@@ -1,0 +1,440 @@
+/* Custom Navbar Styles */
+.navbar-custom {
+    background: linear-gradient(to right, #ff007f, #000080); /* Replace with your desired color gradient */
+   
+}
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffffff; /* Text color */
+}
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #ffcc00; /* Hover text color */
+}
+.navbar-custom .navbar-toggler {
+    background-color: #ffffff; /* Toggler button color */
+}
+
+/* Additional Custom Styles */
+.hero-section {
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+.hero-text {
+    font-family: 'Arial Black', Gadget, Roboto;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.background-section {
+    position: relative;
+    width: 100%;
+    height: 50vh; /* Half of viewport height */
+    overflow: hidden; /* Hide overflow to ensure no scrollbars */
+}
+.background-section img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure the image covers the entire area */
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Half of viewport width */
+    height: 100%; /* Half of viewport height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.overlay .container, .overlay .content {
+    z-index: 1; /* Ensure content is above overlay */
+}
+.overlay a.btn {
+    margin-top: 10px; /* Adjust spacing */
+}
+.overlay::before {
+    content: "";
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)); /* Gradient overlay */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind content */
+}
+.navbar-brand img {
+    max-height: 50px;
+}
+.bg-primary-custom {
+    background-color: #972f67;
+    color: rgb(10, 9, 9);
+}
+.bg-light-custom {
+    background-color: #f8f9fa;
+}
+.background-section {
+    position: relative;
+    width: 100vw; /* Half of viewport width */
+    height: 50vh; /* Half of viewport height */
+    overflow: hidden; /* Hide overflow to ensure no scrollbars */
+    margin: auto; /* Center horizontally */
+}
+.background-section img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.overlay .content {
+    margin-bottom: 20px; /* Adjust as needed for spacing */
+}
+.highlight-section {
+    position: relative;
+    overflow: hidden;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+}
+.highlight-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1; /* Ensure the image is behind the overlay */
+    object-fit: cover;
+}
+.highlight-section .container {
+    position: relative;
+    z-index: 1; /* Ensure content is above the overlay */
+    padding: 80px 15px; /* Adjust padding as needed */
+    text-align: center;
+}
+.highlight-section h2 {
+    font-size: 2.5rem; /* Adjust heading font size */
+    color: #fff; /* Text color */
+}
+.highlight-section p {
+    font-size: 1.25rem; /* Adjust paragraph font size */
+    color: #f0f0f0; /* Text color */
+    line-height: 1.6;
+}
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    color: #007bff;
+}
+.card-text {
+    font-size: 1rem;
+    color: #333;
+}
+.courses-section {
+    padding: 100px 0;
+}
+.courses-section .card {
+    position: relative;
+    overflow: hidden;
+}
+.courses-section .card .card-img-top {
+    width: 100%;
+    height: auto;
+}
+.courses-section .card .card-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+}
+.courses-section .card .card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+}
+.courses-section .card .card-text {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 1.25em;
+    padding: 10px 20px;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+.bg-gradient-dark-pink {
+    background: linear-gradient(135deg, #ff007f, #8b008b);
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+}
+.card {
+    position: relative;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Dark overlay with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.card:hover .card-img-overlay {
+    opacity: 1;
+}
+.card-body {
+    z-index: 1;
+}
+.course-icon {
+    width: 100%; 
+    height: auto; 
+    object-fit: cover;
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+.card-text {
+    font-size: 1rem;
+    color: white;
+}
+.bg-black {
+    background-color: #000;
+    color: #fff;
+}
+.hr-white {
+    border-top: 1px solid #fff;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.unique-points .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.unique-points .card-title {
+    font-size: 1.5rem;
+    background-image: linear-gradient(135deg, rgba(0, 0, 255, 0.5), rgba(0, 0, 139, 0.5)); /* Dark blue gradient with transparency */
+    -webkit-background-clip: text; /* Clip text to background shape */
+    background-clip: text; /* Clip text to background shape */
+    -webkit-text-fill-color: transparent; /* Hide text fill color */
+    color: transparent; /* Hide text color */
+    font-weight: bold;
+}
+.unique-points .card-text {
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif; /* Attractive font style for p */
+}
+.unique-points .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+.bg-dark-custom {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.card-img {
+    width: 100%;
+    height: 300px; /* Ensures all images are the same size */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.3s ease-in-out;
+}
+.card:hover .card-img {
+    transform: scale(1.1);
+}
+.card:hover .card-img-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.overlay-content {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), transparent);
+}
+h2 {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.card-text {
+    font-size: 1rem;
+}
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+/* Navbar Gradient Color */
+.bg-navbar-gradient {
+    background: linear-gradient(to right, #ff007f, #000080); /* Adjust these colors to match your navbar gradient */
+    color: white;
+}
+/* Custom Button Styling */
+.btn-primary-custom {
+    background-color: #007bff; /* Adjust to match your navbar button color */
+    border: none;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out;
+}
+.btn-primary-custom:hover {
+    background-color: #0056b3; /* Adjust to match your navbar hover button color */
+}
+/* Typography */
+h2 {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+/* Global Footer Styles */
+footer {
+    background-color: #343a40; /* Dark background color */
+    color: #ffffff; /* White text color */
+}
+footer a {
+    color: #ffffff; /* White links */
+}
+footer a:hover {
+    color: #f8f9fa; /* Lighter color on hover */
+}
+/* Social Icons */
+.social-icons a {
+    display: inline-block;
+    color: #ffffff; /* White icon color */
+    margin-right: 10px;
+}
+.social-icons a:hover {
+    color: #f8f9fa; /* Lighter color on hover */
+}
+.social-icons a {
+    display: inline-block;
+    color: #ffffff; /* White icon color */
+    font-size: 50px; /* Adjust icon size as needed */
+    margin-right: 20px; /* Spacing between icons */
+}
+.gradient-header {
+    background: linear-gradient(to right, #ff007f, #000080);
+    padding: 20px 0;
+    text-align: center;
+}
+.carousel-item iframe {
+    width: 100%;
+    height: 350px;
+}
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+.carousel-control-prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+.carousel-control-next {
+    right: 0;
+    border-radius: 0 3px 3px 0;
+}
+@media only screen and (max-width: 600px) {
+    .carousel-caption {
+        font-size: 14px;
+    }
+    .carousel-caption h5 {
+        font-size: 16px;
+    }
+}
+ .social-icons a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 2em;
+        }
+        .social-icons a:hover {
+            color: #0056b3;
+        }
+

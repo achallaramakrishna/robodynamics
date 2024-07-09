@@ -13,7 +13,8 @@
     
 </head>
 <body>
-    <!-- Header Section -->
+
+    <!-- Header Section it is-->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom" style=" background: linear-gradient(to right, #ff007f, #000080);">
         <a class="navbar-brand" href="index.jsp">
             <img src="images/logo.jpg" alt="Robo Dynamics Logo" style="max-height: 50px;">

@@ -16,7 +16,7 @@
       background-size: cover;
       color: white;
       text-align: center;
-      padding: 100px 0;
+      padding: 20px 0;
     }
     .hero-section h1 {
       font-size: 3rem;
@@ -106,25 +106,65 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    .navbar-brand img {
-      max-height: 50px;
-    }
-    .navbar-custom {
-      background: linear-gradient(to right, #ff007f, #000080);
-    }
-    .navbar-dark .navbar-nav .nav-link {
-      color: #f8f2f0;
-    }
-    .navbar-dark .navbar-nav .nav-link:hover,
-    .navbar-dark .navbar-nav .nav-link:focus {
-      color: #fa6210;
-    }
-    .navbar-brand {
-      color: white;
-    }
-    .navbar-dark .navbar-toggler {
-      border-color: rgba(43, 33, 42, 0.456);
-    }
+   /* Navbar Custom Styles */
+        .navbar-custom {
+            background: linear-gradient(to right, #ff007f, #000080);
+        }
+
+        .navbar-custom .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar-custom .nav-link {
+            color: #ffffff !important;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #dcdcdc !important;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-custom .navbar-toggler-icon {
+            color: #ffffff;
+        }
+
+        .navbar-custom .header-buttons {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .navbar-custom .header-buttons .btn {
+            margin-left: 10px; /* Space between buttons */
+            width: 100px; /* Ensure buttons have the same width */
+        }
+
+        .btn-outline-primary {
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-primary:hover {
+            color: #000000;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color:  #ff007f;
+        }
+   
     .bg-primary-custom {
       background-color: #972f67;
       color: #0a0909;
@@ -151,6 +191,10 @@
                 <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact</a></li> 
       </ul>
+       <div class="header-buttons">
+                <button type="button" class="btn btn-outline-primary">Login</button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
     </div>
   </nav>
 
@@ -159,7 +203,7 @@
     <div class="container">
       <h1>Our Courses</h1>
       <p>Empowering the next generation with skills in Robotics, Coding, Drones, and AI</p>
-      <a href="#enroll" class="btn btn-primary btn-lg btn-enroll">Enroll Now</a>
+      <a href="subscription.jsp" class="btn btn-primary btn-lg btn-enroll">Enroll Now</a>
     </div>
   </section>
 
@@ -179,7 +223,7 @@
                   <h5 class="card-title">Beginner Robotics</h5>
                   <p class="card-text">Introduction to building and programming simple robots for ages 9-10, Grades 4-5.</p>
                   <a href="robolevel1.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -190,7 +234,7 @@
                   <h5 class="card-title">Intermediate Robotics</h5>
                   <p class="card-text">Building autonomous robots and learning advanced programming for ages 11-12, Grades 6-7.</p>
                   <a href="robolevel2.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -201,7 +245,7 @@
                   <h5 class="card-title">Advanced Robotics</h5>
                   <p class="card-text">Advanced robotics and programming with complex algorithms for ages 13-15, Grades 8-10.</p>
                    <a href="robolevel3.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -222,7 +266,7 @@
                   <h5 class="card-title">Beginner Drones</h5>
                   <p class="card-text">Learning to build and fly simple drones safely for ages 9-10, Grades 4-5.</p>
                   <a href="dronelevel1.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -233,7 +277,7 @@
                   <h5 class="card-title">Intermediate Drones</h5>
                   <p class="card-text">Advanced drone building and programming techniques for ages 11-12, Grades 6-7.</p>
                   <a href="dronelevel2.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -244,7 +288,7 @@
                   <h5 class="card-title">Advanced Drones</h5>
                   <p class="card-text">Professional drone applications for ages 13-15, Grades 8-10.</p>
                    <a href="dronelevel3.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -265,7 +309,7 @@
                   <h5 class="card-title">Beginner Coding</h5>
                   <p class="card-text">Basic coding concepts using block-based programming for ages 9-10, Grades 4-5.</p>
                    <a href="codinglevel1.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -276,7 +320,7 @@
                   <h5 class="card-title">Intermediate Coding</h5>
                   <p class="card-text">Introduction to Python and creating simple applications for ages 11-12, Grades 6-7.</p>
                   <a href="codinglevel2.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -287,7 +331,7 @@
                   <h5 class="card-title">Advanced Coding</h5>
                   <p class="card-text">Advanced Python, web development and data structures for ages 13-15, Grades 8-10.</p>
                   <a href="codinglevel3.jsp" class="btn btn-primary btn-view-details">View Details</a>
-                  <a href="enroll.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
+                  <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -345,7 +389,7 @@
     <div class="container text-center">
       <h2>Enroll Your Child Today!</h2>
       <p>Join our courses to give your child a head start in the world of technology and innovation.</p>
-      <a href="enroll-page.html" class="btn btn-success btn-lg btn-enroll">Enroll Now</a>
+      <a href="subscription.jsp" class="btn btn-success btn-lg btn-enroll">Enroll Now</a>
     </div>
   </section>
 

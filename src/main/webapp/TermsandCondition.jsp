@@ -132,7 +132,8 @@
         </section>
         <section>
             <h2>Contact Us</h2>
-            <p>If you have any questions about these terms, please contact us at Email:<a href="mailto:info@robodynamics.com" class="text-white">info@robodynamics.com</a></p>
+            <p>If you have any questions about these terms, please contact us at Email:<a href="mailto:info@robodynamics.com">info@robodynamics.com</a> or visit our website at <a href="http://www.robodynamics.com">www.robodynamics.com</a></p>  
+            <p>We look forward to welcoming you to the Robo Dynamics family!</p>
         </section>
     </main>
     <footer>

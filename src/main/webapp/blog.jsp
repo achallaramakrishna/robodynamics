@@ -14,22 +14,65 @@
             text-align: center;
             padding: 100px 0;
         }
+       /* Navbar Custom Styles */
         .navbar-custom {
-      background: linear-gradient(to right, #ff007f, #000080);
-    }
-    .navbar-dark .navbar-nav .nav-link {
-      color: rgb(248, 242, 240);
-    }
-    .navbar-dark .navbar-nav .nav-link:hover,
-    .navbar-dark .navbar-nav .nav-link:focus {
-      color: rgb(250, 98, 16);
-    }
-    .navbar-brand {
-      color: white;
-    }
-    .navbar-dark .navbar-toggler {
-      border-color: rgba(43, 33, 42, 0.456);
-    }
+            background: linear-gradient(to right, #ff007f, #000080);
+        }
+
+        .navbar-custom .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar-custom .nav-link {
+            color: #ffffff !important;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #dcdcdc !important;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-custom .navbar-toggler-icon {
+            color: #ffffff;
+        }
+
+        .navbar-custom .header-buttons {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .navbar-custom .header-buttons .btn {
+            margin-left: 10px; /* Space between buttons */
+            width: 100px; /* Ensure buttons have the same width */
+        }
+
+        .btn-outline-primary {
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-primary:hover {
+            color: #000000;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color:  #ff007f;
+        }
+       
     .bg-primary-custom {
       background-color: #972f67;
       color: rgb(10, 9, 9);
@@ -85,6 +128,10 @@
                 <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
             
         </ul>
+        <div class="header-buttons">
+                <button type="button" class="btn btn-outline-primary">Login</button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
     </div>
 </nav>
   

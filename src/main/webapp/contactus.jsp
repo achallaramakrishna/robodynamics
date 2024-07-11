@@ -6,33 +6,101 @@
     <title>Contact Us - Robo Dynamics</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .hero-section {
-            background-image: url('images/background1.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 0;
+        .highlight-section {
+    position: relative;
+    overflow: hidden;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+}
+.highlight-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1; /* Ensure the image is behind the overlay */
+    object-fit: cover;
+}
+.highlight-section .container {
+    position: relative;
+    z-index: 1; /* Ensure content is above the overlay */
+    padding: 80px 15px; /* Adjust padding as needed */
+    text-align: center;
+}
+.highlight-section h2 {
+    font-size: 2.5rem; /* Adjust heading font size */
+    color: #fff; /* Text color */
+}
+.highlight-section p {
+    font-size: 1.25rem; /* Adjust paragraph font size */
+    color: #f0f0f0; /* Text color */
+    line-height: 1.6;
+}
+       /* Navbar Custom Styles */
+        .navbar-custom {
+            background: linear-gradient(to right, #ff007f, #000080);
         }
-        .navbar-brand img {
+
+        .navbar-custom .navbar-brand img {
             max-height: 50px;
         }
-        .navbar-dark {
-            background-image: linear-gradient(to right, #972f67, #0c144e);
+
+        .navbar-custom .nav-link {
+            color: #ffffff !important;
+            margin-right: 10px;
+            font-size: 1rem;
         }
-        .navbar-dark .navbar-nav .nav-link {
-            color: rgb(248, 242, 240);
+
+        .navbar-custom .nav-link:hover {
+            color: #dcdcdc !important;
         }
-        .navbar-dark .navbar-nav .nav-link:hover, 
-        .navbar-dark .navbar-nav .nav-link:focus {
-            color: rgb(250, 98, 16);
+
+        .navbar-custom .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
         }
-        .navbar-brand {
-            color: white;
+
+        .navbar-custom .navbar-toggler-icon {
+            color: #ffffff;
         }
-        .navbar-dark .navbar-toggler {
-            border-color: rgba(43, 33, 42, 0.456);
+
+        .navbar-custom .header-buttons {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
         }
+
+        .navbar-custom .header-buttons .btn {
+            margin-left: 10px; /* Space between buttons */
+            width: 100px; /* Ensure buttons have the same width */
+        }
+
+        .btn-outline-primary {
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-primary:hover {
+            color: #000000;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color:  #ff007f;
+        }
+       
         .content-section {
             padding: 60px 0;
         }
@@ -48,7 +116,7 @@
             margin-bottom: 1rem;
         }
         .footer p {
-            font-size: 1rem;
+            font-size: 1.5rem;
         }
         .footer .fab {
             transition: transform 0.3s ease;
@@ -73,20 +141,31 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-         <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
-           <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
+            <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
         </ul>
     </div>
+    <div class="header-buttons">
+                <button type="button" class="btn btn-outline-primary">Login</button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
 </nav>
 
-<section class="hero-section">
+
+<section class="highlight-section position-relative">
+    <img src="images/background (2).jpeg" alt="background" class="img-fluid">
+    <div class="overlay"></div>
     <div class="container">
-        <h1 class="display-4">Contact Us</h1>
-        <p class="lead">We'd love to hear from you! Get in touch with us for any queries or support.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center text-white">
+                <h2>Contact Us</h2>
+                <p class="lead">We'd love to hear from you! Get in touch with us for any queries or support.</p>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -3,143 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robo Dynamics - Subscription</title>
+    <title>Subscription Plans - Robo Dynamics</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #555;
+}
+/* Navbar Custom Styles */
         .navbar-custom {
             background: linear-gradient(to right, #ff007f, #000080);
         }
-        .navbar-nav .nav-link {
+
+        .navbar-custom .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar-custom .nav-link {
             color: #ffffff !important;
-            font-weight: bold;
-        }
-        .navbar-nav .nav-link:hover {
-            color: #ff007f !important;
-        }
-        .background-section {
-            position: relative;
-            width: 100%;
-            height: 500px; /* Adjust the height as needed */
-            background-image: url('images/background (2).jpeg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .hero-section {
-            text-align: center;
-            color: white;
-        }
-        .hero-text {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .subscription-section {
-            padding: 60px 0;
-            background-color: #f8f9fa;
-        }
-        .subscription-header {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-        .tab-section {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-        .tab-section button {
-            margin: 0 10px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-            background-color: #f8f9fa;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .tab-section button.active, .tab-section button:hover {
-            background-color: #0062E6;
-            color: white;
-        }
-        .subscription-cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .membership-card {
-            border: 2px solid #0062E6;
-            border-radius: 10px;
-            background: #1a2235;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-            width: 300px;
-        }
-        .membership-card:hover {
-            transform: scale(1.05);
-        }
-        .membership-card img {
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        .card-header {
-            
-            color: white;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            padding: 10px;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #00ff88;
-        }
-        .card-text {
+            margin-right: 10px;
             font-size: 1rem;
-            color: #f8f9fa;
         }
+
+        .navbar-custom .nav-link:hover {
+            color: #dcdcdc !important;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-custom .navbar-toggler-icon {
+            color: #ffffff;
+        }
+
+        .navbar-custom .header-buttons {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .navbar-custom .header-buttons .btn {
+            margin-left: 10px; /* Space between buttons */
+            width: 100px; /* Ensure buttons have the same width */
+        }
+
+        .btn-outline-primary {
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .btn-outline-primary:hover {
+            color: #000000;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
         .btn-primary {
-            background-color: #0062E6;
-            border: none;
-            border-radius: 50px;
-            padding: 10px 20px;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
+            background-color: #007bff;
+            border-color: #007bff;
         }
+
         .btn-primary:hover {
-            background-color: #004bb5;
+            background-color: #0056b3;
+            border-color:  #ff007f;
         }
-        .feature-list {
-            text-align: left;
-            padding-left: 20px;
-            color: #f8f9fa;
-        }
-        .feature-list li {
-            margin-bottom: 10px;
-        }
-    </style>
+
+
+.subscription-section {
+    position: relative;
+    padding: 40px 0;
+    background: url('images/background1.jpeg') no-repeat center center/cover;
+}
+
+.subscription-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Overlay */
+    z-index: 1;
+}
+
+.subscription-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.tab-section {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 0 5px;
+}
+
+.tab-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.subscription-cards {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.membership-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 300px;
+    margin-bottom: 20px;
+    background: #000000; /* Dark black background color */
+    color: #ffffff; /* White text color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for pop effect */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.membership-card:hover {
+    transform: translateY(-10px); /* Lift up on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+.card-header {
+    background-color: #28a745; /* Green header background color */
+    color: #ffffff; /* White text color */
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #28a745; /* Green button background color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #218838; /* Darker green for hover */
+}
+
+.feature-list {
+    text-align: left;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.feature-list li {
+    margin-bottom: 10px;
+}
+
+</style>
 </head>
 <body>
-    <!-- Navbar Section -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+
+    <!-- Header Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom" style=" background: linear-gradient(to right, #ff007f, #000080);">
         <a class="navbar-brand" href="index.jsp">
             <img src="images/logo.jpg" alt="Robo Dynamics Logo" style="max-height: 50px;">
         </a>
@@ -155,28 +214,14 @@
                 <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <div class="ml-3">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
             </div>
-        </div>
+            <div class="header-buttons">
+                <button type="button" class="btn btn-outline-primary">Login</button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="background-section">
-        <div class="hero-section">
-            <h1 class="hero-text">Join Robo Dynamics</h1>
-            <p class="hero-text">Empowering young minds through Robotics, Coding, Drones, and AI.</p>
-        </div>
-    </div>
-
-    <!-- Subscription Section -->
-   
-   <section class="subscription-section">
+<section class="subscription-section">
     <div class="container">
         <h2 class="subscription-header">Choose Your Membership Plan</h2>
         <div class="tab-section">
@@ -187,11 +232,42 @@
         <div id="monthly" class="tab-content" style="display: block;">
             <div class="subscription-cards">
                 <div class="card membership-card">
-                    <div class="card-header">Monthly Plan</div>
+                    <div class="card-header">Beginner Level</div>
                     <div class="card-body">
                         <h5 class="card-title">For One Person</h5>
                         <p class="card-text">₹6500/month</p>
                         <a href="#" class="btn btn-primary">Get Started</a>
+                        <ul class="feature-list">
+                            <li>Age Group: 9 to 15 years</li>
+                            <li>Prerequisites: No prior experience required.</li>
+                            <li>Learn basics of robotics, simple robot design, block-based coding, basic drone operation, and AI concepts.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card membership-card">
+                    <div class="card-header">Intermediate Level</div>
+                    <div class="card-body">
+                        <h5 class="card-title">For One Person</h5>
+                        <p class="card-text">₹6500/month</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <ul class="feature-list">
+                            <li>Age Group: 11 to 15 years</li>
+                            <li>Prerequisites: Completion of Beginner Level or equivalent knowledge.</li>
+                            <li>Learn intermediate robot design, sensor integration, text-based coding (Python), intermediate drone skills, and machine learning basics.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card membership-card">
+                    <div class="card-header">Advanced Level</div>
+                    <div class="card-body">
+                        <h5 class="card-title">For One Person</h5>
+                        <p class="card-text">₹6500/month</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <ul class="feature-list">
+                            <li>Age Group: 13 to 15 years</li>
+                            <li>Prerequisites: Completion of Intermediate Level or equivalent knowledge.</li>
+                            <li>Learn advanced robotics, autonomous navigation, advanced programming, advanced drone programming, and deep learning concepts.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -199,31 +275,167 @@
         <div id="halfyearly" class="tab-content" style="display: none;">
             <div class="subscription-cards">
                 <div class="card membership-card">
-                    <div class="card-header">Half-Yearly Plan</div>
+                    <div class="card-header">Beginner Level</div>
                     <div class="card-body">
                         <h5 class="card-title">For One Person</h5>
                         <p class="card-text">₹32000/half-year</p>
                         <p class="card-text">Includes 1 month free extension</p>
                         <a href="#" class="btn btn-primary">Get Started</a>
+                        <ul class="feature-list">
+                            <li>Age Group: 9 to 15 years</li>
+                            <li>Prerequisites: No prior experience required.</li>
+                            <li>Learn basics of robotics, simple robot design, block-based coding, basic drone operation, and AI concepts.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card membership-card">
+                    <div class="card-header">Intermediate Level</div>
+                    <div class="card-body">
+                        <h5 class="card-title">For One Person</h5>
+                        <p class="card-text">₹32000/half-year</p>
+                        <p class="card-text">Includes 1 month free extension</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <ul class="feature-list">
+                            <li>Age Group: 11 to 15 years</li>
+                            <li>Prerequisites: Completion of Beginner Level or equivalent knowledge.</li>
+                            <li>Learn intermediate robot design, sensor integration, text-based coding (Python), intermediate drone skills, and machine learning basics.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card membership-card">
+                    <div class="card-header">Advanced Level</div>
+                    <div class="card-body">
+                        <h5 class="card-title">For One Person</h5>
+                        <p class="card-text">₹32000/half-year</p>
+                        <p class="card-text">Includes 1 month free extension</p>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                        <ul class="feature-list">
+                            <li>Age Group: 13 to 15 years</li>
+                            <li>Prerequisites: Completion of Intermediate Level or equivalent knowledge.</li>
+                            <li>Learn advanced robotics, autonomous navigation, advanced programming, advanced drone programming, and deep learning concepts.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div id="yearly" class="tab-content" style="display: none;">
             <div class="subscription-cards">
-                <div class="card membership-card">
-                    <div class="card-header">Yearly Plan</div>
-                    <div class="card-body">
-                        <h5 class="card-title">For One Person</h5>
-                        <p class="card-text">₹65000/year</p>
-                        <p class="card-text">Includes 2 months free extension</p>
-                        <a href="#" class="btn btn-primary">Get Started</a>
-                    </div>
-                </div>
+    <div class="subscription-cards">
+        <div class="card membership-card">
+            <div class="card-header">Beginner Level</div>
+            <div class="card-body">
+                <h5 class="card-title">For One Person</h5>
+                <p class="card-text">₹65000/year</p>
+                <p class="card-text">Includes 2 months free extension</p>
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <ul class="feature-list">
+                    <li>Age Group: 9 to 15 years</li>
+                    <li>Prerequisites: No prior experience required.</li>
+                    <li>Learn basics of robotics, simple robot design, block-based coding, basic drone operation, and AI concepts.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card membership-card">
+            <div class="card-header">Intermediate Level</div>
+            <div class="card-body">
+                <h5 class="card-title">For One Person</h5>
+                <p class="card-text">₹65000/year</p>
+                <p class="card-text">Includes 2 months free extension</p>
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <ul class="feature-list">
+                    <li>Age Group: 11 to 15 years</li>
+                    <li>Prerequisites: Completion of Beginner Level or equivalent knowledge.</li>
+                    <li>Learn intermediate robot design, sensor integration, text-based coding (Python), intermediate drone skills, and machine learning basics.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card membership-card">
+            <div class="card-header">Advanced Level</div>
+            <div class="card-body">
+                <h5 class="card-title">For One Person</h5>
+                <p class="card-text">₹65000/year</p>
+                <p class="card-text">Includes 2 months free extension</p>
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <ul class="feature-list">
+                    <li>Age Group: 13 to 15 years</li>
+                    <li>Prerequisites: Completion of Intermediate Level or equivalent knowledge.</li>
+                    <li>Learn advanced robotics, autonomous navigation, advanced programming, advanced drone programming, and deep learning concepts.</li>
+                </ul>
             </div>
         </div>
     </div>
+   </div>
+ </div>     
+</div>
 </section>
+<!-- Footer Section -->
+<footer class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Quick Links Section -->
+            <div class="col-md-3 mb-4">
+                <h5 class="mb-4">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="index.jsp" class="text-white">Home</a></li>
+                    <li><a href="subscription.jsp" class="text-white">Membership</a></li>
+                    <li><a href="courses.jsp" class="text-white">Courses</a></li>
+                    <li><a href="aboutus.jsp" class="text-white">About Us</a></li>
+                    <li><a href="contactus.jsp" class="text-white">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Company Information Section -->
+            <div class="col-md-3 mb-4">
+                <h5 class="mb-4">Company</h5>
+                <ul class="list-unstyled">
+                    <li><a href="aboutus.jsp" class="text-white">About</a></li>
+                    <li><a href="subscription.jsp" class="text-white">Careers</a></li>
+                    <li><a href="blog.jsp" class="text-white">Blog</a></li>
+                </ul>
+            </div>
+            <!-- Support Section -->
+            <div class="col-md-3 mb-4">
+                <h5 class="mb-4">Support</h5>
+                <ul class="list-unstyled">
+                    <li><a href="HelpandSupport.jsp" class="text-white">Help and Support</a></li>
+                    <li><a href="TermsandCondition.jsp" class="text-white">Terms of use</a></li>
+                    <li><a href="PrivacyPolicy.jsp" class="text-white">Privacy Policy</a></li>
+                    <li><a href="sitemap.jsp" class="text-white">Sitemap</a></li>
+                </ul>
+            </div>
+            <!-- Contact Information Section -->
+            <div class="col-md-3 mb-4">
+                <h5 class="mb-4">Contact Information</h5>
+                <p>Address:  Ambalipura - Sarjapur Rd, above Agarwal Mithai, Choudadenahalli, Chambenahalli, Bengaluru, Karnataka 562125</p>
+                <p>Phone:  83743 77311</p>
+                <p>Email: <a href="mailto:info@robodynamics.com" class="text-white">info@robodynamics.com</a></p>
+            </div>
+        </div>
+        <!-- Social Media Section -->
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h5 class="mb-4">Follow Us</h5>
+        <div class="social-icons" style="font-size: 1em;">
+            <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+            <a href="#" class="text-white mr-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+    </div>
+</div>
+        <!-- Legal Information Section -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="TermsandCondition.jsp" class="text-white">Terms</a></li>
+                    <li class="list-inline-item"><a href="PrivacyPolicy.jsp" class="text-white">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#" class="text-white">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
     function openTab(evt, tabName) {
@@ -240,6 +452,6 @@
         evt.currentTarget.className += " active";
     }
 </script>
-
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>

@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robo Dynamics</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="stylesheet.css" rel="stylesheet"> 
+    <link href="css/stylesheet.css" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     
 </head>
 
 
 <body>
     <!-- Header Section -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <!-- Including a navigation bar in a JSP -->
+	<jsp:include page="header.jsp" />
+    
+<!--     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <a class="navbar-brand" href="index.jsp">
             <img src="images/logo.jpg" alt="Robo Dynamics Logo">
         </a>
@@ -43,7 +44,7 @@
             </div>
         </div>
     </nav>
-
+ -->
 <!-- Background Section -->
 <section class="background-section">
     <img src="images/background1.jpeg" alt="background" style="width:100%;">
@@ -224,10 +225,10 @@
 </section>
 
 <!-- Footer Section -->
-<footer class="bg-dark text-white py-5">
+<!-- <footer class="bg-dark text-white py-5">
     <div class="container">
         <div class="row">
-            <!-- Quick Links Section -->
+            Quick Links Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Quick Links</h5>
                 <ul class="list-unstyled">
@@ -238,7 +239,7 @@
                     <li><a href="contactus.jsp" class="text-white">Contact Us</a></li>
                 </ul>
             </div>
-            <!-- Company Information Section -->
+            Company Information Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Company</h5>
                 <ul class="list-unstyled">
@@ -247,7 +248,7 @@
                     <li><a href="blog.jsp" class="text-white">Blog</a></li>
                 </ul>
             </div>
-            <!-- Support Section -->
+            Support Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Support</h5>
                 <ul class="list-unstyled">
@@ -257,7 +258,7 @@
                     <li><a href="sitemap.jsp" class="text-white">Sitemap</a></li>
                 </ul>
             </div>
-            <!-- Contact Information Section -->
+            Contact Information Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Contact Information</h5>
                 <p>Address:  Ambalipura - Sarjapur Rd, above Agarwal Mithai, Choudadenahalli, Chambenahalli, Bengaluru, Karnataka 562125</p>
@@ -265,7 +266,7 @@
                 <p>Email: <a href="mailto:info@robodynamics.com" class="text-white">info@robodynamics.com</a></p>
             </div>
         </div>
-        <!-- Social Media Section -->
+        Social Media Section
 <div class="row">
     <div class="col-md-12 text-center">
         <h5 class="mb-4">Follow Us</h5>
@@ -276,7 +277,7 @@
         </div>
     </div>
 </div>
-        <!-- Legal Information Section -->
+        Legal Information Section
         <div class="row mt-4">
             <div class="col-md-6">
                 <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
@@ -290,9 +291,9 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
-
+	<jsp:include page="footer.jsp" />
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,14 +124,26 @@
         <div class="image-section"></div>
         <div class="form-section">
             <h2>Log in</h2>
-            <form>
+              <f:form action="login" modelAttribute="rdUser" autocomplete="off" class="sign-in-form" method="post">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="userName">User NAme</label>
+                    <f:input
+                    type="text" path="userName"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    
+                  />
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                     <f:input
+                    type="password" path="password"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    
+                  />
                 </div>
                 <div class="form-group">
                     <input type="checkbox" id="keep-logged-in">
@@ -144,7 +161,7 @@
                     <button class="facebook">Facebook</button>
                     <button class="twitter">Twitter</button>
                 </div>
-            </form>
+            </f:form>
         </div>
     </div>
 </body>

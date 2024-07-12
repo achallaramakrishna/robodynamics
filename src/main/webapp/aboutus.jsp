@@ -195,7 +195,10 @@
 <body>
 
  <!-- Header Section -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+ 
+ 	<jsp:include page="header.jsp" />
+ 	
+ <!--    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <a class="navbar-brand" href="index.jsp">
             <img src="images/logo.jpg" alt="Robo Dynamics Logo">
         </a>
@@ -217,6 +220,9 @@
             </div>
         </div>
     </nav>
+     -->
+    
+    
 <section class="highlight-section position-relative">
     <img src="images/background (2).jpeg" alt="background" class="img-fluid">
     <div class="overlay"></div>
@@ -292,10 +298,12 @@
     </div>
 </div>
 
-<footer class="bg-dark text-white py-5">
+ 	<jsp:include page="footer.jsp" />
+
+<!-- <footer class="bg-dark text-white py-5">
     <div class="container">
         <div class="row">
-            <!-- Quick Links Section -->
+            Quick Links Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Quick Links</h5>
                 <ul class="list-unstyled">
@@ -306,7 +314,7 @@
                     <li><a href="#" class="text-white">Contact</a></li>
                 </ul>
             </div>
-            <!-- Company Information Section -->
+            Company Information Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Company</h5>
                 <ul class="list-unstyled">
@@ -316,7 +324,7 @@
                     <li><a href="#" class="text-white">Blog</a></li>
                 </ul>
             </div>
-            <!-- Support Section -->
+            Support Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Support</h5>
                 <ul class="list-unstyled">
@@ -326,7 +334,7 @@
                     <li><a href="#" class="text-white">Sitemap</a></li>
                 </ul>
             </div>
-            <!-- Contact Information Section -->
+            Contact Information Section
             <div class="col-md-3 mb-4">
                 <h5 class="mb-4">Contact Information</h5>
                 <p>Address:  Ambalipura - Sarjapur Rd, above Agarwal Mithai, Choudadenahalli, Chambenahalli, Bengaluru, Karnataka 562125</p>
@@ -334,7 +342,7 @@
                 <p>Email: <a href="mailto:info@robodynamics.com" class="text-white">info@robodynamics.com</a></p>
             </div>
         </div>
-        <!-- Social Media Section -->
+        Social Media Section
 <div class="row">
     <div class="col-md-12 text-center">
         <h5 class="mb-4">Follow Us</h5>
@@ -346,7 +354,7 @@
         </div>
     </div>
 </div>
-        <!-- Legal Information Section -->
+        Legal Information Section
         <div class="row mt-4">
             <div class="col-md-6">
                 <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
@@ -360,7 +368,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
 <!-- Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
@@ -26,69 +26,65 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-<div class="container-fluid">
-<div class="row flex-nowrap">
+	<jsp:include page="header.jsp" />
+	<div class="container-fluid">
+		<div class="row flex-nowrap">
 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
 
-  <div class="col-md-offset-1 col-md-10">
-   <h2>Manage Courses</h2>
-   <hr />
-   
-   <input type="button" value="Add Course"
-    onclick="window.location.href='showForm'; return false;"
-    class="btn btn-primary" />
-    <br/><br/>
-    
-       <div class="panel panel-info">
-    <div class="panel-heading">
-     <div class="panel-title">Courses List</div>
-    </div>
-    <div class="panel-body">
-     <table class="table table-striped table-bordered">
-      <tr>
-	       <th>Course Name</th>
-	       <th>Course Category</th>
-	      </tr>
-           <!-- loop over and print our course categories -->
-      <c:forEach var="tempCourse" items="${courses}">
+			<div class="col-md-offset-1 col-md-10">
+				<h2>Manage Courses</h2>
+				<hr />
 
-       <!-- construct an "update" link with customer id -->
-       <c:url var="updateLink" value="/course/updateForm">
-        <c:param name="courseId" value="${tempCourse.courseId}" />
-       </c:url>
+				<input type="button" value="Add Course"
+					onclick="window.location.href='showForm'; return false;"
+					class="btn btn-primary" /> <br />
+				<br />
 
-       <!-- construct an "delete" link with customer id -->
-       <c:url var="deleteLink" value="/course/delete">
-        <c:param name="courseId" value="${tempCourse.courseId}" />
-       </c:url>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">Courses List</div>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-bordered">
+							<tr>
+								<th>Course Name</th>
+								<th>Course Category</th>
+							</tr>
+							<!-- loop over and print our course categories -->
+							<c:forEach var="tempCourse" items="${courses}">
 
-       <tr>
-        <td>${tempCourse.courseName}</td>
-        <td>${tempCourse.courseCategory.courseCategoryName}</td>
-        
-        <td>
-         <!-- display the update link --> <a href="${updateLink}">Update</a>
-         | <a href="${deleteLink}"
-         onclick="if (!(confirm('Are you sure you want to delete this course?'))) return false">Delete</a>
-        </td>
+								<!-- construct an "update" link with customer id -->
+								<c:url var="updateLink" value="/course/updateForm">
+									<c:param name="courseId" value="${tempCourse.courseId}" />
+								</c:url>
 
-       </tr>
+								<!-- construct an "delete" link with customer id -->
+								<c:url var="deleteLink" value="/course/delete">
+									<c:param name="courseId" value="${tempCourse.courseId}" />
+								</c:url>
 
-      </c:forEach>
+								<tr>
+									<td>${tempCourse.courseName}</td>
+									<td>${tempCourse.courseCategory.courseCategoryName}</td>
 
-     </table>
+									<td>
+										<!-- display the update link --> <a href="${updateLink}">Update</a>
+										| <a href="${deleteLink}"
+										onclick="if (!(confirm('Are you sure you want to delete this course?'))) return false">Delete</a>
+									</td>
+
+								</tr>
+
+							</c:forEach>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
-    </div>
-   </div>
-  </div>
-
- </div>
-      
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
 

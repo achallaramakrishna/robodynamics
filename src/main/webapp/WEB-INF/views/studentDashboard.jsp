@@ -26,11 +26,8 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
+	<jsp:include page="header.jsp" />
+	
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
@@ -38,6 +35,7 @@
 		<h1> Student Dashboard </h1>
 	</div>
 		</div>
+		<jsp:include page="footer.jsp" />
 </body>
 </html>
 

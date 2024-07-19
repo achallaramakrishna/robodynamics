@@ -20,7 +20,7 @@ public class RDUserController {
 	@Autowired
 	private RDUserService service;
 
-	@GetMapping("/register")
+	@GetMapping("/register")	
 	public ModelAndView home(Model m) {
 		RDUser rdUser = new RDUser();
 		m.addAttribute("rdUser", rdUser);
@@ -81,7 +81,7 @@ public class RDUserController {
 
 			} else {
 
-				return "welcome";
+				return "dashboard";
 			}
 		}
 		

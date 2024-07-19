@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 
@@ -7,7 +5,14 @@
 
 <c:set var="userRole" value="${user.profile_id}" />
 
+<script>
+	console.log("hello 1");
+</script>
+<c:out value="${userRole}"/>
+
 <c:if test="${userRole eq 1 || userRole eq 2}">
+
+
 	<div class="bg-warning col-auto col-md-2 min-vh-100">
 		<div class="bg-warning p-2">
 
@@ -139,6 +144,9 @@
 </c:if>
 
 <c:if test="${userRole eq 5}">
+<script>
+	console.log("hello student ");
+</script>
 	<div class="bg-warning col-auto col-md-2 min-vh-100">
 		<div class="bg-warning p-2">
 
@@ -164,4 +172,6 @@
 		</div>
 	</div>
 </c:if>
-
+<script>
+	console.log("hello end");
+</script>

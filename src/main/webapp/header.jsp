@@ -25,7 +25,7 @@
 		</ul>
 		<div class="header-buttons">
 			<a href="login" class="btn btn-outline-primary">Login</a> <a
-				href="signup.jsp" class="btn btn-primary">Sign-up</a>
+				href="register" class="btn btn-primary">Sign-up</a>
 		</div>
 	</div>
 </nav>

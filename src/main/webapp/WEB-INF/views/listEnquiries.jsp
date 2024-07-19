@@ -26,14 +26,12 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
 	<br>
 	<br>
 	<br>
 	<br>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
 
 		<div class="col-md-offset-1 col-md-10">
 			<br>

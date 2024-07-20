@@ -26,15 +26,15 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+   <jsp:include page="header.jsp" />
+	
+	<div class="container-fluid">
+		<div class="row flex-nowrap">
 
-<h1>Welcome <c:out value="${rdUser.firstName} "></c:out></h1>
-<h3> Please check your email to activate the link and complete the Registration Process </h3>
+			<h1>Welcome <c:out value="${rdUser.firstName}"></c:out> to Robo Dynamics</h1>
+			<h3> Please Login Now </h3>
+		</div>
+	</div>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

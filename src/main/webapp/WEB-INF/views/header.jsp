@@ -99,7 +99,7 @@
     </div>
     <div class="header-buttons">
         <button type="button" class="btn btn-outline-primary" onclick="window.location.href='login'">Login</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='signup'">Sign-up</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='parent/register'">Sign-up</button>
     </div>
 </nav>
 

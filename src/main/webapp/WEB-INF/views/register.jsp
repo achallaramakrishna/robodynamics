@@ -31,32 +31,61 @@
 <div class="container">
     <h2 class="my-4">User Registration</h2>
 	<f:form action="register" modelAttribute="rdUser" method="post">
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <f:input type="text" path="firstName" class="form-control input"
-									id="firstName" aria-describedby="emailHelp" />
-        </div>
-        <div class="form-group">
-            <label for="userName">User Name</label>
-            <f:input type="text" path="userName" class="form-control input"
-									id="userName" aria-describedby="emailHelp" />
-        </div>
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <f:input type="text" path="firstName" class="form-control input"
-									id="firstName" aria-describedby="emailHelp" />
-        </div>
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <f:input type="text" path="firstName" class="form-control input"
-									id="firstName" aria-describedby="emailHelp" />
-        </div>
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <f:input type="text" path="firstName" class="form-control input"
-									id="firstName" aria-describedby="emailHelp" />
-        </div>         
-        <button type="submit" class="btn btn-primary">Register</button>
+					<div class="form-group input-field">
+						<label for="email">Email</label>
+						<f:input type="text" path="email" class="form-control input"
+							id="email" aria-describedby="emailHelp" />
+					</div>
+					
+					<div class="form-group input-field">
+						<label for="cellPhone">Cell Phone</label>
+						<f:input type="text" path="cellPhone" class="form-control input"
+							id="cellPhone" aria-describedby="emailHelp" />
+					</div>
+					
+					<div class="form-group input-field">
+						<label for="firstName">First Name</label>
+						<f:input type="text" path="firstName" class="form-control input"
+							id="firstName" aria-describedby="emailHelp" />
+					</div>
+					<div class="form-group input-field">
+						<label for="lastName">Last Name</label>
+						<f:input type="text" path="lastName" class="form-control input"
+							id="lastName" aria-describedby="emailHelp" />
+					</div>
+					<div class="form-group input-field">
+						<label for="age">Age</label>
+						<f:input type="text" path="lastName" class="form-control input"
+							id="age" aria-describedby="emailHelp" />
+					</div>
+					<div class="form-group input-field">
+						<label for="address">Address</label>
+						<f:input type="text" path="lastName" class="form-control input"
+							id="address" aria-describedby="emailHelp" />
+					</div>
+					<div class="form-group input-field">
+						<label for="city">City</label>
+						<f:input type="text" path="lastName" class="form-control input"
+							id="city" aria-describedby="emailHelp" />
+					</div>
+					<div class="form-group input-field">
+						<label for="password">Password</label>
+						<f:input type="password" path="lastName" class="form-control input"
+							id="password" aria-describedby="emailHelp" />
+					</div>
+					<div class="form-group">
+								<label for="profile_id" class="col-md-3 control-label">Profile</label>
+								<div class="col-md-9">
+									<f:select path="profile_id" class="form-control">
+										<f:option value="2" label="ROBO ADMIN" />
+										<f:option value="3" label="ROBO MENTOR" />
+									</f:select>
+								</div>
+							</div>
+					<center>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</center>
+
     </f:form>
     <hr>
  </div>

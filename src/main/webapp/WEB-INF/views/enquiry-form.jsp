@@ -25,12 +25,7 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-
+	   <jsp:include page="header.jsp" />
 	
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
@@ -106,5 +101,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

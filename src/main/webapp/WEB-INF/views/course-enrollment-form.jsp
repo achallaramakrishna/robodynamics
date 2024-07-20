@@ -25,14 +25,8 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
+	 <jsp:include page="header.jsp" />
 
-
-	<br />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>

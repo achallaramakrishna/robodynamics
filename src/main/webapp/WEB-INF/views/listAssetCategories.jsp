@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
@@ -26,73 +26,69 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
+	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
 
-		<div class="col-md-offset-1 col-md-10">
-			<br>
-			<h2>Manage Asset Categories</h2>
-			<hr />
+			<div class="col-md-offset-1 col-md-10">
+				<br>
+				<h2>Manage Asset Categories</h2>
+				<hr />
 
-			<input type="button" value="Add Asset Categories"
-				onclick="window.location.href='showForm'; return false;"
-				class="btn btn-primary" /> <br />
-			<br />
+				<input type="button" value="Add Asset Categories"
+					onclick="window.location.href='showForm'; return false;"
+					class="btn btn-primary" /> <br /> <br />
 
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<div class="panel-title">Asset Categories List</div>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped table-bordered">
-						<tr>
-							<th>Asset Name</th>
-							<th>Asset Category Type</th>
-							<th>Action</th>
-						</tr>
-						<!-- loop over and print our asset categories -->
-						<c:forEach var="tempAssetCategory" items="${assetCategories}">
-
-							<!-- construct an "update" link with customer id -->
-							<c:url var="updateLink" value="/assetcategory/updateForm">
-								<c:param name="assetCategoryId"
-									value="${tempAssetCategory.assetCategoryId}" />
-							</c:url>
-
-							<!-- construct an "delete" link with customer id -->
-							<c:url var="deleteLink" value="/assetcategory/delete">
-								<c:param name="assetCategoryId"
-									value="${tempAssetCategory.assetCategoryId}" />
-							</c:url>
-
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">Asset Categories List</div>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-bordered">
 							<tr>
-								<td>${tempAssetCategory.assetCategoryName}</td>
-								<td>${tempAssetCategory.assetCategoryType}</td>
-
-								<td>
-									<!-- display the update link --> <a href="${updateLink}">Update</a>
-									| <a href="${deleteLink}"
-									onclick="if (!(confirm('Are you sure you want to delete this asset category?'))) return false">Delete</a>
-								</td>
-
+								<th>Asset Name</th>
+								<th>Asset Category Type</th>
+								<th>Action</th>
 							</tr>
+							<!-- loop over and print our asset categories -->
+							<c:forEach var="tempAssetCategory" items="${assetCategories}">
 
-						</c:forEach>
+								<!-- construct an "update" link with customer id -->
+								<c:url var="updateLink" value="/assetcategory/updateForm">
+									<c:param name="assetCategoryId"
+										value="${tempAssetCategory.assetCategoryId}" />
+								</c:url>
 
-					</table>
+								<!-- construct an "delete" link with customer id -->
+								<c:url var="deleteLink" value="/assetcategory/delete">
+									<c:param name="assetCategoryId"
+										value="${tempAssetCategory.assetCategoryId}" />
+								</c:url>
 
+								<tr>
+									<td>${tempAssetCategory.assetCategoryName}</td>
+									<td>${tempAssetCategory.assetCategoryType}</td>
+
+									<td>
+										<!-- display the update link --> <a href="${updateLink}">Update</a>
+										| <a href="${deleteLink}"
+										onclick="if (!(confirm('Are you sure you want to delete this asset category?'))) return false">Delete</a>
+									</td>
+
+								</tr>
+
+							</c:forEach>
+
+						</table>
+
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
 		</div>
+	</div>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
 

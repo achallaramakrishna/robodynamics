@@ -25,21 +25,15 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-
-	
+	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
 			<div class="col-md-offset-2 col-md-7">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-					<br>
-							<h2>Manage Asset Categories</h2>
+						<br>
+						<h2>Manage Asset Categories</h2>
 					</div>
 					<br>
 					<div class="panel-body">
@@ -71,8 +65,8 @@
 							</div>
 							<br>
 							<center>
-									<button type="submit" class="btn btn-primary">Submit</button>
-							 </center>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</center>
 
 
 						</form:form>
@@ -81,5 +75,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

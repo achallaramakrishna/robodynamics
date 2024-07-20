@@ -198,31 +198,7 @@
  
  	<jsp:include page="header.jsp" />
  	
- <!--    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <a class="navbar-brand" href="index.jsp">
-            <img src="images/logo.jpg" alt="Robo Dynamics Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
-            </ul>
-            <div class="header-buttons">
-                <button type="button" class="btn btn-outline-primary">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
-            </div>
-        </div>
-    </nav>
-     -->
-    
-    
+ 
 <section class="highlight-section position-relative">
     <img src="images/background (2).jpeg" alt="background" class="img-fluid">
     <div class="overlay"></div>
@@ -300,75 +276,7 @@
 
  	<jsp:include page="footer.jsp" />
 
-<!-- <footer class="bg-dark text-white py-5">
-    <div class="container">
-        <div class="row">
-            Quick Links Section
-            <div class="col-md-3 mb-4">
-                <h5 class="mb-4">Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Home</a></li>
-                    <li><a href="#" class="text-white">Categories</a></li>
-                    <li><a href="#" class="text-white">Courses</a></li>
-                    <li><a href="#" class="text-white">About Us</a></li>
-                    <li><a href="#" class="text-white">Contact</a></li>
-                </ul>
-            </div>
-            Company Information Section
-            <div class="col-md-3 mb-4">
-                <h5 class="mb-4">Company</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">About</a></li>
-                    <li><a href="#" class="text-white">Careers</a></li>
-                    <li><a href="#" class="text-white">Press</a></li>
-                    <li><a href="#" class="text-white">Blog</a></li>
-                </ul>
-            </div>
-            Support Section
-            <div class="col-md-3 mb-4">
-                <h5 class="mb-4">Support</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Help and Support</a></li>
-                    <li><a href="#" class="text-white">Terms</a></li>
-                    <li><a href="#" class="text-white">Privacy Policy</a></li>
-                    <li><a href="#" class="text-white">Sitemap</a></li>
-                </ul>
-            </div>
-            Contact Information Section
-            <div class="col-md-3 mb-4">
-                <h5 class="mb-4">Contact Information</h5>
-                <p>Address:  Ambalipura - Sarjapur Rd, above Agarwal Mithai, Choudadenahalli, Chambenahalli, Bengaluru, Karnataka 562125</p>
-                <p>Phone: (123) 456-7890</p>
-                <p>Email: <a href="mailto:info@robodynamics.com" class="text-white">info@robodynamics.com</a></p>
-            </div>
-        </div>
-        Social Media Section
-<div class="row">
-    <div class="col-md-12 text-center">
-        <h5 class="mb-4">Follow Us</h5>
-        <div class="social-icons">
-            <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-            <a href="#" class="text-white mr-3"><i class="fab fa-twitter fa-lg"></i></a>
-            <a href="#" class="text-white mr-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
-        </div>
-    </div>
-</div>
-        Legal Information Section
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-right">
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#" class="text-white">Terms</a></li>
-                    <li class="list-inline-item"><a href="#" class="text-white">Privacy Policy</a></li>
-                    <li class="list-inline-item"><a href="#" class="text-white">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer> -->
+
 
 <!-- Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>

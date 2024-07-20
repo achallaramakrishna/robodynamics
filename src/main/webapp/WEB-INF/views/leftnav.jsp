@@ -7,7 +7,7 @@
 
 <style>
   .sidebar {
-    background: linear-gradient(to bottom, #343182, #444444);
+    background: #343182;
     color: white;
     min-height: 100vh;
     margin-right: 20px;

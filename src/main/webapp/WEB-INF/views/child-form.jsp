@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+
+<%@ page isELIgnored="false" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,23 +22,11 @@
 	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
-<title>Register</title>
+<title>Welcome</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">
-			<img src="resources/images/rdlogo.jpg"
-            width="90" height="80" alt=""> 
-			</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-		</div>
-	</nav>
+   <jsp:include page="header.jsp" />
+
 	<div class="container mt-5">
 		<div class="card" style="width: 55rem;">
 			<div class="card-header text-center bg-light">Add Child</div>
@@ -78,5 +69,6 @@
 			</div>
 		</div>
 	</div>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

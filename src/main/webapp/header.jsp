@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ page isELIgnored="false"%>
+<c:set var="user" value="${sessionScope.rdUser}" />
+<c:set var="userRole" value="${user.profile_id}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,8 +103,13 @@
         </ul>
     </div>
     <div class="header-buttons">
+	<c:if test="${not empty user}">
+        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='logout'">Logout</button>
+    </c:if>
+    <c:if test="${ empty user}">
         <button type="button" class="btn btn-outline-primary" onclick="window.location.href='login'">Login</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='signup'">Sign-up</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='parent/register'">Sign-up</button>
+    </c:if>
     </div>
 </nav>
 

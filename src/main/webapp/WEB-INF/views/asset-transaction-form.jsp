@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+
+<%@ page isELIgnored="false" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
-<%@ page isELIgnored="false" %>
-<meta charset="ISO-8859-1">
-<title>Robo Dynamics - Assets </title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -22,14 +22,15 @@
 	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
-
+<title>Welcome</title>
 </head>
 <body>
-   <%@ include file="/WEB-INF/views/navmenu.jsp" %>
+   <jsp:include page="header.jsp" />
 
-<br/>
  <div class="container">
   <div class="col-md-offset-2 col-md-7">
+ <%@ include file="/WEB-INF/views/leftnav.jsp"%>
+  
    <div class="panel panel-info">
     <div class="panel-heading">
      <div class="panel-title">Book Asset</div>
@@ -75,5 +76,7 @@
    </div>
   </div>
  </div>
+<jsp:include page="footer.jsp" />
 </body>
 </html>
+

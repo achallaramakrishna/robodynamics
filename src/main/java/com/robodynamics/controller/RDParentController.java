@@ -119,51 +119,24 @@ public class RDParentController {
 		return modelAndView;
 	}
 
-	@GetMapping("/register2")
-	public ModelAndView home2(Model m, @RequestParam("userid") Integer userId) {
-		// error handling to implement
-
-		System.out.println("register2 here .........." + userId);
-
-		RDUser rdUser = service.getRDUser(userId);
-		rdUser.setUserName(null);
-		rdUser.setPassword(null);
-		m.addAttribute("rdUser", rdUser);
-
-		ModelAndView modelAndView = new ModelAndView("registerParentPageTwo");
-		return modelAndView;
-	}
+	/*
+	 * @GetMapping("/register2") public ModelAndView home2(Model
+	 * m, @RequestParam("userid") Integer userId) { // error handling to implement
+	 * 
+	 * System.out.println("register2 here .........." + userId);
+	 * 
+	 * RDUser rdUser = service.getRDUser(userId); rdUser.setUserName(null);
+	 * rdUser.setPassword(null); m.addAttribute("rdUser", rdUser);
+	 * 
+	 * ModelAndView modelAndView = new ModelAndView("registerParentPageTwo"); return
+	 * modelAndView; }
+	 */
 
 	@PostMapping("/registerParentPageOne")
-	public String register1(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
+	public String register1(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
 
 		rdUser.setProfile_id(RDUser.profileType.ROBO_PARENT.getValue());
 		service.registerRDUser(rdUser);
-		String subject = "Activate your email for Registration";
-		String body = "Registered Successfully !!!";
-		String url = "http://localhost:8090/robodynamics/parent/register2?userid=" + rdUser.getUserID();
-		body += "Please click on the url to complete the registration process. " + url;
-		System.out.println(subject);
-		System.out.println(body);
-		emailService.sendEmail(rdUser.getEmail(), subject, body);
-		model.addAttribute("success",
-				"Registered Successfully, Please check your email to activate the link and complete the registration process !!!");
-
-		return "showFirstPageSuccess";
-	}
-
-	@PostMapping("/registerParentPageTwo")
-	public String register2(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
-		rdUser.setProfile_id(RDUser.profileType.ROBO_PARENT.getValue());
-		service.registerRDUser(rdUser);
-		String subject = "Congratulations. Welcome to Robo Dynamics !!!";
-		String body = "You have Registered Successfully !!!";
-		String url = "http://localhost:8090/robodynamics/login";
-		body += "Please click on the url to login " + url;
-		System.out.println(subject);
-		System.out.println(body);
-		emailService.sendEmail(rdUser.getEmail(), subject, body);
-		
 		if (rdUser != null) {
 			session.setAttribute("rdUser", rdUser);
 		}
@@ -172,7 +145,28 @@ public class RDParentController {
 		model.addAttribute("success", "Dear Parent, You have Registered Successfully. Please Login !!!");
 
 		return "parentDashboard";
+
 	}
+
+	/*
+	 * @PostMapping("/registerParentPageTwo") public String
+	 * register2(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession
+	 * session) { rdUser.setProfile_id(RDUser.profileType.ROBO_PARENT.getValue());
+	 * service.registerRDUser(rdUser); String subject =
+	 * "Congratulations. Welcome to Robo Dynamics !!!"; String body =
+	 * "You have Registered Successfully !!!"; String url =
+	 * "http://localhost:8090/robodynamics/login"; body +=
+	 * "Please click on the url to login " + url; System.out.println(subject);
+	 * System.out.println(body); emailService.sendEmail(rdUser.getEmail(), subject,
+	 * body);
+	 * 
+	 * if (rdUser != null) { session.setAttribute("rdUser", rdUser); }
+	 * 
+	 * model.addAttribute("rdUser", rdUser); model.addAttribute("success",
+	 * "Dear Parent, You have Registered Successfully. Please Login !!!");
+	 * 
+	 * return "parentDashboard"; }
+	 */
 	
 	@GetMapping("/showForm")
 	public ModelAndView home(@ModelAttribute("parent") RDUser parent, Model m) {

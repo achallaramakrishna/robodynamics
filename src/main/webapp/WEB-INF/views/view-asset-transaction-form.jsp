@@ -2,11 +2,12 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+
+<%@ page isELIgnored="false" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
-<%@ page isELIgnored="false"%>
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -20,17 +21,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
 	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta charset="ISO-8859-1">
 <title>Welcome</title>
-
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
+   <jsp:include page="header.jsp" />
 
 <div class="container-fluid">
 		<div class="row flex-nowrap">
@@ -86,6 +81,6 @@
   </div>
 
  </div>
-
+<jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -58,7 +58,20 @@ public class RDUserController {
 		m.addAttribute("rdUser", rdUser);
 		return "login";
 	}
+	
+	@GetMapping("/logout")
+	public String logout(Model m, HttpSession session) {
 
+		RDUser rdUser = new RDUser();
+
+		if (session.getAttribute("rdUser") != null) {
+			session.invalidate();
+			System.out.println("here");
+			m.addAttribute("success", "You have logout Successfully!!!");
+		}
+		m.addAttribute("rdUser", rdUser);
+		return "login";
+	}
 	
 	@PostMapping("/login")
 	public String login(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {

@@ -87,7 +87,7 @@
 <!-- Header Section -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <a class="navbar-brand" href="index.jsp">
-        <img src="images/logo.jpg" alt="Robo Dynamics Logo">
+        <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="Robo Dynamics Logo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

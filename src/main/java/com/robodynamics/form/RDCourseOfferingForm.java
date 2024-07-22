@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RDCourseOfferingForm {
 
 	private int courseOfferingId;
+	private String courseOfferingName;
 	private int courseId;
 	private String courseName;
 	private int userID;
@@ -44,6 +45,12 @@ public class RDCourseOfferingForm {
 	
 	
 	
+	public String getCourseOfferingName() {
+		return courseOfferingName;
+	}
+	public void setCourseOfferingName(String courseOfferingName) {
+		this.courseOfferingName = courseOfferingName;
+	}
 	public String getStatus() {
 		return status;
 	}
@@ -67,6 +74,12 @@ public class RDCourseOfferingForm {
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+	@Override
+	public String toString() {
+		return "RDCourseOfferingForm [courseOfferingId=" + courseOfferingId + ", courseOfferingName="
+				+ courseOfferingName + ", courseId=" + courseId + ", courseName=" + courseName + ", userID=" + userID
+				+ ", status=" + status + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 	
 	

@@ -125,8 +125,7 @@ public class RDCourseOfferingController {
     	RDCourse course = courseService.getRDCourse(courseOfferingForm.getCourseId());
     	System.out.println("course id - " + courseOfferingForm.getCourseId());
     	course.setCourseId(courseOfferingForm.getCourseId());
-        RDUser user = userService.getRDUser(courseOfferingForm.getCourseId());
-    	user.setUserID(courseOfferingForm.getUserID());
+        RDUser user = userService.getRDUser(courseOfferingForm.getUserID());
     	
     	try {
     		theCourseOffering.setStartDate(new SimpleDateFormat("yyyy-mm-dd").parse(courseOfferingForm.getStartDate()));
@@ -140,6 +139,7 @@ public class RDCourseOfferingController {
     	theCourseOffering.setCourse(course);
     	theCourseOffering.setInstructor(user);
     	theCourseOffering.setTitle(course.getCourseName());
+    	theCourseOffering.setCourseOfferingName(courseOfferingForm.getCourseOfferingName());
     	
 		courseOfferingService.saveRDCourseOffering(theCourseOffering);
 

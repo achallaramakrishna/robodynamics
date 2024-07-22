@@ -51,6 +51,9 @@ public class RDCourseOffering {
 		this.title = title;
 	}
 
+	@Column(name = "course_offering_name")
+    @JsonProperty("courseOfferingName")
+	private String courseOfferingName;
 
 	@Column(name = "title")
     @JsonProperty("title")
@@ -144,11 +147,25 @@ public class RDCourseOffering {
 	}
 
 
+	public String getCourseOfferingName() {
+		return courseOfferingName;
+	}
+
+
+	public void setCourseOfferingName(String courseOfferingName) {
+		this.courseOfferingName = courseOfferingName;
+	}
+
+
 	@Override
 	public String toString() {
-		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", status=" + status + ", course=" + course + ", instructor=" + instructor + "]";
+		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate
+				+ ", courseOfferingName=" + courseOfferingName + ", title=" + title + ", endDate=" + endDate
+				+ ", status=" + status + ", course=" + course + ", instructor=" + instructor + "]";
 	}
+
+
+	
 
 
 	

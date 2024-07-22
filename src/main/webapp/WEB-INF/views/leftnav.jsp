@@ -6,6 +6,7 @@
 <c:set var="userRole" value="${user.profile_id}" />
 
 <style>
+
   .sidebar {
     background: #343182;
     color: white;

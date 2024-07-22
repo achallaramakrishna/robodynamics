@@ -57,6 +57,13 @@
 							</div>
 
 
+							<div class="form-group">
+								<label for="courseName" class="col-md-3 control-label">Course Offering
+									Name</label>
+								<div class="col-md-9">
+									<form:input path="courseOfferingName" cssClass="form-control" />
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label for="userID" class="col-md-3 control-label">
@@ -70,6 +77,7 @@
 									</form:select>
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label for="startDate" class="col-md-3 control-label">Course
 									Start Date </label>

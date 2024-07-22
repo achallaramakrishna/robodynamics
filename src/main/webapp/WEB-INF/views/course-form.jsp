@@ -34,7 +34,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<br>
-						<h2>Add Course Categories</h2>
+						<h2>Add Course </h2>
 					</div>
 					<div class="panel-body">
 						<form:form action="saveCourse" cssClass="form-horizontal"

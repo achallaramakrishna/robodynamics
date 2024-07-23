@@ -45,6 +45,7 @@
 					<div class="panel-body">
 						<table class="table table-striped table-bordered">
 							<tr>
+								<th>Course Offering Name</th>
 								<th>Course Name</th>
 								<th>Instructor</th>
 								<th>Student</th>
@@ -64,6 +65,7 @@
 								</c:url>
 
 								<tr>
+									<td>${tempStudentEnrollment.courseOffering.courseOfferingName}</td>
 									<td>${tempStudentEnrollment.courseOffering.course.courseName}</td>
 									<td>${tempStudentEnrollment.courseOffering.instructor.firstName}
 										${tempStudentEnrollment.courseOffering.instructor.lastName}</td>

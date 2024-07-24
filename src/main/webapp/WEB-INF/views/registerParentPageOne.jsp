@@ -53,12 +53,12 @@
 						<f:input type="text" path="lastName" class="form-control input"
 							id="lastName" aria-describedby="emailHelp" />
 					</div>
-					<div class="form-group input-field">
+<%-- 					<div class="form-group input-field">
 						<label for="age">Age</label>
 						<f:input type="text" path="age" class="form-control input"
 							id="age" aria-describedby="emailHelp" />
 					</div>
-					<div class="form-group input-field">
+ --%>					<div class="form-group input-field">
 						<label for="address">Address</label>
 						<f:input type="text" path="address" class="form-control input"
 							id="address" aria-describedby="emailHelp" />

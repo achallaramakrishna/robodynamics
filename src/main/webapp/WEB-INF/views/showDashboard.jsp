@@ -25,61 +25,60 @@
 <title>Welcome</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+	background-color: #333;
+	color: #fff;
+	padding: 10px 0;
+	text-align: center;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+	background-color: #333;
+	color: #fff;
+	padding: 10px 0;
+	text-align: center;
 }
 
 .main-container {
-    display: flex;
-    padding: 20px;
+	display: flex;
+	padding: 20px;
 }
 
 .video-container {
-    flex: 2;
-    margin-right: 20px;
+	flex: 2;
+	margin-right: 20px;
 }
 
 .course-contents {
-    flex: 1;
-    margin-right: 20px;
+	flex: 1;
+	margin-right: 20px;
 }
 
 .course-details {
-    flex: 1;
+	flex: 1;
 }
 
 .course-contents ul {
-    list-style-type: none;
-    padding: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
 .course-contents li {
-    cursor: pointer;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: #f4f4f4;
+	border-radius: 5px;
 }
 
 .course-contents li:hover {
-    background-color: #e4e4e4;
+	background-color: #e4e4e4;
 }
-
 </style>
 
 <script type="text/javascript">
@@ -100,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'video') {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ + file;
+                document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
@@ -119,25 +118,47 @@ document.addEventListener('DOMContentLoaded', function() {
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-<div class="main-container">
-    <div class="video-container">
-        <video id="course-video" controls style="display: none;">
-            <source id="video-source" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <iframe id="course-pdf" style="display:none;" src="" width="600" height="400"></iframe>
-    </div>
-    <div class="course-contents">
-        <h2>Course Contents</h2>
-        <ul id="course-list">
+			<div class="main-container">
+				<div class="video-container">
+					<video id="course-video" controls style="display: none;">
+						<source id="video-source" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<iframe id="course-pdf" style="display: none;" src="" width="600"
+						height="400"></iframe>
+				</div>
+
+
+				<div class="course-contents">
+					<!-- <h2>Course Contents</h2> -->
+					<h2>Course Contents</h2>
+					<ul id="course-list">
+
+						<c:forEach items="${courseSessions}" var="courseSession">
+							<li>${courseSession.sessionTitle} <c:forEach
+									items="${courseSession.courseSessionDetails}"
+									var="courseSessionDetail">
+									<ul>
+									<li data-type="${courseSessionDetail.type}"
+										data-file="${courseSessionDetail.file}"
+										data-details="${courseSessionDetail.topic}"
+										data-qa="${courseSessionDetail.topic}">
+										${courseSessionDetail.topic}</li>
+									</ul>
+								</c:forEach>
+							</li>
+						</c:forEach>
+
+
+						<%--         
             <c:forEach items="${courseSessionDetails}" var="courseSessionDetail">
                 <li data-type="${courseSessionDetail.type}" data-file="${courseSessionDetail.file}" data-details="${courseSessionDetail.topic}" data-qa="${courseSessionDetail.topic}">
                     ${courseSessionDetail.topic}
                 </li>
-            </c:forEach>
-        </ul>
-    </div>
-    <div class="course-details">
+            </c:forEach> --%>
+					</ul>
+				</div>
+				<%--     <div class="course-details">
         <h2>Course Details</h2>
         <div id="course-details-content">
            <c:forEach items="${courseSessions}" var="courseSession">
@@ -149,10 +170,10 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <h2>Q&A</h2>
         <div id="course-qa-content"></div>
-    </div>
-</div>
+    </div> --%>
+			</div>
 
-<%@ include file="footer.jsp" %>
+			<%@ include file="footer.jsp"%>
 
 
 		</div>

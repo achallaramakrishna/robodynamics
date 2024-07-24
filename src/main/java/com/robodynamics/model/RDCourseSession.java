@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,6 +48,21 @@ public class RDCourseSession {
 	
 	@Column(name = "version")
 	private int version;
+
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="course_session_id", nullable = true)
+	private List<RDCourseSessionDetail> courseSessionDetails = new ArrayList<RDCourseSessionDetail>();
+	
+	
+	
+	public List<RDCourseSessionDetail> getCourseSessionDetails() {
+		return courseSessionDetails;
+	}
+
+	public void setCourseSessionDetails(List<RDCourseSessionDetail> courseSessionDetails) {
+		this.courseSessionDetails = courseSessionDetails;
+	}
 
 	public int getCourseSessionId() {
 		return courseSessionId;

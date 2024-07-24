@@ -18,8 +18,12 @@ import com.robodynamics.form.RDCourseForm;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseResource;
+import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
+import com.robodynamics.service.RDCourseSessionDetailService;
+import com.robodynamics.service.RDCourseSessionService;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +40,12 @@ public class RDCourseController {
 
 	@Autowired
 	private RDCourseService service;
+	
+	@Autowired
+	private RDCourseSessionService courseSessionservice;
+	
+	@Autowired
+	private RDCourseSessionDetailService courseSessionDetailservice;
 	
 	@Autowired
 	private RDCourseCategoryService courseCategoryService;
@@ -62,12 +72,19 @@ public class RDCourseController {
 	public ModelAndView monitor(Model theModel, @RequestParam("courseId") int theId) {
 		
 		
-		RDCourse course = service.getRDCourse(theId);
-		System.out.println("hello....course id............." + course.getCourseId());
-		System.out.println("hello....course name............." + course.getCourseName());
-        theModel.addAttribute("course", course);
+		//RDCourse course = service.getRDCourse(theId);
+		List <RDCourseSession> courseSessions = courseSessionservice.getRDCourseSessions();
+		List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails();
 		
-		ModelAndView modelAndView = new ModelAndView("monitor");
+		System.out.println(courseSessions);
+		System.out.println(courseSessionDetails);
+		
+		
+		//System.out.println("hello....course id............." + course.getCourseId());
+		//System.out.println("hello....course name............." + course.getCourseName());
+        theModel.addAttribute("courseSessions", courseSessions);
+        theModel.addAttribute("courseSessionDetails", courseSessionDetails);
+		ModelAndView modelAndView = new ModelAndView("showDashboard");
 		return modelAndView;
 	}
 	

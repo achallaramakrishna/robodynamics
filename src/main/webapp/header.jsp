@@ -104,11 +104,11 @@
     </div>
     <div class="header-buttons">
 	<c:if test="${not empty user}">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='logout'">Logout</button>
+        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/logout'">Logout</button>
     </c:if>
     <c:if test="${ empty user}">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='login'">Login</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='parent/register'">Sign-up</button>
+        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/parent/register'">Sign-up</button>
     </c:if>
     </div>
 </nav>

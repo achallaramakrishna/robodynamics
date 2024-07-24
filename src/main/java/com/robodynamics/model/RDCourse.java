@@ -41,7 +41,6 @@ public class RDCourse {
 	@JoinColumn(name="asset_resource_id", nullable = true)
 	private Set<RDCourseResource> courseResources = new HashSet<RDCourseResource>();
 
-	
 	public RDCourse() {
 		
 	}

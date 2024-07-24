@@ -187,7 +187,7 @@ public class RDParentController {
 		child.setDad(parent);
 		child.setProfile_id(RDUser.profileType.ROBO_STUDENT.getValue());
         service.registerRDUser(child);
-        ModelAndView modelAndView = new ModelAndView("profile");
+        ModelAndView modelAndView = new ModelAndView("showProfile");
 		return modelAndView;
     }
 

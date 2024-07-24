@@ -97,6 +97,7 @@ public class RDUserDaoImpl implements RDUserDao {
 	@Override
 	public List<RDUser> getRDChilds(int parentUserId) {
 
+		System.out.println("Parent user id : " + parentUserId);
 		Session session = factory.getCurrentSession();
 		List<RDUser> rdChildsList = new ArrayList<RDUser>();
 		try {

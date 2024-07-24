@@ -28,6 +28,8 @@
 	</bean>
 	<mvc:resources mapping="/images/**" location="/resources/images/" />
 	<mvc:resources mapping="/css/**" location="/resources/css/" />
+	<mvc:resources mapping="/assets/pdfs/**" location="/resources/assets/pdfs/" />
+	<mvc:resources mapping="/assets/videos/**" location="/resources/assets/videos/" />
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven/>

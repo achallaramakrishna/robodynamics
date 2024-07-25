@@ -16,6 +16,7 @@ public interface RDUserService {
 	
 	public List < RDUser > getRDInstructors();
 
+	public List < RDUser > searchUsers(int profileId, int active);
 	
 	public void deleteRDUser(int id);
     

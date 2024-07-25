@@ -112,4 +112,42 @@ public class RDUserDaoImpl implements RDUserDao {
 		}
 	}
 
+	@Override
+	public List<RDUser> getRDUsersByProfile(int profileId) {
+		System.out.println("profileId id : " + profileId);
+		Session session = factory.getCurrentSession();
+		List<RDUser> rdUsersByProfile = new ArrayList<RDUser>();
+		try {
+			Query<RDUser> query = session.createQuery("from RDUser where profileId =:profileId",
+					RDUser.class);
+			query.setParameter("profileId", profileId);
+			rdUsersByProfile = query.getResultList();
+			return rdUsersByProfile;
+		} catch (NoResultException e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	@Override
+	public List<RDUser> searchUsers(int profileId, int active) {
+		System.out.println("profileId id : " + profileId);
+		Session session = factory.getCurrentSession();
+		List<RDUser> rdUsers = new ArrayList<RDUser>();
+		try {
+			Query<RDUser> query = session.createQuery("from RDUser where profile_id =:profileId and active =:active",
+					RDUser.class);
+			query.setParameter("profileId", profileId);
+			query.setParameter("active", active);
+			rdUsers = query.getResultList();
+			return rdUsers;
+		} catch (NoResultException e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+	
+	
+	
+
 }

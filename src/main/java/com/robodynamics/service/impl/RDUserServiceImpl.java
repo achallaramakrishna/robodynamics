@@ -58,6 +58,12 @@ public class RDUserServiceImpl implements RDUserService {
 		return rdUserDao.getRDInstructors();
 
 	}
+
+	@Override
+	@Transactional
+	public List<RDUser> searchUsers(int profileId, int active) {
+		return rdUserDao.searchUsers(profileId, active);
+	}
 	
 	
 

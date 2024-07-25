@@ -12,7 +12,11 @@ public interface RDUserDao {
 	
 	public RDUser getRDUser(int userId);
 	
+	public List < RDUser > searchUsers(int profileId, int active);
+	
 	public List < RDUser > getRDUsers();
+	
+	public List < RDUser > getRDUsersByProfile(int profileId);
 	
 	public List < RDUser > getRDInstructors();
 	

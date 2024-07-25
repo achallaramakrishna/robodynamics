@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 
-<%@ page isELIgnored="false" %>
- 
+<%@ page isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +25,15 @@
 <title>Welcome</title>
 </head>
 <body>
-   <jsp:include page="header.jsp" />
-
-	<div class="container-fluid">
+	<jsp:include page="header.jsp" />
+ 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-		   <%@ include file="/WEB-INF/views/leftnav.jsp" %>
+			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
 
-			<h1> Welcome to Admin Dashboard</h1>
 		</div>
 
-	</div>
-<jsp:include page="footer.jsp" />
+	</div> 
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
 

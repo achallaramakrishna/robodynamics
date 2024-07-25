@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.robodynamics.model.RDUser;
@@ -30,12 +31,22 @@ public class RDUserController {
 
 	@GetMapping("/listusers")
 	public ModelAndView listusers(Model m) {
+		RDUser rdUser = new RDUser();
+		m.addAttribute("rdUser", rdUser);
 		List < RDUser > rdUserList = service.getRDUsers();
 		m.addAttribute("rdUserList", rdUserList);
 		ModelAndView modelAndView = new ModelAndView("manageusers");
 		return modelAndView;
 	}
 
+	@PostMapping("/search")
+	public ModelAndView search(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
+		List < RDUser > rdUserList = service.searchUsers(rdUser.getProfile_id(),rdUser.getActive());
+		model.addAttribute("rdUserList", rdUserList);
+		ModelAndView modelAndView = new ModelAndView("manageusers");
+		return modelAndView;
+	}
+	
 	@PostMapping("/register")
 	public String register(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
 		service.registerRDUser(rdUser);
@@ -93,7 +104,7 @@ public class RDUserController {
 				return "studentDashboard";
 
 			} else {
-
+				System.out.println("calling dashboard");
 				return "dashboard";
 			}
 		}
@@ -106,4 +117,21 @@ public class RDUserController {
 		return "login";
 
 	}
+	
+	@GetMapping("/dashboard")	
+	public ModelAndView homeDashboard(Model m) {
+		System.out.println("Inside Dashboard 111");
+		RDUser rdUser = new RDUser();
+		m.addAttribute("rdUser", rdUser);
+		ModelAndView modelAndView = new ModelAndView("dashboard");
+		return modelAndView;
+	}
+	
+	@PostMapping("/dashboard")
+    public String showDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
+		System.out.println("Inside dashboard");
+        List<RDUser> users = service.searchUsers(rdUser.getProfile_id(), rdUser.getActive());
+        model.addAttribute("users", users);
+        return "dashboard";
+    }
 }

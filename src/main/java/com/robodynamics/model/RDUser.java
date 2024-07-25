@@ -57,6 +57,8 @@ public class RDUser {
 	@Column(name = "cell_phone")
 	private String cellPhone;
 	
+	@Column(name = "active")
+	private int active;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mom_user_id")
@@ -173,8 +175,14 @@ public class RDUser {
 		}
 	}
 
-
 	
+	
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
+	}
 	public RDUser getMom() {
 		return mom;
 	}

@@ -31,7 +31,7 @@
 		<div class="row flex-nowrap">
 		   <%@ include file="/WEB-INF/views/leftnav.jsp" %>
 
-			<h1> Welcome to Admin Dashboard</h1>
+			<h1> Welcome to Admin sss Dashboard</h1>
 		</div>
 
 	</div>

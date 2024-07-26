@@ -48,6 +48,13 @@ body {
         .navbar-custom .navbar-toggler-icon {
             color: #90007f;
         }
+        .navbar-dark .navbar-toggler {
+            color: rgba(255,255,255,.5);
+            border-color: rgba(255,255,255,.1);
+        }
+        .navbar-custom .navbar-toggler {
+              background-color: #b1007f;
+        }
 
         .navbar-custom .header-buttons {
             display: flex;
@@ -297,17 +304,17 @@ footer a:active {
     <a class="navbar-brand" href="index.jsp">
         <img src="images/logo.jpg" alt="Robo Dynamics Logo">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
+             <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
+             <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
             <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
+             <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
         </ul>
     </div>
     <div class="header-buttons">

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enroll at Robo Dynamics</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -31,6 +33,10 @@
     </style>
 </head>
 <body>
+<!-- Header Section -->
+    <!-- Including a navigation bar in a JSP -->
+    <div>
+	<jsp:include page="header.jsp" /></div>
 
 <div class="container">
     <div class="enroll-form">
@@ -58,6 +64,10 @@
         </form>
     </div>
 </div>
+
+<!-- Footer Section -->
+<div><jsp:include page="footer.jsp" /></div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

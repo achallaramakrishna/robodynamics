@@ -11,8 +11,27 @@
     body {
       font-family: 'Roboto', sans-serif;
     }
+    body {
+    background-image: url('images/bk.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+   }
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    pointer-events: none;
+    z-index: -1;
+}
+    
     .hero-section {
-      background: url('images/coursebk.png') no-repeat center center;
       background-size: cover;
       color: white;
       text-align: center;
@@ -85,26 +104,15 @@
       position: relative;
       overflow: hidden;
     }
-    .level-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('images/coursebk2.png') no-repeat center center;
-      background: linear-gradient(to right, #ff007f, #000080);
-      background-size: cover;
-      z-index: -1;
-      opacity: 0.85;
-    }
+   
     .level-content {
       position: relative;
       z-index: 1;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.0);
+      color: white;
     }
    /* Navbar Custom Styles */
         .navbar-custom {
@@ -233,7 +241,7 @@
                 <img src="images/esp32.jpg" class="card-img-top" alt="Intermediate Robotics">
                 <div class="card-body">
                   <h5 class="card-title">Intermediate Robotics</h5>
-                  <p class="card-text">Building autonomous robots and learning advanced programming for ages 11-12, Grades 6-7.</p>
+                  <p class="card-text">Building robots and learning programming for ages 11-12, Grades 6-7.</p>
                   <a href="robolevel2.jsp" class="btn btn-primary btn-view-details">View Details</a>
                   <a href="subscription.jsp" class="btn btn-success btn-enroll-card">Enroll Now</a>
                 </div>

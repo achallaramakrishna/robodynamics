@@ -50,9 +50,9 @@
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/robodynamics_db" />
+			value="jdbc:mysql://localhost:3317/robodynamics_db" />
 		<property name="username" value="root" />
-		<property name="password" value="achalla" />
+		<property name="password" value="user123" />
 	</bean> 	 
 
  	<!-- <bean

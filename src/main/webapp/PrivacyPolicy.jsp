@@ -76,33 +76,17 @@
 </head>
 <body>
     <!-- Header Section -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom" style=" background: linear-gradient(to right, #ff007f, #000080);">
-        <a class="navbar-brand" href="index.jsp">
-            <img src="images/logo.jpg" alt="Robo Dynamics Logo" style="max-height: 50px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Including a navigation bar in a JSP -->
+	<jsp:include page="header.jsp" />
     <header>
         <h1>Privacy Policy</h1>
     </header>
-    <main>
+    <div><main>
         <section>
             <p>This Privacy Policy was last updated on july 09, 2024.</p>
-            <p>Thank you for joining Robo Dynamics. We at Robo Dynamics (“Robo Dynamics”, “we”, “us”) respect your privacy and want you to understand how we collect, use, and share data about you. This Privacy Policy covers our data collection practices and describes your rights regarding your personal data.</p>
-            <p>Unless we link to a different policy or state otherwise, this Privacy Policy applies when you visit or use Robo Dynamics websites, mobile applications, APIs, or related services (the “Services”). It also applies to prospective customers of our business and enterprise products.</p>
-            <p>By using the Services, you agree to the terms of this Privacy Policy. You shouldn’t use the Services if you don’t agree with this Privacy Policy or any other agreement that governs your use of the Services.</p>
+            <p>Thank you for joining Robo Dynamics. We at Robo Dynamics respect your privacy and want you to understand how we collect, use, and share data about you. This Privacy Policy covers our data collection practices and describes your rights regarding your personal data.</p>
+            <p>Unless we link to a different policy or state otherwise, this Privacy Policy applies when you visit or use Robo Dynamics websites, mobile applications, APIs, or related services. It also applies to prospective customers of our business and enterprise products.</p>
+            <p>By using the Services, you agree to the terms of this Privacy Policy. You should no��t use the Services if you do no��t agree with this Privacy Policy or any other agreement that governs your use of the Services.</p>
         </section>
         <section>
             <h2>Table of Contents</h2>
@@ -113,8 +97,7 @@
                 <li><a href="#section4">4. Who We Share Your Data With</a></li>
                 <li><a href="#section5">5. Security</a></li>
                 <li><a href="#section6">6. Your Rights</a></li>
-                <li><a href="#section7">7. Jurisdiction-Specific Rules</a></li>
-                <li><a href="#section8">8. Updates & Contact Info</a></li>
+                <li><a href="#section8">7. Updates & Contact Info</a></li>
             </ul>
         </section>
         <section id="section1">
@@ -142,16 +125,12 @@
             <p>You have certain rights around the use of your data, including the ability to opt out of promotional emails, cookies, and collection of your data by certain third parties. You can update or terminate your account and contact us for individual rights requests about your personal data.</p>
         </section>
         <section id="section7">
-            <h3>7. Jurisdiction-Specific Rules</h3>
-            <p>Depending on where you live, you may have additional rights and protections under the law.</p>
-        </section>
-        <section id="section8">
             <h3>8. Updates & Contact Info</h3>
             <p>When we make a material change to this policy, we’ll notify users via email, in-product notice, or another mechanism required by law. Changes become effective the day they’re posted. Please contact us via email or postal mail with any questions, concerns, or disputes.</p>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
-    </footer>
+    </div>
+    
+    
 </body>
 </html>

@@ -99,12 +99,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'video') {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
+                document.getElementById('video-source').src = ${pageContext.request.contextPath}/assets/videos/+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'block';
-                document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
+                document.getElementById('course-pdf').src = ${pageContext.request.contextPath}/assets/pdfs/ + file;
             }
 
             document.getElementById('course-details-content').textContent = details;
@@ -116,14 +116,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="main-container">
 				<div class="video-container">
 					<video id="course-video" controls style="display: none;">
-						<source id="video-source" type="video/mp4">
-						Your browser does not support the video tag.
-					</video>
+						<source id="video-source" type="video/mp4">	Your browser does not support the video tag.</video>
 					<iframe id="course-pdf" style="display: none;" src="" width="600"
 						height="400"></iframe>
 				</div>
@@ -173,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div> --%>
 			</div>
 
-			<%@ include file="footer.jsp"%>
+			
 
 
 		</div>

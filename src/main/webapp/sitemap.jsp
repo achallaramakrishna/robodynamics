@@ -43,6 +43,10 @@
     </style>
 </head>
 <body>
+  <!-- Header Section -->
+    <!-- Including a navigation bar in a JSP -->
+	<jsp:include page="header.jsp" />
+	
     <div class="map-section">
         <div class="container">
             <h2 class="text-center">Our Location</h2>
@@ -51,5 +55,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- Footer Section -->
+<jsp:include page="footer.jsp" />
+    
 </body>
 </html>

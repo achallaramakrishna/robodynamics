@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						<source id="video-source" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
-					<iframe id="course-pdf" style="display: none;" src="" width="600"
-						height="400"></iframe>
+					<iframe id="course-pdf" style="display: none;" src="" width="1200"
+						height="1000"></iframe>
 				</div>
 
 
@@ -173,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div> --%>
 			</div>
 
-			<%@ include file="footer.jsp"%>
 
 
 		</div>

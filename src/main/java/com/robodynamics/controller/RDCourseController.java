@@ -73,17 +73,20 @@ public class RDCourseController {
 		
 		
 		//RDCourse course = service.getRDCourse(theId);
-		List <RDCourseSession> courseSessions = courseSessionservice.getRDCourseSessions();
-		List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails();
+		List <RDCourseSession> courseSessions = courseSessionservice.getRDCourseSessions(theId);
+	//	List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails(theId);
 		
-		System.out.println(courseSessions);
-		System.out.println(courseSessionDetails);
+		System.out.println("Size - " + courseSessions.size());
+	//	System.out.println(courseSessionDetails);
 		
 		
 		//System.out.println("hello....course id............." + course.getCourseId());
 		//System.out.println("hello....course name............." + course.getCourseName());
         theModel.addAttribute("courseSessions", courseSessions);
-        theModel.addAttribute("courseSessionDetails", courseSessionDetails);
+        for(RDCourseSession courseSession : courseSessions) {
+        	System.out.println(courseSession);
+        }
+       // theModel.addAttribute("courseSessionDetails", courseSessionDetails);
 		ModelAndView modelAndView = new ModelAndView("showDashboard");
 		return modelAndView;
 	}

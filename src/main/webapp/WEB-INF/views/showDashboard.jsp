@@ -125,30 +125,30 @@ document.addEventListener('DOMContentLoaded', function() {
 						Your browser does not support the video tag.
 					</video>
 					<iframe id="course-pdf" style="display: none;" src="" width="1200"
-						height="1000"></iframe>
+						height="700"></iframe>
 				</div>
 
 
 				<div class="course-contents">
-					<!-- <h2>Course Contents</h2> -->
 					<h2>Course Contents</h2>
 					<ul id="course-list">
-
 						<c:forEach items="${courseSessions}" var="courseSession">
-							<li>${courseSession.sessionTitle} <c:forEach
-									items="${courseSession.courseSessionDetails}"
-									var="courseSessionDetail">
+							<li>${courseSession.sessionTitle} 
+							<script> console.log('${courseSession.sessionTitle}');</script>
+							
+							<c:forEach items="${courseSession.courseSessionDetails}" var="courseSessionDetail">
 									<ul>
 									<li data-type="${courseSessionDetail.type}"
 										data-file="${courseSessionDetail.file}"
 										data-details="${courseSessionDetail.topic}"
 										data-qa="${courseSessionDetail.topic}">
-										${courseSessionDetail.topic}</li>
+										${courseSessionDetail.topic}
+									</li>
 									</ul>
 								</c:forEach>
 							</li>
 						</c:forEach>
-
+				</ul>
 
 						<%--         
             <c:forEach items="${courseSessionDetails}" var="courseSessionDetail">
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${courseSessionDetail.topic}
                 </li>
             </c:forEach> --%>
-					</ul>
+					
 				</div>
 				<%--     <div class="course-details">
         <h2>Course Details</h2>

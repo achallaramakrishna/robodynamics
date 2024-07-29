@@ -8,6 +8,7 @@ public class RDResult {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "quiz_result_id")
 	private int id;
 
 	@ManyToOne
@@ -60,6 +61,8 @@ public class RDResult {
 		this.userAnswer = userAnswer;
 	}
 
+
+
 	public boolean isCorrect() {
 		return isCorrect;
 	}
@@ -73,5 +76,7 @@ public class RDResult {
 		return "RDResult [id=" + id + ", user=" + user + ", quiz=" + quiz + ", userAnswer=" + userAnswer
 				+ ", isCorrect=" + isCorrect + "]";
 	}
+	
+	
 
 }

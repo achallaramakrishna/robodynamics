@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ page isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +26,10 @@
             <tbody>
                 <c:forEach var="result" items="${results}">
                     <tr>
-                        <td>${result.user.username}</td>
+                        <td>${result.user.userName}</td>
                         <td>${result.quiz.question}</td>
                         <td>${result.userAnswer}</td>
-                        <td>${result.isCorrect ? 'Yes' : 'No'}</td>
+                        <td>${result.correct ? 'Yes' : 'No'}</td>
                     </tr>
                 </c:forEach>
             </tbody>

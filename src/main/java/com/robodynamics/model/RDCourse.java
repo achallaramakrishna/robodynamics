@@ -49,6 +49,7 @@ public class RDCourse {
 		return courseId;
 	}
 
+	
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}

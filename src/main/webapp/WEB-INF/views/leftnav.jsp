@@ -92,7 +92,7 @@
         <li class="nav-item"><a href="student/3dPens" class="nav-link ${page eq '3dPens' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> view 3d models</span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/enrollment/listbystudent" class="nav-link ${page eq 'viewCourses' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> View Courses </span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/quiz/take" class="nav-link ${page eq 'takeQuiz' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Take Quiz </span></a></li>
-        <li class="nav-item"><a href="${pageContext.request.contextPath}/quiz/results" class="nav-link ${page eq 'viewResults' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> View Results </span></a></li>
+        <li class="nav-item"><a href="${pageContext.request.contextPath}/results/view" class="nav-link ${page eq 'viewResults' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> View Results </span></a></li>
 
       </ul>
     </div>

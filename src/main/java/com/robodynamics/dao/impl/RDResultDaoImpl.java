@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDResultDao;
-import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDResult;
 
 @Repository

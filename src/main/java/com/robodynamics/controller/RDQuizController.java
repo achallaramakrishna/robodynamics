@@ -4,11 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.ui.Model;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.robodynamics.model.RDQuizAnswerForm;
-import com.robodynamics.model.RDQuiz;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robodynamics.model.RDQuizQuestion;
+import com.robodynamics.model.RDQuizQuestionAnswerForm;
 import com.robodynamics.model.RDResult;
 import com.robodynamics.model.RDUser;
-import com.robodynamics.service.RDQuizService;
+import com.robodynamics.service.RDQuizQuestionService;
 import com.robodynamics.service.RDResultService;
 import com.robodynamics.service.RDUserService;
 
@@ -32,7 +29,11 @@ import com.robodynamics.service.RDUserService;
 @RequestMapping("/quiz")
 public class RDQuizController {
     @Autowired
-    private RDQuizService quizService;
+    private RDQuizQuestionService quizQuestionService;
+    
+    @Autowired
+    private RDQuizQuestionService quizService;
+    
     
     @Autowired
     private RDResultService resultService;
@@ -40,27 +41,28 @@ public class RDQuizController {
     @Autowired
     private RDUserService userService;
 
+    
     @GetMapping("/take")
-    public String takeQuiz(Model model, HttpSession session) throws JsonProcessingException {
-        List<RDQuiz> quizzes = quizService.getRDQuizes();
-        model.addAttribute("quizzes", quizzes);
-        model.addAttribute("currentQuiz", quizzes.get(0)); // Start with the first quiz question
-        session.setAttribute("quizList", quizzes);
-        session.setAttribute("currentQuizIndex", 0);
+    public String takeQuiz(Model model, @RequestParam("quiz_id") int quizId, HttpSession session) throws JsonProcessingException {
+        List<RDQuizQuestion> quizQuestions = quizQuestionService.getRDQuizQuestions(quizId);
+        model.addAttribute("quizQuestions", quizQuestions);
+        model.addAttribute("currentQuizQuestion", quizQuestions.get(0)); // Start with the first quiz question
+        session.setAttribute("quizQuestionsList", quizQuestions);
+        session.setAttribute("currentQuizIndexQuestion", 0);
         
         ObjectMapper mapper = new ObjectMapper();
-        String quizzesJson = mapper.writeValueAsString(quizzes);
-        model.addAttribute("quizzes", quizzesJson); // Pass quizzes as JSON string
+        String quizQuestionsJson = mapper.writeValueAsString(quizQuestions);
+        model.addAttribute("quizQuestions", quizQuestionsJson); // Pass quizzes as JSON string
         // Add an empty QuizAnswerForm to the model
-        model.addAttribute("quizAnswerForm", new RDQuizAnswerForm());
+        model.addAttribute("quizQuestionAnswerForm", new RDQuizQuestionAnswerForm());
         return "takeQuiz";
     }
 
     @PostMapping("/submit")
-    public String submitQuiz(@ModelAttribute("quizAnswerForm") RDQuizAnswerForm quizAnswerForm, HttpSession session, Model model) {
-        int currentQuizIndex = (int) session.getAttribute("currentQuizIndex");
-        List<RDQuiz> quizzes = (List<RDQuiz>) session.getAttribute("quizList");
-        RDQuiz quiz = quizzes.get(currentQuizIndex);
+    public String submitQuiz(@ModelAttribute("quizAnswerForm") RDQuizQuestionAnswerForm quizQuestionAnswerForm, HttpSession session, Model model) {
+        int currentQuizQuestionIndex = (int) session.getAttribute("currentQuizIndex");
+        List<RDQuizQuestion> quizQuestionsList = (List<RDQuizQuestion>) session.getAttribute("quizQuestionsList");
+        RDQuizQuestion quizQuestion = quizQuestionsList.get(currentQuizQuestionIndex);
 
         // Retrieve the user from session or a default user for now
         RDUser user = (RDUser) session.getAttribute("rdUser");
@@ -68,17 +70,17 @@ public class RDQuizController {
         // Create a result object
         RDResult result = new RDResult();
         result.setUser(user);
-        result.setQuiz(quiz);
-        result.setUserAnswer(quizAnswerForm.getUserAnswer());
-        result.setCorrect(quiz.getCorrectAnswer().equals(quizAnswerForm.getUserAnswer()));
+        result.setQuizQuestion(quizQuestion);
+        result.setUserAnswer(quizQuestionAnswerForm.getUserAnswer());
+        result.setCorrect(quizQuestion.getCorrectAnswer().equals(quizQuestionAnswerForm.getUserAnswer()));
 
         // Save the result
         resultService.saveRDResult(result);
 
         // Prepare for next quiz question
-        if (currentQuizIndex < quizzes.size() - 1) {
-            session.setAttribute("currentQuizIndex", currentQuizIndex + 1);
-            model.addAttribute("currentQuiz", quizzes.get(currentQuizIndex + 1));
+        if (currentQuizQuestionIndex < quizQuestionsList.size() - 1) {
+            session.setAttribute("currentQuizQuestionIndex", currentQuizQuestionIndex + 1);
+            model.addAttribute("currentQuiz", quizQuestionsList.get(currentQuizQuestionIndex + 1));
             return "takeQuiz";
         } else {
             // If it's the last question, display results
@@ -89,23 +91,23 @@ public class RDQuizController {
     
     @GetMapping("/takeQuiz")
     public String takeQuiz(Model theModel) {
-        List < RDQuiz > quizzes = quizService.getRDQuizes();
-        System.out.println("Number of quizzes - " + quizzes.size());
-        theModel.addAttribute("quizzes", quizzes);
+        List < RDQuizQuestion > quizQuestions = quizQuestionService.getRDQuizQuestions();
+        System.out.println("Number of quizzes - " + quizQuestions.size());
+        theModel.addAttribute("quiz question", quizQuestions);
         
-        theModel.addAttribute("currentQuiz", quizzes.get(0)); // Start with the first quiz question
+        theModel.addAttribute("currentQuizQuestion", quizQuestions.get(0)); // Start with the first quiz question
         return "takeQuiz";
     }
     
-    @GetMapping("/quizzes")
+    @GetMapping("/quizquesitons")
     @ResponseBody
-    public List<RDQuiz> getAllQuizzes() {
-        return quizService.getRDQuizes();
+    public List<RDQuizQuestion> getAllQuizQuestions() {
+        return quizQuestionService.getRDQuizQuestions();
     }
 
-	@PostMapping("/createQuiz")
+	@PostMapping("/createQuizQuestion")
     @ResponseBody
-    public void createQuiz(@RequestBody RDQuiz quiz) {
-        quizService.saveRDQuiz(quiz);
+    public void createQuizQuestion(@RequestBody RDQuizQuestion quizQuestion) {
+        quizQuestionService.saveRDQuizQuestion(quizQuestion);
     }
 }

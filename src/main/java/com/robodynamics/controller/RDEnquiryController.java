@@ -27,12 +27,12 @@ public class RDEnquiryController {
 	private RDEnquiryService service;
 
 	@GetMapping("/list")
-	    public String listEnquiries(Model theModel) {
-	        List < RDEnquiry > enquiries = service.getRDEnquiries();
-	        System.out.println("Number of enquiries - " + enquiries.size());
-	        theModel.addAttribute("enquiries", enquiries);
-	        return "listEnquiries";
-	    }
+    public String listEnquiries(Model theModel) {
+        List < RDEnquiry > enquiries = service.getRDEnquiries();
+        System.out.println("Number of enquiries - " + enquiries.size());
+        theModel.addAttribute("enquiries", enquiries);
+        return "listEnquiries";
+    }
 	@GetMapping("/showForm")
 	public ModelAndView home(Model m) {
 		RDEnquiry enquiry = new RDEnquiry();

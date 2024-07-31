@@ -3,6 +3,7 @@ package com.robodynamics.dao;
 import java.util.List;
 
 import com.robodynamics.model.RDCourseSessionDetail;
+import com.robodynamics.model.RDQuiz;
 
 public interface RDCourseSessionDetailDao {
 	
@@ -10,7 +11,7 @@ public interface RDCourseSessionDetailDao {
 
 	public RDCourseSessionDetail getRDCourseSessionDetail(int courseSessionDetailId);
 	
-	public List < RDCourseSessionDetail > getRDCourseSessionDetails();
+	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int courseId);
 	
     public void deleteRDCourseSessionDetail(int id);
 }

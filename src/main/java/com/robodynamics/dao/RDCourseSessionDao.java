@@ -10,7 +10,7 @@ public interface RDCourseSessionDao {
 
 	public RDCourseSession getRDCourseSession(int courseSessionId);
 	
-	public List < RDCourseSession > getRDCourseSessions();
+	public List < RDCourseSession > getRDCourseSessions(int courseId);
 	
     public void deleteRDCourseSession(int id);
 }

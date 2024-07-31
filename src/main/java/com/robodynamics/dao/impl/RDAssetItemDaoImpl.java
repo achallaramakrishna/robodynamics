@@ -48,6 +48,8 @@ public class RDAssetItemDaoImpl implements RDAssetItemDao {
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery < RDAssetItem > cq = cb.createQuery(RDAssetItem.class);
         Root < RDAssetItem > root = cq.from(RDAssetItem.class);
+        
+        
         cq.select(root);
         Query query = session.createQuery(cq);
         return query.getResultList();

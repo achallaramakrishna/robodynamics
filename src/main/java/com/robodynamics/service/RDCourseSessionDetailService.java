@@ -11,7 +11,7 @@ public interface RDCourseSessionDetailService {
 
 	public RDCourseSessionDetail getRDCourseSessionDetail(int courseSessionDetailId);
 	
-	public List < RDCourseSessionDetail > getRDCourseSessionDetails();
+	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int courseId);
 	
     public void deleteRDCourseSessionDetail(int id);
 }

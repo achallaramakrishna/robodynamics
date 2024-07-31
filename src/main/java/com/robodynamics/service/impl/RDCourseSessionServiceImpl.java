@@ -36,9 +36,9 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
 
 	@Override
 	@Transactional
-	public List<RDCourseSession> getRDCourseSessions() {
+	public List<RDCourseSession> getRDCourseSessions(int courseId) {
 		
-		return rdCourseSessionDao.getRDCourseSessions();
+		return rdCourseSessionDao.getRDCourseSessions(courseId);
 	}
 
 	@Override

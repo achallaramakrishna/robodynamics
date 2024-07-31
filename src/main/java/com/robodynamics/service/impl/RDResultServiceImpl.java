@@ -1,6 +1,6 @@
 package com.robodynamics.service.impl;
 
-import com.robodynamics.dao.RDQuizDao;
+import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.dao.RDResultDao;
 import com.robodynamics.model.RDResult;
 import com.robodynamics.service.RDResultService;

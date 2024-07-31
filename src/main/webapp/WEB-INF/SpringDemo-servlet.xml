@@ -105,6 +105,7 @@
 				<value>com.robodynamics.model.RDCourseSession</value>
 				<value>com.robodynamics.model.RDCourseSessionDetail</value>
 				<value>com.robodynamics.model.RDQuiz</value>
+				<value>com.robodynamics.model.RDQuizQuestion</value>
 				<value>com.robodynamics.model.RDResult</value>
 				
 			</list>

@@ -3,6 +3,7 @@ package com.robodynamics.dao;
 import java.util.List;
 
 import com.robodynamics.model.RDCourseSessionDetail;
+import com.robodynamics.model.RDQuiz;
 
 public interface RDCourseSessionDetailDao {
 	

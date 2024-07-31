@@ -16,8 +16,8 @@ public class RDResult {
 	private RDUser user;
 
 	@ManyToOne
-	@JoinColumn(name = "quiz_id")
-	private RDQuiz quiz;
+	@JoinColumn(name = "quiz_question_id")
+	private RDQuizQuestion quizQuestion;
 
 	@Column(name = "user_answer")
 	private String userAnswer;
@@ -45,12 +45,13 @@ public class RDResult {
 		this.user = user;
 	}
 
-	public RDQuiz getQuiz() {
-		return quiz;
+	
+	public RDQuizQuestion getQuizQuestion() {
+		return quizQuestion;
 	}
 
-	public void setQuiz(RDQuiz quiz) {
-		this.quiz = quiz;
+	public void setQuizQuestion(RDQuizQuestion quizQuestion) {
+		this.quizQuestion = quizQuestion;
 	}
 
 	public String getUserAnswer() {
@@ -73,7 +74,7 @@ public class RDResult {
 
 	@Override
 	public String toString() {
-		return "RDResult [id=" + id + ", user=" + user + ", quiz=" + quiz + ", userAnswer=" + userAnswer
+		return "RDResult [id=" + id + ", user=" + user + ", quizQuestion=" + quizQuestion + ", userAnswer=" + userAnswer
 				+ ", isCorrect=" + isCorrect + "]";
 	}
 	

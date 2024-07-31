@@ -87,28 +87,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     courseListItems.forEach(item => {
         item.addEventListener('click', () => {
-            const type = item.getAttribute('data-type');
+    	        const type = item.getAttribute('data-type');
             const file = item.getAttribute('data-file');
+            const quiz = item.getAttribute('data-quiz');
             const details = item.getAttribute('data-details');
             const qa = item.getAttribute('data-qa');
 			console.log('Type - ' + type);
 			console.log('File - ' + file);
+			console.log('Quiz - ' + quiz);
 			console.log('Details - ' + details);
 			console.log('qa - ' + qa);
 			
             if (type === 'video') {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
+                document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'block';
+                document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
-            }
+            } else if (type === 'quiz') {
+                document.getElementById('course-video').style.display = 'none';
+                document.getElementById('course-pdf').style.display = 'none';
+                document.getElementById('course-quiz').style.display = 'block';
 
-            document.getElementById('course-details-content').textContent = details;
-            document.getElementById('course-qa-content').textContent = qa;
+                document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiz/take?quiz_id=` + quiz;
+                
+            } 
+
+           /*  document.getElementById('course-details-content').textContent = details;
+            document.getElementById('course-qa-content').textContent = qa; */
         });
     });
 });
@@ -126,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
 					</video>
 					<iframe id="course-pdf" style="display: none;" src="" width="1200"
 						height="700"></iframe>
+					<iframe id="course-quiz" style="display: none;" src="" width="1200"
+						height="700"></iframe>
 				</div>
 
 
@@ -140,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<ul>
 									<li data-type="${courseSessionDetail.type}"
 										data-file="${courseSessionDetail.file}"
+										data-quiz="${courseSessionDetail.quiz.quiz_id}"
 										data-details="${courseSessionDetail.topic}"
 										data-qa="${courseSessionDetail.topic}">
 										${courseSessionDetail.topic}

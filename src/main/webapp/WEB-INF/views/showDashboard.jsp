@@ -116,15 +116,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="main-container">
 				<div class="video-container">
-					<video id="course-video" controls style="display: none;">
-						<source id="video-source" type="video/mp4">	Your browser does not support the video tag.</video>
-					<iframe id="course-pdf" style="display: none;" src="" width="600"
-						height="400"></iframe>
+					<video id="course-video">
+						<source id="video-source" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<iframe id="course-pdf" src="" width="1200"
+						height="1000"></iframe>
 				</div>
 
 
@@ -172,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div> --%>
 			</div>
 
-			
 
 
 		</div>

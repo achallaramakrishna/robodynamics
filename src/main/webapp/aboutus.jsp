@@ -268,7 +268,7 @@
             <div class="col-lg-12">
                 <h2>Join Us on Our Journey</h2>
                 <p>At Robo Dynamics, we are dedicated to making a difference in the lives of young learners. Join us on our mission to inspire and educate the tech leaders of tomorrow. Together, we can unlock the potential of every child and pave the way for a brighter, more innovative future.</p>
-                <p>For more information or to enroll in our programs, please contact us at <a href="mailto:info@robodynamics.com">info@robodynamics.com</a> or visit our website at <a href="http://www.robodynamics.com">www.robodynamics.com</a>. We look forward to welcoming you to the Robo Dynamics family!</p>
+                <p>For more information or to enroll in our programs, please contact us at <a href="mailto:info@robodynamics.com">info@robodynamics.com</a> or visit our website at <a href="http://www.robodynamics.in">www.robodynamics.com</a>. We look forward to welcoming you to the Robo Dynamics family!</p>
             </div>
         </div>
     </div>

@@ -87,12 +87,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     courseListItems.forEach(item => {
         item.addEventListener('click', () => {
-            const type = item.getAttribute('data-type');
+    	        const type = item.getAttribute('data-type');
             const file = item.getAttribute('data-file');
+            const quiz = item.getAttribute('data-quiz');
             const details = item.getAttribute('data-details');
             const qa = item.getAttribute('data-qa');
 			console.log('Type - ' + type);
 			console.log('File - ' + file);
+			console.log('Quiz - ' + quiz);
 			console.log('Details - ' + details);
 			console.log('qa - ' + qa);
 			
@@ -100,15 +102,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('video-source').src = ${pageContext.request.contextPath}/assets/videos/+ file;
+                document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'block';
                 document.getElementById('course-pdf').src = ${pageContext.request.contextPath}/assets/pdfs/ + file;
-            }
+                document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
+            } else if (type === 'quiz') {
+                document.getElementById('course-video').style.display = 'none';
+                document.getElementById('course-pdf').style.display = 'none';
+                document.getElementById('course-quiz').style.display = 'block';
+                document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiz/take?quiz_id=` + quiz;
+                
+            } 
 
-            document.getElementById('course-details-content').textContent = details;
-            document.getElementById('course-qa-content').textContent = qa;
+           /*  document.getElementById('course-details-content').textContent = details;
+            document.getElementById('course-qa-content').textContent = qa; */
         });
     });
 });
@@ -126,29 +138,34 @@ document.addEventListener('DOMContentLoaded', function() {
 					</video>
 					<iframe id="course-pdf" src="" width="1200"
 						height="1000"></iframe>
-				</div>
+					<iframe id="course-pdf" style="display: none;" src="" width="1200"
+						height="700"></iframe>
+					<iframe id="course-quiz" style="display: none;" src="" width="1200"
+						height="700"></iframe>
+          			</div>
 
 
 				<div class="course-contents">
-					<!-- <h2>Course Contents</h2> -->
 					<h2>Course Contents</h2>
 					<ul id="course-list">
-
 						<c:forEach items="${courseSessions}" var="courseSession">
-							<li>${courseSession.sessionTitle} <c:forEach
-									items="${courseSession.courseSessionDetails}"
-									var="courseSessionDetail">
+							<li>${courseSession.sessionTitle} 
+							<script> console.log('${courseSession.sessionTitle}');</script>
+							
+							<c:forEach items="${courseSession.courseSessionDetails}" var="courseSessionDetail">
 									<ul>
 									<li data-type="${courseSessionDetail.type}"
 										data-file="${courseSessionDetail.file}"
+										data-quiz="${courseSessionDetail.quiz.quiz_id}"
 										data-details="${courseSessionDetail.topic}"
 										data-qa="${courseSessionDetail.topic}">
-										${courseSessionDetail.topic}</li>
+										${courseSessionDetail.topic}
+									</li>
 									</ul>
 								</c:forEach>
 							</li>
 						</c:forEach>
-
+				</ul>
 
 						<%--         
             <c:forEach items="${courseSessionDetails}" var="courseSessionDetail">
@@ -156,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${courseSessionDetail.topic}
                 </li>
             </c:forEach> --%>
-					</ul>
+					
 				</div>
 				<%--     <div class="course-details">
         <h2>Course Details</h2>

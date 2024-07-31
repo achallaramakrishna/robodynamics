@@ -56,6 +56,19 @@ public class RDCourseSessionDetail {
 	
 	@Column(name = "version")
 	private int version;
+	
+	@ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private RDQuiz quiz;
+
+	
+	public RDQuiz getQuiz() {
+		return quiz;
+	}
+
+	public void setQuiz(RDQuiz quiz) {
+		this.quiz = quiz;
+	}
 
 	public int getCourseSessionDetailId() {
 		return courseSessionDetailId;
@@ -129,6 +142,7 @@ public class RDCourseSessionDetail {
 		this.file = file;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "RDCourseSessionDetail [courseSessionDetailId=" + courseSessionDetailId + ", sessionId=" + sessionId

@@ -99,7 +99,7 @@
             <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
             <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
             <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="contactus">Contact Us</a></li>
         </ul>
     </div>
     <div class="header-buttons">

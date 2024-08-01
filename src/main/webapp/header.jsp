@@ -39,19 +39,25 @@
         }
 
         .navbar-custom .navbar-toggler {
-            border-color:linear-gradient(to right, #ff007f, #000080);
+            border-color: linear-gradient(to right, #ff007f, #000080);
         }
 
         .navbar-custom .navbar-toggler-icon {
             color: #90007f;
         }
-
-        .navbar-custom .header-buttons {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
+        .navbar-dark .navbar-toggler {
+            color: rgba(255,255,255,.5);
+            border-color: rgba(255,255,255,.1);
+        }
+        .navbar-custom .navbar-toggler {
+              background-color: #b1007f;
         }
 
+        .navbar-custom .header-buttons {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        }
         .navbar-custom .header-buttons .btn {
             margin-left: 10px; /* Space between buttons */
             width: 100px; /* Ensure buttons have the same width */
@@ -78,7 +84,35 @@
 
         .btn-primary:hover {
             background-color: #0056b3;
-            border-color:  #ff007f;
+            border-color: #ff007f;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 767.98px) {
+            .navbar-custom .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-custom .nav-link {
+                margin-right: 0;
+                margin-bottom: 10px;
+                font-size: 0.9rem;
+            }
+
+            .navbar-custom .header-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .navbar-custom .header-buttons .btn {
+                width: 100%;
+                text-align: left;
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -96,20 +130,20 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
-             <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
+            <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
             <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
-             <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="contactus">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
         </ul>
     </div>
     <div class="header-buttons">
-	<c:if test="${not empty user}">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/logout'">Logout</button>
-    </c:if>
-    <c:if test="${ empty user}">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/parent/register'">Sign-up</button>
-    </c:if>
+        <c:if test="${not empty user}">
+            <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/logout'">Logout</button>
+        </c:if>
+        <c:if test="${empty user}">
+            <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/parent/register'">Sign-up</button>
+        </c:if>
     </div>
 </nav>
 

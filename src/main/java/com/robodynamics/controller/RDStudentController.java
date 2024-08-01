@@ -56,7 +56,7 @@ public class RDStudentController {
 			session.setAttribute("rdUser", rdUser);
 		}
 
-		ModelAndView modelAndView = new ModelAndView("/enrollment/listbystudent");
+		ModelAndView modelAndView = new ModelAndView("redirect:/enrollment/listbystudent");
 		return modelAndView;
 	}
 }

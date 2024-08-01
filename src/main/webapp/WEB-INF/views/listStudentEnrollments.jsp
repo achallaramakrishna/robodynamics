@@ -50,6 +50,7 @@
 								<th>Instructor</th>
 								<th>Student</th>
 								<th>Start Session</th>
+								<th>View Attendance</th>
 								<th>Course Offering Start Date</th>
 								<th>Course Offering End Date</th>
 
@@ -62,6 +63,13 @@
 								<c:url var="updateLink" value="/course/monitor">
 									<c:param name="courseId"
 										value="${tempStudentEnrollment.courseOffering.course.courseId}" />
+									<c:param name="enrollmentId"
+										value="${tempStudentEnrollment.enrollmentId}" />
+								</c:url>
+								
+								<c:url var="attendanceLink" value="/courseTracking/viewAttendance">
+									<c:param name="enrollmentId"
+										value="${tempStudentEnrollment.enrollmentId}" />
 								</c:url>
 
 								<tr>
@@ -72,6 +80,7 @@
 									<td>${tempStudentEnrollment.student.firstName}
 										${tempStudentEnrollment.student.lastName}</td>
 									<td><!-- display the update link --> <a href="${updateLink}">Start Session</a></td>
+									<td><!-- display the attendance link --> <a href="${attendanceLink}">View Attendance</a></td>
 									<td>${tempStudentEnrollment.courseOffering.startDate}</td>
 									<td>${tempStudentEnrollment.courseOffering.endDate}</td>
 								</tr>

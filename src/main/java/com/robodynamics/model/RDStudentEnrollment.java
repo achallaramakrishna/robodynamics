@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,6 +40,11 @@ public class RDStudentEnrollment {
 	@ManyToOne
     @JoinColumn(name = "course_offering_id")
     private RDCourseOffering courseOffering;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="attendance_id", nullable = true)
+	private List<RDClassAttendance> attendances = new ArrayList<RDClassAttendance>();
+
 	
 	@ManyToOne
     @JoinColumn(name = "student_id")
@@ -73,6 +79,14 @@ public class RDStudentEnrollment {
 
 	public void setCourseOffering(RDCourseOffering courseOffering) {
 		this.courseOffering = courseOffering;
+	}
+
+	public List<RDClassAttendance> getAttendances() {
+		return attendances;
+	}
+
+	public void setAttendances(List<RDClassAttendance> attendances) {
+		this.attendances = attendances;
 	}
 
 	public RDUser getStudent() {

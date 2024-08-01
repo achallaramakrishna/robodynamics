@@ -20,10 +20,12 @@ import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseResource;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
+import com.robodynamics.model.RDStudentEnrollment;
 import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.service.RDStudentEnrollmentService;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +51,9 @@ public class RDCourseController {
 	
 	@Autowired
 	private RDCourseCategoryService courseCategoryService;
+	
+	@Autowired
+	private RDStudentEnrollmentService enrollmentService;
 
 	@GetMapping("/list")
 	    public String listCourses(Model theModel) {
@@ -69,9 +74,13 @@ public class RDCourseController {
 	}
 	
 	@GetMapping("/monitor")
-	public ModelAndView monitor(Model theModel, @RequestParam("courseId") int theId) {
+	public ModelAndView monitor(Model theModel,
+			@RequestParam("courseId") int theId,
+			@RequestParam("enrollmentId") int enrollmentId) {
 		
+		System.out.println("Enrollment id = " + enrollmentId);
 		
+		RDStudentEnrollment studentEnrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
 		//RDCourse course = service.getRDCourse(theId);
 		List <RDCourseSession> courseSessions = courseSessionservice.getRDCourseSessions(theId);
 	//	List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails(theId);
@@ -83,6 +92,7 @@ public class RDCourseController {
 		//System.out.println("hello....course id............." + course.getCourseId());
 		//System.out.println("hello....course name............." + course.getCourseName());
         theModel.addAttribute("courseSessions", courseSessions);
+        theModel.addAttribute("studentEnrollment",studentEnrollment);
         for(RDCourseSession courseSession : courseSessions) {
         	System.out.println(courseSession);
         }

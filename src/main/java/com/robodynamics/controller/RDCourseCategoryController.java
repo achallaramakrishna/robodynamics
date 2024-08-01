@@ -29,6 +29,7 @@ public class RDCourseCategoryController {
 	        theModel.addAttribute("courseCategories", courseCategories);
 	        return "listCourseCategories";
 	    }
+	
 	@GetMapping("/showForm")
 	public ModelAndView home(Model m) {
 		RDCourseCategory courseCategory = new RDCourseCategory();

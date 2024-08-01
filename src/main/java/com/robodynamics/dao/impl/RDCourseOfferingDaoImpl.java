@@ -38,7 +38,7 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 	
 	@Override
 	public void saveRDCourseOffering(RDCourseOffering rdCourseOffering) {
-		System.out.println("hello -- " + rdCourseOffering);
+		
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(rdCourseOffering);
 

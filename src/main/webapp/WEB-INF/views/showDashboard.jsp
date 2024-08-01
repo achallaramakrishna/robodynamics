@@ -134,19 +134,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'video') {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
+                document.getElementById('video-source').src = ${pageContext.request.contextPath}/assets/videos/+ file;
                 document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'block';
+                document.getElementById('course-pdf').src = ${pageContext.request.contextPath}/assets/pdfs/ + file;
                 document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
             } else if (type === 'quiz') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'block';
-
                 document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiz/take?quiz_id=` + quiz;
                 
             } 
@@ -174,14 +175,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="row flex-nowrap">
 			<div class="main-container">
 				<div class="video-container">
-					<video id="course-video" controls style="display: none;">
+					<video id="course-video">
 						<source id="video-source" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
+					<iframe id="course-pdf" src="" width="1200"
+						height="1000"></iframe>
 					<iframe id="course-pdf" style="display: none;" src="" width="1200"
 						height="700"></iframe>
 					<iframe id="course-quiz" style="display: none;" src="" width="1200"
 						height="700"></iframe>
+<<<<<<< HEAD
 					<h2>Q&A</h2>
 					<div id="course-qa-content">
 						<!-- Add Mark Attendance Button and Hidden Input -->
@@ -199,6 +203,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 					</div>
 				</div>
+=======
+          			</div>
+>>>>>>> 3c5539c262f8f85aa45c068dcd718bfd0b123989
 
 
 				<div class="course-contents">

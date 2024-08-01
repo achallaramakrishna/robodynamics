@@ -6,6 +6,8 @@
   <title>Intermediate AI - Robo Dynamics</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <link href="css/stylesheet.css" rel="stylesheet"> 
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -64,6 +66,26 @@
   </style>
 </head>
 <body>
+  <!-- Header Section -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <a class="navbar-brand" href="index.jsp">
+        <img src="images/logo.jpg" alt="Robo Dynamics Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
+             <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
+             <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
+        </ul>
+    </div>
+    </nav>
+    
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container">

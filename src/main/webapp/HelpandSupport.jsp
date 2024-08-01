@@ -72,24 +72,9 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #ff007f, #000080);">
-        <a class="navbar-brand" href="index.jsp">
-            <img src="images/logo.jpg" alt="Robo Dynamics Logo" style="max-height: 50px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="aboutus.jsp">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="subscription.jsp">Membership</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.jsp">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="contactus.jsp">Contact Us</a></li>
-            </ul>
-        </div>
-    </nav>
+   <!-- Header Section -->
+    <!-- Including a navigation bar in a JSP -->
+	<jsp:include page="header.jsp" />
     <header>
         <h1>Help and Support</h1>
     </header>
@@ -121,7 +106,7 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
+       <jsp:include page="footer.jsp" />
     </footer>
 </body>
 </html>

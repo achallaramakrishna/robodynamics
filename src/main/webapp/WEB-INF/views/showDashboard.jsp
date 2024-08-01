@@ -81,22 +81,55 @@ footer {
 }
 </style>
 
+
 <script type="text/javascript">
+
+function setAttendanceDetails(courseSessionDetailId,enrollmentId) {
+    document.getElementById('courseSessionDetailId').value = courseSessionDetailId;
+    document.getElementById('enrollmentId').value = enrollmentId;
+}
+
+function markAttendance() {
+    // Set the value of the hidden input
+ //   document.getElementById('attendanceData').value = 'present'; // Set your desired value here
+    
+    // Optionally, submit the form if needed
+    
+    document.getElementById('attendanceForm').submit();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const courseListItems = document.querySelectorAll('#course-list li');
 
     courseListItems.forEach(item => {
-        item.addEventListener('click', () => {
+    	item.addEventListener('click', (event) => {
+            // Prevent default action if any (like anchor tag default)
+            event.preventDefault();
+            // Stop the event from propagating
+            event.stopPropagation();
+            
+            console.log('Event Target:', event.target);
     	        const type = item.getAttribute('data-type');
             const file = item.getAttribute('data-file');
             const quiz = item.getAttribute('data-quiz');
             const details = item.getAttribute('data-details');
             const qa = item.getAttribute('data-qa');
+            const coursesSessionDetailId = item.getAttribute('data-coursesessiondetail-id');
+            
 			console.log('Type - ' + type);
 			console.log('File - ' + file);
 			console.log('Quiz - ' + quiz);
 			console.log('Details - ' + details);
 			console.log('qa - ' + qa);
+			console.log('coursesSessionDetailId - ' + coursesSessionDetailId);
+
+			
+		
+			
+			 // Prevent double handling
+            if (!type && !file && !quiz && !details && !qa) {
+                return; // No data to handle
+            }
 			
             if (type === 'video') {
                 document.getElementById('course-video').style.display = 'block';
@@ -118,8 +151,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } 
 
-           /*  document.getElementById('course-details-content').textContent = details;
-            document.getElementById('course-qa-content').textContent = qa; */
+            if (details && details !== 'null') {
+                document.getElementById('course-details-content').textContent = details;
+            } else {
+                document.getElementById('course-details-content').textContent = 'No details available';
+            }
+            
+            // Display Q&A content
+            if (qa && qa !== 'null') {
+                document.getElementById('course-qa-content').textContent = qa;
+            } else {
+                document.getElementById('course-qa-content').textContent = 'No Q&A available';
+            }
         });
     });
 });
@@ -139,6 +182,22 @@ document.addEventListener('DOMContentLoaded', function() {
 						height="700"></iframe>
 					<iframe id="course-quiz" style="display: none;" src="" width="1200"
 						height="700"></iframe>
+					<h2>Q&A</h2>
+					<div id="course-qa-content">
+						<!-- Add Mark Attendance Button and Hidden Input -->
+						<div class="mark-attendance">
+							<form id="attendanceForm" action="${pageContext.request.contextPath}/courseTracking/markAttendance"
+								method="post">
+								<input type="hidden" id="courseSessionDetailId" name="courseSessionDetailId"
+									value="">
+								<input type="hidden" id="enrollmentId" name="enrollmentId"
+									value="">
+								<button type="button" class="btn btn-primary"
+									onclick="markAttendance()">Mark Attendance</button>
+							</form>
+						</div>
+
+					</div>
 				</div>
 
 
@@ -146,45 +205,27 @@ document.addEventListener('DOMContentLoaded', function() {
 					<h2>Course Contents</h2>
 					<ul id="course-list">
 						<c:forEach items="${courseSessions}" var="courseSession">
-							<li>${courseSession.sessionTitle} 
-							<script> console.log('${courseSession.sessionTitle}');</script>
-							
-							<c:forEach items="${courseSession.courseSessionDetails}" var="courseSessionDetail">
+							<li>${courseSession.sessionTitle}<script> console.log('${courseSession.sessionTitle}');</script>
+
+								<c:forEach items="${courseSession.courseSessionDetails}"
+									var="courseSessionDetail">
 									<ul>
-									<li data-type="${courseSessionDetail.type}"
-										data-file="${courseSessionDetail.file}"
-										data-quiz="${courseSessionDetail.quiz.quiz_id}"
-										data-details="${courseSessionDetail.topic}"
-										data-qa="${courseSessionDetail.topic}">
-										${courseSessionDetail.topic}
-									</li>
+										<li data-type="${courseSessionDetail.type}"
+											data-file="${courseSessionDetail.file}"
+											data-quiz="${courseSessionDetail.quiz.quiz_id}"
+											data-details="${courseSessionDetail.topic}"
+											data-qa="${courseSessionDetail.topic}"
+											onclick="setAttendanceDetails(${courseSessionDetail.courseSessionDetailId},${studentEnrollment.enrollmentId})">
+											${courseSessionDetail.topic}</li>
 									</ul>
 								</c:forEach>
 							</li>
 						</c:forEach>
-				</ul>
+					</ul>
 
-						<%--         
-            <c:forEach items="${courseSessionDetails}" var="courseSessionDetail">
-                <li data-type="${courseSessionDetail.type}" data-file="${courseSessionDetail.file}" data-details="${courseSessionDetail.topic}" data-qa="${courseSessionDetail.topic}">
-                    ${courseSessionDetail.topic}
-                </li>
-            </c:forEach> --%>
-					
+
 				</div>
-				<%--     <div class="course-details">
-        <h2>Course Details</h2>
-        <div id="course-details-content">
-           <c:forEach items="${courseSessions}" var="courseSession">
-                <li >
-                    ${courseSession.sessionTitle}
-               </li>
-            </c:forEach>
-        
-        </div>
-        <h2>Q&A</h2>
-        <div id="course-qa-content"></div>
-    </div> --%>
+
 			</div>
 
 

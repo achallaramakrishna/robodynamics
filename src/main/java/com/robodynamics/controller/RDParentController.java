@@ -22,6 +22,7 @@ import com.robodynamics.model.RDUser;
 import com.robodynamics.service.EmailService;
 import com.robodynamics.service.RDAssetService;
 import com.robodynamics.service.RDAssetTransactionService;
+import com.robodynamics.service.RDClassAttendanceService;
 import com.robodynamics.service.RDUserService;
 
 @Controller
@@ -37,6 +38,9 @@ public class RDParentController {
 	
 	@Autowired
 	private RDAssetTransactionService assetTransactionService;
+	
+	@Autowired
+	private RDClassAttendanceService attendanceService;
 
 	
 	
@@ -204,5 +208,7 @@ public class RDParentController {
         service.deleteRDUser(theId);
         return "showProfile";
     }
+    
+	
 
 }

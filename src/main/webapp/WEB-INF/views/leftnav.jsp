@@ -42,7 +42,6 @@
         <li class="nav-item"><a href="${pageContext.request.contextPath}/coursecategory/list" class="nav-link ${page eq 'coursecategory' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Course Categories </span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/course/list" class="nav-link ${page eq 'course' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Courses </span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/courseoffering/list" class="nav-link ${page eq 'courseoffering' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Course Offerings </span></a></li>
-        <li class="nav-item"><a href="${pageContext.request.contextPath}/attendance/mark" class="nav-link ${page eq 'courseoffering' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Mark Attendance </span></a></li>
 
       </ul>
     </div>

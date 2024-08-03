@@ -14,7 +14,7 @@
     http://www.springframework.org/schema/tx 
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	
+
 	<tx:annotation-driven />
 	<!-- Adding Support for Component Scan -->
 	<context:component-scan
@@ -24,27 +24,34 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
-		
+
 	</bean>
-	<mvc:resources mapping="/images/**" location="/resources/images/" />
-	<mvc:resources mapping="/css/**" location="/resources/css/" />
-	<mvc:resources mapping="/assets/pdfs/**" location="/resources/assets/pdfs/" />
-	<mvc:resources mapping="/assets/videos/**" location="/resources/assets/videos/" />
-	
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:annotation-driven/>
-	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:app-config.properties"/>
-    </bean>
-    
-	<bean id="multipartResolver"   
-    class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>   
-    
-      
-    
+	<mvc:resources mapping="/images/**"
+		location="/resources/images/" />
+	<mvc:resources mapping="/css/**"
+		location="/resources/css/" />
+	<mvc:resources mapping="/assets/pdfs/**"
+		location="/resources/assets/pdfs/" />
+	<mvc:resources mapping="/assets/videos/**"
+		location="/resources/assets/videos/" />
+
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
+	<mvc:annotation-driven />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+			value="classpath:app-config.properties" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+
+
 	<!-- Create Data Source -->
- 	<bean
+	<bean
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		name="ds">
 		<property name="driverClassName"
@@ -53,18 +60,25 @@
 			value="jdbc:mysql://localhost:3306/robodynamics_db" />
 		<property name="username" value="root" />
 		<property name="password" value="achalla" />
-	</bean> 	 
+	</bean>
 
- 	<!-- <bean
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		name="ds">
-		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://89.116.34.23:3306/robodynamics_db" />
-		<property name="username" value="root" />
-		<property name="password" value="Jatni@752050" />
-	</bean> 	-->
+	<bean id="visitorInterceptor"
+		class="com.robodynamics.util.RDVisitorInterceptor" />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" /> <!-- Apply to all requests -->
+			<bean class="com.robodynamics.util.RDVisitorInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+	<!-- <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+		name="ds"> <property name="driverClassName" value="com.mysql.jdbc.Driver" 
+		/> <property name="url" value="jdbc:mysql://89.116.34.23:3306/robodynamics_db" 
+		/> <property name="username" value="root" /> <property name="password" value="Jatni@752050" 
+		/> </bean> -->
+
 
 
 	<!-- Local SessionFactory -->
@@ -109,7 +123,8 @@
 				<value>com.robodynamics.model.RDResult</value>
 				<value>com.robodynamics.model.RDClassSession</value>
 				<value>com.robodynamics.model.RDClassAttendance</value>
-				
+				<value>com.robodynamics.model.RDVisitorLog</value>
+
 			</list>
 		</property>
 

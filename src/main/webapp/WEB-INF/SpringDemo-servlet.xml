@@ -68,6 +68,9 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" /> <!-- Apply to all requests -->
+			<mvc:exclude-mapping path="/resources/**"/>
+			 <mvc:exclude-mapping path="/css/**"/>
+       		 <mvc:exclude-mapping path="/images/**"/>
 			<bean class="com.robodynamics.util.RDVisitorInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -120,10 +123,17 @@
 				<value>com.robodynamics.model.RDCourseSessionDetail</value>
 				<value>com.robodynamics.model.RDQuiz</value>
 				<value>com.robodynamics.model.RDQuizQuestion</value>
-				<value>com.robodynamics.model.RDResult</value>
+				<value>com.robodynamics.model.RDQuizResult</value>
 				<value>com.robodynamics.model.RDClassSession</value>
 				<value>com.robodynamics.model.RDClassAttendance</value>
 				<value>com.robodynamics.model.RDVisitorLog</value>
+				<value>com.robodynamics.model.RDWorkshop</value>
+				<value>com.robodynamics.model.RDRegistration</value>
+				<value>com.robodynamics.model.RDCompetition</value>
+				<value>com.robodynamics.model.RDCompetitionJudge</value>
+				<value>com.robodynamics.model.RDCompetitionParticipant</value>
+				<value>com.robodynamics.model.RDSubmission</value>
+				<value>com.robodynamics.model.RDScore</value>
 
 			</list>
 		</property>

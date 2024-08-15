@@ -25,7 +25,7 @@
 						<label class="form-check-label" for="option1" id="labelOption1">${currentQuizQuestion.option1}</label>
 					</div>
 					<div class="form-check">
-						<form:radiobutton path="userAnswer" value="${currentQuiz.option2}"
+						<form:radiobutton path="userAnswer" value="${currentQuizQuestion.option2}"
 							id="option2" cssClass="form-check-input" />
 						<label class="form-check-label" for="option2" id="labelOption2">${currentQuizQuestion.option2}</label>
 					</div>

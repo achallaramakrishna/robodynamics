@@ -64,6 +64,13 @@ public class RDUserServiceImpl implements RDUserService {
 	public List<RDUser> searchUsers(int profileId, int active) {
 		return rdUserDao.searchUsers(profileId, active);
 	}
+
+	@Override
+	@Transactional
+	public RDUser getRDUser(String userName, String password) {
+		
+		return rdUserDao.getRDUser(userName,password);
+	}
 	
 	
 

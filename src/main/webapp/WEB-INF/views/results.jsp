@@ -27,7 +27,7 @@
                 <c:forEach var="result" items="${results}">
                     <tr>
                         <td>${result.user.userName}</td>
-                        <td>${result.quiz.question}</td>
+                        <td>${result.quizQuestion.question}</td>
                         <td>${result.userAnswer}</td>
                         <td>${result.correct ? 'Yes' : 'No'}</td>
                     </tr>

@@ -3,12 +3,12 @@ package com.robodynamics.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "rd_quiz_results")
-public class RDResult {
+@Table(name = "rd_quiz_question_results")
+public class RDQuizResult {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "quiz_result_id")
+	@Column(name = "quiz_question_result_id")
 	private int id;
 
 	@ManyToOne
@@ -25,7 +25,7 @@ public class RDResult {
 	@Column(name = "is_correct") 
 	private boolean isCorrect;
 
-	public RDResult() {
+	public RDQuizResult() {
 
 	}
 

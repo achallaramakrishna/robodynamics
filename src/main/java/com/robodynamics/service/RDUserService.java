@@ -12,6 +12,8 @@ public interface RDUserService {
 	
 	public RDUser getRDUser(int userId);
 	
+	public RDUser getRDUser(String userName, String password);
+	
 	public List < RDUser > getRDUsers();
 	
 	public List < RDUser > getRDInstructors();

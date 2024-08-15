@@ -12,6 +12,8 @@ public interface RDUserDao {
 	
 	public RDUser getRDUser(int userId);
 	
+	public RDUser getRDUser(String userName, String password);
+	
 	public List < RDUser > searchUsers(int profileId, int active);
 	
 	public List < RDUser > getRDUsers();

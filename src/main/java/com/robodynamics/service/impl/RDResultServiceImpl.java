@@ -2,7 +2,7 @@ package com.robodynamics.service.impl;
 
 import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.dao.RDResultDao;
-import com.robodynamics.model.RDResult;
+import com.robodynamics.model.RDQuizResult;
 import com.robodynamics.service.RDResultService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,20 @@ public class RDResultServiceImpl implements RDResultService {
 
 	@Override
 	@Transactional
-	public void saveRDResult(RDResult rdResult) {
+	public void saveRDResult(RDQuizResult rdResult) {
 		rdResultDao.saveRDResult(rdResult);
 		
 	}
 
 	@Override
 	@Transactional
-	public RDResult getRDResult(int resultId) {
+	public RDQuizResult getRDResult(int resultId) {
 		return rdResultDao.getRDResult(resultId);
 	}
 
 	@Override
 	@Transactional
-	public List<RDResult> getRDResults() {
+	public List<RDQuizResult> getRDResults() {
 		return rdResultDao.getRDResults();
 	}
 

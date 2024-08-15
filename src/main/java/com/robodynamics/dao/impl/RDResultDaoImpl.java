@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDResultDao;
-import com.robodynamics.model.RDResult;
+import com.robodynamics.model.RDQuizResult;
 
 @Repository
 @Transactional
@@ -25,25 +25,25 @@ public class RDResultDaoImpl implements RDResultDao {
 
 
 	@Override
-	public void saveRDResult(RDResult rdResult) {
+	public void saveRDResult(RDQuizResult rdResult) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(rdResult);
 
 	}
 
 	@Override
-	public RDResult getRDResult(int resultId) {
+	public RDQuizResult getRDResult(int resultId) {
 		Session session = factory.getCurrentSession();
-		RDResult rdResult = session.get(RDResult.class, resultId);
+		RDQuizResult rdResult = session.get(RDQuizResult.class, resultId);
         return rdResult;
 	}
 
 	@Override
-	public List<RDResult> getRDResults() {
+	public List<RDQuizResult> getRDResults() {
 	       Session session = factory.getCurrentSession();
 	        CriteriaBuilder cb = session.getCriteriaBuilder();
-	        CriteriaQuery < RDResult > cq = cb.createQuery(RDResult.class);
-	        Root < RDResult > root = cq.from(RDResult.class);
+	        CriteriaQuery < RDQuizResult > cq = cb.createQuery(RDQuizResult.class);
+	        Root < RDQuizResult > root = cq.from(RDQuizResult.class);
 	        cq.select(root);
 	        Query query = session.createQuery(cq);
 	        return query.getResultList();
@@ -52,7 +52,7 @@ public class RDResultDaoImpl implements RDResultDao {
 	@Override
 	public void deleteRDResult(int id) {
 	       Session session = factory.getCurrentSession();
-	       RDResult rdResult = session.byId(RDResult.class).load(id);
+	       RDQuizResult rdResult = session.byId(RDQuizResult.class).load(id);
 	       session.delete(rdResult);
 
 	}

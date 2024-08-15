@@ -146,6 +146,25 @@ public class RDUserDaoImpl implements RDUserDao {
 			return null;
 		}
 	}
+
+	@Override
+	public RDUser getRDUser(String userName, String password) {
+		// TODO Auto-generated method stub
+		RDUser rdUser = null;
+		Session session = factory.getCurrentSession();
+		try {
+			Query<RDUser> query = session.createQuery("from RDUser where userName =:userName and password =:password",
+					RDUser.class);
+			query.setParameter("userName", userName);
+			query.setParameter("password", password);
+			rdUser = query.getSingleResult();
+			return rdUser;
+		} catch (NoResultException e) {
+			// TODO: handle exception
+			return null;
+		}
+
+	}
 	
 	
 	

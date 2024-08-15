@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.model.RDQuizQuestionAnswerForm;
-import com.robodynamics.model.RDResult;
+import com.robodynamics.model.RDQuizResult;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.service.RDQuizQuestionService;
 import com.robodynamics.service.RDResultService;
@@ -48,7 +48,7 @@ public class RDQuizController {
         model.addAttribute("quizQuestions", quizQuestions);
         model.addAttribute("currentQuizQuestion", quizQuestions.get(0)); // Start with the first quiz question
         session.setAttribute("quizQuestionsList", quizQuestions);
-        session.setAttribute("currentQuizIndexQuestion", 0);
+        session.setAttribute("currentQuizIndex", 0);
         
         ObjectMapper mapper = new ObjectMapper();
         String quizQuestionsJson = mapper.writeValueAsString(quizQuestions);
@@ -59,16 +59,17 @@ public class RDQuizController {
     }
 
     @PostMapping("/submit")
-    public String submitQuiz(@ModelAttribute("quizAnswerForm") RDQuizQuestionAnswerForm quizQuestionAnswerForm, HttpSession session, Model model) {
-        int currentQuizQuestionIndex = (int) session.getAttribute("currentQuizIndex");
+    public String submitQuiz(@ModelAttribute("quizQuestionAnswerForm") RDQuizQuestionAnswerForm quizQuestionAnswerForm, HttpSession session, Model model) {
+        
+    	int currentQuizIndex = (int) session.getAttribute("currentQuizIndex");
         List<RDQuizQuestion> quizQuestionsList = (List<RDQuizQuestion>) session.getAttribute("quizQuestionsList");
-        RDQuizQuestion quizQuestion = quizQuestionsList.get(currentQuizQuestionIndex);
+        RDQuizQuestion quizQuestion = quizQuestionsList.get(currentQuizIndex);
 
         // Retrieve the user from session or a default user for now
         RDUser user = (RDUser) session.getAttribute("rdUser");
 
         // Create a result object
-        RDResult result = new RDResult();
+        RDQuizResult result = new RDQuizResult();
         result.setUser(user);
         result.setQuizQuestion(quizQuestion);
         result.setUserAnswer(quizQuestionAnswerForm.getUserAnswer());
@@ -77,13 +78,18 @@ public class RDQuizController {
         // Save the result
         resultService.saveRDResult(result);
 
+        System.out.println("currentQuizIndex - " + currentQuizIndex);
+        System.out.println("size minus 1 - " + (quizQuestionsList.size()));
         // Prepare for next quiz question
-        if (currentQuizQuestionIndex < quizQuestionsList.size() - 1) {
-            session.setAttribute("currentQuizQuestionIndex", currentQuizQuestionIndex + 1);
-            model.addAttribute("currentQuiz", quizQuestionsList.get(currentQuizQuestionIndex + 1));
+        if (currentQuizIndex < quizQuestionsList.size() - 1) {
+        	System.out.println("hello 1 ");
+            session.setAttribute("currentQuizIndex", currentQuizIndex + 1);
+            
+            model.addAttribute("currentQuizQuestion", quizQuestionsList.get(currentQuizIndex + 1));
             return "takeQuiz";
         } else {
             // If it's the last question, display results
+        	System.out.println("hello 2 last question");
             return "redirect:/results/view";
         }
     }

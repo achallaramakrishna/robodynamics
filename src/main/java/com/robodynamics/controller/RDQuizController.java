@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,16 +33,9 @@ public class RDQuizController {
     private RDQuizQuestionService quizQuestionService;
     
     @Autowired
-    private RDQuizQuestionService quizService;
-    
-    
-    @Autowired
     private RDResultService resultService;
 
-    @Autowired
-    private RDUserService userService;
-
-    
+    //@GetMapping("/take")
     @GetMapping("/take")
     public String takeQuiz(Model model, @RequestParam("quiz_id") int quizId, HttpSession session) throws JsonProcessingException {
         List<RDQuizQuestion> quizQuestions = quizQuestionService.getRDQuizQuestions(quizId);
@@ -50,16 +44,31 @@ public class RDQuizController {
         session.setAttribute("quizQuestionsList", quizQuestions);
         session.setAttribute("currentQuizIndex", 0);
         
+        
+        RDUser user = null;
+		if (session.getAttribute("rdUser") != null) {
+			user = (RDUser) session.getAttribute("rdUser");
+		}
+
+		System.out.println("user - " + user);
+		
+		resultService.updatePreviousTestResults(quizId, user.getUserID());
+		
         ObjectMapper mapper = new ObjectMapper();
         String quizQuestionsJson = mapper.writeValueAsString(quizQuestions);
         model.addAttribute("quizQuestions", quizQuestionsJson); // Pass quizzes as JSON string
         // Add an empty QuizAnswerForm to the model
         model.addAttribute("quizQuestionAnswerForm", new RDQuizQuestionAnswerForm());
+        
+        
+        
         return "takeQuiz";
     }
 
     @PostMapping("/submit")
-    public String submitQuiz(@ModelAttribute("quizQuestionAnswerForm") RDQuizQuestionAnswerForm quizQuestionAnswerForm, HttpSession session, Model model) {
+    public String submitQuiz(@ModelAttribute("quizQuestionAnswerForm") RDQuizQuestionAnswerForm quizQuestionAnswerForm, 
+    		HttpSession session, 
+    		Model model) {
         
     	int currentQuizIndex = (int) session.getAttribute("currentQuizIndex");
         List<RDQuizQuestion> quizQuestionsList = (List<RDQuizQuestion>) session.getAttribute("quizQuestionsList");
@@ -68,6 +77,7 @@ public class RDQuizController {
         // Retrieve the user from session or a default user for now
         RDUser user = (RDUser) session.getAttribute("rdUser");
 
+        System.out.println(quizQuestionAnswerForm);
         // Create a result object
         RDQuizResult result = new RDQuizResult();
         result.setUser(user);
@@ -89,6 +99,10 @@ public class RDQuizController {
             return "takeQuiz";
         } else {
             // If it's the last question, display results
+        	
+            session.setAttribute("quiz", quizQuestion.getQuiz());
+            
+
         	System.out.println("hello 2 last question");
             return "redirect:/results/view";
         }

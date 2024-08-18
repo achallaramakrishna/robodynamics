@@ -43,6 +43,27 @@ public class RDResultServiceImpl implements RDResultService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void getNextTestCountForUser(int quizId, int userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	@Transactional
+	public void updatePreviousTestResults(int quizId, int userId) {
+		rdResultDao.updatePreviousTestResults(quizId, userId);
+		
+	}
+	
+	@Override
+	@Transactional
+	public List<RDQuizResult> getUserResultsForQuiz(int quizId, int userId, int status) {
+		return rdResultDao.getUserResultsForQuiz(quizId, userId, status);
+		
+	}
+
 
 
 }

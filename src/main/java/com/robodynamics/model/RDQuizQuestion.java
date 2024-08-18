@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "rd_quiz_questions")
 public class RDQuizQuestion {
@@ -41,8 +43,19 @@ public class RDQuizQuestion {
     @Column(name = "correct_answer")
     private String correctAnswer;
     
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    @JsonIgnore // This will prevent the quiz field from being serialized
+    private RDQuiz quiz;
     
-    public String getQuestion() {
+    
+    public RDQuiz getQuiz() {
+		return quiz;
+	}
+	public void setQuiz(RDQuiz quiz) {
+		this.quiz = quiz;
+	}
+	public String getQuestion() {
 		return question;
 	}
 	public void setQuestion(String question) {

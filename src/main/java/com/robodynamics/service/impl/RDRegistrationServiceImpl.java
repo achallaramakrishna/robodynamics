@@ -4,13 +4,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.robodynamics.dao.RDRegistrationDao;
-import com.robodynamics.dao.RDWorkshopDao;
 import com.robodynamics.model.RDRegistration;
 import com.robodynamics.model.RDWorkshop;
 import com.robodynamics.service.RDRegistrationService;

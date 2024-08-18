@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.robodynamics.dao.RDAssetCategoryDao;
 import com.robodynamics.dao.RDEnquiryDao;
-import com.robodynamics.model.RDAssetCategory;
 import com.robodynamics.model.RDEnquiry;
-import com.robodynamics.service.RDAssetCategoryService;
 import com.robodynamics.service.RDEnquiryService;
 
 @Service

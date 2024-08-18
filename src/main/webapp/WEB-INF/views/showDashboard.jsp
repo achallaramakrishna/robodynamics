@@ -122,8 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			console.log('Details - ' + details);
 			console.log('qa - ' + qa);
 			console.log('coursesSessionDetailId - ' + coursesSessionDetailId);
-
-			
 		
 			
 			 // Prevent double handling
@@ -147,8 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'block';
 
-                document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiz/take?quiz_id=` + quiz;
-                
+
+                document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
+/*                  document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiz/take?quiz_id=` + quiz; 
+ */                
             } 
 
             if (details && details !== 'null') {

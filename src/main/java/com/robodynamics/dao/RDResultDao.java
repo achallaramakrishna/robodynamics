@@ -12,5 +12,12 @@ public interface RDResultDao {
 	
 	public List < RDQuizResult > getRDResults();
 	
+	public List<RDQuizResult> getUserResultsForQuiz(int quizId, int userId, int status);
+	
     public void deleteRDResult(int id);
+    
+    public void getNextTestCountForUser(int quizId, int userId);
+    
+    public void updatePreviousTestResults(int quizId, int userId);
+
 }

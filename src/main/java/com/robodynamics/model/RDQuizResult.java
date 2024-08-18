@@ -24,6 +24,13 @@ public class RDQuizResult {
 	 
 	@Column(name = "is_correct") 
 	private boolean isCorrect;
+	
+	@Column(name = "is_current_test") 
+	private int isCurrentTest;
+	
+	@Column(name = "test_count") 
+	private int testCount;
+	
 
 	public RDQuizResult() {
 

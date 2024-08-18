@@ -134,6 +134,7 @@
 				<value>com.robodynamics.model.RDCompetitionParticipant</value>
 				<value>com.robodynamics.model.RDSubmission</value>
 				<value>com.robodynamics.model.RDScore</value>
+				<value>com.robodynamics.model.RDQuizTest</value>
 
 			</list>
 		</property>

@@ -27,19 +27,15 @@
 
 </head>
 <body>
-	<jsp:include page="header.jsp" />
-	<div class="container-fluid">
+<%-- 	<jsp:include page="header.jsp" />
+ --%>	<div class="container-fluid">
 		<div class="row flex-nowrap">
 
     <div class="container mt-5">
         <h2>${quiz.quizTitle}</h2>
         <p>Are you ready to start the quiz?</p>
 
-<%--         <form action="/quiztest/${quiz.quiz_id}/start" method="get">
-           
- 		<form action="/quiz/${quiz.quiz_id}/take" method="post">
- 		
- --%>
+
  		<form action="${pageContext.request.contextPath}/quiz/take" method="get">
  			<input type="hidden" name="quiz_id" id="quiz_id" value="${quiz.quiz_id}">
  			<button type="submit" class="btn btn-primary">Start Quiz</button>
@@ -47,7 +43,7 @@
     </div>
 		</div>
 	</div>
-	<jsp:include page="footer.jsp" />
-</body>
+<%-- 	<jsp:include page="footer.jsp" />
+ --%></body>
 </html>
 

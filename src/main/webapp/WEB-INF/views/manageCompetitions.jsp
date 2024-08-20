@@ -79,7 +79,10 @@
                         <td>${competition.status}</td>
                         <td>
                             <a href="${pageContext.request.contextPath}/competition/${competition.competition_id}/register" class="btn btn-primary btn-sm">Register</a>
-                            <button onclick="copyToClipboard('/competition/${competition.competition_id}/register')" class="btn btn-secondary btn-sm">Copy Link</button>
+                            
+                            
+                            
+                            <button onclick="copyToClipboard('${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/competition/${competition.competition_id}/register')" class="btn btn-secondary btn-sm">Copy Link</button>
                             <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateCompetitionModal${competition.competition_id}">Edit</button>
                             <button onclick="confirmDelete(${competition.competition_id})" class="btn btn-danger btn-sm">Delete</button>
                         </td>

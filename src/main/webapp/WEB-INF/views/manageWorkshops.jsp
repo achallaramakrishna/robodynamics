@@ -31,62 +31,45 @@
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
+
 			<div class="col-md-offset-1 col-md-10">
 				<br>
-				<h2>Enroll for a Course</h2>
+				<h2>Manage Workshops</h2>
 				<hr />
 
-				<br />
-
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h2>Course Offerings List</h2>
-					</div>
-					<div class="panel-body">
-						<table class="table table-striped table-bordered">
+				<a href="createWorkshop">Create New Workshop</a>
+				<table border="1">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Date</th>
+							<th>Location</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="workshop" items="${workshops}">
 							<tr>
-								<th>Course Name</th>
-								<th>Instructor</th>
-								<th>Course Offering Start Date</th>
-								<th>Course Offering End Date</th>
+								<td>${workshop.workshop_id}</td>
+								<td>${workshop.name}</td>
+								<td>${workshop.description}</td>
+								<td>${workshop.date}</td>
+								<td>${workshop.location}</td>
+								<td><a href="editWorkshop/${workshop.workshop_id}">Edit</a>
+									<a href="deleteWorkshop/${workshop.workshop_id}"
+									onclick="return confirm('Are you sure?')">Delete</a> <a
+									href="registrations/${workshop.workshop_id}">View
+										Registrations</a></td>
 							</tr>
-							<!-- loop over and print our course categories -->
-							<c:forEach var="tempCourseOffering" items="${courseOfferings}">
-
-								<!-- construct an "update" link with customer id -->
-								<c:url var="updateLink" value="/enrollment/showEnrollmentForm">
-									<c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
-								</c:url>
-
-								<tr>
-									<td>${tempCourseOffering.course.courseName}</td>
-									<td>${tempCourseOffering.instructor.firstName}
-										${tempCourseOffering.instructor.lastName}</td>
-									<td>${tempCourseOffering.startDate}</td>
-									<td>${tempCourseOffering.endDate}</td>
-									<td>
-										<!-- display the update link --> <a href="${updateLink}">Enroll</a>
-									</td>
-								</tr>
-							</c:forEach>
-
-						</table>
-
-					</div>
-				</div>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
+
 		</div>
-
 	</div>
-
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
-
-
-
-
-
-
-
-
-

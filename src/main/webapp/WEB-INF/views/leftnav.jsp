@@ -42,7 +42,7 @@
         <li class="nav-item"><a href="${pageContext.request.contextPath}/coursecategory/list" class="nav-link ${page eq 'coursecategory' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Course Categories </span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/course/list" class="nav-link ${page eq 'course' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Courses </span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/courseoffering/list" class="nav-link ${page eq 'courseoffering' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Course Offerings </span></a></li>
-        <li class="nav-item"><a href="${pageContext.request.contextPath}/workshops" class="nav-link ${page eq 'workshop' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Workshops </span></a></li>
+        <li class="nav-item"><a href="${pageContext.request.contextPath}/workshops/list" class="nav-link ${page eq 'workshop' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Workshops </span></a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/competition/list" class="nav-link ${page eq 'competition' ? 'active' : ''}"> <i class="fs-5 fa-guage"></i> <span class="fs-4 d-none d-sm-inline"> Competitions </span></a></li>
 
       </ul>

@@ -173,11 +173,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="main-container">
-				<div class="video-container">
-					<video id="course-video" controls style="display: none;">
+				<div class="video-container embed-responsive embed-responsive-16by9">
+						<video id="course-video" class="embed-responsive-item" controls style="display: none;">
+					        <source id="video-source" type="video/mp4">
+					        Your browser does not support the video tag.
+					    </video>
+<!-- 					<video id="course-video" controls style="display: none;">
 						<source id="video-source" type="video/mp4">
 						Your browser does not support the video tag.
-					</video>
+					</video> -->
 					<iframe id="course-pdf" style="display: none;" src="" width="1200"
 						height="700"></iframe>
 					<iframe id="course-quiz" style="display: none;" src="" width="1200"

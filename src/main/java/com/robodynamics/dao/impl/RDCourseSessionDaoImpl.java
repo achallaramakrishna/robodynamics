@@ -44,7 +44,7 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
 
 	@Override
 	public List<RDCourseSession> getRDCourseSessions(int courseId) {
-		
+		System.out.println("Course ID : " + courseId);
 		List<RDCourseSession> courseSessions = null;
 		Session session = factory.getCurrentSession();
 		Query query = session.createQuery("from RDCourseSession cs where cs.course.courseId=:courseId");

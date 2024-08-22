@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.robodynamics.model.RDContact;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.service.RDUserService;
 
@@ -54,6 +55,12 @@ public class RDUserController {
 		return "login";
 	}
 	
+	@GetMapping("/contactus")
+	public String register(@ModelAttribute("rdContact") RDContact rdContact, Model model) {
+		
+		model.addAttribute(new RDContact());
+		return "contactus";
+	}
 	
 
 	@GetMapping("/login")

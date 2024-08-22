@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="main-container">
-				<div class="video-container embed-responsive embed-responsive-16by9">
+				<div class="video-container  width="640" height="600"   embed-responsive embed-responsive-16by9">
 						<video id="course-video" class="embed-responsive-item" controls style="display: none;">
 					        <source id="video-source" type="video/mp4">
 					        Your browser does not support the video tag.
@@ -183,9 +183,9 @@ document.addEventListener('DOMContentLoaded', function() {
 						Your browser does not support the video tag.
 					</video> -->
 					<iframe id="course-pdf" style="display: none;" src="" width="1200"
-						height="700"></iframe>
+						height="600"></iframe>
 					<iframe id="course-quiz" style="display: none;" src="" width="1200"
-						height="700"></iframe>
+						height="600"></iframe>
 					<h2>Q&A</h2>
 					<div id="course-qa-content">
 						<!-- Add Mark Attendance Button and Hidden Input -->

@@ -8,6 +8,8 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +42,11 @@ public class RDQuizQuestion {
     @Column(name = "option4")
     private String option4;
     
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "question_type", nullable = false)
+    private QuestionType questionType;
+    
+    
     @Column(name = "correct_answer")
     private String correctAnswer;
     
@@ -47,6 +54,15 @@ public class RDQuizQuestion {
     @JoinColumn(name = "quiz_id")
     @JsonIgnore // This will prevent the quiz field from being serialized
     private RDQuiz quiz;
+    
+    public enum QuestionType {
+        MULTIPLE_CHOICE,
+        FILL_IN_THE_BLANKS,
+        TRUE_FALSE,
+        SHORT_ANSWER
+        // Add more types as needed
+    }
+    
     
     
     public RDQuiz getQuiz() {

@@ -17,9 +17,9 @@ public class RDVisitorInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String ipAddress = request.getRemoteAddr();
+    	String clientIP = IPAddressUtil.getClientIP(request);
         String url = request.getRequestURI();
-        visitorLogService.logVisit(ipAddress, url);
+        visitorLogService.logVisit(clientIP, url);
         return true;
     }
 }

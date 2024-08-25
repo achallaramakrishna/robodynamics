@@ -78,6 +78,9 @@
                         <td>${competition.endDate}</td>
                         <td>${competition.status}</td>
                         <td>
+                            
+                            <a href="${pageContext.request.contextPath}/competition/${competition.competition_id}/registrations" class="btn btn-primary btn-sm">View Registrations</a>
+                            
                             <a href="${pageContext.request.contextPath}/competition/${competition.competition_id}/register" class="btn btn-primary btn-sm">Register</a>
                             
                             

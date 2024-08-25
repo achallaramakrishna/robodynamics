@@ -48,6 +48,11 @@ public class RDCourseSession {
 	
 	@Column(name = "version")
 	private int version;
+	
+	/*
+	 * @OneToMany(mappedBy = "courseSession", cascade = CascadeType.ALL,
+	 * orphanRemoval = true) private List<RDSlide> slides;
+	 */
 
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -111,6 +116,14 @@ public class RDCourseSession {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	
+
+	/*
+	 * public List<RDSlide> getSlides() { return slides; }
+	 * 
+	 * public void setSlides(List<RDSlide> slides) { this.slides = slides; }
+	 */
 
 	@Override
 	public String toString() {

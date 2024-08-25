@@ -114,6 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const quiz = item.getAttribute('data-quiz');
             const details = item.getAttribute('data-details');
             const qa = item.getAttribute('data-qa');
+            const id = item.getAttribute('data-id');
+            
             const coursesSessionDetailId = item.getAttribute('data-coursesessiondetail-id');
             
 			console.log('Type - ' + type);
@@ -121,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			console.log('Quiz - ' + quiz);
 			console.log('Details - ' + details);
 			console.log('qa - ' + qa);
+			console.log('id - ' + id);
 			console.log('coursesSessionDetailId - ' + coursesSessionDetailId);
 		
 			
@@ -133,22 +136,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'block';
                 document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
-            } else if (type === 'quiz') {
+            }  else if (type === 'fib') {
+            	console.log('fib' + coursesSessionDetailId);
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'none';
+                document.getElementById('course-fib').style.display = 'block';
+                document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id;
+            }   else if (type === 'quiz') {
+                document.getElementById('course-video').style.display = 'none';
+                document.getElementById('course-pdf').style.display = 'none';
+                document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'block';
-
-
                 document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
-/*                  document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiz/take?quiz_id=` + quiz; 
- */                
+                
             } 
 
             if (details && details !== 'null') {
@@ -173,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="main-container">
-				<div class="video-container  width="640" height="600"   embed-responsive embed-responsive-16by9">
+				<div class="video-container  width="640" height="800"   embed-responsive embed-responsive-16by9">
 						<video id="course-video" class="embed-responsive-item" controls style="display: none;">
 					        <source id="video-source" type="video/mp4">
 					        Your browser does not support the video tag.
@@ -182,10 +192,14 @@ document.addEventListener('DOMContentLoaded', function() {
 						<source id="video-source" type="video/mp4">
 						Your browser does not support the video tag.
 					</video> -->
-					<iframe id="course-pdf" style="display: none;" src="" width="1200"
-						height="600"></iframe>
-					<iframe id="course-quiz" style="display: none;" src="" width="1200"
-						height="600"></iframe>
+					<iframe id="course-pdf" style="display: none;" src="" width="1000"
+						height="700"></iframe>
+						
+					<iframe id="course-quiz" style="display: none;" src="" width="1000"
+						height="700"></iframe>
+					<iframe id="course-fib" style="display: none;" src="" width="1000"
+						height="700"></iframe>
+		
 					<h2>Q&A</h2>
 					<div id="course-qa-content">
 						<!-- Add Mark Attendance Button and Hidden Input -->
@@ -219,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											data-quiz="${courseSessionDetail.quiz.quiz_id}"
 											data-details="${courseSessionDetail.topic}"
 											data-qa="${courseSessionDetail.topic}"
+											data-id="${courseSessionDetail.courseSessionDetailId}"
 											onclick="setAttendanceDetails(${courseSessionDetail.courseSessionDetailId},${studentEnrollment.enrollmentId})">
 											${courseSessionDetail.topic}</li>
 									</ul>

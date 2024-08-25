@@ -23,6 +23,11 @@
 	crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
 <title>Welcome</title>
+   <script type="text/javascript">
+	    function disableSubmit() {
+	        document.getElementById("submitBtn").disabled = true;
+	    }
+	</script>
 </head>
 <body>
    <jsp:include page="header.jsp" />
@@ -36,7 +41,7 @@
 				</div>
 			</c:if>
 			<div class="card-body">
-				<f:form action="registerChild" modelAttribute="child" method="post">
+				<f:form action="registerChild" modelAttribute="child" method="post" onsubmit="disableSubmit()">
 					<div class="form-group">
 						<label for="exampleInputEmail1">First Name</label>
 						<f:input type="text" path="firstName" class="form-control"
@@ -63,7 +68,7 @@
 							id="exampleInputPassword1" />
 					</div>
 					<center>
-						<button type="submit" class="btn btn-primary">Register</button>
+						<button type="submit" id="submitBtn" class="btn btn-primary">Register</button>
 					</center>
 				</f:form>
 			</div>

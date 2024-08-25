@@ -34,6 +34,11 @@
                 document.getElementById('newUserForm').style.display = 'none';
             }
         }
+        
+        function disableSubmit() {
+	        document.getElementById("submitBtn").disabled = true;
+	    }
+        
     </script>
 
 </head>
@@ -54,7 +59,7 @@
 		<!-- Form for Existing Users -->
         <div id="existingUserForm" style="display: none;">
             <h4 class="text-center">Existing User Registration</h4>
-            <f:form action="register/existing" method="post" modelAttribute="existingUser">
+            <f:form action="register/existing" method="post" modelAttribute="existingUser" onsubmit="disableSubmit()">
                 <div class="form-group">
                     <label for="email">User Name</label>
                     <f:input path="userName" class="form-control" placeholder="Enter your User Name"/>
@@ -63,14 +68,14 @@
                     <label for="password">Password</label>
                     <f:password path="password"  class="form-control" placeholder="Enter your password"/>
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit"  id="submitBtn"  class="btn btn-primary">Register</button>
             </f:form>
         </div>
         
         <!-- Form for New Users -->
         <div id="newUserForm" style="display: none;">
             <h4 class="text-center">New User Registration</h4>
-            <f:form action="register/new" method="post" modelAttribute="newUser">
+            <f:form action="register/new" method="post" modelAttribute="newUser" onsubmit="disableSubmit()">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <f:input path="firstName"  class="form-control" placeholder="Enter your first name" required="required"/>
@@ -111,7 +116,7 @@
                     <label for="address">Address</label>
                     <f:input path="address"  class="form-control" placeholder="Enter your address"/>
                 </div>
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" id="submitBtn"  class="btn btn-success">Register</button>
             </f:form>
         </div>
 	    </div>

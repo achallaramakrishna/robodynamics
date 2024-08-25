@@ -24,13 +24,19 @@
 
     <meta charset="UTF-8">
     <title>Register User</title>
+    
+    <script type="text/javascript">
+    function disableSubmit() {
+        document.getElementById("submitBtn").disabled = true;
+    }
+</script>
 
 </head>
 <body>
 <jsp:include page="header.jsp" />
 <div class="container">
     <h2 class="my-4">User Registration</h2>
-	<f:form action="registerParentPageOne" modelAttribute="rdUser" method="post">
+	<f:form action="registerParentPageOne" modelAttribute="rdUser" method="post" onsubmit="disableSubmit()">
 					<div class="form-group input-field">
 						<label for="email">Email</label>
 						<f:input type="text" path="email" class="form-control input"
@@ -84,7 +90,7 @@
 							id="password" aria-describedby="emailHelp" />
 					</div>
 					<center>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
 					</center>
 
     </f:form>

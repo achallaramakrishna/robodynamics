@@ -182,7 +182,7 @@ public class RDParentController {
 	}
 	
 	@PostMapping("/registerChild")
-    public ModelAndView saveCustomer(@ModelAttribute("child") RDUser child, HttpSession session) {
+    public String saveCustomer(@ModelAttribute("child") RDUser child, HttpSession session) {
 		RDUser parent = null;
 		if (session.getAttribute("rdUser") != null) {
 			parent = (RDUser) session.getAttribute("rdUser");
@@ -191,8 +191,9 @@ public class RDParentController {
 		child.setDad(parent);
 		child.setProfile_id(RDUser.profileType.ROBO_STUDENT.getValue());
         service.registerRDUser(child);
-        ModelAndView modelAndView = new ModelAndView("showProfile");
-		return modelAndView;
+        return "redirect:/parent/profile";
+
+		
     }
 
     @GetMapping("/updateForm")
@@ -203,10 +204,10 @@ public class RDParentController {
         return "child-form";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/deleteChild")
     public String deleteCustomer(@RequestParam("userId") int theId) {
         service.deleteRDUser(theId);
-        return "showProfile";
+        return "redirect:/parent/profile";
     }
     
 	

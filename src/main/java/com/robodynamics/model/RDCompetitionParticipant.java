@@ -19,7 +19,7 @@ public class RDCompetitionParticipant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "competition_participant_id")
+    @Column(name = "competition_participants_id")
     private int competition_participant_id;
 
     @ManyToOne

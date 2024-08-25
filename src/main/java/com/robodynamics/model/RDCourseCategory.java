@@ -20,7 +20,7 @@ public class RDCourseCategory {
 	private int courseCategoryId;
 
 	@Column(name = "parent_course_category_id")
-	private int parentCourseCategoryId;
+	private Integer parentCourseCategoryId;
 
 	@Column(name = "course_category_name")
 	private String courseCategoryName;
@@ -33,11 +33,11 @@ public class RDCourseCategory {
 		this.courseCategoryId = courseCategoryId;
 	}
 
-	public int getParentCourseCategoryId() {
+	public Integer getParentCourseCategoryId() {
 		return parentCourseCategoryId;
 	}
 
-	public void setParentCourseCategoryId(int parentCourseCategoryId) {
+	public void setParentCourseCategoryId(Integer parentCourseCategoryId) {
 		this.parentCourseCategoryId = parentCourseCategoryId;
 	}
 
@@ -49,25 +49,7 @@ public class RDCourseCategory {
 		this.courseCategoryName = courseCategoryName;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(courseCategoryId, courseCategoryName, parentCourseCategoryId);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RDCourseCategory other = (RDCourseCategory) obj;
-		return courseCategoryId == other.courseCategoryId
-				&& Objects.equals(courseCategoryName, other.courseCategoryName)
-				&& parentCourseCategoryId == other.parentCourseCategoryId;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "RDCourseCategory [courseCategoryId=" + courseCategoryId + ", parentCourseCategoryId="

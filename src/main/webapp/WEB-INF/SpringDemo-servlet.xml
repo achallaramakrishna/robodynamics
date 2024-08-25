@@ -34,6 +34,8 @@
 		location="/resources/assets/pdfs/" />
 	<mvc:resources mapping="/assets/videos/**"
 		location="/resources/assets/videos/" />
+	<mvc:resources mapping="/assets/images/**"
+		location="/resources/assets/images/" />
 
 	<mvc:resources mapping="/resources/**"
 		location="/resources/" />
@@ -135,6 +137,8 @@
 				<value>com.robodynamics.model.RDSubmission</value>
 				<value>com.robodynamics.model.RDScore</value>
 				<value>com.robodynamics.model.RDQuizTest</value>
+				<value>com.robodynamics.model.RDSlide</value>
+				<value>com.robodynamics.model.RDFillInBlankQuestion</value>
 
 			</list>
 		</property>

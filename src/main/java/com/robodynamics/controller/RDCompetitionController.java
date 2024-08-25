@@ -167,6 +167,6 @@ public class RDCompetitionController {
     public String viewRegistrations(@PathVariable int id, Model model) {
         List<RDCompetitionParticipant> participants = competitionParticipantService.getRDCompetitionParticipants(id);
         model.addAttribute("participants", participants);
-        return "competition/registrations";
+        return "compRegistrations";
     }
 }

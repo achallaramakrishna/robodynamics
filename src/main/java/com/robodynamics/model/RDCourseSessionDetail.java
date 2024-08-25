@@ -61,7 +61,18 @@ public class RDCourseSessionDetail {
     @JoinColumn(name = "quiz_id")
     private RDQuiz quiz;
 
+	 @OneToMany(mappedBy = "courseSessionDetail", cascade = CascadeType.ALL,orphanRemoval = true) 
+	 private List<RDSlide> slides;
 	
+	 
+	public List<RDSlide> getSlides() {
+		return slides;
+	}
+
+	public void setSlides(List<RDSlide> slides) {
+		this.slides = slides;
+	}
+
 	public RDQuiz getQuiz() {
 		return quiz;
 	}

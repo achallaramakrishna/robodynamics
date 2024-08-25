@@ -32,7 +32,7 @@ public class RDCompetitionParticipantDaoImpl implements RDCompetitionParticipant
 	public List<RDCompetitionParticipant> getRDCompetitionParticipants(int competitionId) {
 		Session session = factory.getCurrentSession();
 		
-		Query query = session.createQuery("from RDCompetitionParticipant competitionParticipant where competitionParticipant.competition.competitionId = :id");
+		Query query = session.createQuery("from RDCompetitionParticipant competitionParticipant where competitionParticipant.competition.competition_id = :id");
 		
 		query.setInteger("id", competitionId);
 

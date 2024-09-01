@@ -132,7 +132,7 @@
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses.jsp">Courses</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/subscription.jsp">Membership</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog.jsp">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contactus">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact/contactus">Contact Us</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/aboutus.jsp">About Us</a></li>
         </ul>
     </div>

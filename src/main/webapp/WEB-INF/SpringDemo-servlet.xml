@@ -139,6 +139,8 @@
 				<value>com.robodynamics.model.RDQuizTest</value>
 				<value>com.robodynamics.model.RDSlide</value>
 				<value>com.robodynamics.model.RDFillInBlankQuestion</value>
+				<value>com.robodynamics.model.RDContact</value>
+				
 
 			</list>
 		</property>

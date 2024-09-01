@@ -150,7 +150,7 @@
     </div>
 </nav>
 
-<section class="highlight-section position-relative">
+<!-- <section class="highlight-section position-relative">
     <img src="images/background (2).jpeg" alt="background" class="img-fluid">
     <div class="overlay"></div>
     <div class="container">
@@ -161,7 +161,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <div class="container content-section">
     <div class="row">
@@ -173,26 +173,46 @@
         </div>
         <div class="col-md-6">
             <h2>Contact Form</h2>
-            <f:form action="${pageContext.request.contextPath}/contact/save" modelAttribute="rdContact" method="post">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <f:input type="text" class="form-control" path="name" id="name" placeholder="Enter your name"/>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <f:input type="email" class="form-control" path="email" id="email" placeholder="Enter your email"/>
-                </div>
-                <div class="form-group">
-                    <label for="cellPhone">Phone</label>
-                    <f:input type="tel" class="form-control" path="cellPhone" id="cellPhone" placeholder="Enter your mobile number"/>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <f:textarea class="form-control" id="message" path="message" rows="4" placeholder="Enter your message"></f:textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </f:form>
-        </div>
+            		<f:form action="saveContact" cssClass="form-horizontal" method="post" modelAttribute="contactForm">
+
+							<div class="form-group">
+								<label for="contactName" class="col-md-3 control-label">Name </label>
+								<div class="col-md-9">
+									<f:input path="contactName" cssClass="form-control" />
+								</div>
+							</div>
+							<br>
+							<div class="form-group">
+								<label for="email" class="col-md-3 control-label">Email</label>
+								<div class="col-md-9">
+									<f:input path="email" cssClass="form-control" />
+								</div>
+							</div>
+							<br>
+							<div class="form-group">
+								<label for="cellPhone" class="col-md-3 control-label">Cell Phone</label>
+								<div class="col-md-9">
+									<f:input path="cellPhone" cssClass="form-control" />
+								</div>
+							</div>
+							<br>
+							<div class="form-group">
+								<label for="message" class="col-md-3 control-label">Message</label>
+								<div class="col-md-9">
+									<f:input path="message" cssClass="form-control" />
+								</div>
+							</div>
+							<br>
+
+							<br>
+							<center>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</center>
+						</f:form>
+                       <c:if test="${not empty successMessage}">
+        		<p>${successMessage}</p>
+    		</c:if>
+        </div> 
     </div>
 </div>
 

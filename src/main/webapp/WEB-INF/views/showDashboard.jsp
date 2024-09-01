@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
-            }  else if (type === 'fib') {
+            }  else if (type === 'slide') {
             	console.log('fib' + coursesSessionDetailId);
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'none';

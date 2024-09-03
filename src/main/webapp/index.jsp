@@ -125,7 +125,8 @@
 			<p class="section-subtitle">Explore the world of Robotics,
 				Coding, AI, and more. Join us for an exciting hands-on experience.</p>
 			<a href="register.html" class="btn btn-primary register-btn">Register
-				Now</a>
+				Now </a>
+				<!--  This is a comment for testing purpose, to be removed -->
 		</div>
 	</section>
 

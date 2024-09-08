@@ -40,7 +40,7 @@ public class RDResultController {
 				quiz = (RDQuiz) session.getAttribute("quiz");
 			
         List<RDQuizResult> results = 
-        		resultService.getUserResultsForQuiz(quiz.getQuiz_id(), rdUser.getUserID(), 0);
+        		resultService.getUserResultsForQuiz(quiz.getQuizId(), rdUser.getUserID(), 0);
         System.out.println(results);
         model.addAttribute("results", results);
         return "results";

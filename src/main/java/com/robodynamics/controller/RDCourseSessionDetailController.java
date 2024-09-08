@@ -55,7 +55,7 @@ public class RDCourseSessionDetailController {
     private String showSlide(Model model, List<RDSlide> slides, int currentSlideIndex, int sessionDetailId) {
         RDSlide slide = slides.get(currentSlideIndex);
         List<RDFillInBlankQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slide.getSlideId());
-
+        System.out.println(fillInBlankQuestions);
         model.addAttribute("slide", slide);
         model.addAttribute("fillInBlankQuestions", fillInBlankQuestions);
         model.addAttribute("currentSlide", currentSlideIndex);

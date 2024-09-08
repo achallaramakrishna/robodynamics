@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 
@@ -21,7 +22,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
 	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
-<meta charset="ISO-8859-1">
+	    <meta charset="UTF-8">
+
 <title>Welcome</title>
 <style>
 body {
@@ -131,17 +133,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!type && !file && !quiz && !details && !qa) {
                 return; // No data to handle
             }
-			
+            
             if (type === 'video') {
                 document.getElementById('course-video').style.display = 'block';
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('course-flashcard').style.display = 'none';
                 document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
                 document.getElementById('course-video').load();
             } else if (type === 'pdf') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'block';
+                document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'none';
                 document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
@@ -151,15 +155,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('course-fib').style.display = 'block';
                 document.getElementById('course-quiz').style.display = 'none';
+                document.getElementById('course-flashcard').style.display = 'none';
                 document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id;
             }   else if (type === 'quiz') {
                 document.getElementById('course-video').style.display = 'none';
                 document.getElementById('course-pdf').style.display = 'none';
                 document.getElementById('course-fib').style.display = 'none';
                 document.getElementById('course-quiz').style.display = 'block';
+                document.getElementById('course-flashcard').style.display = 'none';
                 document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
                 
-            } 
+            } else if (type == 'flashcard') {
+            	 document.getElementById('course-video').style.display = 'none';
+                 document.getElementById('course-pdf').style.display = 'none';
+                 document.getElementById('course-fib').style.display = 'none';
+                 document.getElementById('course-quiz').style.display = 'block';
+                 document.getElementById('course-flashcard').style.display = 'block';
+                 document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcard-sets/session/` + id;
+            }
 
             if (details && details !== 'null') {
                 document.getElementById('course-details-content').textContent = details;
@@ -183,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="main-container">
-				<div class="video-container  width="640" height="800"   embed-responsive embed-responsive-16by9">
+				<div class="video-container  width="640" height="850	"   embed-responsive embed-responsive-16by9">
 						<video id="course-video" class="embed-responsive-item" controls style="display: none;">
 					        <source id="video-source" type="video/mp4">
 					        Your browser does not support the video tag.
@@ -193,57 +206,62 @@ document.addEventListener('DOMContentLoaded', function() {
 						Your browser does not support the video tag.
 					</video> -->
 					<iframe id="course-pdf" style="display: none;" src="" width="1000"
-						height="700"></iframe>
+						height="850"></iframe>
 						
 					<iframe id="course-quiz" style="display: none;" src="" width="1000"
-						height="700"></iframe>
+						height="850"></iframe>
 					<iframe id="course-fib" style="display: none;" src="" width="1000"
-						height="700"></iframe>
+						height="850"></iframe>
+					<iframe id="course-flashcard" style="display: none;" src="" width="1000"
+						height="850"></iframe>
 		
-					<h2>Q&A</h2>
-					<div id="course-qa-content">
-						<!-- Add Mark Attendance Button and Hidden Input -->
-						<div class="mark-attendance">
-							<form id="attendanceForm" action="${pageContext.request.contextPath}/courseTracking/markAttendance"
-								method="post">
-								<input type="hidden" id="courseSessionDetailId" name="courseSessionDetailId"
-									value="">
-								<input type="hidden" id="enrollmentId" name="enrollmentId"
-									value="">
-								<button type="button" class="btn btn-primary"
-									onclick="markAttendance()">Mark Attendance</button>
-							</form>
-						</div>
-
-					</div>
-				</div>
-
-
-				<div class="course-contents">
-					<h2>Course Contents</h2>
-					<ul id="course-list">
-						<c:forEach items="${courseSessions}" var="courseSession">
-							<li>${courseSession.sessionTitle}<script> console.log('${courseSession.sessionTitle}');</script>
-
-								<c:forEach items="${courseSession.courseSessionDetails}"
-									var="courseSessionDetail">
-									<ul>
-										<li data-type="${courseSessionDetail.type}"
-											data-file="${courseSessionDetail.file}"
-											data-quiz="${courseSessionDetail.quiz.quiz_id}"
-											data-details="${courseSessionDetail.topic}"
-											data-qa="${courseSessionDetail.topic}"
-											data-id="${courseSessionDetail.courseSessionDetailId}"
-											onclick="setAttendanceDetails(${courseSessionDetail.courseSessionDetailId},${studentEnrollment.enrollmentId})">
-											${courseSessionDetail.topic}</li>
-									</ul>
-								</c:forEach>
-							</li>
-						</c:forEach>
-					</ul>
-
 
 				</div>
+
+
+<div class="container course-contents mt-4">
+    <h2 class="text-center" style="color: #FF5733; font-family: 'Comic Sans MS', cursive, sans-serif;">
+        🎨📚 Fun Math Course Contents 🎨📚
+    </h2>
+    <ul id="course-list" class="list-group mt-4">
+        <!-- Loop through the list of course sessions -->
+        <c:forEach items="${courseSessions}" var="courseSession">
+            <!-- Display the course session title with a colorful background -->
+            <li class="list-group-item bg-info text-white mb-3" style="font-size: 20px; font-weight: bold;">
+                <i class="fas fa-book-reader"></i> ${courseSession.sessionTitle}
+                
+                <!-- Nested list for course session details -->
+                <ul class="list-group mt-2">
+                    <!-- Loop through the course session details -->
+                    <c:forEach items="${courseSession.courseSessionDetails}" var="courseSessionDetail">
+                        <li class="list-group-item list-group-item-action bg-light mb-2" 
+                            style="font-size: 18px; color: #34495E;"
+                            data-type="${courseSessionDetail.type}"
+                            data-file="${courseSessionDetail.file}"
+                            data-quiz="${courseSessionDetail.quiz.quiz_id}"
+                            data-details="${courseSessionDetail.topic}"
+                            data-qa="${courseSessionDetail.topic}"
+                            data-id="${courseSessionDetail.courseSessionDetailId}"
+                            onclick="setAttendanceDetails(${courseSessionDetail.courseSessionDetailId}, ${studentEnrollment.enrollmentId})">
+                            🧮 ${courseSessionDetail.topic}
+                        </li>
+                    </c:forEach>
+                </ul>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+
+<!-- Bootstrap CSS and FontAwesome for icons -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+<!-- Bootstrap CSS for styling -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 
 			</div>
 

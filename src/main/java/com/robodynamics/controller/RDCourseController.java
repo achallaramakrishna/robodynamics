@@ -86,6 +86,7 @@ public class RDCourseController {
 	//	List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails(theId);
 		
 		System.out.println("Size - " + courseSessions.size());
+		System.out.println(courseSessions);
 	//	System.out.println(courseSessionDetails);
 		
 		
@@ -93,9 +94,7 @@ public class RDCourseController {
 		//System.out.println("hello....course name............." + course.getCourseName());
         theModel.addAttribute("courseSessions", courseSessions);
         theModel.addAttribute("studentEnrollment",studentEnrollment);
-        for(RDCourseSession courseSession : courseSessions) {
-        	System.out.println(courseSession);
-        }
+       
        // theModel.addAttribute("courseSessionDetails", courseSessionDetails);
 		ModelAndView modelAndView = new ModelAndView("showDashboard");
 		return modelAndView;

@@ -10,44 +10,33 @@ import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.service.RDQuizQuestionService;
 
-
-
 @Service
 public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
-	
-	@Autowired
-	private RDQuizQuestionDao rdQuizQuestionDao;
 
-	@Override
-	@Transactional
-	public void saveRDQuizQuestion(RDQuizQuestion rdQuizQuestion) {
-		rdQuizQuestionDao.saveRDQuizQuestion(rdQuizQuestion);
-	}
+    @Autowired
+    private RDQuizQuestionDao rdQuizQuestionDao;
 
-	@Override
-	@Transactional
-	public RDQuizQuestion getRDQuizQuestion(int quizQuestionId) {
-		return rdQuizQuestionDao.getRDQuizQuestion(quizQuestionId);
-	}
+    @Override
+    @Transactional
+    public void saveOrUpdate(RDQuizQuestion question) {
+        rdQuizQuestionDao.saveOrUpdate(question);
+    }
 
-	@Override
-	@Transactional
-	public List<RDQuizQuestion> getRDQuizQuestions() {
-		return rdQuizQuestionDao.getRDQuizQuestions();
-	}
+    @Override
+    @Transactional
+    public RDQuizQuestion findById(int questionId) {
+        return rdQuizQuestionDao.findById(questionId);
+    }
 
-	@Override
-	@Transactional
-	public void deleteRDQuizQuestion(int id) {
-		rdQuizQuestionDao.deleteRDQuizQuestion(id);
-		
-	}
+    @Override
+    @Transactional
+    public List<RDQuizQuestion> findByQuizId(int quizId) {
+        return rdQuizQuestionDao.findByQuizId(quizId);
+    }
 
-	@Override
-	@Transactional
-	public List<RDQuizQuestion> getRDQuizQuestions(int quizId) {
-		
-		return rdQuizQuestionDao.getRDQuizQuestions(quizId);
-	}
-   
+    @Override
+    @Transactional
+    public void delete(RDQuizQuestion question) {
+        rdQuizQuestionDao.delete(question);
+    }
 }

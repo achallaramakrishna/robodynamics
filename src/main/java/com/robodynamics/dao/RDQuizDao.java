@@ -6,13 +6,16 @@ import java.util.List;
 import com.robodynamics.model.RDQuiz;
 
 public interface RDQuizDao {
-	
-	public void saveRDQuiz(RDQuiz rdQuiz);
 
-	public RDQuiz getRDQuiz(int quizId);
-	
-	public List < RDQuiz > getRDQuizzes();
-	
-    public void deleteRDQuiz(int id);
+    // Create or update a quiz
+    void saveOrUpdate(RDQuiz quiz);
 
+    // Find quiz by its ID
+    RDQuiz findById(int quizId);
+
+    // Find all available quizzes
+    List<RDQuiz> findAll();
+
+    // Delete a quiz
+    void delete(RDQuiz quiz);
 }

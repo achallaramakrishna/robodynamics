@@ -2,6 +2,7 @@ package com.robodynamics.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -14,59 +15,48 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDQuizQuestionDao;
+import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDQuizQuestion;
 
 @Repository
 @Transactional
 public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
 
-	@Autowired
-	private SessionFactory factory;
-	
-	@Override
-	public void saveRDQuizQuestion(RDQuizQuestion rdQuizQuestion) {
-		Session session = factory.getCurrentSession();
-		session.saveOrUpdate(rdQuizQuestion);
+    @Autowired
+    private SessionFactory factory;
 
-	}
-
-	@Override
-	public RDQuizQuestion getRDQuizQuestion(int quizQuestionId) {
-		Session session = factory.getCurrentSession();
-		RDQuizQuestion rdQuizQuestion = session.get(RDQuizQuestion.class, quizQuestionId);
-        return rdQuizQuestion;
-	}
-
-	@Override
-	public List<RDQuizQuestion> getRDQuizQuestions() {
-	       Session session = factory.getCurrentSession();
-	        CriteriaBuilder cb = session.getCriteriaBuilder();
-	        CriteriaQuery < RDQuizQuestion > cq = cb.createQuery(RDQuizQuestion.class);
-	        Root < RDQuizQuestion > root = cq.from(RDQuizQuestion.class);
-	        cq.select(root);
-	        Query query = session.createQuery(cq);
-	        return query.getResultList();
-	}
-
-	@Override
-	public void deleteRDQuizQuestion(int id) {
+    @Override
+    public void saveOrUpdate(RDQuizQuestion question) {
         Session session = factory.getCurrentSession();
-        RDQuizQuestion rdQuizQuestion = session.byId(RDQuizQuestion.class).load(id);
-        session.delete(rdQuizQuestion);
-	
-	}
+        session.saveOrUpdate(question);
+    }
 
-	@Override
-	public List<RDQuizQuestion> getRDQuizQuestions(int quizId) {
-		
-		Session session = factory.getCurrentSession();
-		Query query = session.createQuery("from RDQuizQuestion where quiz_id=:quiz_id");
-		query.setInteger("quiz_id", quizId);
-		List<RDQuizQuestion> quizQuestions = query.list();
-		System.out.println(quizQuestions);
-		return quizQuestions;
-	}
+    @Override
+    public RDQuizQuestion findById(int questionId) {
+        Session session = factory.getCurrentSession();
+        return session.get(RDQuizQuestion.class, questionId);
+    }
 
-	
+    
+    @Override
+    public List<RDQuizQuestion> findByQuizId(int quizId) {
+    	Session session = factory.getCurrentSession();
+    	try {
+			Query<RDQuizQuestion> query = session.createQuery("from RDQuizQuestion where quiz.quizId =:quizId",
+					RDQuizQuestion.class);
+			query.setParameter("quizId", quizId);
+			List<RDQuizQuestion> quizQuestionsList  = query.getResultList();
+			return quizQuestionsList;
+		} catch (NoResultException e) {
+			// TODO: handle exception
+			return null;
+		}
+    	
+    }
 
+    @Override
+    public void delete(RDQuizQuestion question) {
+        Session session = factory.getCurrentSession();
+        session.delete(question);
+    }
 }

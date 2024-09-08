@@ -45,7 +45,7 @@ public class RDQuizTestController {
     		Model model, HttpSession session) {
     	
     	
-       RDQuiz quiz = quizService.getRDQuiz(quizId);
+       RDQuiz quiz = quizService.findById(quizId);
        
        
         model.addAttribute("quiz", quiz);
@@ -67,7 +67,7 @@ public class RDQuizTestController {
 		
         RDQuizTest quizTest = new RDQuizTest();
         
-        RDQuiz quiz = quizService.getRDQuiz(quizId);
+        RDQuiz quiz = quizService.findById(quizId);
 
         quizTest.setQuiz(quiz);
         quizTest.setCreationDate(new Date());

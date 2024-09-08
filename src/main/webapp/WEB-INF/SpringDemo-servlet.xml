@@ -36,6 +36,8 @@
 		location="/resources/assets/videos/" />
 	<mvc:resources mapping="/assets/images/**"
 		location="/resources/assets/images/" />
+	<mvc:resources mapping="/assets/audios/**"
+		location="/resources/assets/audios/" />
 
 	<mvc:resources mapping="/resources/**"
 		location="/resources/" />
@@ -125,6 +127,10 @@
 				<value>com.robodynamics.model.RDCourseSessionDetail</value>
 				<value>com.robodynamics.model.RDQuiz</value>
 				<value>com.robodynamics.model.RDQuizQuestion</value>
+				<value>com.robodynamics.model.RDQuizOption</value>
+				<value>com.robodynamics.model.RDQuizAnswer</value>
+				
+				
 				<value>com.robodynamics.model.RDQuizResult</value>
 				<value>com.robodynamics.model.RDClassSession</value>
 				<value>com.robodynamics.model.RDClassAttendance</value>
@@ -140,8 +146,19 @@
 				<value>com.robodynamics.model.RDSlide</value>
 				<value>com.robodynamics.model.RDFillInBlankQuestion</value>
 				<value>com.robodynamics.model.RDContact</value>
+				<value>com.robodynamics.model.RDFlashCardSet</value>
+				<value>com.robodynamics.model.RDFlashCard</value>
+				<value>com.robodynamics.model.RDFlashCardAttempt</value>
 				
-
+				<value>com.robodynamics.model.RDUserPoints</value>
+				<value>com.robodynamics.model.RDUserQuest</value>
+				<value>com.robodynamics.model.RDQuest</value>
+				<value>com.robodynamics.model.RDLeaderboard</value>
+				<value>com.robodynamics.model.RDUserBadge</value>
+				<value>com.robodynamics.model.RDBadge</value>
+				<value>com.robodynamics.model.RDUserQuizResults</value>
+				
+				
 			</list>
 		</property>
 

@@ -1,18 +1,30 @@
 package com.robodynamics.service;
-
 import java.util.List;
+import java.util.Map;
 
-import com.robodynamics.model.RDEnquiry;
 import com.robodynamics.model.RDQuiz;
+import com.robodynamics.model.RDQuizQuestion;
 
 public interface RDQuizService {
-	
-	public void saveRDQuiz(RDQuiz rdQuiz);
 
-	public RDQuiz getRDQuiz(int quizId);
-	
-	public List < RDQuiz > getRDQuizzes();
-	
-    public void deleteRDQuiz(int id);
+    // Create or update a quiz
+    void saveOrUpdate(RDQuiz quiz);
 
+    // Find quiz by its ID
+    RDQuiz findById(int quizId);
+
+    // Find all available quizzes
+    List<RDQuiz> findAll();
+
+    // Delete a quiz
+    void delete(RDQuiz quiz);
+    
+    // Process submitted answers (map question IDs to selected option IDs)
+    Map<Integer, Integer> processAnswers(Map<String, String> answers, List<RDQuizQuestion> quizQuestions);
+
+    // Evaluate the quiz and return whether the user passed or not
+    boolean evaluateQuiz(int quizId, Map<Integer, Integer> selectedAnswers);
+
+	int calculatePoints(List<RDQuizQuestion> quizQuestions, Map<Integer, Integer> selectedAnswers);
+    
 }

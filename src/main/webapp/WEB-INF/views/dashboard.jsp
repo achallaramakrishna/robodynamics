@@ -28,7 +28,116 @@
 	<jsp:include page="header.jsp" />
  	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
+  <div class="row">
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Enquiry</h5>
+          <p class="card-text">View and manage enquiries from users.</p>
+          <a href="${pageContext.request.contextPath}/enquiry/list" class="btn btn-primary ${page eq 'enquiry' ? 'active' : ''}">
+            Manage Enquiries
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Users</h5>
+          <p class="card-text">View and manage registered users.</p>
+          <a href="${pageContext.request.contextPath}/listusers" class="btn btn-primary ${page eq 'users' ? 'active' : ''}">
+            Manage Users
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Asset Categories</h5>
+          <p class="card-text">View and manage asset categories.</p>
+          <a href="${pageContext.request.contextPath}/assetcategory/list" class="btn btn-primary ${page eq 'assetcategory' ? 'active' : ''}">
+            Manage Asset Categories
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Assets</h5>
+          <p class="card-text">View and manage system assets.</p>
+          <a href="${pageContext.request.contextPath}/asset/list" class="btn btn-primary ${page eq 'asset' ? 'active' : ''}">
+            Manage Assets
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Course Categories</h5>
+          <p class="card-text">View and manage course categories.</p>
+          <a href="${pageContext.request.contextPath}/coursecategory/list" class="btn btn-primary ${page eq 'coursecategory' ? 'active' : ''}">
+            Manage Course Categories
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Courses</h5>
+          <p class="card-text">View and manage available courses.</p>
+          <a href="${pageContext.request.contextPath}/course/list" class="btn btn-primary ${page eq 'course' ? 'active' : ''}">
+            Manage Courses
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Course Offerings</h5>
+          <p class="card-text">View and manage course offerings.</p>
+          <a href="${pageContext.request.contextPath}/courseoffering/list" class="btn btn-primary ${page eq 'courseoffering' ? 'active' : ''}">
+            Manage Offerings
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Workshops</h5>
+          <p class="card-text">View and manage upcoming workshops.</p>
+          <a href="${pageContext.request.contextPath}/workshops/list" class="btn btn-primary ${page eq 'workshop' ? 'active' : ''}">
+            Manage Workshops
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Competitions</h5>
+          <p class="card-text">View and manage competitions.</p>
+          <a href="${pageContext.request.contextPath}/competition/list" class="btn btn-primary ${page eq 'competition' ? 'active' : ''}">
+            Manage Competitions
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 		</div>
 

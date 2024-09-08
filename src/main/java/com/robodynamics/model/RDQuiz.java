@@ -1,72 +1,101 @@
 package com.robodynamics.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "rd_quiz")
+@Table(name = "rd_quizzes")
 public class RDQuiz {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "quiz_id")
-	private int quiz_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "quiz_id")
+    private int quizId;
 
-	@Column(name = "quiz_title")
-	private String quizTitle;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="quiz_id", nullable = true)
-	private List<RDQuizQuestion> quizQuestions = new ArrayList<RDQuizQuestion>();
+    @Column(name = "quiz_name", nullable = false)
+    private String quizName;
 
+    @Column(name = "difficulty_level")
+    private String difficultyLevel;
 
-	public RDQuiz() {
-		
-	}
+    @Column(name = "quiz_type", nullable = false)
+    private String quizType;  // This could be something like "multiple_choice" or "fill_in_the_blank"
 
-	public int getQuiz_id() {
-		return quiz_id;
-	}
+    @Column(name = "time_limit_seconds")
+    private int timeLimitSeconds;
 
-	public void setQuiz_id(int quiz_id) {
-		this.quiz_id = quiz_id;
-	}
+    // One-to-Many relationship with RDQuizQuestion
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<RDQuizQuestion> quizQuestions;
 
-	public String getQuizTitle() {
-		return quizTitle;
-	}
+    // Constructors
+    public RDQuiz() {}
 
-	public void setQuizTitle(String quizTitle) {
-		this.quizTitle = quizTitle;
-	}
-	
-	
+    public RDQuiz(String quizName, String difficultyLevel, String quizType, int timeLimitSeconds) {
+        this.quizName = quizName;
+        this.difficultyLevel = difficultyLevel;
+        this.quizType = quizType;
+        this.timeLimitSeconds = timeLimitSeconds;
+    }
 
-	public List<RDQuizQuestion> getQuizQuestions() {
-		return quizQuestions;
-	}
+    // Getters and Setters
+    public int getQuizId() {
+        return quizId;
+    }
 
-	public void setQuizQuestions(List<RDQuizQuestion> quizQuestions) {
-		this.quizQuestions = quizQuestions;
-	}
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
 
-	@Override
-	public String toString() {
-		return "RDQuiz [quiz_id=" + quiz_id + ", quizTitle=" + quizTitle + "]";
-	}
-	
+    public String getQuizName() {
+        return quizName;
+    }
+
+    public void setQuizName(String quizName) {
+        this.quizName = quizName;
+    }
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    public String getQuizType() {
+        return quizType;
+    }
+
+    public void setQuizType(String quizType) {
+        this.quizType = quizType;
+    }
+
+    public int getTimeLimitSeconds() {
+        return timeLimitSeconds;
+    }
+
+    public void setTimeLimitSeconds(int timeLimitSeconds) {
+        this.timeLimitSeconds = timeLimitSeconds;
+    }
+
+    public List<RDQuizQuestion> getQuizQuestions() {
+        return quizQuestions;
+    }
+
+    public void setQuizQuestions(List<RDQuizQuestion> quizQuestions) {
+        this.quizQuestions = quizQuestions;
+    }
+
+    // Optional toString() for debugging purposes
+    @Override
+    public String toString() {
+        return "RDQuiz{" +
+                "quizId=" + quizId +
+                ", quizName='" + quizName + '\'' +
+                ", difficultyLevel='" + difficultyLevel + '\'' +
+                ", quizType='" + quizType + '\'' +
+                ", timeLimitSeconds=" + timeLimitSeconds +
+                '}';
+    }
 }

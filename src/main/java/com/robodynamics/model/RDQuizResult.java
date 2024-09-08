@@ -1,41 +1,39 @@
 package com.robodynamics.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "rd_quiz_question_results")
+@Table(name = "rd_user_quiz_results")
 public class RDQuizResult {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "quiz_question_result_id")
+	@Column(name = "result_id")
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private RDUser user;
+	@JoinColumn(name = "user_id", nullable = false)
+	private RDUser user; // Foreign key to RDUser
 
 	@ManyToOne
-	@JoinColumn(name = "quiz_question_id")
-	private RDQuizQuestion quizQuestion;
+	@JoinColumn(name = "quiz_id", nullable = false)
+	private RDQuiz quiz; // Foreign key to RDQuiz
 
-	@Column(name = "user_answer")
-	private String userAnswer;
-	 
-	@Column(name = "is_correct") 
-	private boolean isCorrect;
-	
-	@Column(name = "is_current_test") 
-	private int isCurrentTest;
-	
-	@Column(name = "test_count") 
-	private int testCount;
-	
+	@Column(name = "score")
+	private int score;
 
-	public RDQuizResult() {
+	@Column(name = "completion_time")
+	private int completionTime; // Time taken in seconds to complete the quiz
 
-	}
+	@Column(name = "start_time", nullable = false)
+	private Timestamp startTime; // When the quiz was started
 
+	@Column(name = "end_time")
+	private Timestamp endTime; // When the quiz was completed
+
+	// Getters and Setters
 	public int getId() {
 		return id;
 	}
@@ -52,39 +50,43 @@ public class RDQuizResult {
 		this.user = user;
 	}
 
-	
-	public RDQuizQuestion getQuizQuestion() {
-		return quizQuestion;
+	public RDQuiz getQuiz() {
+		return quiz;
 	}
 
-	public void setQuizQuestion(RDQuizQuestion quizQuestion) {
-		this.quizQuestion = quizQuestion;
+	public void setQuiz(RDQuiz quiz) {
+		this.quiz = quiz;
 	}
 
-	public String getUserAnswer() {
-		return userAnswer;
+	public int getScore() {
+		return score;
 	}
 
-	public void setUserAnswer(String userAnswer) {
-		this.userAnswer = userAnswer;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
-
-
-	public boolean isCorrect() {
-		return isCorrect;
+	public int getCompletionTime() {
+		return completionTime;
 	}
 
-	public void setCorrect(boolean isCorrect) {
-		this.isCorrect = isCorrect;
+	public void setCompletionTime(int completionTime) {
+		this.completionTime = completionTime;
 	}
 
-	@Override
-	public String toString() {
-		return "RDResult [id=" + id + ", user=" + user + ", quizQuestion=" + quizQuestion + ", userAnswer=" + userAnswer
-				+ ", isCorrect=" + isCorrect + "]";
+	public Timestamp getStartTime() {
+		return startTime;
 	}
-	
-	
 
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
 }

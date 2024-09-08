@@ -1,133 +1,200 @@
 package com.robodynamics.controller;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robodynamics.model.RDQuest;
+import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDQuizQuestion;
-import com.robodynamics.model.RDQuizQuestionAnswerForm;
-import com.robodynamics.model.RDQuizResult;
 import com.robodynamics.model.RDUser;
-import com.robodynamics.service.RDQuizQuestionService;
-import com.robodynamics.service.RDResultService;
-import com.robodynamics.service.RDUserService;
+import com.robodynamics.model.RDUserQuest;
+import com.robodynamics.model.RDUserQuizResults;
+import com.robodynamics.service.*;
 
 @Controller
-@RequestMapping("/quiz")
+@RequestMapping("/quizzes")
 public class RDQuizController {
+
+    @Autowired
+    private RDQuizService quizService;
+
     @Autowired
     private RDQuizQuestionService quizQuestionService;
-    
+
     @Autowired
-    private RDResultService resultService;
+    private RDUserQuizResultService quizResultService;
 
-    //@GetMapping("/take")
-    @GetMapping("/take")
-    public String takeQuiz(Model model, @RequestParam("quiz_id") int quizId, HttpSession session) throws JsonProcessingException {
-        List<RDQuizQuestion> quizQuestions = quizQuestionService.getRDQuizQuestions(quizId);
-        model.addAttribute("quizQuestions", quizQuestions);
-        model.addAttribute("currentQuizQuestion", quizQuestions.get(0)); // Start with the first quiz question
-        session.setAttribute("quizQuestionsList", quizQuestions);
-        session.setAttribute("currentQuizIndex", 0);
-        
-        
-        RDUser user = null;
-		if (session.getAttribute("rdUser") != null) {
-			user = (RDUser) session.getAttribute("rdUser");
-		}
+    @Autowired
+    private RDUserPointsService userPointsService;
 
-		System.out.println("user - " + user);
-		
-		resultService.updatePreviousTestResults(quizId, user.getUserID());
-		
-        ObjectMapper mapper = new ObjectMapper();
-        String quizQuestionsJson = mapper.writeValueAsString(quizQuestions);
-        model.addAttribute("quizQuestions", quizQuestionsJson); // Pass quizzes as JSON string
-        // Add an empty QuizAnswerForm to the model
-        model.addAttribute("quizQuestionAnswerForm", new RDQuizQuestionAnswerForm());
-        
-        
-        
-        return "takeQuiz";
+    @Autowired
+    private RDUserQuestService userQuestService;
+
+    @Autowired
+    private RDQuestService questService;
+
+    // List available quizzes
+    @GetMapping
+    public String listQuizzes(Model model) {
+        List<RDQuiz> quizzes = quizService.findAll();
+        model.addAttribute("quizzes", quizzes);
+        return "quizzes/list";  // list.jsp to display the available quizzes
+    }
+
+    // Start a quiz
+    @GetMapping("/start/{quizId}")
+    public String startQuiz(@PathVariable int quizId, Model model) {
+        RDQuiz quiz = quizService.findById(quizId);
+        List<RDQuizQuestion> quizQuestions = quizQuestionService.findByQuizId(quizId);
+
+        if (quizQuestions.isEmpty()) {
+            model.addAttribute("message", "No questions available for this quiz.");
+            return "quizzes/error";
+        }
+
+        model.addAttribute("quiz", quiz);
+        model.addAttribute("questions", quizQuestions);
+        return "quizzes/take";  // take.jsp to display quiz questions
     }
 
     @PostMapping("/submit")
-    public String submitQuiz(@ModelAttribute("quizQuestionAnswerForm") RDQuizQuestionAnswerForm quizQuestionAnswerForm, 
-    		HttpSession session, 
-    		Model model) {
-        
-    	int currentQuizIndex = (int) session.getAttribute("currentQuizIndex");
-        List<RDQuizQuestion> quizQuestionsList = (List<RDQuizQuestion>) session.getAttribute("quizQuestionsList");
-        RDQuizQuestion quizQuestion = quizQuestionsList.get(currentQuizIndex);
+    public String submitQuiz(@RequestParam Map<String, String> answers,
+    		Model model, HttpSession session) {
+        // Extract the quiz ID and user details
+        int quizId = Integer.parseInt(answers.get("quizId"));
+     
 
-        // Retrieve the user from session or a default user for now
-        RDUser user = (RDUser) session.getAttribute("rdUser");
+        RDUser currentUser = null;  // Replace with actual logic to get the logged-in user
+        if (session.getAttribute("rdUser") != null) {
+        	currentUser = (RDUser) session.getAttribute("rdUser");
+		}
+        RDQuiz quiz = quizService.findById(quizId);
+        List<RDQuizQuestion> quizQuestions = quizQuestionService.findByQuizId(quizId);
 
-        System.out.println(quizQuestionAnswerForm);
-        // Create a result object
-        RDQuizResult result = new RDQuizResult();
-        result.setUser(user);
-        result.setQuizQuestion(quizQuestion);
-        result.setUserAnswer(quizQuestionAnswerForm.getUserAnswer());
-        result.setCorrect(quizQuestion.getCorrectAnswer().equals(quizQuestionAnswerForm.getUserAnswer()));
-
-        // Save the result
-        resultService.saveRDResult(result);
-
-        System.out.println("currentQuizIndex - " + currentQuizIndex);
-        System.out.println("size minus 1 - " + (quizQuestionsList.size()));
-        // Prepare for next quiz question
-        if (currentQuizIndex < quizQuestionsList.size() - 1) {
-        	System.out.println("hello 1 ");
-            session.setAttribute("currentQuizIndex", currentQuizIndex + 1);
-            
-            model.addAttribute("currentQuizQuestion", quizQuestionsList.get(currentQuizIndex + 1));
-            return "takeQuiz";
-        } else {
-            // If it's the last question, display results
-        	
-            session.setAttribute("quiz", quizQuestion.getQuiz());
-            
-
-        	System.out.println("hello 2 last question");
-            return "redirect:/results/view";
+        if (quizQuestions.isEmpty()) {
+            model.addAttribute("message", "No questions available for this quiz.");
+            return "quizzes/error";
         }
-    }
-    
-    
-    @GetMapping("/takeQuiz")
-    public String takeQuiz(Model theModel) {
-        List < RDQuizQuestion > quizQuestions = quizQuestionService.getRDQuizQuestions();
-        System.out.println("Number of quizzes - " + quizQuestions.size());
-        theModel.addAttribute("quiz question", quizQuestions);
-        
-        theModel.addAttribute("currentQuizQuestion", quizQuestions.get(0)); // Start with the first quiz question
-        return "takeQuiz";
-    }
-    
-    @GetMapping("/quizquesitons")
-    @ResponseBody
-    public List<RDQuizQuestion> getAllQuizQuestions() {
-        return quizQuestionService.getRDQuizQuestions();
+
+     // Parse the ISO format startTime from the form
+        String startTimeString = answers.get("startTime");
+        LocalDateTime localDateTime = LocalDateTime.parse(startTimeString, DateTimeFormatter.ISO_DATE_TIME);
+        Timestamp startTime = Timestamp.valueOf(localDateTime);
+
+        // Prepare to store the user's selected answers
+        Map<Integer, Integer> selectedAnswers = new HashMap<>();  // Map questionId -> selectedOptionId
+        for (RDQuizQuestion question : quizQuestions) {
+            String paramName = "question_" + question.getQuestionId();
+            if (answers.containsKey(paramName)) {
+                try {
+                    int selectedOptionId = Integer.parseInt(answers.get(paramName));
+                    selectedAnswers.put(question.getQuestionId(), selectedOptionId);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid option selected for question " + question.getQuestionId());
+                }
+            }
+        }
+
+        // Evaluate the quiz and calculate the score
+        int correctAnswersCount = 0;
+        int pointsEarned = 0;
+        int pointsPerCorrectAnswer = 10;  // Adjust this based on your points system
+
+        for (RDQuizQuestion question : quizQuestions) {
+            int selectedOptionId = selectedAnswers.getOrDefault(question.getQuestionId(), -1);
+            if (question.getCorrectOption().getOptionId() == selectedOptionId) {
+                correctAnswersCount++;
+                pointsEarned += pointsPerCorrectAnswer;
+            }
+        }
+
+        // Determine if the user passed (70% threshold)
+        boolean passed = (double) correctAnswersCount / quizQuestions.size() >= 0.7;
+
+        // Calculate completion time
+        Timestamp endTime = new Timestamp(System.currentTimeMillis());  // Get the current time as end time
+        int completionTime = (int) ((endTime.getTime() - startTime.getTime()) / 1000);  // Calculate completion time in seconds
+
+        // Save the quiz result
+        RDUserQuizResults quizResult = new RDUserQuizResults();
+        quizResult.setUser(currentUser);
+        quizResult.setQuiz(quiz);
+        quizResult.setScore(correctAnswersCount);
+        quizResult.setPassed(passed);
+        quizResult.setPointsEarned(pointsEarned);
+        quizResult.setStartTime(startTime);  // Track the start time
+        quizResult.setEndTime(endTime);  // Track the end time
+        quizResult.setCompletionTime(completionTime);  // Track the total time taken to complete the quiz
+        quizResult.setCompletedAt(endTime);  // Set the completedAt time
+        quizResultService.saveOrUpdate(quizResult);
+
+        // Reward points for completing the quiz
+        userPointsService.addPoints(currentUser, pointsEarned);
+
+        // Check for and complete any applicable quests
+        completeUserQuests(currentUser, quiz);
+
+        // Pass the result to the view
+        model.addAttribute("quizResult", quizResult);
+        model.addAttribute("points", pointsEarned);
+        model.addAttribute("passed", passed);
+
+        return "quizzes/result";  // Display the quiz result page
     }
 
-	@PostMapping("/createQuizQuestion")
-    @ResponseBody
-    public void createQuizQuestion(@RequestBody RDQuizQuestion quizQuestion) {
-        quizQuestionService.saveRDQuizQuestion(quizQuestion);
+    
+
+    // Complete any relevant user quests after submitting the quiz
+    private void completeUserQuests(RDUser user, RDQuiz quiz) {
+        List<RDQuest> allQuests = questService.findAll();
+        for (RDQuest quest : allQuests) {
+            boolean isQuestCompleted = false;
+
+            // Example quest conditions (extend this with more specific logic):
+            switch (quest.getName()) {
+                case "First Quiz Completion":
+                    // Check if the user has completed their first quiz
+                    isQuestCompleted = userQuestService.findByUserId(user.getUserID()).isEmpty();
+                    break;
+
+                case "Five Quizzes Milestone":
+                    // Check if the user has completed 5 quizzes
+                    int totalQuizzesCompleted = userQuestService.countQuizzesCompletedByUser(user.getUserID());
+                    isQuestCompleted = (totalQuizzesCompleted >= 5);
+                    break;
+
+                case "Perfect Scorer":
+                    // Check if the user scored 100% on this quiz
+                    RDUserQuizResults quizResult = quizResultService.findLatestByUserIdAndQuizId(user.getUserID(), quiz.getQuizId());
+                    isQuestCompleted = (quizResult.getScore() == quiz.getQuizQuestions().size());
+                    break;
+
+                // Add more quest conditions as needed
+            }
+
+            // If the user has completed the quest and it's not already marked as completed
+            if (isQuestCompleted && !userQuestService.isQuestCompletedByUser(user.getUserID(), quest.getId())) {
+                // Mark the quest as completed and reward points
+                RDUserQuest userQuest = new RDUserQuest();
+                userQuest.setUser(user);
+                userQuest.setQuest(quest);
+                userQuest.setCompletedAt(new Timestamp(System.currentTimeMillis()));
+                userQuestService.saveOrUpdate(userQuest);
+
+                // Reward points for completing the quest
+                userPointsService.addPoints(user, quest.getPointsReward());
+            }
+        }
     }
 }

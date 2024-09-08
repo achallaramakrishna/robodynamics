@@ -6,6 +6,7 @@ import com.robodynamics.model.RDAssetCategory;
 import com.robodynamics.model.RDUser;
 
 public interface RDUserDao {
+	
 	public void registerRDUser(RDUser rdUser);
 
 	public RDUser loginRDUser(RDUser rdUser);

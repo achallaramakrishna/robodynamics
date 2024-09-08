@@ -46,9 +46,16 @@
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
-	    <div class="container mt-5">
-	        <h2 class="text-center">Register for ${competition.name}</h2>
+			<%-- <%@ include file="/WEB-INF/views/leftnav.jsp"%>
+ --%>
+			<div class="col-md-offset-1 col-md-10">
+				<br>
+				<!-- Back button to go back to the dashboard -->
+				<button class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
+					Back to Dashboard
+				</button>
+				<br><br>
+				<h2 class="text-center">Register for ${competition.name}</h2>
 	        <p class="text-center">${competition.description}</p>
 	        
 		 <div class="text-center mb-4">

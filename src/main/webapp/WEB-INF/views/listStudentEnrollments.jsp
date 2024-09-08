@@ -30,10 +30,13 @@
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
-
-			<div class="col-md-offset-1 col-md-10">
+				<div class="col-md-offset-1 col-md-10">
 				<br>
+				<!-- Back button to go back to the dashboard -->
+				<button class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/studentDashboard';">
+					Back to Dashboard
+				</button>
+				<br><br>
 				<h2>View Courses Enrolled</h2>
 				<hr />
 				<c:if test="${userRole eq 4}">

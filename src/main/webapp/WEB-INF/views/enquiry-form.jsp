@@ -29,8 +29,15 @@
 	
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
-			<div class="col-md-offset-2 col-md-7">
+			<%-- <%@ include file="/WEB-INF/views/leftnav.jsp"%>
+ --%>
+			<div class="col-md-offset-1 col-md-10">
+				<br>
+				<!-- Back button to go back to the dashboard -->
+				<button class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/enquiry/list';">
+					Back to Enquiries
+				</button>
+				<br><br>				
 				<div class="panel panel-info">
 					<div class="panel-heading">
 					<br>

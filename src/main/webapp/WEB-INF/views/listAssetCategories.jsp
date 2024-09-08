@@ -8,6 +8,7 @@
 <head>
 <%@ page isELIgnored="false"%>
 
+<!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -23,81 +24,52 @@
 	crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Welcome</title>
-
+    <title>Quiz List</title>
 </head>
 <body>
+	<!-- Include header JSP -->
 	<jsp:include page="header.jsp" />
+
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
-
 			<div class="col-md-offset-1 col-md-10">
-				<br>
-				<h2>Manage Asset Categories</h2>
+				<!-- Back button to go back to the dashboard -->
+				<button class="btn btn-secondary mt-3" onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
+					Back to Dashboard
+				</button>
+				<br><br>
+				<h2 class="mt-4">Available Quizzes</h2>
 				<hr />
 
-				<input type="button" value="Add Asset Categories"
-					onclick="window.location.href='showForm'; return false;"
-					class="btn btn-primary" /> <br /> <br />
-
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<div class="panel-title">Asset Categories List</div>
-					</div>
-					<div class="panel-body">
-						<table class="table table-striped table-bordered">
+				<table class="table table-bordered mt-3">
+					<thead>
+						<tr>
+							<th>Quiz Name</th>
+							<th>Difficulty Level</th>
+							<th>Quiz Type</th>
+							<th>Time Limit (Seconds)</th>
+							<th>Take Quiz</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="quiz" items="${quizzes}">
 							<tr>
-								<th>Asset Name</th>
-								<th>Asset Category Type</th>
-								<th>Action</th>
+								<td>${quiz.quizName}</td>
+								<td>${quiz.difficultyLevel}</td>
+								<td>${quiz.quizType}</td>
+								<td>${quiz.timeLimitSeconds}</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/quizzes/start/${quiz.quizId}" class="btn btn-primary">Start</a>
+								</td>
 							</tr>
-							<!-- loop over and print our asset categories -->
-							<c:forEach var="tempAssetCategory" items="${assetCategories}">
-
-								<!-- construct an "update" link with customer id -->
-								<c:url var="updateLink" value="/assetcategory/updateForm">
-									<c:param name="assetCategoryId"
-										value="${tempAssetCategory.assetCategoryId}" />
-								</c:url>
-
-								<!-- construct an "delete" link with customer id -->
-								<c:url var="deleteLink" value="/assetcategory/delete">
-									<c:param name="assetCategoryId"
-										value="${tempAssetCategory.assetCategoryId}" />
-								</c:url>
-
-								<tr>
-									<td>${tempAssetCategory.assetCategoryName}</td>
-									<td>${tempAssetCategory.assetCategoryType}</td>
-
-									<td>
-										<!-- display the update link --> <a href="${updateLink}">Update</a>
-										| <a href="${deleteLink}"
-										onclick="if (!(confirm('Are you sure you want to delete this asset category?'))) return false">Delete</a>
-									</td>
-
-								</tr>
-
-							</c:forEach>
-
-						</table>
-
-					</div>
-				</div>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
-
 		</div>
 	</div>
+
+	<!-- Include footer JSP -->
 	<jsp:include page="footer.jsp" />
 </body>
 </html>
-
-
-
-
-
-
-
-
-

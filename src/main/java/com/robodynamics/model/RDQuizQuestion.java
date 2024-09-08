@@ -1,119 +1,100 @@
 package com.robodynamics.model;
 
-import java.util.LinkedHashMap;
+import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "rd_quiz_questions")
 public class RDQuizQuestion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int quiz_question_id;
-    
-    @Column(name = "question")
-    private String question;
-    
-    @Column(name = "option1")
-    private String option1;
-    
-    @Column(name = "option2")
-    private String option2;
-    
-    @Column(name = "option3")
-    private String option3;
-    
-    @Column(name = "option4")
-    private String option4;
-    
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "question_id")
+    private int questionId;
+
+    @Column(name = "question_text", nullable = false)
+    private String questionText;
+
     @Column(name = "question_type", nullable = false)
-    private QuestionType questionType;
-    
-    
-    @Column(name = "correct_answer")
-    private String correctAnswer;
-    
+    private String questionType;  // E.g., "multiple_choice" or "fill_in_the_blank"
+
+    // Many-to-One relationship with RDQuiz
     @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    @JsonIgnore // This will prevent the quiz field from being serialized
+    @JoinColumn(name = "quiz_id", nullable = false)
     private RDQuiz quiz;
-    
-    public enum QuestionType {
-        MULTIPLE_CHOICE,
-        FILL_IN_THE_BLANKS,
-        TRUE_FALSE,
-        SHORT_ANSWER
-        // Add more types as needed
+
+    // One-to-Many relationship with RDQuizOption (each question can have multiple options)
+    @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<RDQuizOption> options;
+
+    // Constructors
+    public RDQuizQuestion() {}
+
+    public RDQuizQuestion(String questionText, String questionType, RDQuiz quiz) {
+        this.questionText = questionText;
+        this.questionType = questionType;
+        this.quiz = quiz;
+    }
+
+    // Getters and Setters
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public RDQuiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(RDQuiz quiz) {
+        this.quiz = quiz;
+    }
+
+    public List<RDQuizOption> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<RDQuizOption> options) {
+        this.options = options;
     }
     
-    
-    
-    public RDQuiz getQuiz() {
-		return quiz;
-	}
-	public void setQuiz(RDQuiz quiz) {
-		this.quiz = quiz;
-	}
-	public String getQuestion() {
-		return question;
-	}
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-	public String getOption1() {
-		return option1;
-	}
-	public void setOption1(String option1) {
-		this.option1 = option1;
-	}
-	public String getOption2() {
-		return option2;
-	}
-	public void setOption2(String option2) {
-		this.option2 = option2;
-	}
-	public String getOption3() {
-		return option3;
-	}
-	public void setOption3(String option3) {
-		this.option3 = option3;
-	}
-	public String getOption4() {
-		return option4;
-	}
-	public void setOption4(String option4) {
-		this.option4 = option4;
-	}
-	public String getCorrectAnswer() {
-		return correctAnswer;
-	}
-	public void setCorrectAnswer(String correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
-	public int getQuiz_question_id() {
-		return quiz_question_id;
-	}
-	public void setQuiz_question_id(int quiz_question_id) {
-		this.quiz_question_id = quiz_question_id;
-	}
+    // Method to find the correct option for the question
+    public RDQuizOption getCorrectOption() {
+        for (RDQuizOption option : options) {
+            if (option.isCorrect()) {
+                return option;  // Return the option where isCorrect is true
+            }
+        }
+        return null; // No correct option found (this shouldn't happen if data is correct)
+    }
 
-
-    
+    // Optional toString() for debugging
+    @Override
+    public String toString() {
+        return "RDQuizQuestion{" +
+                "questionId=" + questionId +
+                ", questionText='" + questionText + '\'' +
+                ", questionType='" + questionType + '\'' +
+                ", quiz=" + quiz +
+                '}';
+    }
 }

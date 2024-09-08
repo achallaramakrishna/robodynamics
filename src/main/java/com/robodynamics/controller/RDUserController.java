@@ -102,18 +102,13 @@ public class RDUserController {
 			model.addAttribute("rdUser", rdUser2);
 			session.setAttribute("rdUser", rdUser2);
 			
-			if(rdUser2.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
-
-				return "parentDashboard";
-
-			} else 	if(rdUser2.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
-
-				return "studentDashboard";
-
-			} else {
-				System.out.println("calling dashboard");
-				return "dashboard";
-			}
+			 if (rdUser2.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
+		            return "redirect:/parentDashboard";  // Redirect to parentDashboard
+		        } else if (rdUser2.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
+		            return "redirect:/studentDashboard";  // Redirect to studentDashboard
+		        } else {
+		            return "dashboard";
+		        }
 		}
 		
 		if (rdUser2 == null) {

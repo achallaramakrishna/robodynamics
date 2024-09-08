@@ -18,19 +18,19 @@
                     <div class="card-body">
                         <p class="card-text">${quiz.question}</p>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answer_${quiz.id}" value="${quiz.option1}">
+                            <input class="form-check-input" type="radio" name="answer_${quiz.questionId}" value="${quiz.option1}">
                             <label class="form-check-label">${quiz.option1}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answer_${quiz.id}" value="${quiz.option2}">
+                            <input class="form-check-input" type="radio" name="answer_${quiz.questionId}" value="${quiz.option2}">
                             <label class="form-check-label">${quiz.option2}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answer_${quiz.id}" value="${quiz.option3}">
+                            <input class="form-check-input" type="radio" name="answer_${quiz.questionId}" value="${quiz.option3}">
                             <label class="form-check-label">${quiz.option3}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answer_${quiz.id}" value="${quiz.option4}">
+                            <input class="form-check-input" type="radio" name="answer_${quiz.questionId}" value="${quiz.option4}">
                             <label class="form-check-label">${quiz.option4}</label>
                         </div>
                     </div>

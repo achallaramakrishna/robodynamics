@@ -49,7 +49,7 @@ public class RDCourseCategoryController {
         Model theModel) {
     	RDCourseCategory courseCategory = service.getRDCourseCategory(theId);
         theModel.addAttribute("courseCategory", courseCategory);
-        return "coursecoursecategory-form";
+        return "coursecategory-form";
     }
 
     @GetMapping("/delete")

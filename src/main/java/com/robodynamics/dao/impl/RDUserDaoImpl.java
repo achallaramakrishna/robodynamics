@@ -26,11 +26,17 @@ public class RDUserDaoImpl implements RDUserDao {
 	private SessionFactory factory;
 
 	@Override
-	public void registerRDUser(RDUser rdUser) {
+	public RDUser registerRDUser(RDUser rdUser) {
 		
 		System.out.println(rdUser);
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(rdUser);
+		
+		// rdUser will now have the ID populated (if auto-generated)
+	    System.out.println("Generated ID: " + rdUser.getUserID());
+	    
+	    // Return the persisted object (with the ID populated)
+	    return rdUser;
 	}
 
 	@Override
@@ -165,7 +171,32 @@ public class RDUserDaoImpl implements RDUserDao {
 		}
 
 	}
+
+	@Override
+	public RDUser findByUserName(String userName) {
+		Session session = factory.getCurrentSession();
+        Query<RDUser> query = session.createQuery("from RDUser where userName = :userName", RDUser.class);
+        query.setParameter("userName", userName);
+        return query.uniqueResult();
+	}
 	
+	@Override
+	public RDUser getChildByParentId(int parentId) {
+	    Session session = factory.getCurrentSession();
+	    
+	    // Assuming there's a field in the RDUser entity representing the parent-child relationship
+	    String hql = "FROM RDUser u WHERE u.dad.userID = :parentId";
+	    
+	    Query<RDUser> query = session.createQuery(hql, RDUser.class);
+	    query.setParameter("parentId", parentId);
+	    
+	    // Fetch the list of results
+	    List<RDUser> children = query.list();
+	    
+	    // Check if the list is not empty and return the first child, or null if empty
+	    return !children.isEmpty() ? children.get(0) : null;
+	}
+
 	
 	
 

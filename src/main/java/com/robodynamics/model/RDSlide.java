@@ -30,8 +30,12 @@ public class RDSlide {
 	@Column(name = "content")
     private String content;
 	
-	@Column(name = "image_url")
-    private String imageUrl; // New field for image URL
+	 @Column(name = "file_url")  // Changed from image_url to file_url
+	 private String fileUrl;  // Updated field name from imageUrl to fileUrl
+	 
+	 @Column(name = "file_type")  // New column for file type
+	 private String fileType;
+	 
     
     @ManyToOne
     @JoinColumn(name = "course_session_detail_id")
@@ -82,11 +86,22 @@ public class RDSlide {
         this.content = content;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public String getFileUrl() {
+		return fileUrl;
+	}
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+    
+	
+
 }

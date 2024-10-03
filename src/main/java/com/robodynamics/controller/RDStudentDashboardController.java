@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,33 +35,34 @@ public class RDStudentDashboardController {
 
 
     @GetMapping("/studentDashboard")
-    public String showStudentDashboard(Model model, HttpSession session) {
-    	 RDUser currentUser = (RDUser) session.getAttribute("rdUser");
-
-    	    if (currentUser != null && currentUser.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
-    	        // Fetch quiz results
-    	        List<RDUserQuizResults> quizResults = quizResultService.findByUserId(currentUser.getUserID());
-
-    	        // Calculate total points
-    	        int totalPoints = quizResults.stream().mapToInt(RDUserQuizResults::getScore).sum();
-
-    	        // Fetch badges earned by the student
-    	        List<RDUserBadge> userBadges = userBadgeService.findByUserId(currentUser.getUserID());
-
-    	        // Extract badge information from RDUserBadge
-    	        List<RDBadge> badges = userBadges.stream()
-    	                                         .map(RDUserBadge::getBadge)  // Assuming RDUserBadge has a getBadge() method
-    	                                         .collect(Collectors.toList());
-
-    	        // Add to model
-    	        model.addAttribute("quizResults", quizResults);
-    	        model.addAttribute("totalPoints", totalPoints);
-    	        model.addAttribute("badges", badges);
-    	        model.addAttribute("totalQuizzes", quizResults.size());
-
-    	        return "studentDashboard";
-    	    } else {
-    	        return "login";  // Redirect to login if not logged in or not a student
+	public ModelAndView studentDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model m, HttpSession session) {
+	
+    	  if (session.getAttribute("rdUser") != null) {
+    	        rdUser = (RDUser) session.getAttribute("rdUser");
     	    }
-    }
+    	    System.out.println("Going to student dashboard + " + rdUser);
+
+    	    // Fetch the total quizzes taken by the user
+    	    int totalQuizzes = quizResultService.countQuizzesTakenByUser(rdUser.getUserID());
+
+    	    // Fetch the total points scored by the user
+    	    int totalPoints = userPointsService.calculateTotalPointsByUser(rdUser.getUserID());
+
+    	    // Fetch the badges earned by the user
+    	    List<RDUserBadge> badges = userBadgeService.findByUserId(rdUser.getUserID());
+
+    	    // Fetch the quiz results for the user
+    	    List<RDUserQuizResults> quizResults = quizResultService.findByUserId(rdUser.getUserID());
+
+    	    // Add data to the model
+    	    m.addAttribute("totalQuizzes", totalQuizzes);
+    	    m.addAttribute("totalPoints", totalPoints);
+    	    m.addAttribute("badges", badges);
+    	    m.addAttribute("quizResults", quizResults);  // Pass the quiz results
+    	    m.addAttribute("user", rdUser);
+
+    	    ModelAndView modelAndView = new ModelAndView("studentDashboard");
+    	    return modelAndView;
+
+	}
 }

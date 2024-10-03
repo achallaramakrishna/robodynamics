@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "rd_course_session_details")
@@ -30,9 +32,6 @@ public class RDCourseSessionDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_session_detail_id")
 	private int courseSessionDetailId;
-	
-	@Column(name = "session_id")
-	private int sessionId;
 	
 	@ManyToOne
     @JoinColumn(name = "course_id")
@@ -62,6 +61,7 @@ public class RDCourseSessionDetail {
     private RDQuiz quiz;
 
 	 @OneToMany(mappedBy = "courseSessionDetail", cascade = CascadeType.ALL,orphanRemoval = true) 
+	 @JsonIgnore
 	 private List<RDSlide> slides;
 	
 	 
@@ -87,14 +87,6 @@ public class RDCourseSessionDetail {
 
 	public void setCourseSessionDetailId(int courseSessionDetailId) {
 		this.courseSessionDetailId = courseSessionDetailId;
-	}
-
-	public int getSessionId() {
-		return sessionId;
-	}
-
-	public void setSessionId(int sessionId) {
-		this.sessionId = sessionId;
 	}
 
 	public RDCourse getCourse() {
@@ -153,36 +145,17 @@ public class RDCourseSessionDetail {
 		this.file = file;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "RDCourseSessionDetail [courseSessionDetailId=" + courseSessionDetailId + ", sessionId=" + sessionId
-				+ ", course=" + course + ", courseSession=" + courseSession + ", topic=" + topic + ", type=" + type
-				+ ", file=" + file + ", creationDate=" + creationDate + ", version=" + version + "]";
+		final int maxLen = 10;
+		return "RDCourseSessionDetail [courseSessionDetailId=" + courseSessionDetailId + ", course=" + course
+				+ ", courseSession=" + courseSession + ", topic=" + topic + ", type=" + type + ", file=" + file
+				+ ", creationDate=" + creationDate + ", version=" + version + ", quiz=" + quiz + ", slides="
+				+ (slides != null ? slides.subList(0, Math.min(slides.size(), maxLen)) : null) + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(course, courseSession, courseSessionDetailId, creationDate, file, sessionId, topic, type,
-				version);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RDCourseSessionDetail other = (RDCourseSessionDetail) obj;
-		return Objects.equals(course, other.course) && Objects.equals(courseSession, other.courseSession)
-				&& courseSessionDetailId == other.courseSessionDetailId
-				&& Objects.equals(creationDate, other.creationDate) && Objects.equals(file, other.file)
-				&& sessionId == other.sessionId && Objects.equals(topic, other.topic)
-				&& Objects.equals(type, other.type) && version == other.version;
-	}
-
+	
+	
 	
 
 }

@@ -27,4 +27,10 @@ public interface RDQuizService {
 
 	int calculatePoints(List<RDQuizQuestion> quizQuestions, Map<Integer, Integer> selectedAnswers);
     
+    void addQuestionToQuiz(int quizId, int questionId);
+    
+    List<RDQuiz> getQuizzesFiltered(Integer courseId, String status, String difficultyLevel);
+
+    
+
 }

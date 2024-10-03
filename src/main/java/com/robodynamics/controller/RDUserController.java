@@ -68,11 +68,11 @@ public class RDUserController {
 
 		RDUser rdUser = new RDUser();
 
-		if (session.getAttribute("rdUser") != null) {
-			session.invalidate();
-			System.out.println("here");
-			m.addAttribute("success", "You have logout Successfully!!!");
-		}
+		/*
+		 * if (session.getAttribute("rdUser") != null) { session.invalidate();
+		 * System.out.println("here"); m.addAttribute("success",
+		 * "You have logout Successfully!!!"); }
+		 */
 		m.addAttribute("rdUser", rdUser);
 		return "login";
 	}
@@ -94,13 +94,22 @@ public class RDUserController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
 		
-		System.out.println("RD user - " + rdUser);
 		RDUser rdUser2 = service.loginRDUser(rdUser);
-		System.out.println("rdUser2" + rdUser2);
 		if (rdUser2 != null) {
-			System.out.println("hello");
 			model.addAttribute("rdUser", rdUser2);
 			session.setAttribute("rdUser", rdUser2);
+			System.out.println("user is in session");
+			
+			 // Check if there is a redirect URL saved from before login
+			
+	        String redirectUrl = (String) session.getAttribute("redirectUrl");
+			System.out.println("Redirect url - " + redirectUrl);
+
+	        if (redirectUrl != null) {
+	            session.removeAttribute("redirectUrl");  // Clear the redirect URL from session
+	            return "redirect:" + redirectUrl;  // Redirect back to the original URL (quiz)
+	        }
+	        
 			
 			 if (rdUser2.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
 		            return "redirect:/parentDashboard";  // Redirect to parentDashboard

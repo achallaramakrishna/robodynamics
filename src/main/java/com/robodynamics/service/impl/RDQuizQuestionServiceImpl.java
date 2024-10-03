@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.model.RDQuizQuestion;
+import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
 import com.robodynamics.service.RDQuizQuestionService;
 
 @Service
@@ -30,13 +31,28 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 
     @Override
     @Transactional
-    public List<RDQuizQuestion> findByQuizId(int quizId) {
-        return rdQuizQuestionDao.findByQuizId(quizId);
-    }
-
-    @Override
-    @Transactional
     public void delete(RDQuizQuestion question) {
         rdQuizQuestionDao.delete(question);
     }
+
+    @Override
+    public List<RDQuizQuestion> getRandomQuestionsBySessionDetailAndDifficultyLevels(int sessionDetailId, List<DifficultyLevel> difficultyLevels, int limit) {
+        return rdQuizQuestionDao.findRandomQuestionsBySessionDetailAndDifficultyLevels(sessionDetailId, difficultyLevels, limit);
+    }
+
+    @Override
+    public List<RDQuizQuestion> getRandomQuestionsBySessionAndDifficultyLevels(int sessionId, List<DifficultyLevel> difficultyLevels, int limit) {
+        return rdQuizQuestionDao.findRandomQuestionsBySessionAndDifficultyLevels(sessionId, difficultyLevels, limit);
+    }
+
+    @Override
+    public List<RDQuizQuestion> getRandomQuestionsByCourseAndDifficultyLevels(int courseId, List<DifficultyLevel> difficultyLevels, int limit) {
+        return rdQuizQuestionDao.findRandomQuestionsByCourseAndDifficultyLevels(courseId, difficultyLevels, limit);
+    }
+
+	@Override
+	public List<RDQuizQuestion> findQuestionsByIds(List<Integer> questionIds) {
+		// TODO Auto-generated method stub
+		return rdQuizQuestionDao.findQuestionsByIds(questionIds);
+	}
 }

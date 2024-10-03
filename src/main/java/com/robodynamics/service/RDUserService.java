@@ -2,11 +2,13 @@ package com.robodynamics.service;
 
 import java.util.List;
 
+import com.robodynamics.form.RDRegistrationForm.Child;
+import com.robodynamics.form.RDRegistrationForm.Parent;
 import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDUser;
 
 public interface RDUserService {
-	public void registerRDUser(RDUser rdUser);
+	public RDUser registerRDUser(RDUser rdUser);
 
 	public RDUser loginRDUser(RDUser rdUser);
 	
@@ -23,6 +25,12 @@ public interface RDUserService {
 	public void deleteRDUser(int id);
     
     public List < RDUser > getRDChilds(int parentUserId);
+
+	public void saveParentAndChild(Parent parent, Child child);
+	
+    public boolean isUsernameTaken(String userName);
+    
+	public RDUser getChildForParent(int userID);
 
 
 }

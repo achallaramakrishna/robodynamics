@@ -23,11 +23,14 @@ public class RDQuiz {
 
     @Column(name = "time_limit_seconds")
     private int timeLimitSeconds;
+    
+    @Column(name = "status")
+    private String status;
 
-    // One-to-Many relationship with RDQuizQuestion
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<RDQuizQuestion> quizQuestions;
-
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    private List<RDQuizQuestionMap> quizQuestionMappings;
+    
+    
     // Constructors
     public RDQuiz() {}
 
@@ -79,23 +82,35 @@ public class RDQuiz {
         this.timeLimitSeconds = timeLimitSeconds;
     }
 
-    public List<RDQuizQuestion> getQuizQuestions() {
-        return quizQuestions;
-    }
 
-    public void setQuizQuestions(List<RDQuizQuestion> quizQuestions) {
-        this.quizQuestions = quizQuestions;
-    }
 
-    // Optional toString() for debugging purposes
-    @Override
-    public String toString() {
-        return "RDQuiz{" +
-                "quizId=" + quizId +
-                ", quizName='" + quizName + '\'' +
-                ", difficultyLevel='" + difficultyLevel + '\'' +
-                ", quizType='" + quizType + '\'' +
-                ", timeLimitSeconds=" + timeLimitSeconds +
-                '}';
-    }
+    public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public List<RDQuizQuestionMap> getQuizQuestionMappings() {
+		return quizQuestionMappings;
+	}
+
+	public void setQuizQuestionMappings(List<RDQuizQuestionMap> quizQuestionMappings) {
+		this.quizQuestionMappings = quizQuestionMappings;
+	}
+
+	@Override
+	public String toString() {
+		final int maxLen = 10;
+		return "RDQuiz [quizId=" + quizId + ", quizName=" + quizName + ", difficultyLevel=" + difficultyLevel
+				+ ", quizType=" + quizType + ", timeLimitSeconds=" + timeLimitSeconds + ", status=" + status
+				+ ", quizQuestionMappings="
+				+ (quizQuestionMappings != null
+						? quizQuestionMappings.subList(0, Math.min(quizQuestionMappings.size(), maxLen))
+						: null)
+				+ "]";
+	}
+
+	
 }

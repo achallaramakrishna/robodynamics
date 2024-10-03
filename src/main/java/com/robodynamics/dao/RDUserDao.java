@@ -7,7 +7,7 @@ import com.robodynamics.model.RDUser;
 
 public interface RDUserDao {
 	
-	public void registerRDUser(RDUser rdUser);
+	public RDUser registerRDUser(RDUser rdUser);
 
 	public RDUser loginRDUser(RDUser rdUser);
 	
@@ -26,6 +26,11 @@ public interface RDUserDao {
     public void deleteRDUser(int id);
     
     public List < RDUser > getRDChilds(int parentUserId);
+    
+    public RDUser findByUserName(String userName);
+
+	public RDUser getChildByParentId(int parentId);
+
 
   
 

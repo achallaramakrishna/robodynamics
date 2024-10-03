@@ -26,4 +26,7 @@ public interface RDUserQuizResultDao {
  // Find quiz results for a specific user and quiz
     List<RDUserQuizResults> findByUserIdAndQuizId(int userId, int quizId);
 
+ // Method to count quizzes taken by a specific user
+    public int countQuizzesTakenByUser(int userId);
+    
 }

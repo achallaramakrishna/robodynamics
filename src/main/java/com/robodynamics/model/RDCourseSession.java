@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "rd_course_sessions")
@@ -38,6 +40,7 @@ public class RDCourseSession {
 	
 	@ManyToOne
     @JoinColumn(name = "course_id")
+	@JsonIgnore  // Prevent circular reference during serialization
     private RDCourse course;
 
 	@Column(name = "session_title")
@@ -57,9 +60,8 @@ public class RDCourseSession {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="course_session_id", nullable = true)
+	@JsonIgnore
 	private List<RDCourseSessionDetail> courseSessionDetails = new ArrayList<RDCourseSessionDetail>();
-	
-	
 	
 	public List<RDCourseSessionDetail> getCourseSessionDetails() {
 		return courseSessionDetails;

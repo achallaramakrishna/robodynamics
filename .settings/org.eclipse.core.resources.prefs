@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/courseDetails.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/flashcard-list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/showDashboard.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/slideShow.jsp=UTF-8

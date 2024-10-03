@@ -27,4 +27,7 @@ public interface RDUserQuizResultService {
     List<RDUserQuizResults> findByUserIdAndQuizId(int userId, int quizId);
     
     RDUserQuizResults findLatestByUserIdAndQuizId(int userId, int quizId);
+
+ // Method to count quizzes taken by a specific user
+    public int countQuizzesTakenByUser(int userId);
 }

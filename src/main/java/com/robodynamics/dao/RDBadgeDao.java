@@ -17,4 +17,6 @@ public interface RDBadgeDao {
 
     // Delete a badge
     void delete(RDBadge badge);
+    
+    public List<RDBadge> findBadgesByUserId(int userId);
 }

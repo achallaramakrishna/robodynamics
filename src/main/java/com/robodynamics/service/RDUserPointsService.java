@@ -25,4 +25,7 @@ public interface RDUserPointsService {
     // Find points by user ID
     int findPointsByUserId(int userId);
     
+    public int calculateTotalPointsByUser(int userId);
+
+    
 }

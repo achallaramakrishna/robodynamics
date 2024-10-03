@@ -48,5 +48,18 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	public List<RDCourseOffering> getRDCourseOfferingsList(int userId) {
 		return rdCourseOfferingDao.getRDCourseOfferingsList(userId);
 	}
+
+	@Override
+	@Transactional
+	public RDCourseOffering getOnlineCourseOffering(int courseId) {
+		
+		return rdCourseOfferingDao.getOnlineCourseOffering(courseId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId) {
+		return rdCourseOfferingDao.getRDCourseOfferingsListByCourse(courseId);
+	}
 	
 }

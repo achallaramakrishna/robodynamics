@@ -95,19 +95,32 @@ public class RDStudentEnrollmentController {
 	@GetMapping("/listbystudent")
 	public String listRDStudentEnrollmentsByStudent(Model theModel, HttpSession session) {
 
-		RDUser student = null;
-		if (session.getAttribute("rdUser") != null) {
-			student = (RDUser) session.getAttribute("rdUser");
-		}
+	    // Retrieve RDUser from session
+	    RDUser student = (RDUser) session.getAttribute("rdUser");
 
-		System.out.println("user - " + student);
-		List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService
-				.getStudentEnrollmentByStudent(student.getUserID());
-		System.out.println(studentEnrollments);
-		
-		theModel.addAttribute("studentEnrollments", studentEnrollments);
-		return "listStudentEnrollments";
+	    // Check if student is null, meaning the user is not logged in or session expired
+	    if (student == null) {
+	        // Redirect to the login page or show an error message
+	        return "redirect:/login";
+	    }
+
+	    // Log the student information for debugging
+	    System.out.println("Logged-in user - " + student);
+
+	    // Fetch the enrollments for the logged-in student
+	    List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService
+	            .getStudentEnrollmentByStudent(student.getUserID());
+
+	    // Log the enrollments for debugging
+	    System.out.println("Student Enrollments: " + studentEnrollments);
+
+	    // Add the enrollment data to the model to display in the view
+	    theModel.addAttribute("studentEnrollments", studentEnrollments);
+
+	    // Return the view name
+	    return "listStudentEnrollments";
 	}
+
 
 	@GetMapping("/showCalendar")
 	public String showCalendar(Model theModel) {
@@ -128,21 +141,20 @@ public class RDStudentEnrollmentController {
 	}
 
 	@GetMapping("/showForm")
-	public ModelAndView showEnrollmentForm(Model theModel, HttpSession session) {
+	public ModelAndView showForm(Model theModel, HttpSession session,
+			@RequestParam("courseId") Integer courseId) {
 
 		RDStudentEnrollmentForm studentEnrollmentForm = new RDStudentEnrollmentForm();
 
-		List<RDCourseOffering> courseOfferings = courseOfferingService.getRDCourseOfferings();
-
+		List<RDCourseOffering> courseOfferings = 
+				courseOfferingService.getRDCourseOfferingsListByCourse(courseId);
 		System.out.println(courseOfferings);
 
-		RDUser parent = null;
-		if (session.getAttribute("rdUser") != null) {
-			parent = (RDUser) session.getAttribute("rdUser");
-		}
+        RDUser currentUser = (RDUser) session.getAttribute("rdUser");
 
-		System.out.println("user - " + parent);
-		List<RDUser> childs = userService.getRDChilds(parent.getUserID());
+
+		System.out.println("user - " + currentUser);
+		List<RDUser> childs = userService.getRDChilds(currentUser.getUserID());
 		System.out.println(childs);
 		theModel.addAttribute("childs", childs);
 
@@ -161,15 +173,11 @@ public class RDStudentEnrollmentController {
 		RDStudentEnrollmentForm studentEnrollmentForm = new RDStudentEnrollmentForm();
 		RDCourseOffering courseOffering = courseOfferingService.getRDCourseOffering(courseOfferingId);
 		System.out.println(courseOffering);
-
-		RDUser parent = null;
-		if (session.getAttribute("rdUser") != null) {
-			parent = (RDUser) session.getAttribute("rdUser");
-		}
-
-		System.out.println("user - " + parent);
 		
-		List<RDUser> childs = userService.getRDChilds(parent.getUserID());
+        RDUser currentUser = (RDUser) session.getAttribute("rdUser");
+        System.out.println(currentUser);
+
+		List<RDUser> childs = userService.getRDChilds(currentUser.getUserID());
 		System.out.println(childs);
 		theModel.addAttribute("childs", childs);
 

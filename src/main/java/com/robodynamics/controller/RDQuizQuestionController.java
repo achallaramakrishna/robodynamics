@@ -17,13 +17,6 @@ public class RDQuizQuestionController {
     @Autowired
     private RDQuizQuestionService quizQuestionService;
 
-    @GetMapping("/quiz/{quizId}")
-    public String listQuizQuestions(@PathVariable int quizId, Model model) {
-        List<RDQuizQuestion> quizQuestions = quizQuestionService.findByQuizId(quizId);
-        model.addAttribute("quizQuestions", quizQuestions);
-        return "quizquestions/list";
-    }
-
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("quizQuestion", new RDQuizQuestion());

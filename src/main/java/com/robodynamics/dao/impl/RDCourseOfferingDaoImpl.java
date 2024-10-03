@@ -35,10 +35,10 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
 	@Autowired
 	private SessionFactory factory;
-	
+
 	@Override
 	public void saveRDCourseOffering(RDCourseOffering rdCourseOffering) {
-		
+
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(rdCourseOffering);
 
@@ -69,7 +69,7 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 		session.delete(rdCourseOffering);
 
 	}
-	
+
 	@Override
 	public List<RDCourseOffering> getRDCourseOfferingsList(int userId) {
 		Session session = factory.getCurrentSession();
@@ -78,12 +78,52 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 			Query<RDCourseOffering> query = session.createQuery("from RDCourseOffering where user.userID =:userId",
 					RDCourseOffering.class);
 			query.setParameter("userId", userId);
-			List<RDCourseOffering> rdCourseOfferingsList  = query.getResultList();
+			List<RDCourseOffering> rdCourseOfferingsList = query.getResultList();
 			return rdCourseOfferingsList;
 		} catch (NoResultException e) {
 			// TODO: handle exception
 			return null;
 		}
+
 	}
+
+	@Override
+	public RDCourseOffering getOnlineCourseOffering(int courseId) {
+	    // Get the current Hibernate session
+	    Session session = factory.getCurrentSession();
+	    System.out.println("Course ID: " + courseId);
+
+	    // HQL query to fetch course offerings based on course type
+	    String hql = "FROM RDCourseOffering co WHERE co.course.courseId = :courseId";
+	    
+	    // Execute query
+	    Query<RDCourseOffering> query = session.createQuery(hql, RDCourseOffering.class);
+	    query.setParameter("courseId", courseId);
+
+	    // Get the result list
+	    List<RDCourseOffering> results = query.getResultList();
+
+	    // If no result found, return null
+	    if (results.isEmpty()) {
+	        return null;
+	    }
+
+	    // Return the first result (assuming one match)
+	    return results.get(0);
+	}
+
+	@Override
+	public List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId) {
+		// Get the current Hibernate session
+        Session session = factory.getCurrentSession();
+
+        // Query to fetch the course offerings based on courseId
+        Query<RDCourseOffering> query = session.createQuery("FROM RDCourseOffering WHERE course.courseId = :courseId", RDCourseOffering.class);
+        query.setParameter("courseId", courseId);
+
+        // Execute the query and return the result list
+        return query.getResultList();
+	}
+
 
 }

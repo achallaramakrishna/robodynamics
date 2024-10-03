@@ -3,6 +3,9 @@ package com.robodynamics.dao.impl;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -93,6 +96,19 @@ public class RDUserQuizResultDaoImpl implements RDUserQuizResultDao {
         );
         query.setParameter("quizId", quizId);
         return query.getResultList();  // Return all quiz results for the given quizId
+
+	}
+
+	@Override
+	public int countQuizzesTakenByUser(int userId) {
+	       CriteriaBuilder cb = getSession().getCriteriaBuilder();
+	        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+	        Root<RDUserQuizResults> root = cq.from(RDUserQuizResults.class);
+
+	        cq.select(cb.count(root)).where(cb.equal(root.get("user").get("userID"), userId));
+	        Query<Long> query = getSession().createQuery(cq);
+
+	        return query.getSingleResult().intValue();
 
 	}
 }

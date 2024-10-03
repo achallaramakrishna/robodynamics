@@ -18,7 +18,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2VinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,15 +29,17 @@
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%-- <%@ include file="/WEB-INF/views/leftnav.jsp"%>
- --%>
-			<div class="col-md-offset-1 col-md-10">
+<%-- 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
+ --%>			<div class="col-md-offset-1 col-md-10">
 				<br>
-				<!-- Back button to go back to the dashboard -->
+
+				<!-- Back to Dashboard Button -->
 				<button class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
 					Back to Dashboard
 				</button>
-				<br><br>				<h2>Manage Course Categories</h2>
+				<br><br>
+
+				<h2>Manage Course Categories</h2>
 				<hr />
 
 				<input type="button" value="Add Course Categories"
@@ -58,14 +60,14 @@
 							<!-- loop over and print our asset categories -->
 							<c:forEach var="tempCourseCategory" items="${courseCategories}">
 
-								<!-- construct an "update" link with customer id -->
-								<c:url var="updateLink" value="/courseCategory/updateForm">
+								<!-- construct an "update" link with courseCategoryId -->
+								<c:url var="updateLink" value="/coursecategory/updateForm">
 									<c:param name="courseCategoryId"
 										value="${tempCourseCategory.courseCategoryId}" />
 								</c:url>
 
-								<!-- construct an "delete" link with customer id -->
-								<c:url var="deleteLink" value="/courseCategory/delete">
+								<!-- construct a "delete" link with courseCategoryId -->
+								<c:url var="deleteLink" value="/coursecategory/delete">
 									<c:param name="courseCategoryId"
 										value="${tempCourseCategory.courseCategoryId}" />
 								</c:url>
@@ -93,12 +95,3 @@
 		<jsp:include page="footer.jsp" />
 </body>
 </html>
-
-
-
-
-
-
-
-
-

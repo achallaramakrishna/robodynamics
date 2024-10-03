@@ -18,4 +18,8 @@ public interface RDQuizDao {
 
     // Delete a quiz
     void delete(RDQuiz quiz);
+    
+    List<RDQuiz> findQuizzesByFilters(Integer courseId, String status, String difficultyLevel);
+
+
 }

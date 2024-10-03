@@ -1,16 +1,27 @@
 package com.robodynamics.service;
 
+import com.robodynamics.model.RDCourseSession;
 import java.util.List;
 
-import com.robodynamics.model.RDCourseSession;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface RDCourseSessionService {
-
-	public void saveRDCourseSession(RDCourseSession rdCourseSession);
-
-	public RDCourseSession getRDCourseSession(int courseSessionId);
-	
-	public List < RDCourseSession > getRDCourseSessions(int courseId);
-	
-    public void deleteRDCourseSession(int id);
+    
+    // Save or update a course session
+    void saveCourseSession(RDCourseSession courseSession);
+    
+    // Retrieve a specific course session by its ID
+    RDCourseSession getCourseSession(int courseSessionId);
+    
+    // Retrieve all course sessions
+    List<RDCourseSession> getAllCourseSessions();
+    
+    // Retrieve course sessions for a specific course by courseId
+    List<RDCourseSession> getCourseSessionsByCourseId(int courseId);
+    
+    // Delete a course session by its ID
+    void deleteCourseSession(int courseSessionId);
+    
+    // Method to process CSV file
+    public void processCsv(MultipartFile file, int selectedCourseId) throws Exception;
 }

@@ -34,7 +34,7 @@
 		<div class="row flex-nowrap">
 			<div class="col-md-offset-1 col-md-10">
 				<!-- Back button to go back to the dashboard -->
-				<button class="btn btn-secondary mt-3" onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
+				<button class="btn btn-secondary mt-3" onclick="window.location.href='${pageContext.request.contextPath}/studentDashboard';">
 					Back to Dashboard
 				</button>
 				<br><br>

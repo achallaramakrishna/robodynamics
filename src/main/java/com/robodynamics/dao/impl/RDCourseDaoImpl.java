@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import com.robodynamics.dao.RDCourseDao;
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDCourseSession;
 
 
 @Repository
@@ -53,6 +54,15 @@ public class RDCourseDaoImpl implements RDCourseDao {
         RDCourse course = session.byId(RDCourse.class).load(id);
         session.delete(course);
     }
+
+	@Override
+	public List <RDCourseSession> findSessionsByCourseId(int courseId) {
+		 // Using Hibernate Criteria API or HQL to fetch sessions by courseId
+        String hql = "FROM RDCourseSession WHERE course.courseId = :courseId";
+        Query query = factory.getCurrentSession().createQuery(hql);
+        query.setParameter("courseId", courseId);
+        return query.getResultList();
+	}
 
 
 

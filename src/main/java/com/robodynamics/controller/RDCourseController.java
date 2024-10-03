@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,7 +56,25 @@ public class RDCourseController {
 	
 	@Autowired
 	private RDStudentEnrollmentService enrollmentService;
+	
+	@GetMapping("/{courseId}/sessions")
+    @ResponseBody
+    public List<RDCourseSession> getSessionsByCourse(@PathVariable int courseId) {
+        return service.findSessionsByCourseId(courseId);
+    }
+	
 
+	@GetMapping("/{courseId}")
+    public String viewCourseDetails(@PathVariable("courseId") int courseId, Model model) {
+        // Fetch course details by course ID from the service
+        RDCourse course = service.getRDCourse(courseId);
+        System.out.println(course);
+        // Add course details to the model
+        model.addAttribute("course", course);
+        
+        return "courseDetails";  // This is the JSP page name
+    }
+	
 	@GetMapping("/list")
 	    public String listCourses(Model theModel) {
 	        List < RDCourse > courses = service.getRDCourses();
@@ -78,11 +98,12 @@ public class RDCourseController {
 			@RequestParam("courseId") int theId,
 			@RequestParam("enrollmentId") int enrollmentId) {
 		
+		RDCourse course = service.getRDCourse(theId);
 		System.out.println("Enrollment id = " + enrollmentId);
 		
 		RDStudentEnrollment studentEnrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
 		//RDCourse course = service.getRDCourse(theId);
-		List <RDCourseSession> courseSessions = courseSessionservice.getRDCourseSessions(theId);
+		List <RDCourseSession> courseSessions = courseSessionservice.getCourseSessionsByCourseId(theId);
 	//	List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails(theId);
 		
 		System.out.println("Size - " + courseSessions.size());
@@ -96,8 +117,11 @@ public class RDCourseController {
         theModel.addAttribute("studentEnrollment",studentEnrollment);
        
        // theModel.addAttribute("courseSessionDetails", courseSessionDetails);
-		ModelAndView modelAndView = new ModelAndView("showDashboard");
-		return modelAndView;
+        ModelAndView modelAndView = null;
+
+        modelAndView = new ModelAndView("showDashboard");
+		
+        return modelAndView;
 	}
 	
 	@PostMapping("/saveCourse")
@@ -131,12 +155,6 @@ public class RDCourseController {
 				e.printStackTrace();
 			}
         	System.out.println(fileName);
-        	RDCourseResource courseResource = new RDCourseResource();
-        	courseResource.setCourseResourceFileName(fileName);
-        	courseResource.setCourseResourceType("image");
-        	courseResource.setCourse(theCourse);
-        	
-        	theCourse.getCourseResources().add(courseResource);
         }
         
 		service.saveRDCourse(theCourse);

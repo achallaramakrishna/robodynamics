@@ -5,6 +5,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,15 @@ public class RDBadgeDaoImpl implements RDBadgeDao {
         Session session = factory.getCurrentSession();
         session.delete(badge);
     }
+
+	@Override
+	public List<RDBadge> findBadgesByUserId(int userId) {
+		CriteriaBuilder cb = factory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<RDBadge> cq = cb.createQuery(RDBadge.class);
+        Root<RDBadge> root = cq.from(RDBadge.class);
+        cq.select(root).where(cb.equal(root.join("users").get("userID"), userId));
+        Query<RDBadge> query = factory.getCurrentSession().createQuery(cq);
+
+        return query.getResultList();
+	}
 }

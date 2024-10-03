@@ -17,5 +17,10 @@ public interface RDCourseOfferingService {
     public void deleteRDCourseOffering(int id);
     
 	public List<RDCourseOffering> getRDCourseOfferingsList(int userId);
+	
+	public RDCourseOffering getOnlineCourseOffering(int courseId);
+	
+	 List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
+
 
 }

@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDQuizDao;
+import com.robodynamics.dao.RDQuizQuestionMapDao;
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDQuizOption;
 import com.robodynamics.model.RDQuizQuestion;
+import com.robodynamics.service.RDQuizQuestionMapService;
 import com.robodynamics.service.RDQuizQuestionService;
 import com.robodynamics.service.RDQuizService;
 
@@ -22,7 +24,13 @@ public class RDQuizServiceImpl implements RDQuizService {
     private RDQuizDao rdQuizDao;
     
     @Autowired
+    private RDQuizQuestionMapService quizQuestionMapService;
+    
+    @Autowired
     private RDQuizQuestionService quizQuestionService;
+    
+    @Autowired
+    private RDQuizQuestionMapDao quizQuestionMapDao;
 
     @Override
     @Transactional
@@ -66,17 +74,27 @@ public class RDQuizServiceImpl implements RDQuizService {
 
     @Override
     public boolean evaluateQuiz(int quizId, Map<Integer, Integer> selectedAnswers) {
+        // Fetch the quiz based on quizId
         RDQuiz quiz = findById(quizId);
         if (quiz == null) {
             return false; // Quiz not found
         }
 
-        List<RDQuizQuestion> quizQuestions = quiz.getQuizQuestions();
+        // Fetch the question IDs mapped to this quiz using RDQuizQuestionMap
+        List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
+
+        // Fetch the actual questions using the question IDs
+        List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
+
+        if (quizQuestions.isEmpty()) {
+            return false; // No questions found for the quiz
+        }
+
         int correctAnswers = 0;
 
         // Loop through the questions and compare the selected answers with correct ones
         for (RDQuizQuestion question : quizQuestions) {
-            int correctOptionId = question.getCorrectOption().getOptionId(); // Assuming you have a method to get the correct option
+            int correctOptionId = question.getCorrectOption().getOptionId();  // Assuming you have a method to get the correct option
             int selectedOptionId = selectedAnswers.getOrDefault(question.getQuestionId(), -1);
 
             // Increment correctAnswers count if the user selected the correct option
@@ -85,10 +103,11 @@ public class RDQuizServiceImpl implements RDQuizService {
             }
         }
 
-        // Define passing criteria (70% correct answers to pass)
+        // Define passing criteria (e.g., 70% correct answers to pass)
         double passingScore = 0.7;
         double score = (double) correctAnswers / quizQuestions.size();
 
+        // Return whether the user passed the quiz based on the score
         return score >= passingScore;
     }
 
@@ -110,5 +129,16 @@ public class RDQuizServiceImpl implements RDQuizService {
         return totalPoints;
     }
 
-	
+    @Override
+    @Transactional
+    public void addQuestionToQuiz(int quizId, int questionId) {
+        quizQuestionMapDao.addQuestionToQuiz(quizId, questionId);
+    }	
+    
+    @Override
+    @Transactional
+    public List<RDQuiz> getQuizzesFiltered(Integer courseId, String status, String difficultyLevel) {
+        return rdQuizDao.findQuizzesByFilters(courseId, status, difficultyLevel);
+    }
+    
 }

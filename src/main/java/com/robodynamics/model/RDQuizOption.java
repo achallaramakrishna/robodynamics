@@ -17,6 +17,9 @@ public class RDQuizOption {
     @Column(name = "is_correct", nullable = false)
     private boolean isCorrect;
 
+    @Column(name = "selected", nullable = false)
+    private boolean selected;  // Add this property
+    
     // Many-to-One relationship with RDQuizQuestion
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
@@ -64,14 +67,19 @@ public class RDQuizOption {
         this.quizQuestion = quizQuestion;
     }
 
-    // Optional toString() method for debugging
-    @Override
-    public String toString() {
-        return "RDQuizOption{" +
-                "optionId=" + optionId +
-                ", optionText='" + optionText + '\'' +
-                ", isCorrect=" + isCorrect +
-                ", quizQuestion=" + quizQuestion +
-                '}';
-    }
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	@Override
+	public String toString() {
+		return "RDQuizOption [optionId=" + optionId + ", optionText=" + optionText + ", isCorrect=" + isCorrect
+				+ ", selected=" + selected + ", quizQuestion=" + quizQuestion + "]";
+	}
+	
+    
 }

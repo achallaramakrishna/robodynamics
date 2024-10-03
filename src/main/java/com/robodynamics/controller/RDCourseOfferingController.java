@@ -140,7 +140,7 @@ public class RDCourseOfferingController {
     	theCourseOffering.setInstructor(user);
     	theCourseOffering.setTitle(course.getCourseName());
     	theCourseOffering.setCourseOfferingName(courseOfferingForm.getCourseOfferingName());
-    	
+
 		courseOfferingService.saveRDCourseOffering(theCourseOffering);
 
 

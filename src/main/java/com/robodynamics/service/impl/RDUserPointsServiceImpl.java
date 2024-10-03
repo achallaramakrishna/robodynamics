@@ -33,15 +33,16 @@ public class RDUserPointsServiceImpl implements RDUserPointsService {
             // If user has no points record, create a new one
             userPoints = new RDUserPoints();
             userPoints.setUser(user);
-            userPoints.setTotalPoints(points); // Set the initial points
+            userPoints.setTotalPoints(points);  // Set the initial points
             rdUserPointsDao.saveOrUpdate(userPoints);
         } else {
-            // If user already has points, update their total points
+            // If user already has points, add the new points to the current total
             int currentPoints = userPoints.getTotalPoints();
-            userPoints.setTotalPoints(points);
+            userPoints.setTotalPoints(currentPoints + points);  // Add new points to the current points
             rdUserPointsDao.saveOrUpdate(userPoints);  // Update the points in the database
         }
     }
+
 
     @Override
     @Transactional
@@ -68,4 +69,11 @@ public class RDUserPointsServiceImpl implements RDUserPointsService {
     public void delete(RDUserPoints userPoints) {
         rdUserPointsDao.delete(userPoints);
     }
+    
+    @Override
+    @Transactional
+    public int calculateTotalPointsByUser(int userId) {
+    	return rdUserPointsDao.calculateTotalPointsByUser(userId);
+    }
+
 }

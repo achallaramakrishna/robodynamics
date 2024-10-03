@@ -17,6 +17,12 @@ public interface RDCourseOfferingDao {
     public void deleteRDCourseOffering(int id);
     
 	public List<RDCourseOffering> getRDCourseOfferingsList(int userId);
+	
+    RDCourseOffering getOnlineCourseOffering(int courseId);
+    
+	List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
+
+
 
 
 }

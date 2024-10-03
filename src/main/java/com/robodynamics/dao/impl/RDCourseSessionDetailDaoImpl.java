@@ -69,4 +69,13 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 
 	}
 
+	@Override
+	public List<RDCourseSessionDetail> findSessionDetailsBySessionId(int sessionId) {
+		Session session = factory.getCurrentSession();
+        Query<RDCourseSessionDetail> query = session.createQuery("FROM RDCourseSessionDetail WHERE courseSession.courseSessionId = :sessionId", RDCourseSessionDetail.class);
+        query.setParameter("sessionId", sessionId);
+        return query.getResultList();
+
+	}
+
 }

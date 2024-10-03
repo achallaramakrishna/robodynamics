@@ -14,4 +14,6 @@ public interface RDCourseSessionDetailDao {
 	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int courseId);
 	
     public void deleteRDCourseSessionDetail(int id);
+    
+    public List<RDCourseSessionDetail> findSessionDetailsBySessionId(int sessionId);
 }

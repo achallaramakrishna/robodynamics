@@ -49,8 +49,12 @@
 			value="classpath:app-config.properties" />
 	</bean>
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+<bean id="multipartResolver"
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="defaultEncoding" value="UTF-8" />
+    <property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+</bean>
+
 
 
 
@@ -72,9 +76,9 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" /> <!-- Apply to all requests -->
-			<mvc:exclude-mapping path="/resources/**"/>
-			 <mvc:exclude-mapping path="/css/**"/>
-       		 <mvc:exclude-mapping path="/images/**"/>
+			<mvc:exclude-mapping path="/resources/**" />
+			<mvc:exclude-mapping path="/css/**" />
+			<mvc:exclude-mapping path="/images/**" />
 			<bean class="com.robodynamics.util.RDVisitorInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -129,8 +133,8 @@
 				<value>com.robodynamics.model.RDQuizQuestion</value>
 				<value>com.robodynamics.model.RDQuizOption</value>
 				<value>com.robodynamics.model.RDQuizAnswer</value>
-				
-				
+
+
 				<value>com.robodynamics.model.RDQuizResult</value>
 				<value>com.robodynamics.model.RDClassSession</value>
 				<value>com.robodynamics.model.RDClassAttendance</value>
@@ -149,7 +153,7 @@
 				<value>com.robodynamics.model.RDFlashCardSet</value>
 				<value>com.robodynamics.model.RDFlashCard</value>
 				<value>com.robodynamics.model.RDFlashCardAttempt</value>
-				
+
 				<value>com.robodynamics.model.RDUserPoints</value>
 				<value>com.robodynamics.model.RDUserQuest</value>
 				<value>com.robodynamics.model.RDQuest</value>
@@ -157,8 +161,12 @@
 				<value>com.robodynamics.model.RDUserBadge</value>
 				<value>com.robodynamics.model.RDBadge</value>
 				<value>com.robodynamics.model.RDUserQuizResults</value>
-				
-				
+				<value>com.robodynamics.model.RDAssignment</value>
+				<value>com.robodynamics.model.RDQuizQuestionMap</value>
+
+
+
+
 			</list>
 		</property>
 

@@ -7,14 +7,17 @@ import com.robodynamics.model.RDUserPoints;
 public interface RDUserPointsDao {
 
     // Create or update user points
-    void saveOrUpdate(RDUserPoints userPoints);
+    public void saveOrUpdate(RDUserPoints userPoints);
 
     // Get total points for a specific user
-    RDUserPoints findByUserId(int userId);
+    public RDUserPoints findByUserId(int userId);
 
     // Get all users with their points (useful for leaderboards)
-    List<RDUserPoints> findAll();
+    public List<RDUserPoints> findAll();
 
     // Delete user points (if necessary)
-    void delete(RDUserPoints userPoints);
+    public void delete(RDUserPoints userPoints);
+    
+    public int calculateTotalPointsByUser(int userId);
+
 }

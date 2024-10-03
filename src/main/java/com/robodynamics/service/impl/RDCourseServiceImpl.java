@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDCourseDao;
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.service.RDCourseService;
 
 @Service
@@ -40,6 +41,12 @@ public class RDCourseServiceImpl implements RDCourseService {
 	public void deleteRDCourse(int id) {
 		rdCourseDao.deleteRDCourse(id);
 		
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseSession> findSessionsByCourseId(int courseId) {
+		return rdCourseDao.findSessionsByCourseId(courseId);
 	}
 
 }

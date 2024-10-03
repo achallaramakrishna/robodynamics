@@ -50,4 +50,10 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 		rdCourseSessionDetailDao.deleteRDCourseSessionDetail(id);
 	}
 
+	@Override
+	public List<RDCourseSessionDetail> findSessionDetailsBySessionId(int sessionId) {
+        return rdCourseSessionDetailDao.findSessionDetailsBySessionId(sessionId);
+
+	}
+
 }

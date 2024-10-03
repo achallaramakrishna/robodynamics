@@ -153,14 +153,14 @@
                     <button type="submit" class="btn">Log in now</button>
                 </div>
                 <div class="form-options">
-                    <a href="#">Create new account</a>
+                    <a href="${pageContext.request.contextPath}/parent/register">Create new account</a>
                     <a href="#">Forgot password</a>
                 </div>
-                <div class="social-login">
+<!--                 <div class="social-login">
                     <button class="google">Google</button>
                     <button class="facebook">Facebook</button>
                     <button class="twitter">Twitter</button>
-                </div>
+                </div> -->
             </f:form>
         </div>
     </div>

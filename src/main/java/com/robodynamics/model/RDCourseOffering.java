@@ -1,13 +1,7 @@
 package com.robodynamics.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,11 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,143 +21,124 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("event")
 public class RDCourseOffering {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "course_offering_id")
+   
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_offering_id")
     @JsonProperty("id")
-	private int courseOfferingId;
-	
-	@Column(name = "start_date")
-	@JsonProperty("start")
+    private int courseOfferingId;
+
+    @Column(name = "start_date")
+    @JsonProperty("start")
     @JsonFormat(pattern="yyyy-MM-dd")
-	private Date startDate;
-	
-	public String getTitle() {
-		return title;
-	}
+    private Date startDate;
 
+    @Column(name = "end_date")
+    @JsonProperty("end")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date endDate;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	@Column(name = "course_offering_name")
+    @Column(name = "course_offering_name")
     @JsonProperty("courseOfferingName")
-	private String courseOfferingName;
+    private String courseOfferingName;
 
-	@Column(name = "title")
+    @Column(name = "title")
     @JsonProperty("title")
-	private String title;
-	
-	@Column(name = "end_date")
-	@JsonProperty("end")
-    @JsonFormat(pattern="yyyy-MM-dd")
-	private Date endDate;
-	
-	@Column(name = "status")
-	@JsonIgnore
-	private String status;
-	
-	@ManyToOne
+    private String title;
+
+    @Column(name = "status")
+    @JsonIgnore
+    private String status;
+
+    @ManyToOne
     @JoinColumn(name = "course_id")
-	@JsonIgnore
+    @JsonIgnore
     private RDCourse course;
-	
-	
-	@ManyToOne
+
+    @ManyToOne
     @JoinColumn(name = "instructor_id")
-	@JsonIgnore
+    @JsonIgnore
     private RDUser instructor;
-	
-	
-	public RDCourseOffering() {
-		
-	}
 
+    
+    public RDCourseOffering() {
+    }
 
-	public int getCourseOfferingId() {
-		return courseOfferingId;
-	}
+    // Getters and Setters
 
+    public int getCourseOfferingId() {
+        return courseOfferingId;
+    }
 
-	public void setCourseOfferingId(int courseOfferingId) {
-		this.courseOfferingId = courseOfferingId;
-	}
+    public void setCourseOfferingId(int courseOfferingId) {
+        this.courseOfferingId = courseOfferingId;
+    }
 
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
+    public Date getEndDate() {
+        return endDate;
+    }
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
+    public String getCourseOfferingName() {
+        return courseOfferingName;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public void setCourseOfferingName(String courseOfferingName) {
+        this.courseOfferingName = courseOfferingName;
+    }
 
+    public String getTitle() {
+        return title;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getStatus() {
+        return status;
+    }
 
-	public RDCourse getCourse() {
-		return course;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
+    public RDCourse getCourse() {
+        return course;
+    }
 
-	public void setCourse(RDCourse course) {
-		this.course = course;
-	}
+    public void setCourse(RDCourse course) {
+        this.course = course;
+    }
 
+    public RDUser getInstructor() {
+        return instructor;
+    }
 
-	public RDUser getInstructor() {
-		return instructor;
-	}
-
-
-	public void setInstructor(RDUser instructor) {
-		this.instructor = instructor;
-	}
-	
-	
-
-
-	public String getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-	public String getCourseOfferingName() {
-		return courseOfferingName;
-	}
-
-
-	public void setCourseOfferingName(String courseOfferingName) {
-		this.courseOfferingName = courseOfferingName;
-	}
-
+    public void setInstructor(RDUser instructor) {
+        this.instructor = instructor;
+    }
 
 	@Override
 	public String toString() {
-		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate
-				+ ", courseOfferingName=" + courseOfferingName + ", title=" + title + ", endDate=" + endDate
-				+ ", status=" + status + ", course=" + course + ", instructor=" + instructor + "]";
+		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", courseOfferingName=" + courseOfferingName + ", title=" + title + ", status=" + status
+				+ ", course=" + course + ", instructor=" + instructor + "]";
 	}
 
+    
 
-		
-
-
-	
-	
+    
 }

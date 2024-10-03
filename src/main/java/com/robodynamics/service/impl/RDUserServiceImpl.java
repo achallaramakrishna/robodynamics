@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDUserDao;
+import com.robodynamics.form.RDRegistrationForm.Child;
+import com.robodynamics.form.RDRegistrationForm.Parent;
 import com.robodynamics.model.RDUser;
+import com.robodynamics.model.RDUser.profileType;
 import com.robodynamics.service.RDUserService;
 
 @Service
@@ -18,8 +21,8 @@ public class RDUserServiceImpl implements RDUserService {
 	
 	@Override
 	@Transactional
-	public void registerRDUser(RDUser rdUser) {
-		rdUserDao.registerRDUser(rdUser);
+	public RDUser registerRDUser(RDUser rdUser) {
+		return rdUserDao.registerRDUser(rdUser);
 
 	}
 
@@ -70,6 +73,32 @@ public class RDUserServiceImpl implements RDUserService {
 	public RDUser getRDUser(String userName, String password) {
 		
 		return rdUserDao.getRDUser(userName,password);
+	}
+
+	@Override
+	@Transactional
+	public void saveParentAndChild(Parent parent, Child child) {
+		
+		RDUser parentUser = RDUser.fromParent(parent);
+		
+		RDUser childUser = RDUser.fromChild(child);
+		parentUser.setProfile_id(profileType.ROBO_PARENT.getValue());
+		childUser.setProfile_id(profileType.ROBO_STUDENT.getValue());
+		rdUserDao.registerRDUser(parentUser);
+		rdUserDao.registerRDUser(childUser);
+		
+		
+	}
+
+	@Override
+	public boolean isUsernameTaken(String userName) {
+		RDUser existingUser = rdUserDao.findByUserName(userName);
+        return existingUser != null;
+	}
+
+	@Override
+	public RDUser getChildForParent(int parentId) {
+		return rdUserDao.getChildByParentId(parentId);
 	}
 	
 	

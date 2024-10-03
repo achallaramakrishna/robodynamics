@@ -73,5 +73,11 @@ public class RDUserQuizResultServiceImpl implements RDUserQuizResultService {
         return results.get(0);  // Return the most recent quiz result
     }
 
+	@Override
+	@Transactional
+	public int countQuizzesTakenByUser(int userId) {
+		return quizResultDao.countQuizzesTakenByUser(userId);
+	}
+
     
 }

@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +50,37 @@ public class RDQuizDaoImpl implements RDQuizDao {
     public void delete(RDQuiz quiz) {
         Session session = factory.getCurrentSession();
         session.delete(quiz);
+    }
+    
+    @Override
+    public List<RDQuiz> findQuizzesByFilters(Integer courseId, String status, String difficultyLevel) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM RDQuiz q WHERE 1=1";  // Always true condition to allow appending further conditions dynamically
+
+        if (courseId != null) {
+            hql += " AND q.course.id = :courseId";
+        }
+        if (status != null && !status.isEmpty()) {
+            hql += " AND q.status = :status";
+        }
+        if (difficultyLevel != null && !difficultyLevel.isEmpty()) {
+            hql += " AND q.difficultyLevel = :difficultyLevel";
+        }
+
+        Query<RDQuiz> query = session.createQuery(hql, RDQuiz.class);
+
+        // Set parameters if provided
+        if (courseId != null) {
+            query.setParameter("courseId", courseId);
+        }
+        if (status != null && !status.isEmpty()) {
+            query.setParameter("status", status);
+        }
+        if (difficultyLevel != null && !difficultyLevel.isEmpty()) {
+            query.setParameter("difficultyLevel", difficultyLevel);
+        }
+
+        // Execute the query and return the list of filtered quizzes
+        return query.getResultList();
     }
 }

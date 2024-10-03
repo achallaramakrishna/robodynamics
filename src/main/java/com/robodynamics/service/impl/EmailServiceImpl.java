@@ -20,11 +20,14 @@ public class EmailServiceImpl implements EmailService {
 	public void sendEmail(String to, String subject, String body) {
 
 		Properties properties = new Properties();
-		properties.put("mail.transport.protocol", "smtps");
+		properties.put("mail.transport.protocol", "smtp");
 		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.host", "smtp.hostinger.com");
-		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.host", "smtp.gmail.com"); // Gmail's SMTP server
+		properties.put("mail.smtp.port", "587"); // TLS port
 		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.ssl.trust", "smtp.gmail.com"); // Trust Gmail's SSL certificate
+		
+		
 		properties.put("mail.smtp.user", "ramakrishna@robodynamics.in");
 		properties.put("mail.smtp.password", "Sashank01%");
 		Session sendSession = Session.getInstance(properties);

@@ -204,6 +204,39 @@ public class RDCourseSessionDetailController {
         return "assignmentShow";  // JSP for assignments
     }
 
+    @PostMapping("/submitAnswers")
+    public String submitSlideAnswers(
+        @RequestParam Map<String, String> allParams,
+        @RequestParam("slideId") int slideId,
+        @RequestParam("sessionDetailId") int sessionDetailId,
+        @RequestParam("currentSlide") int currentSlide,
+        @RequestParam("enrollmentId") int enrollmentId,
+        Model model) {
+
+        // Logic to handle the submitted answers
+        List<RDFillInBlankQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slideId);
+        Map<Integer, Boolean> correctness = new HashMap<>();
+        Map<Integer, String> submittedAnswers = new HashMap<>();
+
+        for (RDFillInBlankQuestion question : fillInBlankQuestions) {
+            String submittedAnswer = allParams.get("answers[" + question.getQuestionId() + "]");
+            submittedAnswers.put(question.getQuestionId(), submittedAnswer);
+            correctness.put(question.getQuestionId(), question.getAnswer().equalsIgnoreCase(submittedAnswer));
+        }
+
+        // Add attributes to model for JSP
+        model.addAttribute("slide", slideService.getSlideById(slideId));
+        model.addAttribute("fillInBlankQuestions", fillInBlankQuestions);
+        model.addAttribute("correctness", correctness);
+        model.addAttribute("submittedAnswers", submittedAnswers);
+        model.addAttribute("sessionDetailId", sessionDetailId);
+        model.addAttribute("enrollmentId", enrollmentId);
+        model.addAttribute("currentSlide", currentSlide);
+        model.addAttribute("slideCount", slideService.getSlidesBySessionDetailId(sessionDetailId).size());
+
+        return "slideShow";  // Return the updated slide show view
+    }
+
     @PostMapping("/executeCode")
     @ResponseBody
     public String executeCode(@RequestParam("code") String code, @RequestParam("languageId") String languageId) {

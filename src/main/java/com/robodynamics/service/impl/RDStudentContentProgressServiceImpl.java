@@ -68,7 +68,7 @@ public class RDStudentContentProgressServiceImpl implements RDStudentContentProg
         RDStudentSessionProgress sessionProgress = sessionProgressService.findByEnrollmentAndSession(enrollmentId, sessionDetailId);
     	RDStudentEnrollment enrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
     	RDCourseSessionDetail sessionDetail = courseSessionDetailService.getRDCourseSessionDetail(sessionDetailId);
-
+    	System.out.println("hello 1111...");
         if (sessionProgress == null) {
             // If session progress doesn't exist, create a new one
         	

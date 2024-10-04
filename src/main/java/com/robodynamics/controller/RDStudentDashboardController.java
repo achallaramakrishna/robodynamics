@@ -1,12 +1,18 @@
 package com.robodynamics.controller;
 
 import com.robodynamics.model.RDBadge;
+import com.robodynamics.model.RDStudentEnrollment;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.model.RDUserBadge;
 import com.robodynamics.model.RDUserQuizResults;
 import com.robodynamics.service.RDUserQuizResultService;
 import com.robodynamics.service.RDUserPointsService;
 import com.robodynamics.service.RDBadgeService;
+import com.robodynamics.service.RDCourseOfferingService;
+import com.robodynamics.service.RDCourseService;
+import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.service.RDStudentEnrollmentService;
+import com.robodynamics.service.RDStudentSessionProgressService;
 import com.robodynamics.service.RDUserBadgeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +39,10 @@ public class RDStudentDashboardController {
     @Autowired
     private RDUserBadgeService userBadgeService;  // RDUserBadgeService instead of RDBadgeService
 
+	@Autowired
+	private RDStudentEnrollmentService studentEnrollmentService;
+
+
 
     @GetMapping("/studentDashboard")
 	public ModelAndView studentDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model m, HttpSession session) {
@@ -42,6 +52,17 @@ public class RDStudentDashboardController {
     	    }
     	    System.out.println("Going to student dashboard + " + rdUser);
 
+    	    // Fetch the enrollments for the logged-in student
+    	    List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService
+    	            .getStudentEnrollmentByStudent(rdUser.getUserID());
+
+    	    // Log the enrollments for debugging
+    	    System.out.println("Student Enrollments: " + studentEnrollments);
+
+    	    // Add the enrollment data to the model to display in the view
+    	    m.addAttribute("studentEnrollments", studentEnrollments);
+
+    	    
     	    // Fetch the total quizzes taken by the user
     	    int totalQuizzes = quizResultService.countQuizzesTakenByUser(rdUser.getUserID());
 

@@ -80,16 +80,36 @@
     <div class="container mt-5">
         <div class="row">
             <!-- Welcome Message and Progress -->
-            <div class="col-md-12 mb-4 text-center">
-                <h2>Welcome back, ${user.firstName}!</h2>
-                <p>You're making great progress in your course. Keep it up!</p>
-                <div class="progress my-3" style="height: 25px;">
-                    <div class="progress-bar" role="progressbar" style="width: ${courseProgress}%;" aria-valuenow="${courseProgress}" aria-valuemin="0" aria-valuemax="100">
-                        ${courseProgress}% Complete
+<!-- Enrolled Courses Section -->
+<div class="col-md-12 mb-4 text-center">
+    <h2>Welcome back, ${studentName}!</h2>
+    <p>Here are the courses you're currently enrolled in:</p>
+
+    <div class="row">
+        <!-- Loop through the list of student enrollments and display them as cards -->
+        <c:forEach var="tempStudentEnrollment" items="${studentEnrollments}">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">${tempStudentEnrollment.courseOffering.course.courseName}</h5>
+                        <p class="card-text"><strong>Course Offering Name:</strong> ${tempStudentEnrollment.courseOffering.courseOfferingName}</p>
+                        <p class="card-text"><strong>Instructor:</strong> ${tempStudentEnrollment.courseOffering.instructor.firstName} ${tempStudentEnrollment.courseOffering.instructor.lastName}</p>
+                        <p class="card-text"><strong>Student:</strong> ${tempStudentEnrollment.student.firstName} ${tempStudentEnrollment.student.lastName}</p>
+                        <p class="card-text"><strong>Course Dates:</strong> ${tempStudentEnrollment.courseOffering.startDate} to ${tempStudentEnrollment.courseOffering.endDate}</p>
+                        
+                        <!-- Progress info -->
+                        <p class="card-text"><strong>Progress:</strong> ${tempStudentEnrollment.progress}%</p>
+                        
+                        <!-- Continue Learning Button -->
+                        <a href="${pageContext.request.contextPath}/course/monitor?courseId=${tempStudentEnrollment.courseOffering.course.courseId}&enrollmentId=${tempStudentEnrollment.enrollmentId}" class="btn btn-primary mb-2">Start Session</a>
+                        
                     </div>
                 </div>
-                <a href="/continue" class="btn btn-primary">Continue Learning</a>
             </div>
+        </c:forEach>
+    </div>
+</div>
+
 
             <!-- Upcoming Lessons and Quizzes -->
             <div class="col-md-12 mb-4">

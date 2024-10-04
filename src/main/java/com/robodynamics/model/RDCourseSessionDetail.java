@@ -145,19 +145,6 @@ public class RDCourseSessionDetail {
 		this.file = file;
 	}
 
-	@Override
-	public String toString() {
-		final int maxLen = 10;
-		return "RDCourseSessionDetail [courseSessionDetailId=" + courseSessionDetailId + ", course=" + course
-				+ ", courseSession=" + courseSession + ", topic=" + topic + ", type=" + type + ", file=" + file
-				+ ", creationDate=" + creationDate + ", version=" + version + ", quiz=" + quiz + ", slides="
-				+ (slides != null ? slides.subList(0, Math.min(slides.size(), maxLen)) : null) + "]";
-	}
-
-	
-	
-	
-
 }
 
 

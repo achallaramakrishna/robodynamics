@@ -163,7 +163,9 @@
 				<value>com.robodynamics.model.RDUserQuizResults</value>
 				<value>com.robodynamics.model.RDAssignment</value>
 				<value>com.robodynamics.model.RDQuizQuestionMap</value>
-
+				<value>com.robodynamics.model.RDStudentContentProgress</value>
+				<value>com.robodynamics.model.RDStudentSessionProgress</value>
+				<value>com.robodynamics.model.RDStudentSlideProgress</value>
 
 
 

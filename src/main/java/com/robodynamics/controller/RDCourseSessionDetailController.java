@@ -17,11 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-
 import com.robodynamics.model.RDFillInBlankQuestion;
 import com.robodynamics.model.RDAssignment;
 import com.robodynamics.model.RDSlide;
 import com.robodynamics.service.RDSlideService;
+import com.robodynamics.service.RDStudentContentProgressService;
 import com.robodynamics.service.RDFillInBlankQuestionService;
 import com.robodynamics.service.Judge0Service;
 import com.robodynamics.service.RDAssignmentService;
@@ -29,9 +29,9 @@ import com.robodynamics.service.RDAssignmentService;
 @Controller
 @RequestMapping("/sessiondetail")
 public class RDCourseSessionDetailController {
-	
-	 @Autowired
-	 private Judge0Service judge0Service;
+    
+    @Autowired
+    private Judge0Service judge0Service;
 
     @Autowired
     private RDSlideService slideService;
@@ -41,25 +41,31 @@ public class RDCourseSessionDetailController {
 
     @Autowired
     private RDAssignmentService assignmentService;
+    
+    @Autowired
+    private RDStudentContentProgressService progressService;
 
-    // Route to start either slide or assignment session based on the content available
+ // Start either slide or assignment session based on the content available
     @GetMapping("/start/{sessionDetailId}")
-    public String startSession(@PathVariable("sessionDetailId") int sessionDetailId, Model model) {
+    public String startSession(@PathVariable("sessionDetailId") int sessionDetailId,
+                               @RequestParam("enrollmentId") int enrollmentId,
+                               Model model) {
+
         // Check if session has slides or assignments and start accordingly
-        return checkSlidesOrAssignments(sessionDetailId, model);
+        return checkSlidesOrAssignments(sessionDetailId, enrollmentId, model);
     }
 
-    // Check if slides or assignments exist and redirect to the appropriate handler
-    private String checkSlidesOrAssignments(int sessionDetailId, Model model) {
+    // Check if slides or assignments exist and redirect accordingly
+    private String checkSlidesOrAssignments(int sessionDetailId, int enrollmentId, Model model) {
         List<RDSlide> slides = slideService.getSlidesBySessionDetailId(sessionDetailId);
 
-        if (!slides.isEmpty()) {
-            return showSlide(model, slides, 0, sessionDetailId);
+        if (slides != null && !slides.isEmpty()) {
+            return showSlide(model, slides, 0, sessionDetailId, enrollmentId);
         }
 
         List<RDAssignment> assignments = assignmentService.getAssignmentsByCourseSessionDetailId(sessionDetailId);
-        if (!assignments.isEmpty()) {
-            return showAssignment(model, assignments, 0, sessionDetailId);
+        if (assignments != null && !assignments.isEmpty()) {
+            return showAssignment(model, assignments, 0, sessionDetailId, enrollmentId);
         }
 
         // No slides or assignments found, show an error
@@ -69,10 +75,12 @@ public class RDCourseSessionDetailController {
 
     // Slide-related methods
     @GetMapping("/slide/start/{sessionDetailId}")
-    public String startSlideSession(@PathVariable("sessionDetailId") int sessionDetailId, Model model) {
+    public String startSlideSession(@PathVariable("sessionDetailId") int sessionDetailId,
+                                    @RequestParam("enrollmentId") int enrollmentId,
+                                    Model model) {
         List<RDSlide> slides = slideService.getSlidesBySessionDetailId(sessionDetailId);
-        if (!slides.isEmpty()) {
-            return showSlide(model, slides, 0, sessionDetailId);
+        if (slides != null && !slides.isEmpty()) {
+            return showSlide(model, slides, 0, sessionDetailId, enrollmentId);
         }
         model.addAttribute("message", "No slides available for this session.");
         return "error";
@@ -82,18 +90,47 @@ public class RDCourseSessionDetailController {
     public String navigateSlides(@RequestParam("currentSlide") int currentSlide,
                                  @RequestParam("direction") String direction,
                                  @RequestParam("sessionDetailId") int sessionDetailId,
+                                 @RequestParam("enrollmentId") int enrollmentId,
                                  Model model) {
+        // Fetch slides for the session
         List<RDSlide> slides = slideService.getSlidesBySessionDetailId(sessionDetailId);
+
+        if (slides == null || slides.isEmpty()) {
+            // Handle the case where no slides are found
+            model.addAttribute("errorMessage", "No slides found for this session.");
+            return "errorPage";
+        }
+
+        // Validate direction and navigate through slides
         if ("next".equals(direction) && currentSlide < slides.size() - 1) {
             currentSlide++;
         } else if ("prev".equals(direction) && currentSlide > 0) {
             currentSlide--;
         }
 
-        return showSlide(model, slides, currentSlide, sessionDetailId);
+        // Log the current slide for debugging purposes
+        System.out.println("Navigated to Slide: " + currentSlide + ", EnrollmentId: " + enrollmentId);
+
+        // Track progress safely
+        try {
+            double progressPercentage = ((double) (currentSlide + 1) / slides.size()) * 100;
+            updateProgress(enrollmentId, sessionDetailId, "slide", progressPercentage);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Failed to update progress. Error: " + e.getMessage());
+            return "errorPage";
+        }
+
+        return showSlide(model, slides, currentSlide, sessionDetailId, enrollmentId);
     }
 
-    private String showSlide(Model model, List<RDSlide> slides, int currentSlideIndex, int sessionDetailId) {
+    private String showSlide(Model model, List<RDSlide> slides, int currentSlideIndex, int sessionDetailId, int enrollmentId) {
+        // Ensure the index is within bounds
+        if (currentSlideIndex >= slides.size()) {
+            currentSlideIndex = slides.size() - 1;
+        } else if (currentSlideIndex < 0) {
+            currentSlideIndex = 0;
+        }
+
         RDSlide slide = slides.get(currentSlideIndex);
         List<RDFillInBlankQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slide.getSlideId());
 
@@ -102,44 +139,35 @@ public class RDCourseSessionDetailController {
         model.addAttribute("currentSlide", currentSlideIndex);
         model.addAttribute("slideCount", slides.size());
         model.addAttribute("sessionDetailId", sessionDetailId);
+        model.addAttribute("enrollmentId", enrollmentId);
 
-        return "slideShow";  // JSP for slides
-    }
-
-    @PostMapping("/submitSlideAnswers")
-    public String submitSlideAnswers(@RequestParam Map<String, String> allParams,
-                                     @RequestParam("slideId") int slideId,
-                                     @RequestParam("sessionDetailId") int sessionDetailId,
-                                     Model model) {
-        List<RDFillInBlankQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slideId);
-        Map<Integer, Boolean> correctness = new HashMap<>();
-        Map<Integer, String> submittedAnswers = new HashMap<>();
-
-        for (RDFillInBlankQuestion question : fillInBlankQuestions) {
-            String submittedAnswer = allParams.get("answers[" + question.getQuestionId() + "]");
-            submittedAnswers.put(question.getQuestionId(), submittedAnswer);
-            correctness.put(question.getQuestionId(), question.getAnswer().equalsIgnoreCase(submittedAnswer));
+        // Fetch progress or initialize it if not present
+        try {
+            model.addAttribute("progress", progressService.getProgressBySessionDetail(enrollmentId, sessionDetailId));
+        } catch (Exception e) {
+            model.addAttribute("progress", 0);  // Default to 0% if no progress is available
         }
 
-        RDSlide slide = slideService.getSlideById(slideId);
+        return "slideShow";  // Return the slide view
+    }
 
-        model.addAttribute("slide", slide);
-        model.addAttribute("fillInBlankQuestions", fillInBlankQuestions);
-        model.addAttribute("correctness", correctness);
-        model.addAttribute("submittedAnswers", submittedAnswers);
-        model.addAttribute("sessionDetailId", sessionDetailId);
-        model.addAttribute("currentSlide", Integer.parseInt(allParams.get("currentSlide")));
-        model.addAttribute("slideCount", slideService.getSlidesBySessionDetailId(sessionDetailId).size());
-
-        return "slideShow";
+    // Helper method to update student progress
+    private void updateProgress(int enrollmentId, int sessionDetailId, String contentType, double progress) {
+        try {
+            progressService.updateStudentContentProgress(enrollmentId, sessionDetailId, contentType, progress);
+        } catch (Exception e) {
+            System.err.println("Failed to update progress: " + e.getMessage());
+        }
     }
 
     // Assignment-related methods
     @GetMapping("/assignment/start/{sessionDetailId}")
-    public String startAssignmentSession(@PathVariable("sessionDetailId") int sessionDetailId, Model model) {
+    public String startAssignmentSession(@PathVariable("sessionDetailId") int sessionDetailId,
+                                         @RequestParam("enrollmentId") int enrollmentId,
+                                         Model model) {
         List<RDAssignment> assignments = assignmentService.getAssignmentsByCourseSessionDetailId(sessionDetailId);
-        if (!assignments.isEmpty()) {
-            return showAssignment(model, assignments, 0, sessionDetailId);
+        if (assignments != null && !assignments.isEmpty()) {
+            return showAssignment(model, assignments, 0, sessionDetailId, enrollmentId);
         }
         model.addAttribute("message", "No assignments available for this session.");
         return "error";
@@ -149,6 +177,7 @@ public class RDCourseSessionDetailController {
     public String navigateAssignments(@RequestParam("currentAssignment") int currentAssignment,
                                       @RequestParam("direction") String direction,
                                       @RequestParam("sessionDetailId") int sessionDetailId,
+                                      @RequestParam("enrollmentId") int enrollmentId,
                                       Model model) {
         List<RDAssignment> assignments = assignmentService.getAssignmentsByCourseSessionDetailId(sessionDetailId);
         if ("next".equals(direction) && currentAssignment < assignments.size() - 1) {
@@ -157,53 +186,24 @@ public class RDCourseSessionDetailController {
             currentAssignment--;
         }
 
-        return showAssignment(model, assignments, currentAssignment, sessionDetailId);
+        // Track progress for assignments
+        updateProgress(enrollmentId, sessionDetailId, "assignment", ((double) (currentAssignment + 1) / assignments.size()) * 100);
+
+        return showAssignment(model, assignments, currentAssignment, sessionDetailId, enrollmentId);
     }
 
-    private String showAssignment(Model model, List<RDAssignment> assignments, int currentAssignmentIndex, int sessionDetailId) {
+    private String showAssignment(Model model, List<RDAssignment> assignments, int currentAssignmentIndex, int sessionDetailId, int enrollmentId) {
         RDAssignment assignment = assignments.get(currentAssignmentIndex);
 
         model.addAttribute("assignment", assignment);
         model.addAttribute("currentAssignment", currentAssignmentIndex);
         model.addAttribute("assignmentCount", assignments.size());
         model.addAttribute("sessionDetailId", sessionDetailId);
+        model.addAttribute("enrollmentId", enrollmentId);
 
         return "assignmentShow";  // JSP for assignments
     }
 
-    @PostMapping("/submitAssignment")
-    @ResponseBody  // This ensures the method returns JSON data
-    public Map<String, Object> submitAssignment(
-            @RequestParam("code") String code,
-            @RequestParam("assignmentId") int assignmentId,
-            @RequestParam("sessionDetailId") int sessionDetailId,
-            @RequestParam("languageId") int languageId) {
-
-        Map<String, Object> response = new HashMap<>();  // Use a map to store the response data
-
-        System.out.println("Start: Submitting code to Judge0 API");
-
-        // Use the Judge0Service to execute the code
-        String executionResult = judge0Service.executeCode(code, String.valueOf(languageId));
-
-        String resultMessage;
-        if (executionResult.contains("Accepted")) {
-            resultMessage = "Accepted";
-        } else {
-            resultMessage = "Rejected - " + executionResult;
-        }
-
-        // Add execution result and message to the response map
-        response.put("resultMessage", resultMessage);
-        response.put("output", executionResult);
-
-        System.out.println("End: Code submission complete");
-
-        // Return the response as JSON
-        return response;
-    }
-
-    
     @PostMapping("/executeCode")
     @ResponseBody
     public String executeCode(@RequestParam("code") String code, @RequestParam("languageId") String languageId) {

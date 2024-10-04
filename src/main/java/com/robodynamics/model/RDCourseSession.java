@@ -3,11 +3,14 @@ package com.robodynamics.model;
 
 import java.beans.Transient;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,6 +55,9 @@ public class RDCourseSession {
 	@Column(name = "version")
 	private int version;
 	
+	@Column(name = "progress")
+	private Double progress;
+	
 	/*
 	 * @OneToMany(mappedBy = "courseSession", cascade = CascadeType.ALL,
 	 * orphanRemoval = true) private List<RDSlide> slides;
@@ -61,13 +67,13 @@ public class RDCourseSession {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="course_session_id", nullable = true)
 	@JsonIgnore
-	private List<RDCourseSessionDetail> courseSessionDetails = new ArrayList<RDCourseSessionDetail>();
+	private Set<RDCourseSessionDetail> courseSessionDetails = new TreeSet<RDCourseSessionDetail>();
 	
-	public List<RDCourseSessionDetail> getCourseSessionDetails() {
+	public Set<RDCourseSessionDetail> getCourseSessionDetails() {
 		return courseSessionDetails;
 	}
 
-	public void setCourseSessionDetails(List<RDCourseSessionDetail> courseSessionDetails) {
+	public void setCourseSessionDetails(Set<RDCourseSessionDetail> courseSessionDetails) {
 		this.courseSessionDetails = courseSessionDetails;
 	}
 
@@ -120,6 +126,7 @@ public class RDCourseSession {
 	}
 	
 	
+	
 
 	/*
 	 * public List<RDSlide> getSlides() { return slides; }
@@ -127,32 +134,15 @@ public class RDCourseSession {
 	 * public void setSlides(List<RDSlide> slides) { this.slides = slides; }
 	 */
 
-	@Override
-	public String toString() {
-		return "RDCourseSession [courseSessionId=" + courseSessionId + ", sessionId=" + sessionId + ", course=" + course
-				+ ", sessionTitle=" + sessionTitle + ", creationDate=" + creationDate + ", version=" + version + "]";
+	public Double getProgress() {
+		return progress;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(course, courseSessionId, creationDate, sessionId, sessionTitle, version);
+	public void setProgress(Double progress) {
+		this.progress = progress;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RDCourseSession other = (RDCourseSession) obj;
-		return Objects.equals(course, other.course) && courseSessionId == other.courseSessionId
-				&& Objects.equals(creationDate, other.creationDate) && sessionId == other.sessionId
-				&& Objects.equals(sessionTitle, other.sessionTitle) && version == other.version;
-	}
 
-	
 }
 
 

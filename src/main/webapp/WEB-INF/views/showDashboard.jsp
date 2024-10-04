@@ -20,7 +20,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
 	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
-	    <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
 <title>Welcome</title>
 <style>
@@ -81,99 +81,68 @@ footer {
 }
 </style>
 
-
 <script type="text/javascript">
+function loadContent(courseSessionDetailId, enrollmentId) {
+    // Update the element content based on the data-type
+    const contentType = event.target.getAttribute('data-type');
+    const file = event.target.getAttribute('data-file');
+    const quiz = event.target.getAttribute('data-quiz');
+    const details = event.target.getAttribute('data-details');
+    const id = event.target.getAttribute('data-id');
 
-function setAttendanceDetails(courseSessionDetailId,enrollmentId) {
-    document.getElementById('courseSessionDetailId').value = courseSessionDetailId;
-    document.getElementById('enrollmentId').value = enrollmentId;
+    // Log debug information
+    console.log('Type - ' + contentType);
+    console.log('File - ' + file);
+    console.log('Quiz - ' + quiz);
+    console.log('Details - ' + details);
+    console.log('ID - ' + id);
+
+    if (!contentType) return;
+
+    // Hide all containers and display the required one based on contentType
+    document.getElementById('course-video').style.display = 'none';
+    document.getElementById('course-pdf').style.display = 'none';
+    document.getElementById('course-quiz').style.display = 'none';
+    document.getElementById('course-fib').style.display = 'none';
+    document.getElementById('course-flashcard').style.display = 'none';
+    document.getElementById('course-assignment').style.display = 'none';
+
+    if (contentType === 'video') {
+        document.getElementById('course-video').style.display = 'block';
+        document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/` + file;
+        document.getElementById('course-video').load();
+    } else if (contentType === 'pdf') {
+        document.getElementById('course-pdf').style.display = 'block';
+        document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
+    } else if (contentType === 'slide') {
+        document.getElementById('course-fib').style.display = 'block';
+        document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id + `?enrollmentId=` + enrollmentId;
+    } else if (contentType === 'quiz') {
+        document.getElementById('course-quiz').style.display = 'block';
+        document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
+    } else if (contentType === 'flashcard') {
+        document.getElementById('course-flashcard').style.display = 'block';
+        document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcard-sets/session/` + id;
+    } else if (contentType === 'assignment') {
+        document.getElementById('course-assignment').style.display = 'block';
+        document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;
+    }
+
+    if (details && details !== 'null') {
+        document.getElementById('course-details-content').textContent = details;
+    } else {
+        document.getElementById('course-details-content').textContent = 'No details available';
+    }
 }
 
-function markAttendance() {
-    document.getElementById('attendanceForm').submit();
-}
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const courseListItems = document.querySelectorAll('#course-list li');
 
     courseListItems.forEach(item => {
-    	item.addEventListener('click', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            
-            const type = item.getAttribute('data-type');
-            const file = item.getAttribute('data-file');
-            const quiz = item.getAttribute('data-quiz');
-            const details = item.getAttribute('data-details');
-            const id = item.getAttribute('data-id');
-            //const assignmentId = item.getAttribute('data-assignment');
-            
-			console.log('Type - ' + type);
-			console.log('File - ' + file);
-			console.log('Quiz - ' + quiz);
-			console.log('Details - ' + details);
-			console.log('id - ' + id);
-			// console.log('assignmentId - ' + assignmentId);
-		
-            if (!type && !file && !quiz && !details) {
-                return;
-            }
-            
-            if (type === 'video') {
-                document.getElementById('course-video').style.display = 'block';
-                document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('course-quiz').style.display = 'none';
-                document.getElementById('course-flashcard').style.display = 'none';
-                document.getElementById('course-fib').style.display = 'none';
-                document.getElementById('course-assignment').style.display = 'none';
-                document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/`+ file;
-                document.getElementById('course-video').load();
-            } else if (type === 'pdf') {
-                document.getElementById('course-video').style.display = 'none';
-                document.getElementById('course-pdf').style.display = 'block';
-                document.getElementById('course-quiz').style.display = 'none';
-                document.getElementById('course-fib').style.display = 'none';
-                document.getElementById('course-assignment').style.display = 'none';
-                document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
-            } else if (type === 'slide') {
-                document.getElementById('course-video').style.display = 'none';
-                document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('course-fib').style.display = 'block';
-                document.getElementById('course-quiz').style.display = 'none';
-                document.getElementById('course-flashcard').style.display = 'none';
-                document.getElementById('course-assignment').style.display = 'none';
-                document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id;
-            } else if (type === 'quiz') {
-                document.getElementById('course-video').style.display = 'none';
-                document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('course-fib').style.display = 'none';
-                document.getElementById('course-quiz').style.display = 'block';
-                document.getElementById('course-flashcard').style.display = 'none';
-                document.getElementById('course-assignment').style.display = 'none';
-                document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
-            } else if (type == 'flashcard') {
-                document.getElementById('course-video').style.display = 'none';
-                document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('course-fib').style.display = 'none';
-                document.getElementById('course-quiz').style.display = 'none';
-                document.getElementById('course-flashcard').style.display = 'block';
-                document.getElementById('course-assignment').style.display = 'none';
-                document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcard-sets/session/` + id;
-            } else if (type == 'assignment') {
-                document.getElementById('course-video').style.display = 'none';
-                document.getElementById('course-pdf').style.display = 'none';
-                document.getElementById('course-fib').style.display = 'none';
-                document.getElementById('course-quiz').style.display = 'none';
-                document.getElementById('course-flashcard').style.display = 'none';
-                document.getElementById('course-assignment').style.display = 'block';
-                document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;
-            }
-
-            if (details && details !== 'null') {
-                document.getElementById('course-details-content').textContent = details;
-            } else {
-                document.getElementById('course-details-content').textContent = 'No details available';
-            }
+        item.addEventListener('click', function (event) {
+            const courseSessionDetailId = event.target.getAttribute('data-id');
+            const enrollmentId = '${studentEnrollment.enrollmentId}'; // Assuming you already have enrollmentId from the backend
+            loadContent(courseSessionDetailId, enrollmentId);
         });
     });
 });
@@ -217,8 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				                            data-quiz="${courseSessionDetail.quiz.quiz_id}"
 				                            data-details="${courseSessionDetail.topic}"
 				                            data-qa="${courseSessionDetail.topic}"
-				                            data-id="${courseSessionDetail.courseSessionDetailId}"
-				                            onclick="setAttendanceDetails(${courseSessionDetail.courseSessionDetailId}, ${studentEnrollment.enrollmentId})">
+				                            data-id="${courseSessionDetail.courseSessionDetailId}">
 				                            🧮 ${courseSessionDetail.topic}
 				                        </li>
 				                    </c:forEach>

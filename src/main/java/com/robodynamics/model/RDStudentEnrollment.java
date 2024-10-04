@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,9 +42,9 @@ public class RDStudentEnrollment {
     @JoinColumn(name = "course_offering_id")
     private RDCourseOffering courseOffering;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="attendance_id", nullable = true)
-	private List<RDClassAttendance> attendances = new ArrayList<RDClassAttendance>();
+	private Set<RDClassAttendance> attendances = new TreeSet<RDClassAttendance>();
 
 	
 	@ManyToOne
@@ -60,6 +61,9 @@ public class RDStudentEnrollment {
 	
 	@Column(name = "status")
 	private int status;
+	
+	@Column(name = "progress")
+	private double progress;
 	
 	public RDStudentEnrollment() {
 		
@@ -81,11 +85,11 @@ public class RDStudentEnrollment {
 		this.courseOffering = courseOffering;
 	}
 
-	public List<RDClassAttendance> getAttendances() {
+	public Set<RDClassAttendance> getAttendances() {
 		return attendances;
 	}
 
-	public void setAttendances(List<RDClassAttendance> attendances) {
+	public void setAttendances(Set<RDClassAttendance> attendances) {
 		this.attendances = attendances;
 	}
 
@@ -119,6 +123,16 @@ public class RDStudentEnrollment {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	
+
+	public double getProgress() {
+		return progress;
+	}
+
+	public void setProgress(double progress) {
+		this.progress = progress;
 	}
 
 	@Override

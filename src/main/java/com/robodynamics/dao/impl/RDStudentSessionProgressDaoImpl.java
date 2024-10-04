@@ -39,8 +39,8 @@ public class RDStudentSessionProgressDaoImpl implements RDStudentSessionProgress
         CriteriaQuery<RDStudentSessionProgress> cq = cb.createQuery(RDStudentSessionProgress.class);
         Root<RDStudentSessionProgress> root = cq.from(RDStudentSessionProgress.class);
         cq.select(root).where(
-            cb.equal(root.get("enrollment").get("id"), enrollmentId),
-            cb.equal(root.get("courseSession").get("id"), sessionId)
+            cb.equal(root.get("enrollment").get("enrollmentId"), enrollmentId),
+            cb.equal(root.get("courseSession").get("courseSessionId"), sessionId)
         );
         return factory.getCurrentSession().createQuery(cq).uniqueResult();
     }
@@ -50,7 +50,7 @@ public class RDStudentSessionProgressDaoImpl implements RDStudentSessionProgress
         CriteriaBuilder cb = factory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<RDStudentSessionProgress> cq = cb.createQuery(RDStudentSessionProgress.class);
         Root<RDStudentSessionProgress> root = cq.from(RDStudentSessionProgress.class);
-        cq.select(root).where(cb.equal(root.get("enrollment").get("id"), enrollmentId));
+        cq.select(root).where(cb.equal(root.get("enrollment").get("enrollmentId"), enrollmentId));
         return factory.getCurrentSession().createQuery(cq).getResultList();
     }
 

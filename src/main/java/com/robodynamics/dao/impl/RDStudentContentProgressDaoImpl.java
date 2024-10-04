@@ -75,7 +75,7 @@ public class RDStudentContentProgressDaoImpl implements RDStudentContentProgress
     public double calculateOverallProgress(int sessionProgressId) {
         Session session = factory.getCurrentSession();
         
-        String hql = "SELECT AVG(progress) FROM RDStudentContentProgress WHERE sessionProgress.sessionProgressId = :sessionProgressId";
+        String hql = "SELECT AVG(progress) FROM RDStudentContentProgress WHERE sessionProgress.id = :sessionProgressId";
         
         Double overallProgress = (Double) session.createQuery(hql)
                 .setParameter("sessionProgressId", sessionProgressId)
@@ -88,7 +88,7 @@ public class RDStudentContentProgressDaoImpl implements RDStudentContentProgress
     public RDStudentContentProgress findBySessionAndContentType(int sessionProgressId, int sessionDetailId, String contentType) {
         Session session = factory.getCurrentSession();
 
-        String hql = "FROM RDStudentContentProgress WHERE sessionProgress.sessionProgressId = :sessionProgressId " +
+        String hql = "FROM RDStudentContentProgress WHERE sessionProgress.id = :sessionProgressId " +
                      "AND courseSessionDetail.courseSessionDetailId = :sessionDetailId " +
                      "AND contentType = :contentType";
 

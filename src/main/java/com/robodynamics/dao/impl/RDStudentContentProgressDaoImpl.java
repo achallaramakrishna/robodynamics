@@ -64,12 +64,22 @@ public class RDStudentContentProgressDaoImpl implements RDStudentContentProgress
     public Double findProgressByStudentAndSessionDetail(int enrollmentId, int sessionDetailId) {
         String hql = "SELECT progress FROM RDStudentContentProgress WHERE sessionProgress.enrollment.enrollmentId = :enrollmentId AND courseSessionDetail.courseSessionDetailId = :sessionDetailId";
         
-        return (Double) factory.getCurrentSession()
-                               .createQuery(hql)
-                               .setParameter("enrollmentId", enrollmentId)
-                               .setParameter("sessionDetailId", sessionDetailId)
-                               .uniqueResult();
+        List<Double> results = factory.getCurrentSession()
+                                      .createQuery(hql, Double.class)
+                                      .setParameter("enrollmentId", enrollmentId)
+                                      .setParameter("sessionDetailId", sessionDetailId)
+                                      .getResultList();
+        
+        // Check if results exist
+        if (results == null || results.isEmpty()) {
+            return null;  // Return null or handle no progress scenario
+        }
+        
+        // If there are multiple progress entries (unexpected scenario), handle it
+        // You can choose the first one or aggregate the progress in some way
+        return results.get(0);  // Return the first result if found
     }
+
     
     @Override
     public double calculateOverallProgress(int sessionProgressId) {
@@ -86,17 +96,21 @@ public class RDStudentContentProgressDaoImpl implements RDStudentContentProgress
     
     @Override
     public RDStudentContentProgress findBySessionAndContentType(int sessionProgressId, int sessionDetailId, String contentType) {
-        Session session = factory.getCurrentSession();
+    	 String hql = "FROM RDStudentContentProgress WHERE sessionProgress.id = :sessionProgressId AND courseSessionDetail.id = :sessionDetailId AND contentType = :contentType";
+    	    
+    	    List<RDStudentContentProgress> result = factory.getCurrentSession()
+    	            .createQuery(hql, RDStudentContentProgress.class)
+    	            .setParameter("sessionProgressId", sessionProgressId)
+    	            .setParameter("sessionDetailId", sessionDetailId)
+    	            .setParameter("contentType", contentType)
+    	            .getResultList();
 
-        String hql = "FROM RDStudentContentProgress WHERE sessionProgress.id = :sessionProgressId " +
-                     "AND courseSessionDetail.courseSessionDetailId = :sessionDetailId " +
-                     "AND contentType = :contentType";
+    	    if (result.isEmpty()) {
+    	        return null; // No progress found
+    	    }
 
-        return (RDStudentContentProgress) session.createQuery(hql)
-                .setParameter("sessionProgressId", sessionProgressId)
-                .setParameter("sessionDetailId", sessionDetailId)
-                .setParameter("contentType", contentType)
-                .uniqueResult();
+    	    return result.get(0); // Return the first (and ideally only) result
+
     }
 
 

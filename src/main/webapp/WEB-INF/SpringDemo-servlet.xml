@@ -166,6 +166,8 @@
 				<value>com.robodynamics.model.RDStudentContentProgress</value>
 				<value>com.robodynamics.model.RDStudentSessionProgress</value>
 				<value>com.robodynamics.model.RDStudentSlideProgress</value>
+				<value>com.robodynamics.model.RDQuestion</value>
+				
 
 
 

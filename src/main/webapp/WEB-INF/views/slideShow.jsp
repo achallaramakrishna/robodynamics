@@ -4,6 +4,9 @@
 <html>
 <head>
 <%@ page isELIgnored="false"%>
+
+
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -15,10 +18,12 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2VinnD/C7E91j9yyk5//jjpt/"
+	integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8">
+<title>Slide Show</title>
 
 <meta charset="UTF-8">
 <title>Slide Show</title>
@@ -136,11 +141,30 @@
         .btn-outline-primary:hover {
             background-color: #ff6347;
         }
+        
+        
 
         .slide-indicator {
             color: #ff4500;
             font-weight: bold;
             font-size: 18px;
+        }
+        
+                /* Progress bar styling */
+        .progress {
+            height: 30px;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background-color: #ff4500;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            line-height: 30px;
+            text-align: center;
         }
 
         /* Mobile responsive adjustments */
@@ -160,7 +184,18 @@
 
 <body>
     <div class="container-fluid">
-        <h2 class="animated-title">✨ ${slide.title} ✨</h2>
+    
+    
+        <h2 class="animated-title">✨ ${slide.title}  ✨</h2>
+        
+        
+        <!-- Progress Bar -->
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}"
+                 aria-valuemin="0" aria-valuemax="100">
+                ${progress}% 
+            </div>
+        </div>
 
         <div class="slide-container">
             <c:if test="${not empty slide.fileUrl}">
@@ -215,11 +250,16 @@
                 <input type="hidden" name="enrollmentId" value="${enrollmentId}" />
                 <input type="hidden" name="currentSlide" value="${currentSlide}" />
 
+<%-- 				<!-- Display total points earned and maximum points -->
+				<div class="alert alert-success mt-3">
+				    You earned <strong>${totalPoints}</strong> out of <strong>${possiblePoints}</strong> points!
+				</div> --%>
+								
                 <div class="row">
                     <c:forEach var="question" items="${fillInBlankQuestions}" varStatus="status">
                         <div class="col-md-4 mb-4">
                             <div class="question">
-                                <label><strong> ${status.index + 1}. ${question.question} </strong></label>
+                                <label><strong> ${status.index + 1}. ${question.questionText} </strong></label>
                                 <input type="text" class="form-control"
                                     name="answers[${question.questionId}]"
                                     value="${fn:escapeXml(submittedAnswers[question.questionId])}" />
@@ -228,9 +268,9 @@
                                         <span class="${correctness[question.questionId] ? 'correct' : 'incorrect'}">
                                             ${correctness[question.questionId] ? 'Correct!' : 'Oops! Incorrect'}
                                         </span>
-                                        <c:if test="${!correctness[question.questionId]}">
-                                            <br /><span class="correct">Correct Answer: ${question.answer}</span>
-                                        </c:if>
+<%--                                         <c:if test="${!correctness[question.questionId]}">
+                                            <br /><span class="correct">Correct Answer: ${question.correctAnswer}</span>
+                                        </c:if> --%>
                                     </div>
                                 </c:if>
                             </div>
@@ -256,7 +296,8 @@
                 <c:if test="${allCorrect}">
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
-                            $('#congratsModal').modal('show');
+                        	var $jq = jQuery.noConflict();
+                        	$jq('#congratsModal').modal('show');
                             var applauseSound = document.getElementById("applauseAudio");
                             applauseSound.play();
                             setTimeout(function () {
@@ -277,6 +318,7 @@
                     </div>
                     <div class="modal-body text-center">
                         <h2>You got all the answers correct! 🎉</h2>
+				    You earned <strong>${pointsEarned}</strong> out of <strong>${totalPoints}</strong> points!
                         <p>Keep up the great work!</p>
                     </div>
                 </div>

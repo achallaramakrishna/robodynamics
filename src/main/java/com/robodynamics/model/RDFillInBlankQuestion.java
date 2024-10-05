@@ -31,6 +31,10 @@ public class RDFillInBlankQuestion {
     
 	@Column(name = "answer")
     private String answer;
+	
+	@Column(name = "points")
+    private int points; // Add points for each question
+	 
 
     // Getters and Setters
     public int getQuestionId() {
@@ -67,5 +71,14 @@ public class RDFillInBlankQuestion {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+    
 }
 

@@ -20,6 +20,8 @@ public interface RDStudentEnrollmentService {
 	public List<RDStudentEnrollment> getStudentEnrollmentByParent(int parentId);
 	
 	public List<RDStudentEnrollment> getStudentEnrollmentByStudent(int studentId);
+	
+	public int getUserIdFromEnrollment(int enrollmentId);
 
 
 }

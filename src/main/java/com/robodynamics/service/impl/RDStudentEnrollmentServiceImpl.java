@@ -54,4 +54,17 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 		return rdStudentEnrollmentDao.getStudentEnrollmentsListByStudent(studentId);
 	}
 	
+	@Override
+	public int getUserIdFromEnrollment(int enrollmentId) {
+	    // Assuming RDStudentEnrollment entity has a reference to the RDUser entity
+	    RDStudentEnrollment enrollment = rdStudentEnrollmentDao.getRDStudentEnrollment(enrollmentId);
+	    
+	    if (enrollment != null && enrollment.getStudent() != null) {
+	        return enrollment.getStudent().getUserID(); // Assuming RDUser has a getUserId() method
+	    } else {
+	        throw new IllegalArgumentException("Enrollment not found or user not associated with the enrollment.");
+	    }
+	}
+
+	
 }

@@ -20,18 +20,17 @@ public class RDQuizOption {
     @Column(name = "selected", nullable = false)
     private boolean selected;  // Add this property
     
-    // Many-to-One relationship with RDQuizQuestion
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
-    private RDQuizQuestion quizQuestion;
+    private RDQuestion question;
 
     // Constructors
     public RDQuizOption() {}
 
-    public RDQuizOption(String optionText, boolean isCorrect, RDQuizQuestion quizQuestion) {
+    public RDQuizOption(String optionText, boolean isCorrect, RDQuestion question) {
         this.optionText = optionText;
         this.isCorrect = isCorrect;
-        this.quizQuestion = quizQuestion;
+        this.question = question;
     }
 
     // Getters and Setters
@@ -59,13 +58,15 @@ public class RDQuizOption {
         this.isCorrect = isCorrect;
     }
 
-    public RDQuizQuestion getQuizQuestion() {
-        return quizQuestion;
-    }
 
-    public void setQuizQuestion(RDQuizQuestion quizQuestion) {
-        this.quizQuestion = quizQuestion;
-    }
+
+	public RDQuestion getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(RDQuestion question) {
+		this.question = question;
+	}
 
 	public boolean isSelected() {
 		return selected;
@@ -75,11 +76,7 @@ public class RDQuizOption {
 		this.selected = selected;
 	}
 
-	@Override
-	public String toString() {
-		return "RDQuizOption [optionId=" + optionId + ", optionText=" + optionText + ", isCorrect=" + isCorrect
-				+ ", selected=" + selected + ", quizQuestion=" + quizQuestion + "]";
-	}
+
 	
     
 }

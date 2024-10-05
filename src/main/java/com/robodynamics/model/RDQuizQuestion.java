@@ -19,7 +19,7 @@ public class RDQuizQuestion {
     private String questionType;  // E.g., "multiple_choice" or "fill_in_the_blank"
 
     // One-to-Many relationship with RDQuizOption (each question can have multiple options)
-    @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<RDQuizOption> options;
 
     @ManyToOne

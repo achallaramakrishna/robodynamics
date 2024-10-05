@@ -4,32 +4,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import com.robodynamics.model.RDFillInBlankQuestion;
 import com.robodynamics.model.RDAssignment;
+import com.robodynamics.model.RDQuestion;
 import com.robodynamics.model.RDSlide;
+import com.robodynamics.model.RDUser;
+import com.robodynamics.model.RDUserPoints;
+import com.robodynamics.service.Judge0Service;
+import com.robodynamics.service.RDQuestionService;
 import com.robodynamics.service.RDSlideService;
 import com.robodynamics.service.RDStudentContentProgressService;
-import com.robodynamics.service.RDFillInBlankQuestionService;
-import com.robodynamics.service.Judge0Service;
+import com.robodynamics.service.RDStudentEnrollmentService;
+import com.robodynamics.service.RDUserPointsService;
+import com.robodynamics.service.RDUserService;
 import com.robodynamics.service.RDAssignmentService;
 
 @Controller
 @RequestMapping("/sessiondetail")
 public class RDCourseSessionDetailController {
-    
+
     @Autowired
     private Judge0Service judge0Service;
 
@@ -37,15 +34,24 @@ public class RDCourseSessionDetailController {
     private RDSlideService slideService;
 
     @Autowired
-    private RDFillInBlankQuestionService questionService;
+    private RDQuestionService questionService;
 
     @Autowired
     private RDAssignmentService assignmentService;
-    
+
     @Autowired
     private RDStudentContentProgressService progressService;
 
- // Start either slide or assignment session based on the content available
+    @Autowired
+    private RDUserPointsService userPointsService;
+
+    @Autowired
+    private RDUserService userService;
+
+    @Autowired
+    private RDStudentEnrollmentService enrollmentService;
+
+    // Start either slide or assignment session based on the content available
     @GetMapping("/start/{sessionDetailId}")
     public String startSession(@PathVariable("sessionDetailId") int sessionDetailId,
                                @RequestParam("enrollmentId") int enrollmentId,
@@ -96,7 +102,6 @@ public class RDCourseSessionDetailController {
         List<RDSlide> slides = slideService.getSlidesBySessionDetailId(sessionDetailId);
 
         if (slides == null || slides.isEmpty()) {
-            // Handle the case where no slides are found
             model.addAttribute("errorMessage", "No slides found for this session.");
             return "errorPage";
         }
@@ -107,9 +112,6 @@ public class RDCourseSessionDetailController {
         } else if ("prev".equals(direction) && currentSlide > 0) {
             currentSlide--;
         }
-
-        // Log the current slide for debugging purposes
-        System.out.println("Navigated to Slide: " + currentSlide + ", EnrollmentId: " + enrollmentId);
 
         // Track progress safely
         try {
@@ -132,7 +134,9 @@ public class RDCourseSessionDetailController {
         }
 
         RDSlide slide = slides.get(currentSlideIndex);
-        List<RDFillInBlankQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slide.getSlideId());
+
+        // Fetch "fill-in-the-blank" questions by slide ID
+        List<RDQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slide.getSlideId(), "fill_in_the_blank");
 
         model.addAttribute("slide", slide);
         model.addAttribute("fillInBlankQuestions", fillInBlankQuestions);
@@ -213,15 +217,32 @@ public class RDCourseSessionDetailController {
         @RequestParam("enrollmentId") int enrollmentId,
         Model model) {
 
-        // Logic to handle the submitted answers
-        List<RDFillInBlankQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slideId);
+        // Fetch "fill-in-the-blank" questions related to the current slide
+        List<RDQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slideId, "fill_in_the_blank");
         Map<Integer, Boolean> correctness = new HashMap<>();
         Map<Integer, String> submittedAnswers = new HashMap<>();
+        int totalPoints = 0; // Total points earned
+        int possiblePoints = 0; // Maximum points for the slide
 
-        for (RDFillInBlankQuestion question : fillInBlankQuestions) {
+		boolean allCorrect = true;  // Variable to track if all answers are correct
+        
+        // Loop through questions to check correctness and calculate points
+        for (RDQuestion question : fillInBlankQuestions) {
             String submittedAnswer = allParams.get("answers[" + question.getQuestionId() + "]");
             submittedAnswers.put(question.getQuestionId(), submittedAnswer);
-            correctness.put(question.getQuestionId(), question.getAnswer().equalsIgnoreCase(submittedAnswer));
+            
+            boolean isCorrect = question.getCorrectAnswer().equalsIgnoreCase(submittedAnswer);
+            correctness.put(question.getQuestionId(), isCorrect);
+
+            // Calculate points if the answer is correct
+            if (isCorrect) {
+                totalPoints += question.getPoints();
+            } else {
+                allCorrect = false;  // Mark as false if any answer is incorrect
+            }
+
+            // Add up the possible points for all questions
+            possiblePoints += question.getPoints();
         }
 
         // Add attributes to model for JSP
@@ -229,12 +250,55 @@ public class RDCourseSessionDetailController {
         model.addAttribute("fillInBlankQuestions", fillInBlankQuestions);
         model.addAttribute("correctness", correctness);
         model.addAttribute("submittedAnswers", submittedAnswers);
+        model.addAttribute("totalPoints", totalPoints); // Send total points to the view
+        model.addAttribute("possiblePoints", possiblePoints); // Send possible points
         model.addAttribute("sessionDetailId", sessionDetailId);
         model.addAttribute("enrollmentId", enrollmentId);
         model.addAttribute("currentSlide", currentSlide);
         model.addAttribute("slideCount", slideService.getSlidesBySessionDetailId(sessionDetailId).size());
+        model.addAttribute("progress", progressService.getProgressBySessionDetail(enrollmentId, sessionDetailId));
 
+        // If all answers are correct, add points and set a flag to show the points modal
+        if (allCorrect) {
+            int points = calculatePoints(fillInBlankQuestions);  // You can assign points per question or slide.
+            addUserPoints(enrollmentId, points);
+            model.addAttribute("pointsEarned", points);  // Pass the points earned to the JSP
+            model.addAttribute("allCorrect", true);      // Flag indicating that all answers were correct
+        } else {
+            model.addAttribute("allCorrect", false);     // Set flag as false if not all answers are correct
+        }
+        
         return "slideShow";  // Return the updated slide show view
+    }
+
+    // Method to calculate total points for correct answers
+    private int calculatePoints(List<RDQuestion> fillInBlankQuestions) {
+        int totalPoints = 0;
+        for (RDQuestion question : fillInBlankQuestions) {
+            totalPoints += question.getPoints();  // Assuming you have points for each question
+        }
+        return totalPoints;
+    }
+
+    // Method to add points to the user
+    private void addUserPoints(int enrollmentId, int points) {
+        int userId = enrollmentService.getUserIdFromEnrollment(enrollmentId);
+        
+        RDUser user = userService.getRDUser(userId);
+        // Fetch existing points
+        RDUserPoints userPoints = userPointsService.findByUserId(userId);
+        
+        if (userPoints == null) {
+            // Create new entry if the user doesn't have any points yet
+            userPoints = new RDUserPoints();
+            userPoints.setUser(user);
+            userPoints.setTotalPoints(points);
+        } else {
+            // Update existing points
+            userPoints.setTotalPoints(userPoints.getTotalPoints() + points);
+        }
+        
+        userPointsService.saveOrUpdate(userPoints);
     }
 
     @PostMapping("/executeCode")

@@ -53,7 +53,6 @@
 			<form
 				action="${pageContext.request.contextPath}/courseSession/uploadCsv"
 				method="post" enctype="multipart/form-data">
-				<!-- Hidden field to include the selected courseId -->
 				<input type="hidden" name="courseId" value="${param.courseId}" />
 
 				<div class="mb-3">
@@ -64,9 +63,6 @@
 
 				<button type="submit" class="btn btn-success">Upload CSV</button>
 			</form>
-
-
-
 		</c:if>
 
 		<!-- Course Sessions Table -->

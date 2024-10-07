@@ -60,7 +60,7 @@ public class RDSlideDaoImpl implements RDSlideDao {
 	@Override
 	public List<RDSlide> getSlidesBySessionDetailId(int sessionDetailId) {
 		Session session = factory.getCurrentSession();
-        Query<RDSlide> query = session.createQuery("from RDSlide where courseSessionDetail.courseSessionDetailId=:sessionDetailId", RDSlide.class);
+		Query<RDSlide> query = session.createQuery("from RDSlide where courseSessionDetail.courseSessionDetailId = :sessionDetailId order by slideOrder ASC", RDSlide.class);
         query.setParameter("sessionDetailId", sessionDetailId);
         return query.getResultList();
 	}

@@ -1,6 +1,8 @@
 package com.robodynamics.service;
 
 import com.robodynamics.model.RDCourseSession;
+
+import java.io.File;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +24,5 @@ public interface RDCourseSessionService {
     // Delete a course session by its ID
     void deleteCourseSession(int courseSessionId);
     
-    // Method to process CSV file
-    public void processCsv(MultipartFile file, int selectedCourseId) throws Exception;
+   	void processCsv(MultipartFile file, int selectedCourseId) throws Exception;
 }

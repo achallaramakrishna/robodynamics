@@ -113,7 +113,7 @@ public class RDCourseSessionController {
             redirectAttributes.addFlashAttribute("error", "Error processing CSV file: " + e.getMessage());
         }
 
-        return "redirect:/courseSession/list?courseId=" + courseId;
+        return "success";
     }
 
 

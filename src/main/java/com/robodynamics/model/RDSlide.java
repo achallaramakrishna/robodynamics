@@ -36,6 +36,8 @@ public class RDSlide {
 	 @Column(name = "file_type")  // New column for file type
 	 private String fileType;
 	 
+	 @Column(name = "slide_order") // New column to define the order of slides
+	 private int slideOrder;
     
     @ManyToOne
     @JoinColumn(name = "course_session_detail_id")
@@ -100,6 +102,14 @@ public class RDSlide {
 
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
+	}
+
+	public int getSlideOrder() {
+		return slideOrder;
+	}
+
+	public void setSlideOrder(int slideOrder) {
+		this.slideOrder = slideOrder;
 	}
     
 	

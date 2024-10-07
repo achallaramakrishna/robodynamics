@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.robodynamics.dao.RDAssetDao;
@@ -55,14 +56,22 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 
 	@Override
 	public List<RDStudentEnrollment> getRDStudentEnrollments() {
-		Session session = factory.getCurrentSession();
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<RDStudentEnrollment> cq = cb.createQuery(RDStudentEnrollment.class);
-		Root<RDStudentEnrollment> root = cq.from(RDStudentEnrollment.class);
-		cq.select(root);
-		Query query = session.createQuery(cq);
-		return query.getResultList();
+	    Session session = factory.getCurrentSession();
+	    CriteriaBuilder cb = session.getCriteriaBuilder();
+	    CriteriaQuery<RDStudentEnrollment> cq = cb.createQuery(RDStudentEnrollment.class);
+	    Root<RDStudentEnrollment> root = cq.from(RDStudentEnrollment.class);
+
+	    // Add condition where status = 1
+	    Predicate statusCondition = cb.equal(root.get("status"), 1);
+
+	    // Apply the condition to the query
+	    cq.select(root).where(statusCondition);
+
+	    // Execute query
+	    Query<RDStudentEnrollment> query = session.createQuery(cq);
+	    return query.getResultList();
 	}
+
 
 	@Override
 	public void deleteRDStudentEnrollment(int id) {
@@ -77,7 +86,7 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 		Session session = factory.getCurrentSession();
 
 		try {
-			Query<RDStudentEnrollment> query = session.createQuery("from RDStudentEnrollment where parent.userID =:userId",
+			Query<RDStudentEnrollment> query = session.createQuery("from RDStudentEnrollment where parent.userID =:userId and status = 1",
 					RDStudentEnrollment.class);
 			query.setParameter("userId", userId);
 			List<RDStudentEnrollment> rdStudentEnrollmentsList  = query.getResultList();
@@ -93,7 +102,7 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 		Session session = factory.getCurrentSession();
 
 		try {
-			Query<RDStudentEnrollment> query = session.createQuery("from RDStudentEnrollment where student.userID =:userId",
+			Query<RDStudentEnrollment> query = session.createQuery("from RDStudentEnrollment where student.userID =:userId and status = 1",
 					RDStudentEnrollment.class);
 			query.setParameter("userId", userId);
 			List<RDStudentEnrollment> rdStudentEnrollmentsList  = query.getResultList();

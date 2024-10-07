@@ -141,7 +141,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <!-- Image for Vedic Maths -->
-                        <img src="https://example.com/images/vedic-maths.jpg" class="card-img-top" alt="Vedic Maths Image">
+                        <img src="/images/vedicmaths.png" class="card-img-top" alt="Vedic Maths Image">
                         <!-- Replace the above URL with your actual image URL -->
                         <div class="card-body">
                             <h5 class="card-title">Vedic Maths</h5>
@@ -154,7 +154,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <!-- Image for Robotics -->
-                        <img src="https://example.com/images/robotics.jpg" class="card-img-top" alt="Robotics Image">
+                        <img src=/images/robotics.png" class="card-img-top" alt="Robotics Image">
                         <!-- Replace the above URL with your actual image URL -->
                         <div class="card-body">
                             <h5 class="card-title">Robotics</h5>
@@ -167,7 +167,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <!-- Image for Drones -->
-                        <img src="https://example.com/images/drones.jpg" class="card-img-top" alt="Drones Image">
+                        <img src="/images/drones.png" class="card-img-top" alt="Drones Image">
                         <!-- Replace the above URL with your actual image URL -->
                         <div class="card-body">
                             <h5 class="card-title">Drones</h5>

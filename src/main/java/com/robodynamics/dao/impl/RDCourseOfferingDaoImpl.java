@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.robodynamics.dao.RDAssetDao;
@@ -53,14 +54,23 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
 	@Override
 	public List<RDCourseOffering> getRDCourseOfferings() {
-		Session session = factory.getCurrentSession();
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<RDCourseOffering> cq = cb.createQuery(RDCourseOffering.class);
-		Root<RDCourseOffering> root = cq.from(RDCourseOffering.class);
-		cq.select(root);
-		Query query = session.createQuery(cq);
-		return query.getResultList();
+	    Session session = factory.getCurrentSession();
+	    CriteriaBuilder cb = session.getCriteriaBuilder();
+	    CriteriaQuery<RDCourseOffering> cq = cb.createQuery(RDCourseOffering.class);
+	    Root<RDCourseOffering> root = cq.from(RDCourseOffering.class);
+
+	    // Add conditions: active = true and archived = false
+	    Predicate isActive = cb.isTrue(root.get("active"));
+	    Predicate isNotArchived = cb.isFalse(root.get("archived"));
+
+	    // Combine conditions
+	    cq.select(root).where(cb.and(isActive, isNotArchived));
+
+	    // Execute query
+	    Query<RDCourseOffering> query = session.createQuery(cq);
+	    return query.getResultList();
 	}
+
 
 	@Override
 	public void deleteRDCourseOffering(int id) {

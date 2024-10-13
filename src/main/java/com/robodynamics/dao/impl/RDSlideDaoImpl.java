@@ -66,6 +66,25 @@ public class RDSlideDaoImpl implements RDSlideDao {
 	}
 
 
+	@Override
+	public void deleteSlide(int slideId) {
+		Session session = factory.getCurrentSession();
+		RDSlide rdSlide = session.get(RDSlide.class, slideId);
+		session.delete(rdSlide);
+		
+	}
+
+
+	@Override
+	public void saveAll(List<RDSlide> slides) {
+		 Session session = factory.getCurrentSession();
+	        for (RDSlide slide : slides) {
+	            session.saveOrUpdate(slide);  // This will either save a new slide or update an existing one
+	        }
+		
+	}
+
+
 	
 	
 }

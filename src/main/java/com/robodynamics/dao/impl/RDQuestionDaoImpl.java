@@ -3,6 +3,10 @@ package com.robodynamics.dao.impl;
 import com.robodynamics.dao.RDQuestionDao;
 import com.robodynamics.model.RDQuestion;
 import com.robodynamics.model.RDQuestion.DifficultyLevel;
+import com.robodynamics.model.RDQuizOption;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -84,4 +88,46 @@ public class RDQuestionDaoImpl implements RDQuestionDao {
 
         return query.getResultList();
     }
+
+    @Override
+    public void saveAll(List<RDQuestion> questions) {
+        for (RDQuestion question : questions) {
+        	saveOrUpdate(question);
+        }
+    }
+    
+    @Override
+    public List<RDQuestion> findBySlideId(int slideId) {
+        String hql = "FROM RDQuestion q LEFT JOIN FETCH q.options WHERE q.slide.slideId = :slideId ORDER BY q.questionNumber ASC";
+        Query<RDQuestion> query = sessionFactory.getCurrentSession().createQuery(hql, RDQuestion.class);
+        query.setParameter("slideId", slideId);
+        return query.getResultList();
+    }
+
+	@Override
+	public List<RDQuizOption> getOptionsForQuestion(int questionId) {
+		 	Session session = sessionFactory.getCurrentSession();
+	        String hql = "FROM RDQuizOption o WHERE o.question.questionId = :questionId";
+	        Query<RDQuizOption> query = session.createQuery(hql);
+	        query.setParameter("questionId", questionId);
+	        return query.getResultList();
+	}
+
+	@Override
+	public RDQuestion findBySlideIdAndQuestionNumber(int slideId, int questionNumber) {
+	        String hql = "FROM RDQuestion WHERE slide.slideId = :slideId AND questionNumber = :questionNumber";
+	        Query<RDQuestion> query = sessionFactory.getCurrentSession().createQuery(hql, RDQuestion.class);
+	        query.setParameter("slideId", slideId);
+	        query.setParameter("questionNumber", questionNumber);
+	        return query.uniqueResult();
+	}
+
+	@Override
+	public List<RDQuestion> getQuestionsByCourseSessionDetailId(int courseSessionDetailId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<RDQuestion> query = session.createQuery("from RDQuestion where courseSessionDetail.courseSessionDetailId=:sessionDetailId", RDQuestion.class);
+        query.setParameter("sessionDetailId", courseSessionDetailId);
+        return query.getResultList();
+	}
+
 }

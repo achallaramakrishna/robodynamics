@@ -28,6 +28,9 @@ public class RDQuestion {
 
     @Column(name = "points", nullable = false)
     private int points;  // Points for the question
+    
+    @Column(name = "question_number", nullable = false)
+    private int questionNumber;  // Points for the question
 
     // Foreign key for session details
     @ManyToOne
@@ -124,4 +127,14 @@ public class RDQuestion {
     public void setOptions(List<RDQuizOption> options) {
         this.options = options;
     }
+
+	public int getQuestionNumber() {
+		return questionNumber;
+	}
+
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
+	}
+    
+    
 }

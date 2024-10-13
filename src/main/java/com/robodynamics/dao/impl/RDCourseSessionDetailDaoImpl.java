@@ -20,7 +20,6 @@ import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
 
 @Repository
-@Transactional
 public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 
 	@Autowired
@@ -28,10 +27,19 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	
 	
 	@Override
-	public void saveRDCourseSession(RDCourseSessionDetail rdCourseSessionDetail) {
-		Session session = factory.getCurrentSession();
-		session.saveOrUpdate(rdCourseSessionDetail);
+	public void saveRDCourseSessionDetail(RDCourseSessionDetail rdCourseSessionDetail) {
+	    Session session = factory.getCurrentSession();
+	    try {
+	        session.saveOrUpdate(rdCourseSessionDetail);
+	        session.flush(); // Force Hibernate to execute SQL immediately
+	        System.out.println("Data has been flushed successfully.");
+	    } catch (Exception e) {
+	        System.out.println("Error occurred while saving session detail: " + e.getMessage());
+	        e.printStackTrace();
+	        throw e; // Re-throw the exception to ensure rollback happens if there is an issue
+	    }
 	}
+
 
 	@Override
 	public RDCourseSessionDetail getRDCourseSessionDetail(int courseSessionDetailId) {
@@ -42,23 +50,15 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 
 	@Override
 	public List<RDCourseSessionDetail> getRDCourseSessionDetails(int courseId) {
-		
-		return factory.getCurrentSession().createCriteria(RDCourseSessionDetail.class)
-				.createAlias("courseSession","courseSession")
-                .createAlias("courseSession.course", "course")
-                .add(Restrictions.eq("course.courseId", courseId))
-                .list();
-		
-		/*
-		 * Session session = factory.getCurrentSession(); CriteriaBuilder cb =
-		 * session.getCriteriaBuilder(); CriteriaQuery < RDCourseSessionDetail > cq =
-		 * cb.createQuery(RDCourseSessionDetail.class); Root < RDCourseSessionDetail >
-		 * root = cq.from(RDCourseSessionDetail.class);
-		 * 
-		 * Predicate condition = cb.equal(root.get("course.courseId"), courseId);
-		 * cq.where(condition); // cq.select(root); Query query =
-		 * session.createQuery(cq); return query.getResultList();
-		 */
+	    Session session = factory.getCurrentSession();
+	    System.out.println("hello............................" + courseId);
+	    // Native SQL query to get course session details where course_id matches
+	    String sql = "SELECT * FROM rd_course_session_details WHERE course_id = :courseId";
+
+	    Query<RDCourseSessionDetail> query = session.createNativeQuery(sql, RDCourseSessionDetail.class);
+	    query.setParameter("courseId", courseId);
+
+	    return query.getResultList();
 	}
 
 	@Override
@@ -77,5 +77,31 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
         return query.getResultList();
 
 	}
+
+	@Override
+	public void saveAll(List<RDCourseSessionDetail> courseSessionDetailss) {
+        Session session = factory.getCurrentSession();
+        for (RDCourseSessionDetail sessionDetail : courseSessionDetailss) {
+            session.saveOrUpdate(sessionDetail);  // Save or update each session detail in the list
+        }
+	}
+
+	@Override
+	public RDCourseSessionDetail getRDCourseSessionDetailBySessionIdAndDetailId(int sessionId,
+			int sessionDetailId) {
+		 Session session = factory.getCurrentSession();
+		    String hql = "FROM RDCourseSessionDetail csd WHERE csd.courseSession.sessionId = :sessionId AND csd.sessionDetailId = :sessionDetailId";
+		    Query<RDCourseSessionDetail> query = session.createQuery(hql, RDCourseSessionDetail.class);
+		    query.setParameter("sessionId", sessionId);
+		    query.setParameter("sessionDetailId", sessionDetailId);
+
+		    return query.uniqueResult();
+	}
+
+	public void flushSession() {
+        Session session = factory.getCurrentSession();
+        session.flush(); // Forces Hibernate to push SQL to the database
+	}
+
 
 }

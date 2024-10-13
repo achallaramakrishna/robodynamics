@@ -67,7 +67,30 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
     public void saveAll(List<RDCourseSession> courseSessions) {
         Session session = factory.getCurrentSession();
         for (RDCourseSession courseSession : courseSessions) {
+        	System.out.println("Step 31.....");
             session.saveOrUpdate(courseSession);  // Save or update each session in the list
         }
     }
+    
+    public RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, int courseId) {
+        Session session = factory.getCurrentSession();
+
+        // Native SQL query that fetches RDCourseSession based on courseSessionId and courseId,
+        // only if the courseSessionId exists in the rd_course_session_details table
+        String sql = "SELECT cs.* " +
+                     "FROM rd_course_sessions cs " +
+                     "WHERE cs.session_id = :sessionId " +
+                     "AND cs.course_id = :courseId " +
+                     "LIMIT 1";
+
+        Query<RDCourseSession> query = session.createNativeQuery(sql, RDCourseSession.class);
+        query.setParameter("sessionId", sessionId);
+        query.setParameter("courseId", courseId);
+
+        return query.uniqueResult();    
+    }
+
+
+
+
 }

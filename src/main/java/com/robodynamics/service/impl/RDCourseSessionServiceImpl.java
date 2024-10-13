@@ -4,6 +4,8 @@ import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.wrapper.CourseSessionJson;
+import com.robodynamics.wrapper.CourseSessionsWrapper;
 import com.robodynamics.dao.RDCourseSessionDao;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -12,7 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -62,11 +71,14 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
         courseSessionDao.deleteRDCourseSession(courseSessionId);
     }
     
+    
+    
     @Override
     public void processCsv(MultipartFile file, int selectedCourseId) throws Exception {
         List<RDCourseSession> courseSessions = new ArrayList<>();
         int courseIdFromCsv = -1; // Placeholder to hold the courseId from the CSV
 
+        System.out.println("hello inside processCsv file .... ");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader())) {
 
@@ -111,4 +123,68 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
             throw new Exception("Error processing CSV file: " + e.getMessage());
         }
     }
+
+    @Override
+    public void processJson(MultipartFile file, int selectedCourseId) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();  // Jackson object mapper to handle JSON
+        System.out.println("Step 21..");
+        try {
+            // Convert JSON file into CourseSessionsWrapper object
+            CourseSessionsWrapper wrapper = objectMapper.readValue(file.getInputStream(), CourseSessionsWrapper.class);
+            System.out.println("Step 22..");
+            // Fetch existing sessions for the selected course
+            List<RDCourseSession> existingSessions = courseSessionDao.getCourseSessionsByCourseId(selectedCourseId);
+            System.out.println("Step 23..");
+            // Map existing sessions by session ID for easy lookup
+            Map<Integer, RDCourseSession> existingSessionsMap = existingSessions.stream()
+                .collect(Collectors.toMap(RDCourseSession::getSessionId, session -> session));
+
+            List<RDCourseSession> courseSessionsToSave = new ArrayList<>();
+            System.out.println("Step 24..");
+            // Iterate through sessions from the JSON file
+            for (CourseSessionJson sessionJson : wrapper.getSessions()) {
+                RDCourseSession courseSession;
+                System.out.println("Step 25..");
+                // Check if session ID exists in the database
+                if (existingSessionsMap.containsKey(sessionJson.getSessionId())) {
+                    // Update the existing session
+                	System.out.println("Step 26..");
+                    courseSession = existingSessionsMap.get(sessionJson.getSessionId());
+                    courseSession.setSessionTitle(sessionJson.getSessionTitle());
+                    courseSession.setVersion(sessionJson.getVersion());
+                } else {
+                    // Create a new session if it doesn't exist
+                	System.out.println("Step 27..");
+                    courseSession = new RDCourseSession();
+                    courseSession.setSessionId(sessionJson.getSessionId());
+                    courseSession.setSessionTitle(sessionJson.getSessionTitle());
+                    courseSession.setVersion(sessionJson.getVersion());
+
+                    // Associate the session with the course
+                    RDCourse course = new RDCourse();
+                    course.setCourseId(selectedCourseId);
+                    courseSession.setCourse(course);
+                }
+                System.out.println("Step 28..");
+                courseSessionsToSave.add(courseSession);
+            }
+            System.out.println("Step 29..");
+            // Persist the sessions (both new and updated)
+            courseSessionDao.saveAll(courseSessionsToSave);
+            
+            System.out.println("Step 30..");
+
+        } catch (Exception e) {
+            throw new Exception("Error processing JSON file: " + e.getMessage());
+        }
+    }
+
+	@Override
+	public RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, Integer courseId) {
+		return courseSessionDao.getCourseSessionBySessionIdAndCourseId(sessionId, courseId);
+	}
+
+    
+
+
 }

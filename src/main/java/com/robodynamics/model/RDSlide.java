@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "rd_slides")
 public class RDSlide {
@@ -38,14 +40,17 @@ public class RDSlide {
 	 
 	 @Column(name = "slide_order") // New column to define the order of slides
 	 private int slideOrder;
+	 
+	 @Column(name = "slide_number")
+	 private Integer slideNumber;
     
     @ManyToOne
     @JoinColumn(name = "course_session_detail_id")
     private RDCourseSessionDetail courseSessionDetail;
 
-    
+    @JsonIgnore  // Prevents the lazy loading of this collection
     @OneToMany(mappedBy = "slide", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RDFillInBlankQuestion> fillInBlankQuestions;
+    private List<RDQuestion> questions;
     
 	public RDCourseSessionDetail getCourseSessionDetail() {
 		return courseSessionDetail;
@@ -55,12 +60,13 @@ public class RDSlide {
 		this.courseSessionDetail = courseSessionDetail;
 	}
 
-	public List<RDFillInBlankQuestion> getFillInBlankQuestions() {
-		return fillInBlankQuestions;
+	
+	public List<RDQuestion> getQuestions() {
+		return questions;
 	}
 
-	public void setFillInBlankQuestions(List<RDFillInBlankQuestion> fillInBlankQuestions) {
-		this.fillInBlankQuestions = fillInBlankQuestions;
+	public void setQuestions(List<RDQuestion> questions) {
+		this.questions = questions;
 	}
 
 	// Getters and Setters
@@ -111,7 +117,18 @@ public class RDSlide {
 	public void setSlideOrder(int slideOrder) {
 		this.slideOrder = slideOrder;
 	}
-    
+
+	
+	public Integer getSlideNumber() {
+		return this.slideNumber;
+	}
+
+	public void setSlideNumber(Integer slideNumber) {
+		this.slideNumber = slideNumber;
+	}
+
+	
+	
 	
 
 }

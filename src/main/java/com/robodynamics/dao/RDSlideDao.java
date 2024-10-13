@@ -15,5 +15,11 @@ public interface RDSlideDao {
     public RDSlide getSlideById(int slideId);
     
     public List<RDSlide> getSlidesBySessionDetailId(int sessionDetailId);
+
+	public void deleteSlide(int slideId);
+	
+    public void saveAll(List<RDSlide> slides);
+
+
     
 }

@@ -102,14 +102,14 @@ footer {
     function loadContent(courseSessionDetailId, enrollmentId) {
         const contentType = event.target.getAttribute('data-type');
         const file = event.target.getAttribute('data-file');
-        const quiz = event.target.getAttribute('data-quiz');
+       // const quiz = event.target.getAttribute('data-quiz');
         const details = event.target.getAttribute('data-details');
         const id = event.target.getAttribute('data-id');
 
         // Log debug information
         console.log('Type - ' + contentType);
         console.log('File - ' + file);
-        console.log('Quiz - ' + quiz);
+       // console.log('Quiz - ' + quiz);
         console.log('Details - ' + details);
         console.log('ID - ' + id);
 
@@ -118,7 +118,7 @@ footer {
         // Hide all containers and display the required one based on contentType
         document.getElementById('course-video').style.display = 'none';
         document.getElementById('course-pdf').style.display = 'none';
-        document.getElementById('course-quiz').style.display = 'none';
+     //   document.getElementById('course-quiz').style.display = 'none';
         document.getElementById('course-fib').style.display = 'none';
         document.getElementById('course-flashcard').style.display = 'none';
         document.getElementById('course-assignment').style.display = 'none';
@@ -133,10 +133,11 @@ footer {
         } else if (contentType === 'slide') {
             document.getElementById('course-fib').style.display = 'block';
             document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id + `?enrollmentId=` + enrollmentId;
-        } else if (contentType === 'quiz') {
-            document.getElementById('course-quiz').style.display = 'block';
-            document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
-        } else if (contentType === 'flashcard') {
+        } //else if (contentType === 'quiz') {
+          //  document.getElementById('course-quiz').style.display = 'block';
+           // document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quiztest/start?quiz_id=` + quiz;
+        //}
+        else if (contentType === 'flashcard') {
             document.getElementById('course-flashcard').style.display = 'block';
             document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcard-sets/session/` + id;
         } else if (contentType === 'assignment') {
@@ -144,11 +145,6 @@ footer {
             document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;
         }
 
-        if (details && details !== 'null') {
-            document.getElementById('course-details-content').textContent = details;
-        } else {
-            document.getElementById('course-details-content').textContent = 'No details available';
-        }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -175,7 +171,7 @@ footer {
                         Your browser does not support the video tag.
                     </video>
                     <iframe id="course-pdf" style="display: none;" src="" width="1400" height="850"></iframe>
-                    <iframe id="course-quiz" style="display: none;" src="" width="1400" height="850"></iframe>
+                  <!--   <iframe id="course-quiz" style="display: none;" src="" width="1400" height="850"></iframe> -->
                     <iframe id="course-fib" style="display: none;" src="" width="1400" height="850"></iframe>
                     <iframe id="course-flashcard" style="display: none;" src="" width="1400" height="850"></iframe>
                     <iframe id="course-assignment" style="display: none;" src="" width="1400" height="850"></iframe>
@@ -195,7 +191,7 @@ footer {
                                             style="font-size: 18px; color: #34495E;"
                                             data-type="${courseSessionDetail.type}"
                                             data-file="${courseSessionDetail.file}"
-                                            data-quiz="${courseSessionDetail.quiz.quiz_id}"
+                                          <%--   data-quiz="${courseSessionDetail.quiz.quiz_id}" --%>
                                             data-details="${courseSessionDetail.topic}"
                                             data-qa="${courseSessionDetail.topic}"
                                             data-id="${courseSessionDetail.courseSessionDetailId}">

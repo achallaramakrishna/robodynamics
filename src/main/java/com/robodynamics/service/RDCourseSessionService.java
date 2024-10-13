@@ -25,4 +25,8 @@ public interface RDCourseSessionService {
     void deleteCourseSession(int courseSessionId);
     
    	void processCsv(MultipartFile file, int selectedCourseId) throws Exception;
+   	
+   	void processJson(MultipartFile file, int selectedCourseId) throws Exception;
+
+	RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, Integer courseId);
 }

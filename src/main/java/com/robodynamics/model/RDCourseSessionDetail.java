@@ -56,11 +56,19 @@ public class RDCourseSessionDetail {
 	@Column(name = "version")
 	private int version;
 	
-	@ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private RDQuiz quiz;
+	@Column(name = "session_detail_id")  // This is the user-defined field
+    private int sessionDetailId;
+	
+	
+	 public int getSessionDetailId() {
+		return sessionDetailId;
+	}
 
-	 @OneToMany(mappedBy = "courseSessionDetail", cascade = CascadeType.ALL,orphanRemoval = true) 
+	public void setSessionDetailId(int sessionDetailId) {
+		this.sessionDetailId = sessionDetailId;
+	}
+
+	@OneToMany(mappedBy = "courseSessionDetail", cascade = CascadeType.ALL,orphanRemoval = true) 
 	 @JsonIgnore
 	 private List<RDSlide> slides;
 	
@@ -71,14 +79,6 @@ public class RDCourseSessionDetail {
 
 	public void setSlides(List<RDSlide> slides) {
 		this.slides = slides;
-	}
-
-	public RDQuiz getQuiz() {
-		return quiz;
-	}
-
-	public void setQuiz(RDQuiz quiz) {
-		this.quiz = quiz;
 	}
 
 	public int getCourseSessionDetailId() {
@@ -144,6 +144,7 @@ public class RDCourseSessionDetail {
 	public void setFile(String file) {
 		this.file = file;
 	}
+
 
 }
 

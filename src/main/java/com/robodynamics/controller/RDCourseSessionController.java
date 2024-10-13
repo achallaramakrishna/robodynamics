@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class RDCourseSessionController {
 
     @Autowired
     private RDCourseService courseService;  // Service to manage courses
+    
+    private static final String UPLOAD_DIR = "c:\\coursedata\\";
+
 
     @Autowired
     private RDCourseSessionService courseSessionService;  // Service to manage course sessions
@@ -88,32 +92,44 @@ public class RDCourseSessionController {
     }
 
 
-    @PostMapping("/uploadCsv")
-    public String handleCsvUpload(@RequestParam("file") MultipartFile file, 
+    @PostMapping("/uploadJson")
+    public String handleJsonUpload(@RequestParam("file") MultipartFile file, 
                                   @RequestParam("courseId") Integer courseId, 
                                   RedirectAttributes redirectAttributes) {
+    	
+    	System.out.println("step 11 ... ");
         // Validate if the file is empty
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Please select a CSV file to upload.");
+            redirectAttributes.addFlashAttribute("error", "Please select a JSON file to upload.");
             return "redirect:/courseSession/list?courseId=" + courseId;
         }
-
+        System.out.println("step 12 ... ");
         try {
             // Validate if courseId is present
             if (courseId == null || courseId <= 0) {
                 redirectAttributes.addFlashAttribute("error", "Invalid course ID. Please select a valid course.");
                 return "redirect:/courseSession/list";
             }
-
-            // Process the CSV file for the specified course
-            courseSessionService.processCsv(file, courseId);
-            redirectAttributes.addFlashAttribute("message", "CSV file uploaded and processed successfully for course ID: " + courseId);
+            System.out.println("step 13 ... ");
+         // Save the file locally
+            String fileName = file.getOriginalFilename();
+            String filePath = UPLOAD_DIR + fileName;
+            File destinationFile = new File(filePath);
+            file.transferTo(destinationFile);
+            // Process the JSON file for the specified course
+            System.out.println("step 14 ... ");
+            courseSessionService.processJson(file, courseId);
+            System.out.println("step 15 ... ");
+            redirectAttributes.addFlashAttribute("message", "JSON file uploaded and processed successfully for course ID: " + courseId);
         } catch (Exception e) {
             // Handle any error during the processing
-            redirectAttributes.addFlashAttribute("error", "Error processing CSV file: " + e.getMessage());
+        	e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Error processing JSON file: " + e.getMessage());
         }
 
-        return "success";
+        System.out.println("step 16 ... ");
+        // Redirect back to the listCourseSessions page
+        return "redirect:/courseSession/list?courseId=" + courseId;
     }
 
 

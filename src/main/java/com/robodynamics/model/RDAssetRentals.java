@@ -30,23 +30,22 @@ public class RDAssetRentals {
 	@Column(name = "asset_rental_id")
 	private int rentalId;
 	
-	@Column(name = "asset_rental_id")
+	@Column(name = "user_id")
 	private int userId;
 	
-	@Column(name = "asset_rental_id")
+	@Column(name = "asset_id")
 	private int assetId;
 	
-	@Column(name = "asset_rental_id")
+	@Column(name = "rental_start_date")
 	private Date rentalStartDate;
 	
-	@Column(name = "asset_rental_id")
+	@Column(name = "rental_end_date")
 	private Date rentalEndDate;
 	
-	@Column(name = "asset_rental_id")
-	private Date actualReturnDate;
-	
-	@Column(name = "asset_rental_id")
+	@Column(name = "status")
 	private String rentalStatus;
+	
+	
 	public int getRentalId() {
 		return rentalId;
 	}
@@ -77,12 +76,7 @@ public class RDAssetRentals {
 	public void setRentalEndDate(Date rentalEndDate) {
 		this.rentalEndDate = rentalEndDate;
 	}
-	public Date getActualReturnDate() {
-		return actualReturnDate;
-	}
-	public void setActualReturnDate(Date actualReturnDate) {
-		this.actualReturnDate = actualReturnDate;
-	}
+	
 	public String getRentalStatus() {
 		return rentalStatus;
 	}
@@ -92,9 +86,10 @@ public class RDAssetRentals {
 	@Override
 	public String toString() {
 		return "RDAssetRentals [rentalId=" + rentalId + ", userId=" + userId + ", assetId=" + assetId
-				+ ", rentalStartDate=" + rentalStartDate + ", rentalEndDate=" + rentalEndDate + ", actualReturnDate="
-				+ actualReturnDate + ", rentalStatus=" + rentalStatus + "]";
+				+ ", rentalStartDate=" + rentalStartDate + ", rentalEndDate=" + rentalEndDate + ", rentalStatus="
+				+ rentalStatus + "]";
 	}
+	
 	
 	
 	

@@ -142,6 +142,16 @@ public class RDCourseSession {
 		this.progress = progress;
 	}
 
+	@Override
+	public String toString() {
+		return "RDCourseSession [courseSessionId=" + courseSessionId + ", sessionId=" + sessionId + ", course=" + course
+				+ ", sessionTitle=" + sessionTitle + ", creationDate=" + creationDate + ", version=" + version
+				+ ", progress=" + progress + "]";
+	}
+
+
+
+	
 
 }
 

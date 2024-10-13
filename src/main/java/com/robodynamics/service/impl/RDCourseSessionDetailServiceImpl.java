@@ -1,32 +1,42 @@
 package com.robodynamics.service.impl;
 
+import java.io.InputStream;
 import java.util.List;
-
-import com.robodynamics.model.RDCourseSession;
-import com.robodynamics.model.RDCourseSessionDetail;
-import com.robodynamics.service.RDCourseSessionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.robodynamics.dao.RDCourseDao;
-import com.robodynamics.dao.RDCourseSessionDao;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robodynamics.dao.RDCourseSessionDetailDao;
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
+import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.wrapper.CourseSessionDetailJson;
+import com.robodynamics.wrapper.CourseSessionJson;
 
 @Service
 public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailService {
 
 	@Autowired
+	private RDCourseService courseService;
+	
+	@Autowired
 	private RDCourseSessionDetailDao rdCourseSessionDetailDao;
 	
+	@Autowired
+	private RDCourseSessionService rdCourseSessionService;
+	
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void saveRDCourseSessionDetail(RDCourseSessionDetail rdCourseSessionDetail) {
-		rdCourseSessionDetailDao.saveRDCourseSession(rdCourseSessionDetail);
+		rdCourseSessionDetailDao.saveRDCourseSessionDetail(rdCourseSessionDetail);
 
 	}
 
@@ -51,9 +61,62 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseSessionDetail> findSessionDetailsBySessionId(int sessionId) {
         return rdCourseSessionDetailDao.findSessionDetailsBySessionId(sessionId);
 
 	}
+
+	@Override
+	@Transactional
+	public void processSessionDetail(CourseSessionDetailJson detail, int sessionId,int courseId) {
+	    // Check if session detail already exists based on sessionId and sessionDetailId
+	    System.out.println("Step 21 ...");
+	    try {
+	    // Retrieve course session and course session detail based on sessionId and sessionDetailId\
+	    RDCourse course = courseService.getRDCourse(courseId);
+	    RDCourseSession courseSession = rdCourseSessionService.getCourseSession(sessionId);
+	    RDCourseSessionDetail existingDetail = rdCourseSessionDetailDao.getRDCourseSessionDetailBySessionIdAndDetailId(sessionId, detail.getSessionDetailId());
+
+	    System.out.println("Step 22 ...");
+	    System.out.println("ExistingDetail - " + existingDetail);
+	    
+	    if (existingDetail != null) {
+	        System.out.println("existing Step 22 ...");
+	        System.out.println("Existing detail - " + existingDetail.getCourseSessionDetailId());
+
+	        // Update the existing detail
+	        existingDetail.setCourse(course);
+	        existingDetail.setTopic(detail.getTopic());
+	        existingDetail.setVersion(detail.getVersion());
+	        existingDetail.setType(detail.getType());
+	        existingDetail.setFile(detail.getFile());
+	        rdCourseSessionDetailDao.saveRDCourseSessionDetail(existingDetail);
+	        rdCourseSessionDetailDao.flushSession();
+
+	    } else {
+	        // Add a new session detail
+	        System.out.println("Step 23 ...");
+	        RDCourseSessionDetail newDetail = new RDCourseSessionDetail();
+	        newDetail.setCourse(course);
+	        newDetail.setCourseSession(courseSession);
+	        newDetail.setSessionDetailId(detail.getSessionDetailId());
+	        newDetail.setTopic(detail.getTopic());
+	        newDetail.setVersion(detail.getVersion());
+	        newDetail.setType(detail.getType());
+	        newDetail.setFile(detail.getFile());
+	        rdCourseSessionDetailDao.saveRDCourseSessionDetail(newDetail);
+	        rdCourseSessionDetailDao.flushSession();
+	    }
+	    } catch(Exception e) {
+	        System.out.println("Error during transaction: " + e.getMessage());
+
+	    	e.printStackTrace();
+	    }
+	    
+	  
+	}
+	
+
 
 }

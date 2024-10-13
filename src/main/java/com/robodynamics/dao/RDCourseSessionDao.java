@@ -1,6 +1,8 @@
 package com.robodynamics.dao;
 
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSessionDetail;
+
 import java.util.List;
 
 public interface RDCourseSessionDao {
@@ -21,4 +23,8 @@ public interface RDCourseSessionDao {
     
     // New method for bulk saving
     void saveAll(List<RDCourseSession> courseSessions);
+
+    RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, int courseId);
+
+
 }

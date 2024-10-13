@@ -18,6 +18,21 @@
 	<jsp:include page="/header.jsp" />
 
 	<div class="container mt-5">
+	
+	        <!-- Display Success Message -->
+        <c:if test="${not empty message}">
+            <div class="alert alert-success" role="alert">
+                ${message}
+            </div>
+        </c:if>
+
+        <!-- Display Error Message -->
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger" role="alert">
+                ${error}
+            </div>
+        </c:if>
+	
 		<!-- Back to Dashboard Button -->
 		<button class="btn btn-secondary mb-3"
 			onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
@@ -51,17 +66,17 @@
 		<!-- CSV Upload Form - Show only if a course is selected -->
 		<c:if test="${param.courseId != null && param.courseId != ''}">
 			<form
-				action="${pageContext.request.contextPath}/courseSession/uploadCsv"
+				action="${pageContext.request.contextPath}/courseSession/uploadJson"
 				method="post" enctype="multipart/form-data">
 				<input type="hidden" name="courseId" value="${param.courseId}" />
 
 				<div class="mb-3">
 					<label for="file" class="form-label">Upload Course Sessions
 						(CSV)</label> <input type="file" class="form-control" id="file"
-						name="file" accept=".csv" required>
+						name="file" accept=".json" required>
 				</div>
 
-				<button type="submit" class="btn btn-success">Upload CSV</button>
+				<button type="submit" class="btn btn-success">Upload Json</button>
 			</form>
 		</c:if>
 

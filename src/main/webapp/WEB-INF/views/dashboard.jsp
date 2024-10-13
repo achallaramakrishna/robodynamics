@@ -117,6 +117,48 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- New Course Session Details Card -->
+				<div class="col-12 col-md-4 mb-4">
+				    <div class="card">
+				        <div class="card-body">
+				            <h5 class="card-title">Course Session Details</h5>
+				            <p class="card-text">View and manage detailed sessions of each course.</p>
+				            <a href="${pageContext.request.contextPath}/courseSessionDetail/list" class="btn btn-primary ${page eq 'courseSessionDetails' ? 'active' : ''}">
+				                Manage Course Session Details
+				            </a>
+				        </div>
+				    </div>
+				</div>
+				
+				
+				                <!-- New Slides Card -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Slides</h5>
+                            <p class="card-text">View and manage all slides for the course sessions.</p>
+                            <a href="${pageContext.request.contextPath}/slides/list" class="btn btn-primary ${page eq 'slides' ? 'active' : ''}">
+                                Manage Slides
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+				<!-- New Questions Card -->
+				<div class="col-12 col-md-4 mb-4">
+				    <div class="card">
+				        <div class="card-body">
+				            <h5 class="card-title">Questions</h5>
+				            <p class="card-text">View and manage different types of questions.</p>
+				            <a href="${pageContext.request.contextPath}/questions/list" class="btn btn-primary ${page eq 'questions' ? 'active' : ''}">
+				                Manage Questions
+				            </a>
+				        </div>
+				    </div>
+				</div>
+
+				
 
                 <!-- New Quizzes Card -->
                 <div class="col-12 col-md-4 mb-4">

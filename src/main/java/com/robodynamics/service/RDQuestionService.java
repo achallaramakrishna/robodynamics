@@ -2,8 +2,11 @@ package com.robodynamics.service;
 
 import com.robodynamics.model.RDQuestion;
 import com.robodynamics.model.RDQuestion.DifficultyLevel;
+import com.robodynamics.model.RDSlide;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface RDQuestionService {
 
@@ -30,4 +33,13 @@ public interface RDQuestionService {
     
  // Method to get questions by slide ID and question type
     List<RDQuestion> getQuestionsBySlideId(int slideId, String questionType);
+    
+    List<RDQuestion> getQuestionsBySlideId(int slideId);
+    
+    public void processJson(MultipartFile file, int selectedCourseSessionDetailId) throws Exception;
+    
+    List<RDQuestion> getQuestionsByCourseSessionDetailId(int courseSessionDetailId);
+
+
+
 }

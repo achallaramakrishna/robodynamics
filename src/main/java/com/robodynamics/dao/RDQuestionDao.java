@@ -2,6 +2,7 @@ package com.robodynamics.dao;
 
 import com.robodynamics.model.RDQuestion;
 import com.robodynamics.model.RDQuestion.DifficultyLevel;
+import com.robodynamics.model.RDQuizOption;
 
 import java.util.List;
 
@@ -30,4 +31,19 @@ public interface RDQuestionDao {
     
     // Method to fetch questions by slide ID and question type
     List<RDQuestion> findQuestionsBySlideIdAndType(int slideId, String questionType);
+    
+    void saveAll(List<RDQuestion> questions);  // Add bulk save method
+    
+    List<RDQuestion> findBySlideId(int slideId);
+    
+    List<RDQuizOption> getOptionsForQuestion(int questionId);  // New method for fetching options
+    
+    public RDQuestion findBySlideIdAndQuestionNumber(int slideId, int questionNumber);
+
+	List<RDQuestion> getQuestionsByCourseSessionDetailId(int courseSessionDetailId);
+
+
+
+
+    
 }

@@ -56,7 +56,7 @@ public class RDCourseSessionDetailController {
     @Autowired
     private RDCourseSessionDetailService courseSessionDetailService;  // Service to manage course session details
 
-    private static final String UPLOAD_DIR = "c:\\coursedata\\";
+   // private static final String UPLOAD_DIR = "c:\\coursedata\\";
 
 
     @Autowired
@@ -178,49 +178,45 @@ public class RDCourseSessionDetailController {
 	        // Validate if the file is empty
 	        if (file.isEmpty()) {
 	            redirectAttributes.addFlashAttribute("error", "Please select a JSON file to upload.");
-	            return "redirect:/courseSessionDetail/list?courseId=" + courseId;
+	            return "redirect:/sessiondetail/list?courseId=" + courseId;
 	        }
+	    	
 	
 	        try {
 	            // Validate if courseId is present
 	            if (courseId == null || courseId <= 0) {
 	                redirectAttributes.addFlashAttribute("error", "Invalid course ID.");
-	                return "redirect:/courseSessionDetail/list";
+	                return "redirect:/sessiondetail/list";
 	            }
-	
-	            // Save the file locally
-	            String fileName = file.getOriginalFilename();
-	            String filePath = UPLOAD_DIR + fileName;
-	            File destinationFile = new File(filePath);
-	            file.transferTo(destinationFile);
+		    	
+				/*
+				 * // Save the file locally String fileName = file.getOriginalFilename(); String
+				 * filePath = UPLOAD_DIR + fileName; File destinationFile = new File(filePath);
+				 * file.transferTo(destinationFile);
+				 */
 	
 	            // Parse the JSON file
 	            List<CourseSessionDetailJson> sessionDetails = parseJsonForSessionDetails(file);
-	            
+		    	
 	            System.out.println(sessionDetails);
 	            System.out.println("Course Id - " + courseId);
 	            // Process each session detail using session_id to map to the correct course_session
 	            for (CourseSessionDetailJson detail : sessionDetails) {
 	            	System.out.println("Detail session id - " + detail.getSessionId());
 	                RDCourseSession courseSession = courseSessionService.getCourseSessionBySessionIdAndCourseId(detail.getSessionId(), courseId.intValue());
-	                System.out.println("course session session id = " + courseSession.getSessionId());
-	                if (courseSession == null) {
-	                    redirectAttributes.addFlashAttribute("error", "No course session found for session ID: " + detail.getSessionId());
-	                    return "redirect:/courseSessionDetail/list?courseId=" + courseId;
-	                }
-	
+	                System.out.println("course session session id = " + courseSession.getCourseSessionId());
 	                // Process session details and assign the correct course_session_id from the retrieved courseSession
 	                courseSessionDetailService.processSessionDetail(detail, courseSession.getCourseSessionId(),courseId);
 	            }
-	
+
 	            redirectAttributes.addFlashAttribute("message", "JSON file uploaded and processed successfully.");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            redirectAttributes.addFlashAttribute("error", "Error processing JSON file: " + e.getMessage());
 	        }
-	
+
 	        // Redirect back to the listCourseSessionDetails page
-	        return "redirect:/courseSessionDetail/list?courseId=" + courseId;
+	        return "redirect:/sessiondetail/list?courseId=" + courseId;
 	    }
 	
 	

@@ -74,7 +74,7 @@ public class RDQuizQuestionMapDaoImpl implements RDQuizQuestionMapDao {
 	public List<Integer> findQuestionIdsByQuizId(int quizId) {
         Session session = sessionFactory.getCurrentSession();
 
-        String hql = "SELECT qqm.questionId FROM RDQuizQuestionMap qqm WHERE qqm.quizId = :quizId";
+        String hql = "SELECT qqm.question.questionId FROM RDQuizQuestionMap qqm WHERE qqm.quiz.quizId = :quizId";
         Query<Integer> query = session.createQuery(hql, Integer.class);
         query.setParameter("quizId", quizId);
         return query.getResultList();

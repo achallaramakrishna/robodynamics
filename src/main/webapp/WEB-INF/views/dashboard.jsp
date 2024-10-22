@@ -124,7 +124,7 @@
 				        <div class="card-body">
 				            <h5 class="card-title">Course Session Details</h5>
 				            <p class="card-text">View and manage detailed sessions of each course.</p>
-				            <a href="${pageContext.request.contextPath}/courseSessionDetail/list" class="btn btn-primary ${page eq 'courseSessionDetails' ? 'active' : ''}">
+				            <a href="${pageContext.request.contextPath}/sessiondetail/list" class="btn btn-primary ${page eq 'courseSessionDetails' ? 'active' : ''}">
 				                Manage Course Session Details
 				            </a>
 				        </div>

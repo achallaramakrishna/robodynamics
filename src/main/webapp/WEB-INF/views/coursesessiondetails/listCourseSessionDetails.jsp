@@ -30,7 +30,10 @@
         <c:if test="${not empty error}">
             <div class="alert alert-danger">${error}</div>
         </c:if>
-
+				<!-- Back to Dashboard Button -->
+		<button class="btn btn-secondary mb-3"
+			onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
+			Back to Dashboard</button>
         <!-- Course Selection Dropdown -->
 		<!-- Course Dropdown -->
 		<form action="list" method="get">
@@ -50,13 +53,13 @@
 
         <!-- Button to Add New Course Session Detail - Show only if a course is selected -->
         <c:if test="${param.courseId != null && param.courseId != ''}">
-            <a href="${pageContext.request.contextPath}/courseSessionDetail/add?courseId=${param.courseId}"
+            <a href="${pageContext.request.contextPath}/sessiondetail/add?courseId=${param.courseId}"
                class="btn btn-primary mb-3">Add New Session Detail</a>
         </c:if>
 
         <!-- JSON Upload Form - Show only if a course is selected -->
         <c:if test="${param.courseId != null && param.courseId != ''}">
-            <form action="${pageContext.request.contextPath}/courseSessionDetail/uploadJson"
+            <form action="${pageContext.request.contextPath}/sessiondetail/uploadJson"
                   method="post" enctype="multipart/form-data">
                 <input type="hidden" name="courseId" value="${param.courseId}" />
 

@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CourseSessionDetailJson {
 
-    @JsonProperty("session_id")
     private int sessionId;
 
-    @JsonProperty("session_detail_id")
     private int sessionDetailId;
 
     private String topic;

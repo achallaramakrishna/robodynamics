@@ -234,6 +234,7 @@ public class RDStudentEnrollmentController {
 		theStudentEnrollment.setEnrollmentDate(new Date());
 
 		theStudentEnrollment.setCourseOffering(courseOffering);
+		theStudentEnrollment.setStatus(1);
 		theStudentEnrollment.setParent(parent);
 		theStudentEnrollment.setStudent(student);
 		studentEnrollmentService.saveRDStudentEnrollment(theStudentEnrollment);

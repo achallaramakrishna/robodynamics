@@ -49,6 +49,34 @@
 	    @Autowired
 	    private RDCourseSessionDetailService courseSessionDetailService;
 	
+	    @GetMapping("/question")
+	    @ResponseBody
+	    public RDQuestion getQuestion() {
+	        return questionService.getRandomQuestion();
+	    }
+	    
+	    @PostMapping("/verify-answer")
+	    @ResponseBody
+	    public Map<String, Object> verifyAnswer(@RequestBody Map<String, String> payload) {
+	        String questionId = payload.get("questionId");
+	        String userAnswer = payload.get("userAnswer");
+	        
+	        System.out.println("Question id - " + questionId + "\t" + userAnswer);
+	        
+	        RDQuestion question = questionService.findById(Integer.parseInt(questionId));
+	     //   RDQuestion question = questionDAO.findById(Long.parseLong(questionId));
+	        Map<String, Object> response = new HashMap<>();
+	        
+	        if (question.getCorrectAnswer().equalsIgnoreCase(userAnswer.trim())) {
+	            response.put("result", "Correct");
+	        } else {
+	            response.put("result", "Incorrect");
+	            response.put("correctAnswer", question.getCorrectAnswer());
+	        }
+
+	        return response;
+	    }
+	    
 	    @GetMapping("/getCourseSessions")
 	    @ResponseBody
 	    public Map<String, Object> getCourseSessions(@RequestParam("courseId") int courseId) {

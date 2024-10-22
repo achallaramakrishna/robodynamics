@@ -2,6 +2,9 @@ package com.robodynamics.model;
 
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 @Entity
@@ -44,6 +47,7 @@ public class RDQuestion {
 
     // One-to-Many relationship with RDQuizOption for multiple-choice questions
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<RDQuizOption> options;
 
     // Enum for Difficulty Level

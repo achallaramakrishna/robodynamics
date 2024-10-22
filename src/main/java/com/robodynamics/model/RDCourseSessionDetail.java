@@ -60,6 +60,11 @@ public class RDCourseSessionDetail {
     private int sessionDetailId;
 	
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "quiz_id", referencedColumnName = "quiz_id")
+    private RDQuiz quiz;
+	
+	
 	 public int getSessionDetailId() {
 		return sessionDetailId;
 	}
@@ -144,6 +149,16 @@ public class RDCourseSessionDetail {
 	public void setFile(String file) {
 		this.file = file;
 	}
+
+	public RDQuiz getQuiz() {
+		return quiz;
+	}
+
+	public void setQuiz(RDQuiz quiz) {
+		this.quiz = quiz;
+	}
+	
+	
 
 
 }

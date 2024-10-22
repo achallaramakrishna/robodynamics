@@ -186,6 +186,14 @@ public class RDQuestionServiceImpl implements RDQuestionService {
         return questionDao.getQuestionsByCourseSessionDetailId(courseSessionDetailId);
 	}
 
+	@Override
+	public RDQuestion getRandomQuestion() {
+		RDQuestion question = questionDao.findById(1);
+		System.out.println(question);
+		return question;
+	}
+	
+
 	
 }
  

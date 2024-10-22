@@ -21,9 +21,8 @@ public interface RDCourseSessionDetailDao {
  // New method for bulk saving
     public void saveAll(List<RDCourseSessionDetail> courseSessionDetailss);
     
-    RDCourseSessionDetail getRDCourseSessionDetailBySessionIdAndDetailId(int courseSessionId, int sessionDetailId);
+    public RDCourseSessionDetail getRDCourseSessionDetailByIdAndDetailId(int courseSessionId, int sessionDetailId);
 
-    void flushSession();
 
     
 }

@@ -44,11 +44,8 @@
 
     <!-- Show total points -->
     <div class="mt-4">
-        <h4>Total Points: ${points}</h4>
+        <h4>Total Points: ${pointsEarned}</h4>
     </div>
-
-    <!-- Back to Quiz List button -->
-    <a href="${pageContext.request.contextPath}/quizzes" class="btn btn-primary mt-4">Back to Quiz List</a>
 
 </body>
 </html>

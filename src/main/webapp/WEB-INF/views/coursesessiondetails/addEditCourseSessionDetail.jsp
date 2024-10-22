@@ -35,7 +35,7 @@
 
             <!-- Hidden field for courseSessionId and courseId -->
             <f:hidden path="courseSession.courseSessionId" value="${courseSessionId}"/>
-            <f:hidden path="courseId" value="${courseId}"/>
+            <f:hidden path="course.courseId" value="${courseId}"/>
 
             <!-- Topic Field -->
             <div class="mb-3">
@@ -54,6 +54,7 @@
                 <f:label path="type" cssClass="form-label">Type</f:label>
                 <f:select path="type" cssClass="form-control">
                     <option value="">Select Type</option>
+                    <option value="slide" ${courseSessionDetail.type == 'slide' ? 'selected' : ''}>Slide</option>
                     <option value="video" ${courseSessionDetail.type == 'video' ? 'selected' : ''}>Video</option>
                     <option value="pdf" ${courseSessionDetail.type == 'pdf' ? 'selected' : ''}>PDF</option>
                     <option value="document" ${courseSessionDetail.type == 'document' ? 'selected' : ''}>Document</option>
@@ -65,12 +66,6 @@
             <div class="mb-3">
                 <f:label path="file" cssClass="form-label">File</f:label>
                 <f:input path="file" cssClass="form-control" type="text" placeholder="Enter file path or URL"/>
-            </div>
-
-            <!-- Quiz ID Field (if this detail links to a quiz) -->
-            <div class="mb-3">
-                <f:label path="quizId" cssClass="form-label">Quiz ID</f:label>
-                <f:input path="quizId" cssClass="form-control" type="number" placeholder="Enter quiz ID (optional)"/>
             </div>
 
             <!-- Submit and Cancel Buttons -->

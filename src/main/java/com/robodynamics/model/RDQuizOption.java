@@ -2,6 +2,8 @@ package com.robodynamics.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "rd_quiz_options")
 public class RDQuizOption {
@@ -22,6 +24,7 @@ public class RDQuizOption {
     
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
+    @JsonBackReference
     private RDQuestion question;
 
     // Constructors

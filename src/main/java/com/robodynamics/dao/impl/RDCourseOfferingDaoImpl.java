@@ -59,17 +59,14 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 	    CriteriaQuery<RDCourseOffering> cq = cb.createQuery(RDCourseOffering.class);
 	    Root<RDCourseOffering> root = cq.from(RDCourseOffering.class);
 
-	    // Add conditions: active = true and archived = false
-	    Predicate isActive = cb.isTrue(root.get("active"));
-	    Predicate isNotArchived = cb.isFalse(root.get("archived"));
-
-	    // Combine conditions
-	    cq.select(root).where(cb.and(isActive, isNotArchived));
+	    // Select all RDCourseOffering entries
+	    cq.select(root);
 
 	    // Execute query
 	    Query<RDCourseOffering> query = session.createQuery(cq);
 	    return query.getResultList();
 	}
+
 
 
 	@Override

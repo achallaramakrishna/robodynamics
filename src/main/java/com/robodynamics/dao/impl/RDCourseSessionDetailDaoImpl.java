@@ -27,12 +27,11 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	
 	
 	@Override
+	@Transactional
 	public void saveRDCourseSessionDetail(RDCourseSessionDetail rdCourseSessionDetail) {
 	    Session session = factory.getCurrentSession();
 	    try {
 	        session.saveOrUpdate(rdCourseSessionDetail);
-	        session.flush(); // Force Hibernate to execute SQL immediately
-	        System.out.println("Data has been flushed successfully.");
 	    } catch (Exception e) {
 	        System.out.println("Error occurred while saving session detail: " + e.getMessage());
 	        e.printStackTrace();
@@ -42,6 +41,7 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 
 
 	@Override
+	@Transactional
 	public RDCourseSessionDetail getRDCourseSessionDetail(int courseSessionDetailId) {
 		 Session session = factory.getCurrentSession();
 		 RDCourseSessionDetail courseSessionDetail = session.get(RDCourseSessionDetail.class, courseSessionDetailId);
@@ -49,6 +49,7 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseSessionDetail> getRDCourseSessionDetails(int courseId) {
 	    Session session = factory.getCurrentSession();
 	    System.out.println("hello............................" + courseId);
@@ -62,6 +63,7 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	}
 
 	@Override
+	@Transactional
 	public void deleteRDCourseSessionDetail(int id) {
 		Session session = factory.getCurrentSession();
 		RDCourseSessionDetail courseSessionDetail = session.byId(RDCourseSessionDetail.class).load(id);
@@ -70,6 +72,7 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseSessionDetail> findSessionDetailsBySessionId(int sessionId) {
 		Session session = factory.getCurrentSession();
         Query<RDCourseSessionDetail> query = session.createQuery("FROM RDCourseSessionDetail WHERE courseSession.courseSessionId = :sessionId", RDCourseSessionDetail.class);
@@ -79,6 +82,7 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	}
 
 	@Override
+	@Transactional
 	public void saveAll(List<RDCourseSessionDetail> courseSessionDetailss) {
         Session session = factory.getCurrentSession();
         for (RDCourseSessionDetail sessionDetail : courseSessionDetailss) {
@@ -87,21 +91,16 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	}
 
 	@Override
-	public RDCourseSessionDetail getRDCourseSessionDetailBySessionIdAndDetailId(int sessionId,
+	@Transactional
+	public RDCourseSessionDetail getRDCourseSessionDetailByIdAndDetailId(int courseSessionId,
 			int sessionDetailId) {
 		 Session session = factory.getCurrentSession();
-		    String hql = "FROM RDCourseSessionDetail csd WHERE csd.courseSession.sessionId = :sessionId AND csd.sessionDetailId = :sessionDetailId";
+		    String hql = "FROM RDCourseSessionDetail csd WHERE csd.courseSession.courseSessionId = :courseSessionId AND csd.sessionDetailId = :sessionDetailId";
 		    Query<RDCourseSessionDetail> query = session.createQuery(hql, RDCourseSessionDetail.class);
-		    query.setParameter("sessionId", sessionId);
-		    query.setParameter("sessionDetailId", sessionDetailId);
+		    query.setParameter("courseSessionId", courseSessionId);
+		    query.setParameter("sessionDetailId", courseSessionId);
 
 		    return query.uniqueResult();
 	}
-
-	public void flushSession() {
-        Session session = factory.getCurrentSession();
-        session.flush(); // Forces Hibernate to push SQL to the database
-	}
-
 
 }

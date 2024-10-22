@@ -34,7 +34,6 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	private RDCourseSessionService rdCourseSessionService;
 	
 	@Override
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void saveRDCourseSessionDetail(RDCourseSessionDetail rdCourseSessionDetail) {
 		rdCourseSessionDetailDao.saveRDCourseSessionDetail(rdCourseSessionDetail);
 
@@ -69,14 +68,15 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 
 	@Override
 	@Transactional
-	public void processSessionDetail(CourseSessionDetailJson detail, int sessionId,int courseId) {
+	public void processSessionDetail(CourseSessionDetailJson detail, int courseSessionId,int courseId) {
 	    // Check if session detail already exists based on sessionId and sessionDetailId
-	    System.out.println("Step 21 ...");
+	    System.out.println("Step 21 ..." + courseSessionId );
 	    try {
 	    // Retrieve course session and course session detail based on sessionId and sessionDetailId\
 	    RDCourse course = courseService.getRDCourse(courseId);
-	    RDCourseSession courseSession = rdCourseSessionService.getCourseSession(sessionId);
-	    RDCourseSessionDetail existingDetail = rdCourseSessionDetailDao.getRDCourseSessionDetailBySessionIdAndDetailId(sessionId, detail.getSessionDetailId());
+	    RDCourseSession courseSession = rdCourseSessionService.getCourseSession(courseSessionId);
+	    System.out.println("Course Session id : " + courseSession.getCourseSessionId());
+	    RDCourseSessionDetail existingDetail = rdCourseSessionDetailDao.getRDCourseSessionDetailByIdAndDetailId(courseSessionId, detail.getSessionDetailId());
 
 	    System.out.println("Step 22 ...");
 	    System.out.println("ExistingDetail - " + existingDetail);
@@ -92,21 +92,21 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	        existingDetail.setType(detail.getType());
 	        existingDetail.setFile(detail.getFile());
 	        rdCourseSessionDetailDao.saveRDCourseSessionDetail(existingDetail);
-	        rdCourseSessionDetailDao.flushSession();
 
 	    } else {
 	        // Add a new session detail
 	        System.out.println("Step 23 ...");
+		    RDCourseSession courseSession1 = rdCourseSessionService.getCourseSession(courseSessionId);
+
 	        RDCourseSessionDetail newDetail = new RDCourseSessionDetail();
 	        newDetail.setCourse(course);
-	        newDetail.setCourseSession(courseSession);
+	        newDetail.setCourseSession(courseSession1);
 	        newDetail.setSessionDetailId(detail.getSessionDetailId());
 	        newDetail.setTopic(detail.getTopic());
 	        newDetail.setVersion(detail.getVersion());
 	        newDetail.setType(detail.getType());
 	        newDetail.setFile(detail.getFile());
 	        rdCourseSessionDetailDao.saveRDCourseSessionDetail(newDetail);
-	        rdCourseSessionDetailDao.flushSession();
 	    }
 	    } catch(Exception e) {
 	        System.out.println("Error during transaction: " + e.getMessage());
@@ -116,7 +116,4 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	    
 	  
 	}
-	
-
-
 }

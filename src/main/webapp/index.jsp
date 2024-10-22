@@ -154,7 +154,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <!-- Image for Robotics -->
-                        <img src=/images/robotics.png" class="card-img-top" alt="Robotics Image">
+                        <img src="/images/robotics.png" class="card-img-top" alt="Robotics Image">
                         <!-- Replace the above URL with your actual image URL -->
                         <div class="card-body">
                             <h5 class="card-title">Robotics</h5>

@@ -36,7 +36,7 @@
         <p>Are you ready to start the quiz?</p>
 
 
- 		<form action="${pageContext.request.contextPath}/quiz/take" method="get">
+ 		<form action="${pageContext.request.contextPath}/quizzes/take" method="get">
  			<input type="hidden" name="quiz_id" id="quiz_id" value="${quiz.quiz_id}">
  			<button type="submit" class="btn btn-primary">Start Quiz</button>
         </form>

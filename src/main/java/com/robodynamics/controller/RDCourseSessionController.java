@@ -22,7 +22,7 @@ public class RDCourseSessionController {
     @Autowired
     private RDCourseService courseService;  // Service to manage courses
     
-    private static final String UPLOAD_DIR = "c:\\coursedata\\";
+    // private static final String UPLOAD_DIR = "c:\\coursedata\\";
 
 
     @Autowired
@@ -112,10 +112,10 @@ public class RDCourseSessionController {
             }
             System.out.println("step 13 ... ");
          // Save the file locally
-            String fileName = file.getOriginalFilename();
-            String filePath = UPLOAD_DIR + fileName;
-            File destinationFile = new File(filePath);
-            file.transferTo(destinationFile);
+         //   String fileName = file.getOriginalFilename();
+         //   String filePath = UPLOAD_DIR + fileName;
+         //   File destinationFile = new File(filePath);
+         //   file.transferTo(destinationFile);
             // Process the JSON file for the specified course
             System.out.println("step 14 ... ");
             courseSessionService.processJson(file, courseId);

@@ -40,6 +40,8 @@ public interface RDQuestionService {
     
     List<RDQuestion> getQuestionsByCourseSessionDetailId(int courseSessionDetailId);
 
+	RDQuestion getRandomQuestion();
+
 
 
 }

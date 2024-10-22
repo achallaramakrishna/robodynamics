@@ -59,6 +59,8 @@ public class RDQuizController {
     @Autowired
     private RDQuestService questService;
     
+    
+    
  // Endpoint to get sessions by course ID
     // Endpoint to get session details by session ID
     @GetMapping("/getSessionByCourse")
@@ -262,15 +264,37 @@ public class RDQuizController {
         List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
 
         // Store the current question's answer before navigating
-        String currentQuestionParam = "question_" + quizQuestions.get(currentQuestionIndex).getQuestionId();
-        Map<Integer, Integer> selectedAnswers = (Map<Integer, Integer>) session.getAttribute("selectedAnswers");
+        RDQuizQuestion currentQuestion = quizQuestions.get(currentQuestionIndex);
+        String currentQuestionParam = "question_" + currentQuestion.getQuestionId();
+        Map<Integer, String> selectedAnswers = (Map<Integer, String>) session.getAttribute("selectedAnswers");
         if (selectedAnswers == null) {
             selectedAnswers = new HashMap<>();
+            session.setAttribute("selectedAnswers", selectedAnswers);
         }
-        if (answers.containsKey(currentQuestionParam)) {
-            int selectedOptionId = Integer.parseInt(answers.get(currentQuestionParam));
-            selectedAnswers.put(quizQuestions.get(currentQuestionIndex).getQuestionId(), selectedOptionId);
+        System.out.println("hello navigate... 1");
+        
+        // Determine if the current question is multiple-choice or fill-in-the-blank
+        if ("multiple_choice".equals(currentQuestion.getQuestionType())) {
+            System.out.println("hello navigate... 2");
+
+            if (answers.containsKey(currentQuestionParam)) {
+                String selectedOptionId = answers.get(currentQuestionParam);
+                selectedAnswers.put(currentQuestion.getQuestionId(), selectedOptionId);
+            }
+        } else if ("fill_in_the_blank".equals(currentQuestion.getQuestionType())) {
+            String fillInTheBlankParam = currentQuestionParam + "_answer";  // Match the key exactly
+
+            System.out.println("hello navigate... 3");
+            System.out.println(answers);
+            System.out.println("fillInTheBlankParam - " + fillInTheBlankParam);
+            if (answers.containsKey(fillInTheBlankParam)) {
+                System.out.println("hello navigate... 41");
+
+                String fillInTheBlankAnswer = answers.get(fillInTheBlankParam);
+                selectedAnswers.put(currentQuestion.getQuestionId(), fillInTheBlankAnswer);
+            }
         }
+        System.out.println("hello navigate... 4");
 
         session.setAttribute("selectedAnswers", selectedAnswers);  // Save selected answers in the session
 
@@ -288,7 +312,7 @@ public class RDQuizController {
         if (currentQuestionIndex >= quizQuestions.size()) currentQuestionIndex = quizQuestions.size() - 1;
 
         // Set current question and pass it to the view
-        RDQuizQuestion currentQuestion = quizQuestions.get(currentQuestionIndex);
+        currentQuestion = quizQuestions.get(currentQuestionIndex);
         model.addAttribute("quiz", quiz);
         model.addAttribute("currentQuestion", currentQuestion);
         model.addAttribute("currentQuestionIndex", currentQuestionIndex);
@@ -296,13 +320,12 @@ public class RDQuizController {
 
         return "quizzes/take";  // Return to quiz page
     }
-    
-
 
     @PostMapping("/submit")
     public String submitQuiz(@RequestParam Map<String, String> answers, 
                              Model model, HttpSession session) {
 
+        System.out.println("hello submit ... 1");
         // Get the current user from the session
         RDUser currentUser = (RDUser) session.getAttribute("rdUser");
 
@@ -312,33 +335,65 @@ public class RDQuizController {
         // Fetch the quiz
         RDQuiz quiz = quizService.findById(quizId);
 
+        System.out.println("hello submit ... 2");
         // Get question IDs mapped to this quiz
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
         List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
 
+        System.out.println("hello submit... 3");
         // Retrieve the user's selected answers from the session
-        Map<Integer, Integer> selectedAnswers = (Map<Integer, Integer>) session.getAttribute("selectedAnswers");
+        Map<Integer, String> selectedAnswers = (Map<Integer, String>) session.getAttribute("selectedAnswers");
+
+        System.out.println("hello submit... 4");
+        System.out.println(selectedAnswers);
 
         // Evaluate the quiz
         int correctAnswersCount = 0;
         int pointsEarned = 0;
         int pointsPerCorrectAnswer = 10;  // Example: 10 points per correct answer
+        System.out.println("hello submit... 5");
 
         for (RDQuizQuestion question : quizQuestions) {
             int questionId = question.getQuestionId();
-            if (selectedAnswers.containsKey(questionId)) {
-                int selectedOptionId = selectedAnswers.getOrDefault(questionId, -1);
 
-                // Check if the selected option is correct
-                if (question.getCorrectOption().getOptionId() == selectedOptionId) {
-                    correctAnswersCount++;
-                    pointsEarned += pointsPerCorrectAnswer;
+            if (selectedAnswers.containsKey(questionId)) {
+                try {
+                    // Retrieve the stored answer, treating it as a String
+                    String selectedOptionStr = selectedAnswers.get(questionId);
+
+                    // Check for null or empty strings before parsing or comparing
+                    if (selectedOptionStr != null && !selectedOptionStr.isEmpty()) {
+                        // Handle based on the question type
+                        if ("multiple_choice".equals(question.getQuestionType())) {
+                            // Parse the string to an integer for multiple choice comparison
+                            int selectedOptionId = Integer.parseInt(selectedOptionStr);  // Parse String to Integer
+
+                            // Check if the selected option is correct
+                            if (question.getCorrectOption().getOptionId() == selectedOptionId) {
+                                correctAnswersCount++;
+                                pointsEarned += pointsPerCorrectAnswer;
+                            }
+                        } else if ("fill_in_the_blank".equals(question.getQuestionType())) {
+                            // Compare the user's answer to the correct answer (case-insensitive)
+                            if (selectedOptionStr.trim().equalsIgnoreCase(question.getCorrectAnswer().trim())) {
+                                correctAnswersCount++;
+                                pointsEarned += pointsPerCorrectAnswer;
+                            }
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    // Handle the case where parsing fails
+                    System.err.println("Error parsing selected option for question ID: " + questionId + " - " + e.getMessage());
                 }
             }
         }
 
+        System.out.println("hello submit... 6");
+
         // Determine if the user passed (70% correct answers threshold)
         boolean passed = (double) correctAnswersCount / quizQuestions.size() >= 0.7;
+
+        System.out.println("hello submit... 7" + passed);
 
         // Save the quiz result
         RDUserQuizResults quizResult = new RDUserQuizResults();
@@ -350,6 +405,7 @@ public class RDQuizController {
         quizResult.setStartTime(Timestamp.valueOf(LocalDateTime.now()));  // Set start time, replace with actual
         quizResult.setEndTime(Timestamp.valueOf(LocalDateTime.now()));    // Set end time, replace with actual
         quizResult.setCompletionTime((int) ((quizResult.getEndTime().getTime() - quizResult.getStartTime().getTime()) / 1000));  // Completion time in seconds
+        System.out.println("hello submit... 8");
 
         quizResultService.saveOrUpdate(quizResult);
 
@@ -359,13 +415,16 @@ public class RDQuizController {
         // Update the session with the latest user data
         currentUser = userService.getRDUser(currentUser.getUserID());
         session.setAttribute("rdUser", currentUser);
+        System.out.println("hello submit... 9");
 
         // Pass the result to the view
         model.addAttribute("quizResult", quizResult);
         model.addAttribute("pointsEarned", pointsEarned);
         model.addAttribute("passed", passed);
+        System.out.println("hello submit... 10");
 
         return "quizzes/result";  // Return to quiz result page
     }
+
 }
 

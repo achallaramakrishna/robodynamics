@@ -10,6 +10,7 @@ import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/slides")
 public class RDSlideController {
+	
+	@Value("${enable.voice.mode}")
+    private boolean enableVoiceMode;
 
 	@Autowired
 	private RDCourseService courseService;

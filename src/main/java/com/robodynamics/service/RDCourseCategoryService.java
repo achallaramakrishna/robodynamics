@@ -13,5 +13,7 @@ public interface RDCourseCategoryService {
 	public List < RDCourseCategory > getRDCourseCategories();
 	
     public void deleteRDCourseCategory(int id);
+    
+    public RDCourseCategory getRDCourseCategoryById(int categoryId);
 
 }

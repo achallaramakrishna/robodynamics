@@ -42,4 +42,10 @@ public class RDCourseCategoryServiceImpl implements RDCourseCategoryService {
 		rdCourseCategoryDao.deleteRDCourseCategory(id);
 	}
 
+	@Override
+	public RDCourseCategory getRDCourseCategoryById(int categoryId) {
+		// Implement the logic to fetch the category by ID
+	    return rdCourseCategoryDao.getRDCourseCategory(categoryId);
+	}
+
 }

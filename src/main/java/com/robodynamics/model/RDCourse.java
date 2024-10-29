@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.robodynamics.form.RDCourseForm;
 
 @Entity
 @Table(name = "rd_courses")
@@ -311,5 +312,23 @@ public class RDCourse {
 	public String toString() {
 		return "RDCourse [courseId=" + courseId + ", courseName=" + courseName + "]";
 	}
+	
+	public RDCourseForm toRDCourseForm(RDCourse rdCourse) {
+	    RDCourseForm form = new RDCourseForm();
+	    form.setCourseId(rdCourse.getCourseId());
+	    form.setCourseName(rdCourse.getCourseName());
+	    
+	    // Assuming RDCourseCategory has an ID getter method
+	    if (rdCourse.getCourseCategory() != null) {
+	        form.setCourseCategoryId(rdCourse.getCourseCategory().getCourseCategoryId());
+	    }
+	    
+	    // Handle the image file separately if needed, otherwise set it to null
+	    // This is usually set during a form submission where the file comes from the client-side
+	    form.setImageFile(null); // Or some logic to handle file upload if needed
+	    
+	    return form;
+	}
+
     
 }

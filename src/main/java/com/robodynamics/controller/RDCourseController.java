@@ -125,47 +125,53 @@ public class RDCourseController {
 	}
 	
 	@PostMapping("/saveCourse")
-    public String saveCourse(@ModelAttribute("courseForm") RDCourseForm courseForm,
-    		BindingResult result) {
-        if(result.hasErrors()) {
-        	return "showForm";
-        }
-		
-        System.out.println("course name : " + courseForm.getCourseName());
-        System.out.println("course category id : " + courseForm.getCourseCategoryId());
-        
-        MultipartFile imageFile = courseForm.getImageFile();
-        RDCourse theCourse = new RDCourse();
-        theCourse.setCourseName(courseForm.getCourseName());
-    	RDCourseCategory courseCategory = new RDCourseCategory();
-    	courseCategory.setCourseCategoryId(courseForm.getCourseCategoryId());
-    	
-    	theCourse.setCourseCategory(courseCategory);
-    	
-        if(imageFile != null || !imageFile.isEmpty()) {
-        	System.out.println("hello............");
-        	String fileName = servletContext.getRealPath("/") + "resources\\images\\" + imageFile.getOriginalFilename();
-        	try {
-        		imageFile.transferTo(new File(fileName));
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	System.out.println(fileName);
-        }
-        
-		service.saveRDCourse(theCourse);
-        return "redirect:/course/list";
-    }
+	public String saveCourse(@ModelAttribute("courseForm") RDCourseForm courseForm, BindingResult result) {
+	    if (result.hasErrors()) {
+	        return "course-form";
+	    }
+
+	    // Fetch the existing category from the database using the provided category ID
+	    RDCourseCategory courseCategory = courseCategoryService.getRDCourseCategoryById(courseForm.getCourseCategoryId());
+	    
+	    if (courseCategory == null) {
+	        // Handle the case where the category is not found (optional, but recommended)
+	        result.rejectValue("courseCategoryId", "error.courseCategoryId", "Invalid course category.");
+	        return "course-form";
+	    }
+
+	    // Create and set up the course entity
+	    RDCourse theCourse = new RDCourse();
+	    theCourse.setCourseName(courseForm.getCourseName());
+	    theCourse.setCourseCategory(courseCategory); // Properly set the fetched course category
+
+	    // Handle image upload if it's present
+	    MultipartFile imageFile = courseForm.getImageFile();
+	    if (imageFile != null && !imageFile.isEmpty()) {
+	        String fileName = servletContext.getRealPath("/") + "resources/images/" + imageFile.getOriginalFilename();
+	        try {
+	            imageFile.transferTo(new File(fileName));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    // Save the course
+	    service.saveRDCourse(theCourse);
+	    return "redirect:/course/list";
+	}
 
     @GetMapping("/updateForm")
     public String showFormForUpdate(@RequestParam("courseId") int theId,
         Model theModel) {
     	RDCourse course = service.getRDCourse(theId);
-        theModel.addAttribute("course", course);
+    	
+    	 // Fetch all course categories to populate the dropdown
+        List<RDCourseCategory> courseCategories = courseCategoryService.getRDCourseCategories();
+
+    	RDCourseForm courseForm = course.toRDCourseForm(course);
+        theModel.addAttribute("courseForm", courseForm);
+        theModel.addAttribute("courseCategories", courseCategories);
+
         return "course-form";
     }
 

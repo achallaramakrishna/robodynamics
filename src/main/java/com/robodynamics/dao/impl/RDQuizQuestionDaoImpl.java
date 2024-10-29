@@ -47,14 +47,20 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
     
 	@Override
 	public List<RDQuizQuestion> findQuestionsByIds(List<Integer> questionIds) {
-        // Build the HQL query to fetch questions by their IDs
-        Session session = factory.getCurrentSession();
+		  // Build the HQL query to fetch questions by their IDs along with their options
+	    Session session = factory.getCurrentSession();
 
-        String hql = "FROM RDQuizQuestion WHERE id IN (:questionIds)";
-        Query<RDQuizQuestion> query = session.createQuery(hql, RDQuizQuestion.class);
-        query.setParameterList("questionIds", questionIds);  // Pass the list of question IDs
-        
-        return query.getResultList();
+	    // Use IN clause to fetch all questions that match the provided list of IDs
+	    String hql = "SELECT DISTINCT q FROM RDQuizQuestion q LEFT JOIN FETCH q.options WHERE q.questionId IN (:questionIds)";
+	    
+	    // Create the query
+	    Query<RDQuizQuestion> query = session.createQuery(hql, RDQuizQuestion.class);
+	    
+	    // Set the list of IDs as the parameter for the query
+	    query.setParameterList("questionIds", questionIds);
+	    
+	    // Execute the query and return the result list
+	    return query.getResultList();
 	}
 
 	
@@ -121,6 +127,48 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
 	    query.setMaxResults(limit);
 
 	    return query.getResultList();
+	}
+
+	@Override
+	public List<RDQuizQuestion> findAll() {
+		Session session = factory.getCurrentSession();
+        Query<RDQuizQuestion> query = session.createQuery("from RDQuizQuestion", RDQuizQuestion.class);
+        return query.getResultList();
+	}
+
+	@Override
+	public List<RDQuizQuestion> findPaginated(int page, int size) {
+		 Session session = factory.getCurrentSession();
+	        
+	        // Create the HQL query to fetch paginated data
+	        Query<RDQuizQuestion> query = session.createQuery("from RDQuizQuestion", RDQuizQuestion.class);
+	        
+	        // Set pagination parameters
+	        query.setFirstResult(page * size); // Calculate the starting index
+	        query.setMaxResults(size); // Set the maximum number of results
+	        
+	        return query.getResultList();
+	}
+
+	@Override
+	public long countQuestions() {
+		  Session session = factory.getCurrentSession();
+	        
+	        // Create the HQL query to count the total number of records
+	        Query<Long> countQuery = session.createQuery("select count(q) from RDQuizQuestion q", Long.class);
+	        
+	        // Get the unique count result
+	        return countQuery.uniqueResult();
+	}
+
+	@Override
+	public List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType) {
+		Session session = factory.getCurrentSession();
+        String hql = "FROM RDQuizQuestion q WHERE q.slide.slideId = :slideId AND q.questionType = :questionType";
+        Query<RDQuizQuestion> query = session.createQuery(hql, RDQuizQuestion.class);
+        query.setParameter("slideId", slideId);
+        query.setParameter("questionType", questionType);
+        return query.getResultList();
 	}
     
 }

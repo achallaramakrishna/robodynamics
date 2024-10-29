@@ -85,6 +85,19 @@ public class RDSlideDaoImpl implements RDSlideDao {
 	}
 
 
+	@Override
+	public RDSlide findByCourseSessionDetailIdAndSlideNumber(int courseSessionDetailId, int slideNumber) {
+		 Session session = factory.getCurrentSession();
+	        String hql = "FROM RDSlide WHERE courseSessionDetail.courseSessionDetailId = :courseSessionDetailId AND slideNumber = :slideNumber";
+	        Query<RDSlide> query = session.createQuery(hql, RDSlide.class);
+	        query.setParameter("courseSessionDetailId", courseSessionDetailId);
+	        query.setParameter("slideNumber", slideNumber);
+	        
+	        // Return the first result or null if not found
+	        return query.uniqueResult();
+	}
+
+
 	
 	
 }

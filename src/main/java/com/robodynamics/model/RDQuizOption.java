@@ -22,18 +22,13 @@ public class RDQuizOption {
     @Column(name = "selected", nullable = false)
     private boolean selected;  // Add this property
     
-    @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    @JsonBackReference
-    private RDQuestion question;
-
     // Constructors
     public RDQuizOption() {}
 
-    public RDQuizOption(String optionText, boolean isCorrect, RDQuestion question) {
+    public RDQuizOption(String optionText, boolean isCorrect) {
         this.optionText = optionText;
         this.isCorrect = isCorrect;
-        this.question = question;
+       
     }
 
     // Getters and Setters
@@ -63,13 +58,7 @@ public class RDQuizOption {
 
 
 
-	public RDQuestion getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(RDQuestion question) {
-		this.question = question;
-	}
+	
 
 	public boolean isSelected() {
 		return selected;
@@ -79,6 +68,13 @@ public class RDQuizOption {
 		this.selected = selected;
 	}
 
+	@Override
+	public String toString() {
+		return "RDQuizOption [optionId=" + optionId + ", optionText=" + optionText + ", isCorrect=" + isCorrect
+				+ ", selected=" + selected + "]";
+	}
+
+	
 
 	
     

@@ -159,7 +159,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Robotics</h5>
                             <p class="card-text">Learn to build and program cool robots from scratch!</p>
-                            <a href="register-robotics.html" class="btn register-btn">Register Now</a>
+                            <a href="${pageContext.request.contextPath}/course/10" class="btn register-btn">Register Now</a>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Drones</h5>
                             <p class="card-text">Explore the exciting world of drones and aerial robotics!</p>
-                            <a href="register-drones.html" class="btn register-btn">Register Now</a>
+                            <a href="${pageContext.request.contextPath}/course/10" class="btn register-btn">Register Now</a>
                         </div>
                     </div>
                 </div>

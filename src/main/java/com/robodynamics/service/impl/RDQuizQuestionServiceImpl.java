@@ -55,4 +55,28 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 		// TODO Auto-generated method stub
 		return rdQuizQuestionDao.findQuestionsByIds(questionIds);
 	}
+
+	@Override
+	@Transactional
+	public List<RDQuizQuestion> findAll() {
+		// TODO Auto-generated method stub
+		return rdQuizQuestionDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public List<RDQuizQuestion> findPaginated(int page, int size) {
+		return rdQuizQuestionDao.findPaginated(page, size);
+	}
+
+	@Override
+	@Transactional
+	public long countQuestions() {
+		return rdQuizQuestionDao.countQuestions();
+	}
+
+	@Override
+	public List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType) {
+		return rdQuizQuestionDao.getQuestionsBySlideId(slideId, questionType);
+	}
 }

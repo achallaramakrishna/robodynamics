@@ -18,8 +18,33 @@ public class RDQuizQuestion {
     @Column(name = "question_type", nullable = false)
     private String questionType;  // E.g., "multiple_choice" or "fill_in_the_blank"
 
-    // One-to-Many relationship with RDQuizOption (each question can have multiple options)
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Column(name = "max_marks", nullable = false)
+    private int maxMarks;
+    
+    @Column(name = "question_number", nullable = false)
+    private int questionNumber;
+    
+    
+    @Column(name = "points", nullable = false)
+    private Integer points;
+    
+    @ManyToOne
+    @JoinColumn(name = "slide_id", nullable = true)
+    private RDSlide slide;  // New field for slide relationship
+
+
+    // Add the corresponding getter and setter
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "question_id") // This should map the correct foreign key field in `quiz_options` table
     private List<RDQuizOption> options;
 
     @ManyToOne
@@ -41,8 +66,35 @@ public class RDQuizQuestion {
     
     @Column(name = "correct_answer", nullable = true)  // To store correct answers for fill-in-the-blank questions
     private String correctAnswer;
+    
+    @Column(name = "additional_info")
+    private String additionalInfo;
 
-    // Constructors
+    public int getQuestionNumber() {
+		return questionNumber;
+	}
+
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
+	}
+
+	public RDSlide getSlide() {
+		return slide;
+	}
+
+	public void setSlide(RDSlide slide) {
+		this.slide = slide;
+	}
+
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	// Constructors
     public RDQuizQuestion() {}
 
     public RDQuizQuestion(String questionText, String questionType) {
@@ -67,10 +119,20 @@ public class RDQuizQuestion {
         this.questionText = questionText;
     }
 
-    public String getQuestionType() {
+    
+    public int getMaxMarks() {
+		return maxMarks;
+	}
+
+	public void setMaxMarks(int maxMarks) {
+		this.maxMarks = maxMarks;
+	}
+
+	public String getQuestionType() {
         return questionType;
     }
 
+    
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
     }
@@ -118,6 +180,8 @@ public class RDQuizQuestion {
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
+	
+	
 
 	@Override
 	public String toString() {
@@ -129,6 +193,5 @@ public class RDQuizQuestion {
 				+ ", correctAnswer=" + correctAnswer + "]";
 	}
 
-	
-   
+ 
 }

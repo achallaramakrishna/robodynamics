@@ -39,4 +39,10 @@ public class RDQuizOptionDaoImpl implements RDQuizOptionDao {
         getSession().createQuery(hql).setParameter("questionId", questionId).executeUpdate();
     }
 
+	@Override
+	public void saveOrUpdate(RDQuizOption option) {
+		Session session = getSession();
+		session.saveOrUpdate(option); 
+	}
+
 }

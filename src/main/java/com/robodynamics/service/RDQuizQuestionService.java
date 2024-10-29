@@ -5,6 +5,13 @@ import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
 
 public interface RDQuizQuestionService {
 
+    List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType);
+
+    
+	List<RDQuizQuestion> findPaginated(int page, int size);
+	
+	long countQuestions(); 
+	
     // Create or update a quiz question
     void saveOrUpdate(RDQuizQuestion question);
 
@@ -25,4 +32,5 @@ public interface RDQuizQuestionService {
 
     List<RDQuizQuestion> findQuestionsByIds(List<Integer> questionIds);
 
+    List<RDQuizQuestion> findAll();
 }

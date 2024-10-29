@@ -1,6 +1,10 @@
 package com.robodynamics.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 @Entity
@@ -28,6 +32,7 @@ public class RDQuiz {
     private String status;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @JsonIgnore // Prevents the field from being serialized
     private List<RDQuizQuestionMap> quizQuestionMappings;
     
     

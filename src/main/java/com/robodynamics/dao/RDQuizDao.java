@@ -7,6 +7,10 @@ import com.robodynamics.model.RDQuiz;
 
 public interface RDQuizDao {
 
+	List<RDQuiz> getPaginatedQuizzes(int pageNumber, int pageSize);
+	
+	long getTotalQuizzesCount();
+
     // Create or update a quiz
     void saveOrUpdate(RDQuiz quiz);
 

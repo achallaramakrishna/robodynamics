@@ -22,6 +22,9 @@ public interface RDSlideService {
     
     public void processJson(MultipartFile file, int courseSessionDetailId) throws Exception;
     
+    RDSlide findByCourseSessionDetailIdAndSlideNumber(int courseSessionDetailId, int slideNumber);
+
+    
   
     
 }

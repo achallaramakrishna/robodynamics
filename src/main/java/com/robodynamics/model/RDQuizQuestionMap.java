@@ -1,6 +1,9 @@
 package com.robodynamics.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 
 @Entity

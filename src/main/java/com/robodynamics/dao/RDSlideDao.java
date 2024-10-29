@@ -20,6 +20,8 @@ public interface RDSlideDao {
 	
     public void saveAll(List<RDSlide> slides);
 
+	public RDSlide findByCourseSessionDetailIdAndSlideNumber(int courseSessionDetailId, int slideNumber);
+
 
     
 }

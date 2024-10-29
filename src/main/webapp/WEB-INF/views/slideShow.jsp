@@ -366,9 +366,9 @@
 													class="${correctness[question.questionId] ? 'correct' : 'incorrect'}">
 													${correctness[question.questionId] ? 'Correct!' : 'Oops! Incorrect'}
 												</span>
-												<%--                                         <c:if test="${!correctness[question.questionId]}">
+												                                         <c:if test="${!correctness[question.questionId]}">
 	                                            <br /><span class="correct">Correct Answer: ${question.correctAnswer}</span>
-	                                        </c:if> --%>
+	                                        </c:if> 
 											</div>
 										</c:if>
 									</div>

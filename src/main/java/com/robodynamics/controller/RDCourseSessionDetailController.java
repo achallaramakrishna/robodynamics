@@ -2,10 +2,13 @@ package com.robodynamics.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +29,7 @@ import com.robodynamics.model.RDAssignment;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
-import com.robodynamics.model.RDQuestion;
+import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.model.RDSlide;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.model.RDUserPoints;
@@ -35,7 +38,7 @@ import com.robodynamics.service.RDAssignmentService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
-import com.robodynamics.service.RDQuestionService;
+import com.robodynamics.service.RDQuizQuestionService;
 import com.robodynamics.service.RDSlideService;
 import com.robodynamics.service.RDStudentContentProgressService;
 import com.robodynamics.service.RDStudentEnrollmentService;
@@ -66,7 +69,7 @@ public class RDCourseSessionDetailController {
     private RDSlideService slideService;
 
     @Autowired
-    private RDQuestionService questionService;
+    private RDQuizQuestionService quizQuestionService;
 
     @Autowired
     private RDAssignmentService assignmentService;
@@ -339,10 +342,10 @@ public class RDCourseSessionDetailController {
         }
 
         RDSlide slide = slides.get(currentSlideIndex);
-
+        System.out.println("Slide id - " + slide.getSlideId());
         // Fetch "fill-in-the-blank" questions by slide ID
-        List<RDQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slide.getSlideId(), "fill_in_the_blank");
-
+        List<RDQuizQuestion> fillInBlankQuestions = quizQuestionService.getQuestionsBySlideId(slide.getSlideId(), "fill_in_the_blank");
+        System.out.println("Fill in blank Questions - " + fillInBlankQuestions);
         model.addAttribute("slide", slide);
         model.addAttribute("fillInBlankQuestions", fillInBlankQuestions);
         model.addAttribute("currentSlide", currentSlideIndex);
@@ -413,6 +416,24 @@ public class RDCourseSessionDetailController {
         return "assignmentShow";  // JSP for assignments
     }
 
+    private String cleanAnswer(String answer) {
+        if (answer == null) {
+            return "";  // Handle null cases gracefully
+        }
+
+        // Split the answer by any combination of commas and spaces using regex, then trim and filter
+        List<String> cleanedParts = Arrays.stream(answer.split("[,\\s]+"))  // Split by commas or spaces (one or more)
+                                          .map(String::trim)  // Trim each part of the answer
+                                          .filter(part -> !part.isEmpty())  // Remove empty parts
+                                          .collect(Collectors.toList());
+        
+        // Sort the cleaned parts to handle unordered answers (e.g., "3 45" vs "45,3")
+        Collections.sort(cleanedParts);
+        
+        // Join the sorted values back into a single string
+        return String.join(",", cleanedParts);
+    }
+    
     @PostMapping("/submitAnswers")
     public String submitSlideAnswers(
         @RequestParam Map<String, String> allParams,
@@ -423,7 +444,7 @@ public class RDCourseSessionDetailController {
         Model model) {
 
         // Fetch "fill-in-the-blank" questions related to the current slide
-        List<RDQuestion> fillInBlankQuestions = questionService.getQuestionsBySlideId(slideId, "fill_in_the_blank");
+        List<RDQuizQuestion> fillInBlankQuestions = quizQuestionService.getQuestionsBySlideId(slideId, "fill_in_the_blank");
         Map<Integer, Boolean> correctness = new HashMap<>();
         Map<Integer, String> submittedAnswers = new HashMap<>();
         int totalPoints = 0; // Total points earned
@@ -432,11 +453,16 @@ public class RDCourseSessionDetailController {
 		boolean allCorrect = true;  // Variable to track if all answers are correct
         
         // Loop through questions to check correctness and calculate points
-        for (RDQuestion question : fillInBlankQuestions) {
+        for (RDQuizQuestion question : fillInBlankQuestions) {
             String submittedAnswer = allParams.get("answers[" + question.getQuestionId() + "]");
             submittedAnswers.put(question.getQuestionId(), submittedAnswer);
             
-            boolean isCorrect = question.getCorrectAnswer().equalsIgnoreCase(submittedAnswer);
+            // Clean up both the correct answer and the submitted answer
+            String cleanedCorrectAnswer = cleanAnswer(question.getCorrectAnswer());
+            String cleanedSubmittedAnswer = cleanAnswer(submittedAnswer);
+            
+            // Compare the cleaned answers
+            boolean isCorrect = cleanedCorrectAnswer.equalsIgnoreCase(cleanedSubmittedAnswer);
             correctness.put(question.getQuestionId(), isCorrect);
 
             // Calculate points if the answer is correct
@@ -477,9 +503,9 @@ public class RDCourseSessionDetailController {
     }
 
     // Method to calculate total points for correct answers
-    private int calculatePoints(List<RDQuestion> fillInBlankQuestions) {
+    private int calculatePoints(List<RDQuizQuestion> fillInBlankQuestions) {
         int totalPoints = 0;
-        for (RDQuestion question : fillInBlankQuestions) {
+        for (RDQuizQuestion question : fillInBlankQuestions) {
             totalPoints += question.getPoints();  // Assuming you have points for each question
         }
         return totalPoints;

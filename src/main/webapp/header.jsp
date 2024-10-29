@@ -130,6 +130,8 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses.jsp">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/projects.jsp">Projects</a></li>
+            
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/subscription.jsp">Membership</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog.jsp">Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact/contactus">Contact Us</a></li>

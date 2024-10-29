@@ -50,7 +50,7 @@ public class RDSlide {
 
     @JsonIgnore  // Prevents the lazy loading of this collection
     @OneToMany(mappedBy = "slide", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RDQuestion> questions;
+    private List<RDQuizQuestion> questions;
     
 	public RDCourseSessionDetail getCourseSessionDetail() {
 		return courseSessionDetail;
@@ -61,11 +61,11 @@ public class RDSlide {
 	}
 
 	
-	public List<RDQuestion> getQuestions() {
+	public List<RDQuizQuestion> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(List<RDQuestion> questions) {
+	public void setQuestions(List<RDQuizQuestion> questions) {
 		this.questions = questions;
 	}
 

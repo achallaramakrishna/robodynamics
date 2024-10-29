@@ -33,7 +33,7 @@
         <h2>Manage Slides</h2>
 
         <!-- Course Selection -->
-        <form:form id="slideForm">
+        <form id="slideForm">
             <div class="form-group">
                 <label for="course">Select Course</label>
                 <select id="course" class="form-control">
@@ -59,7 +59,7 @@
                     <option value="">-- Select Session Detail --</option>
                 </select>
             </div>
-        </form:form>
+        </form>
 
         <!-- Add Slide Button -->
         <a href="${pageContext.request.contextPath}/slides/add?courseSessionDetailId=${courseSessionDetailId}" 

@@ -83,4 +83,29 @@ public class RDQuizDaoImpl implements RDQuizDao {
         // Execute the query and return the list of filtered quizzes
         return query.getResultList();
     }
+
+	@Override
+	public List<RDQuiz> getPaginatedQuizzes(int pageNumber, int pageSize) {
+		 Session session = factory.getCurrentSession();
+		    CriteriaBuilder cb = session.getCriteriaBuilder();
+		    CriteriaQuery<RDQuiz> cq = cb.createQuery(RDQuiz.class);
+		    Root<RDQuiz> root = cq.from(RDQuiz.class);
+		    cq.select(root);
+
+		    Query<RDQuiz> query = session.createQuery(cq);
+		    query.setFirstResult(pageNumber * pageSize);  // Calculate the starting index
+		    query.setMaxResults(pageSize);  // Set the max number of results
+
+		    return query.getResultList();
+	}
+
+	@Override
+	public long getTotalQuizzesCount() {
+		 Session session = factory.getCurrentSession();
+		    CriteriaBuilder cb = session.getCriteriaBuilder();
+		    CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+		    Root<RDQuiz> root = cq.from(RDQuiz.class);
+		    cq.select(cb.count(root));
+		    return session.createQuery(cq).getSingleResult();
+	}
 }

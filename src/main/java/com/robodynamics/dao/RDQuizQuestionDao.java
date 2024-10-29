@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface RDQuizQuestionDao {
 
+	
+    List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType);
+
+    
     // Create or update a quiz question
     void saveOrUpdate(RDQuizQuestion question);
 
@@ -25,6 +29,12 @@ public interface RDQuizQuestionDao {
     List<RDQuizQuestion> findRandomQuestionsBySessionDetailAndDifficultyLevels(int sessionDetailId, List<DifficultyLevel> difficultyLevels, int limit);
 
     List<RDQuizQuestion> findQuestionsByIds(List<Integer> questionIds);
+
+	List<RDQuizQuestion> findAll();
+
+	List<RDQuizQuestion> findPaginated(int page, int size);
+
+	long countQuestions();
 
     
 }

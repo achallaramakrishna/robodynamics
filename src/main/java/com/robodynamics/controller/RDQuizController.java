@@ -4,9 +4,11 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,6 +27,9 @@ import com.robodynamics.service.*;
 @Controller
 @RequestMapping("/quizzes")
 public class RDQuizController {
+	
+	@Autowired
+    private Judge0Service judge0Service;
 
     @Autowired
     private RDQuizQuestionMapService quizQuestionMapService;
@@ -59,6 +64,10 @@ public class RDQuizController {
     @Autowired
     private RDQuestService questService;
     
+    @Autowired
+    private RDUserQuizAnswerService userQuizAnswerService; // Inject the RDUserQuizAnswerService
+
+    
     
     
  // Endpoint to get sessions by course ID
@@ -82,112 +91,113 @@ public class RDQuizController {
  // Show the form to create a quiz
     @GetMapping("/create")
     public String showCreateQuizForm(Model model) {
-    	
-    	// Initialize form object
-        RDQuizForm quizForm = new RDQuizForm();
-        // Add form object to model
-        model.addAttribute("quizForm", quizForm);
-        
-        List<RDCourse> courses = courseService.getRDCourses();
-        System.out.println(courses);
-        
-        // Add courses to the model
-        model.addAttribute("courses", courses);
-        
-        model.addAttribute("difficultyLevels", DifficultyLevel.values());  // Fetch all difficulty levels
-        return "quizzes/createQuiz";  // Corresponding view for quiz creation form
-    }
-    
-    @PostMapping("/create")
-    public String createQuiz(@RequestParam int courseId,
-                             @RequestParam(required = false) List<Integer> sessionId,  // Allow multiple session IDs
-                             @RequestParam(required = false) List<Integer> sessionDetailId,  // Allow multiple session detail IDs
-                             @RequestParam String quizName,
-                             @RequestParam int questionLimit,  // Number of questions to include
-                             @RequestParam(required = false) List<DifficultyLevel> difficultyLevels,  // Allow multiple difficulty levels
-                             Model model) {
-
-        // Step 1: Create the quiz
+        // Create an empty quiz object for binding
         RDQuiz quiz = new RDQuiz();
-        quiz.setQuizName(quizName);
-
-        // Save the newly created quiz
-        quizService.saveOrUpdate(quiz);  
-
-        // Step 2: Fetch random questions based on course/session/session detail and selected difficulty levels
-        List<RDQuizQuestion> questions = new ArrayList<>();
-
-        // If session details are provided, fetch questions based on session detail and difficulty levels
-        if (sessionDetailId != null && !sessionDetailId.isEmpty()) {
-            for (Integer detailId : sessionDetailId) {
-                questions.addAll(quizQuestionService.getRandomQuestionsBySessionDetailAndDifficultyLevels(detailId, difficultyLevels, questionLimit));
-            }
-        }
-        // If session is provided, fetch questions based on session and difficulty levels
-        else if (sessionId != null && !sessionId.isEmpty()) {
-            for (Integer sid : sessionId) {
-                questions.addAll(quizQuestionService.getRandomQuestionsBySessionAndDifficultyLevels(sid, difficultyLevels, questionLimit));
-            }
-        }
-        // If only course is provided, fetch questions based on course and difficulty levels
-        else {
-            questions.addAll(quizQuestionService.getRandomQuestionsByCourseAndDifficultyLevels(courseId, difficultyLevels, questionLimit));
-        }
-
-        // Step 3: Map the randomly selected questions to the quiz
-        for (RDQuizQuestion question : questions) {
-            quizService.addQuestionToQuiz(quiz.getQuizId(), question.getQuestionId());
-        }
-
-        // Step 4: Add a message to the model for UI feedback
-        model.addAttribute("message", "Quiz created successfully with " + questions.size() + " questions.");
-
-        // Step 5: Redirect to the quiz list page after quiz creation
-        return "redirect:/quizzes/list";
+        model.addAttribute("quiz", quiz);
+        return "quizzes/quizForm";  // Use combined form JSP
     }
+
+
+	@PostMapping("/saveQuiz")
+    public String saveQuiz(@ModelAttribute("quiz") RDQuiz quiz, Model model) {
+		quizService.saveOrUpdate(quiz);
+	    // Step 3: Add a success message for UI feedback
+        model.addAttribute("message", "Quiz created successfully!");
+
+        // Step 4: Redirect to the quiz list page after quiz creation
+        return "redirect:/quizzes/dashboard";
+    }
+	
+	@GetMapping("/edit")
+	public String showEditQuizForm(@RequestParam("quizId") Integer quizId, Model model) {
+	    // Fetch the quiz by ID
+	    RDQuiz quiz = quizService.findById(quizId);
+	    
+	    // Check if the quiz exists
+	    if (quiz == null) {
+	        // If the quiz does not exist, redirect to an error page or show a message
+	        return "redirect:/quizzes/dashboard";
+	    }
+
+	    // Add the quiz object to the model to pre-populate the form
+	    model.addAttribute("quiz", quiz);
+	    
+	    // Return the quiz form view (ensure the path to your JSP is correct)
+	    return "quizzes/quizForm";
+	}
+
+	@PostMapping("/update")
+	public String updateQuiz(@ModelAttribute("quiz") RDQuiz quiz, Model model) {
+	    // Update the quiz using the service layer
+	    quizService.saveOrUpdate(quiz);
+
+	    // Add a success message for feedback
+	    model.addAttribute("message", "Quiz updated successfully!");
+
+	    return "redirect:/quizzes/dashboard";  // Redirect back to the quiz dashboard
+	}
+	
+	@GetMapping("/getQuestionOptions")
+	@ResponseBody
+	public Map<String, Object> getQuestionOptions(@RequestParam Integer questionId) {
+	    // Fetch the question from the service
+	    RDQuizQuestion question = quizQuestionService.findById(questionId);
+	    
+	    // Prepare the response
+	    Map<String, Object> response = new HashMap<>();
+	    if (question != null && question.getOptions() != null) {
+	        List<Map<String, Object>> options = new ArrayList<>();
+	        for (RDQuizOption option : question.getOptions()) {
+	            Map<String, Object> optionData = new HashMap<>();
+	            optionData.put("optionId", option.getOptionId());
+	            optionData.put("optionText", option.getOptionText());
+	            options.add(optionData);
+	        }
+	        response.put("options", options);
+	    }
+	    return response;
+	}
+
+	
+	
+	@GetMapping("/delete")
+	public String deleteQuiz(@RequestParam("quizId") Integer quizId, Model model) {
+	    // Fetch the quiz to ensure it exists
+	    RDQuiz quiz = quizService.findById(quizId);
+	    
+	    if (quiz == null) {
+	        // If no quiz is found, you can add an error message to the model
+	        model.addAttribute("message", "Quiz not found.");
+	        return "redirect:/quizzes/dashboard";
+	    }
+
+	    // Perform the delete operation
+	    quizService.delete(quiz);
+
+	    // Redirect back to the quiz dashboard after deletion
+	    return "redirect:/quizzes/dashboard";
+	}
 
     
-    @GetMapping("/dashboard")
-    public String showQuizDashboard(@RequestParam(value = "courseId", required = false) Integer courseId,
-                                    @RequestParam(value = "status", required = false) String status,
-                                    @RequestParam(value = "difficultyLevel", required = false) String difficultyLevel,
-                                    Model model) {
-    	 // Initialize form model object
-        RDQuizDashboardForm quizDashboardForm = new RDQuizDashboardForm();  // Your form class
+	@GetMapping("/dashboard")
+	public String showQuizDashboard(@RequestParam(value = "page", defaultValue = "0") int page,
+	                                @RequestParam(value = "size", defaultValue = "10") int size,
+	                                Model model) {
+	    List<RDQuiz> quizzes = quizService.getPaginatedQuizzes(page, size);
+	    long totalQuizzes = quizService.getTotalQuizzesCount();
 
-        // Fetch the list of quizzes based on filters
-        List<RDQuiz> quizzes = quizService.getQuizzesFiltered(courseId, status, difficultyLevel);
-        model.addAttribute("quizzes", quizzes);
+	    int totalPages = (int) Math.ceil((double) totalQuizzes / size);
 
-        // Fetch quizQuestionMap for each quiz
-        Map<Integer, List<RDQuizQuestionMap>> quizQuestionMaps = new HashMap<>();
-        for (RDQuiz quiz : quizzes) {
-            List<RDQuizQuestionMap> questionMaps = quizQuestionMapService.getQuizQuestionMappingsByQuizId(quiz.getQuizId());
-            quizQuestionMaps.put(quiz.getQuizId(), questionMaps);
-        }
-        model.addAttribute("quizQuestionMaps", quizQuestionMaps);
-        // Add other data needed for filtering
-     // Add form object and necessary data to the model
-        model.addAttribute("quizDashboardForm", quizDashboardForm);  // Bind form to model
+	    model.addAttribute("quizzes", quizzes);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("size", size);
 
-        model.addAttribute("courses", courseService.getRDCourses());
-        model.addAttribute("difficultyLevels", DifficultyLevel.values());
+	    return "quizzes/quizDashboard";
+	}
 
-        // Set selected filter values for displaying in the form
-        model.addAttribute("selectedCourseId", courseId);
-        model.addAttribute("selectedStatus", status);
-        model.addAttribute("selectedDifficultyLevel", difficultyLevel);
-
-        return "quizzes/quizDashboard";
-    }
     
-    // List available quizzes
-    @GetMapping
-    public String listQuizzes(Model model) {
-        List<RDQuiz> quizzes = quizService.findAll();
-        model.addAttribute("quizzes", quizzes);
-        return "quizzes/list";  // list.jsp to display available quizzes
-    }
+    
 
  // Start a quiz and navigate through questions
     @GetMapping("/start/{quizId}")
@@ -237,74 +247,75 @@ public class RDQuizController {
     }
     
     @PostMapping("/navigate")
-    public String navigateQuiz(
-            @RequestParam("quizId") int quizId,
-            @RequestParam("currentQuestionIndex") int currentQuestionIndex,
-            @RequestParam("action") String action,
-            @RequestParam Map<String, String> answers,  // Capture answers for the current question
-            HttpSession session, Model model) {
-
+    public String navigateQuiz(@RequestParam("quizId") int quizId,
+                               @RequestParam("currentQuestionIndex") int currentQuestionIndex,
+                               @RequestParam("action") String action,
+                               @RequestParam Map<String, String> answers, 
+                               HttpSession session, Model model) {
         // Fetch the user from the session
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
         if (rdUser == null) {
             // Handle case where the user is not logged in
             return "redirect:/login";
         }
-
-        // Fetch the quiz and question IDs using the mapping
+        
+        
+        // Fetch the quiz and questions
         RDQuiz quiz = quizService.findById(quizId);
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-
         if (questionIds.isEmpty()) {
             model.addAttribute("message", "No questions available for this quiz.");
             return "quizzes/error";
         }
 
-        // Fetch the questions using the question IDs
         List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
-
-        // Store the current question's answer before navigating
         RDQuizQuestion currentQuestion = quizQuestions.get(currentQuestionIndex);
-        String currentQuestionParam = "question_" + currentQuestion.getQuestionId();
+
+        // Initialize or fetch selectedAnswers from the session
         Map<Integer, String> selectedAnswers = (Map<Integer, String>) session.getAttribute("selectedAnswers");
         if (selectedAnswers == null) {
             selectedAnswers = new HashMap<>();
             session.setAttribute("selectedAnswers", selectedAnswers);
         }
-        System.out.println("hello navigate... 1");
-        
+
+        String questionKey = "question_" + currentQuestion.getQuestionId() + "_answer";
+        System.out.println("Question key " + questionKey);
+        System.out.println("currentQuestion.getQuestionType()" + currentQuestion.getQuestionType());
         // Determine if the current question is multiple-choice or fill-in-the-blank
-        if ("multiple_choice".equals(currentQuestion.getQuestionType())) {
-            System.out.println("hello navigate... 2");
+        if ("multiple_choice".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
+            selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
+            System.out.println("multiple_choice");
+        } else if ("true_false".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
+        	System.out.println("true_false");
+        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
+            System.out.println("Selected answers - " + selectedAnswers);
 
-            if (answers.containsKey(currentQuestionParam)) {
-                String selectedOptionId = answers.get(currentQuestionParam);
-                selectedAnswers.put(currentQuestion.getQuestionId(), selectedOptionId);
-            }
-        } else if ("fill_in_the_blank".equals(currentQuestion.getQuestionType())) {
-            String fillInTheBlankParam = currentQuestionParam + "_answer";  // Match the key exactly
-
-            System.out.println("hello navigate... 3");
-            System.out.println(answers);
-            System.out.println("fillInTheBlankParam - " + fillInTheBlankParam);
-            if (answers.containsKey(fillInTheBlankParam)) {
-                System.out.println("hello navigate... 41");
-
-                String fillInTheBlankAnswer = answers.get(fillInTheBlankParam);
-                selectedAnswers.put(currentQuestion.getQuestionId(), fillInTheBlankAnswer);
-            }
+        } else if ("fill_in_the_blank".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
+        	System.out.println("fill_in_the_blank");
+        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
+        } else if ("short_answer".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
+        	System.out.println("short_answer");
+        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
+        } else if ("long_answer".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
+        	System.out.println("long_answer");
+        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
+        } else if ("coding".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
+        	System.out.println("coding");
+        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
         }
-        System.out.println("hello navigate... 4");
+        System.out.println("Selected answers - " + selectedAnswers);
+        session.setAttribute("selectedAnswers", selectedAnswers);
+        System.out.println("Selected Answers - " + selectedAnswers);
 
-        session.setAttribute("selectedAnswers", selectedAnswers);  // Save selected answers in the session
 
+      
         // Handle navigation action (Next/Previous/Submit)
         if ("next".equals(action)) {
             currentQuestionIndex++;
         } else if ("previous".equals(action)) {
             currentQuestionIndex--;
         } else if ("submit".equals(action)) {
-            return submitQuiz(answers, model, session);  // Submit the quiz
+            return submitQuiz(answers, model, session);
         }
 
         // Ensure valid question index bounds
@@ -317,15 +328,16 @@ public class RDQuizController {
         model.addAttribute("currentQuestion", currentQuestion);
         model.addAttribute("currentQuestionIndex", currentQuestionIndex);
         model.addAttribute("totalQuestions", quizQuestions.size());
+        model.addAttribute("selectedAnswers", selectedAnswers);
 
-        return "quizzes/take";  // Return to quiz page
+        return "quizzes/take";
     }
+
 
     @PostMapping("/submit")
     public String submitQuiz(@RequestParam Map<String, String> answers, 
                              Model model, HttpSession session) {
 
-        System.out.println("hello submit ... 1");
         // Get the current user from the session
         RDUser currentUser = (RDUser) session.getAttribute("rdUser");
 
@@ -335,65 +347,100 @@ public class RDQuizController {
         // Fetch the quiz
         RDQuiz quiz = quizService.findById(quizId);
 
-        System.out.println("hello submit ... 2");
         // Get question IDs mapped to this quiz
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
         List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
 
-        System.out.println("hello submit... 3");
         // Retrieve the user's selected answers from the session
         Map<Integer, String> selectedAnswers = (Map<Integer, String>) session.getAttribute("selectedAnswers");
 
-        System.out.println("hello submit... 4");
         System.out.println(selectedAnswers);
 
-        // Evaluate the quiz
+        // Evaluate the quiz and store answers
         int correctAnswersCount = 0;
         int pointsEarned = 0;
         int pointsPerCorrectAnswer = 10;  // Example: 10 points per correct answer
-        System.out.println("hello submit... 5");
 
         for (RDQuizQuestion question : quizQuestions) {
             int questionId = question.getQuestionId();
+            String selectedOptionStr = selectedAnswers.get(questionId);
 
-            if (selectedAnswers.containsKey(questionId)) {
+            // Check if selected answer exists
+            if (selectedOptionStr != null) {
+                boolean isCorrect = false;
+
+                // Determine question type and evaluate the answer
                 try {
-                    // Retrieve the stored answer, treating it as a String
-                    String selectedOptionStr = selectedAnswers.get(questionId);
+                    switch (question.getQuestionType()) {
+                        case "multiple_choice":
+                            int selectedOptionId = Integer.parseInt(selectedOptionStr);
+                            isCorrect = question.getCorrectOption().getOptionId() == selectedOptionId;
+                            break;
 
-                    // Check for null or empty strings before parsing or comparing
-                    if (selectedOptionStr != null && !selectedOptionStr.isEmpty()) {
-                        // Handle based on the question type
-                        if ("multiple_choice".equals(question.getQuestionType())) {
-                            // Parse the string to an integer for multiple choice comparison
-                            int selectedOptionId = Integer.parseInt(selectedOptionStr);  // Parse String to Integer
+                        case "fill_in_the_blank":
+                            String cleanedCorrectAnswer = cleanAnswer(question.getCorrectAnswer());
+                            String cleanedSubmittedAnswer = cleanAnswer(selectedOptionStr);
+                            isCorrect = cleanedCorrectAnswer.equalsIgnoreCase(cleanedSubmittedAnswer);
+                            break;
 
-                            // Check if the selected option is correct
-                            if (question.getCorrectOption().getOptionId() == selectedOptionId) {
-                                correctAnswersCount++;
-                                pointsEarned += pointsPerCorrectAnswer;
-                            }
-                        } else if ("fill_in_the_blank".equals(question.getQuestionType())) {
-                            // Compare the user's answer to the correct answer (case-insensitive)
-                            if (selectedOptionStr.trim().equalsIgnoreCase(question.getCorrectAnswer().trim())) {
-                                correctAnswersCount++;
-                                pointsEarned += pointsPerCorrectAnswer;
-                            }
-                        }
+                        case "true_false":
+                            isCorrect = selectedOptionStr.trim().equalsIgnoreCase(question.getCorrectAnswer().trim());
+                            break;
+
+                        case "short_answer":
+                            cleanedCorrectAnswer = cleanAnswer(question.getCorrectAnswer());
+                            cleanedSubmittedAnswer = cleanAnswer(selectedOptionStr);
+                            isCorrect = cleanedCorrectAnswer.equalsIgnoreCase(cleanedSubmittedAnswer);
+                            break;
+                        case "long_answer":
+                            // For long answer questions, you can introduce more complex validation later, 
+                            // such as keyword matching, length validation, or human evaluation
+                            // Here, we assume that all long answers are correct for simplicity
+                            isCorrect = true;
+                            break;
+                        case "coding":
+                        	// Implement logic to execute or compare coding answers
+                            isCorrect = evaluateCodingAnswer(selectedOptionStr, question.getCorrectAnswer());
+                            break;
+          
+
+                        default:
+                            System.err.println("Unknown question type: " + question.getQuestionType());
+                            break;
+                    }
+
+                    // Log details about question processing
+                    System.out.println("Processing question ID: " + questionId + " | Type: " + question.getQuestionType() + 
+                                       " | Answer: " + selectedOptionStr + " | Is Correct: " + isCorrect);
+
+                    // Store the user's answer in the database
+                    RDUserQuizAnswer userQuizAnswer = new RDUserQuizAnswer();
+                    userQuizAnswer.setQuizId(quizId);
+                    userQuizAnswer.setUserId(currentUser.getUserID());
+                    userQuizAnswer.setQuestionId(questionId);
+                    userQuizAnswer.setUserAnswer(selectedOptionStr);
+                    userQuizAnswer.setCorrect(isCorrect);
+                    userQuizAnswer.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+                    userQuizAnswerService.saveOrUpdate(userQuizAnswer);
+
+                    // Update score if the answer is correct
+                    if (isCorrect) {
+                        correctAnswersCount++;
+                        pointsEarned += pointsPerCorrectAnswer;
                     }
                 } catch (NumberFormatException e) {
                     // Handle the case where parsing fails
                     System.err.println("Error parsing selected option for question ID: " + questionId + " - " + e.getMessage());
                 }
+            } else {
+                System.out.println("No answer provided for question ID: " + questionId);
             }
         }
 
-        System.out.println("hello submit... 6");
 
         // Determine if the user passed (70% correct answers threshold)
         boolean passed = (double) correctAnswersCount / quizQuestions.size() >= 0.7;
 
-        System.out.println("hello submit... 7" + passed);
 
         // Save the quiz result
         RDUserQuizResults quizResult = new RDUserQuizResults();
@@ -405,7 +452,6 @@ public class RDQuizController {
         quizResult.setStartTime(Timestamp.valueOf(LocalDateTime.now()));  // Set start time, replace with actual
         quizResult.setEndTime(Timestamp.valueOf(LocalDateTime.now()));    // Set end time, replace with actual
         quizResult.setCompletionTime((int) ((quizResult.getEndTime().getTime() - quizResult.getStartTime().getTime()) / 1000));  // Completion time in seconds
-        System.out.println("hello submit... 8");
 
         quizResultService.saveOrUpdate(quizResult);
 
@@ -415,7 +461,6 @@ public class RDQuizController {
         // Update the session with the latest user data
         currentUser = userService.getRDUser(currentUser.getUserID());
         session.setAttribute("rdUser", currentUser);
-        System.out.println("hello submit... 9");
 
         // Pass the result to the view
         model.addAttribute("quizResult", quizResult);
@@ -423,8 +468,41 @@ public class RDQuizController {
         model.addAttribute("passed", passed);
         System.out.println("hello submit... 10");
 
+        // Clear the session attribute for selected answers after processing the quiz submission
+        session.removeAttribute("selectedAnswers");
         return "quizzes/result";  // Return to quiz result page
     }
+
+    private String cleanAnswer(String answer) {
+        if (answer == null) {
+            return "";  // Handle null cases gracefully
+        }
+
+        // Split the answer by spaces, trim each word, filter empty parts, and join them back with a single space
+        return Arrays.stream(answer.split("\\s+"))
+                     .map(String::trim)
+                     .filter(part -> !part.isEmpty())
+                     .collect(Collectors.joining(" "));
+    }
+    
+    private boolean evaluateCodingAnswer(String userCode, String correctSolution) {
+        // Implement your logic to check the correctness of the submitted code.
+        // For example, you could compare userCode with correctSolution or run the code securely and check output.
+
+        // Simple example: Check if the user's code contains the correct solution (basic validation)
+        return userCode != null && userCode.trim().equalsIgnoreCase(correctSolution.trim());
+    }
+    
+    @PostMapping("/executeCode")
+    @ResponseBody
+    public String executeCode(@RequestParam("code") String code, @RequestParam("languageId") String languageId) {
+        // Call the Judge0 service to execute the code
+    	System.out.println("Code received: " + code);
+        System.out.println("Language ID: " + languageId);
+        String output = judge0Service.executeCode(code, languageId);
+        return output;  // Return the result back to the front-end
+    }
+
 
 }
 

@@ -145,22 +145,7 @@
                     </div>
                 </div>
 
-				<!-- New Questions Card -->
-				<div class="col-12 col-md-4 mb-4">
-				    <div class="card">
-				        <div class="card-body">
-				            <h5 class="card-title">Questions</h5>
-				            <p class="card-text">View and manage different types of questions.</p>
-				            <a href="${pageContext.request.contextPath}/questions/list" class="btn btn-primary ${page eq 'questions' ? 'active' : ''}">
-				                Manage Questions
-				            </a>
-				        </div>
-				    </div>
-				</div>
-
-				
-
-                <!-- New Quizzes Card -->
+				<!-- New Quizzes Card -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
@@ -172,6 +157,23 @@
                         </div>
                     </div>
                 </div>
+                
+				<!-- New Quiz Questions Card -->
+				<div class="col-12 col-md-4 mb-4">
+				    <div class="card">
+				        <div class="card-body">
+				            <h5 class="card-title">Quiz Questions</h5>
+				            <p class="card-text">View and manage quiz questions.</p>
+				            <a href="${pageContext.request.contextPath}/quizquestions/listQuizQuestions" 
+				               class="btn btn-primary ${page == 'quizQuestions' ? 'active' : ''}">
+				                Manage Quiz Questions
+				            </a>
+				        </div>
+				    </div>
+				</div>
+
+                
+                
 
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card">

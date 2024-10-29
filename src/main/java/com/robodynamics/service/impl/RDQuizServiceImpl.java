@@ -140,5 +140,17 @@ public class RDQuizServiceImpl implements RDQuizService {
     public List<RDQuiz> getQuizzesFiltered(Integer courseId, String status, String difficultyLevel) {
         return rdQuizDao.findQuizzesByFilters(courseId, status, difficultyLevel);
     }
+
+	@Override
+	@Transactional
+	public List<RDQuiz> getPaginatedQuizzes(int page, int size) {
+		 return rdQuizDao.getPaginatedQuizzes(page, size);
+	}
+
+	@Override
+	@Transactional
+	public long getTotalQuizzesCount() {
+		return rdQuizDao.getTotalQuizzesCount();
+	}
     
 }

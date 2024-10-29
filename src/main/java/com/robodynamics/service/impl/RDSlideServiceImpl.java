@@ -119,6 +119,14 @@ public class RDSlideServiceImpl implements RDSlideService {
 	    }
 	}
 
+	@Override
+	@Transactional
+	public RDSlide findByCourseSessionDetailIdAndSlideNumber(int courseSessionDetailId, int slideNumber) {
+        // Call the DAO method to fetch the slide
+        return rdSlideDao.findByCourseSessionDetailIdAndSlideNumber(courseSessionDetailId, slideNumber);
+
+	}
+
 
 	
 }

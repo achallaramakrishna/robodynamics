@@ -223,6 +223,7 @@ public class RDQuizQuestionController {
                         RDQuizOption option = new RDQuizOption();
                         option.setOptionText(optionDTO.getOptionText());
                         option.setCorrect(optionDTO.isCorrect());
+                        option.setQuestion(question);  // Link the option to the question
                         quizOptionService.save(option);
                     }
                 }

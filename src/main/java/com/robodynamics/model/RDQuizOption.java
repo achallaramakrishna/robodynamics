@@ -22,7 +22,21 @@ public class RDQuizOption {
     @Column(name = "selected", nullable = false)
     private boolean selected;  // Add this property
     
-    // Constructors
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)  // Mapping back to parent
+    @JsonBackReference  // This prevents infinite recursion during JSON serialization
+    private RDQuizQuestion question;
+
+    
+    public RDQuizQuestion getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(RDQuizQuestion question) {
+		this.question = question;
+	}
+
+	// Constructors
     public RDQuizOption() {}
 
     public RDQuizOption(String optionText, boolean isCorrect) {

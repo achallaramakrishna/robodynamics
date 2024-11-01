@@ -24,9 +24,23 @@ public interface RDCourseSessionService {
     // Delete a course session by its ID
     void deleteCourseSession(int courseSessionId);
     
-   	void processCsv(MultipartFile file, int selectedCourseId) throws Exception;
    	
    	void processJson(MultipartFile file, int selectedCourseId) throws Exception;
 
 	RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, Integer courseId);
+
+
+	// **New Methods**
+
+    // Retrieve all units (parent sessions) for a specific course
+    List<RDCourseSession> getUnitsByCourseId(int courseId);
+
+    // Retrieve all sessions under a specific unit
+    List<RDCourseSession> getSessionsByUnitId(int unitId);
+
+    // Retrieve the complete course hierarchy (units and sessions)
+    List<RDCourseSession> getCourseHierarchyByCourseId(int courseId);
+
+    // Save or update a list of course sessions (bulk operation)
+    void saveAllCourseSessions(List<RDCourseSession> courseSessions);
 }

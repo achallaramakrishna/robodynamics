@@ -31,7 +31,13 @@
     <jsp:include page="/header.jsp" />
 
     <div class="container mt-5">
+		<!-- Back to Dashboard Button -->
+		<button class="btn btn-secondary mb-3"
+			onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
+			Back to Dashboard</button>
+
         <h1>Quiz Dashboard</h1>
+
 
         <!-- Create Quiz Button -->
         <div class="row mb-4">

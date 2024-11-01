@@ -1,5 +1,6 @@
 package com.robodynamics.model;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,18 @@ public class RDUser {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dad_user_id")
     private RDUser dad;
+    
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
     
 	public RDUser() {
 		

@@ -20,6 +20,7 @@ public class RDQuizOptionServiceImpl implements RDQuizOptionService {
 	@Override
 	@Transactional
 	public void save(RDQuizOption option) {
+		System.out.println("saving in quiz_option");
 		rdQuizOptionDao.saveOrUpdate(option);
 	
 	}

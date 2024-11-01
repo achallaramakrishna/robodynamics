@@ -1,5 +1,6 @@
 package com.robodynamics.dao.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
@@ -30,6 +31,7 @@ public class RDUserDaoImpl implements RDUserDao {
 		
 		System.out.println(rdUser);
 		Session session = factory.getCurrentSession();
+		rdUser.setCreatedDate(LocalDateTime.now());
 		session.saveOrUpdate(rdUser);
 		
 		// rdUser will now have the ID populated (if auto-generated)

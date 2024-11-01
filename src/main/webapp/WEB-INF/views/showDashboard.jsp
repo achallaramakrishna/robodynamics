@@ -1,105 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-
-<%@ page isELIgnored="false"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2VinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+	<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+	<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	<html>
+	<head>
+	<%@ page isELIgnored="false"%>
+	
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="UTF-8">
-    <title>Welcome</title>
-
+    <title>Basic Accordion Example</title>
     <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.main-container {
-    display: flex;
-    padding: 0 20px; /* Increased padding for better spacing */
-    gap: 20px; /* Gap between video and course contents */
-    max-width: 100%; /* Ensure the main container does not overflow */
-}
-
-.video-container {
-    flex-grow: 1; /* Allow the video container to grow and take up available space */
-    position: relative; /* Needed for aspect ratio technique */
-    padding-top: 56.25%; /* 16:9 Aspect Ratio for rectangular shape */
-    height: 0;
-    margin-right: 0;
-    max-width: 100%;
-}
-
-.video-container iframe,
-.video-container video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px; /* Optional: Rounding corners of video */
-}
-
-.course-contents {
-    flex-basis: 25%; /* Keep course contents compact on the right */
-    overflow-y: auto;
-    padding: 10px;
-}
-
-.course-contents ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.course-contents li {
-    cursor: pointer;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
-}
-
-.course-contents li:hover {
-    background-color: #e4e4e4;
-}
-
-@media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-    }
-
-    .video-container,
-    .course-contents {
-        width: 100%; /* Full width on mobile */
-    }
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .accordion-button {
+            background-color: #007bff;
+            color: white;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #0056b3;
+            color: white;
+        }
+        .video-container {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .accordion-body {
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+        .list-group-item {
+            border: none;
+            padding: 10px 20px;
+        }
+        .list-group-item:hover {
+            background-color: #e2e6ea;
+            cursor: pointer;
+        }
     </style>
-
-    <script type="text/javascript">
+        <script type="text/javascript">
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            const courseListItems = document.querySelectorAll('#basicAccordion .list-group-item');
+            courseListItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    document.querySelector('.video-container').style.display = 'block';
+                });
+            });
+        });
     function loadContent(courseSessionDetailId, enrollmentId) {
+    	console.log('loadContentCalled');
         const contentType = event.target.getAttribute('data-type');
         const file = event.target.getAttribute('data-file');
        const quiz = event.target.getAttribute('data-quiz');
@@ -114,6 +69,7 @@ footer {
         console.log('ID - ' + id);
 
         if (!contentType) return;
+        console.log('hello ....1');
 
         // Hide all containers and display the required one based on contentType
         document.getElementById('course-video').style.display = 'none';
@@ -123,6 +79,8 @@ footer {
         document.getElementById('course-flashcard').style.display = 'none';
         document.getElementById('course-assignment').style.display = 'none';
 
+        console.log('hello ....2');
+
         if (contentType === 'video') {
             document.getElementById('course-video').style.display = 'block';
             document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/` + file;
@@ -131,6 +89,9 @@ footer {
             document.getElementById('course-pdf').style.display = 'block';
             document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
         } else if (contentType === 'slide') {
+        	
+            console.log('hello ....3 slide');
+
             document.getElementById('course-fib').style.display = 'block';
             document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id + `?enrollmentId=` + enrollmentId;
         } else if (contentType === 'quiz') {
@@ -159,53 +120,57 @@ footer {
         });
     });
     </script>
+    
 </head>
 <body>
     <jsp:include page="header.jsp" />
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="main-container">
-                <div class="video-container">
-                    <video id="course-video" class="embed-responsive-item" controls style="display: none;">
-                        <source id="video-source" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <iframe id="course-pdf" style="display: none;" src="" width="1400" height="850"></iframe>
-                    <iframe id="course-quiz" style="display: none;" src="" width="1400" height="850"></iframe>
-                    <iframe id="course-fib" style="display: none;" src="" width="1400" height="850"></iframe>
-                    <iframe id="course-flashcard" style="display: none;" src="" width="1400" height="850"></iframe>
-                    <iframe id="course-assignment" style="display: none;" src="" width="1400" height="850"></iframe>
-                </div>
-
-                <div class="container course-contents mt-4">
-                    <h2 class="text-center" style="color: #FF5733; font-family: 'Comic Sans MS', cursive, sans-serif;">
-                        🎨📚 Fun Course Contents 🎨📚
-                    </h2>
-                    <ul id="course-list" class="list-group mt-4">
-                        <c:forEach items="${courseSessions}" var="courseSession">
-                            <li class="list-group-item bg-info text-white mb-3" style="font-size: 20px; font-weight: bold;">
-                                <i class="fas fa-book-reader"></i> ${courseSession.sessionTitle}
-                                <ul class="list-group mt-2">
-                                    <c:forEach items="${courseSession.courseSessionDetails}" var="courseSessionDetail">
-                                        <li class="list-group-item list-group-item-action bg-light mb-2"
-                                            style="font-size: 18px; color: #34495E;"
+            <div class="main-container d-flex flex-column flex-md-row">
+            
+                <div class="accordion mt-4 col-md-4" id="basicAccordion">
+                    <h2 class="text-center" style="color: #007bff; font-weight: bold;">Course Content</h2>
+                    
+                    <ul id="course-list" class="list-group">
+                    <c:forEach items="${courseSessions}" var="courseSession">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading-${courseSession.sessionId}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${courseSession.sessionId}" aria-expanded="false" aria-controls="collapse-${courseSession.sessionId}">
+                                    ${courseSession.sessionTitle}
+                                </button>
+                            </h2>
+                            <div id="collapse-${courseSession.sessionId}" class="accordion-collapse collapse" aria-labelledby="heading-${courseSession.sessionId}" data-bs-parent="#basicAccordion">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <c:forEach items="${courseSession.courseSessionDetails}" var="courseSessionDetail">
+                                            <li class="list-group-item list-group-item-action bg-light mb-2" style="font-size: 18px; color: #34495E;"
                                             data-type="${courseSessionDetail.type}"
                                             data-file="${courseSessionDetail.file}"
                                             data-quiz="${courseSessionDetail.quiz.quizId}"
                                             data-details="${courseSessionDetail.topic}"
                                             data-qa="${courseSessionDetail.topic}"
                                             data-id="${courseSessionDetail.courseSessionDetailId}">
-                                            🧮 ${courseSessionDetail.topic}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </li>
-                        </c:forEach>
+                                                🧮 ${courseSessionDetail.topic}
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
                     </ul>
                 </div>
-
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+                <div class="video-container mt-4 col-md-8" style="display: block;">
+                    <video id="course-video" class="embed-responsive-item" controls style="width: 100%; height: auto;">
+                        <source id="video-source" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <iframe id="course-pdf" style="width: 100%; height: 800px;" src=""></iframe>
+                    <iframe id="course-quiz" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                    <iframe id="course-fib" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                    <iframe id="course-flashcard" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                    <iframe id="course-assignment" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                </div>
             </div>
         </div>
     </div>

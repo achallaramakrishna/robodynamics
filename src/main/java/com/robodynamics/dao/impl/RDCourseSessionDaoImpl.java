@@ -1,20 +1,16 @@
 package com.robodynamics.dao.impl;
 
-import java.util.List;
+import com.robodynamics.dao.RDCourseSessionDao;
+import com.robodynamics.model.RDCourseSession;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.robodynamics.dao.RDCourseSessionDao;
-import com.robodynamics.model.RDCourseSession;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -33,17 +29,15 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
     public RDCourseSession getRDCourseSession(int courseSessionId) {
         Session session = factory.getCurrentSession();
         RDCourseSession courseSession = session.get(RDCourseSession.class, courseSessionId);
+        Hibernate.initialize(courseSession.getChildSessions());
         return courseSession;
     }
 
     @Override
     public List<RDCourseSession> getRDCourseSessions() {
         Session session = factory.getCurrentSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<RDCourseSession> cq = cb.createQuery(RDCourseSession.class);
-        Root<RDCourseSession> root = cq.from(RDCourseSession.class);
-        cq.select(root);
-        Query<RDCourseSession> query = session.createQuery(cq);
+        String hql = "FROM RDCourseSession";
+        Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
         return query.getResultList();
     }
 
@@ -59,38 +53,58 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
     @Override
     public void deleteRDCourseSession(int courseSessionId) {
         Session session = factory.getCurrentSession();
-        RDCourseSession courseSession = session.byId(RDCourseSession.class).load(courseSessionId);
-        session.delete(courseSession);
+        RDCourseSession courseSession = session.get(RDCourseSession.class, courseSessionId);
+        if (courseSession != null) {
+            session.delete(courseSession);
+        }
     }
 
     @Override
     public void saveAll(List<RDCourseSession> courseSessions) {
         Session session = factory.getCurrentSession();
         for (RDCourseSession courseSession : courseSessions) {
-        	System.out.println("Step 31.....");
-            session.saveOrUpdate(courseSession);  // Save or update each session in the list
+            session.saveOrUpdate(courseSession);
         }
     }
-    
+
+    @Override
     public RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, int courseId) {
         Session session = factory.getCurrentSession();
-
-        // Native SQL query that fetches RDCourseSession based on courseSessionId and courseId,
-        // only if the courseSessionId exists in the rd_course_session_details table
-        String sql = "SELECT cs.* " +
-                     "FROM rd_course_sessions cs " +
-                     "WHERE cs.session_id = :sessionId " +
-                     "AND cs.course_id = :courseId " +
-                     "LIMIT 1";
-
-        Query<RDCourseSession> query = session.createNativeQuery(sql, RDCourseSession.class);
+        String hql = "FROM RDCourseSession cs WHERE cs.sessionId = :sessionId AND cs.course.courseId = :courseId";
+        Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
         query.setParameter("sessionId", sessionId);
         query.setParameter("courseId", courseId);
-
-        return query.uniqueResult();    
+        return query.uniqueResult();
     }
 
+    // **Implementation of New Methods**
 
+    @Override
+    public List<RDCourseSession> getUnitsByCourseId(int courseId) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM RDCourseSession WHERE course.courseId = :courseId AND parentSession IS NULL";
+        Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
+        query.setParameter("courseId", courseId);
+        return query.getResultList();
+    }
 
+    @Override
+    public List<RDCourseSession> getSessionsByUnitId(int unitId) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM RDCourseSession WHERE parentSession.courseSessionId = :unitId";
+        Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
+        query.setParameter("unitId", unitId);
+        return query.getResultList();
+    }
 
+    @Override
+    public List<RDCourseSession> getCourseHierarchyByCourseId(int courseId) {
+        Session session = factory.getCurrentSession();
+        String hql = "SELECT DISTINCT unit FROM RDCourseSession unit " +
+                     "LEFT JOIN FETCH unit.childSessions " +
+                     "WHERE unit.course.courseId = :courseId AND unit.parentSession IS NULL";
+        Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
+        query.setParameter("courseId", courseId);
+        return query.getResultList();
+    }
 }

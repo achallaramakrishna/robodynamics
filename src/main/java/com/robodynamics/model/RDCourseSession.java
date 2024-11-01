@@ -25,7 +25,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -36,16 +38,45 @@ public class RDCourseSession {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_session_id")
-	private int courseSessionId;
+	private Integer courseSessionId;
 
 	@Column(name = "session_id")
-	private int sessionId;
+	private Integer sessionId;
 	
 	@ManyToOne
     @JoinColumn(name = "course_id")
 	@JsonIgnore  // Prevent circular reference during serialization
     private RDCourse course;
 
+	@ManyToOne
+	@JoinColumn(name = "parent_session_id")
+	@JsonBackReference // Handles JSON serialization
+	private RDCourseSession parentSession;
+	
+	@Column(name = "session_type")
+	private String sessionType; // Possible values: 'unit' or 'session'
+
+	public String getSessionType() {
+	    return sessionType;
+	}
+
+	public void setSessionType(String sessionType) {
+	    this.sessionType = sessionType;
+	}
+	
+	@OneToMany(mappedBy = "parentSession", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+ // Handles JSON serialization
+	private List<RDCourseSession> childSessions = new ArrayList<>();
+
+	public List<RDCourseSession> getChildSessions() {
+	    return childSessions;
+	}
+
+	public void setChildSessions(List<RDCourseSession> childSessions) {
+	    this.childSessions = childSessions;
+	}
+	
 	@Column(name = "session_title")
 	private String sessionTitle;
 
@@ -57,13 +88,25 @@ public class RDCourseSession {
 	
 	@Column(name = "progress")
 	private Double progress;
-	
-	/*
-	 * @OneToMany(mappedBy = "courseSession", cascade = CascadeType.ALL,
-	 * orphanRemoval = true) private List<RDSlide> slides;
-	 */
+
+	@Column(name = "grade")
+	private String grade;
+
+	@Column(name = "session_description")
+	private String sessionDescription;
 
 	
+	
+
+	
+	public String getSessionDescription() {
+		return sessionDescription;
+	}
+
+	public void setSessionDescription(String sessionDescription) {
+		this.sessionDescription = sessionDescription;
+	}
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="course_session_id", nullable = true)
 	@JsonIgnore
@@ -77,19 +120,19 @@ public class RDCourseSession {
 		this.courseSessionDetails = courseSessionDetails;
 	}
 
-	public int getCourseSessionId() {
+	public Integer getCourseSessionId() {
 		return courseSessionId;
 	}
 
-	public void setCourseSessionId(int courseSessionId) {
+	public void setCourseSessionId(Integer courseSessionId) {
 		this.courseSessionId = courseSessionId;
 	}
 
-	public int getSessionId() {
+	public Integer getSessionId() {
 		return sessionId;
 	}
 
-	public void setSessionId(int sessionId) {
+	public void setSessionId(Integer sessionId) {
 		this.sessionId = sessionId;
 	}
 
@@ -107,6 +150,15 @@ public class RDCourseSession {
 
 	public void setSessionTitle(String sessionTitle) {
 		this.sessionTitle = sessionTitle;
+	}
+
+	
+	public RDCourseSession getParentSession() {
+		return parentSession;
+	}
+
+	public void setParentSession(RDCourseSession parentSession) {
+		this.parentSession = parentSession;
 	}
 
 	public Date getCreationDate() {
@@ -128,11 +180,6 @@ public class RDCourseSession {
 	
 	
 
-	/*
-	 * public List<RDSlide> getSlides() { return slides; }
-	 * 
-	 * public void setSlides(List<RDSlide> slides) { this.slides = slides; }
-	 */
 
 	public Double getProgress() {
 		return progress;
@@ -140,6 +187,16 @@ public class RDCourseSession {
 
 	public void setProgress(Double progress) {
 		this.progress = progress;
+	}
+	
+	
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 
 	@Override

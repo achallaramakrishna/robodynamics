@@ -25,6 +25,16 @@ public interface RDCourseSessionDao {
     void saveAll(List<RDCourseSession> courseSessions);
 
     RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, int courseId);
+    
+ // **New Methods**
 
+    // Retrieve all units (parent sessions) for a specific course
+    List<RDCourseSession> getUnitsByCourseId(int courseId);
+
+    // Retrieve all sessions under a specific unit
+    List<RDCourseSession> getSessionsByUnitId(int unitId);
+
+    // Retrieve the complete course hierarchy (units and sessions)
+    List<RDCourseSession> getCourseHierarchyByCourseId(int courseId);
 
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -21,133 +20,202 @@ public class RDCourseSessionController {
 
     @Autowired
     private RDCourseService courseService;  // Service to manage courses
-    
-    // private static final String UPLOAD_DIR = "c:\\coursedata\\";
-
 
     @Autowired
     private RDCourseSessionService courseSessionService;  // Service to manage course sessions
 
+    /**
+     * List all units and their child sessions for a selected course.
+     */
     @GetMapping("/list")
     public String listCourseSessions(@RequestParam(required = false) Integer courseId, Model model) {
-        List<RDCourseSession> courseSessions = null;
+        List<RDCourseSession> units = null;
 
         // Fetch all courses for the course selection dropdown
         List<RDCourse> courses = courseService.getRDCourses();
         model.addAttribute("courses", courses);
 
         if (courseId != null && courseId > 0) {
-            courseSessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+            // Fetch units and their child sessions
+            units = courseSessionService.getCourseHierarchyByCourseId(courseId);
         }
 
-        if (courseSessions == null || courseSessions.isEmpty()) {
-            model.addAttribute("message", "No course sessions available for the selected course.");
+        if (units == null || units.isEmpty()) {
+            model.addAttribute("message", "No course units available for the selected course.");
         } else {
-            model.addAttribute("courseSessions", courseSessions);
+            model.addAttribute("units", units);
         }
 
         model.addAttribute("selectedCourseId", courseId != null ? courseId : 0);
         return "coursesessions/listCourseSessions";
     }
 
-    @GetMapping("/add")
-    public String showAddForm(@RequestParam("courseId") int courseId, Model model) {
-        RDCourseSession courseSession = new RDCourseSession();
-        model.addAttribute("courseId", courseId);  // Pass the selected courseId
-        model.addAttribute("courseSession", courseSession);
-        return "coursesessions/addEditCourseSession";
+    /**
+     * Show form to add a new unit.
+     */
+    @GetMapping("/addUnit")
+    public String showAddUnitForm(@RequestParam("courseId") int courseId, Model model) {
+        RDCourseSession unit = new RDCourseSession();
+        RDCourse course = courseService.getRDCourse(courseId);
+        unit.setCourse(course);
+        unit.setSessionType("unit");  // Mark as unit
+        model.addAttribute("courseSession", unit);
+        model.addAttribute("courseId", courseId);
+        return "coursesessions/unitForm";
     }
 
-    
-    @GetMapping("/edit")
-    public String showEditForm(@RequestParam("courseSessionId") int courseSessionId, Model model) {
-        RDCourseSession courseSession = courseSessionService.getCourseSession(courseSessionId);
-        if (courseSession == null) {
-            model.addAttribute("error", "Course session not found.");
+    /**
+     * Show form to add a new session.
+     */
+    @GetMapping("/addSession")
+    public String showAddSessionForm(@RequestParam("courseId") int courseId, Model model) {
+        RDCourseSession session = new RDCourseSession();
+        RDCourse course = courseService.getRDCourse(courseId);
+        session.setCourse(course);
+        session.setSessionType("session");  // Mark as session
+
+        // Get units to populate the parent unit dropdown
+        List<RDCourseSession> units = courseSessionService.getUnitsByCourseId(courseId);
+        model.addAttribute("units", units);
+
+        model.addAttribute("courseSession", session);
+        model.addAttribute("courseId", courseId);
+        return "coursesessions/sessionForm";
+    }
+
+    /**
+     * Show form to edit an existing unit.
+     */
+    @GetMapping("/editUnit")
+    public String showEditUnitForm(@RequestParam("courseSessionId") int courseSessionId, Model model) {
+        RDCourseSession unit = courseSessionService.getCourseSession(courseSessionId);
+        if (unit == null) {
+            model.addAttribute("error", "Unit not found.");
+            return "redirect:/courseSession/list";
+        }
+        model.addAttribute("courseSession", unit);
+        model.addAttribute("courseId", unit.getCourse().getCourseId());
+        return "coursesessions/unitForm";
+    }
+
+    /**
+     * Show form to edit an existing session.
+     */
+    @GetMapping("/editSession")
+    public String showEditSessionForm(@RequestParam("courseSessionId") int courseSessionId, Model model) {
+        RDCourseSession session = courseSessionService.getCourseSession(courseSessionId);
+        if (session == null) {
+            model.addAttribute("error", "Session not found.");
             return "redirect:/courseSession/list";
         }
 
-        List<RDCourse> courses = courseService.getRDCourses();
-        model.addAttribute("courses", courses);
-        model.addAttribute("courseSession", courseSession);
-        return "coursesessions/addEditCourseSession";
+        // Get units to populate the parent unit dropdown
+        List<RDCourseSession> units = courseSessionService.getUnitsByCourseId(session.getCourse().getCourseId());
+        model.addAttribute("units", units);
+
+        model.addAttribute("courseSession", session);
+        model.addAttribute("courseId", session.getCourse().getCourseId());
+        return "coursesessions/sessionForm";
     }
 
-    @PostMapping("/save")
-    public String saveCourseSession(@ModelAttribute("courseSession") RDCourseSession courseSession, RedirectAttributes redirectAttributes) {
+    /**
+     * Save a new or edited unit.
+     */
+    @PostMapping("/saveUnit")
+    public String saveUnit(@ModelAttribute("courseSession") RDCourseSession unit, RedirectAttributes redirectAttributes) {
         try {
-            // Set creation date if it’s a new session
-            if (courseSession.getCourseSessionId() == 0) {
-                courseSession.setCreationDate(new Date());  // Set the current date as the creation date
+            // Set creation date if it's a new unit
+            if (unit.getCourseSessionId() == 0) {
+                unit.setCreationDate(new Date());
             }
-            
-            // Save the course session
-            courseSessionService.saveCourseSession(courseSession);
-            redirectAttributes.addFlashAttribute("message", "Course session saved successfully.");
+            unit.setParentSession(null);  // Units have no parent session
+            unit.setSessionType("unit");  // Ensure sessionType is 'unit'
+
+            // Save the unit
+            courseSessionService.saveCourseSession(unit);
+            redirectAttributes.addFlashAttribute("message", "Unit saved successfully.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error saving the course session.");
-            return "redirect:/courseSession/list?courseId=" + courseSession.getCourse().getCourseId();
+            redirectAttributes.addFlashAttribute("error", "Error saving the unit: " + e.getMessage());
+            return "redirect:/courseSession/list?courseId=" + unit.getCourse().getCourseId();
         }
-        return "redirect:/courseSession/list?courseId=" + courseSession.getCourse().getCourseId();
+        return "redirect:/courseSession/list?courseId=" + unit.getCourse().getCourseId();
     }
 
+    /**
+     * Save a new or edited session.
+     */
+    @PostMapping("/saveSession")
+    public String saveSession(@ModelAttribute("courseSession") RDCourseSession session, RedirectAttributes redirectAttributes) {
+        try {
+            // Set creation date if it's a new session
+            if (session.getCourseSessionId() == 0) {
+                session.setCreationDate(new Date());
+            }
+            session.setSessionType("session");  // Ensure sessionType is 'session'
 
+            // Fetch and set the parent unit
+            RDCourseSession parentUnit = courseSessionService.getCourseSession(session.getParentSession().getCourseSessionId());
+            session.setParentSession(parentUnit);
+
+            // Save the session
+            courseSessionService.saveCourseSession(session);
+            redirectAttributes.addFlashAttribute("message", "Session saved successfully.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error saving the session: " + e.getMessage());
+            return "redirect:/courseSession/list?courseId=" + session.getCourse().getCourseId();
+        }
+        return "redirect:/courseSession/list?courseId=" + session.getCourse().getCourseId();
+    }
+
+    /**
+     * Handle JSON file upload to process units and sessions.
+     */
     @PostMapping("/uploadJson")
     public String handleJsonUpload(@RequestParam("file") MultipartFile file, 
                                   @RequestParam("courseId") Integer courseId, 
                                   RedirectAttributes redirectAttributes) {
-    	
-    	System.out.println("step 11 ... ");
         // Validate if the file is empty
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Please select a JSON file to upload.");
             return "redirect:/courseSession/list?courseId=" + courseId;
         }
-        System.out.println("step 12 ... ");
         try {
             // Validate if courseId is present
             if (courseId == null || courseId <= 0) {
                 redirectAttributes.addFlashAttribute("error", "Invalid course ID. Please select a valid course.");
                 return "redirect:/courseSession/list";
             }
-            System.out.println("step 13 ... ");
-         // Save the file locally
-         //   String fileName = file.getOriginalFilename();
-         //   String filePath = UPLOAD_DIR + fileName;
-         //   File destinationFile = new File(filePath);
-         //   file.transferTo(destinationFile);
+
             // Process the JSON file for the specified course
-            System.out.println("step 14 ... ");
             courseSessionService.processJson(file, courseId);
-            System.out.println("step 15 ... ");
             redirectAttributes.addFlashAttribute("message", "JSON file uploaded and processed successfully for course ID: " + courseId);
         } catch (Exception e) {
             // Handle any error during the processing
-        	e.printStackTrace();
+            e.printStackTrace();
             redirectAttributes.addFlashAttribute("error", "Error processing JSON file: " + e.getMessage());
         }
-
-        System.out.println("step 16 ... ");
         // Redirect back to the listCourseSessions page
         return "redirect:/courseSession/list?courseId=" + courseId;
     }
 
-
+    /**
+     * Delete a unit or session by its ID.
+     */
     @GetMapping("/delete")
     public String deleteCourseSession(@RequestParam("courseSessionId") int courseSessionId, RedirectAttributes redirectAttributes) {
         try {
             RDCourseSession courseSession = courseSessionService.getCourseSession(courseSessionId);
             if (courseSession != null) {
+                int courseId = courseSession.getCourse().getCourseId();
                 courseSessionService.deleteCourseSession(courseSessionId);
                 redirectAttributes.addFlashAttribute("message", "Course session deleted successfully.");
+                return "redirect:/courseSession/list?courseId=" + courseId;
             } else {
                 redirectAttributes.addFlashAttribute("error", "Course session not found.");
             }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error deleting the course session.");
+            redirectAttributes.addFlashAttribute("error", "Error deleting the course session: " + e.getMessage());
         }
         return "redirect:/courseSession/list";
     }
-    
-    
 }

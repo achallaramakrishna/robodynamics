@@ -224,6 +224,7 @@ public class RDQuizQuestionController {
                         option.setOptionText(optionDTO.getOptionText());
                         option.setCorrect(optionDTO.isCorrect());
                         option.setQuestion(question);  // Link the option to the question
+                        System.out.println("option - " + option);
                         quizOptionService.save(option);
                     }
                 }

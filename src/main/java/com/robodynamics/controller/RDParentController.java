@@ -187,7 +187,7 @@ public class RDParentController {
 	    } else {
 	        // No courseId, only a signup process for the parent-child
 	        model.addAttribute("message", "Signup successful! You can now access the dashboard.");
-	        return "redirect:/parent/parentDashboard";
+	        return "redirect:/login";
 	    }
 	}
 	

@@ -51,4 +51,22 @@ public class RDFlashCardDaoImpl implements RDFlashCardDao {
         RDFlashCard flashCard = session.byId(RDFlashCard.class).load(id);
         session.delete(flashCard);
     }
+    
+    @Override
+    public List<RDFlashCard> getRDFlashCards() {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<RDFlashCard> query = currentSession.createQuery("from RDFlashCard", RDFlashCard.class);
+        return query.getResultList();
+    }
+
+	@Override
+	public List<RDFlashCard> findByCourseSessionDetailId(int courseSessionDetailId) {
+	       Session session = sessionFactory.getCurrentSession();
+	        Query<RDFlashCard> query = session.createQuery("FROM RDFlashCard WHERE courseSessionDetailId = :courseSessionDetailId", RDFlashCard.class);
+	        query.setParameter("courseSessionDetailId", courseSessionDetailId);
+	        return query.getResultList();
+
+	}
+    
+
 }

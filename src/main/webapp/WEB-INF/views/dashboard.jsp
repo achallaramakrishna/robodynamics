@@ -172,7 +172,32 @@
 				    </div>
 				</div>
 
-                
+		                   <!-- Flashcard Sets Card -->
+		        <div class="col-12 col-md-4 mb-4">
+		            <div class="card">
+		                <div class="card-body">
+		                    <h5 class="card-title">Flashcard Sets</h5>
+		                    <p class="card-text">View and create flashcard sets for different subjects and topics.</p>
+		                    <a href="${pageContext.request.contextPath}/flashcardsets/flashcard-set-list"
+		                        class="btn btn-primary ${page eq 'flashcardSets' ? 'active' : ''}">
+		                        Manage Flashcard Sets </a>
+		                </div>
+		            </div>
+		        </div>
+		
+		        <!-- Flashcards Card -->
+		        <div class="col-12 col-md-4 mb-4">
+		            <div class="card">
+		                <div class="card-body">
+		                    <h5 class="card-title">Flashcards</h5>
+		                    <p class="card-text">View and manage individual flashcards within sets.</p>
+		                    <a href="${pageContext.request.contextPath}/flashcards/list"
+		                        class="btn btn-primary ${page eq 'flashcards' ? 'active' : ''}">
+		                        Manage Flashcards </a>
+		                </div>
+		            </div>
+		        </div>
+		                
                 
 
                 <div class="col-12 col-md-4 mb-4">
@@ -198,6 +223,19 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-12 col-md-4 mb-4">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Projects</h5>
+							<p class="card-text">View and manage projects.</p>
+							<a href="${pageContext.request.contextPath}/projects/list"
+								class="btn btn-primary ${page eq 'projects' ? 'active' : ''}">
+								Manage Projects </a>
+						</div>
+					</div>
+				</div>
+                
 
             </div>
         </div>

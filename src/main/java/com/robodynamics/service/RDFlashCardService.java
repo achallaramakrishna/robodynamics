@@ -11,4 +11,11 @@ public interface RDFlashCardService {
     List<RDFlashCard> getFlashCardsBySetId(int flashcardSetId);
 
     void deleteRDFlashCard(int id);
+    
+    List<RDFlashCard> getRDFlashCards();
+
+    List<RDFlashCard> getFlashcardsByCourseSessionDetailId(int courseSessionDetailId);
+
+    
+    
 }

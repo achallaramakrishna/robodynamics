@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="UTF-8">
-    <title>Basic Accordion Example</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -100,7 +100,7 @@
         }
         else if (contentType === 'flashcard') {
             document.getElementById('course-flashcard').style.display = 'block';
-            document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcard-sets/session/` + id;
+            document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcards/start/` + id;
         } else if (contentType === 'assignment') {
             document.getElementById('course-assignment').style.display = 'block';
             document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;

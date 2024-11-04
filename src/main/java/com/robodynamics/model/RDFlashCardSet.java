@@ -1,6 +1,10 @@
 package com.robodynamics.model;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.util.List;
 
 @Entity
@@ -18,10 +22,13 @@ public class RDFlashCardSet {
     @Column(name = "set_description")
     private String setDescription;
 
-    @Column(name = "course_session_detail_id", nullable = false)
-    private int courseSessionDetailId;
+    @ManyToOne
+    @JoinColumn(name = "course_session_detail_id")
+    private RDCourseSessionDetail courseSessionDetail;
 
-    @OneToMany(mappedBy = "flashcardSet", cascade = CascadeType.ALL)
+ 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "flashcard_set_id") // This should map the correct foreign key field in `quiz_options` table
     private List<RDFlashCard> flashcards;
 
     // Getters and Setters
@@ -50,15 +57,17 @@ public class RDFlashCardSet {
         this.setDescription = setDescription;
     }
 
-    public int getCourseSessionDetailId() {
-        return courseSessionDetailId;
-    }
+    
 
-    public void setCourseSessionDetailId(int courseSessionDetailId) {
-        this.courseSessionDetailId = courseSessionDetailId;
-    }
+    public RDCourseSessionDetail getCourseSessionDetail() {
+		return courseSessionDetail;
+	}
 
-    public List<RDFlashCard> getFlashcards() {
+	public void setCourseSessionDetail(RDCourseSessionDetail courseSessionDetail) {
+		this.courseSessionDetail = courseSessionDetail;
+	}
+
+	public List<RDFlashCard> getFlashcards() {
         return flashcards;
     }
 

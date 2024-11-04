@@ -38,4 +38,18 @@ public class RDFlashCardServiceImpl implements RDFlashCardService {
     public void deleteRDFlashCard(int id) {
         rdFlashCardDao.deleteRDFlashCard(id);
     }
+
+	@Override
+    @Transactional
+	public List<RDFlashCard> getRDFlashCards() {
+		
+		return rdFlashCardDao.getRDFlashCards();
+	}
+
+	@Override
+    @Transactional
+	public List<RDFlashCard> getFlashcardsByCourseSessionDetailId(int courseSessionDetailId) {
+		
+		return rdFlashCardDao.findByCourseSessionDetailId(courseSessionDetailId);
+	}
 }

@@ -1,6 +1,10 @@
 package com.robodynamics.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -26,9 +30,11 @@ public class RDFlashCard {
 
     @ManyToOne
     @JoinColumn(name = "flashcard_set_id", nullable = false)
+    @JsonBackReference  // This prevents infinite recursion during JSON serialization
     private RDFlashCardSet flashcardSet;
 
     @OneToMany(mappedBy = "flashCard", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<RDFlashCardAttempt> attempts;
 
     // Getters and Setters

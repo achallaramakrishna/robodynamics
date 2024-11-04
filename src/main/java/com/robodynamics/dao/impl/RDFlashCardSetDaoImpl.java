@@ -45,16 +45,7 @@ public class RDFlashCardSetDaoImpl implements RDFlashCardSetDao {
         return query.getResultList();
     }
 
-    @Override
-    public List<RDFlashCardSet> getFlashCardSetsBySessionDetail(int courseSessionDetailId) {
-        Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<RDFlashCardSet> cq = cb.createQuery(RDFlashCardSet.class);
-        Root<RDFlashCardSet> root = cq.from(RDFlashCardSet.class);
-        cq.select(root).where(cb.equal(root.get("courseSessionDetailId"), courseSessionDetailId));
-        Query<RDFlashCardSet> query = session.createQuery(cq);
-        return query.getResultList();
-    }
+
 
     @Override
     public void deleteRDFlashCardSet(int id) {
@@ -62,4 +53,18 @@ public class RDFlashCardSetDaoImpl implements RDFlashCardSetDao {
         RDFlashCardSet flashCardSet = session.byId(RDFlashCardSet.class).load(id);
         session.delete(flashCardSet);
     }
+
+
+
+    @Override
+    public RDFlashCardSet getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId) {
+        String hql = "FROM RDFlashCardSet WHERE courseSessionDetail.courseSessionDetailId = :courseSessionDetailId";
+        List<RDFlashCardSet> results = sessionFactory.getCurrentSession()
+                                                     .createQuery(hql, RDFlashCardSet.class)
+                                                     .setParameter("courseSessionDetailId", courseSessionDetailId)
+                                                     .getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+
 }

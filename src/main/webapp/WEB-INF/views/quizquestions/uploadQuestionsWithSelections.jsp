@@ -25,9 +25,9 @@
 		<br><br>
 
         <!-- Display Success Message -->
-        <c:if test="${not empty message}">
+        <c:if test="${not empty success}">
             <div class="alert alert-success" role="alert">
-                ${message}
+                ${success}
             </div>
         </c:if>
 
@@ -126,8 +126,19 @@
         </table>
 
         <!-- Pagination Controls -->
+       <!-- Improved Pagination Controls -->
         <nav aria-label="Page navigation">
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
+                <!-- First Page Button -->
+                <c:if test="${currentPage > 0}">
+                    <li class="page-item">
+                        <a class="page-link" href="?page=0&size=${size}" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+
+                <!-- Previous Page Button -->
                 <c:if test="${currentPage > 0}">
                     <li class="page-item">
                         <a class="page-link" href="?page=${currentPage - 1}&size=${size}" aria-label="Previous">
@@ -136,12 +147,56 @@
                     </li>
                 </c:if>
 
-                <c:forEach var="i" begin="0" end="${totalPages - 1}">
-                    <li class="page-item ${i == currentPage ? 'active' : ''}">
-                        <a class="page-link" href="?page=${i}&size=${size}">${i + 1}</a>
-                    </li>
-                </c:forEach>
+                <!-- Page Number Links with Ellipses -->
+                <c:choose>
+                    <c:when test="${totalPages <= 7}">
+                        <c:forEach var="i" begin="0" end="${totalPages - 1}">
+                            <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                <a class="page-link" href="?page=${i}&size=${size}">${i + 1}</a>
+                            </li>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Always show first 2 pages -->
+                        <c:forEach var="i" begin="0" end="1">
+                            <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                <a class="page-link" href="?page=${i}&size=${size}">${i + 1}</a>
+                            </li>
+                        </c:forEach>
 
+                        <!-- Ellipsis if currentPage > 3 -->
+                        <c:if test="${currentPage > 3}">
+                            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                        </c:if>
+
+                        <!-- Middle Pages: currentPage-1, currentPage, currentPage+1 -->
+                        <c:if test="${currentPage > 1 and currentPage < totalPages - 2}">
+                            <li class="page-item ${currentPage - 1 == currentPage ? 'active' : ''}">
+                                <a class="page-link" href="?page=${currentPage - 1}&size=${size}">${currentPage}</a>
+                            </li>
+                            <li class="page-item ${currentPage == currentPage ? 'active' : ''}">
+                                <a class="page-link" href="?page=${currentPage}&size=${size}">${currentPage + 1}</a>
+                            </li>
+                            <li class="page-item ${currentPage + 1 == currentPage ? 'active' : ''}">
+                                <a class="page-link" href="?page=${currentPage + 1}&size=${size}">${currentPage + 2}</a>
+                            </li>
+                        </c:if>
+
+                        <!-- Ellipsis if currentPage < totalPages - 3 -->
+                        <c:if test="${currentPage < totalPages - 3}">
+                            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                        </c:if>
+
+                        <!-- Always show last 2 pages -->
+                        <c:forEach var="i" begin="${totalPages - 2}" end="${totalPages - 1}">
+                            <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                <a class="page-link" href="?page=${i}&size=${size}">${i + 1}</a>
+                            </li>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
+                <!-- Next Page Button -->
                 <c:if test="${currentPage < totalPages - 1}">
                     <li class="page-item">
                         <a class="page-link" href="?page=${currentPage + 1}&size=${size}" aria-label="Next">
@@ -149,9 +204,17 @@
                         </a>
                     </li>
                 </c:if>
+
+                <!-- Last Page Button -->
+                <c:if test="${currentPage < totalPages - 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="?page=${totalPages - 1}&size=${size}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </nav>
-
     </div>
 
     <!-- Include Footer JSP -->

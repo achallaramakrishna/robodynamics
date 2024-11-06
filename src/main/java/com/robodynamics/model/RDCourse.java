@@ -27,6 +27,9 @@ public class RDCourse {
     @Column(name = "course_name", nullable = false)
     private String courseName;
     
+    @Column(name = "shortDescription", columnDefinition = "TEXT")
+    private String shortDescription;
+    
     @ManyToOne
     @JoinColumn(name = "course_category_id", nullable = true)
     private RDCourseCategory courseCategory;
@@ -92,6 +95,18 @@ public class RDCourse {
 
     @Column(name = "registration_link", length = 255)
     private String registrationLink;
+    
+    @Column(name = "is_featured", nullable = false)
+    private boolean isFeatured;
+
+
+    public boolean isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
 
    
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -99,9 +114,65 @@ public class RDCourse {
 	@JsonIgnore
 	private List<RDCourseSession> courseSessions = new ArrayList<RDCourseSession>();
 
+	@Column(name = "grade_range", nullable = true)
+    @Enumerated(EnumType.STRING)
+    private GradeRange gradeRange;
+
+    @Column(name = "category", nullable = true, length = 100)
+    private String category;
+
+    // Enum for GradeRange
+    public enum GradeRange {
+        LOWER_PRIMARY_1_3("Lower Primary (Grades 1-3)"),
+        UPPER_PRIMARY_4_6("Upper Primary (Grades 4-6)"),
+        MIDDLE_SCHOOL_7_9("Middle School (Grades 7-9)"),
+        HIGH_SCHOOL_10_12("High School (Grades 10-12)"),
+        SENIOR_SECONDARY("Senior Secondary"); // Add this if necessary
+
+
+        private final String displayName;
+
+        GradeRange(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+    }
+
+    // Getters and setters for new fields
+    public GradeRange getGradeRange() {
+        return gradeRange;
+    }
+
+    public void setGradeRange(GradeRange gradeRange) {
+        this.gradeRange = gradeRange;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
+    // Helper method to get display name
+    public String getGradeRangeDisplayName() {
+        return gradeRange != null ? gradeRange.getDisplayName() : "";
+    }
 	
-	
-    public List<RDCourseSession> getCourseSessions() {
+    
+    public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public List<RDCourseSession> getCourseSessions() {
 		return courseSessions;
 	}
 

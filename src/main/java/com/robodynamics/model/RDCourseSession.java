@@ -67,13 +67,13 @@ public class RDCourseSession {
 	@OneToMany(mappedBy = "parentSession", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
  // Handles JSON serialization
-	private List<RDCourseSession> childSessions = new ArrayList<>();
+	private Set<RDCourseSession> childSessions = new HashSet<>();
 
-	public List<RDCourseSession> getChildSessions() {
+	public Set<RDCourseSession> getChildSessions() {
 	    return childSessions;
 	}
 
-	public void setChildSessions(List<RDCourseSession> childSessions) {
+	public void setChildSessions(Set<RDCourseSession> childSessions) {
 	    this.childSessions = childSessions;
 	}
 	

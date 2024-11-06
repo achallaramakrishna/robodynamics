@@ -16,6 +16,7 @@ import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.service.RDQuizQuestionMapService;
 import com.robodynamics.service.RDQuizQuestionService;
 import com.robodynamics.service.RDQuizService;
+import com.robodynamics.wrapper.ProjectGroup;
 
 @Service
 public class RDQuizServiceImpl implements RDQuizService {
@@ -152,5 +153,29 @@ public class RDQuizServiceImpl implements RDQuizService {
 	public long getTotalQuizzesCount() {
 		return rdQuizDao.getTotalQuizzesCount();
 	}
+
+	@Override
+	@Transactional
+	public List<ProjectGroup<RDQuiz>> getQuizzesGroupedByCategory() {
+		return rdQuizDao.getQuizzesGroupedByCategory();
+	}
+
+	@Override
+	@Transactional
+	public List<ProjectGroup<RDQuiz>> getQuizzesGroupedByGradeRange() {
+		return rdQuizDao.getQuizzesGroupedByGradeRange();
+	}
+
+	@Override
+	@Transactional
+	public List<RDQuiz> getFeaturedQuizzes() {
+		return rdQuizDao.getFeaturedQuizzes();
+	}
+	
+    @Override
+    @Transactional
+    public List<RDQuiz> searchQuizzes(String query) {
+        return rdQuizDao.searchQuizzes(query);
+    }
     
 }

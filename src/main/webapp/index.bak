@@ -1,0 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robo Dynamics - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        .header, .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            color: #007bff;
+            margin: 20px 0;
+        }
+        .card {
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .search-bar {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <jsp:include page="header.jsp" />
+
+    <div class="container search-bar">
+        <h2>Explore Our Offerings</h2>
+        <form method="get" action="${pageContext.request.contextPath}/searchResults">
+            <div class="input-group mb-3">
+                <input type="text" name="query" class="form-control" placeholder="Search for Courses, Projects, Quizzes...">
+                <button class="btn btn-primary" type="submit">Search</button>
+                <select name="category" class="form-select" style="max-width: 150px; margin-left: 10px;">
+                    <option value="all">All</option>
+                    <option value="courses">Courses</option>
+                    <option value="projects">Projects</option>
+                    <option value="quizzes">Quizzes</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <!-- Courses Section -->
+    <section>
+        <div class="container">
+            <h3 class="section-title">Popular Courses</h3>
+            <div class="row">
+                <c:forEach var="course" items="${courses}">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="${course.imageLink}" class="card-img-top" alt="${course.courseName}">
+                            <div class="card-body">
+                                <h5 class="card-title">${course.courseName}</h5>
+                                <p class="card-text">${course.shortDescription}</p>
+                                <a href="${pageContext.request.contextPath}/courses/details?courseId=${course.courseId}" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section>
+        <div class="container">
+            <h3 class="section-title">Exciting Projects</h3>
+            <div class="row">
+                <c:forEach var="project" items="${projects}">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="${project.imageLink}" class="card-img-top" alt="${project.projectName}">
+                            <div class="card-body">
+                                <h5 class="card-title">${project.projectName}</h5>
+                                <p class="card-text">${project.shortDescription}</p>
+                                <a href="${pageContext.request.contextPath}/projects/details?projectId=${project.projectId}" class="btn btn-primary">Explore Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quizzes Section -->
+    <section>
+        <div class="container">
+            <h3 class="section-title">Challenge Yourself with Quizzes</h3>
+            <div class="row">
+                <c:forEach var="quiz" items="${quizzes}">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${quiz.quizTitle}</h5>
+                                <p class="card-text">${quiz.shortDescription}</p>
+                                <a href="${pageContext.request.contextPath}/quizzes/start?quizId=${quiz.quizId}" class="btn btn-primary">Take Quiz</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </section>
+
+    <jsp:include page="footer.jsp" />
+</body>
+</html>

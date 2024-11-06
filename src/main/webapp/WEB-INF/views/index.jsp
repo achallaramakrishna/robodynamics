@@ -1,344 +1,220 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robo Dynamics</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link href="css/stylesheet.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-
-<style>
-.carousel-inner iframe {
-	width: 100%;
-	height: 300px;
-}
-
-.carousel-item {
-	position: relative;
-}
-
-.carousel-caption {
-	background: rgba(0, 0, 0, 0.5);
-	padding: 10px;
-}
-
-.carousel-indicators {
-	bottom: -50px;
-}
-
-.carousel-indicators li {
-	background-color: #999;
-	background-color: rgba(255, 255, 255, 0.25);
-}
-
-.carousel-indicators .active {
-	background-color: #fff;
-}
-
-.thumbnail {
-	padding: 10px;
-	background: linear-gradient(to left, #ff007f 0%, #000080 100%);
-}
-
-.thumbnail img {
-	width: 100px;
-	height: auto;
-	cursor: pointer;
-	margin: 5px;
-	transition: transform 0.3s;
-}
-
-.thumbnail img:hover {
-	transform: scale(1.1);
-}
-
-.register-workshop {
-	padding: 60px 0;
-	background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
-	color: white;
-}
-
-.register-workshop .section-title {
-	font-size: 36px;
-	font-weight: bold;
-	margin-bottom: 20px;
-}
-
-.register-workshop .section-subtitle {
-	font-size: 18px;
-	margin-bottom: 40px;
-}
-
-.register-workshop .register-btn {
-	background-color: #FFD700;
-	color: #000;
-	padding: 15px 30px;
-	font-size: 18px;
-	font-weight: bold;
-	text-transform: uppercase;
-	border-radius: 5px;
-	transition: background-color 0.3s ease;
-}
-
-.register-workshop .register-btn:hover {
-	background-color: #FFA500;
-	color: #FFF;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Robo Dynamics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            color: #007bff;
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+        .carousel-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .carousel-section {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+        .card {
+            flex: 0 0 auto;
+            width: 260px;
+            height: 300px;
+            border: none;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .scroll-btn-left {
+            left: -20px;
+        }
+        .scroll-btn-right {
+            right: -20px;
+        }
+        .popup {
+            position: absolute;
+            top: 10px;
+            left: 270px;
+            width: 250px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+            z-index: 10;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- Header Section -->
-	<!-- Including a navigation bar in a JSP -->
-	<jsp:include page="header.jsp" />
+    <jsp:include page="header.jsp" />
 
-	<!-- Background Section -->
-	<section class="background-section">
-		<img src="images/background1.jpeg" alt="background"
-			style="width: 100%;">
-		<div class="overlay">
-			<div class="container">
-				<h1 class="hero-text">Welcome to Robo Dynamics</h1>
-				<p class="hero-text">Inspiring Young Minds with Robotics,
-					Coding, Drones, and AI</p>
-				<a href="subscription.jsp" class="btn btn-primary">Enroll Now</a>
-			</div>
-		</div>
-	</section>
-	<section class="register-workshop">
-		<div class="container text-center">
-			<h2 class="section-title">Register for a Free Workshop with Robo
-				Dynamics</h2>
-			<p class="section-subtitle">Explore the world of Robotics,
-				Coding, AI, and more. Join us for an exciting hands-on experience.</p>
-			<a href="register.html" class="btn btn-primary register-btn">Register
-				Now </a>
-				<!--  This is a comment for testing purpose, to be removed -->
-		</div>
-	</section>
+        <!-- Search Bar with Category Dropdown -->
+<div class="container">
+        <h2 class="text-center mt-4">Explore Our Offerings</h2>
 
-	<!-- Video Carousel Section -->
+        <!-- Search Bar with Category Dropdown -->
+        <form method="get" action="${pageContext.request.contextPath}/" id="searchForm">
+            <div class="input-group mb-4">
+                <input type="text" name="query" value="${query}" class="form-control" placeholder="Search for Courses, Projects, Quizzes...">
+                <button class="btn btn-primary" type="submit">Search</button>
+                <select name="category" class="form-select" style="max-width: 150px; margin-left: 10px;">
+                    <option value="all" ${category == 'all' ? 'selected' : ''}>All</option>
+                    <option value="courses" ${category == 'courses' ? 'selected' : ''}>Courses</option>
+                    <option value="projects" ${category == 'projects' ? 'selected' : ''}>Projects</option>
+                    <option value="quizzes" ${category == 'quizzes' ? 'selected' : ''}>Quizzes</option>
+                </select>
+                <button type="button" class="btn btn-secondary" onclick="resetSearch()">Clear</button>
+            </div>
+        </form>
+    </div>
 
-	<section id="video-carousel" class="carousel slide"
-		data-ride="carousel">
-		<div class="gradient-header">
-			<h2 class="text-center text-white">Our Students in Action</h2>
-		</div>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<iframe
-					src="https://www.youtube.com/embed/YhOtWdxcxTg?rel=0&enablejsapi=1"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
-				<div class="carousel-caption d-none d-md-block">
-					<h5>Learning Robotics</h5>
-				</div>
-				<div class="numbertext">1 / 4</div>
-			</div>
-			<div class="carousel-item">
-				<iframe
-					src="https://www.youtube.com/embed/n0X3PkSYvkM?rel=0&enablejsapi=1"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
-				<div class="carousel-caption d-none d-md-block">
-					<h5>Coding in Action</h5>
-				</div>
-				<div class="numbertext">2 / 4</div>
-			</div>
-			<div class="carousel-item">
-				<iframe
-					src="https://www.youtube.com/embed/d9UtPD2BINc?rel=0&enablejsapi=1"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
-				<div class="carousel-caption d-none d-md-block">
-					<h5>Flying Drones</h5>
-				</div>
-				<div class="numbertext">3 / 4</div>
-			</div>
-			<div class="carousel-item">
-				<iframe
-					src="https://www.youtube.com/embed/CPfq7DFuHA4?rel=0&enablejsapi=1"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>
-				<div class="carousel-caption d-none d-md-block">
-					<h5>Flying Drones</h5>
-				</div>
-				<div class="numbertext">4 / 4</div>
-			</div>
-		</div>
-		<div class="thumbnail text-center">
-			<img src="https://img.youtube.com/vi/YhOtWdxcxTg/0.jpg"
-				data-target="#video-carousel" data-slide-to="0" class="active">
-			<img src="https://img.youtube.com/vi/n0X3PkSYvkM/0.jpg"
-				data-target="#video-carousel" data-slide-to="1"> <img
-				src="https://img.youtube.com/vi/d9UtPD2BINc/0.jpg"
-				data-target="#video-carousel" data-slide-to="2"> <img
-				src="https://img.youtube.com/vi/CPfq7DFuHA4/0.jpg"
-				data-target="#video-carousel" data-slide-to="3">
-		</div>
-	</section>
+    <!-- Featured Courses Section -->
+    <section class="carousel-container container">
+        <h3 class="section-title">Featured Courses</h3>
+        <button class="scroll-btn scroll-btn-left" onclick="scrollCarousel('carousel-courses', -1)">&lt;</button>
+        <div class="carousel-section" id="carousel-courses">
+            <c:forEach var="course" items="${featuredCourses}">
+                <div class="card" onmouseover="showPopup(this)" onmouseout="hidePopup(this)">
+                    <img src="${pageContext.request.contextPath}/${course.courseImageUrl}" alt="${course.courseName}">
+                    <div class="card-body">
+                        <h5 class="card-title">${course.courseName}</h5>
+                        <a href="${pageContext.request.contextPath}/courses/details?courseId=${course.courseId}" class="btn btn-primary">Learn More</a>
+                    </div>
+                    <div class="popup">
+                        <p>${course.shortDescription}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <button class="scroll-btn scroll-btn-right" onclick="scrollCarousel('carousel-courses', 1)">&gt;</button>
+    </section>
 
+    <!-- Featured Projects Section -->
+    <section class="carousel-container container">
+        <h3 class="section-title">Featured Projects</h3>
+        <button class="scroll-btn scroll-btn-left" onclick="scrollCarousel('carousel-projects', -1)">&lt;</button>
+        <div class="carousel-section" id="carousel-projects">
+            <c:forEach var="project" items="${featuredProjects}">
+                <div class="card" onmouseover="showPopup(this)" onmouseout="hidePopup(this)">
+                    <img src="${pageContext.request.contextPath}/${project.imageLink}" alt="${project.projectName}">
+                    <div class="card-body">
+                        <h5 class="card-title">${project.projectName}</h5>
+                        <a href="${pageContext.request.contextPath}/projects/details?projectId=${project.projectId}" class="btn btn-primary">Explore Project</a>
+                    </div>
+                    <div class="popup">
+                        <p>${project.shortDescription}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <button class="scroll-btn scroll-btn-right" onclick="scrollCarousel('carousel-projects', 1)">&gt;</button>
+    </section>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var videoCarousel = document.getElementById('video-carousel');
-			var videos = videoCarousel.querySelectorAll('iframe');
+    <!-- Featured Quizzes Section -->
+    <section class="carousel-container container">
+        <h3 class="section-title">Featured Quizzes</h3>
+        <button class="scroll-btn scroll-btn-left" onclick="scrollCarousel('carousel-quizzes', -1)">&lt;</button>
+        <div class="carousel-section" id="carousel-quizzes">
+            <c:forEach var="quiz" items="${featuredQuizzes}">
+                <div class="card" onmouseover="showPopup(this)" onmouseout="hidePopup(this)">
+                    <div class="card-body">
+                        <h5 class="card-title">${quiz.quizName}</h5>
+                        <a href="${pageContext.request.contextPath}/quizzes/start?quizId=${quiz.quizId}" class="btn btn-primary">Take Quiz</a>
+                    </div>
+                    <div class="popup">
+                        <p>${quiz.shortDescription}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <button class="scroll-btn scroll-btn-right" onclick="scrollCarousel('carousel-quizzes', 1)">&gt;</button>
+    </section>
 
-			function stopAllVideos() {
-				videos.forEach(function(video) {
-					var iframeSrc = video.src;
-					video.src = iframeSrc; // Reassign the source to stop the video
-				});
-			}
+    <!-- JavaScript for Carousel and Popup Functionality -->
+    <script>
+        const itemsPerScroll = 4;
+        const itemWidth = 275; // Approximate width of each card, including margin
 
-			videoCarousel.addEventListener('slide.bs.carousel', function() {
-				stopAllVideos();
-			});
-		});
-	</script>
+        function scrollCarousel(id, direction) {
+            const carousel = document.getElementById(id);
+            if (!carousel) return;
+            const scrollAmount = direction * itemsPerScroll * itemWidth;
+            carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
 
-	<!-- Highlight section -->
-	<section class="highlight-section position-relative">
-		<img src="images/background (2).jpeg" alt="background"
-			class="img-fluid">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-8 text-center text-white">
-					<h2>Leading the Way in Robotics and Automation</h2>
-					<p class="lead">At Robo Dynamics, we specialize in providing
-						state-of-the-art robotics systems and custom automation solutions
-						for various industries. Our innovative technology and expert team
-						are dedicated to helping you achieve operational excellence.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+        function showPopup(card) {
+            const popup = card.querySelector('.popup');
+            popup.style.display = 'block';
+        }
 
-	<!-- Unique Selling Points Section -->
-	<section class="bg-black py-5">
-		<div class="container text-white">
-			<h2 class="text-center mb-4">Why Choose Robo Dynamics?</h2>
-			<div class="row justify-content-center">
-				<div class="col-md-6 mb-4">
-					<h3 class="mb-3">Expert Instructors</h3>
-					<p class="mb-4">Our experienced educators guide students
-						through each level, ensuring personalized attention and support.</p>
-					<hr class="bg-white">
-				</div>
-				<div class="col-md-6 mb-4">
-					<h3 class="mb-3">Hands-On Learning</h3>
-					<p class="mb-4">Engaging projects and real-world applications
-						make learning exciting and practical.</p>
-					<hr class="bg-white">
-				</div>
-				<div class="col-md-6 mb-4">
-					<h3 class="mb-3">Community and Competitions</h3>
-					<p class="mb-4">Join a community of like-minded peers and
-						participate in exciting challenges and competitions.</p>
-					<hr class="bg-white">
-				</div>
-				<div class="col-md-6 mb-4">
-					<h3 class="mb-3">Future-Ready Skills</h3>
-					<p class="mb-4">Equip your child with the skills they need to
-						thrive in a technology-driven world.</p>
-					<hr class="bg-white">
-				</div>
-				<div class="text-center mt-4 centered-text">
-					<p class="lead">Give your child the gift of knowledge and a
-						head start in their tech journey. Enroll today and watch them
-						transform from curious learners to confident innovators!</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Courses Section with Overlay -->
-	<section class="courses-section bg-gradient-dark-pink py-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card bg-light mb-4">
-						<img src="images/robot.jpg" alt="Robotics Icon"
-							class="card-img-top course-icon">
-						<div class="card-body text-center">
-							<h3 class="card-title">Robotics</h3>
-							<p class="card-text">From Basics to Advanced</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card bg-light mb-4">
-						<img src="images/drone.jpg" alt="Drones Icon"
-							class="card-img-top course-icon">
-						<div class="card-body text-center">
-							<h3 class="card-title">Drones</h3>
-							<p class="card-text">Flight Principles and Applications</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card bg-light mb-4">
-						<img src="images/coding.jpg" alt="Coding Icon"
-							class="card-img-top course-icon">
-						<div class="card-body text-center">
-							<h3 class="card-title">Coding</h3>
-							<p class="card-text">Learn to Code Like a Pro</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="card bg-light mb-4">
-						<img src="images/Ai.jpg" alt="AI Icon"
-							class="card-img-top course-icon">
-						<div class="card-body text-center">
-							<h3 class="card-title">AI</h3>
-							<p class="card-text">Master the Future of Technology</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="text-center mt-4">
-				<a href="courses.jsp" class="btn btn-primary btn-lg">View All
-					Courses</a>
-			</div>
-		</div>
-	</section>
-
-	<!-- Call-to-Action Section -->
-	<section class="bg-navbar-gradient py-5 text-center">
-		<div class="container">
-			<h2>Ready to Start Your Journey?</h2>
-			<p>Join Robo Dynamics today and transform your career with our
-				innovative automation solutions.</p>
-			<a href="subscription.jsp" class="btn btn-primary btn-lg">Enroll
-				Now</a>
-		</div>
-	</section>
-
-	<!-- Footer Section -->
-	<jsp:include page="footer.jsp" />
-
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        function hidePopup(card) {
+            const popup = card.querySelector('.popup');
+            popup.style.display = 'none';
+        }
+        
+        function resetSearch() {
+            document.getElementById("searchForm").reset();
+            window.location.href = "${pageContext.request.contextPath}/";
+        }
+        
+        console.log("Number of courses: ${fn:length(courses)}");
+        console.log("Number of projects: ${fn:length(projects)}");
+        console.log("Number of quizzes: ${fn:length(quizzes)}");
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

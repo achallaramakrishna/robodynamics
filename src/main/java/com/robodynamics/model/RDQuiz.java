@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "rd_quizzes")
@@ -31,11 +32,76 @@ public class RDQuiz {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz")
     @JsonIgnore // Prevents the field from being serialized
-    private List<RDQuizQuestionMap> quizQuestionMappings;
+    private Set<RDQuizQuestionMap> quizQuestionMappings;
+    
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "is_featured", nullable = false)
+    private boolean isFeatured;
+
+    // Getters and Setters
+
+    public boolean isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
     
     
+    @Column(name = "grade_range")
+    @Enumerated(EnumType.STRING)
+    private GradeRange gradeRange;
+
+    // Enum for GradeRange (reuse or add as needed)
+    public enum GradeRange {
+        LOWER_PRIMARY_1_3("Lower Primary (Grades 1-3)"),
+        UPPER_PRIMARY_4_6("Upper Primary (Grades 4-6)"),
+        MIDDLE_SCHOOL_7_9("Middle School (Grades 7-9)"),
+        HIGH_SCHOOL_10_12("High School (Grades 10-12)"),
+        ALL_GRADES("All Grades");
+
+        private final String displayName;
+
+        GradeRange(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+    }
+    @Column(name="short_description")
+    private String shortDescription;
+    
+    // Getter and Setter for shortDescription
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public GradeRange getGradeRange() {
+        return gradeRange;
+    }
+
+    public void setGradeRange(GradeRange gradeRange) {
+        this.gradeRange = gradeRange;
+    }
     // Constructors
     public RDQuiz() {}
 
@@ -97,25 +163,14 @@ public class RDQuiz {
 		this.status = status;
 	}
 
-	public List<RDQuizQuestionMap> getQuizQuestionMappings() {
+	public Set<RDQuizQuestionMap> getQuizQuestionMappings() {
 		return quizQuestionMappings;
 	}
 
-	public void setQuizQuestionMappings(List<RDQuizQuestionMap> quizQuestionMappings) {
+	public void setQuizQuestionMappings(Set<RDQuizQuestionMap> quizQuestionMappings) {
 		this.quizQuestionMappings = quizQuestionMappings;
 	}
 
-	@Override
-	public String toString() {
-		final int maxLen = 10;
-		return "RDQuiz [quizId=" + quizId + ", quizName=" + quizName + ", difficultyLevel=" + difficultyLevel
-				+ ", quizType=" + quizType + ", timeLimitSeconds=" + timeLimitSeconds + ", status=" + status
-				+ ", quizQuestionMappings="
-				+ (quizQuestionMappings != null
-						? quizQuestionMappings.subList(0, Math.min(quizQuestionMappings.size(), maxLen))
-						: null)
-				+ "]";
-	}
-
+	
 	
 }

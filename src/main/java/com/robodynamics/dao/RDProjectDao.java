@@ -16,4 +16,8 @@ public interface RDProjectDao {
 	List<RDProject> getProjectsByCategory();
 
 	List<RDProject> getProjectsByGradeRange();
+	
+	List<RDProject> getFeaturedProjects();
+	
+	List<RDProject> searchProjects(String query);
 }

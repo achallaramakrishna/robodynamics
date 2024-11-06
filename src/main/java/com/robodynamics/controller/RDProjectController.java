@@ -26,13 +26,14 @@ public class RDProjectController {
 
     @GetMapping("/projects")
     public String listProjects(Model model) {
-        // Retrieve projects by grade and category
-        model.addAttribute("grades", projectService.getProjectsByGradeRange());
-        model.addAttribute("categories", projectService.getProjectsByCategory());
-        
+        // Retrieve projects by grade range and category
+        model.addAttribute("grades", projectService.getProjectsGroupedByGradeRange());
+        model.addAttribute("categories", projectService.getProjectsGroupedByCategory());
+
         // Return the JSP page for displaying projects
         return "projects/projects";
     }
+
     
     @GetMapping("/list")
     public String list(Model model) {

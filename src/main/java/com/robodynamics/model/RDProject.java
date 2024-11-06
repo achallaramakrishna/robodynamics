@@ -12,6 +12,18 @@ public class RDProject {
     @Column(name = "project_id")
     private int projectId;
 
+    @Column(name = "is_featured", nullable = false)
+    private boolean isFeatured;
+
+    // Getters and Setters
+
+    public boolean isFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
     public int getProjectId() {
 		return projectId;
 	}
@@ -138,7 +150,7 @@ public class RDProject {
     @Column(name = "grade_level", nullable = false)
     private int gradeLevel;
 
-    @Column(name = "grade_range", nullable = false)
+    @Column(name = "grade_range", nullable = false)	
     @Enumerated(EnumType.STRING)
     private GradeRange gradeRange;
 
@@ -158,7 +170,12 @@ public class RDProject {
             return displayName;
         }
     }
-
+    
+    // Helper to get display name for JSP
+    public String getGradeRangeDisplayName() {
+        return gradeRange != null ? gradeRange.getDisplayName() : "";
+    }
+    
     @Column(name = "category", nullable = false)
     private String category;
 
@@ -206,6 +223,16 @@ public class RDProject {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
+	@Override
+	public String toString() {
+		return "RDProject [projectId=" + projectId + ", projectName=" + projectName + ", gradeLevel=" + gradeLevel
+				+ ", gradeRange=" + gradeRange + ", category=" + category + ", shortDescription=" + shortDescription
+				+ ", detailedDescription=" + detailedDescription + ", difficultyLevel=" + difficultyLevel
+				+ ", estimatedDuration=" + estimatedDuration + ", materialsRequired=" + materialsRequired + ", steps="
+				+ steps + ", videoLink=" + videoLink + ", imageLink=" + imageLink + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + "]";
+	}
 
     
 }

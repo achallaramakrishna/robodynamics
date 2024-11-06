@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDQuizQuestion;
+import com.robodynamics.wrapper.ProjectGroup;
 
 public interface RDQuizService {
 	
@@ -35,6 +36,12 @@ public interface RDQuizService {
     
     List<RDQuiz> getQuizzesFiltered(Integer courseId, String status, String difficultyLevel);
 
+    List<ProjectGroup<RDQuiz>> getQuizzesGroupedByCategory();
     
+    List<ProjectGroup<RDQuiz>> getQuizzesGroupedByGradeRange();
+    
+    List<RDQuiz> getFeaturedQuizzes();
+    
+    List<RDQuiz> searchQuizzes(String query);
 
 }

@@ -53,16 +53,13 @@
 	            display: flex;
 	            flex-direction: row;
 	            align-items: center;
-	            justify-content: center;
-	            margin-bottom: 20px;
-	            flex-wrap: wrap;
 	            width: 100%;
 	            max-width: 1200px;
 	            margin: 0 auto;
 	            background-color: #ffe4e1;
 	            border: 3px solid #ff4500;
 	            border-radius: 20px;
-	            padding: 20px;
+	            padding: 0;
 	            box-shadow: 0px 0px 20px rgba(255, 165, 0, 0.4);
 	        }
 	
@@ -87,14 +84,15 @@
 	        }
 	
 	        .content-box {
-	            width: 45%;
-	            max-width: 600px;
+	            width: 80%;
+	            max-width: 900px;
 	            text-align: left;
 	            background-color: #ffffff;
 	            padding: 20px;
 	            border-radius: 15px;
 	            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 	            color: #333;
+	            margin: 0 auto;
 	        }
 	
 	        .content-box p {
@@ -264,7 +262,32 @@
 	
 	<body>
 		<div class="container-fluid">
-	
+			
+					<!-- Navigation Buttons at the Top -->
+		<div class="nav-buttons">
+		    <form action="${pageContext.request.contextPath}/sessiondetail/navigateSlides" method="post" class="d-inline-flex w-100">
+		        <input type="hidden" name="currentSlide" value="${currentSlide}" />
+		        <input type="hidden" name="sessionDetailId" value="${sessionDetailId}" />
+		        <input type="hidden" name="enrollmentId" value="${enrollmentId}" />
+
+		        <!-- Previous Button -->
+		        <button type="submit" name="direction" value="prev" class="btn btn-outline-primary" style="min-width: 120px;"
+		            ${currentSlide == 0 ? 'disabled' : ''}>
+		            ◀ Prev
+		        </button>
+
+		        <!-- Slide Indicator -->
+		        <div class="slide-indicator text-center w-100">
+		            <span class="badge bg-secondary">Slide ${currentSlide + 1} of ${slideCount}</span>
+		        </div>
+
+		        <!-- Next Button -->
+		        <button type="submit" name="direction" value="next" class="btn btn-outline-primary" style="min-width: 120px;"
+		            ${currentSlide == slideCount - 1 ? 'disabled' : ''}>
+		            Next ▶
+		        </button>
+		    </form>
+		</div>
 	
 			<h2 class="animated-title">✨ ${slide.title} ✨</h2>
 	

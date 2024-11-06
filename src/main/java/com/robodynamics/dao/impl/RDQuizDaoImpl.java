@@ -3,6 +3,8 @@ package com.robodynamics.dao.impl;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDQuizDao;
 import com.robodynamics.model.RDQuiz;
+import com.robodynamics.wrapper.ProjectGroup;
 
 @Repository
 @Transactional
@@ -108,4 +111,47 @@ public class RDQuizDaoImpl implements RDQuizDao {
 		    cq.select(cb.count(root));
 		    return session.createQuery(cq).getSingleResult();
 	}
+
+	@Override
+    public List<ProjectGroup<RDQuiz>> getQuizzesGroupedByCategory() {
+        Session session = factory.getCurrentSession();
+        List<RDQuiz> quizzes = session.createQuery("from RDQuiz", RDQuiz.class).list();
+
+        return quizzes.stream()
+            .collect(Collectors.groupingBy(RDQuiz::getCategory))
+            .entrySet()
+            .stream()
+            .map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
+    }
+
+	@Override
+    public List<ProjectGroup<RDQuiz>> getQuizzesGroupedByGradeRange() {
+        Session session = factory.getCurrentSession();
+        List<RDQuiz> quizzes = session.createQuery("from RDQuiz", RDQuiz.class).list();
+
+        return quizzes.stream()
+            .collect(Collectors.groupingBy(quiz -> quiz.getGradeRange().getDisplayName()))
+            .entrySet()
+            .stream()
+            .map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
+    }
+
+	@Override
+	public List<RDQuiz> getFeaturedQuizzes() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM RDQuiz WHERE isFeatured = true";
+        Query<RDQuiz> query = session.createQuery(hql, RDQuiz.class);
+        return query.getResultList();
+	}
+	
+    @Override
+    public List<RDQuiz> searchQuizzes(String query) {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM RDQuiz WHERE quizName LIKE :query OR shortDescription LIKE :query";
+        Query<RDQuiz> searchQuery = session.createQuery(hql, RDQuiz.class);
+        searchQuery.setParameter("query", "%" + query + "%");
+        return searchQuery.getResultList();
+    }
 }

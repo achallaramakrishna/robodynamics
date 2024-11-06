@@ -1,6 +1,8 @@
 package com.robodynamics.dao.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.NoResultException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,8 +16,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.robodynamics.dao.RDCourseDao;
+import com.robodynamics.dto.RDCourseBasicDTO;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.wrapper.ProjectGroup;
 
 
 @Repository
@@ -63,7 +67,59 @@ public class RDCourseDaoImpl implements RDCourseDao {
         query.setParameter("courseId", courseId);
         return query.getResultList();
 	}
+	
+	@Override
+	public List<RDCourseBasicDTO> getBasicCourseDetails() {
+	    return factory.getCurrentSession().createQuery(
+	        "SELECT new com.robodynamics.dto.RDCourseBasicDTO(c.courseId, c.courseName, c.courseDescription, " +
+	        "c.courseDuration, c.courseLevel, c.courseImageUrl, c.coursePrice, c.courseInstructor, c.courseAgeGroup, c.category, c.gradeRange.displayName) " +
+	        "FROM RDCourse c", RDCourseBasicDTO.class).getResultList();
+	}
 
+	@Override
+	public List<RDCourseBasicDTO> getPopularCourses() {
+	    return factory.getCurrentSession().createQuery(
+		        "SELECT new com.robodynamics.dto.RDCourseBasicDTO(c.courseId, c.courseName, c.courseDescription, " +
+		        "c.courseDuration, c.courseLevel, c.courseImageUrl, c.coursePrice, c.courseInstructor, c.courseAgeGroup, c.category, c.gradeRange.displayName) " +
+		        "FROM RDCourse c where c.courseStatus='active'", RDCourseBasicDTO.class).getResultList();
 
+	}
+
+	@Override
+	public List<ProjectGroup<RDCourse>> getCoursesGroupedByCategory() {
+		Session session = factory.getCurrentSession();
+		List<RDCourse> courses = session.createQuery("from RDCourse", RDCourse.class).list();
+
+		return courses.stream().collect(Collectors.groupingBy(RDCourse::getCategory)).entrySet().stream()
+				.map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue())).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ProjectGroup<RDCourse>> getCoursesGroupedByGradeRange() {
+		Session session = factory.getCurrentSession();
+		List<RDCourse> courses = session.createQuery("from RDCourse", RDCourse.class).list();
+
+		return courses.stream().collect(Collectors.groupingBy(course -> course.getGradeRange().getDisplayName()))
+				.entrySet().stream().map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<RDCourse> getFeaturedCourses() {
+		Session session = factory.getCurrentSession();
+
+		String hql = "FROM RDCourse WHERE isFeatured = true";
+        Query<RDCourse> query = session.createQuery(hql, RDCourse.class);
+        return query.getResultList();
+	}
+
+	@Override
+	public List<RDCourse> searchCourses(String query) {
+		 Session session = factory.getCurrentSession();
+	        String hql = "FROM RDCourse WHERE courseName LIKE :query OR courseDescription LIKE :query";
+	        Query<RDCourse> searchQuery = session.createQuery(hql, RDCourse.class);
+	        searchQuery.setParameter("query", "%" + query + "%");
+	        return searchQuery.getResultList();
+	}
 
 }

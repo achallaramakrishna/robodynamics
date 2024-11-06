@@ -3,7 +3,9 @@ package com.robodynamics.dao;
 
 import java.util.List;
 
+import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDQuiz;
+import com.robodynamics.wrapper.ProjectGroup;
 
 public interface RDQuizDao {
 
@@ -25,5 +27,12 @@ public interface RDQuizDao {
     
     List<RDQuiz> findQuizzesByFilters(Integer courseId, String status, String difficultyLevel);
 
+	List<ProjectGroup<RDQuiz>> getQuizzesGroupedByCategory();
+    
+    List<ProjectGroup<RDQuiz>> getQuizzesGroupedByGradeRange();
+
+    List<RDQuiz> getFeaturedQuizzes();
+    
+    List<RDQuiz> searchQuizzes(String query);
 
 }

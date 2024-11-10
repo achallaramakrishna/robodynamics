@@ -29,7 +29,7 @@ public class RDCourseSessionController {
      */
     @GetMapping("/list")
     public String listCourseSessions(@RequestParam(required = false) Integer courseId, Model model) {
-        List<RDCourseSession> units = null;
+        List<RDCourseSession> sessions = null;
 
         // Fetch all courses for the course selection dropdown
         List<RDCourse> courses = courseService.getRDCourses();
@@ -37,13 +37,13 @@ public class RDCourseSessionController {
 
         if (courseId != null && courseId > 0) {
             // Fetch units and their child sessions
-            units = courseSessionService.getCourseHierarchyByCourseId(courseId);
+        	sessions = courseSessionService.getCourseSessionsByCourseId(courseId);
         }
 
-        if (units == null || units.isEmpty()) {
+        if (sessions == null || sessions.isEmpty()) {
             model.addAttribute("message", "No course units available for the selected course.");
         } else {
-            model.addAttribute("units", units);
+            model.addAttribute("sessions", sessions);
         }
 
         model.addAttribute("selectedCourseId", courseId != null ? courseId : 0);

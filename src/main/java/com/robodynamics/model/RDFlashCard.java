@@ -27,6 +27,21 @@ public class RDFlashCard {
 
     @Column(name = "image_url")
     private String imageUrl;
+    
+    @Column(name = "example")
+    private String example; // New field for storing an example
+
+    @Column(name = "insight")
+    private String insight; // New field for storing insights, e.g., NEET, JEE, etc.
+
+    @Column(name = "insight_type")
+    @Enumerated(EnumType.STRING)
+    private InsightType insightType; // New enum field for insight type (e.g., 'neet', 'jee', 'interview')
+    
+    // Enum for Insight Type
+    public enum InsightType {
+        NEET, JEE, INTERVIEW
+    }
 
     @ManyToOne
     @JoinColumn(name = "flashcard_set_id", nullable = false)
@@ -94,4 +109,29 @@ public class RDFlashCard {
     public void setAttempts(List<RDFlashCardAttempt> attempts) {
         this.attempts = attempts;
     }
+
+	public String getExample() {
+		return example;
+	}
+
+	public void setExample(String example) {
+		this.example = example;
+	}
+
+	public String getInsight() {
+		return insight;
+	}
+
+	public void setInsight(String insight) {
+		this.insight = insight;
+	}
+
+	public InsightType getInsightType() {
+		return insightType;
+	}
+
+	public void setInsightType(InsightType insightType) {
+		this.insightType = insightType;
+	}
+    
 }

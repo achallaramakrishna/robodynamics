@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
+import com.robodynamics.model.RDQuizQuestion.TierLevel;
 import com.robodynamics.service.RDQuizQuestionService;
 
 @Service
@@ -78,5 +79,20 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 	@Override
 	public List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType) {
 		return rdQuizQuestionDao.getQuestionsBySlideId(slideId, questionType);
+	}
+
+	@Override
+	public List<RDQuizQuestion> getQuestionsByTierLevel(TierLevel tierLevel) {
+		return rdQuizQuestionDao.findByTierLevel(tierLevel);
+	}
+
+	@Override
+	public List<RDQuizQuestion> getQuestionsByTierLevelAndDifficulty(TierLevel tierLevel, String difficultyLevel) {
+		return rdQuizQuestionDao.findByTierLevelAndDifficulty(tierLevel, difficultyLevel);
+	}
+
+	@Override
+	public List<RDQuizQuestion> getQuestionsByTierLevelOrdered(TierLevel tierLevel) {
+		return rdQuizQuestionDao.findByTierLevelOrderedByTierOrder(tierLevel);
 	}
 }

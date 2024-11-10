@@ -53,13 +53,13 @@ public class RDQuizQuestion {
 
     @Column(name = "difficulty_level", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DifficultyLevel difficultyLevel;  // Enum for 'Beginner', 'Intermediate', 'Advanced', 'Expert', 'Master'
+    private DifficultyLevel difficultyLevel;  // Enum for 'Easy', 'Medium', 'Hard', 'Expert', 'Master'
 
  // Enum for DifficultyLevel
     public enum DifficultyLevel {
-        Beginner,
-        Intermediate,
-        Advanced,
+        Easy,
+        Medium,
+        Hard,
         Expert,
         Master
     }
@@ -70,6 +70,17 @@ public class RDQuizQuestion {
     @Column(name = "additional_info")
     private String additionalInfo;
 
+    @Column(name = "tier_level")
+    @Enumerated(EnumType.STRING)
+    private TierLevel tierLevel; // Beginner, Intermediate, Advanced
+
+    @Column(name = "tier_order")
+    private int tierOrder;
+
+    public enum TierLevel {
+        BEGINNER, INTERMEDIATE, ADVANCED
+    }
+    
     public int getQuestionNumber() {
 		return questionNumber;
 	}
@@ -182,6 +193,22 @@ public class RDQuizQuestion {
 	}
 	
 	
+
+	public TierLevel getTierLevel() {
+		return tierLevel;
+	}
+
+	public void setTierLevel(TierLevel tierLevel) {
+		this.tierLevel = tierLevel;
+	}
+
+	public int getTierOrder() {
+		return tierOrder;
+	}
+
+	public void setTierOrder(int tierOrder) {
+		this.tierOrder = tierOrder;
+	}
 
 	@Override
 	public String toString() {

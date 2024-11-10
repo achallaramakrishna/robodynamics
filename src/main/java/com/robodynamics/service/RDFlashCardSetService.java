@@ -12,6 +12,7 @@ public interface RDFlashCardSetService {
 
     void deleteRDFlashCardSet(int id);
     
-    RDFlashCardSet getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId);
+    RDFlashCardSet getFlashCardSetsByCourseSessionDetails(int courseSessionDetailId);
 
+    List<RDFlashCardSet> getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId);
 }

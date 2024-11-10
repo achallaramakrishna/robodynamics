@@ -203,7 +203,8 @@ public class RDQuizController {
     @GetMapping("/start/{quizId}")
     public String startQuiz(@PathVariable int quizId, 
                             HttpSession session, HttpServletRequest request, 
-                            Model model, @RequestParam(value = "currentQuestionIndex", defaultValue = "0") int currentQuestionIndex) {
+                            Model model, @RequestParam(value = "currentQuestionIndex", defaultValue = "0") int currentQuestionIndex,
+                            @RequestParam(value = "mode", defaultValue = "practice") String mode) {
         RDUser rdUser = null;
 
         if (session.getAttribute("rdUser") != null) {
@@ -224,7 +225,8 @@ public class RDQuizController {
         // Fetch question IDs from the RDQuizQuestionMap
         
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-
+        
+        System.out.println("questionIds - " + questionIds);
         if (questionIds.isEmpty()) {
             model.addAttribute("message", "No questions available for this quiz.");
             return "quizzes/error";
@@ -243,6 +245,12 @@ public class RDQuizController {
         model.addAttribute("currentQuestion", currentQuestion);
         model.addAttribute("currentQuestionIndex", currentQuestionIndex);
         model.addAttribute("totalQuestions", quizQuestions.size());
+        model.addAttribute("mode", mode);
+        
+        if ("practice".equals(mode)) {
+            model.addAttribute("correctAnswer", currentQuestion.getCorrectAnswer());
+        }
+
         return "quizzes/take";  // Display a single question at a time
     }
     
@@ -251,6 +259,9 @@ public class RDQuizController {
                                @RequestParam("currentQuestionIndex") int currentQuestionIndex,
                                @RequestParam("action") String action,
                                @RequestParam Map<String, String> answers, 
+                               @RequestParam(value = "mode", defaultValue = "practice") String mode,
+
+                               
                                HttpSession session, Model model) {
         // Fetch the user from the session
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
@@ -329,6 +340,12 @@ public class RDQuizController {
         model.addAttribute("currentQuestionIndex", currentQuestionIndex);
         model.addAttribute("totalQuestions", quizQuestions.size());
         model.addAttribute("selectedAnswers", selectedAnswers);
+        
+        model.addAttribute("mode", mode);
+
+        if ("practice".equals(mode)) {
+            model.addAttribute("correctAnswer", currentQuestion.getCorrectAnswer());
+        }
 
         return "quizzes/take";
     }

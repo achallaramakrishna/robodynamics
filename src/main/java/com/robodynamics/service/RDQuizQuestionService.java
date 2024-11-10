@@ -33,4 +33,10 @@ public interface RDQuizQuestionService {
     List<RDQuizQuestion> findQuestionsByIds(List<Integer> questionIds);
 
     List<RDQuizQuestion> findAll();
+    
+    List<RDQuizQuestion> getQuestionsByTierLevel(RDQuizQuestion.TierLevel tierLevel);
+
+    List<RDQuizQuestion> getQuestionsByTierLevelAndDifficulty(RDQuizQuestion.TierLevel tierLevel, String difficultyLevel);
+    
+    List<RDQuizQuestion> getQuestionsByTierLevelOrdered(RDQuizQuestion.TierLevel tierLevel);
 }

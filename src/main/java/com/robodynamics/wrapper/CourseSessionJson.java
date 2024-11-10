@@ -8,6 +8,9 @@ public class CourseSessionJson {
     private String sessionType;
     private Integer parentSessionId;
     private String sessionDescription;
+    private String tierLevel; // New field for tier level
+    private int tierOrder;    // New field for tier order
+    
     
     
 
@@ -70,6 +73,23 @@ public class CourseSessionJson {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
+	public String getTierLevel() {
+		return tierLevel;
+	}
+
+	public void setTierLevel(String tierLevel) {
+		this.tierLevel = tierLevel;
+	}
+
+	public int getTierOrder() {
+		return tierOrder;
+	}
+
+	public void setTierOrder(int tierOrder) {
+		this.tierOrder = tierOrder;
+	}
+	
     
     
 }

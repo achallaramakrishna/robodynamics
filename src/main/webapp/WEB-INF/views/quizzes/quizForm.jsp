@@ -54,6 +54,17 @@
 								</div>
 							</div>
 							   <div class="mb-3">
+						            <label for="category" class="form-label">Category</label>
+						            <form:select path="category" cssClass="form-control">
+						                <form:option value="Programming">Programming</form:option>
+						                <form:option value="Math">Math</form:option>
+						                <form:option value="Physics">Physics</form:option>
+						                <form:option value="Physics">Robotics</form:option>
+						                <form:option value="Drones">Drones</form:option>
+						            </form:select>
+						        </div>
+
+							   <div class="mb-3">
 						            <label for="difficulty" class="form-label">Difficulty Level</label>
 						            <form:select path="difficultyLevel" cssClass="form-control">
 						                <form:option value="Beginner">Beginner</form:option>
@@ -61,6 +72,18 @@
 						                <form:option value="Advanced">Advanced</form:option>
 						            </form:select>
 						        </div>
+						        
+						                                    <!-- New dropdown for grade range -->
+                            <div class="mb-3">
+                                <label for="gradeRange" class="form-label">Grade Range</label>
+                                <form:select path="gradeRange" cssClass="form-control">
+                                    <form:option value="ALL_GRADES">ALL GRADES</form:option>
+                                    <form:option value="LOWER_PRIMARY_1_3">LOWER PRIMARY (1-3)</form:option>
+                                    <form:option value="UPPER_PRIMARY_4_6">UPPER PRIMARY (4-6)</form:option>
+                                    <form:option value="MIDDLE_SCHOOL_7_9">MIDDLE SCHOOL (7-9)</form:option>
+                                    <form:option value="HIGH_SCHOOL_10_12">HIGH SCHOOL (10-12)</form:option>
+                                </form:select>
+                            </div>
 
 							<br>
 							<center>

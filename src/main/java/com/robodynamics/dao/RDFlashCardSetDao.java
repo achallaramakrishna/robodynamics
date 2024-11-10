@@ -14,4 +14,6 @@ public interface RDFlashCardSetDao {
     void deleteRDFlashCardSet(int id);
 
 	RDFlashCardSet getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId);
+
+	List<RDFlashCardSet> findByCourseSessionDetailId(int courseSessionDetailId);
 }

@@ -8,7 +8,7 @@
 <%@ page isELIgnored="false"%>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Course Units and Sessions</title>
+<title>Manage Course Sessions</title>
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
     rel="stylesheet">
@@ -86,7 +86,7 @@
                 <input type="hidden" name="courseId" value="${param.courseId}" />
 
                 <div class="mb-3">
-                    <label for="file" class="form-label">Upload Course Units and Sessions (JSON)</label>
+                    <label for="file" class="form-label">Upload Course Sessions (JSON)</label>
                     <input type="file" class="form-control" id="file"
                         name="file" accept=".json" required>
                 </div>
@@ -110,64 +110,35 @@
             </thead>
             <tbody>
                 <!-- Iterate over units -->
-                <c:forEach var="unit" items="${units}">
+                <c:forEach var="session" items="${sessions}">
                     <!-- Unit Row -->
                     <tr class="unit-row">
-                        <td>${unit.courseSessionId}</td>
-                        <td>${unit.sessionTitle}</td>
-                        <td>${unit.sessionId}</td>
-                        <td>${unit.version}</td>
-                        <td>Unit</td>
+                        <td>${session.courseSessionId}</td>
+                        <td>${session.sessionTitle}</td>
+                        <td>${session.sessionId}</td>
+                        <td>${session.version}</td>
+                        <td>Session</td>
                         <td>
                             <!-- Description Toggle Button -->
-                            <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#descriptionUnit${unit.courseSessionId}" aria-expanded="false" aria-controls="descriptionUnit${unit.courseSessionId}">
+                            <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#descriptionUnit${session.courseSessionId}" aria-expanded="false" aria-controls="descriptionUnit${	session.courseSessionId}">
                                 View Description
                             </button>
                             <!-- Collapsible Description -->
-                            <div class="collapse" id="descriptionUnit${unit.courseSessionId}">
+                            <div class="collapse" id="descriptionUnit${session.courseSessionId}">
                                 <div class="card card-body">
-                                    <c:out value="${unit.sessionDescription}" escapeXml="false"/>
+                                    <c:out value="${session.sessionDescription}" escapeXml="false"/>
                                 </div>
                             </div>
                         </td>
                         <td class="action-buttons">
                             <!-- Edit and Delete Buttons for Unit -->
-                            <a href="editUnit?courseSessionId=${unit.courseSessionId}"
+                            <a href="editUnit?courseSessionId=${session.courseSessionId}"
                                 class="btn btn-sm btn-warning">Edit</a>
-                            <a href="delete?courseSessionId=${unit.courseSessionId}&courseId=${unit.course.courseId}"
+                            <a href="delete?courseSessionId=${unit.courseSessionId}&courseId=${session.course.courseId}"
                                 class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this unit and all its sessions?');">Delete</a>
                         </td>
                     </tr>
-                    <!-- Iterate over sessions under this unit -->
-                    <c:forEach var="session" items="${unit.childSessions}">
-                        <tr class="session-row">
-                            <td>${session.courseSessionId}</td>
-                            <td>&emsp;${session.sessionTitle}</td>
-                            <td>${session.sessionId}</td>
-                            <td>${session.version}</td>
-                            <td>Session</td>
-                            <td>
-                                <!-- Description Toggle Button -->
-                                <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#descriptionSession${session.courseSessionId}" aria-expanded="false" aria-controls="descriptionSession${session.courseSessionId}">
-                                    View Description
-                                </button>
-                                <!-- Collapsible Description -->
-                                <div class="collapse" id="descriptionSession${session.courseSessionId}">
-                                    <div class="card card-body">
-                                        <c:out value="${session.sessionDescription}" escapeXml="false"/>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="action-buttons">
-                                <!-- Edit and Delete Buttons for Session -->
-                                <a href="editSession?courseSessionId=${session.courseSessionId}"
-                                    class="btn btn-sm btn-warning">Edit</a>
-                                <a href="delete?courseSessionId=${session.courseSessionId}&courseId=${session.course.courseId}"
-                                    class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this session?');">Delete</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:forEach>
+                 </c:forEach>
             </tbody>
         </table>
     </div>

@@ -66,5 +66,16 @@ public class RDFlashCardSetDaoImpl implements RDFlashCardSetDao {
         return results.isEmpty() ? null : results.get(0);
     }
 
+	@Override
+	public List<RDFlashCardSet> findByCourseSessionDetailId(int courseSessionDetailId) {
+        String hql = "FROM RDFlashCardSet WHERE courseSessionDetail.courseSessionDetailId = :courseSessionDetailId";
+        List<RDFlashCardSet> results = sessionFactory.getCurrentSession()
+                                                     .createQuery(hql, RDFlashCardSet.class)
+                                                     .setParameter("courseSessionDetailId", courseSessionDetailId)
+                                                     .getResultList();
+        return results.isEmpty() ? null : results;
+
+	}
+
 
 }

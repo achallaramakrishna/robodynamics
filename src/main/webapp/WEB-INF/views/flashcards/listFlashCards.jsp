@@ -59,6 +59,14 @@
                     <option value="">-- Select Session Detail --</option>
                 </select>
             </div>
+            
+            <!-- Flashcard Set Selection -->
+            <div class="form-group mt-3">
+                <label for="flashcardSet">Select Flashcard Set</label>
+                <select id="flashcardSet" name="flashcardSetId" class="form-control" disabled>
+                    <option value="">-- Select Flashcard Set --</option>
+                </select>
+            </div>
         </form>
 
         <!-- Add Flashcard Button -->
@@ -110,10 +118,10 @@
                     });
                 } else {
                     $('#session').html('<option value="">-- Select Session --</option>').prop('disabled', true);
-                    $('#sessionDetail').html('<option value="">-- Select Session Detail --</option>').prop('disabled', true);
+                    $('#sessionDetail, #flashcardSet').html('<option value="">-- Select --</option>').prop('disabled', true);
                     $('#flashcardsTable tbody').html('');
-                    $('#addFlashcardBtn').hide();
-                    $('#uploadJsonForm').hide();
+                    $('#addFlashcardBtn, #uploadJsonForm').hide();
+
                 }
             });
 
@@ -136,33 +144,40 @@
                 }
             });
 
-            // Load Flashcards when Session Detail of type "flashcard" is selected
+            // Load Flashcard Sets when Session Detail is selected
             $('#sessionDetail').change(function () {
                 let courseSessionDetailId = $(this).val();
                 if (courseSessionDetailId) {
                     $.getJSON('${pageContext.request.contextPath}/flashcards/getFlashcardSetsBySessionDetail', {courseSessionDetailId: courseSessionDetailId}, function (data) {
-                        let flashcardSet = data.flashcardSet;
-                        if (flashcardSet) {
-                            let flashcardSetId = flashcardSet.flashcardSetId;
-                            $('#flashcardSetId').val(flashcardSetId);  // Set flashcardSetId for form submission
-                            $('#flashcardTableHeading').text('Flashcards - ' + flashcardSet.setName);  // Update the table heading with flashcard set name
-                            loadFlashcards(flashcardSetId);  // Load the flashcards directly
-                            $('#addFlashcardBtn').show();
-                            $('#uploadJsonForm').show();
-                        } else {
-                            $('#flashcardsTable tbody').html('<tr><td colspan="4">No flashcard set available for this session detail.</td></tr>');
-                            $('#flashcardTableHeading').text('Flashcards');
-                            $('#addFlashcardBtn').hide();
-                            $('#uploadJsonForm').hide();
-                        }
+                        let flashcardSetOptions = '<option value="">-- Select Flashcard Set --</option>';
+                        $.each(data.flashcardSets, function (index, set) {
+                            flashcardSetOptions += '<option value="' + set.flashcardSetId + '">' + set.setName + '</option>';
+                        });
+                        $('#flashcardSet').html(flashcardSetOptions).prop('disabled', false);
                     });
+                } else {
+                    $('#flashcardSet').html('<option value="">-- Select Flashcard Set --</option>').prop('disabled', true);
+                    $('#flashcardsTable tbody').html('');
+                    $('#addFlashcardBtn, #uploadJsonForm').hide();
+                }
+            });
+
+            // Load Flashcards when Flashcard Set is selected
+            $('#flashcardSet').change(function () {
+                let flashcardSetId = $(this).val();
+                if (flashcardSetId) {
+                    $('#flashcardSetId').val(flashcardSetId);  // Set flashcardSetId for form submission
+                    $('#flashcardTableHeading').text('Flashcards - ' + $('#flashcardSet option:selected').text());
+                    loadFlashcards(flashcardSetId);  // Load flashcards
+                    $('#addFlashcardBtn').show();
+                    $('#uploadJsonForm').show();
                 } else {
                     $('#flashcardsTable tbody').html('');
                     $('#flashcardTableHeading').text('Flashcards');
-                    $('#addFlashcardBtn').hide();
-                    $('#uploadJsonForm').hide();
+                    $('#addFlashcardBtn, #uploadJsonForm').hide();
                 }
             });
+
 
             // Function to load flashcards for a given flashcard set
             function loadFlashcards(flashcardSetId) {

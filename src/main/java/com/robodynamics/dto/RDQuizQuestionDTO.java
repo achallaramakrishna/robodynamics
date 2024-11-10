@@ -38,6 +38,14 @@ public class RDQuizQuestionDTO {
     @JsonProperty("options")
     private List<RDQuizOptionDTO> options;
 
+ // New fields for tier level and tier order
+    @JsonProperty("tierLevel")
+    private String tierLevel; // Use String to represent the tier level (e.g., BEGINNER, INTERMEDIATE, ADVANCED)
+    
+    @JsonProperty("tierOrder")
+    private int tierOrder;    // Use int for the order within the tier
+
+    
     // Getters and setters
 
     public int getSlideNumber() {
@@ -126,6 +134,22 @@ public class RDQuizQuestionDTO {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public String getTierLevel() {
+		return tierLevel;
+	}
+
+	public void setTierLevel(String tierLevel) {
+		this.tierLevel = tierLevel;
+	}
+
+	public int getTierOrder() {
+		return tierOrder;
+	}
+
+	public void setTierOrder(int tierOrder) {
+		this.tierOrder = tierOrder;
 	}
     
 }

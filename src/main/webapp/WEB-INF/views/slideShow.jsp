@@ -505,6 +505,57 @@
 		<script>
 	
 		  document.addEventListener("DOMContentLoaded", function () {
+			  
+			    document.addEventListener("keydown", function (event) {
+		            // Check which key is pressed
+		            if (event.key === "ArrowLeft") {
+		                // Navigate to the previous slide if available
+		                navigateSlide('prev');
+		            } else if (event.key === "ArrowRight") {
+		                // Navigate to the next slide if available
+		                navigateSlide('next');
+		            }
+		        });
+
+		        // Function to handle slide navigation
+		        function navigateSlide(direction) {
+		            // Create a form and post it to trigger slide navigation
+		            const form = document.createElement('form');
+		            form.method = 'POST';
+		            form.action = `${pageContext.request.contextPath}/sessiondetail/navigateSlides`;
+
+		            // Add required hidden input fields
+		            const currentSlideInput = document.createElement('input');
+		            currentSlideInput.type = 'hidden';
+		            currentSlideInput.name = 'currentSlide';
+		            currentSlideInput.value = parseInt(${currentSlide});
+
+		            const sessionDetailIdInput = document.createElement('input');
+		            sessionDetailIdInput.type = 'hidden';
+		            sessionDetailIdInput.name = 'sessionDetailId';
+		            sessionDetailIdInput.value = ${sessionDetailId};
+
+		            const enrollmentIdInput = document.createElement('input');
+		            enrollmentIdInput.type = 'hidden';
+		            enrollmentIdInput.name = 'enrollmentId';
+		            enrollmentIdInput.value = ${enrollmentId};
+
+		            const directionInput = document.createElement('input');
+		            directionInput.type = 'hidden';
+		            directionInput.name = 'direction';
+		            directionInput.value = direction;
+
+		            // Append inputs to the form
+		            form.appendChild(currentSlideInput);
+		            form.appendChild(sessionDetailIdInput);
+		            form.appendChild(enrollmentIdInput);
+		            form.appendChild(directionInput);
+
+		            // Add form to document body and submit
+		            document.body.appendChild(form);
+		            form.submit();
+		        }
+		   
 		        let isVoiceMode = false;
 	
 		        // Toggle mode logic

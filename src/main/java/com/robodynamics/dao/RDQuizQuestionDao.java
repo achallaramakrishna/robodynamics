@@ -36,5 +36,10 @@ public interface RDQuizQuestionDao {
 
 	long countQuestions();
 
+    List<RDQuizQuestion> findByTierLevel(RDQuizQuestion.TierLevel tierLevel);
+
+    List<RDQuizQuestion> findByTierLevelAndDifficulty(RDQuizQuestion.TierLevel tierLevel, String difficultyLevel);
     
+    List<RDQuizQuestion> findByTierLevelOrderedByTierOrder(RDQuizQuestion.TierLevel tierLevel);
+
 }

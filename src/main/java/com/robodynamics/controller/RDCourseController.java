@@ -48,9 +48,7 @@ public class RDCourseController {
 	@Autowired
 	private RDCourseSessionService courseSessionservice;
 	
-	@Autowired
-	private RDCourseSessionDetailService courseSessionDetailservice;
-	
+
 	@Autowired
 	private RDCourseCategoryService courseCategoryService;
 	
@@ -104,7 +102,6 @@ public class RDCourseController {
 		RDStudentEnrollment studentEnrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
 		//RDCourse course = service.getRDCourse(theId);
 		List <RDCourseSession> courseSessions = courseSessionservice.getCourseSessionsByCourseId(theId);
-	//	List <RDCourseSessionDetail> courseSessionDetails = courseSessionDetailservice.getRDCourseSessionDetails(theId);
 		
 		System.out.println("Size - " + courseSessions.size());
 		System.out.println(courseSessions);

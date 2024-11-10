@@ -80,6 +80,8 @@
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
+    	console.log("hello 1..");
+    	
         const courseListItems = document.querySelectorAll('#basicAccordion .list-group-item');
         courseListItems.forEach(item => {
             item.addEventListener('click', function () {
@@ -87,13 +89,17 @@
             });
         });
     });
-
+    console.log("hello 2..");
     function loadContent(courseSessionDetailId, enrollmentId) {
+        console.log("hello 7..");
+
         const contentType = event.target.getAttribute('data-type');
         const file = event.target.getAttribute('data-file');
         const quiz = event.target.getAttribute('data-quiz');
         const details = event.target.getAttribute('data-details');
         const id = event.target.getAttribute('data-id');
+        
+        console.log(contentType + "\t" + file + "\t" + quiz + "\t" + details + "\t" + id);
 
         if (!contentType) return;
 
@@ -123,16 +129,23 @@
         } else if (contentType === 'assignment') {
             document.getElementById('course-assignment').style.display = 'block';
             document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;
-        }
+        } 
     }
 
     document.addEventListener('DOMContentLoaded', function () {
         const courseListItems = document.querySelectorAll('#course-list li');
+    	console.log("hello 4..");
 
         courseListItems.forEach(item => {
+        	console.log("hello 5..");
+        	
             item.addEventListener('click', function (event) {
+            	console.log("hello 6..");
+
                 const courseSessionDetailId = event.target.getAttribute('data-id');
                 const enrollmentId = '${studentEnrollment.enrollmentId}'; // Assuming you already have enrollmentId from the backend
+                
+                console.log(courseSessionDetailId + "\t" + enrollmentId);
                 loadContent(courseSessionDetailId, enrollmentId);
             });
         });

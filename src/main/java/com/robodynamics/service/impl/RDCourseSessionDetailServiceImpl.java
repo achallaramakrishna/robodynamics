@@ -15,6 +15,7 @@ import com.robodynamics.dao.RDCourseSessionDetailDao;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
+import com.robodynamics.model.RDCourseSessionDetail.TierLevel;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
@@ -91,6 +92,15 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	        existingDetail.setVersion(detail.getVersion());
 	        existingDetail.setType(detail.getType());
 	        existingDetail.setFile(detail.getFile());
+	     // Assuming sessionDetailJson.getTierLevel() returns a string, like "BEGINNER", "INTERMEDIATE", or "ADVANCED"
+	        String tierLevelString = detail.getTierLevel();
+
+	        // Convert the string to TierLevel enum and set it
+	        if (tierLevelString != null) {
+	        	existingDetail.setTierLevel(TierLevel.valueOf(tierLevelString.toUpperCase()));
+	        } else {
+	        	existingDetail.setTierLevel(null); // Handle null case if needed
+	        }
 	        rdCourseSessionDetailDao.saveRDCourseSessionDetail(existingDetail);
 
 	    } else {
@@ -106,6 +116,17 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	        newDetail.setVersion(detail.getVersion());
 	        newDetail.setType(detail.getType());
 	        newDetail.setFile(detail.getFile());
+	 
+	        // Assuming sessionDetailJson.getTierLevel() returns a string, like "BEGINNER", "INTERMEDIATE", or "ADVANCED"
+	        String tierLevelString = detail.getTierLevel();
+
+	        // Convert the string to TierLevel enum and set it
+	        if (tierLevelString != null) {
+	        	newDetail.setTierLevel(TierLevel.valueOf(tierLevelString.toUpperCase()));
+	        } else {
+	        	newDetail.setTierLevel(null); // Handle null case if needed
+	        }
+	 
 	        rdCourseSessionDetailDao.saveRDCourseSessionDetail(newDetail);
 	    }
 	    } catch(Exception e) {
@@ -115,5 +136,15 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	    }
 	    
 	  
+	}
+
+	@Override
+	public List<RDCourseSessionDetail> findByTierLevel(RDCourseSessionDetail.TierLevel tierLevel) {
+		return rdCourseSessionDetailDao.findByTierLevel(tierLevel);
+	}
+
+	@Override
+	public List<RDCourseSessionDetail> findByTierLevelOrderedByTierOrder(RDCourseSessionDetail.TierLevel tierLevel) {
+		return rdCourseSessionDetailDao.findByTierLevelOrderedByTierOrder(tierLevel);
 	}
 }

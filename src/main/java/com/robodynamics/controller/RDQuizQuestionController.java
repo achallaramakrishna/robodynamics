@@ -161,11 +161,12 @@ public class RDQuizQuestionController {
             redirectAttributes.addFlashAttribute("error", "Please select a JSON file to upload.");
             return "redirect:/quizquestions/listQuizQuestions";
         }
-
+        System.out.println("hello ...1");
         try {
             // Step 2: Parse and process the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
             RDQuizQuestionUploadDTO questionUploadDTO = objectMapper.readValue(file.getInputStream(), RDQuizQuestionUploadDTO.class);
+            System.out.println("hello ...2");
 
             // Step 3: Loop through each question and save it
             for (RDQuizQuestionDTO questionDTO : questionUploadDTO.getQuestions()) {
@@ -178,21 +179,47 @@ public class RDQuizQuestionController {
                 question.setAdditionalInfo(questionDTO.getAdditionalInfo());
                 question.setPoints(questionDTO.getPoints());
                 question.setQuestionNumber(questionDTO.getQuestionNumber());
+                System.out.println("hello ...3");
+
+             // Assuming quizQuestionDto.getTierLevel() returns a string, like "BEGINNER", "INTERMEDIATE", or "ADVANCED"
+                String tierLevelString = questionDTO.getTierLevel();
+
+                // Convert the string to TierLevel enum and set it
+                if (tierLevelString != null) {
+                	question.setTierLevel(RDQuizQuestion.TierLevel.valueOf(tierLevelString.toUpperCase()));
+                } else {
+                	question.setTierLevel(null); // Handle null case if needed
+                }
+
+                System.out.println("hello ...4");
 
                 // Set the course session detail (mandatory for all questions)
                 RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
                 question.setCourseSessionDetail(courseSessionDetail);
+                System.out.println("hello ...5");
 
                 // Step 4: Handle slide association using slide number from JSON (if present)
                 if (questionDTO.getSlideNumber() != 0) {
                     // Find the slide based on slide number and course session detail ID
+                    System.out.println("hello ...6");
+                    System.out.println("courseSessionDetailId : " + courseSessionDetailId);
+                    System.out.println("questionDTO.getSlideNumber() : " + questionDTO.getSlideNumber());
+
                     RDSlide slide = slideService.findByCourseSessionDetailIdAndSlideNumber(courseSessionDetailId, questionDTO.getSlideNumber());
+                    
+                    System.out.println("hello ...7");
+
                     if (slide != null) {
                         question.setSlide(slide);
+                        System.out.println("courseSessionDetailId : " + courseSessionDetailId);
+                        System.out.println("questionDTO.getSlideNumber() : " + questionDTO.getSlideNumber());
+                        
                     } else {
                         throw new IllegalArgumentException("Slide not found for the provided slide number and course session detail ID.");
                     }
                 }
+
+                System.out.println("hello ...8");
 
                 // Handle the association type (Slide or Quiz)
                 if ("quiz".equalsIgnoreCase(associationType) && quizId != null && quizId > 0) {

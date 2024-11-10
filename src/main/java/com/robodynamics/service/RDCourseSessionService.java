@@ -1,6 +1,7 @@
 package com.robodynamics.service;
 
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSession.TierLevel;
 
 import java.io.File;
 import java.util.List;
@@ -43,4 +44,11 @@ public interface RDCourseSessionService {
 
     // Save or update a list of course sessions (bulk operation)
     void saveAllCourseSessions(List<RDCourseSession> courseSessions);
+
+    List<RDCourseSession> getSessionsByCourseAndTier(int courseId, String tierLevel);
+
+    List<RDCourseSession> findByTierLevel(RDCourseSession.TierLevel tierLevel);
+ 
+    List<RDCourseSession> findByTierLevelOrderedByTierOrder(RDCourseSession.TierLevel tierLevel);
+
 }

@@ -18,6 +18,7 @@ import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
+import com.robodynamics.model.RDQuizQuestion.TierLevel;
 
 @Repository
 @Transactional
@@ -170,5 +171,33 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
         query.setParameter("questionType", questionType);
         return query.getResultList();
 	}
+
+	@Override
+    @SuppressWarnings("unchecked")
+    public List<RDQuizQuestion> findByTierLevel(TierLevel tierLevel) {
+        return factory.getCurrentSession()
+                .createQuery("FROM RDQuizQuestion WHERE tierLevel = :tierLevel")
+                .setParameter("tierLevel", tierLevel)
+                .list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<RDQuizQuestion> findByTierLevelAndDifficulty(TierLevel tierLevel, String difficultyLevel) {
+        return factory.getCurrentSession()
+                .createQuery("FROM RDQuizQuestion WHERE tierLevel = :tierLevel AND difficultyLevel = :difficultyLevel")
+                .setParameter("tierLevel", tierLevel)
+                .setParameter("difficultyLevel", difficultyLevel)
+                .list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<RDQuizQuestion> findByTierLevelOrderedByTierOrder(TierLevel tierLevel) {
+        return factory.getCurrentSession()
+                .createQuery("FROM RDQuizQuestion WHERE tierLevel = :tierLevel ORDER BY tierOrder ASC")
+                .setParameter("tierLevel", tierLevel)
+                .list();
+    }
     
 }

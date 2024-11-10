@@ -2,6 +2,7 @@ package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseSessionDao;
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSession.TierLevel;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -107,4 +108,34 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
         query.setParameter("courseId", courseId);
         return query.getResultList();
     }
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<RDCourseSession> findByCourseIdAndTierLevelOrderByTierOrder(int courseId, String tierLevel) {
+
+		var session = factory.getCurrentSession();
+        String hql = "FROM RDCourseSession WHERE course.id = :courseId AND tierLevel = :tierLevel ORDER BY tierOrder";
+        Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
+        query.setParameter("courseId", courseId);
+        query.setParameter("tierLevel", tierLevel);
+        return query.list();
+	}
+
+	@Override
+	public List<RDCourseSession> findByTierLevel(TierLevel tierLevel) {
+		return factory.getCurrentSession()
+                .createQuery("FROM RDCourseSession WHERE tierLevel = :tierLevel")
+                .setParameter("tierLevel", tierLevel)
+                .list();
+	}
+
+	@Override
+	public List<RDCourseSession> findByTierLevelOrderedByTierOrder(TierLevel tierLevel) {
+		return factory.getCurrentSession()
+                .createQuery("FROM RDCourseSession WHERE tierLevel = :tierLevel ORDER BY tierOrder ASC")
+                .setParameter("tierLevel", tierLevel)
+                .list();
+	}
+
+
 }

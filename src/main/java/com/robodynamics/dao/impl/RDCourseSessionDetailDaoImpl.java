@@ -103,4 +103,21 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 		    return query.uniqueResult();
 	}
 
+
+	@Override
+	public List<RDCourseSessionDetail> findByTierLevel(RDCourseSessionDetail.TierLevel tierLevel) {
+		  return factory.getCurrentSession()
+	                .createQuery("FROM RDCourseSessionDetail WHERE tierLevel = :tierLevel")
+	                .setParameter("tierLevel", tierLevel)
+	                .list();	}
+
+
+	@Override
+	public List<RDCourseSessionDetail> findByTierLevelOrderedByTierOrder(RDCourseSessionDetail.TierLevel tierLevel) {
+		return factory.getCurrentSession()
+                .createQuery("FROM RDCourseSessionDetail WHERE tierLevel = :tierLevel ORDER BY tierOrder ASC")
+                .setParameter("tierLevel", tierLevel)
+                .list();
+	}
+
 }

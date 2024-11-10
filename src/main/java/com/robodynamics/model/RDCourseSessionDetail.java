@@ -12,6 +12,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,7 +66,19 @@ public class RDCourseSessionDetail {
     @JoinColumn(name = "quiz_id", referencedColumnName = "quiz_id")
     private RDQuiz quiz;
 	
-	
+
+	@Column(name = "tier_level")
+    @Enumerated(EnumType.STRING)
+    private TierLevel tierLevel;
+
+    @Column(name = "tier_order")
+    private int tierOrder;
+
+    public enum TierLevel {
+        BEGINNER, INTERMEDIATE, ADVANCED
+    }
+
+    
 	 public int getSessionDetailId() {
 		return sessionDetailId;
 	}
@@ -156,6 +170,22 @@ public class RDCourseSessionDetail {
 
 	public void setQuiz(RDQuiz quiz) {
 		this.quiz = quiz;
+	}
+
+	public TierLevel getTierLevel() {
+		return tierLevel;
+	}
+
+	public void setTierLevel(TierLevel tierLevel) {
+		this.tierLevel = tierLevel;
+	}
+
+	public int getTierOrder() {
+		return tierOrder;
+	}
+
+	public void setTierOrder(int tierOrder) {
+		this.tierOrder = tierOrder;
 	}
 	
 	

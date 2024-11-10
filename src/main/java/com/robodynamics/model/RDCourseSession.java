@@ -15,6 +15,8 @@ import java.util.TreeSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -69,6 +71,36 @@ public class RDCourseSession {
  // Handles JSON serialization
 	private Set<RDCourseSession> childSessions = new HashSet<>();
 
+	@Column(name = "tier_level")
+    @Enumerated(EnumType.STRING)
+    private TierLevel tierLevel;
+
+    @Column(name = "tier_order")
+    private int tierOrder;
+
+    // Define the TierLevel enum within RDCourseSession
+    public enum TierLevel {
+        BEGINNER, INTERMEDIATE, ADVANCED
+    }
+
+    // Getters and Setters
+    public TierLevel getTierLevel() {
+        return tierLevel;
+    }
+
+    public void setTierLevel(TierLevel tierLevel) {
+        this.tierLevel = tierLevel;
+    }
+
+    public int getTierOrder() {
+        return tierOrder;
+    }
+
+    public void setTierOrder(int tierOrder) {
+        this.tierOrder = tierOrder;
+    }
+
+    
 	public Set<RDCourseSession> getChildSessions() {
 	    return childSessions;
 	}

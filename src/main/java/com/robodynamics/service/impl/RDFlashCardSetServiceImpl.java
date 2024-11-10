@@ -40,10 +40,16 @@ public class RDFlashCardSetServiceImpl implements RDFlashCardSetService {
         rdFlashCardSetDao.deleteRDFlashCardSet(id);
     }
 
+
 	@Override
 	@Transactional
-	public RDFlashCardSet getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId) {
-		// TODO Auto-generated method stub
+	public RDFlashCardSet getFlashCardSetsByCourseSessionDetails(int courseSessionDetailId) {
 		return rdFlashCardSetDao.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
+	}
+
+	@Override
+	public List<RDFlashCardSet> getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId) {
+	    return rdFlashCardSetDao.findByCourseSessionDetailId(courseSessionDetailId);
+
 	}
 }

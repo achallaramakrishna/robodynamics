@@ -29,8 +29,7 @@
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-<%-- 			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
- --%>			<div class="col-md-offset-1 col-md-10">
+			<div class="col-md-offset-1 col-md-10">
 				<br>
 
 				<!-- Back to Dashboard Button -->
@@ -56,6 +55,7 @@
 						<table class="table table-striped table-bordered">
 							<tr>
 								<th>Course Name</th>
+								<th>Action</th>
 							</tr>
 							<!-- loop over and print our asset categories -->
 							<c:forEach var="tempCourseCategory" items="${courseCategories}">
@@ -91,6 +91,7 @@
 				</div>
 			</div>
 
+		</div>
 		</div>
 		<jsp:include page="footer.jsp" />
 </body>

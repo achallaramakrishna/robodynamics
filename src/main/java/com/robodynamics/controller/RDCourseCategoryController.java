@@ -40,7 +40,7 @@ public class RDCourseCategoryController {
 	
 	@PostMapping("/saveCourseCategory")
     public String saveCustomer(@ModelAttribute("courseCategory") RDCourseCategory theCourseCategory) {
-        service.saveRDCourseCategory(theCourseCategory);
+		service.saveRDCourseCategory(theCourseCategory);
         return "redirect:/coursecategory/list";
     }
 

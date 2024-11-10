@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robodynamics.dao.RDCourseSessionDao;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSession.TierLevel;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.wrapper.CourseSessionJson;
@@ -97,6 +98,16 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
                     courseSession.setGrade(sessionJson.getGrade());
                     courseSession.setSessionType(sessionJson.getSessionType());
                     courseSession.setSessionDescription(sessionJson.getSessionDescription());
+                 // Assuming sessionJson.getTierLevel() returns a string, like "BEGINNER", "INTERMEDIATE", or "ADVANCED"
+                    String tierLevelString = sessionJson.getTierLevel();
+
+                    // Convert the string to TierLevel enum and set it
+                    if (tierLevelString != null) {
+                        courseSession.setTierLevel(TierLevel.valueOf(tierLevelString.toUpperCase()));
+                    } else {
+                        courseSession.setTierLevel(null); // Handle null case if needed
+                    }
+                    courseSession.setTierOrder(sessionJson.getTierOrder());
                 } else {
                     // Create a new session if it doesn't exist
                     courseSession = new RDCourseSession();
@@ -107,6 +118,18 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
                     courseSession.setSessionType(sessionJson.getSessionType());
                     courseSession.setSessionDescription(sessionJson.getSessionDescription());
                     courseSession.setCourse(course);
+
+                    // Assuming sessionJson.getTierLevel() returns a string, like "BEGINNER", "INTERMEDIATE", or "ADVANCED"
+                    String tierLevelString = sessionJson.getTierLevel();
+
+                    // Convert the string to TierLevel enum and set it
+                    if (tierLevelString != null) {
+                        courseSession.setTierLevel(TierLevel.valueOf(tierLevelString.toUpperCase()));
+                    } else {
+                        courseSession.setTierLevel(null); // Handle null case if needed
+                    }
+                    courseSession.setTierOrder(sessionJson.getTierOrder());
+
                 }
 
                 // Add the session to the map for future reference
@@ -170,4 +193,20 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
     public void saveAllCourseSessions(List<RDCourseSession> courseSessions) {
         courseSessionDao.saveAll(courseSessions);
     }
+
+	@Override
+	public List<RDCourseSession> getSessionsByCourseAndTier(int courseId, String tierLevel) {
+
+		return courseSessionDao.findByCourseIdAndTierLevelOrderByTierOrder(courseId, tierLevel);
+	}
+
+	@Override
+	public List<RDCourseSession> findByTierLevel(TierLevel tierLevel) {
+		return courseSessionDao.findByTierLevel(tierLevel);
+	}
+
+	@Override
+	public List<RDCourseSession> findByTierLevelOrderedByTierOrder(TierLevel tierLevel) {
+		return courseSessionDao.findByTierLevelOrderedByTierOrder(tierLevel);
+	}
 }

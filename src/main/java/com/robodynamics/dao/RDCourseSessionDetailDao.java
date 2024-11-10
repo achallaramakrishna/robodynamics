@@ -23,6 +23,9 @@ public interface RDCourseSessionDetailDao {
     
     public RDCourseSessionDetail getRDCourseSessionDetailByIdAndDetailId(int courseSessionId, int sessionDetailId);
 
+    List<RDCourseSessionDetail> findByTierLevel(RDCourseSessionDetail.TierLevel tierLevel);
+
+    List<RDCourseSessionDetail> findByTierLevelOrderedByTierOrder(RDCourseSessionDetail.TierLevel tierLevel);
 
     
 }

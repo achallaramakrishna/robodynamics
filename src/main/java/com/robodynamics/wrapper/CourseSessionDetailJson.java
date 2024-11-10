@@ -13,6 +13,10 @@ public class CourseSessionDetailJson {
     private String type;
     private String file;
 
+ // New fields for tier level and tier order
+    private String tierLevel; // Use String for easier JSON serialization and conversion
+    private int tierOrder;
+    
     // Getters and Setters
 
     public int getSessionId() {
@@ -63,17 +67,21 @@ public class CourseSessionDetailJson {
         this.file = file;
     }
 
-    // toString() method for debugging or logging
+	public String getTierLevel() {
+		return tierLevel;
+	}
 
-    @Override
-    public String toString() {
-        return "CourseSessionDetailJson{" +
-                "sessionId=" + sessionId +
-                ", sessionDetailId=" + sessionDetailId +
-                ", topic='" + topic + '\'' +
-                ", version=" + version +
-                ", type='" + type + '\'' +
-                ", file='" + file + '\'' +
-                '}';
-    }
+	public void setTierLevel(String tierLevel) {
+		this.tierLevel = tierLevel;
+	}
+
+	public int getTierOrder() {
+		return tierOrder;
+	}
+
+	public void setTierOrder(int tierOrder) {
+		this.tierOrder = tierOrder;
+	}
+
+   
 }

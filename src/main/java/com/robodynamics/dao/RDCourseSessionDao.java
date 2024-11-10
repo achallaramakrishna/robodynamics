@@ -37,4 +37,11 @@ public interface RDCourseSessionDao {
     // Retrieve the complete course hierarchy (units and sessions)
     List<RDCourseSession> getCourseHierarchyByCourseId(int courseId);
 
+    List<RDCourseSession> findByCourseIdAndTierLevelOrderByTierOrder(int courseId, String tierLevel);
+
+    List<RDCourseSession> findByTierLevel(RDCourseSession.TierLevel tierLevel);
+
+    List<RDCourseSession> findByTierLevelOrderedByTierOrder(RDCourseSession.TierLevel tierLevel);
+
+
 }

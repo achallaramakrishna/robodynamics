@@ -30,6 +30,9 @@ public interface RDCourseService {
     List<RDCourse> getFeaturedCourses();
     
     List<RDCourse> searchCourses(String query);
+    
+    List<RDCourse> getCoursesByTierLevel(String tierLevel); // Optional based on business need
+
 
     	
 

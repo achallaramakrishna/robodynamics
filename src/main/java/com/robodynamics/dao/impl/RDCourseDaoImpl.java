@@ -87,22 +87,34 @@ public class RDCourseDaoImpl implements RDCourseDao {
 
 	@Override
 	public List<ProjectGroup<RDCourse>> getCoursesGroupedByCategory() {
-		Session session = factory.getCurrentSession();
-		List<RDCourse> courses = session.createQuery("from RDCourse", RDCourse.class).list();
+	    Session session = factory.getCurrentSession();
+	    List<RDCourse> courses = session.createQuery("from RDCourse", RDCourse.class).list();
 
-		return courses.stream().collect(Collectors.groupingBy(RDCourse::getCategory)).entrySet().stream()
-				.map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue())).collect(Collectors.toList());
+	    return courses.stream()
+	            .filter(course -> course.getCategory() != null) // Filter out courses with null categories
+	            .collect(Collectors.groupingBy(RDCourse::getCategory))
+	            .entrySet().stream()
+	            .map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue()))
+	            .collect(Collectors.toList());
 	}
+
 
 	@Override
 	public List<ProjectGroup<RDCourse>> getCoursesGroupedByGradeRange() {
-		Session session = factory.getCurrentSession();
-		List<RDCourse> courses = session.createQuery("from RDCourse", RDCourse.class).list();
+	    Session session = factory.getCurrentSession();
+	    List<RDCourse> courses = session.createQuery("from RDCourse", RDCourse.class).list();
 
-		return courses.stream().collect(Collectors.groupingBy(course -> course.getGradeRange().getDisplayName()))
-				.entrySet().stream().map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue()))
-				.collect(Collectors.toList());
+	    return courses.stream()
+	            .filter(course -> course.getGradeRange() != null && course.getGradeRange().getDisplayName() != null) // Filter out null values
+	            .collect(Collectors.groupingBy(course -> 
+	                    course.getGradeRange().getDisplayName() != null 
+	                    ? course.getGradeRange().getDisplayName() 
+	                    : "Uncategorized")) // Use a default label if displayName is null
+	            .entrySet().stream()
+	            .map(entry -> new ProjectGroup<>(entry.getKey(), entry.getValue()))
+	            .collect(Collectors.toList());
 	}
+
 
 	@Override
 	public List<RDCourse> getFeaturedCourses() {
@@ -120,6 +132,14 @@ public class RDCourseDaoImpl implements RDCourseDao {
 	        Query<RDCourse> searchQuery = session.createQuery(hql, RDCourse.class);
 	        searchQuery.setParameter("query", "%" + query + "%");
 	        return searchQuery.getResultList();
+	}
+
+	@Override
+    public List<RDCourse> findByTierLevel(String tierLevel) {
+		return factory.getCurrentSession()
+                .createQuery("FROM RDCourse WHERE tierLevel = :tierLevel")
+                .setParameter("tierLevel", tierLevel)
+                .list();
 	}
 
 }

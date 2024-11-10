@@ -45,7 +45,29 @@
         // Fetch and render the options dynamically
         fetchMultipleChoiceOptions(currentQuestionId);
         fetchTrueFalseOptions(currentQuestionId);
+        
+        function toggleViewAnswerButton() {
+            if ($("#mode").val() === "practice") {
+                $("#viewAnswerBtn").show();
+                $("#answerSection").hide();  // Hide answer section initially
+            } else {
+                $("#viewAnswerBtn").hide();
+                $("#answerSection").hide();
+            }
+        }
+     // Run toggle on page load and when the mode changes
+        toggleViewAnswerButton();
+        $("#mode").change(function() {
+            toggleViewAnswerButton();
+            
+        });
+        // Show correct answer when "View Answer" is clicked
+        $("#viewAnswerBtn").click(function() {
+            $("#answerSection").toggle(); // Toggle answer visibility
+        });
+        
 
+            
         // Function to fetch options using AJAX and render them
         function fetchMultipleChoiceOptions(questionId) {
             console.log('Selected question ID:', questionId); // Log the selected question ID for debugging
@@ -174,6 +196,15 @@ public static void main(String[] args) {
             }
         });
     });
+    
+	 // Add arrow key navigation functionality
+	    document.addEventListener("keydown", function (event) {
+	        if (event.key === "ArrowLeft") {
+	            document.querySelector('button[name="action"][value="previous"]').click();
+	        } else if (event.key === "ArrowRight") {
+	            document.querySelector('button[name="action"][value="next"]').click();
+	        }
+	    });
 </script>
 
 
@@ -285,12 +316,23 @@ public static void main(String[] args) {
     <div class="quiz-container">
         <h2>🎉 Let's Take a Fun Quiz! 🎉</h2>
         <h4 class="mt-5">Quiz: ${quiz.quizName}</h4>
+        
+       <!-- Mode Selector -->
+        <div class="text-center mt-3">
+            <label for="mode">Select Mode:</label>
+            <select id="mode" name="mode" class="form-control w-25 mx-auto">
+                <option value="practice" ${mode == 'practice' ? 'selected' : ''}>Practice Mode</option>
+                <option value="test" ${mode == 'test' ? 'selected' : ''}>Test Mode</option>
+            </select>
+        </div>
 
         <form action="${pageContext.request.contextPath}/quizzes/navigate" method="post" autocomplete="off">
             <input type="hidden" name="quizId" value="${quiz.quizId}" />
             <input type="hidden" id="currentQuestionId" name="currentQuestionId" value="${currentQuestion.questionId}" />
             <input type="hidden" name="currentQuestionIndex" value="${currentQuestionIndex}" />
             <input type="hidden" id="startTime" name="startTime" value="" />
+            <input type="hidden" name="mode" value="${mode}" />
+            
 
             <!-- Render only the current question -->
             <div class="mt-4">
@@ -363,6 +405,15 @@ public static void main(String[] args) {
 
 
 				</c:choose>
+				
+				 <!-- View Answer Button for Practice Mode -->
+                <c:if test="${mode == 'practice'}">
+                    <button type="button" class="btn btn-info mt-3" id="viewAnswerBtn" style="display:none;">View Answer</button>
+                    <div id="answerSection">
+                        <p><strong>Correct Answer:</strong> ${currentQuestion.correctAnswer}</p>
+                    </div>
+                </c:if>
+                
             </div>
 
             <!-- Navigation buttons -->

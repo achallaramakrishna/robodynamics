@@ -15,6 +15,8 @@ public interface RDFlashCardDao {
     List<RDFlashCard> getRDFlashCards();
 
 	List<RDFlashCard> findByCourseSessionDetailId(int courseSessionDetailId);
+	
+	
 
     
 

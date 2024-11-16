@@ -69,7 +69,7 @@ public class RDProjectController {
         return "redirect:/projects/list";
     }
 
-    
+   
     @GetMapping("/showForm")
     public ModelAndView showFormForAdd(Model model) {
         RDProject project = new RDProject();

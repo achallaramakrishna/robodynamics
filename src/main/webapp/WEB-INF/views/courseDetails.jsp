@@ -1,242 +1,145 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<%@ page isELIgnored="false"%>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${course.courseName}</title>
+    <title>${course.courseName} | Course Details</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-            integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-            integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2VinnD/C7E91j9yyk5//jjpt/"
-            crossorigin="anonymous"></script>
-
-    <!-- Animate.css for animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <!-- WOW.js for scroll-triggered animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
         body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
         }
 
-		.header-section {
-		    background: linear-gradient(135deg, #fcb045, #fd1d1d, #833ab4); /* Fun, vibrant rainbow-like gradient */
-		    padding: 70px 40px;
-		    border-radius: 25px;
-		    text-align: center;
-		    color: white;
-		    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-		    position: relative;
-		    overflow: hidden;
-		    font-family: 'Comic Sans MS', cursive; /* Fun, playful font */
-		}
-		
-		/* Add playful background elements */
-		.header-section::before {
-		    content: "";
-		    position: absolute;
-		    top: -50px;
-		    left: -50px;
-		    width: 150px;
-		    height: 150px;
-		    background-color: rgba(255, 255, 255, 0.2);
-		    border-radius: 50%;
-		    animation: floating 6s ease-in-out infinite;
-		}
-		
-		.header-section::after {
-		    content: "";
-		    position: absolute;
-		    bottom: -50px;
-		    right: -50px;
-		    width: 200px;
-		    height: 200px;
-		    background-color: rgba(255, 255, 255, 0.15);
-		    border-radius: 50%;
-		    animation: floating 8s ease-in-out infinite reverse;
-		}
-		
-		.course-title {
-		    font-size: 3.5rem;
-		    font-weight: bold;
-		    letter-spacing: 2px;
-		    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-		}
-		
-		.course-subtitle {
-		    font-size: 1.75rem;
-		    font-style: italic;
-		    font-weight: 400;
-		    color: rgba(255, 255, 255, 0.85);
-		    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-		}
-		
-		@keyframes floating {
-		    0% {
-		        transform: translate(0, 0);
-		    }
-		    50% {
-		        transform: translate(25px, 25px);
-		    }
-		    100% {
-		        transform: translate(0, 0);
-		    }
-		}
+        .header-section {
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
 
-        .course-section {
+        .header-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            font-size: 1.2rem;
+        }
+
+        .course-overview, .course-details, .testimonials {
             background-color: white;
-            padding: 40px;
-            margin-bottom: 20px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .course-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-details ul li {
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
 
         .register-button {
             background-color: #ff5722;
             color: white;
-            padding: 15px 30px;
+            border: none;
+            padding: 10px 20px;
             border-radius: 30px;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
         }
 
         .register-button:hover {
             background-color: #e64a19;
-            color: white;
         }
 
-        .wow {
-            visibility: hidden;
+        .testimonials blockquote {
+            border-left: 4px solid #007bff;
+            margin: 20px 0;
+            padding-left: 20px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 
-<!-- Trigger WOW.js -->
-<script>
-    new WOW().init();
-</script>
-
-    <!-- Conditional Register Now Section -->
-    <c:choose>
-        <c:when test="${not empty sessionScope.rdUser}">
-            <div class="course-section text-center wow animate__animated animate__bounceInUp">
-                <h2 class="h4">🎟 Register Now</h2>
-                <p>Sign up today to reserve your spot in our next session! Limited seats available.</p>
-                <form action="${pageContext.request.contextPath}/parent/register" method="get">
-                    <input type="hidden" name="courseId" value="${course.courseId}"/>
-                    <button type="submit" class="register-button">Complete Registration</button>
-                </form>
-            </div>
-        </c:when>
-
-        <c:otherwise>
-            <div class="course-section text-center wow animate__animated animate__bounceInUp">
-                <h2 class="h4">🎟 Register Now</h2>
-                <p>Sign up today to reserve your spot in our next session! Limited seats available.</p>
-                <button onclick="window.location.href='${pageContext.request.contextPath}/login?courseId=${course.courseId}'" class="register-button">
-                    Existing User - Login
-                </button>
-                <button onclick="window.location.href='${pageContext.request.contextPath}/parent/register?courseId=${course.courseId}'" class="register-button">
-                    New User - Sign Up
-                </button>
-            </div>
-        </c:otherwise>
-    </c:choose>
-
-
 <div class="container mt-5">
-    <!-- Course Header Section -->
-    <div class="header-section wow animate__animated animate__bounceInDown">
-        <h1 class="display-4 course-title">${course.courseName}</h1>
-        <p class="lead course-subtitle">For Kids (Ages ${course.courseAgeGroup})</p>
+    <!-- Header Section -->
+    <div class="header-section">
+        <h1>${course.courseName}</h1>
+        <p>Perfect for kids aged ${course.courseAgeGroup}</p>
+        <p>${course.courseDuration}</p>
     </div>
 
-    <!-- Course Overview Section -->
-    <div class="course-section wow animate__animated animate__fadeInLeft">
-        <h2 class="h4">🚀 Course Overview</h2>
-        <p class="text-muted">${course.courseOverview}</p>
+    <!-- Course Overview -->
+    <div class="course-overview">
+        <h2>🚀 Course Overview</h2>
+        <p>${course.courseOverview}</p>
     </div>
 
-    <!-- What You Will Learn Section -->
-    <div class="course-section wow animate__animated animate__fadeInRight">
-        <h2 class="h4">📚 What You Will Learn</h2>
-        <div class="pl-3">${course.whatYouWillLearn}</div>
-    </div>
-
-    <!-- Course Features Section -->
-    <div class="course-section wow animate__animated animate__zoomIn">
-        <h2 class="h4">🎯 Course Features</h2>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Age Group:</strong> ${course.courseAgeGroup}</li>
-            <li class="list-group-item"><strong>Course Duration:</strong> ${course.courseDuration}</li>
-            <li class="list-group-item"><strong>Format:</strong> Online/On-site</li>
-            <li class="list-group-item"><strong>Instructor:</strong> ${course.courseInstructor}</li>
+    <!-- Course Details -->
+    <div class="course-details">
+        <h2>📚 What You Will Learn</h2>
+        <p>${course.whatYouWillLearn}</p>
+        <h3 class="mt-4">🎯 Course Features</h3>
+        <ul>
+            <li><strong>Age Group:</strong> ${course.courseAgeGroup}</li>
+            <li><strong>Instructor:</strong> ${course.courseInstructor}</li>
+            <li><strong>Duration:</strong> ${course.courseDuration}</li>
+            <li><strong>Format:</strong> Online / On-site</li>
         </ul>
     </div>
 
-    <!-- Course Syllabus Section -->
-    <div class="course-section wow animate__animated animate__fadeInUp">
-        <h2 class="h4">📋 Detailed Course Syllabus</h2>
-        <div>${course.detailedSyllabus}</div>
+    <!-- Detailed Syllabus -->
+    <div class="course-overview">
+        <h2>📋 Detailed Course Syllabus</h2>
+        <p>${course.detailedSyllabus}</p>
     </div>
 
-    <!-- Testimonials Section -->
-    <div class="course-section wow animate__animated animate__lightSpeedInLeft">
-        <h2 class="h4">💬 Testimonials</h2>
-        <div>${course.testimonials}</div>
+    <!-- Testimonials -->
+    <div class="testimonials">
+        <h2>💬 Testimonials</h2>
+        <blockquote>${course.testimonials}</blockquote>
     </div>
 
-    <!-- Conditional Register Now Section -->
-    <c:choose>
-        <c:when test="${not empty sessionScope.rdUser}">
-            <div class="course-section text-center wow animate__animated animate__bounceInUp">
-                <h2 class="h4">🎟 Register Now</h2>
-                <p>Sign up today to reserve your spot in our next session! Limited seats available.</p>
+    <!-- Registration Section -->
+    <div class="text-center mt-4">
+        <c:choose>
+            <c:when test="${not empty sessionScope.rdUser}">
                 <form action="${pageContext.request.contextPath}/parent/register" method="get">
                     <input type="hidden" name="courseId" value="${course.courseId}"/>
-                    <button type="submit" class="register-button">Complete Registration</button>
+                    <button type="submit" class="register-button">Register Now</button>
                 </form>
-            </div>
-        </c:when>
-
-        <c:otherwise>
-            <div class="course-section text-center wow animate__animated animate__bounceInUp">
-                <h2 class="h4">🎟 Register Now</h2>
-                <p>Sign up today to reserve your spot in our next session! Limited seats available.</p>
+            </c:when>
+            <c:otherwise>
                 <button onclick="window.location.href='${pageContext.request.contextPath}/login?courseId=${course.courseId}'" class="register-button">
                     Existing User - Login
                 </button>
                 <button onclick="window.location.href='${pageContext.request.contextPath}/parent/register?courseId=${course.courseId}'" class="register-button">
                     New User - Sign Up
                 </button>
-            </div>
-        </c:otherwise>
-    </c:choose>
-
-
-
+            </c:otherwise>
+        </c:choose>
+    </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <jsp:include page="footer.jsp"/>
-
 </body>
 </html>

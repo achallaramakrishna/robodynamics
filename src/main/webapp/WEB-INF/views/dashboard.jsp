@@ -1,245 +1,304 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ page isELIgnored="false" %>
 
-<%@ page isELIgnored="false"%>
+<%
+    request.setAttribute("pageTitle", "Dashboard");
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2vinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
-<meta charset="ISO-8859-1">
-<title>Dashboard</title>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+          crossorigin="anonymous">
+
+    <!-- jQuery (Optional, only if used elsewhere) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap Bundle JS (includes Bootstrap and Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+        crossorigin="anonymous"></script>
+
 </head>
 <body>
-    <jsp:include page="header.jsp" />
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Enquiry</h5>
-                            <p class="card-text">View and manage enquiries from users.</p>
-                            <a href="${pageContext.request.contextPath}/enquiry/list" class="btn btn-primary ${page eq 'enquiry' ? 'active' : ''}">
-                                Manage Enquiries
-                            </a>
+    <!-- Include header JSP -->
+    <jsp:include page="/header.jsp" />
+
+    <div class="container-fluid my-4">
+        <h2 class="text-center">Admin Dashboard</h2>
+
+        <div class="accordion" id="dashboardAccordion">
+            <!-- User Management Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingUserManagement">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseUserManagement" aria-expanded="true" 
+                            aria-controls="collapseUserManagement">
+                        User Management
+                    </button>
+                </h2>
+                <div id="collapseUserManagement" class="accordion-collapse collapse show" 
+                     aria-labelledby="headingUserManagement" data-bs-parent="#dashboardAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <!-- Enquiries Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Enquiries</h5>
+                                        <p class="card-text">View and manage enquiries from users.</p>
+                                        <a href="${pageContext.request.contextPath}/enquiry/list" class="btn btn-primary">Manage Enquiries</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Users Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Users</h5>
+                                        <p class="card-text">View and manage registered users.</p>
+                                        <a href="${pageContext.request.contextPath}/listusers" class="btn btn-primary">Manage Users</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Users</h5>
-                            <p class="card-text">View and manage registered users.</p>
-                            <a href="${pageContext.request.contextPath}/listusers" class="btn btn-primary ${page eq 'users' ? 'active' : ''}">
-                                Manage Users
-                            </a>
+            <!-- Content Management Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingContentManagement">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseContentManagement" aria-expanded="false" 
+                            aria-controls="collapseContentManagement">
+                        Content Management
+                    </button>
+                </h2>
+                <div id="collapseContentManagement" class="accordion-collapse collapse" 
+                     aria-labelledby="headingContentManagement" data-bs-parent="#dashboardAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <!-- Matching Games Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Matching Games</h5>
+                                        <p class="card-text">View and manage matching games, categories, and items.</p>
+                                        <a href="${pageContext.request.contextPath}/matching-game/all" class="btn btn-primary">Manage Games</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Flashcards Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Flashcards</h5>
+                                        <p class="card-text">View and manage flashcards for different subjects.</p>
+                                        <a href="${pageContext.request.contextPath}/flashcards/list" class="btn btn-primary">Manage Flashcards</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Slides Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Slides</h5>
+                                        <p class="card-text">View and manage all slides for sessions.</p>
+                                        <a href="${pageContext.request.contextPath}/slides/list" class="btn btn-primary">Manage Slides</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                                        <!-- Quizzes Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Quizzes</h5>
+                                        <p class="card-text">View and manage all quizzes.</p>
+                                        <a href="${pageContext.request.contextPath}/quizzes/dashboard" class="btn btn-primary">Manage Quizzes</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Questions Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Quiz Questions</h5>
+                                        <p class="card-text">View and manage quiz questions.</p>
+                                        <a href="${pageContext.request.contextPath}/quizquestions/listQuizQuestions" class="btn btn-primary">Manage Quiz Questions</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Asset Categories</h5>
-                            <p class="card-text">View and manage asset categories.</p>
-                            <a href="${pageContext.request.contextPath}/assetcategory/list" class="btn btn-primary ${page eq 'assetcategory' ? 'active' : ''}">
-                                Manage Asset Categories
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <!-- Course Management Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingCourseManagement">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseCourseManagement" aria-expanded="false" 
+                            aria-controls="collapseCourseManagement">
+                        Course Management
+                    </button>
+                </h2>
+                <div id="collapseCourseManagement" class="accordion-collapse collapse" 
+                     aria-labelledby="headingCourseManagement" data-bs-parent="#dashboardAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <!-- Course Categories Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Course Categories</h5>
+                                        <p class="card-text">View and manage course categories.</p>
+                                        <a href="${pageContext.request.contextPath}/coursecategory/list" class="btn btn-primary">Manage Categories</a>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Assets</h5>
-                            <p class="card-text">View and manage system assets.</p>
-                            <a href="${pageContext.request.contextPath}/asset/list" class="btn btn-primary ${page eq 'asset' ? 'active' : ''}">
-                                Manage Assets
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                            <!-- Courses Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Courses</h5>
+                                        <p class="card-text">View and manage available courses.</p>
+                                        <a href="${pageContext.request.contextPath}/course/list" class="btn btn-primary">Manage Courses</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Course Offerings Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Course Offerings</h5>
+                                        <p class="card-text">View and manage course offerings.</p>
+                                        <a href="${pageContext.request.contextPath}/courseoffering/list" class="btn btn-primary">Manage Offerings</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Course Categories</h5>
-                            <p class="card-text">View and manage course categories.</p>
-                            <a href="${pageContext.request.contextPath}/coursecategory/list" class="btn btn-primary ${page eq 'coursecategory' ? 'active' : ''}">
-                                Manage Course Categories
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Courses</h5>
-                            <p class="card-text">View and manage available courses.</p>
-                            <a href="${pageContext.request.contextPath}/course/list" class="btn btn-primary ${page eq 'course' ? 'active' : ''}">
-                                Manage Courses
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Course Offerings</h5>
-                            <p class="card-text">View and manage course offerings.</p>
-                            <a href="${pageContext.request.contextPath}/courseoffering/list" class="btn btn-primary ${page eq 'courseoffering' ? 'active' : ''}">
-                                Manage Offerings
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- New Course Sessions Card -->
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Course Sessions</h5>
-                            <p class="card-text">View and manage course sessions.</p>
-                            <a href="${pageContext.request.contextPath}/courseSession/list" class="btn btn-primary ${page eq 'courseSession' ? 'active' : ''}">
-                                Manage Course Sessions
-                            </a>
+                            <!-- Course Sessions Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Course Sessions</h5>
+                                        <p class="card-text">View and manage sessions for each course.</p>
+                                        <a href="${pageContext.request.contextPath}/courseSession/list" class="btn btn-primary">Manage Sessions</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Course Session Details Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Course Session Details</h5>
+                                        <p class="card-text">View and manage detailed sessions of each course.</p>
+                                        <a href="${pageContext.request.contextPath}/sessiondetail/list" class="btn btn-primary">Manage Session Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Course Tracking Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Course Tracking</h5>
+                                        <p class="card-text">View and manage course progress and feedback for students.</p>
+                                        <a href="${pageContext.request.contextPath}/courseTracking/manageCourseTracking" class="btn btn-primary">Manage Course Tracking</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
                 
-                <!-- New Course Session Details Card -->
-				<div class="col-12 col-md-4 mb-4">
-				    <div class="card">
-				        <div class="card-body">
-				            <h5 class="card-title">Course Session Details</h5>
-				            <p class="card-text">View and manage detailed sessions of each course.</p>
-				            <a href="${pageContext.request.contextPath}/sessiondetail/list" class="btn btn-primary ${page eq 'courseSessionDetails' ? 'active' : ''}">
-				                Manage Course Session Details
-				            </a>
-				        </div>
-				    </div>
-				</div>
-				
-				
-				                <!-- New Slides Card -->
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Slides</h5>
-                            <p class="card-text">View and manage all slides for the course sessions.</p>
-                            <a href="${pageContext.request.contextPath}/slides/list" class="btn btn-primary ${page eq 'slides' ? 'active' : ''}">
-                                Manage Slides
-                            </a>
+                 <!-- Event Management Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingEventManagement">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseEventManagement" aria-expanded="false" 
+                            aria-controls="collapseEventManagement">
+                        Event Management
+                    </button>
+                </h2>
+                <div id="collapseEventManagement" class="accordion-collapse collapse" 
+                     aria-labelledby="headingEventManagement" data-bs-parent="#dashboardAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <!-- Workshops Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Workshops</h5>
+                                        <p class="card-text">View and manage upcoming workshops.</p>
+                                        <a href="${pageContext.request.contextPath}/workshops/list" class="btn btn-primary">Manage Workshops</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Competitions Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Competitions</h5>
+                                        <p class="card-text">View and manage competitions.</p>
+                                        <a href="${pageContext.request.contextPath}/competition/list" class="btn btn-primary">Manage Competitions</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Projects Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Projects</h5>
+                                        <p class="card-text">View and manage projects.</p>
+                                        <a href="${pageContext.request.contextPath}/projects/list" class="btn btn-primary">Manage Projects</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Past Exam Papers Card -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Past Exam Papers</h5>
+                                        <p class="card-text">Upload, view, and manage past exam papers.</p>
+                                        <a href="${pageContext.request.contextPath}/pastexampapers/managePastExamPapers" class="btn btn-primary">Manage Past Exam Papers</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-				<!-- New Quizzes Card -->
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Quizzes</h5>
-                            <p class="card-text">View and manage all quizzes.</p>
-                            <a href="${pageContext.request.contextPath}/quizzes/dashboard" class="btn btn-primary ${page eq 'quizzes' ? 'active' : ''}">
-                                Manage Quizzes
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            </div>
                 
-				<!-- New Quiz Questions Card -->
-				<div class="col-12 col-md-4 mb-4">
-				    <div class="card">
-				        <div class="card-body">
-				            <h5 class="card-title">Quiz Questions</h5>
-				            <p class="card-text">View and manage quiz questions.</p>
-				            <a href="${pageContext.request.contextPath}/quizquestions/listQuizQuestions" 
-				               class="btn btn-primary ${page == 'quizQuestions' ? 'active' : ''}">
-				                Manage Quiz Questions
-				            </a>
-				        </div>
-				    </div>
-				</div>
-
-		                   <!-- Flashcard Sets Card -->
-		        <div class="col-12 col-md-4 mb-4">
-		            <div class="card">
-		                <div class="card-body">
-		                    <h5 class="card-title">Flashcard Sets</h5>
-		                    <p class="card-text">View and create flashcard sets for different subjects and topics.</p>
-		                    <a href="${pageContext.request.contextPath}/flashcardsets/flashcard-set-list"
-		                        class="btn btn-primary ${page eq 'flashcardSets' ? 'active' : ''}">
-		                        Manage Flashcard Sets </a>
-		                </div>
-		            </div>
-		        </div>
-		
-		        <!-- Flashcards Card -->
-		        <div class="col-12 col-md-4 mb-4">
-		            <div class="card">
-		                <div class="card-body">
-		                    <h5 class="card-title">Flashcards</h5>
-		                    <p class="card-text">View and manage individual flashcards within sets.</p>
-		                    <a href="${pageContext.request.contextPath}/flashcards/list"
-		                        class="btn btn-primary ${page eq 'flashcards' ? 'active' : ''}">
-		                        Manage Flashcards </a>
-		                </div>
-		            </div>
-		        </div>
-		                
-                
-
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Workshops</h5>
-                            <p class="card-text">View and manage upcoming workshops.</p>
-                            <a href="${pageContext.request.contextPath}/workshops/list" class="btn btn-primary ${page eq 'workshop' ? 'active' : ''}">
-                                Manage Workshops
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Competitions</h5>
-                            <p class="card-text">View and manage competitions.</p>
-                            <a href="${pageContext.request.contextPath}/competition/list" class="btn btn-primary ${page eq 'competition' ? 'active' : ''}">
-                                Manage Competitions
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-4 mb-4">
-					<div class="card">
-						<div class="card-body">
-							<h5 class="card-title">Projects</h5>
-							<p class="card-text">View and manage projects.</p>
-							<a href="${pageContext.request.contextPath}/projects/list"
-								class="btn btn-primary ${page eq 'projects' ? 'active' : ''}">
-								Manage Projects </a>
-						</div>
-					</div>
-				</div>
-                
-
             </div>
         </div>
     </div>
+
+    <!-- Include footer JSP -->
     <jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -44,6 +44,7 @@ public class RDStudentEnrollment {
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="attendance_id", nullable = true)
+	@JsonIgnore	
 	private Set<RDClassAttendance> attendances = new TreeSet<RDClassAttendance>();
 
 	

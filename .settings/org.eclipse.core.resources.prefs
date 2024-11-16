@@ -1,9 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/courseDetails.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/courses.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/flashcards/flashcard-list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/maths/scene_1.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/quizzes/take.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/showDashboard.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/slideShow.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/thankYouRegisterWorkshop.jsp=UTF-8
-encoding//src/main/webapp/courses.jsp=UTF-8
 encoding//src/main/webapp/index.bak=UTF-8

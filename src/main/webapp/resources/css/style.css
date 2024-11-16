@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f8ff;
+}
+
+#math-explorer-max {
+  width: 120px;
+  height: 120px;
+  background-color: #FFD700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  color: #000;
+  position: absolute;
+  top: 20%;
+}
+
+#max-speech {
+  padding: 10px;
+}
+
+button {
+  margin-top: 300px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2e8b57;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

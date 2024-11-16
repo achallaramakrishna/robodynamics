@@ -26,7 +26,8 @@ public class RDHomeController {
 
     @Autowired
     private RDQuizService quizService;
-
+    
+    
     @GetMapping("/")
     public String showHomePage(
             Model model,
@@ -107,19 +108,5 @@ public class RDHomeController {
         return "index";
     }
     
-    @GetMapping("/courses/details")
-    public String getCourseDetails(@RequestParam("courseId") Integer courseId, Model model) {
-        // Fetch the course details from the service or repository using the course ID
-        RDCourse course = courseService.getRDCourse(courseId);
-        
-        if (course == null) {
-            // Handle course not found
-            return "error-page"; // Redirect to an error page if the course is not found
-        }
-        
-        // Add course details to the model to pass to the view
-        model.addAttribute("course", course);
-        
-        return "course-details"; // The name of the JSP page to display course details
-    }
+
 }

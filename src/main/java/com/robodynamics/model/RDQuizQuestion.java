@@ -51,6 +51,15 @@ public class RDQuizQuestion {
     @JoinColumn(name = "course_session_detail_id", nullable = true)
     private RDCourseSessionDetail courseSessionDetail;  // Question linked to a course session detail
 
+    @ManyToOne
+    @JoinColumn(name = "course_session_id", nullable = true)
+    private RDCourseSession courseSession;  // Question linked to a course session detail
+
+    
+    @ManyToOne
+    @JoinColumn(name = "exam_course_id")
+    private RDExamCourse examCourse;
+    
     @Column(name = "difficulty_level", nullable = false)
     @Enumerated(EnumType.STRING)
     private DifficultyLevel difficultyLevel;  // Enum for 'Easy', 'Medium', 'Hard', 'Expert', 'Master'
@@ -70,6 +79,9 @@ public class RDQuizQuestion {
     @Column(name = "additional_info")
     private String additionalInfo;
 
+    @Column(name = "explanation")
+    private String explanation;
+    
     @Column(name = "tier_level")
     @Enumerated(EnumType.STRING)
     private TierLevel tierLevel; // Beginner, Intermediate, Advanced
@@ -81,7 +93,26 @@ public class RDQuizQuestion {
         BEGINNER, INTERMEDIATE, ADVANCED
     }
     
-    public int getQuestionNumber() {
+    
+    
+    
+    public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
+	public RDExamCourse getExamCourse() {
+		return examCourse;
+	}
+
+	public void setExamCourse(RDExamCourse examCourse) {
+		this.examCourse = examCourse;
+	}
+
+	public int getQuestionNumber() {
 		return questionNumber;
 	}
 
@@ -208,6 +239,16 @@ public class RDQuizQuestion {
 
 	public void setTierOrder(int tierOrder) {
 		this.tierOrder = tierOrder;
+	}
+	
+	
+
+	public RDCourseSession getCourseSession() {
+		return courseSession;
+	}
+
+	public void setCourseSession(RDCourseSession courseSession) {
+		this.courseSession = courseSession;
 	}
 
 	@Override

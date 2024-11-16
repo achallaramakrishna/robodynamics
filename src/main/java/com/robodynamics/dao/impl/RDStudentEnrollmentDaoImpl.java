@@ -113,4 +113,20 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 		}
 	}
 
+	@Override
+	public List<RDUser> getStudentsEnrolledInOffering(int courseOfferingId) {
+		 String hql = "SELECT e.student FROM RDStudentEnrollment e WHERE e.courseOffering.courseOfferingId = :courseOfferingId";
+		    Query<RDUser> query = factory.getCurrentSession().createQuery(hql, RDUser.class);
+		    query.setParameter("courseOfferingId", courseOfferingId);
+		    return query.getResultList();
+	}
+
+	@Override
+	public List<RDStudentEnrollment> getEnrolledStudentsByOfferingId(int courseOfferingId) {
+		String hql = "FROM RDStudentEnrollment e WHERE e.courseOffering.courseOfferingId = :courseOfferingId";
+        return factory.getCurrentSession()
+                .createQuery(hql, RDStudentEnrollment.class)
+                .setParameter("courseOfferingId", courseOfferingId)
+                .getResultList();
+	}
 }

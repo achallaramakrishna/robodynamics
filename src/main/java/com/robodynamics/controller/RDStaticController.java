@@ -18,21 +18,28 @@ public class RDStaticController {
 	@Autowired
 	private RDUserService service;
 
-	@GetMapping("/home")
-	public String home(Model m, HttpSession session) {
-		return "home";
-	}
-	
-
 	@GetMapping("/aboutus")
 	public String aboutUs(Model m, HttpSession session) {
 		return "aboutus";
 	}
 
 
-	@GetMapping("/membership")
-	public String membership(Model m, HttpSession session) {
-		return "membership";
+	@GetMapping("/subscription")
+	public String subscription(Model m, HttpSession session) {
+		return "subscription";
 	}
+	
+	@GetMapping("/blog")
+    public String showBlog() {
+    	return "blog";
+    }
+    
+    @GetMapping("/courses")
+    public String showCourses() {
+    	return "courses";
+    }
+    
+      
+
 	
 }

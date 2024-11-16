@@ -6,6 +6,7 @@ import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDStudentEnrollment;
+import com.robodynamics.model.RDUser;
 
 public interface RDStudentEnrollmentDao {
 	
@@ -20,4 +21,8 @@ public interface RDStudentEnrollmentDao {
 	List<RDStudentEnrollment> getStudentEnrollmentsListByParent(int userId);
 
 	List<RDStudentEnrollment> getStudentEnrollmentsListByStudent(int userId);
+
+	public List<RDUser> getStudentsEnrolledInOffering(int courseOfferingId);
+
+	public List<RDStudentEnrollment> getEnrolledStudentsByOfferingId(int courseOfferingId);
 }

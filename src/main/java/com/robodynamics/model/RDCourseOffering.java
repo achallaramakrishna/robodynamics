@@ -21,8 +21,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("event")
 public class RDCourseOffering {
 
-   
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_offering_id")

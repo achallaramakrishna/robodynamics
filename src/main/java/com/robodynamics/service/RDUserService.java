@@ -31,6 +31,9 @@ public interface RDUserService {
     public boolean isUsernameTaken(String userName);
     
 	public RDUser getChildForParent(int userID);
+	
+	public List < RDUser > getRDUsersByProfile(int profileId);
+
 
 
 }

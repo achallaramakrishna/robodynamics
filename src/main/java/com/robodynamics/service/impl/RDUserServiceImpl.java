@@ -91,14 +91,22 @@ public class RDUserServiceImpl implements RDUserService {
 	}
 
 	@Override
+	@Transactional
 	public boolean isUsernameTaken(String userName) {
 		RDUser existingUser = rdUserDao.findByUserName(userName);
         return existingUser != null;
 	}
 
 	@Override
+	@Transactional
 	public RDUser getChildForParent(int parentId) {
 		return rdUserDao.getChildByParentId(parentId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDUser> getRDUsersByProfile(int profileId) {
+		return rdUserDao.getRDUsersByProfile(profileId);
 	}
 	
 	

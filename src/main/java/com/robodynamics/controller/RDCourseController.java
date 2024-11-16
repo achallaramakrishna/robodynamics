@@ -62,15 +62,16 @@ public class RDCourseController {
     }
 	
 
-	@GetMapping("/{courseId}")
-    public String viewCourseDetails(@PathVariable("courseId") int courseId, Model model) {
-        // Fetch course details by course ID from the service
+    @GetMapping("/details")
+    public String getCourseDetails(@RequestParam("courseId") int courseId, Model model) {
+        // Fetch course details from the database using the service
         RDCourse course = service.getRDCourse(courseId);
-        System.out.println(course);
+
         // Add course details to the model
         model.addAttribute("course", course);
-        
-        return "courseDetails";  // This is the JSP page name
+
+        // Return the JSP page for course details
+        return "courseDetails";
     }
 	
 	@GetMapping("/list")
@@ -123,37 +124,50 @@ public class RDCourseController {
 	
 	@PostMapping("/saveCourse")
 	public String saveCourse(@ModelAttribute("courseForm") RDCourseForm courseForm, BindingResult result) {
-	    if (result.hasErrors()) {
+	    
+		if (result.hasErrors()) {
 	        return "course-form";
 	    }
-
 	    // Fetch the existing category from the database using the provided category ID
 	    RDCourseCategory courseCategory = courseCategoryService.getRDCourseCategoryById(courseForm.getCourseCategoryId());
-	    
 	    if (courseCategory == null) {
 	        // Handle the case where the category is not found (optional, but recommended)
 	        result.rejectValue("courseCategoryId", "error.courseCategoryId", "Invalid course category.");
 	        return "course-form";
 	    }
-
-	    // Create and set up the course entity
-	    RDCourse theCourse = new RDCourse();
+	    // Check if courseForm has a course ID and fetch the corresponding course from the database
+	    RDCourse theCourse = ( courseForm.getCourseId() > 0)
+	                            ? service.getRDCourse(courseForm.getCourseId())
+	                            : new RDCourse();
+	    
 	    theCourse.setCourseName(courseForm.getCourseName());
 	    theCourse.setCourseCategory(courseCategory); // Properly set the fetched course category
-
-	    // Handle image upload if it's present
+	    // Handle image upload
 	    MultipartFile imageFile = courseForm.getImageFile();
 	    if (imageFile != null && !imageFile.isEmpty()) {
-	        String fileName = servletContext.getRealPath("/") + "resources/images/" + imageFile.getOriginalFilename();
+	        // Dynamically resolve the path to the webapps/resources/assets/images directory
+	    	
+	        String uploadDir = servletContext.getRealPath("/resources/assets/images/");
+	        
+	        File uploadDirFile = new File(uploadDir);
+	        if (!uploadDirFile.exists()) {
+	            uploadDirFile.mkdirs(); // Create the directory if it doesn't exist
+	        }
+	        String fileName = imageFile.getOriginalFilename();
 	        try {
-	            imageFile.transferTo(new File(fileName));
+	            File destination = new File(uploadDir + fileName);
+	            imageFile.transferTo(destination);
+
+	            // Store relative path in the database
+	            theCourse.setCourseImageUrl("assets/images/" + fileName);
 	        } catch (IOException e) {
 	            e.printStackTrace();
+	            result.rejectValue("imageFile", "error.imageFile", "Failed to upload the image.");
+	            return "course-form";
 	        }
 	    }
-
 	    // Save the course
-	    service.saveRDCourse(theCourse);
+ 	    service.saveRDCourse(theCourse);
 	    return "redirect:/course/list";
 	}
 

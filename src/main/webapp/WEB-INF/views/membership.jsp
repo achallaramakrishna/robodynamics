@@ -21,7 +21,7 @@
 </head>
 <body>
 
-   <%@ include file="/WEB-INF/views/showHeader.jsp" %>
+ 	<jsp:include page="header.jsp" />
 
      <section>
       <center>

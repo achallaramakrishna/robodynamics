@@ -83,6 +83,19 @@
 						</div>
 					</div>
 				</div>
+				
+				    <div class="col-12 col-md-4 mb-4">
+				        <div class="card">
+				            <div class="card-body">
+				                <h5 class="card-title">Course Tracking</h5>
+				                <p class="card-text">View and manage course progress and feedback for students.</p>
+				                <a href="${pageContext.request.contextPath}/courseTracking/manageCourseTracking" 
+				                   class="btn btn-primary ${page eq 'courseTracking' ? 'active' : ''}">
+				                    Manage Course Tracking
+				                </a>
+				            </div>
+				        </div>
+				    </div>
 
 				<!-- Available Courses Section -->
 				<div class="col-12 col-md-12 mb-4">
@@ -92,37 +105,37 @@
             <p class="card-text">Browse and enroll your child in the following courses:</p>
             
             <!-- Check if there are any courses -->
-<c:choose>
-    <c:when test="${not empty availableCourses}">
-        <div class="row">
-            <!-- Loop through the list of courses -->
-            <c:forEach var="course" items="${availableCourses}">
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100 text-center shadow-sm" style="border-radius: 15px; background-color: #f9f9f9;">
-                        <div class="card-body" style="position: relative;">
-                            <!-- Add playful icons -->
-                            <span class="position-absolute top-0 start-50 translate-middle-x" style="font-size: 40px; color: #ff5722;">
-                                🚀
-                            </span>
-                            <h5 class="card-title mt-4" style="font-family: 'Comic Sans MS', cursive; color: #ff4081;">
-                                ${course.courseName}
-                            </h5>
-                            <p class="card-text text-muted">Age Group: ${course.courseAgeGroup}</p>
-                            <p class="card-text" style="font-size: 14px;">Duration: ${course.courseDuration}</p>
-                            <p class="card-text" style="font-size: 14px;">Description: ${course.courseDescription}</p>
-                            <a href="${pageContext.request.contextPath}/enrollment/showForm?courseId=${course.courseId}" class="btn btn-primary btn-block" style="border-radius: 20px; background-color: #42a5f5; border: none;">
-                                Enroll Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <p class="text-muted">No courses are currently available for enrollment.</p>
-    </c:otherwise>
-</c:choose>
+					<c:choose>
+					    <c:when test="${not empty availableCourses}">
+					        <div class="row">
+					            <!-- Loop through the list of courses -->
+					            <c:forEach var="course" items="${availableCourses}">
+					                <div class="col-md-3 mb-4">
+					                    <div class="card h-100 text-center shadow-sm" style="border-radius: 15px; background-color: #f9f9f9;">
+					                        <div class="card-body" style="position: relative;">
+					                            <!-- Add playful icons -->
+					                            <span class="position-absolute top-0 start-50 translate-middle-x" style="font-size: 40px; color: #ff5722;">
+					                                🚀
+					                            </span>
+					                            <h5 class="card-title mt-4" style="font-family: 'Comic Sans MS', cursive; color: #ff4081;">
+					                                ${course.courseName}
+					                            </h5>
+					                            <p class="card-text text-muted">Age Group: ${course.courseAgeGroup}</p>
+					                            <p class="card-text" style="font-size: 14px;">Duration: ${course.courseDuration}</p>
+					                            <p class="card-text" style="font-size: 14px;">Description: ${course.courseDescription}</p>
+					                            <a href="${pageContext.request.contextPath}/enrollment/showForm?courseId=${course.courseId}" class="btn btn-primary btn-block" style="border-radius: 20px; background-color: #42a5f5; border: none;">
+					                                Enroll Now
+					                            </a>
+					                        </div>
+					                    </div>
+					                </div>
+					            </c:forEach>
+					        </div>
+					    </c:when>
+					    <c:otherwise>
+					        <p class="text-muted">No courses are currently available for enrollment.</p>
+					    </c:otherwise>
+					</c:choose>
 
             
         </div>

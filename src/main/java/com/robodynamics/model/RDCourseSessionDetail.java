@@ -61,6 +61,8 @@ public class RDCourseSessionDetail {
 	@Column(name = "session_detail_id")  // This is the user-defined field
     private int sessionDetailId;
 	
+	@Column(name = "has_animation", nullable = false)
+	private Boolean hasAnimation;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quiz_id", referencedColumnName = "quiz_id")

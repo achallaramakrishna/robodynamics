@@ -32,7 +32,7 @@
                         <h2>Add Project</h2>
                     </div>
                     <div class="panel-body">
-                        <form:form action="saveProject" cssClass="form-horizontal" method="post" modelAttribute="project">
+                        <form:form action="saveProject" cssClass="form-horizontal" method="post" modelAttribute="project" enctype="multipart/form-data"> 
 
                             <!-- Section 1: Basic Information -->
                             <fieldset>
@@ -147,12 +147,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="imageLink" class="col-md-3 control-label">Image Link</label>
-                                    <div class="col-md-9">
-                                        <form:input path="imageLink" cssClass="form-control" />
-                                    </div>
-                                </div>
+								<div class="form-group">
+						            <label for="imageFile" class="col-md-3 control-label">Upload Image</label>
+						            <div class="col-md-9">
+						                <input type="file" name="imageFile" class="form-control" />
+						            </div>
+						        </div>
                             </fieldset>
 
                             <br>

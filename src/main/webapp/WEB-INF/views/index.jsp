@@ -33,49 +33,94 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
-        .card {
-            flex: 0 0 auto;
-            width: 260px;
-            height: 300px;
-            border: none;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            scroll-snap-align: center;
-            cursor: pointer;
-        }
-        .card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-        }
-        .card-body {
-            padding: 15px;
-        }
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .popup {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: white;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-            padding: 10px;
-            border-radius: 8px;
-            display: none;
-            z-index: 10;
-            max-width: 200px;
-        }
-        .card:hover .popup {
-            display: block;
-        }
+
+.card {
+    flex: 0 0 auto;
+    width: 300px; /* Reduced width */
+    height: auto; /* Dynamic height */
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    border-radius: 12px; /* Slightly smaller border radius */
+    overflow: hidden;
+    position: relative;
+    scroll-snap-align: center;
+    cursor: pointer;
+    background-color: #fff; /* Clean background */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slight zoom-in on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.card img {
+    width: 100%;
+    height: 150px; /* Reduced image height */
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card .badge {
+    position: absolute;
+    top: 10px; /* Adjusted position */
+    right: 10px;
+    background-color: #ff5722;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.card-body {
+    padding: 15px; /* Reduced padding */
+    text-align: left;
+}
+
+.card-title {
+    font-size: 1.2rem; /* Slightly smaller font size */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.9rem; /* Adjusted font size */
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.card .features {
+    font-size: 0.85rem; /* Reduced font size for features */
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.card .ratings {
+    color: #ffc107;
+    margin-bottom: 10px;
+    font-size: 0.9rem; /* Adjusted font size for ratings */
+}
+
+.card .register-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px; /* Reduced button size */
+    border: none;
+    border-radius: 6px; /* Adjusted button border radius */
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.card .register-button:hover {
+    background-color: #0056b3;
+}
+
+
     </style>
 </head>
 <body>
@@ -105,15 +150,24 @@
         <h3 class="section-title">Featured Courses</h3>
         <div class="carousel-section">
             <c:forEach var="course" items="${featuredCourses}">
-                <div class="card" onclick="redirectToDetails('${pageContext.request.contextPath}', 'course', ${course.courseId})">
-                    <img src="${pageContext.request.contextPath}/${course.courseImageUrl}" alt="${course.courseName}">
-                    <div class="card-body">
-                        <h5 class="card-title">${course.courseName}</h5>
-                    </div>
-                    <div class="popup">
-                        <p>${course.shortDescription}</p>
-                    </div>
-                </div>
+				<div class="card" onclick="redirectToDetails('${pageContext.request.contextPath}', 'course', ${course.courseId})">
+				    <div class="card-header">
+				        <img src="${pageContext.request.contextPath}/${course.courseImageUrl}" alt="${course.courseName}" />
+				        <span class="badge">Top Rated</span>
+				    </div>
+				    <div class="card-body">
+				        <h5 class="card-title">${course.courseName}</h5>
+				        <p class="features">
+				            <strong>Age Group:</strong> ${course.courseAgeGroup} <br>
+				            <strong>Duration:</strong> ${course.courseDuration} <br>
+				            <strong>Instructor:</strong> ${course.courseInstructor}
+				        </p>
+				        <p class="ratings">⭐⭐⭐⭐⭐ (${course.reviewsCount} Reviews)</p>
+				        <p>${fn:substring(course.shortDescription, 0, 100)}...</p>
+				        <button class="register-button" onclick="event.stopPropagation(); redirectToDetails('${pageContext.request.contextPath}', 'course', ${course.courseId})">Explore Details</button>
+				    </div>
+				</div>
+
             </c:forEach>
         </div>
     </section>
@@ -130,23 +184,6 @@
                     </div>
                     <div class="popup">
                         <p>${project.shortDescription}</p>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </section>
-
-    <!-- Featured Quizzes Section -->
-    <section class="carousel-container container">
-        <h3 class="section-title">Featured Quizzes</h3>
-        <div class="carousel-section">
-            <c:forEach var="quiz" items="${featuredQuizzes}">
-                <div class="card" onclick="redirectToDetails('${pageContext.request.contextPath}', 'quiz', ${quiz.quizId})">
-                    <div class="card-body">
-                        <h5 class="card-title">${quiz.quizName}</h5>
-                    </div>
-                    <div class="popup">
-                        <p>${quiz.shortDescription}</p>
                     </div>
                 </div>
             </c:forEach>
@@ -173,5 +210,6 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

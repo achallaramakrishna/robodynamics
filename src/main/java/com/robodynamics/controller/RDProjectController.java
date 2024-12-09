@@ -6,6 +6,7 @@ import com.robodynamics.service.RDProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 @Controller
 @RequestMapping("/projects")
@@ -23,6 +28,9 @@ public class RDProjectController {
 
     @Autowired
     private RDProjectService projectService;
+    
+    @Autowired
+	ServletContext servletContext;
 
     @GetMapping("/projects")
     public String listProjects(Model model) {
@@ -78,11 +86,35 @@ public class RDProjectController {
     }
 
     @PostMapping("/saveProject")
-    public String saveProject(@ModelAttribute("project") RDProject project) {
-        projectService.saveRDProject(project);
+    public String saveProject(@ModelAttribute("project") RDProject project,
+                              @RequestParam("imageFile") MultipartFile imageFile,
+                              RedirectAttributes redirectAttributes,
+                              BindingResult result) {
+        try {
+            if (imageFile != null && !imageFile.isEmpty()) {
+            	String uploadDir = servletContext.getRealPath("/resources/assets/images/");
+    	        
+    	        File uploadDirFile = new File(uploadDir);
+    	        if (!uploadDirFile.exists()) {
+    	            uploadDirFile.mkdirs(); // Create the directory if it doesn't exist
+    	        }
+    	        String fileName = imageFile.getOriginalFilename();                
+    	        File destination = new File(uploadDir + fileName);
+                imageFile.transferTo(destination);
+
+                // Set the image link in the project object
+                project.setImageLink("assets/images/" + fileName);
+            }
+
+            // Save the project to the database
+            project.setFeatured(true);
+            projectService.saveRDProject(project);
+            redirectAttributes.addFlashAttribute("success", "Project saved successfully.");
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("error", "Error uploading file: " + e.getMessage());
+        }
         return "redirect:/projects/list";
     }
-
     @GetMapping("/updateForm")
     public String showFormForUpdate(@RequestParam("projectId") int projectId, Model model) {
         RDProject project = projectService.getRDProject(projectId);

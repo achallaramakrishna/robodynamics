@@ -154,4 +154,45 @@ public class RDQuizDaoImpl implements RDQuizDao {
         searchQuery.setParameter("query", "%" + query + "%");
         return searchQuery.getResultList();
     }
+
+	@Override
+	public List<RDQuiz> findQuizzesByCreator(int userId) {
+		  Session session = factory.getCurrentSession();
+	        String hql = "FROM RDQuiz q WHERE q.createdByUser.userID = :userId";
+	        Query<RDQuiz> query = session.createQuery(hql, RDQuiz.class);
+	        query.setParameter("userId", userId);
+	        return query.getResultList();
+	}
+
+	@Override
+	public List<RDQuiz> findQuizzesForStudent(int studentId) {
+	    Session session = factory.getCurrentSession();
+
+	    // HQL to fetch quizzes created by the student or their parents
+	    String hql = """
+	        SELECT q
+	        FROM RDQuiz q
+	        WHERE q.createdByUser.userID = :studentId
+	           OR q.createdByUser.userID IN (
+	               SELECT parent.userID
+	               FROM RDUser parent
+	               WHERE parent.userID IN (
+	                   SELECT s.mom.userID
+	                   FROM RDUser s
+	                   WHERE s.userID = :studentId
+	               )
+	               OR parent.userID IN (
+	                   SELECT s.dad.userID
+	                   FROM RDUser s
+	                   WHERE s.userID = :studentId
+	               )
+	           )
+	    """;
+
+	    Query<RDQuiz> query = session.createQuery(hql, RDQuiz.class);
+	    query.setParameter("studentId", studentId);
+
+	    return query.getResultList();
+	}
+
 }

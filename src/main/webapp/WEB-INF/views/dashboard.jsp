@@ -132,6 +132,17 @@
                                 </div>
                             </div>
 
+							<!-- Create Test Card -->
+							<div class="col-md-4 mb-4">
+							    <div class="card">
+							        <div class="card-body">
+							            <h5 class="card-title">Create Test</h5>
+							            <p class="card-text">Design and customize tests for students with specific courses and sessions.</p>
+							            <a href="${pageContext.request.contextPath}/tests/create" class="btn btn-primary">Create Test</a>
+							        </div>
+							    </div>
+							</div>
+
                             <!-- Quiz Questions Card -->
                             <div class="col-md-4 mb-4">
                                 <div class="card">
@@ -293,8 +304,97 @@
                     </div>
                 </div>
             </div>
-                
-            </div>
+            
+			  <!-- Learning Path Management Section -->
+			<div class="accordion-item">
+			    <h2 class="accordion-header" id="headingLearningPathManagement">
+			        <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+			                data-bs-target="#collapseLearningPathManagement" aria-expanded="true" 
+			                aria-controls="collapseLearningPathManagement">
+			            Learning Path Management
+			        </button>
+			    </h2>
+			    <div id="collapseLearningPathManagement" class="accordion-collapse collapse show" 
+			         aria-labelledby="headingLearningPathManagement" data-bs-parent="#dashboardAccordion">
+			        <div class="accordion-body">
+			            <div class="row">
+			                <!-- Learning Path Templates Card -->
+			                <div class="col-md-4 mb-4">
+			                    <div class="card">
+			                        <div class="card-body">
+			                            <h5 class="card-title">Learning Path Templates</h5>
+			                            <p class="card-text">Create, view, and manage learning path templates.</p>
+			                            <a href="${pageContext.request.contextPath}/learningpathtemplates/list" class="btn btn-primary">Manage Templates</a>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+			<!-- Apps Management Section -->
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingAppsManagement">
+						<button class="accordion-button collapsed" type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#collapseAppsManagement" aria-expanded="false"
+							aria-controls="collapseAppsManagement">Apps Management</button>
+					</h2>
+					<div id="collapseAppsManagement"
+						class="accordion-collapse collapse"
+						aria-labelledby="headingAppsManagement"
+						data-bs-parent="#dashboardAccordion">
+						<div class="accordion-body">
+							<div class="row">
+								<!-- Matching Games Card -->
+								<div class="col-md-4 mb-4">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Matching Games</h5>
+											<p class="card-text">View and manage matching games,
+												categories, and items.</p>
+											<a
+												href="${pageContext.request.contextPath}/matching-game/list"
+												class="btn btn-primary">Manage Games</a>
+										</div>
+									</div>
+								</div>
+
+								<!-- Additional Apps can be added here -->
+								<!-- Example: Vocabulary Builder -->
+								<div class="col-md-4 mb-4">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Vocabulary Builder</h5>
+											<p class="card-text">An interactive app for enhancing
+												vocabulary.</p>
+											<a
+												href="${pageContext.request.contextPath}/vocabulary-builder"
+												class="btn btn-primary">Explore Vocabulary Builder</a>
+										</div>
+									</div>
+								</div>
+
+								<!-- Example: Quiz Timer -->
+								<div class="col-md-4 mb-4">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card	-title">Quiz Timer</h5>
+											<p class="card-text">A timer app to assist students
+												during quizzes.</p>
+											<a href="${pageContext.request.contextPath}/quiz-timer"
+												class="btn btn-primary">Use Quiz Timer</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
         </div>
     </div>
 

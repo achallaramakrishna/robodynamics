@@ -313,6 +313,11 @@ public static void main(String[] args) {
 </head>
 
 <body class="container">
+
+
+	<c:if test="${showHeaderFooter}">
+	    <jsp:include page="/header.jsp" />
+	</c:if>
     <div class="quiz-container">
         <h2>🎉 Let's Take a Fun Quiz! 🎉</h2>
         <h4 class="mt-5">Quiz: ${quiz.quizName}</h4>
@@ -332,6 +337,8 @@ public static void main(String[] args) {
             <input type="hidden" name="currentQuestionIndex" value="${currentQuestionIndex}" />
             <input type="hidden" id="startTime" name="startTime" value="" />
             <input type="hidden" name="mode" value="${mode}" />
+            <input type="hidden" name="showHeaderFooter" value="${showHeaderFooter}" /> <!-- Pass this forward -->
+            
             
 
             <!-- Render only the current question -->
@@ -432,5 +439,8 @@ public static void main(String[] args) {
             </div>
         </form>
     </div>
+    	<c:if test="${showHeaderFooter}">
+	    <jsp:include page="/footer.jsp" />
+	</c:if>
 </body>
 </html>

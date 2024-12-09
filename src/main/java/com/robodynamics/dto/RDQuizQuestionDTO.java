@@ -1,4 +1,4 @@
-package com.robodynamics.dto;
+	package com.robodynamics.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -31,9 +31,6 @@ public class RDQuizQuestionDTO {
 
     @JsonProperty("slide_number") // Match with JSON field name
     private int slideNumber;
-
-    @JsonProperty("question_number")
-    private int questionNumber;
 
     @JsonProperty("options")
     private List<RDQuizOptionDTO> options;
@@ -118,14 +115,6 @@ public class RDQuizQuestionDTO {
 
     public void setOptions(List<RDQuizOptionDTO> options) {
         this.options = options;
-    }
-
-    public int getQuestionNumber() {
-        return questionNumber;
-    }
-
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
     }
 
 	public int getPoints() {

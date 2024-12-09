@@ -35,4 +35,8 @@ public interface RDQuizDao {
     
     List<RDQuiz> searchQuizzes(String query);
 
+	List<RDQuiz> findQuizzesByCreator(int userId);
+
+	List<RDQuiz> findQuizzesForStudent(int studentId);
+
 }

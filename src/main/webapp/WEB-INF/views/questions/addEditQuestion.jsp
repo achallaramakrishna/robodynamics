@@ -34,12 +34,6 @@
     <form:form action="${pageContext.request.contextPath}/questions/save" modelAttribute="question" method="post">
         <input type="hidden" name="slideId" value="${slideId}">
 
-        <!-- Question Number -->
-        <div class="form-group">
-            <label for="questionNumber">Question Number</label>
-            <form:input path="questionNumber" class="form-control" required="true" />
-        </div>
-
         <!-- Question Text -->
         <div class="form-group mt-3">
             <label for="questionText">Question Text</label>

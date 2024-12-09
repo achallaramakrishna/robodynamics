@@ -35,12 +35,28 @@
             font-size: 1.2rem;
         }
 
-        .course-overview, .course-details, .testimonials {
+        .course-overview, .course-details, .testimonials, .promo-video {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+        }
+
+        .promo-video iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .promo-video .coming-soon {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+            padding: 30px;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
         }
 
         .course-details ul {
@@ -84,6 +100,21 @@
         <h1>${course.courseName}</h1>
         <p>Perfect for kids aged ${course.courseAgeGroup}</p>
         <p>${course.courseDuration}</p>
+    </div>
+
+    <!-- Promotional Video Section -->
+    <div class="promo-video">
+        <h2>🎥 Promotional Video</h2>
+        <c:choose>
+            <c:when test="${not empty course.promoVideoUrl}">
+                <!-- Embed the video using the promoVideoUrl -->
+                <iframe src="${course.promoVideoUrl}" allowfullscreen></iframe>
+            </c:when>
+            <c:otherwise>
+                <!-- Display a placeholder if the promoVideoUrl is not available -->
+                <div class="coming-soon">Promotional Video Coming Soon</div>
+            </c:otherwise>
+        </c:choose>
     </div>
 
     <!-- Course Overview -->

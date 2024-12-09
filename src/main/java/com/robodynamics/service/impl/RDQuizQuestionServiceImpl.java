@@ -77,22 +77,45 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType) {
 		return rdQuizQuestionDao.getQuestionsBySlideId(slideId, questionType);
 	}
 
 	@Override
+	@Transactional
 	public List<RDQuizQuestion> getQuestionsByTierLevel(TierLevel tierLevel) {
 		return rdQuizQuestionDao.findByTierLevel(tierLevel);
 	}
 
 	@Override
+	@Transactional
 	public List<RDQuizQuestion> getQuestionsByTierLevelAndDifficulty(TierLevel tierLevel, String difficultyLevel) {
 		return rdQuizQuestionDao.findByTierLevelAndDifficulty(tierLevel, difficultyLevel);
 	}
 
 	@Override
+	@Transactional
 	public List<RDQuizQuestion> getQuestionsByTierLevelOrdered(TierLevel tierLevel) {
 		return rdQuizQuestionDao.findByTierLevelOrderedByTierOrder(tierLevel);
 	}
+
+	@Override
+	@Transactional
+	public List<RDQuizQuestion> findQuestionsByQuizId(int quizId) {
+		
+		return rdQuizQuestionDao.findQuestionsByQuizId(quizId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDQuizQuestion> findQuestionsByCriteria(Integer courseId, List<Integer> courseSessionIds,
+			List<String> questionTypes, List<String> difficultyLevels, int limit) {
+		
+		return rdQuizQuestionDao.findQuestionsByCriteria(courseId, courseSessionIds, questionTypes, difficultyLevels, limit);
+	}
+
+	
+
+	
 }

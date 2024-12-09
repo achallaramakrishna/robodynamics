@@ -5,7 +5,6 @@ import java.util.List;
 public class QuestionDTO {
 
     private int questionId;
-    private int questionNumber;
     private String questionText;
     private String questionType;
     private String correctAnswer;
@@ -71,14 +70,6 @@ public class QuestionDTO {
     public void setOptions(List<RDOptionDTO> options) {
         this.options = options;
     }
-
-	public int getQuestionNumber() {
-		return questionNumber;
-	}
-
-	public void setQuestionNumber(int questionNumber) {
-		this.questionNumber = questionNumber;
-	}
 
 	public String getDifficultyLevel() {
 		return difficultyLevel;

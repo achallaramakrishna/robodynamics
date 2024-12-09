@@ -177,5 +177,17 @@ public class RDQuizServiceImpl implements RDQuizService {
     public List<RDQuiz> searchQuizzes(String query) {
         return rdQuizDao.searchQuizzes(query);
     }
+
+	@Override
+	@Transactional
+	public List<RDQuiz> findQuizzesByCreator(int userId) {
+		return rdQuizDao.findQuizzesByCreator(userId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDQuiz> findQuizzesForStudent(int studentId) {
+		return rdQuizDao.findQuizzesForStudent(studentId);
+	}
     
 }

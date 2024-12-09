@@ -16,127 +16,71 @@ public class RDQuizQuestion {
     private String questionText;
 
     @Column(name = "question_type", nullable = false)
-    private String questionType;  // E.g., "multiple_choice" or "fill_in_the_blank"
+    private String questionType;
 
-    @Column(name = "max_marks", nullable = false)
-    private int maxMarks;
-    
-    @Column(name = "question_number", nullable = false)
-    private int questionNumber;
-    
-    
-    @Column(name = "points", nullable = false)
-    private Integer points;
-    
-    @ManyToOne
-    @JoinColumn(name = "slide_id", nullable = true)
-    private RDSlide slide;  // New field for slide relationship
+    @Column(name = "correct_answer")
+    private String correctAnswer;
 
-
-    // Add the corresponding getter and setter
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "question_id") // This should map the correct foreign key field in `quiz_options` table
-    private List<RDQuizOption> options;
-
-    @ManyToOne
-    @JoinColumn(name = "course_session_detail_id", nullable = true)
-    private RDCourseSessionDetail courseSessionDetail;  // Question linked to a course session detail
-
-    @ManyToOne
-    @JoinColumn(name = "course_session_id", nullable = true)
-    private RDCourseSession courseSession;  // Question linked to a course session detail
-
-    
-    @ManyToOne
-    @JoinColumn(name = "exam_course_id")
-    private RDExamCourse examCourse;
-    
     @Column(name = "difficulty_level", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DifficultyLevel difficultyLevel;  // Enum for 'Easy', 'Medium', 'Hard', 'Expert', 'Master'
+    private DifficultyLevel difficultyLevel;
 
- // Enum for DifficultyLevel
-    public enum DifficultyLevel {
-        Easy,
-        Medium,
-        Hard,
-        Expert,
-        Master
-    }
-    
-    @Column(name = "correct_answer", nullable = true)  // To store correct answers for fill-in-the-blank questions
-    private String correctAnswer;
-    
+    @Column(name = "max_marks")
+    private int maxMarks;
+
     @Column(name = "additional_info")
     private String additionalInfo;
 
-    @Column(name = "explanation")
-    private String explanation;
-    
+    @Column(name = "points")
+    private Integer points;
+
     @Column(name = "tier_level")
     @Enumerated(EnumType.STRING)
-    private TierLevel tierLevel; // Beginner, Intermediate, Advanced
+    private TierLevel tierLevel;
 
     @Column(name = "tier_order")
     private int tierOrder;
 
+    @Column(name = "explanation")
+    private String explanation;
+
+    @Column(name = "exam_type")
+    private String examType;
+
+    @Column(name = "syllabus_tag")
+    private String syllabusTag;
+
+    @ManyToOne
+    @JoinColumn(name = "course_session_detail_id")
+    private RDCourseSessionDetail courseSessionDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "course_session_id")
+    private RDCourseSession courseSession;
+
+    @ManyToOne
+    @JoinColumn(name = "exam_course_id")
+    private RDExamCourse examCourse;
+
+    @ManyToOne
+    @JoinColumn(name = "slide_id")
+    private RDSlide slide;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "question_id") // FK in `quiz_options` table
+    private List<RDQuizOption> options;
+
+    // Enum for DifficultyLevel
+    public enum DifficultyLevel {
+        Easy, Medium, Hard, Expert, Master
+    }
+
+    // Enum for TierLevel
     public enum TierLevel {
         BEGINNER, INTERMEDIATE, ADVANCED
     }
-    
-    
-    
-    
-    public String getExplanation() {
-		return explanation;
-	}
 
-	public void setExplanation(String explanation) {
-		this.explanation = explanation;
-	}
-
-	public RDExamCourse getExamCourse() {
-		return examCourse;
-	}
-
-	public void setExamCourse(RDExamCourse examCourse) {
-		this.examCourse = examCourse;
-	}
-
-	public int getQuestionNumber() {
-		return questionNumber;
-	}
-
-	public void setQuestionNumber(int questionNumber) {
-		this.questionNumber = questionNumber;
-	}
-
-	public RDSlide getSlide() {
-		return slide;
-	}
-
-	public void setSlide(RDSlide slide) {
-		this.slide = slide;
-	}
-
-	public String getAdditionalInfo() {
-		return additionalInfo;
-	}
-
-	public void setAdditionalInfo(String additionalInfo) {
-		this.additionalInfo = additionalInfo;
-	}
-
-	// Constructors
+    // Constructors
     public RDQuizQuestion() {}
 
     public RDQuizQuestion(String questionText, String questionType) {
@@ -161,22 +105,124 @@ public class RDQuizQuestion {
         this.questionText = questionText;
     }
 
-    
-    public int getMaxMarks() {
-		return maxMarks;
-	}
-
-	public void setMaxMarks(int maxMarks) {
-		this.maxMarks = maxMarks;
-	}
-
-	public String getQuestionType() {
+    public String getQuestionType() {
         return questionType;
     }
 
-    
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public DifficultyLevel getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    public int getMaxMarks() {
+        return maxMarks;
+    }
+
+    public void setMaxMarks(int maxMarks) {
+        this.maxMarks = maxMarks;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public TierLevel getTierLevel() {
+        return tierLevel;
+    }
+
+    public void setTierLevel(TierLevel tierLevel) {
+        this.tierLevel = tierLevel;
+    }
+
+    public int getTierOrder() {
+        return tierOrder;
+    }
+
+    public void setTierOrder(int tierOrder) {
+        this.tierOrder = tierOrder;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public String getExamType() {
+        return examType;
+    }
+
+    public void setExamType(String examType) {
+        this.examType = examType;
+    }
+
+    public String getSyllabusTag() {
+        return syllabusTag;
+    }
+
+    public void setSyllabusTag(String syllabusTag) {
+        this.syllabusTag = syllabusTag;
+    }
+
+    public RDCourseSessionDetail getCourseSessionDetail() {
+        return courseSessionDetail;
+    }
+
+    public void setCourseSessionDetail(RDCourseSessionDetail courseSessionDetail) {
+        this.courseSessionDetail = courseSessionDetail;
+    }
+
+    public RDCourseSession getCourseSession() {
+        return courseSession;
+    }
+
+    public void setCourseSession(RDCourseSession courseSession) {
+        this.courseSession = courseSession;
+    }
+
+    public RDExamCourse getExamCourse() {
+        return examCourse;
+    }
+
+    public void setExamCourse(RDExamCourse examCourse) {
+        this.examCourse = examCourse;
+    }
+
+    public RDSlide getSlide() {
+        return slide;
+    }
+
+    public void setSlide(RDSlide slide) {
+        this.slide = slide;
     }
 
     public List<RDQuizOption> getOptions() {
@@ -186,80 +232,28 @@ public class RDQuizQuestion {
     public void setOptions(List<RDQuizOption> options) {
         this.options = options;
     }
-    
-    // Method to find the correct option for the question
+
+    // Utility methods
     public RDQuizOption getCorrectOption() {
-        for (RDQuizOption option : options) {
-            if (option.isCorrect()) {
-                return option;  // Return the option where isCorrect is true
+        if (options != null) {
+            for (RDQuizOption option : options) {
+                if (option.isCorrect()) {
+                    return option;
+                }
             }
         }
-        return null; // No correct option found (this shouldn't happen if data is correct)
+        return null;
     }
 
-    
-    public RDCourseSessionDetail getCourseSessionDetail() {
-		return courseSessionDetail;
-	}
-
-	public void setCourseSessionDetail(RDCourseSessionDetail courseSessionDetail) {
-		this.courseSessionDetail = courseSessionDetail;
-	}
-
-	public DifficultyLevel getDifficultyLevel() {
-		return difficultyLevel;
-	}
-
-	public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
-		this.difficultyLevel = difficultyLevel;
-	}
-
-	
-	public String getCorrectAnswer() {
-		return correctAnswer;
-	}
-
-	public void setCorrectAnswer(String correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
-	
-	
-
-	public TierLevel getTierLevel() {
-		return tierLevel;
-	}
-
-	public void setTierLevel(TierLevel tierLevel) {
-		this.tierLevel = tierLevel;
-	}
-
-	public int getTierOrder() {
-		return tierOrder;
-	}
-
-	public void setTierOrder(int tierOrder) {
-		this.tierOrder = tierOrder;
-	}
-	
-	
-
-	public RDCourseSession getCourseSession() {
-		return courseSession;
-	}
-
-	public void setCourseSession(RDCourseSession courseSession) {
-		this.courseSession = courseSession;
-	}
-
-	@Override
-	public String toString() {
-		final int maxLen = 10;
-		return "RDQuizQuestion [questionId=" + questionId + ", questionText=" + questionText + ", questionType="
-				+ questionType + ", options="
-				+ (options != null ? options.subList(0, Math.min(options.size(), maxLen)) : null)
-				+ ", courseSessionDetail=" + courseSessionDetail + ", difficultyLevel=" + difficultyLevel
-				+ ", correctAnswer=" + correctAnswer + "]";
-	}
-
- 
+    @Override
+    public String toString() {
+        final int maxLen = 10;
+        return "RDQuizQuestion{" +
+               "questionId=" + questionId +
+               ", questionText='" + questionText + '\'' +
+               ", questionType='" + questionType + '\'' +
+               ", difficultyLevel=" + difficultyLevel +
+               ", options=" + (options != null ? options.subList(0, Math.min(options.size(), maxLen)) : null) +
+               '}';
+    }
 }

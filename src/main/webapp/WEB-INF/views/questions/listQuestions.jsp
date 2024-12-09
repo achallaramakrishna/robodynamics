@@ -100,7 +100,6 @@
             <thead>
             <tr>
                 <th>Slide Number</th>
-                <th>Question Number</th>
                 <th>Question Text</th>
                 <th>Question Type</th>
                 <th>Options (If MCQ)</th>
@@ -164,7 +163,6 @@
                     $.each(data.questions, function (index, question) {
                         questionRows += '<tr>' +
                         	'<td>' + question.slide.slideNumber + '</td>' +
-                        	'<td>' + question.questionNumber + '</td>' +
                             '<td>' + question.questionText + '</td>' +
                             '<td>' + question.questionType + '</td>' +
                             '<td>';

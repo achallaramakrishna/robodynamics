@@ -1,5 +1,6 @@
 package com.robodynamics.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -14,8 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.robodynamics.dao.RDCourseSessionDao;
+import com.robodynamics.dao.RDCourseSessionDetailDao;
 import com.robodynamics.dao.RDQuizQuestionDao;
 import com.robodynamics.model.RDCourseOffering;
+import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
 import com.robodynamics.model.RDQuizQuestion.TierLevel;
@@ -26,6 +31,12 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
 
     @Autowired
     private SessionFactory factory;
+    
+    @Autowired
+    private RDCourseSessionDao courseSessionDao;
+    
+    @Autowired
+    private RDCourseSessionDetailDao courseSessionDetailDao;
 
     @Override
     public void saveOrUpdate(RDQuizQuestion question) {
@@ -199,5 +210,95 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
                 .setParameter("tierLevel", tierLevel)
                 .list();
     }
+
+	@Override
+	public List<RDQuizQuestion> findQuestionsByQuizId(int quizId) {
+		 // Get the current Hibernate session
+        Session session = factory.getCurrentSession();
+
+        // Create the HQL query to fetch quiz questions for the given quizId
+        String hql = "FROM RDQuizQuestion q WHERE q.quiz.quizId = :quizId";
+
+        Query<RDQuizQuestion> query = session.createQuery(hql, RDQuizQuestion.class);
+        query.setParameter("quizId", quizId);
+
+        // Execute the query and return the results
+        return query.getResultList();
+	}
+
+	@Override
+	public List<RDQuizQuestion> findQuestionsByCriteria(
+	        Integer courseId, 
+	        List<Integer> courseSessionIds, 
+	        List<String> questionTypes, 
+	        List<String> difficultyLevels, 
+	        int limit) {
+
+	    Session session = factory.getCurrentSession();
+
+	    System.out.println("Course id - " + courseId);
+	    System.out.println("courseSessionIds - " + courseSessionIds);
+	    System.out.println("questionTypes - " + questionTypes);
+	    System.out.println("difficultyLevels - " + difficultyLevels);
+	    System.out.println("limit - " + limit);
+
+	    String sql = "SELECT q.question_id, q.additional_info, q.correct_answer, \r\n"
+	            + "       q.difficulty_level, q.explanation, q.max_marks, \r\n"
+	            + "       q.points, q.question_text, q.question_type, \r\n"
+	            + "       q.tier_level, q.tier_order\r\n"
+	            + "FROM rd_quiz_questions q\r\n"
+	            + "WHERE q.course_session_id IN (:courseSessionIds)\r\n"
+	            + "  AND q.question_type IN (:questionTypes)\r\n"
+	            + "  AND q.difficulty_level IN (:difficultyLevels)\r\n"
+	            + "ORDER BY q.points DESC\r\n"
+	            + "LIMIT :limit";
+
+	    Query query = session.createNativeQuery(sql);
+
+	    // Set parameters
+	    query.setParameterList("courseSessionIds", courseSessionIds);
+	    query.setParameterList("questionTypes", questionTypes);
+	    query.setParameterList("difficultyLevels", difficultyLevels);
+	    query.setParameter("limit", limit);
+
+	    // Execute query and map results
+	    List<Object[]> rawResults = query.getResultList();
+	    List<RDQuizQuestion> questions = new ArrayList<>();
+
+	    for (Object[] row : rawResults) {
+	        RDQuizQuestion question = new RDQuizQuestion();
+
+	        // Map each column to the corresponding field in RDQuizQuestion
+	        question.setQuestionId((Integer) row[0]);
+	        question.setAdditionalInfo((String) row[1]);
+	        question.setCorrectAnswer((String) row[2]);
+
+	        // Convert and set difficultyLevel (enum)
+	        if (row[3] != null) {
+	            String difficultyLevelString = row[3].toString();
+	            question.setDifficultyLevel(RDQuizQuestion.DifficultyLevel.valueOf(difficultyLevelString));
+	        }
+
+	        question.setExplanation((String) row[4]);
+	        question.setMaxMarks((Integer) row[5]);
+	        question.setPoints((Integer) row[6]);
+	        question.setQuestionText((String) row[7]);
+	        question.setQuestionType((String) row[8]);
+
+	        // Convert and set tierLevel (enum)
+	        if (row[9] != null) {
+	            String tierLevelString = row[9].toString();
+	            question.setTierLevel(RDQuizQuestion.TierLevel.valueOf(tierLevelString));
+	        }
+
+	        question.setTierOrder((Integer) row[10]);
+
+	        questions.add(question);
+	    }
+
+	    return questions;
+	}
+
+	
     
 }

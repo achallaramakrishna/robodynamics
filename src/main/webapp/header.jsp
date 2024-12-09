@@ -120,7 +120,7 @@
 
 <!-- Header Section -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <a class="navbar-brand" href="index.jsp">
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/">
         <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="Robo Dynamics Logo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,14 +128,12 @@
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses.jsp">Courses</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/projects/projects">Projects</a></li>
-            
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/subscription.jsp">Membership</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog.jsp">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/subscription">Membership</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog">Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact/contactus">Contact Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/aboutus.jsp">About Us</a></li>
         </ul>
     </div>
     <div class="header-buttons">

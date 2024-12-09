@@ -44,4 +44,8 @@ public interface RDQuizService {
     
     List<RDQuiz> searchQuizzes(String query);
 
+    
+    List<RDQuiz> findQuizzesByCreator(int userId); // Quizzes created by the user
+    
+    List<RDQuiz> findQuizzesForStudent(int studentId); // Quizzes visible to a student
 }

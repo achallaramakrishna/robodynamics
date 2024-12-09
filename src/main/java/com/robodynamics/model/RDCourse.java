@@ -15,6 +15,10 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.robodynamics.form.RDCourseForm;
 
+/**
+ * @author rama
+ *
+ */
 @Entity
 @Table(name = "rd_courses")
 public class RDCourse {
@@ -98,6 +102,9 @@ public class RDCourse {
     
     @Column(name = "is_featured", nullable = false)
     private boolean isFeatured;
+    
+    @Column(name = "promo_video_url") // Mapping the new column
+    private String promoVideoUrl;
 
 
     public boolean isFeatured() {
@@ -121,6 +128,10 @@ public class RDCourse {
     @Column(name = "category", nullable = true, length = 100)
     private String category;
 
+    
+    @Column(name = "reviews_count", nullable = true)
+    private int reviewsCount;
+    
     // Enum for GradeRange
     public enum GradeRange {
         LOWER_PRIMARY_1_3("Lower Primary (Grades 1-3)"),
@@ -189,9 +200,18 @@ public class RDCourse {
         this.courseCategory = courseCategory;
     }
 
+    
     // Getters and Setters
 
-    public int getCourseId() {
+    public int getReviewsCount() {
+		return reviewsCount;
+	}
+
+	public void setReviewsCount(int reviewsCount) {
+		this.reviewsCount = reviewsCount;
+	}
+
+	public int getCourseId() {
         return courseId;
     }
 
@@ -377,6 +397,16 @@ public class RDCourse {
 
 	public void setCourseAgeGroup(String courseAgeGroup) {
 		this.courseAgeGroup = courseAgeGroup;
+	}
+	
+	
+
+	public String getPromoVideoUrl() {
+		return promoVideoUrl;
+	}
+
+	public void setPromoVideoUrl(String promoVideoUrl) {
+		this.promoVideoUrl = promoVideoUrl;
 	}
 
 	@Override

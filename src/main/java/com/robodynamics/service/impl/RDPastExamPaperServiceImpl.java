@@ -87,7 +87,6 @@ public class RDPastExamPaperServiceImpl implements RDPastExamPaperService {
             	= courseSessionService.getCourseSessionBySessionIdAndCourseId(questionJson.getSessionId(), course.getCourseId());
             	
             	RDQuizQuestion quizQuestion = new RDQuizQuestion();
-            	quizQuestion.setQuestionNumber(questionJson.getQuestionNumber());
                 quizQuestion.setQuestionText(questionJson.getQuestionText());
                 quizQuestion.setQuestionType(questionJson.getQuestionType());
                 quizQuestion.setDifficultyLevel(RDQuizQuestion.DifficultyLevel.valueOf(questionJson.getDifficultyLevel()));

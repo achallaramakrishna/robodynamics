@@ -27,6 +27,7 @@
     <title>Quiz List</title>
 </head>
 <body>
+
 	<!-- Include header JSP -->
 	<jsp:include page="/header.jsp" />
 
@@ -52,6 +53,8 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:out value="${quizzes}" default="No quizzes found."/>
+						
 						<c:forEach var="quiz" items="${quizzes}">
 							<tr>
 								<td>${quiz.quizName}</td>

@@ -37,9 +37,47 @@
                 ${error}
             </div>
         </c:if>
+        
 
         <!-- Course, Session, Session Detail, and Association Type Dropdowns -->
         <form id="uploadJsonForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/quizquestions/uploadJson">
+           
+            <div class="form-group mb-3">
+			    <label for="associationType">Choose Association Type</label>
+			    <select id="associationType" name="associationType" class="form-control" required>
+			        <option value="">-- Select Association Type --</option>
+			        <option value="slide">Slide</option>
+			        <option value="quiz">Quiz</option>
+			        <option value="questionBank">Question Bank</option> <!-- Renamed Option -->
+			    </select>
+			</div>
+			
+			<!-- Sample JSON Button -->
+            <div class="form-group mb-3">
+                <button type="button" class="btn btn-info" id="showSampleJson">Show Sample JSON</button>
+            </div>
+
+            <!-- Modal for Sample JSON -->
+            <div class="modal fade" id="sampleJsonModal" tabindex="-1" aria-labelledby="sampleJsonLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="sampleJsonLabel">Sample JSON</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <pre id="jsonPreview" style="background-color: #f8f9fa; padding: 10px; border: 1px solid #ddd; border-radius: 5px; white-space: pre-wrap;">
+                            </pre>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="copyJsonToClipboard">Copy to Clipboard</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Course Dropdown -->
             <div class="form-group mb-3">
                 <label for="course">Select Course</label>
                 <select id="course" name="courseId" class="form-control" required>
@@ -64,16 +102,7 @@
                 </select>
             </div>
 
-            <div class="form-group mb-3">
-                <label for="associationType">Choose Association Type</label>
-                <select id="associationType" name="associationType" class="form-control" required>
-                    <option value="">-- Select Association Type --</option>
-                    <option value="slide">Slide</option>
-                    <option value="quiz">Quiz</option>
-                </select>
-            </div>
-
-            <div class="form-group mb-3" id="quizSelection" style="display: none;">
+			<div class="form-group mb-3" id="quizSelection" style="display: none;">
                 <label for="quiz">Select Quiz</label>
                 <select id="quiz" name="quizId" class="form-control">
                     <option value="">-- Select Quiz --</option>
@@ -82,11 +111,14 @@
                     </c:forEach>
                 </select>
             </div>
-
+				
             <!-- Upload JSON Form -->
             <div class="form-group mb-3">
                 <label for="jsonFile" class="form-label">Upload JSON File</label>
                 <input type="file" id="jsonFile" name="file" class="form-control" accept=".json" required />
+                <!-- Hidden Field for course_session_id -->
+				<input type="hidden" id="courseSessionId" name="courseSessionId" value="">
+		
             	<input type="hidden" id="courseSessionDetailId" name="courseSessionDetailId" value="">
             	
             </div>
@@ -223,6 +255,84 @@
     <script>
         $(document).ready(function () {
             // Load Course Sessions when Course is selected
+            
+            const sampleJson = {
+                slide: {
+                    questions: [
+                        {
+                            question_text: "What is 2 + 2?",
+                            question_type: "multiple_choice",
+                            correct_answer: "4",
+                            difficulty_level: "Easy",
+                            points: 2,
+                            max_marks: 1,
+                            options: [
+                                { option_text: "3", is_correct: false },
+                                { option_text: "4", is_correct: true }
+                            ]
+                        }
+                    ]
+                },
+                quiz: {
+                    questions: [
+                        {
+                            question_text: "What is the capital of France?",
+                            question_type: "multiple_choice",
+                            correct_answer: "Paris",
+                            difficulty_level: "Medium",
+                            points: 3,
+                            max_marks: 2,
+                            options: [
+                                { option_text: "Berlin", is_correct: false },
+                                { option_text: "Paris", is_correct: true }
+                            ]
+                        }
+                    ]
+                },
+                questionBank: {
+                    questions: [
+                        {
+                            question_text: "Explain Newton's first law.",
+                            question_type: "short_answer",
+                            correct_answer: "Law of inertia",
+                            difficulty_level: "Hard",
+                            points: 10,
+                            max_marks: 5
+                        }
+                    ]
+                }
+            };
+
+            $('#showSampleJson').click(function () {
+                const selectedType = $('#associationType').val();
+                if (selectedType && sampleJson[selectedType]) {
+                    $('#jsonPreview').text(JSON.stringify(sampleJson[selectedType], null, 4));
+                    $('#sampleJsonModal').modal('show');
+                } else {
+                    alert('Please select an association type to view the sample JSON.');
+                }
+            });
+
+            $('#copyJsonToClipboard').click(function () {
+                const jsonText = $('#jsonPreview').text();
+                navigator.clipboard.writeText(jsonText).then(() => {
+                    alert('Sample JSON copied to clipboard!');
+                }).catch(err => {
+                    console.error('Error copying JSON:', err);
+                });
+            });
+
+            
+            $('#associationType').change(function () {
+			    let selectedType = $(this).val();
+			    if (selectedType === 'quiz') {
+			        $('#quizSelection').show(); // Show quiz dropdown only for quiz type
+			    } else {
+			        $('#quizSelection').hide(); // Hide quiz dropdown for all other types
+			    }
+			});
+			
+			            
             $('#course').change(function () {
                 let courseId = $(this).val();
                 if (courseId) {
@@ -244,6 +354,8 @@
             $('#session').change(function () {
                 let sessionId = $(this).val();
                 if (sessionId) {
+                    $('#courseSessionId').val(sessionId); // Set the hidden courseSessionId
+
                     $.getJSON('${pageContext.request.contextPath}/quizquestions/getCourseSessionDetails', {sessionId: sessionId}, function (data) {
                         let sessionDetailOptions = '<option value="">-- Select Session Detail --</option>';
                         $.each(data.sessionDetails, function (index, detail) {
@@ -252,6 +364,8 @@
                         $('#sessionDetail').html(sessionDetailOptions).prop('disabled', false);
                     });
                 } else {
+                    $('#courseSessionId').val(''); // Clear the hidden field if no session is selected
+
                     $('#sessionDetail').html('<option value="">-- Select Session Detail --</option>').prop('disabled', true);
                     $('#uploadJsonForm').hide();
                 }
@@ -268,12 +382,25 @@
             // Show/Hide Quiz selection based on Association Type
             $('#associationType').change(function () {
                 let selectedType = $(this).val();
-                if (selectedType === 'quiz') {
-                    $('#quizSelection').show();
+                if (selectedType === 'questionBank') {
+                    // Hide the Session Detail dropdown for Question Bank
+                    $('#sessionDetail').closest('.form-group').hide();
+                    $('#sessionDetail').prop('required', false); // Remove required
+
                 } else {
-                    $('#quizSelection').hide();
+                    // Show the Session Detail dropdown for other types
+                    $('#sessionDetail').closest('.form-group').show();
+                    $('#sessionDetail').prop('required', true); // Reapply required
+
                 }
-            });
+
+                if (selectedType === 'quiz') {
+                    $('#quizSelection').show(); // Show quiz dropdown for quiz type
+                } else {
+                    $('#quizSelection').hide(); // Hide quiz dropdown for other types
+                }
+            }).trigger('change'); // Trigger change on page load to initialize the state
+
         });
     </script>
 </body>

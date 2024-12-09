@@ -13,18 +13,11 @@ public class QuestionJson {
     private String correctAnswer;
     private String explanation;
     private int sessionId;
-    private int questionNumber;
     
     private List<OptionJson> options;
     
     
     
-	public int getQuestionNumber() {
-		return questionNumber;
-	}
-	public void setQuestionNumber(int questionNumber) {
-		this.questionNumber = questionNumber;
-	}
 	public int getSessionId() {
 		return sessionId;
 	}

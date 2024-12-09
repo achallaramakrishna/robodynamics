@@ -26,7 +26,7 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
+	<%@ include file="/header.jsp"%>
 	<br>
 	<br>
 	<br>
@@ -103,5 +103,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/footer.jsp"%>
+	
 </body>
 </html>

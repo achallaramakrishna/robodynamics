@@ -2,10 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE html>
 <html>
 <head>
-<%@ page isELIgnored="false"%>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Dashboard</title>
@@ -14,16 +13,69 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
           crossorigin="anonymous">
-    
+
     <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMQ/nyM1Gp6UN1siT50RV5wAXRXTz1ovYF55Q7" crossorigin="anonymous" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMQ/nyM1Gp6UN1siT50RV5wAXRXTz1ovYF55Q7" crossorigin="anonymous" />
+
     <!-- Custom CSS -->
     <style>
-        .progress-status {
-            font-size: 18px;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
             color: #555;
-            margin-left: 10px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary, .btn-success {
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+
+        .btn-primary:hover, .btn-success:hover {
+            background-color: #0056b3;
+        }
+
+        .container-fluid {
+            padding-top: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .progress-status {
+            font-size: 16px;
+            color: #007BFF;
+        }
+
+        .pagination-wrapper {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007BFF;
+            border-color: #007BFF;
         }
 
         .floating-help-btn {
@@ -40,115 +92,132 @@
             cursor: pointer;
             z-index: 1000;
         }
-
-        .floating-help-btn img {
-            width: 40px;
-            height: 40px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/dashboard">Robo Dynamics</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <span class="nav-link progress-status">Progress: ${courseProgress}%</span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/help"><i class="fas fa-question-circle"></i> Help</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </li>
-                </ul>
+    <!-- Header -->
+    <jsp:include page="/header.jsp" />
+    <!-- Main Dashboard -->
+<div class="container mt-5">
+    <h2 class="section-title text-center">Welcome back, ${studentName}!</h2>
+
+    <div class="row mt-4">
+        <!-- Enrolled Courses Section -->
+        <div class="col-lg-6 mb-4">
+            <h3>My Courses</h3>
+            <div class="row">
+                <c:forEach var="tempStudentEnrollment" items="${studentEnrollments}">
+                    <div class="col-md-6 mb-4"> <!-- Adjusted to show 2 courses side by side -->
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">${tempStudentEnrollment.courseOffering.course.courseName}</h5>
+                                <div class="progress my-3">
+                                    <div class="progress-bar" role="progressbar"
+                                         style="width: ${tempStudentEnrollment.progress}%"
+                                         aria-valuenow="${tempStudentEnrollment.progress}"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        ${tempStudentEnrollment.progress}%
+                                    </div>
+                                </div>
+                                <a href="${pageContext.request.contextPath}/course/monitor?courseId=${tempStudentEnrollment.courseOffering.course.courseId}&enrollmentId=${tempStudentEnrollment.enrollmentId}"
+                                   class="btn btn-primary btn-sm">Continue Learning</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
-    </nav>
 
-    <!-- Main Learning Area -->
-    <div class="container mt-5">
-        <div class="row">
-            <!-- Welcome Message and Progress -->
-<!-- Enrolled Courses Section -->
-<div class="col-md-12 mb-4 text-center">
-    <h2>Welcome back, ${studentName}!</h2>
-    <p>Here are the courses you're currently enrolled in:</p>
-
-    <div class="row">
-        <!-- Loop through the list of student enrollments and display them as cards -->
-        <c:forEach var="tempStudentEnrollment" items="${studentEnrollments}">
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">${tempStudentEnrollment.courseOffering.course.courseName}</h5>
-                        <p class="card-text"><strong>Course Offering Name:</strong> ${tempStudentEnrollment.courseOffering.courseOfferingName}</p>
-                        <p class="card-text"><strong>Instructor:</strong> ${tempStudentEnrollment.courseOffering.instructor.firstName} ${tempStudentEnrollment.courseOffering.instructor.lastName}</p>
-                        <p class="card-text"><strong>Student:</strong> ${tempStudentEnrollment.student.firstName} ${tempStudentEnrollment.student.lastName}</p>
-                        <p class="card-text"><strong>Course Dates:</strong> ${tempStudentEnrollment.courseOffering.startDate} to ${tempStudentEnrollment.courseOffering.endDate}</p>
-                        
-                        <!-- Progress info -->
-                        <p class="card-text"><strong>Progress:</strong> ${tempStudentEnrollment.progress}%</p>
-                        
-                        <!-- Continue Learning Button -->
-                        <a href="${pageContext.request.contextPath}/course/monitor?courseId=${tempStudentEnrollment.courseOffering.course.courseId}&enrollmentId=${tempStudentEnrollment.enrollmentId}" class="btn btn-primary mb-2">Start Session</a>
-                        
+        <!-- Tests Section -->
+        <div class="col-lg-6 mb-4">
+            <h3>My Tests</h3>
+            <!-- Search and Filter -->
+            <form class="mb-3" method="get" action="/dashboard/tests">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="search" class="form-control" placeholder="Search tests..." value="${searchQuery}">
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary w-100">Search</button>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
-    </div>
-</div>
+            </form>
 
+            <!-- Tests Table -->
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Test Name</th>
+                        <th>Course</th>
+                        <th>Total Questions</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="test" items="${tests}" varStatus="status">
+                        <tr>
+                            <td>${status.count}</td>
+                            <td>${test.quizName}</td>
+                            <td>${test.course.courseName}</td>
+                            <td>${test.totalQuestions}</td>
+                            <td>${test.durationMinutes} mins</td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/quizzes/start/${test.quizId}?showHeaderFooter=true"
+                                   class="btn btn-success btn-sm">
+                                    <i class="fas fa-play-circle"></i> Take Test
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${tests == null || tests.isEmpty()}">
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No tests available.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
 
-            <!-- Upcoming Lessons and Quizzes -->
-            <div class="col-md-12 mb-4">
-                <h3>Upcoming Lessons</h3>
-                <ul class="list-group">
-                    <c:forEach var="lesson" items="${upcomingLessons}">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            ${lesson.name}
-                            <a href="/lesson/${lesson.id}" class="btn btn-sm btn-primary">Start</a>
+            <!-- Pagination -->
+            <div class="pagination-wrapper">
+                <ul class="pagination justify-content-center">
+                    <c:forEach var="i" begin="1" end="${totalPages}">
+                        <li class="page-item ${i == currentPage ? 'active' : ''}">
+                            <a class="page-link" href="?page=${i}">${i}</a>
                         </li>
                     </c:forEach>
                 </ul>
             </div>
+        </div>
+    </div>
 
-            <!-- Achievements and Badges -->
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Your Achievements</h5>
-                        <p class="card-text">You've earned ${totalBadges} badges!</p>
-                        <a href="/badges" class="btn btn-outline-primary">View All Badges</a>
-                    </div>
+    <!-- Achievements and Quick Practice Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Your Achievements</h5>
+                    <p class="card-text">You've earned <strong>${totalBadges}</strong> badges!</p>
+                    <a href="/badges" class="btn btn-outline-primary">View All Badges</a>
                 </div>
             </div>
-
-            <!-- Flashcards or Practice Problems -->
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Quick Practice</h5>
-                        <p class="card-text">Try out some practice problems to refresh your memory.</p>
-                        <a href="/practice" class="btn btn-outline-primary">Start Practicing</a>
-                    </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Practice</h5>
+                    <p class="card-text">Solve practice problems to improve your skills.</p>
+                    <a href="/practice" class="btn btn-outline-primary">Start Practicing</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Floating Help Button for AI Guru -->
+
+    <!-- Floating Help Button -->
     <button class="floating-help-btn" id="help-btn">
         <i class="fas fa-life-ring"></i>
     </button>
@@ -158,17 +227,7 @@
             alert("AI Guru is here to help!");
         });
     </script>
-
-    <!-- Include footer JSP -->
-    <jsp:include page="footer.jsp" />
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-            integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-            integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
-            crossorigin="anonymous"></script>
-
+     <!-- Footer -->
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

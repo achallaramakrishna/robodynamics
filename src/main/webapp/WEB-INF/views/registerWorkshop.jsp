@@ -30,7 +30,6 @@
 	<jsp:include page="header.jsp" />
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="/WEB-INF/views/leftnav.jsp"%>
 <div class="container mt-5">
   <h2 class="text-center">Register for ${workshop.name}</h2>
   <f:form action="${pageContext.request.contextPath}/workshops/${workshop.workshopId}/register" method="post" modelAttribute="registration" class="mt-4">

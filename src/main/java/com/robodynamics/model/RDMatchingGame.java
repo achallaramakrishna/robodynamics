@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "rd_matching_games")
 public class RDMatchingGame {
@@ -11,7 +13,7 @@ public class RDMatchingGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "game_id")
-    private Long gameId;
+    private int gameId;
 
     @Column(name = "name")
     private String name;
@@ -19,22 +21,27 @@ public class RDMatchingGame {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<RDMatchingCategory> categories;
+
+    @OneToOne
+    @JoinColumn(name = "course_session_detail_id")
+    private RDCourseSessionDetail courseSessionDetail;
 
     public RDMatchingGame() {}
 
-    public RDMatchingGame(Long gameId, String name, String description) {
+    public RDMatchingGame(int gameId, String name, String description) {
         this.gameId = gameId;
         this.name = name;
         this.description = description;
     }
 
-    public Long getGameId() {
+    public int getGameId() {
         return gameId;
     }
 
-    public void setGameId(Long gameId) {
+    public void setGameId(int gameId) {
         this.gameId = gameId;
     }
 
@@ -61,8 +68,16 @@ public class RDMatchingGame {
     public void setCategories(List<RDMatchingCategory> categories) {
         this.categories = categories;
     }
+    
+    public RDCourseSessionDetail getCourseSessionDetail() {
+		return courseSessionDetail;
+	}
 
-    @Override
+	public void setCourseSessionDetail(RDCourseSessionDetail courseSessionDetail) {
+		this.courseSessionDetail = courseSessionDetail;
+	}
+
+	@Override
     public String toString() {
         return "RDMatchingGame [gameId=" + gameId + ", name=" + name + ", description=" + description + "]";
     }

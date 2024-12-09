@@ -167,6 +167,7 @@ public class RDCourseController {
 	        }
 	    }
 	    // Save the course
+	    theCourse.setFeatured(true);
  	    service.saveRDCourse(theCourse);
 	    return "redirect:/course/list";
 	}

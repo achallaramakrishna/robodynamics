@@ -3,6 +3,8 @@ package com.robodynamics.model;
 import java.util.Objects;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "rd_matching_items")
 public class RDMatchingItem {
@@ -10,42 +12,38 @@ public class RDMatchingItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private Long itemId;
-
-    @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    private RDMatchingGame game;
+    private int itemId;
 
     @Column(name = "item_name")
     private String itemName;
+    
+    @Column(name = "matching_text", nullable = true)
+    private String matchingText; // Ensure this field exists
+    
+    @Column(name = "image_name", nullable = true)
+    private String imageName; // For item images
 
-    @ManyToOne
+    
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "correct_category_id", nullable = false)
+    @JsonBackReference
     private RDMatchingCategory category;
 
     public RDMatchingItem() {}
 
-    public RDMatchingItem(Long itemId, RDMatchingGame game, String itemName, RDMatchingCategory category) {
+    public RDMatchingItem(int itemId, String itemName, RDMatchingCategory category) {
         this.itemId = itemId;
-        this.game = game;
         this.itemName = itemName;
         this.category = category;
     }
 
-    public Long getItemId() {
+    public int getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(int itemId) {
         this.itemId = itemId;
-    }
-
-    public RDMatchingGame getGame() {
-        return game;
-    }
-
-    public void setGame(RDMatchingGame game) {
-        this.game = game;
     }
 
     public String getItemName() {
@@ -65,11 +63,25 @@ public class RDMatchingItem {
     }
 
     @Override
-    public String toString() {
-        return "RDMatchingItem [itemId=" + itemId + ", itemName=" + itemName + "]";
-    }
+	public String toString() {
+		return "RDMatchingItem [itemId=" + itemId + ", itemName=" + itemName + ", matchingText=" + matchingText
+				+ ", imageName=" + imageName + ",  category=" + category
+				+ "]";
+	}
+    
+    
 
-    @Override
+    public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof RDMatchingItem)) return false;
@@ -81,4 +93,14 @@ public class RDMatchingItem {
     public int hashCode() {
         return Objects.hash(itemId, itemName);
     }
+
+	public String getMatchingText() {
+		return matchingText;
+	}
+
+	public void setMatchingText(String matchingText) {
+		this.matchingText = matchingText;
+	}
+    
+    
 }

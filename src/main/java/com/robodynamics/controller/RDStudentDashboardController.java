@@ -1,6 +1,7 @@
 package com.robodynamics.controller;
 
 import com.robodynamics.model.RDBadge;
+import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDStudentEnrollment;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.model.RDUserBadge;
@@ -11,6 +12,7 @@ import com.robodynamics.service.RDBadgeService;
 import com.robodynamics.service.RDCourseOfferingService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.service.RDQuizService;
 import com.robodynamics.service.RDStudentEnrollmentService;
 import com.robodynamics.service.RDStudentSessionProgressService;
 import com.robodynamics.service.RDUserBadgeService;
@@ -41,6 +43,9 @@ public class RDStudentDashboardController {
 
 	@Autowired
 	private RDStudentEnrollmentService studentEnrollmentService;
+	
+	@Autowired
+	private RDQuizService quizService;
 
 
 
@@ -75,6 +80,12 @@ public class RDStudentDashboardController {
     	    // Fetch the quiz results for the user
     	    List<RDUserQuizResults> quizResults = quizResultService.findByUserId(rdUser.getUserID());
 
+    	    // Fetch tests allocated to the student
+    	    List<RDQuiz> tests = quizService.findQuizzesForStudent(rdUser.getUserID());
+    	    
+    	    System.out.println("Tests - " + tests);
+    	    m.addAttribute("tests", tests);
+    	    
     	    // Add data to the model
     	    m.addAttribute("totalQuizzes", totalQuizzes);
     	    m.addAttribute("totalPoints", totalPoints);

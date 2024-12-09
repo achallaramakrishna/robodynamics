@@ -1,9 +1,13 @@
 package com.robodynamics.controller;
 
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDLearningPath;
+import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.model.RDUserQuizResults;
 import com.robodynamics.service.RDCourseService;
+import com.robodynamics.service.RDLearningPathService;
+import com.robodynamics.service.RDQuizService;
 import com.robodynamics.service.RDUserQuizResultService;
 import com.robodynamics.service.RDUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +24,18 @@ public class RDParentDashboardController {
     @Autowired
     private RDUserService userService;
     
+    @Autowired
+    private RDQuizService quizService;
+    
     
     @Autowired
     private RDCourseService courseService;
 
     @Autowired
     private RDUserQuizResultService quizResultService;
+    
+    @Autowired
+    private RDLearningPathService learningPathService;
 
     @GetMapping("/parentDashboard")
     public String showParentDashboard(Model model, HttpSession session) {
@@ -39,6 +49,14 @@ public class RDParentDashboardController {
             // Fetch quiz results for children
             List<RDUserQuizResults> quizResults = quizResultService.findByUserId(currentUser.getUserID());
 
+            List<RDQuiz> createdTests = quizService.findQuizzesByCreator(currentUser.getUserID());
+            List<RDLearningPath> learningPaths = learningPathService.findPathsByParent(currentUser.getUserID());
+            
+            System.out.println("Created tests - " + createdTests);
+            model.addAttribute("createdTests", createdTests);
+            model.addAttribute("learningPaths", learningPaths);
+
+            
             // Add data to model
             
             List<RDCourse> availableCourses = courseService.getRDCourses();
@@ -47,6 +65,7 @@ public class RDParentDashboardController {
     	    // Add the list of available courses to the model
     	    model.addAttribute("availableCourses", availableCourses);
 
+    	    
     	    
             model.addAttribute("children", children);
             model.addAttribute("quizResults", quizResults);

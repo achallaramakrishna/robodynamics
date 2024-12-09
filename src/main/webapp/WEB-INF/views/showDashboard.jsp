@@ -109,6 +109,7 @@
         document.getElementById('course-fib').style.display = 'none';
         document.getElementById('course-flashcard').style.display = 'none';
         document.getElementById('course-assignment').style.display = 'none';
+        document.getElementById('course-matching-game').style.display = 'none';
 
         if (contentType === 'video') {
             document.getElementById('course-video').style.display = 'block';
@@ -129,6 +130,9 @@
         } else if (contentType === 'assignment') {
             document.getElementById('course-assignment').style.display = 'block';
             document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;
+        } else if (contentType === 'matching-game') {
+            document.getElementById('course-matching-game').style.display = 'block';
+            document.getElementById('course-matching-game').src = `${pageContext.request.contextPath}/matching-game/start/` + id;
         } 
     }
 
@@ -220,6 +224,8 @@
                 <iframe id="course-fib" style="display: none; width: 100%; height: 800px;" src=""></iframe>
                 <iframe id="course-flashcard" style="display: none; width: 100%; height: 800px;" src=""></iframe>
                 <iframe id="course-assignment" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                <iframe id="course-matching-game" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                
             </div>
         </div>
     </div>

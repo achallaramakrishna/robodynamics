@@ -42,4 +42,16 @@ public interface RDQuizQuestionDao {
     
     List<RDQuizQuestion> findByTierLevelOrderedByTierOrder(RDQuizQuestion.TierLevel tierLevel);
 
+
+	List<RDQuizQuestion> findQuestionsByQuizId(int quizId);
+
+
+   // List<RDQuizQuestion> findQuestionsByCriteria(Integer courseId, Integer courseSessionId, List<String> questionTypes, List<String> difficultyLevels, int limit);
+	List<RDQuizQuestion> findQuestionsByCriteria(
+	        Integer courseId, 
+	        List<Integer> courseSessionIds, 
+	        List<String> questionTypes, 
+	        List<String> difficultyLevels, 
+	        int limit);
+    
 }

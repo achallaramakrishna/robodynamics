@@ -5,11 +5,15 @@ import java.util.List;
 
 public interface RDMatchingItemDao {
 
-    RDMatchingItem getItemById(Long itemId);
+    RDMatchingItem getItemById(int itemId);
 
-    List<RDMatchingItem> getItemsByCategoryId(Long categoryId);
+    List<RDMatchingItem> getItemsByCategoryId(int categoryId);
 
-    List<RDMatchingItem> getItemsByGameId(Long gameId);
+    List<RDMatchingItem> getItemsByGameId(int gameId);
 
     void saveItem(RDMatchingItem item);
+
+	void deleteItem(int itemId);
+
+	void updateItem(RDMatchingItem item);
 }

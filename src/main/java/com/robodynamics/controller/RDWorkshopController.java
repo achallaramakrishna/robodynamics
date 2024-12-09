@@ -1,11 +1,14 @@
 package com.robodynamics.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.robodynamics.service.RDRegistrationService;
-import com.robodynamics.service.RDWorkshopService;
-import com.robodynamics.model.RDAssetCategory;
 import com.robodynamics.model.RDRegistration;
 import com.robodynamics.model.RDWorkshop;
+import com.robodynamics.service.RDRegistrationService;
+import com.robodynamics.service.RDWorkshopService;
 
 @Controller
 @RequestMapping("/workshops")
@@ -29,124 +32,116 @@ public class RDWorkshopController {
 
     @Autowired
     private RDWorkshopService workshopService;
-    
+
     @Autowired
     private RDRegistrationService registrationService;
 
-	@GetMapping("/list")
+    private static final String UPLOAD_DIR = "uploads/";
+
+    // Display all workshops
+    @GetMapping("/list")
     public String listWorkshops(Model model) {
         List<RDWorkshop> workshops = workshopService.getRDWorkshops();
         model.addAttribute("workshops", workshops);
         return "listWorkshops";
     }
 
-	/*
-	 * @GetMapping("/createWorkshop") public ModelAndView home(Model m) {
-	 * RDAssetCategory assetCategory = new RDAssetCategory();
-	 * m.addAttribute("assetCategory", assetCategory); ModelAndView modelAndView =
-	 * new ModelAndView("assetcategory-form"); return modelAndView; }
-	 */
-    
+    // Display the form to create or edit a workshop
     @GetMapping("/showForm")
-    public ModelAndView createWorkshopForm(Model model) {
-    	RDWorkshop workshop = new RDWorkshop();
-        model.addAttribute("workshop", new RDWorkshop());
-        ModelAndView modelAndView = new ModelAndView("workshop-form");
-		return modelAndView;
-        
-    }
-
-    
-    @PostMapping("/saveWorkshop")
-    public String saveWorkshop(@ModelAttribute("workshop") RDWorkshop workshop) {
-    	workshop.setDate(new Date());
-        workshopService.saveRDWorkshop(workshop);
-        return "redirect:/workshops/list";
-    }
-    
-    @GetMapping("/updateForm")
-    public ModelAndView editWorkshop(@RequestParam("workshopId") int workshopId,
-    Model theModel) {
-    	RDWorkshop workshop = workshopService.getRDWorkshop(workshopId);
-        theModel.addAttribute("workshop", workshop);
-        ModelAndView modelAndView = new ModelAndView("workshop-form");
-		return modelAndView;
-    }
-    
-    @GetMapping("/delete")
-    public String deleteWorkshop(@RequestParam("workshopId") int theId) {
-    	workshopService.deleteRDWorkshop(theId);
-        return "redirect:/workshops/list";
-    }
-    @GetMapping("/registerForm")
-    public ModelAndView registerForm(@RequestParam("workshopId") int theId, Model model) {
-        RDWorkshop workshop = workshopService.getRDWorkshop(theId);
+    public ModelAndView workshopForm(@RequestParam(value = "workshopId", required = false) Integer workshopId, Model model) {
+        RDWorkshop workshop = (workshopId != null) ? workshopService.getRDWorkshop(workshopId) : new RDWorkshop();
         model.addAttribute("workshop", workshop);
-        System.out.println(workshop);
-        model.addAttribute("registration", new RDRegistration());
-        ModelAndView modelAndView = new ModelAndView("registerWorkshop");
-		return modelAndView;
+        return new ModelAndView("workshop-form");
     }
-   
-	/*
-	 * public String registerForm(@PathVariable int id, Model model) { RDWorkshop
-	 * workshop = workshopService.getRDWorkshop(id); model.addAttribute("workshop",
-	 * workshop); System.out.println(workshop); model.addAttribute("registration",
-	 * new RDRegistration()); return "registerWorkshop"; }
-	 */
-    
 
+    // Save or update a workshop with file uploads
+    @PostMapping("/save")
+    public String saveWorkshop(
+            @ModelAttribute("workshop") RDWorkshop workshop,
+            @RequestParam("flyerImageFile") MultipartFile flyerImageFile,
+            @RequestParam("courseContentsPdfFile") MultipartFile courseContentsPdfFile) {
+        try {
+            // Save flyer image file
+            if (!flyerImageFile.isEmpty()) {
+                String flyerImagePath = saveFile(flyerImageFile, "flyers/");
+                workshop.setFlyerImage(flyerImagePath);
+            }
+
+            // Save course contents PDF file
+            if (!courseContentsPdfFile.isEmpty()) {
+                String pdfPath = saveFile(courseContentsPdfFile, "pdfs/");
+                workshop.setCourseContentsPdf(pdfPath);
+            }
+
+            if (workshop.getWorkshopId() == 0) { // New workshop
+                workshop.setCreatedAt(new Date());
+            }
+            workshop.setUpdatedAt(new Date());
+            workshopService.saveRDWorkshop(workshop);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/workshops/error";
+        }
+        return "redirect:/workshops/list";
+    }
+
+    // Delete a workshop
+    @GetMapping("/delete")
+    public String deleteWorkshop(@RequestParam("workshopId") int workshopId) {
+        workshopService.deleteRDWorkshop(workshopId);
+        return "redirect:/workshops/list";
+    }
+
+    // Show the registration form for a specific workshop
+    @GetMapping("/{id}/register")
+    public ModelAndView showRegistrationForm(@PathVariable("id") int workshopId, Model model) {
+        RDWorkshop workshop = workshopService.getRDWorkshop(workshopId);
+        if (workshop == null) {
+            return new ModelAndView("error", "message", "Workshop not found.");
+        }
+        model.addAttribute("workshop", workshop);
+        model.addAttribute("registration", new RDRegistration());
+        return new ModelAndView("registerWorkshop");
+    }
+
+    // Handle registration submission for a specific workshop
     @PostMapping("/{id}/register")
-    public String saveRegistration(@PathVariable int id, 
-    		@ModelAttribute RDRegistration registration, Model model) {
-        RDWorkshop workshop = workshopService.getRDWorkshop(id);
+    public String saveRegistration(@PathVariable("id") int workshopId, @ModelAttribute RDRegistration registration, Model model) {
+        RDWorkshop workshop = workshopService.getRDWorkshop(workshopId);
+        if (workshop == null) {
+            model.addAttribute("message", "Workshop not found.");
+            return "error";
+        }
         registration.setWorkshop(workshop);
         registrationService.saveRDRegistration(registration);
-        
-        model.addAttribute("workshop",workshop);
-        model.addAttribute("registration",registration);
-        
-        
+        model.addAttribute("workshop", workshop);
         return "thankYouRegisterWorkshop";
     }
 
-	/*
-	 * @PostMapping("/{id}/register") public String saveRegistration(@PathVariable
-	 * int id,
-	 * 
-	 * @ModelAttribute RDRegistration registration, Model model) { RDWorkshop
-	 * workshop = workshopService.getRDWorkshop(id);
-	 * registration.setWorkshop(workshop);
-	 * registrationService.saveRDRegistration(registration);
-	 * 
-	 * model.addAttribute("workshop",workshop);
-	 * 
-	 * return "redirect:/workshops/" + id + "/registrations"; }
-	 */   
-    
+    // View registrations for a specific workshop
     @GetMapping("/{id}/registrations")
-    public String viewRegistrations(@PathVariable int id, Model model) {
-        RDWorkshop workshop = workshopService.getRDWorkshop(id);
-	    List<RDRegistration> registrations = registrationService.getRDRegistration(workshop);
+    public String viewRegistrations(@PathVariable("id") int workshopId, Model model) {
+        RDWorkshop workshop = workshopService.getRDWorkshop(workshopId);
+        if (workshop == null) {
+            model.addAttribute("message", "Workshop not found.");
+            return "error";
+        }
+        List<RDRegistration> registrations = registrationService.getRDRegistration(workshop);
         model.addAttribute("workshop", workshop);
         model.addAttribute("registrations", registrations);
         return "registrations";
     }
-    
-    @PostMapping("/registerWorkshop")
-    public ModelAndView registerWorkshop(HttpServletRequest request, HttpServletResponse response) {
-        // Retrieve form data from request object
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String age = request.getParameter("age");
-        String workshop = request.getParameter("workshop");
 
-        // Process the registration (e.g., save to database)
-
-        // Redirect to thank you page
-        ModelAndView modelAndView = new ModelAndView("thankYou");
-        modelAndView.addObject("name", name);
-        return modelAndView;
+    // Save a file to the server
+    private String saveFile(MultipartFile file, String subDirectory) throws IOException {
+        String uploadPath = UPLOAD_DIR + subDirectory;
+        Path uploadDir = Paths.get(uploadPath);
+        if (!Files.exists(uploadDir)) {
+            Files.createDirectories(uploadDir);
+        }
+        String fileName = file.getOriginalFilename();
+        Path filePath = uploadDir.resolve(fileName);
+        Files.copy(file.getInputStream(), filePath);
+        return uploadPath + fileName;
     }
 }

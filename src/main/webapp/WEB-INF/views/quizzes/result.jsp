@@ -25,6 +25,9 @@
     <title>Quiz Result</title>
  </head>
 <body class="container">
+ <!-- Header -->
+    <jsp:include page="/header.jsp" />
+
 
     <h2 class="mt-5">Quiz Result</h2>
 
@@ -46,6 +49,8 @@
     <div class="mt-4">
         <h4>Total Points: ${pointsEarned}</h4>
     </div>
+ <!-- Footer -->
+    <jsp:include page="/footer.jsp" />
 
 </body>
 </html>

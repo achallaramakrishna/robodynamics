@@ -150,25 +150,33 @@ public class RDQuizQuestionController {
     }
     
     @PostMapping("/uploadJson")
-    public String uploadQuestions(@RequestParam("file") MultipartFile file,
-                                  @RequestParam("courseSessionDetailId") int courseSessionDetailId,
-                                  @RequestParam("associationType") String associationType,
-                                  @RequestParam(value = "slideId", required = false) Integer slideId,
-                                  @RequestParam(value = "quizId", required = false) Integer quizId,
-                                  RedirectAttributes redirectAttributes) {
+    public String uploadQuestions(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(value = "courseSessionId", required = false) Integer courseSessionId,
+            @RequestParam(value = "courseSessionDetailId", required = false) Integer courseSessionDetailId,
+            @RequestParam("associationType") String associationType,
+            @RequestParam(value = "slideId", required = false) Integer slideId,
+            @RequestParam(value = "quizId", required = false) Integer quizId,
+            RedirectAttributes redirectAttributes) {
+
         // Step 1: Validate if the file is empty
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Please select a JSON file to upload.");
             return "redirect:/quizquestions/listQuizQuestions";
         }
-        System.out.println("hello ...1");
+
         try {
             // Step 2: Parse and process the JSON file
             ObjectMapper objectMapper = new ObjectMapper();
             RDQuizQuestionUploadDTO questionUploadDTO = objectMapper.readValue(file.getInputStream(), RDQuizQuestionUploadDTO.class);
-            System.out.println("hello ...2");
 
-            // Step 3: Loop through each question and save it
+            // Validate courseSessionId for questionBank
+            if ("questionBank".equalsIgnoreCase(associationType) && courseSessionId == null) {
+                redirectAttributes.addFlashAttribute("error", "Course session ID is required for Question Bank.");
+                return "redirect:/quizquestions/listQuizQuestions";
+            }
+
+            // Loop through each question in the JSON
             for (RDQuizQuestionDTO questionDTO : questionUploadDTO.getQuestions()) {
                 RDQuizQuestion question = new RDQuizQuestion();
                 question.setQuestionText(questionDTO.getQuestionText());
@@ -178,54 +186,39 @@ public class RDQuizQuestionController {
                 question.setMaxMarks(questionDTO.getMaxMarks());
                 question.setAdditionalInfo(questionDTO.getAdditionalInfo());
                 question.setPoints(questionDTO.getPoints());
-                question.setQuestionNumber(questionDTO.getQuestionNumber());
-                System.out.println("hello ...3");
 
-             // Assuming quizQuestionDto.getTierLevel() returns a string, like "BEGINNER", "INTERMEDIATE", or "ADVANCED"
+                // Set tier level if provided
                 String tierLevelString = questionDTO.getTierLevel();
-
-                // Convert the string to TierLevel enum and set it
                 if (tierLevelString != null) {
-                	question.setTierLevel(RDQuizQuestion.TierLevel.valueOf(tierLevelString.toUpperCase()));
-                } else {
-                	question.setTierLevel(null); // Handle null case if needed
+                    question.setTierLevel(RDQuizQuestion.TierLevel.valueOf(tierLevelString.toUpperCase()));
                 }
 
-                System.out.println("hello ...4");
+                if ("questionBank".equalsIgnoreCase(associationType)) {
+                    // For Question Bank, store courseSessionId and save the question
+                    RDCourseSession courseSession = courseSessionService.getCourseSession(courseSessionId);
+                    question.setCourseSession(courseSession); // Assuming there's a courseSession relationship in the RDQuizQuestion entity
+                    quizQuestionService.saveOrUpdate(question);
+                    continue;
+                }
 
-                // Set the course session detail (mandatory for all questions)
+                // Fetch course session detail for non-questionBank types
                 RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
                 question.setCourseSessionDetail(courseSessionDetail);
-                System.out.println("hello ...5");
 
-                // Step 4: Handle slide association using slide number from JSON (if present)
-                if (questionDTO.getSlideNumber() != 0) {
-                    // Find the slide based on slide number and course session detail ID
-                    System.out.println("hello ...6");
-                    System.out.println("courseSessionDetailId : " + courseSessionDetailId);
-                    System.out.println("questionDTO.getSlideNumber() : " + questionDTO.getSlideNumber());
-
-                    RDSlide slide = slideService.findByCourseSessionDetailIdAndSlideNumber(courseSessionDetailId, questionDTO.getSlideNumber());
-                    
-                    System.out.println("hello ...7");
-
-                    if (slide != null) {
-                        question.setSlide(slide);
-                        System.out.println("courseSessionDetailId : " + courseSessionDetailId);
-                        System.out.println("questionDTO.getSlideNumber() : " + questionDTO.getSlideNumber());
-                        
-                    } else {
-                        throw new IllegalArgumentException("Slide not found for the provided slide number and course session detail ID.");
+                if ("slide".equalsIgnoreCase(associationType)) {
+                    // Associate with a slide if slide number is provided
+                    if ( questionDTO.getSlideNumber() != 0) {
+                        RDSlide slide = slideService.findByCourseSessionDetailIdAndSlideNumber(courseSessionDetailId, questionDTO.getSlideNumber());
+                        if (slide != null) {
+                            question.setSlide(slide);
+                        } else {
+                            throw new IllegalArgumentException("Slide not found for the provided slide number and course session detail ID.");
+                        }
                     }
-                }
-
-                System.out.println("hello ...8");
-
-                // Handle the association type (Slide or Quiz)
-                if ("quiz".equalsIgnoreCase(associationType) && quizId != null && quizId > 0) {
+                    quizQuestionService.saveOrUpdate(question);
+                } else if ("quiz".equalsIgnoreCase(associationType) && quizId != null && quizId > 0) {
+                    // Associate with a quiz
                     RDQuiz quiz = quizService.findById(quizId);
-
-                    // Save the question and let the DB assign the ID
                     quizQuestionService.saveOrUpdate(question);
 
                     // Map the question to the quiz
@@ -234,35 +227,30 @@ public class RDQuizQuestionController {
                     quizQuestionMap.setQuestion(question);
                     quizQuestionMapService.saveQuizQuestionMap(quizQuestionMap);
 
-                    // Also update the session detail with the selected quiz ID
+                    // Optionally update course session detail with quiz
                     courseSessionDetail.setQuiz(quiz);
                     courseSessionDetailService.saveRDCourseSessionDetail(courseSessionDetail);
-                } else if (!"quiz".equalsIgnoreCase(associationType)) {
-                    // Save the question (for slide association scenario)
-                    quizQuestionService.saveOrUpdate(question);
                 } else {
-                    throw new IllegalArgumentException("Invalid association type or missing IDs.");
+                    throw new IllegalArgumentException("Invalid association type or missing required data.");
                 }
 
-                // Save the associated options if it's a multiple-choice question
-                if ("multiple_choice".equals(question.getQuestionType()) && questionDTO.getOptions() != null) {
+                // Save multiple-choice options if applicable
+                if ("multiple_choice".equalsIgnoreCase(question.getQuestionType()) && questionDTO.getOptions() != null) {
                     for (RDQuizOptionDTO optionDTO : questionDTO.getOptions()) {
                         RDQuizOption option = new RDQuizOption();
                         option.setOptionText(optionDTO.getOptionText());
                         option.setCorrect(optionDTO.isCorrect());
                         option.setQuestion(question);  // Link the option to the question
-                        System.out.println("option - " + option);
                         quizOptionService.save(option);
                     }
                 }
             }
 
-            // Step 5: Set a success message and redirect to the questions list
+            // Success feedback
             redirectAttributes.addFlashAttribute("success", "Questions uploaded successfully!");
             return "redirect:/quizquestions/listQuizQuestions";
 
         } catch (Exception e) {
-            // Handle any error during the processing
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("error", "Error processing JSON file: " + e.getMessage());
             return "redirect:/quizquestions/listQuizQuestions";

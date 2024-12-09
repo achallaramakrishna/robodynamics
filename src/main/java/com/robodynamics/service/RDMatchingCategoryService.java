@@ -5,9 +5,13 @@ import java.util.List;
 
 public interface RDMatchingCategoryService {
 
-    RDMatchingCategory getCategoryById(Long categoryId);
+    RDMatchingCategory getCategoryById(int categoryId);
 
-    List<RDMatchingCategory> getCategoriesByGameId(Long gameId);
+    List<RDMatchingCategory> getCategoriesByGameId(int gameId);
 
     void saveCategory(RDMatchingCategory category);
+    
+    void deleteCategory(int categoryId);
+    
+    RDMatchingCategory getFirstCategory(); 
 }

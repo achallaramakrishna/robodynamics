@@ -470,11 +470,11 @@ footer a:active {
             <div class="col-md-3 footer-section">
                 <h5>Quick Links</h5>
                 <ul>
-                    <li><a href="index.jsp">Home</a></li>
-                    <li><a href="subscription.jsp">Membership</a></li>
-                    <li><a href="courses.jsp">Courses</a></li>
-                    <li><a href="aboutus.jsp">About Us</a></li>
-                    <li><a href="contactus.jsp">Contact Us</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/subscription">Membership</a></li>
+                    <li><a href="${pageContext.request.contextPath}/courses">Courses</a></li>
+                    <li><a href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
+                    <li><a href="${pageContext.request.contextPath}/contact/contactus">Contact Us</a></li>
                 </ul>
             </div>
             <!-- Help Links Section -->

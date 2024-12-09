@@ -17,13 +17,13 @@ public class RDMatchingCategoryServiceImpl implements RDMatchingCategoryService 
 
     @Override
     @Transactional(readOnly = true)
-    public RDMatchingCategory getCategoryById(Long categoryId) {
+    public RDMatchingCategory getCategoryById(int categoryId) {
         return matchingCategoryDao.getCategoryById(categoryId);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RDMatchingCategory> getCategoriesByGameId(Long gameId) {
+    public List<RDMatchingCategory> getCategoriesByGameId(int gameId) {
         return matchingCategoryDao.getCategoriesByGameId(gameId);
     }
 
@@ -32,4 +32,17 @@ public class RDMatchingCategoryServiceImpl implements RDMatchingCategoryService 
     public void saveCategory(RDMatchingCategory category) {
         matchingCategoryDao.saveCategory(category);
     }
+
+	@Override
+	@Transactional
+	public void deleteCategory(int categoryId) {
+		matchingCategoryDao.deleteCategory(categoryId);
+		
+	}
+
+	@Override
+	@Transactional
+	public RDMatchingCategory getFirstCategory() {
+		return matchingCategoryDao.getFirstCategory();
+	}
 }

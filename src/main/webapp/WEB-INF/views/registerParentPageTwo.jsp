@@ -26,7 +26,7 @@
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/showHeader.jsp"%>
+	<%@ include file="header.jsp"%>
 	
 <div class="wrapper">
     <div class="container main">

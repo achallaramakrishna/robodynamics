@@ -92,23 +92,56 @@ public class RDQuizController {
     @GetMapping("/create")
     public String showCreateQuizForm(Model model) {
         // Create an empty quiz object for binding
+    	List<RDCourse> courses = courseService.getRDCourses();
+    	model.addAttribute("courses",courses);
         RDQuiz quiz = new RDQuiz();
         model.addAttribute("quiz", quiz);
         return "quizzes/quizForm";  // Use combined form JSP
     }
 
 
-	@PostMapping("/saveQuiz")
-    public String saveQuiz(@ModelAttribute("quiz") RDQuiz quiz, Model model) {
-		quizService.saveOrUpdate(quiz);
-	    // Step 3: Add a success message for UI feedback
-        model.addAttribute("message", "Quiz created successfully!");
+    @PostMapping("/saveQuiz")
+    public String saveQuiz(@ModelAttribute("quiz") RDQuiz quiz, 
+                           @RequestParam("courseId") Integer courseId,
+                           @RequestParam("courseSessionId") Integer courseSessionId,
+                           @RequestParam("courseSessionDetailId") Integer courseSessionDetailId,
+                           Model model, HttpSession session) {
+        // Retrieve the current user
+        RDUser currentUser = (RDUser) session.getAttribute("rdUser");
 
-        // Step 4: Redirect to the quiz list page after quiz creation
-        return "redirect:/quizzes/dashboard";
+        if (currentUser == null) {
+            model.addAttribute("error", "You must be logged in to create a quiz.");
+            return "redirect:/login";
+        }
+
+        try {
+            // Fetch the related entities based on selected IDs
+            RDCourse course = courseService.getRDCourse(courseId);
+            RDCourseSession courseSession = courseSessionService.getCourseSession(courseSessionId);
+            RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
+
+            // Set the associations in the quiz entity
+            quiz.setCourse(course);
+            quiz.setCourseSession(courseSession);
+            quiz.setCourseSessionDetail(courseSessionDetail);
+
+            // Set creator and timestamps
+            quiz.setCreatedByUser(currentUser);
+           
+            // Save the quiz
+            quizService.saveOrUpdate(quiz);
+
+            // Add success message
+            model.addAttribute("message", "Quiz created successfully!");
+        } catch (Exception e) {
+            model.addAttribute("error", "Error while saving quiz: " + e.getMessage());
+            return "quizzes/quizForm"; // Redirect back to the form on error
+        }
+
+        return "redirect:/quizzes/dashboard"; // Redirect to dashboard
     }
-	
-	@GetMapping("/edit")
+
+    @GetMapping("/edit")
 	public String showEditQuizForm(@RequestParam("quizId") Integer quizId, Model model) {
 	    // Fetch the quiz by ID
 	    RDQuiz quiz = quizService.findById(quizId);
@@ -183,6 +216,10 @@ public class RDQuizController {
 	public String showQuizDashboard(@RequestParam(value = "page", defaultValue = "0") int page,
 	                                @RequestParam(value = "size", defaultValue = "10") int size,
 	                                Model model) {
+		
+		List<RDCourse> courses = courseService.getRDCourses();
+    	model.addAttribute("courses",courses);
+    	
 	    List<RDQuiz> quizzes = quizService.getPaginatedQuizzes(page, size);
 	    long totalQuizzes = quizService.getTotalQuizzesCount();
 
@@ -204,7 +241,8 @@ public class RDQuizController {
     public String startQuiz(@PathVariable int quizId, 
                             HttpSession session, HttpServletRequest request, 
                             Model model, @RequestParam(value = "currentQuestionIndex", defaultValue = "0") int currentQuestionIndex,
-                            @RequestParam(value = "mode", defaultValue = "practice") String mode) {
+                            @RequestParam(value = "mode", defaultValue = "practice") String mode,
+                            @RequestParam(value = "showHeaderFooter", required = false, defaultValue = "false") boolean showHeaderFooter) {
         RDUser rdUser = null;
 
         if (session.getAttribute("rdUser") != null) {
@@ -246,6 +284,8 @@ public class RDQuizController {
         model.addAttribute("currentQuestionIndex", currentQuestionIndex);
         model.addAttribute("totalQuestions", quizQuestions.size());
         model.addAttribute("mode", mode);
+        // Add the showHeaderFooter flag to the model
+        model.addAttribute("showHeaderFooter", showHeaderFooter);
         
         if ("practice".equals(mode)) {
             model.addAttribute("correctAnswer", currentQuestion.getCorrectAnswer());
@@ -260,8 +300,7 @@ public class RDQuizController {
                                @RequestParam("action") String action,
                                @RequestParam Map<String, String> answers, 
                                @RequestParam(value = "mode", defaultValue = "practice") String mode,
-
-                               
+                               @RequestParam(value = "showHeaderFooter", required = false, defaultValue = "false") boolean showHeaderFooter,
                                HttpSession session, Model model) {
         // Fetch the user from the session
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
@@ -340,6 +379,8 @@ public class RDQuizController {
         model.addAttribute("currentQuestionIndex", currentQuestionIndex);
         model.addAttribute("totalQuestions", quizQuestions.size());
         model.addAttribute("selectedAnswers", selectedAnswers);
+        model.addAttribute("showHeaderFooter", showHeaderFooter); // Pass this parameter forward
+
         
         model.addAttribute("mode", mode);
 

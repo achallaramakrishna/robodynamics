@@ -32,6 +32,12 @@ public class RDSlide {
 	@Column(name = "content")
     private String content;
 	
+	@Column(name = "animation_script", columnDefinition = "TEXT")
+    private String animationScript;
+
+    @Column(name = "voice_script", columnDefinition = "TEXT")
+    private String voiceScript;
+    
 	 @Column(name = "file_url")  // Changed from image_url to file_url
 	 private String fileUrl;  // Updated field name from imageUrl to fileUrl
 	 
@@ -125,6 +131,22 @@ public class RDSlide {
 
 	public void setSlideNumber(Integer slideNumber) {
 		this.slideNumber = slideNumber;
+	}
+
+	public String getAnimationScript() {
+		return animationScript;
+	}
+
+	public void setAnimationScript(String animationScript) {
+		this.animationScript = animationScript;
+	}
+
+	public String getVoiceScript() {
+		return voiceScript;
+	}
+
+	public void setVoiceScript(String voiceScript) {
+		this.voiceScript = voiceScript;
 	}
 
 	

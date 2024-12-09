@@ -10,6 +10,8 @@ public interface RDQuizQuestionService {
     
 	List<RDQuizQuestion> findPaginated(int page, int size);
 	
+    List<RDQuizQuestion> findQuestionsByQuizId(int quizId);
+
 	long countQuestions(); 
 	
     // Create or update a quiz question
@@ -39,4 +41,13 @@ public interface RDQuizQuestionService {
     List<RDQuizQuestion> getQuestionsByTierLevelAndDifficulty(RDQuizQuestion.TierLevel tierLevel, String difficultyLevel);
     
     List<RDQuizQuestion> getQuestionsByTierLevelOrdered(RDQuizQuestion.TierLevel tierLevel);
+
+
+   // List<RDQuizQuestion> findQuestionsByCriteria(Integer courseId, Integer courseSessionId, List<String> questionTypes, List<String> difficultyLevels, int limit);
+    List<RDQuizQuestion> findQuestionsByCriteria(
+	        Integer courseId, 
+	        List<Integer> courseSessionIds, 
+	        List<String> questionTypes, 
+	        List<String> difficultyLevels, 
+	        int limit);
 }

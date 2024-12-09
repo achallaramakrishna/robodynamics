@@ -49,7 +49,7 @@
                     <ul class="list-group">
                         <c:forEach var="question" items="${section.questions}">
                             <li class="list-group-item">
-                                <p><strong>Q${question.questionNumber}:</strong> ${question.questionText}</p>
+                                <p><strong>${question.questionText}</strong> </p>
                                 <p><em>Type:</em> ${question.questionType} | <em>Difficulty:</em> ${question.difficultyLevel} | <em>Marks:</em> ${question.maxMarks}</p>
                                 <c:choose>
                                     <c:when test="${question.questionType == 'multiple_choice'}">

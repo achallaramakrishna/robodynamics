@@ -43,6 +43,12 @@
                 <f:textarea path="topic" cssClass="form-control" rows="3" required="true"></f:textarea>
             </div>
 
+ 			<!-- Session Detail Id Field -->
+            <div class="mb-3">
+                <f:label path="sessionDetailId" cssClass="form-label">SessionDetailId</f:label>
+                <f:input path="sessionDetailId" cssClass="form-control" type="number" required="true"/>
+            </div>
+            
             <!-- Version Field -->
             <div class="mb-3">
                 <f:label path="version" cssClass="form-label">Version</f:label>

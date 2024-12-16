@@ -143,6 +143,20 @@
                             <h5 class="card-title">Tests</h5>
                             <p class="card-text">Create and manage tests for your child.</p>
 
+							<c:if test="${not empty error}">
+							    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+							        ${error}
+							        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							    </div>
+							</c:if>
+							
+							<c:if test="${not empty message}">
+							    <div class="alert alert-success alert-dismissible fade show" role="alert">
+							        ${message}
+							        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							    </div>
+							</c:if>
+
                             <!-- Create Test Button -->
                             <a href="${pageContext.request.contextPath}/tests/create" class="btn btn-primary mb-3">Create Test</a>
 
@@ -167,6 +181,9 @@
                                             <td>${test.durationMinutes}</td>
                                             <td>
                                                 <a href="${pageContext.request.contextPath}/quizzes/start/${test.quizId}?showHeaderFooter=true" class="btn btn-success btn-sm">Take</a>
+                                            	<a href="${pageContext.request.contextPath}/quizzes/edit/${test.quizId}" class="btn btn-warning btn-sm">Edit</a>
+                                				<a href="${pageContext.request.contextPath}/quizzes/delete/${test.quizId}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this test?');">Delete</a>
+                                            	
                                             </td>
                                         </tr>
                                     </c:forEach>

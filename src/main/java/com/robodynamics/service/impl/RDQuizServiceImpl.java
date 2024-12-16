@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,7 +55,11 @@ public class RDQuizServiceImpl implements RDQuizService {
     @Override
     @Transactional
     public void delete(RDQuiz quiz) {
+    	try {
         rdQuizDao.delete(quiz);
+    	} catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("Cannot delete quiz. It is linked to other data.", e);
+        }
     }
     
     @Override

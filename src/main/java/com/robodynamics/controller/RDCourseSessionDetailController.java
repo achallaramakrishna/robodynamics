@@ -146,7 +146,7 @@ public class RDCourseSessionDetailController {
             model.addAttribute("error", "Course session detail not found.");
             return "redirect:/sessiondetail/list";
         }
-
+        System.out.println("Session Detail id - " + courseSessionDetail.getSessionDetailId());
         List<RDCourse> courses = courseService.getRDCourses();
         model.addAttribute("courses", courses);
         model.addAttribute("courseSessionDetail", courseSessionDetail);

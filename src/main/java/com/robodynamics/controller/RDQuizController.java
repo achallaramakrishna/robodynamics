@@ -141,8 +141,8 @@ public class RDQuizController {
         return "redirect:/quizzes/dashboard"; // Redirect to dashboard
     }
 
-    @GetMapping("/edit")
-	public String showEditQuizForm(@RequestParam("quizId") Integer quizId, Model model) {
+    @GetMapping("/edit/{quizId}")
+	public String showEditQuizForm(@PathVariable("quizId") Integer quizId, Model model) {
 	    // Fetch the quiz by ID
 	    RDQuiz quiz = quizService.findById(quizId);
 	    
@@ -193,22 +193,33 @@ public class RDQuizController {
 
 	
 	
-	@GetMapping("/delete")
-	public String deleteQuiz(@RequestParam("quizId") Integer quizId, Model model) {
+	@GetMapping("/delete/{quizId}")
+	public String deleteQuiz(@PathVariable("quizId") Integer quizId, Model model, HttpSession session) {
 	    // Fetch the quiz to ensure it exists
-	    RDQuiz quiz = quizService.findById(quizId);
-	    
+	try {
+		RDQuiz quiz = quizService.findById(quizId);
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+   
 	    if (quiz == null) {
 	        // If no quiz is found, you can add an error message to the model
 	        model.addAttribute("message", "Quiz not found.");
 	        return "redirect:/quizzes/dashboard";
 	    }
 
-	    // Perform the delete operation
-	    quizService.delete(quiz);
+        // Perform the delete operation
+        quizService.delete(quiz);
 
-	    // Redirect back to the quiz dashboard after deletion
-	    return "redirect:/quizzes/dashboard";
+        model.addAttribute("message", "Quiz deleted successfully.");
+    } catch (Exception e) {
+        // Check if the exception is related to foreign key constraints
+        String errorMessage = "Unable to delete quiz. It is associated with existing user quiz results.";
+        model.addAttribute("error", errorMessage);
+        
+        
+        return "redirect:/quizzes/dashboard";
+    }
+
+    return "redirect:/quizzes/dashboard";
 	}
 
     

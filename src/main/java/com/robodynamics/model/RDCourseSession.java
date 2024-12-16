@@ -25,6 +25,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -142,6 +143,7 @@ public class RDCourseSession {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="course_session_id", nullable = true)
 	@JsonIgnore
+	@OrderBy("sessionDetailId ASC") // Use ASC for ascending or DESC for descending
 	private Set<RDCourseSessionDetail> courseSessionDetails = new TreeSet<RDCourseSessionDetail>();
 	
 	public Set<RDCourseSessionDetail> getCourseSessionDetails() {

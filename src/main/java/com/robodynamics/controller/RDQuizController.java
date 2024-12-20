@@ -247,160 +247,126 @@ public class RDQuizController {
     
     
 
- // Start a quiz and navigate through questions
-    @GetMapping("/start/{quizId}")
-    public String startQuiz(@PathVariable int quizId, 
-                            HttpSession session, HttpServletRequest request, 
-                            Model model, @RequestParam(value = "currentQuestionIndex", defaultValue = "0") int currentQuestionIndex,
-                            @RequestParam(value = "mode", defaultValue = "practice") String mode,
-                            @RequestParam(value = "showHeaderFooter", required = false, defaultValue = "false") boolean showHeaderFooter) {
-        RDUser rdUser = null;
+	@GetMapping("/start/{quizId}")
+	public String startQuiz(@PathVariable int quizId, 
+	                        HttpSession session, HttpServletRequest request, 
+	                        Model model, 
+	                        @RequestParam(value = "currentPage", defaultValue = "0") int currentPage,
+	                        @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+	                        @RequestParam(value = "mode", defaultValue = "practice") String mode,
+	                        @RequestParam(value = "showHeaderFooter", required = false, defaultValue = "false") boolean showHeaderFooter) {
+	    RDUser rdUser = (RDUser) session.getAttribute("rdUser");
 
-        if (session.getAttribute("rdUser") != null) {
-            rdUser = (RDUser) session.getAttribute("rdUser");
-        }
+	    if (rdUser == null) {
+	        // Save intended URL for redirect after login
+	        String redirectUrl = request.getRequestURI().substring(request.getContextPath().length());
+	        session.setAttribute("redirectUrl", redirectUrl);
 
-        if (rdUser == null) {
-            // Save intended URL for redirect after login
-            String redirectUrl = request.getRequestURI().substring(request.getContextPath().length());
-            session.setAttribute("redirectUrl", redirectUrl);
+	        // Redirect to login page
+	        return "redirect:/login";
+	    }
 
-            // Redirect to login page
-            return "redirect:/login";
-        }
+	    RDQuiz quiz = quizService.findById(quizId);
 
-        RDQuiz quiz = quizService.findById(quizId);
+	    // Fetch question IDs from the RDQuizQuestionMap
+	    List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
+	    if (questionIds.isEmpty()) {
+	        model.addAttribute("message", "No questions available for this quiz.");
+	        return "quizzes/error";
+	    }
 
-        // Fetch question IDs from the RDQuizQuestionMap
-        
-        List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-        
-        System.out.println("questionIds - " + questionIds);
-        if (questionIds.isEmpty()) {
-            model.addAttribute("message", "No questions available for this quiz.");
-            return "quizzes/error";
-        }
+	    // Fetch the questions based on the IDs from the mapping
+	    List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
 
-        // Fetch the questions based on the IDs from the mapping
-        List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
+	    // Pagination logic
+	    int totalQuestions = quizQuestions.size();
+	    int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
+	    int startIndex = currentPage * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, totalQuestions);
 
-        // Ensure valid question index
-        if (currentQuestionIndex < 0) currentQuestionIndex = 0;
-        if (currentQuestionIndex >= quizQuestions.size()) currentQuestionIndex = quizQuestions.size() - 1;
+	    List<RDQuizQuestion> questionsToShow = quizQuestions.subList(startIndex, endIndex);
 
-        RDQuizQuestion currentQuestion = quizQuestions.get(currentQuestionIndex);
+	    model.addAttribute("quiz", quiz);
+	    model.addAttribute("questions", questionsToShow); // Pass the current set of questions
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("mode", mode);
+	    model.addAttribute("showHeaderFooter", showHeaderFooter);
 
-        model.addAttribute("quiz", quiz);
-        model.addAttribute("currentQuestion", currentQuestion);
-        model.addAttribute("currentQuestionIndex", currentQuestionIndex);
-        model.addAttribute("totalQuestions", quizQuestions.size());
-        model.addAttribute("mode", mode);
-        // Add the showHeaderFooter flag to the model
-        model.addAttribute("showHeaderFooter", showHeaderFooter);
-        
-        if ("practice".equals(mode)) {
-            model.addAttribute("correctAnswer", currentQuestion.getCorrectAnswer());
-        }
+	    return "quizzes/take"; // Update the JSP to handle multiple questions
+	}
+  
+	@PostMapping("/navigate")
+	public String navigateQuiz(@RequestParam("quizId") int quizId,
+	                           @RequestParam("currentPage") int currentPage,
+	                           @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, // Default to 10
+	                           @RequestParam("action") String action,
+	                           @RequestParam Map<String, String> answers, 
+	                           @RequestParam(value = "mode", defaultValue = "practice") String mode,
+	                           @RequestParam(value = "showHeaderFooter", defaultValue = "false") boolean showHeaderFooter,
+	                           HttpSession session, Model model) {
+		
+		System.out.println("Page Size: " + pageSize);
 
-        return "quizzes/take";  // Display a single question at a time
-    }
-    
-    @PostMapping("/navigate")
-    public String navigateQuiz(@RequestParam("quizId") int quizId,
-                               @RequestParam("currentQuestionIndex") int currentQuestionIndex,
-                               @RequestParam("action") String action,
-                               @RequestParam Map<String, String> answers, 
-                               @RequestParam(value = "mode", defaultValue = "practice") String mode,
-                               @RequestParam(value = "showHeaderFooter", required = false, defaultValue = "false") boolean showHeaderFooter,
-                               HttpSession session, Model model) {
-        // Fetch the user from the session
-        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
-        if (rdUser == null) {
-            // Handle case where the user is not logged in
-            return "redirect:/login";
-        }
-        
-        
-        // Fetch the quiz and questions
-        RDQuiz quiz = quizService.findById(quizId);
-        List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-        if (questionIds.isEmpty()) {
-            model.addAttribute("message", "No questions available for this quiz.");
-            return "quizzes/error";
-        }
+	    // Fetch the user from the session
+	    RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+	    if (rdUser == null) {
+	        return "redirect:/login";
+	    }
 
-        List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
-        RDQuizQuestion currentQuestion = quizQuestions.get(currentQuestionIndex);
+	    // Fetch the quiz and its questions
+	    RDQuiz quiz = quizService.findById(quizId);
+	    List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
+	    List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
 
-        // Initialize or fetch selectedAnswers from the session
-        Map<Integer, String> selectedAnswers = (Map<Integer, String>) session.getAttribute("selectedAnswers");
-        if (selectedAnswers == null) {
-            selectedAnswers = new HashMap<>();
-            session.setAttribute("selectedAnswers", selectedAnswers);
-        }
+	    // Handle navigation action (Next/Previous)
+	    if ("next".equals(action)) {
+	        currentPage++;
+	    } else if ("previous".equals(action)) {
+	        currentPage--;
+	    } else if ("submit".equals(action)) {
+	        return submitQuiz(answers, model, session);
+	    }
 
-        String questionKey = "question_" + currentQuestion.getQuestionId() + "_answer";
-        System.out.println("Question key " + questionKey);
-        System.out.println("currentQuestion.getQuestionType()" + currentQuestion.getQuestionType());
-        // Determine if the current question is multiple-choice or fill-in-the-blank
-        if ("multiple_choice".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
-            selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
-            System.out.println("multiple_choice");
-        } else if ("true_false".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
-        	System.out.println("true_false");
-        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
-            System.out.println("Selected answers - " + selectedAnswers);
+	    // Pagination logic
+	    int totalQuestions = quizQuestions.size();
+	    int totalPages = (int) Math.ceil((double) totalQuestions / pageSize);
+	    int startIndex = currentPage * pageSize;
+	    int endIndex = Math.min(startIndex + pageSize, totalQuestions);
 
-        } else if ("fill_in_the_blank".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
-        	System.out.println("fill_in_the_blank");
-        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
-        } else if ("short_answer".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
-        	System.out.println("short_answer");
-        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
-        } else if ("long_answer".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
-        	System.out.println("long_answer");
-        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
-        } else if ("coding".equals(currentQuestion.getQuestionType()) && answers.containsKey(questionKey)) {
-        	System.out.println("coding");
-        	selectedAnswers.put(currentQuestion.getQuestionId(), answers.get(questionKey));
-        }
-        System.out.println("Selected answers - " + selectedAnswers);
-        session.setAttribute("selectedAnswers", selectedAnswers);
-        System.out.println("Selected Answers - " + selectedAnswers);
+	    // Ensure valid page bounds
+	    if (currentPage < 0) currentPage = 0;
+	    if (currentPage >= totalPages) currentPage = totalPages - 1;
 
+	    List<RDQuizQuestion> questionsToShow = quizQuestions.subList(startIndex, endIndex);
 
-      
-        // Handle navigation action (Next/Previous/Submit)
-        if ("next".equals(action)) {
-            currentQuestionIndex++;
-        } else if ("previous".equals(action)) {
-            currentQuestionIndex--;
-        } else if ("submit".equals(action)) {
-            return submitQuiz(answers, model, session);
-        }
+	    // Save selected answers for the current page
+	    Map<Integer, String> selectedAnswers = (Map<Integer, String>) session.getAttribute("selectedAnswers");
+	    if (selectedAnswers == null) {
+	        selectedAnswers = new HashMap<>();
+	    }
 
-        // Ensure valid question index bounds
-        if (currentQuestionIndex < 0) currentQuestionIndex = 0;
-        if (currentQuestionIndex >= quizQuestions.size()) currentQuestionIndex = quizQuestions.size() - 1;
+	    for (int questionId : questionIds) {
+	        String questionKey = "question_" + questionId + "_answer";
+	        if (answers.containsKey(questionKey)) {
+	            selectedAnswers.put(questionId, answers.get(questionKey));
+	        }
+	    }
+	    session.setAttribute("selectedAnswers", selectedAnswers);
 
-        // Set current question and pass it to the view
-        currentQuestion = quizQuestions.get(currentQuestionIndex);
-        model.addAttribute("quiz", quiz);
-        model.addAttribute("currentQuestion", currentQuestion);
-        model.addAttribute("currentQuestionIndex", currentQuestionIndex);
-        model.addAttribute("totalQuestions", quizQuestions.size());
-        model.addAttribute("selectedAnswers", selectedAnswers);
-        model.addAttribute("showHeaderFooter", showHeaderFooter); // Pass this parameter forward
+	    // Add attributes to the model
+	    model.addAttribute("quiz", quiz);
+	    model.addAttribute("questions", questionsToShow);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("mode", mode);
+	    model.addAttribute("showHeaderFooter", showHeaderFooter);
+	    model.addAttribute("selectedAnswers", selectedAnswers);
 
-        
-        model.addAttribute("mode", mode);
-
-        if ("practice".equals(mode)) {
-            model.addAttribute("correctAnswer", currentQuestion.getCorrectAnswer());
-        }
-
-        return "quizzes/take";
-    }
+	    return "quizzes/take";
+	}
 
 
     @PostMapping("/submit")
@@ -430,6 +396,9 @@ public class RDQuizController {
         int pointsEarned = 0;
         int pointsPerCorrectAnswer = 10;  // Example: 10 points per correct answer
 
+     // Create a list to store details for analysis
+        List<Map<String, Object>> questionAnalysis = new ArrayList<>();
+        		
         for (RDQuizQuestion question : quizQuestions) {
             int questionId = question.getQuestionId();
             String selectedOptionStr = selectedAnswers.get(questionId);
@@ -477,7 +446,33 @@ public class RDQuizController {
                             System.err.println("Unknown question type: " + question.getQuestionType());
                             break;
                     }
+                    
+                    // Add question details to the analysis list
+                    Map<String, Object> analysisEntry = new HashMap<>();
+                    analysisEntry.put("question", question.getQuestionText());
+                    analysisEntry.put("selectedAnswer", selectedOptionStr);
+                    analysisEntry.put("correctAnswer", question.getCorrectAnswer());
+                    analysisEntry.put("isCorrect", isCorrect);
+                    
+                 // Include options for multiple-choice questions
+                    if ("multiple_choice".equals(question.getQuestionType())) {
+                        List<Map<String, Object>> options = new ArrayList<>();
 
+                        for (RDQuizOption option : question.getOptions()) {
+                            Map<String, Object> optionData = new HashMap<>();
+                            optionData.put("optionId", option.getOptionId());
+                            optionData.put("optionText", option.getOptionText());
+                            options.add(optionData);
+                        }
+
+                        analysisEntry.put("options", options);
+                    }
+
+                    questionAnalysis.add(analysisEntry);
+
+                   
+
+                    
                     // Log details about question processing
                     System.out.println("Processing question ID: " + questionId + " | Type: " + question.getQuestionType() + 
                                        " | Answer: " + selectedOptionStr + " | Is Correct: " + isCorrect);
@@ -492,6 +487,7 @@ public class RDQuizController {
                     userQuizAnswer.setCreatedAt(new Timestamp(System.currentTimeMillis()));
                     userQuizAnswerService.saveOrUpdate(userQuizAnswer);
 
+                    
                     // Update score if the answer is correct
                     if (isCorrect) {
                         correctAnswersCount++;
@@ -535,6 +531,8 @@ public class RDQuizController {
         model.addAttribute("quizResult", quizResult);
         model.addAttribute("pointsEarned", pointsEarned);
         model.addAttribute("passed", passed);
+        // Add the question analysis to the model
+        model.addAttribute("questionAnalysis", questionAnalysis);
         System.out.println("hello submit... 10");
 
         // Clear the session attribute for selected answers after processing the quiz submission

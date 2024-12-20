@@ -102,7 +102,7 @@
                 </select>
             </div>
 
-			<div class="form-group mb-3" id="quizSelection" style="display: none;">
+<%-- 			<div class="form-group mb-3" id="quizSelection" style="display: none;">
                 <label for="quiz">Select Quiz</label>
                 <select id="quiz" name="quizId" class="form-control">
                     <option value="">-- Select Quiz --</option>
@@ -110,7 +110,7 @@
                         <option value="${quiz.quizId}">${quiz.quizName}</option>
                     </c:forEach>
                 </select>
-            </div>
+            </div> --%>
 				
             <!-- Upload JSON Form -->
             <div class="form-group mb-3">

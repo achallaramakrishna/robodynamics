@@ -99,6 +99,17 @@
                                 </div>
                             </div>
 
+                            <!-- Flashcards Card Sets -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Flashcard Sets</h5>
+                                        <p class="card-text">View and manage flashcard Sets for different subjects.</p>
+                                        <a href="${pageContext.request.contextPath}/flashcardsets/flashcard-set-list" class="btn btn-primary">Manage Flashcard Sets</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <!-- Flashcards Card -->
                             <div class="col-md-4 mb-4">
                                 <div class="card">

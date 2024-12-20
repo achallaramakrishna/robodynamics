@@ -19,7 +19,12 @@ public class CourseSessionDetailJson {
     
     // Getters and Setters
 
-    public int getSessionId() {
+    public CourseSessionDetailJson(int courseSessionDetailId, String topic2) {
+		this.sessionDetailId = courseSessionDetailId;
+		this.topic = topic2;
+	}
+
+	public int getSessionId() {
         return sessionId;
     }
 

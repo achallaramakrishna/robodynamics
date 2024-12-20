@@ -6,6 +6,7 @@ import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDSlide;
 import com.robodynamics.service.RDSlideService;
+import com.robodynamics.wrapper.CourseSessionDetailJson;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/slides")
@@ -56,9 +58,13 @@ public class RDSlideController {
     @GetMapping("/getCourseSessionDetails")
     @ResponseBody
     public Map<String, Object> getCourseSessionDetails(@RequestParam("sessionId") int sessionId) {
-        List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
+    	List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
+        List<CourseSessionDetailJson> dtoList = sessionDetails.stream()
+            .map(detail -> new CourseSessionDetailJson(detail.getCourseSessionDetailId(), detail.getTopic()))
+            .collect(Collectors.toList());
+
         Map<String, Object> response = new HashMap<>();
-        response.put("sessionDetails", sessionDetails);
+        response.put("sessionDetails", dtoList);
         return response;
     }
 

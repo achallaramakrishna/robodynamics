@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
@@ -20,427 +19,153 @@
     crossorigin="anonymous"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2vVinnD/C7E91j9yyk5//jjpt/"
     crossorigin="anonymous"></script>
-    
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Fun Quiz Time!</title>
 
-<script type="text/javascript">
-    // Ensure the DOM is fully loaded before executing this script
-    
-     $(document).ready(function () {
-        console.log("DOM fully loaded and parsed.");
+    <script type="text/javascript">
+        // Set a default action if no button is explicitly clicked
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form[action*='/quizzes/navigate']");
+            const actionInput = document.createElement("input");
+            actionInput.type = "hidden";
+            actionInput.name = "action";
+            actionInput.value = "next"; // Default action
+            form.appendChild(actionInput);
 
-        // Get the current question ID from the hidden input
-        let currentQuestionId = $('#currentQuestionId').val();
-		
-		
-
-        
-        // Fetch and render the options dynamically
-        fetchMultipleChoiceOptions(currentQuestionId);
-        fetchTrueFalseOptions(currentQuestionId);
-        
-        function toggleViewAnswerButton() {
-            if ($("#mode").val() === "practice") {
-                $("#viewAnswerBtn").show();
-                $("#answerSection").hide();  // Hide answer section initially
-            } else {
-                $("#viewAnswerBtn").hide();
-                $("#answerSection").hide();
-            }
-        }
-     // Run toggle on page load and when the mode changes
-        toggleViewAnswerButton();
-        $("#mode").change(function() {
-            toggleViewAnswerButton();
-            
-        });
-        // Show correct answer when "View Answer" is clicked
-        $("#viewAnswerBtn").click(function() {
-            $("#answerSection").toggle(); // Toggle answer visibility
-        });
-        
-
-            
-        // Function to fetch options using AJAX and render them
-        function fetchMultipleChoiceOptions(questionId) {
-            console.log('Selected question ID:', questionId); // Log the selected question ID for debugging
-
-            // Perform an AJAX GET request to fetch the question options
-            $.getJSON('${pageContext.request.contextPath}/quizzes/getQuestionOptions', { questionId: questionId }, function (data) {
-                console.log('Received data:', data); // Log the received data to inspect it
-
-                // Build the HTML for the radio buttons
-                let radioHtml = '';
-                $.each(data.options, function (index, option) {
-                    console.log('Option ID:', option.optionId, ', Option Text:', option.optionText); // Log each option for debugging
-                    radioHtml += '<li>' +
-                    '<label>' +
-                    '<input type="radio" name="question_' + questionId + '_answer" value="' + option.optionId + '">' + 
-                       ' ' + option.optionText +
-                    '</label>' +
-                    '</li>';
-                });
-
-                // Update the HTML content inside the container
-                $('#radioContainer').html(radioHtml);
-            }).fail(function (jqxhr, textStatus, error) {
-                console.error('Error fetching question options:', textStatus, error); // Log any errors
+            // Update action value when a navigation button is clicked
+            form.addEventListener("submit", function (event) {
+                const clickedButton = document.activeElement; // Identify the button clicked
+                if (clickedButton && clickedButton.name === "action") {
+                    actionInput.value = clickedButton.value;
+                }
             });
-        }
-        
-        
-        // Function to render True/False radio buttons with values correctly set
-        function fetchTrueFalseOptions(questionId) {
-            console.log('Selected question ID for True/False:', questionId);
-            
-            let radioHtml = 
-                '<ul id="trueFalseContainer" class="list-unstyled">' +
-                    '<li>' +
-                        '<label>' +
-                            '<input type="radio" name="question_' + questionId + '_answer" value="true"> True' +
-                        '</label>' +
-                    '</li>' +
-                    '<li>' +
-                        '<label>' +
-                            '<input type="radio" name="question_' + questionId + '_answer" value="false"> False' +
-                        '</label>' +
-                    '</li>' +
-                '</ul>';
-            console.log(radioHtml);
-            $('#trueFalseContainer').html(radioHtml);
-        }
-
-    });
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("DOM fully loaded and parsed.");
-
-        // Capture the start time when the page loads
-        var startTime = new Date().toISOString();
-        document.getElementById("startTime").value = startTime;
-
-        // Clear all form data on page load to prevent browser autocomplete from filling it in
-        document.querySelectorAll('input[type="radio"], input[type="text"]').forEach(input => {
-            input.checked = false;
-            input.value = '';
         });
-
-        // Verify that the element exists before proceeding
-        var editorElement = document.getElementById('editor');
-        if (!editorElement) {
-            console.error("Editor element not found. Please check if the element with ID 'editor' exists in the HTML.");
-            return;
-        }
-
-        // Initialize Monaco Editor only after confirming the element exists
-        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs' }});
-
-        require(['vs/editor/editor.main'], function() {
-            console.log("Monaco Editor loaded.");
-            var editor = monaco.editor.create(editorElement, {
-                value: `// Write your code here
-class Main {
-public static void main(String[] args) {
-	System.out.println("hello world");
-	}
-}`,
-                language: 'java', // Set this dynamically based on the question
-                theme: 'vs-dark',
-                automaticLayout: true
-            });
-
-            // Capture editor content before form submission
-            document.querySelector('form').addEventListener('submit', function() {
-            	var editorContent = editor.getValue();
-                console.log("Editor Content Before Submit:", editorContent); // Debugging
-                document.getElementById('editor-content').value = editorContent;
-            });
-
-            // Run Code Button: Define event listener to execute code
-            var runButton = document.getElementById('run-code');
-            if (runButton) {
-                runButton.addEventListener('click', function() {
-                    console.log("Run Code button clicked.");
-                    var code = editor.getValue();
-                    console.log("Code to execute:", code);
-
-                    // Make an AJAX call to execute the code
-					$.ajax({
-					   url: '${pageContext.request.contextPath}/quizzes/executeCode',
-					   type: 'POST',
-					   data: {
-					       code: code,
-					       languageId: $('#languageId').val()
-					   },
-					   success: function(response) {
-					       console.log("Code execution response:", response);
-					       document.getElementById('output').textContent = "Running the code...\nOutput: " + response;
-					   },
-					   error: function() {
-					       console.error("Failed to execute code.");
-					       document.getElementById('output').textContent = "Error: Unable to execute code.";
-					   }
-					});
-
-                    document.getElementById('output-section').style.display = 'block';
-                });
-            } else {
-                console.error("Run Code button not found.");
-            }
-        });
-    });
+    </script>
     
-	 // Add arrow key navigation functionality
-	    document.addEventListener("keydown", function (event) {
-	        if (event.key === "ArrowLeft") {
-	            document.querySelector('button[name="action"][value="previous"]').click();
-	        } else if (event.key === "ArrowRight") {
-	            document.querySelector('button[name="action"][value="next"]').click();
-	        }
-	    });
-</script>
-
-
-
-<style>
-    body {
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        background-color: #fdfd96; /* Soft yellow background */
-        padding: 20px;
-    }
-
-    .quiz-container {
-        background-color: #ffebcd; /* Light beige background */
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-
-    h2 {
-        color: #FF6347; /* Bright coral color */
-        text-align: center;
-        font-weight: bold;
-    }
-
-    h4 {
-        color: #FF4500; /* Vibrant orange-red color */
-    }
-
-    .form-group label {
-        font-weight: bold;
-        color: #008080; /* Teal color */
-    }
-
-    .form-control {
-        width: 50%; /* Smaller width for the input */
-        margin: 10px auto; /* Center the input and give margin for spacing */
-    }
-
-    .btn-primary, .btn-secondary, .btn-success {
-        font-size: 1.2em;
-        font-weight: bold;
-        padding: 10px 20px;
-        margin: 10px 5px; /* Add margins to separate the buttons */
-    }
-
-    .btn-primary:hover, .btn-secondary:hover, .btn-success:hover {
-        background-color: #FF4500;
-    }
-
-    .list-unstyled {
-        list-style: none;
-        padding: 0;
-    }
-
-    .list-unstyled li {
-        background-color: #fff;
-        border: 2px solid #fdfd96; /* Match the background */
-        border-radius: 10px;
-        margin-bottom: 15px;
-        padding: 15px;
-        transition: background-color 0.3s ease-in-out;
-    }
-
-    .list-unstyled li:hover {
-        background-color: #d4edda; /* Light green to indicate selection */
-    }
-    
-    #editor {
-        height: 400px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-   .submit-btn, .run-btn {
-        font-size: 18px;
-        padding: 10px 20px;
-        border-radius: 10px;
-        margin: 5px;
-    }
-        .run-btn {
-        background-color: #3498db;
-        border-color: #3498db;
-    }
-
-    .run-btn:hover {
-        background-color: #2980b9;
-    }
-
-    .output-section {
-        margin-top: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-        display: none;
-    }
-
-    .output-section pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-    
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs/loader.js"></script>
-
 </head>
 
 <body class="container">
+<c:if test="${showHeaderFooter}">
+    <jsp:include page="/header.jsp" />
+</c:if>
 
+<div class="quiz-container">
+    <h2>🎉 Let's Take a Fun Quiz! 🎉</h2>
+    <h4 class="mt-5">Quiz: ${quiz.quizName}</h4>
+    
+    <!-- Dropdown to select questions per page -->
+    <div class="text-center mt-3">
+        <label for="pageSize">Questions Per Page:</label>
+        <select id="pageSize" name="pageSize" class="form-control w-25 mx-auto"
+                onchange="document.getElementById('pageSizeForm').submit();">
+            <option value="1" ${pageSize == 1 ? 'selected' : ''}>1</option>
+            <option value="5" ${pageSize == 5 ? 'selected' : ''}>5</option>
+            <option value="10" ${pageSize == 10 || pageSize == null  ? 'selected' : ''}>10</option>
+        </select>
+    </div>
 
-	<c:if test="${showHeaderFooter}">
-	    <jsp:include page="/header.jsp" />
-	</c:if>
-    <div class="quiz-container">
-        <h2>🎉 Let's Take a Fun Quiz! 🎉</h2>
-        <h4 class="mt-5">Quiz: ${quiz.quizName}</h4>
-        
-       <!-- Mode Selector -->
-        <div class="text-center mt-3">
-            <label for="mode">Select Mode:</label>
-            <select id="mode" name="mode" class="form-control w-25 mx-auto">
-                <option value="practice" ${mode == 'practice' ? 'selected' : ''}>Practice Mode</option>
-                <option value="test" ${mode == 'test' ? 'selected' : ''}>Test Mode</option>
-            </select>
+    <!-- Form for pagination -->
+    <form id="pageSizeForm" action="${pageContext.request.contextPath}/quizzes/navigate" method="post">
+        <input type="hidden" name="quizId" value="${quiz.quizId}" />
+        <input type="hidden" name="currentPage" value="${currentPage}" />
+        <input type="hidden" name="pageSize" value="${pageSize}" />
+        <input type="hidden" name="mode" value="${mode}" />
+        <input type="hidden" name="showHeaderFooter" value="${showHeaderFooter}" />
+    </form>
+
+    <!-- Questions Rendering -->
+    <form action="${pageContext.request.contextPath}/quizzes/navigate" method="post" autocomplete="off">
+        <input type="hidden" name="quizId" value="${quiz.quizId}" />
+        <input type="hidden" name="currentPage" value="${currentPage}" />
+        <input type="hidden" name="pageSize" value="${pageSize}" />
+        <input type="hidden" name="mode" value="${mode}" />
+        <input type="hidden" name="showHeaderFooter" value="${showHeaderFooter}" />
+
+        <div class="mt-4">
+            <c:forEach var="question" items="${questions}">
+                <div class="mb-4">
+                    <h5>Question ${question.questionId}: ${question.questionText} ❓</h5>
+                    <c:choose>
+                        <c:when test="${question.questionType == 'multiple_choice'}">
+                            <ul class="list-unstyled">
+                                <c:forEach var="option" items="${question.options}">
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="question_${question.questionId}_answer" value="${option.optionId}" 
+                                                ${selectedAnswers[question.questionId] == option.optionId ? 'checked' : ''} />
+                                            ${option.optionText}
+                                        </label>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </c:when>
+                        
+                        <c:when test="${question.questionType == 'true_false'}">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label>
+                                        <input type="radio" name="question_${question.questionId}_answer" value="true" 
+                                            ${selectedAnswers[question.questionId] == 'true' ? 'checked' : ''} />
+                                        True
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="question_${question.questionId}_answer" value="false" 
+                                            ${selectedAnswers[question.questionId] == 'false' ? 'checked' : ''} />
+                                        False
+                                    </label>
+                                </li>
+                            </ul>
+                        </c:when>
+                        
+                        <c:when test="${question.questionType == 'fill_in_the_blank'}">
+                            <input type="text" class="form-control text-center"
+                                   name="question_${question.questionId}_answer"
+                                   value="${selectedAnswers[question.questionId]}" 
+                                   placeholder="Type your answer here!" />
+                        </c:when>
+                        
+                        <c:when test="${question.questionType == 'short_answer'}">
+                            <textarea class="form-control"
+                                      name="question_${question.questionId}_answer" rows="3"
+                                      placeholder="Type your short answer here!">${selectedAnswers[question.questionId]}</textarea>
+                        </c:when>
+                        
+                        <c:when test="${question.questionType == 'long_answer'}">
+                            <textarea class="form-control"
+                                      name="question_${question.questionId}_answer" rows="10"
+                                      placeholder="Type your long answer here!">${selectedAnswers[question.questionId]}</textarea>
+                        </c:when>
+                    </c:choose>
+                </div>
+            </c:forEach>
         </div>
 
-        <form action="${pageContext.request.contextPath}/quizzes/navigate" method="post" autocomplete="off">
-            <input type="hidden" name="quizId" value="${quiz.quizId}" />
-            <input type="hidden" id="currentQuestionId" name="currentQuestionId" value="${currentQuestion.questionId}" />
-            <input type="hidden" name="currentQuestionIndex" value="${currentQuestionIndex}" />
-            <input type="hidden" id="startTime" name="startTime" value="" />
-            <input type="hidden" name="mode" value="${mode}" />
-            <input type="hidden" name="showHeaderFooter" value="${showHeaderFooter}" /> <!-- Pass this forward -->
+        <!-- Navigation Buttons -->
+        <div class="text-center mt-4">
+            <c:if test="${currentPage > 0}">
+                <button type="submit" name="action" value="previous" class="btn btn-secondary">⬅️ Previous</button>
+            </c:if>
             
+            <c:if test="${currentPage < totalPages - 1}">
+                <button type="submit" name="action" value="next" class="btn btn-primary">Next ➡️</button>
+            </c:if>
             
-
-            <!-- Render only the current question -->
-            <div class="mt-4">
-                <h4>Question ${currentQuestion.questionId}: ${currentQuestion.questionText} ❓</h4>
-
-                <!-- Check the question type -->
-                <c:choose>
-					<c:when test="${currentQuestion.questionType == 'multiple_choice'}">
-					    <ul id="radioContainer" class="list-unstyled"></ul>
-					</c:when>
-					
-                    <c:when test="${currentQuestion.questionType == 'true_false'}">
-                        <ul id="trueFalseContainer" class="list-unstyled"></ul>
-                    </c:when>
-
-
-						<c:when test="${currentQuestion.questionType == 'fill_in_the_blank'}">
-						    <div class="form-group mt-3">
-						        <label for="question_${currentQuestion.questionId}_answer">Fill in the blank:</label>
-						        <input type="text" class="form-control text-center"
-						               name="question_${currentQuestion.questionId}_answer"
-						               value="${selectedAnswers[currentQuestion.questionId]}" 
-						               placeholder="Type your answer here!" />
-						    </div>
-						</c:when>
-    					<c:when test="${currentQuestion.questionType == 'short_answer'}">
-						    <div class="form-group mt-3">
-						        <label for="question_${currentQuestion.questionId}_answer">🌟 Short Answer: 🌟</label>
-						        <textarea class="form-control text-center"
-						                  name="question_${currentQuestion.questionId}_answer" rows="3"
-						                  placeholder="Type your short answer here!" autocomplete="off">
-						            ${selectedAnswers[currentQuestion.questionId]}
-						        </textarea>
-						    </div>
-						</c:when>
-
-<c:when test="${currentQuestion.questionType == 'long_answer'}">
-    <div class="form-group mt-3">
-        <div class="text-center">
-            <label for="question_${currentQuestion.questionId}_answer">🌟 Long Answer: 🌟</label>
-            <textarea class="form-control text-center"
-                      name="question_${currentQuestion.questionId}_answer" rows="15"
-                      style="width: 90%;"
-                      placeholder="Type your detailed answer here!" autocomplete="off">
-                ${selectedAnswers[currentQuestion.questionId]}
-            </textarea>
+            <c:if test="${currentPage == totalPages - 1}">
+                <button type="submit" name="action" value="submit" class="btn btn-success">Finish Quiz 🎯</button>
+            </c:if>
         </div>
-    </div>
-</c:when>
-					<c:when test="${currentQuestion.questionType == 'coding'}">
-						<div class="form-group mt-3">
-							<label for="question_${currentQuestion.questionId}_answer">💻
-								Coding Challenge: 💻</label>
-							<div id="editor"
-								style="height: 400px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px;"></div>
-							<input type="hidden" name="languageId" id="languageId" value="62"> 
-							
-							<textarea id="editor-content"
-								name="question_${currentQuestion.questionId}_answer"
-								style="display: none;"></textarea>
-							<button type="button" class="run-btn" id="run-code">Run Code</button>
-							
-						</div>
-						<!-- Output Section -->
-							<div class="output-section" id="output-section">
-								<h5>Code Output</h5>
-								<pre id="output"></pre>
-							</div>
-					</c:when>
+    </form>
+</div>
 
-
-				</c:choose>
-				
-				 <!-- View Answer Button for Practice Mode -->
-                <c:if test="${mode == 'practice'}">
-                    <button type="button" class="btn btn-info mt-3" id="viewAnswerBtn" style="display:none;">View Answer</button>
-                    <div id="answerSection">
-                        <p><strong>Correct Answer:</strong> ${currentQuestion.correctAnswer}</p>
-                    </div>
-                </c:if>
-                
-            </div>
-
-            <!-- Navigation buttons -->
-            <div class="mt-4 text-center">
-                <c:if test="${currentQuestionIndex > 0}">
-                    <button type="submit" name="action" value="previous" class="btn btn-secondary">⬅️ Go Back</button>
-                </c:if>
-                
-                <c:if test="${currentQuestionIndex < totalQuestions - 1}">
-                    <button type="submit" name="action" value="next" class="btn btn-primary">Next ➡️</button>
-                </c:if>
-                
-                <c:if test="${currentQuestionIndex == totalQuestions - 1}">
-                    <button type="submit" name="action" value="submit" class="btn btn-success">Finish Quiz 🎯</button>
-                </c:if>
-            </div>
-        </form>
-    </div>
-    	<c:if test="${showHeaderFooter}">
-	    <jsp:include page="/footer.jsp" />
-	</c:if>
+<c:if test="${showHeaderFooter}">
+    <jsp:include page="/footer.jsp" />
+</c:if>
 </body>
 </html>

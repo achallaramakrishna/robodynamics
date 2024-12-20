@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -22,12 +24,30 @@
     crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Quiz Result</title>
- </head>
-<body class="container">
- <!-- Header -->
-    <jsp:include page="/header.jsp" />
+<title>Quiz Result</title>
+    <script>
+        // JavaScript to handle pagination
+        let currentPage = 0;
+        const pageSize = 10;
 
+        function showPage(page, totalQuestions) {
+            currentPage = page;
+
+            // Hide all rows
+            const rows = document.querySelectorAll('.question-row');
+            rows.forEach((row, index) => {
+                row.style.display = (index >= page * pageSize && index < (page + 1) * pageSize) ? '' : 'none';
+            });
+
+            // Update button visibility
+            document.getElementById('prevButton').style.display = page > 0 ? '' : 'none';
+            document.getElementById('nextButton').style.display = (page + 1) * pageSize < totalQuestions ? '' : 'none';
+        }
+    </script>
+</head>
+<body class="container">
+    <!-- Header -->
+    <jsp:include page="/header.jsp" />
 
     <h2 class="mt-5">Quiz Result</h2>
 
@@ -35,12 +55,12 @@
     <c:choose>
         <c:when test="${passed}">
             <div class="alert alert-success mt-4">
-                <strong>Congratulations!</strong> ${message}
+                <strong>Congratulations!</strong> You passed the quiz!
             </div>
         </c:when>
         <c:otherwise>
             <div class="alert alert-danger mt-4">
-                <strong>Sorry!</strong> ${message}
+                <strong>Sorry!</strong> You did not pass the quiz.
             </div>
         </c:otherwise>
     </c:choose>
@@ -49,8 +69,65 @@
     <div class="mt-4">
         <h4>Total Points: ${pointsEarned}</h4>
     </div>
- <!-- Footer -->
-    <jsp:include page="/footer.jsp" />
 
+    <!-- Question Analysis Table -->
+    <h3 class="mt-5">Question Analysis</h3>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Question</th>
+                <th>Options</th>
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="analysis" items="${questionAnalysis}" varStatus="status">
+                <tr class="question-row">
+                    <td>${status.index + 1}</td>
+                    <td>${analysis.question}</td>
+                    <td>
+                        <c:if test="${not empty analysis.options}">
+                            <ul>
+                                <c:forEach var="option" items="${analysis.options}">
+                                    <li>${option.optionText}</li>
+                                </c:forEach>
+                            </ul>
+                        </c:if>
+                    </td>
+                    <td>${analysis.selectedAnswer}</td>
+                    <td>${analysis.correctAnswer}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${analysis.isCorrect}">
+                                <span class="text-success">Correct</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="text-danger">Incorrect</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
+    <!-- Pagination Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+        <button id="prevButton" class="btn btn-primary" onclick="showPage(currentPage - 1, ${fn:length(questionAnalysis)})" style="display: none;">Previous</button>
+        <button id="nextButton" class="btn btn-primary" onclick="showPage(currentPage + 1, ${fn:length(questionAnalysis)})" style="display: none;">Next</button>
+    </div>
+
+    <script>
+        // Initialize pagination
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(0, ${fn:length(questionAnalysis)});
+        });
+    </script>
+
+    <!-- Footer -->
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

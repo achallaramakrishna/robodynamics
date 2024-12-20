@@ -124,7 +124,7 @@
                     $.getJSON('${pageContext.request.contextPath}/slides/getCourseSessionDetails', {sessionId: sessionId}, function (data) {
                         let sessionDetailOptions = '<option value="">-- Select Session Detail --</option>';
                         $.each(data.sessionDetails, function (index, detail) {
-                            sessionDetailOptions += '<option value="' + detail.courseSessionDetailId + '">' + detail.topic + '</option>';
+                            sessionDetailOptions += '<option value="' + detail.sessionDetailId + '">' + detail.topic + '</option>';
                         });
                         $('#sessionDetail').html(sessionDetailOptions).prop('disabled', false);
                     });

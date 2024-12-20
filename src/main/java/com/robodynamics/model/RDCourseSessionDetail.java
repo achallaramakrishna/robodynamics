@@ -41,6 +41,7 @@ public class RDCourseSessionDetail {
 	
 	@ManyToOne
     @JoinColumn(name = "course_session_id")
+	@JsonIgnore
     private RDCourseSession courseSession;
 	
 	@Column(name = "topic")

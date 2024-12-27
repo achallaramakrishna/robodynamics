@@ -286,6 +286,12 @@ public class RDQuizController {
 
 	    List<RDQuizQuestion> questionsToShow = quizQuestions.subList(startIndex, endIndex);
 
+		/*
+		 * // Initialize the timer for the first time Integer remainingTime = (Integer)
+		 * session.getAttribute("remainingTime"); if (remainingTime == null) {
+		 * remainingTime = 10 * 60; // 10 minutes in seconds
+		 * session.setAttribute("remainingTime", remainingTime); }
+		 */
 	    model.addAttribute("quiz", quiz);
 	    model.addAttribute("questions", questionsToShow); // Pass the current set of questions
 	    model.addAttribute("currentPage", currentPage);
@@ -293,6 +299,8 @@ public class RDQuizController {
 	    model.addAttribute("pageSize", pageSize);
 	    model.addAttribute("mode", mode);
 	    model.addAttribute("showHeaderFooter", showHeaderFooter);
+	 //   model.addAttribute("remainingTime", remainingTime); // Pass timer value to JSP
+
 
 	    return "quizzes/take"; // Update the JSP to handle multiple questions
 	}
@@ -304,6 +312,7 @@ public class RDQuizController {
 	                           @RequestParam("action") String action,
 	                           @RequestParam Map<String, String> answers, 
 	                           @RequestParam(value = "mode", defaultValue = "practice") String mode,
+	                 //          @RequestParam("remainingTime") int remainingTime, // Capture remaining time
 	                           @RequestParam(value = "showHeaderFooter", defaultValue = "false") boolean showHeaderFooter,
 	                           HttpSession session, Model model) {
 		
@@ -364,6 +373,8 @@ public class RDQuizController {
 	    model.addAttribute("mode", mode);
 	    model.addAttribute("showHeaderFooter", showHeaderFooter);
 	    model.addAttribute("selectedAnswers", selectedAnswers);
+	//    model.addAttribute("remainingTime", remainingTime); // Pass timer data back
+
 
 	    return "quizzes/take";
 	}

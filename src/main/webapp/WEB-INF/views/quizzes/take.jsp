@@ -19,7 +19,7 @@
     crossorigin="anonymous"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2vVinnD/C7E91j9yyk5//jjpt/"
+    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
     crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -27,26 +27,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fun Quiz Time!</title>
 
-    <script type="text/javascript">
-        // Set a default action if no button is explicitly clicked
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.querySelector("form[action*='/quizzes/navigate']");
-            const actionInput = document.createElement("input");
-            actionInput.type = "hidden";
-            actionInput.name = "action";
-            actionInput.value = "next"; // Default action
-            form.appendChild(actionInput);
+<style>
+    #timer {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    #timer.green { color: green; }
+    #timer.yellow { color: orange; }
+    #timer.red { color: red; }
+</style>
 
-            // Update action value when a navigation button is clicked
-            form.addEventListener("submit", function (event) {
-                const clickedButton = document.activeElement; // Identify the button clicked
-                if (clickedButton && clickedButton.name === "action") {
-                    actionInput.value = clickedButton.value;
-                }
-            });
-        });
-    </script>
-    
+<script>
+	let remainingTime = ${remainingTime};
+
+	
+/* 	function startTimer() {
+	    const timerElement = document.getElementById("timer");
+	    const timerInput = document.getElementById("timerData");
+	    if (!timerElement) {
+	        console.error("Timer element not found!");
+	        return;
+	    }
+	
+	    const form = document.getElementById("quizForm");
+	
+	    const timerInterval = setInterval(() => {
+	        const minutes = Math.floor(remainingTime / 60);
+	        const seconds = remainingTime % 60;
+	
+	        // Update timer display
+	        timerElement.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+	
+		     // Update timer input for submission
+            timerInput.value = remainingTime;
+
+	        // Change color based on time left
+	        if (remainingTime > 120) {
+	            timerElement.className = "green";
+	        } else if (remainingTime > 30) {
+	            timerElement.className = "yellow";
+	        } else {
+	            timerElement.className = "red";
+	        }
+	
+	        // Submit form when time ends
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                alert("Time's up! Submitting your quiz.");
+                document.getElementById("quizForm").submit();
+            }
+	
+            remainingTime--;
+	    }, 1000);
+	} */
+
+    function playSound(type) {
+        const audio = new Audio(`/sounds/${type}.mp3`);
+        audio.play();
+    }
+
+    // Warn user if they leave the page
+    window.addEventListener("beforeunload", (event) => {
+        event.preventDefault();
+        event.returnValue = "Are you sure you want to leave? Your quiz will not be submitted.";
+    });
+
+/*     document.addEventListener("DOMContentLoaded", startTimer);
+ */</script>
 </head>
 
 <body class="container">
@@ -58,6 +105,9 @@
     <h2>🎉 Let's Take a Fun Quiz! 🎉</h2>
     <h4 class="mt-5">Quiz: ${quiz.quizName}</h4>
     
+    <!-- Timer -->
+<!--     <div id="timer" class="text-center green my-3"></div>
+ -->    
     <!-- Dropdown to select questions per page -->
     <div class="text-center mt-3">
         <label for="pageSize">Questions Per Page:</label>
@@ -76,10 +126,12 @@
         <input type="hidden" name="pageSize" value="${pageSize}" />
         <input type="hidden" name="mode" value="${mode}" />
         <input type="hidden" name="showHeaderFooter" value="${showHeaderFooter}" />
+<%--             <input type="hidden" id="timerData" name="remainingTime" value="${remainingTime}" />
+ --%>        
     </form>
 
     <!-- Questions Rendering -->
-    <form action="${pageContext.request.contextPath}/quizzes/navigate" method="post" autocomplete="off">
+    <form id="quizForm" action="${pageContext.request.contextPath}/quizzes/navigate" method="post" autocomplete="off">
         <input type="hidden" name="quizId" value="${quiz.quizId}" />
         <input type="hidden" name="currentPage" value="${currentPage}" />
         <input type="hidden" name="pageSize" value="${pageSize}" />

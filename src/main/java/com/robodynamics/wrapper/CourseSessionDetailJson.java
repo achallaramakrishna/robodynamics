@@ -19,6 +19,9 @@ public class CourseSessionDetailJson {
     
     // Getters and Setters
 
+    public CourseSessionDetailJson() {
+		
+	}
     public CourseSessionDetailJson(int courseSessionDetailId, String topic2) {
 		this.sessionDetailId = courseSessionDetailId;
 		this.topic = topic2;

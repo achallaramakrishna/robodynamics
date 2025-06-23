@@ -23,6 +23,7 @@ import com.robodynamics.form.RDQuizForm;
 import com.robodynamics.model.*;
 import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
 import com.robodynamics.service.*;
+import com.robodynamics.wrapper.CourseSessionDetailJson;
 
 @Controller
 @RequestMapping("/quizzes")
@@ -74,18 +75,28 @@ public class RDQuizController {
     // Endpoint to get session details by session ID
     @GetMapping("/getSessionByCourse")
     @ResponseBody
-     public List<RDCourseSession> getSessionsByCourse(@RequestParam Integer courseId) {
-    	System.out.println("Course ID : " + courseId);
+    public Map<String, Object> getCourseSessions(@RequestParam("courseId") int courseId) {
     	
-    	
-        return courseSessionService.getCourseSessionsByCourseId(courseId);  // Fetch sessions by course ID
+    	System.out.println("inside course sessions.. get method");
+        List<RDCourseSession> courseSessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("courseSessions", courseSessions);
+        return response;
     }
 
-    // Endpoint to get session details by session ID
-    @GetMapping("/getSessionDetailsBySession")
+    @GetMapping("/getCourseSessionDetails")
     @ResponseBody
-    public List<RDCourseSessionDetail> getSessionDetailsBySession(@RequestParam Integer	 sessionId) {
-        return courseSessionDetailService.findSessionDetailsBySessionId(sessionId);  // Fetch session details by session ID
+    public Map<String, Object> getCourseSessionDetails(@RequestParam("sessionId") int sessionId) {
+    	List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
+        System.out.println("size - " + sessionDetails.size());
+    	List<CourseSessionDetailJson> dtoList = sessionDetails.stream()
+            .map(detail -> new CourseSessionDetailJson(detail.getCourseSessionDetailId(), detail.getTopic()))
+            .collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("sessionDetails", dtoList);
+        return response;
     }
 
  // Show the form to create a quiz

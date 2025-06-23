@@ -152,7 +152,19 @@ public class RDCourse {
         }
     }
 
-    // Getters and setters for new fields
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;  // Default value set to true (active)
+    
+    
+    public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	// Getters and setters for new fields
     public GradeRange getGradeRange() {
         return gradeRange;
     }

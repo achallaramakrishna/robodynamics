@@ -120,7 +120,7 @@ public class RDCourseDaoImpl implements RDCourseDao {
 	public List<RDCourse> getFeaturedCourses() {
 		Session session = factory.getCurrentSession();
 
-		String hql = "FROM RDCourse WHERE isFeatured = true";
+		String hql = "FROM RDCourse WHERE isFeatured = true and is_active = true";
         Query<RDCourse> query = session.createQuery(hql, RDCourse.class);
         return query.getResultList();
 	}

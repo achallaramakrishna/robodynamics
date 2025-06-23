@@ -75,6 +75,36 @@
                 </div>
             </div>
 
+			<!-- Student Management Section -->
+			<div class="accordion-item">
+			    <h2 class="accordion-header" id="headingStudentManagement">
+			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+			                data-bs-target="#collapseStudentManagement" aria-expanded="false" 
+			                aria-controls="collapseStudentManagement">
+			            Student Management
+			        </button>
+			    </h2>
+			    <div id="collapseStudentManagement" class="accordion-collapse collapse" 
+			         aria-labelledby="headingStudentManagement" data-bs-parent="#dashboardAccordion">
+			        <div class="accordion-body">
+			            <div class="row">
+			                <!-- Manage Assignments Card -->
+			                <div class="col-md-4 mb-4">
+			                    <div class="card">
+			                        <div class="card-body">
+			                            <h5 class="card-title">Manage Assignments</h5>
+			                            <p class="card-text">View student uploads, grade assignments, and provide feedback.</p>
+			                            <a href="${pageContext.request.contextPath}/mentor/uploads" class="btn btn-primary">Go to Assignments</a>
+			                        </div>
+			                    </div>
+			                </div>
+			
+			                <!-- Optional: Add more student-related tools here -->
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
             <!-- Content Management Section -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingContentManagement">

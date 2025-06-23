@@ -15,6 +15,9 @@ public class RDQuizOption {
 
     @Column(name = "option_text", nullable = false)
     private String optionText;
+    
+    @Column(name = "option_image")
+    private String optionImage;  // Store the image URL
 
     @Column(name = "is_correct", nullable = false)
     private boolean isCorrect;
@@ -44,8 +47,18 @@ public class RDQuizOption {
         this.isCorrect = isCorrect;
        
     }
+    
+    
 
-    // Getters and Setters
+    public String getOptionImage() {
+		return optionImage;
+	}
+
+	public void setOptionImage(String optionImage) {
+		this.optionImage = optionImage;
+	}
+
+	// Getters and Setters
     public int getOptionId() {
         return optionId;
     }

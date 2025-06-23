@@ -98,6 +98,8 @@
         const quiz = event.target.getAttribute('data-quiz');
         const details = event.target.getAttribute('data-details');
         const id = event.target.getAttribute('data-id');
+        const courseId = event.target.getAttribute('data-courseid');
+        const sessionDetailId = event.target.getAttribute('data-id');
         
         console.log(contentType + "\t" + file + "\t" + quiz + "\t" + details + "\t" + id);
 
@@ -117,7 +119,11 @@
             document.getElementById('course-video').load();
         } else if (contentType === 'pdf') {
             document.getElementById('course-pdf').style.display = 'block';
-            document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
+            const path = `session_materials/` + courseId + `/` + file;
+            console.log('Path - ' + path);
+            document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/mentor/uploads/preview?path=` + path;
+
+       //     document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
         } else if (contentType === 'slide') {
             document.getElementById('course-fib').style.display = 'block';
             document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id + `?enrollmentId=` + enrollmentId;
@@ -201,8 +207,21 @@
                                                     data-quiz="${courseSessionDetail.quiz.quizId}"
                                                     data-details="${courseSessionDetail.topic}"
                                                     data-qa="${courseSessionDetail.topic}"
-                                                    data-id="${courseSessionDetail.courseSessionDetailId}">
+                                                    data-id="${courseSessionDetail.courseSessionDetailId}" 
+                                                    data-courseid="${courseSessionDetail.course.courseId}">
                                                     🧮 ${courseSessionDetail.topic}
+                                                    
+													<c:if test="${courseSessionDetail.type == 'pdf' && courseSessionDetail.assignment}">
+													    <form action="${pageContext.request.contextPath}/student/session-assignment/upload"
+													          method="post" enctype="multipart/form-data" class="mt-2">
+													        <input type="hidden" name="sessionDetailId" value="${courseSessionDetail.courseSessionDetailId}" />
+													        <input type="hidden" name="courseId" value="${courseSessionDetail.course.courseId}" />
+    														<input type="hidden" name="enrollmentId" value="${studentEnrollment.enrollmentId}" />
+													        <input type="file" name="assignmentFile" required class="form-control" />
+													        <button type="submit" class="btn btn-sm btn-success mt-1">Upload Assignment</button>
+													    </form>
+													</c:if>
+
                                                 </li>
                                             </c:forEach>
                                         </ul>

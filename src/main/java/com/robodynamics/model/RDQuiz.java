@@ -1,6 +1,8 @@
 package com.robodynamics.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 
@@ -64,6 +66,7 @@ public class RDQuiz {
 
     @ManyToOne
     @JoinColumn(name = "course_session_detail_id", referencedColumnName = "course_session_detail_id")
+    @JsonBackReference // Prevents recursion
     private RDCourseSessionDetail courseSessionDetail;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz")

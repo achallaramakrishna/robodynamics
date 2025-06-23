@@ -189,7 +189,9 @@ public class RDQuizQuestionController {
             for (RDQuizQuestionDTO questionDTO : questionUploadDTO.getQuestions()) {
                 RDQuizQuestion question = new RDQuizQuestion();
                 question.setQuestionText(questionDTO.getQuestionText());
+                System.out.println(questionDTO.getQuestionText());
                 question.setQuestionType(questionDTO.getQuestionType());
+                System.out.println(questionDTO.getDifficultyLevel());
                 question.setDifficultyLevel(DifficultyLevel.valueOf(questionDTO.getDifficultyLevel()));
                 question.setCorrectAnswer(questionDTO.getCorrectAnswer());
                 question.setMaxMarks(questionDTO.getMaxMarks());

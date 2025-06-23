@@ -334,7 +334,13 @@ footer a:active {
 	<!-- Header Section -->
 
 	<jsp:include page="header.jsp" />
-
+	
+	<c:if test="${not empty message}">
+	    <div class="alert alert-success" role="alert">
+	        ${message}
+	    </div>
+	</c:if>
+	
 
 	<div class="main-content">
 		<div class="container">

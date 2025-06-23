@@ -17,6 +17,9 @@ public class RDQuizQuestion {
 
     @Column(name = "question_type", nullable = false)
     private String questionType;
+    
+    @Column(name = "question_image")
+    private String questionImage;  // Store the URL or file path
 
     @Column(name = "correct_answer")
     private String correctAnswer;
@@ -61,8 +64,18 @@ public class RDQuizQuestion {
     @ManyToOne
     @JoinColumn(name = "exam_course_id")
     private RDExamCourse examCourse;
+    
+    
 
-    @ManyToOne
+    public String getQuestionImage() {
+		return questionImage;
+	}
+
+	public void setQuestionImage(String questionImage) {
+		this.questionImage = questionImage;
+	}
+
+	@ManyToOne
     @JoinColumn(name = "slide_id")
     private RDSlide slide;
 

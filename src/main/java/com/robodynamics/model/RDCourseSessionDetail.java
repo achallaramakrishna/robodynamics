@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -67,8 +69,31 @@ public class RDCourseSessionDetail {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quiz_id", referencedColumnName = "quiz_id")
-    private RDQuiz quiz;
+	@JsonManagedReference // Allows serialization
+	private RDQuiz quiz;
 	
+
+	@Column(name = "assignment")
+	private boolean assignment;
+
+	
+	public Boolean getHasAnimation() {
+		return hasAnimation;
+	}
+
+	public void setHasAnimation(Boolean hasAnimation) {
+		this.hasAnimation = hasAnimation;
+	}
+
+
+	public boolean isAssignment() {
+		return assignment;
+	}
+
+	public void setAssignment(boolean assignment) {
+		this.assignment = assignment;
+	}
+
 
 	@Column(name = "tier_level")
     @Enumerated(EnumType.STRING)

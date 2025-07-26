@@ -1,5 +1,6 @@
 package com.robodynamics.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.robodynamics.model.RDAsset;
@@ -23,6 +24,8 @@ public interface RDCourseOfferingService {
 	 List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
 
 	public void deleteCourseOffering(int courseOfferingId);
+
+	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today);
 
 
 }

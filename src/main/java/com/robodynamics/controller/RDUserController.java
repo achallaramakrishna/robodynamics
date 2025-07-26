@@ -11,16 +11,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.robodynamics.model.RDContact;
+import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDUser;
+import com.robodynamics.service.RDClassAttendanceService;
+import com.robodynamics.service.RDCourseOfferingService;
+import com.robodynamics.service.RDCourseTrackingService;
 import com.robodynamics.service.RDUserService;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RDUserController {
+	
+	@Autowired
+	private RDCourseOfferingService courseOfferingService;
 
 	@Autowired
-	private RDUserService service;
+	private RDClassAttendanceService attendanceService;
+
+	@Autowired
+	private RDCourseTrackingService trackingService;
+
+	@Autowired
+	private RDUserService userService;
 
 	@GetMapping("/register")	
 	public ModelAndView home(Model m) {
@@ -34,7 +50,7 @@ public class RDUserController {
 	public ModelAndView listusers(Model m) {
 		RDUser rdUser = new RDUser();
 		m.addAttribute("rdUser", rdUser);
-		List < RDUser > rdUserList = service.getRDUsers();
+		List < RDUser > rdUserList = userService.getRDUsers();
 		m.addAttribute("rdUserList", rdUserList);
 		ModelAndView modelAndView = new ModelAndView("manageusers");
 		return modelAndView;
@@ -42,7 +58,7 @@ public class RDUserController {
 
 	@PostMapping("/search")
 	public ModelAndView search(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
-		List < RDUser > rdUserList = service.searchUsers(rdUser.getProfile_id(),rdUser.getActive());
+		List < RDUser > rdUserList = userService.searchUsers(rdUser.getProfile_id(),rdUser.getActive());
 		model.addAttribute("rdUserList", rdUserList);
 		ModelAndView modelAndView = new ModelAndView("manageusers");
 		return modelAndView;
@@ -50,7 +66,7 @@ public class RDUserController {
 	
 	@PostMapping("/register")
 	public String register(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
-		service.registerRDUser(rdUser);
+		userService.registerRDUser(rdUser);
 		model.addAttribute("success", "Registered Successfully");
 		return "login";
 	}
@@ -94,7 +110,7 @@ public class RDUserController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
 		
-		RDUser rdUser2 = service.loginRDUser(rdUser);
+		RDUser rdUser2 = userService.loginRDUser(rdUser);
 		if (rdUser2 != null) {
 			model.addAttribute("rdUser", rdUser2);
 			session.setAttribute("rdUser", rdUser2);
@@ -130,18 +146,28 @@ public class RDUserController {
 	}
 	
 	@GetMapping("/dashboard")	
-	public ModelAndView homeDashboard(Model m) {
-		System.out.println("Inside Dashboard 111");
+	public ModelAndView homeDashboard(Model model) {
 		RDUser rdUser = new RDUser();
-		m.addAttribute("rdUser", rdUser);
-		ModelAndView modelAndView = new ModelAndView("dashboard");
-		return modelAndView;
+	    model.addAttribute("rdUser", rdUser);
+
+	    LocalDate today = LocalDate.now();
+	    List<RDCourseOffering> todayOfferings = courseOfferingService.getCourseOfferingsByDate(today);
+	    model.addAttribute("todayOfferings", todayOfferings);
+
+	    Map<Integer, List<RDUser>> enrolledStudentsMap = new HashMap<>();
+	    for (RDCourseOffering offering : todayOfferings) {
+	        List<RDUser> students = userService.getEnrolledStudents(offering.getCourseOfferingId());
+	        enrolledStudentsMap.put(offering.getCourseOfferingId(), students);
+	    }
+	    model.addAttribute("enrolledStudentsMap", enrolledStudentsMap);
+
+	    return new ModelAndView("dashboard");
 	}
 	
 	@PostMapping("/dashboard")
     public String showDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
 		System.out.println("Inside dashboard");
-        List<RDUser> users = service.searchUsers(rdUser.getProfile_id(), rdUser.getActive());
+        List<RDUser> users = userService.searchUsers(rdUser.getProfile_id(), rdUser.getActive());
         model.addAttribute("users", users);
         return "dashboard";
     }

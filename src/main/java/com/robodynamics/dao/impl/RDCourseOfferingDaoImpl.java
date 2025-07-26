@@ -1,5 +1,6 @@
 package com.robodynamics.dao.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -130,6 +131,19 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
         // Execute the query and return the result list
         return query.getResultList();
+	}
+
+	@Override
+	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate date) {
+		 // Convert day enum (e.g., MONDAY) to short string (e.g., "Mon")
+	    String shortDay = date.getDayOfWeek().toString().substring(0, 1).toUpperCase() + 
+	                      date.getDayOfWeek().toString().substring(1, 3).toLowerCase();
+
+	    String hql = "FROM RDCourseOffering c WHERE c.daysOfWeek LIKE :dayOfWeek";
+	    Query<RDCourseOffering> query = factory.getCurrentSession().createQuery(hql, RDCourseOffering.class);
+	    query.setParameter("dayOfWeek", "%" + shortDay + "%");
+
+	    return query.getResultList();
 	}
 
 

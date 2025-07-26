@@ -33,6 +33,9 @@ public interface RDUserService {
 	public RDUser getChildForParent(int userID);
 	
 	public List < RDUser > getRDUsersByProfile(int profileId);
+	
+	List<RDUser> getEnrolledStudents(int courseOfferingId);
+
 
 
 

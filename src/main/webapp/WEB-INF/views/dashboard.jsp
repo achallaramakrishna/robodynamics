@@ -36,6 +36,71 @@
         <h2 class="text-center">Admin Dashboard</h2>
 
         <div class="accordion" id="dashboardAccordion">
+           			<!-- Daily Activity Section -->
+			<div class="accordion-item">
+			    <h2 class="accordion-header" id="headingDailyActivity">
+			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+			                data-bs-target="#collapseDailyActivity" aria-expanded="false"
+			                aria-controls="collapseDailyActivity">
+			            Today's Course Offerings & Attendance
+			        </button>
+			    </h2>
+			    <div id="collapseDailyActivity" class="accordion-collapse collapse"
+			         aria-labelledby="headingDailyActivity" data-bs-parent="#dashboardAccordion">
+			        <div class="accordion-body">
+			
+			            <c:if test="${not empty todayOfferings}">
+			                <div class="table-responsive">
+			                    <table class="table table-bordered">
+			                        <thead class="table-light">
+			                            <tr>
+			                                <th>Course Offering</th>
+			                                <th>Time</th>
+			                                <th>Mentor</th>
+			                                <th>Enrolled Students</th>
+			                                <th>Mark Attendance</th>
+			                                <th>Track Course</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <c:forEach var="offering" items="${todayOfferings}">
+			                                <tr>
+			                                    <td>${offering.course.courseName}</td>
+			                                    <td>${offering.sessionStartTime} - ${offering.sessionEndTime}</td>
+			                                    <td>${offering.mentor.fullName}</td>
+			                                    <td>
+			                                        <ul>
+			                                            <c:forEach var="student" items="${enrolledStudentsMap[offering.courseOfferingId]}">
+			                                                <li>${student.fullName}</li>
+			                                            </c:forEach>
+			                                        </ul>
+			                                    </td>
+			                                    <td>
+			                                        <form method="post" action="${pageContext.request.contextPath}/attendance/mark">
+			                                            <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
+			                                            <button type="submit" class="btn btn-sm btn-success">Mark</button>
+			                                        </form>
+			                                    </td>
+			                                    <td>
+			                                        <form method="get" action="${pageContext.request.contextPath}/courseTracking/add">
+			                                            <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
+			                                            <button type="submit" class="btn btn-sm btn-info">Track</button>
+			                                        </form>
+			                                    </td>
+			                                </tr>
+			                            </c:forEach>
+			                        </tbody>
+			                    </table>
+			                </div>
+			            </c:if>
+			            <c:if test="${empty todayOfferings}">
+			                <div class="alert alert-warning text-center">No course offerings scheduled for today.</div>
+			            </c:if>
+			
+			        </div>
+			    </div>
+			</div>
+           
             <!-- User Management Section -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingUserManagement">
@@ -433,6 +498,8 @@
 						</div>
 					</div>
 				</div>
+
+
 
 
 			</div>

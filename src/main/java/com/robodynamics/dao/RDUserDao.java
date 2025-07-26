@@ -30,8 +30,8 @@ public interface RDUserDao {
     public RDUser findByUserName(String userName);
 
 	public RDUser getChildByParentId(int parentId);
+	
+	List<RDUser> findEnrolledStudentsByOffering(int courseOfferingId);
 
-
-  
 
 }

@@ -108,6 +108,12 @@ public class RDUserServiceImpl implements RDUserService {
 	public List<RDUser> getRDUsersByProfile(int profileId) {
 		return rdUserDao.getRDUsersByProfile(profileId);
 	}
+
+	@Override
+	@Transactional
+	public List<RDUser> getEnrolledStudents(int courseOfferingId) {
+		 return rdUserDao.findEnrolledStudentsByOffering(courseOfferingId);
+	}
 	
 	
 

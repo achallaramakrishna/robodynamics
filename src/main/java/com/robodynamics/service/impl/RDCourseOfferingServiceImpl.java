@@ -1,5 +1,6 @@
 package com.robodynamics.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,22 +30,26 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	}
 
 	@Override
+	@Transactional
 	public RDCourseOffering getRDCourseOffering(int rdCourseOfferingId) {
 		return rdCourseOfferingDao.getRDCourseOffering(rdCourseOfferingId);
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseOffering> getRDCourseOfferings() {
 		return rdCourseOfferingDao.getRDCourseOfferings();
 	}
 
 	@Override
+	@Transactional
 	public void deleteRDCourseOffering(int id) {
 		rdCourseOfferingDao.deleteRDCourseOffering(id);
 		
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseOffering> getRDCourseOfferingsList(int userId) {
 		return rdCourseOfferingDao.getRDCourseOfferingsList(userId);
 	}
@@ -67,6 +72,13 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	public void deleteCourseOffering(int courseOfferingId) {
 		
 		rdCourseOfferingDao.deleteRDCourseOffering(courseOfferingId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.getCourseOfferingsByDate(today);
 	}
 	
 }

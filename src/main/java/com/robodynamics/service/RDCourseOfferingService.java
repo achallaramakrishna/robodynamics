@@ -22,5 +22,7 @@ public interface RDCourseOfferingService {
 	
 	 List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
 
+	public void deleteCourseOffering(int courseOfferingId);
+
 
 }

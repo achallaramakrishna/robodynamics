@@ -1,5 +1,6 @@
 package com.robodynamics.model;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -59,6 +60,19 @@ public class RDCourseOffering {
     @JsonIgnore
     private RDUser instructor;
 
+    
+    @Column(name = "sessions_per_week")
+    private Integer sessionsPerWeek;
+
+    @Column(name = "days_of_week")
+    private String daysOfWeek; // Stored as comma-separated: "Mon,Wed,Fri"
+
+    @Column(name = "session_start_time")
+    private LocalTime sessionStartTime;
+
+    @Column(name = "session_end_time")
+    private LocalTime sessionEndTime;
+    
     
     public RDCourseOffering() {
     }
@@ -129,13 +143,49 @@ public class RDCourseOffering {
         this.instructor = instructor;
     }
 
+    
+	public Integer getSessionsPerWeek() {
+		return sessionsPerWeek;
+	}
+
+	public void setSessionsPerWeek(Integer sessionsPerWeek) {
+		this.sessionsPerWeek = sessionsPerWeek;
+	}
+
+	public String getDaysOfWeek() {
+		return daysOfWeek;
+	}
+
+	public void setDaysOfWeek(String daysOfWeek) {
+		this.daysOfWeek = daysOfWeek;
+	}
+
+	public LocalTime getSessionStartTime() {
+		return sessionStartTime;
+	}
+
+	public void setSessionStartTime(LocalTime sessionStartTime) {
+		this.sessionStartTime = sessionStartTime;
+	}
+
+	public LocalTime getSessionEndTime() {
+		return sessionEndTime;
+	}
+
+	public void setSessionEndTime(LocalTime sessionEndTime) {
+		this.sessionEndTime = sessionEndTime;
+	}
+
 	@Override
 	public String toString() {
 		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", courseOfferingName=" + courseOfferingName + ", title=" + title + ", status=" + status
-				+ ", course=" + course + ", instructor=" + instructor + "]";
+				+ ", course=" + course + ", instructor=" + instructor + ", sessionsPerWeek=" + sessionsPerWeek
+				+ ", daysOfWeek=" + daysOfWeek + ", sessionStartTime=" + sessionStartTime + ", sessionEndTime="
+				+ sessionEndTime + "]";
 	}
 
+	
     
 
     

@@ -50,45 +50,51 @@
 						<h2>Course Offerings List</h2>
 					</div>
 					<div class="panel-body">
-						<table class="table table-striped table-bordered">
-							<tr>
-								<th>Course Offering Name </th>
-								<th>Course Name</th>
-								<th>Instructor</th>
-								<th>Course Offering Start Date</th>
-								<th>Course Offering End Date</th>
-							</tr>
-							<!-- loop over and print our course categories -->
-							<c:forEach var="tempCourseOffering" items="${courseOfferings}">
 
-								<!-- construct an "update" link with customer id -->
-								<c:url var="updateLink" value="/courseoffering/updateForm">
-									<c:param name="courseOfferingId" value="${tempCourse.courseId}" />
-								</c:url>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Course Offering Name</th>
+            <th>Course Name</th>
+            <th>Instructor</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Sessions/Week</th>
+            <th>Days</th>
+            <th>Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="tempCourseOffering" items="${courseOfferings}">
+            <!-- construct update and delete URLs -->
+            <c:url var="updateLink" value="/courseoffering/updateForm">
+                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+            </c:url>
+            <c:url var="deleteLink" value="/courseoffering/delete">
+                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+            </c:url>
 
-								<!-- construct an "delete" link with customer id -->
-								<c:url var="deleteLink" value="/courseoffering/delete">
-									<c:param name="courseOfferingId" value="${tempCourse.courseId}" />
-								</c:url>
+            <tr>
+                <td>${tempCourseOffering.courseOfferingName}</td>
+                <td>${tempCourseOffering.course.courseName}</td>
+                <td>${tempCourseOffering.instructor.firstName} ${tempCourseOffering.instructor.lastName}</td>
+                <td>${tempCourseOffering.startDate}</td>
+                <td>${tempCourseOffering.endDate}</td>
+                <td>${tempCourseOffering.sessionsPerWeek}</td>
+                <td>${tempCourseOffering.daysOfWeek}</td>
+                <td>
+                    ${tempCourseOffering.sessionStartTime} - ${tempCourseOffering.sessionEndTime}
+                </td>
+                <td>
+                    <a href="${updateLink}">Update</a> |
+                    <a href="${deleteLink}" onclick="return confirm('Are you sure you want to delete this course offering?')">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
 
-								<tr>
-									<td>${tempCourseOffering.courseOfferingName}</td>
-									<td>${tempCourseOffering.course.courseName}</td>
-									<td>${tempCourseOffering.instructor.firstName}
-										${tempCourseOffering.instructor.lastName}</td>
-									<td>${tempCourseOffering.startDate}</td>
-									<td>${tempCourseOffering.endDate}</td>
-									<td>
-										<!-- display the update link --> <a href="${updateLink}">Update</a>
-										| <a href="${deleteLink}"
-										onclick="if (!(confirm('Are you sure you want to delete this course Offering?'))) return false">Delete</a>
-									</td>
-
-								</tr>
-
-							</c:forEach>
-
-						</table>
 
 					</div>
 				</div>

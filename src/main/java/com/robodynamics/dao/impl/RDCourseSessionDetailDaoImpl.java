@@ -120,4 +120,16 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
                 .list();
 	}
 
+
+	@Override
+	@Transactional
+	public RDCourseSessionDetail getByOfferingId(int courseOfferingId) {
+		  return (RDCourseSessionDetail) factory.getCurrentSession()
+			        .createQuery("FROM RDCourseSessionDetail " +
+			                     "WHERE courseOffering.courseOfferingId = :offeringId")
+			        .setParameter("offeringId", courseOfferingId)
+			        .setMaxResults(1)
+			        .uniqueResult();
+	}
+
 }

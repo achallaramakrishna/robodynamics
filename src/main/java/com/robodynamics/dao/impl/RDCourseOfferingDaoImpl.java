@@ -1,7 +1,9 @@
 package com.robodynamics.dao.impl;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
@@ -135,16 +137,24 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
 	@Override
 	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate date) {
-		 // Convert day enum (e.g., MONDAY) to short string (e.g., "Mon")
-	    String shortDay = date.getDayOfWeek().toString().substring(0, 1).toUpperCase() + 
-	                      date.getDayOfWeek().toString().substring(1, 3).toLowerCase();
+		String shortDay = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH); 
+	    System.out.println("🔍 Day Filter: " + shortDay);
 
-	    String hql = "FROM RDCourseOffering c WHERE c.daysOfWeek LIKE :dayOfWeek";
-	    Query<RDCourseOffering> query = factory.getCurrentSession().createQuery(hql, RDCourseOffering.class);
-	    query.setParameter("dayOfWeek", "%" + shortDay + "%");
+	    String hql = "FROM RDCourseOffering c " +
+	                 "WHERE c.daysOfWeek LIKE :dayOfWeek " +
+	                 "AND c.startDate <= :today " +
+	                 "AND c.endDate >= :today";
 
-	    return query.getResultList();
+	    Query<RDCourseOffering> query = factory.getCurrentSession()
+	        .createQuery(hql, RDCourseOffering.class);
+	    query.setParameter("dayOfWeek", "%" + shortDay + "%");  // ✅ '%Mon%'
+	    query.setParameter("today", java.sql.Date.valueOf(date));
+
+	    List<RDCourseOffering> results = query.getResultList();
+	    System.out.println("✅ Found " + results.size() + " offerings for " + shortDay);
+	    return results;
 	}
+
 
 
 }

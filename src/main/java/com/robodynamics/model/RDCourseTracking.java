@@ -44,7 +44,21 @@ public class RDCourseTracking {
     @JoinColumn(name = "created_by", nullable = false)
     private RDUser createdBy;  // User who entered the feedback
 
-    @Column(name = "tracking_date")
+    // ✅ New field to link to Class Session
+    @ManyToOne
+    @JoinColumn(name = "class_session_id", nullable = true)
+    private RDClassSession classSession;
+
+    
+    public RDClassSession getClassSession() {
+		return classSession;
+	}
+
+	public void setClassSession(RDClassSession classSession) {
+		this.classSession = classSession;
+	}
+
+	@Column(name = "tracking_date")
     private LocalDate trackingDate;
 
     public LocalDate getTrackingDate() {

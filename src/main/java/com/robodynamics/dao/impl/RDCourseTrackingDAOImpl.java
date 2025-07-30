@@ -84,5 +84,45 @@ public class RDCourseTrackingDAOImpl implements RDCourseTrackingDAO {
 		
 	}
 
+    // ✅ New method to fetch tracking by Class Session
+    public List<RDCourseTracking> getTrackingByClassSession(int classSessionId) {
+        String hql = "FROM RDCourseTracking t WHERE t.classSession.classSessionId = :classSessionId";
+        Query<RDCourseTracking> query = getCurrentSession().createQuery(hql, RDCourseTracking.class);
+        query.setParameter("classSessionId", classSessionId);
+        return query.getResultList();
+    }
+
+    @Override
+    public void save(RDCourseTracking tracking) {
+        sessionFactory.getCurrentSession().saveOrUpdate(tracking);
+    }
+
+    @Override
+    public List<RDCourseTracking> getTrackingsByStudent(int studentId) {
+        String hql = "FROM RDCourseTracking t WHERE t.enrollment.student.userId = :studentId";
+        Query<RDCourseTracking> query = sessionFactory.getCurrentSession()
+                .createQuery(hql, RDCourseTracking.class);
+        query.setParameter("studentId", studentId);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<RDCourseTracking> getTrackingsByCourseSession(int courseSessionId) {
+        String hql = "FROM RDCourseTracking t WHERE t.courseSession.courseSessionId = :sessionId";
+        Query<RDCourseTracking> query = sessionFactory.getCurrentSession()
+                .createQuery(hql, RDCourseTracking.class);
+        query.setParameter("sessionId", courseSessionId);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<RDCourseTracking> getTrackingsByClassSession(int classSessionId) {
+        String hql = "FROM RDCourseTracking t WHERE t.classSession.classSessionId = :classSessionId";
+        Query<RDCourseTracking> query = sessionFactory.getCurrentSession()
+                .createQuery(hql, RDCourseTracking.class);
+        query.setParameter("classSessionId", classSessionId);
+        return query.getResultList();
+    }
+
 	
 }

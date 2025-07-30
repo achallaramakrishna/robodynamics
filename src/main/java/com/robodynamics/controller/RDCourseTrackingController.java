@@ -24,6 +24,7 @@ import com.robodynamics.service.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -41,6 +42,9 @@ public class RDCourseTrackingController {
 
     @Autowired
     private RDStudentEnrollmentService enrollmentService;
+    
+    @Autowired
+    private RDClassSessionService classSessionService;
 
     @Autowired
     private RDCourseService courseService;
@@ -61,6 +65,37 @@ public class RDCourseTrackingController {
         return response;
     }
 
+    // Fetch course sessions by courseId
+    @GetMapping("/getCourseSessionsFromOffering")
+    @ResponseBody
+    public Map<String, Object> getCourseSessionsFromOffering(@RequestParam("offeringId") int offeringId) {
+    	Map<String, Object> response = new HashMap<>();
+
+        // 1️⃣ Fetch offering to get courseId
+        RDCourseOffering offering = courseOfferingService.getRDCourseOffering(offeringId);
+        if (offering == null || offering.getCourse() == null) {
+            response.put("courseSessions", Collections.emptyList());
+            return response;
+        }
+
+        int courseId = offering.getCourse().getCourseId();
+
+        // 2️⃣ Fetch sessions linked to this course
+        List<RDCourseSession> sessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+
+        // 3️⃣ Prepare response
+        List<Map<String, Object>> sessionList = new ArrayList<>();
+        for (RDCourseSession session : sessions) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("courseSessionId", session.getCourseSessionId());
+            map.put("sessionTitle", session.getSessionTitle());
+            sessionList.add(map);
+        }
+
+        response.put("courseSessions", sessionList);
+        return response;
+    }
+    
  // Fetch course offerings by courseId
     @GetMapping("/getCourseOfferings")
     @ResponseBody
@@ -163,27 +198,38 @@ public class RDCourseTrackingController {
     public ResponseEntity<String> saveTracking(
             @RequestParam int studentEnrollmentId,
             @RequestParam int courseSessionId,
+            @RequestParam int classSessionId,  // ✅ Added
             @RequestParam String feedback,
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate trackingDate,
             @RequestParam(required = false) MultipartFile[] files,
             HttpSession session) {
 
         try {
-        	
-        	RDUser rdUser = null;
-        	
-        	System.out.println("studentEnrollmentId - " + studentEnrollmentId);
-
-            if (session.getAttribute("rdUser") != null) {
-                rdUser = (RDUser) session.getAttribute("rdUser");
+            RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+            if (rdUser == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
             }
-        	courseTrackingService.saveTracking(studentEnrollmentId, courseSessionId, feedback, trackingDate, files,rdUser);
+
+            RDCourseTracking tracking = new RDCourseTracking();
+            tracking.setStudentEnrollment(enrollmentService.getRDStudentEnrollment(studentEnrollmentId));
+            tracking.setCourseSession(courseSessionService.getCourseSession(courseSessionId));
+            tracking.setClassSession(classSessionService.getRDClassSession(classSessionId));            tracking.setUser(rdUser);
+            tracking.setFeedback(feedback);
+            tracking.setTrackingDate(trackingDate != null ? trackingDate : LocalDate.now());
+            tracking.setCreatedBy(rdUser);
+            tracking.setCreatedAt(new Date());
+
+            courseTrackingService.save(tracking);
+
             return ResponseEntity.ok("Tracking entry saved successfully.");
         } catch (Exception e) {
-        	e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save tracking entry.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save tracking entry: " + e.getMessage());
         }
     }
+
+
+
     
     
 

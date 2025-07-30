@@ -1,116 +1,78 @@
 package com.robodynamics.dao.impl;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
+import com.robodynamics.dao.RDClassAttendanceDao;
+import com.robodynamics.model.RDClassAttendance;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.robodynamics.dao.RDClassAttendanceDao;
-import com.robodynamics.dao.RDClassSessionDao;
-import com.robodynamics.model.RDClassAttendance;
-import com.robodynamics.model.RDClassSession;
-import com.robodynamics.model.RDCourseOffering;
-import com.robodynamics.model.RDStudentEnrollment;
-import com.robodynamics.model.RDUser;
+import java.sql.Date;
+import java.util.List;
 
 @Repository
 @Transactional
 public class RDClassAttendanceDaoImpl implements RDClassAttendanceDao {
 
-	@Autowired
-	private SessionFactory factory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Override
-	public void saveRDClassAttendance(RDClassAttendance classAttendance) {
-		Session session = factory.getCurrentSession();
-		session.saveOrUpdate(classAttendance);
-	}
+    @Override
+    public void saveAttendance(RDClassAttendance attendance) {
+        sessionFactory.getCurrentSession().saveOrUpdate(attendance);
+    }
 
-	@Override
-	public RDClassAttendance getRDClassAttendance(int attendanceId) {
-		Session session = factory.getCurrentSession();
-		RDClassAttendance classAttendance = session.get(RDClassAttendance.class, attendanceId);
-		return classAttendance;
-	}
+    @Override
+    public RDClassAttendance findBySessionStudentAndDate(int sessionId, int studentId, Date date) {
+        String hql = "FROM RDClassAttendance att " +
+                     "WHERE att.classSession.classSessionId = :sessionId " +
+                     "AND att.student.userID = :studentId " +
+                     "AND att.attendanceDate = :date";
+        Query<RDClassAttendance> query = sessionFactory.getCurrentSession().createQuery(hql, RDClassAttendance.class);
+        query.setParameter("sessionId", sessionId);
+        query.setParameter("studentId", studentId);
+        query.setParameter("date", date);
+        return query.uniqueResult();
+    }
 
+    @Override
+    public List<RDClassAttendance> findBySession(int sessionId) {
+        String hql = "FROM RDClassAttendance att WHERE att.classSession.classSessionId = :sessionId";
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, RDClassAttendance.class)
+                .setParameter("sessionId", sessionId)
+                .list();
+    }
 
+    @Override
+    public List<RDClassAttendance> findByStudent(int studentId) {
+        String hql = "FROM RDClassAttendance att WHERE att.student.userID = :studentId";
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, RDClassAttendance.class)
+                .setParameter("studentId", studentId)
+                .list();
+    }
+    @Override
+    public String getAttendanceStatus(int userId, int offeringId, Date today) {
+        String hql = "SELECT CASE " +
+                     "WHEN a.attendanceStatus = 1 THEN 'Present' " +
+                     "WHEN a.attendanceStatus = 0 THEN 'Absent' " +
+                     "ELSE 'Not Marked' END " +
+                     "FROM RDClassAttendance a " +
+                     "JOIN a.classSession cs " +
+                     "JOIN a.enrollment e " +
+                     "WHERE e.student.userID = :userId " +
+                     "AND cs.courseOffering.courseOfferingId = :offeringId " +
+                     "AND a.attendanceDate = :date";
 
-	@Override
-	public List<RDClassAttendance> getRDClassAttendances() {
-		Session session = factory.getCurrentSession();
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<RDClassAttendance> cq = cb.createQuery(RDClassAttendance.class);
-		Root<RDClassAttendance> root = cq.from(RDClassAttendance.class);
-		cq.select(root);
-		Query query = session.createQuery(cq);
-		return query.getResultList();
-	}
-
-
-
-	@Override
-	public void deleteRDClassAttendance(int id) {
-		Session session = factory.getCurrentSession();
-		RDClassAttendance RDClassAttendance = session.byId(RDClassAttendance.class).load(id);
-		session.delete(RDClassAttendance);
-		
-	}
-
-
-
-	@Override
-	public List<RDClassAttendance> findByClassAttendance(RDClassSession classSession) {
-		return (List<RDClassAttendance>) factory.getCurrentSession()
-				.createQuery("from RDClassAttendance where classSession = :classSession")
-				.setParameter("classSession", classSession).list();
-	}
-
-	@Override
-	public List<RDClassAttendance> getAttendanceByStudent(RDUser student) {
-		return (List<RDClassAttendance>) factory.getCurrentSession()
-				.createQuery("from RDClassAttendance where student = :student")
-				.setParameter("student", student).list();
-	}
-
-	@Override
-	public List<RDClassAttendance> findByClassSession(RDClassSession classSession) {
-		 return (List<RDClassAttendance>) factory.getCurrentSession()
-		            .createQuery("from RDClassAttendance where classSession = :classSession")
-		            .setParameter("classSession", classSession)
-		            .list();
-	}
-
-	@Override
-	public RDClassAttendance findByClassSessionAndStudent(RDClassSession classSession, RDUser student) {
-		return (RDClassAttendance) factory.getCurrentSession()
-	            .createQuery("from RDClassAttendance where classSession = :classSession and student = :student")
-	            .setParameter("classSession", classSession)
-	            .setParameter("student", student)
-	            .uniqueResult();
-	}
-
-	@Override
-	public List<RDClassAttendance> getAttendanceByStudentByEnrollment(RDStudentEnrollment studentEnrollment) {
-		return (List<RDClassAttendance>) factory.getCurrentSession()
-				.createQuery("from RDClassAttendance where studentEnrollment = :studentEnrollment")
-				.setParameter("studentEnrollment", studentEnrollment).list();
-	}
-
-
-	
-
-
-
-
-
-
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, String.class)
+                .setParameter("userId", userId)
+                .setParameter("offeringId", offeringId)
+                .setParameter("date", today)
+                .uniqueResultOptional()
+                .orElse("Not Marked");
+    }
 
 }

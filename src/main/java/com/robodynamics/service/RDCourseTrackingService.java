@@ -29,6 +29,16 @@ public interface RDCourseTrackingService {
     
     void updateTracking(RDCourseTracking tracking);
     void deleteTracking(int trackingId);
+    
+    void save(RDCourseTracking tracking);
+    
+    // Optional methods for filtering
+    List<RDCourseTracking> getTrackingsByStudent(int studentId);
+
+    List<RDCourseTracking> getTrackingsByCourseSession(int courseSessionId);
+
+    List<RDCourseTracking> getTrackingsByClassSession(int classSessionId);
+
 
 
 }

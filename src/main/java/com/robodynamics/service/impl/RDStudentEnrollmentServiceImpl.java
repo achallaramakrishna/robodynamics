@@ -85,5 +85,11 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 		return rdStudentEnrollmentDao.getEnrolledStudentsByOfferingId(courseOfferingId);
 	}
 
+	@Override
+	@Transactional
+	public int findEnrollmentIdByStudentAndOffering(int studentId, int offeringId) {
+		return rdStudentEnrollmentDao.findEnrollmentIdByStudentAndOffering(studentId,offeringId);
+	}
+
 	
 }

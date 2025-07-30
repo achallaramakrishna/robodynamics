@@ -46,6 +46,8 @@ public class RDCourseSessionDetail {
 	@JsonIgnore
     private RDCourseSession courseSession;
 	
+	
+	
 	@Column(name = "topic")
 	private String topic;
 	

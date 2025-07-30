@@ -22,4 +22,15 @@ public interface RDCourseTrackingDAO {
 	void update(RDCourseTracking tracking);
 	
 	void delete(int trackingId);
+	
+	 // ✅ New method to fetch tracking by Class Session
+    List<RDCourseTracking> getTrackingByClassSession(int classSessionId);
+
+	void save(RDCourseTracking tracking);
+
+	List<RDCourseTracking> getTrackingsByStudent(int studentId);
+
+	List<RDCourseTracking> getTrackingsByCourseSession(int courseSessionId);
+
+	List<RDCourseTracking> getTrackingsByClassSession(int classSessionId);
 }

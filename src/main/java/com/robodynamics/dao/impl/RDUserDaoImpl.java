@@ -201,7 +201,7 @@ public class RDUserDaoImpl implements RDUserDao {
 
 	@Override
 	public List<RDUser> findEnrolledStudentsByOffering(int courseOfferingId) {
-	    String hql = "SELECT e.student FROM RDAssignment e WHERE e.courseOffering.courseOfferingId = :offeringId";
+		String hql = "SELECT e.student FROM RDStudentEnrollment e WHERE e.courseOffering.courseOfferingId = :offeringId";
 	    Query<RDUser> query = factory.getCurrentSession().createQuery(hql, RDUser.class);
 	    query.setParameter("offeringId", courseOfferingId);
 	    return query.getResultList();

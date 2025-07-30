@@ -1,5 +1,6 @@
 package com.robodynamics.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,18 @@ public class RDClassSessionServiceImpl implements RDClassSessionService {
 	public List<RDClassSession> getClassSessionsByCourseOffering(RDCourseOffering courseOffering) {
 		
 		return rdClassSessionDao.findByCourseOffering(courseOffering);
+	}
+
+	@Override
+	@Transactional
+	public RDClassSession getOrCreateTodaySession(int courseOfferingId) {
+		return rdClassSessionDao.getOrCreateTodaySession(courseOfferingId);
+	}
+
+	@Override
+	@Transactional
+	public RDClassSession findSessionByOfferingAndDate(int offeringId, Date date) {
+		 return rdClassSessionDao.findByOfferingAndDate(offeringId, date);
 	}
 
 }

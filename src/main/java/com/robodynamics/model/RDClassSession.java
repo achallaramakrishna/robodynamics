@@ -1,7 +1,9 @@
 package com.robodynamics.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,11 +32,26 @@ public class RDClassSession {
 	@Column(name = "session_description")
 	private String sessionDescription;
 	
+	public List<RDCourseTracking> getCourseTrackings() {
+		return courseTrackings;
+	}
+
+
+	public void setCourseTrackings(List<RDCourseTracking> courseTrackings) {
+		this.courseTrackings = courseTrackings;
+	}
+
+
 	@ManyToOne
     @JoinColumn(name = "course_offering_id")
     private RDCourseOffering courseOffering;
 
 
+	 // ✅ New: Link with course tracking
+    @OneToMany(mappedBy = "classSession", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RDCourseTracking> courseTrackings;	
+
+    
 	public RDClassSession() {
 		
 	}

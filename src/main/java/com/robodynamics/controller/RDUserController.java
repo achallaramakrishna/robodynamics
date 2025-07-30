@@ -8,16 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.robodynamics.dto.RDStudentAttendanceDTO;
+import com.robodynamics.model.RDClassSession;
 import com.robodynamics.model.RDContact;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.service.RDClassAttendanceService;
+import com.robodynamics.service.RDClassSessionService;
 import com.robodynamics.service.RDCourseOfferingService;
 import com.robodynamics.service.RDCourseTrackingService;
 import com.robodynamics.service.RDUserService;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +30,11 @@ import java.util.Map;
 
 @Controller
 public class RDUserController {
+	
+	
+	@Autowired
+	private RDClassSessionService classSessionService;
+	
 	
 	@Autowired
 	private RDCourseOfferingService courseOfferingService;
@@ -132,7 +142,7 @@ public class RDUserController {
 		        } else if (rdUser2.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
 		            return "redirect:/studentDashboard";  // Redirect to studentDashboard
 		        } else {
-		            return "dashboard";
+		            return "redirect:/dashboard";
 		        }
 		}
 		
@@ -145,30 +155,37 @@ public class RDUserController {
 
 	}
 	
-	@GetMapping("/dashboard")	
-	public ModelAndView homeDashboard(Model model) {
-		RDUser rdUser = new RDUser();
-	    model.addAttribute("rdUser", rdUser);
-
-	    LocalDate today = LocalDate.now();
+	@GetMapping("/dashboard")
+	public String homeDashboard(Model model) {
+		LocalDate today = LocalDate.now();
+		Date todayDate = java.sql.Date.valueOf(today);
 	    List<RDCourseOffering> todayOfferings = courseOfferingService.getCourseOfferingsByDate(today);
+	    System.out.println("✅ Controller received offerings: " + todayOfferings.size());
+
+	    for (RDCourseOffering offering : todayOfferings) {
+	        System.out.println("Offering: " + offering.getCourse().getCourseName());
+	    }
+
 	    model.addAttribute("todayOfferings", todayOfferings);
 
-	    Map<Integer, List<RDUser>> enrolledStudentsMap = new HashMap<>();
+	    Map<Integer, List<RDStudentAttendanceDTO>> enrolledStudentsMap = new HashMap<>();
 	    for (RDCourseOffering offering : todayOfferings) {
-	        List<RDUser> students = userService.getEnrolledStudents(offering.getCourseOfferingId());
-	        enrolledStudentsMap.put(offering.getCourseOfferingId(), students);
+	    	List<RDStudentAttendanceDTO> studentsWithStatus =
+	                attendanceService.getStudentsWithAttendanceStatus(offering.getCourseOfferingId(), todayDate);
+	        System.out.println("📌 Students for offering " + offering.getCourseOfferingId() + ": " + studentsWithStatus.size());
+	        enrolledStudentsMap.put(offering.getCourseOfferingId(), studentsWithStatus);
 	    }
 	    model.addAttribute("enrolledStudentsMap", enrolledStudentsMap);
 
-	    return new ModelAndView("dashboard");
+	    return "dashboard";
 	}
-	
+
 	@PostMapping("/dashboard")
-    public String showDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
-		System.out.println("Inside dashboard");
-        List<RDUser> users = userService.searchUsers(rdUser.getProfile_id(), rdUser.getActive());
-        model.addAttribute("users", users);
-        return "dashboard";
-    }
+	public String showDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
+	    System.out.println("Inside dashboard");
+	    List<RDUser> users = userService.searchUsers(rdUser.getProfile_id(), rdUser.getActive());
+	    model.addAttribute("users", users);
+	    return "dashboard";
+	}
+
 }

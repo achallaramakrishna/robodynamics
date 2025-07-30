@@ -1,32 +1,22 @@
 package com.robodynamics.service;
 
-import java.util.List;
-
+import com.robodynamics.dto.RDStudentAttendanceDTO;
 import com.robodynamics.model.RDClassAttendance;
-import com.robodynamics.model.RDClassSession;
 import com.robodynamics.model.RDStudentEnrollment;
-import com.robodynamics.model.RDUser;
+
+import java.sql.Date;
+import java.util.List;
 
 public interface RDClassAttendanceService {
 
-	public void saveRDClassAttendance(RDClassAttendance classAttendance);
-
-	public RDClassAttendance getRDClassAttendance(int attendanceId);
-
-	public List<RDClassAttendance> getRDClassAttendances();
-
-	public void deleteRDClassAttendance(int id);
-
-	List<RDClassAttendance> getAttendanceByClassSession(RDClassSession classSession);
-	
-	List<RDClassAttendance>  getAttendanceByStudent(RDUser student);
-	
-	List<RDClassAttendance> findByClassSession(RDClassSession classSession);
-
-	RDClassAttendance getAttendanceByClassSessionAndStudent(RDClassSession classSession, RDUser student);
-	
-	List<RDClassAttendance> getAttendanceByStudentByEnrollment(RDStudentEnrollment studentEnrollment);
+    void markAttendance(int offeringId, int sessionId, int studentId, int status, RDStudentEnrollment enrollment);
 
 
+    String getAttendanceStatusForStudent(int sessionId, int studentId);
 
+    List<RDClassAttendance> getAttendanceForSession(int sessionId);
+
+    List<RDClassAttendance> getAttendanceForStudent(int studentId);
+    
+    List<RDStudentAttendanceDTO> getStudentsWithAttendanceStatus(int offeringId, Date today);
 }

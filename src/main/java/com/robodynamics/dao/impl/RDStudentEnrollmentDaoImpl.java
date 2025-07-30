@@ -129,4 +129,18 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
                 .setParameter("courseOfferingId", courseOfferingId)
                 .getResultList();
 	}
+
+	@Override
+	public int findEnrollmentIdByStudentAndOffering(int studentId, int offeringId) {
+		String hql = "SELECT e.enrollmentId FROM RDStudentEnrollment e " +
+                "WHERE e.student.userID = :studentId " +
+                "AND e.courseOffering.courseOfferingId = :offeringId";
+
+	   return factory.getCurrentSession()
+	           .createQuery(hql, Integer.class)
+	           .setParameter("studentId", studentId)
+	           .setParameter("offeringId", offeringId)
+	           .uniqueResultOptional()
+	           .orElse(null);  // returns null if not found
+		}
 }

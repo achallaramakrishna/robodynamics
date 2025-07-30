@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.robodynamics.form.RDRegistrationForm;
 
@@ -62,6 +63,11 @@ public class RDUser {
 	
 	@Column(name = "active")
 	private int active;
+	
+
+    @Transient
+    private String attendanceStatus;
+
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mom_user_id")
@@ -254,6 +260,16 @@ public class RDUser {
         return parentUser;
     }
     
+    
+    
+	public String getAttendanceStatus() {
+		return attendanceStatus;
+	}
+
+	public void setAttendanceStatus(String attendanceStatus) {
+		this.attendanceStatus = attendanceStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "RDUser [userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="

@@ -35,7 +35,7 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="card-title">${courseOffering.course.courseName}</h5>
+                            <h5 class="card-title">${courseOffering.courseOfferingName}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Instructor: 
                                 ${courseOffering.instructor.firstName} ${courseOffering.instructor.lastName}
                             </h6>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ page isELIgnored="false" %>
 
@@ -35,71 +35,104 @@
     <div class="container-fluid my-4">
         <h2 class="text-center">Admin Dashboard</h2>
 
-        <div class="accordion" id="dashboardAccordion">
-           			<!-- Daily Activity Section -->
-			<div class="accordion-item">
-			    <h2 class="accordion-header" id="headingDailyActivity">
-			        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-			                data-bs-target="#collapseDailyActivity" aria-expanded="false"
-			                aria-controls="collapseDailyActivity">
-			            Today's Course Offerings & Attendance
-			        </button>
-			    </h2>
-			    <div id="collapseDailyActivity" class="accordion-collapse collapse"
-			         aria-labelledby="headingDailyActivity" data-bs-parent="#dashboardAccordion">
-			        <div class="accordion-body">
-			
-			            <c:if test="${not empty todayOfferings}">
-			                <div class="table-responsive">
-			                    <table class="table table-bordered">
-			                        <thead class="table-light">
-			                            <tr>
-			                                <th>Course Offering</th>
-			                                <th>Time</th>
-			                                <th>Mentor</th>
-			                                <th>Enrolled Students</th>
-			                                <th>Mark Attendance</th>
-			                                <th>Track Course</th>
-			                            </tr>
-			                        </thead>
-			                        <tbody>
-			                            <c:forEach var="offering" items="${todayOfferings}">
-			                                <tr>
-			                                    <td>${offering.course.courseName}</td>
-			                                    <td>${offering.sessionStartTime} - ${offering.sessionEndTime}</td>
-			                                    <td>${offering.mentor.fullName}</td>
-			                                    <td>
-			                                        <ul>
-			                                            <c:forEach var="student" items="${enrolledStudentsMap[offering.courseOfferingId]}">
-			                                                <li>${student.fullName}</li>
-			                                            </c:forEach>
-			                                        </ul>
-			                                    </td>
-			                                    <td>
-			                                        <form method="post" action="${pageContext.request.contextPath}/attendance/mark">
-			                                            <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
-			                                            <button type="submit" class="btn btn-sm btn-success">Mark</button>
-			                                        </form>
-			                                    </td>
-			                                    <td>
-			                                        <form method="get" action="${pageContext.request.contextPath}/courseTracking/add">
-			                                            <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
-			                                            <button type="submit" class="btn btn-sm btn-info">Track</button>
-			                                        </form>
-			                                    </td>
-			                                </tr>
-			                            </c:forEach>
-			                        </tbody>
-			                    </table>
-			                </div>
-			            </c:if>
-			            <c:if test="${empty todayOfferings}">
-			                <div class="alert alert-warning text-center">No course offerings scheduled for today.</div>
-			            </c:if>
-			
-			        </div>
-			    </div>
-			</div>
+<div class="accordion" id="dashboardAccordion">
+    <!-- Daily Activity Section -->
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingDailyActivity">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseDailyActivity" aria-expanded="false"
+                    aria-controls="collapseDailyActivity">
+                Today's Course Offerings & Attendance
+            </button>
+        </h2>
+        <div id="collapseDailyActivity" class="accordion-collapse collapse"
+             aria-labelledby="headingDailyActivity" data-bs-parent="#dashboardAccordion">
+            <div class="accordion-body">
+
+                <c:if test="${not empty todayOfferings}">
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Course Offering</th>
+                                    <th>Time</th>
+                                    <th>Mentor</th>
+                                    <th>Enrolled Students</th>
+                                    <th>Status</th>
+                                    <th>Mark Attendance</th>
+                                    <th>Track Course</th>
+                                </tr>
+                            </thead>
+							<tbody>
+							    <c:forEach var="offering" items="${todayOfferings}">
+							        <c:forEach var="student" items="${enrolledStudentsMap[offering.courseOfferingId]}">
+							            <tr>
+							                <td>${offering.course.courseName}</td>
+							                <td>${offering.sessionStartTime} - ${offering.sessionEndTime}</td>
+							                <td>${offering.instructor.firstName}</td>
+							                <td>${student.firstName}</td>
+							                <td>
+							                    <c:choose>
+							                       <c:when test="${student.attendanceStatus eq 'Present'}">
+													    <span class="badge bg-success">🟢 Present</span>
+													</c:when>
+													<c:when test="${student.attendanceStatus eq 'Absent'}">
+													    <span class="badge bg-warning text-dark">🟡 Absent</span>
+													</c:when>
+													<c:otherwise>
+													    <span class="badge bg-danger">🔴 Not Marked</span>
+													</c:otherwise>
+
+							                    </c:choose>
+							                </td>
+							                <td>
+												<form method="post" action="${pageContext.request.contextPath}/attendance/mark">
+												    <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
+												    <input type="hidden" name="studentId" value="${student.userID}" />
+												   	<input type="hidden" name="status" value="1" />
+													<button type="submit" class="btn btn-sm btn-success">Mark Present</button>
+												</form>
+												
+												<form method="post" action="${pageContext.request.contextPath}/attendance/mark">
+												    <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
+												    <input type="hidden" name="studentId" value="${student.userID}" />
+												    <input type="hidden" name="status" value="0" />
+												    <button type="submit" class="btn btn-sm btn-danger">Mark Absent</button>
+												</form>
+							                </td>
+							                <td>
+							                 <!-- ✅ Add Course Tracking Button -->
+												<button type="button" 
+												    class="btn btn-sm btn-primary mt-1"
+												    data-bs-toggle="modal" 
+												    data-bs-target="#courseTrackingModal"
+												    data-enrollment-id="${student.enrollmentId}" 
+												    data-class-session-id="${student.classSessionId}"
+												    data-offering-id="${offering.courseOfferingId}">
+												    Add Tracking
+												</button>
+
+
+											</td>
+							            </tr>
+							        </c:forEach>
+							    </c:forEach>
+							</tbody>
+                        </table>
+                    </div>
+                </c:if>
+
+                <c:if test="${empty todayOfferings}">
+                    <div class="alert alert-warning text-center">
+                        No course offerings scheduled for today.
+                    </div>
+                </c:if>
+
+            </div>
+        </div>
+    </div>
+</div>
+
            
             <!-- User Management Section -->
             <div class="accordion-item">
@@ -504,9 +537,99 @@
 
 			</div>
         </div>
-    </div>
+        
+        <!-- Course Tracking Modal -->
+		<div class="modal fade" id="courseTrackingModal" tabindex="-1" aria-labelledby="courseTrackingModalLabel" aria-hidden="true">
+		    <div class="modal-dialog modal-lg">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="courseTrackingModalLabel">Add Course Tracking</h5>
+		                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		            </div>
+		            <div class="modal-body">
+		                <form id="courseTrackingForm" enctype="multipart/form-data" method="post">
+		                    <input type="hidden" name="studentEnrollmentId" id="trackingStudentId">
+		                    <input type="hidden" name="classSessionId" id="trackingClassSessionId">
+		                    
+		                    <div class="mb-3">
+		                        <label for="courseSessionId" class="form-label">Course Session</label>
+		                        <select class="form-control" id="courseSessionId" name="courseSessionId" required>
+		                            <option value="">-- Select Course Session --</option>
+		                        </select>
+		                    </div>
+		                    <div class="mb-3">
+		                        <label for="feedback" class="form-label">Feedback</label>
+		                        <textarea class="form-control" id="feedback" name="feedback" rows="3" required></textarea>
+		                    </div>
+		                    <div class="mb-3">
+		                        <label for="trackingDate" class="form-label">Date (Optional)</label>
+		                        <input type="date" class="form-control" id="trackingDate" name="trackingDate">
+		                    </div>
+		                    <div class="mb-3">
+		                        <label for="files" class="form-label">Files</label>
+		                        <input type="file" class="form-control" id="files" name="files" multiple>
+		                        <div id="fileNames" class="mt-2"></div>
+		                    </div>
+		                </form>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+		                <button type="button" id="saveButton" class="btn btn-primary">Save</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		        
+		<script>
+		$('#courseTrackingModal').on('show.bs.modal', function (event) {
+		    var button = $(event.relatedTarget);
+		    var enrollmentId = button.data('enrollment-id');
+
+		    $('#trackingStudentId').val(enrollmentId);
+		    $('#trackingClassSessionId').val(button.data('class-session-id')); // ✅ now populated
+
+
+		    $.getJSON('${pageContext.request.contextPath}/courseTracking/getCourseSessionsFromOffering', 
+		        { offeringId: button.data('offering-id') }, function(data) {
+		            $('#courseSessionId').empty().append('<option value="">-- Select Course Session --</option>');
+		            $.each(data.courseSessions, function(index, session) {
+		                $('#courseSessionId').append('<option value="'+session.courseSessionId+'">'+session.sessionTitle+'</option>');
+		            });
+		    });
+		});
+
+
+		
+		$('#saveButton').click(function(e) {
+		    e.preventDefault();
+		    console.log("EnrollmentID:", $('#trackingStudentId').val());
+		    console.log("SessionID:", $('#courseSessionId').val());
+		    console.log("Feedback:", $('#feedback').val());
+
+		    var formData = new FormData($('#courseTrackingForm')[0]);
+
+		    $.ajax({
+		        url: '${pageContext.request.contextPath}/courseTracking/save',
+		        type: 'POST',
+		        data: formData,
+		        processData: false,
+		        contentType: false,
+		        success: function(response) {
+		            $('#courseTrackingModal').modal('hide');
+		            alert(response);
+		        },
+		        error: function(xhr) {
+		            alert('Failed to save course tracking: ' + xhr.responseText);
+		        }
+		    });
+		});
+
+
+
+
+		</script>
 
     <!-- Include footer JSP -->
     <jsp:include page="footer.jsp" />
 </body>
-</html>
+</html> 

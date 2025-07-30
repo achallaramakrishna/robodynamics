@@ -142,4 +142,30 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
         // Delete tracking entry from the database
         trackingDAO.delete(trackingId);
     }
+
+    @Override
+    @Transactional
+    public void save(RDCourseTracking tracking) {
+    	trackingDAO.save(tracking);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RDCourseTracking> getTrackingsByStudent(int studentId) {
+        return trackingDAO.getTrackingsByStudent(studentId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RDCourseTracking> getTrackingsByCourseSession(int courseSessionId) {
+        return trackingDAO.getTrackingsByCourseSession(courseSessionId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RDCourseTracking> getTrackingsByClassSession(int classSessionId) {
+    
+    
+        return trackingDAO.getTrackingsByClassSession(classSessionId);
+    }
 }

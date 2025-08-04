@@ -80,5 +80,11 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 		// TODO Auto-generated method stub
 		return rdCourseOfferingDao.getCourseOfferingsByDate(today);
 	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status) {
+		return rdCourseOfferingDao.getFilteredOfferings(courseId,mentorId,status);
+	}
 	
 }

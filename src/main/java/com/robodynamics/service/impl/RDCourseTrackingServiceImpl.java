@@ -5,6 +5,7 @@ import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseTracking;
 import com.robodynamics.model.RDStudentEnrollment;
 import com.robodynamics.model.RDUser;
+import com.robodynamics.service.RDClassSessionService;
 import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.service.RDCourseTrackingService;
 import com.robodynamics.service.RDStudentEnrollmentService;
@@ -25,6 +26,10 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
 
     @Autowired
     private RDCourseTrackingDAO trackingDAO;
+    
+    @Autowired
+    private RDClassSessionService classSessionService;
+    
     
     @Autowired
     private RDStudentEnrollmentService enrollmentService;
@@ -73,30 +78,34 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
 
 	@Override
 	@Transactional
-	public void saveTracking(int studentEnrollmentId, int courseSessionId, String feedback, LocalDate trackingDate,
-			MultipartFile[] files, RDUser rdUser) {
-		// Fetch related entities
-        RDStudentEnrollment studentEnrollment = enrollmentService.getRDStudentEnrollment(studentEnrollmentId);
-        RDCourseSession courseSession = sessionService.getCourseSession(courseSessionId);
+	public void saveOrUpdateCourseTracking(int enrollmentId, Integer sessionId, int classSessionId,
+	                                       String feedback, LocalDate trackingDate,
+	                                       MultipartFile[] files, RDUser student, RDUser mentor) {
 
-        // Prepare tracking entity
-        RDCourseTracking tracking = new RDCourseTracking();
-        tracking.setStudentEnrollment(studentEnrollment);
-        tracking.setCourseSession(courseSession);
-        tracking.setFeedback(feedback);
-        
-        tracking.setTrackingDate(trackingDate != null ? trackingDate : LocalDate.now());
-        tracking.setUser(studentEnrollment.getStudent());
-        tracking.setCreatedBy(rdUser);
-
-        // Save file paths
-        String filePaths = saveUploadedFiles(files);
-        tracking.setFilePaths(filePaths);
-
-        // Persist tracking entity
-        trackingDAO.saveTracking(tracking);
-		
+	    RDCourseTracking existing = trackingDAO.findByEnrollmentAndDate(enrollmentId, trackingDate);
+	    
+	    if (existing != null) {
+	        existing.setFeedback(feedback);
+	        existing.setUser(student);
+	        existing.setCourseSession(sessionService.getCourseSession(sessionId));
+	        existing.setTrackingDate(trackingDate);
+	        existing.setCreatedBy(mentor);
+	        trackingDAO.updateTracking(existing);
+	        System.out.println("🔄 Course tracking updated for enrollmentId: " + enrollmentId);
+	    } else {
+	        RDCourseTracking newTracking = new RDCourseTracking();
+	        newTracking.setStudentEnrollment(enrollmentService.getRDStudentEnrollment(enrollmentId));
+	        newTracking.setUser(student);
+	        newTracking.setCourseSession(sessionService.getCourseSession(sessionId));
+	        newTracking.setFeedback(feedback);
+	        newTracking.setTrackingDate(trackingDate);
+	        newTracking.setCreatedBy(mentor);
+	        newTracking.setClassSession(classSessionService.getRDClassSession(classSessionId));
+	        trackingDAO.saveTracking(newTracking);
+	        System.out.println("✅ Course tracking saved for enrollmentId: " + enrollmentId);
+	    }
 	}
+
 	
 	@Override
     public String saveUploadedFiles(MultipartFile[] files) {
@@ -168,4 +177,12 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
     
         return trackingDAO.getTrackingsByClassSession(classSessionId);
     }
+
+	@Override
+    @Transactional(readOnly = true)
+	public RDCourseTracking findByEnrollmentAndDate(Integer enrollmentId, LocalDate today) {
+        return trackingDAO.findByEnrollmentAndDate(enrollmentId, today);
+	}
+
+	
 }

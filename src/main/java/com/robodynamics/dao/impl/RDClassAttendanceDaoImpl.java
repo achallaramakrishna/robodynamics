@@ -2,6 +2,9 @@ package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDClassAttendanceDao;
 import com.robodynamics.model.RDClassAttendance;
+import com.robodynamics.model.RDCourseOffering;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -54,25 +58,67 @@ public class RDClassAttendanceDaoImpl implements RDClassAttendanceDao {
                 .list();
     }
     @Override
-    public String getAttendanceStatus(int userId, int offeringId, Date today) {
-        String hql = "SELECT CASE " +
-                     "WHEN a.attendanceStatus = 1 THEN 'Present' " +
-                     "WHEN a.attendanceStatus = 0 THEN 'Absent' " +
-                     "ELSE 'Not Marked' END " +
-                     "FROM RDClassAttendance a " +
-                     "JOIN a.classSession cs " +
-                     "JOIN a.enrollment e " +
-                     "WHERE e.student.userID = :userId " +
-                     "AND cs.courseOffering.courseOfferingId = :offeringId " +
-                     "AND a.attendanceDate = :date";
-
-        return sessionFactory.getCurrentSession()
-                .createQuery(hql, String.class)
-                .setParameter("userId", userId)
-                .setParameter("offeringId", offeringId)
-                .setParameter("date", today)
-                .uniqueResultOptional()
-                .orElse("Not Marked");
+    public String getAttendanceStatus(int userId, int offeringId, LocalDate sessionDate) {
+    	 String hql = "SELECT a.status FROM RDClassAttendance a "
+                 + "WHERE a.student.userID = :userId "
+                 + "AND a.courseOffering.courseOfferingId = :offeringId "
+                 + "AND a.classSession.sessionDate = :sessionDate";
+      return sessionFactory.getCurrentSession()
+                    .createQuery(hql, String.class)
+                    .setParameter("userId", userId)
+                    .setParameter("offeringId", offeringId)
+                    .setParameter("sessionDate", sessionDate)
+                    .uniqueResult();
     }
+
+	@Override
+	public RDClassAttendance getAttendanceById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		RDClassAttendance classAttendance = session.get(RDClassAttendance.class, id);
+		return classAttendance;
+	}
+
+	@Override
+	public boolean existsByOfferingAndUserAndDate(int offeringId, int userId, LocalDate date) {
+	    String hql = "SELECT COUNT(a) FROM RDClassAttendance a " +
+	                 "WHERE a.classSession.courseOffering.courseOfferingId = :offeringId " +
+	                 "AND a.student.userID = :userId " +
+	                 "AND a.classSession.sessionDate = :sessionDate";
+
+	    Long count = sessionFactory.getCurrentSession()
+	                        .createQuery(hql, Long.class)
+	                        .setParameter("offeringId", offeringId)
+	                        .setParameter("userId", userId)
+	                        .setParameter("sessionDate", date)
+	                        .uniqueResult();
+
+	    return count != null && count > 0;
+	}
+
+	@Override
+	public Object saveOrUpdateAttendance(int offeringId, int userId, Integer sessionId, int classSessionId,
+			String attendanceStatus, LocalDate today) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RDClassAttendance findByOfferingStudentAndDate(int offeringId, int studentId, LocalDate date) {
+		String hql = "FROM RDClassAttendance a " +
+                "WHERE a.classSession.courseOffering.courseOfferingId = :offeringId " +
+                "AND a.student.userID = :studentId " +
+                "AND a.attendanceDate = :date";
+
+   return sessionFactory.getCurrentSession()
+           .createQuery(hql, RDClassAttendance.class)
+           .setParameter("offeringId", offeringId)
+           .setParameter("studentId", studentId)
+           .setParameter("date", java.sql.Date.valueOf(date))
+           .uniqueResult();
+	}
+
+	
+	
+	
 
 }

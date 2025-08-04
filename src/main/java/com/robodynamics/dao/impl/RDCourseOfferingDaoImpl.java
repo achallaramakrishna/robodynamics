@@ -137,23 +137,61 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
 	@Override
 	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate date) {
-		String shortDay = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH); 
+	    String shortDay = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH); 
 	    System.out.println("🔍 Day Filter: " + shortDay);
 
 	    String hql = "FROM RDCourseOffering c " +
-	                 "WHERE c.daysOfWeek LIKE :dayOfWeek " +
+	                 "WHERE REPLACE(c.daysOfWeek, ' ', '') LIKE :dayOfWeek " +
 	                 "AND c.startDate <= :today " +
 	                 "AND c.endDate >= :today";
 
 	    Query<RDCourseOffering> query = factory.getCurrentSession()
 	        .createQuery(hql, RDCourseOffering.class);
-	    query.setParameter("dayOfWeek", "%" + shortDay + "%");  // ✅ '%Mon%'
+	    query.setParameter("dayOfWeek", "%" + shortDay + "%");
 	    query.setParameter("today", java.sql.Date.valueOf(date));
 
 	    List<RDCourseOffering> results = query.getResultList();
 	    System.out.println("✅ Found " + results.size() + " offerings for " + shortDay);
+
+	    results.forEach(offering ->
+	        System.out.println("📌 " + offering.getCourseOfferingName() +
+	                           " | Days: " + offering.getDaysOfWeek())
+	    );
+
 	    return results;
 	}
+
+
+	@Override
+	public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status) {
+        Session session = factory.getCurrentSession();
+
+        StringBuilder hql = new StringBuilder("FROM RDCourseOffering o WHERE 1=1");
+
+        if (courseId != null) {
+            hql.append(" AND o.course.courseId = :courseId");
+        }
+        if (mentorId != null) {
+            hql.append(" AND o.instructor.userID = :mentorId");
+        }
+        if (status != null && !status.isEmpty()) {
+            hql.append(" AND o.status = :status");
+        }
+
+        Query<RDCourseOffering> query = session.createQuery(hql.toString(), RDCourseOffering.class);
+
+        if (courseId != null) {
+            query.setParameter("courseId", courseId);
+        }
+        if (mentorId != null) {
+            query.setParameter("mentorId", mentorId);
+        }
+        if (status != null && !status.isEmpty()) {
+            query.setParameter("status", status);
+        }
+
+        return query.getResultList();
+    }
 
 
 

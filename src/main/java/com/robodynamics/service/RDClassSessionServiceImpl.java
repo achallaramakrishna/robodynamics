@@ -1,5 +1,6 @@
 package com.robodynamics.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,9 @@ public class RDClassSessionServiceImpl implements RDClassSessionService {
 
 	@Autowired
 	private RDClassSessionDao rdClassSessionDao;
+	
+	@Autowired
+	private RDCourseOfferingService courseOfferingService;
 	
 	@Override
 	@Transactional
@@ -54,16 +58,35 @@ public class RDClassSessionServiceImpl implements RDClassSessionService {
 		return rdClassSessionDao.findByCourseOffering(courseOffering);
 	}
 
+	
+
 	@Override
 	@Transactional
-	public RDClassSession getOrCreateTodaySession(int courseOfferingId) {
-		return rdClassSessionDao.getOrCreateTodaySession(courseOfferingId);
+	public RDClassSession findSessionByOfferingAndDate(int offeringId, LocalDate date) {
+		 return rdClassSessionDao.findByOfferingAndDate(offeringId, date);
 	}
 
 	@Override
 	@Transactional
-	public RDClassSession findSessionByOfferingAndDate(int offeringId, Date date) {
-		 return rdClassSessionDao.findByOfferingAndDate(offeringId, date);
+	public RDClassSession getOrCreateClassSession(int offeringId, LocalDate sessionDate) {
+		 RDClassSession existingSession = rdClassSessionDao.findByOfferingAndDate(offeringId, sessionDate);
+		    if (existingSession != null) {
+		        return existingSession;
+		    }
+
+		    RDCourseOffering offering = courseOfferingService.getRDCourseOffering(offeringId);
+
+		    RDClassSession newSession = new RDClassSession();
+		    newSession.setCourseOffering(offering);
+		    newSession.setSessionDate(sessionDate);
+		    newSession.setSessionTitle("Session for " + sessionDate); // Example default title
+		    newSession.setSessionDescription("Auto-created session."); // Optional
+
+		    return rdClassSessionDao.saveRDClassSession(newSession);
+
 	}
+
+	
+
 
 }

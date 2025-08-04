@@ -86,10 +86,16 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 	}
 
 	@Override
-	@Transactional
-	public int findEnrollmentIdByStudentAndOffering(int studentId, int offeringId) {
-		return rdStudentEnrollmentDao.findEnrollmentIdByStudentAndOffering(studentId,offeringId);
+	public Integer findEnrollmentIdByStudentAndOffering(int studentId, int offeringId) {
+	    Integer enrollmentId = rdStudentEnrollmentDao.findEnrollmentIdByStudentAndOffering(studentId, offeringId);
+
+	    if (enrollmentId == null) {
+	        System.out.println("⚠️ No enrollment found for studentId=" + studentId + ", offeringId=" + offeringId);
+	        return null; // Return null instead of calling intValue()
+	    }
+	    return enrollmentId;
 	}
+
 
 	
 }

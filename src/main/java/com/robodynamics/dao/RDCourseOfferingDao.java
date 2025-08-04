@@ -25,6 +25,8 @@ public interface RDCourseOfferingDao {
 
 	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today);
 
+	public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status);
+
 
 
 

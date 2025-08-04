@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -124,5 +125,20 @@ public class RDCourseTrackingDAOImpl implements RDCourseTrackingDAO {
         return query.getResultList();
     }
 
-	
+	@Override
+	public RDCourseTracking findByEnrollmentAndDate(int enrollmentId, LocalDate trackingDate) {
+		String hql = "FROM RDCourseTracking t " +
+                "WHERE t.studentEnrollment.enrollmentId  = :enrollmentId " +
+                "AND t.trackingDate = :trackingDate";
+   return sessionFactory.getCurrentSession()
+           .createQuery(hql, RDCourseTracking.class)
+           .setParameter("enrollmentId", enrollmentId)
+           .setParameter("trackingDate", trackingDate)
+           .uniqueResult();
+	}
+
+	// ✅ Update existing tracking record
+    public void updateTracking(RDCourseTracking tracking) {
+        sessionFactory.getCurrentSession().update(tracking);
+    }
 }

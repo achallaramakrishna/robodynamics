@@ -28,7 +28,7 @@ public interface RDStudentEnrollmentService {
 
 	public List<RDStudentEnrollment> getEnrolledStudentsByOfferingId(int courseOfferingId);
 	
-	public int findEnrollmentIdByStudentAndOffering(int studentId, int offeringId);
+	public Integer findEnrollmentIdByStudentAndOffering(int offeringId, int studentId);
 
 
 

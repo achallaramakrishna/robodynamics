@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseSessionDao;
+import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSession.TierLevel;
 
@@ -11,6 +12,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -30,7 +34,6 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
     public RDCourseSession getRDCourseSession(int courseSessionId) {
         Session session = factory.getCurrentSession();
         RDCourseSession courseSession = session.get(RDCourseSession.class, courseSessionId);
-        Hibernate.initialize(courseSession.getChildSessions());
         return courseSession;
     }
 
@@ -135,6 +138,26 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
                 .createQuery("FROM RDCourseSession WHERE tierLevel = :tierLevel ORDER BY tierOrder ASC")
                 .setParameter("tierLevel", tierLevel)
                 .list();
+	}
+
+	@Override
+	public List<RDCourseSession> getCourseSessionsByCourseOfferingId(int courseOfferingId) {
+		 Session session = factory.getCurrentSession();
+
+		    // Fetch CourseOffering
+		    RDCourseOffering offering = session.get(RDCourseOffering.class, courseOfferingId);
+		    if (offering == null || offering.getCourse() == null) {
+		        return Collections.emptyList();
+		    }
+
+		    int courseId = offering.getCourse().getCourseId();
+
+		    // Fetch Sessions using Course ID
+		    String hql = "FROM RDCourseSession cs WHERE cs.course.courseId = :courseId ORDER BY cs.tierOrder ASC";
+		    Query<RDCourseSession> query = session.createQuery(hql, RDCourseSession.class);
+		    query.setParameter("courseId", courseId);
+
+		    return query.getResultList();
 	}
 
 

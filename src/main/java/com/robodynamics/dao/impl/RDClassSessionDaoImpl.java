@@ -34,10 +34,10 @@ public class RDClassSessionDaoImpl implements RDClassSessionDao {
 	
 	
 	@Override
-	public void saveRDClassSession(RDClassSession classSession) {
+	public RDClassSession saveRDClassSession(RDClassSession classSession) {
 		Session session = factory.getCurrentSession();
-		session.saveOrUpdate(classSession);
-
+        session.saveOrUpdate(classSession); // ✅ Will insert or update automatically
+        return classSession;
 		
 	}
 
@@ -85,45 +85,20 @@ public class RDClassSessionDaoImpl implements RDClassSessionDao {
 
 
 
-	@Override
-	public RDClassSession getOrCreateTodaySession(int courseOfferingId) {
-		  Date today = java.sql.Date.valueOf(LocalDate.now());
-
-	        Session session = factory.getCurrentSession();
-	        RDClassSession classSession = (RDClassSession) session.createQuery(
-	            "FROM RDClassSession " +
-	            "WHERE courseOffering.courseOfferingId = :offeringId " +
-	            "AND sessionDate = :today")
-	            .setParameter("offeringId", courseOfferingId)
-	            .setParameter("today", today)
-	            .uniqueResult();
-
-	        if (classSession == null) {
-	            classSession = new RDClassSession();
-	            classSession.setCourseOffering(rdCourseOfferingService.getRDCourseOffering(courseOfferingId));
-	            classSession.setSessionDate(today);
-	            classSession.setSessionTitle("Auto-generated Session");
-	            classSession.setSessionDescription("Created automatically for attendance");
-
-	            session.save(classSession);
-	        }
-
-	        return classSession;
-	    }
-
-
+	
 
 	@Override
-	public RDClassSession findByOfferingAndDate(int offeringId, Date date) {
+	public RDClassSession findByOfferingAndDate(int offeringId, LocalDate sessionDate) {
 	    String hql = "FROM RDClassSession cs " +
-	                 "WHERE cs.courseOffering.id = :offeringId " +
+	                 "WHERE cs.courseOffering.courseOfferingId = :offeringId " +
 	                 "AND cs.sessionDate = :sessionDate";
 	    return factory.getCurrentSession()
 	        .createQuery(hql, RDClassSession.class)
 	        .setParameter("offeringId", offeringId)
-	        .setParameter("sessionDate", date)
+	        .setParameter("sessionDate", sessionDate)
 	        .uniqueResult();
 	}
+
 
 
 

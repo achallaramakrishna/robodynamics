@@ -131,16 +131,23 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 	}
 
 	@Override
-	public int findEnrollmentIdByStudentAndOffering(int studentId, int offeringId) {
-		String hql = "SELECT e.enrollmentId FROM RDStudentEnrollment e " +
-                "WHERE e.student.userID = :studentId " +
-                "AND e.courseOffering.courseOfferingId = :offeringId";
+	@Transactional
+	public Integer findEnrollmentIdByStudentAndOffering(int userId, int offeringId) {
+	    System.out.println("🔍 DAO Input: offeringId=" + offeringId + ", userId=" + userId);
 
-	   return factory.getCurrentSession()
-	           .createQuery(hql, Integer.class)
-	           .setParameter("studentId", studentId)
-	           .setParameter("offeringId", offeringId)
-	           .uniqueResultOptional()
-	           .orElse(null);  // returns null if not found
-		}
+	    String hql = "SELECT e.enrollmentId FROM RDStudentEnrollment e "
+	               + "WHERE e.courseOffering.courseOfferingId = :offeringId "
+	               + "AND e.student.userID = :userId"; // ✅ use userId (confirm RDUser entity field)
+
+	    Query<Integer> query = factory.getCurrentSession().createQuery(hql, Integer.class);
+	    query.setParameter("offeringId", offeringId);
+	    query.setParameter("userId", userId);
+
+	    Integer enrollmentId = query.uniqueResult();
+	    System.out.println("✅ DAO Result EnrollmentId: " + enrollmentId);
+	    return enrollmentId;
+	}
+
+
+
 }

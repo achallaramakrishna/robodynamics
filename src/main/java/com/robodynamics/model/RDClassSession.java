@@ -1,5 +1,6 @@
 package com.robodynamics.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class RDClassSession {
 	private int classSessionId;
 	
 	@Column(name = "session_date")
-	private Date sessionDate;
+	private LocalDate  sessionDate;
 	
 	@Column(name = "session_title")
 	private String sessionTitle;
@@ -67,12 +68,12 @@ public class RDClassSession {
 	}
 
 
-	public Date getSessionDate() {
+	public LocalDate getSessionDate() {
 		return sessionDate;
 	}
 
 
-	public void setSessionDate(Date sessionDate) {
+	public void setSessionDate(LocalDate sessionDate) {
 		this.sessionDate = sessionDate;
 	}
 

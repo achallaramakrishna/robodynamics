@@ -29,6 +29,7 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
     @Autowired
     private RDCourseSessionDao courseSessionDao;
     
+    
     @Autowired
     private RDCourseService courseService;
 
@@ -208,5 +209,10 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
 	@Override
 	public List<RDCourseSession> findByTierLevelOrderedByTierOrder(TierLevel tierLevel) {
 		return courseSessionDao.findByTierLevelOrderedByTierOrder(tierLevel);
+	}
+
+	@Override
+	public List<RDCourseSession> getCourseSessionsByCourseOfferingId(int courseOfferingId) {
+		return courseSessionDao.getCourseSessionsByCourseOfferingId(courseOfferingId);
 	}
 }

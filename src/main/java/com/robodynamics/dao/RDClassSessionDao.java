@@ -1,5 +1,6 @@
 package com.robodynamics.dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import com.robodynamics.model.RDCourseTracking;
 
 public interface RDClassSessionDao {
 
-	public void saveRDClassSession(RDClassSession classSession);
+	public RDClassSession saveRDClassSession(RDClassSession classSession);
 
 	public RDClassSession getRDClassSession(int classSessionId);
 
@@ -19,9 +20,8 @@ public interface RDClassSessionDao {
 
 	List<RDClassSession> findByCourseOffering(RDCourseOffering courseOffering);
 
-	public RDClassSession getOrCreateTodaySession(int courseOfferingId);
-	
-    RDClassSession findByOfferingAndDate(int offeringId, Date date);
+
+    RDClassSession findByOfferingAndDate(int offeringId, LocalDate date);
     
   // ✅ New Methods for Tracking Integration
     

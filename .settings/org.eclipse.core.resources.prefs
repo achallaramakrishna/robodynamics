@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/attendance-tracking.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/courseDetails.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/courses.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/dashboard-sections.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/dashboard.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/demo/vedicmath1.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/flashcards/flashcard-list.jsp=UTF-8

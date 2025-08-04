@@ -23,7 +23,6 @@ public interface RDCourseTrackingService {
     
     List<RDCourseTracking> getTrackingEntriesByEnrollmentId(int studentEnrollmentId);
     
-    void saveTracking(int studentEnrollmentId, int courseSessionId, String feedback, LocalDate trackingDate, MultipartFile[] files,RDUser rdUser);
     
     String saveUploadedFiles(MultipartFile[] files);
     
@@ -38,6 +37,12 @@ public interface RDCourseTrackingService {
     List<RDCourseTracking> getTrackingsByCourseSession(int courseSessionId);
 
     List<RDCourseTracking> getTrackingsByClassSession(int classSessionId);
+    
+    void saveOrUpdateCourseTracking(int enrollmentId, Integer sessionId, int classSessionId,
+            String feedback, LocalDate trackingDate,
+            MultipartFile[] files, RDUser student, RDUser mentor);
+
+	RDCourseTracking findByEnrollmentAndDate(Integer enrollmentId, LocalDate today);
 
 
 

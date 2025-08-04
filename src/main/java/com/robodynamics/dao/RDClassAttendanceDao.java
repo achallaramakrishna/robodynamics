@@ -2,6 +2,7 @@ package com.robodynamics.dao;
 
 import com.robodynamics.model.RDClassAttendance;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RDClassAttendanceDao {
@@ -14,5 +15,15 @@ public interface RDClassAttendanceDao {
 
     List<RDClassAttendance> findByStudent(int studentId);
 
-	String getAttendanceStatus(int userID, int offeringId, Date today);
+	String getAttendanceStatus(int userID, int offeringId, LocalDate today);
+	
+	RDClassAttendance getAttendanceById(int id);
+
+	boolean existsByOfferingAndUserAndDate(int courseOfferingId, int userID, LocalDate today);
+
+	Object saveOrUpdateAttendance(int offeringId, int userId, Integer sessionId, int classSessionId,
+			String attendanceStatus, LocalDate today);
+
+	RDClassAttendance findByOfferingStudentAndDate(int offeringId, int studentId, LocalDate date);
+
 }

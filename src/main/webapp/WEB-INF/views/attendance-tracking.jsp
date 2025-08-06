@@ -32,7 +32,23 @@
 <jsp:include page="/header.jsp" />
 
 <div class="container-fluid my-3">
-    <h3 class="text-center mb-3">Attendance & Tracking</h3>
+     <h3 class="text-center mb-3">
+        Attendance & Tracking for 
+        <span class="text-primary">${selectedDate}</span>
+    </h3>
+	
+	   <!-- ✅ Date Picker to select other dates -->
+    <div class="container mb-3">
+        <form method="get" action="${pageContext.request.contextPath}/attendance-tracking" 
+              class="d-flex align-items-center justify-content-center">
+            <label for="datePicker" class="me-2 fw-bold">Select Date:</label>
+            <input type="date" id="datePicker" name="date"
+			       class="form-control w-auto me-2"
+			       value="${selectedDateFormatted}" />
+            <button type="submit" class="btn btn-primary btn-sm">Load</button>
+        </form>
+    </div>
+    
 
     <c:if test="${not empty todayOfferings}">
         <div class="accordion" id="attendanceAccordion">
@@ -63,7 +79,8 @@
                         <div class="accordion-body">
                             <form method="post" action="${pageContext.request.contextPath}/attendance/attendanceTracking/save">
                                 <input type="hidden" name="offeringId" value="${offering.courseOfferingId}" />
-
+								<input type="hidden" name="date" value="${selectedDateFormatted}" />
+								
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle text-center">
                                         <thead class="table-light">
@@ -153,7 +170,7 @@
 
     <c:if test="${empty todayOfferings}">
         <div class="alert alert-warning text-center">
-            No course offerings scheduled for today.
+            No course offerings scheduled for this date.
         </div>
     </c:if>
 </div>

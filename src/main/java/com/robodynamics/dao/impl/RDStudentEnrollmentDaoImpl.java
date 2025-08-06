@@ -132,7 +132,7 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 
 	@Override
 	@Transactional
-	public Integer findEnrollmentIdByStudentAndOffering(int userId, int offeringId) {
+	public Integer findEnrollmentIdByStudentAndOffering(int offeringId, int userId) {
 	    System.out.println("🔍 DAO Input: offeringId=" + offeringId + ", userId=" + userId);
 
 	    String hql = "SELECT e.enrollmentId FROM RDStudentEnrollment e "

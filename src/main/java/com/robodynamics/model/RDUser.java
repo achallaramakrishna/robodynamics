@@ -64,6 +64,17 @@ public class RDUser {
 	@Column(name = "active")
 	private int active;
 	
+	  // ✅ Newly added columns for Student
+    @Column(name = "grade")
+    private String grade;
+
+    @Column(name = "school_name")
+    private String schoolName;
+
+    @Column(name = "parent_contact")
+    private String parentContact;
+
+	
 
     @Transient
     private String attendanceStatus;
@@ -217,6 +228,33 @@ public class RDUser {
 		this.dad = dad;
 	}
 	
+	
+	
+	
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
+	public String getParentContact() {
+		return parentContact;
+	}
+
+	public void setParentContact(String parentContact) {
+		this.parentContact = parentContact;
+	}
+
 	// Method to convert parent details to RDUser object
     public static RDUser fromParent(RDRegistrationForm.Parent parent) {
         RDUser parentUser = new RDUser();

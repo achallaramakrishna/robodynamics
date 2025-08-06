@@ -26,5 +26,5 @@ public interface RDStudentEnrollmentDao {
 
 	public List<RDStudentEnrollment> getEnrolledStudentsByOfferingId(int courseOfferingId);
 
-	public Integer findEnrollmentIdByStudentAndOffering(int studentId, int offeringId);
+	public Integer findEnrollmentIdByStudentAndOffering(int offeringId, int studentId);
 }

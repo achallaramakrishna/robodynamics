@@ -50,15 +50,23 @@ public class RDClassAttendanceController {
     @PostMapping("/attendanceTracking/save")
     public String saveAttendanceAndTracking(
             @RequestParam("offeringId") int offeringId,
+            @RequestParam(value = "date", required = false) String selectedDateStr,
             HttpServletRequest request, HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         System.out.println("✅ Save or update attendance and tracking... for offeringId: " + offeringId);
         
-      
+        System.out.println("Selected Date String : " + selectedDateStr);
 
-        LocalDate today = LocalDate.now();
-        RDClassSession classSession = classSessionService.getOrCreateClassSession(offeringId, today);
+
+        // ✅ Parse selected date or default to today
+        LocalDate selectedDate = (selectedDateStr != null && !selectedDateStr.isEmpty())
+                ? LocalDate.parse(selectedDateStr)
+                : LocalDate.now();
+        
+        System.out.println("Selected Date : " + selectedDate);
+        
+        RDClassSession classSession = classSessionService.getOrCreateClassSession(offeringId, selectedDate);
 
         // ✅ Loop only attendance-related parameters
         request.getParameterMap().forEach((key, value) -> {
@@ -83,9 +91,9 @@ public class RDClassAttendanceController {
                             sessionId,
                             classSession.getClassSessionId(),
                             attendanceStatus,
-                            today
+                            selectedDate
                     );
-
+                    System.out.println("hello 1 - Offering id - " + offeringId + "User id : " + userId);
                     int enrollmentId = enrollmentService.findEnrollmentIdByStudentAndOffering(offeringId, userId);
                     RDUser studentUser = userService.getRDUser(userId);
 
@@ -94,7 +102,7 @@ public class RDClassAttendanceController {
                             sessionId,
                             classSession.getClassSessionId(),
                             feedback,
-                            today,
+                            selectedDate,
                             null,
                             studentUser,
                             mentor
@@ -107,7 +115,8 @@ public class RDClassAttendanceController {
         });
 
         redirectAttributes.addFlashAttribute("message", "Attendance and tracking saved/updated successfully!");
-        return "redirect:/attendance-tracking";
+     // ✅ Redirect back to same selected date view
+        return "redirect:/attendance-tracking?date=" + selectedDate;
     }
 
 }

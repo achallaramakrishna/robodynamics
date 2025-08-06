@@ -31,6 +31,18 @@
                 </div>
             </div>
         </div>
+        <div class="card shadow-sm mb-3">
+		    <div class="card-header bg-primary text-white">
+		        <h5 class="mb-0">🔎 Search</h5>
+		    </div>
+		    <div class="card-body text-center">
+		        <p>Search students, mentors, courses, and sessions easily.</p>
+		        <a href="${pageContext.request.contextPath}/admin/search" class="btn btn-success">
+		            Go to Search Page →
+		        </a>
+		    </div>
+		</div>
+        
 
         <!-- Include other management sections -->
         <jsp:include page="dashboard-sections.jsp"/>

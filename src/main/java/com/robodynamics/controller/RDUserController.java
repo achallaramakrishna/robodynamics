@@ -191,11 +191,20 @@ public class RDUserController {
 	}
 	
 	@GetMapping("/attendance-tracking")
-	public String viewAttendanceTracking(Model model) {
-	    LocalDate today = LocalDate.now();
+	public String viewAttendanceTracking(@RequestParam(value = "date", required = false) String dateParam,
+			Model model) {
+		  // ✅ Parse the selected date or use today's date
+	    LocalDate selectedDate = (dateParam != null && !dateParam.isEmpty())
+	            ? LocalDate.parse(dateParam)
+	            : LocalDate.now();
+	 
+	    // ✅ Format date for HTML input type="date"
+	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    model.addAttribute("selectedDateFormatted", selectedDate.format(inputFormatter));
 
+	    
 	    // ✅ Get today's offerings
-	    List<RDCourseOffering> todayOfferings = courseOfferingService.getCourseOfferingsByDate(today);
+	    List<RDCourseOffering> todayOfferings = courseOfferingService.getCourseOfferingsByDate(selectedDate);
 
 	    System.out.println("✅ Controller received offerings: " + todayOfferings.size());
 	    todayOfferings.forEach(o -> System.out.println("Offering: " + o.getCourse().getCourseName()));
@@ -234,14 +243,16 @@ public class RDUserController {
 	        
 
 	        for (RDUser student : students) {
-	            String status = attendanceService.getAttendanceStatusForStudent(offeringId, student.getUserID(), today);
+	            String status = attendanceService.getAttendanceStatusForStudent(offeringId, student.getUserID(), selectedDate);
 	            studentAttendanceMap.put(student.getUserID(), status != null ? status : "");
 
-	            Integer enrollmentId = enrollmentService.findEnrollmentIdByStudentAndOffering(student.getUserID(), offeringId);
+                System.out.println("hello 1 - Offering id - " + offeringId + "User id : " + student.getUserID());
+
+	            Integer enrollmentId = enrollmentService.findEnrollmentIdByStudentAndOffering(offeringId, student.getUserID());
 	            System.out.println("🟢 Enrollment ID for student " + student.getUserID() + ": " + enrollmentId);
 
 	            if (enrollmentId != null) {
-	                RDCourseTracking tracking = courseTrackingService.findByEnrollmentAndDate(enrollmentId, today);
+	                RDCourseTracking tracking = courseTrackingService.findByEnrollmentAndDate(enrollmentId, selectedDate);
 	                if (tracking != null) {
 	                    Integer sessionId = (tracking.getCourseSession() != null) 
 	                                        ? tracking.getCourseSession().getCourseSessionId() 

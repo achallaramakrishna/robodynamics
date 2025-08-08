@@ -12,6 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
  <script>
   const contextPath='${pageContext.request.contextPath}';
@@ -291,20 +292,18 @@ function doFilter(){
           </select>
         </div>
 
-        <div class="col-md-4">
-          <label class="form-label">Student (by Enrollment)</label>
-          <select id="enrollmentId" class="form-select">
-            <option value="">-- All Students --</option>
-            <!-- Optional SSR seed (AJAX will replace) -->
-            <c:forEach var="s" items="${studentList}">
-              <option value="${s.enrollmentId}">
-                ${s.firstName} ${s.lastName} (Enr# ${s.enrollmentId})
-              </option>
-            </c:forEach>
-          </select>
-        </div>
-      </div>
-    </div>
+		<div class="col-md-4" id="studentFilterGroup" style="display:none;">
+		  <label class="form-label">Student (by Enrollment)</label>
+		  <select id="enrollmentId" class="form-select">
+		    <option value="">-- All Students --</option>
+		    <c:forEach var="s" items="${studentList}">
+		      <option value="${s.enrollmentId}">
+		        ${s.firstName} ${s.lastName} (Enr# ${s.enrollmentId})
+		      </option>
+		    </c:forEach>
+		  </select>
+		</div>
+
 
     <!-- Results -->
     <div class="card shadow-sm">

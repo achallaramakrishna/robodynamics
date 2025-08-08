@@ -39,6 +39,8 @@ public interface RDCourseTrackingDAO {
 	List<RDCourseTracking> getTrackingsByClassSession(int classSessionId);
 	
 	RDCourseTracking findByEnrollmentAndDate(int enrollmentId, LocalDate trackingDate);
+
+	List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId);
 	
 	
 }

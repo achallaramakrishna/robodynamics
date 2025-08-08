@@ -113,7 +113,7 @@ footer a:active {
         <div class="row">
             <!-- Logo and Social Media Section -->
             <div class="col-md-3 footer-section">
-                 <img src="images/footerlogo.jpg" alt="Robo Dynamics Logo" class="footer-logo">
+                 <img src="${pageContext.request.contextPath}/resources/images/footerlogo.jpg" alt="Robo Dynamics Logo" class="footer-logo">
                 <p>Equip your child with the skills they need to thrive in a technology-driven world.</p>
                 <div class="social-icons">
                      <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f fa-lg"></i></a>

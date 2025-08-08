@@ -33,6 +33,8 @@ public interface RDCourseDao {
     
     List<RDCourse> findByTierLevel(String tierLevel); // Optional if courses are associated with a tier level
 
+	public List<RDCourse> getAllCoursesWithOfferingsAndEnrollments();
+
 
 
 }

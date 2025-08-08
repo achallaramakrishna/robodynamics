@@ -148,6 +148,23 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 	    return enrollmentId;
 	}
 
+	
+	public List<RDStudentEnrollment> getEnrollmentsByCourseId(Integer courseId) {
+		String hql =
+			    "select e " +
+			    "from RDStudentEnrollment e " +
+			    "join fetch e.student s " +
+			    "join fetch e.courseOffering o " +
+			    "join fetch o.course c " +
+			    "where c.courseId = :courseId";
+
+
+	        return factory.getCurrentSession()
+	                .createQuery(hql)
+	                .setParameter("courseId", courseId)
+	                .list();
+	}
+
 
 
 }

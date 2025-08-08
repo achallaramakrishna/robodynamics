@@ -214,4 +214,10 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
 	    return null; // No attendance found
 	}
 
+	@Override
+	public List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId) {
+		
+		return attendanceDao.getAttendanceByEnrollment(enrollmentId);
+	}
+
 }

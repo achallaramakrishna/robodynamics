@@ -26,4 +26,6 @@ public interface RDClassAttendanceDao {
 
 	RDClassAttendance findByOfferingStudentAndDate(int offeringId, int studentId, LocalDate date);
 
+	List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId);
+
 }

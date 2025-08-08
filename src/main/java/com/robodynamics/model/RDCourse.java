@@ -106,6 +106,8 @@ public class RDCourse {
     @Column(name = "promo_video_url") // Mapping the new column
     private String promoVideoUrl;
 
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<RDCourseOffering> courseOfferings;
 
     public boolean isFeatured() {
         return isFeatured;
@@ -215,8 +217,17 @@ public class RDCourse {
     
     // Getters and Setters
 
+    
     public int getReviewsCount() {
 		return reviewsCount;
+	}
+
+	public List<RDCourseOffering> getCourseOfferings() {
+		return courseOfferings;
+	}
+
+	public void setCourseOfferings(List<RDCourseOffering> courseOfferings) {
+		this.courseOfferings = courseOfferings;
 	}
 
 	public void setReviewsCount(int reviewsCount) {

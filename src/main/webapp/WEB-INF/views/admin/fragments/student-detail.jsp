@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <div class="container-fluid">
   <div class="row">
@@ -20,7 +22,22 @@
         <ul class="list-group list-group-flush">
           <c:forEach var="a" items="${attendanceList}">
             <li class="list-group-item">
-              <strong>${a.classSession.sessionDate}</strong> — Status: ${a.attendanceStatus}
+              <strong>
+				    <fmt:parseDate value="${a.classSession.sessionDate}" pattern="yyyy-MM-dd" var="d"/>
+					<strong><fmt:formatDate value="${d}" pattern="yyyy-MM-dd"/></strong>
+				</strong>
+				— Status:
+				<c:choose>
+				  <c:when test="${a.attendanceStatus == 1}">
+				    <span class="badge bg-success">Present</span>
+				  </c:when>
+				  <c:when test="${a.attendanceStatus == 0}">
+				    <span class="badge bg-danger">Absent</span>
+				  </c:when>
+				  <c:otherwise>
+				    <span class="badge bg-secondary">Not Marked</span>
+				  </c:otherwise>
+				</c:choose>
             </li>
           </c:forEach>
           <c:if test="${empty attendanceList}">

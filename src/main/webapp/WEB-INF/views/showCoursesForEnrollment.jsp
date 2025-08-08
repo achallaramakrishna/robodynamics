@@ -97,9 +97,12 @@
 					                            <p class="card-text text-muted">Age Group: ${course.courseAgeGroup}</p>
 					                            <p class="card-text" style="font-size: 14px;">Duration: ${course.courseDuration}</p>
 					                            <p class="card-text" style="font-size: 14px;">Description: ${course.courseDescription}</p>
-					                            <a href="${pageContext.request.contextPath}/enrollment/showForm?courseId=${course.courseId}" class="btn btn-primary btn-block" style="border-radius: 20px; background-color: #42a5f5; border: none;">
-					                                Enroll Now
-					                            </a>
+						                           <c:url var="enrollUrl" value="/enrollment/showForm">
+													  <c:param name="courseId" value="${course.courseId}"/>
+													</c:url>
+													<a href="${enrollUrl}" class="btn btn-primary btn-block" style="border-radius:20px;background:#42a5f5;border:none;">
+													  Enroll Now
+													</a>
 					                        </div>
 					                    </div>
 					                </div>

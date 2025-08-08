@@ -181,20 +181,29 @@
 
 
   // PATCH: build query without empty params to avoid 400
-  function doFilter(){
-    const courseId     = $('#courseId').val();
-    const offeringId   = $('#offeringId').val();
-    const enrollmentId = $('#enrollmentId').val();
-
-    const params = {};
-    if (courseId)     params.courseId = courseId;
-    if (offeringId)   params.offeringId = offeringId;
-    if (enrollmentId) params.enrollmentId = enrollmentId;
-
-    $.get(contextPath + '/admin/search/filter', params, function(html){
+function doFilter(){
+  const enrollmentId = $('#enrollmentId').val();
+  // If student selected, filter ONLY by enrollmentId
+  if (enrollmentId) {
+    $.get(contextPath + '/admin/search/filter', { enrollmentId }, function(html){
       $('#resultContainer').html(html);
     });
+    return;
   }
+
+  // Otherwise build from course/offering
+  const courseId   = $('#courseId').val();
+  const offeringId = $('#offeringId').val();
+
+  const params = {};
+  if (courseId)   params.courseId = courseId;
+  if (offeringId) params.offeringId = offeringId;
+
+  $.get(contextPath + '/admin/search/filter', params, function(html){
+    $('#resultContainer').html(html);
+  });
+}
+
 
   function openDetails(enrollmentId){
     $.get(contextPath + '/admin/search/details', { enrollmentId }, function(html){
@@ -231,7 +240,17 @@
     });
 
     // Student change -> filter
-    $('#enrollmentId').on('change', doFilter);
+ // Student change -> filter + alert
+    $('#enrollmentId').on('change', function(){
+      const enrollmentId = $(this).val();
+      if (enrollmentId) {
+        // Optional: find the selected student's name for a nicer alert
+        const studentName = $(this).find('option:selected').text();
+        alert('Showing results for: ' + studentName);
+      }
+      doFilter();
+    });
+
   });
 </script>
 

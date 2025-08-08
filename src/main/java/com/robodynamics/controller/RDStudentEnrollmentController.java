@@ -136,30 +136,38 @@ public class RDStudentEnrollmentController {
 	}
 
 	@GetMapping("/showForm")
-	public ModelAndView showEnrollmentForm(Model theModel, HttpSession session) {
+	public ModelAndView showEnrollmentForm(
+	        @RequestParam("courseId") Integer courseId,   // 👈 accept it
+	        Model model,
+	        HttpSession session) {
 
-		RDStudentEnrollmentForm studentEnrollmentForm = new RDStudentEnrollmentForm();
+	    // 1) Load course (optional, for header)
+	    RDCourse course = courseService.getRDCourse(courseId);
+	    if (course == null) {
+	        // bad id -> go back to course list
+	        return new ModelAndView("redirect:/enrollment/showCourses");
+	    }
+	    model.addAttribute("course", course);
 
-		List<RDCourseOffering> courseOfferings = courseOfferingService.getRDCourseOfferings();
+	    // 2) Filter offerings by course
+	    List<RDCourseOffering> courseOfferings =
+	            courseOfferingService.getRDCourseOfferingsListByCourse(courseId); // 👈 add this in service/DAO
+	    model.addAttribute("courseOfferings", courseOfferings);
 
-		System.out.println(courseOfferings);
+	    // 3) Parent’s children
+	    RDUser parent = (RDUser) session.getAttribute("rdUser");
+	    if (parent == null) return new ModelAndView("redirect:/login");
+	    List<RDUser> childs = userService.getRDChilds(parent.getUserID());
+	    model.addAttribute("childs", childs);
 
-		RDUser parent = null;
-		if (session.getAttribute("rdUser") != null) {
-			parent = (RDUser) session.getAttribute("rdUser");
-		}
+	    // 4) Form-backing bean
+	    RDStudentEnrollmentForm form = new RDStudentEnrollmentForm();
+	    form.setCourseId(courseId); // keep track of selected course
+	    model.addAttribute("studentEnrollmentForm", form);
 
-		System.out.println("user - " + parent);
-		List<RDUser> childs = userService.getRDChilds(parent.getUserID());
-		System.out.println(childs);
-		theModel.addAttribute("childs", childs);
-
-		theModel.addAttribute("courseOfferings", courseOfferings);
-		theModel.addAttribute("studentEnrollmentForm", studentEnrollmentForm);
-
-		ModelAndView modelAndView = new ModelAndView("student-enrollment-form");
-		return modelAndView;
+	    return new ModelAndView("student-enrollment-form");
 	}
+
 
 	@GetMapping("/showEnrollmentForm")
 	public ModelAndView showEnrollmentForm(Model theModel, HttpSession session,

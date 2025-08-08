@@ -2,7 +2,8 @@ package com.robodynamics.config;
 
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
+import javax.servlet.Filter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -18,5 +19,12 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected String[] getServletMappings() {
         return new String[] { "/" };
+    }
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter enc = new CharacterEncodingFilter();
+        enc.setEncoding("UTF-8");
+        enc.setForceEncoding(true);
+        return new Filter[] { enc };
     }
 }

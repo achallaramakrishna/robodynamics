@@ -2,24 +2,30 @@ package com.robodynamics.model;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @Entity
 @Table(name = "rd_course_offerings")
 @JsonRootName("event")
+@JsonIgnoreProperties({"course", "studentEnrollments", "classSessions", "hibernateLazyInitializer", "handler"})
 public class RDCourseOffering {
 
     @Id
@@ -73,8 +79,19 @@ public class RDCourseOffering {
     @Column(name = "session_end_time")
     private LocalTime sessionEndTime;
     
+    @OneToMany(mappedBy = "courseOffering", fetch = FetchType.LAZY)
+    private Set<RDStudentEnrollment> studentEnrollments;
     
-    public RDCourseOffering() {
+    
+    public Set<RDStudentEnrollment> getStudentEnrollments() {
+		return studentEnrollments;
+	}
+
+	public void setStudentEnrollments(Set<RDStudentEnrollment> studentEnrollments) {
+		this.studentEnrollments = studentEnrollments;
+	}
+
+	public RDCourseOffering() {
     }
 
     // Getters and Setters

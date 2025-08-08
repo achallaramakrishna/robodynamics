@@ -117,6 +117,15 @@ public class RDClassAttendanceDaoImpl implements RDClassAttendanceDao {
            .uniqueResult();
 	}
 
+	@Override
+	public List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId) {
+		String hql = "FROM RDClassAttendance a WHERE a.enrollment.enrollmentId = :enrollmentId";
+	    return sessionFactory.getCurrentSession()
+	        .createQuery(hql, RDClassAttendance.class)
+	        .setParameter("enrollmentId", enrollmentId)
+	        .getResultList();
+	}
+
 	
 	
 	

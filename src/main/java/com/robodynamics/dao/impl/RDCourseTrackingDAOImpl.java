@@ -141,4 +141,12 @@ public class RDCourseTrackingDAOImpl implements RDCourseTrackingDAO {
     public void updateTracking(RDCourseTracking tracking) {
         sessionFactory.getCurrentSession().update(tracking);
     }
+
+	public List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId) {
+		 String hql = "FROM RDCourseTracking t WHERE t.studentEnrollment.enrollmentId = :enrollmentId";
+		    return sessionFactory.getCurrentSession()
+		        .createQuery(hql, RDCourseTracking.class)
+		        .setParameter("enrollmentId", enrollmentId)
+		        .getResultList();
+	}
 }

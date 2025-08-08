@@ -31,4 +31,6 @@ public interface RDClassAttendanceService {
 
 	void saveOrUpdateAttendance(int offeringId, int userId, Integer sessionId, int classSessionId,
 			String attendanceStatus, LocalDate today);
+
+	List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId);
 }

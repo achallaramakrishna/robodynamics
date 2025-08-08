@@ -1,5 +1,6 @@
 package com.robodynamics.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,16 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 	        return null; // Return null instead of calling intValue()
 	    }
 	    return enrollmentId;
+	}
+
+	@Override
+	@Transactional
+	public List<RDStudentEnrollment> getEnrollmentsByCourseId(Integer courseId) {
+		
+		if (courseId == null) {
+	        return new ArrayList<>();
+	    }
+		return rdStudentEnrollmentDao.getEnrollmentsByCourseId(courseId);
 	}
 
 

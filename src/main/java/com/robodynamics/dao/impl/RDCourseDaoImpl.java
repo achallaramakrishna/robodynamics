@@ -142,4 +142,15 @@ public class RDCourseDaoImpl implements RDCourseDao {
                 .list();
 	}
 
+	@Override
+	public List<RDCourse> getAllCoursesWithOfferingsAndEnrollments() {
+		 String hql = "SELECT DISTINCT c FROM RDCourse c " +
+                 "LEFT JOIN FETCH c.courseOfferings o " +
+                 "LEFT JOIN FETCH o.studentEnrollments e " +
+                 "LEFT JOIN FETCH e.student";
+	    return factory.getCurrentSession()
+	        .createQuery(hql, RDCourse.class)
+	        .getResultList();
+		}
+
 }

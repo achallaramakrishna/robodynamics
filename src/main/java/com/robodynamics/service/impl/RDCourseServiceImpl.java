@@ -93,5 +93,10 @@ public class RDCourseServiceImpl implements RDCourseService {
 		return rdCourseDao.findByTierLevel(tierLevel);
 	}
 
+	@Override
+	public List<RDCourse> getAllCoursesWithOfferingsAndEnrollments() {
+		return rdCourseDao.getAllCoursesWithOfferingsAndEnrollments();
+	}
+
 
 }

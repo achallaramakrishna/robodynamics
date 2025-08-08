@@ -44,6 +44,8 @@ public interface RDCourseTrackingService {
 
 	RDCourseTracking findByEnrollmentAndDate(Integer enrollmentId, LocalDate today);
 
+	List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId);
+
 
 
 }

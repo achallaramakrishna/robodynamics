@@ -54,4 +54,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**") // Apply to all paths
                 .excludePathPatterns("/resources/**", "/static/**");
     }
+   
 }

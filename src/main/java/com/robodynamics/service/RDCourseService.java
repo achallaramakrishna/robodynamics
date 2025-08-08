@@ -33,6 +33,8 @@ public interface RDCourseService {
     
     List<RDCourse> getCoursesByTierLevel(String tierLevel); // Optional based on business need
 
+	public List<RDCourse> getAllCoursesWithOfferingsAndEnrollments();
+
 
     	
 

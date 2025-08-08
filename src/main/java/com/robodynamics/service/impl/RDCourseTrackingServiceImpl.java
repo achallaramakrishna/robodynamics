@@ -185,4 +185,10 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
 	}
 
 	
+    @Transactional(readOnly = true)
+	public List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId) {
+    	return trackingDAO.getTrackingByEnrollment(enrollmentId);
+	}
+
+	
 }

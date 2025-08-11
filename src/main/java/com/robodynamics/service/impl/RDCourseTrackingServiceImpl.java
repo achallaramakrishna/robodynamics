@@ -1,6 +1,7 @@
 package com.robodynamics.service.impl;
 
 import com.robodynamics.dao.RDCourseTrackingDAO;
+import com.robodynamics.dto.RDCourseTrackingDTO;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseTracking;
 import com.robodynamics.model.RDStudentEnrollment;
@@ -189,6 +190,15 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
 	public List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId) {
     	return trackingDAO.getTrackingByEnrollment(enrollmentId);
 	}
+
+	@Override
+	@Transactional
+	public List<RDCourseTrackingDTO> getTrackingByEnrollment(Integer enrollmentId) {
+		// TODO Auto-generated method stub
+		return trackingDAO.getTrackingByEnrollment(enrollmentId);
+	}
+    
+    
 
 	
 }

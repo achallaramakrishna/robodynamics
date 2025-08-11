@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseTrackingDAO;
+import com.robodynamics.dto.RDCourseTrackingDTO;
 import com.robodynamics.model.RDCourseTracking;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -149,4 +150,45 @@ public class RDCourseTrackingDAOImpl implements RDCourseTrackingDAO {
 		        .setParameter("enrollmentId", enrollmentId)
 		        .getResultList();
 	}
+
+	@Override
+    public List<RDCourseTrackingDTO> getTrackingByEnrollment(Integer enrollmentId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String hql =
+        	    "select new com.robodynamics.dto.RDCourseTrackingDTO(" +
+        	    "  t.trackingId, " +
+        	    "  e.enrollmentId, " +
+        	    "  cs.classSessionId, " +
+        	    "  coalesce(cs.sessionDate, t.trackingDate), " +  // LocalDate
+        	    "  cs.sessionTitle, " +                           // -> sessionName
+        	    "  t.feedback, " +                                // -> remarks
+        	    "  concat(coalesce(m.firstName,''), " +
+        	    "         case when m.lastName is null or m.lastName='' " +
+        	    "              then '' else concat(' ', m.lastName) end) " +
+        	    ") " +
+        	    "from com.robodynamics.model.RDCourseTracking t " +
+        	    " join t.studentEnrollment e " +
+        	    " left join t.classSession cs " +
+        	    " left join cs.courseOffering co " +
+        	    " left join co.instructor m " +
+        	    "where e.enrollmentId = :eid " +
+        	    "order by coalesce(cs.sessionDate, t.trackingDate) desc";
+
+
+        @SuppressWarnings("unchecked")
+        List<RDCourseTrackingDTO> list = session.createQuery(hql)
+                .setParameter("eid", enrollmentId)
+                .getResultList();
+
+        // If your DTO uses java.time.LocalDate, convert here:
+        list.forEach(dto -> {
+            if (dto.getTrackingDate() instanceof java.util.Date) {
+                java.util.Date d = (java.util.Date) dto.getTrackingDate();
+                dto.setTrackingDate(d);
+            }
+        });
+
+        return list;
+    }
 }

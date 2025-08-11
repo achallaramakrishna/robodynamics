@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDAssetTransactionDao;
 import com.robodynamics.dao.RDCourseOfferingDao;
+import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 
 import javax.persistence.NoResultException;
 import org.hibernate.Query;
@@ -192,6 +193,44 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
         return query.getResultList();
     }
+
+	@Override
+	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId) {
+	    Session session = factory.getCurrentSession();
+
+	    final String hql =
+	            "select new com.robodynamics.dto.RDCourseOfferingSummaryDTO(" +
+	            "  c.courseId, " +
+	            "  c.courseName, " +
+	            "  o.courseOfferingId, " +
+	            "  o.courseOfferingName, " +
+	            "  concat(coalesce(m.firstName, ''), " +
+	            "         case when m.lastName is null or m.lastName = '' then '' else concat(' ', m.lastName) end), " +
+	            "  o.startDate, " +
+	            "  o.endDate, " +
+	            "  o.status, " +
+	            "  count(distinct e.enrollmentId) " +
+	            ") " +
+	            "from com.robodynamics.model.RDCourseOffering o " +
+	            "  join o.course c " +
+	            "  left join o.instructor m " +        // <-- your mapped relation on RDCourseOffering
+	            "  join o.studentEnrollments e " +
+	            "  join e.student s " +
+	            "  left join s.mom mom " +
+	            "  left join s.dad dad " +
+	            "where (mom.userID = :parentId or dad.userID = :parentId) " +
+	            "group by c.courseId, c.courseName, " +
+	            "         o.courseOfferingId, o.courseOfferingName, " +
+	            "         m.firstName, m.lastName, " +
+	            "         o.startDate, o.endDate, o.status " +
+	            "order by o.startDate desc";
+
+	        Query<RDCourseOfferingSummaryDTO> q =
+	            session.createQuery(hql, RDCourseOfferingSummaryDTO.class);
+	        q.setParameter("parentId", parentId);
+	        return q.getResultList();
+	}
+
 
 
 

@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -87,40 +88,61 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<RDStudentAttendanceDTO> getStudentsWithAttendanceStatus(int offeringId, LocalDate today) {
+
 	    List<RDStudentAttendanceDTO> result = new ArrayList<>();
 
-	    // ✅ Fetch all enrollments for the offering
+	    // All enrollments for the offering
 	    List<RDStudentEnrollment> enrollments = enrollmentService.getEnrolledStudentsByOfferingId(offeringId);
+	    if (enrollments == null || enrollments.isEmpty()) return result;
 
-	    // ✅ Ensure today's class session exists (using LocalDate)
+	    // Ensure / fetch today's class session
 	    RDClassSession classSession = classSessionService.getOrCreateClassSession(offeringId, today);
+	    Integer classSessionId = classSession.getClassSessionId();
 
-	    for (RDStudentEnrollment enrollment : enrollments) {
+	    // Fetch all attendance statuses for this session in one query:
+	    // Map<enrollmentId, attendanceStatusCode>
+	    Map<Integer, Integer> statusByEnrollment =
+	            attendanceDao.findStatusForSessionByEnrollment(classSessionId);
+
+	    for (RDStudentEnrollment e : enrollments) {
+	        if (e == null || e.getStudent() == null) continue;
+
 	        RDStudentAttendanceDTO dto = new RDStudentAttendanceDTO();
-	        dto.setUserID(enrollment.getStudent().getUserID());
-	        dto.setFirstName(enrollment.getStudent().getFirstName());
-	        dto.setEnrollmentId(enrollment.getEnrollmentId());
+	        dto.setUserID(e.getStudent().getUserID());
+	        dto.setFirstName(e.getStudent().getFirstName());
+	        dto.setEnrollmentId(e.getEnrollmentId());
+	        dto.setClassSessionId(classSessionId);
 
-	        // ✅ Fetch attendance status using LocalDate
-	        String status = attendanceDao.getAttendanceStatus(
-	                enrollment.getStudent().getUserID(), 
-	                offeringId, 
-	                today // LocalDate
-	        );
-	        dto.setAttendanceStatus(status != null ? status : "Not Marked");
-
-	        // ✅ Set class session ID
-	        dto.setClassSessionId(classSession.getClassSessionId());
+	        Integer code = statusByEnrollment.get(e.getEnrollmentId()); // 1/2 or null
+	        // If your DTO has the overload setAttendanceStatus(int) that also sets a label, use it:
+	        if (code != null) {
+	            dto.setAttendanceStatus(code);           // 1/2
+	            if (hasLabelSetter(dto)) dto.setAttendanceStatusLabel(code == 1 ? "Present" : "Absent");
+	        } else {
+	            // Not marked yet
+	            dto.setAttendanceStatus(0);              // or leave null if you prefer
+	            if (hasLabelSetter(dto)) dto.setAttendanceStatusLabel("Not Marked");
+	        }
 
 	        result.add(dto);
 	    }
 	    return result;
 	}
 
+	// Tiny helper to avoid compile issues if you didn't add the label setter
+	private boolean hasLabelSetter(RDStudentAttendanceDTO dto) {
+	    try {
+	        RDStudentAttendanceDTO.class.getMethod("setAttendanceStatusLabel", String.class);
+	        return true;
+	    } catch (NoSuchMethodException e) { return false; }
+	}
+
+
 
 	@Override
+	@Transactional
 	public void saveAttendance(int offeringId, int userId, Integer sessionId, int classSessionId, String status, Date date, String notes) {
 		 RDClassAttendance attendance = new RDClassAttendance();
 		 
@@ -140,6 +162,7 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
 	 /**
      * ✅ Fetches the enrollmentId for the given user and offering
      */
+	@Transactional
     private int getEnrollmentId(int offeringId, int userId) {
         // Uses enrollment service to find existing enrollment
         int enrollmentId = enrollmentService.findEnrollmentIdByStudentAndOffering(offeringId, userId);
@@ -150,11 +173,13 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
        return 0;
     }
 
+    @Transactional
     public RDClassAttendance getAttendanceById(int id) {
         return attendanceDao.getAttendanceById(id);
     }
 
     @Override
+    @Transactional
     public List<RDClassAttendance> getAttendanceByUser(int userId) {
         return attendanceDao.findByStudent(userId);
     }
@@ -204,6 +229,7 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
 	}
 
 	@Override
+	@Transactional
 	public String getAttendanceStatusForStudent(int offeringId, int studentId, LocalDate date) {
 		RDClassAttendance attendance = attendanceDao.findByOfferingStudentAndDate(offeringId, studentId, date);
 
@@ -215,6 +241,7 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId) {
 		
 		return attendanceDao.getAttendanceByEnrollment(enrollmentId);

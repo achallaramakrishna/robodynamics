@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Transactional
@@ -119,12 +121,44 @@ public class RDClassAttendanceDaoImpl implements RDClassAttendanceDao {
 
 	@Override
 	public List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId) {
-		String hql = "FROM RDClassAttendance a WHERE a.enrollment.enrollmentId = :enrollmentId";
-	    return sessionFactory.getCurrentSession()
-	        .createQuery(hql, RDClassAttendance.class)
-	        .setParameter("enrollmentId", enrollmentId)
-	        .getResultList();
+		  final String hql =
+			        "select a " +
+			        "from RDClassAttendance a " +
+			        "  left join fetch a.classSession cs " +
+			        "  left join fetch cs.courseOffering co " +
+			        "  left join fetch a.enrollment e " +
+			        "  left join fetch e.student s " +
+			        "  left join fetch a.student asd " +
+			        "where e.enrollmentId = :enrId " +
+			        "order by coalesce(cs.sessionDate, a.attendanceDate) asc";
+
+			    Session session = sessionFactory.getCurrentSession();
+			    return session.createQuery(hql, RDClassAttendance.class)
+			                  .setParameter("enrId", enrollmentId)
+			                  .getResultList();
 	}
+
+	// In attendanceDao
+	@SuppressWarnings("unchecked")
+	public Map<Integer, Integer> findStatusForSessionByEnrollment(Integer classSessionId) {
+	    String hql = """
+	        select a.enrollment.enrollmentId, a.attendanceStatus
+	        from RDClassAttendance a
+	        where a.classSession.classSessionId = :sid
+	    """;
+
+	    List<Object[]> rows = sessionFactory.getCurrentSession()
+	            .createQuery(hql)
+	            .setParameter("sid", classSessionId)
+	            .list();
+
+	    Map<Integer, Integer> map = new HashMap<>();
+	    for (Object[] r : rows) {
+	        map.put((Integer) r[0], (Integer) r[1]); // enrollmentId -> 1/2
+	    }
+	    return map;
+	}
+
 
 	
 	

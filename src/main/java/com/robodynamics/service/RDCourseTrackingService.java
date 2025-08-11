@@ -1,5 +1,6 @@
 package com.robodynamics.service;
 
+import com.robodynamics.dto.RDCourseTrackingDTO;
 import com.robodynamics.model.RDCourseTracking;
 import com.robodynamics.model.RDUser;
 
@@ -45,6 +46,8 @@ public interface RDCourseTrackingService {
 	RDCourseTracking findByEnrollmentAndDate(Integer enrollmentId, LocalDate today);
 
 	List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId);
+    List<RDCourseTrackingDTO> getTrackingByEnrollment(Integer enrollmentId);
+
 
 
 

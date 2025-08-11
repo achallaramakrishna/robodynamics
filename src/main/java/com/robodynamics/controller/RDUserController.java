@@ -158,7 +158,7 @@ public class RDUserController {
 	        
 			
 			 if (rdUser2.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
-		            return "redirect:/parentDashboard";  // Redirect to parentDashboard
+		            return "redirect:/parent/dashboard";    // maps to @GetMapping("/parent/dashboard")
 		        } else if (rdUser2.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
 		            return "redirect:/studentDashboard";  // Redirect to studentDashboard
 		        } else {

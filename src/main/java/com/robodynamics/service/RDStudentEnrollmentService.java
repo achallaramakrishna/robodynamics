@@ -2,6 +2,8 @@ package com.robodynamics.service;
 
 import java.util.List;
 
+import com.robodynamics.dto.RDEnrollmentReportDTO;
+import com.robodynamics.dto.RDStudentInfoDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
 import com.robodynamics.model.RDCourseOffering;
@@ -31,6 +33,14 @@ public interface RDStudentEnrollmentService {
 	public Integer findEnrollmentIdByStudentAndOffering(int offeringId, int studentId);
 
 	public List<RDStudentEnrollment> getEnrollmentsByCourseId(Integer courseId);
+
+	public List<RDEnrollmentReportDTO> getEnrollmentsByParentId(Integer parentId);
+
+	public List<RDStudentInfoDTO> getEnrolledStudentInfosByOfferingIdAndParent(Integer offeringId, Integer parentId);
+
+	public boolean enrollmentBelongsToParent(Integer enrollmentId, Integer parentId);
+
+	public List<RDStudentInfoDTO> getChildrenByParentId(Integer parentId);
 
 
 

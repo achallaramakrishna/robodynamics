@@ -4,6 +4,7 @@ import com.robodynamics.model.RDClassAttendance;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface RDClassAttendanceDao {
 
@@ -27,5 +28,7 @@ public interface RDClassAttendanceDao {
 	RDClassAttendance findByOfferingStudentAndDate(int offeringId, int studentId, LocalDate date);
 
 	List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId);
+
+	Map<Integer, Integer> findStatusForSessionByEnrollment(Integer classSessionId);
 
 }

@@ -46,6 +46,7 @@ public class RDParentDashboardController {
     @Autowired private RDCourseTrackingService trackingService;
 
     /* ---------- session helpers ---------- */
+    // This is my test code to give a demo git process.
     private RDUser getParent(HttpSession session) {
         System.out.println(">>> getParent called");
         Object o = session.getAttribute("rdUser");

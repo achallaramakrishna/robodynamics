@@ -195,6 +195,8 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive">
+                <div class="overflow-auto" style="max-height:40vh;">
+              
                 <table class="table table-sm table-striped mb-0">
                   <thead class="table-secondary">
                     <tr><th>Date</th><th>Status</th><th>Topic / Notes</th></tr>
@@ -203,6 +205,7 @@
                     <tr><td colspan="3" class="text-center text-muted">Select enrollment to view attendance.</td></tr>
                   </tbody>
                 </table>
+              </div>
               </div>
             </div>
           </div>
@@ -215,6 +218,7 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive">
+              <div class="overflow-auto" style="max-height:40vh;">
                 <table class="table table-sm table-striped mb-0">
                   <thead class="table-secondary">
                     <tr><th>Date</th><th>Milestone</th><th>Remarks</th><th>Mentor</th></tr>
@@ -224,6 +228,7 @@
                   </tbody>
                 </table>
               </div>
+            </div>
             </div>
           </div>
 

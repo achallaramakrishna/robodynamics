@@ -23,6 +23,34 @@
     .spinner { display:none; }
     h6.text-uppercase { letter-spacing: .04em; }
     .accordion-button::after { transition: transform .15s ease; }
+    /* Color themes for accordion items (Bootstrap 5.3 variables) */
+.accordion-item.acc-primary{
+  --bs-accordion-btn-bg: var(--bs-primary-bg-subtle);
+  --bs-accordion-btn-color: var(--bs-primary-text-emphasis);
+  --bs-accordion-active-bg: var(--bs-primary);
+  --bs-accordion-active-color: #fff;
+  --bs-accordion-border-color: rgba(var(--bs-primary-rgb), .25);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .25);
+}
+.accordion-item.acc-warning{
+  --bs-accordion-btn-bg: var(--bs-warning-bg-subtle);
+  --bs-accordion-btn-color: var(--bs-warning-text-emphasis);
+  --bs-accordion-active-bg: var(--bs-warning);
+  --bs-accordion-active-color: #000;
+  --bs-accordion-border-color: rgba(var(--bs-warning-rgb), .35);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-warning-rgb), .25);
+}
+.accordion-item.acc-info{
+  --bs-accordion-btn-bg: var(--bs-info-bg-subtle);
+  --bs-accordion-btn-color: var(--bs-info-text-emphasis);
+  --bs-accordion-active-bg: var(--bs-info);
+  --bs-accordion-active-color: #000;
+  --bs-accordion-border-color: rgba(var(--bs-info-rgb), .25);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-info-rgb), .25);
+}
+/* Make all accordion headings a touch bolder */
+.accordion .accordion-button{ font-weight: 600; }
+    
   </style>
 </head>
 <body>
@@ -95,7 +123,7 @@
   <div class="accordion accordion-flush" id="parentAccordion">
 
     <!-- School Tests -->
-    <div class="accordion-item">
+    <div class="accordion-item acc-warning">
       <h2 class="accordion-header" id="headingTests">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTests" aria-expanded="false" aria-controls="collapseTests">
           📝 School Tests
@@ -111,13 +139,13 @@
     </div>
 
     <!-- Attendance & Tracking -->
-    <div class="accordion-item">
+    <div class="accordion-item acc-primary">
       <h2 class="accordion-header" id="headingAT">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAT" aria-expanded="false" aria-controls="collapseAT">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAT" aria-expanded="true" aria-controls="collapseAT">
           ✅ View Attendance & 📈 Course Tracking
         </button>
       </h2>
-      <div id="collapseAT" class="accordion-collapse collapse" aria-labelledby="headingAT" data-bs-parent="#parentAccordion">
+      <div id="collapseAT" class="accordion-collapse collapse show" aria-labelledby="headingAT" data-bs-parent="#parentAccordion">
         <div class="accordion-body">
           <h6 class="text-uppercase text-muted mb-3">Attendance & Course Tracking</h6>
 
@@ -132,7 +160,7 @@
             </div>
             <div class="col-md-3">
               <label class="form-label">Course</label>
-              <select id="courseId" class="form-select" disabled>
+              <select id="courseId" class="form-select	" disabled>
                 <option value="">-- Select Course --</option>
               </select>
             </div>
@@ -204,7 +232,7 @@
     </div>
 
     <!-- Reports -->
-    <div class="accordion-item">
+    <div class="accordion-item acc-info">
       <h2 class="accordion-header" id="headingReports">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
           📊 Reports

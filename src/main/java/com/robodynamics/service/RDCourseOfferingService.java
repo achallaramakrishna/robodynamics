@@ -3,6 +3,7 @@ package com.robodynamics.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
 import com.robodynamics.model.RDCourseOffering;
@@ -28,6 +29,8 @@ public interface RDCourseOfferingService {
 	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today);
 
 	public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status);
+
+	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId);
 
 
 }

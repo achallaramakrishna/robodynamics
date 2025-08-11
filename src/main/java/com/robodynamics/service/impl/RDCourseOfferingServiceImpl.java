@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.robodynamics.dao.RDAssetDao;
 import com.robodynamics.dao.RDAssetTransactionDao;
 import com.robodynamics.dao.RDCourseOfferingDao;
+import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
 import com.robodynamics.model.RDCourseOffering;
@@ -85,6 +86,11 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	@Transactional
 	public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status) {
 		return rdCourseOfferingDao.getFilteredOfferings(courseId,mentorId,status);
+	}
+
+	@Override
+	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId) {
+		return rdCourseOfferingDao.getOfferingsByParentId(parentId);
 	}
 	
 }

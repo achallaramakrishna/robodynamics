@@ -1,5 +1,6 @@
 package com.robodynamics.dao;
 
+import com.robodynamics.dto.RDCourseTrackingDTO;
 import com.robodynamics.model.RDCourseTracking;
 
 import java.time.LocalDate;
@@ -41,6 +42,9 @@ public interface RDCourseTrackingDAO {
 	RDCourseTracking findByEnrollmentAndDate(int enrollmentId, LocalDate trackingDate);
 
 	List<RDCourseTracking> getTrackingByEnrollment(int enrollmentId);
+	
+    List<RDCourseTrackingDTO> getTrackingByEnrollment(Integer enrollmentId);
+
 	
 	
 }

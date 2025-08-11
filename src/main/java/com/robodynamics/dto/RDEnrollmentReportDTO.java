@@ -21,7 +21,35 @@ public class RDEnrollmentReportDTO {
         this.enrollmentDate = enrollmentDate;
     }
 
-    // getters
+    public RDEnrollmentReportDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setEnrollmentId(int enrollmentId) {
+		this.enrollmentId = enrollmentId;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	public void setParentContact(String parentContact) {
+		this.parentContact = parentContact;
+	}
+
+	public void setEnrollmentDate(LocalDate enrollmentDate) {
+		this.enrollmentDate = enrollmentDate;
+	}
+
+	// getters
     public int getEnrollmentId() { return enrollmentId; }
     public String getStudentName() { return studentName; }
     public String getGrade() { return grade; }

@@ -63,7 +63,6 @@ public class RDAssetTransactionController {
     	
         RDUser parent = null;
         
-        System.out.println("hello 111");
 		if (session.getAttribute("rdUser") != null) {
 			parent = (RDUser) session.getAttribute("rdUser");
 	

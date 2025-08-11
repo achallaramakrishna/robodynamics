@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.robodynamics.dao.RDAssetDao;
 import com.robodynamics.dao.RDAssetTransactionDao;
 import com.robodynamics.dao.RDStudentEnrollmentDao;
+import com.robodynamics.dto.RDEnrollmentReportDTO;
+import com.robodynamics.dto.RDStudentInfoDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
 import com.robodynamics.model.RDStudentEnrollment;
@@ -107,6 +109,34 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 	        return new ArrayList<>();
 	    }
 		return rdStudentEnrollmentDao.getEnrollmentsByCourseId(courseId);
+	}
+
+	@Transactional
+	public List<RDEnrollmentReportDTO> getEnrollmentsByParentId(Integer parentId) {
+		return rdStudentEnrollmentDao.getEnrollmentsByParentId(parentId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDStudentInfoDTO> getEnrolledStudentInfosByOfferingIdAndParent(Integer offeringId, Integer parentId) {
+		// TODO Auto-generated method stub
+		return rdStudentEnrollmentDao.getEnrolledStudentInfosByOfferingIdAndParent(offeringId,parentId);
+	}
+
+	@Override
+	@Transactional
+	public boolean enrollmentBelongsToParent(Integer enrollmentId, Integer parentId) {
+		System.out.println(">>> SVC.enrollmentBelongsToParent enr=" + enrollmentId + " pid=" + parentId);
+        boolean owns = rdStudentEnrollmentDao.enrollmentBelongsToParent(enrollmentId, parentId);
+        System.out.println("<<< SVC.enrollmentBelongsToParent -> " + owns);
+        return owns;
+	}
+
+	@Override
+	@Transactional
+	public List<RDStudentInfoDTO> getChildrenByParentId(Integer parentId) {
+		// TODO Auto-generated method stub
+		return rdStudentEnrollmentDao.getChildrenByParentId(parentId);
 	}
 
 

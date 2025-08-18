@@ -1,6 +1,7 @@
 package com.robodynamics.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -84,6 +85,13 @@ public class RDClassSessionServiceImpl implements RDClassSessionService {
 
 		    return rdClassSessionDao.saveRDClassSession(newSession);
 
+	}
+
+	@Override
+	@Transactional
+	public List<RDClassSession> getSessionsForOffering(int courseOfferingId, LocalDateTime atStartOfDay,
+			LocalDateTime atStartOfDay2) {
+		return rdClassSessionDao.findForOfferingInWindow(courseOfferingId,atStartOfDay,atStartOfDay2);
 	}
 
 	

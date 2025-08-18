@@ -1,6 +1,7 @@
 package com.robodynamics.dao;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,11 @@ public interface RDClassSessionDao {
 
     // Fetch all class sessions that do not have tracking data
     List<RDClassSession> getClassSessionsWithoutTracking(int courseOfferingId);
+
+	public List<RDClassSession> findForOfferingInWindow(int courseOfferingId, LocalDateTime atStartOfDay,
+			LocalDateTime atStartOfDay2);
+	
+	
 
 
 }

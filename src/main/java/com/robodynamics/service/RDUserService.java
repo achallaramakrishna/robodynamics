@@ -36,6 +36,8 @@ public interface RDUserService {
 	
 	List<RDUser> getEnrolledStudents(int courseOfferingId);
 
+	public RDUser findByUserName(String username);
+
 
 
 

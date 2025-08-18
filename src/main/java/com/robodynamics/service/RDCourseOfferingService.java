@@ -32,5 +32,12 @@ public interface RDCourseOfferingService {
 
 	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId);
 
+	public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, Integer userId);
+
+	public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to);
+
+	public List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
+
+
 
 }

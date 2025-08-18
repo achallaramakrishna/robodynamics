@@ -30,6 +30,12 @@ public interface RDCourseOfferingDao {
 
 	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId);
 
+	public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, LocalDate to);
+
+	public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
+
+	public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate, Integer userId);
+
 
 
 

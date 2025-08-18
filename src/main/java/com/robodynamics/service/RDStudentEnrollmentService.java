@@ -42,6 +42,8 @@ public interface RDStudentEnrollmentService {
 
 	public List<RDStudentInfoDTO> getChildrenByParentId(Integer parentId);
 
+	public int countEnrollments(int courseOfferingId);
+
 
 
 }

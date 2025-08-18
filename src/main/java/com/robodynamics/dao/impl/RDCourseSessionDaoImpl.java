@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseSessionDao;
+import com.robodynamics.dto.RDSessionItem;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSession.TierLevel;
@@ -159,6 +160,51 @@ public class RDCourseSessionDaoImpl implements RDCourseSessionDao {
 
 		    return query.getResultList();
 	}
+
+	@Override
+	public List<RDSessionItem> findSessionItemsByCourse(Integer courseId, String sessionType) {
+	    Session s = factory.getCurrentSession();
+	    String hql =
+	        "select new com.robodynamics.dto.RDSessionItem(" +
+	        "  cs.courseSessionId, cs.sessionTitle, cs.tierOrder, cs.sessionType" +
+	        ") " +
+	        "from RDCourseSession cs " +
+	        "where cs.course.courseId = :courseId " +
+	        "  and (:sessionType is null or cs.sessionType = :sessionType) " +
+	        "order by coalesce(cs.tierOrder, 9999), cs.courseSessionId";
+
+	    Query<RDSessionItem> q = s.createQuery(hql, RDSessionItem.class);
+	    q.setParameter("courseId", courseId);
+	    q.setParameter("sessionType", sessionType); // may be null; the 'is null' guard handles it
+	    return q.getResultList();
+	}
+
+
+	public List<RDSessionItem> findSessionItemsByCourseAndOffering(
+		    Integer courseId, Integer offeringId, String sessionType) { // offeringId currently unused
+		
+		System.out.println("Course id - " + courseId);
+		System.out.println("Offering id - " + offeringId);
+		System.out.println("Session Type - " + sessionType);
+		
+		  String hql =
+		      "select new com.robodynamics.dto.RDSessionItem(" +
+		      "  cs.courseSessionId, " +
+		      "  cs.sessionTitle, " +
+		      "  cs.tierOrder, " +
+		      "  cs.sessionType" +
+		      ") " +
+		      "from com.robodynamics.model.RDCourseSession cs " +
+		      "where cs.course.courseId = :courseId " +
+		      "  and (:sessionType is null or cs.sessionType = :sessionType) " +
+		      "order by cs.tierOrder, cs.courseSessionId";
+
+		  return factory.getCurrentSession()
+		      .createQuery(hql, com.robodynamics.dto.RDSessionItem.class)
+		      .setParameter("courseId", courseId)
+		      .setParameter("sessionType", sessionType) // can be null
+		      .getResultList();
+		}
 
 
 }

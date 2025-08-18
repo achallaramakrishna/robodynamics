@@ -2,6 +2,7 @@ package com.robodynamics.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robodynamics.dao.RDCourseSessionDao;
+import com.robodynamics.dto.RDSessionItem;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSession.TierLevel;
@@ -214,5 +215,11 @@ public class RDCourseSessionServiceImpl implements RDCourseSessionService {
 	@Override
 	public List<RDCourseSession> getCourseSessionsByCourseOfferingId(int courseOfferingId) {
 		return courseSessionDao.getCourseSessionsByCourseOfferingId(courseOfferingId);
+	}
+
+	@Override
+	public List<RDSessionItem> findSessionItemsByCourse(Integer courseId, String sessionType) {
+		// TODO Auto-generated method stub
+		return courseSessionDao.findSessionItemsByCourse(courseId, sessionType);
 	}
 }

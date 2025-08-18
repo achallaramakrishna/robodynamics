@@ -62,7 +62,7 @@
                                 aria-controls="collapse${offering.courseOfferingId}">
                             <div class="w-100 d-flex justify-content-between align-items-center">
                                 <span>
-                                    ${offering.course.courseName}
+                                    ${offering.courseOfferingName}
                                     <span class="badge badge-student-count ms-2">
                                         ${enrolledStudentsMap[offering.courseOfferingId].size()} Students
                                     </span>

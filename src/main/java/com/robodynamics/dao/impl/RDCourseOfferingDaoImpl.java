@@ -1,7 +1,9 @@
 package com.robodynamics.dao.impl;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.TextStyle;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -230,6 +232,160 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 	        q.setParameter("parentId", parentId);
 	        return q.getResultList();
 	}
+
+	
+	public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, Integer userId) {
+	    String shortDay = selectedDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+
+	    String hql =
+	        "FROM RDCourseOffering c " +
+	        "LEFT JOIN FETCH c.course " +
+	        "LEFT JOIN FETCH c.instructor m " +
+	        "WHERE REPLACE(c.daysOfWeek, ' ', '') LIKE :dayOfWeek " +
+	        "AND c.startDate <= :theDate " +
+	        "AND c.endDate   >= :theDate " +
+	        "AND m IS NOT NULL AND m.userID = :mentorId " +
+	        "ORDER BY c.startDate DESC";
+	    // ✅ Convert LocalDate -> java.sql.Date for a DATE column
+        Date date = Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+	    return factory.getCurrentSession()
+	        .createQuery(hql, RDCourseOffering.class)
+	        .setParameter("dayOfWeek", "%" + shortDay + "%")
+	        .setParameter("theDate", date)           
+	        .setParameter("mentorId", userId)
+	        .getResultList();
+	}
+
+	    
+	    public List<RDCourseOffering> findOfferingsIntersecting(LocalDate since, LocalDate to) {
+	        // Overlap window: offering.endDate >= since AND offering.startDate <= to
+	        String hql = "from RDCourseOffering o " +
+	                     "where o.endDate >= :since " +
+	                     "  and o.startDate <= :to " +
+	                     "order by o.startDate asc";
+	    
+	     // ✅ Convert LocalDate -> java.sql.Date for a DATE column
+	        Date sinceDate = Date.from(since.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+	        Date toDate = Date.from(to.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+	        Session session = factory.getCurrentSession();
+	        Query<RDCourseOffering> q = session.createQuery(hql, RDCourseOffering.class);
+	        q.setParameter("since", sinceDate);
+	        q.setParameter("to", toDate);
+	        return q.getResultList();
+	    }
+
+	    
+	    
+	    public List<RDCourseOffering> findOfferingsForMentorIntersecting(int mentorId, LocalDate since, LocalDate to) {
+	        String hql = "from RDCourseOffering o " +
+	                     "where o.instructor.userID = :mentorId " +
+	                     "  and o.endDate >= :since " +
+	                     "  and o.startDate <= :to " +
+	                     "order by o.startDate asc";
+
+	     // ✅ Convert LocalDate -> java.sql.Date for a DATE column
+	        Date sinceDate = Date.from(since.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+	        Date toDate = Date.from(to.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+	        
+	        Session session = factory.getCurrentSession();
+	        Query<RDCourseOffering> q = session.createQuery(hql, RDCourseOffering.class);
+	        q.setParameter("mentorId", mentorId);
+	        q.setParameter("since", sinceDate);
+	        q.setParameter("to", toDate);
+	        return q.getResultList();
+	    }
+
+		@Override
+		public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate since, LocalDate to) {
+			// Overlap window: offering.endDate >= since AND offering.startDate <= to
+	        String hql = "from RDCourseOffering o " +
+	                     "where o.endDate >= :since " +
+	                     "  and o.startDate <= :to " +
+	                     "order by o.startDate asc";
+	        Session session = factory.getCurrentSession();
+	        
+	        Date sinceDate = Date.from(since.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+		       
+	        Date toDate = Date.from(to.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+		       
+			Query<RDCourseOffering> q = session.createQuery(hql, RDCourseOffering.class);
+	        q.setParameter("since", sinceDate);
+	        q.setParameter("to", toDate);
+	        return q.getResultList();
+		}
+
+		@Override
+		public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId, LocalDate since,
+				LocalDate to) {
+			String hql = "from RDCourseOffering o " +
+                    "where o.instructor.userID = :mentorId " +
+                    "  and o.endDate >= :since " +
+                    "  and o.startDate <= :to " +
+                    "order by o.startDate asc";
+       Session session = factory.getCurrentSession();
+       
+       Date sinceDate = Date.from(since.atStartOfDay(ZoneId.systemDefault()).toInstant());
+       
+       
+       Date toDate = Date.from(to.atStartOfDay(ZoneId.systemDefault()).toInstant());
+       
+       
+       Query<RDCourseOffering> q = session.createQuery(hql, RDCourseOffering.class);
+       q.setParameter("mentorId", mentorId);
+       q.setParameter("since", sinceDate);
+       q.setParameter("to", toDate);
+       return q.getResultList();
+		}
+
+		@Override
+		public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate, Integer userId) {
+			 // Build the short day token (e.g., "Mon", "Tue")
+		    String shortDay = selectedDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+		    System.out.println("🔍 Day Filter (mentor): " + shortDay + " | mentorUserId=" + userId);
+
+		    // HQL:
+		    // - Match the day within comma-separated daysOfWeek (spaces removed)
+		    // - Active on the selected date
+		    // - Belongs to the given mentor
+		    String hql =
+		        "FROM RDCourseOffering c " +
+		        "LEFT JOIN FETCH c.course " +                // eager course (optional)
+		        "LEFT JOIN FETCH c.instructor m " +             // eager mentor (optional)
+		        "WHERE REPLACE(c.daysOfWeek, ' ', '') LIKE :dayOfWeek " +
+		        "AND c.startDate <= :theDate " +
+		        "AND c.endDate   >= :theDate " +
+		        "AND m IS NOT NULL AND m.userID = :mentorId " +
+		        "ORDER BY c.startDate DESC";
+
+		    Date date = Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	        
+		       
+		    Query<RDCourseOffering> query = factory.getCurrentSession()
+		        .createQuery(hql, RDCourseOffering.class)
+		        .setParameter("dayOfWeek", "%" + shortDay + "%")
+		        .setParameter("theDate", java.sql.Date.valueOf(selectedDate))
+		        .setParameter("mentorId", userId);
+
+		    List<RDCourseOffering> results = query.getResultList();
+
+		    System.out.println("✅ Found " + results.size() + " mentor offerings for " + shortDay);
+		    results.forEach(o ->
+		        System.out.println("📌 " + o.getCourseOfferingName() +
+		                           " | Days: " + o.getDaysOfWeek())
+		    );
+
+		    return results;
+		}
+
+		
+	
 
 
 

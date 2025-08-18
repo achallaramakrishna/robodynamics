@@ -23,34 +23,34 @@
     .spinner { display:none; }
     h6.text-uppercase { letter-spacing: .04em; }
     .accordion-button::after { transition: transform .15s ease; }
+
     /* Color themes for accordion items (Bootstrap 5.3 variables) */
-.accordion-item.acc-primary{
-  --bs-accordion-btn-bg: var(--bs-primary-bg-subtle);
-  --bs-accordion-btn-color: var(--bs-primary-text-emphasis);
-  --bs-accordion-active-bg: var(--bs-primary);
-  --bs-accordion-active-color: #fff;
-  --bs-accordion-border-color: rgba(var(--bs-primary-rgb), .25);
-  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .25);
-}
-.accordion-item.acc-warning{
-  --bs-accordion-btn-bg: var(--bs-warning-bg-subtle);
-  --bs-accordion-btn-color: var(--bs-warning-text-emphasis);
-  --bs-accordion-active-bg: var(--bs-warning);
-  --bs-accordion-active-color: #000;
-  --bs-accordion-border-color: rgba(var(--bs-warning-rgb), .35);
-  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-warning-rgb), .25);
-}
-.accordion-item.acc-info{
-  --bs-accordion-btn-bg: var(--bs-info-bg-subtle);
-  --bs-accordion-btn-color: var(--bs-info-text-emphasis);
-  --bs-accordion-active-bg: var(--bs-info);
-  --bs-accordion-active-color: #000;
-  --bs-accordion-border-color: rgba(var(--bs-info-rgb), .25);
-  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-info-rgb), .25);
-}
-/* Make all accordion headings a touch bolder */
-.accordion .accordion-button{ font-weight: 600; }
-    
+    .accordion-item.acc-primary{
+      --bs-accordion-btn-bg: var(--bs-primary-bg-subtle);
+      --bs-accordion-btn-color: var(--bs-primary-text-emphasis);
+      --bs-accordion-active-bg: var(--bs-primary);
+      --bs-accordion-active-color: #fff;
+      --bs-accordion-border-color: rgba(var(--bs-primary-rgb), .25);
+      --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .25);
+    }
+    .accordion-item.acc-warning{
+      --bs-accordion-btn-bg: var(--bs-warning-bg-subtle);
+      --bs-accordion-btn-color: var(--bs-warning-text-emphasis);
+      --bs-accordion-active-bg: var(--bs-warning);
+      --bs-accordion-active-color: #000;
+      --bs-accordion-border-color: rgba(var(--bs-warning-rgb), .35);
+      --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-warning-rgb), .25);
+    }
+    .accordion-item.acc-info{
+      --bs-accordion-btn-bg: var(--bs-info-bg-subtle);
+      --bs-accordion-btn-color: var(--bs-info-text-emphasis);
+      --bs-accordion-active-bg: var(--bs-info);
+      --bs-accordion-active-color: #000;
+      --bs-accordion-border-color: rgba(var(--bs-info-rgb), .25);
+      --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-info-rgb), .25);
+    }
+    /* Make all accordion headings a touch bolder */
+    .accordion .accordion-button{ font-weight: 600; }
   </style>
 </head>
 <body>
@@ -108,6 +108,18 @@
         </div>
       </div>
     </div>
+    <!-- Create Test Schedule (now a link to standalone page) -->
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100 text-center">
+        <div class="card-header bg-warning text-dark"><h5 class="mb-0">📝 Create Test Schedule</h5></div>
+        <div class="card-body">
+          <p class="card-text">Add an upcoming school test, attach the schedule PDF, and map chapters.</p>
+          <a href="${pageContext.request.contextPath}/test-management/" class="btn btn-primary">
+            View Tests
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Accordion header + controls -->
@@ -160,7 +172,7 @@
             </div>
             <div class="col-md-3">
               <label class="form-label">Course</label>
-              <select id="courseId" class="form-select	" disabled>
+              <select id="courseId" class="form-select" disabled>
                 <option value="">-- Select Course --</option>
               </select>
             </div>
@@ -196,16 +208,15 @@
             <div class="card-body p-0">
               <div class="table-responsive">
                 <div class="overflow-auto" style="max-height:40vh;">
-              
-                <table class="table table-sm table-striped mb-0">
-                  <thead class="table-secondary">
-                    <tr><th>Date</th><th>Status</th><th>Topic / Notes</th></tr>
-                  </thead>
-                  <tbody id="attendanceTbody">
-                    <tr><td colspan="3" class="text-center text-muted">Select enrollment to view attendance.</td></tr>
-                  </tbody>
-                </table>
-              </div>
+                  <table class="table table-sm table-striped mb-0">
+                    <thead class="table-secondary">
+                      <tr><th>Date</th><th>Status</th><th>Topic / Notes</th></tr>
+                    </thead>
+                    <tbody id="attendanceTbody">
+                      <tr><td colspan="3" class="text-center text-muted">Select enrollment to view attendance.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -218,17 +229,17 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive">
-              <div class="overflow-auto" style="max-height:40vh;">
-                <table class="table table-sm table-striped mb-0">
-                  <thead class="table-secondary">
-                    <tr><th>Date</th><th>Milestone</th><th>Remarks</th><th>Mentor</th></tr>
-                  </thead>
-                  <tbody id="trackingTbody">
-                    <tr><td colspan="4" class="text-center text-muted">Select enrollment to view tracking.</td></tr>
-                  </tbody>
-                </table>
+                <div class="overflow-auto" style="max-height:40vh;">
+                  <table class="table table-sm table-striped mb-0">
+                    <thead class="table-secondary">
+                      <tr><th>Date</th><th>Session Name</th><th>Remarks</th><th>Mentor</th></tr>
+                    </thead>
+                    <tbody id="trackingTbody">
+                      <tr><td colspan="4" class="text-center text-muted">Select enrollment to view tracking.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
             </div>
           </div>
 
@@ -261,11 +272,11 @@
   const ctx = '${pageContext.request.contextPath}';
 
   const API = {
-    children:          ctx + '/parent/api/my-children',
-    offeringsForParent:ctx + '/parent/api/offerings',
-    studentsByOffering:ctx + '/parent/api/students-by-offering',
-    attendance:        ctx + '/parent/api/attendance',
-    tracking:          ctx + '/parent/api/tracking'
+    children:           ctx + '/parent/api/my-children',
+    offeringsForParent: ctx + '/parent/api/offerings',
+    studentsByOffering: ctx + '/parent/api/students-by-offering',
+    attendance:         ctx + '/parent/api/attendance',
+    tracking:           ctx + '/parent/api/tracking'
   };
 
   // Cache
@@ -277,76 +288,38 @@
     return String(v);
   }
 
-  // Flexible date formatter: handles epoch millis, ISO strings,
-  // arrays [y,m,d], objects {year,month,day} or {year,month,dayOfMonth}
-function fmtDate(v){
-  if (v === null || v === undefined || v === '' || v === true || v === false) return '';
-
-  const tz  = 'Asia/Kolkata';
-  const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit' });
-  const p2  = n => String(n).padStart(2,'0');
-
-  // Already a Date
-  if (v instanceof Date) return fmt.format(v);
-
-  // Numbers: epoch seconds or millis
-  if (typeof v === 'number') {
-    const ms = v < 1e12 ? v * 1000 : v;
-    return fmt.format(new Date(ms));
-  }
-
-  // Strings
-  if (typeof v === 'string') {
-    const s = v.trim();
-    if (/^\d{10,13}$/.test(s)) {                      // epoch as string
-      const ms = s.length === 13 ? +s : (+s) * 1000;
+  // Flexible date formatter
+  function fmtDate(v){
+    if (v === null || v === undefined || v === '' || v === true || v === false) return '';
+    const tz  = 'Asia/Kolkata';
+    const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit' });
+    const p2  = n => String(n).padStart(2,'0');
+    if (v instanceof Date) return fmt.format(v);
+    if (typeof v === 'number') {
+      const ms = v < 1e12 ? v * 1000 : v;
       return fmt.format(new Date(ms));
     }
-    if (s.includes('T')) return s.split('T')[0];      // ISO -> take date part
-    const m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-    return m ? (m[1] + '-' + p2(m[2]) + '-' + p2(m[3])) : '';
-  }
-
-  // Arrays: [yyyy, m, d]
-  if (Array.isArray(v) && v.length >= 3) {
-    return v[0] + '-' + p2(v[1]) + '-' + p2(v[2]);
-  }
-
-  // Objects: {time} or {year,month,day/dayOfMonth}
-  if (typeof v === 'object') {
-    if (typeof v.time === 'number') {
-      const ms = v.time < 1e12 ? v.time * 1000 : v.time;
-      return fmt.format(new Date(ms));
+    if (typeof v === 'string') {
+      const s = v.trim();
+      if (/^\d{10,13}$/.test(s)) { const ms = s.length === 13 ? +s : (+s) * 1000; return fmt.format(new Date(ms)); }
+      if (s.includes('T')) return s.split('T')[0];
+      const m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      return m ? (m[1] + '-' + p2(m[2]) + '-' + p2(m[3])) : '';
     }
-    const y = v.year, m = v.month, d = v.day ?? v.dayOfMonth;
-    if (y && m && d) return y + '-' + p2(m) + '-' + p2(d);
+    if (Array.isArray(v) && v.length >= 3) return v[0] + '-' + p2(v[1]) + '-' + p2(v[2]);
+    if (typeof v === 'object') {
+      if (typeof v.time === 'number') { const ms = v.time < 1e12 ? v.time * 1000 : v.time; return fmt.format(new Date(ms)); }
+      const y = v.year, m = v.month, d = v.day ?? v.dayOfMonth;
+      if (y && m && d) return y + '-' + p2(m) + '-' + p2(d);
+    }
+    return '';
   }
 
-  return '';
-}
-
-
-  // Coerce payloads like [], {rows:[]}, {content:[]}
   function asArray(raw){
     if (Array.isArray(raw)) return raw;
     if (raw && Array.isArray(raw.rows)) return raw.rows;
     if (raw && Array.isArray(raw.content)) return raw.content;
     return [];
-  }
-
-  // Forgiving JSON parser: handles text responses with leading logs/BOM
-  function tryParseJson(maybeJson){
-    if (typeof maybeJson !== 'string') return maybeJson; // already parsed
-    let s = maybeJson.replace(/^\uFEFF/, '').trim();
-    const firstBrace = s.indexOf('{');
-    const firstBracket = s.indexOf('[');
-    const i = [firstBrace, firstBracket].filter(x => x >= 0).sort((a,b)=>a-b)[0];
-    if (i > 0) s = s.slice(i);
-    try { return JSON.parse(s); }
-    catch(e){
-      console.error('JSON parse failed. Raw payload:', maybeJson);
-      return [];
-    }
   }
 
   // Summary bar
@@ -363,8 +336,8 @@ function fmtDate(v){
   const pick = {
     childId:    r => r.childId ?? r.userID ?? r.userId ?? r.studentId ?? r.enrollmentId ?? r.id ?? null,
     childName:  r => ((r.firstName||'') + (r.lastName?(' '+r.lastName):'')) || r.name || 'Child',
-    courseId:   o => o.courseId ?? o.courseID ?? o.cId ?? null,
-    courseName: o => o.courseName || 'Course',
+    courseId:   o => o.courseId ?? o.courseID ?? o.cId ?? o.id ?? null,
+    courseName: o => o.courseName || o.name || 'Course',
     offId:      o => o.courseOfferingId ?? o.offeringId ?? o.id ?? null,
     offLabel:   o => {
       const n = safeText(o.courseOfferingName || o.offeringName || 'Offering');
@@ -398,71 +371,46 @@ function fmtDate(v){
 
   // ---------- Loaders ----------
   function loadChildren(){
-    console.log('[UI] loadChildren');
-
-    // Reset downstream selects
     enable('#courseId,#offeringId,#enrollmentId', false);
     fillSelect($('#courseId'), [], null, null, '-- Select Course --');
     fillSelect($('#offeringId'), [], null, null, '-- Select Offering --');
     fillSelect($('#enrollmentId'), [], null, null, '-- Select Enrollment --');
 
-    // Reset tables
     $('#attendanceTbody').html('<tr><td colspan="3" class="text-center text-muted">Select enrollment to view attendance.</td></tr>');
     $('#trackingTbody').html('<tr><td colspan="4" class="text-center text-muted">Select enrollment to view tracking.</td></tr>');
 
     $.getJSON(API.children)
       .done(list=>{
-        console.log('[API] children ->', list);
         const $child = $('#childId');
-
         if (!Array.isArray(list) || list.length === 0) {
           fillSelect($child, [], null, null, '-- Select Child --');
-          enable($child, false);
-          hideBlock($child, false);
+          enable($child, false); hideBlock($child, false);
           setSummary({ child:'', course:'', offering:'', enrollment:'' });
           return;
         }
-
         if (list.length === 1) {
           const one = list[0];
           const cid = pick.childId(one);
           const cname = pick.childName(one);
-
           $child.empty().append($('<option>').val(cid ?? '').text(cname));
-          hideBlock($child, true);
-          enable($child, true);
+          hideBlock($child, true); enable($child, true);
           setSummary({ child: cname });
-
           enable('#courseId', true);
           loadOfferingsForParent().then(()=> buildCoursesFromOffers());
         } else {
           fillSelect($child, list, pick.childId, pick.childName, '-- Select Child --');
-          enable($child, true);
-          hideBlock($child, false);
+          enable($child, true); hideBlock($child, false);
           setSummary({ child:'', course:'', offering:'', enrollment:'' });
         }
       })
-      .fail(()=> {
-        alert('Failed to load children.');
-        enable('#childId', true);
-      });
+      .fail(()=> { alert('Failed to load children.'); enable('#childId', true); });
   }
 
   function loadOfferingsForParent(){
-    if (OFFERS && OFFERS.length > 0) {
-      console.log('[CACHE] using cached offerings:', OFFERS.length);
-      return Promise.resolve(OFFERS);
-    }
-    console.log('[API] offeringsForParent -> fetch');
+    if (OFFERS && OFFERS.length > 0) return Promise.resolve(OFFERS);
     return $.getJSON(API.offeringsForParent).then(list=>{
-      OFFERS = list || [];
-      console.log('[API] offerings ->', OFFERS);
-      return OFFERS;
-    }).catch(()=>{
-      OFFERS = [];
-      alert('Failed to load offerings.');
-      return OFFERS;
-    });
+      OFFERS = list || []; return OFFERS;
+    }).catch(()=>{ OFFERS = []; alert('Failed to load offerings.'); return OFFERS; });
   }
 
   function buildCoursesFromOffers(){
@@ -474,8 +422,6 @@ function fmtDate(v){
       if (!map.has(id)) map.set(id, { id, name: pick.courseName(o) });
     });
     const courses = Array.from(map.values());
-    console.log('[UI] derived courses:', courses);
-
     if (courses.length === 0) {
       fillSelect($course, [], null, null, '-- Select Course --');
       enable($course, false); hideBlock($course, false);
@@ -504,8 +450,6 @@ function fmtDate(v){
       return;
     }
     const list = (OFFERS || []).filter(o => String(pick.courseId(o)) === String(courseId));
-    console.log('[UI] offerings for course', courseId, '->', list);
-
     if (list.length === 0) {
       fillSelect($off, [], null, null, '-- Select Offering --'); enable($off, false); hideBlock($off, false);
       setSummary({ offering:'' });
@@ -534,10 +478,8 @@ function fmtDate(v){
       setSummary({ enrollment:'' });
       return;
     }
-    console.log('[API] studentsByOffering ->', offeringId);
     $.getJSON(API.studentsByOffering, { offeringId })
       .done(list=>{
-        console.log('[API] studentsByOffering <-', list);
         if (!list || list.length === 0) {
           fillSelect($enr, [], null, null, '-- Select Enrollment --'); enable($enr, false); hideBlock($enr, false);
           setSummary({ enrollment:'' });
@@ -568,18 +510,14 @@ function fmtDate(v){
       });
   }
 
-  // ---------- Data renderers (forgiving parsing) ----------
+  // ---------- Data renderers ----------
   function loadAttendance(enrollmentId){
     if(!enrollmentId) return;
-    console.log('[API] attendance ->', enrollmentId);
     $('#attendanceTbody').html('<tr><td colspan="3" class="text-center text-muted">Loading…</td></tr>');
     showSpinner('attn', true);
-
     $.ajax({ url: API.attendance, data: { enrollmentId }, dataType: 'text' })
       .done(txt=>{
-        const raw  = tryParseJson(txt);
-        const data = asArray(raw);
-        console.log(data);
+        const data = asArray(JSON.parse((txt||'').trim() || '[]'));
         if(!data.length){
           $('#attendanceTbody').html('<tr><td colspan="3" class="text-center text-muted">No attendance found.</td></tr>');
           return;
@@ -589,62 +527,49 @@ function fmtDate(v){
           const statusStr = safeText(r.attendanceStatusLabel ?? r.attendanceStatus ?? '');
           const notes     = safeText(r.remarks ?? r.notes ?? '');
           return '<tr>'
-          +   '<td>' + dateStr + '</td>'
-          +   '<td><span class="badge rounded-pill bg-primary">' + statusStr + '</span></td>'
-          +   '<td>' + notes + '</td>'
-          + '</tr>';
+            +   '<td>' + dateStr + '</td>'
+            +   '<td><span class="badge rounded-pill bg-primary">' + statusStr + '</span></td>'
+            +   '<td>' + notes + '</td>'
+            + '</tr>';
         }).join('');
         $('#attendanceTbody').html(rows);
       })
-      .fail((xhr, s, e)=>{
-        console.error('attendance fetch error:', s, e, xhr?.responseText);
-        $('#attendanceTbody').html('<tr><td colspan="3" class="text-danger text-center">Failed to load attendance.</td></tr>');
-      })
+      .fail(()=>$('#attendanceTbody').html('<tr><td colspan="3" class="text-danger text-center">Failed to load attendance.</td></tr>'))
       .always(()=> showSpinner('attn', false));
   }
 
   function loadTracking(enrollmentId){
     if(!enrollmentId) return;
-    console.log('[API] tracking ->', enrollmentId);
     $('#trackingTbody').html('<tr><td colspan="4" class="text-center text-muted">Loading…</td></tr>');
     showSpinner('trk', true);
-
     $.ajax({ url: API.tracking, data: { enrollmentId }, dataType: 'text' })
       .done(txt=>{
-        const raw  = tryParseJson(txt);
-        const data = asArray(raw);
-        console.log(data);
+        const data = asArray(JSON.parse((txt||'').trim() || '[]'));
         if(!data.length){
           $('#trackingTbody').html('<tr><td colspan="4" class="text-center text-muted">No tracking entries found.</td></tr>');
           return;
         }
         const rows = data.map(r => {
-	          const dateStr   = fmtDate(r.trackingDate);
-	          
-	          const milestone = safeText(r.milestone ?? r.topic ?? r.unitName ?? '');
-	          const remarks   = safeText(r.remarks ?? r.notes ?? '');
-	          const mentor    = safeText(r.mentorName ?? r.mentor ?? '');
-	          return '<tr>'
-	          +   '<td>' + dateStr + '</td>'
-	          +   '<td>' + milestone + '</td>'
-	          +   '<td>' + remarks + '</td>'
-	          +   '<td>' + mentor + '</td>'
-	          + '</tr>';
-	        }).join('');
-	        $('#trackingTbody').html(rows);
+          const dateStr = fmtDate(r.trackingDate);
+          const sessionName = safeText(r.sessionName);
+          const remarks   = safeText(r.remarks ?? r.notes ?? '');
+          const mentor    = safeText(r.mentorName ?? r.mentor ?? '');
+          return '<tr>'
+            +   '<td>' + dateStr + '</td>'
+            +   '<td>' + sessionName + '</td>'
+            +   '<td>' + remarks + '</td>'
+            +   '<td>' + mentor + '</td>'
+            + '</tr>';
+        }).join('');
+        $('#trackingTbody').html(rows);
       })
-      .fail((xhr, s, e)=>{
-        console.error('tracking fetch error:', s, e, xhr?.responseText);
-        $('#trackingTbody').html('<tr><td colspan="4" class="text-danger text-center">Failed to load tracking.</td></tr>');
-      })
+      .fail(()=>$('#trackingTbody').html('<tr><td colspan="4" class="text-danger text-center">Failed to load tracking.</td></tr>'))
       .always(()=> showSpinner('trk', false));
   }
 
   // ---------- Cascading handlers ----------
   $(document).on('change', '#childId', function(){
-    const childId = $(this).val();
     const childText = $('#childId option:selected').text();
-    console.log('[UI] child change ->', childId);
     setSummary({ child: childText || '' });
 
     enable('#courseId,#offeringId,#enrollmentId', false);
@@ -660,39 +585,30 @@ function fmtDate(v){
   });
 
   $(document).on('change', '#courseId', function(){
-    const courseId = $(this).val();
     const courseName = $('#courseId option:selected').text();
-    console.log('[UI] course change ->', courseId);
     setSummary({ course: courseName || '' });
-
     enable('#offeringId,#enrollmentId', false);
     fillSelect($('#offeringId'), [], null, null, '-- Select Offering --');
     fillSelect($('#enrollmentId'), [], null, null, '-- Select Enrollment --');
-    buildOfferingsForCourse(courseId);
+    buildOfferingsForCourse($(this).val());
   });
 
   $(document).on('change', '#offeringId', function(){
-    const offeringId = $(this).val();
     const offLabel = $('#offeringId option:selected').text();
-    console.log('[UI] offering change ->', offeringId);
     setSummary({ offering: offLabel || '' });
-
     enable('#enrollmentId', false);
     fillSelect($('#enrollmentId'), [], null, null, '-- Select Enrollment --');
+    const offeringId = $(this).val();
     if (offeringId) loadEnrollmentsByOffering(offeringId);
   });
 
   $(document).on('change', '#enrollmentId', function(){
     const enrollmentId = $(this).val();
     const etx = $('#enrollmentId option:selected').text();
-    console.log('[UI] enrollment change ->', enrollmentId);
     const idDisplay = (enrollmentId && enrollmentId !== '') ? ('Enrollment #' + enrollmentId + ' — ') : '';
     setSummary({ enrollment: idDisplay + (etx || '') });
-
-    if(enrollmentId){
-      loadAttendance(enrollmentId);
-      loadTracking(enrollmentId);
-    } else {
+    if(enrollmentId){ loadAttendance(enrollmentId); loadTracking(enrollmentId); }
+    else {
       $('#attendanceTbody').html('<tr><td colspan="3" class="text-center text-muted">Select enrollment to view attendance.</td></tr>');
       $('#trackingTbody').html('<tr><td colspan="4" class="text-center text-muted">Select enrollment to view tracking.</td></tr>');
     }

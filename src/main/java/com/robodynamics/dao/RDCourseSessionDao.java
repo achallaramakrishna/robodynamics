@@ -1,5 +1,6 @@
 package com.robodynamics.dao;
 
+import com.robodynamics.dto.RDSessionItem;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
 
@@ -44,6 +45,14 @@ public interface RDCourseSessionDao {
     List<RDCourseSession> findByTierLevelOrderedByTierOrder(RDCourseSession.TierLevel tierLevel);
 
 	List<RDCourseSession> getCourseSessionsByCourseOfferingId(int courseOfferingId);
+	
+	 List<RDSessionItem> findSessionItemsByCourse(Integer courseId, String sessionType);
+
+	 List<RDSessionItem> findSessionItemsByCourseAndOffering(Integer courseId, Integer offeringId, String sessionType);
+	 
+	 
+	
+	
 
 
 }

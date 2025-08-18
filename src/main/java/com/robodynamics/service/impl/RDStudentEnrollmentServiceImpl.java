@@ -139,6 +139,13 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 		return rdStudentEnrollmentDao.getChildrenByParentId(parentId);
 	}
 
+	@Override
+	@Transactional
+	public int countEnrollments(int courseOfferingId) {
+		// TODO Auto-generated method stub
+		return rdStudentEnrollmentDao.countEnrollments(courseOfferingId);
+	}
+
 
 	
 }

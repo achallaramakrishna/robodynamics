@@ -53,6 +53,7 @@
 					<div class="panel-body">
 						<table class="table table-striped table-bordered">
 							<tr>
+								<th>Course Id</th>
 								<th>Course Name</th>
 								<th>Course Category</th>
 							</tr>
@@ -70,6 +71,7 @@
 								</c:url>
 
 								<tr>
+									<td>${tempCourse.courseId}</td>
 									<td>${tempCourse.courseName}</td>
 									<td>${tempCourse.courseCategory.courseCategoryName}</td>
 

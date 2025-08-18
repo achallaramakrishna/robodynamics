@@ -48,10 +48,6 @@ public class RDCourseOffering {
     @JsonProperty("courseOfferingName")
     private String courseOfferingName;
 
-    @Column(name = "title")
-    @JsonProperty("title")
-    private String title;
-
     @Column(name = "status")
     @JsonIgnore
     private String status;
@@ -128,14 +124,6 @@ public class RDCourseOffering {
         this.courseOfferingName = courseOfferingName;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -195,12 +183,18 @@ public class RDCourseOffering {
 
 	@Override
 	public String toString() {
-		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", courseOfferingName=" + courseOfferingName + ", title=" + title + ", status=" + status
-				+ ", course=" + course + ", instructor=" + instructor + ", sessionsPerWeek=" + sessionsPerWeek
-				+ ", daysOfWeek=" + daysOfWeek + ", sessionStartTime=" + sessionStartTime + ", sessionEndTime="
-				+ sessionEndTime + "]";
+	    // Keep this DEAD SIMPLE: never touch lazy collections here.
+	    return "RDCourseOffering{" +
+	            "courseOfferingId=" + courseOfferingId +
+	            ", courseOfferingName='" + courseOfferingName + '\'' +
+	            ", startDate=" + startDate +
+	            ", endDate=" + endDate +
+	            ", status=" + status +
+	            // DO NOT include studentEnrollments or any other lazy relation
+	            '}';
 	}
+
+	
 
 	
     

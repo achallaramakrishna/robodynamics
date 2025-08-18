@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,16 @@ import com.robodynamics.model.RDClassSession;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDCourseTracking;
 import com.robodynamics.service.RDCourseOfferingService;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.robodynamics.model.RDClassSession;
 
 @Repository
 @Transactional
@@ -137,5 +148,28 @@ public class RDClassSessionDaoImpl implements RDClassSessionDao {
                 .setParameter("courseOfferingId", courseOfferingId)
                 .list();
     }
+
+
+
+	@Override
+	public List<RDClassSession> findForOfferingInWindow(int courseOfferingId, LocalDateTime atStartOfDay,
+			LocalDateTime atStartOfDay2) {
+        // Overlap condition so sessions that straddle the window are included:
+        // sessionEnd >= :start  AND  sessionStart <= :end
+        String hql = "from RDClassSession s " +
+                     "where s.courseOffering.courseOfferingId = :offId " +
+                     "  and s.sessionEndDateTime   >= :start " +
+                     "  and s.sessionDateTime <= :end " +
+                     "order by s.sessionDateTime asc";
+
+        Session session = factory.getCurrentSession();
+        Query<RDClassSession> q = session.createQuery(hql, RDClassSession.class);
+        q.setParameter("offId", courseOfferingId);
+        q.setParameter("start", atStartOfDay);
+        q.setParameter("end", atStartOfDay2);
+
+        return q.getResultList();
+
+	}
 
 }

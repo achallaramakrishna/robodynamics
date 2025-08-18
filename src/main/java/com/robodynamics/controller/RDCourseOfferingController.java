@@ -137,7 +137,6 @@ public class RDCourseOfferingController {
 
         theCourseOffering.setCourse(course);
         theCourseOffering.setInstructor(user);
-        theCourseOffering.setTitle(course.getCourseName());
         theCourseOffering.setCourseOfferingName(courseOfferingForm.getCourseOfferingName());
 
         // ✅ New Fields Start Here

@@ -39,4 +39,6 @@ public interface RDStudentEnrollmentDao {
 	public List<RDStudentInfoDTO> getChildrenByParentId(Integer parentId);
 
 	public boolean enrollmentBelongsToParent(Integer enrollmentId, Integer parentId);
+
+	public int countEnrollments(int courseOfferingId);
 }

@@ -1,6 +1,7 @@
 package com.robodynamics.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,9 @@ public interface RDClassSessionService {
 	RDClassSession getOrCreateClassSession(int offeringId, LocalDate sessionDate);
 	
     RDClassSession findSessionByOfferingAndDate(int offeringId, LocalDate date);
+
+	public List<RDClassSession> getSessionsForOffering(int courseOfferingId, LocalDateTime atStartOfDay,
+			LocalDateTime atStartOfDay2);
 
 
 }

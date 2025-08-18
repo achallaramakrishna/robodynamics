@@ -1,5 +1,6 @@
 package com.robodynamics.service;
 
+import com.robodynamics.dto.RDSessionItem;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSession.TierLevel;
 
@@ -28,7 +29,7 @@ public interface RDCourseSessionService {
    	
    	void processJson(MultipartFile file, int selectedCourseId) throws Exception;
 
-	RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, Integer courseId);
+   	RDCourseSession getCourseSessionBySessionIdAndCourseId(int sessionId, Integer courseId);
 
 
 	// **New Methods**
@@ -52,6 +53,9 @@ public interface RDCourseSessionService {
     List<RDCourseSession> findByTierLevelOrderedByTierOrder(RDCourseSession.TierLevel tierLevel);
 
 	List<RDCourseSession> getCourseSessionsByCourseOfferingId(int courseOfferingId);
+
+	
+    List<RDSessionItem> findSessionItemsByCourse(Integer courseId, String sessionType);
 
 
 }

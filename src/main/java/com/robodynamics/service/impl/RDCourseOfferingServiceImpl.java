@@ -89,8 +89,30 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId) {
 		return rdCourseOfferingDao.getOfferingsByParentId(parentId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, Integer userId) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.findOfferingsForMentorIntersecting(selectedDate,userId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.getCourseOfferingsByDateAndMentor(since,to);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.findOfferingsForMentorIntersecting(mentorId,since,to);
 	}
 	
 }

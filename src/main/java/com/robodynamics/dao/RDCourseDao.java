@@ -35,6 +35,10 @@ public interface RDCourseDao {
 
 	public List<RDCourse> getAllCoursesWithOfferingsAndEnrollments();
 
+	public List<RDCourse> getTrendingCourses();
+
+	public List<RDCourse> getCoursesNeedingMentors();
+
 
 
 }

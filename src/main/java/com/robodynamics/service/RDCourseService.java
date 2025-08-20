@@ -1,6 +1,7 @@
 package com.robodynamics.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.robodynamics.dto.RDCourseBasicDTO;
 import com.robodynamics.model.RDCourse;
@@ -33,8 +34,11 @@ public interface RDCourseService {
     
     List<RDCourse> getCoursesByTierLevel(String tierLevel); // Optional based on business need
 
-	public List<RDCourse> getAllCoursesWithOfferingsAndEnrollments();
+	List<RDCourse> getAllCoursesWithOfferingsAndEnrollments();
 
+	List<RDCourse> getTrendingCourses();
+	
+	List<RDCourse> getCoursesNeedingMentors();
 
     	
 

@@ -98,5 +98,16 @@ public class RDCourseServiceImpl implements RDCourseService {
 		return rdCourseDao.getAllCoursesWithOfferingsAndEnrollments();
 	}
 
+	@Override
+	public List<RDCourse> getTrendingCourses() {
+		// TODO Auto-generated method stub
+		return rdCourseDao.getTrendingCourses();
+	}
+
+	@Override
+	public List<RDCourse> getCoursesNeedingMentors() {
+		return rdCourseDao.getCoursesNeedingMentors();
+	}
+
 
 }

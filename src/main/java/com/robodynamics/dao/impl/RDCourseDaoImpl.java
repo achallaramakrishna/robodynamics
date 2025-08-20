@@ -153,4 +153,16 @@ public class RDCourseDaoImpl implements RDCourseDao {
 	        .getResultList();
 		}
 
+	@Override
+	public List<RDCourse> getTrendingCourses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RDCourse> getCoursesNeedingMentors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

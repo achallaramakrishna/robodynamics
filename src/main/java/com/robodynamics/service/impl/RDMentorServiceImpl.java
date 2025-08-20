@@ -28,4 +28,10 @@ public class RDMentorServiceImpl implements RDMentorService {
     public List<RDMentorDTO> getMentorsWithSummary() {
         return mentorDao.findMentorsSummary();
     }
+
+	@Override
+	public List<RDMentorDTO> getFeaturedMentors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

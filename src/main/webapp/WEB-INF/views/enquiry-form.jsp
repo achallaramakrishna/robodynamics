@@ -90,9 +90,12 @@
 								<label for="enquiryType" class="col-md-3 control-label">Enquiry Type</label>
 								<div class="col-md-9">
 									<form:select path="enquiryType" class="form-control">
-										<form:option value="Corporate Training" label="Corporate Training" />
-										<form:option value="Young Innovators" label="Young Innovators" />
-										<form:option value="Future Innovators" label="Future Innovators" />
+										<form:option value="Corporate Training" label="Vedic Maths" />
+										<form:option value="Young Innovators" label="Olympiad Classes" />
+										<form:option value="Future Innovators" label="STEM classes" />
+										<form:option value="Future Innovators" label="Languages classes" />
+										<form:option value="Future Innovators" label="Programming Classes" />
+										<form:option value="Future Innovators" label="Robotics Classes" />
 									</form:select>
 								</div>
 							</div>

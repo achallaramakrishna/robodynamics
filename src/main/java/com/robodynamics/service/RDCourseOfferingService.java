@@ -37,6 +37,12 @@ public interface RDCourseOfferingService {
 	public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to);
 
 	public List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
+	
+	
+    // new (suggested)
+    List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end);
+    List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end, Integer mentorUserId);
+
 
 
 

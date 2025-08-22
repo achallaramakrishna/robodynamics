@@ -114,5 +114,20 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 		// TODO Auto-generated method stub
 		return rdCourseOfferingDao.findOfferingsForMentorIntersecting(mentorId,since,to);
 	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.getCourseOfferingsBetween(start,end);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end,
+			Integer mentorUserId) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.getCourseOfferingsBetweenForMentor(start,end);
+	}
 	
 }

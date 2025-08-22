@@ -35,6 +35,31 @@ public interface RDCourseOfferingDao {
 	public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
 
 	public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate, Integer userId);
+	
+    List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate date, Integer mentorUserId);
+
+    // new (suggested)
+    List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end);
+    List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end, Integer mentorUserId);
+
+	public List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end);
+	
+	  /* Day-based */
+    List<RDCourseOffering> findByDate(LocalDate date);
+    List<RDCourseOffering> findByDateAndMentor(LocalDate date, Integer mentorUserId);
+
+    /* Range-based (inclusive start..end) */
+    List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive);
+    List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId);
+
+    /* Simple filter (for calendar endpoint) */
+    List<RDCourseOffering> findFiltered(Long courseId, Long mentorId, String status);
+
+    /* Optional: with pagination if you need it later */
+    List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive, int offset, int limit);
+    List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId, int offset, int limit);
+
+
 
 
 

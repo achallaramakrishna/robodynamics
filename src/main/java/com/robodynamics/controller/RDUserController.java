@@ -7,11 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.robodynamics.model.RDContact;
@@ -27,9 +23,11 @@ import com.robodynamics.service.RDCourseTrackingService;
 import com.robodynamics.service.RDStudentEnrollmentService;
 import com.robodynamics.service.RDUserService;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
+import java.time.DayOfWeek;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -40,14 +38,14 @@ public class RDUserController {
 
     @Autowired private RDCourseOfferingService courseOfferingService;
     @Autowired private RDClassAttendanceService attendanceService;
-    @Autowired private RDCourseTrackingService trackingService;       // kept if used elsewhere
-    @Autowired private RDCourseService courseService;                  // kept if used elsewhere
+    @Autowired private RDCourseTrackingService trackingService;       // if used elsewhere
+    @Autowired private RDCourseService courseService;                  // if used elsewhere
     @Autowired private RDCourseSessionService courseSessionService;
     @Autowired private RDStudentEnrollmentService enrollmentService;
     @Autowired private RDUserService userService;
     @Autowired private RDCourseTrackingService courseTrackingService;
 
-    /* ================== Unchanged auth / user endpoints (your originals) ================== */
+    /* ================== Unchanged auth / user endpoints ================== */
 
     @GetMapping("/register")
     public ModelAndView home(Model m) {
@@ -166,49 +164,70 @@ public class RDUserController {
     /* ================== Attendance & Tracking (UPDATED) ================== */
 
     /**
-     * New flat view endpoint so your URL /attendance-tracking-flat?date=YYYY-MM-DD works.
+     * Flat view shortcut, accepts the same filters as the main view.
      */
     @GetMapping("/attendance-tracking-flat")
-    public String attendanceTrackingFlat(@RequestParam(value = "date", required = false) String dateParam,
-                                         Model model, HttpSession session) {
-        // Delegate to the main method with view=flat
-        return viewAttendanceTracking(dateParam, "flat", model, session);
+    public String attendanceTrackingFlat(
+            @RequestParam Map<String, String> params,
+            Model model, HttpSession session) {
+        params.putIfAbsent("view", "flat");
+        return buildAttendanceModel(params, model, session);
     }
 
     /**
      * Main attendance endpoint. Pass view=accordion (default) or view=flat.
      */
     @GetMapping("/attendance-tracking")
-    public String viewAttendanceTracking(@RequestParam(value = "date", required = false) String dateParam,
-                                         @RequestParam(value = "view", defaultValue = "accordion") String view,
-                                         Model model,
-                                         HttpSession session) {
+    public String viewAttendanceTracking(
+            @RequestParam Map<String, String> params,
+            Model model, HttpSession session) {
+        params.putIfAbsent("view", "accordion");
+        return buildAttendanceModel(params, model, session);
+    }
 
-        // 1) Parse date
-        LocalDate selectedDate;
-        if (dateParam != null && !dateParam.isEmpty()) {
-            try {
-                selectedDate = LocalDate.parse(dateParam);
-            } catch (DateTimeParseException e) {
-                selectedDate = LocalDate.now();
-                model.addAttribute("error", "Invalid date format. Showing today's date.");
-            }
-        } else {
-            selectedDate = LocalDate.now();
-        }
+    /**
+     * Core builder that reads all filters, computes the date window, aggregates data,
+     * applies filters (mentor/offering/student/status/hasFeedback), and fills the model.
+     *
+     * Status semantics across a range:
+     *   - "Present" if student was present on ANY day in the window, else "Absent".
+     * Has feedback semantics:
+     *   - "yes" if ANY non-empty feedback exists in the window, else "no".
+     * Session title shown:
+     *   - The latest (by date) selected session within the window; "No session selected" if none.
+     */
+    private String buildAttendanceModel(Map<String, String> params, Model model, HttpSession session) {
+        final String view = val(params.get("view"), "accordion");
 
+        // -------- Parse range & dates (all optional) --------
+        final String rangeParam     = trimToNull(params.get("range"));         // day|week|month|custom
+        final String dateParam      = trimToNull(params.get("date"));          // yyyy-MM-dd
+        final String startDateParam = trimToNull(params.get("startDate"));     // yyyy-MM-dd
+        final String endDateParam   = trimToNull(params.get("endDate"));       // yyyy-MM-dd
+
+        LocalDate baseDate = parseDateOr(dateParam, LocalDate.now());
+        DateWindow window = computeWindow(val(rangeParam, "day"), baseDate, startDateParam, endDateParam);
+
+        // UI echo
         DateTimeFormatter iso = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter pretty = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        model.addAttribute("selectedDateFormatted", selectedDate.format(iso));     // for <input type="date">
-        model.addAttribute("selectedDate", selectedDate.format(pretty));           // for heading
+        model.addAttribute("selectedRange", window.range);
+        model.addAttribute("selectedDateFormatted", window.base.format(iso));
+        model.addAttribute("startDateFormatted", window.start.format(iso));
+        model.addAttribute("endDateFormatted", window.end.format(iso));
+        model.addAttribute("displayDateRange", humanRange(window.start, window.end));
 
-        // 2) Who am I?
+        // -------- Parse text filters (optional) --------
+        final String mentorQ   = lowerOrNull(params.get("mentor"));
+        final String offeringQ = lowerOrNull(params.get("offering"));
+        final String studentQ  = lowerOrNull(params.get("student"));
+        final String statusQ   = trimToNull(params.get("status"));       // "Present" | "Absent" | null
+        final String hasFbQ    = trimToNull(params.get("hasFeedback"));  // "yes" | "no" | null
+
+        // -------- Who am I? --------
         RDUser current = (RDUser) session.getAttribute("rdUser");
         Integer profileId = (current != null) ? current.getProfile_id() : null;
         Integer userId    = (current != null) ? current.getUserID()      : null;
 
-        // 3) Offerings by role
-        List<RDCourseOffering> todayOfferings;
         boolean isAdmin =
                 profileId != null &&
                 (profileId == RDUser.profileType.SUPER_ADMIN.getValue()
@@ -217,15 +236,28 @@ public class RDUserController {
 
         boolean isMentor = profileId != null && (profileId == RDUser.profileType.ROBO_MENTOR.getValue());
 
-        if (isAdmin) {
-            todayOfferings = courseOfferingService.getCourseOfferingsByDate(selectedDate);
-        } else if (isMentor) {
-            todayOfferings = courseOfferingService.getCourseOfferingsByDateAndMentor(selectedDate, userId);
-        } else {
-            todayOfferings = Collections.emptyList();
+        // -------- Fetch offerings in the date window (dedup by ID) --------
+        Map<Integer, RDCourseOffering> offeringById = new LinkedHashMap<>();
+        for (LocalDate d : daysBetween(window.start, window.end)) {
+            List<RDCourseOffering> dayOfferings;
+            if (isAdmin) {
+                dayOfferings = safeList(courseOfferingService.getCourseOfferingsByDate(d));
+            } else if (isMentor) {
+                dayOfferings = safeList(courseOfferingService.getCourseOfferingsByDateAndMentor(d, userId));
+            } else {
+                dayOfferings = Collections.emptyList();
+            }
+            for (RDCourseOffering o : dayOfferings) {
+                if (o == null) continue;
+                // Apply mentor/offering text filters early (optional)
+                if (!matchesMentor(o, mentorQ)) continue;
+                if (!matchesOffering(o, offeringQ)) continue;
+                offeringById.putIfAbsent(o.getCourseOfferingId(), o);
+            }
         }
+        List<RDCourseOffering> offerings = new ArrayList<>(offeringById.values());
 
-        // 4) Build data maps
+        // -------- Prepare model maps expected by JSP --------
         Map<Integer, List<RDUser>> enrolledStudentsMap = new HashMap<>();
         Map<Integer, List<RDCourseSession>> courseSessionsMap = new HashMap<>();
         Map<Integer, Map<Integer, String>> attendanceStatusMap = new HashMap<>();
@@ -233,82 +265,144 @@ public class RDUserController {
         Map<Integer, Map<Integer, String>> trackingFeedbackMap = new HashMap<>();
         Map<Integer, Map<Integer, Integer>> trackingSessionMap = new HashMap<>();
 
-        for (RDCourseOffering offering : todayOfferings) {
+        int resultCount = 0; // number of rendered student rows
+
+        // -------- Build per-offering data --------
+        for (RDCourseOffering offering : offerings) {
             int offeringId = offering.getCourseOfferingId();
 
-            // Students (distinct)
-            List<RDUser> students = userService.getEnrolledStudents(offeringId)
-                    .stream().distinct().collect(Collectors.toList());
-            enrolledStudentsMap.put(offeringId, students);
-
-            // Sessions for this offering
-            List<RDCourseSession> sessions = courseSessionService.getCourseSessionsByCourseOfferingId(offeringId);
+            // Sessions for this offering (for title lookup later)
+            List<RDCourseSession> sessions = safeList(courseSessionService.getCourseSessionsByCourseOfferingId(offeringId));
             courseSessionsMap.put(offeringId, sessions);
 
-            // Per-student attendance/track/feedback/session
-            Map<Integer, String> studentAttendanceMap = new HashMap<>();
+            // Students (distinct), apply optional student text filter later (and status/hasFeedback after aggregation)
+            List<RDUser> studentsAll = safeList(userService.getEnrolledStudents(offeringId)).stream()
+                    .filter(Objects::nonNull)
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            // Prepare per-student maps
+            Map<Integer, String>  studentAttendanceMap = new HashMap<>();
             Map<Integer, Boolean> studentTrackingMap   = new HashMap<>();
-            Map<Integer, String> studentFeedbackMap    = new HashMap<>();
+            Map<Integer, String>  studentFeedbackMap   = new HashMap<>();
             Map<Integer, Integer> studentSessionMap    = new HashMap<>();
+            List<RDUser>          studentsToRender     = new ArrayList<>();
 
-            for (RDUser student : students) {
-                String status = attendanceService.getAttendanceStatusForStudent(offeringId, student.getUserID(), selectedDate);
-                studentAttendanceMap.put(student.getUserID(), status != null ? status : "");
+            // Aggregate across window
+            for (RDUser student : studentsAll) {
+                if (student == null) continue;
+                int sid = student.getUserID();
 
-                Integer enrollmentId = enrollmentService.findEnrollmentIdByStudentAndOffering(offeringId, student.getUserID());
-                RDCourseTracking tracking = (enrollmentId != null)
-                        ? courseTrackingService.findByEnrollmentAndDate(enrollmentId, selectedDate)
-                        : null;
-
-                if (tracking != null) {
-                    Integer sessionId = (tracking.getCourseSession() != null)
-                            ? tracking.getCourseSession().getCourseSessionId()
-                            : null;
-                    studentTrackingMap.put(student.getUserID(), true);
-                    studentFeedbackMap.put(student.getUserID(), tracking.getFeedback());
-                    studentSessionMap.put(student.getUserID(), sessionId);
-                } else {
-                    studentTrackingMap.put(student.getUserID(), false);
-                    studentFeedbackMap.put(student.getUserID(), "");
-                    studentSessionMap.put(student.getUserID(), null);
+                // Optional student name filter (substring on "first last")
+                if (studentQ != null) {
+                    String full = (nz(student.getFirstName()) + " " + nz(student.getLastName())).toLowerCase(Locale.ROOT);
+                    if (!full.contains(studentQ)) {
+                        continue; // skip early
+                    }
                 }
+
+                Integer enrollmentId = enrollmentService.findEnrollmentIdByStudentAndOffering(offeringId, sid);
+
+                boolean presentAny = false;
+                String  latestFeedback = "";
+                Integer latestSessionId = null;
+                LocalDate latestFbDate = null;
+
+                for (LocalDate d : daysBetween(window.start, window.end)) {
+                    try {
+                        // Attendance
+                        String status = attendanceService.getAttendanceStatusForStudent(offeringId, sid, d);
+                        if ("Present".equalsIgnoreCase(nz(status))) {
+                            presentAny = true;
+                        }
+
+                        // Tracking / feedback
+                        if (enrollmentId != null) {
+                            RDCourseTracking tr = courseTrackingService.findByEnrollmentAndDate(enrollmentId, d);
+                            if (tr != null) {
+                                String fb = nz(tr.getFeedback());
+                                if (!fb.isBlank()) {
+                                    if (latestFbDate == null || d.isAfter(latestFbDate)) {
+                                        latestFbDate = d;
+                                        latestFeedback = fb;
+                                        latestSessionId = (tr.getCourseSession() != null) ? tr.getCourseSession().getCourseSessionId() : null;
+                                    }
+                                }
+                            }
+                        }
+                    } catch (Exception ex) {
+                        // Defensive: continue for that day if any lookup fails
+                        log.debug("Aggregate fail offeringId={}, sid={}, date={}", offeringId, sid, d, ex);
+                    }
+                }
+
+                String finalStatus = presentAny ? "Present" : "Absent";
+                boolean hasFb = !latestFeedback.isBlank();
+
+                // Optional filters: status, hasFeedback
+                if (statusQ != null) {
+                    if (!finalStatus.equalsIgnoreCase(statusQ)) {
+                        continue; // skip this student row
+                    }
+                }
+                if (hasFbQ != null) {
+                    boolean wantYes = "yes".equalsIgnoreCase(hasFbQ);
+                    if (wantYes && !hasFb) continue;
+                    if (!wantYes && hasFb) continue;
+                }
+
+                // Keep student for rendering and populate maps
+                studentsToRender.add(student);
+                studentAttendanceMap.put(sid, finalStatus);
+                studentTrackingMap.put(sid, hasFb);
+                studentFeedbackMap.put(sid, latestFeedback);       // may be ""
+                studentSessionMap.put(sid, latestSessionId);       // may be null
             }
 
-            attendanceStatusMap.put(offeringId, studentAttendanceMap);
-            trackingStatusMap.put(offeringId,   studentTrackingMap);
-            trackingFeedbackMap.put(offeringId, studentFeedbackMap);
-            trackingSessionMap.put(offeringId,  studentSessionMap);
+            if (!studentsToRender.isEmpty()) {
+                enrolledStudentsMap.put(offeringId, studentsToRender);
+                attendanceStatusMap.put(offeringId, studentAttendanceMap);
+                trackingStatusMap.put(offeringId,   studentTrackingMap);
+                trackingFeedbackMap.put(offeringId, studentFeedbackMap);
+                trackingSessionMap.put(offeringId,  studentSessionMap);
+                resultCount += studentsToRender.size();
+            } else {
+                // still expose sessions map for completeness; students/other maps omitted to avoid empty table rows
+                enrolledStudentsMap.put(offeringId, Collections.emptyList());
+            }
         }
 
-        // 5) Precompute selected session titles (JSP-friendly: no Streams)
+        // -------- Translate session ids -> titles for JSP badge --------
         Map<Integer, Map<Integer, String>> sessionTitleByOffering = new HashMap<>();
         for (Map.Entry<Integer, List<RDCourseSession>> e : courseSessionsMap.entrySet()) {
             int offeringId = e.getKey();
             Map<Integer, String> m = new HashMap<>();
             for (RDCourseSession s : e.getValue()) {
-                m.put(s.getCourseSessionId(), s.getSessionTitle());
+                if (s != null) m.put(s.getCourseSessionId(), nz(s.getSessionTitle()));
             }
             sessionTitleByOffering.put(offeringId, m);
         }
 
         Map<Integer, Map<Integer, String>> selectedSessionTitleMap = new HashMap<>();
-        for (RDCourseOffering offering : todayOfferings) {
+        for (RDCourseOffering offering : offerings) {
             int offeringId = offering.getCourseOfferingId();
+
             Map<Integer, Integer> studSess = trackingSessionMap.getOrDefault(offeringId, Collections.emptyMap());
             Map<Integer, String>  titleMap = sessionTitleByOffering.getOrDefault(offeringId, Collections.emptyMap());
 
             Map<Integer, String> perStudent = new HashMap<>();
             for (RDUser student : enrolledStudentsMap.getOrDefault(offeringId, Collections.emptyList())) {
-                Integer sid = studSess.get(student.getUserID());
-                String title = (sid != null) ? titleMap.get(sid) : null;
+                int sid = student.getUserID();
+                Integer sessId = studSess.get(sid);
+                String title = (sessId != null) ? titleMap.get(sessId) : null;
                 if (title == null || title.isBlank()) title = "No session selected";
-                perStudent.put(student.getUserID(), title);
+                perStudent.put(sid, title);
             }
             selectedSessionTitleMap.put(offeringId, perStudent);
         }
 
-        // 6) Model
-        model.addAttribute("todayOfferings", todayOfferings);
+        // -------- Put into model --------
+        model.addAttribute("todayOfferings", offerings); // same variable name your JSP expects
         model.addAttribute("enrolledStudentsMap", enrolledStudentsMap);
         model.addAttribute("courseSessionsMap", courseSessionsMap);
         model.addAttribute("attendanceStatusMap", attendanceStatusMap);
@@ -316,12 +410,10 @@ public class RDUserController {
         model.addAttribute("trackingFeedbackMap", trackingFeedbackMap);
         model.addAttribute("trackingSessionMap", trackingSessionMap);
         model.addAttribute("selectedSessionTitleMap", selectedSessionTitleMap);
+        model.addAttribute("resultCount", resultCount);
 
-        // 7) Choose view
-        if ("flat".equalsIgnoreCase(view)) {
-            return "attendance-tracking-flat";
-        }
-        return "attendance-tracking";
+        // Choose view
+        return "flat".equalsIgnoreCase(view) ? "attendance-tracking-flat" : "attendance-tracking";
     }
 
     /* ================== Calendar JSON (unchanged) ================== */
@@ -367,5 +459,121 @@ public class RDUserController {
             events.add(event);
         }
         return events;
+    }
+
+    /* ================== Helpers ================== */
+
+    private static String val(String v, String d) { return (v == null || v.isBlank()) ? d : v; }
+    private static String nz(String v) { return v == null ? "" : v; }
+    private static String lowerOrNull(String v) {
+        if (v == null) return null;
+        String t = v.trim();
+        return t.isEmpty() ? null : t.toLowerCase(Locale.ROOT);
+    }
+    private static String trimToNull(String v) {
+        if (v == null) return null;
+        String t = v.trim();
+        return t.isEmpty() ? null : t;
+    }
+    private static <T> List<T> safeList(List<T> list) { return list == null ? Collections.emptyList() : list; }
+
+    private static LocalDate parseDateOr(String val, LocalDate fallback) {
+        if (val == null) return fallback;
+        try {
+            return LocalDate.parse(val);
+        } catch (DateTimeParseException e) {
+            return fallback;
+        }
+    }
+
+    private static Iterable<LocalDate> daysBetween(LocalDate start, LocalDate endInclusive) {
+        List<LocalDate> days = new ArrayList<>();
+        LocalDate d = start;
+        while (!d.isAfter(endInclusive)) {
+            days.add(d);
+            d = d.plusDays(1);
+        }
+        return days;
+    }
+
+    private static boolean matchesMentor(RDCourseOffering o, String qLower) {
+        if (qLower == null) return true;
+        try {
+            String fn = (o.getInstructor() != null) ? nz(o.getInstructor().getFirstName()) : "";
+            String ln = (o.getInstructor() != null) ? nz(o.getInstructor().getLastName())  : "";
+            String full = (fn + " " + ln).trim().toLowerCase(Locale.ROOT);
+            return full.contains(qLower);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static boolean matchesOffering(RDCourseOffering o, String qLower) {
+        if (qLower == null) return true;
+        try {
+            String name = nz(o.getCourseOfferingName()).toLowerCase(Locale.ROOT);
+            String courseName = (o.getCourse() != null) ? nz(o.getCourse().getCourseName()).toLowerCase(Locale.ROOT) : "";
+            return name.contains(qLower) || courseName.contains(qLower);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static String humanRange(LocalDate start, LocalDate end) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        if (start.equals(end)) return start.format(fmt);
+        return start.format(fmt) + " — " + end.format(fmt);
+    }
+
+    private static class DateWindow {
+        final String range;     // day|week|month|custom (sanitized)
+        final LocalDate base;   // base date (dateParam or today)
+        final LocalDate start;  // inclusive
+        final LocalDate end;    // inclusive
+        DateWindow(String range, LocalDate base, LocalDate start, LocalDate end) {
+            this.range = range; this.base = base; this.start = start; this.end = end;
+        }
+    }
+
+    private static DateWindow computeWindow(String range, LocalDate base, String startStr, String endStr) {
+        range = (range == null) ? "day" : range.toLowerCase(Locale.ROOT);
+        LocalDate start = base, end = base;
+
+        switch (range) {
+            case "week": {
+                // Monday–Sunday window around base
+                DayOfWeek first = DayOfWeek.MONDAY;
+                start = base.with(TemporalAdjusters.previousOrSame(first));
+                end   = start.plusDays(6);
+                break;
+            }
+            case "month": {
+                start = base.with(TemporalAdjusters.firstDayOfMonth());
+                end   = base.with(TemporalAdjusters.lastDayOfMonth());
+                break;
+            }
+            case "custom": {
+                LocalDate s = parseOrNull(startStr);
+                LocalDate e = parseOrNull(endStr);
+                if (s != null && e != null && !e.isBefore(s)) {
+                    start = s; end = e;
+                } else if (s != null && e == null) {
+                    start = s; end = s;
+                } else if (s == null && e != null) {
+                    start = e; end = e;
+                } // else keep base/base
+                break;
+            }
+            case "day":
+            default:
+                // start=end=base already set
+                range = "day";
+        }
+        return new DateWindow(range, base, start, end);
+    }
+
+    private static LocalDate parseOrNull(String val) {
+        if (val == null || val.isBlank()) return null;
+        try { return LocalDate.parse(val); } catch (DateTimeParseException e) { return null; }
     }
 }

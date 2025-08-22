@@ -66,19 +66,21 @@
 
 		<div class="row">
 			<!-- Attendance & Tracking Card -->
-			<div class="col-md-4 mb-4">
-				<div class="card shadow-sm h-100 text-center">
-					<div class="card-header bg-info text-white">
-						<h5 class="mb-0">📝 Attendance & Tracking</h5>
-					</div>
-					<div class="card-body">
-						<p class="card-text">Mark attendance and track student
-							progress</p>
-						<a href="${pageContext.request.contextPath}/attendance-tracking"
-							class="btn btn-primary">Go</a>
-					</div>
-				</div>
-			</div>
+			<!-- Attendance & Tracking Card -->
+<div class="col-md-4 mb-4">
+    <div class="card shadow-sm h-100 text-center">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">📝 Attendance & Tracking</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Mark attendance and track student progress</p>
+            <!-- Add buttons for accordion and flat view -->
+            <a href="${pageContext.request.contextPath}/attendance-tracking?view=accordion" class="btn btn-primary me-2">Accordion View</a>
+            <a href="${pageContext.request.contextPath}/attendance-tracking?view=flat" class="btn btn-secondary">Flat View</a>
+        </div>
+    </div>
+</div>
+
 			
 			<!-- parent/dashboard.jsp -->
 			<div class="col-md-4">

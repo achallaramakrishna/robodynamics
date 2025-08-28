@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.validation.constraints.Email;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -206,6 +207,32 @@ public class RDUserDaoImpl implements RDUserDao {
 	    query.setParameter("offeringId", courseOfferingId);
 	    return query.getResultList();
 	}
+
+	@Override
+	public void update(RDUser u) {
+		Session session = factory.getCurrentSession();
+		session.update(u);
+
+		
+	}
+
+	@Override
+	public RDUser findByEmail(@Email String email) {
+	    if (email == null) return null;
+	    String normalized = email.trim().toLowerCase(java.util.Locale.ROOT);
+	    if (normalized.isEmpty()) return null;
+
+	    Session session = factory.getCurrentSession();
+	    String hql = "from RDUser u where lower(u.email) = :email";
+
+	    Query<RDUser> query = session.createQuery(hql, RDUser.class)
+	            .setParameter("email", normalized)
+	            .setMaxResults(1);
+
+	    // Hibernate 5.4 supports uniqueResultOptional()
+	    return query.uniqueResult();
+	}
+
 
 	
 

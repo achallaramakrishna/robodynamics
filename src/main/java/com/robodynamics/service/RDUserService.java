@@ -2,6 +2,8 @@ package com.robodynamics.service;
 
 import java.util.List;
 
+import javax.validation.constraints.Email;
+
 import com.robodynamics.form.RDRegistrationForm.Child;
 import com.robodynamics.form.RDRegistrationForm.Parent;
 import com.robodynamics.model.RDCourseCategory;
@@ -37,6 +39,10 @@ public interface RDUserService {
 	List<RDUser> getEnrolledStudents(int courseOfferingId);
 
 	public RDUser findByUserName(String username);
+
+	public RDUser findByEmail(@Email String email);
+
+	public RDUser save(RDUser u);
 
 
 

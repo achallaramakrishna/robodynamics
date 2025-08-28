@@ -2,6 +2,8 @@ package com.robodynamics.service.impl;
 
 import java.util.List;
 
+import javax.validation.constraints.Email;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -119,6 +121,20 @@ public class RDUserServiceImpl implements RDUserService {
 	@Transactional
 	public RDUser findByUserName(String username) {
 		return rdUserDao.findByUserName(username);
+	}
+
+	@Override
+	@Transactional
+	public RDUser findByEmail(@Email String email) {
+		
+		return rdUserDao.findByEmail(email);
+	}
+
+	@Override
+	@Transactional
+	public RDUser save(RDUser u) {
+		
+		return rdUserDao.registerRDUser(u);
 	}
 	
 	

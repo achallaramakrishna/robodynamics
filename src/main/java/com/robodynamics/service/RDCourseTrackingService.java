@@ -49,6 +49,7 @@ public interface RDCourseTrackingService {
     List<RDCourseTrackingDTO> getTrackingByEnrollment(Integer enrollmentId);
 
 
+    RDCourseTracking findLatestByEnrollmentInRange(int enrollmentId, LocalDate from, LocalDate to);
 
 
 }

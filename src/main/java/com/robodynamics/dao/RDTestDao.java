@@ -70,6 +70,7 @@ public interface RDTestDao {
 	
 	 // Optional, if you want role-aware variants (recommended)
     List<RDTest> findByParent(int parentUserId, Integer courseId, String q);
+	RDTest findById(Integer testId);
     
     
 }

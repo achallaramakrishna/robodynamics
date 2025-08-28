@@ -59,7 +59,12 @@ public interface RDCourseOfferingDao {
     List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive, int offset, int limit);
     List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId, int offset, int limit);
 
+	List<RDCourseOffering> getOverlapping(LocalDate from, LocalDate to);
 
+	List<RDCourseOffering> getOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId);
+
+	List<RDCourseOffering> getOverlapping(java.util.Date from, java.util.Date to);
+	List<RDCourseOffering> getOverlappingByMentor(java.util.Date from, java.util.Date to, Integer mentorUserId);
 
 
 

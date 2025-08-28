@@ -90,7 +90,15 @@ public class RDUser {
     
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+    
+    @Column(name = "profile_publish_allowed", nullable = false)
+    private Boolean profilePublishAllowed = false;
 
+
+    public Boolean getProfilePublishAllowed() { return profilePublishAllowed; }
+    public void setProfilePublishAllowed(Boolean profilePublishAllowed) { this.profilePublishAllowed = profilePublishAllowed; }
+
+    
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }

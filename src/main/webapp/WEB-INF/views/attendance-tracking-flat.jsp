@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  <!-- ADD THIS near your other taglibs -->
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -144,157 +144,156 @@
       </small>
 
       <!-- Export buttons (hidden in PDF via CSS) -->
-<div class="d-flex gap-2 export-actions">
-  <!-- CSV URL (safe) -->
-  <c:url var="csvUrl" value="/attendance-tracking-flat">
-    <c:param name="view" value="flat" />
-    <c:param name="export" value="csv" />
-    <c:param name="range" value="${param.range}" />
-    <c:param name="date" value="${param.date}" />
-    <c:param name="startDate" value="${param.startDate}" />
-    <c:param name="endDate" value="${param.endDate}" />
-    <c:param name="mentor" value="${param.mentor}" />
-    <c:param name="offering" value="${param.offering}" />
-    <c:param name="student" value="${param.student}" />
-    <c:param name="status" value="${param.status}" />
-    <c:param name="hasFeedback" value="${param.hasFeedback}" />
-  </c:url>
-  <a class="btn btn-sm btn-outline-secondary" href="<c:out value='${csvUrl}'/>">Export CSV</a>
+      <div class="d-flex gap-2 export-actions">
+        <!-- CSV URL (safe) -->
+        <c:url var="csvUrl" value="/attendance-tracking-flat">
+          <c:param name="view" value="flat" />
+          <c:param name="export" value="csv" />
+          <c:param name="range" value="${param.range}" />
+          <c:param name="date" value="${param.date}" />
+          <c:param name="startDate" value="${param.startDate}" />
+          <c:param name="endDate" value="${param.endDate}" />
+          <c:param name="mentor" value="${param.mentor}" />
+          <c:param name="offering" value="${param.offering}" />
+          <c:param name="student" value="${param.student}" />
+          <c:param name="status" value="${param.status}" />
+          <c:param name="hasFeedback" value="${param.hasFeedback}" />
+        </c:url>
+        <a class="btn btn-sm btn-outline-secondary" href="<c:out value='${csvUrl}'/>">Export CSV</a>
 
-  <!-- Generic JSP→PDF exporter -->
-  <c:url var="pdfUrl" value="/export/pdf-page">
-    <c:param name="path" value="/attendance-tracking-flat" />
-    <c:param name="filename" value="attendance-flat.pdf" />
-    <c:param name="landscape" value="true" />
-    <c:param name="view" value="flat" />
-    <c:param name="asPdf" value="true" />
-    <!-- forward current filters -->
-    <c:param name="range" value="${param.range}" />
-    <c:param name="date" value="${param.date}" />
-    <c:param name="startDate" value="${param.startDate}" />
-    <c:param name="endDate" value="${param.endDate}" />
-    <c:param name="mentor" value="${param.mentor}" />
-    <c:param name="offering" value="${param.offering}" />
-    <c:param name="student" value="${param.student}" />
-    <c:param name="status" value="${param.status}" />
-    <c:param name="hasFeedback" value="${param.hasFeedback}" />
-  </c:url>
-  <a class="btn btn-sm btn-outline-secondary" href="<c:out value='${pdfUrl}'/>">Export PDF</a>
-</div>
-
+        <!-- Generic JSP→PDF exporter -->
+        <c:url var="pdfUrl" value="/export/pdf-page">
+          <c:param name="path" value="/attendance-tracking-flat" />
+          <c:param name="filename" value="attendance-flat.pdf" />
+          <c:param name="landscape" value="true" />
+          <c:param name="view" value="flat" />
+          <c:param name="asPdf" value="true" />
+          <!-- forward current filters -->
+          <c:param name="range" value="${param.range}" />
+          <c:param name="date" value="${param.date}" />
+          <c:param name="startDate" value="${param.startDate}" />
+          <c:param name="endDate" value="${param.endDate}" />
+          <c:param name="mentor" value="${param.mentor}" />
+          <c:param name="offering" value="${param.offering}" />
+          <c:param name="student" value="${param.student}" />
+          <c:param name="status" value="${param.status}" />
+          <c:param name="hasFeedback" value="${param.hasFeedback}" />
+        </c:url>
+        <a class="btn btn-sm btn-outline-secondary" href="<c:out value='${pdfUrl}'/>">Export PDF</a>
+      </div>
     </div>
   </div>
 
   <!-- Results -->
-  <c:if test="${not empty todayOfferings}">
-    <div class="container">
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped mb-0" id="resultTable">
-          <thead>
-          <tr>
-            <th class="sticky sortable" data-col="0">Course Offering <span class="sort-indicator">↕</span></th>
-            <th class="sticky sortable" data-col="1">Mentor <span class="sort-indicator">↕</span></th>
-            <th class="sticky sortable" data-col="2">Date <span class="sort-indicator">↕</span></th>
-            <th class="sticky sortable" data-col="3">Student Name <span class="sort-indicator">↕</span></th>
-            <th class="sticky sortable" data-col="4">Attendance Status <span class="sort-indicator">↕</span></th>
-            <th class="sticky sortable" data-col="5">Session <span class="sort-indicator">↕</span></th>
-            <th class="sticky sortable" data-col="6">Feedback <span class="sort-indicator">↕</span></th>
-          </tr>
-          </thead>
-          <tbody>
-          <c:set var="renderedCount" value="0" />
-          <c:forEach var="offering" items="${todayOfferings}">
-            <c:set var="offId" value="${offering.courseOfferingId}"/>
-            <c:set var="students" value="${enrolledStudentsMap[offId]}"/>
-            <c:if test="${not empty students}">
+  <c:choose>
+    <c:when test="${not empty flatRows}">
+      <div class="container">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped mb-0" id="resultTable">
+            <thead>
+            <tr>
+              <th class="sticky sortable" data-col="0">Course Offering <span class="sort-indicator">↕</span></th>
+              <th class="sticky sortable" data-col="1">Mentor <span class="sort-indicator">↕</span></th>
+              <th class="sticky sortable" data-col="2">Date <span class="sort-indicator">↕</span></th>
+              <th class="sticky sortable" data-col="3">Student Name <span class="sort-indicator">↕</span></th>
+              <th class="sticky sortable" data-col="4">Attendance Status <span class="sort-indicator">↕</span></th>
+              <th class="sticky sortable" data-col="5">Session <span class="sort-indicator">↕</span></th>
+              <th class="sticky sortable" data-col="6">Feedback <span class="sort-indicator">↕</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="r" items="${flatRows}">
+              <tr>
+                <!-- Offering -->
+                <td><c:out value="${r.offeringName}"/></td>
 
-              <c:forEach var="student" items="${students}">
-                <c:set var="sid" value="${student.userID}"/>
+                <!-- Mentor -->
+                <td><c:out value="${empty r.mentorName ? '—' : r.mentorName}"/></td>
 
-                <c:set var="attMap"  value="${attendanceStatusMap[offId]}"/>
-                <c:set var="att"     value="${empty attMap  ? null : attMap[sid]}"/>
+                <!-- Date (+ weekday) -->
+                <td>
+                  <c:out value="${r.sessionDate}"/>
+                  <small class="text-muted">(<c:out value="${r.weekday}"/>)</small>
+                </td>
 
-                <c:set var="sessMap" value="${selectedSessionTitleMap[offId]}"/>
-                <c:set var="sess"    value="${empty sessMap ? null : sessMap[sid]}"/>
+                <!-- Student -->
+                <td><c:out value="${r.studentName}"/></td>
 
-                <c:set var="fbMap"   value="${trackingFeedbackMap[offId]}"/>
-                <c:set var="fb"      value="${empty fbMap   ? null : fbMap[sid]}"/>
-
-                <tr>
-                  <td><c:out value="${offering.courseOfferingName}"/></td>
-
-                  <!-- Mentor -->
-                  <td>
+                <!-- Attendance -->
+                <td>
+                  <span class="badge badge-status
                     <c:choose>
-                      <c:when test="${offering.instructor != null}">
-                        <c:out value="${offering.instructor.firstName}"/>
-                        <c:if test="${not empty offering.instructor.lastName}">
-                          <c:out value=" " /><c:out value="${offering.instructor.lastName}"/>
-                        </c:if>
-                      </c:when>
-                      <c:otherwise>—</c:otherwise>
-                    </c:choose>
-                  </td>
+                      <c:when test="${r.attendanceOnDate == 'Present'}">badge-success</c:when>
+                      <c:when test="${r.attendanceOnDate == '—'}">badge-info</c:when>
+                      <c:otherwise>badge-danger</c:otherwise>
+                    </c:choose>">
+                    <c:out value="${r.attendanceOnDate}"/>
+                  </span>
+                  <c:if test="${not empty r.attendanceMarkedAt}">
+                    <small class="text-muted d-block">
+                      at <fmt:formatDate value="${r.attendanceMarkedAt}" pattern="dd MMM HH:mm"/>
+                    </small>
+                  </c:if>
+                </td>
 
-                  <!-- Date -->
-                  <td>
+                <!-- Session -->
+                <td>
+                  <span class="badge badge-info">
                     <c:choose>
-                      <c:when test="${selectedRange == 'day'}">
-                        <c:out value="${selectedDateFormatted}"/>
+                      <c:when test="${not empty r.trackingSessionIdOnDate}">
+                        Session #<c:out value="${r.trackingSessionIdOnDate}"/>
                       </c:when>
-                      <c:otherwise>
-                        <c:out value="${displayDateRange}"/>
-                      </c:otherwise>
+                      <c:otherwise>No session selected</c:otherwise>
                     </c:choose>
-                  </td>
+                  </span>
+                </td>
 
-                  <td><c:out value="${student.firstName}"/> <c:out value="${student.lastName}"/></td>
+                <!-- Feedback (+ who/when) -->
+                <td>
+                  <div>
+                    <c:out value="${empty r.feedbackOnDate ? 'No feedback' : r.feedbackOnDate}"/>
+                  </div>
+                  <c:if test="${not empty r.trackingMarkedBy || not empty r.trackingMarkedAt}">
+                    <small class="text-muted d-block">
+                      <c:if test="${not empty r.trackingMarkedBy}">by <c:out value="${r.trackingMarkedBy}"/></c:if>
+                      <c:if test="${not empty r.trackingMarkedAt}">
+                        <c:if test="${not empty r.trackingMarkedBy}">&nbsp;•&nbsp;</c:if>
+                        <fmt:formatDate value="${r.trackingMarkedAt}" pattern="dd MMM HH:mm"/>
+                      </c:if>
+                    </small>
+                  </c:if>
+                </td>
+              </tr>
+            </c:forEach>
+            </tbody>
+          </table>
+        </div>
 
-                  <td>
-                    <span class="badge badge-status
-                      <c:choose>
-                        <c:when test='${att == "Present"}'>badge-success</c:when>
-                        <c:otherwise>badge-danger</c:otherwise>
-                      </c:choose>">
-                      <c:out value="${empty att ? 'Absent' : att}"/>
-                    </span>
-                  </td>
-
-                  <td>
-                    <span class="badge badge-info">
-                      <c:out value="${empty sess ? 'No session selected' : sess}"/>
-                    </span>
-                  </td>
-
-                  <td><c:out value="${empty fb ? 'No feedback' : fb}"/></td>
-                </tr>
-
-                <c:set var="renderedCount" value="${renderedCount + 1}" />
-              </c:forEach>
+        <div class="text-end mt-2">
+          <small class="text-muted">
+            Total rows: <strong id="renderedCountText"><c:out value="${resultCount}"/></strong>
+            <c:if test="${not empty markedCount || not empty presentCount}">
+              &nbsp;·&nbsp; Marked: <strong><c:out value="${markedCount}"/></strong>
+              &nbsp;·&nbsp; Present: <strong><c:out value="${presentCount}"/></strong>
             </c:if>
-          </c:forEach>
-          </tbody>
-        </table>
+          </small>
+        </div>
       </div>
+    </c:when>
 
-      <div class="text-end mt-2">
-        <small class="text-muted">Total rows: <strong id="renderedCountText"><c:out value="${renderedCount}"/></strong></small>
+    <c:otherwise>
+      <div class="container">
+        <div class="alert alert-warning text-center">
+          No rows found for the selected filters.
+          <c:if test="${empty param.asPdf}">
+            <div class="mt-2">
+              <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/attendance-tracking-flat">Reset filters</a>
+            </div>
+          </c:if>
+        </div>
       </div>
-    </div>
-  </c:if>
-
-  <c:if test="${empty todayOfferings}">
-    <div class="container">
-      <div class="alert alert-warning text-center">
-        No course offerings found for the selected filters.
-        <c:if test="${empty param.asPdf}">
-          <div class="mt-2">
-            <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/attendance-tracking-flat">Reset filters</a>
-          </div>
-        </c:if>
-      </div>
-    </div>
-  </c:if>
+    </c:otherwise>
+  </c:choose>
 </div>
 
 <!-- Footer only in web mode -->

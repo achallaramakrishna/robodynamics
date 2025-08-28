@@ -24,6 +24,7 @@ import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDTest;
 import com.robodynamics.model.RDTestDetailRole;
 import com.robodynamics.model.RDTestSession;
+import com.robodynamics.model.RDUser;
 import com.robodynamics.model.RDVisibility;
 
 @Repository
@@ -661,4 +662,10 @@ public class RDTestDaoImpl implements RDTestDao {
 
         return query.getResultList();
     }
+	@Override
+	public RDTest findById(Integer testId) {
+		Session session = sessionFactory.getCurrentSession();
+		RDTest test = session.get(RDTest.class, testId);
+        return test;
+	}
 }

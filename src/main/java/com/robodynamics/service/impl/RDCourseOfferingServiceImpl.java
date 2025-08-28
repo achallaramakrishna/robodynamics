@@ -129,5 +129,22 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 		// TODO Auto-generated method stub
 		return rdCourseOfferingDao.getCourseOfferingsBetweenForMentor(start,end);
 	}
+
+	@Override
+	public List<RDCourseOffering> getCourseOfferingsOverlapping(LocalDate from, LocalDate to) {
+		java.sql.Date fromSql = (from == null) ? null : java.sql.Date.valueOf(from);
+	    java.sql.Date toSql   = (to   == null) ? null : java.sql.Date.valueOf(to);
+	  
+		return rdCourseOfferingDao.getOverlapping(fromSql, toSql);
+	}
+
+	@Override
+	public List<RDCourseOffering> getCourseOfferingsOverlappingByMentor(LocalDate from, LocalDate to,
+			Integer mentorUserId) {
+		java.sql.Date fromSql = (from == null) ? null : java.sql.Date.valueOf(from);
+	    java.sql.Date toSql   = (to   == null) ? null : java.sql.Date.valueOf(to);
+	   
+		return rdCourseOfferingDao.getOverlappingByMentor(fromSql,toSql,mentorUserId);
+	}
 	
 }

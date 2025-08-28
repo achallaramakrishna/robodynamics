@@ -159,6 +159,30 @@ public class RDClassAttendanceDaoImpl implements RDClassAttendanceDao {
 	    return map;
 	}
 
+	@Override
+    public boolean wasPresentInRange(int offeringId, int studentUserId, LocalDate from, LocalDate to) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Long count = session.createQuery(
+            "select count(a) " +
+            "from RDClassAttendance a " +
+            " join a.enrollment e " +
+            " join e.courseOffering co " +
+            " join a.student stu " +
+            "where co.courseOfferingId = :offeringId " +
+            "  and stu.userID = :studentUserId " +
+            "  and a.attendanceDate between :from and :to " +
+            "  and lower(a.attendanceStatus) = 'present'",
+            Long.class)
+            .setParameter("offeringId", offeringId)
+            .setParameter("studentUserId", studentUserId)
+            .setParameter("from", from)
+            .setParameter("to", to)
+            .uniqueResult();
+
+        return count != null && count > 0;
+    }
+
 
 	
 	

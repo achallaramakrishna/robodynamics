@@ -52,14 +52,17 @@ public class RDTestServiceImpl implements RDTestService {
         if (title == null || title.trim().isEmpty()) throw new IllegalArgumentException("title required");
         if (type == null) throw new IllegalArgumentException("type required");
         if (testDate == null) throw new IllegalArgumentException("testDate required");
-
+        System.out.println("hello 11");
+        
         // Basic role-based course permission (adjust as needed)
         List<RDCourse> allowed = allowedCoursesForUserInternal(actor);
         boolean ok = allowed.stream().anyMatch(c -> courseId.equals(c.getCourseId()));
         if (!ok) throw new IllegalArgumentException("You are not allowed to create tests for this course.");
+        System.out.println("hello 12");
 
         RDCourse course = courseDao.getRDCourse(courseId);
         if (course == null) throw new IllegalArgumentException("Course not found: " + courseId);
+        System.out.println("hello 13");
 
         RDTest t = new RDTest();
         t.setCourse(course);
@@ -70,6 +73,7 @@ public class RDTestServiceImpl implements RDTestService {
         t.setTestDate(testDate);
         t.setCreatedBy(actor.getUserID());
 
+        System.out.println("hello 14");
         return testDao.save(t);
     }
 
@@ -405,4 +409,19 @@ public class RDTestServiceImpl implements RDTestService {
 
 		return testDao.findForAdminOrMentorOrParent(q,courseId);
 	}
+
+	@Override
+    @Transactional
+    public void updateScheduleFile(Integer testId, java.util.function.Consumer<RDTest> mutator) {
+        RDTest t = testDao.findById(testId);
+        if (t == null) throw new IllegalArgumentException("Test not found: " + testId);
+        mutator.accept(t);
+        testDao.update(t);
+    }
+
+	
+
+   
+	
+	
 }

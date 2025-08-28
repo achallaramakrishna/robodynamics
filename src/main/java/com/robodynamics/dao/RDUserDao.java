@@ -2,6 +2,8 @@ package com.robodynamics.dao;
 
 import java.util.List;
 
+import javax.validation.constraints.Email;
+
 import com.robodynamics.model.RDAssetCategory;
 import com.robodynamics.model.RDUser;
 
@@ -32,6 +34,10 @@ public interface RDUserDao {
 	public RDUser getChildByParentId(int parentId);
 	
 	List<RDUser> findEnrolledStudentsByOffering(int courseOfferingId);
+
+	public void update(RDUser u);
+
+	public RDUser findByEmail(@Email String email);
 
 
 }

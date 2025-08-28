@@ -197,6 +197,13 @@ public class RDCourseTrackingServiceImpl implements RDCourseTrackingService {
 		// TODO Auto-generated method stub
 		return trackingDAO.getTrackingByEnrollment(enrollmentId);
 	}
+
+	@Override
+	@Transactional
+	public RDCourseTracking findLatestByEnrollmentInRange(int enrollmentId, LocalDate from, LocalDate to) {
+		
+		return trackingDAO.findLatestByEnrollmentInRange(enrollmentId, from, to);
+	}
     
     
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import com.robodynamics.dto.RDSessionItem;
 import com.robodynamics.model.RDCourse;
@@ -165,6 +166,10 @@ public interface RDTestService {
                                                                String studentQuery);
 
 	List<RDTest> findForAdminOrMentorOrParent(String q, Integer courseId);
+
+	void updateScheduleFile(Integer testId, Consumer<RDTest> mutator);
+
+
 
     
 }

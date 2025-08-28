@@ -3,6 +3,7 @@ package com.robodynamics.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.CreationTimestamp;
@@ -61,7 +62,54 @@ public class RDTest {
     @Column(name = "created_by", nullable = false)
     private Integer createdBy;
     
-    @Transient public java.util.Date getTestDateUtil() {
+ // com.robodynamics.model.RDTest  (add fields + getters/setters)
+    @Column(name="schedule_file_path")  private String scheduleFilePath;     // absolute or relative FS path
+    @Column(name="schedule_file_name")  private String scheduleFileName;     // original filename
+    @Column(name="schedule_mime")       private String scheduleMime;         // e.g. application/pdf
+    @Column(name="schedule_file_size")  private Long   scheduleFileSize;     // bytes
+    @Column(name="schedule_uploaded_at")private Date   scheduleUploadedAt;   // when uploaded
+    @Column(name="schedule_uploaded_by")private Integer scheduleUploadedBy;  // user id
+
+    
+    
+    
+    public String getScheduleFilePath() {
+		return scheduleFilePath;
+	}
+	public void setScheduleFilePath(String scheduleFilePath) {
+		this.scheduleFilePath = scheduleFilePath;
+	}
+	public String getScheduleFileName() {
+		return scheduleFileName;
+	}
+	public void setScheduleFileName(String scheduleFileName) {
+		this.scheduleFileName = scheduleFileName;
+	}
+	public String getScheduleMime() {
+		return scheduleMime;
+	}
+	public void setScheduleMime(String scheduleMime) {
+		this.scheduleMime = scheduleMime;
+	}
+	public Long getScheduleFileSize() {
+		return scheduleFileSize;
+	}
+	public void setScheduleFileSize(Long scheduleFileSize) {
+		this.scheduleFileSize = scheduleFileSize;
+	}
+	public Date getScheduleUploadedAt() {
+		return scheduleUploadedAt;
+	}
+	public void setScheduleUploadedAt(Date scheduleUploadedAt) {
+		this.scheduleUploadedAt = scheduleUploadedAt;
+	}
+	public Integer getScheduleUploadedBy() {
+		return scheduleUploadedBy;
+	}
+	public void setScheduleUploadedBy(Integer scheduleUploadedBy) {
+		this.scheduleUploadedBy = scheduleUploadedBy;
+	}
+	@Transient public java.util.Date getTestDateUtil() {
         return testDate != null ? java.sql.Date.valueOf(testDate) : null;
     }
     

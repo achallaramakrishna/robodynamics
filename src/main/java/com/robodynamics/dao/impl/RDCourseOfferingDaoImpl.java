@@ -336,5 +336,116 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
         if (! (status == null || status.trim().isEmpty())) q.setParameter("status", status.trim());
         return q.getResultList();
     }
+    
+    @Override
+    public List<RDCourseOffering> getOverlapping(LocalDate from, LocalDate to) {
 
+        return  s().createQuery(
+            "select co from RDCourseOffering co " +
+            "where co.startDate <= :to and co.endDate >= :from " +
+            "order by co.startDate asc",
+            RDCourseOffering.class)
+            .setParameter("from", from)
+            .setParameter("to", to)
+            .list();
+    }
+
+    @Override
+    public List<RDCourseOffering> getOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId) {
+        if (mentorUserId == null) return List.of();
+
+
+        // If mentor is RDUser in co.instructor:
+        return  s().createQuery(
+            "select co from RDCourseOffering co " +
+            " join co.instructor mu " +
+            "where co.startDate <= :to and co.endDate >= :from " +
+            "  and mu.userID = :mentorUserId " +
+            "order by co.startDate asc",
+            RDCourseOffering.class)
+            .setParameter("from", from)
+            .setParameter("to", to)
+            .setParameter("mentorUserId", mentorUserId)
+            .list();
+
+        // If mentor is RDMentor -> user, change join to:
+        // "join co.mentor m join m.user mu"
+    }
+
+	@Override
+	public List<RDCourseOffering> getOverlapping(java.util.Date from, java.util.Date to) {
+
+	    if (from != null && to != null) {
+	        return s().createQuery(
+	            "select co from RDCourseOffering co " +
+	            " where co.endDate >= :from and co.startDate <= :to " +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("from", from)  // java.util.Date / java.sql.Date OK
+	            .setParameter("to", to)
+	            .list();
+	    } else if (from != null) {
+	        return s().createQuery(
+	            "select co from RDCourseOffering co " +
+	            " where co.endDate >= :from " +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("from", from)
+	            .list();
+	    } else if (to != null) {
+	        return s().createQuery(
+	            "select co from RDCourseOffering co " +
+	            " where co.startDate <= :to " +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("to", to)
+	            .list();
+	    } else {
+	        return s().createQuery(
+	            "select co from RDCourseOffering co order by co.startDate asc",
+	            RDCourseOffering.class).list();
+	    }
+	}
+
+	@Override
+	public List<RDCourseOffering> getOverlappingByMentor(java.util.Date from, java.util.Date to, Integer mentorUserId) {
+		if (mentorUserId == null) return java.util.Collections.emptyList();
+	    Session session = factory.getCurrentSession();
+
+	    String baseJoin = " from RDCourseOffering co join co.mentor m join m.user mu ";
+	    String whereCore = " mu.userID = :mentorUserId ";
+
+	    if (from != null && to != null) {
+	        return session.createQuery(
+	            "select co" + baseJoin +
+	            " where co.endDate >= :from and co.startDate <= :to and " + whereCore +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("from", from)
+	            .setParameter("to", to)
+	            .setParameter("mentorUserId", mentorUserId)
+	            .list();
+	    } else if (from != null) {
+	        return session.createQuery(
+	            "select co" + baseJoin +
+	            " where co.endDate >= :from and " + whereCore +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("from", from)
+	            .setParameter("mentorUserId", mentorUserId)
+	            .list();
+	    } else if (to != null) {
+	        return session.createQuery(
+	            "select co" + baseJoin +
+	            " where co.startDate <= :to and " + whereCore +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("to", to)
+	            .setParameter("mentorUserId", mentorUserId)
+	            .list();
+	    } else {
+	        return session.createQuery(
+	            "select co" + baseJoin +
+	            " where " + whereCore +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("mentorUserId", mentorUserId)
+	            .list();
+	    }
+	}
+
+    
 }

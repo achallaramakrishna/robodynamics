@@ -2,9 +2,15 @@
 package com.robodynamics.dao;
 
 import com.robodynamics.dto.RDMentorDTO;
+import com.robodynamics.model.RDMentor;
+
 import java.util.List;
 
 public interface RDMentorDao {
+	
+	RDMentor findByUserId(int userId);
+	void save(RDMentor mentor);
+	void update(RDMentor mentor);
     List<RDMentorDTO> findAllMentorsBasic();
     List<RDMentorDTO> findMentorsSummary(); // with offeringsCount
 }

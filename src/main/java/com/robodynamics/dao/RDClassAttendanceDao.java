@@ -31,4 +31,7 @@ public interface RDClassAttendanceDao {
 
 	Map<Integer, Integer> findStatusForSessionByEnrollment(Integer classSessionId);
 
+
+    boolean wasPresentInRange(int offeringId, int studentUserId, LocalDate from, LocalDate to);
+
 }

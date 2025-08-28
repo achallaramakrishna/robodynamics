@@ -247,4 +247,11 @@ public class RDClassAttendanceServiceImpl implements RDClassAttendanceService {
 		return attendanceDao.getAttendanceByEnrollment(enrollmentId);
 	}
 
+	@Override
+	@Transactional
+	public boolean wasPresentInRange(int offeringId, int studentUserId, LocalDate from, LocalDate to) {
+        return attendanceDao.wasPresentInRange(offeringId, studentUserId, from, to);
+
+	}
+
 }

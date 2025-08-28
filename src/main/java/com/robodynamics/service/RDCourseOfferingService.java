@@ -44,6 +44,9 @@ public interface RDCourseOfferingService {
     List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end, Integer mentorUserId);
 
 
+    List<RDCourseOffering> getCourseOfferingsOverlapping(LocalDate from, LocalDate to);
+    List<RDCourseOffering> getCourseOfferingsOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId);
+
 
 
 }

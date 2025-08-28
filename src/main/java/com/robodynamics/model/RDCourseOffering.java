@@ -78,6 +78,14 @@ public class RDCourseOffering {
     @OneToMany(mappedBy = "courseOffering", fetch = FetchType.LAZY)
     private Set<RDStudentEnrollment> studentEnrollments;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id") // new column in rd_course_offerings
+    private RDMentor mentor;
+
+    // getters/setters
+    public RDMentor getMentor() { return mentor; }
+    public void setMentor(RDMentor mentor) { this.mentor = mentor; }
+
     
     public Set<RDStudentEnrollment> getStudentEnrollments() {
 		return studentEnrollments;

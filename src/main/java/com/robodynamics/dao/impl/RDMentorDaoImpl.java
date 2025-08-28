@@ -3,8 +3,10 @@ package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDMentorDao;
 import com.robodynamics.dto.RDMentorDTO;
+import com.robodynamics.model.RDMentor;
 import com.robodynamics.model.RDUser;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+
 
 @Repository
 @Transactional(readOnly = true)
@@ -80,5 +83,23 @@ public class RDMentorDaoImpl implements RDMentorDao {
         return s.createQuery(hql, RDMentorDTO.class)
                 .setParameter("mentorProfileId", MENTOR_PROFILE_ID)
                 .list();
+    }
+    
+    @Override
+    public RDMentor findByUserId(int userId) {
+      Query<RDMentor> q = sessionFactory.getCurrentSession().createQuery(
+          "from RDMentor m where m.user.userId = :uid", RDMentor.class);
+      q.setParameter("uid", userId);
+      return q.uniqueResult();
+    }
+
+    @Override
+    public void save(RDMentor mentor) {
+      sessionFactory.getCurrentSession().save(mentor);
+    }
+
+    @Override
+    public void update(RDMentor mentor) {
+      sessionFactory.getCurrentSession().update(mentor);
     }
 }

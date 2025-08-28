@@ -33,4 +33,7 @@ public interface RDClassAttendanceService {
 			String attendanceStatus, LocalDate today);
 
 	List<RDClassAttendance> getAttendanceByEnrollment(int enrollmentId);
+
+	boolean wasPresentInRange(int offeringId, int studentUserId, LocalDate from, LocalDate to);
+
 }

@@ -191,4 +191,23 @@ public class RDCourseTrackingDAOImpl implements RDCourseTrackingDAO {
 
         return list;
     }
+	
+	@Override
+    public RDCourseTracking findLatestByEnrollmentInRange(int enrollmentId, LocalDate from, LocalDate to) {
+        Session session = sessionFactory.getCurrentSession();
+
+        List<RDCourseTracking> list = session.createQuery(
+            "select t from RDCourseTracking t " +
+            "where t.enrollment.enrollmentId = :enrollmentId " +
+            "  and t.trackingDate between :from and :to " +
+            "order by t.trackingDate desc, t.trackingId desc",
+            RDCourseTracking.class)
+            .setParameter("enrollmentId", enrollmentId)
+            .setParameter("from", from)
+            .setParameter("to", to)
+            .setMaxResults(1)
+            .list();
+
+        return list.isEmpty() ? null : list.get(0);
+    }
 }

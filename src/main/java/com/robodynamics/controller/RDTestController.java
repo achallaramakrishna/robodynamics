@@ -34,6 +34,8 @@ import com.robodynamics.storage.TestFileStorage;
 @RequestMapping("/test-management")
 public class RDTestController {
 
+	// this is just for testing purpose , to be removed
+	
     @Autowired private RDTestService testService;
     @Autowired private RDCourseSessionService courseSessionService;
 
@@ -345,15 +347,26 @@ public class RDTestController {
     @PostMapping("/delete")
     public String delete(@RequestParam("testId") Integer testId,
                          HttpSession session, RedirectAttributes ra) {
-        RDUser user = (RDUser) session.getAttribute("rdUser");
-        if (user == null) { ra.addFlashAttribute("error", "Please sign in to continue."); return "redirect:/login"; }
+        
+    	System.out.println("hello 1 ...");
+    	RDUser user = (RDUser) session.getAttribute("rdUser");
+    	
+    	if (user == null) { ra.addFlashAttribute("error", "Please sign in to continue."); return "redirect:/login"; }
         try {
             // optional: remove file before deleting the test
-            RDTest t = testService.findByIdIfAllowed(testId, user);
+        	System.out.println("hello 2 ...");
+
+        	RDTest t = testService.findByIdIfAllowed(testId, user);
             if (t != null && t.getScheduleFilePath() != null) {
+            	System.out.println("hello 3 ...");
+
                 fileStorage.deleteIfExists(t.getScheduleFilePath());
             }
+            System.out.println("hello 4 ...");
+
             testService.deleteIfAllowed(testId, user);
+            System.out.println("hello 5 ...");
+
             ra.addFlashAttribute("message", "Test deleted.");
         } catch (Exception ex) {
             ra.addFlashAttribute("error", ex.getMessage() != null ? ex.getMessage() : "Failed to delete test.");
@@ -520,4 +533,41 @@ public class RDTestController {
             default:         return RDVisibility.PARENT;
         }
     }
+    
+ // in RDTestController (or a new @RestController under /test-management)
+    @GetMapping(value = "/api/events", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Map<String, Object>> apiEvents(
+        @RequestParam String start,
+        @RequestParam String end,
+        @RequestParam(required = false) Integer courseId,
+        @RequestParam(required = false) String q
+    ) {
+        // Parse ISO date(-time) from FullCalendar to plain dates
+        LocalDate from = LocalDate.parse(start.substring(0, 10));
+        LocalDate to   = LocalDate.parse(end.substring(0, 10));
+
+        // Fetch your tests (reuse your list method logic or add a service call with filters)
+        List<RDTest> tests = testService.findForAdminOrMentorOrParent(q, courseId /*, ...*/);
+
+        // Filter by date window (inclusive)
+        List<Map<String,Object>> events = new ArrayList<>();
+        for (RDTest t : tests) {
+            if (t.getTestDate() == null) continue;
+            LocalDate d = t.getTestDate();
+            if (!d.isBefore(from) && !d.isAfter(to)) {
+                Map<String,Object> e = new HashMap<>();
+                e.put("id", t.getTestId());
+                e.put("title", t.getTestTitle());
+                e.put("start", d.toString()); // all-day event
+                e.put("url", String.format("%s/test-management/view?testId=%d",
+                        // context path safe:
+                        org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString(),
+                        t.getTestId()));
+                events.add(e);
+            }
+        }
+        return events;
+    }
+
 }

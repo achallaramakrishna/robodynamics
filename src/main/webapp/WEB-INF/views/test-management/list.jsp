@@ -45,7 +45,7 @@
   </div>
 
   <!-- Filters -->
-  <form class="row g-2 mb-3" method="get" action="${pageContext.request.contextPath}/tests">
+  <form class="row g-2 mb-3" method="get" action="${pageContext.request.contextPath}/test-management">
     <div class="col-md-4">
       <input type="text" class="form-control" name="q" placeholder="Search title/course..." value="${q}"/>
     </div>
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
       headerToolbar: { left:'prev,next today', center:'title', right:'dayGridMonth,timeGridWeek,timeGridDay' },
       navLinks: true,
       events: function(fetchInfo, success, failure){
-        const base = '${pageContext.request.contextPath}/tests/api/events';
+        const base = '${pageContext.request.contextPath}/test-management/api/events';
         const url = base
           + '?start=' + encodeURIComponent(fetchInfo.startStr)
           + '&end='   + encodeURIComponent(fetchInfo.endStr)

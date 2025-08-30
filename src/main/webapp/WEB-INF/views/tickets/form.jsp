@@ -48,7 +48,7 @@
 		  <label class="form-label">Assign To</label>
 		  <select name="assigneeUserId" class="form-select">
 		    <option value="">-- Unassigned --</option>
-		    <c:forEach var="u" items="${users}">
+		    <c:forEach var="u" items="${assignableUsers}">
 		      <option value="${u.userID}">
 		        <c:out value="${fn:trim((u.firstName != null ? u.firstName : '') 
 		                         .concat(' ')

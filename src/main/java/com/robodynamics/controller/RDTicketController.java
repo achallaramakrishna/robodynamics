@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,6 +33,17 @@ public class RDTicketController {
 
     @Autowired private RDTicketService ticketService;
     @Autowired private RDUserService   userService;
+    
+    private List<RDUser> getAssignableUsers() {
+        return userService.getRDUsers()
+            .stream()
+            .filter(u -> {
+                int pid = u.getProfile_id();
+                return pid == 1 || pid == 2 || pid == 3; // Admin(1/2) or Mentor(3)
+            })
+            .collect(Collectors.toList());
+    }
+
 
     /* ========= List with role-scoped filters ========= */
     @GetMapping
@@ -146,7 +158,9 @@ public class RDTicketController {
 
         model.addAttribute("priorities", RDTicket.Priority.values());
         model.addAttribute("statuses",  RDTicket.Status.values());
-        model.addAttribute("users", userService.getRDUsers());
+      //  model.addAttribute("users", userService.getRDUsers());
+        model.addAttribute("assignableUsers", getAssignableUsers());
+
         return "tickets/view";
     }
 
@@ -157,7 +171,9 @@ public class RDTicketController {
         model.addAttribute("ticket", new RDTicket());
         model.addAttribute("priorities", RDTicket.Priority.values());
         model.addAttribute("statuses",  RDTicket.Status.values());
-        model.addAttribute("users", userService.getRDUsers()); // assignee dropdown
+     //   model.addAttribute("users", userService.getRDUsers()); // assignee dropdown
+        model.addAttribute("assignableUsers", getAssignableUsers());
+
         return "tickets/form";
     }
 

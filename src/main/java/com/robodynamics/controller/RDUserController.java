@@ -23,6 +23,7 @@ import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.service.RDCourseTrackingService;
 import com.robodynamics.service.RDStudentEnrollmentService;
+import com.robodynamics.service.RDTicketService;
 import com.robodynamics.service.RDUserService;
 
 import java.time.*;
@@ -45,10 +46,40 @@ public class RDUserController {
     @Autowired private RDStudentEnrollmentService enrollmentService;
     @Autowired private RDUserService userService;
     @Autowired private RDCourseTrackingService courseTrackingService;
+    
+    @Autowired private RDTicketService ticketService;
+
 
     // Flat (existing) service
     @Autowired private RDAttendanceFlatService attendanceFlatService;
 
+ // helper: call this from your dashboard method
+    private void addAdminTicketStats(HttpSession session, Model model) {
+        RDUser me = (RDUser) session.getAttribute("rdUser");
+        if (me == null) return;
+        int pid = me.getProfile_id();
+        boolean isAdmin =
+            pid == RDUser.profileType.SUPER_ADMIN.getValue()
+         || pid == RDUser.profileType.ROBO_ADMIN.getValue()
+         || pid == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue();
+
+        if (!isAdmin) return;
+
+        Map<String, Integer> ticketStats = new HashMap<>();
+        // If you added the scoped variants earlier:
+        ticketStats.put("open",        ticketService.countScoped("OPEN",        null, null, null, false));
+        ticketStats.put("inProgress",  ticketService.countScoped("IN_PROGRESS", null, null, null, false));
+        ticketStats.put("resolved",    ticketService.countScoped("RESOLVED",    null, null, null, false));
+        ticketStats.put("closed",      ticketService.countScoped("CLOSED",      null, null, null, false));
+
+        // If you only have count(...):
+        // ticketStats.put("open",       ticketService.count("OPEN", null, null, null));
+        // ticketStats.put("inProgress", ticketService.count("IN_PROGRESS", null, null, null));
+        // ticketStats.put("resolved",   ticketService.count("RESOLVED", null, null, null));
+        // ticketStats.put("closed",     ticketService.count("CLOSED", null, null, null));
+
+        model.addAttribute("ticketStats", ticketStats);
+    }	
     /* ================== Unchanged auth / user endpoints ================== */
 
     @GetMapping("/register")
@@ -121,7 +152,9 @@ public class RDUserController {
                 }
 
                 if (authenticated.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
-                    return "redirect:/parent/dashboard";
+                    addParentTicketStats(session, model);
+
+                	return "redirect:/parent/dashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
                     return "redirect:/studentDashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_MENTOR.getValue()) {
@@ -156,7 +189,36 @@ public class RDUserController {
     private String safe(String s) { return s == null ? "" : s.replaceAll("[\\r\\n]", ""); }
 
     @GetMapping("/dashboard")
-    public String homeDashboard() { return "dashboard"; }
+    public String homeDashboard(Model model, HttpSession session) {
+    
+        addAdminTicketStats(session, model);
+
+    	return "dashboard"; 
+    
+    }
+    
+    private void addParentTicketStats(HttpSession session, Model model) {
+        RDUser me = (RDUser) session.getAttribute("rdUser");
+        if (me == null) return;
+
+        // creatorId = parent’s userId; assigneeId stays null for parent view
+        Integer myId = me.getUserID();
+
+        Map<String, Integer> stats = new HashMap<>();
+        // with scoped methods (recommended):
+        stats.put("open",        ticketService.countScoped("OPEN",        null, myId, null, false));
+        stats.put("inProgress",  ticketService.countScoped("IN_PROGRESS", null, myId, null, false));
+        stats.put("resolved",    ticketService.countScoped("RESOLVED",    null, myId, null, false));
+        stats.put("closed",      ticketService.countScoped("CLOSED",      null, myId, null, false));
+
+        // If you only have count(status, assigneeId, creatorId, q):
+        // stats.put("open",        ticketService.count("OPEN",        null, myId, null));
+        // stats.put("inProgress",  ticketService.count("IN_PROGRESS", null, myId, null));
+        // stats.put("resolved",    ticketService.count("RESOLVED",    null, myId, null));
+        // stats.put("closed",      ticketService.count("CLOSED",      null, myId, null));
+
+        model.addAttribute("ticketStatsParent", stats);
+    }
 
     @PostMapping("/dashboard")
     public String showDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
@@ -543,4 +605,6 @@ public class RDUserController {
         if (val == null || val.isBlank()) return null;
         try { return LocalDate.parse(val); } catch (DateTimeParseException e) { return null; }
     }
+    
+    
 }

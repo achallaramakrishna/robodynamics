@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
@@ -27,17 +27,54 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-	
+
+	<!-- ===== Role flags (pure JSP EL) ===== -->
+	<c:set var="pid"
+		value="${sessionScope.rdUser != null ? sessionScope.rdUser.profile_id : 0}" />
+	<c:set var="isAdmin" value="${pid == 1 or pid == 2}" />
+	<c:set var="isMentor" value="${pid == 3}" />
+	<c:set var="isParent" value="${pid == 4}" />
+	<c:set var="isStudent" value="${pid == 5}" />
+
 	<style>
-  /* Tighter, multiline events with badges */
-  .fc .rd-event { line-height: 1.2; }
-  .fc .rd-title { font-weight: 600; font-size: 0.9rem; display:block; }
-  .fc .rd-sub { font-size: 0.78rem; opacity: 0.9; display:block; }
-  .fc .rd-row { display:flex; align-items:center; gap:.4rem; }
-  .fc .rd-badge { font-size: .68rem; padding: .1rem .35rem; border-radius:.5rem; background: rgba(0,0,0,.08); }
-  .fc .rd-note { font-size:.75rem; opacity:.8; }
-  /* Make month cells show more lines before "more" link */
-  .fc .fc-daygrid-event { white-space: normal; }
+/* Tighter, multiline events with badges */
+.fc .rd-event {
+	line-height: 1.2;
+}
+
+.fc .rd-title {
+	font-weight: 600;
+	font-size: 0.9rem;
+	display: block;
+}
+
+.fc .rd-sub {
+	font-size: 0.78rem;
+	opacity: 0.9;
+	display: block;
+}
+
+.fc .rd-row {
+	display: flex;
+	align-items: center;
+	gap: .4rem;
+}
+
+.fc .rd-badge {
+	font-size: .68rem;
+	padding: .1rem .35rem;
+	border-radius: .5rem;
+	background: rgba(0, 0, 0, .08);
+}
+
+.fc .rd-note {
+	font-size: .75rem;
+	opacity: .8;
+}
+/* Make month cells show more lines before "more" link */
+.fc .fc-daygrid-event {
+	white-space: normal;
+}
 </style>
 
 	<div class="container my-4">
@@ -51,8 +88,7 @@
 						class="card-header d-flex justify-content-between align-items-center">
 						<h5 class="mb-0">📅 Calendar</h5>
 						<div class="btn-group btn-group-sm">
-<!-- 							<button class="btn btn-outline-primary" data-view="dayGridMonth">Month</button>
- -->							<button class="btn btn-outline-primary" data-view="timeGridWeek">Week</button>
+							<button class="btn btn-outline-primary" data-view="timeGridWeek">Week</button>
 							<button class="btn btn-outline-primary" data-view="timeGridDay">Day</button>
 							<button class="btn btn-outline-secondary" id="btnToday">Today</button>
 						</div>
@@ -66,35 +102,80 @@
 
 		<div class="row">
 			<!-- Attendance & Tracking Card -->
-			<!-- Attendance & Tracking Card -->
-<div class="col-md-4 mb-4">
-    <div class="card shadow-sm h-100 text-center">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">📝 Attendance & Tracking</h5>
-        </div>
-        <div class="card-body">
-            <p class="card-text">Mark attendance and track student progress</p>
-            <!-- Add buttons for accordion and flat view -->
-            <a href="${pageContext.request.contextPath}/attendance-tracking?view=accordion" class="btn btn-primary me-2">Accordion View</a>
-            <a href="${pageContext.request.contextPath}/attendance-tracking?view=flat" class="btn btn-secondary">Flat View</a>
-        </div>
-    </div>
-</div>
-
-			
-			<!-- parent/dashboard.jsp -->
-			<div class="col-md-4">
-			  <div class="card shadow-sm h-100 text-center">
-			    <div class="card-header bg-warning text-dark"><h5 class="mb-0">📝 Create Test Schedule</h5></div>
-			    <div class="card-body">
-			      <p class="card-text">Add an upcoming school test, attach the schedule PDF, and map chapters.</p>
-			      <a href="${pageContext.request.contextPath}/test-management/" class="btn btn-primary">
-			        View Tests
-			      </a>
-			    </div>
-			  </div>
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm h-100 text-center">
+					<div class="card-header bg-info text-white">
+						<h5 class="mb-0">📝 Attendance & Tracking</h5>
+					</div>
+					<div class="card-body">
+						<p class="card-text">Mark attendance and track student
+							progress</p>
+						<a
+							href="${pageContext.request.contextPath}/attendance-tracking?view=accordion"
+							class="btn btn-primary me-2">Accordion View</a> <a
+							href="${pageContext.request.contextPath}/attendance-tracking?view=flat"
+							class="btn btn-secondary">Flat View</a>
+					</div>
+				</div>
 			</div>
-						
+
+			<!-- Tests Card -->
+			<div class="col-md-4">
+				<div class="card shadow-sm h-100 text-center">
+					<div class="card-header bg-warning text-dark">
+						<h5 class="mb-0">📝 Create Test Schedule</h5>
+					</div>
+					<div class="card-body">
+						<p class="card-text">Add an upcoming school test, attach the
+							schedule PDF, and map chapters.</p>
+						<a href="${pageContext.request.contextPath}/test-management/"
+							class="btn btn-primary"> View Tests </a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Ticket Management (Admin only) -->
+			<c:if test="${isAdmin}">
+				<div class="col-md-4 mb-4">
+					<div class="card shadow-sm h-100 text-center">
+						<div class="card-header bg-danger text-white">
+							<h5 class="mb-0">🎫 Ticket Management</h5>
+						</div>
+						<div class="card-body">
+							<p class="card-text">Track and resolve support tickets across
+								the org.</p>
+
+							<!-- Quick stats -->
+							<div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+								<span class="badge text-bg-secondary"> Open <span
+									class="badge bg-light text-dark ms-1"> <c:out
+											value="${ticketStats.open != null ? ticketStats.open : 0}" />
+								</span>
+								</span> <span class="badge text-bg-warning"> In&nbsp;Progress <span
+									class="badge bg-light text-dark ms-1"> <c:out
+											value="${ticketStats.inProgress != null ? ticketStats.inProgress : 0}" />
+								</span>
+								</span> <span class="badge text-bg-success"> Resolved <span
+									class="badge bg-light text-dark ms-1"> <c:out
+											value="${ticketStats.resolved != null ? ticketStats.resolved : 0}" />
+								</span>
+								</span> <span class="badge text-bg-dark"> Closed <span
+									class="badge bg-light text-dark ms-1"> <c:out
+											value="${ticketStats.closed != null ? ticketStats.closed : 0}" />
+								</span>
+								</span>
+							</div>
+
+							<div class="d-grid gap-2">
+								<a href="${pageContext.request.contextPath}/tickets"
+									class="btn btn-primary"> View Tickets </a> <a
+									href="${pageContext.request.contextPath}/tickets/new"
+									class="btn btn-outline-primary"> + New Ticket </a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
 
 			<!-- Search Card -->
 			<div class="col-md-4 mb-4">
@@ -111,8 +192,6 @@
 				</div>
 			</div>
 
-
-
 			<!-- Reports Card -->
 			<div class="col-md-4 mb-4">
 				<div class="card shadow-sm h-100 text-center">
@@ -127,9 +206,6 @@
 					</div>
 				</div>
 			</div>
-			
-
-			
 
 			<!-- Data Accuracy Card -->
 			<div class="col-md-4 mb-4">
@@ -154,7 +230,7 @@
 
 	<jsp:include page="footer.jsp" />
 
-<script>
+	<script>
 (function(){
   const EVENTS_URL = '${pageContext.request.contextPath}/admin/api/calendar/events';
 
@@ -168,8 +244,6 @@
     navLinks: true,
     nowIndicator: true,
     selectable: false,
-
-    // 👇 add these (same as Mentor)
     displayEventEnd: true,
     slotMinTime: '06:00:00',
     slotMaxTime: '22:00:00',
@@ -180,14 +254,9 @@
       url.searchParams.set('start', fetchInfo.startStr);
       url.searchParams.set('end', fetchInfo.endStr);
 
-      // Tiny debug to verify week/day fetch ranges & counts
       fetch(url)
         .then(r => r.json())
-        .then(data => {
-          // Uncomment during debugging:
-          // console.log('[ADMIN events]', fetchInfo.startStr, '→', fetchInfo.endStr, 'count=', data?.length || 0);
-          success(data);
-        })
+        .then(data => success(data))
         .catch(failure);
     },
 
@@ -230,14 +299,12 @@ Course: ${course}`;
 
   calendar.render();
 
-  // View switchers
   document.querySelectorAll('[data-view]').forEach(btn=>{
     btn.addEventListener('click', () => calendar.changeView(btn.getAttribute('data-view')));
   });
   document.getElementById('btnToday')?.addEventListener('click', () => calendar.today());
 })();
 </script>
-
 
 </body>
 </html>

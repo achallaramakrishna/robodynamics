@@ -231,6 +231,7 @@ public class RDTestController {
        ======================================================= */
     @GetMapping("/edit")
     public String editForm(@RequestParam("testId") Integer testId,
+                           @RequestParam(value = "sessionType", required = false) String sessionType,
                            Model model, HttpSession session, RedirectAttributes ra) {
         RDUser user = (RDUser) session.getAttribute("rdUser");
         if (user == null) { ra.addFlashAttribute("error", "Please sign in to continue."); return "redirect:/login"; }
@@ -250,12 +251,29 @@ public class RDTestController {
         form.setPassingMarks(t.getPassingMarks());
         form.setTestDate(t.getTestDate());
 
+        // NEW: compute effective course/session type and load sessions
+        Integer effectiveCourseId = form.getCourseId();
+        String effectiveSessionType = sessionType; // keep request override if present
+
+        List<RDSessionItem> sessions = (effectiveCourseId != null)
+                ? courseSessionService.findSessionItemsByCourse(effectiveCourseId, effectiveSessionType)
+                : Collections.emptyList();
+
+        // NEW: already linked session IDs so the JSP can pre-check/mark them
+        List<Integer> linkedIds = testService.findLinkedSessionIds(testId);
+
         model.addAttribute("courses", allowedCoursesForUser(user));
         model.addAttribute("form", form);
         model.addAttribute("editing", true);
 
-        // so JSP can show "View current PDF"
+        // keep showing current PDF
         model.addAttribute("test", t);
+
+        // NEW: provide what the JSP needs to show sessions on edit
+        model.addAttribute("sessions", sessions);
+        model.addAttribute("linkedIds", new HashSet<>(linkedIds));
+        model.addAttribute("chosenCourseId", effectiveCourseId);
+        model.addAttribute("chosenSessionType", effectiveSessionType);
 
         return "test-management/form";
     }
@@ -348,24 +366,20 @@ public class RDTestController {
     public String delete(@RequestParam("testId") Integer testId,
                          HttpSession session, RedirectAttributes ra) {
         
-    	System.out.println("hello 1 ...");
     	RDUser user = (RDUser) session.getAttribute("rdUser");
+
     	
     	if (user == null) { ra.addFlashAttribute("error", "Please sign in to continue."); return "redirect:/login"; }
         try {
             // optional: remove file before deleting the test
-        	System.out.println("hello 2 ...");
 
         	RDTest t = testService.findByIdIfAllowed(testId, user);
             if (t != null && t.getScheduleFilePath() != null) {
-            	System.out.println("hello 3 ...");
-
                 fileStorage.deleteIfExists(t.getScheduleFilePath());
             }
-            System.out.println("hello 4 ...");
 
             testService.deleteIfAllowed(testId, user);
-            System.out.println("hello 5 ...");
+
 
             ra.addFlashAttribute("message", "Test deleted.");
         } catch (Exception ex) {
@@ -476,16 +490,34 @@ public class RDTestController {
                          HttpSession session,
                          HttpServletResponse resp) throws IOException {
         RDUser user = (RDUser) session.getAttribute("rdUser");
-        if (user == null) { resp.setStatus(401); return; }
+        if (user == null) { resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED); return; }
 
         RDTest t = testService.findByIdIfAllowed(testId, user);
-        if (t == null || t.getScheduleFilePath() == null) { resp.setStatus(404); return; }
+        if (t == null || t.getScheduleFilePath() == null) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
 
         byte[] data = fileStorage.read(t.getScheduleFilePath());
-        String fileName = (t.getScheduleFileName() == null ? "schedule.pdf" : t.getScheduleFileName().replace("\"",""));
-        resp.setContentType("application/pdf");
-        resp.setHeader("Content-Disposition", "inline; filename=\"" + fileName + "\"");
+        String original = (t.getScheduleFileName() == null ? "schedule.pdf" : t.getScheduleFileName());
+        // Strip quotes to avoid header injection
+        original = original.replace("\"", "");
+        // ASCII fallback
+        String asciiName = original.replaceAll("[^\\x20-\\x7E]", "_");
+        // UTF-8 RFC 5987 filename*
+        String utf8Name = java.net.URLEncoder.encode(original, java.nio.charset.StandardCharsets.UTF_8).replace("+", "%20");
+
+        String mime = (t.getScheduleMime() != null && !t.getScheduleMime().isBlank())
+                ? t.getScheduleMime()
+                : "application/pdf";
+
+        resp.setContentType(mime);
+        // Force download:
+        resp.setHeader("Content-Disposition",
+                "attachment; filename=\"" + asciiName + "\"; filename*=UTF-8''" + utf8Name);
+        resp.setHeader("X-Content-Type-Options", "nosniff");
         resp.setContentLength(data.length);
+
         resp.getOutputStream().write(data);
     }
 

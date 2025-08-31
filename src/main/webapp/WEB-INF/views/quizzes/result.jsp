@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<meta charset="UTF-8">
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -25,49 +27,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Quiz Result</title>
-    <script>
-        // JavaScript to handle pagination
-        let currentPage = 0;
-        const pageSize = 10;
+<script>
+    // JavaScript to handle pagination
+    let currentPage = 0;
+    const pageSize = 10;
 
-        function showPage(page, totalQuestions) {
-            currentPage = page;
+    function showPage(page, totalQuestions) {
+        currentPage = page;
 
-            // Hide all rows
-            const rows = document.querySelectorAll('.question-row');
-            rows.forEach((row, index) => {
-                row.style.display = (index >= page * pageSize && index < (page + 1) * pageSize) ? '' : 'none';
-            });
+        // Hide all rows
+        const rows = document.querySelectorAll('.question-row');
+        rows.forEach((row, index) => {
+            row.style.display = (index >= page * pageSize && index < (page + 1) * pageSize) ? '' : 'none';
+        });
 
-            // Update button visibility
-            document.getElementById('prevButton').style.display = page > 0 ? '' : 'none';
-            document.getElementById('nextButton').style.display = (page + 1) * pageSize < totalQuestions ? '' : 'none';
-        }
-    </script>
+        // Update button visibility
+        document.getElementById('prevButton').style.display = page > 0 ? '' : 'none';
+        document.getElementById('nextButton').style.display = (page + 1) * pageSize < totalQuestions ? '' : 'none';
+    }
+</script>
 </head>
 <body class="container">
     <!-- Header -->
-    <jsp:include page="/header.jsp" />
-
+<%--     <jsp:include page="/header.jsp" />
+ --%>
     <h2 class="mt-5">Quiz Result</h2>
 
-    <!-- Show a success or failure message based on the evaluation -->
-    <c:choose>
-        <c:when test="${passed}">
-            <div class="alert alert-success mt-4">
-                <strong>Congratulations!</strong> You passed the quiz!
-            </div>
-        </c:when>
-        <c:otherwise>
-            <div class="alert alert-danger mt-4">
-                <strong>Sorry!</strong> You did not pass the quiz.
-            </div>
-        </c:otherwise>
-    </c:choose>
+    <!-- ===== Compute summary numbers on the JSP itself ===== -->
+    <c:set var="totalQuestions" value="${fn:length(questionAnalysis)}" />
+    <c:set var="correctAnswers" value="0" />
+    <c:forEach var="qa" items="${questionAnalysis}">
+        <c:if test="${qa.isCorrect}">
+            <c:set var="correctAnswers" value="${correctAnswers + 1}" />
+        </c:if>
+    </c:forEach>
+    <c:set var="accuracy" value="${totalQuestions > 0 ? (correctAnswers * 100.0) / totalQuestions : 0}" />
+    <fmt:formatNumber value="${accuracy}" maxFractionDigits="1" minFractionDigits="1" var="accuracyStr"/>
 
-    <!-- Show total points -->
-    <div class="mt-4">
-        <h4>Total Points: ${pointsEarned}</h4>
+    <!-- ===== Friendly Score Summary (replaces pass/fail) ===== -->
+    <div class="card mt-4 shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title mb-3">Great work! Here’s your score</h4>
+
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <span class="badge bg-primary fs-6 p-3">
+            Score: ${correctAnswers} / ${totalQuestions}
+          </span>
+          <span class="badge bg-secondary fs-6 p-3">
+            Points: ${pointsEarned}
+          </span>
+        </div>
+
+        <div class="mt-3">
+          <div class="d-flex justify-content-between">
+            <small>Accuracy</small>
+            <small>${accuracyStr}%</small>
+          </div>
+          <div class="progress" style="height: 16px;">
+            <div class="progress-bar" role="progressbar"
+                 style="width: ${accuracy}%;"
+                 aria-valuenow="${accuracy}" aria-valuemin="0" aria-valuemax="100">
+              ${accuracyStr}%
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-3 mb-0 text-muted">
+          Nice effort! Review the questions below and aim to improve by 5–10% next time.
+        </p>
+      </div>
     </div>
 
     <!-- Question Analysis Table -->
@@ -90,7 +118,7 @@
                     <td>${analysis.question}</td>
                     <td>
                         <c:if test="${not empty analysis.options}">
-                            <ul>
+                            <ul class="mb-0">
                                 <c:forEach var="option" items="${analysis.options}">
                                     <li>${option.optionText}</li>
                                 </c:forEach>
@@ -102,10 +130,10 @@
                     <td>
                         <c:choose>
                             <c:when test="${analysis.isCorrect}">
-                                <span class="text-success">Correct</span>
+                                <span class="text-success fw-semibold">Correct</span>
                             </c:when>
                             <c:otherwise>
-                                <span class="text-danger">Incorrect</span>
+                                <span class="text-danger fw-semibold">Incorrect</span>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -128,6 +156,6 @@
     </script>
 
     <!-- Footer -->
-    <jsp:include page="/footer.jsp" />
-</body>
+<%--     <jsp:include page="/footer.jsp" />
+ --%></body>
 </html>

@@ -238,9 +238,9 @@
                     <source id="video-source" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <iframe id="course-pdf" style="width: 100%; height: 800px;" src=""></iframe>
-                <iframe id="course-quiz" style="display: none; width: 100%; height: 800px;" src=""></iframe>
-                <iframe id="course-fib" style="display: none; width: 100%; height: 800px;" src=""></iframe>
+                <iframe id="course-pdf" style="width: 100%; height: 100%;" src=""></iframe>
+                <iframe id="course-quiz" style="display: none; width: 100%; height: 100%;" src=""></iframe>
+                <iframe id="course-fib" style="display: none; width: 100%; height: 100%;" src=""></iframe>
                 <iframe id="course-flashcard" style="display: none; width: 100%; height: 800px;" src=""></iframe>
                 <iframe id="course-assignment" style="display: none; width: 100%; height: 800px;" src=""></iframe>
                 <iframe id="course-matching-game" style="display: none; width: 100%; height: 800px;" src=""></iframe>

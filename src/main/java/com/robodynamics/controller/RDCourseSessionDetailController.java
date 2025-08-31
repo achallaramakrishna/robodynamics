@@ -224,16 +224,17 @@ public class RDCourseSessionDetailController {
 	
 	
 
-    public List<CourseSessionDetailJson> parseJsonForSessionDetails(MultipartFile file) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper(); // Jackson object mapper
+	    public List<CourseSessionDetailJson> parseJsonForSessionDetails(MultipartFile file) throws Exception {
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        objectMapper.configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        // Read the JSON file and map it to a list of CourseSessionDetailJson objects
-        try (InputStream inputStream = file.getInputStream()) {
-            return objectMapper.readValue(inputStream, new TypeReference<List<CourseSessionDetailJson>>() {});
-        } catch (Exception e) {
-            throw new Exception("Failed to parse JSON file: " + e.getMessage(), e);
-        }
-    }
+	        try (InputStream in = file.getInputStream()) {
+	            return objectMapper.readValue(in, new com.fasterxml.jackson.core.type.TypeReference<List<CourseSessionDetailJson>>() {});
+	        } catch (Exception e) {
+	            throw new Exception("Failed to parse JSON file: " + e.getMessage(), e);
+	        }
+	    }
+
  
 
     

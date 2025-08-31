@@ -24,6 +24,7 @@ import com.robodynamics.model.*;
 import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
 import com.robodynamics.service.*;
 import com.robodynamics.wrapper.CourseSessionDetailJson;
+import com.robodynamics.wrapper.CourseSessionJson;
 
 @Controller
 @RequestMapping("/quizzes")
@@ -71,33 +72,66 @@ public class RDQuizController {
     
     
     
- // Endpoint to get sessions by course ID
-    // Endpoint to get session details by session ID
     @GetMapping("/getSessionByCourse")
     @ResponseBody
     public Map<String, Object> getCourseSessions(@RequestParam("courseId") int courseId) {
-    	
-    	System.out.println("inside course sessions.. get method");
-        List<RDCourseSession> courseSessions = courseSessionService.getCourseSessionsByCourseId(courseId);
-        
+        List<RDCourseSession> sessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+
+        List<CourseSessionJson> dto = sessions.stream().map(s -> {
+            CourseSessionJson d = new CourseSessionJson();
+            d.setSessionId(s.getCourseSessionId());
+            d.setSessionTitle(s.getSessionTitle());
+    //        d.setVersion(s.getVersion() != null ? s.getVersion() : 1);
+
+            // map simple scalars only; avoid touching lazy collections
+            d.setGrade(s.getGrade());
+            d.setSessionType(s.getSessionType() != null ? s.getSessionType() : null);
+            d.setSessionDescription(s.getSessionDescription());
+
+            if (s.getParentSession() != null) {
+                d.setParentSessionId(s.getParentSession().getCourseSessionId());
+            }
+
+            if (s.getTierLevel() != null) {
+                d.setTierLevel(s.getTierLevel().name());
+            }
+    //        d.setTierOrder(s.getTierOrder() != null ? s.getTierOrder() : 0);
+
+            return d;
+        }).collect(Collectors.toList());
+
         Map<String, Object> response = new HashMap<>();
-        response.put("courseSessions", courseSessions);
+        response.put("courseSessions", dto);
         return response;
     }
 
     @GetMapping("/getCourseSessionDetails")
     @ResponseBody
     public Map<String, Object> getCourseSessionDetails(@RequestParam("sessionId") int sessionId) {
-    	List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
-        System.out.println("size - " + sessionDetails.size());
-    	List<CourseSessionDetailJson> dtoList = sessionDetails.stream()
-            .map(detail -> new CourseSessionDetailJson(detail.getCourseSessionDetailId(), detail.getTopic()))
-            .collect(Collectors.toList());
+        List<RDCourseSessionDetail> details = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
+
+        List<CourseSessionDetailJson> dtoList = details.stream().map(d -> {
+            CourseSessionDetailJson dto = new CourseSessionDetailJson();
+            dto.setSessionId(d.getCourseSession().getCourseSessionId());
+            dto.setSessionDetailId(d.getCourseSessionDetailId());
+            dto.setTopic(d.getTopic());
+      //      dto.setVersion(d.getVersion() != null ? d.getVersion() : 1);
+            dto.setType(d.getType());
+            dto.setFile(d.getFile());
+
+            if (d.getTierLevel() != null) {
+                dto.setTierLevel(d.getTierLevel().name());
+            }
+    //        dto.setTierOrder(d.getTierOrder() != null ? d.getTierOrder() : 0);
+
+            return dto;
+        }).collect(Collectors.toList());
 
         Map<String, Object> response = new HashMap<>();
         response.put("sessionDetails", dtoList);
         return response;
     }
+
 
  // Show the form to create a quiz
     @GetMapping("/create")

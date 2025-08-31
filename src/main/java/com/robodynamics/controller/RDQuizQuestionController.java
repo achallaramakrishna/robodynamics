@@ -3,6 +3,7 @@ package com.robodynamics.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,6 +36,8 @@ import com.robodynamics.service.RDQuizQuestionMapService;
 import com.robodynamics.service.RDQuizQuestionService;
 import com.robodynamics.service.RDQuizService;
 import com.robodynamics.service.RDSlideService;
+import com.robodynamics.wrapper.CourseSessionDetailJson;
+import com.robodynamics.wrapper.CourseSessionJson;
 
 @Controller
 @RequestMapping("/quizquestions")
@@ -67,23 +70,56 @@ public class RDQuizQuestionController {
     @GetMapping("/getCourseSessions")
     @ResponseBody
     public Map<String, Object> getCourseSessions(@RequestParam("courseId") int courseId) {
-    	
-    	System.out.println("inside course sessions.. get method");
-        List<RDCourseSession> courseSessions = courseSessionService.getCourseSessionsByCourseId(courseId);
-        
+        List<RDCourseSession> sessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+
+        List<CourseSessionJson> dto = sessions.stream().map(s -> {
+            CourseSessionJson d = new CourseSessionJson();
+            d.setSessionId(s.getCourseSessionId());
+            d.setSessionTitle(s.getSessionTitle());
+      //      d.setVersion(s.getVersion() != null ? s.getVersion() : 1);
+            d.setGrade(s.getGrade());
+            d.setSessionType(s.getSessionType() != null ? s.getSessionType() : null);
+            d.setSessionDescription(s.getSessionDescription());
+            if (s.getParentSession() != null) {
+                d.setParentSessionId(s.getParentSession().getCourseSessionId());
+            }
+            if (s.getTierLevel() != null) {
+                d.setTierLevel(s.getTierLevel().name());
+            }
+       //     d.setTierOrder(s.getTierOrder() != null ? s.getTierOrder() : 0);
+            return d;
+        }).collect(Collectors.toList());
+
         Map<String, Object> response = new HashMap<>();
-        response.put("courseSessions", courseSessions);
+        response.put("courseSessions", dto);
         return response;
     }
 
     @GetMapping("/getCourseSessionDetails")
     @ResponseBody
     public Map<String, Object> getCourseSessionDetails(@RequestParam("sessionId") int sessionId) {
-        List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
+        List<RDCourseSessionDetail> details = courseSessionDetailService.findSessionDetailsBySessionId(sessionId);
+
+        List<CourseSessionDetailJson> dtoList = details.stream().map(d -> {
+            CourseSessionDetailJson dto = new CourseSessionDetailJson();
+            dto.setSessionId(d.getCourseSession().getCourseSessionId());
+            dto.setSessionDetailId(d.getCourseSessionDetailId());
+            dto.setTopic(d.getTopic());
+        //    dto.setVersion(d.getVersion() != null ? d.getVersion() : 1);
+            dto.setType(d.getType());
+            dto.setFile(d.getFile());
+            if (d.getTierLevel() != null) {
+                dto.setTierLevel(d.getTierLevel().name());
+            }
+       //     dto.setTierOrder(d.getTierOrder() != null ? d.getTierOrder() : 0);
+            return dto;
+        }).collect(Collectors.toList());
+
         Map<String, Object> response = new HashMap<>();
-        response.put("sessionDetails", sessionDetails);
+        response.put("sessionDetails", dtoList);
         return response;
     }
+
 
     @GetMapping("/listQuizQuestions")
     public String listQuizQuestions(@RequestParam(value = "page", defaultValue = "0") int page,

@@ -562,6 +562,7 @@ public class RDQuizController {
         // Determine if the user passed (70% correct answers threshold)
         boolean passed = (double) correctAnswersCount / quizQuestions.size() >= 0.7;
 
+        
 
         // Save the quiz result
         RDUserQuizResults quizResult = new RDUserQuizResults();
@@ -582,6 +583,24 @@ public class RDQuizController {
         // Update the session with the latest user data
         currentUser = userService.getRDUser(currentUser.getUserID());
         session.setAttribute("rdUser", currentUser);
+
+     // Totals & percentage for a positive summary
+        int totalQuestions = quizQuestions.size();
+        double percentage = totalQuestions == 0 ? 0.0
+                : Math.round((correctAnswersCount * 100.0 / totalQuestions) * 10.0) / 10.0; // one decimal
+
+        // (Optional) keep 'passed' if you use it elsewhere, but we won't show it on UI
+        passed = (double) correctAnswersCount / totalQuestions >= 0.7;
+
+        // Save the quiz result as you already do...
+        // quizResultService.saveOrUpdate(quizResult);
+        // userPointsService.addPoints(currentUser, pointsEarned);
+        // ...
+
+        // Add these to the model for the JSP
+        model.addAttribute("correctAnswers", correctAnswersCount);
+        model.addAttribute("totalQuestions", totalQuestions);
+        model.addAttribute("percentage", percentage);
 
         // Pass the result to the view
         model.addAttribute("quizResult", quizResult);

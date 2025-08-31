@@ -139,27 +139,34 @@ public class RDUserController {
     @PostMapping("/login")
     public String login(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
         try {
+        	System.out.println("hello 1 -- ");
             RDUser authenticated = userService.loginRDUser(rdUser);
+            System.out.println("hello 2 -- ");
             if (authenticated != null) {
+            	System.out.println("hello 2 -- ");
                 model.addAttribute("rdUser", authenticated);
                 session.setAttribute("rdUser", authenticated);
                 log.info("Login success for username='{}', userId={}", safe(rdUser.getUserName()), authenticated.getUserID());
-
+                System.out.println("hello 3 -- ");
                 String redirectUrl = (String) session.getAttribute("redirectUrl");
                 if (redirectUrl != null) {
                     session.removeAttribute("redirectUrl");
                     return "redirect:" + redirectUrl;
                 }
-
+                System.out.println("hello 4 -- ");
                 if (authenticated.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
                     addParentTicketStats(session, model);
-
+                    System.out.println("hello 5 -- ");
                 	return "redirect:/parent/dashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
+                	System.out.println("hello 6 -- ");
                     return "redirect:/studentDashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_MENTOR.getValue()) {
+                	System.out.println("hello 7 -- ");
                     return "redirect:/mentor/dashboard";
                 } else {
+                	System.out.println("hello 8 -- ");
+                	System.out.println(authenticated);
                     return "redirect:/dashboard";
                 }
             }

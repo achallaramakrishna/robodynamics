@@ -48,4 +48,6 @@ public interface RDQuizService {
     List<RDQuiz> findQuizzesByCreator(int userId); // Quizzes created by the user
     
     List<RDQuiz> findQuizzesForStudent(int studentId); // Quizzes visible to a student
+
+	List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId);
 }

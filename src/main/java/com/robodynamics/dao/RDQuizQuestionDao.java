@@ -53,5 +53,15 @@ public interface RDQuizQuestionDao {
 	        List<String> questionTypes, 
 	        List<String> difficultyLevels, 
 	        int limit);
+
+
+	List<RDQuizQuestion> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId, Integer quizId);
+
+
+	List<RDQuizQuestion> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId, Integer quizId,
+			int limit, int offset);
+
+
+	long countByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId, Integer quizId);
     
 }

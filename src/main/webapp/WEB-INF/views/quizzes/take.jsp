@@ -57,6 +57,14 @@
   }
   .badge-tiny{ font-size:.72rem; letter-spacing:.2px; }
   .fixed-actions{ position: sticky; bottom:0; z-index:1030; background:#ffffffee; backdrop-filter: blur(6px); border-top:1px solid #e9eef6; }
+
+  /* Images */
+  .q-image-wrap { margin: .5rem 0 1rem; }
+  .q-image, .opt-image {
+    max-height: 220px; border:1px solid #e6e9ef; border-radius:.75rem; padding:4px; background:#fff;
+  }
+  .opt-image { max-height: 160px; }
+  .img-caption { font-size:.8rem; color:#64748b; }
 </style>
 
 <script>
@@ -125,7 +133,7 @@
     </div>
   </div>
 
-  <!-- Hidden form for page size change (now includes action) -->
+  <!-- Hidden form for page size change -->
   <form id="pageSizeForm" action="${pageContext.request.contextPath}/quizzes/navigate" method="post">
     <input type="hidden" name="quizId" value="${quiz.quizId}" />
     <input type="hidden" name="currentPage" value="${currentPage}" />
@@ -143,7 +151,7 @@
     <input type="hidden" name="mode" value="${mode}" />
     <input type="hidden" name="showHeaderFooter" value="${showHeaderFooter}" />
 
-    <!-- Questions (the controller already paginates into 'questions') -->
+    <!-- Questions -->
     <div class="row">
       <div class="col-12">
         <c:forEach var="question" items="${questions}" varStatus="qs">
@@ -173,18 +181,77 @@
                 </c:choose>
               </div>
 
-              <p class="mb-3">${question.questionText}</p>
+              <p class="mb-2">${question.questionText}</p>
+
+              <!-- QUESTION IMAGE (if any) -->
+              <c:if test="${not empty question.questionImage}">
+                <c:set var="img" value="${question.questionImage}" />
+                <c:choose>
+                  <c:when test="${fn:startsWith(img,'http://') or fn:startsWith(img,'https://')}">
+                    <c:set var="imgSrcNormalized" value="${img}" />
+                  </c:when>
+                  <c:when test="${fn:startsWith(img,'/opt/robodynamics/')}">
+                    <c:set var="imgSrcNormalized" value="${pageContext.request.contextPath}${fn:substringAfter(img,'/opt/robodynamics')}" />
+                  </c:when>
+                  <c:when test="${fn:startsWith(img,'/robodynamics/uploads/')}">
+                    <c:set var="imgSrcNormalized" value="${img}" />
+                  </c:when>
+                  <c:when test="${fn:startsWith(img,'/uploads/')}">
+                    <c:set var="imgSrcNormalized" value="${pageContext.request.contextPath}${img}" />
+                  </c:when>
+                  <c:otherwise>
+                    <c:set var="imgSrcNormalized" value="${pageContext.request.contextPath}/${img}" />
+                  </c:otherwise>
+                </c:choose>
+
+                <div class="q-image-wrap">
+                  <a href="${imgSrcNormalized}" target="_blank" rel="noopener">
+                    <img class="q-image img-fluid" src="${imgSrcNormalized}" alt="Question image" loading="lazy"/>
+                  </a>
+                  <div class="img-caption">Click to open in a new tab</div>
+                </div>
+              </c:if>
 
               <c:choose>
                 <c:when test="${question.questionType == 'multiple_choice'}">
                   <div class="vstack gap-2">
                     <c:forEach var="option" items="${question.options}">
-                      <label class="option-item d-flex align-items-center">
-                        <input type="radio"
-                               name="question_${question.questionId}_answer"
-                               value="${option.optionId}"
-                               ${selectedAnswers[question.questionId] == option.optionId ? 'checked' : ''}/>
-                        <span>${option.optionText}</span>
+                      <label class="option-item d-block">
+                        <div class="d-flex align-items-center">
+                          <input type="radio"
+                                 name="question_${question.questionId}_answer"
+                                 value="${option.optionId}"
+                                 ${selectedAnswers[question.questionId] == option.optionId ? 'checked' : ''}/>
+                          <span><c:out value="${option.optionText}" /></span>
+                        </div>
+
+                        <!-- OPTION IMAGE (if any) -->
+                        <c:if test="${not empty option.optionImage}">
+                          <c:set var="oimg" value="${option.optionImage}" />
+                          <c:choose>
+                            <c:when test="${fn:startsWith(oimg,'http://') or fn:startsWith(oimg,'https://')}">
+                              <c:set var="optImgSrcNormalized" value="${oimg}" />
+                            </c:when>
+                            <c:when test="${fn:startsWith(oimg,'/opt/robodynamics/')}">
+                              <c:set var="optImgSrcNormalized" value="${pageContext.request.contextPath}${fn:substringAfter(oimg,'/opt/robodynamics')}" />
+                            </c:when>
+                            <c:when test="${fn:startsWith(oimg,'/robodynamics/uploads/')}">
+                              <c:set var="optImgSrcNormalized" value="${oimg}" />
+                            </c:when>
+                            <c:when test="${fn:startsWith(oimg,'/uploads/')}">
+                              <c:set var="optImgSrcNormalized" value="${pageContext.request.contextPath}${oimg}" />
+                            </c:when>
+                            <c:otherwise>
+                              <c:set var="optImgSrcNormalized" value="${pageContext.request.contextPath}/${oimg}" />
+                            </c:otherwise>
+                          </c:choose>
+
+                          <div class="mt-2">
+                            <a href="${optImgSrcNormalized}" target="_blank" rel="noopener">
+                              <img class="opt-image img-fluid" src="${optImgSrcNormalized}" alt="Option image" loading="lazy"/>
+                            </a>
+                          </div>
+                        </c:if>
                       </label>
                     </c:forEach>
                   </div>

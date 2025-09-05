@@ -35,4 +35,9 @@ public class RDQuizQuestionMapServiceImpl implements RDQuizQuestionMapService {
 	public List<Integer> findQuestionIdsByQuizId(int quizId) {
 		return quizQuestionMapDao.findQuestionIdsByQuizId(quizId);
 	}
+
+	@Override
+	public List<RDQuizQuestionMap> findByQuestionId(int questionId) {
+		return quizQuestionMapDao.findByQuestionId(questionId);
+	}
 }

@@ -80,4 +80,15 @@ public class RDQuizQuestionMapDaoImpl implements RDQuizQuestionMapDao {
         return query.getResultList();
 
 	}
+
+	
+	
+	 public List<RDQuizQuestionMap> findByQuestionId(int questionId) {
+	        try (Session session = sessionFactory.openSession()) {
+	            return session.createQuery(
+	                "FROM RDQuizQuestionMap m WHERE m.question.questionId = :qid", RDQuizQuestionMap.class)
+	                .setParameter("qid", questionId)
+	                .list();
+	        }
+	    }
 }

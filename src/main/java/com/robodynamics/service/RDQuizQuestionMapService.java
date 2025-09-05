@@ -16,4 +16,6 @@ public interface RDQuizQuestionMapService {
     
     public List<Integer> findQuestionIdsByQuizId(int quizId);
 
+	List<RDQuizQuestionMap> findByQuestionId(int questionId);
+
 }

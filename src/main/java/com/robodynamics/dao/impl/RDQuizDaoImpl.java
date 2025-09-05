@@ -2,7 +2,9 @@ package com.robodynamics.dao.impl;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -195,4 +197,33 @@ public class RDQuizDaoImpl implements RDQuizDao {
 	    return query.getResultList();
 	}
 
+	@Override
+	public List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId) {
+		Session session = factory.getCurrentSession();
+
+        StringBuilder hql = new StringBuilder("select q from RDQuiz q where 1=1");
+        Map<String, Object> params = new HashMap<>();
+
+        if (courseId != null) {
+            hql.append(" and q.course.courseId = :courseId");
+            params.put("courseId", courseId);
+        }
+        if (sessionId != null) {
+            hql.append(" and q.courseSession.courseSessionId = :sessionId");
+            params.put("sessionId", sessionId);
+        }
+        if (sessionDetailId != null) {
+            hql.append(" and q.courseSessionDetail.courseSessionDetailId = :sessionDetailId");
+            params.put("sessionDetailId", sessionDetailId);
+        }
+
+        hql.append(" order by q.quizId desc");
+
+        Query<RDQuiz> query = session.createQuery(hql.toString(), RDQuiz.class);
+        params.forEach(query::setParameter);
+
+        return query.list(); // or .getResultList() if on JPA; Hibernate Query uses list()
+    }
 }
+
+

@@ -103,26 +103,33 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Upload Quiz Questions (Admins & Mentors) -->
-					  <div class="col-6 col-md-4 mb-3">
-					    <div class="card shadow-sm h-100 text-center">
-					      <div class="card-header bg-success text-white">
-					        <h5 class="mb-0">⬆️ Upload Quiz Questions</h5>
-					      </div>
-					      <div class="card-body">
-					        <p class="card-text">
-					          Upload a JSON file and map questions to <em>Slide</em>, <em>Quiz</em>, or <em>Question Bank</em>.
-					        </p>
-					        <div class="d-grid gap-2">
-					          <!-- Opens your uploader/list page -->
-					          <a href="${pageContext.request.contextPath}/quizquestions/listQuizQuestions"
-					             class="btn btn-primary">
-					            Open Uploader
-					          </a>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
+				<!-- Upload Quiz Questions (Admins & Mentors) -->
+				<div class="col-6 col-md-4 mb-3">
+				  <div class="card shadow-sm h-100 text-center">
+				    <div class="card-header bg-success text-white">
+				      <h5 class="mb-0">⬆️ Upload Quiz Questions</h5>
+				    </div>
+				    <div class="card-body">
+				      <p class="card-text">
+				        Upload a JSON file and map questions to <em>Slide</em>, <em>Quiz</em>, or <em>Question Bank</em>.
+				      </p>
+				      <div class="d-grid gap-2">
+				        <!-- Opens uploader/list page -->
+				        <a href="${pageContext.request.contextPath}/quizquestions/listQuizQuestions"
+				           class="btn btn-primary">
+				          Open Uploader
+				        </a>
+				
+				        <!-- New link to manage media -->
+				        <a href="${pageContext.request.contextPath}/quizquestions/manageMedia"
+				           class="btn btn-warning">
+				          Manage Media
+				        </a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
                     
                 </div>
             </div>

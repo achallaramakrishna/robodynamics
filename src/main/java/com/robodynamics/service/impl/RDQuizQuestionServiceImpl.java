@@ -115,6 +115,34 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 		return rdQuizQuestionDao.findQuestionsByCriteria(courseId, courseSessionIds, questionTypes, difficultyLevels, limit);
 	}
 
+	@Override
+	@Transactional
+	public List<RDQuizQuestion> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId,
+			Integer quizId) {
+		  // implement with HQL or Criteria based on what filters are provided
+	    // start broad and narrow down
+	    // e.g. if quizId != null → filter by quiz
+	    // else if sessionDetailId != null → filter by sessionDetail
+	    // else if sessionId != null → filter by session
+	    // else if courseId != null → filter by course
+	    return rdQuizQuestionDao.findByFilters(courseId, sessionId, sessionDetailId, quizId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDQuizQuestion> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId,
+			Integer quizId, int limit, int offset) {
+        return rdQuizQuestionDao.findByFilters(courseId, sessionId, sessionDetailId, quizId, limit, offset);
+
+	}
+
+	@Override
+	@Transactional
+	public long countByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId, Integer quizId) {
+        return rdQuizQuestionDao.countByFilters(courseId, sessionId, sessionDetailId, quizId);
+
+	}
+
 	
 
 	

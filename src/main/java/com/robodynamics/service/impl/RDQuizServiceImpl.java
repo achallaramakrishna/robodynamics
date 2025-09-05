@@ -194,5 +194,11 @@ public class RDQuizServiceImpl implements RDQuizService {
 	public List<RDQuiz> findQuizzesForStudent(int studentId) {
 		return rdQuizDao.findQuizzesForStudent(studentId);
 	}
+
+	@Override
+	@Transactional
+	public List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId) {
+		return rdQuizDao.findByFilters(courseId,sessionId,sessionDetailId);
+	}
     
 }

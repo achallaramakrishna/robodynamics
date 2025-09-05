@@ -6,7 +6,7 @@ import com.robodynamics.service.RDCollectionService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDDemoService;
 import com.robodynamics.service.RDMentorService;
-
+import com.robodynamics.service.RDTestimonialService;
 import com.robodynamics.model.RDCourse;
 
 import com.robodynamics.model.RDDemo;
@@ -38,6 +38,10 @@ public class RDHomeController {
 
     @Autowired
     private RDBlogPostService blogPostService;
+    
+    @Autowired
+    private RDTestimonialService testimonialService;
+
 
     @GetMapping({ "/", "/home" })
     public String home(@RequestParam(value = "viewer", required = false) String viewer,
@@ -78,6 +82,10 @@ public class RDHomeController {
         // Optional: echo query for search box
         if (q != null) {
             req.setAttribute("q", q);
+        }
+        
+        if (testimonialService != null) {
+            model.addAttribute("testimonials", testimonialService.latest(6));
         }
 
         // Return the home page JSP

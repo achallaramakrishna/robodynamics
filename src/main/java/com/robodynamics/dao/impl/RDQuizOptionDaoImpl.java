@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.robodynamics.dao.RDQuizOptionDao;
 import com.robodynamics.model.RDQuizOption;
+import com.robodynamics.model.RDQuizQuestion;
 
 @Repository
 public class RDQuizOptionDaoImpl implements RDQuizOptionDao {
@@ -22,6 +23,12 @@ public class RDQuizOptionDaoImpl implements RDQuizOptionDao {
 	private Session getSession() {
         return sessionFactory.getCurrentSession();
     }
+	
+	 @Override
+	    public RDQuizOption findById(int optionId) {
+	        Session session = sessionFactory.getCurrentSession();
+	        return session.get(RDQuizOption.class, optionId);
+	    }
 
 	@Override
 	public void saveAll(List<RDQuizOption> options) {

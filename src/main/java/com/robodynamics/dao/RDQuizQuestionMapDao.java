@@ -17,6 +17,8 @@ public interface RDQuizQuestionMapDao {
     void addQuestionToQuiz(int quizId, int questionId);
 
 	List<Integer> findQuestionIdsByQuizId(int quizId);
+
+	List<RDQuizQuestionMap> findByQuestionId(int questionId);
     
 
 }

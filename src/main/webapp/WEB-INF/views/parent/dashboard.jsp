@@ -98,7 +98,22 @@
         </div>
       </div>
     </div>
-    
+    <!-- Attendance & Tracking Card -->
+		<div class="col-md-4 mb-4">
+			<div class="card shadow-sm h-100 text-center">
+				<div class="card-header bg-info text-white">
+					<h5 class="mb-0">📝 Attendance & Tracking</h5>
+				</div>
+				<div class="card-body">
+					<p class="card-text">Mark attendance and track student
+						progress</p>
+						<a href="${pageContext.request.contextPath}/attendance-tracking?view=flat"
+						class="btn btn-secondary">Flat View</a>
+				</div>
+			</div>
+		</div>
+			
+			
         <!-- Ticket Management (Parent only) -->
     <!-- Ticket Management (Parent only) -->
       <div class="col-md-4 mb-4">
@@ -163,14 +178,7 @@
     </div>
   </div>
 
-  <!-- Accordion header + controls -->
-  <div class="d-flex align-items-center justify-content-between mb-2">
-    <h4 class="mb-0">Learning & Progress</h4>
-    <div class="btn-group btn-group-sm" role="group" aria-label="Accordion controls">
-      <button id="btnExpandAll" class="btn btn-outline-primary" type="button">Expand all</button>
-      <button id="btnCollapseAll" class="btn btn-outline-secondary" type="button">Collapse all</button>
-    </div>
-  </div>
+
 
   <!-- Accordion -->
   <div class="accordion accordion-flush" id="parentAccordion">
@@ -191,120 +199,7 @@
       </div>
     </div>
 
-    <!-- Attendance & Tracking -->
-    <div class="accordion-item acc-primary">
-      <h2 class="accordion-header" id="headingAT">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAT" aria-expanded="true" aria-controls="collapseAT">
-          ✅ View Attendance & 📈 Course Tracking
-        </button>
-      </h2>
-      <div id="collapseAT" class="accordion-collapse collapse show" aria-labelledby="headingAT" data-bs-parent="#parentAccordion">
-        <div class="accordion-body">
-          <h6 class="text-uppercase text-muted mb-3">Attendance & Course Tracking</h6>
 
-          <!-- Filters -->
-          <h6 class="fw-semibold mb-2">Filters</h6>
-          <div class="row g-3 mb-3">
-            <div class="col-md-3">
-              <label class="form-label">Child</label>
-              <select id="childId" class="form-select">
-                <option value="">-- Select Child --</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Course</label>
-              <select id="courseId" class="form-select" disabled>
-                <option value="">-- Select Course --</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Offering</label>
-              <select id="offeringId" class="form-select" disabled>
-                <option value="">-- Select Offering --</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Enrollment</label>
-              <select id="enrollmentId" class="form-select" disabled>
-                <option value="">-- Select Enrollment --</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Selection summary -->
-          <div id="selectionSummary" class="alert alert-secondary py-2 mb-3" style="display:none">
-            <strong>Selected:</strong>
-            <span class="me-2" id="sumChild"></span>
-            <span class="me-2">• <span id="sumCourse"></span></span>
-            <span class="me-2">• <span id="sumOffering"></span></span>
-            <span class="text-muted small" id="sumEnrollment"></span>
-          </div>
-
-          <!-- Attendance Table -->
-          <div class="card shadow-sm mb-4">
-            <div class="card-header bg-light d-flex align-items-center justify-content-between">
-              <strong>Attendance</strong>
-              <span id="attnSpinner" class="spinner-border spinner-border-sm ms-2 spinner" role="status" aria-hidden="true"></span>
-            </div>
-            <div class="card-body p-0">
-              <div class="table-responsive">
-                <div class="overflow-auto" style="max-height:40vh;">
-                  <table class="table table-sm table-striped mb-0">
-                    <thead class="table-secondary">
-                      <tr><th>Date</th><th>Status</th><th>Topic / Notes</th></tr>
-                    </thead>
-                    <tbody id="attendanceTbody">
-                      <tr><td colspan="3" class="text-center text-muted">Select enrollment to view attendance.</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tracking Table -->
-          <div class="card shadow-sm">
-            <div class="card-header bg-light d-flex align-items-center justify-content-between">
-              <strong>Course Tracking</strong>
-              <span id="trkSpinner" class="spinner-border spinner-border-sm ms-2 spinner" role="status" aria-hidden="true"></span>
-            </div>
-            <div class="card-body p-0">
-              <div class="table-responsive">
-                <div class="overflow-auto" style="max-height:40vh;">
-                  <table class="table table-sm table-striped mb-0">
-                    <thead class="table-secondary">
-                      <tr><th>Date</th><th>Session Name</th><th>Remarks</th><th>Mentor</th></tr>
-                    </thead>
-                    <tbody id="trackingTbody">
-                      <tr><td colspan="4" class="text-center text-muted">Select enrollment to view tracking.</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /accordion-body -->
-      </div>
-    </div>
-
-    <!-- Reports -->
-    <div class="accordion-item acc-info">
-      <h2 class="accordion-header" id="headingReports">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
-          📊 Reports
-        </button>
-      </h2>
-      <div id="collapseReports" class="accordion-collapse collapse" aria-labelledby="headingReports" data-bs-parent="#parentAccordion">
-        <div class="accordion-body">
-          <h6 class="text-uppercase text-muted mb-2">Reports</h6>
-          <p class="text-muted mb-3">Scores, weak areas & trends.</p>
-          <a href="${pageContext.request.contextPath}/parent/reports" class="btn btn-outline-primary btn-sm">View Reports</a>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /accordion -->
 </div><!-- /container -->
 
 <jsp:include page="/footer.jsp"/>

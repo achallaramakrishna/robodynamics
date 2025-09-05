@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Attendance &amp; Tracking - Flat View</title>
 
-  <!-- Load web assets only when NOT rendering PDF -->
   <c:if test="${empty param.asPdf}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -32,18 +31,10 @@
     .sortable { cursor: pointer; }
     .sortable .sort-indicator { font-size: .8rem; opacity: .6; margin-left: .25rem; }
 
-    /* PDF/print-only tweaks */
     <c:if test="${not empty param.asPdf}">
-    @page {
-      size: A4 landscape;
-      margin: 16mm;
-      @bottom-center {
-        content: "Page " counter(page) " of " counter(pages);
-        font-size: 10px;
-      }
-    }
+    @page { size: A4 landscape; margin: 16mm; }
     body { background: #fff; }
-    .table th, .table td { white-space: normal !important; } /* allow wrapping in PDF */
+    .table th, .table td { white-space: normal !important; }
     thead th.sticky { position: static !important; }
     .sortable .sort-indicator, .js-only, .filter-card, .export-actions .btn { display: none !important; }
     </c:if>
@@ -51,10 +42,24 @@
 </head>
 <body>
 
-<!-- Header only in web mode -->
 <c:if test="${empty param.asPdf}">
   <jsp:include page="/header.jsp" />
 </c:if>
+
+<%-- Role IDs: update if needed --%>
+<c:set var="ADMIN_ID_1" value="1"/>
+<c:set var="ADMIN_ID_2" value="2"/>
+<c:set var="ADMIN_ID_3" value="5"/>
+<c:set var="MENTOR_ID"  value="3"/>
+<c:set var="PARENT_ID"  value="4"/>
+
+<c:set var="profileId" value="${sessionScope.rdUser != null ? sessionScope.rdUser.profile_id : 0}" />
+<c:set var="isAdmin"  value="${profileId == ADMIN_ID_1 || profileId == ADMIN_ID_2 || profileId == ADMIN_ID_3}" />
+<c:set var="isMentor" value="${profileId == MENTOR_ID}" />
+<c:set var="isParent" value="${profileId == PARENT_ID}" />
+
+<c:set var="mentorName"    value="${sessionScope.rdUser != null ? sessionScope.rdUser.firstName : ''}" />
+<c:set var="childNamesCsv" value="${sessionScope.childNamesCsv}" />
 
 <div class="container-fluid my-3">
   <h3 class="text-center mb-3">
@@ -62,7 +67,6 @@
     <span class="text-primary"><c:out value="${displayDateRange}"/></span>
   </h3>
 
-  <!-- Filters (hidden in PDF) -->
   <c:if test="${empty param.asPdf}">
     <div class="container mb-3">
       <div class="card filter-card shadow-sm">
@@ -95,18 +99,48 @@
               <input type="date" id="endDate" name="endDate" class="form-control" value="${endDateFormatted}"/>
             </div>
 
-            <div class="col-md-2">
-              <label class="form-label" for="mentor">Mentor</label>
-              <input type="text" id="mentor" name="mentor" class="form-control" value="${param.mentor}" placeholder="e.g., Ananya / Raj"/>
-            </div>
-            <div class="col-md-2">
+            <c:choose>
+              <c:when test="${isMentor}">
+                <div class="col-md-3">
+                  <label class="form-label">Mentor</label>
+                  <div class="form-control-plaintext">
+                    <span class="badge bg-primary">Locked: <c:out value="${sessionScope.rdUser.firstName} ${sessionScope.rdUser.lastName}"/></span>
+                  </div>
+                  <input type="hidden" name="mentor" value="${sessionScope.rdUser.firstName} ${sessionScope.rdUser.lastName}"/>
+                </div>
+              </c:when>
+              <c:otherwise>
+                <div class="col-md-3">
+                  <label class="form-label" for="mentor">Mentor</label>
+                  <input type="text" id="mentor" name="mentor" class="form-control" value="${param.mentor}" placeholder="e.g., Ananya / Raj"/>
+                </div>
+              </c:otherwise>
+            </c:choose>
+
+            <div class="col-md-3">
               <label class="form-label" for="offering">Course Offering</label>
               <input type="text" id="offering" name="offering" class="form-control" value="${param.offering}" placeholder="e.g., Grade 6 Maths"/>
             </div>
-            <div class="col-md-2">
-              <label class="form-label" for="student">Student</label>
-              <input type="text" id="student" name="student" class="form-control" value="${param.student}" placeholder="e.g., Aditya / Neha"/>
-            </div>
+
+            <c:choose>
+              <c:when test="${isParent}">
+                <div class="col-md-3">
+                  <label class="form-label">Student(s)</label>
+                  <div class="form-control-plaintext">
+                    <span class="badge bg-info">
+                      <c:out value="${empty childNamesCsv ? 'Your children will be auto-scoped' : childNamesCsv}"/>
+                    </span>
+                  </div>
+                  <input type="hidden" name="student" value="${childNamesCsv}"/>
+                </div>
+              </c:when>
+              <c:otherwise>
+                <div class="col-md-3">
+                  <label class="form-label" for="student">Student</label>
+                  <input type="text" id="student" name="student" class="form-control" value="${param.student}" placeholder="e.g., Aditya / Neha"/>
+                </div>
+              </c:otherwise>
+            </c:choose>
 
             <div class="col-md-2">
               <label class="form-label" for="status">Status</label>
@@ -116,6 +150,7 @@
                 <option value="Absent"  ${param.status == 'Absent'  ? 'selected' : ''}>Absent</option>
               </select>
             </div>
+
             <div class="col-md-2">
               <label class="form-label" for="hasFeedback">Has feedback</label>
               <select id="hasFeedback" name="hasFeedback" class="form-select">
@@ -125,10 +160,16 @@
               </select>
             </div>
 
-            <div class="col-12 d-flex justify-content-end gap-2">
-              <button type="button" id="btnToday" class="btn btn-outline-secondary">Today</button>
-              <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/attendance-tracking-flat">Reset</a>
-              <button type="submit" class="btn btn-primary">Apply</button>
+            <div class="col-12 d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                <c:if test="${isMentor}">Scope: You’re viewing only your classes & students.</c:if>
+                <c:if test="${isParent}">Scope: You’re viewing only your child(ren)’s records.</c:if>
+              </small>
+              <div class="d-flex gap-2">
+                <button type="button" id="btnToday" class="btn btn-outline-secondary">Today</button>
+                <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/attendance-tracking-flat">Reset</a>
+                <button type="submit" class="btn btn-primary">Apply</button>
+              </div>
             </div>
           </form>
         </div>
@@ -136,16 +177,13 @@
     </div>
   </c:if>
 
-  <!-- Summary + export -->
   <div class="container mb-2">
     <div class="d-flex justify-content-between align-items-center">
       <small class="text-muted">
         <span id="resultSummary">Showing 0 rows for <strong><c:out value="${displayDateRange}"/></strong>.</span>
       </small>
 
-      <!-- Export buttons (hidden in PDF via CSS) -->
       <div class="d-flex gap-2 export-actions">
-        <!-- CSV URL (safe) -->
         <c:url var="csvUrl" value="/attendance-tracking-flat">
           <c:param name="view" value="flat" />
           <c:param name="export" value="csv" />
@@ -161,14 +199,12 @@
         </c:url>
         <a class="btn btn-sm btn-outline-secondary" href="<c:out value='${csvUrl}'/>">Export CSV</a>
 
-        <!-- Generic JSP→PDF exporter -->
         <c:url var="pdfUrl" value="/export/pdf-page">
           <c:param name="path" value="/attendance-tracking-flat" />
           <c:param name="filename" value="attendance-flat.pdf" />
           <c:param name="landscape" value="true" />
           <c:param name="view" value="flat" />
           <c:param name="asPdf" value="true" />
-          <!-- forward current filters -->
           <c:param name="range" value="${param.range}" />
           <c:param name="date" value="${param.date}" />
           <c:param name="startDate" value="${param.startDate}" />
@@ -184,7 +220,6 @@
     </div>
   </div>
 
-  <!-- Results -->
   <c:choose>
     <c:when test="${not empty flatRows}">
       <div class="container">
@@ -204,22 +239,13 @@
             <tbody>
             <c:forEach var="r" items="${flatRows}">
               <tr>
-                <!-- Offering -->
                 <td><c:out value="${r.offeringName}"/></td>
-
-                <!-- Mentor -->
                 <td><c:out value="${empty r.mentorName ? '—' : r.mentorName}"/></td>
-
-                <!-- Date (+ weekday) -->
                 <td>
                   <c:out value="${r.sessionDate}"/>
                   <small class="text-muted">(<c:out value="${r.weekday}"/>)</small>
                 </td>
-
-                <!-- Student -->
                 <td><c:out value="${r.studentName}"/></td>
-
-                <!-- Attendance -->
                 <td>
                   <span class="badge badge-status
                     <c:choose>
@@ -235,8 +261,6 @@
                     </small>
                   </c:if>
                 </td>
-
-                <!-- Session -->
                 <td>
                   <span class="badge badge-info">
                     <c:choose>
@@ -247,12 +271,8 @@
                     </c:choose>
                   </span>
                 </td>
-
-                <!-- Feedback (+ who/when) -->
                 <td>
-                  <div>
-                    <c:out value="${empty r.feedbackOnDate ? 'No feedback' : r.feedbackOnDate}"/>
-                  </div>
+                  <div><c:out value="${empty r.feedbackOnDate ? 'No feedback' : r.feedbackOnDate}"/></div>
                   <c:if test="${not empty r.trackingMarkedBy || not empty r.trackingMarkedAt}">
                     <small class="text-muted d-block">
                       <c:if test="${not empty r.trackingMarkedBy}">by <c:out value="${r.trackingMarkedBy}"/></c:if>
@@ -296,12 +316,10 @@
   </c:choose>
 </div>
 
-<!-- Footer only in web mode -->
 <c:if test="${empty param.asPdf}">
   <jsp:include page="/footer.jsp" />
 </c:if>
 
-<!-- JS only in web mode -->
 <c:if test="${empty param.asPdf}">
 <script>
 (function () {
@@ -310,15 +328,8 @@
     var dayWrap = document.getElementById('dayDateWrap');
     var sWrap  = document.getElementById('startDateWrap');
     var eWrap  = document.getElementById('endDateWrap');
-    if (range === 'custom') {
-      dayWrap.classList.add('d-none');
-      sWrap.classList.remove('d-none');
-      eWrap.classList.remove('d-none');
-    } else {
-      dayWrap.classList.remove('d-none');
-      sWrap.classList.add('d-none');
-      eWrap.classList.add('d-none');
-    }
+    if (range === 'custom') { dayWrap.classList.add('d-none'); sWrap.classList.remove('d-none'); eWrap.classList.remove('d-none'); }
+    else { dayWrap.classList.remove('d-none'); sWrap.classList.add('d-none'); eWrap.classList.add('d-none'); }
   }
   var rangeEl = document.getElementById('range');
   if (rangeEl) { rangeEl.addEventListener('change', updateDateControls); updateDateControls(); }
@@ -331,12 +342,9 @@
       var mm = String(today.getMonth() + 1).padStart(2, '0');
       var dd = String(today.getDate()).padStart(2, '0');
       var qs = new URLSearchParams(window.location.search);
-      qs.set('view', 'flat');
-      qs.set('range', 'day');
-      qs.set('date', yyyy + '-' + mm + '-' + dd);
+      qs.set('view', 'flat'); qs.set('range', 'day'); qs.set('date', yyyy + '-' + mm + '-' + dd);
       ['mentor','offering','student','status','hasFeedback'].forEach(function(k){
-        var el = document.getElementById(k);
-        if (el && el.value) qs.set(k, el.value);
+        var el = document.getElementById(k); if (el && el.value) qs.set(k, el.value);
       });
       window.location.href = window.location.pathname + '?' + qs.toString();
     });
@@ -351,34 +359,8 @@
     });
   });
 
-  // Simple client-side sort
-  var table = document.getElementById('resultTable');
-  if (table) {
-    var headers = table.querySelectorAll('thead th.sortable');
-    headers.forEach(function(th){
-      th.addEventListener('click', function(){
-        var col = parseInt(th.getAttribute('data-col'), 10);
-        var tbody = table.tBodies[0];
-        var rows = Array.from(tbody.querySelectorAll('tr'));
-        var dir = th.getAttribute('data-dir') === 'asc' ? 'desc' : 'asc';
-        rows.sort(function(a, b){
-          var ta = (a.children[col].innerText || '').trim().toLowerCase();
-          var tb = (b.children[col].innerText || '').trim().toLowerCase();
-          if (ta < tb) return dir === 'asc' ? -1 : 1;
-          if (ta > tb) return dir === 'asc' ? 1 : -1;
-          return 0;
-        });
-        headers.forEach(function(h){ h.setAttribute('data-dir',''); });
-        th.setAttribute('data-dir', dir);
-        rows.forEach(function(r){ tbody.appendChild(r); });
-      });
-    });
-  }
-
-  // Result count summary
   function updateSummary() {
-    var count = 0;
-    var tbody = document.querySelector('#resultTable tbody');
+    var count = 0, tbody = document.querySelector('#resultTable tbody');
     if (tbody) count = tbody.querySelectorAll('tr').length;
     var txt = 'Showing ' + count + ' rows for ';
     var rangeHtml = '<strong>' + (document.querySelector('h3 .text-primary')?.innerText || '') + '</strong>.';

@@ -39,4 +39,6 @@ public interface RDQuizDao {
 
 	List<RDQuiz> findQuizzesForStudent(int studentId);
 
+	List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId);
+
 }

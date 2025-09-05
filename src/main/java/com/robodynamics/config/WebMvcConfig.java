@@ -46,6 +46,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/images/**").addResourceLocations("/resources/assets/images/");
         registry.addResourceHandler("/assets/audios/**").addResourceLocations("/resources/assets/audios/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/uploads/**")
+        // NOTE the trailing slash is important
+        .addResourceLocations("file:/opt/robodynamics/uploads/")
+        .setCachePeriod(0); // dev: disable cache; remove in prod    
     }
     
     @Override

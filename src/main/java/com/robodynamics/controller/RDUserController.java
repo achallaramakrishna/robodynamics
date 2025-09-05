@@ -11,20 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.robodynamics.dto.RDAttendanceFlatRowDTO;
-import com.robodynamics.model.RDContact;
-import com.robodynamics.model.RDCourseOffering;
-import com.robodynamics.model.RDCourseSession;
-import com.robodynamics.model.RDCourseTracking;
-import com.robodynamics.model.RDUser;
-import com.robodynamics.service.RDAttendanceFlatService;
-import com.robodynamics.service.RDClassAttendanceService;
-import com.robodynamics.service.RDCourseOfferingService;
-import com.robodynamics.service.RDCourseService;
-import com.robodynamics.service.RDCourseSessionService;
-import com.robodynamics.service.RDCourseTrackingService;
-import com.robodynamics.service.RDStudentEnrollmentService;
-import com.robodynamics.service.RDTicketService;
-import com.robodynamics.service.RDUserService;
+import com.robodynamics.model.*;
+import com.robodynamics.service.*;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -41,45 +29,16 @@ public class RDUserController {
 
     @Autowired private RDCourseOfferingService courseOfferingService;
     @Autowired private RDClassAttendanceService attendanceService;
-    @Autowired private RDCourseService courseService;                  // if used elsewhere
+    @Autowired private RDCourseService courseService;
     @Autowired private RDCourseSessionService courseSessionService;
     @Autowired private RDStudentEnrollmentService enrollmentService;
     @Autowired private RDUserService userService;
     @Autowired private RDCourseTrackingService courseTrackingService;
-    
     @Autowired private RDTicketService ticketService;
-
 
     // Flat (existing) service
     @Autowired private RDAttendanceFlatService attendanceFlatService;
 
- // helper: call this from your dashboard method
-    private void addAdminTicketStats(HttpSession session, Model model) {
-        RDUser me = (RDUser) session.getAttribute("rdUser");
-        if (me == null) return;
-        int pid = me.getProfile_id();
-        boolean isAdmin =
-            pid == RDUser.profileType.SUPER_ADMIN.getValue()
-         || pid == RDUser.profileType.ROBO_ADMIN.getValue()
-         || pid == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue();
-
-        if (!isAdmin) return;
-
-        Map<String, Integer> ticketStats = new HashMap<>();
-        // If you added the scoped variants earlier:
-        ticketStats.put("open",        ticketService.countScoped("OPEN",        null, null, null, false));
-        ticketStats.put("inProgress",  ticketService.countScoped("IN_PROGRESS", null, null, null, false));
-        ticketStats.put("resolved",    ticketService.countScoped("RESOLVED",    null, null, null, false));
-        ticketStats.put("closed",      ticketService.countScoped("CLOSED",      null, null, null, false));
-
-        // If you only have count(...):
-        // ticketStats.put("open",       ticketService.count("OPEN", null, null, null));
-        // ticketStats.put("inProgress", ticketService.count("IN_PROGRESS", null, null, null));
-        // ticketStats.put("resolved",   ticketService.count("RESOLVED", null, null, null));
-        // ticketStats.put("closed",     ticketService.count("CLOSED", null, null, null));
-
-        model.addAttribute("ticketStats", ticketStats);
-    }	
     /* ================== Unchanged auth / user endpoints ================== */
 
     @GetMapping("/register")
@@ -139,34 +98,28 @@ public class RDUserController {
     @PostMapping("/login")
     public String login(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
         try {
-        	System.out.println("hello 1 -- ");
             RDUser authenticated = userService.loginRDUser(rdUser);
-            System.out.println("hello 2 -- ");
             if (authenticated != null) {
-            	System.out.println("hello 2 -- ");
                 model.addAttribute("rdUser", authenticated);
                 session.setAttribute("rdUser", authenticated);
                 log.info("Login success for username='{}', userId={}", safe(rdUser.getUserName()), authenticated.getUserID());
-                System.out.println("hello 3 -- ");
+
                 String redirectUrl = (String) session.getAttribute("redirectUrl");
                 if (redirectUrl != null) {
                     session.removeAttribute("redirectUrl");
                     return "redirect:" + redirectUrl;
                 }
-                System.out.println("hello 4 -- ");
+
                 if (authenticated.getProfile_id() == RDUser.profileType.ROBO_PARENT.getValue()) {
                     addParentTicketStats(session, model);
-                    System.out.println("hello 5 -- ");
-                	return "redirect:/parent/dashboard";
+                    // NEW: feed child names for JSP badge/hidden input
+                    session.setAttribute("childNamesCsv", getChildNamesCsv(authenticated.getUserID()));
+                    return "redirect:/parent/dashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
-                	System.out.println("hello 6 -- ");
                     return "redirect:/studentDashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_MENTOR.getValue()) {
-                	System.out.println("hello 7 -- ");
                     return "redirect:/mentor/dashboard";
                 } else {
-                	System.out.println("hello 8 -- ");
-                	System.out.println(authenticated);
                     return "redirect:/dashboard";
                 }
             }
@@ -197,41 +150,22 @@ public class RDUserController {
 
     @GetMapping("/dashboard")
     public String homeDashboard(Model model, HttpSession session) {
-    
         addAdminTicketStats(session, model);
-
-    	return "dashboard"; 
-    
+        return "dashboard";
     }
-    
+
     private void addParentTicketStats(HttpSession session, Model model) {
         RDUser me = (RDUser) session.getAttribute("rdUser");
         if (me == null) return;
 
-        // creatorId = parent’s userId; assigneeId stays null for parent view
         Integer myId = me.getUserID();
-
         Map<String, Integer> stats = new HashMap<>();
-        // with scoped methods (recommended):
         stats.put("open",        ticketService.countScoped("OPEN",        null, myId, null, false));
         stats.put("inProgress",  ticketService.countScoped("IN_PROGRESS", null, myId, null, false));
         stats.put("resolved",    ticketService.countScoped("RESOLVED",    null, myId, null, false));
         stats.put("closed",      ticketService.countScoped("CLOSED",      null, myId, null, false));
 
-        // If you only have count(status, assigneeId, creatorId, q):
-        // stats.put("open",        ticketService.count("OPEN",        null, myId, null));
-        // stats.put("inProgress",  ticketService.count("IN_PROGRESS", null, myId, null));
-        // stats.put("resolved",    ticketService.count("RESOLVED",    null, myId, null));
-        // stats.put("closed",      ticketService.count("CLOSED",      null, myId, null));
-
         model.addAttribute("ticketStatsParent", stats);
-    }
-
-    @PostMapping("/dashboard")
-    public String showDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model model) {
-        List<RDUser> users = userService.searchUsers(rdUser.getProfile_id(), rdUser.getActive());
-        model.addAttribute("users", users);
-        return "dashboard";
     }
 
     /* ================== Attendance & Tracking ================== */
@@ -258,10 +192,8 @@ public class RDUserController {
         final String eS     = trimToNull(params.get("endDate"));
 
         LocalDate base = parseDateOr(dateS, LocalDate.now());
-        // IMPORTANT: honor custom; do not collapse to "day"
         DateWindow window = computeWindow(range, base, sS, eS);
 
-        // echo window
         model.addAttribute("selectedRange", range);
         model.addAttribute("selectedDateFormatted", window.base.toString());
         model.addAttribute("startDateFormatted", window.start.toString());
@@ -269,7 +201,7 @@ public class RDUserController {
         model.addAttribute("displayDateRange", humanRange(window.start, window.end));
 
         if ("flat".equalsIgnoreCase(view)) {
-            // ---- FLAT: keep your existing logic unchanged ----
+            // ---- FLAT VIEW with role scoping ----
             Integer offeringId   = null;
             Integer studentId    = null;
             String  studentLike  = lowerOrNull(params.get("student"));
@@ -278,19 +210,56 @@ public class RDUserController {
             String  status       = trimToNull(params.get("status"));
             String  hasFeedback  = trimToNull(params.get("hasFeedback"));
 
-            List<RDAttendanceFlatRowDTO> rows;
-            if ("custom".equalsIgnoreCase(range)) {
-                long days = Math.abs(window.end.toEpochDay() - window.start.toEpochDay()) + 1;
-                rows = attendanceFlatService.findFlat(
-                        days <= 7 ? "week" : "month",
-                        window.base,  // keep as you had it
-                        offeringId, studentId, studentLike, mentorLike, offeringLike, status, hasFeedback
-                );
-            } else {
-                rows = attendanceFlatService.findFlat(
-                        range, window.base,
-                        offeringId, studentId, studentLike, mentorLike, offeringLike, status, hasFeedback
-                );
+            RDUser current = (RDUser) session.getAttribute("rdUser");
+            Integer profileId = (current != null) ? current.getProfile_id() : null;
+            Integer userId    = (current != null) ? current.getUserID()      : null;
+
+            boolean isAdmin =
+                    profileId != null && (
+                        profileId == RDUser.profileType.SUPER_ADMIN.getValue()
+                     || profileId == RDUser.profileType.ROBO_ADMIN.getValue()
+                     || profileId == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue()
+                    );
+            boolean isMentor = profileId != null && profileId == RDUser.profileType.ROBO_MENTOR.getValue();
+            boolean isParent = profileId != null && profileId == RDUser.profileType.ROBO_PARENT.getValue();
+
+            // For mentors/parents we ignore free-text to avoid bypassing scope
+            if (isMentor) mentorLike = null;
+            if (isParent) { mentorLike = null; studentLike = null; }
+
+            String effectiveRange = "custom".equalsIgnoreCase(range)
+                ? ((Math.abs(window.end.toEpochDay() - window.start.toEpochDay()) + 1) <= 7 ? "week" : "month")
+                : range;
+
+            List<RDAttendanceFlatRowDTO> rows = attendanceFlatService.findFlat(
+                    effectiveRange, window.base,
+                    offeringId, studentId, studentLike, mentorLike, offeringLike, status, hasFeedback
+            );
+
+            // ----- HARD SCOPE FILTERS (name-based, case-insensitive) -----
+            if (isMentor && current != null) {
+                final String myFull = (nz(current.getFirstName()) + " " + nz(current.getLastName())).trim().toLowerCase(Locale.ROOT);
+                rows = rows.stream()
+                        .filter(r -> {
+                            String rn = nz(r.getMentorName()).trim().toLowerCase(Locale.ROOT);
+                            return !rn.isEmpty() && rn.equals(myFull); // exact match
+                        })
+                        .collect(Collectors.toList());
+            }
+
+            if (isParent && current != null) {
+                // Resolve child names once; use exact, case-insensitive match
+                Set<String> childNames = getChildNamesSet(current.getUserID());
+                if (!childNames.isEmpty()) {
+                    rows = rows.stream()
+                            .filter(r -> {
+                                String sn = nz(r.getStudentName()).trim().toLowerCase(Locale.ROOT);
+                                return childNames.contains(sn);
+                            })
+                            .collect(Collectors.toList());
+                } else {
+                    rows = Collections.emptyList();
+                }
             }
 
             long expected = rows.size();
@@ -305,13 +274,13 @@ public class RDUserController {
 
             return "attendance-tracking-flat";
         } else {
-            // ---- ACCORDION: independent data population ----
+            // ---- ACCORDION VIEW (existing) ----
             buildAccordionModel(window, params, model, session);
             return "attendance-tracking";
         }
     }
 
-    /** Accordion-only data builder. */
+    /** Accordion-only data builder (unchanged from your version) */
     private void buildAccordionModel(DateWindow window, Map<String, String> params, Model model, HttpSession session) {
         RDUser current = (RDUser) session.getAttribute("rdUser");
         Integer profileId = (current != null) ? current.getProfile_id() : null;
@@ -322,16 +291,15 @@ public class RDUserController {
                 (profileId == RDUser.profileType.SUPER_ADMIN.getValue()
               || profileId == RDUser.profileType.ROBO_ADMIN.getValue()
               || profileId == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue());
-        
+
         boolean isMentor = profileId != null && (profileId == RDUser.profileType.ROBO_MENTOR.getValue());
 
         String mentorQ   = lowerOrNull(params.get("mentor"));
         String offeringQ = lowerOrNull(params.get("offering"));
         String studentQ  = lowerOrNull(params.get("student"));
-        String statusQ   = trimToNull(params.get("status"));      // Present|Absent
-        String hasFbQ    = trimToNull(params.get("hasFeedback")); // yes|no
+        String statusQ   = trimToNull(params.get("status"));
+        String hasFbQ    = trimToNull(params.get("hasFeedback"));
 
-        // Collect offerings across window (dedup)
         Map<Integer, RDCourseOffering> offeringById = new LinkedHashMap<>();
         for (LocalDate d : daysBetween(window.start, window.end)) {
             List<RDCourseOffering> dayOfferings =
@@ -351,27 +319,21 @@ public class RDUserController {
                                             .orElse(LocalTime.MIN)
         ));
 
-
-
         Map<Integer, List<RDUser>> enrolledStudentsMap = new HashMap<>();
         Map<Integer, List<RDCourseSession>> courseSessionsMap = new HashMap<>();
         Map<Integer, Map<Integer, String>> attendanceStatusMap = new HashMap<>();
         Map<Integer, Map<Integer, Boolean>> trackingStatusMap = new HashMap<>();
         Map<Integer, Map<Integer, String>> trackingFeedbackMap = new HashMap<>();
         Map<Integer, Map<Integer, Integer>> trackingSessionMap = new HashMap<>();
-        Map<Integer, Map<Integer, String>> trackingSessionTitleMap = new HashMap<>();
-
         int resultCount = 0;
 
         for (RDCourseOffering offering : offerings) {
             int offeringId = offering.getCourseOfferingId();
 
-            // sessions (for dropdown)
             List<RDCourseSession> sessions = safeList(
                 courseSessionService.getCourseSessionsByCourseOfferingId(offeringId));
             courseSessionsMap.put(offeringId, sessions);
 
-            // students
             List<RDUser> studentsAll = safeList(userService.getEnrolledStudents(offeringId))
                     .stream().filter(Objects::nonNull).distinct().collect(Collectors.toList());
 
@@ -384,7 +346,6 @@ public class RDUserController {
             for (RDUser stu : studentsAll) {
                 int sid = stu.getUserID();
 
-                // optional student filter
                 if (studentQ != null) {
                     String full = (nz(stu.getFirstName()) + " " + nz(stu.getLastName())).toLowerCase(Locale.ROOT);
                     if (!full.contains(studentQ)) continue;
@@ -398,11 +359,9 @@ public class RDUserController {
                 LocalDate latestFbDate = null;
 
                 for (LocalDate d : daysBetween(window.start, window.end)) {
-                    // attendance
                     String status = attendanceService.getAttendanceStatusForStudent(offeringId, sid, d);
                     if ("Present".equalsIgnoreCase(nz(status))) presentAny = true;
 
-                    // tracking
                     if (enrollmentId != null) {
                         RDCourseTracking tr = courseTrackingService.findByEnrollmentAndDate(enrollmentId, d);
                         if (tr != null) {
@@ -421,7 +380,6 @@ public class RDUserController {
                 String finalStatus = presentAny ? "Present" : "Absent";
                 boolean hasFb = !latestFb.isBlank();
 
-                // optional filters
                 if (statusQ != null && !finalStatus.equalsIgnoreCase(statusQ)) continue;
                 if (hasFbQ != null) {
                     boolean wantYes = "yes".equalsIgnoreCase(hasFbQ);
@@ -454,7 +412,7 @@ public class RDUserController {
         model.addAttribute("resultCount", resultCount);
     }
 
-    /* ================== Calendar JSON ================== */
+    /* ================== Calendar JSON (unchanged) ================== */
 
     @GetMapping("/attendance-tracking/calendar")
     @ResponseBody
@@ -517,20 +475,13 @@ public class RDUserController {
 
     private static LocalDate parseDateOr(String val, LocalDate fallback) {
         if (val == null) return fallback;
-        try {
-            return LocalDate.parse(val);
-        } catch (DateTimeParseException e) {
-            return fallback;
-        }
+        try { return LocalDate.parse(val); } catch (DateTimeParseException e) { return fallback; }
     }
 
     private static Iterable<LocalDate> daysBetween(LocalDate start, LocalDate endInclusive) {
         List<LocalDate> days = new ArrayList<>();
         LocalDate d = start;
-        while (!d.isAfter(endInclusive)) {
-            days.add(d);
-            d = d.plusDays(1);
-        }
+        while (!d.isAfter(endInclusive)) { days.add(d); d = d.plusDays(1); }
         return days;
     }
 
@@ -541,9 +492,7 @@ public class RDUserController {
             String ln = (o.getInstructor() != null) ? nz(o.getInstructor().getLastName())  : "";
             String full = (fn + " " + ln).trim().toLowerCase(Locale.ROOT);
             return full.contains(qLower);
-        } catch (Exception e) {
-            return false;
-        }
+        } catch (Exception e) { return false; }
     }
 
     private static boolean matchesOffering(RDCourseOffering o, String qLower) {
@@ -552,9 +501,7 @@ public class RDUserController {
             String name = nz(o.getCourseOfferingName()).toLowerCase(Locale.ROOT);
             String courseName = (o.getCourse() != null) ? nz(o.getCourse().getCourseName()).toLowerCase(Locale.ROOT) : "";
             return name.contains(qLower) || courseName.contains(qLower);
-        } catch (Exception e) {
-            return false;
-        }
+        } catch (Exception e) { return false; }
     }
 
     private static String humanRange(LocalDate start, LocalDate end) {
@@ -564,10 +511,10 @@ public class RDUserController {
     }
 
     private static class DateWindow {
-        final String range;     // day|week|month|custom (sanitized)
-        final LocalDate base;   // base date (dateParam or today)
-        final LocalDate start;  // inclusive
-        final LocalDate end;    // inclusive
+        final String range;
+        final LocalDate base;
+        final LocalDate start;
+        final LocalDate end;
         DateWindow(String range, LocalDate base, LocalDate start, LocalDate end) {
             this.range = range; this.base = base; this.start = start; this.end = end;
         }
@@ -592,18 +539,13 @@ public class RDUserController {
             case "custom": {
                 LocalDate s = parseOrNull(startStr);
                 LocalDate e = parseOrNull(endStr);
-                if (s != null && e != null && !e.isBefore(s)) {
-                    start = s; end = e;
-                } else if (s != null && e == null) {
-                    start = s; end = s;
-                } else if (s == null && e != null) {
-                    start = e; end = e;
-                }
+                if (s != null && e != null && !e.isBefore(s)) { start = s; end = e; }
+                else if (s != null) { start = s; end = s; }
+                else if (e != null) { start = e; end = e; }
                 break;
             }
             case "day":
-            default:
-                range = "day"; // keep base/base
+            default: /* base/base */ break;
         }
         return new DateWindow(range, base, start, end);
     }
@@ -612,6 +554,70 @@ public class RDUserController {
         if (val == null || val.isBlank()) return null;
         try { return LocalDate.parse(val); } catch (DateTimeParseException e) { return null; }
     }
-    
-    
+
+    // ===== Parent scoping helpers =====
+
+    /** Uses your existing service: getStudentEnrollmentByParent(int parentId) */
+    private Set<Integer> getStudentIdsForParent(Integer parentUserId) {
+        if (parentUserId == null) return Collections.emptySet();
+        try {
+            List<RDStudentEnrollment> enr = enrollmentService.getStudentEnrollmentByParent(parentUserId);
+            if (enr == null) return Collections.emptySet();
+            return enr.stream()
+                      .map(e -> e.getStudent() != null ? e.getStudent().getUserID() : null)
+                      .filter(Objects::nonNull)
+                      .collect(Collectors.toCollection(LinkedHashSet::new));
+        } catch (Exception ex) {
+            log.warn("Failed to resolve studentIds for parent {}", parentUserId, ex);
+            return Collections.emptySet();
+        }
+    }
+
+    /** Returns case-insensitive set of child full names for name-based scoping. */
+    private Set<String> getChildNamesSet(Integer parentUserId) {
+        if (parentUserId == null) return Collections.emptySet();
+        List<RDStudentEnrollment> enr = enrollmentService.getStudentEnrollmentByParent(parentUserId);
+        if (enr == null) return Collections.emptySet();
+        return enr.stream()
+                  .map(RDStudentEnrollment::getStudent)
+                  .filter(Objects::nonNull)
+                  .map(u -> (nz(u.getFirstName()) + " " + nz(u.getLastName())).trim().toLowerCase(Locale.ROOT))
+                  .filter(s -> !s.isBlank())
+                  .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    /** Populates a readable CSV for the parent badge. */
+    private String getChildNamesCsv(Integer parentUserId) {
+        if (parentUserId == null) return "";
+        List<RDStudentEnrollment> enr = enrollmentService.getStudentEnrollmentByParent(parentUserId);
+        if (enr == null) return "";
+        return enr.stream()
+                  .map(RDStudentEnrollment::getStudent)
+                  .filter(Objects::nonNull)
+                  .map(u -> (nz(u.getFirstName()) + " " + nz(u.getLastName())).trim())
+                  .filter(s -> !s.isBlank())
+                  .distinct()
+                  .collect(Collectors.joining(", "));
+    }
+
+    // ===== Admin ticket stats helper (unchanged from your version) =====
+    private void addAdminTicketStats(HttpSession session, Model model) {
+        RDUser me = (RDUser) session.getAttribute("rdUser");
+        if (me == null) return;
+        int pid = me.getProfile_id();
+        boolean isAdmin =
+            pid == RDUser.profileType.SUPER_ADMIN.getValue()
+         || pid == RDUser.profileType.ROBO_ADMIN.getValue()
+         || pid == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue();
+
+        if (!isAdmin) return;
+
+        Map<String, Integer> ticketStats = new HashMap<>();
+        ticketStats.put("open",        ticketService.countScoped("OPEN",        null, null, null, false));
+        ticketStats.put("inProgress",  ticketService.countScoped("IN_PROGRESS", null, null, null, false));
+        ticketStats.put("resolved",    ticketService.countScoped("RESOLVED",    null, null, null, false));
+        ticketStats.put("closed",      ticketService.countScoped("CLOSED",      null, null, null, false));
+
+        model.addAttribute("ticketStats", ticketStats);
+    }
 }

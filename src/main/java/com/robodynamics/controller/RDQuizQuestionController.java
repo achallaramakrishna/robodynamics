@@ -120,7 +120,16 @@ public class RDQuizQuestionController {
         return response;
     }
 
+    @GetMapping("/manageMedia")   // GET /robodynamics/quizquestions/manageMedia
+    public String manageMedia(Model model) {
+        // TODO: replace with real service call
+        List<RDCourse> courses = courseService.getRDCourses();
+        model.addAttribute("courses", courses != null ? courses : java.util.Collections.emptyList());
 
+        model.addAttribute("mediaList", java.util.Collections.emptyList());
+        return "quizquestions/quizMediaManager"; // resolves to /WEB-INF/views/quizMediaManager.jsp
+    } 
+    
     @GetMapping("/listQuizQuestions")
     public String listQuizQuestions(@RequestParam(value = "page", defaultValue = "0") int page,
                                     @RequestParam(value = "size", defaultValue = "10") int size,

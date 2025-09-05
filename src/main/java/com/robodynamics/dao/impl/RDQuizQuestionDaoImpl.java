@@ -1,7 +1,9 @@
 package com.robodynamics.dao.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -298,6 +300,127 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
 
 	    return questions;
 	}
+
+	    @Override
+	    public List<RDQuizQuestion> findByFilters(Integer courseId,
+	                                              Integer sessionId,
+	                                              Integer sessionDetailId,
+	                                              Integer quizId,
+	                                              int limit,
+	                                              int offset) {
+
+	        // Build dynamic HQL with minimal joins depending on filters
+	        StringBuilder hql = new StringBuilder();
+	        Map<String, Object> params = new HashMap<>();
+
+	        if (quizId != null) {
+	            // via mapping table RDQuizQuestionMap (assumes entity name RDQuizQuestionMap with fields: quiz, question)
+	            hql.append("select distinct q from RDQuizQuestion q ")
+	               .append(" join RDQuizQuestionMap m on m.question.questionId = q.questionId ")
+	               .append(" where m.quiz.quizId = :quizId ");
+	            params.put("quizId", quizId);
+
+	            // You can still narrow further by session/sessionDetail/course if you want:
+	            if (sessionDetailId != null) {
+	                hql.append(" and q.courseSessionDetail.courseSessionDetailId = :sdid ");
+	                params.put("sdid", sessionDetailId);
+	            } else if (sessionId != null) {
+	                hql.append(" and q.courseSession.courseSessionId = :sid ");
+	                params.put("sid", sessionId);
+	            } else if (courseId != null) {
+	                hql.append(" and q.courseSession.course.courseId = :cid ");
+	                params.put("cid", courseId);
+	            }
+	        } else if (sessionDetailId != null) {
+	            hql.append("select q from RDQuizQuestion q ")
+	               .append(" where q.courseSessionDetail.courseSessionDetailId = :sdid ");
+	            params.put("sdid", sessionDetailId);
+	        } else if (sessionId != null) {
+	            hql.append("select q from RDQuizQuestion q ")
+	               .append(" where q.courseSession.courseSessionId = :sid ");
+	            params.put("sid", sessionId);
+	        } else if (courseId != null) {
+	            // need a join to access course.id safely if your mapping is q.courseSession.course
+	            hql.append("select q from RDQuizQuestion q ")
+	               .append(" join q.courseSession cs ")
+	               .append(" join cs.course c ")
+	               .append(" where c.courseId = :cid ");
+	            params.put("cid", courseId);
+	        } else {
+	            // no filters → return something sensible (or empty)
+	            hql.append("select q from RDQuizQuestion q ");
+	        }
+
+	        hql.append(" order by q.questionId desc ");
+		    Session session = factory.getCurrentSession();
+		    
+	        Query<RDQuizQuestion> query = session.createQuery(hql.toString(), RDQuizQuestion.class);
+	        params.forEach(query::setParameter);
+
+	        if (limit > 0) {
+	            query.setFirstResult(Math.max(0, offset));
+	            query.setMaxResults(limit);
+	        }
+
+	        // EAGER 'options' is already configured in your entity;
+	        // if LAZY, fetch join: "select distinct q from RDQuizQuestion q left join fetch q.options ..."
+	        return query.list();
+	    }
+
+	    @Override
+	    public long countByFilters(Integer courseId,
+	                               Integer sessionId,
+	                               Integer sessionDetailId,
+	                               Integer quizId) {
+
+	        StringBuilder hql = new StringBuilder();
+	        Map<String, Object> params = new HashMap<>();
+
+	        if (quizId != null) {
+	            hql.append("select count(distinct q.questionId) from RDQuizQuestion q ")
+	               .append(" join RDQuizQuestionMap m on m.question.questionId = q.questionId ")
+	               .append(" where m.quiz.quizId = :quizId ");
+	            params.put("quizId", quizId);
+
+	            if (sessionDetailId != null) {
+	                hql.append(" and q.courseSessionDetail.courseSessionDetailId = :sdid ");
+	                params.put("sdid", sessionDetailId);
+	            } else if (sessionId != null) {
+	                hql.append(" and q.courseSession.courseSessionId = :sid ");
+	                params.put("sid", sessionId);
+	            } else if (courseId != null) {
+	                hql.append(" and q.courseSession.course.courseId = :cid ");
+	                params.put("cid", courseId);
+	            }
+	        } else if (sessionDetailId != null) {
+	            hql.append("select count(q.questionId) from RDQuizQuestion q ")
+	               .append(" where q.courseSessionDetail.courseSessionDetailId = :sdid ");
+	            params.put("sdid", sessionDetailId);
+	        } else if (sessionId != null) {
+	            hql.append("select count(q.questionId) from RDQuizQuestion q ")
+	               .append(" where q.courseSession.courseSessionId = :sid ");
+	            params.put("sid", sessionId);
+	        } else if (courseId != null) {
+	            hql.append("select count(q.questionId) from RDQuizQuestion q ")
+	               .append(" join q.courseSession cs ")
+	               .append(" join cs.course c ")
+	               .append(" where c.courseId = :cid ");
+	            params.put("cid", courseId);
+	        } else {
+	            hql.append("select count(q.questionId) from RDQuizQuestion q ");
+	        }
+		    Session session = factory.getCurrentSession();
+
+	        Query<Long> query = session.createQuery(hql.toString(), Long.class);
+	        params.forEach(query::setParameter);
+	        return query.uniqueResult();
+	    }
+
+		@Override
+		public List<RDQuizQuestion> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId,
+				Integer quizId) {
+		    return findByFilters(courseId, sessionId, sessionDetailId, quizId, 0, 0);
+		}
 
 	
     

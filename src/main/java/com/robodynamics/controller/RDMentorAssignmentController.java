@@ -19,6 +19,8 @@ import java.nio.file.Files;
 
 
 import com.robodynamics.dao.RDSessionAssignmentUploadDao;
+import com.robodynamics.dto.RDCourseOfferingDTO;
+import com.robodynamics.dto.StudentLiteDTO;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDSessionAssignmentUpload;
@@ -56,16 +58,42 @@ public class RDMentorAssignmentController {
 
     @GetMapping("/ajax/offerings")
     @ResponseBody
-    public List<RDCourseOffering> getOfferingsByCourse(@RequestParam("courseId") int courseId) {
-        return offeringService.getRDCourseOfferingsListByCourse(courseId);
+    public List<RDCourseOfferingDTO> getOfferingsByCourse(@RequestParam("courseId") int courseId) {
+        List<RDCourseOffering> offerings = offeringService.getRDCourseOfferingsListByCourse(courseId);
+        // Convert entity -> DTO
+        return offerings.stream()
+                .map(o -> new RDCourseOfferingDTO(
+                        o.getCourseOfferingId(),         // entity id
+                        o.getCourseOfferingName(),          // or o.getCourseOfferingName()
+                        o.getStartDate(),
+                        o.getEndDate()
+                ))
+                .toList();
     }
 
     @GetMapping("/ajax/students")
     @ResponseBody
-    public List<RDStudentEnrollment> getStudentsByOffering(@RequestParam("offeringId") int offeringId) {
-        return enrollmentService.getEnrolledStudentsByOfferingId(offeringId);
-    }
+    public List<StudentLiteDTO> getStudentsByOffering(
+            @RequestParam(value="offeringId", required=false) Integer offeringId) {
+        if (offeringId == null) {
+            throw new org.springframework.web.server.ResponseStatusException(
+                org.springframework.http.HttpStatus.BAD_REQUEST, "Missing offeringId");
+        }
 
+        List<RDStudentEnrollment> list = enrollmentService.getEnrolledStudentsByOfferingId(offeringId);
+
+        // Map to unique students (if multiple enrollments per student)
+        return list.stream()
+            .map(e -> e.getStudent())
+            .filter(java.util.Objects::nonNull)
+            .collect(java.util.stream.Collectors.toMap(
+                RDUser::getUserID,
+                s -> new StudentLiteDTO(s.getUserID(), s.getFirstName(), s.getLastName()),
+                (a, b) -> a))  // merge
+            .values()
+            .stream()
+            .toList();
+    }
 
     @GetMapping(params = { "studentId", "courseId" })
     public String showStudentUploads(@RequestParam int studentId,
@@ -121,19 +149,35 @@ public class RDMentorAssignmentController {
     @PostMapping("/upload/grade")
     public String gradeAssignment(@RequestParam("uploadId") int uploadId,
                                   @RequestParam("score") int score,
-                                  @RequestParam(value = "feedback", required = false) String feedback) {
+                                  @RequestParam(value = "feedback", required = false) String feedback,
+                                  @RequestParam(value = "courseId",   required = false) Integer courseId,
+                                  @RequestParam(value = "offeringId", required = false) Integer offeringId,
+                                  @RequestParam(value = "studentId",  required = false) Integer studentId) {
 
         RDSessionAssignmentUpload upload = uploadDao.getUpload(uploadId);
-
-        if (upload != null) {
-            upload.setScore(score);
-            upload.setFeedback(feedback);
-            uploadDao.update(upload);  // Make sure your DAO supports update()
+        if (upload == null) {
+            throw new org.springframework.web.server.ResponseStatusException(
+                org.springframework.http.HttpStatus.NOT_FOUND, "Upload not found");
         }
 
-        // Redirect back to the same page (optional: add courseId and studentId if you want to retain selection)
-        return "redirect:/mentor/uploads?studentId=" + upload.getStudent().getUserID() +
-               "&courseId=" + upload.getSessionDetail().getCourse().getCourseId();
+        upload.setScore(score);
+        upload.setFeedback(feedback);
+        uploadDao.update(upload);
+
+        // Fallbacks if any ID wasn't posted for some reason
+        if (courseId == null && upload.getSessionDetail() != null && upload.getSessionDetail().getCourse() != null) {
+            courseId = upload.getSessionDetail().getCourse().getCourseId();
+        }
+        if (studentId == null && upload.getStudent() != null) {
+            studentId = upload.getStudent().getUserID();
+        }
+        // offeringId may legitimately be null if not modeled — that's okay.
+
+     // Redirect back to the same filtered page
+        return "redirect:/mentor/uploads?courseId=" + courseId +
+               "&offeringId=" + offeringId +
+               "&studentId=" + studentId;
     }
+
 
 }

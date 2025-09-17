@@ -233,6 +233,21 @@ public class RDUserDaoImpl implements RDUserDao {
 	    return query.uniqueResult();
 	}
 
+	@Override
+	public List<RDUser> getAllAdminsAndSuperAdmins() {
+		Session session = factory.getCurrentSession();
+		List<RDUser> rdAdmins = new ArrayList<RDUser>();
+		try {
+			Query<RDUser> query = session.createQuery("from RDUser user where user.profile_id in (1,2)",
+					RDUser.class);
+			rdAdmins = query.getResultList();
+			return rdAdmins;
+		} catch (NoResultException e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
 
 	
 

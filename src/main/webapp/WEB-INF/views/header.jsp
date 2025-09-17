@@ -1,124 +1,208 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@ page isELIgnored="false"%>
-<c:set var="user" value="${sessionScope.rdUser}" />
-<c:set var="userRole" value="${user.profile_id}" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="ISO-8859-1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Robo Dynamics</title>
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="z-index:1030;">
+  <style>
+    .nav-cta .btn { margin-left:.4rem; }
+    .rd-logo { max-height:50px; height:auto; }
+    @media (max-width: 991px){
+      .nav-cta .btn{ margin:.4rem 0 0 0; width:100%; }
+    }
 
-    <!-- Use the full version of jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    
-    <style>
-        /* Navbar Custom Styles */
-        .navbar-custom {
-            background: linear-gradient(to right, #ff007f, #000080);
-        }
+    .rd-mega{min-width:980px; border:0; border-radius:16px; box-shadow:0 16px 48px rgba(0,0,0,.12);}
+    @media (max-width: 991px){ .rd-mega{min-width:100%;} }
 
-        .navbar-custom .navbar-brand img {
-            max-height: 50px;
-        }
+    .rd-mega .rd-card{
+      border:0; border-radius:14px; overflow:hidden; background:#fff;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .rd-mega .rd-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 34px rgba(0,0,0,.12);
+    }
 
-        .navbar-custom .navbar-nav {
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-        }
+    .rd-mega .rd-thumb{ position:relative; aspect-ratio:16/9; background:#f3f5f8; overflow:hidden; }
+    .rd-mega .rd-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .rd-mega .rd-thumb::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.18));
+    }
 
-        .navbar-custom .nav-link {
-            color: #ffffff !important;
-            margin-right: 10px;
-            font-size: 1rem;
-        }
+    .rd-mega .rd-body{ padding:12px 14px 14px; }
+    .rd-mega .rd-kicker{ font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#6c757d; margin-bottom:4px; }
+    .rd-mega .rd-title{ font-weight:700; margin:0 0 4px; color:#1f2937; }
 
-        .navbar-custom .nav-link:hover {
-            color: #dcdcdc !important;
-        }
+    .rd-mega .rd-section-title{ font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; color:#6c757d; margin:4px 0 6px; }
+    .rd-mega .dropdown-item{ border-radius:8px; padding:.4rem .6rem; }
+    .rd-mega .dropdown-item:hover{ background:rgba(0,0,0,.05); }
 
-        .navbar-custom .navbar-toggler {
-            border-color:linear-gradient(to right, #ff007f, #000080);
-        }
+    @media (min-width: 992px){
+      .navbar .dropdown:hover > .dropdown-menu { display:block; }
+    }
+  </style>
 
-        .navbar-custom .navbar-toggler-icon {
-            color: #90007f;
-        }
-
-        .navbar-custom .header-buttons {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-
-        .navbar-custom .header-buttons .btn {
-            margin-left: 10px; /* Space between buttons */
-            width: 100px; /* Ensure buttons have the same width */
-            text-align: center; /* Center text inside the buttons */
-            font-size: 1rem; /* Ensure consistent font size */
-            padding: 10px 0; /* Ensure consistent padding */
-        }
-
-        .btn-outline-primary {
-            color: #ffffff;
-            border-color: #ffffff;
-        }
-
-        .btn-outline-primary:hover {
-            color: #000000;
-            background-color: #ffffff;
-            border-color: #ffffff;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color:  #ff007f;
-        }
-    </style>
-</head>
-<body>
-
-<!-- Header Section -->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/">
-        <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="Robo Dynamics Logo">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center"
+       href="${pageContext.request.contextPath}/"
+       aria-label="Robo Dynamics home">
+       
+      <img src="${pageContext.request.contextPath}/images/logo.jpg"
+           alt="Robo Dynamics"
+           class="me-2 rd-logo"
+           onerror="this.onerror=null; this.replaceWith(document.createTextNode('Image not available'));">
+      <span>Robo Dynamics</span>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/subscription">Membership</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses">Courses</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact/contactus">Contact Us</a></li>
-        </ul>
-    </div>
-    <div class="header-buttons">
-	<c:if test="${not empty user}">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/logout'">Logout</button>
-    </c:if>
-    <c:if test="${ empty user}">
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='${pageContext.request.contextPath}/login'">Login</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/parent/register'">Sign-up</button>
-    </c:if>
-    </div>
-</nav>
 
-<!-- Include Bootstrap JS and Popper.js -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-</body>
-</html>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#rdNav"
+            aria-controls="rdNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="rdNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <!-- Courses (mega menu) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="coursesMega" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+          </a>
+
+          <div class="dropdown-menu p-3 rd-mega" aria-labelledby="coursesMega">
+            <!-- Desktop -->
+            <div class="d-none d-lg-block">
+              <div class="row g-3">
+                <!-- Tuition -->
+                <div class="col">
+                  <a class="text-decoration-none" href="${pageContext.request.contextPath}/courses?track=tuition">
+                    <div class="rd-card h-100">
+                      <div class="rd-thumb">
+                        <img src="${pageContext.request.contextPath}/resources/images/mega-tuition.jpg"
+                             alt="Tuition classes for Grades 2–8"
+                             onerror="this.onerror=null; this.replaceWith(document.createTextNode('Image not available'));">
+                      </div>
+                      <div class="rd-body">
+                        <div class="rd-kicker">Core</div>
+                        <h6 class="rd-title mb-0">Tuition (Grades 2–8)</h6>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- Olympiad -->
+                <div class="col">
+                  <a class="text-decoration-none" href="${pageContext.request.contextPath}/olympiads">
+                    <div class="rd-card h-100">
+                      <div class="rd-thumb">
+                        <img src="${pageContext.request.contextPath}/resources/images/mega-olympiad.jpg"
+                             alt="Olympiad preparation"
+                             onerror="this.onerror=null; this.replaceWith(document.createTextNode('Image not available'));">
+                      </div>
+                      <div class="rd-body">
+                        <div class="rd-kicker">Competitive</div>
+                        <h6 class="rd-title mb-0">Olympiad Prep</h6>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- Robotics -->
+                <div class="col">
+                  <a class="text-decoration-none" href="${pageContext.request.contextPath}/robotics">
+                    <div class="rd-card h-100">
+                      <div class="rd-thumb">
+                        <img src="${pageContext.request.contextPath}/resources/images/mega-robotics.jpg"
+                             alt="Robotics and coding for kids"
+                             onerror="this.onerror=null; this.replaceWith(document.createTextNode('Image not available'));">
+                      </div>
+                      <div class="rd-body">
+                        <div class="rd-kicker">Future Skills</div>
+                        <h6 class="rd-title mb-0">Robotics & Coding</h6>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="d-lg-none">
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="rd-section-title">Core Tuition (G2–G8)</div>
+                  <ul class="list-unstyled mb-3 small">
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/tuition/maths">Maths Tuition</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/tuition/science">Science Tuition</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/tuition/english">English Tuition</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/tuition/kannada">Kannada Tuition</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/tuition/hindi">Hindi Tuition</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/tuition/schedule">Batches & Schedule</a></li>
+                  </ul>
+                </div>
+
+                <div class="col-12">
+                  <div class="rd-section-title">Olympiad</div>
+                  <ul class="list-unstyled mb-3 small">
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/olympiads/maths">Math Olympiad</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/olympiads/science">Science Olympiad</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/olympiads/english">English Olympiad</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/olympiads/schedule">Schedule</a></li>
+                  </ul>
+                </div>
+
+                <div class="col-12">
+                  <div class="rd-section-title">Future Skills</div>
+                  <ul class="list-unstyled mb-0 small">
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/robotics/arduino">Robotics with Arduino</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/robotics/esp32">ESP32 Projects</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/robotics/raspberrypi">Raspberry Pi & Sensors</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/coding/scratch">Scratch</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/coding/python">Python Basics</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/coding/web">Web Development</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- Conditional Notification Bell for Admin and Mentor -->
+        <c:choose>
+          <c:when test="${rdUser.profile_id == 1 or rdUser.profile_id == 2 or rdUser.profile_id == 3}"> <!-- Admin or Mentor -->
+            <li class="nav-item ms-2">
+              <a class="nav-link position-relative" href="${pageContext.request.contextPath}/manager/notifications">
+                <i class="bi bi-bell" style="font-size: 1.5rem;"></i>
+                <c:if test="${unreadNotifications > 0}">
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    ${unreadNotifications}
+                  </span>
+                </c:if>
+              </a>
+            </li>
+          </c:when>
+        </c:choose>
+        
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mentors">Mentors</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/pricing">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a></li>
+
+        <!-- Auth -->
+        <li class="nav-item nav-cta ms-lg-2">
+          <c:choose>
+            <c:when test="${not empty sessionScope.rdUser}">
+              <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
+            </c:when>
+            <c:otherwise>
+              <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/login">Sign In</a>
+<%--               <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/mentors/signup">Teach with Us</a>
+ --%>            </c:otherwise>
+          </c:choose>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -2,6 +2,7 @@ package com.robodynamics.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	 @Autowired
 	 private RDVisitorInterceptor rdVisitorInterceptor;
+	 
+	 @Value("${rd.session.materials.base:/opt/robodynamics/session_materials}")
+	 private String materialsBase;
+	 
 	 
     public void configureViewResolvers(ViewResolverRegistry registry) {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -46,6 +51,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/images/**").addResourceLocations("/resources/assets/images/");
         registry.addResourceHandler("/assets/audios/**").addResourceLocations("/resources/assets/audios/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        
+        registry.addResourceHandler("/session_materials/**")
+        .addResourceLocations("file:" + materialsBase + "/");
+        
+        
         registry.addResourceHandler("/uploads/**")
         // NOTE the trailing slash is important
         .addResourceLocations("file:/opt/robodynamics/uploads/")

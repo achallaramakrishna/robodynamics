@@ -136,6 +136,13 @@ public class RDUserServiceImpl implements RDUserService {
 		
 		return rdUserDao.registerRDUser(u);
 	}
+
+	@Override
+	@Transactional
+	public List<RDUser> getAllAdminsAndSuperAdmins() {
+		// TODO Auto-generated method stub
+		return rdUserDao.getAllAdminsAndSuperAdmins();
+	}
 	
 	
 

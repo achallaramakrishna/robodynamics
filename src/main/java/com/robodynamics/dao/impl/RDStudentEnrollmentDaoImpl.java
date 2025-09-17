@@ -126,7 +126,9 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 
 	@Override
 	public List<RDStudentEnrollment> getEnrolledStudentsByOfferingId(int courseOfferingId) {
-		String hql = "FROM RDStudentEnrollment e WHERE e.courseOffering.courseOfferingId = :courseOfferingId";
+		//String hql = "FROM RDStudentEnrollment e WHERE e.courseOffering.courseOfferingId = :courseOfferingId";
+		
+		String hql = "select e from RDStudentEnrollment e join fetch e.student s where e.courseOffering.courseOfferingId = :courseOfferingId";
 		return factory.getCurrentSession().createQuery(hql, RDStudentEnrollment.class)
 				.setParameter("courseOfferingId", courseOfferingId).getResultList();
 	}

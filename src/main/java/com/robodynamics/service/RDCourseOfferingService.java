@@ -3,6 +3,7 @@ package com.robodynamics.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
@@ -22,7 +23,7 @@ public interface RDCourseOfferingService {
 	
 	public RDCourseOffering getOnlineCourseOffering(int courseId);
 	
-	 List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
+	public List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
 
 	public void deleteCourseOffering(int courseOfferingId);
 
@@ -46,6 +47,8 @@ public interface RDCourseOfferingService {
 
     List<RDCourseOffering> getCourseOfferingsOverlapping(LocalDate from, LocalDate to);
     List<RDCourseOffering> getCourseOfferingsOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId);
+
+	public List<RDCourseOffering> getRDCourseOfferingsByCourse(int courseId);
 
 
 

@@ -99,20 +99,21 @@ public class RDAdminSearchController {
     }
 
     /**
-     * ✅ Offerings by course (JSON for the offerings dropdown)
+     * ✅ Offeringss by course (JSON for the offerings dropdown)
      */
     @GetMapping(value = "/offerings", produces = "application/json")
     @ResponseBody
     public List<RDCourseOfferingDTO> getOfferingsByCourse(@RequestParam int courseId) {
         List<RDCourseOffering> list = offeringService.getRDCourseOfferingsListByCourse(courseId);
+     // Convert entity -> DTO
         return list.stream()
-            .map(o -> new RDCourseOfferingDTO(
-                o.getCourseOfferingId(),
-                o.getCourseOfferingName(),   // <- changed
-                o.getStartDate(),
-                o.getEndDate()
-            ))
-            .toList();
+                .map(o -> new RDCourseOfferingDTO(
+                        o.getCourseOfferingId(),         // entity id
+                        o.getCourseOfferingName(),          // or o.getCourseOfferingName()
+                        o.getStartDate(),
+                        o.getEndDate()
+                ))
+                .toList();
     }
 
 

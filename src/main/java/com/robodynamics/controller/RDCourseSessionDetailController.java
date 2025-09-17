@@ -2,6 +2,9 @@ package com.robodynamics.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -10,7 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +67,6 @@ public class RDCourseSessionDetailController {
     @Autowired
     private RDCourseSessionDetailService courseSessionDetailService;  // Service to manage course session details
 
-   // private static final String UPLOAD_DIR = "c:\\coursedata\\";
 
 
     @Autowired
@@ -86,6 +93,76 @@ public class RDCourseSessionDetailController {
     @Autowired
     private RDStudentEnrollmentService enrollmentService;
     
+    @Value("${rd.session.materials.base:/opt/robodynamics/session_materials}")
+    private String materialsBase;
+   
+   /** Filesystem folder: /opt/robodynamics/session_materials/{courseId}/ */
+   private Path courseFolder(int courseId) {
+       return Paths.get(materialsBase, String.valueOf(courseId));
+   }
+
+   /** Public URL: /session_materials/{courseId}/{filename}  (served via ResourceHandler) */
+   private String publicUrl(int courseId, String filename) {
+       return "/session_materials/" + courseId + "/" + filename;
+   }
+    
+   @PostMapping("/uploadFile")
+   public String uploadSessionDetailFile(@RequestParam("courseSessionDetailId") int detailId,
+                                         @RequestParam("courseId") int courseId,
+                                         @RequestParam("file") MultipartFile file,
+                                         RedirectAttributes ra) {
+       if (file == null || file.isEmpty()) {
+           ra.addFlashAttribute("error", "Please choose a file to upload.");
+           return "redirect:/sessiondetail/list?courseId=" + courseId;
+       }
+
+       RDCourseSessionDetail detail = courseSessionDetailService.getRDCourseSessionDetail(detailId);
+       if (detail == null) {
+           ra.addFlashAttribute("error", "Invalid session detail.");
+           return "redirect:/sessiondetail/list?courseId=" + courseId;
+       }
+
+       try {
+           // 1) ensure folder exists
+           Path folder = courseFolder(courseId);
+           Files.createDirectories(folder);
+
+           // 2) sanitize name, prefix with detailId to reduce collisions
+           String original = StringUtils.cleanPath(file.getOriginalFilename());
+           if (original.isEmpty()) {
+               ra.addFlashAttribute("error", "Invalid file name.");
+               return "redirect:/sessiondetail/list?courseId=" + courseId;
+           }
+
+           String safeName = detailId + "_" + original;
+           Path target = folder.resolve(safeName);
+
+           // if exists, append timestamp
+           if (Files.exists(target)) {
+               String ext = "";
+               int dot = safeName.lastIndexOf('.');
+               if (dot >= 0) ext = safeName.substring(dot);
+               String base = (dot >= 0) ? safeName.substring(0, dot) : safeName;
+               safeName = base + "_" + System.currentTimeMillis() + ext;
+               target = folder.resolve(safeName);
+           }
+
+           // 3) persist bytes
+           file.transferTo(target.toFile());
+
+           // 4) save public URL into DB so UI can link it
+           detail.setFile(publicUrl(courseId, safeName));
+           courseSessionDetailService.saveRDCourseSessionDetail(detail);
+
+           ra.addFlashAttribute("message", "File uploaded successfully.");
+       } catch (Exception e) {
+           e.printStackTrace();
+           ra.addFlashAttribute("error", "Upload failed: " + e.getMessage());
+       }
+
+       return "redirect:/sessiondetail/list?courseId=" + courseId;
+   }
+   
     @GetMapping("/list")
     public String listCourseSessionDetails(@RequestParam(required = false) Integer courseId, Model model) {
         List<RDCourseSessionDetail> courseSessionDetails = null;
@@ -121,37 +198,72 @@ public class RDCourseSessionDetailController {
     @GetMapping("/getCourseSessions")
     @ResponseBody
     public Map<String, Object> getCourseSessions(@RequestParam("courseId") int courseId) {
-        List<RDCourseSession> courseSessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+        List<RDCourseSession> sessions = courseSessionService.getCourseSessionsByCourseId(courseId);
+
+        // Tiny DTO avoids Jackson recursion + keeps payload small
+        record SessionLite(int sessionId, String sessionTitle) {}
+
+        List<SessionLite> dto = sessions.stream()
+            .map(s -> new SessionLite(
+                // IMPORTANT: map your actual PK field here.
+                // If your entity uses `getCourseSessionId()`, still send it as `sessionId` to match the JS.
+                s.getCourseSessionId(),
+                s.getSessionTitle()
+            ))
+            .collect(Collectors.toList());
+
         Map<String, Object> response = new HashMap<>();
-        response.put("courseSessions", courseSessions);
+        response.put("courseSessions", dto);
         return response;
     }
     
 
     @GetMapping("/add")
     public String showAddForm(@RequestParam("courseId") int courseId,
-                              @RequestParam("courseSessionId") int courseSessionId,
+            @RequestParam(value = "courseSessionId", required = false) Integer courseSessionId,
                               Model model) {
-        RDCourseSessionDetail courseSessionDetail = new RDCourseSessionDetail();
-        model.addAttribute("courseId", courseId);
-        model.addAttribute("courseSessionId", courseSessionId);
-        model.addAttribute("courseSessionDetail", courseSessionDetail);
+    	
+    	 // populate course list for the dropdown
+        List<RDCourse> courses = courseService.getRDCourses();
+        model.addAttribute("courses", courses);
+        
+        RDCourseSessionDetail detail  = new RDCourseSessionDetail();
+        // **critical**: ids used by JSP + JS
+        model.addAttribute("selectedCourseId", courseId);
+        model.addAttribute("selectedCourseSessionId", courseSessionId != null ? courseSessionId : 0);
+        model.addAttribute("courseSessionDetail", detail);
+        
+     // (nice to have) also share the selected course for showing its name/banner
+        try {
+            RDCourse selectedCourse = courseService.getRDCourse(courseId); // add this in your service if not present
+            model.addAttribute("selectedCourse", selectedCourse);
+        } catch (Exception ignore) {}
+
         return "coursesessiondetails/addEditCourseSessionDetail";
     }
 
     @GetMapping("/edit")
-    public String showEditForm(@RequestParam("courseSessionDetailId") int courseSessionDetailId, Model model) {
-        RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
-        if (courseSessionDetail == null) {
+    public String showEditForm(@RequestParam("courseSessionDetailId") int courseSessionDetailId,
+                               Model model) {
+        RDCourseSessionDetail detail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
+        if (detail == null) {
             model.addAttribute("error", "Course session detail not found.");
             return "redirect:/sessiondetail/list";
         }
-        System.out.println("Session Detail id - " + courseSessionDetail.getSessionDetailId());
-        List<RDCourse> courses = courseService.getRDCourses();
-        model.addAttribute("courses", courses);
-        model.addAttribute("courseSessionDetail", courseSessionDetail);
+
+        model.addAttribute("courseSessionDetail", detail);
+        model.addAttribute("courses", courseService.getRDCourses());
+
+        // **critical**: derive preselected ids from the entity
+        Integer selectedCourseId = (detail.getCourse() != null) ? detail.getCourse().getCourseId() : 0;
+        Integer selectedCourseSessionId = (detail.getCourseSession() != null) ? detail.getCourseSession().getCourseSessionId() : 0;
+
+        model.addAttribute("selectedCourseId", selectedCourseId);
+        model.addAttribute("selectedCourseSessionId", selectedCourseSessionId);
+
         return "coursesessiondetails/addEditCourseSessionDetail";
     }
+
 
     @PostMapping("/save")
     public String saveCourseSessionDetail(@ModelAttribute("courseSessionDetail") RDCourseSessionDetail courseSessionDetail,

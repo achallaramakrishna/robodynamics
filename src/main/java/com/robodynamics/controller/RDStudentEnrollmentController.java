@@ -151,7 +151,7 @@ public class RDStudentEnrollmentController {
 
 	    // 2) Filter offerings by course
 	    List<RDCourseOffering> courseOfferings =
-	            courseOfferingService.getRDCourseOfferingsListByCourse(courseId); // 👈 add this in service/DAO
+	            courseOfferingService.getRDCourseOfferingsByCourse(courseId); // 👈 add this in service/DAO
 	    model.addAttribute("courseOfferings", courseOfferings);
 
 	    // 3) Parent’s children

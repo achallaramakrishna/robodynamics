@@ -1,15 +1,16 @@
 package com.robodynamics.controller;
 
-
 import com.robodynamics.service.RDBlogPostService;
 import com.robodynamics.service.RDCollectionService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDDemoService;
 import com.robodynamics.service.RDMentorService;
 import com.robodynamics.service.RDTestimonialService;
-import com.robodynamics.model.RDCourse;
+import com.robodynamics.service.RDLeadService;
 
+import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDDemo;
+import com.robodynamics.model.RDLead;
 import com.robodynamics.dto.RDMentorDTO;
 import com.robodynamics.model.RDBlogPost;
 import com.robodynamics.model.RDCollection;
@@ -18,77 +19,228 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
 public class RDHomeController {
 
-    @Autowired
-    private RDCourseService courseService;
+    @Autowired private RDCourseService courseService;
+    @Autowired private RDMentorService mentorService;
+    @Autowired private RDCollectionService collectionService;
+    @Autowired private RDDemoService demoService;
+    @Autowired private RDBlogPostService blogPostService;
+    @Autowired private RDTestimonialService testimonialService;
 
-    @Autowired
-    private RDMentorService mentorService;
-
-    @Autowired
-    private RDCollectionService collectionService;
-
-    @Autowired
-    private RDDemoService demoService;
-
-    @Autowired
-    private RDBlogPostService blogPostService;
-    
-    @Autowired
-    private RDTestimonialService testimonialService;
-
+    @Autowired(required = false)
+    private RDLeadService leadService; // optional wire; controller won’t crash if not present
 
     @GetMapping({ "/", "/home" })
     public String home(@RequestParam(value = "viewer", required = false) String viewer,
-                       @RequestParam(value = "q", required = false) String q, Model model, HttpServletRequest req) {
+                       @RequestParam(value = "q", required = false) String q,
+                       Model model, HttpServletRequest req) {
 
-        // 1) viewer toggle
-        if (viewer == null || viewer.isBlank()) {
-            viewer = "parent"; // Default viewer to "parent" if not provided
-        }
+        // 0) A/B variant for copy/CTA (server-side 50/50)
+        boolean abVariantB = ThreadLocalRandom.current().nextBoolean();
+        model.addAttribute("ab_variant", abVariantB ? "B" : "A");
+
+        // 1) viewer toggle (default parent)
+        if (viewer == null || viewer.isBlank()) viewer = "parent";
         model.addAttribute("viewer", viewer);
 
-        // 2) Fetch collections from the database
-        List<RDCollection> collections = collectionService.getCollections();  // Returns List<Collection>
+        // 2) Collections
+        List<RDCollection> collections = safe(() -> collectionService.getCollections());
         model.addAttribute("collections", collections);
 
-        // 3) Fetch trending courses from the database
-        List<RDCourse> trendingCourses = courseService.getTrendingCourses();  // Returns List<RDCourse>
-        model.addAttribute("trendingCourses", trendingCourses);
+        // 3) Featured / trending courses
+        List<RDCourse> trendingCourses = safe(() -> courseService.getTrendingCourses());
+        model.addAttribute("featuredCourses", trendingCourses); // aligns with JSP’s expected attribute
 
-        // 4) Needs mentors (only shown if viewer == mentor)
-        if ("mentor".equals(viewer)) {
-            List<RDCourse> needMentors = courseService.getCoursesNeedingMentors();  // Fetch courses needing mentors
+        // 4) Needs mentors widget
+        if ("mentor".equalsIgnoreCase(viewer)) {
+            List<RDCourse> needMentors = safe(() -> courseService.getCoursesNeedingMentors());
             model.addAttribute("coursesNeedingMentors", needMentors);
         }
 
-        // 5) Fetch mentor spotlight from the database
-        List<RDMentorDTO> teachers = mentorService.getFeaturedMentors();  // Returns List<Mentor>
+        // 5) Mentor spotlight
+        List<RDMentorDTO> teachers = safe(() -> mentorService.getFeaturedMentors());
         model.addAttribute("featuredTeachers", teachers);
 
-        // 6) Fetch upcoming demos from the database
-        List<RDDemo> demos = demoService.getUpcomingDemos();  // Returns List<RDDemo>
+        // 6) Upcoming demos
+        List<RDDemo> demos = safe(() -> demoService.getUpcomingDemos());
         model.addAttribute("upcomingDemos", demos);
 
-        // 7) Fetch blog posts from the database
-        List<RDBlogPost> posts = blogPostService.getBlogPosts();  // Returns List<RDBlogPost>
+        // 7) Blog posts
+        List<RDBlogPost> posts = safe(() -> blogPostService.getBlogPosts());
         model.addAttribute("blogPosts", posts);
 
-        // Optional: echo query for search box
-        if (q != null) {
-            req.setAttribute("q", q);
-        }
-        
+        // 8) Testimonials
         if (testimonialService != null) {
-            model.addAttribute("testimonials", testimonialService.latest(6));
+            model.addAttribute("testimonials", safe(() -> testimonialService.latest(6)));
         }
 
-        // Return the home page JSP
-        return "home"; // Resolves to /WEB-INF/views/home.jsp
+        // Echo search query if present
+        if (q != null) req.setAttribute("q", q);
+
+        return "home"; // /WEB-INF/views/home.jsp
+    }
+
+    // ---------------------------
+    // Lead capture → parents demo (prefilled) → thank-you
+    // ---------------------------
+
+    @PostMapping("/leads")
+    public String captureLead(@ModelAttribute LeadForm form,
+                              HttpServletRequest req,
+                              Model model) {
+
+        // 1) Light validation
+        if (isBlank(form.getName()) || isBlank(form.getPhone()) || isBlank(form.getAudience())) {
+            model.addAttribute("error", "Please share your name, WhatsApp number and choose audience.");
+            return "redirect:/home#lead";
+        }
+
+        // 2) Normalize audience to allowed values
+        final String audience = normalizeAudience(form.getAudience()); // "parent" | "mentor"
+
+        // 3) UTM passthrough
+        final String utmSource   = nvl(req.getParameter("utm_source"));
+        final String utmMedium   = nvl(req.getParameter("utm_medium"));
+        final String utmCampaign = nvl(req.getParameter("utm_campaign"));
+
+        // 4) Build enriched message (subjects + grade/board)
+        String enrichedMsg = nvl(form.getMessage());
+        final String grade = nvl(req.getParameter("grade"));
+        final String board = nvl(req.getParameter("board"));
+        if (!grade.isEmpty() || !board.isEmpty()) {
+            final String gb = "Grade: " + (grade.isEmpty() ? "n/a" : grade) +
+                              ", Board: " + (board.isEmpty() ? "n/a" : board);
+            enrichedMsg = enrichedMsg.isEmpty() ? gb : (enrichedMsg + " | " + gb);
+        }
+
+        // 5) Idempotent capture (find-or-create / upsert in service)
+        RDLead saved = null;
+        if (leadService != null) {
+            try {
+            	saved = leadService.capture(
+            		    form.getName().trim(),
+            		    sanitizePhone(form.getPhone()),
+            		    nvl(form.getEmail()),
+            		    audience,
+            		    nvl(form.getSource()),
+            		    utmSource, utmMedium, utmCampaign,
+            		    enrichedMsg
+            		);
+
+            } catch (Exception ignore) { /* don’t block UX */ }
+        }
+
+        // 6) Mentor fast-path
+        if ("mentor".equals(audience)) {
+            return "redirect:/thank-you?audience=mentor&name=" + url(form.getName());
+        }
+
+        // 7) Hand off to /parents/demo with leadId so step-2 updates the same row
+        final Long leadId = (saved != null ? saved.getId() : null);
+
+        final String qp = new StringBuilder()
+            .append("prefill=1")
+            .append("&leadId=").append(leadId == null ? "" : leadId)
+            .append("&audience=").append(url(audience))
+            .append("&parentName=").append(url(form.getName()))
+            .append("&parentPhone=").append(url(form.getPhone()))
+            .append("&parentEmail=").append(url(nvl(form.getEmail())))
+            .append("&subjects=").append(url(nvl(form.getMessage())))
+            .append("&grade=").append(url(grade))
+            .append("&board=").append(url(board))
+            .append("&source=").append(url(nvl(form.getSource())))
+            .append("&utm_source=").append(url(utmSource))
+            .append("&utm_medium=").append(url(utmMedium))
+            .append("&utm_campaign=").append(url(utmCampaign))
+            .toString();
+
+        return "redirect:/parents/demo?" + qp;
+    }
+
+    private static String normalizeAudience(String a) {
+        String v = nvl(a).trim().toLowerCase();
+        if ("parent".equals(v) || "mentor".equals(v)) return v;
+        return "parent"; // default safely
+    }
+
+    private static String sanitizePhone(String p) {
+        if (p == null) return "";
+        String digits = p.replaceAll("\\D", "");
+        // India-style normalizations (optional):
+        if (digits.startsWith("91") && digits.length() == 12) digits = digits.substring(2);
+        if (digits.startsWith("0")  && digits.length() == 11) digits = digits.substring(1);
+        return digits.isEmpty() ? p.trim() : digits;
+    }
+
+
+    @GetMapping("/thank-you")
+    public String thankYou(@RequestParam(value = "audience", required = false) String audience,
+                           @RequestParam(value = "name", required = false) String name,
+                           Model model) {
+        model.addAttribute("audience", Optional.ofNullable(audience).orElse("parent"));
+        model.addAttribute("name", nvl(name));
+        return "thank-you"; // /WEB-INF/views/thank-you.jsp
+    }
+
+    // ---------------------------
+    // Helpers
+    // ---------------------------
+
+    private static boolean isBlank(String s) {
+        return s == null || s.trim().isEmpty();
+    }
+
+    private static String nvl(String s) {
+        return s == null ? "" : s;
+    }
+
+    private static String url(String s) {
+        try {
+            return java.net.URLEncoder.encode(nvl(s), "UTF-8");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private static <T> T safe(SupplierX<T> s) {
+        try { return s.get(); } catch (Exception e) { return null; }
+    }
+
+    @FunctionalInterface
+    private interface SupplierX<T> { T get() throws Exception; }
+
+    // ---------------------------
+    // Lightweight LeadForm
+    // ---------------------------
+
+    public static class LeadForm {
+        @NotBlank private String name;
+        @NotBlank private String phone;
+        @NotBlank private String audience; // "parent" | "mentor"
+        private String email;              // optional (now on home.jsp)
+        private String source;             // e.g., "home_parent_simple"
+        private String message;            // free text (subjects)
+
+        public String getName() { return name; }
+        public void setName(String name) { this.name = name; }
+        public String getPhone() { return phone; }
+        public void setPhone(String phone) { this.phone = phone; }
+        public String getAudience() { return audience; }
+        public void setAudience(String audience) { this.audience = audience; }
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
+        public String getSource() { return source; }
+        public void setSource(String source) { this.source = source; }
+        public String getMessage() { return message; }
+        public void setMessage(String message) { this.message = message; }
     }
 }

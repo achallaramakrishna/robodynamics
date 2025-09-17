@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.robodynamics.dao.RDAssetDao;
 import com.robodynamics.dao.RDAssetTransactionDao;
 import com.robodynamics.dao.RDCourseOfferingDao;
+import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
@@ -145,6 +146,12 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	    java.sql.Date toSql   = (to   == null) ? null : java.sql.Date.valueOf(to);
 	   
 		return rdCourseOfferingDao.getOverlappingByMentor(fromSql,toSql,mentorUserId);
+	}
+
+	@Override
+	public List<RDCourseOffering> getRDCourseOfferingsByCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return rdCourseOfferingDao.getRDCourseOfferingsListByCourse(courseId);
 	}
 	
 }

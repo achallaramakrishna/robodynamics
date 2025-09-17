@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseOfferingDao;
+import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDUser;
@@ -79,6 +80,8 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
                   .setParameter("courseId", courseId)
                   .getResultList();
     }
+
+
 
     /* ====================== Day-of-week / Daily lookups ====================== */
 

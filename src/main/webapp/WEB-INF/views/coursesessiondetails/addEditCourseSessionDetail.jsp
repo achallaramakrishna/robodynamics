@@ -5,7 +5,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${courseSessionDetail.courseSessionDetailId == null || courseSessionDetail.courseSessionDetailId == 0 ? 'Add' : 'Edit'} Course Session Detail</title>
+  <title>
+    <c:choose>
+      <c:when test="${courseSessionDetail.courseSessionDetailId == null || courseSessionDetail.courseSessionDetailId == 0}">Add</c:when>
+      <c:otherwise>Edit</c:otherwise>
+    </c:choose>
+    Course Session Detail
+  </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,10 +20,16 @@
 <jsp:include page="/header.jsp" />
 
 <div class="container mt-5">
-  <h1 class="mb-3">${courseSessionDetail.courseSessionDetailId == null || courseSessionDetail.courseSessionDetailId == 0 ? 'Add' : 'Edit'} Course Session Detail</h1>
+  <h1 class="mb-3">
+    <c:choose>
+      <c:when test="${courseSessionDetail.courseSessionDetailId == null || courseSessionDetail.courseSessionDetailId == 0}">Add</c:when>
+      <c:otherwise>Edit</c:otherwise>
+    </c:choose>
+    Course Session Detail
+  </h1>
 
-  <c:if test="${not empty message}"><div class="alert alert-success">${message}</div></c:if>
-  <c:if test="${not empty error}"><div class="alert alert-danger">${error}</div></c:if>
+  <c:if test="${not empty message}"><div class="alert alert-success"><c:out value="${message}"/></div></c:if>
+  <c:if test="${not empty error}"><div class="alert alert-danger"><c:out value="${error}"/></div></c:if>
 
   <f:form action="${pageContext.request.contextPath}/sessiondetail/save" method="post" modelAttribute="courseSessionDetail">
     <!-- PK (for edit) -->
@@ -29,8 +41,8 @@
       <select id="courseSelect" name="course.courseId" class="form-control" required>
         <option value="">-- Select Course --</option>
         <c:forEach var="c" items="${courses}">
-          <option value="${c.courseId}" ${selectedCourseId == c.courseId ? 'selected' : ''}>
-            ${c.courseName}
+          <option value="${c.courseId}" <c:if test="${selectedCourseId == c.courseId}">selected</c:if>>
+            <c:out value="${c.courseName}"/>
           </option>
         </c:forEach>
       </select>
@@ -51,7 +63,7 @@
       <f:textarea path="topic" cssClass="form-control" rows="3" required="true"></f:textarea>
     </div>
 
-    <!-- Business key (keep only if you truly need this editable) -->
+    <!-- Business key (editable only if you truly need it) -->
     <div class="mb-3">
       <f:label path="sessionDetailId" cssClass="form-label">Session Detail Id</f:label>
       <f:input path="sessionDetailId" cssClass="form-control" type="number" required="true"/>
@@ -68,11 +80,11 @@
       <f:label path="type" cssClass="form-label">Type</f:label>
       <f:select path="type" cssClass="form-control">
         <option value="">Select Type</option>
-        <option value="slide" ${courseSessionDetail.type == 'slide' ? 'selected' : ''}>Slide</option>
-        <option value="video" ${courseSessionDetail.type == 'video' ? 'selected' : ''}>Video</option>
-        <option value="pdf" ${courseSessionDetail.type == 'pdf' ? 'selected' : ''}>PDF</option>
-        <option value="document" ${courseSessionDetail.type == 'document' ? 'selected' : ''}>Document</option>
-        <option value="quiz" ${courseSessionDetail.type == 'quiz' ? 'selected' : ''}>Quiz</option>
+        <option value="slide"    <c:if test="${courseSessionDetail.type == 'slide'}">selected</c:if>   >Slide</option>
+        <option value="video"    <c:if test="${courseSessionDetail.type == 'video'}">selected</c:if>   >Video</option>
+        <option value="pdf"      <c:if test="${courseSessionDetail.type == 'pdf'}">selected</c:if>     >PDF</option>
+        <option value="document" <c:if test="${courseSessionDetail.type == 'document'}">selected</c:if>>Document</option>
+        <option value="quiz"     <c:if test="${courseSessionDetail.type == 'quiz'}">selected</c:if>    >Quiz</option>
       </f:select>
     </div>
 
@@ -83,7 +95,11 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-      ${courseSessionDetail.courseSessionDetailId == null || courseSessionDetail.courseSessionDetailId == 0 ? 'Save' : 'Update'} Session Detail
+      <c:choose>
+        <c:when test="${courseSessionDetail.courseSessionDetailId == null || courseSessionDetail.courseSessionDetailId == 0}">Save</c:when>
+        <c:otherwise>Update</c:otherwise>
+      </c:choose>
+      Session Detail
     </button>
     <a href="${pageContext.request.contextPath}/sessiondetail/list?courseId=${selectedCourseId != null ? selectedCourseId : 0}" class="btn btn-secondary">Cancel</a>
   </f:form>
@@ -94,35 +110,54 @@
   const ctx = '${pageContext.request.contextPath}';
   const $course = $('#courseSelect');
   const $session = $('#courseSessionSelect');
-  const selectedCourseId = ${selectedCourseId != null ? selectedCourseId : 0};
-  const selectedCourseSessionId = ${selectedCourseSessionId != null ? selectedCourseSessionId : 0};
+
+  // Safely embed numeric defaults
+  const selectedCourseId = Number('${selectedCourseId != null ? selectedCourseId : 0}');
+  const selectedCourseSessionId = Number('${selectedCourseSessionId != null ? selectedCourseSessionId : 0}');
+
+  function setSessions(items, preselectId){
+    let html = '<option value="">-- Select Session --</option>';
+    items.forEach(function(s){
+      const sel = (preselectId && Number(preselectId) === Number(s.sessionId)) ? ' selected' : '';
+      html += '<option value="'+ s.sessionId +'"'+ sel +'>' + s.sessionTitle + '</option>';
+    });
+    $session.html(html);
+    $session.prop('disabled', items.length === 0);
+  }
 
   function loadSessions(courseId, preselectId){
-    if(!courseId){ $session.prop('disabled', true).html('<option value="">-- Select Session --</option>'); return; }
+    if(!courseId){
+      setSessions([], null);
+      return;
+    }
+    // disable while loading
+    $session.prop('disabled', true).html('<option value="">Loading...</option>');
     $.getJSON(ctx + '/sessiondetail/getCourseSessions', { courseId: courseId })
       .done(function(data){
-        const items = data && data.courseSessions ? data.courseSessions : [];
-        let html = '<option value="">-- Select Session --</option>';
-        items.forEach(function(s){
-          // NOTE: DTO uses `sessionId` + `sessionTitle`
-          const sel = (preselectId && preselectId == s.sessionId) ? ' selected' : '';
-          html += '<option value="'+ s.sessionId +'"'+ sel +'>' + s.sessionTitle + '</option>';
-        });
-        $session.html(html).prop('disabled', items.length === 0);
+        const items = (data && Array.isArray(data.courseSessions)) ? data.courseSessions : [];
+        setSessions(items, preselectId);
       })
-      .fail(function(){ 
-        $session.prop('disabled', true).html('<option value="">-- Select Session --</option>');
+      .fail(function(){
+        setSessions([], null);
         alert('Failed to load sessions for the selected course.');
       });
   }
 
   // On page load: if a course is preselected, load sessions and preselect session
   if(selectedCourseId){
+    // make sure the course dropdown visually reflects the selection
+    $course.val(String(selectedCourseId));
     loadSessions(selectedCourseId, selectedCourseSessionId || null);
+  } else {
+    // no course -> keep session disabled
+    setSessions([], null);
   }
 
   // When course changes, reload sessions
-  $course.on('change', function(){ loadSessions($(this).val(), null); });
+  $course.on('change', function(){
+    const cid = $(this).val();
+    loadSessions(cid, null);
+  });
 })();
 </script>
 

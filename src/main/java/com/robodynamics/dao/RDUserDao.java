@@ -39,5 +39,7 @@ public interface RDUserDao {
 
 	public RDUser findByEmail(@Email String email);
 
+	public List<RDUser> getAllAdminsAndSuperAdmins();
+
 
 }

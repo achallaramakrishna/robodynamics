@@ -43,6 +43,8 @@ public interface RDUserService {
 	public RDUser findByEmail(@Email String email);
 
 	public RDUser save(RDUser u);
+	
+	public List<RDUser> getAllAdminsAndSuperAdmins();
 
 
 

@@ -35,12 +35,15 @@ public class RDUserController {
     @Autowired private RDUserService userService;
     @Autowired private RDCourseTrackingService courseTrackingService;
     @Autowired private RDTicketService ticketService;
+    @Autowired private RDNotificationService notificationService;
+    
+    
 
     // Flat (existing) service
     @Autowired private RDAttendanceFlatService attendanceFlatService;
 
     /* ================== Unchanged auth / user endpoints ================== */
-
+    
     @GetMapping("/register")
     public ModelAndView home(Model m) {
         RDUser rdUser = new RDUser();
@@ -145,7 +148,7 @@ public class RDUserController {
         model.addAttribute("rdUser", rdUser);
         return "login";
     }
-
+    
     private String safe(String s) { return s == null ? "" : s.replaceAll("[\\r\\n]", ""); }
 
     @GetMapping("/dashboard")

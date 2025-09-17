@@ -79,101 +79,136 @@
 </style>
 
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-    	console.log("hello 1..");
-    	
-        const courseListItems = document.querySelectorAll('#basicAccordion .list-group-item');
-        courseListItems.forEach(item => {
-            item.addEventListener('click', function () {
-                document.querySelector('.video-container').style.display = 'block';
-            });
-        });
-    });
-    console.log("hello 2..");
-    function loadContent(courseSessionDetailId, enrollmentId) {
-        console.log("hello 7..");
+(function () {
+  // JSP → JS values
+  var ctx = '${pageContext.request.contextPath}';
+  var enrollmentIdServer = '${studentEnrollment.enrollmentId}';
 
-        const contentType = event.target.getAttribute('data-type');
-        const file = event.target.getAttribute('data-file');
-        const quiz = event.target.getAttribute('data-quiz');
-        const details = event.target.getAttribute('data-details');
-        const id = event.target.getAttribute('data-id');
-        const courseId = event.target.getAttribute('data-courseid');
-        const sessionDetailId = event.target.getAttribute('data-id');
-        
-        console.log(contentType + "\t" + file + "\t" + quiz + "\t" + details + "\t" + id);
+  // ---- helpers ----
+  function resolveMaterialPath(file, courseId) {
+    if (!file) return null;
+    var f = String(file).trim();
 
-        if (!contentType) return;
+    // external url
+    if (/^https?:\/\//i.test(f)) return f;
 
-        document.getElementById('course-video').style.display = 'none';
-        document.getElementById('course-pdf').style.display = 'none';
-        document.getElementById('course-quiz').style.display = 'none';
-        document.getElementById('course-fib').style.display = 'none';
-        document.getElementById('course-flashcard').style.display = 'none';
-        document.getElementById('course-assignment').style.display = 'none';
-        document.getElementById('course-matching-game').style.display = 'none';
-
-        if (contentType === 'video') {
-            document.getElementById('course-video').style.display = 'block';
-            document.getElementById('video-source').src = `${pageContext.request.contextPath}/assets/videos/` + file;
-            document.getElementById('course-video').load();
-        } else if (contentType === 'pdf') {
-            document.getElementById('course-pdf').style.display = 'block';
-            const path = `session_materials/` + courseId + `/` + file;
-            console.log('Path - ' + path);
-            document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/mentor/uploads/preview?path=` + path;
-
-       //     document.getElementById('course-pdf').src = `${pageContext.request.contextPath}/assets/pdfs/` + file;
-        } else if (contentType === 'slide') {
-            document.getElementById('course-fib').style.display = 'block';
-            document.getElementById('course-fib').src = `${pageContext.request.contextPath}/sessiondetail/start/` + id + `?enrollmentId=` + enrollmentId;
-        } else if (contentType === 'quiz') {
-            document.getElementById('course-quiz').style.display = 'block';
-            document.getElementById('course-quiz').src = `${pageContext.request.contextPath}/quizzes/start/` + quiz;
-        } else if (contentType === 'flashcard') {
-            document.getElementById('course-flashcard').style.display = 'block';
-            document.getElementById('course-flashcard').src = `${pageContext.request.contextPath}/flashcards/start/` + id;
-        } else if (contentType === 'assignment') {
-            document.getElementById('course-assignment').style.display = 'block';
-            document.getElementById('course-assignment').src = `${pageContext.request.contextPath}/sessiondetail/assignment/start/` + id;
-        } else if (contentType === 'matching-game') {
-            document.getElementById('course-matching-game').style.display = 'block';
-            document.getElementById('course-matching-game').src = `${pageContext.request.contextPath}/matching-game/start/` + id;
-        } 
+    // already a session_materials path? strip leading slash
+    if (/^\/?session_materials\//i.test(f)) {
+      return f.replace(/^\/+/, '');
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const courseListItems = document.querySelectorAll('#course-list li');
-    	console.log("hello 4..");
+    // bare filename -> session_materials/{courseId}/{file}
+    return 'session_materials/' + courseId + '/' + f;
+  }
 
-        courseListItems.forEach(item => {
-        	console.log("hello 5..");
-        	
-            item.addEventListener('click', function (event) {
-            	console.log("hello 6..");
+  function resolveVideoUrl(file, courseId) {
+    if (!file) return null;
+    var f = String(file).trim();
 
-                const courseSessionDetailId = event.target.getAttribute('data-id');
-                const enrollmentId = '${studentEnrollment.enrollmentId}'; // Assuming you already have enrollmentId from the backend
-                
-                console.log(courseSessionDetailId + "\t" + enrollmentId);
-                loadContent(courseSessionDetailId, enrollmentId);
-            });
-        });
-    });
-    
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const content = document.getElementById('content');
+    if (/^https?:\/\//i.test(f)) return f; // external
 
-        if (!sidebar || !content) {
-            console.error('Sidebar or content element not found');
-            return;
-        }
-
-        sidebar.classList.toggle('sidebar-collapsed');
-        content.classList.toggle('content-expanded');
+    if (/^\/?session_materials\//i.test(f)) {
+      return ctx + '/' + f.replace(/^\/+/, '');
     }
+
+    // legacy videos folder fallback
+    return ctx + '/assets/videos/' + f;
+  }
+
+  function hideAll() {
+    ['course-video','course-pdf','course-quiz','course-fib',
+     'course-flashcard','course-assignment','course-matching-game'
+    ].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+
+  // ---- main loader (reads data-* from the clicked <li>) ----
+  function loadContentFromLi(liEl) {
+    var contentType = liEl.getAttribute('data-type');
+    var file        = liEl.getAttribute('data-file') || '';
+    var quiz        = liEl.getAttribute('data-quiz') || '';
+    var id          = liEl.getAttribute('data-id');
+    var courseId    = liEl.getAttribute('data-courseid');
+
+    if (!contentType) return;
+
+    hideAll();
+
+    if (contentType === 'video') {
+      var url = resolveVideoUrl(file, courseId);
+      if (!url) return;
+      var video = document.getElementById('course-video');
+      document.getElementById('video-source').src = url;
+      video.style.display = 'block';
+      video.load();
+
+    } else if (contentType === 'pdf') {
+      var normPath = resolveMaterialPath(file, courseId);
+      if (!normPath) return;
+      var pdf = document.getElementById('course-pdf');
+      pdf.src = /^https?:\/\//i.test(normPath)
+        ? normPath
+        : (ctx + '/mentor/uploads/preview?path=' + encodeURIComponent(normPath));
+      pdf.style.display = 'block';
+
+    } else if (contentType === 'slide') {
+      var fib = document.getElementById('course-fib');
+      fib.src = ctx + '/sessiondetail/start/' + id + '?enrollmentId=' + encodeURIComponent(enrollmentIdServer);
+      fib.style.display = 'block';
+
+    } else if (contentType === 'quiz') {
+      var q = document.getElementById('course-quiz');
+      q.src = ctx + '/quizzes/start/' + quiz;
+      q.style.display = 'block';
+
+    } else if (contentType === 'flashcard') {
+      var fc = document.getElementById('course-flashcard');
+      fc.src = ctx + '/flashcards/start/' + id;
+      fc.style.display = 'block';
+
+    } else if (contentType === 'assignment') {
+      var asn = document.getElementById('course-assignment');
+      asn.src = ctx + '/sessiondetail/assignment/start/' + id;
+      asn.style.display = 'block';
+
+    } else if (contentType === 'matching-game') {
+      var mg = document.getElementById('course-matching-game');
+      mg.src = ctx + '/matching-game/start/' + id;
+      mg.style.display = 'block';
+    }
+  }
+
+  // ---- wiring ----
+  document.addEventListener('DOMContentLoaded', function () {
+    // show the right pane when any content item is clicked
+    document.querySelectorAll('#basicAccordion .list-group-item').forEach(function (li) {
+      li.addEventListener('click', function () {
+        document.querySelector('.video-container').style.display = 'block';
+      });
+    });
+
+    // main click handler on list items (ignore clicks inside forms like assignment upload)
+    document.querySelectorAll('#course-list li.list-group-item').forEach(function (li) {
+      li.addEventListener('click', function (e) {
+        if (e.target && e.target.closest('form')) return; // don't hijack uploads
+        loadContentFromLi(this); // ← pass the LI (no global `event`)
+      });
+    });
+  });
+
+  // expose for your toggle button
+  window.toggleSidebar = function () {
+    var sidebar = document.getElementById('sidebar');
+    var content = document.getElementById('content');
+    if (!sidebar || !content) return;
+    sidebar.classList.toggle('sidebar-collapsed');
+    content.classList.toggle('content-expanded');
+  };
+})();
 </script>
+
 </head>
 <body>
     <jsp:include page="header.jsp" />

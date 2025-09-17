@@ -3,6 +3,7 @@ package com.robodynamics.dao;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDAssetTransaction;
@@ -22,7 +23,8 @@ public interface RDCourseOfferingDao {
 	
     RDCourseOffering getOnlineCourseOffering(int courseId);
     
-	List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
+    List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
+
 
 	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today);
 

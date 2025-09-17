@@ -1,143 +1,56 @@
 package com.robodynamics.dto;
 
-//com.robodynamics.dto.CalendarEventDTO
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Map;
+
+/**
+ * Minimal FC-compatible event payload:
+ *  - top-level: id, title, start, end, color (optional)
+ *  - everything else goes into extendedProps
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CalendarEventDTO {
-	private String id;
-	private String title;
-	private String start; // ISO 8601
-	private String end; // ISO 8601
-	private String color; // optional
 
-	// Extended props for richer UI
-	private String offeringName;
-	private Integer offeringId;
-	private String courseName;
-	private Integer courseId;
-	private String mentorName;
-	private Integer mentorId;
-	private String location;
-	private Integer studentsCount;
-	private String sessionType; // e.g., "Class", "Exam", "Demo"
-	private String notes;
+    @JsonProperty("id")
+    private String id;
 
-	public String getId() {
-		return id;
-	}
+    @JsonProperty("title")
+    private String title;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    /** ISO 8601 "yyyy-MM-dd'T'HH:mm:ss" */
+    @JsonProperty("start")
+    private String start;
 
-	public String getTitle() {
-		return title;
-	}
+    /** ISO 8601 "yyyy-MM-dd'T'HH:mm:ss" */
+    @JsonProperty("end")
+    private String end;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /** Optional FullCalendar color field */
+    @JsonProperty("color")
+    private String color;
 
-	public String getStart() {
-		return start;
-	}
+    /** Arbitrary extras for UI — FC reads them via event.extendedProps */
+    @JsonProperty("extendedProps")
+    private Map<String, Object> extendedProps;
 
-	public void setStart(String start) {
-		this.start = start;
-	}
+    // ---- getters/setters ----
+    public String getId() { return id; }
+    public CalendarEventDTO setId(String id) { this.id = id; return this; }
 
-	public String getEnd() {
-		return end;
-	}
+    public String getTitle() { return title; }
+    public CalendarEventDTO setTitle(String title) { this.title = title; return this; }
 
-	public void setEnd(String end) {
-		this.end = end;
-	}
+    public String getStart() { return start; }
+    public CalendarEventDTO setStart(String start) { this.start = start; return this; }
 
-	public String getColor() {
-		return color;
-	}
+    public String getEnd() { return end; }
+    public CalendarEventDTO setEnd(String end) { this.end = end; return this; }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+    public String getColor() { return color; }
+    public CalendarEventDTO setColor(String color) { this.color = color; return this; }
 
-	public String getOfferingName() {
-		return offeringName;
-	}
-
-	public void setOfferingName(String offeringName) {
-		this.offeringName = offeringName;
-	}
-
-	public Integer getOfferingId() {
-		return offeringId;
-	}
-
-	public void setOfferingId(Integer offeringId) {
-		this.offeringId = offeringId;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public Integer getCourseId() {
-		return courseId;
-	}
-
-	public void setCourseId(Integer courseId) {
-		this.courseId = courseId;
-	}
-
-	public String getMentorName() {
-		return mentorName;
-	}
-
-	public void setMentorName(String mentorName) {
-		this.mentorName = mentorName;
-	}
-
-	public Integer getMentorId() {
-		return mentorId;
-	}
-
-	public void setMentorId(Integer mentorId) {
-		this.mentorId = mentorId;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public Integer getStudentsCount() {
-		return studentsCount;
-	}
-
-	public void setStudentsCount(Integer studentsCount) {
-		this.studentsCount = studentsCount;
-	}
-
-	public String getSessionType() {
-		return sessionType;
-	}
-
-	public void setSessionType(String sessionType) {
-		this.sessionType = sessionType;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
+    public Map<String, Object> getExtendedProps() { return extendedProps; }
+    public CalendarEventDTO setExtendedProps(Map<String, Object> extendedProps) { this.extendedProps = extendedProps; return this; }
 }

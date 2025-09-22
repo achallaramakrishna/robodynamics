@@ -59,7 +59,7 @@ public class RDLeadDaoImpl implements RDLeadDao {
     public void updateStatus(Long id, String status) {
         RDLead l = s().get(RDLead.class, id);
         if (l != null) {
-        	l.setStatus(RDLead.Status.fromDb(status));
+        	l.setStatus(status);
             s().update(l);
         }
     }
@@ -80,7 +80,7 @@ public class RDLeadDaoImpl implements RDLeadDao {
 	}
 	
 	@Override
-	public Optional<RDLead> findByPhoneAndAudience(String phone, RDLead.Audience audience) {
+	public Optional<RDLead> findByPhoneAndAudience(String phone, String audience) {
 	    RDLead l = sessionFactory.getCurrentSession()
 	        .createQuery("from RDLead where phone = :p and audience = :a", RDLead.class)
 	        .setParameter("p", phone)

@@ -97,6 +97,48 @@
       </div>
     </div>
 
+	<!-- Row: Mentor Leads Dashboard -->
+	<div class="row mb-4">
+	    <div class="col-md-6 col-lg-4 mb-4">
+	        <div class="card shadow-sm h-100 text-center">
+	            <div class="card-header bg-success text-white">
+	                <h5 class="mb-0">📋 My Leads</h5>
+	            </div>
+	            <div class="card-body">
+	                <p class="card-text">Leads currently assigned to you for demo scheduling and follow-up.</p>
+	
+	                <!-- Lead stats (set in controller) -->
+	                <c:if test="${not empty mentorLeadStats}">
+	                    <div class="d-flex justify-content-center gap-2 mb-3">
+	                        <span class="badge text-bg-primary">
+	                            Total
+	                            <span class="badge bg-light text-dark ms-1">
+	                                <c:out value="${mentorLeadStats.total != null ? mentorLeadStats.total : 0}"/>
+	                            </span>
+	                        </span>
+	                        <span class="badge text-bg-warning">
+	                            Pending
+	                            <span class="badge bg-light text-dark ms-1">
+	                                <c:out value="${mentorLeadStats.pending != null ? mentorLeadStats.pending : 0}"/>
+	                            </span>
+	                        </span>
+	                        <span class="badge text-bg-success">
+	                            Claimed
+	                            <span class="badge bg-light text-dark ms-1">
+	                                <c:out value="${mentorLeadStats.claimed != null ? mentorLeadStats.claimed : 0}"/>
+	                            </span>
+	                        </span>
+	                    </div>
+	                </c:if>
+	
+	                <div class="d-grid gap-2">
+	                    <a href="${pageContext.request.contextPath}/leads/dashboard" class="btn btn-success">View My Leads</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
     <!-- Row 3: Mentor Ticket Management -->
     <div class="row">
       <div class="col-md-6 col-lg-5 mb-4">

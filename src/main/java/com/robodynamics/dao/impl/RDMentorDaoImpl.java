@@ -102,4 +102,20 @@ public class RDMentorDaoImpl implements RDMentorDao {
     public void update(RDMentor mentor) {
       sessionFactory.getCurrentSession().update(mentor);
     }
+
+	@Override
+	public List<RDMentorDTO> findFeaturedMentors() {
+        // Adjust the constructor args to match YOUR RDMentorDTO constructor
+        return sessionFactory.getCurrentSession().createQuery(
+            "select new com.robodynamics.dto.RDMentorDTO(" +
+            "  m.mentorId, m.fullName, m.city, m.experienceYears, m.linkedinUrl, m.isVerified" +
+            ") " +
+            "from RDMentor m " +
+            "where m.isActive = 1 " +
+            "order by m.isVerified desc, m.updatedAt desc",
+            RDMentorDTO.class
+        )
+        .setMaxResults(8)
+        .getResultList();
+    }
 }

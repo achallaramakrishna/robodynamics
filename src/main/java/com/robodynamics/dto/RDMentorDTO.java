@@ -2,30 +2,33 @@
 package com.robodynamics.dto;
 
 public class RDMentorDTO {
-    private int userId;
+    private int mentorId;
     private String fullName;
-    private String email;
-    private String cellPhone;
-    private boolean active;
-    private long offeringsCount; // optional summary field
+    private String city;
+    private int experienceYears;
+    private String headlineOrPrimarySubjects;
+    private int verifiedOrScore;
 
-    public RDMentorDTO(int userId, String fullName, String email, String cellPhone, boolean active) {
-        this.userId = userId;
+    // 🔧 Constructor Hibernate is expecting (int, String, String, int, String, int)
+    public RDMentorDTO(int mentorId,
+                       String fullName,
+                       String city,
+                       int experienceYears,
+                       String headlineOrPrimarySubjects,
+                       int verifiedOrScore) {
+        this.mentorId = mentorId;
         this.fullName = fullName;
-        this.email = email;
-        this.cellPhone = cellPhone;
-        this.active = active;
+        this.city = city;
+        this.experienceYears = experienceYears;
+        this.headlineOrPrimarySubjects = headlineOrPrimarySubjects;
+        this.verifiedOrScore = verifiedOrScore;
     }
 
-    public RDMentorDTO(int userId, String fullName, String email, String cellPhone, boolean active, long offeringsCount) {
-        this(userId, fullName, email, cellPhone, active);
-        this.offeringsCount = offeringsCount;
-    }
-
-    public int getUserId() { return userId; }
+    // getters (and setters if you need)
+    public int getMentorId() { return mentorId; }
     public String getFullName() { return fullName; }
-    public String getEmail() { return email; }
-    public String getCellPhone() { return cellPhone; }
-    public boolean isActive() { return active; }
-    public long getOfferingsCount() { return offeringsCount; }
+    public String getCity() { return city; }
+    public int getExperienceYears() { return experienceYears; }
+    public String getHeadlineOrPrimarySubjects() { return headlineOrPrimarySubjects; }
+    public int getVerifiedOrScore() { return verifiedOrScore; }
 }

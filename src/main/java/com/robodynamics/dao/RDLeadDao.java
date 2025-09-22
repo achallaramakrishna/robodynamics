@@ -14,7 +14,7 @@ public interface RDLeadDao {
     RDLead saveOrUpdate(RDLead lead);
     
     // NEW: choose based on your uniqueness rule — recommended: (phone, audience)
-    Optional<RDLead> findByPhoneAndAudience(String phone, RDLead.Audience audience);
+    Optional<RDLead> findByPhoneAndAudience(String phone, String audience);
     
     RDLead getLeadById(Long id);
     List<RDLead> getAllLeads();

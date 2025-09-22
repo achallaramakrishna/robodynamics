@@ -13,4 +13,5 @@ public interface RDMentorDao {
 	void update(RDMentor mentor);
     List<RDMentorDTO> findAllMentorsBasic();
     List<RDMentorDTO> findMentorsSummary(); // with offeringsCount
+	List<RDMentorDTO> findFeaturedMentors();
 }

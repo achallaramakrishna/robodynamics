@@ -26,7 +26,15 @@ public class RDLead {
 
 	@Column(length = 160)
 	private String email;
+	
 
+	@Column(length = 160)
+	private String grade;
+	
+	@Column(length = 160)
+	private String board;
+	
+	
 	@Column(nullable = false, length = 10)
 	private String audience; // parent|mentor
 
@@ -50,6 +58,16 @@ public class RDLead {
 
 	@Column(name = "updated_at", insertable = false, updatable = false)
 	private java.sql.Timestamp updatedAt;
+	
+	
+
+	public String getBoard() {
+		return board;
+	}
+
+	public void setBoard(String board) {
+		this.board = board;
+	}
 
 	public enum Audience {
 	    PARENT("parent"),
@@ -213,4 +231,14 @@ public class RDLead {
 		this.updatedAt = updatedAt;
 	}
 
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	
+	
 }

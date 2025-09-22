@@ -5,12 +5,15 @@ import com.robodynamics.service.RDCollectionService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDDemoService;
 import com.robodynamics.service.RDMentorService;
+import com.robodynamics.service.RDSkillService;
 import com.robodynamics.service.RDTestimonialService;
 import com.robodynamics.service.RDLeadService;
-
+import com.robodynamics.service.RDLeadSkillService;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDDemo;
 import com.robodynamics.model.RDLead;
+import com.robodynamics.model.RDLeadSkill;
+import com.robodynamics.model.RDSkill;
 import com.robodynamics.dto.RDMentorDTO;
 import com.robodynamics.model.RDBlogPost;
 import com.robodynamics.model.RDCollection;
@@ -35,9 +38,11 @@ public class RDHomeController {
     @Autowired private RDDemoService demoService;
     @Autowired private RDBlogPostService blogPostService;
     @Autowired private RDTestimonialService testimonialService;
+    
+    @Autowired private RDSkillService skillService;
+    @Autowired private RDLeadSkillService leadSkillService;
 
-    @Autowired(required = false)
-    private RDLeadService leadService; // optional wire; controller won’t crash if not present
+    @Autowired private RDLeadService leadService; // optional wire; controller won’t crash if not present
 
     @GetMapping({ "/", "/home" })
     public String home(@RequestParam(value = "viewer", required = false) String viewer,
@@ -104,48 +109,83 @@ public class RDHomeController {
             return "redirect:/home#lead";
         }
 
-        // 2) Normalize audience to allowed values
+        // 2) Normalize audience
         final String audience = normalizeAudience(form.getAudience()); // "parent" | "mentor"
 
-        // 3) UTM passthrough
+        // 3) UTM passthrough + extras
         final String utmSource   = nvl(req.getParameter("utm_source"));
         final String utmMedium   = nvl(req.getParameter("utm_medium"));
         final String utmCampaign = nvl(req.getParameter("utm_campaign"));
+        final String grade       = nvl(req.getParameter("grade"));
+        final String board       = nvl(req.getParameter("board"));
 
-        // 4) Build enriched message (subjects + grade/board)
-        String enrichedMsg = nvl(form.getMessage());
-        final String grade = nvl(req.getParameter("grade"));
-        final String board = nvl(req.getParameter("board"));
+        // 4) Build enriched message (show-only)
+        String enrichedMsg = "";
+        if (form.getMessage() != null && form.getMessage().length > 0) {
+            enrichedMsg = String.join(",", form.getMessage()); // message is String[]
+        }
         if (!grade.isEmpty() || !board.isEmpty()) {
             final String gb = "Grade: " + (grade.isEmpty() ? "n/a" : grade) +
                               ", Board: " + (board.isEmpty() ? "n/a" : board);
             enrichedMsg = enrichedMsg.isEmpty() ? gb : (enrichedMsg + " | " + gb);
         }
 
-        // 5) Idempotent capture (find-or-create / upsert in service)
+        // 5) Idempotent capture (find-or-create / upsert)
         RDLead saved = null;
-        if (leadService != null) {
-            try {
-            	saved = leadService.capture(
-            		    form.getName().trim(),
-            		    sanitizePhone(form.getPhone()),
-            		    nvl(form.getEmail()),
-            		    audience,
-            		    nvl(form.getSource()),
-            		    utmSource, utmMedium, utmCampaign,
-            		    enrichedMsg
-            		);
+        try {
+            saved = leadService.capture(
+                form.getName().trim(),
+                sanitizePhone(form.getPhone()),
+                nvl(form.getEmail()),
+                audience,
+                nvl(form.getSource()),
+                utmSource, utmMedium, utmCampaign,
+                enrichedMsg,
+                grade,
+                board
+            );
+        } catch (Exception ignore) { /* don’t block UX */ }
 
-            } catch (Exception ignore) { /* don’t block UX */ }
+        // 6) Save lead's subjects (skills) + (if mentor) upsert mentor & mentor skills
+        if (saved != null) {
+            final String[] rawSubjects = form.getMessage(); // comes from multi-select
+            if (rawSubjects != null && rawSubjects.length > 0) {
+                // distinct + clean
+                java.util.Set<String> subjects = java.util.Arrays.stream(rawSubjects)
+                    .filter(s -> s != null && !s.trim().isEmpty())
+                    .map(String::trim)
+                    .map(this::normalizeSubject) // "math" -> "Math"
+                    .collect(java.util.stream.Collectors.toCollection(java.util.LinkedHashSet::new));
+
+                // normalize via rd_skills
+                java.util.List<RDSkill> rdSkills = new java.util.ArrayList<>();
+                java.util.List<Long>    skillIds = new java.util.ArrayList<>();
+                for (String subject : subjects) {
+                    RDSkill skill = skillService.getOrCreateSkill(subject); // CI-unique
+                    rdSkills.add(skill);
+                    skillIds.add(skill.getSkillId());
+                }
+
+                // link to rd_lead_skills (idempotent)
+                leadSkillService.addLeadSkillsIfMissing(saved.getId(), skillIds);
+
+                // if mentor lead: create/update rd_users → rd_mentors → rd_mentor_skills
+                if ("mentor".equals(audience)) {
+                    mentorService.upsertMentorFromLead(saved, rdSkills);
+                    // (Optional) auto-match lead to mentors right now:
+                    // leadMentorService.assignLeadToMentors(saved);
+                }
+            }
         }
 
-        // 6) Mentor fast-path
+        // 7) Fast-path for mentors
         if ("mentor".equals(audience)) {
             return "redirect:/thank-you?audience=mentor&name=" + url(form.getName());
         }
 
-        // 7) Hand off to /parents/demo with leadId so step-2 updates the same row
+        // 8) Hand off to /parents/demo (prefill)
         final Long leadId = (saved != null ? saved.getId() : null);
+        final String subjectsCsv = (form.getMessage() == null ? "" : String.join(",", form.getMessage()));
 
         final String qp = new StringBuilder()
             .append("prefill=1")
@@ -154,7 +194,7 @@ public class RDHomeController {
             .append("&parentName=").append(url(form.getName()))
             .append("&parentPhone=").append(url(form.getPhone()))
             .append("&parentEmail=").append(url(nvl(form.getEmail())))
-            .append("&subjects=").append(url(nvl(form.getMessage())))
+            .append("&subjects=").append(url(subjectsCsv))
             .append("&grade=").append(url(grade))
             .append("&board=").append(url(board))
             .append("&source=").append(url(nvl(form.getSource())))
@@ -166,6 +206,13 @@ public class RDHomeController {
         return "redirect:/parents/demo?" + qp;
     }
 
+
+    private String normalizeSubject(String s) {
+        String t = s.trim().toLowerCase();
+        if (t.isEmpty()) return t;
+        return Character.toUpperCase(t.charAt(0)) + t.substring(1); // "maths" -> "Maths"
+    }
+    
     private static String normalizeAudience(String a) {
         String v = nvl(a).trim().toLowerCase();
         if ("parent".equals(v) || "mentor".equals(v)) return v;
@@ -227,8 +274,9 @@ public class RDHomeController {
         @NotBlank private String phone;
         @NotBlank private String audience; // "parent" | "mentor"
         private String email;              // optional (now on home.jsp)
+        private String grade;
         private String source;             // e.g., "home_parent_simple"
-        private String message;            // free text (subjects)
+        private String[] message;
 
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }
@@ -240,7 +288,20 @@ public class RDHomeController {
         public void setEmail(String email) { this.email = email; }
         public String getSource() { return source; }
         public void setSource(String source) { this.source = source; }
-        public String getMessage() { return message; }
-        public void setMessage(String message) { this.message = message; }
+      
+        
+        public String[] getMessage() {
+			return message;
+		}
+		public void setMessage(String[] message) {
+			this.message = message;
+		}
+		public String getGrade() {
+			return grade;
+		}
+		public void setGrade(String grade) {
+			this.grade = grade;
+		}
+        
     }
 }

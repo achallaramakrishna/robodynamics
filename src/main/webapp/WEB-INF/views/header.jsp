@@ -190,18 +190,21 @@
         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog">Blog</a></li>
         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a></li>
 
+
+        
         <!-- Auth -->
-        <li class="nav-item nav-cta ms-lg-2">
-          <c:choose>
-            <c:when test="${not empty sessionScope.rdUser}">
-              <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
-            </c:when>
-            <c:otherwise>
-              <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/login">Sign In</a>
-<%--               <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/mentors/signup">Teach with Us</a>
- --%>            </c:otherwise>
-          </c:choose>
-        </li>
+		<li class="nav-item nav-cta ms-lg-2">
+		  <c:choose>
+		    <c:when test="${not empty sessionScope.rdUser}">
+		      <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
+		      <a class="btn btn-outline-danger btn-sm ms-2" href="${pageContext.request.contextPath}/logout">Log Out</a>  <!-- Logout Link -->
+		    </c:when>
+		    <c:otherwise>
+		      <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/login">Sign In</a>
+		    </c:otherwise>
+		  </c:choose>
+		</li>
+		        
       </ul>
     </div>
   </div>

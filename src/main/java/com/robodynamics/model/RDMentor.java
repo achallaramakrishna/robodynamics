@@ -4,107 +4,142 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "rd_mentors")
+@Entity @Table(name = "rd_mentors")
 public class RDMentor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "mentor_id")
+    private Integer mentorId;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "mentor_id")
-  private Integer mentorId;
+    @Column(name = "full_name", nullable = false)  private String fullName;
+    @Column(name = "email", nullable = false)      private String email;
+    @Column(name = "mobile", nullable = false)     private String mobile;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id", nullable = false, unique = true)
-  private RDUser user;
+    @Column(name = "city")               private String city;
+    @Column(name = "bio")                private String bio;
+    @Column(name = "experience_years")   private Integer experienceYears;
+    @Column(name = "grade_range")        private String gradeRange;
+    @Column(name = "boards_supported")   private String boardsSupported;
+    @Column(name = "modes")              private String modes;
+    @Column(name = "linkedin_url")       private String linkedinUrl;
+    @Column(name = "is_verified")        private Integer isVerified;
+    @Column(name = "is_active")          private Integer isActive;
 
-  @Column(name = "display_name")
-  private String displayName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")        // FK (ON DELETE SET NULL)
+    private RDUser user;
 
-  @Column(name = "headline")
-  private String headline;
+	public Integer getMentorId() {
+		return mentorId;
+	}
 
-  @Column(name = "bio", columnDefinition = "TEXT")
-  private String bio;
+	public void setMentorId(Integer mentorId) {
+		this.mentorId = mentorId;
+	}
 
-  @Column(name = "years_experience")
-  private BigDecimal yearsExperience;
+	public String getFullName() {
+		return fullName;
+	}
 
-  @Column(name = "hourly_rate_inr")
-  private Integer hourlyRateInr;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-  @Column(name = "city")
-  private String city;
+	public String getEmail() {
+		return email;
+	}
 
-  @Column(name = "area")
-  private String area;
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-  // CSV: "ONLINE,OFFLINE,HOME_VISIT"
-  @Column(name = "teaching_modes")
-  private String teachingModes;
+	public String getMobile() {
+		return mobile;
+	}
 
-  // NEW FIELDS
-  @Column(name = "active", nullable = false)
-  private boolean active = true;               // default true
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-  @Column(name = "verified", nullable = false)
-  private boolean verified = false;            // default false
+	public String getCity() {
+		return city;
+	}
 
-  @Column(name = "created_at", nullable = false, updatable = false)
-  private LocalDateTime createdAt;
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-  @Column(name = "updated_at", nullable = false)
-  private LocalDateTime updatedAt;
+	public String getBio() {
+		return bio;
+	}
 
-  // --- lifecycle hooks for timestamps ---
-  @PrePersist
-  protected void onCreate() {
-    LocalDateTime now = LocalDateTime.now();
-    this.createdAt = now;
-    this.updatedAt = now;
-  }
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
 
-  @PreUpdate
-  protected void onUpdate() {
-    this.updatedAt = LocalDateTime.now();
-  }
+	public Integer getExperienceYears() {
+		return experienceYears;
+	}
 
-  // --- getters/setters ---
-  public Integer getMentorId() { return mentorId; }
-  public void setMentorId(Integer mentorId) { this.mentorId = mentorId; }
+	public void setExperienceYears(Integer experienceYears) {
+		this.experienceYears = experienceYears;
+	}
 
-  public RDUser getUser() { return user; }
-  public void setUser(RDUser user) { this.user = user; }
+	public String getGradeRange() {
+		return gradeRange;
+	}
 
-  public String getDisplayName() { return displayName; }
-  public void setDisplayName(String displayName) { this.displayName = displayName; }
+	public void setGradeRange(String gradeRange) {
+		this.gradeRange = gradeRange;
+	}
 
-  public String getHeadline() { return headline; }
-  public void setHeadline(String headline) { this.headline = headline; }
+	public String getBoardsSupported() {
+		return boardsSupported;
+	}
 
-  public String getBio() { return bio; }
-  public void setBio(String bio) { this.bio = bio; }
+	public void setBoardsSupported(String boardsSupported) {
+		this.boardsSupported = boardsSupported;
+	}
 
-  public BigDecimal getYearsExperience() { return yearsExperience; }
-  public void setYearsExperience(BigDecimal yearsExperience) { this.yearsExperience = yearsExperience; }
+	public String getModes() {
+		return modes;
+	}
 
-  public Integer getHourlyRateInr() { return hourlyRateInr; }
-  public void setHourlyRateInr(Integer hourlyRateInr) { this.hourlyRateInr = hourlyRateInr; }
+	public void setModes(String modes) {
+		this.modes = modes;
+	}
 
-  public String getCity() { return city; }
-  public void setCity(String city) { this.city = city; }
+	public String getLinkedinUrl() {
+		return linkedinUrl;
+	}
 
-  public String getArea() { return area; }
-  public void setArea(String area) { this.area = area; }
+	public void setLinkedinUrl(String linkedinUrl) {
+		this.linkedinUrl = linkedinUrl;
+	}
 
-  public String getTeachingModes() { return teachingModes; }
-  public void setTeachingModes(String teachingModes) { this.teachingModes = teachingModes; }
+	public Integer getIsVerified() {
+		return isVerified;
+	}
 
-  public boolean isActive() { return active; }
-  public void setActive(boolean active) { this.active = active; }
+	public void setIsVerified(Integer isVerified) {
+		this.isVerified = isVerified;
+	}
 
-  public boolean isVerified() { return verified; }
-  public void setVerified(boolean verified) { this.verified = verified; }
+	public Integer getIsActive() {
+		return isActive;
+	}
 
-  public LocalDateTime getCreatedAt() { return createdAt; }
-  public LocalDateTime getUpdatedAt() { return updatedAt; }
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
+
+	public RDUser getUser() {
+		return user;
+	}
+
+	public void setUser(RDUser user) {
+		this.user = user;
+	}
+
+    
 }

@@ -1,5 +1,6 @@
 package com.robodynamics.service.impl;
 
+
 import com.robodynamics.dao.RDLeadDao;
 import com.robodynamics.model.RDLead;
 import com.robodynamics.model.RDUser;
@@ -30,55 +31,66 @@ public class RDLeadServiceImpl implements RDLeadService {
     @Transactional
     public RDLead capture(String name, String phone, String email, String audience,
                           String source, String utmSource, String utmMedium, String utmCampaign,
-                          String message) {
+                          String message, String grade, String board) {
+
+    	System.out.println("--------- leads ------------- 5");
 
         final String normPhone = normalizePhone(phone);
-        final RDLead.Audience audEnum = toAudience(audience);
+        
 
         // 1) Try to find existing (idempotent key: phone+audience)
-        RDLead existing = leadDao.findByPhoneAndAudience(normPhone, audEnum).orElse(null);
+        RDLead existing = leadDao.findByPhoneAndAudience(normPhone, audience).orElse(null);
+    	System.out.println("--------- leads ------------- 6");
 
         if (existing != null) {
             // 2) Update existing
             existing.setName(safe(name));
             existing.setEmail(blankToNull(email));
+            existing.setGrade(grade);
+            existing.setBoard(board);
             existing.setSource(blankToNull(source));
             existing.setUtmSource(blankToNull(utmSource));
             existing.setUtmMedium(blankToNull(utmMedium));
             existing.setUtmCampaign(blankToNull(utmCampaign));
             if (!isBlank(message)) existing.setMessage(message.trim());
             // keep status lifecycle simple on capture
-            if (existing.getStatus() == null) existing.setStatus(RDLead.Status.NEW);
+            if (existing.getStatus() == null) existing.setStatus("new");
             return leadDao.saveOrUpdate(existing);
         }
+    	System.out.println("--------- leads ------------- 7");
 
         // 3) Insert new
         RDLead l = new RDLead();
         l.setName(safe(name));
         l.setPhone(normPhone);
         l.setEmail(blankToNull(email));
-        l.setAudience(audEnum);
+        l.setGrade(grade);
+        l.setBoard(board);
+        l.setAudience(audience);
         l.setSource(blankToNull(source));
         l.setUtmSource(blankToNull(utmSource));
         l.setUtmMedium(blankToNull(utmMedium));
         l.setUtmCampaign(blankToNull(utmCampaign));
         l.setMessage(blankToNull(message));
-        l.setStatus(RDLead.Status.NEW);
+        l.setStatus("new");
+    	System.out.println("--------- leads ------------- 8");
 
         try {
             return leadDao.save(l);
         } catch (ConstraintViolationException dup) {
             // 4) Race condition: someone inserted same (phone,audience) concurrently → merge
-            RDLead concurrent = leadDao.findByPhoneAndAudience(normPhone, audEnum).orElse(null);
+            RDLead concurrent = leadDao.findByPhoneAndAudience(normPhone, audience).orElse(null);
             if (concurrent != null) {
                 concurrent.setName(safe(name));
                 concurrent.setEmail(blankToNull(email));
+                concurrent.setGrade(blankToNull(grade));
+                concurrent.setBoard(blankToNull(board));
                 concurrent.setSource(blankToNull(source));
                 concurrent.setUtmSource(blankToNull(utmSource));
                 concurrent.setUtmMedium(blankToNull(utmMedium));
                 concurrent.setUtmCampaign(blankToNull(utmCampaign));
                 if (!isBlank(message)) concurrent.setMessage(message.trim());
-                if (concurrent.getStatus() == null) concurrent.setStatus(RDLead.Status.NEW);
+                if (concurrent.getStatus() == null) concurrent.setStatus("new");
                 return leadDao.saveOrUpdate(concurrent);
             }
             throw dup; // unexpected
@@ -119,7 +131,16 @@ public class RDLeadServiceImpl implements RDLeadService {
         if (!isBlank(parentEmail)) {
             lead.setEmail(parentEmail.trim());
         }
+        
+     // Step 2: Update the lead details (parentEmail, message, etc.)
+        if (!isBlank(grade)) {
+            lead.setGrade(grade);
+        }
 
+        // Step 2: Update the lead details (parentEmail, message, etc.)
+        if (!isBlank(board)) {
+            lead.setBoard(board);
+        }
         String demoNote = !isBlank(message) ? message.trim()
                 : "DEMO REQUEST — When: " + nz(demoDateTime)
                 + " | Student: " + nz(studentName)
@@ -136,7 +157,7 @@ public class RDLeadServiceImpl implements RDLeadService {
                 : (existing.trim() + "\n---\n[" + ts + "] " + demoNote);
         lead.setMessage(combined);
 
-        lead.setStatus(RDLead.Status.CONTACTED); // Update lead status to "Contacted"
+        lead.setStatus("new"); // Update lead status to "new"
 
         // Step 4: Save the updated lead
         leadDao.saveOrUpdate(lead);

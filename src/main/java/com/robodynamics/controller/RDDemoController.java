@@ -1,5 +1,7 @@
 package com.robodynamics.controller;
 
+import com.robodynamics.model.RDLead;
+import com.robodynamics.service.RDLeadMentorService;
 import com.robodynamics.service.RDLeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,10 @@ import java.util.Optional;
 @Controller
 public class RDDemoController {
 
-    @Autowired(required = false)
+    @Autowired
     private RDLeadService leadService; // optional—won't crash if absent
+    
+    @Autowired private RDLeadMentorService leadMentorService;
 
     @GetMapping("/parents/demo")
     public String showDemoForm(@RequestParam(value = "prefill", required = false) String prefill,
@@ -69,6 +73,8 @@ public class RDDemoController {
                         parentName,
                         parentPhone,
                         Optional.ofNullable(parentEmail).orElse(""),
+                        grade,
+                        board,
                         "parent",
                         source,
                         Optional.ofNullable(req.getParameter("utm_source")).orElse(""),
@@ -76,6 +82,12 @@ public class RDDemoController {
                         Optional.ofNullable(req.getParameter("utm_campaign")).orElse(""),
                         msg
                     );
+                }
+                
+             // Only trigger mentor matching if demo date is provided
+                if (demoDateTime != null && !demoDateTime.isEmpty() && leadMentorService != null) {
+                    RDLead leadForMatching = leadService.getLeadById(leadId);
+                    leadMentorService.assignLeadToMentors(leadForMatching);
                 }
             } catch (Exception ignore) { /* don’t block UX */ }
         }

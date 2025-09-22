@@ -7,41 +7,85 @@ import javax.persistence.*;
 @Table(name = "rd_mentor_skills")
 public class RDMentorSkill {
 
-  public enum SyllabusBoard { CBSE, ICSE, STATE, IB, IGCSE, OTHER }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "skill_id")
+    private Integer id;                            // surrogate PK of this table
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "mentor_skill_id")
-  private Integer mentorSkillId;
+    @Column(name = "mentor_id", nullable = false)
+    private Integer mentorId;                      // keep scalar to avoid mapping churn
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "mentor_id", nullable = false)
-  private RDMentor mentor;
+    @Column(name = "skill_code", nullable = false, length = 40)
+    private String skillCode;                      // e.g., "MATH"
 
-  @Column(name = "subject_code", nullable = false, length = 50)
-  private String subjectCode;
+    @Column(name = "skill_label", nullable = false, length = 80)
+    private String skillLabel;                     // e.g., "Math"
 
-  @Column(name = "grade_min", nullable = false)
-  private Integer gradeMin;
+    @Column(name = "skill_level")
+    private String skillLevel;                     // "beginner" | "intermediate" | "advanced"
 
-  @Column(name = "grade_max", nullable = false)
-  private Integer gradeMax;
+    public static enum SyllabusBoard {
+        CBSE("CBSE"),
+        ICSE("ICSE"),
+        STATE("State"),
+        IB("IB"),
+        IGCSE("IGCSE");
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "syllabus_board", nullable = false, length = 16)
-  private SyllabusBoard syllabusBoard = SyllabusBoard.CBSE;
+        private final String label;
+        SyllabusBoard(String label) { this.label = label; }
+        public String getLabel() { return label; }
+    }
+    
+    @Column(name = "created_at")
+    private java.sql.Timestamp createdAt;
 
-  // --- getters/setters ---
-  public Integer getMentorSkillId() { return mentorSkillId; }
-  public void setMentorSkillId(Integer mentorSkillId) { this.mentorSkillId = mentorSkillId; }
-  public RDMentor getMentor() { return mentor; }
-  public void setMentor(RDMentor mentor) { this.mentor = mentor; }
-  public String getSubjectCode() { return subjectCode; }
-  public void setSubjectCode(String subjectCode) { this.subjectCode = subjectCode; }
-  public Integer getGradeMin() { return gradeMin; }
-  public void setGradeMin(Integer gradeMin) { this.gradeMin = gradeMin; }
-  public Integer getGradeMax() { return gradeMax; }
-  public void setGradeMax(Integer gradeMax) { this.gradeMax = gradeMax; }
-  public SyllabusBoard getSyllabusBoard() { return syllabusBoard; }
-  public void setSyllabusBoard(SyllabusBoard syllabusBoard) { this.syllabusBoard = syllabusBoard; }
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getMentorId() {
+		return mentorId;
+	}
+
+	public void setMentorId(Integer mentorId) {
+		this.mentorId = mentorId;
+	}
+
+	public String getSkillCode() {
+		return skillCode;
+	}
+
+	public void setSkillCode(String skillCode) {
+		this.skillCode = skillCode;
+	}
+
+	public String getSkillLabel() {
+		return skillLabel;
+	}
+
+	public void setSkillLabel(String skillLabel) {
+		this.skillLabel = skillLabel;
+	}
+
+	public String getSkillLevel() {
+		return skillLevel;
+	}
+
+	public void setSkillLevel(String skillLevel) {
+		this.skillLevel = skillLevel;
+	}
+
+	public java.sql.Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(java.sql.Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+    
 }

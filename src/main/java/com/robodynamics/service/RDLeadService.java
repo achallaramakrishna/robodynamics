@@ -14,7 +14,7 @@ public interface RDLeadService {
     
     RDLead capture(String name, String phone, String email, String audience,
                    String source, String utmSource, String utmMedium, String utmCampaign,
-                   String message);
+                   String message, String grade, String board);
 
     RDLead updateFromDemo(Long leadId,
                           String parentEmail,

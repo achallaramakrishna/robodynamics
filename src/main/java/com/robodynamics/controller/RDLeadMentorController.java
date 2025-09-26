@@ -2,6 +2,7 @@ package com.robodynamics.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class RDLeadMentorController {
     public String proposeDemoDate(@PathVariable Long leadId,
                                   @PathVariable Long mentorId,
                                   @PathVariable Long skillId,
-                                  @RequestParam String newDateTime) {
+                                  @RequestParam LocalDateTime newDateTime) {
         leadMentorService.proposeDemoDate(leadId, mentorId, skillId, newDateTime);
         return "redirect:/mentors/dashboard";
     }

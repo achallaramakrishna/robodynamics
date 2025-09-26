@@ -68,6 +68,7 @@ public class RDMentorServiceImpl implements RDMentorService {
             user = new RDUser();
             user.setFirstName(lead.getName());
             user.setCellPhone(lead.getPhone());
+            user.setAge(25);
             user.setEmail(lead.getEmail());
             user.setActive(1);
             user.setProfile_id(RDUser.profileType.ROBO_MENTOR.getValue());
@@ -91,6 +92,7 @@ public class RDMentorServiceImpl implements RDMentorService {
             m.setFullName(lead.getName());
             m.setEmail(nvl(lead.getEmail(), "pending+" + user.getUserID() + "@example.com"));
             m.setMobile(nvl(lead.getPhone(), "NA"));
+            user.setAge(25);
             m.setIsActive(1);
             m.setIsVerified(0);
             s.save(m);

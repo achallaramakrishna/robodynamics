@@ -24,4 +24,6 @@ public interface RDLeadService {
                           String subjects,
                           String demoDateTime,   // HTML datetime-local, IST
                           String message);
+	RDLead createLead(String trim, String sanitizePhone, String nvl, String audience, String nvl2, String utmSource,
+			String utmMedium, String utmCampaign, String enrichedMsg, String grade, String board);
 }

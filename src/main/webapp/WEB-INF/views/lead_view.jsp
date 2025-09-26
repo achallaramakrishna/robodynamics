@@ -62,11 +62,11 @@
 									<td>${assign.mentor.firstName} ${assign.mentor.lastName}</td>
                                     <td>${assign.skill.skillName}</td>
                                     <td>
-                                        <c:choose>
-                                            <c:when test="${assign.isDemoMentor}">Yes</c:when>
-                                            <c:otherwise>No</c:otherwise>
-                                        </c:choose>
-                                    </td>
+									    <c:choose>
+									        <c:when test="${assign.demoMentor}">Yes</c:when>
+									        <c:otherwise>No</c:otherwise>
+									    </c:choose>
+									</td>
                                     <td>${assign.status}</td>
                                     <c:if test="${isMentor}">
                                         <td>

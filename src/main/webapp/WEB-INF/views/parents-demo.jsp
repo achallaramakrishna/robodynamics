@@ -30,8 +30,14 @@
     <input type="hidden" name="utm_medium" value="${fn:escapeXml(param.utm_medium)}"/>
     <input type="hidden" name="utm_campaign" value="${fn:escapeXml(param.utm_campaign)}"/>
     <input type="hidden" name="source" value="${fn:escapeXml(param.source)}"/>
-    <input type="hidden" name="leadId" value="${fn:escapeXml(param.leadId)}"/>
-    
+
+	<input type="hidden" name="audience" value="parent"/>
+	<input type="hidden" name="source" value="home_parent_simple"/>
+
+	<!-- Only include leadId if explicitly provided -->
+	<c:if test="${not empty param.leadId}">
+	  <input type="hidden" name="leadId" value="${fn:escapeXml(param.leadId)}"/>
+	</c:if>    
 
     <div class="row g-3">
       <div class="col-md-6">

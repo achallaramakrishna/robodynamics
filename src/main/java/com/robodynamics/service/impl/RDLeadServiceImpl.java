@@ -8,6 +8,8 @@ import com.robodynamics.service.RDLeadService;
 import com.robodynamics.service.RDNotificationService;
 import com.robodynamics.service.RDUserService;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.exception.ConstraintViolationException;
@@ -215,4 +217,60 @@ public class RDLeadServiceImpl implements RDLeadService {
 		leadDao.deleteLead(id);
 		
 	}
+
+	@Override
+    @Transactional
+    public RDLead createLead(
+        String name,
+        String phone,
+        String email,
+        String audience,
+        String source,
+        String utmSource,
+        String utmMedium,
+        String utmCampaign,
+        String message,
+        String grade,
+        String board
+    ) {
+        RDLead lead = new RDLead();
+
+        // Normalize + sanitize
+        String normAudience = normalizeAudience(audience);
+        String normPhone    = normalizePhone(phone);
+
+        // Core fields
+        lead.setName(safe(name));
+        lead.setPhone(normPhone);
+        lead.setEmail(safe(email));
+        lead.setAudience(normAudience);       // "parent" or "mentor"
+        lead.setSource(safe(source));
+
+        // UTM + extras
+        lead.setUtmSource(safe(utmSource));
+        lead.setUtmMedium(safe(utmMedium));
+        lead.setUtmCampaign(safe(utmCampaign));
+        lead.setMessage(safe(message));
+        lead.setGrade(safe(grade));
+        lead.setBoard(safe(board));
+
+        // Defaults expected by your schema
+        lead.setStatus("new");                // matches your logs
+        Timestamp now = Timestamp.valueOf(java.time.LocalDateTime.now());
+
+        lead.setCreatedAt(now);
+        lead.setUpdatedAt(now);
+
+        // Persist: ALWAYS a new row (ensure no UNIQUE on (phone,audience))
+        RDLead saved = leadDao.save(lead);
+        return saved;
+    }
+	
+
+    private static String normalizeAudience(String a) {
+        String v = safe(a).toLowerCase();
+        return ("mentor".equals(v) ? "mentor" : "parent"); // default parent
+    }
+
+    
 }

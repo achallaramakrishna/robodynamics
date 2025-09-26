@@ -38,11 +38,11 @@ public class RDHomeController {
     @Autowired private RDDemoService demoService;
     @Autowired private RDBlogPostService blogPostService;
     @Autowired private RDTestimonialService testimonialService;
-    
+
     @Autowired private RDSkillService skillService;
     @Autowired private RDLeadSkillService leadSkillService;
 
-    @Autowired private RDLeadService leadService; // optional wire; controller won’t crash if not present
+    @Autowired private RDLeadService leadService; // now uses createLead(...) to always insert
 
     @GetMapping({ "/", "/home" })
     public String home(@RequestParam(value = "viewer", required = false) String viewer,
@@ -63,7 +63,7 @@ public class RDHomeController {
 
         // 3) Featured / trending courses
         List<RDCourse> trendingCourses = safe(() -> courseService.getTrendingCourses());
-        model.addAttribute("featuredCourses", trendingCourses); // aligns with JSP’s expected attribute
+        model.addAttribute("featuredCourses", trendingCourses);
 
         // 4) Needs mentors widget
         if ("mentor".equalsIgnoreCase(viewer)) {
@@ -109,8 +109,8 @@ public class RDHomeController {
             return "redirect:/home#lead";
         }
 
-        // 2) Normalize audience
-        final String audience = normalizeAudience(form.getAudience()); // "parent" | "mentor"
+        // 2) Normalize audience ("parent" | "mentor")
+        final String audience = normalizeAudience(form.getAudience());
 
         // 3) UTM passthrough + extras
         final String utmSource   = nvl(req.getParameter("utm_source"));
@@ -130,15 +130,16 @@ public class RDHomeController {
             enrichedMsg = enrichedMsg.isEmpty() ? gb : (enrichedMsg + " | " + gb);
         }
 
-        // 5) Idempotent capture (find-or-create / upsert)
+        // 5) ALWAYS-CREATE capture (NO upsert)
         RDLead saved = null;
         try {
-            saved = leadService.capture(
+            // IMPORTANT: createLead(...) must unconditionally insert a new row (no findByPhone first)
+            saved = leadService.createLead(
                 form.getName().trim(),
                 sanitizePhone(form.getPhone()),
                 nvl(form.getEmail()),
-                audience,
-                nvl(form.getSource()),
+                audience,                     // normalized "parent"/"mentor"
+                nvl(form.getSource()),        // e.g., "home_parent_simple"
                 utmSource, utmMedium, utmCampaign,
                 enrichedMsg,
                 grade,
@@ -166,7 +167,7 @@ public class RDHomeController {
                     skillIds.add(skill.getSkillId());
                 }
 
-                // link to rd_lead_skills (idempotent)
+                // link to rd_lead_skills (idempotent per (lead_id, skill_id))
                 leadSkillService.addLeadSkillsIfMissing(saved.getId(), skillIds);
 
                 // if mentor lead: create/update rd_users → rd_mentors → rd_mentor_skills
@@ -206,13 +207,12 @@ public class RDHomeController {
         return "redirect:/parents/demo?" + qp;
     }
 
-
     private String normalizeSubject(String s) {
         String t = s.trim().toLowerCase();
         if (t.isEmpty()) return t;
         return Character.toUpperCase(t.charAt(0)) + t.substring(1); // "maths" -> "Maths"
     }
-    
+
     private static String normalizeAudience(String a) {
         String v = nvl(a).trim().toLowerCase();
         if ("parent".equals(v) || "mentor".equals(v)) return v;
@@ -227,7 +227,6 @@ public class RDHomeController {
         if (digits.startsWith("0")  && digits.length() == 11) digits = digits.substring(1);
         return digits.isEmpty() ? p.trim() : digits;
     }
-
 
     @GetMapping("/thank-you")
     public String thankYou(@RequestParam(value = "audience", required = false) String audience,
@@ -288,20 +287,9 @@ public class RDHomeController {
         public void setEmail(String email) { this.email = email; }
         public String getSource() { return source; }
         public void setSource(String source) { this.source = source; }
-      
-        
-        public String[] getMessage() {
-			return message;
-		}
-		public void setMessage(String[] message) {
-			this.message = message;
-		}
-		public String getGrade() {
-			return grade;
-		}
-		public void setGrade(String grade) {
-			this.grade = grade;
-		}
-        
+        public String[] getMessage() { return message; }
+        public void setMessage(String[] message) { this.message = message; }
+        public String getGrade() { return grade; }
+        public void setGrade(String grade) { this.grade = grade; }
     }
 }

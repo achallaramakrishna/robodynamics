@@ -83,6 +83,7 @@
               <option value="Physics">Physics</option>
               <option value="Chemistry">Chemistry</option>
               <option value="Biology">Biology</option>
+              <option value="Kannada">Kannada</option>
             </select>
             <small class="text-muted">Hold down the Ctrl (or Command) key to select multiple subjects.</small>
           </div>
@@ -157,6 +158,7 @@
               <option value="Physics">Physics</option>
               <option value="Chemistry">Chemistry</option>
               <option value="Biology">Biology</option>
+              <option value="Kannada">Kannada</option>
             </select>
             <small class="text-muted">Hold down the Ctrl (or Command) key to select multiple subjects.</small>
           </div>

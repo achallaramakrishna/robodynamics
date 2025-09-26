@@ -1,27 +1,27 @@
 package com.robodynamics.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.robodynamics")
-@PropertySource("classpath:app-config.properties")
+@PropertySource("classpath:app-config.properties") // only this file now
 public class AppConfig implements WebMvcConfigurer {
-	
-	@Autowired
-    private Environment env;
+
+    // Enables @Value("${...}") placeholders
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -37,7 +37,7 @@ public class AppConfig implements WebMvcConfigurer {
         resolver.setMaxUploadSize(5242880); // 5MB
         return resolver;
     }
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
@@ -49,5 +49,4 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/audios/**").addResourceLocations("/resources/assets/audios/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
-    
 }

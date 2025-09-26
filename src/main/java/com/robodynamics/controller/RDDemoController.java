@@ -3,6 +3,9 @@ package com.robodynamics.controller;
 import com.robodynamics.model.RDLead;
 import com.robodynamics.service.RDLeadMentorService;
 import com.robodynamics.service.RDLeadService;
+import com.robodynamics.service.WhatsAppService;
+import com.robodynamics.service.WhatsAppService.WhatsAppSendResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,9 @@ public class RDDemoController {
     private RDLeadService leadService; // optional—won't crash if absent
     
     @Autowired private RDLeadMentorService leadMentorService;
+    
+    @Autowired private WhatsAppService whatsappService;           // <— add
+
 
     @GetMapping("/parents/demo")
     public String showDemoForm(@RequestParam(value = "prefill", required = false) String prefill,
@@ -40,8 +46,18 @@ public class RDDemoController {
             @RequestParam String demoDateTime,
             @RequestParam(required = false) String parentEmail,
             @RequestParam(required = false) Long leadId,   // <-- NEW
+            @RequestParam(required = false, defaultValue = "0") int prefill, // or read param "prefill"
             HttpServletRequest req,
             Model model) {
+    	
+        Long resolvedLeadId = (prefill == 1 && leadId != null) ? leadId : null;
+
+        
+        final String audience = "parent";
+        final String safeSource = Optional.ofNullable(req.getParameter("source"))
+                                          .filter(s -> !s.isBlank())
+                                          .orElse("home_parent_simple"); // or "demo_min_v1"
+
 
         if (leadService != null) {
             try {
@@ -90,7 +106,30 @@ public class RDDemoController {
                     leadMentorService.assignLeadToMentors(leadForMatching);
                 }
             } catch (Exception ignore) { /* don’t block UX */ }
+            
+            
         }
+     // ---- WhatsApp: Parent Thank-You (uses twilio.templates.parent.thankyou or wa.fallback.parent.thankyou) ----
+        try {
+            // very light E.164 normalize; feel free to move to a shared util
+            String digits = parentPhone.replaceAll("\\D", "");
+            System.out.println("Digits - " + digits);
+            String toE164 = digits.startsWith("0") ? "+91" + digits.substring(1)
+                          : digits.startsWith("91") ? "+".concat(digits)
+                          : parentPhone.startsWith("+") ? parentPhone
+                          : "+91" + digits; // default to +91
+            System.out.print("Parent Phone : " + toE164);
+
+            if (whatsappService != null && whatsappService.isValidE164(toE164)) {
+                long idForMsg = (resolvedLeadId != null ? resolvedLeadId : 0L);
+                System.out.println("Id for message : "  + idForMsg);
+                WhatsAppSendResult r = whatsappService.sendLeadThankYouParent(idForMsg, parentName, toE164);
+                // Optional: log r.isOk() / r.getErrorMessage()
+            }
+        } catch (Exception ignore) { /* never block redirect */ }
+        // -----------------------------------------------------------------------------------------------------------
+
+        
 
         String n = URLEncoder.encode(parentName, StandardCharsets.UTF_8);
         return "redirect:/thank-you?audience=parent&name=" + n;

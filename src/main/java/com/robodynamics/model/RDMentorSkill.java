@@ -24,6 +24,25 @@ public class RDMentorSkill {
     @Column(name = "skill_level")
     private String skillLevel;                     // "beginner" | "intermediate" | "advanced"
 
+    @Column(name = "grade_min")
+    private Integer gradeMin;
+
+    @Column(name = "grade_max")
+    private Integer gradeMax;
+
+    @Column(name = "syllabus_board")
+    private String syllabusBoard;
+
+    public Integer getGradeMin() { return gradeMin; }
+    public void setGradeMin(Integer gradeMin) { this.gradeMin = gradeMin; }
+
+    public Integer getGradeMax() { return gradeMax; }
+    public void setGradeMax(Integer gradeMax) { this.gradeMax = gradeMax; }
+
+    public String getSyllabusBoard() { return syllabusBoard; }
+    public void setSyllabusBoard(String syllabusBoard) { this.syllabusBoard = syllabusBoard; }
+
+    
     public static enum SyllabusBoard {
         CBSE("CBSE"),
         ICSE("ICSE"),

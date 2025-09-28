@@ -10,7 +10,6 @@
   <!-- Bootstrap 5.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
-    /* Tab badges/checks */
     .rd-step .check { font-size:.9rem; margin-left:.35rem; color:#28a745; }
     .rd-disabled { pointer-events:none; opacity:.5; }
     .skill-row .form-label{margin-bottom:.25rem;}
@@ -24,7 +23,7 @@
   <h3 class="mb-2">Teach with Robo Dynamics</h3>
   <p class="text-muted">Complete the steps to publish your mentor profile.</p>
 
-  <!-- Flash messages (supports either 'message/error' or 'flashOk/flashErr') -->
+  <!-- Flash messages -->
   <c:if test="${not empty message || not empty flashOk}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <c:out value="${message != null ? message : flashOk}"/>
@@ -63,7 +62,6 @@
     </li>
   </ul>
 
-  <!-- Panels -->
   <!-- CONSENT -->
   <div id="panel-consent" class="${activeTab=='consent' ? '' : 'd-none'}">
     <div class="card shadow-sm">
@@ -90,7 +88,7 @@
     </div>
   </div>
 
-  <!-- PROFILE + RESUME -->
+  <!-- PROFILE -->
   <div id="panel-profile" class="${activeTab=='profile' ? '' : 'd-none'}">
     <div class="card shadow-sm">
       <div class="card-header bg-white"><strong>Profile &amp; Resume</strong></div>
@@ -98,38 +96,77 @@
         <form method="post" action="${pageContext.request.contextPath}/mentors/onboarding/profile"
               enctype="multipart/form-data">
           <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">Display Name</label>
-              <input name="displayName" class="form-control" value="${mentor.displayName}" required/>
+
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="fullName" name="fullName"
+                     value="<c:out value='${mentor.fullName != null ? mentor.fullName : user.firstName + " " + user.lastName}'/>"
+                     required>
             </div>
-            <div class="col-md-6">
-              <label class="form-label">Headline</label>
-              <input name="headline" class="form-control" value="${mentor.headline}" placeholder="Ex: IIT grad • 6 yrs Math"/>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email"
+                     value="<c:out value='${user.email}'/>" readonly>
             </div>
+
+            <!-- Mobile -->
+            <div class="mb-3">
+              <label for="mobile" class="form-label">Mobile</label>
+              <input type="text" class="form-control" id="mobile" name="mobile"
+                     value="<c:out value='${user.cellPhone}'/>" readonly>
+            </div>
+
+            <!-- Bio -->
             <div class="col-12">
               <label class="form-label">Bio</label>
               <textarea name="bio" rows="3" class="form-control">${mentor.bio}</textarea>
             </div>
+
+            <!-- Experience -->
             <div class="col-md-3">
               <label class="form-label">Experience (years)</label>
-              <input type="number" step="0.5" name="yearsExperience" class="form-control" value="${mentor.yearsExperience}"/>
+              <input type="number" step="1" name="experienceYears" class="form-control"
+                     value="${mentor.experienceYears}"/>
             </div>
-            <div class="col-md-3">
-              <label class="form-label">₹ / hour</label>
-              <input type="number" name="hourlyRateInr" class="form-control" value="${mentor.hourlyRateInr}"/>
-            </div>
+
+            <!-- City -->
             <div class="col-md-3">
               <label class="form-label">City</label>
               <input name="city" class="form-control" value="${mentor.city}"/>
             </div>
+
+            <!-- Grade Range -->
             <div class="col-md-3">
-              <label class="form-label">Area</label>
-              <input name="area" class="form-control" value="${mentor.area}"/>
+              <label class="form-label">Grade Range</label>
+              <input name="gradeRange" class="form-control"
+                     value="${mentor.gradeRange}" placeholder="Ex: 4-10"/>
             </div>
+
+            <!-- Boards Supported -->
+            <div class="col-md-3">
+              <label class="form-label">Boards Supported</label>
+              <input name="boardsSupported" class="form-control"
+                     value="${mentor.boardsSupported}" placeholder="CBSE, ICSE"/>
+            </div>
+
+            <!-- Modes -->
             <div class="col-md-6">
-              <label class="form-label">Teaching Modes (comma separated)</label>
-              <input name="teachingModes" class="form-control" value="${mentor.teachingModes}" placeholder="ONLINE,OFFLINE"/>
+              <label class="form-label">Teaching Modes</label>
+              <input name="modes" class="form-control"
+                     value="${mentor.modes}" placeholder="Online,Offline"/>
             </div>
+
+            <!-- LinkedIn -->
+            <div class="col-md-6">
+              <label class="form-label">LinkedIn URL</label>
+              <input name="linkedinUrl" class="form-control"
+                     value="${mentor.linkedinUrl}"/>
+            </div>
+
+            <!-- Resume -->
             <div class="col-md-6">
               <label class="form-label">Resume (PDF/DOC/DOCX)</label>
               <input type="file" name="resume" class="form-control" accept=".pdf,.doc,.docx"/>
@@ -166,7 +203,8 @@
                   <label class="form-label">Subject</label>
                   <select name="subjectCode" class="form-select">
                     <c:forEach var="sub" items="${subjects}">
-                      <option value="${sub}" <c:if test="${sub==s.subjectCode}">selected</c:if>>${sub}</option>
+
+						<option value="${sub}" <c:if test="${sub == s.skillCode}">selected</c:if>>${sub}</option>
                     </c:forEach>
                   </select>
                 </div>
@@ -241,7 +279,6 @@
 
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
-<!-- JS deps -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   function showTab(tab){
@@ -256,13 +293,11 @@
     }
   }
 
-  // Add skills row
   document.getElementById('addRowBtn')?.addEventListener('click', function(){
     const rows = document.getElementById('skillRows');
     const first = rows.querySelector('.skill-row');
     if (!first) return;
     const clone = first.cloneNode(true);
-    // reset values
     clone.querySelectorAll('input').forEach(i => {
       if (i.name === 'gradeMin') i.value = 4;
       if (i.name === 'gradeMax') i.value = 10;

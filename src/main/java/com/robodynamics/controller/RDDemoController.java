@@ -109,6 +109,40 @@ public class RDDemoController {
             
             
         }
+        
+        // --- NEW: Notify Admin(s) ---
+        try {
+            String digits = parentPhone.replaceAll("\\D", "");
+            String toE164 = digits.startsWith("0") ? "+91" + digits.substring(1)
+                          : digits.startsWith("91") ? "+" + digits
+                          : parentPhone.startsWith("+") ? parentPhone
+                          : "+91" + digits;
+
+            if (whatsappService != null && whatsappService.isValidE164(toE164)) {
+                long idForMsg = (resolvedLeadId != null ? resolvedLeadId : 0L);
+
+                // Load admin numbers from config
+                String adminList = req.getServletContext().getInitParameter("rd.admin.whatsapp.numbers");
+                if (adminList != null) {
+                    for (String adminNumber : adminList.split(",")) {
+                        adminNumber = adminNumber.trim();
+                        if (!adminNumber.isEmpty() && whatsappService.isValidE164(adminNumber)) {
+                            WhatsAppSendResult ar = whatsappService.sendAdminLeadNotification(
+                                idForMsg,
+                                parentName,
+                                Optional.ofNullable(grade).orElse(""),
+                                Optional.ofNullable(board).orElse(""),
+                                toE164,   // parent phone for message content
+                                adminNumber // send to each admin
+                            );
+                            // optional: log ar.isOk() / ar.getErrorMessage()
+                        }
+                    }
+                }
+            }
+        } catch (Exception ignore) { /* never block UX */ }
+
+
      // ---- WhatsApp: Parent Thank-You (uses twilio.templates.parent.thankyou or wa.fallback.parent.thankyou) ----
         try {
             // very light E.164 normalize; feel free to move to a shared util

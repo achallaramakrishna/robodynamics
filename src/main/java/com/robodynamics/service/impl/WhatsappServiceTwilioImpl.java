@@ -34,6 +34,10 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
     /* ========= template content SIDs (HX...) ========= */
     @Value("${twilio.templates.parent.thankyou:}")
     private String tplParentThankYou;
+    
+    @Value("${twilio.templates.admin.leadnotification:}")
+    private String tplAdminLeadNotification;
+    
     @Value("${twilio.templates.mentor.thankyou:}")
     private String tplMentorThankYou;
     @Value("${twilio.templates.mentor.assignment:}")
@@ -50,6 +54,10 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
     /* ========= optional fallbacks ========= */
     @Value("${wa.fallback.parent.thankyou:}")
     private String fbParentThankYou;
+    
+    /* ========= optional fallbacks ========= */
+    @Value("${wa.fallback.admin.leadnotification:}")
+    private String fbAdminLeadNotification;
 
     private final DateTimeFormatter human = DateTimeFormatter.ofPattern("EEE, d MMM yyyy h:mm a");
 
@@ -237,4 +245,44 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
         Integer s = r.getHttpStatus(); 
         return s != null && s >= 400 && s < 500; 
     }
+
+    @Override
+    public WhatsAppSendResult sendAdminLeadNotification(long leadId,
+                                                        String parentName,
+                                                        String grade,
+                                                        String board,
+                                                        String phoneE164,
+                                                        String toE164) {
+        System.out.println("Whatsapp Admin Lead Notification...");
+
+        Map<String,Object> v = new HashMap<>();
+        v.put("1", "Admin");
+        v.put("2", safe(grade));
+        v.put("3", safe(board));
+        v.put("4", safe(parentName));
+        v.put("5", safe(phoneE164));
+        v.put("6", String.valueOf(leadId));
+
+
+
+        System.out.println("tplAdminLeadNotification - " + tplAdminLeadNotification);
+
+        // Attempt template send
+        WhatsAppSendResult res = sendTemplate(toE164, tplAdminLeadNotification, v);
+
+        // Fallback if template missing or rejected
+        if (!res.isOk() && (isBlank(tplAdminLeadNotification) || is4xx(res))) {
+            String body = fbAdminLeadNotification;
+            if (!isBlank(body)) {
+                body = body.replace("{parentName}", safe(parentName))
+                           .replace("{leadId}", String.valueOf(leadId))
+                           .replace("{grade}", safe(grade))
+                           .replace("{board}", safe(board))
+                           .replace("{phone}", safe(phoneE164));
+                return sendText(toE164, body);
+            }
+        }
+        return res;
+    }
+
 }

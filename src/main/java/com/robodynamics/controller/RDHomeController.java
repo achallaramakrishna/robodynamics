@@ -181,7 +181,11 @@ public class RDHomeController {
 
         // 7) Fast-path for mentors
         if ("mentor".equals(audience)) {
-            return "redirect:/thank-you?audience=mentor&name=" + url(form.getName());
+        	return "redirect:/thank-you"
+        	        + "?audience=mentor"
+        	        + "&name=" + url(form.getName())
+        	        + "&phone=" + url(form.getPhone())
+        	        + "&email=" + url(nvl(form.getEmail()));
         }
 
         // 8) Hand off to /parents/demo (prefill)
@@ -231,9 +235,13 @@ public class RDHomeController {
     @GetMapping("/thank-you")
     public String thankYou(@RequestParam(value = "audience", required = false) String audience,
                            @RequestParam(value = "name", required = false) String name,
+                           @RequestParam(value = "phone", required = false) String phone,
+                           @RequestParam(value = "email", required = false) String email,
                            Model model) {
         model.addAttribute("audience", Optional.ofNullable(audience).orElse("parent"));
         model.addAttribute("name", nvl(name));
+        model.addAttribute("phone", nvl(phone));
+        model.addAttribute("email", nvl(email));
         return "thank-you"; // /WEB-INF/views/thank-you.jsp
     }
 

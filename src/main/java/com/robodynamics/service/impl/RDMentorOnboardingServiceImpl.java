@@ -46,7 +46,7 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
 
     /** Find mentor row by userId */
     private RDMentor findMentorByUserId(int userId) {
-        String hql = "from RDMentor m where m.userId = :uid";
+        String hql = "from RDMentor m where m.user.userID = :uid";
         return s().createQuery(hql, RDMentor.class)
                   .setParameter("uid", userId)
                   .uniqueResult();
@@ -242,26 +242,12 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
 
             ms.setSkillCode(normCode);
             ms.setSkillLabel(label);
+            ms.setGradeMax(gmax);
+            ms.setGradeMin(gmin);
+            ms.setSyllabusBoard(boardRaw);
+            
 
-            // Optional fields present in your model:
-            // grade range
-            try { RDMentorSkill.class.getMethod("setGradeMin", Integer.class).invoke(ms, nz(gmin)); } catch (Exception ignore) {}
-            try { RDMentorSkill.class.getMethod("setGradeMax", Integer.class).invoke(ms, nz(gmax)); } catch (Exception ignore) {}
-
-            // board as enum or string
-            if (boardRaw != null && !boardRaw.isBlank()) {
-                String b = boardRaw.trim().toUpperCase();
-                // If enum exists
-                try {
-                    @SuppressWarnings("unchecked")
-                    Class<Enum> e = (Class<Enum>) Class.forName("com.robodynamics.model.RDMentorSkill$SyllabusBoard");
-                    Object enumVal = Enum.valueOf(e, b); // throws if not valid
-                    RDMentorSkill.class.getMethod("setBoard", e).invoke(ms, enumVal);
-                } catch (Exception notEnum) {
-                    // else try a string setter
-                    try { RDMentorSkill.class.getMethod("setBoard", String.class).invoke(ms, b); } catch (Exception ignore) {}
-                }
-            }
+            
 
             // level (default beginner) — set if your entity has it
             try { RDMentorSkill.class.getMethod("setSkillLevel", String.class).invoke(ms, "beginner"); } catch (Exception ignore) {}

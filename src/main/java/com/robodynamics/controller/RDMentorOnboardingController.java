@@ -81,6 +81,10 @@ public class RDMentorOnboardingController {
 
         RDMentor mentor = onboardingService.getMentorByUserId(uid);
         model.addAttribute("mentor", mentor == null ? new RDMentor() : mentor);
+        
+        RDUser user = sessionUser(session);
+        model.addAttribute("user", user);
+
 
         var resumeMeta = onboardingService.getCurrentResumeMeta(uid); // Pair<String, Boolean> or null
         model.addAttribute("currentResumeName", resumeMeta == null ? "" : resumeMeta.getLeft());
@@ -113,7 +117,7 @@ public class RDMentorOnboardingController {
 
     // ----- POST: profile + resume -----
     @PostMapping("/profile")
-    public String saveProfile(@RequestParam String displayName,
+    public String saveProfile(@RequestParam("fullName") String fullName,
                               @RequestParam(required = false) String headline,
                               @RequestParam(required = false) String bio,
                               @RequestParam(required = false) BigDecimal yearsExperience,
@@ -131,7 +135,7 @@ public class RDMentorOnboardingController {
         if (uid == null) return redirectToSignup(req);   // ⇠ updated
 
         onboardingService.saveProfile(
-            uid, displayName, headline, bio, yearsExperience,
+            uid, fullName, headline, bio, yearsExperience,
             hourlyRateInr, city, area, teachingModes,
             resume, resumePublic
         );
@@ -154,6 +158,6 @@ public class RDMentorOnboardingController {
 
         onboardingService.replaceSkills(uid, subjectCodes, gradeMins, gradeMaxs, boards);
         ra.addFlashAttribute("flashOk", "Skills updated. You’re all set!");
-        return "redirect:/mentors/onboarding?step=skills";
+        return "mentor/thankyoumentor";  // resolves to /WEB-INF/views/mentor/thankyoumentor.jsp
     }
 }

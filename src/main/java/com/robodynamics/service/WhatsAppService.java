@@ -24,6 +24,15 @@ public interface WhatsAppService {
     WhatsAppSendResult sendMentorThankYou(long userId,
                                           String mentorFirstName,
                                           String toE164);
+    
+    /** Notify admin team when a new lead is submitted. */
+    WhatsAppSendResult sendAdminLeadNotification(long leadId,
+                                                 String parentName,
+                                                 String grade,
+                                                 String board,
+                                                 String phoneE164,
+                                                 String toE164);
+
 
     /** Ops matched mentors to a lead/skill → notify mentor. */
     WhatsAppSendResult sendMentorAssignment(long leadId,

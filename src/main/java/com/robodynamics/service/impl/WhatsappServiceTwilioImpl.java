@@ -253,36 +253,54 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
                                                         String board,
                                                         String phoneE164,
                                                         String toE164) {
-        System.out.println("Whatsapp Admin Lead Notification...");
+    	Twilio.init("ACbbe8018ca570c46f2c97abb72a6b7085", "6cee1a106f97b213bd4bcbe6a987c564");
 
-        Map<String,Object> v = new HashMap<>();
-        v.put("1", "Admin");
-        v.put("2", safe(grade));
-        v.put("3", safe(board));
-        v.put("4", safe(parentName));
-        v.put("5", safe(phoneE164));
-        v.put("6", String.valueOf(leadId));
+    	
+    	System.out.println("Whatsapp Admin Lead Notification...");
 
+        String adminNumber = "whatsapp:+918374377311";  
 
+        // === Build variables exactly as template expects ===
+        Map<String, String> vars = new HashMap<>();
+        vars.put("1", "Admin");
+        vars.put("2", grade);         // grade
+        vars.put("3", board);      // board
+        vars.put("4", parentName);     // parent name
+        vars.put("5", phoneE164);// parent phone (no +91)
+        vars.put("6", String.valueOf(leadId));       // leadId
+        JSONObject jsonVars = new JSONObject(vars);
+        System.out.println("ContentVariables JSON -> " + jsonVars.toString());
+        Message msg = null;
+        try {
+       	 msg = Message.creator(new PhoneNumber(adminNumber), "MGa897be7a55bec4dd13cba80e4a80e714", "")
+                    .setContentSid("HXc54ecae3440adb3a52bd327c8cc41047")
+                    .setContentVariables(jsonVars.toString())
+                    .create();
 
-        System.out.println("tplAdminLeadNotification - " + tplAdminLeadNotification);
+           System.out.println("✅ Sent successfully. SID: " + msg.getSid());
+           return WhatsAppSendResult.success(msg.getSid());
+
+       } catch (ApiException ex) {
+           System.err.println("❌ API Error: " + ex.getStatusCode() + " " + ex.getCode() + " " + ex.getMessage());
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+
+     //   System.out.println("tplAdminLeadNotification - " + tplAdminLeadNotification);
 
         // Attempt template send
-        WhatsAppSendResult res = sendTemplate(toE164, tplAdminLeadNotification, v);
+     //   WhatsAppSendResult res = sendTemplate(toE164, tplAdminLeadNotification, v);
 
         // Fallback if template missing or rejected
-        if (!res.isOk() && (isBlank(tplAdminLeadNotification) || is4xx(res))) {
-            String body = fbAdminLeadNotification;
-            if (!isBlank(body)) {
-                body = body.replace("{parentName}", safe(parentName))
-                           .replace("{leadId}", String.valueOf(leadId))
-                           .replace("{grade}", safe(grade))
-                           .replace("{board}", safe(board))
-                           .replace("{phone}", safe(phoneE164));
-                return sendText(toE164, body);
-            }
-        }
-        return res;
+		/*
+		 * if (!res.isOk() && (isBlank(tplAdminLeadNotification) || is4xx(res))) {
+		 * String body = fbAdminLeadNotification; if (!isBlank(body)) { body =
+		 * body.replace("{parentName}", safe(parentName)) .replace("{leadId}",
+		 * String.valueOf(leadId)) .replace("{grade}", safe(grade)) .replace("{board}",
+		 * safe(board)) .replace("{phone}", safe(phoneE164)); return sendText(toE164,
+		 * body); } } return res;
+		 */
+        return null;
     }
 
 }

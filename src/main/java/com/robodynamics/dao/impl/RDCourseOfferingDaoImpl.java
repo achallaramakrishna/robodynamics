@@ -450,5 +450,20 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 	    }
 	}
 
+	@Override
+	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID) {
+		 Session session = factory.getCurrentSession();
+
+	        String hql = "SELECT DISTINCT co FROM RDCourseOffering co " +
+	                     "LEFT JOIN FETCH co.studentEnrollments es " +   // fetch enrolled students
+	                     "WHERE co.instructor.userID = :mentorId " +
+	                     "ORDER BY co.startDate ASC";
+
+	        Query<RDCourseOffering> query = session.createQuery(hql, RDCourseOffering.class);
+	        query.setParameter("mentorId", userID);
+
+	        return query.getResultList();
+	}
+
     
 }

@@ -71,7 +71,7 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
         m.setEmail(u.getEmail());
         m.setMobile(u.getCellPhone());
         m.setIsActive(1);
-        m.setIsVerified(1);
+        m.setIsVerified(true);
         s().save(m);
         return m;
     }

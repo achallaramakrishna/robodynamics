@@ -24,9 +24,9 @@ public class RDTestimonialDAOImpl implements RDTestimonialDAO {
     private Session s() { return sessionFactory.getCurrentSession(); }
 
     @Override
-    public Optional<RDTestimonial> findById(Long id) {
+    public RDTestimonial findById(Long id) {
         RDTestimonial t = s().get(RDTestimonial.class, id);
-        return Optional.ofNullable(t);
+        return t;
     }
 
     @Override
@@ -90,4 +90,11 @@ public class RDTestimonialDAOImpl implements RDTestimonialDAO {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+	@Override
+	public List<RDTestimonial> getAllTestimonials() {
+		Session session = sessionFactory.getCurrentSession();
+        Query<RDTestimonial> query = session.createQuery("from RDTestimonial", RDTestimonial.class);
+        return query.getResultList();
+	}
 }

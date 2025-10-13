@@ -4,11 +4,15 @@ package com.robodynamics.service;
 
 import com.robodynamics.dto.RDMentorDTO;
 import com.robodynamics.model.RDLead;
+import com.robodynamics.model.RDMentor;
 import com.robodynamics.model.RDSkill;
 
 import java.util.List;
 
 public interface RDMentorService {
+	
+    boolean isMentorProfileComplete(int userId);
+
     List<RDMentorDTO> getAllMentors();          // basic list
     List<RDMentorDTO> getMentorsWithSummary();  // includes offeringsCount
 	List<RDMentorDTO> getFeaturedMentors();
@@ -25,5 +29,11 @@ public interface RDMentorService {
      * using labels from canonical RDSkill rows. Idempotent.
      */
     void upsertMentorSkills(Integer mentorId, List<RDSkill> rdSkills);
+    
+    List<RDMentor> findMentorsForLead(RDLead lead);
+	RDMentor getMentorById(int mentorId);
+
+	boolean hasMentorProfile(int userID);
+
 
 }

@@ -94,7 +94,7 @@ public class RDMentorServiceImpl implements RDMentorService {
             m.setMobile(nvl(lead.getPhone(), "NA"));
             user.setAge(25);
             m.setIsActive(1);
-            m.setIsVerified(0);
+            m.setIsVerified(false);
             s.save(m);
             mentorId = m.getMentorId();
         }
@@ -167,4 +167,29 @@ public class RDMentorServiceImpl implements RDMentorService {
     private static String nvl(String v, String def) {
         return (v == null || v.isEmpty()) ? def : v;
     }
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<RDMentor> findMentorsForLead(RDLead lead) {
+        return mentorDao.findMentorsForLead(lead);
+
+	}
+
+    @Transactional(readOnly = true)
+	public RDMentor getMentorById(int mentorId) {
+		 return mentorDao.getMentorWithSkills(mentorId);
+	}
+
+	@Override
+    @Transactional(readOnly = true)
+	public boolean isMentorProfileComplete(int userId) {
+		 RDMentor mentor = mentorDao.findByUserId(userId);
+		    return mentor != null; // true if entry exists in rd_mentors
+	}
+
+    @Transactional(readOnly = true)
+	public boolean hasMentorProfile(int userID) {
+		// TODO Auto-generated method stub
+		return mentorDao.hasMentorProfile(userID);
+	}
 }

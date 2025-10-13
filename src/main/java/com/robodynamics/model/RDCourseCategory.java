@@ -1,8 +1,5 @@
 package com.robodynamics.model;
 
-import java.util.List;
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,56 +11,66 @@ import javax.persistence.Table;
 @Table(name = "rd_course_categories")
 public class RDCourseCategory {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "course_category_id")
-	private int courseCategoryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_category_id")
+    private int courseCategoryId;
 
-	@Column(name = "parent_course_category_id")
-	private Integer parentCourseCategoryId;
+    @Column(name = "parent_course_category_id")
+    private Integer parentCourseCategoryId;
 
-	@Column(name = "course_category_name")
-	private String courseCategoryName;
+    @Column(name = "course_category_name")
+    private String courseCategoryName;
 
-	public int getCourseCategoryId() {
-		return courseCategoryId;
-	}
+    @Column(name = "image_url")  // New column for image URL
+    private String imageUrl;  // Add this field to store the image URL
 
-	public void setCourseCategoryId(int courseCategoryId) {
-		this.courseCategoryId = courseCategoryId;
-	}
+    // Getters and Setters for all fields
+    public int getCourseCategoryId() {
+        return courseCategoryId;
+    }
 
-	public Integer getParentCourseCategoryId() {
-		return parentCourseCategoryId;
-	}
+    public void setCourseCategoryId(int courseCategoryId) {
+        this.courseCategoryId = courseCategoryId;
+    }
 
-	public void setParentCourseCategoryId(Integer parentCourseCategoryId) {
-		this.parentCourseCategoryId = parentCourseCategoryId;
-	}
+    public Integer getParentCourseCategoryId() {
+        return parentCourseCategoryId;
+    }
 
-	public String getCourseCategoryName() {
-		return courseCategoryName;
-	}
+    public void setParentCourseCategoryId(Integer parentCourseCategoryId) {
+        this.parentCourseCategoryId = parentCourseCategoryId;
+    }
 
-	public void setCourseCategoryName(String courseCategoryName) {
-		this.courseCategoryName = courseCategoryName;
-	}
+    public String getCourseCategoryName() {
+        return courseCategoryName;
+    }
 
-	
-	@Override
-	public String toString() {
-		return "RDCourseCategory [courseCategoryId=" + courseCategoryId + ", parentCourseCategoryId="
-				+ parentCourseCategoryId + ", courseCategoryName=" + courseCategoryName + "]";
-	}
+    public void setCourseCategoryName(String courseCategoryName) {
+        this.courseCategoryName = courseCategoryName;
+    }
 
-	public RDCourseCategory(int courseCategoryId, int parentCourseCategoryId, String courseCategoryName) {
-		super();
-		this.courseCategoryId = courseCategoryId;
-		this.parentCourseCategoryId = parentCourseCategoryId;
-		this.courseCategoryName = courseCategoryName;
-	}
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-	public RDCourseCategory() {
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-	}
+    @Override
+    public String toString() {
+        return "RDCourseCategory [courseCategoryId=" + courseCategoryId + ", parentCourseCategoryId="
+                + parentCourseCategoryId + ", courseCategoryName=" + courseCategoryName + ", imageUrl=" + imageUrl + "]";
+    }
+
+    public RDCourseCategory() {
+    }
+
+    public RDCourseCategory(int courseCategoryId, int parentCourseCategoryId, String courseCategoryName, String imageUrl) {
+        this.courseCategoryId = courseCategoryId;
+        this.parentCourseCategoryId = parentCourseCategoryId;
+        this.courseCategoryName = courseCategoryName;
+        this.imageUrl = imageUrl;
+    }
 }

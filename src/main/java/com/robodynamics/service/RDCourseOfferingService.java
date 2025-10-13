@@ -50,6 +50,8 @@ public interface RDCourseOfferingService {
 
 	public List<RDCourseOffering> getRDCourseOfferingsByCourse(int courseId);
 
+	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID);
+
 
 
 }

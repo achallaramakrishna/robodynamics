@@ -63,6 +63,24 @@
         </div>
       </div>
     </div>
+    
+<!-- Row: Mentor Course Offerings Link -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">📚 My Course Offerings</h5>
+                <p class="card-text">Click below to view all your course offerings and manage testimonial requests.</p>
+                <a href="${pageContext.request.contextPath}/courseoffering/list" 
+                   class="btn btn-primary btn-lg">
+                    View Course Offerings
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
 
     <!-- Row 2: Quick actions -->
     <div class="row">
@@ -138,9 +156,26 @@
 	        </div>
 	    </div>
 	</div>
+	
+
+
+	
 
     <!-- Row 3: Mentor Ticket Management -->
     <div class="row">
+    
+
+  <div class="alert alert-warning shadow-sm p-4 mb-4">
+    <h5 class="mb-2"><i class="bi bi-person-lines-fill me-2"></i> Complete Your Mentor Profile</h5>
+    <p class="mb-3">You are registered as a user but your mentor profile is incomplete.  
+       Please add your subjects, grades, availability, and resume.</p>
+    <a href="${pageContext.request.contextPath}/mentors/onboarding?userId=${user.userID}" 
+       class="btn btn-warning">
+      <i class="bi bi-pencil-square me-1"></i> Complete/Update Mentor Profile
+    </a>
+  </div>
+
+
       <div class="col-md-6 col-lg-5 mb-4">
         <div class="card shadow-sm h-100 text-center">
           <div class="card-header bg-danger text-white">

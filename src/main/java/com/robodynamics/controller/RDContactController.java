@@ -27,7 +27,7 @@ public class RDContactController {
                                 Model model, 
                                 RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return "contactus";
+            return "contact";
         }
         RDContact contact = new RDContact();
         contact.setName(contactForm.getContactName());
@@ -38,17 +38,22 @@ public class RDContactController {
 
      // Use RedirectAttributes to pass success message
         redirectAttributes.addFlashAttribute("successMessage", "Thank you for contacting us. We will get back to you soon.");
-        return "redirect:/contact/contactus"; // Ensure correct redirect path
+        return "redirect:/contact/show";
     }
 
     @GetMapping("/all")
     public List<RDContact> getAllRDContacts() {
         return rdContactService.getAllRDContacts();
     }
-
-    @GetMapping("/contactus")
-    public String contactus(Model model) {
-        model.addAttribute("contactForm", new RDContactUsForm());
-        return "contactus";
+    
+  
+    @GetMapping("/show")
+    public String showContactForm(Model model) {
+        if (!model.containsAttribute("contactForm")) {
+            model.addAttribute("contactForm", new RDContactUsForm());
+        }
+        return "contact"; // contact.jsp
     }
+
+   
 }

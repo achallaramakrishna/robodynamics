@@ -41,9 +41,20 @@ public class RDMentorSkill {
 
     public String getSyllabusBoard() { return syllabusBoard; }
     public void setSyllabusBoard(String syllabusBoard) { this.syllabusBoard = syllabusBoard; }
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id", referencedColumnName = "mentor_id", insertable = false, updatable = false)
+    private RDMentor mentor;
 
     
-    public static enum SyllabusBoard {
+    public RDMentor getMentor() {
+		return mentor;
+	}
+	public void setMentor(RDMentor mentor) {
+		this.mentor = mentor;
+	}
+
+	public static enum SyllabusBoard {
         CBSE("CBSE"),
         ICSE("ICSE"),
         STATE("State"),

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -55,11 +56,32 @@ public class RDCourseOfferingController {
 
 
 	@GetMapping("/list")
-    public String listCourseOfferings(Model theModel) {
-        List < RDCourseOffering > courseOfferings = courseOfferingService.getRDCourseOfferings();
-        System.out.println(courseOfferings);
-        theModel.addAttribute("courseOfferings", courseOfferings);
-        return "listCourseOfferings";
+    public String listCourseOfferings(Model model, HttpSession session) {
+		
+		 RDUser rdUser = new RDUser();
+		    List<RDCourseOffering> courseOfferings;
+
+	        if (session.getAttribute("rdUser") != null) {
+	        	rdUser = (RDUser) session.getAttribute("rdUser");
+	        }
+	        if (rdUser != null) {
+	            if (rdUser.getProfile_id() == 1  || rdUser.getProfile_id() == 2) {
+	                // Admin sees everything
+	                courseOfferings = courseOfferingService.getRDCourseOfferings();
+	            } else if (rdUser.getProfile_id() == 3) {
+	                // Mentor sees only their own offerings
+	                courseOfferings = courseOfferingService.getCourseOfferingsByMentor(rdUser.getUserID());
+	            } else {
+	                // Default or other roles (optional)
+	                courseOfferings = List.of();
+	            }
+	        } else {
+	            // Not logged in, redirect to login page
+	            return "redirect:/login";
+	        }
+
+	        model.addAttribute("courseOfferings", courseOfferings);
+	        return "listCourseOfferings"; // JSP page name
     }
 
 	@GetMapping("/showCalendar")

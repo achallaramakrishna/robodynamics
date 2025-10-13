@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,10 +104,8 @@
             <!-- Full Name -->
             <div class="mb-3">
               <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="fullName" name="fullName"
-                     value="<c:out value='${mentor.fullName != null ? mentor.fullName : user.firstName + " " + user.lastName}'/>"
-                     required>
-            </div>
+             <input type="text" class="form-control" id="fullName" name="fullName" value="${mentor.fullName != null ? mentor.fullName : (user.firstName)} ${user.lastName}" />
+			</div>
 
             <!-- Email -->
             <div class="mb-3">

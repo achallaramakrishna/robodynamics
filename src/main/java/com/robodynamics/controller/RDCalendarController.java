@@ -51,7 +51,7 @@ public class RDCalendarController {
         return out;
     }
 
-    @GetMapping("/mentor/events")
+    @GetMapping(value = "/mentor/events", produces = "application/json")
     public List<CalendarEventDTO> mentorEvents(
             @RequestParam("start") String startStr,
             @RequestParam("end")   String endStr,

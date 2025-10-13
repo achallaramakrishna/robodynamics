@@ -3,6 +3,8 @@ package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDMentorDao;
 import com.robodynamics.dto.RDMentorDTO;
+import com.robodynamics.model.RDCourseCategory;
+import com.robodynamics.model.RDLead;
 import com.robodynamics.model.RDMentor;
 import com.robodynamics.model.RDUser;
 
@@ -12,8 +14,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -118,4 +122,55 @@ public class RDMentorDaoImpl implements RDMentorDao {
         .setMaxResults(8)
         .getResultList();
     }
+
+	@Override
+	public List<RDMentor> findMentorsForLead(RDLead lead) {
+	    Session s = sessionFactory.getCurrentSession();
+
+	    int grade = Integer.parseInt(lead.getGrade().replaceAll("\\D", "0"));
+	    List<String> subjects = Arrays.asList("Math", "Science"); // from lead
+
+	    String hql = "select distinct m " +
+	                 "from RDMentor m " +
+	                 "join fetch m.skills s " +
+	                 "where :grade between s.gradeMin and s.gradeMax " +
+	                 "and s.skillLabel in (:subjects)";
+
+	    return s.createQuery(hql, RDMentor.class)
+	            .setParameter("grade", grade)
+	            .setParameterList("subjects", subjects)
+	            .list();
+	}
+
+	@Override
+	public RDMentor getMentorById(int mentorId) {
+		Session session = sessionFactory.getCurrentSession();
+
+		RDMentor mentor = session.get(RDMentor.class, mentorId);
+        return mentor;
+	}
+
+	@Override
+	public RDMentor getMentorWithSkills(int mentorId) {
+		 String hql = "SELECT m FROM RDMentor m LEFT JOIN FETCH m.skills WHERE m.mentorId = :id";
+		    return sessionFactory.getCurrentSession()
+		                         .createQuery(hql, RDMentor.class)
+		                         .setParameter("id", mentorId)
+		                         .uniqueResult();
+	}
+
+	@Override
+	public boolean hasMentorProfile(int userID) {
+		if (userID == 0) return false;
+
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "SELECT COUNT(m) FROM RDMentor m WHERE m.user.userID = :userId";
+        Query<Long> query = session.createQuery(hql, Long.class);
+        query.setParameter("userId", userID);
+
+        Long count = query.uniqueResult();
+        return count != null && count > 0;
+	}
+
+
 }

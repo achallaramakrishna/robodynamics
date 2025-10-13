@@ -68,6 +68,8 @@ public interface RDCourseOfferingDao {
 	List<RDCourseOffering> getOverlapping(java.util.Date from, java.util.Date to);
 	List<RDCourseOffering> getOverlappingByMentor(java.util.Date from, java.util.Date to, Integer mentorUserId);
 
+	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID);
+
 
 
 

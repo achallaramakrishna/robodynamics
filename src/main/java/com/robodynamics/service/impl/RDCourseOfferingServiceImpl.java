@@ -132,6 +132,7 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseOffering> getCourseOfferingsOverlapping(LocalDate from, LocalDate to) {
 		java.sql.Date fromSql = (from == null) ? null : java.sql.Date.valueOf(from);
 	    java.sql.Date toSql   = (to   == null) ? null : java.sql.Date.valueOf(to);
@@ -140,6 +141,7 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseOffering> getCourseOfferingsOverlappingByMentor(LocalDate from, LocalDate to,
 			Integer mentorUserId) {
 		java.sql.Date fromSql = (from == null) ? null : java.sql.Date.valueOf(from);
@@ -149,9 +151,16 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourseOffering> getRDCourseOfferingsByCourse(int courseId) {
 		// TODO Auto-generated method stub
 		return rdCourseOfferingDao.getRDCourseOfferingsListByCourse(courseId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID) {
+		return rdCourseOfferingDao.getCourseOfferingsByMentor(userID);
 	}
 	
 }

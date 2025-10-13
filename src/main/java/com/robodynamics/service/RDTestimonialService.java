@@ -12,6 +12,12 @@ public interface RDTestimonialService {
     RDTestimonial create(RDTestimonial t);
     RDTestimonial update(RDTestimonial t);
 
-    boolean delete(Long id);              // hard delete
+    void delete(Long id);              // hard delete
     boolean setActive(Long id, boolean active);
+    
+    void saveTestimonial(RDTestimonial testimonial);
+
+    RDTestimonial getTestimonialById(Long id);
+
+    List<RDTestimonial> getAllTestimonials();
 }

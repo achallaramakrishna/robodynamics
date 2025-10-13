@@ -1,11 +1,9 @@
 package com.robodynamics.model;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "rd_testimonials")
@@ -15,67 +13,77 @@ public class RDTestimonial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 120, nullable = false)
-    private String name;
+    // Either a student or a mentor submits the testimonial
+    @Column(name = "student_id")
+    private Long studentId;
 
-    @Column(length = 120)
-    private String city;
+    @Column(name = "mentor_id")
+    private Long mentorId; // NEW: mentor as author
 
-    @Column(name = "role_label", length = 120)
-    private String roleLabel;
+    @Column(name = "course_id")
+    private Long courseId;
 
-    @Lob
-    @Column(nullable = false)
-    private String quote;
+    @Column(name = "course_offering_id")
+    private Long courseOfferingId; // Optional: for mentor testimonial
 
-    @Column(precision = 2, scale = 1)
-    private BigDecimal rating; // 1.0 - 5.0
+    @Column(name = "testimonial")
+    private String testimonial;
 
-    @Column(name = "avatar_url", length = 255)
-    private String avatarUrl;
-
-    @Column(name = "display_order")
-    private Integer displayOrder = 0;
-
-    @Column(nullable = false)
-    private Boolean active = true;
+    @Column(name = "rating")
+    private int rating;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    // Transient fields for display
+    @Transient
+    private String courseName;
 
-    // Getters/Setters
+    @Transient
+    private String studentName;
+
+    @Transient
+    private String parentName;
+
+    @Transient
+    private String mentorName;
+
+    // --- Getters & Setters ---
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    public Long getMentorId() { return mentorId; }
+    public void setMentorId(Long mentorId) { this.mentorId = mentorId; }
 
-    public String getRoleLabel() { return roleLabel; }
-    public void setRoleLabel(String roleLabel) { this.roleLabel = roleLabel; }
+    public Long getCourseId() { return courseId; }
+    public void setCourseId(Long courseId) { this.courseId = courseId; }
 
-    public String getQuote() { return quote; }
-    public void setQuote(String quote) { this.quote = quote; }
+    public Long getCourseOfferingId() { return courseOfferingId; }
+    public void setCourseOfferingId(Long courseOfferingId) { this.courseOfferingId = courseOfferingId; }
 
-    public BigDecimal getRating() { return rating; }
-    public void setRating(BigDecimal rating) { this.rating = rating; }
+    public String getTestimonial() { return testimonial; }
+    public void setTestimonial(String testimonial) { this.testimonial = testimonial; }
 
-    public String getAvatarUrl() { return avatarUrl; }
-    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+    public int getRating() { return rating; }
+    public void setRating(int rating) { this.rating = rating; }
 
-    public Integer getDisplayOrder() { return displayOrder; }
-    public void setDisplayOrder(Integer displayOrder) { this.displayOrder = displayOrder; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public String getCourseName() { return courseName; }
+    public void setCourseName(String courseName) { this.courseName = courseName; }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public String getStudentName() { return studentName; }
+    public void setStudentName(String studentName) { this.studentName = studentName; }
+
+    public String getParentName() { return parentName; }
+    public void setParentName(String parentName) { this.parentName = parentName; }
+
+    public String getMentorName() { return mentorName; }
+    public void setMentorName(String mentorName) { this.mentorName = mentorName; }
 }

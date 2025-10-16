@@ -422,42 +422,130 @@ public class RDUserController {
     public List<Map<String, Object>> getCalendarEvents(
             @RequestParam(required = false) Long courseId,
             @RequestParam(required = false) Long mentorId,
-            @RequestParam(required = false) String status) {
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String start,
+            @RequestParam(required = false) String end) {
 
-        List<RDCourseOffering> offerings = courseOfferingService.getFilteredOfferings(courseId, mentorId, status);
+        System.out.println("🎯 --- getCalendarEvents() called ---");
+        System.out.println("Params => courseId: " + courseId + ", mentorId: " + mentorId + 
+                           ", status: " + status + ", start: " + start + ", end: " + end);
+
+        // 1️⃣ Parse date range coming from FullCalendar
+        LocalDate startDate = (start != null && start.length() >= 10)
+                ? LocalDate.parse(start.substring(0, 10))
+                : LocalDate.now().minusDays(3);
+        LocalDate endDate = (end != null && end.length() >= 10)
+                ? LocalDate.parse(end.substring(0, 10))
+                : LocalDate.now().plusDays(7);
+
+        System.out.println("📅 Date Range => StartDate: " + startDate + ", EndDate: " + endDate);
+
+        // 2️⃣ Fetch offerings
+        List<RDCourseOffering> offerings;
+        if (mentorId != null) {
+            System.out.println("🔍 Fetching offerings by Mentor ID: " + mentorId);
+            offerings = courseOfferingService.getCourseOfferingsByDateAndMentor(startDate, mentorId.intValue());
+        } else {
+            System.out.println("🔍 Fetching offerings by Date only (no mentor filter)");
+            offerings = courseOfferingService.getCourseOfferingsByDate(startDate);
+        }
+
+        if (offerings == null || offerings.isEmpty()) {
+            System.out.println("⚠️ No course offerings found for given filters!");
+        } else {
+            System.out.println("✅ Offerings fetched: " + offerings.size());
+        }
 
         List<Map<String, Object>> events = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
+        // 3️⃣ Iterate over offerings
         for (RDCourseOffering offering : offerings) {
-            Map<String, Object> event = new HashMap<>();
+            System.out.println("➡️ Processing Offering ID: " + offering.getCourseOfferingId() +
+                               ", Name: " + offering.getCourseOfferingName());
 
-            String mentorName = (offering.getInstructor() != null)
-                    ? offering.getInstructor().getFirstName()
-                    : "Unknown Mentor";
-
-            String eventTitle = offering.getCourse().getCourseName() + " - " + mentorName;
-            if (offering.getStatus() != null && !offering.getStatus().isEmpty()) {
-                eventTitle += " (" + offering.getStatus() + ")";
+            if (offering.getDaysOfWeek() == null || offering.getDaysOfWeek().isBlank()) {
+                System.out.println("⏩ Skipping — No days_of_week for offering: " + offering.getCourseOfferingName());
+                continue;
             }
 
-            event.put("id", offering.getCourseOfferingId());
-            event.put("title", eventTitle);
+            // Parse "Mon,Wed,Fri"
+            Set<DayOfWeek> days = Arrays.stream(offering.getDaysOfWeek().split(","))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .map(String::toUpperCase)
+                    .map(RDUserController::parseDayOfWeek)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            System.out.println("🗓️ Parsed Days of Week: " + days);
 
-            if (offering.getSessionStartTime() != null) {
-                event.put("start", offering.getSessionStartTime().format(formatter));
+            LocalDate effectiveStart = (offering.getStartDate() != null)
+                    ? offering.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                    : startDate;
+            LocalDate effectiveEnd = (offering.getEndDate() != null)
+                    ? offering.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                    : endDate;
+
+            LocalDate from = (effectiveStart.isBefore(startDate)) ? startDate : effectiveStart;
+            LocalDate to = (effectiveEnd.isAfter(endDate)) ? endDate : effectiveEnd;
+            System.out.println("📆 Effective Range: " + from + " → " + to);
+
+            // Generate events
+            int eventCount = 0;
+            for (LocalDate d = from; !d.isAfter(to); d = d.plusDays(1)) {
+                if (days.contains(d.getDayOfWeek())) {
+                    Map<String, Object> event = new LinkedHashMap<>();
+
+                    String courseName = (offering.getCourse() != null)
+                            ? offering.getCourse().getCourseName()
+                            : "Untitled Course";
+                    String mentorName = (offering.getInstructor() != null)
+                            ? offering.getInstructor().getFirstName()
+                            : "Unknown Mentor";
+                    String statusLabel = (offering.getIsActive() != null && offering.getIsActive())
+                            ? "Active" : "Inactive";
+
+                    LocalTime startTime = offering.getSessionStartTime() != null
+                            ? offering.getSessionStartTime()
+                            : LocalTime.of(9, 0);
+                    LocalTime endTime = offering.getSessionEndTime() != null
+                            ? offering.getSessionEndTime()
+                            : startTime.plusHours(1);
+
+                    event.put("id", offering.getCourseOfferingId());
+                    event.put("title", courseName + " - " + mentorName + " (" + statusLabel + ")");
+                    event.put("courseName", courseName);
+                    event.put("mentorName", mentorName);
+                    event.put("offeringName", offering.getCourseOfferingName());
+                    event.put("status", statusLabel);
+                    event.put("start", LocalDateTime.of(d, startTime).format(formatter));
+                    event.put("end", LocalDateTime.of(d, endTime).format(formatter));
+
+                    events.add(event);
+                    eventCount++;
+                }
             }
-            if (offering.getSessionEndTime() != null) {
-                event.put("end", offering.getSessionEndTime().format(formatter));
-            }
-
-            event.put("mentor", mentorName);
-            event.put("courseId", offering.getCourse().getCourseId());
-            event.put("status", offering.getStatus());
-
-            events.add(event);
+            System.out.println("📌 Total events generated for offering " +
+                    offering.getCourseOfferingName() + ": " + eventCount);
         }
+
+        System.out.println("✅ Final total events returned: " + events.size());
         return events;
+    }
+
+    /** Helper: converts "Mon", "TUE", etc. to DayOfWeek enum safely */
+    private static DayOfWeek parseDayOfWeek(String s) {
+        if (s == null || s.length() < 3) return null;
+        switch (s.substring(0, 3).toUpperCase(Locale.ENGLISH)) {
+            case "MON": return DayOfWeek.MONDAY;
+            case "TUE": return DayOfWeek.TUESDAY;
+            case "WED": return DayOfWeek.WEDNESDAY;
+            case "THU": return DayOfWeek.THURSDAY;
+            case "FRI": return DayOfWeek.FRIDAY;
+            case "SAT": return DayOfWeek.SATURDAY;
+            case "SUN": return DayOfWeek.SUNDAY;
+            default: return null;
+        }
     }
 
     /* ================== Helpers ================== */

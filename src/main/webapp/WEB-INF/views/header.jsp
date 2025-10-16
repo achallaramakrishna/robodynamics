@@ -110,17 +110,62 @@
 		</c:choose>
 		
 		<!-- Auth Buttons -->
-		<li class="nav-item nav-cta ms-lg-2">
-		  <c:choose>
-		    <c:when test="${not empty sessionScope.rdUser}">
-		      <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
-		      <a class="btn btn-outline-danger btn-sm ms-2" href="${pageContext.request.contextPath}/logout">Log Out</a>
-		    </c:when>
-		    <c:otherwise>
-		      <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/login">Sign In</a>
-		    </c:otherwise>
-		  </c:choose>
-		</li>
+		<!-- Auth Buttons -->
+<li class="nav-item nav-cta ms-lg-2">
+  <c:choose>
+    <c:when test="${not empty sessionScope.rdUser}">
+      <c:choose>
+        <c:when test="${sessionScope.rdUser.profile_id == 1 or sessionScope.rdUser.profile_id == 2}">
+          <a class="btn btn-primary btn-sm"
+             href="${pageContext.request.contextPath}/admin/dashboard">
+             🧭 Admin Dashboard
+          </a>
+        </c:when>
+
+        <c:when test="${sessionScope.rdUser.profile_id == 3}">
+          <a class="btn btn-primary btn-sm"
+             href="${pageContext.request.contextPath}/mentor/dashboard">
+             🎓 Mentor Dashboard
+          </a>
+        </c:when>
+
+        <c:when test="${sessionScope.rdUser.profile_id == 4}">
+          <a class="btn btn-primary btn-sm"
+             href="${pageContext.request.contextPath}/parent/dashboard">
+             👨‍👩‍👧 Parent Dashboard
+          </a>
+        </c:when>
+
+        <c:when test="${sessionScope.rdUser.profile_id == 5}">
+          <a class="btn btn-primary btn-sm"
+             href="${pageContext.request.contextPath}/student/dashboard">
+             🎒 Student Dashboard
+          </a>
+        </c:when>
+
+        <c:otherwise>
+          <a class="btn btn-primary btn-sm"
+             href="${pageContext.request.contextPath}/dashboard">
+             Dashboard
+          </a>
+        </c:otherwise>
+      </c:choose>
+
+      <a class="btn btn-outline-danger btn-sm ms-2"
+         href="${pageContext.request.contextPath}/logout">
+         Log Out
+      </a>
+    </c:when>
+
+    <c:otherwise>
+      <a class="btn btn-outline-primary btn-sm"
+         href="${pageContext.request.contextPath}/login">
+         Sign In
+      </a>
+    </c:otherwise>
+  </c:choose>
+</li>
+
 
       </ul>
     </div>

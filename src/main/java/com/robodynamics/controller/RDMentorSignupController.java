@@ -64,70 +64,88 @@ public class RDMentorSignupController {
 
     private boolean has(String s) { return s != null && !s.isBlank(); }
 
-    // ----- POST: handle submission -----
+ // ----- POST: handle submission -----
     @PostMapping
     public String submit(@RequestParam String firstName,
                          @RequestParam(required = false) String lastName,
                          @RequestParam @Email String email,
                          @RequestParam String cellPhone,
-                         @RequestParam String userName,      // ⬅️ new field
+                         @RequestParam String userName,
                          @RequestParam String password,
                          @RequestParam(value = "next", required = false) String next,
                          HttpSession session,
                          RedirectAttributes ra) {
 
-        // validate mobile
+        // ✅ Validate mobile number
         if (!cellPhone.matches("\\d{10}")) {
-            ra.addFlashAttribute("flashErr", "Please enter a 10-digit mobile number.");
+            ra.addFlashAttribute("flashErr", "Please enter a valid 10-digit mobile number.");
             stashPrefill(ra, firstName, lastName, email, cellPhone);
             return redirectBack(next);
         }
 
         String normalizedEmail = email.trim().toLowerCase();
+        String normalizedUserName = userName.trim();
 
-        // check existing
-        RDUser existing = userService.findByEmail(normalizedEmail);
+        // ✅ Check if a user with this email already exists
+        RDUser existingByEmail = userService.findByEmail(normalizedEmail);
+        RDUser existingByPhone = userService.findByCellPhone(cellPhone);
         RDUser user;
 
-        if (existing != null) {
-        	
-            user = existing;
-            user.setUserName(userName.trim());
-            user.setPassword(password);
-            user.setLastName(lastName);
-            user.setActive(1);
-            user.setAge(0);
-            user.setProfile_id(3);
-            userService.save(user);
-            ra.addFlashAttribute("flashOk", "Welcome back! Continuing your mentor onboarding.");
-        } else {
-            // create new user
-            RDUser u = new RDUser();
-            u.setFirstName(firstName);
-            u.setLastName(lastName);
-            u.setEmail(normalizedEmail);
-            u.setCellPhone(cellPhone);
-            u.setUserName(userName.trim());   // ⬅️ set username
-            u.setActive(1);
-            u.setAge(0);
-            u.setProfile_id(3); // mentor role
-            u.setPassword(password);
+        try {
+            if (existingByEmail != null || existingByPhone != null) {
+                // 🧩 Existing user — continue onboarding
+                user = (existingByEmail != null) ? existingByEmail : existingByPhone;
+                user.setUserName(normalizedUserName);
+                user.setPassword(password);
+                user.setLastName(lastName);
+                user.setActive(1);
+                user.setAge(0);
+                user.setProfile_id(3);
+                userService.save(user);
 
-            user = userService.registerRDUser(u);
+                ra.addFlashAttribute("flashOk",
+                    "This mobile or email is already registered. Continuing your mentor onboarding.");
+            } else {
+                // 🆕 New user — register and create mentor profile
+                RDUser u = new RDUser();
+                u.setFirstName(firstName);
+                u.setLastName(lastName);
+                u.setEmail(normalizedEmail);
+                u.setCellPhone(cellPhone);
+                u.setUserName(normalizedUserName);
+                u.setActive(1);
+                u.setAge(0);
+                u.setProfile_id(3); // mentor role
+                u.setPassword(password);
 
-            String displayName = (firstName + " " + (lastName == null ? "" : lastName)).trim();
-            onboardingService.ensureMentorProfile(user.getUserID(), displayName);
+                user = userService.registerRDUser(u);
 
-            ra.addFlashAttribute("flashOk", "Welcome to Robo Dynamics! Let’s complete your mentor profile.");
+                String displayName = (firstName + " " + (lastName == null ? "" : lastName)).trim();
+                onboardingService.ensureMentorProfile(user.getUserID(), displayName);
+
+                ra.addFlashAttribute("flashOk",
+                    "Welcome to Robo Dynamics! Let’s complete your mentor profile.");
+            }
+
+            // ✅ Auto-login
+            session.setAttribute("rdUser", user);
+
+            String target = has(next) ? next : "/mentors/onboarding?step=consent";
+            return "redirect:" + target;
+
+        } catch (org.hibernate.exception.ConstraintViolationException e) {
+            // ⚠️ Graceful handling of duplicate constraint
+            ra.addFlashAttribute("flashErr",
+                "This mobile number or email is already registered. Please sign in or use another number.");
+            stashPrefill(ra, firstName, lastName, email, cellPhone);
+            return redirectBack(next);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ra.addFlashAttribute("flashErr", "An unexpected error occurred. Please try again.");
+            stashPrefill(ra, firstName, lastName, email, cellPhone);
+            return redirectBack(next);
         }
-
-        // auto-login
-        session.setAttribute("rdUser", user);
-
-        String target = has(next) ? next : "/mentors/onboarding?step=consent";
-        return "redirect:" + target;
     }
-
 
     private void stashPrefill(RedirectAttributes ra, String first, String last, String email, String phone) {
         ra.addFlashAttribute("prefill_firstName", first);

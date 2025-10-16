@@ -176,21 +176,30 @@ public class RDDataQualityDaoImpl implements RDDataQualityDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to) {
-        // Offerings that overlap the window [since..to]
-        // Handles open-ended ranges (null start/end) as “always active”
+        System.out.println("[DAO] Fetching offerings intersecting " + since + " .. " + to);
+
         String hql =
             "from RDCourseOffering o " +
             "left join fetch o.course " +
             "left join fetch o.instructor " +
-            "where (:since is null or o.endDate   is null or o.endDate   >= :since) " +
-            "  and (:to    is null or o.startDate is null or o.startDate <= :to) " +
+            "where (o.startDate is null or o.startDate <= :to) " +
+            "and (o.endDate is null or o.endDate >= :since) " +
             "order by o.course.courseId, o.courseOfferingId";
 
         org.hibernate.query.Query<?> q = s().createQuery(hql);
-        if (since != null) bindDate(q, "since", since); else q.setParameter("since", null);
-        if (to    != null) bindDate(q, "to",    to);    else q.setParameter("to",    null);
-        return (List<RDCourseOffering>) q.getResultList();
+        q.setParameter("since", java.sql.Timestamp.valueOf(since.atStartOfDay()));
+     //   q.setParameter("to", java.sql.Timestamp.valueOf(to.atTime(LocalTime.MAX)));
+
+        List<RDCourseOffering> list = (List<RDCourseOffering>) q.getResultList();
+        System.out.println("[DAO] Offerings fetched: " + list.size());
+        for (RDCourseOffering o : list) {
+            System.out.println(" -> " + o.getCourseOfferingName() +
+                    " | Start=" + o.getStartDate() +
+                    " | End=" + o.getEndDate());
+        }
+        return list;
     }
+
 
     @Override
     @SuppressWarnings("unchecked")

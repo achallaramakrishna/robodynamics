@@ -143,6 +143,12 @@ public class RDUserServiceImpl implements RDUserService {
 		// TODO Auto-generated method stub
 		return rdUserDao.getAllAdminsAndSuperAdmins();
 	}
+
+	@Override
+	@Transactional
+	public RDUser findByCellPhone(String cellPhone) {
+		return rdUserDao.findByCellPhone(cellPhone);	
+		}
 	
 	
 

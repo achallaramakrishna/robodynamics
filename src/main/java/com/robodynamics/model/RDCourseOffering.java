@@ -48,9 +48,10 @@ public class RDCourseOffering {
     @JsonProperty("courseOfferingName")
     private String courseOfferingName;
 
-    @Column(name = "status")
+
+    @Column(name = "is_active", nullable = false)
     @JsonIgnore
-    private String status;
+    private Boolean isActive = true;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
@@ -132,15 +133,15 @@ public class RDCourseOffering {
         this.courseOfferingName = courseOfferingName;
     }
 
-    public String getStatus() {
-        return status;
-    }
+   
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public RDCourse getCourse() {
+    public Boolean getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+	public RDCourse getCourse() {
         return course;
     }
 
@@ -191,16 +192,17 @@ public class RDCourseOffering {
 
 	@Override
 	public String toString() {
-	    // Keep this DEAD SIMPLE: never touch lazy collections here.
-	    return "RDCourseOffering{" +
-	            "courseOfferingId=" + courseOfferingId +
-	            ", courseOfferingName='" + courseOfferingName + '\'' +
-	            ", startDate=" + startDate +
-	            ", endDate=" + endDate +
-	            ", status=" + status +
-	            // DO NOT include studentEnrollments or any other lazy relation
-	            '}';
+	    return "RDCourseOffering [courseOfferingId=" + courseOfferingId +
+	           ", courseOfferingName=" + courseOfferingName +
+	           ", startDate=" + startDate +
+	           ", endDate=" + endDate +
+	           ", isActive=" + isActive +
+	           ", sessionsPerWeek=" + sessionsPerWeek +
+	           ", daysOfWeek=" + daysOfWeek +
+	           ", sessionStartTime=" + sessionStartTime +
+	           ", sessionEndTime=" + sessionEndTime + "]";
 	}
+
 
 	
 

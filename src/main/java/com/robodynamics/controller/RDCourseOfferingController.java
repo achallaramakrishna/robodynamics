@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.robodynamics.form.RDAssetTransactionForm;
 import com.robodynamics.form.RDCourseForm;
@@ -67,7 +68,7 @@ public class RDCourseOfferingController {
 	        if (rdUser != null) {
 	            if (rdUser.getProfile_id() == 1  || rdUser.getProfile_id() == 2) {
 	                // Admin sees everything
-	                courseOfferings = courseOfferingService.getRDCourseOfferings();
+	                courseOfferings = courseOfferingService.getAllRDCourseOfferings();
 	            } else if (rdUser.getProfile_id() == 3) {
 	                // Mentor sees only their own offerings
 	                courseOfferings = courseOfferingService.getCourseOfferingsByMentor(rdUser.getUserID());
@@ -227,10 +228,30 @@ public class RDCourseOfferingController {
     }
 
     @GetMapping("/delete")
-    public String deleteCourseOffering(@RequestParam("courseOfferingId") int courseOfferingId) {
-        courseOfferingService.deleteCourseOffering(courseOfferingId);
+    public String deleteCourseOffering(@RequestParam("courseOfferingId") int id, RedirectAttributes redirectAttrs) {
+        try {
+            courseOfferingService.deleteCourseOffering(id);
+            redirectAttrs.addFlashAttribute("successMessage", "Course offering deleted successfully!");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("errorMessage",
+                    "Cannot delete this course offering — it may have enrolled students or attendance records.");
+        }
         return "redirect:/courseoffering/list";
     }
+
+    
+    @GetMapping("/deactivate")
+    public String deactivateCourseOffering(@RequestParam("courseOfferingId") int id) {
+        courseOfferingService.deactivateCourseOffering(id);
+        return "redirect:/courseoffering/list";
+    }
+
+    @GetMapping("/activate")
+    public String activateCourseOffering(@RequestParam("courseOfferingId") int id) {
+        courseOfferingService.activateCourseOffering(id);
+        return "redirect:/courseoffering/list";
+    }
+
 
 	
 }

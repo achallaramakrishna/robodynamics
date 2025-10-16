@@ -46,6 +46,8 @@ public interface RDUserService {
 	
 	public List<RDUser> getAllAdminsAndSuperAdmins();
 
+	public RDUser findByCellPhone(String cellPhone);
+
 
 
 

@@ -125,6 +125,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "     FROM rd_course_offerings o " +
             "    WHERE (o.start_date IS NULL OR o.start_date <= :day) " +
             "      AND (o.end_date   IS NULL OR o.end_date   >= :day) " +
+            "      AND o.is_active = 1 " +
             "      AND (:offeringId IS NULL OR o.course_offering_id = :offeringId) " +
             "      AND o.days_of_week IS NOT NULL " +
             "      AND REPLACE(o.days_of_week,' ','') REGEXP (DATE_FORMAT(:day, '%a')) " +
@@ -206,6 +207,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "    FROM rd_course_offerings o " +
             "   WHERE (o.start_date IS NULL OR o.start_date <= :to) " +
             "     AND (o.end_date   IS NULL OR o.end_date   >= :from) " +
+            "      AND o.is_active = 1 " +
             "     AND (:offeringId IS NULL OR o.course_offering_id = :offeringId) " +
             "), enr AS ( " +
             "  SELECT e.enrollment_id, e.course_offering_id, u.user_id AS student_id, " +
@@ -291,6 +293,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "    FROM rd_course_offerings o " +
             "   WHERE (o.start_date IS NULL OR o.start_date <= :to) " +
             "     AND (o.end_date   IS NULL OR o.end_date   >= :from) " +
+            "      AND o.is_active = 1 " +
             "     AND (:offeringId IS NULL OR o.course_offering_id = :offeringId) " +
             "), enr AS ( " +
             "  SELECT e.enrollment_id, e.course_offering_id, u.user_id AS student_id, " +

@@ -11,6 +11,8 @@ import com.robodynamics.model.RDCourseOffering;
 
 public interface RDCourseOfferingService {
 	
+	public List<RDCourseOffering> getAllRDCourseOfferings();
+	
 	public void saveRDCourseOffering(RDCourseOffering rdCourseOffering);
 
 	public RDCourseOffering getRDCourseOffering(int rdCourseOfferingId);
@@ -39,16 +41,14 @@ public interface RDCourseOfferingService {
 
 	public List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
 	
+	public void deactivateCourseOffering(int id);
+	public void activateCourseOffering(int id);
+
 	
-    // new (suggested)
-    List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end);
-    List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end, Integer mentorUserId);
+	
+   
 
-
-    List<RDCourseOffering> getCourseOfferingsOverlapping(LocalDate from, LocalDate to);
-    List<RDCourseOffering> getCourseOfferingsOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId);
-
-	public List<RDCourseOffering> getRDCourseOfferingsByCourse(int courseId);
+   	public List<RDCourseOffering> getRDCourseOfferingsByCourse(int courseId);
 
 	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID);
 

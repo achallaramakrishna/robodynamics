@@ -35,6 +35,8 @@ public class RDMentorDashboardController {
     	    boolean profileExists = mentorService.hasMentorProfile(user.getUserID());
     	    List<RDCourseOffering> courseOfferings = courseOfferingService.getCourseOfferingsByMentor(user.getUserID());
     	    model.addAttribute("courseOfferings", courseOfferings);
+    	    model.addAttribute("mentorCourseOfferings", courseOfferings);
+
     	    model.addAttribute("user", user);
     	    model.addAttribute("profileExists", profileExists);
     	    model.addAttribute("title", "Mentor Dashboard");

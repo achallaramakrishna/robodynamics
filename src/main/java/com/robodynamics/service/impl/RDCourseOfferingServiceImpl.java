@@ -102,53 +102,16 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 		return rdCourseOfferingDao.findOfferingsForMentorIntersecting(selectedDate,userId);
 	}
 
-	@Override
-	@Transactional
-	public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to) {
-		// TODO Auto-generated method stub
-		return rdCourseOfferingDao.getCourseOfferingsByDateAndMentor(since,to);
-	}
-
+	
 	@Override
 	@Transactional
 	public List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to) {
 		// TODO Auto-generated method stub
-		return rdCourseOfferingDao.findOfferingsForMentorIntersecting(mentorId,since,to);
+		return rdCourseOfferingDao.getOfferingsForMentorIntersecting(mentorId,since,to);
 	}
 
-	@Override
-	@Transactional
-	public List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end) {
-		// TODO Auto-generated method stub
-		return rdCourseOfferingDao.getCourseOfferingsBetween(start,end);
-	}
-
-	@Override
-	@Transactional
-	public List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end,
-			Integer mentorUserId) {
-		// TODO Auto-generated method stub
-		return rdCourseOfferingDao.getCourseOfferingsBetweenForMentor(start,end);
-	}
-
-	@Override
-	@Transactional
-	public List<RDCourseOffering> getCourseOfferingsOverlapping(LocalDate from, LocalDate to) {
-		java.sql.Date fromSql = (from == null) ? null : java.sql.Date.valueOf(from);
-	    java.sql.Date toSql   = (to   == null) ? null : java.sql.Date.valueOf(to);
-	  
-		return rdCourseOfferingDao.getOverlapping(fromSql, toSql);
-	}
-
-	@Override
-	@Transactional
-	public List<RDCourseOffering> getCourseOfferingsOverlappingByMentor(LocalDate from, LocalDate to,
-			Integer mentorUserId) {
-		java.sql.Date fromSql = (from == null) ? null : java.sql.Date.valueOf(from);
-	    java.sql.Date toSql   = (to   == null) ? null : java.sql.Date.valueOf(to);
-	   
-		return rdCourseOfferingDao.getOverlappingByMentor(fromSql,toSql,mentorUserId);
-	}
+	
+	
 
 	@Override
 	@Transactional
@@ -162,5 +125,35 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID) {
 		return rdCourseOfferingDao.getCourseOfferingsByMentor(userID);
 	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to) {
+		
+		return rdCourseOfferingDao.getOfferingsIntersecting(since,to);
+	}
+
+	@Override
+	@Transactional
+	public void deactivateCourseOffering(int id) {
+		rdCourseOfferingDao.deactivateCourseOffering(id);
+	}
+
+	@Override
+	@Transactional
+	public void activateCourseOffering(int id) {
+		rdCourseOfferingDao.activateCourseOffering(id);
+	}
+	
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getAllRDCourseOfferings() {
+	    return rdCourseOfferingDao.getAllRDCourseOfferings();
+	}
+
+
+
+	
+	
 	
 }

@@ -42,4 +42,7 @@ public interface RDUserDao {
 	public List<RDUser> getAllAdminsAndSuperAdmins();
 
 
+	public RDUser findByCellPhone(String cellPhone);
+
+
 }

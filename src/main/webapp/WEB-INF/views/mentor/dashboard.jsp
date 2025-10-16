@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -80,6 +82,43 @@
     </div>
 </div>
 
+    <!-- ==================== MY COURSE OFFERINGS (CARDS) ==================== -->
+<div class="row mt-4">
+  <div class="col-12">
+    <h3 class="mb-3 text-center">🎓 My Course Offerings</h3>
+    <div class="row justify-content-center">
+      <c:forEach var="offering" items="${mentorCourseOfferings}">
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 text-center">
+            <div class="card-body">
+              <h5 class="card-title">${offering.course.courseName}</h5>
+              <p class="card-text text-muted mb-2">
+                <strong>${offering.daysOfWeek}</strong><br>
+                ${offering.sessionStartTime} - ${offering.sessionEndTime}
+              </p>
+              <p class="card-text small text-secondary mb-3">
+                <i class="bi bi-people"></i> Enrolled Students: 
+                <c:out value="${fn:length(offering.studentEnrollments)}" default="0"/>
+              </p>
+              <a href="${pageContext.request.contextPath}/course/monitor?courseId=${offering.course.courseId}&enrollmentId=0"
+                 class="btn btn-primary btn-sm">
+                <i class="fas fa-play-circle"></i> View Classes
+              </a>
+            </div>
+            <div class="card-footer small text-muted">
+              Start: <fmt:formatDate value="${offering.startDate}" pattern="dd MMM yyyy"/> |
+              End: <fmt:formatDate value="${offering.endDate}" pattern="dd MMM yyyy"/>
+            </div>
+          </div>
+        </div>
+      </c:forEach>
+
+      <c:if test="${empty mentorCourseOfferings}">
+        <div class="text-center text-muted">No course offerings assigned.</div>
+      </c:if>
+    </div>
+  </div>
+</div>
     
 
     <!-- Row 2: Quick actions -->
@@ -114,6 +153,7 @@
         </div>
       </div>
     </div>
+
 
 	<!-- Row: Mentor Leads Dashboard -->
 	<div class="row mb-4">

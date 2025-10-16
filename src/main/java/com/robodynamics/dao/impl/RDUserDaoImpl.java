@@ -248,6 +248,15 @@ public class RDUserDaoImpl implements RDUserDao {
 		}
 	}
 
+	@Override
+	public RDUser findByCellPhone(String cellPhone) {
+		Session session = factory.getCurrentSession();
+		Query<RDUser> q = session.createQuery("FROM RDUser WHERE cellPhone = :cellPhone", RDUser.class);
+        q.setParameter("cellPhone", cellPhone);
+        List<RDUser> results = q.getResultList();
+        return results.isEmpty() ? null : results.get(0);	
+    }
+
 
 	
 

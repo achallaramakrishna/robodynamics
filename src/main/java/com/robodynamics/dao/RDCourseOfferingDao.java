@@ -1,76 +1,96 @@
-package com.robodynamics.dao;
-
-import java.time.LocalDate;
-import java.util.List;
-
-import com.robodynamics.dto.RDCourseOfferingDTO;
-import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
-import com.robodynamics.model.RDAsset;
-import com.robodynamics.model.RDAssetTransaction;
-import com.robodynamics.model.RDCourseOffering;
-
-public interface RDCourseOfferingDao {
+	package com.robodynamics.dao;
 	
-	public void saveRDCourseOffering(RDCourseOffering rdCourseOffering);
-
-	public RDCourseOffering getRDCourseOffering(int rdCourseOfferingId);
+	import java.time.LocalDate;
+	import java.util.List;
 	
-	public List < RDCourseOffering > getRDCourseOfferings();
+	import com.robodynamics.dto.RDCourseOfferingDTO;
+	import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
+	import com.robodynamics.model.RDAsset;
+	import com.robodynamics.model.RDAssetTransaction;
+	import com.robodynamics.model.RDCourseOffering;
 	
-    public void deleteRDCourseOffering(int id);
-    
-	public List<RDCourseOffering> getRDCourseOfferingsList(int userId);
+	public interface RDCourseOfferingDao {
+		
+		List<RDCourseOffering> getAllRDCourseOfferings(); // includes active + inactive
+
+		
+		public void saveRDCourseOffering(RDCourseOffering rdCourseOffering);
 	
-    RDCourseOffering getOnlineCourseOffering(int courseId);
-    
-    List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
-
-
-	public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today);
-
-	public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status);
-
-	public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId);
-
-	public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, LocalDate to);
-
-	public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
-
-	public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate, Integer userId);
+		public RDCourseOffering getRDCourseOffering(int rdCourseOfferingId);
+		
+		public List < RDCourseOffering > getRDCourseOfferings();
+		
+	    public void deleteRDCourseOffering(int id);
+	    
+		public List<RDCourseOffering> getRDCourseOfferingsList(int userId);
+		
+	    RDCourseOffering getOnlineCourseOffering(int courseId);
+	    
+	    List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId);
 	
-    List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate date, Integer mentorUserId);
-
-    // new (suggested)
-    List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end);
-    List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end, Integer mentorUserId);
-
-	public List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end);
 	
-	  /* Day-based */
-    List<RDCourseOffering> findByDate(LocalDate date);
-    List<RDCourseOffering> findByDateAndMentor(LocalDate date, Integer mentorUserId);
+		public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate today);
+	
+		public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status);
+	
+		public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId);
+	
+	
+		public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
+	
+		public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate, Integer userId);
+		
+		
+		  /* Day-based */
+	    List<RDCourseOffering> findByDate(LocalDate date);
+	    List<RDCourseOffering> findByDateAndMentor(LocalDate date, Integer mentorUserId);
+	
+	
+	    /* Simple filter (for calendar endpoint) */
+	    List<RDCourseOffering> findFiltered(Long courseId, Long mentorId, String status);
+	
+	    /* Optional: with pagination if you need it later */
+	    List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive, int offset, int limit);
+	    List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId, int offset, int limit);
+	
+	
+	
+		public List<RDCourseOffering> getCourseOfferingsByMentor(int userID);
+	
+		
+	    /* ====================== Activation / Deactivation ====================== */
 
-    /* Range-based (inclusive start..end) */
-    List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive);
-    List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId);
+	    /**
+	     * Soft deactivate a course offering (sets isActive = false)
+	     */
+	    void deactivateCourseOffering(int id);
 
-    /* Simple filter (for calendar endpoint) */
-    List<RDCourseOffering> findFiltered(Long courseId, Long mentorId, String status);
+	    /**
+	     * Reactivate a course offering (sets isActive = true)
+	     */
+	    void activateCourseOffering(int id);
 
-    /* Optional: with pagination if you need it later */
-    List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive, int offset, int limit);
-    List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId, int offset, int limit);
-
-	List<RDCourseOffering> getOverlapping(LocalDate from, LocalDate to);
-
-	List<RDCourseOffering> getOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId);
-
-	List<RDCourseOffering> getOverlapping(java.util.Date from, java.util.Date to);
-	List<RDCourseOffering> getOverlappingByMentor(java.util.Date from, java.util.Date to, Integer mentorUserId);
-
-	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID);
+	    /**
+	     * Fetch all course offerings, optionally including inactive ones.
+	     * Useful for admin views.
+	     */
+	    List<RDCourseOffering> getAllCourseOfferings(boolean includeInactive);
 
 
+	    /* ====================== Parent View (Summary) ====================== */
 
+	    /**
+	     * Returns parent-visible course offerings including optional inactive ones.
+	     */
+	    List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId, boolean includeInactive);
 
-}
+		List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, Integer userId);
+
+		public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to);
+
+		List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
+
+	
+	
+	
+	}

@@ -78,7 +78,7 @@ public class RDCalendarController {
     /** Expands offerings by days-of-week into discrete day events for FullCalendar. */
     private List<CalendarEventDTO> buildEventsByOffering(Integer mentorId, LocalDate since, LocalDate toIncl) {
 
-        final List<RDCourseOffering> offerings = (mentorId == null)
+    	 List<RDCourseOffering> offerings = (mentorId == null)
                 ? offeringService.getOfferingsIntersecting(since, toIncl)
                 : offeringService.getOfferingsForMentorIntersecting(mentorId, since, toIncl);
 

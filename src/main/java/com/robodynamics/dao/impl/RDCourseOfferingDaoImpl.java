@@ -1,10 +1,8 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseOfferingDao;
-import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDCourseOffering;
-import com.robodynamics.model.RDUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -15,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.NoResultException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.*;
 import java.util.function.Function;
@@ -42,7 +41,7 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
     @Override
     public List<RDCourseOffering> getRDCourseOfferings() {
-        String hql = "from RDCourseOffering";
+        String hql = "from RDCourseOffering where isActive = true order by startDate asc";
         return s().createQuery(hql, RDCourseOffering.class).getResultList();
     }
 
@@ -52,10 +51,38 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
         s().delete(o);
     }
 
+    /* ====================== Activation / Deactivation ====================== */
+
+    @Override
+    public void deactivateCourseOffering(int id) {
+        String hql = "update RDCourseOffering set isActive = false where courseOfferingId = :id";
+        s().createQuery(hql)
+          .setParameter("id", id)
+          .executeUpdate();
+    }
+
+    @Override
+    public void activateCourseOffering(int id) {
+        String hql = "update RDCourseOffering set isActive = true where courseOfferingId = :id";
+        s().createQuery(hql)
+          .setParameter("id", id)
+          .executeUpdate();
+    }
+
+    @Override
+    public List<RDCourseOffering> getAllCourseOfferings(boolean includeInactive) {
+        String hql = includeInactive
+                ? "from RDCourseOffering order by startDate asc"
+                : "from RDCourseOffering where isActive = true order by startDate asc";
+        return s().createQuery(hql, RDCourseOffering.class).getResultList();
+    }
+
+    /* ====================== Mentor / Course Queries ====================== */
+
     @Override
     public List<RDCourseOffering> getRDCourseOfferingsList(int userId) {
         try {
-            String hql = "from RDCourseOffering where user.userID = :userId";
+            String hql = "from RDCourseOffering where instructor.userID = :userId and isActive = true order by startDate asc";
             return s().createQuery(hql, RDCourseOffering.class)
                       .setParameter("userId", userId)
                       .getResultList();
@@ -66,7 +93,7 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
     @Override
     public RDCourseOffering getOnlineCourseOffering(int courseId) {
-        String hql = "from RDCourseOffering co where co.course.courseId = :courseId";
+        String hql = "from RDCourseOffering co where co.course.courseId = :courseId and co.isActive = true";
         List<RDCourseOffering> results = s().createQuery(hql, RDCourseOffering.class)
                                             .setParameter("courseId", courseId)
                                             .getResultList();
@@ -75,55 +102,91 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
     @Override
     public List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId) {
-        String hql = "from RDCourseOffering where course.courseId = :courseId";
+        String hql = "from RDCourseOffering where course.courseId = :courseId and isActive = true order by startDate asc";
         return s().createQuery(hql, RDCourseOffering.class)
                   .setParameter("courseId", courseId)
                   .getResultList();
     }
 
-
+    @Override
+    public List<RDCourseOffering> getCourseOfferingsByMentor(int userID) {
+        String hql = "SELECT DISTINCT co FROM RDCourseOffering co " +
+                     "LEFT JOIN FETCH co.studentEnrollments es " +
+                     "WHERE co.instructor.userID = :mentorId AND co.isActive = true " +
+                     "ORDER BY co.startDate ASC";
+        return s().createQuery(hql, RDCourseOffering.class)
+                 .setParameter("mentorId", userID)
+                 .getResultList();
+    }
 
     /* ====================== Day-of-week / Daily lookups ====================== */
 
     @Override
-    public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate date) {
-        String shortDay = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH); // e.g., Mon
+    public List<RDCourseOffering> getCourseOfferingsByDate(LocalDate selectedDate) {
+        Session session = factory.getCurrentSession();
+
+        String shortDay = selectedDate.getDayOfWeek()
+                .getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                .toLowerCase(Locale.ROOT);
+
         String hql = "from RDCourseOffering c " +
-                     "where replace(lower(c.daysOfWeek), ' ', '') like :dayOfWeek " +
-                     "  and c.startDate <= :d " +
-                     "  and c.endDate   >= :d";
-        return s().createQuery(hql, RDCourseOffering.class)
-                  .setParameter("dayOfWeek", "%" + shortDay.toLowerCase(Locale.ROOT) + "%")
-                  .setParameter("d", Date.valueOf(date))
-                  .getResultList();
+                     "left join fetch c.course " +
+                     "left join fetch c.instructor " +
+                     "where c.isActive = true " +
+                     "and (c.startDate is null or c.startDate <= :date) " +
+                     "and (c.endDate is null or c.endDate >= :date) " +
+                     "and lower(replace(c.daysOfWeek, ' ', '')) like :dayOfWeek " +
+                     "order by c.sessionStartTime asc";
+
+        return session.createQuery(hql, RDCourseOffering.class)
+                .setParameter("date", java.sql.Date.valueOf(selectedDate))
+                .setParameter("dayOfWeek", "%" + shortDay + "%")
+                .getResultList();
     }
 
+
     @Override
-    public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, Integer userId) {
-        String shortDay = selectedDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+    public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, Integer mentorId) {
+        Session session = factory.getCurrentSession();
+
+        String shortDay = selectedDate.getDayOfWeek()
+                .getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                .toLowerCase(Locale.ROOT);
+
         String hql = "from RDCourseOffering c " +
                      "left join fetch c.course " +
                      "left join fetch c.instructor m " +
-                     "where replace(lower(c.daysOfWeek), ' ', '') like :dayOfWeek " +
-                     "  and c.startDate <= :d " +
-                     "  and c.endDate   >= :d " +
-                     "  and m is not null and m.userID = :mentorId " +
-                     "order by c.startDate desc";
-        return s().createQuery(hql, RDCourseOffering.class)
-                  .setParameter("dayOfWeek", "%" + shortDay.toLowerCase(Locale.ROOT) + "%")
-                  .setParameter("d", Date.valueOf(selectedDate))
-                  .setParameter("mentorId", userId)
-                  .getResultList();
+                     "where c.isActive = true " +
+                     "and (c.startDate is null or c.startDate <= :date) " +
+                     "and (c.endDate is null or c.endDate >= :date) " +
+                     "and lower(replace(c.daysOfWeek, ' ', '')) like :dayOfWeek ";
+
+        // ✅ Fix: Use mentorId instead of userID
+        if (mentorId != null) {
+            hql += "and (m.userID = :mentorId or c.mentor.mentorId = :mentorId) ";
+        }
+
+        hql += "order by c.sessionStartTime asc";
+
+        Query<RDCourseOffering> query = session.createQuery(hql, RDCourseOffering.class)
+                .setParameter("date", java.sql.Date.valueOf(selectedDate))
+                .setParameter("dayOfWeek", "%" + shortDay + "%");
+
+        if (mentorId != null) {
+            query.setParameter("mentorId", mentorId);
+        }
+
+        return query.getResultList();
     }
+
+
 
     /* ====================== Date overlap (safe, DATE-only) ====================== */
 
     @Override
     public List<RDCourseOffering> findByDate(LocalDate date) {
         String hql = "from RDCourseOffering o " +
-                     "where o.startDate <= :d " +
-                     "  and o.endDate   >= :d " +
-                     "order by o.startDate asc";
+                     "where o.isActive = true and o.startDate <= :d and o.endDate >= :d order by o.startDate asc";
         return s().createQuery(hql, RDCourseOffering.class)
                   .setParameter("d", Date.valueOf(date))
                   .getResultList();
@@ -132,161 +195,130 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
     @Override
     public List<RDCourseOffering> findByDateAndMentor(LocalDate date, Integer mentorUserId) {
         String hql = "from RDCourseOffering o " +
-                     "where o.instructor.userID = :mid " +
-                     "  and o.startDate <= :d " +
-                     "  and o.endDate   >= :d " +
-                     "order by o.startDate asc";
+                     "where o.isActive = true and o.instructor.userID = :mid " +
+                     "and o.startDate <= :d and o.endDate >= :d order by o.startDate asc";
         return s().createQuery(hql, RDCourseOffering.class)
                   .setParameter("mid", mentorUserId)
                   .setParameter("d", Date.valueOf(date))
                   .getResultList();
     }
 
-    @Override
-    public List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive) {
-        if (endInclusive.isBefore(startInclusive)) endInclusive = startInclusive;
-        String hql = "from RDCourseOffering o " +
-                     "where o.endDate   >= :since " +
-                     "  and o.startDate <= :till " +
-                     "order by o.startDate asc";
-        return s().createQuery(hql, RDCourseOffering.class)
-                  .setParameter("since", Date.valueOf(startInclusive))
-                  .setParameter("till",  Date.valueOf(endInclusive))
-                  .getResultList();
-    }
-
-    @Override
-    public List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive, Integer mentorUserId) {
-        if (endInclusive.isBefore(startInclusive)) endInclusive = startInclusive;
-        String hql = "from RDCourseOffering o " +
-                     "where o.instructor.userID = :mid " +
-                     "  and o.endDate   >= :since " +
-                     "  and o.startDate <= :till " +
-                     "order by o.startDate asc";
-        return s().createQuery(hql, RDCourseOffering.class)
-                  .setParameter("mid",   mentorUserId)
-                  .setParameter("since", Date.valueOf(startInclusive))
-                  .setParameter("till",  Date.valueOf(endInclusive))
-                  .getResultList();
-    }
-
-    /* ===== Pagination variants (still DATE overlap) ===== */
-
-    @Override
-    public List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive, int offset, int limit) {
-        if (endInclusive.isBefore(startInclusive)) endInclusive = startInclusive;
-        String hql = "from RDCourseOffering o " +
-                     "where o.endDate   >= :since " +
-                     "  and o.startDate <= :till " +
-                     "order by o.startDate asc";
-        Query<RDCourseOffering> q = s().createQuery(hql, RDCourseOffering.class)
-                                       .setParameter("since", Date.valueOf(startInclusive))
-                                       .setParameter("till",  Date.valueOf(endInclusive));
-        if (offset > 0) q.setFirstResult(offset);
-        if (limit  > 0) q.setMaxResults(limit);
-        return q.getResultList();
-    }
-
-    @Override
-    public List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive,
-                                                       Integer mentorUserId, int offset, int limit) {
-        if (endInclusive.isBefore(startInclusive)) endInclusive = startInclusive;
-        String hql = "from RDCourseOffering o " +
-                     "where o.instructor.userID = :mid " +
-                     "  and o.endDate   >= :since " +
-                     "  and o.startDate <= :till " +
-                     "order by o.startDate asc";
-        Query<RDCourseOffering> q = s().createQuery(hql, RDCourseOffering.class)
-                                       .setParameter("mid",   mentorUserId)
-                                       .setParameter("since", Date.valueOf(startInclusive))
-                                       .setParameter("till",  Date.valueOf(endInclusive));
-        if (offset > 0) q.setFirstResult(offset);
-        if (limit  > 0) q.setMaxResults(limit);
-        return q.getResultList();
-    }
-
-    /* ===== Convenience aliases / compatibility ===== */
-
-    // Alias if your service has this misnamed signature
-    public List<RDCourseOffering> findByDateAndMentor(LocalDate from, LocalDate to) {
-        return findBetween(from, to);
-    }
-
-    @Override
-    public List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end) {
-        // No mentor id provided in signature — interpret as unfiltered range
-        return getCourseOfferingsBetween(start, end);
-    }
-
-    @Override
-    public List<RDCourseOffering> getCourseOfferingsBetween(LocalDate start, LocalDate end) {
-        if (start == null || end == null) throw new IllegalArgumentException("start and end are required");
-        return findBetween(start, end);
-    }
-
-    @Override
-    public List<RDCourseOffering> getCourseOfferingsBetweenForMentor(LocalDate start, LocalDate end, Integer mentorUserId) {
-        if (start == null || end == null) throw new IllegalArgumentException("start and end are required");
-        if (mentorUserId == null) throw new IllegalArgumentException("mentorUserId is required");
-        return findBetweenForMentor(start, end, mentorUserId);
-    }
-
-    // Another odd overload in your interface; interpret as range without mentor
-    @Override
-    public List<RDCourseOffering> getCourseOfferingsByDateAndMentor(LocalDate selectedDate, LocalDate to) {
-        if (selectedDate == null || to == null) throw new IllegalArgumentException("from/to are required");
-        return findBetween(selectedDate, to);
-    }
-
-    /* ====================== Calendar / Filter helpers ====================== */
+    
+    /* ====================== Filtered / Calendar ====================== */
 
     @Override
     public List<RDCourseOffering> getFilteredOfferings(Long courseId, Long mentorId, String status) {
-        StringBuilder hql = new StringBuilder("from RDCourseOffering o where 1=1 ");
+        StringBuilder hql = new StringBuilder("from RDCourseOffering o where o.isActive = true ");
         if (courseId != null) hql.append("and o.course.courseId = :cid ");
         if (mentorId != null) hql.append("and o.instructor.userID = :mid ");
-        if (status != null && !status.trim().isEmpty()) hql.append("and o.status = :status ");
         hql.append("order by o.startDate asc");
-
         Query<RDCourseOffering> q = s().createQuery(hql.toString(), RDCourseOffering.class);
         if (courseId != null) q.setParameter("cid", courseId.intValue());
         if (mentorId != null) q.setParameter("mid", mentorId.intValue());
-        if (status != null && !status.trim().isEmpty()) q.setParameter("status", status.trim());
         return q.getResultList();
     }
 
     @Override
-    public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId) {
-        final String hql =
-            "select new com.robodynamics.dto.RDCourseOfferingSummaryDTO(" +
-            "  c.courseId, " +
-            "  c.courseName, " +
-            "  o.courseOfferingId, " +
-            "  o.courseOfferingName, " +
-            "  concat(coalesce(m.firstName, ''), " +
-            "         case when m.lastName is null or m.lastName = '' then '' else concat(' ', m.lastName) end), " +
-            "  o.startDate, " +
-            "  o.endDate, " +
-            "  o.status, " +
-            "  count(distinct e.enrollmentId) " +
-            ") " +
-            "from com.robodynamics.model.RDCourseOffering o " +
-            "  join o.course c " +
-            "  left join o.instructor m " +
-            "  join o.studentEnrollments e " +
-            "  join e.student s " +
-            "  left join s.mom mom " +
-            "  left join s.dad dad " +
-            "where (mom.userID = :parentId or dad.userID = :parentId) " +
-            "group by c.courseId, c.courseName, " +
-            "         o.courseOfferingId, o.courseOfferingName, " +
-            "         m.firstName, m.lastName, " +
-            "         o.startDate, o.endDate, o.status " +
-            "order by o.startDate desc";
+    public List<RDCourseOffering> findFiltered(Long courseId, Long mentorId, String status) {
+        StringBuilder hql = new StringBuilder("from RDCourseOffering o where o.isActive = true ");
+        if (courseId != null) hql.append("and o.course.courseId = :cid ");
+        if (mentorId != null) hql.append("and o.instructor.userID = :mid ");
+        hql.append("order by o.startDate asc");
+        Query<RDCourseOffering> q = s().createQuery(hql.toString(), RDCourseOffering.class);
+        if (courseId != null) q.setParameter("cid", courseId.intValue());
+        if (mentorId != null) q.setParameter("mid", mentorId.intValue());
+        return q.getResultList();
+    }
 
+    /* ====================== Parent View (Summary) ====================== */
+
+    @Override
+    public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId) {
+        if (parentId == null) return Collections.emptyList();
+        String hql =
+            "select new com.robodynamics.dto.RDCourseOfferingSummaryDTO(" +
+            "  c.courseId, c.courseName, o.courseOfferingId, o.courseOfferingName, " +
+            "  concat(coalesce(m.firstName, ''), case when m.lastName is null or m.lastName = '' then '' else concat(' ', m.lastName) end), " +
+            "  o.startDate, o.endDate, " +
+            "  case when o.isActive = true then 'Active' else 'Inactive' end, " +
+            "  count(distinct e.enrollmentId)) " +
+            "from com.robodynamics.model.RDCourseOffering o " +
+            "join o.course c left join o.instructor m " +
+            "join o.studentEnrollments e join e.student s " +
+            "left join s.mom mom left join s.dad dad " +
+            "where (mom.userID = :parentId or dad.userID = :parentId) and o.isActive = true " +
+            "group by c.courseId, c.courseName, o.courseOfferingId, o.courseOfferingName, m.firstName, m.lastName, o.startDate, o.endDate, o.isActive " +
+            "order by o.startDate desc";
         return s().createQuery(hql, RDCourseOfferingSummaryDTO.class)
                   .setParameter("parentId", parentId)
                   .getResultList();
+    }
+
+    @Override
+    public List<RDCourseOfferingSummaryDTO> getOfferingsByParentId(Integer parentId, boolean includeInactive) {
+        if (parentId == null) return Collections.emptyList();
+        String hql =
+            "select new com.robodynamics.dto.RDCourseOfferingSummaryDTO(" +
+            "  c.courseId, c.courseName, o.courseOfferingId, o.courseOfferingName, " +
+            "  concat(coalesce(m.firstName, ''), case when m.lastName is null or m.lastName = '' then '' else concat(' ', m.lastName) end), " +
+            "  o.startDate, o.endDate, " +
+            "  case when o.isActive = true then 'Active' else 'Inactive' end, " +
+            "  count(distinct e.enrollmentId)) " +
+            "from com.robodynamics.model.RDCourseOffering o " +
+            "join o.course c left join o.instructor m " +
+            "join o.studentEnrollments e join e.student s " +
+            "left join s.mom mom left join s.dad dad " +
+            "where (mom.userID = :parentId or dad.userID = :parentId) " +
+            (includeInactive ? "" : "and o.isActive = true ") +
+            "group by c.courseId, c.courseName, o.courseOfferingId, o.courseOfferingName, m.firstName, m.lastName, o.startDate, o.endDate, o.isActive " +
+            "order by o.startDate desc";
+        return s().createQuery(hql, RDCourseOfferingSummaryDTO.class)
+                  .setParameter("parentId", parentId)
+                  .getResultList();
+    }
+
+    /* ====================== Overlapping Queries ====================== */
+
+  
+    /* ====================== Mentor Intersect ====================== */
+
+    @Override
+    public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to) {
+    	System.out.println("[DAO] Fetching offerings for mentorId=" + mentorId + " between " + since + " .. " + to);
+
+        String hql =
+            "from RDCourseOffering o " +
+            "left join fetch o.course " +
+            "left join fetch o.instructor " +
+            "where o.instructor.userID = :mentorId " +
+            "and (o.startDate is null or o.startDate <= :to) " +
+            "and (o.endDate   is null or o.endDate   >= :since) " +
+            "order by o.course.courseId, o.courseOfferingId";
+
+        org.hibernate.query.Query<?> q = s().createQuery(hql);
+        q.setParameter("mentorId", mentorId);
+        q.setParameter("since", java.sql.Timestamp.valueOf(since.atStartOfDay()));
+        q.setParameter("to", java.sql.Timestamp.valueOf(to.atTime(LocalTime.MAX)));
+
+        List<RDCourseOffering> list = (List<RDCourseOffering>) q.getResultList();
+
+        System.out.println("[DAO] Offerings fetched for mentorId=" + mentorId + ": " + list.size());
+        for (RDCourseOffering o : list) {
+            String cname = (o.getCourse() != null) ? o.getCourse().getCourseName() : "(no course)";
+            System.out.println("   -> Offering ID=" + o.getCourseOfferingId() +
+                    " | Name=" + o.getCourseOfferingName() +
+                    " | Course=" + cname +
+                    " | Start=" + o.getStartDate() +
+                    " | End=" + o.getEndDate() +
+                    " | Days=" + o.getDaysOfWeek());
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate, Integer userId) {
+        return getCourseOfferingsByDateAndMentor(selectedDate, userId);
     }
 
     /* ====================== Utility ====================== */
@@ -298,172 +330,93 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
     }
 
     @Override
-    public List<RDCourseOffering> findOfferingsForMentorIntersecting(Integer mentorId,
-                                                                     LocalDate since,
-                                                                     LocalDate to) {
-        if (mentorId == null || since == null || to == null) return Collections.emptyList();
-        if (to.isBefore(since)) to = since;
+    @SuppressWarnings("unchecked")
+    public List<RDCourseOffering> getOfferingsIntersecting(LocalDate since, LocalDate to) {
+        System.out.println("[DAO] Fetching offerings intersecting " + since + " .. " + to);
 
-        String hql = "from RDCourseOffering o " +
-                     "where o.instructor.userID = :mid " +
-                     "  and o.endDate   >= :since " +
-                     "  and o.startDate <= :till " +
-                     "order by o.startDate asc";
+        String hql =
+            "from RDCourseOffering o " +
+            "left join fetch o.course " +
+            "left join fetch o.instructor " +
+            "where (o.startDate is null or o.startDate <= :to) " +
+            "and (o.endDate is null or o.endDate >= :since) " +
+            "and o.isActive = true " +
+            "order by o.course.courseId, o.courseOfferingId";
 
-        return s().createQuery(hql, RDCourseOffering.class)
-                  .setParameter("mid",   mentorId)
-                  .setParameter("since", java.sql.Date.valueOf(since))
-                  .setParameter("till",  java.sql.Date.valueOf(to))
-                  .getResultList();
+        org.hibernate.query.Query<?> q = s().createQuery(hql);
+        q.setParameter("since", java.sql.Timestamp.valueOf(since.atStartOfDay()));
+        q.setParameter("to", java.sql.Timestamp.valueOf(to.atTime(LocalTime.MAX)));
+
+        List<RDCourseOffering> list = (List<RDCourseOffering>) q.getResultList();
+        System.out.println("[DAO] Offerings fetched: " + list.size());
+        for (RDCourseOffering o : list) {
+            String cname = (o.getCourse() != null) ? o.getCourse().getCourseName() : "(no course)";
+            System.out.println(" -> " + o.getCourseOfferingName() +
+                    " | Start=" + o.getStartDate() +
+                    " | End=" + o.getEndDate() +
+                    " | Course=" + cname +
+                    " | Mentor=" + ((o.getInstructor() != null) ? o.getInstructor().getFirstName() : "N/A"));
+        }
+        return list;
     }
 
     @Override
-    public List<RDCourseOffering> findOfferingsForMentorIntersecting(LocalDate selectedDate,
-                                                                     Integer userId) {
-        if (selectedDate == null || userId == null) return Collections.emptyList();
-        // Delegate to your existing day+mentor method to avoid duplicate logic.
-        return getCourseOfferingsByDateAndMentor(selectedDate, userId);
+    @SuppressWarnings("unchecked")
+    public List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to) {
+        System.out.println("[DAO] Fetching offerings for mentorId=" + mentorId + " between " + since + " .. " + to);
+
+        String hql =
+            "from RDCourseOffering o " +
+            "left join fetch o.course " +
+            "left join fetch o.instructor " +
+            "where o.instructor.userID = :mentorId " +
+            "and (o.startDate is null or o.startDate <= :to) " +
+            "and (o.endDate is null or o.endDate >= :since) " +
+            "and o.isActive = true " +
+            "order by o.course.courseId, o.courseOfferingId";
+
+        org.hibernate.query.Query<?> q = s().createQuery(hql);
+        q.setParameter("mentorId", mentorId);
+        q.setParameter("since", java.sql.Timestamp.valueOf(since.atStartOfDay()));
+        q.setParameter("to", java.sql.Timestamp.valueOf(to.atTime(LocalTime.MAX)));
+
+        List<RDCourseOffering> list = (List<RDCourseOffering>) q.getResultList();
+        System.out.println("[DAO] Offerings fetched for mentorId=" + mentorId + ": " + list.size());
+        for (RDCourseOffering o : list) {
+            String cname = (o.getCourse() != null) ? o.getCourse().getCourseName() : "(no course)";
+            System.out.println("   -> Offering ID=" + o.getCourseOfferingId() +
+                    " | Name=" + o.getCourseOfferingName() +
+                    " | Course=" + cname +
+                    " | Start=" + o.getStartDate() +
+                    " | End=" + o.getEndDate() +
+                    " | Days=" + o.getDaysOfWeek());
+        }
+        return list;
     }
 
     @Override
-    public List<RDCourseOffering> findFiltered(Long courseId, Long mentorId, String status) {
-        StringBuilder hql = new StringBuilder("from RDCourseOffering o where 1=1 ");
-        if (courseId != null) hql.append("and o.course.courseId = :cid ");
-        if (mentorId != null) hql.append("and o.instructor.userID = :mid ");
-        if (! (status == null || status.trim().isEmpty())) hql.append("and o.status = :status ");
-        hql.append("order by o.startDate asc");
-
-        var q = s().createQuery(hql.toString(), RDCourseOffering.class);
-        if (courseId != null) q.setParameter("cid", courseId.intValue());
-        if (mentorId != null) q.setParameter("mid", mentorId.intValue());
-        if (! (status == null || status.trim().isEmpty())) q.setParameter("status", status.trim());
-        return q.getResultList();
-    }
-    
-    @Override
-    public List<RDCourseOffering> getOverlapping(LocalDate from, LocalDate to) {
-
-        return  s().createQuery(
-            "select co from RDCourseOffering co " +
-            "where co.startDate <= :to and co.endDate >= :from " +
-            "order by co.startDate asc",
-            RDCourseOffering.class)
-            .setParameter("from", from)
-            .setParameter("to", to)
-            .list();
+    @SuppressWarnings("unchecked")
+    public List<RDCourseOffering> getAllRDCourseOfferings() {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM RDCourseOffering o " +
+                     "LEFT JOIN FETCH o.course " +
+                     "LEFT JOIN FETCH o.instructor " +
+                     "ORDER BY o.course.courseName ASC, o.courseOfferingName ASC";
+        return session.createQuery(hql, RDCourseOffering.class).getResultList();
     }
 
-    @Override
-    public List<RDCourseOffering> getOverlappingByMentor(LocalDate from, LocalDate to, Integer mentorUserId) {
-        if (mentorUserId == null) return List.of();
-
-
-        // If mentor is RDUser in co.instructor:
-        return  s().createQuery(
-            "select co from RDCourseOffering co " +
-            " join co.instructor mu " +
-            "where co.startDate <= :to and co.endDate >= :from " +
-            "  and mu.userID = :mentorUserId " +
-            "order by co.startDate asc",
-            RDCourseOffering.class)
-            .setParameter("from", from)
-            .setParameter("to", to)
-            .setParameter("mentorUserId", mentorUserId)
-            .list();
-
-        // If mentor is RDMentor -> user, change join to:
-        // "join co.mentor m join m.user mu"
-    }
+	
 
 	@Override
-	public List<RDCourseOffering> getOverlapping(java.util.Date from, java.util.Date to) {
-
-	    if (from != null && to != null) {
-	        return s().createQuery(
-	            "select co from RDCourseOffering co " +
-	            " where co.endDate >= :from and co.startDate <= :to " +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("from", from)  // java.util.Date / java.sql.Date OK
-	            .setParameter("to", to)
-	            .list();
-	    } else if (from != null) {
-	        return s().createQuery(
-	            "select co from RDCourseOffering co " +
-	            " where co.endDate >= :from " +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("from", from)
-	            .list();
-	    } else if (to != null) {
-	        return s().createQuery(
-	            "select co from RDCourseOffering co " +
-	            " where co.startDate <= :to " +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("to", to)
-	            .list();
-	    } else {
-	        return s().createQuery(
-	            "select co from RDCourseOffering co order by co.startDate asc",
-	            RDCourseOffering.class).list();
-	    }
+	public List<RDCourseOffering> findBetween(LocalDate startInclusive, LocalDate endInclusive, int offset, int limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<RDCourseOffering> getOverlappingByMentor(java.util.Date from, java.util.Date to, Integer mentorUserId) {
-		if (mentorUserId == null) return java.util.Collections.emptyList();
-	    Session session = factory.getCurrentSession();
-
-	    String baseJoin = " from RDCourseOffering co join co.mentor m join m.user mu ";
-	    String whereCore = " mu.userID = :mentorUserId ";
-
-	    if (from != null && to != null) {
-	        return session.createQuery(
-	            "select co" + baseJoin +
-	            " where co.endDate >= :from and co.startDate <= :to and " + whereCore +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("from", from)
-	            .setParameter("to", to)
-	            .setParameter("mentorUserId", mentorUserId)
-	            .list();
-	    } else if (from != null) {
-	        return session.createQuery(
-	            "select co" + baseJoin +
-	            " where co.endDate >= :from and " + whereCore +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("from", from)
-	            .setParameter("mentorUserId", mentorUserId)
-	            .list();
-	    } else if (to != null) {
-	        return session.createQuery(
-	            "select co" + baseJoin +
-	            " where co.startDate <= :to and " + whereCore +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("to", to)
-	            .setParameter("mentorUserId", mentorUserId)
-	            .list();
-	    } else {
-	        return session.createQuery(
-	            "select co" + baseJoin +
-	            " where " + whereCore +
-	            " order by co.startDate asc", RDCourseOffering.class)
-	            .setParameter("mentorUserId", mentorUserId)
-	            .list();
-	    }
+	public List<RDCourseOffering> findBetweenForMentor(LocalDate startInclusive, LocalDate endInclusive,
+			Integer mentorUserId, int offset, int limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	@Override
-	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID) {
-		 Session session = factory.getCurrentSession();
-
-	        String hql = "SELECT DISTINCT co FROM RDCourseOffering co " +
-	                     "LEFT JOIN FETCH co.studentEnrollments es " +   // fetch enrolled students
-	                     "WHERE co.instructor.userID = :mentorId " +
-	                     "ORDER BY co.startDate ASC";
-
-	        Query<RDCourseOffering> query = session.createQuery(hql, RDCourseOffering.class);
-	        query.setParameter("mentorId", userID);
-
-	        return query.getResultList();
-	}
-
-    
 }

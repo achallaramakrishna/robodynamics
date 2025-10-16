@@ -11,6 +11,7 @@
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
     body { background:#f7fafc; }
@@ -32,10 +33,16 @@
 
           <!-- Flash messages -->
           <c:if test="${not empty flashErr}">
-            <div class="alert alert-danger">${flashErr}</div>
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              <div>${flashErr}</div>
+            </div>
           </c:if>
           <c:if test="${not empty flashOk}">
-            <div class="alert alert-success">${flashOk}</div>
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              <div>${flashOk}</div>
+            </div>
           </c:if>
 
           <!-- If already logged in, hint to continue -->
@@ -47,10 +54,8 @@
           </c:if>
 
           <form method="post" action="${pageContext.request.contextPath}/mentors/signup" id="signupForm" novalidate>
-            <!-- keep next hop (comes from controller with sensible default) -->
             <input type="hidden" name="next" value="${next}"/>
 
-            <!-- Spring Security CSRF (optional) -->
             <c:if test="${not empty _csrf}">
               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </c:if>
@@ -77,19 +82,31 @@
               </div>
               
               <div class="col-12">
-				  <label class="form-label">Username</label>
-				  <input class="form-control" name="userName" required
-				         value="${not empty prefill_userName ? prefill_userName : param.userName}" />
-				  <div class="invalid-feedback">Please choose a username.</div>
-				</div>
-              
+                <label class="form-label">Username</label>
+                <input class="form-control" name="userName" required
+                       value="${not empty prefill_userName ? prefill_userName : param.userName}" />
+                <div class="invalid-feedback">Please choose a username.</div>
+              </div>
 
+              <!-- ✅ Mobile field with duplicate check -->
               <div class="col-12">
                 <label class="form-label">Mobile</label>
-                <input class="form-control" name="cellPhone" required pattern="[0-9]{10}" placeholder="10-digit number"
-                       value="${not empty prefill_cellPhone ? prefill_cellPhone : param.cellPhone}" />
+                <input name="cellPhone"
+			       class="form-control <c:if test='${not empty flashErr and fn:containsIgnoreCase(flashErr, "mobile")}'>is-invalid</c:if>'"
+			       required pattern="[0-9]{10}" placeholder="10-digit number"
+			       value="${not empty prefill_cellPhone ? prefill_cellPhone : param.cellPhone}" />
+
                 <div class="form-text">We’ll use this for coordination and OTP (if enabled).</div>
-                <div class="invalid-feedback">Please enter a 10-digit mobile number.</div>
+                <div class="invalid-feedback">
+                  <c:choose>
+                    <c:when test='${not empty flashErr and fn:containsIgnoreCase(flashErr, "mobile")}'>
+                      ${flashErr}
+                    </c:when>
+                    <c:otherwise>
+                      Please enter a 10-digit mobile number.
+                    </c:otherwise>
+                  </c:choose>
+                </div>
               </div>
 
               <div class="col-md-6">
@@ -168,6 +185,12 @@
       }
       form.classList.add('was-validated');
     }, false);
+
+    // ✅ Auto-scroll to alert if present
+    window.addEventListener('load', function() {
+      const alertBox = document.querySelector('.alert-danger, .alert-success');
+      if (alertBox) alertBox.scrollIntoView({behavior: 'smooth', block: 'center'});
+    });
   })();
 </script>
 </body>

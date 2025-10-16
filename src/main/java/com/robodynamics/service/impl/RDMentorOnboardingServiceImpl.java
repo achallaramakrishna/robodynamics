@@ -58,20 +58,37 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
         if (m != null) return m;
 
         RDUser u = loadUser(userId);
+        if (u == null) throw new IllegalArgumentException("User not found for ID " + userId);
 
+        // ✅ Check if mentor already exists with same mobile (prevent duplicate constraint)
+        String mobile = u.getCellPhone();
+        if (mobile != null && !mobile.isBlank()) {
+            Query<RDMentor> query = s().createQuery(
+                "FROM RDMentor WHERE mobile = :mobile", RDMentor.class);
+            query.setParameter("mobile", mobile);
+            List<RDMentor> existingMentors = query.getResultList();
+            if (!existingMentors.isEmpty()) {
+                return existingMentors.get(0); // Return existing mentor instead of inserting
+            }
+        }
+
+        // 🆕 Create new mentor record
         m = new RDMentor();
-        
         m.setUser(u);
-        // Use provided display name if present, else from RDUser
+
+        // Use provided display name if present, else fallback
         String dn = (displayNameFallback != null && !displayNameFallback.isBlank())
                 ? displayNameFallback
-                : (u.getFirstName() != null ? (u.getFirstName()
-                   + (u.getLastName() == null ? "" : (" " + u.getLastName()))) : "Mentor " + userId);
+                : (u.getFirstName() != null
+                    ? (u.getFirstName() + (u.getLastName() == null ? "" : (" " + u.getLastName())))
+                    : "Mentor " + userId);
+
         m.setFullName(dn);
         m.setEmail(u.getEmail());
-        m.setMobile(u.getCellPhone());
+        m.setMobile(mobile);
         m.setIsActive(1);
         m.setIsVerified(true);
+
         s().save(m);
         return m;
     }

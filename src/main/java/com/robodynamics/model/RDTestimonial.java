@@ -14,16 +14,29 @@ public class RDTestimonial {
     private Long id;
 
     // Either a student or a mentor submits the testimonial
-    @Column(name = "student_id")
-    private Long studentId;
+    /** Student (nullable, since mentors can also post testimonials) */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", referencedColumnName = "user_id", nullable = true)
+    private RDUser student;
 
-    @Column(name = "mentor_id")
-    private Long mentorId; // NEW: mentor as author
+    /** Mentor (nullable for student testimonials) */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id", referencedColumnName = "user_id", nullable = true)
+    private RDUser mentor;
 
-    @Column(name = "course_id")
-    private Long courseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id", nullable = false)
+    private RDCourse course;
 
-    @Column(name = "course_offering_id")
+    
+
+    public RDCourse getCourse() {
+		return course;
+	}
+	public void setCourse(RDCourse course) {
+		this.course = course;
+	}
+	@Column(name = "course_offering_id")
     private Long courseOfferingId; // Optional: for mentor testimonial
 
     @Column(name = "testimonial")
@@ -51,18 +64,25 @@ public class RDTestimonial {
 
     // --- Getters & Setters ---
 
+    
+    
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public RDUser getStudent() {
+		return student;
+	}
+	public void setStudent(RDUser student) {
+		this.student = student;
+	}
+	public RDUser getMentor() {
+		return mentor;
+	}
+	public void setMentor(RDUser mentor) {
+		this.mentor = mentor;
+	}
+	public void setId(Long id) { this.id = id; }
 
-    public Long getStudentId() { return studentId; }
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
-
-    public Long getMentorId() { return mentorId; }
-    public void setMentorId(Long mentorId) { this.mentorId = mentorId; }
-
-    public Long getCourseId() { return courseId; }
-    public void setCourseId(Long courseId) { this.courseId = courseId; }
-
+   
+	
     public Long getCourseOfferingId() { return courseOfferingId; }
     public void setCourseOfferingId(Long courseOfferingId) { this.courseOfferingId = courseOfferingId; }
 

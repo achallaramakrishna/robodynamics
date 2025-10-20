@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -74,9 +75,7 @@ public class RDUser {
     @Column(name = "parent_contact")
     private String parentContact;
 
-	
-
-    @Transient
+	@Transient
     private String attendanceStatus;
 
 	
@@ -324,7 +323,32 @@ public class RDUser {
 				+ ", mom=" + mom + ", dad=" + dad + "]";
 	}
 
+	@Transient
+	public String getFullName() {
+	    StringBuilder sb = new StringBuilder();
+	    if (firstName != null && !firstName.trim().isEmpty()) {
+	        sb.append(firstName.trim());
+	    }
+	    if (lastName != null && !lastName.trim().isEmpty()) {
+	        if (sb.length() > 0) sb.append(" ");
+	        sb.append(lastName.trim());
+	    }
+	    return sb.length() > 0 ? sb.toString() : userName; // fallback to username if both null
+	}
 	
+	@Transient
+	public String getParentName() {
+	    if (mom != null) {
+	        return mom.getFullName() + " (Mom)";
+	    } else if (dad != null) {
+	        return dad.getFullName() + " (Dad)";
+	    } else if (parentContact != null && !parentContact.isEmpty()) {
+	        return parentContact;
+	    }
+	    return null;
+	}
+
+
 	
 	
 	

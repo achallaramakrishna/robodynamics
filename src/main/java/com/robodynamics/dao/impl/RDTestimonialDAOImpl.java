@@ -97,4 +97,29 @@ public class RDTestimonialDAOImpl implements RDTestimonialDAO {
         Query<RDTestimonial> query = session.createQuery("from RDTestimonial", RDTestimonial.class);
         return query.getResultList();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<RDTestimonial> getParentStudentTestimonials() {
+	    Session session = sessionFactory.getCurrentSession();
+	    String hql = "SELECT DISTINCT t FROM RDTestimonial t "
+	               + "LEFT JOIN FETCH t.student s "
+	               + "LEFT JOIN FETCH t.course c "
+	               + "WHERE t.mentor IS NULL "
+	               + "ORDER BY t.createdAt DESC";
+	    return session.createQuery(hql).list();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<RDTestimonial> getMentorTestimonials() {
+	    Session session = sessionFactory.getCurrentSession();
+	    String hql = "SELECT DISTINCT t FROM RDTestimonial t "
+	               + "LEFT JOIN FETCH t.mentor m "
+	               + "LEFT JOIN FETCH t.course c "
+	               + "WHERE t.mentor IS NOT NULL "
+	               + "ORDER BY t.createdAt DESC";
+	    return session.createQuery(hql).list();
+	}
+
 }

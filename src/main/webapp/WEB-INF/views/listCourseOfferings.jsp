@@ -43,19 +43,20 @@
                        class="btn btn-primary mb-4" />
             </c:if>
 
-				<c:if test="${not empty successMessage}">
-				    <div class="alert alert-success alert-dismissible fade show" role="alert">
-				        ${successMessage}
-				        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-				    </div>
-				</c:if>
-				
-				<c:if test="${not empty errorMessage}">
-				    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-				        ${errorMessage}
-				        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-				    </div>
-				</c:if>
+            <!-- Success / Error messages -->
+            <c:if test="${not empty successMessage}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ${successMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </c:if>
+            
+            <c:if test="${not empty errorMessage}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${errorMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </c:if>
 
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -74,9 +75,15 @@
                                 <th>Sessions/Week</th>
                                 <th>Days</th>
                                 <th>Time</th>
-                                <!-- Only admins see Actions column -->
+
+                                <!-- Admins see Actions -->
                                 <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
                                     <th>Actions</th>
+                                </c:if>
+
+                                <!-- Mentors see Testimonial -->
+                                <c:if test="${rdUser.profile_id == 3}">
+                                    <th>Testimonial</th>
                                 </c:if>
                             </tr>
                             </thead>
@@ -93,45 +100,58 @@
                                     <td>${tempCourseOffering.daysOfWeek}</td>
                                     <td>${tempCourseOffering.sessionStartTime} - ${tempCourseOffering.sessionEndTime}</td>
 
-                                    <!-- Only admins see edit/delete -->
-									<c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
-									    <td>
-									        <c:url var="updateLink" value="/courseoffering/updateForm">
-									            <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
-									        </c:url>
-									
-									        <c:url var="deactivateLink" value="/courseoffering/deactivate">
-									            <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
-									        </c:url>
-									
-									        <c:url var="activateLink" value="/courseoffering/activate">
-									            <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
-									        </c:url>
-									        
-									        <c:url var="deleteLink" value="/courseoffering/delete">
-											    <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
-											</c:url>
-									
-									        <a href="${updateLink}" class="btn btn-sm btn-primary mb-1">Edit</a>
-									
-									        <c:choose>
-									            <c:when test="${tempCourseOffering.isActive}">
-									                <a href="${deactivateLink}" class="btn btn-sm btn-warning mb-1"
-									                   onclick="return confirm('Deactivate this course offering?');">Deactivate</a>
-									            </c:when>
-									            <c:otherwise>
-									                <a href="${activateLink}" class="btn btn-sm btn-success mb-1"
-									                   onclick="return confirm('Reactivate this course offering?');">Activate</a>
-									            </c:otherwise>
-									        
-									        </c:choose>
-									        <!-- ✅ Delete button placed after choose block -->
-											<a href="${deleteLink}" class="btn btn-sm btn-danger mb-1"
-											   onclick="return confirm('⚠️ This will permanently delete the course offering. Continue?');">
-											   Delete
-											</a>
-									    </td>
-									</c:if>
+                                    <!-- Admin Actions -->
+                                    <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
+                                        <td>
+                                            <c:url var="updateLink" value="/courseoffering/updateForm">
+                                                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+                                            </c:url>
+
+                                            <c:url var="deactivateLink" value="/courseoffering/deactivate">
+                                                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+                                            </c:url>
+
+                                            <c:url var="activateLink" value="/courseoffering/activate">
+                                                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+                                            </c:url>
+
+                                            <c:url var="deleteLink" value="/courseoffering/delete">
+                                                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+                                            </c:url>
+
+                                            <a href="${updateLink}" class="btn btn-sm btn-primary mb-1">Edit</a>
+
+                                            <c:choose>
+                                                <c:when test="${tempCourseOffering.isActive}">
+                                                    <a href="${deactivateLink}" class="btn btn-sm btn-warning mb-1"
+                                                       onclick="return confirm('Deactivate this course offering?');">Deactivate</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${activateLink}" class="btn btn-sm btn-success mb-1"
+                                                       onclick="return confirm('Reactivate this course offering?');">Activate</a>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                            <a href="${deleteLink}" class="btn btn-sm btn-danger mb-1"
+                                               onclick="return confirm('⚠️ This will permanently delete the course offering. Continue?');">
+                                               Delete
+                                            </a>
+                                        </td>
+                                    </c:if>
+
+                                    <!-- ✅ Mentor Testimonial Button -->
+                                    <c:if test="${rdUser.profile_id == 3}">
+                                        <td>
+                                            <c:url var="testimonialLink" value="/mentor/testimonial-form">
+                                                <c:param name="courseId" value="${tempCourseOffering.course.courseId}" />
+                                                <c:param name="courseOfferingId" value="${tempCourseOffering.courseOfferingId}" />
+                                            </c:url>
+
+                                            <a href="${testimonialLink}" class="btn btn-info btn-sm mb-1">
+                                                <i class="bi bi-chat-quote"></i> Post Testimonial
+                                            </a>
+                                        </td>
+                                    </c:if>
 
                                 </tr>
                             </c:forEach>

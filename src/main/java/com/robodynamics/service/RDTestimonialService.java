@@ -20,4 +20,10 @@ public interface RDTestimonialService {
     RDTestimonial getTestimonialById(Long id);
 
     List<RDTestimonial> getAllTestimonials();
+    
+    List<RDTestimonial> getParentStudentTestimonials();
+    
+    List<RDTestimonial> getMentorTestimonials();
+    
+    
 }

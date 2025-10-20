@@ -18,4 +18,10 @@ public interface RDTestimonialDAO {
     int setActive(Long id, boolean active);     // soft active toggle
     
     List<RDTestimonial> getAllTestimonials();
+    
+    public List<RDTestimonial> getParentStudentTestimonials();
+    
+    public List<RDTestimonial> getMentorTestimonials();
+    
+    
 }

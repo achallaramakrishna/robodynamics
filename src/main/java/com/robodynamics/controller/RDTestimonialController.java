@@ -24,11 +24,16 @@ public class RDTestimonialController {
     /** Display all testimonials (public page) */
     @GetMapping("/testimonials")
     public String showTestimonials(Model model) {
-        List<RDTestimonial> testimonials = testimonialService.getAllTestimonials();
-        model.addAttribute("testimonials", testimonials);
-        model.addAttribute("title", "What Parents & Students Say About Robo Dynamics");
+        List<RDTestimonial> parentTestimonials = testimonialService.getParentStudentTestimonials();
+        List<RDTestimonial> mentorTestimonials = testimonialService.getMentorTestimonials();
+
+        model.addAttribute("parentTestimonials", parentTestimonials);
+        model.addAttribute("mentorTestimonials", mentorTestimonials);
+        model.addAttribute("title", "What Parents, Students & Mentors Say About Robo Dynamics");
+
         return "testimonials"; // testimonials.jsp
     }
+
 
     /** Show form for parent/student testimonial */
     @GetMapping("/testimonial-form")

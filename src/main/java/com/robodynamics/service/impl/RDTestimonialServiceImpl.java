@@ -113,4 +113,15 @@ public class RDTestimonialServiceImpl implements RDTestimonialService {
 	    return testimonials;
 
 	}
+
+	@Override
+	public List<RDTestimonial> getParentStudentTestimonials() {
+		return dao.getParentStudentTestimonials();
+	}
+
+	@Override
+	public List<RDTestimonial> getMentorTestimonials() {
+		
+		return dao.getMentorTestimonials();
+	}
 }

@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RDStudentEnrollmentForm {
+	
+	private int enrollmentId;
 
 	private int courseOfferingId;
 	private int courseId;
@@ -17,15 +19,38 @@ public class RDStudentEnrollmentForm {
 	
 	private int parentId;
 	
-	private String status;
+	private int status;
 
     private String startDate;
     
     private String endDate;
     
+    private Double discountPercent;
+    private String discountReason;
+    private Double finalFee;
+
+    
     public RDStudentEnrollmentForm() {
     	
     }
+	public Double getDiscountPercent() {
+		return discountPercent;
+	}
+	public void setDiscountPercent(Double discountPercent) {
+		this.discountPercent = discountPercent;
+	}
+	public String getDiscountReason() {
+		return discountReason;
+	}
+	public void setDiscountReason(String discountReason) {
+		this.discountReason = discountReason;
+	}
+	public Double getFinalFee() {
+		return finalFee;
+	}
+	public void setFinalFee(Double finalFee) {
+		this.finalFee = finalFee;
+	}
 	public int getCourseOfferingId() {
 		return courseOfferingId;
 	}
@@ -47,10 +72,10 @@ public class RDStudentEnrollmentForm {
 	
 	
 	
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getStartDate() {
@@ -77,6 +102,14 @@ public class RDStudentEnrollmentForm {
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
+	public int getEnrollmentId() {
+		return enrollmentId;
+	}
+	public void setEnrollmentId(int enrollmentId) {
+		this.enrollmentId = enrollmentId;
+	}
+	
+	
 	
 	
 	

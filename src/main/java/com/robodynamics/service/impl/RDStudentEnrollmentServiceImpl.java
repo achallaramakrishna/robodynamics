@@ -146,6 +146,12 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 		return rdStudentEnrollmentDao.countEnrollments(courseOfferingId);
 	}
 
+	@Override
+	public List<RDStudentEnrollment> getActiveEnrollments() {
+		
+		return rdStudentEnrollmentDao.getActiveEnrollments();
+	}
+
 
 	
 }

@@ -104,6 +104,15 @@
 				</div>
 			</div>
 			
+			<!-- 💰 Fee Amount -->
+
+			<div class="form-group mt-3">
+			    <label for="feeAmount" class="col-md-3 control-label">Fee Amount (₹)</label>
+			    <div class="col-md-9">
+			        <form:input path="feeAmount" cssClass="form-control" type="number" step="0.01" placeholder="Enter base fee per student" />
+			    </div>
+			</div>
+			
 			<!-- Existing code preserved up to Course End Date -->
 
 			<!-- Sessions Per Week -->

@@ -149,6 +149,18 @@ public class RDUserServiceImpl implements RDUserService {
 	public RDUser findByCellPhone(String cellPhone) {
 		return rdUserDao.findByCellPhone(cellPhone);	
 		}
+
+	@Override
+	public List<RDUser> findStudents() {
+		
+		return rdUserDao.findStudents();
+	}
+
+	@Override
+	public List<RDUser> findParents() {
+		
+		return rdUserDao.findParents();
+	}
 	
 	
 

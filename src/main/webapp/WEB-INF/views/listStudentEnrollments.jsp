@@ -1,92 +1,129 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-
-<c:set var="user" value="${sessionScope.rdUser}" />
-<c:set var="userRole" value="${user.profile_id}" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Enrollments | Robo Dynamics</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+body { background-color: #f8f9fa; }
+.table th, .table td { vertical-align: middle; }
+</style>
 </head>
 <body>
-    <jsp:include page="header.jsp" />
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-md-offset-1 col-md-10">
-                <br>
-                <!-- Back button to go back to the dashboard -->
-                <button class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/studentDashboard';">
-                    Back to Dashboard
-                </button>
-                <br><br>
-                <h2>View Courses Enrolled</h2>
-                <hr />
-                <c:if test="${userRole eq 4}">
-                    <input type="button" value="Enroll Course"
-                           onclick="window.location.href='showForm'; return false;"
-                           class="btn btn-primary" />
-                </c:if>
-                <br /> <br />
 
-                <div class="panel panel-info">
-                    <div class="panel-body">
-                        <table class="table table-striped table-bordered">
-                            <tr>
-                                <th>Course Offering Name</th>
-                                <th>Course Name</th>
-                                <th>Instructor</th>
-                                <th>Student</th>
-                                <th>Start Session</th>
-                                <th>View Attendance</th>
-                                <th>Request Testimonial</th>
-                                <th>Course Offering Start Date</th>
-                                <th>Course Offering End Date</th>
-                            </tr>
+<jsp:include page="header.jsp" />
 
-                            <!-- Loop over and print the enrolled courses -->
-                            <c:forEach var="tempStudentEnrollment" items="${studentEnrollments}">
-                                <c:url var="updateLink" value="/course/monitor">
-                                    <c:param name="courseId" value="${tempStudentEnrollment.courseOffering.course.courseId}" />
-                                    <c:param name="enrollmentId" value="${tempStudentEnrollment.enrollmentId}" />
-                                </c:url>
+<div class="container mt-5 mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="text-primary">🎓 Manage Student Enrollments</h3>
+    <a href="${pageContext.request.contextPath}/courseoffering/list" class="btn btn-secondary btn-sm">
+      ← Back to Offerings
+    </a>
+  </div>
 
-                                <c:url var="attendanceLink" value="/courseTracking/viewAttendance">
-                                    <c:param name="enrollmentId" value="${tempStudentEnrollment.enrollmentId}" />
-                                </c:url>
-
-                                <c:url var="testimonialLink" value="/testimonial-form">
-                                    <c:param name="studentId" value="${tempStudentEnrollment.student.userID}" />
-                                    <c:param name="courseId" value="${tempStudentEnrollment.courseOffering.course.courseId}" />
-                                </c:url>
-
-                                <tr>
-                                    <td>${tempStudentEnrollment.courseOffering.courseOfferingName}</td>
-                                    <td>${tempStudentEnrollment.courseOffering.course.courseName}</td>
-                                    <td>${tempStudentEnrollment.courseOffering.instructor.firstName} ${tempStudentEnrollment.courseOffering.instructor.lastName}</td>
-                                    <td>${tempStudentEnrollment.student.firstName} ${tempStudentEnrollment.student.lastName}</td>
-                                    <td><a href="${updateLink}">Start Session</a></td>
-                                    <td><a href="${attendanceLink}">View Attendance</a></td>
-                                    <!-- Testimonial Request Link -->
-                                    <td><a href="${testimonialLink}" class="btn btn-success">Request Testimonial</a></td>
-                                    <td>${tempStudentEnrollment.courseOffering.startDate}</td>
-                                    <td>${tempStudentEnrollment.courseOffering.endDate}</td>
-                                </tr>
-                            </c:forEach>
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Success & Error Alerts -->
+  <c:if test="${not empty successMessage}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      ${successMessage}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    <jsp:include page="footer.jsp" />
+  </c:if>
+  <c:if test="${not empty errorMessage}">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      ${errorMessage}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  </c:if>
+
+  <!-- Enrollment Table -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>#</th>
+              <th>Student</th>
+              <th>Parent</th>
+              <th>Course Offering</th>
+              <th>Enrollment Date</th>
+              <th>Base Fee (₹)</th>
+              <th>Discount (%)</th>
+              <th>Final Fee (₹)</th>
+              <th>Status</th>
+              <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
+                <th>Actions</th>
+              </c:if>
+            </tr>
+          </thead>
+
+          <tbody>
+          <c:forEach var="enroll" items="${studentEnrollments}" varStatus="loop">
+            <tr>
+              <td class="text-center">${loop.count}</td>
+              <td>${enroll.student.firstName} ${enroll.student.lastName}</td>
+              <td>${enroll.parent.firstName} ${enroll.parent.lastName}</td>
+              <td>${enroll.courseOffering.courseOfferingName}</td>
+              <td><fmt:formatDate value="${enroll.enrollmentDate}" pattern="dd MMM yyyy"/></td>
+              <td class="text-end"><fmt:formatNumber value="${enroll.courseOffering.feeAmount}" pattern="#,##0.00"/></td>
+              <td class="text-end"><fmt:formatNumber value="${enroll.discountPercent}" pattern="#0.##"/></td>
+              <td class="text-end text-success fw-bold">
+                <fmt:formatNumber value="${enroll.finalFee}" pattern="#,##0.00"/>
+              </td>
+			<td class="text-center">
+			  <c:choose>
+			    <c:when test="${enroll.status == 1}">
+			      <span class="badge bg-success">ACTIVE</span>
+			    </c:when>
+			    <c:when test="${enroll.status == 2}">
+			      <span class="badge bg-primary">COMPLETED</span>
+			    </c:when>
+			    <c:when test="${enroll.status == 3}">
+			      <span class="badge bg-danger">CANCELLED</span>
+			    </c:when>
+			    <c:otherwise>
+			      <span class="badge bg-secondary">PENDING</span>
+			    </c:otherwise>
+			  </c:choose>
+			</td>
+
+
+              <!-- Edit option only for Admin & Super Admin -->
+              <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
+                <td class="text-center">
+                  <c:url var="editLink" value="/enrollment/editForm">
+                    <c:param name="enrollmentId" value="${enroll.enrollmentId}" />
+                  </c:url>
+                  <a href="${editLink}" class="btn btn-sm btn-primary">
+                    <i class="bi bi-pencil-square"></i> Edit
+                  </a>
+                </td>
+              </c:if>
+            </tr>
+          </c:forEach>
+
+          <c:if test="${empty studentEnrollments}">
+            <tr>
+              <td colspan="10" class="text-center text-muted">No enrollments found.</td>
+            </tr>
+          </c:if>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<jsp:include page="footer.jsp" />
+
 </body>
 </html>

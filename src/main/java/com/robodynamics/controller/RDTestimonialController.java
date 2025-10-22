@@ -11,15 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDTestimonial;
 import com.robodynamics.model.RDUser;
+import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDTestimonialService;
+import com.robodynamics.service.RDUserService;
 
 @Controller
 public class RDTestimonialController {
 
     @Autowired
     private RDTestimonialService testimonialService;
+    
+    @Autowired private RDUserService userService;
+    @Autowired private RDCourseService courseService;
+
 
     /** Display all testimonials (public page) */
     @GetMapping("/testimonials")
@@ -64,9 +71,19 @@ public class RDTestimonialController {
                                           @RequestParam("testimonial") String testimonial,
                                           @RequestParam("rating") int rating,
                                           RedirectAttributes redirectAttributes) {
+    	
+    	RDUser student = userService.getRDUser(studentId.intValue());
+        RDCourse course = courseService.getRDCourse(courseId.intValue());
+
+        if (student == null || course == null) {
+            redirectAttributes.addFlashAttribute("error", "Invalid student or course reference.");
+            return "redirect:/parent/dashboard";
+        }
+        
+        
         RDTestimonial newTestimonial = new RDTestimonial();
-        newTestimonial.setStudentId(studentId);
-        newTestimonial.setCourseId(courseId);
+        newTestimonial.setStudent(student);
+        newTestimonial.setCourse(course);
         newTestimonial.setTestimonial(testimonial);
         newTestimonial.setRating(rating);
 
@@ -86,9 +103,17 @@ public class RDTestimonialController {
                                           @RequestParam("rating") int rating,
                                           RedirectAttributes redirectAttributes) {
 
-        RDTestimonial newTestimonial = new RDTestimonial();
-        newTestimonial.setMentorId(mentorId); // New field for mentor author
-        newTestimonial.setCourseId(courseId);
+    	 RDUser mentor = userService.getRDUser(mentorId.intValue());
+         RDCourse course = courseService.getRDCourse(courseId.intValue());
+
+         if (mentor == null || course == null) {
+             redirectAttributes.addFlashAttribute("error", "Invalid mentor or course reference.");
+             return "redirect:/mentor/dashboard";
+         }
+         
+    	RDTestimonial newTestimonial = new RDTestimonial();
+        newTestimonial.setMentor(mentor); // New field for mentor author
+        newTestimonial.setCourse(course);
         newTestimonial.setCourseOfferingId(courseOfferingId);
         newTestimonial.setTestimonial(testimonial);
         newTestimonial.setRating(rating);

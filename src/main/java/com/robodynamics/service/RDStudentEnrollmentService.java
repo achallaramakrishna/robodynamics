@@ -44,6 +44,8 @@ public interface RDStudentEnrollmentService {
 
 	public int countEnrollments(int courseOfferingId);
 
+	public List<RDStudentEnrollment> getActiveEnrollments();
+
 
 
 }

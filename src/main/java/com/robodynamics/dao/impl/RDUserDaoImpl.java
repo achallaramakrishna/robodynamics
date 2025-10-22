@@ -257,6 +257,24 @@ public class RDUserDaoImpl implements RDUserDao {
         return results.isEmpty() ? null : results.get(0);	
     }
 
+	// ✅ Find all students (profile_id = 5)
+    @Override
+    public List<RDUser> findStudents() {
+        Session session = factory.getCurrentSession();
+        return session.createQuery(
+                "FROM RDUser WHERE profile_id = 5 AND active = 1 ORDER BY firstName",
+                RDUser.class).list();
+    }
+
+    // ✅ Find all parents (profile_id = 4)
+    @Override
+    public List<RDUser> findParents() {
+        Session session = factory.getCurrentSession();
+        return session.createQuery(
+                "FROM RDUser WHERE profile_id = 4 AND active = 1 ORDER BY firstName",
+                RDUser.class).list();
+    }
+
 
 	
 

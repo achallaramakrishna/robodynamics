@@ -175,6 +175,22 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="col-6 col-md-4 mb-3">
+					    <div class="card shadow-sm h-100">
+					        <div class="card-body text-center">
+					            <h5 class="card-title">Student Enrollments</h5>
+					            <p class="card-text small">
+					                View, add, or manage students enrolled in course offerings.
+					            </p>
+					            <a href="${pageContext.request.contextPath}/enrollment/list"
+					               class="btn btn-primary btn-sm">
+					               Manage
+					            </a>
+					        </div>
+					    </div>
+					</div>
+					                    
                     <div class="col-6 col-md-4 mb-3">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">

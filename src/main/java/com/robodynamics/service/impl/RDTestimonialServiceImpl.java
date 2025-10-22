@@ -87,7 +87,7 @@ public class RDTestimonialServiceImpl implements RDTestimonialService {
 		List<RDTestimonial> testimonials = dao.getAllTestimonials();
 
 	    for (RDTestimonial t : testimonials) {
-	        RDUser student = userDao.getRDUser(t.getStudentId().intValue());
+	        RDUser student = userDao.getRDUser(t.getStudent().getUserID());
 	        if (student != null) {
 	            t.setStudentName(student.getFirstName() + " " + student.getLastName());
 
@@ -105,7 +105,7 @@ public class RDTestimonialServiceImpl implements RDTestimonialService {
 	            t.setParentName(parentName.isEmpty() ? "N/A" : parentName);
 	        }
 	     // Course name
-	        RDCourse course = courseDao.getRDCourse(t.getCourseId().intValue());
+	        RDCourse course = courseDao.getRDCourse(t.getCourse().getCourseId());
 	        t.setCourseName(course != null ? course.getCourseName() : "Course Participant");
 	    }
 

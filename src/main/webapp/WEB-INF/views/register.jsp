@@ -86,6 +86,7 @@
 				<f:select path="profile_id" class="form-control">
 					<f:option value="2" label="ROBO ADMIN" />
 					<f:option value="3" label="ROBO MENTOR" />
+					<f:option value="6" label="ROBO FINANCE ADMIN" />
 				</f:select>
 			</div>
 		</div>

@@ -47,6 +47,10 @@ public interface RDUserService {
 	public List<RDUser> getAllAdminsAndSuperAdmins();
 
 	public RDUser findByCellPhone(String cellPhone);
+	
+	// ✅ New Methods
+    List<RDUser> findStudents();
+    List<RDUser> findParents();
 
 
 

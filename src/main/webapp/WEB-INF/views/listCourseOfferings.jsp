@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,6 +77,11 @@
                                 <th>Sessions/Week</th>
                                 <th>Days</th>
                                 <th>Time</th>
+                                <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
+								    <th>Fee (₹)</th>
+								</c:if>
+
+                                
 
                                 <!-- Admins see Actions -->
                                 <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
@@ -99,6 +106,11 @@
                                     <td>${tempCourseOffering.sessionsPerWeek}</td>
                                     <td>${tempCourseOffering.daysOfWeek}</td>
                                     <td>${tempCourseOffering.sessionStartTime} - ${tempCourseOffering.sessionEndTime}</td>
+                                    <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">
+	                                    <td class="text-end">
+										   <fmt:formatNumber value="${tempCourseOffering.feeAmount}" pattern="#,##0.00" />
+										</td>
+                                    </c:if>
 
                                     <!-- Admin Actions -->
                                     <c:if test="${rdUser.profile_id == 1 || rdUser.profile_id == 2}">

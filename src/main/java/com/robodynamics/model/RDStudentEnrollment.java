@@ -60,6 +60,18 @@ public class RDStudentEnrollment {
 	@Column(name = "enrollment_date")
 	private Date enrollmentDate;
 	
+	// 💰 new fields
+    @Column(name = "discount_percent")
+    private Double discountPercent;
+
+    @Column(name = "discount_reason")
+    private String discountReason;
+    
+	
+	@Column(name = "final_fee")
+	private Double finalFee;
+	 
+	 
 	@Column(name = "status")
 	private int status;
 	
@@ -118,6 +130,15 @@ public class RDStudentEnrollment {
 		this.enrollmentDate = enrollmentDate;
 	}
 
+	
+	public Double getFinalFee() {
+		return finalFee;
+	}
+
+	public void setFinalFee(Double finalFee) {
+		this.finalFee = finalFee;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -127,6 +148,22 @@ public class RDStudentEnrollment {
 	}
 	
 	
+
+	public Double getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public void setDiscountPercent(Double discountPercent) {
+		this.discountPercent = discountPercent;
+	}
+
+	public String getDiscountReason() {
+		return discountReason;
+	}
+
+	public void setDiscountReason(String discountReason) {
+		this.discountReason = discountReason;
+	}
 
 	public double getProgress() {
 		return progress;

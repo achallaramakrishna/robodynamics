@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.robodynamics.form.RDAssetTransactionForm;
 import com.robodynamics.form.RDCourseForm;
@@ -204,11 +205,83 @@ public class RDStudentEnrollmentController {
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
+	
+	@GetMapping("/editForm")
+	public String showEditForm(@RequestParam("enrollmentId") Integer enrollmentId, 
+	                           Model model, HttpSession session) {
+
+	    RDStudentEnrollment existing = studentEnrollmentService.getRDStudentEnrollment(enrollmentId);
+	    if (existing == null) {
+	        return "redirect:/enrollment/list";
+	    }
+
+	    // Convert to form bean for Spring <form:form>
+	    RDStudentEnrollmentForm form = new RDStudentEnrollmentForm();
+	    form.setEnrollmentId(existing.getEnrollmentId());
+	    form.setCourseOfferingId(existing.getCourseOffering().getCourseOfferingId());
+	    form.setStudentId(existing.getStudent().getUserID());
+	    form.setParentId(existing.getParent().getUserID());
+	    form.setDiscountPercent(existing.getDiscountPercent());
+	    form.setDiscountReason(existing.getDiscountReason());
+	    form.setFinalFee(existing.getFinalFee());
+	    form.setStatus(existing.getStatus());
+
+	    // Populate dropdowns and context data
+	    RDCourseOffering selectedOffering = existing.getCourseOffering();
+	    model.addAttribute("selectedOffering", selectedOffering);
+	    model.addAttribute("students", List.of(existing.getStudent()));
+	    model.addAttribute("parents", List.of(existing.getParent()));
+	    model.addAttribute("studentEnrollmentForm", form);
+
+	    return "student-enrollment-form";  // reuse the same JSP
+	}
+
+	@PostMapping("/save")
+	public String saveOrUpdateEnrollment(
+	        @ModelAttribute("studentEnrollmentForm") RDStudentEnrollmentForm form,
+	        HttpSession session,
+	        RedirectAttributes redirectAttributes) {
+
+	    RDCourseOffering offering = courseOfferingService.getRDCourseOffering(form.getCourseOfferingId());
+	    double baseFee = offering.getFeeAmount() != null ? offering.getFeeAmount() : 0.0;
+	    double discount = form.getDiscountPercent() != null ? form.getDiscountPercent() : 0.0;
+	    double finalFee = baseFee - (baseFee * discount / 100);
+
+	    form.setStudentId(form.getStudentId());
+	    form.setParentId(form.getParentId());
+	    
+	   // RDUser parent = userService.getRDUser(form.getParentId());
+	   // RDUser student = userService.getRDUser(form.getStudentId());
+
+	    RDStudentEnrollment enrollment;
+	    if (form.getEnrollmentId() != 0) {
+	        enrollment = studentEnrollmentService.getRDStudentEnrollment(form.getEnrollmentId());
+	    } else {
+	        enrollment = new RDStudentEnrollment();
+	        enrollment.setEnrollmentDate(new Date());
+	    }
+
+	    enrollment.setCourseOffering(offering);
+	   // enrollment.setParent(parent);
+	   // enrollment.setStudent(student);
+	    enrollment.setDiscountPercent(discount);
+	    enrollment.setDiscountReason(form.getDiscountReason());
+	    enrollment.setFinalFee(finalFee);
+	    enrollment.setStatus(form.getStatus() != 0 ? form.getStatus() : 1);
+
+	    studentEnrollmentService.saveRDStudentEnrollment(enrollment);
+
+	    redirectAttributes.addFlashAttribute("successMessage", "Enrollment saved successfully!");
+	    return "redirect:/enrollment/list";
+	}
+
 
 	@PostMapping("/saveStudentEnrollment")
 	public String saveStudentEnrollment(
 			HttpSession session, @ModelAttribute("studentEnrollmentForm") RDStudentEnrollmentForm studentEnrollmentForm,
 			@RequestParam("studentId") Integer studentId, BindingResult bindingResult) {
+
+	    RDCourseOffering offering = courseOfferingService.getRDCourseOffering(studentEnrollmentForm.getCourseOfferingId());
 
 		System.out.println(studentEnrollmentForm);
 		if (bindingResult.hasErrors()) {
@@ -225,6 +298,9 @@ public class RDStudentEnrollmentController {
 
 		System.out.println("user - " + parent);
 
+		double baseFee = offering.getFeeAmount() != null ? offering.getFeeAmount() : 0.0;
+	    double discount = studentEnrollmentForm.getDiscountPercent() != null ? studentEnrollmentForm.getDiscountPercent() : 0.0;
+	    double finalFee = baseFee - (baseFee * discount / 100);
 
 		RDStudentEnrollment theStudentEnrollment = new RDStudentEnrollment();
 
@@ -243,7 +319,9 @@ public class RDStudentEnrollmentController {
 
 		theStudentEnrollment.setCourseOffering(courseOffering);
 		theStudentEnrollment.setStatus(1);
-		theStudentEnrollment.setParent(parent);
+		theStudentEnrollment.setDiscountPercent(discount);
+		theStudentEnrollment.setDiscountReason(studentEnrollmentForm.getDiscountReason());
+		theStudentEnrollment.setFinalFee(finalFee);	theStudentEnrollment.setParent(parent);
 		theStudentEnrollment.setStudent(student);
 		studentEnrollmentService.saveRDStudentEnrollment(theStudentEnrollment);
 

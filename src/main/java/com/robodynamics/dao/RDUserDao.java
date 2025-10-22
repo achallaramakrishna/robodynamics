@@ -43,6 +43,11 @@ public interface RDUserDao {
 
 
 	public RDUser findByCellPhone(String cellPhone);
+	
+	// ✅ New Methods
+    List<RDUser> findStudents();
+    
+    List<RDUser> findParents();
 
 
 }

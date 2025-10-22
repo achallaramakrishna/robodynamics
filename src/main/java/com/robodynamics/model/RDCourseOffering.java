@@ -47,6 +47,9 @@ public class RDCourseOffering {
     @Column(name = "course_offering_name")
     @JsonProperty("courseOfferingName")
     private String courseOfferingName;
+    
+    @Column(name = "fee_amount")
+    private Double feeAmount;
 
 
     @Column(name = "is_active", nullable = false)
@@ -189,7 +192,16 @@ public class RDCourseOffering {
 	public void setSessionEndTime(LocalTime sessionEndTime) {
 		this.sessionEndTime = sessionEndTime;
 	}
+	
+	
 
+	public Double getFeeAmount() {
+		return feeAmount;
+	}
+	public void setFeeAmount(Double feeAmount) {
+		this.feeAmount = feeAmount;
+	}
+	
 	@Override
 	public String toString() {
 	    return "RDCourseOffering [courseOfferingId=" + courseOfferingId +

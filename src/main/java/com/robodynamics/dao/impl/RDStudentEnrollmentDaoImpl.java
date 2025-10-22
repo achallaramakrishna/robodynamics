@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -280,5 +281,21 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 		Long result = q.uniqueResult();
 		return (result != null) ? result.intValue() : 0;
 	}
+
+	@Override
+	public List<RDStudentEnrollment> getActiveEnrollments() {
+	    Session session = factory.getCurrentSession();
+
+	    // HQL to select enrollments by numeric status codes
+	    String hql = "FROM RDStudentEnrollment e WHERE e.status IN (:statuses)";
+
+	    // 1 = ACTIVE, 2 = ONGOING  (use your actual codes)
+	    List<Integer> activeStatuses = Arrays.asList(1, 2);
+
+	    return session.createQuery(hql, RDStudentEnrollment.class)
+	                  .setParameterList("statuses", activeStatuses)
+	                  .getResultList();
+	}
+
 
 }

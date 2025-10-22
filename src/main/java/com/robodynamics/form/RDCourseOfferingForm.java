@@ -17,6 +17,8 @@ public class RDCourseOfferingForm {
 	private String daysOfWeek; // stored as comma-separated string
 	private String sessionStartTime;  // e.g., "10:00"
 	private String sessionEndTime;    // e.g., "11:00"
+	
+	private Double feeAmount;
 
 	public RDCourseOfferingForm() {
 	}
@@ -106,6 +108,16 @@ public class RDCourseOfferingForm {
 	public void setSessionEndTime(String sessionEndTime) {
 		this.sessionEndTime = sessionEndTime;
 	}
+	
+	
+
+	public Double getFeeAmount() {
+		return feeAmount;
+	}
+
+	public void setFeeAmount(Double feeAmount) {
+		this.feeAmount = feeAmount;
+	}
 
 	@Override
 	public String toString() {
@@ -122,4 +134,6 @@ public class RDCourseOfferingForm {
 				", sessionStartTime=" + sessionStartTime +
 				", sessionEndTime=" + sessionEndTime + "]";
 	}
+
+	
 }

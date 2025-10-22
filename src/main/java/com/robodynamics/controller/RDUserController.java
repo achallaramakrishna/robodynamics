@@ -122,7 +122,10 @@ public class RDUserController {
                     return "redirect:/studentDashboard";
                 } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_MENTOR.getValue()) {
                     return "redirect:/mentor/dashboard";
-                } else {
+                }  else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue()) {
+                    return "redirect:/finance/dashboard";
+                }
+                	else {
                     return "redirect:/dashboard";
                 }
             }

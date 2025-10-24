@@ -297,5 +297,18 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 	                  .getResultList();
 	}
 
+    @Override @Transactional(readOnly = true)
+    public boolean existsByStudentAndOffering(int studentId, int offeringId) {
+    	Session session = factory.getCurrentSession();
+
+    	Long cnt = session.createQuery(
+            "select count(e) from RDStudentEnrollment e " +
+            " where e.student.userID=:sid and e.courseOffering.courseOfferingId=:oid " +
+            " and e.status<>0", Long.class)
+            .setParameter("sid", studentId).setParameter("oid", offeringId)
+            .getSingleResult();
+        return cnt != null && cnt > 0;
+    }
+
 
 }

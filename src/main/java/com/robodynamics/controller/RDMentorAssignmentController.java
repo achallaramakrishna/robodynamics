@@ -59,17 +59,45 @@ public class RDMentorAssignmentController {
     @GetMapping("/ajax/offerings")
     @ResponseBody
     public List<RDCourseOfferingDTO> getOfferingsByCourse(@RequestParam("courseId") int courseId) {
+
         List<RDCourseOffering> offerings = offeringService.getRDCourseOfferingsListByCourse(courseId);
-        // Convert entity -> DTO
+
+        // Convert Entity -> DTO
         return offerings.stream()
-                .map(o -> new RDCourseOfferingDTO(
-                        o.getCourseOfferingId(),         // entity id
-                        o.getCourseOfferingName(),          // or o.getCourseOfferingName()
-                        o.getStartDate(),
-                        o.getEndDate()
-                ))
+                .map(o -> {
+                    // 🧠 Mentor name (handle nulls gracefully)
+                    String mentorName = (o.getMentor() != null)
+                            ? o.getInstructor().getFirstName() + 
+                              (o.getInstructor().getLastName() != null ? " " + o.getInstructor().getLastName() : "")
+                            : "Unassigned";
+
+                    // 🕒 Time range (formatted as HH:mm-HH:mm)
+                    String timeRange = (o.getSessionStartTime() != null && o.getSessionEndTime() != null)
+                            ? o.getSessionStartTime() + " - " + o.getSessionEndTime()
+                            : null;
+
+                    // 📅 Days (Mon,Wed,Fri)
+                    String days = o.getDaysOfWeek() != null ? o.getDaysOfWeek() : "";
+
+                    // 💰 Fee amount
+                    Double fee = o.getFeeAmount() != null ? o.getFeeAmount() : 0.0;
+
+                    // ✅ Build DTO
+                    RDCourseOfferingDTO dto = new RDCourseOfferingDTO();
+                    dto.setCourseOfferingId(o.getCourseOfferingId());
+                    dto.setCourseOfferingName(o.getCourseOfferingName());
+                    dto.setStart(o.getStartDate() != null ? o.getStartDate().toString() : null);
+                    dto.setEnd(o.getEndDate() != null ? o.getEndDate().toString() : null);
+                    dto.setMentorName(mentorName);
+                    dto.setFeeAmount(fee);
+                    dto.setTimeRange(timeRange);
+                    dto.setDaysOfWeek(days);
+
+                    return dto;
+                })
                 .toList();
     }
+
 
     @GetMapping("/ajax/students")
     @ResponseBody

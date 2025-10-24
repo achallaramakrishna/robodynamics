@@ -2,29 +2,36 @@ package com.robodynamics.dto;
 
 public class RDCourseOfferingDTO {
     private int courseOfferingId;
-    private String courseOfferingName;   // <- changed
-    private java.util.Date startDate;
-    private java.util.Date endDate;
-
-    public RDCourseOfferingDTO() {}
-
-    public RDCourseOfferingDTO(int courseOfferingId, String courseOfferingName,
-                               java.util.Date startDate, java.util.Date endDate) {
-        this.courseOfferingId = courseOfferingId;
-        this.courseOfferingName = courseOfferingName; // <- changed
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+    private String courseOfferingName;
+    private String start;       // "yyyy-MM-dd"
+    private String end;         // "yyyy-MM-dd"
+    private String mentorName;  // or instructorName if you prefer
+    private String timeRange;   // e.g., "20:22 - 21:22"
+    private Double feeAmount;
+    private String daysOfWeek;
 
     public int getCourseOfferingId() { return courseOfferingId; }
     public void setCourseOfferingId(int id) { this.courseOfferingId = id; }
 
-    public String getCourseOfferingName() { return courseOfferingName; } // <- changed
-    public void setCourseOfferingName(String name) { this.courseOfferingName = name; } // <- changed
+    public String getCourseOfferingName() { return courseOfferingName; }
+    public void setCourseOfferingName(String name) { this.courseOfferingName = name; }
 
-    public java.util.Date getStartDate() { return startDate; }
-    public void setStartDate(java.util.Date d) { this.startDate = d; }
+    public String getStart() { return start; }
+    public void setStart(String start) { this.start = start; }
 
-    public java.util.Date getEndDate() { return endDate; }
-    public void setEndDate(java.util.Date d) { this.endDate = d; }
+    public String getEnd() { return end; }
+    public void setEnd(String end) { this.end = end; }
+
+    public String getMentorName() { return mentorName; }
+    public void setMentorName(String mentorName) { this.mentorName = mentorName; }
+
+    public String getTimeRange() { return timeRange; }
+    public void setTimeRange(String timeRange) { this.timeRange = timeRange; }
+
+    public Double getFeeAmount() { return feeAmount; }
+    public void setFeeAmount(Double feeAmount) { this.feeAmount = feeAmount; }
+	public void setDaysOfWeek(String daysOfWeek) {
+		
+		this.daysOfWeek = daysOfWeek;
+	}
 }

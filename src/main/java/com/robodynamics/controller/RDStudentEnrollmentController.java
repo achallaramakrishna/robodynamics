@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.form.RDAssetTransactionForm;
 import com.robodynamics.form.RDCourseForm;
 import com.robodynamics.form.RDStudentEnrollmentForm;
@@ -45,287 +46,123 @@ import com.robodynamics.service.RDUserService;
 @RequestMapping("/enrollment")
 public class RDStudentEnrollmentController {
 
-	@Autowired
-	ServletContext servletContext;
+    @Autowired private RDCourseService courseService;
+    @Autowired private RDUserService userService;
+    @Autowired private RDCourseOfferingService offeringService;
+    @Autowired private RDStudentEnrollmentService enrollmentService;
 
-	@Autowired
-	private RDCourseService courseService;
+    // 1) Show course picker + student (children) list
+    @GetMapping("/showCourses")
+    public String showCourses(Model model, HttpSession session) {
+        model.addAttribute("availableCourses", courseService.getRDCourses());
 
-	@Autowired
-	private RDUserService userService;
+        RDUser parent = (RDUser) session.getAttribute("rdUser");
+        if (parent == null) return "redirect:/login";
+        model.addAttribute("childs", userService.getRDChilds(parent.getUserID()));
 
-	@Autowired
-	private RDCourseOfferingService courseOfferingService;
+        model.addAttribute("studentEnrollmentForm", new RDStudentEnrollmentForm());
+        return "showCoursesForEnrollment";
+    }
 
-	@Autowired
-	private RDStudentEnrollmentService studentEnrollmentService;
+    // 2) AJAX: offerings for a course (DTOs)
+    @GetMapping(value="/getCourseOfferings", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<RDCourseOfferingDTO> getCourseOfferings(@RequestParam int courseId) {
+        return offeringService.getDTOsByCourse(courseId);
+    }
 
-	@GetMapping("/showCourses")
-	public String showCourses(Model theModel) {
-		List<RDCourse> courses = courseService.getRDCourses();
-		System.out.println(courses);
-		theModel.addAttribute("availableCourses", courses);
-		return "showCoursesForEnrollment";
-	}
-	
-	@GetMapping("/enroll")
-	public String listCourseOfferings(Model theModel) {
-		List<RDCourseOffering> courseOfferings = courseOfferingService.getRDCourseOfferings();
-		System.out.println(courseOfferings);
-		theModel.addAttribute("courseOfferings", courseOfferings);
-		return "listCourseOfferings";
-	}
+    // 3) Submit selection -> enroll
+    @PostMapping("/enroll")
+    public String enroll(@ModelAttribute("studentEnrollmentForm") RDStudentEnrollmentForm form,
+                         HttpSession session, RedirectAttributes ra) {
 
-	@GetMapping("/list")
-	public String listRDStudentEnrollments(Model theModel) {
-		List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService.getRDStudentEnrollments();
-		System.out.println(studentEnrollments);
-		theModel.addAttribute("studentEnrollments", studentEnrollments);
-		return "listStudentEnrollments";
-	}
+        RDUser parent = (RDUser) session.getAttribute("rdUser");
+        if (parent == null) return "redirect:/login";
 
-	@GetMapping("/listbyparent")
-	public String listRDStudentEnrollmentsByParent(Model theModel, HttpSession session) {
+        if (form.getCourseOfferingId()==0 || form.getStudentId()==0) {
+            ra.addFlashAttribute("error", "Please select course, offering and student.");
+            return "redirect:/enrollment/showCourses";
+        }
 
-		RDUser parent = null;
-		if (session.getAttribute("rdUser") != null) {
-			parent = (RDUser) session.getAttribute("rdUser");
-		}
+        if (enrollmentService.existsByStudentAndOffering(form.getStudentId(), form.getCourseOfferingId())) {
+            ra.addFlashAttribute("error", "This student is already enrolled in the selected offering.");
+            return "redirect:/enrollment/showCourses";
+        }
 
-		System.out.println("user - " + parent);
-		List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService
-				.getStudentEnrollmentByParent(parent.getUserID());
-		System.out.println(studentEnrollments);
-		theModel.addAttribute("studentEnrollments", studentEnrollments);
-		theModel.addAttribute("user", parent);
-		return "listStudentEnrollments";
-	}
+        RDCourseOffering offering = offeringService.getRDCourseOffering(form.getCourseOfferingId());
+        RDUser student = userService.getRDUser(form.getStudentId());
 
-	@GetMapping("/listbystudent")
-	public String listRDStudentEnrollmentsByStudent(Model theModel, HttpSession session) {
+        double baseFee = offering.getFeeAmount()!=null ? offering.getFeeAmount() : 0.0;
+        double discount = form.getDiscountPercent()!=null ? form.getDiscountPercent() : 0.0;
+        double finalFee = baseFee - (baseFee * discount / 100.0);
 
-		RDUser student = null;
-		if (session.getAttribute("rdUser") != null) {
-			student = (RDUser) session.getAttribute("rdUser");
-		}
+        RDStudentEnrollment e = new RDStudentEnrollment();
+        e.setCourseOffering(offering);
+        e.setStudent(student);
+        e.setParent(parent);
+        e.setEnrollmentDate(new Date());
+        e.setDiscountPercent(discount);
+        e.setDiscountReason(form.getDiscountReason());
+        e.setFinalFee(finalFee);
+        e.setStatus(1); // Active
 
-		System.out.println("user - " + student);
-		List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService
-				.getStudentEnrollmentByStudent(student.getUserID());
-		System.out.println(studentEnrollments);
-		
-		theModel.addAttribute("studentEnrollments", studentEnrollments);
-		return "listStudentEnrollments";
-	}
+        enrollmentService.saveRDStudentEnrollment(e);
 
-	@GetMapping("/showCalendar")
-	public String showCalendar(Model theModel) {
-		List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService.getRDStudentEnrollments();
-		System.out.println(studentEnrollments);
-		theModel.addAttribute("studentEnrollments", studentEnrollments);
-		return "showCalendar";
-	}
+        ra.addFlashAttribute("success", "Enrollment completed!");
+        return "redirect:/enrollment/listbyparent";
+    }
+    
+ // 4️⃣ Show all enrollments for this parent
+    @GetMapping("/listbyparent")
+    public String listByParent(Model model, HttpSession session) {
+        RDUser parent = (RDUser) session.getAttribute("rdUser");
+        if (parent == null) return "redirect:/login";
 
-	@GetMapping(value = "/viewCalendar", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public List<RDStudentEnrollment> getCourseOfferingList() {
-		List<RDStudentEnrollment> studentEnrollments = studentEnrollmentService.getRDStudentEnrollments();
-		System.out.println("inside view calendar");
-		System.out.println(studentEnrollments);
+        List<RDStudentEnrollment> enrollments = enrollmentService.getStudentEnrollmentByParent(parent.getUserID());
+        model.addAttribute("enrollments", enrollments);
+        model.addAttribute("title", "My Enrollments");
 
-		return studentEnrollments;
-	}
+        return "listParentEnrollments";  // JSP page
+    }
 
-	@GetMapping("/showForm")
-	public ModelAndView showEnrollmentForm(
-	        @RequestParam("courseId") Integer courseId,   // 👈 accept it
-	        Model model,
-	        HttpSession session) {
+    
+    @GetMapping("/showEnrollmentForm")
+    public String showEnrollmentForm(@RequestParam("courseId") int courseId,
+                                     @RequestParam("courseOfferingId") int courseOfferingId,
+                                     @RequestParam("studentId") int studentId,
+                                     Model model,
+                                     HttpSession session) {
 
-	    // 1) Load course (optional, for header)
-	    RDCourse course = courseService.getRDCourse(courseId);
-	    if (course == null) {
-	        // bad id -> go back to course list
-	        return new ModelAndView("redirect:/enrollment/showCourses");
-	    }
-	    model.addAttribute("course", course);
+        RDUser parent = (RDUser) session.getAttribute("rdUser");
+        if (parent == null) {
+            return "redirect:/login";
+        }
 
-	    // 2) Filter offerings by course
-	    List<RDCourseOffering> courseOfferings =
-	            courseOfferingService.getRDCourseOfferingsByCourse(courseId); // 👈 add this in service/DAO
-	    model.addAttribute("courseOfferings", courseOfferings);
+        // Fetch course, offering, and student
+        RDCourse course = courseService.getRDCourse(courseId);
+        RDCourseOffering offering = offeringService.getRDCourseOffering(courseOfferingId);
+        RDUser student = userService.getRDUser(studentId);
 
-	    // 3) Parent’s children
-	    RDUser parent = (RDUser) session.getAttribute("rdUser");
-	    if (parent == null) return new ModelAndView("redirect:/login");
-	    List<RDUser> childs = userService.getRDChilds(parent.getUserID());
-	    model.addAttribute("childs", childs);
+        if (course == null || offering == null || student == null) {
+            model.addAttribute("error", "Invalid course, offering, or student selection.");
+            return "showCoursesForEnrollment";
+        }
 
-	    // 4) Form-backing bean
-	    RDStudentEnrollmentForm form = new RDStudentEnrollmentForm();
-	    form.setCourseId(courseId); // keep track of selected course
-	    model.addAttribute("studentEnrollmentForm", form);
+        // Prepare form object
+        RDStudentEnrollmentForm form = new RDStudentEnrollmentForm();
+        form.setCourseId(course.getCourseId());
+        form.setCourseName(course.getCourseName());
+        form.setCourseOfferingId(offering.getCourseOfferingId());
+        form.setStudentId(student.getUserID());
+        form.setParentId(parent.getUserID());
+        form.setFinalFee(offering.getFeeAmount());
 
-	    return new ModelAndView("student-enrollment-form");
-	}
+        model.addAttribute("studentEnrollmentForm", form);
+        model.addAttribute("course", course);
+        model.addAttribute("offering", offering);
+        model.addAttribute("student", student);
 
-
-	@GetMapping("/showEnrollmentForm")
-	public ModelAndView showEnrollmentForm(Model theModel, HttpSession session,
-
-			@RequestParam("courseOfferingId") Integer courseOfferingId) {
-
-		RDStudentEnrollmentForm studentEnrollmentForm = new RDStudentEnrollmentForm();
-		RDCourseOffering courseOffering = courseOfferingService.getRDCourseOffering(courseOfferingId);
-		System.out.println(courseOffering);
-
-		RDUser parent = null;
-		if (session.getAttribute("rdUser") != null) {
-			parent = (RDUser) session.getAttribute("rdUser");
-		}
-
-		System.out.println("user - " + parent);
-		
-		List<RDUser> childs = userService.getRDChilds(parent.getUserID());
-		System.out.println(childs);
-		theModel.addAttribute("childs", childs);
-
-		studentEnrollmentForm.setCourseOfferingId(courseOfferingId);
-
-		theModel.addAttribute("courseOffering", courseOffering);
-		theModel.addAttribute("studentEnrollmentForm", studentEnrollmentForm);
-
-		ModelAndView modelAndView = new ModelAndView("course-enrollment-form");
-		return modelAndView;
-	}
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
-	
-	@GetMapping("/editForm")
-	public String showEditForm(@RequestParam("enrollmentId") Integer enrollmentId, 
-	                           Model model, HttpSession session) {
-
-	    RDStudentEnrollment existing = studentEnrollmentService.getRDStudentEnrollment(enrollmentId);
-	    if (existing == null) {
-	        return "redirect:/enrollment/list";
-	    }
-
-	    // Convert to form bean for Spring <form:form>
-	    RDStudentEnrollmentForm form = new RDStudentEnrollmentForm();
-	    form.setEnrollmentId(existing.getEnrollmentId());
-	    form.setCourseOfferingId(existing.getCourseOffering().getCourseOfferingId());
-	    form.setStudentId(existing.getStudent().getUserID());
-	    form.setParentId(existing.getParent().getUserID());
-	    form.setDiscountPercent(existing.getDiscountPercent());
-	    form.setDiscountReason(existing.getDiscountReason());
-	    form.setFinalFee(existing.getFinalFee());
-	    form.setStatus(existing.getStatus());
-
-	    // Populate dropdowns and context data
-	    RDCourseOffering selectedOffering = existing.getCourseOffering();
-	    model.addAttribute("selectedOffering", selectedOffering);
-	    model.addAttribute("students", List.of(existing.getStudent()));
-	    model.addAttribute("parents", List.of(existing.getParent()));
-	    model.addAttribute("studentEnrollmentForm", form);
-
-	    return "student-enrollment-form";  // reuse the same JSP
-	}
-
-	@PostMapping("/save")
-	public String saveOrUpdateEnrollment(
-	        @ModelAttribute("studentEnrollmentForm") RDStudentEnrollmentForm form,
-	        HttpSession session,
-	        RedirectAttributes redirectAttributes) {
-
-	    RDCourseOffering offering = courseOfferingService.getRDCourseOffering(form.getCourseOfferingId());
-	    double baseFee = offering.getFeeAmount() != null ? offering.getFeeAmount() : 0.0;
-	    double discount = form.getDiscountPercent() != null ? form.getDiscountPercent() : 0.0;
-	    double finalFee = baseFee - (baseFee * discount / 100);
-
-	    form.setStudentId(form.getStudentId());
-	    form.setParentId(form.getParentId());
-	    
-	   // RDUser parent = userService.getRDUser(form.getParentId());
-	   // RDUser student = userService.getRDUser(form.getStudentId());
-
-	    RDStudentEnrollment enrollment;
-	    if (form.getEnrollmentId() != 0) {
-	        enrollment = studentEnrollmentService.getRDStudentEnrollment(form.getEnrollmentId());
-	    } else {
-	        enrollment = new RDStudentEnrollment();
-	        enrollment.setEnrollmentDate(new Date());
-	    }
-
-	    enrollment.setCourseOffering(offering);
-	   // enrollment.setParent(parent);
-	   // enrollment.setStudent(student);
-	    enrollment.setDiscountPercent(discount);
-	    enrollment.setDiscountReason(form.getDiscountReason());
-	    enrollment.setFinalFee(finalFee);
-	    enrollment.setStatus(form.getStatus() != 0 ? form.getStatus() : 1);
-
-	    studentEnrollmentService.saveRDStudentEnrollment(enrollment);
-
-	    redirectAttributes.addFlashAttribute("successMessage", "Enrollment saved successfully!");
-	    return "redirect:/enrollment/list";
-	}
-
-
-	@PostMapping("/saveStudentEnrollment")
-	public String saveStudentEnrollment(
-			HttpSession session, @ModelAttribute("studentEnrollmentForm") RDStudentEnrollmentForm studentEnrollmentForm,
-			@RequestParam("studentId") Integer studentId, BindingResult bindingResult) {
-
-	    RDCourseOffering offering = courseOfferingService.getRDCourseOffering(studentEnrollmentForm.getCourseOfferingId());
-
-		System.out.println(studentEnrollmentForm);
-		if (bindingResult.hasErrors()) {
-			List<FieldError> errors = bindingResult.getFieldErrors();
-			for (FieldError error : errors) {
-				System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
-			}
-			return "showStudentEnrollmentForm";
-		}
-		RDUser parent = null;
-		if (session.getAttribute("rdUser") != null) {
-			parent = (RDUser) session.getAttribute("rdUser");
-		}
-
-		System.out.println("user - " + parent);
-
-		double baseFee = offering.getFeeAmount() != null ? offering.getFeeAmount() : 0.0;
-	    double discount = studentEnrollmentForm.getDiscountPercent() != null ? studentEnrollmentForm.getDiscountPercent() : 0.0;
-	    double finalFee = baseFee - (baseFee * discount / 100);
-
-		RDStudentEnrollment theStudentEnrollment = new RDStudentEnrollment();
-
-		System.out.println("i am here");
-		RDCourseOffering courseOffering = courseOfferingService
-				.getRDCourseOffering(studentEnrollmentForm.getCourseOfferingId());
-		System.out.println("course offering id - " + studentEnrollmentForm.getCourseOfferingId());
-		courseOffering.setCourseOfferingId(studentEnrollmentForm.getCourseOfferingId());
-		RDUser user = userService.getRDUser(studentEnrollmentForm.getStudentId());
-		user.setUserID(studentEnrollmentForm.getStudentId());
-
-		RDUser student = userService.getRDUser(studentId);
-		student.setUserID(studentId);
-
-		theStudentEnrollment.setEnrollmentDate(new Date());
-
-		theStudentEnrollment.setCourseOffering(courseOffering);
-		theStudentEnrollment.setStatus(1);
-		theStudentEnrollment.setDiscountPercent(discount);
-		theStudentEnrollment.setDiscountReason(studentEnrollmentForm.getDiscountReason());
-		theStudentEnrollment.setFinalFee(finalFee);	theStudentEnrollment.setParent(parent);
-		theStudentEnrollment.setStudent(student);
-		studentEnrollmentService.saveRDStudentEnrollment(theStudentEnrollment);
-
-		return "redirect:/enrollment/listbyparent";
-	}
+        return "showEnrollmentForm"; // 👉 JSP: /WEB-INF/views/showEnrollmentForm.jsp
+    }
 
 }

@@ -90,7 +90,11 @@
 
 		List<RDCourseOffering> getOfferingsForMentorIntersecting(Integer mentorId, LocalDate since, LocalDate to);
 
-	
+	    List<RDCourseOffering> findActiveByCourseId(int courseId);
+
+
+		List<RDCourseOfferingDTO> getDTOsByCourse(int courseId);
+
 	
 	
 	}

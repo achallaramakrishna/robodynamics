@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDCourseOfferingDao;
+import com.robodynamics.dto.RDCourseOfferingDTO;
 import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
 import com.robodynamics.model.RDCourseOffering;
 import org.hibernate.Session;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
@@ -102,11 +104,15 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 
     @Override
     public List<RDCourseOffering> getRDCourseOfferingsListByCourse(int courseId) {
-        String hql = "from RDCourseOffering where course.courseId = :courseId and isActive = true order by startDate asc";
+        String hql = "from RDCourseOffering co " +
+                     "JOIN FETCH co.instructor " +  // Eagerly fetch instructor
+                     "where co.course.courseId = :courseId and co.isActive = true " +
+                     "order by co.startDate asc";
         return s().createQuery(hql, RDCourseOffering.class)
-                  .setParameter("courseId", courseId)
-                  .getResultList();
+                 .setParameter("courseId", courseId)
+                 .getResultList();
     }
+
 
     @Override
     public List<RDCourseOffering> getCourseOfferingsByMentor(int userID) {
@@ -419,4 +425,68 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<RDCourseOffering> findActiveByCourseId(int courseId) {
+		
+        Session session = factory.getCurrentSession();
+
+		return session.createQuery(
+	            "select co from RDCourseOffering co " +
+	            " left join fetch co.mentor m " +
+	            " left join fetch co.instructor i " +
+	            " where co.course.courseId=:cid and co.isActive=true " +
+	            " order by co.startDate asc", RDCourseOffering.class)
+	            .setParameter("cid", courseId)
+	            .getResultList();
+	}
+
+	@Transactional(readOnly = true)
+	public List<RDCourseOfferingDTO> getDTOsByCourse(int courseId) {
+		 Session session = factory.getCurrentSession();
+
+	    List<RDCourseOffering> offerings = session.createQuery(
+	        "select co from RDCourseOffering co " +
+	        " left join fetch co.mentor m " +
+	        " left join fetch co.instructor i " +
+	        " where co.course.courseId = :courseId and co.isActive = true " +
+	        " order by co.startDate asc", 
+	        RDCourseOffering.class)
+	        .setParameter("courseId", courseId)
+	        .getResultList();
+
+	    List<RDCourseOfferingDTO> dtoList = new ArrayList<>();
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+	    for (RDCourseOffering co : offerings) {
+	        RDCourseOfferingDTO dto = new RDCourseOfferingDTO();
+	        dto.setCourseOfferingId(co.getCourseOfferingId());
+	        dto.setCourseOfferingName(co.getCourseOfferingName());
+	        dto.setStart(co.getStartDate() != null ? sdf.format(co.getStartDate()) : "N/A");
+	        dto.setEnd(co.getEndDate() != null ? sdf.format(co.getEndDate()) : "N/A");
+	        dto.setFeeAmount(co.getFeeAmount());
+
+	        // ✅ Mentor fallback to Instructor
+	        String mentorName = null;
+	        if (co.getMentor() != null && co.getMentor().getFullName() != null) {
+	            mentorName = co.getMentor().getFullName();
+	        } else if (co.getInstructor() != null && co.getInstructor().getFullName() != null) {
+	            mentorName = co.getInstructor().getFullName();
+	        } else {
+	            mentorName = "Mentor Not Assigned";
+	        }
+	        dto.setMentorName(mentorName);
+
+	        // ✅ Add time range
+	        if (co.getSessionStartTime() != null && co.getSessionEndTime() != null) {
+	            dto.setTimeRange(co.getSessionStartTime() + " - " + co.getSessionEndTime());
+	        } else {
+	            dto.setTimeRange("TBA");
+	        }
+
+	        dtoList.add(dto);
+	    }
+	    return dtoList;
+	}
+
 }

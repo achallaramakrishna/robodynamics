@@ -43,4 +43,6 @@ public interface RDStudentEnrollmentDao {
 	public int countEnrollments(int courseOfferingId);
 
 	public List<RDStudentEnrollment> getActiveEnrollments();
+
+	public boolean existsByStudentAndOffering(int studentId, int offeringId);
 }

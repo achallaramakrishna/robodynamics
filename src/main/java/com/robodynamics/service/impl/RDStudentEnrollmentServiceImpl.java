@@ -152,6 +152,13 @@ public class RDStudentEnrollmentServiceImpl implements RDStudentEnrollmentServic
 		return rdStudentEnrollmentDao.getActiveEnrollments();
 	}
 
+	@Override
+	@Transactional
+	public boolean existsByStudentAndOffering(int studentId, int offeringId) {
+		return rdStudentEnrollmentDao.existsByStudentAndOffering(studentId, offeringId);
+	}
+
+	
 
 	
 }

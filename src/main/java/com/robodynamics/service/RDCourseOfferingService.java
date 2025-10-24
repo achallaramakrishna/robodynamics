@@ -43,6 +43,8 @@ public interface RDCourseOfferingService {
 	
 	public void deactivateCourseOffering(int id);
 	public void activateCourseOffering(int id);
+	
+	List<RDCourseOfferingDTO> getDTOsByCourse(int courseId);
 
 	
 	

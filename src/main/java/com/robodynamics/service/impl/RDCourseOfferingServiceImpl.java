@@ -1,6 +1,7 @@
 package com.robodynamics.service.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,7 +153,11 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
 	}
 
 
-
+	@Override @Transactional(readOnly = true)
+    public List<RDCourseOfferingDTO> getDTOsByCourse(int courseId) {
+    
+		return rdCourseOfferingDao.getDTOsByCourse(courseId);
+	}
 	
 	
 	

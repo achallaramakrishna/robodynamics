@@ -201,19 +201,16 @@ public class RDCourseOffering {
 	public void setFeeAmount(Double feeAmount) {
 		this.feeAmount = feeAmount;
 	}
-	
 	@Override
 	public String toString() {
-	    return "RDCourseOffering [courseOfferingId=" + courseOfferingId +
-	           ", courseOfferingName=" + courseOfferingName +
-	           ", startDate=" + startDate +
-	           ", endDate=" + endDate +
-	           ", isActive=" + isActive +
-	           ", sessionsPerWeek=" + sessionsPerWeek +
-	           ", daysOfWeek=" + daysOfWeek +
-	           ", sessionStartTime=" + sessionStartTime +
-	           ", sessionEndTime=" + sessionEndTime + "]";
+		return "RDCourseOffering [courseOfferingId=" + courseOfferingId + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", courseOfferingName=" + courseOfferingName + ", feeAmount=" + feeAmount + ", isActive="
+				+ isActive + ", course=" + course + ", instructor=" + instructor + ", sessionsPerWeek="
+				+ sessionsPerWeek + ", daysOfWeek=" + daysOfWeek + ", sessionStartTime=" + sessionStartTime
+				+ ", sessionEndTime=" + sessionEndTime +  "]";
 	}
+	
+	
 
 
 	

@@ -104,17 +104,36 @@ public class RDAdminSearchController {
     @GetMapping(value = "/offerings", produces = "application/json")
     @ResponseBody
     public List<RDCourseOfferingDTO> getOfferingsByCourse(@RequestParam int courseId) {
+
         List<RDCourseOffering> list = offeringService.getRDCourseOfferingsListByCourse(courseId);
-     // Convert entity -> DTO
+
+        // Convert entity -> DTO with mentor, fee, and schedule info
         return list.stream()
-                .map(o -> new RDCourseOfferingDTO(
-                        o.getCourseOfferingId(),         // entity id
-                        o.getCourseOfferingName(),          // or o.getCourseOfferingName()
-                        o.getStartDate(),
-                        o.getEndDate()
-                ))
+                .map(o -> {
+                    String mentorName = (o.getMentor() != null)
+                            ? o.getInstructor().getFirstName() + " " + (o.getInstructor().getLastName() != null ? o.getInstructor().getLastName() : "")
+                            : "Unassigned";
+
+                    // Build readable time range
+                    String timeRange = (o.getSessionStartTime() != null && o.getSessionEndTime() != null)
+                            ? o.getSessionStartTime() + " - " + o.getSessionEndTime()
+                            : null;
+
+                    // Create DTO
+                    RDCourseOfferingDTO dto = new RDCourseOfferingDTO();
+                    dto.setCourseOfferingId(o.getCourseOfferingId());
+                    dto.setCourseOfferingName(o.getCourseOfferingName());
+                    dto.setStart(o.getStartDate() != null ? o.getStartDate().toString() : null);
+                    dto.setEnd(o.getEndDate() != null ? o.getEndDate().toString() : null);
+                    dto.setMentorName(mentorName);
+                    dto.setFeeAmount(o.getFeeAmount());
+                    dto.setTimeRange(timeRange);
+                    dto.setDaysOfWeek(o.getDaysOfWeek());
+                    return dto;
+                })
                 .toList();
     }
+
 
 
 

@@ -341,6 +341,14 @@ footer a:active {
 	    </div>
 	</c:if>
 	
+	<!-- Error Message -->
+	<c:if test="${not empty error}">
+	    <div class="alert alert-danger text-center" role="alert">
+	        <strong>${error}</strong><br>
+	        <small>${errorDetail}</small>
+	    </div>
+	</c:if>
+	
 
 	<div class="main-content">
 		<div class="container">

@@ -489,4 +489,23 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
 	    return dtoList;
 	}
 
+	@Override
+    public List<RDCourseOffering> findForMentorBetweenRDUser(int mentorId, Date from, Date to) {
+        String hql = "FROM RDCourseOffering o " +
+                     "WHERE o.instructor.userID = :mentorId " +
+                     "AND ( " +
+                     "      (o.startDate <= :to AND o.endDate >= :from) " +  // overlapping range
+                     "      OR (o.startDate <= :to AND o.endDate IS NULL) " + // open-ended
+                     "    )";
+
+		 Session session = factory.getCurrentSession();
+
+        Query query = session.createQuery(hql, RDCourseOffering.class);
+        query.setParameter("mentorId", mentorId);
+        query.setParameter("from", from);
+        query.setParameter("to", to);
+
+        return query.getResultList();
+    }
+
 }

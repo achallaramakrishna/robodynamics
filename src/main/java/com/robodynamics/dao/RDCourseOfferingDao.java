@@ -1,7 +1,8 @@
 	package com.robodynamics.dao;
 	
 	import java.time.LocalDate;
-	import java.util.List;
+import java.util.Date;
+import java.util.List;
 	
 	import com.robodynamics.dto.RDCourseOfferingDTO;
 	import com.robodynamics.dto.RDCourseOfferingSummaryDTO;
@@ -94,6 +95,9 @@
 
 
 		List<RDCourseOfferingDTO> getDTOsByCourse(int courseId);
+
+
+		List<RDCourseOffering> findForMentorBetweenRDUser(int mentorId, java.sql.Date from, java.sql.Date to);
 
 	
 	

@@ -112,6 +112,53 @@ public class RDStudentEnrollmentController {
         return "redirect:/enrollment/listbyparent";
     }
     
+ // 6️⃣ Show Edit Form for Existing Enrollment
+    @GetMapping("/editForm")
+    public String showEditForm(@RequestParam("enrollmentId") int enrollmentId,
+                               Model model,
+                               HttpSession session) {
+
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) {
+            return "redirect:/login";
+        }
+
+        // Fetch the enrollment record
+        RDStudentEnrollment enrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
+        if (enrollment == null) {
+            model.addAttribute("error", "Enrollment not found!");
+            return "error";
+        }
+
+        // Role-based access (Parent can only edit their own child’s enrollment)
+        if (rdUser.getProfile_id() == 3 &&  // 3 = Parent
+            enrollment.getParent().getUserID() != rdUser.getUserID()) {
+            model.addAttribute("error", "Access denied. You can only edit your own child's enrollment.");
+            return "error";
+        }
+
+        // Prepare form data
+        RDStudentEnrollmentForm form = new RDStudentEnrollmentForm();
+        form.setEnrollmentId(enrollment.getEnrollmentId());
+        form.setCourseOfferingId(enrollment.getCourseOffering().getCourseOfferingId());
+        form.setCourseId(enrollment.getCourseOffering().getCourse().getCourseId());
+        form.setCourseName(enrollment.getCourseOffering().getCourse().getCourseName());
+        form.setStudentId(enrollment.getStudent().getUserID());
+        form.setParentId(enrollment.getParent().getUserID());
+        form.setDiscountPercent(enrollment.getDiscountPercent());
+        form.setDiscountReason(enrollment.getDiscountReason());
+        form.setFinalFee(enrollment.getFinalFee());
+        form.setStatus(enrollment.getStatus());
+
+        model.addAttribute("studentEnrollmentForm", form);
+        model.addAttribute("enrollment", enrollment);
+        model.addAttribute("courseOffering", enrollment.getCourseOffering());
+        model.addAttribute("student", enrollment.getStudent());
+        model.addAttribute("title", "Edit Enrollment");
+
+        return "course-enrollment-form";  // 👉 JSP page: /WEB-INF/views/editEnrollmentForm.jsp
+    }
+    
  // 4️⃣ Show all enrollments for this parent
     @GetMapping("/listbyparent")
     public String listByParent(Model model, HttpSession session) {
@@ -124,6 +171,58 @@ public class RDStudentEnrollmentController {
 
         return "listParentEnrollments";  // JSP page
     }
+    
+    @PostMapping("/update")
+    public String updateEnrollment(@ModelAttribute("studentEnrollmentForm") RDStudentEnrollmentForm form,
+                                   RedirectAttributes ra,
+                                   HttpSession session) {
+
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) return "redirect:/login";
+
+        RDStudentEnrollment existing = enrollmentService.getRDStudentEnrollment(form.getEnrollmentId());
+        if (existing == null) {
+            ra.addFlashAttribute("error", "Enrollment not found!");
+            return "redirect:/enrollment/list";
+        }
+
+        // Update editable fields
+        existing.setDiscountPercent(form.getDiscountPercent());
+        existing.setDiscountReason(form.getDiscountReason());
+        existing.setFinalFee(form.getFinalFee());
+        existing.setStatus(form.getStatus());
+       // existing.set(new Date());
+
+        enrollmentService.saveRDStudentEnrollment(existing);
+
+        ra.addFlashAttribute("success", "Enrollment details updated successfully!");
+        return "redirect:/enrollment/list";
+    }
+
+    
+ // 5️⃣ Show all student enrollments (for Admin / Super Admin)
+    @GetMapping("/list")
+    public String listAllEnrollments(Model model, HttpSession session) {
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) {
+            return "redirect:/login";
+        }
+
+        // Allow only Admin (1) or Super Admin (2)
+        if (rdUser.getProfile_id() != 1 && rdUser.getProfile_id() != 2) {
+            model.addAttribute("errorMessage", "Access denied. Only Admins can view all enrollments.");
+            return "error";
+        }
+
+        // Fetch all enrollments
+        List<RDStudentEnrollment> studentEnrollments = enrollmentService.getRDStudentEnrollments();
+        model.addAttribute("studentEnrollments", studentEnrollments);
+        model.addAttribute("rdUser", rdUser);  // for role check in JSP
+        model.addAttribute("title", "Manage Student Enrollments");
+
+        return "listStudentEnrollments"; // 👉 JSP: /WEB-INF/views/listStudentEnrollments.jsp
+    }
+
 
     
     @GetMapping("/showEnrollmentForm")

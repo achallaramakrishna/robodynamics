@@ -76,6 +76,19 @@
           </div>
         </div>
       </div>
+      <!-- Mentor Utilization Card -->
+	<div class="col-md-4">
+	  <div class="card shadow-sm border-0">
+	    <div class="card-body">
+	      <h5 class="card-title mb-2">Mentor Utilization</h5>
+	      <p class="card-text text-muted">See weekly calendars, free slots & fill capacity.</p>
+	      <a href="${pageContext.request.contextPath}/admin/mentor-utilization" class="btn btn-primary btn-sm">
+	        Open Report
+	      </a>
+	    </div>
+	  </div>
+	</div>
+      
       
       <!-- Attendance & Tracking Card -->
       <div class="col-md-4 mb-4">

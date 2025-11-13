@@ -208,13 +208,13 @@ public class RDCourseSessionController {
             if (courseSession != null) {
                 int courseId = courseSession.getCourse().getCourseId();
                 courseSessionService.deleteCourseSession(courseSessionId);
-                redirectAttributes.addFlashAttribute("message", "Course session deleted successfully.");
+                redirectAttributes.addFlashAttribute("successMessage", "Course session deleted successfully.");
                 return "redirect:/courseSession/list?courseId=" + courseId;
             } else {
-                redirectAttributes.addFlashAttribute("error", "Course session not found.");
+                redirectAttributes.addFlashAttribute("errorMessage", "Course session not found.");
             }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error deleting the course session: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", "Error deleting the course session: " + e.getMessage());
         }
         return "redirect:/courseSession/list";
     }

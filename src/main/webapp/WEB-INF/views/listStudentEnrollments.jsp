@@ -81,6 +81,9 @@ body { background-color: #f8f9fa; }
               </td>
 			<td class="text-center">
 			  <c:choose>
+			    <c:when test="${enroll.status == 0}">
+			      <span class="badge bg-danger">INACTIVE</span>
+			    </c:when>
 			    <c:when test="${enroll.status == 1}">
 			      <span class="badge bg-success">ACTIVE</span>
 			    </c:when>
@@ -91,7 +94,7 @@ body { background-color: #f8f9fa; }
 			      <span class="badge bg-danger">CANCELLED</span>
 			    </c:when>
 			    <c:otherwise>
-			      <span class="badge bg-secondary">PENDING</span>
+			      <span class="badge bg-secondary">INACTIVE</span>
 			    </c:otherwise>
 			  </c:choose>
 			</td>

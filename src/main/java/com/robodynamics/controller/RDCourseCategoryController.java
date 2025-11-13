@@ -2,6 +2,7 @@ package com.robodynamics.controller;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.service.RDCourseCategoryService;
@@ -53,9 +55,18 @@ public class RDCourseCategoryController {
     }
 
     @GetMapping("/delete")
-    public String deleteCustomer(@RequestParam("courseCategoryId") int theId) {
-        service.deleteRDCourseCategory(theId);
+    public String deleteCourseCategory(@RequestParam("courseCategoryId") int theId, RedirectAttributes redirectAttributes) {
+    	try {
+    		service.deleteRDCourseCategory(theId);
+            redirectAttributes.addFlashAttribute("successMessage", "Course category deleted successfully!");
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Cannot delete category because it has assigned courses.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", 
+                    "Something went wrong while deleting the category. Please try again.");
+            }
         return "redirect:/coursecategory/list";
+
     }
 	
 }

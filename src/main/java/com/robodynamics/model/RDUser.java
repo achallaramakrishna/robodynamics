@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.robodynamics.form.RDRegistrationForm;
 
 @Entity
@@ -28,216 +29,251 @@ public class RDUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int userID;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(name = "user_name")
 	private String userName;
 
 	@Column(name = "age")
 	private Integer age;
-	
+
 	@Column(name = "city")
 	private String city;
-	
+
 	@Column(name = "state")
 	private String state;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "address")
 	private String address;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "profile_id")
 	private int profile_id;
 
 	@Column(name = "cell_phone")
 	private String cellPhone;
-	
+
 	@Column(name = "active")
 	private int active;
-	
-	  // ✅ Newly added columns for Student
-    @Column(name = "grade")
-    private String grade;
 
-    @Column(name = "school_name")
-    private String schoolName;
+	// ✅ Newly added columns for Student
+	@Column(name = "grade")
+	private String grade;
 
-    @Column(name = "parent_contact")
-    private String parentContact;
+	@Column(name = "school_name")
+	private String schoolName;
+
+	@Column(name = "parent_contact")
+	private String parentContact;
 
 	@Transient
-    private String attendanceStatus;
+	private String attendanceStatus;
 
-	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mom_user_id")
-    private RDUser mom;
+	@JoinColumn(name = "mom_user_id")
+	private RDUser mom;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dad_user_id")
-    private RDUser dad;
-    
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-    
-    @Column(name = "profile_publish_allowed", nullable = false)
-    private Boolean profilePublishAllowed = false;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dad_user_id")
+	private RDUser dad;
 
+	@Column(name = "created_date")
+	private LocalDateTime createdDate;
 
-    public Boolean getProfilePublishAllowed() { return profilePublishAllowed; }
-    public void setProfilePublishAllowed(Boolean profilePublishAllowed) { this.profilePublishAllowed = profilePublishAllowed; }
+	@Column(name = "profile_publish_allowed", nullable = false)
+	private Boolean profilePublishAllowed = false;
 
-    
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    
-	public RDUser() {
-		
+	public Boolean getProfilePublishAllowed() {
+		return profilePublishAllowed;
 	}
+
+	public void setProfilePublishAllowed(Boolean profilePublishAllowed) {
+		this.profilePublishAllowed = profilePublishAllowed;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public RDUser() {
+
+	}
+
 	public int getUserID() {
 		return userID;
 	}
+
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public Integer getAge() {
 		return age;
 	}
+
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getState() {
 		return state;
 	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public int getProfile_id() {
 		return profile_id;
 	}
+
 	public void setProfile_id(int profile_id) {
 		this.profile_id = profile_id;
 	}
 
-	
 	public String getCellPhone() {
 		return cellPhone;
 	}
+
 	public void setCellPhone(String cellPhone) {
 		this.cellPhone = cellPhone;
 	}
 
+	@Column(name = "wants_notifications", nullable = false)
+	@JsonProperty("wantsNotifications")
+	private Boolean wantsNotifications = true;
+
+	public Boolean getWantsNotifications() {
+		return wantsNotifications;
+	}
+
+	public void setWantsNotifications(Boolean wantsNotifications) {
+		this.wantsNotifications = wantsNotifications;
+	}
 
 	public static enum profileType {
-		SUPER_ADMIN(1, "SUPER_ADMIN"), ROBO_ADMIN(2, "ROBO_ADMIN"), ROBO_MENTOR(3, "ROBO_MENTOR"), ROBO_PARENT(4, "ROBO_PARENT"), ROBO_STUDENT(5, "ROBO_STUDENT"), ROBO_FINANCE_ADMIN(6, "ROBO_FINANCE_ADMIN");
-		 
+		SUPER_ADMIN(1, "SUPER_ADMIN"), ROBO_ADMIN(2, "ROBO_ADMIN"), ROBO_MENTOR(3, "ROBO_MENTOR"),
+		ROBO_PARENT(4, "ROBO_PARENT"), ROBO_STUDENT(5, "ROBO_STUDENT"), ROBO_FINANCE_ADMIN(6, "ROBO_FINANCE_ADMIN");
+
 		private int value;
 		private String label;
-		 
+
 		private profileType(int value, String label) {
 			this.value = value;
 			this.label = label;
 		}
-		 
+
 		public int getValue() {
-		  return value;
+			return value;
 		}
-		
+
 		public String getLabel() {
 			return label;
 		}
-		
+
 		public static Map<Integer, String> getMap() {
-			Map<Integer, String> map  = new LinkedHashMap<Integer, String>();
-			for (profileType type: profileType.values()) {				
+			Map<Integer, String> map = new LinkedHashMap<Integer, String>();
+			for (profileType type : profileType.values()) {
 				map.put(type.getValue(), type.getLabel());
 			}
 			return map;
 		}
 	}
 
-	
-	
 	public int getActive() {
 		return active;
 	}
+
 	public void setActive(int active) {
 		this.active = active;
 	}
+
 	public RDUser getMom() {
 		return mom;
 	}
+
 	public void setMom(RDUser mom) {
 		this.mom = mom;
 	}
+
 	public RDUser getDad() {
 		return dad;
 	}
+
 	public void setDad(RDUser dad) {
 		this.dad = dad;
 	}
-	
-	
-	
-	
+
 	public String getGrade() {
 		return grade;
 	}
@@ -263,50 +299,49 @@ public class RDUser {
 	}
 
 	// Method to convert parent details to RDUser object
-    public static RDUser fromParent(RDRegistrationForm.Parent parent) {
-        RDUser parentUser = new RDUser();
-        parentUser.setFirstName(parent.getFirstName());
-        parentUser.setLastName(parent.getLastName());
-        parentUser.setUserName(parent.getUserName());  // Username
-        parentUser.setPassword(parent.getPassword());  // Password (ensure you hash the password)
-        parentUser.setEmail(parent.getEmail());
-        parentUser.setCellPhone(parent.getPhone());
-        parentUser.setAddress(parent.getAddress());
-        parentUser.setCity(parent.getCity());
-        parentUser.setState(parent.getState());
-        parentUser.setActive(1);  // Active status (default value)
-        parentUser.setProfile_id(RDUser.profileType.ROBO_PARENT.getValue()); // Set the profile as ROBO_PARENT
+	public static RDUser fromParent(RDRegistrationForm.Parent parent) {
+		RDUser parentUser = new RDUser();
+		parentUser.setFirstName(parent.getFirstName());
+		parentUser.setLastName(parent.getLastName());
+		parentUser.setUserName(parent.getUserName()); // Username
+		parentUser.setPassword(parent.getPassword()); // Password (ensure you hash the password)
+		parentUser.setEmail(parent.getEmail());
+		parentUser.setCellPhone(parent.getPhone());
+		parentUser.setAddress(parent.getAddress());
+		parentUser.setCity(parent.getCity());
+		parentUser.setState(parent.getState());
+		parentUser.setActive(1); // Active status (default value)
+		parentUser.setProfile_id(RDUser.profileType.ROBO_PARENT.getValue()); // Set the profile as ROBO_PARENT
 
-        return parentUser;
-    }
+		return parentUser;
+	}
 
-    // Method to convert child details to RDUser object
-    public static RDUser fromChild(RDRegistrationForm.Child child) {
-        RDUser childUser = new RDUser();
-        childUser.setFirstName(child.getFirstName());
-        childUser.setLastName(child.getLastName());
-        childUser.setAge(child.getAge());  // Child's age
-        childUser.setActive(1);  // Active status (default value)
-        childUser.setUserName(child.getUserName());
-        childUser.setPassword(child.getPassword());
-        childUser.setProfile_id(RDUser.profileType.ROBO_STUDENT.getValue()); // Set the profile as ROBO_STUDENT
+	// Method to convert child details to RDUser object
+	public static RDUser fromChild(RDRegistrationForm.Child child) {
+		RDUser childUser = new RDUser();
+		childUser.setFirstName(child.getFirstName());
+		childUser.setLastName(child.getLastName());
+		childUser.setAge(child.getAge()); // Child's age
+		childUser.setActive(1); // Active status (default value)
+		childUser.setUserName(child.getUserName());
+		childUser.setPassword(child.getPassword());
+		childUser.setProfile_id(RDUser.profileType.ROBO_STUDENT.getValue()); // Set the profile as ROBO_STUDENT
 
-        return childUser;
-    }
+		return childUser;
+	}
 
-    // Method to create a parent-child relationship in RDUser object
-    public static RDUser createFamily(RDRegistrationForm registrationForm) {
-        RDUser parentUser = RDUser.fromParent(registrationForm.getParent());
-        RDUser childUser = RDUser.fromChild(registrationForm.getChild());
+	// Method to create a parent-child relationship in RDUser object
+	public static RDUser createFamily(RDRegistrationForm registrationForm) {
+		RDUser parentUser = RDUser.fromParent(registrationForm.getParent());
+		RDUser childUser = RDUser.fromChild(registrationForm.getChild());
 
-        // Assuming the parent is the "mom" or "dad" depending on the gender or some logic
-        parentUser.setMom(childUser);  // You can decide if mom or dad based on context
+		// Assuming the parent is the "mom" or "dad" depending on the gender or some
+		// logic
+		parentUser.setMom(childUser); // You can decide if mom or dad based on context
 
-        return parentUser;
-    }
-    
-    
-    
+		return parentUser;
+	}
+
 	public String getAttendanceStatus() {
 		return attendanceStatus;
 	}
@@ -325,31 +360,28 @@ public class RDUser {
 
 	@Transient
 	public String getFullName() {
-	    StringBuilder sb = new StringBuilder();
-	    if (firstName != null && !firstName.trim().isEmpty()) {
-	        sb.append(firstName.trim());
-	    }
-	    if (lastName != null && !lastName.trim().isEmpty()) {
-	        if (sb.length() > 0) sb.append(" ");
-	        sb.append(lastName.trim());
-	    }
-	    return sb.length() > 0 ? sb.toString() : userName; // fallback to username if both null
+		StringBuilder sb = new StringBuilder();
+		if (firstName != null && !firstName.trim().isEmpty()) {
+			sb.append(firstName.trim());
+		}
+		if (lastName != null && !lastName.trim().isEmpty()) {
+			if (sb.length() > 0)
+				sb.append(" ");
+			sb.append(lastName.trim());
+		}
+		return sb.length() > 0 ? sb.toString() : userName; // fallback to username if both null
 	}
-	
+
 	@Transient
 	public String getParentName() {
-	    if (mom != null) {
-	        return mom.getFullName() + " (Mom)";
-	    } else if (dad != null) {
-	        return dad.getFullName() + " (Dad)";
-	    } else if (parentContact != null && !parentContact.isEmpty()) {
-	        return parentContact;
-	    }
-	    return null;
+		if (mom != null) {
+			return mom.getFullName() + " (Mom)";
+		} else if (dad != null) {
+			return dad.getFullName() + " (Dad)";
+		} else if (parentContact != null && !parentContact.isEmpty()) {
+			return parentContact;
+		}
+		return null;
 	}
 
-
-	
-	
-	
 }

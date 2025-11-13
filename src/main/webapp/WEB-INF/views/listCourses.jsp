@@ -45,6 +45,21 @@
 					onclick="window.location.href='showForm'; return false;"
 					class="btn btn-primary" /> <br />
 				<br />
+				<!-- Display success or error messages -->
+					<c:if test="${not empty successMessage}">
+					    <div class="alert alert-success alert-dismissible fade show" role="alert">
+					        ${successMessage}
+					        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					    </div>
+					</c:if>
+					
+					<c:if test="${not empty errorMessage}">
+					    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+					        ${errorMessage}
+					        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					    </div>
+					</c:if>
+					
 
 				<div class="panel panel-info">
 					<div class="panel-heading">

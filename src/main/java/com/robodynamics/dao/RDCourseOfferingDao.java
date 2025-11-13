@@ -13,6 +13,8 @@ import java.util.List;
 	public interface RDCourseOfferingDao {
 		
 		List<RDCourseOffering> getAllRDCourseOfferings(); // includes active + inactive
+		
+		public List<RDCourseOffering> findActiveOfferings();
 
 		
 		public void saveRDCourseOffering(RDCourseOffering rdCourseOffering);

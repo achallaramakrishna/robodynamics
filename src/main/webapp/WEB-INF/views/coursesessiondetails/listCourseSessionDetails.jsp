@@ -19,12 +19,21 @@
     <div class="container mt-5">
         <h1>Manage Course Session Details</h1>
 
-        <c:if test="${not empty message}">
-            <div class="alert alert-success">${message}</div>
-        </c:if>
-        <c:if test="${not empty error}">
-            <div class="alert alert-danger">${error}</div>
-        </c:if>
+				<!-- Display success or error messages -->
+					<c:if test="${not empty successMessage}">
+					    <div class="alert alert-success alert-dismissible fade show" role="alert">
+					        ${successMessage}
+					        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					    </div>
+					</c:if>
+					
+					<c:if test="${not empty errorMessage}">
+					    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+					        ${errorMessage}
+					        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					    </div>
+					</c:if>
+					
 
         <button class="btn btn-secondary mb-3"
                 onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">

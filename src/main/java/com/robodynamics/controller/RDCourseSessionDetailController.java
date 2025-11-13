@@ -357,12 +357,12 @@ public class RDCourseSessionDetailController {
             RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
             if (courseSessionDetail != null) {
                 courseSessionDetailService.deleteRDCourseSessionDetail(courseSessionDetailId);
-                redirectAttributes.addFlashAttribute("message", "Course session detail deleted successfully.");
+                redirectAttributes.addFlashAttribute("successMessage", "Course session detail deleted successfully.");
             } else {
-                redirectAttributes.addFlashAttribute("error", "Course session detail not found.");
+                redirectAttributes.addFlashAttribute("errorMessage", "Course session detail not found.");
             }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error deleting the course session detail.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error deleting the course session detail.");
         }
         return "redirect:/sessiondetail/list";
     }

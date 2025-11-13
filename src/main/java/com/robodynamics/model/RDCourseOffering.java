@@ -50,6 +50,10 @@ public class RDCourseOffering {
     
     @Column(name = "fee_amount")
     private Double feeAmount;
+    
+    @Column(name = "reminder_needed", nullable = false)
+    @JsonProperty("reminderNeeded")
+    private Boolean reminderNeeded = true;
 
 
     @Column(name = "is_active", nullable = false)
@@ -91,7 +95,14 @@ public class RDCourseOffering {
     public void setMentor(RDMentor mentor) { this.mentor = mentor; }
 
     
-    public Set<RDStudentEnrollment> getStudentEnrollments() {
+    
+    public Boolean getReminderNeeded() {
+		return reminderNeeded;
+	}
+	public void setReminderNeeded(Boolean reminderNeeded) {
+		this.reminderNeeded = reminderNeeded;
+	}
+	public Set<RDStudentEnrollment> getStudentEnrollments() {
 		return studentEnrollments;
 	}
 

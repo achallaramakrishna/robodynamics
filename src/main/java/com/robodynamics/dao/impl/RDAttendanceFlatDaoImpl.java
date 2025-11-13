@@ -159,7 +159,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "   t.created_at AS tracking_marked_at, " +
             "   CONCAT_WS(' ', cb.first_name, cb.last_name) AS tracking_marked_by " +
             " FROM offering_day od " +
-            " JOIN rd_student_enrollments e ON e.course_offering_id = od.course_offering_id " +
+            " JOIN rd_student_enrollments e ON e.course_offering_id = od.course_offering_id AND e.status = 1" +
             " JOIN rd_users u ON u.user_id = e.student_id " +
             " LEFT JOIN rd_users m  ON m.user_id = COALESCE(od.instructor_id, od.mentor_id) " +
             " LEFT JOIN att_today a ON a.enrollment_id = e.enrollment_id AND a.rn = 1 " +
@@ -213,7 +213,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "  SELECT e.enrollment_id, e.course_offering_id, u.user_id AS student_id, " +
             "         CONCAT_WS(' ', u.first_name, u.last_name) AS student_name " +
             "    FROM rd_student_enrollments e JOIN rd_users u ON u.user_id = e.student_id " +
-            "   WHERE (:studentId IS NULL OR u.user_id = :studentId) " +
+            "   WHERE e.status = 1 and (:studentId IS NULL OR u.user_id = :studentId) " +
             "     AND (:studentLike IS NULL OR CONCAT_WS(' ', u.first_name, u.last_name) LIKE :studentLike) " +
             "), sched_days AS ( " +
             "  SELECT od.course_offering_id, c.d AS session_date " +
@@ -299,7 +299,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "  SELECT e.enrollment_id, e.course_offering_id, u.user_id AS student_id, " +
             "         CONCAT_WS(' ', u.first_name, u.last_name) AS student_name " +
             "    FROM rd_student_enrollments e JOIN rd_users u ON u.user_id = e.student_id " +
-            "   WHERE (:studentId IS NULL OR u.user_id = :studentId) " +
+            "   WHERE e.status = 1 and (:studentId IS NULL OR u.user_id = :studentId) " +
             "     AND (:studentLike IS NULL OR CONCAT_WS(' ', u.first_name, u.last_name) LIKE :studentLike) " +
             "), sched_days AS ( " +
             "  SELECT od.course_offering_id, c.d AS session_date " +

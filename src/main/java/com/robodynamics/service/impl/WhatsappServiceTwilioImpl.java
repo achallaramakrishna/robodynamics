@@ -50,6 +50,14 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
     private String tplReschedule;
     @Value("${twilio.templates.parent.followup:}")
     private String tplParentFollowup;
+    
+    @Value("${twilio.templates.mentor.reminder:}")
+    private String tplClassMentorReminder;
+    
+    @Value("${twilio.templates.student.reminder:}")
+    private String tplClassStudentReminder;
+    
+    
 
     /* ========= optional fallbacks ========= */
     @Value("${wa.fallback.parent.thankyou:}")
@@ -174,6 +182,7 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
 
         try {
             String waTo = toWaAddress(toE164);
+            System.out.println("To - " + waTo);
             JSONObject vars = new JSONObject(contentVariables != null ? contentVariables : Map.of());
             System.out.println("Whatsapp 3...");
 
@@ -302,5 +311,75 @@ public class WhatsappServiceTwilioImpl implements WhatsAppService {
 		 */
         return null;
     }
+
+    @Override
+    public WhatsAppSendResult sendClassReminderMentor(long courseOfferingId,
+                                                      String courseName,
+                                                      LocalDateTime sessionStart,
+                                                      String toE164) {
+        System.out.println("WhatsApp Mentor Reminder...");
+        Map<String, Object> v = new HashMap<>();
+        v.put("1", safe(courseName));
+        v.put("2", sessionStart != null ? human.format(sessionStart) : "TBA");
+        v.put("3", String.valueOf(courseOfferingId));
+
+        // Attempt to send via template (you can create a dedicated template for mentor reminders)
+        WhatsAppSendResult res = sendTemplate(toE164, tplClassMentorReminder, v);
+        if (!res.isOk() && (isBlank(tplClassMentorReminder) || is4xx(res))) {
+            // fallback message
+            String body = "Reminder: Your class for *" + safe(courseName) + "* is scheduled on "
+                    + (sessionStart != null ? human.format(sessionStart) : "TBA")
+                    + ". Offering ID: " + courseOfferingId + ".";
+            return sendText(toE164, body);
+        }
+        return res;
+    }
+
+    @Override
+    public WhatsAppSendResult sendClassReminderStudent(long enrollmentId,
+                                                       String studentName,
+                                                       String courseName,
+                                                       LocalDateTime sessionStart,
+                                                       String toE164) {
+        System.out.println("WhatsApp Student Reminder...");
+        Map<String, Object> v = new HashMap<>();
+        v.put("1", safe(studentName));
+        v.put("2", safe(courseName));
+        v.put("3", sessionStart != null ? human.format(sessionStart) : "TBA");
+        v.put("4", String.valueOf(enrollmentId));
+
+        // Attempt to send via template (you can map tplDemoReminder or new student reminder SID)
+        WhatsAppSendResult res = sendTemplate(toE164, tplClassStudentReminder, v);
+        if (!res.isOk() && (isBlank(tplClassStudentReminder) || is4xx(res))) {
+            String body = "Hi " + safe(studentName) + ", your class *" + safe(courseName)
+                    + "* is scheduled on " + (sessionStart != null ? human.format(sessionStart) : "TBA")
+                    + ". Enrollment ID: " + enrollmentId + ".";
+            return sendText(toE164, body);
+        }
+        return res;
+    }
+
+    @Override
+    public void sendWhatsAppMessage(String cellPhone, String msg) {
+        System.out.println("WhatsApp generic message send...");
+        if (isBlank(cellPhone) || isBlank(msg)) {
+            log.warn("Skipped sendWhatsAppMessage: missing number or message");
+            return;
+        }
+
+        // Auto-format number (optional country fallback, e.g. India)
+        if (!cellPhone.startsWith("+")) {
+            cellPhone = "+91" + cellPhone.replaceAll("\\D", "");
+        }
+
+        WhatsAppSendResult res = sendText(cellPhone, msg);
+        if (!res.isOk()) {
+            log.warn("Failed to send WhatsApp message to {} → {}", cellPhone, res.getErrorMessage());
+        } else {
+            log.info("✅ WhatsApp message sent to {} (SID: {})", cellPhone, res.getProviderMessageSid());
+        }
+    }
+
+
 
 }

@@ -81,6 +81,22 @@ public interface WhatsAppService {
     /** Fallback plain text (not recommended for business-initiated messages). */
     WhatsAppSendResult sendText(String toE164, String body);
 
+    WhatsAppSendResult sendClassReminderMentor(long courseOfferingId,
+            String courseName,
+            LocalDateTime sessionStart,
+            String toE164);
+
+	/** 
+	* Reminder to student before class start.
+	* Usually same message, but more friendly tone.
+	*/
+	WhatsAppSendResult sendClassReminderStudent(long enrollmentId,
+	             String studentName,
+	             String courseName,
+	             LocalDateTime sessionStart,
+	             String toE164);
+
+
     /** Simple format check for E.164. Implementation may also add country fallback. */
     boolean isValidE164(String number);
 
@@ -116,5 +132,8 @@ public interface WhatsAppService {
         public static WhatsAppSendResult failure(Integer httpStatus, Integer errorCode, String msg) {
             return new WhatsAppSendResult(false, null, httpStatus, errorCode, msg);
         }
+        
     }
+
+	void sendWhatsAppMessage(String cellPhone, String msg);
 }

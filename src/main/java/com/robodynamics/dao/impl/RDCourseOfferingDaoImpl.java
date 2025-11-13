@@ -508,4 +508,16 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
         return query.getResultList();
     }
 
+	@Override
+	public List<RDCourseOffering> findActiveOfferings() {
+		
+		Session session = factory.getCurrentSession();
+		
+		String hsql = "SELECT co FROM RDCourseOffering co LEFT JOIN FETCH co.studentEnrollments WHERE co.isActive = true";
+
+	//	String hsql = "SELECT c FROM RDCourseOffering c WHERE c.isActive = true";
+        Query query = session.createQuery(hsql);
+        return query.getResultList();
+	}
+
 }

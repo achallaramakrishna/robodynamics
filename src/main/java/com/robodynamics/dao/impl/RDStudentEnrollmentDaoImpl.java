@@ -67,10 +67,13 @@ public class RDStudentEnrollmentDaoImpl implements RDStudentEnrollmentDao {
 		Root<RDStudentEnrollment> root = cq.from(RDStudentEnrollment.class);
 
 		// Add condition where status = 1
-		Predicate statusCondition = cb.equal(root.get("status"), 1);
+		//Predicate statusCondition = cb.equal(root.get("status"), 1);
 
 		// Apply the condition to the query
-		cq.select(root).where(statusCondition);
+		//cq.select(root).where(statusCondition);
+
+		// Sort by status DESC (1 first, 0 later)
+	    cq.select(root).orderBy(cb.desc(root.get("status")));
 
 		// Execute query
 		Query<RDStudentEnrollment> query = session.createQuery(cq);

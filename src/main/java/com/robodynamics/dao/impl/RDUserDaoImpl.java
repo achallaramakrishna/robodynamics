@@ -275,6 +275,16 @@ public class RDUserDaoImpl implements RDUserDao {
                 RDUser.class).list();
     }
 
+	@Override
+	public void updateNotificationPreference(int userId, boolean allowNotifications) {
+		Session session = factory.getCurrentSession();
+		RDUser user = session.find(RDUser.class, userId);
+	    if (user != null) {
+	        user.setWantsNotifications(allowNotifications);
+	        session.merge(user);
+	    }
+	}
+
 
 	
 

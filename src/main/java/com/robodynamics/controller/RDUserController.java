@@ -66,6 +66,20 @@ public class RDUserController {
         model.addAttribute("rdUserList", rdUserList);
         return new ModelAndView("manageusers");
     }
+    
+    @PostMapping("/updateNotification")
+    public String updateNotification(
+            @RequestParam("userId") int userId,
+            @RequestParam(value = "wantsNotifications", required = false) String wants) {
+
+        boolean allowNotifications = (wants != null);
+
+        userService.updateNotificationPreference(userId, allowNotifications);
+
+        return "redirect:/listusers";   // same page reload
+    }
+
+    
 
     @PostMapping("/register")
     public String register(@ModelAttribute("rdUser") RDUser rdUser, Model model) {

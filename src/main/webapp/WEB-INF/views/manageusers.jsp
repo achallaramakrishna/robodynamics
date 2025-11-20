@@ -79,6 +79,7 @@
 							<tr>
 								<th>User Name</th>
 								<th></th>
+								<th>Notifications</th>
 								<th>Action</th>
 							</tr>
 							<!-- loop over and print our asset categories -->
@@ -98,6 +99,15 @@
 								<tr>
 									<td>${tempUser.userName}</td>
 									<td>${tempUser.email}</td>
+									<td>
+									    <form action="${pageContext.request.contextPath}/updateNotification" method="post">
+									        <input type="hidden" name="userId" value="${tempUser.userID}" />
+									
+									        <input type="checkbox" name="wantsNotifications"
+									               onchange="this.form.submit()"
+									               ${tempUser.wantsNotifications ? 'checked' : ''}>
+									    </form>
+									</td>
 
 									<td>
 										<!-- display the update link --> <a href="${updateLink}">Reset

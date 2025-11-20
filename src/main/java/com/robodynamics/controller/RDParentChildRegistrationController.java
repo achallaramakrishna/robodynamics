@@ -71,7 +71,8 @@ public class RDParentChildRegistrationController {
 
             // ✅ Link parent-child relationship
             // You can store mom or dad depending on gender (for now, we’ll set mom)
-            childUser.setMom(parentUser);
+          //  childUser.setMom(parentUser);
+            
 
             // ✅ Save parent & child together via service
             rdUserService.saveParentAndChild(parent, child);

@@ -52,6 +52,8 @@ public interface RDUserService {
     List<RDUser> findStudents();
     List<RDUser> findParents();
 
+	public void updateNotificationPreference(int userId, boolean allowNotifications);
+
 
 
 

@@ -1,6 +1,7 @@
 package com.robodynamics.dto;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.sql.Timestamp;
 
 public class RDAttendanceFlatRowDTO {
@@ -26,6 +27,29 @@ public class RDAttendanceFlatRowDTO {
     private Integer   trackingSessionIdOnDate; // nullable
     private String    trackingMarkedBy;  // mentor name who saved tracking
     private Timestamp trackingMarkedAt;
+    
+    private String trackingSessionTitle;
+    
+    public String getSessionStartTimeFormatted() {
+        if (sessionStartTime == null) return "";
+        return sessionStartTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+    public String getSessionEndTimeFormatted() {
+        if (sessionEndTime == null) return "";
+        return sessionEndTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+
+
+    
+	
+	public String getTrackingSessionTitle() {
+		return trackingSessionTitle;
+	}
+	public void setTrackingSessionTitle(String trackingSessionTitle) {
+		this.trackingSessionTitle = trackingSessionTitle;
+	}
 	public Integer getOfferingId() {
 		return offeringId;
 	}

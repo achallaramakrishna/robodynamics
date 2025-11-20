@@ -30,10 +30,17 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
     }
 
     // -------- helpers --------
-    private Session s() { return sessionFactory.getCurrentSession(); }
+    private Session s() {
+        return sessionFactory.getCurrentSession();
+    }
 
-    private static String likeWrap(String s) { return (s == null || s.isBlank()) ? null : "%" + s.trim() + "%"; }
-    private static String normalize(String s) { return (s == null) ? null : s.trim().toLowerCase(Locale.ROOT); }
+    private static String likeWrap(String s) {
+        return (s == null || s.isBlank()) ? null : "%" + s.trim() + "%";
+    }
+
+    private static String normalize(String s) {
+        return (s == null) ? null : s.trim().toLowerCase(Locale.ROOT);
+    }
 
     /** Robust conversion to LocalTime from TIME, TIMESTAMP or String (HH:mm[:ss]) */
     private static LocalTime toLocalTime(Object v) {
@@ -47,14 +54,15 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
     /** Robust conversion to LocalDate from SQL/Util Date or String (yyyy-MM-dd) */
     private static LocalDate toLocalDate(Object v) {
         if (v == null) return null;
-        if (v instanceof Date)          return ((Date) v).toLocalDate();
+        if (v instanceof Date)           return ((Date) v).toLocalDate();
         if (v instanceof java.util.Date) return ((java.util.Date) v).toInstant()
                 .atZone(ZoneId.systemDefault()).toLocalDate();
-        if (v instanceof CharSequence)  return LocalDate.parse(v.toString());
+        if (v instanceof CharSequence)   return LocalDate.parse(v.toString());
         return null;
     }
 
-    /** For DTOs expecting java.sql.Date */
+    /** For DTOs expecting java.sql.Date – use if you keep Date in DTO */
+    @SuppressWarnings("unused")
     private static Date toSqlDate(Object v) {
         if (v == null) return null;
         if (v instanceof Date) return (Date) v;
@@ -69,26 +77,35 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
         for (Object[] r : rows) {
             int i = 0;
             RDAttendanceFlatRowDTO dto = new RDAttendanceFlatRowDTO();
-            dto.setOfferingId               ((Number) r[i++] == null ? null : ((Number) r[i-1]).intValue());
-            dto.setOfferingName             ((String)  r[i++]);
-            dto.setMentorName               ((String)  r[i++]);
-            dto.setStudentId                ((Number) r[i++] == null ? null : ((Number) r[i-1]).intValue());
-            dto.setStudentName              ((String)  r[i++]);
 
-            // Was: ((Date) r[i++]).toLocalDate()  → blew up when driver returned String
-            // Use SQL DATE cast + tolerant mapper to keep it stable:
-            dto.setSessionDate(toLocalDate(r[i++]));
-            	// keep DTO signature setSessionDate(Date)
+            // Make sure this order matches SELECT order in all three queries
+            dto.setOfferingId      (r[i] == null ? null : ((Number) r[i]).intValue()); i++;
+            dto.setOfferingName    ((String)  r[i++]);
+            dto.setMentorName      ((String)  r[i++]);
+            dto.setStudentId       (r[i] == null ? null : ((Number) r[i]).intValue()); i++;
+            dto.setStudentName     ((String)  r[i++]);
 
-            dto.setWeekday                  ((String)  r[i++]);
-            dto.setSessionStartTime         (toLocalTime(r[i++]));   // TIME or DATETIME or String
-            dto.setSessionEndTime           (toLocalTime(r[i++]));
-            dto.setAttendanceOnDate         ((String)  r[i++]);
-            dto.setAttendanceMarkedAt       ((Timestamp) r[i++]);
-            dto.setFeedbackOnDate           ((String)  r[i++]);
-            dto.setTrackingSessionIdOnDate  (r[i] == null ? null : ((Number) r[i]).intValue()); i++;
-            dto.setTrackingMarkedAt         ((Timestamp) r[i++]);
-            dto.setTrackingMarkedBy         ((String)  r[i++]);
+            // If DTO uses LocalDate:
+            dto.setSessionDate     (toLocalDate(r[i++]));   // session_date
+
+            dto.setWeekday         ((String)  r[i++]);
+            dto.setSessionStartTime(toLocalTime(r[i++]));   // session_start_time
+            dto.setSessionEndTime  (toLocalTime(r[i++]));   // session_end_time
+            dto.setAttendanceOnDate((String)  r[i++]);
+            dto.setAttendanceMarkedAt((Timestamp) r[i++]);
+            dto.setFeedbackOnDate  ((String)  r[i++]);
+
+            // New: tracking session id + title
+            dto.setTrackingSessionIdOnDate(
+                    r[i] == null ? null : ((Number) r[i]).intValue()
+            );
+            i++;
+
+            dto.setTrackingSessionTitle((String) r[i++]);   // NEW COLUMN
+
+            dto.setTrackingMarkedAt   ((Timestamp) r[i++]);
+            dto.setTrackingMarkedBy   ((String)  r[i++]);
+
             out.add(dto);
         }
         return out;
@@ -112,9 +129,9 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
     // -------- DAY --------
     @Override
     public List<RDAttendanceFlatRowDTO> findDay(LocalDate day,
-                                              Integer offeringId, Integer studentId,
-                                              String studentLike, String mentorLike, String offeringLike,
-                                              String status, String hasFeedback) {
+                                                Integer offeringId, Integer studentId,
+                                                String studentLike, String mentorLike, String offeringLike,
+                                                String status, String hasFeedback) {
 
         String sql =
             "WITH " +
@@ -148,7 +165,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "   COALESCE(CONCAT_WS(' ', m.first_name, m.last_name), '—') AS mentor_name, " +
             "   u.user_id                        AS student_id, " +
             "   CONCAT_WS(' ', u.first_name, u.last_name) AS student_name, " +
-            "   CAST(:day AS DATE)               AS session_date, " + // <— force DATE
+            "   CAST(:day AS DATE)               AS session_date, " +
             "   DATE_FORMAT(:day, '%a')          AS weekday, " +
             "   od.session_start_time, od.session_end_time, " +
             "   CASE WHEN a.attendance_status = 1 THEN 'Present' " +
@@ -156,14 +173,16 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "   a.created_at AS attendance_marked_at, " +
             "   t.feedback   AS feedback_on_date, " +
             "   t.course_session_id AS tracking_session_id_on_date, " +
+            "   cs.session_title    AS tracking_session_title, " +      // NEW
             "   t.created_at AS tracking_marked_at, " +
             "   CONCAT_WS(' ', cb.first_name, cb.last_name) AS tracking_marked_by " +
             " FROM offering_day od " +
-            " JOIN rd_student_enrollments e ON e.course_offering_id = od.course_offering_id AND e.status = 1" +
+            " JOIN rd_student_enrollments e ON e.course_offering_id = od.course_offering_id AND e.status = 1 " +
             " JOIN rd_users u ON u.user_id = e.student_id " +
             " LEFT JOIN rd_users m  ON m.user_id = COALESCE(od.instructor_id, od.mentor_id) " +
             " LEFT JOIN att_today a ON a.enrollment_id = e.enrollment_id AND a.rn = 1 " +
             " LEFT JOIN trk_today t ON t.enrollment_id = e.enrollment_id AND t.rn = 1 " +
+            " LEFT JOIN rd_course_sessions cs ON cs.course_session_id = t.course_session_id " + // NEW JOIN
             " LEFT JOIN rd_users cb ON cb.user_id = t.created_by " +
             " WHERE (:studentId   IS NULL OR u.user_id = :studentId) " +
             "   AND (:studentLike IS NULL OR CONCAT_WS(' ', u.first_name, u.last_name) LIKE :studentLike) " +
@@ -190,16 +209,16 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
     // -------- WEEK --------
     @Override
     public List<RDAttendanceFlatRowDTO> findWeek(LocalDate base,
-                                               Integer offeringId, Integer studentId,
-                                               String studentLike, String mentorLike, String offeringLike,
-                                               String status, String hasFeedback) {
+                                                 Integer offeringId, Integer studentId,
+                                                 String studentLike, String mentorLike, String offeringLike,
+                                                 String status, String hasFeedback) {
         LocalDate from = base.minusDays(base.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue());
         LocalDate to   = from.plusDays(6);
 
         String sql =
             "WITH RECURSIVE cal AS ( " +
-            "  SELECT CAST(:from AS DATE) AS d " + // <— force DATE
-            "  UNION ALL SELECT DATE_ADD(d, INTERVAL 1 DAY) FROM cal WHERE d < CAST(:to AS DATE) " + // <— force DATE
+            "  SELECT CAST(:from AS DATE) AS d " +
+            "  UNION ALL SELECT DATE_ADD(d, INTERVAL 1 DAY) FROM cal WHERE d < CAST(:to AS DATE) " +
             "), offering_days AS ( " +
             "  SELECT o.course_offering_id, o.course_offering_name, o.instructor_id, o.mentor_id, " +
             "         o.session_start_time, o.session_end_time, o.start_date, o.end_date, " +
@@ -207,7 +226,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "    FROM rd_course_offerings o " +
             "   WHERE (o.start_date IS NULL OR o.start_date <= :to) " +
             "     AND (o.end_date   IS NULL OR o.end_date   >= :from) " +
-            "      AND o.is_active = 1 " +
+            "     AND o.is_active = 1 " +
             "     AND (:offeringId IS NULL OR o.course_offering_id = :offeringId) " +
             "), enr AS ( " +
             "  SELECT e.enrollment_id, e.course_offering_id, u.user_id AS student_id, " +
@@ -223,8 +242,9 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "     AND od.days_csv REGEXP (CASE DAYOFWEEK(c.d) " +
             "        WHEN 1 THEN 'Sun' WHEN 2 THEN 'Mon' WHEN 3 THEN 'Tue' WHEN 4 THEN 'Wed' " +
             "        WHEN 5 THEN 'Thu' WHEN 6 THEN 'Fri' WHEN 7 THEN 'Sat' END) " +
-            "), mentors AS ( SELECT u.user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name FROM rd_users u ), " +
-            " att_by_day AS ( " +
+            "), mentors AS ( " +
+            "  SELECT u.user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name FROM rd_users u " +
+            "), att_by_day AS ( " +
             "  SELECT a.enrollment_id, a.attendance_date, a.attendance_status, a.created_at, " +
             "         ROW_NUMBER() OVER (PARTITION BY a.enrollment_id, a.attendance_date " +
             "         ORDER BY a.created_at DESC, a.attendance_id DESC) rn " +
@@ -244,14 +264,19 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "  CASE WHEN a.attendance_status = 1 THEN 'Present' " +
             "       WHEN a.attendance_status IS NULL THEN '—' ELSE 'Absent' END AS attendance_on_date, " +
             "  a.created_at AS attendance_marked_at, " +
-            "  t.feedback AS feedback_on_date, t.course_session_id AS tracking_session_id_on_date, " +
+            "  t.feedback AS feedback_on_date, " +
+            "  t.course_session_id AS tracking_session_id_on_date, " +
+            "  cs.session_title    AS tracking_session_title, " +    // NEW
             "  t.created_at AS tracking_marked_at, cb.name AS tracking_marked_by " +
             " FROM sched_days sd " +
             " JOIN offering_days od ON od.course_offering_id = sd.course_offering_id " +
             " JOIN enr en           ON en.course_offering_id = od.course_offering_id " +
             " LEFT JOIN mentors mn  ON mn.user_id = COALESCE(od.instructor_id, od.mentor_id) " +
-            " LEFT JOIN att_by_day a ON a.enrollment_id = en.enrollment_id AND a.attendance_date = sd.session_date AND a.rn = 1 " +
-            " LEFT JOIN trk_by_day t ON t.enrollment_id = en.enrollment_id AND t.tracking_date  = sd.session_date AND t.rn = 1 " +
+            " LEFT JOIN att_by_day a ON a.enrollment_id = en.enrollment_id " +
+            "                        AND a.attendance_date = sd.session_date AND a.rn = 1 " +
+            " LEFT JOIN trk_by_day t ON t.enrollment_id = en.enrollment_id " +
+            "                        AND t.tracking_date  = sd.session_date AND t.rn = 1 " +
+            " LEFT JOIN rd_course_sessions cs ON cs.course_session_id = t.course_session_id " + // NEW
             " LEFT JOIN mentors cb    ON cb.user_id = t.created_by " +
             " WHERE (:mentorLike  IS NULL OR mn.name LIKE :mentorLike) " +
             "   AND (:offeringLike IS NULL OR od.course_offering_name LIKE :offeringLike) " +
@@ -276,16 +301,16 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
     // -------- MONTH --------
     @Override
     public List<RDAttendanceFlatRowDTO> findMonth(LocalDate base,
-                                                Integer offeringId, Integer studentId,
-                                                String studentLike, String mentorLike, String offeringLike,
-                                                String status, String hasFeedback) {
+                                                  Integer offeringId, Integer studentId,
+                                                  String studentLike, String mentorLike, String offeringLike,
+                                                  String status, String hasFeedback) {
         LocalDate from = base.withDayOfMonth(1);
         LocalDate to   = base.withDayOfMonth(base.lengthOfMonth());
 
         String sql =
             "WITH RECURSIVE cal AS ( " +
-            "  SELECT CAST(:from AS DATE) AS d " + // <— force DATE
-            "  UNION ALL SELECT DATE_ADD(d, INTERVAL 1 DAY) FROM cal WHERE d < CAST(:to AS DATE) " + // <— force DATE
+            "  SELECT CAST(:from AS DATE) AS d " +
+            "  UNION ALL SELECT DATE_ADD(d, INTERVAL 1 DAY) FROM cal WHERE d < CAST(:to AS DATE) " +
             "), offering_days AS ( " +
             "  SELECT o.course_offering_id, o.course_offering_name, o.instructor_id, o.mentor_id, " +
             "         o.session_start_time, o.session_end_time, o.start_date, o.end_date, " +
@@ -293,7 +318,7 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "    FROM rd_course_offerings o " +
             "   WHERE (o.start_date IS NULL OR o.start_date <= :to) " +
             "     AND (o.end_date   IS NULL OR o.end_date   >= :from) " +
-            "      AND o.is_active = 1 " +
+            "     AND o.is_active = 1 " +
             "     AND (:offeringId IS NULL OR o.course_offering_id = :offeringId) " +
             "), enr AS ( " +
             "  SELECT e.enrollment_id, e.course_offering_id, u.user_id AS student_id, " +
@@ -309,8 +334,9 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "     AND od.days_csv REGEXP (CASE DAYOFWEEK(c.d) " +
             "        WHEN 1 THEN 'Sun' WHEN 2 THEN 'Mon' WHEN 3 THEN 'Tue' WHEN 4 THEN 'Wed' " +
             "        WHEN 5 THEN 'Thu' WHEN 6 THEN 'Fri' WHEN 7 THEN 'Sat' END) " +
-            "), mentors AS ( SELECT u.user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name FROM rd_users u ), " +
-            " att_by_day AS ( " +
+            "), mentors AS ( " +
+            "  SELECT u.user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name FROM rd_users u " +
+            "), att_by_day AS ( " +
             "  SELECT a.enrollment_id, a.attendance_date, a.attendance_status, a.created_at, " +
             "         ROW_NUMBER() OVER (PARTITION BY a.enrollment_id, a.attendance_date " +
             "         ORDER BY a.created_at DESC, a.attendance_id DESC) rn " +
@@ -330,14 +356,19 @@ public class RDAttendanceFlatDaoImpl implements RDAttendanceFlatDao {
             "  CASE WHEN a.attendance_status = 1 THEN 'Present' " +
             "       WHEN a.attendance_status IS NULL THEN '—' ELSE 'Absent' END AS attendance_on_date, " +
             "  a.created_at AS attendance_marked_at, " +
-            "  t.feedback AS feedback_on_date, t.course_session_id AS tracking_session_id_on_date, " +
+            "  t.feedback AS feedback_on_date, " +
+            "  t.course_session_id AS tracking_session_id_on_date, " +
+            "  cs.session_title    AS tracking_session_title, " +    // NEW
             "  t.created_at AS tracking_marked_at, cb.name AS tracking_marked_by " +
             " FROM sched_days sd " +
             " JOIN offering_days od ON od.course_offering_id = sd.course_offering_id " +
             " JOIN enr en           ON en.course_offering_id = od.course_offering_id " +
             " LEFT JOIN mentors mn  ON mn.user_id = COALESCE(od.instructor_id, od.mentor_id) " +
-            " LEFT JOIN att_by_day a ON a.enrollment_id = en.enrollment_id AND a.attendance_date = sd.session_date AND a.rn = 1 " +
-            " LEFT JOIN trk_by_day t ON t.enrollment_id = en.enrollment_id AND t.tracking_date  = sd.session_date AND t.rn = 1 " +
+            " LEFT JOIN att_by_day a ON a.enrollment_id = en.enrollment_id " +
+            "                        AND a.attendance_date = sd.session_date AND a.rn = 1 " +
+            " LEFT JOIN trk_by_day t ON t.enrollment_id = en.enrollment_id " +
+            "                        AND t.tracking_date  = sd.session_date AND t.rn = 1 " +
+            " LEFT JOIN rd_course_sessions cs ON cs.course_session_id = t.course_session_id " + // NEW
             " LEFT JOIN mentors cb    ON cb.user_id = t.created_by " +
             " WHERE (:mentorLike  IS NULL OR mn.name LIKE :mentorLike) " +
             "   AND (:offeringLike IS NULL OR od.course_offering_name LIKE :offeringLike) " +

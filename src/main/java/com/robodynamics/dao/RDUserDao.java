@@ -49,5 +49,7 @@ public interface RDUserDao {
     
     List<RDUser> findParents();
 
+	public void updateNotificationPreference(int userId, boolean allowNotifications);
+
 
 }

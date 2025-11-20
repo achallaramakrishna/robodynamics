@@ -115,6 +115,15 @@
 			
 			<!-- Existing code preserved up to Course End Date -->
 
+			<!-- Reminder Needed -->
+			<div class="form-group mt-3">
+			    <label for="reminderNeeded" class="col-md-3 control-label">Reminder Needed</label>
+			    <div class="col-md-9 d-flex align-items-center">
+			        <form:checkbox path="reminderNeeded" cssClass="form-check-input me-2" />
+			        <label class="form-check-label">Send class reminders?</label>
+			    </div>
+			</div>
+
 			<!-- Sessions Per Week -->
 			<div class="form-group">
 				<label for="sessionsPerWeek" class="col-md-3 control-label">Sessions Per Week</label>

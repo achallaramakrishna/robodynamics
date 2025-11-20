@@ -19,6 +19,18 @@ public class RDCourseOfferingForm {
 	private String sessionEndTime;    // e.g., "11:00"
 	
 	private Double feeAmount;
+	
+	private Boolean reminderNeeded = true;
+
+	
+
+	public Boolean getReminderNeeded() {
+		return reminderNeeded;
+	}
+
+	public void setReminderNeeded(Boolean reminderNeeded) {
+		this.reminderNeeded = reminderNeeded;
+	}
 
 	public RDCourseOfferingForm() {
 	}

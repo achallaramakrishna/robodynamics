@@ -16,30 +16,88 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   </c:if>
-
-  <style>
-    body { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background-color: #f8f9fa; }
+<style>
+    body { 
+        font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
+        background-color: #f8f9fa; 
+    }
     h3 { font-weight: 600; }
     .filter-card .form-label { font-weight: 600; font-size: 0.9rem; }
     .badge-status { font-size: 0.85em; padding: 5px 8px; border-radius: 5px; font-weight: 500; }
     .badge-success { background-color: #28a745; color: #fff; }
     .badge-danger  { background-color: #dc3545; color: #fff; }
     .badge-info    { background-color: #17a2b8; color: #fff; }
-    .table th, .table td { vertical-align: middle; white-space: nowrap; }
+
+    .table th, .table td { 
+        vertical-align: middle; 
+        white-space: nowrap; 
+    }
     .table-responsive { overflow-x: auto; }
     thead th.sticky { position: sticky; top: 0; background: #fff; z-index: 2; }
     .sortable { cursor: pointer; }
     .sortable .sort-indicator { font-size: .8rem; opacity: .6; margin-left: .25rem; }
 
+    <!-- PDF MODE FIXES -->
     <c:if test="${not empty param.asPdf}">
-    @page { size: A4 landscape; margin: 16mm; }
-    body { background: #fff; }
-    .table th, .table td { white-space: normal !important; }
-    thead th.sticky { position: static !important; }
-    .sortable .sort-indicator, .js-only, .filter-card, .export-actions .btn { display: none !important; }
+    
+    /* PAGE SETTINGS */
+    @page { size: A4 landscape; margin: 10mm; }
+    body { background: #fff; font-size: 11px !important; }
+
+    /* REMOVE BOOTSTRAP INFLUENCE */
+    .container-fluid, .container { width: 100% !important; padding: 0 !important; }
+    .table-responsive { overflow: visible !important; }
+
+    /* FIX TABLE LAYOUT */
+    table {
+        table-layout: fixed !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    th, td {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        vertical-align: top !important;
+        padding: 4px !important;
+    }
+
+    /* OPTIMAL COLUMN WIDTHS */
+    th:nth-child(1), td:nth-child(1) { width: 18%; }
+    th:nth-child(2), td:nth-child(2) { width: 12%; }
+    th:nth-child(3), td:nth-child(3) { width: 10%; }
+    th:nth-child(4), td:nth-child(4) { width: 12%; }
+    th:nth-child(5), td:nth-child(5) { width: 10%; }
+    th:nth-child(6), td:nth-child(6) { width: 8%; }
+    th:nth-child(7), td:nth-child(7) { width: 30%; }
+
+    /* PAGE BREAK EVERY ~20 ROWS */
+    tbody tr:nth-child(20n) {
+        page-break-after: always;
+    }
+
+    /* REMOVE INTERACTIVE ELEMENTS */
+    .sortable, 
+    .sort-indicator, 
+    .js-only, 
+    .filter-card, 
+    .export-actions,
+    button, 
+    .btn { 
+        display: none !important; 
+    }
+
+    /* REMOVE STICKY HEADERS */
+    thead th.sticky { 
+        position: static !important; 
+    }
+
     </c:if>
-  </style>
-</head>
+</style>
+
+  
+  </head>
 <body>
 
 <c:if test="${empty param.asPdf}">
@@ -255,22 +313,52 @@
                     </c:choose>">
                     <c:out value="${r.attendanceOnDate}"/>
                   </span>
-                  <c:if test="${not empty r.attendanceMarkedAt}">
+      <%--             <c:if test="${not empty r.attendanceMarkedAt}">
                     <small class="text-muted d-block">
                       at <fmt:formatDate value="${r.attendanceMarkedAt}" pattern="dd MMM HH:mm"/>
                     </small>
-                  </c:if>
+                  </c:if> --%>
                 </td>
-                <td>
-                  <span class="badge badge-info">
-                    <c:choose>
-                      <c:when test="${not empty r.trackingSessionIdOnDate}">
-                        Session #<c:out value="${r.trackingSessionIdOnDate}"/>
-                      </c:when>
-                      <c:otherwise>No session selected</c:otherwise>
-                    </c:choose>
-                  </span>
-                </td>
+				<td>
+				    <div style="font-weight:600;">
+				        <c:choose>
+				            <c:when test="${not empty r.trackingSessionIdOnDate}">
+				                Session #<c:out value="${r.trackingSessionIdOnDate}"/>
+				            </c:when>
+				            <c:otherwise>No session selected</c:otherwise>
+				        </c:choose>
+				    </div>
+				
+				    <!-- Session name -->
+				    <c:if test="${not empty r.trackingSessionTitle}">
+				        <div style="font-size:11px; color:#444;">
+				            <c:out value="${r.trackingSessionTitle}"/>
+				        </div>
+				    </c:if>
+				
+				    <!-- Session time -->
+					<c:if test="${not empty r.sessionStartTime && not empty r.sessionEndTime}">
+					    <div style="font-size:11px; color:#666;">
+					        Time: ${r.sessionStartTimeFormatted} – ${r.sessionEndTimeFormatted}
+					    </div>
+					</c:if>
+
+				
+				    <!-- Updated by + timestamp -->
+				    <c:if test="${not empty r.trackingMarkedBy || not empty r.trackingMarkedAt}">
+				        <div style="font-size:10px; color:#777; margin-top:2px;">
+				            <c:if test="${not empty r.trackingMarkedBy}">
+				                Updated by <c:out value="${r.trackingMarkedBy}"/>
+				            </c:if>
+				
+				            <c:if test="${not empty r.trackingMarkedAt}">
+				                <c:if test="${not empty r.trackingMarkedBy}">&nbsp;•&nbsp;</c:if>
+				                <fmt:formatDate value="${r.trackingMarkedAt}" pattern="dd MMM HH:mm"/>
+				            </c:if>
+				        </div>
+				    </c:if>
+				</td>
+
                 <td>
                   <div><c:out value="${empty r.feedbackOnDate ? 'No feedback' : r.feedbackOnDate}"/></div>
                   <c:if test="${not empty r.trackingMarkedBy || not empty r.trackingMarkedAt}">

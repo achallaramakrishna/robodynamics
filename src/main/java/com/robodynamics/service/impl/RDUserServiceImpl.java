@@ -87,6 +87,8 @@ public class RDUserServiceImpl implements RDUserService {
 		parentUser.setProfile_id(profileType.ROBO_PARENT.getValue());
 		childUser.setProfile_id(profileType.ROBO_STUDENT.getValue());
 		rdUserDao.registerRDUser(parentUser);
+		 // Link parent → child using saved parent entity
+		childUser.setMom(parentUser);
 		rdUserDao.registerRDUser(childUser);
 		
 		
@@ -160,6 +162,13 @@ public class RDUserServiceImpl implements RDUserService {
 	public List<RDUser> findParents() {
 		
 		return rdUserDao.findParents();
+	}
+
+	@Override
+	@Transactional
+	public void updateNotificationPreference(int userId, boolean allowNotifications) {
+		rdUserDao.updateNotificationPreference(userId,allowNotifications);
+		
 	}
 	
 	

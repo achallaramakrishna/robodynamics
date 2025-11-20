@@ -145,6 +145,8 @@ public class RDCourseOfferingController {
         RDCourseOffering theCourseOffering = new RDCourseOffering();
         theCourseOffering.setCourseOfferingId(courseOfferingForm.getCourseOfferingId());
         theCourseOffering.setFeeAmount(courseOfferingForm.getFeeAmount());
+        theCourseOffering.setReminderNeeded(courseOfferingForm.getReminderNeeded());
+
 
         System.out.println("i am here");
 
@@ -217,6 +219,8 @@ public class RDCourseOfferingController {
         }
 
         // Set these if they exist
+        form.setReminderNeeded(courseOffering.getReminderNeeded());
+
         form.setSessionsPerWeek(courseOffering.getSessionsPerWeek());
         form.setDaysOfWeek(courseOffering.getDaysOfWeek());
         form.setSessionStartTime(courseOffering.getSessionStartTime() != null ? courseOffering.getSessionStartTime().toString() : null);

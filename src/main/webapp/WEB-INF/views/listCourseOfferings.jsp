@@ -74,6 +74,7 @@
                                 <th>Instructor</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Reminder Needed</th>
                                 <th>Sessions/Week</th>
                                 <th>Days</th>
                                 <th>Time</th>
@@ -103,6 +104,7 @@
                                     <td>${tempCourseOffering.instructor.firstName} ${tempCourseOffering.instructor.lastName}</td>
                                     <td>${tempCourseOffering.startDate}</td>
                                     <td>${tempCourseOffering.endDate}</td>
+                                    <td>${tempCourseOffering.reminderNeeded}</td>
                                     <td>${tempCourseOffering.sessionsPerWeek}</td>
                                     <td>${tempCourseOffering.daysOfWeek}</td>
                                     <td>${tempCourseOffering.sessionStartTime} - ${tempCourseOffering.sessionEndTime}</td>

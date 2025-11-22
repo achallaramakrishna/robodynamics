@@ -3,6 +3,7 @@ package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDMentorDao;
 import com.robodynamics.dto.RDMentorDTO;
+import com.robodynamics.dto.RDMentorSearchCriteria;
 import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDLead;
 import com.robodynamics.model.RDMentor;
@@ -16,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -30,147 +33,147 @@ public class RDMentorDaoImpl implements RDMentorDao {
         this.sessionFactory = sessionFactory;
     }
 
+    private Session s() {
+        return sessionFactory.getCurrentSession();
+    }
+
+    // ---------------------------------------------
+    // BASIC QUERIES (UNCHANGED)
+    // ---------------------------------------------
+
     @Override
     public List<RDMentorDTO> findAllMentorsBasic() {
         Session s = sessionFactory.getCurrentSession();
-        final int MENTOR_PROFILE_ID = com.robodynamics.model.RDUser.profileType.ROBO_MENTOR.getValue();
 
         String hql = """
           select new com.robodynamics.dto.RDMentorDTO(
               u.userID,
-              concat(coalesce(u.firstName,''), case when u.lastName is null or u.lastName='' then '' else concat(' ', u.lastName) end),
+              concat(coalesce(u.firstName,''), 
+                     case when u.lastName is null or u.lastName='' 
+                          then '' else concat(' ', u.lastName) end),
               u.email,
               u.cellPhone,
               case when u.active = 1 then true else false end
           )
-          from com.robodynamics.model.RDUser u
-        		where u.profile_id in (:mentorProfileIds)
+          from RDUser u
+          where u.profile_id in (:mentorProfileIds)
           order by u.firstName asc, u.lastName asc
         """;
 
-        List<Integer> mentorProfileIds = Arrays.asList(
-        	    RDUser.profileType.SUPER_ADMIN.getValue(),
-        	    RDUser.profileType.ROBO_ADMIN.getValue(),
-        	    RDUser.profileType.ROBO_MENTOR.getValue()
-        	);
+        List<Integer> profileIds = Arrays.asList(
+                RDUser.profileType.SUPER_ADMIN.getValue(),
+                RDUser.profileType.ROBO_ADMIN.getValue(),
+                RDUser.profileType.ROBO_MENTOR.getValue()
+        );
 
-        	return s.createQuery(hql, RDMentorDTO.class)
-        	        .setParameterList("mentorProfileIds", mentorProfileIds)
-        	        .list();
-
-          }
+        return s.createQuery(hql, RDMentorDTO.class)
+                .setParameterList("mentorProfileIds", profileIds)
+                .list();
+    }
 
     @Override
     public List<RDMentorDTO> findMentorsSummary() {
         Session s = sessionFactory.getCurrentSession();
-        final int MENTOR_PROFILE_ID = com.robodynamics.model.RDUser.profileType.ROBO_MENTOR.getValue();
 
         String hql = """
           select new com.robodynamics.dto.RDMentorDTO(
               u.userID,
-              concat(coalesce(u.firstName,''), case when u.lastName is null or u.lastName='' then '' else concat(' ', u.lastName) end),
+              concat(coalesce(u.firstName,''), 
+                     case when u.lastName is null or u.lastName='' 
+                     then '' else concat(' ', u.lastName) end),
               u.email,
               u.cellPhone,
               case when u.active = 1 then true else false end,
               count(distinct o.courseOfferingId)
           )
-          from com.robodynamics.model.RDUser u
-            left join com.robodynamics.model.RDCourseOffering o
-                   on o.mentor.userID = u.userID
-                   -- If you store mentor as int, use:
-                   -- on o.mentorId = u.userID
+          from RDUser u
+            left join RDCourseOffering o on o.mentor.userID = u.userID
           where u.profile_id = :mentorProfileId
           group by u.userID, u.firstName, u.lastName, u.email, u.cellPhone, u.active
           order by u.firstName asc, u.lastName asc
         """;
 
         return s.createQuery(hql, RDMentorDTO.class)
-                .setParameter("mentorProfileId", MENTOR_PROFILE_ID)
+                .setParameter("mentorProfileId", RDUser.profileType.ROBO_MENTOR.getValue())
                 .list();
     }
-    
+
     @Override
     public RDMentor findByUserId(int userId) {
-      Query<RDMentor> q = sessionFactory.getCurrentSession().createQuery(
-          "from RDMentor m where m.user.userId = :uid", RDMentor.class);
-      q.setParameter("uid", userId);
-      return q.uniqueResult();
+        return s().createQuery(
+                "from RDMentor m where m.user.userID = :uid", RDMentor.class)
+                .setParameter("uid", userId)
+                .uniqueResult();
     }
 
     @Override
     public void save(RDMentor mentor) {
-      sessionFactory.getCurrentSession().save(mentor);
+        s().save(mentor);
     }
 
     @Override
     public void update(RDMentor mentor) {
-      sessionFactory.getCurrentSession().update(mentor);
+        s().update(mentor);
     }
 
-	@Override
-	public List<RDMentorDTO> findFeaturedMentors() {
-        // Adjust the constructor args to match YOUR RDMentorDTO constructor
-        return sessionFactory.getCurrentSession().createQuery(
-            "select new com.robodynamics.dto.RDMentorDTO(" +
-            "  m.mentorId, m.fullName, m.city, m.experienceYears, m.linkedinUrl, m.isVerified" +
-            ") " +
-            "from RDMentor m " +
-            "where m.isActive = 1 " +
-            "order by m.isVerified desc, m.updatedAt desc",
-            RDMentorDTO.class
-        )
-        .setMaxResults(8)
-        .getResultList();
+    @Override
+    public List<RDMentorDTO> findFeaturedMentors() {
+        return s().createQuery(
+                "select new com.robodynamics.dto.RDMentorDTO(" +
+                "  m.mentorId, m.fullName, m.city, m.experienceYears, " +
+                "  m.linkedinUrl, m.isVerified) " +
+                "from RDMentor m " +
+                "where m.isActive = 1 " +
+                "order by m.isVerified desc, m.updatedAt desc",
+                RDMentorDTO.class)
+                .setMaxResults(8)
+                .list();
     }
 
-	@Override
-	public List<RDMentor> findMentorsForLead(RDLead lead) {
-	    Session s = sessionFactory.getCurrentSession();
+    @Override
+    public List<RDMentor> findMentorsForLead(RDLead lead) {
+        int grade = Integer.parseInt(lead.getGrade().replaceAll("\\D", "0"));
+        List<String> subjects = Arrays.asList("Math", "Science");
 
-	    int grade = Integer.parseInt(lead.getGrade().replaceAll("\\D", "0"));
-	    List<String> subjects = Arrays.asList("Math", "Science"); // from lead
+        String hql = """
+            select distinct m
+            from RDMentor m
+            left join fetch m.skills s
+            where :grade between s.gradeMin and s.gradeMax
+            and s.skillLabel in (:subjects)
+        """;
 
-	    String hql = "select distinct m " +
-	                 "from RDMentor m " +
-	                 "join fetch m.skills s " +
-	                 "where :grade between s.gradeMin and s.gradeMax " +
-	                 "and s.skillLabel in (:subjects)";
+        return s().createQuery(hql, RDMentor.class)
+                .setParameter("grade", grade)
+                .setParameterList("subjects", subjects)
+                .list();
+    }
 
-	    return s.createQuery(hql, RDMentor.class)
-	            .setParameter("grade", grade)
-	            .setParameterList("subjects", subjects)
-	            .list();
-	}
+    @Override
+    public RDMentor getMentorById(int mentorId) {
+        return s().createQuery(
+                "SELECT m FROM RDMentor m LEFT JOIN FETCH m.skills WHERE m.mentorId = :id",
+                RDMentor.class)
+                .setParameter("id", mentorId)
+                .uniqueResult();
+    }
 
-	@Override
-	public RDMentor getMentorById(int mentorId) {
-		Session session = sessionFactory.getCurrentSession();
+    @Override
+    public RDMentor getMentorWithSkills(int mentorId) {
+        return s().createQuery(
+                "SELECT m FROM RDMentor m LEFT JOIN FETCH m.skills WHERE m.mentorId = :id",
+                RDMentor.class)
+                .setParameter("id", mentorId)
+                .uniqueResult();
+    }
 
-		RDMentor mentor = session.get(RDMentor.class, mentorId);
-        return mentor;
-	}
-
-	@Override
-	public RDMentor getMentorWithSkills(int mentorId) {
-		 String hql = "SELECT m FROM RDMentor m LEFT JOIN FETCH m.skills WHERE m.mentorId = :id";
-		    return sessionFactory.getCurrentSession()
-		                         .createQuery(hql, RDMentor.class)
-		                         .setParameter("id", mentorId)
-		                         .uniqueResult();
-	}
-
-	@Override
-	public boolean hasMentorProfile(int userID) {
-		if (userID == 0) return false;
-
-        Session session = sessionFactory.getCurrentSession();
-        String hql = "SELECT COUNT(m) FROM RDMentor m WHERE m.user.userID = :userId";
-        Query<Long> query = session.createQuery(hql, Long.class);
-        query.setParameter("userId", userID);
-
-        Long count = query.uniqueResult();
+    @Override
+    public boolean hasMentorProfile(int userID) {
+        Long count = s().createQuery(
+                "SELECT COUNT(m) FROM RDMentor m WHERE m.user.userID = :uid",
+                Long.class)
+                .setParameter("uid", userID)
+                .uniqueResult();
         return count != null && count > 0;
-	}
-
-
+    }
 }

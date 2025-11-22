@@ -35,51 +35,57 @@
   <div class="container">
     <div class="row align-items-center g-4">
 
-      <!-- Left: Webinar Info -->
-      <div class="col-md-8">
-        <span class="badge bg-warning text-dark mb-2">Upcoming Free Webinar</span>
-        <h3 class="fw-bold mb-2">Financial Literacy for Kids (Grade 4 to 7)</h3>
+<!-- Webinar Section -->
+<section class="container py-4">
+  <div class="row align-items-center section-box shadow-sm p-4 rounded">
 
-        <p class="mb-1">
-          <i class="bi bi-calendar-event"></i>
-          <strong>Sunday, November 16</strong> · 10:00 AM – 11:00 AM IST
-        </p>
+    <!-- Left: Webinar Info -->
+    <div class="col-md-8">
+      <span class="badge bg-warning text-dark mb-2">Upcoming Free Webinar</span>
 
-        <p class="mb-1">
-          <i class="bi bi-camera-video"></i>
-          Google Meet: 
-          <a href="https://meet.google.com/rzo-bzqq-njd" target="_blank">
-            meet.google.com/rzo-bzqq-njd
-          </a>
-        </p>
+      <h3 class="fw-bold mb-2">AI Impact on Parents and Kids</h3>
 
-        <p class="mb-0">
-          <i class="bi bi-info-circle"></i> 
-          Smart Saving • Needs vs Wants • How Money Works
-        </p>
-      </div>
+      <p class="mb-1">
+        <i class="bi bi-calendar-event"></i>
+        <strong>Sunday, December 7</strong> · 10:00 AM – 11:00 AM IST
+      </p>
 
-      <!-- Right: CTA Buttons -->
-      <div class="col-md-4 text-md-end text-center">
-
-        <a href="https://forms.gle/nnwZq2PzigUcx4Zv8"
-           target="_blank"
-           class="btn btn-warning text-dark btn-lg mb-2 w-100 cta-btn"
-           style="font-weight:700;">
-          <i class="bi bi-pencil-square"></i> Register Now
+      <p class="mb-1">
+        <i class="bi bi-camera-video"></i>
+        Google Meet:
+        <a href="https://meet.google.com/nex-ttro-jec" target="_blank">
+          meet.google.com/nex-ttro-jec
         </a>
+      </p>
 
-        <a href="https://meet.google.com/rzo-bzqq-njd"
-           target="_blank"
-           class="btn btn-outline-dark btn-lg w-100 cta-btn"
-           style="font-weight:700;">
-          <i class="bi bi-camera-video"></i> Join Google Meet
-        </a>
-
-      </div>
+      <p class="mb-0">
+        <i class="bi bi-info-circle"></i>
+        Understanding AI • Parenting in the Digital Age • Safe & Smart Tech Use
+      </p>
     </div>
+
+    <!-- Right: CTA Buttons -->
+    <div class="col-md-4 text-md-end text-center">
+
+      <a href="https://forms.gle/DYs1ob1MoWAcMt867"
+         target="_blank"
+         class="btn btn-warning text-dark btn-lg mb-2 w-100 cta-btn"
+         style="font-weight:700;">
+        <i class="bi bi-pencil-square"></i> Register Now
+      </a>
+
+      <a href="https://meet.google.com/nex-ttro-jec"
+         target="_blank"
+         class="btn btn-outline-dark btn-lg w-100 cta-btn"
+         style="font-weight:700;">
+        <i class="bi bi-camera-video"></i> Join Google Meet
+      </a>
+
+    </div>
+
   </div>
 </section>
+
 
 <!-- Hero -->
 <section class="hero" aria-label="Choose your journey">

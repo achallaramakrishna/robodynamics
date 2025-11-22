@@ -32,8 +32,19 @@ public class RDMentorSkill {
 
     @Column(name = "syllabus_board")
     private String syllabusBoard;
+    
+    public RDMentorSkill(String skillCode, String skillLabel) {
+        this.skillCode = skillCode;
+        this.skillLabel = skillLabel;
+    }
 
-    public Integer getGradeMin() { return gradeMin; }
+
+    public RDMentorSkill() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Integer getGradeMin() { return gradeMin; }
     public void setGradeMin(Integer gradeMin) { this.gradeMin = gradeMin; }
 
     public Integer getGradeMax() { return gradeMax; }

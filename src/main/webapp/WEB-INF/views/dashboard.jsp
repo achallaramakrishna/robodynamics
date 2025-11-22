@@ -62,21 +62,32 @@
 
     <div class="row">
     
- 
-    
-          <!-- Leads Management Card -->
+    <!-- Find Mentors -->
       <div class="col-md-4 mb-4">
-        <div class="lead-card">
-          <div class="lead-card-header">
-            <h5 class="mb-0">📈 Leads Management</h5>
+        <div class="card shadow-sm h-100 text-center">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0">🎓 Find Mentors</h5>
           </div>
-          <div class="lead-card-body text-center">
-            <p class="card-text">View, edit, update, and manage leads for both Parents and Mentors.</p>
-            <a href="${pageContext.request.contextPath}/leads/dashboard" class="btn btn-primary">Go to Leads Dashboard</a>
+          <div class="card-body">
+            <p class="card-text">Search mentors by skill, grade, board, city and specialization.</p>
+            <a href="${pageContext.request.contextPath}/mentors/search" class="btn btn-primary me-2">Go to Mentors Search</a>
           </div>
         </div>
       </div>
-      <!-- Mentor Utilization Card -->
+ 
+     <!-- Leads Management Card -->
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 text-center">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0">📈 Leads Management</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">View, edit, update, and manage leads for both Parents and Mentors.</p>
+            <a href="${pageContext.request.contextPath}/leads/dashboard" class="btn btn-primary me-2">Go to Leads Dashboard</a>
+          </div>
+        </div>
+      </div>
+            <!-- Mentor Utilization Card -->
 	<div class="col-md-4">
 	  <div class="card shadow-sm border-0">
 	    <div class="card-body">

@@ -25,6 +25,49 @@ public class RDCourseSessionController {
     private RDCourseSessionService courseSessionService;  // Service to manage course sessions
 
     /**
+     * Bulk delete course sessions (units + sessions).
+     */
+    @PostMapping("/deleteSelected")
+    public String deleteSelected(
+            @RequestParam("selectedIds") List<Integer> selectedIds,
+            @RequestParam("courseId") int courseId,
+            RedirectAttributes redirectAttributes) {
+
+        if (selectedIds == null || selectedIds.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "No sessions selected.");
+            return "redirect:/courseSession/list?courseId=" + courseId;
+        }
+
+        int deleted = 0;
+        int failed = 0;
+
+        for (Integer id : selectedIds) {
+            try {
+                courseSessionService.deleteCourseSession(id);
+                deleted++;
+            } catch (Exception e) {
+                failed++;
+            }
+        }
+
+        if (deleted > 0) {
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    deleted + " session(s) deleted successfully."
+            );
+        }
+
+        if (failed > 0) {
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    failed + " session(s) could NOT be deleted because they are already used (child sessions, session details, slides, assignments, etc)."
+            );
+        }
+
+        return "redirect:/courseSession/list?courseId=" + courseId;
+    }
+
+    /**
      * List all units and their child sessions for a selected course.
      */
     @GetMapping("/list")

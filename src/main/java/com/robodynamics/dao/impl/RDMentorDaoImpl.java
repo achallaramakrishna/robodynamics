@@ -42,6 +42,25 @@ public class RDMentorDaoImpl implements RDMentorDao {
     // ---------------------------------------------
 
     @Override
+    public RDMentor findMentorProfile(Integer mentorId) {
+
+        String hql = """
+            SELECT DISTINCT m FROM RDMentor m
+            LEFT JOIN FETCH m.skills s
+            LEFT JOIN FETCH m.feedbacks f
+            LEFT JOIN FETCH m.recommendations r
+            LEFT JOIN FETCH m.user u
+            WHERE m.mentorId = :id
+        """;
+
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, RDMentor.class)
+                .setParameter("id", mentorId)
+                .uniqueResult();
+    }
+
+    
+    @Override
     public List<RDMentorDTO> findAllMentorsBasic() {
         Session s = sessionFactory.getCurrentSession();
 

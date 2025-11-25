@@ -54,6 +54,22 @@ public class RDSlideController {
         response.put("courseSessions", courseSessions);
         return response;
     }
+    
+    @PostMapping("/deleteSelected")
+    @ResponseBody
+    public String deleteSelected(@RequestParam("slideIds") List<Integer> slideIds) {
+
+        try {
+        	for (Integer id : slideIds) {
+        		slideService.deleteSlide(id); // or slideRepository.deleteById(id);
+            }
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
 
     @GetMapping("/getCourseSessionDetails")
     @ResponseBody

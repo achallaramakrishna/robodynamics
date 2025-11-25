@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,6 +25,31 @@ public class RDMentorController {
 
     @Autowired
     private RDMentorSkillService skillService;
+    
+    
+    @GetMapping("/view/{mentorId}")
+    public String viewMentorProfile(
+            @PathVariable("mentorId") Integer mentorId,
+            Model model) {
+
+        // Fetch mentor + skills + feedback + recommendations
+        RDMentor mentor = mentorService.getMentorById(mentorId);
+
+        if (mentor == null) {
+            model.addAttribute("errorMsg", "Mentor not found");
+            return "error/404";
+        }
+
+        model.addAttribute("mentor", mentor);
+        model.addAttribute("skills", mentor.getSkills());
+        model.addAttribute("feedbacks", mentor.getFeedbacks());
+        model.addAttribute("recommendations", mentor.getRecommendations());
+
+        model.addAttribute("title", mentor.getFullName() + " | Mentor Profile");
+
+        return "mentors/view-profile";  // JSP name inside /WEB-INF/views/mentors/
+    }
+
 
     @GetMapping
     public String mentorLanding(Model model) {

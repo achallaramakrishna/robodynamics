@@ -50,6 +50,8 @@ public interface RDMentorDao {
     // -------------------------------------------------------
     boolean hasMentorProfile(int userID);
 
+	RDMentor findMentorProfile(Integer mentorId);
+
 
     // -------------------------------------------------------
     // ❗️NOTE: no search() or countForSearch() here

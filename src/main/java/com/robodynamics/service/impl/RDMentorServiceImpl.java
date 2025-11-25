@@ -78,8 +78,8 @@ public class RDMentorServiceImpl implements RDMentorService {
 			user.setEmail(lead.getEmail());
 			user.setActive(1);
 			user.setProfile_id(RDUser.profileType.ROBO_MENTOR.getValue());
-			user.setUserName("temp");
-			user.setPassword("temp");
+			user.setUserName(lead.getName());
+			user.setPassword(lead.getName());
 			s.save(user);
 		} else {
 			user.setActive(1);

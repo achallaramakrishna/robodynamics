@@ -652,4 +652,30 @@ public class RDCourseSessionDetailController {
         String output = judge0Service.executeCode(code, languageId);
         return output;  // Return the result back to the front-end
     }
+    
+    @PostMapping("/deleteSelected")
+    public String deleteSelected(
+            @RequestParam("selectedIds") List<Integer> selectedIds,
+            @RequestParam("courseId") int courseId,
+            RedirectAttributes redirectAttributes) {
+
+        if (selectedIds == null || selectedIds.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "No session details selected.");
+            return "redirect:/sessiondetail/list?courseId=" + courseId;
+        }
+
+        try {
+            for (Integer id : selectedIds) {
+                courseSessionDetailService.deleteRDCourseSessionDetail(id);
+            }
+            redirectAttributes.addFlashAttribute("successMessage",
+                    selectedIds.size() + " session details deleted successfully.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Error deleting selected session details.");
+        }
+
+        return "redirect:/sessiondetail/list?courseId=" + courseId;
+    }
+
 }

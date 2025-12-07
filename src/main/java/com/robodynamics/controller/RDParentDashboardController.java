@@ -86,6 +86,7 @@ public class RDParentDashboardController {
                 (parentId == null) ? Collections.emptyList() : offeringService.getOfferingsByParentId(parentId);
         List<RDEnrollmentReportDTO> enrollments =
                 (parentId == null) ? Collections.emptyList() : enrollmentService.getEnrollmentsByParentId(parentId);
+        model.addAttribute("parentUserId", parentId);
 
         model.addAttribute("courseOfferings", courseOfferings);
         model.addAttribute("enrollments", enrollments);

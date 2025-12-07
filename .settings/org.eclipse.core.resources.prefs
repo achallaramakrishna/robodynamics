@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/admin/competitions/list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/data-quality.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/fragments/all-summary.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/search.jsp=UTF-8

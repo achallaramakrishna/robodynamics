@@ -56,13 +56,8 @@
       <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
 
         <!-- Courses -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="coursesMega" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
-          <div class="dropdown-menu p-3 rd-mega" aria-labelledby="coursesMega">
-            <!-- Mega menu content here -->
-          </div>
-        </li>
+              <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses">Courses</a></li>
+
 
         <!-- Other Links -->
         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/about">About</a></li>

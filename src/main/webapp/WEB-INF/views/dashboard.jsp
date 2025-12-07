@@ -62,6 +62,25 @@
 
     <div class="row">
     
+    <!-- Competition Dashboard -->
+	<div class="col-md-4 mb-4">
+	  <div class="card shadow-sm h-100 text-center">
+	    <div class="card-header bg-primary text-white">
+	      <h5 class="mb-0">🏆 Competition Dashboard</h5>
+	    </div>
+	    <div class="card-body">
+	      <p class="card-text">
+	        Manage competitions, rounds, judges, registrations, scores & results.
+	      </p>
+	      <a href="${pageContext.request.contextPath}/admin/competitions/dashboard"
+	         class="btn btn-primary">
+	        Open Competition Dashboard →
+	      </a>
+	    </div>
+	  </div>
+	</div>
+	    
+	    
     <!-- Find Mentors -->
       <div class="col-md-4 mb-4">
         <div class="card shadow-sm h-100 text-center">

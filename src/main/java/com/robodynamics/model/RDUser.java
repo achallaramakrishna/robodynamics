@@ -28,7 +28,7 @@ public class RDUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int userID;
+	private Integer userID;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -113,11 +113,11 @@ public class RDUser {
 
 	}
 
-	public int getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 

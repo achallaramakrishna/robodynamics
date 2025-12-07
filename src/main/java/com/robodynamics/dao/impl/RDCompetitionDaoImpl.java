@@ -1,64 +1,69 @@
-
 package com.robodynamics.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDCompetitionDao;
-import com.robodynamics.model.RDAssetCategory;
 import com.robodynamics.model.RDCompetition;
 
 @Repository
 @Transactional
 public class RDCompetitionDaoImpl implements RDCompetitionDao {
 
-	@Autowired
-	private SessionFactory factory;
-	
-	@Override
-	public void saveRDCompetition(RDCompetition rdCompetition) {
-		
-		Session session = factory.getCurrentSession();
-		session.saveOrUpdate(rdCompetition);
+    private final SessionFactory sessionFactory;
 
-	}
+    public RDCompetitionDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
-	@Override
-	public RDCompetition getRDCompetition(int competitionId) {
-		
-		Session session = factory.getCurrentSession();
-        RDCompetition competition = session.get(RDCompetition.class, competitionId);
-        return competition;
-	}
-	
+    private Session s() {
+        return sessionFactory.getCurrentSession();
+    }
 
-	@Override
-	public List<RDCompetition> getRDCompetitions() {
-		Session session = factory.getCurrentSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery < RDCompetition > cq = cb.createQuery(RDCompetition.class);
-        Root < RDCompetition > root = cq.from(RDCompetition.class);
-        cq.select(root);
-        Query query = session.createQuery(cq);
-        return query.getResultList();
-	}
+    @Override
+    public void save(RDCompetition competition) {
+        s().saveOrUpdate(competition);
+    }
 
-	@Override
-	public void deleteRDCompetition(int id) {
-		Session session = factory.getCurrentSession();
-		RDCompetition competition = session.byId(RDCompetition.class).load(id);
-        session.delete(competition);
+    @Override
+    public void update(RDCompetition competition) {
+        s().update(competition);
+    }
 
-	}
+    @Override
+    public RDCompetition findById(int id) {
+        return s().get(RDCompetition.class, id);
+    }
 
+    @Override
+    public List<RDCompetition> findAll() {
+        return s().createQuery("from RDCompetition", RDCompetition.class).list();
+    }
+
+    @Override
+    public void delete(int id) {
+        RDCompetition c = findById(id);
+        if (c != null) {
+            s().delete(c);
+        }
+    }
+
+    @Override
+    public int countUpcomingCompetitions() {
+        String hql = "SELECT COUNT(c) FROM RDCompetition c WHERE c.date >= current_date";
+        Long count = s().createQuery(hql, Long.class).uniqueResult();
+        return count != null ? count.intValue() : 0;
+    }
+
+    @Override
+    public int countCompetitionsWithResults() {
+        String hql = "SELECT COUNT(DISTINCT r.competition.competitionId) FROM RDCompetitionResult r";
+        Long count = s().createQuery(hql, Long.class).uniqueResult();
+        return count != null ? count.intValue() : 0;
+    }
 }

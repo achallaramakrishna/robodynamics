@@ -2,49 +2,90 @@ package com.robodynamics.service.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDCompetitionDao;
+import com.robodynamics.dao.RDCompetitionRegistrationDao;
+import com.robodynamics.dao.RDCompetitionResultDao;
+import com.robodynamics.dao.RDCompetitionRoundDao;
 import com.robodynamics.model.RDCompetition;
+import com.robodynamics.model.RDCompetitionRegistration;
+import com.robodynamics.model.RDCompetitionResult;
+import com.robodynamics.model.RDCompetitionRound;
 import com.robodynamics.service.RDCompetitionService;
 
 @Service
+@Transactional
 public class RDCompetitionServiceImpl implements RDCompetitionService {
-	
-	@Autowired
-	private RDCompetitionDao rdCompetitionDao;
 
-	@Override
-	@Transactional
-	public void saveRDCompetition(RDCompetition rdCompetition) {
-		rdCompetitionDao.saveRDCompetition(rdCompetition);
+    private final RDCompetitionDao competitionDao;
+    
+    @Autowired
+    private RDCompetitionRoundDao roundDao;
 
-	}
+    @Autowired
+    private RDCompetitionRegistrationDao registrationDao;
 
-	@Override
-	@Transactional
-	public RDCompetition getRDCompetition(int competitionId) {
-		
-		return rdCompetitionDao.getRDCompetition(competitionId);
-	}
+    @Autowired
+    private RDCompetitionResultDao resultDao;
 
-	@Override
-	@Transactional
-	public List<RDCompetition> getRDCompetitions() {
-		
-		return rdCompetitionDao.getRDCompetitions();
-	}
+    public RDCompetitionServiceImpl(RDCompetitionDao competitionDao) {
+        this.competitionDao = competitionDao;
+    }
 
-	@Override
-	@Transactional
-	public void deleteRDCompetition(int id) {
-		
-		rdCompetitionDao.deleteRDCompetition(id);
+    @Override
+    public void save(RDCompetition competition) {
+        competitionDao.save(competition);
+    }
 
-	}
+    @Override
+    public void update(RDCompetition competition) {
+        competitionDao.update(competition);
+    }
+
+    @Override
+    public RDCompetition findById(int id) {
+        return competitionDao.findById(id);
+    }
+
+    @Override
+    public List<RDCompetition> findAll() {
+        return competitionDao.findAll();
+    }
+
+    @Override
+    public void delete(int id) {
+        competitionDao.delete(id);
+    }
+
+    @Override
+    public int countUpcomingCompetitions() {
+        return competitionDao.countUpcomingCompetitions();
+    }
+
+    @Override
+    public int countCompetitionsWithResults() {
+        return competitionDao.countCompetitionsWithResults();
+    }
+
+    @Override
+    public List<RDCompetitionRound> findRoundsByCompetition(int competitionId) {
+        return roundDao.findByCompetition(competitionId);
+    }
+
+    @Override
+    public List<RDCompetitionRegistration> findRegistrations(int competitionId) {
+        return registrationDao.findByCompetition(competitionId);
+    }
+
+    @Override
+    public List<RDCompetitionResult> findResults(int competitionId) {
+        return resultDao.findByCompetition(competitionId);
+    }
+
+
 
 }

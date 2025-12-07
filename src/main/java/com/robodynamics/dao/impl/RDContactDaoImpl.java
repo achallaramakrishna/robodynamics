@@ -29,7 +29,7 @@ public class RDContactDaoImpl implements RDContactDao {
 	@Override
 	public List<RDContact> getAllRDContacts() {
 	    Session session = sessionFactory.openSession();
-	    Query<RDContact> query = session.createQuery("select * from rd_contact", RDContact.class);
+	    Query<RDContact> query = session.createQuery("select * from RDContact", RDContact.class);
 		session.close();
 	    return getAllRDContacts();
 	}

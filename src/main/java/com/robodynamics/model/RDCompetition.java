@@ -1,155 +1,196 @@
 package com.robodynamics.model;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 
 @Entity
 @Table(name = "rd_competitions")
+@Access(AccessType.FIELD)
 public class RDCompetition {
-	
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "competition_id")
-    private int competition_id;
+    @Column(name = "competition_id")
+    private int competitionId;
 
-	@Column(name = "name")
-    private String name;
-    
-	@Column(name = "description")
-    private String description;
-    
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "start_date")
-    private Date startDate;
-    
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "end_date")
-    private Date endDate;
-    
-	@Column(name = "category")
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "category")
     private String category;
+
+    @Column(name = "mode")
+    private String mode;
+
+    @Column(name = "grade_group")
+    private String gradeGroup;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date")
+    private Date date;
+
+    @DateTimeFormat(pattern = "HH:mm")
+    @Temporal(TemporalType.TIME)
+    @Column(name = "start_time")
+    private Date startTime;
+
+    @DateTimeFormat(pattern = "HH:mm")
+    @Temporal(TemporalType.TIME)
+    @Column(name = "end_time")
+    private Date endTime;
+
+    @Column(name = "venue")
+    private String venue;
+
+    @Column(name = "max_participants")
+    private Integer maxParticipants;
+
+    @Column(name = "status")
+    private String status = "upcoming";
+
+    // ⭐ NEW FIELDS FOR REGISTRATION WINDOW ⭐
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "registration_start_date")
+    private Date registrationStartDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "registration_end_date")
+    private Date registrationEndDate;
+    
+    @Column(name = "fee")
+    private Double fee;
+
     
     
-	@Column(name = "status")
-    private String status;
 
+    // ---------- Getters & Setters -----------
 
-	public int getCompetition_id() {
-		return competition_id;
+    public Double getFee() {
+		return fee;
 	}
 
-
-	public void setCompetition_id(int competition_id) {
-		this.competition_id = competition_id;
+	public void setFee(Double fee) {
+		this.fee = fee;
 	}
 
+	public int getCompetitionId() {
+        return competitionId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setCompetitionId(int competitionId) {
+        this.competitionId = competitionId;
+    }
 
+    public String getTitle() {
+        return title;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getCategory() {
+        return category;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
+    public String getMode() {
+        return mode;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
 
+    public String getGradeGroup() {
+        return gradeGroup;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public void setGradeGroup(String gradeGroup) {
+        this.gradeGroup = gradeGroup;
+    }
 
+    public String getDescription() {
+        return description;
+    }
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
+    public Date getDate() {
+        return date;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
+    public Date getStartTime() {
+        return startTime;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
+    public Date getEndTime() {
+        return endTime;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
+    public String getVenue() {
+        return venue;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
 
+    public Integer getMaxParticipants() {
+        return maxParticipants;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setMaxParticipants(Integer maxParticipants) {
+        this.maxParticipants = maxParticipants;
+    }
 
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	// default public constructor
-		public RDCompetition() {
-			
-		}
+    public Date getRegistrationStartDate() {
+        return registrationStartDate;
+    }
 
+    public void setRegistrationStartDate(Date registrationStartDate) {
+        this.registrationStartDate = registrationStartDate;
+    }
 
-		@Override
-		public int hashCode() {
-			return Objects.hash(category, competition_id, description, endDate, name, startDate, status);
-		}
+    public Date getRegistrationEndDate() {
+        return registrationEndDate;
+    }
 
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			RDCompetition other = (RDCompetition) obj;
-			return Objects.equals(category, other.category) && competition_id == other.competition_id
-					&& Objects.equals(description, other.description) && Objects.equals(endDate, other.endDate)
-					&& Objects.equals(name, other.name) && Objects.equals(startDate, other.startDate)
-					&& Objects.equals(status, other.status);
-		}
-
-
-		@Override
-		public String toString() {
-			return "RDCompetition [competition_id=" + competition_id + ", name=" + name + ", description=" + description
-					+ ", startDate=" + startDate + ", endDate=" + endDate + ", category=" + category + ", status="
-					+ status + "]";
-		}
-	
+    public void setRegistrationEndDate(Date registrationEndDate) {
+        this.registrationEndDate = registrationEndDate;
+    }
 }

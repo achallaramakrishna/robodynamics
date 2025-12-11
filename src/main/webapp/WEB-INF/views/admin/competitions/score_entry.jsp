@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Score Entry Panel</title>
@@ -12,15 +13,8 @@
           rel="stylesheet" />
 
     <style>
-        .score-input {
-            width: 80px;
-        }
-        .comment-box {
-            min-width: 200px;
-        }
-        .action-buttons {
-            white-space: nowrap;
-        }
+        .score-input { width: 80px; }
+        .comment-box { min-width: 200px; }
         .instructions-card {
             background-color: #f1f2f5;
             border-left: 4px solid #0d6efd;
@@ -30,7 +24,6 @@
 
 <body>
 
-<!-- HEADER -->
 <jsp:include page="/header.jsp" />
 
 <div class="container mt-4">
@@ -39,14 +32,14 @@
     <c:if test="${not empty successMessage}">
         <div class="alert alert-success alert-dismissible fade show">
             ${successMessage}
-            <button class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     </c:if>
 
     <c:if test="${not empty errorMessage}">
         <div class="alert alert-danger alert-dismissible fade show">
             ${errorMessage}
-            <button class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     </c:if>
 
@@ -69,15 +62,15 @@
                 <c:when test="${round.judge != null}">
                     ${round.judge.firstName} ${round.judge.lastName} (${round.judge.cellPhone})
                 </c:when>
-                <c:otherwise><span class="text-danger">Not Assigned</span></c:otherwise>
+                <c:otherwise>
+                    <span class="text-danger">Not Assigned</span>
+                </c:otherwise>
             </c:choose>
         </p>
 
-        <p class="mb-1">
-            <strong>Time:</strong> ${round.startTime} - ${round.endTime}
-        </p>
+        <p class="mb-1"><strong>Time:</strong> ${round.startTime} – ${round.endTime}</p>
 
-        <!-- Instructions -->
+        <!-- Instructions Toggle -->
         <div class="mt-2">
             <button class="btn btn-link p-0" data-bs-toggle="collapse" data-bs-target="#instructionsBox">
                 Show Instructions
@@ -97,8 +90,10 @@
 
     <form action="${pageContext.request.contextPath}/admin/competitions/scores/save" method="post">
 
-        <input type="hidden" name="round.roundId" value="${round.roundId}" />
-        <input type="hidden" name="judge.userID"
+        <!-- Correct hidden fields -->
+        <input type="hidden" name="roundId" value="${round.roundId}" />
+
+        <input type="hidden" name="judgeId"
                value="${round.judge != null ? round.judge.userID : ''}" />
 
         <table class="table table-striped table-bordered">
@@ -118,9 +113,7 @@
                 <tr>
 
                     <!-- Student -->
-                    <td>
-                        ${p.student.firstName} ${p.student.lastName}
-                    </td>
+                    <td>${p.student.firstName} ${p.student.lastName}</td>
 
                     <!-- Grade -->
                     <td>${p.student.grade}</td>
@@ -135,31 +128,23 @@
                     <td>
                         <input type="number"
                                class="form-control score-input"
-                               name="scores[${p.student.userId}].score"
+                               name="score_${p.student.userID}"
                                min="0" max="100"
-                               value="${existingScores[p.student.userId].score}"
+                               value="${scores[p.student.userID].score}"
                                step="0.1"
                                required />
                     </td>
 
                     <!-- Comments -->
                     <td>
-                        <textarea name="scores[${p.student.userId}].comments"
+                        <textarea name="comment_${p.student.userID}"
                                   class="form-control comment-box"
-                                  rows="2">${existingScores[p.student.userId].comments}</textarea>
+                                  rows="2">${scores[p.student.userID].comments}</textarea>
 
-                        <!-- Hidden fields needed for saving -->
+                        <!-- Student hidden ID -->
                         <input type="hidden"
-                               name="scores[${p.student.userId}].student.userId"
-                               value="${p.student.userId}" />
-
-                        <input type="hidden"
-                               name="scores[${p.student.userId}].round.roundId"
-                               value="${round.roundId}" />
-
-                        <input type="hidden"
-                               name="scores[${p.student.userId}].judge.userId"
-                               value="${round.judge != null ? round.judge.userId : ''}" />
+                               name="student_${p.student.userID}"
+                               value="${p.student.userID}" />
                     </td>
 
                 </tr>
@@ -175,7 +160,6 @@
 
 </div>
 
-<!-- FOOTER -->
 <jsp:include page="/footer.jsp" />
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

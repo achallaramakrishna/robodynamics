@@ -10,4 +10,6 @@ public interface RDCompetitionResultService {
     List<RDCompetitionResult> findByCompetition(int competitionId);
 
     RDCompetitionResult findByStudent(int competitionId, int studentUserId);
+
+	void generateResults(int competitionId);
 }

@@ -1,6 +1,7 @@
 package com.robodynamics.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -39,4 +40,12 @@ public class RDCompetitionScoreServiceImpl implements RDCompetitionScoreService 
 	public int countPendingScores() {
 		return scoreDao.countPendingScores();
 	}
+
+	@Override
+	public Map<Integer, RDCompetitionScore> findScoresForRound(int roundId) {
+		
+		return scoreDao.findScoresForRound(roundId);
+	}
+
+	
 }

@@ -1,6 +1,8 @@
 package com.robodynamics.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import com.robodynamics.model.RDCompetitionScore;
 
 public interface RDCompetitionScoreDao {
@@ -12,4 +14,7 @@ public interface RDCompetitionScoreDao {
     RDCompetitionScore findForStudent(int roundId, int studentUserId);
 
 	int countPendingScores();
+
+	Map<Integer, RDCompetitionScore> findScoresForRound(int roundId);
+
 }

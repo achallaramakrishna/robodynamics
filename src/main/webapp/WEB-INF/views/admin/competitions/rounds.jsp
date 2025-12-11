@@ -7,10 +7,8 @@
     <meta charset="UTF-8">
     <title>Competition Rounds</title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"/>
 
     <style>
         .action-buttons {
@@ -26,7 +24,7 @@
 <body>
 
 <!-- Header -->
-<jsp:include page="/header.jsp" />
+<jsp:include page="/header.jsp"/>
 
 <div class="container mt-4">
 
@@ -56,10 +54,36 @@
         Rounds – <span class="text-primary">${competition.title}</span>
     </h2>
 
-    <!-- Add Round -->
-    <div class="mb-3">
+    <!-- ACTION BAR -->
+    <div class="mb-3 d-flex gap-2">
+
+        <!-- Add Round -->
         <a href="${pageContext.request.contextPath}/admin/competitions/rounds/create?competitionId=${competition.competitionId}"
-           class="btn btn-primary">+ Add New Round</a>
+           class="btn btn-primary">
+            + Add New Round
+        </a>
+
+        <!-- Generate Results (only if not generated) -->
+        <c:if test="${empty results}">
+            <form method="post"
+                  action="${pageContext.request.contextPath}/admin/competitions/results/generate"
+                  onsubmit="return confirm('This will finalize and lock the results. Continue?');">
+                <input type="hidden" name="competitionId"
+                       value="${competition.competitionId}"/>
+                <button class="btn btn-warning">
+                    Generate Results
+                </button>
+            </form>
+        </c:if>
+
+        <!-- View Results (only if generated) -->
+        <c:if test="${not empty results}">
+            <a href="${pageContext.request.contextPath}/admin/competitions/results?competitionId=${competition.competitionId}"
+               class="btn btn-success">
+                View Results
+            </a>
+        </c:if>
+
     </div>
 
     <!-- ROUNDS TABLE -->
@@ -81,18 +105,16 @@
         <c:forEach var="r" items="${rounds}">
             <tr>
 
-                <!-- Round ID -->
                 <td>${r.roundId}</td>
 
-                <!-- Round Name -->
                 <td class="round-title">${r.roundName}</td>
 
-                <!-- Judge -->
                 <td>
                     <c:choose>
                         <c:when test="${r.judge != null}">
                             ${r.judge.firstName} ${r.judge.lastName}
-                            <br><small class="text-muted">${r.judge.cellPhone}</small>
+                            <br>
+                            <small class="text-muted">${r.judge.cellPhone}</small>
                         </c:when>
                         <c:otherwise>
                             <span class="text-muted">Not Assigned</span>
@@ -100,13 +122,9 @@
                     </c:choose>
                 </td>
 
-                <!-- Start Time -->
                 <td>${r.startTime}</td>
-
-                <!-- End Time -->
                 <td>${r.endTime}</td>
 
-                <!-- Instructions (collapsible) -->
                 <td>
                     <button class="btn btn-link p-0"
                             data-bs-toggle="collapse"
@@ -121,18 +139,14 @@
                     </div>
                 </td>
 
-                <!-- Actions -->
                 <td class="action-buttons">
 
-                    <!-- Edit Round -->
                     <a href="${pageContext.request.contextPath}/admin/competitions/rounds/edit?roundId=${r.roundId}"
                        class="btn btn-warning btn-sm">Edit</a>
 
-                    <!-- Enter Scores -->
                     <a href="${pageContext.request.contextPath}/admin/competitions/scores?roundId=${r.roundId}"
                        class="btn btn-info btn-sm">Scores</a>
 
-                    <!-- Delete Round -->
                     <a href="${pageContext.request.contextPath}/admin/competitions/rounds/delete?roundId=${r.roundId}&competitionId=${competition.competitionId}"
                        onclick="return confirm('Are you sure you want to delete this round?');"
                        class="btn btn-danger btn-sm">Delete</a>
@@ -142,13 +156,12 @@
         </c:forEach>
 
         </tbody>
-
     </table>
 
 </div>
 
 <!-- Footer -->
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 

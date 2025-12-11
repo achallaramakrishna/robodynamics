@@ -108,7 +108,7 @@
 
                 <!-- Parent -->
                 <td>
-                    <small>${r.student.parent_contact}</small>
+                    <small>${r.student.parentName}</small>
                 </td>
 
                 <!-- Certificate -->

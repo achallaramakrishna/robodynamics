@@ -34,4 +34,10 @@ public class RDCompetitionResultServiceImpl implements RDCompetitionResultServic
     public RDCompetitionResult findByStudent(int competitionId, int studentUserId) {
         return resultDao.findByStudent(competitionId, studentUserId);
     }
+
+	@Override
+	public void generateResults(int competitionId) {
+		
+		resultDao.generateResults(competitionId);
+	}
 }

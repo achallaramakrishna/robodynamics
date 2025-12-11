@@ -120,7 +120,7 @@
         <div class="card-header bg-success text-white">Registrations</div>
         <div class="card-body">
           <p>View all parent/student competition registrations.</p>
-          <a href="${pageContext.request.contextPath}/admin/competitions/registrations"
+          <a href="${pageContext.request.contextPath}/admin/competitions/list"
              class="btn btn-success">View</a>
         </div>
       </div>
@@ -131,7 +131,7 @@
         <div class="card-header bg-warning text-dark">Rounds & Judges</div>
         <div class="card-body">
           <p>Create rounds and assign judges.</p>
-          <a href="${pageContext.request.contextPath}/admin/competitions/rounds"
+          <a href="${pageContext.request.contextPath}/admin/competitions/list"
              class="btn btn-warning">Manage</a>
         </div>
       </div>
@@ -142,7 +142,7 @@
         <div class="card-header bg-info text-white">Score Entry</div>
         <div class="card-body">
           <p>Judges record scores and feedback.</p>
-          <a href="${pageContext.request.contextPath}/admin/competitions/score"
+          <a href="${pageContext.request.contextPath}/admin/competitions/list"
              class="btn btn-info">Enter Scores</a>
         </div>
       </div>
@@ -153,7 +153,7 @@
         <div class="card-header bg-danger text-white">Results</div>
         <div class="card-body">
           <p>Publish ranks and generate certificates.</p>
-          <a href="${pageContext.request.contextPath}/admin/competitions/results"
+          <a href="${pageContext.request.contextPath}/admin/competitions/list"
              class="btn btn-danger">View Results</a>
         </div>
       </div>

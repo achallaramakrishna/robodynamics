@@ -1,6 +1,8 @@
 package com.robodynamics.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 import org.hibernate.Session;
@@ -38,12 +40,14 @@ public class RDCompetitionScoreDaoImpl implements RDCompetitionScoreDao {
 
     @Override
     public RDCompetitionScore findForStudent(int roundId, int studentUserId) {
-        return s().createQuery(
+    	List<RDCompetitionScore> list = s().createQuery(
             "from RDCompetitionScore sc where sc.round.roundId = :rid and sc.student.userID = :sid",
             RDCompetitionScore.class)
             .setParameter("rid", roundId)
             .setParameter("sid", studentUserId)
-            .uniqueResult();
+            .getResultList();
+        return list.isEmpty() ? null : list.get(0);
+
     }
 
     @Override
@@ -61,6 +65,22 @@ public class RDCompetitionScoreDaoImpl implements RDCompetitionScoreDao {
 
         Long count = (Long) s().createQuery(hql).uniqueResult();
         return count != null ? count.intValue() : 0;
+    }
+
+    public Map<Integer, RDCompetitionScore> findScoresForRound(int roundId) {
+        Session session = sessionFactory.getCurrentSession();  // Get current session
+        String hql = "FROM RDCompetitionScore WHERE round.roundId = :roundId";
+        List<RDCompetitionScore> scores = session.createQuery(hql, RDCompetitionScore.class)
+                                                  .setParameter("roundId", roundId)
+                                                  .getResultList();
+        
+        // Convert List to Map
+        Map<Integer, RDCompetitionScore> scoreMap = new HashMap<>();
+        for (RDCompetitionScore score : scores) {
+            scoreMap.put(score.getStudent().getUserID(), score);
+        }
+
+        return scoreMap;
     }
 
 }

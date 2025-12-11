@@ -4,11 +4,17 @@ import com.robodynamics.model.*;
 import com.robodynamics.service.*;
 
 import java.util.Date;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin/competitions")
@@ -34,8 +40,14 @@ public class RDAdminCompetitionController {
 
     // ------------------ LIST COMPETITIONS ------------------
     @GetMapping("/list")
-    public String list(Model model) {
-        model.addAttribute("competitions", competitionService.findAll());
+    public String list(Model model ,
+		HttpSession session, HttpServletRequest request) {
+		 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+		 if (rdUser == null) {
+		     session.setAttribute("redirectUrl", request.getRequestURI());
+		     return "redirect:/login";
+		 }
+	    model.addAttribute("competitions", competitionService.findAll());
         model.addAttribute("today", new Date());
         return "admin/competitions/list";
     }
@@ -101,23 +113,37 @@ public class RDAdminCompetitionController {
 
     // ------------------ VIEW REGISTRATIONS ------------------
     @GetMapping("/registrations")
-    public String registrations(@RequestParam("id") int competitionId, Model model) {
-        model.addAttribute("registrations", registrationService.findByCompetition(competitionId));
+    public String registrations(@RequestParam("id") int competitionId, Model model,
+    		HttpSession session, HttpServletRequest request) {
+    	 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+         if (rdUser == null) {
+             session.setAttribute("redirectUrl", request.getRequestURI());
+             return "redirect:/login";
+         }
+        model.addAttribute("competition", competitionService.findById(competitionId));
+    	model.addAttribute("registrations", registrationService.findByCompetition(competitionId));
         return "admin/competitions/registrations";
     }
 
 
     // ------------------ MANAGE ROUNDS ------------------
     @GetMapping("/rounds")
-    public String listRounds(@RequestParam("competitionId") int compId, Model model) {
-        model.addAttribute("competition", competitionService.findById(compId));
+    public String listRounds(@RequestParam("competitionId") int compId, Model model,
+    		HttpSession session, HttpServletRequest request) {
+    	 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+         if (rdUser == null) {
+             session.setAttribute("redirectUrl", request.getRequestURI());
+             return "redirect:/login";
+         }
+    	model.addAttribute("competition", competitionService.findById(compId));
         model.addAttribute("rounds", roundService.findByCompetition(compId));
         return "admin/competitions/rounds";
     }
 
     @GetMapping("/rounds/create")
     public String createRound(@RequestParam("competitionId") int compId, Model model) {
-        RDCompetitionRound round = new RDCompetitionRound();
+    
+    	RDCompetitionRound round = new RDCompetitionRound();
         round.setCompetition(competitionService.findById(compId));
         round.setJudge(new RDUser());   // prevents null binding errors
 
@@ -141,25 +167,93 @@ public class RDAdminCompetitionController {
                 + round.getCompetition().getCompetitionId();
     }
 
-
-    // ------------------ SCORE ENTRY ------------------
     @GetMapping("/scores")
-    public String enterScores(@RequestParam("roundId") int roundId, Model model) {
-        RDCompetitionRound round = roundService.findById(roundId);
+    public String enterScores(@RequestParam("roundId") int roundId, Model model, HttpServletRequest request, HttpSession session) {
 
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) {
+            session.setAttribute("redirectUrl", request.getRequestURI());
+            return "redirect:/login";
+        }
+
+        RDCompetitionRound round = roundService.findById(roundId);
+        RDCompetition competition = round.getCompetition();
+        Hibernate.initialize(competition);   // Force load the competition
+
+        // Get the existing scores for the round
+        Map<Integer, RDCompetitionScore> existingScores = scoreService.findScoresForRound(roundId);
+        System.out.println(existingScores);
+        // Pass data to the view
         model.addAttribute("round", round);
-        model.addAttribute("participants",
-                registrationService.findByCompetition(round.getCompetition().getCompetitionId()));
-        model.addAttribute("scores", scoreService.findByRound(roundId));
+        model.addAttribute("competition", competition);
+        model.addAttribute("participants", registrationService.findByCompetition(competition.getCompetitionId()));
+        model.addAttribute("scores", existingScores);  // Pass existing scores to the view
 
         return "admin/competitions/score_entry";
     }
 
+
+
+
     @PostMapping("/scores/save")
-    public String saveScore(@ModelAttribute("score") RDCompetitionScore score) {
-        scoreService.save(score);
-        return "redirect:/admin/competitions/scores?roundId=" 
-                + score.getRound().getRoundId();
+    public String saveScores(@RequestParam("roundId") Integer roundId,
+                             @RequestParam Map<String, String> params, HttpServletRequest request, HttpSession session) {
+
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) {
+            session.setAttribute("redirectUrl", request.getRequestURI());
+            return "redirect:/login";
+        }
+
+        RDCompetitionRound round = roundService.findById(roundId);
+        RDCompetition competition = round.getCompetition();  // Get the associated competition
+
+        // Process and save the scores
+        params.keySet().stream()
+                .filter(key -> key.startsWith("score_"))
+                .forEach(key -> {
+                    Integer studentId = Integer.parseInt(key.replace("score_", ""));
+                    Integer scoreValue = Integer.parseInt(params.get(key));
+                    String commentValue = params.get("comment_" + studentId);
+
+                    RDCompetitionScore score = scoreService.findForStudent(roundId, studentId);
+
+                    if (score == null) {
+                        score = new RDCompetitionScore();
+                        score.setRound(round);
+                        score.setStudent(userService.getRDUser(studentId));
+                    }
+                    score.setJudge(rdUser);
+                    score.setScore(scoreValue);
+                    score.setComments(commentValue);
+
+                    scoreService.save(score);
+                });
+
+        // Redirect back to the rounds page after saving scores
+        return "redirect:/admin/competitions/rounds?competitionId=" + competition.getCompetitionId();
+    }
+
+    @PostMapping("/results/generate")
+    public String generateResults(@RequestParam("competitionId") int competitionId,
+                                  RedirectAttributes ra,
+                                  HttpSession session,
+                                  HttpServletRequest request) {
+
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) {
+            session.setAttribute("redirectUrl", request.getRequestURI());
+            return "redirect:/login";
+        }
+
+        try {
+            resultService.generateResults(competitionId);
+            ra.addFlashAttribute("successMessage", "Results generated successfully.");
+        } catch (IllegalStateException e) {
+            ra.addFlashAttribute("errorMessage", e.getMessage());
+        }
+
+        return "redirect:/admin/competitions/rounds?competitionId=" + competitionId;
     }
 
 

@@ -242,6 +242,11 @@ public class RDQuizQuestionController {
                 question.setMaxMarks(questionDTO.getMaxMarks());
                 question.setAdditionalInfo(questionDTO.getAdditionalInfo());
                 question.setPoints(questionDTO.getPoints());
+                
+                if(questionDTO.getExamType()!= null) {
+                    question.setExamType(questionDTO.getExamType());
+                }
+                
 
                 // Set tier level if provided
                 String tierLevelString = questionDTO.getTierLevel();

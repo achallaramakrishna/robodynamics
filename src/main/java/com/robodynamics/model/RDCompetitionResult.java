@@ -18,6 +18,9 @@ public class RDCompetitionResult {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_user_id")
     private RDUser student;
+    
+    @Column(name = "total_score")
+    private Double totalScore;
 
     @Column(name = "result_rank")
     private int resultRank;
@@ -40,4 +43,12 @@ public class RDCompetitionResult {
 
     public String getCertificateUrl() { return certificateUrl; }
     public void setCertificateUrl(String certificateUrl) { this.certificateUrl = certificateUrl; }
+	public Double getTotalScore() {
+		return totalScore;
+	}
+	public void setTotalScore(Double totalScore) {
+		this.totalScore = totalScore;
+	}
+    
+    
 }

@@ -23,6 +23,10 @@ public class RDQuizQuestionDTO {
     @JsonProperty("points")
     private int points;  // <-- Add this field
 
+    @JsonProperty("exam_type")
+    private String examType;
+
+
     @JsonProperty("max_marks")
     private Integer maxMarks;
 
@@ -45,7 +49,15 @@ public class RDQuizQuestionDTO {
     
     // Getters and setters
 
-    public int getSlideNumber() {
+    public String getExamType() {
+		return examType;
+	}
+
+	public void setExamType(String examType) {
+		this.examType = examType;
+	}
+
+	public int getSlideNumber() {
         return slideNumber;
     }
 

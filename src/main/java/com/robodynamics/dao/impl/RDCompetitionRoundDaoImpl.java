@@ -40,6 +40,15 @@ public class RDCompetitionRoundDaoImpl implements RDCompetitionRoundDao {
 
     @Override
     public RDCompetitionRound findById(int roundId) {
-        return s().get(RDCompetitionRound.class, roundId);
+        return s().createQuery(
+            "select r from RDCompetitionRound r " +
+            "left join fetch r.competition " +
+            "left join fetch r.judge " +
+            "where r.roundId = :id", 
+            RDCompetitionRound.class
+        )
+        .setParameter("id", roundId)
+        .uniqueResult();
     }
+
 }

@@ -2,7 +2,7 @@ package com.robodynamics.dao.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,20 +38,38 @@ public class RDCompetitionRegistrationDaoImpl implements RDCompetitionRegistrati
             .setParameter("cid", competitionId)
             .list();
     }
-
     @Override
-    public List<RDCompetitionRegistration> findByStudent(int studentUserId) {
-        return s().createQuery(
-            "from RDCompetitionRegistration r where r.student.userID = :uid",
-            RDCompetitionRegistration.class)
-            .setParameter("uid", studentUserId)
+    public List<RDCompetitionRegistration> findByStudent(int studentId) {
+
+        return sessionFactory.getCurrentSession()
+            .createQuery(
+                "from RDCompetitionRegistration r " +
+                "join fetch r.competition " +
+                "join fetch r.student " +
+                "where r.student.userID = :studentId",
+                RDCompetitionRegistration.class
+            )
+            .setParameter("studentId", studentId)
             .list();
     }
 
-    @Override
+
     public RDCompetitionRegistration findById(int registrationId) {
-        return s().get(RDCompetitionRegistration.class, registrationId);
+
+        String hql = """
+            SELECT r
+            FROM RDCompetitionRegistration r
+            JOIN FETCH r.competition
+            JOIN FETCH r.student
+            WHERE r.registrationId = :id
+        """;
+
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, RDCompetitionRegistration.class)
+                .setParameter("id", registrationId)
+                .uniqueResult();
     }
+
 
     @Override
     public boolean exists(int competitionId, int studentUserId) {
@@ -72,4 +90,20 @@ public class RDCompetitionRegistrationDaoImpl implements RDCompetitionRegistrati
             .uniqueResult();
         return count != null ? count.intValue() : 0;
     }
+
+	@Override
+	public void update(RDCompetitionRegistration registration) {
+        sessionFactory.getCurrentSession().update(registration);
+	}
+
+	@Override
+	public RDCompetitionRegistration findByRazorpayOrderId(String orderId) {
+	    return (RDCompetitionRegistration) sessionFactory
+	        .getCurrentSession()
+	        .createQuery(
+	            "from RDCompetitionRegistration where razorpayOrderId = :orderId")
+	        .setParameter("orderId", orderId)
+	        .uniqueResult();
+	}
+
 }

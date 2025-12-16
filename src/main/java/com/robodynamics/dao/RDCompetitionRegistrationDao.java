@@ -16,4 +16,9 @@ public interface RDCompetitionRegistrationDao {
     boolean exists(int competitionId, int studentUserId);
 
 	int countAllRegistrations();
+	
+    void update(RDCompetitionRegistration registration);
+
+    RDCompetitionRegistration findByRazorpayOrderId(String orderId);
+
 }

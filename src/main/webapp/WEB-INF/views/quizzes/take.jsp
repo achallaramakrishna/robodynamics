@@ -170,7 +170,10 @@
               <div class="d-flex align-items-center justify-content-between mb-2">
                 <h5 class="card-title mb-0 d-flex align-items-center">
                   <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle badge-tiny me-2">Q</span>
-                  <span class="fw-bold">Q${question.questionId}</span>
+                  <span class="fw-bold">
+					  Q${(currentPage * (pageSize < 0 ? fn:length(questions) : pageSize)) + qs.index + 1}
+					</span>
+
                 </h5>
 
                 <div class="d-flex align-items-center gap-2">

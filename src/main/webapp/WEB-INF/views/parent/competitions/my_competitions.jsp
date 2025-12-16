@@ -80,7 +80,6 @@
                         </c:choose>
                     </td>
 
-                    <!-- Payment Date -->
                     <td>
                         <c:if test="${not empty r.paymentDate}">
                             <fmt:formatDate value="${r.paymentDate}" pattern="dd MMM yyyy, hh:mm a"/>
@@ -90,22 +89,18 @@
                         </c:if>
                     </td>
 
-                    <!-- ACTION COLUMN (PAY NOW) -->
                     <td>
                         <c:choose>
 
-                            <!-- If already paid -->
                             <c:when test="${r.paymentStatus == 'PAID'}">
                                 <span class="badge bg-success">✔ Payment Complete</span>
                             </c:when>
 
-                            <!-- If pending → show Pay Now button -->
                             <c:otherwise>
-                                <!-- PAY NOW BUTTON -->
-                                <button class="btn btn-primary btn-sm pay-btn"
-                                        onclick="openPayment('${r.registrationId}', '${r.paymentAmount}')">
-                                    Pay Now
-                                </button>
+                                 <a href="${pageContext.request.contextPath}/parent/competitions/payment/initiate?registrationId=${r.registrationId}"
+						               class="btn btn-primary btn-sm pay-btn">
+						                Pay Now
+						            </a>
                             </c:otherwise>
 
                         </c:choose>
@@ -123,20 +118,6 @@
 <!-- Footer -->
 <jsp:include page="/footer.jsp" />
 
-<!-- Placeholder Razorpay (fill backend later) -->
-<script>
-    function openPayment(registrationId, amount) {
-
-        alert("Razorpay integration pending.\n\nRegistration ID: " + registrationId +
-              "\nAmount: ₹" + amount + 
-              "\n\nOnce your Razorpay keys are ready, I will integrate the full popup.");
-
-        // ⭐ LATER YOU WILL REPLACE THIS ALERT WITH:
-        //   1. Create Razorpay order via Spring Boot
-        //   2. Call checkout.js with returned orderId
-        //   3. On payment success → call your Spring endpoint to update paymentStatus + paymentDate
-    }
-</script>
 
 </body>
 </html>

@@ -42,6 +42,39 @@ public class RDCompetitionRegistration {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date")
     private Date paymentDate;       // when parent pays
+    
+    public String getRazorpayOrderId() {
+		return razorpayOrderId;
+	}
+
+	public void setRazorpayOrderId(String razorpayOrderId) {
+		this.razorpayOrderId = razorpayOrderId;
+	}
+
+	public String getRazorpayPaymentId() {
+		return razorpayPaymentId;
+	}
+
+	public void setRazorpayPaymentId(String razorpayPaymentId) {
+		this.razorpayPaymentId = razorpayPaymentId;
+	}
+
+	public String getRazorpaySignature() {
+		return razorpaySignature;
+	}
+
+	public void setRazorpaySignature(String razorpaySignature) {
+		this.razorpaySignature = razorpaySignature;
+	}
+
+	@Column(name = "razorpay_order_id", length = 100)
+    private String razorpayOrderId;
+
+    @Column(name = "razorpay_payment_id", length = 100)
+    private String razorpayPaymentId;
+
+    @Column(name = "razorpay_signature", length = 255)
+    private String razorpaySignature;
 
     // ---------------- Getters & Setters ----------------
 

@@ -1,5 +1,6 @@
 package com.robodynamics.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -50,4 +51,54 @@ public class RDCompetitionRegistrationServiceImpl implements RDCompetitionRegist
 		// TODO Auto-generated method stub
 		return regDao.countAllRegistrations();
 	}
+
+	// STEP 1: After Razorpay order creation
+    @Override
+    public void updatePaymentOrder(
+            int registrationId,
+            String razorpayOrderId) {
+
+        RDCompetitionRegistration reg =
+        		regDao.findById(registrationId);
+
+        reg.setRazorpayOrderId(razorpayOrderId);
+        reg.setPaymentStatus("PENDING");
+
+        regDao.update(reg);
+    }
+
+    // STEP 2: After signature verification
+    @Override
+    public void markPaymentSuccess(
+            int registrationId,
+            String razorpayPaymentId,
+            String razorpaySignature) {
+
+        RDCompetitionRegistration reg =
+        		regDao.findById(registrationId);
+
+        reg.setPaymentStatus("SUCCESS");
+        reg.setPaymentDate(new Date());
+        reg.setRazorpayPaymentId(razorpayPaymentId);
+        reg.setRazorpaySignature(razorpaySignature);
+
+        regDao.update(reg);
+    }
+
+    // STEP 3: Failure / Cancel
+    @Override
+    public void markPaymentFailed(int registrationId) {
+
+        RDCompetitionRegistration reg =
+        		regDao.findById(registrationId);
+
+        reg.setPaymentStatus("FAILED");
+        regDao.update(reg);
+    }
+
+    @Override
+    public RDCompetitionRegistration findByRazorpayOrderId(String orderId) {
+        return regDao.findByRazorpayOrderId(orderId);
+    }
+
 }

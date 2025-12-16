@@ -16,6 +16,22 @@ public interface RDCompetitionRegistrationService {
     RDCompetitionRegistration findById(int registrationId);
     
     int countAllRegistrations();
+    
+    void updatePaymentOrder(
+            int registrationId,
+            String razorpayOrderId
+    );
+
+    void markPaymentSuccess(
+            int registrationId,
+            String razorpayPaymentId,
+            String razorpaySignature
+    );
+
+    void markPaymentFailed(int registrationId);
+    
+    RDCompetitionRegistration findByRazorpayOrderId(String orderId);
+
 
     
 }

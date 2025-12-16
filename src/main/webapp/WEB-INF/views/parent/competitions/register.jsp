@@ -101,25 +101,19 @@
             <div class="alert alert-danger">Registration is closed.</div>
         </c:when>
 
-        <!-- ⭐ FORM IS ONLY SHOWN WHEN OPEN -->
         <c:otherwise>
 
-            <!-- REGISTRATION FORM -->
             <f:form action="${pageContext.request.contextPath}/parent/competitions/submit"
                     method="post"
                     modelAttribute="registration">
 
-                <!-- Parent -->
                 <input type="hidden" name="parentUserId" value="${parentUserId}" />
 
-                <!-- Competition ID -->
                 <f:hidden path="competition.competitionId" value="${competition.competitionId}" />
 
-                <!-- Hidden Payment Fields -->
                 <f:hidden path="paymentAmount" value="${competition.fee}" />
                 <f:hidden path="paymentStatus" value="PENDING" />
 
-                <!-- Select Child -->
                 <div class="mb-3">
                     <label class="form-label">Select Child</label>
                     <f:select path="student.userID" cssClass="form-select" required="true">
@@ -132,7 +126,6 @@
                     </f:select>
                 </div>
 
-                <!-- Mode Selection -->
                 <div class="mb-3">
                     <label class="form-label">Participation Mode</label>
                     <f:select path="mode" cssClass="form-select" required="true">
@@ -142,7 +135,6 @@
                     </f:select>
                 </div>
 
-                <!-- Submit -->
                 <button type="submit" class="btn btn-success btn-lg w-100">
                     Confirm Registration
                 </button>

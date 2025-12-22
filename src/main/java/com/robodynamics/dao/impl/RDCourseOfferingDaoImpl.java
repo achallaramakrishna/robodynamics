@@ -520,4 +520,131 @@ public class RDCourseOfferingDaoImpl implements RDCourseOfferingDao {
         return query.getResultList();
 	}
 
+	/**
+     * Admin use case
+     * Filter by category + course (both optional)
+     */
+    @Override
+    public List<RDCourseOffering> getOfferingsByCategoryAndCourse(
+            Integer categoryId,
+            Integer courseId) {
+
+		Session session = factory.getCurrentSession();
+
+
+        StringBuilder hql = new StringBuilder(
+            "select co from RDCourseOffering co " +
+            "join co.course c " +
+            "join c.courseCategory cc " +
+            "where 1=1 "
+        );
+
+        if (categoryId != null) {
+            hql.append(" and cc.courseCategoryId = :categoryId ");
+        }
+
+        if (courseId != null) {
+            hql.append(" and c.courseId = :courseId ");
+        }
+
+        Query<RDCourseOffering> query =
+                session.createQuery(hql.toString(), RDCourseOffering.class);
+
+        if (categoryId != null) {
+            query.setParameter("categoryId", categoryId);
+        }
+
+        if (courseId != null) {
+            query.setParameter("courseId", courseId);
+        }
+
+        return query.getResultList();
+    }
+
+    /**
+     * Mentor use case
+     * Mentor + optional category + optional course
+     */
+    @Override
+    public List<RDCourseOffering> getOfferingsForMentorWithFilters(
+            Integer userID,
+            Integer categoryId,
+            Integer courseId) {
+
+		Session session = factory.getCurrentSession();
+
+
+        StringBuilder hql = new StringBuilder(
+            "select co from RDCourseOffering co " +
+            "join co.course c " +
+            "join c.courseCategory cc " +
+            "where co.instructor.userID = :userId "
+        );
+
+        if (categoryId != null) {
+            hql.append(" and cc.courseCategoryId = :categoryId ");
+        }
+
+        if (courseId != null) {
+            hql.append(" and c.courseId = :courseId ");
+        }
+
+        Query<RDCourseOffering> query =
+                session.createQuery(hql.toString(), RDCourseOffering.class);
+
+        query.setParameter("userId", userID);
+
+        if (categoryId != null) {
+            query.setParameter("categoryId", categoryId);
+        }
+
+        if (courseId != null) {
+            query.setParameter("courseId", courseId);
+        }
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<RDCourseOffering> getOfferingsWithAllFilters(
+            Integer categoryId,
+            Integer courseId,
+            Integer mentorId) {
+
+        Session session = factory.getCurrentSession();
+
+        StringBuilder hql = new StringBuilder(
+            "select distinct o from RDCourseOffering o " +
+            "join o.course c " +
+            "join c.courseCategory cat " +
+            "join o.instructor i " +
+            "where 1=1 ");
+
+        if (categoryId != null) {
+            hql.append(" and cat.courseCategoryId = :categoryId");
+        }
+        if (courseId != null) {
+            hql.append(" and c.courseId = :courseId");
+        }
+        if (mentorId != null) {
+            hql.append(" and i.userID = :mentorId");
+        }
+
+        Query<RDCourseOffering> query =
+                session.createQuery(hql.toString(), RDCourseOffering.class);
+
+        if (categoryId != null) {
+            query.setParameter("categoryId", categoryId);
+        }
+        if (courseId != null) {
+            query.setParameter("courseId", courseId);
+        }
+        if (mentorId != null) {
+            query.setParameter("mentorId", mentorId);
+        }
+
+        return query.getResultList();
+    }
+
+
 }

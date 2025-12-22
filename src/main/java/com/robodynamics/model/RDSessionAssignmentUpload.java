@@ -105,6 +105,14 @@ public class RDSessionAssignmentUpload {
 	    return uploadTime != null ? uploadTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) : "";
 	}
 
+	@Transient
+	public String getUploadTimeFormatted() {
+	    if (uploadTime == null) return "";
+	    return uploadTime.format(
+	        java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+	    );
+	}
+
 	
  
     

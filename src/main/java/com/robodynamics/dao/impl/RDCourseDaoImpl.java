@@ -165,4 +165,12 @@ public class RDCourseDaoImpl implements RDCourseDao {
 		return null;
 	}
 
+	public List<RDCourse> findCoursesByCategoryId(int categoryId) {
+	    return factory.getCurrentSession().createQuery(
+	        "from RDCourse c where c.courseCategory.courseCategoryId = :catId",
+	        RDCourse.class
+	    ).setParameter("catId", categoryId)
+	     .getResultList();
+	}
+
 }

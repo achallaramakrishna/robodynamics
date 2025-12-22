@@ -39,6 +39,8 @@ public interface RDCourseService {
 	List<RDCourse> getTrendingCourses();
 	
 	List<RDCourse> getCoursesNeedingMentors();
+	
+	List<RDCourse> getCoursesByCategoryId(int categoryId);
 
     	
 

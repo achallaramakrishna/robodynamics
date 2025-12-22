@@ -33,6 +33,7 @@ import com.robodynamics.model.RDAsset;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDUser;
+import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseOfferingService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDUserService;
@@ -50,6 +51,9 @@ public class RDCourseOfferingController {
 	private RDCourseService courseService;
 	
 	@Autowired
+	private RDCourseCategoryService courseCategoryService;
+	
+	@Autowired
 	private RDUserService userService;
 	
 	@Autowired
@@ -57,33 +61,49 @@ public class RDCourseOfferingController {
 
 
 	@GetMapping("/list")
-    public String listCourseOfferings(Model model, HttpSession session) {
-		
-		 RDUser rdUser = new RDUser();
-		    List<RDCourseOffering> courseOfferings;
+	public String listCourseOfferings(
+	        @RequestParam(required = false) Integer categoryId,
+	        @RequestParam(required = false) Integer courseId,
+	        @RequestParam(required = false) Integer mentorId,
+	        Model model,
+	        HttpSession session) {
 
-	        if (session.getAttribute("rdUser") != null) {
-	        	rdUser = (RDUser) session.getAttribute("rdUser");
-	        }
-	        if (rdUser != null) {
-	            if (rdUser.getProfile_id() == 1  || rdUser.getProfile_id() == 2) {
-	                // Admin sees everything
-	                courseOfferings = courseOfferingService.getAllRDCourseOfferings();
-	            } else if (rdUser.getProfile_id() == 3) {
-	                // Mentor sees only their own offerings
-	                courseOfferings = courseOfferingService.getCourseOfferingsByMentor(rdUser.getUserID());
-	            } else {
-	                // Default or other roles (optional)
-	                courseOfferings = List.of();
-	            }
-	        } else {
-	            // Not logged in, redirect to login page
-	            return "redirect:/login";
-	        }
+	    RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+	    if (rdUser == null) {
+	        return "redirect:/login";
+	    }
 
-	        model.addAttribute("courseOfferings", courseOfferings);
-	        return "listCourseOfferings"; // JSP page name
-    }
+	    List<RDCourseOffering> courseOfferings;
+
+	    if (rdUser.getProfile_id() == 1 || rdUser.getProfile_id() == 2) {
+	        // ✅ Admin: full filtering
+	        courseOfferings =
+	                courseOfferingService.getOfferingsWithAllFilters(
+	                        categoryId, courseId, mentorId);
+	    } else if (rdUser.getProfile_id() == 3) {
+	        // ✅ Mentor: forced mentor filter
+	        courseOfferings =
+	                courseOfferingService.getOfferingsForMentorWithFilters(
+	                        rdUser.getUserID(), categoryId, courseId);
+	    } else {
+	        courseOfferings = List.of();
+	    }
+
+	    // Dropdown data
+	    model.addAttribute("courseCategories", courseCategoryService.getRDCourseCategories());
+	    model.addAttribute("courses", courseService.getRDCourses());
+	    model.addAttribute("mentors", userService.getRDInstructors());
+
+	    // Preserve selections
+	    model.addAttribute("selectedCategoryId", categoryId);
+	    model.addAttribute("selectedCourseId", courseId);
+	    model.addAttribute("selectedMentorId", mentorId);
+
+	    model.addAttribute("courseOfferings", courseOfferings);
+
+	    return "listCourseOfferings";
+	}
+
 
 	@GetMapping("/showCalendar")
     public String showCalendar(Model theModel) {

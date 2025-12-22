@@ -87,6 +87,14 @@
         <option value="quiz"     <c:if test="${courseSessionDetail.type == 'quiz'}">selected</c:if>    >Quiz</option>
       </f:select>
     </div>
+    
+    <div class="form-check mb-3">
+	    <f:checkbox path="assignment" cssClass="form-check-input" id="assignmentCheck"/>
+	    <label class="form-check-label" for="assignmentCheck">
+	        Has Assignment?
+	    </label>
+	</div>
+	    
 
     <!-- File -->
     <div class="mb-3">

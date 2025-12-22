@@ -158,6 +158,26 @@ public class RDCourseOfferingServiceImpl implements RDCourseOfferingService {
     
 		return rdCourseOfferingDao.getDTOsByCourse(courseId);
 	}
+
+	@Override
+	public List<RDCourseOffering> getOfferingsByCategoryAndCourse(Integer categoryId, Integer courseId) {
+		
+		return rdCourseOfferingDao.getOfferingsByCategoryAndCourse(categoryId,courseId);
+	}
+
+	@Override
+	public List<RDCourseOffering> getOfferingsForMentorWithFilters(Integer userID, Integer categoryId,
+			Integer courseId) {
+		
+		return rdCourseOfferingDao.getOfferingsForMentorWithFilters(userID,categoryId,courseId);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseOffering> getOfferingsWithAllFilters(Integer categoryId, Integer courseId, Integer mentorId) {
+
+		return rdCourseOfferingDao.getOfferingsWithAllFilters(categoryId,courseId,mentorId);
+	}
 	
 	
 	

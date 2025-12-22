@@ -95,7 +95,7 @@
 
                 <td>
                     <c:choose>
-                        <c:when test="${r.paymentStatus == 'paid'}">
+                        <c:when test="${r.paymentStatus == 'PAID' || r.paymentStatus == 'SUCCESS'}">
                             <span class="badge bg-success">Paid</span>
                         </c:when>
                         <c:otherwise>

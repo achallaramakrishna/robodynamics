@@ -123,6 +123,27 @@
 
     <!-- Row 2: Quick actions -->
     <div class="row">
+    
+    <!-- Mentor Assignment Management Card -->
+	<div class="col-md-4 mb-4">
+	  <div class="card shadow-sm h-100 text-center">
+	    <div class="card-header bg-primary text-white">
+	      <h5 class="mb-0">📂 Student Assignments</h5>
+	    </div>
+	
+	    <div class="card-body">
+	      <p class="card-text">
+	        View uploaded assignments, preview files, grade students, and add feedback.
+	      </p>
+	
+	      <a href="${pageContext.request.contextPath}/mentor/uploads"
+	         class="btn btn-primary btn-lg">
+	        Manage Assignments
+	      </a>
+	    </div>
+	  </div>
+	</div>
+	    
       <!-- Attendance & Tracking Card -->
 			<div class="col-md-4 mb-4">
 				<div class="card shadow-sm h-100 text-center">

@@ -77,16 +77,25 @@
                 </div>
             </div>
            
+           <div class="form-group mb-3">
+			    <label for="category">Select Course Category</label>
+			    <select id="category" class="form-control" required>
+			        <option value="">-- Select Category --</option>
+			        <c:forEach var="cat" items="${categories}">
+			            <option value="${cat.courseCategoryId}">
+			                ${cat.courseCategoryName}
+			            </option>
+			        </c:forEach>
+			    </select>
+			</div>
+			           
             <!-- Course Dropdown -->
-            <div class="form-group mb-3">
-                <label for="course">Select Course</label>
-                <select id="course" name="courseId" class="form-control" required>
-                    <option value="">-- Select Course --</option>
-                    <c:forEach var="course" items="${courses}">
-                        <option value="${course.courseId}">${course.courseName}</option>
-                    </c:forEach>
-                </select>
-            </div>
+			<div class="form-group mb-3">
+			    <label for="course">Select Course</label>
+			    <select id="course" name="courseId" class="form-control" required disabled>
+			        <option value="">-- Select Course --</option>
+			    </select>
+			</div>
 
             <div class="form-group mb-3">
                 <label for="session">Select Session</label>
@@ -332,7 +341,35 @@
 			    }
 			});
 			
-			            
+
+         // When Category Changes → Load Courses
+            $('#category').change(function () {
+                let categoryId = $(this).val();
+
+                $('#course').html('<option value="">-- Select Course --</option>').prop('disabled', true);
+                $('#session').html('<option value="">-- Select Session --</option>').prop('disabled', true);
+                $('#sessionDetail').html('<option value="">-- Select Session Detail --</option>').prop('disabled', true);
+
+                $('#courseSessionId').val('');
+                $('#courseSessionDetailId').val('');
+
+                if (!categoryId) return;
+
+                $.getJSON(
+                    '${pageContext.request.contextPath}/quizquestions/getCoursesByCategory',
+                    { categoryId: categoryId },
+                    function (data) {
+                        let options = '<option value="">-- Select Course --</option>';
+
+                        $.each(data.courses, function (i, course) {
+                            options += '<option value="' + course.courseId + '">' + course.courseName + '</option>';
+                        });
+
+                        $('#course').html(options).prop('disabled', false);
+                    }
+                );
+            });
+
             $('#course').change(function () {
                 let courseId = $(this).val();
                 if (courseId) {

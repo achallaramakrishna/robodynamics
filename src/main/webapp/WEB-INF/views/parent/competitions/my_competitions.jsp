@@ -71,7 +71,7 @@
                     <!-- Payment Status -->
                     <td>
                         <c:choose>
-                            <c:when test="${r.paymentStatus == 'PAID'}">
+                            <c:when test="${r.paymentStatus == 'PAID' || r.paymentStatus == 'SUCCESS'}">
                                 <span class="badge bg-success">PAID</span>
                             </c:when>
                             <c:otherwise>
@@ -92,7 +92,7 @@
                     <td>
                         <c:choose>
 
-                            <c:when test="${r.paymentStatus == 'PAID'}">
+                            <c:when test="${r.paymentStatus == 'PAID' || r.paymentStatus == 'SUCCESS'}">
                                 <span class="badge bg-success">✔ Payment Complete</span>
                             </c:when>
 

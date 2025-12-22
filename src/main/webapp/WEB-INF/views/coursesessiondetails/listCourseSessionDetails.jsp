@@ -100,6 +100,7 @@
                 <th>Session Detail ID</th>
                 <th>Topic</th>
                 <th>Type</th>
+                <th>Assignment</th>
                 <th>File</th>
                 <th>Version</th>
                 <th>Actions</th>
@@ -122,7 +123,16 @@
                     <td>${sessionDetail.sessionDetailId}</td>
                     <td>${sessionDetail.topic}</td>
                     <td>${sessionDetail.type}</td>
-
+					
+					<td>
+					  <c:choose>
+					      <c:when test="${sessionDetail.assignment}">
+					          Yes
+					      </c:when>
+					      <c:otherwise>No</c:otherwise>
+					  </c:choose>
+					</td>
+										
                     <td>
                         <c:choose>
                             <c:when test="${not empty sessionDetail.file}">

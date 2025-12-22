@@ -48,4 +48,9 @@ public class RDHomeController {
     private static String nvl(String s) {
         return s == null ? "" : s;
     }
+    
+    @GetMapping("/competitions")
+    public String competitions() {
+    	return "competitions";
+    }
 }

@@ -101,6 +101,12 @@ import java.util.List;
 
 		List<RDCourseOffering> findForMentorBetweenRDUser(int mentorId, java.sql.Date from, java.sql.Date to);
 
+		List<RDCourseOffering> getOfferingsByCategoryAndCourse(Integer categoryId, Integer courseId);
+
+		List<RDCourseOffering> getOfferingsForMentorWithFilters(Integer userID, Integer categoryId, Integer courseId);
+
+		List<RDCourseOffering> getOfferingsWithAllFilters(Integer categoryId, Integer courseId, Integer mentorId);
+
 	
 	
 	}

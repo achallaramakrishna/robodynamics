@@ -54,6 +54,13 @@ public interface RDCourseOfferingService {
 
 	public List<RDCourseOffering> getCourseOfferingsByMentor(int userID);
 
+	public List<RDCourseOffering> getOfferingsByCategoryAndCourse(Integer categoryId, Integer courseId);
+
+	public List<RDCourseOffering> getOfferingsForMentorWithFilters(Integer userID, Integer categoryId,
+			Integer courseId);
+
+	public List<RDCourseOffering> getOfferingsWithAllFilters(Integer categoryId, Integer courseId, Integer mentorId);
+
 
 
 }

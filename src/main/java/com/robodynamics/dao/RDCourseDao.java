@@ -39,6 +39,8 @@ public interface RDCourseDao {
 
 	public List<RDCourse> getCoursesNeedingMentors();
 
+	public List<RDCourse> findCoursesByCategoryId(int categoryId);
+
 
 
 }

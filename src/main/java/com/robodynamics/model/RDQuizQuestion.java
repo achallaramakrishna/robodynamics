@@ -65,9 +65,43 @@ public class RDQuizQuestion {
     @JoinColumn(name = "exam_course_id")
     private RDExamCourse examCourse;
     
-    
+    @Column(name = "exam_year")
+    private Integer examYear;
 
-    public String getQuestionImage() {
+    @Column(name = "exam_paper")
+    private String examPaper;
+
+    @Column(name = "is_pyq")
+    private Boolean isPYQ;
+
+    
+    
+    
+    public Integer getExamYear() {
+		return examYear;
+	}
+
+	public void setExamYear(Integer examYear) {
+		this.examYear = examYear;
+	}
+
+	public String getExamPaper() {
+		return examPaper;
+	}
+
+	public void setExamPaper(String examPaper) {
+		this.examPaper = examPaper;
+	}
+
+	public Boolean getIsPYQ() {
+		return isPYQ;
+	}
+
+	public void setIsPYQ(Boolean isPYQ) {
+		this.isPYQ = isPYQ;
+	}
+
+	public String getQuestionImage() {
 		return questionImage;
 	}
 

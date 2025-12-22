@@ -99,14 +99,22 @@ public class RDCourseServiceImpl implements RDCourseService {
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourse> getTrendingCourses() {
 		// TODO Auto-generated method stub
 		return rdCourseDao.getTrendingCourses();
 	}
 
 	@Override
+	@Transactional
 	public List<RDCourse> getCoursesNeedingMentors() {
 		return rdCourseDao.getCoursesNeedingMentors();
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourse> getCoursesByCategoryId(int categoryId) {
+		return rdCourseDao.findCoursesByCategoryId(categoryId);
 	}
 
 

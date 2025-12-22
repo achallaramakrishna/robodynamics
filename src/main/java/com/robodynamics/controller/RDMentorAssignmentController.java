@@ -51,12 +51,39 @@ public class RDMentorAssignmentController {
     private RDCourseSessionDetailService sessionDetailService;
 
     @GetMapping
-    public String showAssignmentManagementPage(Model model) {
+    public String manageAssignments(
+            @RequestParam(required = false) Integer courseId,
+            @RequestParam(required = false) Integer offeringId,
+            @RequestParam(required = false) Integer studentId,
+            Model model) {
+
+        // Always load courses
         model.addAttribute("courses", courseService.getRDCourses());
+
+        // Preserve selected values for UI
+        model.addAttribute("selectedCourseId", courseId);
+        model.addAttribute("selectedOfferingId", offeringId);
+        model.addAttribute("selectedStudentId", studentId);
+
+        // Load uploads ONLY when student is selected
+        if (studentId != null) {
+            RDUser student = new RDUser();
+            student.setUserID(studentId);
+
+            List<RDSessionAssignmentUpload> uploads =
+                    uploadDao.getUploadsByStudent(student);
+
+            model.addAttribute("uploadedAssignments", uploads);
+        }
+
         return "mentor/manage_assignments";
     }
 
-    @GetMapping("/ajax/offerings")
+
+    @GetMapping(
+    	    value = "/ajax/offerings",
+    	    produces = "application/json"
+    	)
     @ResponseBody
     public List<RDCourseOfferingDTO> getOfferingsByCourse(@RequestParam("courseId") int courseId) {
 
@@ -99,7 +126,10 @@ public class RDMentorAssignmentController {
     }
 
 
-    @GetMapping("/ajax/students")
+    @GetMapping(
+    	    value = "/ajax/students",
+    	    produces = "application/json"
+    	)
     @ResponseBody
     public List<StudentLiteDTO> getStudentsByOffering(
             @RequestParam(value="offeringId", required=false) Integer offeringId) {
@@ -123,19 +153,18 @@ public class RDMentorAssignmentController {
             .toList();
     }
 
-    @GetMapping(params = { "studentId", "courseId" })
-    public String showStudentUploads(@RequestParam int studentId,
-                                     @RequestParam int courseId,
-                                     Model model) {
-        RDUser student = new RDUser();
-        student.setUserID(studentId);
-        List<RDSessionAssignmentUpload> uploads = uploadDao.getUploadsByStudent(student);
-
-        model.addAttribute("uploads", uploads);
-        model.addAttribute("studentId", studentId);
-        model.addAttribute("courseId", courseId);
-        return "mentor/view_uploads";
-    }
+	/*
+	 * @GetMapping(params = { "studentId", "courseId" }) public String
+	 * showStudentUploads(@RequestParam int studentId,
+	 * 
+	 * @RequestParam int courseId, Model model) { RDUser student = new RDUser();
+	 * student.setUserID(studentId); List<RDSessionAssignmentUpload> uploads =
+	 * uploadDao.getUploadsByStudent(student);
+	 * 
+	 * model.addAttribute("uploads", uploads); model.addAttribute("studentId",
+	 * studentId); model.addAttribute("courseId", courseId); return
+	 * "mentor/view_uploads"; }
+	 */
     
     @GetMapping("/preview")
     public void preview(@RequestParam("path") String path, HttpServletResponse response) throws IOException {

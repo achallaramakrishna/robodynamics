@@ -42,7 +42,6 @@
            alt="Robo Dynamics"
            class="me-2 rd-logo"
            onerror="this.onerror=null; this.replaceWith(document.createTextNode('Image not available'));"/>
-      <span>Robo Dynamics</span>
     </a>
 
     <!-- Toggler -->
@@ -57,7 +56,10 @@
 
         <!-- Courses -->
               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses">Courses</a></li>
-
+		<!-- Competitions -->
+		<li class="nav-item">
+		  <a class="nav-link" href="${pageContext.request.contextPath}/competitions">Competitions</a>
+		</li>
 
         <!-- Other Links -->
         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/about">About</a></li>

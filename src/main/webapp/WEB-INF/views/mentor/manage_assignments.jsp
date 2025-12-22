@@ -25,6 +25,8 @@
     	    url: contextPath + "/mentor/uploads/ajax/offerings?courseId=" + encodeURIComponent(courseId),
     	    method: "GET",
     	    success: function (offerings) {
+    	    	  console.log("RAW RESPONSE:", offerings);
+
     	      const $off = $("#offeringId");
     	      $off.empty().append('<option value="">-- Select Offering --</option>');
     	      offerings.forEach(function(o){
@@ -91,8 +93,8 @@
           <select id="offeringId" name="offeringId" class="form-select" required onchange="loadStudents(this.value)">
             <option value="">-- Select Offering --</option>
             <c:forEach var="offering" items="${courseOfferings}">
-              <option value="${offering.offeringId}" <c:if test="${offering.offeringId == selectedOfferingId}">selected</c:if>>
-                ${offering.batchName}
+              <option value="${offering.courseOfferingId}" <c:if test="${offering.courseOfferingId == selectedOfferingId}">selected</c:if>>
+                ${offering.courseOfferingId}
               </option>
             </c:forEach>
           </select>
@@ -123,7 +125,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Session Title</th>
+            <th>Topic</th>
             <th>Uploaded On</th>
             <th>File</th>
             <th>Score</th>
@@ -134,8 +136,8 @@
         <tbody>
           <c:forEach var="upload" items="${uploadedAssignments}">
             <tr>
-              <td>${upload.sessionDetail.sessionTitle}</td>
-              <td><fmt:formatDate value="${upload.uploadTime}" pattern="dd-MM-yyyy HH:mm" /></td>
+              <td>${upload.sessionDetail.topic}</td>
+				<td>${upload.uploadTimeFormatted}</td>
               <td>
                 <a href="${pageContext.request.contextPath}/download?path=${upload.filePath}" target="_blank">
                   ${upload.fileName}

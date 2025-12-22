@@ -76,12 +76,27 @@ public class RDCourseController {
         return "courseDetails";
     }
 	
-	@GetMapping("/list")
-	    public String listCourses(Model theModel) {
-	        List < RDCourse > courses = service.getRDCourses();
-	        theModel.addAttribute("courses", courses);
-	        return "listCourses";
-	    }
+    @GetMapping("/list")
+    public String listCourses(
+            @RequestParam(value = "categoryId", required = false) Integer categoryId,
+            Model model) {
+
+        List<RDCourse> courses;
+        if (categoryId != null && categoryId > 0) {
+            courses = service.getCoursesByCategoryId(categoryId);
+        } else {
+            courses = service.getRDCourses();
+        }
+
+        List<RDCourseCategory> categories = courseCategoryService.getRDCourseCategories();
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("categories", categories);
+        model.addAttribute("selectedCategoryId", categoryId);
+
+        return "listCourses";
+    }
+
 	@GetMapping("/showForm")
 	public ModelAndView home(Model theModel) {
 		

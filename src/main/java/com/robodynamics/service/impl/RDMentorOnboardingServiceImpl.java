@@ -255,7 +255,7 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
 
             // Normalize code/label
             String normCode = code.trim().toUpperCase();     // e.g., "MATH"
-            String label    = prettyLabelFromCode(normCode); // "Maths" / "Science" / ...
+            String label    = resolveSkillLabel(normCode); // "Maths" / "Science" / ...
 
             ms.setSkillCode(normCode);
             ms.setSkillLabel(label);
@@ -286,21 +286,35 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
     // Tiny utilities
     // --------------------------
 
-    private static String prettyLabelFromCode(String code) {
-        if (code == null) return "";
-        return switch (code.trim().toUpperCase()) {
-            case "MATH", "MATHS" -> "Maths";
-            case "SCIENCE"       -> "Science";
-            case "ENGLISH"       -> "English";
-            case "HINDI"         -> "Hindi";
-            case "KANNADA"       -> "Kannada";
-            case "SOCIAL", "SOCIAL STUDIES" -> "Social Studies";
-            case "PHYSICS"       -> "Physics";
-            case "CHEMISTRY"     -> "Chemistry";
-            case "BIOLOGY"       -> "Biology";
-            case "CODING"        -> "Coding";
-            case "ROBOTICS"      -> "Robotics";
-            default -> code.substring(0,1).toUpperCase() + code.substring(1).toLowerCase();
-        };
+    private String resolveSkillLabel(String skillCode) {
+        String hql = """
+            select distinct ms.skillLabel
+            from RDMentorSkill ms
+            where upper(ms.skillCode) = :code
+        """;
+
+        String label = s().createQuery(hql, String.class)
+                .setParameter("code", skillCode.toUpperCase())
+                .setMaxResults(1)
+                .uniqueResult();
+
+        // fallback only if DB empty (rare)
+        return label != null ? label : skillCode;
     }
+
+	@Override
+	public List<String> getDistinctSkillLabels() {
+		
+		String hql = """
+		        select distinct ms.skillLabel
+		        from RDMentorSkill ms
+		        where ms.skillLabel is not null
+		        order by ms.skillLabel
+		    """;
+
+		    return s()
+		            .createQuery(hql, String.class)
+		            .getResultList();
+		}
+
 }

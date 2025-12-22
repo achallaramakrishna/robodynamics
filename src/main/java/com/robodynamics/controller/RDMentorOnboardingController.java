@@ -78,6 +78,15 @@ public class RDMentorOnboardingController {
         model.addAttribute("hasProfile", status.isHasProfile());
         model.addAttribute("hasSkills",  status.isHasSkills());
         model.addAttribute("consentText", CONSENT_TEXT);
+        
+        List<RDMentorSkill> mentorSkills = onboardingService.getSkills(uid);
+
+        List<String> selectedSkillCodes = mentorSkills.stream()
+                .map(RDMentorSkill::getSkillCode)
+                .toList();
+
+        model.addAttribute("selectedSkillCodes", selectedSkillCodes);
+
 
         RDMentor mentor = onboardingService.getMentorByUserId(uid);
         model.addAttribute("mentor", mentor == null ? new RDMentor() : mentor);
@@ -91,7 +100,7 @@ public class RDMentorOnboardingController {
         model.addAttribute("resumePublic",     resumeMeta != null && resumeMeta.getRight());
 
         model.addAttribute("skills", onboardingService.getSkills(uid));
-        model.addAttribute("subjects", List.of("MATH","SCIENCE","ENGLISH","HINDI","KANNADA","CODING","ROBOTICS"));
+        model.addAttribute("subjects", onboardingService.getDistinctSkillLabels());
         model.addAttribute("boards", RDMentorSkill.SyllabusBoard.values());
 
         return VIEW;

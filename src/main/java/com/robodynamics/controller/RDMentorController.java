@@ -41,9 +41,6 @@ public class RDMentorController {
         }
 
         model.addAttribute("mentor", mentor);
-        model.addAttribute("skills", mentor.getSkills());
-        model.addAttribute("feedbacks", mentor.getFeedbacks());
-        model.addAttribute("recommendations", mentor.getRecommendations());
 
         model.addAttribute("title", mentor.getFullName() + " | Mentor Profile");
 

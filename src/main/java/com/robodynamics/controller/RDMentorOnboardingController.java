@@ -78,15 +78,6 @@ public class RDMentorOnboardingController {
         model.addAttribute("hasProfile", status.isHasProfile());
         model.addAttribute("hasSkills",  status.isHasSkills());
         model.addAttribute("consentText", CONSENT_TEXT);
-        
-        List<RDMentorSkill> mentorSkills = onboardingService.getSkills(uid);
-
-        List<String> selectedSkillCodes = mentorSkills.stream()
-                .map(RDMentorSkill::getSkillCode)
-                .toList();
-
-        model.addAttribute("selectedSkillCodes", selectedSkillCodes);
-
 
         RDMentor mentor = onboardingService.getMentorByUserId(uid);
         model.addAttribute("mentor", mentor == null ? new RDMentor() : mentor);
@@ -100,7 +91,52 @@ public class RDMentorOnboardingController {
         model.addAttribute("resumePublic",     resumeMeta != null && resumeMeta.getRight());
 
         model.addAttribute("skills", onboardingService.getSkills(uid));
-        model.addAttribute("subjects", onboardingService.getDistinctSkillLabels());
+        model.addAttribute("subjects", List.of(
+        	    // Core Academics
+        	    "MATH",
+        	    "SCIENCE",
+        	    "PHYSICS",
+        	    "CHEMISTRY",
+        	    "BIOLOGY",
+        	    "ENGLISH",
+        	    "HINDI",
+        	    "KANNADA",
+        	    "SOCIAL_SCIENCE",
+        	    "HISTORY",
+        	    "GEOGRAPHY",
+        	    "CIVICS",
+        	    "ECONOMICS",
+        	    "BUSINESS STUDIES",
+
+        	    // Competitive & Enrichment
+        	    "VEDIC_MATHS",
+        	    "OLYMPIAD_MATH",
+        	    "OLYMPIAD_SCIENCE",
+        	    "REASONING",
+        	    "APTITUDE",
+        	    "SPELLING_BEE",
+        	    "PUBLIC_SPEAKING",
+
+        	    // Technology & Coding
+        	    "CODING",
+        	    "PYTHON",
+        	    "JAVA",
+        	    "WEB_DEVELOPMENT",
+        	    "DATA_SCIENCE",
+        	    "AI_ML",
+
+        	    // Robotics & Hardware
+        	    "ROBOTICS",
+        	    "ARDUINO",
+        	    "RASPBERRY_PI",
+        	    "IOT",
+        	    "DRONES",
+
+        	    // Others (future-ready)
+        	    "FINANCIAL_LITERACY",
+        	    "DIGITAL_MARKETING",
+        	    "GAME_DEVELOPMENT"
+        	));
         model.addAttribute("boards", RDMentorSkill.SyllabusBoard.values());
 
         return VIEW;

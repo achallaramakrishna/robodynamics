@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -138,13 +139,23 @@ public class RDMentorOnboardingServiceImpl implements RDMentorOnboardingService 
     @Override
     @Transactional(readOnly = true)
     public List<RDMentorSkill> getSkills(int userId) {
+
         RDMentor mentor = findMentorByUserId(userId);
-        if (mentor == null) return List.of();
-        String hql = "from RDMentorSkill ms where ms.mentorId = :mid order by ms.skillLabel asc";
+        if (mentor == null) {
+            return Collections.emptyList();
+        }
+
+        String hql = """
+            from RDMentorSkill ms
+            where ms.mentor.mentorId = :mid
+            order by ms.skillCode asc
+        """;
+
         return s().createQuery(hql, RDMentorSkill.class)
                   .setParameter("mid", mentor.getMentorId())
                   .getResultList();
     }
+
 
     @Override
     @Transactional(readOnly = true)

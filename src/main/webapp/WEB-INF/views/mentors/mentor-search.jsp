@@ -67,7 +67,7 @@
 
 <body>
 
-	<jsp:include page="/header.jsp" />
+	<jsp:include page="/WEB-INF/views/header.jsp" />
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
@@ -313,7 +313,7 @@
 		}
 	</script>
 
-	<jsp:include page="/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 </body>
 </html>

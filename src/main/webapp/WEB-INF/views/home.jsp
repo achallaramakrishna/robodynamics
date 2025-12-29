@@ -5,7 +5,32 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Robo Dynamics — Learn & Teach</title>
+<!-- Basic Meta -->
+<title>Robo Dynamics | Competitions, Robotics, Coding & Olympiads</title>
+<meta name="description"
+      content="Robo Dynamics empowers students through competitions in Robotics, Coding, Maths, Spelling and Speaking. Proceeds support scholarships for merit government school students." />
+
+<!-- Open Graph / WhatsApp / Facebook -->
+<meta property="og:title"
+      content="Robo Dynamics 2026 Competitions | Learn • Compete • Empower" />
+
+<meta property="og:description"
+      content="Join Robo Dynamics 2026 Competitions in Robotics, Python Coding, Math, Spelling & Impromptu Speaking. Every registration supports scholarships for merit government school students." />
+
+<meta property="og:url"
+      content="https://robodynamics.in/" />
+
+<meta property="og:type"
+      content="website" />
+
+<meta property="og:image"
+      content="https://robodynamics.in/images/og/robodynamics-competitions.jpg" />
+
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Optional but good -->
+<meta property="og:site_name" content="Robo Dynamics" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
   <style>
@@ -31,61 +56,241 @@
 
 <jsp:include page="header.jsp"/>
 <!-- Upcoming Webinar Section -->
-<section class="py-4" style="background:#fff7e6; border-bottom:2px solid #ffe0b3;">
-  <div class="container">
-    <div class="row align-items-center g-4">
+<section class="py-4" style="background:linear-gradient(135deg,#0d47a1,#1b5e20); color:#fff;">
+  <div class="container text-center">
 
-<!-- Webinar Section -->
-<section class="container py-4">
-  <div class="row align-items-center section-box shadow-sm p-4 rounded">
+    <span class="badge bg-warning text-dark mb-2 px-3 py-1 fs-6">
+      Robo Dynamics 2026
+    </span>
 
-    <!-- Left: Webinar Info -->
-    <div class="col-md-8">
-      <span class="badge bg-warning text-dark mb-2">Upcoming Free Webinar</span>
+    <h2 class="fw-bold mb-1">
+      Robo Dynamics 2026 Competitions
+    </h2>
 
-      <h3 class="fw-bold mb-2">AI Impact on Parents and Kids</h3>
+    <p class="fw-semibold mb-2">
+      Excellence • Education • Empathy
+    </p>
 
-      <p class="mb-1">
-        <i class="bi bi-calendar-event"></i>
-        <strong>Sunday, December 7</strong> · 10:00 AM – 11:00 AM IST
-      </p>
+    <!-- Dates -->
+    <p class="fw-bold mb-2 text-warning">
+      🗓️ January 31 & February 1, 2026
+    </p>
 
-      <p class="mb-1">
-        <i class="bi bi-camera-video"></i>
-        Google Meet:
-        <a href="https://meet.google.com/nex-ttro-jec" target="_blank">
-          meet.google.com/nex-ttro-jec
-        </a>
-      </p>
+    <p class="mx-auto mb-3" style="max-width:880px;">
+      Every competition goes beyond winning medals.
+      <strong>All proceeds support scholarships for merit students from
+      Government Schools</strong>, helping them continue their education.
+    </p>
 
-      <p class="mb-0">
-        <i class="bi bi-info-circle"></i>
-        Understanding AI • Parenting in the Digital Age • Safe & Smart Tech Use
-      </p>
+    <!-- Pricing Cards -->
+    <div class="row justify-content-center g-3 mb-3">
+
+      <div class="col-md-5">
+        <div class="card shadow border-0">
+          <div class="card-body text-dark py-3">
+            <h5 class="fw-bold text-primary mb-1">Junior</h5>
+            <small><strong>Grades:</strong> 3 – 6</small>
+            <div class="fs-4 fw-bold text-success">₹ 750</div>
+            <small class="text-muted">per competition</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="card shadow border-0">
+          <div class="card-body text-dark py-3">
+            <h5 class="fw-bold text-primary mb-1">Senior</h5>
+            <small><strong>Grades:</strong> 7 – 10</small>
+            <div class="fs-4 fw-bold text-success">₹ 1,250</div>
+            <small class="text-muted">per competition</small>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Right: CTA Buttons -->
-    <div class="col-md-4 text-md-end text-center">
+    <!-- Flow -->
+   <p class="mb-3">
+	  <strong>How it works:</strong>
+	  <!-- Parent Registration Manual -->
+<div class="mt-3">
+<a href="${pageContext.request.contextPath}/manuals/RoboDynamicsCompetitionRegistrationManual.pdf"
+   target="_blank"
+   class="btn btn-outline-light fw-semibold">
+  <i class="bi bi-download"></i>
+  Download Parent Registration Guide (PDF)
+</a>
 
-      <a href="https://forms.gle/DYs1ob1MoWAcMt867"
-         target="_blank"
-         class="btn btn-warning text-dark btn-lg mb-2 w-100 cta-btn"
-         style="font-weight:700;">
-        <i class="bi bi-pencil-square"></i> Register Now
+
+  <p class="small mt-1 text-light">
+    Step-by-step instructions to register parent & child and enrol in competitions.
+  </p>
+</div>
+	  
+	  Click Register → Login or Signup → Choose Competitions → Participate
+	</p>
+
+
+    <!-- CTAs -->
+    <div class="d-flex flex-column flex-md-row justify-content-center gap-2">
+
+      <a href="${pageContext.request.contextPath}/competitions/register"
+		   class="btn btn-warning btn-lg fw-bold px-4">
+		  <i class="bi bi-trophy"></i> Register for Competitions
+		</a>
+
+    </div>
+
+    <!-- FAQ (secondary CTA) -->
+    <div class="mt-3">
+      <a href="${pageContext.request.contextPath}/competitions/faq"
+         class="btn btn-outline-light btn-sm fw-semibold">
+        <i class="bi bi-question-circle"></i> View Competition FAQs
       </a>
-
-      <a href="https://meet.google.com/nex-ttro-jec"
-         target="_blank"
-         class="btn btn-outline-dark btn-lg w-100 cta-btn"
-         style="font-weight:700;">
-        <i class="bi bi-camera-video"></i> Join Google Meet
-      </a>
-
     </div>
 
   </div>
 </section>
 
+
+    
+<!-- COMPETITIONS CARDS -->
+<section class="py-1 bg-light">
+  <div class="container">
+
+    <div class="text-center mb-4">
+      <span class="badge bg-success mb-2">Competitions 2026</span>
+      <h2 class="fw-bold">Explore Our Competitions</h2>
+      <p class="text-muted">
+        Skill-based challenges designed to boost confidence, logic, and creativity.
+      </p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Spelling Bee -->
+      <div class="col-md-4">
+        <div class="rd-card h-100">
+          <div class="rd-thumb">
+            <img src="${pageContext.request.contextPath}/images/competitions/spelling.png"
+                 alt="Spelling Bee Competition">
+          </div>
+          <div class="rd-body">
+            <h5 class="rd-title">📝 Spelling Bee</h5>
+            <p class="small text-muted">
+              Vocabulary, pronunciation & stage confidence.
+            </p>
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge bg-info">Online</span>
+              <span class="badge bg-secondary">Junior & Senior</span>
+            </div>
+            <a href="${pageContext.request.contextPath}/competitions"
+               class="btn btn-outline-primary w-100">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Math Contest -->
+      <div class="col-md-4">
+        <div class="rd-card h-100">
+          <div class="rd-thumb">
+            <img src="${pageContext.request.contextPath}/images/competitions/math.png"
+                 alt="Math Contest">
+          </div>
+          <div class="rd-body">
+            <h5 class="rd-title">🔢 Math Contest</h5>
+            <p class="small text-muted">
+              Speed, accuracy & logical problem solving.
+            </p>
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge bg-warning text-dark">Offline</span>
+              <span class="badge bg-secondary">Grade-wise</span>
+            </div>
+            <a href="${pageContext.request.contextPath}/competitions"
+               class="btn btn-outline-primary w-100">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Python Coding -->
+      <div class="col-md-4">
+        <div class="rd-card h-100">
+          <div class="rd-thumb">
+            <img src="${pageContext.request.contextPath}/images/competitions/coding.png"
+                 alt="Python Coding Contest">
+          </div>
+          <div class="rd-body">
+            <h5 class="rd-title">💻 Python Coding</h5>
+            <p class="small text-muted">
+              Logical thinking through real coding challenges.
+            </p>
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge bg-success">Online</span>
+              <span class="badge bg-secondary">Python Basics</span>
+            </div>
+            <a href="${pageContext.request.contextPath}/competitions"
+               class="btn btn-outline-primary w-100">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Robotics -->
+      <div class="col-md-6">
+        <div class="rd-card h-100">
+          <div class="rd-thumb">
+            <img src="${pageContext.request.contextPath}/images/competitions/robotics.png"
+                 alt="Robotics Competition">
+          </div>
+          <div class="rd-body">
+            <h5 class="rd-title">🤖 Robotics Contest</h5>
+            <p class="small text-muted">
+              Design, build & operate robots for real challenges.
+            </p>
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge bg-danger">Offline</span>
+              <span class="badge bg-secondary">Hands-on</span>
+            </div>
+            <a href="${pageContext.request.contextPath}/competitions"
+               class="btn btn-outline-primary w-100">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impromptu Speaking -->
+      <div class="col-md-6">
+        <div class="rd-card h-100">
+          <div class="rd-thumb">
+            <img src="${pageContext.request.contextPath}/images/competitions/speaking.png"
+                 alt="Impromptu Speaking Contest">
+          </div>
+          <div class="rd-body">
+            <h5 class="rd-title">🎤 Impromptu Speaking</h5>
+            <p class="small text-muted">
+              Confidence, clarity & quick thinking.
+            </p>
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge bg-primary">Online</span>
+              <span class="badge bg-secondary">Individual</span>
+            </div>
+            <a href="${pageContext.request.contextPath}/competitions"
+               class="btn btn-outline-primary w-100">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- Hero -->
 <section class="hero" aria-label="Choose your journey">

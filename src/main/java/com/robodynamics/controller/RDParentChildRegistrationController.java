@@ -79,7 +79,7 @@ public class RDParentChildRegistrationController {
 
             model.addAttribute("successMessage",
                     "Parent and Child registration successful! You can now log in to Robo Dynamics LMS.");
-            return "redirect:/login?registered=true";
+            return "redirect:/login?registered=true&redirect=/competitions/register";
 
         } catch (Exception e) {
             e.printStackTrace();

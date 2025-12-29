@@ -53,4 +53,10 @@ public class RDHomeController {
     public String competitions() {
     	return "competitions";
     }
+    
+    @GetMapping("/competitions/faq")
+    public String competitionFaq() {
+        return "competitions-faq";
+    }
+
 }

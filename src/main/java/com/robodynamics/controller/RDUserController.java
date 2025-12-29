@@ -95,11 +95,22 @@ public class RDUserController {
     }
 
     @GetMapping("/login")
-    public String loginDisplay(Model m, HttpSession session) {
+    public String loginDisplay(
+            @RequestParam(value = "redirect", required = false) String redirect,
+            Model m,
+            HttpSession session) {
+
         RDUser rdUser = new RDUser();
         m.addAttribute("rdUser", rdUser);
+
+        // 🔹 store redirect if present
+        if (redirect != null && !redirect.isBlank()) {
+            session.setAttribute("redirectUrl", redirect);
+        }
+
         return "login";
     }
+
 
     @GetMapping("/logout")
     public String logout(Model m, HttpSession session) {

@@ -102,6 +102,21 @@
 <div class="container mt-4 mb-5">
 
     <h2 class="page-title text-center mb-4">Explore Our Competitions</h2>
+    <!-- ================= REGISTER CTA (TOP) ================= -->
+	<div class="text-center mb-4">
+	
+	    <p class="mb-3">
+	        <strong>How it works:</strong>
+	        Register → Login or Signup → Choose Competitions → Participate
+	    </p>
+	
+	    <a href="${pageContext.request.contextPath}/competitions/register"
+	       class="btn btn-warning btn-lg fw-bold px-5 shadow">
+	        🏆 Register for Competitions
+	    </a>
+	
+	</div>
+	    
 
     <!-- ================== COMPETITION TILES ================== -->
     <div class="row g-4 mb-5 text-center">
@@ -156,6 +171,21 @@
         </div>
 
     </div>
+    
+    <!-- ================= REGISTER CTA (BOTTOM) ================= -->
+<div class="text-center mt-5">
+
+    <p class="fw-semibold mb-2">
+        Ready to participate in Robo Dynamics Competitions 2025?
+    </p>
+
+    <a href="${pageContext.request.contextPath}/competitions/register"
+       class="btn btn-primary btn-lg fw-bold px-5">
+        Register Now
+    </a>
+
+</div>
+    
 
 </div>
 
@@ -315,27 +345,6 @@ function math() {
     and attempting timed mock tests.</p>`;
 }
 
-function coding() {
-    general.innerHTML = `<p>The <b>Python Coding Contest</b> tests programming logic,
-    problem-solving ability, and real-world coding skills using Python.</p>`;
-
-    rules.innerHTML = `<ul>
-        <li>Python language only</li>
-        <li>No plagiarism or AI tools</li>
-        <li>Code evaluated for logic & efficiency</li>
-    </ul>`;
-
-    prep.innerHTML = `<ul>
-        <li>Practice loops, functions, lists</li>
-        <li>Solve logic-based coding problems</li>
-        <li>Improve debugging skills</li>
-    </ul>`;
-
-    faq.innerHTML = `
-        <b>Is prior experience required?</b> Basic Python knowledge recommended.<br>
-        <b>Is internet allowed?</b> No, unless stated.
-    `;
-}
 
 function robotics() {
 

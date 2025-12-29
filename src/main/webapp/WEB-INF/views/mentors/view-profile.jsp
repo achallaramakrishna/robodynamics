@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +12,13 @@
 
     <title>${mentor.fullName} | Mentor Profile | Robo Dynamics</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
           rel="stylesheet">
 </head>
 
 <body class="bg-light">
 
-<jsp:include page="../header.jsp"/>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
 
 <div class="container my-4">
 
@@ -28,44 +28,36 @@
         ← Back to Mentors
     </button>
 
-    <!-- Mentor Header -->
+    <!-- ================= Mentor Header ================= -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="row align-items-center">
 
-                <!-- Photo -->
                 <div class="col-md-3 text-center mb-3">
                     <img src="${mentor.photoUrl}"
                          class="img-fluid rounded-circle border"
-                         style="max-height: 180px; width: 180px; object-fit: cover;">
+                         style="height:180px;width:180px;object-fit:cover;">
                 </div>
 
-                <!-- Info -->
                 <div class="col-md-9">
-
                     <h2 class="fw-bold">${mentor.fullName}</h2>
                     <h5 class="text-muted">${mentor.headline}</h5>
 
-                    <p class="mt-3 mb-1"><i class="bi bi-geo-alt"></i> ${mentor.city}</p>
-
-                    <p class="mb-1"><strong>Experience:</strong> 
-                        ${mentor.experienceYears} years
-                    </p>
-
-                    <p class="mb-1">
-                        <strong>Boards:</strong> ${mentor.boardsSupported}
-                    </p>
-
-                    <p class="mb-1">
-                        <strong>Modes:</strong> ${mentor.modes}
-                    </p>
+                    <p class="mt-3 mb-1"><strong>City:</strong> ${mentor.city}</p>
+                    <p class="mb-1"><strong>Experience:</strong> ${mentor.experienceYears} years</p>
+                    <p class="mb-1"><strong>Boards:</strong> ${mentor.boardsSupported}</p>
+                    <p class="mb-1"><strong>Modes:</strong> ${mentor.modes}</p>
 
                     <div class="mt-3">
                         <span class="badge bg-success">⭐ Rating: ${mentor.avgRating}</span>
-                        <span class="badge bg-primary">👨‍🎓 Students: ${mentor.studentCount}</span>
-                        <span class="badge bg-warning text-dark">🎥 Demos: ${mentor.demoCount}</span>
-                        <span class="badge bg-info text-dark">👍 Recos: ${mentor.recommendationCount}</span>
+                        <span class="badge bg-primary">Students: ${mentor.studentCount}</span>
+                        <span class="badge bg-warning text-dark">Demos: ${mentor.demoCount}</span>
+                        <span class="badge bg-info text-dark">Recommendations: ${mentor.recommendationCount}</span>
                     </div>
+
+                    <c:if test="${mentor.isVerified}">
+                        <span class="badge bg-success mt-2">Verified Mentor</span>
+                    </c:if>
 
                     <c:if test="${not empty mentor.linkedinUrl}">
                         <a href="${mentor.linkedinUrl}" target="_blank"
@@ -73,44 +65,68 @@
                             LinkedIn Profile
                         </a>
                     </c:if>
-
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Skills -->
+    <!-- ================= About Mentor ================= -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">About the Mentor</h4>
+        </div>
+        <div class="card-body">
+            <c:if test="${not empty mentor.bio}">
+                <p>${mentor.bio}</p>
+            </c:if>
+
+            <c:if test="${not empty mentor.specializations}">
+                <p><strong>Specializations:</strong> ${mentor.specializations}</p>
+            </c:if>
+        </div>
+    </div>
+
+    <!-- ================= Teaching Preferences ================= -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Teaching Preferences</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6 mb-2"><strong>Grade Range:</strong> ${mentor.gradeRange}</div>
+                <div class="col-md-6 mb-2"><strong>Experience:</strong> ${mentor.experienceYears} years</div>
+                <div class="col-md-6 mb-2"><strong>Boards:</strong> ${mentor.boardsSupported}</div>
+                <div class="col-md-6 mb-2"><strong>Mode:</strong> ${mentor.modes}</div>
+            </div>
+
+            <c:if test="${not empty mentor.teachingStyle}">
+                <hr>
+                <p><strong>Teaching Style:</strong><br/>${mentor.teachingStyle}</p>
+            </c:if>
+        </div>
+    </div>
+
+    <!-- ================= Skills ================= -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
             <h4 class="mb-0">Teaching Skills</h4>
         </div>
-
         <div class="card-body">
             <c:choose>
                 <c:when test="${empty skills}">
                     <p class="text-muted">No skills added.</p>
                 </c:when>
-
                 <c:otherwise>
                     <div class="row">
                         <c:forEach var="skill" items="${skills}">
                             <div class="col-md-6">
                                 <div class="border rounded p-3 mb-3">
-
-                                    <h5 class="fw-bold">
-                                        ${skill.skillLabel}
+                                    <h5>${skill.skillLabel}
                                         <small class="text-muted">(${skill.skillLevel})</small>
                                     </h5>
-
-                                    <p class="mb-1 text-muted">
-                                        <strong>Grades:</strong> 
-                                        ${skill.gradeMin} – ${skill.gradeMax}
-                                    </p>
-
-                                    <p class="mb-0 text-muted">
-                                        <strong>Board:</strong> ${skill.syllabusBoard}
-                                    </p>
-
+                                    <p class="mb-1"><strong>Grades:</strong> ${skill.gradeMin} – ${skill.gradeMax}</p>
+                                    <p class="mb-0"><strong>Board:</strong> ${skill.syllabusBoard}</p>
                                 </div>
                             </div>
                         </c:forEach>
@@ -120,79 +136,61 @@
         </div>
     </div>
 
-    <!-- Feedback Section -->
+    <!-- ================= Feedback ================= -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-success text-white">
             <h4 class="mb-0">Parent / Student Feedback</h4>
         </div>
-
         <div class="card-body">
-
             <c:choose>
                 <c:when test="${empty feedbacks}">
                     <p class="text-muted">No feedback received yet.</p>
                 </c:when>
-
                 <c:otherwise>
                     <c:forEach var="fb" items="${feedbacks}">
                         <div class="card mb-3">
                             <div class="card-body">
-
                                 <h5 class="text-warning">⭐ ${fb.rating} / 5</h5>
-                                <p class="mt-2">${fb.comment}</p>
-
+                                <p>${fb.comment}</p>
                                 <small class="text-muted">
-                                    - ${fb.reviewerName}
-                                    (<fmt:formatDate value="${fb.createdAt}" pattern="dd MMM yyyy"/>)
+                                    - ${fb.reviewerName},
+                                    <fmt:formatDate value="${fb.createdAt}" pattern="dd MMM yyyy"/>
                                 </small>
-
                             </div>
                         </div>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
-
         </div>
     </div>
 
-    <!-- Recommendation Section -->
+    <!-- ================= Contact & Status ================= -->
     <div class="card shadow-sm mb-5">
-        <div class="card-header bg-info text-white">
-            <h4 class="mb-0">Recommendations</h4>
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">Contact & Status</h4>
         </div>
-
         <div class="card-body">
+            <p><strong>Email:</strong> ${mentor.email}</p>
+            <p><strong>Mobile:</strong> ${mentor.mobile}</p>
 
-            <c:choose>
-                <c:when test="${empty recommendations}">
-                    <p class="text-muted">No recommendations yet.</p>
-                </c:when>
-
-                <c:otherwise>
-                    <c:forEach var="rec" items="${recommendations}">
-                        <div class="card mb-3">
-                            <div class="card-body">
-
-                                <p>${rec.message}</p>
-                                <small class="text-muted">
-                                    - ${rec.recommenderName} (${rec.relationship})
-                                </small>
-
-                            </div>
-                        </div>
-                    </c:forEach>
-                </c:otherwise>
-            </c:choose>
-
+            <p>
+                <strong>Status:</strong>
+                <c:choose>
+                    <c:when test="${mentor.isActive == 1}">
+                        <span class="badge bg-success">Active</span>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="badge bg-secondary">Inactive</span>
+                    </c:otherwise>
+                </c:choose>
+            </p>
         </div>
     </div>
 
 </div>
 
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

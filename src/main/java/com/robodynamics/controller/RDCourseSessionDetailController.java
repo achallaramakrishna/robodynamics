@@ -43,6 +43,7 @@ import com.robodynamics.model.RDUser;
 import com.robodynamics.model.RDUserPoints;
 import com.robodynamics.service.Judge0Service;
 import com.robodynamics.service.RDAssignmentService;
+import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
@@ -57,6 +58,10 @@ import com.robodynamics.wrapper.CourseSessionDetailJson;
 @Controller
 @RequestMapping("/sessiondetail")
 public class RDCourseSessionDetailController {
+	
+	@Autowired
+	private RDCourseCategoryService courseCategoryService;
+
 	
     @Autowired
     private RDCourseService courseService;
@@ -163,36 +168,39 @@ public class RDCourseSessionDetailController {
        return "redirect:/sessiondetail/list?courseId=" + courseId;
    }
    
-    @GetMapping("/list")
-    public String listCourseSessionDetails(@RequestParam(required = false) Integer courseId, Model model) {
-        List<RDCourseSessionDetail> courseSessionDetails = null;
+   @GetMapping("/list")
+   public String listCourseSessionDetails(
+           @RequestParam(required = false) Integer categoryId,
+           @RequestParam(required = false) Integer courseId,
+           Model model) {
 
-        // Step 1: Fetch all courses for the course selection dropdown
-        List<RDCourse> courses = courseService.getRDCourses();
-        model.addAttribute("courses", courses);
+       // 1️⃣ Load all categories
+       model.addAttribute(
+           "categories",
+           courseCategoryService.getRDCourseCategories()
+       );
 
-        // Step 2: If courseId is present, fetch all course sessions and their session details
-        if (courseId != null && courseId > 0) {
-             // Step 3: Fetch all session details for all course sessions related to the course
-            courseSessionDetails = courseSessionDetailService.getRDCourseSessionDetails(courseId);
-            System.out.println("helllo.................");
-            for(RDCourseSessionDetail detail : courseSessionDetails) {
-            	System.out.println(detail.getSessionDetailId() + "\t" + detail.getCourseSession().getSessionId() + "\t" + detail.getCourse().getCourseId());
-            }
-        }
+       // 2️⃣ Load courses (filtered by category)
+       List<RDCourse> courses;
+       if (categoryId != null && categoryId > 0) {
+           courses = courseService.getCoursesByCategoryId(categoryId);
+       } else {
+           courses = courseService.getRDCourses();
+       }
+       model.addAttribute("courses", courses);
 
-        // Step 4: Handle case when no session details are found
-        if (courseSessionDetails == null || courseSessionDetails.isEmpty()) {
-            model.addAttribute("message", "No course session details available for the selected course.");
-        } else {
-            model.addAttribute("courseSessionDetails", courseSessionDetails);
-        }
+       // 3️⃣ Load session details if course selected
+       if (courseId != null && courseId > 0) {
+           List<RDCourseSessionDetail> details =
+                   courseSessionDetailService.getRDCourseSessionDetails(courseId);
+           model.addAttribute("courseSessionDetails", details);
+       }
 
-        // Step 5: Add the selected courseId to the model for UI use
-        model.addAttribute("selectedCourseId", courseId != null ? courseId : 0);
+       model.addAttribute("selectedCategoryId", categoryId);
+       model.addAttribute("selectedCourseId", courseId);
 
-        return "coursesessiondetails/listCourseSessionDetails";
-    }
+       return "coursesessiondetails/listCourseSessionDetails";
+   }
 
     
     @GetMapping("/getCourseSessions")

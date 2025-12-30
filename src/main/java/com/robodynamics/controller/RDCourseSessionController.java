@@ -2,6 +2,7 @@ package com.robodynamics.controller;
 
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class RDCourseSessionController {
 
     @Autowired
     private RDCourseService courseService;  // Service to manage courses
+    
+    @Autowired
+	private RDCourseCategoryService courseCategoryService;
 
     @Autowired
     private RDCourseSessionService courseSessionService;  // Service to manage course sessions
@@ -71,27 +75,39 @@ public class RDCourseSessionController {
      * List all units and their child sessions for a selected course.
      */
     @GetMapping("/list")
-    public String listCourseSessions(@RequestParam(required = false) Integer courseId, Model model) {
-        List<RDCourseSession> sessions = null;
+    public String listCourseSessions(
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) Integer courseId,
+            Model model) {
 
-        // Fetch all courses for the course selection dropdown
-        List<RDCourse> courses = courseService.getRDCourses();
+        // 1. Load all categories
+        model.addAttribute(
+            "categories",
+            courseCategoryService.getRDCourseCategories()
+        );
+
+        // 2. Load courses (filtered by category if selected)
+        List<RDCourse> courses;
+        if (categoryId != null && categoryId > 0) {
+            courses = courseService.getCoursesByCategoryId(categoryId);
+        } else {
+            courses = courseService.getRDCourses();
+        }
         model.addAttribute("courses", courses);
 
+        // 3. Load sessions if course selected
         if (courseId != null && courseId > 0) {
-            // Fetch units and their child sessions
-        	sessions = courseSessionService.getCourseSessionsByCourseId(courseId);
-        }
-
-        if (sessions == null || sessions.isEmpty()) {
-            model.addAttribute("message", "No course units available for the selected course.");
-        } else {
+            List<RDCourseSession> sessions =
+                    courseSessionService.getCourseSessionsByCourseId(courseId);
             model.addAttribute("sessions", sessions);
         }
 
-        model.addAttribute("selectedCourseId", courseId != null ? courseId : 0);
+        model.addAttribute("selectedCategoryId", categoryId);
+        model.addAttribute("selectedCourseId", courseId);
+
         return "coursesessions/listCourseSessions";
     }
+
 
     /**
      * Show form to add a new unit.

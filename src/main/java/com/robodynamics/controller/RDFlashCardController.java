@@ -13,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDFlashCard;
@@ -24,6 +26,9 @@ import com.robodynamics.wrapper.RDFlashCardJson;
 @Controller
 @RequestMapping("/flashcards")
 public class RDFlashCardController {
+	
+	@Autowired
+	private RDCourseCategoryService courseCategoryService;
 
     @Autowired
     private RDFlashCardService rdFlashCardService;
@@ -39,6 +44,37 @@ public class RDFlashCardController {
 
     @Autowired
     private RDCourseSessionDetailService courseSessionDetailService;
+    
+    @GetMapping("/manageMedia")   // GET /robodynamics/quizquestions/manageMedia
+    public String manageMedia(Model model) {
+        // TODO: replace with real service call
+        List<RDCourse> courses = rdCourseService.getRDCourses();
+        model.addAttribute("courses", courses != null ? courses : java.util.Collections.emptyList());
+
+        model.addAttribute("mediaList", java.util.Collections.emptyList());
+        return "flashcards/flashcard-media-manager"; // resolves to /WEB-INF/views/quizMediaManager.jsp
+    } 
+    
+    @GetMapping("/getCoursesByCategory")
+    @ResponseBody
+    public Map<String, Object> getCoursesByCategory(
+            @RequestParam("categoryId") int categoryId) {
+
+        List<RDCourse> courses = rdCourseService.getCoursesByCategoryId(categoryId);
+
+        // Lightweight DTO to avoid LazyInitializationException
+        List<Map<String, Object>> dto = courses.stream().map(c -> {
+            Map<String, Object> m = new HashMap<>();
+            m.put("courseId", c.getCourseId());
+            m.put("courseName", c.getCourseName());
+            return m;
+        }).toList();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("courses", dto);
+        return response;
+    }
+
 
     @GetMapping("/start/{courseSessionDetailId}")
     public String startFlashcardSessionByCourseSessionDetailId(@PathVariable("courseSessionDetailId") int courseSessionDetailId, Model model) {
@@ -51,7 +87,7 @@ public class RDFlashCardController {
         }
 
         // Retrieve the flashcard set associated with the course session detail
-        List<RDFlashCardSet> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
+        List<RDFlashcardSetDTO> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
         if (flashcardSets == null || flashcardSets.isEmpty()) {
             model.addAttribute("error", "No flashcard sets associated with this course session detail.");
             return "flashcards/flashcard-viewer";
@@ -101,9 +137,9 @@ public class RDFlashCardController {
         List<RDFlashCardSet> flashcardSets = rdFlashCardSetService.getRDFlashCardSets();
         model.addAttribute("flashcardSets", flashcardSets);
         
-        // Fetch all courses from the service layer
-        List<RDCourse> courses = rdCourseService.getRDCourses();
-        model.addAttribute("courses", courses);
+        // Load only categories initially
+        List<RDCourseCategory> categories = courseCategoryService.getRDCourseCategories();
+        model.addAttribute("categories", categories);
 
         return "flashcards/listFlashCards";
     }
@@ -132,7 +168,9 @@ public class RDFlashCardController {
                 flashcard.setQuestion(flashcardJson.getQuestion());
                 flashcard.setAnswer(flashcardJson.getAnswer());
                 flashcard.setHint(flashcardJson.getHint());
-                flashcard.setImageUrl(flashcardJson.getImageUrl());
+                flashcard.setQuestionImageUrl(flashcardJson.getQuestionImageUrl());
+                flashcard.setAnswerImageUrl(flashcardJson.getAnswerImageUrl());
+
                 flashcard.setExample(flashcardJson.getExample());
                 flashcard.setInsight(flashcardJson.getInsight());
                 
@@ -189,7 +227,7 @@ public class RDFlashCardController {
     @GetMapping("/getFlashcardSetsBySessionDetail")
     @ResponseBody
     public Map<String, Object> getFlashcardSetsByCourseSessionDetail(@RequestParam("courseSessionDetailId") int courseSessionDetailId) {
-        List<RDFlashCardSet> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
+        List<RDFlashcardSetDTO> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
         Map<String, Object> response = new HashMap<>();
         response.put("flashcardSets", flashcardSets);
         return response;

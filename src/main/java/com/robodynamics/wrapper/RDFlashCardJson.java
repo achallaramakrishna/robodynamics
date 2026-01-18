@@ -7,7 +7,8 @@ public class RDFlashCardJson {
     private String question;
     private String answer;
     private String hint;
-    private String imageUrl;
+    private String questionImageUrl;
+    private String answerImageUrl;
     private String example; // Matches the JSON's "example" field
     private String insight; // Matches the JSON's "insight" field
     private String insightType; // For insight type, such as "NEET", "JEE", etc.
@@ -38,15 +39,25 @@ public class RDFlashCardJson {
         this.hint = hint;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+   
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    public String getQuestionImageUrl() {
+		return questionImageUrl;
+	}
 
-    public String getExample() {
+	public void setQuestionImageUrl(String questionImageUrl) {
+		this.questionImageUrl = questionImageUrl;
+	}
+
+	public String getAnswerImageUrl() {
+		return answerImageUrl;
+	}
+
+	public void setAnswerImageUrl(String answerImageUrl) {
+		this.answerImageUrl = answerImageUrl;
+	}
+
+	public String getExample() {
         return example;
     }
 

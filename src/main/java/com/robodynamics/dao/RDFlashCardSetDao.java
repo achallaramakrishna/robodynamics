@@ -1,6 +1,8 @@
 package com.robodynamics.dao;
 
 import java.util.List;
+
+import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDFlashCardSet;
 
 public interface RDFlashCardSetDao {
@@ -15,5 +17,5 @@ public interface RDFlashCardSetDao {
 
 	RDFlashCardSet getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId);
 
-	List<RDFlashCardSet> findByCourseSessionDetailId(int courseSessionDetailId);
+	List<RDFlashcardSetDTO> findByCourseSessionDetailId(int courseSessionDetailId);
 }

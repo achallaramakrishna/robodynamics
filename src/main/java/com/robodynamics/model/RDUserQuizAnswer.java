@@ -17,6 +17,7 @@ public class RDUserQuizAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "answer_id")
     private int answerId;
 
     @Column(name = "quiz_id")

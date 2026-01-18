@@ -12,7 +12,10 @@ public interface RDCourseSessionDetailDao {
 
 	public RDCourseSessionDetail getRDCourseSessionDetail(int courseSessionDetailId);
 	
-	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int courseId);
+	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int sessionId);
+	
+	public List < RDCourseSessionDetail > getRDCourseSessionDetailsByCourseId(int courseId);
+
 	
     public void deleteRDCourseSessionDetail(int id);
     
@@ -28,6 +31,10 @@ public interface RDCourseSessionDetailDao {
     List<RDCourseSessionDetail> findByTierLevelOrderedByTierOrder(RDCourseSessionDetail.TierLevel tierLevel);
     
     RDCourseSessionDetail getByOfferingId(int courseOfferingId);
+
+	public Integer countByType(int sessionId, String string);
+
+	public List<RDCourseSessionDetail> getBySessionAndType(int sessionId, String string);
 
     
 }

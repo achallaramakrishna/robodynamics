@@ -25,8 +25,11 @@ public class RDFlashCard {
     @Column(name = "hint")
     private String hint;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "question_image_url")
+    private String questionImageUrl;
+    
+    @Column(name = "answer_image_url")
+    private String answerImageUrl;
     
     @Column(name = "example")
     private String example; // New field for storing an example
@@ -86,15 +89,25 @@ public class RDFlashCard {
         this.hint = hint;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+   
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    public String getQuestionImageUrl() {
+		return questionImageUrl;
+	}
 
-    public RDFlashCardSet getFlashcardSet() {
+	public void setQuestionImageUrl(String questionImageUrl) {
+		this.questionImageUrl = questionImageUrl;
+	}
+
+	public String getAnswerImageUrl() {
+		return answerImageUrl;
+	}
+
+	public void setAnswerImageUrl(String answerImageUrl) {
+		this.answerImageUrl = answerImageUrl;
+	}
+
+	public RDFlashCardSet getFlashcardSet() {
         return flashcardSet;
     }
 

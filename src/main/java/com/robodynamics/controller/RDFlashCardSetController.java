@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +15,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDFlashCardSet;
+import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
@@ -26,6 +30,10 @@ import com.robodynamics.service.RDFlashCardSetService;
 @Controller
 @RequestMapping("/flashcardsets")
 public class RDFlashCardSetController {
+	
+	@Autowired
+	private RDCourseCategoryService courseCategoryService;
+
 
     @Autowired
     private RDFlashCardSetService rdFlashCardSetService;
@@ -46,21 +54,14 @@ public class RDFlashCardSetController {
      */
     @GetMapping("/flashcard-set-list")
     public String listFlashcardSets(Model model) {
-        // Fetch all flashcard sets from the service layer
-        List<RDFlashCardSet> flashCardSets = rdFlashCardSetService.getRDFlashCardSets();
-        
-        // Fetch all courses from the service layer
-        List<RDCourse> courses = rdCourseService.getRDCourses();
-        
-     // Add the list of courses to the model for course information
-        model.addAttribute("courses", courses);
 
-        // Add the list of flashcard sets to the model so they can be accessed in the view
-        model.addAttribute("flashcardSets", flashCardSets);
+        // Load only categories initially
+        List<RDCourseCategory> categories = courseCategoryService.getRDCourseCategories();
+        model.addAttribute("categories", categories);
 
-        // Return the view name for listing flashcard sets
         return "flashcardsets/flashcard-set-list";
     }
+
 
     // Display a form to add a new flashcard set
     @GetMapping("/add")
@@ -163,12 +164,24 @@ public class RDFlashCardSetController {
 
     @GetMapping("/getCourseSessionDetails")
     @ResponseBody
-    public Map<String, Object> getCourseSessionDetails(@RequestParam("courseSessionId") int courseSessionId) {
-        List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(courseSessionId);
+    public Map<String, Object> getCourseSessionDetails(
+            @RequestParam("courseSessionId") int courseSessionId) {
+
+        List<RDCourseSessionDetail> details =
+            courseSessionDetailService.findSessionDetailsBySessionId(courseSessionId);
+
+        List<Map<String, Object>> dtoList = details.stream().map(d -> {
+            Map<String, Object> m = new HashMap<>();
+            m.put("courseSessionDetailId", d.getCourseSessionDetailId());
+            m.put("topic", d.getTopic());
+            return m;
+        }).toList();
+
         Map<String, Object> response = new HashMap<>();
-        response.put("sessionDetails", sessionDetails);
+        response.put("sessionDetails", dtoList);
         return response;
     }
+
     
 
     /**
@@ -177,9 +190,30 @@ public class RDFlashCardSetController {
     @GetMapping("/getFlashcardSetsBySessionDetail")
     @ResponseBody
     public Map<String, Object> getFlashcardSetsByCourseSessionDetail(@RequestParam("courseSessionDetailId") int courseSessionDetailId) {
-        List<RDFlashCardSet> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
+        List<RDFlashcardSetDTO> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
         Map<String, Object> response = new HashMap<>();
         response.put("flashcardSets", flashcardSets);
+        return response;
+    }
+    
+    @GetMapping("/getCoursesByCategory")
+    @ResponseBody
+    public Map<String, Object> getCoursesByCategory(@RequestParam("categoryId") int categoryId) {
+
+        // Fetch courses by category
+        List<RDCourse> courses = rdCourseService.getCoursesByCategoryId(categoryId);
+
+        // Convert to lightweight DTO to avoid Lazy issues
+        List<Map<String, Object>> dto = courses.stream().map(c -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("courseId", c.getCourseId());
+            map.put("courseName", c.getCourseName());
+            return map;
+        }).collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("courses", dto);
+
         return response;
     }
 

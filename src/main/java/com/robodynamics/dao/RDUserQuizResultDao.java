@@ -1,6 +1,8 @@
 package com.robodynamics.dao;
 
 import java.util.List;
+
+import com.robodynamics.dto.RDStudentQuizSummary;
 import com.robodynamics.model.RDUserQuizResults;
 
 public interface RDUserQuizResultDao {
@@ -28,5 +30,10 @@ public interface RDUserQuizResultDao {
 
  // Method to count quizzes taken by a specific user
     public int countQuizzesTakenByUser(int userId);
+    
+    List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(
+            int userId, int courseId);
+
+	RDUserQuizResults findLatestByUserAndQuiz(Integer userID, int quizId);
     
 }

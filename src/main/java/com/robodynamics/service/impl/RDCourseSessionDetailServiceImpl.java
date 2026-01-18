@@ -49,9 +49,16 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 
 	@Override
 	@Transactional
-	public List<RDCourseSessionDetail> getRDCourseSessionDetails(int courseId) {
+	public List<RDCourseSessionDetail> getRDCourseSessionDetails(int sessionId) {
 		
-		return rdCourseSessionDetailDao.getRDCourseSessionDetails(courseId);
+		return rdCourseSessionDetailDao.getRDCourseSessionDetails(sessionId);
+	}
+	
+	@Override
+	@Transactional
+	public List<RDCourseSessionDetail> getRDCourseSessionDetailsByCourseId(int courseId) {
+		
+		return rdCourseSessionDetailDao.getRDCourseSessionDetailsByCourseId(courseId);
 	}
 
 	@Override
@@ -146,5 +153,19 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 	@Override
 	public List<RDCourseSessionDetail> findByTierLevelOrderedByTierOrder(RDCourseSessionDetail.TierLevel tierLevel) {
 		return rdCourseSessionDetailDao.findByTierLevelOrderedByTierOrder(tierLevel);
+	}
+
+	@Override
+	@Transactional
+	public Integer countByType(int sessionId, String string) {
+		
+		return rdCourseSessionDetailDao.countByType(sessionId,string);
+	}
+
+	@Override
+	@Transactional
+	public List<RDCourseSessionDetail> getBySessionAndType(int sessionId, String string) {
+		
+		return rdCourseSessionDetailDao.getBySessionAndType(sessionId, string);
 	}
 }

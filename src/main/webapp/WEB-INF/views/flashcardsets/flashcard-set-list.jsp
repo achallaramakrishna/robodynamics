@@ -1,234 +1,289 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manage Flashcard Sets</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
-    <!-- Include header JSP -->
-    <jsp:include page="/header.jsp" />
+<jsp:include page="/header.jsp" />
 
-    <div class="container mt-4">
-        <!-- Success and Error Messages -->
-        <c:if test="${not empty message}">
-            <div class="alert alert-success" role="alert">${message}</div>
-        </c:if>
-        <c:if test="${not empty error}">
-            <div class="alert alert-danger" role="alert">${error}</div>
-        </c:if>
+<div class="container mt-4">
 
-        <!-- Back to Dashboard Button -->
-        <button class="btn btn-secondary mb-3" onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
-            Back to Dashboard
-        </button>
+    <!-- Messages -->
+    <c:if test="${not empty success}">
+        <div class="alert alert-success">${success}</div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div class="alert alert-danger">${error}</div>
+    </c:if>
 
-        <h1 class="text-center mb-4">Manage Flashcard Sets</h1>
+    <button class="btn btn-secondary mb-3"
+            onclick="location.href='${pageContext.request.contextPath}/dashboard'">
+        Back to Dashboard
+    </button>
 
-        <!-- Course Selection -->
-        <form id="flashcardSetForm">
-            <div class="form-group">
-                <label for="course">Select Course</label>
-                <select id="course" class="form-control">
-                    <option value="">-- Select Course --</option>
-                    <c:forEach var="course" items="${courses}">
-                        <option value="${course.courseId}">${course.courseName}</option>
-                    </c:forEach>
-                </select>
-            </div>
+    <h2 class="text-center mb-4">Manage Flashcard Sets</h2>
 
-            <!-- Course Session Selection -->
-            <div class="form-group mt-3">
-                <label for="session">Select Course Session</label>
-                <select id="session" class="form-control" disabled>
-                    <option value="">-- Select Session --</option>
-                </select>
-            </div>
+    <!-- DROPDOWNS -->
+    <div class="row g-3">
 
-            <!-- Course Session Detail Selection -->
-            <div class="form-group mt-3">
-                <label for="sessionDetail">Select Session Detail</label>
-                <select id="sessionDetail" class="form-control" disabled>
-                    <option value="">-- Select Session Detail --</option>
-                </select>
-            </div>
-        </form>
-
-        <!-- Button to trigger Add Flashcard Set form -->
-        <button class="btn btn-primary mt-4" id="addFlashcardSetBtn" disabled>Add New Flashcard Set</button>
-
-        <!-- Flashcard Sets Table -->
-        <div class="mt-5">
-            <h3>Flashcard Sets</h3>
-            <table class="table table-striped mt-5" id="flashcardSetsTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Set Name</th>
-                        <th>Description</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="flashcardSet" items="${flashcardSets}">
-                        <tr>
-                            <td>${flashcardSet.flashcardSetId}</td>
-                            <td>${flashcardSet.setName}</td>
-                            <td>${flashcardSet.setDescription}</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm edit-btn" data-id="${flashcardSet.flashcardSetId}" data-name="${flashcardSet.setName}" data-description="${flashcardSet.setDescription}">Edit</button>
-                                <a href="${pageContext.request.contextPath}/flashcardsets/delete/${flashcardSet.flashcardSetId}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this flashcard set?');">Delete</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+        <div class="col-md-3">
+            <label>Course Category</label>
+            <select id="fc-category" class="form-control">
+                <option value="">-- Select Category --</option>
+                <c:forEach var="cat" items="${categories}">
+                    <option value="${cat.courseCategoryId}">
+                        ${cat.courseCategoryName}
+                    </option>
+                </c:forEach>
+            </select>
         </div>
 
-        <!-- Add Flashcard Set Form (Modal) -->
-        <div class="modal fade" id="addFlashcardSetModal" tabindex="-1" role="dialog" aria-labelledby="addFlashcardSetLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form action="<c:url value='/flashcardsets/save' />" method="post">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addFlashcardSetLabel">Add New Flashcard Set</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" id="courseSessionDetailIdInput" name="courseSessionDetailId" value="">
-
-                            <!-- Flashcard Set Name -->
-                            <div class="form-group">
-                                <label for="setName">Flashcard Set Name</label>
-                                <input type="text" class="form-control" id="setName" name="setName" placeholder="Enter set name" required>
-                            </div>
-
-                            <!-- Flashcard Set Description -->
-                            <div class="form-group mt-3">
-                                <label for="setDescription">Description</label>
-                                <textarea class="form-control" id="setDescription" name="setDescription" rows="3" placeholder="Enter description"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Flashcard Set</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="col-md-3">
+            <label>Course</label>
+            <select id="fc-course" class="form-control" disabled>
+                <option value="">-- Select Course --</option>
+            </select>
         </div>
 
-        <!-- Edit Flashcard Set Form (Modal) -->
-        <div class="modal fade" id="editFlashcardSetModal" tabindex="-1" role="dialog" aria-labelledby="editFlashcardSetLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form action="<c:url value='/flashcardsets/update' />" method="post">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editFlashcardSetLabel">Edit Flashcard Set</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" id="editFlashcardSetId" name="flashcardSetId" value="">
+        <div class="col-md-3">
+            <label>Course Session</label>
+            <select id="fc-session" class="form-control" disabled>
+                <option value="">-- Select Session --</option>
+            </select>
+        </div>
 
-                            <!-- Flashcard Set Name -->
-                            <div class="form-group">
-                                <label for="editSetName">Flashcard Set Name</label>
-                                <input type="text" class="form-control" id="editSetName" name="setName" required>
-                            </div>
-
-                            <!-- Flashcard Set Description -->
-                            <div class="form-group mt-3">
-                                <label for="editSetDescription">Description</label>
-                                <textarea class="form-control" id="editSetDescription" name="setDescription" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Update Flashcard Set</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="col-md-3">
+            <label>Session Detail</label>
+            <select id="fc-session-detail" class="form-control" disabled>
+                <option value="">-- Select Session Detail --</option>
+            </select>
         </div>
     </div>
 
-    <!-- Script for dynamically loading sessions and enabling modals -->
-    <script>
-        $(document).ready(function () {
-        	   $('#course').change(function () {
-                   let courseId = $(this).val();
-                   $('#session').html('<option value="">-- Select Session --</option>').prop('disabled', true);
-                   $('#sessionDetail').html('<option value="">-- Select Session Detail --</option>').prop('disabled', true);
+    <!-- ACTIONS -->
+    <div class="mt-4">
+        <button id="fc-addBtn" class="btn btn-primary" disabled>
+            Add Flashcard Set
+        </button>
+        <button id="fc-uploadBtn" class="btn btn-success ms-2" disabled>
+            Upload JSON
+        </button>
+    </div>
 
-                   if (courseId) {
-                       $.getJSON('${pageContext.request.contextPath}/flashcardsets/getCourseSessions', {courseId: courseId}, function (data) {
-                           let sessionOptions = '<option value="">-- Select Session --</option>';
-                           $.each(data.courseSessions, function (index, session) {
-                               sessionOptions += '<option value="' + session.courseSessionId + '">' + session.sessionTitle + '</option>';
-                           });
-                           $('#session').html(sessionOptions).prop('disabled', false);
-                       });
-                   }
-               });
+    <!-- TABLE -->
+    <div class="mt-4">
+        <table class="table table-bordered" id="fc-table">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Set Name</th>
+                    <th>Description</th>
+                    <th width="120">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        Select Category → Course → Session → Session Detail
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-               // Load Session Details when Session is selected
-               $('#session').change(function () {
-                   let courseSessionId = $(this).val();
-                   $('#sessionDetail').html('<option value="">-- Select Session Detail --</option>').prop('disabled', true);
+<!-- ================= JSON UPLOAD MODAL ================= -->
+<div class="modal fade" id="jsonUploadModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form method="post"
+              action="${pageContext.request.contextPath}/flashcardsets/uploadJson"
+              enctype="multipart/form-data"
+              class="modal-content">
 
-                   if (courseSessionId) {
-                       $.getJSON('${pageContext.request.contextPath}/flashcardsets/getCourseSessionDetails', {courseSessionId: courseSessionId}, function (data) {
-                           let sessionDetailOptions = '<option value="">-- Select Session Detail --</option>';
-                           $.each(data.sessionDetails, function (index, detail) {
-                               sessionDetailOptions += '<option value="' + detail.courseSessionDetailId + '">' + detail.topic + '</option>';
-                           });
-                           $('#sessionDetail').html(sessionDetailOptions).prop('disabled', false);
-                       });
-                   }
-               });
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Flashcard JSON</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-               // Enable "Add Flashcard Set" button and open modal
-               $('#sessionDetail').change(function () {
-                   let courseSessionDetailId = $(this).val();
-                   if (courseSessionDetailId) {
-                       $('#courseSessionDetailIdInput').val(courseSessionDetailId);
-                       $('#addFlashcardSetBtn').prop('disabled', false).click(function () {
-                           $('#addFlashcardSetModal').modal('show');
-                       });
-                   } else {
-                       $('#addFlashcardSetBtn').prop('disabled', true);
-                   }
-               });
+            <div class="modal-body">
 
-            // Show Add Flashcard Set Modal
-            $('#addFlashcardSetBtn').click(function () {
-                $('#addFlashcardSetModal').modal('show');
+                <input type="hidden"
+                       name="courseSessionDetailId"
+                       id="jsonSessionDetailId"/>
+
+                <label class="form-label">Select JSON File</label>
+                <input type="file"
+                       name="jsonFile"
+                       class="form-control"
+                       accept=".json"
+                       required/>
+
+                <small class="text-muted d-block mt-2">
+                    Only valid flashcard JSON format allowed
+                </small>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Upload</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+$(document).ready(function () {
+
+    function resetCourse() {
+        $('#fc-course').prop('disabled', true).html('<option value="">-- Select Course --</option>');
+        resetSession();
+    }
+
+    function resetSession() {
+        $('#fc-session').prop('disabled', true).html('<option value="">-- Select Session --</option>');
+        resetSessionDetail();
+    }
+
+    function resetSessionDetail() {
+        $('#fc-session-detail').prop('disabled', true).html('<option value="">-- Select Session Detail --</option>');
+        resetTable();
+    }
+
+    function resetTable() {
+        $('#fc-table tbody').html(
+            '<tr><td colspan="4" class="text-center text-muted">' +
+            'Select Category → Course → Session → Session Detail' +
+            '</td></tr>'
+        );
+        $('#fc-addBtn,#fc-uploadBtn').prop('disabled', true);
+    }
+
+    /* CATEGORY → COURSE */
+    $('#fc-category').on('change', function () {
+        var categoryId = this.value;
+        resetCourse();
+        if (!categoryId) return;
+
+        $.getJSON(
+            '${pageContext.request.contextPath}/flashcardsets/getCoursesByCategory',
+            { categoryId: categoryId }
+        ).done(function (res) {
+            var html = '<option value="">-- Select Course --</option>';
+            $.each(res.courses, function (_, c) {
+                html += '<option value="' + c.courseId + '">' + c.courseName + '</option>';
             });
-
-            // Show Edit Flashcard Set Modal with populated data
-            $('.edit-btn').click(function () {
-                let flashcardSetId = $(this).data('id');
-                let setName = $(this).data('name');
-                let setDescription = $(this).data('description');
-
-                $('#editFlashcardSetId').val(flashcardSetId);
-                $('#editSetName').val(setName);
-                $('#editSetDescription').val(setDescription);
-                
-                $('#editFlashcardSetModal').modal('show');
-            });
+            $('#fc-course').prop('disabled', false).html(html);
         });
-    </script>
+    });
 
-    <!-- Include footer JSP -->
-    <jsp:include page="/footer.jsp" />
+    /* COURSE → SESSION */
+    $('#fc-course').on('change', function () {
+        var courseId = this.value;
+        resetSession();
+        if (!courseId) return;
+
+        $.getJSON(
+            '${pageContext.request.contextPath}/flashcardsets/getCourseSessions',
+            { courseId: courseId }
+        ).done(function (res) {
+            var html = '<option value="">-- Select Session --</option>';
+            $.each(res.courseSessions, function (_, s) {
+                html += '<option value="' + s.courseSessionId + '">' + s.sessionTitle + '</option>';
+            });
+            $('#fc-session').prop('disabled', false).html(html);
+        });
+    });
+
+    /* SESSION → SESSION DETAIL */
+    $('#fc-session').on('change', function () {
+        var sessionId = this.value;
+        resetSessionDetail();
+        if (!sessionId) return;
+
+        $.getJSON(
+            '${pageContext.request.contextPath}/flashcardsets/getCourseSessionDetails',
+            { courseSessionId: sessionId }
+        ).done(function (res) {
+            var html = '<option value="">-- Select Session Detail --</option>';
+            $.each(res.sessionDetails, function (_, d) {
+                html += '<option value="' + d.courseSessionDetailId + '">' + d.topic + '</option>';
+            });
+            $('#fc-session-detail').prop('disabled', false).html(html);
+        });
+    });
+
+    /* SESSION DETAIL → FLASHCARD SET LIST */
+    $('#fc-session-detail').on('change', function () {
+
+        var csdId = this.value;
+        resetTable();
+        if (!csdId) return;
+
+        $('#fc-addBtn,#fc-uploadBtn').prop('disabled', false);
+
+        $.getJSON(
+            '${pageContext.request.contextPath}/flashcardsets/getFlashcardSetsBySessionDetail',
+            { courseSessionDetailId: csdId }
+        ).done(function (res) {
+
+            var rows = '';
+
+            if (!res.flashcardSets || res.flashcardSets.length === 0) {
+                rows =
+                    '<tr><td colspan="4" class="text-center text-muted">' +
+                    'No flashcard sets found' +
+                    '</td></tr>';
+            } else {
+                $.each(res.flashcardSets, function (_, s) {
+                    rows +=
+                        '<tr>' +
+                        '<td>' + s.flashcardSetId + '</td>' +
+                        '<td>' + s.setName + '</td>' +
+                        '<td>' + (s.setDescription || '') + '</td>' +
+                        '<td>' +
+                        '<a class="btn btn-danger btn-sm" ' +
+                        'href="${pageContext.request.contextPath}/flashcardsets/delete/' + s.flashcardSetId + '" ' +
+                        'onclick="return confirm(\'Delete this set?\')">Delete</a>' +
+                        '</td>' +
+                        '</tr>';
+                });
+            }
+
+            $('#fc-table tbody').html(rows);
+        });
+    });
+
+    /* ADD FLASHCARD SET */
+    $('#fc-addBtn').on('click', function () {
+        var csdId = $('#fc-session-detail').val();
+        if (!csdId) return;
+        window.location.href =
+            '${pageContext.request.contextPath}/flashcardsets/add?courseSessionDetailId=' + csdId;
+    });
+
+    /* UPLOAD JSON */
+    $('#fc-uploadBtn').on('click', function () {
+        var csdId = $('#fc-session-detail').val();
+        if (!csdId) return;
+        $('#jsonSessionDetailId').val(csdId);
+        $('#jsonUploadModal').modal('show');
+    });
+
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<jsp:include page="/footer.jsp" />
+
 </body>
 </html>

@@ -1,207 +1,312 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Flashcard Viewer</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #d1f7c4; /* Complementary color to blue */
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            overflow-x: hidden;
+            background-color: #d1f7c4;
+            font-family: Arial, sans-serif;
         }
 
+        /* ===== LEARNING HEADER ===== */
+        .learning-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: #003366;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 1000;
+            font-size: 14px;
+        }
+
+        .learning-header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ===== FLASHCARD WRAPPER ===== */
+		.flashcard-wrapper {
+		    min-height: calc(100vh - 90px);
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    justify-content: flex-start;
+		
+		    margin-top: 50px;      /* ⬅ EXACT HEADER HEIGHT */
+		    padding-top: 20px;     /* ⬅ extra breathing space */
+		    padding-bottom: 0;
+		}
+
+
+
+
+        /* ===== FLASHCARD ===== */
         .flashcard {
             width: 650px;
-            height: 500px;
+            max-width: 95%;
+            height: 420px;
+            background: #fff;
             border-radius: 12px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
             transform-style: preserve-3d;
             perspective: 1000px;
-            position: relative;
             transition: transform 0.8s;
-            margin: 20px;
             cursor: pointer;
+            position: relative;
         }
 
         .flashcard.is-flipped {
             transform: rotateY(180deg);
         }
 
-        .flashcard .card-face {
+        .card-face {
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 12px;
             backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            box-sizing: border-box;
-        }
-
-        .flashcard .front {
-            background-color: #003366; /* Dark blue */
-            color: #ffffff;
-            font-size: 1.5em;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .flashcard .back {
-            background-color: #f9fafb;
-            color: #333;
-            font-size: 1.2em;
             padding: 20px;
-            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .front {
+            background: #003366;
+            color: #fff;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .back {
+            background: #f9fafb;
+            color: #333;
             transform: rotateY(180deg);
         }
 
-        /* Styling for answer, example, and insight with bold and contrasting colors */
-        .back .answer-section {
+        .question-image,
+        .answer-image {
+            max-height: 200px;
+            max-width: 100%;
+            object-fit: contain;
+            margin-top: 12px;
+            background: #f8f9fa;
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        .answer-section {
             font-size: 1.3em;
             font-weight: bold;
-            margin-bottom: 15px;
-            color: #1e40af; /* Bold navy blue */
+            color: #1e40af;
+            margin-bottom: 10px;
         }
 
-        .back .example {
-            margin-top: 15px;
-            font-size: 1.1em;
-            color: #1d4ed8; /* Bright blue for contrast */
-            background-color: #e0f2fe; /* Light blue background */
-            padding: 10px;
+        .example {
+            background: #e0f2fe;
+            color: #1d4ed8;
+            padding: 8px;
             border-radius: 8px;
-            width: 90%;
+            margin-top: 8px;
             font-weight: bold;
+            width: 100%;
         }
 
-        .back .insight {
-            margin-top: 10px;
-            font-size: 1em;
-            color: #dc2626; /* Red for emphasis */
-            background-color: #fee2e2; /* Light red background */
-            padding: 10px;
+        .insight {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 8px;
             border-radius: 8px;
-            width: 90%;
+            margin-top: 8px;
             font-weight: bold;
+            width: 100%;
         }
 
-        /* Controls styling */
+        .flip-text {
+            font-size: 0.85em;
+            color: #d1d5db;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ===== CONTROLS ===== */
         .controls {
-            margin-top: 20px;
+            margin-top: 8px;
             display: flex;
             justify-content: space-between;
-            width: 280px;
+            width: 260px;
+            font-size: 22px;
         }
 
         .controls button {
-            font-size: 1.2em;
             background: none;
             border: none;
-            color: #2563eb;
+            color: #003366;
+            font-weight: bold;
             cursor: pointer;
         }
 
         .controls button:disabled {
-            color: #a0aec0;
+            color: #9ca3af;
         }
 
-        /* Extra information for navigation */
-        .flashcard-info {
-            color: #333;
-            font-size: 1em;
-            font-weight: 500;
-            margin-top: 20px;
+        /* ===== FOOTER ===== */
+        .learning-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            line-height: 28px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #374151;
         }
 
-        .flashcard .flip-text {
-            font-size: 0.9em;
-            color: #d1d5db;
-            margin-top: 10px;
-            font-style: italic;
+        /* ===== MOBILE OPTIMIZATION ===== */
+        @media (max-width: 576px) {
+            .flashcard {
+                height: 440px;
+            }
+            .front {
+                font-size: 1.2em;
+            }
+            .answer-section {
+                font-size: 1.15em;
+            }
         }
     </style>
 </head>
+
 <body>
+
+<!-- ===== LEARNING HEADER ===== -->
+<div class="learning-header">
+    <a href="${pageContext.request.contextPath}/dashboard">← Exit</a>
+    <div>Flashcards</div>
+    <div>${currentFlashcardIndex + 1} / ${totalFlashcards}</div>
+</div>
+
+<div class="flashcard-wrapper">
+
     <c:if test="${not empty error}">
         <div class="alert alert-danger">${error}</div>
     </c:if>
 
     <c:if test="${currentFlashcard != null}">
         <div class="flashcard" id="flashcard" onclick="toggleFlip()">
-            <!-- Front of the card -->
+
+            <!-- FRONT -->
             <div class="card-face front">
                 <div>${currentFlashcard.question}</div>
-                <div class="flip-text">Click to reveal answer</div>
+
+                <c:if test="${not empty currentFlashcard.questionImageUrl}">
+                    <img src="${pageContext.request.contextPath}${currentFlashcard.questionImageUrl}"
+					     class="answer-image"
+					     alt="Answer Image">
+                </c:if>
+
+                <div class="flip-text">Tap to flip</div>
             </div>
-            
-            <!-- Back of the card -->
+
+            <!-- BACK -->
             <div class="card-face back">
-                <div class="answer-section">Answer: ${currentFlashcard.answer}</div>
-                <c:if test="${not empty currentFlashcard.example}">
-                    <div class="example"><strong>Example:</strong> ${currentFlashcard.example}</div>
+                <div class="answer-section">
+                    ${currentFlashcard.answer}
+                </div>
+
+                <c:if test="${not empty currentFlashcard.answerImageUrl}">
+                    <img src="${pageContext.request.contextPath}${currentFlashcard.answerImageUrl}"
+					     class="answer-image"
+					     alt="Answer Image">
+
                 </c:if>
+
+                <c:if test="${not empty currentFlashcard.example}">
+                    <div class="example">
+                        Example: ${currentFlashcard.example}
+                    </div>
+                </c:if>
+
                 <c:if test="${not empty currentFlashcard.insight}">
-                    <div class="insight"><strong>Insight:</strong> ${currentFlashcard.insight}</div>
+                    <div class="insight">
+                        ${currentFlashcard.insightType}: ${currentFlashcard.insight}
+                    </div>
                 </c:if>
             </div>
+
         </div>
     </c:if>
 
+    <!-- ARROW CONTROLS -->
     <div class="controls">
-        <button onclick="navigateFlashcard('previous')" <c:if test="${currentFlashcardIndex == 0}">disabled</c:if>>⬅️</button>
-        <span class="flashcard-info">Flashcard ${currentFlashcardIndex + 1} of ${totalFlashcards}</span>
-        <button onclick="navigateFlashcard('next')" <c:if test="${currentFlashcardIndex == totalFlashcards - 1}">disabled</c:if>>➡️</button>
+        <button onclick="navigateFlashcard('previous')"
+                <c:if test="${currentFlashcardIndex == 0}">disabled</c:if>>
+            ⬅
+        </button>
+
+        <button onclick="navigateFlashcard('next')"
+                <c:if test="${currentFlashcardIndex == totalFlashcards - 1}">disabled</c:if>>
+            ➡
+        </button>
     </div>
 
-    <script>
-        function toggleFlip() {
-            document.getElementById('flashcard').classList.toggle('is-flipped');
+</div>
+
+<!-- ===== LEARNING FOOTER ===== -->
+<div class="learning-footer">
+    Tap = Flip | ⬅ Prev | ➡ Next
+</div>
+
+<script>
+    function toggleFlip() {
+        document.getElementById('flashcard').classList.toggle('is-flipped');
+    }
+
+    function navigateFlashcard(direction) {
+        const currentIndex = parseInt("${currentFlashcardIndex}");
+        const flashcardSetId = "${flashcardSetId}";
+        let newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+
+        if (newIndex < 0 || newIndex >= parseInt("${totalFlashcards}")) return;
+
+        window.location.href =
+            `${pageContext.request.contextPath}/flashcards/view?index=` +
+            newIndex + `&flashcardSetId=${flashcardSetId}`;
+    }
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") navigateFlashcard('previous');
+        if (e.key === "ArrowRight") navigateFlashcard('next');
+        if (e.key === " ") {
+            e.preventDefault();
+            toggleFlip();
         }
+    });
+</script>
 
-        function navigateFlashcard(direction) {
-            const currentIndex = parseInt("${currentFlashcardIndex}");
-            const flashcardSetId = "${flashcardSetId}";
-
-            let newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-            
-            if (newIndex < 0 || newIndex >= parseInt("${totalFlashcards}")) {
-                return;
-            }
-
-            window.location.href = `${pageContext.request.contextPath}/flashcards/view?index=` + newIndex + `&flashcardSetId=${flashcardSetId}`;
-        }
-
-        // Allow arrow key navigation
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "ArrowLeft") {
-                navigateFlashcard('previous');
-            } else if (event.key === "ArrowRight") {
-                navigateFlashcard('next');
-            } else if (event.key === " ") {
-                event.preventDefault(); // Prevents page from scrolling down
-                toggleFlip();
-            }
-        });
-    </script>
 </body>
 </html>

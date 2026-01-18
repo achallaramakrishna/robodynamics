@@ -76,8 +76,29 @@
 
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp" />
 
 <div class="container mt-5">
+
+<div class="d-flex gap-2 mb-3">
+
+    <!-- Back to Course Dashboard (always visible) -->
+    <a href="${pageContext.request.contextPath}/student/course-dashboard?courseId=${courseId}&enrollmentId=${enrollmentId}"
+       class="btn btn-outline-primary">
+        ← Back to Course Dashboard
+    </a>
+
+    <!-- Back to Session Quizzes (only during review) -->
+    <c:if test="${isReview}">
+        <a class="btn btn-outline-secondary"
+           href="${pageContext.request.contextPath}/student/session-quizzes?courseSessionId=${courseSessionId}&enrollmentId=${enrollmentId}">
+            ← Back to Session Quizzes
+        </a>
+    </c:if>
+
+</div>
+
+
 
     <!-- =======================
         HEADER + SUMMARY CARD
@@ -182,6 +203,7 @@
     </div>
 
 </div>
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

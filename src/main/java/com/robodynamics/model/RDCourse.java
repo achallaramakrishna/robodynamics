@@ -107,6 +107,7 @@ public class RDCourse {
     private String promoVideoUrl;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<RDCourseOffering> courseOfferings;
 
     public boolean isFeatured() {

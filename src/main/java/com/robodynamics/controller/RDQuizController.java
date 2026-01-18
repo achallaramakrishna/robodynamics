@@ -200,46 +200,53 @@ public class RDQuizController {
 
         List<Map<String, Object>> questionAnalysis = new ArrayList<>();
 
-        // =====================================
+        // =====================================================
         // Evaluate Quiz
-        // =====================================
+        // =====================================================
         for (RDQuizQuestion q : quizQuestions) {
 
             String chosen = selectedAnswers.get(q.getQuestionId());
+
             boolean isCorrect = false;
             String correctAnswerText = q.getCorrectAnswer();
-            String selectedAnswerText = chosen;
 
-            // =====================================
-            // USER DID NOT ANSWER
-            // =====================================
+            String selectedAnswerText = "Not Attempted";   // UI
+            String selectedAnswerToStore = null;            // DB
+
+            // -------------------------------------------------
+            // UNATTEMPTED
+            // -------------------------------------------------
             if (chosen == null || chosen.trim().isEmpty()) {
-
-                Map<String, Object> entry = new HashMap<>();
-                entry.put("question", q.getQuestionText());
-                entry.put("selectedAnswer", "Not Answered");
-                entry.put("correctAnswer", correctAnswerText);
-                entry.put("isCorrect", false);
-                questionAnalysis.add(entry);
 
                 RDUserQuizAnswer ua = new RDUserQuizAnswer();
                 ua.setQuizId(quizId);
                 ua.setUserId(currentUser.getUserID());
                 ua.setQuestionId(q.getQuestionId());
-                ua.setUserAnswer("Not Answered");
+                ua.setUserAnswer(null);
                 ua.setCorrect(false);
                 ua.setCreatedAt(new Timestamp(System.currentTimeMillis()));
                 userQuizAnswerService.saveOrUpdate(ua);
 
+                Map<String, Object> entry = new HashMap<>();
+                entry.put("question", q.getQuestionText());
+                entry.put("selectedAnswer", selectedAnswerText);
+                entry.put("correctAnswer", correctAnswerText);
+                entry.put("isCorrect", false);
+                questionAnalysis.add(entry);
+
                 continue;
             }
 
+            // -------------------------------------------------
+            // ATTEMPTED
+            // -------------------------------------------------
             switch (q.getQuestionType()) {
 
-                // =====================================
-                // MULTIPLE CHOICE
-                // =====================================
+                // ===================== MCQ =====================
                 case "multiple_choice":
+
+                    int selectedOptionId = Integer.parseInt(chosen);
+                    selectedAnswerToStore = chosen; // ✅ store optionId
 
                     RDQuizOption correctOption = q.getOptions()
                             .stream()
@@ -248,42 +255,42 @@ public class RDQuizController {
                             .orElse(null);
 
                     if (correctOption != null) {
-                        isCorrect = correctOption.getOptionId() == Integer.parseInt(chosen);
+                        isCorrect = correctOption.getOptionId() == selectedOptionId;
                         correctAnswerText = correctOption.getOptionText();
-                    } else {
-                        System.out.println("WARNING: No correct MCQ option for Question " + q.getQuestionId());
-                        isCorrect = false;
                     }
 
-                    // Selected option text
                     RDQuizOption selectedOption = q.getOptions()
                             .stream()
-                            .filter(op -> op.getOptionId() == Integer.parseInt(chosen))
+                            .filter(op -> op.getOptionId() == selectedOptionId)
                             .findFirst()
                             .orElse(null);
 
-                    if (selectedOption != null)
+                    if (selectedOption != null) {
                         selectedAnswerText = selectedOption.getOptionText();
+                    }
 
                     break;
 
-                // =====================================
-                // TEXT ANSWERS
-                // =====================================
+                // ===================== TEXT =====================
                 case "true_false":
                 case "fill_in_the_blank":
                 case "short_answer":
+
+                    selectedAnswerToStore = chosen;
+                    selectedAnswerText = chosen;
+
                     if (q.getCorrectAnswer() != null) {
                         isCorrect = chosen.trim()
                                 .equalsIgnoreCase(q.getCorrectAnswer().trim());
                     }
                     break;
 
-                // =====================================
-                // LONG ANSWER
-                // =====================================
+                // ===================== LONG =====================
                 case "long_answer":
-                    isCorrect = true;   // Manual evaluation later
+
+                    selectedAnswerToStore = chosen;
+                    selectedAnswerText = chosen;
+                    isCorrect = true; // manual evaluation later
                     break;
             }
 
@@ -292,32 +299,32 @@ public class RDQuizController {
                 pointsEarned += pointsPerCorrect;
             }
 
-            // -------------------------------------
-            // Question Review UI Data
-            // -------------------------------------
+            // -------------------------------------------------
+            // Save answer
+            // -------------------------------------------------
+            RDUserQuizAnswer ua = new RDUserQuizAnswer();
+            ua.setQuizId(quizId);
+            ua.setUserId(currentUser.getUserID());
+            ua.setQuestionId(q.getQuestionId());
+            ua.setUserAnswer(selectedAnswerToStore);
+            ua.setCorrect(isCorrect);
+            ua.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            userQuizAnswerService.saveOrUpdate(ua);
+
+            // -------------------------------------------------
+            // Review data
+            // -------------------------------------------------
             Map<String, Object> entry = new HashMap<>();
             entry.put("question", q.getQuestionText());
             entry.put("selectedAnswer", selectedAnswerText);
             entry.put("correctAnswer", correctAnswerText);
             entry.put("isCorrect", isCorrect);
             questionAnalysis.add(entry);
-
-            // -------------------------------------
-            // SAVE ANSWER
-            // -------------------------------------
-            RDUserQuizAnswer ua = new RDUserQuizAnswer();
-            ua.setQuizId(quizId);
-            ua.setUserId(currentUser.getUserID());
-            ua.setQuestionId(q.getQuestionId());
-            ua.setUserAnswer(selectedAnswerText);
-            ua.setCorrect(isCorrect);
-            ua.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            userQuizAnswerService.saveOrUpdate(ua);
         }
 
-        // =====================================
+        // =====================================================
         // SAVE RESULT
-        // =====================================
+        // =====================================================
         boolean passed = ((double) correctCount / quizQuestions.size()) >= 0.7;
 
         RDUserQuizResults result = new RDUserQuizResults();
@@ -326,20 +333,22 @@ public class RDQuizController {
         result.setScore(correctCount);
         result.setPassed(passed);
         result.setPointsEarned(pointsEarned);
-        result.setStartTime(Timestamp.valueOf(LocalDateTime.now()));
-        result.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
+        result.setStartTime(LocalDateTime.now());
+        result.setEndTime(LocalDateTime.now());
         result.setCompletionTime(0);
 
         quizResultService.saveOrUpdate(result);
 
-        // Reward Points
+        // Reward points
         userPointsService.addPoints(currentUser, pointsEarned);
 
-        // Refresh user session
+        // Refresh session user
         currentUser = userService.getRDUser(currentUser.getUserID());
         session.setAttribute("rdUser", currentUser);
 
+        // =====================================================
         // UI Stats
+        // =====================================================
         int totalQ = quizQuestions.size();
         double percentage = Math.round((correctCount * 100.0 / totalQ) * 10.0) / 10.0;
 
@@ -350,11 +359,13 @@ public class RDQuizController {
         model.addAttribute("pointsEarned", pointsEarned);
         model.addAttribute("questionAnalysis", questionAnalysis);
         model.addAttribute("quizResult", result);
+        model.addAttribute("isReview", false); // 🔴 IMPORTANT
 
-        // Clear session saved answers
+
         session.removeAttribute("selectedAnswers");
 
         return "quizzes/result";
     }
+
 
 }

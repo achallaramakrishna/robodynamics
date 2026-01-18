@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDQuizDao;
+import com.robodynamics.dto.RDStudentQuizSummary;
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.wrapper.ProjectGroup;
 
@@ -224,6 +226,57 @@ public class RDQuizDaoImpl implements RDQuizDao {
 
         return query.list(); // or .getResultList() if on JPA; Hibernate Query uses list()
     }
+
+	@Override
+	public List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(
+	        Integer userID, int courseId) {
+
+	    Session session = factory.getCurrentSession();
+
+	    String hql =
+	        "select new com.robodynamics.dto.RDStudentQuizSummary( " +
+	        "   q.quizId, " +
+	        "   q.quizName, " +
+	        "   r.score, " +
+	        "   r.passed, " +
+	        "   r.completionTime, " +
+	        "   r.completedAt " +
+	        ") " +
+	        "from RDUserQuizResults r " +
+	        "join r.quiz q " +
+	        "join q.course c " +
+	        "where r.user.userID = :userId " +
+	        "and c.courseId = :courseId " +
+	        "order by r.completedAt desc";
+
+	    return session.createQuery(hql, RDStudentQuizSummary.class)
+	            .setParameter("userId", userID)
+	            .setParameter("courseId", courseId)
+	            .getResultList();
+	}
+
+	@Override
+	public List<RDQuiz> findByCourseSession(int courseSessionId) {
+		
+		Session session = factory.getCurrentSession();
+
+	    CriteriaBuilder cb = session.getCriteriaBuilder();
+	    CriteriaQuery<RDQuiz> cq = cb.createQuery(RDQuiz.class);
+	    Root<RDQuiz> root = cq.from(RDQuiz.class);
+
+	    Predicate sessionPredicate =
+	            cb.equal(
+	                root.get("courseSession").get("courseSessionId"),
+	                courseSessionId
+	            );
+
+	    cq.where(sessionPredicate);
+	    cq.orderBy(cb.asc(root.get("quizId"))); // optional
+
+	    return session.createQuery(cq).getResultList();
+	}
+
+	
 }
 
 

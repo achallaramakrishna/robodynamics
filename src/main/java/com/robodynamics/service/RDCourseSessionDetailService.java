@@ -16,7 +16,7 @@ public interface RDCourseSessionDetailService {
 
 	public RDCourseSessionDetail getRDCourseSessionDetail(int courseSessionDetailId);
 	
-	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int courseId);
+	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int sessionId);
 	
     public void deleteRDCourseSessionDetail(int id);
     
@@ -26,5 +26,11 @@ public interface RDCourseSessionDetailService {
 
     List<RDCourseSessionDetail> findByTierLevel(TierLevel tierLevel);
     List<RDCourseSessionDetail> findByTierLevelOrderedByTierOrder(TierLevel tierLevel);
+
+	public Integer countByType(int sessionId, String string);
+
+	public List<RDCourseSessionDetail> getBySessionAndType(int sessionId, String string);
+	
+	List<RDCourseSessionDetail> getRDCourseSessionDetailsByCourseId(int courseId);
 
 }

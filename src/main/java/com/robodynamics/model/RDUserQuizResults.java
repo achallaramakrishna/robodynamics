@@ -1,6 +1,8 @@
 package com.robodynamics.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -27,10 +29,10 @@ public class RDUserQuizResults {
     private int completionTime;  // Time taken in seconds to complete the quiz
 
     @Column(name = "start_time", nullable = false)
-    private Timestamp startTime;  // When the quiz was started
+    private LocalDateTime  startTime;  // When the quiz was started
 
     @Column(name = "end_time")
-    private Timestamp endTime;  // When the quiz was completed
+    private LocalDateTime  endTime;  // When the quiz was completed
 
     @Column(name = "passed", nullable = false)
     private boolean passed;  // Whether the user passed the quiz
@@ -39,7 +41,7 @@ public class RDUserQuizResults {
     private int pointsEarned;  // Points earned from completing the quiz
 
     @Column(name = "completed_at")
-    private Timestamp completedAt;  // When the quiz was completed
+    private LocalDateTime  completedAt;  // When the quiz was completed
 
     // Getters and Setters
 
@@ -83,19 +85,19 @@ public class RDUserQuizResults {
         this.completionTime = completionTime;
     }
 
-    public Timestamp getStartTime() {
+    public LocalDateTime  getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(LocalDateTime  startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public LocalDateTime  getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(LocalDateTime  endTime) {
         this.endTime = endTime;
     }
 
@@ -115,11 +117,11 @@ public class RDUserQuizResults {
         this.pointsEarned = pointsEarned;
     }
 
-    public Timestamp getCompletedAt() {
+    public LocalDateTime  getCompletedAt() {
         return completedAt;
     }
 
-    public void setCompletedAt(Timestamp completedAt) {
+    public void setCompletedAt(LocalDateTime  completedAt) {
         this.completedAt = completedAt;
     }
 }

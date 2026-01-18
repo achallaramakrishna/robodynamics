@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDFlashCardSetDao;
+import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDFlashCardSet;
 
 @Repository
@@ -67,13 +68,20 @@ public class RDFlashCardSetDaoImpl implements RDFlashCardSetDao {
     }
 
 	@Override
-	public List<RDFlashCardSet> findByCourseSessionDetailId(int courseSessionDetailId) {
-        String hql = "FROM RDFlashCardSet WHERE courseSessionDetail.courseSessionDetailId = :courseSessionDetailId";
-        List<RDFlashCardSet> results = sessionFactory.getCurrentSession()
-                                                     .createQuery(hql, RDFlashCardSet.class)
-                                                     .setParameter("courseSessionDetailId", courseSessionDetailId)
-                                                     .getResultList();
-        return results.isEmpty() ? null : results;
+	public List<RDFlashcardSetDTO> findByCourseSessionDetailId(int courseSessionDetailId) {
+		 Session session = sessionFactory.getCurrentSession();
+
+		    Query<RDFlashcardSetDTO> q = session.createQuery(
+		        "select new com.robodynamics.dto.RDFlashcardSetDTO(" +
+		        "   f.flashcardSetId, f.setName, f.setDescription" +
+		        ") " +
+		        "from RDFlashCardSet f " +
+		        "where f.courseSessionDetail.courseSessionDetailId = :csdId",
+		        RDFlashcardSetDTO.class
+		    );
+
+		    q.setParameter("csdId", courseSessionDetailId);
+		    return q.getResultList();
 
 	}
 

@@ -79,5 +79,11 @@ public class RDUserQuizResultServiceImpl implements RDUserQuizResultService {
 		return quizResultDao.countQuizzesTakenByUser(userId);
 	}
 
+	@Override
+	public RDUserQuizResults findLatestByUserAndQuiz(Integer userID, int quizId) {
+		
+		return quizResultDao.findLatestByUserAndQuiz(userID,quizId);
+	}
+
     
 }

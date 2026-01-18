@@ -83,16 +83,47 @@
              aria-labelledby="headingContentManagement" data-bs-parent="#dashboardSectionsAccordion">
             <div class="accordion-body">
                 <div class="row">
+                <!-- Flashcard Sets -->
+				<div class="col-6 col-md-4 mb-3">
+				    <div class="card shadow-sm h-100">
+				        <div class="card-body text-center">
+				            <h5 class="card-title">Flashcard Sets</h5>
+				            <p class="card-text small">
+				                Create, edit, upload, and map flashcard sets to sessions.
+				            </p>
+				            <a href="${pageContext.request.contextPath}/flashcardsets/flashcard-set-list"
+				               class="btn btn-primary btn-sm">
+				                Manage
+				            </a>
+				        </div>
+				    </div>
+				</div>
+				                
                     <div class="col-6 col-md-4 mb-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Flashcards</h5>
-                                <p class="card-text small">Manage flashcards for subjects.</p>
-                                <a href="${pageContext.request.contextPath}/flashcards/list" 
-                                   class="btn btn-primary btn-sm">Manage</a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+            <h5 class="card-title">Flashcards</h5>
+            <p class="card-text small">
+                Manage flashcards and upload question/answer images.
+            </p>
+
+            <div class="d-grid gap-2">
+                <!-- Flashcard CRUD -->
+                <a href="${pageContext.request.contextPath}/flashcards/list"
+                   class="btn btn-primary btn-sm">
+                    Manage Flashcards
+                </a>
+
+                <!-- Flashcard Media -->
+                <a href="${pageContext.request.contextPath}/flashcards/manageMedia"
+                   class="btn btn-warning btn-sm">
+                    Manage Media
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+                    
                     <div class="col-6 col-md-4 mb-3">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">

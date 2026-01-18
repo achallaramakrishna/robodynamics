@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.robodynamics.dao.RDUserQuizResultDao;
+import com.robodynamics.dto.RDStudentQuizSummary;
 import com.robodynamics.model.RDUserQuizResults;
 
 @Repository
@@ -111,4 +112,48 @@ public class RDUserQuizResultDaoImpl implements RDUserQuizResultDao {
 	        return query.getSingleResult().intValue();
 
 	}
+
+	@Override
+	public List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(
+	        int userId, int courseId) {
+
+	    Session session = factory.getCurrentSession();
+
+	    String hql =
+	        "select new com.robodynamics.dto.RDStudentQuizSummary( " +
+	        "   q.quizId, " +
+	        "   q.quizTitle, " +
+	        "   r.score, " +
+	        "   r.passed, " +
+	        "   r.completionTime, " +
+	        "   r.completedAt " +
+	        ") " +
+	        "from RDUserQuizResults r " +
+	        "join r.quiz q " +
+	        "join q.course c " +
+	        "where r.user.userID = :userId " +
+	        "and c.courseId = :courseId " +
+	        "order by r.completedAt desc";
+
+	    return session.createQuery(hql, RDStudentQuizSummary.class)
+	            .setParameter("userId", userId)
+	            .setParameter("courseId", courseId)
+	            .getResultList();
+	}
+
+	@Override
+	public RDUserQuizResults findLatestByUserAndQuiz(Integer userID, int quizId) {
+		return factory.getCurrentSession()
+		        .createQuery(
+		            "FROM RDUserQuizResults r " +
+		            "WHERE r.user.userID = :userId " +
+		            "AND r.quiz.quizId = :quizId " +
+		            "ORDER BY r.completedAt DESC",
+		            RDUserQuizResults.class)
+		        .setParameter("userId", userID)
+		        .setParameter("quizId", quizId)
+		        .setMaxResults(1)
+		        .uniqueResult();
+	}
+
 }

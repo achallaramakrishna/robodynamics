@@ -2,6 +2,7 @@ package com.robodynamics.service;
 import java.util.List;
 import java.util.Map;
 
+import com.robodynamics.dto.RDStudentQuizSummary;
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDQuizQuestion;
 import com.robodynamics.wrapper.ProjectGroup;
@@ -50,4 +51,10 @@ public interface RDQuizService {
     List<RDQuiz> findQuizzesForStudent(int studentId); // Quizzes visible to a student
 
 	List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId);
+
+	List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(Integer userID, int courseId);
+
+	List<RDQuiz> findByCourseSession(int courseSessionId);
+	
+
 }

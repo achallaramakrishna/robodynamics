@@ -190,11 +190,15 @@ public class RDCourseSessionDetailController {
        model.addAttribute("courses", courses);
 
        // 3️⃣ Load session details if course selected
+       System.out.println("---- course session details ---");
+       System.out.println("Course id - " + courseId);
        if (courseId != null && courseId > 0) {
            List<RDCourseSessionDetail> details =
-                   courseSessionDetailService.getRDCourseSessionDetails(courseId);
+                   courseSessionDetailService.getRDCourseSessionDetailsByCourseId(courseId);
+           System.out.println("Details - " + details.size());
            model.addAttribute("courseSessionDetails", details);
        }
+       System.out.println("---- course session details ---");
 
        model.addAttribute("selectedCategoryId", categoryId);
        model.addAttribute("selectedCourseId", courseId);

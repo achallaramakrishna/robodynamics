@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDFlashCardSetDao;
+import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDFlashCardSet;
 import com.robodynamics.service.RDFlashCardSetService;
 
@@ -48,7 +49,7 @@ public class RDFlashCardSetServiceImpl implements RDFlashCardSetService {
 	}
 
 	@Override
-	public List<RDFlashCardSet> getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId) {
+	public List<RDFlashcardSetDTO> getFlashCardSetsByCourseSessionDetail(int courseSessionDetailId) {
 	    return rdFlashCardSetDao.findByCourseSessionDetailId(courseSessionDetailId);
 
 	}

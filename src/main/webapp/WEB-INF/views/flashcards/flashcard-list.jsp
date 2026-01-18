@@ -1,24 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Flashcards</title>
+
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <script>
-        // Initialize current flashcard index
         var currentFlashcardIndex = 0;
 
         function showFlashcard(index) {
             var flashcards = document.getElementsByClassName('flashcard');
-            // Hide all flashcards
             for (var i = 0; i < flashcards.length; i++) {
                 flashcards[i].style.display = 'none';
             }
-            // Show only the current flashcard
             flashcards[index].style.display = 'block';
             updateButtonStates();
         }
@@ -40,37 +44,16 @@
 
         function updateButtonStates() {
             var flashcards = document.getElementsByClassName('flashcard');
-            var prevButton = document.getElementById('prevButton');
-            var nextButton = document.getElementById('nextButton');
-
-            if (currentFlashcardIndex === 0) {
-                prevButton.classList.add('disabled');
-                prevButton.classList.remove('btn-primary');
-                prevButton.classList.add('btn-secondary');
-            } else {
-                prevButton.classList.remove('disabled');
-                prevButton.classList.remove('btn-secondary');
-                prevButton.classList.add('btn-primary');
-            }
-
-            if (currentFlashcardIndex === flashcards.length - 1) {
-                nextButton.classList.add('disabled');
-                nextButton.classList.remove('btn-primary');
-                nextButton.classList.add('btn-secondary');
-            } else {
-                nextButton.classList.remove('disabled');
-                nextButton.classList.remove('btn-secondary');
-                nextButton.classList.add('btn-primary');
-            }
+            document.getElementById('prevButton').disabled = (currentFlashcardIndex === 0);
+            document.getElementById('nextButton').disabled =
+                (currentFlashcardIndex === flashcards.length - 1);
         }
 
-        window.onload = function() {
-            // Show the first flashcard when the page loads
+        window.onload = function () {
             showFlashcard(0);
         };
     </script>
 
-    <!-- Custom Styles to make it more attractive for kids -->
     <style>
         body {
             background-color: #f0f8ff;
@@ -78,112 +61,129 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 30px auto;
         }
 
         h1 {
-            color: #FF5733;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ff5733;
             text-align: center;
-            font-size: 28px;
         }
 
         .flashcard {
             display: none;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             margin-bottom: 20px;
         }
 
-        .flashcard h5 {
-            font-size: 22px;
-            color: #2c3e50;
+        .flashcard img {
+            max-height: 260px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+            padding: 8px;
+            border-radius: 8px;
         }
 
-        .flashcard p {
-            font-size: 18px;
-            color: #34495e;
-        }
-
-        .flashcard .hint {
+        .hint {
             font-style: italic;
             color: #7f8c8d;
         }
 
-        /* Navigation Buttons */
         .nav-buttons {
             text-align: center;
             margin-top: 20px;
         }
 
         .nav-buttons button {
-            margin: 10px;
-            font-size: 20px;
-            padding: 10px 20px;
+            font-size: 18px;
+            padding: 10px 24px;
             border-radius: 8px;
-        }
-
-        .btn-primary {
-            background-color: #3498db;
-            border-color: #3498db;
-        }
-
-        .btn-secondary {
-            background-color: #bdc3c7;
-            border-color: #bdc3c7;
-        }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
-
-        /* Correct and Incorrect Feedback */
-        .correct {
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        .incorrect {
-            color: #e74c3c;
-            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Fun with Flashcards 🎮</h1>
+<!-- ===== HEADER ===== -->
+<jsp:include page="/header.jsp" />
 
-    <!-- Flashcards Content -->
+<div class="container">
+    <h1>📘 Fun with Flashcards</h1>
+
     <div id="flashcardContainer">
-        <c:forEach var="flashCard" items="${flashCards}" varStatus="status">
+        <c:forEach var="flashCard" items="${flashCards}">
             <div class="flashcard">
-                <h5>Question:</h5>
+
+                <!-- QUESTION -->
+                <h5>Question</h5>
                 <p>${flashCard.question}</p>
+
+                <c:if test="${not empty flashCard.questionImageUrl}">
+                    <img src="${flashCard.questionImageUrl}"
+                         class="img-fluid mb-3"
+                         alt="Question Image">
+                </c:if>
+
                 <hr>
-                <h5>Answer:</h5>
+
+                <!-- ANSWER -->
+                <h5>Answer</h5>
                 <p>${flashCard.answer}</p>
-                <c:if test="${flashCard.hint != null}">
+
+                <c:if test="${not empty flashCard.answerImageUrl}">
+                    <img src="${flashCard.answerImageUrl}"
+                         class="img-fluid mb-3"
+                         alt="Answer Image">
+                </c:if>
+
+                <!-- HINT -->
+                <c:if test="${not empty flashCard.hint}">
                     <p class="hint">Hint: ${flashCard.hint}</p>
                 </c:if>
+
+                <!-- EXAMPLE -->
+                <c:if test="${not empty flashCard.example}">
+                    <p class="text-info">
+                        <strong>Example:</strong> ${flashCard.example}
+                    </p>
+                </c:if>
+
+                <!-- INSIGHT -->
+                <c:if test="${not empty flashCard.insight}">
+                    <span class="badge badge-success">
+                        ${flashCard.insightType}
+                    </span>
+                    <p class="mt-2">${flashCard.insight}</p>
+                </c:if>
+
             </div>
         </c:forEach>
     </div>
 
-    <!-- Navigation Buttons -->
+    <!-- NAVIGATION -->
     <div class="nav-buttons">
-        <button id="prevButton" class="btn btn-primary" onclick="prevFlashcard()">◀ Prev</button>
-        <button id="nextButton" class="btn btn-primary" onclick="nextFlashcard()">Next ▶</button>
+        <button id="prevButton"
+                class="btn btn-primary"
+                onclick="prevFlashcard()">
+            ◀ Prev
+        </button>
+
+        <button id="nextButton"
+                class="btn btn-primary"
+                onclick="nextFlashcard()">
+            Next ▶
+        </button>
     </div>
 </div>
 
-<!-- Bootstrap JS -->
+<!-- ===== FOOTER ===== -->
+<jsp:include page="/footer.jsp" />
+
+<!-- JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>

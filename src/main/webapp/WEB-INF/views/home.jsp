@@ -50,11 +50,119 @@
     .rd-thumb::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.18)); }
     .rd-body { padding:12px 14px; }
     .rd-title { font-weight:700; margin:0 0 4px; color:#1f2937; }
+    /* ================= MOBILE STICKY REGISTER BAR ================= */
+
+/* Prevent content from hiding behind sticky bar */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 80px; /* height of sticky bar */
+  }
+}
+
+/* Sticky bar container */
+.mobile-register-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+}
+    
   </style>
 </head>
 <body>
 
 <jsp:include page="header.jsp"/>
+<!-- ================= MOBILE SNAPSHOT (MOBILE ONLY) ================= -->
+<!-- ================= MOBILE HERO (MATCHES DESKTOP) ================= -->
+<section class="d-md-none py-4"
+         style="background:linear-gradient(135deg,#0d47a1,#1b5e20); color:#fff;">
+  <div class="container text-center">
+
+    <!-- Badge -->
+    <!-- Title -->
+    <h5 class="fw-bold mt-2 mb-1">
+      Robo Dynamics 2026 Competitions
+    </h5>
+
+    <p class="small mb-2 opacity-75">
+      Excellence • Education • Empathy
+    </p>
+
+    <!-- Date -->
+    <p class="fw-semibold text-warning mb-3">
+      🗓️ January 31 & February 1, 2026
+    </p>
+
+<!-- IMPACT STRIP : VISIBLE ABOVE THE FOLD (MOBILE FIRST) -->
+<div class="d-md-none mt-2 mb-3">
+  <div class="bg-warning text-dark rounded-3 px-3 py-2 small fw-semibold">
+    🏆 Cash Prize: <strong>₹3,000</strong> for Winners  
+    <span class="d-block mt-1">
+      🎓 10 Registrations = 1 Scholarship (<strong>₹12,000</strong>) for a Government School Student
+    </span>
+    <span class="d-block mt-1 text-muted" style="font-size:0.75rem;">
+      *Minimum 10 participants required per competition
+    </span>
+  </div>
+</div>
+
+
+    <!-- Competition List -->
+    <div class="bg-white text-dark rounded-4 p-3 mb-3">
+      <strong>Competitions</strong>
+      <div class="row g-2 mt-2 text-center small">
+        <div class="col-6">📝 Spelling Bee</div>
+        <div class="col-6">🔢 Math Contest</div>
+        <div class="col-6">💻 Python Coding</div>
+        <div class="col-6">🤖 Robotics</div>
+        <div class="col-12">🎤 Impromptu Speaking</div>
+      </div>
+    </div>
+
+    <!-- Fees -->
+    <div class="row g-2 mb-3">
+      <div class="col-6">
+        <div class="bg-white text-dark rounded-3 p-3">
+          <div class="fw-bold text-primary">Junior</div>
+          <small>Grades 3 – 6</small>
+          <div class="fw-bold text-success fs-5 mt-1">₹750</div>
+          <small class="text-muted">per competition</small>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="bg-white text-dark rounded-3 p-3">
+          <div class="fw-bold text-primary">Senior</div>
+          <small>Grades 7 – 10</small>
+          <div class="fw-bold text-success fs-5 mt-1">₹1,250</div>
+          <small class="text-muted">per competition</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <p class="small mb-3">
+      Click Register → Login / Signup → Choose Competitions → Participate
+    </p>
+
+    <!-- CTA -->
+    <a href="${pageContext.request.contextPath}/competitions/register"
+       class="btn btn-warning btn-lg fw-bold w-100 mb-2">
+      🏆 Register for Competitions
+    </a>
+
+    <a href="${pageContext.request.contextPath}/competitions/faq"
+       class="btn btn-outline-light btn-sm w-100">
+      View Competition FAQs
+    </a>
+
+  </div>
+</section>
+
+
 <!-- Upcoming Webinar Section -->
 <section class="py-4" style="background:linear-gradient(135deg,#0d47a1,#1b5e20); color:#fff;">
   <div class="container text-center">
@@ -392,6 +500,22 @@
 </section>
 
 <jsp:include page="footer.jsp"/>
+<!-- ================= MOBILE STICKY REGISTER BAR ================= -->
+<div class="mobile-register-bar d-md-none">
+  <div class="container py-2 d-flex justify-content-between align-items-center">
+
+    <div>
+      <small class="fw-bold text-dark">Competitions 2026</small><br>
+      <small class="text-muted">Jan 31 & Feb 1</small>
+    </div>
+
+    <a href="${pageContext.request.contextPath}/competitions/register"
+       class="btn btn-warning fw-bold px-4">
+      Register
+    </a>
+
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -100,10 +100,11 @@
                 <i class="bi bi-people"></i> Enrolled Students: 
                 <c:out value="${fn:length(offering.studentEnrollments)}" default="0"/>
               </p>
-              <a href="${pageContext.request.contextPath}/course/monitor?courseId=${offering.course.courseId}&enrollmentId=0"
-                 class="btn btn-primary btn-sm">
-                <i class="fas fa-play-circle"></i> View Classes
-              </a>
+              <a href="${pageContext.request.contextPath}/mentor/course/${offering.courseOfferingId}/dashboard" class="btn btn-primary btn-sm">
+				    <i class="fas fa-chalkboard-teacher"></i> View Classes
+				</a>
+
+
             </div>
             <div class="card-footer small text-muted">
               Start: <fmt:formatDate value="${offering.startDate}" pattern="dd MMM yyyy"/> |

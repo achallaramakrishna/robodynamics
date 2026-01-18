@@ -38,6 +38,9 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	        throw e; // Re-throw the exception to ensure rollback happens if there is an issue
 	    }
 	}
+	
+	
+	
 
 
 	@Override
@@ -50,7 +53,21 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 
 	@Override
 	@Transactional
-	public List<RDCourseSessionDetail> getRDCourseSessionDetails(int courseId) {
+	public List<RDCourseSessionDetail> getRDCourseSessionDetails(int sessionId) {
+	    Session session = factory.getCurrentSession();
+	    System.out.println("hello............................" + sessionId);
+	    // Native SQL query to get course session details where course_id matches
+	    String sql = "SELECT * FROM rd_course_session_details WHERE course_session_id = :sessionId";
+
+	    Query<RDCourseSessionDetail> query = session.createNativeQuery(sql, RDCourseSessionDetail.class);
+	    query.setParameter("sessionId", sessionId);
+
+	    return query.getResultList();
+	}
+	
+	@Override
+	@Transactional
+	public List<RDCourseSessionDetail> getRDCourseSessionDetailsByCourseId(int courseId) {
 	    Session session = factory.getCurrentSession();
 	    System.out.println("hello............................" + courseId);
 	    // Native SQL query to get course session details where course_id matches
@@ -98,7 +115,7 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 		    String hql = "FROM RDCourseSessionDetail csd WHERE csd.courseSession.courseSessionId = :courseSessionId AND csd.sessionDetailId = :sessionDetailId";
 		    Query<RDCourseSessionDetail> query = session.createQuery(hql, RDCourseSessionDetail.class);
 		    query.setParameter("courseSessionId", courseSessionId);
-		    query.setParameter("sessionDetailId", courseSessionId);
+		    query.setParameter("sessionDetailId", sessionDetailId);
 
 		    return query.uniqueResult();
 	}
@@ -131,5 +148,44 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 			        .setMaxResults(1)
 			        .uniqueResult();
 	}
+
+
+	@Override
+	public Integer countByType(int sessionId, String type) {
+		  Session session = factory.getCurrentSession();
+
+	        String hql =
+	            "select count(d.courseSessionDetailId) " +
+	            "from RDCourseSessionDetail d " +
+	            "where d.courseSession.sessionId = :sessionId " +
+	            "and d.type = :type";
+
+	        Long count = (Long) session.createQuery(hql)
+	                .setParameter("sessionId", sessionId)
+	                .setParameter("type", type)
+	                .uniqueResult();
+
+	        return count != null ? count.intValue() : 0;
+	    }
+
+
+	@Override
+	public List<RDCourseSessionDetail> getBySessionAndType(int sessionId, String type) {
+
+	    Session session = factory.getCurrentSession();
+
+	    Query<RDCourseSessionDetail> query = session.createQuery(
+	    		 "FROM RDCourseSessionDetail d " +
+	    			        "WHERE d.courseSession.courseSessionId = :sid " +
+	    			        "AND d.type = :type",
+	    			        RDCourseSessionDetail.class
+	    );
+	    query.setParameter("sid", sessionId);
+	    query.setParameter("type", type);
+	    return query.getResultList();
+	}
+
+
+
 
 }

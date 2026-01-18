@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.robodynamics.dao.RDQuizDao;
 import com.robodynamics.dao.RDQuizQuestionMapDao;
+import com.robodynamics.dto.RDStudentQuizSummary;
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDQuizOption;
 import com.robodynamics.model.RDQuizQuestion;
@@ -200,5 +201,18 @@ public class RDQuizServiceImpl implements RDQuizService {
 	public List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId) {
 		return rdQuizDao.findByFilters(courseId,sessionId,sessionDetailId);
 	}
+
+	@Override
+	public List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(Integer userID, int courseId) {
+		
+		return rdQuizDao.getQuizSummaryByUserAndCourse(userID, courseId);
+	}
+
+	@Override
+	public List<RDQuiz> findByCourseSession(int courseSessionId) {
+		return rdQuizDao.findByCourseSession(courseSessionId);
+	}
+
+	
     
 }

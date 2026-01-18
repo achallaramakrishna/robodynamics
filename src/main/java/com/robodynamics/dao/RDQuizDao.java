@@ -3,6 +3,7 @@ package com.robodynamics.dao;
 
 import java.util.List;
 
+import com.robodynamics.dto.RDStudentQuizSummary;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.wrapper.ProjectGroup;
@@ -40,5 +41,10 @@ public interface RDQuizDao {
 	List<RDQuiz> findQuizzesForStudent(int studentId);
 
 	List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId);
+
+	List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(Integer userID, int courseId);
+
+	List<RDQuiz> findByCourseSession(int courseSessionId);
+
 
 }

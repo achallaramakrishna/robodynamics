@@ -29,5 +29,11 @@ public interface RDMatchingGameService {
 
 	Map<String, Object> parseJson(MultipartFile jsonFile) throws IOException;
 
+	List<RDMatchingGame> getGamesBySessionId(int sessionId);
+
+	Integer countGamesBySessionId(int sessionId);
+
+	RDMatchingGame getGameWithCategories(int gameId);
+
 
 }

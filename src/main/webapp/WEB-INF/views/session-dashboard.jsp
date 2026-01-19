@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-
-
 <%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Session Dashboard</title>
+
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -37,8 +37,6 @@
 
 <body>
 
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
-
 <div class="container mt-4">
 
     <!-- ================= SESSION HEADER ================= -->
@@ -50,8 +48,7 @@
     <!-- ================= SAFETY CHECK ================= -->
     <c:if test="${not empty session and session.courseSessionId > 0}">
 
-        <!-- ================= DASHBOARD CARDS ================= -->
-        <div class="row g-4">
+        <div class="row g-4 align-items-stretch">
 
             <!-- 🎥 VIDEOS -->
             <div class="col-md-4">
@@ -68,7 +65,7 @@
                 </div>
             </div>
 
-            <!-- 📘 PDF NOTES -->
+            <!-- 📘 NOTES -->
             <div class="col-md-4">
                 <div class="card dashboard-card text-center">
                     <div class="card-body">
@@ -112,7 +109,27 @@
                     </div>
                 </div>
             </div>
+<!-- 🧩 MATCHING GAMES -->
+<div class="col-md-4">
+    <div class="card dashboard-card text-center h-100">
+        <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+                <div class="card-icon">🧩</div>
+                <h5 class="mt-2">Matching Games</h5>
+                <div class="card-count">
+                    ${summary.matchingGame}
+                </div>
+            </div>
 
+            <a href="${pageContext.request.contextPath}/student/matching-game/list?sessionId=${session.courseSessionId}&enrollmentId=${enrollment.enrollmentId}"
+               class="btn btn-primary mt-3">
+                Play Now
+            </a>
+        </div>
+    </div>
+</div>
+
+            
             <!-- 🗺 MEMORY MAPS -->
             <div class="col-md-4">
                 <div class="card dashboard-card text-center">
@@ -143,10 +160,12 @@
                 </div>
             </div>
 
+
+
         </div>
     </c:if>
 
-    <!-- ================= FALLBACK (SAFETY) ================= -->
+    <!-- ================= FALLBACK ================= -->
     <c:if test="${empty session or session.courseSessionId <= 0}">
         <div class="alert alert-warning mt-4">
             Session information is not available. Please go back and select a session again.

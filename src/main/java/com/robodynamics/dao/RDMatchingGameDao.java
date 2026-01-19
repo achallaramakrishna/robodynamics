@@ -14,4 +14,10 @@ public interface RDMatchingGameDao {
 	void deleteGame(int gameId);
 
 	RDMatchingGame getGameByCourseSessionDetails(int courseSessionDetailId);
+
+	List<RDMatchingGame> getGamesBySessionId(int sessionId);
+
+	Integer countGamesBySessionId(int sessionId);
+
+	RDMatchingGame getGameWithCategories(int gameId);
 }

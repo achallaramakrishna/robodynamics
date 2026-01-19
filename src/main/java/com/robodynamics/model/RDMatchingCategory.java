@@ -1,11 +1,7 @@
 package com.robodynamics.model;
 
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "rd_matching_categories")
@@ -16,29 +12,20 @@ public class RDMatchingCategory {
     @Column(name = "category_id")
     private int categoryId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", nullable = false)
-    @JsonBackReference
     private RDMatchingGame game;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = false)
     private String categoryName;
-    
-    @Column(name = "image_name", nullable = true)
-    private String imageName; // For category images
 
+    @Column(name = "image_name")
+    private String imageName;   // optional
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RDMatchingItem> items;
 
     public RDMatchingCategory() {}
-
-    public RDMatchingCategory(int categoryId, RDMatchingGame game, String categoryName) {
-        this.categoryId = categoryId;
-        this.game = game;
-        this.categoryName = categoryName;
-    }
 
     public int getCategoryId() {
         return categoryId;
@@ -64,6 +51,14 @@ public class RDMatchingCategory {
         this.categoryName = categoryName;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     public List<RDMatchingItem> getItems() {
         return items;
     }
@@ -72,23 +67,10 @@ public class RDMatchingCategory {
         this.items = items;
     }
 
-
-
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
-	@Override
-	public String toString() {
-		final int maxLen = 10;
-		return "RDMatchingCategory [categoryId=" + categoryId + ", game=" + game + ", categoryName=" + categoryName
-				+ ", imageName=" + imageName + ", items="
-				+ (items != null ? items.subList(0, Math.min(items.size(), maxLen)) : null) + "]";
-	}
-    
-    
+    @Override
+    public String toString() {
+        return "RDMatchingCategory [categoryId=" + categoryId +
+               ", categoryName=" + categoryName +
+               ", imageName=" + imageName + "]";
+    }
 }

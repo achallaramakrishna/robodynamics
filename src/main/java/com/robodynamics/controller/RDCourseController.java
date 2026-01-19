@@ -29,6 +29,7 @@ import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.service.RDMatchingGameService;
 import com.robodynamics.service.RDStudentEnrollmentService;
 
 import java.io.File;
@@ -61,6 +62,9 @@ public class RDCourseController {
 	
 	@Autowired
 	private RDStudentEnrollmentService enrollmentService;
+	
+	@Autowired
+	private RDMatchingGameService matchingGameService;
 	
 	@Autowired
 	private RDCourseSessionDetailService courseSessionDetailService;
@@ -223,6 +227,7 @@ public class RDCourseController {
 	    summary.put("pdf", grouped.getOrDefault("pdf", List.of()).size());
 	    summary.put("quiz", grouped.getOrDefault("quiz", List.of()).size());
 	    summary.put("flashcard", grouped.getOrDefault("flashcard", List.of()).size());
+	    summary.put("matchinggame", grouped.getOrDefault("matchinggame", List.of()).size());
 	    summary.put("memory-map", grouped.getOrDefault("memory-map", List.of()).size());
 	    summary.put("assignment", grouped.getOrDefault("assignment", List.of()).size());
 
@@ -246,8 +251,13 @@ public class RDCourseController {
 	    summary.put("quiz", courseSessionDetailService.countByType(sessionId, "quiz"));
 	    summary.put("pdf", courseSessionDetailService.countByType(sessionId, "pdf"));
 	    summary.put("flashcard", courseSessionDetailService.countByType(sessionId, "flashcard"));
+	    summary.put("matchingame", courseSessionDetailService.countByType(sessionId, "matchinggame"));
 	    summary.put("memory-map", courseSessionDetailService.countByType(sessionId, "memory-map"));
 
+	    // ✅ NEW: Matching Games count
+	    summary.put("matchingGame",
+	        matchingGameService.countGamesBySessionId(sessionId)
+	    );
 	    return summary;
 	}
 

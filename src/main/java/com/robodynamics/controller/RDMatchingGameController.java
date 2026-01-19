@@ -1,6 +1,12 @@
 package com.robodynamics.controller;
 
 import com.robodynamics.model.RDMatchingGame;
+import com.robodynamics.dto.RDMatchingCategoryDTO;
+
+import com.robodynamics.dto.RDMatchingGameDTO;
+import com.robodynamics.dto.RDMatchingGameMapper;
+import com.robodynamics.dto.RDMatchingItemDTO;
+import com.robodynamics.dto.RDMatchingGameResponseDTO;
 import com.robodynamics.form.RDMatchingCategoryForm;
 import com.robodynamics.form.RDMatchingItemForm;
 import com.robodynamics.model.RDCourse;
@@ -70,6 +76,13 @@ public class RDMatchingGameController {
         response.put("courseSessions", courseSessions);
         return response;
     }
+    
+    @GetMapping("/dashboard")
+    public String matchingDashboard(Model model) {
+        model.addAttribute("courses", courseService.getRDCourses());
+        return "matching-game/listMatchingGames";
+    }
+
 
     @GetMapping("/getCourseSessionDetails")
     @ResponseBody
@@ -88,25 +101,54 @@ public class RDMatchingGameController {
         return "matching-game/all-games";  // JSP page to list all games
     }
     
-    @GetMapping("/list")
-    public String listMatchingGames(@RequestParam(required = false) Integer courseSessionDetailId, Model model) {
-        RDMatchingGame game = null;
+    @GetMapping("/matching/play")
+    public String playMatchingGame(
+            @RequestParam int sessionId,
+            @RequestParam int enrollmentId,
+            Model model) {
 
-        if (courseSessionDetailId != null && courseSessionDetailId > 0) {
-        	
-            game = matchingGameService.getGameByCourseSessionDetails(courseSessionDetailId);
-        }
-
-        if (game == null) {
-            model.addAttribute("message", "No matching games available for the selected session.");
-        } else {
-            model.addAttribute("games", game);
-        }
-        List<RDCourse> courses = courseService.getRDCourses();
-    	model.addAttribute("courses",courses);
-
-        return "matching-game/listMatchingGames"; // JSP page to display the list of matching games
+    	
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("enrollmentId", enrollmentId);
+        return "matching-game/play";
     }
+    
+    @GetMapping("/list")
+    public String listMatchingGames(
+            @RequestParam int sessionId,
+            @RequestParam int enrollmentId,
+            Model model) {
+
+        List<RDMatchingGame> games =
+            matchingGameService.getGamesBySessionId(sessionId);
+
+        model.addAttribute("games", games);
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("enrollmentId", enrollmentId);
+
+        return "matching-game/listMatchingGames";
+    }
+
+
+    
+	/*
+	 * @GetMapping("/list") public String listMatchingGames(@RequestParam(required =
+	 * false) Integer courseSessionDetailId, Model model) { RDMatchingGame game =
+	 * null;
+	 * 
+	 * if (courseSessionDetailId != null && courseSessionDetailId > 0) {
+	 * 
+	 * game =
+	 * matchingGameService.getGameByCourseSessionDetails(courseSessionDetailId); }
+	 * 
+	 * if (game == null) { model.addAttribute("message",
+	 * "No matching games available for the selected session."); } else {
+	 * model.addAttribute("games", game); } List<RDCourse> courses =
+	 * courseService.getRDCourses(); model.addAttribute("courses",courses);
+	 * 
+	 * return "matching-game/listMatchingGames"; // JSP page to display the list of
+	 * matching games }
+	 */
     
     @PostMapping("/uploadJsonWithImages")
     public String uploadJsonWithImages(
@@ -514,47 +556,42 @@ public class RDMatchingGameController {
     
     @GetMapping("/getGameDetailsBySessionDetail")
     @ResponseBody
-    public Map<String, Object> getGameDetailsBySessionDetail(@RequestParam("sessionDetailId") int sessionDetailId) {
-        Map<String, Object> response = new HashMap<>();
+    public RDMatchingGameResponseDTO getGameDetailsBySessionDetail(
+            @RequestParam("sessionDetailId") int sessionDetailId) {
 
-        // Fetch the game associated with the session detail ID
-        System.out.println("hello 1...." + sessionDetailId)  ;
-        
-        RDMatchingGame game = matchingGameService.getGameByCourseSessionDetails(sessionDetailId);
-        System.out.println("hello 2...." + game);
-        
-        
-        if (game != null) {
-        	System.out.println("hello 3....");
-            
-            response.put("game", game);
+        RDMatchingGameResponseDTO response = new RDMatchingGameResponseDTO();
 
-            
-            // Fetch categories for the game
-            List<RDMatchingCategory> categories = matchingCategoryService.getCategoriesByGameId(game.getGameId());
-            List<Map<String, Object>> categoryDetails = new ArrayList<>();
+        RDMatchingGame game =
+                matchingGameService.getGameByCourseSessionDetails(sessionDetailId);
 
-            for (RDMatchingCategory category : categories) {
-                Map<String, Object> categoryData = new HashMap<>();
-                categoryData.put("categoryId", category.getCategoryId());
-                categoryData.put("categoryName", category.getCategoryName());
-                categoryData.put("imageName", category.getImageName());
-
-                // Fetch items for each category
-                List<RDMatchingItem> items = matchingItemService.getItemsByCategoryId(category.getCategoryId());
-                categoryData.put("items", items);
-
-                categoryDetails.add(categoryData);
-            }
-
-            response.put("categories", categoryDetails);
-        } else {
-            response.put("game", null);
-            response.put("categories", new ArrayList<>());
+        if (game == null) {
+            response.setGame(null);
+            response.setCategories(new ArrayList<>());
+            return response;
         }
 
+        // 1️⃣ Fetch categories
+        List<RDMatchingCategory> categories =
+                matchingCategoryService.getCategoriesByGameId(game.getGameId());
+
+        // 2️⃣ Fetch items grouped by category
+        Map<Integer, List<RDMatchingItem>> itemsByCategory = new HashMap<>();
+        for (RDMatchingCategory c : categories) {
+            itemsByCategory.put(
+                    c.getCategoryId(),
+                    matchingItemService.getItemsByCategoryId(c.getCategoryId())
+            );
+        }
+
+        // 3️⃣ Use Mapper (single source of truth)
+        RDMatchingGameDTO gameDTO =
+                RDMatchingGameMapper.toDTO(game, categories, itemsByCategory);
+
+        response.setGame(gameDTO);
+        response.setCategories(gameDTO.getCategories());
+
         return response;
-    } 
+    }
 
 
 }

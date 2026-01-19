@@ -16,6 +16,7 @@ encoding//src/main/webapp/WEB-INF/views/flashcardsets/flashcard-set-list.jsp=UTF
 encoding//src/main/webapp/WEB-INF/views/header.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/listCourses.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/matching-game/listMatchingGames.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/maths/scene_1.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/mentors/mentor-search.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/parentDashboard.jsp=UTF-8

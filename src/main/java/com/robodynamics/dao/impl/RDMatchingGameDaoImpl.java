@@ -1,9 +1,11 @@
 package com.robodynamics.dao.impl;
 
 import com.robodynamics.dao.RDMatchingGameDao;
+import com.robodynamics.model.RDMatchingCategory;
 import com.robodynamics.model.RDMatchingGame;
 import com.robodynamics.model.RDMatchingItem;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -63,6 +65,65 @@ public class RDMatchingGameDaoImpl implements RDMatchingGameDao {
 	        return null; // Handle exception as needed
 	    }
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<RDMatchingGame> getGamesBySessionId(int sessionId) {
+
+	    Session session = sessionFactory.getCurrentSession();
+
+	    String hql =
+	        "select g " +
+	        "from RDMatchingGame g " +
+	        "join g.courseSessionDetail d " +
+	        "join d.courseSession s " +
+	        "where s.courseSessionId = :sessionId";
+
+	    return session.createQuery(hql)
+	                  .setParameter("sessionId", sessionId)
+	                  .getResultList();
+	}
+
+	@Override
+	public Integer countGamesBySessionId(int sessionId) {
+	    String hql = """
+	        select count(g.gameId)
+	        from RDMatchingGame g
+	        where g.courseSessionDetail.courseSession.courseSessionId = :sessionId
+	    """;
+
+	    Long count = (Long) sessionFactory
+	            .getCurrentSession()
+	            .createQuery(hql)
+	            .setParameter("sessionId", sessionId)
+	            .uniqueResult();
+
+	    return count == null ? 0 : count.intValue();
+	}
+
+	@Override
+    public RDMatchingGame getGameWithCategories(int gameId) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        // Load the game
+        RDMatchingGame game = session.get(RDMatchingGame.class, gameId);
+
+        if (game == null) {
+            return null;
+        }
+
+        // Initialize categories
+        Hibernate.initialize(game.getCategories());
+
+        // Initialize items inside each category
+        for (RDMatchingCategory category : game.getCategories()) {
+            Hibernate.initialize(category.getItems());
+        }
+
+        return game;
+    }
+
 
 	
 }

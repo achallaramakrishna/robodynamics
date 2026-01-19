@@ -156,39 +156,107 @@ public class RDMatchingGameServiceImpl implements RDMatchingGameService {
 	    return objectMapper.readValue(jsonFile.getInputStream(), new TypeReference<>() {});
 	}
 
-	public void saveGameWithCategoriesAndItems(Map<String, Object> parsedData, int courseSessionDetailId) {
-	    // Extract data from parsed JSON
-	    String gameName = (String) parsedData.get("name");
-	    String description = (String) parsedData.get("description");
-	    List<Map<String, Object>> categories = (List<Map<String, Object>>) parsedData.get("categories");
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public void saveGameWithCategoriesAndItems(
+	        Map<String, Object> parsedData,
+	        int courseSessionDetailId) {
 
-	    // Create and save the game
+	    /* -------------------------------
+	     * 1. Extract GAME block
+	     * ------------------------------- */
+	    Map<String, Object> gameMap =
+	            (Map<String, Object>) parsedData.get("game");
+
+	    if (gameMap == null) {
+	        throw new IllegalArgumentException("JSON missing 'game' object");
+	    }
+
+	    String gameName = (String) gameMap.get("name");
+	    String description = (String) gameMap.get("description");
+
+	    if (gameName == null || gameName.trim().isEmpty()) {
+	        throw new IllegalArgumentException("Matching Game name cannot be null or empty");
+	    }
+
+	    /* -------------------------------
+	     * 2. Create & save GAME
+	     * ------------------------------- */
 	    RDMatchingGame game = new RDMatchingGame();
 	    game.setName(gameName);
 	    game.setDescription(description);
-	    RDCourseSessionDetail sessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
-	    game.setCourseSessionDetail(sessionDetail);
-	    this.saveGame(game);
 
-	    // Create and save categories and items
+	    RDCourseSessionDetail sessionDetail =
+	            courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
+
+	    if (sessionDetail == null) {
+	        throw new IllegalArgumentException("Invalid courseSessionDetailId: " + courseSessionDetailId);
+	    }
+
+	    game.setCourseSessionDetail(sessionDetail);
+	    this.saveGame(game);   // 🔴 MUST happen first
+
+	    /* -------------------------------
+	     * 3. Extract CATEGORIES
+	     * ------------------------------- */
+	    List<Map<String, Object>> categories =
+	            (List<Map<String, Object>>) parsedData.get("categories");
+
+	    if (categories == null || categories.isEmpty()) {
+	        throw new IllegalArgumentException("No categories found in JSON");
+	    }
+
+	    /* -------------------------------
+	     * 4. Save Categories + Items
+	     * ------------------------------- */
 	    for (Map<String, Object> categoryData : categories) {
+
 	        RDMatchingCategory category = new RDMatchingCategory();
 	        category.setGame(game);
 	        category.setCategoryName((String) categoryData.get("categoryName"));
 	        category.setImageName((String) categoryData.get("imageName"));
+
 	        matchingCategoryService.saveCategory(category);
 
-	        List<Map<String, Object>> items = (List<Map<String, Object>>) categoryData.get("items");
+	        List<Map<String, Object>> items =
+	                (List<Map<String, Object>>) categoryData.get("items");
+
+	        if (items == null || items.isEmpty()) {
+	            continue; // allow empty category
+	        }
+
 	        for (Map<String, Object> itemData : items) {
 	            RDMatchingItem item = new RDMatchingItem();
 	            item.setCategory(category);
 	            item.setItemName((String) itemData.get("itemName"));
 	            item.setMatchingText((String) itemData.get("matchingText"));
 	            item.setImageName((String) itemData.get("imageName"));
+
 	            matchingItemService.saveItem(item);
 	        }
 	    }
 	}
+
+	@Override
+	@Transactional
+	public List<RDMatchingGame> getGamesBySessionId(int sessionId) {
+		return matchingGameDao.getGamesBySessionId(sessionId);
+	}
+
+	@Override
+	@Transactional
+	public Integer countGamesBySessionId(int sessionId) {
+		
+		return matchingGameDao.countGamesBySessionId(sessionId);
+	}
+
+	@Override
+	@Transactional
+	public RDMatchingGame getGameWithCategories(int gameId) {
+		// TODO Auto-generated method stub
+		return matchingGameDao.getGameWithCategories(gameId);
+	}
+
 
 
 }

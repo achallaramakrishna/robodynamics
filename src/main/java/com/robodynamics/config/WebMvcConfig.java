@@ -1,5 +1,6 @@
 package com.robodynamics.config;
 
+import org.springframework.web.filter.ForwardedHeaderFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	 
 	 @Value("${rd.session.materials.base:/opt/robodynamics/session_materials}")
 	 private String materialsBase;
+	 
+	 @Bean
+	 public ForwardedHeaderFilter forwardedHeaderFilter() {
+	     return new ForwardedHeaderFilter();
+	 }
+
 	 
 	 
     public void configureViewResolvers(ViewResolverRegistry registry) {

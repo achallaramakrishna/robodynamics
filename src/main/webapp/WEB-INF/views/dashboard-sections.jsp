@@ -123,6 +123,36 @@
 							</div>
 						</div>
 					</div>
+<div class="col-6 col-md-4 mb-3">
+    <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+
+            <h5 class="card-title">Match the Pairs</h5>
+
+            <p class="card-text small text-muted">
+                Create match-pair questions and upload images
+                for recall-based practice.
+            </p>
+
+            <div class="d-grid gap-2">
+
+                <!-- Match Pairs: Question / Pair Setup -->
+                <a href="${pageContext.request.contextPath}/matchpairs/list"
+                   class="btn btn-primary btn-sm">
+                    Manage Match Questions
+                </a>
+
+                <!-- Match Pairs: Media Upload -->
+                <a href="${pageContext.request.contextPath}/matchpairs/media/manage"
+                   class="btn btn-warning btn-sm">
+                    Manage Pair Media
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 					<!-- Matching Activities -->
 					<div class="col-6 col-md-4 mb-3">
 						<div class="card shadow-sm h-100">

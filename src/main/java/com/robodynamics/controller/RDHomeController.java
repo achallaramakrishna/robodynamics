@@ -32,6 +32,11 @@ public class RDHomeController {
         return "home"; // /WEB-INF/views/home.jsp
     }
     
+    @GetMapping("/contests")
+    public String contests() {
+        return "contests";   // contests.jsp
+    }
+    
     @GetMapping("/thank-you")
     public String thankYou(@RequestParam(value = "audience", required = false) String audience,
                            @RequestParam(value = "name", required = false) String name,

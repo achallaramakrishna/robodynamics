@@ -36,6 +36,18 @@ public class RDQuizQuestion {
 
     @Column(name = "points")
     private Integer points;
+    
+    @Column(name = "is_active")
+    private boolean active = true;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 
     @Column(name = "tier_level")
     @Enumerated(EnumType.STRING)

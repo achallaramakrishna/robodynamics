@@ -126,7 +126,11 @@ public class RDMatchingGameController {
         model.addAttribute("sessionId", sessionId);
         model.addAttribute("enrollmentId", enrollmentId);
 
-        return "matching-game/listMatchingGames";
+        return "redirect:/matching-game/list?sessionId="
+        + sessionId +
+        "&enrollmentId="
+        + enrollmentId;
+
     }
 
 

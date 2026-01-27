@@ -1,27 +1,6 @@
 package com.robodynamics.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import org.springframework.web.multipart.MultipartFile;
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "rd_match_pair")
@@ -32,47 +11,113 @@ public class RDMatchPair {
     @Column(name = "match_pair_id")
     private int matchPairId;
 
-    @Column(name = "left_text")
+    /* ===================== TEXT ===================== */
+
+    @Column(name = "left_text", nullable = false)
     private String leftText;
 
-    @Column(name = "right_text")
+    @Column(name = "right_text", nullable = false)
     private String rightText;
 
+    /* ===================== ORDER ===================== */
+
+    @Column(name = "display_order")
+    private Integer displayOrder;
+
+    /* ===================== TYPE ===================== */
+    // TEXT / IMAGE (future: BOTH)
+
+    @Column(name = "left_type", length = 10)
+    private String leftType = "TEXT";
+
+    @Column(name = "right_type", length = 10)
+    private String rightType = "TEXT";
+
+    /* ===================== IMAGES ===================== */
+
+    @Column(name = "left_image", length = 255)
+    private String leftImage;
+
+    @Column(name = "right_image", length = 255)
+    private String rightImage;
+
+    /* ===================== RELATION ===================== */
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "match_question_id")
+    @JoinColumn(name = "match_question_id", nullable = false)
     private RDMatchQuestion matchQuestion;
 
-	public int getMatchPairId() {
-		return matchPairId;
-	}
+    /* ===================== GETTERS / SETTERS ===================== */
 
-	public void setMatchPairId(int matchPairId) {
-		this.matchPairId = matchPairId;
-	}
+    public int getMatchPairId() {
+        return matchPairId;
+    }
 
-	public String getLeftText() {
-		return leftText;
-	}
+    public void setMatchPairId(int matchPairId) {
+        this.matchPairId = matchPairId;
+    }
 
-	public void setLeftText(String leftText) {
-		this.leftText = leftText;
-	}
+    public String getLeftText() {
+        return leftText;
+    }
 
-	public String getRightText() {
-		return rightText;
-	}
+    public void setLeftText(String leftText) {
+        this.leftText = leftText;
+    }
 
-	public void setRightText(String rightText) {
-		this.rightText = rightText;
-	}
+    public String getRightText() {
+        return rightText;
+    }
 
-	public RDMatchQuestion getMatchQuestion() {
-		return matchQuestion;
-	}
+    public void setRightText(String rightText) {
+        this.rightText = rightText;
+    }
 
-	public void setMatchQuestion(RDMatchQuestion matchQuestion) {
-		this.matchQuestion = matchQuestion;
-	}
+    public Integer getDisplayOrder() {
+        return displayOrder;
+    }
 
-    
+    public void setDisplayOrder(Integer displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
+    public String getLeftType() {
+        return leftType;
+    }
+
+    public void setLeftType(String leftType) {
+        this.leftType = leftType;
+    }
+
+    public String getRightType() {
+        return rightType;
+    }
+
+    public void setRightType(String rightType) {
+        this.rightType = rightType;
+    }
+
+    public String getLeftImage() {
+        return leftImage;
+    }
+
+    public void setLeftImage(String leftImage) {
+        this.leftImage = leftImage;
+    }
+
+    public String getRightImage() {
+        return rightImage;
+    }
+
+    public void setRightImage(String rightImage) {
+        this.rightImage = rightImage;
+    }
+
+    public RDMatchQuestion getMatchQuestion() {
+        return matchQuestion;
+    }
+
+    public void setMatchQuestion(RDMatchQuestion matchQuestion) {
+        this.matchQuestion = matchQuestion;
+    }
 }

@@ -143,6 +143,12 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 
 	}
 
+	@Override
+	 @Transactional
+	public List<RDQuizQuestion> findActiveQuestionsByIds(List<Integer> ids) {
+		return rdQuizQuestionDao.findActiveQuestionsByIds(ids);
+	}
+
 	
 
 	

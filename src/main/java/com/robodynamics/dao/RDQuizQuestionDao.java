@@ -63,5 +63,8 @@ public interface RDQuizQuestionDao {
 
 
 	long countByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId, Integer quizId);
+
+
+	List<RDQuizQuestion> findActiveQuestionsByIds(List<Integer> ids);
     
 }

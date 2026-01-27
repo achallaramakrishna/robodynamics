@@ -86,6 +86,9 @@
         <option value="document" <c:if test="${courseSessionDetail.type == 'document'}">selected</c:if>>Document</option>
         <option value="quiz"     <c:if test="${courseSessionDetail.type == 'quiz'}">selected</c:if>    >Quiz</option>
         <option value="flashcard"     <c:if test="${courseSessionDetail.type == 'flashcard'}">selected</c:if>    >Flashcard</option>
+        <option value="matchinggame"     <c:if test="${courseSessionDetail.type == 'flashcard'}">selected</c:if>    >Matching Game</option>
+        <option value="matchpairs"     <c:if test="${courseSessionDetail.type == 'matchpairs'}">selected</c:if>    >Match Pairs</option>
+        
       </f:select>
     </div>
     

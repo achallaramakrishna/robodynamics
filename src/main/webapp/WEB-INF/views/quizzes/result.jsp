@@ -83,7 +83,7 @@
 <div class="d-flex gap-2 mb-3">
 
     <!-- Back to Course Dashboard (always visible) -->
-    <a href="${pageContext.request.contextPath}/student/course-dashboard?courseId=${courseId}&enrollmentId=${enrollmentId}"
+<a href="${pageContext.request.contextPath}/studentDashboard"
        class="btn btn-outline-primary">
         ← Back to Course Dashboard
     </a>

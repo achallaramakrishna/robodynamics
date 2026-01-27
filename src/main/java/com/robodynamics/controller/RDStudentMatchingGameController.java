@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDMatchingCategory;
 import com.robodynamics.model.RDMatchingGame;
 import com.robodynamics.model.RDMatchingItem;
+import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.service.RDMatchingGameService;
 
 /**
@@ -33,6 +35,9 @@ public class RDStudentMatchingGameController {
 
     @Autowired
     private RDMatchingGameService matchingGameService;
+    
+    @Autowired
+	private RDCourseSessionService courseSessionservice;
 
     /* -------------------------------------------------
      * LIST MATCHING GAMES FOR A SESSION
@@ -46,9 +51,13 @@ public class RDStudentMatchingGameController {
             @RequestParam("enrollmentId") int enrollmentId,
             Model model) {
 
+    	RDCourseSession session = courseSessionservice.getCourseSession(sessionId);
         // Fetch games mapped to the session
         List<RDMatchingGame> games =
                 matchingGameService.getGamesBySessionId(sessionId);
+        
+        
+        model.addAttribute("session", session);
 
         model.addAttribute("games", games);
         model.addAttribute("sessionId", sessionId);

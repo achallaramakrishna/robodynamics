@@ -422,6 +422,26 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
 		    return findByFilters(courseId, sessionId, sessionDetailId, quizId, 0, 0);
 		}
 
+		@Override
+		public List<RDQuizQuestion> findActiveQuestionsByIds(List<Integer> ids) {
+			
+			  // Build the HQL query to fetch questions by their IDs along with their options
+		    Session session = factory.getCurrentSession();
+
+		    // Use IN clause to fetch all questions that match the provided list of IDs
+		    String hql = "SELECT DISTINCT q FROM RDQuizQuestion q LEFT JOIN FETCH q.options WHERE q.questionId IN (:questionIds) and q.active = true";
+		    
+		    // Create the query
+		    Query<RDQuizQuestion> query = session.createQuery(hql, RDQuizQuestion.class);
+		    
+		    // Set the list of IDs as the parameter for the query
+		    query.setParameterList("questionIds", ids);
+		    
+		    // Execute the query and return the result list
+		    return query.getResultList();
+
+		}
+
 	
     
 }

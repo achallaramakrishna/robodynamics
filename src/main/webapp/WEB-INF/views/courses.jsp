@@ -1,318 +1,202 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses - Robo Dynamics</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<title>Courses | Robo Dynamics Learning Platform</title>
+<meta name="description"
+      content="Explore courses on Robo Dynamics LMS – Coding, Robotics, School Academics and NEET preparation with dashboards, assessments and mentor support." />
 
-  <style>
-    /* General */
-    body { 
-      font-family: 'Roboto', sans-serif;
-      color: #000;
-    }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
 
-    /* Background + overlay */
-    body {
-      background-image: url('images/bk.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35); /* reduced darkness */
-      pointer-events: none;
-      z-index: 0;
-    }
+<style>
+  body { background:#f7fafc; color:#1b1f23; }
 
-    /* Hero Section (still white text) */
-    .hero-section {
-      color: #fff;
-      text-align: center;
-      padding: 48px 0 28px;
-      position: relative;
-      z-index: 1;
-    }
+  .hero {
+    background: linear-gradient(135deg,#0d47a1,#1b5e20);
+    color:#fff;
+    padding:4rem 1rem;
+  }
 
-    .hero-section h1 { font-size: 2.4rem; font-weight: 800; }
-    .hero-section p { font-size: 1.1rem; opacity: 0.95; }
+  .lms-box {
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+  }
 
-    /* Buttons */
-    .btn-demo {
-      background-color: #ffffff;
-      color: #000080;
-      border-radius: 50px;
-      padding: 10px 22px;
-      font-weight: 600;
-      border: none;
-    }
-    .btn-demo:hover { background-color: #ff007f; color:#fff; }
+  .course-card {
+    border-radius:16px;
+    background:#fff;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    transition:transform .2s ease;
+  }
 
-    .btn-wa {
-      background: #25D366;
-      border-radius: 50px;
-      color: white;
-      font-weight: 600;
-      padding: 10px 22px;
-      border: none;
-    }
-    .btn-wa:hover { background:#1ea851; }
+  .course-card:hover {
+    transform:translateY(-4px);
+  }
 
-    /* Sections */
-    .level-section {
-      position: relative;
-      z-index: 1;
-      margin-bottom: 52px;
-    }
-
-    /* Bright readable section background */
-    .level-content {
-      background: rgba(255,255,255,0.90); /* bright and visible */
-      padding: 25px;
-      border-radius: 14px;
-      backdrop-filter: blur(6px);
-      color: #000 !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-
-    .level-content h2,
-    .level-content p {
-      color: #000 !important;
-    }
-
-    /* Course Cards */
-    .course-card .card {
-      border-radius: 12px;
-      overflow: hidden;
-      background: #ffffff; 
-      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    }
-    .course-card img {
-      height: 190px;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    .badge-grade {
-      background: #000080;
-      color: #fff;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-
-    .btn-enroll-card {
-      background-color: #28a745;
-      color: white;
-      border-radius: 50px;
-      margin-top: 10px;
-      padding: 8px 18px;
-      font-weight: 600;
-      border: none;
-    }
-    .btn-enroll-card:hover { background-color:#218838; }
-
-    /* CTA Section */
-    .gradient-bg {
-      background: linear-gradient(to right, #ff007f, #000080);
-      color: white;
-    }
-  </style>
+  .icon-lg {
+    font-size:2.5rem;
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <jsp:include page="header.jsp" />
+<jsp:include page="header.jsp"/>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="container">
-      <span class="badge badge-light px-3 py-2" style="border-radius:999px; font-weight:700;">Grades 2–8</span>
-      <h1 class="mt-3">Tuition + Future Skills</h1>
-      <p>Maths • Science • English • Kannada • Hindi • Olympiad • Robotics • Coding</p>
+<!-- ================= HERO ================= -->
+<section class="hero text-center">
+  <div class="container">
+    <span class="badge bg-warning text-dark mb-3">Robo Dynamics LMS</span>
+    <h1 class="fw-bold mb-3">Courses Powered by a Smart Learning Platform</h1>
+    <p class="lead mb-4">
+      Learn through structured content, assessments, dashboards and mentor guidance —
+      not just tuition.
+    </p>
 
-      <div class="d-flex justify-content-center flex-wrap">
-        <a href="https://robodynamics.in/parents" class="btn-demo mr-2 mb-2">
-          <i class="bi bi-calendar2-check"></i> Book Free Demo
-        </a>
+    <a href="${pageContext.request.contextPath}/parents"
+       class="btn btn-light btn-lg fw-bold me-2">
+      <i class="bi bi-display"></i> Experience the Platform
+    </a>
+  </div>
+</section>
 
-        <a href="https://wa.me/918374377311" class="btn-wa mb-2">
-          <i class="bi bi-whatsapp"></i> Chat on WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
+<!-- ================= HOW LMS WORKS ================= -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-4">How Learning Works on Robo Dynamics</h2>
 
-  <!-- Content Section -->
-  <section class="py-5">
-    <div class="container">
-
-      <!-- Core Tuition Section -->
-      <div class="level-section">
-        <div class="level-content">
-          <h2 class="text-center">Core Tuition (Grades 2–8)</h2>
-          <p class="text-center mb-4">Curriculum-aligned tutoring with practice, tests, and progress reports.</p>
-
-          <div class="row justify-content-center">
-
-            <!-- Maths -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/tuition-maths.jpg" alt="Maths Tuition">
-                <div class="card-body">
-                  <span class="badge-grade">Grades 2–8</span>
-                  <h5 class="card-title">Maths Tuition</h5>
-                  <p class="card-text">Concept clarity, mental math, problem solving.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Science -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/tuition-science.jpg" alt="Science Tuition">
-                <div class="card-body">
-                  <span class="badge-grade">Grades 2–8</span>
-                  <h5 class="card-title">Science Tuition</h5>
-                  <p class="card-text">Experiments, diagrams, hands-on learning.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- English -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/tuition-english.jpg" alt="English Tuition">
-                <div class="card-body">
-                  <span class="badge-grade">Grades 2–8</span>
-                  <h5 class="card-title">English Tuition</h5>
-                  <p class="card-text">Grammar, comprehension, writing & speaking.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Kannada -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/tuition-kannada.jpg" alt="Kannada Tuition">
-                <div class="card-body">
-                  <span class="badge-grade">Grades 2–8</span>
-                  <h5 class="card-title">Kannada Tuition</h5>
-                  <p class="card-text">Reading, writing, grammar, conversation.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Hindi -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/tuition-hindi.jpg" alt="Hindi Tuition">
-                <div class="card-body">
-                  <span class="badge-grade">Grades 2–8</span>
-                  <h5 class="card-title">Hindi Tuition</h5>
-                  <p class="card-text">Writing, grammar, comprehension.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="lms-box text-center">
+          <i class="bi bi-play-circle icon-lg text-primary"></i>
+          <h6 class="fw-bold mt-3">Structured Content</h6>
+          <p class="small text-muted">
+            Videos, PDFs, notes and coding tasks aligned to syllabus & exams.
+          </p>
         </div>
       </div>
 
-      <!-- Future Skills Section -->
-      <div class="level-section">
-        <div class="level-content">
-          <h2 class="text-center">Future Skills Tracks</h2>
-          <p class="text-center mb-4">Build future-ready confidence and skills.</p>
+      <div class="col-md-3">
+        <div class="lms-box text-center">
+          <i class="bi bi-journal-check icon-lg text-success"></i>
+          <h6 class="fw-bold mt-3">Assessments</h6>
+          <p class="small text-muted">
+            MCQs, quizzes, coding tests and worksheets with auto evaluation.
+          </p>
+        </div>
+      </div>
 
-          <div class="row justify-content-center">
+      <div class="col-md-3">
+        <div class="lms-box text-center">
+          <i class="bi bi-bar-chart-line icon-lg text-warning"></i>
+          <h6 class="fw-bold mt-3">Progress Tracking</h6>
+          <p class="small text-muted">
+            Student & parent dashboards with performance analytics.
+          </p>
+        </div>
+      </div>
 
-            <!-- Olympiad -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/olympiad.jpg" alt="Olympiad Training">
-                <div class="card-body">
-                  <span class="badge-grade">Grades 2–8</span>
-                  <h5 class="card-title">Olympiad Training</h5>
-                  <p class="card-text">Maths & Science Olympiad preparation.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
+      <div class="col-md-3">
+        <div class="lms-box text-center">
+          <i class="bi bi-people icon-lg text-danger"></i>
+          <h6 class="fw-bold mt-3">Mentor Support</h6>
+          <p class="small text-muted">
+            Live classes, doubt clearing and mentor feedback.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <!-- Robotics -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/robotics.jpg" alt="Robotics">
-                <div class="card-body">
-                  <span class="badge-grade">Ages 9–15</span>
-                  <h5 class="card-title">Robotics</h5>
-                  <p class="card-text">Arduino, ESP32, sensors, hands-on builds.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
+<!-- ================= COURSES ================= -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-4">Our Course Categories</h2>
 
-            <!-- Coding -->
-            <div class="col-md-6 col-lg-4 course-card">
-              <div class="card">
-                <img src="images/coding2.jpg" alt="Coding">
-                <div class="card-body">
-                  <span class="badge-grade">Ages 9–15</span>
-                  <h5 class="card-title">Coding</h5>
-                  <p class="card-text">Scratch → Python → Web Projects.</p>
-                  <a href="https://robodynamics.in/parents" class="btn-enroll-card">Book Free Demo</a>
-                </div>
-              </div>
-            </div>
+    <div class="row g-4">
 
-          </div>
+      <!-- Academics -->
+      <div class="col-md-4">
+        <div class="course-card p-4 h-100">
+          <i class="bi bi-book icon-lg text-primary"></i>
+          <h5 class="fw-bold mt-3">School Academics (Grades 2–10)</h5>
+          <p class="text-muted">
+            Maths, Science, English, Kannada & Hindi with syllabus-based tracking.
+          </p>
+          <ul class="small">
+            <li>Recorded & live sessions</li>
+            <li>Worksheets & tests</li>
+            <li>Parent progress reports</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Coding -->
+      <div class="col-md-4">
+        <div class="course-card p-4 h-100">
+          <i class="bi bi-code-slash icon-lg text-success"></i>
+          <h5 class="fw-bold mt-3">Coding & Robotics</h5>
+          <p class="text-muted">
+            Build logic and problem-solving through hands-on projects.
+          </p>
+          <ul class="small">
+            <li>Scratch → Python → Web</li>
+            <li>Arduino & ESP32 robotics</li>
+            <li>Project submissions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NEET -->
+      <div class="col-md-4">
+        <div class="course-card p-4 h-100">
+          <i class="bi bi-heart-pulse icon-lg text-danger"></i>
+          <h5 class="fw-bold mt-3">NEET Foundation & Prep</h5>
+          <p class="text-muted">
+            Early foundation and exam-oriented NEET preparation.
+          </p>
+          <ul class="small">
+            <li>Chapter-wise MCQs</li>
+            <li>Mock tests & analytics</li>
+            <li>Performance benchmarking</li>
+          </ul>
         </div>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA Section -->
-  <section class="py-5 gradient-bg">
-    <div class="container text-center">
-      <h2>Enroll Your Child Today!</h2>
-      <p>Structured tuition + future skills for confident learners.</p>
+<!-- ================= CTA ================= -->
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Not Just Courses. A Complete Learning System.</h2>
+    <p class="mb-4">
+      See how Robo Dynamics LMS supports students, parents and mentors in one place.
+    </p>
 
-      <div class="d-flex justify-content-center flex-wrap">
-        <a href="https://robodynamics.in/parents" class="btn-demo mr-2 mb-2">
-          <i class="bi bi-calendar2-check"></i> Book Free Demo
-        </a>
-        <a href="https://wa.me/918374377311" class="btn-wa mb-2">
-          WhatsApp: 8374377311
-        </a>
-      </div>
-    </div>
-  </section>
+    <a href="${pageContext.request.contextPath}/parents"
+       class="btn btn-light btn-lg fw-bold me-2">
+      <i class="bi bi-display"></i> Book a Platform Demo
+    </a>
 
-  <!-- Footer -->
-  <jsp:include page="footer.jsp" />
+    <a href="${pageContext.request.contextPath}/mentors"
+       class="btn btn-outline-light btn-lg">
+      <i class="bi bi-person-plus"></i> Teach on Robo Dynamics
+    </a>
+  </div>
+</section>
 
+<jsp:include page="footer.jsp"/>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

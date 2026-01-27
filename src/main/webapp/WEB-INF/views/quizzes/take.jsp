@@ -17,6 +17,37 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
+/* ===== DOWNLOAD PDF BUTTON ===== */
+
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+
+.download-btn:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.download-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
 :root {
   --primary:#4f46e5;
   --primary-soft:#eef2ff;
@@ -191,6 +222,25 @@ body {
 
   </div>
 </div>
+<!-- Download PDF Button -->
+  <a href="${pageContext.request.contextPath}/quizzes/${quiz.quizId}/download-pdf"
+     class="download-btn mt-2">
+
+    <!-- SVG Icon (No external libs) -->
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3v12m0 0l4-4m-4 4l-4-4"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+      <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+            stroke="currentColor"
+            stroke-linecap="round"/>
+    </svg>
+
+    Download Full Quiz
+  </a>
+
 
 
 <!-- ===== CONTENT ===== -->

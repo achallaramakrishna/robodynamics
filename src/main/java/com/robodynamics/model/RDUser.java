@@ -383,5 +383,39 @@ public class RDUser {
 		}
 		return null;
 	}
+	
+	@Transient
+	public String getDisplayName() {
+	    String name = getFullName();
+	    String role = getRoleLabel();
+
+	    if (role != null && !role.isEmpty()) {
+	        return name + " (" + role + ")";
+	    }
+	    return name;
+	}
+
+	
+	@Transient
+	public String getRoleLabel() {
+	    switch (this.profile_id) {
+	        case 1:
+	            return "Super Admin";
+	        case 2:
+	            return "Robo Dynamics Admin Support";
+	        case 3:
+	            return "Mentor";
+	        case 4:
+	            return "Parent";
+	        case 5:
+	            return "Student";
+	        case 6:
+	            return "Finance Admin";
+	        default:
+	            return "User";
+	    }
+	}
+
+
 
 }

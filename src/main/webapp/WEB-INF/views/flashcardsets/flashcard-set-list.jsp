@@ -119,11 +119,7 @@
                        id="jsonSessionDetailId"/>
 
                 <label class="form-label">Select JSON File</label>
-                <input type="file"
-                       name="jsonFile"
-                       class="form-control"
-                       accept=".json"
-                       required/>
+				<input type="file" name="file" class="form-control" accept=".json" required/>
 
                 <small class="text-muted d-block mt-2">
                     Only valid flashcard JSON format allowed

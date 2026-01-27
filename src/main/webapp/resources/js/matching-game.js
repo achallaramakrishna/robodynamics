@@ -1,66 +1,92 @@
-// matching-game.js
-
-// Initialize score
 let score = 0;
 
-// Add event listeners for draggable items
-document.querySelectorAll(".item").forEach(item => {
-    item.addEventListener("dragstart", dragStart);
-    item.addEventListener("dragend", dragEnd);
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("🎮 Matching Game JS Loaded");
+
+    document.querySelectorAll(".item").forEach(item => {
+        item.addEventListener("dragstart", dragStart);
+        item.addEventListener("dragend", dragEnd);
+    });
+
+    document.querySelectorAll(".category").forEach(category => {
+        category.addEventListener("dragover", dragOver);
+        category.addEventListener("drop", drop);
+    });
 });
 
-// Add event listeners for droppable categories
-document.querySelectorAll(".category").forEach(category => {
-    category.addEventListener("dragover", dragOver);
-    category.addEventListener("drop", drop);
-});
+/* ===== DRAG ===== */
 
-// Drag Start Function: Triggered when an item starts being dragged
 function dragStart(event) {
-    // Set the ID of the dragged item for transfer
-    event.dataTransfer.setData("text", event.target.id);
-    // Add a visual effect to the item being dragged
+    event.dataTransfer.setData("text/plain", event.target.id);
+    event.dataTransfer.effectAllowed = "move";
     event.target.classList.add("dragging");
+
+    console.log("➡️ Drag start:", event.target.id);
 }
 
-// Drag End Function: Triggered when dragging ends
 function dragEnd(event) {
-    // Remove the dragging visual effect
     event.target.classList.remove("dragging");
 }
 
-// Drag Over Function: Triggered when an item is dragged over a category
+/* ===== DROP ===== */
+
 function dragOver(event) {
-    event.preventDefault();  // Allows the drop action
+    event.preventDefault(); // REQUIRED
 }
 
-// Drop Function: Handles the logic when an item is dropped on a category
 function drop(event) {
     event.preventDefault();
-    
-    // Get the ID of the dragged item
-    const itemId = event.dataTransfer.getData("text");
-    const item = document.getElementById(itemId);
-    
-    // Retrieve the correct category ID from the data attribute of the item
-    const correctCategoryId = item.getAttribute("data-correct-category");
 
-    // Check if the item is dropped in the correct category
-    if (event.target.id === correctCategoryId) {
-        // Append the item to the category
-        event.target.appendChild(item);
-        // Make the item non-draggable after a correct match
-        item.draggable = false;
-        
-        // Update the score for a correct match
-        score += 10;
-        document.getElementById("result").textContent = "Correct!";
-    } else {
-        // Update the result message and deduct points for an incorrect match
-        document.getElementById("result").textContent = "Try again!";
-        score -= 5;
+    // SAFELY find category even if dropping on text/image
+    const category = event.target.closest(".category");
+    if (!category) {
+        console.warn("⚠️ Drop ignored (not on category)");
+        return;
     }
 
-    // Display the updated score
+    const itemId = event.dataTransfer.getData("text/plain");
+    const item = document.getElementById(itemId);
+
+    if (!item) {
+        console.error("❌ Item not found:", itemId);
+        return;
+    }
+
+    const correctCategoryId = item.dataset.correctCategory;
+
+    console.log("⬇️ Dropped:", itemId);
+    console.log("   On:", category.id);
+    console.log("   Expected:", correctCategoryId);
+
+    if (category.id === correctCategoryId) {
+
+        category.appendChild(item);
+        item.draggable = false;
+        item.style.cursor = "default";
+
+        score += 10;
+        showResult("✅ Correct!", "green");
+        console.log("✅ MATCH SUCCESS");
+
+    } else {
+
+        score -= 5;
+        showResult("❌ Try again!", "red");
+        console.log("❌ MATCH FAILED");
+    }
+
+    updateScore();
+}
+
+/* ===== UI ===== */
+
+function showResult(text, color) {
+    const result = document.getElementById("result");
+    result.textContent = text;
+    result.style.color = color;
+}
+
+function updateScore() {
     document.getElementById("score").textContent = `Score: ${score}`;
 }

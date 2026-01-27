@@ -2,6 +2,7 @@ package com.robodynamics.dao.impl;
 
 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,32 +201,35 @@ public class RDQuizDaoImpl implements RDQuizDao {
 	}
 
 	@Override
-	public List<RDQuiz> findByFilters(Integer courseId, Integer sessionId, Integer sessionDetailId) {
-		Session session = factory.getCurrentSession();
+	public List<RDQuiz> findByFilters(Integer courseId,
+	                                  Integer sessionId,
+	                                  Integer sessionDetailId) {
 
-        StringBuilder hql = new StringBuilder("select q from RDQuiz q where 1=1");
-        Map<String, Object> params = new HashMap<>();
+	    // Enforce mandatory selection
+	    if (courseId == null || sessionId == null || sessionDetailId == null
+	            || courseId <= 0 || sessionId <= 0 || sessionDetailId <= 0) {
+	        return Collections.emptyList();
+	    }
 
-        if (courseId != null) {
-            hql.append(" and q.course.courseId = :courseId");
-            params.put("courseId", courseId);
-        }
-        if (sessionId != null) {
-            hql.append(" and q.courseSession.courseSessionId = :sessionId");
-            params.put("sessionId", sessionId);
-        }
-        if (sessionDetailId != null) {
-            hql.append(" and q.courseSessionDetail.courseSessionDetailId = :sessionDetailId");
-            params.put("sessionDetailId", sessionDetailId);
-        }
+	    Session session = factory.getCurrentSession();
 
-        hql.append(" order by q.quizId desc");
+	    String hql =
+	        "select q from RDQuiz q " +
+	        "where q.course.courseId = :courseId " +
+	        "and q.courseSession.courseSessionId = :sessionId " +
+	        "and q.courseSessionDetail.courseSessionDetailId = :sessionDetailId " +
+	        "order by q.quizId desc";
 
-        Query<RDQuiz> query = session.createQuery(hql.toString(), RDQuiz.class);
-        params.forEach(query::setParameter);
+	    Query<RDQuiz> query = session.createQuery(hql, RDQuiz.class);
+	    query.setParameter("courseId", courseId);
+	    query.setParameter("sessionId", sessionId);
+	    query.setParameter("sessionDetailId", sessionDetailId);
 
-        return query.list(); // or .getResultList() if on JPA; Hibernate Query uses list()
-    }
+	    System.out.println("STRICT HQL => " + hql);
+	    System.out.println("PARAMS => " + courseId + ", " + sessionId + ", " + sessionDetailId);
+
+	    return query.list();
+	}
 
 	@Override
 	public List<RDStudentQuizSummary> getQuizSummaryByUserAndCourse(

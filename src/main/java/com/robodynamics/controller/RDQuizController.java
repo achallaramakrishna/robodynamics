@@ -5,8 +5,25 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Font;
+import com.lowagie.text.Element;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.draw.LineSeparator;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.lowagie.text.Image;
+import java.net.URL;
+import java.io.File;
+import java.io.InputStream;
+
+import java.io.OutputStream;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +38,10 @@ import com.robodynamics.wrapper.CourseSessionJson;
 @Controller
 @RequestMapping("/quizzes")
 public class RDQuizController {
+	
+	private static final String WINDOWS_UPLOAD_ROOT = "C:/opt/robodynamics";
+	private static final String LINUX_UPLOAD_ROOT   = "/opt/robodynamics";
+
 
     // ------------------------------------------------
     // SERVICE INJECTIONS
@@ -57,13 +78,25 @@ public class RDQuizController {
         // Ensure user is logged in
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
         if (rdUser == null) {
-            session.setAttribute("redirectUrl", request.getRequestURI());
+        	String uri = request.getRequestURI();           // /robodynamics/quizzes/start/60
+        	String ctx = request.getContextPath();          // /robodynamics
+
+        	// remove context path once
+        	String relativeUrl = uri.substring(ctx.length()); // /quizzes/start/60
+
+        	if (request.getQueryString() != null) {
+        	    relativeUrl += "?" + request.getQueryString();
+        	}
+
+        	session.setAttribute("redirectUrl", relativeUrl);
+
+
             return "redirect:/login";
         }
 
         RDQuiz quiz = quizService.findById(quizId);
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-        List<RDQuizQuestion> allQuestions = quizQuestionService.findQuestionsByIds(questionIds);
+        List<RDQuizQuestion> allQuestions = quizQuestionService.findActiveQuestionsByIds(questionIds);
 
         if (allQuestions.isEmpty()) {
             model.addAttribute("message", "No questions found.");
@@ -116,7 +149,7 @@ public class RDQuizController {
         // Load quiz + questions
         RDQuiz quiz = quizService.findById(quizId);
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-        List<RDQuizQuestion> allQuestions = quizQuestionService.findQuestionsByIds(questionIds);
+        List<RDQuizQuestion> allQuestions = quizQuestionService.findActiveQuestionsByIds(questionIds);
 
         // Always load existing selectedAnswers
         Map<Integer, String> selectedAnswers =
@@ -186,7 +219,7 @@ public class RDQuizController {
 
         RDQuiz quiz = quizService.findById(quizId);
         List<Integer> questionIds = quizQuestionMapService.findQuestionIdsByQuizId(quizId);
-        List<RDQuizQuestion> quizQuestions = quizQuestionService.findQuestionsByIds(questionIds);
+        List<RDQuizQuestion> quizQuestions = quizQuestionService.findActiveQuestionsByIds(questionIds);
 
         Map<Integer, String> selectedAnswers =
                 (Map<Integer, String>) session.getAttribute("selectedAnswers");
@@ -365,6 +398,168 @@ public class RDQuizController {
         session.removeAttribute("selectedAnswers");
 
         return "quizzes/result";
+    }
+    
+    @GetMapping("/{quizId}/download-pdf")
+    public void downloadQuizPdf(
+            @PathVariable int quizId,
+            HttpServletResponse response,
+            HttpSession session
+    ) throws Exception {
+
+        // Ensure logged in
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        if (rdUser == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        RDQuiz quiz = quizService.findById(quizId);
+        if (quiz == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        // Load ALL questions (no pagination)
+        List<Integer> questionIds =
+                quizQuestionMapService.findQuestionIdsByQuizId(quizId);
+
+        List<RDQuizQuestion> questions =
+                quizQuestionService.findActiveQuestionsByIds(questionIds);
+
+        // Response headers
+        response.setContentType("application/pdf");
+        response.setHeader(
+                "Content-Disposition",
+                "attachment; filename=Quiz_" + quiz.getQuizName().replaceAll("\\s+", "_") + ".pdf"
+        );
+
+        generateQuizPdf(quiz, questions, response.getOutputStream());
+    }
+
+
+    private void generateQuizPdf(
+            RDQuiz quiz,
+            List<RDQuizQuestion> questions,
+            OutputStream os
+    ) throws Exception {
+
+        Document document = new Document(PageSize.A4, 40, 40, 40, 40);
+        PdfWriter.getInstance(document, os);
+        document.open();
+
+        Font titleFont = new Font(Font.HELVETICA, 16, Font.BOLD);
+        Font qFont = new Font(Font.HELVETICA, 12, Font.BOLD);
+        Font optFont = new Font(Font.HELVETICA, 11);
+
+        // ===== Header =====
+        document.add(new Paragraph("Robo Dynamics", titleFont));
+        document.add(new Paragraph("Quiz: " + quiz.getQuizName()));
+        document.add(new Paragraph(" "));
+        document.add(new LineSeparator());
+        document.add(new Paragraph(" "));
+
+        int qNo = 1;
+
+        for (RDQuizQuestion q : questions) {
+
+            // ===== Question Text =====
+            document.add(new Paragraph(
+                    "Q" + qNo++ + ". " + q.getQuestionText(), qFont));
+
+            // ===== Question Image =====
+            if (q.getQuestionImage() != null && !q.getQuestionImage().isBlank()) {
+                addImageToPdf(document, q.getQuestionImage());
+            }
+
+            // ===== MCQ Options =====
+            if ("multiple_choice".equals(q.getQuestionType())) {
+
+                char optChar = 'A';
+
+                for (RDQuizOption opt : q.getOptions()) {
+
+                    document.add(new Paragraph(
+                            "   " + optChar++ + ") " + opt.getOptionText(),
+                            optFont
+                    ));
+
+                    // ===== Option Image =====
+                    if (opt.getOptionImage() != null && !opt.getOptionImage().isBlank()) {
+                        addImageToPdf(document, opt.getOptionImage());
+                    }
+                }
+            }
+
+            document.add(new Paragraph(" "));
+        }
+
+        document.close();
+    }
+
+    private void addImageToPdf(Document document, String imagePath) {
+        try {
+            if (imagePath == null || imagePath.isBlank()) return;
+
+            String os = System.getProperty("os.name").toLowerCase();
+            boolean isWindows = os.contains("win");
+
+            String physicalPath;
+
+            // =====================================================
+            // CASE 1: /uploads/...   (MOST IMPORTANT FIX)
+            // =====================================================
+            if (imagePath.startsWith("/uploads/")) {
+                physicalPath = (isWindows ? WINDOWS_UPLOAD_ROOT : LINUX_UPLOAD_ROOT)
+                        + imagePath;
+            }
+            // =====================================================
+            // CASE 2: /robodynamics/uploads/...
+            // =====================================================
+            else if (imagePath.startsWith("/robodynamics/uploads/")) {
+                String relative = imagePath.replaceFirst("/robodynamics", "");
+                physicalPath = (isWindows ? WINDOWS_UPLOAD_ROOT : LINUX_UPLOAD_ROOT)
+                        + relative;
+            }
+            // =====================================================
+            // CASE 3: Already absolute Linux path
+            // =====================================================
+            else if (imagePath.startsWith("/opt/")) {
+                physicalPath = imagePath;
+            }
+            // =====================================================
+            // CASE 4: Absolute Windows path
+            // =====================================================
+            else if (imagePath.matches("^[A-Za-z]:\\\\.*")) {
+                physicalPath = imagePath;
+            }
+            // =====================================================
+            // UNKNOWN FORMAT
+            // =====================================================
+            else {
+                System.err.println("Unsupported image path format: " + imagePath);
+                return;
+            }
+
+            File file = new File(physicalPath);
+
+            if (!file.exists()) {
+                System.err.println("Image file NOT FOUND: " + physicalPath);
+                return;
+            }
+
+            Image img = Image.getInstance(physicalPath);
+
+            img.scaleToFit(400, 300);
+            img.setAlignment(Image.ALIGN_CENTER);
+            img.setSpacingBefore(8f);
+            img.setSpacingAfter(8f);
+
+            document.add(img);
+
+        } catch (Exception e) {
+            System.err.println("Image load failed: " + imagePath);
+        }
     }
 
 

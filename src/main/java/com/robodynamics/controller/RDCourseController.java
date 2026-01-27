@@ -24,6 +24,7 @@ import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseResource;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
+import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDStudentEnrollment;
 import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
@@ -228,6 +229,8 @@ public class RDCourseController {
 	    summary.put("quiz", grouped.getOrDefault("quiz", List.of()).size());
 	    summary.put("flashcard", grouped.getOrDefault("flashcard", List.of()).size());
 	    summary.put("matchinggame", grouped.getOrDefault("matchinggame", List.of()).size());
+	    summary.put("matchpairs", grouped.getOrDefault("matchpairs", List.of()).size());
+
 	    summary.put("memory-map", grouped.getOrDefault("memory-map", List.of()).size());
 	    summary.put("assignment", grouped.getOrDefault("assignment", List.of()).size());
 
@@ -252,12 +255,9 @@ public class RDCourseController {
 	    summary.put("pdf", courseSessionDetailService.countByType(sessionId, "pdf"));
 	    summary.put("flashcard", courseSessionDetailService.countByType(sessionId, "flashcard"));
 	    summary.put("matchingame", courseSessionDetailService.countByType(sessionId, "matchinggame"));
+	    summary.put("matchingpairs", courseSessionDetailService.countByType(sessionId, "matchingpairs"));
 	    summary.put("memory-map", courseSessionDetailService.countByType(sessionId, "memory-map"));
 
-	    // ✅ NEW: Matching Games count
-	    summary.put("matchingGame",
-	        matchingGameService.countGamesBySessionId(sessionId)
-	    );
 	    return summary;
 	}
 
@@ -386,18 +386,31 @@ public class RDCourseController {
             @RequestParam("enrollmentId") int enrollmentId,
             Model model) {
 
-        RDCourseSession session = courseSessionservice.getCourseSession(sessionId);
-        RDStudentEnrollment enrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
+        RDCourseSession session =
+                courseSessionservice.getCourseSession(sessionId);
 
-        List<RDCourseSessionDetail> quizzes =
+        RDStudentEnrollment enrollment =
+                enrollmentService.getRDStudentEnrollment(enrollmentId);
+
+        // 1️⃣ Fetch quiz session details
+        List<RDCourseSessionDetail> quizDetails =
                 courseSessionDetailService.getBySessionAndType(sessionId, "quiz");
+
+        // 2️⃣ Extract real RDQuiz objects
+        List<RDQuiz> quizzes = quizDetails.stream()
+                .map(RDCourseSessionDetail::getQuiz)
+                .filter(Objects::nonNull)
+                .toList();
 
         model.addAttribute("session", session);
         model.addAttribute("enrollment", enrollment);
         model.addAttribute("quizzes", quizzes);
 
-        return new ModelAndView("session-quizzes");
+        // 🔑 MUST MATCH /views/quizzes/list.jsp
+        return new ModelAndView("quizzes/list");
     }
+
+
 
     @GetMapping("/session/{sessionId}/flashcards")
     public ModelAndView sessionFlashcards(

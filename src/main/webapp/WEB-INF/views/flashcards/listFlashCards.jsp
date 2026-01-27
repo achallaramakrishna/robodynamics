@@ -1,47 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Manage Flashcards</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
 
-<jsp:include page="/header.jsp" />
+<jsp:include page="/header.jsp"/>
 
 <div class="container mt-4">
 
-    <!-- SUCCESS MESSAGE -->
-		<c:if test="${not empty success}">
-		    <div class="alert alert-success alert-dismissible fade show" role="alert">
-		        <strong>Success!</strong> ${success}
-		        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </div>
-		</c:if>
-		
-		<!-- ERROR MESSAGE -->
-		<c:if test="${not empty error}">
-		    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-		        <strong>Error!</strong> ${error}
-		        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </div>
-		</c:if>
-
-
-    <button class="btn btn-secondary mb-3"
-            onclick="window.location.href='${pageContext.request.contextPath}/dashboard';">
-        Back to Dashboard
-    </button>
-
-    <h2>Manage Flashcards</h2>
+    <h2 class="mb-4">Manage Flashcards</h2>
 
     <!-- CATEGORY -->
-    <div class="form-group mb-3">
-        <label for="courseCategory">Select Course Category</label>
-        <select id="courseCategory" class="form-control">
+    <div class="mb-3">
+        <label>Course Category</label>
+        <select id="category" class="form-control">
             <option value="">-- Select Category --</option>
             <c:forEach var="cat" items="${categories}">
                 <option value="${cat.courseCategoryId}">
@@ -51,226 +31,291 @@
         </select>
     </div>
 
-    <form id="flashcardForm">
-
-        <!-- COURSE (disabled initially; populated via AJAX) -->
-        <div class="form-group">
-            <label for="course">Select Course</label>
-            <select id="course" class="form-control" disabled>
-                <option value="">-- Select Course --</option>
-            </select>
-        </div>
-
-        <!-- SESSION -->
-        <div class="form-group mt-3">
-            <label for="session">Select Course Session</label>
-            <select id="session" class="form-control" disabled>
-                <option value="">-- Select Session --</option>
-            </select>
-        </div>
-
-        <!-- SESSION DETAIL -->
-        <div class="form-group mt-3">
-            <label for="sessionDetail">Select Session Detail</label>
-            <select id="sessionDetail" class="form-control" disabled>
-                <option value="">-- Select Session Detail --</option>
-            </select>
-        </div>
-
-        <!-- FLASHCARD SET -->
-        <div class="form-group mt-3">
-            <label for="flashcardSet">Select Flashcard Set</label>
-            <select id="flashcardSet" class="form-control" disabled>
-                <option value="">-- Select Flashcard Set --</option>
-            </select>
-        </div>
-    </form>
-
-    <!-- Add Flashcard Button -->
-    <a href="#" class="btn btn-primary mt-4" id="addFlashcardBtn" style="display:none;">
-        Add New Flashcard
-    </a>
-
-    <!-- Upload JSON -->
-    <form action="${pageContext.request.contextPath}/flashcards/uploadJson"
-          method="post" enctype="multipart/form-data"
-          id="uploadJsonForm" style="display:none;">
-
-        <!-- FIX: unique id -->
-        <input type="hidden" id="flashcardSetIdHidden" name="flashcardSetId" value="">
-
-        <div class="mb-3">
-            <label for="file" class="form-label">Upload Flashcards (JSON)</label>
-            <input type="file" class="form-control" id="file" name="file" accept=".json" required>
-        </div>
-        <button type="submit" class="btn btn-success">Upload JSON</button>
-    </form>
-
-    <!-- Flashcard List Table -->
-    <div class="mt-5">
-        <h3 id="flashcardTableHeading">Flashcards</h3>
-        <table class="table table-bordered" id="flashcardsTable">
-            <thead>
-            <tr>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>Hint</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+    <!-- COURSE -->
+    <div class="mb-3">
+        <label>Course</label>
+        <select id="course" class="form-control" disabled>
+            <option value="">-- Select Course --</option>
+        </select>
     </div>
 
+    <!-- SESSION -->
+    <div class="mb-3">
+        <label>Course Session</label>
+        <select id="session" class="form-control" disabled>
+            <option value="">-- Select Session --</option>
+        </select>
+    </div>
+
+    <!-- SESSION DETAIL -->
+    <div class="mb-3">
+        <label>Session Detail</label>
+        <select id="sessionDetail" class="form-control" disabled>
+            <option value="">-- Select Session Detail --</option>
+        </select>
+    </div>
+
+    <!-- FLASHCARD SET -->
+    <div class="mb-3">
+        <label>Flashcard Set</label>
+        <select id="flashcardSet" class="form-control" disabled>
+            <option value="">-- Select Flashcard Set --</option>
+        </select>
+    </div>
+
+    <!-- UPLOAD JSON -->
+    <form id="uploadForm"
+          action="${pageContext.request.contextPath}/flashcards/uploadJson"
+          method="post"
+          enctype="multipart/form-data"
+          style="display:none;">
+
+        <input type="hidden" name="flashcardSetId" id="flashcardSetId"/>
+
+        <div class="mb-3">
+            <label>Upload Flashcard JSON</label>
+            <input type="file" name="file" class="form-control" accept=".json" required>
+        </div>
+
+        <button class="btn btn-success">Upload JSON</button>
+    </form>
+<!-- FLASHCARDS TABLE -->
+    <div id="flashcardTableBlock" class="mt-5" style="display:none;">
+
+        <h4 class="mb-3">Flashcards</h4>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-light">
+            <tr>
+                <th width="20%">Question</th>
+                <th width="20%">Answer</th>
+                <th width="15%">Hint</th>
+                <th width="15%">Insight</th>
+                <th width="15%">Images</th>
+            </tr>
+            </thead>
+            <tbody id="flashcardTableBody">
+            </tbody>
+        </table>
+
+    </div>
+
+
 </div>
+
+<jsp:include page="/footer.jsp"/>
 
 <script>
 $(document).ready(function () {
 
-    function resetAllBelowCategory() {
-        $('#course').prop('disabled', true).html('<option value="">-- Select Course --</option>');
-        $('#session').prop('disabled', true).html('<option value="">-- Select Session --</option>');
-        $('#sessionDetail').prop('disabled', true).html('<option value="">-- Select Session Detail --</option>');
-        $('#flashcardSet').prop('disabled', true).html('<option value="">-- Select Flashcard Set --</option>');
-        $('#flashcardsTable tbody').empty();
-        $('#addFlashcardBtn, #uploadJsonForm').hide();
-        $('#flashcardTableHeading').text('Flashcards');
+    function resetFrom(level) {
+        if (level <= 1) $('#course').prop('disabled', true).html('<option value="">-- Select Course --</option>');
+        if (level <= 2) $('#session').prop('disabled', true).html('<option value="">-- Select Session --</option>');
+        if (level <= 3) $('#sessionDetail').prop('disabled', true).html('<option value="">-- Select Session Detail --</option>');
+        if (level <= 4) $('#flashcardSet').prop('disabled', true).html('<option value="">-- Select Flashcard Set --</option>');
+        $('#uploadForm').hide();
     }
 
-    $('#courseCategory').on('change', function () {
+    /* CATEGORY → COURSE */
+    $('#category').on('change', function () {
 
-        var categoryId = $(this).val();
-        resetAllBelowCategory();
+        resetFrom(1);
+        const categoryId = $(this).val();
         if (!categoryId) return;
 
-        $.getJSON(
-            '${pageContext.request.contextPath}/flashcards/getCoursesByCategory',
-            { categoryId: categoryId }
-        )
-        .done(function (data) {
-            console.log('Courses response:', data);
+        $.ajax({
+            url: '${pageContext.request.contextPath}/flashcards/getCoursesByCategory',
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            data: {
+                categoryId: categoryId,
+                _ts: new Date().getTime()
+            },
+            success: function (res) {
 
-            var options = '<option value="">-- Select Course --</option>';
-            if (data && data.courses) {
-                $.each(data.courses, function (i, c) {
-                    options += '<option value="' + c.courseId + '">' + c.courseName + '</option>';
-                });
+                console.log('Courses response:', res);
+
+                let html = '<option value="">-- Select Course --</option>';
+
+                if (res && res.courses && res.courses.length > 0) {
+                    $.each(res.courses, function (_, c) {
+                        html += '<option value="' + c.courseId + '">' +
+                                c.courseName +
+                                '</option>';
+                    });
+                }
+
+                $('#course').html(html).prop('disabled', false);
+            },
+            error: function (xhr) {
+                console.error('Course load failed:', xhr.responseText);
             }
-
-            $('#course').html(options).prop('disabled', false);
-        })
-        .fail(function (xhr) {
-            console.log('getCoursesByCategory failed:', xhr.status, xhr.responseText);
-            alert('Failed to load courses. Check console.');
         });
     });
 
-    // COURSE -> SESSION
+    /* COURSE → SESSION */
     $('#course').on('change', function () {
-        var courseId = $(this).val();
 
-        $('#session').prop('disabled', true).html('<option value="">-- Select Session --</option>');
-        $('#sessionDetail').prop('disabled', true).html('<option value="">-- Select Session Detail --</option>');
-        $('#flashcardSet').prop('disabled', true).html('<option value="">-- Select Flashcard Set --</option>');
-        $('#flashcardsTable tbody').empty();
-        $('#addFlashcardBtn, #uploadJsonForm').hide();
-
+        resetFrom(2);
+        const courseId = $(this).val();
         if (!courseId) return;
 
-        $.getJSON(
-            '${pageContext.request.contextPath}/flashcards/getCourseSessions',
-            { courseId: courseId }
-        ).done(function (data) {
-            var html = '<option value="">-- Select Session --</option>';
-            $.each(data.courseSessions, function (_, s) {
-                html += '<option value="' + s.courseSessionId + '">' + s.sessionTitle + '</option>';
-            });
-            $('#session').html(html).prop('disabled', false);
+        $.ajax({
+            url: '${pageContext.request.contextPath}/flashcards/getCourseSessions',
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            data: {
+                courseId: courseId,
+                _ts: new Date().getTime()
+            },
+            success: function (res) {
+
+                let html = '<option value="">-- Select Session --</option>';
+
+                $.each(res.courseSessions || [], function (_, s) {
+                    html += '<option value="' + s.courseSessionId + '">' +
+                            s.sessionTitle +
+                            '</option>';
+                });
+
+                $('#session').html(html).prop('disabled', false);
+            }
         });
     });
 
-    // SESSION -> SESSION DETAIL
+    /* SESSION → SESSION DETAIL */
     $('#session').on('change', function () {
-        var courseSessionId = $(this).val();
 
-        $('#sessionDetail').prop('disabled', true).html('<option value="">-- Select Session Detail --</option>');
-        $('#flashcardSet').prop('disabled', true).html('<option value="">-- Select Flashcard Set --</option>');
-        $('#flashcardsTable tbody').empty();
-        $('#addFlashcardBtn, #uploadJsonForm').hide();
+        resetFrom(3);
+        const sessionId = $(this).val();
+        if (!sessionId) return;
 
-        if (!courseSessionId) return;
+        $.ajax({
+            url: '${pageContext.request.contextPath}/flashcards/getCourseSessionDetails',
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            data: {
+                courseSessionId: sessionId,
+                _ts: new Date().getTime()
+            },
+            success: function (res) {
 
-        $.getJSON(
-            '${pageContext.request.contextPath}/flashcards/getCourseSessionDetails',
-            { courseSessionId: courseSessionId }
-        ).done(function (data) {
-            var html = '<option value="">-- Select Session Detail --</option>';
-            $.each(data.sessionDetails, function (_, d) {
-                html += '<option value="' + d.courseSessionDetailId + '">' + d.topic + '</option>';
-            });
-            $('#sessionDetail').html(html).prop('disabled', false);
+                let html = '<option value="">-- Select Session Detail --</option>';
+
+                $.each(res.sessionDetails || [], function (_, d) {
+                    html += '<option value="' + d.courseSessionDetailId + '">' +
+                            d.topic +
+                            '</option>';
+                });
+
+                $('#sessionDetail').html(html).prop('disabled', false);
+            }
         });
     });
 
-    // SESSION DETAIL -> FLASHCARD SETS
+    /* SESSION DETAIL → FLASHCARD SET */
     $('#sessionDetail').on('change', function () {
-        var courseSessionDetailId = $(this).val();
 
-        $('#flashcardSet').prop('disabled', true).html('<option value="">-- Select Flashcard Set --</option>');
-        $('#flashcardsTable tbody').empty();
-        $('#addFlashcardBtn, #uploadJsonForm').hide();
+        resetFrom(4);
+        const csdId = $(this).val();
+        if (!csdId) return;
 
-        if (!courseSessionDetailId) return;
+        $.ajax({
+            url: '${pageContext.request.contextPath}/flashcards/getFlashcardSetsBySessionDetail',
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            data: {
+                courseSessionDetailId: csdId,
+                _ts: new Date().getTime()
+            },
+            success: function (res) {
 
-        $.getJSON(
-            '${pageContext.request.contextPath}/flashcards/getFlashcardSetsBySessionDetail',
-            { courseSessionDetailId: courseSessionDetailId }
-        ).done(function (data) {
-            var html = '<option value="">-- Select Flashcard Set --</option>';
-            $.each(data.flashcardSets, function (_, s) {
-                html += '<option value="' + s.flashcardSetId + '">' + s.setName + '</option>';
-            });
-            $('#flashcardSet').html(html).prop('disabled', false);
+                let html = '<option value="">-- Select Flashcard Set --</option>';
+
+                $.each(res.flashcardSets || [], function (_, s) {
+                    html += '<option value="' + s.flashcardSetId + '">' +
+                            s.setName +
+                            '</option>';
+                });
+
+                $('#flashcardSet').html(html).prop('disabled', false);
+            }
         });
     });
 
-    // FLASHCARD SET -> FLASHCARDS
+    /* FLASHCARD SET → ENABLE UPLOAD */
+    /* FLASHCARD SET → ENABLE UPLOAD + LOAD TABLE */
     $('#flashcardSet').on('change', function () {
-        var flashcardSetId = $(this).val();
-        $('#flashcardsTable tbody').empty();
-        $('#addFlashcardBtn, #uploadJsonForm').hide();
 
-        if (!flashcardSetId) return;
+        const setId = $(this).val();
 
-        $('#flashcardSetIdHidden').val(flashcardSetId);
+        $('#flashcardTableBlock').hide();
+        $('#flashcardTableBody').empty();
 
-        // Fix Add link dynamically
-        $('#addFlashcardBtn')
-            .attr('href', '${pageContext.request.contextPath}/flashcards/add?flashcardSetId=' + flashcardSetId)
-            .show();
+        if (!setId) {
+            $('#uploadForm').hide();
+            return;
+        }
 
-        $('#uploadJsonForm').show();
-        $('#flashcardTableHeading').text('Flashcards - ' + $('#flashcardSet option:selected').text());
+        // Enable upload
+        $('#flashcardSetId').val(setId);
+        $('#uploadForm').show();
 
-        $.getJSON(
-            '${pageContext.request.contextPath}/flashcards/getFlashcardsBySet',
-            { flashcardSetId: flashcardSetId }
-        ).done(function (data) {
-            var rows = '';
-            $.each(data.flashcards, function (_, f) {
-                rows += '<tr>'
-                    + '<td>' + (f.question || '') + '</td>'
-                    + '<td>' + (f.answer || '') + '</td>'
-                    + '<td>' + (f.hint || '') + '</td>'
-                    + '<td>'
-                    + '<a href="${pageContext.request.contextPath}/flashcards/edit?flashcardId=' + f.flashcardId + '" class="btn btn-warning btn-sm">Edit</a> '
-                    + '<a href="${pageContext.request.contextPath}/flashcards/delete?flashcardId=' + f.flashcardId + '" class="btn btn-danger btn-sm">Delete</a>'
-                    + '</td>'
-                    + '</tr>';
-            });
-            $('#flashcardsTable tbody').html(rows);
+        // Load flashcards
+        $.ajax({
+            url: '${pageContext.request.contextPath}/flashcards/getFlashcardsBySet',
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            data: {
+                flashcardSetId: setId,
+                _ts: new Date().getTime()
+            },
+            success: function (res) {
+
+                let rows = '';
+
+                if (!res.flashcards || res.flashcards.length === 0) {
+                    rows =
+                        '<tr>' +
+                        '<td colspan="5" class="text-center text-muted">' +
+                        'No flashcards found in this set' +
+                        '</td>' +
+                        '</tr>';
+                } else {
+
+                    $.each(res.flashcards, function (_, f) {
+
+                        rows += '<tr>' +
+                            '<td>' + (f.question || '') + '</td>' +
+                            '<td>' + (f.answer || '') + '</td>' +
+                            '<td>' + (f.hint || '') + '</td>' +
+                            '<td>' + (f.insight || '') + '</td>' +
+                            '<td>' +
+                                (f.questionImageUrl
+                                    ? '<img src="' + f.questionImageUrl + '" width="50"/>'
+                                    : '') +
+                                (f.answerImageUrl
+                                    ? '<br/><img src="' + f.answerImageUrl + '" width="50"/>'
+                                    : '') +
+                            '</td>' +
+                        '</tr>';
+                    });
+                }
+
+                $('#flashcardTableBody').html(rows);
+                $('#flashcardTableBlock').show();
+            },
+            error: function (xhr) {
+                console.error('Failed to load flashcards:', xhr.responseText);
+            }
         });
     });
+
 
 });
 </script>

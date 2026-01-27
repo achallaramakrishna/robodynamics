@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,25 +56,27 @@ public class RDFlashCardController {
         return "flashcards/flashcard-media-manager"; // resolves to /WEB-INF/views/quizMediaManager.jsp
     } 
     
-    @GetMapping("/getCoursesByCategory")
-    @ResponseBody
-    public Map<String, Object> getCoursesByCategory(
-            @RequestParam("categoryId") int categoryId) {
+    @GetMapping(
+    	    value = "/getCoursesByCategory",
+    	    produces = MediaType.APPLICATION_JSON_VALUE
+    	)
+    	@ResponseBody
+    	public Map<String, Object> getCoursesByCategory(
+    	        @RequestParam("categoryId") int categoryId) {
 
-        List<RDCourse> courses = rdCourseService.getCoursesByCategoryId(categoryId);
+    	    List<RDCourse> courses = rdCourseService.getCoursesByCategoryId(categoryId);
 
-        // Lightweight DTO to avoid LazyInitializationException
-        List<Map<String, Object>> dto = courses.stream().map(c -> {
-            Map<String, Object> m = new HashMap<>();
-            m.put("courseId", c.getCourseId());
-            m.put("courseName", c.getCourseName());
-            return m;
-        }).toList();
+    	    List<Map<String, Object>> dto = courses.stream().map(c -> {
+    	        Map<String, Object> m = new HashMap<>();
+    	        m.put("courseId", c.getCourseId());
+    	        m.put("courseName", c.getCourseName());
+    	        return m;
+    	    }).toList();
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("courses", dto);
-        return response;
-    }
+    	    Map<String, Object> response = new HashMap<>();
+    	    response.put("courses", dto);
+    	    return response;
+    	}
 
 
     @GetMapping("/start/{courseSessionDetailId}")
@@ -205,31 +208,67 @@ public class RDFlashCardController {
         return response;
     }
 
-    // Additional AJAX Endpoints for Dynamic Dropdown Support
-    @GetMapping("/getCourseSessions")
-    @ResponseBody
-    public Map<String, Object> getCourseSessions(@RequestParam("courseId") int courseId) {
-        List<RDCourseSession> courseSessions = courseSessionService.getCourseSessionsByCourseId(courseId);
-        Map<String, Object> response = new HashMap<>();
-        response.put("courseSessions", courseSessions);
-        return response;
-    }
+    @GetMapping(
+    	    value = "/getCourseSessions",
+    	    produces = MediaType.APPLICATION_JSON_VALUE
+    	)
+    	@ResponseBody
+    	public Map<String, Object> getCourseSessions(
+    	        @RequestParam("courseId") int courseId) {
 
-    @GetMapping("/getCourseSessionDetails")
-    @ResponseBody
-    public Map<String, Object> getCourseSessionDetails(@RequestParam("courseSessionId") int courseSessionId) {
-        List<RDCourseSessionDetail> sessionDetails = courseSessionDetailService.findSessionDetailsBySessionId(courseSessionId);
-        Map<String, Object> response = new HashMap<>();
-        response.put("sessionDetails", sessionDetails);
-        return response;
-    }
+    	    List<RDCourseSession> sessions =
+    	            courseSessionService.getCourseSessionsByCourseId(courseId);
 
-    @GetMapping("/getFlashcardSetsBySessionDetail")
-    @ResponseBody
-    public Map<String, Object> getFlashcardSetsByCourseSessionDetail(@RequestParam("courseSessionDetailId") int courseSessionDetailId) {
-        List<RDFlashcardSetDTO> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
-        Map<String, Object> response = new HashMap<>();
-        response.put("flashcardSets", flashcardSets);
-        return response;
-    }
+    	    List<Map<String, Object>> dto = sessions.stream().map(s -> {
+    	        Map<String, Object> m = new HashMap<>();
+    	        m.put("courseSessionId", s.getCourseSessionId());
+    	        m.put("sessionTitle", s.getSessionTitle());
+    	        return m;
+    	    }).toList();
+
+    	    Map<String, Object> response = new HashMap<>();
+    	    response.put("courseSessions", dto);
+    	    return response;
+    	}
+
+
+    @GetMapping(
+    	    value = "/getCourseSessionDetails",
+    	    produces = MediaType.APPLICATION_JSON_VALUE
+    	)
+    	@ResponseBody
+    	public Map<String, Object> getCourseSessionDetails(
+    	        @RequestParam("courseSessionId") int courseSessionId) {
+
+    	    List<RDCourseSessionDetail> details =
+    	            courseSessionDetailService.findSessionDetailsBySessionId(courseSessionId);
+
+    	    List<Map<String, Object>> dto = details.stream().map(d -> {
+    	        Map<String, Object> m = new HashMap<>();
+    	        m.put("courseSessionDetailId", d.getCourseSessionDetailId());
+    	        m.put("topic", d.getTopic());
+    	        m.put("type", d.getType());
+    	        return m;
+    	    }).toList();
+
+    	    Map<String, Object> response = new HashMap<>();
+    	    response.put("sessionDetails", dto);
+    	    return response;
+    	}
+
+    @GetMapping(
+    	    value = "/getFlashcardSetsBySessionDetail",
+    	    produces = MediaType.APPLICATION_JSON_VALUE
+    	)
+    	@ResponseBody
+    	public Map<String, Object> getFlashcardSetsByCourseSessionDetail(
+    	        @RequestParam("courseSessionDetailId") int courseSessionDetailId) {
+
+    	    List<RDFlashcardSetDTO> flashcardSets =
+    	            rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
+
+    	    Map<String, Object> response = new HashMap<>();
+    	    response.put("flashcardSets", flashcardSets);
+    	    return response;
+    	}
 }

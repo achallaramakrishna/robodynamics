@@ -1,101 +1,205 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>About Robo Dynamics | A Learning Management Platform for Students</title>
+<meta name="description"
+      content="Robo Dynamics is a modern Learning Management System (LMS) delivering transparent, outcome-driven education in academics, coding, robotics and NEET preparation." />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
+
+<style>
+  body { background:#f7fafc; color:#1b1f23; }
+
+  .hero {
+    background: linear-gradient(135deg,#0d47a1,#1b5e20);
+    color:#fff;
+    padding:4rem 1rem;
+  }
+
+  .box {
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+
+  .icon-lg {
+    font-size:2.6rem;
+  }
+</style>
+</head>
+
+<body>
+
 <jsp:include page="header.jsp"/>
 
-<!-- Hero Section -->
-<section class="py-5 text-white text-center" style="background:linear-gradient(135deg,#1e88e5,#42a5f5,#00c853);">
+<!-- ================= HERO ================= -->
+<section class="hero text-center">
   <div class="container">
-    <h1 class="fw-bold mb-3">About Robo Dynamics</h1>
-    <p class="lead">We are an EdTech training company helping students from Grade 2–12 excel in 
-       <strong>Academics, Olympiads, Robotics, and Coding</strong> — while giving passionate mentors 
-       a platform to teach and earn.</p>
+    <span class="badge bg-warning text-dark mb-3">About Robo Dynamics</span>
+    <h1 class="fw-bold mb-3">Education Built on Visibility, Structure & Outcomes</h1>
+    <p class="lead mb-0">
+      Robo Dynamics is a Learning Management Platform designed to make learning transparent,
+      measurable and accountable — for students, parents and mentors.
+    </p>
   </div>
 </section>
 
-<!-- Stats Section -->
-<section class="py-5 bg-light text-center">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-md-3">
-        <div class="card border-0 shadow-lg h-100">
-          <div class="card-body">
-            <h2 class="fw-bold text-primary">200+</h2>
-            <p class="mb-0">Students trained across CBSE, ICSE & State Boards</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card border-0 shadow-lg h-100">
-          <div class="card-body">
-            <h2 class="fw-bold text-success">35+</h2>
-            <p class="mb-0">Experienced mentors onboarded & verified</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card border-0 shadow-lg h-100">
-          <div class="card-body">
-            <h2 class="fw-bold text-warning">95%</h2>
-            <p class="mb-0">Parent satisfaction & repeat enrolments</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card border-0 shadow-lg h-100">
-          <div class="card-body">
-            <h2 class="fw-bold text-danger">10+</h2>
-            <p class="mb-0">Courses from Tuition to Advanced Robotics</p>
-          </div>
-        </div>
-      </div>
-    </div>
-	<br>
-	<div class="d-flex flex-wrap gap-2 justify-content-center">
-	  <a href="${pageContext.request.contextPath}/parents" 
-	     class="btn btn-warning btn-lg shadow-sm">
-	    <i class="bi bi-calendar2-check"></i> Book a Free Demo
-	  </a>
-	
-	  <a href="${pageContext.request.contextPath}/mentors/apply" 
-	     class="btn btn-success btn-lg shadow-sm text-white">
-	    <i class="bi bi-person-video3"></i> Become a Mentor
-	  </a>
-	</div>
-
-  </div>
-</section>
-
-<!-- Trust Section -->
+<!-- ================= WHO WE ARE ================= -->
 <section class="py-5">
   <div class="container">
-    <h2 class="fw-bold text-center mb-4 text-primary">Why Parents Trust Us</h2>
-    <div class="row g-4 text-center">
-      <div class="col-md-4">
-        <i class="bi bi-patch-check-fill text-success" style="font-size:2.5rem;"></i>
-        <h5 class="mt-3">Verified Mentors</h5>
-        <p>All our mentors undergo screening, subject tests, and demo sessions before onboarding.</p>
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">Who We Are</h2>
+        <p>
+          Robo Dynamics is a technology-driven education platform that combines
+          expert teaching with structured learning workflows.
+        </p>
+        <p>
+          Unlike traditional coaching centres, our platform ensures that every class,
+          assessment, assignment and interaction is recorded, tracked and visible.
+        </p>
+        <p class="fw-semibold">
+          Learning is no longer guesswork — it is data-backed.
+        </p>
       </div>
-      <div class="col-md-4">
-        <i class="bi bi-graph-up text-warning" style="font-size:2.5rem;"></i>
-        <h5 class="mt-3">Proven Results</h5>
-        <p>Students have shown 20–30% grade improvement in just 3 months of consistent classes.</p>
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-shield-lock-fill text-danger" style="font-size:2.5rem;"></i>
-        <h5 class="mt-3">Safe & Transparent</h5>
-        <p>Parents get attendance, performance tracking, and feedback directly from our dashboard.</p>
+
+      <div class="col-md-6">
+        <div class="box">
+          <h6 class="fw-bold mb-2">Founded With a Clear Purpose</h6>
+          <p class="small text-muted mb-0">
+            To eliminate opaque teaching models and replace them with
+            clarity, accountability and measurable growth.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Location & Contact -->
-<section class="py-5 bg-gradient text-white text-center" style="background:linear-gradient(90deg,#673ab7,#3f51b5,#2196f3);">
+<!-- ================= WHAT MAKES US DIFFERENT ================= -->
+<section class="py-5 bg-light">
   <div class="container">
-    <h2 class="fw-bold mb-3">Trusted by Parents in Bengaluru & Beyond</h2>
-    <p class="mb-4">We are based at <strong>Ambalipura – Sarjapur Rd, Bengaluru</strong>, and also serve students online across India.</p>
-    <p class="mb-2">📱 WhatsApp: <a href="https://wa.me/918374377311" class="fw-bold text-warning text-decoration-none">+91 83743 77311</a></p>
-    <p class="mb-2">🌐 <a href="https://robodynamics.in" class="fw-bold text-light text-decoration-underline">robodynamics.in</a></p>
+    <h2 class="fw-bold text-center mb-4">What Makes Robo Dynamics Different</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="box text-center h-100">
+          <i class="bi bi-diagram-3 icon-lg text-primary"></i>
+          <h6 class="fw-bold mt-3">Built as an LMS</h6>
+          <p class="small text-muted">
+            Not retrofitted tuition — a platform-first learning system.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="box text-center h-100">
+          <i class="bi bi-eye icon-lg text-success"></i>
+          <h6 class="fw-bold mt-3">Parent Visibility</h6>
+          <p class="small text-muted">
+            Attendance, performance, feedback — always accessible.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="box text-center h-100">
+          <i class="bi bi-graph-up-arrow icon-lg text-warning"></i>
+          <h6 class="fw-bold mt-3">Outcome Driven</h6>
+          <p class="small text-muted">
+            Decisions based on progress data, not assumptions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT WE TEACH ================= -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-4">What We Teach</h2>
+
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="box h-100 text-center">
+          <h6 class="fw-bold">School Academics</h6>
+          <p class="small text-muted">
+            Maths, Science, English, Kannada, Hindi (Grades 2–10)
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box h-100 text-center">
+          <h6 class="fw-bold">Coding</h6>
+          <p class="small text-muted">
+            Scratch, Python, Web Development, Logic Building
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box h-100 text-center">
+          <h6 class="fw-bold">Robotics</h6>
+          <p class="small text-muted">
+            Arduino, ESP32, Sensors, Real-world projects
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box h-100 text-center">
+          <h6 class="fw-bold">NEET Foundation</h6>
+          <p class="small text-muted">
+            Structured preparation with analytics and tracking
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOR MENTORS ================= -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">For Educators & Mentors</h2>
+    <p class="mb-4">
+      Robo Dynamics empowers mentors with curriculum, tools and structured workflows —
+      so they can focus on teaching, not administration.
+    </p>
+
+    <a href="${pageContext.request.contextPath}/mentors"
+       class="btn btn-primary btn-lg fw-bold">
+      <i class="bi bi-person-plus"></i> Apply to Teach
+    </a>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Learning Should Be Clear, Not Confusing</h2>
+    <p class="mb-4">
+      Experience a platform where progress is visible and education is accountable.
+    </p>
+
+    <a href="${pageContext.request.contextPath}/parents"
+       class="btn btn-light btn-lg fw-bold">
+      <i class="bi bi-display"></i> Explore the Platform
+    </a>
   </div>
 </section>
 
 <jsp:include page="footer.jsp"/>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

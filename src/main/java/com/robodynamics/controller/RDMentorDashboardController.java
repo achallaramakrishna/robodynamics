@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDUser;
@@ -42,6 +43,37 @@ public class RDMentorDashboardController {
     	    model.addAttribute("title", "Mentor Dashboard");
 
         return "mentor/dashboard"; // /WEB-INF/views/mentor/dashboard.jsp
+    }
+    
+    @GetMapping("/mentor/course/{courseOfferingId}/dashboard")
+    public String mentorCourseDashboard(
+            @PathVariable Integer courseOfferingId,
+            HttpSession session,
+            Model model) {
+
+        RDUser user = (RDUser) session.getAttribute("rdUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // Security: ensure mentor owns this course offering
+        RDCourseOffering offering =
+                courseOfferingService.getRDCourseOffering(courseOfferingId);
+
+        if (offering == null ||
+            offering.getMentor() == null ||
+            !offering.getMentor().getUser().getUserID().equals(user.getUserID())) {
+
+            model.addAttribute("error", "Unauthorized access to course");
+            return "error/403";
+        }
+
+        model.addAttribute("offering", offering);
+        model.addAttribute("students", offering.getStudentEnrollments());
+        model.addAttribute("title", "Course Dashboard");
+
+        return "mentor/course_dashboard";
+        // /WEB-INF/views/mentor/course_dashboard.jsp
     }
     
     

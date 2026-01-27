@@ -7,43 +7,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Course Monitor</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
 :root {
-    --footer-height: 60px;
     --header-height: 60px;
+    --footer-height: 60px;
 }
-html, body { height: 100%; margin: 0; }
-body { background: #f8f9fa; }
 
-/* Sidebar */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: #f8f9fa;
+}
+
+/* ================= SIDEBAR ================= */
 .sidebar {
     width: 260px;
     background: #fff;
     border-right: 1px solid #dee2e6;
     padding: 15px;
-    height: calc(100vh - var(--header-height) - var(--footer-height));
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
     overflow-y: auto;
 }
-.session-item {
-    padding: 10px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 6px;
-}
-.session-item.active {
-    background: #007bff;
-    color: #fff;
-}
-.session-item:hover { background: #e9f2ff; }
 
+/* SESSION ITEMS */
+.session-item {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+}
+
+.session-item.active {
+    background: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+/* ================= CONTENT ================= */
 .content-area {
-    flex: 1;
     padding: 15px;
 }
+
 .placeholder-box {
     border: 2px dashed #ced4da;
     padding: 40px;
@@ -51,41 +68,63 @@ body { background: #f8f9fa; }
     border-radius: 10px;
     text-align: center;
 }
-.desktop-toggle {
+
+/* DESKTOP IFRAME */
+.dashboard-frame {
+    width: 100%;
+    height: 70vh;
     border: none;
-    background: #007bff;
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    #sessionsContainer {
+        display: none; /* collapsed by default on mobile */
+    }
+
+    .dashboard-frame {
+        display: none;
+    }
 }
 </style>
 
 <script>
-function loadSessionDashboard(sessionId) {
-    const enrollmentId = '${studentEnrollment.enrollmentId}';
-    document.getElementById("dashboardFrame").src =
-        '${ctx}/course/session/' + sessionId + '/dashboard?enrollmentId=' + enrollmentId;
-
-    document.querySelectorAll('.session-item')
-        .forEach(el => el.classList.remove('active'));
-    document.getElementById("session-" + sessionId).classList.add('active');
-
-    document.getElementById('placeholder').style.display = 'none';
+function isMobile() {
+    return window.matchMedia("(max-width: 768px)").matches;
 }
 
-function openMatchingGame() {
-    const active = document.querySelector('.session-item.active');
-    if (!active) {
-        alert('Please select a session first');
+function toggleSessions() {
+    const el = document.getElementById("sessionsContainer");
+    el.style.display = (el.style.display === "none") ? "block" : "none";
+}
+
+function loadSessionDashboard(sessionId) {
+    const enrollmentId = '${studentEnrollment.enrollmentId}';
+    const url = '${ctx}/course/session/' + sessionId + '/dashboard?enrollmentId=' + enrollmentId;
+
+    // MOBILE → normal navigation
+    if (isMobile()) {
+        window.location.href = url;
         return;
     }
 
-    const sessionId = active.id.replace('session-', '');
-    const enrollmentId = '${studentEnrollment.enrollmentId}';
+    // DESKTOP → iframe
+    const frame = document.getElementById("dashboardFrame");
+    frame.src = url;
 
-    document.getElementById("dashboardFrame").src =
-        '${ctx}/matching/play?sessionId=' + sessionId +
-        '&enrollmentId=' + enrollmentId;
+    document.querySelectorAll('.session-item')
+        .forEach(el => el.classList.remove('active'));
+
+    const active = document.getElementById("session-" + sessionId);
+    if (active) active.classList.add('active');
 
     document.getElementById('placeholder').style.display = 'none';
 }
@@ -98,29 +137,41 @@ function openMatchingGame() {
 <jsp:include page="header.jsp" />
 
 <div class="container-fluid">
-<div class="row">
+<div class="row flex-column flex-md-row">
 
-    <!-- SIDEBAR -->
+    <!-- ================= SIDEBAR ================= -->
     <div class="col-auto sidebar">
+
         <a href="${ctx}/studentDashboard"
-           class="btn btn-sm btn-outline-secondary mb-3">
+           class="btn btn-sm btn-outline-secondary mb-3 w-100">
             ← Courses
         </a>
 
-        <div class="fw-bold mb-3 text-primary">
+        <div class="fw-bold mb-2 text-primary">
             ${course.courseName}
         </div>
 
-        <c:forEach items="${courseSessions}" var="session">
-            <div class="session-item"
-                 id="session-${session.courseSessionId}"
-                 onclick="loadSessionDashboard(${session.courseSessionId})">
-                📘 ${session.sessionTitle}
-            </div>
-        </c:forEach>
+        <!-- 🔽 COLLAPSIBLE TOGGLE -->
+        <button class="btn btn-outline-primary w-100 mb-3"
+                onclick="toggleSessions()">
+            📚 Sessions
+        </button>
+
+        <!-- 🔽 COLLAPSIBLE CONTENT -->
+        <div id="sessionsContainer">
+            <c:forEach items="${courseSessions}" var="session">
+                <button type="button"
+                        class="session-item"
+                        id="session-${session.courseSessionId}"
+                        onclick="loadSessionDashboard(${session.courseSessionId})">
+                    📘 ${session.sessionTitle}
+                </button>
+            </c:forEach>
+        </div>
+
     </div>
 
-    <!-- CONTENT -->
+    <!-- ================= CONTENT ================= -->
     <div class="col content-area">
 
         <!-- PLACEHOLDER -->
@@ -134,7 +185,9 @@ function openMatchingGame() {
 
         <!-- IFRAME -->
         <iframe id="dashboardFrame"
-                style="width:100%; height:70vh; border:none;">
+                class="dashboard-frame"
+                title="Session Dashboard"
+                loading="lazy">
         </iframe>
 
     </div>

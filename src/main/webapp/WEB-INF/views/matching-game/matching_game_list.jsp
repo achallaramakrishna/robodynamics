@@ -34,9 +34,9 @@
     </div>
 
     <!-- Back -->
-    <a href="${pageContext.request.contextPath}/student/course-dashboard?sessionId=${sessionId}&enrollmentId=${enrollmentId}"
-       class="btn btn-outline-secondary mb-4">
-        ← Back to Session Dashboard
+    <a class="btn btn-secondary mb-3"
+       href="${ctx}/course/session/${session.courseSessionId}/dashboard?enrollmentId=${enrollment.enrollmentId}">
+       ← Back to Session
     </a>
 
     <!-- No Games -->

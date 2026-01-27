@@ -1,169 +1,313 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="ISO-8859-1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Robo Dynamics</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<%@ page language="java"
+         contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-/* Global Footer Styles */
-footer {
-    background-color: #000000; /* Dark black background color */
-    color: #ffffff; /* White text color */
-    padding: 2rem 0; /* Additional padding for visual spacing */
+#rdChatLauncher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #fff;
+
+  font-size: 24px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-footer a {
-    color: #00ff00; /* Green links */
+#rdChatLauncher:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
 }
 
-footer a:hover {
-    color: #ffffff; /* White color on hover */
+#rdChatLauncher:active {
+  transform: scale(0.96);
 }
 
-footer a:active {
-    color: #ffffff; /* White color on click */
-}
-
-/* Social Icons */
-.social-icons {
-    margin-top: 20px;
-}
-
-.social-icons a {
-     display: inline-block;
-    margin-right: 10px;
-    font-size: 2em; /* Adjust icon size as needed */
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #ff007f, #000080); /* Gradient color */
-    color: #ffffff; /* White icon color */
-    transition: background 0.3s;
-}
-
-.social-icons a:hover {
-    color: #00ff00; /* Green color on hover */
-}
-
-.social-icons a:active {
-    color: #00ff00; /* Green color on click */
-}
-
-/* Footer Sections */
-.footer-logo {
-    width: 100px; /* Adjust width as needed */
-    margin-bottom: 20px;
-}
-.footer-section {
-    margin-bottom: 20px;
-}
-
-.footer-section h5 {
-    color: #ffffff; /* Green header color */
-    margin-bottom: 20px;
-}
-
-.footer-section p, .footer-section ul, .footer-section li {
-    color: #ffffff; /* White text color */
-}
-
-.footer-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.footer-section ul li a {
-    color: #ffffff; /* Green link color */
-    text-decoration: none;
-}
-
-.footer-section ul li a:hover {
-    color: #00ff00; /* White color on hover */
-}
-
-/* Legal Information */
-.legal {
-    border-top: 1px solid #ffffff; /* White border line */
-    padding-top: 10px;
-    margin-top: 20px;
-}
-
-.legal p {
-    margin-bottom: 0;
-}
-
-.legal a {
-    color: #ffffff; /* Green link color */
-}
-
-.legal a:hover {
-    color: #ffffff; /* White color on hover */
-}
 </style>
-</head>
-<body>
-<footer class="text-white py-5">
-    <div class="container">
-        <div class="row">
-            <!-- Logo and Social Media Section -->
-            <div class="col-md-3 footer-section">
-                 <img src="${pageContext.request.contextPath}/resources/images/footerlogo.jpg" alt="Robo Dynamics Logo" class="footer-logo">
-                <p>Equip your child with the skills they need to thrive in a technology-driven world.</p>
-                <div class="social-icons">
-                     <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-                    <a href="https://www.linkedin.com/in/ramakrishna-achalla-45549031a" class="text-white mr-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                    <a href="https://www.instagram.com/robo__dynamics/" class="text-white mr-3"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="https://x.com/Robo_Dynamics" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
-                </div>
-            </div>
-            <!-- Quick Links Section -->
-            <div class="col-md-3 footer-section">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/subscription">Membership</a></li>
-                    <li><a href="${pageContext.request.contextPath}/courses">Courses</a></li>
-                    <li><a href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
-                    <li><a href="${pageContext.request.contextPath}/contact/contactus">Contact Us</a></li>
-                </ul>
-            </div>
-            <!-- Help Links Section -->
-            <div class="col-md-3 footer-section">
-                <h5>Help Links</h5>
-                <ul>
-                    <li><a href="HelpandSupport.jsp">Help and Support</a></li>
-                    <li><a href="TermsandCondition.jsp">Terms of use</a></li>
-                    <li><a href="PrivacyPolicy.jsp">Privacy Policy</a></li>
-                    <li><a href="sitemap.jsp">Sitemap</a></li>
-                </ul>
-            </div>
-            <!-- Contact Information Section -->
-            <div class="col-md-3 footer-section">
-                <h5>Contact Information</h5>
-                <p>Address: Ambalipura - Sarjapur Rd, above Agarwal Mithai, Choudadenahalli, Chambenahalli, Bengaluru, Karnataka 562125</p>
-                <p>Phone: 83743 77311</p>
-                <p>Email: <a href="mailto:info@robodynamics.com" class="text-white">info@robodynamics.com</a></p>
-            </div>
-        </div>
-        <!-- Legal Information Section -->
-        <div class="row legal">
-            <div class="col-md-6">
-                <p>&copy; 2024 Robo Dynamics. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-right">
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="TermsandCondition.jsp" class="text-white">Terms</a></li>
-                    <li class="list-inline-item"><a href="PrivacyPolicy.jsp" class="text-white">Privacy Policy</a></li>
-                </ul>
-            </div>
-        </div>
+<!-- ================= FOOTER ================= -->
+<footer class="pt-5 pb-4 mt-auto" style="background:#0b1c2d;color:#cfd8dc;">
+  <div class="container">
+    <div class="row gy-4">
+
+      <div class="col-md-4">
+        <h6 class="text-white fw-semibold">Robo Dynamics LMS</h6>
+        <p class="small">
+          Robo Dynamics is a Learning Management System for academics,
+          coding, robotics and NEET preparation with structured mentoring.
+        </p>
+      </div>
+
+      <div class="col-md-2">
+        <h6 class="text-white fw-semibold">Programs</h6>
+        <ul class="list-unstyled small">
+          <li><a class="text-decoration-none text-light"
+                 href="${pageContext.request.contextPath}/courses">Academics</a></li>
+          <li><a class="text-decoration-none text-light"
+                 href="${pageContext.request.contextPath}/courses">Coding & Robotics</a></li>
+          <li><a class="text-decoration-none text-light"
+                 href="${pageContext.request.contextPath}/neet">NEET</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6 class="text-white fw-semibold">Platform</h6>
+        <ul class="list-unstyled small">
+          <li><a class="text-decoration-none text-light"
+                 href="${pageContext.request.contextPath}/platform">How it Works</a></li>
+          <li><a class="text-decoration-none text-light"
+                 href="${pageContext.request.contextPath}/parents">Parent Dashboard</a></li>
+          <li><a class="text-decoration-none text-light"
+                 href="${pageContext.request.contextPath}/mentors">Teach with Us</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6 class="text-white fw-semibold">Contact</h6>
+        <ul class="list-unstyled small">
+          <li>📍 Bengaluru, India</li>
+          <li>📞 <a class="text-decoration-none text-light"
+                   href="tel:+918374377311">+91 83743 77311</a></li>
+          <li>🌐 <a class="text-decoration-none text-light"
+                   href="https://robodynamics.in"
+                   target="_blank">robodynamics.in</a></li>
+        </ul>
+      </div>
+
     </div>
+
+    <div class="text-center small mt-4 pt-3"
+         style="border-top:1px solid rgba(255,255,255,0.1);color:#b0bec5;">
+      © <%= java.time.Year.now() %> Robo Dynamics LMS. All Rights Reserved.
+    </div>
+  </div>
 </footer>
-</body>
-</html>
+
+<!-- ================= CHAT FLOAT BUTTON ================= -->
+<c:if test="${not empty sessionScope.rdUser}">
+  <button id="rdChatLauncher"
+          title ="Chat">
+    💬
+  </button>
+</c:if>
+
+<!-- ================= CHAT OFFCANVAS ================= -->
+<div class="offcanvas offcanvas-end"
+     tabindex="-1"
+     id="chatCanvas"
+     style="width:380px">
+
+  <div class="offcanvas-header">
+    <h6 class="offcanvas-title">Robo Dynamics Chat</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body p-0" id="chatCanvasBody">
+    <div class="text-center text-muted mt-4">Loading chat…</div>
+  </div>
+</div>
+
+<!-- ================= BOOTSTRAP JS (ONCE) ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ================= GLOBAL CHAT JS ================= -->
+<script>
+
+	let pollTimer = null;
+
+  const BASE = '${pageContext.request.contextPath}';
+  let chatCanvas;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    chatCanvas = new bootstrap.Offcanvas('#chatCanvas');
+
+    const launcher = document.getElementById('rdChatLauncher');
+    if (launcher) {
+      launcher.addEventListener('click', () => {
+        chatCanvas.show();
+        loadInbox();
+      });
+    }
+  });
+
+  function loadInbox() {
+    fetch(BASE + '/chat')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('chatCanvasBody').innerHTML = html;
+      });
+  }
+
+  // ✅ MUST BE GLOBAL
+  window.openConversation = function (conversationId) {
+    fetch(BASE + '/chat/conversation/' + conversationId)
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('chatCanvasBody').innerHTML = html;
+     // ✅ INIT CONVERSATION HERE (CRITICAL)
+        initConversation(
+          conversationId,
+          ${sessionScope.rdUser.userID},
+          0
+        );
+      });
+  };
+
+  // ✅ MUST BE GLOBAL
+  // expose globally so inline onsubmit can see it
+  window.startChat = function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.text())
+    .then(html => {
+      const body = document.getElementById('chatCanvasBody');
+      body.innerHTML = html;
+
+      // OPTIONAL: extract conversationId if present
+      const root = body.querySelector('[data-conversation-id]');
+      if (root) {
+        window.currentConversationId = root.dataset.conversationId;
+      }
+    })
+    .catch(err => console.error(err));
+
+    return false; // IMPORTANT: stops full page load
+  };
+
+	let conversationId = ${conversationId != null ? conversationId : 0};
+	let currentUserId = ${currentUserId != null ? currentUserId : 0};
+	let lastMessageId = ${lastMessageId != null ? lastMessageId : 0};
+
+	function initConversation(cid, uid, lastId) {
+		  conversationId = cid;
+		  currentUserId = uid;
+		  lastMessageId = lastId || 0;
+
+		  // stop old poll
+		  if (pollTimer) clearInterval(pollTimer);
+
+		  // start new poll
+		  pollTimer = setInterval(poll, 2500);
+
+		  setTimeout(scrollBottom, 50);
+		}
+
+	 
+	function loadInbox() {
+	    fetch('${pageContext.request.contextPath}/chat')
+	      .then(res => res.text())
+	      .then(html => {
+	        document.getElementById('chatCanvasBody').innerHTML = html;
+	      })
+	      .catch(err => console.error('Failed to load inbox', err));
+	  }
+
+	function scrollBottom() {
+		  const box = document.getElementById("chatBox");
+		  if (!box) return;   // 🔑 critical
+		  box.scrollTop = box.scrollHeight;
+		}
+
+
+  scrollBottom();
+
+  function escapeHtml(s) {
+      return s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+  }
+
+  async function sendMessage() {
+
+      const input = document.getElementById("messageText");
+      const text = input.value.trim();
+      if (!text) return;
+
+      // 1️⃣ Optimistically add message to UI
+      const div = document.createElement("div");
+      div.className = "msg me";
+
+      const now = new Date().toLocaleTimeString();
+
+      div.innerHTML =
+          '<div class="bubble">' +
+              '<div>' + escapeHtml(text) + '</div>' +
+              '<div class="meta">You • ' + now + '</div>' +
+          '</div>';
+
+      document.getElementById("chatBox").appendChild(div);
+      scrollBottom();
+
+      input.value = "";
+
+      // 2️⃣ Send to server
+      const params = new URLSearchParams();
+      params.append("messageText", text);
+
+      try {
+          await fetch(
+              '${pageContext.request.contextPath}/chat/conversation/' +
+              conversationId + '/send',
+              {
+                  method: "POST",
+                  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                  body: params.toString()
+              }
+          );
+      } catch (e) {
+          console.error("Send failed", e);
+      }
+  }
+
+
+  async function poll() {
+	  if (!conversationId || conversationId === 0) return;
+
+	  try {
+	    const res = await fetch(
+	      BASE + '/chat/conversation/' +
+	      conversationId + '/poll?lastMessageId=' + lastMessageId
+	    );
+
+	    if (!res.ok) return;
+
+	    const json = await res.json();
+
+	    if (json.success && json.messages?.length) {
+	      json.messages.forEach(m => appendMessage(m));
+	      lastMessageId = json.lastMessageId;
+	      scrollBottom();
+	    }
+
+	  } catch (e) {
+	    // silent fail
+	  }
+	}
+
+
+
+</script>

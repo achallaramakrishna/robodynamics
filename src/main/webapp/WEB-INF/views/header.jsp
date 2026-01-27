@@ -58,7 +58,7 @@
               <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/courses">Courses</a></li>
 		<!-- Competitions -->
 		<li class="nav-item">
-		  <a class="nav-link" href="${pageContext.request.contextPath}/competitions">Competitions</a>
+		  <a class="nav-link" href="${pageContext.request.contextPath}/contests">Contests</a>
 		</li>
 
         <!-- Other Links -->

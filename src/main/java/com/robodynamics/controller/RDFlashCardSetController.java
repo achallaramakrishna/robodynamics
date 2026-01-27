@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robodynamics.dto.RDFlashCardSetUploadDTO;
 import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseCategory;
@@ -130,26 +131,44 @@ public class RDFlashCardSetController {
     public String handleJsonUpload(@RequestParam("file") MultipartFile file,
                                    @RequestParam("courseSessionDetailId") int courseSessionDetailId,
                                    RedirectAttributes redirectAttributes) {
+
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Please select a JSON file to upload.");
-            return "redirect:/flashcardsets/flashcard-set-list"; // Adjust redirect to the list if no upload page exists
+            redirectAttributes.addFlashAttribute("error", "Please select a JSON file.");
+            return "redirect:/flashcardsets/flashcard-set-list";
         }
-        
-        RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
+
+        RDCourseSessionDetail courseSessionDetail =
+            courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
+
         try (InputStream inputStream = file.getInputStream()) {
+
             ObjectMapper objectMapper = new ObjectMapper();
-            List<RDFlashCardSet> flashCardSets = objectMapper.readValue(inputStream, new TypeReference<List<RDFlashCardSet>>() {});
-            
-            for (RDFlashCardSet set : flashCardSets) {
-                set.setCourseSessionDetail(courseSessionDetail); // Ensure courseSessionDetail is properly set
+
+            List<RDFlashCardSetUploadDTO> dtoList =
+                objectMapper.readValue(inputStream,
+                    new TypeReference<List<RDFlashCardSetUploadDTO>>() {});
+
+            for (RDFlashCardSetUploadDTO dto : dtoList) {
+                RDFlashCardSet set = new RDFlashCardSet();
+                set.setSetName(dto.getSetName());
+                set.setSetDescription(dto.getSetDescription());
+                set.setCourseSessionDetail(courseSessionDetail);
+
                 rdFlashCardSetService.saveRDFlashCardSet(set);
             }
-            redirectAttributes.addFlashAttribute("success", "Flashcard sets uploaded successfully.");
+
+            redirectAttributes.addFlashAttribute(
+                "success", "Flashcard sets uploaded successfully."
+            );
+
         } catch (Exception e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("error", "Error processing JSON file: " + e.getMessage());
+            redirectAttributes.addFlashAttribute(
+                "error", "JSON upload failed: " + e.getMessage()
+            );
         }
-        return "redirect:/flashcardsets/flashcard-set-list"; // Redirect back to the flashcard-set-list page
+
+        return "redirect:/flashcardsets/flashcard-set-list";
     }
 
     @GetMapping("/getCourseSessions")

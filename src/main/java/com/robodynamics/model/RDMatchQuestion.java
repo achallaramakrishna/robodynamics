@@ -1,11 +1,7 @@
 package com.robodynamics.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,13 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.web.multipart.MultipartFile;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "rd_match_question")
@@ -33,81 +27,96 @@ public class RDMatchQuestion {
     private int matchQuestionId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_session_detail_id")
+    @JoinColumn(name = "course_session_detail_id", nullable = false)
     private RDCourseSessionDetail courseSessionDetail;
 
+    @Column(name = "instructions", length = 255)
     private String instructions;
 
-    @Column(name = "difficulty_level")
+    @Column(name = "difficulty_level", length = 20)
     private String difficultyLevel;
 
-    @Column(name = "total_pairs")
+    @Column(name = "total_pairs", nullable = false)
     private int totalPairs;
 
     @Column(name = "is_active")
-    private Boolean active;
+    private Boolean active = true;
 
-    @OneToMany(mappedBy = "matchQuestion",
-               cascade = CascadeType.ALL,
-               orphanRemoval = true,
-               fetch = FetchType.LAZY)
+    /* ================= AUDIT FIELD ================= */
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", updatable = false, insertable = false)
+    private Date createdAt;
+
+    /* ================= RELATION ================= */
+
+    @OneToMany(
+        mappedBy = "matchQuestion",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
     private List<RDMatchPair> pairs;
 
-	public int getMatchQuestionId() {
-		return matchQuestionId;
-	}
+    /* ================= GETTERS & SETTERS ================= */
 
-	public void setMatchQuestionId(int matchQuestionId) {
-		this.matchQuestionId = matchQuestionId;
-	}
+    public int getMatchQuestionId() {
+        return matchQuestionId;
+    }
 
-	public RDCourseSessionDetail getCourseSessionDetail() {
-		return courseSessionDetail;
-	}
+    public void setMatchQuestionId(int matchQuestionId) {
+        this.matchQuestionId = matchQuestionId;
+    }
 
-	public void setCourseSessionDetail(RDCourseSessionDetail courseSessionDetail) {
-		this.courseSessionDetail = courseSessionDetail;
-	}
+    public RDCourseSessionDetail getCourseSessionDetail() {
+        return courseSessionDetail;
+    }
 
-	public String getInstructions() {
-		return instructions;
-	}
+    public void setCourseSessionDetail(RDCourseSessionDetail courseSessionDetail) {
+        this.courseSessionDetail = courseSessionDetail;
+    }
 
-	public void setInstructions(String instructions) {
-		this.instructions = instructions;
-	}
+    public String getInstructions() {
+        return instructions;
+    }
 
-	public String getDifficultyLevel() {
-		return difficultyLevel;
-	}
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
 
-	public void setDifficultyLevel(String difficultyLevel) {
-		this.difficultyLevel = difficultyLevel;
-	}
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
 
-	public int getTotalPairs() {
-		return totalPairs;
-	}
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
 
-	public void setTotalPairs(int totalPairs) {
-		this.totalPairs = totalPairs;
-	}
+    public int getTotalPairs() {
+        return totalPairs;
+    }
 
-	public Boolean getActive() {
-		return active;
-	}
+    public void setTotalPairs(int totalPairs) {
+        this.totalPairs = totalPairs;
+    }
 
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+    public Boolean getActive() {
+        return active;
+    }
 
-	public List<RDMatchPair> getPairs() {
-		return pairs;
-	}
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
-	public void setPairs(List<RDMatchPair> pairs) {
-		this.pairs = pairs;
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-    
+    public List<RDMatchPair> getPairs() {
+        return pairs;
+    }
+
+    public void setPairs(List<RDMatchPair> pairs) {
+        this.pairs = pairs;
+    }
 }

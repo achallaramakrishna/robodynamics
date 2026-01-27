@@ -10,8 +10,11 @@ public interface RDQuizQuestionService {
     
 	List<RDQuizQuestion> findPaginated(int page, int size);
 	
+	
     List<RDQuizQuestion> findQuestionsByQuizId(int quizId);
 
+    List<RDQuizQuestion> findActiveQuestionsByIds(List<Integer> ids);
+    
 	long countQuestions(); 
 	
     // Create or update a quiz question

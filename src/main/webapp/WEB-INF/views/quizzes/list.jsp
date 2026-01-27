@@ -28,9 +28,6 @@
 </head>
 <body>
 
-	<!-- Include header JSP -->
-	<jsp:include page="/header.jsp" />
-
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div class="col-md-offset-1 col-md-10">
@@ -53,7 +50,6 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:out value="${quizzes}" default="No quizzes found."/>
 						
 						<c:forEach var="quiz" items="${quizzes}">
 							<tr>
@@ -72,7 +68,6 @@
 		</div>
 	</div>
 
-	<!-- Include footer JSP -->
-	<jsp:include page="/footer.jsp" />
+
 </body>
 </html>

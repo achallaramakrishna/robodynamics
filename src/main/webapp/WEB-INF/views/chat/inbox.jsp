@@ -45,33 +45,28 @@
 	
 	  <!-- ================= START NEW CHAT ================= -->
 	
-	  <h6 class="mb-2">Start New Chat</h6>
-	
-	  <c:if test="${not empty chatUsers}">
-	    <div class="input-group gap-2">
-	      <select id="toUserId" class="form-select" required>
-	        <option value="">Select a person</option>
-	        <c:forEach var="u" items="${chatUsers}">
-	          <option value="${u.userID}">
-	            <c:out value="${u.displayName}"/>
-	          </option>
-	        </c:forEach>
-	      </select>
-	
-	      <button type="button"
-	              class="btn btn-primary"
-	              onclick="startChat()">
-	        Start
-	      </button>
-	    </div>
-	  </c:if>
-	
-	  <c:if test="${empty chatUsers}">
-	    <div class="alert alert-warning small mt-2">
-	      No users available to start a chat.
-	    </div>
-	  </c:if>
-	
-	</div>
+<h6 class="mb-2">Start New Chat</h6>
+
+<c:if test="${not empty chatUsers}">
+  <form action="${pageContext.request.contextPath}/chat/start-direct"
+        method="post"
+        onsubmit="return startChat(this)"
+        class="input-group gap-2">
+
+    <select name="toUserId" class="form-select" required>
+      <option value="">Select a person</option>
+      <c:forEach var="u" items="${chatUsers}">
+        <option value="${u.userID}">
+          <c:out value="${u.displayName}"/>
+        </option>
+      </c:forEach>
+    </select>
+
+    <button type="submit" class="btn btn-primary">
+      Start
+    </button>
+  </form>
+</c:if>
+
 	
 	

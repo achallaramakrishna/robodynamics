@@ -171,10 +171,8 @@
 
   // ✅ MUST BE GLOBAL
   // expose globally so inline onsubmit can see it
-  window.startChat = function (e) {
-    e.preventDefault();
+  window.startChat = function (form) {
 
-    const form = e.target;
     const formData = new FormData(form);
 
     fetch(form.action, {
@@ -216,15 +214,6 @@
 		}
 
 	 
-	function loadInbox() {
-	    fetch('${pageContext.request.contextPath}/chat')
-	      .then(res => res.text())
-	      .then(html => {
-	        document.getElementById('chatCanvasBody').innerHTML = html;
-	      })
-	      .catch(err => console.error('Failed to load inbox', err));
-	  }
-
 	function scrollBottom() {
 		  const box = document.getElementById("chatBox");
 		  if (!box) return;   // 🔑 critical

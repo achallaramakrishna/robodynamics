@@ -52,10 +52,14 @@ public class RDChatServiceImpl implements RDChatService {
         RDChatParticipant p1 = new RDChatParticipant();
         p1.setConversation(conversation);
         p1.setUserId(fromUserId);
+        p1.setActive(true);   // ✅ REQUIRED
+
 
         RDChatParticipant p2 = new RDChatParticipant();
         p2.setConversation(conversation);
         p2.setUserId(toUserId);
+        p2.setActive(true);   // ✅ REQUIRED
+
 
         participantDao.save(p1);
         participantDao.save(p2);

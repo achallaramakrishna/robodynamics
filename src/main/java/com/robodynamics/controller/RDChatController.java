@@ -61,25 +61,43 @@ public class RDChatController {
        Start Direct Chat
      ========================= */
 
-    @PostMapping("/chat/start-direct")
-    public String startDirectChat(
-            @RequestParam Long toUserId,
-            HttpSession session,
-            Model model) {
+    @PostMapping("/start-direct")
+    public String startDirectChat(@RequestParam Integer toUserId,
+                                  HttpSession session,
+                                  Model model) {
 
         RDUser me = (RDUser) session.getAttribute("rdUser");
+        if (me == null) return "redirect:/login";
 
-        RDChatConversation convo =
-            chatService.getOrCreateDirectConversation(me.getUserId(), toUserId);
+        Long conversationId =
+                chatService.startDirectChat(me.getUserID(), toUserId);
 
-        model.addAttribute("conversationId", convo.getConversationId());
+        model.addAttribute("conversationId", conversationId);
         model.addAttribute("messages",
-            chatService.getMessages(convo.getConversationId()));
-        model.addAttribute("currentUserId", me.getUserId());
+                chatService.getMessages(conversationId, me.getUserID()));
+        model.addAttribute("currentUserId", me.getUserID());
         model.addAttribute("lastMessageId", 0L);
 
-        return "chat/conversation :: body"; // IMPORTANT (fragment)
+        return "chat/conversation"; // ✅ NO redirect
     }
+
+
+    @GetMapping("/conversation/{id}")
+    public String openConversation(@PathVariable("id") Long id,
+                                   HttpSession session,
+                                   Model model) {
+
+        RDUser me = (RDUser) session.getAttribute("rdUser");
+        if (me == null) return "redirect:/login";
+
+        model.addAttribute("conversationId", id);
+        model.addAttribute("messages",
+            chatService.getMessages(id, me.getUserID()));
+        model.addAttribute("currentUserId", me.getUserID());
+        model.addAttribute("lastMessageId", 0L);
+
+        return "chat/conversation";
+    }    
 
 
 
@@ -90,47 +108,28 @@ public class RDChatController {
     @PostMapping("/create-group")
     public String createGroupChat(@RequestParam("title") String title,
                                   @RequestParam("memberUserIds") List<Integer> memberUserIds,
-                                  HttpSession session) {
+                                  HttpSession session, Model model) {
 
         Integer creatorUserId = getCurrentUserId(session);
 
         Long conversationId =
                 chatService.createGroupChat(creatorUserId, title, memberUserIds);
 
-        return "redirect:/chat/conversation/" + conversationId;
+        model.addAttribute("conversationId", conversationId);
+        model.addAttribute("messages",
+                chatService.getMessages(conversationId, creatorUserId));
+        model.addAttribute("currentUserId", creatorUserId);
+        model.addAttribute("lastMessageId", 0L);
+
+        return "chat/conversation";
+
     }
 
     /* =========================
        Open Conversation
      ========================= */
 
-    @GetMapping("/conversation/{conversationId}")
-    public String openConversation(@PathVariable Long conversationId,
-                                   Model model,
-                                   HttpSession session) {
-
-        Integer userId = getCurrentUserId(session);
-        if (userId == null) {
-            return "redirect:/login";
-        }
-
-        List<RDChatMessage> messages =
-                chatService.getMessages(conversationId, userId);
-
-        Collections.reverse(messages);
-
-        model.addAttribute("conversationId", conversationId);
-        model.addAttribute("messages", messages);
-        model.addAttribute("currentUserId", userId);
-
-        Long lastMessageId =
-                messages.isEmpty() ? 0L
-                        : messages.get(messages.size() - 1).getMessageId();
-
-        model.addAttribute("lastMessageId", lastMessageId);
-
-        return "chat/conversation";
-    }
+    
     
 
     /* =========================

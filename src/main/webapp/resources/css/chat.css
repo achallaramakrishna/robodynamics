@@ -1,0 +1,20 @@
+.chat-box {
+  height: 420px;
+  overflow-y: auto;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+}
+.msg { margin-bottom: 10px; }
+.msg.me { text-align: right; }
+.bubble {
+  display: inline-block;
+  max-width: 70%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.msg.me .bubble { background: #e6f0ff; }
+.meta { font-size: 11px; color: #777; margin-top: 3px; }

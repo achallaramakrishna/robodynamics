@@ -3,6 +3,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
+<!-- ================= GLOBAL CSS (Loaded once via header.jsp) ================= -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet"
+      href="${pageContext.request.contextPath}/resources/css/chat.css">
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top" style="z-index:1030;">
   <style>

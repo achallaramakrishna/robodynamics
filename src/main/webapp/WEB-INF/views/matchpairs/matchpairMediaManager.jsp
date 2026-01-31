@@ -117,7 +117,7 @@
 
 </div>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 <script>
 const ctx = '<c:out value="${pageContext.request.contextPath}" />';

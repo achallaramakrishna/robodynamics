@@ -1,7 +1,10 @@
 package com.robodynamics.model;
 
 import javax.persistence.*;
+
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "rd_quiz_questions")
@@ -125,10 +128,9 @@ public class RDQuizQuestion {
     @JoinColumn(name = "slide_id")
     private RDSlide slide;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "question_id") // FK in `quiz_options` table
-    private List<RDQuizOption> options;
-
+	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+	private Set<RDQuizOption> options = new LinkedHashSet<>();
+	
     // Enum for DifficultyLevel
     public enum DifficultyLevel {
         Easy, Medium, Hard, Expert, Master
@@ -284,15 +286,17 @@ public class RDQuizQuestion {
         this.slide = slide;
     }
 
-    public List<RDQuizOption> getOptions() {
-        return options;
-    }
+    public void setOptions(Set<RDQuizOption> options) {
+		this.options = options;
+	}
 
-    public void setOptions(List<RDQuizOption> options) {
-        this.options = options;
-    }
+	
 
-    // Utility methods
+    public Set<RDQuizOption> getOptions() {
+		return options;
+	}
+
+	// Utility methods
     public RDQuizOption getCorrectOption() {
         if (options != null) {
             for (RDQuizOption option : options) {
@@ -304,15 +308,17 @@ public class RDQuizQuestion {
         return null;
     }
 
-    @Override
-    public String toString() {
-        final int maxLen = 10;
-        return "RDQuizQuestion{" +
-               "questionId=" + questionId +
-               ", questionText='" + questionText + '\'' +
-               ", questionType='" + questionType + '\'' +
-               ", difficultyLevel=" + difficultyLevel +
-               ", options=" + (options != null ? options.subList(0, Math.min(options.size(), maxLen)) : null) +
-               '}';
-    }
+	@Override
+	public String toString() {
+		return "RDQuizQuestion [questionId=" + questionId + ", questionText=" + questionText + ", questionType="
+				+ questionType + ", questionImage=" + questionImage + ", correctAnswer=" + correctAnswer
+				+ ", difficultyLevel=" + difficultyLevel + ", maxMarks=" + maxMarks + ", additionalInfo="
+				+ additionalInfo + ", points=" + points + ", active=" + active + ", tierLevel=" + tierLevel
+				+ ", tierOrder=" + tierOrder + ", explanation=" + explanation + ", examType=" + examType
+				+ ", syllabusTag=" + syllabusTag + ", courseSessionDetail=" + courseSessionDetail + ", courseSession="
+				+ courseSession + ", examCourse=" + examCourse + ", examYear=" + examYear + ", examPaper=" + examPaper
+				+ ", isPYQ=" + isPYQ + ", slide=" + slide + ", options=" + options + "]";
+	}
+
+    
 }

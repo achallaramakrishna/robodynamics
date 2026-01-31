@@ -252,7 +252,7 @@
     </c:if>
 </div>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 <!-- Custom: auto-disabling custom range date inputs when not needed -->
 <script>

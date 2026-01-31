@@ -15,6 +15,6 @@
         <p>Your learning path has been created successfully. You can now manage it or view the details from your dashboard.</p>
         <a href="${pageContext.request.contextPath}/dashboard" class="btn btn-primary">Go to Dashboard</a>
     </div>
-    <jsp:include page="/footer.jsp" />
+    <jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

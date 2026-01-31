@@ -42,13 +42,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.viewResolver(viewResolver);
     }
 
-    @Bean
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(10485760); // 10MB
-        return multipartResolver;
-    }
     
+   
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
@@ -74,8 +69,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(rdVisitorInterceptor)
-                .addPathPatterns("/**") // Apply to all paths
-                .excludePathPatterns("/resources/**", "/static/**");
+            .addPathPatterns("/**")
+            .excludePathPatterns(
+                // static
+                "/resources/**",
+                "/static/**",
+                "/uploads/**",
+                "/session_materials/**",
+
+                // upload APIs
+                "/admin/quizzes/media/**",
+                "/flashcards/**",
+                "/matching/**",
+                "/matchpairs/**"
+            );
     }
+
+
    
 }

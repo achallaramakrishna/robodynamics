@@ -17,4 +17,5 @@ public interface RDChatConversationDao {
     void updateLastMessageAt(Long conversationId);
 
 	List<RDChatInboxDTO> findInboxByUser(Integer userId);
+
 }

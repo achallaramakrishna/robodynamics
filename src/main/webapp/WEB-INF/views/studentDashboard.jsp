@@ -103,7 +103,8 @@
 </div>
 
 <!-- FOOTER -->
-<jsp:include page="/footer.jsp" />
+<!-- FOOTER -->
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 </body>
 </html>

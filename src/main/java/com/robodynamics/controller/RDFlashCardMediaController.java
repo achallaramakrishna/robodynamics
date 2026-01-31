@@ -153,6 +153,13 @@ public class RDFlashCardMediaController {
     	        @RequestParam(required = false) MultipartFile aImage,
     	        @RequestParam(defaultValue = "0") int qRemove,
     	        @RequestParam(defaultValue = "0") int aRemove) {
+    	  System.out.println("=== FLASHCARD UPLOAD HIT ===");
+    	    System.out.println("flashcardId=" + flashcardId);
+    	    System.out.println("qImage=" + (qImage != null ? qImage.getOriginalFilename() : "null"));
+    	    System.out.println("qImageSize=" + (qImage != null ? qImage.getSize() : -1));
+    	    System.out.println("aImage=" + (aImage != null ? aImage.getOriginalFilename() : "null"));
+    	    System.out.println("aImageSize=" + (aImage != null ? aImage.getSize() : -1));
+
 
     	    try {
     	        RDFlashCard fc = flashCardService.getRDFlashCard(flashcardId);

@@ -126,7 +126,6 @@ public class RDCourseSessionDetailController {
            ra.addFlashAttribute("error", "Invalid session detail.");
            return "redirect:/sessiondetail/list?courseId=" + courseId;
        }
-
        try {
            // 1) ensure folder exists
            Path folder = courseFolder(courseId);

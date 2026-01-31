@@ -7,4 +7,7 @@ public interface RDChatUserDao {
 
     List<RDUser> findChatEligibleUsers(Integer currentUserId);
 
+
+	String findOtherUserName(Long conversationId, Integer currentUserId);
+
 }

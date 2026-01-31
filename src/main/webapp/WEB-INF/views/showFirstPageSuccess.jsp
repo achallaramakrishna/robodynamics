@@ -35,6 +35,6 @@
 			<h3> Please Login Now </h3>
 		</div>
 	</div>
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

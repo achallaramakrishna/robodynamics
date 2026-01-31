@@ -118,21 +118,33 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
 
-  <div class="offcanvas-body p-0" id="chatCanvasBody">
+<div class="offcanvas-body p-0 d-flex flex-column" id="chatCanvasBody">
     <div class="text-center text-muted mt-4">Loading chat…</div>
   </div>
 </div>
 
 <!-- ================= BOOTSTRAP JS (ONCE) ================= -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 
 <!-- ================= GLOBAL CHAT JS ================= -->
 <script>
-
-	let pollTimer = null;
-
   const BASE = '${pageContext.request.contextPath}';
+//---- prevent duplicate messages
+  const seenMessageIds = new Set();
+
+
   let chatCanvas;
+
+  // ---- Conversation state
+  let conversationId = 0;
+  let currentUserId = ${sessionScope.rdUser != null ? sessionScope.rdUser.userID : 0};
+
+  // ---- WebSocket state
+  let stompClient = null;
+  let stompSub = null;
+  let wsConnecting = false;
 
   document.addEventListener('DOMContentLoaded', () => {
     chatCanvas = new bootstrap.Offcanvas('#chatCanvas');
@@ -146,157 +158,202 @@
     }
   });
 
-  function loadInbox() {
+  // -----------------------------
+  // Inbox load (HTML fragment)
+  // -----------------------------
+  window.loadInbox = function () {
     fetch(BASE + '/chat')
       .then(res => res.text())
       .then(html => {
         document.getElementById('chatCanvasBody').innerHTML = html;
-      });
-  }
+        // optional: stop subscription when leaving conversation
+        wsUnsubscribe();
+      })
+      .catch(err => console.error('Failed to load inbox', err));
+  };
 
-  // ✅ MUST BE GLOBAL
-  window.openConversation = function (conversationId) {
-    fetch(BASE + '/chat/conversation/' + conversationId)
+  // -----------------------------
+  // Open conversation (HTML fragment + WS subscribe)
+  // -----------------------------
+  window.openConversation = function (cid) {
+    fetch(BASE + '/chat/conversation/' + cid)
       .then(res => res.text())
       .then(html => {
         document.getElementById('chatCanvasBody').innerHTML = html;
-     // ✅ INIT CONVERSATION HERE (CRITICAL)
-        initConversation(
-          conversationId,
-          ${sessionScope.rdUser.userID},
-          0
-        );
-      });
+        seedSeenMessageIdsFromDom();   // ✅ ADD THIS
+        initConversation(cid);
+      })
+      .catch(err => console.error('Failed to open conversation', err));
   };
 
-  // ✅ MUST BE GLOBAL
-  // expose globally so inline onsubmit can see it
+  // -----------------------------
+  // Start direct chat (AJAX submit)
+  // IMPORTANT: your controller returns redirect -> HTML fetch will follow it,
+  // but fetch() usually returns the redirected HTML content.
+  // -----------------------------
   window.startChat = function (form) {
-
     const formData = new FormData(form);
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData
-    })
-    .then(res => res.text())
-    .then(html => {
-      const body = document.getElementById('chatCanvasBody');
-      body.innerHTML = html;
+    fetch(form.action, { method: 'POST', body: formData })
+      .then(res => res.text())
+      .then(html => {
+        const body = document.getElementById('chatCanvasBody');
+        body.innerHTML = html;
+        
+        seedSeenMessageIdsFromDom();   // ✅ ADD THIS
 
-      // OPTIONAL: extract conversationId if present
-      const root = body.querySelector('[data-conversation-id]');
-      if (root) {
-        window.currentConversationId = root.dataset.conversationId;
-      }
-    })
-    .catch(err => console.error(err));
 
-    return false; // IMPORTANT: stops full page load
+        // read conversationId from conversationRoot
+        const root = body.querySelector('#conversationRoot[data-conversation-id]');
+        if (root && root.dataset.conversationId) {
+          initConversation(Number(root.dataset.conversationId));
+        } else {
+          // fallback: no conversationRoot means server maybe returned inbox/errors
+          wsUnsubscribe();
+        }
+      })
+      .catch(err => console.error('startChat failed', err));
+
+    return false;
   };
 
-	let conversationId = ${conversationId != null ? conversationId : 0};
-	let currentUserId = ${currentUserId != null ? currentUserId : 0};
-	let lastMessageId = ${lastMessageId != null ? lastMessageId : 0};
+  // -----------------------------
+  // Init conversation state + WS subscribe
+  // -----------------------------
+  function initConversation(cid) {
+    conversationId = Number(cid || 0);
+    if (!conversationId) return;
 
-	function initConversation(cid, uid, lastId) {
-		  conversationId = cid;
-		  currentUserId = uid;
-		  lastMessageId = lastId || 0;
+    wsSubscribe(conversationId);
+    setTimeout(scrollBottom, 60);
+  }
 
-		  // stop old poll
-		  if (pollTimer) clearInterval(pollTimer);
+  // -----------------------------
+  // WebSocket connect / subscribe
+  // -----------------------------
+  function wsConnect(cb) {
+    if (stompClient && stompClient.connected) {
+      cb && cb();
+      return;
+    }
+    if (wsConnecting) return;
 
-		  // start new poll
-		  pollTimer = setInterval(poll, 2500);
+    wsConnecting = true;
 
-		  setTimeout(scrollBottom, 50);
-		}
+    // SockJS endpoint is relative to contextPath => BASE + '/ws-chat'
+    const socket = new SockJS(BASE + '/ws-chat');
+    stompClient = Stomp.over(socket);
+    stompClient.debug = null; // silence logs
 
-	 
-	function scrollBottom() {
-		  const box = document.getElementById("chatBox");
-		  if (!box) return;   // 🔑 critical
-		  box.scrollTop = box.scrollHeight;
-		}
+    stompClient.connect({}, () => {
+      wsConnecting = false;
+      cb && cb();
+    }, (err) => {
+      wsConnecting = false;
+      console.error('WS connect error', err);
+    });
+  }
 
+  function wsSubscribe(cid) {
+    wsConnect(() => {
+      wsUnsubscribe();
+      stompSub = stompClient.subscribe('/topic/conversation.' + cid, (frame) => {
+        try {
+          const msg = JSON.parse(frame.body);
+          appendMessage(msg);
+          scrollBottom();
+        } catch (e) {
+          console.error('WS parse error', e);
+        }
+      });
+    });
+  }
 
-  scrollBottom();
+  function wsUnsubscribe() {
+    if (stompSub) {
+      try { stompSub.unsubscribe(); } catch (e) {}
+      stompSub = null;
+    }
+  }
+
+  // -----------------------------
+  // Send message via WebSocket
+  // -----------------------------
+  window.sendMessage = function () {
+    const input = document.getElementById("messageText");
+    if (!input) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = "";
+
+    // WS send (server will persist + broadcast)
+    wsConnect(() => {
+      if (!conversationId) return;
+
+      stompClient.send("/app/chat.send", {}, JSON.stringify({
+        conversationId: Number(conversationId),
+        messageText: text
+      }));
+    });
+  };
+
+  // -----------------------------
+  // UI helpers
+  // -----------------------------
+  function scrollBottom() {
+    const box = document.getElementById("chatBox");
+    if (!box) return;
+    box.scrollTop = box.scrollHeight;
+  }
 
   function escapeHtml(s) {
-      return s
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
   }
 
-  async function sendMessage() {
-
-      const input = document.getElementById("messageText");
-      const text = input.value.trim();
-      if (!text) return;
-
-      // 1️⃣ Optimistically add message to UI
-      const div = document.createElement("div");
-      div.className = "msg me";
-
-      const now = new Date().toLocaleTimeString();
-
-      div.innerHTML =
-          '<div class="bubble">' +
-              '<div>' + escapeHtml(text) + '</div>' +
-              '<div class="meta">You • ' + now + '</div>' +
-          '</div>';
-
-      document.getElementById("chatBox").appendChild(div);
-      scrollBottom();
-
-      input.value = "";
-
-      // 2️⃣ Send to server
-      const params = new URLSearchParams();
-      params.append("messageText", text);
-
-      try {
-          await fetch(
-              '${pageContext.request.contextPath}/chat/conversation/' +
-              conversationId + '/send',
-              {
-                  method: "POST",
-                  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                  body: params.toString()
-              }
-          );
-      } catch (e) {
-          console.error("Send failed", e);
-      }
-  }
-
-
-  async function poll() {
-	  if (!conversationId || conversationId === 0) return;
-
-	  try {
-	    const res = await fetch(
-	      BASE + '/chat/conversation/' +
-	      conversationId + '/poll?lastMessageId=' + lastMessageId
-	    );
-
-	    if (!res.ok) return;
-
-	    const json = await res.json();
-
-	    if (json.success && json.messages?.length) {
-	      json.messages.forEach(m => appendMessage(m));
-	      lastMessageId = json.lastMessageId;
-	      scrollBottom();
-	    }
-
-	  } catch (e) {
-	    // silent fail
-	  }
+  function seedSeenMessageIdsFromDom() {
+	  seenMessageIds.clear();
+	  document.querySelectorAll('#chatBox .msg[data-id]').forEach(el => {
+	    const id = el.getAttribute('data-id');
+	    if (id) seenMessageIds.add(String(id));
+	  });
 	}
 
 
+  // This was missing in your file but used in poll()
+ function appendMessage(m) {
+  const box = document.getElementById("chatBox");
+  if (!box) return;
+
+  const mid = m.messageId != null ? String(m.messageId) : null;
+
+  // ✅ STOP duplicates here
+  if (mid && seenMessageIds.has(mid)) return;
+
+  const sender = Number(m.senderUserId ?? 0);
+  const text = m.messageText ?? "";
+  const createdAt = m.createdAt ?? "";
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "msg " + (sender === Number(currentUserId) ? "me" : "");
+  if (mid) wrapper.setAttribute("data-id", mid);
+
+  wrapper.innerHTML =
+    '<div class="bubble">' +
+      '<div>' + escapeHtml(text) + '</div>' +
+      '<div class="meta">' +
+        (sender === Number(currentUserId) ? "You" : "Other") +
+        (createdAt ? (" • " + escapeHtml(createdAt)) : "") +
+      '</div>' +
+    '</div>';
+
+  box.appendChild(wrapper);
+
+  if (mid) seenMessageIds.add(mid); // ✅ mark seen
+}
 
 </script>

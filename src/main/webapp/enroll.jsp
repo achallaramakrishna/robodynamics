@@ -66,7 +66,7 @@
 </div>
 
 <!-- Footer Section -->
-<div><jsp:include page="footer.jsp" /></div>
+<div><jsp:include page="/WEB-INF/views/footer.jsp" /></div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

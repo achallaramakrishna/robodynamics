@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java"
+    contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
@@ -57,9 +60,19 @@
 								<td>${quiz.difficultyLevel}</td>
 								<td>${quiz.quizType}</td>
 								<td>${quiz.timeLimitSeconds}</td>
-								<td>
-									<a href="${pageContext.request.contextPath}/quizzes/start/${quiz.quizId}" class="btn btn-primary">Start</a>
+								<td class="d-flex gap-2">
+								    <a href="${pageContext.request.contextPath}/quizzes/start/${quiz.quizId}"
+								       class="btn btn-primary btn-sm">
+								        Start
+								    </a>
+								
+								    <button type="button"
+								            class="btn btn-outline-secondary btn-sm"
+								            onclick="copyQuizLink('${pageContext.request.contextPath}/quizzes/start/${quiz.quizId}')">
+								        📋 Copy Link
+								    </button>
 								</td>
+
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -68,6 +81,37 @@
 		</div>
 	</div>
 
+<script>
+function copyQuizLink(relativeUrl) {
+
+    const fullUrl = window.location.origin + relativeUrl;
+
+    // Modern clipboard API
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(fullUrl).then(() => {
+            alert('Quiz link copied to clipboard!');
+        });
+    } else {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = fullUrl;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            alert('Quiz link copied to clipboard!');
+        } catch (err) {
+            alert('Failed to copy link');
+        }
+
+        document.body.removeChild(textArea);
+    }
+}
+</script>
 
 </body>
 </html>

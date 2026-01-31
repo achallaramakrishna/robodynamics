@@ -142,7 +142,7 @@ public class RDQuizMediaManagerController {
               .append("' alt='question image'/></div>");
         }
 
-        List<RDQuizOption> opts = q.getOptions() != null ? q.getOptions() : Collections.emptyList();
+        Set<RDQuizOption> opts = q.getOptions() != null ? q.getOptions() : Collections.emptySet();
         if (!opts.isEmpty()) {
             sb.append("<ol type='A'>");
             for (RDQuizOption o : opts) {

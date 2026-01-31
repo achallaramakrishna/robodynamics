@@ -258,7 +258,7 @@
     <jsp:include page="dashboard-sections.jsp" />
   </div>
 
-  <jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
   <!-- Details Modal (used by eventClick) -->
   <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">

@@ -67,7 +67,7 @@
     </div>
 
     <!-- Include Footer -->
-    <jsp:include page="/footer.jsp" />
+    <jsp:include page="/WEB-INF/views/footer.jsp" />
 
     <script>
         document.getElementById('uploadForm').addEventListener('submit', async function(event) {

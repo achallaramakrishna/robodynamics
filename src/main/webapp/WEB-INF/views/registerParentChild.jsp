@@ -127,7 +127,7 @@
 </div>
 
 <!-- ✅ STANDARD ROBO DYNAMICS FOOTER -->
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

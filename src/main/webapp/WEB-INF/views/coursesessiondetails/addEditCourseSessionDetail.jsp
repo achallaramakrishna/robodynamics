@@ -88,6 +88,7 @@
         <option value="flashcard"     <c:if test="${courseSessionDetail.type == 'flashcard'}">selected</c:if>    >Flashcard</option>
         <option value="matchinggame"     <c:if test="${courseSessionDetail.type == 'flashcard'}">selected</c:if>    >Matching Game</option>
         <option value="matchpairs"     <c:if test="${courseSessionDetail.type == 'matchpairs'}">selected</c:if>    >Match Pairs</option>
+        <option value="exampaper"     <c:if test="${courseSessionDetail.type == 'exampaper'}">selected</c:if>    >Exam Paper</option>
         
       </f:select>
     </div>
@@ -173,6 +174,6 @@
 })();
 </script>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

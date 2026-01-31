@@ -146,4 +146,25 @@ public class RDChatServiceImpl implements RDChatService {
 	public List<RDChatInboxDTO> getInbox(Integer userId) {
 		return conversationDao.findInboxByUser(userId);
 	}
+
+
+	@Override
+	@Transactional
+	public RDChatConversation getConversationById(Long id) {
+		return conversationDao.findById(id);
+	}
+	
+	@Override
+	public RDChatConversation getConversation(Long conversationId, Integer userId) {
+	    if (!participantDao.isParticipant(conversationId, userId)) {
+	        throw new SecurityException("Access denied");
+	    }
+	    return conversationDao.findById(conversationId);
+	}
+
+	@Override
+	public String getOtherUserName(Long conversationId, Integer currentUserId) {
+	    return chatUserDao.findOtherUserName(conversationId, currentUserId);
+	}
+
 }

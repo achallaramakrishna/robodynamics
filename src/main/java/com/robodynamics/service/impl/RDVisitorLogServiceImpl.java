@@ -52,4 +52,16 @@ public class RDVisitorLogServiceImpl implements RDVisitorLogService {
 		rdVisitorDao.saveRDVisitorLog(visitorLog);
 	}
 
+	@Override
+	public void logVisitAsync(String clientIP, String url) {
+		// TODO Auto-generated method stub
+		 try {
+	            logVisit(clientIP, url);
+	        } catch (Exception e) {
+	            // ABSOLUTELY NEVER propagate exceptions
+	            // Logging failures must not affect requests
+	            e.printStackTrace();
+	        }
+	}
+
 }

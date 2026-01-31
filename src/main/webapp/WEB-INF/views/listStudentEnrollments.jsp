@@ -126,7 +126,7 @@ body { background-color: #f8f9fa; }
   </div>
 </div>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 </body>
 </html>

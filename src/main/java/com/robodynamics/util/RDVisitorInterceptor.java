@@ -16,10 +16,28 @@ public class RDVisitorInterceptor implements HandlerInterceptor {
     private RDVisitorLogService visitorLogService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    	String clientIP = IPAddressUtil.getClientIP(request);
-        String url = request.getRequestURI();
-        visitorLogService.logVisit(clientIP, url);
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Object handler) {
+
+        // Skip multipart uploads entirely
+        if ("POST".equalsIgnoreCase(request.getMethod())
+            && request.getContentType() != null
+            && request.getContentType().startsWith("multipart/")) {
+            return true;
+        }
+
+        try {
+            String clientIP = IPAddressUtil.getClientIP(request);
+            String url = request.getRequestURI();
+            visitorLogService.logVisitAsync(clientIP, url);
+        } catch (Exception e) {
+            // Never block request
+            e.printStackTrace();
+        }
+
         return true;
     }
+
+
 }

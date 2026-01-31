@@ -34,4 +34,31 @@ public class RDChatUserDaoImpl implements RDChatUserDao {
 
         return query.getResultList();
     }
+
+    @Override
+    public String findOtherUserName(Long conversationId, Integer currentUserId) {
+
+        String hql = """
+            select concat(
+                coalesce(u.firstName, ''),
+                ' ',
+                coalesce(u.lastName, '')
+            )
+            from RDChatParticipant p
+            join RDUser u on u.userID = p.userId
+            where p.conversation.conversationId = :cid
+              and p.userId <> :currentUserId
+              and p.active = true
+        """;
+
+        return sessionFactory.getCurrentSession()
+            .createQuery(hql, String.class)
+            .setParameter("cid", conversationId)
+            .setParameter("currentUserId", currentUserId)
+            .setMaxResults(1)
+            .uniqueResult();
+    }
+
+
+   
 }

@@ -210,6 +210,42 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- Exam Papers (Admins & Mentors) -->
+<div class="col-6 col-md-4 mb-3">
+    <div class="card shadow-sm h-100 text-center">
+
+        <!-- Card Header -->
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">📝 Exam Papers</h5>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body">
+            <p class="card-text">
+                Upload and manage <strong>Final Exam</strong> and
+                <strong>Mock Exam</strong> papers with sections and marks.
+            </p>
+
+            <div class="d-grid gap-2">
+
+                <!-- Upload Exam Paper -->
+                <a href="${pageContext.request.contextPath}/exam/upload"
+                   class="btn btn-primary">
+                    ⬆️ Upload Exam Paper
+                </a>
+
+                <!-- Upload Exam Media -->
+                <a href="${pageContext.request.contextPath}/exam/manageMedia"
+                   class="btn btn-warning">
+                    🖼 Manage Exam Media
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+					
 				</div>
 			</div>
 		</div>

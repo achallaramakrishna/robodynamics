@@ -405,7 +405,7 @@
 </div>
 
 <c:if test="${empty param.asPdf}">
-  <jsp:include page="/footer.jsp" />
+  <jsp:include page="/WEB-INF/views/footer.jsp" />
 </c:if>
 
 <c:if test="${empty param.asPdf}">

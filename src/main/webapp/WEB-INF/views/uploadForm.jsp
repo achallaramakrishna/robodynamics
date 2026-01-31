@@ -30,7 +30,7 @@
         <input type="file" name="file"/>
         <button type="submit">Upload</button>
     </form>
-    <jsp:include page="footer.jsp" />
+    <jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 
 </html>

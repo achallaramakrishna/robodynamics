@@ -15,4 +15,6 @@ public interface RDVisitorLogService {
     public void deleteRDVisitorLog(int id);
     
     void logVisit(String ipAddress, String url);
+
+	public void logVisitAsync(String clientIP, String url);
 }

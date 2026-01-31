@@ -72,14 +72,27 @@ public class RDChatController {
         Long conversationId =
                 chatService.startDirectChat(me.getUserID(), toUserId);
 
+        // 🔑 Get conversation + header title
+        RDChatConversation conv =
+                chatService.getConversation(conversationId, me.getUserID());
+
+        String headerTitle;
+        if ("GROUP".equals(conv.getConversationType())) {
+            headerTitle = conv.getTitle();
+        } else {
+            headerTitle = chatService.getOtherUserName(conversationId, me.getUserID());
+        }
+
         model.addAttribute("conversationId", conversationId);
         model.addAttribute("messages",
                 chatService.getMessages(conversationId, me.getUserID()));
         model.addAttribute("currentUserId", me.getUserID());
-        model.addAttribute("lastMessageId", 0L);
+        model.addAttribute("conversationTitle", headerTitle);
+        model.addAttribute("conversationType", conv.getConversationType());
 
-        return "chat/conversation"; // ✅ NO redirect
+        return "chat/conversation";
     }
+
 
 
     @GetMapping("/conversation/{id}")
@@ -90,14 +103,30 @@ public class RDChatController {
         RDUser me = (RDUser) session.getAttribute("rdUser");
         if (me == null) return "redirect:/login";
 
+        // Messages
+        List<RDChatMessage> messages =
+            chatService.getMessages(id, me.getUserID());
+
+        // 🔑 Conversation header info
+        RDChatConversation conv = chatService.getConversation(id, me.getUserID());
+
+        String headerTitle;
+        if ("GROUP".equals(conv.getConversationType())) {
+            headerTitle = conv.getTitle();
+        } else {
+            // Direct chat → other user's name
+            headerTitle = chatService.getOtherUserName(id, me.getUserID());
+        }
+
         model.addAttribute("conversationId", id);
-        model.addAttribute("messages",
-            chatService.getMessages(id, me.getUserID()));
+        model.addAttribute("messages", messages);
         model.addAttribute("currentUserId", me.getUserID());
-        model.addAttribute("lastMessageId", 0L);
+        model.addAttribute("conversationTitle", headerTitle);
+        model.addAttribute("conversationType", conv.getConversationType());
 
         return "chat/conversation";
-    }    
+    }
+
 
 
 

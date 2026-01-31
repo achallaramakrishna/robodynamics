@@ -110,7 +110,7 @@
 
 		</div>
 	</div>
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 
 <script>
 function copyToClipboard(text) {

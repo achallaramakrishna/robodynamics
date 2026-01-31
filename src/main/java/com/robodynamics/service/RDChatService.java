@@ -25,5 +25,11 @@ public interface RDChatService {
     
     List<RDChatInboxDTO> getInbox(Integer userId);
 
+	RDChatConversation getConversationById(Long id);
+
+	RDChatConversation getConversation(Long conversationId, Integer userId);
+
+	String getOtherUserName(Long conversationId, Integer currentUserId);
+
 
 }

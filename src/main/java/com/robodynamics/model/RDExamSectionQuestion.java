@@ -20,10 +20,30 @@ public class RDExamSectionQuestion {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", nullable = false)
     private RDQuizQuestion question;
+    
+    
 
+    
+    @OneToOne(
+    	    mappedBy = "sectionQuestion",
+    	    cascade = CascadeType.ALL,
+    	    fetch = FetchType.LAZY,
+    	    orphanRemoval = true
+    	)
+    	private RDExamAnswerKey answerKey;
+
+    
     /* ================= STRUCTURE ================= */
 
-    @Column(name = "parent_question_id")
+    public RDExamAnswerKey getAnswerKey() {
+		return answerKey;
+	}
+
+	public void setAnswerKey(RDExamAnswerKey answerKey) {
+		this.answerKey = answerKey;
+	}
+
+	@Column(name = "parent_question_id")
     private Integer parentQuestionId; 
     // Used for case study / passage-based grouping
 

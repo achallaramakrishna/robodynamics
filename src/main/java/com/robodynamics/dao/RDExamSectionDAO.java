@@ -15,4 +15,6 @@ public interface RDExamSectionDAO {
     List<RDExamSection> findByExamPaper(Integer examPaperId);
 
     void delete(Integer sectionId);
+
+	void saveOrUpdate(RDExamSection section);
 }

@@ -13,18 +13,32 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
 <style>
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* wrapper between header & footer */
+.page-wrapper {
+    min-height: calc(100vh - 120px); /* header + footer */
+    padding-bottom: 20px;
+}
+
+/* remove forced height */
+.session-card {
+    border-radius:16px;
+    transition:all 0.2s ease;
+    cursor:pointer;
+}
+
     body { background:#f4f6f9; }
 
     .summary-card {
         border-radius:14px;
         box-shadow:0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    .session-card {
-        border-radius:16px;
-        transition:all 0.2s ease;
-        cursor:pointer;
-        height:100%;
     }
 
     .session-card:hover {
@@ -43,7 +57,7 @@
 <body>
 
 <jsp:include page="/WEB-INF/views/header.jsp" />
-
+<div class="page-wrapper">
 <!-- BACK -->
 <div class="container mt-3">
     <a href="${pageContext.request.contextPath}/studentDashboard"
@@ -152,7 +166,7 @@
     </div>
 
 </div>
-
+</div>
 <jsp:include page="/WEB-INF/views/footer.jsp" />
 
 </body>

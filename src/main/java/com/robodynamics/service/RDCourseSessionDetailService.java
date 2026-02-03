@@ -18,6 +18,8 @@ public interface RDCourseSessionDetailService {
 	
 	public List < RDCourseSessionDetail > getRDCourseSessionDetails(int sessionId);
 	
+	List<RDCourseSessionDetail> getExamDetailsWithPapers(int sessionId);
+	
     public void deleteRDCourseSessionDetail(int id);
     
     public List<RDCourseSessionDetail> findSessionDetailsBySessionId(int sessionId);

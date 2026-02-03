@@ -31,9 +31,8 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="post"
-                          action="${pageContext.request.contextPath}/exam/uploadJson"
-                          enctype="multipart/form-data">
+                    <form id="examUploadForm" enctype="multipart/form-data">
+
 
                         <div class="mb-3">
                             <label class="form-label">Course</label>
@@ -244,6 +243,43 @@ $(function () {
     });
 
 });
+$('#examUploadForm').submit(function (e) {
+    e.preventDefault();
+
+    const sessionDetailId = $('#courseSessionDetail').val();
+    if (!sessionDetailId) {
+        alert('Please select Session Detail first');
+        return;
+    }
+
+    const formData = new FormData(this);
+
+    $.ajax({
+        url: ctx + '/exam/uploadJson',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+
+            // 🔄 Reload papers automatically
+            $.getJSON(
+                ctx + '/exam/getExamPapersBySessionDetail',
+                { sessionDetailId: sessionDetailId },
+                function (papers) {
+                    allExamPapers = papers;
+                    renderTable(papers);
+                }
+            );
+
+            alert('✅ Exam paper uploaded successfully');
+        },
+        error: function () {
+            alert('❌ Upload failed');
+        }
+    });
+});
+
 </script>
 
 </body>

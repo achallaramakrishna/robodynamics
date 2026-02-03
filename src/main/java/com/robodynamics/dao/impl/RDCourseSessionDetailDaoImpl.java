@@ -188,4 +188,25 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 
 
 
+
+	@Override
+	@Transactional
+	public List<RDCourseSessionDetail> getExamDetailsWithPapers(int sessionId) {
+		String hql = """
+	            select distinct d
+	            from RDCourseSessionDetail d
+	            join fetch d.examPaper p
+	            where d.courseSession.courseSessionId = :sessionId
+	            and d.type = 'exampaper'
+	        """;
+
+	        return factory.getCurrentSession()
+	                .createQuery(hql, RDCourseSessionDetail.class)
+	                .setParameter("sessionId", sessionId)
+	                .getResultList();
+	}
+
+
+
+
 }

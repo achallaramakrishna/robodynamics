@@ -55,4 +55,20 @@ public class RDExamSectionDAOImpl implements RDExamSectionDAO {
             getCurrentSession().delete(section);
         }
     }
+
+	@Override
+	public void saveOrUpdate(RDExamSection section) {
+		Session session = sessionFactory.getCurrentSession();
+
+        if (section.getSectionId() == null) {
+            System.out.println("💾 Saving NEW ExamSection: " + section.getSectionName());
+            session.save(section);
+            System.out.println("✅ ExamSection saved with ID=" + section.getSectionId());
+        } else {
+            System.out.println("🔄 Updating ExamSection ID=" + section.getSectionId());
+            session.update(section);
+            System.out.println("✅ ExamSection updated");
+        }
+		
+	}
 }

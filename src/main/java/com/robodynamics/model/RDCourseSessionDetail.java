@@ -95,6 +95,11 @@ public class RDCourseSessionDetail {
 	public void setAssignment(boolean assignment) {
 		this.assignment = assignment;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "exam_paper_id")
+	private RDExamPaper examPaper;
+
 
 
 	@Column(name = "tier_level")
@@ -216,6 +221,14 @@ public class RDCourseSessionDetail {
 
 	public void setTierOrder(int tierOrder) {
 		this.tierOrder = tierOrder;
+	}
+
+	public RDExamPaper getExamPaper() {
+		return examPaper;
+	}
+
+	public void setExamPaper(RDExamPaper examPaper) {
+		this.examPaper = examPaper;
 	}
 	
 	

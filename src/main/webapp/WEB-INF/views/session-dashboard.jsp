@@ -14,6 +14,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    overflow-y: auto;
+}
 /* ===== MOBILE ONLY VISIBILITY FIX ===== */
 .mobile-only {
     display: block;
@@ -95,7 +106,8 @@
 <body>
 <!-- MOBILE BACK TO COURSE DASHBOARD -->
 <!-- MOBILE BACK TO COURSE DASHBOARD -->
-<div class="container mobile-only mt-3 mb-2">
+<div class="mobile-only px-3 mt-3 mb-2">
+
     <a href="${ctx}/course/monitor/v2?courseId=${session.course.courseId}&enrollmentId=${enrollment.enrollmentId}"
        class="btn btn-outline-secondary w-100">
         ← Back to Course Dashboard
@@ -208,6 +220,23 @@
                     </div>
                 </div>
             </div>
+            
+			            <!-- 🧾 EXAM PAPERS -->
+			<div class="col-md-4">
+			    <div class="card dashboard-card text-center">
+			        <div class="card-body">
+			            <div class="card-icon">🧾</div>
+			            <h5 class="mt-2">Exam Papers</h5>
+			            <div class="card-count">${summary.exampaper}</div>
+			
+			            <a href="${ctx}/course/session/${session.courseSessionId}/exam-papers?enrollmentId=${enrollment.enrollmentId}"
+			               class="btn btn-start mt-2">
+			                Attempt Exam
+			            </a>
+			        </div>
+			    </div>
+			</div>
+			            
 
             <!-- 🗺 MEMORY MAPS -->
             <div class="col-md-4">

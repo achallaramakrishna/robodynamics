@@ -24,6 +24,7 @@ import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseResource;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
+import com.robodynamics.model.RDExamPaper;
 import com.robodynamics.model.RDQuiz;
 import com.robodynamics.model.RDStudentEnrollment;
 import com.robodynamics.service.RDCourseCategoryService;
@@ -229,10 +230,12 @@ public class RDCourseController {
 	    summary.put("quiz", grouped.getOrDefault("quiz", List.of()).size());
 	    summary.put("flashcard", grouped.getOrDefault("flashcard", List.of()).size());
 	    summary.put("matchinggame", grouped.getOrDefault("matchinggame", List.of()).size());
-	    summary.put("matchpairs", grouped.getOrDefault("matchpairs", List.of()).size());
+	    summary.put("matchpair", grouped.getOrDefault("matchpair", List.of()).size());
 
 	    summary.put("memory-map", grouped.getOrDefault("memory-map", List.of()).size());
 	    summary.put("assignment", grouped.getOrDefault("assignment", List.of()).size());
+
+	    summary.put("exampaper", grouped.getOrDefault("exampaper", List.of()).size());
 
 	    System.out.println("SUMMARY COUNTS → {}" +  summary);
 
@@ -257,6 +260,7 @@ public class RDCourseController {
 	    summary.put("matchingame", courseSessionDetailService.countByType(sessionId, "matchinggame"));
 	    summary.put("matchingpairs", courseSessionDetailService.countByType(sessionId, "matchingpairs"));
 	    summary.put("memory-map", courseSessionDetailService.countByType(sessionId, "memory-map"));
+	    summary.put("exampaper", courseSessionDetailService.countByType(sessionId, "exampaper"));
 
 	    return summary;
 	}
@@ -467,6 +471,36 @@ public class RDCourseController {
         model.addAttribute("assignments", assignments);
 
         return new ModelAndView("session-assignments");
+    }
+
+    @GetMapping("/session/{sessionId}/exam-papers")
+    public ModelAndView sessionExamPapers(
+            @PathVariable int sessionId,
+            @RequestParam("enrollmentId") int enrollmentId,
+            Model model) {
+
+        // Fetch session
+        RDCourseSession session =
+                courseSessionservice.getCourseSession(sessionId);
+
+        // Fetch enrollment
+        RDStudentEnrollment enrollment =
+                enrollmentService.getRDStudentEnrollment(enrollmentId);
+
+        List<RDCourseSessionDetail> examDetails =
+                courseSessionDetailService.getExamDetailsWithPapers(sessionId);
+
+        // Extract actual RDExamPaper objects
+        List<RDExamPaper> examPapers = examDetails.stream()
+                .map(RDCourseSessionDetail::getExamPaper)
+                .filter(Objects::nonNull)
+                .toList();
+
+        model.addAttribute("session", session);
+        model.addAttribute("enrollment", enrollment);
+        model.addAttribute("examPapers", examPapers);
+
+        return new ModelAndView("exam/list");
     }
 
 }

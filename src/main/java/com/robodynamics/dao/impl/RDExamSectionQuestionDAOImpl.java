@@ -55,4 +55,10 @@ public class RDExamSectionQuestionDAOImpl implements RDExamSectionQuestionDAO {
             getCurrentSession().delete(q);
         }
     }
+
+	@Override
+	public void saveOrUpdate(RDExamSectionQuestion sq) {
+		getCurrentSession().saveOrUpdate(sq);
+		
+	}
 }

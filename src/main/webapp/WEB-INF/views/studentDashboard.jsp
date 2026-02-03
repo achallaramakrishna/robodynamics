@@ -42,6 +42,12 @@
     .course-card {
         cursor: default;
     }
+
+
+.btn {
+    z-index: 1;
+}
+    
 </style>
 </head>
 
@@ -86,11 +92,11 @@
                                 Continue Learning
                             </a>
 
-                            <!-- Performance -->
                             <a href="${pageContext.request.contextPath}/student/course-dashboard?courseId=${enroll.courseOffering.course.courseId}&enrollmentId=${enroll.enrollmentId}"
-                               class="btn btn-outline-primary btn-sm">
-                                Performance
-                            </a>
+							   class="btn btn-secondary btn-sm">
+							    <i class="fas fa-chart-line me-1"></i> Performance
+							</a>
+
 
                         </div>
 

@@ -15,4 +15,6 @@ public interface RDExamSectionQuestionDAO {
     List<RDExamSectionQuestion> findBySection(Integer sectionId);
 
     void delete(Integer id);
+
+	void saveOrUpdate(RDExamSectionQuestion sq);
 }

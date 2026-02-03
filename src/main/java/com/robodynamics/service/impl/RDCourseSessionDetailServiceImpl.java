@@ -168,4 +168,10 @@ public class RDCourseSessionDetailServiceImpl implements RDCourseSessionDetailSe
 		
 		return rdCourseSessionDetailDao.getBySessionAndType(sessionId, string);
 	}
+	
+	@Override
+	@Transactional
+	public List<RDCourseSessionDetail> getExamDetailsWithPapers(int sessionId) {
+		return rdCourseSessionDetailDao.getExamDetailsWithPapers(sessionId);
+	}
 }

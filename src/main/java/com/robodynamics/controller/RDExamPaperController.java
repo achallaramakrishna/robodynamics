@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robodynamics.model.RDCourse;
+import com.robodynamics.model.RDExamAnswerKey;
 import com.robodynamics.model.RDExamPaper;
 import com.robodynamics.model.RDExamSection;
 import com.robodynamics.model.RDExamSectionQuestion;
@@ -120,57 +122,46 @@ public class RDExamPaperController {
        POST: Upload Exam Paper JSON
        ========================================================= */
     @PostMapping("/uploadJson")
-    public String uploadExamPaperJson(
+    @ResponseBody
+    public ResponseEntity<?> uploadExamPaperJson(
             @RequestParam("file") MultipartFile file,
             @RequestParam Integer courseSessionId,
             @RequestParam Integer courseSessionDetailId,
-            RedirectAttributes redirectAttributes,
             HttpSession session) {
+
+    	System.out.println(">>> uploadExamPaperJson HIT <<<");
 
         RDUser user = (RDUser) session.getAttribute("rdUser");
 
-        if (file == null || file.isEmpty()) {
-            redirectAttributes.addFlashAttribute(
-                    "error", "Please upload a valid JSON file.");
-            return "redirect:/exam/upload";
-        }
-
         try {
-            RDExamPaperUploadDTO uploadDTO =
+            RDExamPaperUploadDTO dto =
                     mapper.readValue(file.getInputStream(), RDExamPaperUploadDTO.class);
 
-            examPaperService.createExamPaperFromJson(
-                    uploadDTO,
-                    courseSessionId,
-                    courseSessionDetailId,
-                    user
-            );
+            examPaperService.upsertExamPaperFromJson(
+                    dto, courseSessionId, courseSessionDetailId, user);
 
-            redirectAttributes.addFlashAttribute(
-                    "success", "Exam paper uploaded successfully.");
+            return ResponseEntity.ok(
+                Map.of("status", "SUCCESS", "message", "Exam paper saved successfully"));
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            redirectAttributes.addFlashAttribute(
-                    "error", "Upload failed: " + ex.getMessage());
+        } catch (Exception e) {
+        	e.printStackTrace(); // 🔥 ADD THIS
+            return ResponseEntity.status(500).body(
+                Map.of("status", "ERROR", "message", e.getMessage()));
         }
-
-        return "redirect:/exam/upload";
     }
+
+
 
     @GetMapping(
     	    value = "/getExamPapersBySessionDetail",
     	    produces = "application/json"
 	)
-	@ResponseBody
-	@Transactional(readOnly = true)
-    public List<Map<String, Object>> getExamPapersBySessionDetail(
-            @RequestParam Integer sessionDetailId) {
-
-        return examPaperService
-                .getExamPapersBySessionDetail(sessionDetailId);
-                
+    @ResponseBody
+    @Transactional(readOnly = true)
+    public RDExamPaper getExamPapersBySessionDetail(@RequestParam Integer sessionDetailId) {
+        return examPaperService.getExamPapersBySessionDetail(sessionDetailId);
     }
+
 
 
     /* =========================================================
@@ -183,7 +174,6 @@ public class RDExamPaperController {
 
         RDExamPaper examPaper =
                 examPaperService.getExamPaperWithDetails(examPaperId);
-
         model.addAttribute("examPaper", examPaper);
         return "exam/viewExamPaper";
     }
@@ -202,6 +192,39 @@ public class RDExamPaperController {
 
         return "redirect:/exam/upload";
     }
+    
+    /* =========================================================
+    VIEW: Model Answer
+    ========================================================= */
+    @GetMapping("/model-answer")
+    @Transactional(readOnly = true)
+    public String viewModelAnswer(
+            @RequestParam Integer examPaperId,
+            Model model) {
+
+        RDExamPaper examPaper =
+                examPaperService.getExamPaperWithDetails(examPaperId);
+
+        // Fetch answer keys
+        List<RDExamAnswerKey> answerKeys =
+                examPaperService.getAnswerKeysByExamPaper(examPaperId);
+
+        // Map: sectionQuestionId -> AnswerKey
+        Map<Integer, RDExamAnswerKey> answerKeyMap =
+        	    answerKeys.stream()
+        	        .collect(Collectors.<RDExamAnswerKey, Integer, RDExamAnswerKey>toMap(
+        	            ak -> ak.getSectionQuestion().getId(),
+        	            ak -> ak
+        	        ));
+
+
+        model.addAttribute("examPaper", examPaper);
+        model.addAttribute("answerKeyMap", answerKeyMap);
+
+        return "exam/viewModelAnswer";
+    }
+
+
 
     /* =========================================================
        DOWNLOAD PDF (HOOK)

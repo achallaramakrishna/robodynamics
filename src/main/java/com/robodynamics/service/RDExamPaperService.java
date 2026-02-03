@@ -3,7 +3,9 @@ package com.robodynamics.service;
 import java.util.List;
 import java.util.Map;
 
+import com.robodynamics.model.RDExamAnswerKey;
 import com.robodynamics.model.RDExamPaper;
+import com.robodynamics.model.RDExamSectionQuestion;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.dto.RDExamPaperUploadDTO;
 
@@ -16,13 +18,28 @@ public interface RDExamPaperService {
             Integer courseSessionDetailId,
             RDUser createdBy
     );
+    
+    void upsertExamPaperFromJson(RDExamPaperUploadDTO uploadDTO,
+            Integer courseSessionId,
+            Integer courseSessionDetailId,
+            RDUser createdBy);
+
 
     /* Fetch papers for selected session detail (AJAX list) */
-    List<Map<String, Object>> getExamPapersBySessionDetail(Integer sessionDetailId);
+    RDExamPaper getExamPapersBySessionDetail(Integer sessionDetailId);
 
     /* View paper with sections & questions */
     RDExamPaper getExamPaperWithDetails(Integer examPaperId);
 
     /* Delete exam paper */
     void deleteExamPaper(Integer examPaperId);
+
+	List<RDExamPaper> getAllExamPapers();
+
+	List<RDExamAnswerKey> getAnswerKeysByExamPaper(Integer examPaperId);
+
+	List<RDExamPaper> getExamPapersBySession(Integer sessionId);
+
+	RDExamSectionQuestion getSectionQuestionById(Integer sectionQuestionId);
+
 }

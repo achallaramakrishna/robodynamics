@@ -12,6 +12,8 @@ public class RDExamSectionQuestion {
     private Integer id;
 
     /* ================= RELATIONSHIPS ================= */
+    
+   
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id", nullable = false)
@@ -24,13 +26,8 @@ public class RDExamSectionQuestion {
     
 
     
-    @OneToOne(
-    	    mappedBy = "sectionQuestion",
-    	    cascade = CascadeType.ALL,
-    	    fetch = FetchType.LAZY,
-    	    orphanRemoval = true
-    	)
-    	private RDExamAnswerKey answerKey;
+    @OneToOne(mappedBy = "sectionQuestion", fetch = FetchType.LAZY)
+    private RDExamAnswerKey answerKey;
 
     
     /* ================= STRUCTURE ================= */
@@ -75,6 +72,8 @@ public class RDExamSectionQuestion {
     private Integer maxWordLimit;
     // For descriptive answers
 
+    
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "difficulty_override")
     private DifficultyOverride difficultyOverride;

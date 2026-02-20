@@ -37,7 +37,7 @@ public class RDCompetitionDashboardController {
 		
 		 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
 	     if (rdUser == null) {
-	         session.setAttribute("redirectUrl", request.getRequestURI());
+	         session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
 	         return "redirect:/login";
 	     }
         

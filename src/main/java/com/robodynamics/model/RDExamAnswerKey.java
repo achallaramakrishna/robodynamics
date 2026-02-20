@@ -26,8 +26,13 @@ public class RDExamAnswerKey {
     private RDExamPaper examPaper;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exam_section_question_id", nullable = false)
+    @JoinColumn(
+        name = "exam_section_question_id",
+        nullable = false,
+        unique = true
+    )
     private RDExamSectionQuestion sectionQuestion;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", nullable = false)

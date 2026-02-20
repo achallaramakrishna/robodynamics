@@ -44,7 +44,7 @@ public class RDAdminCompetitionController {
 		HttpSession session, HttpServletRequest request) {
 		 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
 		 if (rdUser == null) {
-		     session.setAttribute("redirectUrl", request.getRequestURI());
+		     session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
 		     return "redirect:/login";
 		 }
 	    model.addAttribute("competitions", competitionService.findAll());
@@ -117,7 +117,7 @@ public class RDAdminCompetitionController {
     		HttpSession session, HttpServletRequest request) {
     	 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
          if (rdUser == null) {
-             session.setAttribute("redirectUrl", request.getRequestURI());
+             session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
              return "redirect:/login";
          }
         model.addAttribute("competition", competitionService.findById(competitionId));
@@ -132,7 +132,7 @@ public class RDAdminCompetitionController {
     		HttpSession session, HttpServletRequest request) {
     	 RDUser rdUser = (RDUser) session.getAttribute("rdUser");
          if (rdUser == null) {
-             session.setAttribute("redirectUrl", request.getRequestURI());
+             session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
              return "redirect:/login";
          }
     	model.addAttribute("competition", competitionService.findById(compId));
@@ -172,7 +172,7 @@ public class RDAdminCompetitionController {
 
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
         if (rdUser == null) {
-            session.setAttribute("redirectUrl", request.getRequestURI());
+            session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
             return "redirect:/login";
         }
 
@@ -201,7 +201,7 @@ public class RDAdminCompetitionController {
 
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
         if (rdUser == null) {
-            session.setAttribute("redirectUrl", request.getRequestURI());
+            session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
             return "redirect:/login";
         }
 
@@ -242,7 +242,7 @@ public class RDAdminCompetitionController {
 
         RDUser rdUser = (RDUser) session.getAttribute("rdUser");
         if (rdUser == null) {
-            session.setAttribute("redirectUrl", request.getRequestURI());
+            session.setAttribute("redirectUrl", request.getRequestURI().substring(request.getContextPath().length()));
             return "redirect:/login";
         }
 

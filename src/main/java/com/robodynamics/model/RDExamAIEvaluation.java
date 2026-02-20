@@ -43,7 +43,7 @@ public class RDExamAIEvaluation {
     private BigDecimal marksAwarded;
 
     @Column(name = "confidence", precision = 3, scale = 2)
-    private Double confidence;
+    private BigDecimal confidence;
 
     @Column(name = "feedback", columnDefinition = "TEXT")
     private String feedback;
@@ -52,6 +52,10 @@ public class RDExamAIEvaluation {
 
     @Column(name = "evaluated_by", nullable = false)
     private String evaluatedBy = "AI";
+    
+    @Column(name = "student_answer", columnDefinition = "TEXT")
+    private String studentAnswer;
+
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -103,11 +107,11 @@ public class RDExamAIEvaluation {
         this.marksAwarded = marksAwarded;
     }
 
-    public Double getConfidence() {
+    public BigDecimal getConfidence() {
         return confidence;
     }
 
-    public void setConfidence(Double confidence) {
+    public void setConfidence(BigDecimal confidence) {
         this.confidence = confidence;
     }
 
@@ -130,4 +134,18 @@ public class RDExamAIEvaluation {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+	public String getStudentAnswer() {
+		return studentAnswer;
+	}
+
+	public void setStudentAnswer(String studentAnswer) {
+		this.studentAnswer = studentAnswer;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+    
+    
 }

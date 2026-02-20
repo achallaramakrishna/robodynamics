@@ -27,21 +27,14 @@ public class RDResultController {
     
     @GetMapping("/view")
     public String viewResults(Model model, HttpSession session) {
-    	
-    	RDUser rdUser = null;
-    	RDQuiz quiz = null;	
-        
-        System.out.println("hello 111");
-		if (session.getAttribute("rdUser") != null) 
-			rdUser = (RDUser) session.getAttribute("rdUser");
-			
-		System.out.println("hello 111");
-			if (session.getAttribute("quiz") != null) 
-				quiz = (RDQuiz) session.getAttribute("quiz");
-			
-        List<RDQuizResult> results = 
-        		resultService.getUserResultsForQuiz(quiz.getQuizId(), rdUser.getUserID(), 0);
-        System.out.println(results);
+        RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+        RDQuiz quiz = (RDQuiz) session.getAttribute("quiz");
+
+        if (rdUser == null) return "redirect:/login";
+        if (quiz == null) return "redirect:/dashboard";
+
+        List<RDQuizResult> results =
+                resultService.getUserResultsForQuiz(quiz.getQuizId(), rdUser.getUserID(), 0);
         model.addAttribute("results", results);
         return "results";
     }

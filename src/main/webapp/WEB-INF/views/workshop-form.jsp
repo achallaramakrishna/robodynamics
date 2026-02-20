@@ -55,13 +55,13 @@
             <!-- Flyer Image Upload -->
             <div class="mb-3">
                 <label for="flyerImageFile" class="form-label">Flyer Image</label>
-                <form:file path="flyerImageFile" cssClass="form-control" />
+                <input type="file" name="flyerImageFile" class="form-control" />
             </div>
 
             <!-- Course Contents PDF Upload -->
             <div class="mb-3">
                 <label for="courseContentsPdfFile" class="form-label">Course Contents PDF</label>
-                <form:file path="courseContentsPdfFile" cssClass="form-control" />
+                <input type="file" name="courseContentsPdfFile" class="form-control" />
             </div>
 
             <!-- Duration -->

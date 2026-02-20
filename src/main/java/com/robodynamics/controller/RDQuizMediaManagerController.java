@@ -128,7 +128,7 @@ public class RDQuizMediaManagerController {
     @GetMapping(value = "/preview", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String previewQuestion(@RequestParam int questionId, HttpServletRequest req) {
-        RDQuizQuestion q = questionService.findById(questionId);
+    	RDQuizQuestion q = questionService.findByIdWithOptions(questionId);
         if (q == null) return "<div class='text-danger'>Question not found.</div>";
 
         StringBuilder sb = new StringBuilder();
@@ -165,7 +165,8 @@ public class RDQuizMediaManagerController {
     @GetMapping(value = "/question", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> getQuestion(@RequestParam int questionId, HttpServletRequest req) {
-        RDQuizQuestion q = questionService.findById(questionId);
+    	RDQuizQuestion q = questionService.findByIdWithOptions(questionId);
+
         if (q == null) return Collections.singletonMap("error", "Question not found");
 
         Map<String,Object> m = new HashMap<>();
@@ -203,7 +204,8 @@ public class RDQuizMediaManagerController {
             HttpServletRequest request
     ) {
         Map<String,Object> resp = new HashMap<>();
-        RDQuizQuestion q = questionService.findById(questionId);
+        RDQuizQuestion q = questionService.findByIdWithOptions(questionId);
+
         if (q == null) {
             resp.put("ok", false);
             resp.put("message", "Question not found");

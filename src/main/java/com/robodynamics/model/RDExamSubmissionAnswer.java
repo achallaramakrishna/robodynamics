@@ -16,8 +16,10 @@ public class RDExamSubmissionAnswer {
     @JoinColumn(name = "submission_id", nullable = false)
     private RDExamSubmission submission;
 
-    @Column(name = "section_question_id", nullable = false)
-    private Integer sectionQuestionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "section_question_id", nullable = false)
+    private RDExamSectionQuestion sectionQuestion;
+
 
     @Lob
     @Column(name = "answer_text")
@@ -57,15 +59,17 @@ public class RDExamSubmissionAnswer {
         this.submission = submission;
     }
 
-    public Integer getSectionQuestionId() {
-        return sectionQuestionId;
-    }
+    
 
-    public void setSectionQuestionId(Integer sectionQuestionId) {
-        this.sectionQuestionId = sectionQuestionId;
-    }
+    public RDExamSectionQuestion getSectionQuestion() {
+		return sectionQuestion;
+	}
 
-    public String getAnswerText() {
+	public void setSectionQuestion(RDExamSectionQuestion sectionQuestion) {
+		this.sectionQuestion = sectionQuestion;
+	}
+
+	public String getAnswerText() {
         return answerText;
     }
 

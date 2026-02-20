@@ -1,17 +1,46 @@
 package com.robodynamics.service;
 
 import com.robodynamics.model.RDExamSubmission;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public interface RDExamSubmissionService {
 
-    Map<Integer, RDExamSubmission> getStudentSubmissionsForSession(
+    /* =====================================================
+       CREATE / UPDATE SUBMISSION (UPLOAD)
+       ===================================================== */
+
+    RDExamSubmission createDraftSubmission(
+            Integer examPaperId,
             Integer studentId,
-            Integer sessionId
+            MultipartFile[] files
     );
+    
+    RDExamSubmission findLatestByStudentAndPaper(
+            Integer studentId,
+            Integer paperId
+    );
+
+    /* =====================================================
+       START AI EVALUATION (IDEMPOTENT)
+       ===================================================== */
+
+    /**
+     * Starts evaluation only if it has not already started.
+     *
+     * @param submissionId submission identifier
+     * @return true if evaluation started now, false if already started
+     */
+
+    /* =====================================================
+       MARK FINAL STATES
+       ===================================================== */
+
+
+    /* =====================================================
+       READ OPERATIONS
+       ===================================================== */
 
     RDExamSubmission getLatestSubmission(
             Integer examPaperId,
@@ -20,11 +49,22 @@ public interface RDExamSubmissionService {
 
     RDExamSubmission getSubmissionById(Integer submissionId);
 
-	RDExamSubmission createDraftSubmission(Integer examPaperId, Integer userID, MultipartFile[] files);
+    RDExamSubmission getByIdWithFiles(Integer submissionId);
 
-	RDExamSubmission getByIdWithFiles(Integer submissionId);
+    /**
+     * Returns a map of examPaperId → latest submission
+     * for a given student and session.
+     */
+    Map<Integer, RDExamSubmission>
+    getStudentSubmissionsForSession(Integer studentId, Integer sessionId);
 
-	 void markEvaluating(Integer submissionId);
 
-	 void markEvaluated(Integer submissionId);
+	boolean markEvaluatingIfAllowed(Integer submissionId);
+	
+	
+
+	void markEvaluating(Integer submissionId);
+
+	void markEvaluated(Integer submissionId);
+
 }

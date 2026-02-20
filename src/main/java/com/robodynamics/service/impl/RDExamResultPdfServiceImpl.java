@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -117,9 +118,13 @@ public class RDExamResultPdfServiceImpl
                     bodyFont
             ));
             table.addCell(cell(
-                    ev.getConfidence() != null
-                            ? Math.round(ev.getConfidence() * 100) + "%"
-                            : "-",
+            		ev.getConfidence() != null
+                    ? ev.getConfidence()
+                            .multiply(BigDecimal.valueOf(100))
+                            .setScale(0, RoundingMode.HALF_UP)
+                            .toPlainString() + "%"
+                    : "-"
+,
                     bodyFont
             ));
             table.addCell(cell(

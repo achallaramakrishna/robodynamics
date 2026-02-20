@@ -72,12 +72,10 @@
                     <span class="badge bg-success">Evaluated</span>
                 </c:when>
 
-                <c:when test="${submission.status == 'NEEDS_REVIEW'}">
-                    <span class="badge bg-danger">Needs Review</span>
-                </c:when>
-
                 <c:otherwise>
-                    <span class="badge bg-secondary">${submission.status}</span>
+					<span class="badge bg-secondary">
+					    ${submission.status.label}
+					</span>
                 </c:otherwise>
             </c:choose>
         </td>
@@ -100,21 +98,24 @@
             </c:if>
 
             <!-- Evaluating (disabled button) -->
-            <c:if test="${submission != null && submission.status == 'EVALUATING'}">
+            <c:if test="${submission != null && submission.status.name() == 'EVALUATING'}">
                 <button class="btn btn-sm btn-warning" disabled>
                     Evaluating…
                 </button>
             </c:if>
 
-            <!-- View Result -->
-            <c:if test="${submission != null &&
-                         (submission.status == 'AI_EVALUATED'
-                          || submission.status == 'NEEDS_REVIEW')}">
-                <a href="${ctx}/student/exam/submission/${submission.submissionId}/result"
-                   class="btn btn-sm btn-success">
-                    View Result
-                </a>
-            </c:if>
+			<!-- View Result -->
+			<c:if test="${submission != null &&
+			             submission.status != null &&
+			             (submission.status == 'AI_EVALUATED'
+			              || submission.status == 'REVIEW_REQUIRED'
+			              || submission.status == 'FINALIZED')}">
+			    <a href="${ctx}/student/exam/submission/${submission.submissionId}/result"
+			       class="btn btn-sm btn-success">
+			        View Result
+			    </a>
+			</c:if>
+
 
             <!-- View Submission -->
             <c:if test="${submission != null}">

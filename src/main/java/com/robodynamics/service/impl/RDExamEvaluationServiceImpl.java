@@ -1,77 +1,56 @@
 package com.robodynamics.service.impl;
 
+import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.nio.file.Paths;
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robodynamics.ai.OpenAIEvaluationClient;
 import com.robodynamics.dao.RDExamAIEvaluationDAO;
 import com.robodynamics.dao.RDExamAISummaryDAO;
 import com.robodynamics.dto.AIEvaluationBatchResult;
-import com.robodynamics.dto.AIEvaluationResult;
-import com.robodynamics.model.RDExamSubmission;
-import com.robodynamics.model.RDQuizQuestion;
-import com.robodynamics.service.RDExamEvaluationService;
-import com.robodynamics.service.RDExamSubmissionService;
+import com.robodynamics.model.*;
+import com.robodynamics.service.*;
 import com.robodynamics.util.JsonUtils;
-import com.robodynamics.model.RDExamAIEvaluation;
-import com.robodynamics.model.RDExamAISummary;
-import com.robodynamics.model.RDExamAnswerKey;
-import com.robodynamics.model.RDExamPaper;
-import com.robodynamics.model.RDExamSection;
-import com.robodynamics.model.RDExamSectionQuestion;
-import com.robodynamics.service.RDExamPaperService;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.math.BigDecimal;
-import java.nio.file.Files;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
-
-import java.nio.file.Path;
 
 @Service
-@Transactional
-public class RDExamEvaluationServiceImpl
-        implements RDExamEvaluationService {
-	
-	private final ObjectMapper mapper = new ObjectMapper();
+public class RDExamEvaluationServiceImpl implements RDExamEvaluationService {
 
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
-    private RDExamSubmissionService submissionService;
-
-    @Autowired
-    private OpenAIEvaluationClient openAIEvaluationClient;
-    
-    @Autowired
-    private RDExamPaperService examPaperService;
-    
-    @Autowired
-    private RDExamAIEvaluationDAO evaluationDAO;
+    @Autowired private RDExamSubmissionService submissionService;
+    @Autowired private OpenAIVisionOCRService openAIVisionOCRService;
+    @Autowired private PdfImageService pdfImageService;
+    @Autowired private OpenAIEvaluationClient openAIEvaluationClient;
+    @Autowired private RDExamPaperService examPaperService;
+    @Autowired private RDExamAIEvaluationDAO evaluationDAO;
+    @Autowired private RDExamAISummaryDAO summaryDAO;
+    @Autowired private AITextReconstructionService aiTextReconstructionService;
 
     @Autowired
-    private RDExamAISummaryDAO summaryDAO;
+    private RuleBasedEvaluationService ruleBasedEvaluationService;
 
-
+    /* ===================================================== */
 
     @Override
+    @Transactional
     public void evaluateSubmission(Integer submissionId) {
+
+        System.out.println("🔥 EVALUATION STARTED submissionId=" + submissionId);
 
         RDExamSubmission submission =
                 submissionService.getByIdWithFiles(submissionId);
 
         if (submission == null || submission.getFilePaths() == null) return;
 
-        // 1️⃣ Extract student text
-        String studentAnswerText = extractTextFromFiles(submission);
+        // 1️⃣ OCR
+        String studentText = extractTextFromFiles(submission);
 
         // 2️⃣ Load exam paper
         RDExamPaper examPaper =
@@ -81,112 +60,229 @@ public class RDExamEvaluationServiceImpl
 
         if (examPaper == null || examPaper.getSections() == null) return;
 
-        // 3️⃣ Build evaluation input JSON
+        // 3️⃣ Reconstruct answers
+        Map<Integer, String> answersByQuestionId =
+                aiTextReconstructionService.reconstructAnswersMap(
+                        examPaper,
+                        studentText
+                );
+
+        // 4️⃣ Build evaluation JSON
         String evaluationJson =
-                buildEvaluationInputJson(examPaper, studentAnswerText);
+                buildEvaluationInputJson(examPaper, answersByQuestionId);
+        
+        System.out.println("=========== AI INPUT DEBUG ===========");
 
-        // 4️⃣ Call OpenAI ONCE
-        String aiResponseJson =
-                openAIEvaluationClient.evaluateExamBatch(evaluationJson);
-
-        // 5️⃣ Parse + validate AI response
-        AIEvaluationBatchResult batchResult =
-                parseAndValidate(aiResponseJson, examPaper);
-
-        // 6️⃣ Persist results (Phase-1: log / Phase-2: DB)
-        persistBatchEvaluation(submission, batchResult);
-    }
-
-    private String buildEvaluationInputJson(
-            RDExamPaper examPaper,
-            String studentAnswerText
-    ) {
-
-        List<Map<String, Object>> questions = new ArrayList<>();
-
-        for (RDExamSection section : examPaper.getSections()) {
-            for (RDExamSectionQuestion sq : section.getQuestions()) {
-
-                RDExamAnswerKey ak = sq.getAnswerKey();
-
-                Map<String, Object> q = new LinkedHashMap<>();
-                q.put("questionId", sq.getId());
-                q.put("questionText", sq.getQuestion().getQuestionText());
-                q.put("maxMarks", sq.getMarks());
-                q.put("modelAnswer", ak != null ? ak.getModelAnswer() : null);
-                q.put("keyPoints", ak != null ? ak.getKeyPoints() : null);
-                q.put("expectedKeywords", ak != null ? ak.getExpectedKeywords() : null);
-
-                questions.add(q);
+        for (RDExamSection s : examPaper.getSections()) {
+            for (RDExamSectionQuestion sq : s.getQuestions()) {
+                System.out.println("Sending QID to AI = " + sq.getId());
             }
         }
 
-        Map<String, Object> root = new LinkedHashMap<>();
-        root.put("exam", Map.of(
-                "examPaperId", examPaper.getExamPaperId(),
-                "totalQuestions", questions.size(),
-                "totalMarks", examPaper.getTotalMarks(),
-                "subject", examPaper.getSubject(),
-                "board", examPaper.getBoard()
-        ));
-        root.put("studentAnswerText", studentAnswerText);
-        root.put("questions", questions);
+        System.out.println("======================================");
 
+
+        // 5️⃣ Call AI
+        String aiResponseJson =
+                openAIEvaluationClient.evaluateExamBatch(evaluationJson);
+
+        // 6️⃣ Parse + Validate
+        AIEvaluationBatchResult batchResult =
+                parseAndValidate(aiResponseJson, examPaper);
         
-        return JsonUtils.toJson(root); // Jackson / Gson
+        System.out.println("=========== AI RESPONSE DEBUG ===========");
+
+        for (AIEvaluationBatchResult.QuestionEvaluation qe
+                : batchResult.getEvaluations()) {
+
+            System.out.println("AI Returned QID = "
+                    + qe.getQuestionId()
+                    + " | Marks = "
+                    + qe.getMarksAwarded());
+        }
+
+        System.out.println("=========================================");
+
+
+        // 7️⃣ Persist
+        persistBatchEvaluation(submission, batchResult, answersByQuestionId);
+
+        System.out.println("✅ EVALUATION COMPLETED submissionId=" + submissionId);
     }
 
+    /* ===================================================== */
 
-    /* ================= HELPER METHODS ================= */
+    private void persistBatchEvaluation(
+            RDExamSubmission submission,
+            AIEvaluationBatchResult batchResult,
+            Map<Integer, String> studentAnswerMap
+    ) {
+
+        evaluationDAO.deleteBySubmissionId(submission.getSubmissionId());
+
+        BigDecimal totalMarks = BigDecimal.ZERO;
+        int order = 1;
+
+        for (AIEvaluationBatchResult.QuestionEvaluation qe : batchResult.getEvaluations()) {
+
+            try {
+
+                RDExamSectionQuestion sectionQuestion =
+                        examPaperService.getSectionQuestionById(qe.getQuestionId());
+
+                if (sectionQuestion == null) {
+                    System.err.println("⚠ Unknown questionId: " + qe.getQuestionId());
+                    continue;
+                }
+
+                String studentAnswer =
+                        studentAnswerMap.get(qe.getQuestionId());
+
+                // 🔹 Rule-based evaluation first
+                BigDecimal ruleMarks =
+                        ruleBasedEvaluationService.evaluate(
+                                sectionQuestion,
+                                studentAnswer
+                        );
+
+                BigDecimal marksAwarded;
+
+                // If rule engine gives a decision → override AI
+                if (ruleMarks != null) {
+
+                    marksAwarded = ruleMarks
+                            .setScale(2, RoundingMode.HALF_UP);
+
+                    System.out.println("✅ RULE ENGINE OVERRIDE for QID="
+                            + qe.getQuestionId()
+                            + " | Marks="
+                            + marksAwarded);
+
+                } else {
+
+                    // Fall back to AI marks
+                    marksAwarded = BigDecimal
+                            .valueOf(qe.getMarksAwarded())
+                            .setScale(2, RoundingMode.HALF_UP);
+                }
+
+                RDExamAIEvaluation eval = new RDExamAIEvaluation();
+                eval.setSubmission(submission);
+                eval.setSectionQuestion(sectionQuestion);
+                eval.setQuestionOrder(order++);
+                eval.setMarksAwarded(marksAwarded);
+                eval.setConfidence(normalizeConfidence(qe.getConfidence()));
+                eval.setFeedback(safeString(qe.getFeedback()));
+                eval.setEvaluatedBy("AI");
+
+                eval.setStudentAnswer(
+                        normalizeStudentAnswer(
+                                studentAnswerMap.get(qe.getQuestionId())
+                        )
+                );
+                
+                System.out.println("Saving evaluation for ESQ ID = "
+                        + sectionQuestion.getId()
+                        + " | StudentAnswer = "
+                        + eval.getStudentAnswer());
+
+
+                evaluationDAO.save(eval);
+
+                totalMarks = totalMarks.add(marksAwarded);
+
+            } catch (Exception ex) {
+                System.err.println("❌ Failed saving QID="
+                        + qe.getQuestionId() + " → " + ex.getMessage());
+            }
+        }
+
+        RDExamAISummary summary =
+                summaryDAO.findBySubmissionId(submission.getSubmissionId());
+
+        if (summary == null) {
+            summary = new RDExamAISummary();
+            summary.setSubmission(submission);
+        }
+
+        summary.setTotalMarks(totalMarks.setScale(2, RoundingMode.HALF_UP));
+        summary.setOverallFeedback(safeString(batchResult.getOverallFeedback()));
+        summary.setEvaluatedBy("AI");
+
+        summaryDAO.saveOrUpdate(summary);
+
+        submissionService.markEvaluated(submission.getSubmissionId());
+    }
+
+    /* ===================================================== */
+
+    private BigDecimal normalizeConfidence(Double confidence) {
+
+        if (confidence == null) return new BigDecimal("0.500");
+
+        BigDecimal bd = BigDecimal.valueOf(confidence);
+
+        if (bd.compareTo(BigDecimal.ONE) > 0) {
+            bd = bd.divide(new BigDecimal("100"), 4, RoundingMode.HALF_UP);
+        }
+
+        if (bd.compareTo(BigDecimal.ZERO) < 0) bd = BigDecimal.ZERO;
+        if (bd.compareTo(BigDecimal.ONE) > 0) bd = BigDecimal.ONE;
+
+        return bd.setScale(3, RoundingMode.HALF_UP);
+    }
+
+    /* ===================================================== */
+
+    private String normalizeStudentAnswer(String answer) {
+
+        if (answer == null) return null;
+
+        // Preserve math-critical characters: fractions (/), decimals (.), currency (₹, Rs),
+        // operators (+, -, ×, ÷, %, =), parentheses, superscripts (²³), colons (:)
+        // Only remove truly non-printable or irrelevant control characters.
+        String cleaned = answer
+                .replaceAll("\\r", "")         // remove carriage returns
+                .replaceAll("\\t", " ")        // tabs → space
+                .replaceAll("\\s{2,}", " ")    // collapse multiple spaces
+                .trim();
+
+        return cleaned.isEmpty() ? null : cleaned;
+    }
+
+    private String safeString(String s) {
+        return s == null ? "" : s.trim();
+    }
+
+    /* ===================================================== */
 
     private String extractTextFromFiles(RDExamSubmission submission) {
 
         StringBuilder extracted = new StringBuilder();
 
-        List<String> paths = submission.getFilePaths();
+        for (String filePath : submission.getFilePaths()) {
 
-        for (String filePath : paths) {
             try {
-                Path path = Paths.get(filePath);
-                String lower = filePath.toLowerCase();
+                List<File> images =
+                        pdfImageService.convertPdfToImages(Paths.get(filePath));
 
-                if (lower.endsWith(".pdf")) {
-                    extracted.append(extractFromPdf(path));
-                } 
-                else if (lower.endsWith(".jpg")
-                      || lower.endsWith(".jpeg")
-                      || lower.endsWith(".png")) {
-
-                    // Phase-1 OCR stub
-                    extracted.append("[IMAGE OCR CONTENT]\n");
-                } 
-                else if (lower.endsWith(".txt")) {
-                    extracted.append(Files.readString(path));
+                for (File img : images) {
+                    extracted.append(
+                            openAIVisionOCRService.extractTextFromImage(img)
+                    ).append("\n\n");
                 }
 
-                extracted.append("\n\n");
-
             } catch (Exception e) {
-                extracted.append("[ERROR READING FILE: ")
-                         .append(filePath)
-                         .append("]\n");
+                extracted.append("[OCR FAILED: ")
+                        .append(filePath)
+                        .append("]\n");
             }
         }
 
         return extracted.toString();
     }
 
-
-        
-    private String extractFromPdf(Path pdfPath) throws Exception {
-
-        try (PDDocument document = PDDocument.load(pdfPath.toFile())) {
-            PDFTextStripper stripper = new PDFTextStripper();
-            return stripper.getText(document);
-        }
-    }
-    
-
+    /* ===================================================== */
 
     private AIEvaluationBatchResult parseAndValidate(
             String aiResponseJson,
@@ -194,6 +290,7 @@ public class RDExamEvaluationServiceImpl
     ) {
 
         try {
+
             AIEvaluationBatchResult result =
                     mapper.readValue(aiResponseJson, AIEvaluationBatchResult.class);
 
@@ -203,16 +300,13 @@ public class RDExamEvaluationServiceImpl
                     .sum();
 
             if (result.getEvaluations() == null ||
-                result.getEvaluations().size() != expectedCount) {
+                    result.getEvaluations().size() != expectedCount) {
 
                 throw new IllegalStateException(
-                    "AI returned " +
-                    (result.getEvaluations() == null ? 0 : result.getEvaluations().size()) +
-                    " evaluations, expected " + expectedCount
+                        "AI returned invalid evaluation count"
                 );
             }
 
-            // Validate marks do not exceed maxMarks
             Map<Integer, Integer> maxMarksMap = new HashMap<>();
 
             for (RDExamSection s : examPaper.getSections()) {
@@ -228,15 +322,15 @@ public class RDExamEvaluationServiceImpl
 
                 if (max == null) {
                     throw new IllegalStateException(
-                        "Invalid questionId returned by AI: " + qe.getQuestionId()
+                            "Invalid questionId returned by AI"
                     );
                 }
 
                 if (qe.getMarksAwarded() < 0 ||
-                    qe.getMarksAwarded() > max) {
+                        qe.getMarksAwarded() > max) {
 
                     throw new IllegalStateException(
-                        "Invalid marks for questionId " + qe.getQuestionId()
+                            "Invalid marks returned by AI"
                     );
                 }
             }
@@ -248,69 +342,53 @@ public class RDExamEvaluationServiceImpl
         }
     }
 
-    
-    private void persistBatchEvaluation(
-            RDExamSubmission submission,
-            AIEvaluationBatchResult batchResult
+    /* ===================================================== */
+
+    private String buildEvaluationInputJson(
+            RDExamPaper examPaper,
+            Map<Integer, String> answersByQuestionId
     ) {
 
-        // Optional: clear old AI evaluations if re-run
-        evaluationDAO.deleteBySubmissionId(submission.getSubmissionId());
+        List<Map<String, Object>> questions = new ArrayList<>();
 
-        BigDecimal totalMarks = BigDecimal.ZERO;
-        int order = 1;
+        for (RDExamSection section : examPaper.getSections()) {
+            for (RDExamSectionQuestion sq : section.getQuestions()) {
 
-        for (AIEvaluationBatchResult.QuestionEvaluation qe
-                : batchResult.getEvaluations()) {
+                RDExamAnswerKey ak = sq.getAnswerKey();
 
-        	RDExamSectionQuestion sectionQuestion =
-        	        examPaperService.getSectionQuestionById(
-        	                qe.getQuestionId()
-        	        );
+                Map<String, Object> q = new LinkedHashMap<>();
+                System.out.println("Sending to AI QID=" + sq.getId());
 
+                q.put("questionId", sq.getId());
+                q.put("questionText", sq.getQuestion().getQuestionText());
+                q.put("maxMarks", sq.getMarks());
 
-            if (sectionQuestion == null) {
-                // Safety check — should never happen due to validation
-                continue;
-            }
+                q.put("modelAnswer", ak != null ? ak.getModelAnswer() : "");
+                q.put("keyPoints", ak != null ? ak.getKeyPoints() : "");
+                q.put("expectedKeywords", ak != null ? ak.getExpectedKeywords() : "");
 
-            RDExamAIEvaluation eval = new RDExamAIEvaluation();
-            eval.setSubmission(submission);
-            eval.setSectionQuestion(sectionQuestion);
-            eval.setQuestionOrder(order++);
-            eval.setMarksAwarded(
-                    BigDecimal.valueOf(qe.getMarksAwarded())
-            );
-            eval.setConfidence(qe.getConfidence());
-            eval.setFeedback(qe.getFeedback());
-            eval.setEvaluatedBy("AI");
-
-            evaluationDAO.save(eval);
-
-            totalMarks = totalMarks.add(
-                    BigDecimal.valueOf(qe.getMarksAwarded())
-            );
-        }
-
-        // ===== SUMMARY =====
-        RDExamAISummary summary =
-                summaryDAO.findBySubmissionId(
-                        submission.getSubmissionId()
+                q.put("studentAnswer",
+                        normalizeStudentAnswer(
+                                answersByQuestionId.getOrDefault(sq.getId(), "")
+                        )
                 );
 
-        if (summary == null) {
-            summary = new RDExamAISummary();
-            summary.setSubmission(submission);
+                questions.add(q);
+            }
         }
 
-        summary.setTotalMarks(totalMarks);
-        summary.setOverallFeedback(batchResult.getOverallFeedback());
-        summary.setEvaluatedBy("AI");
+        Map<String, Object> root = new LinkedHashMap<>();
 
-        summaryDAO.saveOrUpdate(summary);
-        submissionService.markEvaluated(submission.getSubmissionId());
+        root.put("exam", Map.of(
+                "examPaperId", examPaper.getExamPaperId(),
+                "totalQuestions", questions.size(),
+                "totalMarks", examPaper.getTotalMarks(),
+                "subject", examPaper.getSubject(),
+                "board", examPaper.getBoard()
+        ));
 
-        
+        root.put("questions", questions);
+
+        return JsonUtils.toJson(root);
     }
-
 }

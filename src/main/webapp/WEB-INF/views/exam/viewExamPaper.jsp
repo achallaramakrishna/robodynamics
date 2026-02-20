@@ -51,17 +51,65 @@
 
             <ol class="mt-3">
                 <c:forEach var="sq" items="${section.questions}">
-                    <li class="mb-2">
-                        <c:if test="${not empty sq.subLabel}">
-                            (${sq.subLabel})
-                        </c:if>
+					 <li class="mb-3">
+					
+					    <!-- Sub label -->
+					    <c:if test="${not empty sq.subLabel}">
+					        (${sq.subLabel})
+					    </c:if>
+					
+					    <!-- Question text -->
+					    <div class="mb-1 fw-semibold">
+					        ${sq.question.questionText}
+					    </div>
+					
+					    <!-- Question image -->
+					    <c:if test="${not empty sq.question.questionImage}">
+					        <div class="mt-2 mb-3">
+					            <img
+					                src="${sq.question.questionImage}"
+					                alt="Question Image"
+					                class="img-fluid border rounded"
+					                style="max-height:300px;"
+					            />
+					        </div>
+					    </c:if>
+					
+					   <!-- ================= MCQ OPTIONS ================= -->
+						<c:if test="${sq.question.questionType == 'multiple_choice'}">
+						    <ol type="A" class="ms-3 mt-2">
+						
+						        <c:forEach var="opt" items="${sq.question.options}">
+						            <li class="mb-2">
+						
+						                <!-- Option text -->
+						                <span>${opt.optionText}</span>
+						
+						                <!-- Option image (if any) -->
+						                <c:if test="${not empty opt.optionImage}">
+						                    <div class="mt-1">
+						                        <img
+						                            src="${opt.optionImage}"
+						                            alt="Option Image"
+						                            class="img-fluid border rounded"
+						                            style="max-height:180px;"
+						                        />
+						                    </div>
+						                </c:if>
+						
+						            </li>
+						        </c:forEach>
+						
+						    </ol>
+						</c:if>
+						<!-- =============== END MCQ OPTIONS ================= -->					
+					    <!-- Marks -->
+					    <span class="float-end text-muted">
+					        (${sq.marks})
+					    </span>
+					
+					</li>
 
-                        ${sq.question.questionText}
-
-                        <span class="float-end">
-                            (${sq.marks})
-                        </span>
-                    </li>
                 </c:forEach>
             </ol>
 

@@ -310,6 +310,43 @@
 			<artifactId>openpdf</artifactId>
 			<version>1.3.39</version>
 		</dependency>
+		
+		    <dependency>
+        <groupId>net.sourceforge.tess4j</groupId>
+        <artifactId>tess4j</artifactId>
+        <version>5.11.0</version>
+    </dependency>
+
+    <!-- PDF handling -->
+    <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>2.0.30</version>
+    </dependency>
+    
+    <!-- PDF to Image -->
+    <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>2.0.30</version>
+    </dependency>
+
+    <!-- HTTP Client -->
+  <!-- OkHttp (stable version for Java 17 + Spring 5) -->
+	<dependency>
+	    <groupId>com.squareup.okhttp3</groupId>
+	    <artifactId>okhttp</artifactId>
+	    <version>4.11.0</version>
+	</dependency>
+
+<!-- Force compatible Okio -->
+<dependency>
+    <groupId>com.squareup.okio</groupId>
+    <artifactId>okio</artifactId>
+    <version>3.2.0</version>
+</dependency>
+
+
 
 <dependency>
     <groupId>org.apache.pdfbox</groupId>
@@ -335,6 +372,20 @@
 				<version>3.3.1</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<!-- Exclude stale .class files from src/main/webapp/WEB-INF/classes
+					     so only the freshly-compiled target/classes output is packaged.
+					     warSourceExcludes only affects the warSourceDirectory
+					     (src/main/webapp), not the webResources overlay. -->
+					<warSourceExcludes>WEB-INF/classes/**/*.class</warSourceExcludes>
+					<webResources>
+						<!-- Overlay freshly-compiled classes from target/classes
+						     into WEB-INF/classes. These are added AFTER the
+						     warSourceExcludes filter and always win. -->
+						<resource>
+							<directory>${project.build.outputDirectory}</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 

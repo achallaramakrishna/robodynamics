@@ -6,6 +6,9 @@ import com.robodynamics.model.RDQuizQuestion.DifficultyLevel;
 public interface RDQuizQuestionService {
 
     List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType);
+    
+    RDQuizQuestion findByIdWithOptions(int questionId);
+
 
     
 	List<RDQuizQuestion> findPaginated(int page, int size);

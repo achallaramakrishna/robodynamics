@@ -11,6 +11,9 @@ public interface RDQuizQuestionDao {
 
 	
     List<RDQuizQuestion> getQuestionsBySlideId(int slideId, String questionType);
+    
+    RDQuizQuestion findByIdWithOptions(int questionId);
+
 
     
     // Create or update a quiz question

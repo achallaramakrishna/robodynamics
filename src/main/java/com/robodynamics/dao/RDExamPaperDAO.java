@@ -14,6 +14,9 @@ public interface RDExamPaperDAO {
     RDExamPaper findBySessionDetail(Integer sessionDetailId);
 
     RDExamPaper getExamPaperWithDetails(Integer examPaperId);
+    
+    boolean hasSubmissions(Integer examPaperId);
+
 
     void delete(Integer examPaperId);
 

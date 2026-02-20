@@ -20,24 +20,24 @@ public class RDEnquiry {
 	@Column(name = "enquiry_id")
 	private int enquiryId;
 	
-	@Column(name = "first_name")
+	@Column(name = "parent_name")
 	private String firstName;
-	
-	@Column(name = "last_name")
+
+	@Column(name = "student_name")
 	private String lastName;
-	
-	@Column(name = "mobile_no")
+
+	@Column(name = "mobile")
 	private String mobileNo;
-	
-	@Column(name = "enquiry_date")
+
+	@Column(name = "created_at")
 	private Date enquiryDate;
-	
-	@Column(name = "enquiry_notes")
+
+	@Column(name = "message")
 	private String enquiryNotes;
-	
-	@Column(name = "enquiry_type")
+
+	@Column(name = "source")
 	private String enquiryType;
-	
+
 	@Column(name = "email")
 	private String email;
 	

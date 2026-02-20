@@ -7,6 +7,7 @@ import com.robodynamics.model.RDExamAnswerKey;
 import com.robodynamics.model.RDExamPaper;
 import com.robodynamics.model.RDExamSectionQuestion;
 import com.robodynamics.model.RDUser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.robodynamics.dto.RDExamPaperUploadDTO;
 
 public interface RDExamPaperService {
@@ -17,12 +18,12 @@ public interface RDExamPaperService {
             Integer courseSessionId,
             Integer courseSessionDetailId,
             RDUser createdBy
-    );
+    ) throws JsonProcessingException;
     
     void upsertExamPaperFromJson(RDExamPaperUploadDTO uploadDTO,
             Integer courseSessionId,
             Integer courseSessionDetailId,
-            RDUser createdBy);
+            RDUser createdBy) throws JsonProcessingException;
 
 
     /* Fetch papers for selected session detail (AJAX list) */

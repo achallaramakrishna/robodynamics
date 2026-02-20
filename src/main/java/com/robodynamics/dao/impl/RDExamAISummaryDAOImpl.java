@@ -69,20 +69,12 @@ public class RDExamAISummaryDAOImpl implements RDExamAISummaryDAO {
 
     @Override
     public void saveOrUpdate(RDExamAISummary summary) {
-
-        if (summary == null) {
-            return;
+        if (summary.getId() == null) {
+            entityManager.persist(summary);
+        } else {
+            entityManager.merge(summary);
         }
-
-        /*
-         * merge() works as:
-         * - INSERT if entity does not exist
-         * - UPDATE if entity already exists
-         *
-         * Since submission_id is the PK,
-         * this is a perfect UPSERT.
-         */
-        entityManager.merge(summary);
     }
+
 
 }

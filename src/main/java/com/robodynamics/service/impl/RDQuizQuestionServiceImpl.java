@@ -149,6 +149,12 @@ public class RDQuizQuestionServiceImpl implements RDQuizQuestionService {
 		return rdQuizQuestionDao.findActiveQuestionsByIds(ids);
 	}
 
+	@Override
+	@Transactional
+	public RDQuizQuestion findByIdWithOptions(int questionId) {
+		 return rdQuizQuestionDao.findByIdWithOptions(questionId);
+	}
+
 	
 
 	

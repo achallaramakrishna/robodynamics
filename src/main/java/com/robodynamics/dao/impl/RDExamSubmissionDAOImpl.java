@@ -92,21 +92,24 @@ public class RDExamSubmissionDAOImpl implements RDExamSubmissionDAO {
             Integer sessionId
     ) {
 
-        String hql =
-            "SELECT s " +
-            "FROM RDExamSubmission s, RDExamPaper p " +
-            "WHERE s.examPaperId = p.examPaperId " +
-            "AND s.studentId = :studentId " +
-            "AND p.session.sessionId = :sessionId " +
-            "ORDER BY s.submissionId DESC";
+        String hql = """
+            SELECT s
+            FROM RDExamSubmission s
+            JOIN s.examPaper p
+            JOIN p.courseSessionDetail d
+            JOIN d.courseSession cs
+            WHERE s.studentId = :studentId
+              AND cs.courseSessionId = :sessionId
+            ORDER BY s.submissionId DESC
+        """;
 
-        return sessionFactory
-                .getCurrentSession()
+        return getCurrentSession()
                 .createQuery(hql)
                 .setParameter("studentId", studentId)
                 .setParameter("sessionId", sessionId)
                 .list();
     }
+
 
     @Override
     public RDExamSubmission findByIdWithFiles(Integer submissionId) {
@@ -123,5 +126,108 @@ public class RDExamSubmissionDAOImpl implements RDExamSubmissionDAO {
                 .uniqueResult();
     }
 
+	@Override
+	public int markEvaluationStarted(Integer submissionId) {
+		// TODO Auto-generated method stub
+		return sessionFactory
+	            .getCurrentSession()
+	            .createQuery(
+	                "UPDATE RDExamSubmission s " +
+	                "SET s.evaluationStarted = true, " +
+	                "    s.status = :status " +
+	                "WHERE s.submissionId = :id " +
+	                "  AND s.evaluationStarted = false"
+	            )
+	            .setParameter(
+	                "status",
+	                RDExamSubmission.SubmissionStatus.EVALUATING
+	            )
+	            .setParameter("id", submissionId)
+	            .executeUpdate();
+	}
+
+	@Override
+	public int markEvaluatingIfSubmitted(Integer submissionId) {
+
+	    return sessionFactory.getCurrentSession()
+	        .createQuery(
+	            "update RDExamSubmission s " +
+	            "set s.status = :evaluating " +
+	            "where s.submissionId = :id " +
+	            "and s.status = :submitted"
+	        )
+	        .setParameter("evaluating",
+	                RDExamSubmission.SubmissionStatus.EVALUATING)
+	        .setParameter("submitted",
+	                RDExamSubmission.SubmissionStatus.SUBMITTED)
+	        .setParameter("id", submissionId)
+	        .executeUpdate();
+	}
+
+	@Override
+	public boolean markEvaluatingIfAllowed(Integer submissionId) {
+
+	    int updated =
+	        sessionFactory
+	            .getCurrentSession()
+	            .createQuery(
+	                "update RDExamSubmission s " +
+	                "set s.status = :evaluating " +
+	                "where s.submissionId = :id " +
+	                "and s.status = :submitted"
+	            )
+	            .setParameter(
+	                "evaluating",
+	                RDExamSubmission.SubmissionStatus.EVALUATING
+	            )
+	            .setParameter(
+	                "submitted",
+	                RDExamSubmission.SubmissionStatus.SUBMITTED
+	            )
+	            .setParameter("id", submissionId)
+	            .executeUpdate();
+
+	    if (updated == 1) {
+	        System.out.println(
+	            "✅ STATE CHANGE: SUBMITTED → EVALUATING for submissionId="
+	            + submissionId
+	        );
+	        return true;
+	    }
+
+	    System.out.println(
+	        "⛔ markEvaluatingIfAllowed skipped for submissionId="
+	        + submissionId + " (already evaluating or evaluated)"
+	    );
+	    return false;
+	}
+
+
+	    @Override
+	    public RDExamSubmission findLatestByStudentAndPaper(
+	            Integer studentId,
+	            Integer paperId
+	    ) {
+
+	        Session session = sessionFactory.getCurrentSession();
+
+	        String hql = """
+	            FROM RDExamSubmission s
+	            WHERE s.studentId = :studentId
+	              AND s.examPaperId = :paperId
+	            ORDER BY s.submissionId DESC
+	        """;
+
+	        RDExamSubmission result = session.createQuery(hql, RDExamSubmission.class)
+	                .setParameter("studentId", studentId)
+	                .setParameter("paperId", paperId)
+	                .setMaxResults(1)
+	                .uniqueResult();
+
+	        System.out.println("DAO → Latest submissionId = " +
+	                (result != null ? result.getSubmissionId() : "NULL"));
+
+	        return result;
+	    }
 
 }

@@ -300,72 +300,79 @@ public class RDQuizQuestionDaoImpl implements RDQuizQuestionDao {
 
 	    return questions;
 	}
+	
+	@Override
+	public RDQuizQuestion findByIdWithOptions(int questionId) {
+	    Session session = factory.getCurrentSession();
 
-	    @Override
-	    public List<RDQuizQuestion> findByFilters(Integer courseId,
-	                                              Integer sessionId,
-	                                              Integer sessionDetailId,
-	                                              Integer quizId,
-	                                              int limit,
-	                                              int offset) {
+	    return session.createQuery(
+	        "select distinct q " +
+	        "from RDQuizQuestion q " +
+	        "left join fetch q.options " +
+	        "where q.questionId = :qid",
+	        RDQuizQuestion.class
+	    )
+	    .setParameter("qid", questionId)
+	    .uniqueResult();
+	}
 
-	        // Build dynamic HQL with minimal joins depending on filters
-	        StringBuilder hql = new StringBuilder();
-	        Map<String, Object> params = new HashMap<>();
 
-	        if (quizId != null) {
-	            // via mapping table RDQuizQuestionMap (assumes entity name RDQuizQuestionMap with fields: quiz, question)
-	            hql.append("select distinct q from RDQuizQuestion q ")
-	               .append(" join RDQuizQuestionMap m on m.question.questionId = q.questionId ")
-	               .append(" where m.quiz.quizId = :quizId ");
-	            params.put("quizId", quizId);
+	@Override
+	public List<RDQuizQuestion> findByFilters(
+	        Integer courseId,
+	        Integer sessionId,
+	        Integer sessionDetailId,
+	        Integer quizId,
+	        int limit,
+	        int offset
+	) {
 
-	            // You can still narrow further by session/sessionDetail/course if you want:
-	            if (sessionDetailId != null) {
-	                hql.append(" and q.courseSessionDetail.courseSessionDetailId = :sdid ");
-	                params.put("sdid", sessionDetailId);
-	            } else if (sessionId != null) {
-	                hql.append(" and q.courseSession.courseSessionId = :sid ");
-	                params.put("sid", sessionId);
-	            } else if (courseId != null) {
-	                hql.append(" and q.courseSession.course.courseId = :cid ");
-	                params.put("cid", courseId);
-	            }
-	        } else if (sessionDetailId != null) {
-	            hql.append("select q from RDQuizQuestion q ")
-	               .append(" where q.courseSessionDetail.courseSessionDetailId = :sdid ");
-	            params.put("sdid", sessionDetailId);
-	        } else if (sessionId != null) {
-	            hql.append("select q from RDQuizQuestion q ")
-	               .append(" where q.courseSession.courseSessionId = :sid ");
-	            params.put("sid", sessionId);
-	        } else if (courseId != null) {
-	            // need a join to access course.id safely if your mapping is q.courseSession.course
-	            hql.append("select q from RDQuizQuestion q ")
-	               .append(" join q.courseSession cs ")
-	               .append(" join cs.course c ")
-	               .append(" where c.courseId = :cid ");
-	            params.put("cid", courseId);
-	        } else {
-	            // no filters → return something sensible (or empty)
-	            hql.append("select q from RDQuizQuestion q ");
-	        }
+	    StringBuilder hql = new StringBuilder();
+	    Map<String, Object> params = new HashMap<>();
 
-	        hql.append(" order by q.questionId desc ");
-		    Session session = factory.getCurrentSession();
-		    
-	        Query<RDQuizQuestion> query = session.createQuery(hql.toString(), RDQuizQuestion.class);
-	        params.forEach(query::setParameter);
+	    hql.append("select distinct q from RDQuizQuestion q\r\n"
+	    		+ "left join fetch q.options\r\n"
+	    		+ " ");
 
-	        if (limit > 0) {
-	            query.setFirstResult(Math.max(0, offset));
-	            query.setMaxResults(limit);
-	        }
+	    // Optional quiz mapping
+	    hql.append(" left join RDQuizQuestionMap qm on qm.question.questionId = q.questionId ");
 
-	        // EAGER 'options' is already configured in your entity;
-	        // if LAZY, fetch join: "select distinct q from RDQuizQuestion q left join fetch q.options ..."
-	        return query.list();
+	    // Optional exam mapping
+	    hql.append(" left join RDExamSectionQuestion eq on eq.question.questionId = q.questionId ");
+
+	    hql.append(" where 1=1 ");
+
+	    // Quiz filter (optional)
+	    if (quizId != null) {
+	        hql.append(" and qm.quiz.quizId = :quizId ");
+	        params.put("quizId", quizId);
 	    }
+
+	    // Curriculum anchoring (MOST IMPORTANT)
+	    if (sessionDetailId != null) {
+	        hql.append(" and q.courseSessionDetail.courseSessionDetailId = :sdid ");
+	        params.put("sdid", sessionDetailId);
+	    } else if (sessionId != null) {
+	        hql.append(" and q.courseSession.courseSessionId = :sid ");
+	        params.put("sid", sessionId);
+	    } else if (courseId != null) {
+	        hql.append(" and q.courseSession.course.courseId = :cid ");
+	        params.put("cid", courseId);
+	    }
+
+	    hql.append(" order by q.questionId desc ");
+
+	    Session session = factory.getCurrentSession();
+	    Query<RDQuizQuestion> query = session.createQuery(hql.toString(), RDQuizQuestion.class);
+	    params.forEach(query::setParameter);
+
+	    if (limit > 0) {
+	        query.setFirstResult(Math.max(0, offset));
+	        query.setMaxResults(limit);
+	    }
+
+	    return query.list();
+	}
 
 	    @Override
 	    public long countByFilters(Integer courseId,

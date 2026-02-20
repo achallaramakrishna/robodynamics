@@ -10,6 +10,7 @@
 <title>Session Dashboard</title>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="memoryMapCount" value="${empty summary ? 0 : (empty summary['memory-map'] ? 0 : summary['memory-map'])}" />
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,101 +20,70 @@ html, body {
     padding: 0;
     overflow-x: hidden;
 }
-
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
     overflow-y: auto;
 }
+
 /* ===== MOBILE ONLY VISIBILITY FIX ===== */
-.mobile-only {
-    display: block;
-}
-
+.mobile-only { display: block; }
 @media (min-width: 768px) {
-    .mobile-only {
-        display: none !important;
-    }
+    .mobile-only { display: none !important; }
 }
 
-    body {
-        background-color: #f8f9fa;
-        font-family: Arial, sans-serif;
-    }
+.dashboard-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+}
+.dashboard-card:hover { transform: translateY(-4px); }
 
-    .dashboard-card {
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        transition: transform 0.2s;
-    }
+.card-icon { font-size: 36px; }
+.card-count { font-size: 28px; font-weight: bold; }
 
-    .dashboard-card:hover {
-        transform: translateY(-4px);
-    }
-
-    .card-icon {
-        font-size: 36px;
-    }
-
-    .card-count {
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    /* ===== BUTTON THEMES ===== */
-
-    /* View */
-    .btn-view {
-        background: linear-gradient(135deg, #4f9cff, #1e6de8);
-        color: #fff;
-        border: none;
-    }
-    .btn-view:hover {
-        background: linear-gradient(135deg, #1e6de8, #174fb8);
-        color: #fff;
-    }
-
-    /* Explore */
-    .btn-explore {
-        background: linear-gradient(135deg, #20c997, #0ca678);
-        color: #fff;
-        border: none;
-    }
-    .btn-explore:hover {
-        background: linear-gradient(135deg, #0ca678, #099268);
-        color: #fff;
-    }
-
-    /* Start / Play */
-    .btn-start {
-        background: linear-gradient(135deg, #ff9f1c, #ff6b00);
-        color: #fff;
-        border: none;
-    }
-    .btn-start:hover {
-        background: linear-gradient(135deg, #ff6b00, #e8590c);
-        color: #fff;
-    }
-
-    .btn-sm-custom {
-        padding: 6px 14px;
-        font-size: 0.85rem;
-        border-radius: 8px;
-    }
+/* ===== BUTTON THEMES ===== */
+.btn-view {
+    background: linear-gradient(135deg, #4f9cff, #1e6de8);
+    color: #fff; border: none;
+}
+.btn-view:hover {
+    background: linear-gradient(135deg, #1e6de8, #174fb8);
+    color: #fff;
+}
+.btn-explore {
+    background: linear-gradient(135deg, #20c997, #0ca678);
+    color: #fff; border: none;
+}
+.btn-explore:hover {
+    background: linear-gradient(135deg, #0ca678, #099268);
+    color: #fff;
+}
+.btn-start {
+    background: linear-gradient(135deg, #ff9f1c, #ff6b00);
+    color: #fff; border: none;
+}
+.btn-start:hover {
+    background: linear-gradient(135deg, #ff6b00, #e8590c);
+    color: #fff;
+}
+.btn-sm-custom {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}
 </style>
 </head>
 
 <body>
-<!-- MOBILE BACK TO COURSE DASHBOARD -->
+
 <!-- MOBILE BACK TO COURSE DASHBOARD -->
 <div class="mobile-only px-3 mt-3 mb-2">
-
     <a href="${ctx}/course/monitor/v2?courseId=${session.course.courseId}&enrollmentId=${enrollment.enrollmentId}"
        class="btn btn-outline-secondary w-100">
         ← Back to Course Dashboard
     </a>
 </div>
-
 
 <div class="container mt-4">
 
@@ -124,7 +94,6 @@ body {
     </div>
 
     <c:if test="${not empty session and session.courseSessionId > 0}">
-
         <div class="row g-4 align-items-stretch">
 
             <!-- 🎥 VIDEOS -->
@@ -133,11 +102,9 @@ body {
                     <div class="card-body">
                         <div class="card-icon">🎥</div>
                         <h5 class="mt-2">Videos</h5>
-                        <div class="card-count">${summary.video}</div>
+                        <div class="card-count">${empty summary.video ? 0 : summary.video}</div>
                         <a href="${ctx}/course/session/${session.courseSessionId}/videos?enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-view mt-2">
-                            View Videos
-                        </a>
+                           class="btn btn-view mt-2">View Videos</a>
                     </div>
                 </div>
             </div>
@@ -148,11 +115,9 @@ body {
                     <div class="card-body">
                         <div class="card-icon">📘</div>
                         <h5 class="mt-2">Notes (PDF)</h5>
-                        <div class="card-count">${summary.pdf}</div>
+                        <div class="card-count">${empty summary.pdf ? 0 : summary.pdf}</div>
                         <a href="${ctx}/course/session/${session.courseSessionId}/pdfs?enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-view mt-2">
-                            Open Notes
-                        </a>
+                           class="btn btn-view mt-2">Open Notes</a>
                     </div>
                 </div>
             </div>
@@ -163,11 +128,9 @@ body {
                     <div class="card-body">
                         <div class="card-icon">🧪</div>
                         <h5 class="mt-2">Quizzes</h5>
-                        <div class="card-count">${summary.quiz}</div>
+                        <div class="card-count">${empty summary.quiz ? 0 : summary.quiz}</div>
                         <a href="${ctx}/course/session/${session.courseSessionId}/quizzes?enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-start mt-2">
-                            Practice Now
-                        </a>
+                           class="btn btn-start mt-2">Practice Now</a>
                     </div>
                 </div>
             </div>
@@ -178,11 +141,9 @@ body {
                     <div class="card-body">
                         <div class="card-icon">🧠</div>
                         <h5 class="mt-2">Flashcards</h5>
-                        <div class="card-count">${summary.flashcard}</div>
+                        <div class="card-count">${empty summary.flashcard ? 0 : summary.flashcard}</div>
                         <a href="${ctx}/course/session/${session.courseSessionId}/flashcards?enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-explore mt-2">
-                            Revise
-                        </a>
+                           class="btn btn-explore mt-2">Revise</a>
                     </div>
                 </div>
             </div>
@@ -194,12 +155,10 @@ body {
                         <div>
                             <div class="card-icon">🧩</div>
                             <h5 class="mt-2">Matching Games</h5>
-                            <div class="card-count">${summary.matchinggame}</div>
+                            <div class="card-count">${empty summary.matchinggame ? 0 : summary.matchinggame}</div>
                         </div>
                         <a href="${ctx}/student/matching-game/list?sessionId=${session.courseSessionId}&enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-start btn-sm-custom mt-3">
-                            Play
-                        </a>
+                           class="btn btn-start btn-sm-custom mt-3">Play</a>
                     </div>
                 </div>
             </div>
@@ -211,32 +170,26 @@ body {
                         <div>
                             <div class="card-icon">🧠</div>
                             <h5 class="mt-2">Match Pairs</h5>
-                            <div class="card-count">${summary.matchpairs}</div>
+                            <div class="card-count">${empty summary.matchpairs ? 0 : summary.matchpairs}</div>
                         </div>
                         <a href="${ctx}/student/matching-pair/list?sessionId=${session.courseSessionId}&enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-start btn-sm-custom mt-3">
-                            Start
-                        </a>
+                           class="btn btn-start btn-sm-custom mt-3">Start</a>
                     </div>
                 </div>
             </div>
-            
-			            <!-- 🧾 EXAM PAPERS -->
-			<div class="col-md-4">
-			    <div class="card dashboard-card text-center">
-			        <div class="card-body">
-			            <div class="card-icon">🧾</div>
-			            <h5 class="mt-2">Exam Papers</h5>
-			            <div class="card-count">${summary.exampaper}</div>
-			
-			            <a href="${ctx}/course/session/${session.courseSessionId}/exam-papers?enrollmentId=${enrollment.enrollmentId}"
-			               class="btn btn-start mt-2">
-			                Attempt Exam
-			            </a>
-			        </div>
-			    </div>
-			</div>
-			            
+
+            <!-- 🧾 EXAM PAPERS -->
+            <div class="col-md-4">
+                <div class="card dashboard-card text-center">
+                    <div class="card-body">
+                        <div class="card-icon">🧾</div>
+                        <h5 class="mt-2">Exam Papers</h5>
+                        <div class="card-count">${empty summary.exampaper ? 0 : summary.exampaper}</div>
+                        <a href="${ctx}/student/exam/session/${session.courseSessionId}?enrollmentId=${enrollment.enrollmentId}"
+                           class="btn btn-start mt-2">Attempt Exam</a>
+                    </div>
+                </div>
+            </div>
 
             <!-- 🗺 MEMORY MAPS -->
             <div class="col-md-4">
@@ -244,11 +197,9 @@ body {
                     <div class="card-body">
                         <div class="card-icon">🗺</div>
                         <h5 class="mt-2">Memory Maps</h5>
-                        <div class="card-count">${summary['memory-map']}</div>
+                        <div class="card-count">${memoryMapCount}</div>
                         <a href="${ctx}/course/session/${session.courseSessionId}/memory-maps?enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-explore mt-2">
-                            Explore
-                        </a>
+                           class="btn btn-explore mt-2">Explore</a>
                     </div>
                 </div>
             </div>
@@ -259,11 +210,9 @@ body {
                     <div class="card-body">
                         <div class="card-icon">📝</div>
                         <h5 class="mt-2">Assignments</h5>
-                        <div class="card-count">${summary.assignment}</div>
+                        <div class="card-count">${empty summary.assignment ? 0 : summary.assignment}</div>
                         <a href="${ctx}/course/session/${session.courseSessionId}/assignments?enrollmentId=${enrollment.enrollmentId}"
-                           class="btn btn-view mt-2">
-                            View
-                        </a>
+                           class="btn btn-view mt-2">View</a>
                     </div>
                 </div>
             </div>
@@ -278,6 +227,5 @@ body {
     </c:if>
 
 </div>
-
 </body>
 </html>

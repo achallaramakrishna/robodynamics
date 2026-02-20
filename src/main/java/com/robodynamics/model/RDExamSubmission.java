@@ -16,8 +16,24 @@ public class RDExamSubmission {
 
     @Column(name = "exam_paper_id", nullable = false)
     private Integer examPaperId;
+    
+    @Column(name = "evaluation_started", nullable = false)
+    private boolean evaluationStarted;
 
-    @Column(name = "student_id", nullable = false)
+
+    public boolean isEvaluationStarted() {
+		return evaluationStarted;
+	}
+
+	public void setEvaluationStarted(boolean evaluationStarted) {
+		this.evaluationStarted = evaluationStarted;
+	}
+
+	public void setExamPaper(RDExamPaper examPaper) {
+		this.examPaper = examPaper;
+	}
+
+	@Column(name = "student_id", nullable = false)
     private Integer studentId;
 
     @Column(name = "attempt_no")
@@ -45,7 +61,22 @@ public class RDExamSubmission {
     @Column(name = "remarks")
     private String remarks;
 
+    @Column(name = "total_marks_awarded")
+    private BigDecimal totalMarksAwarded;
+
+    @Column(name = "overall_confidence")
+    private Double overallConfidence;
+
     /* ================= Relationships ================= */
+
+    // 🔥 NEW: Proper link to Exam Paper (READ-ONLY FK)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "exam_paper_id",
+        insertable = false,
+        updatable = false
+    )
+    private RDExamPaper examPaper;
 
     @OneToMany(mappedBy = "submission", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RDExamSubmissionAnswer> answers;
@@ -61,42 +92,27 @@ public class RDExamSubmission {
     @Column(name = "file_path")
     private List<String> filePaths;
 
-    
     /* ================= Enums ================= */
 
-    public List<RDExamSubmissionAnswer> getAnswers() {
-		return answers;
-	}
+    public enum SubmissionStatus {
 
-	public void setAnswers(List<RDExamSubmissionAnswer> answers) {
-		this.answers = answers;
-	}
+        DRAFT("Draft"),
+        SUBMITTED("Submitted"),
+        EVALUATING("Evaluating"),
+        AI_EVALUATED("AI Evaluated"),
+        REVIEW_REQUIRED("Review Required"),
+        FINALIZED("Finalized");
 
-	public List<RDExamSubmissionFile> getFiles() {
-		return files;
-	}
+        private final String label;
 
-	public void setFiles(List<RDExamSubmissionFile> files) {
-		this.files = files;
-	}
+        SubmissionStatus(String label) {
+            this.label = label;
+        }
 
-	public List<String> getFilePaths() {
-		return filePaths;
-	}
-
-	public void setFilePaths(List<String> filePaths) {
-		this.filePaths = filePaths;
-	}
-
-	public enum SubmissionStatus {
-		DRAFT,
-	    SUBMITTED,
-	    EVALUATING,
-	    AI_EVALUATED,
-	    REVIEW_REQUIRED,
-	    FINALIZED
-	}
-
+        public String getLabel() {
+            return label;
+        }
+    }
 
     /* ================= Getters & Setters ================= */
 
@@ -114,6 +130,11 @@ public class RDExamSubmission {
 
     public void setExamPaperId(Integer examPaperId) {
         this.examPaperId = examPaperId;
+    }
+
+    // 🔥 NEW: Getter used by service & JSP logic
+    public RDExamPaper getExamPaper() {
+        return examPaper;
     }
 
     public Integer getStudentId() {
@@ -186,5 +207,45 @@ public class RDExamSubmission {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public BigDecimal getTotalMarksAwarded() {
+        return totalMarksAwarded;
+    }
+
+    public void setTotalMarksAwarded(BigDecimal totalMarksAwarded) {
+        this.totalMarksAwarded = totalMarksAwarded;
+    }
+
+    public Double getOverallConfidence() {
+        return overallConfidence;
+    }
+
+    public void setOverallConfidence(Double overallConfidence) {
+        this.overallConfidence = overallConfidence;
+    }
+
+    public List<RDExamSubmissionAnswer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<RDExamSubmissionAnswer> answers) {
+        this.answers = answers;
+    }
+
+    public List<RDExamSubmissionFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<RDExamSubmissionFile> files) {
+        this.files = files;
+    }
+
+    public List<String> getFilePaths() {
+        return filePaths;
+    }
+
+    public void setFilePaths(List<String> filePaths) {
+        this.filePaths = filePaths;
     }
 }

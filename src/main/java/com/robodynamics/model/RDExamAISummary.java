@@ -8,93 +8,64 @@ import java.time.LocalDateTime;
 @Table(name = "rd_exam_ai_summary")
 public class RDExamAISummary {
 
-    /* ================= PRIMARY KEY ================= */
-
     @Id
-    @Column(name = "submission_id")
-    private Integer submissionId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ai_summary_id")
+    private Integer id;
 
-    /* ================= RELATION ================= */
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "submission_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "submission_id", nullable = false, unique = true)
     private RDExamSubmission submission;
 
-    /* ================= AI SUMMARY ================= */
 
-    @Column(name = "total_marks", precision = 6, scale = 2, nullable = false)
-    private BigDecimal totalMarks;
-
-    @Column(name = "overall_feedback", columnDefinition = "TEXT")
+    @Column(name = "overall_feedback")
     private String overallFeedback;
 
+    @Column(name = "total_marks", nullable = false)
+    private BigDecimal totalMarks;
+
     @Column(name = "evaluated_by", nullable = false)
-    private String evaluatedBy = "AI";
+    private String evaluatedBy;
 
-    /* ================= AUDIT ================= */
+	public Integer getId() {
+		return id;
+	}
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+	public RDExamSubmission getSubmission() {
+		return submission;
+	}
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = this.createdAt;
-    }
+	public void setSubmission(RDExamSubmission submission) {
+		this.submission = submission;
+	}
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+	public String getOverallFeedback() {
+		return overallFeedback;
+	}
 
-    /* ================= GETTERS & SETTERS ================= */
+	public void setOverallFeedback(String overallFeedback) {
+		this.overallFeedback = overallFeedback;
+	}
 
-    public Integer getSubmissionId() {
-        return submissionId;
-    }
+	public BigDecimal getTotalMarks() {
+		return totalMarks;
+	}
 
-    public RDExamSubmission getSubmission() {
-        return submission;
-    }
+	public void setTotalMarks(BigDecimal totalMarks) {
+		this.totalMarks = totalMarks;
+	}
 
-    public void setSubmission(RDExamSubmission submission) {
-        this.submission = submission;
-        this.submissionId = submission.getSubmissionId();
-    }
+	public String getEvaluatedBy() {
+		return evaluatedBy;
+	}
 
-    public BigDecimal getTotalMarks() {
-        return totalMarks;
-    }
+	public void setEvaluatedBy(String evaluatedBy) {
+		this.evaluatedBy = evaluatedBy;
+	}
 
-    public void setTotalMarks(BigDecimal totalMarks) {
-        this.totalMarks = totalMarks;
-    }
-
-    public String getOverallFeedback() {
-        return overallFeedback;
-    }
-
-    public void setOverallFeedback(String overallFeedback) {
-        this.overallFeedback = overallFeedback;
-    }
-
-    public String getEvaluatedBy() {
-        return evaluatedBy;
-    }
-
-    public void setEvaluatedBy(String evaluatedBy) {
-        this.evaluatedBy = evaluatedBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+    /* getters & setters */
 }

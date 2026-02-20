@@ -26,10 +26,8 @@ import java.util.Map;
 public class RDExamSubmissionServiceImpl
         implements RDExamSubmissionService {
 
-	@Value("${rd.uploads.root}")
-	private String uploadsRoot;
-
-
+    @Value("${rd.uploads.root}")
+    private String uploadsRoot;
 
     @Autowired
     private RDExamSubmissionDAO submissionDAO;
@@ -37,6 +35,8 @@ public class RDExamSubmissionServiceImpl
     /* =====================================================
        CREATE DRAFT + SUBMIT SUBMISSION
        ===================================================== */
+    
+    
     @Override
     @Transactional
     public RDExamSubmission createDraftSubmission(
@@ -45,14 +45,31 @@ public class RDExamSubmissionServiceImpl
             MultipartFile[] files
     ) {
 
-        // 1️⃣ Check existing submission (LATEST)
+        // // System.out.println("➡️ [SERVICE] createDraftSubmission()");
+        // // System.out.println("   examPaperId=" + examPaperId + ", studentId=" + studentId);
+
         RDExamSubmission submission =
                 submissionDAO.findLatestByExamAndStudent(examPaperId, studentId);
+
+        /* =====================================================
+           🔒 HARD STATE GATE
+           ===================================================== */
+        if (submission != null &&
+            submission.getStatus() != RDExamSubmission.SubmissionStatus.DRAFT) {
+
+            // // System.out.println("🚫 BLOCKED re-upload");
+            // System.out.println("   submissionId=" + submission.getSubmissionId());
+            // System.out.println("   currentStatus=" + submission.getStatus());
+
+            // ❌ Do NOT overwrite files
+            return submission;
+        }
 
         boolean isNew = false;
 
         if (submission == null) {
-            // Create new submission
+            // System.out.println("🆕 Creating NEW submission");
+
             submission = new RDExamSubmission();
             submission.setExamPaperId(examPaperId);
             submission.setStudentId(studentId);
@@ -60,10 +77,15 @@ public class RDExamSubmissionServiceImpl
             submission.setStatus(RDExamSubmission.SubmissionStatus.DRAFT);
             submission.setSubmittedAt(LocalDateTime.now());
 
-            submissionDAO.save(submission); // submissionId generated
+            submissionDAO.save(submission);
             isNew = true;
+
+            // System.out.println("✅ New submissionId=" + submission.getSubmissionId());
         } else {
-            // Re-upload → clear previous files
+            // System.out.println("♻️ Updating existing DRAFT submissionId="  + submission.getSubmissionId());
+
+            submission.setSubmittedAt(LocalDateTime.now());
+
             Path oldDir = Paths.get(
                     uploadsRoot,
                     "exams",
@@ -82,11 +104,11 @@ public class RDExamSubmissionServiceImpl
             } catch (Exception e) {
                 throw new RuntimeException("Failed to clear old submission files", e);
             }
-
-            submission.setSubmittedAt(LocalDateTime.now());
         }
 
-        // 2️⃣ Create directory (same submissionId)
+        /* =====================================================
+           SAVE FILES
+           ===================================================== */
         Path submissionDir = Paths.get(
                 uploadsRoot,
                 "exams",
@@ -101,7 +123,6 @@ public class RDExamSubmissionServiceImpl
             throw new RuntimeException("Unable to create upload directory", e);
         }
 
-        // 3️⃣ Save new files
         List<String> savedFilePaths = new ArrayList<>();
 
         for (MultipartFile file : files) {
@@ -125,20 +146,22 @@ public class RDExamSubmissionServiceImpl
             }
         }
 
-        // 4️⃣ Finalize submission
+        /* =====================================================
+           FINALIZE — ONLY DRAFT → SUBMITTED
+           ===================================================== */
         submission.setFilePaths(savedFilePaths);
-        submission.setStatus(RDExamSubmission.SubmissionStatus.SUBMITTED);
 
-        if (isNew) {
-            submissionDAO.update(submission);
-        } else {
-            submissionDAO.update(submission);
+        if (submission.getStatus() == RDExamSubmission.SubmissionStatus.DRAFT) {
+            submission.setStatus(RDExamSubmission.SubmissionStatus.SUBMITTED);
         }
+
+        submissionDAO.update(submission);
+
+        // System.out.println("✅ Submission finalized");
+        // System.out.println("   status=" + submission.getStatus());
 
         return submission;
     }
-
-
 
     /* =====================================================
        GET LATEST SUBMISSION
@@ -149,8 +172,17 @@ public class RDExamSubmissionServiceImpl
             Integer examPaperId,
             Integer studentId
     ) {
-        return submissionDAO
-                .findLatestByExamAndStudent(examPaperId, studentId);
+
+        // System.out.println("➡️ [SERVICE] getLatestSubmission()");
+        // System.out.println("   examPaperId=" + examPaperId);
+        // System.out.println("   studentId=" + studentId);
+
+        RDExamSubmission sub =
+                submissionDAO.findLatestByExamAndStudent(examPaperId, studentId);
+
+        // System.out.println("   result=" + (sub == null ? "NULL" : ("id=" + sub.getSubmissionId() + ", status=" + sub.getStatus())));
+
+        return sub;
     }
 
     /* =====================================================
@@ -159,58 +191,95 @@ public class RDExamSubmissionServiceImpl
     @Override
     @Transactional(readOnly = true)
     public RDExamSubmission getSubmissionById(Integer submissionId) {
-        return submissionDAO.findById(submissionId);
+
+        // System.out.println("➡️ [SERVICE] getSubmissionById(), submissionId=" + submissionId);
+
+        RDExamSubmission sub = submissionDAO.findById(submissionId);
+
+        // System.out.println("   found=" + (sub != null));
+        return sub;
     }
 
     /* =====================================================
-       MAP: examPaperId → latest submission (SESSION VIEW)
+       SESSION VIEW MAP
        ===================================================== */
     @Override
     @Transactional(readOnly = true)
     public Map<Integer, RDExamSubmission>
     getStudentSubmissionsForSession(Integer studentId, Integer sessionId) {
 
+        // System.out.println("➡️ [SERVICE] getStudentSubmissionsForSession()");
+        // System.out.println("   studentId=" + studentId);
+        // System.out.println("   sessionId=" + sessionId);
+
         List<RDExamSubmission> submissions =
                 submissionDAO.findByStudentAndSession(studentId, sessionId);
 
+        // System.out.println("   submissions fetched=" + submissions.size());
+
         Map<Integer, RDExamSubmission> submissionMap = new HashMap<>();
 
-        // Keep latest submission per exam paper
         for (RDExamSubmission submission : submissions) {
-            Integer examPaperId = submission.getExamPaperId();
-            if (!submissionMap.containsKey(examPaperId)) {
-                submissionMap.put(examPaperId, submission);
-            }
+            Integer examPaperId =
+                    submission.getExamPaper().getExamPaperId();
+
+            // System.out.println("   mapping examPaperId=" + examPaperId +  " → submissionId=" + submission.getSubmissionId());
+
+            submissionMap.putIfAbsent(examPaperId, submission);
         }
 
+        // // System.out.println("   final map size=" + submissionMap.size());
         return submissionMap;
     }
 
-	@Override
+    /* =====================================================
+       GET BY ID WITH FILES
+       ===================================================== */
+    @Override
     @Transactional(readOnly = true)
     public RDExamSubmission getByIdWithFiles(Integer submissionId) {
-        return submissionDAO.findByIdWithFiles(submissionId);
+
+        // // System.out.println("➡️ [SERVICE] getByIdWithFiles(), submissionId=" + submissionId);
+
+        RDExamSubmission sub = submissionDAO.findByIdWithFiles(submissionId);
+
+        if (sub != null) {
+            // System.out.println("   status=" + sub.getStatus());
+            // System.out.println("   files=" + (sub.getFilePaths() == null ? 0 : sub.getFilePaths().size()));
+        } else {
+            // System.out.println("   submission NOT FOUND");
+        }
+
+        return sub;
     }
 
-
-
-	@Override
+    /* =====================================================
+       FORCE MARK EVALUATING
+       ===================================================== */
+    @Override
     public void markEvaluating(Integer submissionId) {
+
+        // System.out.println("➡️ [SERVICE] markEvaluating(), submissionId=" + submissionId);
 
         RDExamSubmission submission =
                 submissionDAO.findById(submissionId);
 
         if (submission == null) {
+            // System.out.println("🔥 Submission not found");
             throw new IllegalArgumentException(
                 "Submission not found: " + submissionId
             );
         }
+
+        // System.out.println("   currentStatus=" + submission.getStatus());
 
         submission.setStatus(
             RDExamSubmission.SubmissionStatus.EVALUATING
         );
 
         submissionDAO.update(submission);
+
+        // System.out.println("   status updated to EVALUATING");
     }
 
     /* =====================================================
@@ -219,19 +288,50 @@ public class RDExamSubmissionServiceImpl
     @Override
     public void markEvaluated(Integer submissionId) {
 
+        // System.out.println("➡️ [SERVICE] markEvaluated(), submissionId=" + submissionId);
+
         RDExamSubmission submission =
                 submissionDAO.findById(submissionId);
 
         if (submission == null) {
+            // System.out.println("🔥 Submission not found");
             throw new IllegalArgumentException(
                 "Submission not found: " + submissionId
             );
         }
+
+        // System.out.println("   currentStatus=" + submission.getStatus());
 
         submission.setStatus(
             RDExamSubmission.SubmissionStatus.AI_EVALUATED
         );
 
         submissionDAO.update(submission);
+
+        // System.out.println("   status updated to AI_EVALUATED");
     }
+
+    /* =====================================================
+       ATOMIC STATUS TRANSITION
+       ===================================================== */
+    @Override
+    public boolean markEvaluatingIfAllowed(Integer submissionId) {
+
+        // System.out.println("➡️ [SERVICE] markEvaluatingIfAllowed()");
+        // System.out.println("   submissionId=" + submissionId);
+
+        int updated =
+                submissionDAO.markEvaluatingIfSubmitted(submissionId);
+
+        // System.out.println("   rowsUpdated=" + updated);
+
+        return updated == 1;
+    }
+
+	@Override
+	public RDExamSubmission findLatestByStudentAndPaper(Integer studentId, Integer paperId) {
+		// TODO Auto-generated method stub
+		return submissionDAO.findLatestByStudentAndPaper(studentId,paperId);
+	}
+
 }

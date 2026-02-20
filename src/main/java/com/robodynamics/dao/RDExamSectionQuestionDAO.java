@@ -17,4 +17,6 @@ public interface RDExamSectionQuestionDAO {
     void delete(Integer id);
 
 	void saveOrUpdate(RDExamSectionQuestion sq);
+
+	void flush();
 }

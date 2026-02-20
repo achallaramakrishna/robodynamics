@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
 
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
@@ -15,6 +15,7 @@
 </head>
 
 <body class="bg-light">
+
 <div class="container mt-4">
 
     <!-- Back -->
@@ -22,73 +23,92 @@
         ← Back
     </a>
 
-    <!-- Title -->
-    <div class="d-flex justify-content-between align-items-center mb-2">
-        <h4 class="fw-bold mb-0">Exam Submission</h4>
+    <!-- ================= HEADER ================= -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body d-flex justify-content-between align-items-center">
 
-        <span class="badge bg-info">
-            Status: <c:out value="${submission.status}" />
-        </span>
+            <h4 class="fw-bold mb-0">Exam Submission</h4>
+
+            <span class="badge
+                <c:choose>
+  			        <c:when test="${submission.status.name() eq 'DRAFT'}">bg-secondary</c:when>
+				    <c:when test="${submission.status.name() eq 'EVALUATING'}">bg-info</c:when>
+				    <c:when test="${submission.status.name() eq 'AI_EVALUATED'}">bg-success</c:when>
+				    <c:when test="${submission.status.name() eq 'NEEDS_REVIEW'}">bg-warning text-dark</c:when>
+                    <c:otherwise>bg-secondary</c:otherwise>
+                </c:choose> fs-6">
+                ${submission.status}
+            </span>
+
+        </div>
     </div>
 
-    <!-- Success message -->
-    <c:if test="${submission.status eq 'SUBMITTED'}">
-        <div class="alert alert-success">
-            ✅ Your answer sheets have been uploaded successfully.
+    <!-- ================= UPLOADED FILES ================= -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header fw-semibold">
+            Uploaded Answer Files
         </div>
+
+        <ul class="list-group list-group-flush">
+            <c:forEach var="file" items="${fileNames}">
+                <li class="list-group-item">
+                    📄 ${file}
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+    <!-- ================= EVALUATING STATE ================= -->
+    <c:if test="${submission.status.name() eq 'EVALUATING'}">
+
+        <div class="card shadow-sm text-center">
+            <div class="card-body py-5">
+
+                <div class="spinner-border text-primary mb-3"
+                     style="width:3rem;height:3rem;"></div>
+
+                <h5 class="fw-bold mb-2">
+                    Evaluating your answers…
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Our AI is carefully reviewing your responses.<br>
+                    This may take a minute. Please do not refresh manually.
+                </p>
+
+            </div>
+        </div>
+
+        <!-- Auto refresh every 5 seconds -->
+        <script>
+            setTimeout(() => location.reload(), 5000);
+        </script>
+
     </c:if>
 
-	<!-- Uploaded files -->
-	<div class="card shadow-sm">
-	    <div class="card-header fw-semibold">
-	        Uploaded Files
-	    </div>
-	
-	    <c:choose>
-	        <c:when test="${not empty fileNames}">
-	            <ul class="list-group list-group-flush">
-	
-	                <c:forEach var="fileName" items="${fileNames}" varStatus="status">
-	
-	                    <li class="list-group-item d-flex justify-content-between align-items-center">
-	                        <span class="text-truncate" style="max-width: 70%;">
-	                            <c:out value="${fileName}" />
-	                        </span>
-	
-	                        <c:url var="viewUrl" value="/files/view">
-	                            <c:param name="index" value="${status.index}" />
-	                            <c:param name="submissionId" value="${submission.submissionId}" />
-	                        </c:url>
-	
-							<a href="${viewUrl}"
-							   class="btn btn-sm btn-outline-primary"
-							   target="_blank" rel="noopener">
-							    View
-							</a>
+    <!-- ================= AUTO REDIRECT WHEN READY ================= -->
+    <c:if test="${submission.status.name() eq 'AI_EVALUATED'}">
+	    <script>
+	        window.location.href =
+	            "${ctx}/student/exam/submission/${submission.submissionId}/result";
+	    </script>
+	</c:if>
 
-	                    </li>
-	
-	                </c:forEach>
-	
-	            </ul>
-	        </c:when>
-	
-	        <c:otherwise>
-	            <div class="alert alert-warning m-3 mb-0">
-	                No files found for this submission.
-	            </div>
-	        </c:otherwise>
-	    </c:choose>
-	</div>
 
-    <!-- Evaluation result -->
-    <c:if test="${submission.status eq 'EVALUATED' || submission.status eq 'PUBLISHED'}">
-        <div class="alert alert-success mt-4">
-            <strong>Score:</strong>
-            <c:out value="${submission.totalMarks}" /> / <c:out value="${submission.maxMarks}" />
+    <!-- ================= NEEDS REVIEW ================= -->
+<c:if test="${submission.status.name() eq 'NEEDS_REVIEW'}">
+        <div class="alert alert-warning mt-4">
+            <strong>Notice:</strong>
+            This submission requires teacher review.
         </div>
+
+        <a href="${ctx}/student/exam/submission/${submission.submissionId}/result"
+           class="btn btn-warning">
+            View Current Evaluation
+        </a>
     </c:if>
 
 </div>
+
 </body>
 </html>

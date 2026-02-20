@@ -1,60 +1,102 @@
 package com.robodynamics.dto;
 
+import java.util.List;
+
 public class ExamResultQuestionView {
-
+	
     private Integer questionId;
-    private String questionText;
 
-    private Double marksAwarded;
-    private Integer maxMarks;
-
-    private Double confidence;
-    private String feedback;
-
-    /* UI helpers */
-    private boolean needsReview;
-
-    // getters & setters
 
     public Integer getQuestionId() {
-        return questionId;
+		return questionId;
+	}
+
+	public void setQuestionId(Integer questionId) {
+		this.questionId = questionId;
+	}
+
+	/* ================= SECTION ================= */
+    private String sectionTitle;
+
+    /* ================= QUESTION ================= */
+    private String questionText;
+    private int maxMarks;
+
+    /* ================= ANSWERS ================= */
+    private String correctAnswer;     // from rd_exam_answer_keys
+    private String studentAnswer;     // from submission answers
+
+    /* ================= EVALUATION ================= */
+    private double marksAwarded;
+    private String feedback;
+    
+    private String questionType;          // NEW
+    private List<McqOptionView> options;       // NEW
+
+    /* ================= GETTERS / SETTERS ================= */
+
+    public String getSectionTitle() {
+        return sectionTitle;
     }
 
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
+    public void setSectionTitle(String sectionTitle) {
+        this.sectionTitle = sectionTitle;
     }
 
     public String getQuestionText() {
         return questionText;
     }
 
-    public void setQuestionText(String questionText) {
+    public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+
+	public List<McqOptionView> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<McqOptionView> options) {
+		this.options = options;
+	}
+
+	public void setQuestionText(String questionText) {
         this.questionText = questionText;
     }
 
-    public Double getMarksAwarded() {
-        return marksAwarded;
-    }
-
-    public void setMarksAwarded(Double marksAwarded) {
-        this.marksAwarded = marksAwarded;
-    }
-
-    public Integer getMaxMarks() {
+    public int getMaxMarks() {
         return maxMarks;
     }
 
-    public void setMaxMarks(Integer maxMarks) {
+    public void setMaxMarks(int maxMarks) {
         this.maxMarks = maxMarks;
     }
 
-    public Double getConfidence() {
-        return confidence;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setConfidence(Double confidence) {
-        this.confidence = confidence;
-        this.needsReview = confidence != null && confidence < 0.6;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getStudentAnswer() {
+        return studentAnswer;
+    }
+
+    public void setStudentAnswer(String studentAnswer) {
+        this.studentAnswer = studentAnswer;
+    }
+
+    public double getMarksAwarded() {
+        return marksAwarded;
+    }
+
+    public void setMarksAwarded(double marksAwarded) {
+        this.marksAwarded = marksAwarded;
     }
 
     public String getFeedback() {
@@ -63,9 +105,5 @@ public class ExamResultQuestionView {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
-    }
-
-    public boolean isNeedsReview() {
-        return needsReview;
     }
 }

@@ -1,3 +1,29 @@
 /target/
 /.apt_generated/
 /.apt_generated_tests/
+# ====== Maven ======
+*.log
+
+# ====== IDE ======
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# ====== OS Files ======
+.DS_Store
+Thumbs.db
+
+# ====== Environment / Secrets ======
+.env
+app-config.properties
+application-local.properties
+
+# ====== Compiled Files ======
+*.class
+
+# ====== Node (if frontend exists) ======
+node_modules/
+dist/
+

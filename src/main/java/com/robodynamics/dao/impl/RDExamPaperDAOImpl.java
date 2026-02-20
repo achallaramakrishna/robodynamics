@@ -12,13 +12,33 @@ import org.springframework.stereotype.Repository;
 import com.robodynamics.dao.RDExamPaperDAO;
 import com.robodynamics.model.RDExamAnswerKey;
 import com.robodynamics.model.RDExamPaper;
+import com.robodynamics.model.RDExamSection;
 import com.robodynamics.model.RDExamSectionQuestion;
+import com.robodynamics.model.RDQuizQuestion;
 
 @Repository
 public class RDExamPaperDAOImpl implements RDExamPaperDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
+    
+    @Override
+    public boolean hasSubmissions(Integer examPaperId) {
+
+        String hql = """
+            select count(s.submissionId)
+            from RDExamSubmission s
+            where s.examPaper.examPaperId = :paperId
+        """;
+
+        Long count = sessionFactory.getCurrentSession()
+                .createQuery(hql, Long.class)
+                .setParameter("paperId", examPaperId)
+                .uniqueResult();
+
+        return count != null && count > 0;
+    }
+
 
     @Override
     public void save(RDExamPaper paper) {
@@ -47,20 +67,47 @@ public class RDExamPaperDAOImpl implements RDExamPaperDAO {
     public RDExamPaper getExamPaperWithDetails(Integer examPaperId) {
 
         String hql =
-            "select distinct ep " +
-            "from RDExamPaper ep " +
-            "left join fetch ep.sections s " +
-            "left join fetch s.questions sq " +
-            "left join fetch sq.question q " +
-            "where ep.examPaperId = :id " +
-            "order by s.sectionOrder, sq.displayOrder";
+            "select distinct ep\r\n"
+            + "from RDExamPaper ep\r\n"
+            + "left join fetch ep.sections s\r\n"
+            + "left join fetch s.questions sq\r\n"
+            + "left join fetch sq.question q\r\n"
+            + "left join fetch q.options o\r\n"
+            + "where ep.examPaperId = :id\r\n"
+            + "order by s.sectionOrder, sq.displayOrder";
 
-        return sessionFactory
+        RDExamPaper paper =  sessionFactory
                 .getCurrentSession()
                 .createQuery(hql, RDExamPaper.class)
                 .setParameter("id", examPaperId)
                 .uniqueResult();
+        
+        // 🔹 Step 2: Explicitly initialize MCQ options
+        initializeQuestionOptions(paper);
+
+        return paper;
     }
+    
+    private void initializeQuestionOptions(RDExamPaper paper) {
+
+        if (paper == null || paper.getSections() == null) return;
+
+        for (RDExamSection section : paper.getSections()) {
+            if (section.getQuestions() == null) continue;
+
+            for (RDExamSectionQuestion sq : section.getQuestions()) {
+                RDQuizQuestion q = sq.getQuestion();
+
+                if (q != null
+                    && "multiple_choice".equalsIgnoreCase(q.getQuestionType())) {
+
+                    // Force lazy collection initialization safely
+                    q.getOptions().size();
+                }
+            }
+        }
+    }
+
 
     @Override
     public void delete(Integer examPaperId) {
@@ -129,9 +176,9 @@ public class RDExamPaperDAOImpl implements RDExamPaperDAO {
 	        "select distinct p " +
 	        "from RDExamPaper p " +
 	        "join p.courseSessionDetail d " +
-	        "join d.session s " +
-	        "where s.sessionId = :sessionId " +
-	        "order by p.createdOn desc";
+	        "join d.courseSession s " +
+	        "where s.courseSessionId = :sessionId " +
+	        "order by p.createdAt desc";
 
 	    return sessionFactory
 	            .getCurrentSession()

@@ -17,8 +17,8 @@ public class RDBadge {
 	@Column(name = "badge_description")
 	private String description;
 
-	@Column(name = "badge_image_url")
-	private String imageUrl; // Optional image URL for badge representation
+	@Column(name = "points_threshold")
+	private int pointsThreshold;
 
 	// Getters and Setters
 	public int getId() {
@@ -45,11 +45,11 @@ public class RDBadge {
 		this.description = description;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public int getPointsThreshold() {
+		return pointsThreshold;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setPointsThreshold(int pointsThreshold) {
+		this.pointsThreshold = pointsThreshold;
 	}
 }

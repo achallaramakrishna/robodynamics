@@ -31,6 +31,13 @@ public class AIEvaluationBatchResult {
         private Double marksAwarded;
         private Double confidence;
         private String feedback;
+        
+     // 🔥 ADD THESE
+        private String errorType;
+        private Boolean requiresReview;
+
+        
+        
 
         public Integer getQuestionId() {
             return questionId;
@@ -63,5 +70,23 @@ public class AIEvaluationBatchResult {
         public void setFeedback(String feedback) {
             this.feedback = feedback;
         }
+
+		public String getErrorType() {
+			return errorType;
+		}
+
+		public void setErrorType(String errorType) {
+			this.errorType = errorType;
+		}
+
+		public Boolean getRequiresReview() {
+			return requiresReview;
+		}
+
+		public void setRequiresReview(Boolean requiresReview) {
+			this.requiresReview = requiresReview;
+		}
+        
+        
     }
 }

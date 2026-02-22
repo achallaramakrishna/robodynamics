@@ -1,6 +1,7 @@
 package com.robodynamics.dao.impl;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -153,16 +154,17 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	@Override
 	public Integer countByType(int sessionId, String type) {
 		  Session session = factory.getCurrentSession();
+		  String normalizedType = type == null ? "" : type.trim().toLowerCase(Locale.ROOT);
 
-	        String hql =
-	            "select count(d.courseSessionDetailId) " +
-	            "from RDCourseSessionDetail d " +
-	            "where d.courseSession.sessionId = :sessionId " +
-	            "and d.type = :type";
+        String hql =
+            "select count(d.courseSessionDetailId) " +
+            "from RDCourseSessionDetail d " +
+            "where d.courseSession.courseSessionId = :sessionId " +
+            "and lower(trim(d.type)) = :type";
 
 	        Long count = (Long) session.createQuery(hql)
 	                .setParameter("sessionId", sessionId)
-	                .setParameter("type", type)
+	                .setParameter("type", normalizedType)
 	                .uniqueResult();
 
 	        return count != null ? count.intValue() : 0;
@@ -173,15 +175,16 @@ public class RDCourseSessionDetailDaoImpl implements RDCourseSessionDetailDao {
 	public List<RDCourseSessionDetail> getBySessionAndType(int sessionId, String type) {
 
 	    Session session = factory.getCurrentSession();
+	    String normalizedType = type == null ? "" : type.trim().toLowerCase(Locale.ROOT);
 
 	    Query<RDCourseSessionDetail> query = session.createQuery(
 	    		 "FROM RDCourseSessionDetail d " +
 	    			        "WHERE d.courseSession.courseSessionId = :sid " +
-	    			        "AND d.type = :type",
+	    			        "AND lower(trim(d.type)) = :type",
 	    			        RDCourseSessionDetail.class
 	    );
 	    query.setParameter("sid", sessionId);
-	    query.setParameter("type", type);
+	    query.setParameter("type", normalizedType);
 	    return query.getResultList();
 	}
 

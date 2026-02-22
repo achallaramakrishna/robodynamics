@@ -1,6 +1,8 @@
 package com.robodynamics.controller;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,15 @@ public class RDFlashCardController {
 
     @Autowired
     private RDCourseSessionDetailService courseSessionDetailService;
+
+    private static final class FlashcardWorkspaceSelection {
+        private Integer selectedDetailId;
+        private Integer selectedSetId;
+        private String selectedTopicTitle;
+        private int selectedTopicSetCount;
+        private int selectedTopicCardCount;
+        private boolean selectedTopicJsonBacked;
+    }
     
     @GetMapping("/manageMedia")   // GET /robodynamics/quizquestions/manageMedia
     public String manageMedia(Model model) {
@@ -80,59 +91,291 @@ public class RDFlashCardController {
 
 
     @GetMapping("/start/{courseSessionDetailId}")
-    public String startFlashcardSessionByCourseSessionDetailId(@PathVariable("courseSessionDetailId") int courseSessionDetailId, Model model) {
-        // Retrieve the course session detail based on the ID
+    public String startFlashcardSessionByCourseSessionDetailId(
+            @PathVariable("courseSessionDetailId") int courseSessionDetailId,
+            @RequestParam(value = "sessionId", required = false) Integer sessionId,
+            @RequestParam(value = "enrollmentId", required = false) Integer enrollmentId,
+            @RequestParam(value = "courseId", required = false) Integer courseId,
+            Model model) {
         RDCourseSessionDetail courseSessionDetail = courseSessionDetailService.getRDCourseSessionDetail(courseSessionDetailId);
-        
+
+        if (courseSessionDetail != null && courseSessionDetail.getCourseSession() != null) {
+            if (sessionId == null) {
+                sessionId = courseSessionDetail.getCourseSession().getCourseSessionId();
+            }
+            if (courseId == null
+                    && courseSessionDetail.getCourseSession().getCourse() != null) {
+                courseId = courseSessionDetail.getCourseSession().getCourse().getCourseId();
+            }
+        }
+
+        FlashcardWorkspaceSelection workspace =
+                populateWorkspaceModel(model, sessionId, courseSessionDetailId, null);
+
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("enrollmentId", enrollmentId);
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("courseSessionDetailId", workspace.selectedDetailId);
+
         if (courseSessionDetail == null || !"flashcard".equalsIgnoreCase(courseSessionDetail.getType())) {
-            model.addAttribute("error", "No flashcard session available for this course session detail.");
+            model.addAttribute("error", "No flashcard topic available for the selected session detail.");
+            if (workspace.selectedSetId != null) {
+                return buildViewRedirect(
+                        workspace.selectedSetId,
+                        0,
+                        sessionId,
+                        enrollmentId,
+                        courseId,
+                        workspace.selectedDetailId);
+            }
             return "flashcards/flashcard-viewer";
         }
 
-        // Retrieve the flashcard set associated with the course session detail
-        List<RDFlashcardSetDTO> flashcardSets = rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(courseSessionDetailId);
-        if (flashcardSets == null || flashcardSets.isEmpty()) {
-            model.addAttribute("error", "No flashcard sets associated with this course session detail.");
+        if (workspace.selectedSetId == null) {
+            if (workspace.selectedTopicJsonBacked && workspace.selectedDetailId != null) {
+                model.addAttribute("info", "This topic is available as guided content. Open topic content to continue.");
+                model.addAttribute("topicContentDetailId", workspace.selectedDetailId);
+            } else {
+                model.addAttribute("error", "No flashcard sets associated with this topic.");
+            }
+            model.addAttribute("currentFlashcard", null);
+            model.addAttribute("currentFlashcardIndex", 0);
+            model.addAttribute("totalFlashcards", 0);
             return "flashcards/flashcard-viewer";
         }
 
-        // Display the first flashcard from the first flashcard set by default
-        List<RDFlashCard> flashcards = rdFlashCardService.getFlashCardsBySetId(flashcardSets.get(0).getFlashcardSetId());
-        
-        if (flashcards.isEmpty()) {
-            model.addAttribute("error", "No flashcards available in this set.");
+        return buildViewRedirect(
+                workspace.selectedSetId,
+                0,
+                sessionId,
+                enrollmentId,
+                courseId,
+                workspace.selectedDetailId);
+    }
+
+    @GetMapping("/view")
+    public String viewFlashcard(
+            @RequestParam(value = "index", required = false, defaultValue = "0") int index,
+            @RequestParam("flashcardSetId") int flashcardSetId,
+            @RequestParam(value = "sessionId", required = false) Integer sessionId,
+            @RequestParam(value = "enrollmentId", required = false) Integer enrollmentId,
+            @RequestParam(value = "courseId", required = false) Integer courseId,
+            @RequestParam(value = "courseSessionDetailId", required = false) Integer courseSessionDetailId,
+            Model model) {
+
+        RDFlashCardSet selectedSet = rdFlashCardSetService.getRDFlashCardSet(flashcardSetId);
+        if (selectedSet != null && selectedSet.getCourseSessionDetail() != null) {
+            courseSessionDetailId = selectedSet.getCourseSessionDetail().getCourseSessionDetailId();
+
+            if (selectedSet.getCourseSessionDetail().getCourseSession() != null) {
+                if (sessionId == null) {
+                    sessionId = selectedSet.getCourseSessionDetail().getCourseSession().getCourseSessionId();
+                }
+                if (courseId == null
+                        && selectedSet.getCourseSessionDetail().getCourseSession().getCourse() != null) {
+                    courseId = selectedSet.getCourseSessionDetail().getCourseSession().getCourse().getCourseId();
+                }
+            }
+        }
+
+        FlashcardWorkspaceSelection workspace =
+                populateWorkspaceModel(model, sessionId, courseSessionDetailId, flashcardSetId);
+
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("enrollmentId", enrollmentId);
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("courseSessionDetailId", workspace.selectedDetailId);
+
+        Integer effectiveSetId = workspace.selectedSetId;
+        if (effectiveSetId == null) {
+            if (workspace.selectedTopicJsonBacked && workspace.selectedDetailId != null) {
+                model.addAttribute("info", "This topic is available as guided content. Open topic content to continue.");
+                model.addAttribute("topicContentDetailId", workspace.selectedDetailId);
+            } else {
+                model.addAttribute("error", "No flashcards available for the selected topic.");
+            }
+            model.addAttribute("currentFlashcard", null);
+            model.addAttribute("currentFlashcardIndex", 0);
+            model.addAttribute("totalFlashcards", 0);
             return "flashcards/flashcard-viewer";
         }
 
-        model.addAttribute("currentFlashcard", flashcards.get(0));
-        model.addAttribute("currentFlashcardIndex", 0);
-        model.addAttribute("totalFlashcards", flashcards.size());
-        model.addAttribute("flashcardSets", flashcardSets); // Add flashcard sets to select from
-        model.addAttribute("flashcardSetId", flashcardSets.get(0).getFlashcardSetId());
+        List<RDFlashCard> flashcards = rdFlashCardService.getFlashCardsBySetId(effectiveSetId);
+        if (flashcards == null || flashcards.isEmpty()) {
+            model.addAttribute("error", "No flashcards available in the selected set.");
+            model.addAttribute("currentFlashcard", null);
+            model.addAttribute("currentFlashcardIndex", 0);
+            model.addAttribute("totalFlashcards", 0);
+            model.addAttribute("flashcardSetId", effectiveSetId);
+            return "flashcards/flashcard-viewer";
+        }
+
+        int totalFlashcards = flashcards.size();
+        int normalizedIndex = index;
+        if (normalizedIndex < 0) {
+            normalizedIndex = 0;
+        }
+        if (normalizedIndex >= totalFlashcards) {
+            normalizedIndex = totalFlashcards - 1;
+        }
+
+        RDFlashCard currentFlashcard = flashcards.get(normalizedIndex);
+        model.addAttribute("currentFlashcard", currentFlashcard);
+        model.addAttribute("currentFlashcardIndex", normalizedIndex);
+        model.addAttribute("totalFlashcards", totalFlashcards);
+        model.addAttribute("flashcardSetId", effectiveSetId);
+        model.addAttribute("selectedCourseSessionDetailId", workspace.selectedDetailId);
 
         return "flashcards/flashcard-viewer";
     }
 
-    @GetMapping("/view")
-    public String viewFlashcard(@RequestParam(value = "index", required = false, defaultValue = "0") int index, 
-                                @RequestParam("flashcardSetId") int flashcardSetId, 
-                                Model model) {
-        List<RDFlashCard> flashcards = rdFlashCardService.getFlashCardsBySetId(flashcardSetId);
-        int totalFlashcards = flashcards.size();
-        
-        if (index < 0 || index >= totalFlashcards) {
-            model.addAttribute("error", "Invalid flashcard index.");
-            model.addAttribute("currentFlashcard", null);
-            model.addAttribute("totalFlashcards", totalFlashcards);
-            return "flashcards/flashcard-viewer";
+    private FlashcardWorkspaceSelection populateWorkspaceModel(
+            Model model,
+            Integer sessionId,
+            Integer preferredDetailId,
+            Integer preferredSetId) {
+
+        List<RDCourseSessionDetail> topicDetails =
+                (sessionId == null)
+                        ? Collections.emptyList()
+                        : courseSessionDetailService.getBySessionAndType(sessionId, "flashcard");
+
+        if (topicDetails == null) {
+            topicDetails = Collections.emptyList();
         }
 
-        RDFlashCard currentFlashcard = flashcards.get(index);
-        model.addAttribute("currentFlashcard", currentFlashcard);
-        model.addAttribute("currentFlashcardIndex", index);
-        model.addAttribute("totalFlashcards", totalFlashcards);
-        model.addAttribute("flashcardSetId", flashcardSetId);
-        return "flashcards/flashcard-viewer";
+        FlashcardWorkspaceSelection selection = new FlashcardWorkspaceSelection();
+        selection.selectedDetailId = preferredDetailId;
+
+        if (selection.selectedDetailId == null && !topicDetails.isEmpty()) {
+            selection.selectedDetailId = topicDetails.get(0).getCourseSessionDetailId();
+        }
+
+        List<Map<String, Object>> topicSummaries = new ArrayList<>();
+        Map<Integer, List<RDFlashcardSetDTO>> setsByDetailId = new HashMap<>();
+        Map<Integer, Integer> cardsByDetailId = new HashMap<>();
+        Map<Integer, String> titleByDetailId = new HashMap<>();
+        Map<Integer, Boolean> jsonBackedByDetailId = new HashMap<>();
+
+        int totalCardsInSession = 0;
+        int totalSetsInSession = 0;
+
+        for (int i = 0; i < topicDetails.size(); i++) {
+            RDCourseSessionDetail detail = topicDetails.get(i);
+            int detailId = detail.getCourseSessionDetailId();
+            String title = (detail.getTopic() == null || detail.getTopic().trim().isEmpty())
+                    ? "Topic " + (i + 1)
+                    : detail.getTopic().trim();
+
+            List<RDFlashcardSetDTO> sets =
+                    rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(detailId);
+            if (sets == null) {
+                sets = Collections.emptyList();
+            }
+
+            int cardCount = 0;
+            for (RDFlashcardSetDTO set : sets) {
+                List<RDFlashCard> cards =
+                        rdFlashCardService.getFlashCardsBySetId(set.getFlashcardSetId());
+                cardCount += cards == null ? 0 : cards.size();
+            }
+
+            boolean jsonBacked = detail.getFile() != null && !detail.getFile().trim().isEmpty();
+            if (cardCount == 0 && jsonBacked) {
+                cardCount = 1;
+            }
+
+            totalCardsInSession += cardCount;
+            totalSetsInSession += sets.size();
+
+            Integer firstSetId = sets.isEmpty() ? null : sets.get(0).getFlashcardSetId();
+
+            Map<String, Object> summary = new HashMap<>();
+            summary.put("detailId", detailId);
+            summary.put("topic", title);
+            summary.put("setCount", sets.size());
+            summary.put("cardCount", cardCount);
+            summary.put("firstSetId", firstSetId);
+            summary.put("jsonBacked", jsonBacked);
+            topicSummaries.add(summary);
+
+            setsByDetailId.put(detailId, sets);
+            cardsByDetailId.put(detailId, cardCount);
+            titleByDetailId.put(detailId, title);
+            jsonBackedByDetailId.put(detailId, jsonBacked);
+        }
+
+        if (selection.selectedDetailId != null
+                && !setsByDetailId.containsKey(selection.selectedDetailId)
+                && !topicSummaries.isEmpty()) {
+            selection.selectedDetailId = (Integer) topicSummaries.get(0).get("detailId");
+        }
+
+        List<RDFlashcardSetDTO> selectedSets = Collections.emptyList();
+        if (selection.selectedDetailId != null) {
+            selectedSets = setsByDetailId.getOrDefault(selection.selectedDetailId, Collections.emptyList());
+            selection.selectedTopicTitle = titleByDetailId.get(selection.selectedDetailId);
+            selection.selectedTopicCardCount = cardsByDetailId.getOrDefault(selection.selectedDetailId, 0);
+            selection.selectedTopicSetCount = selectedSets.size();
+            selection.selectedTopicJsonBacked = jsonBackedByDetailId.getOrDefault(selection.selectedDetailId, false);
+        }
+
+        if (!selectedSets.isEmpty()) {
+            if (preferredSetId != null) {
+                boolean preferredSetFound = selectedSets.stream()
+                        .anyMatch(s -> s.getFlashcardSetId() == preferredSetId);
+                if (preferredSetFound) {
+                    selection.selectedSetId = preferredSetId;
+                }
+            }
+            if (selection.selectedSetId == null) {
+                selection.selectedSetId = selectedSets.get(0).getFlashcardSetId();
+            }
+        }
+
+        model.addAttribute("flashcardTopics", topicSummaries);
+        model.addAttribute("totalFlashcardTopics", topicSummaries.size());
+        model.addAttribute("totalFlashcardsInSession", totalCardsInSession);
+        model.addAttribute("totalFlashcardSetsInSession", totalSetsInSession);
+        model.addAttribute("selectedCourseSessionDetailId", selection.selectedDetailId);
+        model.addAttribute("selectedTopicTitle", selection.selectedTopicTitle);
+        model.addAttribute("selectedTopicSetCount", selection.selectedTopicSetCount);
+        model.addAttribute("selectedTopicCardCount", selection.selectedTopicCardCount);
+        model.addAttribute("selectedTopicJsonBacked", selection.selectedTopicJsonBacked);
+        model.addAttribute("flashcardSets", selectedSets);
+        if (selection.selectedSetId != null) {
+            model.addAttribute("flashcardSetId", selection.selectedSetId);
+        }
+
+        return selection;
+    }
+
+    private String buildViewRedirect(
+            int flashcardSetId,
+            int index,
+            Integer sessionId,
+            Integer enrollmentId,
+            Integer courseId,
+            Integer courseSessionDetailId) {
+
+        StringBuilder url = new StringBuilder("redirect:/flashcards/view?index=")
+                .append(Math.max(index, 0))
+                .append("&flashcardSetId=")
+                .append(flashcardSetId);
+
+        if (sessionId != null) {
+            url.append("&sessionId=").append(sessionId);
+        }
+        if (enrollmentId != null) {
+            url.append("&enrollmentId=").append(enrollmentId);
+        }
+        if (courseId != null) {
+            url.append("&courseId=").append(courseId);
+        }
+        if (courseSessionDetailId != null) {
+            url.append("&courseSessionDetailId=").append(courseSessionDetailId);
+        }
+        return url.toString();
     }
 
     @GetMapping("/list")

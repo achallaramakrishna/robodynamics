@@ -3,6 +3,7 @@ package com.robodynamics.service.impl;
 import com.robodynamics.model.RDExamSubmission;
 import com.robodynamics.service.RDExamAnswerExtractionService;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,7 @@ public class RDExamAnswerExtractionServiceImpl
     /* ================= PDF ================= */
 
     private String extractFromPdf(File pdfFile) throws Exception {
-        try (PDDocument document = PDDocument.load(pdfFile)) {
+        try (PDDocument document = Loader.loadPDF(pdfFile)) {
             PDFTextStripper stripper = new PDFTextStripper();
             stripper.setSortByPosition(true);
             return stripper.getText(document);

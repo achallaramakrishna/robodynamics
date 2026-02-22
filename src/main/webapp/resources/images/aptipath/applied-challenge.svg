@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="Applied challenge visual">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="20" fill="url(#g2)"/>
+  <g fill="#ffffff" opacity="0.95">
+    <text x="44" y="70" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Applied Problem Challenge</text>
+    <text x="44" y="106" font-family="Segoe UI, Arial, sans-serif" font-size="20">Real-world decisions: diagnose, prioritize, execute</text>
+    <rect x="44" y="142" width="870" height="120" rx="12" fill="#ffffff" opacity="0.14"/>
+    <text x="70" y="184" font-family="Segoe UI, Arial, sans-serif" font-size="24">Scenario: Mock-test score stagnates despite high study hours.</text>
+    <text x="70" y="218" font-family="Segoe UI, Arial, sans-serif" font-size="24">Best first step: error-pattern analysis and sprint redesign.</text>
+  </g>
+</svg>

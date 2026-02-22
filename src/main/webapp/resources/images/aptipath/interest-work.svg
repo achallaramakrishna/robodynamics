@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="Interest and work preference visual">
+  <defs>
+    <linearGradient id="g3" x1="0" x2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="20" fill="url(#g3)"/>
+  <g fill="#ffffff" opacity="0.95">
+    <text x="44" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Interest and Work Preference</text>
+    <text x="44" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="20">What energizes you? Build, discover, communicate, create.</text>
+    <rect x="44" y="146" width="420" height="108" rx="12" fill="#ffffff" opacity="0.14"/>
+    <text x="66" y="188" font-family="Segoe UI, Arial, sans-serif" font-size="24">Choose the project you will sustain for 12 weeks.</text>
+    <text x="66" y="220" font-family="Segoe UI, Arial, sans-serif" font-size="24">Consistency reveals authentic interest.</text>
+    <circle cx="760" cy="186" r="70" fill="#ffffff" opacity="0.14"/>
+    <circle cx="760" cy="186" r="44" fill="#ffffff" opacity="0.18"/>
+    <circle cx="760" cy="186" r="16" fill="#ffffff" opacity="0.25"/>
+  </g>
+</svg>

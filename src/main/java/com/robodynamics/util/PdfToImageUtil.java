@@ -1,6 +1,7 @@
 package com.robodynamics.util;
 
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
@@ -26,7 +27,7 @@ public class PdfToImageUtil {
             int dpi
     ) throws Exception {
 
-        try (PDDocument document = PDDocument.load(new File(pdfPath))) {
+        try (PDDocument document = Loader.loadPDF(new File(pdfPath))) {
 
             PDFRenderer renderer = new PDFRenderer(document);
 

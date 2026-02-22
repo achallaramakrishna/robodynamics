@@ -25,6 +25,7 @@ import com.robodynamics.service.RDQuizService;
 import com.robodynamics.service.RDStudentEnrollmentService;
 import com.robodynamics.service.RDStudentSessionProgressService;
 import com.robodynamics.service.RDUserBadgeService;
+import com.robodynamics.util.RDRoleRouteUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,6 +89,12 @@ public class RDStudentDashboardController {
 
 		// Logged-in student
 		RDUser rdUser = (RDUser) session.getAttribute("rdUser");
+		if (rdUser == null) {
+			return "redirect:/login";
+		}
+		if (rdUser.getProfile_id() != RDUser.profileType.ROBO_STUDENT.getValue()) {
+			return RDRoleRouteUtil.redirectHomeFor(rdUser);
+		}
 
 		// Course details
 		RDCourse course = courseService.getRDCourse(courseId);
@@ -128,6 +135,9 @@ public class RDStudentDashboardController {
 
 	    RDUser user = (RDUser) session.getAttribute("rdUser");
 	    if (user == null) return "redirect:/login";
+	    if (user.getProfile_id() != RDUser.profileType.ROBO_STUDENT.getValue()) {
+	        return RDRoleRouteUtil.redirectHomeFor(user);
+	    }
 
 	    // Load session
 	    RDCourseSession sessionEntity =
@@ -160,8 +170,13 @@ public class RDStudentDashboardController {
 	@GetMapping("/studentDashboard")
 	public ModelAndView studentDashboard(@ModelAttribute("rdUser") RDUser rdUser, Model m, HttpSession session) {
 
-		if (session.getAttribute("rdUser") != null) {
-			rdUser = (RDUser) session.getAttribute("rdUser");
+		Object sessionUser = session.getAttribute("rdUser");
+		if (!(sessionUser instanceof RDUser)) {
+			return new ModelAndView("redirect:/login?redirect=/studentDashboard");
+		}
+		rdUser = (RDUser) sessionUser;
+		if (rdUser.getProfile_id() != RDUser.profileType.ROBO_STUDENT.getValue()) {
+			return new ModelAndView(RDRoleRouteUtil.redirectHomeFor(rdUser));
 		}
 		System.out.println("Going to student dashboard + " + rdUser);
 
@@ -214,6 +229,9 @@ public class RDStudentDashboardController {
 
 	    RDUser user = (RDUser) session.getAttribute("rdUser");
 	    if (user == null) return "redirect:/login";
+	    if (user.getProfile_id() != RDUser.profileType.ROBO_STUDENT.getValue()) {
+	        return RDRoleRouteUtil.redirectHomeFor(user);
+	    }
 
 	    // -----------------------------------
 	    // 1️⃣ Load quiz + latest result

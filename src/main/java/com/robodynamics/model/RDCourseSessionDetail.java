@@ -64,7 +64,7 @@ public class RDCourseSessionDetail {
 	private int version;
 	
 	@Column(name = "session_detail_id")  // This is the user-defined field
-    private int sessionDetailId;
+    private Integer sessionDetailId;
 	
 	@Column(name = "has_animation", nullable = false)
 	private Boolean hasAnimation;
@@ -114,11 +114,11 @@ public class RDCourseSessionDetail {
     }
 
     
-	 public int getSessionDetailId() {
+	 public Integer getSessionDetailId() {
 		return sessionDetailId;
 	}
 
-	public void setSessionDetailId(int sessionDetailId) {
+	public void setSessionDetailId(Integer sessionDetailId) {
 		this.sessionDetailId = sessionDetailId;
 	}
 

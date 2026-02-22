@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AptiPath Student Onboarding</title>
+  <style>
+    :root {
+      --bg-1: #0b1f3a;
+      --bg-2: #0f766e;
+      --ink: #ecfeff;
+      --line: rgba(255, 255, 255, 0.28);
+      --card: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(480px 240px at 12% 8%, rgba(255, 255, 255, 0.18), transparent 66%),
+        radial-gradient(580px 240px at 95% 6%, rgba(45, 212, 191, 0.22), transparent 72%),
+        linear-gradient(128deg, var(--bg-1), var(--bg-2));
+    }
+
+    .frame {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 20px 24px 16px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+
+    .brand .title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand .pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .scene {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 18px 20px;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: show 16s infinite;
+    }
+
+    .slide h2 {
+      margin: 0;
+      font-size: clamp(18px, 3vw, 28px);
+      letter-spacing: -0.02em;
+    }
+
+    .slide p {
+      margin: 0;
+      font-size: clamp(13px, 1.7vw, 17px);
+      line-height: 1.5;
+      color: #d7f6ff;
+      max-width: 92%;
+    }
+
+    .slide ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      max-width: 92%;
+      font-size: clamp(12px, 1.5vw, 15px);
+    }
+
+    .slide li {
+      background: rgba(8, 47, 73, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 7px 10px;
+    }
+
+    .s1 { animation-delay: 0s; }
+    .s2 { animation-delay: 4s; }
+    .s3 { animation-delay: 8s; }
+    .s4 { animation-delay: 12s; }
+
+    @keyframes show {
+      0% { opacity: 0; transform: translateY(8px); }
+      6% { opacity: 1; transform: translateY(0); }
+      22% { opacity: 1; transform: translateY(0); }
+      28% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 0; transform: translateY(-8px); }
+    }
+
+    .foot {
+      display: grid;
+      gap: 8px;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #22d3ee, #a7f3d0);
+      animation: run 16s linear infinite;
+    }
+
+    @keyframes run {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .caption {
+      font-size: 12px;
+      opacity: 0.95;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <header class="brand">
+      <div class="title">AptiPath 360 Student Walkthrough</div>
+      <div class="pill">Starter Clip</div>
+    </header>
+
+    <section class="scene" aria-label="Animated onboarding scene">
+      <article class="slide s1">
+        <h2>Welcome to your career journey.</h2>
+        <p>
+          This assessment is not a marks test. It maps how you think, learn, and make decisions.
+        </p>
+      </article>
+
+      <article class="slide s2">
+        <h2>7 sprints. One clear roadmap.</h2>
+        <ul>
+          <li>Core aptitude and applied challenge.</li>
+          <li>Interests, values, learning behavior.</li>
+          <li>AI readiness and career reality check.</li>
+        </ul>
+      </article>
+
+      <article class="slide s3">
+        <h2>Answer honestly. Keep moving.</h2>
+        <ul>
+          <li>Choose what is true for you right now.</li>
+          <li>Do not overthink one question.</li>
+          <li>Your confidence signals improve report quality.</li>
+        </ul>
+      </article>
+
+      <article class="slide s4">
+        <h2>Result = strengths + action plan.</h2>
+        <p>
+          You will get stream fit, future pathway options, and a practical 90-day improvement plan.
+        </p>
+      </article>
+    </section>
+
+    <footer class="foot">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="caption">
+        <span>Keep this tab open and start with full focus.</span>
+        <span>Loop: 16s</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

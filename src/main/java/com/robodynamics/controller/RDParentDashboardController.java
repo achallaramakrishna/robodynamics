@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import com.robodynamics.util.RDRoleRouteUtil;
 
 @Controller
 public class RDParentDashboardController {
@@ -51,6 +52,9 @@ public class RDParentDashboardController {
         System.out.println(">>> getParent called");
         Object o = session.getAttribute("rdUser");
         RDUser parent = (o instanceof RDUser) ? (RDUser) o : null;
+        if (parent != null && parent.getProfile_id() != RDUser.profileType.ROBO_PARENT.getValue()) {
+            parent = null;
+        }
         System.out.println("<<< getParent returning: " + (parent == null ? "null" : ("userId=" + parent.getUserID())));
         return parent;
     }
@@ -82,6 +86,13 @@ public class RDParentDashboardController {
     public String showParentDashboard(Model model, Principal principal, HttpSession session) {
         System.out.println(">>> showParentDashboard called");
         Integer parentId = getParentId(session);
+        if (parentId == null) {
+            Object rawUser = session.getAttribute("rdUser");
+            if (rawUser instanceof RDUser) {
+                return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
+            }
+            return "redirect:/login?redirect=/parent/dashboard";
+        }
         List<RDCourseOfferingSummaryDTO> courseOfferings =
                 (parentId == null) ? Collections.emptyList() : offeringService.getOfferingsByParentId(parentId);
         List<RDEnrollmentReportDTO> enrollments =

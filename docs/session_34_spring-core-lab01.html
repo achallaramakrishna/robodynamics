@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spring Core Lab 01 – Traditional Java (Before Spring)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#0f172a;
+    color:#f8fafc;
+    font-family:"Segoe UI", sans-serif;
+}
+.sidebar{
+    background:#0b1220;
+    min-height:100vh;
+    position:sticky;
+    top:0;
+    align-self:flex-start;
+}
+.sidebar a{
+    color:#cbd5e1;
+    text-decoration:none;
+    display:block;
+    margin:8px 0;
+}
+.sidebar a:hover{ color:#ffffff; }
+.section{
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    margin-bottom:30px;
+}
+.code-block{
+    background:#0b1120;
+    padding:20px;
+    border-radius:8px;
+    font-family:Consolas, monospace;
+    font-size:14px;
+    white-space:pre;
+    overflow-x:auto;
+    display:none;
+    border:1px solid rgba(148,163,184,0.15);
+}
+img{
+    max-width:100%;
+    border-radius:8px;
+    margin-top:15px;
+    min-height:180px;
+    object-fit:cover;
+}
+.progress-container{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index:999;
+}
+.copy-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+}
+.small-note{ color:#cbd5e1; }
+hr.border-soft{ border-color: rgba(148,163,184,0.25) !important; }
+.badge-soft{
+    background:rgba(59,130,246,0.15);
+    border:1px solid rgba(59,130,246,0.25);
+    color:#93c5fd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+<div class="row">
+
+<!-- Sidebar -->
+<div class="col-md-3 col-lg-2 sidebar p-4">
+    <h5 class="text-info mb-2">Spring Core Lab 01</h5>
+    <div class="small-note mb-3">Traditional Java (Before Spring)</div>
+    <hr class="border-secondary">
+
+    <a href="#intro">Introduction</a>
+    <a href="#objectives">Learning Objectives</a>
+    <a href="#step1">Step 1 – Create Maven Project</a>
+    <a href="#step2">Step 2 – pom.xml</a>
+    <a href="#step3">Step 3 – Package Structure</a>
+    <a href="#step4">Step 4 – MessageService</a>
+    <a href="#step5">Step 5 – EmailService</a>
+    <a href="#step6">Step 6 – App.java</a>
+    <a href="#step7">Step 7 – Run & Output</a>
+    <a href="#flow">Execution Flow</a>
+    <a href="#change">What If We Change Implementation?</a>
+    <a href="#troubleshoot">Common Problems & Fixes</a>
+    <a href="#reflection">Reflection</a>
+</div>
+
+<!-- Content -->
+<div class="col-md-9 col-lg-10 p-5">
+
+<h1 class="text-info">Spring Core Lab 01</h1>
+<h4 class="mb-4">Understanding Tight Coupling in Traditional Java</h4>
+
+<!-- INTRO -->
+<div class="section" id="intro">
+<h3>📘 Introduction</h3>
+
+<p>
+Before learning Spring Framework, students must understand the pain point Spring solves.
+In traditional Java, we create objects manually using <span class="badge badge-soft">new</span>.
+That often introduces <strong>tight coupling</strong> and makes changes difficult.
+</p>
+
+<ul>
+<li>How objects are created manually</li>
+<li>What tight coupling means</li>
+<li>Why dependency management becomes difficult</li>
+</ul>
+
+<p class="small-note">
+If students don’t feel this pain, Spring Dependency Injection will feel unnecessary.
+</p>
+</div>
+
+<!-- OBJECTIVES -->
+<div class="section" id="objectives">
+<h3>🎯 Learning Objectives</h3>
+<ul>
+<li>Create a Maven project in Eclipse</li>
+<li>Configure JDK 17 correctly</li>
+<li>Write interface + implementation</li>
+<li>Run the application and observe output</li>
+<li>Identify tight coupling and explain why DI is needed</li>
+</ul>
+</div>
+
+<!-- STEP 1 -->
+<div class="section" id="step1">
+<h3>Step 1 – Create Maven Project</h3>
+
+<p><strong>Why Maven?</strong></p>
+<p>
+Maven manages dependencies and enforces a standard project structure.
+Most Spring projects are Maven/Gradle based.
+</p>
+
+<p><strong>Action:</strong></p>
+<ol>
+<li>Eclipse → File → New → Other → Maven → Maven Project</li>
+<li>Select Archetype: <strong>maven-archetype-quickstart</strong></li>
+<li>Enter Coordinates:
+    <ul>
+        <li>GroupId: <strong>com.robodynamics</strong></li>
+        <li>ArtifactId: <strong>core-traditional-java</strong></li>
+        <li>Packaging: <strong>jar</strong></li>
+    </ul>
+</li>
+</ol>
+
+<img src="/resources/images/01_maven_select.png"
+     onerror="this.onerror=null; this.src='/resources/images/placeholder.png';">
+
+<img src="/resources/images/02_archetype.png"
+     onerror="this.onerror=null; this.src='/resources/images/placeholder.png';">
+
+<img src="/resources/images/03_coordinates.png"
+     onerror="this.onerror=null; this.src='/resources/images/placeholder.png';">
+
+<hr class="border-soft mt-4">
+
+<h5 class="text-warning mt-2">⚙ Configure JDK / Build Path (JDK 17)</h5>
+<p><strong>Why?</strong> If Eclipse is using an older JRE/JDK, the project may fail to compile or run.</p>
+
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Right-click Project → <strong>Properties</strong></li>
+<li><strong>Java Build Path</strong> → <strong>Libraries</strong></li>
+<li>If JRE is missing/broken → <strong>Add Library</strong> → <strong>JRE System Library</strong></li>
+<li>Select <strong>Workspace default JDK 17</strong> (or installed JDK 17)</li>
+<li>Apply and Close</li>
+</ol>
+
+<p class="small-note">
+Tip: Eclipse → Window → Preferences → Java → Installed JREs → ensure JDK 17 is added and selected.
+</p>
+</div>
+
+<!-- STEP 2 -->
+<div class="section" id="step2">
+<h3>Step 2 – Configure pom.xml</h3>
+
+<p>
+The <strong>pom.xml</strong> defines project identity and Java version. For this lab, we set Java 17.
+</p>
+
+<div class="position-relative">
+    <button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('pomCode', this)">Copy</button>
+    <button class="btn btn-info btn-sm mb-3" onclick="toggleCode('pomCode')">Show Code</button>
+
+    <div class="code-block" id="pomCode">
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;groupId&gt;com.robodynamics&lt;/groupId&gt;
+  &lt;artifactId&gt;core-traditional-java&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+  &lt;properties&gt;
+    &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+  &lt;/properties&gt;
+
+&lt;/project&gt;
+    </div>
+</div>
+
+<p class="small-note mt-3">
+If your machine has only JDK 8/11 installed, set the version accordingly OR install JDK 17.
+</p>
+</div>
+
+<!-- STEP 3 -->
+<div class="section" id="step3">
+<h3>Step 3 – Package Structure</h3>
+
+<p>
+We follow standard Java packaging. Note: artifactId may contain hyphens, but package names should not.
+So we use: <span class="badge badge-soft">com.robodynamics.core_traditional_java</span>
+</p>
+
+<div class="position-relative">
+    <button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('structureCode', this)">Copy</button>
+    <button class="btn btn-info btn-sm mb-3" onclick="toggleCode('structureCode')">Show Structure</button>
+
+    <div class="code-block" id="structureCode">
+src/main/java
+ └── com.robodynamics.core_traditional_java
+     ├── App.java
+     └── service
+         ├── MessageService.java
+         └── EmailService.java
+    </div>
+</div>
+
+<p class="small-note mt-3">
+If you see “The declared package does not match the expected package”, your folder structure and package statement don’t match.
+</p>
+</div>
+
+<!-- STEP 4 -->
+<div class="section" id="step4">
+<h3>Step 4 – Create Interface (MessageService.java)</h3>
+
+<p><strong>Why interface?</strong></p>
+<p>
+Interfaces define a contract. They allow multiple implementations (Email/SMS/WhatsApp) without changing business logic everywhere.
+</p>
+
+<div class="position-relative">
+    <button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('msgCode', this)">Copy</button>
+    <button class="btn btn-info btn-sm mb-3" onclick="toggleCode('msgCode')">Show Code</button>
+
+    <div class="code-block" id="msgCode">
+package com.robodynamics.core_traditional_java.service;
+
+public interface MessageService {
+    String sendMessage(String to, String message);
+}
+    </div>
+</div>
+</div>
+
+<!-- STEP 5 -->
+<div class="section" id="step5">
+<h3>Step 5 – Create Implementation (EmailService.java)</h3>
+
+<p>
+This class implements the contract and provides actual behavior.
+</p>
+
+<div class="position-relative">
+    <button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('emailCode', this)">Copy</button>
+    <button class="btn btn-info btn-sm mb-3" onclick="toggleCode('emailCode')">Show Code</button>
+
+    <div class="code-block" id="emailCode">
+package com.robodynamics.core_traditional_java.service;
+
+public class EmailService implements MessageService {
+
+    @Override
+    public String sendMessage(String to, String message) {
+        return "EMAIL SENT to " + to + " | message=" + message;
+    }
+}
+    </div>
+</div>
+
+<p class="small-note mt-3">
+Later you can create: SmsService, WhatsAppService, PushNotificationService, etc.
+</p>
+</div>
+
+<!-- STEP 6 -->
+<div class="section" id="step6">
+<h3>Step 6 – Create Main Class (App.java)</h3>
+
+<p>
+This is the entry point of the program. Here we manually create dependency using <strong>new</strong>.
+This is where tight coupling is introduced.
+</p>
+
+<div class="position-relative">
+    <button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('appCode', this)">Copy</button>
+    <button class="btn btn-info btn-sm mb-3" onclick="toggleCode('appCode')">Show Code</button>
+
+    <div class="code-block" id="appCode">
+package com.robodynamics.core_traditional_java;
+
+import com.robodynamics.core_traditional_java.service.EmailService;
+import com.robodynamics.core_traditional_java.service.MessageService;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        // Tight Coupling: direct object creation
+        MessageService service = new EmailService();
+
+        String result = service.sendMessage(
+                "student@robodynamics.in",
+                "Welcome to Spring Core!"
+        );
+
+        System.out.println(result);
+    }
+}
+    </div>
+</div>
+
+<ul class="mt-3">
+<li><strong>Coupling point:</strong> <code>new EmailService()</code></li>
+<li>If implementation changes, <strong>App.java must change</strong></li>
+<li>No runtime flexibility (cannot switch without recompiling)</li>
+</ul>
+</div>
+
+<!-- STEP 7 -->
+<div class="section" id="step7">
+<h3>Step 7 – Run Application & Verify Output</h3>
+
+<p><strong>Action:</strong></p>
+<ol>
+<li>Right-click <strong>App.java</strong></li>
+<li>Run As → <strong>Java Application</strong></li>
+</ol>
+
+<img src="/resources/images/04_console.png"
+     onerror="this.onerror=null; this.src='/resources/images/placeholder.png';">
+
+<p class="mt-3"><strong>Expected Output:</strong></p>
+<div class="code-block" style="display:block;">
+EMAIL SENT to student@robodynamics.in | message=Welcome to Spring Core!
+</div>
+</div>
+
+<!-- FLOW -->
+<div class="section" id="flow">
+<h3>🔁 Full Code Flow (What Happens When You Run?)</h3>
+
+<p>
+When you run <strong>App.java</strong>, the program follows this flow:
+</p>
+
+<ol>
+<li><strong>JVM starts</strong> and loads the <code>App</code> class.</li>
+<li><code>main()</code> method begins execution.</li>
+<li><code>new EmailService()</code> creates an object in memory (heap).</li>
+<li>The object reference is assigned to <code>service</code> of type <code>MessageService</code>.</li>
+<li><code>service.sendMessage(...)</code> calls the implementation in <code>EmailService</code>.</li>
+<li>The method returns a String message.</li>
+<li><code>System.out.println()</code> prints the result in console.</li>
+</ol>
+
+<p class="small-note">
+Important: Even though the reference type is <code>MessageService</code>, the actual object is <code>EmailService</code>.
+This is runtime polymorphism.
+</p>
+</div>
+
+<!-- CHANGE -->
+<div class="section" id="change">
+<h3>🔄 What If We Change the Implementation?</h3>
+
+<p>
+Suppose the business says: “Stop Email. Use WhatsApp.”
+In traditional Java, you must change <strong>App.java</strong>.
+</p>
+
+<p><strong>Old:</strong></p>
+<div class="code-block" style="display:block;">MessageService service = new EmailService();</div>
+
+<p><strong>New (requires code change):</strong></p>
+<div class="code-block" style="display:block;">MessageService service = new WhatsAppService();</div>
+
+<p><strong>Result:</strong></p>
+<ul>
+<li>Modify source code</li>
+<li>Recompile</li>
+<li>Redeploy</li>
+</ul>
+
+<p class="text-warning">
+This is the exact pain Spring solves using Dependency Injection.
+</p>
+</div>
+
+<!-- TROUBLESHOOT -->
+<div class="section" id="troubleshoot">
+<h3>🚨 Common Problems & Corrective Measures</h3>
+
+<h5 class="text-warning mt-3">1) Red cross on project / pom.xml error</h5>
+<ul>
+<li>Right-click project → Maven → <strong>Update Project</strong></li>
+<li>Ensure internet access (Maven downloads dependencies/plugins)</li>
+<li>Try: Project → Clean</li>
+</ul>
+
+<h5 class="text-warning mt-3">2) “JRE System Library missing”</h5>
+<ul>
+<li>Project → Properties → Java Build Path → Libraries</li>
+<li>Add Library → JRE System Library → Select <strong>JDK 17</strong></li>
+</ul>
+
+<h5 class="text-warning mt-3">3) “Unsupported class version”</h5>
+<ul>
+<li>You compiled with newer JDK but ran with older JRE</li>
+<li>Set Eclipse Installed JREs to JDK 17 and re-run</li>
+</ul>
+
+<h5 class="text-warning mt-3">4) “Package does not match expected package”</h5>
+<ul>
+<li>Ensure file is inside correct folder path</li>
+<li>Folder must match: <code>com/robodynamics/core_traditional_java</code></li>
+<li>Package statement must match exactly</li>
+</ul>
+
+<h5 class="text-warning mt-3">5) “NoClassDefFoundError / Main not found”</h5>
+<ul>
+<li>Run the correct class: <strong>App.java</strong></li>
+<li>Verify <code>public static void main(String[] args)</code> exists</li>
+</ul>
+</div>
+
+<!-- REFLECTION -->
+<div class="section" id="reflection">
+<h3>🧠 Reflection & Analysis</h3>
+
+<p><strong>Question 1:</strong> Where is tight coupling introduced?</p>
+<p><strong>Answer:</strong> In <code>App.java</code> at <code>new EmailService()</code></p>
+
+<p><strong>Question 2:</strong> Why is this a problem?</p>
+<ul>
+<li>Every implementation change requires code changes</li>
+<li>No runtime flexibility</li>
+<li>Harder to test and maintain</li>
+</ul>
+
+<h5 class="text-info mt-4">Next Lab Preview</h5>
+<p>
+In Lab 02, Spring Framework will take control of object creation using Dependency Injection.
+This removes tight coupling.
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Progress Bar -->
+<div class="progress-container">
+<div class="progress">
+  <div class="progress-bar bg-info" id="progressBar"></div>
+</div>
+</div>
+
+<script>
+function toggleCode(id){
+    const el=document.getElementById(id);
+    el.style.display = el.style.display==="block"?"none":"block";
+}
+
+function copyCode(id, button){
+    const codeEl = document.getElementById(id);
+    const text = codeEl.innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showCopied(button))
+            .catch(() => fallbackCopy(text, button));
+    } else {
+        fallbackCopy(text, button);
+    }
+}
+
+function fallbackCopy(text, button){
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta);
+    showCopied(button);
+}
+
+function showCopied(button){
+    const original = button.innerText;
+    button.innerText = "Copied!";
+    button.classList.remove("btn-outline-info");
+    button.classList.add("btn-success");
+    setTimeout(() => {
+        button.innerText = original;
+        button.classList.remove("btn-success");
+        button.classList.add("btn-outline-info");
+    }, 1500);
+}
+
+document.addEventListener("scroll", () => {
+    requestAnimationFrame(() => {
+        const scrollTop = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const percent = height > 0 ? (scrollTop / height) * 100 : 0;
+        document.getElementById("progressBar").style.width = percent + "%";
+    });
+});
+</script>
+
+</body>
+</html>

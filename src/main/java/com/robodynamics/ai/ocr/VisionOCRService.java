@@ -1,6 +1,7 @@
 package com.robodynamics.ai.ocr;
 
 import com.robodynamics.util.PdfToImageUtil;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class VisionOCRService {
     private String extractFromPdf(Path pdfPath) throws Exception {
 
         // 1️⃣ Try native PDF text first
-        try (PDDocument doc = PDDocument.load(pdfPath.toFile())) {
+        try (PDDocument doc = Loader.loadPDF(pdfPath.toFile())) {
 
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(doc);

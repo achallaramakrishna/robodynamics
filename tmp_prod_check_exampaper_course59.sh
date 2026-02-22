@@ -1,0 +1,4 @@
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; \
+SELECT 'SESSIONS', cs.course_session_id, cs.session_title FROM rd_course_sessions cs WHERE cs.course_id=59 ORDER BY cs.course_session_id; \
+SELECT 'DETAIL_TYPES', d.course_session_id, LOWER(TRIM(d.type)) AS type_norm, COUNT(*) FROM rd_course_session_details d JOIN rd_course_sessions cs ON cs.course_session_id=d.course_session_id WHERE cs.course_id=59 GROUP BY d.course_session_id, LOWER(TRIM(d.type)) ORDER BY d.course_session_id, type_norm; \
+SELECT 'DETAIL_EXAMPAPER', d.course_session_detail_id, d.course_session_id, d.type, d.exam_paper_id, d.topic FROM rd_course_session_details d JOIN rd_course_sessions cs ON cs.course_session_id=d.course_session_id WHERE cs.course_id=59 AND (LOWER(TRIM(d.type)) LIKE '%exam%' OR d.exam_paper_id IS NOT NULL) ORDER BY d.course_session_id, d.course_session_detail_id;"

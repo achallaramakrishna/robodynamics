@@ -1,0 +1,10 @@
+HTTP/1.1 302 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: JSESSIONID=1494184E915A720ADF03A620A48E3A20; Path=/robodynamics; HttpOnly
+Location: /robodynamics/login;jsessionid=1494184E915A720ADF03A620A48E3A20?redirect=/aptipath/student/test
+Content-Language: en-IN
+Content-Length: 0
+Date: Sun, 22 Feb 2026 05:26:50 GMT
+

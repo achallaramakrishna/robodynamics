@@ -1,0 +1,23 @@
+<configuration>
+
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} %-5level %logger{40} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Your application -->
+    <logger name="com.robodynamics" level="DEBUG"/>
+
+    <!-- Spring & Hibernate (keep clean) -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

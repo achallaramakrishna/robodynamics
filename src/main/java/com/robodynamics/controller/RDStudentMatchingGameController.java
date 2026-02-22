@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.robodynamics.model.RDCourseSession;
+import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDMatchingCategory;
 import com.robodynamics.model.RDMatchingGame;
 import com.robodynamics.model.RDMatchingItem;
+import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.service.RDMatchingGameService;
 
@@ -35,9 +37,12 @@ public class RDStudentMatchingGameController {
 
     @Autowired
     private RDMatchingGameService matchingGameService;
-    
+
     @Autowired
 	private RDCourseSessionService courseSessionservice;
+
+    @Autowired
+    private RDCourseSessionDetailService courseSessionDetailService;
 
     /* -------------------------------------------------
      * LIST MATCHING GAMES FOR A SESSION
@@ -55,8 +60,19 @@ public class RDStudentMatchingGameController {
         // Fetch games mapped to the session
         List<RDMatchingGame> games =
                 matchingGameService.getGamesBySessionId(sessionId);
-        
-        
+
+        // If no DB-backed games found, check for JSON-backed CMS content
+        if (games == null || games.isEmpty()) {
+            List<RDCourseSessionDetail> jsonDetails =
+                    courseSessionDetailService.getBySessionAndType(sessionId, "matchinggame");
+            boolean hasJson = jsonDetails.stream()
+                    .anyMatch(d -> d.getFile() != null && !d.getFile().trim().isEmpty());
+            if (hasJson) {
+                return "redirect:/student/content/list/" + sessionId
+                        + "/matchinggame?enrollmentId=" + enrollmentId;
+            }
+        }
+
         model.addAttribute("session", session);
 
         model.addAttribute("games", games);

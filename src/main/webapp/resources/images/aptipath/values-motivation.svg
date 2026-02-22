@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="Values and motivation visual">
+  <defs>
+    <linearGradient id="g4" x1="0" x2="1">
+      <stop offset="0%" stop-color="#be123c"/>
+      <stop offset="100%" stop-color="#3f0f1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="20" fill="url(#g4)"/>
+  <g fill="#ffffff" opacity="0.95">
+    <text x="44" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Values and Motivation</text>
+    <text x="44" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="20">Short-term comfort vs long-term mastery decisions</text>
+    <rect x="44" y="142" width="280" height="116" rx="12" fill="#ffffff" opacity="0.14"/>
+    <text x="72" y="186" font-family="Segoe UI, Arial, sans-serif" font-size="22">Comfort</text>
+    <text x="72" y="220" font-family="Segoe UI, Arial, sans-serif" font-size="18">easy now</text>
+    <rect x="354" y="142" width="560" height="116" rx="12" fill="#ffffff" opacity="0.20"/>
+    <text x="382" y="186" font-family="Segoe UI, Arial, sans-serif" font-size="22">Growth Path</text>
+    <text x="382" y="220" font-family="Segoe UI, Arial, sans-serif" font-size="18">hard now, stronger future</text>
+  </g>
+</svg>

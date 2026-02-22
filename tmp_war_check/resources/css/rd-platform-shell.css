@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --rd-primary: #0f766e;
+  --rd-primary-dark: #0b1f3a;
+  --rd-page-top: #f7fbff;
+  --rd-page-bottom: #edf3f8;
+  --rd-surface: #ffffff;
+  --rd-ink-900: #0f172a;
+  --rd-ink-700: #334155;
+  --rd-ink-500: #64748b;
+  --rd-line: #dce5ef;
+  --rd-shadow-soft: 0 20px 42px rgba(2, 23, 39, 0.1);
+}
+
+body.rd-shell-page {
+  font-family: "Plus Jakarta Sans", "Trebuchet MS", sans-serif;
+  color: var(--rd-ink-900);
+  min-height: 100vh;
+  background:
+    radial-gradient(850px 420px at -8% -15%, rgba(11, 31, 58, 0.15), transparent 62%),
+    radial-gradient(780px 380px at 110% -18%, rgba(15, 118, 110, 0.18), transparent 60%),
+    linear-gradient(180deg, var(--rd-page-top) 0%, var(--rd-page-bottom) 100%);
+}
+
+.rd-shell {
+  width: min(1180px, 92vw);
+  margin: 28px auto 36px;
+}
+
+.rd-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(120deg, var(--rd-primary-dark) 0%, var(--rd-primary) 100%);
+  color: #f8fbff;
+  padding: 26px;
+  box-shadow: var(--rd-shadow-soft);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1.3fr 0.7fr;
+}
+
+.rd-hero::before,
+.rd-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.rd-hero::before {
+  width: 240px;
+  height: 240px;
+  right: -70px;
+  top: -72px;
+}
+
+.rd-hero::after {
+  width: 170px;
+  height: 170px;
+  right: 120px;
+  bottom: -80px;
+}
+
+.rd-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.rd-hero-title {
+  margin-top: 10px;
+  margin-bottom: 0;
+  letter-spacing: -0.02em;
+  font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.rd-hero-sub {
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 1.55;
+  color: rgba(241, 247, 255, 0.95);
+  max-width: 700px;
+}
+
+.rd-hero-meta {
+  display: grid;
+  gap: 10px;
+  align-content: center;
+}
+
+.rd-meta-card {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(2px);
+}
+
+.rd-meta-label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  opacity: 0.88;
+  font-weight: 700;
+}
+
+.rd-meta-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.rd-content {
+  margin-top: 16px;
+}
+
+.rd-section-title {
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--rd-ink-900);
+}
+
+.rd-shell .card {
+  border: 1px solid var(--rd-line);
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+}
+
+.rd-shell .card-header {
+  border-radius: 18px 18px 0 0 !important;
+}
+
+.rd-shell .card-title {
+  font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.rd-shell .btn-primary {
+  background: var(--rd-primary);
+  border-color: var(--rd-primary);
+}
+
+.rd-shell .btn-primary:hover {
+  background: #0c635d;
+  border-color: #0c635d;
+}
+
+@media (max-width: 980px) {
+  .rd-hero {
+    grid-template-columns: 1fr;
+  }
+}

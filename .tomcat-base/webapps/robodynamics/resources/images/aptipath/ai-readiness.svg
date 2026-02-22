@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="AI readiness visual">
+  <defs>
+    <linearGradient id="g6" x1="0" x2="1">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="20" fill="url(#g6)"/>
+  <g fill="#ffffff" opacity="0.95">
+    <text x="44" y="70" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">AI-era Readiness</text>
+    <text x="44" y="106" font-family="Segoe UI, Arial, sans-serif" font-size="20">Prompt quality, verification, ethics, and human judgment</text>
+    <rect x="44" y="142" width="280" height="116" rx="12" fill="#ffffff" opacity="0.14"/>
+    <text x="64" y="188" font-family="Consolas, monospace" font-size="20">Prompt</text>
+    <text x="64" y="220" font-family="Consolas, monospace" font-size="18">"Show steps + verify units"</text>
+    <rect x="350" y="142" width="260" height="116" rx="12" fill="#ffffff" opacity="0.18"/>
+    <text x="378" y="194" font-family="Segoe UI, Arial, sans-serif" font-size="22">Verify Sources</text>
+    <rect x="636" y="142" width="278" height="116" rx="12" fill="#ffffff" opacity="0.14"/>
+    <text x="662" y="194" font-family="Segoe UI, Arial, sans-serif" font-size="22">Use Responsibly</text>
+  </g>
+</svg>

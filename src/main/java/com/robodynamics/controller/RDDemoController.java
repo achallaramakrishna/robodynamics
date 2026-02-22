@@ -100,10 +100,13 @@
 	                    );
 	                }
 	                
-	             // Only trigger mentor matching if demo date is provided
-	                if (demoDateTime != null && !demoDateTime.isEmpty() && leadMentorService != null) {
+	             // Only trigger mentor matching if demo date and leadId are provided
+	                if (demoDateTime != null && !demoDateTime.isEmpty()
+	                        && leadMentorService != null && leadId != null) {
 	                    RDLead leadForMatching = leadService.getLeadById(leadId);
-	                    leadMentorService.assignLeadToMentors(leadForMatching);
+	                    if (leadForMatching != null) {
+	                        leadMentorService.assignLeadToMentors(leadForMatching);
+	                    }
 	                }
 	            } catch (Exception ignore) { /* don’t block UX */ }
 	            

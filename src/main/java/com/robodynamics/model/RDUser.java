@@ -223,7 +223,8 @@ public class RDUser {
 
 	public static enum profileType {
 		SUPER_ADMIN(1, "SUPER_ADMIN"), ROBO_ADMIN(2, "ROBO_ADMIN"), ROBO_MENTOR(3, "ROBO_MENTOR"),
-		ROBO_PARENT(4, "ROBO_PARENT"), ROBO_STUDENT(5, "ROBO_STUDENT"), ROBO_FINANCE_ADMIN(6, "ROBO_FINANCE_ADMIN");
+		ROBO_PARENT(4, "ROBO_PARENT"), ROBO_STUDENT(5, "ROBO_STUDENT"), ROBO_FINANCE_ADMIN(6, "ROBO_FINANCE_ADMIN"),
+		COMPANY_ADMIN(7, "COMPANY_ADMIN");
 
 		private int value;
 		private String label;
@@ -322,6 +323,7 @@ public class RDUser {
 		childUser.setFirstName(child.getFirstName());
 		childUser.setLastName(child.getLastName());
 		childUser.setAge(child.getAge()); // Child's age
+		childUser.setSchoolName(child.getSchool());
 		childUser.setActive(1); // Active status (default value)
 		childUser.setUserName(child.getUserName());
 		childUser.setPassword(child.getPassword());
@@ -411,6 +413,8 @@ public class RDUser {
 	            return "Student";
 	        case 6:
 	            return "Finance Admin";
+	        case 7:
+	            return "Company Admin";
 	        default:
 	            return "User";
 	    }

@@ -2,8 +2,10 @@ package com.robodynamics.controller;
 
 import com.robodynamics.dto.ExamResultView;
 import com.robodynamics.model.*;
+import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDExamSubmission.SubmissionStatus;
 import com.robodynamics.service.*;
+import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.impl.RDExamEvaluationAsyncRunner;
 
 import java.util.List;
@@ -35,6 +37,12 @@ public class RDStudentExamController {
     @Autowired
     private RDExamResultService examResultService;
 
+    @Autowired
+    private RDCourseSessionDetailService courseSessionDetailService;
+
+    @Autowired
+    private RDCourseSessionService courseSessionService;
+
     /* =====================================================
        1️⃣ LIST EXAM PAPERS
        ===================================================== */
@@ -60,9 +68,23 @@ public class RDStudentExamController {
         List<RDExamPaper> papers =
                 examPaperService.getExamPapersBySession(sessionId);
 
+        // If no DB-backed exam papers, check for JSON-backed CMS content
+        if (papers == null || papers.isEmpty()) {
+            List<RDCourseSessionDetail> jsonDetails =
+                    courseSessionDetailService.getBySessionAndType(sessionId, "exampaper");
+            boolean hasJson = jsonDetails.stream()
+                    .anyMatch(d -> d.getFile() != null && !d.getFile().trim().isEmpty());
+            if (hasJson) {
+                return "redirect:/student/content/list/" + sessionId
+                        + "/exampaper?enrollmentId=" + enrollmentId;
+            }
+        }
+
         Map<Integer, RDExamSubmission> submissionMap =
                 submissionService.getStudentSubmissionsForSession(
                         rdUser.getUserID(), sessionId);
+
+        RDCourseSession sessionInfo = courseSessionService.getCourseSession(sessionId);
 
         /* ===================== 🔍 LOGGING ===================== */
         // System.out.println("========== EXAM PAPER LIST DEBUG ==========");
@@ -92,6 +114,7 @@ public class RDStudentExamController {
         model.addAttribute("examPapers", papers);
         model.addAttribute("submissionMap", submissionMap);
         model.addAttribute("enrollmentId", enrollmentId);
+        model.addAttribute("session", sessionInfo);
 
         // System.out.println("⬅️ EXIT listExamPapers()");
         return "exam/examPapers";

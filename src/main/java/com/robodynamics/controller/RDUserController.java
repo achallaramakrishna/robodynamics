@@ -1,5 +1,6 @@
 package com.robodynamics.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.robodynamics.dto.RDAttendanceFlatRowDTO;
 import com.robodynamics.model.*;
 import com.robodynamics.service.*;
+import com.robodynamics.util.IPAddressUtil;
+import com.robodynamics.util.RDRoleRouteUtil;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +39,9 @@ public class RDUserController {
     @Autowired private RDCourseTrackingService courseTrackingService;
     @Autowired private RDTicketService ticketService;
     @Autowired private RDNotificationService notificationService;
+    @Autowired private RDUserLoginLogService userLoginLogService;
+    @Autowired private RDCISubscriptionService ciSubscriptionService;
+    @Autowired private RDModuleAccessService moduleAccessService;
     
     
 
@@ -124,13 +130,23 @@ public class RDUserController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("rdUser") RDUser rdUser, Model model, HttpSession session) {
+    public String login(@ModelAttribute("rdUser") RDUser rdUser,
+                        Model model,
+                        HttpSession session,
+                        HttpServletRequest request) {
         try {
             RDUser authenticated = userService.loginRDUser(rdUser);
             if (authenticated != null) {
                 model.addAttribute("rdUser", authenticated);
                 session.setAttribute("rdUser", authenticated);
                 log.info("Login success for username='{}', userId={}", safe(rdUser.getUserName()), authenticated.getUserID());
+                try {
+                    String clientIP = IPAddressUtil.getClientIP(request);
+                    userLoginLogService.logSuccessfulLogin(authenticated, clientIP);
+                } catch (Exception ex) {
+                    // Do not block login if analytics logging fails
+                    log.warn("Login analytics write failed for userId={}", authenticated.getUserID(), ex);
+                }
 
                 String redirectUrl = (String) session.getAttribute("redirectUrl");
                 if (redirectUrl != null) {
@@ -142,17 +158,8 @@ public class RDUserController {
                     addParentTicketStats(session, model);
                     // NEW: feed child names for JSP badge/hidden input
                     session.setAttribute("childNamesCsv", getChildNamesCsv(authenticated.getUserID()));
-                    return "redirect:/parent/dashboard";
-                } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
-                    return "redirect:/studentDashboard";
-                } else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_MENTOR.getValue()) {
-                    return "redirect:/mentor/dashboard";
-                }  else if (authenticated.getProfile_id() == RDUser.profileType.ROBO_FINANCE_ADMIN.getValue()) {
-                    return "redirect:/finance/dashboard";
                 }
-                	else {
-                    return "redirect:/dashboard";
-                }
+                return RDRoleRouteUtil.redirectHomeFor(authenticated);
             }
 
             String username = rdUser.getUserName();
@@ -179,8 +186,41 @@ public class RDUserController {
     
     private String safe(String s) { return s == null ? "" : s.replaceAll("[\\r\\n]", ""); }
 
+    @GetMapping("/admin/dashboard")
+    public String adminDashboardAlias() {
+        return "redirect:/home";
+    }
+
+    @GetMapping("/home")
+    public String roleHome(HttpSession session) {
+        RDUser user = (RDUser) session.getAttribute("rdUser");
+        if (user == null) {
+            return "redirect:/login?redirect=/home";
+        }
+        return RDRoleRouteUtil.redirectHomeFor(user);
+    }
+
+    @GetMapping("/student/dashboard")
+    public String studentDashboardAlias(HttpSession session) {
+        RDUser user = (RDUser) session.getAttribute("rdUser");
+        if (user == null) {
+            return "redirect:/login?redirect=/student/dashboard";
+        }
+        if (user.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
+            return "redirect:/studentDashboard";
+        }
+        return RDRoleRouteUtil.redirectHomeFor(user);
+    }
+
     @GetMapping("/dashboard")
     public String homeDashboard(Model model, HttpSession session) {
+        RDUser me = (RDUser) session.getAttribute("rdUser");
+        if (me == null) {
+            return "redirect:/login?redirect=/dashboard";
+        }
+        if (!RDRoleRouteUtil.isAdminProfile(me.getProfile_id())) {
+            return RDRoleRouteUtil.redirectHomeFor(me);
+        }
         addAdminTicketStats(session, model);
         return "dashboard";
     }
@@ -738,5 +778,18 @@ public class RDUserController {
         ticketStats.put("closed",      ticketService.countScoped("CLOSED",      null, null, null, false));
 
         model.addAttribute("ticketStats", ticketStats);
+
+        Map<String, Long> loginStats = new HashMap<>();
+        try {
+            loginStats.put("uniqueUsersAllTime", userLoginLogService.countDistinctUsersLoggedIn());
+            loginStats.put("uniqueUsersToday", userLoginLogService.countDistinctUsersLoggedInToday());
+            loginStats.put("loginsToday", userLoginLogService.countLoginsToday());
+        } catch (Exception ex) {
+            log.warn("Failed to load login stats for dashboard", ex);
+            loginStats.put("uniqueUsersAllTime", 0L);
+            loginStats.put("uniqueUsersToday", 0L);
+            loginStats.put("loginsToday", 0L);
+        }
+        model.addAttribute("loginStats", loginStats);
     }
 }

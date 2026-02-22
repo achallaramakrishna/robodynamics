@@ -1,0 +1,277 @@
+{
+  "sessionDetailId": 4295,
+  "title": "Lab Manual 01 – Traditional Java (Before Spring)",
+  "version": 1,
+  "difficultyLevel": "Beginner",
+  "estimatedTimeMinutes": 45,
+  "objective": "Understand tight coupling in traditional Java. Students must feel this pain before Spring DI makes sense.",
+  "sections": [
+    {
+      "title": "Introduction",
+      "sectionType": "INTRO",
+      "displayOrder": 1,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "📘 Introduction",
+          "instructionHtml": "<p>Before learning Spring Framework, students must understand the pain point Spring solves. In traditional Java, we create objects manually using <code style='background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;padding:1px 6px;border-radius:4px;'>new</code>. That often introduces <strong>tight coupling</strong> and makes changes difficult.</p><ul style='margin-top:10px;'><li>How objects are created manually</li><li>What tight coupling means</li><li>Why dependency management becomes difficult</li></ul><p style='color:#94a3b8;margin-top:10px;'>If students don't feel this pain, Spring Dependency Injection will feel unnecessary.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "title": "Learning Objectives",
+      "sectionType": "INTRO",
+      "displayOrder": 2,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "🎯 What You Will Accomplish",
+          "instructionHtml": "<ul><li>Create a Maven project in Eclipse</li><li>Configure JDK 17 correctly</li><li>Write interface + implementation</li><li>Run the application and observe output</li><li>Identify tight coupling and explain why DI is needed</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "title": "Step 1 – Create Maven Project",
+      "sectionType": "STEP",
+      "displayOrder": 3,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Why Maven?",
+          "instructionHtml": "<p>Maven manages dependencies and enforces a standard project structure. Most Spring projects are Maven/Gradle based.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 2,
+          "heading": "Action: Create the Project",
+          "instructionHtml": "<ol><li>Eclipse → File → New → Other → Maven → Maven Project</li><li>Select Archetype: <strong>maven-archetype-quickstart</strong></li><li>Enter Coordinates:<ul style='margin-top:6px;'><li>GroupId: <strong>com.robodynamics</strong></li><li>ArtifactId: <strong>core-traditional-java</strong></li><li>Packaging: <strong>jar</strong></li></ul></li></ol>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 3,
+          "heading": "⚙ Configure JDK 17 Build Path",
+          "instructionHtml": "<p><strong>Why?</strong> If Eclipse is using an older JRE/JDK, the project may fail to compile or run.</p><ol style='margin-top:8px;'><li>Right-click Project → <strong>Properties</strong></li><li><strong>Java Build Path</strong> → <strong>Libraries</strong></li><li>If JRE is missing/broken → <strong>Add Library</strong> → <strong>JRE System Library</strong></li><li>Select <strong>Workspace default JDK 17</strong> (or installed JDK 17)</li><li>Apply and Close</li></ol><p style='color:#94a3b8;margin-top:8px;'>Tip: Eclipse → Window → Preferences → Java → Installed JREs → ensure JDK 17 is added and selected.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "title": "Step 2 – Configure pom.xml",
+      "sectionType": "STEP",
+      "displayOrder": 4,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Set Java Version to 17",
+          "instructionHtml": "<p>The <strong>pom.xml</strong> defines project identity and Java version. For this lab, we set Java 17.</p><p style='color:#94a3b8;margin-top:8px;'>If your machine has only JDK 8/11 installed, set the version accordingly OR install JDK 17.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": [
+            {
+              "language": "xml",
+              "codeContent": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n\n  <modelVersion>4.0.0</modelVersion>\n\n  <groupId>com.robodynamics</groupId>\n  <artifactId>core-traditional-java</artifactId>\n  <version>1.0-SNAPSHOT</version>\n\n  <properties>\n    <maven.compiler.source>17</maven.compiler.source>\n    <maven.compiler.target>17</maven.compiler.target>\n    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n  </properties>\n\n</project>",
+              "showToggle": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Step 3 – Package Structure",
+      "sectionType": "STEP",
+      "displayOrder": 5,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Organise Your Files",
+          "instructionHtml": "<p>We follow standard Java packaging. Note: artifactId may contain hyphens, but package names should not. So we use: <code>com.robodynamics.core_traditional_java</code></p><p style='color:#94a3b8;margin-top:8px;'>If you see "The declared package does not match the expected package", your folder structure and package statement don't match.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": [
+            {
+              "language": "text",
+              "codeContent": "src/main/java\n └── com.robodynamics.core_traditional_java\n     ├── App.java\n     └── service\n         ├── MessageService.java\n         └── EmailService.java",
+              "showToggle": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Step 4 – Create Interface (MessageService.java)",
+      "sectionType": "STEP",
+      "displayOrder": 6,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Why Interface?",
+          "instructionHtml": "<p>Interfaces define a contract. They allow multiple implementations (Email/SMS/WhatsApp) without changing business logic everywhere.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": [
+            {
+              "language": "java",
+              "codeContent": "package com.robodynamics.core_traditional_java.service;\n\npublic interface MessageService {\n    String sendMessage(String to, String message);\n}",
+              "showToggle": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Step 5 – Create Implementation (EmailService.java)",
+      "sectionType": "STEP",
+      "displayOrder": 7,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "EmailService Implements the Contract",
+          "instructionHtml": "<p>This class implements the contract and provides actual behavior.</p><p style='color:#94a3b8;margin-top:8px;'>Later you can create: SmsService, WhatsAppService, PushNotificationService, etc.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": [
+            {
+              "language": "java",
+              "codeContent": "package com.robodynamics.core_traditional_java.service;\n\npublic class EmailService implements MessageService {\n\n    @Override\n    public String sendMessage(String to, String message) {\n        return \"EMAIL SENT to \" + to + \" | message=\" + message;\n    }\n}",
+              "showToggle": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Step 6 – Create Main Class (App.java)",
+      "sectionType": "STEP",
+      "displayOrder": 8,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Tight Coupling Introduced Here",
+          "instructionHtml": "<p>This is the entry point. Here we manually create dependency using <strong>new</strong>. This is where tight coupling is introduced.</p><ul style='margin-top:10px;'><li><strong>Coupling point:</strong> <code>new EmailService()</code></li><li>If implementation changes, <strong>App.java must change</strong></li><li>No runtime flexibility — cannot switch without recompiling</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": [
+            {
+              "language": "java",
+              "codeContent": "package com.robodynamics.core_traditional_java;\n\nimport com.robodynamics.core_traditional_java.service.EmailService;\nimport com.robodynamics.core_traditional_java.service.MessageService;\n\npublic class App {\n\n    public static void main(String[] args) {\n\n        // Tight Coupling: direct object creation\n        MessageService service = new EmailService();\n\n        String result = service.sendMessage(\n                \"student@robodynamics.in\",\n                \"Welcome to Spring Core!\"\n        );\n\n        System.out.println(result);\n    }\n}",
+              "showToggle": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Step 7 – Run & Verify Output",
+      "sectionType": "STEP",
+      "displayOrder": 9,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Run the Application",
+          "instructionHtml": "<ol><li>Right-click <strong>App.java</strong></li><li>Run As → <strong>Java Application</strong></li><li>Check the Console tab for the expected output below</li></ol>",
+          "expectedOutputHtml": "EMAIL SENT to student@robodynamics.in | message=Welcome to Spring Core!",
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "title": "🔁 Full Code Flow",
+      "sectionType": "THEORY",
+      "displayOrder": 10,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "What Happens When You Run?",
+          "instructionHtml": "<p>When you run <strong>App.java</strong>, the program follows this sequence:</p><ol style='margin-top:10px;'><li><strong>JVM starts</strong> and loads the <code>App</code> class.</li><li><code>main()</code> method begins execution.</li><li><code>new EmailService()</code> creates an object in memory (heap).</li><li>The object reference is assigned to <code>service</code> of type <code>MessageService</code>.</li><li><code>service.sendMessage(...)</code> calls the implementation in <code>EmailService</code>.</li><li>The method returns a String message.</li><li><code>System.out.println()</code> prints the result in console.</li></ol><p style='color:#94a3b8;margin-top:10px;'>Important: Even though the reference type is <code>MessageService</code>, the actual object is <code>EmailService</code>. This is runtime polymorphism.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "title": "🔄 What If We Change Implementation?",
+      "sectionType": "THEORY",
+      "displayOrder": 11,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "The Problem with Tight Coupling",
+          "instructionHtml": "<p>Suppose the business says: <em>\"Stop Email. Use WhatsApp.\"</em> In traditional Java, you must change <strong>App.java</strong>.</p><p style='margin-top:10px;'><strong>Result:</strong></p><ul><li>Modify source code</li><li>Recompile</li><li>Redeploy</li></ul><p style='color:#fbbf24;margin-top:10px;'>This is the exact pain Spring solves using Dependency Injection.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": [
+            {
+              "language": "java",
+              "codeContent": "// Old (tight coupling):\nMessageService service = new EmailService();\n\n// New — requires code change, recompile, redeploy:\nMessageService service = new WhatsAppService();",
+              "showToggle": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "🚨 Common Problems & Corrective Measures",
+      "sectionType": "SUMMARY",
+      "displayOrder": 12,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "1) Red cross on project / pom.xml error",
+          "instructionHtml": "<ul><li>Right-click project → Maven → <strong>Update Project</strong></li><li>Ensure internet access (Maven downloads dependencies/plugins)</li><li>Try: Project → Clean</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 2,
+          "heading": "2) \"JRE System Library missing\"",
+          "instructionHtml": "<ul><li>Project → Properties → Java Build Path → Libraries</li><li>Add Library → JRE System Library → Select <strong>JDK 17</strong></li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 3,
+          "heading": "3) \"Unsupported class version\"",
+          "instructionHtml": "<ul><li>You compiled with newer JDK but ran with older JRE</li><li>Set Eclipse Installed JREs to JDK 17 and re-run</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 4,
+          "heading": "4) \"Package does not match expected package\"",
+          "instructionHtml": "<ul><li>Ensure file is inside correct folder path</li><li>Folder must match: <code>com/robodynamics/core_traditional_java</code></li><li>Package statement must match exactly</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 5,
+          "heading": "5) \"NoClassDefFoundError / Main not found\"",
+          "instructionHtml": "<ul><li>Run the correct class: <strong>App.java</strong></li><li>Verify <code>public static void main(String[] args)</code> exists</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "title": "🧠 Reflection & Analysis",
+      "sectionType": "SUMMARY",
+      "displayOrder": 13,
+      "steps": [
+        {
+          "stepNo": 1,
+          "heading": "Think About It",
+          "instructionHtml": "<p><strong>Question 1:</strong> Where is tight coupling introduced?</p><p><strong>Answer:</strong> In <code>App.java</code> at <code>new EmailService()</code></p><p style='margin-top:14px;'><strong>Question 2:</strong> Why is this a problem?</p><ul><li>Every implementation change requires code changes</li><li>No runtime flexibility</li><li>Harder to test and maintain</li></ul>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        },
+        {
+          "stepNo": 2,
+          "heading": "Next Lab Preview",
+          "instructionHtml": "<p>In <strong>Lab 02</strong>, Spring Framework will take control of object creation using Dependency Injection. This removes tight coupling entirely.</p>",
+          "expectedOutputHtml": "",
+          "codeBlocks": []
+        }
+      ]
+    }
+  ]
+}

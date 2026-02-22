@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AptiPath Parent Onboarding</title>
+  <style>
+    :root {
+      --bg-1: #0b1f3a;
+      --bg-2: #115e59;
+      --ink: #ecfeff;
+      --line: rgba(255, 255, 255, 0.28);
+      --card: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(520px 260px at 12% 8%, rgba(255, 255, 255, 0.18), transparent 66%),
+        radial-gradient(620px 270px at 95% 6%, rgba(45, 212, 191, 0.22), transparent 72%),
+        linear-gradient(128deg, var(--bg-1), var(--bg-2));
+    }
+
+    .frame {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 20px 24px 16px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+
+    .brand .title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand .pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .scene {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 18px 20px;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: show 16s infinite;
+    }
+
+    .slide h2 {
+      margin: 0;
+      font-size: clamp(18px, 3vw, 28px);
+      letter-spacing: -0.02em;
+    }
+
+    .slide p {
+      margin: 0;
+      font-size: clamp(13px, 1.7vw, 17px);
+      line-height: 1.5;
+      color: #d7f6ff;
+      max-width: 92%;
+    }
+
+    .flow {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      max-width: 96%;
+      font-size: clamp(12px, 1.5vw, 15px);
+    }
+
+    .flow li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(8, 47, 73, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 7px 10px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #67e8f9;
+      box-shadow: 0 0 10px rgba(103, 232, 249, 0.9);
+    }
+
+    .s1 { animation-delay: 0s; }
+    .s2 { animation-delay: 4s; }
+    .s3 { animation-delay: 8s; }
+    .s4 { animation-delay: 12s; }
+
+    @keyframes show {
+      0% { opacity: 0; transform: translateY(8px); }
+      6% { opacity: 1; transform: translateY(0); }
+      22% { opacity: 1; transform: translateY(0); }
+      28% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 0; transform: translateY(-8px); }
+    }
+
+    .foot {
+      display: grid;
+      gap: 8px;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #22d3ee, #a7f3d0);
+      animation: run 16s linear infinite;
+    }
+
+    @keyframes run {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .caption {
+      font-size: 12px;
+      opacity: 0.95;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <header class="brand">
+      <div class="title">AptiPath 360 Parent Walkthrough</div>
+      <div class="pill">Starter Clip</div>
+    </header>
+
+    <section class="scene" aria-label="Animated parent onboarding scene">
+      <article class="slide s1">
+        <h2>Parent context shapes the final guidance.</h2>
+        <p>
+          We use your intake signals to understand support reality, not just aspiration.
+        </p>
+      </article>
+
+      <article class="slide s2">
+        <h2>What happens in sequence?</h2>
+        <ul class="flow">
+          <li><span class="dot"></span> Parent intake: goals, constraints, expectations.</li>
+          <li><span class="dot"></span> Student adaptive assessment across 7 sections.</li>
+          <li><span class="dot"></span> Recommendation snapshot with practical options.</li>
+        </ul>
+      </article>
+
+      <article class="slide s3">
+        <h2>You will see what to do next.</h2>
+        <ul class="flow">
+          <li><span class="dot"></span> 90-day action plan for parent and student.</li>
+          <li><span class="dot"></span> Readiness and pressure indicators.</li>
+          <li><span class="dot"></span> Suggested mentor checkpoints.</li>
+        </ul>
+      </article>
+
+      <article class="slide s4">
+        <h2>Goal: reduce anxiety, increase clarity.</h2>
+        <p>
+          Start with honest inputs. Better context creates stronger, realistic decisions for your child.
+        </p>
+      </article>
+    </section>
+
+    <footer class="foot">
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="caption">
+        <span>Use this as a pre-intake explainer.</span>
+        <span>Loop: 16s</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

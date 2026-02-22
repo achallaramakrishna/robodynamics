@@ -1,0 +1,10 @@
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: JSESSIONID=E0ECA4A26378EE82DCEC1BE4D125D06C; Path=/robodynamics; HttpOnly
+Content-Type: text/html;charset=ISO-8859-1
+Content-Language: en-IN
+Transfer-Encoding: chunked
+Date: Sun, 22 Feb 2026 05:17:52 GMT
+

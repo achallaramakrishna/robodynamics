@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.robodynamics.form.RDCourseForm;
+import com.robodynamics.dto.RDFlashcardSetDTO;
 import com.robodynamics.model.RDCourse;
 import com.robodynamics.model.RDCourseCategory;
 import com.robodynamics.model.RDCourseResource;
@@ -31,6 +32,8 @@ import com.robodynamics.service.RDCourseCategoryService;
 import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
+import com.robodynamics.service.RDFlashCardSetService;
+import com.robodynamics.service.RDLabManualService;
 import com.robodynamics.service.RDMatchingGameService;
 import com.robodynamics.service.RDStudentEnrollmentService;
 
@@ -70,8 +73,13 @@ public class RDCourseController {
 	
 	@Autowired
 	private RDCourseSessionDetailService courseSessionDetailService;
-	
-	
+
+	@Autowired
+	private RDLabManualService labManualService;
+
+	@Autowired
+	private RDFlashCardSetService rdFlashCardSetService;
+
 	@GetMapping("/{courseId}/sessions")
     @ResponseBody
     public List<RDCourseSession> getSessionsByCourse(@PathVariable int courseId) {
@@ -223,25 +231,31 @@ public class RDCourseController {
 	        grouped.computeIfAbsent(d.getType(), k -> new ArrayList<>()).add(d);
 	    }
 
-	    // Summary
+	    // Summary — keys match JSP and canonical DB type values (no underscores)
 	    Map<String, Integer> summary = new HashMap<>();
 	    summary.put("video", grouped.getOrDefault("video", List.of()).size());
-	    summary.put("pdf", grouped.getOrDefault("pdf", List.of()).size());
+	    // Count both "pdf" and "notes" types under the Notes card
+	    summary.put("pdf", grouped.getOrDefault("pdf", List.of()).size()
+	                     + grouped.getOrDefault("notes", List.of()).size());
 	    summary.put("quiz", grouped.getOrDefault("quiz", List.of()).size());
-	    summary.put("flashcard", grouped.getOrDefault("flashcard", List.of()).size());
+	    summary.put("flashcard", countFlashcardSetsForDetails(grouped.getOrDefault("flashcard", List.of())));
 	    summary.put("matchinggame", grouped.getOrDefault("matchinggame", List.of()).size());
-	    summary.put("matchpair", grouped.getOrDefault("matchpair", List.of()).size());
-
+	    summary.put("matchpairs", grouped.getOrDefault("matchingpair", List.of()).size());
 	    summary.put("memory-map", grouped.getOrDefault("memory-map", List.of()).size());
 	    summary.put("assignment", grouped.getOrDefault("assignment", List.of()).size());
-
-	    summary.put("exampaper", grouped.getOrDefault("exampaper", List.of()).size());
+	    summary.put("exampaper", sizeByTypes(grouped, "exampaper", "exam_paper", "exam-paper", "exam paper"));
+	    // labmanual: count from session details (canonical type = "labmanual")
+	    summary.put("labmanual", grouped.getOrDefault("labmanual", List.of()).size());
 
 	    System.out.println("SUMMARY COUNTS → {}" +  summary);
 
 	    model.addAttribute("session", session);
 	    model.addAttribute("enrollment", enrollment);
 	    model.addAttribute("summary", summary);
+	    // courseId for mobile back-button in session-dashboard.jsp
+	    if (session != null && session.getCourse() != null) {
+	        model.addAttribute("courseId", session.getCourse().getCourseId());
+	    }
 
 	    System.out.println("=== SESSION DASHBOARD END ===");
 
@@ -255,12 +269,21 @@ public class RDCourseController {
 	    Map<String, Integer> summary = new HashMap<>();
 	    summary.put("video", courseSessionDetailService.countByType(sessionId, "video"));
 	    summary.put("quiz", courseSessionDetailService.countByType(sessionId, "quiz"));
-	    summary.put("pdf", courseSessionDetailService.countByType(sessionId, "pdf"));
-	    summary.put("flashcard", courseSessionDetailService.countByType(sessionId, "flashcard"));
-	    summary.put("matchingame", courseSessionDetailService.countByType(sessionId, "matchinggame"));
-	    summary.put("matchingpairs", courseSessionDetailService.countByType(sessionId, "matchingpairs"));
+	    // "pdf" + "notes" both show under the Notes card (CMS courses use "notes" type)
+	    summary.put("pdf", courseSessionDetailService.countByType(sessionId, "pdf")
+	                     + courseSessionDetailService.countByType(sessionId, "notes"));
+	    summary.put("flashcard", countFlashcardSetsForSession(sessionId));
+	    // keep legacy keys and add canonical keys to avoid breaking older pages
+	    Integer matchingGame = courseSessionDetailService.countByType(sessionId, "matchinggame");
+	    Integer matchPairs = courseSessionDetailService.countByType(sessionId, "matchingpair");
+	    summary.put("matchingame", matchingGame);
+	    summary.put("matchinggame", matchingGame);
+	    summary.put("matchingpairs", matchPairs);
+	    summary.put("matchpairs", matchPairs);
 	    summary.put("memory-map", courseSessionDetailService.countByType(sessionId, "memory-map"));
-	    summary.put("exampaper", courseSessionDetailService.countByType(sessionId, "exampaper"));
+	    summary.put("assignment", courseSessionDetailService.countByType(sessionId, "assignment"));
+	    summary.put("exampaper", countByAnyType(sessionId, "exampaper", "exam_paper", "exam-paper", "exam paper"));
+	    summary.put("labmanual", courseSessionDetailService.countByType(sessionId, "labmanual"));
 
 	    return summary;
 	}
@@ -374,8 +397,18 @@ public class RDCourseController {
         RDCourseSession session = courseSessionservice.getCourseSession(sessionId);
         RDStudentEnrollment enrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
 
-        List<RDCourseSessionDetail> pdfs =
-                courseSessionDetailService.getBySessionAndType(sessionId, "pdf");
+        List<RDCourseSessionDetail> pdfs = new ArrayList<>(
+                courseSessionDetailService.getBySessionAndType(sessionId, "pdf"));
+        // Also include "notes" type (CMS-imported courses e.g. Course 162)
+        pdfs.addAll(courseSessionDetailService.getBySessionAndType(sessionId, "notes"));
+
+        // If any are JSON-backed (file path set), use list-picker (auto-skips to viewer if only 1)
+        boolean hasJsonBacked = pdfs.stream()
+                .anyMatch(d -> d.getFile() != null && !d.getFile().trim().isEmpty());
+        if (hasJsonBacked) {
+            return new ModelAndView("redirect:/student/content/list/"
+                    + sessionId + "/notes?enrollmentId=" + enrollmentId);
+        }
 
         model.addAttribute("session", session);
         model.addAttribute("enrollment", enrollment);
@@ -406,6 +439,16 @@ public class RDCourseController {
                 .filter(Objects::nonNull)
                 .toList();
 
+        // If no DB-backed quizzes, check for JSON-backed (CMS courses like 162)
+        if (quizzes.isEmpty()) {
+            boolean hasJsonQuiz = quizDetails.stream()
+                    .anyMatch(d -> d.getFile() != null && !d.getFile().trim().isEmpty());
+            if (hasJsonQuiz) {
+                return new ModelAndView("redirect:/student/content/list/"
+                        + sessionId + "/quiz?enrollmentId=" + enrollmentId);
+            }
+        }
+
         model.addAttribute("session", session);
         model.addAttribute("enrollment", enrollment);
         model.addAttribute("quizzes", quizzes);
@@ -423,14 +466,38 @@ public class RDCourseController {
             Model model) {
 
         RDCourseSession session = courseSessionservice.getCourseSession(sessionId);
-        RDStudentEnrollment enrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
-
         List<RDCourseSessionDetail> flashcards =
                 courseSessionDetailService.getBySessionAndType(sessionId, "flashcard");
 
+        if (flashcards != null && !flashcards.isEmpty()) {
+            RDCourseSessionDetail first = flashcards.get(0);
+            // JSON-backed (CMS courses) → use list-picker (auto-skips to viewer if only 1)
+            if (first.getFile() != null && !first.getFile().trim().isEmpty()) {
+                return new ModelAndView("redirect:/student/content/list/"
+                        + sessionId + "/flashcard?enrollmentId=" + enrollmentId);
+            }
+            // DB-backed → use legacy flashcard viewer
+            int detailId = first.getCourseSessionDetailId();
+            Integer courseId = (session != null && session.getCourse() != null)
+                    ? session.getCourse().getCourseId()
+                    : null;
+            StringBuilder redirectUrl = new StringBuilder("redirect:/flashcards/start/")
+                    .append(detailId)
+                    .append("?sessionId=").append(sessionId)
+                    .append("&enrollmentId=").append(enrollmentId);
+            if (courseId != null) {
+                redirectUrl.append("&courseId=").append(courseId);
+            }
+            return new ModelAndView(redirectUrl.toString());
+        }
+
+        RDStudentEnrollment enrollment = enrollmentService.getRDStudentEnrollment(enrollmentId);
         model.addAttribute("session", session);
         model.addAttribute("enrollment", enrollment);
         model.addAttribute("flashcards", flashcards);
+        if (session != null && session.getCourse() != null) {
+            model.addAttribute("courseId", session.getCourse().getCourseId());
+        }
 
         return new ModelAndView("session-flashcards");
     }
@@ -501,6 +568,83 @@ public class RDCourseController {
         model.addAttribute("examPapers", examPapers);
 
         return new ModelAndView("exam/list");
+    }
+
+    private int countFlashcardSetsForSession(int sessionId) {
+        List<RDCourseSessionDetail> flashcardDetails =
+                courseSessionDetailService.getBySessionAndType(sessionId, "flashcard");
+        return countFlashcardSetsForDetails(flashcardDetails);
+    }
+
+    private int countByAnyType(int sessionId, String... types) {
+        if (types == null || types.length == 0) {
+            return 0;
+        }
+
+        int total = 0;
+        Set<String> seen = new HashSet<>();
+        for (String type : types) {
+            if (type == null) {
+                continue;
+            }
+            String normalized = type.trim().toLowerCase(Locale.ROOT);
+            if (normalized.isEmpty() || !seen.add(normalized)) {
+                continue;
+            }
+            Integer count = courseSessionDetailService.countByType(sessionId, normalized);
+            total += count == null ? 0 : count;
+        }
+        return total;
+    }
+
+    private int sizeByTypes(Map<String, List<RDCourseSessionDetail>> grouped, String... types) {
+        if (grouped == null || grouped.isEmpty() || types == null || types.length == 0) {
+            return 0;
+        }
+
+        int total = 0;
+        for (Map.Entry<String, List<RDCourseSessionDetail>> entry : grouped.entrySet()) {
+            String key = entry.getKey();
+            if (key == null) {
+                continue;
+            }
+            for (String type : types) {
+                if (type != null && key.equalsIgnoreCase(type)) {
+                    total += entry.getValue() == null ? 0 : entry.getValue().size();
+                    break;
+                }
+            }
+        }
+        return total;
+    }
+
+    private int countFlashcardSetsForDetails(List<RDCourseSessionDetail> flashcardDetails) {
+        if (flashcardDetails == null || flashcardDetails.isEmpty()) {
+            return 0;
+        }
+
+        int totalSets = 0;
+        for (RDCourseSessionDetail detail : flashcardDetails) {
+            if (detail == null) {
+                continue;
+            }
+
+            // CMS/JSON-backed flashcard topics do not use rd_flashcard_sets rows.
+            // Count each JSON-backed topic as one available flashcard set entry in UI.
+            boolean jsonBacked = detail.getFile() != null && !detail.getFile().trim().isEmpty();
+
+            List<RDFlashcardSetDTO> sets =
+                    rdFlashCardSetService.getFlashCardSetsByCourseSessionDetail(detail.getCourseSessionDetailId());
+            int setCount = (sets == null ? 0 : sets.size());
+
+            if (setCount > 0) {
+                totalSets += setCount;
+            } else if (jsonBacked) {
+                totalSets += 1;
+            }
+        }
+
+        return totalSets;
     }
 
 }

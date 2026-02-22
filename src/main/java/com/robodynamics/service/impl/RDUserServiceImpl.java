@@ -84,6 +84,7 @@ public class RDUserServiceImpl implements RDUserService {
 		RDUser parentUser = RDUser.fromParent(parent);
 		
 		RDUser childUser = RDUser.fromChild(child);
+		childUser.setParentContact(parent.getPhone());
 		parentUser.setProfile_id(profileType.ROBO_PARENT.getValue());
 		childUser.setProfile_id(profileType.ROBO_STUDENT.getValue());
 		rdUserDao.registerRDUser(parentUser);

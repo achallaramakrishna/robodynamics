@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lab Manual 2 – Implementing IoC using XML Configuration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#0f172a;
+    color:#f8fafc;
+    font-family:"Segoe UI", sans-serif;
+}
+.section{
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    margin-bottom:30px;
+}
+.code-block{
+    background:#0b1120;
+    padding:20px;
+    border-radius:8px;
+    font-family:Consolas, monospace;
+    font-size:14px;
+    white-space:pre;
+    overflow-x:auto;
+    display:none;
+}
+.copy-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+}
+.progress-container{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+}
+</style>
+</head>
+
+<body class="container py-5">
+
+<h1 class="text-info mb-4">Lab Manual 2</h1>
+<h3>Implementing IoC using XML Configuration</h3>
+
+<!-- INTRO -->
+<div class="section">
+<h4>📘 Objective</h4>
+<p>
+In this lab, students will learn how Spring removes tight coupling by managing object creation using the IoC container through XML configuration.
+</p>
+</div>
+
+<!-- THEORY -->
+<div class="section">
+<h4>🧠 Concept: What is IoC?</h4>
+
+<p><strong>Traditional Java:</strong></p>
+<div class="code-block" style="display:block;">
+MessageService service = new EmailService();
+</div>
+
+<p>
+The application controls object creation.
+</p>
+
+<hr>
+
+<p><strong>Spring IoC:</strong></p>
+<p>
+Spring container creates and manages objects (Beans).
+Your application only requests them.
+</p>
+
+<p class="text-warning">
+Control of object creation is inverted → Hence Inversion of Control.
+</p>
+</div>
+
+<!-- STEP 1 -->
+<div class="section">
+<h4>Step 1 – Add Spring Dependency (pom.xml)</h4>
+
+<div class="position-relative">
+<button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('pomCode', this)">Copy</button>
+<button class="btn btn-info btn-sm mb-3" onclick="toggleCode('pomCode')">Show Code</button>
+
+<div class="code-block" id="pomCode">
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+  &lt;version&gt;5.3.30&lt;/version&gt;
+&lt;/dependency&gt;
+</div>
+</div>
+
+<p>After adding dependency → Right Click Project → Maven → Update Project</p>
+</div>
+
+<!-- STEP 2 -->
+<div class="section">
+<h4>Step 2 – Create Interface</h4>
+
+<div class="position-relative">
+<button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('interfaceCode', this)">Copy</button>
+<button class="btn btn-info btn-sm mb-3" onclick="toggleCode('interfaceCode')">Show Code</button>
+
+<div class="code-block" id="interfaceCode">
+package com.robodynamics.springcore.service;
+
+public interface MessageService {
+    String sendMessage(String to, String message);
+}
+</div>
+</div>
+</div>
+
+<!-- STEP 3 -->
+<div class="section">
+<h4>Step 3 – Create Implementation</h4>
+
+<div class="position-relative">
+<button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('implCode', this)">Copy</button>
+<button class="btn btn-info btn-sm mb-3" onclick="toggleCode('implCode')">Show Code</button>
+
+<div class="code-block" id="implCode">
+package com.robodynamics.springcore.service;
+
+public class EmailService implements MessageService {
+
+    @Override
+    public String sendMessage(String to, String message) {
+        return "EMAIL SENT via Spring IoC to " + to + " | message=" + message;
+    }
+}
+</div>
+</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="section">
+<h4>Step 4 – Create Spring XML Configuration</h4>
+
+<p>Create file under: <strong>src/main/resources/applicationContext.xml</strong></p>
+
+<div class="position-relative">
+<button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('xmlCode', this)">Copy</button>
+<button class="btn btn-info btn-sm mb-3" onclick="toggleCode('xmlCode')">Show Code</button>
+
+<div class="code-block" id="xmlCode">
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;
+
+    &lt;bean id="messageService"
+          class="com.robodynamics.springcore.service.EmailService"/&gt;
+
+&lt;/beans&gt;
+</div>
+</div>
+
+<p>
+Here Spring creates the object. We do NOT use new.
+</p>
+</div>
+
+<!-- STEP 5 -->
+<div class="section">
+<h4>Step 5 – Create Main Class</h4>
+
+<div class="position-relative">
+<button class="btn btn-sm btn-outline-info copy-btn" onclick="copyCode('mainCode', this)">Copy</button>
+<button class="btn btn-info btn-sm mb-3" onclick="toggleCode('mainCode')">Show Code</button>
+
+<div class="code-block" id="mainCode">
+package com.robodynamics.springcore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.robodynamics.springcore.service.MessageService;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        MessageService service =
+                context.getBean("messageService", MessageService.class);
+
+        System.out.println(
+                service.sendMessage("student@robodynamics.in",
+                        "Welcome to Spring IoC!")
+        );
+    }
+}
+</div>
+</div>
+</div>
+
+<!-- OUTPUT -->
+<div class="section">
+<h4>Expected Output</h4>
+<div class="code-block" style="display:block;">
+EMAIL SENT via Spring IoC to student@robodynamics.in | message=Welcome to Spring IoC!
+</div>
+</div>
+
+<!-- FLOW -->
+<div class="section">
+<h4>🔁 Execution Flow</h4>
+<ol>
+<li>Spring container starts.</li>
+<li>Reads applicationContext.xml.</li>
+<li>Creates EmailService bean.</li>
+<li>Stores bean inside container.</li>
+<li>App requests bean using getBean().</li>
+<li>Spring returns managed object.</li>
+</ol>
+</div>
+
+<!-- TROUBLESHOOT -->
+<div class="section">
+<h4>🚨 Common Errors & Fixes</h4>
+
+<ul>
+<li><strong>Cannot find spring-context:</strong> Run Maven Update</li>
+<li><strong>applicationContext.xml not found:</strong> Ensure file inside resources</li>
+<li><strong>NoSuchBeanDefinitionException:</strong> Check bean id name</li>
+<li><strong>ClassNotFoundException:</strong> Verify fully qualified class name in XML</li>
+</ul>
+</div>
+
+<!-- REFLECTION -->
+<div class="section">
+<h4>🧠 Reflection</h4>
+<p>
+We no longer use <strong>new EmailService()</strong>.
+Spring container creates and manages the object.
+This removes tight coupling.
+</p>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function toggleCode(id){
+    const el=document.getElementById(id);
+    el.style.display = el.style.display==="block"?"none":"block";
+}
+
+function copyCode(id, button){
+    const code = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(code).then(()=>{
+        button.innerText="Copied!";
+        setTimeout(()=>{ button.innerText="Copy"; },1500);
+    });
+}
+</script>
+
+</body>
+</html>

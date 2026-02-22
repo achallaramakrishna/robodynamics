@@ -14,6 +14,7 @@ import com.robodynamics.model.RDCourseOffering;
 import com.robodynamics.model.RDUser;
 import com.robodynamics.service.RDCourseOfferingService;
 import com.robodynamics.service.RDMentorService;
+import com.robodynamics.util.RDRoleRouteUtil;
 
 @Controller
 public class RDMentorDashboardController {
@@ -32,6 +33,9 @@ public class RDMentorDashboardController {
     	    if (user == null) {
     	        return "redirect:/login";
     	    }
+            if (user.getProfile_id() != RDUser.profileType.ROBO_MENTOR.getValue()) {
+                return RDRoleRouteUtil.redirectHomeFor(user);
+            }
 
     	    boolean profileExists = mentorService.hasMentorProfile(user.getUserID());
     	    List<RDCourseOffering> courseOfferings = courseOfferingService.getCourseOfferingsByMentor(user.getUserID());
@@ -54,6 +58,9 @@ public class RDMentorDashboardController {
         RDUser user = (RDUser) session.getAttribute("rdUser");
         if (user == null) {
             return "redirect:/login";
+        }
+        if (user.getProfile_id() != RDUser.profileType.ROBO_MENTOR.getValue()) {
+            return RDRoleRouteUtil.redirectHomeFor(user);
         }
 
         // Security: ensure mentor owns this course offering

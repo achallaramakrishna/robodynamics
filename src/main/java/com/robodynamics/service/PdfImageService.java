@@ -2,16 +2,10 @@ package com.robodynamics.service;
 
 import javax.imageio.ImageIO;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.springframework.stereotype.Component;
-
-import org.springframework.stereotype.Component;
-
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.PDFRenderer;
-
-import javax.imageio.ImageIO;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,7 +22,7 @@ public class PdfImageService {
         List<File> images = new ArrayList<>();
         Path tempDir = Files.createTempDirectory("ocr_pages");
 
-        try (PDDocument document = PDDocument.load(pdfPath.toFile())) {
+        try (PDDocument document = Loader.loadPDF(pdfPath.toFile())) {
             PDFRenderer renderer = new PDFRenderer(document);
 
             for (int i = 0; i < document.getNumberOfPages(); i++) {

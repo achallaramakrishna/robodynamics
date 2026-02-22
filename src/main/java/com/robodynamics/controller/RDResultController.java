@@ -31,7 +31,7 @@ public class RDResultController {
         RDQuiz quiz = (RDQuiz) session.getAttribute("quiz");
 
         if (rdUser == null) return "redirect:/login";
-        if (quiz == null) return "redirect:/dashboard";
+        if (quiz == null) return "redirect:/home";
 
         List<RDQuizResult> results =
                 resultService.getUserResultsForQuiz(quiz.getQuizId(), rdUser.getUserID(), 0);

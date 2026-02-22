@@ -1,0 +1,9 @@
+HTTP/1.1 200 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: text/html;charset=UTF-8
+Content-Language: en-IN
+Transfer-Encoding: chunked
+Date: Sun, 22 Feb 2026 05:27:01 GMT
+

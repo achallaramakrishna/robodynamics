@@ -65,8 +65,14 @@ public class HtmlToPdf {
 
     /** Replace common HTML named entities with numeric references that XML accepts. */
     private static String sanitizeForXml(String html) {
-        // Be generous: handle case-insensitive &nbsp; and missing ';'
+        // Strip script blocks for PDF rendering; interactive JS is not needed in static output.
         String out = html
+            .replaceAll("(?is)<script\\b[^>]*>.*?</script>", "")
+            // Escape raw ampersands that are not already entities.
+            .replaceAll("&(?!(?:#\\d+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]+);)", "&amp;")
+            // Convert HTML void tags into XHTML-compatible self-closing tags.
+            .replaceAll("(?i)<(meta|link|img|br|hr|input)([^>]*?)(?<!/)>", "<$1$2/>")
+            // Be generous: handle case-insensitive &nbsp; and missing ';'
             .replaceAll("(?i)&nbsp;?", "&#160;")
             .replace("&ensp;",   "&#8194;")
             .replace("&emsp;",   "&#8195;")
@@ -88,6 +94,8 @@ public class HtmlToPdf {
             .replace("&quot;",   "&#34;")
             .replace("&lt;",     "&#60;")
             .replace("&gt;",     "&#62;");
+        // Any remaining named entities would break strict XML; keep literal text instead.
+        out = out.replaceAll("&(?!(?:amp|lt|gt|quot|apos|#\\d+|#x[0-9a-fA-F]+);)([a-zA-Z][a-zA-Z0-9]+);", "&amp;$1;");
         return out;
     }
 }

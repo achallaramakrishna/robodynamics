@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.model.RDMatchQuestion;
 import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDMatchPair;
+import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDMatchQuestionService;
 import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.service.RDMatchPairService;
@@ -41,6 +43,9 @@ public class RDStudentMatchingPairController {
     @Autowired
     private RDMatchPairService matchPairService;
 
+    @Autowired
+    private RDCourseSessionDetailService courseSessionDetailService;
+
 
 @GetMapping("/list")
 public String showMatchingPairList(
@@ -50,14 +55,26 @@ public String showMatchingPairList(
 	
 	
 	RDCourseSession session = courseSessionservice.getCourseSession(sessionId);
-	
+
 	System.out.println("Session id - " + sessionId);
-	
+
     // Fetch ALL matching-pair questions under this session
     List<RDMatchQuestion> questions =
             matchQuestionService.findBySessionId(sessionId);
     System.out.println("Questions count - " + questions.size());
-    
+
+    // If no DB-backed questions found, check for JSON-backed CMS content
+    if (questions == null || questions.isEmpty()) {
+        List<RDCourseSessionDetail> jsonDetails =
+                courseSessionDetailService.getBySessionAndType(sessionId, "matchingpair");
+        boolean hasJson = jsonDetails.stream()
+                .anyMatch(d -> d.getFile() != null && !d.getFile().trim().isEmpty());
+        if (hasJson) {
+            return "redirect:/student/content/list/" + sessionId
+                    + "/matchingpair?enrollmentId=" + enrollmentId;
+        }
+    }
+
     model.addAttribute("session", session);
 
     model.addAttribute("questions", questions);

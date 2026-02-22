@@ -1,0 +1,82 @@
+[
+  {
+    "sessionId": 1,
+    "sessionDetailId": 1,
+    "topic": "DSA Fundamentals - Arrays and Strings",
+    "version": 1,
+    "type": "pdf",
+    "file": "session1_dsa_arrays_strings_fundamentals.pdf"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 2,
+    "topic": "Problem Solving Techniques",
+    "version": 1,
+    "type": "pdf",
+    "file": "session1_problem_solving_techniques.pdf"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 3,
+    "topic": "DSA Quick Reference - Time Complexity",
+    "version": 1,
+    "type": "flashcard",
+    "file": "session1_time_complexity_flashcards.json"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 4,
+    "topic": "Array Operations Practice",
+    "version": 1,
+    "type": "flashcard",
+    "file": "session1_array_operations_flashcards.json"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 5,
+    "topic": "DSA Screening Assessment",
+    "version": 1,
+    "type": "quiz",
+    "file": "session1_dsa_screening_quiz.json"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 6,
+    "topic": "Algorithm Complexity Matching",
+    "version": 1,
+    "type": "matching_pair",
+    "file": "session1_algorithm_complexity_matching.json"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 7,
+    "topic": "Data Structures Concepts Game",
+    "version": 1,
+    "type": "matching_game",
+    "file": "session1_data_structures_matching_game.json"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 8,
+    "topic": "DSA Comprehensive Assessment Paper",
+    "version": 1,
+    "type": "exam_paper",
+    "file": "session1_dsa_comprehensive_exam.json"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 9,
+    "topic": "Coding Practice Problems",
+    "version": 1,
+    "type": "pdf",
+    "file": "session1_coding_practice_problems.pdf"
+  },
+  {
+    "sessionId": 1,
+    "sessionDetailId": 10,
+    "topic": "DSA Video Tutorial - Array Fundamentals",
+    "version": 1,
+    "type": "video",
+    "file": "session1_array_fundamentals_tutorial.mp4"
+  }
+]

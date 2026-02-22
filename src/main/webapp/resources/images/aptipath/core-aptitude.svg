@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="Core aptitude visual">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#0b1f3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="20" fill="url(#g1)"/>
+  <g fill="#ffffff" opacity="0.95">
+    <text x="44" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Core Aptitude Sprint</text>
+    <text x="44" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="20">Quantitative + Logical + Verbal + Spatial reasoning</text>
+    <rect x="44" y="146" width="180" height="112" rx="10" fill="#ffffff" opacity="0.17"/>
+    <text x="66" y="206" font-family="Consolas, monospace" font-size="34" font-weight="700">2, 6, 12, ?</text>
+    <rect x="248" y="146" width="220" height="112" rx="10" fill="#ffffff" opacity="0.17"/>
+    <text x="268" y="186" font-family="Segoe UI, Arial, sans-serif" font-size="24">If 8 books cost 240,</text>
+    <text x="268" y="218" font-family="Segoe UI, Arial, sans-serif" font-size="24">what is cost of 5?</text>
+    <rect x="494" y="146" width="420" height="112" rx="10" fill="#ffffff" opacity="0.17"/>
+    <text x="514" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="24">Read carefully. Solve with method, not guesswork.</text>
+  </g>
+</svg>

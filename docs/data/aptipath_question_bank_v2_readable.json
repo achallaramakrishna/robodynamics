@@ -1,0 +1,1388 @@
+﻿[
+    {
+        "ci_question_id":  11,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_01",
+        "sequence_no":  1,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Verbal reasoning: Choose the best analogy. Catalyst is to reaction as coach is to:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Athlete progress"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Sports equipment"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Tournament ticket"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Scoreboard"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  12,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_01",
+        "sequence_no":  2,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: A school wants to cut electricity usage by 15%. What is the best first step?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Collect one week room-wise usage data"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Replace all lights immediately"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Ban AC use for everyone"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Issue a warning notice only"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  13,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_INT_01",
+        "sequence_no":  3,
+        "section_code":  "INTEREST_WORK",
+        "question_type":  "MCQ",
+        "question_text":  "Which weekend project are you most likely to complete fully?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Build a small robot and tune it"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Host a school event with sponsors"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Produce a short social awareness video"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Design a student support survey"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  14,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_VAL_01",
+        "sequence_no":  4,
+        "section_code":  "VALUES_MOTIVATION",
+        "question_type":  "MCQ",
+        "question_text":  "Which matters most when selecting a career path right now?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Long-term growth and mastery"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Quick recognition"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Minimal effort path"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Only peer approval"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  15,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_LRN_01",
+        "sequence_no":  5,
+        "section_code":  "LEARNING_BEHAVIOR",
+        "question_type":  "MCQ",
+        "question_text":  "You miss your study target for two days. What do you do next?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Reset plan and recover with a focused schedule"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Wait for motivation to return"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Drop difficult topics permanently"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Study randomly without a plan"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  16,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_AIR_01",
+        "sequence_no":  6,
+        "section_code":  "AI_READINESS",
+        "question_type":  "MCQ",
+        "question_text":  "When using an AI tool for homework, the most reliable practice is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Verify AI output with textbook or trusted source"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Copy the answer as-is if it looks fluent"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Use only one prompt and submit quickly"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Avoid checking units or assumptions"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  17,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_REAL_01",
+        "sequence_no":  7,
+        "section_code":  "CAREER_REALITY",
+        "question_type":  "MCQ",
+        "question_text":  "A career you like needs 3 years of disciplined practice. Your response is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Commit to a structured long-term plan"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Try only if immediate results appear"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Switch paths every month"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Avoid effort-heavy careers"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  0.8999999761581421,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  18,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_02",
+        "sequence_no":  8,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Quantitative: If 18 notebooks cost 540, what is the cost of 11 notebooks?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "270"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "300"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "330"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "360"
+                             }
+                         ],
+        "correct_option":  "C",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  19,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_02",
+        "sequence_no":  9,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: In a mock test, wrong answers carry negative marks. Best strategy is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Attempt only questions with clear elimination confidence"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Attempt every question regardless of certainty"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Skip all hard questions without reading"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Spend equal time on each question blindly"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  20,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_INT_02",
+        "sequence_no":  10,
+        "section_code":  "INTEREST_WORK",
+        "question_type":  "MCQ",
+        "question_text":  "Which work setup energizes you most?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Building systems and debugging issues"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Negotiating and selling daily"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Documenting policies and procedures"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Performing repetitive routine tasks"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  21,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_VAL_02",
+        "sequence_no":  11,
+        "section_code":  "VALUES_MOTIVATION",
+        "question_type":  "MCQ",
+        "question_text":  "If two options pay equally, you choose the one that:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Builds stronger skills for the future"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Looks easiest immediately"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Requires the least learning"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Matches social media trends"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  22,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_LRN_02",
+        "sequence_no":  12,
+        "section_code":  "LEARNING_BEHAVIOR",
+        "question_type":  "MCQ",
+        "question_text":  "How do you typically revise after class?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Within 24 to 48 hours using active recall"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Only before tests"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Only when teacher reminds"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Rarely revise"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  23,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_AIR_02",
+        "sequence_no":  13,
+        "section_code":  "AI_READINESS",
+        "question_type":  "MCQ",
+        "question_text":  "AI readiness: Best way to prompt an AI tutor for difficult physics problems is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Ask step-by-step reasoning with unit checks"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Ask for final answer only"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Paste question without context and trust output"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Use casual chat without constraints"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  24,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_REAL_02",
+        "sequence_no":  14,
+        "section_code":  "CAREER_REALITY",
+        "question_type":  "MCQ",
+        "question_text":  "When your chosen target seems uncertain, you should:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Keep target plus prepare adjacent fallback options"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Ignore uncertainty and avoid backup planning"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Stop preparation immediately"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Rely only on friends choices"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  0.8999999761581421,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  25,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_03",
+        "sequence_no":  15,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Logical reasoning: All coders are problem-solvers. Some mentors are coders. Which statement follows?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "All mentors are problem-solvers"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Some mentors are problem-solvers"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "No mentor is a problem-solver"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Some problem-solvers are not coders"
+                             }
+                         ],
+        "correct_option":  "B",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  26,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_03",
+        "sequence_no":  16,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: A startup must choose one feature to launch first. Best decision method is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Score user impact, effort, and risk before selecting"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Choose the flashiest feature only"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Pick randomly to save time"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Build all features partially"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  27,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_INT_03",
+        "sequence_no":  17,
+        "section_code":  "INTEREST_WORK",
+        "question_type":  "MCQ",
+        "question_text":  "You prefer tasks where success is defined by:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Solving complex problems with measurable improvement"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Avoiding any performance evaluation"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Doing only tasks assigned by others"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Repeating known steps forever"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  28,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_VAL_03",
+        "sequence_no":  18,
+        "section_code":  "VALUES_MOTIVATION",
+        "question_type":  "MCQ",
+        "question_text":  "Which statement best matches your motivation style?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "I value purposeful effort and progress tracking"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "I start many goals but rarely follow through"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "I avoid goals that need feedback"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "I work only under pressure from others"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  29,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_LRN_03",
+        "sequence_no":  19,
+        "section_code":  "LEARNING_BEHAVIOR",
+        "question_type":  "MCQ",
+        "question_text":  "During long exam preparation, your best habit is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Weekly review plus error-log correction"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "New material daily without revision"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Skipping analysis of mistakes"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Studying only favorite topics"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  30,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_AIR_03",
+        "sequence_no":  20,
+        "section_code":  "AI_READINESS",
+        "question_type":  "MCQ",
+        "question_text":  "Which behavior shows strong AI-era collaboration skill?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Use AI drafts, then refine with peer discussion"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Use AI output and avoid teamwork"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Ignore conflicting viewpoints"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Avoid documenting assumptions"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  31,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_REAL_03",
+        "sequence_no":  21,
+        "section_code":  "CAREER_REALITY",
+        "question_type":  "MCQ",
+        "question_text":  "If your score drops in one mock test, what is the best response?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Diagnose weak areas and adjust the weekly plan"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Conclude you are not capable"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Ignore the result completely"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Copy someone else schedule without adaptation"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  0.8999999761581421,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  32,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_04",
+        "sequence_no":  22,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Spatial reasoning: A cube has opposite faces painted red and blue. If red is top, blue can be:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Bottom only"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Any adjacent face"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Left only"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Front only"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  33,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_04",
+        "sequence_no":  23,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: A biology experiment gives inconsistent results. First correction should be:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Check control variables and measurement consistency"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Discard all data and start new topic"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Change hypothesis after every trial"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Report average without checking errors"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  34,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_INT_04",
+        "sequence_no":  24,
+        "section_code":  "INTEREST_WORK",
+        "question_type":  "MCQ",
+        "question_text":  "Which cross-domain task feels most exciting?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Math plus coding plus real-world model building"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Only memorizing definitions repeatedly"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Avoiding experimentation and discussion"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Following one template forever"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  35,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_VAL_04",
+        "sequence_no":  25,
+        "section_code":  "VALUES_MOTIVATION",
+        "question_type":  "MCQ",
+        "question_text":  "You are offered two projects: easy short-term versus difficult high-learning. You pick:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Difficult high-learning with a milestone plan"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Easy short-term regardless of growth"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Neither because both need effort"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Whichever requires least accountability"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  36,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_LRN_04",
+        "sequence_no":  26,
+        "section_code":  "LEARNING_BEHAVIOR",
+        "question_type":  "MCQ",
+        "question_text":  "Which approach improves exam stamina most?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Timed practice blocks with review breaks"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Random late-night cramming"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Only passive reading"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Skipping sleep before tests"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  37,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_AIR_04",
+        "sequence_no":  27,
+        "section_code":  "AI_READINESS",
+        "question_type":  "MCQ",
+        "question_text":  "AI ethics in learning means:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Use AI responsibly and cite support where needed"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Submit AI text as original work"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Hide all AI usage from mentors"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Use AI to bypass understanding"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.100000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  38,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_REAL_04",
+        "sequence_no":  28,
+        "section_code":  "CAREER_REALITY",
+        "question_type":  "MCQ",
+        "question_text":  "Communication-heavy roles require frequent presentations. You currently:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Practice gradually to improve communication confidence"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Avoid all speaking tasks permanently"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Assume communication never matters"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Wait for confidence without practice"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  0.8999999761581421,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  39,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_05",
+        "sequence_no":  29,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Quantitative: Ratio of boys to girls is 5:4 in a class of 45. Number of girls?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "18"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "20"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "22"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "25"
+                             }
+                         ],
+        "correct_option":  "B",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  40,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_05",
+        "sequence_no":  30,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: A social campaign has low participation. Most effective fix is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Run audience interviews and redesign message"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Post more without feedback analysis"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Change logo every day"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Stop campaign immediately"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  41,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_INT_05",
+        "sequence_no":  31,
+        "section_code":  "INTEREST_WORK",
+        "question_type":  "MCQ",
+        "question_text":  "You would rather spend two hours on:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Breaking a hard concept until it becomes clear"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Scrolling updates about others achievements"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Postponing all decisions"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Repeating solved easy questions only"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  42,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_06",
+        "sequence_no":  32,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Verbal: Choose the sentence with strongest logical structure.",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Since all data was sampled randomly, inference error is reduced."
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Data looked good so the result must be correct."
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Most students liked it therefore it is scientifically valid."
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "One success proves the method always works."
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  43,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_06",
+        "sequence_no":  33,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: You must choose between NEET and JEE focus with limited time. Best path is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Map strengths, syllabus overlap, and mentor feedback before committing"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Choose whichever friends choose"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Prepare both fully without scheduling"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Delay decision until exam month"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  44,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_INT_06",
+        "sequence_no":  34,
+        "section_code":  "INTEREST_WORK",
+        "question_type":  "MCQ",
+        "question_text":  "When you see a difficult machine or system, your first thought is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "How does this work internally and how can it improve?"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "I should avoid understanding this"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Someone else will handle it"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "This is not useful to learn"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  45,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_07",
+        "sequence_no":  35,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Logical sequence: 3, 7, 15, 31, ?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "45"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "51"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "63"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "95"
+                             }
+                         ],
+        "correct_option":  "C",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  46,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_07",
+        "sequence_no":  36,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: In a design sprint, user testing shows confusion. Next action is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Revise prototype based on top confusion points"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Ignore users and launch anyway"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Add more features without testing"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Change team roles without evidence"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  47,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_08",
+        "sequence_no":  37,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Spatial: A paper is folded twice and one corner is cut. After unfolding, cuts appear:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "At one corner only"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "At two symmetric points"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "At four symmetric points"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Randomly placed"
+                             }
+                         ],
+        "correct_option":  "C",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  48,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_APPL_08",
+        "sequence_no":  38,
+        "section_code":  "APPLIED_CHALLENGE",
+        "question_type":  "MCQ",
+        "question_text":  "Applied challenge: A mock test trend shows slow improvement. Best intervention is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Section-wise analysis and targeted drill schedule"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Increase study hours without analysis"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Switch every resource weekly"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Attempt fewer tests"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.399999976158142,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  49,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_09",
+        "sequence_no":  39,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Quantitative: If a speed increases from 40 km/h to 50 km/h, percentage increase is:",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "20%"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "25%"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "30%"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "40%"
+                             }
+                         ],
+        "correct_option":  "B",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  50,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_10",
+        "sequence_no":  40,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Verbal inference: Which statement is strongest when evidence is incomplete?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Propose a cautious conclusion and seek more data"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "Claim certainty from one data point"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "Reject all evidence immediately"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "Accept the most popular opinion"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  51,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_11",
+        "sequence_no":  41,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Logical puzzle: If no A is B, and some C are B, then which is definitely true?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "Some C are not A"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "All C are A"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "No C is A"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "All A are C"
+                             }
+                         ],
+        "correct_option":  "A",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    },
+    {
+        "ci_question_id":  52,
+        "module_code":  "APTIPATH",
+        "assessment_version":  "v2",
+        "question_code":  "AP2_CORE_12",
+        "sequence_no":  42,
+        "section_code":  "CORE_APTITUDE",
+        "question_type":  "MCQ",
+        "question_text":  "Numeric reasoning: A test has 80 questions and you solved 60%. How many were solved?",
+        "options_json":  [
+                             {
+                                 "code":  "A",
+                                 "label":  "36"
+                             },
+                             {
+                                 "code":  "B",
+                                 "label":  "42"
+                             },
+                             {
+                                 "code":  "C",
+                                 "label":  "48"
+                             },
+                             {
+                                 "code":  "D",
+                                 "label":  "60"
+                             }
+                         ],
+        "correct_option":  "C",
+        "weightage":  1.600000023841858,
+        "status":  "ACTIVE",
+        "created_at":  "2026-02-22 08:37:45",
+        "updated_at":  "2026-02-22 08:37:45"
+    }
+]

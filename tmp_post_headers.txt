@@ -1,0 +1,10 @@
+HTTP/1.1 302 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: JSESSIONID=2BF9D6760B372AEF482044F1E13986EB; Path=/robodynamics; HttpOnly
+Location: /robodynamics/platform/modules
+Content-Language: en-IN
+Content-Length: 0
+Date: Sun, 22 Feb 2026 05:20:25 GMT
+

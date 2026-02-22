@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="Career reality visual">
+  <defs>
+    <linearGradient id="g7" x1="0" x2="1">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#422006"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="20" fill="url(#g7)"/>
+  <g fill="#ffffff" opacity="0.95">
+    <text x="44" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Career Reality and Mental Preparedness</text>
+    <text x="44" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="20">Uncertainty tolerance, resilience, communication, and fallback planning</text>
+    <rect x="44" y="144" width="870" height="114" rx="12" fill="#ffffff" opacity="0.14"/>
+    <text x="70" y="188" font-family="Segoe UI, Arial, sans-serif" font-size="23">Progress is non-linear. Strong candidates regulate pressure and keep direction.</text>
+    <text x="70" y="222" font-family="Segoe UI, Arial, sans-serif" font-size="23">Plan A + Adjacent paths + Wellbeing protocol = durable success.</text>
+  </g>
+</svg>

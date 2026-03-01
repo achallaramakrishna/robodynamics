@@ -35,3 +35,7 @@ dist/
 .tomcat-base/logs/
 target/
 .m2repo/
+
+# App config with secrets (keep local only)
+src/main/resources/app-config.properties
+src/main/webapp/WEB-INF/classes/app-config.properties

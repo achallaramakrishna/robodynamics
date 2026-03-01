@@ -27,3 +27,11 @@ application-local.properties
 node_modules/
 dist/
 
+
+# Tomcat deployed WARs and backups
+.tomcat-base/webapps/*.war
+.tomcat-base/webapps/backup/
+.tomcat-base/work/
+.tomcat-base/logs/
+target/
+.m2repo/

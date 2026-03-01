@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +53,7 @@ import com.robodynamics.service.RDCIQuestionBankService;
 import com.robodynamics.service.RDCIRecommendationService;
 import com.robodynamics.service.RDCIScoreIndexService;
 import com.robodynamics.service.RDCISubscriptionService;
+import com.robodynamics.service.RDAptiPathReportEnrichmentService;
 import com.robodynamics.util.RDRoleRouteUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,11 +65,40 @@ public class RDAptiPathStudentController {
     private static final String ASSESSMENT_VERSION = "v3";
     private static final String DEFAULT_STUDENT_ONBOARDING_VIDEO_URL =
             "/assets/videos/aptipath-student-onboarding.html";
+    private static final String STUDENT_INTAKE_SECTION_PROFILE = "PROFILE";
+    private static final String STUDENT_INTAKE_SECTION_THINKING = "THINKING_COMPOSITION";
+    private static final String STUDENT_INTAKE_SECTION_REPORT_ENRICHMENT = "REPORT_ENRICHMENT";
+    private static final String STUDENT_INTAKE_SCHOOL_CODE = "S_CURR_SCHOOL_01";
+    private static final String STUDENT_INTAKE_GRADE_CODE = "S_CURR_GRADE_01";
+    private static final String STUDENT_INTAKE_BOARD_CODE = "S_CURR_BOARD_01";
+    private static final String STUDENT_INTAKE_STREAM_CODE = "S_CURR_STREAM_01";
+    private static final String STUDENT_INTAKE_SUBJECTS_CODE = "S_CURR_SUBJECTS_01";
+    private static final String STUDENT_INTAKE_PROGRAM_CODE = "S_CURR_PROGRAM_01";
+    private static final String STUDENT_INTAKE_YEARS_LEFT_CODE = "S_CURR_YEARS_LEFT_01";
+    private static final List<String> REPORT_ENRICHMENT_CODES = List.of("RFQ_01", "RFQ_02", "RFQ_03");
+    private static final Set<String> REQUIRED_STUDENT_INTAKE_CODES = Set.of(
+            STUDENT_INTAKE_SCHOOL_CODE,
+            STUDENT_INTAKE_GRADE_CODE,
+            STUDENT_INTAKE_BOARD_CODE,
+            "S_GOAL_01",
+            "S_LIFE_01",
+            "S_HOBBY_01",
+            "S_DISLIKE_01",
+            "S_STYLE_01",
+            "S_ACHIEVE_01",
+            "S_FEAR_01",
+            "S_SUPPORT_01");
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Value("${aptipath.onboarding.studentVideoUrl:" + DEFAULT_STUDENT_ONBOARDING_VIDEO_URL + "}")
     private String onboardingStudentVideoUrl;
+
+    @Value("${aptipath.release.mode:beta}")
+    private String aptiPathReleaseMode;
+
+    @Value("${aptipath.report.prefinal.enabled:false}")
+    private boolean aptiPathPrefinalEnabled;
 
     @Autowired
     private RDCISubscriptionService ciSubscriptionService;
@@ -96,6 +127,9 @@ public class RDAptiPathStudentController {
     @Autowired
     private RDCICareerMappingService ciCareerMappingService;
 
+    @Autowired(required = false)
+    private RDAptiPathReportEnrichmentService aptiPathReportEnrichmentService;
+
     @GetMapping("/home")
     public String home(@RequestParam(value = "embed", defaultValue = "0") Integer embed,
                        @RequestParam(value = "company", required = false) String companyCode,
@@ -111,15 +145,37 @@ public class RDAptiPathStudentController {
             return RDRoleRouteUtil.redirectHomeFor(student);
         }
 
-        RDCISubscription subscription = ciSubscriptionService.getLatestByStudentUserId(student.getUserID());
+        RDCISubscription subscription = resolveLatestAptiPathSubscription(student.getUserID());
         RDCIAssessmentSession latestSession = ciAssessmentSessionService.getLatestByStudentUserId(student.getUserID());
         RDCIAssessmentSession latestCompletedSession = resolveCompletedSessionForStudent(student, null);
         String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
         RDCompanyBranding branding = companyContextService.getActiveBrandingByCompanyCode(resolvedCompanyCode);
         boolean embedMode = embed != null && embed == 1;
+        boolean paymentEnabled = isLiveReleaseMode();
+        boolean hasAccess = hasAptiPathAccess(subscription) || !paymentEnabled;
+        boolean profileIntakeCompleted = hasRequiredStudentProfileIntake(subscription);
+        boolean canStartTest = hasAccess && profileIntakeCompleted;
+
+        String registrationRedirect = "/plans/checkout?plan=career-basic";
+        String registrationUrl = "/registerParentChild?plan=career-basic&redirect=" + urlEncode(registrationRedirect);
+        String intakeUrl = "/aptipath/student/intake";
+        if (embedMode) {
+            registrationRedirect = "/aptipath/student/home?embed=1&company=" + urlEncode(resolvedCompanyCode);
+            registrationUrl = "/registerParentChild?plan=career-basic&redirect=" + urlEncode(registrationRedirect);
+            intakeUrl = "/aptipath/student/intake?embed=1&company=" + urlEncode(resolvedCompanyCode);
+        } else if (!resolvedCompanyCode.equals("ROBODYNAMICS")) {
+            intakeUrl = "/aptipath/student/intake?company=" + urlEncode(resolvedCompanyCode);
+        }
 
         model.addAttribute("student", student);
         model.addAttribute("subscription", subscription);
+        model.addAttribute("paymentEnabled", paymentEnabled);
+        model.addAttribute("releaseMode", normalizedReleaseMode());
+        model.addAttribute("hasAptiPathAccess", hasAccess);
+        model.addAttribute("profileIntakeCompleted", profileIntakeCompleted);
+        model.addAttribute("canStartTest", canStartTest);
+        model.addAttribute("registrationUrl", registrationUrl);
+        model.addAttribute("intakeUrl", intakeUrl);
         model.addAttribute("latestSession", latestSession);
         model.addAttribute("latestCompletedSession", latestCompletedSession);
         model.addAttribute("embedMode", embedMode);
@@ -127,6 +183,212 @@ public class RDAptiPathStudentController {
         model.addAttribute("branding", branding);
         model.addAttribute("onboardingVideoUrl", nz(onboardingStudentVideoUrl));
         return "student/aptipath-home";
+    }
+
+    @GetMapping("/intake")
+    public String intake(@RequestParam(value = "embed", defaultValue = "0") Integer embed,
+                         @RequestParam(value = "company", required = false) String companyCode,
+                         @RequestParam(value = "intakeRequired", required = false) Integer intakeRequired,
+                         Model model,
+                         HttpSession session) {
+        Object rawUser = session.getAttribute("rdUser");
+        if (!(rawUser instanceof RDUser)) {
+            return "redirect:/login?redirect=/aptipath/student/intake";
+        }
+
+        RDUser student = requireStudent(session);
+        if (student == null) {
+            return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
+        }
+
+        RDCISubscription subscription = resolveOrCreateAccessibleSubscription(student);
+        if (!hasAptiPathAccess(subscription)) {
+            return "redirect:/aptipath/student/home?subscriptionRequired=1";
+        }
+
+        Map<String, String> answers = loadStudentProfileIntakeAnswers(subscription);
+        String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
+        RDCompanyBranding branding = companyContextService.getActiveBrandingByCompanyCode(resolvedCompanyCode);
+        boolean embedMode = embed != null && embed == 1;
+
+        model.addAttribute("student", student);
+        model.addAttribute("subscription", subscription);
+        model.addAttribute("answers", answers);
+        model.addAttribute("paymentEnabled", isLiveReleaseMode());
+        model.addAttribute("releaseMode", normalizedReleaseMode());
+        model.addAttribute("intakeRequired", intakeRequired != null && intakeRequired == 1);
+        model.addAttribute("embedMode", embedMode);
+        model.addAttribute("companyCode", resolvedCompanyCode);
+        model.addAttribute("branding", branding);
+        return "student/aptipath-intake";
+    }
+
+    @PostMapping("/intake")
+    public String saveIntake(@RequestParam("subscriptionId") Long subscriptionId,
+                             @RequestParam(value = "embed", defaultValue = "0") Integer embed,
+                             @RequestParam(value = "company", required = false) String companyCode,
+                             @RequestParam Map<String, String> formData,
+                             HttpSession session) {
+        Object rawUser = session.getAttribute("rdUser");
+        if (!(rawUser instanceof RDUser)) {
+            return "redirect:/login";
+        }
+
+        RDUser student = requireStudent(session);
+        if (student == null) {
+            return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
+        }
+
+        RDCISubscription subscription = resolveOrCreateAccessibleSubscription(student);
+        if (!hasAptiPathAccess(subscription)
+                || subscription == null
+                || !subscription.getCiSubscriptionId().equals(subscriptionId)) {
+            return "redirect:/aptipath/student/home?subscriptionRequired=1";
+        }
+
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_GOAL_01", formData.get("S_GOAL_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_LIFE_01", formData.get("S_LIFE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_SCHOOL_CODE, formData.get(STUDENT_INTAKE_SCHOOL_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_GRADE_CODE, formData.get(STUDENT_INTAKE_GRADE_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_BOARD_CODE, formData.get(STUDENT_INTAKE_BOARD_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_STREAM_CODE, formData.get(STUDENT_INTAKE_STREAM_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_SUBJECTS_CODE, formData.get(STUDENT_INTAKE_SUBJECTS_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_PROGRAM_CODE, formData.get(STUDENT_INTAKE_PROGRAM_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_YEARS_LEFT_CODE, formData.get(STUDENT_INTAKE_YEARS_LEFT_CODE));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_HOBBY_01", formData.get("S_HOBBY_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_DISLIKE_01", formData.get("S_DISLIKE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_STYLE_01", formData.get("S_STYLE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_MOTIVE_01", formData.get("S_MOTIVE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_ROLE_01", formData.get("S_ROLE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_ACHIEVE_01", formData.get("S_ACHIEVE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_ACCOLADE_01", formData.get("S_ACCOLADE_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_FEAR_01", formData.get("S_FEAR_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_STRESS_01", formData.get("S_STRESS_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_SUPPORT_01", formData.get("S_SUPPORT_01"));
+        saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_PARENT_01", formData.get("S_PARENT_01"));
+
+        StringBuilder target = new StringBuilder("redirect:/aptipath/student/home?intakeSaved=1");
+        if (embed != null && embed == 1) {
+            target.append("&embed=1");
+        }
+        if (companyCode != null && !companyCode.trim().isEmpty()) {
+            target.append("&company=").append(urlEncode(companyCode.trim()));
+        }
+        return target.toString();
+    }
+
+    @GetMapping("/report-intake")
+    public String reportIntake(@RequestParam("sessionId") Long sessionId,
+                               @RequestParam(value = "embed", defaultValue = "0") Integer embed,
+                               @RequestParam(value = "company", required = false) String companyCode,
+                               @RequestParam(value = "required", required = false) Integer required,
+                               @RequestParam(value = "validationError", required = false) Integer validationError,
+                               Model model,
+                               HttpSession session) {
+        Object rawUser = session.getAttribute("rdUser");
+        if (!(rawUser instanceof RDUser)) {
+            return "redirect:/login?redirect=/aptipath/student/report-intake";
+        }
+        RDUser student = requireStudent(session);
+        if (student == null) {
+            return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
+        }
+        if (!aptiPathPrefinalEnabled) {
+            return resultRedirect(sessionId, embed, companyCode);
+        }
+
+        RDCIAssessmentSession sessionRow = resolveCompletedSessionForStudent(student, sessionId);
+        if (sessionRow == null) {
+            return "redirect:/aptipath/student/home?resultUnavailable=1";
+        }
+
+        RDCISubscription subscription = sessionRow.getSubscription();
+        boolean completed = hasRequiredReportEnrichment(subscription);
+        if (completed && (required == null || required != 1)) {
+            return resultRedirect(sessionId, embed, companyCode);
+        }
+
+        RDCIRecommendationSnapshot recommendation = ciRecommendationService
+                .getLatestByAssessmentSessionId(sessionRow.getCiAssessmentSessionId());
+        Map<String, Object> diagnosticPayload = parseJsonObject(
+                recommendation == null ? null : recommendation.getCareerClustersJson());
+        List<String> followUpQuestions = resolveReportFollowUpQuestions(diagnosticPayload);
+        Map<String, String> savedAnswers = loadStudentIntakeAnswers(subscription, STUDENT_INTAKE_SECTION_REPORT_ENRICHMENT);
+        String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
+        RDCompanyBranding branding = companyContextService.getActiveBrandingByCompanyCode(resolvedCompanyCode);
+        boolean embedMode = embed != null && embed == 1;
+
+        model.addAttribute("student", student);
+        model.addAttribute("sessionRow", sessionRow);
+        model.addAttribute("followUpQuestions", followUpQuestions);
+        model.addAttribute("savedAnswers", savedAnswers);
+        model.addAttribute("validationError", validationError != null && validationError == 1);
+        model.addAttribute("requiredPrompt", required != null && required == 1);
+        model.addAttribute("embedMode", embedMode);
+        model.addAttribute("companyCode", resolvedCompanyCode);
+        model.addAttribute("branding", branding);
+        return "student/aptipath-report-intake";
+    }
+
+    @PostMapping("/report-intake")
+    public String saveReportIntake(@RequestParam("sessionId") Long sessionId,
+                                   @RequestParam(value = "embed", defaultValue = "0") Integer embed,
+                                   @RequestParam(value = "company", required = false) String companyCode,
+                                   @RequestParam Map<String, String> formData,
+                                   HttpSession session) {
+        Object rawUser = session.getAttribute("rdUser");
+        if (!(rawUser instanceof RDUser)) {
+            return "redirect:/login";
+        }
+        RDUser student = requireStudent(session);
+        if (student == null) {
+            return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
+        }
+        if (!aptiPathPrefinalEnabled) {
+            return resultRedirect(sessionId, embed, companyCode);
+        }
+
+        RDCIAssessmentSession sessionRow = resolveCompletedSessionForStudent(student, sessionId);
+        if (sessionRow == null || sessionRow.getSubscription() == null || sessionRow.getSubscription().getCiSubscriptionId() == null) {
+            return "redirect:/aptipath/student/home?resultUnavailable=1";
+        }
+
+        RDCIRecommendationSnapshot recommendation = ciRecommendationService
+                .getLatestByAssessmentSessionId(sessionRow.getCiAssessmentSessionId());
+        Map<String, Object> diagnosticPayload = parseJsonObject(
+                recommendation == null ? null : recommendation.getCareerClustersJson());
+        List<String> followUpQuestions = resolveReportFollowUpQuestions(diagnosticPayload);
+
+        Map<String, String> followUpAnswers = new LinkedHashMap<>();
+        for (int i = 0; i < REPORT_ENRICHMENT_CODES.size(); i++) {
+            String code = REPORT_ENRICHMENT_CODES.get(i);
+            String answer = trimToNull(formData.get(code));
+            if (answer == null || answer.length() < 20) {
+                StringBuilder redirect = new StringBuilder(reportIntakeRedirect(sessionId, embed, companyCode, true));
+                redirect.append("&validationError=1");
+                return redirect.toString();
+            }
+            saveStudentIntakeResponse(
+                    sessionRow.getSubscription().getCiSubscriptionId(),
+                    student.getUserID(),
+                    STUDENT_INTAKE_SECTION_REPORT_ENRICHMENT,
+                    code,
+                    answer);
+            followUpAnswers.put(code, answer);
+            if (i < followUpQuestions.size()) {
+                saveStudentIntakeResponse(
+                        sessionRow.getSubscription().getCiSubscriptionId(),
+                        student.getUserID(),
+                        STUDENT_INTAKE_SECTION_REPORT_ENRICHMENT,
+                        code + "_PROMPT",
+                        followUpQuestions.get(i));
+            }
+        }
+
+        applyPrefinalAiEnrichment(sessionRow, student, recommendation, diagnosticPayload, followUpQuestions, followUpAnswers);
+        StringBuilder redirect = new StringBuilder(resultRedirect(sessionId, embed, companyCode));
+        redirect.append(redirect.indexOf("?") >= 0 ? "&" : "?").append("finalInputSaved=1");
+        return redirect.toString();
     }
 
     @GetMapping("/result")
@@ -149,6 +411,9 @@ public class RDAptiPathStudentController {
         if (sessionRow == null) {
             return "redirect:/aptipath/student/home?resultUnavailable=1";
         }
+        if (aptiPathPrefinalEnabled && !hasRequiredReportEnrichment(sessionRow.getSubscription())) {
+            return reportIntakeRedirect(sessionRow.getCiAssessmentSessionId(), embed, companyCode, true);
+        }
 
         List<RDCIAssessmentResponse> responses = ciAssessmentResponseService
                 .getBySessionId(sessionRow.getCiAssessmentSessionId());
@@ -170,6 +435,13 @@ public class RDAptiPathStudentController {
         double assessedAccuracyPercent = scoreSummary == null ? 0.0 : clamp(scoreSummary.getScorePercent(), 0.0, 100.0);
         Map<String, Double> sectionScores = computeSectionScores(servedQuestions, persistedFormData);
         List<Map<String, Object>> scoreDriverQuestions = buildScoreDriverQuestions(servedQuestions, persistedFormData, 20);
+        List<RDCIIntakeResponse> intakeRows = List.of();
+        if (sessionRow.getSubscription() != null && sessionRow.getSubscription().getCiSubscriptionId() != null) {
+            intakeRows = ciIntakeService.getBySubscriptionId(sessionRow.getSubscription().getCiSubscriptionId());
+        }
+        Map<String, String> thinkingCompositionAnswers = extractStudentThinkingCompositionAnswers(intakeRows);
+        List<String> thinkingCompositionInsights = buildThinkingCompositionInsights(thinkingCompositionAnswers);
+        List<Map<String, String>> thinkingCompositionSnapshots = buildThinkingCompositionSnapshots(thinkingCompositionAnswers);
 
         RDCIScoreIndex scoreIndex = ciScoreIndexService.getByAssessmentSessionId(sessionRow.getCiAssessmentSessionId());
         RDCIRecommendationSnapshot recommendation = ciRecommendationService
@@ -259,6 +531,11 @@ public class RDAptiPathStudentController {
                     alignment,
                     emergingClusterFits);
         }
+        String aiStudentNarrative = parseStringValue(diagnosticPayload.get("aiStudentNarrative"));
+        List<String> aiParentGuidance = parseStringList(diagnosticPayload.get("aiParentGuidance"));
+        List<String> aiFollowUpQuestions = parseStringList(diagnosticPayload.get("aiFollowUpQuestions"));
+        boolean aiEnrichmentApplied = parseBooleanValue(diagnosticPayload.get("aiEnrichmentApplied"), false);
+        String aiEnrichmentStatus = parseStringValue(diagnosticPayload.get("aiEnrichmentStatus"));
         String recommendationSummaryText = buildRecommendationSummary(scoreSummary)
                 + " Career health score "
                 + careerScore
@@ -276,6 +553,13 @@ public class RDAptiPathStudentController {
         String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
         RDCompanyBranding branding = companyContextService.getActiveBrandingByCompanyCode(resolvedCompanyCode);
         boolean embedMode = embed != null && embed == 1;
+
+        // --- Grade-aware planning data (needed for 10-year roadmap) ---
+        Map<String, String> academicProfile = subscription != null
+                ? extractAcademicProfileFromAnswers(loadStudentProfileIntakeAnswers(subscription))
+                : new LinkedHashMap<>();
+        String planningMode = resolvePlanningModeFromAcademicProfile(academicProfile);
+        String planningWindow = resolvePlanningWindowFromAcademicProfile(academicProfile);
 
         model.addAttribute("student", student);
         model.addAttribute("subscription", subscription);
@@ -312,8 +596,18 @@ public class RDAptiPathStudentController {
         model.addAttribute("encouragementHighlights", encouragementHighlights);
         model.addAttribute("encouragementActions", encouragementActions);
         model.addAttribute("scoreDriverQuestions", scoreDriverQuestions);
+        model.addAttribute("thinkingCompositionInsights", thinkingCompositionInsights);
+        model.addAttribute("thinkingCompositionSnapshots", thinkingCompositionSnapshots);
         model.addAttribute("scoringMethodNotes", scoringMethodNotes);
         model.addAttribute("recommendationSummaryText", recommendationSummaryText);
+        model.addAttribute("academicProfile", academicProfile);
+        model.addAttribute("planningMode", planningMode);
+        model.addAttribute("planningWindow", planningWindow);
+        model.addAttribute("aiStudentNarrative", aiStudentNarrative);
+        model.addAttribute("aiParentGuidance", aiParentGuidance);
+        model.addAttribute("aiFollowUpQuestions", aiFollowUpQuestions);
+        model.addAttribute("aiEnrichmentApplied", aiEnrichmentApplied);
+        model.addAttribute("aiEnrichmentStatus", aiEnrichmentStatus);
         model.addAttribute("recommendation", effectiveRecommendation);
         model.addAttribute("planAText", planSummaryText(
                 effectiveRecommendation.getPlanAJson(),
@@ -324,6 +618,9 @@ public class RDAptiPathStudentController {
         model.addAttribute("planCText", planSummaryText(
                 effectiveRecommendation.getPlanCJson(),
                 "Exploratory path: run low-risk discovery sprints before lock-in."));
+        model.addAttribute("planACareer", topCareerMatches.size() > 0 ? topCareerMatches.get(0) : null);
+        model.addAttribute("planBCareer", topCareerMatches.size() > 1 ? topCareerMatches.get(1) : null);
+        model.addAttribute("planCCareer", topCareerMatches.size() > 2 ? topCareerMatches.get(2) : null);
         model.addAttribute("embedMode", embedMode);
         model.addAttribute("companyCode", resolvedCompanyCode);
         model.addAttribute("branding", branding);
@@ -381,6 +678,7 @@ public class RDAptiPathStudentController {
     public String test(@RequestParam(value = "embed", defaultValue = "0") Integer embed,
                        @RequestParam(value = "company", required = false) String companyCode,
                        @RequestParam(value = "validationError", required = false) Integer validationError,
+                       @RequestParam(value = "restarted", required = false) Integer restarted,
                        @RequestParam(value = "missing", required = false) String missing,
                        Model model,
                        HttpSession session) {
@@ -394,14 +692,28 @@ public class RDAptiPathStudentController {
             return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
         }
 
-        RDCISubscription subscription = ciSubscriptionService.getLatestByStudentUserId(student.getUserID());
-        if (!isActiveAptiPathSubscription(subscription)) {
+        RDCISubscription subscription = resolveOrCreateAccessibleSubscription(student);
+        if (!hasAptiPathAccess(subscription)) {
             return "redirect:/aptipath/student/home?subscriptionRequired=1";
+        }
+        if (!hasRequiredStudentProfileIntake(subscription)) {
+            StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/intake?intakeRequired=1");
+            if (embed != null && embed == 1) {
+                redirect.append("&embed=1");
+            }
+            if (companyCode != null && !companyCode.trim().isEmpty()) {
+                redirect.append("&company=").append(urlEncode(companyCode.trim()));
+            }
+            return redirect.toString();
         }
 
         RDCIAssessmentSession liveSession = resolveOrCreateLiveSession(subscription, student);
+        Map<String, String> academicProfile = loadStudentProfileIntakeAnswers(subscription);
+        String academicStage = resolveAcademicStage(academicProfile);
         List<RDCIQuestionBank> questions = ciQuestionBankService
                 .getOrSeedActiveQuestions("APTIPATH", liveSession.getAssessmentVersion());
+        questions = filterQuestionsByAcademicGrade(questions, academicProfile);
+        questions = filterQuestionsByAcademicStage(questions, academicStage, academicProfile);
 
         Map<String, String> savedAnswers = new LinkedHashMap<>();
         List<RDCIAssessmentResponse> savedResponses = ciAssessmentResponseService
@@ -423,8 +735,13 @@ public class RDAptiPathStudentController {
             row.put("mediaVideoUrl", question.getMediaVideoUrl());
             row.put("mediaAnimationUrl", question.getMediaAnimationUrl());
             row.put("options", parseOptions(question.getOptionsJson()));
+            row.put("timeLimitSecs", question.getTimeLimitSecs());
+            row.put("isBehavioral", Boolean.TRUE.equals(question.getIsBehavioral()));
+            row.put("careerClusterMap", question.getCareerClusterMap());
+            row.put("difficulty", question.getDifficulty());
             questionPayload.add(row);
         }
+        Map<String, String> thinkingAnswers = loadStudentThinkingCompositionAnswers(subscription);
 
         String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
         RDCompanyBranding branding = companyContextService.getActiveBrandingByCompanyCode(resolvedCompanyCode);
@@ -435,14 +752,79 @@ public class RDAptiPathStudentController {
         model.addAttribute("sessionRow", liveSession);
         model.addAttribute("questions", questions);
         model.addAttribute("savedAnswers", savedAnswers);
+        model.addAttribute("thinkingStorySummary", nz(thinkingAnswers.get("S_STORY_SUMMARY_01")));
+        model.addAttribute("thinkingStoryDecision", nz(thinkingAnswers.get("S_STORY_DECISION_01")));
+        model.addAttribute("thinkingStoryAction", nz(thinkingAnswers.get("S_STORY_ACTION_01")));
         model.addAttribute("questionsJson", toJson(questionPayload, "[]"));
         model.addAttribute("savedAnswersJson", toJson(savedAnswers, "{}"));
+        model.addAttribute("academicStage", academicStage);
+        model.addAttribute("academicProfile", academicProfile);
+        model.addAttribute("questionBankDepth", questions.size());
+        int targetQuestionCount = computeTargetQuestionCountForStage(questions, academicStage);
+        model.addAttribute("targetQuestionCount", targetQuestionCount);
+        model.addAttribute("paymentEnabled", isLiveReleaseMode());
+        model.addAttribute("releaseMode", normalizedReleaseMode());
         model.addAttribute("embedMode", embedMode);
         model.addAttribute("companyCode", resolvedCompanyCode);
         model.addAttribute("branding", branding);
         model.addAttribute("validationError", validationError != null && validationError == 1);
+        model.addAttribute("restarted", restarted != null && restarted == 1);
         model.addAttribute("missingCoverage", missing == null ? "" : missing);
         return "student/aptipath-test";
+    }
+
+    @PostMapping("/test/restart")
+    public String restartTest(@RequestParam(value = "embed", defaultValue = "0") Integer embed,
+                              @RequestParam(value = "company", required = false) String companyCode,
+                              HttpSession session) {
+        Object rawUser = session.getAttribute("rdUser");
+        if (!(rawUser instanceof RDUser)) {
+            return "redirect:/login?redirect=/aptipath/student/test";
+        }
+
+        RDUser student = requireStudent(session);
+        if (student == null) {
+            return RDRoleRouteUtil.redirectHomeFor((RDUser) rawUser);
+        }
+
+        RDCISubscription subscription = resolveOrCreateAccessibleSubscription(student);
+        if (!hasAptiPathAccess(subscription)) {
+            return "redirect:/aptipath/student/home?subscriptionRequired=1";
+        }
+        if (!hasRequiredStudentProfileIntake(subscription)) {
+            StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/intake?intakeRequired=1");
+            if (embed != null && embed == 1) {
+                redirect.append("&embed=1");
+            }
+            if (companyCode != null && !companyCode.trim().isEmpty()) {
+                redirect.append("&company=").append(urlEncode(companyCode.trim()));
+            }
+            return redirect.toString();
+        }
+
+        RDCIAssessmentSession latest = ciAssessmentSessionService.getLatestByStudentUserId(student.getUserID());
+        if (latest != null
+                && latest.getSubscription() != null
+                && subscription.getCiSubscriptionId().equals(latest.getSubscription().getCiSubscriptionId())
+                && ASSESSMENT_VERSION.equalsIgnoreCase(nz(latest.getAssessmentVersion()))
+                && !"COMPLETED".equalsIgnoreCase(nz(latest.getStatus()))) {
+            ciAssessmentSessionService.completeSession(latest.getCiAssessmentSessionId(), 0);
+        }
+
+        RDCIAssessmentSession freshSession = ciAssessmentSessionService.createSession(
+                subscription.getCiSubscriptionId(),
+                student.getUserID(),
+                ASSESSMENT_VERSION);
+        ciAssessmentSessionService.markInProgress(freshSession.getCiAssessmentSessionId());
+
+        StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/test?restarted=1");
+        if (embed != null && embed == 1) {
+            redirect.append("&embed=1");
+        }
+        if (companyCode != null && !companyCode.trim().isEmpty()) {
+            redirect.append("&company=").append(urlEncode(companyCode.trim()));
+        }
+        return redirect.toString();
     }
 
     @PostMapping("/test/submit")
@@ -471,8 +853,12 @@ public class RDAptiPathStudentController {
 
         List<RDCIQuestionBank> questions = ciQuestionBankService
                 .getOrSeedActiveQuestions("APTIPATH", sessionRow.getAssessmentVersion());
+        Map<String, String> academicProfile = loadStudentProfileIntakeAnswers(sessionRow.getSubscription());
+        String academicStage = resolveAcademicStage(academicProfile);
+        questions = filterQuestionsByAcademicGrade(questions, academicProfile);
+        questions = filterQuestionsByAcademicStage(questions, academicStage, academicProfile);
         List<RDCIQuestionBank> servedQuestions = resolveServedQuestions(questions, formData.get("questionOrder"));
-        String coverageError = validateCoverage(sessionRow.getAssessmentVersion(), servedQuestions, formData);
+        String coverageError = validateCoverage(sessionRow.getAssessmentVersion(), servedQuestions, formData, academicStage);
         if (coverageError != null) {
             StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/test?validationError=1");
             if (embed != null && embed == 1) {
@@ -482,6 +868,18 @@ public class RDAptiPathStudentController {
                 redirect.append("&company=").append(urlEncode(companyCode.trim()));
             }
             redirect.append("&missing=").append(urlEncode(coverageError));
+            return redirect.toString();
+        }
+        String thinkingValidationError = validateThinkingComposition(formData);
+        if (thinkingValidationError != null) {
+            StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/test?validationError=1");
+            if (embed != null && embed == 1) {
+                redirect.append("&embed=1");
+            }
+            if (companyCode != null && !companyCode.trim().isEmpty()) {
+                redirect.append("&company=").append(urlEncode(companyCode.trim()));
+            }
+            redirect.append("&missing=").append(urlEncode(thinkingValidationError));
             return redirect.toString();
         }
         for (RDCIQuestionBank question : servedQuestions) {
@@ -499,6 +897,16 @@ public class RDAptiPathStudentController {
                     timeSpent,
                     confidence);
         }
+        if (sessionRow.getSubscription() != null && sessionRow.getSubscription().getCiSubscriptionId() != null) {
+            Long subscriptionId = sessionRow.getSubscription().getCiSubscriptionId();
+            Integer studentUserId = student.getUserID();
+            saveStudentIntakeResponse(subscriptionId, studentUserId, STUDENT_INTAKE_SECTION_THINKING,
+                    "S_STORY_SUMMARY_01", formData.get("THINK_STORY_SUMMARY"));
+            saveStudentIntakeResponse(subscriptionId, studentUserId, STUDENT_INTAKE_SECTION_THINKING,
+                    "S_STORY_DECISION_01", formData.get("THINK_STORY_DECISION"));
+            saveStudentIntakeResponse(subscriptionId, studentUserId, STUDENT_INTAKE_SECTION_THINKING,
+                    "S_STORY_ACTION_01", formData.get("THINK_STORY_ACTION"));
+        }
 
         Integer durationSeconds = toInteger(formData.get("durationSeconds"));
         sessionRow = ciAssessmentSessionService.completeSession(sessionId, durationSeconds);
@@ -515,18 +923,32 @@ public class RDAptiPathStudentController {
         if (sessionRow.getSubscription() != null && sessionRow.getSubscription().getCiSubscriptionId() != null) {
             intakeRows = ciIntakeService.getBySubscriptionId(sessionRow.getSubscription().getCiSubscriptionId());
         }
+        Map<String, String> thinkingCompositionAnswers = extractStudentThinkingCompositionAnswers(intakeRows);
+        List<String> thinkingCompositionInsights = buildThinkingCompositionInsights(thinkingCompositionAnswers);
+        List<Map<String, String>> thinkingCompositionSnapshots = buildThinkingCompositionSnapshots(thinkingCompositionAnswers);
+        Map<String, String> academicProfileFromIntake = extractAcademicProfileFromIntakeRows(intakeRows);
+        if (!academicProfileFromIntake.isEmpty()) {
+            academicProfile.putAll(academicProfileFromIntake);
+        }
+        String planningMode = resolvePlanningModeFromAcademicProfile(academicProfile);
+        String planningWindow = resolvePlanningWindowFromAcademicProfile(academicProfile);
         double aptitudeScore = weightedAverage(sectionScores, "CORE_APTITUDE", 0.65, "APPLIED_CHALLENGE", 0.35);
         double interestScore = weightedAverage(sectionScores, "INTEREST_WORK", 0.60, "VALUES_MOTIVATION", 0.40);
         double examReadinessIndex = sectionScores.getOrDefault("LEARNING_BEHAVIOR", Math.max(45.0, percent - 6.0));
         double aiReadinessIndex = sectionScores.getOrDefault("AI_READINESS", Math.max(45.0, percent - 4.0));
         double explorationIndex = sectionScores.getOrDefault("INTEREST_WORK", Math.max(45.0, percent - 2.0));
         double pressureIndex = clamp(100.0 - sectionScores.getOrDefault("CAREER_REALITY", 55.0), 5.0, 95.0);
+        double stemFoundationIndex = sectionScores.getOrDefault("STEM_FOUNDATION", aptitudeScore);
+        double biologyFoundationIndex = sectionScores.getOrDefault("BIOLOGY_FOUNDATION", interestScore);
+        double generalAwarenessIndex = sectionScores.getOrDefault("GENERAL_AWARENESS", examReadinessIndex);
+        double reasoningIqIndex = sectionScores.getOrDefault("REASONING_IQ", aptitudeScore);
         double parentContextScore = computeParentContextScore(intakeRows);
         double alignmentIndex = computeAlignmentIndex(intakeRows);
         double overallFitScore = clamp(
                 (percent * 0.45)
-                        + (aptitudeScore * 0.30)
+                        + (aptitudeScore * 0.26)
                         + (interestScore * 0.15)
+                        + (reasoningIqIndex * 0.04)
                         + (parentContextScore * 0.10),
                 0.0,
                 100.0);
@@ -568,43 +990,51 @@ public class RDAptiPathStudentController {
         double medicineSubjectReadiness = clamp((biologyAffinity * 0.50) + (chemistryAffinity * 0.30) + (physicsAffinity * 0.20), 0.0, 100.0);
         double commerceSubjectReadiness = clamp((mathAffinity * 0.45) + (languageAffinity * 0.35) + (chemistryAffinity * 0.20), 0.0, 100.0);
         double communicationSubjectReadiness = clamp((languageAffinity * 0.70) + ((100.0 - mathAffinity) * 0.10) + (interestScore * 0.20), 0.0, 100.0);
+        double engineeringEvidence = clamp((stemFoundationIndex * 0.45) + (reasoningIqIndex * 0.35) + (engineeringSubjectReadiness * 0.20), 0.0, 100.0);
+        double medicineEvidence = clamp((biologyFoundationIndex * 0.55) + (stemFoundationIndex * 0.15) + (medicineSubjectReadiness * 0.30), 0.0, 100.0);
+        double managementEvidence = clamp((reasoningIqIndex * 0.45) + (generalAwarenessIndex * 0.25) + (commerceSubjectReadiness * 0.30), 0.0, 100.0);
+        double lawEvidence = clamp((generalAwarenessIndex * 0.35) + (reasoningIqIndex * 0.30) + (communicationSubjectReadiness * 0.35), 0.0, 100.0);
         double stemCompetencyIndex = clamp(
                 (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.32)
-                        + (sectionScores.getOrDefault("APPLIED_CHALLENGE", aptitudeScore) * 0.22)
+                        + (sectionScores.getOrDefault("APPLIED_CHALLENGE", aptitudeScore) * 0.20)
+                        + (stemFoundationIndex * 0.14)
+                        + (reasoningIqIndex * 0.10)
                         + (aiReadinessIndex * 0.18)
-                        + (mathAffinity * 0.16)
-                        + (physicsAffinity * 0.12),
+                        + (mathAffinity * 0.06),
                 0.0,
                 100.0);
         double medicalCompetencyIndex = clamp(
-                (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.16)
-                        + (sectionScores.getOrDefault("LEARNING_BEHAVIOR", examReadinessIndex) * 0.22)
+                (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.12)
+                        + (sectionScores.getOrDefault("LEARNING_BEHAVIOR", examReadinessIndex) * 0.20)
+                        + (biologyFoundationIndex * 0.18)
                         + (biologyAffinity * 0.30)
-                        + (chemistryAffinity * 0.20)
-                        + (neetFitIndex * 0.12),
+                        + (chemistryAffinity * 0.12)
+                        + (neetFitIndex * 0.08),
                 0.0,
                 100.0);
         double commerceCompetencyIndex = clamp(
-                (catFitIndex * 0.30)
-                        + (commerceSubjectReadiness * 0.28)
-                        + (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.20)
-                        + (sectionScores.getOrDefault("LEARNING_BEHAVIOR", examReadinessIndex) * 0.12)
+                (catFitIndex * 0.24)
+                        + (commerceSubjectReadiness * 0.24)
+                        + (reasoningIqIndex * 0.18)
+                        + (generalAwarenessIndex * 0.12)
+                        + (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.12)
                         + (alignmentIndex * 0.10),
                 0.0,
                 100.0);
         double humanitiesCompetencyIndex = clamp(
-                (lawFitIndex * 0.28)
-                        + (communicationSubjectReadiness * 0.26)
-                        + (sectionScores.getOrDefault("INTEREST_WORK", interestScore) * 0.20)
-                        + (sectionScores.getOrDefault("VALUES_MOTIVATION", interestScore) * 0.14)
-                        + (mentalPreparednessIndex * 0.12),
+                (lawFitIndex * 0.24)
+                        + (communicationSubjectReadiness * 0.22)
+                        + (generalAwarenessIndex * 0.20)
+                        + (sectionScores.getOrDefault("INTEREST_WORK", interestScore) * 0.16)
+                        + (sectionScores.getOrDefault("VALUES_MOTIVATION", interestScore) * 0.10)
+                        + (mentalPreparednessIndex * 0.08),
                 0.0,
                 100.0);
 
-        iitFitIndex = blendWithSubject(iitFitIndex, engineeringSubjectReadiness, 0.28);
-        neetFitIndex = blendWithSubject(neetFitIndex, medicineSubjectReadiness, 0.32);
-        catFitIndex = blendWithSubject(catFitIndex, commerceSubjectReadiness, 0.20);
-        lawFitIndex = blendWithSubject(lawFitIndex, communicationSubjectReadiness, 0.22);
+        iitFitIndex = blendWithSubject(iitFitIndex, engineeringEvidence, 0.34);
+        neetFitIndex = blendWithSubject(neetFitIndex, medicineEvidence, 0.38);
+        catFitIndex = blendWithSubject(catFitIndex, managementEvidence, 0.30);
+        lawFitIndex = blendWithSubject(lawFitIndex, lawEvidence, 0.32);
         roboticsFitIndex = blendWithSubject(roboticsFitIndex, engineeringSubjectReadiness, 0.18);
         aiSystemsFitIndex = blendWithSubject(aiSystemsFitIndex, mathAffinity, 0.18);
         spaceTechFitIndex = blendWithSubject(spaceTechFitIndex, engineeringSubjectReadiness, 0.22);
@@ -704,7 +1134,8 @@ public class RDAptiPathStudentController {
                 selectedCareerIntents,
                 studentSelfSignals,
                 subjectAffinitySignals,
-                percent);
+                percent,
+                academicProfile);
         List<Map<String, Object>> topCareerMatches = careerUniverseFits.stream()
                 .sorted((a, b) -> Double.compare(
                         (Double) b.getOrDefault("fitScore", 0.0),
@@ -728,6 +1159,70 @@ public class RDAptiPathStudentController {
         }
         if (!subjectAffinityInsights.isEmpty()) {
             careerSummaryLine = careerSummaryLine + " Subject signal: " + subjectAffinityInsights.get(0);
+        }
+        RDCIRecommendationSnapshot existingSnapshot = ciRecommendationService.getLatestByAssessmentSessionId(sessionId);
+        Map<String, Object> existingSnapshotPayload = parseJsonObject(
+                existingSnapshot == null ? null : existingSnapshot.getCareerClustersJson());
+        boolean existingAiApplied = parseBooleanValue(existingSnapshotPayload.get("aiEnrichmentApplied"), false);
+        String existingAiStatus = parseStringValue(existingSnapshotPayload.get("aiEnrichmentStatus"));
+        boolean existingAiAttempted = existingAiApplied || !existingAiStatus.isEmpty();
+        String aiStudentNarrative = "";
+        List<String> aiParentGuidance = List.of();
+        List<String> aiFollowUpQuestions = List.of();
+        boolean aiEnrichmentApplied = existingAiApplied;
+        String aiEnrichmentStatus = existingAiStatus.isEmpty() ? "DISABLED" : existingAiStatus;
+        if (!existingAiApplied) {
+            String existingSummaryLine = parseStringValue(existingSnapshotPayload.get("careerSummaryLine"));
+            if (!existingSummaryLine.isEmpty()) {
+                careerSummaryLine = existingSummaryLine;
+            }
+            List<String> existingHighlights = parseStringList(existingSnapshotPayload.get("encouragementHighlights"));
+            if (!existingHighlights.isEmpty()) {
+                encouragementHighlights = existingHighlights;
+            }
+            List<String> existingActions = parseStringList(existingSnapshotPayload.get("encouragementActions"));
+            if (!existingActions.isEmpty()) {
+                encouragementActions = existingActions;
+            }
+        }
+        aiStudentNarrative = parseStringValue(existingSnapshotPayload.get("aiStudentNarrative"));
+        aiParentGuidance = parseStringList(existingSnapshotPayload.get("aiParentGuidance"));
+        aiFollowUpQuestions = parseStringList(existingSnapshotPayload.get("aiFollowUpQuestions"));
+        if (aptiPathReportEnrichmentService != null && !existingAiAttempted) {
+            RDAptiPathReportEnrichmentService.EnrichmentResult aiEnrichment = aptiPathReportEnrichmentService
+                    .enrichReport(buildAiEnrichmentContext(
+                            student,
+                            sessionRow,
+                            percent,
+                            overallFitScore,
+                            careerScore,
+                            careerScoreBand,
+                            careerSummaryLine,
+                            streamCompetencyFits,
+                            sectionScores,
+                            topCareerMatches,
+                            intentLabels(selectedCareerIntents),
+                            subjectAffinityInsights,
+                            thinkingCompositionInsights,
+                            encouragementHighlights,
+                            encouragementActions,
+                            extractAcademicProfileFromIntakeRows(intakeRows)));
+            aiEnrichmentApplied = aiEnrichment.isApplied();
+            aiEnrichmentStatus = aiEnrichment.getStatus();
+            if (!aiEnrichment.getSummaryLine().isEmpty()) {
+                careerSummaryLine = aiEnrichment.getSummaryLine();
+            }
+            if (!aiEnrichment.getHighlights().isEmpty()) {
+                encouragementHighlights = aiEnrichment.getHighlights();
+            }
+            if (!aiEnrichment.getActions().isEmpty()) {
+                encouragementActions = aiEnrichment.getActions();
+            }
+            aiStudentNarrative = aiEnrichment.getStudentNarrative();
+            aiParentGuidance = aiEnrichment.getParentGuidance();
+            aiFollowUpQuestions = aiEnrichment.getFollowUpQuestions();
+        } else if (existingAiAttempted && aiEnrichmentStatus.isEmpty()) {
+            aiEnrichmentStatus = existingAiApplied ? "APPLIED_EXISTING" : "SKIPPED_EXISTING";
         }
 
         Map<String, Double> streamFitPayload = new LinkedHashMap<>();
@@ -775,6 +1270,14 @@ public class RDAptiPathStudentController {
         careerClusterPayload.put("streamFitIndices", streamFitIndices);
         careerClusterPayload.put("encouragementHighlights", encouragementHighlights);
         careerClusterPayload.put("encouragementActions", encouragementActions);
+        careerClusterPayload.put("aiStudentNarrative", aiStudentNarrative);
+        careerClusterPayload.put("aiParentGuidance", aiParentGuidance);
+        careerClusterPayload.put("aiFollowUpQuestions", aiFollowUpQuestions);
+        careerClusterPayload.put("aiEnrichmentApplied", aiEnrichmentApplied);
+        careerClusterPayload.put("aiEnrichmentStatus", aiEnrichmentStatus);
+        careerClusterPayload.put("academicProfile", academicProfile);
+        careerClusterPayload.put("planningMode", planningMode);
+        careerClusterPayload.put("planningWindow", planningWindow);
 
         Map<String, Object> planAPayload = new LinkedHashMap<>();
         planAPayload.put("title", "Primary Path");
@@ -807,6 +1310,8 @@ public class RDAptiPathStudentController {
                 + careerScoreBand
                 + "). "
                 + careerSummaryLine
+                + (aiEnrichmentApplied ? " AI enrichment status: APPLIED." : "")
+                + " Planning horizon: " + planningMode + " (" + planningWindow + ")."
                 + " Score calculation: 65% assessed test accuracy + 35% readiness indices."
                 + " IIT/NEET/CAT are readiness-fit indicators, not predicted exam ranks.";
 
@@ -819,6 +1324,10 @@ public class RDAptiPathStudentController {
                 planBJson,
                 planCJson,
                 summaryText);
+
+        if (aptiPathPrefinalEnabled) {
+            return reportIntakeRedirect(sessionId, embed, companyCode, false);
+        }
 
         RDCISubscription subscription = ciSubscriptionService.getLatestByStudentUserId(student.getUserID());
         String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
@@ -860,8 +1369,18 @@ public class RDAptiPathStudentController {
         model.addAttribute("encouragementHighlights", encouragementHighlights);
         model.addAttribute("encouragementActions", encouragementActions);
         model.addAttribute("scoreDriverQuestions", scoreDriverQuestions);
+        model.addAttribute("thinkingCompositionInsights", thinkingCompositionInsights);
+        model.addAttribute("thinkingCompositionSnapshots", thinkingCompositionSnapshots);
         model.addAttribute("scoringMethodNotes", buildScoringMethodNotes(scoreSummary, overallFitScore));
         model.addAttribute("recommendationSummaryText", summaryText);
+        model.addAttribute("academicProfile", academicProfile);
+        model.addAttribute("planningMode", planningMode);
+        model.addAttribute("planningWindow", planningWindow);
+        model.addAttribute("aiStudentNarrative", aiStudentNarrative);
+        model.addAttribute("aiParentGuidance", aiParentGuidance);
+        model.addAttribute("aiFollowUpQuestions", aiFollowUpQuestions);
+        model.addAttribute("aiEnrichmentApplied", aiEnrichmentApplied);
+        model.addAttribute("aiEnrichmentStatus", aiEnrichmentStatus);
         model.addAttribute("recommendation", recommendation);
         model.addAttribute("planAText", planSummaryText(
                 recommendation.getPlanAJson(),
@@ -872,10 +1391,64 @@ public class RDAptiPathStudentController {
         model.addAttribute("planCText", planSummaryText(
                 recommendation.getPlanCJson(),
                 "Exploratory path: run low-risk discovery sprints before lock-in."));
+        model.addAttribute("planACareer", topCareerMatches.size() > 0 ? topCareerMatches.get(0) : null);
+        model.addAttribute("planBCareer", topCareerMatches.size() > 1 ? topCareerMatches.get(1) : null);
+        model.addAttribute("planCCareer", topCareerMatches.size() > 2 ? topCareerMatches.get(2) : null);
         model.addAttribute("embedMode", embedMode);
         model.addAttribute("companyCode", resolvedCompanyCode);
         model.addAttribute("branding", branding);
         return "student/aptipath-result";
+    }
+
+    @PostMapping("/feedback")
+    public ResponseEntity<String> submitFeedback(@RequestParam("sessionId") Long sessionId,
+                                                  @RequestParam(value = "starRating", defaultValue = "0") int starRating,
+                                                  @RequestParam(value = "npsScore", defaultValue = "-1") int npsScore,
+                                                  @RequestParam(value = "feedbackText", required = false) String feedbackText,
+                                                  @RequestParam(value = "wouldRefer", defaultValue = "false") boolean wouldRefer,
+                                                  HttpSession session) {
+        RDUser student = requireStudent(session);
+        if (student == null) {
+            return ResponseEntity.status(401).body("{\"status\":\"unauthorized\"}");
+        }
+        RDCIAssessmentSession sessionRow = resolveCompletedSessionForStudent(student, sessionId);
+        if (sessionRow == null) {
+            return ResponseEntity.status(404).body("{\"status\":\"session_not_found\"}");
+        }
+        Long subscriptionId = sessionRow.getSubscription() != null
+                ? sessionRow.getSubscription().getCiSubscriptionId() : null;
+        if (subscriptionId == null) {
+            return ResponseEntity.status(400).body("{\"status\":\"no_subscription\"}");
+        }
+        Map<String, Object> feedbackJson = new LinkedHashMap<>();
+        feedbackJson.put("starRating", starRating);
+        feedbackJson.put("npsScore", npsScore);
+        feedbackJson.put("feedbackText", feedbackText != null ? feedbackText.trim() : "");
+        feedbackJson.put("wouldRefer", wouldRefer);
+        feedbackJson.put("sessionId", sessionId);
+        feedbackJson.put("submittedAt", java.time.LocalDateTime.now().toString());
+        String answerJson = toJson(feedbackJson, "{}");
+        ciIntakeService.saveResponse(
+                subscriptionId,
+                null,
+                student.getUserID(),
+                "STUDENT",
+                "FEEDBACK",
+                "FEEDBACK_REPORT_01",
+                String.valueOf(starRating),
+                answerJson);
+        if (npsScore >= 0) {
+            ciIntakeService.saveResponse(
+                    subscriptionId,
+                    null,
+                    student.getUserID(),
+                    "STUDENT",
+                    "FEEDBACK",
+                    "FEEDBACK_NPS_01",
+                    String.valueOf(npsScore),
+                    answerJson);
+        }
+        return ResponseEntity.ok("{\"status\":\"ok\",\"message\":\"Thank you for your feedback!\"}");
     }
 
     private String resolveCompanyCode(String companyCode, HttpSession session) {
@@ -887,6 +1460,33 @@ public class RDAptiPathStudentController {
             return ((String) raw).trim();
         }
         return "ROBODYNAMICS";
+    }
+
+    private String resultRedirect(Long sessionId, Integer embed, String companyCode) {
+        StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/result?sessionId=");
+        redirect.append(sessionId == null ? "" : sessionId);
+        if (embed != null && embed == 1) {
+            redirect.append("&embed=1");
+        }
+        if (companyCode != null && !companyCode.trim().isEmpty()) {
+            redirect.append("&company=").append(urlEncode(companyCode.trim()));
+        }
+        return redirect.toString();
+    }
+
+    private String reportIntakeRedirect(Long sessionId, Integer embed, String companyCode, boolean required) {
+        StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/report-intake?sessionId=");
+        redirect.append(sessionId == null ? "" : sessionId);
+        if (required) {
+            redirect.append("&required=1");
+        }
+        if (embed != null && embed == 1) {
+            redirect.append("&embed=1");
+        }
+        if (companyCode != null && !companyCode.trim().isEmpty()) {
+            redirect.append("&company=").append(urlEncode(companyCode.trim()));
+        }
+        return redirect.toString();
     }
 
     private RDUser requireStudent(HttpSession session) {
@@ -901,13 +1501,401 @@ public class RDAptiPathStudentController {
         return student;
     }
 
+    private boolean isLiveReleaseMode() {
+        return "LIVE".equalsIgnoreCase(normalizedReleaseMode());
+    }
+
+    private String normalizedReleaseMode() {
+        String mode = nz(aptiPathReleaseMode).trim();
+        return mode.isEmpty() ? "BETA" : mode.toUpperCase(Locale.ENGLISH);
+    }
+
+    private boolean isAptiPathModule(RDCISubscription subscription) {
+        return subscription != null && "APTIPATH".equalsIgnoreCase(nz(subscription.getModuleCode()));
+    }
+
     private boolean isActiveAptiPathSubscription(RDCISubscription subscription) {
-        return subscription != null
-                && "APTIPATH".equalsIgnoreCase(nz(subscription.getModuleCode()))
-                && "ACTIVE".equalsIgnoreCase(nz(subscription.getStatus()));
+        return isAptiPathModule(subscription) && "ACTIVE".equalsIgnoreCase(nz(subscription.getStatus()));
+    }
+
+    private boolean hasAptiPathAccess(RDCISubscription subscription) {
+        if (isLiveReleaseMode()) {
+            return isActiveAptiPathSubscription(subscription);
+        }
+        return isAptiPathModule(subscription);
+    }
+
+    private RDCISubscription resolveLatestAptiPathSubscription(Integer studentUserId) {
+        if (studentUserId == null) {
+            return null;
+        }
+        RDCISubscription active = ciSubscriptionService
+                .getLatestActiveModuleSubscription(studentUserId, "APTIPATH");
+        if (active != null) {
+            return active;
+        }
+        RDCISubscription latest = ciSubscriptionService.getLatestByStudentUserId(studentUserId);
+        return isAptiPathModule(latest) ? latest : null;
+    }
+
+    private RDCISubscription resolveOrCreateAccessibleSubscription(RDUser student) {
+        if (student == null || student.getUserID() == null) {
+            return null;
+        }
+        RDCISubscription subscription = resolveLatestAptiPathSubscription(student.getUserID());
+        if (isLiveReleaseMode()) {
+            return subscription;
+        }
+        if (subscription != null) {
+            return subscription;
+        }
+        return ensureBetaSubscription(student);
+    }
+
+    private RDCISubscription ensureBetaSubscription(RDUser student) {
+        if (student == null || student.getUserID() == null) {
+            return null;
+        }
+        String providerOrderId = "BETA-APTIPATH-STUDENT-" + student.getUserID();
+        RDUser parent = resolvePrimaryGuardian(student);
+        RDUser parentOrStudent = parent == null ? student : parent;
+        try {
+            return ciSubscriptionService.recordCheckoutSuccess(
+                    parentOrStudent,
+                    student,
+                    "aptipath-beta",
+                    "AptiPath Beta Access",
+                    "career",
+                    "beta",
+                    0,
+                    0,
+                    0,
+                    "0",
+                    "BETA",
+                    providerOrderId,
+                    null,
+                    null,
+                    null);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private RDUser resolvePrimaryGuardian(RDUser student) {
+        if (student == null) {
+            return null;
+        }
+        if (student.getMom() != null && student.getMom().getUserID() != null) {
+            return student.getMom();
+        }
+        if (student.getDad() != null && student.getDad().getUserID() != null) {
+            return student.getDad();
+        }
+        return null;
+    }
+
+    private Map<String, String> loadStudentProfileIntakeAnswers(RDCISubscription subscription) {
+        return loadStudentIntakeAnswers(subscription, STUDENT_INTAKE_SECTION_PROFILE);
+    }
+
+    private Map<String, String> loadStudentThinkingCompositionAnswers(RDCISubscription subscription) {
+        return loadStudentIntakeAnswers(subscription, STUDENT_INTAKE_SECTION_THINKING);
+    }
+
+    private Map<String, String> extractAcademicProfileFromIntakeRows(List<RDCIIntakeResponse> intakeRows) {
+        if (intakeRows == null || intakeRows.isEmpty()) {
+            return Map.of();
+        }
+        Map<String, String> answers = intakeRows.stream()
+                .filter(r -> r != null)
+                .filter(r -> "STUDENT".equalsIgnoreCase(nz(r.getRespondentType())))
+                .filter(r -> STUDENT_INTAKE_SECTION_PROFILE.equalsIgnoreCase(nz(r.getSectionCode())))
+                .filter(r -> r.getQuestionCode() != null)
+                .collect(Collectors.toMap(
+                        r -> r.getQuestionCode().trim().toUpperCase(Locale.ENGLISH),
+                        r -> nz(r.getAnswerValue()),
+                        (left, right) -> right,
+                        LinkedHashMap::new));
+        return extractAcademicProfileFromAnswers(answers);
+    }
+
+    private Map<String, String> extractAcademicProfileFromAnswers(Map<String, String> answers) {
+        Map<String, String> profile = new LinkedHashMap<>();
+        if (answers == null || answers.isEmpty()) {
+            return profile;
+        }
+        putIfNotBlank(profile, "school", answers.get(STUDENT_INTAKE_SCHOOL_CODE));
+        putIfNotBlank(profile, "grade", answers.get(STUDENT_INTAKE_GRADE_CODE));
+        putIfNotBlank(profile, "board", answers.get(STUDENT_INTAKE_BOARD_CODE));
+        putIfNotBlank(profile, "stream", answers.get(STUDENT_INTAKE_STREAM_CODE));
+        putIfNotBlank(profile, "subjects", answers.get(STUDENT_INTAKE_SUBJECTS_CODE));
+        putIfNotBlank(profile, "program", answers.get(STUDENT_INTAKE_PROGRAM_CODE));
+        putIfNotBlank(profile, "yearsLeft", answers.get(STUDENT_INTAKE_YEARS_LEFT_CODE));
+        return profile;
+    }
+
+    private void putIfNotBlank(Map<String, String> target, String key, String value) {
+        if (target == null || key == null) {
+            return;
+        }
+        String cleaned = trimToNull(value);
+        if (cleaned != null) {
+            target.put(key, cleaned);
+        }
+    }
+
+    private boolean hasRequiredReportEnrichment(RDCISubscription subscription) {
+        if (subscription == null || subscription.getCiSubscriptionId() == null) {
+            return false;
+        }
+        Map<String, String> answers = loadStudentIntakeAnswers(subscription, STUDENT_INTAKE_SECTION_REPORT_ENRICHMENT);
+        for (String code : REPORT_ENRICHMENT_CODES) {
+            if (trimToNull(answers.get(code)) == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Map<String, String> loadStudentIntakeAnswers(RDCISubscription subscription, String sectionCode) {
+        if (subscription == null || subscription.getCiSubscriptionId() == null) {
+            return new LinkedHashMap<>();
+        }
+        List<RDCIIntakeResponse> rows = ciIntakeService.getBySubscriptionId(subscription.getCiSubscriptionId());
+        return rows.stream()
+                .filter(r -> "STUDENT".equalsIgnoreCase(nz(r.getRespondentType())))
+                .filter(r -> nz(sectionCode).equalsIgnoreCase(nz(r.getSectionCode())))
+                .filter(r -> r.getQuestionCode() != null)
+                .collect(Collectors.toMap(
+                        r -> r.getQuestionCode().trim().toUpperCase(Locale.ENGLISH),
+                        r -> nz(r.getAnswerValue()),
+                        (left, right) -> right,
+                        LinkedHashMap::new));
+    }
+
+    private boolean hasRequiredStudentProfileIntake(RDCISubscription subscription) {
+        if (subscription == null || subscription.getCiSubscriptionId() == null) {
+            return false;
+        }
+        Map<String, String> answers = loadStudentProfileIntakeAnswers(subscription);
+        Set<String> answeredCodes = answers.entrySet().stream()
+                .filter(e -> !nz(e.getValue()).trim().isEmpty())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+        if (!answeredCodes.containsAll(REQUIRED_STUDENT_INTAKE_CODES)) {
+            return false;
+        }
+        return hasRequiredSeniorAcademicContext(answers);
+    }
+
+    private boolean hasRequiredSeniorAcademicContext(Map<String, String> answers) {
+        if (answers == null || answers.isEmpty()) {
+            return false;
+        }
+        String gradeCode = nz(answers.get(STUDENT_INTAKE_GRADE_CODE)).trim().toUpperCase(Locale.ENGLISH);
+        if (!isSeniorOrCollegeGrade(gradeCode) && !isPost12Grade(gradeCode)) {
+            return true;
+        }
+        String streamCode = trimToNull(answers.get(STUDENT_INTAKE_STREAM_CODE));
+        if (streamCode == null) {
+            return false;
+        }
+        if (isSeniorOrCollegeGrade(gradeCode)) {
+            String subjects = trimToNull(answers.get(STUDENT_INTAKE_SUBJECTS_CODE));
+            return subjects != null && subjects.length() >= 3;
+        }
+        String program = trimToNull(answers.get(STUDENT_INTAKE_PROGRAM_CODE));
+        String yearsLeft = trimToNull(answers.get(STUDENT_INTAKE_YEARS_LEFT_CODE));
+        return program != null && yearsLeft != null;
+    }
+
+    private boolean isSeniorOrCollegeGrade(String gradeCode) {
+        if (gradeCode == null || gradeCode.isEmpty()) {
+            return false;
+        }
+        switch (gradeCode) {
+            case "11":
+            case "12":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private boolean isPost12Grade(String gradeCode) {
+        if (gradeCode == null || gradeCode.isEmpty()) {
+            return false;
+        }
+        switch (gradeCode) {
+            case "DIPLOMA_1":
+            case "DIPLOMA_2":
+            case "DIPLOMA_3":
+            case "UG_1":
+            case "UG_2":
+            case "UG_3":
+            case "UG_4":
+            case "UG_5":
+            case "PG_1":
+            case "PG_2":
+            case "MBA_1":
+            case "MBA_2":
+            case "MTECH_1":
+            case "MTECH_2":
+            case "COLLEGE_OTHER":
+            case "WORKING":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void saveStudentIntakeResponse(Long subscriptionId,
+                                           Integer studentUserId,
+                                           String questionCode,
+                                           String answerValue) {
+        saveStudentIntakeResponse(
+                subscriptionId,
+                studentUserId,
+                STUDENT_INTAKE_SECTION_PROFILE,
+                questionCode,
+                answerValue);
+    }
+
+    private void saveStudentIntakeResponse(Long subscriptionId,
+                                           Integer studentUserId,
+                                           String sectionCode,
+                                           String questionCode,
+                                           String answerValue) {
+        ciIntakeService.saveResponse(
+                subscriptionId,
+                null,
+                studentUserId,
+                "STUDENT",
+                sectionCode,
+                questionCode,
+                answerValue,
+                null);
+    }
+
+    private List<String> resolveReportFollowUpQuestions(Map<String, Object> diagnosticPayload) {
+        List<String> fromPayload = parseStringList(
+                diagnosticPayload == null ? null : diagnosticPayload.get("aiFollowUpQuestions"));
+        List<String> questions = new ArrayList<>();
+        for (String question : fromPayload) {
+            String cleaned = trimToNull(question);
+            if (cleaned != null) {
+                questions.add(cleaned);
+            }
+            if (questions.size() >= REPORT_ENRICHMENT_CODES.size()) {
+                break;
+            }
+        }
+        if (questions.size() < REPORT_ENRICHMENT_CODES.size()) {
+            List<String> defaults = List.of(
+                    "Which top career from this report feels most energizing to you, and why?",
+                    "What is one real-life constraint to account for now (time, money, support, confidence)?",
+                    "What one measurable commitment will you complete in the next 30 days?");
+            for (String q : defaults) {
+                if (questions.size() >= REPORT_ENRICHMENT_CODES.size()) {
+                    break;
+                }
+                if (trimToNull(q) != null) {
+                    questions.add(q);
+                }
+            }
+        }
+        return questions;
+    }
+
+    private void applyPrefinalAiEnrichment(RDCIAssessmentSession sessionRow,
+                                           RDUser student,
+                                           RDCIRecommendationSnapshot recommendation,
+                                           Map<String, Object> diagnosticPayload,
+                                           List<String> followUpQuestions,
+                                           Map<String, String> followUpAnswers) {
+        if (aptiPathReportEnrichmentService == null
+                || recommendation == null
+                || sessionRow == null
+                || sessionRow.getCiAssessmentSessionId() == null) {
+            return;
+        }
+        Map<String, Object> payload = diagnosticPayload == null
+                ? new LinkedHashMap<>()
+                : new LinkedHashMap<>(diagnosticPayload);
+        String prefinalStatus = parseStringValue(payload.get("aiPrefinalEnrichmentStatus"));
+        if (!prefinalStatus.isEmpty()) {
+            return;
+        }
+        Map<String, Object> context = new LinkedHashMap<>();
+        context.put("module", "AptiPath360 Career Discovery");
+        context.put("phase", "prefinal_followup");
+        context.put("studentUserId", student == null ? null : student.getUserID());
+        context.put("sessionId", sessionRow.getCiAssessmentSessionId());
+        Map<String, String> academicProfile = extractAcademicProfileFromAnswers(
+                loadStudentProfileIntakeAnswers(sessionRow.getSubscription()));
+        context.put("academicProfile", academicProfile);
+        context.put("planningMode", resolvePlanningModeFromAcademicProfile(academicProfile));
+        context.put("planningWindow", resolvePlanningWindowFromAcademicProfile(academicProfile));
+        context.put("reportSnapshot", diagnosticPayload == null ? Map.of() : diagnosticPayload);
+        context.put("followUpQuestions", followUpQuestions == null ? List.of() : followUpQuestions);
+        context.put("followUpAnswers", followUpAnswers == null ? Map.of() : followUpAnswers);
+
+        RDAptiPathReportEnrichmentService.EnrichmentResult enrichment = aptiPathReportEnrichmentService.enrichReport(context);
+        payload.put("aiPrefinalEnrichmentApplied", enrichment.isApplied());
+        payload.put("aiPrefinalEnrichmentStatus", enrichment.isApplied()
+                ? "APPLIED_PREFINAL"
+                : "SKIPPED_" + nz(enrichment.getStatus()));
+        payload.put("reportFollowUpAnswers", followUpAnswers == null ? Map.of() : followUpAnswers);
+        payload.put("academicProfile", academicProfile);
+        payload.put("planningMode", resolvePlanningModeFromAcademicProfile(academicProfile));
+        payload.put("planningWindow", resolvePlanningWindowFromAcademicProfile(academicProfile));
+        if (!enrichment.isApplied()) {
+            ciRecommendationService.saveSnapshot(
+                    sessionRow.getCiAssessmentSessionId(),
+                    nz(recommendation.getRecommendationVersion()).isEmpty() ? ASSESSMENT_VERSION : recommendation.getRecommendationVersion(),
+                    recommendation.getStreamFitJson(),
+                    toJson(payload, "{}"),
+                    recommendation.getPlanAJson(),
+                    recommendation.getPlanBJson(),
+                    recommendation.getPlanCJson(),
+                    recommendation.getSummaryText());
+            return;
+        }
+        if (!enrichment.getSummaryLine().isEmpty()) {
+            payload.put("careerSummaryLine", enrichment.getSummaryLine());
+        }
+        if (!enrichment.getHighlights().isEmpty()) {
+            payload.put("encouragementHighlights", enrichment.getHighlights());
+        }
+        if (!enrichment.getActions().isEmpty()) {
+            payload.put("encouragementActions", enrichment.getActions());
+        }
+        payload.put("aiStudentNarrative", enrichment.getStudentNarrative());
+        payload.put("aiParentGuidance", enrichment.getParentGuidance());
+        payload.put("aiFollowUpQuestions", enrichment.getFollowUpQuestions());
+        payload.put("aiEnrichmentApplied", true);
+        payload.put("aiEnrichmentStatus", "APPLIED_PREFINAL");
+
+        String updatedSummary = nz(recommendation.getSummaryText());
+        if (!enrichment.getSummaryLine().isEmpty()) {
+            updatedSummary = (updatedSummary + " " + enrichment.getSummaryLine()).trim();
+        }
+
+        ciRecommendationService.saveSnapshot(
+                sessionRow.getCiAssessmentSessionId(),
+                nz(recommendation.getRecommendationVersion()).isEmpty() ? ASSESSMENT_VERSION : recommendation.getRecommendationVersion(),
+                recommendation.getStreamFitJson(),
+                toJson(payload, "{}"),
+                recommendation.getPlanAJson(),
+                recommendation.getPlanBJson(),
+                recommendation.getPlanCJson(),
+                updatedSummary);
     }
 
     private RDCIAssessmentSession resolveOrCreateLiveSession(RDCISubscription subscription, RDUser student) {
+        if (subscription == null || subscription.getCiSubscriptionId() == null) {
+            throw new IllegalArgumentException("AptiPath subscription is required.");
+        }
         RDCIAssessmentSession latest = ciAssessmentSessionService.getLatestByStudentUserId(student.getUserID());
         if (latest == null
                 || latest.getSubscription() == null
@@ -1096,6 +2084,114 @@ public class RDAptiPathStudentController {
         return value.isEmpty() ? "" : value;
     }
 
+    private boolean parseBooleanValue(Object raw, boolean fallback) {
+        if (raw == null) {
+            return fallback;
+        }
+        if (raw instanceof Boolean) {
+            return (Boolean) raw;
+        }
+        if (raw instanceof Number) {
+            return ((Number) raw).intValue() != 0;
+        }
+        String value = raw.toString().trim();
+        if (value.isEmpty()) {
+            return fallback;
+        }
+        if ("true".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value) || "1".equals(value)) {
+            return true;
+        }
+        if ("false".equalsIgnoreCase(value) || "no".equalsIgnoreCase(value) || "0".equals(value)) {
+            return false;
+        }
+        return fallback;
+    }
+
+    private Map<String, Object> buildAiEnrichmentContext(RDUser student,
+                                                         RDCIAssessmentSession sessionRow,
+                                                         double assessedAccuracyPercent,
+                                                         double overallReadinessScore,
+                                                         int careerScore,
+                                                         String careerScoreBand,
+                                                         String careerSummaryLine,
+                                                         Map<String, Double> streamCompetencyFits,
+                                                         Map<String, Double> sectionScores,
+                                                         List<Map<String, Object>> topCareerMatches,
+                                                         List<String> selectedIntentLabels,
+                                                         List<String> subjectAffinityInsights,
+                                                         List<String> thinkingCompositionInsights,
+                                                         List<String> encouragementHighlights,
+                                                         List<String> encouragementActions,
+                                                         Map<String, String> academicProfile) {
+        Map<String, Object> context = new LinkedHashMap<>();
+        context.put("module", "AptiPath360 Career Discovery");
+        context.put("studentUserId", student == null ? null : student.getUserID());
+        context.put("sessionId", sessionRow == null ? null : sessionRow.getCiAssessmentSessionId());
+        context.put("assessmentVersion", sessionRow == null ? ASSESSMENT_VERSION : nz(sessionRow.getAssessmentVersion()));
+        context.put("assessedAccuracyPercent", round1(assessedAccuracyPercent));
+        context.put("overallReadinessScore", round1(overallReadinessScore));
+        context.put("careerScore", careerScore);
+        context.put("careerScoreBand", nz(careerScoreBand));
+        context.put("careerSummaryLine", nz(careerSummaryLine));
+        context.put("streamCompetencyFits", streamCompetencyFits == null ? Map.of() : streamCompetencyFits);
+        context.put("sectionScores", sectionScores == null ? Map.of() : sectionScores);
+        context.put("selectedCareerIntents", selectedIntentLabels == null ? List.of() : selectedIntentLabels);
+        context.put("subjectAffinityInsights", subjectAffinityInsights == null ? List.of() : subjectAffinityInsights);
+        context.put("thinkingCompositionInsights", thinkingCompositionInsights == null ? List.of() : thinkingCompositionInsights);
+        context.put("baselineHighlights", encouragementHighlights == null ? List.of() : encouragementHighlights);
+        context.put("baselineActions", encouragementActions == null ? List.of() : encouragementActions);
+        context.put("academicProfile", academicProfile == null ? Map.of() : academicProfile);
+        context.put("planningMode", resolvePlanningModeFromAcademicProfile(academicProfile));
+        context.put("planningWindow", resolvePlanningWindowFromAcademicProfile(academicProfile));
+        context.put("topCareerMatches", toLightweightCareerRows(topCareerMatches, 6));
+        return context;
+    }
+
+    private List<Map<String, Object>> toLightweightCareerRows(List<Map<String, Object>> careers, int limit) {
+        if (careers == null || careers.isEmpty()) {
+            return List.of();
+        }
+        List<Map<String, Object>> rows = new ArrayList<>();
+        int max = Math.max(1, limit);
+        for (Map<String, Object> career : careers) {
+            if (rows.size() >= max || career == null || career.isEmpty()) {
+                continue;
+            }
+            Map<String, Object> row = new LinkedHashMap<>();
+            row.put("careerCode", parseStringValue(career.get("careerCode")));
+            row.put("careerName", parseStringValue(career.get("name")));
+            row.put("cluster", parseStringValue(career.get("cluster")));
+            row.put("fitScore", round1(parseDoubleValue(career.get("fitScore"), 0.0)));
+            row.put("fitBand", parseStringValue(career.get("fitBand")));
+            row.put("reason", parseStringValue(career.get("reason")));
+            rows.add(row);
+        }
+        return rows;
+    }
+
+    private String resolvePlanningModeFromAcademicProfile(Map<String, String> academicProfile) {
+        String grade = academicProfile == null ? "" : nz(academicProfile.get("grade")).trim().toUpperCase(Locale.ENGLISH);
+        if (isPost12Grade(grade)) {
+            return "IMMEDIATE_2_TO_4_YEARS";
+        }
+        if (isSeniorOrCollegeGrade(grade)) {
+            return "SHORT_TERM_1_TO_2_YEARS";
+        }
+        return "FOUNDATION_3_TO_8_YEARS";
+    }
+
+    private String resolvePlanningWindowFromAcademicProfile(Map<String, String> academicProfile) {
+        String mode = resolvePlanningModeFromAcademicProfile(academicProfile);
+        switch (mode) {
+            case "IMMEDIATE_2_TO_4_YEARS":
+                return "90-730 days";
+            case "SHORT_TERM_1_TO_2_YEARS":
+                return "60-365 days";
+            default:
+                return "90-1460 days";
+        }
+    }
+
     private double metricValue(BigDecimal value, double fallback) {
         if (value == null) {
             return round1(clamp(fallback, 0.0, 100.0));
@@ -1173,9 +2269,121 @@ public class RDAptiPathStudentController {
         notes.add(String.format(Locale.ENGLISH,
                 "Career Health Score uses 65%% assessed accuracy + 35%% overall readiness (current readiness %.1f/100).",
                 clamp(overallFitScore, 0.0, 100.0)));
-        notes.add("IIT/NEET/CAT values are readiness-fit indicators from this assessment, not predicted exam score/rank.");
+        notes.add("IIT/NEET/CAT/LAW values are readiness-fit indicators, not predicted exam score/rank.");
+        notes.add("Competitive-stream fit now requires domain evidence from STEM, Biology, General Awareness, and Reasoning-IQ sections.");
         notes.add("When subject-affinity survey inputs are missing, neutral baseline (50/100) is used instead of optimistic defaults.");
         return notes;
+    }
+
+    private String validateThinkingComposition(Map<String, String> formData) {
+        if (formData == null || formData.isEmpty()) {
+            return "Please complete Story Insight section before submit.";
+        }
+        String summary = trimToNull(formData.get("THINK_STORY_SUMMARY"));
+        String decision = trimToNull(formData.get("THINK_STORY_DECISION"));
+        String action = trimToNull(formData.get("THINK_STORY_ACTION"));
+        if (summary == null || decision == null || action == null) {
+            return "Please answer all Story Insight questions before submit.";
+        }
+        if (summary.length() < 35 || decision.length() < 35 || action.length() < 35) {
+            return "Story Insight responses should be meaningful (minimum 35 characters each).";
+        }
+        return null;
+    }
+
+    private Map<String, String> extractStudentThinkingCompositionAnswers(List<RDCIIntakeResponse> intakeRows) {
+        if (intakeRows == null || intakeRows.isEmpty()) {
+            return new LinkedHashMap<>();
+        }
+        return intakeRows.stream()
+                .filter(r -> r != null)
+                .filter(r -> "STUDENT".equalsIgnoreCase(nz(r.getRespondentType())))
+                .filter(r -> STUDENT_INTAKE_SECTION_THINKING.equalsIgnoreCase(nz(r.getSectionCode())))
+                .filter(r -> r.getQuestionCode() != null)
+                .collect(Collectors.toMap(
+                        r -> r.getQuestionCode().trim().toUpperCase(Locale.ENGLISH),
+                        r -> nz(r.getAnswerValue()),
+                        (left, right) -> right,
+                        LinkedHashMap::new));
+    }
+
+    private List<Map<String, String>> buildThinkingCompositionSnapshots(Map<String, String> answers) {
+        if (answers == null || answers.isEmpty()) {
+            return List.of();
+        }
+        List<Map<String, String>> snapshots = new ArrayList<>();
+        addThinkingSnapshot(snapshots, "Core Challenge Noticed", answers.get("S_STORY_SUMMARY_01"));
+        addThinkingSnapshot(snapshots, "Decision Logic", answers.get("S_STORY_DECISION_01"));
+        addThinkingSnapshot(snapshots, "Action Plan", answers.get("S_STORY_ACTION_01"));
+        return snapshots;
+    }
+
+    private void addThinkingSnapshot(List<Map<String, String>> snapshots, String label, String response) {
+        String cleaned = trimToNull(response);
+        if (snapshots == null || cleaned == null) {
+            return;
+        }
+        Map<String, String> row = new LinkedHashMap<>();
+        row.put("label", nz(label));
+        row.put("response", clipText(cleaned, 260));
+        snapshots.add(row);
+    }
+
+    private List<String> buildThinkingCompositionInsights(Map<String, String> answers) {
+        if (answers == null || answers.isEmpty()) {
+            return List.of("Story-based thinking insight is not available for this report.");
+        }
+        String summary = nz(answers.get("S_STORY_SUMMARY_01"));
+        String decision = nz(answers.get("S_STORY_DECISION_01"));
+        String action = nz(answers.get("S_STORY_ACTION_01"));
+        String merged = (summary + " " + decision + " " + action).toLowerCase(Locale.ENGLISH);
+        int wordCount = merged.trim().isEmpty() ? 0 : merged.trim().split("\\s+").length;
+
+        int reasoningSignals = keywordHits(merged, List.of("because", "therefore", "hence", "if", "then", "so that"));
+        int planningSignals = keywordHits(merged, List.of("plan", "step", "schedule", "timeline", "revise", "practice", "strategy"));
+        int growthSignals = keywordHits(merged, List.of("learn", "improve", "mistake", "feedback", "retry", "discipline", "consisten"));
+        int supportSignals = keywordHits(merged, List.of("mentor", "teacher", "parent", "friend", "team", "support"));
+
+        double depthScore = clamp((wordCount * 0.22) + (reasoningSignals * 5.0) + (planningSignals * 5.5), 0.0, 100.0);
+        double selfRegScore = clamp(40.0 + (growthSignals * 6.0) + (supportSignals * 4.0) + (planningSignals * 3.0), 0.0, 100.0);
+
+        String decisionStyle = depthScore >= 70 ? "Structured and evidence-oriented"
+                : depthScore >= 50 ? "Partially structured, needs stronger reasoning"
+                : "Reactive; needs guided thinking scaffolds";
+        String selfRegStyle = selfRegScore >= 70 ? "Strong self-regulation and growth orientation"
+                : selfRegScore >= 50 ? "Moderate self-regulation; can improve planning discipline"
+                : "Needs support in emotional regulation and execution consistency";
+
+        List<String> insights = new ArrayList<>();
+        insights.add(String.format(Locale.ENGLISH,
+                "Narrative depth: %d words captured. Decision maturity signal: %s.",
+                wordCount,
+                decisionStyle));
+        insights.add(String.format(Locale.ENGLISH,
+                "Planning cues detected: %d, reasoning cues: %d. This indicates %s.",
+                planningSignals,
+                reasoningSignals,
+                decisionStyle.toLowerCase(Locale.ENGLISH)));
+        insights.add(String.format(Locale.ENGLISH,
+                "Self-regulation signal: %s (growth cues: %d, support cues: %d).",
+                selfRegStyle,
+                growthSignals,
+                supportSignals));
+        insights.add("Use this as a guidance signal, not a clinical or diagnostic judgment.");
+        return insights;
+    }
+
+    private int keywordHits(String text, List<String> keywords) {
+        if (text == null || text.isEmpty() || keywords == null || keywords.isEmpty()) {
+            return 0;
+        }
+        int hits = 0;
+        for (String keyword : keywords) {
+            if (keyword != null && !keyword.isEmpty() && text.contains(keyword.toLowerCase(Locale.ENGLISH))) {
+                hits++;
+            }
+        }
+        return hits;
     }
 
     private double estimateMentalPreparedness(double examReadiness, double alignment, double wellbeingRisk) {
@@ -1510,7 +2718,8 @@ public class RDAptiPathStudentController {
                                                               List<String> selectedCareerIntents,
                                                               Map<String, Integer> studentSelfSignals,
                                                               Map<String, Integer> subjectAffinitySignals,
-                                                              double assessedAccuracyPercent) {
+                                                              double assessedAccuracyPercent,
+                                                              Map<String, String> academicProfile) {
         Map<String, Double> clusterScores = new LinkedHashMap<>();
         clusterScores.put("Engineering & Core Technology", clamp(iitFitIndex, 0.0, 100.0));
         clusterScores.put("Medical & Clinical Pathways", clamp(neetFitIndex, 0.0, 100.0));
@@ -1643,8 +2852,14 @@ public class RDAptiPathStudentController {
         Map<String, String> roleTargetPhase = new LinkedHashMap<>();
         Map<String, Map<String, Integer>> roleCutoffMap = new LinkedHashMap<>();
         Map<String, String> roleCodes = new LinkedHashMap<>();
-        List<RDCICareerCatalog> careerCatalog = ciCareerMappingService
+        String academicPhase = resolveAcademicCareerPhase(academicProfile);
+        List<RDCICareerCatalog> allCareerCatalog = ciCareerMappingService
                 .getActiveCareerCatalog("APTIPATH", ASSESSMENT_VERSION);
+        List<RDCICareerCatalog> careerCatalog = filterCareerCatalogByAcademicContext(allCareerCatalog, academicProfile);
+        careerCatalog = prioritizePrimaryCareerCatalog(careerCatalog, 65);
+        if (careerCatalog == null || careerCatalog.isEmpty()) {
+            careerCatalog = prioritizePrimaryCareerCatalog(allCareerCatalog, 65);
+        }
         if (careerCatalog != null && !careerCatalog.isEmpty()) {
             clusterRoles.clear();
             for (RDCICareerCatalog catalogRow : careerCatalog) {
@@ -1735,6 +2950,7 @@ public class RDAptiPathStudentController {
                         fit = (roboticsFitIndex * 0.42) + (droneAutonomyFitIndex * 0.24) + (aiReadinessIndex * 0.20) + (examReadinessIndex * 0.14) + roleVariance(role);
                     }
                 }
+                fit += academicProgramCareerBoost(cluster, role, academicProfile);
 
                 Map<String, Integer> roleCutoffs = roleCutoffMap.get(role);
                 List<String> prerequisiteGaps = buildPrerequisiteGaps(roleCutoffs, subjectAffinitySignals);
@@ -1757,6 +2973,10 @@ public class RDAptiPathStudentController {
                 String requiredSubjects = roleRequiredSubjects.getOrDefault(role, "");
                 String entranceExams = roleEntranceExams.getOrDefault(role, "");
                 String targetPhase = roleTargetPhase.getOrDefault(role, "Post-12");
+                double phasePenalty = careerPhasePenalty(targetPhase, academicPhase);
+                if (phasePenalty > 0.0) {
+                    fit = clamp(fit - phasePenalty, 12.0, 99.0);
+                }
                 List<String> evidenceTrace = buildCareerEvidenceTrace(
                         cluster,
                         sectionScores,
@@ -1778,12 +2998,90 @@ public class RDAptiPathStudentController {
                 row.put("requiredSubjects", requiredSubjects);
                 row.put("entranceExams", entranceExams);
                 row.put("targetPhase", targetPhase);
+                row.put("academicPhase", academicPhase);
                 row.put("evidenceTrace", evidenceTrace);
                 row.put("reason", "Strong signal in " + reasonSignalText + " for this pathway." + intentReason);
                 careers.add(row);
             }
         }
         return careers;
+    }
+
+    private double academicProgramCareerBoost(String cluster, String role, Map<String, String> academicProfile) {
+        if (academicProfile == null || academicProfile.isEmpty()) {
+            return 0.0;
+        }
+        String stream = nz(academicProfile.get(STUDENT_INTAKE_STREAM_CODE)).trim().toUpperCase(Locale.ENGLISH);
+        String program = nz(academicProfile.get(STUDENT_INTAKE_PROGRAM_CODE)).trim().toUpperCase(Locale.ENGLISH);
+        if (stream.isEmpty() && program.isEmpty()) {
+            return 0.0;
+        }
+
+        String roleText = (nz(cluster) + " " + nz(role)).toUpperCase(Locale.ENGLISH);
+        boolean techTrack = containsAny(stream,
+                "ENGINEERING", "TECH", "COMPUTER", "DATA", "AI", "ELECTRONICS", "ELECTRICAL",
+                "MECHANICAL", "CIVIL", "ROBOTICS", "AUTOMATION")
+                || containsAny(program,
+                "BTECH", "BE_", "MTECH", "ME", "CSE", "AI", "DATA", "CYBER", "IOT",
+                "ECE", "EEE", "MECH", "CIVIL", "ROBOTICS", "AUTOMOBILE", "MECHATRONICS");
+        if (techTrack) {
+            if (containsAny(roleText, "COMPUTER", "AI", "ROBOT", "AUTONOM", "ENGINEER", "AEROSPACE", "DRONE")) {
+                return 6.0;
+            }
+            if (containsAny(roleText, "MEDICAL", "LAW", "LEGAL", "CLINICAL")) {
+                return -3.0;
+            }
+        }
+
+        boolean medicalTrack = containsAny(stream, "HEALTH", "MEDICAL", "BIO", "LIFE_SCI")
+                || containsAny(program, "MBBS", "BDS", "BAMS", "BHMS", "BUMS", "BVSC", "BPHARM",
+                "PHARMD", "NURSING", "BPT", "BOT", "BMLT", "BOPTOM", "BASLP", "BIOTECH");
+        if (medicalTrack) {
+            if (containsAny(roleText, "MEDICAL", "HEALTH", "CLINICAL", "BIO", "PHARMA", "LIFE SCIENCE")) {
+                return 7.0;
+            }
+            if (containsAny(roleText, "LAW", "FINANCE", "ACCOUNT", "TREASURY")) {
+                return -2.5;
+            }
+        }
+
+        boolean commerceTrack = containsAny(stream, "COMMERCE", "BUSINESS", "FINANCE", "ECONOMICS", "MANAGEMENT")
+                || containsAny(program, "BBA", "BCOM", "BMS", "BFM", "BAF", "BBI", "MBA", "MCOM", "PGDM", "CA_CS_CMA");
+        if (commerceTrack) {
+            if (containsAny(roleText, "FINANCE", "ACCOUNT", "ECONOM", "BUSINESS", "ENTREPRENEUR", "PRODUCT", "SUPPLY CHAIN")) {
+                return 6.0;
+            }
+            if (containsAny(roleText, "CLINICAL", "SURGEON", "MEDICAL")) {
+                return -3.0;
+            }
+        }
+
+        boolean lawPolicyTrack = containsAny(stream, "LAW", "POLICY", "GOV", "HUMANITIES", "SOCIAL", "MEDIA", "COMM")
+                || containsAny(program, "LLB", "BALLB", "BBALLB", "BCOMLLB", "LLM", "BA_", "MA", "JOURNALISM");
+        if (lawPolicyTrack) {
+            if (containsAny(roleText, "LAW", "LEGAL", "POLICY", "GOVERNANCE", "PUBLIC IMPACT", "COMMUNICATION")) {
+                return 6.0;
+            }
+        }
+
+        boolean designTrack = containsAny(stream, "ARCH", "DESIGN", "CREATIVE", "MEDIA", "PERFORMING")
+                || containsAny(program, "BARCH", "BPLAN", "BDES", "BFA", "BID", "BFD", "ANIMATION", "VFX", "BPA");
+        if (designTrack && containsAny(roleText, "DESIGN", "UX", "MEDIA", "CREATIVE", "PRODUCT")) {
+            return 5.5;
+        }
+
+        boolean researchTrack = containsAny(stream, "SCIENCE", "RESEARCH", "AGRI", "ENV")
+                || containsAny(program, "BSC", "MSC", "BSC_", "MSC_", "AGRICULTURE", "FORENSIC", "ENVIRONMENT", "MPH");
+        if (researchTrack && containsAny(roleText, "SCIENTIST", "RESEARCH", "LAB", "CLIMATE", "BIOTECH")) {
+            return 4.5;
+        }
+
+        boolean serviceTrack = containsAny(stream, "HOSPITALITY", "TOURISM", "DEFENCE", "AVIATION", "MARITIME", "SPORTS")
+                || containsAny(program, "BHM", "BBA_HOSPITALITY", "BBA_AVIATION", "DIPLOMA_HOSPITALITY", "BTECH_MARINE", "BPED");
+        if (serviceTrack && containsAny(roleText, "OPERATIONS", "HOSPITALITY", "AVIATION", "MARITIME", "FITNESS", "WELLNESS")) {
+            return 4.0;
+        }
+        return 0.0;
     }
 
     private List<String> topSignalLabels(double aptitudeScore,
@@ -1980,6 +3278,10 @@ public class RDAptiPathStudentController {
             case "LEARNING_BEHAVIOR": return "Learning Behavior";
             case "AI_READINESS": return "AI Readiness";
             case "CAREER_REALITY": return "Career Reality";
+            case "STEM_FOUNDATION": return "STEM Foundation";
+            case "BIOLOGY_FOUNDATION": return "Biology Foundation";
+            case "GENERAL_AWARENESS": return "General Awareness";
+            case "REASONING_IQ": return "Reasoning and IQ";
             default: return sectionCode;
         }
     }
@@ -2147,6 +3449,173 @@ public class RDAptiPathStudentController {
             return "";
         }
         return value.trim().toUpperCase(Locale.ENGLISH);
+    }
+
+    private List<RDCICareerCatalog> prioritizePrimaryCareerCatalog(List<RDCICareerCatalog> rows, int primaryLimit) {
+        if (rows == null || rows.isEmpty() || primaryLimit <= 0) {
+            return rows;
+        }
+        List<RDCICareerCatalog> primary = rows.stream()
+                .filter(this::isPrimary65Career)
+                .sorted((a, b) -> Integer.compare(careerCodeSequence(a), careerCodeSequence(b)))
+                .collect(Collectors.toList());
+        if (primary.size() >= primaryLimit) {
+            if (clusterDiversityCount(primary) >= 8) {
+                return new ArrayList<>(primary.subList(0, primaryLimit));
+            }
+            return pickDiverseCareerCatalog(rows, primaryLimit);
+        }
+        if (primary.isEmpty()) {
+            return pickDiverseCareerCatalog(rows, primaryLimit);
+        }
+        List<RDCICareerCatalog> ordered = new ArrayList<>(primary);
+        rows.stream()
+                .filter(row -> !isPrimary65Career(row))
+                .forEach(ordered::add);
+        return pickDiverseCareerCatalog(ordered, primaryLimit);
+    }
+
+    private int clusterDiversityCount(List<RDCICareerCatalog> rows) {
+        if (rows == null || rows.isEmpty()) {
+            return 0;
+        }
+        return (int) rows.stream()
+                .map(row -> nz(row == null ? null : row.getClusterName()).trim().toUpperCase(Locale.ENGLISH))
+                .filter(s -> !s.isEmpty())
+                .distinct()
+                .count();
+    }
+
+    private List<RDCICareerCatalog> pickDiverseCareerCatalog(List<RDCICareerCatalog> rows, int limit) {
+        if (rows == null || rows.isEmpty() || limit <= 0) {
+            return rows == null ? List.of() : rows;
+        }
+        List<RDCICareerCatalog> orderedRows = rows.stream()
+                .filter(row -> row != null)
+                .sorted((a, b) -> Integer.compare(careerCodeSequence(a), careerCodeSequence(b)))
+                .collect(Collectors.toList());
+        if (orderedRows.size() <= limit) {
+            return orderedRows;
+        }
+
+        Map<String, List<RDCICareerCatalog>> byCluster = new LinkedHashMap<>();
+        for (RDCICareerCatalog row : orderedRows) {
+            String cluster = nz(row.getClusterName()).trim();
+            if (cluster.isEmpty()) {
+                cluster = "UNSPECIFIED";
+            }
+            byCluster.computeIfAbsent(cluster, key -> new ArrayList<>()).add(row);
+        }
+
+        List<RDCICareerCatalog> selected = new ArrayList<>();
+        while (selected.size() < limit) {
+            boolean added = false;
+            for (Map.Entry<String, List<RDCICareerCatalog>> entry : byCluster.entrySet()) {
+                List<RDCICareerCatalog> clusterRows = entry.getValue();
+                if (clusterRows == null || clusterRows.isEmpty() || selected.size() >= limit) {
+                    continue;
+                }
+                selected.add(clusterRows.remove(0));
+                added = true;
+            }
+            if (!added) {
+                break;
+            }
+        }
+        return selected;
+    }
+
+    private boolean isPrimary65Career(RDCICareerCatalog row) {
+        int sequence = careerCodeSequence(row);
+        return sequence >= 1 && sequence <= 65;
+    }
+
+    private int careerCodeSequence(RDCICareerCatalog row) {
+        if (row == null) {
+            return Integer.MAX_VALUE;
+        }
+        String code = nz(row.getCareerCode()).trim().toUpperCase(Locale.ENGLISH);
+        if (!code.startsWith("AP3_CAR_") || code.length() < 12) {
+            return Integer.MAX_VALUE;
+        }
+        String suffix = code.substring(code.length() - 4);
+        try {
+            return Integer.parseInt(suffix);
+        } catch (NumberFormatException ex) {
+            return Integer.MAX_VALUE;
+        }
+    }
+
+    private String resolveAcademicCareerPhase(Map<String, String> academicProfile) {
+        String stage = resolveAcademicStage(academicProfile);
+        if ("FOUNDATION_8_9".equals(stage)) {
+            return "FOUNDATION";
+        }
+        if ("SECONDARY_10_12".equals(stage)) {
+            return "SECONDARY";
+        }
+        if ("POST12_COLLEGE".equals(stage)) {
+            return "POST12";
+        }
+        return "SECONDARY";
+    }
+
+    private List<RDCICareerCatalog> filterCareerCatalogByAcademicContext(List<RDCICareerCatalog> rows,
+                                                                          Map<String, String> academicProfile) {
+        if (rows == null || rows.isEmpty()) {
+            return rows;
+        }
+        String academicPhase = resolveAcademicCareerPhase(academicProfile);
+        List<RDCICareerCatalog> filtered = rows.stream()
+                .filter(row -> isCareerPhaseCompatible(nz(row == null ? null : row.getTargetPhase()), academicPhase))
+                .collect(Collectors.toList());
+        if (!filtered.isEmpty()) {
+            return filtered;
+        }
+        return rows;
+    }
+
+    private boolean isCareerPhaseCompatible(String targetPhaseRaw, String academicPhase) {
+        String targetPhase = nz(targetPhaseRaw).trim().toUpperCase(Locale.ENGLISH);
+        if (targetPhase.isEmpty()) {
+            return true;
+        }
+        String normalizedPhase = nz(academicPhase).trim().toUpperCase(Locale.ENGLISH);
+        if (normalizedPhase.isEmpty()) {
+            return true;
+        }
+
+        if (containsAny(targetPhase, "ALL", "COMMON", "ANY")) {
+            return true;
+        }
+        if ("FOUNDATION".equals(normalizedPhase)) {
+            return containsAny(targetPhase, "FOUNDATION", "8_10", "8_TO_10", "POST_8_TO_10", "POST_10_TO_POST12");
+        }
+        if ("SECONDARY".equals(normalizedPhase)) {
+            return containsAny(targetPhase, "SECONDARY", "10_12", "10_TO_12", "POST_10_TO_12", "POST_10_TO_POST12");
+        }
+        if ("POST12".equals(normalizedPhase)) {
+            return containsAny(targetPhase, "POST12", "POST_12", "UG", "PG", "COLLEGE", "IMMEDIATE", "POST_10_TO_POST12");
+        }
+        return true;
+    }
+
+    private double careerPhasePenalty(String targetPhaseRaw, String academicPhase) {
+        if (isCareerPhaseCompatible(targetPhaseRaw, academicPhase)) {
+            return 0.0;
+        }
+        String targetPhase = nz(targetPhaseRaw).trim().toUpperCase(Locale.ENGLISH);
+        String phase = nz(academicPhase).trim().toUpperCase(Locale.ENGLISH);
+        if (phase.isEmpty() || targetPhase.isEmpty()) {
+            return 0.0;
+        }
+        if ("FOUNDATION".equals(phase) && containsAny(targetPhase, "POST12", "POST_12", "UG", "PG", "COLLEGE")) {
+            return 12.0;
+        }
+        if ("POST12".equals(phase) && containsAny(targetPhase, "FOUNDATION", "8_10", "8_TO_10")) {
+            return 10.0;
+        }
+        return 6.0;
     }
 
     private String signalBandForScale(int scale) {
@@ -2776,7 +4245,10 @@ public class RDAptiPathStudentController {
         return value;
     }
 
-    private String validateCoverage(String assessmentVersion, List<RDCIQuestionBank> questions, Map<String, String> formData) {
+    private String validateCoverage(String assessmentVersion,
+                                    List<RDCIQuestionBank> questions,
+                                    Map<String, String> formData,
+                                    String academicStage) {
         if (questions == null || questions.isEmpty()) {
             return "Question bank is empty.";
         }
@@ -2798,7 +4270,9 @@ public class RDAptiPathStudentController {
         }
 
         boolean isV3 = "v3".equalsIgnoreCase(nz(assessmentVersion));
-        int minimumOverall = Math.min(isV3 ? 60 : 30, questions.size());
+        Map<String, Integer> required = requiredSectionCoverageByStage(isV3, academicStage);
+        int requiredSum = required.values().stream().mapToInt(Integer::intValue).sum();
+        int minimumOverall = Math.min(requiredSum, questions.size());
         if (attempted < minimumOverall) {
             return "Please answer at least " + minimumOverall + " questions before submit.";
         }
@@ -2810,29 +4284,14 @@ public class RDAptiPathStudentController {
                 "VALUES_MOTIVATION",
                 "LEARNING_BEHAVIOR",
                 "AI_READINESS",
-                "CAREER_REALITY");
+                "CAREER_REALITY",
+                "STEM_FOUNDATION",
+                "BIOLOGY_FOUNDATION",
+                "GENERAL_AWARENESS",
+                "REASONING_IQ");
         boolean hasPremiumStructure = totalBySection.keySet().stream().anyMatch(premiumSections::contains);
         if (!hasPremiumStructure) {
             return null;
-        }
-
-        Map<String, Integer> required = new LinkedHashMap<>();
-        if (isV3) {
-            required.put("CORE_APTITUDE", 14);
-            required.put("APPLIED_CHALLENGE", 11);
-            required.put("INTEREST_WORK", 8);
-            required.put("VALUES_MOTIVATION", 6);
-            required.put("LEARNING_BEHAVIOR", 6);
-            required.put("AI_READINESS", 5);
-            required.put("CAREER_REALITY", 5);
-        } else {
-            required.put("CORE_APTITUDE", 8);
-            required.put("APPLIED_CHALLENGE", 5);
-            required.put("INTEREST_WORK", 4);
-            required.put("VALUES_MOTIVATION", 3);
-            required.put("LEARNING_BEHAVIOR", 3);
-            required.put("AI_READINESS", 3);
-            required.put("CAREER_REALITY", 3);
         }
 
         for (Map.Entry<String, Integer> rule : required.entrySet()) {
@@ -2848,6 +4307,482 @@ public class RDAptiPathStudentController {
             }
         }
         return null;
+    }
+
+    private Map<String, Integer> requiredSectionCoverageByStage(boolean isV3, String academicStage) {
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        Map<String, Integer> required = new LinkedHashMap<>();
+        if (!isV3) {
+            required.put("CORE_APTITUDE", 8);
+            required.put("APPLIED_CHALLENGE", 5);
+            required.put("INTEREST_WORK", 4);
+            required.put("VALUES_MOTIVATION", 3);
+            required.put("LEARNING_BEHAVIOR", 3);
+            required.put("AI_READINESS", 2);
+            required.put("CAREER_REALITY", 2);
+            required.put("STEM_FOUNDATION", 2);
+            required.put("BIOLOGY_FOUNDATION", 2);
+            required.put("GENERAL_AWARENESS", 1);
+            required.put("REASONING_IQ", 2);
+            return required;
+        }
+        if ("FOUNDATION_8_9".equals(stage)) {
+            // Grade 8/9 CSV: CA(10) AC(8) IW(8) VM(6) LB(6) AIR(4) CR(4) GA(6) RIQ(4) SF(4) = 60
+            // Required ~77% minimum coverage (46/60)
+            required.put("CORE_APTITUDE", 8);
+            required.put("APPLIED_CHALLENGE", 6);
+            required.put("INTEREST_WORK", 6);
+            required.put("VALUES_MOTIVATION", 5);
+            required.put("LEARNING_BEHAVIOR", 5);
+            required.put("AI_READINESS", 3);
+            required.put("CAREER_REALITY", 3);
+            required.put("STEM_FOUNDATION", 3);
+            required.put("BIOLOGY_FOUNDATION", 0);
+            required.put("GENERAL_AWARENESS", 4);
+            required.put("REASONING_IQ", 3);
+            return required;
+        }
+        if ("POST12_COLLEGE".equals(stage)) {
+            required.put("CORE_APTITUDE", 14);
+            required.put("APPLIED_CHALLENGE", 10);
+            required.put("INTEREST_WORK", 6);
+            required.put("VALUES_MOTIVATION", 5);
+            required.put("LEARNING_BEHAVIOR", 5);
+            required.put("AI_READINESS", 6);
+            required.put("CAREER_REALITY", 5);
+            required.put("STEM_FOUNDATION", 8);
+            required.put("BIOLOGY_FOUNDATION", 5);
+            required.put("GENERAL_AWARENESS", 4);
+            required.put("REASONING_IQ", 4);
+            return required;
+        }
+        // Grade 10 CSV: CA(12) AC(10) IW(8) VM(6) LB(6) AIR(6) CR(6) SF(6) BF(4) GA(4) RIQ(2) = 70
+        // Required ~81% minimum coverage (57/70)
+        required.put("CORE_APTITUDE", 10);
+        required.put("APPLIED_CHALLENGE", 8);
+        required.put("INTEREST_WORK", 6);
+        required.put("VALUES_MOTIVATION", 5);
+        required.put("LEARNING_BEHAVIOR", 5);
+        required.put("AI_READINESS", 5);
+        required.put("CAREER_REALITY", 5);
+        required.put("STEM_FOUNDATION", 5);
+        required.put("BIOLOGY_FOUNDATION", 3);
+        required.put("GENERAL_AWARENESS", 3);
+        required.put("REASONING_IQ", 2);
+        return required;
+    }
+
+    private int computeTargetQuestionCountForStage(List<RDCIQuestionBank> questions, String academicStage) {
+        if (questions == null || questions.isEmpty()) {
+            return 0;
+        }
+        Map<String, Integer> required = requiredSectionCoverageByStage(true, academicStage);
+        Map<String, Integer> availableBySection = new LinkedHashMap<>();
+        for (RDCIQuestionBank question : questions) {
+            if (question == null) {
+                continue;
+            }
+            String section = nz(question.getSectionCode()).trim().toUpperCase(Locale.ENGLISH);
+            if (section.isEmpty()) {
+                continue;
+            }
+            availableBySection.put(section, availableBySection.getOrDefault(section, 0) + 1);
+        }
+        int total = 0;
+        for (Map.Entry<String, Integer> rule : required.entrySet()) {
+            int available = availableBySection.getOrDefault(rule.getKey(), 0);
+            int expected = Math.max(0, rule.getValue() == null ? 0 : rule.getValue());
+            total += Math.min(available, expected);
+        }
+        return total > 0 ? total : questions.size();
+    }
+
+    private String resolveAcademicStage(Map<String, String> academicProfile) {
+        String gradeCode = academicProfile == null ? "" : nz(academicProfile.get(STUDENT_INTAKE_GRADE_CODE));
+        gradeCode = gradeCode.trim().toUpperCase(Locale.ENGLISH);
+        if ("8".equals(gradeCode) || "9".equals(gradeCode)) {
+            return "FOUNDATION_8_9";
+        }
+        if ("10".equals(gradeCode) || "11".equals(gradeCode) || "12".equals(gradeCode)) {
+            return "SECONDARY_10_12";
+        }
+        if (isPost12Grade(gradeCode)) {
+            return "POST12_COLLEGE";
+        }
+        return "SECONDARY_10_12";
+    }
+
+    private List<RDCIQuestionBank> filterQuestionsByAcademicGrade(List<RDCIQuestionBank> source,
+                                                                   Map<String, String> academicProfile) {
+        if (source == null || source.isEmpty()) {
+            return List.of();
+        }
+        String gradeCode = normalizeAcademicGradeCode(academicProfile);
+        if (gradeCode.isEmpty()) {
+            return source;
+        }
+
+        String expectedGradeLevel = "GRADE_" + gradeCode;
+
+        // Primary: match by grade_level column (new data)
+        List<RDCIQuestionBank> matched = new ArrayList<>();
+        for (RDCIQuestionBank question : source) {
+            String gl = nz(question.getGradeLevel()).trim().toUpperCase(Locale.ENGLISH);
+            if (expectedGradeLevel.equals(gl)) {
+                matched.add(question);
+            }
+        }
+        if (!matched.isEmpty()) {
+            return matched;
+        }
+
+        // Fallback: match by question code pattern (legacy data)
+        for (RDCIQuestionBank question : source) {
+            if (matchesAcademicGradeQuestion(question, gradeCode)) {
+                matched.add(question);
+            }
+        }
+        return matched.isEmpty() ? source : matched;
+    }
+
+    private String normalizeAcademicGradeCode(Map<String, String> academicProfile) {
+        String raw = academicProfile == null ? "" : nz(academicProfile.get(STUDENT_INTAKE_GRADE_CODE));
+        String grade = raw.trim().toUpperCase(Locale.ENGLISH).replace('-', '_').replace(' ', '_');
+        if (grade.isEmpty()) {
+            return "";
+        }
+        if (containsAny(grade, "GRADE_8", "GRADE8", "CLASS_8", "CLASS8") || "8".equals(grade)) {
+            return "8";
+        }
+        if (containsAny(grade, "GRADE_9", "GRADE9", "CLASS_9", "CLASS9") || "9".equals(grade)) {
+            return "9";
+        }
+        if (containsAny(grade, "GRADE_10", "GRADE10", "CLASS_10", "CLASS10") || "10".equals(grade)) {
+            return "10";
+        }
+        return "";
+    }
+
+    private boolean matchesAcademicGradeQuestion(RDCIQuestionBank question, String gradeCode) {
+        if (question == null || gradeCode == null || gradeCode.isEmpty()) {
+            return false;
+        }
+        String code = nz(question.getQuestionCode()).trim().toUpperCase(Locale.ENGLISH);
+        String text = nz(question.getQuestionText()).trim().toUpperCase(Locale.ENGLISH);
+        switch (gradeCode) {
+            case "8":
+                return containsAny(code, "_G8_", "-G8-", "GRADE_8", "GRADE8", "CLASS_8", "CLASS8", "APG8_")
+                        || containsAny(text, "GRADE 8", "CLASS 8");
+            case "9":
+                return containsAny(code, "_G9_", "-G9-", "GRADE_9", "GRADE9", "CLASS_9", "CLASS9", "APG9_")
+                        || containsAny(text, "GRADE 9", "CLASS 9");
+            case "10":
+                return containsAny(code, "_G10_", "-G10-", "GRADE_10", "GRADE10", "CLASS_10", "CLASS10", "APG10_")
+                        || containsAny(text, "GRADE 10", "CLASS 10");
+            default:
+                return false;
+        }
+    }
+
+    private List<RDCIQuestionBank> filterQuestionsByAcademicStage(List<RDCIQuestionBank> source,
+                                                                  String academicStage,
+                                                                  Map<String, String> academicProfile) {
+        if (source == null || source.isEmpty()) {
+            return List.of();
+        }
+        Map<String, Integer> required = requiredSectionCoverageByStage(true, academicStage);
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        Map<String, List<RDCIQuestionBank>> bySection = new LinkedHashMap<>();
+        for (RDCIQuestionBank question : source) {
+            if (question == null || question.getQuestionCode() == null) {
+                continue;
+            }
+            String section = nz(question.getSectionCode()).trim().toUpperCase(Locale.ENGLISH);
+            bySection.computeIfAbsent(section, key -> new ArrayList<>()).add(question);
+        }
+
+        List<RDCIQuestionBank> filtered = new ArrayList<>();
+        for (Map.Entry<String, Integer> rule : required.entrySet()) {
+            String section = rule.getKey();
+            int target = Math.max(0, rule.getValue());
+            List<RDCIQuestionBank> sectionRows = bySection.getOrDefault(section, List.of());
+            if (sectionRows.isEmpty() || target <= 0) {
+                continue;
+            }
+            List<RDCIQuestionBank> ordered = new ArrayList<>(sectionRows);
+            ordered.sort((a, b) -> Integer.compare(
+                    a.getSequenceNo() == null ? Integer.MAX_VALUE : a.getSequenceNo(),
+                    b.getSequenceNo() == null ? Integer.MAX_VALUE : b.getSequenceNo()));
+            filtered.addAll(pickStageQuestionSlice(ordered, target, stage, academicProfile));
+        }
+        if (filtered.isEmpty()) {
+            return source;
+        }
+        filtered.sort((a, b) -> Integer.compare(
+                a.getSequenceNo() == null ? Integer.MAX_VALUE : a.getSequenceNo(),
+                b.getSequenceNo() == null ? Integer.MAX_VALUE : b.getSequenceNo()));
+        return filtered;
+    }
+
+    private List<RDCIQuestionBank> pickStageQuestionSlice(List<RDCIQuestionBank> ordered,
+                                                          int target,
+                                                          String academicStage,
+                                                          Map<String, String> academicProfile) {
+        if (ordered == null || ordered.isEmpty() || target <= 0) {
+            return List.of();
+        }
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        List<RDCIQuestionBank> stageTagged = new ArrayList<>();
+        for (RDCIQuestionBank question : ordered) {
+            if (matchesAcademicStageKeyword(question, stage)
+                    || matchesAcademicProgramKeyword(question, academicProfile)) {
+                stageTagged.add(question);
+            }
+        }
+
+        List<RDCIQuestionBank> selected = new ArrayList<>();
+        Set<String> selectedCodes = new HashSet<>();
+        addFromStageWindow(selected, selectedCodes, stageTagged, target, stage);
+        if (selected.size() < target) {
+            addFromStageWindow(selected, selectedCodes, ordered, target, stage);
+        }
+        return selected;
+    }
+
+    private void addFromStageWindow(List<RDCIQuestionBank> selected,
+                                    Set<String> selectedCodes,
+                                    List<RDCIQuestionBank> pool,
+                                    int target,
+                                    String academicStage) {
+        if (selected == null || selectedCodes == null || pool == null || pool.isEmpty() || target <= 0) {
+            return;
+        }
+        int size = pool.size();
+        List<Integer> order = stageIndexTraversalOrder(size, academicStage);
+        for (Integer idx : order) {
+            if (idx == null || idx < 0 || idx >= size || selected.size() >= target) {
+                continue;
+            }
+            if (!withinPrimaryStageWindow(idx, size, academicStage)) {
+                continue;
+            }
+            RDCIQuestionBank question = pool.get(idx);
+            String code = questionCodeKey(question);
+            if (code == null || selectedCodes.contains(code)) {
+                continue;
+            }
+            selected.add(question);
+            selectedCodes.add(code);
+        }
+        if (selected.size() >= target) {
+            return;
+        }
+        for (Integer idx : order) {
+            if (idx == null || idx < 0 || idx >= size || selected.size() >= target) {
+                continue;
+            }
+            RDCIQuestionBank question = pool.get(idx);
+            String code = questionCodeKey(question);
+            if (code == null || selectedCodes.contains(code)) {
+                continue;
+            }
+            selected.add(question);
+            selectedCodes.add(code);
+        }
+    }
+
+    private List<Integer> stageIndexTraversalOrder(int size, String academicStage) {
+        List<Integer> order = new ArrayList<>();
+        if (size <= 0) {
+            return order;
+        }
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        if ("POST12_COLLEGE".equals(stage)) {
+            for (int i = size - 1; i >= 0; i--) {
+                order.add(i);
+            }
+            return order;
+        }
+        if ("SECONDARY_10_12".equals(stage)) {
+            int center = size / 2;
+            order.add(center);
+            int offset = 1;
+            while (order.size() < size) {
+                int right = center + offset;
+                int left = center - offset;
+                if (right < size) {
+                    order.add(right);
+                }
+                if (left >= 0) {
+                    order.add(left);
+                }
+                offset++;
+            }
+            return order;
+        }
+        for (int i = 0; i < size; i++) {
+            order.add(i);
+        }
+        return order;
+    }
+
+    private boolean withinPrimaryStageWindow(int index, int size, String academicStage) {
+        if (size <= 0 || index < 0 || index >= size) {
+            return false;
+        }
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        if ("FOUNDATION_8_9".equals(stage)) {
+            int max = Math.max(0, (int) Math.ceil(size * 0.65d) - 1);
+            return index <= max;
+        }
+        if ("SECONDARY_10_12".equals(stage)) {
+            int min = (int) Math.floor(size * 0.20d);
+            int max = Math.max(min, (int) Math.ceil(size * 0.90d) - 1);
+            return index >= min && index <= max;
+        }
+        if ("POST12_COLLEGE".equals(stage)) {
+            int min = (int) Math.floor(size * 0.35d);
+            return index >= min;
+        }
+        return true;
+    }
+
+    private boolean matchesAcademicStageKeyword(RDCIQuestionBank question, String academicStage) {
+        if (question == null) {
+            return false;
+        }
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        String text = (nz(question.getQuestionCode()) + " " + nz(question.getQuestionText())).toUpperCase(Locale.ENGLISH);
+        if (text.isEmpty()) {
+            return false;
+        }
+        if ("FOUNDATION_8_9".equals(stage)) {
+            return containsAny(text, "GRADE 8", "GRADE 9", "FOUNDATION", "SCHOOL LEVEL", "BASIC");
+        }
+        if ("SECONDARY_10_12".equals(stage)) {
+            return containsAny(text, "GRADE 10", "GRADE 11", "GRADE 12", "BOARD", "JEE", "NEET");
+        }
+        if ("POST12_COLLEGE".equals(stage)) {
+            return containsAny(
+                    text,
+                    "COLLEGE", "UNDERGRAD", "UG", "PG", "SEMESTER", "INTERNSHIP", "PLACEMENT",
+                    "BTECH", "B.E", "BE ", "MTECH", "M.E", "ENGINEERING",
+                    "BARCH", "B.ARCH", "BPLAN", "BDES", "DESIGN", "ARCHITECTURE",
+                    "BBA", "BMS", "BCOM", "MBA", "PGDM", "MCOM", "MANAGEMENT", "FINANCE",
+                    "LLB", "BALLB", "LLM", "LAW", "LEGAL", "POLICY", "GOVERNANCE",
+                    "MBBS", "BDS", "BAMS", "BHMS", "BPHARM", "NURSING", "BPT", "PHARMD",
+                    "BSC", "MSC", "MCA", "DATA SCIENCE", "CYBER", "AI", "MACHINE LEARNING",
+                    "AGRICULTURE", "VETERINARY", "HOSPITALITY", "TOURISM", "AVIATION", "MARITIME");
+        }
+        return false;
+    }
+
+    private boolean matchesAcademicProgramKeyword(RDCIQuestionBank question, Map<String, String> academicProfile) {
+        if (question == null || academicProfile == null || academicProfile.isEmpty()) {
+            return false;
+        }
+        String stream = nz(academicProfile.get(STUDENT_INTAKE_STREAM_CODE)).trim().toUpperCase(Locale.ENGLISH);
+        String program = nz(academicProfile.get(STUDENT_INTAKE_PROGRAM_CODE)).trim().toUpperCase(Locale.ENGLISH);
+        if (stream.isEmpty() && program.isEmpty()) {
+            return false;
+        }
+        String text = (nz(question.getQuestionCode()) + " " + nz(question.getQuestionText())).toUpperCase(Locale.ENGLISH);
+        if (text.isEmpty()) {
+            return false;
+        }
+
+        boolean techTrack = containsAny(stream,
+                "PCM", "ENGINEERING", "TECH", "COMPUTER", "DATA", "AI", "ELECTRONICS", "ELECTRICAL",
+                "MECHANICAL", "CIVIL", "MANUFACTURING", "ROBOTICS")
+                || containsAny(program,
+                "BTECH", "BE_", "MTECH", "ME", "CSE", "AI", "DATA", "CYBER", "IOT",
+                "ECE", "EEE", "MECH", "CIVIL", "ROBOTICS", "AUTOMOBILE", "MECHATRONICS", "INDUSTRIAL");
+        if (techTrack) {
+            return containsAny(text,
+                    "ENGINEERING", "TECH", "AI", "CODING", "PROGRAMMING", "ALGORITHM", "DATA",
+                    "ROBOT", "AUTONOM", "SYSTEM", "ELECTRONIC", "CIRCUIT", "SOFTWARE", "HARDWARE");
+        }
+
+        boolean medicalTrack = containsAny(stream,
+                "PCB", "HEALTH", "MEDICAL", "LIFE_SCI", "BIOTECH", "BIO")
+                || containsAny(program,
+                "MBBS", "BDS", "BAMS", "BHMS", "BUMS", "BVSC", "BPHARM", "PHARMD",
+                "NURSING", "BPT", "BOT", "BMLT", "BOPTOM", "BASLP", "BIOTECH", "MICROBIOLOGY");
+        if (medicalTrack) {
+            return containsAny(text,
+                    "MEDICAL", "BIOLOGY", "HEALTH", "CLINICAL", "LIFE SCIENCE", "BIO",
+                    "ANATOMY", "PHYSIOLOGY", "PATIENT", "DIAGNOS", "PHARMA", "NEET");
+        }
+
+        boolean commerceTrack = containsAny(stream,
+                "COMMERCE", "BUSINESS", "FINANCE", "ECONOMICS", "MANAGEMENT")
+                || containsAny(program,
+                "BBA", "BCOM", "BMS", "BFM", "BAF", "BBI", "MBA", "MCOM", "PGDM", "CA_CS_CMA");
+        if (commerceTrack) {
+            return containsAny(text,
+                    "BUSINESS", "FINANCE", "COMMERCE", "MANAGEMENT", "CAT", "MARKET",
+                    "ANALYTICS", "ECON", "ACCOUNT", "BANK", "INVEST", "SUPPLY CHAIN", "OPERATIONS");
+        }
+
+        boolean lawPolicyTrack = containsAny(stream,
+                "LAW", "POLICY", "GOV", "HUMANITIES", "SOCIAL", "MEDIA", "COMM")
+                || containsAny(program,
+                "LLB", "BALLB", "BBALLB", "BCOMLLB", "LLM", "BA_", "MA", "JOURNALISM");
+        if (lawPolicyTrack) {
+            return containsAny(text,
+                    "LAW", "LEGAL", "CLAT", "POLICY", "GOVERNANCE", "PUBLIC ADMIN", "CONSTITUTION",
+                    "HUMANITIES", "SOCIAL", "LANGUAGE", "COMMUNICATION", "CURRENT AFFAIRS");
+        }
+
+        boolean designCreativeTrack = containsAny(stream,
+                "ARCH", "DESIGN", "CREATIVE", "MEDIA", "PERFORMING")
+                || containsAny(program,
+                "BARCH", "BPLAN", "BDES", "BFA", "BID", "BFD", "ANIMATION", "VFX", "BPA");
+        if (designCreativeTrack) {
+            return containsAny(text,
+                    "DESIGN", "CREATIVE", "UX", "UI", "VISUAL", "MEDIA", "PRODUCT", "ARCHITECTURE", "PORTFOLIO");
+        }
+
+        boolean scienceResearchTrack = containsAny(stream,
+                "SCIENCE", "PURE_SCIENCES", "RESEARCH", "AGRI", "FOOD", "ENV")
+                || containsAny(program,
+                "BSC", "MSC", "BSC_", "MSC_", "AGRICULTURE", "FORENSIC", "ENVIRONMENT", "MPH");
+        if (scienceResearchTrack) {
+            return containsAny(text,
+                    "RESEARCH", "SCIENTIFIC", "LAB", "EXPERIMENT", "STATISTICS", "ANALYSIS",
+                    "ENVIRONMENT", "SUSTAIN", "AGRICULTURE", "BIO", "CHEMISTRY", "PHYSICS");
+        }
+
+        boolean serviceTrack = containsAny(stream,
+                "HOSPITALITY", "TOURISM", "DEFENCE", "AVIATION", "MARITIME", "SPORTS")
+                || containsAny(program,
+                "BHM", "BBA_HOSPITALITY", "BBA_AVIATION", "DIPLOMA_HOSPITALITY", "BTECH_MARINE", "BPED");
+        if (serviceTrack) {
+            return containsAny(text,
+                    "OPERATIONS", "SERVICE", "HOSPITALITY", "CUSTOMER", "AVIATION", "MARITIME",
+                    "TRAVEL", "DISCIPLINE", "TEAM", "LEADERSHIP");
+        }
+        return false;
+    }
+
+    private boolean containsAny(String source, String... needles) {
+        if (source == null || source.isEmpty() || needles == null || needles.length == 0) {
+            return false;
+        }
+        for (String needle : needles) {
+            if (needle != null && !needle.isEmpty() && source.contains(needle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String questionCodeKey(RDCIQuestionBank question) {
+        if (question == null || question.getQuestionCode() == null) {
+            return null;
+        }
+        String code = question.getQuestionCode().trim().toUpperCase(Locale.ENGLISH);
+        return code.isEmpty() ? null : code;
     }
 
     private List<RDCIQuestionBank> resolveServedQuestions(List<RDCIQuestionBank> allQuestions, String questionOrderCsv) {

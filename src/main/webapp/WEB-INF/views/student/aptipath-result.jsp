@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AptiPath 360 Diagnostic Report</title>
+  <title>AptiPath360 Diagnostic Report</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap');
@@ -570,6 +570,445 @@
       white-space: nowrap;
     }
 
+    .radar-wrap {
+      border: 1px solid #dbe6ef;
+      border-radius: 14px;
+      background: linear-gradient(140deg, #0b1221, #1f2937);
+      padding: 14px;
+      min-height: 320px;
+      display: grid;
+      align-items: center;
+    }
+
+    .radar-wrap canvas {
+      width: 100% !important;
+      max-height: 280px;
+    }
+
+    /* ===== 10-Year Roadmap ===== */
+    .roadmap-container {
+      margin-top: 16px;
+      position: relative;
+      padding: 0 0 20px;
+    }
+
+    .roadmap-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0;
+    }
+
+    .roadmap-node {
+      position: relative;
+      text-align: center;
+      padding: 16px 6px 12px;
+    }
+
+    .roadmap-node::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #dbeafe, #93c5fd);
+      z-index: 0;
+    }
+
+    .roadmap-node:first-child::before { left: 50%; }
+    .roadmap-node:last-child::before { right: 50%; }
+
+    .roadmap-dot {
+      position: relative;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 3px solid #2563eb;
+      background: #fff;
+      margin: 0 auto 10px;
+      transition: transform .2s;
+    }
+
+    .roadmap-node.active .roadmap-dot {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      border-color: #059669;
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2), 0 4px 12px rgba(5, 150, 105, 0.3);
+    }
+
+    .roadmap-node.active .roadmap-dot::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    .roadmap-node.future .roadmap-dot {
+      border-color: #93c5fd;
+      background: #eff6ff;
+    }
+
+    .roadmap-node.milestone .roadmap-dot {
+      width: 24px;
+      height: 24px;
+      border-color: #d97706;
+      background: #fffbeb;
+    }
+
+    .roadmap-year {
+      font-size: 11px;
+      font-weight: 800;
+      color: #1d4ed8;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .roadmap-node.active .roadmap-year { color: #059669; }
+
+    .roadmap-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 4px 0 3px;
+      line-height: 1.25;
+    }
+
+    .roadmap-desc {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    /* ===== Career Destination ===== */
+    .destination-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0f766e 100%);
+      border-radius: 18px;
+      padding: 24px;
+      color: #f8fbff;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .destination-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(20, 184, 166, 0.12);
+    }
+
+    .destination-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #a7f3d0;
+    }
+
+    .destination-name {
+      font-family: "Sora", sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      margin: 12px 0 4px;
+      line-height: 1.2;
+    }
+
+    .destination-cluster {
+      font-size: 13px;
+      color: #94dbce;
+      font-weight: 700;
+    }
+
+    .destination-score-ring {
+      position: relative;
+      width: 90px;
+      height: 90px;
+    }
+
+    .destination-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .dest-detail-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .dest-detail-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: rgba(167, 243, 208, 0.9);
+      margin-bottom: 4px;
+    }
+
+    .dest-detail-value {
+      font-size: 13px;
+      color: #e2f3ff;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    /* ===== Career Universe Tiers ===== */
+    .tier-section {
+      margin-top: 14px;
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tier-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .tier-title {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .tier-count {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .tier-card {
+      border: 1px solid #dbe6ef;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+      display: grid;
+      gap: 4px;
+      transition: box-shadow .2s, transform .15s;
+    }
+
+    .tier-card:hover {
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .tier-card .tc-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .tier-card .tc-cluster {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .tier-card .tc-score-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .tc-score-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: #e5edf4;
+      overflow: hidden;
+    }
+
+    .tc-score-fill {
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .tc-score-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+
+    /* ===== Pro Plan Preview ===== */
+    .pro-preview {
+      position: relative;
+      border: 2px solid #fbbf24;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .pro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .pro-locked-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pro-locked-card {
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.7);
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pro-locked-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(255,251,235,0.85) 100%);
+      backdrop-filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .pro-locked-card .plc-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #78350f;
+      margin-bottom: 6px;
+    }
+
+    .pro-locked-card .plc-item {
+      font-size: 12px;
+      color: #92400e;
+      line-height: 1.4;
+      margin: 3px 0;
+    }
+
+    .pro-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-pro {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 8px 20px rgba(217, 119, 6, 0.3);
+      transition: transform .15s;
+    }
+
+    .btn-pro:hover { transform: translateY(-2px); }
+
+    /* ===== 90-Day Visual Plan ===== */
+    .action-timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .action-phase {
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .action-phase .phase-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .action-phase h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .action-phase .action-list {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #334155;
+    }
+
+    .action-phase .action-list li + li { margin-top: 6px; }
+
+    @media (max-width: 980px) {
+      .destination-details-grid { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .pro-locked-grid { grid-template-columns: 1fr; }
+      .action-timeline { grid-template-columns: 1fr; }
+      .roadmap-track { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
+
     @media print {
       body { background: #ffffff; }
       .shell { width: 100%; margin: 0; }
@@ -604,11 +1043,33 @@
   </c:if>
   <div class="shell">
     <section class="hero">
-      <h1>AptiPath 360 Diagnostic Report</h1>
-      <p>
-        Student: <strong><c:out value="${student.displayName}" /></strong><br>
-        Session #<c:out value="${sessionRow.ciAssessmentSessionId}" /> completed.
-      </p>
+      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 280px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span style="font-size: 28px;">&#128506;</span>
+            <h1 style="font-size: 22px;">AptiPath360 Career GPS Report</h1>
+          </div>
+          <p style="margin: 0;">
+            Student: <strong><c:out value="${student.displayName}" /></strong>
+            <c:if test="${not empty academicProfile and not empty academicProfile.grade}">
+              &bull; Grade <c:out value="${academicProfile.grade}" />
+            </c:if>
+            <br>
+            <span style="font-size: 13px; opacity: 0.85;">
+              Session #<c:out value="${sessionRow.ciAssessmentSessionId}" /> &bull;
+              <c:out value="${careerUniverseCount}" /> career paths mapped &bull;
+              <c:out value="${scoreSummary.totalQuestions}" /> signals analyzed
+            </span>
+          </p>
+        </div>
+        <c:if test="${not empty careerScore}">
+        <div style="text-align: center; background: rgba(255,255,255,0.1); border-radius: 16px; padding: 12px 18px; border: 1px solid rgba(255,255,255,0.15);">
+          <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: rgba(167,243,208,0.9);">Career Score</div>
+          <div style="font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 800; line-height: 1; margin-top: 2px;"><c:out value="${careerScore}" /></div>
+          <div style="font-size: 11px; font-weight: 700; color: rgba(167,243,208,0.9); margin-top: 2px;"><c:out value="${careerScoreBand}" /> Band</div>
+        </div>
+        </c:if>
+      </div>
     </section>
 
     <section class="grid">
@@ -934,6 +1395,33 @@
       </section>
     </c:if>
 
+    <c:if test="${not empty thinkingCompositionInsights or not empty thinkingCompositionSnapshots}">
+      <section class="panel">
+        <h2>How Student Thinks (Story Insight)</h2>
+        <p class="muted">
+          Based on the story-composition answers captured during the test. This is an interpretation aid for parents/mentors,
+          not a clinical diagnosis.
+        </p>
+        <c:if test="${not empty thinkingCompositionSnapshots}">
+          <div class="plan-grid">
+            <c:forEach var="snap" items="${thinkingCompositionSnapshots}">
+              <article class="plan">
+                <h3><c:out value="${snap.label}" /></h3>
+                <p><c:out value="${snap.response}" /></p>
+              </article>
+            </c:forEach>
+          </div>
+        </c:if>
+        <c:if test="${not empty thinkingCompositionInsights}">
+          <ul class="cue-list" style="margin-top:12px;">
+            <c:forEach var="insight" items="${thinkingCompositionInsights}">
+              <li><c:out value="${insight}" /></li>
+            </c:forEach>
+          </ul>
+        </c:if>
+      </section>
+    </c:if>
+
     <c:if test="${not empty topCareerMatches}">
       <section class="panel">
         <h2>Top Career Matches (Current Snapshot)</h2>
@@ -969,6 +1457,49 @@
         </div>
       </section>
     </c:if>
+
+    <section class="panel">
+      <h2>Pathway Radar</h2>
+      <p class="muted">
+        Visual pathway map for parent-student discussion: strengths now, growth areas next.
+      </p>
+      <div class="radar-wrap">
+        <canvas id="pathwayRadar" aria-label="Pathway Radar Chart"></canvas>
+      </div>
+    </section>
+
+    <%-- ===== 10-YEAR CAREER ROADMAP ===== --%>
+    <c:set var="studentGrade" value="${not empty academicProfile and not empty academicProfile.grade ? academicProfile.grade : '10'}" />
+    <section class="panel" style="background: linear-gradient(135deg, #0f172a, #1e3a5f); color: #f8fbff; border-color: #1e3a5f;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+        <span style="font-size: 28px;">&#128506;</span>
+        <div>
+          <h2 style="color: #a7f3d0; font-size: 20px;">Your 10-Year Career Roadmap</h2>
+          <p style="color: rgba(226,243,255,0.8); font-size: 13px; margin: 2px 0 0;">
+            Grade <c:out value="${studentGrade}" /> to Career Launch &mdash; personalized year-by-year from your assessment signals
+          </p>
+        </div>
+      </div>
+
+      <div class="roadmap-container" id="roadmapContainer">
+        <%-- Populated dynamically by JavaScript based on current grade --%>
+      </div>
+
+      <div style="margin-top: 14px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg, #059669, #10b981); border: 2px solid #059669;"></span>
+          <span style="font-size: 11px; color: #a7f3d0; font-weight: 700;">You Are Here</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #eff6ff; border: 2px solid #93c5fd;"></span>
+          <span style="font-size: 11px; color: #bfdbfe; font-weight: 700;">Upcoming Phase</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #fffbeb; border: 2px solid #d97706;"></span>
+          <span style="font-size: 11px; color: #fde68a; font-weight: 700;">Key Milestone</span>
+        </div>
+      </div>
+    </section>
 
     <c:if test="${not empty emergingClusterFits}">
       <section class="panel">
@@ -1013,45 +1544,417 @@
       </section>
     </c:if>
 
-    <section class="panel">
-      <h2>Recommendation Summary</h2>
-      <p class="muted">
-        <c:choose>
-          <c:when test="${not empty recommendationSummaryText}">
-            <c:out value="${recommendationSummaryText}" />
-          </c:when>
-          <c:otherwise>
-            <c:out value="${recommendation.summaryText}" />
-          </c:otherwise>
-        </c:choose>
-      </p>
+    <c:if test="${not empty aiStudentNarrative or not empty aiParentGuidance or not empty aiFollowUpQuestions}">
+      <section class="panel">
+        <h2>AI Reflection Layer</h2>
+        <p class="muted">
+          This layer uses deterministic score outputs and adds contextual coaching for student-parent discussion.
+          <c:if test="${not empty aiEnrichmentStatus}">Status: <c:out value="${aiEnrichmentStatus}" />.</c:if>
+        </p>
+        <c:if test="${not empty aiStudentNarrative}">
+          <article class="plan" style="margin-top:10px;">
+            <h3>Student Narrative</h3>
+            <p><c:out value="${aiStudentNarrative}" /></p>
+          </article>
+        </c:if>
+        <div class="plan-grid">
+          <c:if test="${not empty aiParentGuidance}">
+            <article class="plan">
+              <h3>Parent Guidance</h3>
+              <ul class="cue-list">
+                <c:forEach var="cue" items="${aiParentGuidance}">
+                  <li><c:out value="${cue}" /></li>
+                </c:forEach>
+              </ul>
+            </article>
+          </c:if>
+          <c:if test="${not empty aiFollowUpQuestions}">
+            <article class="plan">
+              <h3>Follow-Up Questions</h3>
+              <ul class="cue-list">
+                <c:forEach var="cue" items="${aiFollowUpQuestions}">
+                  <li><c:out value="${cue}" /></li>
+                </c:forEach>
+              </ul>
+            </article>
+          </c:if>
+        </div>
+      </section>
+    </c:if>
 
-      <div class="plan-grid">
-        <article class="plan">
-          <h3>Plan A</h3>
-          <p><c:out value="${planAText}" /></p>
-        </article>
-        <article class="plan">
-          <h3>Plan B</h3>
-          <p><c:out value="${planBText}" /></p>
-        </article>
-        <article class="plan">
-          <h3>Plan C</h3>
-          <p><c:out value="${planCText}" /></p>
-        </article>
+    <%-- ===== YOUR CAREER DESTINATION (Primary Match) ===== --%>
+    <c:if test="${not empty planACareer}">
+    <section class="panel" style="padding: 0; border: none; background: transparent; box-shadow: none;">
+      <div class="destination-card">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+          <div style="flex: 1; min-width: 260px;">
+            <span class="destination-badge">&#127919; Your #1 Career Destination</span>
+            <div class="destination-name"><c:out value="${planACareer.careerName}" /></div>
+            <div class="destination-cluster"><c:out value="${planACareer.cluster}" /></div>
+            <c:if test="${not empty planACareer.reason}">
+            <p style="margin: 10px 0 0; font-size: 14px; color: rgba(226,243,255,0.9); line-height: 1.55;">
+              <c:out value="${planACareer.reason}" />
+            </p>
+            </c:if>
+          </div>
+          <div style="text-align: center;">
+            <div style="position: relative; width: 100px; height: 100px;">
+              <svg viewBox="0 0 100 100" style="width: 100px; height: 100px; transform: rotate(-90deg);">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="8"/>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#10b981" stroke-width="8"
+                        stroke-dasharray="${planACareer.fitScore * 2.639} 263.9"
+                        stroke-linecap="round"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                <span style="font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 800; color: #fff;"><c:out value="${planACareer.fitScore}" /></span>
+                <span style="font-size: 10px; color: #a7f3d0; font-weight: 700;">/100 FIT</span>
+              </div>
+            </div>
+            <div style="margin-top: 4px; font-size: 12px; font-weight: 800; color: #a7f3d0;"><c:out value="${planACareer.fitBand}" /></div>
+          </div>
+        </div>
+
+        <div class="destination-details-grid">
+          <c:if test="${not empty planACareer.requiredSubjects}">
+          <div class="dest-detail-box">
+            <div class="dest-detail-label">Required Subjects</div>
+            <div class="dest-detail-value"><c:out value="${planACareer.requiredSubjects}" /></div>
+          </div>
+          </c:if>
+          <c:if test="${not empty planACareer.entranceExams}">
+          <div class="dest-detail-box">
+            <div class="dest-detail-label">Entrance Exams</div>
+            <div class="dest-detail-value"><c:out value="${planACareer.entranceExams}" /></div>
+          </div>
+          </c:if>
+          <c:if test="${not empty planACareer.pathwayHint}">
+          <div class="dest-detail-box">
+            <div class="dest-detail-label">Education Pathway</div>
+            <div class="dest-detail-value"><c:out value="${planACareer.pathwayHint}" /></div>
+          </div>
+          </c:if>
+          <c:if test="${not empty planACareer.prerequisiteSummary}">
+          <div class="dest-detail-box">
+            <div class="dest-detail-label">Prerequisites</div>
+            <div class="dest-detail-value"><c:out value="${planACareer.prerequisiteSummary}" /></div>
+          </div>
+          </c:if>
+          <c:if test="${not empty planACareer.examHint}">
+          <div class="dest-detail-box" style="grid-column: 1 / -1;">
+            <div class="dest-detail-label">Exam Strategy</div>
+            <div class="dest-detail-value"><c:out value="${planACareer.examHint}" /></div>
+          </div>
+          </c:if>
+        </div>
+      </div>
+    </section>
+    </c:if>
+
+    <%-- ===== YOUR CAREER UNIVERSE (Tiered) ===== --%>
+    <c:if test="${not empty topCareerMatches}">
+    <section class="panel">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+        <span style="font-size: 24px;">&#127760;</span>
+        <div>
+          <h2>Your Career Universe</h2>
+          <p class="muted" style="margin: 2px 0 0;">
+            <c:out value="${careerUniverseCount}" /> career paths mapped from your signals. Every path can lead to success &mdash; your job is to pick the one that excites you most.
+          </p>
+        </div>
       </div>
 
-      <div class="btn-row">
+      <%-- Tier 1: Strong Fit --%>
+      <div class="tier-section">
+        <div class="tier-header">
+          <span class="tier-icon" style="background: linear-gradient(135deg, #059669, #10b981);">&#9733;</span>
+          <span class="tier-title" style="color: #065f46;">Strong Fit</span>
+          <span class="tier-count">&mdash; These match your aptitude, interests, and readiness signals closely</span>
+        </div>
+        <div class="tier-grid">
+          <c:forEach var="career" items="${topCareerMatches}" begin="0" end="2">
+          <article class="tier-card" style="border-left: 3px solid #10b981;">
+            <div class="tc-name"><c:out value="${career.careerName}" /></div>
+            <div class="tc-cluster"><c:out value="${career.cluster}" /></div>
+            <div class="tc-score-row">
+              <div class="tc-score-bar">
+                <div class="tc-score-fill" style="width: ${career.fitScore}%; background: linear-gradient(90deg, #059669, #10b981);"></div>
+              </div>
+              <span class="tc-score-label" style="color: #065f46;"><c:out value="${career.fitScore}" />/100</span>
+            </div>
+            <c:if test="${not empty career.requiredSubjects}">
+            <div style="font-size: 11px; color: #475569; margin-top: 2px;"><strong>Subjects:</strong> <c:out value="${career.requiredSubjects}" /></div>
+            </c:if>
+          </article>
+          </c:forEach>
+        </div>
+      </div>
+
+      <%-- Tier 2: Good Fit --%>
+      <c:if test="${topCareerMatches.size() > 3}">
+      <div class="tier-section">
+        <div class="tier-header">
+          <span class="tier-icon" style="background: linear-gradient(135deg, #2563eb, #3b82f6);">&#10004;</span>
+          <span class="tier-title" style="color: #1e3a5f;">Good Fit</span>
+          <span class="tier-count">&mdash; Solid alignment, may need focused preparation</span>
+        </div>
+        <div class="tier-grid">
+          <c:forEach var="career" items="${topCareerMatches}" begin="3" end="6">
+          <article class="tier-card" style="border-left: 3px solid #3b82f6;">
+            <div class="tc-name"><c:out value="${career.careerName}" /></div>
+            <div class="tc-cluster"><c:out value="${career.cluster}" /></div>
+            <div class="tc-score-row">
+              <div class="tc-score-bar">
+                <div class="tc-score-fill" style="width: ${career.fitScore}%; background: linear-gradient(90deg, #2563eb, #60a5fa);"></div>
+              </div>
+              <span class="tc-score-label" style="color: #1e40af;"><c:out value="${career.fitScore}" />/100</span>
+            </div>
+          </article>
+          </c:forEach>
+        </div>
+      </div>
+      </c:if>
+
+      <%-- Tier 3: Emerging Potential --%>
+      <c:if test="${topCareerMatches.size() > 7}">
+      <div class="tier-section">
+        <div class="tier-header">
+          <span class="tier-icon" style="background: linear-gradient(135deg, #d97706, #f59e0b);">&#128161;</span>
+          <span class="tier-title" style="color: #78350f;">Emerging Potential</span>
+          <span class="tier-count">&mdash; Worth exploring with guided exposure</span>
+        </div>
+        <div class="tier-grid">
+          <c:forEach var="career" items="${topCareerMatches}" begin="7" end="10">
+          <article class="tier-card" style="border-left: 3px solid #f59e0b;">
+            <div class="tc-name"><c:out value="${career.careerName}" /></div>
+            <div class="tc-cluster"><c:out value="${career.cluster}" /></div>
+            <div class="tc-score-row">
+              <div class="tc-score-bar">
+                <div class="tc-score-fill" style="width: ${career.fitScore}%; background: linear-gradient(90deg, #d97706, #fbbf24);"></div>
+              </div>
+              <span class="tc-score-label" style="color: #92400e;"><c:out value="${career.fitScore}" />/100</span>
+            </div>
+          </article>
+          </c:forEach>
+        </div>
+      </div>
+      </c:if>
+
+      <div style="margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border: 1px solid #bbf7d0;">
+        <p style="margin: 0; font-size: 13px; color: #065f46; line-height: 1.5; font-weight: 600;">
+          &#128161; <strong>Remember:</strong> Only a small percentage of students crack the top competitive exams, but the remaining 98% find their path and succeed brilliantly.
+          There are hundreds of career routes that lead to fulfilling, well-paying careers. Your assessment shows you have multiple strong options.
+          The best career is the one that aligns with your strengths AND excites you.
+        </p>
+      </div>
+    </section>
+    </c:if>
+
+    <%-- ===== 90-DAY VISUAL ACTION PLAN ===== --%>
+    <section class="panel">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+        <span style="font-size: 24px;">&#128640;</span>
+        <div>
+          <h2>Your 90-Day Action Plan</h2>
+          <p class="muted" style="margin: 2px 0 0;">Start with your #1 destination. Use the first 90 days to validate your direction. If it doesn't feel right, explore other paths from your Career Universe.</p>
+        </div>
+      </div>
+      <div class="action-timeline">
+        <article class="action-phase" style="background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border: 1px solid #bbf7d0;">
+          <div class="phase-number" style="background: #059669;">1</div>
+          <h3 style="color: #065f46;">Days 1-30: Discovery</h3>
+          <ul class="action-list">
+            <li>Map your strengths and gaps against your top career destination requirements</li>
+            <li>Start one structured practice habit &mdash; 30 minutes daily, same time</li>
+            <li>Talk to one person already working in your chosen career path</li>
+            <li>Research the entrance exams and key subjects you need to focus on</li>
+          </ul>
+        </article>
+        <article class="action-phase" style="background: linear-gradient(135deg, #eff6ff, #eef2ff); border: 1px solid #93c5fd;">
+          <div class="phase-number" style="background: #2563eb;">2</div>
+          <h3 style="color: #1e3a5f;">Days 31-60: Build</h3>
+          <ul class="action-list">
+            <li>Begin targeted preparation aligned to your career destination</li>
+            <li>Maintain an error log &mdash; track what you get wrong and why</li>
+            <li>Explore one alternate career from your Career Universe (weekends)</li>
+            <li>Take one mini assessment or quiz in your strongest subject</li>
+          </ul>
+        </article>
+        <article class="action-phase" style="background: linear-gradient(135deg, #fefce8, #fffbeb); border: 1px solid #fde68a;">
+          <div class="phase-number" style="background: #d97706;">3</div>
+          <h3 style="color: #78350f;">Days 61-90: Validate</h3>
+          <ul class="action-list">
+            <li>Take a mock test or simulated challenge for your target entrance exam</li>
+            <li>Review progress with a mentor, parent, or career counselor</li>
+            <li>Confirm your direction or confidently switch to another strong-fit career</li>
+            <li>Retake AptiPath360 to see how your signals have evolved</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <%-- ===== PRO PLAN PREVIEW ===== --%>
+    <c:if test="${param.asPdf ne '1'}">
+    <section class="panel print-hide" style="padding: 0; border: none; background: transparent; box-shadow: none;">
+      <div class="pro-preview">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+          <span class="pro-badge">&#128274; Pro Plan</span>
+          <h2 style="font-size: 18px; color: #78350f; margin: 0;">Unlock Your Full Career Intelligence</h2>
+        </div>
+        <p style="margin: 4px 0 0; font-size: 14px; color: #92400e; line-height: 1.5;">
+          Get detailed step-by-step guidance for your chosen career path &mdash; competitive exam calendar, application deadlines, cutoff trends, college rankings, and a personalized preparation roadmap.
+        </p>
+
+        <div class="pro-locked-grid">
+          <div class="pro-locked-card">
+            <div class="plc-title">&#128197; Exam Calendar 2026-27</div>
+            <div class="plc-item">JEE Main: Jan &amp; Apr 2027</div>
+            <div class="plc-item">NEET UG: May 2027</div>
+            <div class="plc-item">CUET: May-Jun 2027</div>
+            <div class="plc-item">Application opens: Oct 2026</div>
+          </div>
+          <div class="pro-locked-card">
+            <div class="plc-title">&#128200; Cutoff Intelligence</div>
+            <div class="plc-item">Last 3 years cutoff trends</div>
+            <div class="plc-item">College-wise requirements</div>
+            <div class="plc-item">Category-wise analysis</div>
+            <div class="plc-item">Expected 2027 predictions</div>
+          </div>
+          <div class="pro-locked-card">
+            <div class="plc-title">&#128218; Prep Roadmap</div>
+            <div class="plc-item">Month-by-month study plan</div>
+            <div class="plc-item">Subject-wise weightage</div>
+            <div class="plc-item">Mock test schedule</div>
+            <div class="plc-item">Revision strategy</div>
+          </div>
+        </div>
+
+        <div class="pro-cta-row">
+          <button class="btn-pro" onclick="alert('Pro Plan subscription coming soon! We will notify you when it launches.');">
+            &#9889; Upgrade to Pro Plan
+          </button>
+          <span style="font-size: 13px; color: #92400e; font-weight: 600;">
+            Choose which career destination you want deep intelligence for &mdash; we'll build your personalized roadmap.
+          </span>
+        </div>
+      </div>
+    </section>
+    </c:if>
+
+    <%-- ===== DOWNLOAD PDF CTA ===== --%>
+    <section class="panel">
+      <div class="btn-row" style="justify-content: center;">
         <c:choose>
           <c:when test="${embedMode}">
-            <a class="btn btn-secondary print-hide" href="${pageContext.request.contextPath}/aptipath/student/result/pdf?sessionId=${sessionRow.ciAssessmentSessionId}&embed=1&company=${companyCode}">Download Diagnostic Report (PDF)</a>
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/aptipath/student/home?embed=1&company=${companyCode}">Back to AptiPath Home</a>
-            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/platform/modules?embed=1&company=${companyCode}">Back to Modules</a>
+            <a class="btn btn-primary print-hide" href="${pageContext.request.contextPath}/aptipath/student/result/pdf?sessionId=${sessionRow.ciAssessmentSessionId}&embed=1&company=${companyCode}" style="font-size: 16px; padding: 14px 28px;">&#128196; Download Your Career GPS Report (PDF)</a>
           </c:when>
           <c:otherwise>
-            <a class="btn btn-secondary print-hide" href="${pageContext.request.contextPath}/aptipath/student/result/pdf?sessionId=${sessionRow.ciAssessmentSessionId}">Download Diagnostic Report (PDF)</a>
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/aptipath/student/home">Back to AptiPath Home</a>
-            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/platform/modules">Back to Modules</a>
+            <a class="btn btn-primary print-hide" href="${pageContext.request.contextPath}/aptipath/student/result/pdf?sessionId=${sessionRow.ciAssessmentSessionId}" style="font-size: 16px; padding: 14px 28px;">&#128196; Download Your Career GPS Report (PDF)</a>
+          </c:otherwise>
+        </c:choose>
+      </div>
+    </section>
+
+    <c:if test="${param.asPdf ne '1'}">
+    <section class="panel print-hide" id="feedbackSection" style="background: linear-gradient(135deg, #fefce8, #fff7ed); border-color: #fed7aa;">
+      <h2>How was your experience?</h2>
+      <p class="muted">Your feedback helps us build a better career GPS for every student. It takes 30 seconds.</p>
+
+      <div id="feedbackForm">
+        <div style="text-align: center; margin: 16px 0;">
+          <div style="font-size: 14px; font-weight: 700; color: #334155; margin-bottom: 8px;">Rate this Career Report</div>
+          <div id="starRating" style="display: inline-flex; gap: 8px; cursor: pointer;">
+            <span class="fb-star" data-val="1" style="font-size: 36px; color: #cbd5e1; transition: color .2s;">&#9733;</span>
+            <span class="fb-star" data-val="2" style="font-size: 36px; color: #cbd5e1; transition: color .2s;">&#9733;</span>
+            <span class="fb-star" data-val="3" style="font-size: 36px; color: #cbd5e1; transition: color .2s;">&#9733;</span>
+            <span class="fb-star" data-val="4" style="font-size: 36px; color: #cbd5e1; transition: color .2s;">&#9733;</span>
+            <span class="fb-star" data-val="5" style="font-size: 36px; color: #cbd5e1; transition: color .2s;">&#9733;</span>
+          </div>
+          <div id="starLabel" style="font-size: 12px; color: #64748b; margin-top: 4px;">&nbsp;</div>
+        </div>
+
+        <div style="margin: 14px 0;">
+          <div style="font-size: 14px; font-weight: 700; color: #334155; margin-bottom: 6px;">How likely are you to recommend AptiPath360 to a friend? (0-10)</div>
+          <div id="npsRow" style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+            <c:forEach var="n" begin="0" end="10">
+            <span class="nps-btn" data-val="${n}"
+                  style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+                         border-radius: 8px; border: 2px solid #cbd5e1; background: #fff; color: #334155;
+                         font-weight: 800; font-size: 14px; cursor: pointer; transition: all .2s;">${n}</span>
+            </c:forEach>
+          </div>
+        </div>
+
+        <div style="margin: 14px 0;">
+          <div style="font-size: 14px; font-weight: 700; color: #334155; margin-bottom: 6px;">Any thoughts or suggestions? (Optional)</div>
+          <textarea id="feedbackText" rows="3" placeholder="Tell us what you liked, or what we can improve..."
+                    style="width: 100%; border: 1px solid #d0dde8; border-radius: 10px; padding: 10px; font-family: inherit;
+                           font-size: 14px; resize: vertical; background: #fff;"></textarea>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; margin: 10px 0;">
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 14px; color: #334155; font-weight: 600;">
+            <input type="checkbox" id="wouldRefer" style="width: 18px; height: 18px;"> I'd be happy to refer AptiPath360 to friends and family
+          </label>
+        </div>
+
+        <div style="text-align: center; margin-top: 12px;">
+          <button id="submitFeedbackBtn" class="btn btn-primary" style="padding: 12px 32px; font-size: 15px;">
+            Submit Feedback
+          </button>
+        </div>
+      </div>
+
+      <div id="feedbackThanks" style="display: none; text-align: center; padding: 20px 0;">
+        <div style="font-size: 42px; margin-bottom: 8px;">&#10024;</div>
+        <h3 style="color: #065f46; font-size: 20px;">Thank You!</h3>
+        <p style="color: #334155; font-size: 15px; margin-top: 6px;">Your feedback is the fuel that makes our Career GPS smarter for every student.</p>
+      </div>
+    </section>
+
+    <section class="panel print-hide" style="background: linear-gradient(135deg, #eff6ff, #eef2ff); border-color: #93c5fd;">
+      <h2>Know someone who needs career clarity?</h2>
+      <p class="muted">
+        Every student deserves a career GPS. Share AptiPath360 with friends, classmates, or parents who are figuring out their next steps.
+      </p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; align-items: center;">
+        <a id="whatsappShare" href="#" target="_blank" class="btn" style="background: #25d366; color: #fff; padding: 10px 18px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Share on WhatsApp
+        </a>
+        <button id="copyLinkBtn" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; font-size: 14px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy Referral Link
+        </button>
+        <span id="copyConfirm" style="font-size: 13px; color: #059669; font-weight: 700; display: none;">Link copied!</span>
+      </div>
+    </section>
+    </c:if>
+
+    <section class="panel" style="background: linear-gradient(120deg, var(--brand-secondary), var(--brand-primary)); color: #f8fbff; text-align: center; padding: 32px 24px; border-radius: 22px;">
+      <div style="font-size: 56px; margin-bottom: 10px;">&#127919;</div>
+      <h2 style="color: #a7f3d0; font-size: 24px; font-family: 'Sora', sans-serif;">Your Career Journey Starts Now</h2>
+      <p style="color: rgba(240, 248, 255, 0.94); font-size: 16px; line-height: 1.65; max-width: 680px; margin: 14px auto 0;">
+        This report is your <strong>Career GPS</strong>. It shows where you are, the best routes ahead,
+        and the turns you need to make. Your <c:out value="${careerUniverseCount}" /> mapped career paths prove one thing:
+        <strong>you have options, and every option leads somewhere great.</strong>
+      </p>
+      <div style="max-width: 600px; margin: 18px auto 0; padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);">
+        <p style="margin: 0; font-size: 14px; color: rgba(240, 248, 255, 0.92); line-height: 1.55;">
+          &#128161; <strong>Here's the truth:</strong> Only a small percentage of students crack IIT, NEET, or CAT &mdash;
+          but the remaining 98% find their way and succeed brilliantly. The world has hundreds of paths to a fulfilling career.
+          <strong>AptiPath360 is your GPS to find YOUR best path.</strong>
+        </p>
+      </div>
+      <p style="color: rgba(167, 243, 208, 0.9); font-size: 14px; margin-top: 16px; font-weight: 700;">
+        Every expert was once a student who chose to start. You just did. &#128170;
+      </p>
+      <div class="btn-row" style="justify-content: center; margin-top: 18px; gap: 12px;">
+        <c:choose>
+          <c:when test="${embedMode}">
+            <a class="btn print-hide" href="${pageContext.request.contextPath}/aptipath/student/home?embed=1&company=${companyCode}" style="background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 20px;">&#127968; Back to AptiPath Home</a>
+          </c:when>
+          <c:otherwise>
+            <a class="btn print-hide" href="${pageContext.request.contextPath}/aptipath/student/home" style="background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 20px;">&#127968; Back to AptiPath Home</a>
           </c:otherwise>
         </c:choose>
       </div>
@@ -1063,14 +1966,86 @@
           <c:out value="${branding.poweredByLabel}" />
         </c:when>
         <c:otherwise>
-          Powered by Robo Dynamics
+          Powered by Robo Dynamics &mdash; Career GPS for Every Student
         </c:otherwise>
       </c:choose>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script id="streamCompetencyJson" type="application/json"><c:out value="${streamCompetencyJson}" escapeXml="false" /></script>
   <script>
     (function() {
+      const radarEl = document.getElementById('pathwayRadar');
+      const streamCompetencyRaw = document.getElementById('streamCompetencyJson');
+      if (radarEl && streamCompetencyRaw && typeof window.Chart !== 'undefined') {
+        let competencyMap = {};
+        try {
+          competencyMap = JSON.parse(streamCompetencyRaw.textContent || '{}');
+        } catch (e) {
+          competencyMap = {};
+        }
+        const labels = Object.keys(competencyMap);
+        const values = labels.map(label => Number(competencyMap[label] || 0));
+        if (!labels.length) {
+          labels.push('STEM', 'Medical', 'Commerce', 'Humanities');
+          values.push(50, 50, 50, 50);
+        }
+        new Chart(radarEl, {
+          type: 'radar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Pathway Fit',
+              data: values,
+              borderColor: '#00f0ff',
+              backgroundColor: 'rgba(0, 240, 255, 0.22)',
+              borderWidth: 2,
+              pointBackgroundColor: '#39ff14',
+              pointRadius: 3
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 1400,
+              easing: 'easeOutQuart'
+            },
+            scales: {
+              r: {
+                beginAtZero: true,
+                min: 0,
+                max: 100,
+                ticks: {
+                  display: false
+                },
+                grid: {
+                  color: 'rgba(191, 219, 254, 0.25)'
+                },
+                angleLines: {
+                  color: 'rgba(191, 219, 254, 0.25)'
+                },
+                pointLabels: {
+                  color: '#e2f3ff',
+                  font: {
+                    size: 11,
+                    weight: '700'
+                  }
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#e2f3ff'
+                }
+              }
+            }
+          }
+        });
+      }
+
       const sessionId = '<c:out value="${sessionRow.ciAssessmentSessionId}" />';
       if (sessionId) {
         try {
@@ -1079,6 +2054,181 @@
         } catch (e) {
           // ignore
         }
+      }
+
+      // ===== 10-YEAR CAREER ROADMAP (Dynamic, Grade-Aware) =====
+      (function() {
+        var container = document.getElementById('roadmapContainer');
+        if (!container) return;
+
+        var currentGrade = parseInt('<c:out value="${studentGrade}" />') || 10;
+        var currentYear = 2026;
+        var steps = [];
+
+        // Grade 8 roadmap (10 years: 2026-2036)
+        if (currentGrade === 8) {
+          steps = [
+            { year: currentYear, label: 'Grade 8', title: 'Foundation', desc: 'Build curiosity, aptitude habits, explore broadly', type: 'active' },
+            { year: currentYear + 1, label: 'Grade 9', title: 'Explore', desc: 'Identify subject strengths, try 2-3 extracurriculars', type: 'future' },
+            { year: currentYear + 2, label: 'Grade 10', title: 'Board Prep', desc: 'Stream selection decision, board exam preparation', type: 'milestone' },
+            { year: currentYear + 3, label: 'Grade 11', title: 'Deep Dive', desc: 'Subject specialization, competitive exam coaching begins', type: 'future' },
+            { year: currentYear + 4, label: 'Grade 12', title: 'Entrance Year', desc: 'Board + competitive exams, college applications', type: 'milestone' },
+            { year: currentYear + 5, label: 'College Y1', title: 'Foundation Year', desc: 'Core subjects, campus exposure, skill-building', type: 'future' },
+            { year: currentYear + 6, label: 'College Y2', title: 'Specialization', desc: 'Major selection, internship search, projects', type: 'future' },
+            { year: currentYear + 7, label: 'College Y3', title: 'Industry Ready', desc: 'Internships, portfolio building, placement prep', type: 'future' },
+            { year: currentYear + 8, label: 'College Y4', title: 'Launch Pad', desc: 'Final projects, placements, or higher education applications', type: 'milestone' },
+            { year: currentYear + 9, label: '' + (currentYear + 9), title: 'Career Start', desc: 'First job or post-grad, apply everything you built', type: 'milestone' }
+          ];
+        }
+        // Grade 9 roadmap
+        else if (currentGrade === 9) {
+          steps = [
+            { year: currentYear, label: 'Grade 9', title: 'Explore & Focus', desc: 'Identify top subjects, start building study discipline', type: 'active' },
+            { year: currentYear + 1, label: 'Grade 10', title: 'Board Prep', desc: 'Stream decision, board exam readiness, first competitive tests', type: 'milestone' },
+            { year: currentYear + 2, label: 'Grade 11', title: 'Stream Deep Dive', desc: 'Subject mastery, entrance exam coaching, skill projects', type: 'future' },
+            { year: currentYear + 3, label: 'Grade 12', title: 'Exam & Apply', desc: 'Boards + entrance exams, college applications filed', type: 'milestone' },
+            { year: currentYear + 4, label: 'College Y1', title: 'Foundation', desc: 'Core learning, campus activities, discover passions', type: 'future' },
+            { year: currentYear + 5, label: 'College Y2', title: 'Specialize', desc: 'Choose major/track, first internship experience', type: 'future' },
+            { year: currentYear + 6, label: 'College Y3', title: 'Build Portfolio', desc: 'Projects, internships, professional network building', type: 'future' },
+            { year: currentYear + 7, label: 'College Y4', title: 'Launch', desc: 'Placements, higher studies, or entrepreneurship launch', type: 'milestone' },
+            { year: currentYear + 8, label: '' + (currentYear + 8), title: 'Career Growth', desc: 'First role mastery, upskilling, career acceleration', type: 'future' }
+          ];
+        }
+        // Grade 10 roadmap
+        else if (currentGrade === 10) {
+          steps = [
+            { year: currentYear, label: 'Grade 10', title: 'Board Year', desc: 'Excel in boards, finalize stream choice for Class 11', type: 'active' },
+            { year: currentYear + 1, label: 'Grade 11', title: 'Stream Start', desc: 'Deep subject study, entrance coaching, build foundations', type: 'future' },
+            { year: currentYear + 2, label: 'Grade 12', title: 'Entrance Year', desc: 'Board + competitive exams, applications, interview prep', type: 'milestone' },
+            { year: currentYear + 3, label: 'College Y1', title: 'New Beginning', desc: 'Core curriculum, explore clubs, hackathons, labs', type: 'future' },
+            { year: currentYear + 4, label: 'College Y2', title: 'Specialize', desc: 'Declare major, first internship, research projects', type: 'future' },
+            { year: currentYear + 5, label: 'College Y3', title: 'Industry Ready', desc: 'Professional internships, certifications, portfolio', type: 'future' },
+            { year: currentYear + 6, label: 'College Y4', title: 'Launch Pad', desc: 'Campus placements, higher study apps, startup projects', type: 'milestone' },
+            { year: currentYear + 7, label: '' + (currentYear + 7), title: 'Career Start', desc: 'First professional role, apply your 7 years of preparation', type: 'milestone' },
+            { year: currentYear + 8, label: '' + (currentYear + 8), title: 'Accelerate', desc: 'Promotions, specializations, leadership growth', type: 'future' }
+          ];
+        }
+        // Default: generic 8-year roadmap
+        else {
+          steps = [
+            { year: currentYear, label: 'Now', title: 'Assessment Baseline', desc: 'Your current strengths and readiness captured', type: 'active' },
+            { year: currentYear + 1, label: '' + (currentYear + 1), title: 'Skill Building', desc: 'Strengthen weak areas, maintain strengths', type: 'future' },
+            { year: currentYear + 2, label: '' + (currentYear + 2), title: 'Exam Readiness', desc: 'Targeted preparation for entrance exams', type: 'milestone' },
+            { year: currentYear + 3, label: '' + (currentYear + 3), title: 'College Entry', desc: 'Begin degree, explore specializations', type: 'future' },
+            { year: currentYear + 4, label: '' + (currentYear + 4), title: 'Specialize', desc: 'Deep expertise in chosen field', type: 'future' },
+            { year: currentYear + 5, label: '' + (currentYear + 5), title: 'Industry Exposure', desc: 'Internships, projects, professional network', type: 'future' },
+            { year: currentYear + 6, label: '' + (currentYear + 6), title: 'Career Launch', desc: 'First role or higher education', type: 'milestone' },
+            { year: currentYear + 8, label: '' + (currentYear + 8), title: 'Career Growth', desc: 'Established professional, making impact', type: 'milestone' }
+          ];
+        }
+
+        var html = '<div class="roadmap-track">';
+        for (var i = 0; i < steps.length; i++) {
+          var s = steps[i];
+          html += '<div class="roadmap-node ' + s.type + '">'
+            + '<div class="roadmap-dot"></div>'
+            + '<div class="roadmap-year">' + s.label + '</div>'
+            + '<div class="roadmap-title">' + s.title + '</div>'
+            + '<p class="roadmap-desc">' + s.desc + '</p>'
+            + '</div>';
+        }
+        html += '</div>';
+        container.innerHTML = html;
+      })();
+
+      // ---- Feedback: Star Rating ----
+      let selectedStars = 0;
+      const starLabels = ['', 'Needs improvement', 'Below expectations', 'Good', 'Very helpful', 'Excellent!'];
+      document.querySelectorAll('.fb-star').forEach(function(star) {
+        star.addEventListener('mouseenter', function() {
+          const v = parseInt(this.getAttribute('data-val'));
+          document.querySelectorAll('.fb-star').forEach(function(s) {
+            s.style.color = parseInt(s.getAttribute('data-val')) <= v ? '#f59e0b' : '#cbd5e1';
+          });
+        });
+        star.addEventListener('mouseleave', function() {
+          document.querySelectorAll('.fb-star').forEach(function(s) {
+            s.style.color = parseInt(s.getAttribute('data-val')) <= selectedStars ? '#f59e0b' : '#cbd5e1';
+          });
+        });
+        star.addEventListener('click', function() {
+          selectedStars = parseInt(this.getAttribute('data-val'));
+          document.querySelectorAll('.fb-star').forEach(function(s) {
+            s.style.color = parseInt(s.getAttribute('data-val')) <= selectedStars ? '#f59e0b' : '#cbd5e1';
+          });
+          var lbl = document.getElementById('starLabel');
+          if (lbl) lbl.textContent = starLabels[selectedStars] || '';
+        });
+      });
+
+      // ---- Feedback: NPS ----
+      let selectedNps = -1;
+      document.querySelectorAll('.nps-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          selectedNps = parseInt(this.getAttribute('data-val'));
+          document.querySelectorAll('.nps-btn').forEach(function(b) {
+            var bv = parseInt(b.getAttribute('data-val'));
+            if (bv === selectedNps) {
+              b.style.background = bv <= 6 ? '#fef2f2' : bv <= 8 ? '#fefce8' : '#f0fdf4';
+              b.style.borderColor = bv <= 6 ? '#ef4444' : bv <= 8 ? '#f59e0b' : '#22c55e';
+              b.style.color = bv <= 6 ? '#991b1b' : bv <= 8 ? '#92400e' : '#166534';
+            } else {
+              b.style.background = '#fff';
+              b.style.borderColor = '#cbd5e1';
+              b.style.color = '#334155';
+            }
+          });
+        });
+      });
+
+      // ---- Feedback: Submit ----
+      var submitBtn = document.getElementById('submitFeedbackBtn');
+      if (submitBtn) {
+        submitBtn.addEventListener('click', function() {
+          if (selectedStars === 0) { alert('Please select a star rating.'); return; }
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+          var feedbackText = (document.getElementById('feedbackText') || {}).value || '';
+          var wouldRefer = (document.getElementById('wouldRefer') || {}).checked || false;
+          var ctx = '<c:out value="${pageContext.request.contextPath}" />';
+          var body = 'sessionId=' + encodeURIComponent(sessionId)
+            + '&starRating=' + selectedStars
+            + '&npsScore=' + selectedNps
+            + '&feedbackText=' + encodeURIComponent(feedbackText)
+            + '&wouldRefer=' + wouldRefer;
+          fetch(ctx + '/aptipath/student/feedback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body
+          }).then(function(r) { return r.json(); })
+          .then(function() {
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('feedbackThanks').style.display = 'block';
+          }).catch(function() {
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('feedbackThanks').style.display = 'block';
+          });
+        });
+      }
+
+      // ---- Share: WhatsApp ----
+      var waBtn = document.getElementById('whatsappShare');
+      if (waBtn) {
+        var shareUrl = window.location.origin + '<c:out value="${pageContext.request.contextPath}" />/aptipath/student/home';
+        var shareText = 'I just completed my Career GPS assessment on AptiPath360! It mapped my top career paths with detailed guidance. Try it: ' + shareUrl;
+        waBtn.href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+      }
+
+      // ---- Share: Copy Link ----
+      var copyBtn = document.getElementById('copyLinkBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+          var shareUrl = window.location.origin + '<c:out value="${pageContext.request.contextPath}" />/aptipath/student/home';
+          navigator.clipboard.writeText(shareUrl).then(function() {
+            var cf = document.getElementById('copyConfirm');
+            if (cf) { cf.style.display = 'inline'; setTimeout(function(){ cf.style.display = 'none'; }, 2500); }
+          });
+        });
       }
     })();
   </script>

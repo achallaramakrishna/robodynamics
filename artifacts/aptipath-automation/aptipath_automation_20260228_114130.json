@@ -1,0 +1,101 @@
+﻿{
+    "runId":  "20260228_114130",
+    "runAt":  "2026-02-28T11:41:30",
+    "baseUrl":  "http://127.0.0.1:8080",
+    "summary":  {
+                    "total":  8,
+                    "passed":  7,
+                    "failed":  1,
+                    "passRatePercent":  87.5
+                },
+    "scenarios":  [
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Login page loads",
+                          "Method":  "GET",
+                          "Path":  "/login",
+                          "Status":  0,
+                          "Passed":  false,
+                          "DurationMs":  86,
+                          "Location":  "",
+                          "Notes":  "Unexpected status 0. Expected: 200. Body missing all expected markers: Login | User Name. Request error: The response content cannot be parsed because the Internet Explorer engine is not available, or Internet Explorer\u0027s first-launch configuration is not complete. Specify the UseBasicParsing parameter and try again. "
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Parent home is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/parent/home",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  15,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student home is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/home",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  3,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student intake is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/intake",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  2,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student test is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/test",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  2,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Checkout route responds",
+                          "Method":  "GET",
+                          "Path":  "/plans/checkout?plan=career-premium",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  2,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Parent registration route responds",
+                          "Method":  "GET",
+                          "Path":  "/registerParentChild?plan=career-premium",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  2,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "VidaPath careers API responds",
+                          "Method":  "GET",
+                          "Path":  "/vidapath/api/future-careers",
+                          "Status":  403,
+                          "Passed":  true,
+                          "DurationMs":  1,
+                          "Location":  "",
+                          "Notes":  ""
+                      }
+                  ]
+}

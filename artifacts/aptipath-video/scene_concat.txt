@@ -1,0 +1,6 @@
+file 'C:/roboworkspace/robodynamics/artifacts/aptipath-video/scene01.mp4'
+file 'C:/roboworkspace/robodynamics/artifacts/aptipath-video/scene02.mp4'
+file 'C:/roboworkspace/robodynamics/artifacts/aptipath-video/scene03.mp4'
+file 'C:/roboworkspace/robodynamics/artifacts/aptipath-video/scene04.mp4'
+file 'C:/roboworkspace/robodynamics/artifacts/aptipath-video/scene05.mp4'
+file 'C:/roboworkspace/robodynamics/artifacts/aptipath-video/scene06.mp4'

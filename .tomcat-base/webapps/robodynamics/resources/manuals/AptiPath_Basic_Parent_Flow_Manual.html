@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AptiPath Basic Parent Flow Manual</title>
+<style>
+  :root {
+    --bg: #f6f9f6;
+    --card: #ffffff;
+    --ink: #102419;
+    --muted: #4a6358;
+    --line: #d2e1d7;
+    --primary: #0f766e;
+    --primary-dark: #0b5f58;
+    --warn: #7c2d12;
+    --warn-bg: #fff7ed;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.45;
+  }
+
+  .shell {
+    width: min(960px, 92vw);
+    margin: 20px auto 40px;
+  }
+
+  .header {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--card);
+    padding: 16px;
+    box-shadow: 0 10px 20px rgba(7, 33, 21, 0.08);
+  }
+
+  h1, h2, h3 {
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  h1 { font-size: clamp(24px, 4vw, 34px); }
+  h2 { font-size: clamp(18px, 3vw, 24px); margin-top: 16px; }
+  h3 { font-size: 16px; margin-top: 10px; }
+
+  p, li {
+    color: var(--muted);
+    margin-top: 0;
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .btn {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(130deg, var(--primary), var(--primary-dark));
+    color: #fff;
+  }
+
+  .btn-light {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+
+  .note {
+    margin-top: 10px;
+    border: 1px solid #fed7aa;
+    border-radius: 12px;
+    background: var(--warn-bg);
+    padding: 10px;
+    color: var(--warn);
+    font-weight: 600;
+  }
+
+  .grid {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    padding: 12px;
+  }
+
+  .steps {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .steps li {
+    margin-bottom: 8px;
+  }
+
+  .footer {
+    margin-top: 16px;
+    font-size: 13px;
+    color: #486356;
+  }
+
+  @media print {
+    .btn-row { display: none; }
+    body { background: #fff; }
+    .header, .card { box-shadow: none; }
+  }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <section class="header">
+      <h1>AptiPath Career Discover Basic - Parent Flow Manual</h1>
+      <p>This manual explains the complete parent-first flow from plan purchase to report usage.</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" onclick="window.print()">Save / Print as PDF</button>
+        <a class="btn btn-light" href="../../plans/checkout?plan=career-basic">Start Basic Plan</a>
+      </div>
+      <div class="note">
+        PDF tip: click "Save / Print as PDF" and choose "Save as PDF" in your browser print dialog.
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>1. What parents see first</h2>
+        <ul class="steps">
+          <li>Career Discover is shown as an independent module.</li>
+          <li>Basic and Pro pricing is clear with scope differences.</li>
+          <li>Primary CTA is Basic plan purchase for first-time users.</li>
+          <li>Existing users can login and continue from dashboard.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>2. 4-step conversion journey</h2>
+        <ol class="steps">
+          <li>Parent starts Basic plan checkout.</li>
+          <li>Parent logs in or registers parent + student profile.</li>
+          <li>Parent questionnaire is completed first.</li>
+          <li>Student intake is completed, then student starts test.</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h2>3. Parent questionnaire scope</h2>
+        <ul class="steps">
+          <li>Academic goals, budget range, and timeline.</li>
+          <li>Observed strengths and areas of concern.</li>
+          <li>Expected support style from mentors and platform.</li>
+          <li>Location and coaching constraints.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>4. Student intake scope</h2>
+        <ul class="steps">
+          <li>Interests, hobbies, dislikes, and motivation.</li>
+          <li>Self-rated comfort by subject and learning mode.</li>
+          <li>Fears, pressure points, and achievement signals.</li>
+          <li>Readiness check before test starts.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>5. Basic vs Pro positioning</h2>
+        <ul class="steps">
+          <li>Basic: starter diagnosis and direction snapshot.</li>
+          <li>Pro: deeper competency, roadmap, and action planning.</li>
+          <li>Recommended to upgrade to Pro after Basic completion.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>6. Parent questions to answer clearly</h2>
+        <ul class="steps">
+          <li>How scores are calculated and validated.</li>
+          <li>Which responses affected each key output metric.</li>
+          <li>What confidence level the system has in recommendations.</li>
+          <li>What additional assessment is needed before high-stakes decisions.</li>
+        </ul>
+      </article>
+    </section>
+
+    <p class="footer">
+      Version: 2026-02-23 | Module: AptiPath Career Discover Basic
+    </p>
+  </div>
+</body>
+</html>

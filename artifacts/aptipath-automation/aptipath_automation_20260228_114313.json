@@ -1,0 +1,101 @@
+﻿{
+    "runId":  "20260228_114313",
+    "runAt":  "2026-02-28T11:43:13",
+    "baseUrl":  "http://127.0.0.1:8085/robodynamics",
+    "summary":  {
+                    "total":  8,
+                    "passed":  8,
+                    "failed":  0,
+                    "passRatePercent":  100
+                },
+    "scenarios":  [
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Login page loads",
+                          "Method":  "GET",
+                          "Path":  "/login",
+                          "Status":  200,
+                          "Passed":  true,
+                          "DurationMs":  62,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Parent home is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/parent/home",
+                          "Status":  302,
+                          "Passed":  true,
+                          "DurationMs":  12,
+                          "Location":  "/robodynamics/login;jsessionid=5AECFAD686FD6795F07ABB19CBB35D5F?redirect=/aptipath/parent/home",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student home is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/home",
+                          "Status":  302,
+                          "Passed":  true,
+                          "DurationMs":  13,
+                          "Location":  "/robodynamics/login;jsessionid=723B2C078D85D5C765B07FDD7D0ADAF4?redirect=/aptipath/student/home",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student intake is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/intake",
+                          "Status":  302,
+                          "Passed":  true,
+                          "DurationMs":  12,
+                          "Location":  "/robodynamics/login;jsessionid=141373B0A5F5C4DC15294CBFCD0CE8A3?redirect=/aptipath/student/intake",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student test is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/test",
+                          "Status":  302,
+                          "Passed":  true,
+                          "DurationMs":  10,
+                          "Location":  "/robodynamics/login;jsessionid=462060B612FBA1A8B815347AE9034203?redirect=/aptipath/student/test",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Checkout route responds",
+                          "Method":  "GET",
+                          "Path":  "/plans/checkout?plan=career-premium",
+                          "Status":  302,
+                          "Passed":  true,
+                          "DurationMs":  11,
+                          "Location":  "/robodynamics/registerParentChild;jsessionid=07AAE5DEBC17B79B748551424B2948F5?plan=career-basic\u0026redirect=%2Fplans%2Fcheckout%3Fplan%3Dcareer-basic",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Parent registration route responds",
+                          "Method":  "GET",
+                          "Path":  "/registerParentChild?plan=career-premium",
+                          "Status":  200,
+                          "Passed":  true,
+                          "DurationMs":  20,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "VidaPath careers API responds",
+                          "Method":  "GET",
+                          "Path":  "/vidapath/api/future-careers",
+                          "Status":  200,
+                          "Passed":  true,
+                          "DurationMs":  10,
+                          "Location":  "",
+                          "Notes":  ""
+                      }
+                  ]
+}

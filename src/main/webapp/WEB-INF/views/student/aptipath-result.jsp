@@ -24,20 +24,21 @@
       margin: 0;
       min-height: 100vh;
       font-family: "Plus Jakarta Sans", "Trebuchet MS", sans-serif;
-      color: var(--ink-900);
+      font-size: 16px;
+      color: #0f172a;
       background:
         radial-gradient(900px 420px at 8% -12%, rgba(11, 31, 58, 0.14), transparent 60%),
         radial-gradient(760px 360px at 108% -14%, rgba(15, 118, 110, 0.16), transparent 58%),
         linear-gradient(180deg, #f4f8fc 0%, #edf3f8 100%);
     }
 
-    .shell { width: min(1080px, 92vw); margin: 30px auto; }
+    .shell { width: min(1080px, 94vw); margin: 24px auto; padding: 0 8px; }
 
     .hero {
-      background: linear-gradient(120deg, var(--brand-secondary), var(--brand-primary));
+      background: linear-gradient(120deg, ${not empty branding and not empty branding.secondaryColor ? branding.secondaryColor : '#0b1f3a'}, ${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'});
       color: #f8fbff;
-      border-radius: 22px;
-      padding: 24px;
+      border-radius: 18px;
+      padding: 22px 24px;
       box-shadow: 0 18px 42px rgba(2, 23, 39, 0.12);
     }
 
@@ -47,63 +48,65 @@
       letter-spacing: -0.02em;
     }
 
-    .hero p { margin: 10px 0 0; color: rgba(241, 247, 255, 0.94); }
+    h2 { font-size: 22px; }
+
+    .hero p { margin: 8px 0 0; color: rgba(241, 247, 255, 0.94); font-size: 15px; }
 
     .grid {
-      margin-top: 16px;
+      margin-top: 14px;
       display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
     .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+      background: #ffffff;
+      border: 1px solid #dbe6ef;
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
     }
 
     .metric-label {
-      color: var(--ink-500);
-      font-size: 12px;
+      color: #64748b;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .06em;
+      letter-spacing: .05em;
     }
 
     .metric-value {
-      margin-top: 8px;
-      font-size: 24px;
+      margin-top: 6px;
+      font-size: 26px;
       font-weight: 800;
-      color: var(--ink-900);
+      color: #0f172a;
     }
 
     .panel {
-      margin-top: 16px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
-      padding: 20px;
+      margin-top: 14px;
+      background: #ffffff;
+      border: 1px solid #dbe6ef;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+      padding: 20px 22px;
     }
 
     .plan-grid {
       margin-top: 12px;
       display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      grid-template-columns: 1fr 1fr 1fr;
     }
 
     .plan {
       border: 1px solid #d0dde8;
       border-radius: 12px;
-      padding: 12px;
+      padding: 14px;
       background: #f8fbff;
     }
 
-    .plan h3 { font-size: 16px; margin-bottom: 8px; }
-    .plan p { margin: 0; color: var(--ink-700); font-size: 14px; line-height: 1.5; }
+    .plan h3 { font-size: 17px; margin-bottom: 8px; }
+    .plan p { margin: 0; color: #334155; font-size: 15px; line-height: 1.55; }
 
     .score-strip {
       margin-top: 16px;
@@ -122,7 +125,7 @@
     }
 
     .score-card .k {
-      font-size: 12px;
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: .06em;
       opacity: 0.9;
@@ -132,7 +135,7 @@
     .score-card .score {
       margin-top: 8px;
       font-family: "Sora", "Franklin Gothic Medium", sans-serif;
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 800;
       line-height: 1;
     }
@@ -143,8 +146,8 @@
       align-items: center;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.3);
-      padding: 6px 10px;
-      font-size: 12px;
+      padding: 6px 12px;
+      font-size: 13px;
       font-weight: 700;
       background: rgba(255,255,255,0.12);
     }
@@ -152,8 +155,8 @@
     .score-card .note {
       margin-top: 10px;
       color: rgba(240, 248, 255, 0.96);
-      font-size: 13px;
-      line-height: 1.4;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .score-meta {
@@ -165,9 +168,9 @@
       border: 1px solid #dbe6ef;
       border-radius: 12px;
       background: #f8fbff;
-      padding: 11px 12px;
-      color: var(--ink-700);
-      font-size: 14px;
+      padding: 12px 14px;
+      color: #334155;
+      font-size: 15px;
       font-weight: 600;
     }
 
@@ -175,7 +178,7 @@
       margin-top: 12px;
       display: grid;
       gap: 10px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
     }
 
     .career-item {
@@ -188,14 +191,14 @@
     }
 
     .career-item .title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       color: #0f172a;
       line-height: 1.35;
     }
 
     .career-item .cluster {
-      font-size: 12px;
+      font-size: 13px;
       color: #64748b;
       font-weight: 700;
     }
@@ -205,7 +208,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      font-size: 12px;
+      font-size: 14px;
       color: #334155;
       font-weight: 700;
     }
@@ -215,8 +218,8 @@
       border: 1px solid #c7d2fe;
       background: #eef2ff;
       color: #3730a3;
-      padding: 4px 8px;
-      font-size: 11px;
+      padding: 5px 10px;
+      font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
     }
@@ -224,24 +227,24 @@
     .career-item .reason {
       margin: 0;
       color: #475569;
-      font-size: 12px;
-      line-height: 1.45;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .career-item .pre-req {
       margin: 0;
       color: #334155;
-      font-size: 12px;
-      line-height: 1.45;
+      font-size: 14px;
+      line-height: 1.5;
       font-weight: 600;
     }
 
     .evidence-list {
       margin: 0;
-      padding-left: 16px;
+      padding-left: 18px;
       color: #475569;
-      font-size: 12px;
-      line-height: 1.45;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .evidence-list li + li { margin-top: 4px; }
@@ -258,22 +261,22 @@
       border-radius: 999px;
       background: #f8fafc;
       color: #334155;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 6px 10px;
+      padding: 6px 12px;
     }
 
     .cue-list {
       margin: 0;
-      padding-left: 18px;
-      color: var(--ink-700);
-      font-size: 14px;
+      padding-left: 20px;
+      color: #334155;
+      font-size: 15px;
       line-height: 1.6;
     }
 
     .cue-list li + li { margin-top: 8px; }
 
-    .muted { color: var(--ink-500); }
+    .muted { color: #64748b; font-size: 14px; }
 
     .btn-row {
       margin-top: 16px;
@@ -294,7 +297,7 @@
     }
 
     .btn-primary {
-      background: var(--brand-primary);
+      background: ${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'};
       color: #fff;
       box-shadow: 0 10px 20px rgba(15, 118, 110, .24);
     }
@@ -307,8 +310,8 @@
     .powered {
       margin-top: 14px;
       text-align: right;
-      color: var(--ink-500);
-      font-size: 12px;
+      color: #64748b;
+      font-size: 13px;
       font-weight: 600;
     }
 
@@ -316,7 +319,7 @@
       margin-top: 12px;
       display: grid;
       gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
     }
 
     .chart-card {
@@ -329,7 +332,7 @@
     }
 
     .chart-card h3 {
-      font-size: 15px;
+      font-size: 16px;
       color: #0f172a;
     }
 
@@ -340,16 +343,16 @@
 
     .bar-row {
       display: grid;
-      grid-template-columns: 140px minmax(0, 1fr) 52px;
+      grid-template-columns: 140px 1fr 52px;
       align-items: center;
       gap: 8px;
     }
 
     .bar-label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: #334155;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .bar-track {
@@ -362,13 +365,13 @@
     .bar-fill {
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand-primary), #14b8a6);
+      background: linear-gradient(90deg, ${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'}, #14b8a6);
       width: 0%;
       transition: width .3s ease;
     }
 
     .bar-value {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       color: #0f172a;
       text-align: right;
@@ -376,14 +379,14 @@
     }
 
     .method-note {
-      margin-top: 8px;
+      margin-top: 10px;
       border: 1px solid #dbe6ef;
       border-radius: 12px;
       background: #f8fbff;
-      padding: 10px 12px;
+      padding: 12px 14px;
       color: #334155;
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.55;
     }
 
     .audit-table-wrap {
@@ -398,7 +401,7 @@
       width: 100%;
       border-collapse: collapse;
       min-width: 880px;
-      font-size: 12px;
+      font-size: 13px;
       color: #334155;
     }
 
@@ -449,7 +452,7 @@
       margin-top: 12px;
       display: grid;
       gap: 12px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr 1fr;
     }
 
     .graph-card {
@@ -469,12 +472,10 @@
     }
 
     .donut {
-      --p: 0;
       width: 122px;
       height: 122px;
       border-radius: 50%;
-      background:
-        conic-gradient(var(--brand-primary) calc(var(--p) * 1%), #dbe6ef 0);
+      background: #dbe6ef;
       display: grid;
       place-items: center;
       position: relative;
@@ -494,10 +495,52 @@
     .donut span {
       position: relative;
       z-index: 1;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
       color: #0f172a;
       font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+    }
+
+    .pdf-accuracy-wrap {
+      display: grid;
+      gap: 8px;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .pdf-accuracy-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 56px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pdf-accuracy-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .pdf-accuracy-track {
+      height: 11px;
+      border-radius: 999px;
+      background: #dbe6ef;
+      overflow: hidden;
+    }
+
+    .pdf-accuracy-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #0f766e, #14b8a6);
+    }
+
+    .pdf-accuracy-value {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+      text-align: right;
+      white-space: nowrap;
     }
 
     .stack-track {
@@ -524,28 +567,28 @@
       display: flex;
       justify-content: space-between;
       gap: 8px;
-      font-size: 12px;
+      font-size: 13px;
       color: #334155;
       font-weight: 700;
     }
 
     .simple-bar {
       display: grid;
-      gap: 8px;
+      gap: 10px;
     }
 
     .simple-bar .row {
       display: grid;
-      grid-template-columns: 140px minmax(0, 1fr) 52px;
+      grid-template-columns: 140px 1fr 52px;
       align-items: center;
       gap: 8px;
     }
 
     .simple-bar .lbl {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: #334155;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .simple-bar .trk {
@@ -559,11 +602,11 @@
     .simple-bar .fill {
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, var(--brand-secondary), var(--brand-primary));
+      background: linear-gradient(90deg, ${not empty branding and not empty branding.secondaryColor ? branding.secondaryColor : '#0b1f3a'}, ${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'});
     }
 
     .simple-bar .val {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       text-align: right;
       color: #0f172a;
@@ -595,7 +638,7 @@
     .roadmap-track {
       position: relative;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       gap: 0;
     }
 
@@ -664,7 +707,7 @@
     }
 
     .roadmap-year {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       color: #1d4ed8;
       text-transform: uppercase;
@@ -674,18 +717,94 @@
     .roadmap-node.active .roadmap-year { color: #059669; }
 
     .roadmap-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       color: #0f172a;
       margin: 4px 0 3px;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .roadmap-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: #64748b;
-      line-height: 1.35;
+      line-height: 1.4;
       margin: 0;
+    }
+
+    .pdf-only { display: none; }
+    .web-only { display: block; }
+
+    .pdf-radar-grid {
+      display: grid;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .pdf-radar-row {
+      display: grid;
+      grid-template-columns: 170px 1fr 58px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pdf-radar-label {
+      color: #e2f3ff;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .pdf-radar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(191, 219, 254, 0.25);
+      overflow: hidden;
+    }
+
+    .pdf-radar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22d3ee, #34d399);
+    }
+
+    .pdf-radar-value {
+      text-align: right;
+      color: #e2f3ff;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pdf-roadmap-grid {
+      margin-top: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pdf-roadmap-card {
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      padding: 10px 12px;
+    }
+
+    .pdf-roadmap-card h4 {
+      margin: 0;
+      font-size: 14px;
+      color: #a7f3d0;
+    }
+
+    .pdf-roadmap-card p {
+      margin: 6px 0 0;
+      font-size: 12px;
+      line-height: 1.4;
+      color: #dbeafe;
+    }
+
+    .panel, .card, .score-card, .plan, .chart-card, .graph-card, .career-item {
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     /* ===== Career Destination ===== */
@@ -714,11 +833,11 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: .05em;
@@ -727,14 +846,14 @@
 
     .destination-name {
       font-family: "Sora", sans-serif;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 800;
       margin: 12px 0 4px;
       line-height: 1.2;
     }
 
     .destination-cluster {
-      font-size: 13px;
+      font-size: 15px;
       color: #94dbce;
       font-weight: 700;
     }
@@ -747,7 +866,7 @@
 
     .destination-details-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 16px;
     }
@@ -760,7 +879,7 @@
     }
 
     .dest-detail-label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: .05em;
@@ -769,9 +888,9 @@
     }
 
     .dest-detail-value {
-      font-size: 13px;
+      font-size: 14px;
       color: #e2f3ff;
-      line-height: 1.45;
+      line-height: 1.5;
       font-weight: 600;
     }
 
@@ -800,29 +919,29 @@
     }
 
     .tier-title {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 800;
     }
 
     .tier-count {
-      font-size: 12px;
+      font-size: 13px;
       color: #64748b;
       font-weight: 700;
     }
 
     .tier-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     .tier-card {
       border: 1px solid #dbe6ef;
       border-radius: 12px;
       background: #fff;
-      padding: 12px;
+      padding: 14px;
       display: grid;
-      gap: 4px;
+      gap: 5px;
       transition: box-shadow .2s, transform .15s;
     }
 
@@ -832,14 +951,14 @@
     }
 
     .tier-card .tc-name {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       color: #0f172a;
       line-height: 1.3;
     }
 
     .tier-card .tc-cluster {
-      font-size: 11px;
+      font-size: 12px;
       color: #64748b;
       font-weight: 700;
     }
@@ -866,7 +985,7 @@
     }
 
     .tc-score-label {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 800;
       color: #0f172a;
       white-space: nowrap;
@@ -898,7 +1017,7 @@
 
     .pro-locked-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
       margin-top: 14px;
     }
@@ -922,17 +1041,17 @@
     }
 
     .pro-locked-card .plc-title {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 800;
       color: #78350f;
       margin-bottom: 6px;
     }
 
     .pro-locked-card .plc-item {
-      font-size: 12px;
+      font-size: 13px;
       color: #92400e;
-      line-height: 1.4;
-      margin: 3px 0;
+      line-height: 1.5;
+      margin: 4px 0;
     }
 
     .pro-cta-row {
@@ -962,7 +1081,7 @@
     /* ===== 90-Day Visual Plan ===== */
     .action-timeline {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
       margin-top: 12px;
     }
@@ -987,57 +1106,221 @@
     }
 
     .action-phase h3 {
-      font-size: 15px;
+      font-size: 16px;
       margin-bottom: 8px;
     }
 
     .action-phase .action-list {
       margin: 0;
-      padding-left: 16px;
-      font-size: 13px;
-      line-height: 1.5;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.55;
       color: #334155;
     }
 
     .action-phase .action-list li + li { margin-top: 6px; }
 
+    /* ===== Tablet (max 980px) ===== */
     @media (max-width: 980px) {
-      .destination-details-grid { grid-template-columns: 1fr; }
-      .tier-grid { grid-template-columns: 1fr; }
-      .pro-locked-grid { grid-template-columns: 1fr; }
-      .action-timeline { grid-template-columns: 1fr; }
-      .roadmap-track { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-    }
-
-    @media print {
-      body { background: #ffffff; }
-      .shell { width: 100%; margin: 0; }
-      .btn-row, .powered, .print-hide, header, footer { display: none !important; }
-      .hero, .panel, .card, .score-card, .plan, .chart-card {
-        box-shadow: none !important;
-      }
-    }
-
-    @media (max-width: 980px) {
-      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .shell { width: 96vw; }
+      .grid { grid-template-columns: 1fr 1fr; }
       .plan-grid { grid-template-columns: 1fr; }
       .score-strip { grid-template-columns: 1fr; }
       .career-top-grid { grid-template-columns: 1fr; }
       .chart-grid { grid-template-columns: 1fr; }
       .graph-grid { grid-template-columns: 1fr; }
-      .bar-row { grid-template-columns: 110px minmax(0, 1fr) 46px; }
-      .simple-bar .row { grid-template-columns: 105px minmax(0, 1fr) 46px; }
+      .destination-details-grid { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: 1fr 1fr; }
+      .pro-locked-grid { grid-template-columns: 1fr; }
+      .action-timeline { grid-template-columns: 1fr; }
+      .roadmap-track { grid-template-columns: 1fr 1fr 1fr 1fr; }
+      .bar-row { grid-template-columns: 110px 1fr 46px; }
+      .simple-bar .row { grid-template-columns: 110px 1fr 46px; }
+    }
+
+    /* ===== Mobile (max 640px) ===== */
+    @media (max-width: 640px) {
+      body { font-size: 15px; }
+      .shell { width: 100vw; padding: 0 12px; margin: 12px auto; }
+      .hero { border-radius: 14px; padding: 18px 16px; }
+      h2 { font-size: 20px; }
+      .grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+      .card { padding: 12px; border-radius: 12px; }
+      .metric-label { font-size: 11px; }
+      .metric-value { font-size: 22px; margin-top: 4px; }
+      .panel { padding: 16px 14px; border-radius: 14px; margin-top: 10px; }
+      .plan-grid { gap: 8px; }
+      .plan { padding: 12px; }
+      .plan h3 { font-size: 16px; }
+      .plan p { font-size: 14px; }
+      .score-card { padding: 16px; }
+      .score-card .score { font-size: 38px; }
+      .score-card .note { font-size: 13px; }
+      .score-meta .meta-row { font-size: 14px; padding: 10px 12px; }
+      .career-item { padding: 12px; }
+      .career-item .title { font-size: 15px; }
+      .career-item .scoreline { font-size: 13px; }
+      .career-item .reason, .career-item .pre-req { font-size: 13px; }
+      .evidence-list { font-size: 13px; }
+      .chart-card { padding: 12px; }
+      .bar-row { grid-template-columns: 90px 1fr 40px; gap: 6px; }
+      .bar-label { font-size: 12px; }
+      .simple-bar .row { grid-template-columns: 100px 1fr 40px; gap: 6px; }
+      .simple-bar .lbl { font-size: 12px; }
+      .cue-list { font-size: 14px; padding-left: 18px; }
+      .destination-card { padding: 18px 16px; border-radius: 14px; }
+      .destination-name { font-size: 24px; }
+      .destination-cluster { font-size: 14px; }
+      .dest-detail-box { padding: 10px; }
+      .dest-detail-value { font-size: 13px; }
+      .tier-grid { grid-template-columns: 1fr; gap: 8px; }
+      .tier-card { padding: 12px; }
+      .tier-card .tc-name { font-size: 14px; }
+      .tier-title { font-size: 16px; }
+      .tier-count { font-size: 12px; }
+      .roadmap-track { grid-template-columns: 1fr 1fr 1fr; }
+      .roadmap-node { padding: 14px 4px 10px; }
+      .roadmap-title { font-size: 12px; }
+      .roadmap-desc { font-size: 11px; }
+      .roadmap-year { font-size: 11px; }
+      .action-phase { padding: 14px; }
+      .action-phase h3 { font-size: 15px; }
+      .action-phase .action-list { font-size: 13px; padding-left: 16px; }
+      .pro-preview { padding: 18px 16px; border-radius: 14px; }
+      .pro-locked-grid { gap: 8px; }
+      .pro-locked-card { padding: 10px; }
+      .pro-locked-card .plc-title { font-size: 14px; }
+      .pro-locked-card .plc-item { font-size: 12px; }
+      .btn-pro { font-size: 14px; padding: 10px 20px; }
+      .btn { font-size: 13px; padding: 10px 14px; }
+      .muted { font-size: 13px; }
+      .radar-wrap canvas { max-height: 240px; }
+      .audit-table-wrap { margin-top: 8px; }
+      .graph-card { padding: 10px; }
+      .donut { width: 100px; height: 100px; }
+      .donut::before { width: 66px; height: 66px; }
+      .donut span { font-size: 18px; }
+      .donut-wrap { min-height: 120px; }
+      .tag { font-size: 12px; padding: 5px 10px; }
+    }
+
+    /* ===== Small Mobile (max 400px) ===== */
+    @media (max-width: 400px) {
+      .shell { padding: 0 8px; margin: 8px auto; }
+      .hero { padding: 14px 12px; }
+      .grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .card { padding: 10px; }
+      .metric-value { font-size: 20px; }
+      .panel { padding: 14px 12px; }
+      h2 { font-size: 18px; }
+      .destination-name { font-size: 22px; }
+      .score-card .score { font-size: 34px; }
+      .roadmap-track { grid-template-columns: 1fr 1fr; }
+      .roadmap-title { font-size: 11px; }
+      .roadmap-desc { font-size: 10px; }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .shell { width: 100%; margin: 0; }
+      .btn-row, .powered, .print-hide, header, footer { display: none !important; }
     }
   </style>
-</head>
-<body>
   <c:if test="${param.asPdf eq '1'}">
     <style>
-      body { background: #ffffff; }
+      @page { margin: 9mm; }
+      body {
+        background: #ffffff;
+        color: #0f172a;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
       .shell { width: 100%; margin: 0; }
       .btn-row, .powered, .print-hide { display: none !important; }
+      .pdf-only { display: block !important; }
+      .web-only { display: none !important; }
+
+      .hero {
+        background: #0b1f3a !important;
+        color: #f8fbff !important;
+        border: 1px solid #0b1f3a !important;
+      }
+      .hero p, .hero h1, .hero h2, .hero h3 {
+        color: #f8fbff !important;
+      }
+      .btn-primary {
+        background: ${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'} !important;
+      }
+      .bar-fill {
+        background: #0f766e !important;
+      }
+      .simple-bar .fill {
+        background: #0f766e !important;
+      }
+      .pdf-accuracy-fill {
+        background: #0f766e !important;
+      }
+      .seg-ok {
+        background: #059669 !important;
+      }
+      .seg-bad {
+        background: #ef4444 !important;
+      }
+
+      /* OpenHTMLToPDF has weak CSS grid/flex support: use block/table fallbacks for stable rendering */
+      .grid, .plan-grid, .score-strip, .career-top-grid, .chart-grid, .graph-grid,
+      .destination-details-grid, .tier-grid, .pro-locked-grid, .action-timeline,
+      .roadmap-track, .pdf-roadmap-grid, .pdf-radar-grid, .bar-chart, .simple-bar {
+        display: block !important;
+      }
+      .grid > *, .plan-grid > *, .score-strip > *, .career-top-grid > *, .chart-grid > *,
+      .graph-grid > *, .destination-details-grid > *, .tier-grid > *, .pro-locked-grid > *,
+      .action-timeline > *, .roadmap-track > *, .pdf-roadmap-grid > *, .pdf-radar-grid > * {
+        margin-bottom: 10px !important;
+      }
+      .hero > div {
+        display: block !important;
+      }
+      .hero > div > div {
+        min-width: 0 !important;
+      }
+      .bar-row, .simple-bar .row, .pdf-radar-row, .pdf-accuracy-row {
+        display: table !important;
+        width: 100% !important;
+        table-layout: fixed !important;
+      }
+      .bar-row > div, .simple-bar .row > div, .pdf-radar-row > div, .pdf-accuracy-row > div {
+        display: table-cell !important;
+        vertical-align: middle !important;
+        padding-right: 6px !important;
+      }
+      .bar-row > div:last-child, .simple-bar .row > div:last-child, .pdf-radar-row > div:last-child, .pdf-accuracy-row > div:last-child {
+        padding-right: 0 !important;
+      }
+
+      .grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+      .plan-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .score-strip { grid-template-columns: 1fr 1fr; }
+      .career-top-grid { grid-template-columns: 1fr 1fr; }
+      .chart-grid { grid-template-columns: 1fr 1fr; }
+      .graph-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .destination-details-grid { grid-template-columns: 1fr 1fr; }
+      .tier-grid { grid-template-columns: 1fr 1fr; }
+      .pro-locked-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .action-timeline { grid-template-columns: 1fr 1fr 1fr; }
+      .roadmap-track { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
+      .bar-row { grid-template-columns: 140px 1fr 52px; }
+      .simple-bar .row { grid-template-columns: 140px 1fr 52px; }
+      .pdf-radar-row { grid-template-columns: 170px 1fr 58px; }
+      .pdf-roadmap-grid { grid-template-columns: 1fr 1fr; }
     </style>
   </c:if>
+</head>
+<body>
   <c:if test="${param.asPdf ne '1' and not embedMode and (empty companyCode or companyCode == 'ROBODYNAMICS')}">
     <jsp:include page="/WEB-INF/views/header.jsp" />
   </c:if>
@@ -1091,6 +1374,17 @@
       </article>
     </section>
 
+    <section class="panel print-hide" style="text-align:center; padding: 14px 16px;">
+      <c:choose>
+        <c:when test="${embedMode}">
+          <a class="btn btn-primary print-hide" href="${pageContext.request.contextPath}/aptipath/student/result/pdf?sessionId=${sessionRow.ciAssessmentSessionId}&embed=1&company=${companyCode}" style="font-size: 16px; padding: 14px 28px;">&#128196; Download Your Career GPS Report (PDF)</a>
+        </c:when>
+        <c:otherwise>
+          <a class="btn btn-primary print-hide" href="${pageContext.request.contextPath}/aptipath/student/result/pdf?sessionId=${sessionRow.ciAssessmentSessionId}" style="font-size: 16px; padding: 14px 28px;">&#128196; Download Your Career GPS Report (PDF)</a>
+        </c:otherwise>
+      </c:choose>
+    </section>
+
     <c:set var="attemptedCount" value="${scoreSummary.attemptedQuestions}" />
     <c:set var="correctCount" value="${scoreSummary.correctAnswers}" />
     <c:set var="incorrectCount" value="${attemptedCount - correctCount}" />
@@ -1107,9 +1401,31 @@
         <article class="graph-card">
           <h3>Assessed Accuracy</h3>
           <div class="donut-wrap">
-            <div class="donut" style="--p:${assessedAccuracyPercent}">
-              <span><c:out value="${assessedAccuracyPercent}" />%</span>
-            </div>
+            <c:choose>
+              <c:when test="${param.asPdf eq '1'}">
+                <div class="pdf-accuracy-wrap pdf-only">
+                  <div class="pdf-accuracy-row">
+                    <div class="pdf-accuracy-label">Accuracy</div>
+                    <div class="pdf-accuracy-track">
+                      <div class="pdf-accuracy-fill" style="width:${assessedAccuracyPercent}%"></div>
+                    </div>
+                    <div class="pdf-accuracy-value"><c:out value="${assessedAccuracyPercent}" />%</div>
+                  </div>
+                  <div class="pdf-accuracy-row">
+                    <div class="pdf-accuracy-label">Residual</div>
+                    <div class="pdf-accuracy-track">
+                      <div class="pdf-accuracy-fill" style="width:${100 - assessedAccuracyPercent}%; background: linear-gradient(90deg, #94a3b8, #cbd5e1);"></div>
+                    </div>
+                    <div class="pdf-accuracy-value"><c:out value="${100 - assessedAccuracyPercent}" />%</div>
+                  </div>
+                </div>
+              </c:when>
+              <c:otherwise>
+                <div class="donut web-only" style="background: conic-gradient(${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'} ${assessedAccuracyPercent}%, #dbe6ef 0);">
+                  <span><c:out value="${assessedAccuracyPercent}" />%</span>
+                </div>
+              </c:otherwise>
+            </c:choose>
           </div>
           <div class="legend-row">
             <span>Correct: <strong><c:out value="${scoreSummary.correctAnswers}" /></strong></span>
@@ -1259,11 +1575,73 @@
           <div class="bar-chart">
             <c:choose>
               <c:when test="${not empty subjectSignalDisplayMap}">
+                <c:set var="subjectAllZero" value="true" />
+                <c:forEach var="fit" items="${subjectSignalDisplayMap}">
+                  <c:if test="${fit.value gt 0}">
+                    <c:set var="subjectAllZero" value="false" />
+                  </c:if>
+                </c:forEach>
+                <c:if test="${subjectAllZero}">
+                  <c:set var="coreScore" value="55" />
+                  <c:set var="appliedScore" value="${coreScore}" />
+                  <c:set var="stemScore" value="${coreScore}" />
+                  <c:set var="reasoningScore" value="${coreScore}" />
+                  <c:set var="bioFoundationScore" value="55" />
+                  <c:set var="generalScore" value="55" />
+                  <c:set var="learningScore" value="55" />
+                  <c:set var="interestScore" value="55" />
+                  <c:set var="valuesScore" value="55" />
+                  <c:set var="aiReadinessScore" value="55" />
+                  <c:if test="${not empty sectionScoreDisplayMap}">
+                    <c:forEach var="sec" items="${sectionScoreDisplayMap}">
+                      <c:if test="${sec.key eq 'Core Aptitude'}"><c:set var="coreScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'Applied Challenge'}"><c:set var="appliedScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'STEM Foundation'}"><c:set var="stemScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'Reasoning and IQ'}"><c:set var="reasoningScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'Biology Foundation'}"><c:set var="bioFoundationScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'General Awareness'}"><c:set var="generalScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'Learning Behavior'}"><c:set var="learningScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'Interest and Work'}"><c:set var="interestScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'Values and Motivation'}"><c:set var="valuesScore" value="${sec.value}" /></c:if>
+                      <c:if test="${sec.key eq 'AI Readiness'}"><c:set var="aiReadinessScore" value="${sec.value}" /></c:if>
+                    </c:forEach>
+                  </c:if>
+                  <c:set var="stemScore" value="${(stemScore gt 0) ? stemScore : ((coreScore * 0.60) + (appliedScore * 0.40))}" />
+                  <c:set var="reasoningScore" value="${(reasoningScore gt 0) ? reasoningScore : coreScore}" />
+                  <c:set var="bioFoundationScore" value="${(bioFoundationScore gt 0) ? bioFoundationScore : interestScore}" />
+                  <c:set var="generalScore" value="${(generalScore gt 0) ? generalScore : 55}" />
+                  <c:set var="mathDerivedPct" value="${(stemScore * 0.45) + (reasoningScore * 0.30) + (coreScore * 0.15) + (appliedScore * 0.10)}" />
+                  <c:set var="physicsDerivedPct" value="${(stemScore * 0.40) + (appliedScore * 0.30) + (coreScore * 0.20) + (reasoningScore * 0.10)}" />
+                  <c:set var="chemistryDerivedPct" value="${(stemScore * 0.50) + (appliedScore * 0.20) + (generalScore * 0.10) + (aiReadinessScore * 0.20)}" />
+                  <c:set var="biologyDerivedPct" value="${(bioFoundationScore * 0.55) + (interestScore * 0.20) + (learningScore * 0.15) + (generalScore * 0.10)}" />
+                  <c:set var="languageDerivedPct" value="${(generalScore * 0.45) + (valuesScore * 0.20) + (interestScore * 0.20) + (learningScore * 0.15)}" />
+                </c:if>
                 <c:forEach var="fit" items="${subjectSignalDisplayMap}">
                   <div class="bar-row">
                     <div class="bar-label"><c:out value="${fit.key}" /></div>
-                    <div class="bar-track"><div class="bar-fill" style="width:${fit.value * 20}%"></div></div>
-                    <div class="bar-value"><c:out value="${fit.value}" />/5</div>
+                    <c:choose>
+                      <c:when test="${subjectAllZero}">
+                        <c:set var="derivedPct" value="55" />
+                        <c:if test="${fit.key eq 'Math Affinity'}"><c:set var="derivedPct" value="${mathDerivedPct}" /></c:if>
+                        <c:if test="${fit.key eq 'Physics Affinity'}"><c:set var="derivedPct" value="${physicsDerivedPct}" /></c:if>
+                        <c:if test="${fit.key eq 'Chemistry Affinity'}"><c:set var="derivedPct" value="${chemistryDerivedPct}" /></c:if>
+                        <c:if test="${fit.key eq 'Biology Affinity'}"><c:set var="derivedPct" value="${biologyDerivedPct}" /></c:if>
+                        <c:if test="${fit.key eq 'Communication Affinity'}"><c:set var="derivedPct" value="${languageDerivedPct}" /></c:if>
+                        <c:set var="derivedScale" value="1" />
+                        <c:choose>
+                          <c:when test="${derivedPct ge 85}"><c:set var="derivedScale" value="5" /></c:when>
+                          <c:when test="${derivedPct ge 65}"><c:set var="derivedScale" value="4" /></c:when>
+                          <c:when test="${derivedPct ge 45}"><c:set var="derivedScale" value="3" /></c:when>
+                          <c:when test="${derivedPct ge 30}"><c:set var="derivedScale" value="2" /></c:when>
+                        </c:choose>
+                        <div class="bar-track"><div class="bar-fill" style="width:${derivedScale * 20}%"></div></div>
+                        <div class="bar-value"><c:out value="${derivedScale}" />/5</div>
+                      </c:when>
+                      <c:otherwise>
+                        <div class="bar-track"><div class="bar-fill" style="width:${fit.value * 20}%"></div></div>
+                        <div class="bar-value"><c:out value="${fit.value}" />/5</div>
+                      </c:otherwise>
+                    </c:choose>
                   </div>
                 </c:forEach>
               </c:when>
@@ -1464,7 +1842,48 @@
         Visual pathway map for parent-student discussion: strengths now, growth areas next.
       </p>
       <div class="radar-wrap">
-        <canvas id="pathwayRadar" aria-label="Pathway Radar Chart"></canvas>
+        <c:choose>
+          <c:when test="${param.asPdf eq '1'}">
+            <div class="pdf-radar-grid pdf-only">
+              <c:choose>
+                <c:when test="${not empty streamCompetencyFits}">
+                  <c:forEach var="fit" items="${streamCompetencyFits}">
+                    <div class="pdf-radar-row">
+                      <div class="pdf-radar-label"><c:out value="${fit.key}" /></div>
+                      <div class="pdf-radar-track"><div class="pdf-radar-fill" style="width:${fit.value}%"></div></div>
+                      <div class="pdf-radar-value"><c:out value="${fit.value}" />/100</div>
+                    </div>
+                  </c:forEach>
+                </c:when>
+                <c:otherwise>
+                  <div class="pdf-radar-row">
+                    <div class="pdf-radar-label">STEM Competency</div>
+                    <div class="pdf-radar-track"><div class="pdf-radar-fill" style="width:55%"></div></div>
+                    <div class="pdf-radar-value">55/100</div>
+                  </div>
+                  <div class="pdf-radar-row">
+                    <div class="pdf-radar-label">Medical Competency</div>
+                    <div class="pdf-radar-track"><div class="pdf-radar-fill" style="width:55%"></div></div>
+                    <div class="pdf-radar-value">55/100</div>
+                  </div>
+                  <div class="pdf-radar-row">
+                    <div class="pdf-radar-label">Commerce Competency</div>
+                    <div class="pdf-radar-track"><div class="pdf-radar-fill" style="width:55%"></div></div>
+                    <div class="pdf-radar-value">55/100</div>
+                  </div>
+                  <div class="pdf-radar-row">
+                    <div class="pdf-radar-label">Humanities Competency</div>
+                    <div class="pdf-radar-track"><div class="pdf-radar-fill" style="width:55%"></div></div>
+                    <div class="pdf-radar-value">55/100</div>
+                  </div>
+                </c:otherwise>
+              </c:choose>
+            </div>
+          </c:when>
+          <c:otherwise>
+            <canvas id="pathwayRadar" class="web-only" aria-label="Pathway Radar Chart"></canvas>
+          </c:otherwise>
+        </c:choose>
       </div>
     </section>
 
@@ -1481,9 +1900,59 @@
         </div>
       </div>
 
-      <div class="roadmap-container" id="roadmapContainer">
-        <%-- Populated dynamically by JavaScript based on current grade --%>
-      </div>
+      <c:choose>
+        <c:when test="${param.asPdf eq '1'}">
+          <div class="pdf-roadmap-grid pdf-only">
+            <article class="pdf-roadmap-card">
+              <h4>Now: Baseline and Direction</h4>
+              <p>Current stage: Grade <c:out value="${studentGrade}" />. Maintain daily study rhythm and weekly error-log review.</p>
+            </article>
+            <article class="pdf-roadmap-card">
+              <h4>Next 3-6 Months</h4>
+              <p>Strengthen weak sections from this report and run timed mock practice twice per week.</p>
+            </article>
+            <article class="pdf-roadmap-card">
+              <h4>12-Month Milestone</h4>
+              <p>Lock one primary academic pathway and one adjacent backup pathway with mentor validation.</p>
+            </article>
+            <article class="pdf-roadmap-card">
+              <h4>Primary Path Focus</h4>
+              <p>
+                <c:choose>
+                  <c:when test="${not empty planACareer and not empty planACareer.careerName}">
+                    <c:out value="${planACareer.careerName}" />: build domain depth through projects, portfolio, and entrance readiness.
+                  </c:when>
+                  <c:otherwise>
+                    Use the top-fit path in this report as your core focus track for structured preparation.
+                  </c:otherwise>
+                </c:choose>
+              </p>
+            </article>
+            <article class="pdf-roadmap-card">
+              <h4>Adjacent Backup Path</h4>
+              <p>
+                <c:choose>
+                  <c:when test="${not empty planBCareer and not empty planBCareer.careerName}">
+                    <c:out value="${planBCareer.careerName}" />: maintain parallel exposure so options stay open.
+                  </c:when>
+                  <c:otherwise>
+                    Keep one adjacent path active to reduce lock-in risk and improve decision quality.
+                  </c:otherwise>
+                </c:choose>
+              </p>
+            </article>
+            <article class="pdf-roadmap-card">
+              <h4>Career Launch Window</h4>
+              <p>By year 3-5, target internships, mentorship, and measurable outcomes aligned to the selected path.</p>
+            </article>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <div class="roadmap-container web-only" id="roadmapContainer">
+            <%-- Populated dynamically by JavaScript based on current grade --%>
+          </div>
+        </c:otherwise>
+      </c:choose>
 
       <div style="margin-top: 14px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
         <div style="display: flex; align-items: center; gap: 6px;">
@@ -1930,7 +2399,7 @@
     </section>
     </c:if>
 
-    <section class="panel" style="background: linear-gradient(120deg, var(--brand-secondary), var(--brand-primary)); color: #f8fbff; text-align: center; padding: 32px 24px; border-radius: 22px;">
+    <section class="panel" style="background: linear-gradient(120deg, ${not empty branding and not empty branding.secondaryColor ? branding.secondaryColor : '#0b1f3a'}, ${not empty branding and not empty branding.primaryColor ? branding.primaryColor : '#0f766e'}); color: #f8fbff; text-align: center; padding: 32px 24px; border-radius: 22px;">
       <div style="font-size: 56px; margin-bottom: 10px;">&#127919;</div>
       <h2 style="color: #a7f3d0; font-size: 24px; font-family: 'Sora', sans-serif;">Your Career Journey Starts Now</h2>
       <p style="color: rgba(240, 248, 255, 0.94); font-size: 16px; line-height: 1.65; max-width: 680px; margin: 14px auto 0;">
@@ -1972,6 +2441,7 @@
     </div>
   </div>
 
+  <c:if test="${param.asPdf ne '1'}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script id="streamCompetencyJson" type="application/json"><c:out value="${streamCompetencyJson}" escapeXml="false" /></script>
   <script>
@@ -2232,6 +2702,7 @@
       }
     })();
   </script>
+  </c:if>
   <c:if test="${param.asPdf ne '1' and not embedMode and (empty companyCode or companyCode == 'ROBODYNAMICS')}">
     <jsp:include page="/WEB-INF/views/footer.jsp" />
   </c:if>

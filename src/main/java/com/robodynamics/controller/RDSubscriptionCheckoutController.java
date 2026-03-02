@@ -543,7 +543,7 @@ public class RDSubscriptionCheckoutController {
         CAREER_BASIC(
                 "career-basic",
                 "Career Discovery Basic",
-                299,
+                799,
                 "Affordable starter assessment for stream and career direction clarity.",
                 "career",
                 "one-time",

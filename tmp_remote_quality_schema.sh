@@ -1,0 +1,1 @@
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; SHOW COLUMNS FROM rd_quiz_questions; SHOW COLUMNS FROM rd_quiz_options;"

@@ -230,6 +230,14 @@
       <c:if test="${param.intakeSaved eq '1'}">
         <div class="banner">Parent intake saved successfully.</div>
       </c:if>
+      <c:if test="${param.studentProfileSaved eq '1'}">
+        <div class="banner">Student profile updated successfully.</div>
+      </c:if>
+      <c:if test="${param.gradeChanged eq '1'}">
+        <div class="banner" style="background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a;">
+          Grade changed. Any in-progress AptiPath test was reset. Ask the student to start test again for grade-specific questions.
+        </div>
+      </c:if>
       <c:if test="${empty children}">
         <div class="banner" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412;">
           Register parent + student profile first to activate AptiPath 360.
@@ -312,14 +320,18 @@
                     <td>
                         <c:choose>
                           <c:when test="${not empty sub and sub.status eq 'ACTIVE'}">
-                            <c:choose>
-                              <c:when test="${embedMode}">
-                                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/parent/intake?studentId=${child.userID}&embed=1&company=${companyCode}">Open Intake</a>
-                              </c:when>
-                              <c:otherwise>
-                                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/parent/intake?studentId=${child.userID}">Open Intake</a>
-                              </c:otherwise>
-                            </c:choose>
+                            <div class="btn-row" style="margin-top:0;">
+                              <c:choose>
+                                <c:when test="${embedMode}">
+                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/parent/intake?studentId=${child.userID}&embed=1&company=${companyCode}">Update Parent Profile</a>
+                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/parent/student-profile?studentId=${child.userID}&embed=1&company=${companyCode}">Update Student Profile</a>
+                                </c:when>
+                                <c:otherwise>
+                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/parent/intake?studentId=${child.userID}">Update Parent Profile</a>
+                                  <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/parent/student-profile?studentId=${child.userID}">Update Student Profile</a>
+                                </c:otherwise>
+                              </c:choose>
+                            </div>
                           </c:when>
                           <c:otherwise>
                             <a class="btn btn-secondary" href="${pageContext.request.contextPath}/plans/checkout?plan=career-premium&studentId=${child.userID}">Activate AptiPath 360</a>

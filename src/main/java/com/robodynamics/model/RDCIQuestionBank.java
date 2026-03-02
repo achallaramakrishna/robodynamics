@@ -46,6 +46,21 @@ public class RDCIQuestionBank {
     @Column(name = "correct_option")
     private String correctOption;
 
+    @Column(name = "time_limit_secs")
+    private Integer timeLimitSecs;
+
+    @Column(name = "is_behavioral")
+    private Boolean isBehavioral;
+
+    @Column(name = "career_cluster_map")
+    private String careerClusterMap;
+
+    @Column(name = "difficulty")
+    private String difficulty;
+
+    @Column(name = "grade_level")
+    private String gradeLevel;
+
     @Column(name = "media_image_url")
     private String mediaImageUrl;
 
@@ -145,6 +160,46 @@ public class RDCIQuestionBank {
 
     public void setCorrectOption(String correctOption) {
         this.correctOption = correctOption;
+    }
+
+    public Integer getTimeLimitSecs() {
+        return timeLimitSecs;
+    }
+
+    public void setTimeLimitSecs(Integer timeLimitSecs) {
+        this.timeLimitSecs = timeLimitSecs;
+    }
+
+    public Boolean getIsBehavioral() {
+        return isBehavioral;
+    }
+
+    public void setIsBehavioral(Boolean isBehavioral) {
+        this.isBehavioral = isBehavioral;
+    }
+
+    public String getCareerClusterMap() {
+        return careerClusterMap;
+    }
+
+    public void setCareerClusterMap(String careerClusterMap) {
+        this.careerClusterMap = careerClusterMap;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getGradeLevel() {
+        return gradeLevel;
+    }
+
+    public void setGradeLevel(String gradeLevel) {
+        this.gradeLevel = gradeLevel;
     }
 
     public String getMediaImageUrl() {

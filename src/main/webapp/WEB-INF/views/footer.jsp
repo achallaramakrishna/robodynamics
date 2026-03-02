@@ -2,6 +2,11 @@
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="rdCtx" value="${pageContext.request.contextPath}" />
+<c:set var="rdUri" value="${pageContext.request.requestURI}" />
+<c:set var="rdIsBrandHome"
+       value="${rdUri == rdCtx or rdUri == '/' or fn:endsWith(rdUri, '/public/home')}" />
 <style>
 #rdAppFooter {
   position: relative !important;
@@ -52,58 +57,92 @@
 <!-- ================= FOOTER ================= -->
 <footer id="rdAppFooter" class="pt-5 pb-4 mt-auto" style="background:#0b1c2d;color:#cfd8dc;">
   <div class="container">
-    <div class="row gy-4">
+    <c:choose>
+      <c:when test="${rdIsBrandHome}">
+        <div class="row gy-4">
+          <div class="col-md-4">
+            <h6 class="text-white fw-semibold">AptiPath360 Career Discovery</h6>
+            <p class="small">
+              Parent-first module for Grade 8 to College/Post-12 career direction, student intake,
+              transparent reports, and step-by-step roadmap planning.
+            </p>
+          </div>
 
-      <div class="col-md-4">
-        <h6 class="text-white fw-semibold">Robo Dynamics LMS</h6>
-        <p class="small">
-          Robo Dynamics is a Learning Management System for academics,
-          coding, robotics and NEET preparation with structured mentoring.
-        </p>
-      </div>
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Core Modules</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#career-discover">AptiPath360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#exam-courses">ExamPrep360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#tuition-info">Tuition</a></li>
+            </ul>
+          </div>
 
-      <div class="col-md-2">
-        <h6 class="text-white fw-semibold">Programs</h6>
-        <ul class="list-unstyled small">
-          <li><a class="text-decoration-none text-light"
-                 href="${pageContext.request.contextPath}/courses">Academics</a></li>
-          <li><a class="text-decoration-none text-light"
-                 href="${pageContext.request.contextPath}/courses">Coding & Robotics</a></li>
-          <li><a class="text-decoration-none text-light"
-                 href="${pageContext.request.contextPath}/neet">NEET</a></li>
-        </ul>
-      </div>
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Parent Start</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay ₹799 and Start</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">ExamPrep360 Basic - Rs 1999</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/login?redirect=/aptipath/parent/home">Existing Parent Login</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/resources/manuals/AptiPath_Basic_Parent_Flow_Manual.html" target="_blank">Flow Manual</a></li>
+            </ul>
+          </div>
 
-      <div class="col-md-3">
-        <h6 class="text-white fw-semibold">Platform</h6>
-        <ul class="list-unstyled small">
-          <li><a class="text-decoration-none text-light"
-                 href="${pageContext.request.contextPath}/platform">How it Works</a></li>
-          <li><a class="text-decoration-none text-light"
-                 href="${pageContext.request.contextPath}/parents">Parent Dashboard</a></li>
-          <li><a class="text-decoration-none text-light"
-                 href="${pageContext.request.contextPath}/mentors">Teach with Us</a></li>
-        </ul>
-      </div>
+          <div class="col-md-2">
+            <h6 class="text-white fw-semibold">Contact</h6>
+            <ul class="list-unstyled small">
+              <li>Bengaluru, India</li>
+              <li><a class="text-decoration-none text-light" href="tel:+918374377311">+91 83743 77311</a></li>
+              <li><a class="text-decoration-none text-light" href="https://robodynamics.in" target="_blank">robodynamics.in</a></li>
+            </ul>
+          </div>
+        </div>
+      </c:when>
+      <c:otherwise>
+        <div class="row gy-4">
+          <div class="col-md-4">
+            <h6 class="text-white fw-semibold">Robo Dynamics</h6>
+            <p class="small">
+              Platform for AptiPath360 Career Discovery, ExamPrep360, and Tuition journeys with
+              parent, student, and mentor workflows.
+            </p>
+          </div>
 
-      <div class="col-md-3">
-        <h6 class="text-white fw-semibold">Contact</h6>
-        <ul class="list-unstyled small">
-          <li>Bengaluru, India</li>
-          <li><a class="text-decoration-none text-light" href="tel:+918374377311">+91 83743 77311</a></li>
-          <li><a class="text-decoration-none text-light" href="https://robodynamics.in" target="_blank">robodynamics.in</a></li>
-        </ul>
-      </div>
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Products</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/">AptiPath360 Career Discovery</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/courses">ExamPrep360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/parents/demo?source=footer_tuition_quote">Tuition Guidance</a></li>
+            </ul>
+          </div>
 
-    </div>
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Platform</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/platform/modules">Parent Dashboard</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/studentDashboard">Student Dashboard</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/mentor/dashboard">Mentor Dashboard</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2">
+            <h6 class="text-white fw-semibold">Contact</h6>
+            <ul class="list-unstyled small">
+              <li>Bengaluru, India</li>
+              <li><a class="text-decoration-none text-light" href="tel:+918374377311">+91 83743 77311</a></li>
+              <li><a class="text-decoration-none text-light" href="https://robodynamics.in" target="_blank">robodynamics.in</a></li>
+            </ul>
+          </div>
+        </div>
+      </c:otherwise>
+    </c:choose>
 
     <div class="text-center small mt-4 pt-3"
          style="border-top:1px solid rgba(255,255,255,0.1);color:#b0bec5;">
-      © <%= java.time.Year.now() %> Robo Dynamics LMS. All Rights Reserved.
+      (c) <%= java.time.Year.now() %> Robo Dynamics. All rights reserved.
     </div>
   </div>
 </footer>
-
 <!-- ================= CHAT FLOAT BUTTON ================= -->
 <c:if test="${not empty sessionScope.rdUser}">
   <button id="rdChatLauncher" title="Chat"><i class="bi bi-chat-dots-fill"></i></button>
@@ -121,7 +160,7 @@
   </div>
 
 <div class="offcanvas-body p-0 d-flex flex-column" id="chatCanvasBody">
-    <div class="text-center text-muted mt-4">Loading chat…</div>
+    <div class="text-center text-muted mt-4">Loading chat...</div>
   </div>
 </div>
 
@@ -359,4 +398,5 @@
 }
 
 </script>
+
 

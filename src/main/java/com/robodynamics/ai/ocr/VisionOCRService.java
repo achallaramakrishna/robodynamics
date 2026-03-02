@@ -1,5 +1,6 @@
 package com.robodynamics.ai.ocr;
 
+import com.robodynamics.service.OpenAIVisionOCRService;
 import com.robodynamics.util.PdfToImageUtil;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -17,7 +18,7 @@ import java.util.Comparator;
 public class VisionOCRService {
 
     @Autowired
-    private OpenAIVisionOCR openAIVisionOCR;
+    private OpenAIVisionOCRService openAIVisionOCR;
 
     public String extractText(Path path) {
 

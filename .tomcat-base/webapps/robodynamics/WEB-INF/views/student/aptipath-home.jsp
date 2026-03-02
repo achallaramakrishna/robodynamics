@@ -353,6 +353,17 @@
               <a class="btn btn-hero" href="${pageContext.request.contextPath}/aptipath/student/home">Refresh Status</a>
             </c:otherwise>
           </c:choose>
+          <c:if test="${not empty latestCompletedSession}">
+            <c:choose>
+              <c:when test="${embedMode}">
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/student/result?sessionId=${latestCompletedSession.ciAssessmentSessionId}&embed=1&company=${companyCode}">Open Diagnostic Report</a>
+              </c:when>
+              <c:otherwise>
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/student/result?sessionId=${latestCompletedSession.ciAssessmentSessionId}">Open Diagnostic Report</a>
+              </c:otherwise>
+            </c:choose>
+          </c:if>
+          <a class="btn btn-secondary" href="${pageContext.request.contextPath}${intakeUrl}">Update Profile and Grade</a>
         </div>
       </div>
       <div class="hero-kpi">
@@ -411,6 +422,17 @@
       </details>
     </c:if>
 
+    <c:if test="${param.intakeSaved eq '1'}">
+      <section class="panel reveal delay-1" style="margin-top:12px;">
+        <p class="muted" style="margin:0;color:#166534;font-weight:700;">
+          Student profile saved successfully.
+          <c:if test="${param.gradeChanged eq '1'}">
+            Grade updated. Any in-progress test was reset. Start test again to get grade-specific questions.
+          </c:if>
+        </p>
+      </section>
+    </c:if>
+
     <div class="main-grid">
       <section class="panel reveal delay-1">
         <h2>Subscription</h2>
@@ -443,6 +465,9 @@
 
       <section class="panel reveal delay-2">
         <h2>Assessment</h2>
+        <c:if test="${param.resultUnavailable eq '1'}">
+          <p class="muted" style="color:#b91c1c;font-weight:700;">No completed diagnostic report is available yet. Finish an AptiPath test to unlock the report.</p>
+        </c:if>
         <c:choose>
           <c:when test="${not empty latestSession}">
             <p class="muted">Your latest assessment attempt is tracked below.</p>
@@ -482,6 +507,16 @@
               <a class="btn btn-primary" href="${pageContext.request.contextPath}/aptipath/student/home">Refresh Status</a>
             </c:otherwise>
           </c:choose>
+          <c:if test="${not empty latestCompletedSession}">
+            <c:choose>
+              <c:when test="${embedMode}">
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/student/result?sessionId=${latestCompletedSession.ciAssessmentSessionId}&embed=1&company=${companyCode}">Open Diagnostic Report</a>
+              </c:when>
+              <c:otherwise>
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/student/result?sessionId=${latestCompletedSession.ciAssessmentSessionId}">Open Diagnostic Report</a>
+              </c:otherwise>
+            </c:choose>
+          </c:if>
           <c:choose>
             <c:when test="${embedMode}">
               <a class="btn btn-secondary" href="${pageContext.request.contextPath}/platform/modules?embed=1&company=${companyCode}">Back to Modules</a>
@@ -490,6 +525,7 @@
               <a class="btn btn-secondary" href="${pageContext.request.contextPath}/platform/modules">Back to Modules</a>
             </c:otherwise>
           </c:choose>
+          <a class="btn btn-secondary" href="${pageContext.request.contextPath}${intakeUrl}">Update Profile and Grade</a>
         </div>
       </section>
     </div>

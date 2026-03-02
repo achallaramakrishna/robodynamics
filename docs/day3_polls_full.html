@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Live Polls — Phase 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Source+Code+Pro:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#040812;
+      --panel:#0b1424;
+      --glow:#312c84;
+      --accent:#5ce1e6;
+      --accent2:#f6ae2d;
+      --text:#f2f6ff;
+      --muted:#a8b6d7;
+      --border:rgba(255,255,255,0.08);
+      --card:rgba(17,20,40,0.95);
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      background:linear-gradient(160deg, #030714, #09192f 55%, #0f2a4c 100%);
+      color:var(--text);
+    }
+    main {
+      max-width:1200px;
+      margin:0 auto;
+      padding:40px 24px 80px;
+    }
+    header {
+      margin-bottom:36px;
+      padding-bottom:18px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    header h1 {
+      font-size:2.6rem;
+      letter-spacing:1px;
+      margin:0;
+    }
+    header p {
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:1rem;
+    }
+    .category {
+      margin-bottom:42px;
+    }
+    .category h2 {
+      margin-bottom:12px;
+      font-size:1.7rem;
+      color:var(--accent2);
+    }
+    .category p {
+      margin-top:0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    .poll-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+      margin-top:20px;
+    }
+    .poll-card {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 25px rgba(6,7,20,0.5);
+      position:relative;
+      overflow:hidden;
+    }
+    .poll-card::after {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 30% -10%, rgba(92,225,230,0.2), transparent 50%);
+      pointer-events:none;
+    }
+    .poll-card h3 {
+      font-size:1.1rem;
+      margin-bottom:10px;
+      color:var(--accent);
+    }
+    .options {
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:6px;
+    }
+    .options li {
+      padding:8px 12px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.05);
+      font-size:0.95rem;
+    }
+    .hint {
+      margin-top:10px;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+    footer {
+      margin-top:60px;
+      padding-top:20px;
+      border-top:1px solid var(--border);
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
+    .cta {
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+      justify-content:center;
+      padding:10px 18px;
+      border-radius:999px;
+      background:var(--glow);
+      color:var(--text);
+      font-weight:600;
+      text-decoration:none;
+    }
+    @media (max-width:768px) {
+      header {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Day 3 Quick-Vote Poll Deck</h1>
+      <p>Trigger a live poll every 12-15 minutes to keep a class of Java Full Stack learners engaged. Share each question, pause for answers, then reveal the hint or correct option before moving to the next topic.</p>
+    </header>
+
+    <section class="category" id="classes">
+      <h2>Classes (5 Polls)</h2>
+      <p>Cover constructors, encapsulation, and class responsibilities before switching to examples.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. What keyword creates a new object?</h3>
+          <ul class="options">
+            <li>new</li>
+            <li>class</li>
+            <li>public</li>
+            <li>extends</li>
+          </ul>
+          <p class="hint">Hint: Instantiation always calls constructors using this keyword.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. Which visibility modifier is package-private?</h3>
+          <ul class="options">
+            <li>private</li>
+            <li>protected</li>
+            <li>(no modifier)</li>
+            <li>final</li>
+          </ul>
+          <p class="hint">Answer: Omitting a modifier keeps members visible inside the same package only.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. Which method expresses an object's state for logging?</h3>
+          <ul class="options">
+            <li>toString()</li>
+            <li>equals()</li>
+            <li>hashCode()</li>
+            <li>notify()</li>
+          </ul>
+          <p class="hint">toString() is a logging-friendly describe method every value object should override.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. How do you prevent subclassing?</h3>
+          <ul class="options">
+            <li>abstract</li>
+            <li>static</li>
+            <li>private</li>
+            <li>final</li>
+          </ul>
+          <p class="hint">Make the class final so the compiler rejects any extends attempts.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. What best describes a model class?</h3>
+          <ul class="options">
+            <li>Holds data only</li>
+            <li>Contains business logic</li>
+            <li>Manages threads</li>
+            <li>Handles I/O</li>
+          </ul>
+          <p class="hint">Correct: Model classes focus on representing structured data, not behavior.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="category" id="inheritance">
+      <h2>Inheritance (5 Polls)</h2>
+      <p>Confirm understanding of extends, method overriding, and the is-a relationship.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. Which keyword calls the superclass constructor?</h3>
+          <ul class="options">
+            <li>this</li>
+            <li>super</li>
+            <li>extends</li>
+            <li>base</li>
+          </ul>
+          <p class="hint">Hint: super() jumps up one level.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. What happens if you override without @Override?</h3>
+          <ul class="options">
+            <li>Compilation error</li>
+            <li>It still overrides</li>
+            <li>Runtime warning</li>
+            <li>Method is final</li>
+          </ul>
+          <p class="hint">Answer: It still overrides, but @Override helps catch typos.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. How to call parent logic from an override?</h3>
+          <ul class="options">
+            <li>super.method()</li>
+            <li>parent.method()</li>
+            <li>this.method()</li>
+            <li>base.method()</li>
+          </ul>
+          <p class="hint">Use super.method(...) to reuse behavior before extending it.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. Which describes inheritance?</h3>
+          <ul class="options">
+            <li>Has-a</li>
+            <li>Uses-a</li>
+            <li>Is-a</li>
+            <li>Needs-a</li>
+          </ul>
+          <p class="hint">Car is a Vehicle is a classic inheritance example.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. When should you use inheritance?</h3>
+          <ul class="options">
+            <li>Different animals sharing eat()</li>
+            <li>Different UIs for separate apps</li>
+            <li>Networking vs disk I/O</li>
+            <li>Bank vs Insurance services</li>
+          </ul>
+          <p class="hint">Pick a domain with shared behavior and a natural parent entity.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="category" id="interfaces">
+      <h2>Interfaces (5 Polls)</h2>
+      <p>Validate awareness of default methods, multiple interfaces, and conceptual differences.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. Which keyword implements an interface?</h3>
+          <ul class="options">
+            <li>extends</li>
+            <li>implements</li>
+            <li>uses</li>
+            <li>super</li>
+          </ul>
+          <p class="hint">implements binds a class to an interface contract.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. Which feature arrived in Java 8 interfaces?</h3>
+          <ul class="options">
+            <li>Can hold state</li>
+            <li>Can have default methods</li>
+            <li>Can be instantiated</li>
+            <li>Members are private</li>
+          </ul>
+          <p class="hint">Default methods ship reusable logic alongside abstract declarations.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. Can a class implement multiple interfaces?</h3>
+          <ul class="options">
+            <li>Yes</li>
+            <li>No</li>
+            <li>Only if abstract</li>
+            <li>Only with generics</li>
+          </ul>
+          <p class="hint">Yes—interfaces are the route around Java's single inheritance.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. Why prefer interfaces over abstract classes?</h3>
+          <ul class="options">
+            <li>Avoid multiple inheritance limitations</li>
+            <li>Require constructors</li>
+            <li>Hold business data</li>
+            <li>Provide state</li>
+          </ul>
+          <p class="hint">Interfaces allow behavior to be mixed into many classes.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. Which belongs on an interface?</h3>
+          <ul class="options">
+            <li>start() and stop()</li>
+            <li>Static factory</li>
+            <li>Private fields</li>
+            <li>Final methods</li>
+          </ul>
+          <p class="hint">Behavioral contracts such as start/stop suit interfaces best.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="category" id="static">
+      <h2>Static Concepts (5 Polls)</h2>
+      <p>Check comprehension of static context, fields, and utility usage.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. Static belongs to?</h3>
+          <ul class="options">
+            <li>Instance</li>
+            <li>Class</li>
+            <li>Constructor</li>
+            <li>Interface</li>
+          </ul>
+          <p class="hint">Static is associated with the class, not an instance.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. When should constants be static final?</h3>
+          <ul class="options">
+            <li>Only for methods</li>
+            <li>For shared, immutable values</li>
+            <li>For constructors</li>
+            <li>Never</li>
+          </ul>
+          <p class="hint">Share static final values instead of hard-coding per object.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. Which block runs once when a class loads?</h3>
+          <ul class="options">
+            <li>Instance initializer</li>
+            <li>Static initializer</li>
+            <li>Constructor</li>
+            <li>Finalizer</li>
+          </ul>
+          <p class="hint">Static initializer blocks are ideal for bootstrapping shared resources.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. Can an interface define static members?</h3>
+          <ul class="options">
+            <li>Yes</li>
+            <li>No</li>
+            <li>Only in abstract classes</li>
+            <li>Only with enums</li>
+          </ul>
+          <p class="hint">Interfaces can have static helpers since Java 8.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. Why use static factory methods?</h3>
+          <ul class="options">
+            <li>To reuse constructors</li>
+            <li>To avoid new keywords</li>
+            <li>Every class should have one</li>
+            <li>When constructors are private</li>
+          </ul>
+          <p class="hint">Static factories hide construction details and can return cached instances.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="category" id="exceptions">
+      <h2>Exception Handling (5 Polls)</h2>
+      <p>Reinforce which keywords control try/catch flow and how checked/unchecked differ.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. Which is checked even if not declared?</h3>
+          <ul class="options">
+            <li>IOException</li>
+            <li>RuntimeException</li>
+            <li>Error</li>
+            <li>NullPointerException</li>
+          </ul>
+          <p class="hint">IOException requires throws or handling.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. What guarantees execution even with a return?</h3>
+          <ul class="options">
+            <li>try</li>
+            <li>catch</li>
+            <li>finally</li>
+            <li>throw</li>
+          </ul>
+          <p class="hint">finally runs regardless of earlier returns.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. Which handles multiple exception types elegantly?</h3>
+          <ul class="options">
+            <li>multi-catch</li>
+            <li>finally</li>
+            <li>throw</li>
+            <li>try-with-resources</li>
+          </ul>
+          <p class="hint">catch (SQLException | IOException e) is multi-catch.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. What's needed to use try-with-resources?</h3>
+          <ul class="options">
+            <li>Resource implements AutoCloseable</li>
+            <li>Use try only</li>
+            <li>Call close() manually</li>
+            <li>Wrap in finally</li>
+          </ul>
+          <p class="hint">Any resource that implements AutoCloseable works.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. When throw vs throws?</h3>
+          <ul class="options">
+            <li>throw declares exceptions</li>
+            <li>throws instantiates them</li>
+            <li>throw raises an exception at runtime</li>
+            <li>throws runs code in catch</li>
+          </ul>
+          <p class="hint">throw triggers an exception explicitly, throws lists it on the method.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="category" id="collections">
+      <h2>Collections (5 Polls)</h2>
+      <p>Quiz learners on interfaces, implementations, and iteration strategies.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. Which interface is sorted?</h3>
+          <ul class="options">
+            <li>List</li>
+            <li>Set</li>
+            <li>Queue</li>
+            <li>Map</li>
+          </ul>
+          <p class="hint">Many implementations maintain sorting indirectly through comparators.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. Which Set keeps insertion order?</h3>
+          <ul class="options">
+            <li>HashSet</li>
+            <li>LinkedHashSet</li>
+            <li>TreeSet</li>
+            <li>ConcurrentSkipListSet</li>
+          </ul>
+          <p class="hint">LinkedHashSet preserves the order elements were added.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. How does HashMap handle collisions?</h3>
+          <ul class="options">
+            <li>Linear search</li>
+            <li>Linked lists/buckets</li>
+            <li>Arrays only</li>
+            <li>Recursion</li>
+          </ul>
+          <p class="hint">Buckets chain entries; from Java 8, long chains become trees.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. Which iteration gives fail-fast behavior?</h3>
+          <ul class="options">
+            <li>for-loop with index</li>
+            <li>Iterator</li>
+            <li>ListIterator</li>
+            <li>forEach</li>
+          </ul>
+          <p class="hint">Most collections throw ConcurrentModificationException through iterators.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. What utility class sorts?</h3>
+          <ul class="options">
+            <li>Arrays</li>
+            <li>Collections</li>
+            <li>Math</li>
+            <li>File</li>
+          </ul>
+          <p class="hint">Collections.sort(list, comparator) is a common pattern.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="category" id="generics">
+      <h2>Generics (5 Polls)</h2>
+      <p>Make sure learners know bounded types, wildcards, and erasure limits.</p>
+      <div class="poll-grid">
+        <article class="poll-card">
+          <h3>1. Which declaration lets you accept Number subclasses?</h3>
+          <ul class="options">
+            <li>&lt;T&gt;</li>
+            <li>&lt;T extends Number&gt;</li>
+            <li>&lt;T super Number&gt;</li>
+            <li>&lt;? extends Number&gt;</li>
+          </ul>
+          <p class="hint">Use &lt;T extends Number&gt; when you need numeric API access.</p>
+        </article>
+        <article class="poll-card">
+          <h3>2. PECS stands for?</h3>
+          <ul class="options">
+            <li>Producer Extends Consumer Super</li>
+            <li>Pattern Extend Class Strategy</li>
+            <li>Proxy Extract Class Super</li>
+            <li>Plain Enum Control Style</li>
+          </ul>
+          <p class="hint">Remember: Producer Extends, Consumer Super.</p>
+        </article>
+        <article class="poll-card">
+          <h3>3. Can you instantiate new T()?</h3>
+          <ul class="options">
+            <li>Yes</li>
+            <li>No</li>
+            <li>Only with reflection</li>
+            <li>Only if T extends Object</li>
+          </ul>
+          <p class="hint">You cannot create new T() directly because of type erasure.</p>
+        </article>
+        <article class="poll-card">
+          <h3>4. Which wildcard lets you add integers safely?</h3>
+          <ul class="options">
+            <li>List&lt;?&gt;</li>
+            <li>List&lt;? extends Integer&gt;</li>
+            <li>List&lt;? super Integer&gt;</li>
+            <li>List&lt;T&gt;</li>
+          </ul>
+          <p class="hint">Use ? super Integer when adding values.</p>
+        </article>
+        <article class="poll-card">
+          <h3>5. Wildcard ? extends T allows:</h3>
+          <ul class="options">
+            <li>Read only</li>
+            <li>Write only</li>
+            <li>Both read and write</li>
+            <li>No access</li>
+          </ul>
+          <p class="hint">Producer Extends: you can read, but adding is limited.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <span>Use these polls as quick engagement pivots during the 1:00-5:00 PM slot.</span>
+      <span class="cta">Share the correct option after collecting votes</span>
+    </footer>
+  </main>
+</body>
+</html>

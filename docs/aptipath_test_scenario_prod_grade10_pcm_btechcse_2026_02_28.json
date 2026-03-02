@@ -1,0 +1,1256 @@
+﻿{
+    "scenario":  {
+                     "source":  "production",
+                     "moduleCode":  "APTIPATH",
+                     "assessmentVersion":  "v3",
+                     "prefill":  {
+                                     "studentIntakeGradeCode":  "10",
+                                     "studentIntakeStreamCode":  "PCM",
+                                     "studentIntakeProgramCode":  "BTECH_CSE"
+                                 },
+                     "academicStage":  "SECONDARY_10_12",
+                     "requiredSectionCoverage":  {
+                                                     "CORE_APTITUDE":  12,
+                                                     "APPLIED_CHALLENGE":  8,
+                                                     "INTEREST_WORK":  6,
+                                                     "VALUES_MOTIVATION":  4,
+                                                     "LEARNING_BEHAVIOR":  4,
+                                                     "AI_READINESS":  4,
+                                                     "CAREER_REALITY":  4,
+                                                     "STEM_FOUNDATION":  7,
+                                                     "BIOLOGY_FOUNDATION":  5,
+                                                     "GENERAL_AWARENESS":  3,
+                                                     "REASONING_IQ":  3
+                                                 },
+                     "generatedQuestionCount":  42,
+                     "generatedSectionCoverage":  {
+                                                      "CORE_APTITUDE":  12,
+                                                      "VALUES_MOTIVATION":  4,
+                                                      "APPLIED_CHALLENGE":  8,
+                                                      "INTEREST_WORK":  6,
+                                                      "LEARNING_BEHAVIOR":  4,
+                                                      "AI_READINESS":  4,
+                                                      "CAREER_REALITY":  4
+                                                  }
+                 },
+    "questions":  [
+                      {
+                          "index":  1,
+                          "questionCode":  "AP3_CORE_083",
+                          "sequenceNo":  95,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "If a strategy is data-driven, it is testable. This strategy is data-driven. Therefore:",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "This strategy is untestable"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Data and testing are unrelated"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Only experts can test it"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "This strategy is testable"
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "This strategy is testable",
+                          "weightage":  1.6
+                      },
+                      {
+                          "index":  2,
+                          "questionCode":  "AP3_VAL_007",
+                          "sequenceNo":  203,
+                          "sectionCode":  "VALUES_MOTIVATION",
+                          "questionType":  "MCQ",
+                          "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Quick comfort even if learning quality drops"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Decision based only on what others prefer"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Avoid difficult choices and postpone commitment"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Long-term mastery with disciplined consistency"
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "Long-term mastery with disciplined consistency",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  3,
+                          "questionCode":  "AP3_VAL_013",
+                          "sequenceNo":  209,
+                          "sectionCode":  "VALUES_MOTIVATION",
+                          "questionType":  "MCQ",
+                          "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Quick comfort even if learning quality drops"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Long-term mastery with disciplined consistency"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Decision based only on what others prefer"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Avoid difficult choices and postpone commitment"
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Long-term mastery with disciplined consistency",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  4,
+                          "questionCode":  "AP3_VAL_019",
+                          "sequenceNo":  215,
+                          "sectionCode":  "VALUES_MOTIVATION",
+                          "questionType":  "MCQ",
+                          "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Quick comfort even if learning quality drops"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Decision based only on what others prefer"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Avoid difficult choices and postpone commitment"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Long-term mastery with disciplined consistency"
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "Long-term mastery with disciplined consistency",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  5,
+                          "questionCode":  "AP3_VAL_025",
+                          "sequenceNo":  221,
+                          "sectionCode":  "VALUES_MOTIVATION",
+                          "questionType":  "MCQ",
+                          "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Quick comfort even if learning quality drops"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Long-term mastery with disciplined consistency"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Decision based only on what others prefer"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Avoid difficult choices and postpone commitment"
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Long-term mastery with disciplined consistency",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  6,
+                          "questionCode":  "AP3X_CA_0064",
+                          "sequenceNo":  4063,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: If 15 items cost 555 rupees, what is the cost of 12 items?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "481"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "518"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "444"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "407"
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "444",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  7,
+                          "questionCode":  "AP3X_CA_0065",
+                          "sequenceNo":  4064,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: A quantity is 159. After a 15% increase, what is the new value?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "183"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "175"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "199"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "191"
+                                          }
+                                      ],
+                          "correctOptionCode":  "A",
+                          "correctOptionLabel":  "183",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  8,
+                          "questionCode":  "AP3X_CA_0066",
+                          "sequenceNo":  4065,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: Find the next number in the sequence: 14, 18, 22, 26, ?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "31"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "29"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "30"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "32"
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "30",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  9,
+                          "questionCode":  "AP3X_CA_0067",
+                          "sequenceNo":  4066,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: Choose the best completion: \u0027He was known for his ____ explanation, so everyone understood.\u0027",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "vague"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "silent"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "random"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "clear"
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "clear",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  10,
+                          "questionCode":  "AP3X_CA_0068",
+                          "sequenceNo":  4067,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: If 24 items cost 360 rupees, what is the cost of 11 items?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "150"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "195"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "180"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "165"
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "165",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  11,
+                          "questionCode":  "AP3X_CA_0069",
+                          "sequenceNo":  4068,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: A quantity is 316. After a 5% increase, what is the new value?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "316"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "332"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "363"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "348"
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "332",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  12,
+                          "questionCode":  "AP3X_CA_0070",
+                          "sequenceNo":  4069,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: Find the next number in the sequence: 26, 28, 30, 32, ?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "34"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "36"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "33"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "35"
+                                          }
+                                      ],
+                          "correctOptionCode":  "A",
+                          "correctOptionLabel":  "34",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  13,
+                          "questionCode":  "AP3X_CA_0071",
+                          "sequenceNo":  4070,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: Choose the word closest in meaning to \u0027resilient\u0027.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Fragile"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Adaptable"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Uncertain"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Rigid"
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Adaptable",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  14,
+                          "questionCode":  "AP3X_CA_0072",
+                          "sequenceNo":  4071,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: If 25 items cost 675 rupees, what is the cost of 19 items?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "540"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "567"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "513"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "486"
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "513",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  15,
+                          "questionCode":  "AP3X_CA_0073",
+                          "sequenceNo":  4072,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: A quantity is 630. After a 35% increase, what is the new value?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "914"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "850"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "819"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "882"
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "850",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  16,
+                          "questionCode":  "AP3X_CA_0074",
+                          "sequenceNo":  4073,
+                          "sectionCode":  "CORE_APTITUDE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Core aptitude: Find the next number in the sequence: 8, 15, 22, 29, ?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "37"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "35"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "36"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "38"
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "36",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  17,
+                          "questionCode":  "AP3X_AC_0011",
+                          "sequenceNo":  4230,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Wait for motivation."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Study only when tests are near."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Make a bigger plan."
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  18,
+                          "questionCode":  "AP3X_AC_0015",
+                          "sequenceNo":  4234,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Study only when tests are near."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Make a bigger plan."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Wait for motivation."
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  19,
+                          "questionCode":  "AP3X_AC_0019",
+                          "sequenceNo":  4238,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Study only when tests are near."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Wait for motivation."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Make a bigger plan."
+                                          }
+                                      ],
+                          "correctOptionCode":  "A",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  20,
+                          "questionCode":  "AP3X_AC_0023",
+                          "sequenceNo":  4242,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Study only when tests are near."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Make a bigger plan."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Wait for motivation."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  21,
+                          "questionCode":  "AP3X_AC_0027",
+                          "sequenceNo":  4246,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Make a bigger plan."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Wait for motivation."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Study only when tests are near."
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  22,
+                          "questionCode":  "AP3X_AC_0031",
+                          "sequenceNo":  4250,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Wait for motivation."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Make a bigger plan."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Study only when tests are near."
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  23,
+                          "questionCode":  "AP3X_AC_0035",
+                          "sequenceNo":  4254,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Wait for motivation."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Study only when tests are near."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Make a bigger plan."
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  24,
+                          "questionCode":  "AP3X_AC_0039",
+                          "sequenceNo":  4258,
+                          "sectionCode":  "APPLIED_CHALLENGE",
+                          "questionType":  "MCQ",
+                          "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Make a bigger plan."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Study only when tests are near."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Wait for motivation."
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "Reduce scope, lock daily minimum targets, and track completion visibly.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  25,
+                          "questionCode":  "AP3X_IW_0026",
+                          "sequenceNo":  4415,
+                          "sectionCode":  "INTEREST_WORK",
+                          "questionType":  "MCQ",
+                          "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  26,
+                          "questionCode":  "AP3X_IW_0030",
+                          "sequenceNo":  4419,
+                          "sectionCode":  "INTEREST_WORK",
+                          "questionType":  "MCQ",
+                          "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  27,
+                          "questionCode":  "AP3X_IW_0034",
+                          "sequenceNo":  4423,
+                          "sectionCode":  "INTEREST_WORK",
+                          "questionType":  "MCQ",
+                          "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  28,
+                          "questionCode":  "AP3X_IW_0038",
+                          "sequenceNo":  4427,
+                          "sectionCode":  "INTEREST_WORK",
+                          "questionType":  "MCQ",
+                          "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  29,
+                          "questionCode":  "AP3X_IW_0042",
+                          "sequenceNo":  4431,
+                          "sectionCode":  "INTEREST_WORK",
+                          "questionType":  "MCQ",
+                          "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  30,
+                          "questionCode":  "AP3X_IW_0046",
+                          "sequenceNo":  4435,
+                          "sectionCode":  "INTEREST_WORK",
+                          "questionType":  "MCQ",
+                          "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  31,
+                          "questionCode":  "AP3X_LB_0037",
+                          "sequenceNo":  4616,
+                          "sectionCode":  "LEARNING_BEHAVIOR",
+                          "questionType":  "MCQ",
+                          "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  32,
+                          "questionCode":  "AP3X_LB_0041",
+                          "sequenceNo":  4620,
+                          "sectionCode":  "LEARNING_BEHAVIOR",
+                          "questionType":  "MCQ",
+                          "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  33,
+                          "questionCode":  "AP3X_LB_0045",
+                          "sequenceNo":  4624,
+                          "sectionCode":  "LEARNING_BEHAVIOR",
+                          "questionType":  "MCQ",
+                          "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  34,
+                          "questionCode":  "AP3X_LB_0049",
+                          "sequenceNo":  4628,
+                          "sectionCode":  "LEARNING_BEHAVIOR",
+                          "questionType":  "MCQ",
+                          "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  35,
+                          "questionCode":  "AP3X_AR_0023",
+                          "sequenceNo":  4682,
+                          "sectionCode":  "AI_READINESS",
+                          "questionType":  "MCQ",
+                          "questionText":  "AI readiness: If two AI tools disagree on the same problem, what should you do?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Pick randomly."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Avoid the topic completely."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Choose the longer answer."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Compare steps, validate with authoritative material, and resolve logically."
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "Compare steps, validate with authoritative material, and resolve logically.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  36,
+                          "questionCode":  "AP3X_AR_0024",
+                          "sequenceNo":  4683,
+                          "sectionCode":  "AI_READINESS",
+                          "questionType":  "MCQ",
+                          "questionText":  "AI readiness: When AI gives an answer, what is the best academic practice?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Use it directly because AI is always right."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Skip checking if it looks fluent."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Verify with textbook steps or trusted sources before using it."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Copy it without understanding."
+                                          }
+                                      ],
+                          "correctOptionCode":  "C",
+                          "correctOptionLabel":  "Verify with textbook steps or trusted sources before using it.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  37,
+                          "questionCode":  "AP3X_AR_0025",
+                          "sequenceNo":  4684,
+                          "sectionCode":  "AI_READINESS",
+                          "questionType":  "MCQ",
+                          "questionText":  "AI readiness: Best way to prompt AI for exam preparation?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Generate random content without context."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Use very vague prompts."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Ask only for final answers."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Ask for stepwise reasoning, alternate methods, and common mistakes."
+                                          }
+                                      ],
+                          "correctOptionCode":  "D",
+                          "correctOptionLabel":  "Ask for stepwise reasoning, alternate methods, and common mistakes.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  38,
+                          "questionCode":  "AP3X_AR_0026",
+                          "sequenceNo":  4685,
+                          "sectionCode":  "AI_READINESS",
+                          "questionType":  "MCQ",
+                          "questionText":  "AI readiness: How should you use AI for writing assignments?",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Paste AI output unchanged."
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Use it for structure ideas, then write in your own words with citations."
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Use AI to bypass learning."
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Avoid references entirely."
+                                          }
+                                      ],
+                          "correctOptionCode":  "B",
+                          "correctOptionLabel":  "Use it for structure ideas, then write in your own words with citations.",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  39,
+                          "questionCode":  "AP3X_CR_0032",
+                          "sequenceNo":  4761,
+                          "sectionCode":  "CAREER_REALITY",
+                          "questionType":  "MCQ",
+                          "questionText":  "Career reality: I can handle uncertainty while still taking focused action.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  40,
+                          "questionCode":  "AP3X_CR_0035",
+                          "sequenceNo":  4764,
+                          "sectionCode":  "CAREER_REALITY",
+                          "questionType":  "MCQ",
+                          "questionText":  "Career reality: I am ready to invest sustained effort for difficult career goals.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  41,
+                          "questionCode":  "AP3X_CR_0036",
+                          "sequenceNo":  4765,
+                          "sectionCode":  "CAREER_REALITY",
+                          "questionType":  "MCQ",
+                          "questionText":  "Career reality: I can handle uncertainty while still taking focused action.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      },
+                      {
+                          "index":  42,
+                          "questionCode":  "AP3X_CR_0039",
+                          "sequenceNo":  4768,
+                          "sectionCode":  "CAREER_REALITY",
+                          "questionType":  "MCQ",
+                          "questionText":  "Career reality: I am ready to invest sustained effort for difficult career goals.",
+                          "options":  [
+                                          {
+                                              "code":  "A",
+                                              "label":  "Strongly agree"
+                                          },
+                                          {
+                                              "code":  "B",
+                                              "label":  "Agree"
+                                          },
+                                          {
+                                              "code":  "C",
+                                              "label":  "Not sure"
+                                          },
+                                          {
+                                              "code":  "D",
+                                              "label":  "Disagree"
+                                          }
+                                      ],
+                          "correctOptionCode":  "NULL",
+                          "correctOptionLabel":  "",
+                          "weightage":  1
+                      }
+                  ]
+}

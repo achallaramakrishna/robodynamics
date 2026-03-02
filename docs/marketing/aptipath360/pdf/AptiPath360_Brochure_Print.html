@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AptiPath360 - One Page Brochure</title>
+  <style>
+    :root {
+      --brand-1: #0f766e;
+      --brand-2: #0b1f3a;
+      --ink: #0f172a;
+      --muted: #334155;
+      --line: #dbe3ef;
+      --bg: #f5f8fc;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 16mm;
+    }
+    .hero {
+      background: linear-gradient(120deg, var(--brand-2), var(--brand-1));
+      color: #fff;
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .hero h1 { margin: 0 0 6px 0; font-size: 30px; }
+    .hero p { margin: 0; font-size: 14px; opacity: 0.95; }
+    h2 {
+      margin: 14px 0 6px;
+      font-size: 16px;
+      color: var(--brand-2);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+    }
+    p { margin: 0 0 8px 0; line-height: 1.5; color: var(--muted); }
+    ul { margin: 0 0 8px 18px; color: var(--muted); }
+    li { margin: 3px 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+    }
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+    }
+    .cta {
+      margin-top: 14px;
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      color: #155e75;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 600;
+    }
+    .footer {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #64748b;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; width: auto; min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>AptiPath360</h1>
+      <p>Career Discovery and Decision Support for Grade 8 to Post-12</p>
+    </section>
+
+    <section>
+      <h2>The Problem</h2>
+      <p>Students and parents struggle to make confident stream and career decisions. Most guidance is generic and lacks a practical action plan.</p>
+    </section>
+
+    <section>
+      <h2>The Solution</h2>
+      <p>AptiPath360 combines parent context, student diagnostic assessment, and AI-assisted interpretation to generate clear, actionable career direction.</p>
+    </section>
+
+    <section class="grid">
+      <div class="box">
+        <h2>What It Delivers</h2>
+        <ul>
+          <li>Top career-fit recommendations</li>
+          <li>Stream-fit direction</li>
+          <li>Strength and risk signals</li>
+          <li>90-day action plan</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h2>Assessment Areas</h2>
+        <ul>
+          <li>Core Aptitude</li>
+          <li>Applied Challenge</li>
+          <li>Interest and Work Preference</li>
+          <li>Values and Motivation</li>
+          <li>Learning Behavior</li>
+          <li>AI Readiness</li>
+          <li>Career Reality Check</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h2>Who Uses It</h2>
+        <ul>
+          <li>Schools and career cells</li>
+          <li>Coaching institutes</li>
+          <li>Counseling centers</li>
+          <li>Parents of Grade 8 to Post-12 students</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h2>Why Institutions Buy</h2>
+        <ul>
+          <li>Structured counseling process</li>
+          <li>Higher parent trust</li>
+          <li>Early mismatch detection</li>
+          <li>Scalable batch implementation</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      Book a 20-minute demo and get a sample report walkthrough.
+    </section>
+
+    <section class="footer">
+      Robo Dynamics | AptiPath360 | Contact: ____________________ | Date: ____________________
+    </section>
+  </main>
+</body>
+</html>
+

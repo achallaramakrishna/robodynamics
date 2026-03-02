@@ -26,7 +26,15 @@ public class RDQuizQuestionDTO {
     @JsonProperty("exam_type")
     private String examType;
 
-    // 🔥 NEW FIELDS
+    @JsonProperty("question_image")
+    private String questionImage;
+
+    @JsonProperty("syllabus_tag")
+    private String syllabusTag;
+
+    @JsonProperty("explanation")
+    private String explanation;
+
     @JsonProperty("exam_year")
     private Integer examYear;
 
@@ -54,56 +62,155 @@ public class RDQuizQuestionDTO {
     @JsonProperty("tierOrder")
     private int tierOrder;
 
+    public String getExamType() {
+        return examType;
+    }
 
-    // =======================
-    // Getters & Setters
-    // =======================
+    public void setExamType(String examType) {
+        this.examType = examType;
+    }
 
-    public String getExamType() { return examType; }
-    public void setExamType(String examType) { this.examType = examType; }
+    public String getQuestionImage() {
+        return questionImage;
+    }
 
-    public Integer getExamYear() { return examYear; }
-    public void setExamYear(Integer examYear) { this.examYear = examYear; }
+    public void setQuestionImage(String questionImage) {
+        this.questionImage = questionImage;
+    }
 
-    public String getExamPaper() { return examPaper; }
-    public void setExamPaper(String examPaper) { this.examPaper = examPaper; }
+    public String getSyllabusTag() {
+        return syllabusTag;
+    }
 
-    public Boolean getIsPYQ() { return isPYQ; }
-    public void setIsPYQ(Boolean isPYQ) { this.isPYQ = isPYQ; }
+    public void setSyllabusTag(String syllabusTag) {
+        this.syllabusTag = syllabusTag;
+    }
 
-    public int getSlideNumber() { return slideNumber; }
-    public void setSlideNumber(int slideNumber) { this.slideNumber = slideNumber; }
+    public String getExplanation() {
+        return explanation;
+    }
 
-    public String getQuestionText() { return questionText; }
-    public void setQuestionText(String questionText) { this.questionText = questionText; }
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
 
-    public String getQuestionType() { return questionType; }
-    public void setQuestionType(String questionType) { this.questionType = questionType; }
+    public Integer getExamYear() {
+        return examYear;
+    }
 
-    public String getDifficultyLevel() { return difficultyLevel; }
-    public void setDifficultyLevel(String difficultyLevel) { this.difficultyLevel = difficultyLevel; }
+    public void setExamYear(Integer examYear) {
+        this.examYear = examYear;
+    }
 
-    public Integer getCourseSessionDetailId() { return courseSessionDetailId; }
-    public void setCourseSessionDetailId(Integer courseSessionDetailId) { this.courseSessionDetailId = courseSessionDetailId; }
+    public String getExamPaper() {
+        return examPaper;
+    }
 
-    public String getCorrectAnswer() { return correctAnswer; }
-    public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAnswer; }
+    public void setExamPaper(String examPaper) {
+        this.examPaper = examPaper;
+    }
 
-    public Integer getMaxMarks() { return maxMarks; }
-    public void setMaxMarks(Integer maxMarks) { this.maxMarks = maxMarks; }
+    public Boolean getIsPYQ() {
+        return isPYQ;
+    }
 
-    public String getAdditionalInfo() { return additionalInfo; }
-    public void setAdditionalInfo(String additionalInfo) { this.additionalInfo = additionalInfo; }
+    public void setIsPYQ(Boolean isPYQ) {
+        this.isPYQ = isPYQ;
+    }
 
-    public List<RDQuizOptionDTO> getOptions() { return options; }
-    public void setOptions(List<RDQuizOptionDTO> options) { this.options = options; }
+    public int getSlideNumber() {
+        return slideNumber;
+    }
 
-    public int getPoints() { return points; }
-    public void setPoints(int points) { this.points = points; }
+    public void setSlideNumber(int slideNumber) {
+        this.slideNumber = slideNumber;
+    }
 
-    public String getTierLevel() { return tierLevel; }
-    public void setTierLevel(String tierLevel) { this.tierLevel = tierLevel; }
+    public String getQuestionText() {
+        return questionText;
+    }
 
-    public int getTierOrder() { return tierOrder; }
-    public void setTierOrder(int tierOrder) { this.tierOrder = tierOrder; }
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    public Integer getCourseSessionDetailId() {
+        return courseSessionDetailId;
+    }
+
+    public void setCourseSessionDetailId(Integer courseSessionDetailId) {
+        this.courseSessionDetailId = courseSessionDetailId;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public Integer getMaxMarks() {
+        return maxMarks;
+    }
+
+    public void setMaxMarks(Integer maxMarks) {
+        this.maxMarks = maxMarks;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public List<RDQuizOptionDTO> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<RDQuizOptionDTO> options) {
+        this.options = options;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public String getTierLevel() {
+        return tierLevel;
+    }
+
+    public void setTierLevel(String tierLevel) {
+        this.tierLevel = tierLevel;
+    }
+
+    public int getTierOrder() {
+        return tierOrder;
+    }
+
+    public void setTierOrder(int tierOrder) {
+        this.tierOrder = tierOrder;
+    }
 }

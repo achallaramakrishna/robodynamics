@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Debug Challenges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#05060f;
+      --panel:#0f172a;
+      --border:#1f2a44;
+      --accent:#7c3aed;
+      --accent2:#22d3ee;
+      --text:#e8eeff;
+      --muted:#94a3b8;
+      --code:#111727;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      background:linear-gradient(145deg,#030712,#0a1223 55%,#0b1f3a);
+      color:var(--text);
+      font-family:'Space Grotesk',sans-serif;
+      min-height:100vh;
+    }
+    main {
+      max-width:1000px;
+      margin:0 auto;
+      padding:48px 24px 80px;
+    }
+    header {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-bottom:30px;
+    }
+    header h1 {
+      font-size:2.5rem;
+      margin:0;
+      letter-spacing:1px;
+    }
+    header p {
+      margin:0;
+      color:var(--muted);
+    }
+    .challenge {
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:26px;
+      margin-bottom:28px;
+      box-shadow:0 20px 40px rgba(2,6,23,0.7);
+    }
+    .challenge h2 {
+      margin-top:0;
+      margin-bottom:6px;
+      color:var(--accent);
+    }
+    .challenge p {
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+    .code-panel {
+      background:var(--code);
+      border-radius:14px;
+      position:relative;
+      overflow:hidden;
+      padding:18px;
+      margin-bottom:12px;
+    }
+    .code-panel pre {
+      margin:0;
+      font-family:'Source Code Pro',monospace;
+      font-size:0.9rem;
+      line-height:1.5;
+      white-space:pre-wrap;
+      word-break:break-all;
+    }
+    .code-panel button {
+      position:absolute;
+      top:12px;
+      right:12px;
+      border:none;
+      background:var(--accent2);
+      color:#05060f;
+      padding:6px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:0.8rem;
+    }
+    .steps {
+      display:grid;
+      gap:8px;
+      margin-bottom:12px;
+    }
+    .steps li {
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .badge {
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(124,58,237,0.15);
+      color:var(--accent);
+      font-size:0.75rem;
+      letter-spacing:0.5px;
+      margin-bottom:8px;
+    }
+    footer {
+      margin-top:40px;
+      border-top:1px solid var(--border);
+      padding-top:20px;
+      color:var(--muted);
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    @media (max-width:640px) {
+      .code-panel button {
+        font-size:0.7rem;
+        padding:5px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Debug Challenge Lab</h1>
+      <p>Each challenge describes a subtle bug. Give learners 7-10 minutes, then walk through the fix together and highlight best practices.</p>
+    </header>
+
+    <article class="challenge" id="null-check">
+      <span class="badge">Challenge 1</span>
+      <h2>Handle a lazy cache peek</h2>
+      <p>Users report occasional NullPointerExceptions when multiple threads load cache data.</p>
+      <div class="code-panel">
+        <button data-target="cacheSnippet">Copy</button>
+        <pre id="cacheSnippet">public Integer getScore(String learnerId) {
+  return learnerScores.get(learnerId).intValue();
+}</pre>
+      </div>
+      <ul class="steps">
+        <li>Gap: no null-check before unboxing and `get` can return null for new entries.</li>
+        <li>Fix: use `Objects.requireNonNullElse` or default to `0`, then unbox safely.</li>
+        <li>Explain: unboxing null throws NPE; best to return a default, log missing keys, and avoid global state mutation.</li>
+      </ul>
+    </article>
+
+    <article class="challenge" id="multi-catch">
+      <span class="badge">Challenge 2</span>
+      <h2>Misordered multi-catch</h2>
+      <p>Compilation fails even though each exception is handled.</p>
+      <div class="code-panel">
+        <button data-target="multiCatchSnippet">Copy</button>
+        <pre id="multiCatchSnippet">try {
+  Files.readAllLines(path);
+} catch (IOException e) {
+  log(e);
+} catch (FileNotFoundException fnf) {
+  log(fnf);
+}</pre>
+      </div>
+      <ul class="steps">
+        <li>Java checks catch blocks top to bottom; subclasses must appear before supertypes.</li>
+        <li>Swap order or use multi-catch to keep `FileNotFoundException` reachable.</li>
+        <li>Explain: FileNotFoundException is a subtype of IOException, so compiler sees unreachable block.</li>
+      </ul>
+    </article>
+
+    <article class="challenge" id="generic-cast">
+      <span class="badge">Challenge 3</span>
+      <h2>Unchecked cast in a generic factory</h2>
+      <p>Generic factory returns unchecked warnings and fails when retrieving typed data.</p>
+      <div class="code-panel">
+        <button data-target="genericSnippet">Copy</button>
+        <pre id="genericSnippet">public &lt;T&gt; T loadValue(Class&lt;T&gt; type) {
+  Map&lt;String, Object&gt; storage = loadStorage();
+  return (T) storage.get(type.getSimpleName());
+}</pre>
+      </div>
+      <ul class="steps">
+        <li>Problem: raw map entries get cast without verification, so a ClassCastException may surface.</li>
+        <li>Suggestion: store values using `Map<Class<?>, Object>` and even check `type.isInstance(value)` before casting.</li>
+        <li>Explain: generics are compile-time; retaining `Class<T>` lets you guard at runtime before the cast.</li>
+      </ul>
+    </article>
+
+    <footer>
+      Discuss remediation, show Git diff, and track fixes back in the lab journal after learners pair-program.</footer>
+  </main>
+  <script>
+    document.querySelectorAll('.code-panel button').forEach(button => {
+      button.addEventListener('click', () => {
+        const target = document.getElementById(button.dataset.target);
+        navigator.clipboard.writeText(target.innerText.trim()).then(() => {
+          button.innerText = 'Copied';
+          setTimeout(() => button.innerText = 'Copy', 1200);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

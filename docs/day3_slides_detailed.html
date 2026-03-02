@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 3 Slide Plan – Exception Handling, Collections &amp; Generics</title>
+  <style>
+    :root {
+      --background: #020617;
+      --card: #0f172a;
+      --accent: #38bdf8;
+      --accent-strong: #7dd3fc;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #1f2937;
+      --highlight: #f97316;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.9rem;
+      color: var(--accent-strong);
+      line-height: 1.1;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 780px;
+    }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 20px 40px rgba(2,6,23,.55);
+    }
+    section h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    section h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      color: var(--highlight);
+    }
+    .slide-meta {
+      font-size: .95rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .sub-bullet {
+      margin-left: 20px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59,130,246,.15);
+      color: #93c5fd;
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-right: 8px;
+      margin-bottom: 12px;
+    }
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .card {
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: rgba(15,23,42,.6);
+    }
+    .card h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: var(--accent-strong);
+    }
+    .code-snippet {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      border-radius: 12px;
+      padding: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: .95rem;
+      overflow-x: auto;
+      color: #dbeafe;
+    }
+    .poll {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+    }
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="slide-meta">Java Full Stack · Phase 1 · Day 3 / 1:00 PM – 5:00 PM Session</p>
+      <h1>Slide-wise Day 3 Presentation</h1>
+      <p>Each slide below maps to roughly 8‑12 minutes of on-screen teaching plus Q&amp;A/ pair practice. Follow along with the hands-on labs in <strong>Java_Full_Stack_Course_Outline_With_Labs.docx</strong>, and capture reflections in the lab journal at the footer.</p>
+    </header>
+    <section>
+      <div class="tag">Slide 1</div>
+      <h2>Introduction &amp; Objectives</h2>
+      <p>Set the tone: highlight what Exception Handling, Collections, and Generics unlock in large Java systems (robust services, predictable data flows, compile-time safety).</p>
+      <ul>
+        <li>Explain today’s agenda (exceptions → collections → generics → MCQs + labs).</li>
+        <li>State success criteria: students can catch/explain/wrap exceptions, choose the appropriate collection type, and design generic helpers.</li>
+        <li>Prompt: “Share one scenario from your work where losing control of errors paused features.” Capture responses live.</li>
+      </ul>
+    </section>
+    <section>
+      <div class="tag">Slide 2</div>
+      <h2>Exception Handling Basics</h2>
+      <p class="slide-meta">Time: 1:10 – 1:30 PM</p>
+      <h3>Concepts you cover:</h3>
+      <ul>
+        <li>Try/catch/finally lifecycle, difference between caught vs auto-propagated errors.</li>
+        <li>Checked vs unchecked exceptions and why the compiler enforces certain contracts.</li>
+        <li>When to use <code>throw</code> vs <code>throws</code>.</li>
+      </ul>
+      <div class="code-snippet">
+        <code>try (BufferedReader reader = Files.newBufferedReader(path)) {
+    String line = reader.readLine();
+    // ...
+} catch (IOException e) {
+    log.error("Unable to read config", e);
+} finally {
+    System.out.println("This always executes unless System.exit");
+}</code>
+      </div>
+      <div class="card">
+        <h4>Slide Activity</h4>
+        <p>Start with a crash reproduction: run a demo that throws FileNotFoundException and show the stack trace. Ask students to annotate each line as “handled” or “bubbled up”.</p>
+      </div>
+    </section>
+    <section>
+      <div class="tag">Slide 3</div>
+      <h2>Debug + Output Challenge</h2>
+      <h3>Live debugging prompt</h3>
+      <ul>
+        <li>Inject a <code>NullPointerException</code> by calling <code>String.toUpperCase()</code> on a null value inside a try block.</li>
+        <li>Step through the call stack with debugger or print statements; ask: “Which stack frame belongs to the catch block?”</li>
+      </ul>
+      <div class="card">
+        <h4>Output Prediction</h4>
+        <p>Show the following snippet and ask attendees to predict the printed lines before running.</p>
+        <div class="code-snippet">
+          <code>try {
+    System.out.println("Step A");
+    throw new IllegalArgumentException("Bad input");
+} catch (RuntimeException e) {
+    System.out.println("Step B");
+} finally {
+    System.out.println("Step C");
+}</code>
+        </div>
+        <p>Answer: Step A → Step B → Step C (finally always executes even after catch).</p>
+      </div>
+    </section>
+    <section>
+      <div class="tag">Slide 4</div>
+      <h2>Poll: Exception Logging Strategy</h2>
+      <p class="poll">"When should you log an exception?"</p>
+      <ul>
+        <li>A) Only if it’s not rethrown.</li>
+        <li>B) In every catch block.</li>
+        <li>C) When the exception crosses module/API boundary and there is no upper-level handler.</li>
+        <li>D) Never log; let the caller handle it.</li>
+      </ul>
+      <p>Correct answer: C – log at boundaries or when you have actionable context, but avoid double logging upstream.</p>
+    </section>
+    <section>
+      <div class="tag">Slide 5</div>
+      <h2>Advanced Exception Patterns + Lab</h2>
+      <p class="slide-meta">Time: 1:50 – 2:20 PM</p>
+      <ul>
+        <li>Custom domain exception example: <code>ValidationException extends RuntimeException</code> with errorCode + field.</li>
+        <li>Wrap checked IO calls into a service method that throws a runtime wrapper.</li>
+        <li>Use <code>try-with-resources</code> to auto-close; show suppressed exceptions with a multi-resource demo.</li>
+      </ul>
+      <p class="card">
+        <span class="tag">Mini Lab</span>
+        Refactor the sample service in the doc so it rethrows <code>DataAccessException</code> and writes contextual info to the logger.
+      </p>
+    </section>
+    <section>
+      <div class="tag">Slide 6</div>
+      <h2>Collections Framework – Deep Dive</h2>
+      <p class="slide-meta">Time: 2:40 – 3:20 PM</p>
+      <h3>List / Set / Map fundamentals</h3>
+      <ul>
+        <li>List: ordered and indexed. Compare <code>ArrayList</code> vs <code>LinkedList</code> (array vs node, random access vs insertion).</li>
+        <li>Set: uniqueness. Distinguish <code>HashSet</code> (unordered), <code>LinkedHashSet</code> (insertion order), <code>TreeSet</code> (sorted).</li>
+        <li>Map: hash-based vs tree-based; show how <code>HashMap</code> handles collisions, <code>TreeMap</code> provides natural ordering.</li>
+      </ul>
+      <div class="grid-two">
+        <div class="card">
+          <h4>Example</h4>
+          <p>Maintain a playlist with <code>List&lt;Song&gt;</code>, then extract unique artists via <code>Set&lt;String&gt;</code> + <code>Map&lt;String, Integer&gt;</code> for play counts.</p>
+        </div>
+        <div class="card">
+          <h4>Best Practice</h4>
+          <p>Prefer interfaces in signatures: <code>List&lt;String&gt;</code> instead of concrete type, and choose the smallest capability you need (e.g., <code>Deque</code> when you need push/pop).</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="tag">Slide 7</div>
+      <h2>Collections Advanced – Concurrency &amp; Streams</h2>
+      <ul>
+        <li>Trigger <code>ConcurrentModificationException</code> via for-each removal; fix with <code>Iterator.remove()</code> or use <code>CopyOnWriteArrayList</code>.</li>
+        <li>Introduce <code>ConcurrentHashMap</code> (segment-based locking) and describe when to use it vs synchronized map.</li>
+        <li>Stream helper: <code>students.stream().filter(...).collect(Collectors.toList())</code> to create immutable snapshots.</li>
+      </ul>
+      <div class="card">
+        <h4>Programming Exercise</h4>
+        <p>Given a list of Student records with grade and attendance, build a filtered list of students needing parent outreach and sort them using a comparator chain (<code>Comparator.comparing(Student::getGrade).thenComparing(Student::getName)</code>).</p>
+      </div>
+    </section>
+    <section>
+      <div class="tag">Slide 8</div>
+      <h2>Generics Essentials – Type Safety</h2>
+      <p class="slide-meta">Time: 4:00 – 4:30 PM</p>
+      <ul>
+        <li>Explain generics invariance, covariance vs contravariance via PECS (Producer Extends, Consumer Super).</li>
+        <li>Show signature: <code>&lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt; list)</code> and why comparables are required.</li>
+        <li>Highlight raw type pitfalls: unchecked casts and ClassCastException at runtime.</li>
+      </ul>
+      <div class="code-snippet">
+        <code>public static void addIntegers(List&lt;? super Integer&gt; list) {
+    list.add(1);
+    list.add(2);
+}</code>
+      </div>
+    </section>
+    <section>
+      <div class="tag">Slide 9</div>
+      <h2>Generics Practice Lab</h2>
+      <ul>
+        <li>Refactor the lab method that currently uses raw lists of <code>Object</code> into typed helpers (<code>List&lt;String&gt;</code>, <code>List&lt;Number&gt;</code>).</li>
+        <li>Implement helper: <code>public static double sumNumbers(List&lt;? extends Number&gt; numbers)</code> and explain compile-time limitations.</li>
+      </ul>
+      <div class="grid-two">
+        <div class="card">
+          <h4>PECS Reminder</h4>
+          <p>Use <code>? extends</code> when you only read elements, <code>? super</code> when you only write.</p>
+        </div>
+        <div class="card">
+          <h4>Debug Challenge</h4>
+          <p>Show a method that tries to add an <code>Integer</code> to a <code>List&lt;? extends Number&gt;</code> and explain the compiler error.</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="tag">Slide 10</div>
+      <h2>MCQ &amp; Crowd Check</h2>
+      <ul>
+        <li>Run slides MCQ 34‑38 sequentially (Exception Handling, Collections basics, Generics). Let learners vote with thumbs up/down and explain the correct answers afterward.</li>
+        <li>Poll question: “Which collection gives insertion order guarantee?” (Answer: <code>LinkedHashSet</code> or <code>LinkedHashMap</code>).</li>
+        <li>Summarize best practices for exceptions + collections + generics; capture “Top takeaway” on a shared wall.</li>
+      </ul>
+    </section>
+    <section>
+      <div class="tag">Slide 11</div>
+      <h2>Lab Wrap &amp; Reflection</h2>
+      <ul>
+        <li>Students push the combined lab (exception + collection) to repo and write 3 bullet reflection on “What worked, what needs clarity, what’s next”.</li>
+        <li>Preview Day 4 topics and link to property files + config best practices (closing slide). Mention optional stretch: explore Spring Boot exception handlers from doc.</li>
+      </ul>
+      <div class="card">
+        <h4>Final Prompt</h4>
+        <p>“Describe in one sentence how a properly defined generic helper saved you from a runtime bug today.” Capture responses for the next stand-up.</p>
+      </div>
+    </section>
+    <footer>
+      <p>Slide plan generated for today (25-Feb-2026). Open the file locally to present or copy/paste it into your preferred slide editor. Link: <a href="docs/day3_slides_detailed.html">this document</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>

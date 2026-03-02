@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 3 - Exception Handling, Collections &amp; Generics | Phase 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0A1628;
+    --secondary: #1A3A6B;
+    --accent: #50FA7B;
+    --accent2: #FF79C6;
+    --light: #F0F4FF;
+    --white: #FFFFFF;
+    --text: #E8EDF5;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --border: rgba(80, 250, 123, 0.3);
+    --code-bg: #0D1117;
+    --muted: #8899BB;
+    --java-keyword: #FF79C6;
+    --java-type: #8BE9FD;
+    --java-literal: #F1FA8C;
+    --java-comment: #6272A4;
+    --java-operator: #FFB86C;
+    --error: #FF5555;
+    --success: #50FA7B;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  .deck { width: 100vw; height: 100vh; position: relative; }
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 42px 66px 68px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: fadeIn 0.4s ease;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .slide.active { display: flex; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
+  .bg-hero {
+    background: linear-gradient(135deg, #0A1628 0%, #1A3A6B 60%, #0F2547 100%);
+  }
+  .bg-section { background: #0D1117; }
+  .bg-poll { background: linear-gradient(135deg, #120f2a, #2b0f5b); border-left: 6px solid var(--accent); }
+  .bg-lab { background: linear-gradient(135deg, #0a1f0a, #122a14); border-left: 6px solid #81C784; }
+  .bg-challenge { background: linear-gradient(135deg, #1a0f2e, #2a1060); border-left: 6px solid var(--accent2); }
+  h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--white); }
+  h1 { font-size: 3.4rem; line-height: 1.1; margin-bottom: 10px; }
+  h2 { font-size: 2.3rem; line-height: 1.25; margin-bottom: 10px; }
+  h3 { font-size: 1.6rem; margin-bottom: 8px; color: var(--accent); }
+  p, li { font-size: 1.05rem; line-height: 1.6; color: var(--text); }
+  ul { margin-left: 30px; }
+  .accent-line { width: 90px; height: 4px; background: var(--accent); margin: 12px 0 24px; border-radius: 2px; }
+  .slide-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+  .schedule-container { display: grid; gap: 12px; margin-top: 20px; }
+  .sched-item { display:flex; justify-content: space-between; padding:12px 20px; background: var(--card-bg); border-radius:10px; border-left:4px solid transparent; }
+  .sched-tag { font-size:0.7rem; padding:4px 10px; border-radius:6px; text-transform:uppercase; }
+  .tag-lecture { background: rgba(80,250,123,0.15); color: var(--accent); }
+  .tag-break { background: rgba(255,85,85,0.15); color:#FF5555; }
+  .tag-lab { background: rgba(129,199,132,0.15); color:#81C784; }
+  .tag-mcq { background: rgba(255,184,108,0.15); color:#FFB86C; }
+  .tag-poll { background: rgba(255,121,198,0.15); color: var(--accent2); }
+  .card { background: var(--card-bg); border-radius: 12px; padding: 16px 20px; border: 1px solid var(--border); margin-top: 16px; max-width: 850px; }
+  .code-block { background: var(--code-bg); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-family: 'Source Code Pro', monospace; font-size: 0.9rem; color: #e2e8f0; overflow-x: auto; white-space: pre; margin-top: 12px; }
+  .poll-option { display:flex; align-items:center; gap:12px; padding:14px 18px; background: rgba(255,255,255,0.07); border-radius:10px; margin-bottom:10px; cursor:pointer; }
+  .poll-option strong { color: var(--accent); font-size: 1rem; }
+  .challenge-box { background: rgba(255,121,198,0.12); border-left: 4px solid var(--accent2); border-radius: 8px; padding: 16px 22px; margin-top: 20px; }
+  .break-box { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:12px; }
+  .highlight { color: var(--accent); }
+  .deck-title { font-size: 3.6rem; font-weight: 900; margin-bottom: 12px; }
+  .deck-subtitle { font-size: 1.3rem; color: var(--muted); }
+  .deck-meta { color: var(--accent2); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px; }
+  .footer-nav { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); display:flex; gap:12px; }
+  .nav-button { background: var(--card-bg); border:1px solid var(--border); color: var(--light); padding:10px 20px; border-radius:8px; cursor:pointer; font-family:'Montserrat',sans-serif; font-weight:600; text-transform: uppercase; }
+  .nav-button:disabled { opacity:0.4; cursor:not-allowed; }
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="slide bg-hero center active" id="s1">
+    <div class="deck-title">Day 3 — Exception Handling, Collections &amp; Generics</div>
+    <div class="deck-subtitle">Design resilient Java applications in four focused hours</div>
+    <div class="accent-line"></div>
+    <div class="deck-meta">📅 25-Feb-26 | 🕐 1:00 PM – 5:00 PM | Phase 1: Core Java</div>
+    <p style="margin-top:20px; max-width:700px; font-size:1rem">Use the labs in <strong>Java_Full_Stack_Course_Outline_With_Labs.docx</strong> (exception + collections + generics sections) as anchors for the demos and exercises listed on the following slides. Each slide maps to ~8 minutes of teaching plus time for polls, labs, and reflection.</p>
+  </div>
+
+  <div class="slide bg-section" id="s2">
+    <div class="slide-label">Agenda</div>
+    <h2>What we'll cover today</h2>
+    <div class="accent-line"></div>
+    <div class="schedule-container">
+      <div class="sched-item">
+        <span>1:00‑1:30 PM</span>
+        <span>Exception handling fundamentals + logging practices</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item">
+        <span>1:30‑2:20 PM</span>
+        <span>Advanced patterns, debugging challenges, lab</span>
+        <span class="sched-tag tag-lab">Lab</span>
+      </div>
+      <div class="sched-item">
+        <span>2:20‑2:40 PM</span>
+        <span>Break + quick poll</span>
+        <span class="sched-tag tag-break">Break</span>
+      </div>
+      <div class="sched-item">
+        <span>2:40‑3:40 PM</span>
+        <span>Collections framework deep dive + exercises</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item">
+        <span>3:40‑4:20 PM</span>
+        <span>Generics, wildcards, PECS &amp; refactor lab</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item">
+        <span>4:20‑5:00 PM</span>
+        <span>MCQ wrap, homework + Q&amp;A</span>
+        <span class="sched-tag tag-mcq">MCQ</span>
+      </div>
+    </div>
+    <p style="margin-top:20px">Trainer note: Keep a live timer on each block. Stop for questions every 12 minutes, then recap with a poll or MCQ before moving on.</p>
+  </div>
+
+  <div class="slide bg-section" id="s2-topics">
+    <div class="slide-label">Topics Covered</div>
+    <h2>What you will master</h2>
+    <div class="accent-line"></div>
+    <div class="card">
+      <ul>
+        <li>Exception types &amp; hierarchy plus <code>try</code>/<code>catch</code>/<code>finally</code>.</li>
+        <li>try-with-resources, multi-catch blocks, and <code>throw</code>/<code>throws</code> patterns.</li>
+        <li>User-defined exceptions that carry error codes and contextual data.</li>
+        <li>Collections Framework deep dive: List, Set, Map, Queue.</li>
+        <li>Comparable &amp; Comparator for sorting strategies.</li>
+        <li>Generics with collections, including bounded parameters and wildcards.</li>
+        <li>Loading configuration via Property Files (<code>.properties</code>). </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide bg-lab" id="s2-labs">
+    <div class="slide-label">Lab Manuals &amp; Assignment</div>
+    <h2>Hands-on exercises</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li><strong>Lab 3.1 – Exception Handling:</strong> catch ArithmeticException/NumberFormatException/NullPointerException, implement multi-catch + finally, create <code>InsufficientFundsException</code>, and use try-with-resources with a custom AutoCloseable.</li>
+      <li><strong>Lab 3.2 – Collections (List, Set, Map, Queue):</strong> compare ArrayList/LinkedList add/remove costs, dedupe with HashSet and sort with TreeSet, build a HashMap phone book demonstrating <code>getOrDefault</code> &amp; <code>putIfAbsent</code>, and simulate a ticket queue using ArrayDeque.</li>
+      <li><strong>Lab 3.3 – Sorting with Comparable &amp; Comparator:</strong> implement Student.<code>compareTo</code> by GPA, call <code>Collections.sort()</code>, write a name-first, GPA-desc comparator, chain comparators with <code>thenComparing()</code>.</li>
+      <li><strong>Lab 3.4 – Generics &amp; Property Files:</strong> design <code>Pair&lt;A,B&gt;</code> and <code>Stack&lt;T&gt;</code>, print any <code>List&lt;T&gt;</code>, load <code>config.properties</code> using <code>Properties</code>, and demonstrate bounded type params with <code>&lt;T extends Number&gt;</code>.</li>
+    </ul>
+    <p style="margin-top:12px"><strong>Home Assignment:</strong> Implement a student grade manager with Collections, handle exceptions gracefully, and push the solution to Git (include README reflections).</p>
+  </div>
+
+  <div class="slide bg-section" id="s3">
+    <div class="slide-label">Exception Handling</div>
+    <h2>Slide 3 · Try / catch / finally anatomy</h2>
+    <div class="accent-line"></div>
+    <p>Cover the runtime journey of an exception, mention the difference between checked (IOException) and unchecked (NullPointerException) types, and stress when to rethrow with context.</p>
+    <div class="code-block">
+try (BufferedReader reader = Files.newBufferedReader(path)) {
+    String line = reader.readLine();
+    System.out.println(line);
+} catch (IOException e) {
+    log.error("Cannot read config", e);
+} finally {
+    System.out.println("Cleanup log written");
+}
+    </div>
+    <p>Highlight: finally runs even when you return early; multi-catch lets you handle similar exceptions without duplication.</p>
+  </div>
+
+  <div class="slide bg-challenge" id="s4">
+    <div class="slide-label">Debug Challenge</div>
+    <h2>Slide 4 · Predict the output</h2>
+    <div class="accent-line"></div>
+    <p>Click into this code before showing the execution.</p>
+    <div class="code-block">
+try {
+    System.out.println("A");
+    throw new IllegalStateException("oops");
+} catch (RuntimeException e) {
+    System.out.println("B");
+} finally {
+    System.out.println("C");
+}
+    </div>
+    <p>Answer: A → B → C. Ask: “What if we call System.exit(0) inside catch?”</p>
+  </div>
+
+  <div class="slide bg-poll" id="s5">
+    <div class="slide-label">Poll</div>
+    <h2>When should you log an exception?</h2>
+    <div class="accent-line"></div>
+    <div class="poll-option">
+      <strong>A</strong>
+      <span>Every time you catch, regardless of context.</span>
+    </div>
+    <div class="poll-option">
+      <strong>B</strong>
+      <span>Only when you rethrow with more context.</span>
+    </div>
+    <div class="poll-option">
+      <strong>C</strong>
+      <span>When the exception crosses module/API boundaries and someone needs to know.</span>
+    </div>
+    <div class="poll-option">
+      <strong>D</strong>
+      <span>Never log; rely on upstream handlers.</span>
+    </div>
+    <p style="margin-top:12px">Correct: C. Log at boundaries with context; avoid double logging that floods the console.</p>
+  </div>
+
+  <div class="slide bg-lab" id="s6">
+    <div class="slide-label">Lab · Exception Propagation</div>
+    <h2>Slide 6 · Lab walkthrough</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li>Open the lab file “Exception propagation path” → identify service/controller layers.</li>
+      <li>Wrap your I/O calls in try-with-resources and log suppressed exceptions (<code>close()</code> in finally).</li>
+      <li>Pair reflection: What metadata belongs in your custom exception?<br><strong>Hint:</strong> include error code &amp; user-friendly message.</li>
+    </ul>
+    <div class="challenge-box">
+      <p><strong>Challenge:</strong> Create <code>ValidationException</code> that captures a field name, expected format, and sends that info to the logger inside your catch block.</p>
+    </div>
+  </div>
+
+  <div class="slide bg-section" id="s7">
+    <div class="slide-label">Break</div>
+    <h2>Slide 7 · Stretch + refocus</h2>
+    <div class="break-box">
+      <p style="font-size:2rem;">10 minute break</p>
+      <p style="color:var(--muted);">Grab water, share one insight from the morning labs.</p>
+    </div>
+  </div>
+
+  <div class="slide bg-section" id="s8">
+    <div class="slide-label">Collections · Overview</div>
+    <h2>Slide 8 · Choosing the right Collection</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li><strong>List:</strong> Ordered, accepts duplicates; use ArrayList for random access, LinkedList for insert-heavy flows.</li>
+      <li><strong>Set:</strong> Uniqueness. HashSet for speed, TreeSet for sorted order, LinkedHashSet to preserve insertion order.</li>
+      <li><strong>Map:</strong> Key-value store; HashMap vs TreeMap (natural ordering) vs LinkedHashMap (recency/insertion), ConcurrentHashMap for multi-threaded access.</li>
+    </ul>
+    <div class="card">
+      <h3>Example</h3>
+      <p>Maintain a playlist (List) and build a play-count map (HashMap&lt;String,Integer&gt;) to track how many times each artist streams.</p>
+    </div>
+  </div>
+
+  <div class="slide bg-section" id="s9">
+    <div class="slide-label">Collections · Lab</div>
+    <h2>Slide 9 · Live coding</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li>Implement the lab snippet that filters a list of scores into two sets: passed (>=75) and needs follow-up.</li>
+      <li>Use <code>TreeSet</code> to maintain sorted review queue and <code>ArrayList</code> for the raw log.</li>
+      <li>Demonstrate comparator chaining (<code>Comparator.comparing(Student::getGrade).thenComparing(Student::getName)</code>).</li>
+    </ul>
+    <div class="code-block">
+List&lt;Student&gt; roster = List.of(...);
+Set&lt;Student&gt; flagged = roster.stream()
+    .filter(s -&gt; s.getGrade() &lt; 75)
+    .collect(Collectors.toCollection(() -&gt; new TreeSet<>(Comparator.comparing(Student::getGrade))));
+    </div>
+  </div>
+
+  <div class="slide bg-section" id="s10">
+    <div class="slide-label">Collections · Concurrency</div>
+    <h2>Slide 10 · Fail-fast vs Concurrent</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li>Explain <code>ConcurrentModificationException</code> by removing from <code>ArrayList</code> while iterating.</li>
+      <li>Introduce <code>Iterator.remove()</code> and <code>CopyOnWriteArrayList</code> for safe mutation, plus <code>ConcurrentHashMap</code> for multi-threaded caches.</li>
+      <li>Show screenshot of hit log from lab where modifications triggered CME vs corrected code.</li>
+    </ul>
+  </div>
+
+  <div class="slide bg-section" id="s11">
+    <div class="slide-label">Generics · Type safety</div>
+    <h2>Slide 11 · Wildcards &amp; PECS</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li><strong>Producer extends:</strong> <code>List&lt;? extends Number&gt;</code> → can read Number but not add.</li>
+      <li><strong>Consumer super:</strong> <code>List&lt;? super Integer&gt;</code> → can add Integer but reading only guarantees Object.</li>
+      <li>Generics prevent runtime ClassCastException by enforcing types at compile time.</li>
+    </ul>
+    <div class="code-block">
+public static double sumNumbers(List&lt;? extends Number&gt; numbers) {
+    return numbers.stream()
+        .mapToDouble(Number::doubleValue)
+        .sum();
+}
+    </div>
+  </div>
+
+  <div class="slide bg-lab" id="s12">
+    <div class="slide-label">Generics Lab</div>
+    <h2>Slide 12 · Refactor raw collections</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li>Story: you inherited a legacy helper that accepts <code>List</code> and casts to <code>Object</code>. Refactor to typed signatures.</li>
+      <li>Implement helper <code>&lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt; list)</code> and validate with comparators.</li>
+      <li>Pair challenge: convert an array of <code>Object</code> to <code>List&lt;String&gt;</code> safely using generics.</li>
+    </ul>
+  </div>
+
+  <div class="slide bg-poll" id="s13">
+    <div class="slide-label">MCQ</div>
+    <h2>Slide 13 · Quick quiz</h2>
+    <div class="accent-line"></div>
+    <div class="poll-option">
+      <strong>A</strong>
+      <span><code>TreeSet</code> maintains insertion order.</span>
+    </div>
+    <div class="poll-option">
+      <strong>B</strong>
+      <span><code>HashSet</code> permits duplicates.</span>
+    </div>
+    <div class="poll-option">
+      <strong>C</strong>
+      <span><code>LinkedHashSet</code> preserves insertion order.</span>
+    </div>
+    <div class="poll-option">
+      <strong>D</strong>
+      <span><code>List</code> is unordered.</span>
+    </div>
+    <p style="margin-top:10px">Correct: C. LinkedHashSet keeps the order items were added.</p>
+  </div>
+
+  <div class="slide bg-section" id="s14">
+    <div class="slide-label">Wrap</div>
+    <h2>Slide 14 · Homework &amp; Reflection</h2>
+    <div class="accent-line"></div>
+    <ul>
+      <li>Push your exception + collections labs to the shared repo, include README with what you learned.</li>
+      <li>Reflect: 1) What exception is hardest to debug? 2) Which collection would you pick for caching? 3) What generics pattern saved you time?</li>
+      <li>Optional stretch: hook your exceptions into Spring Boot's <code>@ControllerAdvice</code> and log to a centralized system.</li>
+    </ul>
+    <p style="margin-top:16px; color: var(--muted)">Trainer note: Invite students to share their answers in the next standup channel.</p>
+  </div>
+
+  <div class="slide bg-hero center" id="s15">
+    <div class="deck-title">Thanks for tuning in!</div>
+    <div class="deck-subtitle">Any questions before Day 4?</div>
+    <div class="accent-line"></div>
+    <div class="deck-meta">Phase 1: Core Java · Day 3 recap</div>
+    <p style="margin-top:20px; max-width:500px;">Repeat the code examples locally before the next class. Need more help? Refer to <code>Java_Full_Stack_Course_Outline_With_Labs.docx</code> sections on exception handling, collections, and generics.</p>
+  </div>
+</div>
+
+<div class="footer-nav">
+  <button class="nav-button" id="prevSlide" onclick="changeSlide(-1)" disabled>← Previous</button>
+  <div id="slideCounter" style="min-width:60px; text-align:center; font-family:'Montserrat',sans-serif; letter-spacing:1px;"></div>
+  <button class="nav-button" id="nextSlide" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    document.getElementById('prevSlide').disabled = index === 0;
+    document.getElementById('nextSlide').disabled = index === totalSlides - 1;
+    document.getElementById('slideCounter').textContent = `${index + 1} / ${totalSlides}`;
+  }
+
+  function changeSlide(delta) {
+    currentSlideIndex = Math.max(0, Math.min(totalSlides - 1, currentSlideIndex + delta));
+    showSlide(currentSlideIndex);
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') changeSlide(1);
+    if (event.key === 'ArrowLeft') changeSlide(-1);
+  });
+
+  showSlide(currentSlideIndex);
+</script>
+</body>
+</html>

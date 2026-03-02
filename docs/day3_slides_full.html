@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Slides — Exception Handling, Collections & Generics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#0A1628; --accent:#50FA7B; --accent2:#FF79C6; --light:#F0F4FF; --text:#E8EDF5; --card:rgba(255,255,255,0.06); --border:rgba(80,250,123,0.3); --code:#0D1117; --muted:#8899BB; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Lato',sans-serif;background:var(--primary);color:var(--text);overflow:hidden;height:100vh;width:100vw;}
+    .deck{width:100vw;height:100vh;position:relative;}
+    .slide{display:none;width:100%;height:100%;position:absolute;top:0;left:0;padding:50px 70px 140px;overflow-y:auto;background:linear-gradient(145deg,#0A1628,#03080f);}
+    .slide.active{display:flex;flex-direction:column;gap:14px;}
+    h2{font-family:'Montserrat',sans-serif;font-size:2.2rem;color:var(--light);}
+    h3{font-family:'Montserrat',sans-serif;font-size:1.4rem;color:var(--accent);}
+    p,li{font-size:1.05rem;line-height:1.6;}
+    ul{margin-left:26px;}
+    .accent-line{width:90px;height:4px;background:var(--accent);border-radius:4px;margin:6px 0 16px;}
+    .code-panel{background:var(--code);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:18px;position:relative;overflow:auto;}
+    .code-panel pre{font-family:'Source Code Pro',monospace;font-size:0.95rem;color:#f8fafc;white-space:pre-wrap;}
+    .copy-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.15);border:none;padding:6px 12px;border-radius:6px;color:#fff;font-size:0.85rem;cursor:pointer;}
+    .tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:999px;background:rgba(80,250,123,0.15);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.2em;margin-bottom:6px;}
+    .panel{border:1px dashed rgba(255,255,255,0.2);border-radius:10px;padding:14px;margin-top:12px;background:rgba(255,255,255,0.02);}
+    .quiz,.challenge{border-left:4px solid var(--accent2);padding-left:12px;margin-top:12px;}
+    .nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:12px;}
+    .nav button{background:var(--card);border:1px solid var(--border);color:var(--light);padding:10px 20px;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;transition:transform .2s;}
+    .nav button:disabled{opacity:0.4;cursor:not-allowed;}
+    .nav button:not(:disabled):hover{transform:translateY(-2px);}
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="slide active" id="slide1">
+      <span class="tag">Slide 1</span>
+      <h2>Day 3 Overview</h2>
+      <div class="accent-line"></div>
+      <h3>Exception Handling, Collections & Generics</h3>
+      <p>Phase 1 | 25-Feb-26 | 1:00 PM – 5:00 PM.</p>
+      <p>This deck walks through the exception journey, collections framework, and generics patterns in 50 slides.</p>
+      <p>Each slide contains speaker notes, code snippets, polls, labs, and discussion prompts.</p>
+    </div>
+
+    <div class="slide" id="slide2">
+      <span class="tag">Slide 2</span>
+      <h2>Session Goals</h2>
+      <div class="accent-line"></div>
+      <h3>Why these topics matter</h3>
+      <p>Explain how the JVM handles errors, how collections manage data, and how generics enforce safe APIs.</p>
+      <p>Keep the labs from Java_Full_Stack_Course_Outline_With_Labs.docx front and center while running polls.</p>
+    </div>
+
+    <div class="slide" id="slide3">
+      <span class="tag">Slide 3</span>
+      <h2>What is an Exception?</h2>
+      <div class="accent-line"></div>
+      <h3>Runtime disruption</h3>
+      <p>An exception is an object thrown when a method cannot complete normally.</p>
+      <p>It propagates up the call stack until a handler catches it.</p>
+    </div>
+
+    <div class="slide" id="slide4">
+      <span class="tag">Slide 4</span>
+      <h2>Compile-time vs Runtime</h2>
+      <div class="accent-line"></div>
+      <h3>Errors vs Exceptions</h3>
+      <p>Compile-time errors are detected by the compiler, while runtime exceptions occur during execution.</p>
+      <p>Recognizing the difference helps you debug faster.</p>
+    </div>
+
+    <div class="slide" id="slide5">
+      <span class="tag">Slide 5</span>
+      <h2>Throwable Hierarchy</h2>
+      <div class="accent-line"></div>
+      <h3>Throwable, Error, Exception</h3>
+      <p>Throwable splits into Error (critical JVM issues) and Exception (recoverable runtime conditions).</p>
+      <p>Exception divides into checked and unchecked branches.</p>
+    </div>
+
+    <div class="slide" id="slide6">
+      <span class="tag">Slide 6</span>
+      <h2>Checked Exceptions</h2>
+      <div class="accent-line"></div>
+      <h3>Compiler enforces handling</h3>
+      <p>Examples include IOException and SQLException.</p>
+      <p>You must catch them or declare them with throws.</p>
+    </div>
+
+    <div class="slide" id="slide7">
+      <span class="tag">Slide 7</span>
+      <h2>Unchecked Exceptions</h2>
+      <div class="accent-line"></div>
+      <h3>RuntimeException family</h3>
+      <p>NullPointerException and ArithmeticException extend RuntimeException.</p>
+      <p>They can be left uncaught, so guard inputs carefully.</p>
+    </div>
+
+    <div class="slide" id="slide8">
+      <span class="tag">Slide 8</span>
+      <h2>try-catch Basics</h2>
+      <div class="accent-line"></div>
+      <h3>Catching flow</h3>
+      <p>Place risky code inside try and follow with catch blocks for matching types.</p>
+      <p>Log exceptions before recovering or rethrowing.</p>
+    </div>
+
+    <div class="slide" id="slide9">
+      <span class="tag">Slide 9</span>
+      <h2>Multi-catch</h2>
+      <div class="accent-line"></div>
+      <h3>Java 7 feature</h3>
+      <p>Use catch (IOException | SecurityException ex) to share handling logic.</p>
+      <p>Helpful when several exceptions need identical processing.</p>
+    </div>
+
+    <div class="slide" id="slide10">
+      <span class="tag">Slide 10</span>
+      <h2>finally Block</h2>
+      <div class="accent-line"></div>
+      <h3>Cleanup guard</h3>
+      <p>finally executes regardless of whether an exception occurred (unless System.exit interrupts).</p>
+      <p>Great place to log completion or release resources outside try-with-resources.</p>
+    </div>
+
+    <div class="slide" id="slide11">
+      <span class="tag">Slide 11</span>
+      <h2>throw vs throws</h2>
+      <div class="accent-line"></div>
+      <h3>Raising vs declaring</h3>
+      <p>Use throw to raise a specific exception instance.</p>
+      <p>Use throws in the method signature to delegate responsibility.</p>
+    </div>
+
+    <div class="slide" id="slide12">
+      <span class="tag">Slide 12</span>
+      <h2>Custom Exceptions</h2>
+      <div class="accent-line"></div>
+      <h3>Domain signals</h3>
+      <p>Extend RuntimeException for business rule violations (e.g., InsufficientFunds).</p>
+      <p>Include contextual data like error codes.</p>
+    </div>
+
+    <div class="slide" id="slide13">
+      <span class="tag">Slide 13</span>
+      <h2>Try-with-resources</h2>
+      <div class="accent-line"></div>
+      <h3>Auto cleanup</h3>
+      <p>AutoCloseable resources close automatically even during exceptions.</p>
+      <p>Great for InputStream/BufferedReader stacks.</p>
+      <div class="code-panel">
+        <button class="copy-btn">Copy</button>
+        <pre>try (BufferedReader reader = Files.newBufferedReader(path)) {
+    reader.lines().forEach(System.out::println);
+} catch (IOException e) {
+    log.error("Read failed", e);
+}</pre>
+      </div>
+    </div>
+
+    <div class="slide" id="slide14">
+      <span class="tag">Slide 14</span>
+      <h2>Logging Strategy</h2>
+      <div class="accent-line"></div>
+      <h3>Context-rich logs</h3>
+      <p>Log the event along with the offending value and stack trace.</p>
+      <p>Wrap exceptions with more contextual ones before rethrowing.</p>
+    </div>
+
+    <div class="slide" id="slide15">
+      <span class="tag">Slide 15</span>
+      <h2>Lab 3.1 Pt1</h2>
+      <div class="accent-line"></div>
+      <h3>Catch specific errors</h3>
+      <p>Handle ArithmeticException, NumberFormatException, and NullPointerException with targeted recovery paths.</p>
+      <p>Pair up to intentionally trigger each and inspect stack traces.</p>
+    </div>
+
+    <div class="slide" id="slide16">
+      <span class="tag">Slide 16</span>
+      <h2>Lab 3.1 Pt2</h2>
+      <div class="accent-line"></div>
+      <h3>Multi-catch + finally</h3>
+      <p>Group exception handling with multi-catch and guarantee cleanup via finally.</p>
+    </div>
+
+    <div class="slide" id="slide17">
+      <span class="tag">Slide 17</span>
+      <h2>Lab 3.1 Pt3</h2>
+      <div class="accent-line"></div>
+      <h3>InsufficientFundsException</h3>
+      <p>Create a RuntimeException that carries a reason string.</p>
+      <p>Throw it from withdraw when balance is insufficient.</p>
+      <div class="code-panel">
+        <button class="copy-btn">Copy</button>
+        <pre>public class InsufficientFundsException extends RuntimeException {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="slide" id="slide18">
+      <span class="tag">Slide 18</span>
+      <h2>Lab 3.1 Pt4</h2>
+      <div class="accent-line"></div>
+      <h3>AutoCloseable resource</h3>
+      <p>Implement AutoCloseable to log open/close incidents.</p>
+      <p>Demonstrate suppressed exceptions when close also throws.</p>
+    </div>
+
+    <div class="slide" id="slide19">
+      <span class="tag">Slide 19</span>
+      <h2>Exception Poll</h2>
+      <div class="accent-line"></div>
+      <h3>When to log?</h3>
+      <p>Log when the exception crosses a module boundary or holds actionable data.</p>
+      <p>Avoid logging the same exception multiple times.</p>
+    </div>
+
+    <div class="slide" id="slide20">
+      <span class="tag">Slide 20</span>
+      <h2>Debug Challenge</h2>
+      <div class="accent-line"></div>
+      <h3>Suppressed exceptions</h3>
+      <p>Force a closing error to inspect getSuppressed() output.</p>
+      <p>Use it to surface secondary failures.</p>
+    </div>
+
+    <div class="slide" id="slide21">
+      <span class="tag">Slide 21</span>
+      <h2>Collections Intro</h2>
+      <div class="accent-line"></div>
+      <h3>Why arrays fail</h3>
+      <p>Arrays are fixed size with no utility methods.</p>
+      <p>Collections provide resizing, iteration, and concurrency choices.</p>
+    </div>
+
+    <div class="slide" id="slide22">
+      <span class="tag">Slide 22</span>
+      <h2>Framework Architecture</h2>
+      <div class="accent-line"></div>
+      <h3>Collection vs Map</h3>
+      <p>Collection is the root for List, Set, Queue; Map stands beside but shares helpers.</p>
+      <p>Understanding the tree makes selecting structures easier.</p>
+    </div>
+
+    <div class="slide" id="slide23">
+      <span class="tag">Slide 23</span>
+      <h2>List Interface</h2>
+      <div class="accent-line"></div>
+      <h3>Ordered sequences</h3>
+      <p>Lists preserve insertion order and allow duplicates.</p>
+      <p>Support index-based adds/removes.</p>
+    </div>
+
+    <div class="slide" id="slide24">
+      <span class="tag">Slide 24</span>
+      <h2>ArrayList</h2>
+      <div class="accent-line"></div>
+      <h3>Dynamic array</h3>
+      <p>Backed by an array that grows by ~50% when full.</p>
+      <p>Fast random access and iteration.</p>
+    </div>
+
+    <div class="slide" id="slide25">
+      <span class="tag">Slide 25</span>
+      <h2>LinkedList</h2>
+      <div class="accent-line"></div>
+      <h3>Node chain</h3>
+      <p>Doubly linked nodes support quick head/tail inserts.</p>
+      <p>Random access is linear.</p>
+    </div>
+
+    <div class="slide" id="slide26">
+      <span class="tag">Slide 26</span>
+      <h2>Vector & Stack</h2>
+      <div class="accent-line"></div>
+      <h3>Legacy sync</h3>
+      <p>Vector synchronizes every method (slow).</p>
+      <p>Stack extends Vector; prefer Deque for LIFO today.</p>
+    </div>
+
+    <div class="slide" id="slide27">
+      <span class="tag">Slide 27</span>
+      <h2>Set Interface</h2>
+      <div class="accent-line"></div>
+      <h3>Uniqueness</h3>
+      <p>Sets rely on equals/hashCode.</p>
+      <p>No duplicates allowed.</p>
+    </div>
+
+    <div class="slide" id="slide28">
+      <span class="tag">Slide 28</span>
+      <h2>HashSet</h2>
+      <div class="accent-line"></div>
+      <h3>Buckets & load factor</h3>
+      <p>Uses hashing to assign buckets; load factor 0.75 triggers resize.</p>
+      <p>Collision chains degrade to trees with many entries.</p>
+    </div>
+
+    <div class="slide" id="slide29">
+      <span class="tag">Slide 29</span>
+      <h2>LinkedHashSet</h2>
+      <div class="accent-line"></div>
+      <h3>Insertion order</h3>
+      <p>Maintains insertion order via linked entries.</p>
+      <p>Ideal for deterministic iteration.</p>
+    </div>
+
+    <div class="slide" id="slide30">
+      <span class="tag">Slide 30</span>
+      <h2>TreeSet</h2>
+      <div class="accent-line"></div>
+      <h3>Sorted set</h3>
+      <p>Red-black tree keeps elements sorted.</p>
+      <p>Provide comparator or rely on Comparable.</p>
+    </div>
+
+    <div class="slide" id="slide31">
+      <span class="tag">Slide 31</span>
+      <h2>Map Interface</h2>
+      <div class="accent-line"></div>
+      <h3>Key-value pairs</h3>
+      <p>Maps associate unique keys to values.</p>
+      <p>Support optional compute and merge helpers.</p>
+    </div>
+
+    <div class="slide" id="slide32">
+      <span class="tag">Slide 32</span>
+      <h2>HashMap</h2>
+      <div class="accent-line"></div>
+      <h3>Internal design</h3>
+      <p>Buckets store entries determined by hashCode.</p>
+      <p>Resizing keeps bucket occupancy balanced.</p>
+    </div>
+
+    <div class="slide" id="slide33">
+      <span class="tag">Slide 33</span>
+      <h2>LinkedHashMap</h2>
+      <div class="accent-line"></div>
+      <h3>LRU caches</h3>
+      <p>Tracks insertion or access order.</p>
+      <p>Override removeEldestEntry for eviction.</p>
+    </div>
+
+    <div class="slide" id="slide34">
+      <span class="tag">Slide 34</span>
+      <h2>TreeMap</h2>
+      <div class="accent-line"></div>
+      <h3>Sorted keys</h3>
+      <p>Sorted according to natural order or comparator.</p>
+      <p>Operations cost O(log n).</p>
+    </div>
+
+    <div class="slide" id="slide35">
+      <span class="tag">Slide 35</span>
+      <h2>Hashtable vs ConcurrentHashMap</h2>
+      <div class="accent-line"></div>
+      <h3>Thread safety</h3>
+      <p>Hashtable synchronizes each method; causes contention.</p>
+      <p>ConcurrentHashMap uses lock striping for scalability.</p>
+    </div>
+
+    <div class="slide" id="slide36">
+      <span class="tag">Slide 36</span>
+      <h2>Iteration Techniques</h2>
+      <div class="accent-line"></div>
+      <h3>Loops & iterators</h3>
+      <p>For loops, enhanced for, Iterator/ListIterator removal.</p>
+      <p>Streams and forEach lambdas simplify iteration.</p>
+    </div>
+
+    <div class="slide" id="slide37">
+      <span class="tag">Slide 37</span>
+      <h2>Streams Intro</h2>
+      <div class="accent-line"></div>
+      <h3>Pipeline helpers</h3>
+      <p>Map/filter/reduce pipeline example.</p>
+      <p>Avoid shared mutable state on parallel streams.</p>
+    </div>
+
+    <div class="slide" id="slide38">
+      <span class="tag">Slide 38</span>
+      <h2>ArrayDeque</h2>
+      <div class="accent-line"></div>
+      <h3>Deque operations</h3>
+      <p>Support push/pop and offer/poll with no fixed capacity.</p>
+      <p>Replace legacy Stack for LIFO behavior.</p>
+    </div>
+
+    <div class="slide" id="slide39">
+      <span class="tag">Slide 39</span>
+      <h2>HashMap Phonebook</h2>
+      <div class="accent-line"></div>
+      <h3>Helper methods</h3>
+      <p>Use getOrDefault to supply fallback values.</p>
+      <p>Use putIfAbsent and computeIfPresent safely update.</p>
+    </div>
+
+    <div class="slide" id="slide40">
+      <span class="tag">Slide 40</span>
+      <h2>Comparable</h2>
+      <div class="accent-line"></div>
+      <h3>Natural order</h3>
+      <p>Override compareTo in Student to sort by GPA.</p>
+      <p>Collections.sort uses natural order by default.</p>
+    </div>
+
+    <div class="slide" id="slide41">
+      <span class="tag">Slide 41</span>
+      <h2>Comparator</h2>
+      <div class="accent-line"></div>
+      <h3>Alternate order</h3>
+      <p>Use Comparator.comparing and thenComparing for multi-level sorts.</p>
+      <p>Supply comparators when natural order doesnt match requirements.</p>
+    </div>
+
+    <div class="slide" id="slide42">
+      <span class="tag">Slide 42</span>
+      <h2>Collections Utilities</h2>
+      <div class="accent-line"></div>
+      <h3>Helper methods</h3>
+      <p>Collections.sort, reverse, shuffle, binarySearch operate on lists.</p>
+      <p>Binary search requires sorted data.</p>
+    </div>
+
+    <div class="slide" id="slide43">
+      <span class="tag">Slide 43</span>
+      <h2>Arrays Utilities</h2>
+      <div class="accent-line"></div>
+      <h3>Array helpers</h3>
+      <p>Arrays.asList bridges arrays to lists.</p>
+      <p>Arrays.stream builds pipelines for primitive arrays.</p>
+    </div>
+
+    <div class="slide" id="slide44">
+      <span class="tag">Slide 44</span>
+      <h2>Generics Intro</h2>
+      <div class="accent-line"></div>
+      <h3>Type safety</h3>
+      <p>Generics enforce compile-time type checking.</p>
+      <p>Avoid raw types to prevent runtime ClassCastException.</p>
+    </div>
+
+    <div class="slide" id="slide45">
+      <span class="tag">Slide 45</span>
+      <h2>Generic Class</h2>
+      <div class="accent-line"></div>
+      <h3>Pair<A,B></h3>
+      <p>Store heterogeneous values with two type parameters.</p>
+      <p>Typed getters keep usage safe.</p>
+    </div>
+
+    <div class="slide" id="slide46">
+      <span class="tag">Slide 46</span>
+      <h2>Generic Method</h2>
+      <div class="accent-line"></div>
+      <h3>printList</h3>
+      <p>Static generic method prints any List<T>.</p>
+      <p>Callers typically rely on type inference.</p>
+    </div>
+
+    <div class="slide" id="slide47">
+      <span class="tag">Slide 47</span>
+      <h2>Bounded Types</h2>
+      <div class="accent-line"></div>
+      <h3><T extends Number></h3>
+      <p>Restrict type parameter to Number or subclasses.</p>
+      <p>Allows safe usage of numeric operations.</p>
+    </div>
+
+    <div class="slide" id="slide48">
+      <span class="tag">Slide 48</span>
+      <h2>Multiple Bounds</h2>
+      <div class="accent-line"></div>
+      <h3><T extends Comparable<T> & Serializable></h3>
+      <p>Combine requirements using &.</p>
+      <p>Useful when types must satisfy multiple contracts.</p>
+    </div>
+
+    <div class="slide" id="slide49">
+      <span class="tag">Slide 49</span>
+      <h2>Wildcards</h2>
+      <div class="accent-line"></div>
+      <h3>?, ? extends, ? super</h3>
+      <p>PECS (Producer Extends, Consumer Super) guides wildcard choice.</p>
+      <p>? extends Number for reading values, ? super Integer for writing.</p>
+    </div>
+
+    <div class="slide" id="slide50">
+      <span class="tag">Slide 50</span>
+      <h2>Type Erasure</h2>
+      <div class="accent-line"></div>
+      <h3>Runtime view</h3>
+      <p>Generics vanish after compilation; runtime sees raw types.</p>
+      <p>Avoid instanceof parameterized types.</p>
+    </div>
+
+    <div class="slide" id="slide51">
+      <span class="tag">Slide 51</span>
+      <h2>Restrictions</h2>
+      <div class="accent-line"></div>
+      <h3>Limitations</h3>
+      <p>Cannot instantiate type parameters or create generic arrays.</p>
+      <p>Static methods must declare their own type parameters.</p>
+    </div>
+
+    <div class="slide" id="slide52">
+      <span class="tag">Slide 52</span>
+      <h2>Property Files</h2>
+      <div class="accent-line"></div>
+      <h3>config.properties</h3>
+      <p>Use java.util.Properties to load settings outside your code.</p>
+      <p>Store API keys, credentials, feature toggles securely.</p>
+      <div class="code-panel">
+        <button class="copy-btn">Copy</button>
+        <pre>Properties config = new Properties();
+try (InputStream in = Files.newInputStream(Paths.get("config.properties"))) {
+    config.load(in);
+}</pre>
+      </div>
+    </div>
+
+    <div class="slide" id="slide53">
+      <span class="tag">Slide 53</span>
+      <h2>Quiz</h2>
+      <div class="accent-line"></div>
+      <h3>Which set keeps insertion order?</h3>
+      <p>Answer: LinkedHashSet or LinkedHashMap retains insertion order.</p>
+    </div>
+
+    <div class="slide" id="slide54">
+      <span class="tag">Slide 54</span>
+      <h2>Debug Challenge</h2>
+      <div class="accent-line"></div>
+      <h3>ConcurrentModificationException</h3>
+      <p>Removing from a collection while iterating triggers CME.</p>
+      <p>Fix with Iterator.remove or copy entries before removing.</p>
+    </div>
+
+    <div class="slide" id="slide55">
+      <span class="tag">Slide 55</span>
+      <h2>Assignment</h2>
+      <div class="accent-line"></div>
+      <h3>Student Grade Manager</h3>
+      <p>Build Map<String,List<Integer>> storing grades, load from properties, validate entries, throw custom validation exception.</p>
+      <p>Log summary, explain failure, and push solution with README reflections.</p>
+    </div>
+
+    <div class="slide" id="slide56">
+      <span class="tag">Slide 56</span>
+      <h2>Best Practices</h2>
+      <div class="accent-line"></div>
+      <h3>Wrap and log</h3>
+      <p>Wrap underlying exceptions to add domain context before rethrowing.</p>
+      <p>Log only once with the full stack trace to prevent duplicates.</p>
+    </div>
+
+    <div class="slide" id="slide57">
+      <span class="tag">Slide 57</span>
+      <h2>Wrap-up</h2>
+      <div class="accent-line"></div>
+      <h3>Next steps</h3>
+      <p>Push labs to Git, capture observations, preview Day 4.</p>
+      <p>Share insights in the peer channel and plan follow-ups.</p>
+    </div>
+
+  </div>
+  <div class="nav">
+    <button id="prev">← Previous</button>
+    <button id="next">Next →</button>
+  </div>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+    const showSlide = () => {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      document.getElementById('prev').disabled = index === 0;
+      document.getElementById('next').disabled = index === slides.length - 1;
+    };
+    document.getElementById('next').addEventListener('click', () => {
+      if (index < slides.length - 1) {
+        index++;
+        showSlide();
+      }
+    });
+    document.getElementById('prev').addEventListener('click', () => {
+      if (index > 0) {
+        index--;
+        showSlide();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') document.getElementById('next').click();
+      if (event.key === 'ArrowLeft') document.getElementById('prev').click();
+    });
+    document.querySelectorAll('.copy-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        const pre = button.parentElement.querySelector('pre');
+        if (!pre) return;
+        const range = document.createRange();
+        range.selectNodeContents(pre);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+        button.textContent = 'Copied';
+        setTimeout(() => { button.textContent = 'Copy'; }, 1200);
+      });
+    });
+    showSlide();
+  </script>
+</body>
+</html>

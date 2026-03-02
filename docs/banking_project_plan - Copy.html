@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>15-Phase Banking Project Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#030711;
+      --panel:#0b1224;
+      --accent:#38bdf8;
+      --accent2:#f97316;
+      --border:#1c283d;
+      --text:#f4f7ff;
+      --muted:#94a3b8;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Space Grotesk',sans-serif;
+      background:linear-gradient(160deg,#01030a,#0b203f 60%,#0f2d5c);
+      color:var(--text);
+    }
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px 80px;
+    }
+    header{
+      margin-bottom:32px;
+    }
+    header h1{
+      margin:0;
+      font-size:2.8rem;
+    }
+    header p{
+      margin:10px 0 0;
+      color:var(--muted);
+      max-width:760px;
+    }
+    ol{
+      counter-reset:phase;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:20px;
+    }
+    li{
+      list-style:none;
+      background:var(--panel);
+      border-radius:20px;
+      border:1px solid var(--border);
+      padding:22px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.5);
+      position:relative;
+    }
+    li::before{
+      counter-increment:phase;
+      content:"Phase " counter(phase);
+      position:absolute;
+      top:-14px;
+      left:20px;
+      background:var(--accent);
+      padding:4px 12px;
+      border-radius:999px;
+      color:#030712;
+      font-size:0.8rem;
+      letter-spacing:0.5px;
+    }
+    li h2{
+      margin:0 0 6px;
+      font-size:1.3rem;
+      color:var(--accent2);
+    }
+    li p{
+      margin:0;
+      line-height:1.55;
+      color:var(--text);
+    }
+    footer{
+      margin-top:40px;
+      border-top:1px solid var(--border);
+      padding-top:18px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>15-Phase Banking Project Plan</h1>
+      <p>Sequential phases guide interns from Core Java modeling through SQL/PLSQL, Spring/Hibernate APIs, Git practices, and React/Node integration to deliver a complete banking application.</p>
+    </header>
+    <ol>
+      <li>
+        <h2>Domain Modeling</h2>
+        <p>Build `Customer`, `Account`, `Transaction`, and `StatementLine` classes/records with validation helpers and overrides so future layers reuse consistent structures.</p>
+      </li>
+      <li>
+        <h2>Business Rule Enforcement</h2>
+        <p>Create services (e.g., `TransactionService`) that throw `InsufficientFundsException` when debits exceed balance and cover the rules with JUnit 5 tests.</p>
+      </li>
+      <li>
+        <h2>Reporting Logic</h2>
+        <p>Implement a `StatementService` that sorts transactions, groups by type, and formats totals using comparators and collection pipelines.</p>
+      </li>
+      <li>
+        <h2>Git Process Documentation</h2>
+        <p>Document branching conventions, commit structure, PR checklist, and GitHub issue templates tailored to the banking workflow.</p>
+      </li>
+      <li>
+        <h2>Operation Interface Layer</h2>
+        <p>Introduce a `BankOperation` interface plus implementations (`FundTransfer`, `BillPayment`), then register them with a batch processor to exercise polymorphism.</p>
+      </li>
+      <li>
+        <h2>Exception Monitoring</h2>
+        <p>Capture exceptions thrown by service methods, tally them by type, and expose counts via an HTML report for visibility before the Spring layer integrates it.</p>
+      </li>
+      <li>
+        <h2>Configuration Loader</h2>
+        <p>Build a singleton that loads `application.properties`, honors environment overrides, and exposes typed getters (JDBC URL, API secrets).</p>
+      </li>
+      <li>
+        <h2>Ledger Schema (DDL)</h2>
+        <p>Write SQL for `accounts`, `transactions`, `ledgers`, and `alerts` tables with PK/FK constraints, indexes, and seed inserts representing the domain.</p>
+      </li>
+      <li>
+        <h2>Analytical SQL Queries</h2>
+        <p>Produce JOIN-based views/reports that compute daily balances and highlight overdrafts for reporting dashboards.</p>
+      </li>
+      <li>
+        <h2>PL/SQL Alert Procedure</h2>
+        <p>Implement a PL/SQL stored procedure that scans transfers >10k and populates an `alerts` table for compliance monitoring.</p>
+      </li>
+      <li>
+        <h2>JPA Entities & Relationships</h2>
+        <p>Map the schema to Spring entities with proper relationships and seed initial data via `CommandLineRunner` for the REST API.</p>
+      </li>
+      <li>
+        <h2>Spring REST API</h2>
+        <p>Expose `/accounts`, `/transactions`, `/alerts` controllers using DTOs, validation annotations, and structured error handling tied to the exception layer.</p>
+      </li>
+      <li>
+        <h2>Spring Data + Security</h2>
+        <p>Add repository methods (`@Query`) for high-value transactions and balances, then secure endpoints so only `ROLE_TELLER` can create transactions.</p>
+      </li>
+      <li>
+        <h2>React Frontend</h2>
+        <p>Build a React dashboard that consumes the Spring API, shows balances/alerts, and includes a transfer form with validation using hooks.</p>
+      </li>
+      <li>
+        <h2>Redux & Integration Story</h2>
+        <p>Manage accounts/alerts via Redux Toolkit slices, connect components for live alert counts, and document the end-to-end flow from onboarding through alert generation.</p>
+      </li>
+    </ol>
+    <footer>Each phase must include README notes, tests or SQL scripts, demo instructions, and be delivered via Git branches following the documented workflow. Together they form a production-like banking application.</footer>
+  </main>
+</body>
+</html>

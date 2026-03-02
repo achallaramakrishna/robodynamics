@@ -23,7 +23,9 @@
     }
 
     * { box-sizing: border-box; }
+    *::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
     html, body { height: 100%; }
+    html { scrollbar-width: none; -ms-overflow-style: none; }
     body {
       margin: 0;
       font-family: "Plus Jakarta Sans", "Trebuchet MS", sans-serif;
@@ -37,11 +39,11 @@
 
     .shell {
       width: min(1180px, 97vw);
-      margin: 6px auto;
-      height: calc(100dvh - 12px);
+      margin: 4px auto;
+      height: calc(100dvh - 8px);
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
     }
 
     h1, h2, h3 {
@@ -65,8 +67,8 @@
     .hero p {
       margin: 2px 0 0;
       color: rgba(241, 247, 255, 0.94);
-      line-height: 1.3;
-      font-size: 12px;
+      line-height: 1.35;
+      font-size: 14px;
     }
 
     .kpi-grid {
@@ -87,7 +89,7 @@
     }
 
     .kpi .label {
-      font-size: 10px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .06em;
       opacity: .9;
@@ -96,7 +98,7 @@
 
     .kpi .value {
       font-weight: 800;
-      font-size: 13px;
+      font-size: 15px;
     }
 
     .panel {
@@ -104,38 +106,42 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-      padding: 10px;
+      padding: 10px 14px;
       flex: 1;
       min-height: 0;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      overflow: hidden;
+      gap: 4px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
+    .panel::-webkit-scrollbar { width: 0; height: 0; display: none; }
 
     .panel-top {
       display: grid;
-      gap: 8px;
-      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4px;
+      grid-template-columns: 1fr;
       align-items: start;
     }
 
     .progress-wrap {
       display: grid;
-      gap: 6px;
+      gap: 4px;
     }
 
     .progress-meta {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--ink-700);
       font-weight: 600;
     }
 
     .progress-track {
-      height: 11px;
+      height: 8px;
       border-radius: 999px;
       background: #e2e8f0;
       overflow: hidden;
@@ -149,39 +155,30 @@
     }
 
     .adaptive-note {
-      background: #f8fafc;
-      border: 1px solid #d8e2ec;
-      border-radius: 11px;
-      padding: 8px 10px;
-      color: var(--ink-700);
-      font-size: 12px;
-      line-height: 1.4;
+      display: none;
     }
 
     .adaptive-note strong { color: var(--ink-900); }
 
     .journey-strip {
-      margin-top: 6px;
       border: 1px solid #d9e4ee;
-      border-radius: 12px;
+      border-radius: 10px;
       background: #f9fbfe;
-      padding: 6px 8px;
+      padding: 4px 8px;
       display: grid;
-      gap: 6px;
+      gap: 0;
     }
 
     .intent-panel {
-      margin-top: 6px;
       border: 1px solid #dbe6ef;
-      border-radius: 12px;
+      border-radius: 10px;
       background: #f8fbff;
-      overflow: hidden;
     }
 
     .intent-panel summary {
       cursor: pointer;
-      padding: 7px 10px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
       font-weight: 800;
       color: #0f172a;
       list-style: none;
@@ -198,10 +195,10 @@
     }
 
     .intent-help {
-      font-size: 11px;
+      font-size: 13px;
       color: #64748b;
       font-weight: 600;
-      line-height: 1.35;
+      line-height: 1.4;
     }
 
     .intent-chips {
@@ -215,9 +212,9 @@
       border-radius: 999px;
       background: #ffffff;
       color: #334155;
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 5px 9px;
+      padding: 6px 11px;
       cursor: pointer;
       line-height: 1.2;
     }
@@ -230,7 +227,7 @@
     }
 
     .intent-count {
-      font-size: 11px;
+      font-size: 13px;
       color: #64748b;
       font-weight: 700;
     }
@@ -257,10 +254,10 @@
     }
 
     .signal-label {
-      font-size: 11px;
+      font-size: 13px;
       color: #334155;
       font-weight: 700;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .signal-choices {
@@ -274,8 +271,8 @@
       background: #f8fafc;
       color: #475569;
       border-radius: 8px;
-      padding: 5px 8px;
-      font-size: 11px;
+      padding: 6px 10px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       line-height: 1.2;
@@ -293,9 +290,15 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--ink-700);
       font-weight: 700;
+    }
+
+    .sections-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
     }
 
     .journey-controls {
@@ -310,8 +313,8 @@
       background: #eff6ff;
       color: #1d4ed8;
       border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
+      padding: 6px 12px;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       line-height: 1;
@@ -324,15 +327,32 @@
     }
 
     .section-tabs-shell {
-      margin-top: 4px;
+      margin-top: 2px;
       border: 1px solid #dbe6ef;
-      border-radius: 12px;
+      border-radius: 10px;
       background: #f8fbff;
-      padding: 6px;
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 6px;
-      overflow: hidden;
+      padding: 4px 4px 6px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #94a3b8 #e2e8f0;
+    }
+
+    .section-tabs-shell::-webkit-scrollbar {
+      height: 8px !important;
+      width: 8px !important;
+      display: block !important;
+    }
+    .section-tabs-shell::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 999px;
+    }
+    .section-tabs-shell::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 999px;
     }
 
     .section-tab-btn {
@@ -341,39 +361,37 @@
       --section-bg: #ffffff;
       --section-soft: #dbe6ef;
       border: 1px solid var(--section-soft);
-      border-radius: 10px;
+      border-radius: 8px;
       background: var(--section-bg);
-      padding: 7px 9px;
+      padding: 5px 8px;
       text-align: left;
       cursor: pointer;
       display: grid;
-      gap: 5px;
+      gap: 3px;
       color: var(--ink-700);
       font-family: inherit;
-      min-width: 0;
-      width: 100%;
+      min-width: 110px;
+      flex: 0 0 auto;
     }
 
     .section-tab-btn .name {
       color: var(--section-accent);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
-      line-height: 1.25;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      line-height: 1.2;
+      white-space: nowrap;
       overflow: hidden;
-      min-height: 2.5em;
+      text-overflow: ellipsis;
     }
 
     .section-tab-btn .meta {
       color: rgba(15, 23, 42, 0.72);
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
     }
 
     .section-tab-progress {
-      height: 5px;
+      height: 4px;
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.12);
       overflow: hidden;
@@ -424,23 +442,24 @@
       background: #f0fdf4;
       color: #166534;
       border-radius: 10px;
-      padding: 7px 9px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .question-shell {
-      margin-top: 4px;
+      margin-top: 2px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 8px;
+      padding: 12px 16px;
       background: linear-gradient(180deg, #ffffff, #f9fcff);
       flex: 1;
       min-height: 0;
-      display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr);
+      display: flex;
+      flex-direction: column;
       gap: 8px;
-      overflow: hidden;
+      overflow-y: visible;
+      overflow-x: hidden;
     }
 
     .question-head {
@@ -458,54 +477,108 @@
       display: none !important;
     }
 
-    .q-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .q-meta { display: none; }
 
     .question-tag {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      border-radius: 999px;
-      padding: 5px 9px;
-      background: var(--soft-accent);
-      color: var(--brand-secondary);
-      font-size: 11px;
-      font-weight: 700;
+      width: 100%;
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: #e2e8f0;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .question-shell.section-core-aptitude {
+      border-color: #bfdbfe;
+      background: linear-gradient(180deg, #eff6ff 0%, #f8fbff 100%);
+    }
+    .question-shell.section-core-aptitude .question-tag {
+      background: #dbeafe;
+      color: #1e3a8a;
+    }
+    .question-shell.section-applied-challenge {
+      border-color: #fdba74;
+      background: linear-gradient(180deg, #fff7ed 0%, #fffaf5 100%);
+    }
+    .question-shell.section-applied-challenge .question-tag {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+    .question-shell.section-interest-work {
+      border-color: #99f6e4;
+      background: linear-gradient(180deg, #ecfeff 0%, #f7feff 100%);
+    }
+    .question-shell.section-interest-work .question-tag {
+      background: #ccfbf1;
+      color: #115e59;
+    }
+    .question-shell.section-values-motivation {
+      border-color: #fde68a;
+      background: linear-gradient(180deg, #fefce8 0%, #fffdf2 100%);
+    }
+    .question-shell.section-values-motivation .question-tag {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .question-shell.section-learning-behavior {
+      border-color: #86efac;
+      background: linear-gradient(180deg, #f0fdf4 0%, #f7fef9 100%);
+    }
+    .question-shell.section-learning-behavior .question-tag {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .question-shell.section-ai-readiness {
+      border-color: #c7d2fe;
+      background: linear-gradient(180deg, #eef2ff 0%, #f6f8ff 100%);
+    }
+    .question-shell.section-ai-readiness .question-tag {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+    .question-shell.section-career-reality {
+      border-color: #fda4af;
+      background: linear-gradient(180deg, #fff1f2 0%, #fff6f7 100%);
+    }
+    .question-shell.section-career-reality .question-tag {
+      background: #ffe4e6;
+      color: #9f1239;
     }
 
     .sprint-tag {
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border: 1px solid #d8e2ec;
       color: var(--ink-700);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
     }
 
     .question-title {
-      margin-top: 2px;
-      font-size: clamp(16px, 1.55vw, 19px);
-      line-height: 1.28;
+      margin-top: 4px;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.32;
       color: var(--ink-900);
     }
 
     .section-tip {
-      margin-top: 2px;
+      margin-top: 4px;
       color: var(--ink-500);
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .question-stem {
       border: 1px solid #dbe6ef;
-      border-radius: 11px;
+      border-radius: 12px;
       background: linear-gradient(180deg, #ffffff, #f7fbff);
-      padding: 8px 10px;
+      padding: 12px 14px;
     }
 
     .media {
@@ -523,40 +596,43 @@
 
     .question-main {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 210px;
-      gap: 8px;
-      min-height: 0;
-      align-items: stretch;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-items: start;
     }
 
     .options {
       display: grid;
-      gap: 8px;
+      gap: 10px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       align-content: start;
-      min-height: 0;
+    }
+    .options.options-single {
+      grid-template-columns: 1fr;
     }
 
     .option {
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 7px 8px;
+      border: 2px solid #e2e8f0;
+      border-left: 4px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 11px 14px;
       display: flex;
-      gap: 8px;
+      gap: 12px;
       align-items: center;
       cursor: pointer;
-      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-      background: #fff;
-      font-size: 13px;
-      line-height: 1.3;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease, background .2s ease;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+      font-size: 16px;
+      line-height: 1.35;
       position: relative;
-      min-height: 58px;
     }
 
     .option:hover {
-      border-color: var(--brand-primary);
+      border-color: #93c5fd;
+      border-left-color: var(--brand-primary);
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(15, 118, 110, .12);
+      box-shadow: 0 8px 20px rgba(15, 118, 110, .1);
+      background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
     }
 
     .option input {
@@ -568,36 +644,38 @@
     .option-body {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 8px;
+      gap: 12px;
       align-items: center;
       width: 100%;
     }
 
     .option-code {
-      width: 27px;
-      height: 27px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
-      border: 1px solid #cbd5e1;
-      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      background: #f1f5f9;
       color: #334155;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 800;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex: 0 0 27px;
+      flex: 0 0 34px;
+      transition: all .2s ease;
     }
 
     .option-text {
       color: #0f172a;
       font-weight: 600;
-      line-height: 1.28;
+      line-height: 1.35;
     }
 
     .option.selected {
       border-color: var(--brand-primary);
-      box-shadow: 0 10px 20px rgba(15, 118, 110, .16);
-      background: #effcfb;
+      border-left-color: var(--brand-primary);
+      box-shadow: 0 8px 24px rgba(15, 118, 110, .16);
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 100%);
     }
 
     .option.selected .option-code {
@@ -606,54 +684,142 @@
       color: #ffffff;
     }
 
+    .rank-help {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .rank-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .rank-item {
+      border: 2px solid #dbe6ef;
+      border-left: 4px solid #94a3b8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 38px minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    .rank-pos {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 2px solid #0f766e;
+      background: #ecfdf5;
+      color: #065f46;
+      font-size: 14px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rank-text {
+      color: #0f172a;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .rank-actions {
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .rank-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #334155;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rank-btn:hover {
+      border-color: #93c5fd;
+      background: #f0f9ff;
+    }
+
+    .rank-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
     .confidence {
       margin-top: 0;
       border: 1px solid #dbe6ef;
-      border-radius: 11px;
+      border-radius: 10px;
       background: #f8fbff;
-      padding: 7px;
-      display: grid;
-      gap: 7px;
-      align-content: start;
+      padding: 8px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .confidence .label {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--ink-700);
-      line-height: 1.25;
+      line-height: 1.2;
+      white-space: nowrap;
     }
 
     .confidence-row {
-      display: grid;
-      gap: 6px;
-      grid-template-columns: 1fr;
+      display: flex;
+      gap: 8px;
+      flex: 1;
     }
 
     .conf-btn {
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      padding: 8px 9px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 7px 16px;
       background: #fff;
       color: var(--ink-700);
       font-weight: 700;
-      font-size: 12px;
+      font-size: 14px;
       cursor: pointer;
-      text-align: left;
+      text-align: center;
+      transition: all .2s ease;
+      flex: 1;
+    }
+
+    .conf-btn:hover {
+      border-color: #93c5fd;
+      background: #f0f9ff;
     }
 
     .conf-btn.active {
       border-color: var(--brand-primary);
       background: var(--soft-accent);
       color: var(--brand-secondary);
+      box-shadow: 0 4px 12px rgba(15, 118, 110, .12);
     }
 
     .footer-row {
-      margin-top: 4px;
+      margin-top: 2px;
       display: flex;
       justify-content: space-between;
       gap: 8px;
       flex-wrap: wrap;
+      flex-shrink: 0;
     }
 
     .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -662,12 +828,15 @@
       text-decoration: none;
       border: 0;
       border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 13px;
+      padding: 10px 18px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
+      transition: transform .15s ease, box-shadow .15s ease;
     }
+
+    .btn:hover { transform: translateY(-1px); }
 
     .btn-primary {
       background: var(--brand-primary);
@@ -691,16 +860,88 @@
       background: var(--warn-bg);
       color: var(--warn-ink);
       border-radius: 10px;
-      padding: 8px 10px;
-      font-size: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
       font-weight: 600;
     }
 
+    .story-insight {
+      margin-top: 8px;
+      border: 1px solid #dbe6ef;
+      border-radius: 10px;
+      background: #f8fbff;
+      padding: 8px 10px;
+      display: grid;
+      gap: 8px;
+      max-height: min(34vh, 300px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: #94a3b8 #e2e8f0;
+    }
+    .story-insight::-webkit-scrollbar {
+      height: 8px !important;
+      width: 8px !important;
+      display: block !important;
+    }
+    .story-insight::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 999px;
+    }
+    .story-insight::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 999px;
+    }
+
+    .story-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .story-note {
+      font-size: 12px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .story-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr;
+    }
+
+    .story-field {
+      display: grid;
+      gap: 4px;
+    }
+
+    .story-field span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .story-field textarea {
+      width: 100%;
+      resize: vertical;
+      min-height: 64px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1.35;
+      color: #0f172a;
+      background: #ffffff;
+    }
+
     .micro-tip {
-      margin-top: 2px;
-      font-size: 11px;
+      margin-top: 1px;
+      font-size: 12px;
       color: var(--ink-500);
       text-align: right;
+      flex-shrink: 0;
     }
 
     .muted { color: var(--ink-500); }
@@ -709,38 +950,80 @@
     .powered {
       text-align: right;
       color: var(--ink-500);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
     }
 
+    /* ===== Tablet (max 980px) ===== */
     @media (max-width: 980px) {
-      body { overflow: auto; }
-      .shell {
-        height: auto;
-        min-height: 100vh;
-        margin: 10px auto;
-      }
+      body { overflow: hidden; }
+      .shell { height: calc(100dvh - 8px); min-height: 0; }
       .hero { grid-template-columns: 1fr; }
-      .panel-top { grid-template-columns: 1fr; }
-      .section-tabs-shell {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        overflow-y: hidden;
-      }
-      .section-tab-btn {
-        min-width: 146px;
-      }
+      .panel { overflow-y: auto; overflow-x: hidden; }
+      .question-shell { overflow-y: visible; flex: 1; }
       .question-head { grid-template-columns: 1fr; }
       .question-main { grid-template-columns: 1fr; }
+      .options { grid-template-columns: 1fr; }
+      .story-grid { grid-template-columns: 1fr; }
       .question-media-slot { justify-content: flex-start; }
       .media-compact { width: 100%; max-height: 220px; }
-      .options { grid-template-columns: 1fr; }
-      .confidence-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .conf-btn { text-align: center; }
       .micro-tip { text-align: left; }
       .signal-grid { grid-template-columns: 1fr; }
       .subject-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Mobile (max 640px) ===== */
+    @media (max-width: 640px) {
+      .shell { width: 100vw; padding: 0 6px; gap: 4px; }
+      .hero { border-radius: 14px; padding: 8px 10px; gap: 6px; }
+      .hero h1 { font-size: 18px; }
+      .hero p { font-size: 13px; }
+      .kpi { padding: 5px 8px; }
+      .kpi .label { font-size: 10px; }
+      .kpi .value { font-size: 13px; }
+      .panel { padding: 8px; border-radius: 14px; }
+      .progress-meta { font-size: 13px; }
+      .section-tab-btn { min-width: 100px; padding: 4px 6px; }
+      .section-tab-btn .name { font-size: 11px; }
+      .section-tab-btn .meta { font-size: 10px; }
+      .question-shell { padding: 10px; border-radius: 10px; gap: 6px; }
+      .question-title { font-size: 18px; }
+      .section-tip { font-size: 13px; }
+      .question-stem { padding: 8px 10px; }
+      .option { padding: 10px 12px; font-size: 15px; border-radius: 10px; }
+      .option-code { width: 30px; height: 30px; flex: 0 0 30px; font-size: 13px; }
+      .option-body { gap: 10px; }
+      .rank-item { grid-template-columns: 32px minmax(0, 1fr) auto; padding: 9px 10px; }
+      .rank-pos { width: 28px; height: 28px; font-size: 13px; }
+      .rank-text { font-size: 14px; }
+      .rank-btn { width: 30px; height: 30px; font-size: 14px; }
+      .confidence { padding: 6px 10px; }
+      .confidence .label { font-size: 13px; }
+      .conf-btn { font-size: 13px; padding: 6px 10px; }
+      .btn { font-size: 14px; padding: 9px 14px; }
+      .micro-tip { font-size: 11px; }
+      .journey-head { font-size: 13px; }
+      .voice-toggle { font-size: 12px; padding: 5px 10px; }
+      .intent-panel summary { font-size: 13px; }
+      .intent-chip { font-size: 12px; }
+      .signal-label { font-size: 12px; }
+      .signal-btn { font-size: 12px; }
+      .warn-strip { font-size: 13px; }
+    }
+
+    /* ===== Small Mobile (max 400px) ===== */
+    @media (max-width: 400px) {
+      .shell { padding: 0 4px; }
+      .hero { padding: 6px 8px; }
+      .hero h1 { font-size: 16px; }
+      .kpi-grid { gap: 4px; }
+      .panel { padding: 6px; }
+      .question-shell { padding: 8px; }
+      .question-title { font-size: 16px; }
+      .option { padding: 8px 10px; font-size: 14px; }
+      .option-code { width: 28px; height: 28px; flex: 0 0 28px; font-size: 12px; }
+      .conf-btn { font-size: 12px; padding: 5px 8px; }
+      .section-tab-btn { min-width: 85px; }
     }
   </style>
 </head>
@@ -792,14 +1075,14 @@
       </div>
       <div class="journey-strip">
         <div class="journey-head">
-          <span>Sections</span>
+          <span id="sectionsLabel" class="sections-label">Sections</span>
           <div class="journey-controls">
             <span id="etaLabel">Estimated time left: --</span>
             <button type="button" id="voiceToggleBtn" class="voice-toggle">Voice Coach: On</button>
           </div>
         </div>
       </div>
-      <details class="intent-panel">
+      <details id="intentPanel" class="intent-panel hidden">
         <summary>Career Direction Signals (Optional)</summary>
         <div class="intent-body">
           <div class="intent-help">
@@ -823,6 +1106,28 @@
           </c:if>
         </div>
       </c:if>
+      <c:if test="${restarted}">
+        <div class="warn-strip" style="margin-top:10px;background:#f0fdf4;border-color:#bbf7d0;color:#166534;">
+          Fresh attempt started successfully.
+        </div>
+      </c:if>
+      <div class="footer-row" style="margin-top:10px;">
+        <div class="btn-row">
+          <c:choose>
+            <c:when test="${embedMode}">
+              <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/student/intake?embed=1&company=${companyCode}">Update Profile and Grade</a>
+            </c:when>
+            <c:otherwise>
+              <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath/student/intake">Update Profile and Grade</a>
+            </c:otherwise>
+          </c:choose>
+        </div>
+        <form method="post" action="${pageContext.request.contextPath}/aptipath/student/test/restart" class="btn-row" style="margin:0;">
+          <input type="hidden" name="embed" value="${embedMode ? 1 : 0}">
+          <input type="hidden" name="company" value="${companyCode}">
+          <button class="btn btn-secondary" type="submit" onclick="return confirm('Restart test with a fresh question set? Current in-progress attempt will be closed.');">Restart Test</button>
+        </form>
+      </div>
 
       <div id="questionRoot" class="question-shell">
         <div class="q-meta">
@@ -866,6 +1171,25 @@
         <input type="hidden" name="company" value="${companyCode}">
         <div id="hiddenAnswers"></div>
 
+        <div id="storyInsightBlock" class="story-insight hidden">
+          <div class="story-title">Story Insight (Required)</div>
+          <div class="story-note">Write at least 35 characters in each box before submit.</div>
+          <div class="story-grid">
+            <label class="story-field">
+              <span>Core challenge noticed</span>
+              <textarea name="THINK_STORY_SUMMARY" id="thinkStorySummary" placeholder="Describe one real challenge you noticed in your recent learning journey."><c:out value="${thinkingStorySummary}" /></textarea>
+            </label>
+            <label class="story-field">
+              <span>Decision logic</span>
+              <textarea name="THINK_STORY_DECISION" id="thinkStoryDecision" placeholder="Explain how you decided what to do next and why."><c:out value="${thinkingStoryDecision}" /></textarea>
+            </label>
+            <label class="story-field">
+              <span>Action plan</span>
+              <textarea name="THINK_STORY_ACTION" id="thinkStoryAction" placeholder="State the exact action you will take in the next 7 days."><c:out value="${thinkingStoryAction}" /></textarea>
+            </label>
+          </div>
+        </div>
+
         <div class="footer-row">
           <div class="btn-row">
             <button id="prevBtn" class="btn btn-secondary" type="button">Previous</button>
@@ -884,7 +1208,7 @@
           </div>
         </div>
       </form>
-      <div class="micro-tip">Tip: Keyboard shortcuts 1-4 can select options quickly.</div>
+      
     </section>
 
     <div class="powered">
@@ -915,7 +1239,7 @@
         .filter(q => q && q.questionCode)
         .sort((a, b) => (a.sequenceNo || 0) - (b.sequenceNo || 0));
       const poolCodes = sorted.map(q => q.questionCode);
-      const sectionTargets = {
+      const baseSectionTargets = {
         CORE_APTITUDE: 18,
         APPLIED_CHALLENGE: 14,
         INTEREST_WORK: 9,
@@ -924,7 +1248,7 @@
         AI_READINESS: 6,
         CAREER_REALITY: 5
       };
-      const sectionOrder = [
+      const preferredSectionOrder = [
         'CORE_APTITUDE',
         'APPLIED_CHALLENGE',
         'INTEREST_WORK',
@@ -940,7 +1264,11 @@
         VALUES_MOTIVATION: 'Values and Motivation',
         LEARNING_BEHAVIOR: 'Learning Behavior',
         AI_READINESS: 'AI-era Readiness',
-        CAREER_REALITY: 'Career Reality'
+        CAREER_REALITY: 'Career Reality',
+        GENERAL_AWARENESS: 'General Awareness',
+        REASONING_IQ: 'Reasoning IQ',
+        STEM_FOUNDATION: 'STEM Foundation',
+        BIOLOGY_FOUNDATION: 'Biology Foundation'
       };
       const sectionInsights = {
         CORE_APTITUDE: 'This section builds your foundation in reasoning and problem-solving.',
@@ -949,10 +1277,16 @@
         VALUES_MOTIVATION: 'This section maps your priorities and long-term motivation.',
         LEARNING_BEHAVIOR: 'This section assesses your learning routine and consistency.',
         AI_READINESS: 'This section checks how responsibly and effectively you use AI tools.',
-        CAREER_REALITY: 'This section looks at resilience, clarity, and steady decision-making.'
+        CAREER_REALITY: 'This section looks at resilience, clarity, and steady decision-making.',
+        GENERAL_AWARENESS: 'This section checks practical awareness across current and social contexts.',
+        REASONING_IQ: 'This section checks abstract reasoning depth and pattern recognition quality.',
+        STEM_FOUNDATION: 'This section checks strength in core science and math fundamentals.',
+        BIOLOGY_FOUNDATION: 'This section checks your baseline comfort with biological concepts.'
       };
+      const sectionOrder = buildDynamicSectionOrder(sorted, preferredSectionOrder);
+      const sectionTargets = buildDynamicSectionTargets(sorted, sectionOrder, baseSectionTargets);
       const plannedQuestionCount = Math.min(
-        Object.values(sectionTargets).reduce((acc, value) => acc + value, 0),
+        computePlannedQuestionCount(sorted, sectionOrder, sectionTargets),
         poolCodes.length
       );
       const sectionPools = buildSectionPools(sorted);
@@ -964,6 +1298,7 @@
       let branchModeBySection = {};
       let lastSignalBySection = {};
       let currentIndex = 0;
+      let isSubmitStep = false;
       let answers = Object.assign({}, saved);
       let confidenceByQuestion = {};
       let timeSpent = {};
@@ -975,11 +1310,13 @@
       const questionCountLabel = document.getElementById('questionCountLabel');
       const answerCountLabel = document.getElementById('answerCountLabel');
       const progressFill = document.getElementById('progressFill');
+      const sectionsLabel = document.getElementById('sectionsLabel');
       const questionTag = document.getElementById('questionTag');
       const questionTitle = document.getElementById('questionTitle');
       const sectionTip = document.getElementById('sectionTip');
       const questionHead = document.getElementById('questionHead');
       const questionMedia = document.getElementById('questionMedia');
+      const questionRoot = document.getElementById('questionRoot');
       const optionList = document.getElementById('optionList');
       const confButtons = Array.from(document.querySelectorAll('.conf-btn'));
       const prevBtn = document.getElementById('prevBtn');
@@ -1013,6 +1350,8 @@
       const subjectChemistryField = document.getElementById('subjectChemistry');
       const subjectBiologyField = document.getElementById('subjectBiology');
       const subjectLanguageField = document.getElementById('subjectLanguage');
+      const storyInsightBlock = document.getElementById('storyInsightBlock');
+      const intentPanel = document.getElementById('intentPanel');
 
       const voicePrefKey = 'aptipath_voice_coach_enabled';
       let voiceCoachSupported = false;
@@ -1107,6 +1446,170 @@
         return { code: String.fromCharCode(65 + index), label: String(option) };
       }
 
+      function normalizedQuestionType(question) {
+        if (!question) return '';
+        const raw = question.questionType || question.question_type || '';
+        return String(raw).trim().toUpperCase().replace(/[\s-]+/g, '_');
+      }
+
+      function isRankOrderQuestion(question) {
+        const type = normalizedQuestionType(question);
+        if (type === 'RANK_ORDER' || type === 'RANKING') {
+          return true;
+        }
+        const text = String((question && question.questionText) || '').trim().toUpperCase();
+        return text.indexOf('RANK THESE') === 0 || text.indexOf('RANK ') === 0;
+      }
+
+      function mapRankTokenToCode(token, optionItems) {
+        const rawToken = String(token || '').trim();
+        if (!rawToken) return '';
+        const cleaned = rawToken.replace(/^\d+\s*[\).:-]\s*/, '').trim();
+        if (!cleaned) return '';
+        const tokenUpper = cleaned.toUpperCase();
+
+        for (let i = 0; i < optionItems.length; i++) {
+          const codeUpper = String(optionItems[i].code || '').toUpperCase();
+          if (codeUpper && tokenUpper === codeUpper) {
+            return codeUpper;
+          }
+        }
+        for (let i = 0; i < optionItems.length; i++) {
+          const labelUpper = String(optionItems[i].label || '').trim().toUpperCase();
+          const codeUpper = String(optionItems[i].code || '').toUpperCase();
+          if (labelUpper && tokenUpper === labelUpper) {
+            return codeUpper;
+          }
+        }
+        return '';
+      }
+
+      function parseRankAnswer(answerValue, optionItems) {
+        const fallback = optionItems.map(item => String(item.code || '').toUpperCase()).filter(Boolean);
+        const raw = String(answerValue || '').trim();
+        if (!raw) return fallback.slice();
+
+        const validSet = new Set(fallback);
+        const ordered = [];
+        const pushUnique = function(code) {
+          const normalized = String(code || '').toUpperCase();
+          if (!normalized || !validSet.has(normalized)) return;
+          if (ordered.indexOf(normalized) >= 0) return;
+          ordered.push(normalized);
+        };
+
+        const pairRanks = [];
+        raw.split(/[|,>]/).forEach(part => {
+          const chunk = String(part || '').trim();
+          if (!chunk) return;
+          const pair = chunk.match(/^(.+?)\s*[:=]\s*(\d+)$/);
+          if (!pair) return;
+          const code = mapRankTokenToCode(pair[1], optionItems);
+          const pos = Number(pair[2]);
+          if (!code || !Number.isFinite(pos) || pos <= 0) return;
+          pairRanks.push({ code: code, pos: pos });
+        });
+        if (pairRanks.length) {
+          pairRanks.sort((a, b) => a.pos - b.pos);
+          pairRanks.forEach(item => pushUnique(item.code));
+        }
+
+        if (!ordered.length) {
+          raw.split(/[|,>]/).forEach(part => {
+            const code = mapRankTokenToCode(part, optionItems);
+            pushUnique(code);
+          });
+        }
+
+        if (!ordered.length) {
+          const single = mapRankTokenToCode(raw, optionItems);
+          pushUnique(single);
+        }
+
+        fallback.forEach(code => pushUnique(code));
+        return ordered;
+      }
+
+      function encodeRankAnswer(orderCodes) {
+        return (Array.isArray(orderCodes) ? orderCodes : []).join('>');
+      }
+
+      function renderRankOrderQuestion(question, rawOptions, selectedValue) {
+        const optionItems = rawOptions.map((rawOption, idx) => {
+          const option = normalizeOption(rawOption, idx);
+          return {
+            code: String(option.code || '').toUpperCase(),
+            label: String(option.label || '')
+          };
+        }).filter(item => item.code);
+        if (!optionItems.length) {
+          optionList.innerHTML = '';
+          return false;
+        }
+
+        const optionByCode = {};
+        optionItems.forEach(item => {
+          optionByCode[item.code] = item;
+        });
+        let order = parseRankAnswer(selectedValue, optionItems);
+
+        function syncRankAnswerAndProgress(saveNow) {
+          const encoded = encodeRankAnswer(order);
+          answers[question.questionCode] = encoded;
+          updateProgress();
+          if (saveNow) {
+            saveState();
+          }
+        }
+
+        function moveRankItem(index, direction) {
+          const target = index + direction;
+          if (target < 0 || target >= order.length) return;
+          const next = order.slice();
+          const swap = next[index];
+          next[index] = next[target];
+          next[target] = swap;
+          order = next;
+          drawRankList();
+          syncRankAnswerAndProgress(true);
+        }
+
+        function drawRankList() {
+          optionList.innerHTML =
+            '<div class="rank-help">Tap the arrows to set rank order. 1 is most enjoyable.</div>' +
+            '<div class="rank-list">' +
+            order.map((code, idx) => {
+              const item = optionByCode[code] || { label: code };
+              const upDisabled = idx === 0 ? 'disabled' : '';
+              const downDisabled = idx === order.length - 1 ? 'disabled' : '';
+              return (
+                '<div class="rank-item" data-index="' + idx + '">' +
+                  '<span class="rank-pos">' + (idx + 1) + '</span>' +
+                  '<span class="rank-text">' + sanitize(item.label) + '</span>' +
+                  '<span class="rank-actions">' +
+                    '<button type="button" class="rank-btn" data-dir="up" data-index="' + idx + '" ' + upDisabled + ' aria-label="Move up">&#8593;</button>' +
+                    '<button type="button" class="rank-btn" data-dir="down" data-index="' + idx + '" ' + downDisabled + ' aria-label="Move down">&#8595;</button>' +
+                  '</span>' +
+                '</div>'
+              );
+            }).join('') +
+            '</div>';
+
+          optionList.querySelectorAll('.rank-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const index = Number(this.getAttribute('data-index'));
+              const dir = this.getAttribute('data-dir') === 'up' ? -1 : 1;
+              if (!Number.isFinite(index)) return;
+              moveRankItem(index, dir);
+            });
+          });
+        }
+
+        drawRankList();
+        syncRankAnswerAndProgress(false);
+        return true;
+      }
+
       function sectionTipText(sectionCode) {
         const section = String(sectionCode || '').toUpperCase();
         switch (section) {
@@ -1117,6 +1620,10 @@
           case 'LEARNING_BEHAVIOR': return 'This section checks consistency, revision habits, and learning discipline.';
           case 'AI_READINESS': return 'This section checks how well you use AI tools with critical thinking.';
           case 'CAREER_REALITY': return 'This section checks resilience, clarity, and readiness for effort.';
+          case 'GENERAL_AWARENESS': return 'This section checks practical awareness and context understanding.';
+          case 'REASONING_IQ': return 'This section checks abstract reasoning and pattern intelligence.';
+          case 'STEM_FOUNDATION': return 'This section checks fundamentals across science and mathematics.';
+          case 'BIOLOGY_FOUNDATION': return 'This section checks foundational biology readiness.';
           case 'LOGIC': return 'This question checks reasoning clarity and pattern thinking.';
           case 'NUMERIC': return 'This question checks number sense and applied math thinking.';
           case 'SPATIAL': return 'This question checks visualization and structure understanding.';
@@ -1139,9 +1646,71 @@
         return section;
       }
 
+      function countQuestionsInListBySection(questions, sectionCode) {
+        const canonical = canonicalSection(sectionCode);
+        return (questions || []).reduce((count, q) => {
+          if (!q) return count;
+          return canonicalSection(q.sectionCode) === canonical ? count + 1 : count;
+        }, 0);
+      }
+
+      function buildDynamicSectionOrder(questions, preferredOrder) {
+        const ordered = [];
+        const seen = new Set();
+        (preferredOrder || []).forEach(section => {
+          const canonical = canonicalSection(section);
+          if (!canonical || seen.has(canonical)) return;
+          if (countQuestionsInListBySection(questions, canonical) <= 0) return;
+          ordered.push(canonical);
+          seen.add(canonical);
+        });
+        (questions || []).forEach(q => {
+          const canonical = canonicalSection(q && q.sectionCode);
+          if (!canonical || seen.has(canonical)) return;
+          ordered.push(canonical);
+          seen.add(canonical);
+        });
+        return ordered;
+      }
+
+      function buildDynamicSectionTargets(questions, dynamicOrder, baseTargets) {
+        const targets = Object.assign({}, baseTargets || {});
+        (dynamicOrder || []).forEach(section => {
+          if (typeof targets[section] === 'number' && targets[section] > 0) return;
+          targets[section] = countQuestionsInListBySection(questions, section);
+        });
+        return targets;
+      }
+
+      function computePlannedQuestionCount(questions, dynamicOrder, targets) {
+        return (dynamicOrder || []).reduce((sum, section) => {
+          const total = countQuestionsInListBySection(questions, section);
+          const target = Math.min(Number(targets[section] || total), total);
+          return sum + Math.max(0, target);
+        }, 0);
+      }
+
       function sectionName(sectionCode) {
         const canonical = canonicalSection(sectionCode);
         return sectionNames[canonical] || canonical || 'Guided Section';
+      }
+
+      function sectionChipName(sectionCode) {
+        const canonical = canonicalSection(sectionCode);
+        switch (canonical) {
+          case 'CORE_APTITUDE': return 'Core Aptitude';
+          case 'APPLIED_CHALLENGE': return 'Applied';
+          case 'INTEREST_WORK': return 'Interest';
+          case 'VALUES_MOTIVATION': return 'Values';
+          case 'LEARNING_BEHAVIOR': return 'Learning';
+          case 'AI_READINESS': return 'AI Readiness';
+          case 'CAREER_REALITY': return 'Career Reality';
+          case 'GENERAL_AWARENESS': return 'General Awareness';
+          case 'REASONING_IQ': return 'Reasoning IQ';
+          case 'STEM_FOUNDATION': return 'STEM Foundation';
+          case 'BIOLOGY_FOUNDATION': return 'Biology Foundation';
+          default: return sectionName(sectionCode);
+        }
       }
 
       function sectionCssClass(sectionCode) {
@@ -1162,7 +1731,11 @@
           'values check',
           'learning behavior',
           'ai readiness',
-          'career reality'
+          'career reality',
+          'general awareness',
+          'reasoning iq',
+          'stem foundation',
+          'biology foundation'
         ];
         const shouldTrim = removablePrefixes.some(prefix => head.startsWith(prefix));
         if (!shouldTrim) return raw;
@@ -1171,7 +1744,11 @@
 
       function targetForSection(sectionCode) {
         const canonical = canonicalSection(sectionCode);
-        return sectionTargets[canonical] || 0;
+        const configured = sectionTargets[canonical];
+        if (typeof configured === 'number' && configured > 0) {
+          return configured;
+        }
+        return countBySection(canonical);
       }
 
       function initializeVoiceCoach() {
@@ -1267,6 +1844,28 @@
         if (value >= 4) return 'High';
         if (value >= 3) return 'Medium';
         return 'Low';
+      }
+
+      function ensureSignalDefaultsForSubmitStep() {
+        const selfKeys = ['numeric', 'language', 'discipline', 'spatial'];
+        const subjectKeys = ['math', 'physics', 'chemistry', 'biology', 'language'];
+        const hasAnySelf = selfKeys.some(key => Number(selfSignals[key] || 0) > 0);
+        const hasAnySubject = subjectKeys.some(key => Number(subjectSignals[key] || 0) > 0);
+
+        if (!hasAnySelf) {
+          selfSignals.numeric = 3;
+          selfSignals.language = 3;
+          selfSignals.discipline = 3;
+          selfSignals.spatial = 3;
+        }
+        if (!hasAnySubject) {
+          subjectSignals.math = 3;
+          subjectSignals.physics = 3;
+          subjectSignals.chemistry = 3;
+          subjectSignals.biology = 3;
+          subjectSignals.language = Number(selfSignals.language || 0) > 0 ? Number(selfSignals.language) : 3;
+        }
+        syncIntentFields();
       }
 
       function renderIntentChips() {
@@ -1610,14 +2209,34 @@
       function updateProgress() {
         const total = allCodes.length;
         const answered = answeredCount();
-        questionCountLabel.textContent = 'Question ' + (currentIndex + 1) + ' / ' + total;
+        questionCountLabel.textContent = isSubmitStep
+          ? 'Submit Step'
+          : ('Question ' + (currentIndex + 1) + ' / ' + total);
         answerCountLabel.textContent = 'Answered ' + answered;
         progressFill.style.width = (((currentIndex + 1) / total) * 100) + '%';
 
         prevBtn.disabled = currentIndex === 0;
-        const isLast = currentIndex === total - 1;
-        nextBtn.classList.toggle('hidden', isLast);
-        submitBtn.classList.toggle('hidden', !isLast);
+        const isLastQuestion = currentIndex === total - 1;
+        const showSubmitStep = isSubmitStep && isLastQuestion;
+        nextBtn.classList.toggle('hidden', showSubmitStep);
+        nextBtn.textContent = isLastQuestion ? 'Continue to Submit' : 'Next';
+        submitBtn.classList.toggle('hidden', !showSubmitStep);
+        if (questionRoot) {
+          questionRoot.classList.toggle('hidden', showSubmitStep);
+        }
+        if (storyInsightBlock) {
+          storyInsightBlock.classList.toggle('hidden', !showSubmitStep);
+        }
+        if (intentPanel) {
+          intentPanel.classList.toggle('hidden', !showSubmitStep);
+          intentPanel.open = showSubmitStep;
+          if (showSubmitStep) {
+            ensureSignalDefaultsForSubmitStep();
+            renderIntentChips();
+            renderSelfSignalGrid();
+            renderSubjectSignalGrid();
+          }
+        }
         renderSectionTabs();
         updateEngagementSignals(answered, total);
       }
@@ -1655,7 +2274,10 @@
       function jumpToSection(sectionCode) {
         const nextIndex = findBestIndexForSection(sectionCode);
         if (nextIndex < 0 || nextIndex === currentIndex) return;
-        accumulateTimeForCurrent();
+        if (!isSubmitStep) {
+          accumulateTimeForCurrent();
+        }
+        isSubmitStep = false;
         currentIndex = nextIndex;
         saveState();
         renderQuestion();
@@ -1784,36 +2406,60 @@
         if (!question) {
           return;
         }
-        questionTag.textContent = sectionName(question.sectionCode);
+        const sectionDisplay = sectionChipName(question.sectionCode);
+        if (sectionsLabel) {
+          sectionsLabel.textContent = 'Sections: ' + sectionDisplay;
+        }
+        questionTag.textContent = sectionDisplay;
+        if (questionRoot) {
+          questionRoot.className = 'question-shell ' + sectionCssClass(question.sectionCode);
+        }
+        questionTag.textContent = 'Section: ' + sectionDisplay;
         questionTitle.textContent = cleanQuestionText(question.questionText);
         sectionTip.textContent = sectionTipText(question.sectionCode);
         renderMedia(question);
 
         const options = Array.isArray(question.options) ? question.options : [];
         const selected = answers[question.questionCode] || '';
-        optionList.innerHTML = options.map((rawOption, idx) => {
-          const option = normalizeOption(rawOption, idx);
-          const checked = String(selected).toUpperCase() === String(option.code).toUpperCase();
-          return (
-            '<label class="option ' + (checked ? 'selected' : '') + '" data-code="' + sanitize(option.code) + '">' +
-            '<input type="radio" name="opt_' + sanitize(question.questionCode) + '" value="' + sanitize(option.code) + '" ' + (checked ? 'checked' : '') + '>' +
-            '<span class="option-body">' +
-              '<span class="option-code">' + sanitize(option.code) + '</span>' +
-              '<span class="option-text">' + sanitize(option.label) + '</span>' +
-            '</span>' +
-            '</label>'
-          );
-        }).join('');
+        const isRankOrder = isRankOrderQuestion(question);
+        optionList.classList.remove('options-single');
 
-        optionList.querySelectorAll('input[type="radio"]').forEach(input => {
-          input.addEventListener('change', function() {
-            answers[question.questionCode] = this.value;
-            optionList.querySelectorAll('.option').forEach(node => node.classList.remove('selected'));
-            this.closest('.option').classList.add('selected');
-            updateProgress();
-            saveState();
+        if (isRankOrder && renderRankOrderQuestion(question, options, selected)) {
+          optionList.classList.add('options-single');
+        } else {
+          optionList.innerHTML = options.map((rawOption, idx) => {
+            const option = normalizeOption(rawOption, idx);
+            const checked = String(selected).toUpperCase() === String(option.code).toUpperCase();
+            return (
+              '<label class="option ' + (checked ? 'selected' : '') + '" data-code="' + sanitize(option.code) + '">' +
+              '<input type="radio" name="opt_' + sanitize(question.questionCode) + '" value="' + sanitize(option.code) + '" ' + (checked ? 'checked' : '') + '>' +
+              '<span class="option-body">' +
+                '<span class="option-code">' + sanitize(option.code) + '</span>' +
+                '<span class="option-text">' + sanitize(option.label) + '</span>' +
+              '</span>' +
+              '</label>'
+            );
+          }).join('');
+
+          const hasLongOption = options.some(rawOption => {
+            const option = normalizeOption(rawOption, 0);
+            const text = String(option.label || '').trim();
+            if (!text) return false;
+            const wordCount = text.split(/\s+/).filter(Boolean).length;
+            return text.length > 44 || wordCount > 8;
           });
-        });
+          optionList.classList.toggle('options-single', hasLongOption);
+
+          optionList.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', function() {
+              answers[question.questionCode] = this.value;
+              optionList.querySelectorAll('.option').forEach(node => node.classList.remove('selected'));
+              this.closest('.option').classList.add('selected');
+              updateProgress();
+              saveState();
+            });
+          });
+        }
 
         bindConfidenceButtons(question.questionCode);
         setConfidenceUI(question.questionCode);
@@ -1989,7 +2635,14 @@
       }
 
       function moveNext() {
-        if (currentIndex >= allCodes.length - 1) return;
+        if (isSubmitStep) return;
+        if (currentIndex >= allCodes.length - 1) {
+          accumulateTimeForCurrent();
+          isSubmitStep = true;
+          saveState();
+          updateProgress();
+          return;
+        }
         accumulateTimeForCurrent();
         const currentSection = currentSectionCode();
         const currentSectionTarget = Math.min(targetForSection(currentSection), countBySection(currentSection));
@@ -2023,6 +2676,12 @@
       }
 
       function movePrevious() {
+        if (isSubmitStep) {
+          isSubmitStep = false;
+          saveState();
+          renderQuestion();
+          return;
+        }
         if (currentIndex === 0) return;
         accumulateTimeForCurrent();
         currentIndex -= 1;
@@ -2034,7 +2693,8 @@
       nextBtn.addEventListener('click', moveNext);
 
       document.addEventListener('keydown', function(evt) {
-        if (!currentQuestion()) return;
+        const question = currentQuestion();
+        if (!question || isSubmitStep || isRankOrderQuestion(question)) return;
         const options = optionList.querySelectorAll('input[type="radio"]');
         if (!options.length) return;
         const key = evt.key;
@@ -2048,7 +2708,10 @@
       });
 
       submitForm.addEventListener('submit', function() {
-        accumulateTimeForCurrent();
+        if (!isSubmitStep) {
+          accumulateTimeForCurrent();
+        }
+        ensureSignalDefaultsForSubmitStep();
         syncIntentFields();
         const elapsedSeconds = getElapsedSeconds();
         durationField.value = Math.max(1, elapsedSeconds);
@@ -2098,6 +2761,7 @@
           subjectSignals,
           activeOrder,
           currentIndex,
+          isSubmitStep,
           elapsedCarry: elapsedCarry + Math.max(0, Math.round((now - testStart) / 1000)),
           savedAt: now
         };
@@ -2161,6 +2825,7 @@
           activeOrder = data.activeOrder.slice();
           allCodes = activeOrder.slice();
           currentIndex = Math.max(0, Math.min(allCodes.length - 1, Number(data.currentIndex || 0)));
+          isSubmitStep = Boolean(data.isSubmitStep) && currentIndex === allCodes.length - 1;
           elapsedCarry = Math.max(0, Number(data.elapsedCarry || 0));
           testStart = Date.now();
           const restoreCode = activeOrder[currentIndex];

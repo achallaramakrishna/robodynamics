@@ -1,0 +1,1 @@
+nl -ba /tmp/VIDAPATH_GRADE_BASED_REFRESH_2026_02_28.sql | head -n 30

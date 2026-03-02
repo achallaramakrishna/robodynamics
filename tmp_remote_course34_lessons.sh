@@ -1,0 +1,1 @@
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; SELECT course_session_id, session_title FROM rd_course_sessions WHERE course_id=34 AND LOWER(TRIM(session_type))='session' AND session_title LIKE 'Lesson %' ORDER BY course_session_id;"

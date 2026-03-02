@@ -1,65 +1,83 @@
-// com.robodynamics.pdf.HtmlToPdf
 package com.robodynamics.pdf;
 
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
-import com.openhtmltopdf.util.XRRuntimeException;
 
 import java.io.ByteArrayOutputStream;
 
 public class HtmlToPdf {
 
-    /** Default: try Fast HTML5 first, then fallback to sanitized XML mode if needed. */
+    /** Default output: portrait. */
     public static byte[] toPdf(String html, String baseUri) {
-        return toPdf(html, baseUri, true);
+        return toPdf(html, baseUri, false, true);
     }
 
     /**
-     * @param fastMode true → try HTML5 (JSoup) first, else go straight to XML mode with sanitization.
+     * Backward-compatible overload used by controllers:
+     * true = landscape, false = portrait.
      */
-    public static byte[] toPdf(String html, String baseUri, boolean fastMode) {
+    public static byte[] toPdf(String html, String baseUri, boolean landscape) {
+        return toPdf(html, baseUri, landscape, true);
+    }
+
+    /**
+     * Full control overload.
+     * @param landscape true for landscape page layout.
+     * @param fastMode true to try HTML5 parser first, else strict XML mode.
+     */
+    public static byte[] toPdf(String html, String baseUri, boolean landscape, boolean fastMode) {
         if (html == null) html = "";
         if (fastMode) {
             try {
-                return renderFast(html, baseUri);
+                return renderFast(html, baseUri, landscape);
             } catch (Throwable t) {
                 // Fallback for cases like &nbsp; in strict parser path
-                return renderXmlSanitized(html, baseUri);
+                return renderXmlSanitized(html, baseUri, landscape);
             }
         } else {
-            return renderXmlSanitized(html, baseUri);
+            return renderXmlSanitized(html, baseUri, landscape);
         }
     }
 
     /** Explicit helper if you ever want to force XML mode. */
     public static byte[] toPdfXmlCompat(String html, String baseUri) {
-        return renderXmlSanitized(html, baseUri);
+        return renderXmlSanitized(html, baseUri, false);
     }
 
     // --- Internals ---
 
-    private static byte[] renderFast(String html, String baseUri) {
+    private static byte[] renderFast(String html, String baseUri, boolean landscape) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            PdfRendererBuilder b = new PdfRendererBuilder();
-            b.useFastMode();                  // HTML5 tolerant parser
-            b.withHtmlContent(html, baseUri);
-            b.toStream(baos);
-            b.run();
+            PdfRendererBuilder builder = new PdfRendererBuilder();
+            builder.useFastMode(); // HTML5 tolerant parser
+            applyPageSize(builder, landscape);
+            builder.withHtmlContent(html, baseUri);
+            builder.toStream(baos);
+            builder.run();
             return baos.toByteArray();
         } catch (Exception e) {
-            throw new RuntimeException("HTML→PDF (fast) failed", e);
+            throw new RuntimeException("HTML to PDF (fast) failed", e);
         }
     }
 
-    private static byte[] renderXmlSanitized(String html, String baseUri) {
+    private static byte[] renderXmlSanitized(String html, String baseUri, boolean landscape) {
         String safe = sanitizeForXml(html);
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            PdfRendererBuilder b = new PdfRendererBuilder();
-            b.withHtmlContent(safe, baseUri); // strict XML/XHTML parser
-            b.toStream(baos);
-            b.run();
+            PdfRendererBuilder builder = new PdfRendererBuilder();
+            applyPageSize(builder, landscape);
+            builder.withHtmlContent(safe, baseUri); // strict XML/XHTML parser
+            builder.toStream(baos);
+            builder.run();
             return baos.toByteArray();
         } catch (Exception e) {
-            throw new RuntimeException("HTML→PDF (XML fallback) failed", e);
+            throw new RuntimeException("HTML to PDF (XML fallback) failed", e);
+        }
+    }
+
+    private static void applyPageSize(PdfRendererBuilder builder, boolean landscape) {
+        if (landscape) {
+            builder.useDefaultPageSize(11f, 8.5f, PdfRendererBuilder.PageSizeUnits.INCHES);
+        } else {
+            builder.useDefaultPageSize(8.5f, 11f, PdfRendererBuilder.PageSizeUnits.INCHES);
         }
     }
 

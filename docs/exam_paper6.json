@@ -1,0 +1,732 @@
+{
+  "title": "CBSE Grade 5 – Mathematics Final Examination",
+  "subject": "Mathematics",
+  "board": "CBSE",
+  "examYear": 2025,
+  "examType": "FINAL",
+  "patternCode": "CBSE_G5_MATH_FINAL",
+  "durationMinutes": 150,
+  "totalMarks": 80,
+  "instructions": "All questions are compulsory. Use proper steps and units wherever required. Draw neat diagrams for geometry questions. Figures are not to scale unless stated.",
+  "negativeMarking": false,
+  "shuffleSections": false,
+  "shuffleQuestions": false,
+  "sections": [
+    {
+      "sectionName": "A",
+      "title": "Section A – Mental Maths & Objective",
+      "description": "Attempt all questions",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 1,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 1,
+          "mandatory": true,
+          "maxWordLimit": 80,
+          "question": {
+            "question_text": "Write the place value of 6 in 6,84,291.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 1
+          },
+          "answerKey": {
+            "modelAnswer": "In 6,84,291, the digit 6 is in the lakhs place. Place value = 6 × 1,00,000 = 6,00,000.",
+            "keyPoints": ["identify lakhs place", "multiply by 1,00,000", "6,00,000"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 2,
+          "mandatory": true,
+          "maxWordLimit": 120,
+          "question": {
+            "question_text": "Write the smallest 7-digit number using digits 3, 5, 0, 8, 2, 6, 1 (no repetition).",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 2
+          },
+          "answerKey": {
+            "modelAnswer": "To get the smallest 7-digit number, the first digit cannot be 0. Choose the smallest non-zero digit 1 first, then arrange the remaining digits in ascending order: 0, 2, 3, 5, 6, 8. Hence the number is 1,023,568.",
+            "keyPoints": ["first digit not 0", "start with 1", "remaining digits ascending", "1,023,568"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 3,
+          "mandatory": true,
+          "maxWordLimit": 90,
+          "question": {
+            "question_text": "Round 9,748 to the nearest thousand.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 3
+          },
+          "answerKey": {
+            "modelAnswer": "For nearest thousand, look at the hundreds digit in 9,748 (it is 7). Since 7 ≥ 5, round up 9,000 to 10,000. So 9,748 ≈ 10,000.",
+            "keyPoints": ["check hundreds digit", "7 ≥ 5 so round up", "10,000"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 4,
+          "mandatory": true,
+          "maxWordLimit": 80,
+          "question": {
+            "question_text": "Write the greatest factor of 45.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 4
+          },
+          "answerKey": {
+            "modelAnswer": "The greatest factor of a number is the number itself. Therefore, the greatest factor of 45 is 45.",
+            "keyPoints": ["greatest factor = the number", "45"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 5,
+          "mandatory": true,
+          "maxWordLimit": 110,
+          "question": {
+            "question_text": "Convert 0.45 into a fraction in simplest form.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 5
+          },
+          "answerKey": {
+            "modelAnswer": "0.45 = 45/100 (45 hundredths). Simplify by dividing by 5: 45/100 = (45 ÷ 5)/(100 ÷ 5) = 9/20. So the fraction is 9/20.",
+            "keyPoints": ["45/100", "divide by 5", "9/20"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 6,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "How many edges does a cuboid have?",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 6
+          },
+          "answerKey": {
+            "modelAnswer": "A cuboid has 12 edges.",
+            "keyPoints": ["cuboid", "12 edges"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 7,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "Name the polygon with 10 sides.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 7
+          },
+          "answerKey": {
+            "modelAnswer": "A 10-sided polygon is called a decagon.",
+            "keyPoints": ["10 sides", "decagon"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 8,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "How many lines of symmetry does a rectangle have?",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 8
+          },
+          "answerKey": {
+            "modelAnswer": "A rectangle has 2 lines of symmetry: one horizontal and one vertical through its centre.",
+            "keyPoints": ["2 lines", "horizontal", "vertical"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 9,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "₹750 − ₹389 = ______",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 9
+          },
+          "answerKey": {
+            "modelAnswer": "₹750 − ₹389 = ₹361.",
+            "keyPoints": ["subtraction", "₹361"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 10,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "Find the missing number: 5, 10, 20, 40, ___",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 10
+          },
+          "answerKey": {
+            "modelAnswer": "Each term is double the previous term. So 40 × 2 = 80. Missing number = 80.",
+            "keyPoints": ["multiply by 2", "80"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "B",
+      "title": "Section B – Short Answer",
+      "description": "Attempt all questions",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 20,
+      "sectionOrder": 2,
+      "questions": [
+        {
+          "marks": 2,
+          "displayOrder": 11,
+          "mandatory": true,
+          "maxWordLimit": 220,
+          "question": {
+            "question_text": "Write 9,03,486 in (a) words (Indian system) and (b) expanded form.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 11
+          },
+          "answerKey": {
+            "modelAnswer": "(a) 9,03,486 (Indian system) = Nine lakh three thousand four hundred eighty-six.\n(b) Expanded form: 9,03,486 = 9,00,000 + 3,000 + 400 + 80 + 6 (sum of place values).",
+            "keyPoints": ["correct Indian words", "expanded place values", "9,00,000 + 3,000 + 400 + 80 + 6"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 12,
+          "mandatory": true,
+          "maxWordLimit": 180,
+          "question": {
+            "question_text": "Find the value of (428 × 5) − 640.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 12
+          },
+          "answerKey": {
+            "modelAnswer": "Step 1: 428 × 5 = 2,140.\nStep 2: 2,140 − 640 = 1,500.\nSo, (428 × 5) − 640 = 1,500.",
+            "keyPoints": ["multiply first", "2140", "subtract 640", "1500"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 13,
+          "mandatory": true,
+          "maxWordLimit": 200,
+          "question": {
+            "question_text": "Write all the factors of 48.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 13
+          },
+          "answerKey": {
+            "modelAnswer": "Factors are numbers that divide 48 exactly. The factors of 48 are: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48.",
+            "keyPoints": ["exact divisors", "complete list", "ends with 48"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 14,
+          "mandatory": true,
+          "maxWordLimit": 180,
+          "question": {
+            "question_text": "Find the HCF of 16 and 24.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 14
+          },
+          "answerKey": {
+            "modelAnswer": "Factors of 16: 1, 2, 4, 8, 16.\nFactors of 24: 1, 2, 3, 4, 6, 8, 12, 24.\nCommon factors are 1, 2, 4, 8. Greatest is 8. Hence HCF = 8.",
+            "keyPoints": ["list factors", "common factors", "greatest common = 8"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 15,
+          "mandatory": true,
+          "maxWordLimit": 150,
+          "question": {
+            "question_text": "Convert 7/20 into a decimal.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 15
+          },
+          "answerKey": {
+            "modelAnswer": "Convert by division: 7 ÷ 20 = 0.35. Therefore, 7/20 = 0.35.",
+            "keyPoints": ["divide numerator by denominator", "0.35"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 16,
+          "mandatory": true,
+          "maxWordLimit": 160,
+          "question": {
+            "question_text": "Convert 4 kg 375 g into grams.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 16
+          },
+          "answerKey": {
+            "modelAnswer": "1 kg = 1000 g, so 4 kg = 4 × 1000 = 4000 g. Add 375 g: 4000 g + 375 g = 4375 g. Hence, 4 kg 375 g = 4375 g.",
+            "keyPoints": ["kg to g", "4 kg = 4000 g", "total 4375 g"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 17,
+          "mandatory": true,
+          "maxWordLimit": 170,
+          "question": {
+            "question_text": "Find the perimeter of a rectangle whose length is 15 cm and breadth is 9 cm.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 17
+          },
+          "answerKey": {
+            "modelAnswer": "Perimeter of a rectangle = 2 × (length + breadth).\n= 2 × (15 + 9)\n= 2 × 24\n= 48 cm.\nSo, the perimeter is 48 cm.",
+            "keyPoints": ["formula 2(l+b)", "15+9=24", "48 cm"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 18,
+          "mandatory": true,
+          "maxWordLimit": 160,
+          "question": {
+            "question_text": "Find the area of a square of side 11 cm.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 18
+          },
+          "answerKey": {
+            "modelAnswer": "Area of a square = side × side.\n= 11 cm × 11 cm\n= 121 cm².\nSo, the area is 121 cm².",
+            "keyPoints": ["side × side", "121", "cm²"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 19,
+          "mandatory": true,
+          "maxWordLimit": 120,
+          "question": {
+            "question_text": "Draw a symmetrical figure and show its line of symmetry.",
+            "question_type": "diagram",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 19
+          },
+          "answerKey": {
+            "modelAnswer": "Draw a square or a butterfly-like figure and draw a straight line through the centre such that both halves are mirror images (this line is the line of symmetry).",
+            "keyPoints": ["neat symmetric figure", "line through centre", "both halves identical"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 20,
+          "mandatory": true,
+          "maxWordLimit": 160,
+          "question": {
+            "question_text": "Write the next three numbers in the pattern: 2, 6, 12, 20, ____ , ____ , ____",
+            "question_type": "short_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 20
+          },
+          "answerKey": {
+            "modelAnswer": "Differences are: +4, +6, +8 (increasing by 2). Next differences: +10, +12, +14.\nSo next terms: 20+10=30, 30+12=42, 42+14=56.\nNext three numbers are 30, 42, 56.",
+            "keyPoints": ["differences +4,+6,+8", "next +10,+12,+14", "30,42,56"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "C",
+      "title": "Section C – Word Problems",
+      "description": "Show complete working (step marks apply)",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 32,
+      "sectionOrder": 3,
+      "questions": [
+        {
+          "marks": 4,
+          "displayOrder": 21,
+          "mandatory": true,
+          "maxWordLimit": 380,
+          "question": {
+            "question_text": "A factory manufactured 6,48,375 pens in January and 5,79,684 pens in February. (a) Find the total number of pens manufactured. (b) Round the total to the nearest ten thousand.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 21
+          },
+          "answerKey": {
+            "modelAnswer": "(a) Total pens = 6,48,375 + 5,79,684 = 12,28,059.\n(b) Nearest ten thousand: check the thousands digit in 12,28,059 (it is 8). Since 8 ≥ 5, increase the ten-thousands digit (2) to 3 and make the remaining digits zero. So 12,28,059 ≈ 12,30,000.\nFinal: Total = 12,28,059 pens; Rounded = 12,30,000 pens.",
+            "keyPoints": ["addition", "12,28,059", "rounding using thousands digit", "12,30,000"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 22,
+          "mandatory": true,
+          "maxWordLimit": 420,
+          "question": {
+            "question_text": "Divide 2,436 ÷ 6. Verify your answer using the division algorithm.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 22
+          },
+          "answerKey": {
+            "modelAnswer": "2436 ÷ 6:\n6 goes into 24 = 4 times, remainder 0.\nBring down 3 → 3 ÷ 6 = 0 times (write 0), remainder 3.\nBring down 6 → 36 ÷ 6 = 6 times, remainder 0.\nSo quotient = 406, remainder = 0.\nVerification: Dividend = Divisor × Quotient + Remainder = 6 × 406 + 0 = 2436.\nHence verified.\nFinal: 2436 ÷ 6 = 406 (remainder 0).",
+            "keyPoints": ["quotient 406", "remainder 0", "verification formula", "6×406=2436"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 23,
+          "mandatory": true,
+          "maxWordLimit": 420,
+          "question": {
+            "question_text": "Find the HCF of 36, 48 and 60. Write one real-life situation where HCF is used.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 23
+          },
+          "answerKey": {
+            "modelAnswer": "Factors:\n36: 1,2,3,4,6,9,12,18,36\n48: 1,2,3,4,6,8,12,16,24,48\n60: 1,2,3,4,5,6,10,12,15,20,30,60\nCommon factors: 1,2,3,4,6,12. Greatest is 12.\nSo HCF = 12.\nReal-life: Used for making the largest equal groups/packets (e.g., equal packets of 36 biscuits, 48 chocolates and 60 toffees with no leftovers).\nFinal: HCF = 12; used for equal distribution.",
+            "keyPoints": ["list factors", "common factors", "HCF 12", "equal grouping example"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 24,
+          "mandatory": true,
+          "maxWordLimit": 360,
+          "question": {
+            "question_text": "A tank was filled with 5/6 litre of water. Later 1/3 litre of water was taken out. (a) How much water is left? (b) Write the answer in simplest form.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 24
+          },
+          "answerKey": {
+            "modelAnswer": "Water left = 5/6 − 1/3.\nConvert to same denominator: 1/3 = 2/6.\nSo water left = 5/6 − 2/6 = 3/6.\nSimplify: 3/6 = 1/2.\nFinal: Water left = 1/2 litre.",
+            "keyPoints": ["common denominator 6", "subtract 5/6-2/6", "3/6", "simplify to 1/2"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 25,
+          "mandatory": true,
+          "maxWordLimit": 380,
+          "question": {
+            "question_text": "Meena bought a book for ₹45.75 and a pen for ₹18.50. (a) Find the total amount spent. (b) If she gave ₹100, how much change did she get back?",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 25
+          },
+          "answerKey": {
+            "modelAnswer": "(a) Total spent = 45.75 + 18.50 = 64.25.\n(b) Change = 100.00 − 64.25 = 35.75.\nFinal: Total spent = ₹64.25; Change = ₹35.75.",
+            "keyPoints": ["add decimals", "64.25", "subtract from 100", "₹35.75"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 26,
+          "mandatory": true,
+          "maxWordLimit": 380,
+          "question": {
+            "question_text": "A movie started at 2:35 p.m. and ended at 5:10 p.m. Find the duration of the movie.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 26
+          },
+          "answerKey": {
+            "modelAnswer": "From 2:35 p.m. to 3:35 p.m. = 1 hour.\nFrom 3:35 p.m. to 4:35 p.m. = 1 hour.\nFrom 4:35 p.m. to 5:10 p.m. = 35 minutes.\nTotal duration = 2 hours 35 minutes.\nFinal: 2 hours 35 minutes.",
+            "keyPoints": ["break time into parts", "2 hours", "35 minutes", "2 h 35 min"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 27,
+          "mandatory": true,
+          "maxWordLimit": 420,
+          "question": {
+            "question_text": "The length of a rectangular field is 25 m and its breadth is 16 m. (a) Find the area of the field. (b) If fencing costs ₹4 per metre, find the total cost of fencing the field.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 27
+          },
+          "answerKey": {
+            "modelAnswer": "(a) Area = length × breadth = 25 × 16 = 400 m².\n(b) For fencing we need perimeter.\nPerimeter = 2 × (length + breadth) = 2 × (25 + 16) = 2 × 41 = 82 m.\nCost = 82 × 4 = ₹328.\nFinal: Area = 400 m²; Fencing cost = ₹328.",
+            "keyPoints": ["area 25×16", "400 m²", "perimeter 2(25+16)=82", "cost ₹328"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 28,
+          "mandatory": true,
+          "maxWordLimit": 220,
+          "question": {
+            "question_text": "Find the volume of a cuboid whose length = 8 cm, breadth = 5 cm, height = 6 cm.",
+            "question_type": "long_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 28
+          },
+          "answerKey": {
+            "modelAnswer": "Volume of a cuboid = length × breadth × height.\n= 8 × 5 × 6\n= 40 × 6\n= 240 cm³.\nFinal: Volume = 240 cm³.",
+            "keyPoints": ["l×b×h", "8×5×6", "240 cm³"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "D",
+      "title": "Section D – Data Handling & Reasoning",
+      "description": "Attempt all questions",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 16,
+      "sectionOrder": 4,
+      "questions": [
+        {
+          "marks": 4,
+          "displayOrder": 29,
+          "mandatory": true,
+          "maxWordLimit": 420,
+          "question": {
+            "question_text": "The table shows the number of books read by students in one month: A=6, B=9, C=4, D=7, E=9. (a) Who read the maximum number of books? (b) Who read the minimum number of books? (c) How many books were read in total? (d) Find the average number of books read.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 29
+          },
+          "answerKey": {
+            "modelAnswer": "(a) Maximum books = 9. Students B and E read 9 books, so they read the maximum.\n(b) Minimum books = 4. Student C read 4 books, so C read the minimum.\n(c) Total books = 6 + 9 + 4 + 7 + 9 = 35 books.\n(d) Average = Total ÷ Number of students = 35 ÷ 5 = 7.\nFinal: Max = B & E; Min = C; Total = 35; Average = 7 books.",
+            "keyPoints": ["max value 9", "B and E", "min value 4", "total 35", "average 7"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 30,
+          "mandatory": true,
+          "maxWordLimit": 360,
+          "question": {
+            "question_text": "🍎 = 5 apples. Class V A has 🍎🍎🍎, V B has 🍎🍎🍎🍎, V C has 🍎🍎. (a) Which class collected the maximum apples? (b) How many apples did Class V A collect? (c) How many apples were collected altogether?",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 30
+          },
+          "answerKey": {
+            "modelAnswer": "Each 🍎 represents 5 apples.\nV A has 3 symbols → 3 × 5 = 15 apples.\nV B has 4 symbols → 4 × 5 = 20 apples.\nV C has 2 symbols → 2 × 5 = 10 apples.\n(a) Maximum is 20 apples, so Class V B collected the maximum.\n(b) Class V A collected 15 apples.\n(c) Total apples = 15 + 20 + 10 = 45 apples.\nFinal: (a) V B (b) 15 apples (c) 45 apples.",
+            "keyPoints": ["each symbol = 5", "VA=15", "VB=20", "VC=10", "max VB", "total 45"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 31,
+          "mandatory": true,
+          "maxWordLimit": 320,
+          "question": {
+            "question_text": "(a) Find the next two numbers: 1, 4, 9, 16, ___ , ___. (b) Write the rule used in the pattern.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 31
+          },
+          "answerKey": {
+            "modelAnswer": "(a) The numbers are perfect squares:\n1 = 1², 4 = 2², 9 = 3², 16 = 4².\nNext squares are 5² = 25 and 6² = 36.\nSo the next two numbers are 25 and 36.\n(b) Rule: Write squares of natural numbers in order (1², 2², 3², 4², ...).",
+            "keyPoints": ["identify squares", "5²=25", "6²=36", "rule: squares of natural numbers"]
+          }
+        },
+        {
+          "marks": 4,
+          "displayOrder": 32,
+          "mandatory": true,
+          "maxWordLimit": 320,
+          "question": {
+            "question_text": "(a) Is a circle a polygon? Give reason. (b) Name one object from daily life that shows line symmetry.",
+            "question_type": "long_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "FINAL",
+            "exam_year": 2025,
+            "exam_paper": "CBSE Grade 5 Mathematics",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 32
+          },
+          "answerKey": {
+            "modelAnswer": "(a) No, a circle is not a polygon because a polygon is made only of straight line segments (sides), but a circle has a curved boundary and no straight sides.\n(b) Example of line symmetry: a butterfly (left and right wings are mirror images) / a leaf / a human face (approximately).",
+            "keyPoints": ["polygon has straight sides", "circle is curved", "example of symmetry object"]
+          }
+        }
+      ]
+    }
+  ]
+}

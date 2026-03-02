@@ -1,0 +1,3185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 — Exception Handling, Collections & Generics | Phase 1</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Global Variables --- */
+        :root {
+            --primary: #0A1628;
+            --secondary: #1A3A6B;
+            --accent: #50FA7B;
+            /* Green for highlight */
+            --accent2: #FF79C6;
+            /* Pink for concepts/challenges */
+            --light: #F0F4FF;
+            --white: #FFFFFF;
+            --text: #E8EDF5;
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --border: rgba(80, 250, 123, 0.3);
+            --code-bg: #0D1117;
+            --muted: #8899BB;
+            /* Java Syntax Highlighting (Example) */
+            --java-keyword: #FF79C6;
+            --java-type: #8BE9FD;
+            --java-literal: #F1FA8C;
+            --java-comment: #6272A4;
+            --java-operator: #FFB86C;
+            /* Status Colors */
+            --error: #FF5555;
+            --success: #50FA7B;
+        }
+
+        /* --- Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow: hidden;
+            /* Hide scrollbars for presentation */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .deck {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* --- Slide Styles --- */
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            padding: 42px 66px 80px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            animation: fadeIn 0.4s ease;
+
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Centered Slide Layout */
+        .slide.center {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- Typography & General Elements --- */
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px 0 40px;
+            border-radius: 2px;
+        }
+
+        .slide.center.accent-line {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p,
+        ul,
+        ol {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            margin-left: 25px;
+        }
+
+        /* Content Blocks for structure */
+        .content-block {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            width: 100%;
+            /* Take full width of slide content area */
+        }
+
+        .content-block h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: var(--accent2);
+            margin-bottom: 15px;
+        }
+
+        /* --- Code Styling --- */
+        pre {
+            background: var(--code-bg);
+            border-radius: 8px;
+            padding: 15px;
+            overflow-x: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            border: 1px solid rgba(80, 250, 123, 0.15);
+        }
+
+        code {
+            font-family: 'Source Code Pro', monospace;
+            color: var(--light);
+        }
+
+        /* --- Syntax Highlighting Classes (Example - apply these to your `<span>`s within `<code>`) --- */
+        .java-keyword {
+            color: var(--java-keyword);
+        }
+
+        .java-type {
+            color: var(--java-type);
+        }
+
+        .java-literal {
+            color: var(--java-literal);
+        }
+
+        .java-comment {
+            color: var(--java-comment);
+        }
+
+        .java-operator {
+            color: var(--java-operator);
+        }
+
+        .string {
+            color: var(--java-literal);
+        }
+
+        .number {
+            color: var(--java-literal);
+        }
+
+        .annotation {
+            color: var(--accent2);
+        }
+
+        .method {
+            color: var(--accent);
+        }
+
+        .class-name {
+            color: var(--java-type);
+        }
+
+        /* --- Buttons --- */
+        .copy-code-button,
+        .reveal-answer-button {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .copy-code-button:hover,
+        .reveal-answer-button:hover {
+            background: #47E06E;
+            /* Brighter green */
+            transform: translateY(-2px);
+        }
+
+        /* --- Activity prompts --- */
+        .p-activity {
+            font-style: italic;
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* --- Slide Labels (Top-Left corner) --- */
+        .slide-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(80, 250, 123, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* --- Title Slide Specifics --- */
+        .slide.bg-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deck-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 4.5rem;
+            color: var(--light);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .deck-subtitle {
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: var(--accent2);
+            margin-bottom: 30px;
+        }
+
+        .deck-meta {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-top: 20px;
+        }
+
+        /* --- Agenda Specifics --- */
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 30px;
+        }
+
+        .sched-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 12px 20px;
+            border-left: 4px solid transparent;
+            transition: border-left-color 0.2s ease;
+        }
+
+        .sched-item.current {
+            /* Highlight for current agenda item */
+            border-left-color: var(--accent);
+            box-shadow: 0 0 15px rgba(80, 250, 123, 0.2);
+        }
+
+        .sched-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent2);
+            min-width: 90px;
+        }
+
+        .sched-topic {
+            flex-grow: 1;
+            font-size: 1rem;
+            color: var(--light);
+            margin: 0 15px;
+        }
+
+        .sched-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        .tag-lecture {
+            background: rgba(80, 250, 123, 0.15);
+            color: var(--accent);
+        }
+
+        .tag-break {
+            background: rgba(255, 85, 85, 0.15);
+            color: #FF5555;
+        }
+
+        .tag-poll {
+            background: rgba(255, 121, 198, 0.15);
+            color: var(--accent2);
+        }
+
+        .tag-mcq {
+            background: rgba(255, 184, 108, 0.15);
+            color: #FFB86C;
+        }
+
+        .tag-ex {
+            background: rgba(189, 147, 249, 0.15);
+            color: #BD93F9;
+        }
+
+        .tag-lab {
+            background: rgba(129, 199, 132, 0.15);
+            color: #81C784;
+        }
+
+        /* --- MCQ Specifics --- */
+        .question-block {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .options {
+            list-style: upper-alpha;
+            /* A, B, C, D */
+            margin-left: 30px;
+        }
+
+        .options li {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            cursor: pointer;
+            padding: 5px;
+            transition: background-color 0.2s ease;
+        }
+
+        .options li:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+
+        .answer-reveal-area {
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .answer {
+            background: rgba(80, 250, 123, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .explanation {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        .explanation ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .explanation li {
+            margin-bottom: 5px;
+        }
+
+        /* --- Navigation Styles --- */
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            /* Ensure navigation is above slides */
+        }
+
+        .nav-button {
+            background: var(--accent2);
+            color: var(--primary);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            /* Pill shape */
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+            /* Prevent text selection */
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #FF4DAE;
+            /* Brighter pink */
+            transform: translateY(-2px);
+        }
+
+        .nav-button:disabled {
+            background: var(--muted);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .slide-indicator {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--light);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="deck">
+        <!-- ==================== SLIDE 1: TITLE SLIDE ==================== -->
+        <div class="slide bg-hero center" id="s1">
+            <div class="deck-title">Day 3 — Exception Handling, Collections & Generics</div>
+            <div class="deck-subtitle">Building Robust & Efficient Java Applications</div>
+            <div class="accent-line"></div>
+            <div class="deck-meta">📅 25-Feb-26 | 🕐 1:00 PM – 5:00 PM | Phase 1: Core Java</div>
+            <p style="font-size:0.9rem; color:var(--muted); margin-top:20px;">**Trainer Note:** "Welcome to Day 3! Today
+                we tackle crucial topics for robust Java development: handling errors gracefully, and managing data
+                efficiently. Get ready for some in-depth discussions!"</p>
+        </div>
+        <!-- ==================== SLIDE 2: AGENDA ==================== -->
+        <div class="slide" id="s2">
+            <div class="slide-label">Overview</div>
+            <h2>What We'll Cover <span class="highlight">Today</span></h2>
+            <div class="accent-line"></div>
+            <div class="schedule-container">
+                <div class="sched-item" id="agenda-item-0">
+                    <span class="sched-time">1:00–1:10 PM</span>
+                    <span class="sched-topic">👋 Welcome & Day 2 Recap</span>
+                    <span class="sched-tag tag-poll">Poll</span>
+                </div>
+                <div class="sched-item" id="agenda-item-1">
+                    <span class="sched-time">1:10–1:40 PM</span>
+                    <span class="sched-topic">💥 Exception Handling: Why It Matters & Basic Flow</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-2">
+                    <span class="sched-time">1:40–2:00 PM</span>
+                    <span class="sched-topic">♻️ Advanced Exception Handling: TWR & Custom Exceptions</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-3">
+                    <span class="sched-time">2:00–2:15 PM</span>
+                    <span class="sched-topic">🐞 Debugging & Output Prediction (Exceptions in Practice)</span>
+                    <span class="sched-tag tag-ex">Challenge</span>
+                </div>
+                <div class="sched-item" id="agenda-item-4">
+                    <span class="sched-time">2:15–2:30 PM</span>
+                    <span class="sched-topic">☕ Coffee Break & Poll (Hard)</span>
+                    <span class="sched-tag tag-break">Break</span>
+                </div>
+                <div class="sched-item" id="agenda-item-5">
+                    <span class="sched-time">2:30–3:00 PM</span>
+                    <span class="sched-topic">🗂️ Collections Framework: Hierarchy & List Implementations</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-6">
+                    <span class="sched-time">3:00–3:30 PM</span>
+                    <span class="sched-topic">↔️ Set & Map Implementations: Choosing the Right Tool</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-7">
+                    <span class="sched-time">3:30–3:50 PM</span>
+                    <span class="sched-topic">✨ Sorting: Comparable & Comparator for Flexible Ordering</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-8">
+                    <span class="sched-time">3:50–4:00 PM</span>
+                    <span class="sched-topic">💡 Generics: Type Safety & Wildcard Magic</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-9">
+                    <span class="sched-time">4:00–4:15 PM</span>
+                    <span class="sched-topic">🧩 Inner Classes & Cloning: Advanced Concepts</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-10">
+                    <span class="sched-time">4:15–4:30 PM</span>
+                    <span class="sched-topic">⚙️ Property Files: Robust Configuration</span>
+                    <span class="sched-tag tag-lecture">Lecture</span>
+                </div>
+                <div class="sched-item" id="agenda-item-11">
+                    <span class="sched-time">4:30–4:45 PM</span>
+                    <span class="sched-topic">❓ MCQ Challenge & Discussion</span>
+                    <span class="sched-tag tag-mcq">MCQ</span>
+                </div>
+                <div class="sched-item" id="agenda-item-12">
+                    <span class="sched-time">4:45–5:00 PM</span>
+                    <span class="sched-topic">🧪 Lab 3.1-3.4 Discussion & Q&A</span>
+                    <span class="sched-tag tag-lab">Lab</span>
+                </div>
+                <div class="sched-item" id="agenda-item-13">
+                    <span class="sched-time">5:00–5:15 PM</span>
+                    <span class="sched-topic">🏠 Home Assignment & Wrap-up</span>
+                    <span class="sched-tag tag-ex">Assignment</span>
+                </div>
+            </div>
+            <p style="margin-top:20px; font-size:0.9rem; color:var(--muted);">**Trainer Note:** "Today's labs will give
+                you hands-on experience with all these powerful features. Let's make sure we understand not just *how*
+                to use them, but *when* and *why* – critical for real-world projects."</p>
+        </div>
+        <!-- ==================== SLIDE 3: EXCEPTION HANDLING: INTRODUCTION ==================== -->
+        <div class="slide" id="s3">
+            <div class="slide-label">Exception Handling</div>
+            <h2>Exception Handling: <span class="highlight">The "Why" & Basic Flow</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>What is an Exception?</h3>
+                <p>An **exception** is an event that disrupts the normal flow of a program's instructions. It's an
+                    object that encapsulates information about an abnormal event that occurred during execution.</p>
+                <ul>
+                    <li>**Error vs. Exception:**
+                        <ul>
+                            <li>`Error`: Represents serious problems that most applications should not try to catch
+                                (e.g., `OutOfMemoryError`, `StackOverflowError`).</li>
+                            <li>`Exception`: Represents conditions that a reasonable application might want to catch
+                                (e.g., `IOException`, `NullPointerException`).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p style="margin-top: 10px;">**Why handle them?**</p>
+                <ul>
+                    <li>**Graceful Degradation:** Prevent program crashes.</li>
+                    <li>**User Experience:** Provide meaningful error messages.</li>
+                    <li>**Recovery:** Allow the program to attempt recovery from an error.</li>
+                    <li>**Debugging:** Centralize error reporting and logging.</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Basic Exception Handling (`try-catch-finally`)</h3>
+                <pre><code class="language-java">
+// Basic structure
+try {
+    // Code that might throw an exception
+    int result = 10 / 0; // This will throw an ArithmeticException
+    System.out.println("Result: " + result); // This line won't be reached
+} catch (ArithmeticException e) {
+    // Code to handle the specific exception
+    System.err.println("Caught an ArithmeticException: " + e.getMessage());
+} catch (Exception e) { // Generic catch for any other unexpected exception
+    System.err.println("Caught a generic Exception: " + e.getMessage());
+} finally {
+    // Code that always executes, regardless of whether an exception occurred or not
+    System.out.println("Finally block executed. Cleanup tasks go here.");
+}
+System.out.println("Program continues after the try-catch-finally block.");
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Modify the `try` block to remove the
+                    division by zero (e.g., `int result = 10 / 2;`). Observe the difference in output. What happens if
+                    you remove the `finally` block?</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 4: CHECKED VS UNCHECKED ==================== -->
+        <div class="slide" id="s4">
+            <div class="slide-label">Exception Handling</div>
+            <h2>Checked vs. Unchecked: <span class="highlight">The Compiler's Role</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>Checked Exceptions (Compile-time Exceptions)</h3>
+                <ul>
+                    <li>**Definition:** Exceptions that must be caught or declared in the method signature using the
+                        `throws` keyword. The compiler enforces this.</li>
+                    <li>**Hierarchy:** Subclasses of `java.lang.Exception` (but not `RuntimeException`).</li>
+                    <li>**Examples:** `IOException`, `SQLException`, `ClassNotFoundException`.</li>
+                    <li>**Use Case:** Typically represent problems outside the immediate control of the program that can
+                        reasonably be recovered from (e.g., file not found, network issues).</li>
+                </ul>
+                <p style="margin-top: 10px;">**Rule:** If a method calls another method that declares a checked
+                    exception, the calling method must either `catch` it or `declare` it (pass it up the call stack).
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>Unchecked Exceptions (Runtime Exceptions)</h3>
+                <ul>
+                    <li>**Definition:** Exceptions that do NOT need to be caught or declared. The compiler does not
+                        enforce their handling.</li>
+                    <li>**Hierarchy:** Subclasses of `java.lang.RuntimeException` (which is a subclass of `Exception`).
+                    </li>
+                    <li>**Examples:** `NullPointerException`, `ArithmeticException`, `ArrayIndexOutOfBoundsException`,
+                        `IllegalArgumentException`.</li>
+                    <li>**Use Case:** Typically represent programming errors (bugs) that should ideally be fixed rather
+                        than caught (e.g., trying to access an array out of bounds, dereferencing a null object).</li>
+                </ul>
+                <p style="margin-top: 10px;">**Rule:** It's generally a bad practice to catch `RuntimeException`s unless
+                    you have a specific recovery strategy. They indicate a flaw in logic.</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 5: DECLARING & PROPAGATING EXCEPTIONS ==================== -->
+        <div class="slide" id="s5">
+            <div class="slide-label">Exception Handling</div>
+            <h2>Declaring & Propagating: <span class="highlight">`throws` Keyword</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>Handling Checked Exceptions: `try-catch` vs. `throws`</h3>
+                <p>When a method might throw a checked exception, you have two primary choices:</p>
+                <ul>
+                    <li>**`try-catch`:** Handle the exception immediately within the method where it might occur. This
+                        is suitable if the method itself knows how to recover or respond to the exception.</li>
+                    <li>**`throws` keyword:** Declare that the method *might* throw the exception, delegating the
+                        responsibility of handling it to the calling method. This is useful when the current method
+                        cannot meaningfully handle the exception, and a higher-level caller is better equipped.</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Coding Scenario: `throws` in Action</h3>
+                <pre><code class="language-java">
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ThrowsKeywordDemo {
+
+    // Method 1: Declares (throws) an IOException, passing responsibility to its caller
+    public void readFile(String filePath) throws IOException {
+        System.out.println("Attempting to read file: " + filePath);
+        FileReader reader = null;
+        try {
+            reader = new FileReader(filePath);
+            // Simulate reading the file
+            int charCode;
+            while ((charCode = reader.read())!= -1) {
+                System.out.print((char) charCode);
+            }
+            System.out.println("\nFile read successfully.");
+        } finally {
+            if (reader!= null) {
+                reader.close(); // FileReader.close() can also throw IOException!
+            }
+        }
+    }
+
+    // Method 2: Catches the IOException thrown by readFile
+    public void processFile(String fileName) {
+        try {
+            readFile(fileName);
+        } catch (IOException e) {
+            System.err.println("Error processing file '" + fileName + "': " + e.getMessage());
+            // Log the error, notify user, or try an alternative
+        }
+    }
+
+    public static void main(String[] args) {
+        ThrowsKeywordDemo demo = new ThrowsKeywordDemo();
+        // This will succeed if "my_file.txt" exists and is readable
+        demo.processFile("my_file.txt");
+
+        // This will cause an IOException (file not found)
+        demo.processFile("non_existent_file.txt");
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Create a simple `my_file.txt` in your
+                    project's root directory with some text. Observe how `processFile` handles both existing and
+                    non-existing files. What happens if you remove `throws IOException` from the `readFile` method
+                    signature? Why?</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 6: MULTI-CATCH & FINALLY ==================== -->
+        <div class="slide" id="s6">
+            <div class="slide-label">Exception Handling</div>
+            <h2>Multi-Catch & `finally`: <span class="highlight">Refined Handling</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>Catching Multiple Exceptions (Java 7+)</h3>
+                <p>Before Java 7, if you wanted to handle multiple distinct exception types in the same way, you had to
+                    write separate `catch` blocks for each. With multi-catch, you can catch several exceptions in a
+                    single `catch` block if they are unrelated or share a common handling logic.</p>
+                <ul>
+                    <li>**Syntax:** `catch (ExceptionType1 | ExceptionType2 |... e)`</li>
+                    <li>**Benefit:** Reduces code duplication and improves readability.</li>
+                    <li>**Restriction:** The exception types in a multi-catch block cannot be subclasses or superclasses
+                        of each other (e.g., `catch (IOException | FileNotFoundException e)` is invalid because
+                        `FileNotFoundException` is a subclass of `IOException`).</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>The `finally` Block: Guaranteed Execution</h3>
+                <p>The `finally` block is always executed regardless of whether an exception occurs in the `try` block
+                    or not, and regardless of whether it's caught. It's primarily used for cleanup operations.</p>
+                <ul>
+                    <li>**Purpose:** Close resources (files, network connections, database connections), release locks,
+                        etc.</li>
+                    <li>**Guaranteed?** Almost always. Exceptions: `System.exit()` call, JVM crash, infinite loop in
+                        `try` or `catch`.</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Coding Scenario: Multi-Catch & `finally`</h3>
+                <pre><code class="language-java">
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class MultiCatchFinallyDemo {
+
+    public static void connectAndLoad(String dbUrl, String filePath) {
+        Connection conn = null;
+        FileInputStream fis = null;
+
+        try {
+            // Simulate database connection
+            conn = DriverManager.getConnection(dbUrl); // Might throw SQLException
+            System.out.println("Database connected.");
+
+            // Simulate file loading
+            fis = new FileInputStream(filePath); // Might throw FileNotFoundException (an IOException)
+            int data = fis.read(); // Might throw IOException
+            System.out.println("File data read: " + data);
+
+        } catch (SQLException | IOException e) { // Multi-catch for related but distinct exceptions
+            System.err.println("An error occurred during DB or File operation: " + e.getMessage());
+            // In real app: log the exception, show user-friendly message
+        } finally {
+            System.out.println("Executing finally block for cleanup...");
+            // Close resources in reverse order of opening
+            try {
+                if (fis!= null) fis.close();
+                System.out.println("FileInputStream closed.");
+            } catch (IOException e) {
+                System.err.println("Error closing file: " + e.getMessage());
+            }
+            try {
+                if (conn!= null) conn.close();
+                System.out.println("Database connection closed.");
+            } catch (SQLException e) {
+                System.err.println("Error closing database connection: " + e.getMessage());
+            }
+        }
+        System.out.println("Method finished.");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("--- Scenario 1: All operations succeed ---");
+        // These might fail in a real setup, but for demo, assume success
+        connectAndLoad("jdbc:mock:db", "existing_file.txt");
+
+        System.out.println("\n--- Scenario 2: File Not Found ---");
+        connectAndLoad("jdbc:mock:db", "non_existent_file.txt");
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Create an empty `existing_file.txt`.
+                    Observe how the `finally` block always executes. Explain why `catch (FileNotFoundException |
+                    IOException e)` would cause a compile-time error. What happens if you try to close `fis` before
+                    `conn` in the `finally` block?</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 7: TRY-WITH-RESOURCES (TWR) ==================== -->
+        <div class="slide" id="s7">
+            <div class="slide-label">Exception Handling</div>
+            <h2>`try-with-resources`: <span class="highlight">Automatic Resource Management</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>The Problem with Manual Resource Closing</h3>
+                <p>Manually closing resources in `finally` blocks (as seen in the previous slide) is verbose and
+                    error-prone, especially when multiple resources are involved. If one `close()` call throws an
+                    exception, others might not be executed.</p>
+                <ul>
+                    <li>**Boilerplate Code:** Repetitive `if (resource!= null) { resource.close(); }` blocks.</li>
+                    <li>**Suppressed Exceptions:** If an exception is thrown in the `try` block, and another is thrown
+                        in the `finally` block during cleanup, the original exception can be "lost" (suppressed).</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>`try-with-resources` (TWR) - Java 7+</h3>
+                <p>TWR automatically closes resources that implement the `java.lang.AutoCloseable` interface (or
+                    `java.io.Closeable`, which extends `AutoCloseable`).</p>
+                <ul>
+                    <li>**Syntax:** Resources are declared within the `try` parentheses.</li>
+                    <li>**Automatic Closing:** Resources are closed automatically at the end of the `try` block,
+                        regardless of how the block exits (normally or via an exception).</li>
+                    <li>**Exception Handling:** If an exception occurs in the `try` block and another during `close()`,
+                        the exception from `close()` is suppressed, and the original exception is re-thrown. The
+                        suppressed exception can be retrieved via `Throwable.getSuppressed()`.</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Coding Scenario: `try-with-resources` for `FileReader`</h3>
+                <pre><code class="language-java">
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class TryWithResourcesDemo {
+
+    public static void readFileTWR(String filePath) {
+        // Resources declared here are automatically closed
+        try (FileReader fr = new FileReader(filePath);
+             BufferedReader br = new BufferedReader(fr)) { // Multiple resources allowed
+
+            System.out.println("Reading from file: " + filePath);
+            String line;
+            while ((line = br.readLine())!= null) {
+                System.out.println(" " + line);
+            }
+            System.out.println("File read successfully.");
+        } catch (IOException e) { // Catch block is still needed for declared exceptions
+            System.err.println("Error reading file: " + e.getMessage());
+            // Exception in fr.close() or br.close() would be suppressed and added to 'e'
+            for (Throwable suppressed : e.getSuppressed()) {
+                System.err.println(" Suppressed Exception: " + suppressed.getMessage());
+            }
+        }
+        System.out.println("Method finished.");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("--- Scenario 1: Existing File ---");
+        // Create an "example.txt" file for this to work
+        readFileTWR("example.txt");
+
+        System.out.println("\n--- Scenario 2: Non-Existing File ---");
+        readFileTWR("non_existent_file.txt");
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Create an `example.txt` file and put
+                    some text in it. Observe how the resources are closed without explicit `finally` blocks. Discuss why
+                    `try-with-resources` is a significant improvement over manual `finally` blocks for resource
+                    management.</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 8: CUSTOM EXCEPTIONS: TAILORING ERRORS ==================== -->
+        <div class="slide" id="s8">
+            <div class="slide-label">Exception Handling</div>
+            <h2>Custom Exceptions: <span class="highlight">Tailoring Your Errors</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>Why Create Custom Exceptions?</h3>
+                <ul>
+                    <li><strong>Business Logic Errors:</strong> Standard Java exceptions don't always accurately
+                        represent domain-specific problems (e.g., "Insufficient Funds" is not an
+                        `IllegalArgumentException`).</li>
+                    <li><strong>Improved Readability & Clarity:</strong> Custom exceptions make the code's intent
+                        clearer to other developers.</li>
+                    <li><strong>Fine-grained Handling:</strong> Allows client code to catch and handle specific business
+                        errors more precisely.</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Rule of thumb:</strong> If a standard `RuntimeException` (like
+                    `IllegalArgumentException` or `IllegalStateException`) doesn't perfectly describe the error,
+                    consider a custom exception.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>How to Create & Use Custom Exceptions</h3>
+                <p style="margin-bottom: 10px;">Your custom exception class should extend either `java.lang.Exception`
+                    (for a **checked** exception) or `java.lang.RuntimeException` (for an **unchecked** exception).</p>
+                <ul>
+                    <li><strong>Extend `Exception`:</strong> Use for conditions client code *must* explicitly handle
+                        (e.g., file not found from an external source, network issues). Signals a *recoverable* problem.
+                    </li>
+                    <li><strong>Extend `RuntimeException`:</strong> Use for programming errors or situations client code
+                        *should* ideally prevent. Signals an *unrecoverable* problem that often indicates a bug.</li>
+                </ul>
+                <pre><code class="language-java">
+// 1. Define your Custom Exception (Checked)
+class InsufficientFundsException extends Exception {
+    private double currentBalance;
+    private double withdrawalAmount;
+
+    public InsufficientFundsException(String message, double currentBalance, double withdrawalAmount) {
+        super(message);
+        this.currentBalance = currentBalance;
+        this.withdrawalAmount = withdrawalAmount;
+    }
+
+    public double getCurrentBalance() { return currentBalance; }
+    public double getWithdrawalAmount() { return withdrawalAmount; }
+}
+
+// 2. Use it in a Service Class
+class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public void withdraw(double amount) throws InsufficientFundsException { // Declare it!
+        if (amount &lt;= 0) {
+            throw new IllegalArgumentException("Withdrawal amount must be positive.");
+        }
+        if (balance &lt; amount) {
+            throw new InsufficientFundsException(
+                "Attempted withdrawal of " + amount + " but balance is only " + balance,
+                balance, amount
+            );
+        }
+        balance -= amount;
+        System.out.println("Withdrew " + amount + ". New balance: " + balance);
+    }
+}
+
+// 3. Handle it in Client Code
+public class CustomExceptionDemo {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(500);
+
+        try {
+            account.withdraw(200); // OK
+            account.withdraw(400); // Insufficient funds!
+            account.withdraw(-50); // IllegalArgumentException (Unchecked)
+        } catch (InsufficientFundsException e) {
+            System.err.println("Transaction Failed: " + e.getMessage());
+            System.err.println("Current Balance: " + e.getCurrentBalance() + ", Attempted: " + e.getWithdrawalAmount());
+        } catch (IllegalArgumentException e) { // Catches the unchecked exception
+            System.err.println("Input Error: " + e.getMessage());
+        } catch (Exception e) { // Generic catch for any other unexpected issues
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this `CustomExceptionDemo`. Modify
+                    `InsufficientFundsException` to extend `RuntimeException` instead and observe how the compiler no
+                    longer forces `throws` declaration. Discuss the implications for API design and developer contracts.
+                </p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 9: IF VS TRY-CATCH ==================== -->
+        <div class="slide" id="s9">
+            <div class="slide-label">Exception Handling</div>
+            <h2>`if` vs. `try-catch`: <span class="highlight">Deciding Your Strategy</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>The Core Principle: Predictability and Recoverability</h3>
+                <ul>
+                    <li><strong>Use `if` for predictable, preventable conditions:</strong>
+                        <ul>
+                            <li>When you can check a condition *before* an operation, and the failure is a normal,
+                                expected deviation in flow (e.g., input validation).</li>
+                            <li>This prevents an exception from being thrown in the first place.</li>
+                            <li>Leads to cleaner code and often better performance (exceptions are expensive).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Use `try-catch` for unpredictable, exceptional conditions:</strong>
+                        <ul>
+                            <li>When an operation might fail due to circumstances outside your control or that are
+                                genuinely "exceptional" (e.g., network down, file missing, external service error).</li>
+                            <li>When the failure is not a normal part of your application's logic flow.</li>
+                            <li>When you need to *recover* from an error or log it appropriately.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="p-activity"><strong>Trainer Note:</strong> This distinction is crucial for writing efficient,
+                    readable, and robust code. Don't use exceptions for flow control!</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Scenario: Parsing User Input (Comparing Approaches)</h3>
+                <pre><code class="language-java">
+public class IfVsTryCatch {
+
+    // Approach 1: Using 'if' for validation (PREFERABLE for expected input issues)
+    public static void processInputWithIf(String input) {
+        System.out.println("\n--- Processing with IF ---");
+        if (input == null || input.trim().isEmpty()) {
+            System.out.println("Error: Input cannot be empty.");
+            return;
+        }
+        if (!input.matches("\\d+")) { // Check if it's purely digits
+            System.out.println("Error: Input '" + input + "' is not a valid number (contains non-digits).");
+            return;
+        }
+
+        int number = Integer.parseInt(input); // Now it's safer to parse
+        System.out.println("Successfully parsed (if-check): " + number);
+    }
+
+    // Approach 2: Relying on 'try-catch' (Use for truly unexpected external input failures)
+    public static void processInputWithTryCatch(String input) {
+        System.out.println("\n--- Processing with TRY-CATCH ---");
+        try {
+            int number = Integer.parseInt(input);
+            System.out.println("Successfully parsed (try-catch): " + number);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Input '" + input + "' is not a valid number (NumberFormatException).");
+            // Log.error("Failed to parse input", e); // In a real project, always log!
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        processInputWithIf("123");
+        processInputWithIf("");
+        processInputWithIf("abc");
+
+        processInputWithTryCatch("456");
+        processInputWithTryCatch(""); // This will parse as empty string, then fail parseInt
+        processInputWithTryCatch("xyz");
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Observe the output differences. When is
+                    `processInputWithIf` more appropriate? When might `processInputWithTryCatch` be unavoidable or even
+                    preferred (e.g., parsing a configuration value loaded from an unknown source)?</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 10: EXCEPTION HANDLING IN PROJECT ARCHITECTURE ==================== -->
+        <div class="slide" id="s10">
+            <div class="slide-label">Exception Handling</div>
+            <h2>Exception Handling: <span class="highlight">In Project Architecture</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>Beyond Basic `try-catch`: Production-Ready Practices</h3>
+                <ul>
+                    <li><strong>Logging, Not Printing:</strong> Never use `e.printStackTrace()` or
+                        `System.err.println()` in production code. Use a proper logging framework (e.g., SLF4J with
+                        Logback/Log4j2).</li>
+                    <li><strong>Don't Swallow Exceptions:</strong> If you `catch` an exception, *do something* with it –
+                        log it, re-throw it (possibly wrapped), or present a user-friendly error. An empty `catch` block
+                        is a major anti-pattern.</li>
+                    <li><strong>Wrap & Re-throw:</strong> Often, you catch a low-level exception (e.g., `SQLException`)
+                        and wrap it in a custom, higher-level, business-specific exception (e.g.,
+                        `ProductPersistenceException`) to provide more context.</li>
+                    <li><strong>Global Exception Handlers:</strong> In frameworks like Spring Boot, you define
+                        centralized mechanisms to catch unhandled exceptions at a high level and return consistent error
+                        responses (e.g., JSON error objects for APIs).</li>
+                </ul>
+                <p class="p-activity"><strong>Trainer Note:</strong> Good exception handling is a cornerstone of
+                    maintainable and scalable enterprise applications.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Example: Logging vs. `printStackTrace()`</h3>
+                <p>Using a logger (like SLF4J/Logback) provides powerful features like filtering, different log levels
+                    (DEBUG, INFO, WARN, ERROR), and output to various destinations (console, file, network).</p>
+                <pre><code class="language-java">
+// Example: Using SLF4J Logger (replace with your actual logger setup)
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class ProjectExceptionHandling {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProjectExceptionHandling.class);
+
+    public void fetchData(String resourceId) {
+        try {
+            // Simulate an operation that might fail
+            if (resourceId.equals("invalid")) {
+                throw new IOException("Resource not found or inaccessible: " + resourceId);
+            }
+            logger.info("Data fetched successfully for resource: {}", resourceId);
+        } catch (IOException e) {
+            // Instead of e.printStackTrace();
+            logger.error("Failed to fetch data for resource: {}", resourceId, e); // Log message, resourceId, AND the exception stack trace
+            // Potentially re-throw a custom exception
+            throw new RuntimeException("Data access failed due_to_io_error", e);
+        }
+    }
+
+    public static void main(String[] args) {
+        ProjectExceptionHandling handler = new ProjectExceptionHandling();
+        handler.fetchData("valid_resource");
+        try {
+            handler.fetchData("invalid");
+        } catch (RuntimeException e) {
+            System.err.println("Caught wrapped exception in main: " + e.getMessage());
+        }
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Discuss how `logger.error` is superior to
+                    `e.printStackTrace()`. How would you implement the "wrap & re-throw" strategy shown, using a custom
+                    exception `ResourceAccessException` instead of `RuntimeException`?</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 11: COLLECTIONS FRAMEWORK: HIERARCHY & LISTS ==================== -->
+        <div class="slide" id="s11">
+            <div class="slide-label">Collections Framework</div>
+            <h2><span class="highlight">Collections Hierarchy</span> & List Implementations</h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>The Java Collections Framework: Your Data Toolbox</h3>
+                <ul>
+                    <li>A unified architecture for representing and manipulating collections of objects.</li>
+                    <li>Provides interfaces (e.g., `List`, `Set`, `Map`) and their implementations (e.g., `ArrayList`,
+                        `HashSet`, `HashMap`).</li>
+                    <li>**Goal:** To enable interoperability, reduce programming effort, and increase performance.</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Key Interfaces:</strong> `Collection` (root), `List`, `Set`,
+                    `Queue`, and `Map` (separate hierarchy).</p>
+            </div>
+
+            <div class="content-block">
+                <h3>`List` Interface: Ordered, Indexed, Allows Duplicates</h3>
+                <p>Represents an ordered collection (sequence) of elements. Elements can be accessed by their integer
+                    index.</p>
+                <div style="display: flex; gap: 20px; width: 100%;">
+                    <div style="flex: 1;">
+                        <h4>`ArrayList`: Fast Random Access (like a dynamic array)</h4>
+                        <ul>
+                            <li><strong>Internal:</strong> Resizable array.</li>
+                            <li><strong>Best For:</strong> Frequent random access (`get(index)` is O(1)).</li>
+                            <li><strong>Performance:</strong>
+                                <ul>
+                                    <li>`add(element)` at end: Amortized O(1).</li>
+                                    <li>`get(index)`: O(1).</li>
+                                    <li>`add(index, element)` in middle: O(n) (requires shifting elements).</li>
+                                    <li>`remove(index)` in middle: O(n).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1;">
+                        <h4>`LinkedList`: Fast Inserts/Deletes (like a doubly-linked list)</h4>
+                        <ul>
+                            <li><strong>Internal:</strong> Doubly-linked list.</li>
+                            <li><strong>Best For:</strong> Frequent insertions and deletions in the middle.</li>
+                            <li><strong>Performance:</strong>
+                                <ul>
+                                    <li>`add(element)` at end: O(1).</li>
+                                    <li>`get(index)`: O(n) (requires traversal).</li>
+                                    <li>`add(index, element)` in middle: O(1) (after O(n) traversal to find index).</li>
+                                    <li>`remove(index)` in middle: O(1) (after O(n) traversal).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Coding Scenario: Choosing the Right `List`</h3>
+                <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ListChoiceDemo {
+    public static void main(String[] args) {
+        // Scenario 1: You need to frequently access elements by index (e.g., display by row number)
+        List&lt;String&gt; shoppingList = new ArrayList&lt;&gt;();
+        shoppingList.add("Milk");
+        shoppingList.add("Bread");
+        shoppingList.add("Eggs");
+        System.out.println("Item 2 (0-indexed): " + shoppingList.get(1)); // Fast access
+
+        // Scenario 2: You frequently add/remove items from the middle (e.g., managing a playlist)
+        List&lt;String&gt; playlist = new LinkedList&lt;&gt;();
+        playlist.add("Song A");
+        playlist.add("Song C");
+        playlist.add(1, "Song B"); // Efficient insertion in middle
+        System.out.println("Playlist: " + playlist);
+        playlist.remove("Song A"); // Efficient removal
+        System.out.println("Updated Playlist: " + playlist);
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Discuss how `ArrayList` might be slow if
+                    you repeatedly `add(0, element)`. Why is `LinkedList` better for that?</p>
+            </div>
+        </div>
+        <!-- ==================== SLIDE 12: LIST INTERFACE: IMPORTANT METHODS ==================== -->
+        <div class="slide" id="s12">
+            <div class="slide-label">Collections Framework</div>
+            <h2>`List` Interface: <span class="highlight">Key Methods & Utilities</span></h2>
+            <div class="accent-line"></div>
+
+            <div class="content-block">
+                <h3>Beyond `add()` and `get()`: Writing Concise Code</h3>
+                <p>Knowing common `List` methods helps write efficient and readable code, often turning multiple lines
+                    of manual iteration into a single method call.</p>
+                <ul>
+                    <li><strong>`indexOf(Object o)`:</strong> Returns the index of the first occurrence of the specified
+                        element, or -1 if this list does not contain the element.</li>
+                    <li><strong>`lastIndexOf(Object o)`:</strong> Returns the index of the last occurrence.</li>
+                    <li><strong>`subList(int fromIndex, int toIndex)`:</strong> Returns a `view` of the portion of this
+                        list between the specified `fromIndex`, inclusive, and `toIndex`, exclusive. Changes to the
+                        sublist are reflected in the original list and vice versa.</li>
+                    <li><strong>`replaceAll(UnaryOperator<E> operator)`:</strong> Replaces each element of this list
+                        with the result of applying the operator to that element. (Java 8+)</li>
+                    <li><strong>`sort(Comparator
+                            <? super E> c)`:</strong> Sorts this list according to the order induced by the specified `Comparator`. (Java 8+)</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Leveraging these built-in methods is crucial for writing "3 lines of code" instead of "20 lines of code" in projects.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Practical Examples with `ArrayList`</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+
+public class ListMethodsDemo {
+    public static void main(String[] args) {
+        List&lt;String&gt; names = new ArrayList&lt;&gt;();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+        names.add("Alice"); // Duplicate
+
+        System.out.println("Original List: " + names);
+
+        // 1. indexOf and lastIndexOf
+        System.out.println("First 'Alice' at: " + names.indexOf("Alice"));
+        System.out.println("Last 'Alice' at: " + names.lastIndexOf("Alice"));
+        System.out.println("'David' at: " + names.indexOf("David")); // -1
+
+        // 2. subList - creating a view
+        List&lt;String&gt; sub = names.subList(1, 3); // Elements at index 1 and 2
+        System.out.println("Sublist (index 1 to 2): " + sub);
+        sub.add("Eve"); // Adds to original 'names' list too!
+        System.out.println("Original List after sublist modification: " + names);
+
+        // 3. replaceAll (Java 8+)
+        List&lt;String&gt; fruits = new ArrayList&lt;&gt;(List.of("apple", "banana", "cherry"));
+        fruits.replaceAll(String::toUpperCase); // Convert all to uppercase
+        System.out.println("Fruits after replaceAll: " + fruits);
+
+        // 4. sort (Java 8+) - using default String comparator
+        names.sort(Comparator.naturalOrder()); // Sorts alphabetically
+        System.out.println("Names after sort: " + names);
+
+        // Another sort example: sort by length (Java 8+)
+        fruits.sort(Comparator.comparingInt(String::length));
+        System.out.println("Fruits sorted by length: " + fruits);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Experiment with `subList` by removing an element from `sub` and observe its effect on the original `names` list. Try to `add` an element to `sub` *after* the original `names` list has been structurally modified (e.g., `names.add("Frank")` after `sub` is created). What happens and why?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 13: SET INTERFACE: IMPLEMENTATIONS & UNIQUENESS ==================== -->
+  <div class="slide" id="s13">
+    <div class="slide-label">Collections Framework</div>
+    <h2>`Set` Interface: <span class="highlight">Unique Elements Only</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The `Set` Contract: No Duplicate Elements</h3>
+      <p>A `Set` is a collection that cannot contain duplicate elements. It models the mathematical set abstraction. There is no specific order of elements (though some implementations guarantee iteration order).</p>
+      <p style="margin-top: 10px;">Choosing the right `Set` implementation depends on whether you need ordering and the performance characteristics you prioritize.</p>
+    </div>
+
+    <div class="content-block">
+      <div style="display: flex; gap: 20px; width: 100%;">
+        <div style="flex: 1;">
+          <h4>`HashSet`: Fast Access, No Order Guaranteed</h4>
+          <ul>
+            <li><strong>Internal:</strong> Backed by a `HashMap`.</li>
+            <li><strong>Characteristics:</strong> Offers constant time performance (O(1)) for basic operations (add, remove, contains), assuming the hash function disperses elements properly. Does not guarantee order.</li>
+            <li><strong>Key Requirement:</strong> Elements must correctly implement `hashCode()` and `equals()` methods for uniqueness.</li>
+            <li><strong>Best For:</strong> High-performance storage of unique elements when iteration order is not important.</li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <h4>`LinkedHashSet`: Insertion Order Maintained</h4>
+          <ul>
+            <li><strong>Internal:</strong> Backed by a `LinkedHashMap`.</li>
+            <li><strong>Characteristics:</strong> Maintains the insertion order of elements (they iterate in the order they were inserted). Provides near `HashSet` performance.</li>
+            <li><strong>Best For:</strong> When you need unique elements but also need to preserve the order in which they were added.</li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <h4>`TreeSet`: Sorted Order Maintained</h4>
+          <ul>
+            <li><strong>Internal:</strong> Backed by a `TreeMap`.</li>
+            <li><strong>Characteristics:</strong> Stores elements in a sorted (natural or custom) order. Operations typically take O(log n) time. Does not allow `null` keys.</li>
+            <li><strong>Key Requirement:</strong> Elements must implement `Comparable` or a `Comparator` must be provided at construction time.</li>
+            <li><strong>Best For:</strong> When you need unique elements and they must always be kept in sorted order.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Demonstrating `Set` Behaviors</h3>
+      <pre><code class="language-java">
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class SetDemo {
+    public static void main(String[] args) {
+        // HashSet: No guaranteed order, fast, no duplicates
+        Set&lt;String&gt; hashSet = new HashSet&lt;&gt;();
+        hashSet.add("Apple");
+        hashSet.add("Banana");
+        hashSet.add("Cherry");
+        hashSet.add("Apple"); // Duplicate, won't be added
+        System.out.println("HashSet: " + hashSet); // Order might vary
+
+        // LinkedHashSet: Insertion order maintained, fast, no duplicates
+        Set&lt;String&gt; linkedHashSet = new LinkedHashSet&lt;&gt;();
+        linkedHashSet.add("Apple");
+        linkedHashSet.add("Banana");
+        linkedHashSet.add("Cherry");
+        linkedHashSet.add("Apple");
+        System.out.println("LinkedHashSet: " + linkedHashSet); // Will be [Apple, Banana, Cherry]
+
+        // TreeSet: Elements are sorted, O(log n), no duplicates
+        Set&lt;String&gt; treeSet = new TreeSet&lt;&gt;();
+        treeSet.add("Cherry");
+        treeSet.add("Apple");
+        treeSet.add("Banana");
+        treeSet.add("Apple");
+        System.out.println("TreeSet: " + treeSet); // Will be [Apple, Banana, Cherry] (alphabetical)
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code and observe the distinct output for each `Set` type. Try adding `null` to each. What happens for `TreeSet` and why?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 14: SET INTERFACE: PRACTICAL SCENARIOS ==================== -->
+  <div class="slide" id="s14">
+    <div class="slide-label">Collections Framework</div>
+    <h2>`Set` Interface: <span class="highlight">Practical Scenarios</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>Leveraging `Set` for Common Problems</h3>
+      <ul>
+        <li><strong>Removing Duplicates:</strong> The most common use case. Copying elements from a `List` to a `Set` (and back if needed) is the most efficient way to get unique elements.</li>
+        <li><strong>Membership Testing:</strong> Efficiently checking if an element exists in a large collection (`contains()` operation is O(1) for `HashSet`).</li>
+        <li><strong>Mathematical Set Operations:</strong> While not direct methods, `Set`s are fundamental for implementing union, intersection, and difference operations.</li>
+        <li><strong>Counting Unique Items:</strong> A `Set`'s `size()` directly gives the count of unique items.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> When you see a problem asking for "unique items" or "no duplicates," your first thought should be a `Set`!</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Removing Duplicates (The 3-Line Trick!)</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class RemoveDuplicatesDemo {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; numbersWithDuplicates = new ArrayList&lt;&gt;(
+            List.of(1, 5, 2, 8, 5, 1, 9, 2, 7, 5)
+        );
+        System.out.println("Original List: " + numbersWithDuplicates);
+
+        // --- The 3-line trick to remove duplicates (and potentially sort!) ---
+
+        // 1. Using HashSet (removes duplicates, no guaranteed order)
+        Set&lt;Integer&gt; uniqueHashSet = new HashSet&lt;&gt;(numbersWithDuplicates);
+        List&lt;Integer&gt; listWithoutDuplicatesUnordered = new ArrayList&lt;&gt;(uniqueHashSet);
+        System.out.println("Unique (unordered) via HashSet: " + listWithoutDuplicatesUnordered);
+
+        // 2. Using TreeSet (removes duplicates, automatically sorted)
+        Set&lt;Integer&gt; uniqueTreeSet = new TreeSet&lt;&gt;(numbersWithDuplicates);
+        List&lt;Integer&gt; listWithoutDuplicatesSorted = new ArrayList&lt;&gt;(uniqueTreeSet);
+        System.out.println("Unique (sorted) via TreeSet: " + listWithoutDuplicatesSorted);
+
+        // --- Checking for membership ---
+        Set&lt;String&gt; registeredEmails = new HashSet&lt;&gt;();
+        registeredEmails.add("alice@example.com");
+        registeredEmails.add("bob@example.com");
+
+        String newEmail = "charlie@example.com";
+        String existingEmail = "alice@example.com";
+
+        System.out.println("\nIs " + newEmail + " registered? " + registeredEmails.contains(newEmail));
+        System.out.println("Is " + existingEmail + " registered? " + registeredEmails.contains(existingEmail));
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Modify the `numbersWithDuplicates` list to include `null`. What happens when you use `HashSet`? What about `TreeSet`? Explain why. Design a scenario where `LinkedHashSet` would be the best choice for removing duplicates.</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 15: MAP INTERFACE: KEY-VALUE POWERHOUSES ==================== -->
+  <div class="slide" id="s15">
+    <div class="slide-label">Collections Framework</div>
+    <h2>`Map` Interface: <span class="highlight">Key-Value Powerhouses</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The `Map` Contract: Unique Keys Map to Values</h3>
+      <p>A `Map` is an object that maps keys to values. A `Map` cannot contain duplicate keys; each key can map to at most one value. It's not a `Collection` but an essential part of the Java Collections Framework.</p>
+      <p style="margin-top: 10px;">Choosing the right `Map` depends on performance, whether you need key ordering, and how you handle nulls.</p>
+    </div>
+
+    <div class="content-block">
+      <div style="display: flex; gap: 20px; width: 100%;">
+        <div style="flex: 1;">
+          <h4>`HashMap`: Fast, Unordered, Allows Nulls</h4>
+          <ul>
+            <li><strong>Internal:</strong> Backed by a hash table (array of linked lists/trees).</li>
+            <li><strong>Characteristics:</strong> Provides constant time performance (O(1)) for basic operations (`get`, `put`, `contains`) in average case. No guaranteed order. Allows one `null` key and multiple `null` values.</li>
+            <li><strong>Key Requirement:</strong> Keys must correctly implement `hashCode()` and `equals()` for proper functioning.</li>
+            <li><strong>Best For:</strong> High-performance lookups when order isn't a concern. Most common `Map` implementation.</li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <h4>`LinkedHashMap`: Insertion Order Maintained, Fast</h4>
+          <ul>
+            <li><strong>Internal:</strong> Hash table with a doubly-linked list running through its entries.</li>
+            <li><strong>Characteristics:</strong> Maintains the insertion order of key-value pairs (they iterate in the order they were inserted). Offers near `HashMap` performance.</li>
+            <li><strong>Best For:</strong> When you need the fast lookups of `HashMap` but also need to preserve the order in which entries were added.</li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <h4>`TreeMap`: Sorted by Keys, O(log n)</h4>
+          <ul>
+            <li><strong>Internal:</strong> Backed by a Red-Black tree.</li>
+            <li><strong>Characteristics:</strong> Stores entries in a sorted order based on the keys (natural or custom). Operations typically take O(log n) time. Does not allow `null` keys.</li>
+            <li><strong>Key Requirement:</strong> Keys must implement `Comparable` or a `Comparator` must be provided.</li>
+            <li><strong>Best For:</strong> When you need keys to be automatically sorted.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Demonstrating `Map` Behaviors (Phonebook)</h3>
+      <pre><code class="language-java">
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class MapDemo {
+    public static void main(String[] args) {
+        // HashMap: No guaranteed order
+        Map&lt;String, String&gt; hashMap = new HashMap&lt;&gt;();
+        hashMap.put("Alice", "123-4567");
+        hashMap.put("Charlie", "789-0123");
+        hashMap.put("Bob", "456-7890");
+        System.out.println("HashMap: " + hashMap); // Order might vary
+
+        // LinkedHashMap: Insertion order maintained
+        Map&lt;String, String&gt; linkedHashMap = new LinkedHashMap&lt;&gt;();
+        linkedHashMap.put("Alice", "123-4567");
+        linkedHashMap.put("Charlie", "789-0123");
+        linkedHashMap.put("Bob", "456-7890");
+        System.out.println("LinkedHashMap: " + linkedHashMap); // Will be [Alice, Charlie, Bob]
+
+        // TreeMap: Keys are sorted (alphabetical for String keys)
+        Map&lt;String, String&gt; treeMap = new TreeMap&lt;&gt;();
+        treeMap.put("Charlie", "789-0123");
+        treeMap.put("Alice", "123-4567");
+        treeMap.put("Bob", "456-7890");
+        System.out.println("TreeMap: " + treeMap); // Will be [Alice, Bob, Charlie]
+
+        // Basic Map operations
+        System.out.println("\nBob's number: " + hashMap.get("Bob"));
+        System.out.println("Contains key 'Alice'? " + hashMap.containsKey("Alice"));
+        System.out.println("Contains value '456-7890'? " + hashMap.containsValue("456-7890"));
+        hashMap.remove("Charlie");
+        System.out.println("HashMap after removing Charlie: " + hashMap);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Add a `null` key to `HashMap` and `LinkedHashMap`. What happens when you try to add a `null` key to `TreeMap` and why?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 16: MAP INTERFACE: ADVANCED METHODS & SCENARIOS ==================== -->
+  <div class="slide" id="s16">
+    <div class="slide-label">Collections Framework</div>
+    <h2>`Map` Interface: <span class="highlight">Leveraging Advanced Methods</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>Beyond Basic `put()` and `get()`: Writing Concise Logic (Java 8+)</h3>
+      <p>Modern Java introduced several powerful default methods to the `Map` interface, making common patterns more concise and efficient. These methods often replace verbose `if/else` checks for existence.</p>
+      <ul>
+        <li><strong>`getOrDefault(Object key, V defaultValue)`:</strong> Returns the value for the specified key, or `defaultValue` if the key is not found. Avoids `NullPointerException` if key doesn't exist.</li>
+        <li><strong>`putIfAbsent(K key, V value)`:</strong> Inserts the specified value with the specified key only if the key is not already associated with a value. Returns the previous value associated with the key, or `null` if there was no mapping.</li>
+        <li><strong>`computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction)`:</strong> If the specified key is not already associated with a value (or is mapped to `null`), attempts to compute its value using the given mapping function and enters it into this map.</li>
+        <li><strong>`computeIfPresent(K key, BiFunction<? super K,? super V,? extends V> remappingFunction)`:</strong> If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.</li>
+        <li><strong>`merge(K key, V value, BiFunction<? super V,? super V,? extends V> remappingFunction)`:</strong> If the specified key is not already associated with a value or is associated with `null`, associates it with the given non-null `value`. Otherwise, it attempts to re-map the value using the given remapping function.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Mastering these methods can drastically reduce boilerplate code, especially in scenarios like frequency counting or grouping data.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Word Frequency Counter</h3>
+      <pre><code class="language-java">
+import java.util.HashMap;
+import java.util.Map;
+
+public class AdvancedMapDemo {
+    public static void main(String[] args) {
+        String text = "Java is fun. Java is powerful. Learning Java is key.";
+        String[] words = text.toLowerCase().replaceAll("[^a-z ]", "").split(" "); // Clean and split
+        Map&lt;String, Integer&gt; wordFrequencies = new HashMap&lt;&gt;();
+
+        // --- Traditional way (pre-Java 8) ---
+        // for (String word : words) {
+        // if (!word.isEmpty()) {
+        // Integer count = wordFrequencies.get(word);
+        // if (count == null) {
+        // wordFrequencies.put(word, 1);
+        // } else {
+        // wordFrequencies.put(word, count + 1);
+        // }
+        // }
+        // }
+        // System.out.println("Traditional Frequencies: " + wordFrequencies);
+
+        // --- Using computeIfAbsent (more concise for putting initial value) ---
+        Map&lt;String, Integer&gt; wordFrequenciesCompute = new HashMap&lt;&gt;();
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                wordFrequenciesCompute.computeIfAbsent(word, k -&gt; 0); // Ensure key exists with 0 if not present
+                wordFrequenciesCompute.put(word, wordFrequenciesCompute.get(word) + 1);
+            }
+        }
+        System.out.println("\nFrequencies (computeIfAbsent + put): " + wordFrequenciesCompute);
+
+        // --- Using merge (most concise for frequency counting) ---
+        Map&lt;String, Integer&gt; wordFrequenciesMerge = new HashMap&lt;&gt;();
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                // If key exists, apply (oldValue + newValue), else put newValue (1)
+                wordFrequenciesMerge.merge(word, 1, Integer::sum); // Integer::sum is equivalent to (oldVal, newVal) -&gt; oldVal + newVal
+            }
+        }
+        System.out.println("Frequencies (merge): " + wordFrequenciesMerge);
+
+        // --- Using getOrDefault ---
+        System.out.println("\nFrequency of 'java': " + wordFrequenciesMerge.getOrDefault("java", 0));
+        System.out.println("Frequency of 'python': " + wordFrequenciesMerge.getOrDefault("python", 0));
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Comment out the `merge` and `computeIfAbsent` sections and uncomment the "Traditional way" to compare verbosity. Discuss how `merge` simplifies the frequency counting logic. What method would you use if you needed to group objects by a certain property (e.g., `Map<Category, List<Product>>`) and why?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 17: QUEUE INTERFACE: PROCESSING PIPELINES ==================== -->
+  <div class="slide" id="s17">
+    <div class="slide-label">Collections Framework</div>
+    <h2>`Queue` Interface: <span class="highlight">Processing Pipelines (FIFO)</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The `Queue` Contract: First-In, First-Out (FIFO)</h3>
+      <p>A `Queue` is a collection designed for holding elements prior to processing. Besides basic `Collection` operations, queues provide additional insertion, extraction, and inspection operations.</p>
+      <ul>
+        <li>**FIFO (First-In, First-Out):** Elements are typically processed in the order they were added.</li>
+        <li><strong>Common Implementations:</strong>
+          <ul>
+            <li>`LinkedList`: Can function as a `Queue` and `Deque`.</li>
+            <li>`ArrayDeque`: A more efficient double-ended queue, often preferred over `LinkedList` for queue behavior.</li>
+            <li>`PriorityQueue`: Elements are ordered according to their natural ordering, or by a `Comparator`. Not FIFO in the traditional sense, but by priority.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Key `Queue` Operations (Two Forms)</h3>
+      <p>Queues typically offer two sets of methods for each operation:</p>
+      <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+        <thead>
+          <tr>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left; background-color: rgba(255,255,255,0.05);">Operation</th>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left; background-color: rgba(255,255,255,0.05);">Throws Exception</th>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left; background-color: rgba(255,255,255,0.05);">Returns Special Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 8px; border: 1px solid var(--border);">Insert</td>
+            <td style="padding: 8px; border: 1px solid var(--border);">`add(e)`</td>
+            <td style="padding: 8px; border: 1px solid var(--border);">`offer(e)`</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid var(--border);">Remove</td>
+            <td style="padding: 8px; border: 1px solid var(--border);">`remove()`</td>
+            <td style="padding: 8px; border: 1px solid var(--border);">`poll()`</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border: 1px solid var(--border);">Examine</td>
+            <td style="padding: 8px; border: 1px solid var(--border);">`element()`</td>
+            <td style="padding: 8px; border: 1px solid var(--border);">`peek()`</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 10px; font-style: italic; color: var(--muted);"><strong>Trainer Note:</strong> Use `offer`, `poll`, `peek` (return special value) to avoid exceptions for normal flow; use `add`, `remove`, `element` (throw exception) when an empty queue is truly an error condition.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Simulating a Simple Ticket Queue</h3>
+      <pre><code class="language-java">
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+public class TicketQueueDemo {
+    public static void main(String[] args) {
+        Queue&lt;String&gt; ticketQueue = new ArrayDeque&lt;&gt;();
+
+        // Add people to the queue (offer is generally safer than add)
+        ticketQueue.offer("Alice");
+        ticketQueue.offer("Bob");
+        ticketQueue.offer("Charlie");
+        System.out.println("Initial Queue: " + ticketQueue); // [Alice, Bob, Charlie]
+
+        // Peek at the next person without removing
+        String nextPerson = ticketQueue.peek();
+        System.out.println("Next person in queue (peek): " + nextPerson); // Alice
+        System.out.println("Queue after peek: " + ticketQueue); // [Alice, Bob, Charlie]
+
+        // Process people from the queue (poll is generally safer than remove)
+        String processedPerson1 = ticketQueue.poll();
+        System.out.println("Processed: " + processedPerson1); // Alice
+        System.out.println("Queue after first poll: " + ticketQueue); // [Bob, Charlie]
+
+        String processedPerson2 = ticketQueue.poll();
+        System.out.println("Processed: " + processedPerson2); // Bob
+        System.out.println("Queue after second poll: " + ticketQueue); // [Charlie]
+
+        // Check if queue is empty
+        System.out.println("Is queue empty? " + ticketQueue.isEmpty());
+
+        // Process last person
+        String processedPerson3 = ticketQueue.poll();
+        System.out.println("Processed: " + processedPerson3); // Charlie
+        System.out.println("Queue after third poll: " + ticketQueue); // []
+
+        // What happens when polling an empty queue?
+        String processedPerson4 = ticketQueue.poll();
+        System.out.println("Processed from empty queue: " + processedPerson4); // null (poll returns null for empty)
+
+        // What happens when using remove() on an empty queue?
+        try {
+            ticketQueue.remove(); // Throws NoSuchElementException!
+        } catch (java.util.NoSuchElementException e) {
+            System.err.println("Caught exception: " + e.getMessage() + " when trying to remove from empty queue.");
+        }
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Observe the behavior of `offer`/`poll`/`peek` vs. `add`/`remove`/`element` on an empty queue. Discuss: In a multi-threaded application, how would you ensure thread-safe queue operations?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 18: COMPARABLE: NATURAL ORDERING ==================== -->
+  <div class="slide" id="s18">
+    <div class="slide-label">Sorting</div>
+    <h2>`Comparable`: <span class="highlight">Defining Natural Order</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>What is Natural Ordering?</h3>
+      <p>Natural ordering is the default sort order for objects. For example, numbers sort numerically, and strings sort alphabetically. The `Comparable` interface provides a way for a class to define this "natural" ordering for its instances.</p>
+      <ul>
+        <li>**Interface:** `java.lang.Comparable<T>`</li>
+        <li>**Method:** `int compareTo(T other)`</li>
+        <li>**Contract:**
+          <ul>
+            <li>Returns a **negative integer** if `this` object is less than `other`.</li>
+            <li>Returns **zero** if `this` object is equal to `other`.</li>
+            <li>Returns a **positive integer** if `this` object is greater than `other`.</li>
+          </ul>
+        </li>
+      </ul>
+      <p style="margin-top: 10px;">**Use Case:** When an object has an obvious, single, default sorting criterion (e.g., `Student` by ID, `Product` by SKU).</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Sorting `Student` Objects by ID (Natural Order)</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+// 1. Student class implements Comparable
+class Student implements Comparable&lt;Student&gt; {
+    private int studentId;
+    private String name;
+    private double gpa;
+
+    public Student(int studentId, String name, double gpa) {
+        this.studentId = studentId;
+        this.name = name;
+        this.gpa = gpa;
+    }
+
+    public int getStudentId() { return studentId; }
+    public String getName() { return name; }
+    public double getGpa() { return gpa; }
+
+    @Override
+    public String toString() {
+        return "Student{id=" + studentId + ", name='" + name + "', gpa=" + gpa + "}";
+    }
+
+    // Define natural order: sort by studentId
+    @Override
+    public int compareTo(Student other) {
+        return Integer.compare(this.studentId, other.studentId);
+        // Alternative: return this.studentId - other.studentId; (careful with large numbers to avoid overflow)
+    }
+}
+
+public class ComparableDemo {
+    public static void main(String[] args) {
+        List&lt;Student&gt; students = new ArrayList&lt;&gt;();
+        students.add(new Student(103, "Charlie", 3.2));
+        students.add(new Student(101, "Alice", 3.8));
+        students.add(new Student(102, "Bob", 3.5));
+
+        System.out.println("Before sorting (by ID):");
+        students.forEach(System.out::println);
+
+        // Sorts the list using the natural ordering defined by Student's compareTo()
+        Collections.sort(students);
+
+        System.out.println("\nAfter sorting (by ID):");
+        students.forEach(System.out::println);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Modify the `compareTo` method in `Student` to sort by `gpa` (descending) instead of `studentId`. What changes would you make?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 19: COMPARATOR: EXTERNAL & CUSTOM SORTING ==================== -->
+  <div class="slide" id="s19">
+    <div class="slide-label">Sorting</div>
+    <h2>`Comparator`: <span class="highlight">External & Custom Sorting</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>When `Comparable` Isn't Enough: `Comparator` to the Rescue!</h3>
+      <p>While `Comparable` defines a single, "natural" ordering *within* a class, `Comparator` provides a way to define *external*, multiple, or highly flexible sorting criteria.</p>
+      <ul>
+        <li>**Interface:** `java.util.Comparator<T>`</li>
+        <li>**Method:** `int compare(T o1, T o2)`</li>
+        <li>**Contract:**
+          <ul>
+            <li>Returns a **negative integer** if `o1` is less than `o2`.</li>
+            <li>Returns **zero** if `o1` is equal to `o2`.</li>
+            <li>Returns a **positive integer** if `o1` is greater than `o2`.</li>
+          </ul>
+        </li>
+      </ul>
+      <p style="margin-top: 10px;">**Use Cases:**
+        <ul>
+          <li>Sorting objects that *don't* implement `Comparable`.</li>
+          <li>Providing *multiple* ways to sort the same object type (e.g., sort `Student` by name, then by GPA, then by ID).</li>
+          <li>Sorting in reverse order.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Sorting `Student` Objects by Name (External Order)</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+// (Assuming Student class from previous slide is available, without Comparable for this example)
+// class Student {... getters, toString, constructor... }
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List&lt;Student&gt; students = new ArrayList&lt;&gt;();
+        students.add(new Student(103, "Charlie", 3.2));
+        students.add(new Student(101, "Alice", 3.8));
+        students.add(new Student(102, "Bob", 3.5));
+        students.add(new Student(104, "Alice", 3.0)); // Another Alice
+
+        System.out.println("Before sorting:");
+        students.forEach(System.out::println);
+
+        // 1. Sort by Name (traditional anonymous inner class - pre Java 8)
+        // Collections.sort(students, new Comparator&lt;Student&gt;() {
+        // @Override
+        // public int compare(Student s1, Student s2) {
+        // return s1.getName().compareTo(s2.getName());
+        // }
+        // });
+
+        // 2. Sort by Name (modern Java 8+ using Lambda Expression)
+        // students.sort((s1, s2) -&gt; s1.getName().compareTo(s2.getName()));
+
+        // 3. Sort by Name (most concise Java 8+ using Comparator.comparing and Method Reference)
+        students.sort(Comparator.comparing(Student::getName));
+
+        System.out.println("\nAfter sorting by Name (Alice, Alice, Bob, Charlie):");
+        students.forEach(System.out::println);
+
+        // Sort by GPA (descending)
+        students.sort(Comparator.comparing(Student::getGpa).reversed());
+        System.out.println("\nAfter sorting by GPA (descending):");
+        students.forEach(System.out::println);
+    }
+}
+
+// Student class (repeated for completeness for interns to copy if needed)
+class Student {
+    private int studentId;
+    private String name;
+    private double gpa;
+
+    public Student(int studentId, String name, double gpa) {
+        this.studentId = studentId;
+        this.name = name;
+        this.gpa = gpa;
+    }
+
+    public int getStudentId() { return studentId; }
+    public String getName() { return name; }
+    public double getGpa() { return gpa; }
+
+    @Override
+    public String toString() {
+        return "Student{id=" + studentId + ", name='" + name + "', gpa=" + gpa + "}";
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Try uncommenting the pre-Java 8 `Comparator` code to see the verbosity. Implement sorting by `studentId` in descending order using `Comparator.comparing()` and `reversed()`.</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 20: CHAINING COMPARATORS: BUILDING COMPLEX SORTS ==================== -->
+  <div class="slide" id="s20">
+    <div class="slide-label">Sorting</div>
+    <h2>Chaining Comparators: <span class="highlight">Building Complex Sorts</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>`thenComparing()`: Combining Multiple Criteria</h3>
+      <p>Often, you need to sort data based on multiple attributes. For example, sort by `GPA`, and if `GPA`s are equal, then sort by `name`. The `Comparator` interface provides `thenComparing()` methods to chain multiple comparators together.</p>
+      <ul>
+        <li>`Comparator.comparing(keyExtractor)`: Defines the primary sorting criterion.</li>
+        <li>`.thenComparing(anotherKeyExtractor)`: Defines the secondary sorting criterion (applied if primary criteria are equal).</li>
+        <li>`.thenComparing(anotherComparator)`: Can also chain with another `Comparator` instance.</li>
+        <li>`.reversed()`: Reverses the order of the current comparator chain.</li>
+      </ul>
+      <p style="margin-top: 10px;">This allows for highly expressive and concise multi-level sorting, making your code much cleaner than nested `if-else` blocks in a single `compare()` method.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Sorting `Student` by GPA, then Name, then ID</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+// Student class (re-included for completeness)
+class Student {
+    private int studentId;
+    private String name;
+    private double gpa;
+
+    public Student(int studentId, String name, double gpa) {
+        this.studentId = studentId;
+        this.name = name;
+        this.gpa = gpa;
+    }
+
+    public int getStudentId() { return studentId; }
+    public String getName() { return name; }
+    public double getGpa() { return gpa; }
+
+    @Override
+    public String toString() {
+        return "Student{id=" + studentId + ", name='" + name + "', gpa=" + gpa + "}";
+    }
+}
+
+public class ChainingComparatorDemo {
+    public static void main(String[] args) {
+        List&lt;Student&gt; students = new ArrayList&lt;&gt;();
+        students.add(new Student(103, "Charlie", 3.2));
+        students.add(new Student(101, "Alice", 3.8));
+        students.add(new Student(102, "Bob", 3.5));
+        students.add(new Student(104, "Alice", 3.8)); // Same GPA as 101, different ID
+        students.add(new Student(105, "David", 3.2)); // Same GPA as 103, different name
+
+        System.out.println("Before sorting:");
+        students.forEach(System.out::println);
+
+        // Sort by GPA (descending), then by Name (ascending), then by Student ID (ascending)
+        Comparator&lt;Student&gt; complexComparator = Comparator
+       .comparing(Student::getGpa, Comparator.reverseOrder()) // Primary: GPA descending
+       .thenComparing(Student::getName) // Secondary: Name ascending
+       .thenComparing(Student::getStudentId); // Tertiary: ID ascending
+
+        students.sort(complexComparator);
+
+        System.out.println("\nAfter complex sorting (GPA DESC, Name ASC, ID ASC):");
+        students.forEach(System.out::println);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code and observe the order. Modify the `complexComparator` to sort by `Name` (ascending), then by `GPA` (ascending), and finally by `Student ID` (descending). Use `Integer::compare` explicitly for `Student ID` comparison if needed.</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 21: GENERICS: THE "WHY" & PROBLEM SOLVED ==================== -->
+  <div class="slide" id="s21">
+    <div class="slide-label">Generics</div>
+    <h2>Generics: <span class="highlight">The Type Safety Revolution</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The Problem Generics Solved: <span class="highlight">Runtime Errors & Verbose Casting</span></h3>
+      <p>Before Generics (Java 5), collections stored elements as `java.lang.Object`. This led to two major issues:</p>
+      <ul>
+        <li><strong>No Type Safety at Compile Time:</strong> You could accidentally add objects of different types to the same collection. The compiler couldn't catch this mistake.</li>
+        <li><strong>Verbose and Error-Prone Casting:</strong> Every time you retrieved an object from a collection, you had to manually cast it back to its original type. This was boilerplate code and if the cast was incorrect, it resulted in a `ClassCastException` at runtime.</li>
+      </ul>
+      <p style="margin-top: 10px;">Generics introduced type parameters, allowing you to specify the type of objects a collection (or class/method) can hold, bringing type safety to the forefront.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Pre-Generics Fragility vs. Generics Safety</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsProblemSolutionDemo {
+    public static void main(String[] args) {
+        // --- SCENARIO 1: Pre-Generics (Java 1.4 and earlier) ---
+        // Compiler treats everything as Object, no type-checking for elements
+        List rawList = new ArrayList();
+        rawList.add("Hello"); // Adds a String
+        rawList.add(123); // Accidentally adds an Integer
+
+        System.out.println("--- Pre-Generics (Fragile) ---");
+        for (Object item : rawList) {
+            if (item instanceof String) {
+                String s = (String) item;
+                System.out.println("String: " + s);
+            } else if (item instanceof Integer) {
+                Integer i = (Integer) item;
+                System.out.println("Integer: " + i);
+            }
+        }
+
+        // What if we incorrectly assume all elements are String?
+        try {
+            String firstString = (String) rawList.get(0); // OK
+            String secondString = (String) rawList.get(1); // ClassCastException at runtime!
+            System.out.println("No error here yet for secondString: " + secondString);
+        } catch (ClassCastException e) {
+            System.err.println("Runtime Error (Pre-Generics): " + e.getClass().getSimpleName() + " - " + e.getMessage());
+            System.err.println("This error should have been caught by the compiler!");
+        }
+
+        System.out.println("\n--- With Generics (Safe & Clean) ---");
+        // --- SCENARIO 2: With Generics (Java 5+) ---
+        // Compiler enforces type-checking at compile time
+        List&lt;String&gt; stringList = new ArrayList&lt;&gt;();
+        stringList.add("World");
+        // stringList.add(456); // Compile-time Error! (Uncomment to see)
+
+        // No need for explicit casting when retrieving
+        String greeting = stringList.get(0);
+        System.out.println("Greeting: " + greeting);
+        // If we try to cast to Integer, compiler stops us:
+        // Integer num = (Integer) stringList.get(0); // Compile-time Error!
+
+        // Benefits:
+        System.out.println(" - Compile-time type checking for safety.");
+        System.out.println(" - No need for explicit casting, cleaner code.");
+        System.out.println(" - Write more reusable and robust code.");
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run the code. Uncomment `stringList.add(456);` and `Integer num = (Integer) stringList.get(0);`. Observe how the compiler immediately flags these as errors. Discuss: How much developer time might be saved by catching these errors at compile time rather than during testing or production?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 22: GENERIC CLASSES & METHODS ==================== -->
+  <div class="slide" id="s22">
+    <div class="slide-label">Generics</div>
+    <h2>Generic Classes & Methods: <span class="highlight">Building Flexible Structures</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>Generic Classes: Design for Reusability</h3>
+      <p>A generic class is a class that can operate on types specified by the user. It allows you to create classes that work with different types of objects while maintaining compile-time type safety.</p>
+      <ul>
+        <li>**Syntax:** `class MyClass<T, U,...> {... }` where `T`, `U` are type parameters.</li>
+        <li>**Benefits:** Avoids code duplication, works with specific types while ensuring safety.</li>
+        <li>**Example:** `ArrayList<E>`, `HashMap<K, V>`.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Generic Methods: Type-Safe Algorithms</h3>
+      <p>Generic methods are methods that introduce their own type parameters. This allows them to be written once and used for different types of arguments.</p>
+      <ul>
+        <li>**Syntax:** `public <T> T myGenericMethod(T arg) {... }`</li>
+        <li>**Placement:** The type parameter `T` is declared *before* the return type.</li>
+        <li>**Benefits:** Implement algorithms that are applicable to different types, reducing code redundancy.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Custom Generic `Pair` Class and Generic `printArray` Method</h3>
+      <pre><code class="language-java">
+import java.util.Arrays;
+
+// 1. Generic Class: A simple Pair to hold two objects of potentially different types
+class Pair&lt;K, V&gt; {
+    private K key;
+    private V value;
+
+    public Pair(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public K getKey() { return key; }
+    public V getValue() { return value; }
+
+    @Override
+    public String toString() {
+        return "Pair{" + key + "=" + value + '}';
+    }
+}
+
+public class GenericClassMethodDemo {
+
+    // 2. Generic Method: A method to print elements of any array type
+    public static &lt;T&gt; void printArray(T[] array) {
+        System.out.println("Printing array of type " + array.getClass().getComponentType().getSimpleName() + ":");
+        for (T element : array) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Using the Generic Pair class
+        Pair&lt;String, Integer&gt; personAge = new Pair&lt;&gt;("Alice", 30);
+        Pair&lt;Double, String&gt; coordinates = new Pair&lt;&gt;(10.5, "Latitude");
+        Pair&lt;Boolean, Boolean&gt; flags = new Pair&lt;&gt;(true, false);
+
+        System.out.println(personAge);
+        System.out.println(coordinates);
+        System.out.println(flags);
+
+        // Using the Generic printArray method
+        Integer[] intArray = {1, 2, 3, 4, 5};
+        Double[] doubleArray = {1.1, 2.2, 3.3};
+        String[] stringArray = {"Hello", "World", "Generics"};
+
+        printArray(intArray);
+        printArray(doubleArray);
+        printArray(stringArray);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Modify the `Pair` class to include a `setValue()` method. Then, in `main`, create a `Pair<String, List<String>>` and manipulate the `List` using generic methods. Discuss how generics ensure type safety even with complex types.</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 23: BOUNDED TYPES & WILDCARDS (? EXTENDS T) ==================== -->
+  <div class="slide" id="s23">
+    <div class="slide-label">Generics</div>
+    <h2>Bounded Types & Wildcards: <span class="highlight">Producers (`? extends T`)</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>Bounding Types: Adding Constraints to Generics</h3>
+      <p>Sometimes you want to restrict the types that can be used as type arguments in a generic class or method. Bounded type parameters allow you to do this.</p>
+      <ul>
+        <li>**Syntax:** `<T extends SomeClass>` or `<T extends Interface1 & Interface2>`</li>
+        <li>**Meaning:** `T` can be `SomeClass` itself, or any class that extends `SomeClass` (or implements the specified interfaces).</li>
+        <li>**Use Case:** Ensures that a generic type `T` has certain methods available (e.g., if `T extends Number`, you know `T` will have `intValue()`, `doubleValue()`, etc.).</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>The `? extends T` Wildcard: <span class="highlight">The "Producer" Role</span></h3>
+      <p>The `? extends T` wildcard is used when you want to create a generic method or class that will *read* (produce) elements from a collection of `T` or a subtype of `T`.</p>
+      <ul>
+        <li><strong>Meaning:</strong> `List<? extends Number>` means a list of `Number` or any subclass of `Number` (e.g., `Integer`, `Double`, `Float`).</li>
+        <li><strong>Read/Producer Role:</strong> You can safely *read* elements from such a list as `Number` (or `T`).</li>
+        <li><strong>Write Restriction:</strong> You **cannot** *add* any elements (except `null`) to a `List<? extends Number>`. Why? Because the compiler doesn't know the exact subtype (is it `List<Integer>`? `List<Double>`?). Adding an `Integer` to a `List<Double>` would be unsafe.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> This is a key part of the **PECS principle**: "Producer-Extends, Consumer-Super". Remember, if you only *read* from a generic collection, use `? extends T`.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Summing Numbers from Various Numeric Lists</h3>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoundedTypeAndExtendsWildcardDemo {
+
+    // Method to sum numbers from a list of any type that extends Number
+    // Uses &lt;? extends Number&gt; because it's only PRODUCING (reading) numbers from the list.
+    public static double sumNumbers(List&lt;? extends Number&gt; numbers) {
+        double sum = 0.0;
+        for (Number num : numbers) { // Safely read elements as Number
+            sum += num.doubleValue();
+        }
+        // numbers.add(new Integer(5)); // COMPILE-TIME ERROR! Cannot add to &lt;? extends T&gt;
+        return sum;
+    }
+
+    // A generic method with a bounded type parameter
+    public static &lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt; list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        T max = list.get(0);
+        for (T item : list) {
+            if (item.compareTo(max) &gt; 0) {
+                max = item;
+            }
+        }
+        return max;
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; integers = new ArrayList&lt;&gt;();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+        System.out.println("Sum of Integers: " + sumNumbers(integers));
+
+        List&lt;Double&gt; doubles = new ArrayList&lt;&gt;();
+        doubles.add(1.5);
+        doubles.add(2.5);
+        doubles.add(3.5);
+        System.out.println("Sum of Doubles: " + sumNumbers(doubles));
+
+        // Using findMax with a list of Integers
+        System.out.println("Max Integer: " + findMax(integers));
+
+        // List&lt;String&gt; strings = new ArrayList&lt;&gt;();
+        // strings.add("hello");
+        // findMax(strings); // COMPILE-TIME ERROR! String does not extend Number (for sumNumbers)
+                            // or String is Comparable, but not limited by 'findMax' if it were &lt;T extends Number&gt;
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code. Uncomment the `numbers.add(new Integer(5))` line within `sumNumbers` and observe the compile-time error. Then, uncomment `findMax(strings)` and discuss why `findMax` works for `String`s but `sumNumbers` doesn't, given their respective bounds/wildcards.</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 24: WILDCARDS (? SUPER T,?) ==================== -->
+  <div class="slide" id="s24">
+    <div class="slide-label">Generics</div>
+    <h2>Wildcards: <span class="highlight">Consumers (`? super T`) & Unbounded (`?`)</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The `? super T` Wildcard: <span class="highlight">The "Consumer" Role</span></h3>
+      <p>The `? super T` wildcard is used when you want a generic method or class to *write* (consume) elements into a collection of `T` or a supertype of `T`.</p>
+      <ul>
+        <li><strong>Meaning:</strong> `List<? super Integer>` means a list of `Integer` or any superclass of `Integer` (e.g., `Number`, `Object`).</li>
+        <li><strong>Write/Consumer Role:</strong> You can safely *add* elements of type `Integer` (or its subtypes) to `List<? super Integer>`. Why? Because `Integer` can always be stored in a list that expects `Integer` or any of its supertypes.</li>
+        <li><strong>Read Restriction:</strong> You *cannot* read elements from `List<? super Integer>` as `Integer` without casting to `Object`. Why? Because the compiler doesn't know the exact supertype (is it `List<Number>`? `List<Object>`? A `Number` might not be an `Integer`).</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> This completes the **PECS principle**: "Producer-Extends, Consumer-Super". If you only *write* to a generic collection, use `? super T`.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>The Unbounded Wildcard (`?`): When Type Doesn't Matter</h3>
+      <p>The `?` (unbounded wildcard) is used when you don't care about the specific type parameter, or when you know that operations on the collection won't depend on the actual type.</p>
+      <ul>
+        <li><strong>Meaning:</strong> `List<?>` is equivalent to `List
+                            <? extends Object>`. It means a list of *any* type.</li>
+        <li><strong>Read Role:</strong> You can only read elements as `Object`.</li>
+        <li><strong>Write Restriction:</strong> You **cannot** add any elements (except `null`) to a `List<?>`.</li>
+                    <li><strong>Use Case:</strong> Often used for methods that print or iterate through a collection
+                        where the individual type isn't relevant, or for methods that operate on any `List` without
+                        needing to know its element type.</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Coding Scenario: Consuming Integers & Printing Any List</h3>
+                <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.List;
+
+public class SuperAndUnboundedWildcardDemo {
+
+    // Method to add Integers to a list that can hold Integers or their supertypes
+    // Uses &lt;? super Integer&gt; because it's CONSUMING (writing) Integers into the list.
+    public static void addIntegers(List&lt;? super Integer&gt; list) {
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        System.out.println("Added Integers to list.");
+        // Integer num = list.get(0); // COMPILE-TIME ERROR! Cannot read as Integer directly.
+        Object obj = list.get(0); // Can only read as Object
+        System.out.println("Read from list as Object: " + obj);
+    }
+
+    // Method to print elements of any list type
+    // Uses &lt;?&gt; because the exact type doesn't matter for printing.
+    public static void printList(List&lt;?&gt; list) {
+        System.out.println("Printing list of unknown type:");
+        for (Object element : list) { // Elements can only be treated as Object
+            System.out.println(element);
+        }
+        // list.add("something"); // COMPILE-TIME ERROR! Cannot add to &lt;?&gt; (except null)
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; integers = new ArrayList&lt;&gt;();
+        addIntegers(integers);
+        System.out.println("Integers list after addIntegers: " + integers);
+        printList(integers);
+
+        List&lt;Number&gt; numbers = new ArrayList&lt;&gt;();
+        addIntegers(numbers); // Allowed because Number is a supertype of Integer
+        System.out.println("Numbers list after addIntegers: " + numbers);
+        printList(numbers);
+
+        List&lt;Object&gt; objects = new ArrayList&lt;&gt;();
+        addIntegers(objects); // Allowed because Object is a supertype of Integer
+        System.out.println("Objects list after addIntegers: " + objects);
+        printList(objects);
+
+        List&lt;String&gt; strings = new ArrayList&lt;&gt;();
+        strings.add("hello");
+        strings.add("world");
+        printList(strings); // printList works for any List&lt;?&gt;
+        // addIntegers(strings); // COMPILE-TIME ERROR! String is not a supertype of Integer
+    }
+}
+      </code></pre>
+                <button class="copy-code-button">Copy Code</button>
+                <p class="p-activity"><strong>Hands-on:</strong> Run this code. Uncomment `Integer num = list.get(0);`
+                    in `addIntegers` and `list.add("something");` in `printList`. Explain why these cause compile-time
+                    errors. Design a method that copies elements from a `List
+                    <? extends T>` to a `List<? super T>`. Why are these specific wildcards necessary?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 25: INNER CLASSES: ENCAPSULATION & SCOPE ==================== -->
+  <div class="slide" id="s25">
+    <div class="slide-label">Advanced Features</div>
+    <h2>Inner Classes: <span class="highlight">Encapsulation & Scope</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>What are Inner Classes?</h3>
+      <p>An inner class is a class defined entirely within another class. They provide a powerful way to logically group classes that are only used in one place, increase encapsulation, and create more readable and maintainable code.</p>
+      <p style="margin-top: 10px;"><strong>Key Advantages:</strong></p>
+      <ul>
+        <li><strong>Encapsulation:</strong> The inner class can be hidden from other classes in the same package.</li>
+        <li><strong>Access to Outer Class Members:</strong> Inner classes (non-static) have direct access to all members (fields and methods) of the enclosing outer class, including private ones.</li>
+        <li><strong>Readability:</strong> Grouping related classes logically.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Inner classes are less frequently used with modern Java features like Lambdas, but understanding them is crucial for reading older codebases and for specific patterns.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Types of Inner Classes</h3>
+      <div style="display: flex; gap: 20px; width: 100%;">
+        <div style="flex: 1;">
+          <h4>1. Member Inner Class (Non-static)</h4>
+          <ul>
+            <li>Declared directly inside the outer class, but not within a method.</li>
+            <li>Can access all members of the outer class, including private.</li>
+            <li>**Requires an instance of the outer class** to be instantiated.</li>
+            <li>Often used for helper classes closely tied to an outer instance.</li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <h4>2. Static Nested Class</h4>
+          <ul>
+            <li>Declared inside the outer class with the `static` keyword.</li>
+            <li>**Does NOT require an instance of the outer class.**</li>
+            <li>Can only access `static` members of the outer class.</li>
+            <li>Functions much like a top-level class but is logically grouped. Often used for building blocks (like `Node` in a `LinkedList`) or utility comparators.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; gap: 20px; width: 100%; margin-top: 20px;">
+        <div style="flex: 1;">
+          <h4>3. Local Inner Class</h4>
+          <ul>
+            <li>Declared inside a method or scope block.</li>
+            <li>Only visible within that block.</li>
+            <li>Can access `final` or effectively `final` local variables of the enclosing block.</li>
+            <li>Useful for one-time use helper classes within a method.</li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <h4>4. Anonymous Inner Class</h4>
+          <ul>
+            <li>A local inner class without a name.</li>
+            <li>Defined and instantiated in a single expression.</li>
+            <li>Used for implementing interfaces or extending classes on-the-fly. Largely replaced by Lambda Expressions in Java 8+ for functional interfaces.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 26: INNER CLASSES: CODING EXAMPLES ==================== -->
+  <div class="slide" id="s26">
+    <div class="slide-label">Advanced Features</div>
+    <h2>Inner Classes: <span class="highlight">Coding Examples</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>1. Member Inner Class Example (`Car` and `Engine`)</h3>
+      <p>The `Engine` is intrinsically tied to a `Car` instance.</p>
+      <pre><code class="language-java">
+class Car {
+    private String make;
+    private String model;
+    private Engine engine; // Car HAS-A Engine
+
+    public Car(String make, String model, int cylinders) {
+        this.make = make;
+        this.model = model;
+        this.engine = new Engine(cylinders); // Engine is created with Car
+    }
+
+    public void startCar() {
+        System.out.println(make + " " + model + ": ");
+        engine.start(); // Car uses its Engine
+    }
+
+    // Member Inner Class
+    class Engine {
+        private int cylinders;
+
+        public Engine(int cylinders) {
+            this.cylinders = cylinders;
+        }
+
+        public void start() {
+            // Can access outer class members directly!
+            System.out.println(" " + make + "'s " + cylinders + "-cylinder engine starting.");
+        }
+    }
+}
+
+public class MemberInnerClassDemo {
+    public static void main(String[] args) {
+        Car myCar = new Car("Toyota", "Camry", 4);
+        myCar.startCar();
+
+        // How to instantiate an Engine directly (less common):
+        // Car.Engine anotherEngine = myCar.new Engine(6);
+        // anotherEngine.start();
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+    </div>
+
+    <div class="content-block" style="margin-top: 20px;">
+      <h3>2. Static Nested Class Example (`Outer` and `StaticNested`)</h3>
+      <p>A static nested class is like a regular top-level class but declared inside another class for logical grouping. It cannot access non-static members of the outer class.</p>
+      <pre><code class="language-java">
+class OuterClass {
+    private static String staticMsg = "Hello from Outer Static!";
+    private String instanceMsg = "Hello from Outer Instance!";
+
+    // Static Nested Class
+    static class StaticNestedClass {
+        public void display() {
+            System.out.println("Inside Static Nested Class:");
+            System.out.println(" " + staticMsg); // Can access static members of OuterClass
+            // System.out.println(instanceMsg); // COMPILE-TIME ERROR: Cannot access non-static member
+        }
+    }
+}
+
+public class StaticNestedClassDemo {
+    public static void main(String[] args) {
+        // No need for an OuterClass instance to create StaticNestedClass
+        OuterClass.StaticNestedClass nested = new OuterClass.StaticNestedClass();
+        nested.display();
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 27: INNER CLASSES (CONT.) & OBJECT CLONING ==================== -->
+  <div class="slide" id="s27">
+    <div class="slide-label">Advanced Features</div>
+    <h2>Inner Classes (Cont.) & Object Cloning: <span class="highlight">Deep vs. Shallow</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>3. Local Inner Class Example (`MethodClass`)</h3>
+      <p>A class defined within a method. It's useful when you need a class only for a specific method's functionality.</p>
+      <pre><code class="language-java">
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+class MethodClass {
+    public void sortNumbers(List&lt;Integer&gt; numbers) {
+        // Local Inner Class: Comparator defined inside the method
+        class MyCustomComparator implements Comparator&lt;Integer&gt; {
+            @Override
+            public int compare(Integer i1, Integer i2) {
+                return i2.compareTo(i1); // Sort in descending order
+            }
+        }
+        Collections.sort(numbers, new MyCustomComparator());
+        System.out.println("Sorted numbers (descending) using local inner class: " + numbers);
+    }
+}
+
+public class LocalInnerClassDemo {
+    public static void main(String[] args) {
+        MethodClass obj = new MethodClass();
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;(List.of(5, 1, 4, 2, 8));
+        System.out.println("Original list: " + list);
+        obj.sortNumbers(list);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+    </div>
+
+    <div class="content-block" style="margin-top: 20px;">
+      <h3>4. Anonymous Inner Class Example (Replaced by Lambda)</h3>
+      <p>Used to implement functional interfaces on the fly. With Java 8, lambda expressions largely replaced them for single-abstract-method interfaces.</p>
+      <pre><code class="language-java">
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class AnonymousInnerClassDemo {
+    public static void main(String[] args) {
+        System.out.println("Starting timer for 2 seconds...");
+        // Anonymous Inner Class implementing Runnable (pre-Java 8 style)
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Timer Task Executed! (Anonymous Inner Class)");
+                timer.cancel(); // Stop the timer
+            }
+        }, 2000); // Delay in milliseconds
+
+        // The modern equivalent using a Lambda Expression (for functional interfaces)
+        // new Timer().schedule(new TimerTask() {
+        // @Override
+        // public void run() {
+        // System.out.println("Timer Task Executed! (Lambda)");
+        // }
+        // }, 2000);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run the `LocalInnerClassDemo` and `AnonymousInnerClassDemo`. Discuss the trade-offs between local/anonymous inner classes and lambda expressions for functional interfaces. Which one leads to more concise code?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 28: OBJECT CLONING: SHALLOW VS. DEEP COPY ==================== -->
+  <div class="slide" id="s28">
+    <div class="slide-label">Advanced Features</div>
+    <h2>Object Cloning: <span class="highlight">Shallow vs. Deep Copy</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The `clone()` Method & `Cloneable` Interface</h3>
+      <p>Cloning an object creates a new object with the same state as the original. Java's default `clone()` method (from `Object` class) provides a shallow copy.</p>
+      <ul>
+        <li><strong>`Cloneable` Interface:</strong> A marker interface. If a class implements this, it indicates that it's okay for the `Object.clone()` method to be called on instances of that class. If not implemented, `clone()` throws `CloneNotSupportedException`.</li>
+        <li><strong>`Object.clone()`:</strong> Performs a field-by-field copy of the object. For primitive fields, it copies the actual value. For reference type fields, it copies the *reference* (memory address), not the object itself. This is a **shallow copy**.</li>
+      </ul>
+      <p style="margin-top: 10px;"><strong>When to use `clone()`:</strong> Less common in modern Java due to complexities. Often replaced by copy constructors or serialization for deep copies.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Shallow Copy: Shared References</h3>
+      <p>In a shallow copy, the new object is a copy of the original object, but any nested objects (objects referenced by fields) are *not* copied. Instead, both the original and the copied object share references to the *same* nested objects.</p>
+      <ul>
+        <li>**Problem:** Modifying a nested object through one reference will affect the object accessed via the other reference.</li>
+      </ul>
+      <pre><code class="language-java">
+// A simple mutable class
+class Address {
+    String street;
+    public Address(String street) { this.street = street; }
+    @Override public String toString() { return "Address{street='" + street + "'}"; }
+}
+
+// Class implementing Cloneable for shallow copy
+class User implements Cloneable {
+    String name;
+    Address address;
+
+    public User(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // Performs shallow copy
+    }
+
+    @Override public String toString() { return "User{name='" + name + "', address=" + address + '}'; }
+}
+
+public class ShallowCopyDemo {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Address home = new Address("123 Main St");
+        User originalUser = new User("Alice", home);
+        User clonedUser = (User) originalUser.clone();
+
+        System.out.println("Original: " + originalUser);
+        System.out.println("Cloned: " + clonedUser);
+        System.out.println("Are addresses same object? " + (originalUser.address == clonedUser.address)); // true
+
+        // Modify nested object in clonedUser
+        clonedUser.address.street = "456 Oak Ave";
+
+        System.out.println("\nAfter modifying clonedUser's address:");
+        System.out.println("Original: " + originalUser); // Original also changed!
+        System.out.println("Cloned: " + clonedUser);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code and clearly observe how changing the address in the cloned user also changes it for the original user. This is the danger of shallow copy!</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 29: OBJECT CLONING: DEEP COPY ==================== -->
+  <div class="slide" id="s29">
+    <div class="slide-label">Advanced Features</div>
+    <h2>Object Cloning: <span class="highlight">Achieving Deep Copy</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>Deep Copy: Independent Objects</h3>
+      <p>A deep copy creates a new object and recursively copies all nested objects (objects referenced by its fields) as well. This ensures that the original and the cloned object are completely independent.</p>
+      <ul>
+        <li>**How to achieve:**
+          <ul>
+            <li>**Override `clone()`:** Manually implement the `clone()` method to call `clone()` on all mutable reference fields. This can be complex for deeply nested objects.</li>
+            <li>**Copy Constructor:** Create a constructor that takes an object of the same class as an argument and copies all its fields, including creating new instances for mutable reference types. This is generally preferred.</li>
+            <li>**Serialization:** Serialize the object to a byte stream and then deserialize it back. This is a common and robust way to create deep copies, but it requires classes to implement `Serializable`.</li>
+          </ul>
+        </li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Deep copy is usually what you want when you say "clone this object," to avoid unintended side effects from shared references.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Deep Copy with Overridden `clone()`</h3>
+      <pre><code class="language-java">
+// A simple mutable class (from previous example)
+class Address implements Cloneable { // Address must also be Cloneable for deep copy via clone()
+    String street;
+    public Address(String street) { this.street = street; }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // Shallow copy of Address fields (String is immutable)
+    }
+
+    @Override public String toString() { return "Address{street='" + street + "'}"; }
+}
+
+// Class implementing Cloneable for deep copy
+class UserDeepClone implements Cloneable {
+    String name;
+    Address address; // Mutable reference type
+
+    public UserDeepClone(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        UserDeepClone clonedUser = (UserDeepClone) super.clone(); // First, do shallow copy
+        // Now, perform deep copy for mutable reference types:
+        clonedUser.address = (Address) address.clone(); // Call clone() on the Address object
+        return clonedUser;
+    }
+
+    @Override public String toString() { return "User{name='" + name + "', address=" + address + '}'; }
+}
+
+public class DeepCopyDemo {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Address home = new Address("123 Main St");
+        UserDeepClone originalUser = new UserDeepClone("Alice", home);
+        UserDeepClone clonedUser = (UserDeepClone) originalUser.clone();
+
+        System.out.println("Original: " + originalUser);
+        System.out.println("Cloned: " + clonedUser);
+        System.out.println("Are addresses same object? " + (originalUser.address == clonedUser.address)); // false
+
+        // Modify nested object in clonedUser
+        clonedUser.address.street = "456 Oak Ave";
+
+        System.out.println("\nAfter modifying clonedUser's address:");
+        System.out.println("Original: " + originalUser); // Original remains unchanged!
+        System.out.println("Cloned: " + clonedUser);
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run this code and verify that modifying the cloned user's address no longer affects the original user. Discuss the complexity of implementing `clone()` for objects with many nested mutable reference fields. As an alternative, how would you implement a deep copy using a **copy constructor** for the `UserDeepClone` class?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 30: PROPERTY FILES: INTRODUCTION ==================== -->
+  <div class="slide" id="s30">
+    <div class="slide-label">Configuration</div>
+    <h2>Property Files: <span class="highlight">Externalizing Configurations</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>What are Property Files?</h3>
+      <p>Property files (`.properties` extension) are simple key-value pair files used in Java to store application configuration parameters outside of the main source code.</p>
+      <ul>
+        <li><strong>Format:</strong> `key=value` (or `key:value`, `key value`).</li>
+        <li><strong>Comments:</strong> Lines starting with `#` or `!` are treated as comments.</li>
+        <li><strong>Line Continuations:</strong> A backslash `\` at the end of a line indicates that the value continues on the next line.</li>
+      </ul>
+      <p style="margin-top: 10px;">**Why use them?**</p>
+      <ul>
+        <li><strong>Separation of Concerns:</strong> Keeps configuration separate from code.</li>
+        <li><strong>Easy Updates:</strong> Configuration can be changed without recompiling the application.</li>
+        <li><strong>Environment Specifics:</strong> Easily manage different configurations for development, testing, and production environments.</li>
+        <li><strong>Readability:</strong> Simple human-readable format.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Almost every real-world Java application uses some form of external configuration, and `.properties` files are a fundamental way to achieve this.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Basic Structure of a `.properties` File</h3>
+      <p>Imagine a file named `application.properties` with the following content:</p>
+      <pre><code class="language-properties">
+# This is a comment
+application.name=MyAwesomeApp
+application.version=1.0.0
+database.url=jdbc:mysql://localhost:3306/mydb
+database.username=user
+database.password=password123
+max.connections=10
+welcome.message=Welcome to the \
+                Application!
+      </code></pre>
+      <p style="margin-top: 15px; font-style: italic; color: var(--muted);">This simple text file can then be loaded and used by your Java application to retrieve these settings.</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 31: PROPERTY FILES: LOADING & USING ==================== -->
+  <div class="slide" id="s31">
+    <div class="slide-label">Configuration</div>
+    <h2>Property Files: <span class="highlight">Loading & Using in Java</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>The `java.util.Properties` Class</h3>
+      <p>Java provides the `Properties` class (which extends `HashMap<Object, Object>`) for managing property lists. It includes methods to load properties from and save properties to streams.</p>
+      <ul>
+        <li><strong>`load(InputStream inStream)`:</strong> Reads a property list (key and element pairs) from the input stream.</li>
+        <li><strong>`getProperty(String key)`:</strong> Searches for the property with the specified key in this property list. Returns `null` if not found.</li>
+        <li><strong>`getProperty(String key, String defaultValue)`:</strong> Similar to `getProperty(String key)` but returns the specified default value if the key is not found.</li>
+        <li><strong>`setProperty(String key, String value)`:</strong> Sets the value of the property associated with the specified key.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Always prefer `getProperty(key, defaultValue)` to handle cases where a property might be missing gracefully.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Coding Scenario: Reading `application.properties`</h3>
+      <p>First, ensure you have an `application.properties` file in your project's `src` or root directory (or wherever your classpath can find it) with content similar to the previous slide.</p>
+      <pre><code class="language-java">
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class PropertyFileDemo {
+    public static void main(String[] args) {
+        Properties appProps = new Properties();
+        // Use try-with-resources for safe handling of InputStream
+        try (InputStream input = PropertyFileDemo.class.getClassLoader().getResourceAsStream("application.properties")) {
+
+            if (input == null) {
+                System.out.println("Sorry, unable to find application.properties. Check your classpath.");
+                return;
+            }
+
+            // Load a properties file from classpath
+            appProps.load(input);
+
+            // Get property values
+            System.out.println("Application Name: " + appProps.getProperty("application.name"));
+            System.out.println("Application Version: " + appProps.getProperty("application.version"));
+            System.out.println("Database URL: " + appProps.getProperty("database.url"));
+            System.out.println("Database User: " + appProps.getProperty("database.username"));
+
+            // Get property with default value
+            System.out.println("Database Password: " + appProps.getProperty("database.password", "NOT_SET"));
+            System.out.println("Max Connections: " + appProps.getProperty("max.connections", "5"));
+
+            // Property that doesn't exist
+            System.out.println("Admin Email: " + appProps.getProperty("admin.email", "not_configured@example.com"));
+
+            // Multiline welcome message
+            System.out.println("Welcome Message: " + appProps.getProperty("welcome.message"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Create an `application.properties` file in your project (e.g., in `src/main/resources` for Maven/Gradle, or directly in `src` for simple projects). Copy the example content into it. Run this `PropertyFileDemo` code. Modify `max.connections` to be a non-numeric value and observe how `getProperty` still retrieves it as a String. How would you convert it to an `int` safely?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 32: PROPERTY FILES: BEST PRACTICES & ALTERNATIVES ==================== -->
+  <div class="slide" id="s32">
+    <div class="slide-label">Configuration</div>
+    <h2>Property Files: <span class="highlight">Best Practices & Alternatives</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="content-block">
+      <h3>Best Practices for Property Files</h3>
+      <ul>
+        <li><strong>Separate by Concern:</strong> Use different property files for different modules or concerns (e.g., `database.properties`, `email.properties`, `app.properties`).</li>
+        <li><strong>Environment-Specific Files:</strong> Have distinct files for different environments (e.g., `application-dev.properties`, `application-prod.properties`) and load the appropriate one based on a system property or environment variable.</li>
+        <li><strong>Sensitive Data:</strong> **NEVER** store sensitive data like passwords directly in version-controlled property files. Use environment variables, secure vault systems (like HashiCorp Vault), or encrypted properties.</li>
+        <li><strong>Type Conversion:</strong> When retrieving values, convert them to the expected type safely (e.g., `Integer.parseInt(value)` within a `try-catch` block).</li>
+        <li><strong>Immutable Properties:</strong> Load properties once at application startup into immutable configuration objects for thread safety and consistency.</li>
+      </ul>
+      <p class="p-activity"><strong>Trainer Note:</strong> Following these practices is crucial for secure and maintainable applications.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Alternatives to `.properties` Files</h3>
+      <p>While `.properties` files are simple and widely used, other formats and tools offer more features or better readability, especially for complex configurations:</p>
+      <ul>
+        <li><strong>YAML (`.yml`):</strong> Human-readable data serialization standard. Often preferred for its cleaner syntax for hierarchical data. Widely used in Spring Boot applications.</li>
+        <li><strong>JSON (`.json`):</strong> JavaScript Object Notation. Very common for data exchange and configuration, especially in web contexts. Supports complex nested structures.</li>
+        <li><strong>XML (`.xml`):</strong> Extensible Markup Language. Historically popular for configuration (e.g., older Spring, Maven POMs), but often more verbose than JSON/YAML.</li>
+        <li><strong>Environment Variables:</strong> Excellent for sensitive data and environment-specific overrides.</li>
+        <li><strong>Configuration Management Systems:</strong> (e.g., Consul, Apache ZooKeeper, Spring Cloud Config) for dynamic, centralized configuration in microservice architectures.</li>
+      </ul>
+      <pre><code class="language-java">
+// Example of safe type conversion
+import java.util.Properties;
+//... (assuming 'appProps' is loaded)...
+public class SafeConversion {
+    public static void main(String[] args) {
+        Properties appProps = new Properties(); // For demo, assume loaded
+        appProps.setProperty("max.connections", "10"); // Example value
+        appProps.setProperty("timeout.seconds", "abc"); // Invalid value
+
+        String maxConnectionsStr = appProps.getProperty("max.connections");
+        String timeoutStr = appProps.getProperty("timeout.seconds");
+
+        int maxConnections = 0;
+        try {
+            maxConnections = Integer.parseInt(maxConnectionsStr);
+            System.out.println("Parsed max connections: " + maxConnections);
+        } catch (NumberFormatException e) {
+            System.err.println("Error: 'max.connections' is not a valid number. Using default. " + e.getMessage());
+            maxConnections = 5; // Default value
+        }
+
+        int timeout = 0;
+        try {
+            timeout = Integer.parseInt(timeoutStr);
+            System.out.println("Parsed timeout: " + timeout);
+        } catch (NumberFormatException e) {
+            System.err.println("Error: 'timeout.seconds' is not a valid number. Using default. " + e.getMessage());
+            timeout = 30; // Default value
+        }
+    }
+}
+      </code></pre>
+      <button class="copy-code-button">Copy Code</button>
+      <p class="p-activity"><strong>Hands-on:</strong> Run the `SafeConversion` code. Discuss how Spring Boot simplifies configuration by automatically handling property loading and type conversion from various sources. How would you handle a configuration where a property could be either a single value or a comma-separated list of values?</p>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 33: MCQ CHALLENGE INTRODUCTION ==================== -->
+  <div class="slide center" id="s33">
+    <div class="slide-label">Review & Practice</div>
+    <h2><span class="highlight">MCQ Challenge:</span> Test Your Knowledge!</h2>
+    <div class="accent-line"></div>
+    <p style="font-size: 1.2rem; margin-top: 30px;">Let's put your understanding of Exception Handling, Collections, Generics, and Advanced Concepts to the test!</p>
+    <p style="font-size: 1.1rem; margin-top: 15px;">We'll go through a series of Multiple Choice Questions. Discuss your answers and reasoning as a group.</p>
+    <p style="font-size: 1.3rem; margin-top: 40px; color: var(--accent);">Get ready to think, analyze, and learn!</p>
+    <p style="font-size:0.9rem; color:var(--muted); margin-top:30px;">**Trainer Note:** "This is an interactive session. Encourage participants to explain *why* they chose an answer, not just *what* the answer is. Focus on reinforcing concepts and addressing common misconceptions."</p>
+  </div>
+  <!-- ==================== SLIDE 34: MCQ 1: EXCEPTION HANDLING ==================== -->
+  <div class="slide" id="s34">
+    <div class="slide-label">MCQ Challenge</div>
+    <h2>MCQ 1: <span class="highlight">Exception Handling Basics</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="question-block">
+      <p class="question">Which of the following statements about Java exceptions is TRUE?</p>
+      <ul class="options">
+        <li>A) All `RuntimeException`s (unchecked exceptions) must be explicitly caught or declared using `throws`.</li>
+        <li>B) The `finally` block is guaranteed to execute, even if an exception occurs or a `return` statement is encountered in the `try` or `catch` block.</li>
+        <li>C) `try-with-resources` statements are primarily used to handle `NullPointerException`s automatically.</li>
+        <li>D) A `catch` block can handle any type of exception, regardless of its type, without specifying `Exception` or `Throwable`.</li>
+      </ul>
+      <div class="answer-reveal-area">
+        <button class="reveal-answer-button">Reveal Answer</button>
+        <div class="answer" style="display:none;">
+          <p class="correct-answer">Correct Answer: B</p>
+          <p class="explanation"><strong>Explanation:</strong></p>
+          <ul>
+            <li>A) is False. `RuntimeException`s do NOT need to be explicitly caught or declared.</li>
+            <li>B) is True. The `finally` block is designed for cleanup and always executes, except in very rare cases like `System.exit()`.</li>
+            <li>C) is False. `try-with-resources` is for automatic resource management (e.g., closing `InputStream`, `FileWriter`), not `NullPointerException`s.</li>
+            <li>D) is False. A `catch` block must specify a type that is `Throwable` or a subclass of `Throwable`.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 35: MCQ 2: COLLECTIONS FRAMEWORK ==================== -->
+  <div class="slide" id="s35">
+    <div class="slide-label">MCQ Challenge</div>
+    <h2>MCQ 2: <span class="highlight">Collections Framework Fundamentals</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="question-block">
+      <p class="question">You need to store a list of unique names, and you want to ensure they are always maintained in alphabetical order. Which Java Collection type would be the most suitable?</p>
+      <ul class="options">
+        <li>A) `ArrayList<String>`</li>
+        <li>B) `HashSet<String>`</li>
+        <li>C) `LinkedHashSet<String>`</li>
+        <li>D) `TreeSet<String>`</li>
+      </ul>
+      <div class="answer-reveal-area">
+        <button class="reveal-answer-button">Reveal Answer</button>
+        <div class="answer" style="display:none;">
+          <p class="correct-answer">Correct Answer: D</p>
+          <p class="explanation"><strong>Explanation:</strong></p>
+          <ul>
+            <li>A) `ArrayList` allows duplicates and does not maintain sorted order automatically.</li>
+            <li>B) `HashSet` ensures uniqueness but does not guarantee any specific order (including alphabetical).</li>
+            <li>C) `LinkedHashSet` ensures uniqueness and maintains insertion order, not alphabetical order.</li>
+            <li>D) `TreeSet` ensures uniqueness and automatically stores elements in their natural sorted order (alphabetical for `String`s) or by a provided `Comparator`.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 36: MCQ 3: GENERICS & WILDCARDS ==================== -->
+  <div class="slide" id="s36">
+    <div class="slide-label">MCQ Challenge</div>
+    <h2>MCQ 3: <span class="highlight">Generics & Wildcards</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="question-block">
+      <p class="question">Consider the following Java method signature:</p>
+      <pre><code class="language-java">
+public void processList(List&lt;? extends Number&gt; numbers) { /*... */ }
+      </code></pre>
+      <p class="question" style="margin-top: 15px;">Which of the following operations is *valid* inside the `processList` method?</p>
+      <ul class="options">
+        <li>A) `numbers.add(new Integer(10));`</li>
+        <li>B) `numbers.add(new Double(5.5));`</li>
+        <li>C) `Number n = numbers.get(0);`</li>
+        <li>D) `numbers = new ArrayList<Object>();`</li>
+      </ul>
+      <div class="answer-reveal-area">
+        <button class="reveal-answer-button">Reveal Answer</button>
+        <div class="answer" style="display:none;">
+          <p class="correct-answer">Correct Answer: C</p>
+          <p class="explanation"><strong>Explanation:</strong></p>
+          <ul>
+            <li>A) and B) are invalid. With `List<? extends Number>`, you cannot add any elements (except `null`) to the list because the compiler doesn't know the exact subtype. Adding an `Integer` to what might be a `List<Double>` is unsafe.</li>
+            <li>C) is valid. `? extends Number` means the list contains `Number` or a subtype of `Number`, so it's safe to read elements as `Number`. This is the "Producer-Extends" part of PECS.</li>
+            <li>D) is invalid. You cannot assign a `List<Object>` to a `List<? extends Number>` reference directly. The type argument must be `Number` or a subtype of `Number`.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 37: MCQ 4: OBJECT CLONING ==================== -->
+  <div class="slide" id="s37">
+    <div class="slide-label">MCQ Challenge</div>
+    <h2>MCQ 4: <span class="highlight">Object Cloning & Immutability</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="question-block">
+      <p class="question">Given a class `Car` that has a `String brand` field and a `List<String> passengers` field. If you perform a **shallow copy** of a `Car` object, and then modify the `passengers` list of the cloned `Car` object, what will be the effect?</p>
+      <ul class="options">
+        <li>A) The `passengers` list of the original `Car` object will remain unchanged.</li>
+        <li>B) The `passengers` list of the original `Car` object will also be modified.</li>
+        <li>C) A `CloneNotSupportedException` will be thrown.</li>
+        <li>D) The `brand` field of the original `Car` object will also be modified.</li>
+      </ul>
+      <div class="answer-reveal-area">
+        <button class="reveal-answer-button">Reveal Answer</button>
+        <div class="answer" style="display:none;">
+          <p class="correct-answer">Correct Answer: B</p>
+          <p class="explanation"><strong>Explanation:</strong></p>
+          <ul>
+            <li>A) is False. In a shallow copy, reference type fields (like `List<String> passengers`) are copied by reference.</li>
+            <li>B) is True. Since both the original and cloned `Car` objects refer to the *same* `List<String>` object for `passengers`, modifying the list via the cloned `Car` will affect the original `Car` as well.</li>
+            <li>C) is False. This would only happen if `Car` didn't implement `Cloneable` and `clone()` was called directly on `Object` or if the `clone()` method itself threw it for some reason.</li>
+            <li>D) is False. `String` is immutable in Java. Changing `brand` in the cloned object would create a new `String` instance for the cloned object's `brand`, leaving the original `Car`'s `brand` unaffected.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== SLIDE 38: MCQ 5: PROPERTY FILES ==================== -->
+  <div class="slide" id="s38">
+    <div class="slide-label">MCQ Challenge</div>
+    <h2>MCQ 5: <span class="highlight">Property Files & Configuration</span></h2>
+    <div class="accent-line"></div>
+
+    <div class="question-block">
+      <p class="question">You have an `application.properties` file with the entry `app.timeout=60`. You want to load this value in your Java code and ensure it's treated as an `int`. Which is the SAFEST way to do this?</p>
+      <ul class="options">
+        <li>A) `int timeout = Integer.parseInt(properties.getProperty("app.timeout"));`</li>
+        <li>B) `int timeout = Integer.valueOf(properties.getProperty("app.timeout", "0"));`</li>
+        <li>C) `int timeout = properties.getProperty("app.timeout").equals("null")? 0 : Integer.parseInt(properties.getProperty("app.timeout"));`</li>
+        <li>D) `int timeout = Integer.parseInt(properties.getProperty("app.timeout", "60"));`</li>
+      </ul>
+      <div class="answer-reveal-area">
+        <button class="reveal-answer-button">Reveal Answer</button>
+        <div class="answer" style="display:none;">
+          <p class="correct-answer">Correct Answer: D</p>
+          <p class="explanation"><strong>Explanation:</strong></p>
+          <ul>
+            <li>A) is risky. If "app.timeout" is not found in the properties file, `properties.getProperty("app.timeout")` returns `null`, leading to a `NullPointerException` when calling `parseInt()`.</li>
+            <li>B) is risky. While `properties.getProperty("app.timeout", "0")` provides a default if the key is missing, if the value for "app.timeout" *exists* but is not a valid integer (e.g., "abc"), `Integer.valueOf()` will still throw a `NumberFormatException`. It doesn't handle the case of an *invalid* existing value safely.</li>
+            <li>C) is overly complex and still prone to `NumberFormatException` if the value is not "null" but also not a valid integer.</li>
+            <li>D) is the safest. `properties.getProperty("app.timeout", "60")` ensures that if "app.timeout" is missing, it defaults to "60" (a valid string for parsing). If "app.timeout" *is* present but has a non-numeric value, `Integer.parseInt()` will throw a `NumberFormatException`. However, given the context of "safest" for loading a *valid* property, providing a default string that *is* parsable is the best approach for the initial retrieval. For truly robust parsing, a `try-catch` around `Integer.parseInt()` (as shown in previous slides) would be necessary for *any* case where the property value might be invalid. But among the given options, D provides the best defense against missing keys *and* prepares a parsable string.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- Closes the main "deck" div -->
+
+<!-- --- Navigation Controls --- -->
+<nav class="navigation">
+  <button id="prevBtn" class="nav-button">◀ Previous</button>
+  <span class="slide-indicator">Slide <span id="currentSlideNum">0</span> / <span id="totalSlidesNum">0</span></span>
+  <button id="nextBtn" class="nav-button">Next ▶</button>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlideIndex = 0;
+        const totalSlides = slides.length;
+
+        const currentSlideNumSpan = document.getElementById('currentSlideNum');
+        const totalSlidesNumSpan = document.getElementById('totalSlidesNum');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Handle case with no slides initially
+        if (totalSlides === 0) {
+            currentSlideNumSpan.textContent = '0';
+            totalSlidesNumSpan.textContent = '0';
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            return; // Exit if no slides to show
+        }
+
+        // Initialize total slides number
+        totalSlidesNumSpan.textContent = totalSlides;
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            // Show the current slide
+            slides[index].classList.add('active');
+            // Update slide indicator
+            currentSlideNumSpan.textContent = index + 1;
+
+            // Enable/disable navigation buttons
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === totalSlides - 1;
+
+            // Reset 'reveal answer' for current slide if it exists
+            // Find all reveal buttons and their associated answers on the current slide
+            const currentSlide = slides[index];
+            currentSlide.querySelectorAll('.answer-reveal-area').forEach(area => {
+                const revealBtn = area.querySelector('.reveal-answer-button');
+                const answerDiv = area.querySelector('.answer');
+                if (revealBtn && answerDiv) {
+                    answerDiv.style.display = 'none';
+                    revealBtn.style.display = 'block';
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        // Initial slide display
+        showSlide(currentSlideIndex);
+
+        // Event Listeners for navigation buttons
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowRight') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // --- Function to handle "Copy Code" buttons ---
+        document.querySelectorAll('.copy-code-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const codeBlock = this.previousElementSibling;
+                if (codeBlock && codeBlock.tagName === 'PRE') {
+                    const code = codeBlock.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        this.textContent = 'Copied!';
+                        setTimeout(() => {
+                            this.textContent = 'Copy Code';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        this.textContent = 'Failed to Copy';
+                    });
+                }
+            });
+        });
+
+        // --- Function to handle "Reveal Answer" buttons ---
+        document.querySelectorAll('.reveal-answer-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const answerBlock = this.nextElementSibling;
+                if (answerBlock && answerBlock.classList.contains('answer')) {
+                    answerBlock.style.display = 'block';
+                    this.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

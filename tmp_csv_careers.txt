@@ -1,0 +1,20 @@
+AI/Tech|AI Engineer
+AI/Tech|AI Ethics Specialist
+AI/Tech|Generative AI Specialist
+AI/Tech|Prompt Engineer
+Data/Hybrid|Cybersecurity Analyst
+Data/Hybrid|Data Scientist
+Data/Hybrid|EV Engineer
+Data/Hybrid|FinTech Engineer
+Green/Sustainability|Carbon Footprint Analyst
+Green/Sustainability|ESG Analyst
+Green/Sustainability|Green Hydrogen Engineer
+Green/Sustainability|Renewable Energy Engineer
+Green/Sustainability|Sustainability Manager
+Healthcare/HealthTech|Behavioural Therapist
+Healthcare/HealthTech|Biomedical Researcher
+Healthcare/HealthTech|Biotech Specialist
+Healthcare/HealthTech|Health AI Developer
+Other Rising|Cloud Architect
+Other Rising|Defense Manufacturing Specialist
+Other Rising|Intelligent Automation Expert

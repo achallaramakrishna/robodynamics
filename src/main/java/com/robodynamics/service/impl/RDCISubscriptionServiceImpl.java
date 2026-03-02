@@ -102,6 +102,12 @@ public class RDCISubscriptionServiceImpl implements RDCISubscriptionService {
 
     @Override
     @Transactional(readOnly = true)
+    public RDCISubscription getLatestActiveModuleSubscription(Integer studentUserId, String moduleCode) {
+        return ciSubscriptionDao.findLatestActiveByStudentUserIdAndModuleCode(studentUserId, moduleCode);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public boolean hasActiveAptiPathSubscription(Integer studentUserId) {
         return hasActiveModuleSubscription(studentUserId, "APTIPATH");
     }

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Programming Exercises</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#030712;
+      --surface:#0a1024;
+      --panel:#111a33;
+      --border:#223047;
+      --accent:#38bdf8;
+      --accent2:#f97316;
+      --text:#edf2ff;
+      --muted:#94a3b8;
+      --code:#0c1222;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      background:linear-gradient(150deg,#02060f,#0b1331 65%,#0f223c);
+      color:var(--text);
+      font-family:'Inter',sans-serif;
+    }
+    main {
+      max-width:1100px;
+      margin:0 auto;
+      padding:40px 24px 80px;
+    }
+    header {
+      margin-bottom:32px;
+    }
+    header h1 {
+      font-size:2.8rem;
+      margin:0;
+    }
+    header p {
+      margin-top:8px;
+      color:var(--muted);
+      max-width:760px;
+    }
+    .exercise {
+      background:var(--panel);
+      border-radius:24px;
+      border:1px solid var(--border);
+      padding:24px;
+      margin-bottom:26px;
+      box-shadow:0 28px 50px rgba(0,0,0,0.45);
+    }
+    .exercise h2 {
+      margin:0 0 6px;
+      color:var(--accent2);
+    }
+    .meta {
+      margin:0;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+    .description {
+      margin:14px 0 16px;
+      color:var(--text);
+      font-size:1rem;
+      line-height:1.6;
+    }
+    .code-panel {
+      background:var(--code);
+      border-radius:16px;
+      padding:18px;
+      position:relative;
+      margin-bottom:14px;
+    }
+    .code-panel pre {
+      margin:0;
+      font-family:'Source Code Pro',monospace;
+      font-size:0.9rem;
+      line-height:1.55;
+      white-space:pre-wrap;
+    }
+    .code-panel button {
+      position:absolute;
+      top:12px;
+      right:12px;
+      border:none;
+      background:var(--accent);
+      color:#05060f;
+      padding:6px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:0.8rem;
+    }
+    .workflow {
+      margin:0;
+      padding-left:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      line-height:1.5;
+    }
+    .workflow li {
+      margin-bottom:6px;
+    }
+    .practice {
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+    .practice span {
+      background:rgba(59,130,246,0.1);
+      padding:4px 10px;
+      border-radius:999px;
+    }
+    footer {
+      margin-top:40px;
+      border-top:1px solid var(--border);
+      padding-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Day 3 Hands-On Exercises</h1>
+      <p>Each block below connects to a lecture fragment (classes, inheritance, interfaces, static, exception handling, collections). Follow the workflow, show the sample snippet, and let pairs extend it.</p>
+    </header>
+
+    <section class="exercise" id="classes">
+      <h2>Classes & Encapsulation</h2>
+      <p class="meta">Duration: 25 min | Scope: Build a value object with validation</p>
+      <p class="description">Create a `StudentProfile` class that keeps name, email, GPA, and shields any invalid GPA (0.0-4.0). Include factory methods and encapsulated setters.</p>
+      <div class="code-panel">
+        <button data-target="studentProfile">Copy</button>
+        <pre id="studentProfile">public final class StudentProfile {
+  private final String name;
+  private final String email;
+  private double gpa;
+
+  private StudentProfile(String name, String email, double gpa) {
+    this.name = Objects.requireNonNull(name, "name");
+    this.email = Objects.requireNonNull(email, "email");
+    updateGpa(gpa);
+  }
+
+  public static StudentProfile create(String name, String email, double gpa) {
+    return new StudentProfile(name.trim(), email.toLowerCase(), gpa);
+  }
+
+  public void updateGpa(double gpa) {
+    if (gpa < 0 || gpa > 4) {
+      throw new IllegalArgumentException("GPA must be 0-4");
+    }
+    this.gpa = gpa;
+  }
+}</pre>
+      </div>
+      <ul class="workflow">
+        <li>Instantiate via the static factory to centralize normalization.</li>
+        <li>Throw early for invalid GPA and prevent exposing setters that allow invalid state.</li>
+        <li>Use immutable fields + validation to keep the object stable.</li>
+      </ul>
+      <div class="practice">
+        <span>Best practice: private constructor + factory</span>
+        <span>Pair exercise: add `displayName()` and `toDTO()` methods</span>
+      </div>
+    </section>
+
+    <section class="exercise" id="inheritance">
+      <h2>Inheritance and Method Overriding</h2>
+      <p class="meta">Duration: 30 min | Scope: Model account hierarchy</p>
+      <p class="description">Implement `Account`, `SavingsAccount`, and `CheckingAccount`. `Account` holds `balance` and defines `deposit` plus an abstract `applyMonthlyCharge`. Child classes override the charge behavior.</p>
+      <div class="code-panel">
+        <button data-target="accountSample">Copy</button>
+        <pre id="accountSample">public abstract class Account {
+  protected double balance;
+
+  public Account(double openingBalance) {
+    balance = openingBalance;
+  }
+
+  public void deposit(double amount) {
+    if (amount <= 0) {
+      throw new IllegalArgumentException("Deposit must be positive");
+    }
+    balance += amount;
+  }
+
+  public abstract void applyMonthlyCharge();
+}
+
+public class SavingsAccount extends Account {
+  public SavingsAccount(double openingBalance) {
+    super(openingBalance);
+  }
+
+  @Override
+  public void applyMonthlyCharge() {
+    balance -= 5; // base fee
+  }
+}</pre>
+      </div>
+      <ul class="workflow">
+        <li>Favor protected helper fields for tests but avoid exposing them publicly.</li>
+        <li>Override `toString()` in each child to dump type and balance (demo in lecture).</li>
+        <li>Add `super` calls when child extends parent logic.</li>
+      </ul>
+      <div class="practice">
+        <span>Lab prompt: add transaction logging</span>
+        <span>Extension: `Account` implements `Comparable<Account>` by balance</span>
+      </div>
+    </section>
+
+    <section class="exercise" id="interfaces">
+      <h2>Interfaces & Contracts</h2>
+      <p class="meta">Duration: 20 min | Scope: Create a reportable pipeline</p>
+      <p class="description">Define a `Reportable` interface with `generateReport()` plus a default method `header()`. Implement it in a `CourseProgressReport` class and compose it via a `ReportScheduler` service.</p>
+      <div class="code-panel">
+        <button data-target="reportSample">Copy</button>
+        <pre id="reportSample">public interface Reportable {
+  default String header() {
+    return \"== Learner Report ==\";  
+  }
+
+  String generateReport();
+}
+
+public class CourseProgressReport implements Reportable {
+  @Override
+  public String generateReport() {
+    return header() + \"\\nProgress: 80%\\n\";  
+  }
+}</pre>
+      </div>
+      <ul class="workflow">
+        <li>Use default methods to share common header formatting.</li>
+        <li>Explain why multiple classes can implement `Reportable` to support dashboards and email.</li>
+        <li>Extend the interface with a static helper `formatLine()` to reuse logic.</li>
+      </ul>
+      <div class="practice">
+        <span>Discuss: interface vs abstract class</span>
+        <span>Bonus: create `Alertable` and implement a multi-interface class</span>
+      </div>
+    </section>
+
+    <section class="exercise" id="static">
+      <h2>Static Utilities and Constants</h2>
+      <p class="meta">Duration: 15 min | Scope: Provide shared helpers</p>
+      <p class="description">Build `DateTimeUtils` with static methods `nowUtc()` and `format(DateTimeFormatter, LocalDateTime)` plus a `static final` formatter.</p>
+      <div class="code-panel">
+        <button data-target="staticSample">Copy</button>
+        <pre id="staticSample">public final class DateTimeUtils {
+  public static final DateTimeFormatter ISO_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+  private DateTimeUtils() {}
+
+  public static LocalDateTime nowUtc() {
+    return LocalDateTime.now(ZoneOffset.UTC);
+  }
+
+  public static String format(LocalDateTime when) {
+    return when.format(ISO_FORMAT);
+  }
+}</pre>
+      </div>
+      <ul class="workflow">
+        <li>Prevent instantiation with a private constructor.</li>
+        <li>Share formatters as `static final` to reuse across modules.</li>
+        <li>Point out thread-safety of `DateTimeFormatter` in this context.</li>
+      </ul>
+      <div class="practice">
+        <span>Example: add `durationSeconds()`</span>
+        <span>Discuss: why not store mutable state statically?</span>
+      </div>
+    </section>
+
+    <section class="exercise" id="exceptions">
+      <h2>Exception Handling & User Defined Errors</h2>
+      <p class="meta">Duration: 25 min | Scope: Build custom exception layering</p>
+      <p class="description">Implement `InsufficientBalanceException` (extends `RuntimeException`). Update `Account.withdraw` to throw it, wrap low-level exceptions, and log root causes.</p>
+      <div class="code-panel">
+        <button data-target="exceptionSample">Copy</button>
+        <pre id="exceptionSample">public class InsufficientBalanceException extends RuntimeException {
+  public InsufficientBalanceException(String message) {
+    super(message);
+  }
+}
+
+public void withdraw(double amount) {
+  if (amount > balance) {
+    throw new InsufficientBalanceException(\"Amount exceeds balance\");
+  }
+  balance -= amount;
+}</pre>
+      </div>
+      <ul class="workflow">
+        <li>Discuss checked vs unchecked and why runtime exception fits here.</li>
+        <li>Wrap underlying `IOException` when persisting transactions using `throw new BusinessException(\"\", io)`.</li>
+        <li>Always log the exception with `Logger` before rethrowing for troubleshooting.</li>
+      </ul>
+      <div class="practice">
+        <span>Revisit multi-catch from lecture</span>
+        <span>Lab prompt: add `try-with-resources` when logging</span>
+      </div>
+    </section>
+
+    <section class="exercise" id="collections">
+      <h2>Collections & Ordering</h2>
+      <p class="meta">Duration: 30 min | Scope: Leaderboard and comparator chaining</p>
+      <p class="description">Create `StudentScore` with `Comparable` by GPA, and build a `Leaderboard` using `TreeSet` and chained comparators to sort by GPA, then name.</p>
+      <div class="code-panel">
+        <button data-target="collectionsSample">Copy</button>
+        <pre id="collectionsSample">record StudentScore(String name, double gpa) implements Comparable&lt;StudentScore&gt; {
+  @Override
+  public int compareTo(StudentScore that) {
+    return Double.compare(that.gpa, this.gpa);
+  }
+}
+
+Set&lt;StudentScore&gt; leaderboard = new TreeSet&lt;&gt;(Comparator
+  .comparingDouble(StudentScore::gpa).reversed()
+  .thenComparing(StudentScore::name));</pre>
+      </div>
+      <ul class="workflow">
+        <li>Explain why `TreeSet` needs consistent `compareTo`/`equals`.</li>
+        <li>Demonstrate `thenComparing` to break ties deterministically.</li>
+        <li>Show how iteration order follows the comparator, perfect for leaderboard slides.</li>
+      </ul>
+      <div class="practice">
+        <span>Extension: add `LinkedHashSet` cache for insertion order</span>
+        <span>Discuss: when to choose ArrayList vs LinkedList for ranking</span>
+      </div>
+    </section>
+
+    <footer>Wrap up by sharing these exercises with the class Git repo and letting each group commit their version. Use pair-programming rotations to keep everyone engaged.</footer>
+  </main>
+  <script>
+    document.querySelectorAll('.code-panel button').forEach(button => {
+      button.addEventListener('click', () => {
+        const snippet = document.getElementById(button.dataset.target).innerText.trim();
+        navigator.clipboard.writeText(snippet).then(() => {
+          button.innerText = 'Copied';
+          setTimeout(() => button.innerText = 'Copy', 1200);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

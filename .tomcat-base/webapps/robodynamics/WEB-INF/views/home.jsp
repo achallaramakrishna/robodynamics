@@ -513,7 +513,7 @@
         </p>
         <div class="hero-buttons">
           <a class="btn-main" href="${pageContext.request.contextPath}/plans/checkout?plan=career-basic">
-            Pay Now - Career Discovery Rs 299 + GST
+            Pay Now - Career Discovery Rs 799 + GST
           </a>
           <a class="btn-alt" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">
             Pay Now - Exam Prep Rs 999 + GST
@@ -564,8 +564,8 @@
         <article class="plan-card plan-career">
           <span class="plan-badge">Foundation assessment</span>
           <h3 class="plan-title">Career Discovery Basic</h3>
-          <div class="plan-price">Rs 299 <span>/ one-time</span></div>
-          <p class="tax-line">GST Rs 54 | Total Rs 353</p>
+          <div class="plan-price">Rs 799 <span>/ one-time</span></div>
+          <p class="tax-line">GST Rs 144 | Total Rs 943</p>
           <ul class="features">
             <li>Career aptitude and interest assessment</li>
             <li>Concise report with key observations</li>
@@ -574,7 +574,7 @@
           </ul>
           <div class="plan-actions">
             <a class="btn-main" href="${pageContext.request.contextPath}/plans/checkout?plan=career-basic">
-              Pay Now - Rs 299 + GST
+              Pay Now - Rs 799 + GST
             </a>
             <a class="btn-ghost" href="${pageContext.request.contextPath}/parents/demo?source=career_intelligence_basic">
               Talk to academic advisor
@@ -881,7 +881,7 @@
 
 <div class="mobile-cta">
   <a href="${pageContext.request.contextPath}/plans/checkout?plan=career-basic">
-    Pay Now - Career Discovery Basic Rs 299 + GST
+    Pay Now - Career Discovery Basic Rs 799 + GST
   </a>
 </div>
 

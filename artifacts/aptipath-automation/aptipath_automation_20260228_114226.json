@@ -1,0 +1,101 @@
+﻿{
+    "runId":  "20260228_114226",
+    "runAt":  "2026-02-28T11:42:26",
+    "baseUrl":  "http://127.0.0.1:8085/robodynamics",
+    "summary":  {
+                    "total":  8,
+                    "passed":  3,
+                    "failed":  5,
+                    "passRatePercent":  37.5
+                },
+    "scenarios":  [
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Login page loads",
+                          "Method":  "GET",
+                          "Path":  "/login",
+                          "Status":  200,
+                          "Passed":  true,
+                          "DurationMs":  64,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Parent home is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/parent/home",
+                          "Status":  0,
+                          "Passed":  false,
+                          "DurationMs":  18,
+                          "Location":  "",
+                          "Notes":  "Unexpected status 0. Expected: 302,303,401,403. Route is not login-gated as expected. Request error: Operation is not valid due to the current state of the object."
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student home is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/home",
+                          "Status":  0,
+                          "Passed":  false,
+                          "DurationMs":  12,
+                          "Location":  "",
+                          "Notes":  "Unexpected status 0. Expected: 302,303,401,403. Route is not login-gated as expected. Request error: Operation is not valid due to the current state of the object."
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student intake is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/intake",
+                          "Status":  0,
+                          "Passed":  false,
+                          "DurationMs":  14,
+                          "Location":  "",
+                          "Notes":  "Unexpected status 0. Expected: 302,303,401,403. Route is not login-gated as expected. Request error: Operation is not valid due to the current state of the object."
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Student test is gated for guest",
+                          "Method":  "GET",
+                          "Path":  "/aptipath/student/test",
+                          "Status":  0,
+                          "Passed":  false,
+                          "DurationMs":  12,
+                          "Location":  "",
+                          "Notes":  "Unexpected status 0. Expected: 302,303,401,403. Route is not login-gated as expected. Request error: Operation is not valid due to the current state of the object."
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Checkout route responds",
+                          "Method":  "GET",
+                          "Path":  "/plans/checkout?plan=career-premium",
+                          "Status":  0,
+                          "Passed":  false,
+                          "DurationMs":  10,
+                          "Location":  "",
+                          "Notes":  "Unexpected status 0. Expected: 200,302,303,401,403. Request error: Operation is not valid due to the current state of the object."
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "Parent registration route responds",
+                          "Method":  "GET",
+                          "Path":  "/registerParentChild?plan=career-premium",
+                          "Status":  200,
+                          "Passed":  true,
+                          "DurationMs":  22,
+                          "Location":  "",
+                          "Notes":  ""
+                      },
+                      {
+                          "Set":  "guest",
+                          "Scenario":  "VidaPath careers API responds",
+                          "Method":  "GET",
+                          "Path":  "/vidapath/api/future-careers",
+                          "Status":  200,
+                          "Passed":  true,
+                          "DurationMs":  157,
+                          "Location":  "",
+                          "Notes":  ""
+                      }
+                  ]
+}

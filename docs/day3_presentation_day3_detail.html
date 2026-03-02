@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 3 – Full Stack Java Deep Dive</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: #020617;
+      color: #e2e8f0;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    .meta-line {
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .35em;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 2.8rem;
+      color: #7dd3fc;
+      line-height: 1.2;
+    }
+    header p {
+      margin: 0;
+      color: #cbd5f5;
+      font-size: 1rem;
+    }
+    section {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+    }
+    section h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+    dl {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 6px 18px;
+      margin: 0 0 14px;
+    }
+    dt {
+      font-weight: 600;
+      color: #bfdbfe;
+    }
+    dd {
+      margin: 0;
+      color: #e0f2fe;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0 0;
+      color: #cbd5f5;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    th,
+    td {
+      padding: 12px;
+      border: 1px solid #1f2937;
+      text-align: left;
+    }
+    th {
+      background: #1e293b;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    footer {
+      margin-top: 32px;
+      font-size: .95rem;
+      color: #94a3b8;
+    }
+    a {
+      color: #7dd3fc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta-line">Java Full Stack · Phase 1 · Day 3</div>
+      <h1>1:00‑5:00 PM · Exception Handling, Collections &amp; Generics Deep Dive</h1>
+      <p>Align your demos and labs with the exercises inside <strong>Java_Full_Stack_Course_Outline_With_Labs.docx</strong> (exception handling, collections &amp; generics sections). Follow the rubric below, pause for reflection, and keep the discussion anchored in the real-world booster problems.</p>
+    </header>
+    <section>
+      <h2>Hour 1 · Exception handling fundamentals</h2>
+      <dl>
+        <dt>1:00‑1:10</dt>
+        <dd>Welcome and recap Day 2 progress (object orientation, earlier concurrency primer). Share learning goals and open the code repo clearly visible.</dd>
+        <dt>1:10‑1:30</dt>
+        <dd>Walk through the try/catch/finally lifecycle: show how the JVM unwinds the stack, contrast checked versus unchecked exceptions, and mention the <code>throws</code> signature.</dd>
+        <dt>1:30‑1:55</dt>
+        <dd>Live demo from the doc’s exception propagation lab. Trigger an <code>IOException</code>, capture stack trace, and show logging with SLF4J or System.err.</dd>
+      </dl>
+      <ul>
+        <li>Highlight multi-catch, suppressed exceptions (try-with-resources), and when <code>finally</code> might be skipped (e.g., <code>System.exit</code>).</li>
+        <li>Ask: “What happens once you swallow an exception without rethrowing?” and capture answers for wrap-up.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Hour 2 · Advanced patterns + mini lab</h2>
+      <dl>
+        <dt>1:55‑2:20</dt>
+        <dd>Define custom exceptions vs RuntimeException; embed metadata (error codes) and show how the doc’s sample <code>ValidationException</code> is used by services.</dd>
+        <dt>2:20‑2:30</dt>
+        <dd>Pair exercise: wrap an I/O stream with try-with-resources and log suppressed exceptions using the lab sheet for guidance.</dd>
+      </dl>
+      <ul>
+        <li>Explain the design decision of creating domain-specific exception classes (service, data layer, orchestration).</li>
+        <li>Run MCQ (slide 34) live: “Which block always executes?” and reinforce the answer (finally).</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Break · 2:30‑2:40 PM</h2>
+      <p style="color:#94a3b8;">Use the 10 minutes to stretch, answer quick questions on Day 2 labs, and point learners to the labs hosted in the course outline document. Remind them to reopen tabs for collections coding after the break.</p>
+    </section>
+    <section>
+      <h2>Hours 3‑4 · Collections, streams, and generics workshop</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Topic</th>
+            <th>Activities &amp; Talking Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2:40‑3:20</td>
+            <td>Collections hierarchy (List, Set, Map)</td>
+            <td>Code comparisons of <code>ArrayList</code>, <code>LinkedList</code>, <code>HashSet</code>, <code>TreeSet</code>, and <code>TreeMap</code>. Explain ordering, duplicates, and memory access patterns using the lab’s shopping/playlist snippets.</td>
+          </tr>
+          <tr>
+            <td>3:20‑3:40</td>
+            <td>Concurrent collections + iteration safety</td>
+            <td>Show <code>ConcurrentHashMap</code> and <code>CopyOnWriteArrayList</code>; trigger <code>ConcurrentModificationException</code> intentionally and fix it. Connect to thread-safe contexts.</td>
+          </tr>
+          <tr>
+            <td>3:40‑4:00</td>
+            <td>Comparators &amp; immutable helpers</td>
+            <td>Sort the student list from the lab using <code>Comparator.comparing()</code>, <code>thenComparing()</code>, and method references; highlight <code>Collections.unmodifiableList</code>.</td>
+          </tr>
+          <tr>
+            <td>4:00‑4:40</td>
+            <td>Generics &amp; wildcards</td>
+            <td>Dive into the doc’s methods: <code>sumNumbers(List&lt;? extends Number&gt;)</code>, <code>addIntegers(List&lt;? super Integer&gt;)</code>, and <code>&lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt;)</code>. Refactor a legacy raw-type code block in pairs.</td>
+          </tr>
+          <tr>
+            <td>4:40‑5:00</td>
+            <td>Wrap-up, MCQ, and open Q&amp;A</td>
+            <td>Students commit a micro-lab: combine exception flow with collection filtering. Run MCQ slides 35‑38 rapidly, collect remaining questions, and preview Day 4.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer>
+      <p>Resources: link directly to <a href="Java_Full_Stack_Course_Outline_With_Labs.docx">Java_Full_Stack_Course_Outline_With_Labs.docx</a>, the MCQ slides, and the shared GitHub repo. Ask learners to capture their reflection in the course journal after 5 PM.</p>
+      <p>Generated for today’s Day 3 session (25-Feb-2026 · 1:00 PM). Adjust timing in real time if the labs spark extra discussion.</p>
+    </footer>
+  </main>
+</body>
+</html>

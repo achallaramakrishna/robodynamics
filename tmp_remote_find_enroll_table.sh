@@ -1,0 +1,1 @@
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; SHOW TABLES LIKE '%enroll%'; SHOW TABLES LIKE '%student%course%'; SHOW TABLES LIKE '%course%student%';"

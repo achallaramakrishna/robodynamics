@@ -1,0 +1,671 @@
+{
+  "title": "ICSE Grade 5 Science Chapter Review",
+  "subject": "Science",
+  "board": "ICSE",
+  "examYear": 2026,
+  "examType": "EXAM_PREP",
+  "patternCode": "ICSE_G5_SCI_CHAPTER_REVIEW",
+  "durationMinutes": 90,
+  "totalMarks": 60,
+  "instructions": "Answer all questions. Write neat diagrams when asked, label clearly, and show steps for every calculation.",
+  "negativeMarking": false,
+  "shuffleSections": false,
+  "shuffleQuestions": false,
+  "sections": [
+    {
+      "sectionName": "A",
+      "title": "Chapter 1 - Circulatory System",
+      "description": "Circulation and blood components",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 1,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 1,
+          "mandatory": true,
+          "maxWordLimit": 40,
+          "question": {
+            "question_text": "Which blood component carries oxygen to the body cells?",
+            "question_type": "multiple_choice",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 1,
+            "max_marks": 1,
+            "points": 1,
+            "options": [
+              {"option_text": "Platelets", "is_correct": false},
+              {"option_text": "White blood cells", "is_correct": false},
+              {"option_text": "Red blood cells", "is_correct": true},
+              {"option_text": "Plasma", "is_correct": false}
+            ]
+          },
+          "answerKey": {
+            "modelAnswer": "Red blood cells carry oxygen because they contain the pigment haemoglobin, which binds oxygen and transports it around the body.",
+            "keyPoints": ["contains haemoglobin", "binds oxygen", "transports oxygen"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 2,
+          "mandatory": true,
+          "maxWordLimit": 120,
+          "question": {
+            "question_text": "Name the four chambers of the human heart and identify where oxygenated blood is received and pumped out.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 2,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "The four chambers are the right atrium, right ventricle, left atrium, and left ventricle. The left atrium receives oxygenated blood from the lungs and the left ventricle pumps it out to the body.",
+            "keyPoints": ["right atrium/ventricle", "left atrium/ventricle", "oxygenated blood enters left atrium", "left ventricle pumps to body"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 3,
+          "mandatory": true,
+          "maxWordLimit": 130,
+          "question": {
+            "question_text": "Describe the pathway of oxygenated blood starting from the lungs until it reaches the body cells.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 3,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "Oxygenated blood travels from the lungs to the left atrium via the pulmonary veins, moves into the left ventricle, and is pumped through the aorta into arteries that carry it to body cells.",
+            "keyPoints": ["pulmonary veins", "left atrium", "left ventricle", "aorta to body cells"]
+          }
+        },
+        {
+          "marks": 5,
+          "displayOrder": 4,
+          "mandatory": true,
+          "maxWordLimit": 300,
+          "question": {
+            "question_text": "Explain double circulation and why it is important for humans.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 4,
+            "max_marks": 5,
+            "points": 5
+          },
+          "answerKey": {
+            "modelAnswer": "Double circulation means blood flows through the heart twice in each circuit: once through the pulmonary circulation (heart to lungs and back) and once through systemic circulation (heart to body). It keeps oxygen-rich and oxygen-poor blood separate, allowing efficient oxygen delivery to all tissues.",
+            "keyPoints": ["two loops", "pulmonary loop", "systemic loop", "keeps blood separate", "efficient oxygen delivery"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "B",
+      "title": "Chapter 6 - Solids, Liquids and Gases",
+      "description": "Properties and changes of matter",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 2,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 5,
+          "mandatory": true,
+          "maxWordLimit": 50,
+          "question": {
+            "question_text": "Which state of matter has a fixed shape and fixed volume?",
+            "question_type": "multiple_choice",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 5,
+            "max_marks": 1,
+            "points": 1,
+            "options": [
+              {"option_text": "Solid", "is_correct": true},
+              {"option_text": "Liquid", "is_correct": false},
+              {"option_text": "Gas", "is_correct": false},
+              {"option_text": "Plasma", "is_correct": false}
+            ]
+          },
+          "answerKey": {
+            "modelAnswer": "A solid has both a fixed shape and fixed volume because its particles are closely packed in a regular arrangement.",
+            "keyPoints": ["fixed shape", "fixed volume", "particles close together"]
+          }
+        },
+        {
+          "marks": 1,
+          "displayOrder": 6,
+          "mandatory": true,
+          "maxWordLimit": 70,
+          "question": {
+            "question_text": "State one difference between liquids and gases.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 6,
+            "max_marks": 1,
+            "points": 1
+          },
+          "answerKey": {
+            "modelAnswer": "Liquids have a fixed volume but gases do not; gases expand to fill the container.",
+            "keyPoints": ["liquid fixed volume", "gas expands", "fills container"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 7,
+          "mandatory": true,
+          "maxWordLimit": 150,
+          "question": {
+            "question_text": "Explain why heat causes the particles of a solid to move apart and change into a liquid.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 7,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "Heating supplies energy that makes the particles vibrate faster and move slightly apart. Eventually the forces holding them together weaken and the solid melts into a liquid.",
+            "keyPoints": ["heat adds energy", "particles vibrate", "forces weaken", "change to liquid"]
+          }
+        },
+        {
+          "marks": 6,
+          "displayOrder": 8,
+          "mandatory": true,
+          "maxWordLimit": 250,
+          "question": {
+            "question_text": "Describe an experiment to show that gases have no fixed shape or volume.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 8,
+            "max_marks": 6,
+            "points": 6
+          },
+          "answerKey": {
+            "modelAnswer": "Take a deflated balloon and hold it over the mouth of a bottle. Pour warm water over the bottle so the air inside heats up. The balloon inflates and changes shape because the gas expands to fill available space; the balloon has no fixed shape or volume.",
+            "keyPoints": ["balloon experiment", "warm air expands", "no fixed shape", "balloon inflates"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "C",
+      "title": "Chapter 7 - Interdependence in Living Beings",
+      "description": "Food chains and habitats",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 3,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 9,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "Which organism in a food chain is usually the producer?",
+            "question_type": "multiple_choice",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 9,
+            "max_marks": 1,
+            "points": 1,
+            "options": [
+              {"option_text": "Lion", "is_correct": false},
+              {"option_text": "Grass", "is_correct": true},
+              {"option_text": "Snake", "is_correct": false},
+              {"option_text": "Eagle", "is_correct": false}
+            ]
+          },
+          "answerKey": {
+            "modelAnswer": "Plants such as grass are producers because they make their own food using sunlight through photosynthesis.",
+            "keyPoints": ["plants", "photosynthesis", "make own food"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 10,
+          "mandatory": true,
+          "maxWordLimit": 120,
+          "question": {
+            "question_text": "Define a habitat and give one example of an animal adapting to its habitat.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 10,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "A habitat is the natural place where an organism lives. For example, polar bears live in the Arctic where they have thick fur and fat to keep warm.",
+            "keyPoints": ["natural home", "example polar bear", "thick fur", "fat layer"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 11,
+          "mandatory": true,
+          "maxWordLimit": 140,
+          "question": {
+            "question_text": "What is a food chain? Explain how energy flows using the chain: Grass â†’ Grasshopper â†’ Frog â†’ Snake.",
+            "question_type": "short_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 11,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "A food chain is a sequence showing energy transfer from plants to animals. Grass uses sunlight to make food, the grasshopper eats the grass, the frog eats the grasshopper, and the snake eats the frog. Energy moves from producers to herbivores to carnivores.",
+            "keyPoints": ["sequence", "energy flows", "producer to herbivore to carnivore", "grasshopper eats grass", "frog eats grasshopper", "snake eats frog"]
+          }
+        },
+        {
+          "marks": 5,
+          "displayOrder": 12,
+          "mandatory": true,
+          "maxWordLimit": 300,
+          "question": {
+            "question_text": "Describe two ways in which living beings depend on each other for survival.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 12,
+            "max_marks": 5,
+            "points": 5
+          },
+          "answerKey": {
+            "modelAnswer": "One example is the relationship between plants and animals: herbivores eat plants for food and return carbon dioxide that plants need. Another example is pollination: bees collect nectar from flowers and at the same time help spread pollen so plants can reproduce.",
+            "keyPoints": ["herbivores eat plants", "animals release carbon dioxide", "pollinators transfer pollen", "mutual benefit"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "D",
+      "title": "Chapter 8 - Sound and Noise",
+      "description": "Properties of sound and noise control",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 4,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 13,
+          "mandatory": true,
+          "maxWordLimit": 70,
+          "question": {
+            "question_text": "Which of the following is a sound with a clear pitch?",
+            "question_type": "multiple_choice",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 13,
+            "max_marks": 1,
+            "points": 1,
+            "options": [
+              {"option_text": "Traffic noise", "is_correct": false},
+              {"option_text": "Violin note", "is_correct": true},
+              {"option_text": "Hissing fan", "is_correct": false},
+              {"option_text": "Dripping tap", "is_correct": false}
+            ]
+          },
+          "answerKey": {
+            "modelAnswer": "A violin note has a definite pitch because it repeats vibrations at a fixed frequency.",
+            "keyPoints": ["definite pitch", "fixed frequency", "violin note"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 14,
+          "mandatory": true,
+          "maxWordLimit": 130,
+          "question": {
+            "question_text": "Explain how sound is produced in a guitar string.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 14,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "When the string is plucked, it vibrates. These vibrations travel through the air as compressions and rarefactions, which our ears interpret as sound.",
+            "keyPoints": ["strings vibrate", "vibrations produce sound waves", "air carries waves", "ear detects sound"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 15,
+          "mandatory": true,
+          "maxWordLimit": 140,
+          "question": {
+            "question_text": "List two differences between sound and noise.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 15,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "Sound has a pleasant tone and definite pitch, while noise is irregular and unpleasant. Sound carries useful information; noise disturbs concentration.",
+            "keyPoints": ["sound pleasing", "noise unpleasant", "sound definite pitch", "noise irregular"]
+          }
+        },
+        {
+          "marks": 5,
+          "displayOrder": 16,
+          "mandatory": true,
+          "maxWordLimit": 320,
+          "question": {
+            "question_text": "Describe two ways to reduce noise pollution at school.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 16,
+            "max_marks": 5,
+            "points": 5
+          },
+          "answerKey": {
+            "modelAnswer": "First, use soft materials like curtains or carpets in classrooms to absorb sound. Second, avoid shouting in corridors, and place signboards asking everyone to speak softly near sensitive areas like laboratories.",
+            "keyPoints": ["soft materials absorb sound", "no shouting", "signboards asking for quiet", "protect laboratories"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "E",
+      "title": "Chapter 9 - Work and Energy",
+      "description": "Energy transfer and simple calculations",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 5,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 17,
+          "mandatory": true,
+          "maxWordLimit": 60,
+          "question": {
+            "question_text": "What is the SI unit of work?",
+            "question_type": "multiple_choice",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 17,
+            "max_marks": 1,
+            "points": 1,
+            "options": [
+              {"option_text": "Joule", "is_correct": true},
+              {"option_text": "Newton", "is_correct": false},
+              {"option_text": "Watt", "is_correct": false},
+              {"option_text": "Pascal", "is_correct": false}
+            ]
+          },
+          "answerKey": {
+            "modelAnswer": "The SI unit of work is the joule (J).",
+            "keyPoints": ["unit", "joule", "symbol J"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 18,
+          "mandatory": true,
+          "maxWordLimit": 140,
+          "question": {
+            "question_text": "Define energy and give one example of how it is stored in a lifted weight.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 18,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "Energy is the capacity to do work. A lifted weight has potential energy stored because it can do work when released due to gravity.",
+            "keyPoints": ["capacity to do work", "lifted weight", "potential energy", "released by gravity"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 19,
+          "mandatory": true,
+          "maxWordLimit": 150,
+          "question": {
+            "question_text": "A boy lifts a box of 10 kg by 2 metres. Calculate the work done (take g = 10 m/s²).",
+            "question_type": "short_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 19,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "Work = force × distance = weight × height = (10 kg × 10 m/s²) × 2 m = 200 J.",
+            "keyPoints": ["force = 10×10", "distance 2 m", "200 J"]
+          }
+        },
+        {
+          "marks": 5,
+          "displayOrder": 20,
+          "mandatory": true,
+          "maxWordLimit": 280,
+          "question": {
+            "question_text": "Explain the difference between potential and kinetic energy with one example each.",
+            "question_type": "long_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 20,
+            "max_marks": 5,
+            "points": 5
+          },
+          "answerKey": {
+            "modelAnswer": "Potential energy is stored energy; for example, a stretched bow has potential energy. Kinetic energy is energy of motion; for example, an arrow flying through the air has kinetic energy.",
+            "keyPoints": ["potential stored energy", "example stretched bow", "kinetic energy of motion", "example flying arrow"]
+          }
+        }
+      ]
+    },
+    {
+      "sectionName": "F",
+      "title": "Chapter 11 - Simple Machines",
+      "description": "Levers, pulleys, and inclined planes",
+      "attemptType": "ALL",
+      "compulsory": true,
+      "totalMarks": 10,
+      "sectionOrder": 6,
+      "questions": [
+        {
+          "marks": 1,
+          "displayOrder": 21,
+          "mandatory": true,
+          "maxWordLimit": 70,
+          "question": {
+            "question_text": "What is a fulcrum in a lever?",
+            "question_type": "multiple_choice",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 21,
+            "max_marks": 1,
+            "points": 1,
+            "options": [
+              {"option_text": "The effort point", "is_correct": false},
+              {"option_text": "The fixed point about which the lever pivots", "is_correct": true},
+              {"option_text": "The load", "is_correct": false},
+              {"option_text": "The direction of force", "is_correct": false}
+            ]
+          },
+          "answerKey": {
+            "modelAnswer": "A fulcrum is the pivot point that stays fixed while the lever turns around it.",
+            "keyPoints": ["pivot point", "fixed", "lever rotates"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 22,
+          "mandatory": true,
+          "maxWordLimit": 130,
+          "question": {
+            "question_text": "Give one example of a pulley being used to lift a bucket of water and state how it makes lifting easier.",
+            "question_type": "short_answer",
+            "difficulty_level": "Easy",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "BEGINNER",
+            "tierOrder": 22,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "A pulley fixed above a well changes the direction of force so you can pull down to lift the bucket. This reduces effort because the pulley supports part of the load.",
+            "keyPoints": ["changes direction", "pull down to lift", "supports load", "reduces effort"]
+          }
+        },
+        {
+          "marks": 2,
+          "displayOrder": 23,
+          "mandatory": true,
+          "maxWordLimit": 160,
+          "question": {
+            "question_text": "Explain how an inclined plane helps in moving heavy objects.",
+            "question_type": "short_answer",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 23,
+            "max_marks": 2,
+            "points": 2
+          },
+          "answerKey": {
+            "modelAnswer": "An inclined plane allows us to move objects upward by pushing them along a slope instead of lifting them straight up, reducing the effort needed because the same height is gained over a longer distance.",
+            "keyPoints": ["push along slope", "less effort", "longer distance", "same height"]
+          }
+        },
+        {
+          "marks": 5,
+          "displayOrder": 24,
+          "mandatory": true,
+          "maxWordLimit": 300,
+          "question": {
+            "question_text": "Describe a seesaw as a lever and label the parts: effort, load, fulcrum.",
+            "question_type": "diagram",
+            "difficulty_level": "Medium",
+            "exam_type": "EXAM_PREP",
+            "exam_year": 2026,
+            "exam_paper": "ICSE Grade 5 Science Chapter Review",
+            "is_pyq": false,
+            "tierLevel": "INTERMEDIATE",
+            "tierOrder": 24,
+            "max_marks": 5,
+            "points": 5
+          },
+          "answerKey": {
+            "modelAnswer": "A seesaw is a first-class lever with the fulcrum in the centre, effort applied on one side, and load on the other. Draw the plank balanced on a pivot and mark each part.",
+            "keyPoints": ["first-class lever", "fulcrum centre", "effort on one end", "load on opposite end"]
+          }
+        }
+      ]
+    }
+  ]
+}
+

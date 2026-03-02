@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Output Challenges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#050712;
+      --panel:#0e192b;
+      --border:#1c2a42;
+      --accent:#f97316;
+      --accent2:#22d3ee;
+      --text:#f3f4ff;
+      --muted:#94a3b8;
+      --code:#0c1220;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(140deg,#040711,#081a34 60%,#0f2a4c);
+      color:var(--text);
+    }
+    main {
+      max-width:980px;
+      margin:0 auto;
+      padding:48px 24px 80px;
+    }
+    header {
+      margin-bottom:28px;
+    }
+    header h1 {
+      font-size:2.5rem;
+      margin:0;
+      letter-spacing:1px;
+    }
+    header p {
+      margin:8px 0 0;
+      color:var(--muted);
+    }
+    .challenge {
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:24px;
+      margin-bottom:26px;
+      box-shadow:0 18px 35px rgba(3,6,23,0.6);
+    }
+    .challenge h2 {
+      margin-top:0;
+      margin-bottom:6px;
+      color:var(--accent);
+    }
+    .meta {
+      font-size:0.9rem;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+    .code-panel {
+      background:var(--code);
+      border-radius:16px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      margin-bottom:12px;
+    }
+    .code-panel pre {
+      margin:0;
+      font-family:'Source Code Pro',monospace;
+      font-size:0.9rem;
+      line-height:1.5;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .code-panel button {
+      position:absolute;
+      top:12px;
+      right:12px;
+      border:none;
+      background:var(--accent2);
+      color:#05060f;
+      padding:6px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:0.8rem;
+    }
+    .options {
+      list-style:none;
+      padding:0;
+      margin:12px 0 0;
+      display:grid;
+      gap:8px;
+    }
+    .options li {
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid transparent;
+      background:rgba(255,255,255,0.04);
+    }
+    .hint {
+      color:var(--muted);
+      font-size:0.85rem;
+      margin-top:10px;
+    }
+    footer {
+      margin-top:30px;
+      border-top:1px solid var(--border);
+      padding-top:18px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Output Prediction Challenges</h1>
+      <p>Give these puzzles in small groups. Let teams debate the output before showing the answer and dissecting the behavior.</p>
+    </header>
+
+    <article class="challenge">
+      <h2>Challenge 1: Order of finally</h2>
+      <p class="meta">Duration: 5 minutes | Concept: try/catch/finally precedence</p>
+      <div class="code-panel">
+        <button data-target="out1">Copy</button>
+        <pre id="out1">public static String flag() {
+  try {
+    return \"try\";
+  } finally {
+    return \"finally\";
+  }
+}
+
+System.out.println(flag());</pre>
+      </div>
+      <p>What prints to the console?</p>
+      <ul class="options">
+        <li>A) try</li>
+        <li>B) finally</li>
+        <li>C) tryfinally</li>
+        <li>D) compilation error</li>
+      </ul>
+      <p class="hint">Hint: finally executes after try, even if a return already executed.</p>
+    </article>
+
+    <article class="challenge">
+      <h2>Challenge 2: Iterator remove</h2>
+      <p class="meta">Duration: 7 minutes | Concept: Iterator contract and ConcurrentModificationException</p>
+      <div class="code-panel">
+        <button data-target="out2">Copy</button>
+        <pre id="out2">List&lt;String&gt; names = new ArrayList&lt;&gt;(List.of(\"Alice\", \"Bob\", \"Cara\"));
+for (String name : names) {
+  if (name.startsWith(\"C\")) {
+    names.remove(name);
+  }
+}
+System.out.println(names);</pre>
+      </div>
+      <p>What happens when this code runs?</p>
+      <ul class="options">
+        <li>A) [Alice, Bob]</li>
+        <li>B) [Alice, Cara]</li>
+        <li>C) ConcurrentModificationException</li>
+        <li>D) Compilation error</li>
+      </ul>
+      <p class="hint">Hint: fail-fast iterators disallow modifying the underlying collection while looping.</p>
+    </article>
+
+    <article class="challenge">
+      <h2>Challenge 3: Generics with <?></h2>
+      <p class="meta">Duration: 6 minutes | Concept: Wildcards and type capture</p>
+      <div class="code-panel">
+        <button data-target="out3">Copy</button>
+        <pre id="out3">List&lt;? extends Number&gt; values = List.of(1, 2, 3);
+values.add(4);
+System.out.println(values);</pre>
+      </div>
+      <p>What is the result?</p>
+      <ul class="options">
+        <li>A) [1, 2, 3, 4]</li>
+        <li>B) Compilation error at add()</li>
+        <li>C) UnsupportedOperationException</li>
+        <li>D) RuntimeClassCastException</li>
+      </ul>
+      <p class="hint">Hint: ? extends Number prevents adding because the compiler loses track of the exact subtype.</p>
+    </article>
+
+    <footer>Reveal the answers together, then describe the lifecycle for try/catch/finally, iterator modification, and PECS.</footer>
+  </main>
+  <script>
+    document.querySelectorAll('.code-panel button').forEach(button => {
+      button.addEventListener('click', () => {
+        const snippet = document.getElementById(button.dataset.target).innerText.trim();
+        navigator.clipboard.writeText(snippet).then(() => {
+          button.innerText = 'Copied';
+          setTimeout(() => button.innerText = 'Copy', 1200);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

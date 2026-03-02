@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Interactive Polls</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#050b17;
+      --card:#0d172b;
+      --accent:#38bdf8;
+      --accent2:#7dd3fc;
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --border:rgba(255,255,255,0.08);
+    }
+    body {
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      background:linear-gradient(135deg,#040817,#0b1c33);
+      color:var(--text);
+      min-height:100vh;
+    }
+    main {
+      max-width:1200px;
+      margin:0 auto;
+      padding:40px 24px 60px;
+    }
+    header h1 {
+      margin-bottom:6px;
+      font-size:2.8rem;
+      color:var(--accent2);
+    }
+    header p {
+      margin:0;
+      color:var(--muted);
+      max-width:780px;
+    }
+    section {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:24px 32px;
+      box-shadow:0 25px 40px rgba(2,6,23,.7);
+      margin-top:30px;
+    }
+    section h2 {
+      margin-top:0;
+      font-size:2rem;
+      color:var(--accent);
+    }
+    ul {
+      list-style:none;
+      margin:20px 0 0;
+      padding:0;
+      display:grid;
+      gap:16px;
+    }
+    li {
+      border:1px solid rgba(255,255,255,0.1);
+      padding:14px 18px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+    }
+    li strong {
+      display:block;
+      margin-bottom:12px;
+      letter-spacing:0.08em;
+      font-size:0.9rem;
+      color:var(--accent2);
+    }
+    .options {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+      gap:12px;
+    }
+    .option {
+      padding:8px 10px;
+      border-radius:8px;
+      text-align:center;
+      background:rgba(0,0,0,0.35);
+      border:1px dashed rgba(255,255,255,0.15);
+      font-size:0.95rem;
+    }
+    footer {
+      margin-top:40px;
+      text-align:center;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Day 3 Engagement Polls</h1>
+      <p>Run these polls live after each topic block to keep the class interactive—display them on screen, let learners vote in chat, then discuss the correct option.</p>
+    </header>
+    <section>
+      <h2>Classes</h2>
+      <ul>
+        <li>
+          <strong>What keyword creates a new object?</strong>
+          <div class="options">
+            <span class="option">new</span>
+            <span class="option">class</span>
+            <span class="option">public</span>
+            <span class="option">extends</span>
+          </div>
+        </li>
+        <li>
+          <strong>Which modifier is package-private?</strong>
+          <div class="options">
+            <span class="option">private</span>
+            <span class="option">protected</span>
+            <span class="option">*(no modifier)*</span>
+            <span class="option">final</span>
+          </div>
+        </li>
+        <li>
+          <strong>Which method describes the object state?</strong>
+          <div class="options">
+            <span class="option">toString()</span>
+            <span class="option">equals()</span>
+            <span class="option">hashCode()</span>
+            <span class="option">notify()</span>
+          </div>
+        </li>
+        <li>
+          <strong>How to prevent subclassing?</strong>
+          <div class="options">
+            <span class="option">abstract</span>
+            <span class="option">static</span>
+            <span class="option">private</span>
+            <span class="option">final</span>
+          </div>
+        </li>
+        <li>
+          <strong>What describes a model class?</strong>
+          <div class="options">
+            <span class="option">Holds data only</span>
+            <span class="option">Contains business logic</span>
+            <span class="option">Manages threads</span>
+            <span class="option">Handles I/O</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Inheritance</h2>
+      <ul>
+        <li>
+          <strong>Which keyword accesses parent constructor?</strong>
+          <div class="options">
+            <span class="option">this</span>
+            <span class="option">super</span>
+            <span class="option">extends</span>
+            <span class="option">base</span>
+          </div>
+        </li>
+        <li>
+          <strong>Overriding without @Override?</strong>
+          <div class="options">
+            <span class="option">Compilation error</span>
+            <span class="option">Overrides anyway</span>
+            <span class="option">Runtime warning</span>
+            <span class="option">Method is final</span>
+          </div>
+        </li>
+        <li>
+          <strong>Call parent method?</strong>
+          <div class="options">
+            <span class="option">super.method()</span>
+            <span class="option">parent.method()</span>
+            <span class="option">this.method()</span>
+            <span class="option">base.method()</span>
+          </div>
+        </li>
+        <li>
+          <strong>Which relationship is inheritance?</strong>
+          <div class="options">
+            <span class="option">Has-a</span>
+            <span class="option">Uses-a</span>
+            <span class="option">Is-a</span>
+            <span class="option">Needs-a</span>
+          </div>
+        </li>
+        <li>
+          <strong>Best scenario for inheritance?</strong>
+          <div class="options">
+            <span class="option">Different animals sharing eat()</span>
+            <span class="option">Different UIs for separate apps</span>
+            <span class="option">Networking vs disk I/O</span>
+            <span class="option">Bank vs insurance services</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Interfaces</h2>
+      <ul>
+        <li>
+          <strong>Implement keyword?</strong>
+          <div class="options">
+            <span class="option">extends</span>
+            <span class="option">implements</span>
+            <span class="option">uses</span>
+            <span class="option">super</span>
+          </div>
+        </li>
+        <li>
+          <strong>Java 8 interface feature?</strong>
+          <div class="options">
+            <span class="option">Can hold state</span>
+            <span class="option">Default methods</span>
+            <span class="option">Can be instantiated</span>
+            <span class="option">Members private</span>
+          </div>
+        </li>
+        <li>
+          <strong>Can class implement multiple interfaces?</strong>
+          <div class="options">
+            <span class="option">Yes</span>
+            <span class="option">No</span>
+            <span class="option">Only if abstract</span>
+            <span class="option">Only with generics</span>
+          </div>
+        </li>
+        <li>
+          <strong>Why prefer interfaces?</strong>
+          <div class="options">
+            <span class="option">Avoid multiple inheritance limits</span>
+            <span class="option">Require constructors</span>
+            <span class="option">Hold data</span>
+            <span class="option">Provide state</span>
+          </div>
+        </li>
+        <li>
+          <strong>Which trait belongs on interface?</strong>
+          <div class="options">
+            <span class="option">start() and stop()</span>
+            <span class="option">static factory</span>
+            <span class="option">private fields</span>
+            <span class="option">final methods</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Static Concepts</h2>
+      <ul>
+        <li>
+          <strong>Static belongs to?</strong>
+          <div class="options">
+            <span class="option">Instance</span>
+            <span class="option">Class</span>
+            <span class="option">Constructor</span>
+            <span class="option">Interface</span>
+          </div>
+        </li>
+        <li>
+          <strong>Static block runs when?</strong>
+          <div class="options">
+            <span class="option">Before first use</span>
+            <span class="option">On new object</span>
+            <span class="option">After constructor</span>
+            <span class="option">On GC</span>
+          </div>
+        </li>
+        <li>
+          <strong>Static method can access instance fields?</strong>
+          <div class="options">
+            <span class="option">Yes</span>
+            <span class="option">No unless object provided</span>
+            <span class="option">Only if final</span>
+            <span class="option">Only inside interface</span>
+          </div>
+        </li>
+        <li>
+          <strong>Why use static factory?</strong>
+          <div class="options">
+            <span class="option">Control creation</span>
+            <span class="option">Replace constructors</span>
+            <span class="option">Manage caches</span>
+            <span class="option">All of these</span>
+          </div>
+        </li>
+        <li>
+          <strong>Static imports do what?</strong>
+          <div class="options">
+            <span class="option">Bring in constants/methods</span>
+            <span class="option">Make classes static</span>
+            <span class="option">Extend superclass statically</span>
+            <span class="option">None</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Exception Handling</h2>
+      <ul>
+        <li>
+          <strong>Which block runs before exception propagates?</strong>
+          <div class="options">
+            <span class="option">finally</span>
+            <span class="option">catch</span>
+            <span class="option">throw</span>
+            <span class="option">try</span>
+          </div>
+        </li>
+        <li>
+          <strong>Must be declared or caught?</strong>
+          <div class="options">
+            <span class="option">RuntimeException</span>
+            <span class="option">IOException</span>
+            <span class="option">NullPointerException</span>
+            <span class="option">ArithmeticException</span>
+          </div>
+        </li>
+        <li>
+          <strong>Keyword that creates exception object?</strong>
+          <div class="options">
+            <span class="option">throw</span>
+            <span class="option">try</span>
+            <span class="option">catch</span>
+            <span class="option">implements</span>
+          </div>
+        </li>
+        <li>
+          <strong>When is finally skipped?</strong>
+          <div class="options">
+            <span class="option">After return</span>
+            <span class="option">System.exit</span>
+            <span class="option">Exception caught</span>
+            <span class="option">No exception</span>
+          </div>
+        </li>
+        <li>
+          <strong>Multi-catch requires?</strong>
+          <div class="options">
+            <span class="option">Common supertype</span>
+            <span class="option">Same package</span>
+            <span class="option">try-with-resources</span>
+            <span class="option">Two catch files</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Collections</h2>
+      <ul>
+        <li>
+          <strong>Allows duplicates but is unordered?</strong>
+          <div class="options">
+            <span class="option">List</span>
+            <span class="option">Set</span>
+            <span class="option">Map</span>
+            <span class="option">Queue</span>
+          </div>
+        </li>
+        <li>
+          <strong>Map with insertion order?</strong>
+          <div class="options">
+            <span class="option">HashMap</span>
+            <span class="option">LinkedHashMap</span>
+            <span class="option">TreeMap</span>
+            <span class="option">Hashtable</span>
+          </div>
+        </li>
+        <li>
+          <strong>Sorted set?</strong>
+          <div class="options">
+            <span class="option">HashSet</span>
+            <span class="option">LinkedHashSet</span>
+            <span class="option">TreeSet</span>
+            <span class="option">ConcurrentHashSet</span>
+          </div>
+        </li>
+        <li>
+          <strong>computeIfAbsent does?</strong>
+          <div class="options">
+            <span class="option">Add default value</span>
+            <span class="option">Remove entry</span>
+            <span class="option">Sort map</span>
+            <span class="option">No action</span>
+          </div>
+        </li>
+        <li>
+          <strong>FIFO interface?</strong>
+          <div class="options">
+            <span class="option">List</span>
+            <span class="option">Queue</span>
+            <span class="option">Set</span>
+            <span class="option">Map</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Generics</h2>
+      <ul>
+        <li>
+          <strong>Prevents ClassCastException at compile time?</strong>
+          <div class="options">
+            <span class="option">Generics</span>
+            <span class="option">Reflection</span>
+            <span class="option">Exceptions</span>
+            <span class="option">Enums</span>
+          </div>
+        </li>
+        <li>
+          <strong>Upper bound syntax?</strong>
+          <div class="options">
+            <span class="option">&lt;T&gt;</span>
+            <span class="option">&lt;T extends Number&gt;</span>
+            <span class="option">&lt;T super Number&gt;</span>
+            <span class="option">&lt;? extends Number&gt;</span>
+          </div>
+        </li>
+        <li>
+          <strong>PECS stands for?</strong>
+          <div class="options">
+            <span class="option">Producer Extends Consumer Super</span>
+            <span class="option">Pattern Extend Class Strategy</span>
+            <span class="option">Proxy Extract Class Super</span>
+            <span class="option">Plain Enum Control Style</span>
+          </div>
+        </li>
+        <li>
+          <strong>Can you create `new T()`?</strong>
+          <div class="options">
+            <span class="option">Yes</span>
+            <span class="option">No</span>
+            <span class="option">Only with reflection</span>
+            <span class="option">Only if T extends Object</span>
+          </div>
+        </li>
+        <li>
+          <strong>Which wildcard lets you add integers?</strong>
+          <div class="options">
+            <span class="option">List&lt;?&gt;</span>
+            <span class="option">List&lt;? extends Integer&gt;</span>
+            <span class="option">List&lt;? super Integer&gt;</span>
+            <span class="option">List&lt;T&gt;</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <footer>
+      Use these polls as mini-breaks every 12–15 minutes to keep learners responding. Display them on-screen and mention the correct option before moving on.
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1 @@
+grep -Ei "SEVERE|Exception|ERROR|Failed|Context|deploy|Deployment" /opt/tomcat/logs/catalina.out | tail -n 120

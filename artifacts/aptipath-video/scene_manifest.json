@@ -1,0 +1,54 @@
+﻿{
+    "title":  "AptiPath360 Homepage Intro",
+    "durationSeconds":  45,
+    "scenes":  [
+                   {
+                       "index":  1,
+                       "duration":  5,
+                       "title":  "Too many options. Too much confusion.",
+                       "subtitle":  "Very little clarity for your child.",
+                       "voice":  "Too many career options. Too much confusion. And very little clarity for your child.",
+                       "image":  "scenes/scene01.png"
+                   },
+                   {
+                       "index":  2,
+                       "duration":  6,
+                       "title":  "Introducing AptiPath360",
+                       "subtitle":  "Career Discovery for Grade 8 to Post-12.",
+                       "voice":  "Introducing AptiPath360 by Robo Dynamics, a guided Career Discovery system for students from Grade 8 to Post 12.",
+                       "image":  "scenes/scene02.png"
+                   },
+                   {
+                       "index":  3,
+                       "duration":  8,
+                       "title":  "Simple parent-first activation flow",
+                       "subtitle":  "Register, pay, generate student link, student login.",
+                       "voice":  "Simple parent first flow. Register, complete payment, and instantly generate your student\u0027s secure test link.",
+                       "image":  "scenes/scene03.png"
+                   },
+                   {
+                       "index":  4,
+                       "duration":  10,
+                       "title":  "Adaptive student assessment experience",
+                       "subtitle":  "MCQ, Slider, Drag-Rank. Personalized by grade, stream, and program.",
+                       "voice":  "The student takes an adaptive assessment, personalized by grade, stream, and program, like Science, Commerce, Humanities, B.Tech, B.B.A, and more.",
+                       "image":  "scenes/scene04.png"
+                   },
+                   {
+                       "index":  5,
+                       "duration":  9,
+                       "title":  "Powerful report for real decisions",
+                       "subtitle":  "Top careers, strengths, stream-fit insights, and 90-day plan.",
+                       "voice":  "You get a powerful report: top career matches, strengths, stream fit insights, and a practical 90 day action plan.",
+                       "image":  "scenes/scene05.png"
+                   },
+                   {
+                       "index":  6,
+                       "duration":  7,
+                       "title":  "Start AptiPath360 today",
+                       "subtitle":  "Support: +91 8374377311 (Call / WhatsApp)",
+                       "voice":  "AptiPath360 helps families make smarter career decisions early. Start today. For support, call or WhatsApp plus nine one eight three seven four three seven seven three one one.",
+                       "image":  "scenes/scene06.png"
+                   }
+               ]
+}

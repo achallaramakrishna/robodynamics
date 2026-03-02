@@ -54,6 +54,7 @@ import com.robodynamics.service.RDCIRecommendationService;
 import com.robodynamics.service.RDCIScoreIndexService;
 import com.robodynamics.service.RDCISubscriptionService;
 import com.robodynamics.service.RDAptiPathReportEnrichmentService;
+import com.robodynamics.service.RDUserService;
 import com.robodynamics.util.RDRoleRouteUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -129,6 +130,9 @@ public class RDAptiPathStudentController {
 
     @Autowired(required = false)
     private RDAptiPathReportEnrichmentService aptiPathReportEnrichmentService;
+
+    @Autowired
+    private RDUserService userService;
 
     @GetMapping("/home")
     public String home(@RequestParam(value = "embed", defaultValue = "0") Integer embed,
@@ -246,6 +250,10 @@ public class RDAptiPathStudentController {
             return "redirect:/aptipath/student/home?subscriptionRequired=1";
         }
 
+        Map<String, String> existingAnswers = loadStudentProfileIntakeAnswers(subscription);
+        String previousGrade = normalizeGradeCodeForComparison(existingAnswers.get(STUDENT_INTAKE_GRADE_CODE));
+        String currentGrade = normalizeGradeCodeForComparison(formData.get(STUDENT_INTAKE_GRADE_CODE));
+
         saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_GOAL_01", formData.get("S_GOAL_01"));
         saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_LIFE_01", formData.get("S_LIFE_01"));
         saveStudentIntakeResponse(subscriptionId, student.getUserID(), STUDENT_INTAKE_SCHOOL_CODE, formData.get(STUDENT_INTAKE_SCHOOL_CODE));
@@ -267,7 +275,17 @@ public class RDAptiPathStudentController {
         saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_SUPPORT_01", formData.get("S_SUPPORT_01"));
         saveStudentIntakeResponse(subscriptionId, student.getUserID(), "S_PARENT_01", formData.get("S_PARENT_01"));
 
+        syncStudentCoreProfile(student, formData, session);
+
+        boolean gradeChanged = !currentGrade.isEmpty() && !currentGrade.equals(previousGrade);
+        if (gradeChanged) {
+            closeLiveSessionForStudent(subscription, student.getUserID());
+        }
+
         StringBuilder target = new StringBuilder("redirect:/aptipath/student/home?intakeSaved=1");
+        if (gradeChanged) {
+            target.append("&gradeChanged=1");
+        }
         if (embed != null && embed == 1) {
             target.append("&embed=1");
         }
@@ -395,6 +413,7 @@ public class RDAptiPathStudentController {
     public String result(@RequestParam(value = "sessionId", required = false) Long sessionId,
                          @RequestParam(value = "embed", defaultValue = "0") Integer embed,
                          @RequestParam(value = "company", required = false) String companyCode,
+                         @RequestParam(value = "asPdf", required = false) String asPdf,
                          Model model,
                          HttpSession session) {
         Object rawUser = session.getAttribute("rdUser");
@@ -462,10 +481,9 @@ public class RDAptiPathStudentController {
         double catFitIndex = streamFitIndices.getOrDefault("CAT", 0.0);
         double lawFitIndex = streamFitIndices.getOrDefault("LAW", 0.0);
 
-        Map<String, Integer> subjectAffinitySignals = parseIntMap(diagnosticPayload.get("subjectAffinitySignals"));
-        if (subjectAffinitySignals.isEmpty()) {
-            subjectAffinitySignals = defaultSubjectSignals();
-        }
+        Map<String, Integer> subjectAffinitySignals = normalizeSubjectAffinitySignals(
+                parseIntMap(diagnosticPayload.get("subjectAffinitySignals")),
+                sectionScores);
         Map<String, Integer> studentSelfSignals = parseIntMap(diagnosticPayload.get("studentSelfSignals"));
         if (studentSelfSignals.isEmpty()) {
             studentSelfSignals = defaultStudentSelfSignals();
@@ -624,6 +642,10 @@ public class RDAptiPathStudentController {
         model.addAttribute("embedMode", embedMode);
         model.addAttribute("companyCode", resolvedCompanyCode);
         model.addAttribute("branding", branding);
+        // Route to a dedicated, visually optimised PDF template when rendering for download
+        if ("1".equals(asPdf)) {
+            return "student/aptipath-result-pdf";
+        }
         return "student/aptipath-result";
     }
 
@@ -977,7 +999,9 @@ public class RDAptiPathStudentController {
         List<String> selectedCareerIntents = parseCareerIntents(formData.get("careerIntentCsv"));
         Map<String, Integer> studentSelfSignals = parseStudentSelfSignals(formData);
         List<String> selfSignalInsights = buildSelfSignalInsights(selectedCareerIntents, studentSelfSignals);
-        Map<String, Integer> subjectAffinitySignals = parseSubjectAffinitySignals(formData);
+        Map<String, Integer> subjectAffinitySignals = normalizeSubjectAffinitySignals(
+                parseSubjectAffinitySignals(formData),
+                sectionScores);
         List<String> subjectAffinityInsights = buildSubjectAffinityInsights(subjectAffinitySignals, selectedCareerIntents);
 
         double mathAffinity = affinityPercent(subjectAffinitySignals.getOrDefault("math", 0), aptitudeScore);
@@ -2450,6 +2474,86 @@ public class RDAptiPathStudentController {
         subjectSignals.put("biology", 0);
         subjectSignals.put("language", 0);
         return subjectSignals;
+    }
+
+    private Map<String, Integer> neutralSubjectSignals() {
+        Map<String, Integer> subjectSignals = new LinkedHashMap<>();
+        subjectSignals.put("math", 3);
+        subjectSignals.put("physics", 3);
+        subjectSignals.put("chemistry", 3);
+        subjectSignals.put("biology", 3);
+        subjectSignals.put("language", 3);
+        return subjectSignals;
+    }
+
+    private Map<String, Integer> normalizeSubjectAffinitySignals(Map<String, Integer> rawSignals,
+                                                                 Map<String, Double> sectionScores) {
+        Map<String, Integer> normalized = new LinkedHashMap<>();
+        normalized.put("math", clampSignal(rawSignals == null ? 0 : rawSignals.getOrDefault("math", 0)));
+        normalized.put("physics", clampSignal(rawSignals == null ? 0 : rawSignals.getOrDefault("physics", 0)));
+        normalized.put("chemistry", clampSignal(rawSignals == null ? 0 : rawSignals.getOrDefault("chemistry", 0)));
+        normalized.put("biology", clampSignal(rawSignals == null ? 0 : rawSignals.getOrDefault("biology", 0)));
+        normalized.put("language", clampSignal(rawSignals == null ? 0 : rawSignals.getOrDefault("language", 0)));
+
+        if (hasAnySubjectSignal(normalized)) {
+            return normalized;
+        }
+        return deriveSubjectSignalsFromSectionScores(sectionScores);
+    }
+
+    private Map<String, Integer> deriveSubjectSignalsFromSectionScores(Map<String, Double> sectionScores) {
+        if (sectionScores == null || sectionScores.isEmpty()) {
+            return neutralSubjectSignals();
+        }
+
+        double core = sectionScoreValue(sectionScores, "CORE_APTITUDE", 56.0);
+        double applied = sectionScoreValue(sectionScores, "APPLIED_CHALLENGE", core);
+        double stem = sectionScoreValue(sectionScores, "STEM_FOUNDATION", (core * 0.60) + (applied * 0.40));
+        double reasoning = sectionScoreValue(sectionScores, "REASONING_IQ", core);
+        double bioFoundation = sectionScoreValue(sectionScores, "BIOLOGY_FOUNDATION",
+                sectionScoreValue(sectionScores, "INTEREST_WORK", 55.0));
+        double general = sectionScoreValue(sectionScores, "GENERAL_AWARENESS",
+                sectionScoreValue(sectionScores, "CAREER_REALITY", 55.0));
+        double learning = sectionScoreValue(sectionScores, "LEARNING_BEHAVIOR", 55.0);
+        double interest = sectionScoreValue(sectionScores, "INTEREST_WORK", 55.0);
+        double values = sectionScoreValue(sectionScores, "VALUES_MOTIVATION", 55.0);
+        double aiReadiness = sectionScoreValue(sectionScores, "AI_READINESS", 55.0);
+
+        double mathPct = clamp((stem * 0.45) + (reasoning * 0.30) + (core * 0.15) + (applied * 0.10), 35.0, 95.0);
+        double physicsPct = clamp((stem * 0.40) + (applied * 0.30) + (core * 0.20) + (reasoning * 0.10), 35.0, 95.0);
+        double chemistryPct = clamp((stem * 0.50) + (applied * 0.20) + (general * 0.10) + (aiReadiness * 0.20), 35.0, 95.0);
+        double biologyPct = clamp((bioFoundation * 0.55) + (interest * 0.20) + (learning * 0.15) + (general * 0.10), 35.0, 95.0);
+        double languagePct = clamp((general * 0.45) + (values * 0.20) + (interest * 0.20) + (learning * 0.15), 35.0, 95.0);
+
+        Map<String, Integer> derived = new LinkedHashMap<>();
+        derived.put("math", percentToSignalScale(mathPct));
+        derived.put("physics", percentToSignalScale(physicsPct));
+        derived.put("chemistry", percentToSignalScale(chemistryPct));
+        derived.put("biology", percentToSignalScale(biologyPct));
+        derived.put("language", percentToSignalScale(languagePct));
+        return derived;
+    }
+
+    private double sectionScoreValue(Map<String, Double> sectionScores, String key, double fallback) {
+        if (sectionScores == null || sectionScores.isEmpty()) {
+            return fallback;
+        }
+        Double value = sectionScores.get(key);
+        if (value == null) {
+            return fallback;
+        }
+        return clamp(value, 0.0, 100.0);
+    }
+
+    private int percentToSignalScale(double percent) {
+        int scale = (int) Math.round(clamp(percent, 0.0, 100.0) / 20.0);
+        if (scale < 1) {
+            return 1;
+        }
+        if (scale > 5) {
+            return 5;
+        }
+        return scale;
     }
 
     private Map<String, Integer> defaultStudentSelfSignals() {
@@ -4077,7 +4181,10 @@ public class RDAptiPathStudentController {
                 score += hasCorrectOption ? (isCorrect ? -2.0 : 4.0) : -4.0;
             }
             score = clamp(score, 0.0, 100.0);
-            double weight = question.getWeightage() == null ? 1.0 : question.getWeightage().doubleValue();
+            // Section-score stability: some behavioral items are stored with weight 0 in the bank.
+            // For section-level diagnostics we still want attempted items to contribute.
+            double rawWeight = question.getWeightage() == null ? 1.0 : question.getWeightage().doubleValue();
+            double weight = rawWeight <= 0.0 ? 1.0 : rawWeight;
             weightedScoreSum.put(section, weightedScoreSum.getOrDefault(section, 0.0) + (score * weight));
             weightSum.put(section, weightSum.getOrDefault(section, 0.0) + weight);
         }
@@ -4460,6 +4567,12 @@ public class RDAptiPathStudentController {
         if (containsAny(grade, "GRADE_10", "GRADE10", "CLASS_10", "CLASS10") || "10".equals(grade)) {
             return "10";
         }
+        if (containsAny(grade, "GRADE_11", "GRADE11", "CLASS_11", "CLASS11") || "11".equals(grade)) {
+            return "11";
+        }
+        if (containsAny(grade, "GRADE_12", "GRADE12", "CLASS_12", "CLASS12") || "12".equals(grade)) {
+            return "12";
+        }
         return "";
     }
 
@@ -4479,9 +4592,66 @@ public class RDAptiPathStudentController {
             case "10":
                 return containsAny(code, "_G10_", "-G10-", "GRADE_10", "GRADE10", "CLASS_10", "CLASS10", "APG10_")
                         || containsAny(text, "GRADE 10", "CLASS 10");
+            case "11":
+                return containsAny(code, "_G11_", "-G11-", "GRADE_11", "GRADE11", "CLASS_11", "CLASS11", "APG11_")
+                        || containsAny(text, "GRADE 11", "CLASS 11");
+            case "12":
+                return containsAny(code, "_G12_", "-G12-", "GRADE_12", "GRADE12", "CLASS_12", "CLASS12", "APG12_")
+                        || containsAny(text, "GRADE 12", "CLASS 12");
             default:
                 return false;
         }
+    }
+
+    private String normalizeGradeCodeForComparison(String value) {
+        String cleaned = trimToNull(value);
+        return cleaned == null ? "" : cleaned.toUpperCase(Locale.ENGLISH);
+    }
+
+    private void syncStudentCoreProfile(RDUser student,
+                                        Map<String, String> formData,
+                                        HttpSession session) {
+        if (student == null || formData == null) {
+            return;
+        }
+        String grade = trimToNull(formData.get(STUDENT_INTAKE_GRADE_CODE));
+        String school = trimToNull(formData.get(STUDENT_INTAKE_SCHOOL_CODE));
+        String existingGrade = trimToNull(student.getGrade());
+        String existingSchool = trimToNull(student.getSchoolName());
+        if (safeEquals(existingGrade, grade) && safeEquals(existingSchool, school)) {
+            return;
+        }
+        student.setGrade(grade);
+        student.setSchoolName(school);
+        RDUser saved = userService.save(student);
+        session.setAttribute("rdUser", saved == null ? student : saved);
+    }
+
+    private boolean safeEquals(String left, String right) {
+        if (left == null) {
+            return right == null;
+        }
+        return left.equals(right);
+    }
+
+    private void closeLiveSessionForStudent(RDCISubscription subscription, Integer studentUserId) {
+        if (subscription == null || subscription.getCiSubscriptionId() == null || studentUserId == null) {
+            return;
+        }
+        RDCIAssessmentSession latest = ciAssessmentSessionService.getLatestByStudentUserId(studentUserId);
+        if (latest == null || latest.getCiAssessmentSessionId() == null) {
+            return;
+        }
+        if (latest.getSubscription() == null || latest.getSubscription().getCiSubscriptionId() == null) {
+            return;
+        }
+        if (!subscription.getCiSubscriptionId().equals(latest.getSubscription().getCiSubscriptionId())) {
+            return;
+        }
+        if ("COMPLETED".equalsIgnoreCase(nz(latest.getStatus()))) {
+            return;
+        }
+        ciAssessmentSessionService.completeSession(latest.getCiAssessmentSessionId(), 0);
     }
 
     private List<RDCIQuestionBank> filterQuestionsByAcademicStage(List<RDCIQuestionBank> source,

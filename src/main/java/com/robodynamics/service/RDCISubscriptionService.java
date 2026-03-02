@@ -30,6 +30,8 @@ public interface RDCISubscriptionService {
 
     RDCISubscription getLatestByStudentUserId(Integer studentUserId);
 
+    RDCISubscription getLatestActiveModuleSubscription(Integer studentUserId, String moduleCode);
+
     boolean hasActiveAptiPathSubscription(Integer studentUserId);
 
     boolean hasActiveModuleSubscription(Integer studentUserId, String moduleCode);

@@ -1,0 +1,78 @@
+Basic Career Roadmap Template (Free/Basic Plan – ₹599 Level)
+This is a high-level template you can use in your VidaPath module for the Basic plan. It gives parents/students a general overview without overwhelming details, encouraging upgrade to Pro for personalization. Present it as a clean, printable PDF or expandable card in the results screen.
+Template Structure (for any career, e.g., "AI Engineer"):
+
+Career Overview: Short description + why 2026–2036 relevant.
+General Roadmap: 4–5 key phases (Today → 2036).
+Upgrade Teaser: "For grade-specific steps, upgrade to Pro (₹1299)".
+
+Example for "AI Engineer" (Inclined towards AI/Tech Cluster)
+Career Overview
+AI Engineers design and build intelligent systems like chatbots, recommendation engines, and autonomous vehicles. By 2036, India will need 1.4M+ AI roles due to digital transformation (source: NASSCOM). Starting salary: ₹12–25LPA.
+General Roadmap
+
+Foundation (Grades 8–10): Build basics in math, science, and coding. Focus on logical thinking.
+Preparation (Grades 11–12): Choose PCM + Computer Science stream. Prepare for entrance exams.
+Higher Education (Post-12): Pursue B.Tech in AI/ML or CSE from top institutes.
+Skill Building & Experience: Learn Python, ML tools; do internships/projects.
+Career Launch (2034–2036): Entry-level roles at tech firms; upskill in advanced AI.
+
+Upgrade to Pro for Details
+In Pro (₹1299), get a customized plan based on your grade, board, and strengths (e.g., specific subjects, projects, colleges).
+Pro Career Roadmap Template (₹1299 Level – Detailed & Grade-Specific)
+For the Pro upgrade, make it highly detailed and personalized. Use the student's grade, board (CBSE/ICSE/etc.), test scores, and preferences from the adaptive test to fill in the blanks. Present as an interactive dashboard or PDF with timelines (use Widget 12 from our list).
+Template Structure:
+
+Personalized Overview: Tailored to student's profile.
+Grade-Specific Roadmap: Break by current grade (8–10 vs. 11–12).
+4 Sections: Study, Skills, Projects, Where to Study (as you requested).
+Milestones: 30/60/90-day actions + long-term to 2036.
+Resources: Links to courses, exams, colleges.
+
+Example for "AI Engineer" (Student in Grade 9, CBSE Board, High Tech Interest Score)
+Personalized Overview
+Based on your test, you're 4.2/5 inclined to AI/Tech! As a grade 9 CBSE student, this path aligns with your logical thinking and curiosity. By 2036, AI roles will boom in India (1.4M+ demand). Expected salary: ₹12–30LPA starting.
+Grade-Specific Roadmap (Starting from Grade 9)
+1. What to Study
+
+Grade 9: Focus on Math (Algebra/Geometry), Science (Physics basics), English (communication). Introduce Computer Science if available.
+Grade 10: Strengthen PCM; aim for 90%+ in boards. Take intro CS courses.
+Grades 11–12: PCM + Computer Science stream. Cover calculus, probability, programming.
+Post-12: B.Tech AI/ML or CSE (4 years).
+2034–2036: Optional M.Tech or certs (e.g., Google AI).
+
+2. Skills to Gather
+
+Grade 9: Basic coding (Scratch/Python basics), logical puzzles.
+Grade 10: Python (loops/functions), data basics (Excel).
+Grades 11–12: Algorithms, ML intro (scikit-learn), Git/version control.
+Post-12: Advanced ML (TensorFlow), cloud (AWS free tier), ethics.
+By 2036: Specialize in NLP/CV; soft skills like teamwork.
+
+3. What Kind of Projects to Do
+
+Grade 9: Simple chatbot in Python; puzzle solver app.
+Grade 10: Weather predictor using data; basic ML model (e.g., Iris classification on Kaggle).
+Grades 11–12: Image recognizer; participate in hackathons (HackIndia).
+Post-12: Open-source contribution; AI project for social good (e.g., crop disease detector).
+By 2036: Portfolio of 5+ projects; internship projects.
+
+4. Where to Study
+
+Grades 8–12: Top CBSE schools with CS labs (e.g., DPS Bengaluru).
+Entrance Exams: JEE Main/Advanced (for IITs), BITSAT, VITEEE.
+Colleges: IIT Bombay/Delhi (CSE/AI), IIIT Hyderabad, BITS Pilani, NIT Trichy, VIT Vellore.
+Online Resources: Coursera (Google AI), Khan Academy (math), freeCodeCamp (coding).
+By 2036: Specialize at IISc or abroad (e.g., Stanford AI certs).
+
+90-Day Action Plan (Personalized)
+
+Days 1–30: Daily 30 min Python practice; read “AI for Beginners” book.
+Days 31–60: Build first project (chatbot); join online AI club.
+Days 61–90: Mock JEE practice; mentor session (find on LinkedIn).
+
+Long-Term Milestones to 2036
+
+2030: College graduation.
+2032: First internship (TCS/Infosys AI lab).
+2036: Full-time AI Engineer role.

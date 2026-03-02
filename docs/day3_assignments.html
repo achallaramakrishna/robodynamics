@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Full Stack Day 3 Assignments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#040812;
+      --surface:#0c1222;
+      --panel:#11192e;
+      --accent:#38bdf8;
+      --accent2:#f97316;
+      --text:#f4f7ff;
+      --muted:#94a3b8;
+      --border:#1f2a44;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:'Space Grotesk',sans-serif;
+      background:linear-gradient(130deg,#02060f,#0b1b3a);
+      color:var(--text);
+      min-height:100vh;
+    }
+    main {
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px 80px;
+    }
+    header {
+      margin-bottom:24px;
+    }
+    header h1 {
+      margin:0;
+      font-size:2.8rem;
+    }
+    header p {
+      margin-top:10px;
+      color:var(--muted);
+    }
+    ol {
+      counter-reset:assignment;
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:20px;
+    }
+    li {
+      counter-increment:assignment;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:20px;
+      position:relative;
+      box-shadow:0 25px 50px rgba(0,0,0,0.5);
+    }
+    li::before {
+      content:counter(assignment);
+      position:absolute;
+      top:-12px;
+      left:18px;
+      padding:4px 12px;
+      border-radius:999px;
+      background:var(--accent);
+      color:#030712;
+      font-weight:600;
+      font-size:0.9rem;
+    }
+    li h2 {
+      margin:0 0 8px;
+      font-size:1.2rem;
+      color:var(--accent2);
+    }
+    li p {
+      margin:0;
+      color:var(--muted);
+      font-size:0.95rem;
+      line-height:1.4;
+    }
+    .keywords {
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:12px;
+      font-size:0.82rem;
+      color:var(--text);
+    }
+    .keywords span {
+      padding:2px 10px;
+      border-radius:999px;
+      background:rgba(56,189,248,0.15);
+    }
+    footer {
+      margin-top:40px;
+      border-top:1px solid var(--border);
+      padding-top:16px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>15 Java Full Stack Assignments</h1>
+      <p>Designed to reinforce Day 1-3 topics (classes, inheritance, interfaces, static members, exception handling, collections, generics, properties). Each assignment includes a clean deliverable, acceptance hints, and related keywords for Git submissions.</p>
+    </header>
+
+    <ol>
+      <li>
+        <h2>Student Profile Builder</h2>
+        <p>Encapsulate student data with private fields, validation, and factory methods. Deliver getter-only APIs plus `equals`/`hashCode` overrides.</p>
+        <div class="keywords"><span>classes</span><span>encapsulation</span><span>value object</span></div>
+      </li>
+      <li>
+        <h2>Account Hierarchy</h2>
+        <p>Create abstract `Account` with `SavingsAccount` and `CheckingAccount` subclasses. Override monthly charges and provide `super` calls where needed.</p>
+        <div class="keywords"><span>inheritance</span><span>abstract class</span><span>super</span></div>
+      </li>
+      <li>
+        <h2>Reportable Interface Chain</h2>
+        <p>Define `Reportable` interface with default headers and static helpers. Implement multiple classes to print CSV or Markdown reports.</p>
+        <div class="keywords"><span>interfaces</span><span>default methods</span><span>static helper</span></div>
+      </li>
+      <li>
+        <h2>Singleton Configuration</h2>
+        <p>Use a `final` class with a private constructor and static factory to expose immutable `Properties`. Add lazy loading with `synchronized` block.</p>
+        <div class="keywords"><span>static</span><span>singleton</span><span>properties</span></div>
+      </li>
+      <li>
+        <h2>Exception-Safe DAO</h2>
+        <p>Create a DAO method that throws custom `DataReadException` and uses multi-catch to handle `SQLException` and `IOException`. Wrap and rethrow while logging.</p>
+        <div class="keywords"><span>exception handling</span><span>multi-catch</span><span>custom exception</span></div>
+      </li>
+      <li>
+        <h2>Try-With-Resources Logger</h2>
+        <p>Implement `LogWriter` with `AutoCloseable`. Use try-with-resources to append log entries and ensure file handles close.</p>
+        <div class="keywords"><span>try-with-resources</span><span>AutoCloseable</span><span>I/O</span></div>
+      </li>
+      <li>
+        <h2>Leaderboard with Comparable</h2>
+        <p>Model `StudentScore` implementing `Comparable` by GPA. Sort a list using `Collections.sort` and a `Comparator` for name tiebreakers.</p>
+        <div class="keywords"><span>collections</span><span>comparators</span><span>sorting</span></div>
+      </li>
+      <li>
+        <h2>Collection Cleanup Service</h2>
+        <p>Write a service that removes duplicates using `HashSet`, keeps order with `LinkedHashSet`, and sorts with `TreeSet`. Demonstrate iteration extremes.</p>
+        <div class="keywords"><span>set</span><span>hashing</span><span>iteration</span></div>
+      </li>
+      <li>
+        <h2>Properties Reader Util</h2>
+        <p>Build a utility reading `config.properties`, exposing defaults via `getProperty(key, defaultValue)`, and watching for reloads.</p>
+        <div class="keywords"><span>properties</span><span>IO</span><span>APIs</span></div>
+      </li>
+      <li>
+        <h2>Generic Pair & Stack</h2>
+        <p>Create `Pair<A,B>` and `Stack<T>` classes. Include methods demonstrating bounded type parameters (`<T extends Number>`).</p>
+        <div class="keywords"><span>generics</span><span>bounded types</span><span>data structures</span></div>
+      </li>
+      <li>
+        <h2>Comparator Chain Lab</h2>
+        <p>Sort a collection of `Course` records first by difficulty, then by enrollment using chained comparators via `thenComparing`.</p>
+        <div class="keywords"><span>comparator</span><span>chaining</span><span>sorting</span></div>
+      </li>
+      <li>
+        <h2>Stateful Enum Config</h2>
+        <p>Define an enum `Environment` with `STAGING/PROD`, each mapping to property files. Provide static helper for `isProduction()` checks.</p>
+        <div class="keywords"><span>enum</span><span>static</span><span>config</span></div>
+      </li>
+      <li>
+        <h2>Debug Logging Challenge</h2>
+        <p>Deliver multi-catch block documented in Git with known issues and tests that reproduce `ArrayIndexOutOfBounds` and `NullPointerException` scenarios, plus fixes.</p>
+        <div class="keywords"><span>debug</span><span>logging</span><span>tests</span></div>
+      </li>
+      <li>
+        <h2>Output Prediction Exercise</h2>
+        <p>Submit a short write-up analyzing Falcon `finally` + `return`, iterator mutation, and wildcard generics output puzzles from the session. Capture answers in README.</p>
+        <div class="keywords"><span>output</span><span>explain</span><span>code reasoning</span></div>
+      </li>
+      <li>
+        <h2>Full-Stack Demo Mini App</h2>
+        <p>Compose a Spring boot controller returning JSON from collection utilities, handling exceptions, and injecting config via `@Value` from properties.</p>
+        <div class="keywords"><span>Spring</span><span>REST</span><span>exception</span></div>
+      </li>
+      <li>
+        <h2>Beta Test Plan</h2>
+        <p>Document how new parent/student logins should be created, how to reset passwords, and how to skip payment integration during beta with steps and sample API calls.</p>
+        <div class="keywords"><span>beta</span><span>user flow</span><span>documentation</span></div>
+      </li>
+    </ol>
+
+    <footer>Deliverables: create Git branches per assignment, describe the workflow, include unit tests where applicable, and push with descriptive commit messages before the next sync.</footer>
+  </main>
+</body>
+</html>

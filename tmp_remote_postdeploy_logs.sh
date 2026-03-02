@@ -1,0 +1,1 @@
+tail -n 120 /opt/tomcat/logs/catalina.out

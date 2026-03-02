@@ -1,0 +1,65 @@
+﻿Section,Question_ID,Grade_Band,Question_Text,Type,Tags,Adaptivity_Notes
+Aptitude,AP-G8-A-01,GRADE_8,What is 25% of 160? A) 30 B) 35 C) 40 D) 45,MCQ,"aptitude,grade_8,numeric,foundation",grade_8_foundation
+Aptitude,AP-G8-A-02,GRADE_8,If 3 notebooks cost Rs 45 then 5 notebooks cost? A) Rs 60 B) Rs 70 C) Rs 75 D) Rs 80,MCQ,"aptitude,grade_8,arithmetic",grade_8_ratio
+Aptitude,AP-G8-A-03,GRADE_8,In the ratio 2:3 the first number is 18. What is the second number? A) 24 B) 27 C) 30 D) 36,MCQ,"aptitude,grade_8,ratio",grade_8_ratio
+Aptitude,AP-G8-A-04,GRADE_8,Find the average of 12 15 and 18. A) 14 B) 15 C) 16 D) 17,MCQ,"aptitude,grade_8,numeric",grade_8_average
+Aptitude,AP-G8-A-05,GRADE_8,A bike moves at 60 km per hour for 2.5 hours. Distance covered? A) 120 km B) 135 km C) 150 km D) 165 km,MCQ,"aptitude,grade_8,speed_distance",grade_8_application
+Aptitude,AP-G8-A-06,GRADE_8,Perimeter of a square with side 9 cm is? A) 27 cm B) 32 cm C) 36 cm D) 40 cm,MCQ,"aptitude,grade_8,geometry",grade_8_geometry
+Aptitude,AP-G8-A-07,GRADE_8,Simple interest on Rs 5000 at 10% per year for 2 years is? A) Rs 500 B) Rs 750 C) Rs 1000 D) Rs 1200,MCQ,"aptitude,grade_8,finance",grade_8_finance
+Aptitude,AP-G8-A-08,GRADE_8,What is 3 x (4 + 5) - 6 ? A) 15 B) 18 C) 21 D) 24,MCQ,"aptitude,grade_8,operations",grade_8_operations
+Reasoning,AP-G8-R-01,GRADE_8,Find the next number: 2 4 8 16 ? A) 18 B) 24 C) 30 D) 32,MCQ,"reasoning,grade_8,series",grade_8_logic
+Reasoning,AP-G8-R-02,GRADE_8,Which is the odd one out? A) Triangle B) Square C) Circle D) Cube,MCQ,"reasoning,grade_8,classify",grade_8_logic
+Reasoning,AP-G8-R-03,GRADE_8,If CAT is coded as DBU then DOG is coded as? A) EPH B) EOG C) DPH D) EPG,MCQ,"reasoning,grade_8,coding",grade_8_pattern
+Reasoning,AP-G8-R-04,GRADE_8,A student faces North then turns right and then right again. Which direction now? A) North B) East C) South D) West,MCQ,"reasoning,grade_8,direction",grade_8_spatial
+Reasoning,AP-G8-R-05,GRADE_8,Book is to Read as Food is to? A) Throw B) Eat C) Smell D) Grow,MCQ,"reasoning,grade_8,analogy",grade_8_verbal
+Reasoning,AP-G8-R-06,GRADE_8,What comes next: Monday Wednesday Friday ? A) Saturday B) Sunday C) Monday D) Tuesday,MCQ,"reasoning,grade_8,sequence",grade_8_pattern
+Reasoning,AP-G8-R-07,GRADE_8,All roses are flowers. Some flowers are red. Which statement must be true? A) All flowers are roses B) Some roses may be red C) No flowers are red D) All red things are roses,MCQ,"reasoning,grade_8,syllogism",grade_8_logic
+Reasoning,AP-G8-R-08,GRADE_8,Choose the mirror pair style: LEFT : RIGHT :: UP : ? A) DOWN B) TOP C) SKY D) FRONT,MCQ,"reasoning,grade_8,analogy,spatial",grade_8_spatial
+Aptitude,AP-G9-A-01,GRADE_9,Solve for x: 3x + 5 = 23. A) 4 B) 5 C) 6 D) 7,MCQ,"aptitude,grade_9,algebra",grade_9_algebra
+Aptitude,AP-G9-A-02,GRADE_9,An item marked Rs 800 has 15% discount. Sale price is? A) Rs 640 B) Rs 660 C) Rs 680 D) Rs 700,MCQ,"aptitude,grade_9,percentage",grade_9_commerce
+Aptitude,AP-G9-A-03,GRADE_9,Cost price is Rs 500 and selling price is Rs 575. Profit percent is? A) 10% B) 12% C) 15% D) 18%,MCQ,"aptitude,grade_9,profit_loss",grade_9_commerce
+Aptitude,AP-G9-A-04,GRADE_9,Simple interest on Rs 4000 at 8% per year for 3 years is? A) Rs 840 B) Rs 900 C) Rs 960 D) Rs 1040,MCQ,"aptitude,grade_9,finance",grade_9_finance
+Aptitude,AP-G9-A-05,GRADE_9,If 5 workers finish a job in 6 days then 10 workers will finish it in? A) 2 days B) 3 days C) 4 days D) 5 days,MCQ,"aptitude,grade_9,time_work",grade_9_application
+Aptitude,AP-G9-A-06,GRADE_9,Average of first five odd numbers is? A) 3 B) 4 C) 5 D) 6,MCQ,"aptitude,grade_9,average",grade_9_number_sense
+Aptitude,AP-G9-A-07,GRADE_9,Area of triangle with base 12 cm and height 9 cm is? A) 42 sq cm B) 48 sq cm C) 54 sq cm D) 60 sq cm,MCQ,"aptitude,grade_9,geometry",grade_9_geometry
+Aptitude,AP-G9-A-08,GRADE_9,If 2/5 of a number is 18 then the number is? A) 40 B) 42 C) 45 D) 50,MCQ,"aptitude,grade_9,fractions",grade_9_algebra
+Reasoning,AP-G9-R-01,GRADE_9,Find the next number: 3 6 12 24 ? A) 30 B) 36 C) 42 D) 48,MCQ,"reasoning,grade_9,series",grade_9_logic
+Reasoning,AP-G9-R-02,GRADE_9,If BIRD is coded as CJSE then FISH is coded as? A) GJTI B) GJSH C) FJTI D) HJTI,MCQ,"reasoning,grade_9,coding",grade_9_pattern
+Reasoning,AP-G9-R-03,GRADE_9,Rahul says She is the daughter of my mother's brother. She is Rahul's? A) Sister B) Niece C) Cousin D) Aunt,MCQ,"reasoning,grade_9,blood_relation",grade_9_relations
+Reasoning,AP-G9-R-04,GRADE_9,All pens are books. Some books are blue. Which is definitely true? A) All pens are blue B) Some pens may be blue C) No books are blue D) All books are pens,MCQ,"reasoning,grade_9,syllogism",grade_9_logic
+Reasoning,AP-G9-R-05,GRADE_9,At 3:00 what is the angle between hour and minute hands? A) 60 degree B) 75 degree C) 90 degree D) 120 degree,MCQ,"reasoning,grade_9,clock",grade_9_spatial
+Reasoning,AP-G9-R-06,GRADE_9,A person faces East then turns left then right then right. Final direction is? A) North B) South C) East D) West,MCQ,"reasoning,grade_9,direction",grade_9_spatial
+Reasoning,AP-G9-R-07,GRADE_9,Choose correct order: Seed Plant Tree Fruit. A) Seed Plant Tree Fruit B) Fruit Tree Plant Seed C) Plant Seed Fruit Tree D) Seed Tree Plant Fruit,MCQ,"reasoning,grade_9,ordering",grade_9_sequence
+Reasoning,AP-G9-R-08,GRADE_9,Statement: Students need practice to improve math. Assumption: Practice helps performance. A) Assumption follows B) Assumption does not follow C) Data insufficient D) Both impossible,MCQ,"reasoning,grade_9,critical",grade_9_inference
+Aptitude,AP-G10-A-01,GRADE_10,For x^2 - 7x + 10 = 0 what is sum of roots? A) 5 B) 7 C) 10 D) 12,MCQ,"aptitude,grade_10,algebra",grade_10_algebra
+Aptitude,AP-G10-A-02,GRADE_10,Probability of getting an even number on one fair die roll is? A) 1/6 B) 1/3 C) 1/2 D) 2/3,MCQ,"aptitude,grade_10,probability",grade_10_statistics
+Aptitude,AP-G10-A-03,GRADE_10,A can do a job in 12 days and B in 18 days. Together they do it in? A) 6 days B) 7.2 days C) 8 days D) 9 days,MCQ,"aptitude,grade_10,time_work",grade_10_application
+Aptitude,AP-G10-A-04,GRADE_10,Solve: 2x + y = 11 and x - y = 1. Value of x is? A) 3 B) 4 C) 5 D) 6,MCQ,"aptitude,grade_10,simultaneous_equations",grade_10_algebra
+Aptitude,AP-G10-A-05,GRADE_10,In a right triangle if opposite side is 3 and hypotenuse is 5 then sin theta is? A) 2/5 B) 3/5 C) 4/5 D) 5/3,MCQ,"aptitude,grade_10,trigonometry",grade_10_geometry
+Aptitude,AP-G10-A-06,GRADE_10,Compound interest on Rs 10000 at 10% per year for 2 years is? A) Rs 2000 B) Rs 2050 C) Rs 2100 D) Rs 2200,MCQ,"aptitude,grade_10,finance",grade_10_finance
+Aptitude,AP-G10-A-07,GRADE_10,A train covers 180 km in 3 hours. Speed is? A) 45 kmph B) 50 kmph C) 55 kmph D) 60 kmph,MCQ,"aptitude,grade_10,speed_distance",grade_10_application
+Aptitude,AP-G10-A-08,GRADE_10,If one angle of a linear pair is 68 degree then the other angle is? A) 102 degree B) 108 degree C) 112 degree D) 122 degree,MCQ,"aptitude,grade_10,geometry",grade_10_geometry
+Reasoning,AP-G10-R-01,GRADE_10,Find the next number: 5 11 23 47 ? A) 89 B) 91 C) 95 D) 97,MCQ,"reasoning,grade_10,series",grade_10_logic
+Reasoning,AP-G10-R-02,GRADE_10,If GARDEN is coded as HBSEFO then MARKET is coded as? A) NBSLFU B) NBSLFS C) NBRLFT D) NBSKFU,MCQ,"reasoning,grade_10,coding",grade_10_pattern
+Reasoning,AP-G10-R-03,GRADE_10,No artists are bankers. Some bankers are coders. Which conclusion is valid? A) Some artists are coders B) No artist is banker C) All coders are bankers D) All bankers are artists,MCQ,"reasoning,grade_10,syllogism",grade_10_logic
+Reasoning,AP-G10-R-04,GRADE_10,Statement: Online classes improve access. Conclusion: Students in remote areas can attend lessons. A) Only statement true B) Conclusion follows C) Conclusion does not follow D) Both false,MCQ,"reasoning,grade_10,conclusion",grade_10_inference
+Reasoning,AP-G10-R-05,GRADE_10,If today is Monday then day after 100 days will be? A) Monday B) Tuesday C) Wednesday D) Thursday,MCQ,"reasoning,grade_10,calendar",grade_10_logic
+Reasoning,AP-G10-R-06,GRADE_10,A is taller than B. B is taller than C. Which is true? A) C tallest B) A taller than C C) B taller than A D) None,MCQ,"reasoning,grade_10,comparison",grade_10_inference
+Reasoning,AP-G10-R-07,GRADE_10,Five friends sit in a row. R is between P and Q. S is at one end. Who can be in the middle? A) R B) S C) P only D) Q only,MCQ,"reasoning,grade_10,arrangement",grade_10_logic
+Reasoning,AP-G10-R-08,GRADE_10,A cube has opposite faces numbered 1 and 6. If top is 1 then bottom is? A) 2 B) 3 C) 5 D) 6,MCQ,"reasoning,grade_10,spatial",grade_10_spatial
+Aptitude,AP-COL-A-01,COLLEGE,How many arrangements are possible for 5 students in a row? A) 24 B) 60 C) 120 D) 240,MCQ,"aptitude,college,permutation",college_quant
+Aptitude,AP-COL-A-02,COLLEGE,Probability of getting exactly 2 heads in 3 coin tosses is? A) 1/8 B) 2/8 C) 3/8 D) 4/8,MCQ,"aptitude,college,probability",college_stats
+Aptitude,AP-COL-A-03,COLLEGE,Value of log10(1000) is? A) 2 B) 3 C) 10 D) 100,MCQ,"aptitude,college,logarithm",college_quant
+Aptitude,AP-COL-A-04,COLLEGE,If f(x)=2x^2-3x then f(4) is? A) 16 B) 18 C) 20 D) 22,MCQ,"aptitude,college,algebra",college_algebra
+Aptitude,AP-COL-A-05,COLLEGE,Mean of 4 8 10 14 14 is? A) 9 B) 10 C) 11 D) 12,MCQ,"aptitude,college,statistics",college_stats
+Aptitude,AP-COL-A-06,COLLEGE,A tank fills in 6 hours and empties in 9 hours. Net fill time is? A) 12 hours B) 15 hours C) 18 hours D) 21 hours,MCQ,"aptitude,college,time_work",college_application
+Aptitude,AP-COL-A-07,COLLEGE,Percentage increase from 120 to 150 is? A) 20% B) 22% C) 25% D) 30%,MCQ,"aptitude,college,percentage",college_quant
+Aptitude,AP-COL-A-08,COLLEGE,Simplify (x^2 - 1)/(x - 1) at x=5. A) 4 B) 5 C) 6 D) 8,MCQ,"aptitude,college,algebra",college_algebra
+Reasoning,AP-COL-R-01,COLLEGE,Argument: City buses should be electric. Which option best strengthens it? A) Electric buses reduce fuel imports B) Electric buses are colorful C) Drivers prefer old buses D) Tickets stay unchanged,MCQ,"reasoning,college,critical",college_critical
+Reasoning,AP-COL-R-02,COLLEGE,All analysts are logical. Some logical people are designers. Which is valid? A) All designers are analysts B) Some analysts may be designers C) No analyst is designer D) All logical are analysts,MCQ,"reasoning,college,syllogism",college_logic
+Reasoning,AP-COL-R-03,COLLEGE,Statement: Remote work saves commute time. Assumption: Commute takes measurable time. A) Assumption follows B) Assumption does not follow C) Neither can be judged D) Statement false,MCQ,"reasoning,college,assumption",college_inference
+Reasoning,AP-COL-R-04,COLLEGE,In a team of six A sits second from left and B sits immediate right of A. Position of B is? A) First B) Second C) Third D) Fourth,MCQ,"reasoning,college,arrangement",college_logic
+Reasoning,AP-COL-R-05,COLLEGE,Choose the odd one out: API SDK IDE SQL. A) API B) SDK C) IDE D) SQL,MCQ,"reasoning,college,classify",college_tech_reasoning
+Reasoning,AP-COL-R-06,COLLEGE,Cause: Server response time dropped after cache enabled. Best inference is? A) Cache likely improved performance B) Database deleted C) Users stopped logging in D) Network failed,MCQ,"reasoning,college,cause_effect",college_inference
+Reasoning,AP-COL-R-07,COLLEGE,Data sufficiency: Is x > y? I: x-y=3 II: x+y=10. A) I alone sufficient B) II alone sufficient C) Both together sufficient D) Neither sufficient,MCQ,"reasoning,college,data_sufficiency",college_analytical
+Reasoning,AP-COL-R-08,COLLEGE,Algorithm is to Program as Recipe is to? A) Kitchen B) Dish C) Chef D) Grocery,MCQ,"reasoning,college,analogy",college_verbal

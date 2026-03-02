@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Banking Capstone Project — 15 Assignments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#030711;
+      --panel:#0b1224;
+      --accent:#38bdf8;
+      --accent2:#f97316;
+      --border:#1c283d;
+      --text:#f4f7ff;
+      --muted:#94a3b8;
+      --card:#111a33;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Space Grotesk',sans-serif;
+      background:linear-gradient(160deg,#01030a,#0b203f 60%,#0f2d5c);
+      color:var(--text);
+    }
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px 80px;
+    }
+    header{
+      margin-bottom:32px;
+    }
+    header h1{
+      margin:0;
+      font-size:2.8rem;
+    }
+    header p{
+      margin:10px 0 0;
+      color:var(--muted);
+      max-width:760px;
+    }
+    section{
+      margin-bottom:32px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:0 24px 45px rgba(0,0,0,0.6);
+    }
+    section h2{
+      margin-top:0;
+      color:var(--accent2);
+    }
+    section ul{
+      padding-left:20px;
+      margin:12px 0 0;
+    }
+    section ul li{
+      margin-bottom:8px;
+      line-height:1.6;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+      margin-top:20px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      padding:16px;
+      border:1px solid var(--border);
+      box-shadow:0 12px 30px rgba(0,0,0,0.35);
+    }
+    .card h3{
+      margin-top:0;
+      margin-bottom:6px;
+      font-size:1.1rem;
+      color:var(--accent);
+    }
+    .card p{
+      margin:0;
+      color:var(--text);
+      font-size:0.95rem;
+      line-height:1.4;
+    }
+    footer{
+      margin-top:30px;
+      border-top:1px solid var(--border);
+      padding-top:18px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Banking Capstone — 15 Assignments</h1>
+      <p>One banking project delivered by five teams (A–E). Individuals handle assignments 1–6 to internalize the concepts; teams collaborate on 7–15 and submit consolidated branches + demos for review.</p>
+    </header>
+
+    <section>
+      <h2>Team Breakdown</h2>
+      <div class="grid">
+        <div class="card"><h3>Team A — Payments</h3><p>Owns transfer, payment operations, and related REST endpoints.</p></div>
+        <div class="card"><h3>Team B — Alerts & Compliance</h3><p>Builds exception tallying, SQL alerts, PL/SQL scanning, and security.</p></div>
+        <div class="card"><h3>Team C — Reporting</h3><p>Creates reporting views, statements, and analytics dashboards.</p></div>
+        <div class="card"><h3>Team D — Onboarding</h3><p>Manages onboarding CLI, customer modeling, and Spring Data.</p></div>
+        <div class="card"><h3>Team E — Frontend Experience</h3><p>Delivers React/Redux dashboard, forms, and alert UI.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Individual Assignments (1–6)</h2>
+      <ul>
+        <li>
+          <strong>Domain Modeling:</strong> Implement `Customer`, `Account`, `Transaction`, and `StatementLine` with private fields, validation logic, immutability where appropriate, and overridden `equals`/`hashCode`. Document how each class will be used by future services.
+        </li>
+        <li>
+          <strong>Transaction Service:</strong> Build `TransactionService` that updates balances and throws `InsufficientFundsException` when a debit would overdraw. Include JUnit 5 tests (parameterized + edge cases) verifying the exception and success scenarios.
+        </li>
+        <li>
+          <strong>Statement Generator:</strong> Create a service that orders transactions by timestamp, groups them by type, calculates subtotals, and formats monthly statements for the UI layer.
+        </li>
+        <li>
+          <strong>Git & Issue Templates:</strong> Document branch naming (e.g., `feature/assignment-3`), commit message convention, PR checklist, and provide GitHub issue templates (bug/feature/research) referencing banking behaviors.
+        </li>
+        <li>
+          <strong>Bank Operations & Cache:</strong> Define a `BankOperation` interface (methods like `authorize`, `execute`). Implement operations (`FundTransfer`, `BillPayment`) plus a thread-safe generics cache (`GenericCache<K,V extends Cacheable>`) reused across services.
+        </li>
+        <li>
+          <strong>Configuration & Monitoring:</strong> Build a singleton config loader that pulls from `application.properties` and environment overrides, and an exception-monitoring inspector that counts exceptions by type and renders a simple HTML report for reviewers.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Team Assignments (7–15)</h2>
+      <ul>
+        <li>
+          <strong>Schema DDL:</strong> Collaboratively design SQL scripts creating `accounts`, `transactions`, `alerts`, and `ledgers` tables with PKs/FKs, unique/index constraints, and sample seed data reflecting the domain.
+        </li>
+        <li>
+          <strong>Analytical SQL & PL/SQL:</strong> Write JOIN-based balance reports (daily balance, overdrafts) and a PL/SQL procedure that scans for >10k transfers, inserting rows into `alerts` for compliance review.
+        </li>
+        <li>
+          <strong>JPA Mapping:</strong> Map the schema to Spring entities with proper relationships (`@OneToMany`, `@ManyToOne`), cascade rules, and seed data via `CommandLineRunner`.
+        </li>
+        <li>
+          <strong>REST API:</strong> Build controllers for `/accounts`, `/transactions`, `/alerts`, use DTOs, `@Valid` input, and consistent error responses (400/404/403). Services should reuse earlier exception/config modules.
+        </li>
+        <li>
+          <strong>Spring Data + Security:</strong> Create repository queries (derived, `@Query`, projections) for high-value transactions and balances. Secure endpoints so only `ROLE_TELLER` writes transactions. Provide integration tests verifying both authorized and unauthorized access.
+        </li>
+        <li>
+          <strong>Exception Integration:</strong> Hook the exception-monitoring module into Spring services, log categorized counts, and expose metrics (HTML or actuator-style) that reviewers can inspect.
+        </li>
+        <li>
+          <strong>React Dashboard:</strong> Build a React client that calls Spring APIs, renders account balances, alerts, and latest transactions using hooks and axios/fetch.
+        </li>
+        <li>
+          <strong>React Forms:</strong> Implement the transfer form with React Router navigation, inline validation, and friendly error messaging before submission.
+        </li>
+        <li>
+          <strong>Redux Integration:</strong> Use Redux Toolkit slices for accounts/alerts, connect components to display live alert counts, and show loading/error states during API calls.
+        </li>
+        <li>
+          <strong>End-to-End Review:</strong> Document the onboarding→transaction→alert journey, provide README/demo instructions, and submit a short walkthrough video plus consolidated branch for review.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Database Structure</h2>
+      <ul>
+        <li><strong>accounts</strong> (account_id PK, customer_id FK, account_type, balance, status, created_at)</li>
+        <li><strong>customers</strong> (customer_id PK, first_name, last_name, email UNIQUE, created_at)</li>
+        <li><strong>transactions</strong> (transaction_id PK, account_id FK, type, amount, timestamp, status, description)</li>
+        <li><strong>alerts</strong> (alert_id PK, transaction_id FK, level, message, created_at)</li>
+        <li><strong>ledgers</strong> (ledger_id PK, account_id FK, entry_type, amount, recorded_at)</li>
+        <li>Indexes on `customers.email`, `accounts.customer_id`, `transactions.account_id`, and composite indexes for reporting queries.</li>
+        <li>PL/SQL procedure `raise_high_value_alerts` runs nightly, scanning large transfers and inserting into `alerts`.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Submission Guidelines</h2>
+      <ul>
+        <li>Individuals submit branches per assignment with README/test evidence.</li>
+        <li>Each team consolidates work into a shared branch, includes SQL scripts/tests, and records a short demo.</li>
+        <li>Reviews evaluate correctness, tests, security, and integration with other teams.</li>
+      </ul>
+    </section>
+
+    <footer>Completing all assignments teaches Core Java, SQL/PLSQL, Spring/Hibernate, Git, React/Node, and CI-ready practices within a single banking project.</footer>
+  </main>
+</body>
+</html>

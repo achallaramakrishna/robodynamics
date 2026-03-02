@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 — Object-Oriented Programming | Phase 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0A1628;
+    --secondary: #1A3A6B;
+    --accent: #50FA7B; /* Green for Java/OOP focus */
+    --accent2: #FF79C6; /* Pink for concepts/challenges */
+    --light: #F0F4FF;
+    --white: #FFFFFF;
+    --text: #E8EDF5;
+    --card-bg: rgba(255,255,255,0.06);
+    --border: rgba(80,250,123,0.3);
+    --code-bg: #0D1117;
+    --muted: #8899BB;
+    --java-keyword: #FF79C6; /* Pink */
+    --java-type: #8BE9FD; /* Cyan */
+    --java-literal: #F1FA8C; /* Yellow */
+    --java-comment: #6272A4; /* Grey */
+    --java-operator: #FFB86C; /* Orange */
+    --error: #FF5555; /* Red */
+    --success: #50FA7B; /* Green */
+  }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    overflow: hidden; /* Hide scrollbars for presentation */
+    height: 100vh;
+    width: 100vw;
+  }
+
+.deck { width: 100vw; height: 100vh; position: relative; }
+
+.slide {
+    display: none; /* Hidden by default */
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
+    padding: 42px 66px 68px; /* Consistent padding */
+    overflow-y: auto; /* Allows vertical scrolling when content overflows */
+    overflow-x: hidden; /* Prevent horizontal scroll unless explicitly needed within a code block */
+    animation: fadeIn 0.4s ease; /* Smooth transition for slides */
+  }
+/* CRITICAL FIX HERE: Align to flex-start instead of center to prevent top content from being cut off */
+.slide.active { display: flex; flex-direction: column; justify-content: flex-start; } 
+  @keyframes fadeIn { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+
+  /* BACKGROUNDS - Themed for different slide types */
+.bg-dark { background: var(--primary); }
+.bg-hero { background: linear-gradient(135deg, #0A1628 0%, #1A3A6B 60%, #0F2547 100%); }
+.bg-section { background: linear-gradient(135deg, #0F2240 0%, #1A3A6B 100%); }
+.bg-poll { background: linear-gradient(135deg, #1E2D50 0%, #0D1F3C 100%); border-left: 6px solid var(--accent); }
+.bg-quiz { background: linear-gradient(135deg, #1A0F2E 0%, #2A1060 100%); border-left: 6px solid var(--accent2); }
+.bg-lab { background: linear-gradient(135deg, #0A1F0A 0%, #142814 100%); border-left: 6px solid #81C784; }
+.bg-code { background: linear-gradient(135deg, #0D1117 0%, #171B20 100%); }
+.bg-break { background: linear-gradient(135deg, #6B4226 0%, #3A2211 100%); }
+.bg-challenge { background: linear-gradient(135deg, #1A0F2E 0%, #2A1060 100%); border-left: 6px solid var(--accent2); } /* For output/debug/refactor challenges */
+
+  /* TYPOGRAPHY */
+  h1 { font-family: 'Montserrat', sans-serif; font-size: 3.2rem; line-height: 1.1; font-weight: 900; color: var(--white); margin-bottom: 12px; }
+  h2 { font-family: 'Montserrat', sans-serif; font-size: 2.4rem; line-height: 1.2; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  h3 { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; line-height: 1.3; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  p { font-size: 1.05rem; line-height: 1.6; color: var(--text); }
+  ul { list-style-type: disc; margin-left: 30px; }
+  li { font-size: 1.05rem; line-height: 1.6; color: var(--text); margin-bottom: 5px; }
+  strong { color: var(--white); font-weight: 700; }
+.highlight { color: var(--accent); } /* Green highlight */
+.highlight2 { color: var(--accent2); } /* Pink highlight */
+.highlight-java-keyword { color: var(--java-keyword); }
+.highlight-java-type { color: var(--java-type); }
+.highlight-java-literal { color: var(--java-literal); }
+
+  /* UTILITIES */
+.center { text-align: center; justify-content: center; align-items: center; }
+.v-center { align-items: center; } /* Vertically center content */
+.h-center { justify-content: center; } /* Horizontally center content */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; }
+.two-col-code { display: grid; grid-template-columns: 1.8fr 1fr; gap: 40px; width: 100%; align-items: flex-start; } /* Wider left column for text */
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; width: 100%; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-row { display: flex; flex-direction: row; align-items: center; }
+.space-between { justify-content: space-between; }
+.gap-10 { gap: 10px; }
+.img-small { max-width: 300px; max-height: 300px; object-fit: contain; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.img-medium { max-width: 450px; max-height: 450px; object-fit: contain; margin-top: 20px; border-radius: 88px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.img-large { max-width: 600px; max-height: 450px; object-fit: contain; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+.accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 24px; border-radius: 2px; }
+
+  /* COMPONENTS */
+.slide-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+.deck-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.8rem;
+    line-height: 1.1;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+.deck-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
+    color: var(--light);
+    max-width: 700px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+.deck-meta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+.section-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.08);
+    position: absolute;
+    top: 50%;
+    left: 66px; /* Match slide padding */
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+.agenda-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 12px 20px;
+    border-left: 4px solid var(--accent);
+    transition: transform 0.2s ease;
+  }
+.agenda-item:hover { transform: translateX(5px); }
+.agenda-icon { font-size: 1.8rem; margin-right: 15px; }
+.agenda-text h3 { margin-bottom: 2px; font-size: 1.2rem; }
+.agenda-text p { font-size: 0.9rem; color: var(--muted); }
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+.card-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.card h3 { margin-bottom: 8px; font-size: 1.3rem; }
+.card p { font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
+
+.insight-box {
+    display: flex;
+    align-items: flex-start;
+    background: rgba(80,250,123,0.1); /* Based on accent */
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 18px 25px;
+    margin-top: 25px;
+  }
+.insight-icon { font-size: 1.8rem; margin-right: 15px; }
+.insight-text { font-size: 0.95rem; line-height: 1.6; }
+
+.tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.tech-tag {
+    background: rgba(80,250,123,0.15); /* Based on accent */
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+  }
+.code-wrap {
+    background: var(--code-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    width: 100%;
+    position: relative; /* For copy button positioning */
+  }
+.code-titlebar {
+    background: #282A36;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+.code-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+.dot-r { background: #FF5F56; } /* Red dot */
+.dot-y { background: #FFBD2E; } /* Yellow dot */
+.dot-g { background: #27C93F; } /* Green dot */
+.code-filename {
+    flex-grow: 1;
+    text-align: center;
+    color: var(--muted);
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9rem;
+  }
+.code-body {
+    padding: 20px 25px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #F8F8F2; /* Draculya White */
+    overflow-x: auto; /* Enable horizontal scroll for long lines */
+    white-space: pre; /* Preserve whitespace and line breaks */
+  }
+  /* Java Syntax Highlighting */
+.java-keyword { color: var(--java-keyword); font-weight: 600; } /* Pink */
+.java-type { color: var(--java-type); } /* Cyan */
+.java-literal { color: var(--java-literal); } /* Yellow */
+.java-comment { color: var(--java-comment); } /* Grey */
+.java-operator { color: var(--java-operator); } /* Orange */
+.java-identifier { color: #F8F8F2; } /* White */
+
+.copy-button {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: var(--light);
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+.code-wrap:hover .copy-button { /* Show copy button on hover */
+    opacity: 1;
+  }
+
+  /* POLLS & QUIZZES */
+.poll-header,.quiz-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+.poll-emoji,.quiz-emoji { font-size: 3rem; margin-right: 20px; }
+.poll-title,.quiz-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+.poll-subtitle,.quiz-subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+.poll-question,.quiz-question {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--light);
+    margin-bottom: 30px;
+    line-height: 1.4;
+  }
+.poll-options,.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+.poll-option,.quiz-option {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+.poll-option:hover,.quiz-option:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.poll-option.selected,.quiz-option.selected { /* Selected option */
+    border: 2px solid var(--accent);
+    background: rgba(80,250,123,0.2);
+  }
+.poll-option.correct,.quiz-option.correct { /* Correct answer (for quizzes) */
+    border: 2px solid #2ECC71; /* Green */
+    background: rgba(46,204,113,0.2);
+  }
+.poll-letter,.quiz-letter {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+  }
+.quiz-option.correct .quiz-letter {
+    color: #2ECC71;
+  }
+.poll-option-text,.quiz-option-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  /* CHALLENGE BOXES */
+.challenge-box {
+    background: rgba(255,121,198,0.15); /* Accent2 light */
+    border-left: 4px solid var(--accent2);
+    border-radius: 8px;
+    padding: 18px 25px;
+    margin-top: 25px;
+  }
+.challenge-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+.challenge-icon { font-size: 1.8rem; margin-right: 15px; color: var(--accent2); }
+.challenge-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+.challenge-text { font-size: 0.95rem; line-height: 1.6; color: var(--light); margin-bottom: 10px;}
+.challenge-answer {
+    color: var(--success);
+    font-weight: 600;
+    margin-top: 10px;
+    border-top: 1px dashed rgba(255,255,255,0.2);
+    padding-top: 10px;
+    display: none; /* Hidden by default */
+  }
+
+  /* Break Slide Specifics */
+.break-timer {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--white);
+    text-shadow: 0 0 15px rgba(255,255,255,0.5);
+    margin-top: 30px;
+  }
+.break-message {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--light);
+    margin-top: 15px;
+  }
+
+  /* Footer Navigation */
+.footer-nav {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+  }
+.nav-button {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--light);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+.nav-button:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+.nav-button:disabled {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.05);
+    color: var(--muted);
+    cursor: not-allowed;
+  }
+.utility-buttons {
+    position: absolute;
+    top: 25px;
+    right: 66px;
+    display: flex;
+    gap: 10px;
+  }
+.utility-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--light);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+.utility-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* SCHEDULE */
+.schedule-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 30px;
+  }
+.sched-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 12px 20px;
+    border-left: 4px solid transparent;
+    transition: border-left-color 0.2s ease;
+  }
+.sched-item.current { /* Highlight for current agenda item */
+    border-left-color: var(--accent);
+    box-shadow: 0 0 15px rgba(80,250,123,0.2);
+  }
+.sched-time {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent2);
+    min-width: 90px;
+  }
+.sched-topic {
+    flex-grow: 1;
+    font-size: 1rem;
+    color: var(--light);
+    margin: 0 15px;
+  }
+.sched-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 5px;
+    text-transform: uppercase;
+  }
+.tag-lecture { background: rgba(80,250,123,0.15); color: var(--accent); }
+.tag-break { background: rgba(255,85,85,0.15); color: #FF5555; }
+.tag-poll { background: rgba(255,121,198,0.15); color: var(--accent2); }
+.tag-mcq { background: rgba(255,184,108,0.15); color: #FFB86C; }
+.tag-ex { background: rgba(189,147,249,0.15); color: #BD93F9; }
+.tag-lab { background: rgba(129,199,132,0.15); color: #81C784; }
+
+</style>
+</head>
+<body>
+
+<div class="deck">
+  <!-- ==================== SLIDE 1: TITLE SLIDE ==================== -->
+  <div class="slide bg-hero center active" id="s1">
+    <div class="deck-title">Day 2 — Object-Oriented Programming</div>
+    <div class="deck-subtitle">Building Modular & Reusable Code with Java</div>
+    <div class="accent-line"></div>
+    <div class="deck-meta">📅 24-Feb-26 | 🕐 1:00 PM – 5:00 PM | Phase 1: Core Java</div>
+    <p style="font-size:0.9rem; color:var(--muted); margin-top:20px;">**Trainer Note:** "Welcome back, everyone! Today we dive deep into OOP. Let's make sure we're all on the same page from Day 1 first."</p>
+  </div>
+
+  <!-- ==================== SLIDE 2: AGENDA ==================== -->
+  <div class="slide bg-dark" id="s2">
+    <div class="slide-label">Overview</div>
+    <h2>What We'll Cover <span class="highlight">Today</span></h2>
+    <div class="accent-line"></div>
+    <div class="schedule-container">
+      <div class="sched-item" id="agenda-item-0">
+        <span class="sched-time">1:00–1:10 PM</span>
+        <span class="sched-topic">👋 Welcome & Day 1 Recap</span>
+        <span class="sched-tag tag-poll">Poll</span>
+      </div>
+      <div class="sched-item" id="agenda-item-1">
+        <span class="sched-time">1:10–1:30 PM</span>
+        <span class="sched-topic">📚 Classes, Objects & Constructors</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-2">
+        <span class="sched-time">1:30–1:50 PM</span>
+        <span class="sched-topic">🔑 Access Specifiers, Static & `this`</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-3">
+        <span class="sched-time">1:50–2:10 PM</span>
+        <span class="sched-topic">📊 Wrapper Classes & Type Casting</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-4">
+        <span class="sched-time">2:10–2:20 PM</span>
+        <span class="sched-topic">☕ Coffee Break & Poll</span>
+        <span class="sched-tag tag-break">Break</span>
+      </div>
+      <div class="sched-item" id="agenda-item-5">
+        <span class="sched-time">2:20–2:40 PM</span>
+        <span class="sched-topic">🌳 Inheritance & `super` Keyword</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-6">
+        <span class="sched-time">2:40–3:00 PM</span>
+        <span class="sched-topic">🔄 Method Overloading & Overriding</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-7">
+        <span class="sched-time">3:00–3:20 PM</span>
+        <span class="sched-topic">🧩 Abstract Classes & Interfaces</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-8">
+        <span class="sched-time">3:20–3:30 PM</span>
+        <span class="sched-topic">🧘 Stretch Break & Poll</span>
+        <span class="sched-tag tag-break">Break</span>
+      </div>
+      <div class="sched-item" id="agenda-item-9">
+        <span class="sched-time">3:30–4:00 PM</span>
+        <span class="sched-topic">🏃 Runtime Polymorphism & String Handling</span>
+        <span class="sched-tag tag-lecture">Lecture</span>
+      </div>
+      <div class="sched-item" id="agenda-item-10">
+        <span class="sched-time">4:00–4:30 PM</span>
+        <span class="sched-topic">🧪 Lab 2.1-2.4 Discussion</span>
+        <span class="sched-tag tag-lab">Lab</span>
+      </div>
+      <div class="sched-item" id="agenda-item-11">
+        <span class="sched-time">4:30–4:45 PM</span>
+        <span class="sched-topic">🏠 Home Assignment, Q&A & Wrap-up</span>
+        <span class="sched-tag tag-ex">Assignment</span>
+      </div>
+      <div class="sched-item" id="agenda-item-12">
+        <span class="sched-time">4:45–5:00 PM</span>
+        <span class="sched-topic">🌟 Open Discussion: OOP Design Principles</span>
+        <span class="sched-tag tag-ex">Discussion</span>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We have a packed day! We'll have interactive polls and challenges along the way, so stay sharp."</p>
+  </div>
+
+  <!-- ==================== SLIDE 3: DAY 1 RECAP & POLL ==================== -->
+  <div class="slide bg-poll center" id="s3">
+    <div class="poll-emoji">&#128203;</div>
+    <h2 class="poll-title">Day 1 Quick Recall!</h2>
+    <div class="poll-subtitle">Let's warm up our Java brains. **Put your answer in the Teams chat!**</div>
+    <div class="accent-line" style="margin-top:20px;"></div>
+    <div class="poll-question">In Java, which keyword is used to declare a variable that is a fixed-size collection of elements of the same type?</div>
+    <div class="poll-options">
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">A</div><div class="poll-option-text">`List`</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">B</div><div class="poll-option-text">`ArrayList`</div></div>
+      <div class="poll-option correct" onclick="selectOption(this)"><div class="poll-letter">C</div><div class="poll-option-text">`array`</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">D</div><div class="poll-option-text">`enum`</div></div>
+    </div>
+    <div class="insight-box" style="margin-top:14px;">
+      <div class="insight-icon">💡</div>
+      <div class="insight-text">While `List` and `ArrayList` are used for dynamic collections, `array` is the keyword for defining static, fixed-size arrays in Java.</div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "How is an array different from an `ArrayList` in terms of size and performance characteristics?"</p>
+    <p style="margin-top:10px;">**Trainer Action:** "Let's kick things off with a quick recap. Can Participant #1 and Participant #2 each summarize 1-2 key takeaways from Day 1 on Java basics?"</p>
+  </div>
+    <!-- ==================== SLIDE 4: SECTION INTRO - Classes, Objects, Constructors ==================== -->
+  <div class="slide bg-section v-center" id="s4">
+    <div class="section-number">01</div>
+    <h2><span class="highlight">Classes, Objects,</span> & Constructors</h2>
+    <div class="accent-line"></div>
+    <p class="deck-subtitle" style="max-width: 600px;">The fundamental building blocks of Object-Oriented Programming: defining data structures and their initial state.</p>
+    <div class="tech-tags">
+      <span class="tech-tag">Classes</span>
+      <span class="tech-tag">Objects</span>
+      <span class="tech-tag">Instantiation</span>
+      <span class="tech-tag">Constructors</span>
+      <span class="tech-tag">`this` keyword</span>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We'll kick off with the basics: how we define what an entity is (`Class`) and then bring it to life (`Object`). We'll also cover how objects are 'born' with Constructors."</p>
+  </div>
+    <!-- ==================== SLIDE 5: CLASSES & OBJECTS ==================== -->
+  <div class="slide bg-dark v-center" id="s5">
+    <div class="slide-label">Core Concepts</div>
+    <h2>Classes: The <span class="highlight">Blueprints</span></h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>What is a Class?</h3>
+        <ul>
+          <li>A <strong class="highlight">blueprint or template</strong> for creating objects.</li>
+          <li>Defines the <strong class="highlight2">characteristics (attributes/fields)</strong> and <strong class="highlight">behaviors (methods)</strong> that its objects will have.</li>
+          <li>Does NOT consume memory for data when defined; it's a logical construct.</li>
+          <li>Example: A `Car` class defines what a car *is* (color, model, speed) and what it *does* (start, stop, accelerate).</li>
+        </ul>
+        <h3>What is an Object?</h3>
+        <ul>
+          <li>A <strong class="highlight">real-world entity or instance</strong> of a class.</li>
+          <li>Created from a class blueprint using the `new` keyword.</li>
+          <li>Each object has its own unique set of attribute values and can perform the behaviors defined by its class.</li>
+          <li>Example: `myRedCar` is an object of the `Car` class, with `color="Red"`, `model="Sedan"`, `speed=0`.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:25px;">
+          <div class="insight-icon">💡</div>
+          <div class="insight-text">Think of a class as a cookie cutter, and objects as the actual cookies. All cookies are made from the same cutter, but each is a distinct cookie.</div>
+        </div>
+      </div>
+      <div>
+        <h3>Defining a Simple Class:</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">Car.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">Car</span> {
+    <span class="java-type">String</span> <span class="java-identifier">model</span>;
+    <span class="java-type">String</span> <span class="java-identifier">color</span>;
+    <span class="java-type">int</span> <span class="java-identifier">speed</span>;
+
+    <span class="java-comment">// Method to display car details</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">displayCarInfo</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Model: "</span> + <span class="java-identifier">model</span> +
+                           <span class="java-literal">", Color: "</span> + <span class="java-identifier">color</span> +
+                           <span class="java-literal">", Speed: "</span> + <span class="java-identifier">speed</span> + <span class="java-literal">" km/h"</span>);
+    }
+}
+          </div>
+        </div>
+        <h3 style="margin-top:20px;">Creating Objects (Instantiation):</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">Main.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="comment">// Creating the first Car object</span>
+        <span class="java-type">Car</span> <span class="java-identifier">car1</span> = <span class="java-keyword">new</span> <span class="java-type">Car</span>();
+        <span class="java-identifier">car1</span>.<span class="java-identifier">model</span> = <span class="java-literal">"Toyota"</span>;
+        <span class="java-identifier">car1</span>.<span class="java-identifier">color</span> = <span class="java-literal">"Blue"</span>;
+        <span class="java-identifier">car1</span>.<span class="java-identifier">speed</span> = <span class="java-literal">100</span>;
+        <span class="java-identifier">car1</span>.<span class="java-identifier">displayCarInfo</span>();
+
+        <span class="comment">// Creating another Car object</span>
+        <span class="java-type">Car</span> <span class="java-identifier">car2</span> = <span class="java-keyword">new</span> <span class="java-type">Car</span>();
+        <span class="java-identifier">car2</span>.<span class="java-identifier">model</span> = <span class="java-literal">"Honda"</span>;
+        <span class="java-identifier">car2</span>.<span class="java-identifier">color</span> = <span class="java-literal">"Red"</span>;
+        <span class="java-identifier">car2</span>.<span class="java-identifier">speed</span> = <span class="java-literal">120</span>;
+        <span class="java-identifier">car2</span>.<span class="java-identifier">displayCarInfo</span>();
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Notice how `car1` and `car2` are separate entities, each with its own `model`, `color`, and `speed`."</p>
+  </div>
+
+  <!-- ==================== SLIDE 6: CONSTRUCTORS & THIS ==================== -->
+  <div class="slide bg-dark v-center" id="s6">
+    <div class="slide-label">Object Initialization</div>
+    <h2>Constructors & the <span class="highlight2">`this` Keyword</span></h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>What is a Constructor?</h3>
+        <ul>
+          <li>A special type of method used to <strong class="highlight">initialize newly created objects</strong>.</li>
+          <li>It has the <strong class="highlight2">same name as the class</strong> and <strong class="highlight">no return type</strong> (not even `void`).</li>
+          <li>Called automatically when an object is created using the `new` keyword.</li>
+          <li>If you don't define any constructor, Java provides a <strong class="highlight2">default (no-argument) constructor</strong>.</li>
+        </ul>
+        <h3>Types of Constructors:</h3>
+        <ul>
+          <li><strong class="highlight">Default Constructor:</strong> Provided by Java if none are explicitly defined.</li>
+          <li><strong class="highlight2">No-argument Constructor:</strong> Explicitly defined constructor that takes no parameters.</li>
+          <li><strong class="highlight">Parameterized Constructor:</strong> Takes one or more parameters to initialize object fields.</li>
+          <li><strong class="highlight2">Copy Constructor:</strong> (Specialized) Used to create a new object as a copy of an existing object.</li>
+        </ul>
+        <h3>The `this` Keyword:</h3>
+        <ul>
+          <li>A reference to the <strong class="highlight">current object</strong>.</li>
+          <li>Used to distinguish between instance variables and local/parameter variables when they have the same name (shadowing).</li>
+          <li>Can be used to invoke the current class's constructor (constructor chaining: `this(...)`).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Example: Constructors & `this`</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">CarWithConstructors.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">Car</span> {
+    <span class="java-type">String</span> <span class="java-identifier">model</span>;
+    <span class="java-type">String</span> <span class="java-identifier">color</span>;
+    <span class="java-type">int</span> <span class="java-identifier">speed</span>;
+
+    <span class="java-comment">// No-argument constructor</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">Car</span>() {
+        <span class="java-keyword">this</span>(<span class="java-literal">"Generic"</span>, <span class="java-literal">"White"</span>, <span class="java-literal">0</span>); <span class="java-comment">// Constructor chaining</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Default car created."</span>);
+    }
+
+    <span class="java-comment">// Parameterized constructor (main)</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">Car</span>(<span class="java-type">String</span> <span class="java-identifier">model</span>, <span class="java-type">String</span> <span class="java-identifier">color</span>, <span class="java-type">int</span> <span class="java-identifier">speed</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">model</span> = <span class="java-identifier">model</span>; <span class="java-comment">// 'this' to refer to instance variable</span>
+        <span class="java-keyword">this</span>.<span class="java-identifier">color</span> = <span class="java-identifier">color</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">speed</span> = <span class="java-identifier">speed</span>;
+    }
+
+    <span class="comment">// Copy constructor (creates a new Car from an existing one)</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">Car</span>(<span class="java-type">Car</span> <span class="java-identifier">otherCar</span>) {
+        <span class="java-keyword">this</span>(<span class="java-identifier">otherCar</span>.<span class="java-identifier">model</span>, <span class="java-identifier">otherCar</span>.<span class="java-identifier">color</span>, <span class="java-identifier">otherCar</span>.<span class="java-identifier">speed</span>); <span class="java-comment">// Uses another constructor</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Car copied."</span>);
+    }
+
+    <span class="java-comment">// toString() method for easy object printing</span>
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-literal">"Car [model="</span> + <span class="java-identifier">model</span> + <span class="java-literal">", color="</span> + <span class="java-identifier">color</span> + <span class="java-literal">", speed="</span> + <span class="java-identifier">speed</span> + <span class="java-literal">"]"</span>;
+    }
+
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Car</span> <span class="java-identifier">myCar</span> = <span class="java-keyword">new</span> <span class="java-type">Car</span>(<span class="java-literal">"Honda Civic"</span>, <span class="java-literal">"Black"</span>, <span class="java-literal">150</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">myCar</span>);
+
+        <span class="java-type">Car</span> <span class="java-identifier">defaultCar</span> = <span class="java-keyword">new</span> <span class="java-type">Car</span>();
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">defaultCar</span>);
+
+        <span class="java-type">Car</span> <span class="java-identifier">copiedCar</span> = <span class="java-keyword">new</span> <span class="java-type">Car</span>(<span class="java-identifier">myCar</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">copiedCar</span>);
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Observe how the `this` keyword resolves ambiguity between local and instance variables, and how `this(...)` allows one constructor to call another, preventing code duplication."</p>
+  </div>
+    <!-- ==================== SLIDE 7: Lab 2.1 - Classes & Object Construction (Programming Exercise) ==================== -->
+  <div class="slide bg-lab v-center" id="s7">
+    <div class="slide-label">Lab Exercise</div>
+    <h2>Lab 2.1: <span class="highlight">Classes & Object Construction</span></h2>
+    <div class="accent-line"></div>
+    <p style="margin-bottom:20px;">Let's put our knowledge of Classes, Objects, Constructors, and the `this` keyword into practice.</p>
+    <div class="two-col">
+      <div>
+        <h3>Task 1: Basic `BankAccount` Class</h3>
+        <ul>
+          <li>Create a `BankAccount` class with private instance variables: `accountNumber` (String), `accountHolderName` (String), and `balance` (double).</li>
+          <li>Implement a parameterized constructor to initialize all three fields.</li>
+          <li>Add public getter and setter methods for `accountHolderName` and `balance`. The `accountNumber` should only have a getter (immutable after creation).</li>
+          <li>Include `deposit(double amount)` and `withdraw(double amount)` methods. Ensure withdrawals don't allow negative balance.</li>
+        </ul>
+        <h3>Task 2: Constructor Overloading & `this()`</h3>
+        <ul>
+          <li>Add a no-argument constructor to `BankAccount` that initializes `accountNumber` to a default (e.g., "0000-0000"), `accountHolderName` to "Anonymous", and `balance` to 0.0. Use constructor chaining (`this(...)`) to call your primary parameterized constructor.</li>
+          <li>Add another constructor `BankAccount(String accountNumber, String accountHolderName)` that sets `balance` to 0.0. Again, use `this(...)` to chain to your primary constructor.</li>
+        </ul>
+        <h3>Task 3: `toString()` & Copy Constructor</h3>
+        <ul>
+          <li>Override the `toString()` method in `BankAccount` to return a user-friendly string representation of the account's state (e.g., "Account [No: ..., Holder: ..., Balance: ...]").</li>
+          <li>Implement a <strong class="highlight2">copy constructor</strong> `BankAccount(BankAccount otherAccount)` that creates a new `BankAccount` object with the same state as an existing one. Demonstrate its usage in `main`.</li>
+        </ul>
+        <h3>Task 4: Static Factory Method (Optional/Advanced)</h3>
+        <ul>
+          <li>Add a static factory method `public static BankAccount createNewAccount(String holderName, double initialDeposit)` that generates a unique `accountNumber` (e.g., using `UUID.randomUUID().toString()`) and returns a new `BankAccount` instance.</li>
+          <li><strong class="highlight">Hint:</strong> A static field might be useful for tracking unique account IDs if not using `UUID`.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:15px;">
+          <div class="insight-icon">🛠️</div>
+          <div class="insight-text"><strong>Focus:</strong> Understanding how to design a class, control object creation with constructors, ensure data integrity with getters/setters, and create reusable object instances.</div>
+        </div>
+      </div>
+      <div class="code-wrap">
+        <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+        <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">BankAccount.java (Skeleton)</div></div>
+        <div class="code-body">
+<span class="java-keyword">import</span> java.util.UUID; <span class="java-comment">// For Task 4</span>
+
+<span class="java-keyword">public class</span> <span class="java-type">BankAccount</span> {
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">accountNumber</span>;
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">accountHolderName</span>;
+    <span class="java-keyword">private double</span> <span class="java-identifier">balance</span>;
+
+    <span class="java-comment">// Task 1: Parameterized Constructor</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">BankAccount</span>(<span class="java-type">String</span> <span class="java-identifier">accountNumber</span>, <span class="java-type">String</span> <span class="java-identifier">accountHolderName</span>, <span class="java-type">double</span> <span class="java-identifier">balance</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">accountNumber</span> = <span class="java-identifier">accountNumber</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">accountHolderName</span> = <span class="java-identifier">accountHolderName</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">balance</span> = <span class="java-identifier">balance</span>;
+    }
+
+    <span class="java-comment">// Task 2: No-argument constructor (use this() chaining)</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">BankAccount</span>() {
+        <span class="java-keyword">this</span>(<span class="java-literal">"0000-0000"</span>, <span class="java-literal">"Anonymous"</span>, <span class="java-literal">0.0</span>);
+    }
+
+    <span class="java-comment">// Task 2: Constructor (account number & name only, use this() chaining)</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">BankAccount</span>(<span class="java-type">String</span> <span class="java-identifier">accountNumber</span>, <span class="java-type">String</span> <span class="java-identifier">accountHolderName</span>) {
+        <span class="java-keyword">this</span>(<span class="java-identifier">accountNumber</span>, <span class="java-identifier">accountHolderName</span>, <span class="java-literal">0.0</span>);
+    }
+
+    <span class="java-comment">// Task 3: Copy Constructor</span>
+    <span class="java-keyword">public</span> <span class="java-identifier">BankAccount</span>(<span class="java-type">BankAccount</span> <span class="java-identifier">otherAccount</span>) {
+        <span class="java-keyword">this</span>(<span class="java-identifier">otherAccount</span>.<span class="java-identifier">accountNumber</span>,
+             <span class="java-identifier">otherAccount</span>.<span class="java-identifier">accountHolderName</span>,
+             <span class="java-identifier">otherAccount</span>.<span class="java-identifier">balance</span>);
+    }
+
+    <span class="java-comment">// Task 1: Getters & Setters</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">getAccountNumber</span>() {
+        <span class="java-keyword">return</span> <span class="java-identifier">accountNumber</span>;
+    }
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">getAccountHolderName</span>() {
+        <span class="java-keyword">return</span> <span class="java-identifier">accountHolderName</span>;
+    }
+    <span class="java-keyword">public void</span> <span class="java-identifier">setAccountHolderName</span>(<span class="java-type">String</span> <span class="java-identifier">accountHolderName</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">accountHolderName</span> = <span class="java-identifier">accountHolderName</span>;
+    }
+    <span class="java-keyword">public double</span> <span class="java-identifier">getBalance</span>() {
+        <span class="java-keyword">return</span> <span class="java-identifier">balance</span>;
+    }
+    <span class="java-keyword">public void</span> <span class="java-identifier">setBalance</span>(<span class="java-type">double</span> <span class="java-identifier">balance</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">balance</span> = <span class="java-identifier">balance</span>;
+    }
+
+    <span class="java-comment">// Task 1: Deposit & Withdraw methods</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">deposit</span>(<span class="java-type">double</span> <span class="java-identifier">amount</span>) {
+        <span class="java-keyword">if</span> (<span class="java-identifier">amount</span> <span class="java-operator">></span> <span class="java-literal">0</span>) {
+            <span class="java-keyword">this</span>.<span class="java-identifier">balance</span> += <span class="java-identifier">amount</span>;
+            <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Deposited: "</span> + <span class="java-identifier">amount</span> + <span class="java-literal">". New balance: "</span> + <span class="java-identifier">balance</span>);
+        } <span class="java-keyword">else</span> {
+            <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Deposit amount must be positive."</span>);
+        }
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">withdraw</span>(<span class="java-type">double</span> <span class="java-identifier">amount</span>) {
+        <span class="java-keyword">if</span> (<span class="java-identifier">amount</span> <span class="java-operator">></span> <span class="java-literal">0</span> <span class="java-operator">&&</span> <span class="java-keyword">this</span>.<span class="java-identifier">balance</span> <span class="java-operator">>=</span> <span class="java-identifier">amount</span>) {
+            <span class="java-keyword">this</span>.<span class="java-identifier">balance</span> -= <span class="java-identifier">amount</span>;
+            <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Withdrew: "</span> + <span class="java-identifier">amount</span> + <span class="java-literal">". New balance: "</span> + <span class="java-identifier">balance</span>);
+        } <span class="java-keyword">else</span> <span class="java-keyword">if</span> (<span class="java-identifier">amount</span> <span class="java-operator"><=</span> <span class="java-literal">0</span>) {
+            <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Withdrawal amount must be positive."</span>);
+        } <span class="java-keyword">else</span> {
+            <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Insufficient balance."</span>);
+        }
+    }
+
+    <span class="java-comment">// Task 3: Override toString()</span>
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-literal">"Account [No: "</span> + <span class="java-identifier">accountNumber</span> +
+               <span class="java-literal">", Holder: "</span> + <span class="java-identifier">accountHolderName</span> +
+               <span class="java-literal">", Balance: "</span> + <span class="java-identifier">balance</span> + <span class="java-literal">"]"</span>;
+    }
+
+    <span class="java-comment">// Task 4: Static factory method</span>
+    <span class="java-keyword">public static</span> <span class="java-type">BankAccount</span> <span class="java-identifier">createNewAccount</span>(<span class="java-type">String</span> <span class="java-identifier">holderName</span>, <span class="java-type">double</span> <span class="java-identifier">initialDeposit</span>) {
+        <span class="java-type">String</span> <span class="java-identifier">newAccNum</span> = <span class="java-type">UUID</span>.<span class="java-identifier">randomUUID</span>().<span class="java-identifier">toString</span>();
+        <span class="java-keyword">return new</span> <span class="java-type">BankAccount</span>(<span class="java-identifier">newAccNum</span>, <span class="java-identifier">holderName</span>, <span class="java-identifier">initialDeposit</span>);
+    }
+
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="comment">// Demonstrating Task 1 & 2</span>
+        <span class="java-type">BankAccount</span> <span class="java-identifier">acc1</span> = <span class="java-keyword">new</span> <span class="java-type">BankAccount</span>(<span class="java-literal">"1234-5678"</span>, <span class="java-literal">"Alice Smith"</span>, <span class="java-literal">1000.0</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Initial: "</span> + <span class="java-identifier">acc1</span>);
+        <span class="java-identifier">acc1</span>.<span class="java-identifier">deposit</span>(<span class="java-literal">200</span>);
+        <span class="java-identifier">acc1</span>.<span class="java-identifier">withdraw</span>(<span class="java-literal">500</span>);
+        <span class="java-identifier">acc1</span>.<span class="java-identifier">withdraw</span>(<span class="java-literal">1000</span>); <span class="java-comment">// Insufficient balance</span>
+
+        <span class="java-type">BankAccount</span> <span class="java-identifier">acc2</span> = <span class="java-keyword">new</span> <span class="java-type">BankAccount</span>(); <span class="java-comment">// No-arg constructor</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Default: "</span> + <span class="java-identifier">acc2</span>);
+
+        <span class="java-type">BankAccount</span> <span class="java-identifier">acc3</span> = <span class="java-keyword">new</span> <span class="java-type">BankAccount</span>(<span class="java-literal">"9876-5432"</span>, <span class="java-literal">"Bob Johnson"</span>); <span class="java-comment">// 2-arg constructor</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Bob's Account: "</span> + <span class="java-identifier">acc3</span>);
+
+        <span class="comment">// Demonstrating Task 3: Copy Constructor</span>
+        <span class="java-type">BankAccount</span> <span class="java-identifier">acc4</span> = <span class="java-keyword">new</span> <span class="java-type">BankAccount</span>(<span class="java-identifier">acc1</span>);
+        <span class="java-identifier">acc4</span>.<span class="java-identifier">setAccountHolderName</span>(<span class="java-literal">"Alice Smith (Copy)"</span>); <span class="java-comment">// Modify copy, not original</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Copied: "</span> + <span class="java-identifier">acc4</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Original (acc1): "</span> + <span class="java-identifier">acc1</span>);
+
+        <span class="comment">// Demonstrating Task 4: Static Factory Method</span>
+        <span class="java-type">BankAccount</span> <span class="java-identifier">acc5</span> = <span class="java-type">BankAccount</span>.<span class="java-identifier">createNewAccount</span>(<span class="java-literal">"Charlie Brown"</span>, <span class="java-literal">500.0</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Factory created: "</span> + <span class="java-identifier">acc5</span>);
+    }
+}
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We'll dedicate **20 minutes** to this lab. Focus on making your `BankAccount` class robust and testing each constructor and method."</p>
+    <p style="margin-top:10px;">**Trainer Action:** "After this lab, Participant #3 and Participant #4, be ready to explain your implementations of `this()` for constructor chaining and the `toString()` method, respectively."</p>
+  </div>
+  
+    <!-- ==================== SLIDE 8: SECTION INTRO - Access Specifiers, Static, this ==================== -->
+  <div class="slide bg-section v-center" id="s8">
+    <div class="section-number">02</div>
+    <h2><span class="highlight">Access Specifiers,</span> Static & `this` Reference</h2>
+    <div class="accent-line"></div>
+    <p class="deck-subtitle" style="max-width: 600px;">Controlling visibility and managing class-level vs. object-level members.</p>
+    <div class="tech-tags">
+      <span class="tech-tag">`public`</span>
+      <span class="tech-tag">`private`</span>
+      <span class="tech-tag">`protected`</span>
+      <span class="tech-tag">Default (Package)</span>
+      <span class="tech-tag">`static` keyword</span>
+      <span class="tech-tag">`this` reference</span>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Now that we know how to build objects, let's learn how to protect their internal state and how to define behaviors that belong to the class itself, not just an individual object."</p>
+  </div>
+  
+    <!-- ==================== SLIDE 9: ACCESS SPECIFIERS ==================== -->
+  <div class="slide bg-dark v-center" id="s9">
+    <div class="slide-label">Controlling Visibility</div>
+    <h2>Access <span class="highlight">Specifiers</span> in Java</h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>Purpose of Access Specifiers:</h3>
+        <ul>
+          <li>Determine the <strong class="highlight2">visibility and accessibility</strong> of classes, fields, methods, and constructors.</li>
+          <li>Crucial for <strong class="highlight">encapsulation</strong> – controlling direct access to an object's internal state.</li>
+          <li>Helps in protecting data integrity and simplifying code maintenance by defining clear interfaces.</li>
+        </ul>
+        <h3>The Four Access Levels:</h3>
+        <table style="width:100%; border-collapse: collapse; margin-top:20px;">
+          <thead>
+            <tr style="background:var(--secondary);">
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Modifier</th>
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Same Class</th>
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Same Package</th>
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Subclass (different package)</th>
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Other Package</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--accent2);"><code>private</code></td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">❌</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">❌</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">❌</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--muted);"><em>(no modifier)</em><br>(Default / Package-Private)</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">❌</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">❌</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--java-type);"><code>protected</code></td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">❌</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--accent);"><code>public</code></td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Best Practices:</h3>
+        <ul>
+          <li><strong class="highlight">Encapsulate:</strong> Make fields `private`. Provide `public` getters/setters if external access is needed. This allows you to add validation logic to setters.</li>
+          <li><strong class="highlight2">Package-Private (Default):</strong> Use for utility classes or members strictly internal to a package.</li>
+          <li><strong class="highlight">Protected:</strong> Reserve for members that subclasses in other packages need to access, or for framework-level extensibility.</li>
+          <li><strong class="highlight2">Public:</strong> For methods that define the public API of your class. Use sparingly for fields.</li>
+        </ul>
+
+        <h3>Example: Access Specifiers in Action</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">AccessExample.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">package</span> <span class="java-identifier">com.example.model</span>;
+
+<span class="java-keyword">public class</span> <span class="java-type">Student</span> {
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">name</span>; <span class="java-comment">// Accessible only within Student class</span>
+    <span class="java-type">int</span> <span class="java-identifier">id</span>; <span class="java-comment">// Default: package-private</span>
+    <span class="java-keyword">protected</span> <span class="java-type">String</span> <span class="java-identifier">grade</span>; <span class="java-comment">// Accessible in package & subclasses</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">university</span>; <span class="java-comment">// Accessible everywhere</span>
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Student</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">int</span> <span class="java-identifier">id</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">name</span> = <span class="java-identifier">name</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">id</span> = <span class="java-identifier">id</span>;
+    }
+
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">getName</span>() { <span class="java-comment">// Public getter for private field</span>
+        <span class="java-keyword">return</span> <span class="java-identifier">name</span>;
+    }
+}
+<span class="java-comment">// In another package, only public members are directly accessible.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Understanding access specifiers is key to writing robust, maintainable, and secure Java applications. It directly supports the encapsulation principle."</p>
+  </div>
+  
+    <!-- ==================== SLIDE 10: STATIC KEYWORD & OUTPUT PREDICTION ==================== -->
+  <div class="slide bg-dark v-center" id="s10">
+    <div class="slide-label">Class-Level Members</div>
+    <h2>The <span class="highlight">`static` Keyword</span></h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>What `static` Means:</h3>
+        <ul>
+          <li>The `static` keyword makes a member (field, method, or nested class) belong to the <strong class="highlight">class itself</strong>, rather than to any specific instance of the class.</li>
+          <li><strong class="highlight2">Static Fields:</strong> Shared by all instances of the class. There's only one copy in memory, regardless of how many objects are created.</li>
+          <li><strong class="highlight">Static Methods:</strong> Can be called directly on the class name (e.g., `ClassName.staticMethod()`) without creating an object. They can only access static members (fields and methods) directly.</li>
+          <li>Often used for utility methods (like `Math.random()`) or constants.</li>
+        </ul>
+        <h3>Why use `static`?</h3>
+        <ul>
+          <li><strong class="highlight2">Memory Management:</strong> Saves memory as static members are loaded once.</li>
+          <li><strong class="highlight">Utility Functions:</strong> Ideal for methods that don't depend on object-specific data.</li>
+          <li><strong class="highlight2">Constants:</strong> `public static final` fields are common for global constants.</li>
+          <li><strong class="highlight">Single Point of Truth:</strong> For data that should be consistent across all instances (e.g., a counter for created objects).</li>
+        </ul>
+        <div class="insight-box" style="margin-top:25px;">
+          <div class="insight-icon">💡</div>
+          <div class="insight-text">A static method cannot refer to `this` or `super` keywords, as they are used to refer to instance-specific entities.</div>
+        </div>
+      </div>
+      <div>
+        <h3>Example: Static Members</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">StudentCounter.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">Student</span> {
+    <span class="java-type">String</span> <span class="java-identifier">name</span>;
+    <span class="java-keyword">private static int</span> <span class="java-identifier">studentCount</span> = <span class="java-literal">0</span>; <span class="java-comment">// Static field</span>
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Student</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">name</span> = <span class="java-identifier">name</span>;
+        <span class="java-identifier">studentCount</span>++; <span class="java-comment">// Increments the shared count</span>
+    }
+
+    <span class="java-keyword">public static int</span> <span class="java-identifier">getStudentCount</span>() { <span class="java-comment">// Static method</span>
+        <span class="java-keyword">return</span> <span class="java-identifier">studentCount</span>;
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">displayInfo</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Student Name: "</span> + <span class="java-identifier">name</span> +
+                           <span class="java-literal">", Total Students: "</span> + <span class="java-identifier">studentCount</span>);
+    }
+
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Student</span> <span class="java-identifier">s1</span> = <span class="java-keyword">new</span> <span class="java-type">Student</span>(<span class="java-literal">"Alice"</span>);
+        <span class="java-type">Student</span> <span class="java-identifier">s2</span> = <span class="java-keyword">new</span> <span class="java-type">Student</span>(<span class="java-literal">"Bob"</span>);
+        <span class="java-type">Student</span> <span class="java-identifier">s3</span> = <span class="java-keyword">new</span> <span class="java-type">Student</span>(<span class="java-literal">"Charlie"</span>);
+
+        <span class="java-type">s1</span>.<span class="java-identifier">displayInfo</span>();
+        <span class="java-type">s2</span>.<span class="java-identifier">displayInfo</span>();
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Total students created: "</span> + <span class="java-type">Student</span>.<span class="java-identifier">getStudentCount</span>());
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Notice how `studentCount` reflects the total number of students created, not just the count for a single `s1` or `s2`."</p>
+  </div>
+    <!-- ==================== SLIDE 11: OUTPUT PREDICTION CHALLENGE ==================== -->
+  <div class="slide bg-challenge v-center" id="s11">
+    <div class="slide-label">Interactive Challenge</div>
+    <h2>Output Prediction: <span class="highlight2">Static vs. Instance</span></h2>
+    <div class="accent-line"></div>
+    <p style="margin-bottom:20px;">What will be printed to the console? Discuss with your partner for 2 minutes before revealing the answer.</p>
+    <div class="two-col" style="align-items: flex-start;">
+      <div class="code-wrap" style="flex: 1;">
+        <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+        <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">Main.java</div></div>
+        <div class="code-body">
+<span class="java-keyword">class</span> <span class="java-type">MyClass</span> {
+    <span class="java-type">int</span> <span class="java-identifier">instanceVar</span> = <span class="java-literal">10</span>;
+    <span class="java-keyword">static int</span> <span class="java-identifier">staticVar</span> = <span class="java-literal">20</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">MyClass</span>() {
+        <span class="java-identifier">instanceVar</span>++;
+        <span class="java-identifier">staticVar</span>++;
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">printValues</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Instance Var: "</span> + <span class="java-identifier">instanceVar</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Static Var: "</span> + <span class="java-identifier">staticVar</span>);
+    }
+}
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">MyClass</span> <span class="java-identifier">obj1</span> = <span class="java-keyword">new</span> <span class="java-type">MyClass</span>();
+        <span class="java-type">MyClass</span> <span class="java-identifier">obj2</span> = <span class="java-keyword">new</span> <span class="java-type">MyClass</span>();
+        <span class="java-identifier">obj1</span>.<span class="java-identifier">printValues</span>();
+        <span class="java-identifier">obj2</span>.<span class="java-identifier">printValues</span>();
+    }
+}
+        </div>
+      </div>
+      <div style="flex: 1;">
+        <h3>Your Prediction?</h3>
+        <p>Take a moment to trace the execution and determine the exact output. Write down your answer.</p>
+        <button class="show-answer-btn" style="margin-top:20px;" onclick="toggleAnswer('s11-answer')">Show Expected Output</button>
+        <div class="answer-box" id="s11-answer" style="display: none;">
+          <h3>Expected Output:</h3>
+          <pre style="color:var(--success);"><code>Instance Var: 11
+Static Var: 22
+Instance Var: 11
+Static Var: 22</code></pre>
+          <p><strong>Explanation:</strong></p>
+          <ul>
+            <li>`instanceVar` is incremented once for each object creation, so `obj1` and `obj2` each have their own `instanceVar` at `11`.</li>
+            <li>`staticVar` belongs to the class itself, not individual objects. So, when `obj1` is created, `staticVar` becomes `21`. When `obj2` is created, it's incremented *again*, becoming `22`.</li>
+            <li>Both objects then reference this single, shared `staticVar` which is `22`.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Participant #5, explain why `staticVar` changes for both `obj1` and `obj2`. Participant #6, what if `staticVar` was also an instance variable? How would the output differ?"</p>
+  </div>
+    <!-- ==================== SLIDE 12: WRAPPER CLASSES & TYPE CASTING ==================== -->
+  <div class="slide bg-dark v-center" id="s12">
+    <div class="slide-label">Data Manipulation</div>
+    <h2>Wrapper Classes & <span class="highlight">Type Casting</span></h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>Wrapper Classes: Bridging Primitives & Objects</h3>
+        <ul>
+          <li>Java is object-oriented, but it includes primitive data types (`int`, `char`, `boolean`, etc.) for performance.</li>
+          <li><strong class="highlight2">Wrapper classes</strong> (`Integer`, `Character`, `Boolean`, etc.) provide object representations for these primitives.</li>
+          <li><strong class="highlight">Why use them?</strong>
+            <ul>
+              <li>To store primitive values in collections (e.g., `ArrayList<Integer>`).</li>
+              <li>To use utility methods (e.g., `Integer.parseInt()`).</li>
+              <li>For methods that accept `Object` types.</li>
+            </ul>
+          </li>
+          <li><strong class="highlight2">Autoboxing & Unboxing:</strong> Java automatically converts between primitives and their wrappers.
+            <ul>
+              <li><strong class="highlight">Autoboxing:</strong> `int` to `Integer`.</li>
+              <li><strong class="highlight2">Unboxing:</strong> `Integer` to `int`.</li>
+            </ul>
+          </li>
+        </ul>
+        <h3>Type Casting: Converting Data Types</h3>
+        <ul>
+          <li>Used to convert a value from one data type to another.</li>
+          <li><strong class="highlight">Widening (Implicit) Casting:</strong> Automatic conversion from a smaller type to a larger type (e.g., `int` to `double`). No data loss.</li>
+          <li><strong class="highlight2">Narrowing (Explicit) Casting:</strong> Manual conversion from a larger type to a smaller type (e.g., `double` to `int`). Requires explicit cast operator `()` and may result in data loss or precision loss.</li>
+          <li><strong class="highlight">Object Casting:</strong> Converting between related object types (e.g., `Animal` to `Dog`). Requires careful use of `instanceof` to avoid `ClassCastException`.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Example: Wrapper Classes</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">WrapperExample.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">WrapperExample</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="comment">// Autoboxing: primitive int to Wrapper Integer</span>
+        <span class="java-type">int</span> <span class="java-identifier">primitiveInt</span> = <span class="java-literal">100</span>;
+        <span class="java-type">Integer</span> <span class="java-identifier">wrapperInt</span> = <span class="java-identifier">primitiveInt</span>; <span class="java-comment">// Autoboxing</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Wrapper Integer: "</span> + <span class="java-identifier">wrapperInt</span>);
+
+        <span class="comment">// Unboxing: Wrapper Integer to primitive int</span>
+        <span class="java-type">int</span> <span class="java-identifier">anotherInt</span> = <span class="java-identifier">wrapperInt</span>; <span class="java-comment">// Unboxing</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Primitive int: "</span> + <span class="java-identifier">anotherInt</span>);
+
+        <span class="comment">// Using wrapper class utility method</span>
+        <span class="java-type">String</span> <span class="java-identifier">numberString</span> = <span class="java-literal">"123"</span>;
+        <span class="java-type">int</span> <span class="java-identifier">parsedInt</span> = <span class="java-type">Integer</span>.<span class="java-identifier">parseInt</span>(<span class="java-identifier">numberString</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Parsed int: "</span> + <span class="java-identifier">parsedInt</span>);
+    }
+}
+          </div>
+        </div>
+
+        <h3>Example: Type Casting</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">CastingExample.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">CastingExample</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="comment">// Widening (Implicit) Casting</span>
+        <span class="java-type">int</span> <span class="java-identifier">myInt</span> = <span class="java-literal">10</span>;
+        <span class="java-type">double</span> <span class="java-identifier">myDouble</span> = <span class="java-identifier">myInt</span>; <span class="java-comment">// int to double, automatic</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Int to Double: "</span> + <span class="java-identifier">myDouble</span>);
+
+        <span class="comment">// Narrowing (Explicit) Casting</span>
+        <span class="java-type">double</span> <span class="java-identifier">anotherDouble</span> = <span class="java-literal">9.78</span>;
+        <span class="java-type">int</span> <span class="java-identifier">anotherInt</span> = (<span class="java-type">int</span>) <span class="java-identifier">anotherDouble</span>; <span class="java-comment">// double to int, explicit, data loss</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Double to Int: "</span> + <span class="java-identifier">anotherInt</span>);
+
+        <span class="comment">// Object Casting (Upcasting/Downcasting)</span>
+        <span class="java-type">Object</span> <span class="java-identifier">obj</span> = <span class="java-literal">"Hello"</span>; <span class="java-comment">// Upcasting (implicit)</span>
+        <span class="java-type">String</span> <span class="java-identifier">str</span> = (<span class="java-type">String</span>) <span class="java-identifier">obj</span>; <span class="java-comment">// Downcasting (explicit)</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Object to String: "</span> + <span class="java-identifier">str</span>);
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Wrapper classes provide a crucial bridge in Java's hybrid object-oriented and primitive type system. Casting allows us to control type conversions, but always be mindful of potential data loss with narrowing casts."</p>
+  </div>
+
+  <!-- ==================== SLIDE 13: STRING HANDLING ==================== -->
+  <div class="slide bg-dark v-center" id="s13">
+    <div class="slide-label">Data Manipulation</div>
+    <h2><span class="highlight2">String</span> Handling in Java</h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>Strings: Immutable Sequences of Characters</h3>
+        <ul>
+          <li>`java.lang.String` is one of the most fundamental classes in Java.</li>
+          <li><strong class="highlight">Immutability:</strong> Once a `String` object is created, its contents cannot be changed. Any operation that appears to modify a `String` actually creates a new `String` object.
+            <ul>
+              <li>Example: `String s = "hello"; s = s + " world";` creates two `String` objects.</li>
+            </ul>
+          </li>
+          <li>This immutability makes `String` safe for multi-threading and suitable for keys in `HashMap`.</li>
+        </ul>
+        <h3>`StringBuilder` & `StringBuffer`: Mutable Alternatives</h3>
+        <ul>
+          <li>For scenarios requiring frequent string modifications (e.g., building a long string in a loop), `String` concatenation (`+`) is inefficient due to its immutability.</li>
+          <li><strong class="highlight2">`StringBuilder`:</strong> A mutable sequence of characters. Ideal for single-threaded environments where performance is critical. Appends and inserts modify the object in place.</li>
+          <li><strong class="highlight">`StringBuffer`:</strong> Similar to `StringBuilder`, but `synchronized` (thread-safe). Slower than `StringBuilder` due to the overhead of synchronization, but safer for multi-threaded access.</li>
+          <li>Use `append()`, `insert()`, `delete()`, `reverse()` methods.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Example: String Immutability vs. StringBuilder</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">StringVsBuilder.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">public class</span> <span class="java-type">StringVsBuilder</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="comment">// Demonstrating String Immutability</span>
+        <span class="java-type">String</span> <span class="java-identifier">s1</span> = <span class="java-literal">"Java"</span>;
+        <span class="java-type">String</span> <span class="java-identifier">s2</span> = <span class="java-identifier">s1</span>; <span class="java-comment">// s2 refers to the same "Java" object</span>
+        <span class="java-identifier">s1</span> = <span class="java-identifier">s1</span> + <span class="java-literal">" is Great"</span>; <span class="java-comment">// s1 now refers to a *new* String object</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"s1: "</span> + <span class="java-identifier">s1</span>); <span class="java-comment">// Java is Great</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"s2: "</span> + <span class="java-identifier">s2</span>); <span class="java-comment">// Java (original object unchanged)</span>
+
+        <span class="comment">// Demonstrating StringBuilder Mutability</span>
+        <span class="java-type">StringBuilder</span> <span class="java-identifier">sb1</span> = <span class="java-keyword">new</span> <span class="java-type">StringBuilder</span>(<span class="java-literal">"Hello"</span>);
+        <span class="java-type">StringBuilder</span> <span class="java-identifier">sb2</span> = <span class="java-identifier">sb1</span>; <span class="java-comment">// sb2 refers to the same StringBuilder object</span>
+        <span class="java-identifier">sb1</span>.<span class="java-identifier">append</span>(<span class="java-literal">" World"</span>); <span class="java-comment">// sb1 modifies the existing object</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"sb1: "</span> + <span class="java-identifier">sb1</span>); <span class="java-comment">// Hello World</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"sb2: "</span> + <span class="java-identifier">sb2</span>); <span class="java-comment">// Hello World (same object modified)</span>
+
+        <span class="comment">// Performance difference (conceptual)</span>
+        <span class="java-type">long</span> <span class="java-identifier">startTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-type">String</span> <span class="java-identifier">tempString</span> = <span class="java-literal">""</span>;
+        <span class="java-keyword">for</span> (<span class="java-type">int</span> <span class="java-identifier">i</span> = <span class="java-literal">0</span>; <span class="java-identifier">i</span> <span class="java-operator"><</span> <span class="java-literal">1000</span>; <span class="java-identifier">i</span>++) {
+            <span class="java-identifier">tempString</span> += <span class="java-literal">"a"</span>; <span class="java-comment">// Creates 1000 new String objects</span>
+        }
+        <span class="java-type">long</span> <span class="java-identifier">endTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"String concat time: "</span> + (<span class="java-identifier">endTime</span> - <span class="java-identifier">startTime</span>) + <span class="java-literal">" ns"</span>);
+
+        <span class="java-type">startTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-type">StringBuilder</span> <span class="java-identifier">tempBuilder</span> = <span class="java-keyword">new</span> <span class="java-type">StringBuilder</span>();
+        <span class="java-keyword">for</span> (<span class="java-type">int</span> <span class="java-identifier">i</span> = <span class="java-literal">0</span>; <span class="java-identifier">i</span> <span class="java-operator"><</span> <span class="java-literal">1000</span>; <span class="java-identifier">i</span>++) {
+            <span class="java-identifier">tempBuilder</span>.<span class="java-identifier">append</span>(<span class="java-literal">"a"</span>); <span class="java-comment">// Modifies single StringBuilder object</span>
+        }
+        <span class="java-identifier">tempBuilder</span>.<span class="java-identifier">toString</span>(); <span class="java-comment">// Convert to String once</span>
+        <span class="java-type">endTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"StringBuilder append time: "</span> + (<span class="java-identifier">endTime</span> - <span class="java-identifier">startTime</span>) + <span class="java-literal">" ns"</span>);
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "The immutability of `String` is a fundamental concept. It's why `StringBuilder` and `StringBuffer` exist. The performance difference with frequent modifications is significant."</p>
+  </div>
+    <!-- ==================== SLIDE 14: COFFEE BREAK & POLL ==================== -->
+  <div class="slide bg-break center" id="s14">
+    <div class="break-emoji">&#9749;</div>
+    <div class="break-message">Time for a quick Coffee Break!</div>
+    <div class="break-timer" id="breakTimer1">10:00</div>
+    <p style="margin-top:20px; font-size: 1.1rem; color: var(--light);">Grab a coffee, stretch your legs, and let's quickly take a poll!</p>
+
+    <div class="poll-question" style="margin-top: 30px; font-size: 1.4rem;">What's your favorite Java feature discussed so far today?</div>
+    <div class="poll-options" style="width: 80%; max-width: 500px;">
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">A</div><div class="poll-option-text">Classes & Objects</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">B</div><div class="poll-option-text">Constructors & `this`</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">C</div><div class="poll-option-text">Access Specifiers</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">D</div><div class="poll-option-text">`static` keyword</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">E</div><div class="poll-option-text">Wrapper Classes / Type Casting</div></div>
+      <div class="poll-option" onclick="selectOption(this)"><div class="poll-letter">F</div><div class="poll-option-text">String Handling</div></div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We'll resume in 10 minutes. While you're on break, let's get some votes on what's been most interesting!"</p>
+  </div>
+    <!-- ==================== SLIDE 15: SECTION INTRO - Inheritance & Polymorphism ==================== -->
+  <div class="slide bg-section v-center" id="s15">
+    <div class="section-number">03</div>
+    <h2><span class="highlight">Inheritance &</span> Polymorphism</h2>
+    <div class="accent-line"></div>
+    <p class="deck-subtitle" style="max-width: 600px;">Building hierarchies and writing flexible, extensible code through abstraction.</p>
+    <div class="tech-tags">
+      <span class="tech-tag">`extends` keyword</span>
+      <span class="tech-tag">`super` keyword</span>
+      <span class="tech-tag">Method Overriding</span>
+      <span class="tech-tag">Method Overloading</span>
+      <span class="tech-tag">`final` keyword</span>
+      <span class="tech-tag">`is-a` relationship</span>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Welcome back! Now that we've covered the basics of defining objects, let's explore how we can build relationships between them. This is where the true power of OOP for code reuse and extensibility really shines."</p>
+  </div>
+    <!-- ==================== SLIDE 16: INHERITANCE EXAMPLE ==================== -->
+  <div class="slide bg-dark v-center" id="s16">
+    <div class="slide-label">Core Concept</div>
+    <h2><span class="highlight">Inheritance</span>: Building on Existing Code</h2>
+    <div class="accent-line"></div>
+    <div class="two-col-code">
+      <div>
+        <h3>Hierarchical Relationship:</h3>
+        <ul>
+          <li><strong>Parent Class (Superclass/Base class):</strong> The class whose features are inherited.</li>
+          <li><strong>Child Class (Subclass/Derived class):</strong> The class that inherits features from another class.</li>
+          <li>A subclass `extends` a superclass, establishing an <strong class="highlight2">"is-a" relationship</strong> (e.g., a Dog *is a* kind of Animal).</li>
+        </ul>
+        <h3>Benefits:</h3>
+        <ul>
+          <li><strong>Code Reusability:</strong> Common code is written once in the superclass and reused by subclasses.</li>
+          <li><strong>Maintainability:</strong> Changes to common logic in the superclass automatically propagate to subclasses.</li>
+          <li><strong>Polymorphism:</strong> Enables treating objects of different subclasses uniformly through a superclass reference.</li>
+          <li><strong>Extensibility:</strong> New subclasses can be added easily without modifying existing code.</li>
+        </ul>
+        <h3>The `super` Keyword:</h3>
+        <ul>
+          <li>Used to refer to the immediate parent class object.</li>
+          <li>Can be used to:
+            <ul>
+              <li>Call the parent class's constructor (`super(...)`). Must be the first statement in the subclass constructor.</li>
+              <li>Access parent class members (fields or methods) that are hidden or overridden by the subclass (`super.field` or `super.method()`).</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>Example: Animal & Dog Hierarchy</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">Animal.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">class</span> <span class="java-type">Animal</span> {
+    <span class="java-type">String</span> <span class="java-identifier">name</span>;
+    <span class="java-keyword">int</span> <span class="java-identifier">age</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Animal</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">int</span> <span class="java-identifier">age</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">name</span> = <span class="java-identifier">name</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">age</span> = <span class="java-identifier">age</span>;
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Animal constructor: "</span> + <span class="java-identifier">name</span>);
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">eat</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">name</span> + <span class="java-literal">" is eating."</span>);
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">sleep</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">name</span> + <span class="java-literal">" is sleeping."</span>);
+    }
+}
+
+<span class="java-keyword">class</span> <span class="java-type">Dog</span> <span class="java-keyword">extends</span> <span class="java-type">Animal</span> {
+    <span class="java-type">String</span> <span class="java-identifier">breed</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Dog</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">int</span> <span class="java-identifier">age</span>, <span class="java-type">String</span> <span class="java-identifier">breed</span>) {
+        <span class="java-keyword">super</span>(<span class="java-identifier">name</span>, <span class="java-identifier">age</span>); <span class="java-comment">// Call Animal's constructor</span>
+        <span class="java-keyword">this</span>.<span class="java-identifier">breed</span> = <span class="java-identifier">breed</span>;
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Dog constructor: "</span> + <span class="java-identifier">name</span> + <span class="java-literal">", breed "</span> + <span class="java-identifier">breed</span>);
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">bark</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">name</span> + <span class="java-literal">" is barking!"</span>);
+    }
+}
+
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Dog</span> <span class="java-identifier">myDog</span> = <span class="java-keyword">new</span> <span class="java-type">Dog</span>(<span class="java-literal">"Buddy"</span>, <span class="java-literal">3</span>, <span class="java-literal">"Golden Retriever"</span>);
+        <span class="java-identifier">myDog</span>.<span class="java-identifier">eat</span>();     <span class="java-comment">// Inherited from Animal</span>
+        <span class="java-identifier">myDog</span>.<span class="java-identifier">sleep</span>();   <span class="java-comment">// Inherited from Animal</span>
+        <span class="java-identifier">myDog</span>.<span class="java-identifier">bark</span>();    <span class="java-comment">// Specific to Dog</span>
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Notice how `Dog` automatically gets `eat()` and `sleep()` from `Animal`. This saves us from writing that code again. Also, see how `super()` is used to call the `Animal` constructor first."</p>
+  </div>
+  
+    <!-- ==================== SLIDE 17: Lab 2.2 - Inheritance & super Keyword ==================== -->
+  <div class="slide bg-lab v-center" id="s17">
+    <div class="slide-label">Lab Exercise</div>
+    <h2>Lab 2.2: <span class="highlight">Inheritance & `super` Keyword</span></h2>
+    <div class="accent-line"></div>
+    <p style="margin-bottom:20px;">Let's build a simple animal hierarchy to demonstrate inheritance, `super` keyword, method overriding, and `final` restrictions.</p>
+    <div class="two-col">
+      <div>
+        <h3>Task 1: Create `Animal` Class</h3>
+        <ul>
+          <li>Create a class `Animal` with `private` fields: `name` (String), `age` (int).</li>
+          <li>Implement a parameterized constructor `Animal(String name, int age)`.</li>
+          <li>Add a `public` method `makeSound()` that prints "Animal makes a sound."</li>
+          <li>Override `toString()` to return "Animal [name=..., age=...]".</li>
+        </ul>
+        <h3>Task 2: Create `Dog` Subclass</h3>
+        <ul>
+          <li>Create a class `Dog` that `extends Animal`.</li>
+          <li>Add a `private` field: `breed` (String).</li>
+          <li>Implement a parameterized constructor `Dog(String name, int age, String breed)`. <strong class="highlight2">Crucially, use `super(...)`</strong> as the first statement to invoke the parent `Animal` constructor.</li>
+          <li>Override `makeSound()` to print "Woof!".</li>
+          <li>Override `toString()` to include both `Animal` and `Dog` specific details. (Hint: Use `super.toString()`).</li>
+        </ul>
+        <h3>Task 3: Create `Labrador` Subclass</h3>
+        <ul>
+          <li>Create a class `Labrador` that `extends Dog`.</li>
+          <li>Add a `private` field: `color` (String).</li>
+          <li>Implement a parameterized constructor `Labrador(String name, int age, String breed, String color)`. Use `super(...)` to invoke the `Dog` constructor.</li>
+          <li>Override `makeSound()` to print "Labrador barks happily!".</li>
+          <li>Override `toString()` to include all `Animal`, `Dog`, and `Labrador` details.</li>
+        </ul>
+        <h3>Task 4: `final` Keyword & Main Method</h3>
+        <ul>
+          <li>In your `Animal` class, declare `makeSound()` as `final`. Observe the compilation error in `Dog` and `Labrador`. Remove `final` afterwards.</li>
+          <li>Declare the `Dog` class as `final`. Observe the compilation error in `Labrador`. Remove `final` afterwards.</li>
+          <li>In a `Main` class (or within `Animal` as a nested class), create instances of `Animal`, `Dog`, and `Labrador`. Call their `makeSound()` and print them using `System.out.println()`.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:15px;">
+          <div class="insight-icon">🛠️</div>
+          <div class="insight-text"><strong>Focus:</strong> Solidifying understanding of class hierarchies, constructor chaining (`super()`), method overriding, and the restrictive nature of the `final` keyword.</div>
+        </div>
+      </div>
+      <div class="code-wrap">
+        <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+        <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">AnimalHierarchy.java (Skeleton)</div></div>
+        <div class="code-body">
+<span class="java-comment">// Task 1: Animal Class</span>
+<span class="java-keyword">class</span> <span class="java-type">Animal</span> {
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">name</span>;
+    <span class="java-keyword">private int</span> <span class="java-identifier">age</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Animal</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">int</span> <span class="java-identifier">age</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">name</span> = <span class="java-identifier">name</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">age</span> = <span class="java-identifier">age</span>;
+    }
+
+    <span class="java-keyword">public void</span> <span class="java-identifier">makeSound</span>() { <span class="java-comment">// Could be final for Task 4</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Animal makes a sound."</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-literal">"Animal [name="</span> + <span class="java-identifier">name</span> + <span class="java-literal">", age="</span> + <span class="java-identifier">age</span> + <span class="java-literal">"]"</span>;
+    }
+}
+
+<span class="java-comment">// Task 2: Dog Subclass (Could be final for Task 4)</span>
+<span class="java-keyword">class</span> <span class="java-type">Dog</span> <span class="java-keyword">extends</span> <span class="java-type">Animal</span> {
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">breed</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Dog</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">int</span> <span class="java-identifier">age</span>, <span class="java-type">String</span> <span class="java-identifier">breed</span>) {
+        <span class="java-keyword">super</span>(<span class="java-identifier">name</span>, <span class="java-identifier">age</span>);
+        <span class="java-keyword">this</span>.<span class="java-identifier">breed</span> = <span class="java-identifier">breed</span>;
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">makeSound</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Woof!"</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-keyword">super</span>.<span class="java-identifier">toString</span>() + <span class="java-literal">" [breed="</span> + <span class="java-identifier">breed</span> + <span class="java-literal">"]"</span>;
+    }
+}
+
+<span class="java-comment">// Task 3: Labrador Subclass</span>
+<span class="java-keyword">class</span> <span class="java-type">Labrador</span> <span class="java-keyword">extends</span> <span class="java-type">Dog</span> {
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">color</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Labrador</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">int</span> <span class="java-identifier">age</span>, <span class="java-type">String</span> <span class="java-identifier">breed</span>, <span class="java-type">String</span> <span class="java-identifier">color</span>) {
+        <span class="java-keyword">super</span>(<span class="java-identifier">name</span>, <span class="java-identifier">age</span>, <span class="java-identifier">breed</span>);
+        <span class="java-keyword">this</span>.<span class="java-identifier">color</span> = <span class="java-identifier">color</span>;
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">makeSound</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Labrador barks happily!"</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-keyword">super</span>.<span class="java-identifier">toString</span>() + <span class="java-literal">" [color="</span> + <span class="java-identifier">color</span> + <span class="java-literal">"]"</span>;
+    }
+}
+
+<span class="java-comment">// Main class for testing (Task 4)</span>
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Animal</span> <span class="java-identifier">a</span> = <span class="java-keyword">new</span> <span class="java-type">Animal</span>(<span class="java-literal">"Generic Animal"</span>, <span class="java-literal">5</span>);
+        <span class="java-type">Dog</span> <span class="java-identifier">d</span> = <span class="java-keyword">new</span> <span class="java-type">Dog</span>(<span class="java-literal">"Buddy"</span>, <span class="java-literal">3</span>, <span class="java-literal">"Golden Retriever"</span>);
+        <span class="java-type">Labrador</span> <span class="java-identifier">l</span> = <span class="java-keyword">new</span> <span class="java-type">Labrador</span>(<span class="java-literal">"Max"</span>, <span class="java-literal">2</span>, <span class="java-literal">"Labrador"</span>, <span class="java-literal">"Yellow"</span>);
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">a</span>);
+        <span class="java-identifier">a</span>.<span class="java-identifier">makeSound</span>();
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">d</span>);
+        <span class="java-identifier">d</span>.<span class="java-identifier">makeSound</span>();
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">l</span>);
+        <span class="java-identifier">l</span>.<span class="java-identifier">makeSound</span>();
+    }
+}
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We'll dedicate **20-25 minutes** to this lab. Make sure to experiment with the `final` keyword as well."</p>
+    <p style="margin-top:10px;">**Trainer Action:** "After this lab, Participant #7 and Participant #8, be ready to explain the benefits of overriding `toString()` and how `super()` is used in your constructors."</p>
+  </div>
+    <!-- ==================== SLIDE 18: METHOD OVERLOADING & OVERRIDING ==================== -->
+  <div class="slide bg-dark v-center" id="s18">
+    <div class="slide-label">Polymorphism in Action</div>
+    <h2>Method <span class="highlight">Overloading</span> & <span class="highlight2">Overriding</span></h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>Method Overloading: Same Name, Different Parameters</h3>
+        <ul>
+          <li>Allows a class to have <strong class="highlight">multiple methods with the same name</strong> but <strong class="highlight2">different parameter lists</strong> (different number, type, or order of parameters).</li>
+          <li>Occurs <strong class="highlight">within the same class</strong>.</li>
+          <li>Determined at <strong class="highlight2">compile time</strong> (static polymorphism).</li>
+          <li>Return type can be different, but not the sole distinguishing factor. If parameters are the same, return type *must* be the same.</li>
+          <li>Example: `add(int a, int b)` vs. `add(double a, double b)` vs. `add(int a, int b, int c)`.</li>
+        </ul>
+        <h3>Method Overriding: Same Signature, Different Implementation</h3>
+        <ul>
+          <li>Allows a subclass to provide a <strong class="highlight">specific implementation</strong> for a method that is already defined in its superclass.</li>
+          <li>Occurs in an <strong class="highlight2">inheritance hierarchy</strong> (subclass overriding superclass method).</li>
+          <li>Method signature (name, number, and type of parameters) and return type <strong class="highlight">must be the same</strong> (or a covariant return type).</li>
+          <li>Determined at <strong class="highlight2">runtime</strong> (dynamic polymorphism).</li>
+          <li>Use the `@Override` annotation for clarity and compile-time checks.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:25px;">
+          <div class="insight-icon">💡</div>
+          <div class="insight-text">Overloading provides flexibility for a single method name to handle different data inputs. Overriding allows specialized behavior in subclasses while maintaining a common interface.</div>
+        </div>
+      </div>
+      <div>
+        <h3>Example: Overloading & Overriding</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">ShapeCalculator.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">class</span> <span class="java-type">Shape</span> {
+    <span class="java-keyword">public double</span> <span class="java-identifier">area</span>() {
+        <span class="java-keyword">return</span> <span class="java-literal">0.0</span>; <span class="java-comment">// Default implementation</span>
+    }
+    <span class="java-keyword">public void</span> <span class="java-identifier">draw</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Drawing a generic shape."</span>);
+    }
+}
+
+<span class="java-keyword">class</span> <span class="java-type">Circle</span> <span class="java-keyword">extends</span> <span class="java-type">Shape</span> {
+    <span class="java-type">double</span> <span class="java-identifier">radius</span>;
+    <span class="java-keyword">public</span> <span class="java-identifier">Circle</span>(<span class="java-type">double</span> <span class="java-identifier">radius</span>) { <span class="java-keyword">this</span>.<span class="java-identifier">radius</span> = <span class="java-identifier">radius</span>; }
+
+    @<span class="java-type">Override</span> <span class="java-comment">// Overriding area() from Shape</span>
+    <span class="java-keyword">public double</span> <span class="java-identifier">area</span>() {
+        <span class="java-keyword">return</span> <span class="java-type">Math</span>.<span class="java-identifier">PI</span> * <span class="java-identifier">radius</span> * <span class="java-identifier">radius</span>;
+    }
+
+    <span class="comment">// Overloaded draw methods</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">draw</span>() { <span class="java-comment">// Overriding draw() from Shape</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Drawing a circle."</span>);
+    }
+    <span class="java-keyword">public void</span> <span class="java-identifier">draw</span>(<span class="java-type">String</span> <span class="java-identifier">color</span>) { <span class="java-comment">// Overloaded draw method</span>
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Drawing a "</span> + <span class="java-identifier">color</span> + <span class="java-literal">" circle."</span>);
+    }
+}
+
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Circle</span> <span class="java-identifier">c</span> = <span class="java-keyword">new</span> <span class="java-type">Circle</span>(<span class="java-literal">5</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Circle Area: "</span> + <span class="java-identifier">c</span>.<span class="java-identifier">area</span>()); <span class="java-comment">// Calls overridden area()</span>
+        <span class="java-identifier">c</span>.<span class="java-identifier">draw</span>(); <span class="java-comment">// Calls overridden draw()</span>
+        <span class="java-identifier">c</span>.<span class="java-identifier">draw</span>(<span class="java-literal">"Red"</span>); <span class="java-comment">// Calls overloaded draw(String)</span>
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "Participant #9, can you explain why the `draw` method in `Circle` is both overriding and overloading? Participant #10, what's a good real-world analogy for method overloading?"</p>
+  </div>
+    <!-- ==================== SLIDE 19: ABSTRACT CLASSES & INTERFACES ==================== -->
+  <div class="slide bg-dark v-center" id="s19">
+    <div class="slide-label">Advanced Abstraction</div>
+    <h2>Abstract Classes & <span class="highlight2">Interfaces</span></h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>Abstract Classes: Partial Blueprints</h3>
+        <ul>
+          <li>A class that is declared with the `abstract` keyword.</li>
+          <li><strong class="highlight">Cannot be instantiated directly</strong> (you cannot create objects of an abstract class).</li>
+          <li>Can have `abstract` methods (methods without a body) AND concrete methods (methods with a body).</li>
+          <li>Subclasses <strong class="highlight2">must implement all abstract methods</strong> of the abstract parent, or they must also be declared abstract.</li>
+          <li>Used when you want to provide a common base class for subclasses, but some behavior needs to be defined by each subclass individually. Represents an <strong class="highlight">"is-a" relationship</strong> with shared state and partially implemented behavior.</li>
+          <li>Example: `abstract class Shape { abstract double area(); String color; }`</li>
+        </ul>
+        <h3>Interfaces: Pure Abstraction (Contracts)</h3>
+        <ul>
+          <li>A blueprint of a class that can contain only abstract methods (pre-Java 8), `default` methods, `static` methods, and constant variables.</li>
+          <li>Declared with the `interface` keyword.</li>
+          <li><strong class="highlight2">Cannot be instantiated directly</strong>.</li>
+          <li>A class `implements` an interface, agreeing to provide implementations for all its abstract methods.</li>
+          <li>Represents a <strong class="highlight">"can-do" or "has-a" capability</strong>. A class can implement multiple interfaces (solving Java's single inheritance limitation for behavior).</li>
+          <li>Example: `interface Drawable { void draw(); }`</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Comparison: Abstract Class vs. Interface</h3>
+        <table style="width:100%; border-collapse: collapse; margin-top:20px;">
+          <thead>
+            <tr style="background:var(--secondary);">
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Feature</th>
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Abstract Class</th>
+              <th style="padding:10px; border:1px solid var(--border); text-align:left; color:var(--white);">Interface</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">Instantiation</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">No</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--error);">No</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">Abstract Methods</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">Yes</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">Yes</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">Concrete Methods</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">Yes</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">Yes (<code>default</code>/<code>static</code> in Java 8+)</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">Fields</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--success);">Any access modifier</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);"><code>public static final</code> (implicitly)</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">Inheritance</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">One class can extend one abstract class</td>
+              <td style="padding:10px; border:1px solid var(--border); color:var(--light);">One class can implement multiple interfaces</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="insight-box" style="margin-top:25px;">
+          <div class="insight-icon">💡</div>
+          <div class="insight-text">Abstract classes are for *specializing* a type (e.g., a "Vehicle" base for "Car" and "Bike"). Interfaces are for *defining capabilities* (e.g., "Driveable" for anything that can be driven).</div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "These are fundamental for designing flexible and extensible architectures. Understanding when to use which is a sign of a seasoned Java developer."</p>
+  </div>
+    <!-- ==================== SLIDE 20: Lab 2.3 - Abstract Classes & Interfaces ==================== -->
+  <div class="slide bg-lab v-center" id="s20">
+    <div class="slide-label">Lab Exercise</div>
+    <h2>Lab 2.3: <span class="highlight">Abstract Classes & Interfaces</span></h2>
+    <div class="accent-line"></div>
+    <p style="margin-bottom:20px;">Let's implement different shapes using abstract classes and interfaces to understand their practical application.</p>
+    <div class="two-col">
+      <div>
+        <h3>Task 1: Abstract `Shape` Class</h3>
+        <ul>
+          <li>Define an `abstract class Shape` with a `private` field `name` (String) and a constructor `Shape(String name)`.</li>
+          <li>Add a `public` concrete method `getName()` and a `public abstract double area()`.</li>
+          <li>Override `toString()` in `Shape` to include its name.</li>
+        </ul>
+        <h3>Task 2: Concrete Shape Implementations</h3>
+        <ul>
+          <li>Create `Circle` and `Rectangle` classes that `extend Shape`.</li>
+          <li>`Circle` should have a `private double radius`, and its constructor should take `name` and `radius`.</li>
+          <li>`Rectangle` should have `private double length` and `private double width`, and its constructor should take `name`, `length`, and `width`.</li>
+          <li>For both `Circle` and `Rectangle`, <strong class="highlight">implement the `area()` method</strong>.</li>
+          <li>Override `toString()` in `Circle` and `Rectangle` to display their specific dimensions.</li>
+        </ul>
+        <h3>Task 3: Define & Implement Interfaces</h3>
+        <ul>
+          <li>Define an `interface Drawable` with a `default void draw()` method that prints "Drawing a generic shape."</li>
+          <li>Add a `public abstract void setColor(String color)` to `Drawable`.</li>
+          <li>Define an `interface Resizable` with a `void resize(double factor)` abstract method.</li>
+          <li>Make `Circle` and `Rectangle` <strong class="highlight2">implement both `Drawable` and `Resizable`</strong>.</li>
+          <li>Implement the `setColor` and `resize` methods in `Circle` and `Rectangle`. For `draw()`, you can keep the default or override it.</li>
+        </ul>
+        <h3>Task 4: Demonstrate in `main`</h3>
+        <ul>
+          <li>In a `Main` class, create instances of `Circle` and `Rectangle`.</li>
+          <li>Call their `area()`, `draw()`, `setColor()`, and `resize()` methods.</li>
+          <li>Use `System.out.println()` with your objects to show the overridden `toString()` results.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:15px;">
+          <div class="insight-icon">🛠️</div>
+          <div class="insight-text"><strong>Focus:</strong> Hands-on experience with abstract methods, concrete implementations, interface contracts, and default methods for flexible design.</div>
+        </div>
+      </div>
+      <div class="code-wrap">
+        <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+        <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">ShapeApp.java (Skeleton)</div></div>
+        <div class="code-body">
+<span class="java-comment">// Task 1: Abstract Shape Class</span>
+<span class="java-keyword">abstract class</span> <span class="java-type">Shape</span> {
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">name</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Shape</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">name</span> = <span class="java-identifier">name</span>;
+    }
+
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">getName</span>() {
+        <span class="java-keyword">return</span> <span class="java-identifier">name</span>;
+    }
+
+    <span class="java-keyword">public abstract double</span> <span class="java-identifier">area</span>();
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-literal">"Shape [name="</span> + <span class="java-identifier">name</span> + <span class="java-literal">"]"</span>;
+    }
+}
+
+<span class="java-comment">// Task 3: Drawable Interface</span>
+<span class="java-keyword">interface</span> <span class="java-type">Drawable</span> {
+    <span class="java-keyword">default void</span> <span class="java-identifier">draw</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Drawing a generic shape."</span>);
+    }
+    <span class="java-keyword">void</span> <span class="java-identifier">setColor</span>(<span class="java-type">String</span> <span class="java-identifier">color</span>);
+}
+
+<span class="java-comment">// Task 3: Resizable Interface</span>
+<span class="java-keyword">interface</span> <span class="java-type">Resizable</span> {
+    <span class="java-keyword">void</span> <span class="java-identifier">resize</span>(<span class="java-type">double</span> <span class="java-identifier">factor</span>);
+}
+
+<span class="java-comment">// Task 2: Circle Class</span>
+<span class="java-keyword">class</span> <span class="java-type">Circle</span> <span class="java-keyword">extends</span> <span class="java-type">Shape</span> <span class="java-keyword">implements</span> <span class="java-type">Drawable</span>, <span class="java-type">Resizable</span> {
+    <span class="java-keyword">private double</span> <span class="java-identifier">radius</span>;
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">color</span> = <span class="java-literal">"No Color"</span>; <span class="java-comment">// For setColor implementation</span>
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Circle</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">double</span> <span class="java-identifier">radius</span>) {
+        <span class="java-keyword">super</span>(<span class="java-identifier">name</span>);
+        <span class="java-keyword">this</span>.<span class="java-identifier">radius</span> = <span class="java-identifier">radius</span>;
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public double</span> <span class="java-identifier">area</span>() {
+        <span class="java-keyword">return</span> <span class="java-type">Math</span>.<span class="java-identifier">PI</span> * <span class="java-identifier">radius</span> * <span class="java-identifier">radius</span>;
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">setColor</span>(<span class="java-type">String</span> <span class="java-identifier">color</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">color</span> = <span class="java-identifier">color</span>;
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">getName</span>() + <span class="java-literal">" color set to "</span> + <span class="java-identifier">color</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">resize</span>(<span class="java-type">double</span> <span class="java-identifier">factor</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">radius</span> *= <span class="java-identifier">factor</span>;
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">getName</span>() + <span class="java-literal">" resized. New radius: "</span> + <span class="java-identifier">radius</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-keyword">super</span>.<span class="java-identifier">toString</span>() + <span class="java-literal">" [radius="</span> + <span class="java-identifier">radius</span> + <span class="java-literal">", color="</span> + <span class="java-identifier">color</span> + <span class="java-literal">", area="</span> + <span class="java-identifier">area</span>() + <span class="java-literal">"]"</span>;
+    }
+}
+
+<span class="java-comment">// Task 2: Rectangle Class</span>
+<span class="java-keyword">class</span> <span class="java-type">Rectangle</span> <span class="java-keyword">extends</span> <span class="java-type">Shape</span> <span class="java-keyword">implements</span> <span class="java-type">Drawable</span>, <span class="java-type">Resizable</span> {
+    <span class="java-keyword">private double</span> <span class="java-identifier">length</span>;
+    <span class="java-keyword">private double</span> <span class="java-identifier">width</span>;
+    <span class="java-keyword">private</span> <span class="java-type">String</span> <span class="java-identifier">color</span> = <span class="java-literal">"No Color"</span>;
+
+    <span class="java-keyword">public</span> <span class="java-identifier">Rectangle</span>(<span class="java-type">String</span> <span class="java-identifier">name</span>, <span class="java-type">double</span> <span class="java-identifier">length</span>, <span class="java-type">double</span> <span class="java-identifier">width</span>) {
+        <span class="java-keyword">super</span>(<span class="java-identifier">name</span>);
+        <span class="java-keyword">this</span>.<span class="java-identifier">length</span> = <span class="java-identifier">length</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">width</span> = <span class="java-identifier">width</span>;
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public double</span> <span class="java-identifier">area</span>() {
+        <span class="java-keyword">return</span> <span class="java-identifier">length</span> * <span class="java-identifier">width</span>;
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">setColor</span>(<span class="java-type">String</span> <span class="java-identifier">color</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">color</span> = <span class="java-identifier">color</span>;
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">getName</span>() + <span class="java-literal">" color set to "</span> + <span class="java-identifier">color</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">resize</span>(<span class="java-type">double</span> <span class="java-identifier">factor</span>) {
+        <span class="java-keyword">this</span>.<span class="java-identifier">length</span> *= <span class="java-identifier">factor</span>;
+        <span class="java-keyword">this</span>.<span class="java-identifier">width</span> *= <span class="java-identifier">factor</span>;
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">getName</span>() + <span class="java-literal">" resized. New dimensions: "</span> + <span class="java-identifier">length</span> + <span class="java-literal">"x"</span> + <span class="java-identifier">width</span>);
+    }
+
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public</span> <span class="java-type">String</span> <span class="java-identifier">toString</span>() {
+        <span class="java-keyword">return</span> <span class="java-keyword">super</span>.<span class="java-identifier">toString</span>() + <span class="java-literal">" [length="</span> + <span class="java-identifier">length</span> + <span class="java-literal">", width="</span> + <span class="java-identifier">width</span> + <span class="java-literal">", color="</span> + <span class="java-identifier">color</span> + <span class="java-literal">", area="</span> + <span class="java-identifier">area</span>() + <span class="java-literal">"]"</span>;
+    }
+}
+
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Circle</span> <span class="java-identifier">myCircle</span> = <span class="java-keyword">new</span> <span class="java-type">Circle</span>(<span class="java-literal">"Red Circle"</span>, <span class="java-literal">5.0</span>);
+        <span class="java-type">Rectangle</span> <span class="java-identifier">myRectangle</span> = <span class="java-keyword">new</span> <span class="java-type">Rectangle</span>(<span class="java-literal">"Blue Rectangle"</span>, <span class="java-literal">4.0</span>, <span class="java-literal">6.0</span>);
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"--- Initial Shapes ---"</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">myCircle</span>);
+        <span class="java-identifier">myCircle</span>.<span class="java-identifier">draw</span>();
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">myRectangle</span>);
+        <span class="java-identifier">myRectangle</span>.<span class="java-identifier">draw</span>();
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"\n--- Modifying Shapes ---"</span>);
+        <span class="java-identifier">myCircle</span>.<span class="java-identifier">setColor</span>(<span class="java-literal">"Green"</span>);
+        <span class="java-identifier">myCircle</span>.<span class="java-identifier">resize</span>(<span class="java-literal">2.0</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">myCircle</span>);
+
+        <span class="java-identifier">myRectangle</span>.<span class="java-identifier">setColor</span>(<span class="java-literal">"Yellow"</span>);
+        <span class="java-identifier">myRectangle</span>.<span class="java-identifier">resize</span>(<span class="java-literal">0.5</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">myRectangle</span>);
+    }
+}
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We'll dedicate **20-25 minutes** to this lab. This will be a great way to differentiate abstract classes from interfaces."</p>
+    <p style="margin-top:10px;">**Trainer Action:** "After this lab, Participant #9 and Participant #10, please be ready to discuss when you would choose an abstract class over an interface, and vice-versa, based on your implementation."</p>
+  </div>
+    <!-- ==================== SLIDE 21: RUNTIME POLYMORPHISM ==================== -->
+  <div class="slide bg-dark v-center" id="s21">
+    <div class="slide-label">Dynamic Behavior</div>
+    <h2><span class="highlight">Runtime Polymorphism</span>: Dynamic Method Dispatch</h2>
+    <div class="accent-line"></div>
+    <div class="two-col-code">
+      <div>
+        <h3>What is Runtime Polymorphism?</h3>
+        <ul>
+          <li>Literally means "many forms" at runtime.</li>
+          <li>In Java, it's primarily achieved through <strong class="highlight2">method overriding</strong>.</li>
+          <li>It allows a program to decide which method implementation to call at <strong class="highlight">runtime</strong>, rather than at compile time.</li>
+          <li>This is also known as <strong class="highlight2">Dynamic Method Dispatch</strong>.</li>
+          <li>A superclass reference variable can refer to objects of its subclass. When an overridden method is called using this reference, the version of the method in the actual object type (subclass) is executed.</li>
+          <li>Example: An `Animal` reference variable holding a `Dog` object will call `Dog`'s `makeSound()` method if `Dog` overrides it.</li>
+        </ul>
+        <h3>Benefits:</h3>
+        <ul>
+          <li><strong class="highlight">Flexibility & Extensibility:</strong> Write code that can work with objects of various types related by inheritance. Easily add new subclasses without modifying existing code.</li>
+          <li><strong class="highlight2">Decoupling:</strong> Reduces the coupling between client code and specific implementations, allowing for more modular and maintainable systems.</li>
+          <li><strong class="highlight">Achieves "Plug-and-Play" Architecture:</strong> New components (subclasses) can "plug in" to an existing system by adhering to the superclass's contract.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:25px;">
+          <div class="insight-icon">💡</div>
+          <div class="insight-text">Runtime Polymorphism is a cornerstone of modern OOP, enabling highly flexible and adaptable software designs. It's why interfaces and abstract classes are so powerful.</div>
+        </div>
+      </div>
+      <div>
+        <h3>Example: Runtime Polymorphism</h3>
+        <div class="code-wrap">
+          <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+          <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">PolymorphismDemo.java</div></div>
+          <div class="code-body">
+<span class="java-keyword">class</span> <span class="java-type">Animal</span> {
+    <span class="java-keyword">public void</span> <span class="java-identifier">makeSound</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Animal makes a generic sound."</span>);
+    }
+}
+
+<span class="java-keyword">class</span> <span class="java-type">Dog</span> <span class="java-keyword">extends</span> <span class="java-type">Animal</span> {
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">makeSound</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Woof! Woof!"</span>);
+    }
+}
+
+<span class="java-keyword">class</span> <span class="java-type">Cat</span> <span class="java-keyword">extends</span> <span class="java-type">Animal</span> {
+    @<span class="java-type">Override</span>
+    <span class="java-keyword">public void</span> <span class="java-identifier">makeSound</span>() {
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"Meow."</span>);
+    }
+}
+
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="java-type">Animal</span> <span class="java-identifier">myAnimal</span>; <span class="java-comment">// Declare a reference of type Animal</span>
+
+        <span class="java-identifier">myAnimal</span> = <span class="java-keyword">new</span> <span class="java-type">Dog</span>(); <span class="java-comment">// Assign a Dog object</span>
+        <span class="java-identifier">myAnimal</span>.<span class="java-identifier">makeSound</span>(); <span class="java-comment">// Calls Dog's makeSound() at runtime</span>
+
+        <span class="java-identifier">myAnimal</span> = <span class="java-keyword">new</span> <span class="java-type">Cat</span>(); <span class="java-comment">// Assign a Cat object</span>
+        <span class="java-identifier">myAnimal</span>.<span class="java-identifier">makeSound</span>(); <span class="java-comment">// Calls Cat's makeSound() at runtime</span>
+
+        <span class="java-type">Animal</span>[] <span class="java-identifier">animals</span> = <span class="java-keyword">new</span> <span class="java-type">Animal</span>[<span class="java-literal">3</span>];
+        <span class="java-identifier">animals</span>[<span class="java-literal">0</span>] = <span class="java-keyword">new</span> <span class="java-type">Dog</span>();
+        <span class="java-identifier">animals</span>[<span class="java-literal">1</span>] = <span class="java-keyword">new</span> <span class="java-type">Cat</span>();
+        <span class="java-identifier">animals</span>[<span class="java-literal">2</span>] = <span class="java-keyword">new</span> <span class="java-type">Animal</span>();
+
+        <span class="java-keyword">for</span> (<span class="java-type">Animal</span> <span class="java-identifier">a</span> : <span class="java-identifier">animals</span>) {
+            <span class="java-identifier">a</span>.<span class="java-identifier">makeSound</span>(); <span class="java-comment">// Each calls its own specific implementation</span>
+        }
+    }
+}
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "The magic of polymorphism lies in how Java knows *which* `makeSound()` to call without us needing `if-else` checks on the object's type."</p>
+  </div>
+
+  <!-- ==================== SLIDE 22: Lab 2.4 - Runtime Polymorphism & String Handling ==================== -->
+  <div class="slide bg-lab v-center" id="s22">
+    <div class="slide-label">Lab Exercise</div>
+    <h2>Lab 2.4: <span class="highlight">Runtime Polymorphism & String Handling</span></h2>
+    <div class="accent-line"></div>
+    <p style="margin-bottom:20px;">Utilize polymorphism with your `Shape` hierarchy and benchmark string operations.</p>
+    <div class="two-col">
+      <div>
+        <h3>Task 1: Polymorphic Shape Array</h3>
+        <ul>
+          <li>Create a `Main` method.</li>
+          <li>Declare an array of `Shape` objects: `Shape[] shapes = new Shape[4];`.</li>
+          <li>Populate this array with instances of `Circle`, `Rectangle`, and potentially a new `Triangle` class (if you want to extend Lab 2.3). Make sure to include various concrete types.</li>
+          <li><strong class="highlight">Iterate through the `shapes` array</strong> using a for-each loop.</li>
+          <li>Inside the loop, for each `Shape` object, call its `area()` method and print the result. Observe how the correct `area()` implementation is called dynamically for each specific shape type.</li>
+        </ul>
+        <h3>Task 2: `instanceof` and Safe Casting</h3>
+        <ul>
+          <li>In the same loop, use the `instanceof` operator to check if a `Shape` object is an instance of `Circle` or `Rectangle`.</li>
+          <li>If it is a `Circle`, safely cast it back to a `Circle` object and call a method specific to `Circle` (e.g., set its color or resize it). This demonstrates <strong class="highlight2">downcasting</strong>.</li>
+          <li>Repeat for `Rectangle` if desired.</li>
+        </ul>
+        <h3>Task 3: `StringBuilder` Performance Benchmark</h3>
+        <ul>
+          <li>Write a method `benchmarkStringConcatenation(int iterations)` that uses `String` concatenation (`+` operator) to build a string in a loop (e.g., concatenating "Hello" `iterations` times). Measure its execution time.</li>
+          <li>Write another method `benchmarkStringBuilder(int iterations)` that uses `StringBuilder.append()` to achieve the same concatenation. Measure its execution time.</li>
+          <li>Call these methods in `main` with a high number of iterations (e.g., 10,000 or 100,000) and print the time difference. This will clearly illustrate the performance benefits of `StringBuilder`.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:15px;">
+          <div class="insight-icon">🛠️</div>
+          <div class="insight-text"><strong>Focus:</strong> Understanding dynamic method dispatch and when to use specific type checks, plus practical performance implications of `String` vs. `StringBuilder`.</div>
+        </div>
+      </div>
+      <div class="code-wrap">
+        <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+        <div class="code-titlebar"><div class="code-dot dot-r"></div><div class="code-dot dot-y"></div><div class="code-dot dot-g"></div><div class="code-filename">PolymorphicStringLab.java (Skeleton)</div></div>
+        <div class="code-body">
+<span class="java-comment">// Assume Shape, Circle, Rectangle, Drawable, Resizable from Lab 2.3 are available</span>
+<span class="java-comment">// Or copy them here for a self-contained example</span>
+
+<span class="java-keyword">public class</span> <span class="java-type">Main</span> {
+    <span class="java-keyword">public static void</span> <span class="java-identifier">main</span>(<span class="java-type">String</span>[] <span class="java-identifier">args</span>) {
+        <span class="comment">// Task 1: Polymorphic Shape Array</span>
+        <span class="java-type">Shape</span>[] <span class="java-identifier">shapes</span> = <span class="java-keyword">new</span> <span class="java-type">Shape</span>[<span class="java-literal">3</span>];
+        <span class="java-identifier">shapes</span>[<span class="java-literal">0</span>] = <span class="java-keyword">new</span> <span class="java-type">Circle</span>(<span class="java-literal">"Small Circle"</span>, <span class="java-literal">2.5</span>);
+        <span class="java-identifier">shapes</span>[<span class="java-literal">1</span>] = <span class="java-keyword">new</span> <span class="java-type">Rectangle</span>(<span class="java-literal">"Large Rect"</span>, <span class="java-literal">10.0</span>, <span class="java-literal">5.0</span>);
+        <span class="java-identifier">shapes</span>[<span class="java-literal">2</span>] = <span class="java-keyword">new</span> <span class="java-type">Circle</span>(<span class="java-literal">"Medium Circle"</span>, <span class="java-literal">4.0</span>);
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"--- Polymorphic Area Calculation ---"</span>);
+        <span class="java-keyword">for</span> (<span class="java-type">Shape</span> <span class="java-identifier">s</span> : <span class="java-identifier">shapes</span>) {
+            <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-identifier">s</span>.<span class="java-identifier">getName</span>() + <span class="java-literal">" Area: "</span> + <span class="java-identifier">s</span>.<span class="java-identifier">area</span>());
+
+            <span class="comment">// Task 2: instanceof and Downcasting</span>
+            <span class="java-keyword">if</span> (<span class="java-identifier">s</span> <span class="java-keyword">instanceof</span> <span class="java-type">Circle</span>) {
+                <span class="java-type">Circle</span> <span class="java-identifier">c</span> = (<span class="java-type">Circle</span>) <span class="java-identifier">s</span>; <span class="java-comment">// Safe downcast</span>
+                <span class="java-identifier">c</span>.<span class="java-identifier">setColor</span>(<span class="java-literal">"Magenta"</span>);
+            }
+        }
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"\n--- String Performance Benchmark ---"</span>);
+        <span class="java-type">int</span> <span class="java-identifier">iterations</span> = <span class="java-literal">10000</span>; <span class="java-comment">// Try with 100_000, 1_000_000</span>
+        <span class="java-type">long</span> <span class="java-identifier">stringConcatTime</span> = <span class="java-identifier">benchmarkStringConcatenation</span>(<span class="java-identifier">iterations</span>);
+        <span class="java-type">long</span> <span class="java-identifier">stringBuilderTime</span> = <span class="java-identifier">benchmarkStringBuilder</span>(<span class="java-identifier">iterations</span>);
+
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"String Concatenation took: "</span> + <span class="java-identifier">stringConcatTime</span> + <span class="java-literal">" ns"</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"StringBuilder took: "</span> + <span class="java-identifier">stringBuilderTime</span> + <span class="java-literal">" ns"</span>);
+        <span class="java-type">System</span>.<span class="java-identifier">out</span>.<span class="java-identifier">println</span>(<span class="java-literal">"StringBuilder was "</span> + (<span class="java-type">double</span>)<span class="java-identifier">stringConcatTime</span> / <span class="java-identifier">stringBuilderTime</span> + <span class="java-literal">"x faster."</span>);
+    }
+
+    <span class="java-keyword">public static long</span> <span class="java-identifier">benchmarkStringConcatenation</span>(<span class="java-type">int</span> <span class="java-identifier">iterations</span>) {
+        <span class="java-type">long</span> <span class="java-identifier">startTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-type">String</span> <span class="java-identifier">result</span> = <span class="java-literal">""</span>;
+        <span class="java-keyword">for</span> (<span class="java-type">int</span> <span class="java-identifier">i</span> = <span class="java-literal">0</span>; <span class="java-identifier">i</span> <span class="java-operator"><</span> <span class="java-identifier">iterations</span>; <span class="java-identifier">i</span>++) {
+            <span class="java-identifier">result</span> += <span class="java-literal">"a"</span>;
+        }
+        <span class="java-type">long</span> <span class="java-identifier">endTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-keyword">return</span> <span class="java-identifier">endTime</span> - <span class="java-identifier">startTime</span>;
+    }
+
+    <span class="java-keyword">public static long</span> <span class="java-identifier">benchmarkStringBuilder</span>(<span class="java-type">int</span> <span class="java-identifier">iterations</span>) {
+        <span class="java-type">long</span> <span class="java-identifier">startTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-type">StringBuilder</span> <span class="java-identifier">sb</span> = <span class="java-keyword">new</span> <span class="java-type">StringBuilder</span>();
+        <span class="java-keyword">for</span> (<span class="java-type">int</span> <span class="java-identifier">i</span> = <span class="java-literal">0</span>; <span class="java-identifier">i</span> <span class="java-operator"><</span> <span class="java-identifier">iterations</span>; <span class="java-identifier">i</span>++) {
+            <span class="java-identifier">sb</span>.<span class="java-identifier">append</span>(<span class="java-literal">"a"</span>);
+        }
+        <span class="java-identifier">sb</span>.<span class="java-identifier">toString</span>(); <span class="java-comment">// Final toString() call</span>
+        <span class="java-type">long</span> <span class="java-identifier">endTime</span> = <span class="java-type">System</span>.<span class="java-identifier">nanoTime</span>();
+        <span class="java-keyword">return</span> <span class="java-identifier">endTime</span> - <span class="java-identifier">startTime</span>;
+    }
+}
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "We'll dedicate **25-30 minutes** to this lab. This is where you really see polymorphism in action and understand real-world performance differences."</p>
+  </div>
+    <!-- ==================== SLIDE 23: BEST PRACTICES ==================== -->
+  <div class="slide bg-dark v-center" id="s23">
+    <div class="slide-label">Production Ready Code</div>
+    <h2>OOP <span class="highlight">Best Practices</span> & Clean Code Principles</h2>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div>
+        <h3>1. DRY (Don't Repeat Yourself)</h3>
+        <ul>
+          <li>Avoid code duplication. Use inheritance, composition, and helper methods.</li>
+          <li>Example: Constructor chaining with `this()` and `super()` helps reduce repetitive initialization code.</li>
+        </ul>
+        <h3>2. SOLID Principles</h3>
+        <p>A set of five design principles intended to make software designs more understandable, flexible, and maintainable.</p>
+        <ul>
+          <li><strong class="highlight2">S</strong>ingle Responsibility Principle (SRP)</li>
+          <li><strong class="highlight">O</strong>pen/Closed Principle (OCP)</li>
+          <li><strong class="highlight2">L</strong>iskov Substitution Principle (LSP)</li>
+          <li><strong class="highlight">I</strong>nterface Segregation Principle (ISP)</li>
+          <li><strong class="highlight2">D</strong>ependency Inversion Principle (DIP)</li>
+        </ul>
+        <h3>3. Encapsulate Everything</h3>
+        <ul>
+          <li>Keep fields `private` and provide access through `public` getters and setters.</li>
+          <li>This protects internal state and allows for validation.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>4. Favor Composition Over Inheritance</h3>
+        <ul>
+          <li>Inheritance creates tight coupling. Composition (using objects as fields) offers more flexibility.</li>
+          <li>"Has-a" relationships (`Car has an Engine`) are often better as composition than "is-a" (`Car is a Vehicle`).</li>
+        </ul>
+        <h3>5. Use Interfaces for Contracts</h3>
+        <ul>
+          <li>Define behavior contracts with interfaces. This allows for flexible implementations and polymorphic code.</li>
+          <li>Promotes loose coupling between modules.</li>
+        </ul>
+        <h3>6. Write Readable, Maintainable Code</h3>
+        <ul>
+          <li>Meaningful variable/method names.</li>
+          <li>Consistent formatting (use an IDE's formatter).</li>
+          <li>Clear comments for complex logic (but aim for self-documenting code).</li>
+          <li>Break down large methods into smaller, focused ones.</li>
+        </ul>
+        <div class="insight-box" style="margin-top:25px;">
+          <div class="insight-icon">💡</div>
+          <div class="insight-text">Adhering to these principles leads to more robust, scalable, and easier-to-debug applications. They're not just theoretical; they're essential for production-grade code.</div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:20px;">**Trainer Note:** "These principles are the real difference between just writing code and writing good, production-ready code. We'll touch more on SOLID in later phases."</p>
+  </div>
+
+  <!-- ==================== SLIDE 24: HOME ASSIGNMENT & Q&A ==================== -->
+  <div class="slide bg-hero center" id="s24">
+    <div class="deck-title" style="font-size: 3.5rem;"><span class="highlight">Home Assignment</span> & Q&A</div>
+    <div class="accent-line"></div>
+    <h3 style="margin-top:20px;">Build a Mini OOP Model</h3>
+    <p style="max-width: 700px; margin: 0 auto 30px auto; font-size: 1.1rem; color: var(--light);">
+      Your task is to apply everything we've learned today to build a small, well-structured OOP model.
+    </p>
+    <div class="card-grid" style="max-width: 800px;">
+      <div class="card">
+        <div class="card-icon" style="color:var(--accent);">&#127969;</div>
+        <h3>Model a Household</h3>
+        <p>Create classes like `Room`, `Appliance`, `Furniture`. Think about properties (size, color, powerConsumption) and behaviors (turnOn, clean, move). Use constructors, access specifiers, `this`, `static`, etc.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="color:var(--accent2);">&#128100;</div>
+        <h3>Implement Inheritance</h3>
+        <p>Create a hierarchy. E.g., `Appliance` (base) -> `Television`, `Refrigerator`. Override `toString()` methods. Use `super()` in constructors.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="color:#F1FA8C;">&#128220;</div>
+        <h3>Integrate Interfaces</h3>
+        <p>Define interfaces like `Switchable` (for appliances that can be turned on/off) or `Cleanable` (for items that can be cleaned). Implement them in relevant classes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon" style="color:#8BE9FD;">&#128187;</div>
+        <h3>Demonstrate Polymorphism</h3>
+        <p>In a `main` method, create an array of `Appliance` (or a higher-level class) and iterate through it, calling common methods. Use `instanceof` and safe casting if appropriate.</p>
+      </div>
+    </div>
+    <p style="font-size:1.1rem; color:var(--light); margin-top:30px;">
+      Commit your code to a Git repository and push it to a remote (e.g., GitHub, GitLab). Share the repository link!
+    </p>
+    <p style="font-size:0.9rem; color:var(--muted); margin-top:20px;">**Trainer Note:** "This assignment is your chance to synthesize all the OOP concepts. Focus on clean code, proper encapsulation, and demonstrating the principles."</p>
+  </div>
+
+  <!-- ==================== SLIDE 25: THANK YOU & END ==================== -->
+  <div class="slide bg-hero center" id="s25">
+    <div class="deck-title">Thank You!</div>
+    <div class="deck-subtitle">Any Questions? Let's connect on future learning.</div>
+    <div class="accent-line"></div>
+    <div class="deck-meta">Phase 1: Core Java | Day 2: Object-Oriented Programming</div>
+    <p style="font-size:0.9rem; color:var(--muted); margin-top:20px;">**Trainer Action:** "Open the floor for any final questions about today's topics or the assignment."</p>
+    <p style="font-size:0.9rem; color:var(--muted); margin-top:10px;">**Trainer Note:** "Excellent work today, everyone. You've now got a solid foundation in OOP. I'm excited to see your home assignments!"</p>
+  </div>
+  
+ </div> <!-- End of.deck div -->
+
+<!-- Footer Navigation -->
+<div class="footer-nav">
+  <button class="nav-button" id="prevSlide" onclick="changeSlide(-1)" disabled>&#8592; Previous</button>
+  <div id="slideCounter" style="color: var(--muted); font-size: 0.9rem; font-family: 'Montserrat', sans-serif; font-weight: 600; display: flex; align-items: center; justify-content: center; min-width: 60px;"></div>
+  <button class="nav-button" id="nextSlide" onclick="changeSlide(1)">Next &#8594;</button>
+</div>
+
+<!-- Utility Buttons (e.g., Toggle Fullscreen) -->
+<div class="utility-buttons">
+  <button class="utility-button" onclick="toggleFullscreen()">&#9970; Fullscreen</button>
+</div>
+
+<script>
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let breakTimerInterval; // To store interval for break timer
+
+  // Function to show a specific slide
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+    });
+    slides[index].classList.add('active');
+
+    // Update navigation buttons
+    document.getElementById('prevSlide').disabled = (index === 0);
+    document.getElementById('nextSlide').disabled = (index === totalSlides - 1);
+
+    // Update slide counter
+    document.getElementById('slideCounter').textContent = `${index + 1} / ${totalSlides}`;
+
+    // Handle break timer if it's the break slide
+    if (slides[index].id === 's14') {
+      startBreakTimer(10 * 60); // 10 minutes in seconds
+    } else {
+      stopBreakTimer();
+    }
+
+    // Highlight current agenda item if agenda slide is active
+    if (slides[index].id === 's2') {
+        const agendaItems = document.querySelectorAll('.sched-item');
+        agendaItems.forEach(item => item.classList.remove('current'));
+        // Logic to dynamically highlight current topic based on time, or manually
+        // For simplicity, let's manually highlight the welcome/recap for now
+        // A more advanced system would track time and current topic.
+        document.getElementById('agenda-item-0').classList.add('current');
+    }
+  }
+
+  // Function to change slide
+  function changeSlide(direction) {
+    currentSlideIndex += direction;
+    if (currentSlideIndex < 0) currentSlideIndex = 0;
+    if (currentSlideIndex >= totalSlides) currentSlideIndex = totalSlides - 1;
+    showSlide(currentSlideIndex);
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+      changeSlide(1);
+    } else if (event.key === 'ArrowLeft') {
+      changeSlide(-1);
+    }
+  });
+
+  // Copy code functionality
+  function copyCode(button) {
+    const codeBody = button.nextElementSibling.nextElementSibling; // Get the code-body div
+    const range = document.createRange();
+    range.selectNode(codeBody);
+    window.getSelection().removeAllRanges(); // Clear current selection
+    window.getSelection().addRange(range); // Select the code
+    try {
+      document.execCommand('copy');
+      button.textContent = 'Copied!';
+    } catch (err) {
+      button.textContent = 'Failed to copy!';
+    }
+    window.getSelection().removeAllRanges(); // Deselect
+    setTimeout(() => {
+      button.textContent = 'Copy Code';
+    }, 2000);
+  }
+
+  // Toggle Fullscreen
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  // Generic function to toggle visibility of answer boxes
+  function toggleAnswer(answerBoxId) {
+    const answerBox = document.getElementById(answerBoxId);
+    if (answerBox.style.display === 'none' || answerBox.style.display === '') {
+      answerBox.style.display = 'block';
+    } else {
+      answerBox.style.display = 'none';
+    }
+  }
+
+  // Break Timer functionality
+  function startBreakTimer(duration) {
+    let timer = duration, minutes, seconds;
+    const display = document.getElementById('breakTimer1'); // Assuming slide s14 has this ID
+    if (!display) return;
+
+    if (breakTimerInterval) clearInterval(breakTimerInterval); // Clear any existing timer
+
+    breakTimerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10? "0" + minutes : minutes;
+        seconds = seconds < 10? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = 0; // Prevent negative countdown
+            display.textContent = "00:00";
+            clearInterval(breakTimerInterval);
+            alert("Break is over! Let's resume."); // Optional alert
+            // Optionally, auto-advance slide after break
+            // changeSlide(1);
+        }
+    }, 1000);
+  }
+
+  function stopBreakTimer() {
+    if (breakTimerInterval) {
+      clearInterval(breakTimerInterval);
+      breakTimerInterval = null;
+    }
+    const display = document.getElementById('breakTimer1');
+    if (display) display.textContent = "10:00"; // Reset if desired
+  }
+
+  // Initialize first slide on load
+  showSlide(currentSlideIndex);
+</script>
+
+</body>
+</html> 

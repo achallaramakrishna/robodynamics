@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Domain Assignments — 30-Day Java Full Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#030711;
+      --panel:#0c1121;
+      --card:#111a33;
+      --accent:#38bdf8;
+      --accent2:#f97316;
+      --text:#f4f7ff;
+      --muted:#94a3b8;
+      --border:#1f2a44;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:'Space Grotesk',sans-serif;
+      background:linear-gradient(160deg,#01030a,#0b1d33 60%,#0f274a);
+      color:var(--text);
+    }
+    main {
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px 80px;
+    }
+    header {
+      margin-bottom:30px;
+    }
+    header h1 {
+      margin:0;
+      font-size:2.8rem;
+    }
+    header p {
+      margin:10px 0 0;
+      color:var(--muted);
+      max-width:780px;
+    }
+    section {
+      margin-bottom:28px;
+    }
+    h2 {
+      font-size:1.6rem;
+      margin-bottom:6px;
+      color:var(--accent2);
+    }
+    p.lead {
+      margin:0;
+      color:var(--muted);
+    }
+    ol {
+      padding:0;
+      margin:24px 0 0;
+      counter-reset:assignment;
+      list-style:none;
+      display:grid;
+      gap:20px;
+    }
+    li {
+      position:relative;
+      padding:20px;
+      border-radius:20px;
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:0 20px 40px rgba(0,0,0,0.55);
+    }
+    li::before {
+      counter-increment:assignment;
+      content:counter(assignment);
+      position:absolute;
+      top:-12px;
+      left:20px;
+      padding:4px 12px;
+      border-radius:999px;
+      background:var(--accent);
+      color:#030712;
+      font-weight:600;
+      font-size:0.85rem;
+    }
+    li h3 {
+      margin:0 0 6px;
+      font-size:1.2rem;
+      color:var(--accent);
+    }
+    li p {
+      margin:0 0 10px;
+      color:var(--text);
+      line-height:1.5;
+    }
+    .metadata {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+    .metadata span {
+      padding:3px 10px;
+      border-radius:999px;
+      background:rgba(56,189,248,0.15);
+    }
+    footer {
+      margin-top:40px;
+      border-top:1px solid var(--border);
+      padding-top:18px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>30-Day Banking Domain Assignments</h1>
+      <p>Each assignment maps to the core curriculum you provided (Core Java through Spring/React stacks, Git, and testing) minus infrastructure. All relate to Broadridge-style workflows (accounts, transactions, compliance, scorecards).</p>
+    </header>
+
+    <section>
+      <h2>Assignment Instructions</h2>
+      <p class="lead">Deliver each assignment as its own Git branch with descriptive commit(s), unit tests where applicable, and a short README summarizing the business rule and how to exercise the feature.</p>
+    </section>
+
+    <section>
+      <ol>
+        <li>
+          <h3>Account Onboarding CLI</h3>
+          <p>Build a CLI that registers retail clients with `Customer`, `PrimaryAccount`, and `Address` classes. Persist data to an in-memory map and log every created account.</p>
+          <div class="metadata"><span>Collections</span><span>Object Modeling</span><span>CLI</span></div>
+        </li>
+        <li>
+          <h3>Transaction Balance Checker</h3>
+          <p>Create a service that stores transactions in a `List<Transaction>` and throws `InsufficientFundsException` when debit exceeds balance. Include unit tests showing the exception path.</p>
+          <div class="metadata"><span>Exception Handling</span><span>JUnit</span></div>
+        </li>
+        <li>
+          <h3>Customer Statement Generator</h3>
+          <p>Design an immutable `StatementLine` record. Build a `StatementService` that sorts lines by timestamp, groups by transaction type, and formats totals.</p>
+          <div class="metadata"><span>Collections</span><span>Sorting</span><span>Java 17</span></div>
+        </li>
+        <li>
+          <h3>Git-Based Code Review Workflow</h3>
+          <p>Document in Markdown how to create feature branches, commit messages referencing Jira-style IDs, and open a pull request for code reviewing a banking feature. Include `git` commands and templates.</p>
+          <div class="metadata"><span>Git</span><span>GitHub</span><span>Documentation</span></div>
+        </li>
+        <li>
+          <h3>Account Authorization Interface</h3>
+          <p>Define a `BankOperation` interface with methods `authorize()` and `execute()`. Implement `FundTransferOperation` and `BillPaymentOperation`, then register them with a `BatchProcessor`.</p>
+          <div class="metadata"><span>Interfaces</span><span>Polymorphism</span></div>
+        </li>
+        <li>
+          <h3>Exception Observation Dashboard</h3>
+          <p>Capture exceptions during transaction processing, categorize by type (checked/unchecked), and log metadata. Provide a simple HTML report listing counts per exception class.</p>
+          <div class="metadata"><span>Exception Handling</span><span>Collections</span></div>
+        </li>
+        <li>
+          <h3>Generics-Based Cache</h3>
+          <p>Implement a thread-safe `GenericCache<K,V>` backed by `ConcurrentHashMap`. Require `V` to extend `Cacheable` and provide `putIfAbsent`/`computeIfPresent` helpers.</p>
+          <div class="metadata"><span>Generics</span><span>Concurrency</span></div>
+        </li>
+        <li>
+          <h3>Props & Config Loader</h3>
+          <p>Load `application.properties` with JDBC credentials and API keys. Provide defaults, allow overrides via environment variables, and surface values through a `Config` singleton.</p>
+          <div class="metadata"><span>Properties</span><span>Singleton</span></div>
+        </li>
+        <li>
+          <h3>SQL Schema for Ledger</h3>
+          <p>Design `accounts`, `ledgers`, and `transactions` tables with PK/FK constraints. Share the DDL script plus sample INSERT statements demonstrating constraints.</p>
+          <div class="metadata"><span>DDL</span><span>Integrity</span><span>SQL</span></div>
+        </li>
+        <li>
+          <h3>JOIN-Based Balance Report</h3>
+          <p>Write SQL that joins accounts with transactions to compute daily balances, highlighting overdrafts. Include a view definition or stored query for analytics.</p>
+          <div class="metadata"><span>Advanced SQL</span><span>Reporting</span></div>
+        </li>
+        <li>
+          <h3>PL/SQL Alert Procedure</h3>
+          <p>Implement a PL/SQL procedure that scans the ledger, detects suspicious `amount > 10000` transfers, and inserts rows into an `alerts` table.</p>
+          <div class="metadata"><span>PL/SQL</span><span>Triggers</span></div>
+        </li>
+        <li>
+          <h3>JPA Entities & Relationships</h3>
+          <p>Model `Customer`, `Account`, and `Transaction` entities with `OneToMany`/`ManyToOne` relationships. Seed data using `CommandLineRunner`.</p>
+          <div class="metadata"><span>JPA</span><span>Spring Boot</span></div>
+        </li>
+        <li>
+          <h3>Spring Boot REST API</h3>
+          <p>Expose endpoints for `/accounts`, `/transactions`, `/alerts`. Use DTOs and validation annotations. Return meaningful error responses for validation or not-found cases.</p>
+          <div class="metadata"><span>Spring MVC</span><span>Validation</span></div>
+        </li>
+        <li>
+          <h3>Spring Data JPA Queries</h3>
+          <p>Implement repository methods using method names and `@Query` to find high-value transactions and get account balances via projections.</p>
+          <div class="metadata"><span>Spring Data</span><span>Repositories</span></div>
+        </li>
+        <li>
+          <h3>Spring Security Layer</h3>
+          <p>Secure APIs with HTTP Basic or JWT, restrict transaction creation to `ROLE_TELLER`, and return `403` for unauthorized attempts. Provide test coverage for secured endpoints.</p>
+          <div class="metadata"><span>Security</span><span>Roles</span></div>
+        </li>
+        <li>
+          <h3>Frontend React Banking Dashboard</h3>
+          <p>Build a React app that hits `/accounts` and `/transactions`, displays balances, and highlights alerts. Use hooks for state and axios for REST calls.</p>
+          <div class="metadata"><span>React</span><span>Hooks</span></div>
+        </li>
+        <li>
+          <h3>React Form & Validation</h3>
+          <p>Create a transfer form with React Router, validate fields (amount > 0, account numbers required) and show inline error messages before submitting.</p>
+          <div class="metadata"><span>Forms</span><span>Validation</span></div>
+        </li>
+        <li>
+          <h3>Redux Toolkit State</h3>
+          <p>Use Redux Toolkit slices to store accounts + alerts. Connect a component to display live alert counts.</p>
+          <div class="metadata"><span>Redux</span><span>State</span></div>
+        </li>
+        <li>
+          <h3>E2E Story Flow</h3>
+          <p>Describe an end-to-end scenario: onboarding, transfer, alert creation, REST call, and React UI update. Provide sequence diagrams or textual steps.</p>
+          <div class="metadata"><span>Integration</span><span>Story</span></div>
+        </li>
+        <li>
+          <h3>JUnit 5 Test Suite</h3>
+          <p>Write unit tests for the service layer covering success, exception, and boundary cases. Use `@Nested`, `@DisplayName`, and parameterized tests for coverage.</p>
+          <div class="metadata"><span>JUnit 5</span><span>TDD</span></div>
+        </li>
+        <li>
+          <h3>GitHub Issue Tracker</h3>
+          <p>Create issue templates for `bug`, `feature`, and `research`. Link them to sample assignments and show a workflow that ties issues to commits.</p>
+          <div class="metadata"><span>GitHub</span><span>Templates</span></div>
+        </li>
+      </ol>
+    </section>
+
+    <footer>Students should submit each assignment with a short demo video or README showing how the banking scenario works plus any relevant SQL scripts/tests.</footer>
+  </main>
+</body>
+</html>

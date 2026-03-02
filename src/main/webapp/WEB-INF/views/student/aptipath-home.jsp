@@ -363,6 +363,7 @@
               </c:otherwise>
             </c:choose>
           </c:if>
+          <a class="btn btn-secondary" href="${pageContext.request.contextPath}${intakeUrl}">Update Profile and Grade</a>
         </div>
       </div>
       <div class="hero-kpi">
@@ -419,6 +420,17 @@
           </div>
         </div>
       </details>
+    </c:if>
+
+    <c:if test="${param.intakeSaved eq '1'}">
+      <section class="panel reveal delay-1" style="margin-top:12px;">
+        <p class="muted" style="margin:0;color:#166534;font-weight:700;">
+          Student profile saved successfully.
+          <c:if test="${param.gradeChanged eq '1'}">
+            Grade updated. Any in-progress test was reset. Start test again to get grade-specific questions.
+          </c:if>
+        </p>
+      </section>
     </c:if>
 
     <div class="main-grid">
@@ -513,6 +525,7 @@
               <a class="btn btn-secondary" href="${pageContext.request.contextPath}/platform/modules">Back to Modules</a>
             </c:otherwise>
           </c:choose>
+          <a class="btn btn-secondary" href="${pageContext.request.contextPath}${intakeUrl}">Update Profile and Grade</a>
         </div>
       </section>
     </div>

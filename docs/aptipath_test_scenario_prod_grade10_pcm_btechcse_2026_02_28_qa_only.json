@@ -1,0 +1,1130 @@
+﻿{
+    "scenario":  {
+                     "source":  "production",
+                     "moduleCode":  "APTIPATH",
+                     "assessmentVersion":  "v3",
+                     "prefill":  {
+                                     "studentIntakeGradeCode":  "10",
+                                     "studentIntakeStreamCode":  "PCM",
+                                     "studentIntakeProgramCode":  "BTECH_CSE"
+                                 },
+                     "academicStage":  "SECONDARY_10_12",
+                     "requiredSectionCoverage":  {
+                                                     "CORE_APTITUDE":  12,
+                                                     "APPLIED_CHALLENGE":  8,
+                                                     "INTEREST_WORK":  6,
+                                                     "VALUES_MOTIVATION":  4,
+                                                     "LEARNING_BEHAVIOR":  4,
+                                                     "AI_READINESS":  4,
+                                                     "CAREER_REALITY":  4,
+                                                     "STEM_FOUNDATION":  7,
+                                                     "BIOLOGY_FOUNDATION":  5,
+                                                     "GENERAL_AWARENESS":  3,
+                                                     "REASONING_IQ":  3
+                                                 },
+                     "generatedQuestionCount":  42,
+                     "generatedSectionCoverage":  {
+                                                      "CORE_APTITUDE":  12,
+                                                      "VALUES_MOTIVATION":  4,
+                                                      "APPLIED_CHALLENGE":  8,
+                                                      "INTEREST_WORK":  6,
+                                                      "LEARNING_BEHAVIOR":  4,
+                                                      "AI_READINESS":  4,
+                                                      "CAREER_REALITY":  4
+                                                  }
+                 },
+    "qa":  [
+               {
+                   "index":  1,
+                   "questionCode":  "AP3_CORE_083",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "If a strategy is data-driven, it is testable. This strategy is data-driven. Therefore:",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "This strategy is untestable"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Data and testing are unrelated"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Only experts can test it"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "This strategy is testable"
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "This strategy is testable"
+               },
+               {
+                   "index":  2,
+                   "questionCode":  "AP3_VAL_007",
+                   "sectionCode":  "VALUES_MOTIVATION",
+                   "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Quick comfort even if learning quality drops"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Decision based only on what others prefer"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Avoid difficult choices and postpone commitment"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Long-term mastery with disciplined consistency"
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "Long-term mastery with disciplined consistency"
+               },
+               {
+                   "index":  3,
+                   "questionCode":  "AP3_VAL_013",
+                   "sectionCode":  "VALUES_MOTIVATION",
+                   "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Quick comfort even if learning quality drops"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Long-term mastery with disciplined consistency"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Decision based only on what others prefer"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Avoid difficult choices and postpone commitment"
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Long-term mastery with disciplined consistency"
+               },
+               {
+                   "index":  4,
+                   "questionCode":  "AP3_VAL_019",
+                   "sectionCode":  "VALUES_MOTIVATION",
+                   "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Quick comfort even if learning quality drops"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Decision based only on what others prefer"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Avoid difficult choices and postpone commitment"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Long-term mastery with disciplined consistency"
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "Long-term mastery with disciplined consistency"
+               },
+               {
+                   "index":  5,
+                   "questionCode":  "AP3_VAL_025",
+                   "sectionCode":  "VALUES_MOTIVATION",
+                   "questionText":  "Values check: When shortcuts are available but reduce understanding, what do you choose?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Quick comfort even if learning quality drops"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Long-term mastery with disciplined consistency"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Decision based only on what others prefer"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Avoid difficult choices and postpone commitment"
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Long-term mastery with disciplined consistency"
+               },
+               {
+                   "index":  6,
+                   "questionCode":  "AP3X_CA_0064",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: If 15 items cost 555 rupees, what is the cost of 12 items?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "481"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "518"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "444"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "407"
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "444"
+               },
+               {
+                   "index":  7,
+                   "questionCode":  "AP3X_CA_0065",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: A quantity is 159. After a 15% increase, what is the new value?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "183"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "175"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "199"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "191"
+                                   }
+                               ],
+                   "answerCode":  "A",
+                   "answer":  "183"
+               },
+               {
+                   "index":  8,
+                   "questionCode":  "AP3X_CA_0066",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: Find the next number in the sequence: 14, 18, 22, 26, ?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "31"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "29"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "30"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "32"
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "30"
+               },
+               {
+                   "index":  9,
+                   "questionCode":  "AP3X_CA_0067",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: Choose the best completion: \u0027He was known for his ____ explanation, so everyone understood.\u0027",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "vague"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "silent"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "random"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "clear"
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "clear"
+               },
+               {
+                   "index":  10,
+                   "questionCode":  "AP3X_CA_0068",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: If 24 items cost 360 rupees, what is the cost of 11 items?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "150"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "195"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "180"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "165"
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "165"
+               },
+               {
+                   "index":  11,
+                   "questionCode":  "AP3X_CA_0069",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: A quantity is 316. After a 5% increase, what is the new value?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "316"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "332"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "363"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "348"
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "332"
+               },
+               {
+                   "index":  12,
+                   "questionCode":  "AP3X_CA_0070",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: Find the next number in the sequence: 26, 28, 30, 32, ?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "34"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "36"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "33"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "35"
+                                   }
+                               ],
+                   "answerCode":  "A",
+                   "answer":  "34"
+               },
+               {
+                   "index":  13,
+                   "questionCode":  "AP3X_CA_0071",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: Choose the word closest in meaning to \u0027resilient\u0027.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Fragile"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Adaptable"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Uncertain"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Rigid"
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Adaptable"
+               },
+               {
+                   "index":  14,
+                   "questionCode":  "AP3X_CA_0072",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: If 25 items cost 675 rupees, what is the cost of 19 items?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "540"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "567"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "513"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "486"
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "513"
+               },
+               {
+                   "index":  15,
+                   "questionCode":  "AP3X_CA_0073",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: A quantity is 630. After a 35% increase, what is the new value?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "914"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "850"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "819"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "882"
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "850"
+               },
+               {
+                   "index":  16,
+                   "questionCode":  "AP3X_CA_0074",
+                   "sectionCode":  "CORE_APTITUDE",
+                   "questionText":  "Core aptitude: Find the next number in the sequence: 8, 15, 22, 29, ?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "37"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "35"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "36"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "38"
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "36"
+               },
+               {
+                   "index":  17,
+                   "questionCode":  "AP3X_AC_0011",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Wait for motivation."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Study only when tests are near."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Make a bigger plan."
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  18,
+                   "questionCode":  "AP3X_AC_0015",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Study only when tests are near."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Make a bigger plan."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Wait for motivation."
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  19,
+                   "questionCode":  "AP3X_AC_0019",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Study only when tests are near."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Wait for motivation."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Make a bigger plan."
+                                   }
+                               ],
+                   "answerCode":  "A",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  20,
+                   "questionCode":  "AP3X_AC_0023",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Study only when tests are near."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Make a bigger plan."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Wait for motivation."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  21,
+                   "questionCode":  "AP3X_AC_0027",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Make a bigger plan."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Wait for motivation."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Study only when tests are near."
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  22,
+                   "questionCode":  "AP3X_AC_0031",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Wait for motivation."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Make a bigger plan."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Study only when tests are near."
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  23,
+                   "questionCode":  "AP3X_AC_0035",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Wait for motivation."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Study only when tests are near."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Make a bigger plan."
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  24,
+                   "questionCode":  "AP3X_AC_0039",
+                   "sectionCode":  "APPLIED_CHALLENGE",
+                   "questionText":  "Applied challenge: Your study plan keeps failing after day 3. What should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Make a bigger plan."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Study only when tests are near."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Wait for motivation."
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "Reduce scope, lock daily minimum targets, and track completion visibly."
+               },
+               {
+                   "index":  25,
+                   "questionCode":  "AP3X_IW_0026",
+                   "sectionCode":  "INTEREST_WORK",
+                   "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  26,
+                   "questionCode":  "AP3X_IW_0030",
+                   "sectionCode":  "INTEREST_WORK",
+                   "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  27,
+                   "questionCode":  "AP3X_IW_0034",
+                   "sectionCode":  "INTEREST_WORK",
+                   "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  28,
+                   "questionCode":  "AP3X_IW_0038",
+                   "sectionCode":  "INTEREST_WORK",
+                   "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  29,
+                   "questionCode":  "AP3X_IW_0042",
+                   "sectionCode":  "INTEREST_WORK",
+                   "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  30,
+                   "questionCode":  "AP3X_IW_0046",
+                   "sectionCode":  "INTEREST_WORK",
+                   "questionText":  "Interest and work: I prefer tasks where I can explain ideas to others clearly.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  31,
+                   "questionCode":  "AP3X_LB_0037",
+                   "sectionCode":  "LEARNING_BEHAVIOR",
+                   "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  32,
+                   "questionCode":  "AP3X_LB_0041",
+                   "sectionCode":  "LEARNING_BEHAVIOR",
+                   "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  33,
+                   "questionCode":  "AP3X_LB_0045",
+                   "sectionCode":  "LEARNING_BEHAVIOR",
+                   "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  34,
+                   "questionCode":  "AP3X_LB_0049",
+                   "sectionCode":  "LEARNING_BEHAVIOR",
+                   "questionText":  "Learning behavior: I maintain an error log and use it for improvement.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  35,
+                   "questionCode":  "AP3X_AR_0023",
+                   "sectionCode":  "AI_READINESS",
+                   "questionText":  "AI readiness: If two AI tools disagree on the same problem, what should you do?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Pick randomly."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Avoid the topic completely."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Choose the longer answer."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Compare steps, validate with authoritative material, and resolve logically."
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "Compare steps, validate with authoritative material, and resolve logically."
+               },
+               {
+                   "index":  36,
+                   "questionCode":  "AP3X_AR_0024",
+                   "sectionCode":  "AI_READINESS",
+                   "questionText":  "AI readiness: When AI gives an answer, what is the best academic practice?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Use it directly because AI is always right."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Skip checking if it looks fluent."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Verify with textbook steps or trusted sources before using it."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Copy it without understanding."
+                                   }
+                               ],
+                   "answerCode":  "C",
+                   "answer":  "Verify with textbook steps or trusted sources before using it."
+               },
+               {
+                   "index":  37,
+                   "questionCode":  "AP3X_AR_0025",
+                   "sectionCode":  "AI_READINESS",
+                   "questionText":  "AI readiness: Best way to prompt AI for exam preparation?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Generate random content without context."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Use very vague prompts."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Ask only for final answers."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Ask for stepwise reasoning, alternate methods, and common mistakes."
+                                   }
+                               ],
+                   "answerCode":  "D",
+                   "answer":  "Ask for stepwise reasoning, alternate methods, and common mistakes."
+               },
+               {
+                   "index":  38,
+                   "questionCode":  "AP3X_AR_0026",
+                   "sectionCode":  "AI_READINESS",
+                   "questionText":  "AI readiness: How should you use AI for writing assignments?",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Paste AI output unchanged."
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Use it for structure ideas, then write in your own words with citations."
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Use AI to bypass learning."
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Avoid references entirely."
+                                   }
+                               ],
+                   "answerCode":  "B",
+                   "answer":  "Use it for structure ideas, then write in your own words with citations."
+               },
+               {
+                   "index":  39,
+                   "questionCode":  "AP3X_CR_0032",
+                   "sectionCode":  "CAREER_REALITY",
+                   "questionText":  "Career reality: I can handle uncertainty while still taking focused action.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  40,
+                   "questionCode":  "AP3X_CR_0035",
+                   "sectionCode":  "CAREER_REALITY",
+                   "questionText":  "Career reality: I am ready to invest sustained effort for difficult career goals.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  41,
+                   "questionCode":  "AP3X_CR_0036",
+                   "sectionCode":  "CAREER_REALITY",
+                   "questionText":  "Career reality: I can handle uncertainty while still taking focused action.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               },
+               {
+                   "index":  42,
+                   "questionCode":  "AP3X_CR_0039",
+                   "sectionCode":  "CAREER_REALITY",
+                   "questionText":  "Career reality: I am ready to invest sustained effort for difficult career goals.",
+                   "options":  [
+                                   {
+                                       "code":  "A",
+                                       "label":  "Strongly agree"
+                                   },
+                                   {
+                                       "code":  "B",
+                                       "label":  "Agree"
+                                   },
+                                   {
+                                       "code":  "C",
+                                       "label":  "Not sure"
+                                   },
+                                   {
+                                       "code":  "D",
+                                       "label":  "Disagree"
+                                   }
+                               ],
+                   "answerCode":  "NULL",
+                   "answer":  ""
+               }
+           ]
+}

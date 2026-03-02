@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3 Session Plan — Exception Handling, Collections &amp; Generics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Source+Code+Pro:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: #0d1117;
+      --border: #1f2937;
+      --accent: #38bdf8;
+      --accent2: #7dd3fc;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --card: rgba(255,255,255,0.04);
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+    body {
+      margin:0;
+      font-family:'Lato',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    main {
+      max-width:1100px;
+      margin:0 auto;
+      padding:40px 24px 80px;
+    }
+    header {
+      text-align:center;
+      margin-bottom:32px;
+    }
+    header h1 {
+      font-family:'Montserrat',sans-serif;
+      font-size:3rem;
+      margin-bottom:6px;
+      color:var(--accent2);
+    }
+    header p {
+      color:var(--muted);
+      max-width:760px;
+      margin:0 auto;
+    }
+    section {
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:28px 32px;
+      margin-bottom:28px;
+      box-shadow:0 20px 40px rgba(0,0,0,.5);
+    }
+    section h2 {
+      margin-top:0;
+      font-family:'Montserrat',sans-serif;
+      color:var(--accent);
+    }
+    section h3 {
+      margin-bottom:6px;
+      color:var(--accent2);
+    }
+    .note {
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:10px;
+    }
+    ul {
+      margin-left:22px;
+      line-height:1.6;
+    }
+    .time-block {
+      font-family:'Source Code Pro',monospace;
+      background:rgba(59,130,246,0.12);
+      padding:8px 12px;
+      border-radius:8px;
+      display:inline-flex;
+      margin-bottom:14px;
+      color:#93c5fd;
+      font-size:0.9rem;
+    }
+    .code-panel {
+      background:rgba(15,23,42,0.95);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:12px;
+      padding:16px;
+      margin-top:18px;
+      position:relative;
+      overflow:auto;
+    }
+    .code-panel pre {
+      margin:0;
+      font-family:'Source Code Pro',monospace;
+      font-size:0.94rem;
+      color:#f8fafc;
+      white-space:pre;
+    }
+    .copy-button {
+      position:absolute;
+      top:10px;
+      right:10px;
+      background:rgba(255,255,255,0.08);
+      border:none;
+      padding:6px 12px;
+      border-radius:6px;
+      color:#fff;
+      cursor:pointer;
+      transition:background .2s;
+    }
+    .copy-button:hover {
+      background:rgba(255,255,255,0.15);
+    }
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    .panel {
+      border:1px dashed var(--border);
+      border-radius:10px;
+      padding:12px 16px;
+      background:rgba(100,116,139,0.08);
+      font-size:0.95rem;
+    }
+    .quiz, .challenge {
+      margin-top:14px;
+      border-left:4px solid var(--accent2);
+      padding-left:14px;
+      font-size:0.95rem;
+    }
+    .break {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:1.4rem;
+      padding:18px;
+      border-radius:12px;
+      background:linear-gradient(135deg,#0a1628,#111b3e);
+      margin-top:12px;
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+    }
+    .footer-note {
+      font-size:0.9rem;
+      color:var(--muted);
+      text-align:center;
+      margin-top:40px;
+    }
+    .highlight { color:var(--accent); }
+    .badge {
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.2);
+      font-size:0.8rem;
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      margin-right:8px;
+      color:#a5b4fc;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="badge">Day 3 · 1:00‑5:00 PM · Phase 1</div>
+      <h1>Exception Handling, Collections &amp; Generics</h1>
+      <p>A 4-hour walkthrough with explanations, working examples, quizzes, debugging challenges, programming assignments, and best practices. Each topic includes copy-ready code so participants can try it live.</p>
+    </header>
+
+    <section>
+      <div class="time-block">1:00 ‑ 1:25 PM</div>
+      <h2>Part 1 · Exception Handling Fundamentals</h2>
+      <h3>What is an Exception?</h3>
+      <ul>
+        <li>Exceptions are runtime disruptions; they propagate up the call stack until handled.</li>
+        <li>Compile-time errors vs runtime exceptions: explain compilation halts versus runtime throws.</li>
+        <li>Walk through the JVM handling mechanism: exception table, stack unwinding, and the importance of stack trace reading.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code1">Copy</button>
+        <pre id="code1">// stack trace example
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException ex) {
+    ex.printStackTrace(); // shows call stack + line number
+}</pre>
+      </div>
+      <p class="note">Explain that <code>printStackTrace()</code> reveals the sequence of method calls; emphasize logging the message plus stack trace.</p>
+    </section>
+
+    <section>
+      <div class="time-block">1:25 ‑ 2:05 PM</div>
+      <h2>Exception Hierarchy &amp; try‑catch control</h2>
+      <h3>Throwable tree &amp; catch flow</h3>
+      <ul>
+        <li><strong>Throwable</strong> splits into <strong>Error</strong> (rare, unrecoverable) and <strong>Exception</strong>.</li>
+        <li>Checked exceptions (IOException) must be declared/handled; unchecked (RuntimeException) propagate by default.</li>
+        <li>Demonstrate multi-catch and ordering; more specific first, otherwise compiler error.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code2">Copy</button>
+        <pre id="code2">try {
+    Path path = Paths.get("config.csv");
+    List<String> lines = Files.readAllLines(path);
+} catch (IOException | SecurityException ex) {
+    log.warn("File access issue", ex);
+} finally {
+    System.out.println("Done with file attempt");
+}</pre>
+      </div>
+      <p class="note">Highlight catch order: IOException is checked, SecurityException extends RuntimeException but still caught. Always release resources in finally.</p>
+    </section>
+
+    <section>
+      <h2>Custom Exceptions, throw &amp; throws</h2>
+      <div class="grid">
+        <div class="panel">
+          <h3>Example</h3>
+          <div class="code-panel">
+            <button class="copy-button" data-target="code3">Copy</button>
+            <pre id="code3">public class InsufficientFundsException extends RuntimeException {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+public void withdraw(int amount) throws InsufficientFundsException {
+    if (balance &lt; amount) {
+        throw new InsufficientFundsException("Need " + (amount - balance) + " more");
+    }
+}</pre>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Best Practice</h3>
+          <p>Use unchecked for business rules that indicate misuse (InsufficientFunds). Use checked when recovery action is expected.</p>
+        </div>
+      </div>
+      <div class="quiz">
+        <strong>Quiz:</strong> When should you declare <code>throws</code> in the method signature?
+        <ul>
+          <li>A) Only for unchecked exceptions</li>
+          <li>B) For any exception you catch</li>
+          <li>C) For checked exceptions you do not handle</li>
+        </ul>
+        <p>Correct: C.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="time-block">2:05 ‑ 2:35 PM</div>
+      <h2>Try-with-resources + finally insights</h2>
+      <h3>Resource-safe execution</h3>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code4">Copy</button>
+        <pre id="code4">try (BufferedReader reader = Files.newBufferedReader(path)) {
+    reader.lines().forEach(System.out::println);
+} catch (IOException e) {
+    log.error("Failed to read", e);
+}</pre>
+      </div>
+      <p class="note">AutoCloseable guarantees <code>close()</code> even if exception occurs. Finally runs with resources for additional cleanup; returning inside finally still executes before return.</p>
+      <div class="challenge">
+        <strong>Debug Challenge:</strong> Open file that doesn't exist; observe suppressed exception in try-with-resources. Ask what happens if <code>close()</code> throws as well (look at suppressed list).</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="time-block">2:35 ‑ 3:00 PM</div>
+      <h2>Collections Framework Foundation</h2>
+      <h3>Why Collections?</h3>
+      <ul>
+        <li>Arrays are fixed-size and lack built-in algorithms—Collections add dynamic sizing, iteration helpers, concurrency versions.</li>
+        <li>Framework overview: Collection root, then List/Set/Queue, with Map separately.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code5">Copy</button>
+        <pre id="code5">List&lt;String&gt; team = new ArrayList<>();
+team.add("Alice");
+team.add("Bob");</pre>
+      </div>
+      <div class="panel">
+        <h3>List variations</h3>
+        <p>ArrayList (random access), LinkedList (insert/delete), Vector (synchronized), Stack (LIFO). Use-case: prefer ArrayList unless you need constant-time insertion/removal at both ends.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Set &amp; Map Deep Dive (3:00‑3:40 PM)</h2>
+      <div class="grid">
+        <div class="panel">
+          <h3>Set behavior</h3>
+          <p>HashSet uses hashing to dedupe; LinkedHashSet keeps insertion order; TreeSet sorts entries via Comparator.</p>
+        </div>
+        <div class="panel">
+          <h3>Map internals</h3>
+          <p>HashMap uses buckets; load factor ~0.75 triggers resize; Java 8 treeifies buckets when collisions high; LinkedHashMap keeps ordering; TreeMap sorts keys.</p>
+        </div>
+      </div>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code6">Copy</button>
+        <pre id="code6">Map&lt;String,Integer&gt; phoneBook = new HashMap<>();
+phoneBook.put("Alice","+91 90000");
+phoneBook.putIfAbsent("Bob","+91 91000");
+int attempts = phoneBook.getOrDefault("Charlie", -1);</pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="time-block">3:40 ‑ 4:05 PM</div>
+      <h2>Iteration &amp; Sorting</h2>
+      <ul>
+        <li>Iterations: classic for, enhanced for, Iterator/ListIterator for removal, <code>forEach</code>, and intro to Streams for filtering.</li>
+        <li>Sorting: <code>Comparable</code> vs <code>Comparator</code>. Multi-level sorting with <code>thenComparing</code>.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code7">Copy</button>
+        <pre id="code7">Collections.sort(students); // Student implements Comparable&lt;Student&gt;
+students.sort(Comparator.comparing(Student::getName)
+              .thenComparing(Comparator.comparing(Student::getGpa).reversed()));</pre>
+      </div>
+      <p class="note">Explain: Comparable gives natural ordering; Comparator used for alternate sorts and chaining.</p>
+    </section>
+
+    <section>
+      <h2>Utility Classes &amp; Streams (4:05‑4:25 PM)</h2>
+      <ul>
+        <li>Review <code>Collections.sort/list</code>, <code>Collections.reverse</code>, <code>Collections.shuffle</code>, <code>Collections.binarySearch</code>.</li>
+        <li><code>Arrays.asList</code> to bridge arrays and collections.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code8">Copy</button>
+        <pre id="code8">List&lt;Integer&gt; numbers = Arrays.asList(5,3,2,9);
+Collections.sort(numbers);
+Collections.reverse(numbers);
+Collections.shuffle(numbers);
+int idx = Collections.binarySearch(numbers, 3);</pre>
+      </div>
+      <p class="note">Point out binarySearch requires sorted data; mention Collections utility methods are static.</p>
+    </section>
+
+    <section>
+      <div class="time-block">4:25 ‑ 4:45 PM</div>
+      <h2>Part 3 · Generics Walkthrough</h2>
+      <h3>Type safety &amp; PECS</h3>
+      <ul>
+        <li>Generics provide compile-time check vs raw types (List vs List&lt;String&gt;).</li>
+        <li>Generic classes: <code>class Pair&lt;A,B&gt;</code>; generic methods: <code>static &lt;T&gt; void printList(List&lt;T&gt; list)</code>.</li>
+        <li>Bounded params: <code>&lt;T extends Number&gt;</code>; wildcards: <?>, ? extends, ? super.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code9">Copy</button>
+        <pre id="code9">public class Pair&lt;A,B&gt; {
+    private final A first;
+    private final B second;
+    public Pair(A first,B second){ this.first=first; this.second=second; }
+    public A getFirst(){ return first; }
+}</pre>
+      </div>
+      <p class="note">Explain class instantiation: <code>new Pair&lt;String,Integer&gt;("score", 95)</code>; mention type erasure removes generics at runtime.</p>
+    </section>
+
+    <section>
+      <h2>Generics Advanced (Wildcards &amp; Restrictions)</h2>
+      <ul>
+        <li>Wildcards: <?> read-only, <? extends Number> producers, <? super Integer> consumers (PECS).</li>
+        <li>Restrictions: no primitive type parameters, cannot instantiate <code>new T()</code>, generic array creation limited.</li>
+        <li>Type erasure removes generic info at runtime → use instanceof carefully.</li>
+      </ul>
+      <div class="code-panel">
+        <button class="copy-button" data-target="code10">Copy</button>
+        <pre id="code10">public static void addIntegers(List&lt;? super Integer&gt; list) {
+    list.add(10);
+}</pre>
+      </div>
+      <p class="note">Show output when using <? extends Number&gt; vs <? super Integer&gt;.</p>
+    </section>
+
+    <section>
+      <div class="time-block">4:45 ‑ 5:00 PM</div>
+      <h2>Wrap-up, MCQ &amp; Assignment</h2>
+      <div class="quiz">
+        <strong>MCQ:</strong> Which statement is true about <code>? super Integer</code>?
+        <ul>
+          <li>A) You can safely read Integers from it.</li>
+          <li>B) You can safely add Integers to it.</li>
+          <li>C) It extends Integer.</li>
+        </ul>
+        <p>Correct: B. <? super Integer&gt; is a consumer.</p>
+      </div>
+      <div class="challenge">
+        <strong>Programming assignment:</strong> Build a student grade manager that reads grades from a property file, stores student records in a Map&lt;String, List&lt;Integer&gt;&gt;, handles invalid numbers via custom exception, and writes summary into a sorted TreeMap.</p>
+      </div>
+      <p class="note">Explain workflow: read properties → parse with exception handling → populate collections → sort → output results.</p>
+    </section>
+
+    <footer class="footer-note">
+      Built for Day 3 (25-Feb-26) Phase 1 session. Use this file as presenter notes; copy code blocks via the buttons, run demos live, and prompt students with the included quizzes and debugging challenges.
+    </footer>
+  </main>
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const target = document.getElementById(button.dataset.target);
+        const range = document.createRange();
+        range.selectNode(target);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        button.textContent = 'Copied';
+        setTimeout(() => button.textContent = 'Copy', 1600);
+      });
+    });
+  </script>
+</body>
+</html>

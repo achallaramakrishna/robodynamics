@@ -6,5 +6,9 @@ import com.robodynamics.model.RDBlogPost;
 
 public interface RDBlogDao {
 	List<RDBlogPost> getBlogPosts();
+	List<RDBlogPost> getAllBlogPostsForAdmin();
+	RDBlogPost getBlogPostById(int postId);
+	void saveOrUpdateBlogPost(RDBlogPost post);
+	void deleteBlogPostById(int postId);
 
 }

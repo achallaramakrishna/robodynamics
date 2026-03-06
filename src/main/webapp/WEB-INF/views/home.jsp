@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -182,6 +183,35 @@
       border: 1px solid #deebdf;
     }
 
+    .hero-signal {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-height: 100%;
+    }
+
+    .hero-signal h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      color: #143f27;
+      line-height: 1.28;
+      font-family: "Outfit", sans-serif;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .hero-signal p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .hero-signal .awareness-relevance {
+      font-size: 0.86rem;
+    }
+
     .media-caption {
       margin: 0;
       color: var(--muted);
@@ -338,6 +368,463 @@
       padding: 0.78rem 1.28rem;
     }
 
+    .awareness-board {
+      margin-top: 1rem;
+      border: 1px solid #cfe1d1;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #f7fcf8 0%, #edf6ef 100%);
+      padding: 1rem;
+      box-shadow: 0 12px 22px rgba(17, 68, 38, 0.1);
+    }
+
+    .awareness-board,
+    .awareness-board * {
+      box-sizing: border-box;
+    }
+
+    .awareness-topline {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.52rem 0.7rem;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #d9e9dc;
+      color: #18492d;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+
+    .awareness-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1d7a47;
+      box-shadow: 0 0 0 6px rgba(29, 122, 71, 0.14);
+      animation: pulseDot 1.6s ease-in-out infinite;
+      flex: 0 0 10px;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.65; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .awareness-audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.75rem;
+    }
+
+    .awareness-audience-grid > *,
+    .india-focus-grid > * {
+      min-width: 0;
+    }
+
+    .audience-panel {
+      border: 1px solid #d5e6d8;
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .audience-head h3 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      color: #154229;
+      font-size: 1.08rem;
+    }
+
+    .audience-head p {
+      margin: 0.2rem 0 0;
+      color: #4f6759;
+      font-size: 0.86rem;
+    }
+
+    .awareness-card {
+      background: #fff;
+      border: 1px solid #dceadb;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      height: auto;
+    }
+
+    .awareness-hero-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid #e4efe5;
+    }
+
+    .awareness-hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.9rem;
+      min-width: 0;
+    }
+
+    .awareness-hero-content h3 {
+      margin: 0;
+      color: #133d26;
+      font-size: 1.28rem;
+      line-height: 1.25;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .awareness-hero-content p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.95rem;
+    }
+
+    .awareness-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .awareness-side-item {
+      border: 1px solid #dceadb;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 0.7rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .awareness-side-item h4 {
+      margin: 0;
+      color: #184b2d;
+      font-size: 1rem;
+      line-height: 1.28;
+    }
+
+    .awareness-side-item p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.9rem;
+    }
+
+    .awareness-side-row {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 0.55rem;
+      align-items: start;
+    }
+
+    .awareness-side-thumb {
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #deebdf;
+    }
+
+    .awareness-side-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    .awareness-meta {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .awareness-type {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      border: 1px solid #bfe0c7;
+      background: #eaf8ee;
+      color: #145b35;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.16rem 0.5rem;
+    }
+
+    .awareness-readtime {
+      display: inline-flex;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #3f5b4c;
+      background: #eef6ef;
+      border: 1px solid #d7e8da;
+      border-radius: 999px;
+      padding: 0.14rem 0.45rem;
+    }
+
+    .awareness-origin {
+      display: inline-flex;
+      width: fit-content;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0a4a80;
+      background: #e8f3ff;
+      border: 1px solid #c7ddf6;
+      border-radius: 999px;
+      padding: 0.14rem 0.44rem;
+    }
+
+    .awareness-relevance {
+      margin: 0;
+      font-size: 0.83rem;
+      color: #2a5d3e;
+      font-weight: 700;
+    }
+
+    .awareness-link {
+      margin-top: auto;
+      font-weight: 800;
+      color: #155d35;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .awareness-link:hover {
+      text-decoration: underline;
+    }
+
+    .startup-desk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    .startup-desk-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-bottom: 1px solid #e4efe5;
+    }
+
+    .startup-desk-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding: 0.72rem;
+      min-width: 0;
+    }
+
+    .startup-desk-content h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      color: #164428;
+      line-height: 1.26;
+      font-family: "Outfit", sans-serif;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .startup-desk-content p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.89rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .india-focus-strip {
+      border: 1px solid #cfe1d3;
+      border-radius: 13px;
+      background: #f8fcf8;
+      padding: 0.75rem;
+    }
+
+    .india-focus-strip h3 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      font-size: 1.06rem;
+      color: #164328;
+    }
+
+    .india-focus-strip p {
+      margin: 0.2rem 0 0.55rem;
+      font-size: 0.86rem;
+      color: #4e6658;
+    }
+
+    .india-focus-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 0.72rem;
+      align-items: stretch;
+    }
+
+    .india-lead-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-bottom: 1px solid #e4efe5;
+    }
+
+    .india-quick-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.58rem;
+    }
+
+    .india-quick-item {
+      padding: 0.58rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .india-quick-row {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 0.52rem;
+      align-items: start;
+    }
+
+    .india-quick-thumb {
+      width: 78px;
+      height: 78px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #deebdf;
+    }
+
+    .india-quick-copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .india-focus-content {
+      padding: 0.62rem 0.64rem 0.68rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+      min-width: 0;
+    }
+
+    .awareness-hero-content h3,
+    .awareness-side-item h4,
+    .india-focus-content h4,
+    .awareness-relevance,
+    .awareness-link {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .india-focus-content h4 {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.25;
+      color: #17452b;
+    }
+
+    .india-focus-content p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.84rem;
+    }
+
+    .india-builder-strip {
+      margin-top: 0.72rem;
+      border: 1px solid #d6e6d8;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 0.65rem;
+    }
+
+    .india-builder-head h4 {
+      margin: 0;
+      color: #154129;
+      font-size: 1rem;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .india-builder-head p {
+      margin: 0.18rem 0 0.55rem;
+      color: #4d6658;
+      font-size: 0.84rem;
+    }
+
+    .india-builder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.58rem;
+    }
+
+    .india-builder-card {
+      padding: 0.52rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.36rem;
+    }
+
+    .india-builder-card h5 {
+      margin: 0;
+      color: #17452b;
+      font-size: 0.93rem;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .india-builder-card p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.82rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    #indiaLeadTitle,
+    #indiaLeadExcerpt,
+    #indiaLeadBenefit {
+      transition: opacity 0.28s ease;
+    }
+
+    .product-rail {
+      border: 1px solid #cde1d1;
+      border-radius: 12px;
+      background: #fff;
+      padding: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      height: fit-content;
+      margin-top: 0.8rem;
+    }
+
+    .product-rail h4 {
+      margin: 0;
+      color: #123d25;
+      font-size: 1.02rem;
+    }
+
+    .product-rail p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.86rem;
+    }
+
+    .product-rail .btn {
+      padding: 0.56rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
     @media (max-width: 980px) {
       .hero {
         grid-template-columns: 1fr;
@@ -347,6 +834,32 @@
       }
       .modules {
         grid-template-columns: 1fr;
+      }
+      .awareness-audience-grid {
+        grid-template-columns: 1fr;
+      }
+      .startup-desk-grid {
+        grid-template-columns: 1fr;
+      }
+      .india-focus-layout {
+        grid-template-columns: 1fr;
+      }
+      .india-builder-grid {
+        grid-template-columns: 1fr;
+      }
+      .india-quick-row {
+        grid-template-columns: 70px 1fr;
+      }
+      .india-quick-thumb {
+        width: 70px;
+        height: 70px;
+      }
+      .awareness-side-row {
+        grid-template-columns: 70px 1fr;
+      }
+      .awareness-side-thumb {
+        width: 70px;
+        height: 70px;
       }
     }
 
@@ -378,6 +891,8 @@
     <c:url var="studentPortalLoginUrl" value="/login">
       <c:param name="redirect" value="/aptipath/student/home" />
     </c:url>
+    <c:set var="pid" value="${sessionScope.rdUser != null ? sessionScope.rdUser.profile_id : 0}" />
+    <c:set var="isParentOrAdmin" value="${pid == 4 or pid == 1 or pid == 2}" />
 
     <section id="career-discover" class="hero">
       <div class="hero-text">
@@ -399,13 +914,14 @@
           </div>
           <div class="hero-meta-item">
             <strong>&#8377;799</strong>
-            single launch price (Grade 8 to College)
+            base fee (+ GST at checkout)
           </div>
         </div>
 
         <div class="hero-cta">
-          <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Pay &#8377;799 - Start AptiPath360</a>
+          <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Pay &#8377;799 + GST - Start AptiPath360</a>
         </div>
+        <p class="media-caption">Final payable amount is shown transparently on the secure checkout page.</p>
         <p class="media-caption">
           Already registered? <a href="${pageContext.request.contextPath}${existingParentLoginUrl}">Login and continue</a>.
         </p>
@@ -417,6 +933,76 @@
           One shared family decision: map your child strengths first, then invest in the right path.
         </figcaption>
       </figure>
+    </section>
+
+    <section id="awareness-updates">
+      <div class="section-head">
+        <h2>India Startup Career Desk (2026-2036)</h2>
+        <p>Each card opens a shareable compiled brief with company-level signals and student skill mapping. Source links are optional references.</p>
+      </div>
+      <div class="startup-desk-grid">
+        <c:forEach var="u" items="${startupCareerUpdates}" varStatus="st">
+          <article class="startup-desk-card awareness-card" data-headline="${fn:escapeXml(u.title)}">
+            <c:choose>
+              <c:when test="${fn:startsWith(u.imageUrl, 'http')}">
+                <img src="${u.imageUrl}" alt="${u.title}" />
+              </c:when>
+              <c:otherwise>
+                <img src="${pageContext.request.contextPath}${u.imageUrl}" alt="${u.title}" />
+              </c:otherwise>
+            </c:choose>
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">${u.readTime}</span>
+              </div>
+              <h3>${u.title}</h3>
+              <p>${u.fullInfo}</p>
+              <p class="awareness-relevance">Career Track: ${u.careerTrack}</p>
+              <p class="awareness-relevance">Skill Focus: ${u.skillFocus}</p>
+              <p class="awareness-relevance">${u.parentAction}</p>
+              <a class="awareness-link" href="${pageContext.request.contextPath}${u.href}">${u.ctaLabel} &rarr;</a>
+              <c:if test="${not empty u.sourceUrl}">
+                <a class="awareness-link" href="${u.sourceUrl}" target="_blank" rel="noopener">Reference Source (${u.sourceLabel}) &rarr;</a>
+              </c:if>
+              <a class="awareness-link" href="${pageContext.request.contextPath}${u.productCtaHref}">${u.productCtaLabel} &rarr;</a>
+            </div>
+          </article>
+        </c:forEach>
+      </div>
+
+      <aside class="product-rail">
+        <h4>Convert Insight to Revenue</h4>
+        <p>Keep AptiPath360 as the first action after every story.</p>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Start AptiPath360</a>
+        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep">ExamPrep360</a>
+        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/tuition-on-demand">Tuition on Demand</a>
+      </aside>
+    </section>
+
+    <section id="career-horizon">
+      <div class="section-head">
+        <h2>Career Horizon Map (2026-2036)</h2>
+        <p>Map startup activity to real career tracks and child skill development.</p>
+      </div>
+      <div class="careers">
+        <article class="card">
+          <h4>SpaceTech & ISRO Tracks</h4>
+          <p>Math, physics, satellite systems, mission planning.</p>
+        </article>
+        <article class="card">
+          <h4>EV & ClimateTech Tracks</h4>
+          <p>Battery systems, product engineering, mobility design.</p>
+        </article>
+        <article class="card">
+          <h4>AI & Data Tracks</h4>
+          <p>Coding, data literacy, responsible AI problem solving.</p>
+        </article>
+        <article class="card">
+          <h4>Startup Product Tracks</h4>
+          <p>Creativity, product thinking, execution, communication.</p>
+        </article>
+      </div>
     </section>
 
     <section>
@@ -463,7 +1049,7 @@
         </article>
         <article class="card">
           <h4>2. Parent makes payment</h4>
-          <p>Pay once using Razorpay: <strong>&#8377;799</strong> single launch price for Grade 8 to College/Post-12 learners.</p>
+          <p>Pay once using Razorpay: <strong>&#8377;799 base</strong> + GST for Grade 8 to College/Post-12 learners.</p>
         </article>
         <article class="card">
           <h4>3. Existing parent path</h4>
@@ -492,7 +1078,7 @@
           <h3>AptiPath360 Career Discovery</h3>
           <p>Adaptive assessment + career signal report + action roadmap for Grade 8, Grade 11-12, and Post-12 students. Start here before spending on classes, so you invest only where needed.</p>
           <div class="module-actions">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Pay &#8377;799 and Start</a>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Pay &#8377;799 + GST and Start</a>
             <a class="btn btn-secondary" href="${pageContext.request.contextPath}${existingParentLoginUrl}">Open Parent Dashboard</a>
           </div>
         </article>
@@ -504,6 +1090,9 @@
           <div class="module-actions">
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">Start ExamPrep360 - Rs 1999</a>
             <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep">Explore Exam Prep</a>
+            <c:if test="${isParentOrAdmin}">
+              <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep/create">Create Exam Paper</a>
+            </c:if>
           </div>
         </article>
         <article id="tuition-info" class="card module-secondary">
@@ -544,15 +1133,20 @@
 
   <jsp:include page="footer.jsp"/>
   <script>
-    document.getElementById("copyLink").addEventListener("click", function () {
-      const text = document.getElementById("studentLink").textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        this.textContent = "Copied";
-        setTimeout(() => {
-          this.textContent = "Copy";
-        }, 1200);
-      });
-    });
+    (function () {
+      const copyBtn = document.getElementById("copyLink");
+      const linkEl = document.getElementById("studentLink");
+      if (copyBtn && linkEl) {
+        copyBtn.addEventListener("click", function () {
+          navigator.clipboard.writeText(linkEl.textContent).then(() => {
+            this.textContent = "Copied";
+            setTimeout(() => {
+              this.textContent = "Copy";
+            }, 1200);
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>

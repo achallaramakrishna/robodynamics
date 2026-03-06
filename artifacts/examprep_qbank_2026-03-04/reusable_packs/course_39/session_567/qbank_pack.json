@@ -1,0 +1,406 @@
+{
+  "course_id": 39,
+  "course_name": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep",
+  "course_session_id": 567,
+  "session_title": "Chapter 5: Understanding Elementary Shapes",
+  "grade": 6,
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 1,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q01.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 2,
+      "question_text": "How many sides does the hexagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q02.svg",
+      "options": [
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 3,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q03.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 4,
+      "question_text": "How many sides does the hexagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q04.svg",
+      "options": [
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 5,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q05.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 6,
+      "question_text": "How many sides does the hexagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q06.svg",
+      "options": [
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 7,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q07.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 8,
+      "question_text": "How many sides does the hexagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q08.svg",
+      "options": [
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 9,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q09.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 10,
+      "question_text": "How many sides does the hexagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q10.svg",
+      "options": [
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 39,
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "sequence_no": 11,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep | Session: Chapter 5: Understanding Elementary Shapes | Visual Pack",
+      "question_image": "/session_materials/39/images/g6_c39_s567_q11.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

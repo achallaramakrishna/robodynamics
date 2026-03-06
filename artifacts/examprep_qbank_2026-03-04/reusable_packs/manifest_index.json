@@ -1,0 +1,368 @@
+{
+  "title": "Reusable SVG Course Session Packs",
+  "generated_at": "2026-03-04",
+  "source_plan_tsv": "artifacts/prod_qbank_prod_ready_plan_2026-03-01.tsv",
+  "pack_count": 36,
+  "packs": [
+    {
+      "course_id": 34,
+      "course_name": "CBSE Grade 5 Mathematics - Exam Prep",
+      "course_session_id": 1085,
+      "session_title": "Mid-Term Exam Prep",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_34/session_1085/qbank_pack.json"
+    },
+    {
+      "course_id": 34,
+      "course_name": "CBSE Grade 5 Mathematics - Exam Prep",
+      "course_session_id": 1163,
+      "session_title": "GIIS Mid-Term Exam Prep",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_34/session_1163/qbank_pack.json"
+    },
+    {
+      "course_id": 35,
+      "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+      "course_session_id": 482,
+      "session_title": "Session 12: Understanding Elementary Shapes",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_35/session_482/qbank_pack.json"
+    },
+    {
+      "course_id": 35,
+      "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+      "course_session_id": 483,
+      "session_title": "Session 13: Three-Dimensional Shapes",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_35/session_483/qbank_pack.json"
+    },
+    {
+      "course_id": 35,
+      "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_35/session_484/qbank_pack.json"
+    },
+    {
+      "course_id": 35,
+      "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+      "course_session_id": 485,
+      "session_title": "Session 15: Symmetry",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_35/session_485/qbank_pack.json"
+    },
+    {
+      "course_id": 35,
+      "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+      "course_session_id": 486,
+      "session_title": "Session 16: Perimeter and Area",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_35/session_486/qbank_pack.json"
+    },
+    {
+      "course_id": 35,
+      "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+      "course_session_id": 487,
+      "session_title": "Session 17: Data Handling",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_35/session_487/qbank_pack.json"
+    },
+    {
+      "course_id": 39,
+      "course_name": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep",
+      "course_session_id": 567,
+      "session_title": "Chapter 5: Understanding Elementary Shapes",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_39/session_567/qbank_pack.json"
+    },
+    {
+      "course_id": 39,
+      "course_name": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep",
+      "course_session_id": 571,
+      "session_title": "Chapter 9: Data Handling",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_39/session_571/qbank_pack.json"
+    },
+    {
+      "course_id": 39,
+      "course_name": "CBSE Grade 6 Mathematics (Living Maths) - Exam Prep",
+      "course_session_id": 572,
+      "session_title": "Chapter 10: Mensuration",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_39/session_572/qbank_pack.json"
+    },
+    {
+      "course_id": 43,
+      "course_name": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep",
+      "course_session_id": 831,
+      "session_title": "Chapter 5: Data Handling and Presentation",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_43/session_831/qbank_pack.json"
+    },
+    {
+      "course_id": 43,
+      "course_name": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep",
+      "course_session_id": 833,
+      "session_title": "Chapter 7: Perimeter and Area",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_43/session_833/qbank_pack.json"
+    },
+    {
+      "course_id": 43,
+      "course_name": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep",
+      "course_session_id": 835,
+      "session_title": "Chapter 9: Playing with Constructions",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_43/session_835/qbank_pack.json"
+    },
+    {
+      "course_id": 43,
+      "course_name": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep",
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_43/session_836/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1131,
+      "session_title": "Chapter 1: Roman Numerals",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1131/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1132,
+      "session_title": "Chapter 2: Large Numbers",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1132/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1133,
+      "session_title": "Chapter 3: Operations on Large Numbers",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1133/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1134,
+      "session_title": "Chapter 4: Fractions",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1134/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1135,
+      "session_title": "Chapter 5: Decimals",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1135/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1136,
+      "session_title": "Chapter 6: Integers",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1136/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1137,
+      "session_title": "Chapter 7: HCF and LCM",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1137/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "grade": 5,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1138/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1139,
+      "session_title": "Chapter 9: Symmetry and Nets",
+      "grade": 5,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1139/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1140,
+      "session_title": "Chapter 10: Measurement - Length, Mass and Capacity",
+      "grade": 5,
+      "question_count": 4,
+      "image_count": 4,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1140/qbank_pack.json"
+    },
+    {
+      "course_id": 66,
+      "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+      "course_session_id": 1141,
+      "session_title": "Chapter 11: Perimeter and Area",
+      "grade": 5,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_66/session_1141/qbank_pack.json"
+    },
+    {
+      "course_id": 68,
+      "course_name": "CBSE Grade 6 Math Divine",
+      "course_session_id": 1158,
+      "session_title": "Chapter 4: Data Handling and Presentation",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_68/session_1158/qbank_pack.json"
+    },
+    {
+      "course_id": 68,
+      "course_name": "CBSE Grade 6 Math Divine",
+      "course_session_id": 1159,
+      "session_title": "Chapter 6: Perimeter and Area",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_68/session_1159/qbank_pack.json"
+    },
+    {
+      "course_id": 68,
+      "course_name": "CBSE Grade 6 Math Divine",
+      "course_session_id": 1161,
+      "session_title": "Chapter 8: Playing with Constructions",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_68/session_1161/qbank_pack.json"
+    },
+    {
+      "course_id": 68,
+      "course_name": "CBSE Grade 6 Math Divine",
+      "course_session_id": 1162,
+      "session_title": "Chapter 9: Symmetry",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_68/session_1162/qbank_pack.json"
+    },
+    {
+      "course_id": 74,
+      "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+      "course_session_id": 1097,
+      "session_title": "Chapter 12: Understanding Elementary Shapes",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_74/session_1097/qbank_pack.json"
+    },
+    {
+      "course_id": 74,
+      "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_74/session_1098/qbank_pack.json"
+    },
+    {
+      "course_id": 74,
+      "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+      "course_session_id": 1099,
+      "session_title": "Chapter 14: Constructions",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_74/session_1099/qbank_pack.json"
+    },
+    {
+      "course_id": 74,
+      "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+      "course_session_id": 1100,
+      "session_title": "Chapter 15: Symmetry",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_74/session_1100/qbank_pack.json"
+    },
+    {
+      "course_id": 74,
+      "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+      "course_session_id": 1101,
+      "session_title": "Chapter 16: Perimeter and Area",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_74/session_1101/qbank_pack.json"
+    },
+    {
+      "course_id": 74,
+      "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+      "course_session_id": 1102,
+      "session_title": "Chapter 17: Data Handling",
+      "grade": 6,
+      "question_count": 11,
+      "image_count": 11,
+      "pack_json": "artifacts/examprep_qbank_2026-03-04/reusable_packs/course_74/session_1102/qbank_pack.json"
+    }
+  ]
+}

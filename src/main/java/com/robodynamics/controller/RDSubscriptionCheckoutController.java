@@ -1,6 +1,7 @@
 package com.robodynamics.controller;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -26,6 +27,7 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.Utils;
 import com.robodynamics.model.RDCISubscription;
 import com.robodynamics.model.RDUser;
+import com.robodynamics.service.RDCIIntakeService;
 import com.robodynamics.service.RDCISubscriptionService;
 import com.robodynamics.service.RDUserService;
 
@@ -33,11 +35,17 @@ import com.robodynamics.service.RDUserService;
 @RequestMapping("/plans")
 public class RDSubscriptionCheckoutController {
 
+    private static final String SESSION_PENDING_PARENT_INTAKE = "rdPendingParentIntake";
+    private static final String SESSION_PENDING_STUDENT_INTAKE = "rdPendingStudentIntake";
+
     @Autowired
     private RDCISubscriptionService ciSubscriptionService;
 
     @Autowired
     private RDUserService rdUserService;
+
+    @Autowired
+    private RDCIIntakeService ciIntakeService;
 
     @Value("${razorpay.key.id:}")
     private String razorpayKeyId;
@@ -48,7 +56,7 @@ public class RDSubscriptionCheckoutController {
     @Value("${rd.pricing.gst.percent:18.0}")
     private double gstPercent;
 
-    @Value("${rd.checkout.bypass.enabled:true}")
+    @Value("${rd.checkout.bypass.enabled:false}")
     private boolean checkoutBypassEnabled;
 
     @GetMapping("/checkout")
@@ -119,7 +127,8 @@ public class RDSubscriptionCheckoutController {
             orderRequest.put("payment_capture", 1);
 
             Order order = client.orders.create(orderRequest);
-            String orderId = String.valueOf(order.get("id"));
+            Object rawOrderId = order.get("id");
+            String orderId = rawOrderId == null ? "" : rawOrderId.toString();
 
             model.addAttribute("paymentEnabled", true);
             model.addAttribute("razorpayKey", razorpayKeyId);
@@ -129,6 +138,14 @@ public class RDSubscriptionCheckoutController {
             session.setAttribute("checkoutOrderId", orderId);
             session.setAttribute("checkoutCourseId", courseId);
         } catch (Exception ex) {
+            System.err.println("[RD_CHECKOUT] Razorpay order creation failed"
+                    + " plan=" + plan.getKey()
+                    + " amount=" + totalPayable
+                    + " courseId=" + courseId
+                    + " studentId=" + studentId
+                    + " keyIdLen=" + (razorpayKeyId == null ? 0 : razorpayKeyId.trim().length())
+                    + " keySecretLen=" + (razorpayKeySecret == null ? 0 : razorpayKeySecret.trim().length()));
+            ex.printStackTrace();
             model.addAttribute("paymentEnabled", false);
             model.addAttribute("paymentError",
                     "We could not start checkout right now. Please try again or book a doubt-clearing session.");
@@ -170,6 +187,10 @@ public class RDSubscriptionCheckoutController {
         if (plan == null) {
             plan = Plan.CAREER_BASIC;
         }
+        RDUser loggedInUser = resolveLoggedInUser(session);
+        RDUser parentUser = resolveParentUser(loggedInUser);
+        RDUser selectedStudent = resolveStudentUser(session, loggedInUser, parentUser);
+        Integer selectedStudentId = selectedStudent == null ? null : selectedStudent.getUserID();
 
         session.setAttribute("lastSubscriptionPlanName", plan.getDisplayName());
         session.setAttribute("lastSubscriptionPlanKey", plan.getKey());
@@ -198,6 +219,7 @@ public class RDSubscriptionCheckoutController {
         }
         if (ciSubscriptionId != null) {
             session.setAttribute("lastCiSubscriptionId", ciSubscriptionId);
+            applyPendingRegistrationIntake(session, ciSubscriptionId);
         }
         session.setAttribute("lastSubscriptionBaseAmount", baseAmount);
         session.setAttribute("lastSubscriptionGstAmount", gstAmount);
@@ -209,9 +231,10 @@ public class RDSubscriptionCheckoutController {
         session.removeAttribute("checkoutCourseId");
         session.removeAttribute("checkoutStudentId");
 
+        String postPaymentRedirect = resolvePostPaymentRedirect(plan, selectedStudentId);
         return Map.of(
                 "status", "SUCCESS",
-                "redirectUrl", "/plans/success");
+                "redirectUrl", postPaymentRedirect);
     }
 
     @PostMapping("/bypass")
@@ -288,6 +311,7 @@ public class RDSubscriptionCheckoutController {
         }
         if (ciSubscriptionId != null) {
             session.setAttribute("lastCiSubscriptionId", ciSubscriptionId);
+            applyPendingRegistrationIntake(session, ciSubscriptionId);
         }
 
         return "redirect:/plans/success?bypass=true";
@@ -537,6 +561,91 @@ public class RDSubscriptionCheckoutController {
             }
         }
         return null;
+    }
+
+    private String resolvePostPaymentRedirect(Plan plan, Integer studentId) {
+        if (plan != null && "career".equals(plan.getTrackType())) {
+            if (studentId != null) {
+                return "/aptipath/parent/student-profile?studentId=" + studentId;
+            }
+            return "/aptipath/parent/home";
+        }
+        return "/plans/success";
+    }
+
+    private void applyPendingRegistrationIntake(HttpSession session, Long subscriptionId) {
+        if (subscriptionId == null) {
+            return;
+        }
+        try {
+            RDCISubscription subscription = ciSubscriptionService.getById(subscriptionId);
+            if (subscription == null || !"APTIPATH".equalsIgnoreCase(trim(subscription.getModuleCode()))) {
+                clearPendingRegistrationIntake(session);
+                return;
+            }
+
+            Integer parentUserId = subscription.getParentUser() == null ? null : subscription.getParentUser().getUserID();
+            Integer studentUserId = subscription.getStudentUser() == null ? null : subscription.getStudentUser().getUserID();
+            if (studentUserId == null) {
+                clearPendingRegistrationIntake(session);
+                return;
+            }
+
+            Map<String, String> parentIntake = readStringMapFromSession(session.getAttribute(SESSION_PENDING_PARENT_INTAKE));
+            Map<String, String> studentIntake = readStringMapFromSession(session.getAttribute(SESSION_PENDING_STUDENT_INTAKE));
+
+            for (Map.Entry<String, String> entry : parentIntake.entrySet()) {
+                ciIntakeService.saveResponse(
+                        subscriptionId,
+                        parentUserId,
+                        studentUserId,
+                        "PARENT",
+                        "GOALS",
+                        entry.getKey(),
+                        entry.getValue(),
+                        null);
+            }
+
+            for (Map.Entry<String, String> entry : studentIntake.entrySet()) {
+                ciIntakeService.saveResponse(
+                        subscriptionId,
+                        null,
+                        studentUserId,
+                        "STUDENT",
+                        "PROFILE",
+                        entry.getKey(),
+                        entry.getValue(),
+                        null);
+            }
+
+            clearPendingRegistrationIntake(session);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private Map<String, String> readStringMapFromSession(Object raw) {
+        Map<String, String> map = new LinkedHashMap<>();
+        if (!(raw instanceof Map<?, ?>)) {
+            return map;
+        }
+        Map<?, ?> source = (Map<?, ?>) raw;
+        for (Map.Entry<?, ?> entry : source.entrySet()) {
+            if (entry == null) {
+                continue;
+            }
+            String key = entry.getKey() == null ? "" : entry.getKey().toString().trim().toUpperCase(Locale.ENGLISH);
+            String value = entry.getValue() == null ? "" : entry.getValue().toString().trim();
+            if (!key.isEmpty() && !value.isEmpty()) {
+                map.put(key, value);
+            }
+        }
+        return map;
+    }
+
+    private void clearPendingRegistrationIntake(HttpSession session) {
+        session.removeAttribute(SESSION_PENDING_PARENT_INTAKE);
+        session.removeAttribute(SESSION_PENDING_STUDENT_INTAKE);
     }
 
     private enum Plan {

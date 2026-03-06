@@ -1,0 +1,154 @@
+{
+  "course_id": 66,
+  "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+  "course_session_id": 1137,
+  "session_title": "Chapter 7: HCF and LCM",
+  "grade": 5,
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 66,
+      "course_session_id": 1137,
+      "session_title": "Chapter 7: HCF and LCM",
+      "sequence_no": 1,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Right",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 7: HCF and LCM | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1137_q01.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1137,
+      "session_title": "Chapter 7: HCF and LCM",
+      "sequence_no": 2,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Acute",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 7: HCF and LCM | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1137_q02.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflex",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1137,
+      "session_title": "Chapter 7: HCF and LCM",
+      "sequence_no": 3,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Obtuse",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 7: HCF and LCM | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1137_q03.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1137,
+      "session_title": "Chapter 7: HCF and LCM",
+      "sequence_no": 4,
+      "question_text": "How many sides does the polygon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 7: HCF and LCM | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1137_q04.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

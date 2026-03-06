@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +154,20 @@ public class RDExamPaperServiceImpl implements RDExamPaperService {
                 quizQ.setDifficultyLevel(mapDifficultyLevel(qq.getDifficultyLevel()));
                 quizQ.setMaxMarks(qDto.getMarks());
                 quizQ.setCourseSessionDetail(sessionDetail);
+                quizQ.setQuestionImage(trimToNull(qq.getQuestionImage()));
+                quizQ.setCorrectAnswer(trimToNull(qq.getCorrectAnswer()));
+                quizQ.setAdditionalInfo(trimToNull(qq.getAdditionalInfo()));
+                quizQ.setExplanation(trimToNull(qq.getExplanation()));
+                quizQ.setPoints(qq.getPoints() > 0 ? qq.getPoints() : qDto.getMarks());
+                quizQ.setExamType(trimToNull(qq.getExamType()));
+                quizQ.setSyllabusTag(trimToNull(qq.getSyllabusTag()));
+                quizQ.setExamYear(qq.getExamYear());
+                quizQ.setExamPaper(trimToNull(qq.getExamPaper()));
+                quizQ.setIsPYQ(qq.getIsPYQ());
+                quizQ.setTierLevel(mapTierLevel(qq.getTierLevel()));
+                if (qq.getTierOrder() > 0) {
+                    quizQ.setTierOrder(qq.getTierOrder());
+                }
                 quizQuestionDao.saveOrUpdate(quizQ);
                 
 
@@ -163,6 +178,7 @@ public class RDExamPaperServiceImpl implements RDExamPaperService {
                     for (RDQuizOptionDTO optionDTO : qq.getOptions()) {
                         RDQuizOption option = new RDQuizOption();
                         option.setOptionText(optionDTO.getOptionText());
+                        option.setOptionImage(trimToNull(optionDTO.getOptionImage()));
                         option.setCorrect(optionDTO.isCorrect());
                         option.setQuestion(quizQ);
                         quizOptionService.save(option);
@@ -256,6 +272,25 @@ public class RDExamPaperServiceImpl implements RDExamPaperService {
             case "master": return RDQuizQuestion.DifficultyLevel.Master;
             default: throw new IllegalArgumentException("Invalid difficulty: " + level);
         }
+    }
+
+    private RDQuizQuestion.TierLevel mapTierLevel(String tierLevel) {
+        if (tierLevel == null || tierLevel.isBlank()) {
+            return null;
+        }
+        try {
+            return RDQuizQuestion.TierLevel.valueOf(tierLevel.trim().toUpperCase(Locale.ENGLISH));
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
+    }
+
+    private String trimToNull(String value) {
+        if (value == null) {
+            return null;
+        }
+        String trimmed = value.trim();
+        return trimmed.isEmpty() ? null : trimmed;
     }
 
     /* =========================================================

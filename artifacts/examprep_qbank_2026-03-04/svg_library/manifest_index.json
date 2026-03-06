@@ -1,0 +1,16 @@
+{
+  "title": "Reusable SVG Library Index",
+  "generated_at": "2026-03-04",
+  "manifests": [
+    {
+      "grade": "5",
+      "manifest": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/manifest.json",
+      "asset_count": 30
+    },
+    {
+      "grade": "6",
+      "manifest": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_6/manifest.json",
+      "asset_count": 14
+    }
+  ]
+}

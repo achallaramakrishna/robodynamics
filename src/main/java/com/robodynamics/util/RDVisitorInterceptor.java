@@ -28,9 +28,7 @@ public class RDVisitorInterceptor implements HandlerInterceptor {
         }
 
         try {
-            String clientIP = IPAddressUtil.getClientIP(request);
-            String url = request.getRequestURI();
-            visitorLogService.logVisitAsync(clientIP, url);
+            visitorLogService.logVisitAsync(request);
         } catch (Exception e) {
             // Never block request
             e.printStackTrace();

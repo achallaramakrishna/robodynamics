@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +37,7 @@ import com.robodynamics.model.RDCIAssessmentResponse;
 import com.robodynamics.model.RDCIAssessmentSession;
 import com.robodynamics.model.RDCICareerAdjustment;
 import com.robodynamics.model.RDCICareerCatalog;
+import com.robodynamics.model.RDCICareerRoadmap;
 import com.robodynamics.model.RDCIIntakeResponse;
 import com.robodynamics.model.RDCIQuestionBank;
 import com.robodynamics.model.RDCIRecommendationSnapshot;
@@ -48,12 +52,14 @@ import com.robodynamics.service.RDCIAssessmentResponseService;
 import com.robodynamics.service.RDCIAssessmentResponseService.SessionScoreSummary;
 import com.robodynamics.service.RDCIAssessmentSessionService;
 import com.robodynamics.service.RDCICareerMappingService;
+import com.robodynamics.service.RDCICareerRoadmapService;
 import com.robodynamics.service.RDCIIntakeService;
 import com.robodynamics.service.RDCIQuestionBankService;
 import com.robodynamics.service.RDCIRecommendationService;
 import com.robodynamics.service.RDCIScoreIndexService;
 import com.robodynamics.service.RDCISubscriptionService;
 import com.robodynamics.service.RDAptiPathReportEnrichmentService;
+import com.robodynamics.service.OpenAIService;
 import com.robodynamics.service.RDUserService;
 import com.robodynamics.util.RDRoleRouteUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -76,6 +82,16 @@ public class RDAptiPathStudentController {
     private static final String STUDENT_INTAKE_SUBJECTS_CODE = "S_CURR_SUBJECTS_01";
     private static final String STUDENT_INTAKE_PROGRAM_CODE = "S_CURR_PROGRAM_01";
     private static final String STUDENT_INTAKE_YEARS_LEFT_CODE = "S_CURR_YEARS_LEFT_01";
+    private static final int CAREER_POOL_LIMIT = 500;
+    private static final Set<String> ROADMAP_TEMPLATE_REQUIRED_SECTIONS = Set.of(
+            "OVERVIEW", "WHAT_TO_STUDY", "SKILLS", "PROJECTS",
+            "WHERE_TO_STUDY", "ACTION_90", "MILESTONE");
+    private static final Set<String> BASIC_ROADMAP_SECTIONS = Set.of(
+            "OVERVIEW", "WHAT_TO_STUDY", "SKILLS", "PROJECTS",
+            "WHERE_TO_STUDY", "ACTION_90", "MILESTONE", "UPGRADE");
+    private static final Set<String> PRO_ROADMAP_SECTIONS = Set.of(
+            "OVERVIEW", "WHAT_TO_STUDY", "SKILLS", "PROJECTS",
+            "WHERE_TO_STUDY", "ACTION_90", "MILESTONE", "UPGRADE");
     private static final List<String> REPORT_ENRICHMENT_CODES = List.of("RFQ_01", "RFQ_02", "RFQ_03");
     private static final Set<String> REQUIRED_STUDENT_INTAKE_CODES = Set.of(
             STUDENT_INTAKE_SCHOOL_CODE,
@@ -91,6 +107,12 @@ public class RDAptiPathStudentController {
             "S_SUPPORT_01");
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ExecutorService roadmapBackfillExecutor = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "aptipath-roadmap-backfill");
+        t.setDaemon(true);
+        return t;
+    });
+    private final Set<String> roadmapBackfillInFlight = ConcurrentHashMap.newKeySet();
 
     @Value("${aptipath.onboarding.studentVideoUrl:" + DEFAULT_STUDENT_ONBOARDING_VIDEO_URL + "}")
     private String onboardingStudentVideoUrl;
@@ -100,6 +122,18 @@ public class RDAptiPathStudentController {
 
     @Value("${aptipath.report.prefinal.enabled:false}")
     private boolean aptiPathPrefinalEnabled;
+
+    @Value("${aptipath.roadmap.ai.autofill.enabled:false}")
+    private boolean roadmapAiAutofillEnabled;
+
+    @Value("${aptipath.roadmap.ai.maxTokens:1800}")
+    private int roadmapAiMaxTokens;
+
+    @Value("${aptipath.roadmap.ai.maxRows:36}")
+    private int roadmapAiMaxRows;
+
+    @Value("${aptipath.plan.pro.price:Rs 2999}")
+    private String aptiPathProPlanPrice;
 
     @Autowired
     private RDCISubscriptionService ciSubscriptionService;
@@ -129,7 +163,13 @@ public class RDAptiPathStudentController {
     private RDCICareerMappingService ciCareerMappingService;
 
     @Autowired(required = false)
+    private RDCICareerRoadmapService ciCareerRoadmapService;
+
+    @Autowired(required = false)
     private RDAptiPathReportEnrichmentService aptiPathReportEnrichmentService;
+
+    @Autowired(required = false)
+    private OpenAIService openAIService;
 
     @Autowired
     private RDUserService userService;
@@ -414,6 +454,7 @@ public class RDAptiPathStudentController {
                          @RequestParam(value = "embed", defaultValue = "0") Integer embed,
                          @RequestParam(value = "company", required = false) String companyCode,
                          @RequestParam(value = "asPdf", required = false) String asPdf,
+                         @RequestParam(value = "internalPdfRender", required = false) String internalPdfRender,
                          Model model,
                          HttpSession session) {
         Object rawUser = session.getAttribute("rdUser");
@@ -429,6 +470,10 @@ public class RDAptiPathStudentController {
         RDCIAssessmentSession sessionRow = resolveCompletedSessionForStudent(student, sessionId);
         if (sessionRow == null) {
             return "redirect:/aptipath/student/home?resultUnavailable=1";
+        }
+        String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
+        if ("1".equals(asPdf) && !"1".equals(internalPdfRender)) {
+            return resultPdfRedirect(sessionRow.getCiAssessmentSessionId(), embed, resolvedCompanyCode);
         }
         if (aptiPathPrefinalEnabled && !hasRequiredReportEnrichment(sessionRow.getSubscription())) {
             return reportIntakeRedirect(sessionRow.getCiAssessmentSessionId(), embed, companyCode, true);
@@ -480,6 +525,27 @@ public class RDAptiPathStudentController {
         double neetFitIndex = streamFitIndices.getOrDefault("NEET", 0.0);
         double catFitIndex = streamFitIndices.getOrDefault("CAT", 0.0);
         double lawFitIndex = streamFitIndices.getOrDefault("LAW", 0.0);
+        double caCsCmaFitIndex = streamFitIndices.getOrDefault("CA/CS/CMA",
+                streamFitPayload.getOrDefault("ca_cs_cma", catFitIndex));
+        double mbaBusinessAnalyticsFitIndex = streamFitIndices.getOrDefault("MBA - Business Analytics",
+                streamFitPayload.getOrDefault("mba_business_analytics", catFitIndex));
+        double mbaFinanceFitIndex = streamFitIndices.getOrDefault("MBA - Finance",
+                streamFitPayload.getOrDefault("mba_finance", catFitIndex));
+        double mbaMarketingFitIndex = streamFitIndices.getOrDefault("MBA - Marketing",
+                streamFitPayload.getOrDefault("mba_marketing", catFitIndex));
+        double mbaOperationsFitIndex = streamFitIndices.getOrDefault("MBA - Operations",
+                streamFitPayload.getOrDefault("mba_operations", catFitIndex));
+        double mbaHrFitIndex = streamFitIndices.getOrDefault("MBA - HR/People",
+                streamFitPayload.getOrDefault("mba_hr_people", catFitIndex));
+        double mbaEntrepreneurshipFitIndex = streamFitIndices.getOrDefault("MBA - Entrepreneurship",
+                streamFitPayload.getOrDefault("mba_entrepreneurship", catFitIndex));
+        streamFitIndices.putIfAbsent("CA/CS/CMA", round1(caCsCmaFitIndex));
+        streamFitIndices.putIfAbsent("MBA - Business Analytics", round1(mbaBusinessAnalyticsFitIndex));
+        streamFitIndices.putIfAbsent("MBA - Finance", round1(mbaFinanceFitIndex));
+        streamFitIndices.putIfAbsent("MBA - Marketing", round1(mbaMarketingFitIndex));
+        streamFitIndices.putIfAbsent("MBA - Operations", round1(mbaOperationsFitIndex));
+        streamFitIndices.putIfAbsent("MBA - HR/People", round1(mbaHrFitIndex));
+        streamFitIndices.putIfAbsent("MBA - Entrepreneurship", round1(mbaEntrepreneurshipFitIndex));
 
         Map<String, Integer> subjectAffinitySignals = normalizeSubjectAffinitySignals(
                 parseIntMap(diagnosticPayload.get("subjectAffinitySignals")),
@@ -489,15 +555,56 @@ public class RDAptiPathStudentController {
             studentSelfSignals = defaultStudentSelfSignals();
         }
 
-        List<String> selectedCareerIntents = parseStringList(diagnosticPayload.get("selectedCareerIntents"));
+        List<String> selectedCareerIntents = normalizeCareerIntents(
+                parseStringList(diagnosticPayload.get("selectedCareerIntents")));
+        if (selectedCareerIntents.isEmpty()) {
+            selectedCareerIntents = normalizeCareerIntents(
+                    parseStringList(diagnosticPayload.get("selectedCareerIntentLabels")));
+        }
         List<String> selfSignalInsights = parseStringList(diagnosticPayload.get("selfSignalInsights"));
         if (selfSignalInsights.isEmpty()) {
             selfSignalInsights = List.of("No self-signal adjustments captured; scoring used assessment responses and baseline indices.");
         }
         List<String> subjectAffinityInsights = parseStringList(diagnosticPayload.get("subjectAffinityInsights"));
         if (subjectAffinityInsights.isEmpty()) {
-            subjectAffinityInsights = buildSubjectAffinityInsights(subjectAffinitySignals, List.of());
+            subjectAffinityInsights = buildSubjectAffinityInsights(subjectAffinitySignals, selectedCareerIntents);
         }
+
+        double aptitudeScore = metricValue(
+                scoreIndex == null ? null : scoreIndex.getAptitudeScore(),
+                weightedAverage(sectionScores, "CORE_APTITUDE", 0.65, "APPLIED_CHALLENGE", 0.35));
+        double interestScore = metricValue(
+                scoreIndex == null ? null : scoreIndex.getInterestScore(),
+                weightedAverage(sectionScores, "INTEREST_WORK", 0.60, "VALUES_MOTIVATION", 0.40));
+        double parentContextScore = metricValue(
+                scoreIndex == null ? null : scoreIndex.getParentContextScore(),
+                computeParentContextScore(intakeRows));
+        double overallFitScore = metricValue(scoreIndex == null ? null : scoreIndex.getOverallFitScore(), assessedAccuracyPercent);
+        double examReadiness = metricValue(scoreIndex == null ? null : scoreIndex.getExamReadinessIndex(), 55.0);
+        double aiReadiness = metricValue(scoreIndex == null ? null : scoreIndex.getAiReadinessIndex(), 55.0);
+        double alignment = metricValue(scoreIndex == null ? null : scoreIndex.getAlignmentIndex(), 55.0);
+        double wellbeingRisk = metricValue(scoreIndex == null ? null : scoreIndex.getWellbeingRiskIndex(), 45.0);
+        double mentalPreparednessIndex = calibrateFitIndex(parseDoubleValue(
+                diagnosticPayload.get("mentalPreparednessIndex"),
+                estimateMentalPreparedness(examReadiness, alignment, wellbeingRisk)), assessedAccuracyPercent);
+        double roboticsFitIndex = clamp((aptitudeScore * 0.30) + (aiReadiness * 0.26) + (interestScore * 0.20)
+                + (mentalPreparednessIndex * 0.14) + (examReadiness * 0.10), 0.0, 100.0);
+        double spaceTechFitIndex = clamp((aptitudeScore * 0.38) + (examReadiness * 0.20) + (mentalPreparednessIndex * 0.20)
+                + (aiReadiness * 0.12) + (alignment * 0.10), 0.0, 100.0);
+        double droneAutonomyFitIndex = clamp((aptitudeScore * 0.28) + (aiReadiness * 0.30) + (interestScore * 0.18)
+                + (mentalPreparednessIndex * 0.14) + (examReadiness * 0.10), 0.0, 100.0);
+        double aiSystemsFitIndex = clamp((aiReadiness * 0.34) + (aptitudeScore * 0.24) + (interestScore * 0.16)
+                + (mentalPreparednessIndex * 0.14) + (examReadiness * 0.12), 0.0, 100.0);
+        double biotechFitIndex = clamp((neetFitIndex * 0.34) + (aptitudeScore * 0.20) + (interestScore * 0.18)
+                + (mentalPreparednessIndex * 0.18) + (aiReadiness * 0.10), 0.0, 100.0);
+        double climateTechFitIndex = clamp((interestScore * 0.24) + (aptitudeScore * 0.24) + (aiReadiness * 0.18)
+                + (mentalPreparednessIndex * 0.18) + (alignment * 0.16), 0.0, 100.0);
+        double productDesignFitIndex = clamp((interestScore * 0.32) + (aiReadiness * 0.18) + (mentalPreparednessIndex * 0.18)
+                + (alignment * 0.16) + (examReadiness * 0.16), 0.0, 100.0);
+        double entrepreneurialFitIndex = clamp((interestScore * 0.24) + (catFitIndex * 0.18) + (aiReadiness * 0.16)
+                + (mentalPreparednessIndex * 0.22) + (alignment * 0.20), 0.0, 100.0);
+        double publicImpactFitIndex = clamp((lawFitIndex * 0.26) + (interestScore * 0.24) + (mentalPreparednessIndex * 0.22)
+                + (alignment * 0.18) + (examReadiness * 0.10), 0.0, 100.0);
 
         Map<String, Double> streamCompetencyFits = parseDoubleMap(diagnosticPayload.get("streamCompetencyFits"));
         if (streamCompetencyFits.isEmpty()) {
@@ -509,26 +616,60 @@ public class RDAptiPathStudentController {
             emergingClusterFits = inferEmergingClusterFits(streamFitPayload);
         }
         emergingClusterFits = calibrateFitMap(emergingClusterFits, assessedAccuracyPercent);
-        List<Map<String, Object>> topCareerMatches = calibrateTopCareerMatches(
+
+        Map<String, String> academicProfile = extractAcademicProfileFromIntakeRows(intakeRows);
+        if (academicProfile.isEmpty() && sessionRow.getSubscription() != null) {
+            academicProfile = extractAcademicProfileFromAnswers(loadStudentProfileIntakeAnswers(sessionRow.getSubscription()));
+        }
+        List<Map<String, Object>> snapshotTopCareerMatches = calibrateTopCareerMatches(
                 parseMapList(diagnosticPayload.get("topCareerMatches")),
                 assessedAccuracyPercent);
+        List<Map<String, Object>> careerUniverseFits = buildCareerUniverseFits(
+                aptitudeScore,
+                interestScore,
+                examReadiness,
+                aiReadiness,
+                mentalPreparednessIndex,
+                alignment,
+                wellbeingRisk,
+                parentContextScore,
+                sectionScores,
+                iitFitIndex,
+                neetFitIndex,
+                catFitIndex,
+                lawFitIndex,
+                roboticsFitIndex,
+                spaceTechFitIndex,
+                droneAutonomyFitIndex,
+                aiSystemsFitIndex,
+                biotechFitIndex,
+                climateTechFitIndex,
+                productDesignFitIndex,
+                entrepreneurialFitIndex,
+                publicImpactFitIndex,
+                selectedCareerIntents,
+                studentSelfSignals,
+                subjectAffinitySignals,
+                assessedAccuracyPercent,
+                academicProfile);
+        List<Map<String, Object>> topCareerMatches = refineTopCareerMatches(
+                careerUniverseFits.isEmpty() ? snapshotTopCareerMatches : careerUniverseFits,
+                selectedCareerIntents,
+                20);
+        if (topCareerMatches.isEmpty()) {
+            topCareerMatches = refineTopCareerMatches(snapshotTopCareerMatches, selectedCareerIntents, 20);
+        }
+        topCareerMatches = refreshCareerRowsForDisplay(topCareerMatches, sectionScores, selectedCareerIntents);
 
-        double overallFitScore = metricValue(scoreIndex == null ? null : scoreIndex.getOverallFitScore(), assessedAccuracyPercent);
         int careerScore = computeCareerHealthScore(assessedAccuracyPercent, overallFitScore);
         String careerScoreBand = resolveCareerScoreBand(careerScore);
-        int careerUniverseCount = parseIntValue(diagnosticPayload.get("careerUniverseCount"), topCareerMatches.size());
+        int careerUniverseCount = careerUniverseFits.isEmpty()
+                ? parseIntValue(diagnosticPayload.get("careerUniverseCount"), topCareerMatches.size())
+                : careerUniverseFits.size();
         String careerSummaryLine = parseStringValue(diagnosticPayload.get("careerSummaryLine"));
         if (careerSummaryLine.isEmpty() && recommendation != null) {
             careerSummaryLine = nz(recommendation.getSummaryText());
         }
-
-        double examReadiness = metricValue(scoreIndex == null ? null : scoreIndex.getExamReadinessIndex(), 55.0);
-        double aiReadiness = metricValue(scoreIndex == null ? null : scoreIndex.getAiReadinessIndex(), 55.0);
-        double alignment = metricValue(scoreIndex == null ? null : scoreIndex.getAlignmentIndex(), 55.0);
-        double wellbeingRisk = metricValue(scoreIndex == null ? null : scoreIndex.getWellbeingRiskIndex(), 45.0);
-        double mentalPreparednessIndex = calibrateFitIndex(parseDoubleValue(
-                diagnosticPayload.get("mentalPreparednessIndex"),
-                estimateMentalPreparedness(examReadiness, alignment, wellbeingRisk)), assessedAccuracyPercent);
 
         List<String> encouragementHighlights = parseStringList(diagnosticPayload.get("encouragementHighlights"));
         if (encouragementHighlights.isEmpty()) {
@@ -568,16 +709,16 @@ public class RDAptiPathStudentController {
                 : recommendation;
 
         RDCISubscription subscription = ciSubscriptionService.getLatestByStudentUserId(student.getUserID());
-        String resolvedCompanyCode = resolveCompanyCode(companyCode, session);
+        if (academicProfile.isEmpty() && subscription != null) {
+            academicProfile = extractAcademicProfileFromAnswers(loadStudentProfileIntakeAnswers(subscription));
+        }
         RDCompanyBranding branding = companyContextService.getActiveBrandingByCompanyCode(resolvedCompanyCode);
         boolean embedMode = embed != null && embed == 1;
 
         // --- Grade-aware planning data (needed for 10-year roadmap) ---
-        Map<String, String> academicProfile = subscription != null
-                ? extractAcademicProfileFromAnswers(loadStudentProfileIntakeAnswers(subscription))
-                : new LinkedHashMap<>();
-        String planningMode = resolvePlanningModeFromAcademicProfile(academicProfile);
-        String planningWindow = resolvePlanningWindowFromAcademicProfile(academicProfile);
+        final Map<String, String> finalAcademicProfile = academicProfile;
+        String planningMode = resolvePlanningModeFromAcademicProfile(finalAcademicProfile);
+        String planningWindow = resolvePlanningWindowFromAcademicProfile(finalAcademicProfile);
 
         model.addAttribute("student", student);
         model.addAttribute("subscription", subscription);
@@ -591,13 +732,20 @@ public class RDAptiPathStudentController {
         model.addAttribute("neetFitIndex", round1(neetFitIndex));
         model.addAttribute("catFitIndex", round1(catFitIndex));
         model.addAttribute("lawFitIndex", round1(lawFitIndex));
+        model.addAttribute("caCsCmaFitIndex", round1(caCsCmaFitIndex));
+        model.addAttribute("mbaBusinessAnalyticsFitIndex", round1(mbaBusinessAnalyticsFitIndex));
+        model.addAttribute("mbaFinanceFitIndex", round1(mbaFinanceFitIndex));
+        model.addAttribute("mbaMarketingFitIndex", round1(mbaMarketingFitIndex));
+        model.addAttribute("mbaOperationsFitIndex", round1(mbaOperationsFitIndex));
+        model.addAttribute("mbaHrFitIndex", round1(mbaHrFitIndex));
+        model.addAttribute("mbaEntrepreneurshipFitIndex", round1(mbaEntrepreneurshipFitIndex));
         model.addAttribute("emergingClusterFits", emergingClusterFits);
         model.addAttribute("careerScore", careerScore);
         model.addAttribute("careerScoreBand", careerScoreBand);
         model.addAttribute("careerUniverseCount", careerUniverseCount);
         model.addAttribute("topCareerMatches", topCareerMatches);
         model.addAttribute("careerSummaryLine", careerSummaryLine);
-        model.addAttribute("selectedCareerIntents", selectedCareerIntents);
+        model.addAttribute("selectedCareerIntents", intentLabels(selectedCareerIntents));
         model.addAttribute("studentSelfSignals", studentSelfSignals);
         model.addAttribute("selfSignalInsights", selfSignalInsights);
         model.addAttribute("subjectAffinitySignals", subjectAffinitySignals);
@@ -618,7 +766,7 @@ public class RDAptiPathStudentController {
         model.addAttribute("thinkingCompositionSnapshots", thinkingCompositionSnapshots);
         model.addAttribute("scoringMethodNotes", scoringMethodNotes);
         model.addAttribute("recommendationSummaryText", recommendationSummaryText);
-        model.addAttribute("academicProfile", academicProfile);
+        model.addAttribute("academicProfile", finalAcademicProfile);
         model.addAttribute("planningMode", planningMode);
         model.addAttribute("planningWindow", planningWindow);
         model.addAttribute("aiStudentNarrative", aiStudentNarrative);
@@ -639,10 +787,20 @@ public class RDAptiPathStudentController {
         model.addAttribute("planACareer", topCareerMatches.size() > 0 ? topCareerMatches.get(0) : null);
         model.addAttribute("planBCareer", topCareerMatches.size() > 1 ? topCareerMatches.get(1) : null);
         model.addAttribute("planCCareer", topCareerMatches.size() > 2 ? topCareerMatches.get(2) : null);
+        Map<String, Object> primaryCareerMatch = topCareerMatches.size() > 0 ? topCareerMatches.get(0) : Map.of();
+        List<Map<String, Object>> careerBasicRoadmapCards = topCareerMatches.stream()
+                .limit(5)
+                .map(row -> buildBasicCareerRoadmapTemplate(row, finalAcademicProfile))
+                .collect(Collectors.toList());
+        model.addAttribute("careerBasicRoadmapCards", careerBasicRoadmapCards);
+        model.addAttribute("basicRoadmapTemplate",
+                buildBasicCareerRoadmapTemplate(primaryCareerMatch, finalAcademicProfile));
+        model.addAttribute("proRoadmapTemplate",
+                buildProCareerRoadmapTemplate(primaryCareerMatch, finalAcademicProfile, assessedAccuracyPercent));
         model.addAttribute("embedMode", embedMode);
         model.addAttribute("companyCode", resolvedCompanyCode);
         model.addAttribute("branding", branding);
-        // Route to a dedicated, visually optimised PDF template when rendering for download
+        // Keep template rendering for internal PDF capture; external asPdf should redirect to binary endpoint.
         if ("1".equals(asPdf)) {
             return "student/aptipath-result-pdf";
         }
@@ -673,6 +831,7 @@ public class RDAptiPathStudentController {
         Map<String, String[]> params = new LinkedHashMap<>(request.getParameterMap());
         params.put("sessionId", new String[] { String.valueOf(sessionRow.getCiAssessmentSessionId()) });
         params.put("asPdf", new String[] { "1" });
+        params.put("internalPdfRender", new String[] { "1" });
         if (embed != null && embed == 1) {
             params.put("embed", new String[] { "1" });
         } else {
@@ -782,7 +941,7 @@ public class RDAptiPathStudentController {
         model.addAttribute("academicStage", academicStage);
         model.addAttribute("academicProfile", academicProfile);
         model.addAttribute("questionBankDepth", questions.size());
-        int targetQuestionCount = computeTargetQuestionCountForStage(questions, academicStage);
+        int targetQuestionCount = computeTargetQuestionCountForStage(questions, academicStage, academicProfile);
         model.addAttribute("targetQuestionCount", targetQuestionCount);
         model.addAttribute("paymentEnabled", isLiveReleaseMode());
         model.addAttribute("releaseMode", normalizedReleaseMode());
@@ -880,7 +1039,12 @@ public class RDAptiPathStudentController {
         questions = filterQuestionsByAcademicGrade(questions, academicProfile);
         questions = filterQuestionsByAcademicStage(questions, academicStage, academicProfile);
         List<RDCIQuestionBank> servedQuestions = resolveServedQuestions(questions, formData.get("questionOrder"));
-        String coverageError = validateCoverage(sessionRow.getAssessmentVersion(), servedQuestions, formData, academicStage);
+        String coverageError = validateCoverage(
+                sessionRow.getAssessmentVersion(),
+                servedQuestions,
+                formData,
+                academicStage,
+                academicProfile);
         if (coverageError != null) {
             StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/test?validationError=1");
             if (embed != null && embed == 1) {
@@ -962,6 +1126,10 @@ public class RDAptiPathStudentController {
         double pressureIndex = clamp(100.0 - sectionScores.getOrDefault("CAREER_REALITY", 55.0), 5.0, 95.0);
         double stemFoundationIndex = sectionScores.getOrDefault("STEM_FOUNDATION", aptitudeScore);
         double biologyFoundationIndex = sectionScores.getOrDefault("BIOLOGY_FOUNDATION", interestScore);
+        double commerceFoundationIndex = sectionScores.getOrDefault("COMMERCE_FOUNDATION",
+                weightedAverage(sectionScores, "CORE_APTITUDE", 0.50, "GENERAL_AWARENESS", 0.50));
+        double humanitiesFoundationIndex = sectionScores.getOrDefault("HUMANITIES_FOUNDATION",
+                weightedAverage(sectionScores, "INTEREST_WORK", 0.55, "GENERAL_AWARENESS", 0.45));
         double generalAwarenessIndex = sectionScores.getOrDefault("GENERAL_AWARENESS", examReadinessIndex);
         double reasoningIqIndex = sectionScores.getOrDefault("REASONING_IQ", aptitudeScore);
         double parentContextScore = computeParentContextScore(intakeRows);
@@ -1014,10 +1182,73 @@ public class RDAptiPathStudentController {
         double medicineSubjectReadiness = clamp((biologyAffinity * 0.50) + (chemistryAffinity * 0.30) + (physicsAffinity * 0.20), 0.0, 100.0);
         double commerceSubjectReadiness = clamp((mathAffinity * 0.45) + (languageAffinity * 0.35) + (chemistryAffinity * 0.20), 0.0, 100.0);
         double communicationSubjectReadiness = clamp((languageAffinity * 0.70) + ((100.0 - mathAffinity) * 0.10) + (interestScore * 0.20), 0.0, 100.0);
+        double caCsCmaFitIndex = clamp(
+                (commerceFoundationIndex * 0.30)
+                        + (reasoningIqIndex * 0.20)
+                        + (commerceSubjectReadiness * 0.20)
+                        + (examReadinessIndex * 0.15)
+                        + (alignmentIndex * 0.15),
+                0.0,
+                100.0);
+        double mbaBusinessAnalyticsFitIndex = clamp(
+                (catFitIndex * 0.35)
+                        + (aptitudeScore * 0.20)
+                        + (mathAffinity * 0.20)
+                        + (aiReadinessIndex * 0.15)
+                        + (examReadinessIndex * 0.10),
+                0.0,
+                100.0);
+        double mbaFinanceFitIndex = clamp(
+                (catFitIndex * 0.32)
+                        + (caCsCmaFitIndex * 0.28)
+                        + (mathAffinity * 0.18)
+                        + (commerceSubjectReadiness * 0.12)
+                        + (examReadinessIndex * 0.10),
+                0.0,
+                100.0);
+        double mbaMarketingFitIndex = clamp(
+                (catFitIndex * 0.28)
+                        + (interestScore * 0.22)
+                        + (languageAffinity * 0.20)
+                        + (alignmentIndex * 0.15)
+                        + (mentalPreparednessIndex * 0.15),
+                0.0,
+                100.0);
+        double mbaOperationsFitIndex = clamp(
+                (catFitIndex * 0.30)
+                        + (aptitudeScore * 0.24)
+                        + (examReadinessIndex * 0.18)
+                        + (mathAffinity * 0.14)
+                        + (alignmentIndex * 0.14),
+                0.0,
+                100.0);
+        double mbaHrFitIndex = clamp(
+                (catFitIndex * 0.24)
+                        + (interestScore * 0.24)
+                        + (communicationSubjectReadiness * 0.20)
+                        + (alignmentIndex * 0.16)
+                        + (mentalPreparednessIndex * 0.16),
+                0.0,
+                100.0);
+        double mbaEntrepreneurshipFitIndex = clamp(
+                (entrepreneurialFitIndex * 0.50)
+                        + (catFitIndex * 0.20)
+                        + (aiReadinessIndex * 0.15)
+                        + (alignmentIndex * 0.15),
+                0.0,
+                100.0);
         double engineeringEvidence = clamp((stemFoundationIndex * 0.45) + (reasoningIqIndex * 0.35) + (engineeringSubjectReadiness * 0.20), 0.0, 100.0);
         double medicineEvidence = clamp((biologyFoundationIndex * 0.55) + (stemFoundationIndex * 0.15) + (medicineSubjectReadiness * 0.30), 0.0, 100.0);
-        double managementEvidence = clamp((reasoningIqIndex * 0.45) + (generalAwarenessIndex * 0.25) + (commerceSubjectReadiness * 0.30), 0.0, 100.0);
-        double lawEvidence = clamp((generalAwarenessIndex * 0.35) + (reasoningIqIndex * 0.30) + (communicationSubjectReadiness * 0.35), 0.0, 100.0);
+        double managementEvidence = clamp(
+                (commerceFoundationIndex * 0.35) + (reasoningIqIndex * 0.25)
+                        + (generalAwarenessIndex * 0.15) + (commerceSubjectReadiness * 0.25),
+                0.0,
+                100.0);
+        double lawEvidence = clamp(
+                (humanitiesFoundationIndex * 0.35) + (generalAwarenessIndex * 0.20)
+                        + (reasoningIqIndex * 0.15) + (communicationSubjectReadiness * 0.30),
+                0.0,
+                100.0);
         double stemCompetencyIndex = clamp(
                 (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.32)
                         + (sectionScores.getOrDefault("APPLIED_CHALLENGE", aptitudeScore) * 0.20)
@@ -1037,21 +1268,21 @@ public class RDAptiPathStudentController {
                 0.0,
                 100.0);
         double commerceCompetencyIndex = clamp(
-                (catFitIndex * 0.24)
-                        + (commerceSubjectReadiness * 0.24)
-                        + (reasoningIqIndex * 0.18)
+                (catFitIndex * 0.20)
+                        + (commerceFoundationIndex * 0.24)
+                        + (commerceSubjectReadiness * 0.20)
+                        + (reasoningIqIndex * 0.14)
                         + (generalAwarenessIndex * 0.12)
-                        + (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.12)
-                        + (alignmentIndex * 0.10),
+                        + (sectionScores.getOrDefault("CORE_APTITUDE", aptitudeScore) * 0.10),
                 0.0,
                 100.0);
         double humanitiesCompetencyIndex = clamp(
-                (lawFitIndex * 0.24)
-                        + (communicationSubjectReadiness * 0.22)
-                        + (generalAwarenessIndex * 0.20)
-                        + (sectionScores.getOrDefault("INTEREST_WORK", interestScore) * 0.16)
-                        + (sectionScores.getOrDefault("VALUES_MOTIVATION", interestScore) * 0.10)
-                        + (mentalPreparednessIndex * 0.08),
+                (lawFitIndex * 0.20)
+                        + (humanitiesFoundationIndex * 0.24)
+                        + (communicationSubjectReadiness * 0.20)
+                        + (generalAwarenessIndex * 0.16)
+                        + (sectionScores.getOrDefault("INTEREST_WORK", interestScore) * 0.12)
+                        + (sectionScores.getOrDefault("VALUES_MOTIVATION", interestScore) * 0.08),
                 0.0,
                 100.0);
 
@@ -1066,6 +1297,13 @@ public class RDAptiPathStudentController {
         biotechFitIndex = blendWithSubject(biotechFitIndex, medicineSubjectReadiness, 0.22);
         productDesignFitIndex = blendWithSubject(productDesignFitIndex, communicationSubjectReadiness, 0.15);
         publicImpactFitIndex = blendWithSubject(publicImpactFitIndex, communicationSubjectReadiness, 0.16);
+        caCsCmaFitIndex = blendWithSubject(caCsCmaFitIndex, commerceSubjectReadiness, 0.24);
+        mbaBusinessAnalyticsFitIndex = blendWithSubject(mbaBusinessAnalyticsFitIndex, mathAffinity, 0.18);
+        mbaFinanceFitIndex = blendWithSubject(mbaFinanceFitIndex, mathAffinity, 0.15);
+        mbaMarketingFitIndex = blendWithSubject(mbaMarketingFitIndex, communicationSubjectReadiness, 0.18);
+        mbaOperationsFitIndex = blendWithSubject(mbaOperationsFitIndex, mathAffinity, 0.16);
+        mbaHrFitIndex = blendWithSubject(mbaHrFitIndex, communicationSubjectReadiness, 0.20);
+        mbaEntrepreneurshipFitIndex = blendWithSubject(mbaEntrepreneurshipFitIndex, communicationSubjectReadiness, 0.12);
 
         iitFitIndex = calibrateFitIndex(iitFitIndex, percent);
         neetFitIndex = calibrateFitIndex(neetFitIndex, percent);
@@ -1080,6 +1318,13 @@ public class RDAptiPathStudentController {
         productDesignFitIndex = calibrateFitIndex(productDesignFitIndex, percent);
         entrepreneurialFitIndex = calibrateFitIndex(entrepreneurialFitIndex, percent);
         publicImpactFitIndex = calibrateFitIndex(publicImpactFitIndex, percent);
+        caCsCmaFitIndex = calibrateFitIndex(caCsCmaFitIndex, percent);
+        mbaBusinessAnalyticsFitIndex = calibrateFitIndex(mbaBusinessAnalyticsFitIndex, percent);
+        mbaFinanceFitIndex = calibrateFitIndex(mbaFinanceFitIndex, percent);
+        mbaMarketingFitIndex = calibrateFitIndex(mbaMarketingFitIndex, percent);
+        mbaOperationsFitIndex = calibrateFitIndex(mbaOperationsFitIndex, percent);
+        mbaHrFitIndex = calibrateFitIndex(mbaHrFitIndex, percent);
+        mbaEntrepreneurshipFitIndex = calibrateFitIndex(mbaEntrepreneurshipFitIndex, percent);
 
         stemCompetencyIndex = calibrateFitIndex(stemCompetencyIndex, percent);
         medicalCompetencyIndex = calibrateFitIndex(medicalCompetencyIndex, percent);
@@ -1160,12 +1405,16 @@ public class RDAptiPathStudentController {
                 subjectAffinitySignals,
                 percent,
                 academicProfile);
-        List<Map<String, Object>> topCareerMatches = careerUniverseFits.stream()
+        List<Map<String, Object>> rankedCareerMatches = careerUniverseFits.stream()
                 .sorted((a, b) -> Double.compare(
                         (Double) b.getOrDefault("fitScore", 0.0),
                         (Double) a.getOrDefault("fitScore", 0.0)))
-                .limit(20)
                 .collect(Collectors.toList());
+        List<Map<String, Object>> topCareerMatches = refineTopCareerMatches(
+                rankedCareerMatches,
+                selectedCareerIntents,
+                20);
+        topCareerMatches = refreshCareerRowsForDisplay(topCareerMatches, sectionScores, selectedCareerIntents);
         int careerScore = computeCareerHealthScore(percent, overallFitScore);
         String careerScoreBand = resolveCareerScoreBand(careerScore);
         String primaryCareer = careerNameAt(topCareerMatches, 0, "Engineering and Technology");
@@ -1263,6 +1512,13 @@ public class RDAptiPathStudentController {
         streamFitPayload.put("product_design", round1(productDesignFitIndex));
         streamFitPayload.put("entrepreneurship", round1(entrepreneurialFitIndex));
         streamFitPayload.put("public_impact", round1(publicImpactFitIndex));
+        streamFitPayload.put("ca_cs_cma", round1(caCsCmaFitIndex));
+        streamFitPayload.put("mba_business_analytics", round1(mbaBusinessAnalyticsFitIndex));
+        streamFitPayload.put("mba_finance", round1(mbaFinanceFitIndex));
+        streamFitPayload.put("mba_marketing", round1(mbaMarketingFitIndex));
+        streamFitPayload.put("mba_operations", round1(mbaOperationsFitIndex));
+        streamFitPayload.put("mba_hr_people", round1(mbaHrFitIndex));
+        streamFitPayload.put("mba_entrepreneurship", round1(mbaEntrepreneurshipFitIndex));
         streamFitPayload.put("creative_tech", round1(calibrateFitIndex(
                 (interestScore * 0.60) + (aiReadinessIndex * 0.40), percent)));
         streamFitPayload.put("applied_vocational", round1(calibrateFitIndex(
@@ -1273,6 +1529,13 @@ public class RDAptiPathStudentController {
         streamFitIndices.put("NEET", round1(neetFitIndex));
         streamFitIndices.put("CAT", round1(catFitIndex));
         streamFitIndices.put("LAW", round1(lawFitIndex));
+        streamFitIndices.put("CA/CS/CMA", round1(caCsCmaFitIndex));
+        streamFitIndices.put("MBA - Business Analytics", round1(mbaBusinessAnalyticsFitIndex));
+        streamFitIndices.put("MBA - Finance", round1(mbaFinanceFitIndex));
+        streamFitIndices.put("MBA - Marketing", round1(mbaMarketingFitIndex));
+        streamFitIndices.put("MBA - Operations", round1(mbaOperationsFitIndex));
+        streamFitIndices.put("MBA - HR/People", round1(mbaHrFitIndex));
+        streamFitIndices.put("MBA - Entrepreneurship", round1(mbaEntrepreneurshipFitIndex));
 
         Map<String, Object> careerClusterPayload = new LinkedHashMap<>();
         careerClusterPayload.put("cluster", "Career Universe Fit");
@@ -1282,7 +1545,8 @@ public class RDAptiPathStudentController {
         careerClusterPayload.put("careerScoreBand", careerScoreBand);
         careerClusterPayload.put("careerUniverseCount", careerUniverseFits.size());
         careerClusterPayload.put("careerSummaryLine", careerSummaryLine);
-        careerClusterPayload.put("selectedCareerIntents", intentLabels(selectedCareerIntents));
+        careerClusterPayload.put("selectedCareerIntents", selectedCareerIntents);
+        careerClusterPayload.put("selectedCareerIntentLabels", intentLabels(selectedCareerIntents));
         careerClusterPayload.put("studentSelfSignals", studentSelfSignals);
         careerClusterPayload.put("selfSignalInsights", selfSignalInsights);
         careerClusterPayload.put("subjectAffinitySignals", subjectAffinitySignals);
@@ -1337,7 +1601,7 @@ public class RDAptiPathStudentController {
                 + (aiEnrichmentApplied ? " AI enrichment status: APPLIED." : "")
                 + " Planning horizon: " + planningMode + " (" + planningWindow + ")."
                 + " Score calculation: 65% assessed test accuracy + 35% readiness indices."
-                + " IIT/NEET/CAT are readiness-fit indicators, not predicted exam ranks.";
+                + " IIT/NEET/CAT/LAW/CA-MBA are readiness-fit indicators, not predicted exam ranks.";
 
         RDCIRecommendationSnapshot recommendation = ciRecommendationService.saveSnapshot(
                 sessionId,
@@ -1370,6 +1634,13 @@ public class RDAptiPathStudentController {
         model.addAttribute("neetFitIndex", round1(neetFitIndex));
         model.addAttribute("catFitIndex", round1(catFitIndex));
         model.addAttribute("lawFitIndex", round1(lawFitIndex));
+        model.addAttribute("caCsCmaFitIndex", round1(caCsCmaFitIndex));
+        model.addAttribute("mbaBusinessAnalyticsFitIndex", round1(mbaBusinessAnalyticsFitIndex));
+        model.addAttribute("mbaFinanceFitIndex", round1(mbaFinanceFitIndex));
+        model.addAttribute("mbaMarketingFitIndex", round1(mbaMarketingFitIndex));
+        model.addAttribute("mbaOperationsFitIndex", round1(mbaOperationsFitIndex));
+        model.addAttribute("mbaHrFitIndex", round1(mbaHrFitIndex));
+        model.addAttribute("mbaEntrepreneurshipFitIndex", round1(mbaEntrepreneurshipFitIndex));
         model.addAttribute("emergingClusterFits", emergingClusterFits);
         model.addAttribute("careerScore", careerScore);
         model.addAttribute("careerScoreBand", careerScoreBand);
@@ -1418,6 +1689,16 @@ public class RDAptiPathStudentController {
         model.addAttribute("planACareer", topCareerMatches.size() > 0 ? topCareerMatches.get(0) : null);
         model.addAttribute("planBCareer", topCareerMatches.size() > 1 ? topCareerMatches.get(1) : null);
         model.addAttribute("planCCareer", topCareerMatches.size() > 2 ? topCareerMatches.get(2) : null);
+        Map<String, Object> primaryCareerMatch = topCareerMatches.size() > 0 ? topCareerMatches.get(0) : Map.of();
+        List<Map<String, Object>> careerBasicRoadmapCards = topCareerMatches.stream()
+                .limit(5)
+                .map(row -> buildBasicCareerRoadmapTemplate(row, academicProfile))
+                .collect(Collectors.toList());
+        model.addAttribute("careerBasicRoadmapCards", careerBasicRoadmapCards);
+        model.addAttribute("basicRoadmapTemplate",
+                buildBasicCareerRoadmapTemplate(primaryCareerMatch, academicProfile));
+        model.addAttribute("proRoadmapTemplate",
+                buildProCareerRoadmapTemplate(primaryCareerMatch, academicProfile, percent));
         model.addAttribute("embedMode", embedMode);
         model.addAttribute("companyCode", resolvedCompanyCode);
         model.addAttribute("branding", branding);
@@ -1504,6 +1785,18 @@ public class RDAptiPathStudentController {
         if (required) {
             redirect.append("&required=1");
         }
+        if (embed != null && embed == 1) {
+            redirect.append("&embed=1");
+        }
+        if (companyCode != null && !companyCode.trim().isEmpty()) {
+            redirect.append("&company=").append(urlEncode(companyCode.trim()));
+        }
+        return redirect.toString();
+    }
+
+    private String resultPdfRedirect(Long sessionId, Integer embed, String companyCode) {
+        StringBuilder redirect = new StringBuilder("redirect:/aptipath/student/result/pdf?sessionId=");
+        redirect.append(sessionId == null ? "" : sessionId);
         if (embed != null && embed == 1) {
             redirect.append("&embed=1");
         }
@@ -1648,14 +1941,30 @@ public class RDAptiPathStudentController {
         if (answers == null || answers.isEmpty()) {
             return profile;
         }
-        putIfNotBlank(profile, "school", answers.get(STUDENT_INTAKE_SCHOOL_CODE));
-        putIfNotBlank(profile, "grade", answers.get(STUDENT_INTAKE_GRADE_CODE));
-        putIfNotBlank(profile, "board", answers.get(STUDENT_INTAKE_BOARD_CODE));
-        putIfNotBlank(profile, "stream", answers.get(STUDENT_INTAKE_STREAM_CODE));
-        putIfNotBlank(profile, "subjects", answers.get(STUDENT_INTAKE_SUBJECTS_CODE));
-        putIfNotBlank(profile, "program", answers.get(STUDENT_INTAKE_PROGRAM_CODE));
-        putIfNotBlank(profile, "yearsLeft", answers.get(STUDENT_INTAKE_YEARS_LEFT_CODE));
+        putAcademicProfile(profile, "school", STUDENT_INTAKE_SCHOOL_CODE, answers.get(STUDENT_INTAKE_SCHOOL_CODE));
+        putAcademicProfile(profile, "grade", STUDENT_INTAKE_GRADE_CODE, answers.get(STUDENT_INTAKE_GRADE_CODE));
+        putAcademicProfile(profile, "board", STUDENT_INTAKE_BOARD_CODE, answers.get(STUDENT_INTAKE_BOARD_CODE));
+        putAcademicProfile(profile, "stream", STUDENT_INTAKE_STREAM_CODE, answers.get(STUDENT_INTAKE_STREAM_CODE));
+        putAcademicProfile(profile, "subjects", STUDENT_INTAKE_SUBJECTS_CODE, answers.get(STUDENT_INTAKE_SUBJECTS_CODE));
+        putAcademicProfile(profile, "program", STUDENT_INTAKE_PROGRAM_CODE, answers.get(STUDENT_INTAKE_PROGRAM_CODE));
+        putAcademicProfile(profile, "yearsLeft", STUDENT_INTAKE_YEARS_LEFT_CODE, answers.get(STUDENT_INTAKE_YEARS_LEFT_CODE));
         return profile;
+    }
+
+    private void putAcademicProfile(Map<String, String> target, String aliasKey, String intakeCode, String value) {
+        if (target == null) {
+            return;
+        }
+        String cleaned = trimToNull(value);
+        if (cleaned == null) {
+            return;
+        }
+        if (aliasKey != null && !aliasKey.trim().isEmpty()) {
+            target.put(aliasKey, cleaned);
+        }
+        if (intakeCode != null && !intakeCode.trim().isEmpty()) {
+            target.put(intakeCode, cleaned);
+        }
     }
 
     private void putIfNotBlank(Map<String, String> target, String key, String value) {
@@ -2183,7 +2492,7 @@ public class RDAptiPathStudentController {
             }
             Map<String, Object> row = new LinkedHashMap<>();
             row.put("careerCode", parseStringValue(career.get("careerCode")));
-            row.put("careerName", parseStringValue(career.get("name")));
+            row.put("careerName", parseStringValue(career.get("careerName")));
             row.put("cluster", parseStringValue(career.get("cluster")));
             row.put("fitScore", round1(parseDoubleValue(career.get("fitScore"), 0.0)));
             row.put("fitBand", parseStringValue(career.get("fitBand")));
@@ -2194,7 +2503,9 @@ public class RDAptiPathStudentController {
     }
 
     private String resolvePlanningModeFromAcademicProfile(Map<String, String> academicProfile) {
-        String grade = academicProfile == null ? "" : nz(academicProfile.get("grade")).trim().toUpperCase(Locale.ENGLISH);
+        String grade = academicProfileValue(academicProfile, "grade", STUDENT_INTAKE_GRADE_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
         if (isPost12Grade(grade)) {
             return "IMMEDIATE_2_TO_4_YEARS";
         }
@@ -2214,6 +2525,1005 @@ public class RDAptiPathStudentController {
             default:
                 return "90-1460 days";
         }
+    }
+
+    private Map<String, Object> buildBasicCareerRoadmapTemplate(Map<String, Object> primaryCareer,
+                                                                Map<String, String> academicProfile) {
+        String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        if (careerName.isEmpty()) {
+            careerName = "AI / ML Engineer";
+        }
+        String careerCode = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerCode"))
+                .trim().toUpperCase(Locale.ENGLISH);
+        String cluster = parseStringValue(primaryCareer == null ? null : primaryCareer.get("cluster"));
+        String requiredSubjects = parseStringValue(primaryCareer == null ? null : primaryCareer.get("requiredSubjects"));
+        String entranceExams = parseStringValue(primaryCareer == null ? null : primaryCareer.get("entranceExams"));
+        String pathwayHint = parseStringValue(primaryCareer == null ? null : primaryCareer.get("pathwayHint"));
+        String gradeStage = resolveRoadmapGradeStage(academicProfile);
+        List<RDCICareerRoadmap> dbRows = resolveCareerRoadmapRows(primaryCareer, "BASIC", gradeStage);
+        boolean roadmapAvailable = dbRows != null && !dbRows.isEmpty();
+        Map<String, String> tokens = buildRoadmapTokens(primaryCareer, academicProfile, careerName);
+        String grade = tokens.getOrDefault("GRADE", "11");
+
+        List<Map<String, String>> whatToStudyFallback = fallbackWhatToStudyRows(careerName, grade, requiredSubjects);
+        List<Map<String, String>> skillsFallback = fallbackSkillRows(careerName, pathwayHint);
+        List<Map<String, String>> projectsFallback = fallbackProjectRows(careerName, grade);
+        List<Map<String, String>> whereToStudyFallback = fallbackWhereToStudyRows(careerName, entranceExams);
+        List<Map<String, String>> action90Fallback = fallbackAction90Rows(careerName);
+        List<Map<String, String>> milestoneFallback = fallbackMilestoneRows(careerName);
+
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("planLabel", "Basic Plan");
+        payload.put("planPrice", "INR 599");
+        payload.put("proPlanPrice", trimToNull(aptiPathProPlanPrice) == null ? "Rs 2999" : aptiPathProPlanPrice.trim());
+        payload.put("careerTitle", careerName);
+        payload.put("careerCode", careerCode);
+        payload.put("roadmapAvailable", roadmapAvailable);
+        payload.put("overview", resolveRoadmapTextBySectionTypes(dbRows,
+                basicFallbackOverview(careerName, cluster, requiredSubjects),
+                tokens,
+                "OVERVIEW"));
+        payload.put("relevanceWindow", resolveRoadmapTextBySectionTypes(dbRows,
+                basicFallbackRelevance(careerName, cluster, pathwayHint),
+                tokens,
+                "OVERVIEW"));
+        payload.put("salaryBand", resolveRoadmapTextBySectionTypes(dbRows,
+                basicFallbackExamPrep(parseStringValue(primaryCareer == null ? null : primaryCareer.get("examHint")), entranceExams),
+                tokens,
+                "WHERE_TO_STUDY", "OVERVIEW"));
+        payload.put("phases", resolveRoadmapSectionRowsByAliases(dbRows, tokens, milestoneFallback,
+                "MILESTONE", "PHASE"));
+        payload.put("whatToStudyRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, whatToStudyFallback,
+                "WHAT_TO_STUDY", "STUDY"));
+        payload.put("skillsRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, skillsFallback,
+                "SKILLS"));
+        payload.put("projectsRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, projectsFallback,
+                "PROJECTS"));
+        payload.put("whereToStudyRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, whereToStudyFallback,
+                "WHERE_TO_STUDY", "EXAMS"));
+        payload.put("action90Roadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, action90Fallback,
+                "ACTION_90"));
+        payload.put("milestoneRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, milestoneFallback,
+                "MILESTONE", "PHASE"));
+        payload.put("upgradeLine", resolveRoadmapText(dbRows, "UPGRADE",
+                "Choose Pro Plan (" + (trimToNull(aptiPathProPlanPrice) == null ? "Rs 2999" : aptiPathProPlanPrice.trim())
+                        + ") to unlock deeper mentoring and personalized execution for " + careerName + ".",
+                tokens));
+        return payload;
+    }
+
+    private String basicFallbackOverview(String careerName, String cluster, String requiredSubjects) {
+        String subjectText = basicFallbackSubjects(requiredSubjects);
+        String clusterText = trimToNull(cluster);
+        if (clusterText == null) {
+            return careerName + " is a viable future pathway for students who build subject depth, discipline, and practical execution.";
+        }
+        return careerName + " is a strong pathway in " + clusterText
+                + " for students who build depth in " + subjectText + ".";
+    }
+
+    private String basicFallbackRelevance(String careerName, String cluster, String pathwayHint) {
+        String hint = trimToNull(pathwayHint);
+        if (hint != null) {
+            return "2026-2036 relevance: " + careerName + " demand is rising; " + hint;
+        }
+        String clusterText = trimToNull(cluster);
+        if (clusterText != null) {
+            return "2026-2036 relevance: " + clusterText + " pathways are expanding, and " + careerName
+                    + " benefits from this demand cycle.";
+        }
+        return "2026-2036 relevance: " + careerName
+                + " rewards students who combine subject clarity with practical project evidence.";
+    }
+
+    private String basicFallbackSubjects(String requiredSubjects) {
+        String subjects = trimToNull(requiredSubjects);
+        if (subjects == null) {
+            return "core academics";
+        }
+        return subjects;
+    }
+
+    private String basicFallbackExamPrep(String examHint, String entranceExams) {
+        String examText = trimToNull(examHint);
+        if (examText != null) {
+            return examText;
+        }
+        String routes = trimToNull(entranceExams);
+        if (routes != null) {
+            return "Align preparation with relevant entrance routes: " + routes + ".";
+        }
+        return "Choose the right stream and align preparation to competitive entrances.";
+    }
+
+    private String basicFallbackSkillDetail(String pathwayHint) {
+        String hint = trimToNull(pathwayHint);
+        if (hint != null) {
+            return hint;
+        }
+        return "Build practical projects, internships, and mentor-reviewed execution proof.";
+    }
+
+    private Map<String, Object> buildProCareerRoadmapTemplate(Map<String, Object> primaryCareer,
+                                                              Map<String, String> academicProfile,
+                                                              double assessedAccuracyPercent) {
+        String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        if (careerName.isEmpty()) {
+            careerName = "AI / ML Engineer";
+        }
+        String careerCode = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerCode"))
+                .trim().toUpperCase(Locale.ENGLISH);
+        String requiredSubjects = parseStringValue(primaryCareer == null ? null : primaryCareer.get("requiredSubjects"));
+        String entranceExams = parseStringValue(primaryCareer == null ? null : primaryCareer.get("entranceExams"));
+        String pathwayHint = parseStringValue(primaryCareer == null ? null : primaryCareer.get("pathwayHint"));
+        String gradeStage = resolveRoadmapGradeStage(academicProfile);
+        List<RDCICareerRoadmap> dbRows = resolveCareerRoadmapRows(primaryCareer, "PRO", gradeStage);
+        boolean roadmapAvailable = dbRows != null && !dbRows.isEmpty();
+        Map<String, String> tokens = buildRoadmapTokens(primaryCareer, academicProfile, careerName);
+        tokens.put("ACCURACY", String.format(Locale.ENGLISH, "%.1f", clamp(assessedAccuracyPercent, 0.0, 100.0)));
+        String grade = tokens.getOrDefault("GRADE", "11");
+
+        List<Map<String, String>> whatToStudyFallback = fallbackWhatToStudyRows(careerName, grade, requiredSubjects);
+        List<Map<String, String>> skillsFallback = fallbackSkillRows(careerName, pathwayHint);
+        List<Map<String, String>> projectsFallback = fallbackProjectRows(careerName, grade);
+        List<Map<String, String>> whereToStudyFallback = fallbackWhereToStudyRows(careerName, entranceExams);
+        List<Map<String, String>> action90Fallback = fallbackAction90Rows(careerName);
+        List<Map<String, String>> milestoneFallback = fallbackMilestoneRows(careerName);
+
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("planLabel", "Pro Plan");
+        payload.put("planPrice", trimToNull(aptiPathProPlanPrice) == null ? "Rs 2999" : aptiPathProPlanPrice.trim());
+        payload.put("depthTag", "5x deeper than Basic");
+        payload.put("careerTitle", careerName);
+        payload.put("careerCode", careerCode);
+        payload.put("roadmapAvailable", roadmapAvailable);
+        payload.put("personalizedOverview", resolveRoadmapTextBySectionTypes(dbRows,
+                basicFallbackOverview(careerName, parseStringValue(primaryCareer == null ? null : primaryCareer.get("cluster")), requiredSubjects),
+                tokens,
+                "OVERVIEW"));
+        payload.put("studyRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, whatToStudyFallback,
+                "WHAT_TO_STUDY", "STUDY"));
+        payload.put("skillRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, skillsFallback,
+                "SKILLS"));
+        payload.put("projectRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, projectsFallback,
+                "PROJECTS"));
+        payload.put("whereToStudyRoadmap", resolveRoadmapSectionRowsByAliases(dbRows, tokens, whereToStudyFallback,
+                "WHERE_TO_STUDY", "EXAMS"));
+        payload.put("examStrategy", resolveRoadmapSectionRowsByAliases(dbRows, tokens, whereToStudyFallback,
+                "WHERE_TO_STUDY", "EXAMS"));
+        payload.put("first90Days", resolveRoadmapSectionRowsByAliases(dbRows, tokens, action90Fallback,
+                "ACTION_90"));
+        payload.put("longTermMilestones", resolveRoadmapSectionRowsByAliases(dbRows, tokens, milestoneFallback,
+                "MILESTONE", "PHASE"));
+        payload.put("databaseScale", resolveRoadmapSectionRowsByAliases(dbRows, tokens, milestoneFallback,
+                "MILESTONE"));
+        payload.put("upgradeLine", resolveRoadmapText(dbRows, "UPGRADE",
+                "Upgrade to Pro Plan to get mentor-grade strategy, exam planning, and portfolio tracking for " + careerName + ".",
+                tokens));
+        return payload;
+    }
+
+    private List<RDCICareerRoadmap> resolveCareerRoadmapRows(Map<String, Object> primaryCareer,
+                                                             String planTier,
+                                                             String gradeStage) {
+        if (ciCareerRoadmapService == null) {
+            return List.of();
+        }
+        List<String> keys = candidateRoadmapKeys(primaryCareer, planTier);
+        for (String key : keys) {
+            if (key == null || key.trim().isEmpty()) {
+                continue;
+            }
+            try {
+                List<RDCICareerRoadmap> rows = ciCareerRoadmapService.getActiveRoadmap(
+                        "APTIPATH",
+                        ASSESSMENT_VERSION,
+                        key,
+                        planTier,
+                        gradeStage);
+                if (rows != null && !rows.isEmpty() && hasRequiredRoadmapCoverageFromDbRows(rows, planTier)) {
+                    return rows;
+                }
+                boolean incomplete = rows == null || rows.isEmpty() || !hasRequiredRoadmapCoverageFromDbRows(rows, planTier);
+                if (incomplete) {
+                    scheduleRoadmapBackfill(primaryCareer, key, planTier, gradeStage);
+                    List<RDCICareerRoadmap> syntheticRows = buildRuleBasedRoadmapRowsForRender(primaryCareer, key, planTier, gradeStage);
+                    if (!syntheticRows.isEmpty()) {
+                        if (rows == null || rows.isEmpty()) {
+                            return syntheticRows;
+                        }
+                        return mergeRoadmapRowsForRender(rows, syntheticRows);
+                    }
+                }
+                if (rows != null && !rows.isEmpty()) {
+                    return rows;
+                }
+            } catch (RuntimeException ignore) {
+                // Keep report rendering resilient even if roadmap table is not ready.
+            }
+        }
+        try {
+            List<RDCICareerRoadmap> fallbackRows = ciCareerRoadmapService.getActiveRoadmap(
+                    "APTIPATH",
+                    ASSESSMENT_VERSION,
+                    "DEFAULT",
+                    planTier,
+                    gradeStage);
+            if (fallbackRows != null && !fallbackRows.isEmpty() && hasRequiredRoadmapCoverageFromDbRows(fallbackRows, planTier)) {
+                return fallbackRows;
+            }
+            if (fallbackRows != null && !fallbackRows.isEmpty()) {
+                return fallbackRows;
+            }
+        } catch (RuntimeException ignore) {
+            // Keep report rendering resilient even if default roadmap rows are unavailable.
+        }
+        String fallbackKey = normalizeRoadmapCareerCode(parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName")));
+        if (fallbackKey.isEmpty()) {
+            fallbackKey = "DEFAULT";
+        }
+        return buildRuleBasedRoadmapRowsForRender(primaryCareer, fallbackKey, planTier, gradeStage);
+    }
+
+    private void scheduleRoadmapBackfill(Map<String, Object> primaryCareer,
+                                         String roadmapKey,
+                                         String planTier,
+                                         String gradeStage) {
+        String key = nz(roadmapKey).trim().toUpperCase(Locale.ENGLISH);
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        String stage = normalizeRoadmapGradeStageForStorage(planTier, gradeStage);
+        if (key.isEmpty()) {
+            return;
+        }
+        String inFlightKey = key + "|" + tier + "|" + stage;
+        if (!roadmapBackfillInFlight.add(inFlightKey)) {
+            return;
+        }
+        roadmapBackfillExecutor.submit(() -> {
+            try {
+                boolean generated = attemptAiRoadmapAutofill(primaryCareer, key, tier, stage);
+                if (!generated) {
+                    attemptRuleBasedRoadmapAutofill(primaryCareer, key, tier, stage);
+                }
+            } catch (Exception ignore) {
+                // Keep report rendering resilient; background failures should not affect user page load.
+            } finally {
+                roadmapBackfillInFlight.remove(inFlightKey);
+            }
+        });
+    }
+
+    private boolean attemptRuleBasedRoadmapAutofill(Map<String, Object> primaryCareer,
+                                                    String roadmapKey,
+                                                    String planTier,
+                                                    String gradeStage) {
+        if (ciCareerRoadmapService == null) {
+            return false;
+        }
+        String key = nz(roadmapKey).trim().toUpperCase(Locale.ENGLISH);
+        if (key.isEmpty()) {
+            return false;
+        }
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        String gradeForStorage = normalizeRoadmapGradeStageForStorage(planTier, gradeStage);
+        List<Map<String, Object>> normalizedRows = buildRuleBasedRoadmapRowsPayload(primaryCareer, key, tier, gradeForStorage);
+        if (!hasRequiredRoadmapCoverage(normalizedRows, tier)) {
+            return false;
+        }
+        String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        for (Map<String, Object> row : normalizedRows) {
+            if (row == null) {
+                continue;
+            }
+            RDCICareerRoadmap entity = new RDCICareerRoadmap();
+            entity.setModuleCode("APTIPATH");
+            entity.setAssessmentVersion(ASSESSMENT_VERSION);
+            entity.setCareerCode(key);
+            entity.setPlanTier(tier);
+            entity.setGradeStage(gradeForStorage);
+            entity.setSectionType(parseStringValue(row.get("sectionType")));
+            entity.setItemOrder(parseIntValue(row.get("itemOrder"), 1));
+            entity.setTitle(parseStringValue(row.get("title")));
+            entity.setDetailText(parseStringValue(row.get("detailText")));
+            entity.setStatus("ACTIVE");
+            entity.setMetadataJson(toJson(Map.of(
+                    "source", "RULE_BASED_AUTOFILL",
+                    "promptVersion", "roadmap-fallback-v1",
+                    "careerName", nz(careerName),
+                    "careerCode", key,
+                    "planTier", tier,
+                    "gradeStage", gradeForStorage), "{}"));
+            ciCareerRoadmapService.saveRoadmap(entity);
+        }
+        return true;
+    }
+
+    private List<RDCICareerRoadmap> buildRuleBasedRoadmapRowsForRender(Map<String, Object> primaryCareer,
+                                                                        String roadmapKey,
+                                                                        String planTier,
+                                                                        String gradeStage) {
+        String key = nz(roadmapKey).trim().toUpperCase(Locale.ENGLISH);
+        if (key.isEmpty()) {
+            return List.of();
+        }
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        String gradeForStorage = normalizeRoadmapGradeStageForStorage(planTier, gradeStage);
+        List<Map<String, Object>> normalizedRows = buildRuleBasedRoadmapRowsPayload(primaryCareer, key, tier, gradeForStorage);
+        if (!hasRequiredRoadmapCoverage(normalizedRows, tier)) {
+            return List.of();
+        }
+        List<RDCICareerRoadmap> rows = new ArrayList<>();
+        for (Map<String, Object> row : normalizedRows) {
+            if (row == null) {
+                continue;
+            }
+            RDCICareerRoadmap entity = new RDCICareerRoadmap();
+            entity.setModuleCode("APTIPATH");
+            entity.setAssessmentVersion(ASSESSMENT_VERSION);
+            entity.setCareerCode(key);
+            entity.setPlanTier(tier);
+            entity.setGradeStage(gradeForStorage);
+            entity.setSectionType(parseStringValue(row.get("sectionType")));
+            entity.setItemOrder(parseIntValue(row.get("itemOrder"), 1));
+            entity.setTitle(parseStringValue(row.get("title")));
+            entity.setDetailText(parseStringValue(row.get("detailText")));
+            entity.setStatus("ACTIVE");
+            rows.add(entity);
+        }
+        return rows;
+    }
+
+    private List<Map<String, Object>> buildRuleBasedRoadmapRowsPayload(Map<String, Object> primaryCareer,
+                                                                        String roadmapKey,
+                                                                        String planTier,
+                                                                        String gradeForStorage) {
+        String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        if (careerName.isEmpty()) {
+            careerName = roadmapKey;
+        }
+        String cluster = parseStringValue(primaryCareer == null ? null : primaryCareer.get("cluster"));
+        String requiredSubjects = parseStringValue(primaryCareer == null ? null : primaryCareer.get("requiredSubjects"));
+        String entranceExams = parseStringValue(primaryCareer == null ? null : primaryCareer.get("entranceExams"));
+        String pathwayHint = parseStringValue(primaryCareer == null ? null : primaryCareer.get("pathwayHint"));
+        String gradeHint = gradeHintFromRoadmapStage(gradeForStorage);
+
+        List<Map<String, Object>> rows = new ArrayList<>();
+        rows.add(generatedRoadmapRow(
+                "OVERVIEW",
+                1,
+                "Career Overview",
+                basicFallbackOverview(careerName, cluster, requiredSubjects)
+                        + " " + basicFallbackRelevance(careerName, cluster, pathwayHint)));
+        appendGeneratedSectionRows(rows, "WHAT_TO_STUDY",
+                fallbackWhatToStudyRows(careerName, gradeHint, requiredSubjects));
+        appendGeneratedSectionRows(rows, "SKILLS",
+                fallbackSkillRows(careerName, pathwayHint));
+        appendGeneratedSectionRows(rows, "PROJECTS",
+                fallbackProjectRows(careerName, gradeHint));
+        appendGeneratedSectionRows(rows, "WHERE_TO_STUDY",
+                fallbackWhereToStudyRows(careerName, entranceExams));
+        appendGeneratedSectionRows(rows, "ACTION_90",
+                fallbackAction90Rows(careerName));
+        appendGeneratedSectionRows(rows, "MILESTONE",
+                fallbackMilestoneRows(careerName));
+        rows.add(generatedRoadmapRow(
+                "UPGRADE",
+                1,
+                "Pro Plan",
+                "Choose Pro Plan (" + (trimToNull(aptiPathProPlanPrice) == null ? "Rs 2999" : aptiPathProPlanPrice.trim())
+                        + ") to unlock deeper personalized strategy for " + careerName + "."));
+
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("rows", rows);
+        return normalizeGeneratedRoadmapRows(payload, planTier);
+    }
+
+    private List<RDCICareerRoadmap> mergeRoadmapRowsForRender(List<RDCICareerRoadmap> existing,
+                                                              List<RDCICareerRoadmap> supplement) {
+        Map<String, RDCICareerRoadmap> merged = new LinkedHashMap<>();
+        if (existing != null) {
+            for (RDCICareerRoadmap row : existing) {
+                if (row == null) {
+                    continue;
+                }
+                String key = normalizeRoadmapSectionType(parseStringValue(row.getSectionType()))
+                        + "#" + parseIntValue(row.getItemOrder(), 1);
+                merged.put(key, row);
+            }
+        }
+        if (supplement != null) {
+            for (RDCICareerRoadmap row : supplement) {
+                if (row == null) {
+                    continue;
+                }
+                String key = normalizeRoadmapSectionType(parseStringValue(row.getSectionType()))
+                        + "#" + parseIntValue(row.getItemOrder(), 1);
+                if (!merged.containsKey(key)) {
+                    merged.put(key, row);
+                }
+            }
+        }
+        List<RDCICareerRoadmap> out = new ArrayList<>(merged.values());
+        out.sort((a, b) -> {
+            String sa = normalizeRoadmapSectionType(parseStringValue(a == null ? null : a.getSectionType()));
+            String sb = normalizeRoadmapSectionType(parseStringValue(b == null ? null : b.getSectionType()));
+            int sectionCmp = sa.compareTo(sb);
+            if (sectionCmp != 0) {
+                return sectionCmp;
+            }
+            return Integer.compare(
+                    parseIntValue(a == null ? null : a.getItemOrder(), 1),
+                    parseIntValue(b == null ? null : b.getItemOrder(), 1));
+        });
+        return out;
+    }
+
+    private void appendGeneratedSectionRows(List<Map<String, Object>> target,
+                                            String sectionType,
+                                            List<Map<String, String>> rows) {
+        if (target == null || rows == null || rows.isEmpty()) {
+            return;
+        }
+        int order = 1;
+        for (Map<String, String> row : rows) {
+            if (row == null) {
+                continue;
+            }
+            target.add(generatedRoadmapRow(
+                    sectionType,
+                    order++,
+                    parseStringValue(row.get("title")),
+                    parseStringValue(row.get("detail"))));
+        }
+    }
+
+    private Map<String, Object> generatedRoadmapRow(String sectionType,
+                                                    int itemOrder,
+                                                    String title,
+                                                    String detailText) {
+        Map<String, Object> row = new LinkedHashMap<>();
+        row.put("sectionType", nz(sectionType).trim().toUpperCase(Locale.ENGLISH));
+        row.put("itemOrder", Math.max(itemOrder, 1));
+        row.put("title", nz(title));
+        row.put("detailText", nz(detailText));
+        return row;
+    }
+
+    private String gradeHintFromRoadmapStage(String gradeStage) {
+        String stage = nz(gradeStage).trim().toUpperCase(Locale.ENGLISH);
+        if (stage.contains("FOUNDATION")) {
+            return "9";
+        }
+        if (stage.contains("SENIOR")) {
+            return "11";
+        }
+        if (stage.contains("POST12")) {
+            return "13";
+        }
+        return "10";
+    }
+
+    private List<String> candidateRoadmapKeys(Map<String, Object> primaryCareer, String planTier) {
+        List<String> keys = new ArrayList<>();
+        String code = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerCode"))
+                .trim().toUpperCase(Locale.ENGLISH);
+        if (!code.isEmpty()) {
+            keys.add(code);
+        }
+        String name = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        String normalizedNameCode = normalizeRoadmapCareerCode(name);
+        if (!normalizedNameCode.isEmpty() && !keys.contains(normalizedNameCode)) {
+            keys.add(normalizedNameCode);
+        }
+        String cluster = parseStringValue(primaryCareer == null ? null : primaryCareer.get("cluster"));
+        String inferredKey = inferRoadmapKey(name, cluster);
+        if (!inferredKey.isEmpty() && !keys.contains(inferredKey)) {
+            keys.add(inferredKey);
+        }
+        return keys;
+    }
+
+    private boolean attemptAiRoadmapAutofill(Map<String, Object> primaryCareer,
+                                             String roadmapKey,
+                                             String planTier,
+                                             String gradeStage) {
+        if (!roadmapAiAutofillEnabled || openAIService == null) {
+            return false;
+        }
+        String key = nz(roadmapKey).trim().toUpperCase(Locale.ENGLISH);
+        if (key.isEmpty() || "DEFAULT".equals(key)) {
+            return false;
+        }
+        try {
+            String prompt = buildRoadmapAutofillPrompt(primaryCareer, key, planTier, gradeStage);
+            String response = openAIService.getResponseFromOpenAI(prompt, roadmapAiMaxTokens);
+            Map<String, Object> payload = parseJsonObject(response);
+            List<Map<String, Object>> normalizedRows = normalizeGeneratedRoadmapRows(payload, planTier);
+            if (!hasRequiredRoadmapCoverage(normalizedRows, planTier)) {
+                return false;
+            }
+            String gradeForStorage = normalizeRoadmapGradeStageForStorage(planTier, gradeStage);
+            String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+            for (Map<String, Object> row : normalizedRows) {
+                if (row == null) {
+                    continue;
+                }
+                RDCICareerRoadmap entity = new RDCICareerRoadmap();
+                entity.setModuleCode("APTIPATH");
+                entity.setAssessmentVersion(ASSESSMENT_VERSION);
+                entity.setCareerCode(key);
+                entity.setPlanTier(planTier);
+                entity.setGradeStage(gradeForStorage);
+                entity.setSectionType(parseStringValue(row.get("sectionType")));
+                entity.setItemOrder(parseIntValue(row.get("itemOrder"), 1));
+                entity.setTitle(parseStringValue(row.get("title")));
+                entity.setDetailText(parseStringValue(row.get("detailText")));
+                entity.setStatus("ACTIVE");
+                entity.setMetadataJson(toJson(Map.of(
+                        "source", "OPENAI_AUTOFILL",
+                        "promptVersion", "roadmap-v1",
+                        "careerName", nz(careerName),
+                        "careerCode", key,
+                        "planTier", nz(planTier),
+                        "gradeStage", gradeForStorage), "{}"));
+                ciCareerRoadmapService.saveRoadmap(entity);
+            }
+            return true;
+        } catch (Exception ignore) {
+            return false;
+        }
+    }
+
+    private String buildRoadmapAutofillPrompt(Map<String, Object> primaryCareer,
+                                              String roadmapKey,
+                                              String planTier,
+                                              String gradeStage) {
+        String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        String cluster = parseStringValue(primaryCareer == null ? null : primaryCareer.get("cluster"));
+        String subjects = parseStringValue(primaryCareer == null ? null : primaryCareer.get("requiredSubjects"));
+        String exams = parseStringValue(primaryCareer == null ? null : primaryCareer.get("entranceExams"));
+        String pathwayHint = parseStringValue(primaryCareer == null ? null : primaryCareer.get("pathwayHint"));
+        String fitScore = parseStringValue(primaryCareer == null ? null : primaryCareer.get("fitScore"));
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        String allowedSections = String.join(", ", allowedRoadmapSections(tier));
+
+        String requirements;
+        if ("PRO".equals(tier)) {
+            requirements = "- Must include sections: OVERVIEW, WHAT_TO_STUDY, SKILLS, PROJECTS, WHERE_TO_STUDY, ACTION_90, MILESTONE, UPGRADE\n"
+                    + "- ACTION_90: exactly 3 rows (itemOrder 1..3)\n"
+                    + "- MILESTONE: at least 3 rows\n"
+                    + "- WHAT_TO_STUDY: at least 3 rows (grade-aware)\n"
+                    + "- WHERE_TO_STUDY should include Indian exams + colleges context\n";
+        } else {
+            requirements = "- Must include sections: OVERVIEW, WHAT_TO_STUDY, SKILLS, PROJECTS, WHERE_TO_STUDY, ACTION_90, MILESTONE, UPGRADE\n"
+                    + "- Keep each section concise but structured for preview\n";
+        }
+
+        return "You generate AptiPath roadmap rows for direct DB storage.\n"
+                + "Return STRICT JSON only. No markdown. No prose outside JSON.\n"
+                + "Schema:\n"
+                + "{\n"
+                + "  \"rows\": [\n"
+                + "    {\n"
+                + "      \"sectionType\": \"OVERVIEW\",\n"
+                + "      \"itemOrder\": 1,\n"
+                + "      \"title\": \"...\",\n"
+                + "      \"detailText\": \"...\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}\n"
+                + "Rules:\n"
+                + "- sectionType allowed only from: " + allowedSections + "\n"
+                + requirements
+                + "- Keep each detailText under 280 characters.\n"
+                + "- Keep titles under 80 characters.\n"
+                + "- Tone: factual, student-safe, actionable. Avoid fluffy advice.\n"
+                + "- Use placeholders {CAREER}, {GRADE}, {BOARD}, {FIT_SCORE} where natural.\n"
+                + "- Avoid guaranteed salary promises.\n"
+                + "- 2026-2036 India relevance should be covered in OVERVIEW.\n"
+                + "Context:\n"
+                + "careerCode=" + roadmapKey + "\n"
+                + "careerName=" + (careerName.isEmpty() ? roadmapKey : careerName) + "\n"
+                + "cluster=" + (cluster.isEmpty() ? "General" : cluster) + "\n"
+                + "planTier=" + tier + "\n"
+                + "gradeStage=" + normalizeRoadmapGradeStageForStorage(planTier, gradeStage) + "\n"
+                + "fitScore=" + (fitScore.isEmpty() ? "NA" : fitScore) + "\n"
+                + "requiredSubjects=" + (subjects.isEmpty() ? "NA" : subjects) + "\n"
+                + "entranceExams=" + (exams.isEmpty() ? "NA" : exams) + "\n"
+                + "pathwayHint=" + (pathwayHint.isEmpty() ? "NA" : pathwayHint);
+    }
+
+    private List<Map<String, Object>> normalizeGeneratedRoadmapRows(Map<String, Object> payload, String planTier) {
+        List<Map<String, Object>> rawRows = parseMapList(payload == null ? null : payload.get("rows"));
+        if (rawRows.isEmpty()) {
+            return List.of();
+        }
+        Set<String> allowedSections = allowedRoadmapSections(planTier);
+        Map<String, Integer> defaultOrderBySection = new LinkedHashMap<>();
+        Map<String, Map<String, Object>> deduped = new LinkedHashMap<>();
+        int rowLimit = Math.max(8, Math.min(roadmapAiMaxRows, 60));
+        for (Map<String, Object> raw : rawRows) {
+            if (raw == null || raw.isEmpty()) {
+                continue;
+            }
+            String sectionType = normalizeRoadmapSectionType(parseStringValue(raw.get("sectionType")));
+            if (!allowedSections.contains(sectionType)) {
+                continue;
+            }
+            int fallbackOrder = defaultOrderBySection.getOrDefault(sectionType, 0) + 1;
+            int itemOrder = parseIntValue(raw.get("itemOrder"), fallbackOrder);
+            if (itemOrder < 1) {
+                itemOrder = fallbackOrder;
+            }
+            if (itemOrder > 50) {
+                itemOrder = 50;
+            }
+            String title = trimToNull(parseStringValue(raw.get("title")));
+            if (title == null) {
+                title = sectionType.replace('_', ' ');
+            }
+            title = truncateRoadmapText(title, 255);
+            String detailText = trimToNull(parseStringValue(raw.get("detailText")));
+            if (detailText == null) {
+                detailText = trimToNull(parseStringValue(raw.get("detail")));
+            }
+            if (detailText == null) {
+                continue;
+            }
+            detailText = truncateRoadmapText(detailText, 1200);
+            String dedupeKey = sectionType + "#" + itemOrder;
+            if (deduped.containsKey(dedupeKey)) {
+                continue;
+            }
+            Map<String, Object> normalized = new LinkedHashMap<>();
+            normalized.put("sectionType", sectionType);
+            normalized.put("itemOrder", itemOrder);
+            normalized.put("title", title);
+            normalized.put("detailText", detailText);
+            deduped.put(dedupeKey, normalized);
+            defaultOrderBySection.put(sectionType, Math.max(defaultOrderBySection.getOrDefault(sectionType, 0), itemOrder));
+            if (deduped.size() >= rowLimit) {
+                break;
+            }
+        }
+        return new ArrayList<>(deduped.values());
+    }
+
+    private boolean hasRequiredRoadmapCoverage(List<Map<String, Object>> rows, String planTier) {
+        if (rows == null || rows.isEmpty()) {
+            return false;
+        }
+        Map<String, Integer> sectionCounts = new LinkedHashMap<>();
+        for (Map<String, Object> row : rows) {
+            if (row == null) {
+                continue;
+            }
+            String section = normalizeRoadmapSectionType(parseStringValue(row.get("sectionType")));
+            if (section.isEmpty()) {
+                continue;
+            }
+            sectionCounts.put(section, sectionCounts.getOrDefault(section, 0) + 1);
+        }
+
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        for (String requiredSection : ROADMAP_TEMPLATE_REQUIRED_SECTIONS) {
+            if (sectionCounts.getOrDefault(requiredSection, 0) < 1) {
+                return false;
+            }
+        }
+        if ("PRO".equals(tier)) {
+            return sectionCounts.getOrDefault("ACTION_90", 0) >= 3
+                    && sectionCounts.getOrDefault("MILESTONE", 0) >= 3
+                    && sectionCounts.getOrDefault("WHAT_TO_STUDY", 0) >= 3
+                    && sectionCounts.getOrDefault("UPGRADE", 0) >= 1;
+        }
+        return sectionCounts.getOrDefault("ACTION_90", 0) >= 3
+                && sectionCounts.getOrDefault("MILESTONE", 0) >= 2
+                && sectionCounts.getOrDefault("UPGRADE", 0) >= 1;
+    }
+
+    private boolean hasRequiredRoadmapCoverageFromDbRows(List<RDCICareerRoadmap> rows, String planTier) {
+        if (rows == null || rows.isEmpty()) {
+            return false;
+        }
+        List<Map<String, Object>> normalized = new ArrayList<>();
+        for (RDCICareerRoadmap row : rows) {
+            if (row == null) {
+                continue;
+            }
+            String sectionType = normalizeRoadmapSectionType(parseStringValue(row.getSectionType()));
+            if (sectionType.isEmpty()) {
+                continue;
+            }
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("sectionType", sectionType);
+            normalized.add(item);
+        }
+        return hasRequiredRoadmapCoverage(normalized, planTier);
+    }
+
+    private List<Map<String, String>> fallbackWhatToStudyRows(String careerName, String grade, String requiredSubjects) {
+        String subjects = trimToNull(requiredSubjects);
+        if (subjects == null) {
+            subjects = "Math, Physics, Computer Science, Communication";
+        }
+        return List.of(
+                roadmapRow("Class " + grade + " focus", "Prioritize " + subjects + " with a weekly revision plan and concept-first notes."),
+                roadmapRow("Stream alignment", "Keep your subject mix aligned with " + careerName + " entry routes and exam requirements."),
+                roadmapRow("Post-12 path", "Target degree options linked to " + careerName + " and shortlist 5-7 institutions early.")
+        );
+    }
+
+    private List<Map<String, String>> fallbackSkillRows(String careerName, String pathwayHint) {
+        String hint = trimToNull(pathwayHint);
+        if (hint == null) {
+            hint = "Build practical execution evidence using structured projects and mentor feedback.";
+        }
+        return List.of(
+                roadmapRow("Foundation skills", "Strengthen analytical reasoning, communication, and disciplined problem solving."),
+                roadmapRow("Technical stack", "Develop tool fluency needed for " + careerName + " with weekly applied practice."),
+                roadmapRow("Execution proof", hint)
+        );
+    }
+
+    private List<Map<String, String>> fallbackProjectRows(String careerName, String grade) {
+        return List.of(
+                roadmapRow("School-level build", "Complete one mini project in Class " + grade + " aligned to " + careerName + "."),
+                roadmapRow("Portfolio artifact", "Document project goals, approach, outcomes, and learning in a shareable portfolio."),
+                roadmapRow("Validation sprint", "Run one mentor-reviewed project iteration every 30 days.")
+        );
+    }
+
+    private List<Map<String, String>> fallbackWhereToStudyRows(String careerName, String entranceExams) {
+        String exams = trimToNull(entranceExams);
+        if (exams == null) {
+            exams = "JEE / CUET / institution-specific entrances";
+        }
+        return List.of(
+                roadmapRow("Exam route", "Primary exam routes: " + exams + "."),
+                roadmapRow("College shortlist", "Build a tiered shortlist (dream, target, safe) mapped to " + careerName + " programs."),
+                roadmapRow("Learning stack", "Use school academics + mock tests + online specialization tracks for consistent growth.")
+        );
+    }
+
+    private List<Map<String, String>> fallbackAction90Rows(String careerName) {
+        return List.of(
+                roadmapRow("Days 1-30", "Audit gaps, set weekly goals, and start a daily 60-90 minute deep work block for " + careerName + "."),
+                roadmapRow("Days 31-60", "Complete one project milestone and one mock/assessment cycle with error analysis."),
+                roadmapRow("Days 61-90", "Publish outcomes, review progress with mentor/parent, and finalize next 90-day plan.")
+        );
+    }
+
+    private List<Map<String, String>> fallbackMilestoneRows(String careerName) {
+        return List.of(
+                roadmapRow("By 2028", "Demonstrate strong fundamentals and 2-3 validated projects for " + careerName + " readiness."),
+                roadmapRow("By 2032", "Complete degree-stage specialization, internships, and measurable portfolio depth."),
+                roadmapRow("By 2036", "Progress into high-impact role with advanced skills, domain depth, and leadership potential.")
+        );
+    }
+
+    private Set<String> allowedRoadmapSections(String planTier) {
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        return "PRO".equals(tier) ? PRO_ROADMAP_SECTIONS : BASIC_ROADMAP_SECTIONS;
+    }
+
+    private String normalizeRoadmapSectionType(String sectionType) {
+        String normalized = nz(sectionType).trim().toUpperCase(Locale.ENGLISH);
+        if (normalized.isEmpty()) {
+            return "";
+        }
+        normalized = normalized.replace('-', '_').replace(' ', '_');
+        while (normalized.contains("__")) {
+            normalized = normalized.replace("__", "_");
+        }
+        if ("STUDY".equals(normalized)) {
+            return "WHAT_TO_STUDY";
+        }
+        if ("PHASE".equals(normalized)) {
+            return "MILESTONE";
+        }
+        if ("EXAMS".equals(normalized)) {
+            return "WHERE_TO_STUDY";
+        }
+        if ("LONG_TERM_MILESTONE".equals(normalized) || "LONG_TERM_MILESTONES".equals(normalized)) {
+            return "MILESTONE";
+        }
+        if ("NINETY_DAY_PLAN".equals(normalized) || "PLAN_90".equals(normalized)) {
+            return "ACTION_90";
+        }
+        return normalized;
+    }
+
+    private String normalizeRoadmapGradeStageForStorage(String planTier, String gradeStage) {
+        String tier = nz(planTier).trim().toUpperCase(Locale.ENGLISH);
+        if (!"PRO".equals(tier)) {
+            return "ANY";
+        }
+        String stage = nz(gradeStage).trim().toUpperCase(Locale.ENGLISH);
+        if (stage.isEmpty()) {
+            return "ANY";
+        }
+        return stage;
+    }
+
+    private String truncateRoadmapText(String input, int maxLength) {
+        String value = nz(input).trim();
+        if (value.isEmpty()) {
+            return "";
+        }
+        value = value.replace('\r', ' ').replace('\n', ' ');
+        while (value.contains("  ")) {
+            value = value.replace("  ", " ");
+        }
+        if (value.length() <= maxLength) {
+            return value;
+        }
+        return value.substring(0, maxLength).trim();
+    }
+
+    private String normalizeRoadmapCareerCode(String careerName) {
+        String value = nz(careerName).trim().toUpperCase(Locale.ENGLISH);
+        if (value.isEmpty()) {
+            return "";
+        }
+        value = value.replaceAll("[^A-Z0-9]+", "_").replaceAll("_+", "_");
+        value = value.replaceAll("^_+", "").replaceAll("_+$", "");
+        return value;
+    }
+
+    private String inferRoadmapKey(String careerName, String clusterName) {
+        String context = (nz(careerName) + " " + nz(clusterName)).toUpperCase(Locale.ENGLISH);
+        if (containsAny(context, "AI", "ML", "MACHINE LEARNING", "DATA SCIENCE", "COMPUTER", "SOFTWARE")) {
+            return "AI_ML_ENGINEER";
+        }
+        if (containsAny(context, "CA", "CS", "CMA", "CHARTERED ACCOUNT")) {
+            return "CA_CS_CMA";
+        }
+        if (containsAny(context, "LAW", "LEGAL", "ADVOCATE")) {
+            return "LAW_PROFESSIONAL";
+        }
+        return "";
+    }
+
+    private String resolveRoadmapGradeStage(Map<String, String> academicProfile) {
+        String grade = academicProfileValue(academicProfile, "grade", STUDENT_INTAKE_GRADE_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
+        if ("8".equals(grade) || "9".equals(grade) || "10".equals(grade)) {
+            return "FOUNDATION_8_10";
+        }
+        if ("11".equals(grade) || "12".equals(grade)) {
+            return "SENIOR_11_12";
+        }
+        if (isPost12Grade(grade)) {
+            return "POST12";
+        }
+        return "ANY";
+    }
+
+    private Map<String, String> buildRoadmapTokens(Map<String, Object> primaryCareer,
+                                                   Map<String, String> academicProfile,
+                                                   String fallbackCareerName) {
+        Map<String, String> tokens = new LinkedHashMap<>();
+        String careerName = parseStringValue(primaryCareer == null ? null : primaryCareer.get("careerName"));
+        String fitScore = parseStringValue(primaryCareer == null ? null : primaryCareer.get("fitScore"));
+        String grade = academicProfileValue(academicProfile, "grade", STUDENT_INTAKE_GRADE_CODE);
+        String board = academicProfileValue(academicProfile, "board", STUDENT_INTAKE_BOARD_CODE);
+        tokens.put("CAREER", careerName.isEmpty() ? fallbackCareerName : careerName);
+        tokens.put("FIT_SCORE", fitScore.isEmpty() ? "0" : fitScore);
+        tokens.put("GRADE", grade.isEmpty() ? "10" : grade);
+        tokens.put("BOARD", board.isEmpty() ? "CBSE/ICSE/State" : board);
+        return tokens;
+    }
+
+    private String resolveRoadmapText(List<RDCICareerRoadmap> rows,
+                                      String sectionType,
+                                      String fallback,
+                                      Map<String, String> tokens) {
+        if (rows != null) {
+            for (RDCICareerRoadmap row : rows) {
+                if (row == null) {
+                    continue;
+                }
+                if (sectionType.equalsIgnoreCase(nz(row.getSectionType()))) {
+                    String detail = trimToNull(row.getDetailText());
+                    if (detail != null) {
+                        return applyRoadmapTokens(detail, tokens);
+                    }
+                }
+            }
+        }
+        return applyRoadmapTokens(nz(fallback), tokens);
+    }
+
+    private String resolveRoadmapTextBySectionTypes(List<RDCICareerRoadmap> rows,
+                                                    String fallback,
+                                                    Map<String, String> tokens,
+                                                    String... sectionTypes) {
+        if (sectionTypes != null) {
+            for (String sectionType : sectionTypes) {
+                String resolved = resolveRoadmapText(rows, nz(sectionType), "", tokens);
+                if (!resolved.trim().isEmpty()) {
+                    return resolved;
+                }
+            }
+        }
+        return applyRoadmapTokens(nz(fallback), tokens);
+    }
+
+    private List<Map<String, String>> resolveRoadmapSectionRows(List<RDCICareerRoadmap> rows,
+                                                                String sectionType,
+                                                                Map<String, String> tokens,
+                                                                List<Map<String, String>> fallbackRows) {
+        List<Map<String, String>> items = new ArrayList<>();
+        if (rows != null) {
+            for (RDCICareerRoadmap row : rows) {
+                if (row == null || !sectionType.equalsIgnoreCase(nz(row.getSectionType()))) {
+                    continue;
+                }
+                String title = trimToNull(row.getTitle());
+                String detail = trimToNull(row.getDetailText());
+                if (title == null && detail == null) {
+                    continue;
+                }
+                items.add(roadmapRow(
+                        applyRoadmapTokens(title == null ? "Milestone" : title, tokens),
+                        applyRoadmapTokens(detail == null ? "" : detail, tokens)));
+            }
+        }
+        if (!items.isEmpty()) {
+            return items;
+        }
+        if (fallbackRows == null || fallbackRows.isEmpty()) {
+            return List.of();
+        }
+        List<Map<String, String>> resolved = new ArrayList<>();
+        for (Map<String, String> row : fallbackRows) {
+            if (row == null) {
+                continue;
+            }
+            resolved.add(roadmapRow(
+                    applyRoadmapTokens(nz(row.get("title")), tokens),
+                    applyRoadmapTokens(nz(row.get("detail")), tokens)));
+        }
+        return resolved;
+    }
+
+    private List<Map<String, String>> resolveRoadmapSectionRowsByAliases(List<RDCICareerRoadmap> rows,
+                                                                          Map<String, String> tokens,
+                                                                          List<Map<String, String>> fallbackRows,
+                                                                          String... sectionTypes) {
+        if (sectionTypes != null) {
+            for (String sectionType : sectionTypes) {
+                List<Map<String, String>> resolved = resolveRoadmapSectionRows(rows, nz(sectionType), tokens, List.of());
+                if (resolved != null && !resolved.isEmpty()) {
+                    return resolved;
+                }
+            }
+        }
+        return resolveRoadmapSectionRows(rows, "", tokens, fallbackRows);
+    }
+
+    private Map<String, String> roadmapRow(String title, String detail) {
+        Map<String, String> row = new LinkedHashMap<>();
+        row.put("title", nz(title));
+        row.put("detail", nz(detail));
+        return row;
+    }
+
+    private String applyRoadmapTokens(String input, Map<String, String> tokens) {
+        String output = nz(input);
+        if (output.isEmpty() || tokens == null || tokens.isEmpty()) {
+            return output;
+        }
+        for (Map.Entry<String, String> entry : tokens.entrySet()) {
+            if (entry.getKey() == null) {
+                continue;
+            }
+            String token = "{" + entry.getKey().trim().toUpperCase(Locale.ENGLISH) + "}";
+            output = output.replace(token, nz(entry.getValue()));
+        }
+        return output;
     }
 
     private double metricValue(BigDecimal value, double fallback) {
@@ -2293,8 +3603,8 @@ public class RDAptiPathStudentController {
         notes.add(String.format(Locale.ENGLISH,
                 "Career Health Score uses 65%% assessed accuracy + 35%% overall readiness (current readiness %.1f/100).",
                 clamp(overallFitScore, 0.0, 100.0)));
-        notes.add("IIT/NEET/CAT/LAW values are readiness-fit indicators, not predicted exam score/rank.");
-        notes.add("Competitive-stream fit now requires domain evidence from STEM, Biology, General Awareness, and Reasoning-IQ sections.");
+        notes.add("IIT/NEET/CAT/LAW/CA-MBA values are readiness-fit indicators, not predicted exam score/rank.");
+        notes.add("Competitive-stream fit requires domain evidence from STEM/Biology or Commerce/Humanities plus General Awareness and Reasoning-IQ sections.");
         notes.add("When subject-affinity survey inputs are missing, neutral baseline (50/100) is used instead of optimistic defaults.");
         return notes;
     }
@@ -2424,11 +3734,27 @@ public class RDAptiPathStudentController {
         double aptitude = metricValue(scoreIndex == null ? null : scoreIndex.getAptitudeScore(), 55.0);
         double interest = metricValue(scoreIndex == null ? null : scoreIndex.getInterestScore(), 55.0);
         double examReadiness = metricValue(scoreIndex == null ? null : scoreIndex.getExamReadinessIndex(), 55.0);
+        double aiReadiness = metricValue(scoreIndex == null ? null : scoreIndex.getAiReadinessIndex(), 55.0);
         double alignment = metricValue(scoreIndex == null ? null : scoreIndex.getAlignmentIndex(), 55.0);
+        double catFallback = (aptitude * 0.40) + (examReadiness * 0.35) + (alignment * 0.25);
         result.put("IIT", round1(streamFitPayload.getOrDefault("iit", aptitude)));
         result.put("NEET", round1(streamFitPayload.getOrDefault("neet", (aptitude * 0.60) + (examReadiness * 0.40))));
-        result.put("CAT", round1(streamFitPayload.getOrDefault("cat", (aptitude * 0.40) + (examReadiness * 0.35) + (alignment * 0.25))));
+        result.put("CAT", round1(streamFitPayload.getOrDefault("cat", catFallback)));
         result.put("LAW", round1(streamFitPayload.getOrDefault("law", (interest * 0.45) + (alignment * 0.30) + (examReadiness * 0.25))));
+        result.put("CA/CS/CMA", round1(streamFitPayload.getOrDefault("ca_cs_cma",
+                (catFallback * 0.55) + (examReadiness * 0.25) + (alignment * 0.20))));
+        result.put("MBA - Business Analytics", round1(streamFitPayload.getOrDefault("mba_business_analytics",
+                (catFallback * 0.50) + (aptitude * 0.25) + (aiReadiness * 0.25))));
+        result.put("MBA - Finance", round1(streamFitPayload.getOrDefault("mba_finance",
+                (catFallback * 0.45) + (aptitude * 0.30) + (examReadiness * 0.25))));
+        result.put("MBA - Marketing", round1(streamFitPayload.getOrDefault("mba_marketing",
+                (catFallback * 0.42) + (interest * 0.33) + (alignment * 0.25))));
+        result.put("MBA - Operations", round1(streamFitPayload.getOrDefault("mba_operations",
+                (catFallback * 0.45) + (aptitude * 0.30) + (examReadiness * 0.25))));
+        result.put("MBA - HR/People", round1(streamFitPayload.getOrDefault("mba_hr_people",
+                (catFallback * 0.35) + (interest * 0.40) + (alignment * 0.25))));
+        result.put("MBA - Entrepreneurship", round1(streamFitPayload.getOrDefault("mba_entrepreneurship",
+                (catFallback * 0.40) + (aiReadiness * 0.25) + (alignment * 0.35))));
         return result;
     }
 
@@ -2512,6 +3838,10 @@ public class RDAptiPathStudentController {
         double reasoning = sectionScoreValue(sectionScores, "REASONING_IQ", core);
         double bioFoundation = sectionScoreValue(sectionScores, "BIOLOGY_FOUNDATION",
                 sectionScoreValue(sectionScores, "INTEREST_WORK", 55.0));
+        double commerceFoundation = sectionScoreValue(sectionScores, "COMMERCE_FOUNDATION",
+                sectionScoreValue(sectionScores, "GENERAL_AWARENESS", 55.0));
+        double humanitiesFoundation = sectionScoreValue(sectionScores, "HUMANITIES_FOUNDATION",
+                sectionScoreValue(sectionScores, "INTEREST_WORK", 55.0));
         double general = sectionScoreValue(sectionScores, "GENERAL_AWARENESS",
                 sectionScoreValue(sectionScores, "CAREER_REALITY", 55.0));
         double learning = sectionScoreValue(sectionScores, "LEARNING_BEHAVIOR", 55.0);
@@ -2519,11 +3849,15 @@ public class RDAptiPathStudentController {
         double values = sectionScoreValue(sectionScores, "VALUES_MOTIVATION", 55.0);
         double aiReadiness = sectionScoreValue(sectionScores, "AI_READINESS", 55.0);
 
-        double mathPct = clamp((stem * 0.45) + (reasoning * 0.30) + (core * 0.15) + (applied * 0.10), 35.0, 95.0);
+        double mathPct = clamp((stem * 0.35) + (commerceFoundation * 0.10) + (reasoning * 0.30) + (core * 0.15) + (applied * 0.10), 35.0, 95.0);
         double physicsPct = clamp((stem * 0.40) + (applied * 0.30) + (core * 0.20) + (reasoning * 0.10), 35.0, 95.0);
         double chemistryPct = clamp((stem * 0.50) + (applied * 0.20) + (general * 0.10) + (aiReadiness * 0.20), 35.0, 95.0);
         double biologyPct = clamp((bioFoundation * 0.55) + (interest * 0.20) + (learning * 0.15) + (general * 0.10), 35.0, 95.0);
-        double languagePct = clamp((general * 0.45) + (values * 0.20) + (interest * 0.20) + (learning * 0.15), 35.0, 95.0);
+        double languagePct = clamp(
+                (general * 0.30) + (humanitiesFoundation * 0.25) + (commerceFoundation * 0.10)
+                        + (values * 0.15) + (interest * 0.10) + (learning * 0.10),
+                35.0,
+                95.0);
 
         Map<String, Integer> derived = new LinkedHashMap<>();
         derived.put("math", percentToSignalScale(mathPct));
@@ -2577,7 +3911,13 @@ public class RDAptiPathStudentController {
                 "VALUES_MOTIVATION",
                 "LEARNING_BEHAVIOR",
                 "AI_READINESS",
-                "CAREER_REALITY");
+                "CAREER_REALITY",
+                "STEM_FOUNDATION",
+                "BIOLOGY_FOUNDATION",
+                "COMMERCE_FOUNDATION",
+                "HUMANITIES_FOUNDATION",
+                "GENERAL_AWARENESS",
+                "REASONING_IQ");
         for (String sectionCode : order) {
             if (sectionScores.containsKey(sectionCode)) {
                 display.put(sectionLabel(sectionCode), sectionScores.get(sectionCode));
@@ -2852,15 +4192,19 @@ public class RDAptiPathStudentController {
         clusterScores.put("Robotics, Drones & Autonomous Systems", clamp((roboticsFitIndex * 0.45) + (droneAutonomyFitIndex * 0.25) + (aiReadinessIndex * 0.16) + (examReadinessIndex * 0.14), 0.0, 100.0));
         List<RDCICareerAdjustment> adjustmentCatalog = ciCareerMappingService
                 .getActiveAdjustments("APTIPATH", ASSESSMENT_VERSION);
-        boolean dbAdjusted = applyCatalogAdjustments(
+        AdjustmentCoverage adjustmentCoverage = applyCatalogAdjustments(
                 clusterScores,
                 selectedCareerIntents,
                 studentSelfSignals,
                 subjectAffinitySignals,
                 adjustmentCatalog);
-        if (!dbAdjusted) {
+        if (!adjustmentCoverage.intentApplied) {
             applyIntentBoosts(clusterScores, selectedCareerIntents);
+        }
+        if (!adjustmentCoverage.selfApplied) {
             applySelfSignalAdjustments(clusterScores, studentSelfSignals);
+        }
+        if (!adjustmentCoverage.subjectApplied) {
             applySubjectAffinityAdjustments(clusterScores, subjectAffinitySignals);
         }
         for (Map.Entry<String, Double> entry : new ArrayList<>(clusterScores.entrySet())) {
@@ -2960,9 +4304,9 @@ public class RDAptiPathStudentController {
         List<RDCICareerCatalog> allCareerCatalog = ciCareerMappingService
                 .getActiveCareerCatalog("APTIPATH", ASSESSMENT_VERSION);
         List<RDCICareerCatalog> careerCatalog = filterCareerCatalogByAcademicContext(allCareerCatalog, academicProfile);
-        careerCatalog = prioritizePrimaryCareerCatalog(careerCatalog, 65);
+        careerCatalog = prioritizePrimaryCareerCatalog(careerCatalog, CAREER_POOL_LIMIT);
         if (careerCatalog == null || careerCatalog.isEmpty()) {
-            careerCatalog = prioritizePrimaryCareerCatalog(allCareerCatalog, 65);
+            careerCatalog = prioritizePrimaryCareerCatalog(allCareerCatalog, CAREER_POOL_LIMIT);
         }
         if (careerCatalog != null && !careerCatalog.isEmpty()) {
             clusterRoles.clear();
@@ -3104,7 +4448,13 @@ public class RDAptiPathStudentController {
                 row.put("targetPhase", targetPhase);
                 row.put("academicPhase", academicPhase);
                 row.put("evidenceTrace", evidenceTrace);
-                row.put("reason", "Strong signal in " + reasonSignalText + " for this pathway." + intentReason);
+                row.put("reason", buildCareerReasonLine(
+                        cluster,
+                        sectionScores,
+                        selectedCareerIntents,
+                        role,
+                        reasonSignalText,
+                        intentReason));
                 careers.add(row);
             }
         }
@@ -3229,6 +4579,368 @@ public class RDAptiPathStudentController {
             return "Developing Fit";
         }
         return "Exploratory";
+    }
+
+    private String buildCareerReasonLine(String cluster,
+                                         Map<String, Double> sectionScores,
+                                         List<String> selectedCareerIntents,
+                                         String role,
+                                         String reasonSignalText,
+                                         String intentReason) {
+        String topEvidence = topSectionEvidence(sectionScores, 1);
+        String roleText = nz(role).trim();
+        if (roleText.isEmpty()) {
+            roleText = "this pathway";
+        }
+        boolean intentAligned = isCareerIntentAligned(cluster, role, selectedCareerIntents);
+        if (intentAligned) {
+            return roleText + " aligns with your declared intent and current strength in "
+                    + topEvidence + "." + intentReason;
+        }
+        return roleText + " is currently supported by " + reasonSignalText
+                + ", with strongest evidence in " + topEvidence + ".";
+    }
+
+    private List<Map<String, Object>> refineTopCareerMatches(List<Map<String, Object>> careers,
+                                                             List<String> selectedCareerIntents,
+                                                             int limit) {
+        if (careers == null || careers.isEmpty() || limit <= 0) {
+            return List.of();
+        }
+        List<Map<String, Object>> sorted = new ArrayList<>(careers);
+        sorted.sort((a, b) -> Double.compare(
+                careerRankScore(b, selectedCareerIntents),
+                careerRankScore(a, selectedCareerIntents)));
+
+        double topFit = careerFitScore(sorted.get(0));
+        double minAllowedFit = Math.max(35.0, topFit - 22.0);
+
+        List<Map<String, Object>> filtered = new ArrayList<>();
+        Map<String, Integer> clusterCount = new LinkedHashMap<>();
+        Set<String> careerNames = new HashSet<>();
+        int primaryClusterLimit = 1;
+
+        for (Map<String, Object> row : sorted) {
+            if (row == null || row.isEmpty()) {
+                continue;
+            }
+            double fit = careerFitScore(row);
+            if (fit < minAllowedFit) {
+                continue;
+            }
+            String cluster = parseStringValue(row.get("cluster")).trim();
+            String career = parseStringValue(row.get("careerName")).trim().toUpperCase(Locale.ENGLISH);
+            if (career.isEmpty() || careerNames.contains(career)) {
+                continue;
+            }
+            int count = clusterCount.getOrDefault(cluster, 0);
+            if (count >= primaryClusterLimit) {
+                continue;
+            }
+            filtered.add(row);
+            careerNames.add(career);
+            clusterCount.put(cluster, count + 1);
+            if (filtered.size() >= limit) {
+                break;
+            }
+        }
+
+        if (filtered.size() >= Math.min(limit, 6)) {
+            return filtered;
+        }
+
+        for (Map<String, Object> row : sorted) {
+            if (filtered.size() >= limit || row == null || row.isEmpty()) {
+                continue;
+            }
+            String career = parseStringValue(row.get("careerName")).trim().toUpperCase(Locale.ENGLISH);
+            if (career.isEmpty() || careerNames.contains(career)) {
+                continue;
+            }
+            double fit = careerFitScore(row);
+            String cluster = parseStringValue(row.get("cluster"));
+            String role = parseStringValue(row.get("careerName"));
+            double relaxedMinFit = Math.max(24.0, minAllowedFit - 10.0);
+            boolean intentAligned = isCareerIntentAligned(cluster, role, selectedCareerIntents);
+            if (fit < relaxedMinFit && !intentAligned) {
+                continue;
+            }
+            filtered.add(row);
+            careerNames.add(career);
+        }
+        if (!filtered.isEmpty()) {
+            return filtered;
+        }
+        if (selectedCareerIntents != null && !selectedCareerIntents.isEmpty()) {
+            for (Map<String, Object> row : sorted) {
+                if (filtered.size() >= limit || row == null || row.isEmpty()) {
+                    continue;
+                }
+                String career = parseStringValue(row.get("careerName")).trim().toUpperCase(Locale.ENGLISH);
+                if (career.isEmpty() || careerNames.contains(career)) {
+                    continue;
+                }
+                String cluster = parseStringValue(row.get("cluster"));
+                String role = parseStringValue(row.get("careerName"));
+                if (!isCareerIntentAligned(cluster, role, selectedCareerIntents)) {
+                    continue;
+                }
+                filtered.add(row);
+                careerNames.add(career);
+            }
+            if (!filtered.isEmpty()) {
+                return filtered;
+            }
+        }
+        for (Map<String, Object> row : sorted) {
+            if (filtered.size() >= limit || row == null || row.isEmpty()) {
+                continue;
+            }
+            String career = parseStringValue(row.get("careerName")).trim().toUpperCase(Locale.ENGLISH);
+            if (career.isEmpty() || careerNames.contains(career)) {
+                continue;
+            }
+            filtered.add(row);
+            careerNames.add(career);
+        }
+        return filtered;
+    }
+
+    private List<Map<String, Object>> refreshCareerRowsForDisplay(List<Map<String, Object>> careers,
+                                                                   Map<String, Double> sectionScores,
+                                                                   List<String> selectedCareerIntents) {
+        if (careers == null || careers.isEmpty()) {
+            return List.of();
+        }
+        String reasonSignalText = topSectionEvidence(sectionScores, 2);
+        String intentReason = selectedCareerIntents == null || selectedCareerIntents.isEmpty()
+                ? ""
+                : " Intent cues: " + String.join(", ", intentLabels(selectedCareerIntents)) + ".";
+        List<Map<String, Object>> refreshed = new ArrayList<>();
+        for (Map<String, Object> row : careers) {
+            if (row == null || row.isEmpty()) {
+                continue;
+            }
+            Map<String, Object> copy = new LinkedHashMap<>(row);
+            String cluster = parseStringValue(copy.get("cluster"));
+            String role = parseStringValue(copy.get("careerName"));
+            copy.put("reason", buildCareerReasonLine(
+                    cluster,
+                    sectionScores,
+                    selectedCareerIntents,
+                    role,
+                    reasonSignalText,
+                    intentReason));
+            refreshed.add(copy);
+        }
+        return refreshed;
+    }
+
+    private double careerFitScore(Map<String, Object> row) {
+        if (row == null || row.isEmpty()) {
+            return 0.0;
+        }
+        return parseDoubleValue(row.get("fitScore"), 0.0);
+    }
+
+    private double careerRankScore(Map<String, Object> row, List<String> selectedCareerIntents) {
+        double fit = careerFitScore(row);
+        String cluster = parseStringValue(row == null ? null : row.get("cluster"));
+        String role = parseStringValue(row == null ? null : row.get("careerName"));
+        int intentMatchScore = intentKeywordMatchScore(cluster, role, selectedCareerIntents);
+        boolean hasIntentSignals = selectedCareerIntents != null && !selectedCareerIntents.isEmpty();
+        double intentBoost = intentMatchScore > 0
+                ? Math.min(34.0, 12.0 + (intentMatchScore * 5.0))
+                : 0.0;
+        double intentPenalty = (hasIntentSignals && intentMatchScore == 0) ? 18.0 : 0.0;
+        double roleSpecificBoost = intentRoleSpecificBoost(cluster, role, selectedCareerIntents);
+        double marketDemandScore = marketDemandScore(cluster, role);
+        double marketBlend = (marketDemandScore - 50.0) * 0.35;
+        return fit + intentBoost + roleSpecificBoost + marketBlend - intentPenalty;
+    }
+
+    private double marketDemandScore(String cluster, String role) {
+        String clusterU = nz(cluster).trim().toUpperCase(Locale.ENGLISH);
+        String roleU = nz(role).trim().toUpperCase(Locale.ENGLISH);
+        double score;
+        switch (clusterU) {
+            case "COMPUTER SCIENCE & AI":
+                score = 92.0;
+                break;
+            case "CYBERSECURITY & DIGITAL TRUST":
+                score = 90.0;
+                break;
+            case "ROBOTICS, DRONES & AUTONOMOUS SYSTEMS":
+                score = 89.0;
+                break;
+            case "DATA, ANALYTICS & FINTECH":
+                score = 88.0;
+                break;
+            case "ENVIRONMENTAL & CLIMATE SYSTEMS":
+                score = 82.0;
+                break;
+            case "ECONOMICS, FINANCE & ACCOUNTING":
+            case "BUSINESS, COMMERCE & MANAGEMENT":
+                score = 78.0;
+                break;
+            case "ENGINEERING & CORE TECHNOLOGY":
+                score = 76.0;
+                break;
+            case "MEDICAL & CLINICAL PATHWAYS":
+            case "ALLIED HEALTH & CARE":
+                score = 75.0;
+                break;
+            case "SKILLED TRADES & APPLIED VOCATIONAL":
+                score = 66.0;
+                break;
+            case "SPORTS, FITNESS & WELLNESS":
+                score = 58.0;
+                break;
+            default:
+                score = 70.0;
+                break;
+        }
+
+        if (containsAny(roleU, "AI", "ML", "MACHINE LEARNING", "DATA SCIENTIST", "CYBER", "CLOUD", "MLOPS", "NLP", "COMPUTER VISION")) {
+            score += 10.0;
+        } else if (containsAny(roleU, "SOFTWARE", "FULL STACK", "BACKEND", "MOBILE APP", "DEVOPS", "AUTOMATION")) {
+            score += 7.0;
+        }
+        if (containsAny(roleU, "ENGINEER", "SCIENTIST", "ARCHITECT", "PRODUCT MANAGER", "QUANT")) {
+            score += 4.0;
+        }
+        if (containsAny(roleU, "TRAINER", "COACH", "RECREATIONAL", "FITNESS")) {
+            score -= 10.0;
+        }
+        if (containsAny(roleU, "TECHNICIAN", "MAINTENANCE", "SERVICE")) {
+            score -= containsAny(roleU, "ROBOTICS", "AUTOMATION", "DRONE") ? 1.0 : 6.0;
+        }
+        return clamp(score, 20.0, 100.0);
+    }
+
+    private int intentKeywordMatchScore(String cluster, String role, List<String> selectedCareerIntents) {
+        if (selectedCareerIntents == null || selectedCareerIntents.isEmpty()) {
+            return 0;
+        }
+        String target = (nz(cluster) + " " + nz(role)).toUpperCase(Locale.ENGLISH);
+        int best = 0;
+        for (String rawIntent : selectedCareerIntents) {
+            String intent = nz(rawIntent).trim().toUpperCase(Locale.ENGLISH);
+            if (intent.isEmpty()) {
+                continue;
+            }
+            int matches = 0;
+            for (String keyword : intentKeywords(intent)) {
+                if (keyword != null && !keyword.isEmpty() && target.contains(keyword)) {
+                    matches++;
+                }
+            }
+            if (matches > best) {
+                best = matches;
+            }
+        }
+        return best;
+    }
+
+    private double intentRoleSpecificBoost(String cluster, String role, List<String> selectedCareerIntents) {
+        if (selectedCareerIntents == null || selectedCareerIntents.isEmpty()) {
+            return 0.0;
+        }
+        String target = (nz(cluster) + " " + nz(role)).toUpperCase(Locale.ENGLISH);
+        boolean csAiIntent = false;
+        boolean roboticsIntent = false;
+        boolean skilledVocationalIntent = false;
+        for (String rawIntent : selectedCareerIntents) {
+            String intent = nz(rawIntent).trim().toUpperCase(Locale.ENGLISH);
+            if (containsAny(intent, "CS_AI", "COMPUTER SCIENCE", "AI")) {
+                csAiIntent = true;
+            }
+            if (containsAny(intent, "ROBOTICS_DRONE", "ROBOTICS", "DRONE")) {
+                roboticsIntent = true;
+            }
+            if (containsAny(intent, "SKILLED_VOCATIONAL", "VOCATIONAL", "TRADES", "ITI")) {
+                skilledVocationalIntent = true;
+            }
+        }
+
+        double boost = 0.0;
+        if (csAiIntent) {
+            if (containsAny(target, "AI/ML ENGINEER", "MACHINE LEARNING ENGINEER", "NLP ENGINEER", "COMPUTER VISION ENGINEER", "MLOPS ENGINEER", "AI PRODUCT ENGINEER")) {
+                boost += 20.0;
+            }
+            if (containsAny(target, "AI", "ML", "MACHINE LEARNING", "DATA", "SOFTWARE", "COMPUTER", "CYBER", "CLOUD")) {
+                boost += 22.0;
+            } else if (containsAny(target, "ROBOT", "DRONE", "UAV", "AUTONOM")) {
+                boost += 8.0;
+            } else {
+                boost -= 8.0;
+            }
+            if (!skilledVocationalIntent && containsAny(target, "TECHNICIAN", "MAINTENANCE", "HVAC", "ELECTRICIAN", "WELDING", "ASSEMBLY")) {
+                boost -= 16.0;
+            }
+        }
+        if (roboticsIntent) {
+            if (containsAny(target, "ROBOTICS ENGINEER", "AUTOMATION ENGINEER", "EMBEDDED SYSTEMS ENGINEER", "ROBOT SIMULATION ENGINEER", "UAV MISSION PLANNER")) {
+                boost += 12.0;
+            }
+            if (containsAny(target, "ROBOT", "DRONE", "UAV", "AUTONOM", "MECHATRONICS")) {
+                boost += 14.0;
+            } else if (containsAny(target, "AI", "COMPUTER", "SOFTWARE")) {
+                boost += 6.0;
+            }
+            if (!skilledVocationalIntent && containsAny(target, "TECHNICIAN", "MAINTENANCE")) {
+                boost -= 8.0;
+            }
+        }
+        return boost;
+    }
+
+    private boolean isCareerIntentAligned(String cluster, String role, List<String> selectedCareerIntents) {
+        if (selectedCareerIntents == null || selectedCareerIntents.isEmpty()) {
+            return false;
+        }
+        String target = (nz(cluster) + " " + nz(role)).toUpperCase(Locale.ENGLISH);
+        for (String rawIntent : selectedCareerIntents) {
+            String intent = nz(rawIntent).trim().toUpperCase(Locale.ENGLISH);
+            if (intent.isEmpty()) {
+                continue;
+            }
+            for (String keyword : intentKeywords(intent)) {
+                if (keyword != null && !keyword.isEmpty() && target.contains(keyword)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private List<String> intentKeywords(String intentCodeOrLabel) {
+        String intent = nz(intentCodeOrLabel).trim().toUpperCase(Locale.ENGLISH);
+        if (intent.isEmpty()) {
+            return List.of();
+        }
+        if (containsAny(intent, "CS_AI", "COMPUTER SCIENCE", "AI")) {
+            return List.of("AI", "COMPUTER", "SOFTWARE", "DATA", "CYBER", "ROBOT", "AUTONOM");
+        }
+        if (containsAny(intent, "ROBOTICS_DRONE", "ROBOTICS", "DRONE")) {
+            return List.of("ROBOT", "DRONE", "UAV", "AUTONOM", "EMBEDDED", "IOT");
+        }
+        if (containsAny(intent, "MEDICAL_HEALTH", "MEDIC", "HEALTH")) {
+            return List.of("MEDICAL", "HEALTH", "CLINICAL", "BIO", "PHARMA", "NURS");
+        }
+        if (containsAny(intent, "LAW_POLICY", "LAW", "POLICY")) {
+            return List.of("LAW", "LEGAL", "POLICY", "GOVERN");
+        }
+        if (containsAny(intent, "BUSINESS_FINANCE", "BUSINESS", "FINANCE", "COMMERCE")) {
+            return List.of("BUSINESS", "FINANCE", "ACCOUNT", "MANAGEMENT", "ECONOM");
+        }
+        if (containsAny(intent, "DESIGN_CREATIVE", "DESIGN", "CREATIVE")) {
+            return List.of("DESIGN", "CREATIVE", "UX", "MEDIA");
+        }
+        if (containsAny(intent, "CIVIL_SERVICES", "UPSC", "GOVERNANCE")) {
+            return List.of("CIVIL", "GOVERN", "POLICY", "PUBLIC");
+        }
+        return List.of(intent);
     }
 
     private String clusterPathwayHint(String cluster) {
@@ -3384,6 +5096,8 @@ public class RDAptiPathStudentController {
             case "CAREER_REALITY": return "Career Reality";
             case "STEM_FOUNDATION": return "STEM Foundation";
             case "BIOLOGY_FOUNDATION": return "Biology Foundation";
+            case "COMMERCE_FOUNDATION": return "Commerce Foundation";
+            case "HUMANITIES_FOUNDATION": return "Humanities Foundation";
             case "GENERAL_AWARENESS": return "General Awareness";
             case "REASONING_IQ": return "Reasoning and IQ";
             default: return sectionCode;
@@ -3430,60 +5144,68 @@ public class RDAptiPathStudentController {
         return (cutoff - signal) * 2.8;
     }
 
-    private boolean applyCatalogAdjustments(Map<String, Double> clusterScores,
-                                            List<String> selectedCareerIntents,
-                                            Map<String, Integer> studentSelfSignals,
-                                            Map<String, Integer> subjectAffinitySignals,
-                                            List<RDCICareerAdjustment> adjustmentCatalog) {
+    private AdjustmentCoverage applyCatalogAdjustments(Map<String, Double> clusterScores,
+                                                       List<String> selectedCareerIntents,
+                                                       Map<String, Integer> studentSelfSignals,
+                                                       Map<String, Integer> subjectAffinitySignals,
+                                                       List<RDCICareerAdjustment> adjustmentCatalog) {
+        AdjustmentCoverage coverage = new AdjustmentCoverage();
         if (clusterScores == null || clusterScores.isEmpty() || adjustmentCatalog == null || adjustmentCatalog.isEmpty()) {
-            return false;
+            return coverage;
         }
         for (String intentCode : selectedCareerIntents == null ? List.<String>of() : selectedCareerIntents) {
-            applyAdjustmentRows(clusterScores, adjustmentCatalog, "INTENT", intentCode, "ANY");
+            coverage.intentApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "INTENT", intentCode, "ANY");
         }
 
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "numeric",
+        coverage.selfApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "numeric",
                 signalBandForScale(studentSelfSignals == null ? 0 : studentSelfSignals.getOrDefault("numeric", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "language",
+        coverage.selfApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "language",
                 signalBandForScale(studentSelfSignals == null ? 0 : studentSelfSignals.getOrDefault("language", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "discipline",
+        coverage.selfApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "discipline",
                 signalBandForScale(studentSelfSignals == null ? 0 : studentSelfSignals.getOrDefault("discipline", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "spatial",
+        coverage.selfApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_SIGNAL", "spatial",
                 signalBandForScale(studentSelfSignals == null ? 0 : studentSelfSignals.getOrDefault("spatial", 0)));
 
         int numeric = studentSelfSignals == null ? 0 : studentSelfSignals.getOrDefault("numeric", 0);
         int language = studentSelfSignals == null ? 0 : studentSelfSignals.getOrDefault("language", 0);
         if (numeric > 0 && language > 0 && numeric <= 2 && language >= 4) {
-            applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_COMPOSITE", "NUMERIC_LOW_LANGUAGE_HIGH", "ANY");
+            coverage.selfApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SELF_COMPOSITE", "NUMERIC_LOW_LANGUAGE_HIGH", "ANY");
         }
 
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "math",
+        coverage.subjectApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "math",
                 signalBandForScale(subjectAffinitySignals == null ? 0 : subjectAffinitySignals.getOrDefault("math", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "physics",
+        coverage.subjectApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "physics",
                 signalBandForScale(subjectAffinitySignals == null ? 0 : subjectAffinitySignals.getOrDefault("physics", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "chemistry",
+        coverage.subjectApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "chemistry",
                 signalBandForScale(subjectAffinitySignals == null ? 0 : subjectAffinitySignals.getOrDefault("chemistry", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "biology",
+        coverage.subjectApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "biology",
                 signalBandForScale(subjectAffinitySignals == null ? 0 : subjectAffinitySignals.getOrDefault("biology", 0)));
-        applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "language",
+        coverage.subjectApplied |= applyAdjustmentRows(clusterScores, adjustmentCatalog, "SUBJECT_SIGNAL", "language",
                 signalBandForScale(subjectAffinitySignals == null ? 0 : subjectAffinitySignals.getOrDefault("language", 0)));
-        return true;
+        return coverage;
     }
 
-    private void applyAdjustmentRows(Map<String, Double> clusterScores,
-                                     List<RDCICareerAdjustment> adjustmentCatalog,
-                                     String signalType,
-                                     String signalCode,
-                                     String signalBand) {
+    private static final class AdjustmentCoverage {
+        private boolean intentApplied;
+        private boolean selfApplied;
+        private boolean subjectApplied;
+    }
+
+    private boolean applyAdjustmentRows(Map<String, Double> clusterScores,
+                                        List<RDCICareerAdjustment> adjustmentCatalog,
+                                        String signalType,
+                                        String signalCode,
+                                        String signalBand) {
         if (clusterScores == null || clusterScores.isEmpty()
                 || adjustmentCatalog == null || adjustmentCatalog.isEmpty()
                 || signalType == null || signalCode == null || signalBand == null
                 || signalBand.trim().isEmpty()) {
-            return;
+            return false;
         }
         String normalizedType = signalType.trim().toUpperCase(Locale.ENGLISH);
         String normalizedCode = signalCode.trim().toUpperCase(Locale.ENGLISH);
         String normalizedBand = signalBand.trim().toUpperCase(Locale.ENGLISH);
+        boolean applied = false;
 
         for (RDCICareerAdjustment row : adjustmentCatalog) {
             if (row == null) {
@@ -3499,7 +5221,9 @@ public class RDAptiPathStudentController {
                 continue;
             }
             addClusterBoost(clusterScores, row.getClusterName(), toDouble(row.getBoostValue()));
+            applied = true;
         }
+        return applied;
     }
 
     private double fitByStrategy(String strategy,
@@ -3696,7 +5420,9 @@ public class RDAptiPathStudentController {
             return containsAny(targetPhase, "FOUNDATION", "8_10", "8_TO_10", "POST_8_TO_10", "POST_10_TO_POST12");
         }
         if ("SECONDARY".equals(normalizedPhase)) {
-            return containsAny(targetPhase, "SECONDARY", "10_12", "10_TO_12", "POST_10_TO_12", "POST_10_TO_POST12");
+            return containsAny(targetPhase,
+                    "SECONDARY", "10_12", "10_TO_12", "POST_10_TO_12", "POST_10_TO_POST12",
+                    "POST12", "POST_12", "UG", "IMMEDIATE");
         }
         if ("POST12".equals(normalizedPhase)) {
             return containsAny(targetPhase, "POST12", "POST_12", "UG", "PG", "COLLEGE", "IMMEDIATE", "POST_10_TO_POST12");
@@ -3761,6 +5487,34 @@ public class RDAptiPathStudentController {
         if (csv == null || csv.trim().isEmpty()) {
             return List.of();
         }
+        return java.util.Arrays.stream(csv.split(","))
+                .map(String::trim)
+                .map(this::normalizeIntentCode)
+                .filter(v -> !v.isEmpty())
+                .distinct()
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> normalizeCareerIntents(List<String> rawIntents) {
+        if (rawIntents == null || rawIntents.isEmpty()) {
+            return List.of();
+        }
+        List<String> normalized = new ArrayList<>();
+        for (String rawIntent : rawIntents) {
+            String code = normalizeIntentCode(rawIntent);
+            if (!code.isEmpty() && !normalized.contains(code)) {
+                normalized.add(code);
+            }
+        }
+        return normalized;
+    }
+
+    private String normalizeIntentCode(String rawIntent) {
+        String intent = nz(rawIntent).trim().toUpperCase(Locale.ENGLISH);
+        if (intent.isEmpty()) {
+            return "";
+        }
         Set<String> allowed = Set.of(
                 "COMMERCIAL_PILOT",
                 "LAW_POLICY",
@@ -3774,20 +5528,58 @@ public class RDAptiPathStudentController {
                 "MEDIA_COMM",
                 "CORE_ENGINEERING",
                 "SKILLED_VOCATIONAL");
-        return java.util.Arrays.stream(csv.split(","))
-                .map(String::trim)
-                .map(v -> v.toUpperCase(Locale.ENGLISH))
-                .filter(v -> !v.isEmpty() && allowed.contains(v))
-                .distinct()
-                .limit(5)
-                .collect(Collectors.toList());
+        if (allowed.contains(intent)) {
+            return intent;
+        }
+        if (containsAny(intent, "COMMERCIAL PILOT", "AVIATION")) {
+            return "COMMERCIAL_PILOT";
+        }
+        if (containsAny(intent, "LAW", "POLICY")) {
+            return "LAW_POLICY";
+        }
+        if (containsAny(intent, "MEDIC", "HEALTH")) {
+            return "MEDICAL_HEALTH";
+        }
+        if (containsAny(intent, "CS_AI", "COMPUTER SCIENCE", "ARTIFICIAL INTELLIGENCE", "MACHINE LEARNING", "AI")) {
+            return "CS_AI";
+        }
+        if (containsAny(intent, "ROBOTICS", "DRONE", "UAV", "AUTONOM")) {
+            return "ROBOTICS_DRONE";
+        }
+        if (containsAny(intent, "DESIGN", "CREATIVE", "UX", "UI", "MEDIA ART")) {
+            return "DESIGN_CREATIVE";
+        }
+        if (containsAny(intent, "BUSINESS", "FINANCE", "COMMERCE", "ACCOUNT")) {
+            return "BUSINESS_FINANCE";
+        }
+        if (containsAny(intent, "CIVIL SERVICES", "UPSC", "GOVERNANCE")) {
+            return "CIVIL_SERVICES";
+        }
+        if (containsAny(intent, "PSYCHOLOGY", "EDUCATION", "GUIDANCE")) {
+            return "PSYCHOLOGY_EDU";
+        }
+        if (containsAny(intent, "MEDIA", "COMMUNICATION", "JOURNAL")) {
+            return "MEDIA_COMM";
+        }
+        if (containsAny(intent, "CORE ENGINEERING", "ENGINEERING")) {
+            return "CORE_ENGINEERING";
+        }
+        if (containsAny(intent, "VOCATIONAL", "TRADES", "SKILLED", "ITI")) {
+            return "SKILLED_VOCATIONAL";
+        }
+        return "";
     }
 
     private List<String> intentLabels(List<String> intentCodes) {
         if (intentCodes == null || intentCodes.isEmpty()) {
             return List.of();
         }
-        return intentCodes.stream().map(this::intentLabel).collect(Collectors.toList());
+        List<String> labels = intentCodes.stream()
+                .map(this::intentLabel)
+                .filter(label -> !label.isEmpty() && !"General Exploration".equals(label))
+                .distinct()
+                .collect(Collectors.toList());
+        return labels.isEmpty() ? List.of("General Exploration") : labels;
     }
 
     private String intentLabel(String code) {
@@ -4355,7 +6147,8 @@ public class RDAptiPathStudentController {
     private String validateCoverage(String assessmentVersion,
                                     List<RDCIQuestionBank> questions,
                                     Map<String, String> formData,
-                                    String academicStage) {
+                                    String academicStage,
+                                    Map<String, String> academicProfile) {
         if (questions == null || questions.isEmpty()) {
             return "Question bank is empty.";
         }
@@ -4363,6 +6156,8 @@ public class RDAptiPathStudentController {
         int attempted = 0;
         Map<String, Integer> answeredBySection = new LinkedHashMap<>();
         Map<String, Integer> totalBySection = new LinkedHashMap<>();
+        Map<String, Integer> answeredBySubject = new LinkedHashMap<>();
+        Map<String, Integer> totalBySubject = new LinkedHashMap<>();
         for (RDCIQuestionBank question : questions) {
             if (question == null || question.getQuestionCode() == null) {
                 continue;
@@ -4370,14 +6165,21 @@ public class RDAptiPathStudentController {
             String section = question.getSectionCode() == null ? "" : question.getSectionCode().trim().toUpperCase(Locale.ENGLISH);
             totalBySection.put(section, totalBySection.getOrDefault(section, 0) + 1);
             String answer = formData.get("Q_" + question.getQuestionCode());
+            String subjectBucket = resolveQuestionSubjectBucket(question);
+            if (!subjectBucket.isEmpty()) {
+                totalBySubject.put(subjectBucket, totalBySubject.getOrDefault(subjectBucket, 0) + 1);
+            }
             if (answer != null && !answer.trim().isEmpty()) {
                 attempted++;
                 answeredBySection.put(section, answeredBySection.getOrDefault(section, 0) + 1);
+                if (!subjectBucket.isEmpty()) {
+                    answeredBySubject.put(subjectBucket, answeredBySubject.getOrDefault(subjectBucket, 0) + 1);
+                }
             }
         }
 
         boolean isV3 = "v3".equalsIgnoreCase(nz(assessmentVersion));
-        Map<String, Integer> required = requiredSectionCoverageByStage(isV3, academicStage);
+        Map<String, Integer> required = requiredSectionCoverageByStage(isV3, academicStage, academicProfile);
         int requiredSum = required.values().stream().mapToInt(Integer::intValue).sum();
         int minimumOverall = Math.min(requiredSum, questions.size());
         if (attempted < minimumOverall) {
@@ -4394,6 +6196,8 @@ public class RDAptiPathStudentController {
                 "CAREER_REALITY",
                 "STEM_FOUNDATION",
                 "BIOLOGY_FOUNDATION",
+                "COMMERCE_FOUNDATION",
+                "HUMANITIES_FOUNDATION",
                 "GENERAL_AWARENESS",
                 "REASONING_IQ");
         boolean hasPremiumStructure = totalBySection.keySet().stream().anyMatch(premiumSections::contains);
@@ -4410,13 +6214,32 @@ public class RDAptiPathStudentController {
             int expected = Math.min(total, rule.getValue());
             int answered = answeredBySection.getOrDefault(section, 0);
             if (answered < expected) {
-                return "Please complete required items in section " + section + " (" + answered + "/" + expected + ").";
+                return "Please complete required items in section " + sectionLabel(section)
+                        + " (" + answered + "/" + expected + ").";
+            }
+        }
+
+        Map<String, Integer> requiredSubjectCoverage = requiredSubjectCoverageByStage(academicStage, academicProfile);
+        for (Map.Entry<String, Integer> rule : requiredSubjectCoverage.entrySet()) {
+            String subject = rule.getKey();
+            int total = totalBySubject.getOrDefault(subject, 0);
+            if (total <= 0) {
+                return "Required subject block " + subjectLabel(subject)
+                        + " is not available for this track. Please restart the test.";
+            }
+            int expected = Math.min(total, Math.max(0, rule.getValue()));
+            int answered = answeredBySubject.getOrDefault(subject, 0);
+            if (answered < expected) {
+                return "Please answer at least " + expected + " " + subjectLabel(subject)
+                        + " questions (" + answered + "/" + expected + ").";
             }
         }
         return null;
     }
 
-    private Map<String, Integer> requiredSectionCoverageByStage(boolean isV3, String academicStage) {
+    private Map<String, Integer> requiredSectionCoverageByStage(boolean isV3,
+                                                                String academicStage,
+                                                                Map<String, String> academicProfile) {
         String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
         Map<String, Integer> required = new LinkedHashMap<>();
         if (!isV3) {
@@ -4463,6 +6286,78 @@ public class RDAptiPathStudentController {
             required.put("REASONING_IQ", 4);
             return required;
         }
+        String gradeCode = normalizeAcademicGradeCode(academicProfile);
+        if ("11".equals(gradeCode) || "12".equals(gradeCode)) {
+            String track = resolveSecondarySectionTrack(academicProfile);
+            if ("COMMERCE_HUMANITIES_DUAL".equals(track)) {
+                required.put("CORE_APTITUDE", 10);
+                required.put("APPLIED_CHALLENGE", 8);
+                required.put("INTEREST_WORK", 6);
+                required.put("VALUES_MOTIVATION", 5);
+                required.put("LEARNING_BEHAVIOR", 5);
+                required.put("AI_READINESS", 5);
+                required.put("CAREER_REALITY", 5);
+                required.put("COMMERCE_FOUNDATION", 5);
+                required.put("HUMANITIES_FOUNDATION", 5);
+                required.put("GENERAL_AWARENESS", 3);
+                required.put("REASONING_IQ", 2);
+                return required;
+            }
+            if ("COMMERCE".equals(track)) {
+                required.put("CORE_APTITUDE", 10);
+                required.put("APPLIED_CHALLENGE", 8);
+                required.put("INTEREST_WORK", 6);
+                required.put("VALUES_MOTIVATION", 5);
+                required.put("LEARNING_BEHAVIOR", 5);
+                required.put("AI_READINESS", 5);
+                required.put("CAREER_REALITY", 5);
+                required.put("COMMERCE_FOUNDATION", 8);
+                required.put("GENERAL_AWARENESS", 3);
+                required.put("REASONING_IQ", 2);
+                return required;
+            }
+            if ("HUMANITIES".equals(track)) {
+                required.put("CORE_APTITUDE", 10);
+                required.put("APPLIED_CHALLENGE", 8);
+                required.put("INTEREST_WORK", 6);
+                required.put("VALUES_MOTIVATION", 5);
+                required.put("LEARNING_BEHAVIOR", 5);
+                required.put("AI_READINESS", 5);
+                required.put("CAREER_REALITY", 5);
+                required.put("HUMANITIES_FOUNDATION", 8);
+                required.put("GENERAL_AWARENESS", 3);
+                required.put("REASONING_IQ", 2);
+                return required;
+            }
+            if ("STEM_DUAL".equals(track) || "STEM_BIO".equals(track)) {
+                required.put("CORE_APTITUDE", 10);
+                required.put("APPLIED_CHALLENGE", 8);
+                required.put("INTEREST_WORK", 6);
+                required.put("VALUES_MOTIVATION", 5);
+                required.put("LEARNING_BEHAVIOR", 5);
+                required.put("AI_READINESS", 5);
+                required.put("CAREER_REALITY", 5);
+                required.put("STEM_FOUNDATION", 6);
+                required.put("BIOLOGY_FOUNDATION", 4);
+                required.put("GENERAL_AWARENESS", 3);
+                required.put("REASONING_IQ", 2);
+                return required;
+            }
+            if ("STEM_NO_BIO".equals(track)) {
+                required.put("CORE_APTITUDE", 10);
+                required.put("APPLIED_CHALLENGE", 8);
+                required.put("INTEREST_WORK", 6);
+                required.put("VALUES_MOTIVATION", 5);
+                required.put("LEARNING_BEHAVIOR", 5);
+                required.put("AI_READINESS", 5);
+                required.put("CAREER_REALITY", 5);
+                required.put("STEM_FOUNDATION", 8);
+                required.put("BIOLOGY_FOUNDATION", 0);
+                required.put("GENERAL_AWARENESS", 3);
+                required.put("REASONING_IQ", 2);
+                return required;
+            }
+        }
         // Grade 10 CSV: CA(12) AC(10) IW(8) VM(6) LB(6) AIR(6) CR(6) SF(6) BF(4) GA(4) RIQ(2) = 70
         // Required ~81% minimum coverage (57/70)
         required.put("CORE_APTITUDE", 10);
@@ -4479,11 +6374,66 @@ public class RDAptiPathStudentController {
         return required;
     }
 
-    private int computeTargetQuestionCountForStage(List<RDCIQuestionBank> questions, String academicStage) {
+    private Map<String, Integer> requiredSubjectCoverageByStage(String academicStage,
+                                                                Map<String, String> academicProfile) {
+        String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
+        String gradeCode = normalizeAcademicGradeCode(academicProfile);
+        if (!"SECONDARY_10_12".equals(stage) || (!"11".equals(gradeCode) && !"12".equals(gradeCode))) {
+            return Map.of();
+        }
+
+        String track = resolveSecondarySectionTrack(academicProfile);
+        Map<String, Integer> required = new LinkedHashMap<>();
+        if ("STEM_NO_BIO".equals(track)) {
+            required.put("PHYSICS", 7);
+            required.put("CHEMISTRY", 7);
+            required.put("MATHEMATICS", 7);
+            return required;
+        }
+        if ("STEM_BIO".equals(track)) {
+            required.put("PHYSICS", 7);
+            required.put("CHEMISTRY", 7);
+            required.put("BIOLOGY", 7);
+            return required;
+        }
+        if ("STEM_DUAL".equals(track)) {
+            required.put("PHYSICS", 7);
+            required.put("CHEMISTRY", 7);
+            required.put("MATHEMATICS", 7);
+            required.put("BIOLOGY", 7);
+            return required;
+        }
+        if ("COMMERCE".equals(track)) {
+            required.put("ACCOUNTANCY", 5);
+            required.put("ECONOMICS", 5);
+            required.put("BUSINESS_STUDIES", 5);
+            return required;
+        }
+        if ("HUMANITIES".equals(track)) {
+            required.put("HISTORY", 5);
+            required.put("POLITICAL_SCIENCE", 5);
+            required.put("SOCIAL_SCIENCE", 5);
+            return required;
+        }
+        if ("COMMERCE_HUMANITIES_DUAL".equals(track)) {
+            required.put("ACCOUNTANCY", 4);
+            required.put("ECONOMICS", 4);
+            required.put("BUSINESS_STUDIES", 4);
+            required.put("HISTORY", 4);
+            required.put("POLITICAL_SCIENCE", 4);
+            required.put("SOCIAL_SCIENCE", 4);
+            return required;
+        }
+        return required;
+    }
+
+    private int computeTargetQuestionCountForStage(List<RDCIQuestionBank> questions,
+                                                   String academicStage,
+                                                   Map<String, String> academicProfile) {
         if (questions == null || questions.isEmpty()) {
             return 0;
         }
-        Map<String, Integer> required = requiredSectionCoverageByStage(true, academicStage);
+        Map<String, Integer> required = requiredSectionCoverageByStage(true, academicStage, academicProfile);
         Map<String, Integer> availableBySection = new LinkedHashMap<>();
         for (RDCIQuestionBank question : questions) {
             if (question == null) {
@@ -4505,7 +6455,7 @@ public class RDAptiPathStudentController {
     }
 
     private String resolveAcademicStage(Map<String, String> academicProfile) {
-        String gradeCode = academicProfile == null ? "" : nz(academicProfile.get(STUDENT_INTAKE_GRADE_CODE));
+        String gradeCode = academicProfileValue(academicProfile, "grade", STUDENT_INTAKE_GRADE_CODE);
         gradeCode = gradeCode.trim().toUpperCase(Locale.ENGLISH);
         if ("8".equals(gradeCode) || "9".equals(gradeCode)) {
             return "FOUNDATION_8_9";
@@ -4553,7 +6503,7 @@ public class RDAptiPathStudentController {
     }
 
     private String normalizeAcademicGradeCode(Map<String, String> academicProfile) {
-        String raw = academicProfile == null ? "" : nz(academicProfile.get(STUDENT_INTAKE_GRADE_CODE));
+        String raw = academicProfileValue(academicProfile, "grade", STUDENT_INTAKE_GRADE_CODE);
         String grade = raw.trim().toUpperCase(Locale.ENGLISH).replace('-', '_').replace(' ', '_');
         if (grade.isEmpty()) {
             return "";
@@ -4574,6 +6524,57 @@ public class RDAptiPathStudentController {
             return "12";
         }
         return "";
+    }
+
+    private String resolveSecondarySectionTrack(Map<String, String> academicProfile) {
+        String stream = academicProfileValue(academicProfile, "stream", STUDENT_INTAKE_STREAM_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
+        String subjects = academicProfileValue(academicProfile, "subjects", STUDENT_INTAKE_SUBJECTS_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
+        String program = academicProfileValue(academicProfile, "program", STUDENT_INTAKE_PROGRAM_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
+        String combined = (stream + " " + subjects + " " + program).trim();
+
+        boolean commerceTrack = containsAny(stream, "COMMERCE", "BUSINESS", "FINANCE", "ACCOUNT", "ECONOM")
+                || containsAny(subjects,
+                "ACCOUNT", "BOOK KEEP", "BUSINESS STUD", "ECONOM", "ENTREPRENEUR", "COMMERCE",
+                "ACC", "BST")
+                || containsAny(program, "BCOM", "BBA", "BMS", "BFM", "BAF", "BBI", "CA_CS_CMA");
+        boolean humanitiesTrack = containsAny(stream, "HUMANITIES", "ARTS", "SOCIAL", "LAW", "POLICY", "MEDIA", "COMM")
+                || containsAny(subjects,
+                "HISTORY", "POLITICAL", "SOCIOLOGY", "PSYCHOLOGY", "GEOGRAPHY",
+                "PUBLIC ADMIN", "CIVICS", "PHILOSOPHY", "LITERATURE", "JOURNALISM", "LANGUAGE",
+                "HUM_")
+                || containsAny(program, "LLB", "BALLB", "LLM", "BA_", "MA", "JOURNALISM");
+        if (commerceTrack && humanitiesTrack) {
+            return "COMMERCE_HUMANITIES_DUAL";
+        }
+        if (commerceTrack) {
+            return "COMMERCE";
+        }
+        if (humanitiesTrack) {
+            return "HUMANITIES";
+        }
+
+        boolean hasMath = containsAny(combined,
+                "PCM", "PCMB", "MATH", "MATHEMATICS", "APPLIED_MATH", "STATISTICS",
+                "PHYSICS", "CHEMISTRY", "COMPUTER", "INFORMATICS", "JEE");
+        boolean hasBiology = containsAny(combined,
+                "PCB", "PCMB", "BIO", "BIOLOGY", "BOTANY", "ZOOLOGY", "BIOTECH",
+                "MEDICAL", "HEALTH", "LIFE_SCI");
+        if (hasMath && hasBiology) {
+            return "STEM_DUAL";
+        }
+        if (hasBiology) {
+            return "STEM_BIO";
+        }
+        if (hasMath) {
+            return "STEM_NO_BIO";
+        }
+        return "STEM_BIO";
     }
 
     private boolean matchesAcademicGradeQuestion(RDCIQuestionBank question, String gradeCode) {
@@ -4660,7 +6661,7 @@ public class RDAptiPathStudentController {
         if (source == null || source.isEmpty()) {
             return List.of();
         }
-        Map<String, Integer> required = requiredSectionCoverageByStage(true, academicStage);
+        Map<String, Integer> required = requiredSectionCoverageByStage(true, academicStage, academicProfile);
         String stage = nz(academicStage).trim().toUpperCase(Locale.ENGLISH);
         Map<String, List<RDCIQuestionBank>> bySection = new LinkedHashMap<>();
         for (RDCIQuestionBank question : source) {
@@ -4688,10 +6689,79 @@ public class RDAptiPathStudentController {
         if (filtered.isEmpty()) {
             return source;
         }
+        Map<String, Integer> requiredSubjectCoverage = requiredSubjectCoverageByStage(academicStage, academicProfile);
+        if (!requiredSubjectCoverage.isEmpty()) {
+            filtered = ensureSubjectCoverage(filtered, source, requiredSubjectCoverage);
+        }
         filtered.sort((a, b) -> Integer.compare(
                 a.getSequenceNo() == null ? Integer.MAX_VALUE : a.getSequenceNo(),
                 b.getSequenceNo() == null ? Integer.MAX_VALUE : b.getSequenceNo()));
         return filtered;
+    }
+
+    private List<RDCIQuestionBank> ensureSubjectCoverage(List<RDCIQuestionBank> selected,
+                                                         List<RDCIQuestionBank> source,
+                                                         Map<String, Integer> requiredSubjectCoverage) {
+        if (selected == null || selected.isEmpty()
+                || source == null || source.isEmpty()
+                || requiredSubjectCoverage == null || requiredSubjectCoverage.isEmpty()) {
+            return selected == null ? List.of() : selected;
+        }
+
+        List<RDCIQuestionBank> merged = new ArrayList<>(selected);
+        Set<String> selectedCodes = merged.stream()
+                .map(this::questionCodeKey)
+                .filter(code -> code != null && !code.isEmpty())
+                .collect(Collectors.toCollection(HashSet::new));
+        Map<String, Integer> selectedBySubject = new LinkedHashMap<>();
+        Map<String, Integer> availableBySubject = new LinkedHashMap<>();
+
+        for (RDCIQuestionBank question : source) {
+            String subject = resolveQuestionSubjectBucket(question);
+            if (subject.isEmpty()) {
+                continue;
+            }
+            availableBySubject.put(subject, availableBySubject.getOrDefault(subject, 0) + 1);
+        }
+        for (RDCIQuestionBank question : merged) {
+            String subject = resolveQuestionSubjectBucket(question);
+            if (subject.isEmpty()) {
+                continue;
+            }
+            selectedBySubject.put(subject, selectedBySubject.getOrDefault(subject, 0) + 1);
+        }
+
+        List<RDCIQuestionBank> orderedSource = new ArrayList<>(source);
+        orderedSource.sort((a, b) -> Integer.compare(
+                a.getSequenceNo() == null ? Integer.MAX_VALUE : a.getSequenceNo(),
+                b.getSequenceNo() == null ? Integer.MAX_VALUE : b.getSequenceNo()));
+
+        for (Map.Entry<String, Integer> rule : requiredSubjectCoverage.entrySet()) {
+            String subject = rule.getKey();
+            int available = availableBySubject.getOrDefault(subject, 0);
+            int expected = Math.min(available, Math.max(0, rule.getValue()));
+            int current = selectedBySubject.getOrDefault(subject, 0);
+            if (expected <= current) {
+                continue;
+            }
+            for (RDCIQuestionBank question : orderedSource) {
+                if (current >= expected) {
+                    break;
+                }
+                if (!subject.equals(resolveQuestionSubjectBucket(question))) {
+                    continue;
+                }
+                String code = questionCodeKey(question);
+                if (code == null || selectedCodes.contains(code)) {
+                    continue;
+                }
+                merged.add(question);
+                selectedCodes.add(code);
+                current++;
+            }
+            selectedBySubject.put(subject, current);
+        }
+        return merged;
     }
 
     private List<RDCIQuestionBank> pickStageQuestionSlice(List<RDCIQuestionBank> ordered,
@@ -4851,8 +6921,12 @@ public class RDAptiPathStudentController {
         if (question == null || academicProfile == null || academicProfile.isEmpty()) {
             return false;
         }
-        String stream = nz(academicProfile.get(STUDENT_INTAKE_STREAM_CODE)).trim().toUpperCase(Locale.ENGLISH);
-        String program = nz(academicProfile.get(STUDENT_INTAKE_PROGRAM_CODE)).trim().toUpperCase(Locale.ENGLISH);
+        String stream = academicProfileValue(academicProfile, "stream", STUDENT_INTAKE_STREAM_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
+        String program = academicProfileValue(academicProfile, "program", STUDENT_INTAKE_PROGRAM_CODE)
+                .trim()
+                .toUpperCase(Locale.ENGLISH);
         if (stream.isEmpty() && program.isEmpty()) {
             return false;
         }
@@ -4935,6 +7009,17 @@ public class RDAptiPathStudentController {
         return false;
     }
 
+    private String academicProfileValue(Map<String, String> academicProfile, String aliasKey, String intakeCode) {
+        if (academicProfile == null || academicProfile.isEmpty()) {
+            return "";
+        }
+        String value = aliasKey == null ? "" : nz(academicProfile.get(aliasKey));
+        if (!value.trim().isEmpty()) {
+            return value;
+        }
+        return intakeCode == null ? "" : nz(academicProfile.get(intakeCode));
+    }
+
     private boolean containsAny(String source, String... needles) {
         if (source == null || source.isEmpty() || needles == null || needles.length == 0) {
             return false;
@@ -4945,6 +7030,83 @@ public class RDAptiPathStudentController {
             }
         }
         return false;
+    }
+
+    private String resolveQuestionSubjectBucket(RDCIQuestionBank question) {
+        if (question == null) {
+            return "";
+        }
+        String context = (
+                nz(question.getQuestionCode()) + " "
+                        + nz(question.getSectionCode()) + " "
+                        + nz(question.getCareerClusterMap()) + " "
+                        + nz(question.getQuestionText()))
+                .toUpperCase(Locale.ENGLISH);
+        if (context.isEmpty()) {
+            return "";
+        }
+
+        if (containsAny(context,
+                "ACCOUNT", "ACCOUNTANCY", "BALANCE_SHEET", "DEPRECIATION", "RATIO_ANALYSIS", "BOOK_KEEP")) {
+            return "ACCOUNTANCY";
+        }
+        if (containsAny(context,
+                "ECONOM", "MACROECON", "MICROECON", "MONETARY_POLICY", "INDUSTRIAL_POLICY")) {
+            return "ECONOMICS";
+        }
+        if (containsAny(context,
+                "BUSINESS", "ENTREPRENEUR", "COMMERCE", "MANAGEMENT", "PROFIT_LOSS", "GST", "MARKET", "BANKING")) {
+            return "BUSINESS_STUDIES";
+        }
+        if (containsAny(context, "HISTORY", "INDIAN_HISTORY", "ANCIENT", "MODERN_HISTORY")) {
+            return "HISTORY";
+        }
+        if (containsAny(context,
+                "POLITICAL", "POLITY", "GOVERNANCE", "CONSTITUTION", "PUBLIC_ADMIN", "INTERNATIONAL_RELATIONS")) {
+            return "POLITICAL_SCIENCE";
+        }
+        if (containsAny(context,
+                "SOCIOLOGY", "PSYCHOLOGY", "SOCIAL_SCIENCE", "PHILOSOPHY", "MEDIA", "JOURNALISM")) {
+            return "SOCIAL_SCIENCE";
+        }
+        if (containsAny(context,
+                "PHYSICS", "MECHANICS", "OPTICS", "CIRCUIT", "ELECTRO", "WAVE_PHYSICS", "WAVE_OPTICS", "KINEMATICS")) {
+            return "PHYSICS";
+        }
+        if (containsAny(context,
+                "CHEMISTRY", "ORGANIC", "INORGANIC", "ELECTROCHEM", "NERNST", "CHEM")) {
+            return "CHEMISTRY";
+        }
+        if (containsAny(context,
+                "MATH", "MATHEMATICS", "ALGEBRA", "CALCULUS", "GEOMETRY", "TRIGONOMETRY",
+                "COMBINATORICS", "PROBABILITY", "STATISTICS", "VECTOR", "INTEGRATION", "LOGARITHM", "SERIES_MATH")) {
+            return "MATHEMATICS";
+        }
+        if (containsAny(context,
+                "BIOLOGY", "GENETICS", "PHYSIOLOGY", "ECOLOGY", "BOTANY", "ZOOLOGY", "BIOCHEM",
+                "MOLECULAR_BIOLOGY", "CELL_BIOLOGY", "PLANT_BIOLOGY", "MEDICAL", "HEALTH", "EPIDEMIOLOGY")) {
+            return "BIOLOGY";
+        }
+        return "";
+    }
+
+    private String subjectLabel(String subjectCode) {
+        if (subjectCode == null) {
+            return "Subject";
+        }
+        switch (subjectCode.trim().toUpperCase(Locale.ENGLISH)) {
+            case "PHYSICS": return "Physics";
+            case "CHEMISTRY": return "Chemistry";
+            case "MATHEMATICS": return "Mathematics";
+            case "BIOLOGY": return "Biology";
+            case "ACCOUNTANCY": return "Accountancy";
+            case "ECONOMICS": return "Economics";
+            case "BUSINESS_STUDIES": return "Business Studies";
+            case "HISTORY": return "History";
+            case "POLITICAL_SCIENCE": return "Political Science";
+            case "SOCIAL_SCIENCE": return "Social Science";
+            default: return subjectCode;
+        }
     }
 
     private String questionCodeKey(RDCIQuestionBank question) {

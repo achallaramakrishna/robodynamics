@@ -225,7 +225,7 @@
       <h1>${planName}</h1>
       <p class="description">${planDescription}</p>
       <div class="price">
-        Rs ${planBaseAmount}
+        Rs ${planBaseAmount} <small>(base fee)</small>
         <small>
           <c:choose>
             <c:when test="${billingLabel eq 'month'}">/ month</c:when>

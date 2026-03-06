@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false"%>
 
@@ -364,13 +365,33 @@ body {
 			</section>
 
 			<section class="auth-panel">
+				<c:set var="redirectPath" value="${sessionScope.redirectUrl}" />
+				<c:set var="isCompetitionFlow" value="${not empty redirectPath and fn:contains(redirectPath, '/competitions/')}" />
+				<c:set var="isCheckoutFlow" value="${not empty redirectPath and fn:contains(redirectPath, '/plans/checkout')}" />
+				<c:url var="createParentAccountUrl" value="/registerParentChild">
+					<c:if test="${not empty redirectPath}">
+						<c:param name="redirect" value="${redirectPath}" />
+					</c:if>
+				</c:url>
 				<c:if test="${not empty sessionScope.redirectUrl}">
-					<span class="context-pill">Competition registration login</span>
+					<span class="context-pill">
+						<c:choose>
+							<c:when test="${isCompetitionFlow}">Competition registration login</c:when>
+							<c:when test="${isCheckoutFlow}">Checkout continuation login</c:when>
+							<c:otherwise>Continue your flow</c:otherwise>
+						</c:choose>
+					</span>
 				</c:if>
 				<h2 class="auth-title">
 					<c:choose>
-						<c:when test="${not empty sessionScope.redirectUrl}">
+						<c:when test="${isCompetitionFlow}">
 	                        Continue to Competition Registration
+	                    </c:when>
+	                    <c:when test="${isCheckoutFlow}">
+	                        Continue to Secure Checkout
+	                    </c:when>
+	                    <c:when test="${not empty sessionScope.redirectUrl}">
+	                        Continue Where You Left Off
 	                    </c:when>
 						<c:otherwise>
 	                        Sign in to continue
@@ -403,7 +424,7 @@ body {
 
 					<div class="quick-links" style="margin-top:14px;">
 						<a
-							href="${pageContext.request.contextPath}/registerParentChild?redirect=/competitions/register">
+							href="${createParentAccountUrl}">
 							Create Parent Account</a>
 						<a href="${pageContext.request.contextPath}/forgotpassword">
 							Forgot password</a>

@@ -122,14 +122,7 @@
         <li class="nav-item d-flex gap-2 ms-lg-3 mt-2 mt-lg-0">
           <c:choose>
             <c:when test="${empty sessionScope.rdUser}">
-              <c:choose>
-                <c:when test="${rdIsBrandHome}">
-                  <a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay ₹799</a>
-                </c:when>
-                <c:otherwise>
-                  <a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/parents">Free Demo</a>
-                </c:otherwise>
-              </c:choose>
+              <a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay &#8377;799 + GST</a>
               <a class="btn btn-outline-dark btn-sm" href="${pageContext.request.contextPath}/registerParentChild">Parent Sign Up</a>
               <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/login">Sign In</a>
             </c:when>
@@ -170,7 +163,7 @@
         <div class="module-icon">🧭</div>
         <p><strong>AptiPath360 Career Discovery</strong></p>
         <p>Adaptive discovery for Grade 8 to College/Post-12.</p>
-        <a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay ₹799</a>
+        <a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay &#8377;799 + GST</a>
       </article>
       <article class="header-module exam">
         <div class="module-icon">📘</div>

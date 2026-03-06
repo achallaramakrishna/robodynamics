@@ -192,7 +192,7 @@
 
                   <div class="d-flex align-items-center gap-2 mb-2">
                     <c:if test="${not empty c.promoVideoUrl}">
-                      <span class="badge badge-demo">Demo</span>
+                      <span class="badge badge-demo">Preview</span>
                     </c:if>
                     <c:if test="${not empty c.courseAgeGroup}">
                       <small class="text-muted">${c.courseAgeGroup}</small>
@@ -208,7 +208,7 @@
                       <c:otherwise>
                         <a href="${enrollUrl}" class="btn btn-sm btn-primary">Enroll</a>
                         <c:if test="${not empty c.promoVideoUrl}">
-                          <a href="${pageContext.request.contextPath}/demos/book?courseId=${c.courseId}" class="btn btn-sm btn-outline-success mt-1">Book demo</a>
+                          <a href="${c.promoVideoUrl}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-success mt-1">Watch Preview</a>
                         </c:if>
                       </c:otherwise>
                     </c:choose>
@@ -277,9 +277,9 @@
     </div>
   </section>
 
-  <!-- UPCOMING DEMOS (image not shown here; slug & text only) -->
+  <!-- UPCOMING FREE SESSIONS (image not shown here; slug & text only) -->
   <section class="container rd-container mb-5">
-    <h4 class="mb-2"><i class="bi bi-calendar2-week me-2"></i>Book Your Free Demo</h4>
+    <h4 class="mb-2"><i class="bi bi-calendar2-week me-2"></i>Upcoming Free Sessions</h4>
     <div class="vstack gap-2 mb-2">
       <c:forEach var="d" items="${upcomingDemos}">
         <div class="d-flex align-items-center justify-content-between p-3 bg-white rounded-3 shadow-sm">
@@ -290,7 +290,7 @@
               <small class="text-muted">${d.meta}</small>
             </div>
           </div>
-          <a class="btn btn-accent" href="${pageContext.request.contextPath}/demos/${d.slug}">Enroll Free</a>
+          <a class="btn btn-accent" href="${pageContext.request.contextPath}/demos/${d.slug}">View Session</a>
         </div>
       </c:forEach>
     </div>

@@ -1,1 +1,17 @@
-mysql -uroot -pJatni@752050 -D robodynamics_db -t -e "SELECT COUNT(*) AS total_rows, SUM(CASE WHEN is_archived=0 THEN 1 ELSE 0 END) AS active_rows, SUM(CASE WHEN is_archived=1 THEN 1 ELSE 0 END) AS archived_rows FROM vida_path_question_bank; SELECT grade_band, section, COUNT(*) AS active_count FROM vida_path_question_bank WHERE is_archived=0 GROUP BY grade_band, section ORDER BY grade_band, section; SELECT COUNT(*) AS archive_snapshot_rows FROM vida_path_question_bank_archive; SELECT COUNT(*) AS future_career_rows FROM vida_path_future_career; SELECT COUNT(*) AS future_career_archive_rows FROM vida_path_future_career_archive;"
+python3 - <<'PY'
+import re, urllib.request, urllib.parse, http.cookiejar
+BASE='http://127.0.0.1:8080'; USER='sashank'; PWD='sashank'; SID='54'
+cj=http.cookiejar.CookieJar(); op=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+def req(path,data=None):
+    body=None
+    if data is not None: body=urllib.parse.urlencode(data).encode('utf-8')
+    r=urllib.request.Request(BASE+path,data=body)
+    with op.open(r,timeout=40) as resp:
+        return resp.read().decode('utf-8','replace')
+req('/login'); req('/login',{'userName':USER,'password':PWD})
+html=req('/aptipath/student/result?sessionId='+SID)
+names=re.findall(r'<div class="title">\s*([^<]+?)\s*</div>', html)
+print('TOTAL_TITLES', len(names))
+print('TOP20', ' | '.join(names[:20]))
+print('HAS_AI_ML_ENGINEER', any('AI/ML Engineer' in n or 'AI Engineer' in n for n in names))
+PY

@@ -1,0 +1,878 @@
+{
+  "course_id": 34,
+  "course_session_id": 1085,
+  "session_title": "Visual Math Practice - Set 1",
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 1,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Right",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q01.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 2,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Acute",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q02.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflex",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 3,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Obtuse",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q03.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 4,
+      "question_text": "How many sides does the polygon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q04.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 5,
+      "question_text": "The triangle has side lengths 4 cm, 4 cm and 4 cm. What is it called?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Equilateral",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q05.svg",
+      "options": [
+        {
+          "option_text": "Scalene",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Isosceles",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equilateral",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 6,
+      "question_text": "How many lines of symmetry does this square have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Does It Look the Same?",
+      "question_image": "/session_materials/34/images/g5_math_img_q06.svg",
+      "options": [
+        {
+          "option_text": "1",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "2",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "3",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "4",
+          "is_correct": true,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 7,
+      "question_text": "The mirror line is vertical. Which statement is true?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Left and right match",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Does It Look the Same?",
+      "question_image": "/session_materials/34/images/g5_math_img_q07.svg",
+      "options": [
+        {
+          "option_text": "Left and right match",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Top and bottom match",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "No matching parts",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Only corners match",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 8,
+      "question_text": "How many shaded squares are there?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "8",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: How Many Squares?",
+      "question_image": "/session_materials/34/images/g5_math_img_q08.svg",
+      "options": [
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "9",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 9,
+      "question_text": "How many total small squares are in the grid?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "20",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: How Many Squares?",
+      "question_image": "/session_materials/34/images/g5_math_img_q09.svg",
+      "options": [
+        {
+          "option_text": "12",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "16",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "20",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "24",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 10,
+      "question_text": "Fill in the blank: Area of this rectangle is ____ sq cm.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "24",
+      "explanation": "Fill using the visual.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q10.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 11,
+      "question_text": "Fill in the blank: Perimeter of this rectangle is ____ cm.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "20",
+      "explanation": "Fill using the visual.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q11.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 12,
+      "question_text": "What is the area of the L-shape?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "21 sq units",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q12.svg",
+      "options": [
+        {
+          "option_text": "16 sq units",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "19 sq units",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "21 sq units",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "25 sq units",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 13,
+      "question_text": "In the map, what is the shortest path length from H to S (in grid steps)?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Mapping Your Way",
+      "question_image": "/session_materials/34/images/g5_math_img_q13.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 14,
+      "question_text": "From P to L, move 2 right and 3 up. Where do you reach?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Point C",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Mapping Your Way",
+      "question_image": "/session_materials/34/images/g5_math_img_q14.svg",
+      "options": [
+        {
+          "option_text": "Point A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Point B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Point C",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Point D",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 15,
+      "question_text": "Use the map and write the coordinates of point B.",
+      "question_type": "short_answer",
+      "difficulty_level": "Easy",
+      "max_marks": 2,
+      "correct_answer": "(4,2)",
+      "explanation": "Use the values shown in the image.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Mapping Your Way",
+      "question_image": "/session_materials/34/images/g5_math_img_q15.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 16,
+      "question_text": "How many grid steps from A(1,1) to C(5,4) if you move only right and up?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "7",
+      "explanation": "Use the values shown in the image.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Mapping Your Way",
+      "question_image": "/session_materials/34/images/g5_math_img_q16.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 17,
+      "question_text": "Which net can fold into a cube?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Image 17 (this net)",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Boxes and Sketches",
+      "question_image": "/session_materials/34/images/g5_math_img_q17.svg",
+      "options": [
+        {
+          "option_text": "Image 17 (this net)",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "A line of 6 squares",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "A plus with 7 squares",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Any 6 squares",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 18,
+      "question_text": "Can this net fold into a cube?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "No",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Boxes and Sketches",
+      "question_image": "/session_materials/34/images/g5_math_img_q18.svg",
+      "options": [
+        {
+          "option_text": "Yes",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "No",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Only if cut",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cannot say",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 19,
+      "question_text": "How many cubes are stacked in this block figure?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "9",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Boxes and Sketches",
+      "question_image": "/session_materials/34/images/g5_math_img_q19.svg",
+      "options": [
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "9",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "10",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "11",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 20,
+      "question_text": "Which fruit has the highest sales?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Mango",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Smart Charts",
+      "question_image": "/session_materials/34/images/g5_math_img_q20.svg",
+      "options": [
+        {
+          "option_text": "Apple",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Banana",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Mango",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Grapes",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 21,
+      "question_text": "How many more Mangoes than Apples were sold?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Smart Charts",
+      "question_image": "/session_materials/34/images/g5_math_img_q21.svg",
+      "options": [
+        {
+          "option_text": "2",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "3",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "4",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 22,
+      "question_text": "What fraction of the strip is shaded?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "3/6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q22.svg",
+      "options": [
+        {
+          "option_text": "2/6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "3/6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "4/6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5/6",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 23,
+      "question_text": "What is the unshaded fraction of the strip?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "3/6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q23.svg",
+      "options": [
+        {
+          "option_text": "1/6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "2/6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "3/6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "4/6",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 24,
+      "question_text": "How many small squares are needed to make a 6 by 4 rectangle?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "24",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: How Many Squares?",
+      "question_image": "/session_materials/34/images/g5_math_img_q24.svg",
+      "options": [
+        {
+          "option_text": "20",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "22",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "24",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "26",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 25,
+      "question_text": "Fill in the blank: Number of small squares in the image is ____.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "24",
+      "explanation": "Fill using the visual.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: How Many Squares?",
+      "question_image": "/session_materials/34/images/g5_math_img_q25.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 26,
+      "question_text": "One angle is 35 deg and together they make a right angle. Find the other angle.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "55 deg",
+      "explanation": "Use the values shown in the image.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q26.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 27,
+      "question_text": "Find the perimeter of the rectangle shown.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "26 cm",
+      "explanation": "Use the values shown in the image.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q27.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 28,
+      "question_text": "Find the area of the rectangle shown.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "40 sq cm",
+      "explanation": "Use the values shown in the image.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Area and Its Boundary",
+      "question_image": "/session_materials/34/images/g5_math_img_q28.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 29,
+      "question_text": "Write total of all bars in the chart.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "19",
+      "explanation": "Use the values shown in the image.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Smart Charts",
+      "question_image": "/session_materials/34/images/g5_math_img_q29.svg",
+      "options": []
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 30,
+      "question_text": "Fill in the blank: The straight angle is ____ deg.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "180",
+      "explanation": "Fill using the visual.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q30.svg",
+      "options": []
+    }
+  ]
+}

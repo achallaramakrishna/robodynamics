@@ -1,32 +1,3 @@
 set -e
-svc="tomcat"
-if systemctl list-unit-files | grep -q '^tomcat.service'; then
-  svc='tomcat'
-elif systemctl list-unit-files | grep -q '^tomcat9.service'; then
-  svc='tomcat9'
-fi
-
-echo SERVICE=$svc
-mkdir -p /opt/tomcat/webapps/backup
-if [ -f /opt/tomcat/webapps/ROOT.war ]; then
-  cp /opt/tomcat/webapps/ROOT.war /opt/tomcat/webapps/backup/ROOT.war.$(date +%Y%m%d_%H%M%S).bak
-fi
-
-systemctl stop "$svc"
-rm -rf /opt/tomcat/webapps/ROOT
-mv /tmp/robodynamics-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/ROOT.war
-chown tomcat:tomcat /opt/tomcat/webapps/ROOT.war
-
-if [ ! -f /opt/tomcat/bin/setenv.sh ]; then
-  printf '#!/bin/bash\n' > /opt/tomcat/bin/setenv.sh
-fi
-if grep -q '^export RD_JDBC_PASSWORD=' /opt/tomcat/bin/setenv.sh; then
-  sed -i "s|^export RD_JDBC_PASSWORD=.*|export RD_JDBC_PASSWORD='Jatni@752050'|" /opt/tomcat/bin/setenv.sh
-else
-  printf "\nexport RD_JDBC_PASSWORD='Jatni@752050'\n" >> /opt/tomcat/bin/setenv.sh
-fi
-chmod 750 /opt/tomcat/bin/setenv.sh
-
-systemctl start "$svc"
-systemctl is-active "$svc"
-stat -c 'ROOT_WAR=%n SIZE=%s MTIME=%y' /opt/tomcat/webapps/ROOT.war
+mysql -uroot -pJatni@752050 -D robodynamics_db -e "SET SQL_SAFE_UPDATES=0; START TRANSACTION; CREATE TEMPORARY TABLE tmp_apti_sessions (ci_assessment_session_id BIGINT PRIMARY KEY); INSERT INTO tmp_apti_sessions SELECT s.ci_assessment_session_id FROM rd_ci_assessment_session s JOIN rd_ci_subscription sub ON sub.ci_subscription_id=s.ci_subscription_id WHERE UPPER(IFNULL(sub.module_code,''))='APTIPATH'; DELETE FROM rd_ci_assessment_response WHERE ci_assessment_session_id IN (SELECT ci_assessment_session_id FROM tmp_apti_sessions); DELETE FROM rd_ci_score_index WHERE ci_assessment_session_id IN (SELECT ci_assessment_session_id FROM tmp_apti_sessions); DELETE FROM rd_ci_recommendation_snapshot WHERE ci_assessment_session_id IN (SELECT ci_assessment_session_id FROM tmp_apti_sessions); DELETE FROM rd_ci_assessment_session WHERE ci_assessment_session_id IN (SELECT ci_assessment_session_id FROM tmp_apti_sessions); DROP TEMPORARY TABLE IF EXISTS tmp_apti_sessions; COMMIT;"
+mysql -uroot -pJatni@752050 -D robodynamics_db -t -e "SELECT COUNT(*) AS aptipath_sessions FROM rd_ci_assessment_session s JOIN rd_ci_subscription sub ON sub.ci_subscription_id=s.ci_subscription_id WHERE UPPER(IFNULL(sub.module_code,''))='APTIPATH'; SELECT COUNT(*) AS aptipath_responses FROM rd_ci_assessment_response r JOIN rd_ci_assessment_session s ON s.ci_assessment_session_id=r.ci_assessment_session_id JOIN rd_ci_subscription sub ON sub.ci_subscription_id=s.ci_subscription_id WHERE UPPER(IFNULL(sub.module_code,''))='APTIPATH'; SELECT COUNT(*) AS aptipath_scores FROM rd_ci_score_index si JOIN rd_ci_assessment_session s ON s.ci_assessment_session_id=si.ci_assessment_session_id JOIN rd_ci_subscription sub ON sub.ci_subscription_id=s.ci_subscription_id WHERE UPPER(IFNULL(sub.module_code,''))='APTIPATH'; SELECT COUNT(*) AS aptipath_recommendations FROM rd_ci_recommendation_snapshot rs JOIN rd_ci_assessment_session s ON s.ci_assessment_session_id=rs.ci_assessment_session_id JOIN rd_ci_subscription sub ON sub.ci_subscription_id=s.ci_subscription_id WHERE UPPER(IFNULL(sub.module_code,''))='APTIPATH';"

@@ -1,0 +1,31 @@
+USE robodynamics_db;
+SET SQL_SAFE_UPDATES=0;
+START TRANSACTION;
+SET @course_name='CBSE Grade 12 Chemistry (NCERT) - Part 2';
+SET @import_tag='import_cbse_grade_12_chemistry_part_2_2026_03_04';
+INSERT INTO rd_courses (course_category_id,course_name,course_description,shortDescription,course_level,course_status,grade_range,category,is_featured,tier_level,tier_order,reviews_count,is_active)
+SELECT 13,@course_name,'NCERT Class 12 Chemistry chapters imported from docs/course_materials/cbse_grade_12_chemistry_part_2.','Auto-imported from lech2ps.pdf table of contents and chapter PDFs.','12','ACTIVE','SENIOR_SECONDARY','Chemistry',0,'beginner',1,0,1
+WHERE NOT EXISTS (SELECT 1 FROM rd_courses WHERE course_name=@course_name);
+SET @course_id=(SELECT course_id FROM rd_courses WHERE course_name=@course_name ORDER BY course_id DESC LIMIT 1);
+DELETE d FROM rd_course_session_details d JOIN rd_course_sessions s ON s.course_session_id=d.course_session_id WHERE s.course_id=@course_id AND COALESCE(s.session_description,'')=@import_tag;
+DELETE FROM rd_course_sessions WHERE course_id=@course_id AND COALESCE(session_description,'')=@import_tag;
+INSERT INTO rd_course_sessions (course_id,session_id,session_title,creation_date,version,completed,progress,session_type,session_description,tier_level,tier_order) VALUES (@course_id,1,'Chapter 1: Haloalkanes and Haloarenes',CURDATE(),1,0,0.00,'session',@import_tag,'BEGINNER',1);
+SET @s1=LAST_INSERT_ID();
+INSERT INTO rd_course_session_details (topic,creation_date,version,course_id,course_session_id,type,file,session_detail_id,tier_level,tier_order,has_animation,assignment) VALUES ('Chapter 1: Haloalkanes and Haloarenes',CURDATE(),1,@course_id,@s1,'pdf','lech201.pdf',1,'BEGINNER',1,0,0);
+INSERT INTO rd_course_sessions (course_id,session_id,session_title,creation_date,version,completed,progress,session_type,session_description,tier_level,tier_order) VALUES (@course_id,2,'Chapter 2: Alcohols, Phenols and Ethers',CURDATE(),1,0,0.00,'session',@import_tag,'BEGINNER',2);
+SET @s2=LAST_INSERT_ID();
+INSERT INTO rd_course_session_details (topic,creation_date,version,course_id,course_session_id,type,file,session_detail_id,tier_level,tier_order,has_animation,assignment) VALUES ('Chapter 2: Alcohols, Phenols and Ethers',CURDATE(),1,@course_id,@s2,'pdf','lech202.pdf',1,'BEGINNER',1,0,0);
+INSERT INTO rd_course_sessions (course_id,session_id,session_title,creation_date,version,completed,progress,session_type,session_description,tier_level,tier_order) VALUES (@course_id,3,'Chapter 3: Aldehydes, Ketones and Carboxylic Acids',CURDATE(),1,0,0.00,'session',@import_tag,'BEGINNER',3);
+SET @s3=LAST_INSERT_ID();
+INSERT INTO rd_course_session_details (topic,creation_date,version,course_id,course_session_id,type,file,session_detail_id,tier_level,tier_order,has_animation,assignment) VALUES ('Chapter 3: Aldehydes, Ketones and Carboxylic Acids',CURDATE(),1,@course_id,@s3,'pdf','lech203.pdf',1,'BEGINNER',1,0,0);
+INSERT INTO rd_course_sessions (course_id,session_id,session_title,creation_date,version,completed,progress,session_type,session_description,tier_level,tier_order) VALUES (@course_id,4,'Chapter 4: Amines',CURDATE(),1,0,0.00,'session',@import_tag,'BEGINNER',4);
+SET @s4=LAST_INSERT_ID();
+INSERT INTO rd_course_session_details (topic,creation_date,version,course_id,course_session_id,type,file,session_detail_id,tier_level,tier_order,has_animation,assignment) VALUES ('Chapter 4: Amines',CURDATE(),1,@course_id,@s4,'pdf','lech204.pdf',1,'BEGINNER',1,0,0);
+INSERT INTO rd_course_sessions (course_id,session_id,session_title,creation_date,version,completed,progress,session_type,session_description,tier_level,tier_order) VALUES (@course_id,5,'Chapter 5: Biomolecules',CURDATE(),1,0,0.00,'session',@import_tag,'BEGINNER',5);
+SET @s5=LAST_INSERT_ID();
+INSERT INTO rd_course_session_details (topic,creation_date,version,course_id,course_session_id,type,file,session_detail_id,tier_level,tier_order,has_animation,assignment) VALUES ('Chapter 5: Biomolecules',CURDATE(),1,@course_id,@s5,'pdf','lech205.pdf',1,'BEGINNER',1,0,0);
+COMMIT;
+SELECT @course_id AS course_id;
+SELECT COUNT(*) AS imported_sessions FROM rd_course_sessions WHERE course_id=@course_id AND COALESCE(session_description,'')=@import_tag;
+SELECT COUNT(*) AS imported_pdf_details FROM rd_course_session_details d JOIN rd_course_sessions s ON s.course_session_id=d.course_session_id WHERE s.course_id=@course_id AND COALESCE(s.session_description,'')=@import_tag AND LOWER(COALESCE(d.type,''))='pdf';
+SELECT s.session_id,s.session_title,d.file FROM rd_course_sessions s LEFT JOIN rd_course_session_details d ON d.course_session_id=s.course_session_id AND LOWER(COALESCE(d.type,''))='pdf' WHERE s.course_id=@course_id AND COALESCE(s.session_description,'')=@import_tag ORDER BY s.session_id;

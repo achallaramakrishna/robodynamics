@@ -181,6 +181,8 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+<c:set var="pid" value="${sessionScope.rdUser != null ? sessionScope.rdUser.profile_id : 0}" />
+<c:set var="isParentOrAdmin" value="${pid == 4 or pid == 1 or pid == 2}" />
 <main class="page">
     <section class="hero">
         <p class="tag">Exam Prep</p>
@@ -197,6 +199,9 @@
             <p>CBSE, ICSE, and state-board aligned papers with review loops based on student performance trends.</p>
             <p><strong>ExamPrep360 Basic: Rs 1999</strong> (one-time).</p>
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">Start Basic Plan - Rs 1999</a>
+            <c:if test="${isParentOrAdmin}">
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep/create" style="margin-top:8px;">Create Exam Paper</a>
+            </c:if>
         </article>
         <article class="module-card">
             <h3>Mentor-led doubt clearing</h3>

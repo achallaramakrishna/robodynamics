@@ -1,0 +1,280 @@
+{
+  "course_id": 43,
+  "course_name": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep",
+  "course_session_id": 836,
+  "session_title": "Chapter 10: Symmetry",
+  "grade": 6,
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 1,
+      "question_text": "Fill in the blank: The square shown has ____ lines of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q01.svg",
+      "options": []
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 2,
+      "question_text": "Fill in the blank: The isosceles triangle shown has ____ line of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "1",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q02.svg",
+      "options": []
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 3,
+      "question_text": "In the grid image, the red line acts as:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Vertical mirror line",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q03.svg",
+      "options": [
+        {
+          "option_text": "Horizontal axis",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Vertical mirror line",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Diagonal line",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Number line",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 4,
+      "question_text": "The shape on the right side is the ____ of the shape on the left.",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Reflection",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q04.svg",
+      "options": [
+        {
+          "option_text": "Translation",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Rotation",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflection",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Enlargement",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 5,
+      "question_text": "Fill in the blank: The square shown has ____ lines of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q05.svg",
+      "options": []
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 6,
+      "question_text": "Fill in the blank: The isosceles triangle shown has ____ line of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "1",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q06.svg",
+      "options": []
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 7,
+      "question_text": "In the grid image, the red line acts as:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Vertical mirror line",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q07.svg",
+      "options": [
+        {
+          "option_text": "Horizontal axis",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Vertical mirror line",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Diagonal line",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Number line",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 8,
+      "question_text": "The shape on the right side is the ____ of the shape on the left.",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Reflection",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q08.svg",
+      "options": [
+        {
+          "option_text": "Translation",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Rotation",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflection",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Enlargement",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 9,
+      "question_text": "Fill in the blank: The square shown has ____ lines of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q09.svg",
+      "options": []
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 10,
+      "question_text": "Fill in the blank: The isosceles triangle shown has ____ line of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "1",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q10.svg",
+      "options": []
+    },
+    {
+      "course_id": 43,
+      "course_session_id": 836,
+      "session_title": "Chapter 10: Symmetry",
+      "sequence_no": 11,
+      "question_text": "In the grid image, the red line acts as:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Vertical mirror line",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics (RD Sharma) - Exam Prep | Session: Chapter 10: Symmetry | Visual Pack",
+      "question_image": "/session_materials/43/images/g6_c43_s836_q11.svg",
+      "options": [
+        {
+          "option_text": "Horizontal axis",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Vertical mirror line",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Diagonal line",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Number line",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

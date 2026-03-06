@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+BASE="http://127.0.0.1:8080"
+COOKIE="/tmp/rd_g5_img_qbank_cookie.txt"
+WORK="/tmp/rd_g5_img_qbank_$(date +%s)"
+COURSE_ID=34
+SESSION_ID=1085
+DEST="/opt/robodynamics/session_materials/${COURSE_ID}/images"
+
+before=$(mysql -uroot -pJatni@752050 robodynamics_db -Nse "SELECT COUNT(*) FROM rd_quiz_questions WHERE course_session_id=${SESSION_ID};")
+echo "BEFORE_COUNT=$before"
+if [ "$before" -gt 0 ]; then
+  echo "ABORT: session already has questions; skipping import to avoid duplicates."
+  exit 2
+fi
+
+mkdir -p "$WORK"
+cat > "$WORK/bundle.tgz.b64" <<'B64'
+H4sIALIOqGkAA+1d62/jOJKfzwfs/0D4vqQBdyJSoh6NThZJZnqmgc5MYzJ3g8XhEDAyHWtjS25J7iT7+N+XpB6WJVlWYlNSFHEGHVtWVfFVPxbJYvHOJxOKb5wFuaM331Y0CB3PDW5U5fjvgef+cJCkKIqu64D/ZSn/VzdUqACI2X+Gwb4oQIFYMdQfgHIY8dVpFYTEZ1nZl0++cK8k/fMv/wXAyPZWfkBvnMnoA1C1cfZZQIOAdYnoN6iYOPo1eRw64ZyyX0b/6wQrMgdXJJyBrz6xQ8em4D24piGAo4jmjrrUJyGd3JCQkyAF6e8V9b2ixS+k/Y/9+n/8CQD/jP6U5zH7vDyf4o0X5DWmYxlybXrjepzn+ocknzchfRQl+XNGQhA+LSnwpoC4d3MKnAAEM+/B/euojI69yukWq3noLOf0xp55LA+ZVyfOdOrY7Oenmzn9Tuf87Z9I8JR5ZUEebxbEvw82M2d7vk/t8Ia4wQP1Od3vzt0szBDSx+WcuITnhP98Ll7kGb4lAZ0AzwXhjIKJQ+58sjjOEJLJxOFUZH7juFNeKaPLi+ufwM8cRAAWFUoXjLEdgM8cUaIqBf8ClzOyDKn/AVyzDzRgdTQB57yegrLqEWjEuZ8kTceYUt8h8+BE1U7Ez8HJHeaPZ+ztu5tvCjwOvt9lmHnLXE/a6E2ZV9JGPLdXYaYJxCtOcBPXJ3tjyuTTcRmLNMOj9a//HteUm2ueotzQX0kQ+9ttuAraKO916JNdRX6m6OTj/0cfkqx0BzzQqwWPnFb0EzyQfPCQo8Q7sUOSDrcGHr/T6Zw+viXoUF8tdOQ7ST+xQ+2v4dEaeMgBy7doeGgV6PGL9wAWxH0CgTNhqjHx2D9cAZfe/OmOKaMT6aMoOJiR77QDmIL7Difa3nCitaDSuHlt1lsopvGWoANXQMcfTLFC1pGFyTEjgYAQMKfuXTgLgAbsxVj8KxSEfzgGwlZhyumEwCbzOZ10AE1++rZy5lwlybzvuIL3xpVr1mzUbcNQ+Rx4gU03KqMx2aVdpCj9dUzvOo85eh1zZe64TEXYjCd4Wixo6D8lpguf+3xbEf/g1soVnTirxUsQRusIrvzIa+hzCL543r0Qc00W5TX0EnDR9wYX2IJqoxZkqi3IrDQInwdcnQcQY4fRsnB83/MFhHDN+059xpbMuXni2DMQhKyvL6grLBVeNZ0AkS90GgqTwOfjAQPB0J69CVwx9saV6qrbVx3qauAf3lJk4tYLQ2+xOxeSgOBXLxLtuHdgSfywDXvqN3f+BJgUl/rBwSui8/Bk1lqOmTH1m8SmDJsLMHuGaZbfheUXsyOww+vqitfVdVRJB0Mcc2/Eee3rEnVlms3DqPWWoMKqAxWhFzLGwYLM5xt4ES/d3vlOF5ZZkNJ32LD2nwC1MRuBbYBVtjcUhcpBDnTIRfHOQwdUKrDjk8OwIsaHW6aJ9x/AuU8JX08RKyi8TtKt5BuWGLDwBdwqGJkynkwpbwQ/WSBSsZQiyrQKuF3Li/VdVNqBsUNUEjfiP4cBuPBW7oT4TwfCD6hsx4/u9rIqj8iSXvaV1cGCspqo6Gpd6GcVg9Wr72cVXpLd7Wc7neecaN+apDBGwZf3Ad9J6cTyDYIcQleuk51wt2oHSe1j+zvTQb2kwsSLjRhFVpvSSztLUbokMwnLKHr37aUqH7vPkSIuyHIMHjJoE8w8P2TvgiWXFW19g6nvLcAvbFoGrsERG/74BAwEIV0G7zoBRV1xn7kiyyUfRf/GWhj8SQ6GPfs74w3eM69ilar7mFLlefeJw8RXDhNfxmDhfacAxRsUfFBWwWrJN6Soz9TPA0/eilnKxJ51AkG+eo4bgsue48j+XnhRPZ23oGaR5IvWJF82j2aR4B/fFL5Uuef9T0ATo0UgyoPvhNET2/P8icO0NfKgWUZ9pXLSLQydBAFePOdGVaBypI3Ru+2QkhTnO5mzzEXnGza8k18JqlT44HW3n9VyyVrbuZEJfH4Ex/AdH+Auj/BYewecqRjHxFjn8S3g9XC3WlYObM/ofpWjWmUHNPrf+Sp8tLrb+arceSKPHZdyf2IXTL35hDUL63EE2Kvbbqz8RE0MDXAk1jtZXitQrlHD6cJ7jN2Mr+9paM8O5mgM9/fZqaw1QdCASXEe+YixMVJPdlZbsKjOwXK+CsCDw7TGaDMfDONl1EP3zawqj51L4oKki3YTgH71eo83+3vs/K0Vlco2TVGopJgP3PJippi9auPcJ1MX1wtBkLVp9hbefQSp5cjDESNy3QlCYt/TSWRicuWce/Y9mDp3q4N6AL4cU6zeQ8r+3jyVznGS1KvSO04OnsBKVx5Z+3OHPCvSefhAVb480RRo6q+cUJzC5Mo2YxNrvi0VkPkWB7dmnf+uiHvXFSvkmuU45F83fN/3AgtU4bpT17heskZoQZEuWDO4pAXBuS5RlCsHrVhHWb6t2QuqctFKbY+Fx8wO0SbiFCWb1IgeyaadfAcqYPOaDsBIVw5SyoCQ/WPXDUcZpaFG5eZ87wBjp6/dVLBiKhY72gWh7yyjqFP81FIHkEI90TuCFTLd7ND+bnbopA0vELVaqhwl1lopKj6o1O6Dx85QdbHr3MqNjziWgskAIU1ByP7ecrAVvRqAq7cQUi9eXeG8o0spx5OQH3C/p4AAHdw+AW19wqQDoFJ1gKkXpyDR/l5z1WcDZcFJG7On6hOJktz73xaWVHnIlZxP+3W1uI0Op23iy0YYzPigWvun1Fo+DSkNQ16jjxyq8pH7zaXr0MwqBhN6Jwy60LujPKwHb6OnZNhKvOLY68fgk8NfYy3oifeip627ymFRhO74y8mKmIheo8McqnKYS/vTcvMkLs0cxBXN1X4nQzqwF93pY1JnYRUOc93tZ1VuUWk/yx7I7VwX05QosMEb6WUVblLd7WVVrjN/RmcaRAAcfvsBs3luiZ+aazbfoWm/l8EKb5nGR0oJW1cVrjKd7VbqM8Oj/BGtTJK1bZbGq2CWUOtTAWi2HLFClgWm1oiKwv+wz/9u+x6915riepcqQ1EUwzC23f8Yfdm8/1HBEP4AsNRcxemN3/9YGs1M+CMcTkb1/Z8KhFjPtb+mGPpw/2cT6SNrafC4mLvB6WgWhssPJycPDw/HD+qx59+dIFaUE47B4MGZhLPTkYaUEZhRPhKejhAbeNiIQh8uvMfTEWs3wH4G/OnZRz5GbSfiw+Lp6L+nIo344OrdU/ZgAid4cjs6OfvIh2PAuEJzBJ5O+XIXmHpu+D5w/sFehHr8dUoWzpz9fs4HkpQvhNBExuhMjEbgx2gR/eMJ53n2URzreYSMCc/WE/uAIPvwiE5HqsKfoPhJmquYXfzgfVIqns0KZtET9sGsyUvEEZmcjq4AVwjGB5wDVef/K+I/xhBAQ8swQ1hX6W2emZrUg+u5lDO2Hd9m9WA/xpmyn+Js+lxyrtKydW8gUfnQytU+rqz9OFdnlsLNo6TaeTc6a7u3DymfSvEfNY3/eMD/ltKA/7LwH1kRLwitw+C/xbTExK8G/jU8wH/3Uyn+q03jv5HHf6jAAf+bSAP+S7P/OVZzZpZ5IPtfNZn9b72aAYDPV4YRoOOpFP+1RvFfwapatP+NAf+bSL3G/6/RRcYJAiX3GougZ6y8UFXGJsuwrowNBagQjyEzWpGKxwgxW5t/tzKZpVPLVjOZtZCmKLSIvievCeu23xV6OBm79N8o6j9U0KD/TaRe6/8f8Q3F2wCAGUFjXSysjrm5xcy/sbCLYjZUmaIpzWRPsTWil2t8ml9LFxnGaDPDKpsQAzs1QpPXzehtBLVar6uKWev9+viz/TrPw/WxXfM/VSvs/0BFG/S/idRr/Y98k8F1fE1woh0ib5y3pgjmhpKWTzxKsiq+JFhAGRZkswqpSkxSigXppFCACZ8UGsmaICydYNKpxlKeF0ofTEgwI75PWF51oG/OO7VYhPggZJixDPHkoDKMvIiDFSPimBERyTyAiNdjirWStl+7ejgZu/Bf0dCw/9NS6jX+X0WXPX9hKFNY/UuxGeM8Nqu7EUctQxwzQpzCNJOZl2LvRhmLLXydzStNPr9k33WcZvp2OrndsDbhRKMTs4B1x7hMCLddmRA2JRVCEI6EqHsJGbCz92n7JbiHk7ED/zWoF+1/OOz/NJJ6jf8/86j053mz34isfo77CZpn8qdWZK988wZGYJnOKpS6/C3VxtPJs/mrkvnrkuvHkss/bl5TVvUodfm/sHpUyfx1yfVjyc1/3LwQSlZfeQLU2gL2U2B5JbAklyBpY02yDtcQsGcbSxOgyxZgSWqDYU7RqbT9NvvDyXiR/T/s/zWS+m//X3TW/t9vbJHG/63Y//s1b//t//2ad7D/97f/97QNO2D/79fG0ozbwf4/oP3/PAGD/d+pVHr/jdKw/58x+P+1lXpt//+exJzKTwESG0VJC4ayeRSnJLY6/pSi26YToI6PIwm6+ZyTE0m+9TLXP14FApAVzvv5TMv9A0v1v9n4D+X6rw7630Qa9H/Q/4L+N3v+X4MGLOq/Muh/E6nX+v/lvQhNNgGfxO2ZW1BAV3bNcCb21KZGFgN0HasFpzB4jDamUEgyfyyZvymXf+RwJ49/3LyW5OaVxh9L5m/K5Z80ryz+yQIFkty+8gRgyQKSGsKya0iaACxZQFJDpuwakiYASxKQHlCLx181Z3NqpQPw2U/Enm1cnwBOAeRxlleuEw6RALqXSu3/ZuO/IA3n438O5/+bSr22/6/tmefx6NBLAAsHQMQmU/b8hziLi6IHaY7s2wmmcOOsWp5QfOcMDFiP0II5idYOQqjomyKjB8+RCfmSxYZQiIwdUjWUkyoePEuqrual6uoOqYaZkyoePEuqZeWlWlY1qThQvXkaSHumVKTmO5J4UikV5/sgfm5fEi9uSt1FGr1Z1vO3kWYDCPGeJwII8cL5LCP5uD9Z5YXx8XatlvWQV99fEp3NyBftwuVzndkhHsVLZpb+EunXb8JcKR3/m43/g1S1sP43nP9sKPV6/Bf+f1fed5pfTMcRVw3ngeHs6+kRHON3Y3B+eqSKDxenR2issg+X/AliH348PcJj+G63RaGj51kUppEjNHcM0emIB60c5WbU0SpSDPOkuO44a6p5UnPH6J4OWzBfR+JJLVItX0viyYsstl2EUMmbQEpdmVDNWRTRg1qket7c0/W6pFbeerLMmqRiir/RfdW61RS1RFnP30a6YVGgJCRhHYsiCkmIePfOBcD5+iYG7AOn0vG/2fhfSNcK8b+hMsz/G0m9Hv8vPc+fOC4JKeCmQGHA1hPEU3LxX/mDkkwVCM08oVmTEBZCzkJYl1QrkGp1SY0CqVGTFCl5UvGkFqlaIFXrkuoFUr0uqVUgtWqSJt1Br0to5QituoRp1OCEMr00ZDcpzpPi2qRmntSsS7qOmqLko6bsJNXypFptUiNPatQljVq/TMe3kWZNE14v9lOsnMw00dcQoxNVIxtIlXrFF2PzXeQnIHpkxqgKLrz7+J48OkFTtkzp+N9w/D9FLRn/B/+fRlKvx/+vPKL6pbdyw7z+xSdM9Ny6JB6dnbP5P3wHQg9cslm+VpzlJ2AvPAY3F21RFlHK/QRR6cCR8kpGjhp3RqEkDJTglsSBspQxEvGf1n/FaZdMRPg1423x44djGm8mleJ/w/H/dFjY/x3wv6HUa/y/XN1S8CsNC4FfE7ccvpqUZnKdR/55HfVdtbNrWOVR3zedcmLrThJ7pGhN5D4TFVdG3WBNKnu+53c49uvlx6jjIFzYOSh1h7ok/CJpJ2A/zifcpliQewoIsFnH/GsnlitL8b/Z+H9QV0rifw/7f42kN43/ciFODvcE/SXlXe7I2NDQdeDBpb/ovwX/m43/BHW9EP97iP/aUOo1/l+HxL6nE8DHgWDL6S+YAVKcySdeZ3Nb0Ows8mgH5XbQvKHD5o3v0udOrWzhVgwMWOSmH5IbOmzeiteDbGGmKwRPSa0m3YuZhLGiDP9Rs/E/EIIF+18x8ID/TaRe4/8nf+WE4JrMaQCObokffADn44vx1fjn4rJ+sp2aLsWr6S5u3WX9RNeT2EzccT2pAr3UCq3Q9XSnIoY0o3ChWKnNqRZ2GpMKrEdfiJYO1cSmVkpLY9RCrrQ5uT+YiGJQ2CQtzQ7OFycB5brlKUR/TKcgCJWWh/vL1S+P8EN7ij3da2THyJcHJQ5tNctzVSiPEfnYQ10rLQ/Wn1Ue7lYvWtuslR2tUB5Te1Z5fu7IPOitptLxv9n4P+Xj/7D+10gaxv9h/B/G/2H8H8b/t5lKx/9m43/BUv//4f7fRlLPx39ih47nguvQd5Z55NSVOEjf5nLhcSazYpSKeJo6nRK7RvgUbXO1tAkhTZQEPa8kxaDQtYQ8ryQvE6LKLEnOwVQs+9aJm/NtReZgSfww4HzXnbUN/2/UbPyXcvwf1n8bSQP+D/g/4P+A/xv432z8D4j1Ev/vIf5/I6nX+B/H/17NiQ/O+R3tW3xAMpvywlkijQOuV+S1zvkemMRUSA7ewjSmwsYR2NI4WHlSoy5pekgzId1ytX1VRKqUFNcmtfKkVl3ShHJ9Kjqpps1T0VWkuECK65JaBVKrnHQd3z1ehMQoj+48drs3Xy3cADwCDfjeQ2NHOV+USvG/2fgPUMMl8d8H/G8k9Rr/9UdtI/DDAPsD7L8A9jsJ3AdKpfjf9Pl/wxji/7SUeo3/v3OR4JzfAASul/N1BPI13CaYuT7Nn8ZCqbHtr25id4EZTBDYOACvBFfhRsYqzvCndYi3+BAwc1XFYELvCrvscbUXI6eedeXgypAOkkrxv9nz/6X3vw33vzeT+o3/r/T+N1PG/W+49v1vqNnz3+X6P9z/2Ega9H/Q/4L+N3v+t8z/e4j/0FDqtf4P/t+D//fg/z34fw9payob/9Vmz38rOi7x/xvs/0ZSr8f/69An6yXgwpCfhMGGaZTxJCI11HcP+VouWLTYbRPBojmxz1/I5SdbrMQ/rOQKmiDJNc/oAI9DGtKQZKX/ADRi0o4APAEA
+B64
+
+base64 -d "$WORK/bundle.tgz.b64" > "$WORK/bundle.tgz"
+mkdir -p "$WORK/unpack"
+tar -xzf "$WORK/bundle.tgz" -C "$WORK/unpack"
+
+mkdir -p "$DEST"
+cp -f "$WORK/unpack/images/"*.svg "$DEST/"
+chmod 644 "$DEST/"*.svg || true
+
+rm -f "$COOKIE"
+curl -s -c "$COOKIE" -b "$COOKIE" -o "$WORK/login_body.txt" -w "LOGIN_HTTP=%{http_code}\n"   -d "userName=anirudh&password=anirudh" "$BASE/login"
+
+curl -s -b "$COOKIE" -o "$WORK/upload_resp.json" -w "UPLOAD_HTTP=%{http_code}\n"   -F "courseId=${COURSE_ID}"   -F "sessionId=${SESSION_ID}"   -F "file=@$WORK/unpack/grade5_image_questions_30.json;type=application/json"   "$BASE/exam-prep/api/upload-question-bank"
+
+echo "UPLOAD_RESPONSE_BEGIN"
+cat "$WORK/upload_resp.json"
+echo
+echo "UPLOAD_RESPONSE_END"
+
+after=$(mysql -uroot -pJatni@752050 robodynamics_db -Nse "SELECT COUNT(*) FROM rd_quiz_questions WHERE course_session_id=${SESSION_ID};")
+img_count=$(find "$DEST" -maxdepth 1 -type f -name 'g5_math_img_q*.svg' | wc -l)
+echo "AFTER_COUNT=$after"
+echo "REMOTE_IMAGE_COUNT=$img_count"

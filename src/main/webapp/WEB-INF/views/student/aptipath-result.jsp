@@ -91,6 +91,308 @@
       padding: 20px 22px;
     }
 
+    .revenue-focus {
+      border: 2px solid #0ea5e9;
+      box-shadow: 0 16px 34px rgba(14, 165, 233, 0.20);
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .revenue-focus::before {
+      content: "Revenue Focus";
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #0b4a6f;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .accordion-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .accordion-toggle {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .panel.is-collapsed .accordion-body {
+      display: none;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .career-roadmap-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2200;
+      display: none;
+    }
+
+    .career-roadmap-modal.is-open {
+      display: block;
+    }
+
+    .career-roadmap-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.62);
+      backdrop-filter: blur(1px);
+    }
+
+    .career-roadmap-modal-dialog {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(860px, 94vw);
+      max-height: 88vh;
+      overflow: auto;
+      border: 1px solid #dbeafe;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+      padding: 18px 18px 14px;
+      font-family: "Plus Jakarta Sans", "Trebuchet MS", sans-serif;
+    }
+
+    .career-roadmap-modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .career-roadmap-modal-title {
+      font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+      font-size: 29px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .career-roadmap-modal-code {
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    .career-roadmap-modal-body {
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 12px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #1e293b;
+    }
+
+    .career-roadmap-modal-close {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 11px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .career-roadmap-modal-foot {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .roadmap-parent-banner {
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #eff6ff, #f8fbff);
+      padding: 12px 14px;
+    }
+
+    .roadmap-parent-banner h4 {
+      margin: 0;
+      font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+      font-size: 19px;
+      color: #1e3a8a;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .roadmap-parent-banner p {
+      margin: 5px 0 0;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .roadmap-parent-checklist {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    .roadmap-parent-checklist li + li {
+      margin-top: 4px;
+    }
+
+    .roadmap-quick-grid {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .roadmap-quick-card {
+      border: 1px solid #dbe6ef;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 10px;
+    }
+
+    .roadmap-quick-label {
+      font-size: 11.5px;
+      color: #0f766e;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+    }
+
+    .roadmap-quick-text {
+      margin-top: 5px;
+      color: #0f172a;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .roadmap-detail-section {
+      margin-top: 10px;
+      border: 1px solid #dbe6ef;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .roadmap-detail-section[data-roadmap-section="ACTION_90"] {
+      border-color: #bfdbfe;
+      background: #f8fbff;
+    }
+
+    .roadmap-detail-section[data-roadmap-section="MILESTONE"] {
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .roadmap-acc-btn {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #0f172a;
+      padding: 11px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: left;
+      letter-spacing: .01em;
+      font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+    }
+
+    .roadmap-acc-btn:hover {
+      background: rgba(148, 163, 184, 0.08);
+    }
+
+    .roadmap-acc-title {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .roadmap-acc-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      color: #1e293b;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      transition: transform .16s ease;
+    }
+
+    .roadmap-acc-body {
+      display: none;
+      padding: 0 12px 10px;
+    }
+
+    .roadmap-acc-item.is-open .roadmap-acc-body {
+      display: block;
+    }
+
+    .roadmap-acc-item.is-open .roadmap-acc-icon {
+      transform: rotate(45deg);
+    }
+
+    .career-roadmap-modal-body .basic-roadmap-phases {
+      margin-top: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #334155;
+    }
+
+    .career-roadmap-modal-body .basic-roadmap-phases li + li {
+      margin-top: 6px;
+    }
+
+    .career-roadmap-modal-body .basic-roadmap-phases strong {
+      color: #0f172a;
+      font-size: 14px;
+      font-family: "Sora", "Franklin Gothic Medium", sans-serif;
+      letter-spacing: .01em;
+    }
+
     .plan-grid {
       margin-top: 12px;
       display: grid;
@@ -616,19 +918,53 @@
     .radar-wrap {
       border: 1px solid #dbe6ef;
       border-radius: 14px;
-      background: linear-gradient(140deg, #0b1221, #1f2937);
-      padding: 14px;
-      min-height: 320px;
+      background: linear-gradient(160deg, #f8fbff, #f2f7fc);
+      padding: 18px;
+      min-height: 340px;
       display: grid;
       align-items: center;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
     }
 
     .radar-wrap canvas {
       width: 100% !important;
-      max-height: 280px;
+      max-height: 320px;
     }
 
     /* ===== 10-Year Roadmap ===== */
+    .roadmap-panel {
+      background: linear-gradient(180deg, #fbfdff, #f4f8fc);
+      color: #0f172a;
+      border: 1px solid #d6e4f0;
+    }
+
+    .roadmap-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .roadmap-icon {
+      font-size: 28px;
+      line-height: 1;
+      color: #0f766e;
+    }
+
+    .roadmap-main-title {
+      color: #0f172a;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .roadmap-main-sub {
+      color: #334155;
+      font-size: 15px;
+      margin: 4px 0 0;
+      font-weight: 600;
+    }
+
     .roadmap-container {
       margin-top: 16px;
       position: relative;
@@ -645,7 +981,7 @@
     .roadmap-node {
       position: relative;
       text-align: center;
-      padding: 16px 6px 12px;
+      padding: 18px 8px 12px;
     }
 
     .roadmap-node::before {
@@ -655,7 +991,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, #dbeafe, #93c5fd);
+      background: linear-gradient(90deg, #cbd9e8, #9fb7d4);
       z-index: 0;
     }
 
@@ -707,9 +1043,9 @@
     }
 
     .roadmap-year {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
-      color: #1d4ed8;
+      color: #1e3a8a;
       text-transform: uppercase;
       letter-spacing: .04em;
     }
@@ -717,18 +1053,60 @@
     .roadmap-node.active .roadmap-year { color: #059669; }
 
     .roadmap-title {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 800;
       color: #0f172a;
-      margin: 4px 0 3px;
+      margin: 5px 0 4px;
       line-height: 1.3;
     }
 
     .roadmap-desc {
-      font-size: 12px;
-      color: #64748b;
-      line-height: 1.4;
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.5;
       margin: 0;
+    }
+
+    .roadmap-legend {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .roadmap-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .roadmap-legend-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .roadmap-legend-dot.current {
+      background: linear-gradient(135deg, #059669, #10b981);
+      border: 2px solid #059669;
+    }
+
+    .roadmap-legend-dot.upcoming {
+      background: #eff6ff;
+      border: 2px solid #93c5fd;
+    }
+
+    .roadmap-legend-dot.milestone {
+      background: #fffbeb;
+      border: 2px solid #d97706;
+    }
+
+    .roadmap-legend-text {
+      font-size: 13px;
+      color: #334155;
+      font-weight: 700;
     }
 
     .pdf-only { display: none; }
@@ -748,8 +1126,8 @@
     }
 
     .pdf-radar-label {
-      color: #e2f3ff;
-      font-size: 13px;
+      color: #1f2937;
+      font-size: 14px;
       font-weight: 700;
       line-height: 1.3;
     }
@@ -757,20 +1135,20 @@
     .pdf-radar-track {
       height: 10px;
       border-radius: 999px;
-      background: rgba(191, 219, 254, 0.25);
+      background: #e2e8f0;
       overflow: hidden;
     }
 
     .pdf-radar-fill {
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #22d3ee, #34d399);
+      background: linear-gradient(90deg, #1d4ed8, #0f766e);
     }
 
     .pdf-radar-value {
       text-align: right;
-      color: #e2f3ff;
-      font-size: 12px;
+      color: #0f172a;
+      font-size: 13px;
       font-weight: 800;
       white-space: nowrap;
     }
@@ -991,6 +1369,57 @@
       white-space: nowrap;
     }
 
+    .basic-roadmap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .basic-roadmap-card {
+      border: 1px solid #dbe6ef;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .basic-roadmap-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .basic-roadmap-sub {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .basic-roadmap-phases {
+      margin: 0;
+      padding-left: 18px;
+      color: #334155;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .basic-roadmap-phases li + li { margin-top: 5px; }
+
+    .basic-upgrade-line {
+      margin-top: 4px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #fde68a;
+      background: #fffbeb;
+      color: #92400e;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
     /* ===== Pro Plan Preview ===== */
     .pro-preview {
       position: relative;
@@ -1131,9 +1560,11 @@
       .graph-grid { grid-template-columns: 1fr; }
       .destination-details-grid { grid-template-columns: 1fr; }
       .tier-grid { grid-template-columns: 1fr 1fr; }
+      .basic-roadmap-grid { grid-template-columns: 1fr; }
       .pro-locked-grid { grid-template-columns: 1fr; }
       .action-timeline { grid-template-columns: 1fr; }
       .roadmap-track { grid-template-columns: 1fr 1fr 1fr 1fr; }
+      .roadmap-quick-grid { grid-template-columns: 1fr 1fr; }
       .bar-row { grid-template-columns: 110px 1fr 46px; }
       .simple-bar .row { grid-template-columns: 110px 1fr 46px; }
     }
@@ -1174,15 +1605,24 @@
       .dest-detail-box { padding: 10px; }
       .dest-detail-value { font-size: 13px; }
       .tier-grid { grid-template-columns: 1fr; gap: 8px; }
+      .basic-roadmap-card { padding: 12px; }
+      .basic-roadmap-title { font-size: 15px; }
       .tier-card { padding: 12px; }
       .tier-card .tc-name { font-size: 14px; }
       .tier-title { font-size: 16px; }
       .tier-count { font-size: 12px; }
       .roadmap-track { grid-template-columns: 1fr 1fr 1fr; }
       .roadmap-node { padding: 14px 4px 10px; }
-      .roadmap-title { font-size: 12px; }
-      .roadmap-desc { font-size: 11px; }
-      .roadmap-year { font-size: 11px; }
+      .roadmap-title { font-size: 13px; }
+      .roadmap-desc { font-size: 12px; }
+      .roadmap-year { font-size: 12px; }
+      .roadmap-main-title { font-size: 20px; }
+      .roadmap-main-sub { font-size: 14px; }
+      .roadmap-legend { gap: 12px; }
+      .roadmap-legend-text { font-size: 12px; }
+      .roadmap-quick-grid { grid-template-columns: 1fr; }
+      .roadmap-parent-banner { padding: 10px 11px; }
+      .roadmap-detail-section { padding: 9px 10px; }
       .action-phase { padding: 14px; }
       .action-phase h3 { font-size: 15px; }
       .action-phase .action-list { font-size: 13px; padding-left: 16px; }
@@ -1202,6 +1642,44 @@
       .donut span { font-size: 18px; }
       .donut-wrap { min-height: 120px; }
       .tag { font-size: 12px; padding: 5px 10px; }
+
+      .career-roadmap-modal-dialog {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        width: 100%;
+        max-height: 86vh;
+        border-radius: 16px 16px 0 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        padding: 14px 14px 10px;
+      }
+
+      .career-roadmap-modal-title {
+        font-size: 22px;
+      }
+
+      .career-roadmap-modal-body {
+        font-size: 14px;
+      }
+
+      .roadmap-parent-banner h4 {
+        font-size: 17px;
+      }
+
+      .roadmap-parent-banner p,
+      .roadmap-parent-checklist,
+      .roadmap-quick-text,
+      .career-roadmap-modal-body .basic-roadmap-phases {
+        font-size: 14px;
+      }
+
+      .roadmap-acc-btn {
+        font-size: 14px;
+      }
     }
 
     /* ===== Small Mobile (max 400px) ===== */
@@ -1216,8 +1694,8 @@
       .destination-name { font-size: 22px; }
       .score-card .score { font-size: 34px; }
       .roadmap-track { grid-template-columns: 1fr 1fr; }
-      .roadmap-title { font-size: 11px; }
-      .roadmap-desc { font-size: 10px; }
+      .roadmap-title { font-size: 12px; }
+      .roadmap-desc { font-size: 11px; }
     }
 
     @media print {
@@ -1273,12 +1751,12 @@
 
       /* OpenHTMLToPDF has weak CSS grid/flex support: use block/table fallbacks for stable rendering */
       .grid, .plan-grid, .score-strip, .career-top-grid, .chart-grid, .graph-grid,
-      .destination-details-grid, .tier-grid, .pro-locked-grid, .action-timeline,
+      .destination-details-grid, .tier-grid, .basic-roadmap-grid, .pro-locked-grid, .action-timeline,
       .roadmap-track, .pdf-roadmap-grid, .pdf-radar-grid, .bar-chart, .simple-bar {
         display: block !important;
       }
       .grid > *, .plan-grid > *, .score-strip > *, .career-top-grid > *, .chart-grid > *,
-      .graph-grid > *, .destination-details-grid > *, .tier-grid > *, .pro-locked-grid > *,
+      .graph-grid > *, .destination-details-grid > *, .tier-grid > *, .basic-roadmap-grid > *, .pro-locked-grid > *,
       .action-timeline > *, .roadmap-track > *, .pdf-roadmap-grid > *, .pdf-radar-grid > * {
         margin-bottom: 10px !important;
       }
@@ -1310,6 +1788,7 @@
       .graph-grid { grid-template-columns: 1fr 1fr 1fr; }
       .destination-details-grid { grid-template-columns: 1fr 1fr; }
       .tier-grid { grid-template-columns: 1fr 1fr; }
+      .basic-roadmap-grid { grid-template-columns: 1fr 1fr; }
       .pro-locked-grid { grid-template-columns: 1fr 1fr 1fr; }
       .action-timeline { grid-template-columns: 1fr 1fr 1fr; }
       .roadmap-track { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
@@ -1499,10 +1978,20 @@
           <div class="metric-value"><c:out value="${neetFitIndex}" /></div>
         </article>
         <article class="card">
-          <div class="metric-label">CAT/Law Fit Index</div>
-          <div class="metric-value">
-            <c:out value="${catFitIndex}" /> / <c:out value="${lawFitIndex}" />
-          </div>
+          <div class="metric-label">CAT Fit Index</div>
+          <div class="metric-value"><c:out value="${catFitIndex}" /></div>
+        </article>
+        <article class="card">
+          <div class="metric-label">LAW Fit Index</div>
+          <div class="metric-value"><c:out value="${lawFitIndex}" /></div>
+        </article>
+        <article class="card">
+          <div class="metric-label">CA/CS/CMA Fit Index</div>
+          <div class="metric-value"><c:out value="${caCsCmaFitIndex}" /></div>
+        </article>
+        <article class="card">
+          <div class="metric-label">MBA Analytics Fit</div>
+          <div class="metric-value"><c:out value="${mbaBusinessAnalyticsFitIndex}" /></div>
         </article>
       </section>
     </c:if>
@@ -1654,7 +2143,7 @@
       </div>
       <div class="method-note">
         Competitive fit and competency values are readiness indicators from this diagnostic, not predicted
-        IIT/NEET/CAT exam ranks or marks.
+        IIT/NEET/CAT/LAW/CA-MBA exam ranks or marks.
         <c:if test="${not empty scoringMethodNotes}">
           <ul class="cue-list" style="margin-top:8px;">
             <c:forEach var="note" items="${scoringMethodNotes}">
@@ -1800,7 +2289,7 @@
       </section>
     </c:if>
 
-    <c:if test="${not empty topCareerMatches}">
+    <c:if test="${not empty topCareerMatches and empty careerBasicRoadmapCards}">
       <section class="panel">
         <h2>Top Career Matches (Current Snapshot)</h2>
         <p class="muted">
@@ -1887,15 +2376,33 @@
       </div>
     </section>
 
-    <%-- ===== 10-YEAR CAREER ROADMAP ===== --%>
+    <%-- ===== GRADE-ALIGNED CAREER ROADMAP ===== --%>
     <c:set var="studentGrade" value="${not empty academicProfile and not empty academicProfile.grade ? academicProfile.grade : '10'}" />
-    <section class="panel" style="background: linear-gradient(135deg, #0f172a, #1e3a5f); color: #f8fbff; border-color: #1e3a5f;">
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-        <span style="font-size: 28px;">&#128506;</span>
+    <c:set var="roadmapYears" value="8" />
+    <c:choose>
+      <c:when test="${studentGrade + 0 <= 8}">
+        <c:set var="roadmapYears" value="10" />
+      </c:when>
+      <c:when test="${studentGrade + 0 == 9}">
+        <c:set var="roadmapYears" value="9" />
+      </c:when>
+      <c:when test="${studentGrade + 0 == 10}">
+        <c:set var="roadmapYears" value="8" />
+      </c:when>
+      <c:when test="${studentGrade + 0 == 11}">
+        <c:set var="roadmapYears" value="7" />
+      </c:when>
+      <c:when test="${studentGrade + 0 >= 12}">
+        <c:set var="roadmapYears" value="6" />
+      </c:when>
+    </c:choose>
+    <section class="panel roadmap-panel">
+      <div class="roadmap-header">
+        <span class="roadmap-icon">&#128506;</span>
         <div>
-          <h2 style="color: #a7f3d0; font-size: 20px;">Your 10-Year Career Roadmap</h2>
-          <p style="color: rgba(226,243,255,0.8); font-size: 13px; margin: 2px 0 0;">
-            Grade <c:out value="${studentGrade}" /> to Career Launch &mdash; personalized year-by-year from your assessment signals
+          <h2 class="roadmap-main-title">Your <span id="roadmapYearsLabel"><c:out value="${roadmapYears}" /></span>-Year Career Roadmap</h2>
+          <p id="roadmapMainSubtitle" class="roadmap-main-sub">
+            Grade <c:out value="${studentGrade}" /> onward &mdash; year-by-year execution plan aligned to current grade
           </p>
         </div>
       </div>
@@ -1954,18 +2461,18 @@
         </c:otherwise>
       </c:choose>
 
-      <div style="margin-top: 14px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <span style="width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg, #059669, #10b981); border: 2px solid #059669;"></span>
-          <span style="font-size: 11px; color: #a7f3d0; font-weight: 700;">You Are Here</span>
+      <div class="roadmap-legend">
+        <div class="roadmap-legend-item">
+          <span class="roadmap-legend-dot current"></span>
+          <span class="roadmap-legend-text">You Are Here</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <span style="width: 12px; height: 12px; border-radius: 50%; background: #eff6ff; border: 2px solid #93c5fd;"></span>
-          <span style="font-size: 11px; color: #bfdbfe; font-weight: 700;">Upcoming Phase</span>
+        <div class="roadmap-legend-item">
+          <span class="roadmap-legend-dot upcoming"></span>
+          <span class="roadmap-legend-text">Upcoming Phase</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <span style="width: 12px; height: 12px; border-radius: 50%; background: #fffbeb; border: 2px solid #d97706;"></span>
-          <span style="font-size: 11px; color: #fde68a; font-weight: 700;">Key Milestone</span>
+        <div class="roadmap-legend-item">
+          <span class="roadmap-legend-dot milestone"></span>
+          <span class="roadmap-legend-text">Key Milestone</span>
         </div>
       </div>
     </section>
@@ -2218,6 +2725,148 @@
     </section>
     </c:if>
 
+    <%-- ===== BASIC ROADMAP CARDS (TOP CAREERS) ===== --%>
+    <c:if test="${not empty careerBasicRoadmapCards}">
+    <section class="panel">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+        <span style="font-size: 24px;">&#128221;</span>
+        <div>
+          <h2>Career Direction Cards (Top 5)</h2>
+          <p class="muted" style="margin: 2px 0 0;">Open each card to see a parent-friendly, grade-aligned plan with clear student + parent next steps.</p>
+        </div>
+      </div>
+      <div class="basic-roadmap-grid">
+        <c:forEach var="roadmap" items="${careerBasicRoadmapCards}" varStatus="loop">
+          <article class="basic-roadmap-card" style="border: 1px solid #dbeafe; border-radius: 14px; background: #ffffff; box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);">
+            <div class="basic-roadmap-title"><c:out value="${roadmap.careerTitle}" /></div>
+            <div class="basic-roadmap-sub"><strong>Career Focus:</strong> <c:out value="${roadmap.overview}" /></div>
+            <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <button type="button"
+                      class="btn btn-primary print-hide js-roadmap-toggle"
+                      style="font-size: 13px; padding: 8px 12px;"
+                      data-target="careerRoadmapDetail_${loop.index}"
+                      data-career="<c:out value="${roadmap.careerTitle}" />"
+                      data-careercode="<c:out value="${roadmap.careerCode}" />"
+                      data-proprice="<c:out value="${roadmap.proPlanPrice}" />">
+                Open Roadmap Plan
+              </button>
+              <button type="button"
+                      class="btn-pro print-hide"
+                      style="font-size: 13px; padding: 8px 12px;"
+                      onclick="alert('Choose Pro Plan (' + '<c:out value="${roadmap.proPlanPrice}" />' + ') to unlock complete roadmap depth for this career.');">
+                Choose Pro Plan (<c:out value="${roadmap.proPlanPrice}" />)
+              </button>
+              <span style="font-size: 12px; color: #64748b;">Parent + student can review this plan together in under 5 minutes.</span>
+            </div>
+
+            <div id="careerRoadmapDetail_${loop.index}" style="display: none; margin-top: 12px; border-top: 1px dashed #cbd5e1; padding-top: 12px;">
+              <section class="roadmap-detail-section roadmap-acc-item is-open" data-roadmap-section="WHAT_TO_STUDY">
+                <button type="button" class="roadmap-acc-btn" data-roadmap-toggle>
+                  <span class="roadmap-acc-title">What to Study</span>
+                  <span class="roadmap-acc-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="roadmap-acc-body">
+                  <ol class="basic-roadmap-phases">
+                    <c:forEach var="row" items="${roadmap.whatToStudyRoadmap}">
+                      <li><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></li>
+                    </c:forEach>
+                  </ol>
+                </div>
+              </section>
+              <section class="roadmap-detail-section roadmap-acc-item" data-roadmap-section="SKILLS">
+                <button type="button" class="roadmap-acc-btn" data-roadmap-toggle>
+                  <span class="roadmap-acc-title">Skills to Build</span>
+                  <span class="roadmap-acc-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="roadmap-acc-body">
+                  <ol class="basic-roadmap-phases">
+                    <c:forEach var="row" items="${roadmap.skillsRoadmap}">
+                      <li><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></li>
+                    </c:forEach>
+                  </ol>
+                </div>
+              </section>
+              <section class="roadmap-detail-section roadmap-acc-item" data-roadmap-section="PROJECTS">
+                <button type="button" class="roadmap-acc-btn" data-roadmap-toggle>
+                  <span class="roadmap-acc-title">Projects to Do</span>
+                  <span class="roadmap-acc-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="roadmap-acc-body">
+                  <ol class="basic-roadmap-phases">
+                    <c:forEach var="row" items="${roadmap.projectsRoadmap}">
+                      <li><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></li>
+                    </c:forEach>
+                  </ol>
+                </div>
+              </section>
+              <section class="roadmap-detail-section roadmap-acc-item" data-roadmap-section="WHERE_TO_STUDY">
+                <button type="button" class="roadmap-acc-btn" data-roadmap-toggle>
+                  <span class="roadmap-acc-title">Where to Study</span>
+                  <span class="roadmap-acc-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="roadmap-acc-body">
+                  <ol class="basic-roadmap-phases">
+                    <c:forEach var="row" items="${roadmap.whereToStudyRoadmap}">
+                      <li><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></li>
+                    </c:forEach>
+                  </ol>
+                </div>
+              </section>
+              <section class="roadmap-detail-section roadmap-acc-item is-open" data-roadmap-section="ACTION_90">
+                <button type="button" class="roadmap-acc-btn" data-roadmap-toggle>
+                  <span class="roadmap-acc-title">First 90-Day Action Plan</span>
+                  <span class="roadmap-acc-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="roadmap-acc-body">
+                  <ol class="basic-roadmap-phases">
+                    <c:forEach var="row" items="${roadmap.action90Roadmap}">
+                      <li><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></li>
+                    </c:forEach>
+                  </ol>
+                </div>
+              </section>
+              <section class="roadmap-detail-section roadmap-acc-item" data-roadmap-section="MILESTONE">
+                <button type="button" class="roadmap-acc-btn" data-roadmap-toggle>
+                  <span class="roadmap-acc-title">Long-Term Milestones</span>
+                  <span class="roadmap-acc-icon" aria-hidden="true">+</span>
+                </button>
+                <div class="roadmap-acc-body">
+                  <ol class="basic-roadmap-phases">
+                    <c:forEach var="row" items="${roadmap.milestoneRoadmap}">
+                      <li><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></li>
+                    </c:forEach>
+                  </ol>
+                </div>
+              </section>
+            </div>
+            <div class="basic-upgrade-line"><c:out value="${roadmap.upgradeLine}" /></div>
+          </article>
+        </c:forEach>
+      </div>
+    </section>
+
+    <div id="careerRoadmapModal" class="career-roadmap-modal print-hide" aria-hidden="true">
+      <div class="career-roadmap-modal-backdrop js-roadmap-modal-close"></div>
+      <div class="career-roadmap-modal-dialog" role="dialog" aria-modal="true" aria-label="Career roadmap details">
+        <div class="career-roadmap-modal-head">
+          <h3 id="careerRoadmapModalTitle" class="career-roadmap-modal-title">Career Roadmap</h3>
+          <button type="button" class="career-roadmap-modal-close js-roadmap-modal-close">Close</button>
+        </div>
+        <div id="careerRoadmapModalCode" class="career-roadmap-modal-code"></div>
+        <div id="careerRoadmapModalBody" class="career-roadmap-modal-body"></div>
+        <div class="career-roadmap-modal-foot">
+          <button id="careerRoadmapModalProBtn"
+                  type="button"
+                  class="btn-pro"
+                  style="font-size: 13px; padding: 9px 14px;">
+            Choose Pro Plan
+          </button>
+          <span style="font-size: 12px; color: #64748b;">Parent tip: review this plan once a week and track completion, not just marks.</span>
+        </div>
+      </div>
+    </div>
+    </c:if>
+
     <%-- ===== 90-DAY VISUAL ACTION PLAN ===== --%>
     <section class="panel">
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
@@ -2267,33 +2916,48 @@
       <div class="pro-preview">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
           <span class="pro-badge">&#128274; Pro Plan</span>
-          <h2 style="font-size: 18px; color: #78350f; margin: 0;">Unlock Your Full Career Intelligence</h2>
+          <h2 style="font-size: 18px; color: #78350f; margin: 0;">Unlock Your Full Career Intelligence (<c:out value="${proRoadmapTemplate.planPrice}" />)</h2>
         </div>
+        <p style="margin: 0; font-size: 13px; color: #92400e; font-weight: 700;">
+          career_code: <c:out value="${proRoadmapTemplate.careerCode}" />
+        </p>
         <p style="margin: 4px 0 0; font-size: 14px; color: #92400e; line-height: 1.5;">
-          Get detailed step-by-step guidance for your chosen career path &mdash; competitive exam calendar, application deadlines, cutoff trends, college rankings, and a personalized preparation roadmap.
+          <c:out value="${proRoadmapTemplate.personalizedOverview}" />
         </p>
 
         <div class="pro-locked-grid">
           <div class="pro-locked-card">
-            <div class="plc-title">&#128197; Exam Calendar 2026-27</div>
-            <div class="plc-item">JEE Main: Jan &amp; Apr 2027</div>
-            <div class="plc-item">NEET UG: May 2027</div>
-            <div class="plc-item">CUET: May-Jun 2027</div>
-            <div class="plc-item">Application opens: Oct 2026</div>
+            <div class="plc-title">&#128218; Study + Skill + Project Plan</div>
+            <c:forEach var="row" items="${proRoadmapTemplate.studyRoadmap}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
+            <c:forEach var="row" items="${proRoadmapTemplate.skillRoadmap}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
+            <c:forEach var="row" items="${proRoadmapTemplate.projectRoadmap}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
           </div>
           <div class="pro-locked-card">
-            <div class="plc-title">&#128200; Cutoff Intelligence</div>
-            <div class="plc-item">Last 3 years cutoff trends</div>
-            <div class="plc-item">College-wise requirements</div>
-            <div class="plc-item">Category-wise analysis</div>
-            <div class="plc-item">Expected 2027 predictions</div>
+            <div class="plc-title">&#128200; Exam + College Intelligence</div>
+            <c:forEach var="row" items="${proRoadmapTemplate.examStrategy}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
+            <c:forEach var="row" items="${proRoadmapTemplate.whereToStudyRoadmap}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
+            <c:forEach var="row" items="${proRoadmapTemplate.databaseScale}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
           </div>
           <div class="pro-locked-card">
-            <div class="plc-title">&#128218; Prep Roadmap</div>
-            <div class="plc-item">Month-by-month study plan</div>
-            <div class="plc-item">Subject-wise weightage</div>
-            <div class="plc-item">Mock test schedule</div>
-            <div class="plc-item">Revision strategy</div>
+            <div class="plc-title">&#128205; 90-Day + Long-Term Milestones</div>
+            <c:forEach var="row" items="${proRoadmapTemplate.first90Days}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
+            <c:forEach var="row" items="${proRoadmapTemplate.longTermMilestones}">
+              <div class="plc-item"><strong><c:out value="${row.title}" />:</strong> <c:out value="${row.detail}" /></div>
+            </c:forEach>
           </div>
         </div>
 
@@ -2302,7 +2966,7 @@
             &#9889; Upgrade to Pro Plan
           </button>
           <span style="font-size: 13px; color: #92400e; font-weight: 600;">
-            Choose which career destination you want deep intelligence for &mdash; we'll build your personalized roadmap.
+            <c:out value="${proRoadmapTemplate.upgradeLine}" />
           </span>
         </div>
       </div>
@@ -2409,7 +3073,7 @@
       </p>
       <div style="max-width: 600px; margin: 18px auto 0; padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);">
         <p style="margin: 0; font-size: 14px; color: rgba(240, 248, 255, 0.92); line-height: 1.55;">
-          &#128161; <strong>Here's the truth:</strong> Only a small percentage of students crack IIT, NEET, or CAT &mdash;
+          &#128161; <strong>Here's the truth:</strong> Only a small percentage of students crack IIT, NEET, CAT, or Law-type competitive routes &mdash;
           but the remaining 98% find their way and succeed brilliantly. The world has hundreds of paths to a fulfilling career.
           <strong>AptiPath360 is your GPS to find YOUR best path.</strong>
         </p>
@@ -2468,11 +3132,13 @@
             datasets: [{
               label: 'Pathway Fit',
               data: values,
-              borderColor: '#00f0ff',
-              backgroundColor: 'rgba(0, 240, 255, 0.22)',
-              borderWidth: 2,
-              pointBackgroundColor: '#39ff14',
-              pointRadius: 3
+              borderColor: '#0f766e',
+              backgroundColor: 'rgba(15, 118, 110, 0.20)',
+              borderWidth: 2.5,
+              pointBackgroundColor: '#0b1f3a',
+              pointBorderColor: '#ffffff',
+              pointBorderWidth: 2,
+              pointRadius: 4
             }]
           },
           options: {
@@ -2491,15 +3157,15 @@
                   display: false
                 },
                 grid: {
-                  color: 'rgba(191, 219, 254, 0.25)'
+                  color: 'rgba(100, 116, 139, 0.22)'
                 },
                 angleLines: {
-                  color: 'rgba(191, 219, 254, 0.25)'
+                  color: 'rgba(100, 116, 139, 0.22)'
                 },
                 pointLabels: {
-                  color: '#e2f3ff',
+                  color: '#1e293b',
                   font: {
-                    size: 11,
+                    size: 13,
                     weight: '700'
                   }
                 }
@@ -2508,7 +3174,11 @@
             plugins: {
               legend: {
                 labels: {
-                  color: '#e2f3ff'
+                  color: '#334155',
+                  font: {
+                    size: 12,
+                    weight: '700'
+                  }
                 }
               }
             }
@@ -2526,70 +3196,318 @@
         }
       }
 
-      // ===== 10-YEAR CAREER ROADMAP (Dynamic, Grade-Aware) =====
+      // ---- Career roadmap card popup (desktop modal + mobile bottom-sheet) ----
+      (function() {
+        var modal = document.getElementById('careerRoadmapModal');
+        if (!modal) return;
+        var modalTitle = document.getElementById('careerRoadmapModalTitle');
+        var modalCode = document.getElementById('careerRoadmapModalCode');
+        var modalBody = document.getElementById('careerRoadmapModalBody');
+        var modalProBtn = document.getElementById('careerRoadmapModalProBtn');
+        var modalDialog = modal.querySelector('.career-roadmap-modal-dialog');
+        var currentGrade = parseInt('<c:out value="${studentGrade}" />') || 10;
+
+        function computeRoadmapYears(grade) {
+          if (grade <= 8) return 10;
+          if (grade === 9) return 9;
+          if (grade === 10) return 8;
+          if (grade === 11) return 7;
+          return 6;
+        }
+
+        var roadmapYears = computeRoadmapYears(currentGrade);
+
+        function escapeHtml(text) {
+          return String(text || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+
+        function readSectionItems(root, sectionKey) {
+          var section = root.querySelector('[data-roadmap-section="' + sectionKey + '"]');
+          if (!section) return [];
+          return Array.prototype.slice.call(section.querySelectorAll('li')).map(function(li) {
+            return (li.textContent || '').replace(/\s+/g, ' ').trim();
+          }).filter(function(v) { return !!v; });
+        }
+
+        function pick(items, index, fallbackText) {
+          if (items && items.length > index && items[index]) return items[index];
+          return fallbackText;
+        }
+
+        function bindRoadmapAccordions(scope) {
+          if (!scope) return;
+          var accordions = scope.querySelectorAll('.roadmap-acc-item');
+          accordions.forEach(function(item, index) {
+            if (index !== 0 && !item.classList.contains('is-open')) {
+              item.classList.remove('is-open');
+            }
+            var btn = item.querySelector('[data-roadmap-toggle]');
+            if (!btn) return;
+            btn.addEventListener('click', function() {
+              item.classList.toggle('is-open');
+            });
+          });
+        }
+
+        function closeRoadmapModal() {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+          modalBody.innerHTML = '';
+        }
+
+        document.querySelectorAll('.js-roadmap-toggle').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var targetId = this.getAttribute('data-target') || '';
+            if (!targetId) return;
+            var detail = document.getElementById(targetId);
+            if (!detail) return;
+
+            var careerTitle = this.getAttribute('data-career') || 'Career Roadmap';
+            var careerCode = this.getAttribute('data-careercode') || '';
+            var proPrice = this.getAttribute('data-proprice') || 'Rs 2999';
+            var temp = document.createElement('div');
+            temp.innerHTML = detail.innerHTML;
+
+            var actionItems = readSectionItems(temp, 'ACTION_90');
+            var studyItems = readSectionItems(temp, 'WHAT_TO_STUDY');
+            var milestoneItems = readSectionItems(temp, 'MILESTONE');
+
+            var quickNow = pick(actionItems, 0, pick(studyItems, 0, 'Start with one fixed weekly academic target and track completion.'));
+            var quickNext = pick(actionItems, 1, pick(studyItems, 1, 'Strengthen one weak area using mock tests and error reviews.'));
+            var quickMilestone = pick(milestoneItems, 0, 'Lock a 6-12 month milestone and review progress monthly.');
+
+            var summaryHtml =
+              '<div class="roadmap-parent-banner">'
+                + '<h4>Parent Action Snapshot</h4>'
+                + '<p>Use this ' + roadmapYears + '-year plan as a shared weekly execution guide, not just a one-time report read.</p>'
+                + '<ul class="roadmap-parent-checklist">'
+                  + '<li>Run one 20-minute weekly review (same day/time) with student ownership first.</li>'
+                  + '<li>Track only 3 metrics: consistency, outcomes, and reflection notes.</li>'
+                  + '<li>At month-end, continue/adjust plan based on evidence, not stress.</li>'
+                + '</ul>'
+                + '<div class="roadmap-quick-grid">'
+                  + '<article class="roadmap-quick-card">'
+                    + '<div class="roadmap-quick-label">Start This Week</div>'
+                    + '<div class="roadmap-quick-text">' + escapeHtml(quickNow) + '</div>'
+                  + '</article>'
+                  + '<article class="roadmap-quick-card">'
+                    + '<div class="roadmap-quick-label">Next 30-60 Days</div>'
+                    + '<div class="roadmap-quick-text">' + escapeHtml(quickNext) + '</div>'
+                  + '</article>'
+                  + '<article class="roadmap-quick-card">'
+                    + '<div class="roadmap-quick-label">Long-Term Anchor</div>'
+                    + '<div class="roadmap-quick-text">' + escapeHtml(quickMilestone) + '</div>'
+                  + '</article>'
+                + '</div>'
+              + '</div>';
+
+            modalTitle.textContent = careerTitle + ' - Parent Roadmap (' + roadmapYears + ' Years)';
+            modalCode.textContent = careerCode ? ('Reference Code: ' + careerCode) : '';
+            modalBody.innerHTML = summaryHtml + temp.innerHTML;
+            bindRoadmapAccordions(modalBody);
+            modalProBtn.textContent = 'Choose Pro Plan (' + proPrice + ')';
+            modalProBtn.onclick = function() {
+              alert('Choose Pro Plan (' + proPrice + ') to unlock complete roadmap depth for this career.');
+            };
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            if (modalDialog) {
+              modalDialog.scrollTop = 0;
+            }
+          });
+        });
+
+        document.querySelectorAll('.js-roadmap-modal-close').forEach(function(node) {
+          node.addEventListener('click', closeRoadmapModal);
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeRoadmapModal();
+          }
+        });
+      })();
+
+      // ---- Move career cards to top and convert deep sections into accordions ----
+      (function() {
+        var panelList = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+        if (!panelList.length) return;
+
+        var cardsPanel = panelList.find(function(panel) {
+          var h = panel.querySelector('h2');
+          return h && h.textContent.indexOf('Career Direction Cards') >= 0;
+        });
+        var scoreBreakdownPanel = panelList.find(function(panel) {
+          var h = panel.querySelector('h2');
+          return h && h.textContent.indexOf('Score Visual Breakdown') >= 0;
+        });
+        if (cardsPanel && scoreBreakdownPanel && scoreBreakdownPanel.parentNode) {
+          scoreBreakdownPanel.parentNode.insertBefore(cardsPanel, scoreBreakdownPanel);
+          cardsPanel.classList.add('revenue-focus');
+        }
+
+        var accordionTitles = [
+          'Score Visual Breakdown',
+          'Visual Performance Dashboard',
+          'Question-Level Score Audit',
+          'Career Direction Signals Captured',
+          'How Student Thinks (Story Insight)',
+          'Pathway Radar',
+          'Future Possibility Map',
+          'Encouragement Cues',
+          'AI Reflection Layer',
+          'Your Career Universe',
+          'Your 90-Day Action Plan'
+        ];
+        var keepExpanded = {
+          'Score Visual Breakdown': true
+        };
+
+        panelList.forEach(function(panel) {
+          var heading = panel.querySelector('h2');
+          if (!heading) return;
+          var title = (heading.textContent || '').trim();
+          if (accordionTitles.indexOf(title) === -1) return;
+
+          var children = Array.prototype.slice.call(panel.children);
+          if (children.length < 2) return;
+
+          var first = children[0];
+          var body = document.createElement('div');
+          body.className = 'accordion-body';
+          children.slice(1).forEach(function(ch) { body.appendChild(ch); });
+          panel.appendChild(body);
+
+          var headWrap = document.createElement('div');
+          headWrap.className = 'accordion-head';
+
+          if (first.tagName && first.tagName.toUpperCase() === 'H2') {
+            panel.insertBefore(headWrap, first);
+            headWrap.appendChild(first);
+          } else {
+            panel.insertBefore(headWrap, first);
+            headWrap.appendChild(first);
+          }
+
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'accordion-toggle print-hide';
+          btn.textContent = keepExpanded[title] ? 'Collapse' : 'Expand';
+          headWrap.appendChild(btn);
+
+          var expanded = !!keepExpanded[title];
+          if (!expanded) {
+            panel.classList.add('is-collapsed');
+          }
+
+          btn.addEventListener('click', function() {
+            expanded = !expanded;
+            panel.classList.toggle('is-collapsed', !expanded);
+            btn.textContent = expanded ? 'Collapse' : 'Expand';
+          });
+        });
+      })();
+
+      // ===== Grade-Aligned Career Roadmap (No extra AI call) =====
       (function() {
         var container = document.getElementById('roadmapContainer');
         if (!container) return;
 
         var currentGrade = parseInt('<c:out value="${studentGrade}" />') || 10;
-        var currentYear = 2026;
-        var steps = [];
+        var currentYear = new Date().getFullYear();
+        var titleNode = document.getElementById('roadmapYearsLabel');
+        var subtitleNode = document.getElementById('roadmapMainSubtitle');
 
-        // Grade 8 roadmap (10 years: 2026-2036)
-        if (currentGrade === 8) {
-          steps = [
-            { year: currentYear, label: 'Grade 8', title: 'Foundation', desc: 'Build curiosity, aptitude habits, explore broadly', type: 'active' },
-            { year: currentYear + 1, label: 'Grade 9', title: 'Explore', desc: 'Identify subject strengths, try 2-3 extracurriculars', type: 'future' },
-            { year: currentYear + 2, label: 'Grade 10', title: 'Board Prep', desc: 'Stream selection decision, board exam preparation', type: 'milestone' },
-            { year: currentYear + 3, label: 'Grade 11', title: 'Deep Dive', desc: 'Subject specialization, competitive exam coaching begins', type: 'future' },
-            { year: currentYear + 4, label: 'Grade 12', title: 'Entrance Year', desc: 'Board + competitive exams, college applications', type: 'milestone' },
-            { year: currentYear + 5, label: 'College Y1', title: 'Foundation Year', desc: 'Core subjects, campus exposure, skill-building', type: 'future' },
-            { year: currentYear + 6, label: 'College Y2', title: 'Specialization', desc: 'Major selection, internship search, projects', type: 'future' },
-            { year: currentYear + 7, label: 'College Y3', title: 'Industry Ready', desc: 'Internships, portfolio building, placement prep', type: 'future' },
-            { year: currentYear + 8, label: 'College Y4', title: 'Launch Pad', desc: 'Final projects, placements, or higher education applications', type: 'milestone' },
-            { year: currentYear + 9, label: '' + (currentYear + 9), title: 'Career Start', desc: 'First job or post-grad, apply everything you built', type: 'milestone' }
-          ];
+        function roadmapYearsForGrade(grade) {
+          if (grade <= 8) return 10;
+          if (grade === 9) return 9;
+          if (grade === 10) return 8;
+          if (grade === 11) return 7;
+          return 6;
         }
-        // Grade 9 roadmap
-        else if (currentGrade === 9) {
-          steps = [
-            { year: currentYear, label: 'Grade 9', title: 'Explore & Focus', desc: 'Identify top subjects, start building study discipline', type: 'active' },
-            { year: currentYear + 1, label: 'Grade 10', title: 'Board Prep', desc: 'Stream decision, board exam readiness, first competitive tests', type: 'milestone' },
-            { year: currentYear + 2, label: 'Grade 11', title: 'Stream Deep Dive', desc: 'Subject mastery, entrance exam coaching, skill projects', type: 'future' },
-            { year: currentYear + 3, label: 'Grade 12', title: 'Exam & Apply', desc: 'Boards + entrance exams, college applications filed', type: 'milestone' },
-            { year: currentYear + 4, label: 'College Y1', title: 'Foundation', desc: 'Core learning, campus activities, discover passions', type: 'future' },
-            { year: currentYear + 5, label: 'College Y2', title: 'Specialize', desc: 'Choose major/track, first internship experience', type: 'future' },
-            { year: currentYear + 6, label: 'College Y3', title: 'Build Portfolio', desc: 'Projects, internships, professional network building', type: 'future' },
-            { year: currentYear + 7, label: 'College Y4', title: 'Launch', desc: 'Placements, higher studies, or entrepreneurship launch', type: 'milestone' },
-            { year: currentYear + 8, label: '' + (currentYear + 8), title: 'Career Growth', desc: 'First role mastery, upskilling, career acceleration', type: 'future' }
-          ];
+
+        function schoolStage(grade) {
+          if (grade <= 8) {
+            return { title: 'Foundation', desc: 'Build curiosity, consistency, and core subject confidence.', type: 'active' };
+          }
+          if (grade === 9) {
+            return { title: 'Exploration & Focus', desc: 'Identify strengths and lock disciplined study habits.', type: 'future' };
+          }
+          if (grade === 10) {
+            return { title: 'Board & Stream Strategy', desc: 'Board performance plus stream decisions with evidence-based planning.', type: 'milestone' };
+          }
+          if (grade === 11) {
+            return { title: 'Specialization Start', desc: 'Deepen stream subjects and begin structured entrance preparation.', type: 'future' };
+          }
+          return { title: 'Entrance & Applications', desc: 'Execute board + entrance plan and finalize college applications.', type: 'milestone' };
         }
-        // Grade 10 roadmap
-        else if (currentGrade === 10) {
-          steps = [
-            { year: currentYear, label: 'Grade 10', title: 'Board Year', desc: 'Excel in boards, finalize stream choice for Class 11', type: 'active' },
-            { year: currentYear + 1, label: 'Grade 11', title: 'Stream Start', desc: 'Deep subject study, entrance coaching, build foundations', type: 'future' },
-            { year: currentYear + 2, label: 'Grade 12', title: 'Entrance Year', desc: 'Board + competitive exams, applications, interview prep', type: 'milestone' },
-            { year: currentYear + 3, label: 'College Y1', title: 'New Beginning', desc: 'Core curriculum, explore clubs, hackathons, labs', type: 'future' },
-            { year: currentYear + 4, label: 'College Y2', title: 'Specialize', desc: 'Declare major, first internship, research projects', type: 'future' },
-            { year: currentYear + 5, label: 'College Y3', title: 'Industry Ready', desc: 'Professional internships, certifications, portfolio', type: 'future' },
-            { year: currentYear + 6, label: 'College Y4', title: 'Launch Pad', desc: 'Campus placements, higher study apps, startup projects', type: 'milestone' },
-            { year: currentYear + 7, label: '' + (currentYear + 7), title: 'Career Start', desc: 'First professional role, apply your 7 years of preparation', type: 'milestone' },
-            { year: currentYear + 8, label: '' + (currentYear + 8), title: 'Accelerate', desc: 'Promotions, specializations, leadership growth', type: 'future' }
-          ];
+
+        function ugStage(year) {
+          if (year === 1) {
+            return { title: 'UG Year 1: Foundation', desc: 'Strengthen fundamentals and start profile-building activities.', type: 'future' };
+          }
+          if (year === 2) {
+            return { title: 'UG Year 2: Applied Learning', desc: 'Add projects, certifications, and practical domain exposure.', type: 'future' };
+          }
+          if (year === 3) {
+            return { title: 'UG Year 3: Portfolio & Internships', desc: 'Convert skills into internships, outcomes, and strong portfolio evidence.', type: 'future' };
+          }
+          return { title: 'UG Year 4: Launch Readiness', desc: 'Placement/higher-study execution with interview and application readiness.', type: 'milestone' };
         }
-        // Default: generic 8-year roadmap
-        else {
-          steps = [
-            { year: currentYear, label: 'Now', title: 'Assessment Baseline', desc: 'Your current strengths and readiness captured', type: 'active' },
-            { year: currentYear + 1, label: '' + (currentYear + 1), title: 'Skill Building', desc: 'Strengthen weak areas, maintain strengths', type: 'future' },
-            { year: currentYear + 2, label: '' + (currentYear + 2), title: 'Exam Readiness', desc: 'Targeted preparation for entrance exams', type: 'milestone' },
-            { year: currentYear + 3, label: '' + (currentYear + 3), title: 'College Entry', desc: 'Begin degree, explore specializations', type: 'future' },
-            { year: currentYear + 4, label: '' + (currentYear + 4), title: 'Specialize', desc: 'Deep expertise in chosen field', type: 'future' },
-            { year: currentYear + 5, label: '' + (currentYear + 5), title: 'Industry Exposure', desc: 'Internships, projects, professional network', type: 'future' },
-            { year: currentYear + 6, label: '' + (currentYear + 6), title: 'Career Launch', desc: 'First role or higher education', type: 'milestone' },
-            { year: currentYear + 8, label: '' + (currentYear + 8), title: 'Career Growth', desc: 'Established professional, making impact', type: 'milestone' }
-          ];
+
+        function earlyCareerStage(careerYear) {
+          if (careerYear <= 1) {
+            return { title: 'Career Start', desc: 'Enter role with execution discipline and mentor feedback loops.', type: 'milestone' };
+          }
+          if (careerYear === 2) {
+            return { title: 'Career Acceleration', desc: 'Build depth, credibility, and measurable outcomes in chosen domain.', type: 'future' };
+          }
+          return { title: 'Growth Track', desc: 'Specialize further and move toward high-impact opportunities.', type: 'future' };
+        }
+
+        var yearsToShow = roadmapYearsForGrade(currentGrade);
+        if (titleNode) titleNode.textContent = String(yearsToShow);
+        if (subtitleNode) {
+          subtitleNode.textContent = 'Grade ' + currentGrade + ' onward - ' + yearsToShow + '-year execution roadmap aligned to current grade.';
+        }
+
+        var steps = [];
+        for (var i = 0; i < yearsToShow; i++) {
+          var year = currentYear + i;
+          var academicGrade = currentGrade + i;
+          var step;
+          var label;
+
+          if (academicGrade <= 12) {
+            step = schoolStage(academicGrade);
+            step.type = (i === 0) ? 'active' : step.type;
+            label = 'Grade ' + academicGrade;
+          } else {
+            var ugYear = academicGrade - 12;
+            if (ugYear <= 4) {
+              step = ugStage(ugYear);
+              label = 'UG ' + ugYear;
+            } else {
+              step = earlyCareerStage(ugYear - 4);
+              label = '' + year;
+            }
+          }
+
+          steps.push({
+            year: year,
+            label: label,
+            title: step.title,
+            desc: step.desc,
+            type: step.type
+          });
         }
 
         var html = '<div class="roadmap-track">';

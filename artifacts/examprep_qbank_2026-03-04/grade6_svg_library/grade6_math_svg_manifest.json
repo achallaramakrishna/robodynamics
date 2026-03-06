@@ -1,0 +1,219 @@
+{
+  "title": "CBSE Grade 6 Math SVG Library",
+  "generated_at": "2026-03-04",
+  "source_plan_tsv": "artifacts\\prod_qbank_prod_ready_plan_2026-03-01.tsv",
+  "assets": [
+    {
+      "sequence_no": 1,
+      "chapter": "Basic Geometrical Ideas",
+      "template": "line_ray_segment",
+      "filename": "g6_01_basic_geometrical_ideas_line_ray_segment.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_01_basic_geometrical_ideas_line_ray_segment.svg",
+      "chapter_pdf_references": [
+        "39_4_basic_geometrical_ideas.pdf",
+        "35_session_11_basic_geometrical_ideas.pdf",
+        "11_basic_geometrical_ideas.pdf"
+      ],
+      "tags": [
+        "line",
+        "ray",
+        "segment"
+      ]
+    },
+    {
+      "sequence_no": 2,
+      "chapter": "Understanding Elementary Shapes",
+      "template": "polygon_types",
+      "filename": "g6_02_understanding_elementary_shapes_polygon_types.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_02_understanding_elementary_shapes_polygon_types.svg",
+      "chapter_pdf_references": [
+        "39_5_understanding_elementary_shapes.pdf",
+        "35_session_12_understanding_elementary_shapes.pdf",
+        "12_understanding_elementary_shapes.pdf"
+      ],
+      "tags": [
+        "polygon",
+        "shape"
+      ]
+    },
+    {
+      "sequence_no": 3,
+      "chapter": "Lines and Angles",
+      "template": "angle_set",
+      "filename": "g6_03_lines_and_angles_angle_set.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_03_lines_and_angles_angle_set.svg",
+      "chapter_pdf_references": [
+        "3_lines_and_angles.pdf",
+        "2_lines_and_angles.pdf"
+      ],
+      "tags": [
+        "angles",
+        "classification"
+      ]
+    },
+    {
+      "sequence_no": 4,
+      "chapter": "Three-Dimensional Shapes",
+      "template": "solids_comparison",
+      "filename": "g6_04_three_dimensional_shapes_solids_comparison.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_04_three_dimensional_shapes_solids_comparison.svg",
+      "chapter_pdf_references": [
+        "35_session_13_three-dimensional_shapes.pdf",
+        "13_three_dimensional_shapes.pdf"
+      ],
+      "tags": [
+        "cube",
+        "cylinder",
+        "sphere"
+      ]
+    },
+    {
+      "sequence_no": 5,
+      "chapter": "Playing with Constructions",
+      "template": "cube_net_valid",
+      "filename": "g6_05_playing_with_constructions_cube_net_valid.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_05_playing_with_constructions_cube_net_valid.svg",
+      "chapter_pdf_references": [
+        "9_playing_with_constructions.pdf",
+        "8_playing_with_constructions.pdf"
+      ],
+      "tags": [
+        "net",
+        "3d"
+      ]
+    },
+    {
+      "sequence_no": 6,
+      "chapter": "Constructions",
+      "template": "compass_bisector",
+      "filename": "g6_06_constructions_compass_bisector.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_06_constructions_compass_bisector.svg",
+      "chapter_pdf_references": [
+        "35_session_14_constructions.pdf",
+        "14_constructions.pdf"
+      ],
+      "tags": [
+        "compass",
+        "construction"
+      ]
+    },
+    {
+      "sequence_no": 7,
+      "chapter": "Symmetry",
+      "template": "axes_overview",
+      "filename": "g6_07_symmetry_axes_overview.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_07_symmetry_axes_overview.svg",
+      "chapter_pdf_references": [
+        "35_session_15_symmetry.pdf",
+        "10_symmetry.pdf",
+        "9_symmetry.pdf",
+        "15_symmetry.pdf"
+      ],
+      "tags": [
+        "line_of_symmetry"
+      ]
+    },
+    {
+      "sequence_no": 8,
+      "chapter": "Symmetry",
+      "template": "reflection_grid",
+      "filename": "g6_08_symmetry_reflection_grid.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_08_symmetry_reflection_grid.svg",
+      "chapter_pdf_references": [
+        "35_session_15_symmetry.pdf",
+        "10_symmetry.pdf",
+        "9_symmetry.pdf",
+        "15_symmetry.pdf"
+      ],
+      "tags": [
+        "reflection"
+      ]
+    },
+    {
+      "sequence_no": 9,
+      "chapter": "Perimeter and Area",
+      "template": "perimeter_rectangle",
+      "filename": "g6_09_perimeter_and_area_perimeter_rectangle.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_09_perimeter_and_area_perimeter_rectangle.svg",
+      "chapter_pdf_references": [
+        "35_session_16_perimeter_and_area.pdf",
+        "7_perimeter_and_area.pdf",
+        "6_perimeter_and_area.pdf",
+        "16_perimeter_and_area.pdf"
+      ],
+      "tags": [
+        "perimeter"
+      ]
+    },
+    {
+      "sequence_no": 10,
+      "chapter": "Mensuration",
+      "template": "area_lshape_grid",
+      "filename": "g6_10_mensuration_area_lshape_grid.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_10_mensuration_area_lshape_grid.svg",
+      "chapter_pdf_references": [
+        "39_10_mensuration.pdf"
+      ],
+      "tags": [
+        "area"
+      ]
+    },
+    {
+      "sequence_no": 11,
+      "chapter": "Mensuration",
+      "template": "unit_conversion_card",
+      "filename": "g6_11_mensuration_unit_conversion_card.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_11_mensuration_unit_conversion_card.svg",
+      "chapter_pdf_references": [
+        "39_10_mensuration.pdf"
+      ],
+      "tags": [
+        "unit-conversion"
+      ]
+    },
+    {
+      "sequence_no": 12,
+      "chapter": "Data Handling",
+      "template": "bar_graph_week",
+      "filename": "g6_12_data_handling_bar_graph_week.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_12_data_handling_bar_graph_week.svg",
+      "chapter_pdf_references": [
+        "35_session_17_data_handling.pdf",
+        "39_9_data_handling.pdf",
+        "17_data_handling.pdf"
+      ],
+      "tags": [
+        "bar-graph"
+      ]
+    },
+    {
+      "sequence_no": 13,
+      "chapter": "Data Handling and Presentation",
+      "template": "pictograph_students",
+      "filename": "g6_13_data_handling_and_presentation_pictograph_students.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_13_data_handling_and_presentation_pictograph_students.svg",
+      "chapter_pdf_references": [
+        "4_data_handling_and_presentation.pdf",
+        "5_data_handling_and_presentation.pdf"
+      ],
+      "tags": [
+        "pictograph"
+      ]
+    },
+    {
+      "sequence_no": 14,
+      "chapter": "Data Handling and Presentation",
+      "template": "tally_table",
+      "filename": "g6_14_data_handling_and_presentation_tally_table.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/grade6_svg_library/g6_14_data_handling_and_presentation_tally_table.svg",
+      "chapter_pdf_references": [
+        "4_data_handling_and_presentation.pdf",
+        "5_data_handling_and_presentation.pdf"
+      ],
+      "tags": [
+        "tally",
+        "frequency"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "course_id": 66,
+  "course_name": "ICSE Mathematics Grade 5 - Exam Prep",
+  "course_session_id": 1138,
+  "session_title": "Chapter 8: Angles and Triangles",
+  "grade": 5,
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 1,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Right",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q01.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 2,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Acute",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q02.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflex",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 3,
+      "question_text": "What type of angle is shown?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Obtuse",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q03.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 4,
+      "question_text": "How many sides does the polygon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q04.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 5,
+      "question_text": "The triangle has side lengths 4 cm, 4 cm and 4 cm. What is it called?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Equilateral",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q05.svg",
+      "options": [
+        {
+          "option_text": "Scalene",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Isosceles",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equilateral",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 6,
+      "question_text": "How many lines of symmetry does this square have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q06.svg",
+      "options": [
+        {
+          "option_text": "1",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "2",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "3",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "4",
+          "is_correct": true,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 7,
+      "question_text": "The mirror line is vertical. Which statement is true?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Left and right match",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q07.svg",
+      "options": [
+        {
+          "option_text": "Left and right match",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Top and bottom match",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "No matching parts",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Only corners match",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 8,
+      "question_text": "How many shaded squares are there?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "8",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q08.svg",
+      "options": [
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "9",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 9,
+      "question_text": "How many total small squares are in the grid?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "20",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q09.svg",
+      "options": [
+        {
+          "option_text": "12",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "16",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "20",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "24",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 10,
+      "question_text": "Fill in the blank: Area of this rectangle is ____ sq cm.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "24",
+      "explanation": "Fill using the visual.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q10.svg",
+      "options": []
+    },
+    {
+      "course_id": 66,
+      "course_session_id": 1138,
+      "session_title": "Chapter 8: Angles and Triangles",
+      "sequence_no": 11,
+      "question_text": "Fill in the blank: Perimeter of this rectangle is ____ cm.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "20",
+      "explanation": "Fill using the visual.",
+      "additional_info": "ICSE Mathematics Grade 5 - Exam Prep | Session: Chapter 8: Angles and Triangles | Visual Pack",
+      "question_image": "/session_materials/66/images/g5_c66_s1138_q11.svg",
+      "options": []
+    }
+  ]
+}

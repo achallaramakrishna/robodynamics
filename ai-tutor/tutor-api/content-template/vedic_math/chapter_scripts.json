@@ -1,0 +1,90 @@
+{
+  "L1_COMPLETING_WHOLE": {
+    "title": "Chapter 1: Completing the Whole",
+    "source": "Vedic Mathematics Teacher's Manual (Elementary Level)",
+    "coreIdeas": [
+      "Make 10 first, then finish the sum.",
+      "Use visual movement (circle or number hops) before symbolic steps.",
+      "Pause every 45-60 seconds for a student checkpoint."
+    ],
+    "workedExamples": [
+      {
+        "question": "8 + 7",
+        "method": "Complete to 10",
+        "answer": "8 needs 2; take 2 from 7, then 10 + 5 = 15"
+      },
+      {
+        "question": "13 - 4",
+        "method": "Near-base subtraction",
+        "answer": "13 - 3 = 10, then -1 => 9"
+      }
+    ],
+    "starterPractice": [
+      "6 + 5",
+      "9 + 8",
+      "27 + 36"
+    ],
+    "teachingScript": [
+      {
+        "stepId": "L1_A",
+        "exerciseGroup": "A",
+        "subtopic": "Introduction to Vedic Maths",
+        "boardMode": "free_draw",
+        "teacherLine": "First we learn the big idea: make a friendly base before solving.",
+        "boardAction": "Write friendly base 10 and show one simple make-10 example.",
+        "checkpointPrompt": "For 8 + 7, why might completing 10 help?",
+        "microPractice": "Say one sentence on what base-10 completion means."
+      },
+      {
+        "stepId": "L1_B",
+        "exerciseGroup": "B",
+        "subtopic": "Ten point circle",
+        "boardMode": "svg",
+        "teacherLine": "Now I will draw the ten-point circle and we move clockwise together.",
+        "boardAction": "Draw circle labels 10..1 and animate a jump path.",
+        "checkpointPrompt": "Start at 3 and move 4 clockwise. Where do you land?",
+        "microPractice": "Try one more jump with your own numbers."
+      },
+      {
+        "stepId": "L1_C",
+        "exerciseGroup": "C",
+        "subtopic": "Ten point circle",
+        "boardMode": "svg",
+        "teacherLine": "We will do one more circle movement and then you will answer.",
+        "boardAction": "Highlight start point and trace jump arrows slowly.",
+        "checkpointPrompt": "From 5, jump 3 clockwise. Where do you land?",
+        "microPractice": "Try two circle jumps without writing."
+      },
+      {
+        "stepId": "L1_D",
+        "exerciseGroup": "D",
+        "subtopic": "Deficiency from ten",
+        "boardMode": "free_draw",
+        "teacherLine": "Let us find what is missing to reach 10 using bars.",
+        "boardAction": "Draw a 10-bar and shade the missing part.",
+        "checkpointPrompt": "What is the deficiency of 7 from 10?",
+        "microPractice": "Find deficiency for 9, 6, and 4."
+      },
+      {
+        "stepId": "L1_F",
+        "exerciseGroup": "F",
+        "subtopic": "Mental addition",
+        "boardMode": "free_draw",
+        "teacherLine": "We will split the second number to complete 10 first.",
+        "boardAction": "Write 8+7, split 7 as 2+5, then show 10+5.",
+        "checkpointPrompt": "How do you solve 9 + 6 using the same method?",
+        "microPractice": "Solve 7 + 8 and say each step aloud."
+      },
+      {
+        "stepId": "L1_H",
+        "exerciseGroup": "H",
+        "subtopic": "By addition and subtraction",
+        "boardMode": "free_draw",
+        "teacherLine": "I will break subtraction into easy jumps on a number line.",
+        "boardAction": "Draw hops for 23-8 as 23-3-5.",
+        "checkpointPrompt": "Can you do 16-7 with the same jumps?",
+        "microPractice": "Solve 18-9 and explain your hops."
+      }
+    ]
+  }
+}

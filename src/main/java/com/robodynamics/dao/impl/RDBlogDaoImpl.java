@@ -17,6 +17,37 @@ public class RDBlogDaoImpl implements RDBlogDao {
     @Override
     public List<RDBlogPost> getBlogPosts() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM RDBlogPost WHERE isPublished = true", RDBlogPost.class).list(); // Fetch published blog posts
+        return session.createQuery(
+                "FROM RDBlogPost WHERE isPublished = true ORDER BY id DESC",
+                RDBlogPost.class
+        ).list();
+    }
+
+    @Override
+    public List<RDBlogPost> getAllBlogPostsForAdmin() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery(
+                "FROM RDBlogPost ORDER BY id DESC",
+                RDBlogPost.class
+        ).list();
+    }
+
+    @Override
+    public RDBlogPost getBlogPostById(int postId) {
+        return sessionFactory.getCurrentSession().get(RDBlogPost.class, postId);
+    }
+
+    @Override
+    public void saveOrUpdateBlogPost(RDBlogPost post) {
+        sessionFactory.getCurrentSession().saveOrUpdate(post);
+    }
+
+    @Override
+    public void deleteBlogPostById(int postId) {
+        Session session = sessionFactory.getCurrentSession();
+        RDBlogPost post = session.get(RDBlogPost.class, postId);
+        if (post != null) {
+            session.delete(post);
+        }
     }
 }

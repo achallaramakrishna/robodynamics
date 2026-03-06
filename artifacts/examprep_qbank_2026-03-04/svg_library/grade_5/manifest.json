@@ -1,0 +1,339 @@
+{
+  "title": "Reusable SVG Library - Grade 5 Math",
+  "grade": "5",
+  "subject": "Mathematics",
+  "generated_at": "2026-03-04",
+  "source": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/grade5_image_questions_30.json",
+  "assets": [
+    {
+      "sequence_no": 1,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q01",
+      "filename": "g5_01_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_01_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q01.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    },
+    {
+      "sequence_no": 2,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q02",
+      "filename": "g5_02_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_02_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q02.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    },
+    {
+      "sequence_no": 3,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q03",
+      "filename": "g5_03_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_03_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q03.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    },
+    {
+      "sequence_no": 4,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q04",
+      "filename": "g5_04_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_04_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q04.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    },
+    {
+      "sequence_no": 5,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q05",
+      "filename": "g5_05_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_05_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q05.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    },
+    {
+      "sequence_no": 6,
+      "chapter": "Does It Look the Same?",
+      "template": "set1_q06",
+      "filename": "g5_06_does_it_look_the_same.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_06_does_it_look_the_same.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q06.svg",
+      "tags": [
+        "does_it_look_the_same"
+      ]
+    },
+    {
+      "sequence_no": 7,
+      "chapter": "Does It Look the Same?",
+      "template": "set1_q07",
+      "filename": "g5_07_does_it_look_the_same.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_07_does_it_look_the_same.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q07.svg",
+      "tags": [
+        "does_it_look_the_same"
+      ]
+    },
+    {
+      "sequence_no": 8,
+      "chapter": "How Many Squares?",
+      "template": "set1_q08",
+      "filename": "g5_08_how_many_squares.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_08_how_many_squares.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q08.svg",
+      "tags": [
+        "how_many_squares"
+      ]
+    },
+    {
+      "sequence_no": 9,
+      "chapter": "How Many Squares?",
+      "template": "set1_q09",
+      "filename": "g5_09_how_many_squares.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_09_how_many_squares.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q09.svg",
+      "tags": [
+        "how_many_squares"
+      ]
+    },
+    {
+      "sequence_no": 10,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q10",
+      "filename": "g5_10_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_10_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q10.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 11,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q11",
+      "filename": "g5_11_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_11_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q11.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 12,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q12",
+      "filename": "g5_12_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_12_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q12.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 13,
+      "chapter": "Mapping Your Way",
+      "template": "set1_q13",
+      "filename": "g5_13_mapping_your_way.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_13_mapping_your_way.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q13.svg",
+      "tags": [
+        "mapping_your_way"
+      ]
+    },
+    {
+      "sequence_no": 14,
+      "chapter": "Mapping Your Way",
+      "template": "set1_q14",
+      "filename": "g5_14_mapping_your_way.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_14_mapping_your_way.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q14.svg",
+      "tags": [
+        "mapping_your_way"
+      ]
+    },
+    {
+      "sequence_no": 15,
+      "chapter": "Mapping Your Way",
+      "template": "set1_q15",
+      "filename": "g5_15_mapping_your_way.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_15_mapping_your_way.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q15.svg",
+      "tags": [
+        "mapping_your_way"
+      ]
+    },
+    {
+      "sequence_no": 16,
+      "chapter": "Mapping Your Way",
+      "template": "set1_q16",
+      "filename": "g5_16_mapping_your_way.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_16_mapping_your_way.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q16.svg",
+      "tags": [
+        "mapping_your_way"
+      ]
+    },
+    {
+      "sequence_no": 17,
+      "chapter": "Boxes and Sketches",
+      "template": "set1_q17",
+      "filename": "g5_17_boxes_and_sketches.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_17_boxes_and_sketches.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q17.svg",
+      "tags": [
+        "boxes_and_sketches"
+      ]
+    },
+    {
+      "sequence_no": 18,
+      "chapter": "Boxes and Sketches",
+      "template": "set1_q18",
+      "filename": "g5_18_boxes_and_sketches.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_18_boxes_and_sketches.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q18.svg",
+      "tags": [
+        "boxes_and_sketches"
+      ]
+    },
+    {
+      "sequence_no": 19,
+      "chapter": "Boxes and Sketches",
+      "template": "set1_q19",
+      "filename": "g5_19_boxes_and_sketches.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_19_boxes_and_sketches.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q19.svg",
+      "tags": [
+        "boxes_and_sketches"
+      ]
+    },
+    {
+      "sequence_no": 20,
+      "chapter": "Smart Charts",
+      "template": "set1_q20",
+      "filename": "g5_20_smart_charts.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_20_smart_charts.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q20.svg",
+      "tags": [
+        "smart_charts"
+      ]
+    },
+    {
+      "sequence_no": 21,
+      "chapter": "Smart Charts",
+      "template": "set1_q21",
+      "filename": "g5_21_smart_charts.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_21_smart_charts.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q21.svg",
+      "tags": [
+        "smart_charts"
+      ]
+    },
+    {
+      "sequence_no": 22,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q22",
+      "filename": "g5_22_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_22_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q22.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 23,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q23",
+      "filename": "g5_23_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_23_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q23.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 24,
+      "chapter": "How Many Squares?",
+      "template": "set1_q24",
+      "filename": "g5_24_how_many_squares.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_24_how_many_squares.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q24.svg",
+      "tags": [
+        "how_many_squares"
+      ]
+    },
+    {
+      "sequence_no": 25,
+      "chapter": "How Many Squares?",
+      "template": "set1_q25",
+      "filename": "g5_25_how_many_squares.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_25_how_many_squares.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q25.svg",
+      "tags": [
+        "how_many_squares"
+      ]
+    },
+    {
+      "sequence_no": 26,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q26",
+      "filename": "g5_26_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_26_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q26.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    },
+    {
+      "sequence_no": 27,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q27",
+      "filename": "g5_27_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_27_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q27.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 28,
+      "chapter": "Area and Its Boundary",
+      "template": "set1_q28",
+      "filename": "g5_28_area_and_its_boundary.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_28_area_and_its_boundary.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q28.svg",
+      "tags": [
+        "area_and_its_boundary"
+      ]
+    },
+    {
+      "sequence_no": 29,
+      "chapter": "Smart Charts",
+      "template": "set1_q29",
+      "filename": "g5_29_smart_charts.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_29_smart_charts.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q29.svg",
+      "tags": [
+        "smart_charts"
+      ]
+    },
+    {
+      "sequence_no": 30,
+      "chapter": "Shapes and Angles",
+      "template": "set1_q30",
+      "filename": "g5_30_shapes_and_angles.svg",
+      "relative_path": "artifacts/examprep_qbank_2026-03-04/svg_library/grade_5/assets/g5_30_shapes_and_angles.svg",
+      "source_ref": "artifacts/examprep_qbank_2026-03-04/course_34/grade5_image_set_30/images/g5_math_img_q30.svg",
+      "tags": [
+        "shapes_and_angles"
+      ]
+    }
+  ]
+}

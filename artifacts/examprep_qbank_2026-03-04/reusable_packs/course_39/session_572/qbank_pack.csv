@@ -1,0 +1,12 @@
+sequence_no,question_type,difficulty_level,max_marks,question_text,correct_answer,question_image,options_json
+1,multiple_choice,Medium,1,How many unit squares are in the L-shaped grid figure?,33,/session_materials/39/images/g6_c39_s572_q01.svg,"[{""option_text"": ""30"", ""is_correct"": false, ""option_image"": """"}, {""option_text"": ""31"", ""is_correct"": false, ""option_image"": """"}, {""option_text"": ""33"", ""is_correct"": true, ""option_image"": """"}, {""option_text"": ""35"", ""is_correct"": false, ""option_image"": """"}]"
+2,fill_in_blank,Medium,1,Fill in the blank: Area of the L-shape is ____ square units.,33,/session_materials/39/images/g6_c39_s572_q02.svg,[]
+3,fill_in_blank,Easy,1,Fill in the blank: 2 m = ____ cm.,200,/session_materials/39/images/g6_c39_s572_q03.svg,[]
+4,short_answer,Medium,2,Convert 350 cm into metres.,3.5 m,/session_materials/39/images/g6_c39_s572_q04.svg,[]
+5,multiple_choice,Medium,1,How many unit squares are in the L-shaped grid figure?,33,/session_materials/39/images/g6_c39_s572_q05.svg,"[{""option_text"": ""30"", ""is_correct"": false, ""option_image"": """"}, {""option_text"": ""31"", ""is_correct"": false, ""option_image"": """"}, {""option_text"": ""33"", ""is_correct"": true, ""option_image"": """"}, {""option_text"": ""35"", ""is_correct"": false, ""option_image"": """"}]"
+6,fill_in_blank,Medium,1,Fill in the blank: Area of the L-shape is ____ square units.,33,/session_materials/39/images/g6_c39_s572_q06.svg,[]
+7,fill_in_blank,Easy,1,Fill in the blank: 2 m = ____ cm.,200,/session_materials/39/images/g6_c39_s572_q07.svg,[]
+8,short_answer,Medium,2,Convert 350 cm into metres.,3.5 m,/session_materials/39/images/g6_c39_s572_q08.svg,[]
+9,multiple_choice,Medium,1,How many unit squares are in the L-shaped grid figure?,33,/session_materials/39/images/g6_c39_s572_q09.svg,"[{""option_text"": ""30"", ""is_correct"": false, ""option_image"": """"}, {""option_text"": ""31"", ""is_correct"": false, ""option_image"": """"}, {""option_text"": ""33"", ""is_correct"": true, ""option_image"": """"}, {""option_text"": ""35"", ""is_correct"": false, ""option_image"": """"}]"
+10,fill_in_blank,Medium,1,Fill in the blank: Area of the L-shape is ____ square units.,33,/session_materials/39/images/g6_c39_s572_q10.svg,[]
+11,fill_in_blank,Easy,1,Fill in the blank: 2 m = ____ cm.,200,/session_materials/39/images/g6_c39_s572_q11.svg,[]

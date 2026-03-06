@@ -567,6 +567,38 @@
 <%-- ============================================================
      PAGE 2 — CAREER DESTINATION & UNIVERSE
      ============================================================ --%>
+<c:if test="${not empty basicRoadmapTemplate}">
+<div class="no-break wrap">
+  <h2 class="section-header">Basic Career Roadmap (INR 599 Layer)</h2>
+  <div class="card" style="border-top: 3pt solid #f59e0b;">
+    <h3 style="font-size: 11pt; color: #78350f;">
+      <c:out value="${basicRoadmapTemplate.careerTitle}"/>
+    </h3>
+    <p style="font-size: 8.5pt; color: #334155; line-height: 1.5;">
+      <strong>career_code:</strong> <c:out value="${basicRoadmapTemplate.careerCode}"/>
+    </p>
+    <p style="font-size: 8.5pt; color: #334155; line-height: 1.5;">
+      <strong>Career overview:</strong> <c:out value="${basicRoadmapTemplate.overview}"/>
+    </p>
+    <p style="font-size: 8.5pt; color: #334155; line-height: 1.5;">
+      <strong>2026-2036 relevance:</strong> <c:out value="${basicRoadmapTemplate.relevanceWindow}"/>
+    </p>
+    <p style="font-size: 8.5pt; color: #334155; line-height: 1.5;">
+      <strong>Salary band:</strong> <c:out value="${basicRoadmapTemplate.salaryBand}"/>
+    </p>
+    <ul class="alist" style="margin-top: 5pt;">
+      <c:forEach var="phase" items="${basicRoadmapTemplate.phases}">
+        <li><strong><c:out value="${phase.title}"/>:</strong> <c:out value="${phase.detail}"/></li>
+      </c:forEach>
+    </ul>
+    <div style="margin-top: 6pt; padding: 7pt 9pt; border: 1pt solid #fde68a; border-radius: 7pt; background: #fffbeb;
+                color: #92400e; font-size: 8pt; font-weight: bold; line-height: 1.45;">
+      <c:out value="${basicRoadmapTemplate.upgradeLine}"/>
+    </div>
+  </div>
+</div>
+</c:if>
+
 <div class="page-break"></div>
 
 <%-- ── CAREER DESTINATION (Primary Match) ── --%>
@@ -879,7 +911,7 @@
               border: 1pt solid #bbf7d0; border-radius: 8pt; font-size: 8pt;
               color: #065f46; line-height: 1.5;">
     <strong>Remember:</strong> Every path above leads to a fulfilling career.
-    Only a small % of students crack IIT/NEET/CAT &mdash; but the remaining 98%
+    Only a small % of students crack IIT/NEET/CAT/LAW routes &mdash; but the remaining 98%
     succeed brilliantly through the hundreds of other routes.
     <strong>Your strength is that you have multiple strong-fit options.</strong>
   </div>

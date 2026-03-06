@@ -1,0 +1,1 @@
+mysql -uroot -pJatni@752050 -D robodynamics_db -N -s -e "SELECT item_id, source_name, total_score, title FROM rd_content_radar_item WHERE status IN ('DISCOVERED','REVIEW') ORDER BY total_score DESC, fetched_at DESC LIMIT 80;"

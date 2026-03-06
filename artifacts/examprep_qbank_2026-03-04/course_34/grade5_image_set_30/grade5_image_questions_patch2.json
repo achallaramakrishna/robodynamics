@@ -1,0 +1,80 @@
+{
+  "course_id": 34,
+  "course_session_id": 1085,
+  "session_title": "Visual Math Practice - Set 1",
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 2,
+      "question_text": "What type of angle is shown (45 deg)?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Acute",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q02.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflex",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 34,
+      "course_session_id": 1085,
+      "session_title": "Visual Math Practice - Set 1",
+      "sequence_no": 3,
+      "question_text": "What type of angle is shown (120 deg)?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Obtuse",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 5 Mathematics Image Set 1 | Chapter: Shapes and Angles",
+      "question_image": "/session_materials/34/images/g5_math_img_q03.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

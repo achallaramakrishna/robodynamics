@@ -1,0 +1,301 @@
+{
+  "course_id": 35,
+  "course_name": "CBSE Grade 6 Mathematics - Exam Prep",
+  "course_session_id": 484,
+  "session_title": "Session 14: Constructions",
+  "grade": 6,
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 1,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q01.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 2,
+      "question_text": "AB is joined to the top arc intersection using two segments. What is relation between these two segment lengths?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "Equal",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q02.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 3,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q03.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 4,
+      "question_text": "AB is joined to the top arc intersection using two segments. What is relation between these two segment lengths?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "Equal",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q04.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 5,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q05.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 6,
+      "question_text": "AB is joined to the top arc intersection using two segments. What is relation between these two segment lengths?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "Equal",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q06.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 7,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q07.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 8,
+      "question_text": "AB is joined to the top arc intersection using two segments. What is relation between these two segment lengths?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "Equal",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q08.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 9,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q09.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 10,
+      "question_text": "AB is joined to the top arc intersection using two segments. What is relation between these two segment lengths?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "Equal",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q10.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 484,
+      "session_title": "Session 14: Constructions",
+      "sequence_no": 11,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics - Exam Prep | Session: Session 14: Constructions | Visual Pack",
+      "question_image": "/session_materials/35/images/g6_c35_s484_q11.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

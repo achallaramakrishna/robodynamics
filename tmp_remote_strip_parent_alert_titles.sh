@@ -1,0 +1,2 @@
+set -e
+mysql -uroot -pJatni@752050 -D robodynamics_db -e "UPDATE rd_blog_post SET title = TRIM(CASE WHEN title LIKE 'Parent Alert:%' THEN SUBSTRING(title, LENGTH('Parent Alert:') + 1) WHEN title LIKE 'Parent Alert -%' THEN SUBSTRING(title, LENGTH('Parent Alert -') + 1) ELSE title END) WHERE title LIKE 'Parent Alert:%' OR title LIKE 'Parent Alert -%'; SELECT ROW_COUNT() AS updated_rows; SELECT id,title FROM rd_blog_post ORDER BY id DESC LIMIT 8;"

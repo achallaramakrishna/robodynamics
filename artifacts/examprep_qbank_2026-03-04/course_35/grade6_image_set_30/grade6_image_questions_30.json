@@ -1,0 +1,794 @@
+{
+  "course_id": 35,
+  "course_session_id": 1103,
+  "session_title": "Grade 6 Visual Math Practice - Set 1",
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 1,
+      "question_text": "Which figure has one endpoint and extends in one direction?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Ray",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Basic Geometrical Ideas",
+      "question_image": "/session_materials/35/images/g6_math_img_q01.svg",
+      "options": [
+        {
+          "option_text": "Line",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Ray",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Line Segment",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Circle",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 2,
+      "question_text": "Which figure has two endpoints?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Line Segment",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Basic Geometrical Ideas",
+      "question_image": "/session_materials/35/images/g6_math_img_q02.svg",
+      "options": [
+        {
+          "option_text": "Line",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Ray",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Line Segment",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Angle",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 3,
+      "question_text": "How many sides does the pentagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "5",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Understanding Elementary Shapes",
+      "question_image": "/session_materials/35/images/g6_math_img_q03.svg",
+      "options": [
+        {
+          "option_text": "4",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "5",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 4,
+      "question_text": "How many sides does the hexagon in the image have?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Understanding Elementary Shapes",
+      "question_image": "/session_materials/35/images/g6_math_img_q04.svg",
+      "options": [
+        {
+          "option_text": "5",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "6",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "7",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 5,
+      "question_text": "Which angle type is marked in blue?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Acute",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Lines and Angles",
+      "question_image": "/session_materials/35/images/g6_math_img_q05.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Straight",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 6,
+      "question_text": "Which angle type is marked in red?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Obtuse",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Lines and Angles",
+      "question_image": "/session_materials/35/images/g6_math_img_q06.svg",
+      "options": [
+        {
+          "option_text": "Acute",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Right",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Obtuse",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflex",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 7,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Three-Dimensional Shapes",
+      "question_image": "/session_materials/35/images/g6_math_img_q07.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 8,
+      "question_text": "Which shown solid has two circular faces?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Cylinder",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Three-Dimensional Shapes",
+      "question_image": "/session_materials/35/images/g6_math_img_q08.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cone",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 9,
+      "question_text": "Can the net shown fold into a cube?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Yes",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Playing with Constructions",
+      "question_image": "/session_materials/35/images/g6_math_img_q09.svg",
+      "options": [
+        {
+          "option_text": "Yes",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "No",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Only with extra flap",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cannot say",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 10,
+      "question_text": "Fill in the blank: A cube has ____ faces.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "6",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Playing with Constructions",
+      "question_image": "/session_materials/35/images/g6_math_img_q10.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 11,
+      "question_text": "In the construction image, the red arc intersection point is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Equidistant from A and B",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Constructions",
+      "question_image": "/session_materials/35/images/g6_math_img_q11.svg",
+      "options": [
+        {
+          "option_text": "Closer to A",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Closer to B",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Equidistant from A and B",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Outside the figure",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 12,
+      "question_text": "AB is joined to the top arc intersection using two segments. What is relation between these two segment lengths?",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "Equal",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Constructions",
+      "question_image": "/session_materials/35/images/g6_math_img_q12.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 13,
+      "question_text": "Fill in the blank: The square shown has ____ lines of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "4",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Symmetry",
+      "question_image": "/session_materials/35/images/g6_math_img_q13.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 14,
+      "question_text": "Fill in the blank: The isosceles triangle shown has ____ line of symmetry.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "1",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Symmetry",
+      "question_image": "/session_materials/35/images/g6_math_img_q14.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 15,
+      "question_text": "In the grid image, the red line acts as:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Vertical mirror line",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Symmetry",
+      "question_image": "/session_materials/35/images/g6_math_img_q15.svg",
+      "options": [
+        {
+          "option_text": "Horizontal axis",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Vertical mirror line",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Diagonal line",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Number line",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 16,
+      "question_text": "The shape on the right side is the ____ of the shape on the left.",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "Reflection",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Symmetry",
+      "question_image": "/session_materials/35/images/g6_math_img_q16.svg",
+      "options": [
+        {
+          "option_text": "Translation",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Rotation",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Reflection",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Enlargement",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 17,
+      "question_text": "Find the perimeter of the rectangle (12 cm by 7 cm).",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "38 cm",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Perimeter and Area",
+      "question_image": "/session_materials/35/images/g6_math_img_q17.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 18,
+      "question_text": "Find the area of the rectangle (12 cm by 7 cm).",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "84 sq cm",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Perimeter and Area",
+      "question_image": "/session_materials/35/images/g6_math_img_q18.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 19,
+      "question_text": "How many unit squares are in the L-shaped grid figure?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "33",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Mensuration",
+      "question_image": "/session_materials/35/images/g6_math_img_q19.svg",
+      "options": [
+        {
+          "option_text": "30",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "31",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "33",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "35",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 20,
+      "question_text": "Fill in the blank: Area of the L-shape is ____ square units.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Medium",
+      "max_marks": 1,
+      "correct_answer": "33",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Mensuration",
+      "question_image": "/session_materials/35/images/g6_math_img_q20.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 21,
+      "question_text": "Fill in the blank: 2 m = ____ cm.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "200",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Mensuration",
+      "question_image": "/session_materials/35/images/g6_math_img_q21.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 22,
+      "question_text": "Convert 350 cm into metres.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "3.5 m",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Mensuration",
+      "question_image": "/session_materials/35/images/g6_math_img_q22.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 23,
+      "question_text": "Which day has the highest value in the bar graph?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Thursday",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling",
+      "question_image": "/session_materials/35/images/g6_math_img_q23.svg",
+      "options": [
+        {
+          "option_text": "Monday",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Tuesday",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Thursday",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Friday",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 24,
+      "question_text": "Find total of Monday and Tuesday values.",
+      "question_type": "short_answer",
+      "difficulty_level": "Easy",
+      "max_marks": 2,
+      "correct_answer": "11",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling",
+      "question_image": "/session_materials/35/images/g6_math_img_q24.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 25,
+      "question_text": "Fill in the blank: Thursday value is ____.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "9",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling",
+      "question_image": "/session_materials/35/images/g6_math_img_q25.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 26,
+      "question_text": "In the pictograph, 1 star = 2 students. Blue has 5 stars. Number of students in Blue is:",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "10",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling and Presentation",
+      "question_image": "/session_materials/35/images/g6_math_img_q26.svg",
+      "options": [
+        {
+          "option_text": "8",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "9",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "10",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "12",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 27,
+      "question_text": "In the pictograph, find total students across Red, Blue and Green.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "24",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling and Presentation",
+      "question_image": "/session_materials/35/images/g6_math_img_q27.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 28,
+      "question_text": "From tally table, Banana frequency is ____.",
+      "question_type": "fill_in_blank",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "7",
+      "explanation": "Fill the blank by reading the image carefully.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling and Presentation",
+      "question_image": "/session_materials/35/images/g6_math_img_q28.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 29,
+      "question_text": "From tally table, find total frequency of all items.",
+      "question_type": "short_answer",
+      "difficulty_level": "Medium",
+      "max_marks": 2,
+      "correct_answer": "16",
+      "explanation": "Use values shown in the visual.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling and Presentation",
+      "question_image": "/session_materials/35/images/g6_math_img_q29.svg",
+      "options": []
+    },
+    {
+      "course_id": 35,
+      "course_session_id": 1103,
+      "session_title": "Grade 6 Visual Math Practice - Set 1",
+      "sequence_no": 30,
+      "question_text": "From tally table, which item has highest frequency?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Banana",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "CBSE Grade 6 Mathematics Image Set 1 | Chapter: Data Handling and Presentation",
+      "question_image": "/session_materials/35/images/g6_math_img_q30.svg",
+      "options": [
+        {
+          "option_text": "Apple",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Banana",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Mango",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "All equal",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

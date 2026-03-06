@@ -189,6 +189,17 @@
           </div>
         </div>
       </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 text-center">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Content Radar</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Discover reputed articles, moderate summaries, and publish attributed awareness updates.</p>
+            <a href="${pageContext.request.contextPath}/admin/content-radar" class="btn btn-primary">Open Content Radar</a>
+          </div>
+        </div>
+      </div>
             <!-- Mentor Utilization Card -->
 	<div class="col-md-4">
 	  <div class="card shadow-sm border-0">
@@ -322,6 +333,210 @@
                     <c:out value="${loginStats.loginsToday != null ? loginStats.loginsToday : 0}" />
                   </span>
                 </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </c:if>
+
+      <c:if test="${isAdmin}">
+        <div class="col-lg-8 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Visitor Activity (<c:out value="${visitorActivityIsToday ? 'Today' : visitorActivityDateLabel}" />)</h5>
+              <small>Source: rd_visitor_logs</small>
+            </div>
+            <div class="card-body">
+              <form method="get" action="${pageContext.request.contextPath}/dashboard" class="row g-2 align-items-end mb-3">
+                <div class="col-sm-5">
+                  <label class="form-label mb-1">Activity Date</label>
+                  <input type="date" class="form-control form-control-sm" name="activityDate"
+                         value="<c:out value='${visitorActivityDate}' />">
+                </div>
+                <div class="col-sm-7 d-flex gap-2">
+                  <button type="submit" class="btn btn-primary btn-sm">Show Activity</button>
+                  <a href="${pageContext.request.contextPath}/dashboard" class="btn btn-outline-secondary btn-sm">Today</a>
+                </div>
+              </form>
+
+              <div class="row g-2 mb-3 text-center">
+                <div class="col-6 col-md-3">
+                  <div class="border rounded p-2">
+                    <div class="small text-muted">Visits</div>
+                    <div class="fw-bold">
+                      <c:out value="${visitorStats.visitsOnDate != null ? visitorStats.visitsOnDate : 0}" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="border rounded p-2">
+                    <div class="small text-muted">Unique IPs</div>
+                    <div class="fw-bold">
+                      <c:out value="${visitorStats.uniqueIpsOnDate != null ? visitorStats.uniqueIpsOnDate : 0}" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="border rounded p-2">
+                    <div class="small text-muted">Distinct URLs</div>
+                    <div class="fw-bold">
+                      <c:out value="${visitorStats.distinctUrlsOnDate != null ? visitorStats.distinctUrlsOnDate : 0}" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="border rounded p-2">
+                    <div class="small text-muted">AptiPath360 Hits</div>
+                    <div class="fw-bold">
+                      <c:out value="${visitorStats.aptiPathVisitsOnDate != null ? visitorStats.aptiPathVisitsOnDate : 0}" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="badge text-bg-success">
+                  Logged in visits
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.loggedInVisitsOnDate != null ? visitorStats.loggedInVisitsOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-secondary">
+                  Anonymous visits
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.anonymousVisitsOnDate != null ? visitorStats.anonymousVisitsOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-primary">
+                  AptiPath student tests
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.aptiPathTestOnDate != null ? visitorStats.aptiPathTestOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-warning text-dark">
+                  AptiPath reports viewed
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.aptiPathResultOnDate != null ? visitorStats.aptiPathResultOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-info text-dark">
+                  AptiPath student home
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.aptiPathStudentHomeOnDate != null ? visitorStats.aptiPathStudentHomeOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-info text-dark">
+                  AptiPath parent home
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.aptiPathParentHomeOnDate != null ? visitorStats.aptiPathParentHomeOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-warning text-dark">
+                  AptiPath intake
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.aptiPathIntakeOnDate != null ? visitorStats.aptiPathIntakeOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-secondary">
+                  Demo page hits
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.demoVisitsOnDate != null ? visitorStats.demoVisitsOnDate : 0}" />
+                  </span>
+                </span>
+                <span class="badge text-bg-info text-dark">
+                  Login page hits
+                  <span class="badge bg-light text-dark ms-1">
+                    <c:out value="${visitorStats.loginPageVisitsOnDate != null ? visitorStats.loginPageVisitsOnDate : 0}" />
+                  </span>
+                </span>
+              </div>
+
+              <div class="small text-muted mb-3">
+                7-day context:
+                <strong><c:out value="${visitorStats.visits7d != null ? visitorStats.visits7d : 0}" /></strong> visits,
+                AptiPath360
+                <strong><c:out value="${visitorStats.aptiPathVisits7d != null ? visitorStats.aptiPathVisits7d : 0}" /></strong>,
+                tests
+                <strong><c:out value="${visitorStats.aptiPathTest7d != null ? visitorStats.aptiPathTest7d : 0}" /></strong>,
+                reports
+                <strong><c:out value="${visitorStats.aptiPathResult7d != null ? visitorStats.aptiPathResult7d : 0}" /></strong>.
+              </div>
+
+              <c:if test="${not empty visitorInsights}">
+                <ul class="mb-3">
+                  <c:forEach var="insight" items="${visitorInsights}">
+                    <li><c:out value="${insight}" /></li>
+                  </c:forEach>
+                </ul>
+              </c:if>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <h6 class="mb-2">Top URLs</h6>
+                  <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                      <thead>
+                        <tr><th>URL</th><th class="text-end">Hits</th></tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="r" items="${topVisitorUrls}">
+                          <tr>
+                            <td><c:out value="${r.url}" /></td>
+                            <td class="text-end"><c:out value="${r.count}" /></td>
+                          </tr>
+                        </c:forEach>
+                        <c:if test="${empty topVisitorUrls}">
+                          <tr><td colspan="2" class="text-muted">No data</td></tr>
+                        </c:if>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="mb-2">Top Countries (by hits)</h6>
+                  <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                      <thead>
+                        <tr><th>Country</th><th class="text-end">Hits</th></tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="r" items="${topVisitorCountries}">
+                          <tr>
+                            <td><c:out value="${r.country}" /></td>
+                            <td class="text-end"><c:out value="${r.count}" /></td>
+                          </tr>
+                        </c:forEach>
+                        <c:if test="${empty topVisitorCountries}">
+                          <tr><td colspan="2" class="text-muted">No data</td></tr>
+                        </c:if>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h6 class="mb-2">Most Active Logged-in Users</h6>
+                  <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                      <thead>
+                        <tr><th>User</th><th class="text-end">Visits</th></tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach var="r" items="${topLoggedInVisitors}">
+                          <tr>
+                            <td>
+                              <c:out value="${r.userName}" />
+                              <span class="text-muted small">#<c:out value="${r.userId}" /></span>
+                            </td>
+                            <td class="text-end"><c:out value="${r.count}" /></td>
+                          </tr>
+                        </c:forEach>
+                        <c:if test="${empty topLoggedInVisitors}">
+                          <tr><td colspan="2" class="text-muted">No data</td></tr>
+                        </c:if>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

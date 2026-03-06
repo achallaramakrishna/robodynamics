@@ -1,0 +1,406 @@
+{
+  "course_id": 74,
+  "course_name": "Grade 6 CBSE New Enjoying Mathematics",
+  "course_session_id": 1098,
+  "session_title": "Chapter 13: Three-Dimensional Shapes",
+  "grade": 6,
+  "generated_at": "2026-03-04",
+  "questions": [
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 1,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q01.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 2,
+      "question_text": "Which shown solid has two circular faces?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Cylinder",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q02.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cone",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 3,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q03.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 4,
+      "question_text": "Which shown solid has two circular faces?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Cylinder",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q04.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cone",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 5,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q05.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 6,
+      "question_text": "Which shown solid has two circular faces?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Cylinder",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q06.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cone",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 7,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q07.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 8,
+      "question_text": "Which shown solid has two circular faces?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Cylinder",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q08.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cone",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 9,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q09.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 10,
+      "question_text": "Which shown solid has two circular faces?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Cylinder",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q10.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cone",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    },
+    {
+      "course_id": 74,
+      "course_session_id": 1098,
+      "session_title": "Chapter 13: Three-Dimensional Shapes",
+      "sequence_no": 11,
+      "question_text": "Which shown solid has only one curved surface and no edges?",
+      "question_type": "multiple_choice",
+      "difficulty_level": "Easy",
+      "max_marks": 1,
+      "correct_answer": "Sphere",
+      "explanation": "Answer is based on the diagram.",
+      "additional_info": "Grade 6 CBSE New Enjoying Mathematics | Session: Chapter 13: Three-Dimensional Shapes | Visual Pack",
+      "question_image": "/session_materials/74/images/g6_c74_s1098_q11.svg",
+      "options": [
+        {
+          "option_text": "Cube",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cylinder",
+          "is_correct": false,
+          "option_image": ""
+        },
+        {
+          "option_text": "Sphere",
+          "is_correct": true,
+          "option_image": ""
+        },
+        {
+          "option_text": "Cuboid",
+          "is_correct": false,
+          "option_image": ""
+        }
+      ]
+    }
+  ]
+}

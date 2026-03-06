@@ -141,6 +141,29 @@
             </div>
         </div>
 
+        <!-- ExamPrep360 -->
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">ExamPrep360</h5>
+                    <p class="card-text">Generate board-focused exam papers and practice sets for your child.</p>
+                    <a href="${pageContext.request.contextPath}/exam-prep/create" class="btn btn-primary">Create Exam Paper</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vedic Math AI Tutor -->
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Vedic Math AI Tutor</h5>
+                    <p class="card-text">Start Lesson-1 guided practice for your child with step-by-step hints and instant checking.</p>
+                    <a href="${pageContext.request.contextPath}/ai-tutor/launch?module=VEDIC_MATH"
+                       class="btn btn-primary">Launch AI Tutor</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Learning Paths -->
         <div class="col-12">
             <div class="card">

@@ -323,7 +323,10 @@ public class RDUser {
 		childUser.setFirstName(child.getFirstName());
 		childUser.setLastName(child.getLastName());
 		childUser.setAge(child.getAge()); // Child's age
+		childUser.setGrade(child.getGrade());
 		childUser.setSchoolName(child.getSchool());
+		childUser.setCity(child.getCity());
+		childUser.setState(child.getState());
 		childUser.setActive(1); // Active status (default value)
 		childUser.setUserName(child.getUserName());
 		childUser.setPassword(child.getPassword());

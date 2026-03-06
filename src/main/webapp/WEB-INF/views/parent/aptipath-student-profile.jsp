@@ -244,17 +244,39 @@
 
           <div id="streamWrap">
             <label for="S_CURR_STREAM_01">Current stream *</label>
-            <input id="S_CURR_STREAM_01" name="S_CURR_STREAM_01" type="text" maxlength="120"
-                   value="<c:out value='${answers["S_CURR_STREAM_01"]}' />"
-                   placeholder="Example: PCM, PCB, COMMERCE, ENGINEERING_TECH">
+            <select id="S_CURR_STREAM_01" name="S_CURR_STREAM_01"
+                    data-selected="<c:out value='${answers["S_CURR_STREAM_01"]}' />">
+              <option value="">Select</option>
+              <optgroup label="School Streams">
+                <option value="PCM">PCM (Physics, Chemistry, Math)</option>
+                <option value="PCB">PCB (Physics, Chemistry, Biology)</option>
+                <option value="PCMB">PCMB</option>
+                <option value="COMMERCE_MATH">Commerce with Math</option>
+                <option value="COMMERCE">Commerce</option>
+                <option value="HUMANITIES">Humanities</option>
+                <option value="ARTS">Arts</option>
+              </optgroup>
+              <optgroup label="Post-12 Streams">
+                <option value="ENGINEERING_TECH">Engineering and Technology</option>
+                <option value="COMPUTER_DATA_AI">Computer Science, Data and AI</option>
+                <option value="BUSINESS_MANAGEMENT">Business and Management</option>
+                <option value="COMMERCE_FINANCE">Commerce and Finance</option>
+                <option value="ECONOMICS_PUBLIC_POLICY">Economics and Public Policy</option>
+                <option value="LAW_POLICY_GOV">Law, Policy and Governance</option>
+                <option value="HEALTHCARE_MEDICAL">Medical and Healthcare</option>
+                <option value="MEDIA_COMM">Media and Communication</option>
+                <option value="SOCIAL_SCIENCES">Social Sciences</option>
+              </optgroup>
+            </select>
             <div class="hint">Required for Class 11/12 and post-12 grades.</div>
           </div>
 
           <div id="subjectsWrap" class="field-full">
             <label for="S_CURR_SUBJECTS_01">Main subjects *</label>
-            <input id="S_CURR_SUBJECTS_01" name="S_CURR_SUBJECTS_01" type="text" maxlength="320"
-                   value="<c:out value='${answers["S_CURR_SUBJECTS_01"]}' />"
-                   placeholder="Example: Physics, Chemistry, Mathematics, English">
+            <select id="S_CURR_SUBJECTS_01" name="S_CURR_SUBJECTS_01"
+                    data-selected="<c:out value='${answers["S_CURR_SUBJECTS_01"]}' />">
+              <option value="">Select subject combination</option>
+            </select>
             <div class="hint">Required for Class 11/12.</div>
           </div>
 
@@ -315,6 +337,37 @@
       const subjectsField = document.getElementById('S_CURR_SUBJECTS_01');
       const programField = document.getElementById('S_CURR_PROGRAM_01');
       const yearsLeftField = document.getElementById('S_CURR_YEARS_LEFT_01');
+      const serverStreamValue = streamField ? (streamField.getAttribute('data-selected') || '').trim() : '';
+      const serverSubjectValue = subjectsField ? (subjectsField.getAttribute('data-selected') || '').trim() : '';
+      const subjectOptionCatalog = {
+        PCM: [
+          { value: 'PCM_PHYSICS_CHEMISTRY_MATH', label: 'Physics, Chemistry, Mathematics' },
+          { value: 'PCM_PHYSICS_CHEMISTRY_MATH_CS', label: 'Physics, Chemistry, Mathematics, Computer Science' },
+          { value: 'PCM_PHYSICS_CHEMISTRY_MATH_ECONOMICS', label: 'Physics, Chemistry, Mathematics, Economics' }
+        ],
+        PCB: [
+          { value: 'PCB_PHYSICS_CHEMISTRY_BIOLOGY', label: 'Physics, Chemistry, Biology' },
+          { value: 'PCB_PHYSICS_CHEMISTRY_BIOLOGY_MATH', label: 'Physics, Chemistry, Biology, Mathematics' },
+          { value: 'PCB_PHYSICS_CHEMISTRY_BIOLOGY_PSYCHOLOGY', label: 'Physics, Chemistry, Biology, Psychology' }
+        ],
+        COMMERCE: [
+          { value: 'COM_ACC_ECO_BST', label: 'Accountancy, Economics, Business Studies' },
+          { value: 'COM_ACC_ECO_BST_MATH', label: 'Accountancy, Economics, Business Studies, Mathematics' },
+          { value: 'COM_ACC_ECO_BST_IP', label: 'Accountancy, Economics, Business Studies, Informatics Practices' },
+          { value: 'COM_ACC_ECO_BST_ENTREPRENEURSHIP', label: 'Accountancy, Economics, Business Studies, Entrepreneurship' }
+        ],
+        HUMANITIES: [
+          { value: 'HUM_HISTORY_POLITICAL_SCIENCE_SOCIOLOGY', label: 'History, Political Science, Sociology' },
+          { value: 'HUM_HISTORY_POLITICAL_SCIENCE_PSYCHOLOGY', label: 'History, Political Science, Psychology' },
+          { value: 'HUM_HISTORY_GEOGRAPHY_ECONOMICS', label: 'History, Geography, Economics' },
+          { value: 'HUM_POLITICAL_SCIENCE_ECONOMICS_MATH', label: 'Political Science, Economics, Mathematics' }
+        ],
+        GENERAL: [
+          { value: 'GENERAL_SCIENCE_MATH_LANGUAGE', label: 'Science, Mathematics, Language' },
+          { value: 'GENERAL_COMMERCE_LANGUAGE_MATH', label: 'Commerce, Language, Mathematics' },
+          { value: 'GENERAL_SOCIAL_SCIENCE_LANGUAGE', label: 'Social Science, Language' }
+        ]
+      };
 
       function isSeniorSchoolGrade(code) {
         return code === '11' || code === '12';
@@ -328,6 +381,68 @@
           'MTECH_1','MTECH_2','COLLEGE_OTHER','WORKING'
         ]);
         return set.has(code);
+      }
+
+      function detectSubjectTrack(streamCode) {
+        const stream = (streamCode || '').trim().toUpperCase();
+        if (!stream) return 'GENERAL';
+        if (stream.indexOf('COMMERCE') >= 0 || stream.indexOf('BUSINESS') >= 0 || stream.indexOf('FINANCE') >= 0) {
+          return 'COMMERCE';
+        }
+        if (stream.indexOf('HUMANITIES') >= 0 || stream.indexOf('ARTS') >= 0 || stream.indexOf('SOCIAL') >= 0
+            || stream.indexOf('LAW') >= 0 || stream.indexOf('POLICY') >= 0 || stream.indexOf('MEDIA') >= 0) {
+          return 'HUMANITIES';
+        }
+        if (stream.indexOf('PCB') >= 0 || stream.indexOf('HEALTH') >= 0 || stream.indexOf('BIO') >= 0) {
+          return 'PCB';
+        }
+        if (stream.indexOf('PCM') >= 0 || stream.indexOf('ENGINEERING') >= 0 || stream.indexOf('TECH') >= 0
+            || stream.indexOf('COMPUTER') >= 0 || stream.indexOf('AI') >= 0) {
+          return 'PCM';
+        }
+        return 'GENERAL';
+      }
+
+      function ensureStreamSelection() {
+        if (!streamField || !serverStreamValue) return;
+        const hasValue = Array.from(streamField.options || []).some(option => option.value === serverStreamValue);
+        if (!hasValue) {
+          const option = document.createElement('option');
+          option.value = serverStreamValue;
+          option.textContent = 'Current: ' + serverStreamValue.replace(/_/g, ' ');
+          streamField.appendChild(option);
+        }
+        streamField.value = serverStreamValue;
+      }
+
+      function renderSubjectOptions() {
+        if (!subjectsField) return;
+        const selected = (subjectsField.value || serverSubjectValue || '').trim();
+        const track = detectSubjectTrack(streamField ? streamField.value : '');
+        const catalog = subjectOptionCatalog[track] || subjectOptionCatalog.GENERAL;
+        const optionValues = new Set();
+        subjectsField.innerHTML = '';
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select subject combination';
+        subjectsField.appendChild(defaultOption);
+
+        catalog.forEach(function(item) {
+          const option = document.createElement('option');
+          option.value = item.value;
+          option.textContent = item.label;
+          subjectsField.appendChild(option);
+          optionValues.add(item.value);
+        });
+
+        if (selected && !optionValues.has(selected)) {
+          const carry = document.createElement('option');
+          carry.value = selected;
+          carry.textContent = 'Current: ' + selected.replace(/_/g, ' ');
+          subjectsField.appendChild(carry);
+        }
+        subjectsField.value = selected;
       }
 
       function toggleAcademicContext() {
@@ -346,11 +461,16 @@
         yearsLeftWrap.style.display = post12 ? '' : 'none';
         programField.required = post12;
         yearsLeftField.required = post12;
+        renderSubjectOptions();
       }
 
       if (gradeField) {
         gradeField.addEventListener('change', toggleAcademicContext);
       }
+      if (streamField) {
+        streamField.addEventListener('change', renderSubjectOptions);
+      }
+      ensureStreamSelection();
       toggleAcademicContext();
     })();
   </script>

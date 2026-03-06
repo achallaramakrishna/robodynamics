@@ -150,7 +150,9 @@ public class RDPartnerIntegrationController {
             if (student) {
                 links.put("EXAM_PREP", "/studentDashboard");
             } else if (parent) {
-                links.put("EXAM_PREP", "/parent/dashboard");
+                links.put("EXAM_PREP", "/exam-prep/create");
+            } else if (RDRoleRouteUtil.isAdminProfile(profileId)) {
+                links.put("EXAM_PREP", "/exam-prep/create");
             } else {
                 links.put("EXAM_PREP", RDRoleRouteUtil.homePathFor(user));
             }

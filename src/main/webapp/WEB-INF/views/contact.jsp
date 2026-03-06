@@ -8,15 +8,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>Contact Robo Dynamics LMS | Demo, Support & Enquiries</title>
+  <title>Contact Robo Dynamics | AptiPath360, ExamPrep360 and Tuition Support</title>
   <meta name="description"
-        content="Contact Robo Dynamics LMS for demos, admissions, NEET & coding course enquiries, and mentor onboarding support. WhatsApp, phone, and quick enquiry form available." />
+        content="Contact Robo Dynamics for AptiPath360 onboarding, ExamPrep360 setup, Tuition on Demand guidance, and LMS support via WhatsApp, phone, or enquiry form." />
 
-  <meta property="og:title" content="Contact Robo Dynamics LMS" />
-  <meta property="og:description" content="Get demos, course guidance, NEET counselling, and LMS support from Robo Dynamics." />
+  <meta property="og:title" content="Contact Robo Dynamics" />
+  <meta property="og:description" content="Get AptiPath360, ExamPrep360 and Tuition on Demand support from Robo Dynamics." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://robodynamics.in/contact-us" />
-  <meta property="og:site_name" content="Robo Dynamics LMS" />
+  <meta property="og:site_name" content="Robo Dynamics" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
@@ -83,18 +83,17 @@
 
 <jsp:include page="header.jsp"/>
 
-<!-- ================= HERO ================= -->
 <section class="hero-band py-5">
   <div class="container text-center">
     <div class="d-inline-flex pill mb-3">
       <i class="bi bi-mortarboard"></i>
-      Robo Dynamics LMS Support
+      Robo Dynamics Support
     </div>
 
     <h1 class="fw-bold mb-2">Contact Us</h1>
     <p class="lead mb-4" style="max-width: 860px; margin: 0 auto;">
-      Get help with course admissions, NEET preparation, coding & robotics tracks,
-      LMS access, dashboards, and mentor onboarding.
+      Get help with AptiPath360 Career Discovery, ExamPrep360 setup,
+      Tuition on Demand, LMS access, and parent onboarding.
     </p>
 
     <div class="quick-actions d-flex justify-content-center flex-wrap gap-2">
@@ -110,8 +109,8 @@
       </a>
 
       <a class="btn btn-outline-light btn-round px-4"
-         href="${pageContext.request.contextPath}/parents">
-        <i class="bi bi-calendar2-check"></i> Book Free Demo
+         href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">
+        <i class="bi bi-lightning-charge"></i> Start AptiPath360 (Rs 799 + GST)
       </a>
     </div>
 
@@ -121,11 +120,9 @@
   </div>
 </section>
 
-<!-- ================= CONTENT ================= -->
 <section class="py-5">
   <div class="container">
 
-    <!-- Success message -->
     <c:if test="${not empty successMessage}">
       <div class="alert alert-success text-center fw-bold mb-4">
         <i class="bi bi-check-circle-fill"></i> ${successMessage}
@@ -134,7 +131,6 @@
 
     <div class="row g-4">
 
-      <!-- ================= CONTACT INFO ================= -->
       <div class="col-lg-5">
         <div class="card card-soft h-100">
           <div class="card-body">
@@ -148,7 +144,7 @@
               <div>
                 <div class="fw-semibold">Address</div>
                 <div class="small">
-                  Ambalipura – Sarjapur Rd, Above Agarwal Mithai,<br/>
+                  Ambalipura - Sarjapur Rd, Above Agarwal Mithai,<br/>
                   Choudadenahalli, Bengaluru, Karnataka 562125
                 </div>
               </div>
@@ -160,7 +156,7 @@
                 <div class="fw-semibold">WhatsApp</div>
                 <a class="text-success fw-bold" target="_blank" rel="noopener"
                    href="https://wa.me/918374377311">+91 83743 77311</a>
-                <div class="help-note">Fastest way to reach us for demos & admissions.</div>
+                <div class="help-note">Fastest way to reach us for onboarding and support.</div>
               </div>
             </div>
 
@@ -169,7 +165,7 @@
               <div>
                 <div class="fw-semibold">Website</div>
                 <a class="fw-bold" target="_blank" rel="noopener" href="https://robodynamics.in">robodynamics.in</a>
-                <div class="help-note">Explore LMS courses, dashboards, and contests.</div>
+                <div class="help-note">Explore AptiPath360, ExamPrep360, and Tuition on Demand.</div>
               </div>
             </div>
 
@@ -178,8 +174,8 @@
               <div>
                 <div class="fw-semibold">Working Hours</div>
                 <div class="small">
-                  Mon–Fri: 7 AM – 9 PM<br/>
-                  Sat–Sun: 9 AM – 7 PM
+                  Mon-Fri: 7 AM - 9 PM<br/>
+                  Sat-Sun: 9 AM - 7 PM
                 </div>
               </div>
             </div>
@@ -187,11 +183,11 @@
             <hr class="my-4"/>
 
             <div class="small">
-              <div class="fw-bold mb-2">For quicker help, mention:</div>
+              <div class="fw-bold mb-2">Share this for quicker help:</div>
               <ul class="mb-0">
-                <li>Student grade / NEET year</li>
-                <li>Course interest (Academics / Coding / Robotics / NEET)</li>
-                <li>Preferred mode (Online / Offline)</li>
+                <li>Module: AptiPath360 / ExamPrep360 / Tuition on Demand</li>
+                <li>Student class/grade and board</li>
+                <li>Support needed: onboarding, payment, report, or mentor booking</li>
               </ul>
             </div>
 
@@ -199,7 +195,6 @@
         </div>
       </div>
 
-      <!-- ================= ENQUIRY FORM ================= -->
       <div class="col-lg-7">
         <div class="card card-soft h-100">
           <div class="card-body">
@@ -209,7 +204,8 @@
             </h4>
 
             <p class="text-muted mb-4">
-              Submit this form and our team will contact you with course details, LMS login help, or demo scheduling.
+              Submit this form and our team will contact you with module details,
+              onboarding steps, pricing help, or support resolution.
             </p>
 
             <form:form modelAttribute="contactForm"
@@ -233,27 +229,25 @@
                   <form:input path="email" type="email" cssClass="form-control" id="email" required="true"/>
                 </div>
 
-                <!-- Optional: enquiry category (safe even if backend ignores it) -->
                 <div class="col-md-12">
                   <label class="form-label fw-semibold" for="enquiryType">Enquiry Type</label>
                   <select class="form-select" id="enquiryType" name="enquiryType">
-                    <option value="Demo">Book a Free Demo</option>
-                    <option value="Academics">Academics (Grades 2–10)</option>
-                    <option value="Coding">Coding / Python</option>
-                    <option value="Robotics">Robotics</option>
-                    <option value="NEET">NEET Preparation</option>
+                    <option value="AptiPath360">AptiPath360 Career Discovery</option>
+                    <option value="ExamPrep360">ExamPrep360</option>
+                    <option value="Tuition">Tuition on Demand</option>
+                    <option value="ParentAccess">Parent Dashboard or Login Support</option>
                     <option value="Mentor">Become a Mentor</option>
-                    <option value="LMS">LMS Login / Dashboard Support</option>
                     <option value="Other">Other</option>
                   </select>
-                  <div class="help-note mt-1">This helps us route your request faster.</div>
+                  <div class="help-note mt-1">This helps us route your request quickly.</div>
                 </div>
 
                 <div class="col-md-12">
                   <label for="message" class="form-label fw-semibold">Message</label>
                   <form:textarea path="message" cssClass="form-control" id="message" rows="4" required="true"/>
                   <div class="help-note mt-1">
-                    Example: "Grade 8 Math + Coding, need demo this weekend" or "NEET 2027 crash course details".
+                    Example: "Need AptiPath360 for Grade 9", "Need ExamPrep360 setup",
+                    or "Need mentor booking this week".
                   </div>
                 </div>
 
@@ -268,7 +262,7 @@
 
             <div class="text-center mt-3">
               <span class="small text-muted">
-                Prefer WhatsApp? Message “DEMO” to <strong>83743 77311</strong>.
+                Prefer WhatsApp? Send "HELLO" to <strong>83743 77311</strong>.
               </span>
             </div>
 
@@ -278,7 +272,6 @@
 
     </div>
 
-    <!-- ================= MAP ================= -->
     <div class="mt-5 text-center">
       <h4 class="fw-bold mb-3">
         <i class="bi bi-map-fill text-danger"></i> Find Us on the Map

@@ -1,5 +1,10 @@
 package com.robodynamics.service.impl;
 
+import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -18,11 +23,24 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Value("${openai.api.key}")
     private String apiKey;
 
+    @Value("${openai.chat.model:gpt-4o-mini}")
+    private String chatModel;
+
+    @Value("${openai.chat.maxTokens:600}")
+    private int defaultMaxTokens;
+
+    private final ObjectMapper mapper = new ObjectMapper();
+
     // Updated endpoint for chat models
     private static final String OPENAI_CHAT_API_URL = "https://api.openai.com/v1/chat/completions";
 
+    @Override
     public String getResponseFromOpenAI(String prompt) throws Exception {
+        return getResponseFromOpenAI(prompt, defaultMaxTokens);
+    }
 
+    @Override
+    public String getResponseFromOpenAI(String prompt, int maxTokens) throws Exception {
         System.out.println("Sending request to OpenAI...");
 
         // Create HTTP Client
@@ -32,12 +50,16 @@ public class OpenAIServiceImpl implements OpenAIService {
             request.addHeader("Content-Type", "application/json");
             request.addHeader("Authorization", "Bearer " + apiKey);
 
-            // Build the JSON body with the message format required for chat models
-            String jsonBody = String.format(
-                "{\"model\":\"gpt-3.5-turbo\",\"messages\":[{\"role\":\"user\",\"content\":\"%s\"}],\"max_tokens\":100}",
-                prompt.replace("\"", "\\\"") // Escape quotes for the prompt
-            );
-            StringEntity entity = new StringEntity(jsonBody);
+            int resolvedMaxTokens = Math.max(120, Math.min(maxTokens, 2400));
+            Map<String, Object> payload = new LinkedHashMap<>();
+            payload.put("model", safeModel(chatModel));
+            payload.put("messages", List.of(Map.of(
+                    "role", "user",
+                    "content", prompt == null ? "" : prompt)));
+            payload.put("max_tokens", resolvedMaxTokens);
+
+            String jsonBody = mapper.writeValueAsString(payload);
+            StringEntity entity = new StringEntity(jsonBody, StandardCharsets.UTF_8);
             request.setEntity(entity);
 
             System.out.println("Executing request...");
@@ -51,7 +73,6 @@ public class OpenAIServiceImpl implements OpenAIService {
                 System.out.println("Response received from OpenAI: " + jsonResponse);
 
                 // Parse the response
-                ObjectMapper mapper = new ObjectMapper();
                 JsonNode jsonNode = mapper.readTree(jsonResponse);
 
                 // Check if there is an error
@@ -69,5 +90,10 @@ public class OpenAIServiceImpl implements OpenAIService {
                 }
             }
         }
+    }
+
+    private String safeModel(String model) {
+        String value = model == null ? "" : model.trim();
+        return value.isEmpty() ? "gpt-4o-mini" : value;
     }
 }

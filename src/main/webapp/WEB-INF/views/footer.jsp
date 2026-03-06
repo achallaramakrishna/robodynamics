@@ -80,7 +80,7 @@
           <div class="col-md-3">
             <h6 class="text-white fw-semibold">Parent Start</h6>
             <ul class="list-unstyled small">
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay ₹799 and Start</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay &#8377;799 + GST and Start</a></li>
               <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">ExamPrep360 Basic - Rs 1999</a></li>
               <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/login?redirect=/aptipath/parent/home">Existing Parent Login</a></li>
               <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/resources/manuals/AptiPath_Basic_Parent_Flow_Manual.html" target="_blank">Flow Manual</a></li>

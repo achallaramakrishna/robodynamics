@@ -4,6 +4,7 @@ import com.robodynamics.model.RDCourseSession;
 import com.robodynamics.model.RDCourseSessionDetail;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDCourseSessionService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +36,9 @@ public class RDJsonContentController {
     @Autowired
     private RDCourseSessionService courseSessionService;
 
+    @Value("${rd.session.materials.base:/opt/robodynamics/session_materials}")
+    private String sessionMaterialsBase;
+
     /** View a single JSON-backed asset. */
     @GetMapping("/{detailId}")
     public String viewContent(@PathVariable int detailId,
@@ -49,8 +54,20 @@ public class RDJsonContentController {
         }
 
         try {
+            String fileRef = detail.getFile().trim();
+
+            // PDF/notes assets should open directly via static session_materials URL.
+            if (isPdfAsset(detail, fileRef)) {
+                return "redirect:" + toPublicPdfUrl(detail, fileRef);
+            }
+
+            Path contentPath = resolveContentPath(detail, fileRef);
+            if (contentPath == null || !Files.exists(contentPath)) {
+                throw new IllegalStateException("Content file not found: " + fileRef);
+            }
+
             String json = new String(
-                    Files.readAllBytes(Paths.get(detail.getFile())),
+                    Files.readAllBytes(contentPath),
                     StandardCharsets.UTF_8);
 
             // Escape </script> to prevent early script-tag closure
@@ -75,6 +92,68 @@ public class RDJsonContentController {
         }
 
         return "student/json-content-viewer";
+    }
+
+    private boolean isPdfAsset(RDCourseSessionDetail detail, String fileRef) {
+        String type = detail.getType() == null ? "" : detail.getType().trim().toLowerCase();
+        String normalized = fileRef == null ? "" : fileRef.trim().toLowerCase();
+        return "pdf".equals(type) || normalized.endsWith(".pdf");
+    }
+
+    private String toPublicPdfUrl(RDCourseSessionDetail detail, String fileRef) {
+        String normalized = fileRef == null ? "" : fileRef.trim().replace('\\', '/');
+        if (normalized.startsWith("/session_materials/")) {
+            return normalized;
+        }
+        if (normalized.startsWith("session_materials/")) {
+            return "/" + normalized;
+        }
+        if (normalized.startsWith("http://") || normalized.startsWith("https://")) {
+            return normalized;
+        }
+
+        Integer courseId = null;
+        if (detail.getCourseSession() != null && detail.getCourseSession().getCourse() != null) {
+            courseId = detail.getCourseSession().getCourse().getCourseId();
+        } else if (detail.getCourse() != null) {
+            courseId = detail.getCourse().getCourseId();
+        }
+        if (courseId != null && courseId > 0) {
+            String fileName = Paths.get(normalized).getFileName().toString();
+            return "/session_materials/" + courseId + "/" + fileName;
+        }
+        return normalized.startsWith("/") ? normalized : "/" + normalized;
+    }
+
+    private Path resolveContentPath(RDCourseSessionDetail detail, String fileRef) {
+        if (fileRef == null || fileRef.trim().isEmpty()) {
+            return null;
+        }
+        String normalized = fileRef.trim().replace('\\', '/');
+
+        if (normalized.startsWith("/session_materials/")) {
+            String rel = normalized.substring("/session_materials/".length());
+            return Paths.get(sessionMaterialsBase).resolve(rel).normalize();
+        }
+
+        Path rawPath = Paths.get(fileRef);
+        if (rawPath.isAbsolute()) {
+            return rawPath.normalize();
+        }
+
+        Integer courseId = null;
+        if (detail.getCourseSession() != null && detail.getCourseSession().getCourse() != null) {
+            courseId = detail.getCourseSession().getCourse().getCourseId();
+        } else if (detail.getCourse() != null) {
+            courseId = detail.getCourse().getCourseId();
+        }
+        if (courseId != null && courseId > 0) {
+            Path candidate = Paths.get(sessionMaterialsBase, String.valueOf(courseId), normalized).normalize();
+            if (Files.exists(candidate)) {
+                return candidate;
+            }
+        }
+        return rawPath.normalize();
     }
 
     /**

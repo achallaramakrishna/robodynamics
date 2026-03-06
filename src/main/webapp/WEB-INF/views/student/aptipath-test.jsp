@@ -23,9 +23,7 @@
     }
 
     * { box-sizing: border-box; }
-    *::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
     html, body { height: 100%; }
-    html { scrollbar-width: none; -ms-overflow-style: none; }
     body {
       margin: 0;
       font-family: "Plus Jakarta Sans", "Trebuchet MS", sans-serif;
@@ -34,7 +32,8 @@
         radial-gradient(900px 420px at 8% -12%, rgba(11, 31, 58, 0.14), transparent 60%),
         radial-gradient(760px 360px at 108% -14%, rgba(15, 118, 110, 0.16), transparent 58%),
         linear-gradient(180deg, #f4f8fc 0%, #edf3f8 100%);
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .shell {
@@ -114,10 +113,23 @@
       gap: 4px;
       overflow-y: auto;
       overflow-x: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #94a3b8 #e2e8f0;
     }
-    .panel::-webkit-scrollbar { width: 0; height: 0; display: none; }
+    .panel::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      display: block;
+    }
+    .panel::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 999px;
+    }
+    .panel::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 999px;
+    }
 
     .panel-top {
       display: grid;
@@ -873,24 +885,6 @@
       padding: 8px 10px;
       display: grid;
       gap: 8px;
-      max-height: min(34vh, 300px);
-      overflow-y: auto;
-      overflow-x: hidden;
-      scrollbar-width: thin;
-      scrollbar-color: #94a3b8 #e2e8f0;
-    }
-    .story-insight::-webkit-scrollbar {
-      height: 8px !important;
-      width: 8px !important;
-      display: block !important;
-    }
-    .story-insight::-webkit-scrollbar-track {
-      background: #e2e8f0;
-      border-radius: 999px;
-    }
-    .story-insight::-webkit-scrollbar-thumb {
-      background: #94a3b8;
-      border-radius: 999px;
     }
 
     .story-title {
@@ -956,7 +950,7 @@
 
     /* ===== Tablet (max 980px) ===== */
     @media (max-width: 980px) {
-      body { overflow: hidden; }
+      body { overflow-x: hidden; overflow-y: auto; }
       .shell { height: calc(100dvh - 8px); min-height: 0; }
       .hero { grid-template-columns: 1fr; }
       .panel { overflow-y: auto; overflow-x: hidden; }
@@ -1317,6 +1311,7 @@
       const questionHead = document.getElementById('questionHead');
       const questionMedia = document.getElementById('questionMedia');
       const questionRoot = document.getElementById('questionRoot');
+      const panelContainer = document.querySelector('.panel');
       const optionList = document.getElementById('optionList');
       const confButtons = Array.from(document.querySelectorAll('.conf-btn'));
       const prevBtn = document.getElementById('prevBtn');
@@ -1352,6 +1347,7 @@
       const subjectLanguageField = document.getElementById('subjectLanguage');
       const storyInsightBlock = document.getElementById('storyInsightBlock');
       const intentPanel = document.getElementById('intentPanel');
+      let submitStepVisible = false;
 
       const voicePrefKey = 'aptipath_voice_coach_enabled';
       let voiceCoachSupported = false;
@@ -1611,7 +1607,7 @@
       }
 
       function sectionTipText(sectionCode) {
-        const section = String(sectionCode || '').toUpperCase();
+        const section = canonicalSection(sectionCode);
         switch (section) {
           case 'CORE_APTITUDE': return 'This checks verbal, quantitative, logical, and spatial readiness.';
           case 'APPLIED_CHALLENGE': return 'This section checks problem-solving in real study situations.';
@@ -1637,7 +1633,11 @@
       }
 
       function canonicalSection(sectionCode) {
-        const section = String(sectionCode || '').toUpperCase();
+        const section = String(sectionCode || '')
+          .trim()
+          .toUpperCase()
+          .replace(/[^A-Z0-9]+/g, '_')
+          .replace(/^_+|_+$/g, '');
         if (section === 'LOGIC' || section === 'NUMERIC' || section === 'SPATIAL') return 'CORE_APTITUDE';
         if (section === 'INTEREST') return 'INTEREST_WORK';
         if (section === 'DECISION') return 'VALUES_MOTIVATION';
@@ -2237,6 +2237,10 @@
             renderSubjectSignalGrid();
           }
         }
+        if (showSubmitStep && !submitStepVisible && panelContainer) {
+          panelContainer.scrollTop = 0;
+        }
+        submitStepVisible = showSubmitStep;
         renderSectionTabs();
         updateEngagementSignals(answered, total);
       }

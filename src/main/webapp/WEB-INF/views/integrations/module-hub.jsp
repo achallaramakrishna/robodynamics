@@ -327,8 +327,19 @@
           <c:otherwise>
             <a class="btn btn-off" href="#">Access Disabled</a>
           </c:otherwise>
-        </c:choose>
+          </c:choose>
       </article>
+
+      <c:if test="${rdUser.profile_id == 4 || rdUser.profile_id == 5}">
+        <article class="module reveal delay-3">
+          <div class="top">
+            <h3>Vedic Math AI Tutor</h3>
+            <span class="chip chip-on">Live</span>
+          </div>
+          <p>Start Lesson-1 guided Vedic Math practice with hints, instant answer check, and doubt support.</p>
+          <a class="btn btn-on" href="${pageContext.request.contextPath}/ai-tutor/launch?module=VEDIC_MATH">Launch AI Tutor</a>
+        </article>
+      </c:if>
     </section>
 
   </div>

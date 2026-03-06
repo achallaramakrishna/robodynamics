@@ -40,6 +40,7 @@ public class RDUserController {
     @Autowired private RDTicketService ticketService;
     @Autowired private RDNotificationService notificationService;
     @Autowired private RDUserLoginLogService userLoginLogService;
+    @Autowired private RDVisitorLogService visitorLogService;
     @Autowired private RDCISubscriptionService ciSubscriptionService;
     @Autowired private RDModuleAccessService moduleAccessService;
     
@@ -213,7 +214,8 @@ public class RDUserController {
     }
 
     @GetMapping("/dashboard")
-    public String homeDashboard(Model model, HttpSession session) {
+    public String homeDashboard(@RequestParam(value = "activityDate", required = false) String activityDate,
+                                Model model, HttpSession session) {
         RDUser me = (RDUser) session.getAttribute("rdUser");
         if (me == null) {
             return "redirect:/login?redirect=/dashboard";
@@ -221,7 +223,8 @@ public class RDUserController {
         if (!RDRoleRouteUtil.isAdminProfile(me.getProfile_id())) {
             return RDRoleRouteUtil.redirectHomeFor(me);
         }
-        addAdminTicketStats(session, model);
+        LocalDate selectedActivityDate = parseDateOr(activityDate, LocalDate.now());
+        addAdminTicketStats(session, model, selectedActivityDate);
         return "dashboard";
     }
 
@@ -760,7 +763,7 @@ public class RDUserController {
     }
 
     // ===== Admin ticket stats helper (unchanged from your version) =====
-    private void addAdminTicketStats(HttpSession session, Model model) {
+    private void addAdminTicketStats(HttpSession session, Model model, LocalDate selectedActivityDate) {
         RDUser me = (RDUser) session.getAttribute("rdUser");
         if (me == null) return;
         int pid = me.getProfile_id();
@@ -791,5 +794,174 @@ public class RDUserController {
             loginStats.put("loginsToday", 0L);
         }
         model.addAttribute("loginStats", loginStats);
+        addVisitorInsights(model, selectedActivityDate);
+    }
+
+    private void addVisitorInsights(Model model, LocalDate selectedActivityDate) {
+        Map<String, Long> visitorStats = new HashMap<>();
+        List<Map<String, Object>> topVisitorUrls = Collections.emptyList();
+        List<Map<String, Object>> topVisitorCountries = Collections.emptyList();
+        List<Map<String, Object>> topLoggedInVisitors = Collections.emptyList();
+        List<String> visitorInsights = new ArrayList<>();
+        LocalDate effectiveDate = selectedActivityDate == null ? LocalDate.now() : selectedActivityDate;
+        LocalDateTime dayStart = effectiveDate.atStartOfDay();
+        LocalDateTime dayEnd = dayStart.plusDays(1);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
+        try {
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime since7d = now.minusDays(7);
+
+            long visitsOnDate = visitorLogService.countVisitsBetween(dayStart, dayEnd);
+            long uniqueIpsOnDate = visitorLogService.countDistinctIpsBetween(dayStart, dayEnd);
+            long distinctUrlsOnDate = visitorLogService.countDistinctUrlsBetween(dayStart, dayEnd);
+            long loggedInVisitsOnDate = visitorLogService.countLoggedInVisitsBetween(dayStart, dayEnd);
+            long anonymousVisitsOnDate = visitorLogService.countAnonymousVisitsBetween(dayStart, dayEnd);
+            long distinctLoggedInUsersOnDate = visitorLogService.countDistinctLoggedInUsersBetween(dayStart, dayEnd);
+            long aptiPathVisitsOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/aptipath/%");
+            long aptiPathStudentHomeOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/aptipath/student/home%");
+            long aptiPathParentHomeOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/aptipath/parent/home%");
+            long aptiPathTestOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/aptipath/student/test%");
+            long aptiPathResultOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/aptipath/student/result%");
+            long aptiPathIntakeOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/aptipath/%/intake%");
+            long demoVisitsOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/parents/demo%");
+            long loginPageVisitsOnDate = visitorLogService.countVisitsByUrlPatternBetween(dayStart, dayEnd, "%/login%");
+
+            long visits7d = visitorLogService.countVisitsSince(since7d);
+            long uniqueIps7d = visitorLogService.countDistinctIpsSince(since7d);
+            long loggedInVisits7d = visitorLogService.countLoggedInVisitsSince(since7d);
+            long anonymousVisits7d = visitorLogService.countAnonymousVisitsSince(since7d);
+            long aptiPathVisits7d = visitorLogService.countVisitsByUrlPatternSince(since7d, "%/aptipath/%");
+            long aptiPathTest7d = visitorLogService.countVisitsByUrlPatternSince(since7d, "%/aptipath/student/test%");
+            long aptiPathResult7d = visitorLogService.countVisitsByUrlPatternSince(since7d, "%/aptipath/student/result%");
+
+            visitorStats.put("visitsOnDate", visitsOnDate);
+            visitorStats.put("uniqueIpsOnDate", uniqueIpsOnDate);
+            visitorStats.put("distinctUrlsOnDate", distinctUrlsOnDate);
+            visitorStats.put("loggedInVisitsOnDate", loggedInVisitsOnDate);
+            visitorStats.put("anonymousVisitsOnDate", anonymousVisitsOnDate);
+            visitorStats.put("distinctLoggedInUsersOnDate", distinctLoggedInUsersOnDate);
+            visitorStats.put("aptiPathVisitsOnDate", aptiPathVisitsOnDate);
+            visitorStats.put("aptiPathStudentHomeOnDate", aptiPathStudentHomeOnDate);
+            visitorStats.put("aptiPathParentHomeOnDate", aptiPathParentHomeOnDate);
+            visitorStats.put("aptiPathTestOnDate", aptiPathTestOnDate);
+            visitorStats.put("aptiPathResultOnDate", aptiPathResultOnDate);
+            visitorStats.put("aptiPathIntakeOnDate", aptiPathIntakeOnDate);
+            visitorStats.put("demoVisitsOnDate", demoVisitsOnDate);
+            visitorStats.put("loginPageVisitsOnDate", loginPageVisitsOnDate);
+            visitorStats.put("engagedVisitRateOnDate", pct(loggedInVisitsOnDate, visitsOnDate));
+            visitorStats.put("anonymousVisitRateOnDate", pct(anonymousVisitsOnDate, visitsOnDate));
+            visitorStats.put("aptiPathVisitRateOnDate", pct(aptiPathVisitsOnDate, visitsOnDate));
+
+            visitorStats.put("visits7d", visits7d);
+            visitorStats.put("uniqueIps7d", uniqueIps7d);
+            visitorStats.put("loggedInVisits7d", loggedInVisits7d);
+            visitorStats.put("anonymousVisits7d", anonymousVisits7d);
+            visitorStats.put("aptiPathVisits7d", aptiPathVisits7d);
+            visitorStats.put("aptiPathTest7d", aptiPathTest7d);
+            visitorStats.put("aptiPathResult7d", aptiPathResult7d);
+            visitorStats.put("engagedVisitRate7d", pct(loggedInVisits7d, visits7d));
+
+            topVisitorUrls = toUrlRows(visitorLogService.topUrlsBetween(dayStart, dayEnd, 8));
+            topVisitorCountries = toCountryRows(visitorLogService.topCountriesBetween(dayStart, dayEnd, 8));
+            topLoggedInVisitors = toLoggedInUserRows(visitorLogService.topLoggedInUsersBetween(dayStart, dayEnd, 8));
+
+            if (visitsOnDate == 0L) {
+                visitorInsights.add("No visitor activity recorded on " + effectiveDate.format(dateFormatter) + ".");
+            } else {
+                visitorInsights.add("Selected date (" + effectiveDate.format(dateFormatter) + "): " + visitsOnDate
+                        + " visits from " + uniqueIpsOnDate + " unique IPs.");
+                visitorInsights.add("Traffic mix: logged-in " + pct(loggedInVisitsOnDate, visitsOnDate) + "%, anonymous "
+                        + pct(anonymousVisitsOnDate, visitsOnDate) + "%.");
+                visitorInsights.add("AptiPath360 actions: total " + aptiPathVisitsOnDate + ", student tests "
+                        + aptiPathTestOnDate + ", reports " + aptiPathResultOnDate + ".");
+            }
+            visitorInsights.add("7-day context: " + visits7d + " total visits, AptiPath360 " + aptiPathVisits7d
+                    + " (tests " + aptiPathTest7d + ", reports " + aptiPathResult7d + ").");
+        } catch (Exception ex) {
+            log.warn("Failed to load visitor insights for dashboard", ex);
+        }
+
+        model.addAttribute("visitorActivityDate", effectiveDate.toString());
+        model.addAttribute("visitorActivityDateLabel", effectiveDate.format(dateFormatter));
+        model.addAttribute("visitorActivityIsToday", LocalDate.now().equals(effectiveDate));
+        model.addAttribute("visitorStats", visitorStats);
+        model.addAttribute("topVisitorUrls", topVisitorUrls);
+        model.addAttribute("topVisitorCountries", topVisitorCountries);
+        model.addAttribute("topLoggedInVisitors", topLoggedInVisitors);
+        model.addAttribute("visitorInsights", visitorInsights);
+    }
+
+    private List<Map<String, Object>> toUrlRows(List<Object[]> rows) {
+        List<Map<String, Object>> out = new ArrayList<>();
+        if (rows == null) {
+            return out;
+        }
+        for (Object[] row : rows) {
+            if (row == null || row.length < 2) {
+                continue;
+            }
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("url", row[0] == null ? "(unknown)" : row[0].toString());
+            item.put("count", safeLong(row[1]));
+            out.add(item);
+        }
+        return out;
+    }
+
+    private List<Map<String, Object>> toCountryRows(List<Object[]> rows) {
+        List<Map<String, Object>> out = new ArrayList<>();
+        if (rows == null) {
+            return out;
+        }
+        for (Object[] row : rows) {
+            if (row == null || row.length < 2) {
+                continue;
+            }
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("country", row[0] == null ? "UNKNOWN" : row[0].toString());
+            item.put("count", safeLong(row[1]));
+            out.add(item);
+        }
+        return out;
+    }
+
+    private List<Map<String, Object>> toLoggedInUserRows(List<Object[]> rows) {
+        List<Map<String, Object>> out = new ArrayList<>();
+        if (rows == null) {
+            return out;
+        }
+        for (Object[] row : rows) {
+            if (row == null || row.length < 3) {
+                continue;
+            }
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("userId", safeLong(row[0]));
+            item.put("userName", row[1] == null ? "(unknown)" : row[1].toString());
+            item.put("count", safeLong(row[2]));
+            out.add(item);
+        }
+        return out;
+    }
+
+    private long safeLong(Object value) {
+        if (value instanceof Number) {
+            return ((Number) value).longValue();
+        }
+        if (value == null) {
+            return 0L;
+        }
+        try {
+            return Long.parseLong(value.toString());
+        } catch (NumberFormatException ex) {
+            return 0L;
+        }
+    }
+
+    private long pct(long part, long whole) {
+        if (whole <= 0L || part <= 0L) {
+            return 0L;
+        }
+        return Math.round((part * 100.0d) / whole);
     }
 }

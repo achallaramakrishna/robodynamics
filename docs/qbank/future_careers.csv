@@ -1,0 +1,31 @@
+Career_Cluster,Career_Name,Description,Required_Skills,Projected_Growth_India,Projected_Growth_Global,Relevant_Grades,Why_Future_Proof,Entry_Path_for_Grade_8-12
+AI/Tech,AI Engineer,Designs and trains AI/ML models,"Python, Math, ML frameworks (TensorFlow/PyTorch)",1.4M+ roles by 2030,High (97M new AI jobs),8-12,AI transforming every industry; India leads in AI talent,Grade 8-10: Learn Python → Grade 11-12: PCM + CS → B.Tech AI/ML (IIT/NIT)
+AI/Tech,Prompt Engineer,Crafts precise prompts for LLMs,"Language logic, creativity, AI ethics",Emerging high-demand,High,Emerging role in generative AI era,Grade 8-12: Practice ChatGPT prompting → build prompt libraries → B.Tech CS/AI
+AI/Tech,AI Ethics Specialist,Ensures fair/responsible AI,"Philosophy, policy, tech understanding",Growing fast,35%+,AI regulation boom (EU AI Act, India rules),Grade 8-12: Debate ethics → read AI policy → B.Tech + ethics cert
+AI/Tech,Generative AI Specialist,Creates AI art/music/video,"Creative tools, AI frameworks",Part of 1.4M AI jobs,High,Content explosion (Midjourney, Sora),Grade 8-12: Experiment with gen AI → portfolio → B.Tech CS
+AI/Tech,Intelligent Automation Expert,Automates business processes,"RPA, AI, process design",38M jobs disrupted → new created,97M new,Automation wave in India services,Grade 8-12: Build simple bots → UiPath cert → B.Tech IT
+Green/Sustainability,Sustainability Manager,Leads ESG & green strategy,"Env science, management, data",5-10M roles by 2030,50M+,India net-zero 2070 + ESG mandates,Grade 8-12: Eco projects → B.Sc Env + MBA
+Green/Sustainability,Renewable Energy Engineer,Designs solar/wind systems,"Engineering, physics, energy modeling",500GW target by 2030,High,Green hydrogen + solar boom,Grade 8-12: Solar model → B.Tech Energy Engg (IIT)
+Green/Sustainability,ESG Analyst,Evaluates env/social/governance,"Finance, data, sustainability",Booming in India GCCs,25%+,ESG funds growing 30% YoY,Grade 8-12: Study sustainability → B.Com + ESG cert
+Green/Sustainability,Green Hydrogen Engineer,Develops H2 production/storage,"Chemistry, engineering",5-10M tonnes by 2030,Emerging,National Green Hydrogen Mission,Grade 8-12: Chemistry projects → B.Tech Chemical
+Green/Sustainability,Carbon Footprint Analyst,Measures & reduces emissions,"Data analysis, env science",Net-zero push,High,Carbon credit market explosion,Grade 8-12: Carbon calculator app → B.Sc Env
+Healthcare/HealthTech,Health AI Developer,Builds AI for diagnostics,"AI, biology, programming",5M+ health jobs by 2030,35%,AI in telemedicine boom,Grade 8-12: Health app → B.Tech Biomedical
+Healthcare/HealthTech,Biomedical Researcher,Advances medical devices,"Science, research, biotech",Post-pandemic growth,High,Personalized medicine rise,Grade 8-12: Lab experiments → M.Sc Biotech
+Healthcare/HealthTech,Behavioural Therapist,Mental health support,"Psychology, empathy",Growing mental health crisis,25%+,India wellness boom,Grade 8-12: Volunteer → B.A Psychology
+Healthcare/HealthTech,Biotech Specialist,Works on gene/tech therapies,"Biology, tech",High in India pharma,35%+,Gene editing (CRISPR) future,Grade 8-12: Bio projects → B.Tech Biotech
+Data/Hybrid,Data Scientist,Extracts insights from data,"Stats, Python, ML",400K+ fresher roles by 2030,25%,Data-driven everything,Grade 8-12: Kaggle → B.Sc Data Science
+Data/Hybrid,Cybersecurity Analyst,Protects systems,"Security, networking",Tech boom + cyber threats,High,India cyber market $10B+,Grade 8-12: CTF challenges → B.Tech CS
+Data/Hybrid,FinTech Engineer,Builds banking/payment apps,"Finance, programming",GCC 500K+ roles,25%,UPI + digital India,Grade 8-12: App building → B.Tech CS
+Data/Hybrid,EV Engineer,Designs electric vehicles,"Engineering, electronics",EV policy push,High,India EV market 2030,Grade 8-12: Battery project → B.Tech Mech/Electrical
+Other Rising,Cloud Architect,Designs cloud infrastructure,"Cloud (AWS/Azure), architecture",GCC 500K+,6M AI jobs,Cloud backbone of future,Grade 8-12: AWS free tier → B.Tech CS
+Other Rising,Defense Manufacturing Specialist,Builds defence tech,"Engineering, security",Defence corridor boom,High,Make in India,Grade 8-12: Robotics → B.Tech Aero/Mech
+Other Rising,Quantum Computing Specialist,Develops quantum algorithms,"Physics, programming",Emerging high-growth,High,Quantum advantage by 2035,Grade 8-12: Quantum basics → B.Sc Physics
+Other Rising,Space Tech Engineer,Works on satellites/rockets,"Aerospace, engineering",ISRO + private (Skyroot),High,India space economy,Grade 8-12: Rocket model → B.Tech Aerospace
+Other Rising,Metaverse Architect,Designs virtual worlds,"3D, Unity, AI",Gaming + metaverse boom,High,Web3 future,Grade 8-12: Roblox/Unity → B.Tech CS
+Other Rising,Precision Farming Specialist,Uses AI/drones for farming,"AI, agronomy, data",500K+ agritech roles,High,Agritech revolution,Grade 8-12: Drone project → B.Tech Agri Engg
+Other Rising,EdTech AI Tutor Developer,Builds personalized learning AI,"AI, education, content",Booming in India,35%+,NEP 2020 focus,Grade 8-12: Tutor bot → B.Tech CS
+Other Rising,Satellite Data Analyst,Analyzes earth observation,"Remote sensing, data science",ISRO + private,High,Climate monitoring,Grade 8-12: GIS tools → B.Sc Geo
+Other Rising,Autonomous Drone Engineer,Builds delivery/defence drones,"Robotics, AI, aerospace",Defence + logistics boom,High,Drone policy 2026,Grade 8-12: Drone build → B.Tech Aero
+Other Rising,Smart Supply Chain Engineer,Optimizes logistics with AI/IoT,"Logistics, AI, data",Quick commerce (Zepto),High,Digital India,Grade 8-12: Supply chain sim → B.Tech IE
+Other Rising,Personalized Medicine Specialist,Uses genomics + AI,"Biology, tech",Gene editing future,High,Precision health,Grade 8-12: Bio project → B.Tech Biotech
+Other Rising,Circular Economy Consultant,Designs waste-to-value systems,"Env science, business",Net-zero economy,High,Sustainable India,Grade 8-12: Waste project → B.Sc Env

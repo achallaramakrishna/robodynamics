@@ -1,0 +1,8 @@
+AI_TUTOR_JWT_SECRET=change_me_ai_tutor_secret
+AI_TUTOR_JWT_ISSUER=robodynamics-java
+AI_TUTOR_JWT_AUDIENCE=robodynamics-ai-tutor
+TUTOR_INTERNAL_KEY=change_me_ai_tutor_internal_key
+ROBODYNAMICS_EVENT_URL=http://127.0.0.1:8080/api/ai-tutor/session/event
+ROBODYNAMICS_EVENT_API_KEY=change_me_ai_tutor_internal_key
+AI_TUTOR_CONTENT_ROOT=/opt/robodynamics
+OPENAI_MODEL=gpt-4.1-mini

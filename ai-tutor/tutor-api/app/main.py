@@ -11,6 +11,7 @@ from app.models import (
     CheckAnswerRequest,
     CheckAnswerResponse,
     DoubtRequest,
+    EventIngestRequest,
     NextQuestionRequest,
     QuestionPayload,
     StartRequest,
@@ -292,3 +293,41 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
         )
     )
     return {"courseId": session.course_id, "reply": reply}
+
+
+@app.post("/ai-tutor-api/vedic/event")
+async def ingest_event(payload: EventIngestRequest, x_ai_tutor_key: str | None = Header(default=None)) -> dict:
+    require_internal_key(x_ai_tutor_key)
+    try:
+        session = session_store.get(payload.sessionId)
+    except KeyError as ex:
+        raise HTTPException(status_code=404, detail=str(ex)) from ex
+
+    event_type = (payload.eventType or "").strip().upper()
+    if not event_type:
+        raise HTTPException(status_code=400, detail="eventType is required")
+
+    question_id = payload.questionId or str(session.current_question.get("questionId") or "")
+    lesson_code = payload.lessonCode or session.chapter_code
+    meta = payload.meta if isinstance(payload.meta, dict) else {}
+
+    await session_store.send_event(
+        TutorEvent(
+            sessionId=session.session_id,
+            userId=session.user_id,
+            childId=session.child_id,
+            moduleCode=session.module_code,
+            eventType=event_type,
+            lessonCode=lesson_code,
+            questionId=question_id or None,
+            isCorrect=payload.isCorrect,
+            scoreDelta=payload.scoreDelta,
+            meta={
+                "courseId": session.course_id,
+                "chapterCode": session.chapter_code,
+                "exerciseGroup": session.exercise_group,
+                **meta,
+            },
+        )
+    )
+    return {"ok": True}

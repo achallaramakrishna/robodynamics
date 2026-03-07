@@ -17,6 +17,7 @@ export type TutorStartResponse = {
     exerciseCoverage: string[];
     exerciseFlow: Array<{ exerciseGroup: string; subtopic: string }>;
     teachingScript: TutorTeachingStep[];
+    screenplay: TutorScreenplayBeat[];
     coreIdeas: string[];
     workedExamples: Array<{ question: string; method: string; answer: string }>;
     starterPractice: string[];
@@ -51,6 +52,28 @@ export type TutorTeachingStep = {
   boardAction: string;
   checkpointPrompt: string;
   microPractice: string;
+};
+
+export type TutorScreenplayBeat = {
+  beatId: string;
+  stepId: string;
+  exerciseGroup: string;
+  subtopic: string;
+  sequence: number;
+  cue: "intro" | "explain" | "checkpoint";
+  boardMode: "svg" | "free_draw";
+  teacherLine: string;
+  boardAction: string;
+  checkpointPrompt: string;
+  pauseType: "none" | "student_response";
+  holdSec: number;
+  expectedStudentResponse: string;
+  fallbackHint: string;
+  performanceTag?: "core" | "remedial" | "challenge";
+  useWhenCorrect?: boolean;
+  useWhenIncorrect?: boolean;
+  minConfidence?: "low" | "medium" | "high";
+  maxConfidence?: "low" | "medium" | "high";
 };
 
 export type TutorChapter = {
@@ -107,6 +130,7 @@ export type TutorNextQuestionResponse = {
     exerciseCoverage: string[];
     exerciseFlow: Array<{ exerciseGroup: string; subtopic: string }>;
     teachingScript: TutorTeachingStep[];
+    screenplay: TutorScreenplayBeat[];
     coreIdeas: string[];
     workedExamples: Array<{ question: string; method: string; answer: string }>;
     starterPractice: string[];

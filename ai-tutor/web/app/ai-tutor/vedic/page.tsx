@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type {
@@ -9,12 +10,14 @@ import type {
   TutorExerciseGroup,
   TutorNextQuestionResponse,
   TutorQuestion,
+  TutorScreenplayBeat,
   TutorTeachingStep,
   TutorStartResponse
 } from "@/lib/types";
 
 type Status = "idle" | "loading" | "ready" | "error";
 type Confidence = "low" | "medium" | "high";
+type ScreenplayMode = "core" | "remedial" | "challenge";
 
 type SvgBoardStep =
   | {
@@ -52,6 +55,13 @@ const AVATARS: Avatar[] = [
   { id: "tara", name: "Tara", role: "Friendly Teacher", color: "#f97316", style: "girl" },
   { id: "niva", name: "Niva", role: "Patient Guide", color: "#6366f1", style: "boy" }
 ];
+
+const AVATAR_STAGE_ART: Record<string, string> = {
+  arya: "/ai-tutor/avatars/5.svg",
+  ved: "/ai-tutor/avatars/3.svg",
+  tara: "/ai-tutor/avatars/4.svg",
+  niva: "/ai-tutor/avatars/5.svg"
+};
 
 function AvatarFace({
   avatar,
@@ -102,31 +112,22 @@ function AvatarCharacter({
   avatar: Avatar;
   speaking?: boolean;
 }) {
-  const dress = avatar.style === "girl" ? "#fcd34d" : "#bae6fd";
-  const sleeve = avatar.style === "girl" ? "#f59e0b" : "#0ea5e9";
-  const mouthPath = speaking ? "M88 104 Q100 116 112 104" : "M90 104 Q100 110 110 104";
+  const src = AVATAR_STAGE_ART[avatar.id] || "/ai-tutor/avatars/5.svg";
   return (
-    <svg
-      width={176}
-      height={176}
-      viewBox="0 0 200 200"
-      role="img"
-      aria-label={`${avatar.name} animated teacher`}
-      style={{ animation: "avatarFloat 2.2s ease-in-out infinite" }}
+    <div
+      className={`teacher-stage-avatar${speaking ? " speaking" : ""}`}
+      style={{ ["--teacher-accent" as any]: avatar.color }}
     >
-      <ellipse cx="100" cy="188" rx="56" ry="8" fill="#e2e8f0" />
-      <circle cx="100" cy="76" r="44" fill="#fde68a" stroke="#cbd5e1" strokeWidth="2" />
-      <path
-        d={avatar.style === "girl" ? "M48,78 C50,24 150,24 152,78 L152,56 C149,20 51,20 48,56 Z" : "M52,78 C58,30 142,30 148,78 L148,58 C140,26 60,26 52,58 Z"}
-        fill={avatar.color}
+      <div className="teacher-stage-glow" aria-hidden="true" />
+      <Image
+        src={src}
+        alt={`${avatar.name} teaching avatar`}
+        width={340}
+        height={440}
+        unoptimized
+        className="teacher-stage-image"
       />
-      <circle cx="84" cy="78" r="5" fill="#0f172a" />
-      <circle cx="116" cy="78" r="5" fill="#0f172a" />
-      <path d={mouthPath} fill="none" stroke="#7c2d12" strokeWidth="3.4" strokeLinecap="round" />
-      <path d="M64 134 Q100 120 136 134 L146 176 L54 176 Z" fill={dress} stroke="#cbd5e1" strokeWidth="2" />
-      <rect x="48" y="142" width="20" height="10" rx="4" fill={sleeve} />
-      <rect x="132" y="142" width="20" height="10" rx="4" fill={sleeve} />
-    </svg>
+    </div>
   );
 }
 
@@ -345,6 +346,7 @@ function VedicTutorContent() {
   const [lessonExerciseCoverage, setLessonExerciseCoverage] = useState<string[]>([]);
   const [lessonExerciseFlow, setLessonExerciseFlow] = useState<Array<{ exerciseGroup: string; subtopic: string }>>([]);
   const [lessonTeachingScript, setLessonTeachingScript] = useState<TutorTeachingStep[]>([]);
+  const [lessonScreenplay, setLessonScreenplay] = useState<TutorScreenplayBeat[]>([]);
   const [coreIdeas, setCoreIdeas] = useState<string[]>([]);
 
   const [chapters, setChapters] = useState<TutorChapter[]>(DEFAULT_CHAPTERS);
@@ -362,6 +364,7 @@ function VedicTutorContent() {
   const [doubt, setDoubt] = useState("");
   const [doubtReply, setDoubtReply] = useState("");
   const [score, setScore] = useState({ attempts: 0, correctCount: 0, accuracyPct: 0 });
+  const [attemptByQuestion, setAttemptByQuestion] = useState<Record<string, { correct: boolean; confidence: Confidence }>>({});
 
   const [selectedAvatarId, setSelectedAvatarId] = useState(AVATARS[0].id);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
@@ -369,14 +372,19 @@ function VedicTutorContent() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [awaitingStudentResponse, setAwaitingStudentResponse] = useState(false);
+  const [autoTeachEnabled, setAutoTeachEnabled] = useState(true);
+  const [pendingKickoff, setPendingKickoff] = useState<"none" | "welcome" | "teach">("none");
   const [teacherUtterance, setTeacherUtterance] = useState("");
   const [boardSteps, setBoardSteps] = useState<SvgBoardStep[]>([]);
   const [boardRunId, setBoardRunId] = useState(0);
   const [boardSpeed, setBoardSpeed] = useState(1);
 
   const boardTimerRef = useRef<number | null>(null);
+  const boardWaitResolveRef = useRef<(() => void) | null>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
   const speakSeqRef = useRef(0);
+  const teachRunRef = useRef(0);
+  const kickoffRunningRef = useRef(false);
 
   const canStart = useMemo(() => token.trim().length > 20, [token]);
   const chapterList = chapters.length ? chapters : DEFAULT_CHAPTERS;
@@ -417,6 +425,60 @@ function VedicTutorContent() {
       (s) => s.subtopic.trim().toLowerCase() === (question.subtopic || "").trim().toLowerCase()
     ) || null;
   }, [visibleTeachingScript, question]);
+  const activeAttempt = useMemo(() => {
+    if (!question) return null;
+    return attemptByQuestion[question.questionId] || null;
+  }, [attemptByQuestion, question]);
+  const screenplayMode: ScreenplayMode = useMemo(() => {
+    if (!activeAttempt) return "core";
+    if (!activeAttempt.correct) return "remedial";
+    if (activeAttempt.confidence === "high") return "challenge";
+    return "core";
+  }, [activeAttempt]);
+  const activeScreenplayBeats = useMemo(() => {
+    if (!question) return [];
+    const raw = lessonScreenplay
+      .filter((beat) => beat.exerciseGroup === question.exerciseGroup)
+      .sort((a, b) => a.sequence - b.sequence);
+    if (!raw.length) return raw;
+
+    const confidenceRank: Record<Confidence, number> = { low: 0, medium: 1, high: 2 };
+    const activeConfidence = activeAttempt?.confidence || confidence;
+    const currentRank = confidenceRank[activeConfidence];
+    const currentCorrect = activeAttempt?.correct;
+
+    const gated = raw.filter((beat) => {
+      if (beat.useWhenCorrect === true && currentCorrect !== true) return false;
+      if (beat.useWhenIncorrect === true && currentCorrect !== false) return false;
+      if (beat.minConfidence && currentRank < confidenceRank[beat.minConfidence]) return false;
+      if (beat.maxConfidence && currentRank > confidenceRank[beat.maxConfidence]) return false;
+      return true;
+    });
+    if (!gated.length) return raw;
+
+    const core = gated.filter((beat) => !beat.performanceTag || beat.performanceTag === "core");
+    if (screenplayMode === "core") {
+      return core.length ? core : gated;
+    }
+
+    const modeSpecific = gated.filter((beat) => beat.performanceTag === screenplayMode);
+    if (!modeSpecific.length) {
+      return core.length ? core : gated;
+    }
+
+    const pickedByCue = new Map<string, TutorScreenplayBeat>();
+    for (const beat of core) {
+      if (!pickedByCue.has(beat.cue)) {
+        pickedByCue.set(beat.cue, beat);
+      }
+    }
+    for (const beat of modeSpecific) {
+      pickedByCue.set(beat.cue, beat);
+    }
+
+    const merged = [...pickedByCue.values()].sort((a, b) => a.sequence - b.sequence);
+    return merged.length ? merged : gated;
+  }, [lessonScreenplay, question, activeAttempt, confidence, screenplayMode]);
 
   const stageStatusText = useMemo(() => {
     if (isTeachingBoard) return "Teaching on whiteboard...";
@@ -431,6 +493,9 @@ function VedicTutorContent() {
       window.speechSynthesis.cancel();
     }
     if (activeAudioRef.current) {
+      activeAudioRef.current.onplaying = null;
+      activeAudioRef.current.onended = null;
+      activeAudioRef.current.onerror = null;
       activeAudioRef.current.pause();
       activeAudioRef.current.currentTime = 0;
       activeAudioRef.current = null;
@@ -474,6 +539,11 @@ function VedicTutorContent() {
       cancelled = true;
       if (boardTimerRef.current) {
         window.clearTimeout(boardTimerRef.current);
+        boardTimerRef.current = null;
+      }
+      if (boardWaitResolveRef.current) {
+        boardWaitResolveRef.current();
+        boardWaitResolveRef.current = null;
       }
       stopVoicePlayback();
     };
@@ -485,7 +555,7 @@ function VedicTutorContent() {
     }
   }, [voiceEnabled]);
 
-  async function speak(text: string) {
+  async function speak(text: string): Promise<void> {
     const line = (text || "").trim();
     if (!line) {
       setIsSpeaking(false);
@@ -517,22 +587,31 @@ function VedicTutorContent() {
         const mimeType = String(ttsData.mimeType || "audio/wav");
         const audio = new Audio(`data:${mimeType};base64,${ttsData.audioBase64}`);
         activeAudioRef.current = audio;
-        audio.onplaying = () => {
-          if (speakSeq === speakSeqRef.current) {
-            setIsSpeaking(true);
-          }
-        };
-        audio.onended = () => {
-          if (speakSeq === speakSeqRef.current) {
-            setIsSpeaking(false);
-          }
-        };
-        audio.onerror = () => {
-          if (speakSeq === speakSeqRef.current) {
-            setIsSpeaking(false);
-          }
-        };
-        await audio.play();
+        await new Promise<void>((resolve, reject) => {
+          audio.onplaying = () => {
+            if (speakSeq === speakSeqRef.current) {
+              setIsSpeaking(true);
+            }
+          };
+          audio.onended = () => {
+            if (speakSeq === speakSeqRef.current) {
+              setIsSpeaking(false);
+            }
+            resolve();
+          };
+          audio.onerror = () => {
+            if (speakSeq === speakSeqRef.current) {
+              setIsSpeaking(false);
+            }
+            reject(new Error("TTS audio playback failed"));
+          };
+          void audio.play().catch((err) => {
+            reject(err instanceof Error ? err : new Error("TTS audio playback error"));
+          });
+        });
+        if (speakSeq === speakSeqRef.current) {
+          setIsSpeaking(false);
+        }
         return;
       }
     } catch {
@@ -543,23 +622,30 @@ function VedicTutorContent() {
       const utter = new SpeechSynthesisUtterance(line);
       utter.rate = 0.95;
       utter.pitch = 1;
-      utter.onstart = () => {
-        if (speakSeq === speakSeqRef.current) {
-          setIsSpeaking(true);
-        }
-      };
-      utter.onend = () => {
-        if (speakSeq === speakSeqRef.current) {
-          setIsSpeaking(false);
-        }
-      };
-      utter.onerror = () => {
-        if (speakSeq === speakSeqRef.current) {
-          setIsSpeaking(false);
-        }
-      };
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(utter);
+      await new Promise<void>((resolve) => {
+        utter.onstart = () => {
+          if (speakSeq === speakSeqRef.current) {
+            setIsSpeaking(true);
+          }
+        };
+        utter.onend = () => {
+          if (speakSeq === speakSeqRef.current) {
+            setIsSpeaking(false);
+          }
+          resolve();
+        };
+        utter.onerror = () => {
+          if (speakSeq === speakSeqRef.current) {
+            setIsSpeaking(false);
+          }
+          resolve();
+        };
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utter);
+      });
+      if (speakSeq === speakSeqRef.current) {
+        setIsSpeaking(false);
+      }
       return;
     }
 
@@ -709,42 +795,156 @@ function VedicTutorContent() {
     return steps;
   }
 
+  function boardDurationMs(steps: SvgBoardStep[], holdSec = 0): number {
+    const timelineSec = steps.reduce((mx, s) => Math.max(mx, s.delaySec + s.durationSec), 0);
+    return Math.ceil((timelineSec + Math.max(0, holdSec)) * 1000) + 380;
+  }
+
+  async function logTutorEvent(eventType: string, meta: Record<string, unknown>, extras?: { isCorrect?: boolean; scoreDelta?: number }) {
+    if (!sessionId) return;
+    try {
+      await fetch("/api/vedic/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId,
+          eventType,
+          questionId: question?.questionId,
+          lessonCode: activeChapter,
+          isCorrect: extras?.isCorrect,
+          scoreDelta: extras?.scoreDelta,
+          meta,
+        }),
+      });
+    } catch {
+      // analytics events must not block tutoring flow
+    }
+  }
+
   function clearBoard() {
+    teachRunRef.current += 1;
     setBoardSteps([]);
     setBoardRunId((v) => v + 1);
     if (boardTimerRef.current) {
       window.clearTimeout(boardTimerRef.current);
       boardTimerRef.current = null;
     }
+    if (boardWaitResolveRef.current) {
+      boardWaitResolveRef.current();
+      boardWaitResolveRef.current = null;
+    }
     setIsTeachingBoard(false);
+    setIsListening(false);
     setAwaitingStudentResponse(false);
   }
 
-  function teachOnBoard() {
-    if (!question) return;
+  async function waitForBoard(ms: number): Promise<void> {
+    await new Promise<void>((resolve) => {
+      if (boardTimerRef.current) {
+        window.clearTimeout(boardTimerRef.current);
+        boardTimerRef.current = null;
+      }
+      boardWaitResolveRef.current = () => {
+        boardWaitResolveRef.current = null;
+        resolve();
+      };
+      boardTimerRef.current = window.setTimeout(() => {
+        boardTimerRef.current = null;
+        const done = boardWaitResolveRef.current;
+        boardWaitResolveRef.current = null;
+        if (done) done();
+      }, Math.max(1, ms));
+    });
+  }
 
+  async function teachOnBoard() {
+    if (!question || isTeachingBoard) return;
+    const runId = teachRunRef.current + 1;
+    teachRunRef.current = runId;
+    setError("");
+    setIsListening(false);
+    setAwaitingStudentResponse(false);
+
+    const screenplay = activeScreenplayBeats;
+    setIsTeachingBoard(true);
+    if (screenplay.length) {
+      void logTutorEvent("SCREENPLAY_PLAN", {
+        mode: screenplayMode,
+        confidence,
+        beatIds: screenplay.map((b) => b.beatId),
+        beatCount: screenplay.length,
+      });
+      for (const beat of screenplay) {
+        if (runId !== teachRunRef.current) return;
+        void logTutorEvent("SCREENPLAY_BEAT_SELECTED", {
+          mode: screenplayMode,
+          beatId: beat.beatId,
+          stepId: beat.stepId,
+          cue: beat.cue,
+          performanceTag: beat.performanceTag || "core",
+          holdSec: beat.holdSec,
+          useWhenCorrect: beat.useWhenCorrect,
+          useWhenIncorrect: beat.useWhenIncorrect,
+          minConfidence: beat.minConfidence,
+          maxConfidence: beat.maxConfidence,
+        });
+        const beatStep: TutorTeachingStep = {
+          stepId: beat.stepId,
+          exerciseGroup: beat.exerciseGroup,
+          subtopic: beat.subtopic,
+          boardMode: beat.boardMode,
+          teacherLine: beat.teacherLine || activeTeachingStep?.teacherLine || question.hint,
+          boardAction: beat.boardAction || activeTeachingStep?.boardAction || "Teacher demonstrates the next step.",
+          checkpointPrompt: beat.checkpointPrompt || activeTeachingStep?.checkpointPrompt || "What should we do first?",
+          microPractice: beat.fallbackHint || activeTeachingStep?.microPractice || ""
+        };
+        const steps = buildBoardSteps(question, activeAvatar, beatStep);
+        setBoardSteps(steps);
+        setBoardRunId((v) => v + 1);
+        await Promise.all([
+          waitForBoard(boardDurationMs(steps, beat.holdSec)),
+          speak(beat.teacherLine || beatStep.teacherLine)
+        ]);
+        if (runId !== teachRunRef.current) return;
+        if (beat.pauseType === "student_response") {
+          void logTutorEvent("SCREENPLAY_CHECKPOINT_WAIT", {
+            mode: screenplayMode,
+            beatId: beat.beatId,
+            checkpointPrompt: beat.checkpointPrompt,
+            expectedStudentResponse: beat.expectedStudentResponse,
+          });
+          setIsTeachingBoard(false);
+          setAwaitingStudentResponse(true);
+          return;
+        }
+      }
+      setIsTeachingBoard(false);
+      setAwaitingStudentResponse(true);
+      return;
+    }
+
+    void logTutorEvent("SCREENPLAY_FALLBACK_TEACH", {
+      mode: screenplayMode,
+      reason: "no_screenplay_for_group",
+      exerciseGroup: question.exerciseGroup,
+    });
     const steps = buildBoardSteps(question, activeAvatar, activeTeachingStep);
     setBoardSteps(steps);
     setBoardRunId((v) => v + 1);
+    await Promise.all([
+      waitForBoard(boardDurationMs(steps)),
+      speak(`${toChatStylePrompt(question)} ${activeTeachingStep?.teacherLine || question.hint}.`)
+    ]);
+    if (runId !== teachRunRef.current) return;
 
-    if (boardTimerRef.current) {
-      window.clearTimeout(boardTimerRef.current);
-      boardTimerRef.current = null;
-    }
-
-    setIsTeachingBoard(true);
-    speak(`${toChatStylePrompt(question)} ${activeTeachingStep?.teacherLine || question.hint}.`);
-
-    const total = steps.reduce((mx, s) => Math.max(mx, s.delaySec + s.durationSec), 0);
-    boardTimerRef.current = window.setTimeout(() => {
-      setIsTeachingBoard(false);
-      boardTimerRef.current = null;
-      speak(
-        `Nice progress. ${activeTeachingStep?.checkpointPrompt || "What should we do first?"} ${
-          activeTeachingStep?.microPractice || ""
-        }`
-      );
-    }, Math.ceil(total * 1000) + 400);
+    setIsTeachingBoard(false);
+    await speak(
+      `Nice progress. ${activeTeachingStep?.checkpointPrompt || "What should we do first?"} ${
+        activeTeachingStep?.microPractice || ""
+      }`
+    );
+    if (runId !== teachRunRef.current) return;
+    setAwaitingStudentResponse(true);
   }
 
   function listenAnswer() {
@@ -757,6 +957,9 @@ function VedicTutorContent() {
     }
 
     const recog = new SR();
+    setError("");
+    setIsListening(true);
+    setAwaitingStudentResponse(false);
     recog.lang = "en-IN";
     recog.interimResults = false;
     recog.maxAlternatives = 1;
@@ -764,7 +967,13 @@ function VedicTutorContent() {
       const transcript = event?.results?.[0]?.[0]?.transcript || "";
       setAnswer(String(transcript).trim());
     };
+    recog.onend = () => {
+      setIsListening(false);
+      setAwaitingStudentResponse(true);
+    };
     recog.onerror = () => {
+      setIsListening(false);
+      setAwaitingStudentResponse(true);
       setError("Could not capture voice. Please try again.");
     };
     recog.start();
@@ -774,7 +983,12 @@ function VedicTutorContent() {
     setStatus("loading");
     setError("");
     setCheck(null);
+    setAttemptByQuestion({});
     setDoubtReply("");
+    setPendingKickoff("none");
+    kickoffRunningRef.current = false;
+    setIsListening(false);
+    setAwaitingStudentResponse(false);
 
     try {
       const response = await fetch("/api/vedic/start", {
@@ -802,6 +1016,7 @@ function VedicTutorContent() {
       setLessonExerciseCoverage(data.lesson.exerciseCoverage || []);
       setLessonExerciseFlow(data.lesson.exerciseFlow || []);
       setLessonTeachingScript(data.lesson.teachingScript || []);
+      setLessonScreenplay(data.lesson.screenplay || []);
       setCoreIdeas(data.lesson.coreIdeas || []);
 
       if (data.chapters?.length) setChapters(data.chapters);
@@ -816,7 +1031,13 @@ function VedicTutorContent() {
       setStatus("ready");
 
       clearBoard();
-      speak(`Welcome to ${data.lesson.title}. We will learn it step by step together.`);
+      const welcomeLine = `Welcome to ${data.lesson.title}. We will learn it step by step together.`;
+      setTeacherUtterance(welcomeLine);
+      if (autoTeachEnabled) {
+        setPendingKickoff("welcome");
+      } else {
+        void speak(welcomeLine);
+      }
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Unexpected error");
@@ -828,6 +1049,8 @@ function VedicTutorContent() {
 
     setCheck(null);
     setDoubtReply("");
+    setIsListening(false);
+    setAwaitingStudentResponse(false);
     const responseTimeMs = questionShownAt > 0 ? Math.max(0, Date.now() - questionShownAt) : undefined;
 
     const response = await fetch("/api/vedic/check-answer", {
@@ -848,15 +1071,41 @@ function VedicTutorContent() {
     }
 
     setCheck(data);
+    setAttemptByQuestion((prev) => ({
+      ...prev,
+      [question.questionId]: {
+        correct: !!data.correct,
+        confidence
+      }
+    }));
+    const nextMode = !data.correct ? "remedial" : confidence === "high" ? "challenge" : "core";
+    void logTutorEvent(
+      "ANSWER_ADAPTATION_DECISION",
+      {
+        currentConfidence: confidence,
+        answerCorrect: !!data.correct,
+        nextScreenplayMode: nextMode,
+        tutorAction: data.tutorAction || "",
+        coachTip: data.coachTip || "",
+      },
+      { isCorrect: !!data.correct, scoreDelta: data.correct ? 1 : 0 }
+    );
     if (data.summary) {
       setScore(data.summary);
     }
     if (data.coachTip) {
-      speak(data.coachTip);
+      void speak(data.coachTip);
     } else if (data.correct) {
-      speak("Great work. Tell me how you got that answer, then we will go to the next one.");
+      void speak("Great work. Tell me how you got that answer, then we will go to the next one.");
     } else {
-      speak(`Good attempt. ${activeTeachingStep?.checkpointPrompt || "Let us retry this with one smaller step."}`);
+      const retryLine = `Good attempt. ${activeTeachingStep?.checkpointPrompt || "Let us retry this with one smaller step."}`;
+      if (autoTeachEnabled) {
+        clearBoard();
+        setTeacherUtterance(retryLine);
+        setPendingKickoff("teach");
+      } else {
+        void speak(retryLine);
+      }
     }
   }
 
@@ -866,6 +1115,10 @@ function VedicTutorContent() {
     setAnswer("");
     setCheck(null);
     setDoubtReply("");
+    setPendingKickoff("none");
+    kickoffRunningRef.current = false;
+    setIsListening(false);
+    setAwaitingStudentResponse(false);
 
     const response = await fetch("/api/vedic/next-question", {
       method: "POST",
@@ -903,10 +1156,14 @@ function VedicTutorContent() {
       setLessonExerciseCoverage(data.lesson.exerciseCoverage || []);
       setLessonExerciseFlow(data.lesson.exerciseFlow || []);
       setLessonTeachingScript(data.lesson.teachingScript || []);
+      setLessonScreenplay(data.lesson.screenplay || []);
       setCoreIdeas(data.lesson.coreIdeas || []);
     }
 
     clearBoard();
+    if (autoTeachEnabled) {
+      setPendingKickoff("teach");
+    }
   }
 
   async function askDoubt() {
@@ -923,29 +1180,97 @@ function VedicTutorContent() {
       return;
     }
     setDoubtReply(String(data.reply || ""));
-    speak(String(data.reply || ""));
+    void speak(String(data.reply || ""));
   }
 
+  useEffect(() => {
+    if (status !== "ready" || !question || pendingKickoff === "none" || kickoffRunningRef.current) {
+      return;
+    }
+
+    let cancelled = false;
+    kickoffRunningRef.current = true;
+
+    async function runKickoff() {
+      try {
+        if (pendingKickoff === "welcome") {
+          const welcomeLine = `Welcome to ${lessonTitle || previewChapter?.title || "this chapter"}. We will learn it step by step together.`;
+          setTeacherUtterance(welcomeLine);
+          await speak(welcomeLine);
+        }
+        if (!cancelled) {
+          await teachOnBoard();
+        }
+      } finally {
+        kickoffRunningRef.current = false;
+        if (!cancelled) {
+          setPendingKickoff("none");
+        }
+      }
+    }
+
+    void runKickoff();
+    return () => {
+      cancelled = true;
+    };
+  }, [status, question, pendingKickoff, lessonTitle, previewChapter?.title, teachOnBoard, speak]);
+
   return (
-    <main className="container">
-      <section className="panel" style={{ marginBottom: "0.9rem" }}>
-        <h1 style={{ marginTop: 0 }}>Vedic Math AI Tutor</h1>
-        <p className="muted" style={{ marginTop: 4 }}>
-          Classroom mode: choose avatar, learn on whiteboard, and practice chapter exercises A-I.
-        </p>
+    <main className="container tutor-shell">
+      <section className="panel tutor-setup-panel">
+        <div className="setup-hero-grid">
+          <div className="setup-hero-copy">
+            <span className="setup-hero-kicker">Live AI Classroom</span>
+            <h1 className="tutor-main-title">Vedic Math AI Tutor Classroom</h1>
+            <p className="muted tutor-main-subtitle">
+              Structured like a course lesson: teacher explains on the board, pauses for your response, then moves to guided exercises.
+            </p>
+            <div className="setup-flow-row">
+              <div className="setup-flow-step">
+                <strong>1. Setup</strong>
+                Pick chapter, exercise, and confidence level.
+              </div>
+              <div className="setup-flow-step">
+                <strong>2. Learn</strong>
+                Avatar explains on whiteboard with synchronized voice.
+              </div>
+              <div className="setup-flow-step">
+                <strong>3. Practice</strong>
+                Solve and get instant teacher feedback.
+              </div>
+            </div>
+            <div className="setup-chip-row setup-chip-row-left">
+              <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
+              <span className="pill">Course: {courseId}</span>
+              <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
+            </div>
+          </div>
+
+          <div className="panel setup-hero-stage">
+            <p className="setup-stage-kicker">Teacher Stage</p>
+            <div className="setup-avatar-stage">
+              <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking || status === "loading"} />
+            </div>
+            <p className="setup-stage-title" style={{ color: activeAvatar.color }}>
+              {activeAvatar.name} • {activeAvatar.role}
+            </p>
+            <p className="muted setup-stage-copy">
+              {teacherUtterance || "I will teach each step on the board and wait for your response."}
+            </p>
+          </div>
+        </div>
 
         <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Choose AI Avatar</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "0.6rem", marginBottom: "0.8rem" }}>
+        <div className="avatar-selector-grid">
           {AVATARS.map((avatar) => (
             <button
               key={avatar.id}
               type="button"
               onClick={() => setSelectedAvatarId(avatar.id)}
-              className="button secondary"
+              className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
               style={{
-                textAlign: "left",
                 borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
-                background: selectedAvatarId === avatar.id ? "#f8fafc" : "#fff"
+                ["--avatar-color" as any]: avatar.color
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
@@ -959,12 +1284,9 @@ function VedicTutorContent() {
           ))}
         </div>
 
-        <div className="row" style={{ marginTop: "0.7rem" }}>
-          <div className="col">
-            <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
-            <span className="pill" style={{ marginLeft: "0.4rem" }}>Course: {courseId}</span>
-
-            <div style={{ marginTop: "0.65rem", maxWidth: "460px" }}>
+        <div className="setup-grid">
+          <div className="setup-controls">
+            <div className="field-block">
               <label htmlFor="chapterSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
                 Chapter
               </label>
@@ -982,7 +1304,7 @@ function VedicTutorContent() {
               </select>
             </div>
 
-            <div style={{ marginTop: "0.65rem", maxWidth: "460px" }}>
+            <div className="field-block">
               <label htmlFor="exerciseSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
                 Exercise
               </label>
@@ -1000,7 +1322,7 @@ function VedicTutorContent() {
               </select>
             </div>
 
-            <div style={{ marginTop: "0.65rem", maxWidth: "220px" }}>
+            <div className="field-block confidence-field">
               <label htmlFor="confidence" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
                 Confidence
               </label>
@@ -1016,9 +1338,12 @@ function VedicTutorContent() {
               </select>
             </div>
 
-            <div style={{ marginTop: "0.8rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+            <div className="setup-actions">
               <button className="button" onClick={startSession} disabled={!canStart || status === "loading"}>
                 {status === "loading" ? "Starting..." : sessionId ? "Restart with Chapter" : "Start Tutor Session"}
+              </button>
+              <button className="button secondary" type="button" onClick={() => setAutoTeachEnabled((v) => !v)}>
+                Flow: {autoTeachEnabled ? "Auto Teach" : "Manual"}
               </button>
               <button className="button secondary" type="button" onClick={() => setVoiceEnabled((v) => !v)}>
                 Voice: {voiceEnabled ? "On" : "Off"}
@@ -1026,7 +1351,7 @@ function VedicTutorContent() {
             </div>
           </div>
 
-          <div className="col panel" style={{ background: "#f8fafc" }}>
+          <div className="panel setup-preview">
             <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>What You Will Learn</h3>
             <p style={{ marginTop: 0, marginBottom: "0.4rem" }}><strong>{previewChapter?.title || "Selected Chapter"}</strong></p>
             <p className="muted" style={{ marginTop: 0 }}>
@@ -1049,123 +1374,72 @@ function VedicTutorContent() {
           </div>
         </div>
 
-        {error ? <p style={{ color: "#9f1239" }}>{error}</p> : null}
+        {error ? <p className="error-text">{error}</p> : null}
       </section>
 
       {status === "ready" && question ? (
-        <div className="row">
-          <section className="col panel" style={{ order: 2, flexBasis: "100%" }}>
-            <h2 style={{ marginTop: 0 }}>{lessonTitle || "Chapter"}</h2>
-            <p className="muted">{lessonSource}</p>
-            <p className="muted">Active chapter: {activeChapter} | Active exercise: {activeExerciseGroup} | Subtopic: {question.subtopic || "Practice"}</p>
-            <p className="muted">Estimated chapter time: {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} minutes</p>
-
-            <h3>Core Ideas</h3>
-            <ul>
-              {coreIdeas.map((idea) => (
-                <li key={idea}>{idea}</li>
-              ))}
-            </ul>
-
-            <h3>Subtopics</h3>
-            <ul>
-              {(lessonSubtopics.length ? lessonSubtopics : previewChapter?.subtopics || []).map((topic) => (
-                <li key={topic}>{topic}</li>
-              ))}
-            </ul>
-
-            <p><strong>Exercise Coverage:</strong> {(lessonExerciseCoverage.length ? lessonExerciseCoverage : previewChapter?.exerciseGroups || []).join(", ")}</p>
-            <p><strong>Current Flow:</strong> {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((f) => ` ${f.exerciseGroup}->${f.subtopic}`).join(" | ")}</p>
-
-            <h3>Teacher Script (A-I)</h3>
-            <ul>
-              {visibleTeachingScript.map((step) => (
-                <li key={step.stepId} style={{ marginBottom: "0.45rem" }}>
-                  <strong>{step.exerciseGroup} - {step.subtopic} ({step.boardMode === "free_draw" ? "Free Draw" : "SVG"}):</strong> {step.teacherLine}
-                  <br />
-                  <span className="muted">Checkpoint: {step.checkpointPrompt}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="col panel" style={{ order: 1, flexBasis: "100%" }}>
-            <h2 style={{ marginTop: 0 }}>AI Classroom Board</h2>
-            <div
-              className="stage-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "minmax(180px, 220px) minmax(0, 1fr)",
-                gap: "0.8rem",
-                alignItems: "start"
-              }}
-            >
-              <div className="panel" style={{ background: "#f8fafc", minHeight: "360px" }}>
-                <p style={{ marginTop: 0, marginBottom: "0.35rem", fontWeight: 700, color: activeAvatar.color }}>
-                  {activeAvatar.name} ({activeAvatar.style === "girl" ? "Girl Voice" : "Boy Voice"})
-                </p>
-                <p className="muted" style={{ marginTop: 0, marginBottom: "0.45rem" }}>{activeAvatar.role}</p>
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.45rem" }}>
-                  <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking} />
-                </div>
-                <div
-                  style={{
-                    border: `1px solid ${activeAvatar.color}33`,
-                    borderRadius: "10px",
-                    background: "#fff",
-                    padding: "0.5rem 0.6rem"
-                  }}
-                >
-                  <p style={{ margin: 0, fontSize: "0.88rem", lineHeight: 1.4 }}>
-                    {teacherUtterance || activeTeachingStep?.teacherLine || "Let us begin this step."}
-                  </p>
-                </div>
-                <p className="muted" style={{ marginTop: "0.45rem", marginBottom: 0 }}>
-                  {isSpeaking ? "Speaking live..." : "Listening for your response..."}
+        <>
+          <section className="panel classroom-stage-panel">
+            <div className="classroom-stage-header">
+              <div>
+                <h2 style={{ marginTop: 0, marginBottom: "0.25rem" }}>Classroom Board</h2>
+                <p className="muted" style={{ marginTop: 0 }}>
+                  The teacher demonstrates on board first, then you solve the exercise in the same flow.
                 </p>
               </div>
+              <div className="classroom-chip-row">
+                <span className="pill">Chapter: {activeChapter}</span>
+                <span className="pill">Exercise: {activeExerciseGroup}</span>
+                <span className="pill">Mode: {screenplayMode}</span>
+                <span className="pill">Status: {stageStatusText}</span>
+              </div>
+            </div>
 
-              <div>
+            <div className="classroom-stage-grid">
+              <div className="board-workbench">
                 {activeTeachingStep ? (
-                  <div className="panel" style={{ marginBottom: "0.6rem", background: "#f8fafc" }}>
+                  <div className="panel teaching-snapshot">
                     <p style={{ marginTop: 0, marginBottom: "0.35rem" }}>
                       <strong>Now Teaching:</strong> Exercise {activeTeachingStep.exerciseGroup} - {activeTeachingStep.subtopic}
                     </p>
-                    <p className="muted" style={{ marginTop: 0, marginBottom: "0.25rem" }}>{activeTeachingStep.teacherLine}</p>
-                    <p className="muted" style={{ marginTop: 0, marginBottom: "0.2rem" }}>Board: {activeTeachingStep.boardAction}</p>
+                    <p className="muted" style={{ marginTop: 0, marginBottom: "0.2rem" }}>{activeTeachingStep.teacherLine}</p>
+                    <p className="muted" style={{ marginTop: 0, marginBottom: "0.2rem" }}>Board action: {activeTeachingStep.boardAction}</p>
                     <p className="muted" style={{ marginTop: 0, marginBottom: 0 }}>
                       Mode: {activeTeachingStep.boardMode === "free_draw" ? "Free Draw" : "SVG Diagram"}
                     </p>
                   </div>
                 ) : null}
+
                 <AnimatedBoard
                   steps={boardSteps}
                   runId={boardRunId}
                   showPrompt={isTeachingBoard}
                 />
-                <div style={{ marginTop: "0.55rem", maxWidth: "240px" }}>
-                  <label htmlFor="boardSpeed" style={{ display: "block", marginBottom: "0.25rem", fontWeight: 600 }}>
-                    Teaching Speed: {boardSpeed.toFixed(1)}x
-                  </label>
-                  <input
-                    id="boardSpeed"
-                    type="range"
-                    min={0.7}
-                    max={1.5}
-                    step={0.1}
-                    value={boardSpeed}
-                    onChange={(e) => setBoardSpeed(Number(e.target.value))}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-                <div style={{ marginTop: "0.6rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-                  <button className="button" type="button" onClick={teachOnBoard} disabled={isTeachingBoard}>Teach on Whiteboard</button>
-                  <button className="button secondary" type="button" onClick={clearBoard}>Clear Board</button>
-                  <button className="button secondary" type="button" onClick={() => speak(`${question.questionText}. ${question.hint}`)}>Speak Question</button>
+
+                <div className="panel board-toolbar">
+                  <div className="speed-control">
+                    <label htmlFor="boardSpeed" style={{ display: "block", marginBottom: "0.25rem", fontWeight: 600 }}>
+                      Teaching Speed: {boardSpeed.toFixed(1)}x
+                    </label>
+                    <input
+                      id="boardSpeed"
+                      type="range"
+                      min={0.7}
+                      max={1.5}
+                      step={0.1}
+                      value={boardSpeed}
+                      onChange={(e) => setBoardSpeed(Number(e.target.value))}
+                    />
+                  </div>
+                  <div className="board-actions">
+                    <button className="button" type="button" onClick={teachOnBoard} disabled={isTeachingBoard || isSpeaking}>Teach on Whiteboard</button>
+                    <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>Speak Question</button>
+                    <button className="button secondary" type="button" onClick={clearBoard}>Clear Board</button>
+                  </div>
                 </div>
 
-                <div className="panel" style={{ marginTop: "0.75rem", background: "#fbfefc" }}>
-                  <p className="muted" style={{ marginTop: 0 }}>
+                <div className="panel exercise-workbench">
+                  <p className="muted" style={{ marginTop: 0, marginBottom: "0.35rem" }}>
                     Skill: {question.skill} | Difficulty: {question.difficulty} | Exercise: {question.exerciseGroup}
                   </p>
                   <p style={{ marginTop: 0 }}><strong>{question.questionText}</strong></p>
@@ -1180,14 +1454,14 @@ function VedicTutorContent() {
                     onChange={(e) => setAnswer(e.target.value)}
                     placeholder="Type answer here"
                   />
-                  <div style={{ marginTop: "0.7rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+                  <div className="exercise-actions">
                     <button className="button" onClick={checkAnswer}>Check Answer</button>
                     <button className="button secondary" type="button" onClick={listenAnswer}>Speak Answer</button>
                     <button className="button secondary" onClick={nextQuestion}>Next Question</button>
                   </div>
-                  <p className="muted" style={{ marginTop: "0.6rem", marginBottom: 0 }}>Hint: {question.hint}</p>
+                  <p className="muted" style={{ marginTop: "0.55rem", marginBottom: 0 }}>Hint: {question.hint}</p>
                   {check ? (
-                    <div className="panel" style={{ marginTop: "0.7rem", background: "#fff" }}>
+                    <div className="panel exercise-result">
                       <p style={{ marginTop: 0 }}>
                         Result:{" "}
                         <strong style={{ color: check.correct ? "#065f46" : "#9f1239" }}>
@@ -1202,38 +1476,110 @@ function VedicTutorContent() {
                   ) : null}
                 </div>
               </div>
+
+              <aside className="panel teacher-rail">
+                <p className="teacher-name" style={{ color: activeAvatar.color }}>
+                  {activeAvatar.name} ({activeAvatar.style === "girl" ? "Girl Voice" : "Boy Voice"})
+                </p>
+                <p className="muted teacher-role">{activeAvatar.role}</p>
+                <div className="teacher-avatar-wrap">
+                  <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking} />
+                </div>
+                <div className="teacher-speech" style={{ borderColor: `${activeAvatar.color}55` }}>
+                  <p style={{ margin: 0, fontSize: "0.92rem", lineHeight: 1.45 }}>
+                    {teacherUtterance || activeTeachingStep?.teacherLine || "Let us begin this step."}
+                  </p>
+                </div>
+                <p className="muted teacher-status">{stageStatusText}</p>
+
+                <div className="panel doubt-panel">
+                  <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Ask a Doubt</h3>
+                  <textarea
+                    value={doubt}
+                    onChange={(e) => setDoubt(e.target.value)}
+                    rows={3}
+                    placeholder="Example: Why do we move 2 from 7 in 8 + 7?"
+                  />
+                  <div style={{ marginTop: "0.55rem" }}>
+                    <button className="button secondary" onClick={askDoubt}>Get Explanation</button>
+                  </div>
+                  {doubtReply ? (
+                    <div className="panel doubt-reply">
+                      <pre>{doubtReply}</pre>
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="panel progress-panel">
+                  <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Live Progress</h3>
+                  <div className="progress-grid">
+                    <div className="progress-card">
+                      <span className="muted">Attempts</span>
+                      <strong>{score.attempts}</strong>
+                    </div>
+                    <div className="progress-card">
+                      <span className="muted">Correct</span>
+                      <strong>{score.correctCount}</strong>
+                    </div>
+                    <div className="progress-card">
+                      <span className="muted">Accuracy</span>
+                      <strong>{score.accuracyPct}%</strong>
+                    </div>
+                    <div className="progress-card">
+                      <span className="muted">Exercise</span>
+                      <strong>{activeExerciseGroup}</strong>
+                    </div>
+                  </div>
+                  <p className="muted" style={{ marginBottom: 0, marginTop: "0.6rem" }}>Session: {sessionId || "-"}</p>
+                </div>
+              </aside>
             </div>
           </section>
-        </div>
-      ) : null}
 
-      {status === "ready" && question ? (
-        <div className="row" style={{ marginTop: "0.8rem" }}>
-          <section className="col panel">
-            <h3 style={{ marginTop: 0 }}>Ask a Doubt</h3>
-            <textarea
-              value={doubt}
-              onChange={(e) => setDoubt(e.target.value)}
-              rows={3}
-              placeholder="Example: Why do we move 2 from 7 in 8 + 7?"
-            />
-            <div style={{ marginTop: "0.65rem" }}>
-              <button className="button secondary" onClick={askDoubt}>Get Explanation</button>
-            </div>
-            {doubtReply ? (
-              <div className="panel" style={{ marginTop: "0.7rem", background: "#f8fcfa" }}>
-                <pre>{doubtReply}</pre>
+          <section className="panel lesson-details-panel">
+            <details>
+              <summary>Lesson Plan and Teaching Script</summary>
+              <div className="lesson-details-meta">
+                <p className="muted">{lessonSource}</p>
+                <p className="muted">Estimated chapter time: {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} minutes</p>
+                <p><strong>Exercise Coverage:</strong> {(lessonExerciseCoverage.length ? lessonExerciseCoverage : previewChapter?.exerciseGroups || []).join(", ")}</p>
+                <p><strong>Current Flow:</strong> {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((f) => `${f.exerciseGroup}->${f.subtopic}`).join(" | ")}</p>
+                <p><strong>Screenplay Beats:</strong> {lessonScreenplay.length || 0}</p>
+                <p><strong>Active Screenplay Mode:</strong> {screenplayMode}</p>
               </div>
-            ) : null}
+              <div className="lesson-details-grid">
+                <div>
+                  <h3 style={{ marginTop: 0 }}>Core Ideas</h3>
+                  <ul>
+                    {coreIdeas.map((idea) => (
+                      <li key={idea}>{idea}</li>
+                    ))}
+                  </ul>
 
-            <h3 style={{ marginTop: "1rem" }}>Live Progress</h3>
-            <p><strong>Attempts:</strong> {score.attempts}</p>
-            <p><strong>Correct:</strong> {score.correctCount}</p>
-            <p><strong>Accuracy:</strong> {score.accuracyPct}%</p>
-            <p><strong>Exercise:</strong> {activeExerciseGroup}</p>
-            <p className="muted">Session: {sessionId || "-"}</p>
+                  <h3>Subtopics</h3>
+                  <ul>
+                    {(lessonSubtopics.length ? lessonSubtopics : previewChapter?.subtopics || []).map((topic) => (
+                      <li key={topic}>{topic}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 style={{ marginTop: 0 }}>Teacher Script (A-I)</h3>
+                  <ul className="teacher-script-list">
+                    {visibleTeachingScript.map((step) => (
+                      <li key={step.stepId}>
+                        <strong>{step.exerciseGroup} - {step.subtopic} ({step.boardMode === "free_draw" ? "Free Draw" : "SVG"}):</strong> {step.teacherLine}
+                        <br />
+                        <span className="muted">Checkpoint: {step.checkpointPrompt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </details>
           </section>
-        </div>
+        </>
       ) : null}
       <style jsx global>{`
         @keyframes avatarFloat {
@@ -1244,6 +1590,52 @@ function VedicTutorContent() {
           50% {
             transform: translateY(-3px);
           }
+        }
+        @keyframes avatarTalk {
+          0%,
+          100% {
+            transform: translateY(0) scale(1);
+          }
+          25% {
+            transform: translateY(-2px) scale(1.01);
+          }
+          50% {
+            transform: translateY(-1px) scale(1.015);
+          }
+          75% {
+            transform: translateY(-2px) scale(1.01);
+          }
+        }
+        .teacher-stage-avatar {
+          position: relative;
+          width: min(100%, 240px);
+          aspect-ratio: 3 / 4;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          transform-origin: 50% 88%;
+          animation: avatarFloat 2.8s ease-in-out infinite;
+        }
+        .teacher-stage-avatar.speaking {
+          animation: avatarTalk 0.75s ease-in-out infinite;
+        }
+        .teacher-stage-glow {
+          position: absolute;
+          inset: 12% 8% 10%;
+          border-radius: 28px;
+          background: radial-gradient(circle at 50% 30%, var(--teacher-accent, #0ea5e9) 0%, rgba(255, 255, 255, 0) 72%);
+          filter: blur(14px);
+          opacity: 0.18;
+          pointer-events: none;
+        }
+        .teacher-stage-image {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center bottom;
+          filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.22));
+          position: relative;
+          z-index: 1;
         }
         @keyframes boardDrawLine {
           to {
@@ -1256,7 +1648,7 @@ function VedicTutorContent() {
           }
         }
         @media (max-width: 900px) {
-          .stage-grid {
+          .classroom-stage-grid {
             grid-template-columns: 1fr !important;
           }
         }

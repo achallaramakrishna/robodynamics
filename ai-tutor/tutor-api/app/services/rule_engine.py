@@ -809,8 +809,8 @@ class VedicRuleEngine:
         chapter_script: Dict[str, Any],
     ) -> List[Dict[str, str]]:
         raw = chapter_script.get("teachingScript")
+        by_group: Dict[str, Dict[str, str]] = {}
         if isinstance(raw, list):
-            cleaned: List[Dict[str, str]] = []
             for item in raw:
                 if not isinstance(item, dict):
                     continue
@@ -823,25 +823,37 @@ class VedicRuleEngine:
                 board_mode = str(item.get("boardMode", "")).strip().lower() or self._board_mode_for_subtopic(subtopic)
                 if board_mode not in {"svg", "free_draw"}:
                     board_mode = "svg"
-                cleaned.append(
-                    {
-                        "stepId": str(item.get("stepId", f"{chapter_code}_{group}")),
-                        "exerciseGroup": group,
-                        "subtopic": subtopic,
-                        "boardMode": board_mode,
-                        "teacherLine": teacher_line,
-                        "boardAction": board_action,
-                        "checkpointPrompt": checkpoint,
-                        "microPractice": micro,
-                    }
-                )
-            if cleaned:
-                return cleaned
+                by_group[group] = {
+                    "stepId": str(item.get("stepId", f"{chapter_code}_{group}")),
+                    "exerciseGroup": group,
+                    "subtopic": subtopic,
+                    "boardMode": board_mode,
+                    "teacherLine": teacher_line,
+                    "boardAction": board_action,
+                    "checkpointPrompt": checkpoint,
+                    "microPractice": micro,
+                }
 
         scripted: List[Dict[str, str]] = []
         for item in exercise_flow:
             group = self.normalize_exercise_group(item.get("exerciseGroup"))
+            base = by_group.get(group)
             subtopic = str(item.get("subtopic", "")).strip() or self._subtopic_for_group(chapter_code, group)
+            if base:
+                scripted.append(
+                    {
+                        "stepId": str(base.get("stepId", f"{chapter_code}_{group}")),
+                        "exerciseGroup": group,
+                        "subtopic": str(base.get("subtopic", "")).strip() or subtopic,
+                        "boardMode": str(base.get("boardMode", "svg")).strip().lower() or self._board_mode_for_subtopic(subtopic),
+                        "teacherLine": str(base.get("teacherLine", "")).strip() or self._teacher_line_for_subtopic(subtopic),
+                        "boardAction": str(base.get("boardAction", "")).strip() or self._board_action_for_subtopic(subtopic),
+                        "checkpointPrompt": str(base.get("checkpointPrompt", "")).strip() or self._checkpoint_for_subtopic(subtopic),
+                        "microPractice": str(base.get("microPractice", "")).strip() or self._micro_practice_for_subtopic(subtopic),
+                    }
+                )
+                continue
+
             scripted.append(
                 {
                     "stepId": f"{chapter_code}_{group}",
@@ -856,12 +868,193 @@ class VedicRuleEngine:
             )
         return scripted
 
+    def _build_default_screenplay_beats(self, step: Dict[str, str]) -> List[Dict[str, Any]]:
+        group = self.normalize_exercise_group(step.get("exerciseGroup"))
+        subtopic = str(step.get("subtopic", "")).strip() or "Practice"
+        step_id = str(step.get("stepId", f"{group}_STEP")).strip() or f"{group}_STEP"
+        board_mode = str(step.get("boardMode", "")).strip().lower() or self._board_mode_for_subtopic(subtopic)
+        if board_mode not in {"svg", "free_draw"}:
+            board_mode = "svg"
+        teacher_line = str(step.get("teacherLine", "")).strip() or self._teacher_line_for_subtopic(subtopic)
+        board_action = str(step.get("boardAction", "")).strip() or self._board_action_for_subtopic(subtopic)
+        checkpoint = str(step.get("checkpointPrompt", "")).strip() or self._checkpoint_for_subtopic(subtopic)
+        micro = str(step.get("microPractice", "")).strip() or self._micro_practice_for_subtopic(subtopic)
+
+        return [
+            {
+                "beatId": f"{step_id}_B1",
+                "stepId": step_id,
+                "exerciseGroup": group,
+                "subtopic": subtopic,
+                "sequence": 1,
+                "cue": "intro",
+                "boardMode": board_mode,
+                "teacherLine": teacher_line,
+                "boardAction": board_action,
+                "checkpointPrompt": checkpoint,
+                "pauseType": "none",
+                "holdSec": 0.25,
+                "expectedStudentResponse": "",
+                "fallbackHint": micro,
+                "performanceTag": "core",
+                "useWhenCorrect": None,
+                "useWhenIncorrect": None,
+                "minConfidence": None,
+                "maxConfidence": None,
+            },
+            {
+                "beatId": f"{step_id}_B2",
+                "stepId": step_id,
+                "exerciseGroup": group,
+                "subtopic": subtopic,
+                "sequence": 2,
+                "cue": "explain",
+                "boardMode": board_mode,
+                "teacherLine": "Watch the board carefully. We will solve this in one clean sequence.",
+                "boardAction": board_action,
+                "checkpointPrompt": checkpoint,
+                "pauseType": "none",
+                "holdSec": 0.3,
+                "expectedStudentResponse": "",
+                "fallbackHint": micro,
+                "performanceTag": "core",
+                "useWhenCorrect": None,
+                "useWhenIncorrect": None,
+                "minConfidence": None,
+                "maxConfidence": None,
+            },
+            {
+                "beatId": f"{step_id}_B3",
+                "stepId": step_id,
+                "exerciseGroup": group,
+                "subtopic": subtopic,
+                "sequence": 3,
+                "cue": "checkpoint",
+                "boardMode": board_mode,
+                "teacherLine": checkpoint,
+                "boardAction": "Pause and collect student explanation before moving ahead.",
+                "checkpointPrompt": checkpoint,
+                "pauseType": "student_response",
+                "holdSec": 0.55,
+                "expectedStudentResponse": "Student explains the next step in own words.",
+                "fallbackHint": micro,
+                "performanceTag": "core",
+                "useWhenCorrect": None,
+                "useWhenIncorrect": None,
+                "minConfidence": None,
+                "maxConfidence": None,
+            },
+        ]
+
+    def _build_screenplay(
+        self,
+        chapter_code: str,
+        chapter_script: Dict[str, Any],
+        teaching_script: List[Dict[str, str]],
+    ) -> List[Dict[str, Any]]:
+        step_by_group: Dict[str, Dict[str, str]] = {
+            self.normalize_exercise_group(step.get("exerciseGroup")): step for step in teaching_script
+        }
+        raw = chapter_script.get("screenplay")
+        by_group: Dict[str, List[Dict[str, Any]]] = {g: [] for g in self.EXERCISE_GROUPS}
+
+        if isinstance(raw, list):
+            for item in raw:
+                if not isinstance(item, dict):
+                    continue
+                group = self.normalize_exercise_group(str(item.get("exerciseGroup", "")).upper())
+                step = step_by_group.get(group, {})
+                subtopic = str(item.get("subtopic", "")).strip() or str(step.get("subtopic", "")).strip() or self._subtopic_for_group(chapter_code, group)
+                step_id = str(item.get("stepId", "")).strip() or str(step.get("stepId", "")).strip() or f"{chapter_code}_{group}"
+                cue = str(item.get("cue", "explain")).strip().lower()
+                if cue not in {"intro", "explain", "checkpoint"}:
+                    cue = "explain"
+                board_mode = str(item.get("boardMode", "")).strip().lower() or str(step.get("boardMode", "")).strip().lower() or self._board_mode_for_subtopic(subtopic)
+                if board_mode not in {"svg", "free_draw"}:
+                    board_mode = "svg"
+                teacher_line = str(item.get("teacherLine", "")).strip() or str(step.get("teacherLine", "")).strip() or self._teacher_line_for_subtopic(subtopic)
+                board_action = str(item.get("boardAction", "")).strip() or str(step.get("boardAction", "")).strip() or self._board_action_for_subtopic(subtopic)
+                checkpoint = str(item.get("checkpointPrompt", "")).strip() or str(step.get("checkpointPrompt", "")).strip() or self._checkpoint_for_subtopic(subtopic)
+                pause_type = str(item.get("pauseType", "none")).strip().lower()
+                if pause_type not in {"none", "student_response"}:
+                    pause_type = "none"
+                try:
+                    sequence = int(item.get("sequence", len(by_group[group]) + 1))
+                except Exception:
+                    sequence = len(by_group[group]) + 1
+                if sequence < 1:
+                    sequence = len(by_group[group]) + 1
+                try:
+                    hold_sec = float(item.get("holdSec", 0.3))
+                except Exception:
+                    hold_sec = 0.3
+                hold_sec = max(0.0, min(8.0, hold_sec))
+                beat_id = str(item.get("beatId", "")).strip() or f"{step_id}_S{sequence}"
+                expected = str(item.get("expectedStudentResponse", "")).strip()
+                fallback_hint = str(item.get("fallbackHint", "")).strip() or str(step.get("microPractice", "")).strip() or self._micro_practice_for_subtopic(subtopic)
+                performance_tag = str(item.get("performanceTag", "core")).strip().lower() or "core"
+                if performance_tag not in {"core", "remedial", "challenge"}:
+                    performance_tag = "core"
+                use_when_correct = item.get("useWhenCorrect")
+                if use_when_correct is not None:
+                    if isinstance(use_when_correct, bool):
+                        use_when_correct = use_when_correct
+                    else:
+                        use_when_correct = str(use_when_correct).strip().lower() in {"1", "true", "yes", "y", "on"}
+                use_when_incorrect = item.get("useWhenIncorrect")
+                if use_when_incorrect is not None:
+                    if isinstance(use_when_incorrect, bool):
+                        use_when_incorrect = use_when_incorrect
+                    else:
+                        use_when_incorrect = str(use_when_incorrect).strip().lower() in {"1", "true", "yes", "y", "on"}
+                min_conf = str(item.get("minConfidence", "")).strip().lower()
+                if min_conf not in {"low", "medium", "high"}:
+                    min_conf = None
+                max_conf = str(item.get("maxConfidence", "")).strip().lower()
+                if max_conf not in {"low", "medium", "high"}:
+                    max_conf = None
+                by_group[group].append(
+                    {
+                        "beatId": beat_id,
+                        "stepId": step_id,
+                        "exerciseGroup": group,
+                        "subtopic": subtopic,
+                        "sequence": sequence,
+                        "cue": cue,
+                        "boardMode": board_mode,
+                        "teacherLine": teacher_line,
+                        "boardAction": board_action,
+                        "checkpointPrompt": checkpoint,
+                        "pauseType": pause_type,
+                        "holdSec": hold_sec,
+                        "expectedStudentResponse": expected,
+                        "fallbackHint": fallback_hint,
+                        "performanceTag": performance_tag,
+                        "useWhenCorrect": use_when_correct,
+                        "useWhenIncorrect": use_when_incorrect,
+                        "minConfidence": min_conf,
+                        "maxConfidence": max_conf,
+                    }
+                )
+
+        screenplay: List[Dict[str, Any]] = []
+        for group in self.EXERCISE_GROUPS:
+            scripted_beats = sorted(by_group.get(group, []), key=lambda b: int(b.get("sequence", 1)))
+            if scripted_beats:
+                screenplay.extend(scripted_beats)
+                continue
+            step = step_by_group.get(group)
+            if step:
+                screenplay.extend(self._build_default_screenplay_beats(step))
+        return screenplay
+
     def _build_lessons(self) -> Dict[str, Dict[str, Any]]:
         lessons: Dict[str, Dict[str, Any]] = {}
         for code, chapter in self.CHAPTER_CATALOG.items():
             chapter_script = self._script_loader.chapter_script(code)
             exercise_flow = self._exercise_flow(code)
             teaching_script = self._build_teaching_script(code, exercise_flow, chapter_script)
+            screenplay = self._build_screenplay(code, chapter_script, teaching_script)
             core_ideas = self._safe_list_of_str(chapter_script.get("coreIdeas")) or [
                 "Understand the shortcut pattern first.",
                 "Practice through exercises A to I from easier to harder.",
@@ -895,6 +1088,7 @@ class VedicRuleEngine:
                 "exerciseCoverage": list(self.EXERCISE_GROUPS),
                 "exerciseFlow": exercise_flow,
                 "teachingScript": teaching_script,
+                "screenplay": screenplay,
                 "coreIdeas": core_ideas,
                 "workedExamples": worked_examples,
                 "starterPractice": starter_practice,

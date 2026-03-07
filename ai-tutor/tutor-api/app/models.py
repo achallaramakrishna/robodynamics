@@ -33,6 +33,28 @@ class TeachingStep(BaseModel):
     microPractice: str
 
 
+class ScreenplayBeat(BaseModel):
+    beatId: str
+    stepId: str
+    exerciseGroup: str
+    subtopic: str
+    sequence: int
+    cue: str
+    boardMode: str
+    teacherLine: str
+    boardAction: str
+    checkpointPrompt: str
+    pauseType: str
+    holdSec: float
+    expectedStudentResponse: str
+    fallbackHint: str
+    performanceTag: str = "core"
+    useWhenCorrect: Optional[bool] = None
+    useWhenIncorrect: Optional[bool] = None
+    minConfidence: Optional[str] = None
+    maxConfidence: Optional[str] = None
+
+
 class LessonPayload(BaseModel):
     lessonId: str
     title: str
@@ -44,6 +66,7 @@ class LessonPayload(BaseModel):
     exerciseCoverage: List[str]
     exerciseFlow: List[ExerciseFlowItem]
     teachingScript: List[TeachingStep]
+    screenplay: List[ScreenplayBeat] = Field(default_factory=list)
     coreIdeas: List[str]
     workedExamples: List[LessonExample]
     starterPractice: List[str]
@@ -116,6 +139,16 @@ class DoubtRequest(BaseModel):
     sessionId: str
     message: str
     courseId: Optional[str] = None
+
+
+class EventIngestRequest(BaseModel):
+    sessionId: str
+    eventType: str
+    questionId: Optional[str] = None
+    lessonCode: Optional[str] = None
+    isCorrect: Optional[bool] = None
+    scoreDelta: Optional[int] = None
+    meta: Dict[str, Any] = Field(default_factory=dict)
 
 
 class TutorEvent(BaseModel):

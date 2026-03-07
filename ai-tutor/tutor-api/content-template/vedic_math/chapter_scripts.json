@@ -66,6 +66,16 @@
         "microPractice": "Find deficiency for 9, 6, and 4."
       },
       {
+        "stepId": "L1_E",
+        "exerciseGroup": "E",
+        "subtopic": "Deficiency from ten",
+        "boardMode": "free_draw",
+        "teacherLine": "Now we convert deficiency into fast subtraction thinking.",
+        "boardAction": "Write pairs like 10-3, 10-6, 10-8 and map them to complements.",
+        "checkpointPrompt": "If a number is 4 away from 10, what is its complement?",
+        "microPractice": "Say the complements of 2, 5, and 9 without writing."
+      },
+      {
         "stepId": "L1_F",
         "exerciseGroup": "F",
         "subtopic": "Mental addition",
@@ -76,6 +86,16 @@
         "microPractice": "Solve 7 + 8 and say each step aloud."
       },
       {
+        "stepId": "L1_G",
+        "exerciseGroup": "G",
+        "subtopic": "Mental addition",
+        "boardMode": "free_draw",
+        "teacherLine": "We will do a slightly bigger sum using the same make-10 move.",
+        "boardAction": "Show 17+8 as 17+3+5 and regroup to 20+5.",
+        "checkpointPrompt": "How would you solve 18 + 7 by completing the next ten?",
+        "microPractice": "Try 26 + 9 mentally and speak your steps."
+      },
+      {
         "stepId": "L1_H",
         "exerciseGroup": "H",
         "subtopic": "By addition and subtraction",
@@ -84,7 +104,60 @@
         "boardAction": "Draw hops for 23-8 as 23-3-5.",
         "checkpointPrompt": "Can you do 16-7 with the same jumps?",
         "microPractice": "Solve 18-9 and explain your hops."
+      },
+      {
+        "stepId": "L1_I",
+        "exerciseGroup": "I",
+        "subtopic": "By addition and subtraction",
+        "boardMode": "free_draw",
+        "teacherLine": "Now we mix addition and subtraction with one consistent jump strategy.",
+        "boardAction": "Solve 34-9 and 24+7 using bridge-to-ten jumps on the same line.",
+        "checkpointPrompt": "For 31 - 8, what is your first jump and why?",
+        "microPractice": "Explain one mixed question using jump language."
       }
+    ],
+    "screenplay": [
+      { "beatId": "L1_A_B1", "stepId": "L1_A", "exerciseGroup": "A", "subtopic": "Introduction to Vedic Maths", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "Welcome to Completing the Whole. We begin with the make-10 mindset.", "boardAction": "Write the idea of base 10 and one quick mental example.", "checkpointPrompt": "Why does making 10 first reduce mental load?", "pauseType": "none", "holdSec": 0.3, "expectedStudentResponse": "", "fallbackHint": "Think of 8+7 as 8+(2+5)." },
+      { "beatId": "L1_A_B2", "stepId": "L1_A", "exerciseGroup": "A", "subtopic": "Introduction to Vedic Maths", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "When we complete the base first, the remaining addition is simpler and faster.", "boardAction": "Demonstrate 8+7 by moving 2 to complete 10, then add the remainder.", "checkpointPrompt": "What remains after making 10 in 8+7?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "After 8 becomes 10, only 5 is left." },
+      { "beatId": "L1_A_B3", "stepId": "L1_A", "exerciseGroup": "A", "subtopic": "Introduction to Vedic Maths", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Your turn: explain the first move for 9+6 using this method.", "boardAction": "Pause board and wait for learner explanation.", "checkpointPrompt": "For 9+6, what do you add first to reach 10?", "pauseType": "student_response", "holdSec": 0.7, "expectedStudentResponse": "Student says: add 1 to 9 first, then add remaining 5.", "fallbackHint": "Break 6 into 1 and 5." },
+
+      { "beatId": "L1_B_B1", "stepId": "L1_B", "exerciseGroup": "B", "subtopic": "Ten point circle", "sequence": 1, "cue": "intro", "boardMode": "svg", "teacherLine": "Now we use the ten-point circle to visualize movement and counting.", "boardAction": "Draw labeled circle from 10 to 1 clockwise.", "checkpointPrompt": "Where is 10 placed in the circle?", "pauseType": "none", "holdSec": 0.25, "expectedStudentResponse": "", "fallbackHint": "10 sits at the top." },
+      { "beatId": "L1_B_B2", "stepId": "L1_B", "exerciseGroup": "B", "subtopic": "Ten point circle", "sequence": 2, "cue": "explain", "boardMode": "svg", "teacherLine": "Start at a number, move clockwise by steps, and land on the answer.", "boardAction": "Animate one clockwise jump sequence from start to landing.", "checkpointPrompt": "If we start at 3 and move 4 clockwise, where do we land?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "Count each hop carefully: 4,5,6,7." },
+      { "beatId": "L1_B_B3", "stepId": "L1_B", "exerciseGroup": "B", "subtopic": "Ten point circle", "sequence": 3, "cue": "checkpoint", "boardMode": "svg", "teacherLine": "Tell me the landing point before I reveal it.", "boardAction": "Pause animation and wait for student response.", "checkpointPrompt": "Start at 2 and move 5 clockwise. Where do you stop?", "pauseType": "student_response", "holdSec": 0.75, "expectedStudentResponse": "Student answers 7.", "fallbackHint": "Move one hop at a time: 3,4,5,6,7." },
+
+      { "beatId": "L1_C_B1", "stepId": "L1_C", "exerciseGroup": "C", "subtopic": "Ten point circle", "sequence": 1, "cue": "intro", "boardMode": "svg", "teacherLine": "We repeat with a second circle task to build speed and confidence.", "boardAction": "Highlight start point and direction arrows.", "checkpointPrompt": "What direction do we move for this chapter?", "pauseType": "none", "holdSec": 0.25, "expectedStudentResponse": "", "fallbackHint": "Direction is clockwise." },
+      { "beatId": "L1_C_B2", "stepId": "L1_C", "exerciseGroup": "C", "subtopic": "Ten point circle", "sequence": 2, "cue": "explain", "boardMode": "svg", "teacherLine": "Focus on controlled jumps: start, count, and confirm landing.", "boardAction": "Trace jumps from 5 moving 3 steps clockwise.", "checkpointPrompt": "From 5, jump 3 clockwise. Where do you land?", "pauseType": "none", "holdSec": 0.3, "expectedStudentResponse": "", "fallbackHint": "6, then 7, then 8." },
+      { "beatId": "L1_C_B3", "stepId": "L1_C", "exerciseGroup": "C", "subtopic": "Ten point circle", "sequence": 3, "cue": "checkpoint", "boardMode": "svg", "teacherLine": "Your turn: solve one jump without board help.", "boardAction": "Pause and request verbal student answer.", "checkpointPrompt": "From 7, jump 2 clockwise. What is the landing number?", "pauseType": "student_response", "holdSec": 0.7, "expectedStudentResponse": "Student answers 9.", "fallbackHint": "8 is first hop, 9 is second." },
+
+      { "beatId": "L1_D_B1", "stepId": "L1_D", "exerciseGroup": "D", "subtopic": "Deficiency from ten", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "Now we learn deficiency: how far a number is from 10.", "boardAction": "Draw 10-bar and mark missing parts for sample numbers.", "checkpointPrompt": "What does deficiency from 10 mean?", "pauseType": "none", "holdSec": 0.25, "expectedStudentResponse": "", "fallbackHint": "It is the gap needed to reach 10." },
+      { "beatId": "L1_D_B2", "stepId": "L1_D", "exerciseGroup": "D", "subtopic": "Deficiency from ten", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "For 7, the deficiency is 3 because 7 plus 3 makes 10.", "boardAction": "Shade three missing units on the 10-bar.", "checkpointPrompt": "What is the deficiency of 7 from 10?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "Ask what you add to 7 to get 10." },
+      { "beatId": "L1_D_B3", "stepId": "L1_D", "exerciseGroup": "D", "subtopic": "Deficiency from ten", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Answer quickly: deficiency drill.", "boardAction": "Pause and wait for student to answer three quick deficiencies.", "checkpointPrompt": "Say deficiencies of 9, 6, and 4 from 10.", "pauseType": "student_response", "holdSec": 0.8, "expectedStudentResponse": "Student answers 1, 4, and 6.", "fallbackHint": "Use 10 minus number." },
+
+      { "beatId": "L1_E_B1", "stepId": "L1_E", "exerciseGroup": "E", "subtopic": "Deficiency from ten", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "We now convert deficiency understanding into fast complement thinking.", "boardAction": "Write complement pairs around 10.", "checkpointPrompt": "What is a complement to 10?", "pauseType": "none", "holdSec": 0.25, "expectedStudentResponse": "", "fallbackHint": "A number pair that totals 10." },
+      { "beatId": "L1_E_B2", "stepId": "L1_E", "exerciseGroup": "E", "subtopic": "Deficiency from ten", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "If a number is 4 away from 10, its complement is 6.", "boardAction": "Map 4-away and 6-away on the same bar model.", "checkpointPrompt": "If a number is 4 away from 10, what is its complement?", "pauseType": "none", "holdSec": 0.3, "expectedStudentResponse": "", "fallbackHint": "Complement plus number must be 10." },
+      { "beatId": "L1_E_B3", "stepId": "L1_E", "exerciseGroup": "E", "subtopic": "Deficiency from ten", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "You respond now: quick complements.", "boardAction": "Pause and wait for spoken response.", "checkpointPrompt": "Give complements of 2, 5, and 9.", "pauseType": "student_response", "holdSec": 0.75, "expectedStudentResponse": "Student answers 8, 5, and 1.", "fallbackHint": "Subtract each from 10." },
+
+      { "beatId": "L1_F_B1", "stepId": "L1_F", "exerciseGroup": "F", "subtopic": "Mental addition", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "We return to mental addition using the make-10 split strategy.", "boardAction": "Write 8+7 and show split placeholders.", "checkpointPrompt": "Why do we split the second number?", "pauseType": "none", "holdSec": 0.3, "expectedStudentResponse": "", "fallbackHint": "Splitting helps create 10 first." },
+      { "beatId": "L1_F_B2", "stepId": "L1_F", "exerciseGroup": "F", "subtopic": "Mental addition", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "Split 7 as 2 and 5, make 10 with 8, then add 5 to get 15.", "boardAction": "Show sequence 8+7 -> 8+2+5 -> 10+5.", "checkpointPrompt": "How do you solve 9+6 using the same method?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "Break 6 into 1 and 5." },
+      { "beatId": "L1_F_B3", "stepId": "L1_F", "exerciseGroup": "F", "subtopic": "Mental addition", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Now teach back one full example in your own words.", "boardAction": "Pause board and ask for learner explanation.", "checkpointPrompt": "Explain 7+8 step by step.", "pauseType": "student_response", "holdSec": 0.8, "expectedStudentResponse": "Student explains make-10 and remainder addition.", "fallbackHint": "Move 2 from 8 to make 7 become 9 is one way; then finish." },
+
+      { "beatId": "L1_G_B1", "stepId": "L1_G", "exerciseGroup": "G", "subtopic": "Mental addition", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "Let us scale the same strategy to a two-digit sum.", "boardAction": "Write 17+8 and mark bridge to 20.", "checkpointPrompt": "What nearby base helps here?", "pauseType": "none", "holdSec": 0.25, "expectedStudentResponse": "", "fallbackHint": "Use 20 as the bridge." },
+      { "beatId": "L1_G_B2", "stepId": "L1_G", "exerciseGroup": "G", "subtopic": "Mental addition", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "Break 8 into 3 and 5, do 17+3=20, then 20+5=25.", "boardAction": "Demonstrate regrouping from 17+8 to 20+5.", "checkpointPrompt": "How would you solve 18+7 by completing the next ten?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "Take 2 first to reach 20." },
+      { "beatId": "L1_G_B3", "stepId": "L1_G", "exerciseGroup": "G", "subtopic": "Mental addition", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Your turn: do one without writing.", "boardAction": "Pause and ask student to solve mentally.", "checkpointPrompt": "Solve 26+9 mentally and explain.", "pauseType": "student_response", "holdSec": 0.8, "expectedStudentResponse": "Student reaches 35 with bridge-to-ten logic.", "fallbackHint": "26+4 gives 30, then add 5." },
+
+      { "beatId": "L1_H_B1", "stepId": "L1_H", "exerciseGroup": "H", "subtopic": "By addition and subtraction", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "Now we apply jump strategy for subtraction.", "boardAction": "Draw number line for 23-8 with two jumps.", "checkpointPrompt": "Why split subtraction into jumps?", "pauseType": "none", "holdSec": 0.25, "expectedStudentResponse": "", "fallbackHint": "Jumps reduce big subtraction into easy parts." },
+      { "beatId": "L1_H_B2", "stepId": "L1_H", "exerciseGroup": "H", "subtopic": "By addition and subtraction", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "Compute 23-8 as 23-3=20, then 20-5=15.", "boardAction": "Mark two hops and intermediate result on board.", "checkpointPrompt": "Can you do 16-7 with similar jumps?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "Reach 10 first if it helps." },
+      { "beatId": "L1_H_B3", "stepId": "L1_H", "exerciseGroup": "H", "subtopic": "By addition and subtraction", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "You solve now using jump language.", "boardAction": "Pause and collect learner response.", "checkpointPrompt": "Solve 18-9 and explain each hop.", "pauseType": "student_response", "holdSec": 0.8, "expectedStudentResponse": "Student explains 18-8=10, then 10-1=9.", "fallbackHint": "Break 9 as 8 and 1." },
+
+      { "beatId": "L1_I_B1", "stepId": "L1_I", "exerciseGroup": "I", "subtopic": "By addition and subtraction", "sequence": 1, "cue": "intro", "boardMode": "free_draw", "teacherLine": "Final step: mix addition and subtraction with one consistent bridge strategy.", "boardAction": "Place 34-9 and 24+7 on shared number line model.", "checkpointPrompt": "What common idea connects both operations?", "pauseType": "none", "holdSec": 0.3, "expectedStudentResponse": "", "fallbackHint": "Use friendly base points like 10, 20, 30." },
+      { "beatId": "L1_I_B2", "stepId": "L1_I", "exerciseGroup": "I", "subtopic": "By addition and subtraction", "sequence": 2, "cue": "explain", "boardMode": "free_draw", "teacherLine": "For 31-8, jump to 30 first, then subtract the remainder.", "boardAction": "Demonstrate first jump and completion jump.", "checkpointPrompt": "For 31-8, what is your first jump and why?", "pauseType": "none", "holdSec": 0.35, "expectedStudentResponse": "", "fallbackHint": "Take 1 first to hit 30." },
+      { "beatId": "L1_I_B3", "stepId": "L1_I", "exerciseGroup": "I", "subtopic": "By addition and subtraction", "sequence": 3, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Excellent. Summarize the method like a teacher.", "boardAction": "Pause board for student summary.", "checkpointPrompt": "Explain one mixed question using jump strategy.", "pauseType": "student_response", "holdSec": 0.9, "expectedStudentResponse": "Student explains bridge and remainder steps clearly.", "fallbackHint": "Say: choose bridge, split number, complete." },
+
+      { "beatId": "L1_B_C4", "stepId": "L1_B", "exerciseGroup": "B", "subtopic": "Ten point circle", "sequence": 41, "cue": "checkpoint", "boardMode": "svg", "teacherLine": "Challenge round: answer without counting aloud.", "boardAction": "Pause and ask for fast mental landing.", "checkpointPrompt": "From 4, jump 6 clockwise. Give only the final landing number.", "pauseType": "student_response", "holdSec": 0.85, "expectedStudentResponse": "Student answers 10 quickly.", "fallbackHint": "If needed, do one fast internal count.", "performanceTag": "challenge", "useWhenCorrect": true, "minConfidence": "high" },
+      { "beatId": "L1_G_C4", "stepId": "L1_G", "exerciseGroup": "G", "subtopic": "Mental addition", "sequence": 42, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Challenge round: solve mentally and explain in one line.", "boardAction": "Pause board and ask for compact reasoning.", "checkpointPrompt": "Solve 37+8 mentally and explain in one sentence.", "pauseType": "student_response", "holdSec": 0.9, "expectedStudentResponse": "Student answers 45 with bridge-to-40 strategy.", "fallbackHint": "Bridge to 40 first, then add the remainder.", "performanceTag": "challenge", "useWhenCorrect": true, "minConfidence": "high" },
+
+      { "beatId": "L1_F_R4", "stepId": "L1_F", "exerciseGroup": "F", "subtopic": "Mental addition", "sequence": 51, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "Let us slow down and repair the step together.", "boardAction": "Re-draw split and bridge steps one by one.", "checkpointPrompt": "For 9+6, what tiny split helps you reach 10 first?", "pauseType": "student_response", "holdSec": 0.95, "expectedStudentResponse": "Student says split 6 into 1 and 5.", "fallbackHint": "Always find the piece that completes 10 first.", "performanceTag": "remedial", "useWhenIncorrect": true, "maxConfidence": "medium" },
+      { "beatId": "L1_H_R4", "stepId": "L1_H", "exerciseGroup": "H", "subtopic": "By addition and subtraction", "sequence": 52, "cue": "checkpoint", "boardMode": "free_draw", "teacherLine": "We will rebuild subtraction with smaller hops.", "boardAction": "Show each hop with verbal counting and pause after each.", "checkpointPrompt": "In 18-9, what is the first hop that reaches a friendly number?", "pauseType": "student_response", "holdSec": 1.0, "expectedStudentResponse": "Student says first hop is minus 8 to reach 10.", "fallbackHint": "Find the hop that lands on 10 first.", "performanceTag": "remedial", "useWhenIncorrect": true, "maxConfidence": "medium" }
     ]
   }
 }

@@ -215,9 +215,30 @@
                   <i class="fas fa-chart-line me-1"></i> View Performance
                 </a>
               </c:forEach>
+              <div class="d-grid gap-2 mt-2">
+                <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-atom me-1"></i> NEET Physics Tutor
+                </a>
+                <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-flask me-1"></i> NEET Chemistry Tutor
+                </a>
+                <a href="${ctx}/ai-tutor/launch?module=NEET_MATH" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-square-root-alt me-1"></i> NEET Math Tutor
+                </a>
+              </div>
             </c:when>
             <c:otherwise>
-              <p class="side-note mb-0">No course is available yet for quick actions.</p>
+              <div class="d-grid gap-2">
+                <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-atom me-1"></i> NEET Physics Tutor
+                </a>
+                <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-flask me-1"></i> NEET Chemistry Tutor
+                </a>
+                <a href="${ctx}/ai-tutor/launch?module=NEET_MATH" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-square-root-alt me-1"></i> NEET Math Tutor
+                </a>
+              </div>
             </c:otherwise>
           </c:choose>
         </article>

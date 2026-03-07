@@ -53,6 +53,7 @@ class ScreenplayBeat(BaseModel):
     useWhenIncorrect: Optional[bool] = None
     minConfidence: Optional[str] = None
     maxConfidence: Optional[str] = None
+    svgAnimation: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class LessonPayload(BaseModel):
@@ -149,6 +150,20 @@ class EventIngestRequest(BaseModel):
     isCorrect: Optional[bool] = None
     scoreDelta: Optional[int] = None
     meta: Dict[str, Any] = Field(default_factory=dict)
+
+
+class OrchestratorCommandRequest(BaseModel):
+    sessionId: str
+    command: str
+    meta: Dict[str, Any] = Field(default_factory=dict)
+
+
+class OrchestratorStateResponse(BaseModel):
+    sessionId: str
+    state: str
+    version: int
+    updatedAt: str
+    context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class TutorEvent(BaseModel):

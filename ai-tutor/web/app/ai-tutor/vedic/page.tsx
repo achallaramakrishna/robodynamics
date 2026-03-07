@@ -9,7 +9,10 @@ import type {
   TutorCheckResponse,
   TutorExerciseGroup,
   TutorNextQuestionResponse,
+  TutorOrchestratorSnapshot,
+  TutorOrchestratorState,
   TutorQuestion,
+  TutorRealtimeEvent,
   TutorScreenplayBeat,
   TutorTeachingStep,
   TutorStartResponse
@@ -18,6 +21,7 @@ import type {
 type Status = "idle" | "loading" | "ready" | "error";
 type Confidence = "low" | "medium" | "high";
 type ScreenplayMode = "core" | "remedial" | "challenge";
+type MicPermission = "unknown" | "granted" | "prompt" | "denied" | "unsupported";
 
 type SvgBoardStep =
   | {
@@ -45,8 +49,25 @@ type SvgBoardStep =
     };
 
 type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" };
+type ConversationRole = "tutor" | "student" | "system";
+type ConversationChannel = "voice" | "text" | "doubt" | "system";
+type ConversationTurn = {
+  id: string;
+  role: ConversationRole;
+  channel: ConversationChannel;
+  text: string;
+  at: number;
+  questionId?: string;
+  exerciseGroup?: string;
+};
 
-const COURSE_ID = "vedic_math";
+const DEFAULT_COURSE_ID = "vedic_math";
+const MODULE_TO_COURSE_ID: Record<string, string> = {
+  VEDIC_MATH: "vedic_math",
+  NEET_PHYSICS: "neet_physics",
+  NEET_CHEMISTRY: "neet_chemistry",
+  NEET_MATH: "neet_math"
+};
 const EX_GROUP_KEYS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 
 const AVATARS: Avatar[] = [
@@ -198,7 +219,7 @@ function AnimatedBoard({
           );
         })}
         {showPrompt ? (
-          <text x="22" y="322" fill="#7c2d12" fontSize={14} style={{ opacity: 0.92 }}>
+          <text x="500" y="22" fill="#7c2d12" fontSize={12} style={{ opacity: 0.9 }}>
             Teacher check-in: Tell me your next step in your own words.
           </text>
         ) : null}
@@ -332,11 +353,15 @@ export default function VedicTutorPage() {
 function VedicTutorContent() {
   const params = useSearchParams();
   const token = params.get("token") || "";
+  const studentNameFromQuery = (params.get("studentName") || params.get("learnerName") || "").trim();
+  const moduleFromQuery = (params.get("module") || "").trim().toUpperCase();
+  const courseIdFromQuery = (params.get("courseId") || "").trim().toLowerCase();
+  const requestedCourseId = courseIdFromQuery || MODULE_TO_COURSE_ID[moduleFromQuery] || DEFAULT_COURSE_ID;
 
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [sessionId, setSessionId] = useState("");
-  const [courseId, setCourseId] = useState(COURSE_ID);
+  const [courseId, setCourseId] = useState(requestedCourseId);
 
   const [lessonTitle, setLessonTitle] = useState("");
   const [lessonSource, setLessonSource] = useState("");
@@ -355,25 +380,34 @@ function VedicTutorContent() {
   const [activeChapter, setActiveChapter] = useState(DEFAULT_CHAPTERS[0].chapterCode);
   const [selectedExerciseGroup, setSelectedExerciseGroup] = useState("A");
   const [activeExerciseGroup, setActiveExerciseGroup] = useState("A");
+  const [studentName, setStudentName] = useState("");
 
   const [question, setQuestion] = useState<TutorQuestion | null>(null);
   const [questionShownAt, setQuestionShownAt] = useState(0);
   const [answer, setAnswer] = useState("");
+  const [lastAnswerMode, setLastAnswerMode] = useState<"typed" | "voice">("typed");
   const [confidence, setConfidence] = useState<Confidence>("medium");
   const [check, setCheck] = useState<TutorCheckResponse | null>(null);
   const [doubt, setDoubt] = useState("");
   const [doubtReply, setDoubtReply] = useState("");
+  const [conversationLog, setConversationLog] = useState<ConversationTurn[]>([]);
   const [score, setScore] = useState({ attempts: 0, correctCount: 0, accuracyPct: 0 });
   const [attemptByQuestion, setAttemptByQuestion] = useState<Record<string, { correct: boolean; confidence: Confidence }>>({});
+  const [flowState, setFlowState] = useState<TutorOrchestratorState>("idle");
+  const [flowVersion, setFlowVersion] = useState(0);
+  const [realtimeConnected, setRealtimeConnected] = useState(false);
 
   const [selectedAvatarId, setSelectedAvatarId] = useState(AVATARS[0].id);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [micPermission, setMicPermission] = useState<MicPermission>("unknown");
   const [isTeachingBoard, setIsTeachingBoard] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [isEvaluatingAnswer, setIsEvaluatingAnswer] = useState(false);
   const [awaitingStudentResponse, setAwaitingStudentResponse] = useState(false);
   const [autoTeachEnabled, setAutoTeachEnabled] = useState(true);
   const [pendingKickoff, setPendingKickoff] = useState<"none" | "welcome" | "teach">("none");
+  const [pendingKickoffToken, setPendingKickoffToken] = useState("");
   const [teacherUtterance, setTeacherUtterance] = useState("");
   const [boardSteps, setBoardSteps] = useState<SvgBoardStep[]>([]);
   const [boardRunId, setBoardRunId] = useState(0);
@@ -381,10 +415,18 @@ function VedicTutorContent() {
 
   const boardTimerRef = useRef<number | null>(null);
   const boardWaitResolveRef = useRef<(() => void) | null>(null);
+  const answerInputRef = useRef<HTMLInputElement | null>(null);
+  const listenTimerRef = useRef<number | null>(null);
+  const speechRecognitionRef = useRef<any>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
   const speakSeqRef = useRef(0);
   const teachRunRef = useRef(0);
   const kickoffRunningRef = useRef(false);
+  const lastKickoffTokenRef = useRef("");
+  const autoListenQuestionRef = useRef("");
+  const speakRef = useRef<(text: string) => Promise<void>>(async () => {});
+  const teachOnBoardRef = useRef<() => Promise<void>>(async () => {});
+  const sessionRecoveryRef = useRef(false);
 
   const canStart = useMemo(() => token.trim().length > 20, [token]);
   const chapterList = chapters.length ? chapters : DEFAULT_CHAPTERS;
@@ -429,6 +471,10 @@ function VedicTutorContent() {
     if (!question) return null;
     return attemptByQuestion[question.questionId] || null;
   }, [attemptByQuestion, question]);
+  const isFirstScene = useMemo(
+    () => !!question && score.attempts === 0 && !activeAttempt,
+    [question, score.attempts, activeAttempt]
+  );
   const screenplayMode: ScreenplayMode = useMemo(() => {
     if (!activeAttempt) return "core";
     if (!activeAttempt.correct) return "remedial";
@@ -482,11 +528,43 @@ function VedicTutorContent() {
 
   const stageStatusText = useMemo(() => {
     if (isTeachingBoard) return "Teaching on whiteboard...";
+    if (isEvaluatingAnswer) return "Evaluating your answer...";
     if (isSpeaking) return "Speaking live...";
     if (isListening) return "Listening to your answer...";
-    if (awaitingStudentResponse) return "Your turn now: answer by voice or text.";
+    if (awaitingStudentResponse) {
+      return micPermission === "denied"
+        ? "Your turn now: type your answer and click Check Answer."
+        : "Your turn now: answer by voice or text.";
+    }
     return "Ready for next step.";
-  }, [isTeachingBoard, isSpeaking, isListening, awaitingStudentResponse]);
+  }, [isTeachingBoard, isEvaluatingAnswer, isSpeaking, isListening, awaitingStudentResponse, micPermission]);
+
+  const conversationInsights = useMemo(() => {
+    const tutorTurns = conversationLog.filter((t) => t.role === "tutor");
+    const studentTurns = conversationLog.filter((t) => t.role === "student");
+    const voiceStudentTurns = studentTurns.filter((t) => t.channel === "voice");
+    const doubtTurns = studentTurns.filter((t) => t.channel === "doubt");
+    const responseGaps: number[] = [];
+
+    for (const sTurn of studentTurns) {
+      const prevTutor = [...tutorTurns].reverse().find((t) => t.at < sTurn.at);
+      if (prevTutor) {
+        responseGaps.push((sTurn.at - prevTutor.at) / 1000);
+      }
+    }
+
+    const avgResponseSec = responseGaps.length
+      ? Math.round(responseGaps.reduce((a, b) => a + b, 0) / responseGaps.length)
+      : 0;
+
+    return {
+      tutorTurns: tutorTurns.length,
+      studentTurns: studentTurns.length,
+      voiceStudentTurns: voiceStudentTurns.length,
+      doubtTurns: doubtTurns.length,
+      avgResponseSec,
+    };
+  }, [conversationLog]);
 
   function stopVoicePlayback() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -503,12 +581,33 @@ function VedicTutorContent() {
     setIsSpeaking(false);
   }
 
+  function clearListenTimeout() {
+    if (listenTimerRef.current) {
+      window.clearTimeout(listenTimerRef.current);
+      listenTimerRef.current = null;
+    }
+  }
+
+  function stopListeningSession() {
+    clearListenTimeout();
+    const recog = speechRecognitionRef.current;
+    speechRecognitionRef.current = null;
+    if (recog && typeof recog.stop === "function") {
+      try {
+        recog.stop();
+      } catch {
+        // ignore stop failure
+      }
+    }
+    setIsListening(false);
+  }
+
   useEffect(() => {
     let cancelled = false;
 
     async function loadCatalog() {
       try {
-        const response = await fetch(`/api/vedic/catalog?courseId=${encodeURIComponent(COURSE_ID)}`, { cache: "no-store" });
+        const response = await fetch(`/api/vedic/catalog?courseId=${encodeURIComponent(requestedCourseId)}`, { cache: "no-store" });
         const data: TutorCatalogResponse & { error?: string } = await response.json();
         if (!response.ok || data.error || cancelled) {
           return;
@@ -545,15 +644,143 @@ function VedicTutorContent() {
         boardWaitResolveRef.current();
         boardWaitResolveRef.current = null;
       }
+      stopListeningSession();
       stopVoicePlayback();
     };
-  }, []);
+  }, [requestedCourseId]);
 
   useEffect(() => {
     if (!voiceEnabled) {
       stopVoicePlayback();
     }
   }, [voiceEnabled]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (studentNameFromQuery) {
+      setStudentName(studentNameFromQuery);
+      window.localStorage.setItem("aiTutorStudentName", studentNameFromQuery);
+      return;
+    }
+    const storedName = window.localStorage.getItem("aiTutorStudentName") || "";
+    if (storedName) {
+      setStudentName(storedName);
+    }
+  }, [studentNameFromQuery]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const permissionsApi = (navigator as any)?.permissions;
+    if (!permissionsApi?.query) {
+      setMicPermission("unsupported");
+      return;
+    }
+
+    let disposed = false;
+    let permissionStatus: any = null;
+
+    permissionsApi
+      .query({ name: "microphone" })
+      .then((status: any) => {
+        if (disposed) return;
+        permissionStatus = status;
+        const next = String(status?.state || "unknown");
+        if (next === "granted" || next === "prompt" || next === "denied") {
+          setMicPermission(next);
+        } else {
+          setMicPermission("unknown");
+        }
+        status.onchange = () => {
+          const changed = String(status?.state || "unknown");
+          if (changed === "granted" || changed === "prompt" || changed === "denied") {
+            setMicPermission(changed);
+          } else {
+            setMicPermission("unknown");
+          }
+        };
+      })
+      .catch(() => {
+        if (!disposed) {
+          setMicPermission("unknown");
+        }
+      });
+
+    return () => {
+      disposed = true;
+      if (permissionStatus) {
+        permissionStatus.onchange = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (status !== "ready" || !sessionId || typeof window === "undefined") {
+      setRealtimeConnected(false);
+      return;
+    }
+
+    let disposed = false;
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const wsUrl = `${protocol}://${window.location.host}/ai-tutor-api/vedic/ws/${encodeURIComponent(sessionId)}`;
+    const ws = new WebSocket(wsUrl);
+
+    ws.onopen = () => {
+      if (!disposed) {
+        setRealtimeConnected(true);
+      }
+    };
+    ws.onmessage = (event) => {
+      if (disposed) return;
+      try {
+        const payload = JSON.parse(String(event.data || "{}")) as TutorRealtimeEvent;
+        if (payload.state) setFlowState(payload.state);
+        if (typeof payload.version === "number") setFlowVersion(payload.version);
+      } catch {
+        // ignore malformed realtime frame
+      }
+    };
+    ws.onclose = () => {
+      if (!disposed) {
+        setRealtimeConnected(false);
+      }
+    };
+    ws.onerror = () => {
+      if (!disposed) {
+        setRealtimeConnected(false);
+      }
+    };
+
+    return () => {
+      disposed = true;
+      try {
+        ws.close();
+      } catch {
+        // noop
+      }
+      setRealtimeConnected(false);
+    };
+  }, [status, sessionId]);
+
+  useEffect(() => {
+    if (status !== "ready" || !sessionId || realtimeConnected) {
+      return;
+    }
+    void refreshFlowState();
+    const id = window.setInterval(() => {
+      void refreshFlowState();
+    }, 4500);
+    return () => {
+      window.clearInterval(id);
+    };
+  }, [status, sessionId, realtimeConnected]);
+
+  useEffect(() => {
+    if (!awaitingStudentResponse || isListening) return;
+    const id = window.setTimeout(() => {
+      answerInputRef.current?.focus();
+    }, 120);
+    return () => window.clearTimeout(id);
+  }, [awaitingStudentResponse, isListening]);
 
   async function speak(text: string): Promise<void> {
     const line = (text || "").trim();
@@ -562,6 +789,7 @@ function VedicTutorContent() {
       return;
     }
     setTeacherUtterance(line);
+    addConversationTurn("tutor", voiceEnabled ? "voice" : "text", line, { source: "speak" });
     if (!voiceEnabled || typeof window === "undefined") {
       setIsSpeaking(false);
       return;
@@ -705,7 +933,58 @@ function VedicTutorContent() {
     return lines;
   }
 
-  function buildBoardSteps(q: TutorQuestion, avatar: Avatar, teachingStep: TutorTeachingStep | null): SvgBoardStep[] {
+  function compactText(text: string, max = 72): string {
+    const clean = (text || "").replace(/\s+/g, " ").trim();
+    if (!clean) return "";
+    if (clean.length <= max) return clean;
+    return `${clean.slice(0, Math.max(0, max - 1)).trimEnd()}...`;
+  }
+
+  function normalizeSvgBoardSteps(raw?: TutorScreenplayBeat["svgAnimation"]): SvgBoardStep[] {
+    if (!Array.isArray(raw)) return [];
+    const normalized: SvgBoardStep[] = [];
+    for (const item of raw.slice(0, 24)) {
+      if (!item || typeof item !== "object") continue;
+      if (item.kind === "line") {
+        normalized.push({
+          kind: "line",
+          id: String(item.id || `line_${normalized.length + 1}`),
+          x1: Number(item.x1 ?? 420),
+          y1: Number(item.y1 ?? 96),
+          x2: Number(item.x2 ?? 620),
+          y2: Number(item.y2 ?? 96),
+          color: item.color || "#0ea5e9",
+          width: Number(item.width ?? 2),
+          delaySec: Math.max(0, Number(item.delaySec ?? 0)),
+          durationSec: Math.max(0.1, Number(item.durationSec ?? 0.45))
+        });
+        continue;
+      }
+      if (item.kind === "text") {
+        const text = String(item.text || "").trim();
+        if (!text) continue;
+        normalized.push({
+          kind: "text",
+          id: String(item.id || `text_${normalized.length + 1}`),
+          x: Number(item.x ?? 430),
+          y: Number(item.y ?? 82),
+          text,
+          color: item.color || "#1e293b",
+          size: Number(item.size ?? 14),
+          delaySec: Math.max(0, Number(item.delaySec ?? 0)),
+          durationSec: Math.max(0.1, Number(item.durationSec ?? 0.45))
+        });
+      }
+    }
+    return normalized;
+  }
+
+  function buildBoardSteps(
+    q: TutorQuestion,
+    avatar: Avatar,
+    teachingStep: TutorTeachingStep | null,
+    beat: TutorScreenplayBeat | null = null
+  ): SvgBoardStep[] {
     const steps: SvgBoardStep[] = [];
     const speed = Math.max(0.5, boardSpeed);
     let delay = 0;
@@ -741,24 +1020,33 @@ function VedicTutorContent() {
       delay += 0.35 / speed;
     };
 
-    addText("header", 20, 30, "Classroom Whiteboard Session", avatar.color, 18);
-    addLine("header_line", 16, 42, 744, 42, "#cbd5e1", 1);
-    if (teachingStep) {
-      addText("teacher_line", 20, 64, teachingStep.teacherLine, "#1e293b", 14);
-      addText("board_action", 20, 84, `Board plan: ${teachingStep.boardAction}`, "#334155", 13);
+    addText("header", 20, 26, "Classroom Whiteboard Session", avatar.color, 17);
+    addLine("header_line", 16, 36, 744, 36, "#cbd5e1", 1);
+
+    const customSvgSteps = normalizeSvgBoardSteps(beat?.svgAnimation);
+    if (customSvgSteps.length) {
+      let maxTimeline = 0;
+      for (const step of customSvgSteps) {
+        steps.push({
+          ...step,
+          delaySec: delay + step.delaySec
+        });
+        maxTimeline = Math.max(maxTimeline, step.delaySec + step.durationSec);
+      }
+      delay += maxTimeline + 0.2;
     }
 
-    if (teachingStep?.boardMode === "free_draw") {
-      addText("fd_intro", 20, 106, "Step 1: I will free-draw the method flow.", "#334155", 14);
-      addLine("fd_1", 420, 106, 620, 106, avatar.color, 2);
-      addLine("fd_2", 420, 130, 670, 130, avatar.color, 2);
-      addLine("fd_3", 420, 154, 600, 154, avatar.color, 2);
-      addLine("fd_arrow", 620, 106, 655, 130, "#ef4444", 2);
-      addText("fd_note", 430, 178, "Teacher writes and explains each transition.", "#1e293b", 12);
+    if (!customSvgSteps.length && teachingStep?.boardMode === "free_draw") {
+      addText("fd_intro", 20, 62, "Step 1: Board demo of the method flow.", "#334155", 14);
+      addLine("fd_1", 420, 62, 620, 62, avatar.color, 2);
+      addLine("fd_2", 420, 86, 670, 86, avatar.color, 2);
+      addLine("fd_3", 420, 110, 600, 110, avatar.color, 2);
+      addLine("fd_arrow", 620, 62, 655, 86, "#ef4444", 2);
+      addText("fd_note", 430, 134, "Teacher writes each transition.", "#1e293b", 12);
     }
 
-    if (teachingStep?.boardMode !== "free_draw" && (q.subtopic || "").toLowerCase().includes("ten point circle")) {
-      addText("tpc_intro", 20, 106, "Step 1: I will draw the ten-point circle first.", "#334155", 14);
+    if (!customSvgSteps.length && teachingStep?.boardMode !== "free_draw" && (q.subtopic || "").toLowerCase().includes("ten point circle")) {
+      addText("tpc_intro", 20, 62, "Step 1: I will draw the ten-point circle first.", "#334155", 14);
       const ringPoints = [
         { x: 520, y: 156, label: "9" },
         { x: 540, y: 202, label: "8" },
@@ -780,17 +1068,17 @@ function VedicTutorContent() {
       addText("tpc_labels", 250, 320, "10 at top, then 9..1 clockwise", "#1e293b", 13);
     }
 
-    addText("question_title", 20, 202, "Step 2: Let's understand the task.", "#334155", 14);
-    const boardQuestionLines = splitText(q.questionText, 56).slice(0, 2);
+    addText("question_title", 20, 176, "Step 2: Let's understand the task.", "#334155", 14);
+    const boardQuestionLines = splitText(q.questionText, 44).slice(0, 2);
     for (const [idx, line] of boardQuestionLines.entries()) {
-      addText(`q_line_${idx}`, 20, 226 + idx * 20, line, "#0f172a", 15);
+      addText(`q_line_${idx}`, 20, 198 + idx * 20, line, "#0f172a", 15);
     }
-    addText("subtopic", 20, 286, `Subtopic: ${q.subtopic || q.skill}`, "#334155", 14);
-    addText("hint", 20, 306, `Hint: ${q.hint}`, "#334155", 14);
+    addText("subtopic", 20, 250, compactText(`Subtopic: ${q.subtopic || q.skill}`, 64), "#334155", 14);
+    addText("hint", 20, 272, compactText(`Hint: ${q.hint}`, 64), "#334155", 14);
     if (teachingStep) {
-      addText("checkpoint", 20, 326, `Checkpoint: ${teachingStep.checkpointPrompt}`, "#7c2d12", 14);
+      addText("checkpoint", 20, 294, compactText(`Checkpoint: ${teachingStep.checkpointPrompt}`, 64), "#7c2d12", 14);
     } else {
-      addText("check_u", 20, 326, "Can you tell me your first step?", "#7c2d12", 15);
+      addText("check_u", 20, 294, "Can you tell me your first step?", "#7c2d12", 15);
     }
     return steps;
   }
@@ -821,6 +1109,125 @@ function VedicTutorContent() {
     }
   }
 
+  function addConversationTurn(role: ConversationRole, channel: ConversationChannel, text: string, meta: Record<string, unknown> = {}) {
+    const cleaned = (text || "").replace(/\s+/g, " ").trim();
+    if (!cleaned) return;
+    const turn: ConversationTurn = {
+      id: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      role,
+      channel,
+      text: cleaned,
+      at: Date.now(),
+      questionId: question?.questionId,
+      exerciseGroup: activeExerciseGroup
+    };
+    setConversationLog((prev) => {
+      const next = [...prev, turn];
+      return next.length > 300 ? next.slice(next.length - 300) : next;
+    });
+    void logTutorEvent("CONVERSATION_TURN", {
+      role,
+      channel,
+      text: cleaned,
+      chapterCode: activeChapter,
+      exerciseGroup: activeExerciseGroup,
+      questionId: question?.questionId || "",
+      flowState,
+      screenplayMode,
+      ...meta
+    });
+  }
+
+  function downloadConversationLog() {
+    if (typeof window === "undefined" || !conversationLog.length) return;
+    const payload = {
+      sessionId: sessionId || "",
+      chapterCode: activeChapter,
+      exerciseGroup: activeExerciseGroup,
+      exportedAt: new Date().toISOString(),
+      turns: conversationLog.map((t) => ({
+        ...t,
+        isoTime: new Date(t.at).toISOString()
+      }))
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ai_tutor_conversation_${sessionId || "session"}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  }
+
+  async function sendOrchestratorCommand(command: string, meta: Record<string, unknown> = {}) {
+    if (!sessionId) return;
+    try {
+      const response = await fetch("/api/vedic/orchestrator/command", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId,
+          command,
+          meta,
+        }),
+      });
+      const data: TutorOrchestratorSnapshot & { error?: string } = await response.json().catch(() => ({ error: "bad_json" } as any));
+      if (!response.ok || data.error) return;
+      setFlowState(data.state);
+      setFlowVersion(data.version || 0);
+    } catch {
+      // flow commands must not block tutor UX
+    }
+  }
+
+  function isExpiredSessionError(message: string): boolean {
+    return /invalid or expired tutor session/i.test(message || "");
+  }
+
+  async function recoverExpiredSession(trigger: string) {
+    if (sessionRecoveryRef.current) return;
+    if (!token || token.trim().length <= 20) return;
+    sessionRecoveryRef.current = true;
+    setError("Session expired on server. Reconnecting...");
+    addConversationTurn("system", "system", "Session expired. Recovering a new tutor session.", {
+      source: "session_recovery_start",
+      trigger,
+    });
+    try {
+      await startSession();
+      setError("");
+      addConversationTurn("system", "system", "Tutor session recovered.", {
+        source: "session_recovery_success",
+        trigger,
+      });
+    } catch {
+      setError("Session recovery failed. Please click Start Tutor Session.");
+      addConversationTurn("system", "system", "Tutor session recovery failed.", {
+        source: "session_recovery_failed",
+        trigger,
+      });
+    } finally {
+      sessionRecoveryRef.current = false;
+    }
+  }
+
+  async function refreshFlowState() {
+    if (!sessionId) return;
+    try {
+      const response = await fetch(`/api/vedic/orchestrator/state?sessionId=${encodeURIComponent(sessionId)}`, {
+        cache: "no-store",
+      });
+      const data: TutorOrchestratorSnapshot & { error?: string } = await response.json().catch(() => ({ error: "bad_json" } as any));
+      if (!response.ok || data.error) return;
+      setFlowState(data.state);
+      setFlowVersion(data.version || 0);
+    } catch {
+      // polling fallback is best-effort
+    }
+  }
+
   function clearBoard() {
     teachRunRef.current += 1;
     setBoardSteps([]);
@@ -834,7 +1241,7 @@ function VedicTutorContent() {
       boardWaitResolveRef.current = null;
     }
     setIsTeachingBoard(false);
-    setIsListening(false);
+    stopListeningSession();
     setAwaitingStudentResponse(false);
   }
 
@@ -859,6 +1266,11 @@ function VedicTutorContent() {
 
   async function teachOnBoard() {
     if (!question || isTeachingBoard) return;
+    void sendOrchestratorCommand("START_LOOP", {
+      trigger: "teach_on_board",
+      questionId: question.questionId,
+      mode: screenplayMode,
+    });
     const runId = teachRunRef.current + 1;
     teachRunRef.current = runId;
     setError("");
@@ -898,7 +1310,7 @@ function VedicTutorContent() {
           checkpointPrompt: beat.checkpointPrompt || activeTeachingStep?.checkpointPrompt || "What should we do first?",
           microPractice: beat.fallbackHint || activeTeachingStep?.microPractice || ""
         };
-        const steps = buildBoardSteps(question, activeAvatar, beatStep);
+        const steps = buildBoardSteps(question, activeAvatar, beatStep, beat);
         setBoardSteps(steps);
         setBoardRunId((v) => v + 1);
         await Promise.all([
@@ -907,6 +1319,10 @@ function VedicTutorContent() {
         ]);
         if (runId !== teachRunRef.current) return;
         if (beat.pauseType === "student_response") {
+          void sendOrchestratorCommand("BOARD_COMPLETE", {
+            beatId: beat.beatId,
+            checkpointPrompt: beat.checkpointPrompt,
+          });
           void logTutorEvent("SCREENPLAY_CHECKPOINT_WAIT", {
             mode: screenplayMode,
             beatId: beat.beatId,
@@ -918,6 +1334,9 @@ function VedicTutorContent() {
           return;
         }
       }
+      void sendOrchestratorCommand("BOARD_COMPLETE", {
+        reason: "screenplay_completed_without_explicit_checkpoint",
+      });
       setIsTeachingBoard(false);
       setAwaitingStudentResponse(true);
       return;
@@ -928,7 +1347,7 @@ function VedicTutorContent() {
       reason: "no_screenplay_for_group",
       exerciseGroup: question.exerciseGroup,
     });
-    const steps = buildBoardSteps(question, activeAvatar, activeTeachingStep);
+    const steps = buildBoardSteps(question, activeAvatar, activeTeachingStep, null);
     setBoardSteps(steps);
     setBoardRunId((v) => v + 1);
     await Promise.all([
@@ -938,6 +1357,9 @@ function VedicTutorContent() {
     if (runId !== teachRunRef.current) return;
 
     setIsTeachingBoard(false);
+    void sendOrchestratorCommand("BOARD_COMPLETE", {
+      reason: "fallback_board_complete",
+    });
     await speak(
       `Nice progress. ${activeTeachingStep?.checkpointPrompt || "What should we do first?"} ${
         activeTeachingStep?.microPractice || ""
@@ -947,8 +1369,24 @@ function VedicTutorContent() {
     setAwaitingStudentResponse(true);
   }
 
+  useEffect(() => {
+    speakRef.current = speak;
+  }, [speak]);
+
+  useEffect(() => {
+    teachOnBoardRef.current = teachOnBoard;
+  }, [teachOnBoard]);
+
   function listenAnswer() {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || isEvaluatingAnswer) return;
+    if (micPermission === "denied") {
+      setAwaitingStudentResponse(true);
+      setError("Microphone is blocked in browser settings. Continue by typing your answer.");
+      addConversationTurn("system", "system", "Microphone permission is blocked. Switched to text input.", {
+        source: "listen_denied",
+      });
+      return;
+    }
     const w = window as Window & { webkitSpeechRecognition?: any; SpeechRecognition?: any };
     const SR = w.SpeechRecognition || w.webkitSpeechRecognition;
     if (!SR) {
@@ -956,25 +1394,82 @@ function VedicTutorContent() {
       return;
     }
 
+    clearListenTimeout();
     const recog = new SR();
+    speechRecognitionRef.current = recog;
+    let submittedFromVoice = false;
+    let heardTranscript = false;
     setError("");
     setIsListening(true);
     setAwaitingStudentResponse(false);
+    addConversationTurn("system", "system", "Voice listening started.", { source: "listen_start" });
     recog.lang = "en-IN";
+    recog.continuous = false;
     recog.interimResults = false;
     recog.maxAlternatives = 1;
+    listenTimerRef.current = window.setTimeout(() => {
+      try {
+        recog.stop();
+      } catch {
+        // ignore stop errors
+      }
+      speechRecognitionRef.current = null;
+      setIsListening(false);
+      setAwaitingStudentResponse(true);
+      setError("Listening timed out. Click Speak Answer again, or type and press Enter.");
+      addConversationTurn("system", "system", "Voice listening timeout.", { source: "listen_timeout" });
+      clearListenTimeout();
+    }, 9000);
+
     recog.onresult = (event: any) => {
       const transcript = event?.results?.[0]?.[0]?.transcript || "";
-      setAnswer(String(transcript).trim());
+      const spokenAnswer = String(transcript || "").trim();
+      heardTranscript = spokenAnswer.length > 0;
+      clearListenTimeout();
+      setAnswer(spokenAnswer);
+      setLastAnswerMode("voice");
+      void sendOrchestratorCommand("STUDENT_RESPONSE", {
+        modality: "voice",
+        transcriptLength: spokenAnswer.length,
+      });
+      if (autoTeachEnabled && awaitingStudentResponse && spokenAnswer) {
+        submittedFromVoice = true;
+        void checkAnswer(spokenAnswer, "voice");
+      }
     };
     recog.onend = () => {
+      clearListenTimeout();
+      speechRecognitionRef.current = null;
       setIsListening(false);
-      setAwaitingStudentResponse(true);
+      addConversationTurn("system", "system", "Voice listening ended.", { source: "listen_end", heardTranscript });
+      if (!submittedFromVoice) {
+        if (!heardTranscript) {
+          setError("I could not hear a clear answer. Click Speak Answer again, or type and press Enter.");
+        }
+        setAwaitingStudentResponse(true);
+      }
     };
-    recog.onerror = () => {
+    recog.onerror = (event: any) => {
+      clearListenTimeout();
+      speechRecognitionRef.current = null;
       setIsListening(false);
       setAwaitingStudentResponse(true);
-      setError("Could not capture voice. Please try again.");
+      const errorCode = String(event?.error || "");
+      if (errorCode === "not-allowed" || errorCode === "service-not-allowed") {
+        setMicPermission("denied");
+        setVoiceEnabled(false);
+        setError("Microphone permission denied. Continue by typing your answer.");
+        addConversationTurn("system", "system", "Microphone permission denied by browser.", {
+          source: "listen_permission_denied",
+          errorCode,
+        });
+        return;
+      }
+      setError("Could not capture voice. Click Speak Answer again, or type and press Enter.");
+      addConversationTurn("system", "system", "Voice listening error.", {
+        source: "listen_error",
+        errorCode,
+      });
     };
     recog.start();
   }
@@ -983,11 +1478,20 @@ function VedicTutorContent() {
     setStatus("loading");
     setError("");
     setCheck(null);
+    setPendingKickoffToken("");
+    setFlowState("idle");
+    setFlowVersion(0);
+    setRealtimeConnected(false);
     setAttemptByQuestion({});
     setDoubtReply("");
+    setConversationLog([]);
     setPendingKickoff("none");
+    setPendingKickoffToken("");
     kickoffRunningRef.current = false;
-    setIsListening(false);
+    autoListenQuestionRef.current = "";
+    stopListeningSession();
+    setIsEvaluatingAnswer(false);
+    setLastAnswerMode("typed");
     setAwaitingStudentResponse(false);
 
     try {
@@ -1029,11 +1533,19 @@ function VedicTutorContent() {
       setQuestion(data.question);
       setQuestionShownAt(Date.now());
       setStatus("ready");
+      addConversationTurn(
+        "system",
+        "system",
+        `Session started: ${data.lesson.title} | Exercise ${data.activeExerciseGroup || selectedExerciseGroup}`,
+        { source: "start_session" }
+      );
 
       clearBoard();
-      const welcomeLine = `Welcome to ${data.lesson.title}. We will learn it step by step together.`;
+      const greetingName = (studentName || "").trim() || "there";
+      const welcomeLine = `Hi ${greetingName}! I am ${activeAvatar.name}, your ${activeAvatar.role}. Welcome to ${data.lesson.title}. We will learn it step by step together.`;
       setTeacherUtterance(welcomeLine);
       if (autoTeachEnabled) {
+        setPendingKickoffToken(`${Date.now()}_${data.sessionId}_${data.question?.questionId || "q"}_welcome`);
         setPendingKickoff("welcome");
       } else {
         void speak(welcomeLine);
@@ -1044,68 +1556,126 @@ function VedicTutorContent() {
     }
   }
 
-  async function checkAnswer() {
+  async function checkAnswer(answerOverride?: string, source?: "typed" | "voice") {
     if (!sessionId || !question) return;
-
-    setCheck(null);
-    setDoubtReply("");
-    setIsListening(false);
-    setAwaitingStudentResponse(false);
-    const responseTimeMs = questionShownAt > 0 ? Math.max(0, Date.now() - questionShownAt) : undefined;
-
-    const response = await fetch("/api/vedic/check-answer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        sessionId,
-        questionId: question.questionId,
-        learnerAnswer: answer,
-        responseTimeMs,
-        confidence
-      })
-    });
-    const data: TutorCheckResponse & { error?: string } = await response.json();
-    if (!response.ok || data.error) {
-      setError(data.error || "Unable to evaluate answer.");
+    if (isEvaluatingAnswer) return;
+    const learnerAnswer = (answerOverride ?? answer).trim();
+    const answerSource = source || lastAnswerMode;
+    if (!learnerAnswer) {
+      setError("Please type or speak your answer first.");
+      setAwaitingStudentResponse(true);
       return;
     }
 
-    setCheck(data);
-    setAttemptByQuestion((prev) => ({
-      ...prev,
-      [question.questionId]: {
-        correct: !!data.correct,
-        confidence
+    setIsEvaluatingAnswer(true);
+    setCheck(null);
+    setDoubtReply("");
+    setError("");
+    stopListeningSession();
+    setAwaitingStudentResponse(false);
+    addConversationTurn("student", answerSource === "voice" ? "voice" : "text", learnerAnswer, {
+      source: "answer_submission"
+    });
+    const responseTimeMs = questionShownAt > 0 ? Math.max(0, Date.now() - questionShownAt) : undefined;
+    void sendOrchestratorCommand("STUDENT_RESPONSE", {
+      modality: "text_or_voice",
+      answerLength: learnerAnswer.length,
+      responseTimeMs,
+    });
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+      const response = await fetch("/api/vedic/check-answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          sessionId,
+          questionId: question.questionId,
+          learnerAnswer,
+          responseTimeMs,
+          confidence
+        })
+      });
+      window.clearTimeout(timeoutId);
+      const data: TutorCheckResponse & { error?: string } = await response.json();
+      if (!response.ok || data.error) {
+        const msg = data.error || "Unable to evaluate answer.";
+        setError(msg);
+        setAwaitingStudentResponse(true);
+        if (isExpiredSessionError(msg)) {
+          await recoverExpiredSession("check_answer");
+          return;
+        }
+        void sendOrchestratorCommand("CHECKPOINT_ERROR", {
+          source: "check_answer_response",
+          message: msg,
+        });
+        return;
       }
-    }));
-    const nextMode = !data.correct ? "remedial" : confidence === "high" ? "challenge" : "core";
-    void logTutorEvent(
-      "ANSWER_ADAPTATION_DECISION",
-      {
-        currentConfidence: confidence,
-        answerCorrect: !!data.correct,
-        nextScreenplayMode: nextMode,
+
+      setCheck(data);
+      setAttemptByQuestion((prev) => ({
+        ...prev,
+        [question.questionId]: {
+          correct: !!data.correct,
+          confidence
+        }
+      }));
+      const nextMode = !data.correct ? "remedial" : confidence === "high" ? "challenge" : "core";
+      void sendOrchestratorCommand("ANSWER_EVALUATED", {
+        isCorrect: !!data.correct,
+        confidence,
+        nextMode,
         tutorAction: data.tutorAction || "",
-        coachTip: data.coachTip || "",
-      },
-      { isCorrect: !!data.correct, scoreDelta: data.correct ? 1 : 0 }
-    );
-    if (data.summary) {
-      setScore(data.summary);
-    }
-    if (data.coachTip) {
-      void speak(data.coachTip);
-    } else if (data.correct) {
-      void speak("Great work. Tell me how you got that answer, then we will go to the next one.");
-    } else {
-      const retryLine = `Good attempt. ${activeTeachingStep?.checkpointPrompt || "Let us retry this with one smaller step."}`;
-      if (autoTeachEnabled) {
-        clearBoard();
-        setTeacherUtterance(retryLine);
-        setPendingKickoff("teach");
-      } else {
-        void speak(retryLine);
+      });
+      void logTutorEvent(
+        "ANSWER_ADAPTATION_DECISION",
+        {
+          currentConfidence: confidence,
+          answerCorrect: !!data.correct,
+          nextScreenplayMode: nextMode,
+          tutorAction: data.tutorAction || "",
+          coachTip: data.coachTip || "",
+        },
+        { isCorrect: !!data.correct, scoreDelta: data.correct ? 1 : 0 }
+      );
+      if (data.summary) {
+        setScore(data.summary);
       }
+      if (data.coachTip) {
+        await speakRef.current(data.coachTip);
+      } else if (data.correct) {
+        if (autoTeachEnabled) {
+          await speakRef.current("Great work. Moving to the next question.");
+          await nextQuestion();
+          return;
+        }
+        await speakRef.current("Great work. Tell me how you got that answer, then click Next Question.");
+      } else {
+        const retryLine = `Good attempt. ${activeTeachingStep?.checkpointPrompt || "Let us retry this with one smaller step."}`;
+        if (autoTeachEnabled) {
+          clearBoard();
+          setTeacherUtterance(retryLine);
+          setPendingKickoffToken(`${Date.now()}_${sessionId}_${question.questionId}_retry`);
+          setPendingKickoff("teach");
+        } else {
+          await speakRef.current(retryLine);
+        }
+      }
+    } catch (err) {
+      const msg = err instanceof Error && err.name === "AbortError"
+        ? "Answer check timed out. Please try again."
+        : "Network issue while checking answer. Please try again.";
+      setError(msg);
+      setAwaitingStudentResponse(true);
+      void sendOrchestratorCommand("CHECKPOINT_ERROR", {
+        source: "check_answer_exception",
+        message: msg,
+      });
+    } finally {
+      setIsEvaluatingAnswer(false);
     }
   }
 
@@ -1116,8 +1686,12 @@ function VedicTutorContent() {
     setCheck(null);
     setDoubtReply("");
     setPendingKickoff("none");
+    setPendingKickoffToken("");
     kickoffRunningRef.current = false;
-    setIsListening(false);
+    autoListenQuestionRef.current = "";
+    stopListeningSession();
+    setIsEvaluatingAnswer(false);
+    setLastAnswerMode("typed");
     setAwaitingStudentResponse(false);
 
     const response = await fetch("/api/vedic/next-question", {
@@ -1132,11 +1706,26 @@ function VedicTutorContent() {
     });
     const data: TutorNextQuestionResponse & { error?: string } = await response.json();
     if (!response.ok || data.error) {
-      setError(data.error || "Unable to load next question.");
+      const msg = data.error || "Unable to load next question.";
+      setError(msg);
+      if (isExpiredSessionError(msg)) {
+        await recoverExpiredSession("next_question");
+      }
       return;
     }
 
     setQuestion(data.question);
+    addConversationTurn(
+      "system",
+      "system",
+      `Moved to next question: Exercise ${data.question?.exerciseGroup || selectedExerciseGroup}`,
+      { source: "next_question" }
+    );
+    void sendOrchestratorCommand("NEXT_QUESTION", {
+      questionId: data.question?.questionId || "",
+      chapterCode: data.activeChapterCode || selectedChapter,
+      exerciseGroup: data.activeExerciseGroup || selectedExerciseGroup,
+    });
     setQuestionShownAt(Date.now());
     if (data.courseId) setCourseId(data.courseId);
     if (data.activeChapterCode) {
@@ -1162,12 +1751,17 @@ function VedicTutorContent() {
 
     clearBoard();
     if (autoTeachEnabled) {
+      setPendingKickoffToken(`${Date.now()}_${sessionId}_${data.question?.questionId || "q"}_teach`);
       setPendingKickoff("teach");
     }
   }
 
   async function askDoubt() {
     if (!sessionId || !doubt.trim()) return;
+    addConversationTurn("student", "doubt", doubt.trim(), { source: "doubt_question" });
+    void sendOrchestratorCommand("ASK_DOUBT", {
+      messageLength: doubt.trim().length,
+    });
 
     const response = await fetch("/api/vedic/doubt", {
       method: "POST",
@@ -1176,35 +1770,51 @@ function VedicTutorContent() {
     });
     const data = await response.json();
     if (!response.ok || data.error) {
-      setError(data.error || "Unable to fetch doubt explanation.");
+      const msg = data.error || "Unable to fetch doubt explanation.";
+      setError(msg);
+      if (isExpiredSessionError(msg)) {
+        await recoverExpiredSession("ask_doubt");
+      }
       return;
     }
     setDoubtReply(String(data.reply || ""));
+    addConversationTurn("tutor", "doubt", String(data.reply || ""), { source: "doubt_reply" });
     void speak(String(data.reply || ""));
   }
 
   useEffect(() => {
-    if (status !== "ready" || !question || pendingKickoff === "none" || kickoffRunningRef.current) {
+    if (
+      status !== "ready" ||
+      !question ||
+      pendingKickoff === "none" ||
+      !pendingKickoffToken ||
+      kickoffRunningRef.current ||
+      pendingKickoffToken === lastKickoffTokenRef.current
+    ) {
       return;
     }
 
     let cancelled = false;
     kickoffRunningRef.current = true;
+    lastKickoffTokenRef.current = pendingKickoffToken;
 
     async function runKickoff() {
       try {
         if (pendingKickoff === "welcome") {
-          const welcomeLine = `Welcome to ${lessonTitle || previewChapter?.title || "this chapter"}. We will learn it step by step together.`;
+          const greetingName = (studentName || "").trim() || "there";
+          const welcomeLine = `Hi ${greetingName}! I am ${activeAvatar.name}, your ${activeAvatar.role}. Welcome to ${lessonTitle || previewChapter?.title || "this chapter"}. We will learn it step by step together.`;
           setTeacherUtterance(welcomeLine);
-          await speak(welcomeLine);
+          await speakRef.current(welcomeLine);
+          await speakRef.current("Before we start, stay active. I will teach, then you answer each checkpoint.");
         }
         if (!cancelled) {
-          await teachOnBoard();
+          await teachOnBoardRef.current();
         }
       } finally {
         kickoffRunningRef.current = false;
         if (!cancelled) {
           setPendingKickoff("none");
+          setPendingKickoffToken("");
         }
       }
     }
@@ -1213,129 +1823,133 @@ function VedicTutorContent() {
     return () => {
       cancelled = true;
     };
-  }, [status, question, pendingKickoff, lessonTitle, previewChapter?.title, teachOnBoard, speak]);
+  }, [status, question, pendingKickoff, pendingKickoffToken, lessonTitle, previewChapter?.title, studentName, activeAvatar.name, activeAvatar.role]);
+
+  useEffect(() => {
+    if (
+      status !== "ready" ||
+      !question ||
+      !autoTeachEnabled ||
+      !voiceEnabled ||
+      micPermission === "denied" ||
+      isFirstScene ||
+      !awaitingStudentResponse ||
+      isListening ||
+      isSpeaking
+    ) {
+      return;
+    }
+    if (autoListenQuestionRef.current === question.questionId) {
+      return;
+    }
+    autoListenQuestionRef.current = question.questionId;
+    const timer = window.setTimeout(() => {
+      listenAnswer();
+    }, 450);
+    return () => window.clearTimeout(timer);
+  }, [status, question, autoTeachEnabled, voiceEnabled, micPermission, isFirstScene, awaitingStudentResponse, isListening, isSpeaking]);
 
   return (
     <main className="container tutor-shell">
-      <section className="panel tutor-setup-panel">
-        <div className="setup-hero-grid">
-          <div className="setup-hero-copy">
-            <span className="setup-hero-kicker">Live AI Classroom</span>
-            <h1 className="tutor-main-title">Vedic Math AI Tutor Classroom</h1>
-            <p className="muted tutor-main-subtitle">
-              Structured like a course lesson: teacher explains on the board, pauses for your response, then moves to guided exercises.
-            </p>
-            <div className="setup-flow-row">
-              <div className="setup-flow-step">
-                <strong>1. Setup</strong>
-                Pick chapter, exercise, and confidence level.
-              </div>
-              <div className="setup-flow-step">
-                <strong>2. Learn</strong>
-                Avatar explains on whiteboard with synchronized voice.
-              </div>
-              <div className="setup-flow-step">
-                <strong>3. Practice</strong>
-                Solve and get instant teacher feedback.
-              </div>
-            </div>
-            <div className="setup-chip-row setup-chip-row-left">
-              <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
-              <span className="pill">Course: {courseId}</span>
-              <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
-            </div>
-          </div>
-
-          <div className="panel setup-hero-stage">
-            <p className="setup-stage-kicker">Teacher Stage</p>
-            <div className="setup-avatar-stage">
-              <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking || status === "loading"} />
-            </div>
-            <p className="setup-stage-title" style={{ color: activeAvatar.color }}>
-              {activeAvatar.name} • {activeAvatar.role}
-            </p>
-            <p className="muted setup-stage-copy">
-              {teacherUtterance || "I will teach each step on the board and wait for your response."}
-            </p>
-          </div>
-        </div>
-
-        <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Choose AI Avatar</h3>
-        <div className="avatar-selector-grid">
-          {AVATARS.map((avatar) => (
-            <button
-              key={avatar.id}
-              type="button"
-              onClick={() => setSelectedAvatarId(avatar.id)}
-              className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
-              style={{
-                borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
-                ["--avatar-color" as any]: avatar.color
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-                <AvatarFace avatar={avatar} size={42} />
-                <div>
-                  <div style={{ fontWeight: 700, color: avatar.color }}>{avatar.name}</div>
-                  <div className="muted" style={{ fontSize: "0.85rem" }}>{avatar.role}</div>
+      <section className={`panel tutor-setup-panel${status === "ready" ? " tutor-setup-panel-live" : ""}`}>
+        <div className={`setup-grid${status === "ready" ? " setup-grid-live" : ""}`}>
+          <div className="setup-controls">
+            {status !== "ready" ? (
+              <div className="setup-hero-copy">
+                <span className="setup-hero-kicker">Live AI Classroom</span>
+                <h1 className="tutor-main-title">Vedic Math AI Tutor Classroom</h1>
+                <p className="muted tutor-main-subtitle">
+                  Structured like a course lesson: teacher explains on the board, pauses for your response, then moves to guided exercises.
+                </p>
+                <p className="setup-flow-inline">
+                  <strong>Flow:</strong> Setup {"->"} Learn {"->"} Practice
+                </p>
+                <div className="setup-chip-row setup-chip-row-left">
+                  <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
+                  <span className="pill">Course: {courseId}</span>
+                  <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
                 </div>
               </div>
-            </button>
-          ))}
-        </div>
+            ) : (
+              <div className="setup-chip-row setup-chip-row-left">
+                <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
+                <span className="pill">Course: {courseId}</span>
+                <span className="pill">Teacher: {activeAvatar.name}</span>
+                <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
+              </div>
+            )}
 
-        <div className="setup-grid">
-          <div className="setup-controls">
-            <div className="field-block">
-              <label htmlFor="chapterSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                Chapter
-              </label>
-              <select
-                id="chapterSelect"
-                value={selectedChapter}
-                onChange={(e) => setSelectedChapter(e.target.value)}
-                style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-              >
-                {chapterList.map((c) => (
-                  <option key={c.chapterCode} value={c.chapterCode}>
-                    {c.title}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <div className="setup-form-grid">
+              <div className="field-block">
+                <label htmlFor="studentName" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
+                  Student
+                </label>
+                <input
+                  id="studentName"
+                  value={studentName}
+                  onChange={(e) => {
+                    const nextName = e.target.value;
+                    setStudentName(nextName);
+                    if (typeof window !== "undefined") {
+                      window.localStorage.setItem("aiTutorStudentName", nextName);
+                    }
+                  }}
+                  placeholder="Enter student name"
+                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
+                />
+              </div>
 
-            <div className="field-block">
-              <label htmlFor="exerciseSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                Exercise
-              </label>
-              <select
-                id="exerciseSelect"
-                value={selectedExerciseGroup}
-                onChange={(e) => setSelectedExerciseGroup(e.target.value)}
-                style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-              >
-                {exerciseList.map((g) => (
-                  <option key={g.exerciseGroup} value={g.exerciseGroup}>
-                    {g.title}
-                  </option>
-                ))}
-              </select>
-            </div>
+              <div className="field-block">
+                <label htmlFor="chapterSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
+                  Chapter
+                </label>
+                <select
+                  id="chapterSelect"
+                  value={selectedChapter}
+                  onChange={(e) => setSelectedChapter(e.target.value)}
+                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
+                >
+                  {chapterList.map((c) => (
+                    <option key={c.chapterCode} value={c.chapterCode}>
+                      {c.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            <div className="field-block confidence-field">
-              <label htmlFor="confidence" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                Confidence
-              </label>
-              <select
-                id="confidence"
-                value={confidence}
-                onChange={(e) => setConfidence(e.target.value as Confidence)}
-                style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-              >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
+              <div className="field-block">
+                <label htmlFor="exerciseSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
+                  Exercise
+                </label>
+                <select
+                  id="exerciseSelect"
+                  value={selectedExerciseGroup}
+                  onChange={(e) => setSelectedExerciseGroup(e.target.value)}
+                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
+                >
+                  {exerciseList.map((g) => (
+                    <option key={g.exerciseGroup} value={g.exerciseGroup}>
+                      {g.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="field-block confidence-field">
+                <label htmlFor="confidence" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
+                  Confidence
+                </label>
+                <select
+                  id="confidence"
+                  value={confidence}
+                  onChange={(e) => setConfidence(e.target.value as Confidence)}
+                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
             </div>
 
             <div className="setup-actions">
@@ -1351,28 +1965,91 @@ function VedicTutorContent() {
             </div>
           </div>
 
-          <div className="panel setup-preview">
-            <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>What You Will Learn</h3>
-            <p style={{ marginTop: 0, marginBottom: "0.4rem" }}><strong>{previewChapter?.title || "Selected Chapter"}</strong></p>
-            <p className="muted" style={{ marginTop: 0 }}>
-              Estimated time: {previewChapter?.estimatedMinutes || 20} mins | Exercises: {(previewChapter?.exerciseGroups || ["A", "B", "C"]).join(", ")}
-            </p>
-
-            <p style={{ marginBottom: "0.35rem" }}><strong>Subtopics</strong></p>
-            <ul style={{ marginTop: 0 }}>
-              {(previewChapter?.subtopics || []).map((topic) => (
-                <li key={topic}>{topic}</li>
-              ))}
-            </ul>
-
-            <p style={{ marginBottom: "0.35rem" }}><strong>Exercise Flow (A-I)</strong></p>
-            <ul style={{ marginTop: 0, marginBottom: 0 }}>
-              {(previewChapter?.exerciseFlow || []).map((item) => (
-                <li key={`${item.exerciseGroup}_${item.subtopic}`}>Exercise {item.exerciseGroup}: {item.subtopic}</li>
-              ))}
-            </ul>
+          <div className={`panel setup-preview${status === "ready" ? " setup-preview-live" : ""}`}>
+            {status !== "ready" ? (
+              <>
+                <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>What You Will Learn</h3>
+                <p style={{ marginTop: 0, marginBottom: "0.4rem" }}><strong>{previewChapter?.title || "Selected Chapter"}</strong></p>
+                <p className="muted" style={{ marginTop: 0 }}>
+                  Estimated time: {previewChapter?.estimatedMinutes || 20} mins | Exercises: {(previewChapter?.exerciseGroups || ["A", "B", "C"]).join(", ")}
+                </p>
+                <div className="setup-preview-grid">
+                  <div>
+                    <p style={{ marginBottom: "0.35rem" }}><strong>Subtopics</strong></p>
+                    <ul className="setup-compact-list">
+                      {(previewChapter?.subtopics || []).map((topic) => (
+                        <li key={topic}>{topic}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p style={{ marginBottom: "0.35rem" }}><strong>Exercise Flow (A-I)</strong></p>
+                    <ul className="setup-compact-list">
+                      {(previewChapter?.exerciseFlow || []).map((item) => (
+                        <li key={`${item.exerciseGroup}_${item.subtopic}`}>Exercise {item.exerciseGroup}: {item.subtopic}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Session Snapshot</h3>
+                <p style={{ marginTop: 0, marginBottom: "0.4rem" }}><strong>{previewChapter?.title || "Selected Chapter"}</strong></p>
+                <p className="muted" style={{ marginTop: 0 }}>
+                  Estimated time: {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} mins | Exercise: {activeExerciseGroup}
+                </p>
+                <div className="setup-chip-row setup-chip-row-left">
+                  <span className="pill">Teacher: {activeAvatar.name}</span>
+                  <span className="pill">Mode: {screenplayMode}</span>
+                  <span className="pill">Flow: {flowState}</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
+
+        {status !== "ready" ? (
+          <>
+            <h3 style={{ marginTop: "0.7rem", marginBottom: "0.45rem" }}>Choose AI Avatar</h3>
+            <div className="avatar-selector-grid">
+              {AVATARS.map((avatar) => (
+                <button
+                  key={avatar.id}
+                  type="button"
+                  onClick={() => setSelectedAvatarId(avatar.id)}
+                  className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
+                  style={{
+                    borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
+                    ["--avatar-color" as any]: avatar.color
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+                    <AvatarFace avatar={avatar} size={42} />
+                    <div>
+                      <div style={{ fontWeight: 700, color: avatar.color }}>{avatar.name}</div>
+                      <div className="muted" style={{ fontSize: "0.85rem" }}>{avatar.role}</div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </>
+        ) : null}
+        {status !== "ready" ? (
+          <div className="panel setup-hero-stage" style={{ marginTop: "0.45rem" }}>
+            <p className="setup-stage-kicker">Teacher Stage</p>
+            <div className="setup-avatar-stage">
+              <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking || status === "loading"} />
+            </div>
+            <p className="setup-stage-title" style={{ color: activeAvatar.color }}>
+              {activeAvatar.name} - {activeAvatar.role}
+            </p>
+            <p className="muted setup-stage-copy">
+              {teacherUtterance || "I will teach each step on the board and wait for your response."}
+            </p>
+          </div>
+        ) : null}
 
         {error ? <p className="error-text">{error}</p> : null}
       </section>
@@ -1391,6 +2068,8 @@ function VedicTutorContent() {
                 <span className="pill">Chapter: {activeChapter}</span>
                 <span className="pill">Exercise: {activeExerciseGroup}</span>
                 <span className="pill">Mode: {screenplayMode}</span>
+                <span className="pill">Flow Engine: {flowState} (v{flowVersion})</span>
+                <span className="pill">Realtime: {realtimeConnected ? "connected" : "polling"}</span>
                 <span className="pill">Status: {stageStatusText}</span>
               </div>
             </div>
@@ -1399,6 +2078,11 @@ function VedicTutorContent() {
               <div className="board-workbench">
                 {activeTeachingStep ? (
                   <div className="panel teaching-snapshot">
+                    {isFirstScene ? (
+                      <p style={{ marginTop: 0, marginBottom: "0.35rem" }}>
+                        <strong>Scene 1:</strong> Welcome, first concept demo, and your first checkpoint.
+                      </p>
+                    ) : null}
                     <p style={{ marginTop: 0, marginBottom: "0.35rem" }}>
                       <strong>Now Teaching:</strong> Exercise {activeTeachingStep.exerciseGroup} - {activeTeachingStep.subtopic}
                     </p>
@@ -1409,6 +2093,132 @@ function VedicTutorContent() {
                     </p>
                   </div>
                 ) : null}
+
+                <div className="panel exercise-workbench">
+                  <p className="muted" style={{ marginTop: 0, marginBottom: "0.35rem" }}>
+                    Skill: {question.skill} | Difficulty: {question.difficulty} | Exercise: {question.exerciseGroup}
+                  </p>
+                  <p style={{ marginTop: 0 }}><strong>{question.questionText}</strong></p>
+                  {question.visual?.svg ? (
+                    <div className="panel" style={{ marginBottom: "0.6rem", background: "#f8fafc" }}>
+                      <p className="muted" style={{ marginTop: 0 }}>{question.visual.title}</p>
+                      <div dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
+                    </div>
+                  ) : null}
+                <label
+                  htmlFor="answerInput"
+                  style={{
+                    display: "block",
+                    marginTop: "0.5rem",
+                    marginBottom: "0.3rem",
+                    fontWeight: 700,
+                    color: awaitingStudentResponse ? "#0f766e" : "#334155"
+                  }}
+                >
+                  Your Answer
+                </label>
+                <input
+                  id="answerInput"
+                  ref={answerInputRef}
+                  value={answer}
+                  onChange={(e) => {
+                    setAnswer(e.target.value);
+                    setLastAnswerMode("typed");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      void checkAnswer();
+                    }
+                  }}
+                  placeholder="Type your answer here (for example: 10)"
+                  style={{
+                    borderWidth: awaitingStudentResponse ? "2px" : "1px",
+                    borderColor: awaitingStudentResponse ? "#0f766e" : "#cbd5e1",
+                    boxShadow: awaitingStudentResponse ? "0 0 0 3px rgba(15,118,110,0.12)" : "none"
+                  }}
+                />
+                  <div className="exercise-actions">
+                    <button className="button" onClick={() => void checkAnswer()} disabled={isEvaluatingAnswer}>
+                      {isEvaluatingAnswer ? "Checking..." : "Check Answer"}
+                    </button>
+                    <button
+                      className="button secondary"
+                      type="button"
+                      onClick={listenAnswer}
+                      disabled={isEvaluatingAnswer || isListening || micPermission === "denied"}
+                    >
+                      {micPermission === "denied" ? "Speak Answer (Mic Blocked)" : "Speak Answer"}
+                    </button>
+                    {isListening ? (
+                      <button
+                        className="button secondary"
+                        type="button"
+                        onClick={() => {
+                          stopListeningSession();
+                          setAwaitingStudentResponse(true);
+                          addConversationTurn("system", "system", "Voice listening stopped by student.", { source: "listen_stop" });
+                        }}
+                      >
+                        Stop Listening
+                      </button>
+                    ) : null}
+                    <button className="button secondary" onClick={nextQuestion}>Next Question</button>
+                  </div>
+                  <p className="muted" style={{ marginTop: "0.55rem", marginBottom: 0 }}>Hint: {question.hint}</p>
+                  {micPermission === "denied" ? (
+                    <p className="muted" style={{ marginTop: "0.45rem", marginBottom: 0 }}>
+                      Microphone access is blocked in your browser. Use text input to continue the lesson.
+                    </p>
+                  ) : null}
+                  {awaitingStudentResponse && !check ? (
+                    <div className="panel student-next-step">
+                      <p style={{ marginTop: 0, marginBottom: "0.25rem" }}>
+                        <strong>Your turn now</strong>
+                      </p>
+                      <p className="muted" style={{ margin: 0 }}>
+                        Type your answer or use Speak Answer, then click Check Answer to continue the teaching loop.
+                      </p>
+                      {isFirstScene ? (
+                        <p className="muted" style={{ marginTop: "0.45rem", marginBottom: 0 }}>
+                          First scene is in guided mode: answer this checkpoint to unlock the next scene.
+                        </p>
+                      ) : null}
+                      <div style={{ display: "flex", gap: "0.45rem", marginTop: "0.6rem", flexWrap: "wrap" }}>
+                        <button
+                          className="button"
+                          type="button"
+                          onClick={() => void checkAnswer()}
+                          disabled={isEvaluatingAnswer}
+                        >
+                          {isEvaluatingAnswer ? "Checking..." : "Submit & Continue"}
+                        </button>
+                        <button
+                          className="button secondary"
+                          type="button"
+                          onClick={listenAnswer}
+                          disabled={isListening || isEvaluatingAnswer || micPermission === "denied"}
+                        >
+                          {isListening ? "Listening..." : "Speak Now"}
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+                  {check ? (
+                    <div className="panel exercise-result">
+                      <p style={{ marginTop: 0 }}>
+                        Result:{" "}
+                        <strong style={{ color: check.correct ? "#065f46" : "#9f1239" }}>
+                          {check.correct ? "Correct" : "Try Again"}
+                        </strong>
+                      </p>
+                      <p className="muted">{check.encouragement}</p>
+                      {check.coachTip ? <p className="muted">Coach tip: {check.coachTip}</p> : null}
+                      <p><strong>Expected:</strong> {check.expectedAnswer}</p>
+                      <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
+                    </div>
+                  ) : null}
+                </div>
 
                 <AnimatedBoard
                   steps={boardSteps}
@@ -1437,47 +2247,9 @@ function VedicTutorContent() {
                     <button className="button secondary" type="button" onClick={clearBoard}>Clear Board</button>
                   </div>
                 </div>
-
-                <div className="panel exercise-workbench">
-                  <p className="muted" style={{ marginTop: 0, marginBottom: "0.35rem" }}>
-                    Skill: {question.skill} | Difficulty: {question.difficulty} | Exercise: {question.exerciseGroup}
-                  </p>
-                  <p style={{ marginTop: 0 }}><strong>{question.questionText}</strong></p>
-                  {question.visual?.svg ? (
-                    <div className="panel" style={{ marginBottom: "0.6rem", background: "#f8fafc" }}>
-                      <p className="muted" style={{ marginTop: 0 }}>{question.visual.title}</p>
-                      <div dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
-                    </div>
-                  ) : null}
-                  <input
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    placeholder="Type answer here"
-                  />
-                  <div className="exercise-actions">
-                    <button className="button" onClick={checkAnswer}>Check Answer</button>
-                    <button className="button secondary" type="button" onClick={listenAnswer}>Speak Answer</button>
-                    <button className="button secondary" onClick={nextQuestion}>Next Question</button>
-                  </div>
-                  <p className="muted" style={{ marginTop: "0.55rem", marginBottom: 0 }}>Hint: {question.hint}</p>
-                  {check ? (
-                    <div className="panel exercise-result">
-                      <p style={{ marginTop: 0 }}>
-                        Result:{" "}
-                        <strong style={{ color: check.correct ? "#065f46" : "#9f1239" }}>
-                          {check.correct ? "Correct" : "Try Again"}
-                        </strong>
-                      </p>
-                      <p className="muted">{check.encouragement}</p>
-                      {check.coachTip ? <p className="muted">Coach tip: {check.coachTip}</p> : null}
-                      <p><strong>Expected:</strong> {check.expectedAnswer}</p>
-                      <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
-                    </div>
-                  ) : null}
-                </div>
               </div>
 
-              <aside className="panel teacher-rail">
+              <aside className="panel teacher-rail teacher-rail-sticky">
                 <p className="teacher-name" style={{ color: activeAvatar.color }}>
                   {activeAvatar.name} ({activeAvatar.style === "girl" ? "Girl Voice" : "Boy Voice"})
                 </p>
@@ -1532,52 +2304,112 @@ function VedicTutorContent() {
                   </div>
                   <p className="muted" style={{ marginBottom: 0, marginTop: "0.6rem" }}>Session: {sessionId || "-"}</p>
                 </div>
+
+                <div className="panel conversation-log-panel">
+                  <div className="conversation-log-header">
+                    <h3 style={{ margin: 0 }}>Conversation Log</h3>
+                    <button
+                      className="button secondary"
+                      type="button"
+                      onClick={downloadConversationLog}
+                      disabled={!conversationLog.length}
+                    >
+                      Export JSON
+                    </button>
+                  </div>
+                  <div className="conversation-metrics">
+                    <span className="pill">Tutor: {conversationInsights.tutorTurns}</span>
+                    <span className="pill">Student: {conversationInsights.studentTurns}</span>
+                    <span className="pill">Voice: {conversationInsights.voiceStudentTurns}</span>
+                    <span className="pill">Doubts: {conversationInsights.doubtTurns}</span>
+                    <span className="pill">Avg response: {conversationInsights.avgResponseSec || 0}s</span>
+                  </div>
+                  <div className="conversation-log-list">
+                    {conversationLog.length ? (
+                      conversationLog.slice(-18).map((turn) => (
+                        <div key={turn.id} className={`conversation-log-item role-${turn.role}`}>
+                          <p className="conversation-log-meta">
+                            {turn.role.toUpperCase()} ({turn.channel}) | {new Date(turn.at).toLocaleTimeString()}
+                          </p>
+                          <p className="conversation-log-text">{turn.text}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="muted" style={{ margin: 0 }}>No conversation turns yet.</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="panel roadmap-panel">
+                  <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Chapter Roadmap</h3>
+                  <p className="muted" style={{ marginTop: 0 }}>
+                    {lessonSource || "Lesson source unavailable"} | {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} mins
+                  </p>
+                  <div className="setup-preview-grid">
+                    <div>
+                      <p style={{ marginBottom: "0.35rem" }}><strong>Subtopics</strong></p>
+                      <ul className="setup-compact-list">
+                        {(lessonSubtopics.length ? lessonSubtopics : previewChapter?.subtopics || []).map((topic) => (
+                          <li key={topic}>{topic}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p style={{ marginBottom: "0.35rem" }}><strong>Exercise Flow</strong></p>
+                      <ul className="setup-compact-list">
+                        {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((item) => (
+                          <li key={`${item.exerciseGroup}_${item.subtopic}`}>
+                            {item.exerciseGroup}: {item.subtopic}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <section className="panel lesson-details-panel lesson-details-in-rail">
+                  <details>
+                    <summary>Lesson Plan and Teaching Script</summary>
+                    <div className="lesson-details-meta">
+                      <p><strong>Exercise Coverage:</strong> {(lessonExerciseCoverage.length ? lessonExerciseCoverage : previewChapter?.exerciseGroups || []).join(", ")}</p>
+                      <p><strong>Current Flow:</strong> {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((f) => `${f.exerciseGroup}->${f.subtopic}`).join(" | ")}</p>
+                      <p><strong>Screenplay Beats:</strong> {lessonScreenplay.length || 0}</p>
+                      <p><strong>Active Screenplay Mode:</strong> {screenplayMode}</p>
+                    </div>
+                    <div className="lesson-details-grid">
+                      <div>
+                        <h3 style={{ marginTop: 0 }}>Core Ideas</h3>
+                        <ul>
+                          {coreIdeas.map((idea) => (
+                            <li key={idea}>{idea}</li>
+                          ))}
+                        </ul>
+
+                        <h3>Learning Goals</h3>
+                        <ul>
+                          {(lessonLearningGoals.length ? lessonLearningGoals : previewChapter?.learningGoals || []).map((goal) => (
+                            <li key={goal}>{goal}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h3 style={{ marginTop: 0 }}>Teacher Script (A-I)</h3>
+                        <ul className="teacher-script-list">
+                          {visibleTeachingScript.map((step) => (
+                            <li key={step.stepId}>
+                              <strong>{step.exerciseGroup} - {step.subtopic} ({step.boardMode === "free_draw" ? "Free Draw" : "SVG"}):</strong> {step.teacherLine}
+                              <br />
+                              <span className="muted">Checkpoint: {step.checkpointPrompt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
+                </section>
               </aside>
             </div>
-          </section>
-
-          <section className="panel lesson-details-panel">
-            <details>
-              <summary>Lesson Plan and Teaching Script</summary>
-              <div className="lesson-details-meta">
-                <p className="muted">{lessonSource}</p>
-                <p className="muted">Estimated chapter time: {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} minutes</p>
-                <p><strong>Exercise Coverage:</strong> {(lessonExerciseCoverage.length ? lessonExerciseCoverage : previewChapter?.exerciseGroups || []).join(", ")}</p>
-                <p><strong>Current Flow:</strong> {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((f) => `${f.exerciseGroup}->${f.subtopic}`).join(" | ")}</p>
-                <p><strong>Screenplay Beats:</strong> {lessonScreenplay.length || 0}</p>
-                <p><strong>Active Screenplay Mode:</strong> {screenplayMode}</p>
-              </div>
-              <div className="lesson-details-grid">
-                <div>
-                  <h3 style={{ marginTop: 0 }}>Core Ideas</h3>
-                  <ul>
-                    {coreIdeas.map((idea) => (
-                      <li key={idea}>{idea}</li>
-                    ))}
-                  </ul>
-
-                  <h3>Subtopics</h3>
-                  <ul>
-                    {(lessonSubtopics.length ? lessonSubtopics : previewChapter?.subtopics || []).map((topic) => (
-                      <li key={topic}>{topic}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 style={{ marginTop: 0 }}>Teacher Script (A-I)</h3>
-                  <ul className="teacher-script-list">
-                    {visibleTeachingScript.map((step) => (
-                      <li key={step.stepId}>
-                        <strong>{step.exerciseGroup} - {step.subtopic} ({step.boardMode === "free_draw" ? "Free Draw" : "SVG"}):</strong> {step.teacherLine}
-                        <br />
-                        <span className="muted">Checkpoint: {step.checkpointPrompt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </details>
           </section>
         </>
       ) : null}

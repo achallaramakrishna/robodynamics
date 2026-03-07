@@ -42,9 +42,26 @@ public class RDAITutorLaunchController {
             }
         }
 
+        String learnerName = resolveLearnerName(me, effectiveChildId);
         String token = aiTutorIntegrationService.createLaunchToken(me, effectiveChildId, module, grade);
-        String launchUrl = aiTutorIntegrationService.buildLaunchUrl(token);
+        String launchUrl = aiTutorIntegrationService.buildLaunchUrl(token, learnerName, module);
         return "redirect:" + launchUrl;
     }
-}
 
+    private String resolveLearnerName(RDUser currentUser, Integer effectiveChildId) {
+        if (currentUser == null) {
+            return "";
+        }
+        if (currentUser.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()) {
+            return currentUser.getFullName();
+        }
+        if (effectiveChildId == null) {
+            return currentUser.getFullName();
+        }
+        RDUser child = rdUserService.getRDUser(effectiveChildId);
+        if (child == null) {
+            return currentUser.getFullName();
+        }
+        return child.getFullName();
+    }
+}

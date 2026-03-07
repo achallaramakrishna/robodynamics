@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from datetime import datetime, timezone
 
-from fastapi import FastAPI, Header, HTTPException
+from fastapi import FastAPI, Header, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.models import (
@@ -12,6 +12,8 @@ from app.models import (
     CheckAnswerResponse,
     DoubtRequest,
     EventIngestRequest,
+    OrchestratorCommandRequest,
+    OrchestratorStateResponse,
     NextQuestionRequest,
     QuestionPayload,
     StartRequest,
@@ -19,6 +21,8 @@ from app.models import (
     TutorEvent,
 )
 from app.services.engine_registry import TutorEngineRegistry
+from app.services.generic_course_engine import CourseTemplateRuleEngine, resolve_template_course_id
+from app.services.orchestrator import TutorOrchestrator
 from app.services.quality_refresh import QualityRefreshService
 from app.services.rule_engine import VedicRuleEngine
 from app.services.session_store import SessionStore
@@ -34,9 +38,32 @@ app.add_middleware(
 )
 
 token_service = TokenService()
-engine_registry = TutorEngineRegistry({"vedic_math": VedicRuleEngine()})
+engine_registry = TutorEngineRegistry(
+    {
+        "vedic_math": VedicRuleEngine(),
+        "neet_physics": CourseTemplateRuleEngine(
+            course_id="neet_physics",
+            title="NEET Physics Tutor",
+            template_course_id=resolve_template_course_id("neet_physics", os.getenv("AI_TUTOR_NEET_PHYSICS_DB_COURSE_ID", "155")),
+            fallback_chapter_code="PHY_CH1",
+        ),
+        "neet_chemistry": CourseTemplateRuleEngine(
+            course_id="neet_chemistry",
+            title="NEET Chemistry Tutor",
+            template_course_id=resolve_template_course_id("neet_chemistry", os.getenv("AI_TUTOR_NEET_CHEMISTRY_DB_COURSE_ID", "156")),
+            fallback_chapter_code="CHEM_CH1",
+        ),
+        "neet_math": CourseTemplateRuleEngine(
+            course_id="neet_math",
+            title="NEET Math Tutor",
+            template_course_id=resolve_template_course_id("neet_math", os.getenv("AI_TUTOR_NEET_MATH_DB_COURSE_ID", "65")),
+            fallback_chapter_code="MATH_CH1",
+        ),
+    }
+)
 quality_refresh_service = QualityRefreshService()
 session_store = SessionStore()
+orchestrator = TutorOrchestrator()
 internal_key = os.getenv("TUTOR_INTERNAL_KEY", "").strip()
 
 
@@ -97,6 +124,19 @@ async def start(payload: StartRequest, x_ai_tutor_key: str | None = Header(defau
 
     session = session_store.create(claims, course_id, module_code, grade, chapter_code, exercise_group)
     session_store.set_question(session.session_id, question)
+    await orchestrator.bootstrap(
+        session_id=session.session_id,
+        user_id=session.user_id,
+        chapter_code=chapter_code,
+        exercise_group=exercise_group,
+        context={
+            "courseId": course_id,
+            "grade": grade,
+            "role": session.role,
+            "lessonTitle": lesson.get("title", ""),
+            "questionId": question.get("questionId", ""),
+        },
+    )
 
     await session_store.send_event(
         TutorEvent(
@@ -114,6 +154,16 @@ async def start(payload: StartRequest, x_ai_tutor_key: str | None = Header(defau
                 "exerciseGroup": exercise_group,
             },
         )
+    )
+    await orchestrator.notify(
+        session.session_id,
+        "SESSION_STARTED",
+        {
+            "courseId": course_id,
+            "chapterCode": chapter_code,
+            "exerciseGroup": exercise_group,
+            "questionId": question.get("questionId", ""),
+        },
     )
 
     chapters = [ChapterPayload(**c) for c in engine.chapters()]
@@ -174,6 +224,17 @@ async def next_question(payload: NextQuestionRequest, x_ai_tutor_key: str | None
                 "subtopic": question.get("subtopic"),
             },
         )
+    )
+    await orchestrator.notify(
+        session.session_id,
+        "QUESTION_DELIVERED",
+        {
+            "questionId": question.get("questionId", ""),
+            "chapterCode": session.chapter_code,
+            "exerciseGroup": session.exercise_group,
+            "difficulty": question.get("difficulty", ""),
+            "skill": question.get("skill", ""),
+        },
     )
 
     return {
@@ -246,6 +307,18 @@ async def check_answer(
             },
         )
     )
+    await orchestrator.notify(
+        session.session_id,
+        "ANSWER_SUBMITTED",
+        {
+            "questionId": payload.questionId,
+            "isCorrect": bool(result["correct"]),
+            "confidence": payload.confidence,
+            "responseTimeMs": payload.responseTimeMs,
+            "tutorAction": quality.get("tutorAction"),
+            "coachTip": quality.get("coachTip"),
+        },
+    )
 
     return CheckAnswerResponse(
         correct=bool(result["correct"]),
@@ -292,6 +365,14 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
             },
         )
     )
+    await orchestrator.notify(
+        session.session_id,
+        "DOUBT_ASKED",
+        {
+            "messageLength": len(payload.message or ""),
+            "doubtCount": session.doubt_count,
+        },
+    )
     return {"courseId": session.course_id, "reply": reply}
 
 
@@ -330,4 +411,60 @@ async def ingest_event(payload: EventIngestRequest, x_ai_tutor_key: str | None =
             },
         )
     )
+    await orchestrator.notify(
+        session.session_id,
+        event_type,
+        {
+            "questionId": question_id or "",
+            **meta,
+        },
+    )
     return {"ok": True}
+
+
+@app.post("/ai-tutor-api/vedic/orchestrator/command", response_model=OrchestratorStateResponse)
+async def orchestrator_command(
+    payload: OrchestratorCommandRequest, x_ai_tutor_key: str | None = Header(default=None)
+) -> OrchestratorStateResponse:
+    require_internal_key(x_ai_tutor_key)
+    try:
+        _ = session_store.get(payload.sessionId)
+    except KeyError as ex:
+        raise HTTPException(status_code=404, detail=str(ex)) from ex
+
+    try:
+        snapshot = await orchestrator.command(payload.sessionId, payload.command, payload.meta)
+    except ValueError as ex:
+        raise HTTPException(status_code=400, detail=str(ex)) from ex
+    return OrchestratorStateResponse(**snapshot)
+
+
+@app.get("/ai-tutor-api/vedic/orchestrator/state", response_model=OrchestratorStateResponse)
+async def orchestrator_state(sessionId: str, x_ai_tutor_key: str | None = Header(default=None)) -> OrchestratorStateResponse:
+    require_internal_key(x_ai_tutor_key)
+    try:
+        _ = session_store.get(sessionId)
+        snapshot = await orchestrator.state(sessionId)
+    except KeyError as ex:
+        raise HTTPException(status_code=404, detail=str(ex)) from ex
+    return OrchestratorStateResponse(**snapshot)
+
+
+@app.websocket("/ai-tutor-api/vedic/ws/{session_id}")
+async def orchestrator_ws(websocket: WebSocket, session_id: str) -> None:
+    try:
+        _ = session_store.get(session_id)
+        queue = await orchestrator.subscribe(session_id)
+    except KeyError:
+        await websocket.close(code=4404)
+        return
+
+    await websocket.accept()
+    try:
+        while True:
+            payload = await queue.get()
+            await websocket.send_json(payload)
+    except WebSocketDisconnect:
+        pass
+    finally:
+        await orchestrator.unsubscribe(session_id, queue)

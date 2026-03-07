@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +31,7 @@ public class RDAITutorIntegrationService {
     private static final String HMAC_SHA_256 = "HmacSHA256";
     private static final String DEFAULT_MODULE = "VEDIC_MATH";
     private static final String DEFAULT_GRADE = "6";
+    private static final Map<String, String> MODULE_COURSE_MAP = buildModuleCourseMap();
 
     @Value("${rd.ai.tutor.jwt.secret:change_me_ai_tutor_secret}")
     private String jwtSecret;
@@ -80,9 +82,30 @@ public class RDAITutorIntegrationService {
     }
 
     public String buildLaunchUrl(String token) {
+        return buildLaunchUrl(token, null, DEFAULT_MODULE);
+    }
+
+    public String buildLaunchUrl(String token, String learnerName) {
+        return buildLaunchUrl(token, learnerName, DEFAULT_MODULE);
+    }
+
+    public String buildLaunchUrl(String token, String learnerName, String module) {
         String base = trimTrailingSlash(aiTutorWebBaseUrl);
         String encoded = URLEncoder.encode(token, StandardCharsets.UTF_8);
-        return base + "/ai-tutor/vedic?token=" + encoded;
+        String normalizedModule = normalizeModule(module);
+        String courseId = courseIdForModule(normalizedModule);
+        StringBuilder out = new StringBuilder(base)
+                .append("/ai-tutor/vedic?token=")
+                .append(encoded)
+                .append("&module=")
+                .append(URLEncoder.encode(normalizedModule, StandardCharsets.UTF_8))
+                .append("&courseId=")
+                .append(URLEncoder.encode(courseId, StandardCharsets.UTF_8));
+        String cleanName = safe(learnerName, "").trim();
+        if (!cleanName.isEmpty()) {
+            out.append("&studentName=").append(URLEncoder.encode(cleanName, StandardCharsets.UTF_8));
+        }
+        return out.toString();
     }
 
     public long getTokenTtlSeconds() {
@@ -217,6 +240,12 @@ public class RDAITutorIntegrationService {
         return value.isEmpty() ? DEFAULT_MODULE : value.toUpperCase(Locale.ENGLISH);
     }
 
+    private String courseIdForModule(String module) {
+        String normalized = normalizeModule(module);
+        String mapped = MODULE_COURSE_MAP.get(normalized);
+        return mapped == null || mapped.isBlank() ? "vedic_math" : mapped;
+    }
+
     private String normalizeGrade(String grade, RDUser user) {
         String value = safe(grade, "");
         if (!value.isBlank()) {
@@ -249,5 +278,14 @@ public class RDAITutorIntegrationService {
         byte[] aBytes = a == null ? new byte[0] : a.getBytes(StandardCharsets.UTF_8);
         byte[] bBytes = b == null ? new byte[0] : b.getBytes(StandardCharsets.UTF_8);
         return MessageDigest.isEqual(aBytes, bBytes);
+    }
+
+    private static Map<String, String> buildModuleCourseMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("VEDIC_MATH", "vedic_math");
+        map.put("NEET_PHYSICS", "neet_physics");
+        map.put("NEET_CHEMISTRY", "neet_chemistry");
+        map.put("NEET_MATH", "neet_math");
+        return map;
     }
 }

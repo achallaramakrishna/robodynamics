@@ -59,6 +59,13 @@ npm run dev
 - `AI_TUTOR_CONTENT_ROOT` (chapter screenplay folder root, default `/opt/robodynamics`)
 - `OPENAI_API_KEY` (for PDF -> screenplay generation tool)
 - `OPENAI_MODEL` (default `gpt-4.1-mini`)
+- `AI_TUTOR_ADAPTIVE_POLICY_ENABLED` (enable learned runtime action policy)
+- `AI_TUTOR_ADAPTIVE_POLICY_PATH` (path to trained policy JSON)
+- `AI_TUTOR_ADAPTIVE_POLICY_MIN_OBS` (minimum context support before policy action is used)
+- `AI_TUTOR_TEMPLATE_API_URL` (Java API endpoint for course/session asset template)
+- `AI_TUTOR_DYNAMIC_COURSE_TEMPLATE_ENABLED` (auto-build tutor engine for new `courseId` aliases)
+- `AI_TUTOR_TEMPLATE_COURSE_IDS` (alias->db course id map, e.g. `neet_physics:155`)
+- `AI_TUTOR_NEET_PHYSICS_DB_COURSE_ID`, `AI_TUTOR_NEET_CHEMISTRY_DB_COURSE_ID`, `AI_TUTOR_NEET_MATH_DB_COURSE_ID`
 
 ### Next.js (`ai-tutor/web/.env.example`)
 
@@ -68,7 +75,7 @@ npm run dev
 - `SARVAM_TTS_URL`, `SARVAM_TTS_MODEL`, `SARVAM_DEFAULT_LANGUAGE_CODE`
 - `SARVAM_DEFAULT_SPEAKER`, `SARVAM_SPEAKER_ARYA`, `SARVAM_SPEAKER_VED`, `SARVAM_SPEAKER_TARA`, `SARVAM_SPEAKER_NIVA`
 
-## Screenplay Generation (OpenAI + PDF)
+## Screenplay Generation (OpenAI + PDF + SVG Beats)
 
 Generate chapter scene scripts from chapter PDFs and store them as:
 `/opt/robodynamics/{courseId}/chapter_scripts.json`
@@ -81,10 +88,35 @@ python3 scripts/generate_screenplay_openai.py \
   --output /opt/robodynamics/vedic_math/chapter_scripts.json
 ```
 
-The tutor API will load this file automatically and use it for whiteboard scene-by-scene teaching.
+The tutor API will load this file automatically and use it for:
+- chapter metadata (`subtopics`, `learningGoals`)
+- teacher `teachingScript`
+- scene-by-scene `screenplay`
+- optional `svgAnimation` steps per screenplay beat for animated board visuals
+
+## Adaptive Policy Training (Learn From Tutor Experience)
+
+Train a policy model from historical tutor events, then let runtime choose next tutor action from that policy:
+
+```bash
+python3 ai-tutor/tutor-api/scripts/train_adaptive_policy.py \
+  --events /opt/robodynamics/vedic_math/events/ai_tutor_events.jsonl \
+  --output /opt/robodynamics/vedic_math/policies/adaptive_policy_v1.json \
+  --mastery-output /opt/robodynamics/vedic_math/policies/mastery_snapshot_v1.json \
+  --min-support 8
+```
+
+Schema and architecture notes:
+- `docs/ai_tutor_ml_phase1.sql`
+- `docs/ai_tutor_ml_phase1.md`
 
 ## Notes
 
 - Current starter uses in-memory session/event store in Java and FastAPI.
 - SQL schema for persistent analytics is available at `docs/ai_tutor_schema.sql`.
 - Nginx routing template is available at `docs/ai_tutor_integration_nginx.conf`.
+- Module codes now supported by default:
+  - `VEDIC_MATH`
+  - `NEET_PHYSICS`
+  - `NEET_CHEMISTRY`
+  - `NEET_MATH`

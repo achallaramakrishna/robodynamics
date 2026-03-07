@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+import re
 import uuid
 from typing import Any, Callable, Dict, List
 
@@ -296,13 +297,17 @@ class VedicRuleEngine:
         return question
 
     def evaluate(self, question: Dict[str, Any], learner_answer: str) -> Dict[str, Any]:
-        expected = self._normalize(str(question.get("expectedAnswer", "")))
-        got = self._normalize(learner_answer)
-        correct = expected != "" and expected == got
+        expected_raw = str(question.get("expectedAnswer", "")).strip()
+        received_raw = str(learner_answer or "").strip()
+        expected = self._normalize(expected_raw)
+        got = self._normalize(received_raw)
+        correct = expected != "" and (
+            expected == got or self._semantic_match(expected_raw, received_raw)
+        )
         return {
             "correct": correct,
-            "expectedAnswer": expected,
-            "receivedAnswer": got,
+            "expectedAnswer": expected_raw,
+            "receivedAnswer": received_raw,
             "explanation": str(question.get("solution", "")),
             "encouragement": "Excellent. Keep practicing." if correct else "Good try. Follow the hint and retry.",
         }
@@ -350,16 +355,17 @@ class VedicRuleEngine:
             q.update(
                 {
                     "questionText": (
-                        f"Exercise {group} ({subtopic}): In this chapter, which base do we usually complete first for quick addition?"
+                        f"Exercise {group} ({subtopic}): In this chapter, which friendly base do we usually complete first for quick mental addition?"
                     ),
                     "hint": "Think of the most common base used in 'completing the whole'.",
-                    "solution": "We usually complete to base 10 first.",
+                    "solution": "Vedic Maths helps us calculate faster with clarity and confidence. In this chapter, we usually complete to base 10 first.",
                     "expectedAnswer": "10",
                     "visual": self._svg(
-                        "Introduction: Base Thinking",
+                        "Introduction: What and Why Vedic Maths",
                         "<rect x='20' y='26' width='360' height='54' rx='8' fill='#f8fafc' stroke='#cbd5e1'/>"
-                        "<text x='34' y='52' font-size='15'>Vedic idea: complete to a friendly base first.</text>"
-                        "<text x='34' y='72' font-size='15'>For this chapter, friendly base = 10.</text>",
+                        "<text x='34' y='46' font-size='14'>Vedic Maths: faster mental methods with clarity.</text>"
+                        "<text x='34' y='64' font-size='14'>Benefit: speed + accuracy + confidence.</text>"
+                        "<text x='34' y='82' font-size='14'>For this chapter, friendly base = 10.</text>",
                     ),
                 }
             )
@@ -728,6 +734,8 @@ class VedicRuleEngine:
     @staticmethod
     def _teacher_line_for_subtopic(subtopic: str) -> str:
         s = subtopic.strip().lower()
+        if "introduction to vedic maths" in s:
+            return "Vedic Maths is a smart mental math system with fewer steps, better speed, and stronger accuracy."
         if "ten point circle" in s:
             return "I will draw the circle, then we will jump clockwise together."
         if "deficiency" in s:
@@ -753,6 +761,8 @@ class VedicRuleEngine:
     @staticmethod
     def _board_action_for_subtopic(subtopic: str) -> str:
         s = subtopic.strip().lower()
+        if "introduction to vedic maths" in s:
+            return "Write what Vedic Maths means, then list benefits: speed, accuracy, confidence."
         if "ten point circle" in s:
             return "Draw circle with labels 10 to 1 and trace clockwise jump arrows."
         if "deficiency" in s:
@@ -779,6 +789,8 @@ class VedicRuleEngine:
     @staticmethod
     def _checkpoint_for_subtopic(subtopic: str) -> str:
         s = subtopic.strip().lower()
+        if "introduction to vedic maths" in s:
+            return "In one line, what is Vedic Maths and one benefit for you?"
         if "ten point circle" in s:
             return "If we start at 4 and move 5 clockwise, where do we land?"
         if "deficiency" in s:
@@ -792,6 +804,8 @@ class VedicRuleEngine:
     @staticmethod
     def _micro_practice_for_subtopic(subtopic: str) -> str:
         s = subtopic.strip().lower()
+        if "introduction to vedic maths" in s:
+            return "Micro-practice: say one benefit you want first - speed, accuracy, or confidence."
         if "ten point circle" in s:
             return "Micro-practice: 3 + 4 on the circle."
         if "deficiency" in s:
@@ -879,6 +893,7 @@ class VedicRuleEngine:
         board_action = str(step.get("boardAction", "")).strip() or self._board_action_for_subtopic(subtopic)
         checkpoint = str(step.get("checkpointPrompt", "")).strip() or self._checkpoint_for_subtopic(subtopic)
         micro = str(step.get("microPractice", "")).strip() or self._micro_practice_for_subtopic(subtopic)
+        svg_animation = self._default_svg_animation(subtopic, board_mode, checkpoint)
 
         return [
             {
@@ -901,6 +916,7 @@ class VedicRuleEngine:
                 "useWhenIncorrect": None,
                 "minConfidence": None,
                 "maxConfidence": None,
+                "svgAnimation": svg_animation,
             },
             {
                 "beatId": f"{step_id}_B2",
@@ -922,6 +938,7 @@ class VedicRuleEngine:
                 "useWhenIncorrect": None,
                 "minConfidence": None,
                 "maxConfidence": None,
+                "svgAnimation": svg_animation,
             },
             {
                 "beatId": f"{step_id}_B3",
@@ -943,7 +960,110 @@ class VedicRuleEngine:
                 "useWhenIncorrect": None,
                 "minConfidence": None,
                 "maxConfidence": None,
+                "svgAnimation": self._default_svg_animation(subtopic, board_mode, checkpoint, checkpoint_only=True),
             },
+        ]
+
+    @staticmethod
+    def _clamp_float(value: Any, default: float, minimum: float, maximum: float) -> float:
+        try:
+            parsed = float(value)
+        except Exception:
+            parsed = default
+        if parsed < minimum:
+            return minimum
+        if parsed > maximum:
+            return maximum
+        return parsed
+
+    @staticmethod
+    def _safe_color(color: Any, default: str = "#334155") -> str:
+        value = str(color or "").strip()
+        if not value:
+            return default
+        if len(value) > 32:
+            return default
+        return value
+
+    def _safe_svg_animation(self, raw: Any) -> List[Dict[str, Any]]:
+        if not isinstance(raw, list):
+            return []
+        cleaned: List[Dict[str, Any]] = []
+        for item in raw[:24]:
+            if not isinstance(item, dict):
+                continue
+            kind = str(item.get("kind", "")).strip().lower()
+            if kind not in {"line", "text"}:
+                continue
+            delay_sec = self._clamp_float(item.get("delaySec", 0.0), 0.0, 0.0, 12.0)
+            duration_sec = self._clamp_float(item.get("durationSec", 0.45), 0.45, 0.1, 8.0)
+            entry: Dict[str, Any] = {
+                "kind": kind,
+                "id": str(item.get("id", f"svg_{len(cleaned)+1}")).strip() or f"svg_{len(cleaned)+1}",
+                "delaySec": delay_sec,
+                "durationSec": duration_sec,
+            }
+            if kind == "line":
+                entry["x1"] = self._clamp_float(item.get("x1", 420), 420.0, 0.0, 760.0)
+                entry["y1"] = self._clamp_float(item.get("y1", 96), 96.0, 0.0, 340.0)
+                entry["x2"] = self._clamp_float(item.get("x2", 620), 620.0, 0.0, 760.0)
+                entry["y2"] = self._clamp_float(item.get("y2", 96), 96.0, 0.0, 340.0)
+                entry["color"] = self._safe_color(item.get("color"), "#0ea5e9")
+                entry["width"] = self._clamp_float(item.get("width", 2), 2.0, 1.0, 8.0)
+            else:
+                entry["x"] = self._clamp_float(item.get("x", 430), 430.0, 0.0, 760.0)
+                entry["y"] = self._clamp_float(item.get("y", 82), 82.0, 0.0, 340.0)
+                entry["text"] = str(item.get("text", "")).strip()[:160]
+                if not entry["text"]:
+                    continue
+                entry["color"] = self._safe_color(item.get("color"), "#1e293b")
+                entry["size"] = self._clamp_float(item.get("size", 14), 14.0, 10.0, 36.0)
+            cleaned.append(entry)
+        return cleaned
+
+    def _default_svg_animation(
+        self,
+        subtopic: str,
+        board_mode: str,
+        checkpoint_prompt: str,
+        checkpoint_only: bool = False,
+    ) -> List[Dict[str, Any]]:
+        if checkpoint_only:
+            return [
+                {
+                    "kind": "text",
+                    "id": "cp_prompt",
+                    "x": 430,
+                    "y": 92,
+                    "text": checkpoint_prompt[:96],
+                    "color": "#7c2d12",
+                    "size": 13,
+                    "delaySec": 0.0,
+                    "durationSec": 0.4,
+                }
+            ]
+
+        if board_mode == "svg" and "circle" in subtopic.lower():
+            return [
+                {"kind": "line", "id": "c_1", "x1": 520, "y1": 156, "x2": 540, "y2": 202, "color": "#0ea5e9", "width": 2, "delaySec": 0.0, "durationSec": 0.5},
+                {"kind": "line", "id": "c_2", "x1": 540, "y1": 202, "x2": 522, "y2": 250, "color": "#0ea5e9", "width": 2, "delaySec": 0.2, "durationSec": 0.5},
+                {"kind": "line", "id": "c_3", "x1": 522, "y1": 250, "x2": 472, "y2": 284, "color": "#0ea5e9", "width": 2, "delaySec": 0.4, "durationSec": 0.5},
+                {"kind": "line", "id": "c_4", "x1": 472, "y1": 284, "x2": 380, "y2": 296, "color": "#0ea5e9", "width": 2, "delaySec": 0.6, "durationSec": 0.5},
+                {"kind": "line", "id": "c_5", "x1": 380, "y1": 296, "x2": 288, "y2": 284, "color": "#0ea5e9", "width": 2, "delaySec": 0.8, "durationSec": 0.5},
+                {"kind": "line", "id": "c_6", "x1": 288, "y1": 284, "x2": 238, "y2": 250, "color": "#0ea5e9", "width": 2, "delaySec": 1.0, "durationSec": 0.5},
+                {"kind": "line", "id": "c_7", "x1": 238, "y1": 250, "x2": 220, "y2": 202, "color": "#0ea5e9", "width": 2, "delaySec": 1.2, "durationSec": 0.5},
+                {"kind": "line", "id": "c_8", "x1": 220, "y1": 202, "x2": 240, "y2": 156, "color": "#0ea5e9", "width": 2, "delaySec": 1.4, "durationSec": 0.5},
+                {"kind": "line", "id": "c_9", "x1": 240, "y1": 156, "x2": 380, "y2": 128, "color": "#0ea5e9", "width": 2, "delaySec": 1.6, "durationSec": 0.5},
+                {"kind": "line", "id": "c_10", "x1": 380, "y1": 128, "x2": 520, "y2": 156, "color": "#0ea5e9", "width": 2, "delaySec": 1.8, "durationSec": 0.5},
+                {"kind": "text", "id": "c_label", "x": 430, "y": 318, "text": "10 at top, then clockwise movement", "color": "#1e293b", "size": 12, "delaySec": 2.0, "durationSec": 0.4},
+            ]
+
+        return [
+            {"kind": "text", "id": "fd_t1", "x": 430, "y": 82, "text": f"Scene: {subtopic[:52]}", "color": "#1e293b", "size": 14, "delaySec": 0.0, "durationSec": 0.4},
+            {"kind": "line", "id": "fd_l1", "x1": 420, "y1": 102, "x2": 620, "y2": 102, "color": "#6366f1", "width": 2, "delaySec": 0.2, "durationSec": 0.5},
+            {"kind": "line", "id": "fd_l2", "x1": 420, "y1": 126, "x2": 670, "y2": 126, "color": "#6366f1", "width": 2, "delaySec": 0.4, "durationSec": 0.5},
+            {"kind": "line", "id": "fd_l3", "x1": 420, "y1": 150, "x2": 600, "y2": 150, "color": "#6366f1", "width": 2, "delaySec": 0.6, "durationSec": 0.5},
+            {"kind": "text", "id": "fd_note", "x": 430, "y": 176, "text": "Model -> checkpoint -> your turn", "color": "#334155", "size": 12, "delaySec": 0.8, "durationSec": 0.4},
         ]
 
     def _build_screenplay(
@@ -1013,6 +1133,14 @@ class VedicRuleEngine:
                 max_conf = str(item.get("maxConfidence", "")).strip().lower()
                 if max_conf not in {"low", "medium", "high"}:
                     max_conf = None
+                svg_animation = self._safe_svg_animation(item.get("svgAnimation"))
+                if not svg_animation:
+                    svg_animation = self._default_svg_animation(
+                        subtopic=subtopic,
+                        board_mode=board_mode,
+                        checkpoint_prompt=checkpoint,
+                        checkpoint_only=(pause_type == "student_response"),
+                    )
                 by_group[group].append(
                     {
                         "beatId": beat_id,
@@ -1034,6 +1162,7 @@ class VedicRuleEngine:
                         "useWhenIncorrect": use_when_incorrect,
                         "minConfidence": min_conf,
                         "maxConfidence": max_conf,
+                        "svgAnimation": svg_animation,
                     }
                 )
 
@@ -1052,9 +1181,24 @@ class VedicRuleEngine:
         lessons: Dict[str, Dict[str, Any]] = {}
         for code, chapter in self.CHAPTER_CATALOG.items():
             chapter_script = self._script_loader.chapter_script(code)
-            exercise_flow = self._exercise_flow(code)
-            teaching_script = self._build_teaching_script(code, exercise_flow, chapter_script)
+            base_exercise_flow = self._exercise_flow(code)
+            teaching_script = self._build_teaching_script(code, base_exercise_flow, chapter_script)
+            exercise_flow = [
+                {
+                    "exerciseGroup": self.normalize_exercise_group(step.get("exerciseGroup")),
+                    "subtopic": str(step.get("subtopic", "")).strip() or self._subtopic_for_group(code, step.get("exerciseGroup")),
+                }
+                for step in teaching_script
+            ]
             screenplay = self._build_screenplay(code, chapter_script, teaching_script)
+            scripted_subtopics = self._safe_list_of_str(chapter_script.get("subtopics"))
+            chapter_subtopics = scripted_subtopics or list(chapter["subtopics"])
+            scripted_goals = self._safe_list_of_str(chapter_script.get("learningGoals"))
+            chapter_goals = scripted_goals or list(chapter["learningGoals"])
+            try:
+                estimated_minutes = int(chapter_script.get("estimatedMinutes", chapter["estimatedMinutes"]))
+            except Exception:
+                estimated_minutes = int(chapter["estimatedMinutes"])
             core_ideas = self._safe_list_of_str(chapter_script.get("coreIdeas")) or [
                 "Understand the shortcut pattern first.",
                 "Practice through exercises A to I from easier to harder.",
@@ -1062,12 +1206,12 @@ class VedicRuleEngine:
             ]
             worked_examples = self._safe_worked_examples(chapter_script.get("workedExamples")) or [
                 {
-                    "question": f"{chapter['subtopics'][0]} demo",
+                    "question": f"{chapter_subtopics[0]} demo",
                     "method": "I do, we do, you do",
                     "answer": "Solved on whiteboard with checkpoints",
                 },
                 {
-                    "question": f"{chapter['subtopics'][-1]} bridge",
+                    "question": f"{chapter_subtopics[-1]} bridge",
                     "method": "Pattern plus verification",
                     "answer": "Method with quick self-check",
                 },
@@ -1082,9 +1226,9 @@ class VedicRuleEngine:
                 "title": str(chapter_script.get("title", chapter["title"])),
                 "gradeBand": "Grades 3-10",
                 "source": str(chapter_script.get("source", "Vedic Mathematics Teacher's Manual (Elementary Level)")),
-                "estimatedMinutes": int(chapter["estimatedMinutes"]),
-                "subtopics": list(chapter["subtopics"]),
-                "learningGoals": list(chapter["learningGoals"]),
+                "estimatedMinutes": estimated_minutes,
+                "subtopics": chapter_subtopics,
+                "learningGoals": chapter_goals,
                 "exerciseCoverage": list(self.EXERCISE_GROUPS),
                 "exerciseFlow": exercise_flow,
                 "teachingScript": teaching_script,
@@ -1097,4 +1241,46 @@ class VedicRuleEngine:
 
     @staticmethod
     def _normalize(value: str) -> str:
-        return "".join(value.strip().split())
+        lowered = value.strip().lower()
+        lowered = (
+            lowered.replace("−", "-")
+            .replace("—", "-")
+            .replace("×", "x")
+            .replace("÷", "/")
+        )
+        return "".join(ch for ch in lowered if ch.isalnum() or ch in "+-*/^|().")
+
+    @staticmethod
+    def _semantic_match(expected_raw: str, received_raw: str) -> bool:
+        expected_text = str(expected_raw or "").strip()
+        received_text = str(received_raw or "").strip()
+        if not expected_text or not received_text:
+            return False
+
+        # Numeric answers: accept if any number in student response matches expected.
+        if re.fullmatch(r"-?\d+(?:\.\d+)?", expected_text):
+            expected_num = float(expected_text)
+            numbers = [float(x) for x in re.findall(r"-?\d+(?:\.\d+)?", received_text)]
+            return any(abs(n - expected_num) < 1e-9 for n in numbers)
+
+        # Quotient/remainder answers like 13R2.
+        qr = re.fullmatch(r"\s*(-?\d+)\s*[rR]\s*(-?\d+)\s*", expected_text)
+        if qr:
+            eq = int(qr.group(1))
+            er = int(qr.group(2))
+            patterns = [
+                r"(-?\d+)\s*[rR]\s*(-?\d+)",
+                r"(-?\d+)\s*remainder\s*(-?\d+)",
+            ]
+            for pat in patterns:
+                m = re.search(pat, received_text, flags=re.IGNORECASE)
+                if m and int(m.group(1)) == eq and int(m.group(2)) == er:
+                    return True
+            return False
+
+        # String answers: normalized substring match supports natural phrasing.
+        expected_norm = VedicRuleEngine._normalize(expected_text)
+        received_norm = VedicRuleEngine._normalize(received_text)
+        if expected_norm and expected_norm in received_norm:
+            return True
+        return False

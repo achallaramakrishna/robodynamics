@@ -74,6 +74,31 @@ export type TutorScreenplayBeat = {
   useWhenIncorrect?: boolean;
   minConfidence?: "low" | "medium" | "high";
   maxConfidence?: "low" | "medium" | "high";
+  svgAnimation?: Array<
+    | {
+        kind: "line";
+        id: string;
+        x1: number;
+        y1: number;
+        x2: number;
+        y2: number;
+        color?: string;
+        width?: number;
+        delaySec: number;
+        durationSec: number;
+      }
+    | {
+        kind: "text";
+        id: string;
+        x: number;
+        y: number;
+        text: string;
+        size?: number;
+        color?: string;
+        delaySec: number;
+        durationSec: number;
+      }
+  >;
 };
 
 export type TutorChapter = {
@@ -143,4 +168,30 @@ export type TutorCatalogResponse = {
   chapters: TutorChapter[];
   exerciseGroups: TutorExerciseGroup[];
   courses?: Array<{ courseId: string; title: string }>;
+};
+
+export type TutorOrchestratorState =
+  | "idle"
+  | "intro"
+  | "teach"
+  | "checkpoint"
+  | "practice"
+  | "feedback"
+  | "adapt";
+
+export type TutorOrchestratorSnapshot = {
+  sessionId: string;
+  state: TutorOrchestratorState;
+  version: number;
+  updatedAt: string;
+  context: Record<string, unknown>;
+};
+
+export type TutorRealtimeEvent = {
+  sessionId: string;
+  eventType: string;
+  state: TutorOrchestratorState;
+  version: number;
+  timestamp: string;
+  meta: Record<string, unknown>;
 };

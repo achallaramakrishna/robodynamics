@@ -5,6 +5,8 @@ from typing import Any, Dict
 
 import httpx
 
+from app.services.adaptive_policy import AdaptivePolicyService
+
 
 class QualityRefreshService:
     def __init__(self) -> None:
@@ -12,6 +14,7 @@ class QualityRefreshService:
         self._openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini").strip()
         self._refresh_interval = max(1, int(os.getenv("AI_TUTOR_REFRESH_INTERVAL", "5")))
         self._enabled = bool(self._openai_api_key)
+        self._adaptive_policy = AdaptivePolicyService()
 
     @staticmethod
     def _fallback_tip(summary: Dict[str, Any], correct: bool) -> Dict[str, str]:
@@ -29,6 +32,13 @@ class QualityRefreshService:
         return {"tutorAction": "steady_practice", "coachTip": "Good progress. Keep practicing with one clear step at a time."}
 
     async def maybe_refresh(self, summary: Dict[str, Any], context: Dict[str, Any], correct: bool) -> Dict[str, str]:
+        adaptive = self._adaptive_policy.recommend(summary, context)
+        if adaptive:
+            return {
+                "tutorAction": str(adaptive.get("tutorAction", "")),
+                "coachTip": str(adaptive.get("coachTip", "")),
+            }
+
         attempts = int(summary.get("attempts", 0) or 0)
         if attempts == 0:
             return self._fallback_tip(summary, correct)

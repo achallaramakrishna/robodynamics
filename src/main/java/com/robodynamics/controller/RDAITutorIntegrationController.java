@@ -35,6 +35,7 @@ import com.robodynamics.service.RDCourseService;
 import com.robodynamics.service.RDCourseSessionService;
 import com.robodynamics.service.RDCourseSessionDetailService;
 import com.robodynamics.service.RDQuizQuestionService;
+import com.robodynamics.service.RDStudentEnrollmentService;
 import com.robodynamics.service.RDUserService;
 import com.robodynamics.service.impl.RDAITutorIntegrationService;
 
@@ -60,6 +61,9 @@ public class RDAITutorIntegrationController {
     @Autowired
     private RDQuizQuestionService rdQuizQuestionService;
 
+    @Autowired
+    private RDStudentEnrollmentService studentEnrollmentService;
+
     @PostMapping("/session/init")
     public ResponseEntity<?> initSession(@RequestBody(required = false) RDAITutorSessionInitRequest request,
                                          HttpSession session) {
@@ -76,6 +80,15 @@ public class RDAITutorIntegrationController {
             ));
         }
 
+        if (isEnrollmentRequiredModule(resolved.getModule())
+                && !isStudentEnrolledForModule(childId, resolved.getModule())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of(
+                    "error", "AI Tutor access denied. Student is not enrolled in this module course offering.",
+                    "module", normalizeModule(resolved.getModule()),
+                    "childId", childId
+            ));
+        }
+
         String token = aiTutorIntegrationService.createLaunchToken(
                 me,
                 childId,
@@ -83,8 +96,17 @@ public class RDAITutorIntegrationController {
                 resolved.getGrade()
         );
         String learnerName = resolveLearnerName(me, childId);
+        ModuleEnrollmentContext launchContext = resolveEnrollmentForModule(childId, resolved.getModule());
         RDAITutorSessionInitResponse response = new RDAITutorSessionInitResponse();
-        response.setLaunchUrl(aiTutorIntegrationService.buildLaunchUrl(token, learnerName, resolved.getModule()));
+        response.setLaunchUrl(
+                aiTutorIntegrationService.buildLaunchUrl(
+                        token,
+                        learnerName,
+                        resolved.getModule(),
+                        launchContext == null ? null : launchContext.enrollmentId,
+                        launchContext == null ? null : launchContext.courseId
+                )
+        );
         response.setExpiresInSec(aiTutorIntegrationService.getTokenTtlSeconds());
         response.setModule(resolved.getModule() == null ? "VEDIC_MATH" : resolved.getModule());
         response.setGrade(resolved.getGrade() == null ? safeGrade(me) : resolved.getGrade());
@@ -160,11 +182,18 @@ public class RDAITutorIntegrationController {
             }
 
             int courseSessionId = session.getCourseSessionId();
-            List<RDCourseSessionDetail> details = rdCourseSessionDetailService.getRDCourseSessionDetails(courseSessionId);
+            List<RDCourseSessionDetail> details;
+            try {
+                details = rdCourseSessionDetailService.getRDCourseSessionDetails(courseSessionId);
+            } catch (Exception ex) {
+                // Skip broken/missing asset references instead of failing the full template response.
+                details = Collections.emptyList();
+            }
             if (details == null) {
                 details = Collections.emptyList();
             }
             Map<String, Integer> assets = buildAssetCounts(details);
+            List<Map<String, Object>> assetItems = buildAssetItems(courseId, details);
             List<Map<String, Object>> questionPool = buildQuestionPool(courseId, courseSessionId, 45);
 
             String title = safe(session.getSessionTitle(), "Session " + session.getSessionId());
@@ -179,7 +208,12 @@ public class RDAITutorIntegrationController {
             chapter.put("exerciseGroups", List.of("A", "B", "C", "D", "E", "F", "G", "H", "I"));
             chapter.put("exerciseFlow", buildExerciseFlow(subtopics));
             chapter.put("assets", assets);
+            chapter.put("assetItems", assetItems);
             chapter.put("questionPool", questionPool);
+            if (!assetItems.isEmpty()) {
+                Object sourceUrlObj = assetItems.get(0).get("url");
+                chapter.put("source", sourceUrlObj == null ? "" : String.valueOf(sourceUrlObj));
+            }
             chapters.add(chapter);
         }
 
@@ -388,9 +422,64 @@ public class RDAITutorIntegrationController {
         return counts;
     }
 
+    private static List<Map<String, Object>> buildAssetItems(int courseId, List<RDCourseSessionDetail> details) {
+        List<Map<String, Object>> out = new ArrayList<>();
+        if (details == null) {
+            return out;
+        }
+        for (RDCourseSessionDetail d : details) {
+            if (d == null) {
+                continue;
+            }
+            String file = safe(d.getFile(), "").trim();
+            if (file.isEmpty()) {
+                continue;
+            }
+            String type = normalizeType(d.getType());
+            if ("notes".equals(type)) {
+                type = "pdf";
+            }
+            if ("exam_paper".equals(type) || "exam-paper".equals(type) || "exam paper".equals(type)) {
+                type = "exampaper";
+            }
+
+            Map<String, Object> row = new LinkedHashMap<>();
+            row.put("assetType", type.isEmpty() ? "asset" : type);
+            row.put("topic", safe(d.getTopic(), ""));
+            row.put("file", file);
+            row.put("url", toPublicAssetUrl(courseId, file));
+            out.add(row);
+        }
+        return out;
+    }
+
+    private static String toPublicAssetUrl(int courseId, String fileRef) {
+        String normalized = safe(fileRef, "").trim().replace('\\', '/');
+        if (normalized.isEmpty()) {
+            return "";
+        }
+        if (normalized.startsWith("http://") || normalized.startsWith("https://")) {
+            return normalized;
+        }
+        if (normalized.startsWith("/session_materials/")) {
+            return normalized;
+        }
+        if (normalized.startsWith("session_materials/")) {
+            return "/" + normalized;
+        }
+        String relative = normalized.startsWith("/") ? normalized.substring(1) : normalized;
+        return "/session_materials/" + courseId + "/" + relative;
+    }
+
     private List<Map<String, Object>> buildQuestionPool(int courseId, int sessionId, int limit) {
         List<Map<String, Object>> out = new ArrayList<>();
-        List<RDQuizQuestion> questions = rdQuizQuestionService.findByFilters(courseId, sessionId, null, null, limit, 0);
+        List<RDQuizQuestion> questions;
+        try {
+            questions = rdQuizQuestionService.findByFilters(courseId, sessionId, null, null, limit, 0);
+        } catch (Exception ex) {
+            // Some legacy rows can point to missing media entities; skip question pool in that case.
+            return out;
+        }
         if (questions == null) {
             return out;
         }
@@ -429,6 +518,66 @@ public class RDAITutorIntegrationController {
         return "short_answer";
     }
 
+    private boolean isStudentEnrolledForModule(Integer studentId, String module) {
+        if (studentId == null) {
+            return false;
+        }
+        List<com.robodynamics.model.RDStudentEnrollment> enrollments =
+                studentEnrollmentService.getStudentEnrollmentByStudent(studentId);
+        if (enrollments == null || enrollments.isEmpty()) {
+            return false;
+        }
+        for (com.robodynamics.model.RDStudentEnrollment enrollment : enrollments) {
+            if (enrollment == null || enrollment.getStatus() == 0 || enrollment.getCourseOffering() == null
+                    || enrollment.getCourseOffering().getCourse() == null) {
+                continue;
+            }
+            int enrolledCourseId = enrollment.getCourseOffering().getCourse().getCourseId();
+            String enrolledCourseName = enrollment.getCourseOffering().getCourse().getCourseName();
+            if (aiTutorIntegrationService.isCourseMappedToModule(enrolledCourseId, enrolledCourseName, module)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private ModuleEnrollmentContext resolveEnrollmentForModule(Integer studentId, String module) {
+        if (studentId == null) {
+            return null;
+        }
+        List<com.robodynamics.model.RDStudentEnrollment> enrollments =
+                studentEnrollmentService.getStudentEnrollmentByStudent(studentId);
+        if (enrollments == null || enrollments.isEmpty()) {
+            return null;
+        }
+        for (com.robodynamics.model.RDStudentEnrollment enrollment : enrollments) {
+            if (enrollment == null || enrollment.getStatus() == 0 || enrollment.getCourseOffering() == null
+                    || enrollment.getCourseOffering().getCourse() == null) {
+                continue;
+            }
+            int enrolledCourseId = enrollment.getCourseOffering().getCourse().getCourseId();
+            String enrolledCourseName = enrollment.getCourseOffering().getCourse().getCourseName();
+            if (aiTutorIntegrationService.isCourseMappedToModule(enrolledCourseId, enrolledCourseName, module)) {
+                return new ModuleEnrollmentContext(enrollment.getEnrollmentId(), enrolledCourseId);
+            }
+        }
+        return null;
+    }
+
+    private static String normalizeModule(String module) {
+        if (module == null || module.isBlank()) {
+            return "VEDIC_MATH";
+        }
+        return module.trim().toUpperCase(Locale.ENGLISH);
+    }
+
+    private static boolean isEnrollmentRequiredModule(String module) {
+        String normalized = normalizeModule(module);
+        return "NEET_PHYSICS".equals(normalized)
+                || "NEET_CHEMISTRY".equals(normalized)
+                || "NEET_BIOLOGY".equals(normalized);
+    }
+
     private String resolveLearnerName(RDUser me, Integer childId) {
         if (me == null) {
             return "";
@@ -444,5 +593,15 @@ public class RDAITutorIntegrationController {
             return me.getFullName();
         }
         return child.getFullName();
+    }
+
+    private static final class ModuleEnrollmentContext {
+        private final Integer enrollmentId;
+        private final Integer courseId;
+
+        private ModuleEnrollmentContext(Integer enrollmentId, Integer courseId) {
+            this.enrollmentId = enrollmentId;
+            this.courseId = courseId;
+        }
     }
 }

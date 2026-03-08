@@ -12,7 +12,7 @@ class TutorEngine(Protocol):
     def normalize_chapter(self, chapter_code: str | None) -> str: ...
     def normalize_exercise_group(self, exercise_group: str | None) -> str: ...
     def lesson(self, chapter_code: str | None) -> Dict[str, Any]: ...
-    def next_question(self, chapter_code: str | None, exercise_group: str | None) -> Dict[str, Any]: ...
+    def next_question(self, chapter_code: str | None, exercise_group: str | None, grade: str | None = None) -> Dict[str, Any]: ...
     def evaluate(self, question: Dict[str, Any], learner_answer: str) -> Dict[str, Any]: ...
     def doubt_reply(self, message: str, chapter_code: str | None) -> str: ...
 
@@ -23,7 +23,7 @@ class TutorEngineRegistry:
         "VEDIC_MATH": "vedic_math",
         "NEET_PHYSICS": "neet_physics",
         "NEET_CHEMISTRY": "neet_chemistry",
-        "NEET_MATH": "neet_math",
+        "NEET_BIOLOGY": "neet_biology",
     }
 
     def __init__(self, engines: Dict[str, TutorEngine]) -> None:
@@ -44,8 +44,8 @@ class TutorEngineRegistry:
             return "neet_physics"
         if cid in {"chemistry", "neetchemistry", "neet_chemistry", "neet-chemistry"}:
             return "neet_chemistry"
-        if cid in {"math", "mathematics", "neetmath", "neet_math", "neet-math"}:
-            return "neet_math"
+        if cid in {"biology", "bio", "neetbiology", "neet_biology", "neet-biology"}:
+            return "neet_biology"
         if cid in {"phonics"}:
             return "phonics"
         return cid

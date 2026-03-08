@@ -44,6 +44,12 @@
     </div>
   </section>
 
+  <c:if test="${param.aiTutorAccessDenied eq '1'}">
+    <div class="alert alert-warning mt-3 mb-0" role="alert">
+      AI Tutor is available only for courses where you are enrolled through Course Offering.
+    </div>
+  </c:if>
+
   <div class="rd-content student-content">
     <section class="student-kpi-grid">
       <article class="student-kpi-card">
@@ -62,6 +68,77 @@
         <p class="label">Quiz Records</p>
         <p class="value"><c:out value="${fn:length(quizResults)}" default="0" /></p>
       </article>
+    </section>
+
+    <section class="student-ai-tutor-section">
+      <div class="student-section-head">
+        <div>
+          <h2 class="student-section-title">AI Tutor Classroom</h2>
+          <p class="student-section-sub">Launch subject tutors with the same live classroom experience.</p>
+        </div>
+        <span class="course-total-pill">Multi-Course</span>
+      </div>
+      <div class="ai-tutor-card-grid">
+        <article class="ai-tutor-card ai-tutor-vedic">
+          <p class="course-kicker">AI Tutor</p>
+          <h3 class="course-name">Vedic Math AI Tutor</h3>
+          <p class="side-note">Mental math practice with guided explanation, checkpoints, and instant feedback.</p>
+          <a href="${ctx}/ai-tutor/launch?module=VEDIC_MATH" class="btn btn-primary">
+            <i class="fas fa-brain me-1"></i> Launch Tutor
+          </a>
+        </article>
+
+        <article class="ai-tutor-card ai-tutor-neet ai-tutor-physics ${neetPhysicsTutorEnabled ? '' : 'is-locked'}">
+          <p class="course-kicker">AI Tutor</p>
+          <h3 class="course-name">NEET Physics AI Tutor</h3>
+          <p class="side-note">Concept-to-numerical coaching from your enrolled NEET Physics sessions and assets.</p>
+          <c:choose>
+            <c:when test="${neetPhysicsTutorEnabled}">
+              <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-primary">
+                <i class="fas fa-atom me-1"></i> Launch Tutor
+              </a>
+            </c:when>
+            <c:otherwise>
+              <button class="btn btn-outline-secondary" type="button" disabled>Not Assigned</button>
+            </c:otherwise>
+          </c:choose>
+        </article>
+
+        <article class="ai-tutor-card ai-tutor-neet ai-tutor-chemistry ${neetChemistryTutorEnabled ? '' : 'is-locked'}">
+          <p class="course-kicker">AI Tutor</p>
+          <h3 class="course-name">NEET Chemistry AI Tutor</h3>
+          <p class="side-note">Reaction logic, periodic trends, and problem solving from your LMS course content.</p>
+          <c:choose>
+            <c:when test="${neetChemistryTutorEnabled}">
+              <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-primary">
+                <i class="fas fa-flask me-1"></i> Launch Tutor
+              </a>
+            </c:when>
+            <c:otherwise>
+              <button class="btn btn-outline-secondary" type="button" disabled>Not Assigned</button>
+            </c:otherwise>
+          </c:choose>
+        </article>
+
+        <article class="ai-tutor-card ai-tutor-neet ai-tutor-biology ${neetBiologyTutorEnabled ? '' : 'is-locked'}">
+          <p class="course-kicker">AI Tutor</p>
+          <h3 class="course-name">NEET Biology AI Tutor</h3>
+          <p class="side-note">NCERT-aligned biology guidance with chapter-level drills and doubt support.</p>
+          <c:choose>
+            <c:when test="${neetBiologyTutorEnabled}">
+              <a href="${ctx}/ai-tutor/launch?module=NEET_BIOLOGY" class="btn btn-primary">
+                <i class="fas fa-dna me-1"></i> Launch Tutor
+              </a>
+            </c:when>
+            <c:otherwise>
+              <button class="btn btn-outline-secondary" type="button" disabled>Not Assigned</button>
+            </c:otherwise>
+          </c:choose>
+        </article>
+      </div>
+      <c:if test="${not hasAnyNeetTutorEnabled}">
+        <p class="side-note mb-0">NEET tutors will unlock automatically when NEET course offerings are assigned in LMS.</p>
+      </c:if>
     </section>
 
     <div class="student-workspace">
@@ -216,29 +293,28 @@
                 </a>
               </c:forEach>
               <div class="d-grid gap-2 mt-2">
-                <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-outline-primary w-100">
-                  <i class="fas fa-atom me-1"></i> NEET Physics Tutor
-                </a>
-                <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-outline-primary w-100">
-                  <i class="fas fa-flask me-1"></i> NEET Chemistry Tutor
-                </a>
-                <a href="${ctx}/ai-tutor/launch?module=NEET_MATH" class="btn btn-outline-primary w-100">
-                  <i class="fas fa-square-root-alt me-1"></i> NEET Math Tutor
-                </a>
+                <c:if test="${neetPhysicsTutorEnabled}">
+                  <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-atom me-1"></i> NEET Physics Tutor
+                  </a>
+                </c:if>
+                <c:if test="${neetChemistryTutorEnabled}">
+                  <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-flask me-1"></i> NEET Chemistry Tutor
+                  </a>
+                </c:if>
+                <c:if test="${neetBiologyTutorEnabled}">
+                  <a href="${ctx}/ai-tutor/launch?module=NEET_BIOLOGY" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-dna me-1"></i> NEET Biology Tutor
+                  </a>
+                </c:if>
+                <c:if test="${not hasAnyNeetTutorEnabled}">
+                  <p class="side-note mb-0">No NEET AI Tutor offering assigned yet.</p>
+                </c:if>
               </div>
             </c:when>
             <c:otherwise>
-              <div class="d-grid gap-2">
-                <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-outline-primary w-100">
-                  <i class="fas fa-atom me-1"></i> NEET Physics Tutor
-                </a>
-                <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-outline-primary w-100">
-                  <i class="fas fa-flask me-1"></i> NEET Chemistry Tutor
-                </a>
-                <a href="${ctx}/ai-tutor/launch?module=NEET_MATH" class="btn btn-outline-primary w-100">
-                  <i class="fas fa-square-root-alt me-1"></i> NEET Math Tutor
-                </a>
-              </div>
+              <p class="side-note mb-0">No active course offering assigned yet.</p>
             </c:otherwise>
           </c:choose>
         </article>

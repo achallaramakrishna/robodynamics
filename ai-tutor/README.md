@@ -1,6 +1,6 @@
 # RoboDynamics AI Tutor (Next.js + FastAPI)
 
-This folder contains the starter implementation for Vedic Math AI Tutor:
+This folder contains the multi-course implementation for RoboDynamics AI Tutor:
 
 - `web/` -> Next.js (App Router) UI + BFF routes
 - `tutor-api/` -> FastAPI rule-based tutor backend
@@ -10,7 +10,7 @@ This folder contains the starter implementation for Vedic Math AI Tutor:
 
 1. Java app (`robodynamics`) issues launch token at `/api/ai-tutor/session/init`
 2. User launches `/ai-tutor/launch?module=VEDIC_MATH`
-3. Next.js reads token and calls FastAPI `/ai-tutor-api/vedic/start`
+3. Next.js reads token and calls FastAPI `/ai-tutor-api/tutor/start`
 4. FastAPI serves lesson + questions, evaluates answers, answers doubts
 5. FastAPI forwards event telemetry to Java `/api/ai-tutor/session/event`
 6. Java exposes summary at `/api/ai-tutor/session/summary`
@@ -64,8 +64,8 @@ npm run dev
 - `AI_TUTOR_ADAPTIVE_POLICY_MIN_OBS` (minimum context support before policy action is used)
 - `AI_TUTOR_TEMPLATE_API_URL` (Java API endpoint for course/session asset template)
 - `AI_TUTOR_DYNAMIC_COURSE_TEMPLATE_ENABLED` (auto-build tutor engine for new `courseId` aliases)
-- `AI_TUTOR_TEMPLATE_COURSE_IDS` (alias->db course id map, e.g. `neet_physics:155`)
-- `AI_TUTOR_NEET_PHYSICS_DB_COURSE_ID`, `AI_TUTOR_NEET_CHEMISTRY_DB_COURSE_ID`, `AI_TUTOR_NEET_MATH_DB_COURSE_ID`
+- `AI_TUTOR_TEMPLATE_COURSE_IDS` (alias->db course id map, e.g. `neet_physics:138,neet_chemistry:131,neet_biology:132`)
+- `AI_TUTOR_NEET_PHYSICS_DB_COURSE_ID`, `AI_TUTOR_NEET_CHEMISTRY_DB_COURSE_ID`, `AI_TUTOR_NEET_BIOLOGY_DB_COURSE_ID`
 
 ### Next.js (`ai-tutor/web/.env.example`)
 
@@ -114,9 +114,13 @@ Schema and architecture notes:
 
 - Current starter uses in-memory session/event store in Java and FastAPI.
 - SQL schema for persistent analytics is available at `docs/ai_tutor_schema.sql`.
+- LMS seeding helpers for NEET AI Tutor:
+  - `neet_ai_tutor_lms_seed_2026_03_07.sql` (creates offerings + unit sessions; optional enrollments)
+  - `scripts/link_neet_pdf_assets_to_sessions.sh` (maps `session_materials/{courseId}/chapter/*.pdf` into `rd_course_session_details`)
 - Nginx routing template is available at `docs/ai_tutor_integration_nginx.conf`.
 - Module codes now supported by default:
   - `VEDIC_MATH`
   - `NEET_PHYSICS`
   - `NEET_CHEMISTRY`
-  - `NEET_MATH`
+  - `NEET_BIOLOGY`
+- Legacy compatibility aliases are still available under `/ai-tutor-api/vedic/*`.

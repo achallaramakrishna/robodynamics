@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "RoboDynamics AI Tutor",
-  description: "Vedic Math AI Tutor integrated with RoboDynamics"
+  description: "Multi-course AI Tutor integrated with RoboDynamics"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -13,4 +13,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-

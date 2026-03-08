@@ -196,11 +196,29 @@ class VedicRuleEngine:
         }
     }
 
+    # ── Grade scaling ─────────────────────────────────────────────────────────
+    @staticmethod
+    def _grade_scale(grade: str | None) -> int:
+        """Return a 0-4 difficulty boost based on student grade."""
+        try:
+            g = int(grade or "8")
+        except (ValueError, TypeError):
+            g = 8
+        if g <= 4:
+            return 0   # primary: smallest numbers
+        if g <= 6:
+            return 1   # upper-primary
+        if g <= 8:
+            return 2   # middle school (default)
+        if g <= 10:
+            return 3   # secondary
+        return 4       # senior secondary
+
     def __init__(self) -> None:
         self._rng = random.SystemRandom()
         self._script_loader = CourseScriptLoader(self.COURSE_ID)
         self._lessons = self._build_lessons()
-        self._question_builders: Dict[str, Callable[[str], Dict[str, Any]]] = {
+        self._question_builders: Dict[str, Callable[..., Dict[str, Any]]] = {
             "L1_COMPLETING_WHOLE": self._q_completing_whole,
             "L2_DOUBLING_HALVING": self._q_doubling_halving,
             "L3_MULTIPLY_BY_11": self._q_multiply_by_11,
@@ -286,11 +304,12 @@ class VedicRuleEngine:
     def lesson(self, chapter_code: str | None) -> Dict[str, Any]:
         return self._lessons[self.normalize_chapter(chapter_code)]
 
-    def next_question(self, chapter_code: str | None, exercise_group: str | None) -> Dict[str, Any]:
+    def next_question(self, chapter_code: str | None, exercise_group: str | None, grade: str | None = None) -> Dict[str, Any]:
         code = self.normalize_chapter(chapter_code)
         group = self.normalize_exercise_group(exercise_group)
+        scale = self._grade_scale(grade)
         builder = self._question_builders.get(code, self._q_completing_whole)
-        question = builder(group)
+        question = builder(group, scale)  # type: ignore[call-arg]
         question["chapterCode"] = code
         question["exerciseGroup"] = group
         question["subtopic"] = self._subtopic_for_group(code, group)
@@ -336,6 +355,11 @@ class VedicRuleEngine:
             "type": qtype,
         }
 
+    def _r(self, lo: int, hi: int, scale: int = 2) -> int:
+        """Random int with grade-scale boost: scale 0=easy, 4=hardest."""
+        boost = scale * max(0, (hi - lo) // 5)
+        return self._rng.randint(lo, hi + boost)
+
     def _svg(self, title: str, inner: str) -> Dict[str, str]:
         return {
             "kind": "svg",
@@ -346,101 +370,164 @@ class VedicRuleEngine:
             ),
         }
 
-    def _q_completing_whole(self, group: str) -> Dict[str, Any]:
+    # ── L1 question type selectors (manual Practice A-O) ─────────────────────
+    # 0=concept intro, 1-2=ten-point circle, 3-4=deficiency,
+    # 5-6=two-digit completion, 7=mental addition with carry,
+    # 8=near-tens add/sub (By Addition and By Subtraction)
+    _L1_TYPE_MAP = [0, 1, 2, 3, 4, 5, 6, 7, 8]  # one per exercise group A-I
+
+    def _q_completing_whole(self, group: str, scale: int = 2) -> Dict[str, Any]:
         idx = self._idx(group)
         subtopic = self._subtopic_for_group("L1_COMPLETING_WHOLE", group)
+        qtype_idx = self._L1_TYPE_MAP[min(idx, len(self._L1_TYPE_MAP) - 1)]
 
-        if idx == 0:
+        # ── 0: Concept intro ──────────────────────────────────────────────────
+        if qtype_idx == 0:
             q = self._base_q(group, "Introduction to Vedic Maths", "concept_intro")
-            q.update(
-                {
-                    "questionText": (
-                        f"Exercise {group} ({subtopic}): In this chapter, which friendly base do we usually complete first for quick mental addition?"
-                    ),
-                    "hint": "Think of the most common base used in 'completing the whole'.",
-                    "solution": "Vedic Maths helps us calculate faster with clarity and confidence. In this chapter, we usually complete to base 10 first.",
-                    "expectedAnswer": "10",
-                    "visual": self._svg(
-                        "Introduction: What and Why Vedic Maths",
-                        "<rect x='20' y='26' width='360' height='54' rx='8' fill='#f8fafc' stroke='#cbd5e1'/>"
-                        "<text x='34' y='46' font-size='14'>Vedic Maths: faster mental methods with clarity.</text>"
-                        "<text x='34' y='64' font-size='14'>Benefit: speed + accuracy + confidence.</text>"
-                        "<text x='34' y='82' font-size='14'>For this chapter, friendly base = 10.</text>",
-                    ),
-                }
-            )
+            q.update({
+                "questionText": f"Exercise {group} ({subtopic}): Which base number do we 'complete to' for fast mental addition in the Vedic system?",
+                "hint": "It is the simplest round number.",
+                "solution": "We complete to base 10. Vedic Maths uses 'By the Completion' sutra for faster mental arithmetic.",
+                "expectedAnswer": "10",
+                "visual": self._svg(
+                    "Introduction: Vedic Maths Base",
+                    "<rect x='20' y='22' width='370' height='66' rx='8' fill='#f0f9ff' stroke='#7dd3fc'/>"
+                    "<text x='34' y='44' font-size='14' fill='#0369a1'>Sutra: By the Completion or Non-Completion</text>"
+                    "<text x='34' y='62' font-size='13' fill='#334155'>We always look for the nearest multiple of 10.</text>"
+                    "<text x='34' y='80' font-size='13' fill='#334155'>Example: 6 + 4 = 10  |  37 + 3 = 40</text>",
+                ),
+            })
             return q
 
-        if idx <= 2:
+        # ── 1-2: Ten-point circle jumps ───────────────────────────────────────
+        if qtype_idx in (1, 2):
             start = self._rng.randint(1, 7)
             jump = self._rng.randint(2, 9 - start)
             ans = start + jump
             q = self._base_q(group, "Ten point circle", "circle_jump")
-            q.update(
-                {
-                    "questionText": f"Exercise {group} ({subtopic}): Start at {start} and move {jump} steps clockwise on the ten-point circle. Where do you land?",
-                    "hint": "Count forward on the circle.",
-                    "solution": f"You land on {ans}.",
-                    "expectedAnswer": str(ans),
-                    "visual": self._svg(
-                        "Ten Point Circle Jump",
-                        f"<line x1='20' y1='60' x2='400' y2='60' stroke='#334155' stroke-width='2'/>"
-                        f"<text x='45' y='40'>{start}</text><text x='290' y='40'>{ans}</text><text x='165' y='28'>+{jump}</text>",
-                    ),
-                }
-            )
-            return q
-
-        if idx <= 4:
-            n = self._rng.randint(1, 9)
-            ans = 10 - n
-            q = self._base_q(group, "Deficiency from ten", "deficiency_from_ten")
-            q.update(
-                {
-                    "questionText": f"Exercise {group} ({subtopic}): What is the deficiency of {n} from 10?",
-                    "hint": f"Think: {n} + ? = 10.",
-                    "solution": f"Deficiency is {ans}.",
-                    "expectedAnswer": str(ans),
-                    "visual": self._svg(
-                        "Deficiency to 10",
-                        f"<rect x='15' y='30' width='{n * 30}' height='24' fill='#93c5fd'/>"
-                        f"<rect x='{15 + n * 30}' y='30' width='{(10 - n) * 30}' height='24' fill='#dbeafe'/>"
-                        "<text x='15' y='20' font-size='13'>Total = 10</text>",
-                    ),
-                }
-            )
-            return q
-
-        if idx <= 6:
-            a = self._rng.randint(6, 9)
-            b = self._rng.randint(5, 11)
-            ans = a + b
-            q = self._base_q(group, "Mental addition", "mental_addition")
-            q.update(
-                {
-                    "questionText": f"Exercise {group} ({subtopic}): Solve {a}+{b} by completing to 10.",
-                    "hint": "Take what is needed from the second number to make 10.",
-                    "solution": f"Answer = {ans}.",
-                    "expectedAnswer": str(ans),
-                }
-            )
-            return q
-
-        a = self._rng.randint(11, 29)
-        b = self._rng.randint(3, 9)
-        ans = a - b
-        q = self._base_q(group, "By addition and subtraction", "near_base_subtraction")
-        q.update(
-            {
-                "questionText": f"Exercise {group} ({subtopic}): Solve {a}-{b} using near-base thinking.",
-                "hint": "Break subtraction into easy jumps.",
-                "solution": f"Answer = {ans}.",
+            q.update({
+                "questionText": f"Exercise {group} ({subtopic}): Start at {start} on the ten-point circle and move {jump} steps clockwise. Where do you land?",
+                "hint": "Count forward from your start number.",
+                "solution": f"Start at {start}, count {jump} forward: land on {ans}.",
                 "expectedAnswer": str(ans),
-            }
-        )
+                "visual": self._svg(
+                    "Ten Point Circle",
+                    "<circle cx='210' cy='55' r='40' fill='none' stroke='#94a3b8' stroke-width='2'/>"
+                    f"<text x='200' y='12' font-size='13'>10/0</text>"
+                    f"<text x='60' y='60' font-size='13'>Start:{start}</text>"
+                    f"<text x='310' y='60' font-size='13'>Land:{ans}</text>"
+                    f"<text x='185' y='105' font-size='12'>+{jump} steps</text>",
+                ),
+            })
+            return q
+
+        # ── 3-4: Deficiency from ten / completing the whole ───────────────────
+        if qtype_idx in (3, 4):
+            # Scale: lower grades: single digit; higher grades: from 20/100
+            if scale <= 1:
+                n = self._rng.randint(1, 9)
+                base = 10
+            elif scale <= 2:
+                # Mix single digit and two-digit
+                if self._rng.random() < 0.5:
+                    n = self._rng.randint(1, 9)
+                    base = 10
+                else:
+                    n = self._rng.randint(11, 19)
+                    base = 20
+            else:
+                n = self._rng.randint(10, 90)
+                base = round(n / 10 + 1) * 10  # nearest higher multiple of 10
+            ans = base - n
+            q = self._base_q(group, "Deficiency from ten", "deficiency_from_base")
+            q.update({
+                "questionText": f"Exercise {group} ({subtopic}): What must you add to {n} to reach {base}?",
+                "hint": f"Think: {n} + ? = {base}.",
+                "solution": f"Deficiency of {n} from {base} is {ans}. ({n} + {ans} = {base})",
+                "expectedAnswer": str(ans),
+                "visual": self._svg(
+                    f"Deficiency to {base}",
+                    f"<rect x='10' y='34' width='{min(n*3, 280)}' height='24' fill='#93c5fd' rx='3'/>"
+                    f"<rect x='{10 + min(n*3, 280)}' y='34' width='{min(ans*3, 120)}' height='24' fill='#dbeafe' rx='3'/>"
+                    f"<text x='10' y='22' font-size='13'>{n} + ? = {base}</text>",
+                ),
+            })
+            return q
+
+        # ── 5-6: Two-digit mental addition (Practice B style: 37+23, 42+28) ──
+        if qtype_idx in (5, 6):
+            # Make one number end in something that completes with the other's unit
+            tens1 = self._rng.randint(1 + scale, 5 + scale * 2)
+            units1 = self._rng.randint(2, 8)
+            units2 = 10 - units1  # so units always sum to 10
+            tens2 = self._rng.randint(1 + scale, 4 + scale)
+            a = tens1 * 10 + units1
+            b = tens2 * 10 + units2
+            ans = a + b
+            q = self._base_q(group, "Mental addition", "two_digit_completion")
+            q.update({
+                "questionText": f"Exercise {group} ({subtopic}): {a} + {b} = ? (Hint: the units add to 10)",
+                "hint": f"Units: {units1}+{units2}={10}. Add the tens separately.",
+                "solution": f"{units1}+{units2}=10, {tens1*10}+{tens2*10}={tens1*10+tens2*10}, total={ans}.",
+                "expectedAnswer": str(ans),
+                "visual": self._svg(
+                    "Two-digit Completion",
+                    f"<text x='20' y='44' font-size='20' fill='#1e293b'>{a} + {b}</text>"
+                    f"<text x='220' y='44' font-size='18' fill='#0369a1'>= {ans}</text>"
+                    f"<text x='20' y='74' font-size='13' fill='#64748b'>Units {units1}+{units2}=10  |  Tens {tens1*10}+{tens2*10}</text>",
+                ),
+            })
+            return q
+
+        # ── 7: Mental addition with carry (Practice E style: 56+26, 48+45) ───
+        if qtype_idx == 7:
+            a = self._rng.randint(20 + scale * 5, 60 + scale * 8)
+            b = self._rng.randint(15 + scale * 3, 45 + scale * 5)
+            ans = a + b
+            q = self._base_q(group, "Mental addition", "mental_addition_carry")
+            q.update({
+                "questionText": f"Exercise {group} ({subtopic}): {a} + {b} = ? (Do it mentally, left to right)",
+                "hint": "Add tens first, then units, then carry if needed.",
+                "solution": (
+                    f"Add tens: {(a//10)*10}+{(b//10)*10}={((a//10)+(b//10))*10}. "
+                    f"Add units: {a%10}+{b%10}={a%10+b%10}. "
+                    f"Total={ans}."
+                ),
+                "expectedAnswer": str(ans),
+            })
+            return q
+
+        # ── 8: Near-tens add/subtract (By Addition and By Subtraction) ────────
+        # Practice K,L,M,N,O: +9, +19, +38, -19, -38 etc.
+        near_tens = [9, 19, 29, 18, 38, 39][self._rng.randint(0, 2 + scale)]
+        op = self._rng.choice(["+", "-"])
+        a = self._rng.randint(20 + scale * 5, 60 + scale * 8)
+        if op == "+" :
+            ans = a + near_tens
+        else:
+            ans = a - near_tens
+            if ans <= 0:  # avoid negatives for young grades
+                op = "+"
+                ans = a + near_tens
+        q = self._base_q(group, "By addition and subtraction", "near_base_operation")
+        nearby = (near_tens // 10 + 1) * 10
+        deficit = nearby - near_tens
+        q.update({
+            "questionText": f"Exercise {group} ({subtopic}): {a} {op} {near_tens} = ? (use near-base thinking)",
+            "hint": f"{near_tens} is {deficit} less than {nearby}. {'Add' if op=='+' else 'Subtract'} {nearby} then {'subtract' if op=='+' else 'add'} {deficit}.",
+            "solution": (
+                f"{a} {op} {nearby} {'−' if op=='+' else '+'} {deficit} = {ans}"
+            ),
+            "expectedAnswer": str(ans),
+            "visual": self._svg(
+                "Near-Tens Trick",
+                f"<text x='20' y='44' font-size='18' fill='#1e293b'>{a} {op} {near_tens}</text>"
+                f"<text x='20' y='70' font-size='13' fill='#64748b'>= {a} {op} {nearby} {'−' if op=='+' else '+'} {deficit} = {ans}</text>",
+            ),
+        })
         return q
 
-    def _q_doubling_halving(self, group: str) -> Dict[str, Any]:
+    def _q_doubling_halving(self, group: str, scale: int = 2) -> Dict[str, Any]:
         n = self._rng.randint(12, 50 + self._idx(group) * 4)
         if self._idx(group) % 2 == 0:
             q = self._base_q(group, "Doubling", "double_number")
@@ -465,7 +552,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_multiply_by_11(self, group: str) -> Dict[str, Any]:
+    def _q_multiply_by_11(self, group: str, scale: int = 2) -> Dict[str, Any]:
         n = self._rng.randint(12, 99)
         a = n // 10
         b = n % 10
@@ -486,7 +573,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_vertical_crosswise(self, group: str) -> Dict[str, Any]:
+    def _q_vertical_crosswise(self, group: str, scale: int = 2) -> Dict[str, Any]:
         x = self._rng.randint(12, 40 + self._idx(group) * 2)
         y = self._rng.randint(12, 40 + self._idx(group) * 2)
         q = self._base_q(group, "Vertical & Crosswise", "two_digit_multiplication")
@@ -500,7 +587,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_all_from_9(self, group: str) -> Dict[str, Any]:
+    def _q_all_from_9(self, group: str, scale: int = 2) -> Dict[str, Any]:
         base = 100 if self._idx(group) < 3 else 1000
         n = self._rng.randint(base // 10, base - 1)
         q = self._base_q(group, "Complements", "all_from_9")
@@ -519,7 +606,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_nikhilam_near_base(self, group: str) -> Dict[str, Any]:
+    def _q_nikhilam_near_base(self, group: str, scale: int = 2) -> Dict[str, Any]:
         spread = 5 + self._idx(group)
         a = self._rng.randint(100 - spread, 100 + spread)
         b = self._rng.randint(100 - spread, 100 + spread)
@@ -542,7 +629,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_squares_ending_5(self, group: str) -> Dict[str, Any]:
+    def _q_squares_ending_5(self, group: str, scale: int = 2) -> Dict[str, Any]:
         p = self._rng.randint(1 + self._idx(group), 10 + self._idx(group))
         n = p * 10 + 5
         q = self._base_q(group, "Squares ending in 5", "square_ending_5")
@@ -561,7 +648,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_yavadunam(self, group: str) -> Dict[str, Any]:
+    def _q_yavadunam(self, group: str, scale: int = 2) -> Dict[str, Any]:
         spread = 4 + self._idx(group)
         a = self._rng.randint(100 - spread, 100 + spread)
         b = self._rng.randint(100 - spread, 100 + spread)
@@ -576,7 +663,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_general_multiplication(self, group: str) -> Dict[str, Any]:
+    def _q_general_multiplication(self, group: str, scale: int = 2) -> Dict[str, Any]:
         a = self._rng.randint(20 + self._idx(group) * 2, 50 + self._idx(group) * 3)
         b = self._rng.randint(20 + self._idx(group) * 2, 50 + self._idx(group) * 3)
         q = self._base_q(group, "General multiplication", "general_multiply")
@@ -590,7 +677,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_division_by_9(self, group: str) -> Dict[str, Any]:
+    def _q_division_by_9(self, group: str, scale: int = 2) -> Dict[str, Any]:
         n = self._rng.randint(30 + self._idx(group) * 10, 250 + self._idx(group) * 40)
         quotient, remainder = n // 9, n % 9
         q = self._base_q(group, "Division by 9", "divide_by_9")
@@ -609,7 +696,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_vinculum_intro(self, group: str) -> Dict[str, Any]:
+    def _q_vinculum_intro(self, group: str, scale: int = 2) -> Dict[str, Any]:
         n = self._rng.randint(11, 19)
         deficit = 20 - n
         q = self._base_q(group, "Vinculum intro", "vinculum_conversion")
@@ -623,7 +710,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_fractions_decimals(self, group: str) -> Dict[str, Any]:
+    def _q_fractions_decimals(self, group: str, scale: int = 2) -> Dict[str, Any]:
         pairs = [
             ("1/2", "0.5"),
             ("1/4", "0.25"),
@@ -647,7 +734,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_algebraic_identity(self, group: str) -> Dict[str, Any]:
+    def _q_algebraic_identity(self, group: str, scale: int = 2) -> Dict[str, Any]:
         b = self._rng.randint(2 + self._idx(group) // 2, 9 + self._idx(group) // 2)
         q = self._base_q(group, "Algebraic identity", "expand_square")
         q.update(
@@ -665,7 +752,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_factorisation(self, group: str) -> Dict[str, Any]:
+    def _q_factorisation(self, group: str, scale: int = 2) -> Dict[str, Any]:
         b = self._rng.randint(2 + self._idx(group) // 2, 12 + self._idx(group) // 2)
         q = self._base_q(group, "Factorisation", "difference_of_squares")
         q.update(
@@ -678,7 +765,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_squares_near_base(self, group: str) -> Dict[str, Any]:
+    def _q_squares_near_base(self, group: str, scale: int = 2) -> Dict[str, Any]:
         values = [89, 94, 96, 97, 103, 104, 108, 112, 115]
         n = values[self._idx(group)]
         q = self._base_q(group, "Squares near base", "square_near_100")
@@ -692,7 +779,7 @@ class VedicRuleEngine:
         )
         return q
 
-    def _q_cubes_intro(self, group: str) -> Dict[str, Any]:
+    def _q_cubes_intro(self, group: str, scale: int = 2) -> Dict[str, Any]:
         n = self._rng.randint(8 + self._idx(group), 12 + self._idx(group))
         q = self._base_q(group, "Cubes", "cube_value")
         q.update(

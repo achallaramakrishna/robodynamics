@@ -284,6 +284,66 @@
   white-space: nowrap;
 }
 
+.student-ai-tutor-section {
+  background: #fff;
+  border: 1px solid var(--rd-line);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  padding: 16px;
+}
+
+.ai-tutor-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.ai-tutor-card {
+  border: 1px solid #d8e3ee;
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 210px;
+}
+
+.ai-tutor-card .course-name {
+  margin: 0;
+  font-size: 19px;
+}
+
+.ai-tutor-card .side-note {
+  margin: 0 0 auto;
+  font-size: 13px;
+}
+
+.ai-tutor-card .btn {
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.ai-tutor-card.ai-tutor-vedic {
+  background: linear-gradient(180deg, #f3fbff 0%, #ffffff 100%);
+}
+
+.ai-tutor-card.ai-tutor-physics {
+  background: linear-gradient(180deg, #eef5ff 0%, #ffffff 100%);
+}
+
+.ai-tutor-card.ai-tutor-chemistry {
+  background: linear-gradient(180deg, #f1fcf7 0%, #ffffff 100%);
+}
+
+.ai-tutor-card.ai-tutor-biology {
+  background: linear-gradient(180deg, #f9f4ff 0%, #ffffff 100%);
+}
+
+.ai-tutor-card.is-locked {
+  opacity: 0.75;
+}
+
 .student-side-panel {
   display: grid;
   gap: 10px;
@@ -437,6 +497,10 @@
   }
 
   .student-course-section {
+    padding: 12px;
+  }
+
+  .student-ai-tutor-section {
     padding: 12px;
   }
 

@@ -26,6 +26,7 @@ import com.robodynamics.service.RDStudentEnrollmentService;
 import com.robodynamics.service.RDStudentSessionProgressService;
 import com.robodynamics.service.RDUserBadgeService;
 import com.robodynamics.util.RDRoleRouteUtil;
+import com.robodynamics.service.impl.RDAITutorIntegrationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,6 +83,9 @@ public class RDStudentDashboardController {
 
 	@Autowired
 	private RDQuizService quizService;
+
+	@Autowired
+	private RDAITutorIntegrationService aiTutorIntegrationService;
 
 	@GetMapping("/student/course-dashboard")
 	public String courseDashboard(@RequestParam("courseId") int courseId,
@@ -189,6 +193,15 @@ public class RDStudentDashboardController {
 
 		// Add the enrollment data to the model to display in the view
 		m.addAttribute("studentEnrollments", studentEnrollments);
+		m.addAttribute("vedicTutorEnabled", true);
+		boolean neetPhysicsTutorEnabled = hasAiTutorEnrollment(studentEnrollments, "NEET_PHYSICS");
+		boolean neetChemistryTutorEnabled = hasAiTutorEnrollment(studentEnrollments, "NEET_CHEMISTRY");
+		boolean neetBiologyTutorEnabled = hasAiTutorEnrollment(studentEnrollments, "NEET_BIOLOGY");
+		m.addAttribute("neetPhysicsTutorEnabled", neetPhysicsTutorEnabled);
+		m.addAttribute("neetChemistryTutorEnabled", neetChemistryTutorEnabled);
+		m.addAttribute("neetBiologyTutorEnabled", neetBiologyTutorEnabled);
+		m.addAttribute("hasAnyNeetTutorEnabled",
+				neetPhysicsTutorEnabled || neetChemistryTutorEnabled || neetBiologyTutorEnabled);
 
 		// Fetch the total quizzes taken by the user
 		int totalQuizzes = quizResultService.countQuizzesTakenByUser(rdUser.getUserID());
@@ -218,6 +231,24 @@ public class RDStudentDashboardController {
 		ModelAndView modelAndView = new ModelAndView("studentDashboard");
 		return modelAndView;
 
+	}
+
+	private boolean hasAiTutorEnrollment(List<RDStudentEnrollment> studentEnrollments, String moduleCode) {
+		if (studentEnrollments == null || studentEnrollments.isEmpty()) {
+			return false;
+		}
+		for (RDStudentEnrollment enrollment : studentEnrollments) {
+			if (enrollment == null || enrollment.getStatus() == 0 || enrollment.getCourseOffering() == null
+					|| enrollment.getCourseOffering().getCourse() == null) {
+				continue;
+			}
+			int enrolledCourseId = enrollment.getCourseOffering().getCourse().getCourseId();
+			String enrolledCourseName = enrollment.getCourseOffering().getCourse().getCourseName();
+			if (aiTutorIntegrationService.isCourseMappedToModule(enrolledCourseId, enrolledCourseName, moduleCode)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@GetMapping("student/quiz-review")

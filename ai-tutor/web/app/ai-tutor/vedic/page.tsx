@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type {
+  TutorAssetItem,
   TutorCatalogResponse,
   TutorChapter,
   TutorCheckResponse,
@@ -61,14 +62,56 @@ type ConversationTurn = {
   exerciseGroup?: string;
 };
 
-const DEFAULT_COURSE_ID = "vedic_math";
+const DEFAULT_COURSE_ID = "neet_physics";
 const MODULE_TO_COURSE_ID: Record<string, string> = {
   VEDIC_MATH: "vedic_math",
   NEET_PHYSICS: "neet_physics",
   NEET_CHEMISTRY: "neet_chemistry",
-  NEET_MATH: "neet_math"
+  NEET_BIOLOGY: "neet_biology"
+};
+const COURSE_LABELS: Record<string, string> = {
+  vedic_math: "Vedic Math",
+  neet_physics: "NEET Physics",
+  neet_chemistry: "NEET Chemistry",
+  neet_biology: "NEET Biology"
 };
 const EX_GROUP_KEYS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+
+function toCourseLabel(courseId: string): string {
+  const key = (courseId || "").trim().toLowerCase();
+  if (COURSE_LABELS[key]) {
+    return COURSE_LABELS[key];
+  }
+  if (!key) {
+    return "AI Tutor";
+  }
+  return key.replace(/_/g, " ").replace(/\b\w/g, (ch) => ch.toUpperCase());
+}
+
+function toAssetTypeLabel(assetType: string): string {
+  const normalized = (assetType || "").trim().toLowerCase();
+  const labels: Record<string, string> = {
+    pdf: "PDF",
+    notes: "Notes",
+    video: "Video",
+    flashcard: "Flashcards",
+    quiz: "Quiz",
+    assignment: "Assignment",
+    matchinggame: "Matching Game",
+    matchingpair: "Matching Pairs",
+    exampaper: "Exam Paper"
+  };
+  return labels[normalized] || normalized.replace(/_/g, " ").replace(/\b\w/g, (ch) => ch.toUpperCase()) || "Asset";
+}
+
+function toAssetUrl(raw: string): string {
+  const value = (raw || "").trim();
+  if (!value) return "#";
+  if (value.startsWith("http://") || value.startsWith("https://") || value.startsWith("/")) {
+    return value;
+  }
+  return `/${value.replace(/^\/+/, "")}`;
+}
 
 const AVATARS: Avatar[] = [
   { id: "arya", name: "Arya", role: "Calm Mentor", color: "#0ea5e9", style: "girl" },
@@ -82,6 +125,90 @@ const AVATAR_STAGE_ART: Record<string, string> = {
   ved: "/ai-tutor/avatars/3.svg",
   tara: "/ai-tutor/avatars/4.svg",
   niva: "/ai-tutor/avatars/5.svg"
+};
+
+// ── Vedic Sutra names per chapter ─────────────────────────────────────────────
+const CHAPTER_SUTRAS: Record<string, string> = {
+  L1_COMPLETING_WHOLE: "By the Completion or Non-Completion",
+  L2_DOUBLING_HALVING: "Alternate Elimination and Retention",
+  L3_MULTIPLY_BY_11: "Anurupyena — Proportionality",
+  L4_VERTICAL_CROSSWISE: "Urdhva-Tiryagbhyam — Vertical and Crosswise",
+  L5_ALL_FROM_9_LAST_FROM_10: "All from 9 and the Last from 10",
+  L6_NIKHILAM_BASE_10_100: "Nikhilam — Near Base Method",
+  L7_SQUARES_ENDING_5: "By One More than the One Before",
+  L8_YAVADUNAM: "Yavadunam — Whatever the Deficiency",
+  L9_GENERAL_MULTIPLICATION: "Urdhva-Tiryagbhyam — General Case",
+  L10_DIVISION_BY_9: "Paravartya Yojayet — Transpose and Apply",
+  L11_VINCULUM_INTRO: "Vinculum — Negative Digit Representation",
+  L12_FRACTIONS_DECIMALS: "Anurupyena — Proportional Fractions",
+  L13_ALGEBRAIC_IDENTITIES: "Anurupye Sunyam — Proportionately Zero",
+  L14_FACTORISATION: "Adyam Adyena — First by First",
+  L15_SQUARES_NEAR_BASE: "Yavadunam — Near Base Squares",
+  L16_CUBES_INTRO: "Anurupyena — Cubes by Pattern",
+};
+
+// ── Worked example lines for DEMO slide (board animation) ────────────────────
+const CHAPTER_DEMO_STEPS: Record<string, Array<{ text: string; color?: string; size?: number }>> = {
+  L1_COMPLETING_WHOLE: [
+    { text: "Question: What adds to 7 to reach 10?", color: "#334155", size: 14 },
+    { text: "Step 1 — Base = 10  (our target)", color: "#0369a1", size: 14 },
+    { text: "Step 2 — 7 + ? = 10", color: "#334155", size: 15 },
+    { text: "Answer:  10 − 7 = 3", color: "#065f46", size: 18 },
+    { text: "Check: 7 + 3 = 10  ✓   (Sutra confirmed!)", color: "#7c2d12", size: 12 },
+  ],
+  L2_DOUBLING_HALVING: [
+    { text: "Question: Double 36", color: "#334155", size: 14 },
+    { text: "Step 1 — Split: 36 = 30 + 6", color: "#0369a1", size: 14 },
+    { text: "Step 2 — Double each: 60 + 12", color: "#334155", size: 14 },
+    { text: "Answer: 60 + 12 = 72", color: "#065f46", size: 18 },
+    { text: "Twice as fast as long multiplication!", color: "#7c2d12", size: 12 },
+  ],
+  L3_MULTIPLY_BY_11: [
+    { text: "Question: 34 × 11 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 — Write the outer digits: 3 _ 4", color: "#0369a1", size: 14 },
+    { text: "Step 2 — Insert their sum: 3+4 = 7", color: "#334155", size: 14 },
+    { text: "Answer: 374", color: "#065f46", size: 20 },
+    { text: "No multiplication table needed!", color: "#7c2d12", size: 12 },
+  ],
+  L4_VERTICAL_CROSSWISE: [
+    { text: "Question: 23 × 14 = ?", color: "#334155", size: 14 },
+    { text: "V-Right: 3×4=12 → write 2, carry 1", color: "#0369a1", size: 13 },
+    { text: "Crosswise: 2×4+3×1=11+1=12 → write 2, carry 1", color: "#334155", size: 12 },
+    { text: "V-Left: 2×1=2+1=3", color: "#334155", size: 13 },
+    { text: "Answer: 322", color: "#065f46", size: 20 },
+  ],
+  L5_ALL_FROM_9_LAST_FROM_10: [
+    { text: "Question: 100 − 37 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 — 'All from 9': 9 − 3 = 6", color: "#0369a1", size: 14 },
+    { text: "Step 2 — 'Last from 10': 10 − 7 = 3", color: "#334155", size: 14 },
+    { text: "Answer: 63", color: "#065f46", size: 20 },
+    { text: "Instant subtraction — no borrowing!", color: "#7c2d12", size: 12 },
+  ],
+  L6_NIKHILAM_BASE_10_100: [
+    { text: "Question: 97 × 98 (base 100)", color: "#334155", size: 14 },
+    { text: "Step 1 — Deviations: 97→−3,  98→−2", color: "#0369a1", size: 13 },
+    { text: "Step 2 — Left: 97+(−2)=95  or  98+(−3)=95", color: "#334155", size: 12 },
+    { text: "Step 3 — Right: (−3)×(−2)=06", color: "#334155", size: 13 },
+    { text: "Answer: 9506", color: "#065f46", size: 20 },
+  ],
+  L7_SQUARES_ENDING_5: [
+    { text: "Question: 35² = ?", color: "#334155", size: 14 },
+    { text: "Step 1 — Prefix: 3 × (3+1) = 3 × 4 = 12", color: "#0369a1", size: 13 },
+    { text: "Step 2 — Attach 25", color: "#334155", size: 14 },
+    { text: "Answer: 1225", color: "#065f46", size: 20 },
+    { text: "Any number ending in 5, instant square!", color: "#7c2d12", size: 12 },
+  ],
+};
+
+// ── Spoken DEMO narration per chapter ─────────────────────────────────────────
+const CHAPTER_DEMO_SPEECH: Record<string, string> = {
+  L1_COMPLETING_WHOLE: "Watch how I find what adds to 7 to make 10. Our base is 10. Seven plus what equals ten? Ten minus 7 is 3. So the answer is 3. Seven plus 3 equals 10. The Sutra works!",
+  L2_DOUBLING_HALVING: "Watch me double 36. I split it: 30 and 6. Double 30 is 60. Double 6 is 12. Add them: 72. No calculator needed!",
+  L3_MULTIPLY_BY_11: "Watch 34 times 11. Write the outer digits 3 and 4. Insert their sum 7 in the middle. Answer: 374. No long multiplication!",
+  L4_VERTICAL_CROSSWISE: "Watch 23 times 14. Three steps: vertical right, crosswise, vertical left. Each step follows the Sutra. Answer: 322.",
+  L5_ALL_FROM_9_LAST_FROM_10: "Watch me do 100 minus 37. Take digits from 9 and the last from 10. Nine minus 3 is 6. Ten minus 7 is 3. Answer: 63. Instant!",
+  L6_NIKHILAM_BASE_10_100: "Watch 97 times 98. Deviations from 100: minus 3 and minus 2. Left part: 95. Right part: 06. Answer: 9506.",
+  L7_SQUARES_ENDING_5: "Watch 35 squared. Prefix is 3. Multiply by the next number: 3 times 4 is 12. Attach 25. Answer: 1225. Any number ending in 5 works like this!",
 };
 
 function AvatarFace({
@@ -150,6 +277,82 @@ function AvatarCharacter({
       />
     </div>
   );
+}
+
+// ── Lesson intro slide builder ────────────────────────────────────────────────
+// Builds SVG board steps for the 3-slide lesson intro (EXPLAIN → DEMO → GUIDED).
+// Runs BEFORE the first question. Pure function — no React hooks.
+function buildIntroSlideBoardSteps(
+  slide: 1 | 2 | 3,
+  chapterCode: string,
+  learningGoals: string[],
+  avatar: Avatar,
+  speed: number
+): SvgBoardStep[] {
+  const steps: SvgBoardStep[] = [];
+  const sp = Math.max(0.5, speed);
+  let delay = 0;
+
+  const addT = (id: string, x: number, y: number, text: string, color = "#0f172a", size = 14) => {
+    steps.push({ kind: "text", id, x, y, text, color, size, delaySec: delay, durationSec: 0.45 / sp });
+    delay += 0.38 / sp;
+  };
+  const addL = (id: string, x1: number, y1: number, x2: number, y2: number, color = "#cbd5e1", width = 1) => {
+    steps.push({ kind: "line", id, x1, y1, x2, y2, color, width, delaySec: delay, durationSec: 0.55 / sp });
+    delay += 0.35 / sp;
+  };
+
+  if (slide === 1) {
+    // ── EXPLAIN: Sutra name + learning goals ──────────────────────────────
+    addT("s1_badge", 16, 22, "EXPLAIN  —  Step 1 of 3: Here is the Concept", "#94a3b8", 11);
+    addL("s1_sep", 16, 30, 744, 30, "#e2e8f0", 1);
+    addT("s1_sutra_lbl", 16, 54, "Vedic Sutra:", "#7c2d12", 13);
+    addT("s1_sutra", 16, 78, `"${CHAPTER_SUTRAS[chapterCode] || "Vedic Method"}"`, avatar.color, 17);
+    addL("s1_line", 16, 92, 480, 92, avatar.color, 2);
+    addT("s1_goal_lbl", 16, 116, "Today you will learn:", "#334155", 13);
+    learningGoals.slice(0, 3).forEach((g, i) => {
+      const truncated = g.length > 70 ? `${g.slice(0, 68)}…` : g;
+      addT(`s1_g${i}`, 24, 138 + i * 24, `• ${truncated}`, "#0f172a", 13);
+    });
+    addT("s1_next", 16, 240, "► Next: Watch a worked example on the board", "#64748b", 11);
+  } else if (slide === 2) {
+    // ── DEMO: Step-by-step worked example ────────────────────────────────
+    const demoLines = CHAPTER_DEMO_STEPS[chapterCode] || [
+      { text: "Step 1 — Identify the base or pattern", color: "#0369a1", size: 14 },
+      { text: "Step 2 — Apply the Sutra rule", color: "#334155", size: 14 },
+      { text: "Step 3 — Write the answer", color: "#065f46", size: 16 },
+    ];
+    addT("s2_badge", 16, 22, "DEMO  —  Step 2 of 3: Watch Me Solve One", "#94a3b8", 11);
+    addL("s2_sep", 16, 30, 744, 30, "#e2e8f0", 1);
+    let y = 58;
+    demoLines.forEach((line, i) => {
+      if (i === demoLines.length - 1) {
+        addL(`s2_ans_line`, 16, y - 6, 380, y - 6, avatar.color, 2);
+      }
+      addT(`s2_l${i}`, 16, y, line.text, line.color || "#0f172a", line.size || 14);
+      y += (line.size || 14) + 16;
+    });
+    addT("s2_next", 16, 310, "► Next: Your turn!", "#64748b", 11);
+  } else {
+    // ── GUIDED: Student transition ────────────────────────────────────────
+    addT("s3_badge", 16, 22, "GUIDED  —  Step 3 of 3: Now You Try", "#94a3b8", 11);
+    addL("s3_sep", 16, 30, 744, 30, "#e2e8f0", 1);
+    addT("s3_l1", 16, 68, "Apply the same method to each question.", "#334155", 15);
+    addT("s3_l2", 16, 96, "I will guide you if you are stuck.", avatar.color, 14);
+    addL("s3_line", 16, 114, 440, 114, avatar.color, 2);
+    addT("s3_r1", 28, 140, "• Read the question carefully", "#0f172a", 13);
+    addT("s3_r2", 28, 162, "• Use the Sutra step by step", "#0f172a", 13);
+    addT("s3_r3", 28, 184, "• Type your answer and click Check Answer", "#0f172a", 13);
+    addT("s3_r4", 28, 206, "• Ask me a doubt any time using the doubt panel", "#0f172a", 13);
+    addT("s3_ready", 16, 248, "Ready? Let us begin! ✓", avatar.color, 17);
+  }
+
+  return steps;
+}
+
+function getDemoSpeech(chapterCode: string): string {
+  return CHAPTER_DEMO_SPEECH[chapterCode]
+    || "Watch how I apply the Vedic method step by step. Each step follows directly from the Sutra rule. Notice how much faster this is than the conventional method.";
 }
 
 function AnimatedBoard({
@@ -339,24 +542,64 @@ const DEFAULT_CHAPTERS: TutorChapter[] = [
   makeChapter("L15_SQUARES_NEAR_BASE", "Chapter 15: Squares Near Base", 25, ["Deviation method", "Left-right writeup", "Below/above base", "Near 100 drills"], ["Square near base", "Handle +/- deviation", "Increase speed"]),
   makeChapter("L16_CUBES_INTRO", "Chapter 16: Cubes Intro and Review", 30, ["Cube concept", "Small cube patterns", "Mental multiplication chain", "Final review"], ["Compute cubes", "Use multiplication chain", "Connect methods"])
 ];
+const NEET_PHYSICS_FALLBACK_CHAPTERS: TutorChapter[] = [
+  makeChapter(
+    "PHY_CH1",
+    "Chapter 1: Physical World and Measurement",
+    30,
+    ["Units and dimensions", "Significant figures", "Error analysis", "Numerical practice"],
+    ["Understand SI units", "Apply dimensional analysis", "Solve measurement questions"]
+  )
+];
+const NEET_CHEMISTRY_FALLBACK_CHAPTERS: TutorChapter[] = [
+  makeChapter(
+    "CHEM_CH1",
+    "Chapter 1: Some Basic Concepts of Chemistry",
+    30,
+    ["Mole concept", "Atomic/molecular mass", "Stoichiometry", "Concentration terms"],
+    ["Use mole relationships", "Balance reactions", "Solve stoichiometry numericals"]
+  )
+];
+const NEET_BIOLOGY_FALLBACK_CHAPTERS: TutorChapter[] = [
+  makeChapter(
+    "BIO_CH1",
+    "Chapter 1: The Living World",
+    30,
+    ["Characteristics of life", "Taxonomic hierarchy", "Binomial nomenclature", "Examples and practice"],
+    ["Identify living characteristics", "Classify organisms", "Use taxonomy terms correctly"]
+  )
+];
+const DEFAULT_CHAPTERS_BY_COURSE: Record<string, TutorChapter[]> = {
+  vedic_math: DEFAULT_CHAPTERS,
+  neet_physics: NEET_PHYSICS_FALLBACK_CHAPTERS,
+  neet_chemistry: NEET_CHEMISTRY_FALLBACK_CHAPTERS,
+  neet_biology: NEET_BIOLOGY_FALLBACK_CHAPTERS
+};
 
 const DEFAULT_EXERCISE_GROUPS: TutorExerciseGroup[] = EX_GROUP_KEYS.map((g) => ({ exerciseGroup: g, title: `Exercise ${g}` }));
 
-export default function VedicTutorPage() {
+function fallbackChaptersForCourse(courseId: string): TutorChapter[] {
+  return DEFAULT_CHAPTERS_BY_COURSE[courseId] || DEFAULT_CHAPTERS_BY_COURSE[DEFAULT_COURSE_ID];
+}
+
+export default function TutorPage() {
   return (
     <Suspense fallback={<main className="container"><section className="panel">Loading tutor...</section></main>}>
-      <VedicTutorContent />
+      <TutorContent />
     </Suspense>
   );
 }
 
-function VedicTutorContent() {
+function TutorContent() {
   const params = useSearchParams();
   const token = params.get("token") || "";
   const studentNameFromQuery = (params.get("studentName") || params.get("learnerName") || "").trim();
   const moduleFromQuery = (params.get("module") || "").trim().toUpperCase();
   const courseIdFromQuery = (params.get("courseId") || "").trim().toLowerCase();
+  const enrollmentIdFromQuery = (params.get("enrollmentId") || "").trim();
+  const dbCourseIdFromQuery = (params.get("dbCourseId") || "").trim();
   const requestedCourseId = courseIdFromQuery || MODULE_TO_COURSE_ID[moduleFromQuery] || DEFAULT_COURSE_ID;
+  const requestedFallbackChapters = fallbackChaptersForCourse(requestedCourseId);
 
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
@@ -372,12 +615,14 @@ function VedicTutorContent() {
   const [lessonExerciseFlow, setLessonExerciseFlow] = useState<Array<{ exerciseGroup: string; subtopic: string }>>([]);
   const [lessonTeachingScript, setLessonTeachingScript] = useState<TutorTeachingStep[]>([]);
   const [lessonScreenplay, setLessonScreenplay] = useState<TutorScreenplayBeat[]>([]);
+  const [lessonAssetItems, setLessonAssetItems] = useState<TutorAssetItem[]>([]);
   const [coreIdeas, setCoreIdeas] = useState<string[]>([]);
+  const [dbCourseId, setDbCourseId] = useState(dbCourseIdFromQuery);
 
-  const [chapters, setChapters] = useState<TutorChapter[]>(DEFAULT_CHAPTERS);
+  const [chapters, setChapters] = useState<TutorChapter[]>(requestedFallbackChapters);
   const [exerciseGroups, setExerciseGroups] = useState<TutorExerciseGroup[]>(DEFAULT_EXERCISE_GROUPS);
-  const [selectedChapter, setSelectedChapter] = useState(DEFAULT_CHAPTERS[0].chapterCode);
-  const [activeChapter, setActiveChapter] = useState(DEFAULT_CHAPTERS[0].chapterCode);
+  const [selectedChapter, setSelectedChapter] = useState(requestedFallbackChapters[0].chapterCode);
+  const [activeChapter, setActiveChapter] = useState(requestedFallbackChapters[0].chapterCode);
   const [selectedExerciseGroup, setSelectedExerciseGroup] = useState("A");
   const [activeExerciseGroup, setActiveExerciseGroup] = useState("A");
   const [studentName, setStudentName] = useState("");
@@ -429,8 +674,21 @@ function VedicTutorContent() {
   const sessionRecoveryRef = useRef(false);
 
   const canStart = useMemo(() => token.trim().length > 20, [token]);
-  const chapterList = chapters.length ? chapters : DEFAULT_CHAPTERS;
+  const chapterList = chapters.length ? chapters : requestedFallbackChapters;
   const exerciseList = exerciseGroups.length ? exerciseGroups : DEFAULT_EXERCISE_GROUPS;
+  const courseLabel = useMemo(() => toCourseLabel(courseId || requestedCourseId), [courseId, requestedCourseId]);
+  const effectiveDbCourseId = useMemo(() => {
+    const raw = (dbCourseId || "").trim();
+    if (!raw) return "";
+    const n = Number(raw);
+    return Number.isFinite(n) && n > 0 ? String(Math.trunc(n)) : "";
+  }, [dbCourseId]);
+  const courseMonitorUrl = useMemo(() => {
+    if (!effectiveDbCourseId || !enrollmentIdFromQuery) {
+      return "";
+    }
+    return `/course/monitor/v2?courseId=${encodeURIComponent(effectiveDbCourseId)}&enrollmentId=${encodeURIComponent(enrollmentIdFromQuery)}`;
+  }, [effectiveDbCourseId, enrollmentIdFromQuery]);
 
   const previewChapter = useMemo(() => {
     const code = status === "ready" ? activeChapter : selectedChapter;
@@ -721,7 +979,7 @@ function VedicTutorContent() {
 
     let disposed = false;
     const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-    const wsUrl = `${protocol}://${window.location.host}/ai-tutor-api/vedic/ws/${encodeURIComponent(sessionId)}`;
+    const wsUrl = `${protocol}://${window.location.host}/ai-tutor-api/tutor/ws/${encodeURIComponent(sessionId)}`;
     const ws = new WebSocket(wsUrl);
 
     ws.onopen = () => {
@@ -940,10 +1198,11 @@ function VedicTutorContent() {
     return `${clean.slice(0, Math.max(0, max - 1)).trimEnd()}...`;
   }
 
-  function normalizeSvgBoardSteps(raw?: TutorScreenplayBeat["svgAnimation"]): SvgBoardStep[] {
+  function normalizeSvgBoardSteps(raw?: unknown): SvgBoardStep[] {
     if (!Array.isArray(raw)) return [];
     const normalized: SvgBoardStep[] = [];
-    for (const item of raw.slice(0, 24)) {
+    for (const entry of (raw as unknown[]).slice(0, 24)) {
+      const item = entry as any;
       if (!item || typeof item !== "object") continue;
       if (item.kind === "line") {
         normalized.push({
@@ -1023,7 +1282,7 @@ function VedicTutorContent() {
     addText("header", 20, 26, "Classroom Whiteboard Session", avatar.color, 17);
     addLine("header_line", 16, 36, 744, 36, "#cbd5e1", 1);
 
-    const customSvgSteps = normalizeSvgBoardSteps(beat?.svgAnimation);
+    const customSvgSteps = normalizeSvgBoardSteps((beat as any)?.svgAnimation);
     if (customSvgSteps.length) {
       let maxTimeline = 0;
       for (const step of customSvgSteps) {
@@ -1485,6 +1744,8 @@ function VedicTutorContent() {
     setAttemptByQuestion({});
     setDoubtReply("");
     setConversationLog([]);
+    setLessonAssetItems([]);
+    setDbCourseId(dbCourseIdFromQuery);
     setPendingKickoff("none");
     setPendingKickoffToken("");
     kickoffRunningRef.current = false;
@@ -1521,7 +1782,11 @@ function VedicTutorContent() {
       setLessonExerciseFlow(data.lesson.exerciseFlow || []);
       setLessonTeachingScript(data.lesson.teachingScript || []);
       setLessonScreenplay(data.lesson.screenplay || []);
+      setLessonAssetItems(data.lesson.assetItems || []);
       setCoreIdeas(data.lesson.coreIdeas || []);
+      if (typeof data.lesson.dbCourseId === "number" && data.lesson.dbCourseId > 0) {
+        setDbCourseId(String(data.lesson.dbCourseId));
+      }
 
       if (data.chapters?.length) setChapters(data.chapters);
       if (data.exerciseGroups?.length) setExerciseGroups(data.exerciseGroups);
@@ -1746,7 +2011,11 @@ function VedicTutorContent() {
       setLessonExerciseFlow(data.lesson.exerciseFlow || []);
       setLessonTeachingScript(data.lesson.teachingScript || []);
       setLessonScreenplay(data.lesson.screenplay || []);
+      setLessonAssetItems(data.lesson.assetItems || []);
       setCoreIdeas(data.lesson.coreIdeas || []);
+      if (typeof data.lesson.dbCourseId === "number" && data.lesson.dbCourseId > 0) {
+        setDbCourseId(String(data.lesson.dbCourseId));
+      }
     }
 
     clearBoard();
@@ -1758,28 +2027,36 @@ function VedicTutorContent() {
 
   async function askDoubt() {
     if (!sessionId || !doubt.trim()) return;
-    addConversationTurn("student", "doubt", doubt.trim(), { source: "doubt_question" });
+    const msg = doubt.trim();
+    addConversationTurn("student", "doubt", msg, { source: "doubt_question" });
+    setDoubt("");
     void sendOrchestratorCommand("ASK_DOUBT", {
-      messageLength: doubt.trim().length,
+      messageLength: msg.length,
     });
 
-    const response = await fetch("/api/vedic/doubt", {
+    const response = await fetch("/api/vedic/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId, courseId, message: doubt.trim() })
+      body: JSON.stringify({
+        sessionId,
+        message: msg,
+        avatarName: activeAvatar.name,
+        context: "doubt",
+      })
     });
     const data = await response.json();
     if (!response.ok || data.error) {
-      const msg = data.error || "Unable to fetch doubt explanation.";
-      setError(msg);
-      if (isExpiredSessionError(msg)) {
+      const errMsg = data.error || "Unable to fetch doubt explanation.";
+      setError(errMsg);
+      if (isExpiredSessionError(errMsg)) {
         await recoverExpiredSession("ask_doubt");
       }
       return;
     }
-    setDoubtReply(String(data.reply || ""));
-    addConversationTurn("tutor", "doubt", String(data.reply || ""), { source: "doubt_reply" });
-    void speak(String(data.reply || ""));
+    const reply = String(data.reply || "");
+    setDoubtReply(reply);
+    addConversationTurn("tutor", "doubt", reply, { source: "doubt_reply" });
+    void speak(reply);
   }
 
   useEffect(() => {
@@ -1802,10 +2079,55 @@ function VedicTutorContent() {
       try {
         if (pendingKickoff === "welcome") {
           const greetingName = (studentName || "").trim() || "there";
-          const welcomeLine = `Hi ${greetingName}! I am ${activeAvatar.name}, your ${activeAvatar.role}. Welcome to ${lessonTitle || previewChapter?.title || "this chapter"}. We will learn it step by step together.`;
+          const chCode = activeChapter;
+          const goals = lessonLearningGoals.length ? lessonLearningGoals : (previewChapter?.learningGoals || []);
+          const welcomeLine = `Hi ${greetingName}! I am ${activeAvatar.name}, your ${activeAvatar.role}. Welcome to ${lessonTitle || previewChapter?.title || "this chapter"}.`;
           setTeacherUtterance(welcomeLine);
           await speakRef.current(welcomeLine);
-          await speakRef.current("Before we start, stay active. I will teach, then you answer each checkpoint.");
+          if (cancelled) return;
+
+          // ── Slide 1: EXPLAIN — Sutra name + learning goals ────────────────
+          const slide1 = buildIntroSlideBoardSteps(1, chCode, goals, activeAvatar, boardSpeed);
+          setBoardSteps(slide1);
+          setBoardRunId((v) => v + 1);
+          setIsTeachingBoard(true);
+          await Promise.all([
+            waitForBoard(boardDurationMs(slide1, 1.2)),
+            speakRef.current(
+              `The Vedic Sutra for today is: "${CHAPTER_SUTRAS[chCode] || "Vedic Method"}". ` +
+              `Let me show you a quick worked example so you can see exactly how it works.`
+            ),
+          ]);
+          setIsTeachingBoard(false);
+          if (cancelled) return;
+
+          // ── Slide 2: DEMO — Step-by-step worked example ───────────────────
+          const slide2 = buildIntroSlideBoardSteps(2, chCode, goals, activeAvatar, boardSpeed);
+          setBoardSteps(slide2);
+          setBoardRunId((v) => v + 1);
+          setIsTeachingBoard(true);
+          await Promise.all([
+            waitForBoard(boardDurationMs(slide2, 2)),
+            speakRef.current(getDemoSpeech(chCode)),
+          ]);
+          setIsTeachingBoard(false);
+          if (cancelled) return;
+
+          // ── Slide 3: GUIDED transition — "Now you try" ────────────────────
+          const slide3 = buildIntroSlideBoardSteps(3, chCode, goals, activeAvatar, boardSpeed);
+          setBoardSteps(slide3);
+          setBoardRunId((v) => v + 1);
+          setIsTeachingBoard(true);
+          await Promise.all([
+            waitForBoard(boardDurationMs(slide3, 0.8)),
+            speakRef.current(
+              "Now it is your turn. I will show you the first question. " +
+              "Use the same method I just demonstrated. I will guide you on every step."
+            ),
+          ]);
+          setIsTeachingBoard(false);
+          if (cancelled) return;
+          clearBoard();
         }
         if (!cancelled) {
           await teachOnBoardRef.current();
@@ -1857,7 +2179,7 @@ function VedicTutorContent() {
             {status !== "ready" ? (
               <div className="setup-hero-copy">
                 <span className="setup-hero-kicker">Live AI Classroom</span>
-                <h1 className="tutor-main-title">Vedic Math AI Tutor Classroom</h1>
+                <h1 className="tutor-main-title">{courseLabel} AI Tutor Classroom</h1>
                 <p className="muted tutor-main-subtitle">
                   Structured like a course lesson: teacher explains on the board, pauses for your response, then moves to guided exercises.
                 </p>
@@ -1866,14 +2188,14 @@ function VedicTutorContent() {
                 </p>
                 <div className="setup-chip-row setup-chip-row-left">
                   <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
-                  <span className="pill">Course: {courseId}</span>
+                  <span className="pill">Course: {courseLabel}</span>
                   <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
                 </div>
               </div>
             ) : (
               <div className="setup-chip-row setup-chip-row-left">
                 <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
-                <span className="pill">Course: {courseId}</span>
+                <span className="pill">Course: {courseLabel}</span>
                 <span className="pill">Teacher: {activeAvatar.name}</span>
                 <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
               </div>
@@ -2265,21 +2587,65 @@ function VedicTutorContent() {
                 <p className="muted teacher-status">{stageStatusText}</p>
 
                 <div className="panel doubt-panel">
-                  <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Ask a Doubt</h3>
+                  <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Ask {activeAvatar.name} a Doubt</h3>
+                  {/* Multi-turn chat history */}
+                  {conversationLog.filter((t) => t.channel === "doubt").length > 0 && (
+                    <div style={{
+                      maxHeight: "260px",
+                      overflowY: "auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.5rem",
+                      marginBottom: "0.75rem",
+                      padding: "0.5rem",
+                      background: "var(--surface, #f8fafc)",
+                      borderRadius: "8px",
+                      border: "1px solid var(--border, #e2e8f0)"
+                    }}>
+                      {conversationLog.filter((t) => t.channel === "doubt").map((turn) => (
+                        <div key={turn.id} style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: turn.role === "student" ? "flex-end" : "flex-start",
+                        }}>
+                          <div style={{
+                            maxWidth: "85%",
+                            padding: "0.5rem 0.75rem",
+                            borderRadius: turn.role === "student" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
+                            background: turn.role === "student" ? activeAvatar.color : "white",
+                            color: turn.role === "student" ? "white" : "inherit",
+                            border: turn.role === "tutor" ? `1px solid ${activeAvatar.color}44` : "none",
+                            fontSize: "0.88rem",
+                            lineHeight: 1.5,
+                            whiteSpace: "pre-wrap",
+                            wordBreak: "break-word",
+                          }}>
+                            {turn.text}
+                          </div>
+                          <span style={{ fontSize: "0.72rem", color: "#94a3b8", marginTop: "2px" }}>
+                            {turn.role === "student" ? "You" : activeAvatar.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <textarea
                     value={doubt}
                     onChange={(e) => setDoubt(e.target.value)}
-                    rows={3}
-                    placeholder="Example: Why do we move 2 from 7 in 8 + 7?"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        void askDoubt();
+                      }
+                    }}
+                    rows={2}
+                    placeholder="Type your doubt and press Enter..."
                   />
                   <div style={{ marginTop: "0.55rem" }}>
-                    <button className="button secondary" onClick={askDoubt}>Get Explanation</button>
+                    <button className="button secondary" onClick={() => void askDoubt()} disabled={!doubt.trim()}>
+                      Ask {activeAvatar.name}
+                    </button>
                   </div>
-                  {doubtReply ? (
-                    <div className="panel doubt-reply">
-                      <pre>{doubtReply}</pre>
-                    </div>
-                  ) : null}
                 </div>
 
                 <div className="panel progress-panel">
@@ -2365,6 +2731,38 @@ function VedicTutorContent() {
                       </ul>
                     </div>
                   </div>
+                </div>
+
+                <div className="panel roadmap-panel">
+                  <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>LMS Assets</h3>
+                  {courseMonitorUrl ? (
+                    <p style={{ marginTop: 0, marginBottom: "0.5rem" }}>
+                      <a className="button secondary" href={courseMonitorUrl} target="_blank" rel="noreferrer">
+                        Open Course Monitor
+                      </a>
+                    </p>
+                  ) : null}
+                  {lessonAssetItems.length ? (
+                    <div className="setup-preview-grid">
+                      {lessonAssetItems.slice(0, 12).map((asset, idx) => (
+                        <div key={`${asset.assetType}_${asset.file}_${idx}`}>
+                          <p style={{ marginBottom: "0.2rem" }}>
+                            <strong>{toAssetTypeLabel(asset.assetType)}</strong>
+                          </p>
+                          <p className="muted" style={{ marginTop: 0, marginBottom: "0.4rem" }}>
+                            {asset.topic || asset.file}
+                          </p>
+                          <a className="button secondary" href={toAssetUrl(asset.url || asset.file)} target="_blank" rel="noreferrer">
+                            Open Asset
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="muted" style={{ marginTop: 0, marginBottom: 0 }}>
+                      No mapped LMS assets found for this chapter yet.
+                    </p>
+                  )}
                 </div>
 
                 <section className="panel lesson-details-panel lesson-details-in-rail">
@@ -2488,3 +2886,4 @@ function VedicTutorContent() {
     </main>
   );
 }
+

@@ -44,6 +44,12 @@
     </div>
   </section>
 
+  <c:if test="${param.aiTutorAccessDenied eq '1'}">
+    <div class="alert alert-warning mt-3 mb-0" role="alert">
+      AI Tutor is available only for courses where you are enrolled through Course Offering.
+    </div>
+  </c:if>
+
   <div class="rd-content student-content">
     <section class="student-kpi-grid">
       <article class="student-kpi-card">
@@ -215,9 +221,29 @@
                   <i class="fas fa-chart-line me-1"></i> View Performance
                 </a>
               </c:forEach>
+              <div class="d-grid gap-2 mt-2">
+                <c:if test="${neetPhysicsTutorEnabled}">
+                  <a href="${ctx}/ai-tutor/launch?module=NEET_PHYSICS" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-atom me-1"></i> NEET Physics Tutor
+                  </a>
+                </c:if>
+                <c:if test="${neetChemistryTutorEnabled}">
+                  <a href="${ctx}/ai-tutor/launch?module=NEET_CHEMISTRY" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-flask me-1"></i> NEET Chemistry Tutor
+                  </a>
+                </c:if>
+                <c:if test="${neetBiologyTutorEnabled}">
+                  <a href="${ctx}/ai-tutor/launch?module=NEET_BIOLOGY" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-dna me-1"></i> NEET Biology Tutor
+                  </a>
+                </c:if>
+                <c:if test="${not hasAnyNeetTutorEnabled}">
+                  <p class="side-note mb-0">No NEET AI Tutor offering assigned yet.</p>
+                </c:if>
+              </div>
             </c:when>
             <c:otherwise>
-              <p class="side-note mb-0">No course is available yet for quick actions.</p>
+              <p class="side-note mb-0">No active course offering assigned yet.</p>
             </c:otherwise>
           </c:choose>
         </article>

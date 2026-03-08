@@ -51,6 +51,15 @@ public class RDAITutorIntegrationService {
     @Value("${rd.ai.tutor.internal.api.key:change_me_ai_tutor_internal_key}")
     private String internalApiKey;
 
+    @Value("${rd.ai.tutor.neet.physics.db-course-id:0}")
+    private Integer neetPhysicsDbCourseId;
+
+    @Value("${rd.ai.tutor.neet.chemistry.db-course-id:0}")
+    private Integer neetChemistryDbCourseId;
+
+    @Value("${rd.ai.tutor.neet.biology.db-course-id:0}")
+    private Integer neetBiologyDbCourseId;
+
     private final ObjectMapper mapper = new ObjectMapper();
     private final List<RDAITutorEventRequest> eventLog = new CopyOnWriteArrayList<>();
 
@@ -90,17 +99,30 @@ public class RDAITutorIntegrationService {
     }
 
     public String buildLaunchUrl(String token, String learnerName, String module) {
+        return buildLaunchUrl(token, learnerName, module, null, null);
+    }
+
+    public String buildLaunchUrl(String token, String learnerName, String module,
+                                 Integer enrollmentId, Integer dbCourseId) {
         String base = trimTrailingSlash(aiTutorWebBaseUrl);
         String encoded = URLEncoder.encode(token, StandardCharsets.UTF_8);
         String normalizedModule = normalizeModule(module);
         String courseId = courseIdForModule(normalizedModule);
         StringBuilder out = new StringBuilder(base)
-                .append("/ai-tutor/vedic?token=")
+                .append("/ai-tutor/learn?token=")
                 .append(encoded)
                 .append("&module=")
                 .append(URLEncoder.encode(normalizedModule, StandardCharsets.UTF_8))
                 .append("&courseId=")
                 .append(URLEncoder.encode(courseId, StandardCharsets.UTF_8));
+        if (enrollmentId != null && enrollmentId.intValue() > 0) {
+            out.append("&enrollmentId=")
+                    .append(enrollmentId.intValue());
+        }
+        if (dbCourseId != null && dbCourseId.intValue() > 0) {
+            out.append("&dbCourseId=")
+                    .append(dbCourseId.intValue());
+        }
         String cleanName = safe(learnerName, "").trim();
         if (!cleanName.isEmpty()) {
             out.append("&studentName=").append(URLEncoder.encode(cleanName, StandardCharsets.UTF_8));
@@ -246,6 +268,44 @@ public class RDAITutorIntegrationService {
         return mapped == null || mapped.isBlank() ? "vedic_math" : mapped;
     }
 
+    public Integer resolveDbCourseIdForModule(String module) {
+        String normalized = normalizeModule(module);
+        switch (normalized) {
+            case "NEET_PHYSICS":
+                return sanitizeCourseId(neetPhysicsDbCourseId);
+            case "NEET_CHEMISTRY":
+                return sanitizeCourseId(neetChemistryDbCourseId);
+            case "NEET_BIOLOGY":
+                return sanitizeCourseId(neetBiologyDbCourseId);
+            default:
+                return null;
+        }
+    }
+
+    public boolean isCourseMappedToModule(Integer enrolledCourseId, String enrolledCourseName, String module) {
+        String normalized = normalizeModule(module);
+        Integer configuredCourseId = resolveDbCourseIdForModule(normalized);
+        if (configuredCourseId != null && enrolledCourseId != null
+                && configuredCourseId.intValue() == enrolledCourseId.intValue()) {
+            return true;
+        }
+
+        String courseName = safe(enrolledCourseName, "").trim().toLowerCase(Locale.ENGLISH);
+        if (courseName.isEmpty()) {
+            return false;
+        }
+        switch (normalized) {
+            case "NEET_PHYSICS":
+                return courseName.contains("neet physics") || courseName.contains("physics");
+            case "NEET_CHEMISTRY":
+                return courseName.contains("neet chemistry") || courseName.contains("chemistry");
+            case "NEET_BIOLOGY":
+                return courseName.contains("neet biology") || courseName.contains("biology");
+            default:
+                return false;
+        }
+    }
+
     private String normalizeGrade(String grade, RDUser user) {
         String value = safe(grade, "");
         if (!value.isBlank()) {
@@ -274,6 +334,13 @@ public class RDAITutorIntegrationService {
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 
+    private static Integer sanitizeCourseId(Integer value) {
+        if (value == null || value.intValue() <= 0) {
+            return null;
+        }
+        return value;
+    }
+
     private static boolean constantTimeEquals(String a, String b) {
         byte[] aBytes = a == null ? new byte[0] : a.getBytes(StandardCharsets.UTF_8);
         byte[] bBytes = b == null ? new byte[0] : b.getBytes(StandardCharsets.UTF_8);
@@ -285,7 +352,7 @@ public class RDAITutorIntegrationService {
         map.put("VEDIC_MATH", "vedic_math");
         map.put("NEET_PHYSICS", "neet_physics");
         map.put("NEET_CHEMISTRY", "neet_chemistry");
-        map.put("NEET_MATH", "neet_math");
+        map.put("NEET_BIOLOGY", "neet_biology");
         return map;
     }
 }

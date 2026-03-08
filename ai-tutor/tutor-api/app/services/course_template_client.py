@@ -11,7 +11,7 @@ class CourseTemplateClient:
     def __init__(self) -> None:
         self._endpoint = os.getenv(
             "AI_TUTOR_TEMPLATE_API_URL",
-            "http://localhost:8085/api/ai-tutor/course-template",
+            "http://localhost:8080/api/ai-tutor/course-template",
         ).strip()
         self._api_key = os.getenv("TUTOR_INTERNAL_KEY", "").strip()
         self._timeout_sec = max(2.0, float(os.getenv("AI_TUTOR_TEMPLATE_TIMEOUT_SEC", "8")))
@@ -33,6 +33,7 @@ class CourseTemplateClient:
             return None
 
         headers: Dict[str, str] = {}
+        headers["Accept"] = "application/json"
         if self._api_key:
             headers["X-AI-TUTOR-KEY"] = self._api_key
 
@@ -54,4 +55,3 @@ class CourseTemplateClient:
         except Exception:
             return None
         return None
-

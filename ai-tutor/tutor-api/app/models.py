@@ -17,6 +17,13 @@ class LessonExample(BaseModel):
     answer: str
 
 
+class LessonAssetItem(BaseModel):
+    assetType: str
+    topic: str
+    file: str
+    url: str
+
+
 class ExerciseFlowItem(BaseModel):
     exerciseGroup: str
     subtopic: str
@@ -61,6 +68,7 @@ class LessonPayload(BaseModel):
     title: str
     gradeBand: str
     source: str
+    dbCourseId: Optional[int] = None
     estimatedMinutes: int
     subtopics: List[str]
     learningGoals: List[str]
@@ -71,6 +79,8 @@ class LessonPayload(BaseModel):
     coreIdeas: List[str]
     workedExamples: List[LessonExample]
     starterPractice: List[str]
+    assets: Dict[str, int] = Field(default_factory=dict)
+    assetItems: List[LessonAssetItem] = Field(default_factory=list)
 
 
 class QuestionPayload(BaseModel):
@@ -140,6 +150,31 @@ class DoubtRequest(BaseModel):
     sessionId: str
     message: str
     courseId: Optional[str] = None
+    avatarName: Optional[str] = None  # e.g. "Arya", "Ved", "Tara", "Niva"
+
+
+class DoubtResponse(BaseModel):
+    courseId: str
+    reply: str
+    conversationTurn: int  # how many turns in this session's conversation
+
+
+class ChatRequest(BaseModel):
+    """Multi-turn tutoring chat. Preferred over DoubtRequest for new frontends."""
+    sessionId: str
+    message: str
+    avatarName: Optional[str] = "Arya"
+    courseId: Optional[str] = None
+    # Optional hint to the LLM about context ("doubt", "hint_request", "concept_check")
+    context: Optional[str] = "doubt"
+
+
+class ChatResponse(BaseModel):
+    reply: str
+    conversationTurn: int
+    sessionId: str
+    # Suggested next UX action: "practice" | "reteach" | "continue"
+    suggestNextAction: str = "continue"
 
 
 class EventIngestRequest(BaseModel):

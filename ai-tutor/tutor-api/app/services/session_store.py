@@ -31,6 +31,9 @@ class TutorSession:
     confidence_last: str = "unknown"
     question_issued_at: str = ""
     current_question: Dict[str, Any] = field(default_factory=dict)
+    # Rolling conversation history for the LLM tutoring chat.
+    # Each entry: {"role": "user"|"assistant", "content": "<text>"}
+    conversation_history: list = field(default_factory=list)
     started_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
@@ -96,6 +99,28 @@ class SessionStore:
         session = self.get(session_id)
         session.doubt_count += 1
         return session
+
+    # ── Conversation history (for LLM chat) ──────────────────────────────────
+
+    _MAX_HISTORY_MESSAGES = 12  # 6 turns × 2 messages each
+
+    def add_to_conversation(self, session_id: str, role: str, content: str) -> None:
+        """Append a message to the rolling conversation history, keeping at most _MAX_HISTORY_MESSAGES entries."""
+        session = self.get(session_id)
+        session.conversation_history.append({"role": role, "content": content})
+        if len(session.conversation_history) > self._MAX_HISTORY_MESSAGES:
+            # Drop oldest messages in pairs so history always starts with a user turn
+            session.conversation_history = session.conversation_history[-self._MAX_HISTORY_MESSAGES:]
+
+    def get_conversation(self, session_id: str) -> list:
+        """Return the current conversation history list."""
+        session = self.get(session_id)
+        return list(session.conversation_history)
+
+    def clear_conversation(self, session_id: str) -> None:
+        """Reset conversation history (e.g. when student switches chapters)."""
+        session = self.get(session_id)
+        session.conversation_history = []
 
     def update_score(
         self,

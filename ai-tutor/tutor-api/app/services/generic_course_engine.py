@@ -80,6 +80,8 @@ class CourseTemplateRuleEngine:
             teaching_script = self._teaching_script(code, exercise_flow, chapter_script)
             screenplay = self._screenplay_from_script_or_default(teaching_script, chapter_script)
             assets = chapter.get("assets") if isinstance(chapter.get("assets"), dict) else {}
+            raw_asset_items = chapter.get("assetItems")
+            asset_items = raw_asset_items if isinstance(raw_asset_items, list) else []
 
             source_label = f"RoboDynamics Course Template ({self._title})"
             if self._template_course_id:
@@ -90,6 +92,7 @@ class CourseTemplateRuleEngine:
                 "title": title,
                 "gradeBand": "NEET/Exam Prep",
                 "source": str(chapter_script.get("source", source_label)),
+                "dbCourseId": int(self._template_course_id) if str(self._template_course_id).isdigit() else None,
                 "estimatedMinutes": estimated_minutes,
                 "subtopics": subtopics,
                 "learningGoals": learning_goals,
@@ -115,6 +118,7 @@ class CourseTemplateRuleEngine:
                     "Review one error and retry.",
                 ],
                 "assets": assets,
+                "assetItems": self._normalize_asset_items(asset_items),
             }
             pools[code] = self._normalize_question_pool(code, chapter.get("questionPool"))
 
@@ -162,7 +166,7 @@ class CourseTemplateRuleEngine:
         self._load(force=False)
         return self._lessons[self.normalize_chapter(chapter_code)]
 
-    def next_question(self, chapter_code: str | None, exercise_group: str | None) -> Dict[str, Any]:
+    def next_question(self, chapter_code: str | None, exercise_group: str | None, grade: str | None = None) -> Dict[str, Any]:
         code = self.normalize_chapter(chapter_code)
         group = self.normalize_exercise_group(exercise_group)
         pool = self._question_pool.get(code, [])
@@ -352,6 +356,29 @@ class CourseTemplateRuleEngine:
                 )
         return pool
 
+    def _normalize_asset_items(self, raw_items: Any) -> List[Dict[str, str]]:
+        out: List[Dict[str, str]] = []
+        if not isinstance(raw_items, list):
+            return out
+        for item in raw_items[:40]:
+            if not isinstance(item, dict):
+                continue
+            asset_type = str(item.get("assetType", "asset")).strip().lower() or "asset"
+            topic = str(item.get("topic", "")).strip()
+            file_ref = str(item.get("file", "")).strip()
+            url = str(item.get("url", "")).strip()
+            if not url and not file_ref:
+                continue
+            out.append(
+                {
+                    "assetType": asset_type,
+                    "topic": topic,
+                    "file": file_ref,
+                    "url": url or file_ref,
+                }
+            )
+        return out
+
     def _subtopic_for_group(self, chapter_code: str, group: str) -> str:
         lesson = self._lessons.get(chapter_code, {})
         exercise_flow = lesson.get("exerciseFlow", [])
@@ -440,4 +467,3 @@ def resolve_template_course_id(course_id: str, default_value: str | int | None =
             if alias.strip().lower() == course_id.strip().lower() and cid.strip():
                 return cid.strip()
     return str(default_value or "").strip()
-

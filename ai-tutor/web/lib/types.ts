@@ -11,6 +11,7 @@ export type TutorStartResponse = {
     title: string;
     gradeBand: string;
     source: string;
+    dbCourseId?: number;
     estimatedMinutes: number;
     subtopics: string[];
     learningGoals: string[];
@@ -21,8 +22,17 @@ export type TutorStartResponse = {
     coreIdeas: string[];
     workedExamples: Array<{ question: string; method: string; answer: string }>;
     starterPractice: string[];
+    assets?: Record<string, number>;
+    assetItems?: TutorAssetItem[];
   };
   question: TutorQuestion;
+};
+
+export type TutorAssetItem = {
+  assetType: string;
+  topic: string;
+  file: string;
+  url: string;
 };
 
 export type TutorQuestion = {
@@ -149,6 +159,7 @@ export type TutorNextQuestionResponse = {
     title: string;
     gradeBand: string;
     source: string;
+    dbCourseId?: number;
     estimatedMinutes: number;
     subtopics: string[];
     learningGoals: string[];
@@ -159,6 +170,8 @@ export type TutorNextQuestionResponse = {
     coreIdeas: string[];
     workedExamples: Array<{ question: string; method: string; answer: string }>;
     starterPractice: string[];
+    assets?: Record<string, number>;
+    assetItems?: TutorAssetItem[];
   };
 };
 

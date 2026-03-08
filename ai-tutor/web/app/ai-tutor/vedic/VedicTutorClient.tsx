@@ -62,7 +62,7 @@ type SvgBoardStep =
       durationSec: number;
     };
 
-type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" };
+type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" | "male" };
 type ConversationRole = "tutor" | "student" | "system";
 type ConversationChannel = "voice" | "text" | "doubt" | "system";
 type ConversationTurn = {
@@ -128,17 +128,19 @@ function toAssetUrl(raw: string): string {
 }
 
 const AVATARS: Avatar[] = [
-  { id: "arya", name: "Arya", role: "Calm Mentor", color: "#0ea5e9", style: "girl" },
-  { id: "ved", name: "Ved", role: "Fast Coach", color: "#22c55e", style: "boy" },
+  { id: "arya", name: "Arya", role: "Calm Mentor",      color: "#0ea5e9", style: "girl" },
+  { id: "ved",  name: "Ved",  role: "Fast Coach",       color: "#22c55e", style: "boy"  },
   { id: "tara", name: "Tara", role: "Friendly Teacher", color: "#f97316", style: "girl" },
-  { id: "niva", name: "Niva", role: "Patient Guide", color: "#6366f1", style: "boy" }
+  { id: "niva", name: "Niva", role: "Patient Guide",    color: "#6366f1", style: "boy"  },
+  { id: "raj",  name: "Raj",  role: "Expert Coach",     color: "#dc2626", style: "male" }
 ];
 
 const AVATAR_STAGE_ART: Record<string, string> = {
   arya: "/ai-tutor/avatars/5.svg",
-  ved: "/ai-tutor/avatars/3.svg",
+  ved:  "/ai-tutor/avatars/3.svg",
   tara: "/ai-tutor/avatars/4.svg",
-  niva: "/ai-tutor/avatars/5.svg"
+  niva: "/ai-tutor/avatars/5.svg",
+  raj:  "/avatar_1/sprite_r03_c01.svg"   // male teacher face/body for stage
 };
 
 const BOARD_TEACHER_SVG_BY_CUE: Record<string, string> = {
@@ -174,6 +176,27 @@ const VISEME_CYCLE_SRCS = [
   "/teacher_1/svg/viseme_u.svg",
   "/teacher_1/svg/viseme_l.svg",
   "/teacher_1/svg/viseme_rest.svg",
+];
+
+// ── Male teacher (avatar_1) – full-body SVG per cue ───────────────────────
+// Cue → single best-fit sprite from the 51-sprite pack (r=row, c=col).
+const MALE_TEACHER_SPRITE_BY_CUE: Record<string, string> = {
+  intro:      "/avatar_1/sprite_r03_c06.svg",  // friendly wave / greeting
+  explain:    "/avatar_1/sprite_r02_c01.svg",  // arms spread, enthusiastic explain
+  demo:       "/avatar_1/sprite_r06_c01.svg",  // holding whiteboard / pointing
+  guided:     "/avatar_1/sprite_r03_c05.svg",  // both hands raised "come on"
+  practice:   "/avatar_1/sprite_r04_c04.svg",  // calm attentive standing
+  check:      "/avatar_1/sprite_r03_c01.svg",  // approving wave
+  checkpoint: "/avatar_1/sprite_r04_c01.svg",  // hands raised, asking student
+  default:    "/avatar_1/sprite_r01_c11.svg",  // relaxed open-arms pose
+};
+
+// Sprites cycled while speaking (mouth-open variants for lip-sync feel)
+const MALE_TEACHER_SPEAKING_CYCLE = [
+  "/avatar_1/sprite_r02_c01.svg",   // arms out
+  "/avatar_1/sprite_r04_c01.svg",   // hands raised
+  "/avatar_1/sprite_r01_c11.svg",   // open arms
+  "/avatar_1/sprite_r04_c01.svg",
 ];
 
 function boardTeacherSvgForCue(cue?: string): string {
@@ -323,16 +346,28 @@ function SpeakingTeacher({
 }) {
   const [visemeIdx, setVisemeIdx] = useState(0);
   const [showBlink, setShowBlink] = useState(false);
+  // Separate slower index for male full-body sprite cycling (500 ms per pose)
+  const [malePoseIdx, setMalePoseIdx] = useState(0);
 
-  // Viseme cycling when speaking (~110 ms per shape = ~9 fps)
+  // Viseme cycling when speaking (~110 ms per shape = ~9 fps) — SVG teacher_1 only
   useEffect(() => {
-    if (!speaking) { setVisemeIdx(0); return; }
+    if (avatar.style === "male" || !speaking) { setVisemeIdx(0); return; }
     const tid = setInterval(
       () => setVisemeIdx(i => (i + 1) % VISEME_CYCLE_SRCS.length),
       110
     );
     return () => clearInterval(tid);
-  }, [speaking]);
+  }, [speaking, avatar.style]);
+
+  // Male teacher pose cycling when speaking (500 ms per pose — smooth, no flicker)
+  useEffect(() => {
+    if (avatar.style !== "male" || !speaking) { setMalePoseIdx(0); return; }
+    const tid = setInterval(
+      () => setMalePoseIdx(i => (i + 1) % MALE_TEACHER_SPEAKING_CYCLE.length),
+      500
+    );
+    return () => clearInterval(tid);
+  }, [speaking, avatar.style]);
 
   // Periodic auto-blink every 3–7 s
   useEffect(() => {
@@ -347,6 +382,39 @@ function SpeakingTeacher({
     scheduleBlink();
     return () => clearTimeout(t);
   }, []);
+
+  // ── Male teacher: single full-body SVG per cue ─────────────────────────
+  if (avatar.style === "male") {
+    const cueKey = (cue || "").toLowerCase();
+    const maleSpriteSrc = speaking
+      ? MALE_TEACHER_SPEAKING_CYCLE[malePoseIdx]
+      : (MALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? MALE_TEACHER_SPRITE_BY_CUE.default);
+    const feedbackSrc =
+      feedback === true  ? "/avatar_1/sprite_r03_c06.svg"
+      : feedback === false ? "/avatar_1/sprite_r05_c05.svg"
+      : null;
+    const activeSrc = feedbackSrc ?? maleSpriteSrc;
+    return (
+      <div
+        className={`speaking-teacher male-teacher${speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
+        style={{ ["--teacher-accent" as any]: avatar.color }}
+        aria-label={`${avatar.name} teacher avatar`}
+      >
+        {/* Preload speaking cycle SVGs to prevent flicker on first cycle */}
+        <div style={{ display: "none" }} aria-hidden="true">
+          {MALE_TEACHER_SPEAKING_CYCLE.map(src => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={src} src={src} alt="" />
+          ))}
+        </div>
+        <div className="teacher-glow" aria-hidden="true" />
+        {/* NO key prop — keep the same DOM element, just swap src in-place */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={activeSrc} alt={avatar.name}
+             className="male-teacher-sprite" draggable={false} />
+      </div>
+    );
+  }
 
   const gestureSrc =
     TEACHER_GESTURE_BY_CUE[(cue || "").toLowerCase()] ?? TEACHER_GESTURE_BY_CUE.default;
@@ -428,10 +496,9 @@ function buildIntroSlideBoardSteps(
   };
 
   if (slide === 1) {
-    addI("s1_teacher", 590, 64, 156, 262, boardTeacherSvgForCue("explain"));
     // ── EXPLAIN: Sutra name + learning goals ──────────────────────────────
     addT("s1_badge", 16, 22, "EXPLAIN  —  Step 1 of 3: Here is the Concept", "#94a3b8", 11);
-    addL("s1_sep", 16, 30, 744, 30, "#e2e8f0", 1);
+    addL("s1_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     addT("s1_sutra_lbl", 16, 54, "Vedic Sutra:", "#7c2d12", 13);
     addT("s1_sutra", 16, 78, `"${CHAPTER_SUTRAS[chapterCode] || "Vedic Method"}"`, avatar.color, 17);
     addL("s1_line", 16, 92, 480, 92, avatar.color, 2);
@@ -442,7 +509,6 @@ function buildIntroSlideBoardSteps(
     });
     addT("s1_next", 16, 240, "► Next: Watch a worked example on the board", "#64748b", 11);
   } else if (slide === 2) {
-    addI("s2_teacher", 590, 64, 156, 262, boardTeacherSvgForCue("demo"));
     // ── DEMO: Step-by-step worked example ────────────────────────────────
     const demoLines = CHAPTER_DEMO_STEPS[chapterCode] || [
       { text: "Step 1 — Identify the base or pattern", color: "#0369a1", size: 14 },
@@ -450,7 +516,7 @@ function buildIntroSlideBoardSteps(
       { text: "Step 3 — Write the answer", color: "#065f46", size: 16 },
     ];
     addT("s2_badge", 16, 22, "DEMO  —  Step 2 of 3: Watch Me Solve One", "#94a3b8", 11);
-    addL("s2_sep", 16, 30, 744, 30, "#e2e8f0", 1);
+    addL("s2_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     let y = 58;
     demoLines.forEach((line, i) => {
       if (i === demoLines.length - 1) {
@@ -461,10 +527,9 @@ function buildIntroSlideBoardSteps(
     });
     addT("s2_next", 16, 310, "► Next: Your turn!", "#64748b", 11);
   } else {
-    addI("s3_teacher", 590, 64, 156, 262, boardTeacherSvgForCue("guided"));
     // ── GUIDED: Student transition ────────────────────────────────────────
     addT("s3_badge", 16, 22, "GUIDED  —  Step 3 of 3: Now You Try", "#94a3b8", 11);
-    addL("s3_sep", 16, 30, 744, 30, "#e2e8f0", 1);
+    addL("s3_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     addT("s3_l1", 16, 68, "Apply the same method to each question.", "#334155", 15);
     addT("s3_l2", 16, 96, "I will guide you if you are stuck.", avatar.color, 14);
     addL("s3_line", 16, 114, 440, 114, avatar.color, 2);
@@ -494,7 +559,7 @@ function AnimatedBoard({
 }) {
   return (
     <div style={{ width: "100%", border: "1px solid #cbd5e1", borderRadius: "10px", background: "#fff", overflow: "hidden" }}>
-      <svg viewBox="0 0 760 340" width="100%" height="340" role="img" aria-label="AI Tutor Whiteboard">
+      <svg viewBox="0 0 580 340" width="100%" height="340" role="img" aria-label="AI Tutor Whiteboard">
         <defs>
           <pattern id="board-grid" width="24" height="24" patternUnits="userSpaceOnUse">
             <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#f1f5f9" strokeWidth="1" />
@@ -984,14 +1049,8 @@ function TutorContent() {
 
     return ordered.length ? ordered : selected;
   }, [lessonScreenplay, question, activeAttempt, confidence, screenplayMode]);
-  const showExercisePanel = useMemo(
-    () => !minimalDuolingoLayout || !isTeachingBoard,
-    [minimalDuolingoLayout, isTeachingBoard]
-  );
-  const showBoardPanel = useMemo(
-    () => !minimalDuolingoLayout || isTeachingBoard,
-    [minimalDuolingoLayout, isTeachingBoard]
-  );
+  const showExercisePanel = useMemo(() => !isTeachingBoard, [isTeachingBoard]);
+  const showBoardPanel = useMemo(() => isTeachingBoard, [isTeachingBoard]);
 
   const stageStatusText = useMemo(() => {
     if (isTeachingBoard) return "Teaching on whiteboard...";
@@ -1581,15 +1640,7 @@ function TutorContent() {
     };
 
     addText("header", 20, 26, "Classroom Whiteboard Session", avatar.color, 17);
-    addLine("header_line", 16, 36, 744, 36, "#cbd5e1", 1);
-    addImage(
-      `teacher_avatar_${(beat?.cue || "explain").toLowerCase()}`,
-      592,
-      64,
-      156,
-      262,
-      boardTeacherSvgForCue(beat?.cue || "explain")
-    );
+    addLine("header_line", 16, 36, 570, 36, "#cbd5e1", 1);
 
     const customSvgSteps = normalizeSvgBoardSteps((beat as any)?.svgAnimation);
     if (customSvgSteps.length) {
@@ -1636,18 +1687,6 @@ function TutorContent() {
       addText("tpc_labels", 250, 320, "10 at top, then 9..1 clockwise", "#1e293b", 13);
     }
 
-    addText("question_title", 20, 176, "Step 2: Let's understand the task.", "#334155", 14);
-    const boardQuestionLines = splitText(q.questionText, 44).slice(0, 2);
-    for (const [idx, line] of boardQuestionLines.entries()) {
-      addText(`q_line_${idx}`, 20, 198 + idx * 20, line, "#0f172a", 15);
-    }
-    addText("subtopic", 20, 250, compactText(`Subtopic: ${q.subtopic || q.skill}`, 64), "#334155", 14);
-    addText("hint", 20, 272, compactText(`Hint: ${q.hint}`, 64), "#334155", 14);
-    if (teachingStep) {
-      addText("checkpoint", 20, 294, compactText(`Checkpoint: ${teachingStep.checkpointPrompt}`, 64), "#7c2d12", 14);
-    } else {
-      addText("check_u", 20, 294, "Can you tell me your first step?", "#7c2d12", 15);
-    }
     return steps;
   }
 
@@ -2732,7 +2771,9 @@ function TutorContent() {
           {/* ── Top bar ──────────────────────────────────────────────────── */}
           <div className={`udemy-topbar${minimalDuolingoLayout ? " minimal" : ""}`}>
             <div className="udemy-topbar-avatar">
-              <SpeakingTeacher avatar={activeAvatar} cue={currentCue} speaking={isSpeaking} feedback={check?.correct} compact />
+              <div className="udemy-avatar-pill" style={{ background: activeAvatar.color }}>
+                {activeAvatar.name.charAt(0)}
+              </div>
             </div>
             <div className="udemy-topbar-speech">
               <span className="udemy-avatar-name" style={{ color: activeAvatar.color }}>
@@ -2849,41 +2890,53 @@ function TutorContent() {
               ) : null}
 
               {showBoardPanel ? (
-                <>
-                  {/* Animated whiteboard */}
-                  <AnimatedBoard
-                    steps={boardSteps}
-                    runId={boardRunId}
-                    showPrompt={isTeachingBoard}
-                  />
+                <div className="board-with-teacher">
+                  <div className="board-canvas-wrap">
+                    {/* Animated whiteboard */}
+                    <AnimatedBoard
+                      steps={boardSteps}
+                      runId={boardRunId}
+                      showPrompt={isTeachingBoard}
+                    />
 
-                  {/* Board toolbar */}
-                  <div className="udemy-board-toolbar">
-                    <div className="udemy-speed-row">
-                      <label htmlFor="boardSpeedU">Speed: {boardSpeed.toFixed(1)}x</label>
-                      <input
-                        id="boardSpeedU"
-                        type="range"
-                        min={0.7}
-                        max={1.5}
-                        step={0.1}
-                        value={boardSpeed}
-                        onChange={(e) => setBoardSpeed(Number(e.target.value))}
-                      />
-                    </div>
-                    <div className="udemy-board-btns">
-                      <button className="button" type="button" onClick={teachOnBoard} disabled={isTeachingBoard || isSpeaking}>
-                        Teach on Board
-                      </button>
-                      <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
-                        Speak Question
-                      </button>
-                      <button className="button secondary" type="button" onClick={clearBoard}>
-                        Clear Board
-                      </button>
+                    {/* Board toolbar */}
+                    <div className="udemy-board-toolbar">
+                      <div className="udemy-speed-row">
+                        <label htmlFor="boardSpeedU">Speed: {boardSpeed.toFixed(1)}x</label>
+                        <input
+                          id="boardSpeedU"
+                          type="range"
+                          min={0.7}
+                          max={1.5}
+                          step={0.1}
+                          value={boardSpeed}
+                          onChange={(e) => setBoardSpeed(Number(e.target.value))}
+                        />
+                      </div>
+                      <div className="udemy-board-btns">
+                        <button className="button" type="button" onClick={teachOnBoard} disabled={isTeachingBoard || isSpeaking}>
+                          Teach on Board
+                        </button>
+                        <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
+                          Speak Question
+                        </button>
+                        <button className="button secondary" type="button" onClick={clearBoard}>
+                          Clear Board
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </>
+
+                  {/* SpeakingTeacher alongside the board */}
+                  <div className="board-teacher-panel">
+                    <SpeakingTeacher
+                      avatar={activeAvatar}
+                      cue={currentCue}
+                      speaking={isSpeaking}
+                      feedback={check?.correct}
+                    />
+                  </div>
+                </div>
               ) : null}
 
               {/* Feedback */}
@@ -3263,6 +3316,40 @@ function TutorContent() {
         .speaking-teacher.compact {
           width: 80px;
         }
+        /* ── Male teacher (PNG sprites) ────────────────────────────────── */
+        .speaking-teacher.male-teacher {
+          aspect-ratio: unset;
+          width: min(100%, 200px);
+          height: 220px;
+          align-items: center;
+          justify-content: center;
+        }
+        .speaking-teacher.male-teacher.compact {
+          width: 70px;
+          height: 80px;
+        }
+        .male-teacher-sprite {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          filter: drop-shadow(0 8px 14px rgba(15,23,42,0.20));
+          /* No opacity transition here — src swap is instant once preloaded */
+        }
+        /* Gentle breathing float for idle state */
+        .speaking-teacher.male-teacher:not(.speaking) {
+          animation: avatarFloat 3s ease-in-out infinite;
+        }
+        /* Subtle bob when speaking — CSS handles movement, src swap handles pose */
+        .speaking-teacher.male-teacher.speaking {
+          animation: maleTeacherTalk 0.5s ease-in-out infinite;
+        }
+        @keyframes maleTeacherTalk {
+          0%, 100% { transform: translateY(0) scale(1); }
+          30%       { transform: translateY(-4px) scale(1.02); }
+          70%       { transform: translateY(2px) scale(0.99); }
+        }
         .teacher-glow {
           position: absolute;
           inset: 12% 8% 10%;
@@ -3382,11 +3469,41 @@ function TutorContent() {
         }
         .udemy-topbar-avatar {
           flex-shrink: 0;
-          width: 52px;
-          height: 52px;
-          overflow: hidden;
+          width: 48px;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .udemy-avatar-pill {
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
-          border: 2px solid #334155;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: #fff;
+          letter-spacing: 0;
+          user-select: none;
+          border: 2px solid rgba(255,255,255,0.25);
+        }
+        .board-with-teacher {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .board-canvas-wrap {
+          flex: 1;
+          min-width: 0;
+        }
+        .board-teacher-panel {
+          flex-shrink: 0;
+          width: 160px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .udemy-topbar-speech { flex: 1; min-width: 0; }
         .udemy-avatar-name {

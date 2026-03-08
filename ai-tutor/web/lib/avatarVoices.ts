@@ -3,7 +3,7 @@ export const AVATAR_SPEAKER_MAP: Record<string, string> = {
   ved:  process.env.SARVAM_SPEAKER_VED  || "aditya",
   tara: process.env.SARVAM_SPEAKER_TARA || "ritu",
   niva: process.env.SARVAM_SPEAKER_NIVA || "rahul",
-  raj:  process.env.SARVAM_SPEAKER_RAJ  || "arjun"   // male voice for Raj
+  raj:  process.env.SARVAM_SPEAKER_RAJ  || "kabir"   // male voice for Raj (bulbul:v3)
 };
 
 export function getSpeakerForAvatar(avatarId?: string): string {

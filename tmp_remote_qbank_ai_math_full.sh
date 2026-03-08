@@ -1,4 +1,4 @@
-export OPENAI_API_KEY='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'
+export OPENAI_API_KEY='change_me_openai_api_key'
 export QBANK_SUBJECT_FILTER=MATH
 export QBANK_MAX_CHAPTERS=0
 export QBANK_API_SLEEP_SEC=0.8

@@ -142,15 +142,39 @@ const AVATAR_STAGE_ART: Record<string, string> = {
 };
 
 const BOARD_TEACHER_SVG_BY_CUE: Record<string, string> = {
-  intro: "/ai-tutor/teacher/gesture_greeting.svg",
-  explain: "/ai-tutor/teacher/gesture_explain_1.svg",
-  demo: "/ai-tutor/teacher/gesture_write_on_board.svg",
-  guided: "/ai-tutor/teacher/gesture_ask_question.svg",
-  practice: "/ai-tutor/teacher/gesture_look_at_students.svg",
-  check: "/ai-tutor/teacher/gesture_ok_good.svg",
-  checkpoint: "/ai-tutor/teacher/gesture_answer.svg",
-  default: "/ai-tutor/teacher/idle_hands_clasped.svg"
+  intro: "/teacher_1/svg/gesture_greeting.svg",
+  explain: "/teacher_1/svg/gesture_explain_1.svg",
+  demo: "/teacher_1/svg/gesture_write_on_board.svg",
+  guided: "/teacher_1/svg/gesture_ask_question.svg",
+  practice: "/teacher_1/svg/gesture_look_at_students.svg",
+  check: "/teacher_1/svg/gesture_ok_good.svg",
+  checkpoint: "/teacher_1/svg/gesture_answer.svg",
+  default: "/teacher_1/svg/idle_hands_clasped.svg"
 };
+
+// ── Speaking teacher – gesture per cue ────────────────────────────────────
+const TEACHER_GESTURE_BY_CUE: Record<string, string> = {
+  intro:      "/teacher_1/svg/gesture_greeting.svg",
+  explain:    "/teacher_1/svg/gesture_explain_1.svg",
+  demo:       "/teacher_1/svg/gesture_write_on_board.svg",
+  guided:     "/teacher_1/svg/gesture_ask_question.svg",
+  practice:   "/teacher_1/svg/gesture_look_at_students.svg",
+  check:      "/teacher_1/svg/gesture_ok_good.svg",
+  checkpoint: "/teacher_1/svg/gesture_answer.svg",
+  default:    "/teacher_1/svg/idle_hands_clasped.svg"
+};
+
+// ── Viseme sequence for lip-sync ───────────────────────────────────────────
+const VISEME_CYCLE_SRCS = [
+  "/teacher_1/svg/viseme_rest.svg",
+  "/teacher_1/svg/viseme_a.svg",
+  "/teacher_1/svg/viseme_mbp.svg",
+  "/teacher_1/svg/viseme_o.svg",
+  "/teacher_1/svg/viseme_e.svg",
+  "/teacher_1/svg/viseme_u.svg",
+  "/teacher_1/svg/viseme_l.svg",
+  "/teacher_1/svg/viseme_rest.svg",
+];
 
 function boardTeacherSvgForCue(cue?: string): string {
   const key = (cue || "").toLowerCase();
@@ -283,28 +307,87 @@ function AvatarFace({
   );
 }
 
-function AvatarCharacter({
+// ── Speaking teacher avatar (layered sprite system) ────────────────────────
+function SpeakingTeacher({
+  cue = "explain",
+  speaking = false,
+  feedback,
   avatar,
-  speaking
+  compact = false
 }: {
-  avatar: Avatar;
+  cue?: string;
   speaking?: boolean;
+  feedback?: boolean;
+  avatar: Avatar;
+  compact?: boolean;
 }) {
-  const src = AVATAR_STAGE_ART[avatar.id] || "/ai-tutor/avatars/5.svg";
+  const [visemeIdx, setVisemeIdx] = useState(0);
+  const [showBlink, setShowBlink] = useState(false);
+
+  // Viseme cycling when speaking (~110 ms per shape = ~9 fps)
+  useEffect(() => {
+    if (!speaking) { setVisemeIdx(0); return; }
+    const tid = setInterval(
+      () => setVisemeIdx(i => (i + 1) % VISEME_CYCLE_SRCS.length),
+      110
+    );
+    return () => clearInterval(tid);
+  }, [speaking]);
+
+  // Periodic auto-blink every 3–7 s
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
+    const scheduleBlink = () => {
+      t = setTimeout(() => {
+        setShowBlink(true);
+        setTimeout(() => setShowBlink(false), 160);
+        scheduleBlink();
+      }, 3000 + Math.random() * 4000);
+    };
+    scheduleBlink();
+    return () => clearTimeout(t);
+  }, []);
+
+  const gestureSrc =
+    TEACHER_GESTURE_BY_CUE[(cue || "").toLowerCase()] ?? TEACHER_GESTURE_BY_CUE.default;
+
+  const expressionSrc =
+    feedback === true  ? "/teacher_1/svg/expression_happy.svg"
+    : feedback === false ? "/teacher_1/svg/expression_concerned.svg"
+    : speaking         ? "/teacher_1/svg/expression_smile.svg"
+    :                    "/teacher_1/svg/expression_neutral.svg";
+
   return (
     <div
-      className={`teacher-stage-avatar${speaking ? " speaking" : ""}`}
+      className={`speaking-teacher${speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
       style={{ ["--teacher-accent" as any]: avatar.color }}
+      aria-label={`${avatar.name} teacher avatar`}
     >
-      <div className="teacher-stage-glow" aria-hidden="true" />
-      <Image
-        src={src}
-        alt={`${avatar.name} teaching avatar`}
-        width={340}
-        height={440}
-        unoptimized
-        className="teacher-stage-image"
-      />
+      <div className="teacher-glow" aria-hidden="true" />
+      {/* Body base – full figure */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/teacher_1/svg/view_front.svg" alt={avatar.name}
+           className="st-layer st-body" draggable={false} />
+      {/* Gesture overlay – arms (cue-dependent) */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img key={gestureSrc} src={gestureSrc} alt=""
+           className="st-layer st-gesture" draggable={false} />
+      {/* Expression overlay – face */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img key={expressionSrc} src={expressionSrc} alt=""
+           className="st-layer st-expression" draggable={false} />
+      {/* Viseme / lip-sync overlay – mouth */}
+      {speaking && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={VISEME_CYCLE_SRCS[visemeIdx]} alt=""
+             className="st-layer st-viseme" draggable={false} />
+      )}
+      {/* Blink overlay */}
+      {showBlink && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src="/teacher_1/svg/head_blink.svg" alt=""
+             className="st-layer st-blink" draggable={false} />
+      )}
     </div>
   );
 }
@@ -727,6 +810,7 @@ function TutorContent() {
   const [micPermission, setMicPermission] = useState<MicPermission>("unknown");
   const [isTeachingBoard, setIsTeachingBoard] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [currentCue, setCurrentCue] = useState<string>("explain");
   const [isListening, setIsListening] = useState(false);
   const [isEvaluatingAnswer, setIsEvaluatingAnswer] = useState(false);
   const [awaitingStudentResponse, setAwaitingStudentResponse] = useState(false);
@@ -1782,6 +1866,7 @@ function TutorContent() {
       });
       for (const beat of screenplay) {
         if (runId !== teachRunRef.current) return;
+        setCurrentCue(beat.cue || "explain");
         void logTutorEvent("SCREENPLAY_BEAT_SELECTED", {
           mode: screenplayMode,
           beatId: beat.beatId,
@@ -2628,7 +2713,7 @@ function TutorContent() {
           <div className="panel setup-hero-stage" style={{ marginTop: "0.45rem" }}>
             <p className="setup-stage-kicker">Teacher Stage</p>
             <div className="setup-avatar-stage">
-              <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking || status === "loading"} />
+              <SpeakingTeacher avatar={activeAvatar} cue={currentCue} speaking={isSpeaking || status === "loading"} feedback={check?.correct} />
             </div>
             <p className="setup-stage-title" style={{ color: activeAvatar.color }}>
               {activeAvatar.name} - {activeAvatar.role}
@@ -2647,7 +2732,7 @@ function TutorContent() {
           {/* ── Top bar ──────────────────────────────────────────────────── */}
           <div className={`udemy-topbar${minimalDuolingoLayout ? " minimal" : ""}`}>
             <div className="udemy-topbar-avatar">
-              <AvatarCharacter avatar={activeAvatar} speaking={isSpeaking} />
+              <SpeakingTeacher avatar={activeAvatar} cue={currentCue} speaking={isSpeaking} feedback={check?.correct} compact />
             </div>
             <div className="udemy-topbar-speech">
               <span className="udemy-avatar-name" style={{ color: activeAvatar.color }}>
@@ -3160,6 +3245,66 @@ function TutorContent() {
         }
         @keyframes boardDrawLine { to { stroke-dashoffset: 0; } }
         @keyframes boardFadeText { to { opacity: 1; } }
+
+        /* ── Speaking Teacher (layered sprite avatar) ───────────────────── */
+        .speaking-teacher {
+          position: relative;
+          width: min(100%, 240px);
+          aspect-ratio: 180 / 219;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          transform-origin: 50% 88%;
+          animation: avatarFloat 2.8s ease-in-out infinite;
+        }
+        .speaking-teacher.speaking {
+          animation: avatarTalk 0.75s ease-in-out infinite;
+        }
+        .speaking-teacher.compact {
+          width: 80px;
+        }
+        .teacher-glow {
+          position: absolute;
+          inset: 12% 8% 10%;
+          border-radius: 28px;
+          background: radial-gradient(circle at 50% 30%, var(--teacher-accent, #0ea5e9) 0%, rgba(255,255,255,0) 72%);
+          filter: blur(14px);
+          opacity: 0.18;
+          pointer-events: none;
+        }
+        /* Base layer – full body */
+        .st-layer { position: absolute; pointer-events: none; }
+        .st-body { inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 1; filter: drop-shadow(0 10px 18px rgba(15,23,42,0.22)); }
+        /* Gesture – arm overlay (bottom half of figure) */
+        .st-gesture {
+          z-index: 2;
+          bottom: 0; left: 50%; transform: translateX(-50%);
+          width: auto; height: 58%;
+          object-fit: contain;
+          transition: opacity 0.3s ease;
+        }
+        /* Expression – face overlay (top ~38% of figure) */
+        .st-expression {
+          z-index: 3;
+          top: 4%; left: 50%; transform: translateX(-50%);
+          width: 38%; height: 38%;
+          object-fit: contain;
+          transition: opacity 0.25s ease;
+        }
+        /* Viseme – mouth overlay (~30% from top, centred) */
+        .st-viseme {
+          z-index: 4;
+          top: 28%; left: 50%; transform: translateX(-50%);
+          width: 52%; height: auto;
+          object-fit: contain;
+        }
+        /* Blink – eyes overlay (very top, centred) */
+        .st-blink {
+          z-index: 5;
+          top: 2%; left: 50%; transform: translateX(-50%);
+          width: 35%; height: auto;
+          object-fit: contain;
+        }
 
         /* ── Udemy-style layout ─────────────────────────────────────────── */
         .tutor-shell-live {

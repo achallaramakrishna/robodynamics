@@ -1,0 +1,30 @@
+HTTP/1.1 302 
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 08 Mar 2026 10:39:01 GMT
+Content-Length: 0
+Connection: keep-alive
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Location: http://robodynamics.in/platform/modules
+Content-Language: en
+
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 08 Mar 2026 10:39:01 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Location: https://robodynamics.in/platform/modules
+
+HTTP/1.1 200 
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 08 Mar 2026 10:39:02 GMT
+Content-Type: text/html;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Language: en
+

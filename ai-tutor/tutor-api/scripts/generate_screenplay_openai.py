@@ -441,7 +441,7 @@ def normalize_screenplay(
             if pause_type not in {"none", "student_response"}:
                 pause_type = "none"
             cue = str(item.get("cue", "explain")).strip().lower()
-            if cue not in {"intro", "explain", "checkpoint"}:
+            if cue not in {"intro", "explain", "demo", "guided", "practice", "check", "checkpoint"}:
                 cue = "explain"
             try:
                 sequence = int(item.get("sequence", len(grouped_beats[group]) + 1))

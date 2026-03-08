@@ -6,6 +6,7 @@ export type TutorStartResponse = {
   activeExerciseGroup: string;
   chapters: TutorChapter[];
   exerciseGroups: TutorExerciseGroup[];
+  sessionProgress: TutorSessionProgress;
   lesson: {
     lessonId: string;
     title: string;
@@ -70,7 +71,7 @@ export type TutorScreenplayBeat = {
   exerciseGroup: string;
   subtopic: string;
   sequence: number;
-  cue: "intro" | "explain" | "checkpoint";
+  cue: "intro" | "explain" | "demo" | "guided" | "practice" | "check" | "checkpoint";
   boardMode: "svg" | "free_draw";
   teacherLine: string;
   boardAction: string;
@@ -108,6 +109,18 @@ export type TutorScreenplayBeat = {
         delaySec: number;
         durationSec: number;
       }
+    | {
+        kind: "image";
+        id: string;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        href: string;
+        opacity?: number;
+        delaySec: number;
+        durationSec: number;
+      }
   >;
 };
 
@@ -134,6 +147,7 @@ export type TutorCheckResponse = {
   encouragement: string;
   tutorAction?: string;
   coachTip?: string;
+  sessionProgress?: TutorSessionProgress;
   summary?: {
     attempts: number;
     correctCount: number;
@@ -154,6 +168,7 @@ export type TutorNextQuestionResponse = {
   question: TutorQuestion;
   activeChapterCode?: string;
   activeExerciseGroup?: string;
+  sessionProgress?: TutorSessionProgress;
   lesson?: {
     lessonId: string;
     title: string;
@@ -207,4 +222,27 @@ export type TutorRealtimeEvent = {
   version: number;
   timestamp: string;
   meta: Record<string, unknown>;
+};
+
+export type TutorLessonPathItem = {
+  exerciseGroup: string;
+  subtopic: string;
+  status: "locked" | "active" | "completed";
+  attempts: number;
+  correctCount: number;
+  accuracyPct: number;
+};
+
+export type TutorSessionProgress = {
+  hearts: number;
+  maxHearts: number;
+  xp: number;
+  streak: number;
+  masteryPct: number;
+  lessonCompletionPct: number;
+  livesDepleted: boolean;
+  canContinue: boolean;
+  activeExerciseGroup: string;
+  reviewQueue: string[];
+  lessonPath: TutorLessonPathItem[];
 };

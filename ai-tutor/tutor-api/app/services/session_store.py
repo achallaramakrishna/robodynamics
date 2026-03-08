@@ -4,7 +4,7 @@ import os
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import httpx
 
@@ -31,6 +31,13 @@ class TutorSession:
     confidence_last: str = "unknown"
     question_issued_at: str = ""
     current_question: Dict[str, Any] = field(default_factory=dict)
+    hearts_max: int = 5
+    hearts: int = 5
+    xp: int = 0
+    streak: int = 0
+    question_progress: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    group_progress: Dict[str, Dict[str, int]] = field(default_factory=dict)
+    subtopic_mastery: Dict[str, int] = field(default_factory=dict)
     # Rolling conversation history for the LLM tutoring chat.
     # Each entry: {"role": "user"|"assistant", "content": "<text>"}
     conversation_history: list = field(default_factory=list)
@@ -81,6 +88,11 @@ class SessionStore:
         session = self.get(session_id)
         session.chapter_code = chapter_code
         session.current_question = {}
+        session.question_progress = {}
+        session.group_progress = {}
+        session.subtopic_mastery = {}
+        session.hearts = session.hearts_max
+        session.streak = 0
         return session
 
     def set_course_id(self, session_id: str, course_id: str) -> TutorSession:
@@ -126,16 +138,50 @@ class SessionStore:
         self,
         session_id: str,
         correct: bool,
+        question_id: str | None = None,
+        exercise_group: str | None = None,
+        subtopic: str | None = None,
         response_time_ms: int | None = None,
         confidence: str | None = None,
     ) -> TutorSession:
         session = self.get(session_id)
         session.attempts += 1
+        qid = (question_id or "").strip()
+        qstat = session.question_progress.setdefault(qid, {"attempts": 0, "solved": False}) if qid else None
+        if qstat is not None:
+            qstat["attempts"] = int(qstat.get("attempts", 0)) + 1
+
+        grp = (exercise_group or session.exercise_group or "").strip().upper()
+        if grp:
+            gstat = session.group_progress.setdefault(grp, {"attempts": 0, "correct": 0})
+            gstat["attempts"] = int(gstat.get("attempts", 0)) + 1
+
+        topic = (subtopic or "").strip()
+        if topic:
+            session.subtopic_mastery.setdefault(topic, 50)
+
         if correct:
             session.correct_count += 1
             session.error_streak = 0
+            if grp:
+                gstat = session.group_progress.setdefault(grp, {"attempts": 0, "correct": 0})
+                gstat["correct"] = int(gstat.get("correct", 0)) + 1
+            session.streak += 1
+            award_xp = True
+            if qstat is not None:
+                if bool(qstat.get("solved")):
+                    award_xp = False
+                qstat["solved"] = True
+            if award_xp:
+                session.xp += 10
+            if topic:
+                session.subtopic_mastery[topic] = min(100, int(session.subtopic_mastery.get(topic, 50)) + 8)
         else:
             session.error_streak += 1
+            session.streak = 0
+            session.hearts = max(0, session.hearts - 1)
+            if topic:
+                session.subtopic_mastery[topic] = max(0, int(session.subtopic_mastery.get(topic, 50)) - 6)
 
         if response_time_ms is not None and response_time_ms >= 0:
             session.last_response_ms = int(response_time_ms)
@@ -154,6 +200,91 @@ class SessionStore:
             session.confidence_last = confidence.strip().lower()
         return session
 
+    def lesson_progress(
+        self,
+        session_id: str,
+        lesson: Dict[str, Any],
+        active_exercise_group: str | None = None,
+    ) -> Dict[str, Any]:
+        session = self.get(session_id)
+        flow: List[Dict[str, Any]] = list(lesson.get("exerciseFlow") or [])
+        teaching_script = list(lesson.get("teachingScript") or [])
+        if teaching_script:
+            by_group: Dict[str, Dict[str, Any]] = {}
+            for step in teaching_script:
+                if not isinstance(step, dict):
+                    continue
+                group = str(step.get("exerciseGroup", "")).strip().upper()
+                subtopic = str(step.get("subtopic", "")).strip() or "Practice"
+                if not group or group in by_group:
+                    continue
+                by_group[group] = {"exerciseGroup": group, "subtopic": subtopic}
+            if by_group:
+                ordered_groups = sorted(by_group.keys())
+                flow = [by_group[g] for g in ordered_groups]
+        active_group = (active_exercise_group or session.exercise_group or "").strip().upper() or "A"
+        lesson_path: List[Dict[str, Any]] = []
+        completed = 0
+        unlocked_seen = False
+
+        for item in flow:
+            group = str(item.get("exerciseGroup", "")).strip().upper()
+            subtopic = str(item.get("subtopic", "")).strip() or "Practice"
+            gstat = session.group_progress.get(group, {})
+            attempts = int(gstat.get("attempts", 0))
+            correct = int(gstat.get("correct", 0))
+            accuracy = round((correct * 100.0 / attempts), 2) if attempts else 0.0
+            is_completed = correct > 0
+            if is_completed:
+                completed += 1
+
+            if is_completed:
+                status = "completed"
+            elif not unlocked_seen or group == active_group:
+                status = "active"
+                unlocked_seen = True
+            else:
+                status = "locked"
+
+            lesson_path.append(
+                {
+                    "exerciseGroup": group,
+                    "subtopic": subtopic,
+                    "status": status,
+                    "attempts": attempts,
+                    "correctCount": correct,
+                    "accuracyPct": accuracy,
+                }
+            )
+
+        if lesson_path and all(item["status"] != "active" for item in lesson_path):
+            for item in lesson_path:
+                if item["status"] != "completed":
+                    item["status"] = "active"
+                    break
+
+        mastery_values = list(session.subtopic_mastery.values())
+        mastery_pct = round(sum(mastery_values) / len(mastery_values), 2) if mastery_values else 50.0
+        completion_pct = round((completed * 100.0 / len(lesson_path)), 2) if lesson_path else 0.0
+
+        weak = sorted(session.subtopic_mastery.items(), key=lambda kv: kv[1])
+        review_queue = [name for name, score in weak if score < 70][:5]
+
+        lives_depleted = session.hearts <= 0
+        return {
+            "hearts": session.hearts,
+            "maxHearts": session.hearts_max,
+            "xp": session.xp,
+            "streak": session.streak,
+            "masteryPct": mastery_pct,
+            "lessonCompletionPct": completion_pct,
+            "livesDepleted": lives_depleted,
+            "canContinue": not lives_depleted,
+            "activeExerciseGroup": active_group,
+            "reviewQueue": review_queue,
+            "lessonPath": lesson_path,
+        }
+
     def summary(self, session_id: str) -> Dict[str, Any]:
         session = self.get(session_id)
         accuracy = (session.correct_count * 100.0 / session.attempts) if session.attempts else 0.0
@@ -170,6 +301,10 @@ class SessionStore:
             "courseId": session.course_id,
             "chapterCode": session.chapter_code,
             "exerciseGroup": session.exercise_group,
+            "hearts": session.hearts,
+            "maxHearts": session.hearts_max,
+            "xp": session.xp,
+            "streak": session.streak,
         }
 
     async def send_event(self, event: TutorEvent) -> None:

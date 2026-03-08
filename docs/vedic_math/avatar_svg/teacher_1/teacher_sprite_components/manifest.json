@@ -1,0 +1,370 @@
+[
+  {
+    "id": "view_front",
+    "category": "views",
+    "png": "png/view_front.png",
+    "svg": "svg/view_front.svg",
+    "width": 180,
+    "height": 219
+  },
+  {
+    "id": "view_side",
+    "category": "views",
+    "png": "png/view_side.png",
+    "svg": "svg/view_side.svg",
+    "width": 175,
+    "height": 209
+  },
+  {
+    "id": "view_three_quarter",
+    "category": "views",
+    "png": "png/view_three_quarter.png",
+    "svg": "svg/view_three_quarter.svg",
+    "width": 180,
+    "height": 209
+  },
+  {
+    "id": "viseme_a",
+    "category": "visemes",
+    "png": "png/viseme_a.png",
+    "svg": "svg/viseme_a.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_e",
+    "category": "visemes",
+    "png": "png/viseme_e.png",
+    "svg": "svg/viseme_e.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_o",
+    "category": "visemes",
+    "png": "png/viseme_o.png",
+    "svg": "svg/viseme_o.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_u",
+    "category": "visemes",
+    "png": "png/viseme_u.png",
+    "svg": "svg/viseme_u.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_mbp",
+    "category": "visemes",
+    "png": "png/viseme_mbp.png",
+    "svg": "svg/viseme_mbp.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_fv",
+    "category": "visemes",
+    "png": "png/viseme_fv.png",
+    "svg": "svg/viseme_fv.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_l",
+    "category": "visemes",
+    "png": "png/viseme_l.png",
+    "svg": "svg/viseme_l.svg",
+    "width": 91,
+    "height": 74
+  },
+  {
+    "id": "viseme_sz",
+    "category": "visemes",
+    "png": "png/viseme_sz.png",
+    "svg": "svg/viseme_sz.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_chj",
+    "category": "visemes",
+    "png": "png/viseme_chj.png",
+    "svg": "svg/viseme_chj.svg",
+    "width": 91,
+    "height": 78
+  },
+  {
+    "id": "viseme_r",
+    "category": "visemes",
+    "png": "png/viseme_r.png",
+    "svg": "svg/viseme_r.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_wq",
+    "category": "visemes",
+    "png": "png/viseme_wq.png",
+    "svg": "svg/viseme_wq.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "viseme_rest",
+    "category": "visemes",
+    "png": "png/viseme_rest.png",
+    "svg": "svg/viseme_rest.svg",
+    "width": 92,
+    "height": 78
+  },
+  {
+    "id": "gesture_greeting",
+    "category": "gestures",
+    "png": "png/gesture_greeting.png",
+    "svg": "svg/gesture_greeting.svg",
+    "width": 134,
+    "height": 128
+  },
+  {
+    "id": "gesture_explain_1",
+    "category": "gestures",
+    "png": "png/gesture_explain_1.png",
+    "svg": "svg/gesture_explain_1.svg",
+    "width": 133,
+    "height": 118
+  },
+  {
+    "id": "gesture_explain_2",
+    "category": "gestures",
+    "png": "png/gesture_explain_2.png",
+    "svg": "svg/gesture_explain_2.svg",
+    "width": 130,
+    "height": 118
+  },
+  {
+    "id": "gesture_point_to_board",
+    "category": "gestures",
+    "png": "png/gesture_point_to_board.png",
+    "svg": "svg/gesture_point_to_board.svg",
+    "width": 162,
+    "height": 118
+  },
+  {
+    "id": "gesture_write_on_board",
+    "category": "gestures",
+    "png": "png/gesture_write_on_board.png",
+    "svg": "svg/gesture_write_on_board.svg",
+    "width": 192,
+    "height": 115
+  },
+  {
+    "id": "gesture_hold_book",
+    "category": "gestures",
+    "png": "png/gesture_hold_book.png",
+    "svg": "svg/gesture_hold_book.svg",
+    "width": 120,
+    "height": 115
+  },
+  {
+    "id": "gesture_ask_question",
+    "category": "gestures",
+    "png": "png/gesture_ask_question.png",
+    "svg": "svg/gesture_ask_question.svg",
+    "width": 125,
+    "height": 115
+  },
+  {
+    "id": "gesture_answer",
+    "category": "gestures",
+    "png": "png/gesture_answer.png",
+    "svg": "svg/gesture_answer.svg",
+    "width": 135,
+    "height": 115
+  },
+  {
+    "id": "gesture_emphasize",
+    "category": "gestures",
+    "png": "png/gesture_emphasize.png",
+    "svg": "svg/gesture_emphasize.svg",
+    "width": 140,
+    "height": 128
+  },
+  {
+    "id": "gesture_ok_good",
+    "category": "gestures",
+    "png": "png/gesture_ok_good.png",
+    "svg": "svg/gesture_ok_good.svg",
+    "width": 145,
+    "height": 124
+  },
+  {
+    "id": "gesture_count",
+    "category": "gestures",
+    "png": "png/gesture_count.png",
+    "svg": "svg/gesture_count.svg",
+    "width": 150,
+    "height": 126
+  },
+  {
+    "id": "gesture_look_at_students",
+    "category": "gestures",
+    "png": "png/gesture_look_at_students.png",
+    "svg": "svg/gesture_look_at_students.svg",
+    "width": 140,
+    "height": 128
+  },
+  {
+    "id": "expression_neutral",
+    "category": "expressions",
+    "png": "png/expression_neutral.png",
+    "svg": "svg/expression_neutral.svg",
+    "width": 61,
+    "height": 82
+  },
+  {
+    "id": "expression_smile",
+    "category": "expressions",
+    "png": "png/expression_smile.png",
+    "svg": "svg/expression_smile.svg",
+    "width": 60,
+    "height": 82
+  },
+  {
+    "id": "expression_happy",
+    "category": "expressions",
+    "png": "png/expression_happy.png",
+    "svg": "svg/expression_happy.svg",
+    "width": 58,
+    "height": 82
+  },
+  {
+    "id": "expression_serious",
+    "category": "expressions",
+    "png": "png/expression_serious.png",
+    "svg": "svg/expression_serious.svg",
+    "width": 73,
+    "height": 82
+  },
+  {
+    "id": "expression_surprise",
+    "category": "expressions",
+    "png": "png/expression_surprise.png",
+    "svg": "svg/expression_surprise.svg",
+    "width": 73,
+    "height": 82
+  },
+  {
+    "id": "expression_thinking",
+    "category": "expressions",
+    "png": "png/expression_thinking.png",
+    "svg": "svg/expression_thinking.svg",
+    "width": 64,
+    "height": 82
+  },
+  {
+    "id": "expression_encouraging",
+    "category": "expressions",
+    "png": "png/expression_encouraging.png",
+    "svg": "svg/expression_encouraging.svg",
+    "width": 90,
+    "height": 82
+  },
+  {
+    "id": "expression_concerned",
+    "category": "expressions",
+    "png": "png/expression_concerned.png",
+    "svg": "svg/expression_concerned.svg",
+    "width": 81,
+    "height": 82
+  },
+  {
+    "id": "expression_thinking_soft",
+    "category": "expressions",
+    "png": "png/expression_thinking_soft.png",
+    "svg": "svg/expression_thinking_soft.svg",
+    "width": 90,
+    "height": 82
+  },
+  {
+    "id": "head_look_board",
+    "category": "head_movements",
+    "png": "png/head_look_board.png",
+    "svg": "svg/head_look_board.svg",
+    "width": 75,
+    "height": 90
+  },
+  {
+    "id": "head_head_nod",
+    "category": "head_movements",
+    "png": "png/head_head_nod.png",
+    "svg": "svg/head_head_nod.svg",
+    "width": 79,
+    "height": 90
+  },
+  {
+    "id": "head_head_tilt",
+    "category": "head_movements",
+    "png": "png/head_head_tilt.png",
+    "svg": "svg/head_head_tilt.svg",
+    "width": 76,
+    "height": 90
+  },
+  {
+    "id": "head_blink",
+    "category": "head_movements",
+    "png": "png/head_blink.png",
+    "svg": "svg/head_blink.svg",
+    "width": 62,
+    "height": 68
+  },
+  {
+    "id": "head_look_left",
+    "category": "head_movements",
+    "png": "png/head_look_left.png",
+    "svg": "svg/head_look_left.svg",
+    "width": 63,
+    "height": 68
+  },
+  {
+    "id": "head_look_right",
+    "category": "head_movements",
+    "png": "png/head_look_right.png",
+    "svg": "svg/head_look_right.svg",
+    "width": 82,
+    "height": 68
+  },
+  {
+    "id": "head_head_turn",
+    "category": "head_movements",
+    "png": "png/head_head_turn.png",
+    "svg": "svg/head_head_turn.svg",
+    "width": 67,
+    "height": 70
+  },
+  {
+    "id": "idle_hold_book",
+    "category": "idle_poses",
+    "png": "png/idle_hold_book.png",
+    "svg": "svg/idle_hold_book.svg",
+    "width": 112,
+    "height": 300
+  },
+  {
+    "id": "idle_hand_pocket",
+    "category": "idle_poses",
+    "png": "png/idle_hand_pocket.png",
+    "svg": "svg/idle_hand_pocket.svg",
+    "width": 112,
+    "height": 300
+  },
+  {
+    "id": "idle_hands_clasped",
+    "category": "idle_poses",
+    "png": "png/idle_hands_clasped.png",
+    "svg": "svg/idle_hands_clasped.svg",
+    "width": 112,
+    "height": 300
+  }
+]

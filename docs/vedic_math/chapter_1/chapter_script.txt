@@ -1,0 +1,703 @@
+CHAPTER 1 SCRIPT — “COMPLETING THE WHOLE”
+1. EXPLAIN — “Here’s the concept”
+Teacher spoken script
+
+“Today we begin with one of the most powerful ideas in Vedic Mathematics: completing the whole.
+
+A ‘whole’ means a complete friendly number like 10, 20, 30, 40. When numbers join to make a whole, addition becomes fast and neat.
+
+For example, if I say 24 + 26, I do not think of long addition first. I notice something special:
+
+4 and 6 make 10.
+So 24 and 26 together make 50.
+
+That is the big idea of this chapter:
+
+look for what completes 10,
+
+look for what completes the next multiple of 10,
+
+and use that to add mentally.”
+
+The manual emphasizes that Vedic Mathematics connects to natural mental functions such as “completing a whole,” and that it is fundamentally a mental system. 
+
+Manual 1
+
+Board diagram 1 — Pairs that make 10
+
+Write:
+
+Pairs that make 10
+1 + 9 = 10
+2 + 8 = 10
+3 + 7 = 10
+4 + 6 = 10
+5 + 5 = 10
+
+Then say:
+
+“These five pairs are the key. If you know these instantly, you can do this whole chapter easily.”
+
+This exact list is highlighted in the chapter as important. 
+
+Manual 1
+
+Board diagram 2 — Ten-point circle
+
+Draw a simple circle and mark numbers around it:
+
+          10
+      9        1
+    8            2
+    7            3
+      6        4
+          5
+
+Then add branches outward and explain:
+
+“On the same branch, numbers end with the same digit.
+So above 1 we get 11, 21, 31...
+Above 2 we get 12, 22, 32...
+And all multiples of ten sit on the top branch: 10, 20, 30, 40...”
+
+This is exactly how the text explains the ten-point circle and its use for adding and taking away. 
+
+Manual 1
+
+Teacher spoken explanation: deficiency
+
+“Now another idea: deficiency.
+A number may be close to the next ten, but just a little below it.
+
+Example:
+
+38 is close to 40
+
+and it is 2 below 40
+
+So if I want to add 38 + 5, I first use 2 from the 5 to reach 40, and then 3 is left.
+So the answer is 43.”
+
+This method is directly shown in the lesson using 38 + 5. 
+
+Manual 1
+
+Board diagram 3 — Number line jump
+38 ---- 40 -------- 43
+   +2       +3
+
+Then say:
+
+“First complete the whole. Then add the rest.”
+
+Teacher spoken explanation: mental addition with carry
+
+“Now suppose the answer crosses into the next ten.
+Example: 56 + 26.
+
+I think:
+
+50 + 20 = 70
+
+6 + 6 = 12
+
+70 + 12 = 82
+
+So 56 + 26 = 82.”
+
+This is the chapter’s exact mental-addition model. 
+
+Manual 1
+
+Board diagram 4 — Mental carry model
+56 + 26
+= (50 + 20) + (6 + 6)
+= 70 + 12
+= 82
+
+Then say:
+
+“We are not avoiding carries. We are handling them mentally in a calm way.”
+
+Teacher spoken explanation: adding near a base
+
+“Some numbers are just below a base like 10, 20, 30, 40.
+Examples: 9, 19, 29, 38.
+
+These are easy because we can use addition and subtraction together.
+
+Example:
+33 + 9
+= 33 + 10 - 1
+= 43 - 1
+= 42
+
+Example:
+66 + 19
+= 66 + 20 - 1
+= 86 - 1
+= 85”
+
+This method is explicitly taught in section 1.6. 
+
+Manual 1
+
+Board diagram 5 — Add a near-base number
+33 + 9
+= 33 + 10 - 1
+= 43 - 1
+= 42
+
+66 + 19
+= 66 + 20 - 1
+= 86 - 1
+= 85
+Teacher spoken explanation: subtracting near a base
+
+“The same trick works in subtraction.
+
+Example:
+55 - 19
+19 is 1 below 20
+
+So:
+55 - 19
+= 55 - 20 + 1
+= 35 + 1
+= 36
+
+Example:
+61 - 38
+38 is 2 below 40
+
+So:
+61 - 38
+= 61 - 40 + 2
+= 21 + 2
+= 23”
+
+This is directly given in the chapter. 
+
+Manual 1
+
+2. DEMO — “Watch me solve one”
+
+Here the teacher models slowly and clearly.
+
+Demo 1 — Completing 10
+
+Problem: 47 + 3
+
+Teacher script
+
+“I ask: what does 47 need to become a whole ten?
+It needs 3.
+And I already have +3.
+So the answer is 50.”
+
+Board
+47 + 3 = 50
+because 7 + 3 = 10
+
+This type appears in Practice A. 
+
+Manual 1
+
+Demo 2 — Completing the next ten
+
+Problem: 49 + 5
+
+Teacher script
+
+“49 is very close to 50. It is short by 1.
+So I use 1 from the 5 to reach 50.
+Then 4 is left.
+
+50 + 4 = 54.”
+
+Board
+49 + 5
+= 50 + 4
+= 54
+
+This matches Practice D. 
+
+Manual 1
+
+Demo 3 — Using deficiency
+
+Problem: 58 + 7
+
+Teacher script
+
+“58 is close to 60. It is 2 below 60.
+Take 2 from 7 and move to 60.
+Now 5 remains.
+60 + 5 = 65.”
+
+Board
+58 + 7
+= 60 + 5
+= 65
+Demo 4 — Mental addition with carry
+
+Problem: 48 + 45
+
+Teacher script
+
+“I split tens and ones:
+
+40 + 40 = 80
+
+8 + 5 = 13
+
+80 + 13 = 93
+
+So the answer is 93.”
+
+The manual gives this exact example as 48 + 45 = 93. 
+
+Manual 1
+
+Board
+48 + 45
+= (40 + 40) + (8 + 5)
+= 80 + 13
+= 93
+Demo 5 — Grouping several numbers into a whole
+
+Problem: 19 + 8 + 1
+
+Teacher script
+
+“I do not add left to right blindly.
+I look for a whole.
+19 and 1 make 20.
+Then 20 + 8 = 28.”
+
+This exact example appears in the lesson. 
+
+Manual 1
+
+Board
+19 + 8 + 1
+= (19 + 1) + 8
+= 20 + 8
+= 28
+Demo 6 — Grouping to a multiple of ten
+
+Problem: 33 + 28 + 4 + 32
+
+Teacher script
+
+“I scan the numbers looking for a friendly group.
+28 and 32 make 60.
+Then 60 + 33 = 93.
+Then +4 = 97.”
+
+This exact example is in the lesson. 
+
+Manual 1
+
+Board
+33 + 28 + 4 + 32
+= (28 + 32) + 33 + 4
+= 60 + 33 + 4
+= 97
+Demo 7 — Add by addition and subtraction
+
+Problem: 54 + 39
+
+Teacher script
+
+“39 is 1 below 40.
+So instead of adding 39, I add 40 and subtract 1.
+54 + 40 = 94
+94 - 1 = 93”
+
+This is one of the chapter’s exact examples. 
+
+Manual 1
+
+Board
+54 + 39
+= 54 + 40 - 1
+= 94 - 1
+= 93
+Demo 8 — Subtract near a base
+
+Problem: 72 - 48
+
+Teacher script
+
+“48 is 2 below 50.
+So I subtract 50 and add 2 back.
+72 - 50 = 22
+22 + 2 = 24”
+
+This approach is the one used in the subtraction section. 
+
+Manual 1
+
+Board
+72 - 48
+= 72 - 50 + 2
+= 22 + 2
+= 24
+3. GUIDED — “Now you try, I’ll help”
+
+In this phase, the teacher asks and nudges rather than fully solves.
+
+Guided Set A — make 10
+
+22 + 8
+
+Teacher: “What do 2 and 8 make?”
+
+Student: “10”
+
+Teacher: “So 22 + 8 = ?”
+
+Student: “30”
+
+61 + 9
+
+Teacher: “How much does 61 need to reach the next ten?”
+
+Student: “9”
+
+Teacher: “So the answer?”
+
+Student: “70”
+
+These follow Practice A. 
+
+Manual 1
+
+Guided Set B — complete the next multiple of 10
+
+37 + 6
+
+Teacher: “37 is close to what?”
+
+Student: “40”
+
+Teacher: “How far below?”
+
+Student: “3”
+
+Teacher: “Take 3 from 6. What remains?”
+
+Student: “3”
+
+Teacher: “So 40 + 3 = ?”
+
+Student: “43”
+
+79 + 6
+
+Teacher: “79 is close to?”
+
+Student: “80”
+
+Teacher: “Short by?”
+
+Student: “1”
+
+Teacher: “So use 1, then?”
+
+Student: “80 + 5 = 85”
+
+These match Practice D style. 
+
+Manual 1
+
+Guided Set C — deficiency language
+
+Ask students to speak in the exact format.
+
+49
+
+Teacher: “49 is close to ___ and is ___ below.”
+
+Student: “49 is close to 50 and is 1 below.”
+
+68
+
+Teacher: “68 is close to ___ and is ___ below.”
+
+Student: “68 is close to 70 and is 2 below.”
+
+This mirrors Practice C. 
+
+Manual 1
+
+Guided Set D — mental addition with carry
+
+56 + 26
+
+Teacher: “How many tens?”
+
+Student: “70”
+
+Teacher: “How many ones?”
+
+Student: “12”
+
+Teacher: “70 + 12?”
+
+Student: “82”
+
+48 + 45
+
+Teacher: “Tens?”
+
+Student: “80”
+
+Teacher: “Ones?”
+
+Student: “13”
+
+Teacher: “Total?”
+
+Student: “93”
+
+This follows the manual’s carry examples. 
+
+Manual 1
+
+Guided Set E — grouping several numbers
+
+6 + 7 + 4
+
+Teacher: “Which two make 10?”
+
+Student: “6 and 4”
+
+Teacher: “So 10 + 7 = ?”
+
+Student: “17”
+
+3 + 6 + 2 + 5
+
+Teacher: “Can you spot a group that makes 10?”
+
+Student: “3 + 2 + 5”
+
+Teacher: “Then 10 + 6 = ?”
+
+Student: “16”
+
+These examples are explicitly given in the text. 
+
+Manual 1
+
+Guided Set F — add near a base
+
+33 + 9
+
+Teacher: “9 is 1 below what?”
+
+Student: “10”
+
+Teacher: “So add 10 and then?”
+
+Student: “Take away 1”
+
+Teacher: “Answer?”
+
+Student: “42”
+
+66 + 19
+
+Teacher: “19 is 1 below what?”
+
+Student: “20”
+
+Teacher: “So?”
+
+Student: “66 + 20 - 1 = 85”
+
+These are direct chapter examples. 
+
+Manual 1
+
+Guided Set G — subtract near a base
+
+55 - 19
+
+Teacher: “19 is 1 below?”
+
+Student: “20”
+
+Teacher: “So subtract 20, then?”
+
+Student: “Add 1 back”
+
+Teacher: “Answer?”
+
+Student: “36”
+
+61 - 38
+
+Teacher: “38 is 2 below?”
+
+Student: “40”
+
+Teacher: “So subtract 40, then?”
+
+Student: “Add 2 back”
+
+Teacher: “Answer?”
+
+Student: “23”
+
+These are also direct chapter examples. 
+
+Manual 1
+
+4. PRACTICE — “Solve this yourself”
+
+Here is a structured solo practice sheet drawn from the lesson style.
+
+Practice Round 1 — Fast completes
+
+a. 6 + 4
+b. 13 + 7
+c. 54 + 6
+d. 85 + 5
+e. 22 + 8
+
+Practice Round 2 — Complete the next ten
+
+a. 49 + 5
+b. 58 + 3
+c. 38 + 7
+d. 69 + 4
+e. 37 + 6
+
+Practice Round 3 — Mental addition
+
+a. 56 + 26
+b. 48 + 45
+c. 37 + 47
+d. 55 + 28
+e. 29 + 36
+
+Practice Round 4 — Group into wholes
+
+a. 6 + 7 + 4
+b. 3 + 6 + 2 + 5
+c. 19 + 8 + 1
+d. 33 + 28 + 4 + 32
+e. 23 + 48 + 27
+
+Practice Round 5 — Add near a base
+
+a. 33 + 9
+b. 66 + 19
+c. 54 + 39
+d. 44 + 18
+e. 28 + 29
+
+Practice Round 6 — Subtract near a base
+
+a. 55 - 19
+b. 61 - 38
+c. 72 - 48
+d. 44 - 19
+e. 52 - 28
+
+These practice types and many of these specific items are taken directly from Lesson 1. 
+
+Manual 1
+
+ 
+
+Manual 1
+
+ 
+
+Manual 1
+
+ 
+
+Manual 1
+
+5. CHECK — “Right! Because…” / “Not quite, here’s why…”
+
+Use these exact teacher feedback lines.
+
+When the student is correct
+
+“Right, because you completed the next ten first.”
+
+“Correct, because you saw the deficiency and used it well.”
+
+“Yes, that is efficient. You grouped the numbers into a whole.”
+
+“Exactly. You added the base and then adjusted.”
+
+“Well done. You handled the carry mentally.”
+
+When the student is partly correct
+
+“You spotted the next ten correctly, but you forgot to add the leftover.”
+
+“Good start. 38 is close to 40, but how much below 40 is it?”
+
+“You added 20 for 19, but did you remember to take 1 away?”
+
+“You subtracted 40 for 38, but what must you add back?”
+
+“You grouped numbers, but try to choose the pair that makes 10 first.”
+
+When the student is incorrect
+
+“Not quite. Let’s go back to the friendly number.”
+
+“Pause. What whole are we trying to complete?”
+
+“Check the deficiency again. Is the number 1 below, 2 below, or 3 below?”
+
+“Try splitting tens and ones separately.”
+
+“Look again: which two numbers can make 10?”
+
+Suggested full classroom flow
+Opening
+
+“Today we are training our mind to spot friendly numbers. We are not just adding numbers; we are looking for structure.”
+
+Middle
+
+start with pairs that make 10,
+
+move to completing the next ten,
+
+then mental carry,
+
+then grouping several numbers,
+
+then add/subtract near a base.
+
+This sequence matches the lesson’s progression from ten-point circle and completion, to deficiency, to mental addition, to addition/subtraction near a base. 
+
+Manual 1
+
+Closing summary script
+
+“Chapter 1 teaches one big habit: look for the whole.
+If numbers can make 10, make 10.
+If a number is close to 20, 30, 40, or 50, move to that whole first.
+If several numbers are being added, group them into wholes.
+If a number is just below a base like 9, 19, or 38, use addition and subtraction together.”
+
+Quick answer key
+
+Practice Round 1: 10, 20, 60, 90, 30
+Practice Round 2: 54, 61, 45, 73, 43
+Practice Round 3: 82, 93, 84, 83, 65
+Practice Round 4: 17, 16, 28, 97, 98
+Practice Round 5: 42, 85, 93, 62, 57
+Practice Round 6: 36, 23, 24, 25, 24

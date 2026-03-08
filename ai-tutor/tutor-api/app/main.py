@@ -36,6 +36,7 @@ from app.models import (
 from app.services.conversation_engine import ConversationEngine
 from app.services.engine_registry import TutorEngineRegistry
 from app.services.generic_course_engine import CourseTemplateRuleEngine, resolve_template_course_id
+from app.services.rule_engine import VedicRuleEngine
 from app.services.orchestrator import TutorOrchestrator
 from app.services.quality_refresh import QualityRefreshService
 from app.services.session_store import SessionStore
@@ -53,12 +54,7 @@ app.add_middleware(
 token_service = TokenService()
 engine_registry = TutorEngineRegistry(
     {
-        "vedic_math": CourseTemplateRuleEngine(
-            course_id="vedic_math",
-            title="Vedic Math Tutor",
-            template_course_id=resolve_template_course_id("vedic_math", os.getenv("AI_TUTOR_VEDIC_MATH_DB_COURSE_ID", "")),
-            fallback_chapter_code="VEDIC_CH1",
-        ),
+        "vedic_math": VedicRuleEngine(),
         "neet_physics": CourseTemplateRuleEngine(
             course_id="neet_physics",
             title="NEET Physics Tutor",
@@ -188,6 +184,7 @@ async def start(payload: StartRequest, x_ai_tutor_key: str | None = Header(defau
     )
 
     chapters = [ChapterPayload(**c) for c in engine.chapters()]
+    session_progress = session_store.lesson_progress(session.session_id, lesson, active_exercise_group=exercise_group)
     return StartResponse(
         sessionId=session.session_id,
         moduleCode=module_code,
@@ -196,6 +193,7 @@ async def start(payload: StartRequest, x_ai_tutor_key: str | None = Header(defau
         activeExerciseGroup=exercise_group,
         chapters=chapters,
         exerciseGroups=engine.exercises(),
+        sessionProgress=session_progress,
         lesson=lesson,
         question=QuestionPayload(**question),
     )
@@ -229,6 +227,11 @@ async def next_question(payload: NextQuestionRequest, x_ai_tutor_key: str | None
     question = engine.next_question(session.chapter_code, session.exercise_group, session.grade)
     session_store.set_question(payload.sessionId, question)
     lesson = engine.lesson(session.chapter_code)
+    session_progress = session_store.lesson_progress(
+        payload.sessionId,
+        lesson,
+        active_exercise_group=session.exercise_group,
+    )
 
     await session_store.send_event(
         TutorEvent(
@@ -266,6 +269,7 @@ async def next_question(payload: NextQuestionRequest, x_ai_tutor_key: str | None
         "question": question,
         "activeChapterCode": session.chapter_code,
         "activeExerciseGroup": session.exercise_group,
+        "sessionProgress": session_progress,
         "lesson": lesson,
     }
 
@@ -292,10 +296,19 @@ async def check_answer(
     session = session_store.update_score(
         payload.sessionId,
         bool(result["correct"]),
+        question_id=str(question.get("questionId", "")),
+        exercise_group=str(question.get("exerciseGroup", session.exercise_group)),
+        subtopic=str(question.get("subtopic", "")),
         response_time_ms=payload.responseTimeMs,
         confidence=payload.confidence,
     )
     summary = session_store.summary(payload.sessionId)
+    lesson = engine.lesson(session.chapter_code)
+    session_progress = session_store.lesson_progress(
+        payload.sessionId,
+        lesson,
+        active_exercise_group=session.exercise_group,
+    )
 
     quality = await quality_refresh_service.maybe_refresh(
         summary,
@@ -354,6 +367,7 @@ async def check_answer(
         tutorAction=quality.get("tutorAction"),
         coachTip=quality.get("coachTip"),
         summary=summary,
+        sessionProgress=session_progress,
     )
 
 

@@ -108,6 +108,29 @@ class ChapterPayload(BaseModel):
     exerciseFlow: List[ExerciseFlowItem]
 
 
+class LessonPathItem(BaseModel):
+    exerciseGroup: str
+    subtopic: str
+    status: str
+    attempts: int = 0
+    correctCount: int = 0
+    accuracyPct: float = 0.0
+
+
+class SessionProgress(BaseModel):
+    hearts: int
+    maxHearts: int
+    xp: int
+    streak: int
+    masteryPct: float
+    lessonCompletionPct: float
+    livesDepleted: bool
+    canContinue: bool
+    activeExerciseGroup: str
+    reviewQueue: List[str] = Field(default_factory=list)
+    lessonPath: List[LessonPathItem] = Field(default_factory=list)
+
+
 class StartResponse(BaseModel):
     sessionId: str
     moduleCode: str
@@ -116,6 +139,7 @@ class StartResponse(BaseModel):
     activeExerciseGroup: str
     chapters: List[ChapterPayload]
     exerciseGroups: List[Dict[str, str]]
+    sessionProgress: SessionProgress
     lesson: LessonPayload
     question: QuestionPayload
 
@@ -144,6 +168,7 @@ class CheckAnswerResponse(BaseModel):
     tutorAction: Optional[str] = None
     coachTip: Optional[str] = None
     summary: Dict[str, Any]
+    sessionProgress: Optional[SessionProgress] = None
 
 
 class DoubtRequest(BaseModel):

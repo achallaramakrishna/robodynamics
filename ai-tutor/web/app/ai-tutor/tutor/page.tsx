@@ -1,1 +1,6 @@
-export { default } from "../vedic/page";
+import VedicTutorPage from "../vedic/page";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default VedicTutorPage;

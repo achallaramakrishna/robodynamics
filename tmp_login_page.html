@@ -1,0 +1,927 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Robo Dynamics</title>
+
+<link href="/css/stylesheet.css"
+	rel="stylesheet">
+
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+	--brand-navy: #0b1f3a;
+	--brand-teal: #0f766e;
+	--ink-900: #0f172a;
+	--ink-700: #334155;
+	--ink-500: #64748b;
+	--line: #dbe6ef;
+	--surface: #ffffff;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	font-family: "Manrope", "Segoe UI", sans-serif;
+	color: var(--ink-900);
+	background:
+		radial-gradient(900px 360px at -8% -10%, rgba(11, 31, 58, 0.18),
+		transparent 58%),
+		radial-gradient(780px 320px at 108% -18%, rgba(15, 118, 110, 0.2),
+		transparent 56%), linear-gradient(180deg, #f3f8fc 0%, #ecf2f8 100%);
+}
+
+.login-shell {
+	width: min(1120px, 95vw);
+	margin: 20px auto 30px;
+}
+
+.alert-stack {
+	display: grid;
+	gap: 10px;
+	margin-bottom: 12px;
+}
+
+.notice {
+	border-radius: 12px;
+	padding: 12px 14px;
+	font-size: 14px;
+	font-weight: 600;
+	border: 1px solid transparent;
+}
+
+.notice.success {
+	color: #166534;
+	background: #f0fdf4;
+	border-color: #86efac;
+}
+
+.notice.info {
+	color: #1e3a8a;
+	background: #eff6ff;
+	border-color: #93c5fd;
+}
+
+.notice.error {
+	color: #991b1b;
+	background: #fef2f2;
+	border-color: #fca5a5;
+}
+
+.login-grid {
+	display: grid;
+	grid-template-columns: 1.08fr 0.92fr;
+	gap: 16px;
+}
+
+.brand-panel {
+	background: linear-gradient(135deg, var(--brand-navy), var(--brand-teal));
+	border-radius: 22px;
+	padding: 26px;
+	color: #f8fbff;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	box-shadow: 0 20px 42px rgba(11, 31, 58, 0.2);
+}
+
+.brand-panel:before {
+	content: "";
+	position: absolute;
+	width: 340px;
+	height: 340px;
+	right: -110px;
+	top: -120px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.14);
+}
+
+.brand-panel h1 {
+	margin: 0;
+	font-family: "Sora", "Segoe UI", sans-serif;
+	font-size: clamp(22px, 2.2vw, 30px);
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	position: relative;
+	z-index: 1;
+}
+
+.brand-panel p {
+	margin: 0;
+	line-height: 1.45;
+	font-size: 14px;
+	color: rgba(243, 248, 255, 0.96);
+	position: relative;
+	z-index: 1;
+}
+
+.role-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	position: relative;
+	z-index: 1;
+}
+
+.role-chip {
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	border-radius: 999px;
+	padding: 6px 10px;
+}
+
+.feature-list {
+	margin: 0;
+	padding-left: 18px;
+	display: grid;
+	gap: 8px;
+	font-size: 14px;
+	line-height: 1.35;
+	position: relative;
+	z-index: 1;
+}
+
+.feature-list li {
+	color: rgba(245, 249, 255, 0.96);
+}
+
+.brand-image {
+	margin-top: auto;
+	border-radius: 14px;
+	border: 1px solid rgba(255, 255, 255, 0.24);
+	background: rgba(255, 255, 255, 0.1);
+	padding: 8px;
+	position: relative;
+	z-index: 1;
+}
+
+.brand-image img {
+	width: 100%;
+	max-height: 170px;
+	object-fit: cover;
+	border-radius: 10px;
+	display: block;
+}
+
+.auth-panel {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: 22px;
+	padding: 24px;
+	box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.auth-title {
+	margin: 0;
+	font-family: "Sora", "Segoe UI", sans-serif;
+	font-size: 27px;
+	line-height: 1.2;
+	color: var(--ink-900);
+	letter-spacing: -0.02em;
+}
+
+.auth-subtitle {
+	margin: 0;
+	font-size: 14px;
+	color: var(--ink-500);
+}
+
+.field-group {
+	display: grid;
+	gap: 7px;
+}
+
+.field-group label {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--ink-700);
+}
+
+.field-input {
+	width: 100%;
+	border: 1px solid #cbd5e1;
+	border-radius: 12px;
+	padding: 12px 12px;
+	font-size: 15px;
+	color: var(--ink-900);
+	background: #ffffff;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-input:focus {
+	outline: none;
+	border-color: var(--brand-teal);
+	box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+.login-btn {
+	margin-top: 4px;
+	width: 100%;
+	border: 0;
+	border-radius: 12px;
+	padding: 12px 14px;
+	background: linear-gradient(120deg, var(--brand-teal), #14b8a6);
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 800;
+	cursor: pointer;
+	box-shadow: 0 12px 24px rgba(15, 118, 110, 0.22);
+}
+
+.quick-links {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	flex-wrap: wrap;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.quick-links a {
+	color: #0f5dc2;
+	text-decoration: none;
+}
+
+.quick-links a:hover {
+	text-decoration: underline;
+}
+
+.context-pill {
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid #bfdbfe;
+	background: #eff6ff;
+	color: #1d4ed8;
+	padding: 6px 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+@media ( max-width : 992px) {
+	.login-grid {
+		grid-template-columns: 1fr;
+	}
+	.brand-panel {
+		padding: 20px;
+	}
+	.auth-panel {
+		padding: 20px;
+	}
+}
+
+@media ( max-width : 560px) {
+	.login-shell {
+		width: 94vw;
+	}
+	.auth-title {
+		font-size: 24px;
+	}
+	.quick-links {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.brand-image img {
+		max-height: 140px;
+	}
+}
+</style>
+</head>
+
+<body>
+
+	
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/resources/css/chat.css">
+
+
+
+
+
+<style>
+  .rd-nav {
+    border-bottom: 1px solid #dbe7df;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
+  }
+
+  .rd-logo {
+    max-height: 46px;
+    width: auto;
+  }
+
+  .rd-brand-text {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #0f2d21;
+  }
+
+  .rd-sub-text {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4a6358;
+    margin-top: -2px;
+  }
+
+  .rd-nav .nav-link {
+    color: #244336;
+    font-weight: 700;
+  }
+
+  .rd-nav .nav-link:hover {
+    color: #0f766e;
+  }
+
+  .rd-nav .btn {
+    white-space: nowrap;
+  }
+
+  .rd-pill {
+    border: 1px solid #cde8dc;
+    background: #ecfdf5;
+    color: #065f46;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    margin-left: 8px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg sticky-top rd-nav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/" aria-label="Robo Dynamics home">
+      <img src="/images/logo.jpg"
+           alt="Robo Dynamics"
+           class="me-2 rd-logo"
+           onerror="this.onerror=null; this.replaceWith(document.createTextNode('Robo Dynamics'));"/>
+      <div>
+        <span class="rd-brand-text">
+          
+            
+            Robo Dynamics
+          
+        </span>
+        <span class="rd-sub-text">
+          
+            
+            Learning platform
+          
+        </span>
+      </div>
+      
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#rdNav"
+            aria-controls="rdNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="rdNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+        
+          
+          
+            <li class="nav-item"><a class="nav-link" href="/">AptiPath360</a></li>
+            <li class="nav-item"><a class="nav-link" href="/exam-prep">ExamPrep360</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tuition-on-demand">Tuition on Demand</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact-us">Contact</a></li>
+          
+        
+
+        <li class="nav-item d-flex gap-2 ms-lg-3 mt-2 mt-lg-0">
+          
+            
+              <a class="btn btn-success btn-sm" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay &#8377;799 + GST</a>
+              <a class="btn btn-outline-dark btn-sm" href="/registerParentChild">Parent Sign Up</a>
+              <a class="btn btn-outline-primary btn-sm" href="/login">Sign In</a>
+            
+            
+          
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<style>
+  .header-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0 1.2rem;
+  }
+
+  .header-module {
+    border-radius: 18px;
+    border: 1px solid rgba(15, 118, 110, 0.4);
+    background: rgba(15, 118, 110, 0.08);
+    padding: 1rem;
+    color: #fff;
+  }
+
+  .header-module.career {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(14, 165, 233, 0.08));
+  }
+
+  .header-module.exam {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(79, 70, 229, 0.08));
+  }
+
+  .header-module.tuition {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.25), rgba(251, 113, 133, 0.08));
+  }
+
+  .header-module .module-icon {
+    font-size: 1.6rem;
+  }
+
+  .header-module p {
+    margin: 0.2rem 0;
+    color: #f8fafc;
+  }
+
+  .header-module a.btn {
+    margin-top: 0.4rem;
+  }
+</style>
+
+
+	<div class="login-shell">
+
+		<div class="alert-stack">
+			
+			
+			
+		</div>
+
+		<div class="login-grid">
+			<section class="brand-panel">
+				<div class="role-chips">
+					<span class="role-chip">Super Admin</span>
+					<span class="role-chip">Robo Admin</span>
+					<span class="role-chip">Parent</span>
+					<span class="role-chip">Student</span>
+					<span class="role-chip">Mentor</span>
+				</div>
+				<h1>Welcome to Robo Dynamics Learning Platform</h1>
+				<p>One intelligent workspace for schools, colleges, mentoring centers, and future-ready learners.</p>
+				<ul class="feature-list">
+					<li>Adaptive student journeys with clear learning progression.</li>
+					<li>Mentor and parent visibility with actionable performance insights.</li>
+					<li>Competitive-exam and career pathways in one unified system.</li>
+				</ul>
+				<div class="brand-image">
+					<img src="/images/login_competitions.png" alt="Robo Dynamics Learning Experience">
+				</div>
+			</section>
+
+			<section class="auth-panel">
+				
+				
+				
+				
+				
+				<h2 class="auth-title">
+					
+						
+	                    
+	                    
+						
+	                        Sign in to continue
+	                    
+					
+				</h2>
+				<p class="auth-subtitle">Use your assigned student, parent, mentor, or admin credentials.</p>
+
+				<form id="rdUser" action="/login" method="post" autocomplete="on">
+
+					
+
+					<div class="field-group">
+						<label for="userName">User Name</label>
+						<input id="userName" name="userName" minlength="4" class="field-input" type="text" value="" autocomplete="username"/>
+					</div>
+
+					<div class="field-group" style="margin-top:12px;">
+						<label for="password">Password</label>
+						<input id="password" name="password" minlength="4" class="field-input" type="password" value="" autocomplete="current-password"/>
+					</div>
+
+					<button type="submit" class="login-btn">Log in</button>
+
+					<div class="quick-links" style="margin-top:14px;">
+						<a
+							href="/registerParentChild;jsessionid=968471999A5B8DC25AC25314EFC797A2">
+							Create Parent Account</a>
+						<a href="/forgotpassword">
+							Forgot password</a>
+					</div>
+				</form>
+			</section>
+
+		</div>
+	</div>
+
+	
+
+
+
+
+
+<style>
+#rdAppFooter {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100%;
+}
+
+#rdChatLauncher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #fff;
+
+  font-size: 24px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#rdChatLauncher:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+}
+
+#rdChatLauncher:active {
+  transform: scale(0.96);
+}
+
+</style>
+<!-- ================= FOOTER ================= -->
+<footer id="rdAppFooter" class="pt-5 pb-4 mt-auto" style="background:#0b1c2d;color:#cfd8dc;">
+  <div class="container">
+    
+      
+      
+        <div class="row gy-4">
+          <div class="col-md-4">
+            <h6 class="text-white fw-semibold">Robo Dynamics</h6>
+            <p class="small">
+              Platform for AptiPath360 Career Discovery, ExamPrep360, and Tuition journeys with
+              parent, student, and mentor workflows.
+            </p>
+          </div>
+
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Products</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="/">AptiPath360 Career Discovery</a></li>
+              <li><a class="text-decoration-none text-light" href="/courses">ExamPrep360</a></li>
+              <li><a class="text-decoration-none text-light" href="/parents/demo?source=footer_tuition_quote">Tuition Guidance</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Platform</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="/platform/modules">Parent Dashboard</a></li>
+              <li><a class="text-decoration-none text-light" href="/studentDashboard">Student Dashboard</a></li>
+              <li><a class="text-decoration-none text-light" href="/mentor/dashboard">Mentor Dashboard</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2">
+            <h6 class="text-white fw-semibold">Contact</h6>
+            <ul class="list-unstyled small">
+              <li>Bengaluru, India</li>
+              <li><a class="text-decoration-none text-light" href="tel:+918374377311">+91 83743 77311</a></li>
+              <li><a class="text-decoration-none text-light" href="https://robodynamics.in" target="_blank">robodynamics.in</a></li>
+            </ul>
+          </div>
+        </div>
+      
+    
+
+    <div class="text-center small mt-4 pt-3"
+         style="border-top:1px solid rgba(255,255,255,0.1);color:#b0bec5;">
+      (c) 2026 Robo Dynamics. All rights reserved.
+    </div>
+  </div>
+</footer>
+<!-- ================= CHAT FLOAT BUTTON ================= -->
+
+
+<!-- ================= CHAT OFFCANVAS ================= -->
+<div class="offcanvas offcanvas-end"
+     tabindex="-1"
+     id="chatCanvas"
+     style="width:380px">
+
+  <div class="offcanvas-header">
+    <h6 class="offcanvas-title">Robo Dynamics Chat</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+<div class="offcanvas-body p-0 d-flex flex-column" id="chatCanvasBody">
+    <div class="text-center text-muted mt-4">Loading chat...</div>
+  </div>
+</div>
+
+<!-- ================= BOOTSTRAP JS (ONCE) ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+<!-- ================= GLOBAL CHAT JS ================= -->
+<script>
+  const BASE = '';
+//---- prevent duplicate messages
+  const seenMessageIds = new Set();
+
+
+  let chatCanvas;
+
+  // ---- Conversation state
+  let conversationId = 0;
+  let currentUserId = 0;
+
+  // ---- WebSocket state
+  let stompClient = null;
+  let stompSub = null;
+  let wsConnecting = false;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    chatCanvas = new bootstrap.Offcanvas('#chatCanvas');
+
+    const launcher = document.getElementById('rdChatLauncher');
+    if (launcher) {
+      launcher.addEventListener('click', () => {
+        chatCanvas.show();
+        loadInbox();
+      });
+    }
+  });
+
+  // -----------------------------
+  // Inbox load (HTML fragment)
+  // -----------------------------
+  window.loadInbox = function () {
+    fetch(BASE + '/chat')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('chatCanvasBody').innerHTML = html;
+        // optional: stop subscription when leaving conversation
+        wsUnsubscribe();
+      })
+      .catch(err => console.error('Failed to load inbox', err));
+  };
+
+  // -----------------------------
+  // Open conversation (HTML fragment + WS subscribe)
+  // -----------------------------
+  window.openConversation = function (cid) {
+    fetch(BASE + '/chat/conversation/' + cid)
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('chatCanvasBody').innerHTML = html;
+        seedSeenMessageIdsFromDom();   // ✅ ADD THIS
+        initConversation(cid);
+      })
+      .catch(err => console.error('Failed to open conversation', err));
+  };
+
+  // -----------------------------
+  // Start direct chat (AJAX submit)
+  // IMPORTANT: your controller returns redirect -> HTML fetch will follow it,
+  // but fetch() usually returns the redirected HTML content.
+  // -----------------------------
+  window.startChat = function (form) {
+    const formData = new FormData(form);
+
+    fetch(form.action, { method: 'POST', body: formData })
+      .then(res => res.text())
+      .then(html => {
+        const body = document.getElementById('chatCanvasBody');
+        body.innerHTML = html;
+        
+        seedSeenMessageIdsFromDom();   // ✅ ADD THIS
+
+
+        // read conversationId from conversationRoot
+        const root = body.querySelector('#conversationRoot[data-conversation-id]');
+        if (root && root.dataset.conversationId) {
+          initConversation(Number(root.dataset.conversationId));
+        } else {
+          // fallback: no conversationRoot means server maybe returned inbox/errors
+          wsUnsubscribe();
+        }
+      })
+      .catch(err => console.error('startChat failed', err));
+
+    return false;
+  };
+
+  // -----------------------------
+  // Init conversation state + WS subscribe
+  // -----------------------------
+  function initConversation(cid) {
+    conversationId = Number(cid || 0);
+    if (!conversationId) return;
+
+    wsSubscribe(conversationId);
+    setTimeout(scrollBottom, 60);
+  }
+
+  // -----------------------------
+  // WebSocket connect / subscribe
+  // -----------------------------
+  function wsConnect(cb) {
+    if (stompClient && stompClient.connected) {
+      cb && cb();
+      return;
+    }
+    if (wsConnecting) return;
+
+    wsConnecting = true;
+
+    // SockJS endpoint is relative to contextPath => BASE + '/ws-chat'
+    const socket = new SockJS(BASE + '/ws-chat');
+    stompClient = Stomp.over(socket);
+    stompClient.debug = null; // silence logs
+
+    stompClient.connect({}, () => {
+      wsConnecting = false;
+      cb && cb();
+    }, (err) => {
+      wsConnecting = false;
+      console.error('WS connect error', err);
+    });
+  }
+
+  function wsSubscribe(cid) {
+    wsConnect(() => {
+      wsUnsubscribe();
+      stompSub = stompClient.subscribe('/topic/conversation.' + cid, (frame) => {
+        try {
+          const msg = JSON.parse(frame.body);
+          appendMessage(msg);
+          scrollBottom();
+        } catch (e) {
+          console.error('WS parse error', e);
+        }
+      });
+    });
+  }
+
+  function wsUnsubscribe() {
+    if (stompSub) {
+      try { stompSub.unsubscribe(); } catch (e) {}
+      stompSub = null;
+    }
+  }
+
+  // -----------------------------
+  // Send message via WebSocket
+  // -----------------------------
+  window.sendMessage = function () {
+    const input = document.getElementById("messageText");
+    if (!input) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = "";
+
+    // WS send (server will persist + broadcast)
+    wsConnect(() => {
+      if (!conversationId) return;
+
+      stompClient.send("/app/chat.send", {}, JSON.stringify({
+        conversationId: Number(conversationId),
+        messageText: text
+      }));
+    });
+  };
+
+  // -----------------------------
+  // UI helpers
+  // -----------------------------
+  function scrollBottom() {
+    const box = document.getElementById("chatBox");
+    if (!box) return;
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function seedSeenMessageIdsFromDom() {
+	  seenMessageIds.clear();
+	  document.querySelectorAll('#chatBox .msg[data-id]').forEach(el => {
+	    const id = el.getAttribute('data-id');
+	    if (id) seenMessageIds.add(String(id));
+	  });
+	}
+
+
+  // This was missing in your file but used in poll()
+ function appendMessage(m) {
+  const box = document.getElementById("chatBox");
+  if (!box) return;
+
+  const mid = m.messageId != null ? String(m.messageId) : null;
+
+  // ✅ STOP duplicates here
+  if (mid && seenMessageIds.has(mid)) return;
+
+  const sender = Number(m.senderUserId ?? 0);
+  const text = m.messageText ?? "";
+  const createdAt = m.createdAt ?? "";
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "msg " + (sender === Number(currentUserId) ? "me" : "");
+  if (mid) wrapper.setAttribute("data-id", mid);
+
+  wrapper.innerHTML =
+    '<div class="bubble">' +
+      '<div>' + escapeHtml(text) + '</div>' +
+      '<div class="meta">' +
+        (sender === Number(currentUserId) ? "You" : "Other") +
+        (createdAt ? (" • " + escapeHtml(createdAt)) : "") +
+      '</div>' +
+    '</div>';
+
+  box.appendChild(wrapper);
+
+  if (mid) seenMessageIds.add(mid); // ✅ mark seen
+}
+
+</script>
+
+
+
+
+</body>
+</html>

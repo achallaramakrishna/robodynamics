@@ -2592,209 +2592,72 @@ function TutorContent() {
 
   return (
     <main className={`container tutor-shell${status === "ready" ? " tutor-shell-live" : ""}`}>
+      {/* ── Quick-start screen: choose teacher → start (no clutter) ── */}
       <section className={`panel tutor-setup-panel${status === "ready" ? " tutor-setup-panel-live" : ""}`}>
-        <div className={`setup-grid${status === "ready" ? " setup-grid-live" : ""}`}>
-          <div className="setup-controls">
-            {status !== "ready" ? (
-              <div className="setup-hero-copy">
-                <span className="setup-hero-kicker">Live AI Classroom</span>
-                <h1 className="tutor-main-title">{courseLabel} AI Tutor Classroom</h1>
-                <p className="muted tutor-main-subtitle">
-                  Structured like a course lesson: teacher explains on the board, pauses for your response, then moves to guided exercises.
-                </p>
-                <p className="setup-flow-inline">
-                  <strong>Flow:</strong> Setup {"->"} Learn {"->"} Practice
-                </p>
-                <div className="setup-chip-row setup-chip-row-left">
-                  <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
-                  <span className="pill">Course: {courseLabel}</span>
-                  <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
+        <div className="tutor-quickstart">
+          <p className="tutor-qs-label">{courseLabel} · AI Tutor</p>
+          <h2 className="tutor-qs-title">Choose Your Teacher</h2>
+
+          {/* Avatar picker */}
+          <div className="avatar-selector-grid">
+            {AVATARS.map((avatar) => (
+              <button
+                key={avatar.id}
+                type="button"
+                onClick={() => {
+                  unlockAudio();
+                  setSelectedAvatarId(avatar.id);
+                  void speak(`Hi! I am ${avatar.name}, your ${avatar.role}. Let's learn together!`);
+                }}
+                className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
+                style={{
+                  borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
+                  ["--avatar-color" as any]: avatar.color
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+                  <AvatarFace avatar={avatar} size={42} />
+                  <div>
+                    <div style={{ fontWeight: 700, color: avatar.color }}>{avatar.name}</div>
+                    <div className="muted" style={{ fontSize: "0.85rem" }}>{avatar.role}</div>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="setup-chip-row setup-chip-row-left">
-                <span className="pill">Session token: {canStart ? "detected" : "missing/invalid"}</span>
-                <span className="pill">Course: {courseLabel}</span>
-                <span className="pill">Teacher: {activeAvatar.name}</span>
-                <span className="pill">Flow: {autoTeachEnabled ? "auto" : "manual"}</span>
-              </div>
-            )}
-
-            <div className="setup-form-grid">
-              <div className="field-block">
-                <label htmlFor="studentName" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                  Student
-                </label>
-                <input
-                  id="studentName"
-                  value={studentName}
-                  onChange={(e) => {
-                    const nextName = e.target.value;
-                    setStudentName(nextName);
-                    if (typeof window !== "undefined") {
-                      window.localStorage.setItem("aiTutorStudentName", nextName);
-                    }
-                  }}
-                  placeholder="Enter student name"
-                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                />
-              </div>
-
-              <div className="field-block">
-                <label htmlFor="chapterSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                  Chapter
-                </label>
-                <select
-                  id="chapterSelect"
-                  value={selectedChapter}
-                  onChange={(e) => setSelectedChapter(e.target.value)}
-                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                >
-                  {chapterList.map((c) => (
-                    <option key={c.chapterCode} value={c.chapterCode}>
-                      {c.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="field-block">
-                <label htmlFor="exerciseSelect" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                  Exercise
-                </label>
-                <select
-                  id="exerciseSelect"
-                  value={selectedExerciseGroup}
-                  onChange={(e) => setSelectedExerciseGroup(e.target.value)}
-                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                >
-                  {exerciseList.map((g) => (
-                    <option key={g.exerciseGroup} value={g.exerciseGroup}>
-                      {g.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="field-block confidence-field">
-                <label htmlFor="confidence" style={{ display: "block", marginBottom: "0.3rem", fontWeight: 600 }}>
-                  Confidence
-                </label>
-                <select
-                  id="confidence"
-                  value={confidence}
-                  onChange={(e) => setConfidence(e.target.value as Confidence)}
-                  style={{ width: "100%", padding: "0.55rem", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="setup-actions">
-              <button className="button" onClick={startSession} disabled={!canStart || status === "loading"}>
-                {status === "loading" ? "Starting..." : sessionId ? "Restart with Chapter" : "Start Tutor Session"}
               </button>
-              <button className="button secondary" type="button" onClick={() => setAutoTeachEnabled((v) => !v)}>
-                Flow: {autoTeachEnabled ? "Auto Teach" : "Manual"}
-              </button>
-              <button className="button secondary" type="button" onClick={() => setVoiceEnabled((v) => !v)}>
-                Voice: {voiceEnabled ? "On" : "Off"}
-              </button>
-            </div>
+            ))}
           </div>
 
-          <div className={`panel setup-preview${status === "ready" ? " setup-preview-live" : ""}`}>
-            {status !== "ready" ? (
-              <>
-                <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>What You Will Learn</h3>
-                <p style={{ marginTop: 0, marginBottom: "0.4rem" }}><strong>{previewChapter?.title || "Selected Chapter"}</strong></p>
-                <p className="muted" style={{ marginTop: 0 }}>
-                  Estimated time: {previewChapter?.estimatedMinutes || 20} mins | Exercises: {(previewChapter?.exerciseGroups || ["A", "B", "C"]).join(", ")}
-                </p>
-                <div className="setup-preview-grid">
-                  <div>
-                    <p style={{ marginBottom: "0.35rem" }}><strong>Subtopics</strong></p>
-                    <ul className="setup-compact-list">
-                      {(previewChapter?.subtopics || []).map((topic) => (
-                        <li key={topic}>{topic}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p style={{ marginBottom: "0.35rem" }}><strong>Exercise Flow (A-I)</strong></p>
-                    <ul className="setup-compact-list">
-                      {(previewChapter?.exerciseFlow || []).map((item) => (
-                        <li key={`${item.exerciseGroup}_${item.subtopic}`}>Exercise {item.exerciseGroup}: {item.subtopic}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Session Snapshot</h3>
-                <p style={{ marginTop: 0, marginBottom: "0.4rem" }}><strong>{previewChapter?.title || "Selected Chapter"}</strong></p>
-                <p className="muted" style={{ marginTop: 0 }}>
-                  Estimated time: {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} mins | Exercise: {activeExerciseGroup}
-                </p>
-                <div className="setup-chip-row setup-chip-row-left">
-                  <span className="pill">Teacher: {activeAvatar.name}</span>
-                  <span className="pill">Mode: {screenplayMode}</span>
-                  <span className="pill">Flow: {flowState}</span>
-                </div>
-              </>
+          {/* Selected teacher preview */}
+          <div className="tutor-qs-stage">
+            <SpeakingTeacher
+              avatar={activeAvatar}
+              cue="intro"
+              speaking={isSpeaking || status === "loading"}
+              feedback={undefined}
+            />
+          </div>
+
+          {/* Start button */}
+          <div className="tutor-qs-actions">
+            <button
+              className="button tutor-qs-btn"
+              onClick={startSession}
+              disabled={!canStart || status === "loading"}
+            >
+              {status === "loading" ? "Starting…" : sessionId ? "Restart Session" : `Start Learning with ${activeAvatar.name} →`}
+            </button>
+            {!canStart && (
+              <p className="muted" style={{ fontSize: "0.85rem", marginTop: "0.5rem", textAlign: "center" }}>
+                Session token missing — launch from the LMS
+              </p>
             )}
+            <p className="tutor-qs-hint muted">
+              Voice {voiceEnabled ? "on" : "off"} ·{" "}
+              <button type="button" className="link-btn" onClick={() => setVoiceEnabled(v => !v)}>
+                {voiceEnabled ? "turn off" : "turn on"}
+              </button>
+            </p>
           </div>
         </div>
-
-        {status !== "ready" ? (
-          <>
-            <h3 style={{ marginTop: "0.7rem", marginBottom: "0.45rem" }}>Choose AI Avatar</h3>
-            <div className="avatar-selector-grid">
-              {AVATARS.map((avatar) => (
-                <button
-                  key={avatar.id}
-                  type="button"
-                  onClick={() => {
-                    unlockAudio();   // must be synchronous in click handler
-                    setSelectedAvatarId(avatar.id);
-                    void speak(`Hi! I am ${avatar.name}, your ${avatar.role}. Let's learn together!`);
-                  }}
-                  className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
-                  style={{
-                    borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
-                    ["--avatar-color" as any]: avatar.color
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-                    <AvatarFace avatar={avatar} size={42} />
-                    <div>
-                      <div style={{ fontWeight: 700, color: avatar.color }}>{avatar.name}</div>
-                      <div className="muted" style={{ fontSize: "0.85rem" }}>{avatar.role}</div>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </>
-        ) : null}
-        {status !== "ready" ? (
-          <div className="panel setup-hero-stage" style={{ marginTop: "0.45rem" }}>
-            <p className="setup-stage-kicker">Teacher Stage</p>
-            <div className="setup-avatar-stage">
-              <SpeakingTeacher avatar={activeAvatar} cue={currentCue} speaking={isSpeaking || status === "loading"} feedback={check?.correct} />
-            </div>
-            <p className="setup-stage-title" style={{ color: activeAvatar.color }}>
-              {activeAvatar.name} - {activeAvatar.role}
-            </p>
-            <p className="muted setup-stage-copy">
-              {teacherUtterance || "I will teach each step on the board and wait for your response."}
-            </p>
-          </div>
-        ) : null}
 
         {error ? <p className="error-text">{error}</p> : null}
       </section>

@@ -102,6 +102,72 @@ function toCourseLabel(courseId: string): string {
   return key.replace(/_/g, " ").replace(/\b\w/g, (ch) => ch.toUpperCase());
 }
 
+function decodeJwtPayload(token: string): Record<string, unknown> | null {
+  const compact = (token || "").trim();
+  const parts = compact.split(".");
+  if (parts.length < 2) return null;
+  try {
+    const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
+    const decoded = atob(padded);
+    const json = decodeURIComponent(
+      Array.from(decoded)
+        .map((ch) => `%${ch.charCodeAt(0).toString(16).padStart(2, "0")}`)
+        .join("")
+    );
+    const payload = JSON.parse(json);
+    return payload && typeof payload === "object" ? payload as Record<string, unknown> : null;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeGradeValue(raw: unknown): number | null {
+  const text = String(raw ?? "").trim();
+  if (!text) return null;
+  const match = text.match(/\d{1,2}/);
+  if (!match) return null;
+  const value = Number(match[0]);
+  return Number.isFinite(value) ? value : null;
+}
+
+function parseGradeBand(raw: unknown): { min: number | null; max: number | null; label: string } {
+  const text = String(raw ?? "").trim();
+  if (!text) {
+    return { min: null, max: null, label: "" };
+  }
+  const numbers = [...text.matchAll(/\d{1,2}/g)]
+    .map((match) => Number(match[0]))
+    .filter((value) => Number.isFinite(value));
+  if (numbers.length >= 2) {
+    const min = numbers[0];
+    const max = numbers[numbers.length - 1];
+    return { min, max, label: `Grades ${min}-${max}` };
+  }
+  if (numbers.length === 1) {
+    const grade = numbers[0];
+    return { min: grade, max: grade, label: `Grade ${grade}` };
+  }
+  if (/primary|junior/i.test(text)) {
+    return { min: 4, max: 6, label: "Grades 4-6" };
+  }
+  if (/middle|secondary|senior/i.test(text)) {
+    return { min: 7, max: 9, label: "Grades 7-9" };
+  }
+  return { min: null, max: null, label: text };
+}
+
+function formatElapsedLabel(totalSec: number): string {
+  const safe = Math.max(0, Math.floor(totalSec || 0));
+  const hours = Math.floor(safe / 3600);
+  const minutes = Math.floor((safe % 3600) / 60);
+  const seconds = safe % 60;
+  if (hours > 0) {
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
 function toAssetTypeLabel(assetType: string): string {
   const normalized = (assetType || "").trim().toLowerCase();
   const labels: Record<string, string> = {
@@ -130,6 +196,7 @@ function toAssetUrl(raw: string): string {
 const AVATARS: Avatar[] = [
   { id: "raj",  name: "Raj",  role: "Expert Coach",     color: "#dc2626", style: "male" }
 ];
+const STATIC_AVATAR_MODE = true;
 
 const AVATAR_STAGE_ART: Record<string, string> = {
   raj: "/avatar_1/sprite_r03_c01.svg"
@@ -344,6 +411,7 @@ function SpeakingTeacher({
 
   // Male teacher gesture cycling: swap pose every 2.5 s while speaking
   useEffect(() => {
+    if (STATIC_AVATAR_MODE) { setSpeakFrame(0); return; }
     if (avatar.style !== "male" || !speaking) { setSpeakFrame(0); return; }
     const tid = setInterval(
       () => setSpeakFrame(f => (f + 1) % MALE_TEACHER_SPEAKING_CYCLE.length),
@@ -354,6 +422,7 @@ function SpeakingTeacher({
 
   // Viseme cycling when speaking (~110 ms per shape = ~9 fps) — SVG teacher_1 only
   useEffect(() => {
+    if (STATIC_AVATAR_MODE) { setVisemeIdx(0); return; }
     if (avatar.style === "male" || !speaking) { setVisemeIdx(0); return; }
     const tid = setInterval(
       () => setVisemeIdx(i => (i + 1) % VISEME_CYCLE_SRCS.length),
@@ -364,6 +433,7 @@ function SpeakingTeacher({
 
   // Periodic auto-blink every 3–7 s
   useEffect(() => {
+    if (STATIC_AVATAR_MODE) { setShowBlink(false); return; }
     let t: ReturnType<typeof setTimeout>;
     const scheduleBlink = () => {
       t = setTimeout(() => {
@@ -385,12 +455,14 @@ function SpeakingTeacher({
       : feedback === false ? "/avatar_1/sprite_r05_c05.svg"  // concerned — wrong answer
       : (MALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? MALE_TEACHER_SPRITE_BY_CUE.default);
     // While speaking (no feedback override) → cycle through 4 gesture sprites
-    const activeSrc = (speaking && feedback == null)
-      ? MALE_TEACHER_SPEAKING_CYCLE[speakFrame]
-      : cueSrc;
+    const activeSrc = STATIC_AVATAR_MODE
+      ? MALE_TEACHER_SPRITE_BY_CUE.default
+      : (speaking && feedback == null)
+        ? MALE_TEACHER_SPEAKING_CYCLE[speakFrame]
+        : cueSrc;
     return (
       <div
-        className={`speaking-teacher male-teacher${speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
+        className={`speaking-teacher male-teacher${!STATIC_AVATAR_MODE && speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
         style={{ ["--teacher-accent" as any]: avatar.color }}
         aria-label={`${avatar.name} teacher avatar`}
       >
@@ -806,6 +878,7 @@ export default function TutorPage() {
 function TutorContent() {
   const params = useSearchParams();
   const token = params.get("token") || "";
+  const gradeFromQuery = (params.get("grade") || params.get("class") || "").trim();
   const studentNameFromQuery = (params.get("studentName") || params.get("learnerName") || "").trim();
   const moduleFromQuery = (params.get("module") || "").trim().toUpperCase();
   const courseIdFromQuery = (params.get("courseId") || "").trim().toLowerCase();
@@ -817,9 +890,12 @@ function TutorContent() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [sessionId, setSessionId] = useState("");
+  const [classStartedAt, setClassStartedAt] = useState<number | null>(null);
+  const [classElapsedSec, setClassElapsedSec] = useState(0);
   const [courseId, setCourseId] = useState(requestedCourseId);
 
   const [lessonTitle, setLessonTitle] = useState("");
+  const [lessonGradeBand, setLessonGradeBand] = useState("");
   const [lessonSource, setLessonSource] = useState("");
   const [lessonEstimatedMinutes, setLessonEstimatedMinutes] = useState(0);
   const [lessonSubtopics, setLessonSubtopics] = useState<string[]>([]);
@@ -872,7 +948,6 @@ function TutorContent() {
   const [boardSteps, setBoardSteps] = useState<SvgBoardStep[]>([]);
   const [boardRunId, setBoardRunId] = useState(0);
   const [boardSpeed, setBoardSpeed] = useState(1);
-  const minimalDuolingoLayout = true;
 
   const boardTimerRef = useRef<number | null>(null);
   const boardWaitResolveRef = useRef<(() => void) | null>(null);
@@ -892,9 +967,33 @@ function TutorContent() {
   const sessionRecoveryRef = useRef(false);
 
   const canStart = useMemo(() => token.trim().length > 20, [token]);
+  const launchTokenGrade = useMemo(() => {
+    const payload = decodeJwtPayload(token);
+    return normalizeGradeValue(gradeFromQuery) ?? normalizeGradeValue(payload?.grade);
+  }, [gradeFromQuery, token]);
   const chapterList = chapters.length ? chapters : requestedFallbackChapters;
   const exerciseList = exerciseGroups.length ? exerciseGroups : DEFAULT_EXERCISE_GROUPS;
   const courseLabel = useMemo(() => toCourseLabel(courseId || requestedCourseId), [courseId, requestedCourseId]);
+  const parsedLessonGradeBand = useMemo(() => parseGradeBand(lessonGradeBand), [lessonGradeBand]);
+  const learnerGrade = useMemo(
+    () => launchTokenGrade ?? parsedLessonGradeBand.min,
+    [launchTokenGrade, parsedLessonGradeBand.min]
+  );
+  const isJuniorLayout = useMemo(() => {
+    if (learnerGrade !== null) {
+      return learnerGrade <= 6;
+    }
+    return parsedLessonGradeBand.max !== null ? parsedLessonGradeBand.max <= 6 : false;
+  }, [learnerGrade, parsedLessonGradeBand.max]);
+  const minimalDuolingoLayout = isJuniorLayout;
+  const learnerLabel = useMemo(() => {
+    if (learnerGrade !== null) {
+      return `Grade ${learnerGrade}`;
+    }
+    return parsedLessonGradeBand.label || (isJuniorLayout ? "Grades 4-6" : "Grades 7-9");
+  }, [learnerGrade, parsedLessonGradeBand.label, isJuniorLayout]);
+  const workspaceLabel = minimalDuolingoLayout ? "Guided Mission" : "Focus Workspace";
+  const classElapsedLabel = useMemo(() => formatElapsedLabel(classElapsedSec), [classElapsedSec]);
   const effectiveDbCourseId = useMemo(() => {
     const raw = (dbCourseId || "").trim();
     if (!raw) return "";
@@ -1223,6 +1322,18 @@ function TutorContent() {
   }, [voiceEnabled]);
 
   useEffect(() => {
+    if (!classStartedAt) {
+      setClassElapsedSec(0);
+      return;
+    }
+    setClassElapsedSec(Math.max(0, Math.floor((Date.now() - classStartedAt) / 1000)));
+    const id = window.setInterval(() => {
+      setClassElapsedSec(Math.max(0, Math.floor((Date.now() - classStartedAt) / 1000)));
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [classStartedAt]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
     if (studentNameFromQuery) {
       setStudentName(studentNameFromQuery);
@@ -1377,7 +1488,7 @@ function TutorContent() {
           text: line,
           avatarId: activeAvatar.id,
           languageCode: "en-IN",
-          pace: 1.0
+          pace: 0.92
         })
       });
       const ttsData = await ttsResponse.json().catch(() => null);
@@ -1418,8 +1529,8 @@ function TutorContent() {
 
     if ("speechSynthesis" in window) {
       const utter = new SpeechSynthesisUtterance(line);
-      utter.rate = 0.95;
-      utter.pitch = 1;
+      utter.rate = 0.9;
+      utter.pitch = 1.08;
       await new Promise<void>((resolve) => {
         utter.onstart = () => {
           if (speakSeq === speakSeqRef.current) {
@@ -1805,7 +1916,7 @@ function TutorContent() {
       trigger,
     });
     try {
-      await startSession();
+      await startSession({ preserveClassClock: true });
       setError("");
       addConversationTurn("system", "system", "Tutor session recovered.", {
         source: "session_recovery_success",
@@ -2112,8 +2223,9 @@ function TutorContent() {
     } catch { /* ignore */ }
   }
 
-  async function startSession() {
+  async function startSession(options?: { preserveClassClock?: boolean }) {
     unlockAudio();
+    const preserveClassClock = options?.preserveClassClock === true;
     setStatus("loading");
     setError("");
     setCheck(null);
@@ -2125,6 +2237,7 @@ function TutorContent() {
     setDoubtReply("");
     setConversationLog([]);
     setLessonAssetItems([]);
+    setLessonGradeBand("");
     setSessionProgress(EMPTY_SESSION_PROGRESS);
     setDbCourseId(dbCourseIdFromQuery);
     setPendingKickoff("none");
@@ -2135,7 +2248,6 @@ function TutorContent() {
     setIsEvaluatingAnswer(false);
     setLastAnswerMode("typed");
     setAwaitingStudentResponse(false);
-
     try {
       const response = await fetch("/api/vedic/start", {
         method: "POST",
@@ -2156,6 +2268,7 @@ function TutorContent() {
       setCourseId(data.courseId || courseId);
       setSessionProgress(data.sessionProgress || EMPTY_SESSION_PROGRESS);
       setLessonTitle(data.lesson.title);
+      setLessonGradeBand(data.lesson.gradeBand || "");
       setLessonSource(data.lesson.source);
       setLessonEstimatedMinutes(data.lesson.estimatedMinutes || 0);
       setLessonSubtopics(data.lesson.subtopics || []);
@@ -2172,6 +2285,11 @@ function TutorContent() {
 
       if (data.chapters?.length) setChapters(data.chapters);
       if (data.exerciseGroups?.length) setExerciseGroups(data.exerciseGroups);
+      if (!preserveClassClock) {
+        const startedAt = Date.now();
+        setClassStartedAt(startedAt);
+        setClassElapsedSec(0);
+      }
 
       setSelectedChapter(data.activeChapterCode || selectedChapter);
       setActiveChapter(data.activeChapterCode || selectedChapter);
@@ -2414,6 +2532,7 @@ function TutorContent() {
     }
     if (data.lesson) {
       setLessonTitle(data.lesson.title);
+      setLessonGradeBand(data.lesson.gradeBand || "");
       setLessonSource(data.lesson.source);
       setLessonEstimatedMinutes(data.lesson.estimatedMinutes || 0);
       setLessonSubtopics(data.lesson.subtopics || []);
@@ -2587,8 +2706,8 @@ function TutorContent() {
       {/* ── Quick-start screen: Raj intro → start ───────────────── */}
       <section className={`panel tutor-setup-panel${status === "ready" ? " tutor-setup-panel-live" : ""}`}>
         <div className="tutor-quickstart">
-          <p className="tutor-qs-label">{courseLabel} · AI Tutor</p>
-          <h2 className="tutor-qs-title">Meet Raj, Your AI Tutor</h2>
+          <p className="tutor-qs-label">{courseLabel} · {learnerLabel}</p>
+          <h2 className="tutor-qs-title">Meet Raj, Your {minimalDuolingoLayout ? "AI Tutor" : "AI Coach"}</h2>
 
           {/* Raj teacher sprite — big and centred */}
           <div className="tutor-qs-stage">
@@ -2601,7 +2720,9 @@ function TutorContent() {
           </div>
 
           <p className="tutor-qs-tagline">
-            I&apos;ll teach on the board, then ask you to answer. Ready?
+            {minimalDuolingoLayout
+              ? "We will learn in short steps, then you try one answer at a time."
+              : "I will teach on the board, then push you through focused practice."}
           </p>
 
           {/* Start button */}
@@ -2631,507 +2752,427 @@ function TutorContent() {
       </section>
 
       {status === "ready" && question ? (
-        <div className={`udemy-layout${minimalDuolingoLayout ? " minimal" : ""}`}>
-          {/* ── Top bar ──────────────────────────────────────────────────── */}
-          <div className={`udemy-topbar${minimalDuolingoLayout ? " minimal" : ""}`}>
-            <div className="udemy-topbar-avatar">
-              <div className="udemy-avatar-pill" style={{ background: activeAvatar.color }}>
-                {activeAvatar.name.charAt(0)}
-              </div>
+        <div className="ca-app">
+
+          {/* ── Slim progress strip ───────────────────────────── */}
+          <div className="ca-strip">
+            <span className="ca-strip-chapter">{lessonTitle || previewChapter?.title || activeChapter}</span>
+            <div className="ca-strip-bar-wrap">
+              <div className="ca-strip-bar" style={{ width: `${sessionProgress.lessonCompletionPct}%` }} />
             </div>
-            <div className="udemy-topbar-speech">
-              <span className="udemy-avatar-name" style={{ color: activeAvatar.color }}>
-                {activeAvatar.name} · {activeAvatar.role}
-              </span>
-              <p className="udemy-speech-text">
-                {teacherUtterance || activeTeachingStep?.teacherLine || "Let us begin."}
-              </p>
-            </div>
-            <div className="udemy-topbar-meta">
-              <span className="udemy-meta-pill">{lessonTitle || previewChapter?.title || activeChapter}</span>
-              <span className="udemy-meta-pill muted">Exercise {activeExerciseGroup}</span>
-              <span className="udemy-meta-pill muted">❤️ {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
-              <span className="udemy-meta-pill muted">⚡ {sessionProgress.xp} XP</span>
-              <span className="udemy-meta-pill muted">🔥 {sessionProgress.streak}</span>
-              <span className="udemy-meta-pill muted">🎯 {score.accuracyPct}%</span>
-            </div>
+            <span className="ca-strip-stat">♥ {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
+            <span className="ca-strip-stat">⚡ {sessionProgress.xp} XP</span>
+            <span className="ca-strip-stat">🔥 {sessionProgress.streak}</span>
+            <span className="ca-strip-stat">🎯 {score.accuracyPct}%</span>
+            <span className="ca-strip-stat muted">{classElapsedLabel}</span>
           </div>
 
-          {/* ── Body: main (left) + sidebar (right) ──────────────────────── */}
-          <div className={`udemy-body${minimalDuolingoLayout ? " minimal" : ""}`}>
-            {/* Left: learning area */}
-            <div className="udemy-main">
-              {/* ── Classroom stage: teacher + board (always visible) ─── */}
-              <div className="classroom-stage">
+          {/* ── Coach layout: left panel + right content ─────── */}
+          <div className="ca-body">
 
-                {/* Teacher on the left */}
-                <div className="stage-teacher">
-                  <SpeakingTeacher
-                    avatar={activeAvatar}
-                    cue={currentCue}
-                    speaking={isSpeaking}
-                    feedback={check?.correct}
-                  />
-                </div>
+            {/* ── LEFT: Coach panel ─────────────────────────── */}
+            <div className="ca-coach">
 
-                {/* Whiteboard on the right */}
-                <div className="stage-board">
-                  {showBoardPanel ? (
-                    <>
-                      <AnimatedBoard
-                        steps={boardSteps}
-                        runId={boardRunId}
-                        showPrompt={isTeachingBoard}
-                      />
-                      <div className="udemy-board-toolbar">
-                        <div className="udemy-speed-row">
-                          <label htmlFor="boardSpeedU">Speed: {boardSpeed.toFixed(1)}x</label>
-                          <input
-                            id="boardSpeedU"
-                            type="range"
-                            min={0.7}
-                            max={1.5}
-                            step={0.1}
-                            value={boardSpeed}
-                            onChange={(e) => setBoardSpeed(Number(e.target.value))}
-                          />
-                        </div>
-                        <div className="udemy-board-btns">
-                          <button className="button" type="button" onClick={() => void teachOnBoard()} disabled={isTeachingBoard || isSpeaking}>
-                            Teach on Board
-                          </button>
-                          <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
-                            Speak Question
-                          </button>
-                          <button className="button secondary" type="button" onClick={clearBoard}>
-                            Clear Board
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    /* Idle board state — shows prompt and "teach" button */
-                    <div className="stage-board-idle">
-                      {awaitingStudentResponse ? (
-                        <>
-                          <span className="stage-idle-icon">✏️</span>
-                          <p className="stage-idle-text">Answer the question below!</p>
-                        </>
-                      ) : (
-                        <>
-                          <span className="stage-idle-icon">📋</span>
-                          <p className="stage-idle-text">Board ready for lesson</p>
-                        </>
-                      )}
-                      <button
-                        className="button"
-                        type="button"
-                        onClick={() => void teachOnBoard()}
-                        disabled={isTeachingBoard || isSpeaking}
-                        style={{ marginTop: "0.75rem" }}
-                      >
-                        ▶ Teach on Board
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* ── Question & answer zone (below stage) ────────────────── */}
-              {showExercisePanel ? (
-              <div className={`udemy-question-card${awaitingStudentResponse ? " practice-spotlight" : ""}`}>
-                <div className="udemy-question-meta">
-                  <span className="pill">{question.skill}</span>
-                  <span className="pill">Difficulty: {question.difficulty}</span>
-                </div>
-                <p className="udemy-question-text"><strong>{question.questionText}</strong></p>
-                {question.visual?.svg ? (
-                  <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
-                ) : null}
-                <label
-                  htmlFor="answerInput"
-                  className="udemy-answer-label"
-                  style={{ color: awaitingStudentResponse ? "#0f766e" : "#334155" }}
-                >
-                  Your Answer
-                </label>
-                <input
-                  id="answerInput"
-                  ref={answerInputRef}
-                  disabled={!canAttemptAnswer}
-                  value={answer}
-                  onChange={(e) => {
-                    setAnswer(e.target.value);
-                    setLastAnswerMode("typed");
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      void checkAnswer();
-                    }
-                  }}
-                  placeholder="Type your answer (e.g. 10)"
-                  style={{
-                    borderWidth: awaitingStudentResponse ? "2px" : "1px",
-                    borderColor: awaitingStudentResponse ? "#0f766e" : "#cbd5e1",
-                    boxShadow: awaitingStudentResponse ? "0 0 0 3px rgba(15,118,110,0.12)" : "none"
-                  }}
+              {/* Raj sprite */}
+              <div className="ca-coach-stage">
+                <SpeakingTeacher
+                  avatar={activeAvatar}
+                  cue={currentCue}
+                  speaking={isSpeaking}
+                  feedback={check?.correct}
                 />
-                <p className="muted udemy-hint">Hint: {question.hint}</p>
-                {micPermission === "denied" ? (
-                  <p className="muted" style={{ marginTop: "0.35rem", marginBottom: 0 }}>
-                    Microphone access is blocked. Use text input.
-                  </p>
-                ) : null}
-                {sessionProgress.livesDepleted ? (
-                  <p style={{ marginTop: "0.35rem", marginBottom: 0, color: "#b91c1c", fontWeight: 700 }}>
-                    💔 No hearts left. Do review to refill and continue.
-                  </p>
-                ) : null}
-                <div className="udemy-answer-actions">
-                  <button className="button" onClick={() => void checkAnswer()} disabled={isEvaluatingAnswer || !canAttemptAnswer}>
-                    {isEvaluatingAnswer ? "Checking..." : "Check ✅"}
-                  </button>
-                  <button
-                    className="button secondary"
-                    type="button"
-                    onClick={listenAnswer}
-                    disabled={isEvaluatingAnswer || isListening || micPermission === "denied" || !canAttemptAnswer}
-                  >
-                    {micPermission === "denied" ? "Mic Blocked" : isListening ? "Listening\u2026" : "Speak Answer"}
-                  </button>
-                  {isListening ? (
-                    <button
-                      className="button secondary"
-                      type="button"
-                      onClick={() => {
-                        stopListeningSession();
-                        setAwaitingStudentResponse(true);
-                        addConversationTurn("system", "system", "Voice listening stopped by student.", { source: "listen_stop" });
-                      }}
-                    >
-                      Stop
-                    </button>
-                  ) : null}
-                  <button className="button secondary" onClick={nextQuestion}>Next ➜</button>
-                </div>
               </div>
-              ) : null}
 
-              {/* Feedback */}
-              {check ? (
-                <div className={`udemy-feedback ${check.correct ? "correct" : "wrong"}`}>
-                  <p className="udemy-feedback-verdict">
-                    {check.correct ? "✅ Correct! 🎉" : "❌ Try Again 💪"}
-                  </p>
-                  <p className="muted">{check.encouragement}</p>
-                  {check.coachTip ? <p className="muted">💡 Tip: {check.coachTip}</p> : null}
-                  <p><strong>Expected:</strong> {check.expectedAnswer}</p>
-                  <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
-                </div>
-              ) : null}
+              {/* Speech bubble */}
+              <div className="ca-coach-speech">
+                <p>{teacherUtterance || activeTeachingStep?.teacherLine || "Let us begin."}</p>
+              </div>
 
-              {/* Q&A dock */}
-              {!minimalDuolingoLayout ? <div className="udemy-qa-dock">
-                <h3 className="udemy-qa-title">Ask {activeAvatar.name} a Doubt</h3>
-                {conversationLog.filter((t) => t.channel === "doubt").length > 0 && (
-                  <div className="udemy-chat-history">
-                    {conversationLog.filter((t) => t.channel === "doubt").map((turn) => (
-                      <div
-                        key={turn.id}
-                        className={`udemy-chat-bubble ${turn.role === "student" ? "student" : "tutor"}`}
-                        style={{ ["--accent" as string]: activeAvatar.color }}
-                      >
-                        <div className="udemy-bubble-text">{turn.text}</div>
-                        <span className="udemy-bubble-name">
-                          {turn.role === "student" ? "You" : activeAvatar.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <div className="udemy-chat-input-row">
-                  <textarea
-                    value={doubt}
-                    onChange={(e) => setDoubt(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                        void askDoubt();
-                      }
-                    }}
-                    rows={2}
-                    placeholder="Type a doubt and press Enter\u2026"
-                    className="udemy-chat-input"
-                  />
-                  <button className="button secondary" onClick={() => void askDoubt()} disabled={!doubt.trim()}>
-                    Ask
-                  </button>
-                </div>
-              </div> : null}
-            </div>
-
-            {/* Right sidebar */}
-            <aside className={`udemy-sidebar${minimalDuolingoLayout ? " minimal" : ""}`}>
-              {/* Curriculum nav */}
-              {!minimalDuolingoLayout ? <div className="udemy-sidebar-section">
-                <h4 className="udemy-sidebar-title">Course Content</h4>
-                <div className="udemy-chapter-list">
+              {/* Chapter + exercise nav */}
+              <div className="ca-coach-nav">
+                <p className="ca-nav-label">Course · {chapterList.length} Chapters</p>
+                <div className="ca-chapter-list">
                   {chapterList.map((c, idx) => (
                     <div
                       key={c.chapterCode}
-                      className={`udemy-chapter-item ${c.chapterCode === activeChapter ? "active" : ""}`}
-                      style={c.chapterCode === activeChapter
-                        ? { borderLeftColor: activeAvatar.color, background: `${activeAvatar.color}12` }
-                        : {}
-                      }
+                      className={`ca-chapter-item${c.chapterCode === activeChapter ? " active" : ""}`}
                     >
-                      <span className="udemy-chapter-num">{String(idx + 1).padStart(2, "0")}</span>
-                      <span className="udemy-chapter-name">{c.title}</span>
+                      <span className="ca-ch-num">{String(idx + 1).padStart(2, "0")}</span>
+                      <span className="ca-ch-name">{c.title}</span>
                       {c.chapterCode === activeChapter
-                        ? <span className="udemy-chapter-badge" style={{ background: activeAvatar.color }}>Now</span>
-                        : null
-                      }
+                        ? <span className="ca-ch-badge">Now</span>
+                        : null}
                     </div>
                   ))}
                 </div>
-              </div> : null}
 
-              {/* Exercise flow */}
-              <div className="udemy-sidebar-section">
-                <h4 className="udemy-sidebar-title">{minimalDuolingoLayout ? "Lesson Path" : "This Chapter \u2014 Exercise Flow"}</h4>
-                <div className="udemy-exercise-list">
+                <p className="ca-nav-label" style={{ marginTop: "0.8rem" }}>Exercise Flow</p>
+                <div className="ca-ex-list">
                   {lessonPath.map((item) => (
                     <div
                       key={`${item.exerciseGroup}_${item.subtopic}`}
-                      className={`udemy-ex-item ${item.exerciseGroup === activeExerciseGroup ? "active" : ""}`}
+                      className={`ca-ex-item${item.exerciseGroup === activeExerciseGroup ? " active" : ""}`}
                       style={
                         item.status === "completed"
-                          ? { color: "#16a34a", fontWeight: 600 }
-                          : item.exerciseGroup === activeExerciseGroup || item.status === "active"
-                            ? { color: activeAvatar.color, fontWeight: 600 }
-                            : { opacity: 0.66 }
+                          ? { color: "#4ade80" }
+                          : item.status === "locked"
+                            ? { opacity: 0.4 }
+                            : {}
                       }
                     >
-                      {/* Subtopic is primary; exercise letter badge is a small secondary indicator */}
-                      <span className="udemy-ex-subtopic">
-                        {item.status === "completed" ? "✓ " : item.status === "locked" ? "🔒 " : ""}
-                        {item.subtopic}
+                      <span className="ca-ex-dot">
+                        {item.status === "completed" ? "✓" : item.status === "locked" ? "🔒" : "›"}
                       </span>
-                      <span className="udemy-ex-badge" style={{ fontSize: "0.65rem", opacity: 0.45, marginLeft: "auto", flexShrink: 0 }}>{item.exerciseGroup}</span>
+                      <span className="ca-ex-name">{item.subtopic}</span>
+                      <span className="ca-ex-grp">{item.exerciseGroup}</span>
                     </div>
                   ))}
                 </div>
-              </div>
 
-              {/* Progress */}
-              <div className="udemy-sidebar-section">
-                <h4 className="udemy-sidebar-title">Progress</h4>
-                <div className="udemy-progress-grid">
-                  <div className="udemy-stat">
-                    <span className="muted">❤️ Hearts</span>
-                    <strong>{sessionProgress.hearts}/{sessionProgress.maxHearts}</strong>
-                  </div>
-                  <div className="udemy-stat">
-                    <span className="muted">⚡ XP</span>
-                    <strong>{sessionProgress.xp}</strong>
-                  </div>
-                  <div className="udemy-stat">
-                    <span className="muted">🔥 Streak</span>
-                    <strong>{sessionProgress.streak}</strong>
-                  </div>
-                  <div className="udemy-stat">
-                    <span className="muted">📈 Mastery</span>
-                    <strong>{sessionProgress.masteryPct}%</strong>
-                  </div>
-                  <div className="udemy-stat">
-                    <span className="muted">🧭 Lesson</span>
-                    <strong>{sessionProgress.lessonCompletionPct}%</strong>
-                  </div>
-                  <div className="udemy-stat">
-                    <span className="muted">📝 Attempts</span>
-                    <strong>{score.attempts}</strong>
-                  </div>
-                  <div className="udemy-stat">
-                    <span className="muted">🎯 Accuracy</span>
-                    <strong>{score.accuracyPct}%</strong>
-                  </div>
-                </div>
-                {sessionProgress.reviewQueue.length ? (
-                  <p className="muted" style={{ marginTop: "0.5rem", marginBottom: 0, fontSize: "0.78rem" }}>
-                    Review next: {sessionProgress.reviewQueue.slice(0, 2).join(", ")}
-                  </p>
-                ) : null}
-                {sessionProgress.livesDepleted ? (
-                  <p style={{ marginTop: "0.45rem", marginBottom: 0, color: "#b91c1c", fontWeight: 700, fontSize: "0.82rem" }}>
-                    Hearts depleted. Start review to continue.
-                  </p>
-                ) : null}
-                <p className="muted" style={{ marginTop: "0.5rem", marginBottom: 0, fontSize: "0.78rem" }}>
-                  Session: <code style={{ fontFamily: "Consolas, monospace" }}>{sessionId || "—"}</code>
-                  {sessionId ? (
-                    <button
-                      type="button"
-                      className="button secondary"
-                      onClick={() => void copySessionId()}
-                      style={{ marginLeft: "0.45rem", padding: "0.15rem 0.45rem", fontSize: "0.72rem" }}
-                    >
-                      Copy
-                    </button>
-                  ) : null}
-                </p>
-              </div>
-            </aside>
-          </div>
-
-          {/* ── Developer Tools (collapsed) ────────────────────────────────── */}
-          <details className="udemy-devtools">
-            <summary>Developer Tools</summary>
-            <div className="udemy-devtools-body">
-              <div className="classroom-chip-row">
-                <span className="pill">Chapter: {activeChapter}</span>
-                <span className="pill">Exercise: {activeExerciseGroup}</span>
-                <span className="pill">Mode: {screenplayMode}</span>
-                <span className="pill">Flow: {flowState} v{flowVersion}</span>
-                <span className="pill">Realtime: {realtimeConnected ? "connected" : "polling"}</span>
-                <span className="pill">Status: {stageStatusText}</span>
-              </div>
-              {activeTeachingStep ? (
-                <div className="panel teaching-snapshot">
-                  <p style={{ marginTop: 0, marginBottom: "0.3rem" }}>
-                    <strong>Now Teaching:</strong> {activeTeachingStep.exerciseGroup} \u2014 {activeTeachingStep.subtopic}
-                  </p>
-                  <p className="muted" style={{ marginTop: 0, marginBottom: "0.2rem" }}>{activeTeachingStep.teacherLine}</p>
-                  <p className="muted" style={{ margin: 0 }}>
-                    Board: {activeTeachingStep.boardAction} | Mode: {activeTeachingStep.boardMode}
-                  </p>
-                </div>
-              ) : null}
-
-              <div className="panel conversation-log-panel">
-                <div className="conversation-log-header">
-                  <h3 style={{ margin: 0 }}>Conversation Log</h3>
-                  <button className="button secondary" type="button" onClick={downloadConversationLog} disabled={!conversationLog.length}>
-                    Export JSON
-                  </button>
-                </div>
-                <div className="conversation-metrics">
-                  <span className="pill">Tutor: {conversationInsights.tutorTurns}</span>
-                  <span className="pill">Student: {conversationInsights.studentTurns}</span>
-                  <span className="pill">Voice: {conversationInsights.voiceStudentTurns}</span>
-                  <span className="pill">Doubts: {conversationInsights.doubtTurns}</span>
-                  <span className="pill">Avg: {conversationInsights.avgResponseSec || 0}s</span>
-                </div>
-                <div className="conversation-log-list">
-                  {conversationLog.length ? (
-                    conversationLog.slice(-18).map((turn) => (
-                      <div key={turn.id} className={`conversation-log-item role-${turn.role}`}>
-                        <p className="conversation-log-meta">
-                          {turn.role.toUpperCase()} ({turn.channel}) | {new Date(turn.at).toLocaleTimeString()}
-                        </p>
-                        <p className="conversation-log-text">{turn.text}</p>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="muted" style={{ margin: 0 }}>No conversation turns yet.</p>
-                  )}
+                {/* Mini progress stats */}
+                <div className="ca-mini-stats">
+                  <div className="ca-mini-stat"><span>Mastery</span><strong>{sessionProgress.masteryPct}%</strong></div>
+                  <div className="ca-mini-stat"><span>Attempts</span><strong>{score.attempts}</strong></div>
+                  <div className="ca-mini-stat"><span>Lesson</span><strong>{sessionProgress.lessonCompletionPct}%</strong></div>
+                  <div className="ca-mini-stat"><span>Ex.</span><strong>{activeExerciseGroup}</strong></div>
                 </div>
               </div>
-
-              <div className="panel roadmap-panel">
-                <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Chapter Roadmap</h3>
-                <p className="muted" style={{ marginTop: 0 }}>
-                  {lessonSource || "Lesson source unavailable"} | {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} mins
-                </p>
-                <div className="setup-preview-grid">
-                  <div>
-                    <p style={{ marginBottom: "0.35rem" }}><strong>Subtopics</strong></p>
-                    <ul className="setup-compact-list">
-                      {(lessonSubtopics.length ? lessonSubtopics : previewChapter?.subtopics || []).map((topic) => (
-                        <li key={topic}>{topic}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p style={{ marginBottom: "0.35rem" }}><strong>Exercise Flow</strong></p>
-                    <ul className="setup-compact-list">
-                      {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((item) => (
-                        <li key={`${item.exerciseGroup}_${item.subtopic}`}>
-                          {item.exerciseGroup}: {item.subtopic}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {courseMonitorUrl ? (
-                <p style={{ marginTop: 0 }}>
-                  <a className="button secondary" href={courseMonitorUrl} target="_blank" rel="noreferrer">
-                    Open Course Monitor
-                  </a>
-                </p>
-              ) : null}
-
-              {lessonAssetItems.length ? (
-                <div className="setup-preview-grid">
-                  {lessonAssetItems.slice(0, 12).map((asset, idx) => (
-                    <div key={`${asset.assetType}_${asset.file}_${idx}`}>
-                      <p style={{ marginBottom: "0.2rem" }}>
-                        <strong>{toAssetTypeLabel(asset.assetType)}</strong>
-                      </p>
-                      <p className="muted" style={{ marginTop: 0, marginBottom: "0.4rem" }}>
-                        {asset.topic || asset.file}
-                      </p>
-                      <a className="button secondary" href={toAssetUrl(asset.url || asset.file)} target="_blank" rel="noreferrer">
-                        Open Asset
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-
-              <section className="panel lesson-details-panel">
-                <details>
-                  <summary>Lesson Plan and Teaching Script</summary>
-                  <div className="lesson-details-meta">
-                    <p><strong>Exercise Coverage:</strong> {(lessonExerciseCoverage.length ? lessonExerciseCoverage : previewChapter?.exerciseGroups || []).join(", ")}</p>
-                    <p><strong>Current Flow:</strong> {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((f) => `${f.exerciseGroup}->${f.subtopic}`).join(" | ")}</p>
-                    <p><strong>Screenplay Beats:</strong> {lessonScreenplay.length || 0}</p>
-                    <p><strong>Active Screenplay Mode:</strong> {screenplayMode}</p>
-                  </div>
-                  <div className="lesson-details-grid">
-                    <div>
-                      <h3 style={{ marginTop: 0 }}>Core Ideas</h3>
-                      <ul>
-                        {coreIdeas.map((idea) => (
-                          <li key={idea}>{idea}</li>
-                        ))}
-                      </ul>
-                      <h3>Learning Goals</h3>
-                      <ul>
-                        {(lessonLearningGoals.length ? lessonLearningGoals : previewChapter?.learningGoals || []).map((goal) => (
-                          <li key={goal}>{goal}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 style={{ marginTop: 0 }}>Teacher Script (A-I)</h3>
-                      <ul className="teacher-script-list">
-                        {visibleTeachingScript.map((step) => (
-                          <li key={step.stepId}>
-                            <strong>{step.exerciseGroup} - {step.subtopic} ({step.boardMode === "free_draw" ? "Free Draw" : "SVG"}):</strong> {step.teacherLine}
-                            <br />
-                            <span className="muted">Checkpoint: {step.checkpointPrompt}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </details>
-              </section>
             </div>
-          </details>
+
+            {/* ── RIGHT: Content panel ──────────────────────── */}
+            <div className="ca-content">
+
+              {/* Board */}
+              <div className="ca-board">
+                {showBoardPanel ? (
+                  <AnimatedBoard
+                    steps={boardSteps}
+                    runId={boardRunId}
+                    showPrompt={isTeachingBoard}
+                  />
+                ) : (
+                  <div className="ca-board-idle">
+                    {awaitingStudentResponse ? (
+                      <>
+                        <span className="ca-idle-icon">✏️</span>
+                        <p className="ca-idle-text">Answer the question below!</p>
+                      </>
+                    ) : (
+                      <>
+                        <span className="ca-idle-icon">📋</span>
+                        <p className="ca-idle-text">Board ready — click Teach on Board</p>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Board toolbar */}
+              <div className="ca-board-bar">
+                <div className="ca-speed-row">
+                  <label htmlFor="caBoardSpeed">Speed {boardSpeed.toFixed(1)}x</label>
+                  <input
+                    id="caBoardSpeed"
+                    type="range" min={0.7} max={1.5} step={0.1}
+                    value={boardSpeed}
+                    onChange={(e) => setBoardSpeed(Number(e.target.value))}
+                  />
+                </div>
+                <button className="button" type="button" onClick={() => void teachOnBoard()} disabled={isTeachingBoard || isSpeaking}>
+                  ▶ Teach on Board
+                </button>
+                <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
+                  🔊 Speak
+                </button>
+                <button className="button secondary" type="button" onClick={clearBoard}>
+                  Clear
+                </button>
+              </div>
+
+              {/* Question zone */}
+              {showExercisePanel ? (
+                <div className={`ca-question${awaitingStudentResponse ? " spotlight" : ""}`}>
+                  <div className="udemy-question-meta">
+                    <span className="pill">{question.skill}</span>
+                    <span className="pill">Difficulty: {question.difficulty}</span>
+                  </div>
+                  <p className="udemy-question-text"><strong>{question.questionText}</strong></p>
+                  {question.visual?.svg ? (
+                    <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
+                  ) : null}
+                  <label
+                    htmlFor="answerInput"
+                    className="udemy-answer-label"
+                    style={{ color: awaitingStudentResponse ? "#0f766e" : "#334155" }}
+                  >
+                    Your Answer
+                  </label>
+                  <input
+                    id="answerInput"
+                    ref={answerInputRef}
+                    disabled={!canAttemptAnswer}
+                    value={answer}
+                    onChange={(e) => {
+                      setAnswer(e.target.value);
+                      setLastAnswerMode("typed");
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        void checkAnswer();
+                      }
+                    }}
+                    placeholder="Type your answer (e.g. 10)"
+                    style={{
+                      borderWidth: awaitingStudentResponse ? "2px" : "1px",
+                      borderColor: awaitingStudentResponse ? "#0f766e" : "#cbd5e1",
+                      boxShadow: awaitingStudentResponse ? "0 0 0 3px rgba(15,118,110,0.12)" : "none"
+                    }}
+                  />
+                  <p className="muted udemy-hint">Hint: {question.hint}</p>
+                  {micPermission === "denied" ? (
+                    <p className="muted" style={{ marginTop: "0.35rem", marginBottom: 0 }}>
+                      Microphone access is blocked. Use text input.
+                    </p>
+                  ) : null}
+                  {sessionProgress.livesDepleted ? (
+                    <p style={{ marginTop: "0.35rem", marginBottom: 0, color: "#b91c1c", fontWeight: 700 }}>
+                      💔 No hearts left. Do review to refill and continue.
+                    </p>
+                  ) : null}
+                  <div className="udemy-answer-actions">
+                    <button className="button" onClick={() => void checkAnswer()} disabled={isEvaluatingAnswer || !canAttemptAnswer}>
+                      {isEvaluatingAnswer ? "Checking..." : "Check ✅"}
+                    </button>
+                    <button
+                      className="button secondary"
+                      type="button"
+                      onClick={listenAnswer}
+                      disabled={isEvaluatingAnswer || isListening || micPermission === "denied" || !canAttemptAnswer}
+                    >
+                      {micPermission === "denied" ? "Mic Blocked" : isListening ? "Listening\u2026" : "Speak Answer"}
+                    </button>
+                    {isListening ? (
+                      <button
+                        className="button secondary"
+                        type="button"
+                        onClick={() => {
+                          stopListeningSession();
+                          setAwaitingStudentResponse(true);
+                          addConversationTurn("system", "system", "Voice listening stopped by student.", { source: "listen_stop" });
+                        }}
+                      >
+                        Stop
+                      </button>
+                    ) : null}
+                    <button className="button secondary" onClick={nextQuestion}>Next ➜</button>
+                  </div>
+
+                  {/* Feedback */}
+                  {check ? (
+                    <div className={`udemy-feedback ${check.correct ? "correct" : "wrong"}`}>
+                      <p className="udemy-feedback-verdict">
+                        {check.correct ? "✅ Correct! 🎉" : "❌ Try Again 💪"}
+                      </p>
+                      <p className="muted">{check.encouragement}</p>
+                      {check.coachTip ? <p className="muted">💡 Tip: {check.coachTip}</p> : null}
+                      <p><strong>Expected:</strong> {check.expectedAnswer}</p>
+                      <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
+                    </div>
+                  ) : null}
+
+                  {/* Q&A dock */}
+                  <div className="udemy-qa-dock">
+                    <h3 className="udemy-qa-title">Ask {activeAvatar.name} a Doubt</h3>
+                    {conversationLog.filter((t) => t.channel === "doubt").length > 0 && (
+                      <div className="udemy-chat-history">
+                        {conversationLog.filter((t) => t.channel === "doubt").map((turn) => (
+                          <div
+                            key={turn.id}
+                            className={`udemy-chat-bubble ${turn.role === "student" ? "student" : "tutor"}`}
+                            style={{ ["--accent" as string]: activeAvatar.color }}
+                          >
+                            <div className="udemy-bubble-text">{turn.text}</div>
+                            <span className="udemy-bubble-name">
+                              {turn.role === "student" ? "You" : activeAvatar.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <div className="udemy-chat-input-row">
+                      <textarea
+                        value={doubt}
+                        onChange={(e) => setDoubt(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            void askDoubt();
+                          }
+                        }}
+                        rows={2}
+                        placeholder="Type a doubt and press Enter\u2026"
+                        className="udemy-chat-input"
+                      />
+                      <button className="button secondary" onClick={() => void askDoubt()} disabled={!doubt.trim()}>
+                        Ask
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {/* Developer tools */}
+              <details className="udemy-devtools">
+                <summary>Developer Tools</summary>
+                <div className="udemy-devtools-body">
+                  <div className="classroom-chip-row">
+                    <span className="pill">Chapter: {activeChapter}</span>
+                    <span className="pill">Exercise: {activeExerciseGroup}</span>
+                    <span className="pill">Mode: {screenplayMode}</span>
+                    <span className="pill">Flow: {flowState} v{flowVersion}</span>
+                    <span className="pill">Realtime: {realtimeConnected ? "connected" : "polling"}</span>
+                    <span className="pill">Status: {stageStatusText}</span>
+                  </div>
+                  {activeTeachingStep ? (
+                    <div className="panel teaching-snapshot">
+                      <p style={{ marginTop: 0, marginBottom: "0.3rem" }}>
+                        <strong>Now Teaching:</strong> {activeTeachingStep.exerciseGroup} \u2014 {activeTeachingStep.subtopic}
+                      </p>
+                      <p className="muted" style={{ marginTop: 0, marginBottom: "0.2rem" }}>{activeTeachingStep.teacherLine}</p>
+                      <p className="muted" style={{ margin: 0 }}>
+                        Board: {activeTeachingStep.boardAction} | Mode: {activeTeachingStep.boardMode}
+                      </p>
+                    </div>
+                  ) : null}
+
+                  <div className="panel conversation-log-panel">
+                    <div className="conversation-log-header">
+                      <h3 style={{ margin: 0 }}>Conversation Log</h3>
+                      <button className="button secondary" type="button" onClick={downloadConversationLog} disabled={!conversationLog.length}>
+                        Export JSON
+                      </button>
+                    </div>
+                    <div className="conversation-metrics">
+                      <span className="pill">Tutor: {conversationInsights.tutorTurns}</span>
+                      <span className="pill">Student: {conversationInsights.studentTurns}</span>
+                      <span className="pill">Voice: {conversationInsights.voiceStudentTurns}</span>
+                      <span className="pill">Doubts: {conversationInsights.doubtTurns}</span>
+                      <span className="pill">Avg: {conversationInsights.avgResponseSec || 0}s</span>
+                    </div>
+                    <div className="conversation-log-list">
+                      {conversationLog.length ? (
+                        conversationLog.slice(-18).map((turn) => (
+                          <div key={turn.id} className={`conversation-log-item role-${turn.role}`}>
+                            <p className="conversation-log-meta">
+                              {turn.role.toUpperCase()} ({turn.channel}) | {new Date(turn.at).toLocaleTimeString()}
+                            </p>
+                            <p className="conversation-log-text">{turn.text}</p>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="muted" style={{ margin: 0 }}>No conversation turns yet.</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="panel roadmap-panel">
+                    <h3 style={{ marginTop: 0, marginBottom: "0.45rem" }}>Chapter Roadmap</h3>
+                    <p className="muted" style={{ marginTop: 0 }}>
+                      {lessonSource || "Lesson source unavailable"} | {lessonEstimatedMinutes || previewChapter?.estimatedMinutes || 20} mins
+                    </p>
+                    <div className="setup-preview-grid">
+                      <div>
+                        <p style={{ marginBottom: "0.35rem" }}><strong>Subtopics</strong></p>
+                        <ul className="setup-compact-list">
+                          {(lessonSubtopics.length ? lessonSubtopics : previewChapter?.subtopics || []).map((topic) => (
+                            <li key={topic}>{topic}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p style={{ marginBottom: "0.35rem" }}><strong>Exercise Flow</strong></p>
+                        <ul className="setup-compact-list">
+                          {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((item) => (
+                            <li key={`${item.exerciseGroup}_${item.subtopic}`}>
+                              {item.exerciseGroup}: {item.subtopic}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {courseMonitorUrl ? (
+                    <p style={{ marginTop: 0 }}>
+                      <a className="button secondary" href={courseMonitorUrl} target="_blank" rel="noreferrer">
+                        Open Course Monitor
+                      </a>
+                    </p>
+                  ) : null}
+
+                  {lessonAssetItems.length ? (
+                    <div className="setup-preview-grid">
+                      {lessonAssetItems.slice(0, 12).map((asset, idx) => (
+                        <div key={`${asset.assetType}_${asset.file}_${idx}`}>
+                          <p style={{ marginBottom: "0.2rem" }}>
+                            <strong>{toAssetTypeLabel(asset.assetType)}</strong>
+                          </p>
+                          <p className="muted" style={{ marginTop: 0, marginBottom: "0.4rem" }}>
+                            {asset.topic || asset.file}
+                          </p>
+                          <a className="button secondary" href={toAssetUrl(asset.url || asset.file)} target="_blank" rel="noreferrer">
+                            Open Asset
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <section className="panel lesson-details-panel">
+                    <details>
+                      <summary>Lesson Plan and Teaching Script</summary>
+                      <div className="lesson-details-meta">
+                        <p><strong>Exercise Coverage:</strong> {(lessonExerciseCoverage.length ? lessonExerciseCoverage : previewChapter?.exerciseGroups || []).join(", ")}</p>
+                        <p><strong>Current Flow:</strong> {(lessonExerciseFlow.length ? lessonExerciseFlow : previewChapter?.exerciseFlow || []).map((f) => `${f.exerciseGroup}->${f.subtopic}`).join(" | ")}</p>
+                        <p><strong>Screenplay Beats:</strong> {lessonScreenplay.length || 0}</p>
+                        <p><strong>Active Screenplay Mode:</strong> {screenplayMode}</p>
+                      </div>
+                      <div className="lesson-details-grid">
+                        <div>
+                          <h3 style={{ marginTop: 0 }}>Core Ideas</h3>
+                          <ul>
+                            {coreIdeas.map((idea) => (
+                              <li key={idea}>{idea}</li>
+                            ))}
+                          </ul>
+                          <h3>Learning Goals</h3>
+                          <ul>
+                            {(lessonLearningGoals.length ? lessonLearningGoals : previewChapter?.learningGoals || []).map((goal) => (
+                              <li key={goal}>{goal}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h3 style={{ marginTop: 0 }}>Teacher Script (A-I)</h3>
+                          <ul className="teacher-script-list">
+                            {visibleTeachingScript.map((step) => (
+                              <li key={step.stepId}>
+                                <strong>{step.exerciseGroup} - {step.subtopic} ({step.boardMode === "free_draw" ? "Free Draw" : "SVG"}):</strong> {step.teacherLine}
+                                <br />
+                                <span className="muted">Checkpoint: {step.checkpointPrompt}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </details>
+                  </section>
+                </div>
+              </details>
+
+            </div>
+          </div>
         </div>
       ) : null}
       <style jsx global>{`
@@ -3153,10 +3194,10 @@ function TutorContent() {
           align-items: flex-end;
           justify-content: center;
           transform-origin: 50% 88%;
-          animation: avatarFloat 2.8s ease-in-out infinite;
+          animation: none;
         }
         .teacher-stage-avatar.speaking {
-          animation: avatarTalk 0.75s ease-in-out infinite;
+          animation: none;
         }
         .teacher-stage-glow {
           position: absolute;
@@ -3188,10 +3229,10 @@ function TutorContent() {
           align-items: flex-end;
           justify-content: center;
           transform-origin: 50% 88%;
-          animation: avatarFloat 2.8s ease-in-out infinite;
+          animation: none;
         }
         .speaking-teacher.speaking {
-          animation: avatarTalk 0.75s ease-in-out infinite;
+          animation: none;
         }
         .speaking-teacher.compact {
           width: 80px;
@@ -3219,15 +3260,15 @@ function TutorContent() {
           filter: drop-shadow(0 8px 14px rgba(15,23,42,0.20));
           z-index: 2;
           position: relative;
-          animation: spriteFadeIn 0.45s ease;
+          animation: none;
         }
         /* Gentle float when idle */
         .speaking-teacher.male-teacher:not(.speaking) {
-          animation: avatarFloat 3s ease-in-out infinite;
+          animation: none;
         }
         /* Speaking rhythm: subtle body energy — no gesture changes, CSS does all the work */
         .speaking-teacher.male-teacher.speaking {
-          animation: maleSpeak 0.42s ease-in-out infinite;
+          animation: none;
           transform-origin: 50% 30%;
         }
         @keyframes maleSpeak {
@@ -3279,245 +3320,262 @@ function TutorContent() {
           object-fit: contain;
         }
 
-        /* ── Udemy-style layout ─────────────────────────────────────────── */
-        .tutor-shell-live {
-          height: calc(100vh - 0.75rem);
-          overflow: hidden;
-          padding-bottom: 0;
-        }
-        .tutor-shell-live .tutor-setup-panel-live {
-          display: none;
-        }
-        .tutor-shell-live .udemy-layout.minimal {
-          height: 100%;
+        /* ── Coach-A Layout ─────────────────────────────────────────────── */
+        .ca-app {
           display: flex;
           flex-direction: column;
-          padding-bottom: 0.5rem;
-        }
-        .tutor-shell-live .udemy-body.minimal {
-          flex: 1;
-          min-height: 0;
+          height: 100dvh;
           overflow: hidden;
-        }
-        .tutor-shell-live .udemy-main {
-          min-height: 0;
-          overflow: auto;
-        }
-        .tutor-shell-live .udemy-sidebar.minimal {
-          max-height: none;
-          overflow: auto;
-        }
-        .udemy-layout {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
+          background: #f1f5f9;
           margin: 0 -1.5rem;
         }
-        .udemy-layout.minimal {
-          margin: 0 auto;
-          max-width: 920px;
-          padding: 0.5rem 0.9rem 1rem;
-        }
-        /* Top bar */
-        .udemy-topbar {
+
+        /* Progress strip */
+        .ca-strip {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          padding: 0.75rem 1.5rem;
+          gap: 0.6rem;
+          padding: 0 1.25rem;
           background: #0f172a;
           color: white;
-          position: sticky;
-          top: 0;
-          z-index: 20;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-        }
-        .udemy-topbar.minimal {
-          position: static;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px;
-          background: #ffffff;
-          color: #0f172a;
-          box-shadow: none;
-          margin-bottom: 0.85rem;
-          padding: 0.65rem 0.8rem;
-        }
-        .udemy-topbar.minimal .udemy-speech-text {
-          color: #334155;
-        }
-        .udemy-topbar.minimal .udemy-meta-pill {
-          background: #f8fafc;
-          color: #475569;
-          border-color: #e2e8f0;
-        }
-        .udemy-topbar.minimal .udemy-meta-pill:not(.muted) {
-          color: #1e293b;
-          border-color: #cbd5e1;
-        }
-        .udemy-topbar-avatar {
+          height: 46px;
           flex-shrink: 0;
-          width: 48px;
-          height: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .udemy-avatar-pill {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.3rem;
-          font-weight: 800;
-          color: #fff;
-          letter-spacing: 0;
-          user-select: none;
-          border: 2px solid rgba(255,255,255,0.25);
-        }
-        /* ── Classroom stage: teacher left, board right ────────── */
-        .classroom-stage {
-          display: grid;
-          grid-template-columns: 140px 1fr;
-          gap: 12px;
-          align-items: stretch;
-          background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
-          border-radius: 16px;
-          padding: 14px 14px 10px;
-        }
-        .stage-teacher {
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          min-height: 220px;
-          padding-bottom: 4px;
-        }
-        .stage-board {
-          background: #f8fafc;
-          border-radius: 10px;
           overflow: hidden;
-          display: flex;
-          flex-direction: column;
         }
-        /* Idle board (no active teaching steps) */
-        .stage-board-idle {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          flex: 1;
-          min-height: 180px;
-          color: #475569;
-          text-align: center;
-          padding: 1.5rem 1rem;
-        }
-        .stage-idle-icon { font-size: 2.2rem; display: block; margin-bottom: 0.3rem; }
-        .stage-idle-text { font-size: 0.95rem; font-weight: 600; color: #334155; margin: 0; }
-        .udemy-topbar-speech { flex: 1; min-width: 0; }
-        .udemy-avatar-name {
-          font-size: 0.75rem;
+        .ca-strip-chapter {
+          font-size: 0.8rem;
           font-weight: 700;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          display: block;
-        }
-        .udemy-speech-text {
-          margin: 0.1rem 0 0;
-          font-size: 0.88rem;
-          line-height: 1.4;
           color: #e2e8f0;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          max-width: 200px;
         }
-        .udemy-topbar-meta {
-          display: flex;
-          gap: 0.4rem;
-          flex-shrink: 0;
-          flex-wrap: wrap;
-          justify-content: flex-end;
-        }
-        .udemy-meta-pill {
-          font-size: 0.72rem;
-          background: #1e293b;
-          color: #94a3b8;
+        .ca-strip-bar-wrap {
+          flex: 1;
+          height: 5px;
+          background: #334155;
           border-radius: 999px;
-          padding: 0.2rem 0.6rem;
-          border: 1px solid #334155;
+          overflow: hidden;
+          min-width: 60px;
+        }
+        .ca-strip-bar {
+          height: 100%;
+          background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+          border-radius: 999px;
+          transition: width 0.5s ease;
+        }
+        .ca-strip-stat {
+          font-size: 0.72rem;
+          color: #94a3b8;
           white-space: nowrap;
         }
-        .udemy-meta-pill:not(.muted) { color: #e2e8f0; border-color: #475569; }
+        .ca-strip-stat.muted { color: #475569; }
 
-        /* Body: 2-column */
-        .udemy-body {
+        /* Body: left coach + right content */
+        .ca-body {
           display: grid;
-          grid-template-columns: 1fr 320px;
-          align-items: start;
-          min-height: 80vh;
-        }
-        .udemy-body.minimal {
-          grid-template-columns: 1fr;
+          grid-template-columns: 260px 1fr;
+          flex: 1;
           min-height: 0;
+          overflow: hidden;
         }
 
-        /* Left: main */
-        .udemy-main {
-          padding: 1.25rem 1.5rem;
+        /* Left coach panel */
+        .ca-coach {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
-          border-right: 1px solid #e2e8f0;
-          min-width: 0;
+          background: linear-gradient(180deg, #0f172a 0%, #1e293b 55%, #162032 100%);
+          border-right: 1px solid #1e3a5f;
+          overflow-y: auto;
+          overflow-x: hidden;
         }
-        .udemy-layout.minimal .udemy-main {
-          border-right: none;
-          padding: 0;
-          gap: 0.8rem;
+        .ca-coach-stage {
+          height: 280px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          padding-bottom: 0;
+        }
+        .ca-coach-speech {
+          margin: 0.5rem 0.75rem;
+          background: rgba(255,255,255,0.07);
+          border: 1px solid rgba(255,255,255,0.10);
+          border-radius: 10px;
+          padding: 0.55rem 0.75rem;
+          min-height: 50px;
+          flex-shrink: 0;
+        }
+        .ca-coach-speech p {
+          font-size: 0.80rem;
+          color: #cbd5e1;
+          line-height: 1.45;
+          margin: 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
-        /* Board toolbar */
-        .udemy-board-toolbar {
+        /* Chapter + exercise nav */
+        .ca-coach-nav {
+          flex: 1;
+          padding: 0 0.5rem 1rem;
+          overflow-y: auto;
+        }
+        .ca-nav-label {
+          font-size: 0.66rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #475569;
+          padding: 0.3rem 0.5rem 0.2rem;
+          margin: 0;
+        }
+        .ca-chapter-list { display: flex; flex-direction: column; gap: 1px; }
+        .ca-chapter-item {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-          padding: 0.6rem 0.75rem;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
+          gap: 0.4rem;
+          padding: 0.3rem 0.5rem;
+          border-radius: 6px;
+          cursor: default;
+          transition: background 0.15s;
         }
-        .udemy-speed-row {
+        .ca-chapter-item.active {
+          background: rgba(14,165,233,0.18);
+        }
+        .ca-ch-num {
+          font-size: 0.65rem;
+          color: #475569;
+          font-weight: 700;
+          width: 18px;
+          flex-shrink: 0;
+        }
+        .ca-ch-name {
+          font-size: 0.72rem;
+          color: #64748b;
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .ca-chapter-item.active .ca-ch-name { color: #e2e8f0; font-weight: 600; }
+        .ca-ch-badge {
+          font-size: 0.6rem;
+          font-weight: 700;
+          background: #0ea5e9;
+          color: white;
+          padding: 0.1rem 0.35rem;
+          border-radius: 999px;
+          flex-shrink: 0;
+        }
+
+        .ca-ex-list { display: flex; flex-direction: column; gap: 2px; }
+        .ca-ex-item {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          padding: 0.22rem 0.5rem;
+          border-radius: 5px;
+          font-size: 0.70rem;
+          color: #64748b;
+        }
+        .ca-ex-item.active { background: rgba(255,255,255,0.06); color: #94a3b8; }
+        .ca-ex-dot { width: 14px; flex-shrink: 0; font-size: 0.65rem; }
+        .ca-ex-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ca-ex-grp {
+          font-size: 0.6rem;
+          color: #475569;
+          background: rgba(255,255,255,0.06);
+          padding: 0.05rem 0.3rem;
+          border-radius: 4px;
+          flex-shrink: 0;
+        }
+
+        .ca-mini-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.4rem;
+          margin-top: 0.8rem;
+          padding: 0 0.25rem;
+        }
+        .ca-mini-stat {
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 8px;
+          padding: 0.35rem 0.5rem;
+          display: flex;
+          flex-direction: column;
+        }
+        .ca-mini-stat span { font-size: 0.62rem; color: #475569; }
+        .ca-mini-stat strong { font-size: 0.82rem; color: #94a3b8; font-weight: 700; }
+
+        /* Right content panel */
+        .ca-content {
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          background: white;
+        }
+
+        /* Board */
+        .ca-board {
+          flex: 1;
+          min-height: 0;
+          background: #f8fafc;
+          border-bottom: 1px solid #e2e8f0;
+          overflow: hidden;
+          position: relative;
+        }
+        .ca-board-idle {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          color: #94a3b8;
+          gap: 0.4rem;
+        }
+        .ca-idle-icon { font-size: 2rem; }
+        .ca-idle-text { font-size: 0.9rem; font-weight: 600; color: #64748b; margin: 0; }
+
+        /* Board toolbar */
+        .ca-board-bar {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: #475569;
+          padding: 0.4rem 0.75rem;
+          background: #f8fafc;
+          border-bottom: 1px solid #e2e8f0;
+          flex-shrink: 0;
+          flex-wrap: wrap;
         }
-        .udemy-speed-row input[type="range"] { width: 80px; }
-        .udemy-board-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-        .udemy-board-collapsed {
+        .ca-speed-row {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          gap: 0.6rem;
-          padding: 0.55rem 0.7rem;
-          border: 1px dashed #cbd5e1;
-          border-radius: 10px;
-          background: #f8fafc;
+          gap: 0.3rem;
+          font-size: 0.75rem;
+          color: #475569;
+        }
+        .ca-speed-row input[type="range"] { width: 70px; }
+
+        /* Question zone */
+        .ca-question {
+          padding: 0.9rem 1.25rem 1rem;
+          background: white;
+          overflow-y: auto;
+          flex-shrink: 0;
+          max-height: 46vh;
+          border-top: 2px solid #e2e8f0;
+        }
+        .ca-question.spotlight {
+          background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+          border-top-color: #10b981;
         }
 
-        /* Question card */
-        .udemy-question-card {
-          background: white;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px;
-          padding: 1.1rem 1.25rem;
-        }
-        .udemy-question-card.practice-spotlight {
-          border-color: #93c5fd;
-          box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08);
-        }
+        /* Keep udemy-question-meta / text / feedback / qa-dock classes used inside ca-question */
         .udemy-question-meta {
           display: flex;
           gap: 0.4rem;
@@ -3551,6 +3609,7 @@ function TutorContent() {
           padding: 1rem 1.1rem;
           border-left: 4px solid #cbd5e1;
           background: #f8fafc;
+          margin-top: 0.75rem;
         }
         .udemy-feedback.correct { border-left-color: #059669; background: #ecfdf5; }
         .udemy-feedback.wrong   { border-left-color: #dc2626; background: #fef2f2; }
@@ -3564,6 +3623,7 @@ function TutorContent() {
           border: 1px solid #e2e8f0;
           border-radius: 12px;
           padding: 1rem 1.1rem;
+          margin-top: 0.75rem;
         }
         .udemy-qa-title { margin: 0 0 0.7rem; font-size: 0.95rem; font-weight: 700; color: #1e293b; }
         .udemy-chat-history {
@@ -3610,123 +3670,13 @@ function TutorContent() {
           font-family: inherit;
         }
 
-        /* Right sidebar */
-        .udemy-sidebar {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-          position: sticky;
-          top: 68px;
-          max-height: calc(100vh - 68px);
-          overflow-y: auto;
-          background: #f8fafc;
-        }
-        .udemy-sidebar.minimal {
-          position: static;
-          max-height: none;
-          background: transparent;
-          margin-top: 0.6rem;
-          border-radius: 10px;
-          border: 1px solid #e2e8f0;
-        }
-        .udemy-layout.minimal .udemy-devtools {
-          display: none;
-        }
-        .udemy-sidebar-section { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
-        .udemy-sidebar-title {
-          margin: 0 0 0.65rem;
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: #64748b;
-        }
-
-        /* Chapter list */
-        .udemy-chapter-list {
-          display: flex;
-          flex-direction: column;
-          gap: 0.15rem;
-          max-height: 340px;
-          overflow-y: auto;
-        }
-        .udemy-chapter-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.45rem 0.5rem;
-          border-radius: 6px;
-          border-left: 3px solid transparent;
-          font-size: 0.81rem;
-          color: #475569;
-          line-height: 1.3;
-        }
-        .udemy-chapter-item.active { font-weight: 600; color: #0f172a; }
-        .udemy-chapter-num {
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: #94a3b8;
-          min-width: 20px;
-          flex-shrink: 0;
-        }
-        .udemy-chapter-name { flex: 1; }
-        .udemy-chapter-badge {
-          font-size: 0.62rem;
-          font-weight: 700;
-          color: white;
-          padding: 0.12rem 0.38rem;
-          border-radius: 999px;
-          flex-shrink: 0;
-        }
-
-        /* Exercise list */
-        .udemy-exercise-list { display: flex; flex-direction: column; gap: 0.2rem; }
-        .udemy-ex-item {
-          display: flex;
-          align-items: center;
-          gap: 0.45rem;
-          padding: 0.35rem 0;
-          font-size: 0.81rem;
-          color: #475569;
-          border-bottom: 1px solid #f1f5f9;
-        }
-        .udemy-ex-badge {
-          font-size: 0.7rem;
-          font-weight: 700;
-          background: #e2e8f0;
-          color: #475569;
-          padding: 0.1rem 0.32rem;
-          border-radius: 4px;
-          flex-shrink: 0;
-        }
-        .udemy-ex-subtopic { flex: 1; line-height: 1.35; }
-
-        /* Progress */
-        .udemy-progress-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 0.5rem;
-        }
-        .udemy-stat {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          background: white;
-          border-radius: 8px;
-          border: 1px solid #e2e8f0;
-          padding: 0.5rem 0.3rem;
-          text-align: center;
-          gap: 0.1rem;
-        }
-        .udemy-stat span { font-size: 0.68rem; }
-        .udemy-stat strong { font-size: 1rem; }
-
         /* Developer tools */
         .udemy-devtools {
-          margin: 1rem 1.5rem 1.5rem;
+          margin: 0.5rem 0.75rem 0.75rem;
           border: 1px solid #e2e8f0;
           border-radius: 8px;
           overflow: hidden;
+          flex-shrink: 0;
         }
         .udemy-devtools > summary {
           cursor: pointer;
@@ -3747,19 +3697,14 @@ function TutorContent() {
           gap: 0.75rem;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-          .udemy-body { grid-template-columns: 1fr; }
-          .udemy-sidebar {
-            position: static;
-            max-height: none;
-            border-top: 1px solid #e2e8f0;
-          }
-          .udemy-layout { margin: 0 -1rem; }
-          .udemy-topbar { padding: 0.6rem 1rem; flex-wrap: wrap; }
-          .udemy-main { padding: 1rem; }
-          .udemy-speech-text { display: none; }
-          .udemy-topbar-meta { display: none; }
+        /* Mobile: stack vertically */
+        @media (max-width: 768px) {
+          .ca-body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+          .ca-coach { flex-direction: row; height: 100px; }
+          .ca-coach-stage { height: 100px; width: 80px; }
+          .ca-coach-speech { display: none; }
+          .ca-coach-nav { display: none; }
+          .ca-app { margin: 0 -1rem; }
         }
       `}</style>
     </main>

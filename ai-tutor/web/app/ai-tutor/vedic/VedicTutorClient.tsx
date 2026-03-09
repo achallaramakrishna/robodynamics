@@ -2693,7 +2693,83 @@ function TutorContent() {
           <div className={`udemy-body${minimalDuolingoLayout ? " minimal" : ""}`}>
             {/* Left: learning area */}
             <div className="udemy-main">
-              {/* Question card */}
+              {/* ── Classroom stage: teacher + board (always visible) ─── */}
+              <div className="classroom-stage">
+
+                {/* Teacher on the left */}
+                <div className="stage-teacher">
+                  <SpeakingTeacher
+                    avatar={activeAvatar}
+                    cue={currentCue}
+                    speaking={isSpeaking}
+                    feedback={check?.correct}
+                  />
+                </div>
+
+                {/* Whiteboard on the right */}
+                <div className="stage-board">
+                  {showBoardPanel ? (
+                    <>
+                      <AnimatedBoard
+                        steps={boardSteps}
+                        runId={boardRunId}
+                        showPrompt={isTeachingBoard}
+                      />
+                      <div className="udemy-board-toolbar">
+                        <div className="udemy-speed-row">
+                          <label htmlFor="boardSpeedU">Speed: {boardSpeed.toFixed(1)}x</label>
+                          <input
+                            id="boardSpeedU"
+                            type="range"
+                            min={0.7}
+                            max={1.5}
+                            step={0.1}
+                            value={boardSpeed}
+                            onChange={(e) => setBoardSpeed(Number(e.target.value))}
+                          />
+                        </div>
+                        <div className="udemy-board-btns">
+                          <button className="button" type="button" onClick={() => void teachOnBoard()} disabled={isTeachingBoard || isSpeaking}>
+                            Teach on Board
+                          </button>
+                          <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
+                            Speak Question
+                          </button>
+                          <button className="button secondary" type="button" onClick={clearBoard}>
+                            Clear Board
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    /* Idle board state — shows prompt and "teach" button */
+                    <div className="stage-board-idle">
+                      {awaitingStudentResponse ? (
+                        <>
+                          <span className="stage-idle-icon">✏️</span>
+                          <p className="stage-idle-text">Answer the question below!</p>
+                        </>
+                      ) : (
+                        <>
+                          <span className="stage-idle-icon">📋</span>
+                          <p className="stage-idle-text">Board ready for lesson</p>
+                        </>
+                      )}
+                      <button
+                        className="button"
+                        type="button"
+                        onClick={() => void teachOnBoard()}
+                        disabled={isTeachingBoard || isSpeaking}
+                        style={{ marginTop: "0.75rem" }}
+                      >
+                        ▶ Teach on Board
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* ── Question & answer zone (below stage) ────────────────── */}
               {showExercisePanel ? (
               <div className={`udemy-question-card${awaitingStudentResponse ? " practice-spotlight" : ""}`}>
                 <div className="udemy-question-meta">
@@ -2756,9 +2832,6 @@ function TutorContent() {
                   >
                     {micPermission === "denied" ? "Mic Blocked" : isListening ? "Listening\u2026" : "Speak Answer"}
                   </button>
-                  <button className="button secondary" type="button" onClick={() => void teachOnBoard()} disabled={isTeachingBoard || isSpeaking}>
-                    Board Demo
-                  </button>
                   {isListening ? (
                     <button
                       className="button secondary"
@@ -2774,65 +2847,7 @@ function TutorContent() {
                   ) : null}
                   <button className="button secondary" onClick={nextQuestion}>Next ➜</button>
                 </div>
-                {awaitingStudentResponse && !check ? (
-                  <div className="panel student-next-step" style={{ marginTop: "0.75rem" }}>
-                    <p style={{ marginTop: 0, marginBottom: "0.25rem" }}><strong>Your turn now</strong></p>
-                    <p className="muted" style={{ margin: 0 }}>
-                      Type or speak your answer, then click Check Answer.
-                    </p>
-                  </div>
-                ) : null}
               </div>
-              ) : null}
-
-              {showBoardPanel ? (
-                <div className="board-with-teacher">
-                  <div className="board-canvas-wrap">
-                    {/* Animated whiteboard */}
-                    <AnimatedBoard
-                      steps={boardSteps}
-                      runId={boardRunId}
-                      showPrompt={isTeachingBoard}
-                    />
-
-                    {/* Board toolbar */}
-                    <div className="udemy-board-toolbar">
-                      <div className="udemy-speed-row">
-                        <label htmlFor="boardSpeedU">Speed: {boardSpeed.toFixed(1)}x</label>
-                        <input
-                          id="boardSpeedU"
-                          type="range"
-                          min={0.7}
-                          max={1.5}
-                          step={0.1}
-                          value={boardSpeed}
-                          onChange={(e) => setBoardSpeed(Number(e.target.value))}
-                        />
-                      </div>
-                      <div className="udemy-board-btns">
-                        <button className="button" type="button" onClick={teachOnBoard} disabled={isTeachingBoard || isSpeaking}>
-                          Teach on Board
-                        </button>
-                        <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
-                          Speak Question
-                        </button>
-                        <button className="button secondary" type="button" onClick={clearBoard}>
-                          Clear Board
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* SpeakingTeacher alongside the board */}
-                  <div className="board-teacher-panel">
-                    <SpeakingTeacher
-                      avatar={activeAvatar}
-                      cue={currentCue}
-                      speaking={isSpeaking}
-                      feedback={check?.correct}
-                    />
-                  </div>
-                </div>
               ) : null}
 
               {/* Feedback */}
@@ -3392,22 +3407,44 @@ function TutorContent() {
           user-select: none;
           border: 2px solid rgba(255,255,255,0.25);
         }
-        .board-with-teacher {
-          display: flex;
-          align-items: flex-start;
+        /* ── Classroom stage: teacher left, board right ────────── */
+        .classroom-stage {
+          display: grid;
+          grid-template-columns: 140px 1fr;
           gap: 12px;
+          align-items: stretch;
+          background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
+          border-radius: 16px;
+          padding: 14px 14px 10px;
         }
-        .board-canvas-wrap {
-          flex: 1;
-          min-width: 0;
-        }
-        .board-teacher-panel {
-          flex-shrink: 0;
-          width: 160px;
+        .stage-teacher {
           display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          min-height: 220px;
+          padding-bottom: 4px;
+        }
+        .stage-board {
+          background: #f8fafc;
+          border-radius: 10px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        }
+        /* Idle board (no active teaching steps) */
+        .stage-board-idle {
+          display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
+          flex: 1;
+          min-height: 180px;
+          color: #475569;
+          text-align: center;
+          padding: 1.5rem 1rem;
         }
+        .stage-idle-icon { font-size: 2.2rem; display: block; margin-bottom: 0.3rem; }
+        .stage-idle-text { font-size: 0.95rem; font-weight: 600; color: #334155; margin: 0; }
         .udemy-topbar-speech { flex: 1; min-width: 0; }
         .udemy-avatar-name {
           font-size: 0.75rem;

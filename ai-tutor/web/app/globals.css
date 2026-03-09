@@ -332,18 +332,20 @@ pre {
   margin: 0 0 1.2rem;
 }
 
-/* 5 avatar columns in quickstart context */
-.tutor-quickstart .avatar-selector-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin-bottom: 0;
-}
 
 .tutor-qs-stage {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 180px;
+  height: 240px;      /* taller so Raj sprite is prominent */
   margin: 0.8rem 0 0;
+}
+
+.tutor-qs-tagline {
+  font-size: 1rem;
+  color: #475569;
+  margin: 0.55rem 0 0;
+  text-align: center;
 }
 
 .tutor-qs-actions {

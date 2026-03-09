@@ -128,19 +128,11 @@ function toAssetUrl(raw: string): string {
 }
 
 const AVATARS: Avatar[] = [
-  { id: "arya", name: "Arya", role: "Calm Mentor",      color: "#0ea5e9", style: "girl" },
-  { id: "ved",  name: "Ved",  role: "Fast Coach",       color: "#22c55e", style: "boy"  },
-  { id: "tara", name: "Tara", role: "Friendly Teacher", color: "#f97316", style: "girl" },
-  { id: "niva", name: "Niva", role: "Patient Guide",    color: "#6366f1", style: "boy"  },
   { id: "raj",  name: "Raj",  role: "Expert Coach",     color: "#dc2626", style: "male" }
 ];
 
 const AVATAR_STAGE_ART: Record<string, string> = {
-  arya: "/ai-tutor/avatars/5.svg",
-  ved:  "/ai-tutor/avatars/3.svg",
-  tara: "/ai-tutor/avatars/4.svg",
-  niva: "/ai-tutor/avatars/5.svg",
-  raj:  "/avatar_1/sprite_r03_c01.svg"   // male teacher face/body for stage
+  raj: "/avatar_1/sprite_r03_c01.svg"
 };
 
 const BOARD_TEACHER_SVG_BY_CUE: Record<string, string> = {
@@ -2592,41 +2584,13 @@ function TutorContent() {
 
   return (
     <main className={`container tutor-shell${status === "ready" ? " tutor-shell-live" : ""}`}>
-      {/* ── Quick-start screen: choose teacher → start (no clutter) ── */}
+      {/* ── Quick-start screen: Raj intro → start ───────────────── */}
       <section className={`panel tutor-setup-panel${status === "ready" ? " tutor-setup-panel-live" : ""}`}>
         <div className="tutor-quickstart">
           <p className="tutor-qs-label">{courseLabel} · AI Tutor</p>
-          <h2 className="tutor-qs-title">Choose Your Teacher</h2>
+          <h2 className="tutor-qs-title">Meet Raj, Your AI Tutor</h2>
 
-          {/* Avatar picker */}
-          <div className="avatar-selector-grid">
-            {AVATARS.map((avatar) => (
-              <button
-                key={avatar.id}
-                type="button"
-                onClick={() => {
-                  unlockAudio();
-                  setSelectedAvatarId(avatar.id);
-                  void speak(`Hi! I am ${avatar.name}, your ${avatar.role}. Let's learn together!`);
-                }}
-                className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
-                style={{
-                  borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
-                  ["--avatar-color" as any]: avatar.color
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-                  <AvatarFace avatar={avatar} size={42} />
-                  <div>
-                    <div style={{ fontWeight: 700, color: avatar.color }}>{avatar.name}</div>
-                    <div className="muted" style={{ fontSize: "0.85rem" }}>{avatar.role}</div>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Selected teacher preview */}
+          {/* Raj teacher sprite — big and centred */}
           <div className="tutor-qs-stage">
             <SpeakingTeacher
               avatar={activeAvatar}
@@ -2636,14 +2600,18 @@ function TutorContent() {
             />
           </div>
 
+          <p className="tutor-qs-tagline">
+            I&apos;ll teach on the board, then ask you to answer. Ready?
+          </p>
+
           {/* Start button */}
           <div className="tutor-qs-actions">
             <button
               className="button tutor-qs-btn"
-              onClick={startSession}
+              onClick={() => { unlockAudio(); void startSession(); }}
               disabled={!canStart || status === "loading"}
             >
-              {status === "loading" ? "Starting…" : sessionId ? "Restart Session" : `Start Learning with ${activeAvatar.name} →`}
+              {status === "loading" ? "Starting…" : sessionId ? "Restart Session" : "Start Learning →"}
             </button>
             {!canStart && (
               <p className="muted" style={{ fontSize: "0.85rem", marginTop: "0.5rem", textAlign: "center" }}>

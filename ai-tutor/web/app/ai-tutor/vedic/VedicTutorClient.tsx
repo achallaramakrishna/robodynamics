@@ -347,6 +347,18 @@ function SpeakingTeacher({
 }) {
   const [visemeIdx, setVisemeIdx] = useState(0);
   const [showBlink, setShowBlink] = useState(false);
+  // Sprite-cycle index for male teacher speaking animation (0–3)
+  const [speakFrame, setSpeakFrame] = useState(0);
+
+  // Male teacher gesture cycling: swap pose every 2.5 s while speaking
+  useEffect(() => {
+    if (avatar.style !== "male" || !speaking) { setSpeakFrame(0); return; }
+    const tid = setInterval(
+      () => setSpeakFrame(f => (f + 1) % MALE_TEACHER_SPEAKING_CYCLE.length),
+      2500
+    );
+    return () => clearInterval(tid);
+  }, [speaking, avatar.style]);
 
   // Viseme cycling when speaking (~110 ms per shape = ~9 fps) — SVG teacher_1 only
   useEffect(() => {
@@ -372,13 +384,18 @@ function SpeakingTeacher({
     return () => clearTimeout(t);
   }, []);
 
-  // ── Male teacher: static sprite + CSS speaking rhythm (no gesture cycling) ──
+  // ── Male teacher: cycling sprite gesture + CSS speaking rhythm ──────────────
   if (avatar.style === "male") {
     const cueKey = (cue || "").toLowerCase();
-    const src =
-      feedback === true  ? "/avatar_1/sprite_r03_c06.svg"
-      : feedback === false ? "/avatar_1/sprite_r05_c05.svg"
+    // Cue/feedback-based sprite (shown when idle, or when feedback overrides)
+    const cueSrc =
+      feedback === true  ? "/avatar_1/sprite_r03_c06.svg"   // happy wave — correct!
+      : feedback === false ? "/avatar_1/sprite_r05_c05.svg"  // concerned — wrong answer
       : (MALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? MALE_TEACHER_SPRITE_BY_CUE.default);
+    // While speaking (no feedback override) → cycle through 4 gesture sprites
+    const activeSrc = (speaking && feedback == null)
+      ? MALE_TEACHER_SPEAKING_CYCLE[speakFrame]
+      : cueSrc;
     return (
       <div
         className={`speaking-teacher male-teacher${speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
@@ -386,8 +403,9 @@ function SpeakingTeacher({
         aria-label={`${avatar.name} teacher avatar`}
       >
         <div className="teacher-glow" aria-hidden="true" />
+        {/* key changes when sprite changes → triggers spriteFadeIn CSS animation */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={avatar.name} className="male-teacher-sprite" draggable={false} />
+        <img key={activeSrc} src={activeSrc} alt={avatar.name} className="male-teacher-sprite" draggable={false} />
       </div>
     );
   }
@@ -3344,6 +3362,10 @@ function TutorContent() {
           width: 70px;
           height: 80px;
         }
+        @keyframes spriteFadeIn {
+          from { opacity: 0; transform: scale(0.96); }
+          to   { opacity: 1; transform: scale(1); }
+        }
         .male-teacher-sprite {
           width: 100%;
           height: 100%;
@@ -3351,6 +3373,7 @@ function TutorContent() {
           filter: drop-shadow(0 8px 14px rgba(15,23,42,0.20));
           z-index: 2;
           position: relative;
+          animation: spriteFadeIn 0.45s ease;
         }
         /* Gentle float when idle */
         .speaking-teacher.male-teacher:not(.speaking) {

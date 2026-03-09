@@ -166,12 +166,21 @@ class CourseTemplateRuleEngine:
         self._load(force=False)
         return self._lessons[self.normalize_chapter(chapter_code)]
 
-    def next_question(self, chapter_code: str | None, exercise_group: str | None, grade: str | None = None) -> Dict[str, Any]:
+    def next_question(self, chapter_code: str | None, exercise_group: str | None, grade: str | None = None, exclude_question_id: str | None = None) -> Dict[str, Any]:
         code = self.normalize_chapter(chapter_code)
         group = self.normalize_exercise_group(exercise_group)
         pool = self._question_pool.get(code, [])
         if pool:
-            chosen = dict(self._rng.choice(pool))
+            # Filter to the requested exercise group only
+            group_pool = [q for q in pool if q.get("exerciseGroup") == group]
+            if not group_pool:
+                group_pool = pool  # fallback if group has no questions
+            # Exclude last-asked question to prevent immediate repeats
+            if exclude_question_id and len(group_pool) > 1:
+                filtered = [q for q in group_pool if q.get("questionId") != exclude_question_id]
+                if filtered:
+                    group_pool = filtered
+            chosen = dict(self._rng.choice(group_pool))
         else:
             chosen = {
                 "questionId": str(uuid.uuid4()),

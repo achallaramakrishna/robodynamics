@@ -224,7 +224,9 @@ async def next_question(payload: NextQuestionRequest, x_ai_tutor_key: str | None
     if requested_group != session.exercise_group:
         session = session_store.set_exercise_group(payload.sessionId, requested_group)
 
-    question = engine.next_question(session.chapter_code, session.exercise_group, session.grade)
+    # Pass current question ID to avoid immediate repeat
+    last_question_id = session.current_question.get("questionId") if session.current_question else None
+    question = engine.next_question(session.chapter_code, session.exercise_group, session.grade, exclude_question_id=last_question_id)
     session_store.set_question(payload.sessionId, question)
     lesson = engine.lesson(session.chapter_code)
     session_progress = session_store.lesson_progress(

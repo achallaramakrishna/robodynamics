@@ -191,12 +191,13 @@ const MALE_TEACHER_SPRITE_BY_CUE: Record<string, string> = {
   default:    "/avatar_1/sprite_r01_c11.svg",  // relaxed open-arms pose
 };
 
-// Sprites cycled while speaking (mouth-open variants for lip-sync feel)
+// Sprites cycled while speaking — slow gesture changes (2.5 s each), crossfaded smoothly.
+// Pick poses that feel "engaged explaining" — not wildly different so crossfade looks natural.
 const MALE_TEACHER_SPEAKING_CYCLE = [
-  "/avatar_1/sprite_r02_c01.svg",   // arms out
-  "/avatar_1/sprite_r04_c01.svg",   // hands raised
-  "/avatar_1/sprite_r01_c11.svg",   // open arms
-  "/avatar_1/sprite_r04_c01.svg",
+  "/avatar_1/sprite_r01_c11.svg",  // open arms — neutral engaging
+  "/avatar_1/sprite_r02_c01.svg",  // arms spread — enthusiastic
+  "/avatar_1/sprite_r03_c05.svg",  // pointing/guiding — confident
+  "/avatar_1/sprite_r04_c04.svg",  // hands together — thoughtful
 ];
 
 function boardTeacherSvgForCue(cue?: string): string {
@@ -346,8 +347,6 @@ function SpeakingTeacher({
 }) {
   const [visemeIdx, setVisemeIdx] = useState(0);
   const [showBlink, setShowBlink] = useState(false);
-  // Separate slower index for male full-body sprite cycling (500 ms per pose)
-  const [malePoseIdx, setMalePoseIdx] = useState(0);
 
   // Viseme cycling when speaking (~110 ms per shape = ~9 fps) — SVG teacher_1 only
   useEffect(() => {
@@ -355,16 +354,6 @@ function SpeakingTeacher({
     const tid = setInterval(
       () => setVisemeIdx(i => (i + 1) % VISEME_CYCLE_SRCS.length),
       110
-    );
-    return () => clearInterval(tid);
-  }, [speaking, avatar.style]);
-
-  // Male teacher pose cycling when speaking (500 ms per pose — smooth, no flicker)
-  useEffect(() => {
-    if (avatar.style !== "male" || !speaking) { setMalePoseIdx(0); return; }
-    const tid = setInterval(
-      () => setMalePoseIdx(i => (i + 1) % MALE_TEACHER_SPEAKING_CYCLE.length),
-      500
     );
     return () => clearInterval(tid);
   }, [speaking, avatar.style]);
@@ -383,35 +372,22 @@ function SpeakingTeacher({
     return () => clearTimeout(t);
   }, []);
 
-  // ── Male teacher: single full-body SVG per cue ─────────────────────────
+  // ── Male teacher: static sprite + CSS speaking rhythm (no gesture cycling) ──
   if (avatar.style === "male") {
     const cueKey = (cue || "").toLowerCase();
-    const maleSpriteSrc = speaking
-      ? MALE_TEACHER_SPEAKING_CYCLE[malePoseIdx]
-      : (MALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? MALE_TEACHER_SPRITE_BY_CUE.default);
-    const feedbackSrc =
+    const src =
       feedback === true  ? "/avatar_1/sprite_r03_c06.svg"
       : feedback === false ? "/avatar_1/sprite_r05_c05.svg"
-      : null;
-    const activeSrc = feedbackSrc ?? maleSpriteSrc;
+      : (MALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? MALE_TEACHER_SPRITE_BY_CUE.default);
     return (
       <div
         className={`speaking-teacher male-teacher${speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
         style={{ ["--teacher-accent" as any]: avatar.color }}
         aria-label={`${avatar.name} teacher avatar`}
       >
-        {/* Preload speaking cycle SVGs to prevent flicker on first cycle */}
-        <div style={{ display: "none" }} aria-hidden="true">
-          {MALE_TEACHER_SPEAKING_CYCLE.map(src => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={src} src={src} alt="" />
-          ))}
-        </div>
         <div className="teacher-glow" aria-hidden="true" />
-        {/* NO key prop — keep the same DOM element, just swap src in-place */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={activeSrc} alt={avatar.name}
-             className="male-teacher-sprite" draggable={false} />
+        <img src={src} alt={avatar.name} className="male-teacher-sprite" draggable={false} />
       </div>
     );
   }
@@ -894,8 +870,10 @@ function TutorContent() {
   const listenTimerRef = useRef<number | null>(null);
   const speechRecognitionRef = useRef<any>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUnlockedRef = useRef(false);
   const speakSeqRef = useRef(0);
   const teachRunRef = useRef(0);
+  const teachingLockRef = useRef(false);   // ref-based lock so teachOnBoard guard is never stale
   const kickoffRunningRef = useRef(false);
   const lastKickoffTokenRef = useRef("");
   const autoListenQuestionRef = useRef("");
@@ -1049,8 +1027,9 @@ function TutorContent() {
 
     return ordered.length ? ordered : selected;
   }, [lessonScreenplay, question, activeAttempt, confidence, screenplayMode]);
-  const showExercisePanel = useMemo(() => !isTeachingBoard, [isTeachingBoard]);
-  const showBoardPanel = useMemo(() => isTeachingBoard, [isTeachingBoard]);
+  // Always show both panels: board above for teaching, question card below for answering
+  const showExercisePanel = true;
+  const showBoardPanel = useMemo(() => boardSteps.length > 0, [boardSteps]);
 
   const stageStatusText = useMemo(() => {
     if (isTeachingBoard) return "Teaching on whiteboard...";
@@ -1361,7 +1340,10 @@ function TutorContent() {
   }, [awaitingStudentResponse, isListening]);
 
   async function speak(text: string): Promise<void> {
-    const line = (text || "").trim();
+    // Resolve {{studentName}} template placeholder left in chapter JSON content
+    const line = (text || "")
+      .replace(/\{\{studentName\}\}/g, (studentName || "").trim() || "friend")
+      .trim();
     if (!line) {
       setIsSpeaking(false);
       return;
@@ -1847,6 +1829,7 @@ function TutorContent() {
 
   function clearBoard() {
     teachRunRef.current += 1;
+    teachingLockRef.current = false;   // release lock so teachOnBoard can run after clearBoard
     setBoardSteps([]);
     setBoardRunId((v) => v + 1);
     if (boardTimerRef.current) {
@@ -1882,7 +1865,9 @@ function TutorContent() {
   }
 
   async function teachOnBoard() {
-    if (!question || isTeachingBoard) return;
+    // Use ref-based lock to avoid stale-closure false-positives from React async state
+    if (!question || teachingLockRef.current) return;
+    teachingLockRef.current = true;
     void sendOrchestratorCommand("START_LOOP", {
       trigger: "teach_on_board",
       questionId: question.questionId,
@@ -1947,6 +1932,7 @@ function TutorContent() {
             checkpointPrompt: beat.checkpointPrompt,
             expectedStudentResponse: beat.expectedStudentResponse,
           });
+          teachingLockRef.current = false;
           setIsTeachingBoard(false);
           setAwaitingStudentResponse(true);
           return;
@@ -1955,6 +1941,7 @@ function TutorContent() {
       void sendOrchestratorCommand("BOARD_COMPLETE", {
         reason: "screenplay_completed_without_explicit_checkpoint",
       });
+      teachingLockRef.current = false;
       setIsTeachingBoard(false);
       setAwaitingStudentResponse(true);
       return;
@@ -1974,6 +1961,7 @@ function TutorContent() {
     ]);
     if (runId !== teachRunRef.current) return;
 
+    teachingLockRef.current = false;
     setIsTeachingBoard(false);
     void sendOrchestratorCommand("BOARD_COMPLETE", {
       reason: "fallback_board_complete",
@@ -2092,7 +2080,30 @@ function TutorContent() {
     recog.start();
   }
 
+  // Unlock browser audio context on first user gesture — must happen synchronously
+  // before any async call, otherwise autoplay is blocked on mobile/strict browsers.
+  function unlockAudio() {
+    if (audioUnlockedRef.current || typeof window === "undefined") return;
+    audioUnlockedRef.current = true;
+    try {
+      const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx() as AudioContext;
+        const buf = ctx.createBuffer(1, 1, 22050);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        src.connect(ctx.destination);
+        src.start(0);
+        void ctx.resume();
+      }
+      // Also prime HTMLAudioElement path with a silent data URL
+      const sil = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=");
+      void sil.play().catch(() => {});
+    } catch { /* ignore */ }
+  }
+
   async function startSession() {
+    unlockAudio();
     setStatus("loading");
     setError("");
     setCheck(null);
@@ -2729,7 +2740,11 @@ function TutorContent() {
                 <button
                   key={avatar.id}
                   type="button"
-                  onClick={() => setSelectedAvatarId(avatar.id)}
+                  onClick={() => {
+                    unlockAudio();   // must be synchronous in click handler
+                    setSelectedAvatarId(avatar.id);
+                    void speak(`Hi! I am ${avatar.name}, your ${avatar.role}. Let's learn together!`);
+                  }}
                   className={`avatar-choice${selectedAvatarId === avatar.id ? " active" : ""}`}
                   style={{
                     borderColor: selectedAvatarId === avatar.id ? avatar.color : "#cbd5e1",
@@ -3034,11 +3049,12 @@ function TutorContent() {
                             : { opacity: 0.66 }
                       }
                     >
-                      <span className="udemy-ex-badge">{item.exerciseGroup}</span>
+                      {/* Subtopic is primary; exercise letter badge is a small secondary indicator */}
                       <span className="udemy-ex-subtopic">
+                        {item.status === "completed" ? "✓ " : item.status === "locked" ? "🔒 " : ""}
                         {item.subtopic}
-                        {item.status === "completed" ? "  ✓" : item.status === "locked" ? "  🔒" : ""}
                       </span>
+                      <span className="udemy-ex-badge" style={{ fontSize: "0.65rem", opacity: 0.45, marginLeft: "auto", flexShrink: 0 }}>{item.exerciseGroup}</span>
                     </div>
                   ))}
                 </div>
@@ -3316,7 +3332,7 @@ function TutorContent() {
         .speaking-teacher.compact {
           width: 80px;
         }
-        /* ── Male teacher (PNG sprites) ────────────────────────────────── */
+        /* ── Male teacher (static sprite + CSS animation) ──────────────── */
         .speaking-teacher.male-teacher {
           aspect-ratio: unset;
           width: min(100%, 200px);
@@ -3329,26 +3345,27 @@ function TutorContent() {
           height: 80px;
         }
         .male-teacher-sprite {
-          position: relative;
-          z-index: 2;
           width: 100%;
           height: 100%;
           object-fit: contain;
           filter: drop-shadow(0 8px 14px rgba(15,23,42,0.20));
-          /* No opacity transition here — src swap is instant once preloaded */
+          z-index: 2;
+          position: relative;
         }
-        /* Gentle breathing float for idle state */
+        /* Gentle float when idle */
         .speaking-teacher.male-teacher:not(.speaking) {
           animation: avatarFloat 3s ease-in-out infinite;
         }
-        /* Subtle bob when speaking — CSS handles movement, src swap handles pose */
+        /* Speaking rhythm: subtle body energy — no gesture changes, CSS does all the work */
         .speaking-teacher.male-teacher.speaking {
-          animation: maleTeacherTalk 0.5s ease-in-out infinite;
+          animation: maleSpeak 0.42s ease-in-out infinite;
+          transform-origin: 50% 30%;
         }
-        @keyframes maleTeacherTalk {
-          0%, 100% { transform: translateY(0) scale(1); }
-          30%       { transform: translateY(-4px) scale(1.02); }
-          70%       { transform: translateY(2px) scale(0.99); }
+        @keyframes maleSpeak {
+          0%, 100% { transform: translateY(0)     scaleY(1); }
+          22%       { transform: translateY(-3px)  scaleY(1.012); }
+          55%       { transform: translateY(0.5px) scaleY(0.997); }
+          78%       { transform: translateY(-2px)  scaleY(1.007); }
         }
         .teacher-glow {
           position: absolute;

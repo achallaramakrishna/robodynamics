@@ -100,6 +100,7 @@ class CourseTemplateRuleEngine:
                 "exerciseFlow": exercise_flow,
                 "teachingScript": teaching_script,
                 "screenplay": screenplay,
+                "duolingoLessonArc": chapter_script.get("duolingoLessonArc") if isinstance(chapter_script.get("duolingoLessonArc"), dict) else None,
                 "coreIdeas": [
                     "Start with concept clarity.",
                     "Practice with active recall.",

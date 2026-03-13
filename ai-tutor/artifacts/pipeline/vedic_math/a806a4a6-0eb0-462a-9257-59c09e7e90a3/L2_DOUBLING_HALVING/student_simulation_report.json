@@ -1,0 +1,48 @@
+{
+  "artifactType": "student_simulation_report",
+  "generatedAt": "2026-03-10T01:53:06.382Z",
+  "simulationMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L2_DOUBLING_HALVING",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/chapter_lesson_plan.json",
+  "learnerProfile": {
+    "gradeBand": "5-8",
+    "confidence": "medium",
+    "pace": "average",
+    "weaknesses": [
+      "mental subtraction",
+      "multi-step attention"
+    ],
+    "languageComfort": "english"
+  },
+  "status": "simulated",
+  "stuckMoments": [
+    "No major stall was predicted in the local simulation."
+  ],
+  "repetitionRisks": [],
+  "hintEffectiveness": [
+    {
+      "hint": "Split: 10×2=20, 4×2=8, then add.",
+      "helped": true
+    },
+    {
+      "hint": "30×2=60, 7×2=14, then add.",
+      "helped": true
+    },
+    {
+      "hint": "100×2=200, 80×2=160, 6×2=12 — add all.",
+      "helped": true
+    },
+    {
+      "hint": "12 → 24 → ?",
+      "helped": true
+    },
+    {
+      "hint": "23 → 46 → ?",
+      "helped": true
+    }
+  ],
+  "recommendedFixes": [
+    "Run the lesson with a lower-confidence learner profile next."
+  ]
+}

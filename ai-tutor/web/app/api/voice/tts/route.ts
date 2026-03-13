@@ -3,8 +3,11 @@ import { getSpeakerForAvatar } from "@/lib/avatarVoices";
 
 const SARVAM_TTS_URL = process.env.SARVAM_TTS_URL || "https://api.sarvam.ai/text-to-speech";
 const SARVAM_API_KEY = process.env.SARVAM_API_KEY || "";
-const SARVAM_DEFAULT_MODEL = process.env.SARVAM_TTS_MODEL || "bulbul:v3";
+// bulbul:v2 is Sarvam's most reliable model for Indian English — warm, clear voices
+const SARVAM_DEFAULT_MODEL = process.env.SARVAM_TTS_MODEL || "bulbul:v2";
 const SARVAM_DEFAULT_LANGUAGE_CODE = process.env.SARVAM_DEFAULT_LANGUAGE_CODE || "en-IN";
+// 1.0 = natural pace; feels lively and engaging for Grade 4-8 students
+const SARVAM_DEFAULT_PACE = Number(process.env.SARVAM_DEFAULT_TTS_PACE || "1.0");
 
 type TtsRequest = {
   text?: string;
@@ -28,7 +31,7 @@ export async function POST(request: NextRequest) {
     const speaker = getSpeakerForAvatar(body.avatarId);
     const pace = typeof body.pace === "number" && Number.isFinite(body.pace)
       ? Math.min(1.6, Math.max(0.6, body.pace))
-      : 1.0;
+      : Math.min(1.6, Math.max(0.6, SARVAM_DEFAULT_PACE));
 
     const payload = {
       text: text.slice(0, 1400),
@@ -91,4 +94,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

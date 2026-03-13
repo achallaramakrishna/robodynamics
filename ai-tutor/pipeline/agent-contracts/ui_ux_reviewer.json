@@ -1,0 +1,15 @@
+{
+  "agentId": "ui_ux_reviewer",
+  "implementationType": "artifact_heuristic_reviewer",
+  "purpose": "Review learner-flow friction, accessibility risks, and engagement issues from lesson artifacts and optional UI snapshots.",
+  "inputs": [
+    "courseId",
+    "chapterCode",
+    "lessonPlanPath",
+    "uiSnapshotPaths",
+    "uiStateDumpPath"
+  ],
+  "outputs": [
+    "ui_ux_review_report.json"
+  ]
+}

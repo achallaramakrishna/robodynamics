@@ -1,0 +1,14 @@
+{
+  "agentId": "student_simulator",
+  "implementationType": "heuristic_local_simulator",
+  "purpose": "Predict likely stuck moments, repetition risks, and hint usefulness for a representative learner profile.",
+  "inputs": [
+    "courseId",
+    "chapterCode",
+    "lessonPlanPath",
+    "learnerProfile"
+  ],
+  "outputs": [
+    "student_simulation_report.json"
+  ]
+}

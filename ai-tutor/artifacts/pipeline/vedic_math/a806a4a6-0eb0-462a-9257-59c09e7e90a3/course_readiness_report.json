@@ -1,0 +1,216 @@
+{
+  "artifactType": "course_readiness_report",
+  "generatedAt": "2026-03-10T01:53:12.631Z",
+  "courseId": "vedic_math",
+  "totalChapters": 16,
+  "deterministicReadyCount": 3,
+  "publishApprovalCount": 0,
+  "blockedCount": 13,
+  "averageDeterministicScore": 72.16,
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L2_DOUBLING_HALVING",
+      "title": "Lesson 2: Doubling and Halving",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L3_MULTIPLY_BY_11",
+      "title": "Lesson 3: Digit Sums and the Nine Point Circle",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L4_VERTICAL_CROSSWISE",
+      "title": "Lesson 4: Left to Right Arithmetic",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L5_ALL_FROM_9_LAST_FROM_10",
+      "title": "Lesson 5: All from 9 and Last from 10",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L6_NIKHILAM_BASE_10_100",
+      "title": "Lesson 6: Number Splitting",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L7_SQUARES_ENDING_5",
+      "title": "Lesson 7: Base Multiplication",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 70.67
+      }
+    },
+    {
+      "chapterCode": "L8_YAVADUNAM",
+      "title": "Lesson 8: Checking and Divisibility",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L9_GENERAL_MULTIPLICATION",
+      "title": "Lesson 9: Bar Numbers",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L10_DIVISION_BY_9",
+      "title": "Lesson 10: Special Multiplication",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L11_VINCULUM_INTRO",
+      "title": "Lesson 11: General Multiplication",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L12_FRACTIONS_DECIMALS",
+      "title": "Lesson 12: Squaring",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L13_ALGEBRAIC_IDENTITIES",
+      "title": "Lesson 13: One-Line Equations",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L14_FACTORISATION",
+      "title": "Lesson 14: Fractions",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L15_SQUARES_NEAR_BASE",
+      "title": "Lesson 15: Special Division",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L16_CUBES_INTRO",
+      "title": "Lesson 16: The Crowning Gem (Advanced Division)",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    }
+  ],
+  "runDbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "MySQL unavailable"
+  }
+}

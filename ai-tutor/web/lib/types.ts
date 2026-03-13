@@ -20,6 +20,7 @@ export type TutorStartResponse = {
     exerciseFlow: Array<{ exerciseGroup: string; subtopic: string }>;
     teachingScript: TutorTeachingStep[];
     screenplay: TutorScreenplayBeat[];
+    duolingoLessonArc?: TutorDuolingoLessonArc;
     coreIdeas: string[];
     workedExamples: Array<{ question: string; method: string; answer: string }>;
     starterPractice: string[];
@@ -34,6 +35,59 @@ export type TutorAssetItem = {
   topic: string;
   file: string;
   url: string;
+};
+
+export type TutorDuolingoLessonStep = {
+  exerciseGroup: string;
+  subtopic: string;
+  missionStepTitle: string;
+  coachHook: string;
+  boardDemo: string;
+  readAloudPrompt: string;
+  tryPrompt: string;
+  masteryCheck: string;
+  instantFeedbackWin: string;
+  instantFeedbackRetry: string;
+  reviewPrompt: string;
+  xpReward: number;
+  badgeFocus: string;
+};
+
+export type TutorDuolingoLessonArc = {
+  version: string;
+  onboarding: {
+    askLearnerName: boolean;
+    knownLanguageOptions: string[];
+    learnerLevelOptions: string[];
+    goalOptions: string[];
+    coachIntro: string;
+    placementRule: string;
+  };
+  mission: {
+    missionTitle: string;
+    missionPromise: string;
+    successCelebration: string;
+  };
+  microLessonPattern: string[];
+  rewardLoop: {
+    xpUnit: string;
+    streakRule: string;
+    badgeRule: string;
+    celebrationStyle: string;
+  };
+  reviewLoop: {
+    trigger: string;
+    practiceStyle: string;
+    masteryRule: string;
+    revisitRule: string;
+  };
+  uiDirectives: {
+    layout: string;
+    primaryFocus: string;
+    secondaryPanels: string[];
+    noScrollGoal: string;
+  };
+  sessionFlow: TutorDuolingoLessonStep[];
 };
 
 export type TutorQuestion = {
@@ -182,6 +236,7 @@ export type TutorNextQuestionResponse = {
     exerciseFlow: Array<{ exerciseGroup: string; subtopic: string }>;
     teachingScript: TutorTeachingStep[];
     screenplay: TutorScreenplayBeat[];
+    duolingoLessonArc?: TutorDuolingoLessonArc;
     coreIdeas: string[];
     workedExamples: Array<{ question: string; method: string; answer: string }>;
     starterPractice: string[];

@@ -1,0 +1,77 @@
+{
+  "artifactType": "deterministic_validation_report",
+  "generatedAt": "2026-03-10T01:53:10.460Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L12_FRACTIONS_DECIMALS",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/chapter_lesson_plan.json",
+  "status": "incomplete",
+  "layers": {
+    "l1_schema": {
+      "pass": true,
+      "score": 20,
+      "issues": []
+    },
+    "l2_completeness": {
+      "pass": false,
+      "score": 8,
+      "issues": [
+        {
+          "layer": "l2_completeness",
+          "severity": "error",
+          "message": "questionPool has 0"
+        },
+        {
+          "layer": "l2_completeness",
+          "severity": "error",
+          "message": "workedExamples has 2"
+        },
+        {
+          "layer": "l2_completeness",
+          "severity": "error",
+          "message": "Missing difficulty levels"
+        }
+      ],
+      "stats": {
+        "questionPoolCount": 0,
+        "workedExampleCount": 2,
+        "screenplayBeatCount": 45,
+        "difficultyCounts": {
+          "easy": 0,
+          "medium": 0,
+          "hard": 0
+        }
+      }
+    },
+    "l3_math_accuracy": {
+      "pass": true,
+      "score": 21,
+      "issues": [
+        {
+          "layer": "l3_math_accuracy",
+          "severity": "warning",
+          "message": "No verifiable arithmetic items found."
+        }
+      ],
+      "stats": {
+        "verified": 0,
+        "wrong": 0,
+        "unverifiable": 2,
+        "totalChecked": 2
+      }
+    }
+  },
+  "overallScore": 65.33,
+  "blockingIssues": [
+    "questionPool has 0",
+    "workedExamples has 2",
+    "Missing difficulty levels"
+  ],
+  "warnings": [
+    "No verifiable arithmetic items found."
+  ],
+  "publishGate": {
+    "threshold": 80,
+    "status": "incomplete",
+    "readyForReview": false
+  }
+}

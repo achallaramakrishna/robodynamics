@@ -35,6 +35,12 @@ from datetime import datetime
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 from validators.schema_validator import SchemaValidator
 from validators.completeness_validator import CompletenessValidator
 from validators.math_validator import MathValidator

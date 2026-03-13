@@ -112,8 +112,8 @@ Schema and architecture notes:
 
 ## Notes
 
-- Current starter uses in-memory session/event store in Java and FastAPI.
-- SQL schema for persistent analytics is available at `docs/ai_tutor_schema.sql`.
+- Java now persists AI tutor session/event analytics into the tables in `docs/ai_tutor_schema.sql`.
+- FastAPI still keeps the live tutoring session in-memory; resume-on-login requires a follow-up rehydration step.
 - LMS seeding helpers for NEET AI Tutor:
   - `neet_ai_tutor_lms_seed_2026_03_07.sql` (creates offerings + unit sessions; optional enrollments)
   - `scripts/link_neet_pdf_assets_to_sessions.sh` (maps `session_materials/{courseId}/chapter/*.pdf` into `rd_course_session_details`)

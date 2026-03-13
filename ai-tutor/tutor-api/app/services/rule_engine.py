@@ -308,16 +308,62 @@ class VedicRuleEngine:
     def lesson(self, chapter_code: str | None) -> Dict[str, Any]:
         return self._lessons[self.normalize_chapter(chapter_code)]
 
-    def next_question(self, chapter_code: str | None, exercise_group: str | None, grade: str | None = None) -> Dict[str, Any]:
+    def next_question(
+        self,
+        chapter_code: str | None,
+        exercise_group: str | None,
+        grade: str | None = None,
+        exclude_question_id: str | None = None,
+    ) -> Dict[str, Any]:
         code = self.normalize_chapter(chapter_code)
         group = self.normalize_exercise_group(exercise_group)
+        lesson = self.lesson(code)
+        scripted_pool = lesson.get("questionPool", []) if isinstance(lesson, dict) else []
+        if isinstance(scripted_pool, list) and scripted_pool:
+            group_pool = [
+                dict(q)
+                for q in scripted_pool
+                if isinstance(q, dict) and self.normalize_exercise_group(q.get("exerciseGroup")) == group
+            ]
+            if not group_pool:
+                group_pool = [dict(q) for q in scripted_pool if isinstance(q, dict)]
+            if exclude_question_id and len(group_pool) > 1:
+                filtered = [q for q in group_pool if str(q.get("questionId", "")) != str(exclude_question_id)]
+                if filtered:
+                    group_pool = filtered
+            question = dict(self._rng.choice(group_pool))
+            question["chapterCode"] = code
+            question["exerciseGroup"] = self.normalize_exercise_group(question.get("exerciseGroup") or group)
+            question["subtopic"] = str(question.get("subtopic", "")).strip() or self._subtopic_for_group(code, question["exerciseGroup"])
+            return question
+
         scale = self._grade_scale(grade)
         builder = self._question_builders.get(code, self._q_completing_whole)
-        question = builder(group, scale)  # type: ignore[call-arg]
-        question["chapterCode"] = code
-        question["exerciseGroup"] = group
-        question["subtopic"] = self._subtopic_for_group(code, group)
+        question: Dict[str, Any] = {}
+        for attempt in range(5):
+            candidate = builder(group, scale)  # type: ignore[call-arg]
+            candidate["chapterCode"] = code
+            candidate["exerciseGroup"] = group
+            candidate["subtopic"] = self._subtopic_for_group(code, group)
+            candidate["questionId"] = self._stable_question_id(code, group, candidate)
+            question = candidate
+            if not exclude_question_id or candidate["questionId"] != exclude_question_id or attempt == 4:
+                break
         return question
+
+    @staticmethod
+    def _stable_question_id(chapter_code: str, exercise_group: str, question: Dict[str, Any]) -> str:
+        key = "|".join(
+            [
+                str(chapter_code or "").strip().upper(),
+                str(exercise_group or "").strip().upper(),
+                str(question.get("type", "")).strip().lower(),
+                str(question.get("skill", "")).strip().lower(),
+                str(question.get("questionText", "")).strip().lower(),
+                str(question.get("expectedAnswer", "")).strip().lower(),
+            ]
+        )
+        return str(uuid.uuid5(uuid.NAMESPACE_URL, key))
 
     def evaluate(self, question: Dict[str, Any], learner_answer: str) -> Dict[str, Any]:
         expected_raw = str(question.get("expectedAnswer", "")).strip()
@@ -1303,6 +1349,7 @@ class VedicRuleEngine:
                 "Exercise B guided practice",
                 "Exercise C independent attempt",
             ]
+            question_pool = self._script_question_pool(code, chapter_script)
             lessons[code] = {
                 "lessonId": code,
                 "title": str(chapter_script.get("title", chapter["title"])),
@@ -1315,11 +1362,51 @@ class VedicRuleEngine:
                 "exerciseFlow": exercise_flow,
                 "teachingScript": teaching_script,
                 "screenplay": screenplay,
+                "duolingoLessonArc": chapter_script.get("duolingoLessonArc") if isinstance(chapter_script.get("duolingoLessonArc"), dict) else None,
                 "coreIdeas": core_ideas,
                 "workedExamples": worked_examples,
                 "starterPractice": starter_practice,
+                "questionPool": question_pool,
             }
         return lessons
+
+    def _script_question_pool(self, chapter_code: str, chapter_script: Dict[str, Any]) -> List[Dict[str, Any]]:
+        raw_pool = chapter_script.get("questionPool")
+        if not isinstance(raw_pool, list):
+            raw_pool = chapter_script.get("exercises")
+        if not isinstance(raw_pool, list):
+            return []
+
+        out: List[Dict[str, Any]] = []
+        for idx, item in enumerate(raw_pool):
+            if not isinstance(item, dict):
+                continue
+            text = str(item.get("questionText", "")).strip()
+            if not text:
+                continue
+            group = self.normalize_exercise_group(item.get("exerciseGroup"))
+            expected = str(item.get("expectedAnswer", "")).strip()
+            qid = str(item.get("questionId", "")).strip()
+            if not qid:
+                seed = "|".join([chapter_code, group, text.lower(), expected.lower(), str(idx)])
+                qid = str(uuid.uuid5(uuid.NAMESPACE_URL, seed))
+            out.append(
+                {
+                    "questionId": qid,
+                    "chapterCode": chapter_code,
+                    "exerciseGroup": group,
+                    "subtopic": str(item.get("subtopic", "")).strip() or self._subtopic_for_group(chapter_code, group),
+                    "skill": str(item.get("skill", "")).strip() or self._subtopic_for_group(chapter_code, group),
+                    "difficulty": str(item.get("difficulty", self._difficulty(group))).strip().lower(),
+                    "type": str(item.get("type", "short_answer")).strip() or "short_answer",
+                    "questionText": text,
+                    "hint": str(item.get("hint", "Use the Vedic step for this group.")).strip(),
+                    "solution": str(item.get("solution", "Follow the base-completion method step-by-step.")).strip(),
+                    "expectedAnswer": expected,
+                    "visual": item.get("visual") if isinstance(item.get("visual"), dict) else None,
+                }
+            )
+        return out
 
     @staticmethod
     def _normalize(value: str) -> str:

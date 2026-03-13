@@ -1,0 +1,17 @@
+{
+  "agentId": "publish_orchestrator",
+  "implementationType": "deterministic_gatekeeper",
+  "purpose": "Aggregate all machine reports and emit a final publish decision that can optionally capture human approval.",
+  "inputs": [
+    "courseId",
+    "chapterCode",
+    "validationReportPath",
+    "pedagogyReviewPath",
+    "uiUxReviewPath",
+    "studentSimulationPath",
+    "approvedBy"
+  ],
+  "outputs": [
+    "publish_decision.json"
+  ]
+}

@@ -1,0 +1,677 @@
+                                     LESSON 3
+                                    DIGIT SUMS
+
+
+                                         SUMMARY
+3.1    Adding Digits – obtaining digit sums.
+3.2    The Nine Point Circle – representing numbers around a circle.
+3.3    Casting out Nines – to simplify finding digit sums.
+3.4    Digit Sum Puzzles
+3.5    The Digit Sum Check – using digit sums to check addition and
+       multiplication sums.
+3.6    The Vedic square – characteristics of the nine basic digits.
+3.7    Patterns from the Vedic Square – using the Vedic Square to design patterns.
+3.8    Number Nine
+
+
+
+
+                                  3.1 ADDING DIGITS
+
+
+The word digit means a single figure number: the numbers 1, 2, 3, 4, 5, 6, 7, 8, 9 and 0.
+Sum means add.
+
+So 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 are 1-digit numbers.
+
+And numbers 10, 11, 12 . . . . up to 99, are 2-digit numbers.
+
+
+           The digit sum of a number is found by adding the digits in the number.
+
+
+
+   1    To find the digit sum of 17, for example, you just add the 1 and 7.
+        1 + 7 = 8, so the digit sum of 17 is 8.
+
+   2    And the digit sum of 123 is 6 because 1+2+3=6.
+
+
+
+
+Digit sums can be very useful: for checking calculations (see Sections 3.5, 8.1), in divisibility
+testing, in finding square roots; and there is an algebraic form too (Section 11.5).
+3: DIGIT SUMS                                                                                 25
+
+   Practice A     Find the digit sum of the following numbers:
+
+                          NUMBER                         DIGIT SUM
+                              13                             4
+                             241                             7
+                             171                             9
+                             242                             8
+                             303                             6
+                            1213                             7
+                             900                             9
+
+
+Sometimes two steps are needed to find a digit sum.
+
+
+                   The digit sum is found by adding the digits in a number,
+                                and adding again if necessary.
+
+
+
+
+   3   So for the digit sum of 19 you add 1 + 9 = 10.
+       But since 10 is a 2-digit number you add again: 1+0 = 1.
+       So for the digit sum of 19 you can write:
+                                              19 J 10 J 1
+
+   4   Similarly for 39 you get 39 J 12 J 3.
+       So the digit sum of 39 is 3.
+
+
+
+   Practice B     Find the digit sum of the following numbers:
+
+                             NUMBER                   DIGIT SUM
+                                 83                       2
+                                614                       2
+                                345                       3
+                               5555                       2
+                                 78                       6
+                               2379                       3
+                              521832                      3
+                                999                       9
+
+
+This means that any number of any size can be reduced to a single digit: just add all the digits,
+and if you get a 2-figure number, add again.
+26                                                  VEDIC MATHEMATICS MANUAL 1
+
+
+                          3.2 THE NINE POINT CIRCLE
+
+The sequence of whole numbers starts at 1 and increases by 1 each time:
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 . . . . .
+
+We are very familiar with the cycle of tens in our number system: 10, 20, 30 etc. and we have
+seen this illustrated neatly in the circle of ten points.
+
+
+But if we take the digit sums of the counting numbers we get:
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 . . . . .
+1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3 . . . . .
+and here we see another cycle contained within the cycle of ten: a cycle of nine.
+
+
+We therefore also need to have a circle of nine points, and this has many uses, as we will see.
+
+                        10
+             9                      1
+
+
+       8                                2
+
+
+       7                                3
+
+
+              6                     4
+                         5
+
+                  10-point circle                                  9-point circle
+
+
+
+
+                             3.3 CASTING OUT NINES
+
+
+The 9-point circle is a circle whose edge is divided into 9 equal parts and as with the ten-point
+circle you can continue numbering round the circle as shown below.
+3: DIGIT SUMS                                                                               27
+
+
+
+
+Notice here that on any branch the digit sum of every number is the same. For example on the
+1-branch we get 1, 10, 19, 28 etc. all of whose digit sums are 1.
+
+This shows that adding 9 to a number does not affect its digit sum.
+And in fact it follows that adding any number of 9’s, or subtracting any number of 9’s will not
+affect the digit sum of a number.
+
+
+                     Adding 9 to a number does not affect its digit sum:
+                  so 4, 40, 49, 94, 949 all have a digit sum of 4 for example.
+
+
+
+   5   To find the digit sum of 3949 you can cast out the nines and just add up the 3 and
+       4.
+       So the digit sum is 7.
+
+       Or using the longer method you add all the digits: 3+9+4+9 J 25 J 7 again.
+
+
+
+
+                 3949
+28                                                   VEDIC MATHEMATICS MANUAL 1
+
+     Practice C     Find the digit sums of the numbers below. Use casting out 9’s.
+
+
+                                NUMBER                  DIGIT SUM
+                                     39                       3
+                                     93                       3
+                                    993                       3
+                                   9993                       3
+                                   9329                       5
+                                 941992                       7
+                                  79896                       3
+
+
+There is another way of casting out the nines from a number when you are finding its digit
+sum:
+
+
+               Any group of figures in a number that add up to 9 can be "cast out".
+
+
+
+
+     6    To find the digit sum of 24701 you see that you have 2 and 7 which add up to 9 and
+          can therefore be cast out.
+          This leaves only 4 and 1 which add up to 5.
+          So the digit sum of 24701 is 5.
+
+
+     7    Similarly with 21035 you see that 1, 3 and 5 add up to 9 and so can be cast out.
+          This leaves only 2 and so this is the answer.
+          The digit sum of 21035 is 2.
+
+
+
+Practice D        Use casting out 9’s to find the digit sums of the numbers below.
+
+         NUMBER              DIGIT SUM                     NUMBER               DIGIT SUM
+            465                   6                            2346                  6
+            274                   4                           16271                  8
+           3335                   5                            9653                  5
+           6193                   1                           36247                  4
+           2532                   3                          215841                  3
+            819                 9 or 0                         7152                  6
+            723                   3                         9821736                9 or 0
+
+Casting out of 9’s and digits totalling 9 comes under the Sutra When the Samuccaya is the
+Same it is Zero. So in 465, as 4 and 5 total nine, they are cast out and the digit sum is 6: when
+the total is the same (as 9) it is zero (can be cast out). Cancelling a common factor in a
+fraction is another example.
+3: DIGIT SUMS                                                                                       29
+
+
+                               3.4 DIGIT SUM PUZZLES
+
+Some simple problems can be given here involving digit sums.
+
+   8       The digit sum of a 2-figure number is 8 and the figures are the same, what is the
+           number?
+           This is clearly 44.
+
+   9       The digit sum of a 2-figure number is 9 and the first figure is twice the second, what
+           is it?
+           This must be 63.
+
+  10       Give three 2-digit numbers that have a digit sum of 3.
+           12, 21, 30 . . .
+
+
+  Practice E         In all of the following puzzles the answer is a 2-figure number.
+                     Some have more than one answer.
+                     You are given the digit sum of the answer and another fact.
+
+
+  DIGIT                                                             NUMBER OF
+                                OTHER FACT                                           ANSWER(S)
+   SUM                                                               ANSWERS
+       5               difference between the figures is 3              2               14 or 41
+
+       6                    the figures are the same                    1                  33
+
+       6                first figure is double the second               1                  42
+
+       7               difference between the figures is 3              2                25, 52
+
+       7                        one figure is a 4                       2                34, 43
+
+       6                      both figures are odd                      3               15, 51, 33
+
+       5                  the figures are consecutive*                  2                23, 32
+
+       9                  the figures are consecutive*                  2                45, 54
+
+       3                 one figure is double the other                 2                12, 21
+
+       8                    the answer is below 20                      1                  17
+
+       1                     number is less than 40                     5            10, 19, 28, 37
+
+       1                      the first figure is a 2                   1                  28
+
+* Consecutive means one after the other. E.g. 6 and 7 are consecutive (or 7 and 6).
+30                                                    VEDIC MATHEMATICS MANUAL 1
+
+                                MORE DIGIT SUM PUZZLES
+
+
+Harder digit sum problems can be given.
+
+Below is the 9-point circle again but numbered up to 44.
+Note that the numbers on each branch have the same digit sum. For example all the numbers
+on the 3-branch have a digit sum of 3.
+
+
+     11   A 2-figure number has a digit sum of 5 and the figures are the same. What is the
+          number?
+
+          5 is an odd number but looking at the 9-point circle we see that 14, which is also on
+          the 5-branch can be split into 7+7. So the number must be 77.
+
+
+
+
+     Practice F     In the puzzles below you will need to choose the right branch and then
+                    select the right answer from the numbers on that branch.
+                    All answers are 2-figure numbers.
+
+
+
+     DIGIT SUM                          OTHER FACT                              ANSWER
+           5                      number is between 20 and 30                        23
+           8                           answer ends in 5                              35
+           7                             first figure is 2                           25
+           2                           figures differ by 7                         29, 92
+3: DIGIT SUMS                                                                                 31
+
+
+         1                        answer is in the 7 × table                        28
+         3                    first figure is 3 times the second                    93
+         4                       number is in the 5 × table                         40
+         6                           figures are the same                           33
+         8                      last figure is 3 times the first                    26
+         5                       number is in the 8 × table                         32
+         9                                ends in 7                                 27
+         3                           both figures are odd                    57, 75, 39, 93
+
+
+
+
+                           3.5 THE DIGIT SUM CHECK
+
+You can use digit sums to check that answers are right.
+
+
+  12   Find 32 + 12 and check the answer using digit sums.
+
+                    32         5
+                    12 +       3 +
+                    44         8
+
+       You get 44 for the answer to the sum.
+       Then the digit sum of 32 is 5 (3+2=5) and the digit sum of 12 is 3.
+       The sum (the total) of the digit sums is 5+3=8. If the sum has been done correctly,
+       the digit sum of the answer should also be 8.
+       44J8; so according to this check the answer is probably correct.
+
+
+
+So there are four steps:     1. Do the sum
+                             2. Write down the digit sums of the numbers being added
+                             3. Add the digit sums
+                             4. Check the two answers are the same in digit sums
+
+
+  13   Add 365 and 208 and check the answer.
+
+       365          5          1. We get 573 for the answer.
+       208 +        1 +        2. We find the digit sums of 365, 208 are 5, 1.
+       573          6          3. Adding 5 and 1 gives 6.
+         1
+                               4. 573=6 in digit sums, which confirms the answer.
+32                                                    VEDIC MATHEMATICS MANUAL 1
+
+     Practice G      Add the following and check your answers using the digit sums:
+
+a 66                 b 57              c 94                d 304              e 787
+  77 +                 29 +              58 +                271    +           176 +
+  __                   __                __                  ___                ___
+
+f 389                g 5131            h 456               i 5555
+   55 +                 676 +            209 +               7777 +
+  ___                  ____              ___                 ____
+
+a 143        b 86          c 152       d 575       e 963
+3+5=8        3+2=5         4+4=8       7+1=8       4+5=9
+
+f 444        g 5807        h 665       i 13332
+2+1=3        1+1=2         6+2=8       2+1=3
+
+
+
+
+Here is another example of a digit sum check.
+
+     14   Add 77 and 124 and check.
+
+           77         5               Here, when we find 5+7 we get 12,
+          124 +       7 +             but 12 = 3 in digit sums.
+          201         3               So this confirms the answer.
+
+
+
+
+     Practice H      Add the following and check your answers using the digit sums:
+
+a 35              b 56             c 35          d 52              e 456      f 188
+  47 +              27 +             59 +          24 +              333 +      277 +
+  __                __               __            __                ___        ___
+
+g 78              h 66             i 555         j 823             k 3760
+  87 +              48 +              77 +          37 +              481 +
+                                                                     ____
+
+a 82         b 83          c 94        d 76        e 789       f 465
+8+2=1        2+9=2         8+5=4       7+6=4       6+9=6       8+7=6
+
+g 165        h 114         i 632       j 860       k 4241
+6+6=3        3+3=6         6+5=2       4+1=5       7+4=2
+
+
+
+
+The Vedic formula The Product of the Sum is the Sum of the Products applies for all the digit
+sum checks. For addition it would be The Total of the Digit Sums is the Digit Sum of the
+Total. The formula has many other applications (see Reference 3), for example in finding
+areas of composite shapes (The Area of the Whole is the Sum of the Areas).
+3: DIGIT SUMS                                                                             33
+
+CAUTION!
+
+Check the following sum:         279          The check is: 9
+                                 121 +                      4 +
+                                 490                        4
+
+which confirms the answer.
+
+However if you check the addition of the original sum you will find that it is incorrect!
+This shows that the digit sum method does not always find an error. It usually works but not
+always.
+
+We will be meeting other checking devices later on.
+
+
+
+
+                                     MULTIPLICATION CHECK
+
+
+Multiplying numbers, for example 38 × 3, is a straightforward process. You set the sum out as
+shown below, and multiply each figure in 38 by 3, starting at the right:
+
+
+  15         Sum:             3 8                  Check:      2
+                                3 ×                            3 ×
+                            1 1 4                              6
+                                 2
+
+
+
+
+The digit sum check has also been carried out above. The digit sums of the numbers being
+multiplied are 2 and 3, and when these are multiplied you get 6. Since the digit sum of the
+answer, 114, is also 6 this shows you that the answer is probably correct.
+
+
+
+  16                  6 2                check:   8
+                        4 ×                       4 ×
+                    2 4 8                         5   (since 8×4=32 and 3+2=5)
+
+       The check here confirms the answer, since the digit sum of 248 is the same as the
+       digit sum of 8×4.
+
+
+  17                    3 8 3 9                       Check:      5
+                              6×                                  6 ×
+                      2 3 0 3 4                                   3
+                        5    2       5
+
+       For the check you get the digit sum of 3839, which is 5 and find that 5 × 6 J 3.
+       The digit sum of 23034 is 3, so the answer is confirmed.
+34                                                                VEDIC MATHEMATICS MANUAL 1
+
+     Practice I      Multiply the following numbers and check each one using the digit sums:
+
+a 88 × 8                       b 32 × 3                        c 73 × 4                     d 717 × 6
+
+e 234 × 5                      f 533 × 2                       g 3115 × 3                   h 142857×7
+a 704 (2)         b 96 (6)            c 292 (4)             d 4302 (9)
+e 1170 (9)        f 1066 (4)          g 9345 (3)            h 999999 (9)
+
+
+
+
+                                   3.6 THE VEDIC SQUARE
+
+The multiplication table below has many interesting patterns and properties.
+
+                                      1       2   3    4      5    6   7       8    9
+
+                                      2       4   6    8     10   12   14      16   18
+
+                                      3       6   9    12    15   18   21      24   27
+
+                                      4       8   12   16    20   24   28      32   36
+
+                                      5   10      15   20    25   30   35      40   45
+
+                                      6   12      18   24    30   36   42      48   54
+
+                                      7   14      21   28    35   42   49      56   63
+
+                                      8   16      24   32    40   48   56      64   72
+
+                                      9   18      27   36    45   54   63      72   81
+
+
+
+We make the Vedic Square by replacing every number in the table above by its digit sum as
+shown below.
+
+                                  1       2       3    4      5    6       7    8       9
+                                  2       4       6    8      1    3       5    7       9
+                                  3       6       9    3      6    9       3    6       9
+                                  4       8       3    7      2    6       1    5       9
+                                  5       1       6    2      7    3       8    4       9
+                                  6       3       9    6      3    9       6    3       9
+                                  7       5       3    1      8    6       4    2       9
+                                  8       7       6    5      4    3       2    1       9
+                                  9       9       9    9      9    9       9    9       9
+3: DIGIT SUMS                                                                                               35
+
+Each of the numbers 1 to 9 has its own pattern in the Vedic Square.
+
+
+    18   To draw the pattern for the number One, for example, we colour in every square that
+         has a “1” in it.
+
+         Alternatively, we can put a dot in the center of each square with a “1” in it and join
+         the dots to make a pleasing pattern.
+
+
+
+    Practice J           Draw the patterns for the nine numbers using the Squares below.
+
+1   2    3   4   5   6    7   8   9     1   2   3   4   5   6   7   8   9   1   2   3   4   5   6   7   8    9
+2   4    6   8   1   3    5   7   9     2   4   6   8   1   3   5   7   9   2   4   6   8   1   3   5   7    9
+3   6    9   3   6   9    3   6   9     3   6   9   3   6   9   3   6   9   3   6   9   3   6   9   3   6    9
+4   8    3   7   2   6    1   5   9     4   8   3   7   2   6   1   5   9   4   8   3   7   2   6   1   5    9
+5   1    6   2   7   3    8   4   9     5   1   6   2   7   3   8   4   9   5   1   6   2   7   3   8   4    9
+6   3    9   6   3   9    6   3   9     6   3   9   6   3   9   6   3   9   6   3   9   6   3   9   6   3    9
+7   5    3   1   8   6    4   2   9     7   5   3   1   8   6   4   2   9   7   5   3   1   8   6   4   2    9
+8   7    6   5   4   3    2   1   9     8   7   6   5   4   3   2   1   9   8   7   6   5   4   3   2   1    9
+9   9    9   9   9   9    9   9   9     9   9   9   9   9   9   9   9   9   9   9   9   9   9   9   9   9    9
+
+
+
+
+1   2    3   4   5   6    7   8   9     1   2   3   4   5   6   7   8   9   1   2   3   4   5   6   7   8    9
+2   4    6   8   1   3    5   7   9     2   4   6   8   1   3   5   7   9   2   4   6   8   1   3   5   7    9
+3   6    9   3   6   9    3   6   9     3   6   9   3   6   9   3   6   9   3   6   9   3   6   9   3   6    9
+4   8    3   7   2   6    1   5   9     4   8   3   7   2   6   1   5   9   4   8   3   7   2   6   1   5    9
+5   1    6   2   7   3    8   4   9     5   1   6   2   7   3   8   4   9   5   1   6   2   7   3   8   4    9
+6   3    9   6   3   9    6   3   9     6   3   9   6   3   9   6   3   9   6   3   9   6   3   9   6   3    9
+7   5    3   1   8   6    4   2   9     7   5   3   1   8   6   4   2   9   7   5   3   1   8   6   4   2    9
+8   7    6   5   4   3    2   1   9     8   7   6   5   4   3   2   1   9   8   7   6   5   4   3   2   1    9
+9   9    9   9   9   9    9   9   9     9   9   9   9   9   9   9   9   9   9   9   9   9   9   9   9   9    9
+
+
+
+
+1   2    3   4   5   6    7   8   9     1   2   3   4   5   6   7   8   9   1   2   3   4   5   6   7   8    9
+2   4    6   8   1   3    5   7   9     2   4   6   8   1   3   5   7   9   2   4   6   8   1   3   5   7    9
+3   6    9   3   6   9    3   6   9     3   6   9   3   6   9   3   6   9   3   6   9   3   6   9   3   6    9
+4   8    3   7   2   6    1   5   9     4   8   3   7   2   6   1   5   9   4   8   3   7   2   6   1   5    9
+5   1    6   2   7   3    8   4   9     5   1   6   2   7   3   8   4   9   5   1   6   2   7   3   8   4    9
+6   3    9   6   3   9    6   3   9     6   3   9   6   3   9   6   3   9   6   3   9   6   3   9   6   3    9
+7   5    3   1   8   6    4   2   9     7   5   3   1   8   6   4   2   9   7   5   3   1   8   6   4   2    9
+8   7    6   5   4   3    2   1   9     8   7   6   5   4   3   2   1   9   8   7   6   5   4   3   2   1    9
+9   9    9   9   9   9    9   9   9     9   9   9   9   9   9   9   9   9   9   9   9   9   9   9   9   9    9
+36                                                     VEDIC MATHEMATICS MANUAL 1
+
+
+
+               3.7 PATTERNS FROM THE VEDIC SQUARE
+
+The Vedic Square is also useful in the design of patterns. Below is the Square again with the
+nine rows labeled A to I.
+
+
+                       A     1     2    3    4    5    6     7    8    9
+                       B     2     4    6    8    1    3     5    7    9
+                       C     3     6    9    3    6    9     3    6    9
+                       D     4     8    3    7    2    6     1    5    9
+                       E     5     1    6    2    7    3     8    4    9
+                       F     6     3    9    6    3    9     6    3    9
+                       G     7     5    3    1    8    6     4    2    9
+                       H     8     7    6    5    4    3     2    1    9
+                       I     9     9    9    9    9    9     9    9    9
+
+
+To design a pattern we choose a line of the Square, a starting point in that line and an angle of
+rotation.
+
+
+
+     19   Suppose we choose line D (4 8 3 7 2 6 1 5 9) and start at the beginning.
+          We also choose a rotation of, say, 90° anticlockwise.
+
+          Take a sheet of graph paper and mark a point near the bottom left corner (you will
+          need 2cm to the left of this).
+
+          We always start by moving to the right and the numbers in the row we have chosen
+          tell us how many centimetres to move. (It is advisable to use a pencil for this at first)
+
+          So now we can draw the design: first we draw a line 4cm to the right,
+             then turn 90° anticlockwise (to the left) and draw a line 8cm up.
+             then turn 90° anticlockwise and draw a line 3cm long,
+             then turn 90° anticlockwise and draw a line 7cm long,
+             and so on.
+
+          When you come to the end of the row of numbers you start again at the beginning of
+          that row. Eventually you will return to your starting point and the design is complete.
+
+
+
+     Practice K
+
+a Draw the pattern described above.
+
+b Try another design using row D again (starting at the beginning) but now the rotation angle
+  can be 60° and so triangular spotty paper can be used instead of graph paper:
+3: DIGIT SUMS                                                                                37
+
+   (With the long side of your sheet at the bottom mark a dot near the middle of the bottom
+   line.
+   We start moving to the right again 4cm.
+   Then we turn 60° to the left and draw a line 8cm long.
+   Then we turn 60° to the left and draw a line 3cm long.
+   And so on, the same as previously but with a turn of 60° instead of 90°.)
+
+c On another sheet of triangular spotty paper mark a point in the middle, and two rows down
+  from the top of the page. Choose row E this time (starting at the beginning) and a rotation
+  of 120° anticlockwise.
+  Draw the pattern for this.
+
+
+ (You can also use the columns and diagonals in the Vedic Square as well as the rows, or a
+combination of them)
+
+The diagram that appears at the beginning of each chapter of this book is formed by using the
+Vedic Square in this way.
+
+
+
+
+                                 3.8 NUMBER NINE
+
+
+In our number system the number nine is the largest digit.
+The number nine also has many other remarkable properties which make it extremely useful.
+You have already seen that it can be used in finding digit sums, and that the digit sum of a
+number is unchanged if 9 is added to it or subtracted from it.
+
+Now look at the 9-times table:         9× 1=      9
+                                       9× 2= 18
+                                       9× 3= 27
+                                       9× 4= 36
+                                       9× 5= 45
+                                       9× 6= 54
+                                       9× 7= 63
+                                       9× 8= 72
+                                       9× 9= 81
+                                       9 × 10 = 9 0
+                                       9 × 11 = 9 9
+                                       9 × 12 =10 8
+
+If you look at the answers you will see that in every case the digit sum is 9.
+
+You may also see that if you read the answers as two columns the left column goes up (1, 2, 3,
+. . .) and the right column goes down (9, 8, 7, . . .).
+
+This makes it easy to get the answers in the 9 times table.
+38                                                   VEDIC MATHEMATICS MANUAL 1
+
+It is also possible to use your fingers to multiply by nine.
+
+Suppose the fingers of your hands are numbered as shown below:
+
+                                  234
+                                     5        67 8 9
+                             1                          10
+
+
+To multiply, say, 4 by 9, simply fold down the 4th finger.
+You will find 3 fingers to the left of the folded finger and 6 fingers to the right.
+So 4 × 9 = 36.
+And so on.
+
+
+See also Russian Peasant Multiplication on Page 69.
+

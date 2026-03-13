@@ -63,6 +63,33 @@ class ScreenplayBeat(BaseModel):
     svgAnimation: List[Dict[str, Any]] = Field(default_factory=list)
 
 
+class DuolingoLessonStep(BaseModel):
+    exerciseGroup: str
+    subtopic: str
+    missionStepTitle: str
+    coachHook: str
+    boardDemo: str
+    readAloudPrompt: str
+    tryPrompt: str
+    masteryCheck: str
+    instantFeedbackWin: str
+    instantFeedbackRetry: str
+    reviewPrompt: str
+    xpReward: int
+    badgeFocus: str
+
+
+class DuolingoLessonArc(BaseModel):
+    version: str
+    onboarding: Dict[str, Any] = Field(default_factory=dict)
+    mission: Dict[str, Any] = Field(default_factory=dict)
+    microLessonPattern: List[str] = Field(default_factory=list)
+    rewardLoop: Dict[str, Any] = Field(default_factory=dict)
+    reviewLoop: Dict[str, Any] = Field(default_factory=dict)
+    uiDirectives: Dict[str, Any] = Field(default_factory=dict)
+    sessionFlow: List[DuolingoLessonStep] = Field(default_factory=list)
+
+
 class LessonPayload(BaseModel):
     lessonId: str
     title: str
@@ -76,6 +103,7 @@ class LessonPayload(BaseModel):
     exerciseFlow: List[ExerciseFlowItem]
     teachingScript: List[TeachingStep]
     screenplay: List[ScreenplayBeat] = Field(default_factory=list)
+    duolingoLessonArc: Optional[DuolingoLessonArc] = None
     coreIdeas: List[str]
     workedExamples: List[LessonExample]
     starterPractice: List[str]

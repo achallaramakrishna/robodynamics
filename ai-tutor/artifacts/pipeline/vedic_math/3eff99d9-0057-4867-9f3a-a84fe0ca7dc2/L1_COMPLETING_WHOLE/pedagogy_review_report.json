@@ -1,0 +1,25 @@
+{
+  "artifactType": "pedagogy_review_report",
+  "generatedAt": "2026-03-10T01:12:35.033Z",
+  "reviewMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/3eff99d9-0057-4867-9f3a-a84fe0ca7dc2/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/3eff99d9-0057-4867-9f3a-a84fe0ca7dc2/L1_COMPLETING_WHOLE/deterministic_validation_report.json",
+  "status": "reviewed",
+  "scores": {
+    "teaching_clarity": 7,
+    "difficulty_progression": 7.5,
+    "example_quality": 7.5,
+    "engagement": 6.5,
+    "bloom_coverage": 7
+  },
+  "overallScore": 7.1,
+  "topIssues": [
+    "No major pedagogy blocker found in the local heuristic review."
+  ],
+  "suggestedFixes": [
+    "Proceed to UI/UX and student simulation review."
+  ],
+  "approvalRecommendation": "approve_with_minor_edits"
+}

@@ -1,0 +1,262 @@
+{
+  "artifactType": "course_standard",
+  "courseId": "vedic_math",
+  "generatedAt": "2026-03-10T01:12:35.018Z",
+  "standard": {
+    "_meta": {
+      "framework_name": "RoboDynamics Content Quality Standard",
+      "version": "1.0.0",
+      "course": "vedic_math",
+      "created": "2026-03-09",
+      "references": [
+        "IMS Global — Question & Test Interoperability (QTI) v2.1",
+        "Bloom's Revised Taxonomy (Anderson & Krathwohl, 2001)",
+        "Universal Design for Learning (UDL) Guidelines v2.2",
+        "Kirkpatrick Four-Level Evaluation Model",
+        "SCORM 2004 — Sharable Content Object Reference Model",
+        "India NEP 2020 — Competency-Based Learning Framework"
+      ],
+      "publish_threshold": 80,
+      "needs_work_threshold": 60
+    },
+    "layer_1_schema": {
+      "_description": "Structural completeness — all required fields must exist with correct types",
+      "required_top_level_fields": [
+        "title",
+        "source",
+        "estimatedMinutes",
+        "subtopics",
+        "learningGoals",
+        "coreIdeas",
+        "workedExamples",
+        "starterPractice",
+        "teachingScript",
+        "screenplay",
+        "teachingFlowStages",
+        "questionPool"
+      ],
+      "field_types": {
+        "title": "string",
+        "source": "string",
+        "estimatedMinutes": "integer",
+        "subtopics": "array",
+        "learningGoals": "array",
+        "coreIdeas": "array",
+        "workedExamples": "array",
+        "starterPractice": "array",
+        "teachingScript": "array",
+        "screenplay": "array",
+        "teachingFlowStages": "array",
+        "questionPool": "array"
+      },
+      "field_constraints": {
+        "estimatedMinutes": {
+          "min": 10,
+          "max": 90
+        },
+        "title": {
+          "min_length": 5,
+          "max_length": 120
+        }
+      },
+      "screenplay_beat_required_fields": [
+        "beatId",
+        "stepId",
+        "exerciseGroup",
+        "subtopic",
+        "sequence",
+        "cue",
+        "boardMode",
+        "teacherLine",
+        "boardAction",
+        "pauseType"
+      ],
+      "question_required_fields": [
+        "questionId",
+        "exerciseGroup",
+        "subtopic",
+        "skill",
+        "difficulty",
+        "type",
+        "questionText",
+        "hint",
+        "solution",
+        "expectedAnswer"
+      ],
+      "worked_example_required_fields": [
+        "question",
+        "method",
+        "answer"
+      ],
+      "teaching_step_required_fields": [
+        "stepId",
+        "exerciseGroup",
+        "subtopic",
+        "boardMode",
+        "teacherLine",
+        "boardAction"
+      ],
+      "scoring": {
+        "weight": 20,
+        "all_fields_present": 20,
+        "deduction_per_missing_field": 3,
+        "deduction_per_type_error": 2
+      }
+    },
+    "layer_2_completeness": {
+      "_description": "Minimum content volume — industry standard for adaptive tutoring systems",
+      "_rationale": "Question pool should be 3x expected per-session questions (8 per session → 24 minimum). Multiple difficulty levels ensure adaptive routing. Screenplay beats drive the immersive classroom experience.",
+      "min_learning_goals": 3,
+      "min_subtopics": 3,
+      "min_core_ideas": 2,
+      "min_worked_examples": 4,
+      "min_starter_practice": 3,
+      "min_teaching_steps": 5,
+      "min_screenplay_beats": 30,
+      "min_question_pool_size": 24,
+      "required_teaching_phases": [
+        "INTRO",
+        "EXPLAIN",
+        "DEMO",
+        "GUIDED",
+        "PRACTICE",
+        "CHECK",
+        "CHECKPOINT"
+      ],
+      "required_difficulty_levels": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "min_difficulty_distribution": {
+        "easy": 20,
+        "medium": 30,
+        "hard": 20
+      },
+      "question_id_pattern": "^L\\d+_[A-Z]_[A-Z_]+_[a-f0-9]{6}$",
+      "allowed_question_types": [
+        "short_answer",
+        "multiple_choice",
+        "fill_blank",
+        "true_false",
+        "multi_step",
+        "match"
+      ],
+      "allowed_board_modes": [
+        "free_draw",
+        "step_reveal",
+        "highlight",
+        "equation",
+        "table",
+        "diagram"
+      ],
+      "scoring": {
+        "weight": 25,
+        "full_score_conditions": {
+          "question_pool_size": {
+            "threshold": 24,
+            "points": 8
+          },
+          "worked_examples": {
+            "threshold": 4,
+            "points": 5
+          },
+          "screenplay_beats": {
+            "threshold": 30,
+            "points": 4
+          },
+          "teaching_phases": {
+            "all_required": true,
+            "points": 4
+          },
+          "difficulty_distribution": {
+            "all_levels_present": true,
+            "points": 4
+          }
+        }
+      }
+    },
+    "layer_3_math_accuracy": {
+      "_description": "Mathematical correctness — zero tolerance for wrong answers in an AI tutor",
+      "_approach": "Programmatic eval for simple arithmetic; pattern matching for multi-step; AI verification for complex",
+      "zero_tolerance": true,
+      "verifiable_patterns": [
+        "^\\d+\\s*[\\+\\-\\*\\/]\\s*\\d+\\s*=\\s*\\?$",
+        "^\\d+\\s*[\\+\\-\\*\\/]\\s*\\d+\\s*=\\s*\\?.*base",
+        "^What is \\d+ [\\+\\-\\*\\/×÷] \\d+"
+      ],
+      "answer_format_rules": {
+        "must_be_non_empty": true,
+        "no_trailing_spaces": true,
+        "numeric_answers_must_be_parseable": true
+      },
+      "worked_example_check": "answer must match eval(question) where question is parseable",
+      "scoring": {
+        "weight": 30,
+        "perfect_score": 30,
+        "deduction_per_wrong_answer": 5,
+        "deduction_per_unverifiable_answer": 1
+      }
+    },
+    "layer_4_ai_quality": {
+      "_description": "Pedagogical quality — AI-powered review using Claude to evaluate teaching effectiveness",
+      "_model": "claude-sonnet-4-6",
+      "dimensions": {
+        "teaching_clarity": {
+          "weight": 20,
+          "description": "Are teacherLines clear, age-appropriate (grade 5-8), jargon-free, and engaging?",
+          "target_score": 8,
+          "min_acceptable": 6
+        },
+        "difficulty_progression": {
+          "weight": 20,
+          "description": "Do questions scaffold logically from easy → medium → hard? No jarring jumps?",
+          "target_score": 7.5,
+          "min_acceptable": 6
+        },
+        "example_quality": {
+          "weight": 20,
+          "description": "Do workedExamples demonstrate the concept clearly with proper step-by-step method?",
+          "target_score": 8,
+          "min_acceptable": 6.5
+        },
+        "engagement": {
+          "weight": 20,
+          "description": "Is the content motivating, culturally relevant (Indian student context), and fun?",
+          "target_score": 7,
+          "min_acceptable": 5.5
+        },
+        "bloom_coverage": {
+          "weight": 20,
+          "description": "Do questions cover at least Remember + Understand + Apply levels of Bloom's taxonomy?",
+          "target_score": 7,
+          "min_acceptable": 6
+        }
+      },
+      "scoring": {
+        "weight": 25,
+        "max_score": 10,
+        "pass_threshold": 7
+      },
+      "prompt_template": "You are an expert educational content reviewer specializing in K-12 mathematics pedagogy for Indian students (grades 5-8). Review this Vedic Math chapter JSON and score each dimension from 0-10. Be strict — this content will be used by an AI tutor to teach real students.\n\nChapter: {title}\n\nSample teacherLines:\n{teacher_lines}\n\nSample questions (first 8):\n{sample_questions}\n\nWorked examples:\n{worked_examples}\n\nScore these 5 dimensions from 0-10:\n1. teaching_clarity: Are teacherLines clear, age-appropriate, engaging?\n2. difficulty_progression: Do questions logically scaffold from easy to hard?\n3. example_quality: Do examples clearly demonstrate the Vedic Math concept with steps?\n4. engagement: Is the content motivating and culturally relevant for Indian students?\n5. bloom_coverage: Do questions cover Remember, Understand, AND Apply levels?\n\nRespond ONLY as valid JSON:\n{\"teaching_clarity\": X, \"difficulty_progression\": X, \"example_quality\": X, \"engagement\": X, \"bloom_coverage\": X, \"overall_comments\": \"...\", \"top_issues\": [\"...\", \"...\"], \"suggested_fixes\": [\"...\", \"...\"]}"
+    },
+    "publish_gate": {
+      "_description": "Rules for marking a chapter as ready to publish",
+      "required_layers_passing": [
+        "layer_1_schema",
+        "layer_2_completeness",
+        "layer_3_math_accuracy"
+      ],
+      "min_overall_score": 80,
+      "min_ai_quality_score": 7,
+      "zero_critical_errors": true,
+      "statuses": {
+        "draft": "Not yet validated",
+        "validated": "All layers passed, ready for AI review",
+        "approved": "All layers passed including AI quality ≥ 7.0",
+        "published": "Approved and deployed to production",
+        "deprecated": "Previously published, now superseded"
+      }
+    }
+  }
+}

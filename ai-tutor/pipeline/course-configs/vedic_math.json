@@ -1,0 +1,22 @@
+{
+  "courseId": "vedic_math",
+  "courseTitle": "Vedic Math",
+  "gradeBand": "5-8",
+  "subject": "mathematics",
+  "curriculumContext": "India tutoring enrichment",
+  "standardPath": "ai-tutor/scripts/standards/vedic_math_standard.json",
+  "chapterDir": "ai-tutor/tutor-api/content-template/vedic_math/chapter",
+  "sourcePdfDir": "docs/vedic_math",
+  "artifactRoot": "ai-tutor/artifacts/pipeline",
+  "targetSessionMinutes": 25,
+  "difficultyModel": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "deliveryModes": [
+    "voice",
+    "board",
+    "text"
+  ]
+}

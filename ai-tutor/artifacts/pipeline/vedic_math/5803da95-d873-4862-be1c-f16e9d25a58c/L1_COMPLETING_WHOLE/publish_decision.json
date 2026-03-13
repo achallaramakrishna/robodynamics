@@ -1,0 +1,20 @@
+{
+  "artifactType": "publish_decision",
+  "generatedAt": "2026-03-10T01:28:53.907Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "decision": "pending_human_approval",
+  "publishStatus": "pending_review",
+  "approvedBy": null,
+  "approvedAt": null,
+  "blockers": [],
+  "dbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "spawnSync C:\\Users\\Achalla Ramakrishna\\AppData\\Local\\Programs\\Python\\Python313\\python.exe EPERM"
+  },
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/deterministic_validation_report.json",
+  "pedagogyReviewPath": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/pedagogy_review_report.json",
+  "uiUxReviewPath": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/ui_ux_review_report.json",
+  "studentSimulationPath": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/student_simulation_report.json"
+}

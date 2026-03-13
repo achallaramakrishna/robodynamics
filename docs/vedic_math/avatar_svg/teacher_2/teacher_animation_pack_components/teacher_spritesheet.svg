@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+<symbol id="hero_main" viewBox="0 0 265 335"><image href="hero_main.png" x="0" y="0" width="265" height="335"/></symbol>
+<symbol id="expression_pose_1" viewBox="0 0 155 225"><image href="expression_pose_1.png" x="0" y="0" width="155" height="225"/></symbol>
+<symbol id="expression_pose_2" viewBox="0 0 153 225"><image href="expression_pose_2.png" x="0" y="0" width="153" height="225"/></symbol>
+<symbol id="gesture_greeting" viewBox="0 0 155 228"><image href="gesture_greeting.png" x="0" y="0" width="155" height="228"/></symbol>
+<symbol id="gesture_explain" viewBox="0 0 155 228"><image href="gesture_explain.png" x="0" y="0" width="155" height="228"/></symbol>
+<symbol id="gesture_point" viewBox="0 0 155 228"><image href="gesture_point.png" x="0" y="0" width="155" height="228"/></symbol>
+<symbol id="gesture_board_work" viewBox="0 0 155 228"><image href="gesture_board_work.png" x="0" y="0" width="155" height="228"/></symbol>
+<symbol id="gesture_question" viewBox="0 0 155 235"><image href="gesture_question.png" x="0" y="0" width="155" height="235"/></symbol>
+<symbol id="gesture_encourage" viewBox="0 0 155 235"><image href="gesture_encourage.png" x="0" y="0" width="155" height="235"/></symbol>
+<symbol id="gesture_emphasize" viewBox="0 0 155 235"><image href="gesture_emphasize.png" x="0" y="0" width="155" height="235"/></symbol>
+<symbol id="gesture_conclude" viewBox="0 0 155 235"><image href="gesture_conclude.png" x="0" y="0" width="155" height="235"/></symbol>
+<symbol id="head_blink_look" viewBox="0 0 150 215"><image href="head_blink_look.png" x="0" y="0" width="150" height="215"/></symbol>
+<symbol id="head_nod_tilt" viewBox="0 0 150 215"><image href="head_nod_tilt.png" x="0" y="0" width="150" height="215"/></symbol>
+</defs></svg>

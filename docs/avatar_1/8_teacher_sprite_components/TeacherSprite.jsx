@@ -1,0 +1,62 @@
+import React from "react";
+
+const spriteMap = {
+  "sprite_r01_c01": "png/sprite_r01_c01.png",
+  "sprite_r01_c02": "png/sprite_r01_c02.png",
+  "sprite_r01_c03": "png/sprite_r01_c03.png",
+  "sprite_r01_c04": "png/sprite_r01_c04.png",
+  "sprite_r01_c05": "png/sprite_r01_c05.png",
+  "sprite_r01_c06": "png/sprite_r01_c06.png",
+  "sprite_r01_c07": "png/sprite_r01_c07.png",
+  "sprite_r01_c08": "png/sprite_r01_c08.png",
+  "sprite_r01_c09": "png/sprite_r01_c09.png",
+  "sprite_r01_c10": "png/sprite_r01_c10.png",
+  "sprite_r01_c11": "png/sprite_r01_c11.png",
+  "sprite_r02_c01": "png/sprite_r02_c01.png",
+  "sprite_r02_c02": "png/sprite_r02_c02.png",
+  "sprite_r02_c03": "png/sprite_r02_c03.png",
+  "sprite_r02_c04": "png/sprite_r02_c04.png",
+  "sprite_r02_c05": "png/sprite_r02_c05.png",
+  "sprite_r02_c06": "png/sprite_r02_c06.png",
+  "sprite_r02_c07": "png/sprite_r02_c07.png",
+  "sprite_r02_c08": "png/sprite_r02_c08.png",
+  "sprite_r02_c09": "png/sprite_r02_c09.png",
+  "sprite_r02_c10": "png/sprite_r02_c10.png",
+  "sprite_r03_c01": "png/sprite_r03_c01.png",
+  "sprite_r03_c02": "png/sprite_r03_c02.png",
+  "sprite_r03_c03": "png/sprite_r03_c03.png",
+  "sprite_r03_c04": "png/sprite_r03_c04.png",
+  "sprite_r03_c05": "png/sprite_r03_c05.png",
+  "sprite_r03_c06": "png/sprite_r03_c06.png",
+  "sprite_r03_c07": "png/sprite_r03_c07.png",
+  "sprite_r04_c01": "png/sprite_r04_c01.png",
+  "sprite_r04_c02": "png/sprite_r04_c02.png",
+  "sprite_r04_c03": "png/sprite_r04_c03.png",
+  "sprite_r04_c04": "png/sprite_r04_c04.png",
+  "sprite_r04_c05": "png/sprite_r04_c05.png",
+  "sprite_r04_c06": "png/sprite_r04_c06.png",
+  "sprite_r04_c07": "png/sprite_r04_c07.png",
+  "sprite_r04_c08": "png/sprite_r04_c08.png",
+  "sprite_r04_c09": "png/sprite_r04_c09.png",
+  "sprite_r05_c01": "png/sprite_r05_c01.png",
+  "sprite_r05_c02": "png/sprite_r05_c02.png",
+  "sprite_r05_c03": "png/sprite_r05_c03.png",
+  "sprite_r05_c04": "png/sprite_r05_c04.png",
+  "sprite_r05_c05": "png/sprite_r05_c05.png",
+  "sprite_r05_c06": "png/sprite_r05_c06.png",
+  "sprite_r05_c07": "png/sprite_r05_c07.png",
+  "sprite_r05_c08": "png/sprite_r05_c08.png",
+  "sprite_r06_c01": "png/sprite_r06_c01.png",
+  "sprite_r06_c02": "png/sprite_r06_c02.png",
+  "sprite_r06_c03": "png/sprite_r06_c03.png",
+  "sprite_r06_c04": "png/sprite_r06_c04.png",
+  "sprite_r06_c05": "png/sprite_r06_c05.png",
+  "sprite_r06_c06": "png/sprite_r06_c06.png",
+  "sprite_r06_c07": "png/sprite_r06_c07.png"
+};
+
+export default function TeacherSprite({ id, alt = "", style = {}, className = "" }) {
+  const src = spriteMap[id];
+  if (!src) return null;
+  return <img src={src} alt={alt || id} style={style} className={className} />;
+}

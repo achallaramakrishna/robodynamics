@@ -1,0 +1,23 @@
+{
+  "artifactType": "publish_decision",
+  "generatedAt": "2026-03-10T01:53:11.660Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L14_FACTORISATION",
+  "decision": "blocked",
+  "publishStatus": "needs_revision",
+  "approvedBy": null,
+  "approvedAt": null,
+  "blockers": [
+    "Deterministic validation is not publish-ready.",
+    "Pedagogy review score is below the acceptance floor."
+  ],
+  "dbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "MySQL unavailable"
+  },
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/deterministic_validation_report.json",
+  "pedagogyReviewPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/pedagogy_review_report.json",
+  "uiUxReviewPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/ui_ux_review_report.json",
+  "studentSimulationPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/student_simulation_report.json"
+}

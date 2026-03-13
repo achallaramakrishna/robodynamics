@@ -21,6 +21,12 @@ import argparse
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 ANSI_RESET = "\033[0m"
 ANSI_RED    = "\033[91m"
 ANSI_YELLOW = "\033[93m"

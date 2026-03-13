@@ -1,0 +1,15 @@
+{
+  "agentId": "pedagogical_architect",
+  "implementationType": "deterministic_builder",
+  "purpose": "Build the reusable pedagogical contract for a course before chapter generation starts.",
+  "inputs": [
+    "courseId",
+    "courseConfigPath",
+    "standardPath",
+    "chapterSelection"
+  ],
+  "outputs": [
+    "course_standard.json",
+    "course_blueprint.json"
+  ]
+}

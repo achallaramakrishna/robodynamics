@@ -1,0 +1,38 @@
+{
+  "artifactType": "pedagogy_review_report",
+  "generatedAt": "2026-03-10T02:10:42.283Z",
+  "reviewMode": "llm_anthropic",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/b2086c46-d9bd-458f-bf54-7e5c5e6ba7ec/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/b2086c46-d9bd-458f-bf54-7e5c5e6ba7ec/L1_COMPLETING_WHOLE/deterministic_validation_report.json",
+  "status": "reviewed",
+  "scores": {
+    "teaching_clarity": 8.5,
+    "difficulty_progression": 7.5,
+    "example_quality": 9,
+    "engagement": 7,
+    "bloom_coverage": 6.5
+  },
+  "overallScore": 7.7,
+  "overallComments": "The lesson is well-structured with a logical phase sequence (INTRO → EXPLAIN → DEMO → GUIDED → PRACTICE → CHECK → CHECKPOINT) that mirrors good pedagogical scaffolding. Worked examples are mathematically accurate, clearly stepped, and the dual-path example for 43+8 is a standout feature that promotes flexible thinking. The question bank covers three subtopics with E/M/H difficulty tiers and consistent solution formatting. However, the lesson leans heavily on lower-order Bloom's levels (Remember, Understand, Apply) with minimal representation of Analysis, Evaluation, or Creation. The CHECK phase topic 'Mental Addition with Carry' feels disconnected from the chapter's core 'Completing the Whole' theme and is not supported by a dedicated worked example or question set. The CHECKPOINT phase asks for summarization but no rubric or model answer is provided for the tutor to evaluate quality. Engagement mechanisms are implicit rather than explicit — there are no gamification cues, visual anchors beyond the Ten Point Circle mention, or culturally contextualised word problems relevant to Indian learners (e.g., money, cricket scores, market quantities). Difficulty labelling is slightly inconsistent: L1_C_M_09110f ('complement of 8') is arguably easier than L1_C_E_33eb2f ('6+?=10') given the direct count-up hint.",
+  "topIssues": [
+    "CHECK phase topic 'Mental Addition with Carry' is thematically misaligned with the chapter focus on 'Completing the Whole' and has no supporting worked example or question in the question bank.",
+    "Bloom's Taxonomy coverage is shallow — questions and phases address only Remember, Understand, and Apply; Analysis (comparing methods), Evaluation (judging efficiency of paths), and Creation (constructing own problems) are absent.",
+    "Difficulty calibration inconsistency: L1_C_M_09110f is labelled 'medium' but is cognitively simpler than some 'easy' items; L1_A_H_b582b5 and L1_B_H_0af896 are near-identical in demand to medium items.",
+    "No culturally contextualised or real-world word problems are included, missing an opportunity to increase relevance and engagement for Indian K-12 learners.",
+    "CHECKPOINT phase lacks a model summary or evaluation rubric, making it difficult for the AI tutor to assess whether the student's summarization meets the learning objective.",
+    "Exercise Group C has only one hard question (L1_C_H_a3e759) and no medium-to-hard bridge, creating an abrupt jump from medium to hard within the Ten Point Circle subtopic.",
+    "The GUIDED phase topic 'Completing the Next Ten' (e.g., 37+?=40 style) has only one worked example and no dedicated question group, leaving insufficient practice scaffolding for that specific skill."
+  ],
+  "suggestedFixes": [
+    "Replace or rename the CHECK phase topic from 'Mental Addition with Carry' to 'Correcting a Completing-the-Whole Error' and add a worked example showing a common student mistake (e.g., 7+6: student writes 14 instead of 13) with explicit correction logic tied to the base-10 bridging method.",
+    "Add at least one Analysis-level question per exercise group, such as 'Riya used Path A and Dev used Path B for 43+8. Both got 51. Which path is faster for mental math and why?' to push into higher-order thinking.",
+    "Recalibrate difficulty labels: move L1_C_M_09110f to 'easy', elevate L1_C_E_33eb2f to 'easy-medium', and add a new hard item for Groups A and B that involves a two-digit addend (e.g., '27+6=? Use base-10 bridging and show two steps').",
+    "Add 2–3 contextualised word problems using Indian settings, for example: 'Priya has ₹8. She needs ₹15 for a notebook. How much more does she need?' or 'A cricket team scored 37 runs. How many more to reach 40?'",
+    "Provide a model CHECKPOINT response and a 3-point rubric (e.g., 1=names the method, 2=states the two steps, 3=gives a correct example) so the AI tutor can score student summaries consistently.",
+    "Add a medium-hard question to Exercise Group C, for example: 'Using the Ten Point Circle, find the missing number: 24 + ? = 30. Explain your reasoning.' to bridge the gap between medium and hard items.",
+    "Create a dedicated Exercise Group D (or extend Group B) for the 'Completing the Next Ten' subtopic with at least three questions at easy, medium, and hard levels (e.g., easy: 27+?=30, medium: 54+?=60, hard: 78+?=80 and then use that to solve 78+6)."
+  ],
+  "approvalRecommendation": "approve_with_minor_edits"
+}

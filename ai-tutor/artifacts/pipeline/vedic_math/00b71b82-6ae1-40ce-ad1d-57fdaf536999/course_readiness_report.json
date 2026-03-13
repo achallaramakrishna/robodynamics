@@ -1,0 +1,29 @@
+{
+  "artifactType": "course_readiness_report",
+  "generatedAt": "2026-03-10T02:16:38.856Z",
+  "courseId": "vedic_math",
+  "totalChapters": 1,
+  "deterministicReadyCount": 1,
+  "publishApprovalCount": 0,
+  "blockedCount": 1,
+  "averageDeterministicScore": 100,
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "UI/UX review still has multiple accessibility issues."
+      ],
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    }
+  ],
+  "runDbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "MySQL unavailable"
+  }
+}

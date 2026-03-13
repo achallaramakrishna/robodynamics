@@ -1,0 +1,35 @@
+{
+  "agentId": "project_manager",
+  "implementationType": "deterministic_orchestrator",
+  "purpose": "Own the end-to-end course build workflow by sequencing stage agents, tracking chapter status, rerun conditions, blockers, and overall course readiness.",
+  "inputs": [
+    "courseId",
+    "courseConfigPath",
+    "chapterSelection",
+    "stageSelection",
+    "dependencyPolicy",
+    "rerunPolicy"
+  ],
+  "outputs": [
+    "course_build_manifest.json",
+    "chapter_status_board.json",
+    "course_readiness_report.json"
+  ],
+  "ownsSequencing": [
+    "pedagogical_architect",
+    "content_generator",
+    "deterministic_validator",
+    "pedagogy_reviewer",
+    "ui_ux_reviewer",
+    "student_simulator",
+    "publish_orchestrator"
+  ],
+  "coreResponsibilities": [
+    "Create a run id and artifact workspace",
+    "Load course config and chapter inventory",
+    "Decide which chapters can move to the next stage",
+    "Block LLM-backed stages until deterministic validation passes",
+    "Record blockers and rerun recommendations",
+    "Emit course-level progress and readiness"
+  ]
+}

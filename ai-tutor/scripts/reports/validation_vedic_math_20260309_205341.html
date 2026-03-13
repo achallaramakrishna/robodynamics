@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content Validation Report — vedic_math</title>
+<style>
+  :root {
+    --green: #16a34a; --green-bg: #f0fdf4; --green-border: #86efac;
+    --yellow: #ca8a04; --yellow-bg: #fefce8; --yellow-border: #fde047;
+    --red: #dc2626;   --red-bg:   #fff1f2; --red-border: #fca5a5;
+    --blue: #2563eb;  --blue-bg:  #eff6ff; --blue-border: #93c5fd;
+    --gray: #64748b;  --gray-bg:  #f8fafc; --gray-border: #e2e8f0;
+    --dark: #0f172a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          background: #f1f5f9; color: #1e293b; font-size: 14px; line-height: 1.5; }
+  .header { background: var(--dark); color: white; padding: 1.5rem 2rem; }
+  .header h1 { font-size: 1.4rem; font-weight: 800; }
+  .header-meta { font-size: 0.78rem; color: #94a3b8; margin-top: 0.3rem; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+  /* Summary cards */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: white; border-radius: 12px; padding: 1.2rem 1.4rem;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid var(--gray-border); }
+  .stat-card .stat-val { font-size: 2rem; font-weight: 900; color: var(--dark); }
+  .stat-card .stat-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase;
+                            letter-spacing: 0.07em; margin-top: 0.2rem; font-weight: 600; }
+  .stat-card.green { border-color: var(--green-border); background: var(--green-bg); }
+  .stat-card.green .stat-val { color: var(--green); }
+  .stat-card.yellow { border-color: var(--yellow-border); background: var(--yellow-bg); }
+  .stat-card.yellow .stat-val { color: var(--yellow); }
+  .stat-card.red { border-color: var(--red-border); background: var(--red-bg); }
+  .stat-card.red .stat-val { color: var(--red); }
+
+  /* Chapter cards */
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--dark);
+                    margin-bottom: 0.75rem; padding-bottom: 0.4rem;
+                    border-bottom: 2px solid var(--gray-border); }
+  .chapter-card { background: white; border-radius: 12px; margin-bottom: 1.2rem;
+                   box-shadow: 0 1px 4px rgba(0,0,0,0.07); overflow: hidden; }
+  .chapter-header { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem;
+                     cursor: pointer; user-select: none; border-bottom: 1px solid var(--gray-border); }
+  .chapter-header:hover { background: var(--gray-bg); }
+  .ch-status { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .ch-status.ready { background: var(--green); }
+  .ch-status.needs_work { background: var(--yellow); }
+  .ch-status.incomplete { background: var(--red); }
+  .ch-code { font-size: 0.72rem; font-weight: 800; color: var(--gray);
+              background: var(--gray-bg); padding: 0.15rem 0.5rem;
+              border-radius: 5px; border: 1px solid var(--gray-border); }
+  .ch-title { flex: 1; font-weight: 700; color: var(--dark); font-size: 0.95rem; }
+  .ch-score { font-size: 1.1rem; font-weight: 900; }
+  .ch-score.ready { color: var(--green); }
+  .ch-score.needs_work { color: var(--yellow); }
+  .ch-score.incomplete { color: var(--red); }
+  .ch-badge { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem;
+               border-radius: 999px; white-space: nowrap; }
+  .badge-ready { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .badge-needs_work { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+  .badge-incomplete { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+
+  .chapter-body { padding: 1rem 1.2rem; }
+
+  /* Layer summary row */
+  .layer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
+  .layer-cell { border-radius: 8px; padding: 0.5rem 0.7rem; border: 1px solid; }
+  .layer-cell.pass { background: var(--green-bg); border-color: var(--green-border); }
+  .layer-cell.fail { background: var(--red-bg);   border-color: var(--red-border); }
+  .layer-cell.warn { background: var(--yellow-bg); border-color: var(--yellow-border); }
+  .layer-cell.skip { background: var(--gray-bg);  border-color: var(--gray-border); }
+  .layer-name { font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+                 letter-spacing: 0.07em; color: var(--gray); }
+  .layer-val { font-size: 0.9rem; font-weight: 800; margin-top: 0.1rem; }
+  .layer-cell.pass .layer-val { color: var(--green); }
+  .layer-cell.fail .layer-val { color: var(--red); }
+  .layer-cell.warn .layer-val { color: var(--yellow); }
+  .layer-cell.skip .layer-val { color: var(--gray); }
+
+  /* Stats row */
+  .stats-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;
+                padding: 0.6rem 0.8rem; background: var(--gray-bg);
+                border-radius: 8px; font-size: 0.8rem; }
+  .stat-item span { color: var(--gray); }
+  .stat-item strong { color: var(--dark); }
+
+  /* Issues table */
+  .issues-section { margin-top: 0.5rem; }
+  .issues-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+                   letter-spacing: 0.07em; color: var(--gray); margin-bottom: 0.5rem; }
+  .issue-row { display: flex; align-items: flex-start; gap: 0.6rem;
+                padding: 0.45rem 0.6rem; border-radius: 6px; margin-bottom: 0.3rem;
+                border: 1px solid transparent; }
+  .issue-row.error   { background: var(--red-bg);    border-color: var(--red-border); }
+  .issue-row.warning { background: var(--yellow-bg); border-color: var(--yellow-border); }
+  .issue-row.info    { background: var(--blue-bg);   border-color: var(--blue-border); }
+  .issue-sev { font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+                padding: 0.1rem 0.35rem; border-radius: 4px; flex-shrink: 0; white-space: nowrap; }
+  .sev-error   { background: var(--red);   color: white; }
+  .sev-warning { background: var(--yellow); color: white; }
+  .sev-info    { background: var(--blue);  color: white; }
+  .issue-rule { font-size: 0.68rem; color: var(--gray); font-family: monospace; flex-shrink: 0; }
+  .issue-msg { font-size: 0.82rem; color: #1e293b; flex: 1; }
+  .issue-fix { font-size: 0.75rem; color: #0369a1; margin-top: 0.15rem; }
+  .no-issues { font-size: 0.82rem; color: var(--green); padding: 0.4rem 0;
+                font-weight: 600; }
+
+  /* AI quality dimensions */
+  .ai-dims { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.3rem; }
+  .ai-dim-row { display: flex; align-items: center; gap: 0.6rem; }
+  .ai-dim-name { width: 160px; font-size: 0.78rem; color: var(--gray); }
+  .ai-dim-bar { flex: 1; height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
+  .ai-dim-fill { height: 100%; border-radius: 999px; transition: width 0.3s; }
+  .ai-dim-score { font-size: 0.78rem; font-weight: 700; width: 32px; text-align: right; }
+
+  .toggle-btn { font-size: 1rem; color: var(--gray); transition: transform 0.2s; }
+  details .toggle-btn { transform: rotate(-90deg); }
+  details[open] .toggle-btn { transform: rotate(0deg); }
+
+  .ai-comments { font-size: 0.82rem; color: #475569; margin-top: 0.6rem; padding: 0.5rem 0.7rem;
+                  background: var(--blue-bg); border-radius: 6px; border-left: 3px solid #93c5fd; }
+
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .layer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 Content Validation Report — Vedic Math</h1>
+  <div class="header-meta">
+    Run ID: quick &nbsp;·&nbsp;
+    Mode: quick &nbsp;·&nbsp;
+    Generated: 2026-03-09 20:53:41 &nbsp;·&nbsp;
+    Framework: RoboDynamics Content Quality Standard v1.0.0
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Summary -->
+  <div class="summary-grid">
+    <div class="stat-card">
+      <div class="stat-val">1</div>
+      <div class="stat-label">Total Chapters</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-val">0</div>
+      <div class="stat-label">✅ Publish Ready</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="stat-val">0</div>
+      <div class="stat-label">⚠️ Needs Work</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-val">1</div>
+      <div class="stat-label">❌ Incomplete</div>
+    </div>
+  </div>
+
+  <!-- Chapter results -->
+  <div class="section-title">Chapter-by-Chapter Results</div>
+  
+<div class="chapter-card">
+  <details>
+  <summary class="chapter-header">
+    <span class="ch-status incomplete"></span>
+    <span class="ch-code">L2_DOUBLING_HALVING</span>
+    <span class="ch-title">Lesson 2: Doubling and Halving</span>
+    <span class="ch-score incomplete">85/100</span>
+    <span class="ch-badge badge-incomplete">INCOMPLETE</span>
+    <span class="toggle-btn">▼</span>
+  </summary>
+  <div class="chapter-body">
+    <div class="layer-grid"><div class="layer-cell fail"><div class="layer-name">Schema</div><div class="layer-val">✗ 17/20</div></div><div class="layer-cell fail"><div class="layer-name">Completeness</div><div class="layer-val">✗ 17/25</div></div><div class="layer-cell pass"><div class="layer-name">Math Accuracy</div><div class="layer-val">✓ 30/30</div></div><div class="layer-cell skip"><div class="layer-name">AI Quality</div><div class="layer-val">—</div></div></div>
+    <div class="stats-row"><div class="stat-item"><span>Questions: </span><strong>27</strong></div><div class="stat-item"><span>Worked Ex.: </span><strong>4</strong></div><div class="stat-item"><span>Screenplay Beats: </span><strong>27</strong></div><div class="stat-item"><span>Math Verified: </span><strong>0/0</strong></div><div class="stat-item"><span>Difficulty: </span><strong>E:9 M:9 H:9</strong></div></div>
+    
+    <div class="issues-section"><div class="issues-title">Issues Found</div><div class="issue-row error"><span class="issue-sev sev-error">ERROR</span><span class="issue-rule">MISSING_REQUIRED_FIELD</span><div class="issue-msg">Required field 'teachingFlowStages' is missing from chapter JSON<div class="issue-fix">💡 Add the 'teachingFlowStages' key to the chapter JSON</div></div></div><div class="issue-row error"><span class="issue-sev sev-error">ERROR</span><span class="issue-rule">MISSING_TEACHING_PHASES</span><div class="issue-msg">teachingFlowStages missing phases: ['CHECK', 'CHECKPOINT', 'DEMO', 'EXPLAIN', 'GUIDED', 'INTRO', 'PRACTICE']<div class="issue-fix">💡 Add missing phase entries: ['CHECK', 'CHECKPOINT', 'DEMO', 'EXPLAIN', 'GUIDED', 'INTRO', 'PRACTICE']</div></div></div><div class="issue-row warning"><span class="issue-sev sev-warning">WARNING</span><span class="issue-rule">FEW_SCREENPLAY_BEATS</span><div class="issue-msg">screenplay has 27 beats, minimum is 30<div class="issue-fix">💡 Add more teacherLine + boardAction beats to flesh out the lesson</div></div></div><div class="issue-row info"><span class="issue-sev sev-info">INFO</span><span class="issue-rule">NONSTANDARD_QUESTION_ID</span><div class="issue-msg">20 question IDs don't match pattern ^L\d+_[A-Z]_[A-Z_]+_[a-f0-9]{6}$<div class="issue-fix">💡 Use format: L{n}_{EXERCISEGROUP}_{DIFFICULTY_INIT}_{6hexchars}</div></div></div></div>
+  </div>
+  </details>
+</div>
+
+</div>
+</body>
+</html>

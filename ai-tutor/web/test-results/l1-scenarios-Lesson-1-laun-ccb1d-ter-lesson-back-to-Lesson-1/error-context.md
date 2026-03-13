@@ -1,0 +1,45 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - paragraph [ref=e7]: Step 1 of 9
+          - heading "Introduction to Completing the Whole" [level=2] [ref=e8]
+        - generic [ref=e9]:
+          - generic [ref=e10]: 5/5 hearts
+          - button "Listen" [ref=e11] [cursor=pointer]
+          - button "Voice on" [ref=e12] [cursor=pointer]
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - paragraph [ref=e17]: Your turn
+          - generic [ref=e19]: Your turn
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - generic "Raj teacher avatar" [ref=e24]:
+              - img "Raj" [ref=e25]
+            - generic [ref=e26]:
+              - heading "Try this one on your own now." [level=3] [ref=e27]
+              - paragraph [ref=e28]: "Your turn now: answer by voice or text."
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - generic [ref=e31]: Try this
+              - paragraph [ref=e32]:
+                - strong [ref=e33]: "Exercise A (Introduction to Completing the Whole): Which base number do we 'complete to' for fast mental addition in the Vedic system?"
+              - img [ref=e35]:
+                - generic [ref=e37]: "Sutra: By the Completion or Non-Completion"
+                - generic [ref=e38]: We always look for the nearest multiple of 10.
+                - generic [ref=e39]: "Example: 6 + 4 = 10 | 37 + 3 = 40"
+            - generic [ref=e40]:
+              - generic [ref=e41]: Your Answer
+              - textbox "Your Answer" [active] [ref=e42]:
+                - /placeholder: Type your answer
+              - paragraph [ref=e43]: Answer the question above.
+              - generic [ref=e44]:
+                - button "Check" [ref=e45] [cursor=pointer]
+                - button "Speak" [ref=e46] [cursor=pointer]
+                - button "Skip" [ref=e47] [cursor=pointer]
+  - alert [ref=e48]
+```

@@ -1,0 +1,14 @@
+{
+  "agentId": "pedagogy_reviewer",
+  "implementationType": "heuristic_local_reviewer",
+  "purpose": "Score teaching clarity, progression, examples, engagement, and Bloom coverage after deterministic validation.",
+  "inputs": [
+    "courseId",
+    "chapterCode",
+    "lessonPlanPath",
+    "validationReportPath"
+  ],
+  "outputs": [
+    "pedagogy_review_report.json"
+  ]
+}

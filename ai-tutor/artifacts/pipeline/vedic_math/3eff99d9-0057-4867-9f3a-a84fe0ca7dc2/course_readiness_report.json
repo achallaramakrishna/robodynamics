@@ -1,0 +1,35 @@
+{
+  "artifactType": "course_readiness_report",
+  "generatedAt": "2026-03-10T01:12:35.048Z",
+  "courseId": "vedic_math",
+  "totalChapters": 2,
+  "deterministicReadyCount": 1,
+  "publishApprovalCount": 0,
+  "blockedCount": 1,
+  "averageDeterministicScore": 82.66,
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L4_VERTICAL_CROSSWISE",
+      "title": "Lesson 4: Left to Right Arithmetic",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    }
+  ]
+}

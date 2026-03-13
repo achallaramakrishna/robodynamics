@@ -1,0 +1,27 @@
+{
+  "artifactType": "course_readiness_report",
+  "generatedAt": "2026-03-10T01:28:53.911Z",
+  "courseId": "vedic_math",
+  "totalChapters": 1,
+  "deterministicReadyCount": 1,
+  "publishApprovalCount": 0,
+  "blockedCount": 0,
+  "averageDeterministicScore": 100,
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    }
+  ],
+  "runDbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "spawnSync C:\\Users\\Achalla Ramakrishna\\AppData\\Local\\Programs\\Python\\Python313\\python.exe EPERM"
+  }
+}

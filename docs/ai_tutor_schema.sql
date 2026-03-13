@@ -1,5 +1,5 @@
--- Optional persistence tables for AI tutor events and progress.
--- Current Java implementation stores events in-memory for starter rollout.
+-- Persistence tables for AI tutor session analytics and progress snapshots.
+-- Java event ingestion now writes to these tables; FastAPI live session state remains in-memory until resume hydration is added.
 
 CREATE TABLE IF NOT EXISTS rd_ai_tutor_session (
   session_id VARCHAR(64) PRIMARY KEY,
@@ -41,4 +41,3 @@ CREATE TABLE IF NOT EXISTS rd_ai_tutor_progress (
   last_practiced_at DATETIME,
   UNIQUE KEY uq_ai_tutor_progress (student_user_id, module_code, lesson_code)
 );
-

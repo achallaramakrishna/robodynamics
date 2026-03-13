@@ -1,0 +1,52 @@
+{
+  "artifactType": "chapter_status_board",
+  "courseId": "vedic_math",
+  "generatedAt": "2026-03-10T01:28:53.908Z",
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c/L1_COMPLETING_WHOLE/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    }
+  ]
+}

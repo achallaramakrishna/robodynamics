@@ -1,0 +1,453 @@
+{
+  "artifactType": "course_blueprint",
+  "courseId": "vedic_math",
+  "courseTitle": "Vedic Math",
+  "generatedAt": "2026-03-10T01:30:57.046Z",
+  "gradeBand": "5-8",
+  "subject": "mathematics",
+  "pedagogicalContract": {
+    "requiredTeachingPhases": [
+      "INTRO",
+      "EXPLAIN",
+      "DEMO",
+      "GUIDED",
+      "PRACTICE",
+      "CHECK",
+      "CHECKPOINT"
+    ],
+    "difficultyLadder": [
+      "easy",
+      "medium",
+      "hard"
+    ],
+    "sessionModel": {
+      "estimatedMinutes": 25,
+      "workedExamplesMin": 4,
+      "questionPoolMin": 24
+    },
+    "deliveryModes": [
+      "voice",
+      "board",
+      "text"
+    ]
+  },
+  "chapterBlueprints": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "learningGoals": [
+        "Understand what Vedic Maths is and why it improves confidence.",
+        "Use base-10 completion for faster mental arithmetic.",
+        "Solve near-ten addition and subtraction with clear steps."
+      ],
+      "summaryTopics": [
+        "Introduction to Completing the Whole",
+        "Pairs That Make 10",
+        "Ten Point Circle",
+        "Completing the Next Ten",
+        "Deficiency from Ten",
+        "Mental Addition with Carry",
+        "Grouping Numbers into Wholes",
+        "Add Near a Base",
+        "Subtract Near a Base"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Completing the Whole with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Introduction to Completing the Whole in simple language.",
+        "DEMO": "Model Pairs That Make 10 step by step on the board.",
+        "GUIDED": "Guide the learner through Pairs That Make 10 with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Ten Point Circle across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L2_DOUBLING_HALVING",
+      "title": "Lesson 2: Doubling and Halving",
+      "learningGoals": [
+        "Double and halve any number instantly without paper.",
+        "Use the balancing trick to make hard multiplications easy.",
+        "Apply ×5, ×25, ÷5, ÷25 shortcuts using doubling and halving."
+      ],
+      "summaryTopics": [
+        "Doubling — Multiply by 2",
+        "Multiply by 4 — Double Twice",
+        "Multiply by 8 — Double Three Times",
+        "Halving — Divide by 2",
+        "Divide by 4 — Halve Twice",
+        "Balancing Trick — One Doubles, One Halves",
+        "Multiply by 5 — Times 10 then Halve",
+        "Multiply by 25 — Times 100 then Quarter",
+        "Divide by 5 and 25 — Reverse Trick"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Doubling and Halving with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Doubling — Multiply by 2 in simple language.",
+        "DEMO": "Model Multiply by 4 — Double Twice step by step on the board.",
+        "GUIDED": "Guide the learner through Multiply by 4 — Double Twice with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Multiply by 8 — Double Three Times across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L3_MULTIPLY_BY_11",
+      "title": "Lesson 3: Digit Sums and the Nine Point Circle",
+      "learningGoals": [
+        "Find digit sums quickly, even when the reduction takes two steps.",
+        "Use casting out nines to speed up digit-sum work and check arithmetic answers.",
+        "Read the nine point circle and Vedic Square as pattern tools, not just as facts to memorize."
+      ],
+      "summaryTopics": [
+        "Adding Digits and Digit Sums",
+        "Two-Step Digit Sums",
+        "The Nine Point Circle",
+        "Casting Out Nines",
+        "Digit Sum Puzzles",
+        "Digit Sum Check for Addition",
+        "Digit Sum Check for Multiplication",
+        "The Vedic Square and Pattern Design",
+        "Number Nine"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Digit Sums and the Nine Point Circle with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Adding Digits and Digit Sums in simple language.",
+        "DEMO": "Model Two-Step Digit Sums step by step on the board.",
+        "GUIDED": "Guide the learner through Two-Step Digit Sums with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on The Nine Point Circle across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L4_VERTICAL_CROSSWISE",
+      "title": "Lesson 4: Left to Right Arithmetic",
+      "learningGoals": [
+        "Perform operations from left to right with control.",
+        "Combine speed methods with correctness checks.",
+        "Handle longer numbers without losing place value."
+      ],
+      "summaryTopics": [
+        "Addition from Left to Right",
+        "Multiplication from Left to Right",
+        "Doubling and Halving for Product Conversion",
+        "Subtraction from Left to Right",
+        "Digit Sum Check for Subtraction",
+        "Longer Subtractions Left to Right"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Left to Right Arithmetic with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Addition from Left to Right in simple language.",
+        "DEMO": "Model Multiplication from Left to Right step by step on the board.",
+        "GUIDED": "Guide the learner through Multiplication from Left to Right with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Doubling and Halving for Product Conversion across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L5_ALL_FROM_9_LAST_FROM_10",
+      "title": "Lesson 5: All from 9 and Last from 10",
+      "learningGoals": [
+        "Apply All from 9 and Last from 10 correctly.",
+        "Subtract near-base numbers in one flow.",
+        "Use the method in practical money calculations."
+      ],
+      "summaryTopics": [
+        "Applying the Formula",
+        "Subtraction from a Base",
+        "Money Applications of Base Subtraction"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open All from 9 and Last from 10 with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Applying the Formula in simple language.",
+        "DEMO": "Model Subtraction from a Base step by step on the board.",
+        "GUIDED": "Guide the learner through Subtraction from a Base with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Money Applications of Base Subtraction across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L6_NIKHILAM_BASE_10_100",
+      "title": "Lesson 6: Number Splitting",
+      "learningGoals": [
+        "Split hard expressions into easy mental chunks.",
+        "Use splitting across all four operations.",
+        "Keep solution flow from left to right."
+      ],
+      "summaryTopics": [
+        "Addition by Splitting",
+        "Subtraction by Splitting",
+        "Multiplication by Splitting",
+        "Division by Splitting",
+        "Left-to-Right Simplification"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Number Splitting with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Addition by Splitting in simple language.",
+        "DEMO": "Model Subtraction by Splitting step by step on the board.",
+        "GUIDED": "Guide the learner through Subtraction by Splitting with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Multiplication by Splitting across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L7_SQUARES_ENDING_5",
+      "title": "Lesson 7: Base Multiplication",
+      "learningGoals": [
+        "Multiply near base numbers with minimal writing.",
+        "Use pattern recognition for faster products.",
+        "Extend base multiplication to larger numbers."
+      ],
+      "summaryTopics": [
+        "Times Tables up to 5x5 Mental Strategy",
+        "Numbers Just Over Ten",
+        "Table Patterns on the 9-Point Circle",
+        "Numbers Close to 100",
+        "Larger Number Multiplication",
+        "Proportionate Extension",
+        "Different Base Multiplication",
+        "Squaring Near a Base",
+        "Method Summary"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Base Multiplication with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Times Tables up to 5x5 Mental Strategy in simple language.",
+        "DEMO": "Model Numbers Just Over Ten step by step on the board.",
+        "GUIDED": "Guide the learner through Numbers Just Over Ten with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Table Patterns on the 9-Point Circle across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L8_YAVADUNAM",
+      "title": "Lesson 8: Checking and Divisibility",
+      "learningGoals": [
+        "Validate answers quickly before finalizing.",
+        "Apply divisibility tests with confidence.",
+        "Reduce avoidable arithmetic mistakes."
+      ],
+      "summaryTopics": [
+        "Digit Sum Check for Division",
+        "First by First Last by Last Checks",
+        "Divisibility by 4",
+        "Divisibility by 11"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Checking and Divisibility with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Digit Sum Check for Division in simple language.",
+        "DEMO": "Model First by First Last by Last Checks step by step on the board.",
+        "GUIDED": "Guide the learner through First by First Last by Last Checks with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Divisibility by 4 across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L9_GENERAL_MULTIPLICATION",
+      "title": "Lesson 9: Bar Numbers",
+      "learningGoals": [
+        "Convert between bar and standard forms.",
+        "Use bar numbers to simplify subtraction.",
+        "Apply bar-number thinking in multi-step sums."
+      ],
+      "summaryTopics": [
+        "Removing Bar Numbers",
+        "General Subtraction with Bar Numbers",
+        "Creating Bar Numbers",
+        "Applications of Bar Numbers"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Bar Numbers with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Removing Bar Numbers in simple language.",
+        "DEMO": "Model General Subtraction with Bar Numbers step by step on the board.",
+        "GUIDED": "Guide the learner through General Subtraction with Bar Numbers with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Creating Bar Numbers across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L10_DIVISION_BY_9",
+      "title": "Lesson 10: Special Multiplication",
+      "learningGoals": [
+        "Use special multiplication shortcuts accurately.",
+        "Select the best pattern for each number pair.",
+        "Speed up products while preserving correctness."
+      ],
+      "summaryTopics": [
+        "Multiplication by 11",
+        "By One More than the One Before",
+        "Multiplication by Nines",
+        "First by First Last by Last Multiplication",
+        "Using Average to Find Product",
+        "Special Number Factor Spotting"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Special Multiplication with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Multiplication by 11 in simple language.",
+        "DEMO": "Model By One More than the One Before step by step on the board.",
+        "GUIDED": "Guide the learner through By One More than the One Before with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Multiplication by Nines across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L11_VINCULUM_INTRO",
+      "title": "Lesson 11: General Multiplication",
+      "learningGoals": [
+        "Multiply 2-figure and 3-figure numbers systematically.",
+        "Use moving multiplier cleanly for long operands.",
+        "Connect mental and written left-to-right processes."
+      ],
+      "summaryTopics": [
+        "Revision of Core Multiplication Ideas",
+        "Two-Figure Numbers in One Line",
+        "Moving Multiplier for Long Numbers",
+        "Three-Figure Extension",
+        "Multiplying Binomials",
+        "Three-Figure Pattern Extension",
+        "Written Left-to-Right Calculations"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open General Multiplication with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Revision of Core Multiplication Ideas in simple language.",
+        "DEMO": "Model Two-Figure Numbers in One Line step by step on the board.",
+        "GUIDED": "Guide the learner through Two-Figure Numbers in One Line with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Moving Multiplier for Long Numbers across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L12_FRACTIONS_DECIMALS",
+      "title": "Lesson 12: Squaring",
+      "learningGoals": [
+        "Square numbers rapidly using multiple patterns.",
+        "Verify squares using digit-sum properties.",
+        "Extend squaring methods to larger numbers."
+      ],
+      "summaryTopics": [
+        "Squaring Numbers Ending in 5",
+        "Squaring Numbers Near 50",
+        "General Left-to-Right Squaring",
+        "Number Splitting for Squaring",
+        "Algebraic Squaring",
+        "Digit Sums of Squares",
+        "Square Roots of Perfect Squares",
+        "Squaring 3 and 4-Figure Numbers"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Squaring with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Squaring Numbers Ending in 5 in simple language.",
+        "DEMO": "Model Squaring Numbers Near 50 step by step on the board.",
+        "GUIDED": "Guide the learner through Squaring Numbers Near 50 with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on General Left-to-Right Squaring across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L13_ALGEBRAIC_IDENTITIES",
+      "title": "Lesson 13: One-Line Equations",
+      "learningGoals": [
+        "Solve linear equations mentally with structure.",
+        "Use inverse operations with speed and clarity.",
+        "Explain each equation step confidently."
+      ],
+      "summaryTopics": [
+        "One-Step Equations",
+        "Two-Step Equations",
+        "Three-Step Equations",
+        "Mental One-Line Solutions"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open One-Line Equations with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind One-Step Equations in simple language.",
+        "DEMO": "Model Two-Step Equations step by step on the board.",
+        "GUIDED": "Guide the learner through Two-Step Equations with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Three-Step Equations across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L14_FACTORISATION",
+      "title": "Lesson 14: Fractions",
+      "learningGoals": [
+        "Add and subtract fractions using crosswise thinking.",
+        "Compare and simplify fractions quickly.",
+        "See a unified pattern across all fraction operations."
+      ],
+      "summaryTopics": [
+        "Vertically and Crosswise for Fraction Addition/Subtraction",
+        "Fraction Simplification",
+        "Comparing Fractions",
+        "Unified Fraction Operations + - x /"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Fractions with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Vertically and Crosswise for Fraction Addition/Subtraction in simple language.",
+        "DEMO": "Model Fraction Simplification step by step on the board.",
+        "GUIDED": "Guide the learner through Fraction Simplification with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Comparing Fractions across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L15_SQUARES_NEAR_BASE",
+      "title": "Lesson 15: Special Division",
+      "learningGoals": [
+        "Perform fast division near base numbers.",
+        "Track quotient and remainder correctly.",
+        "Adapt method for above-base and below-base divisors."
+      ],
+      "summaryTopics": [
+        "Division by 9",
+        "Division by 8 and Similar Bases",
+        "Division by 99 and 98",
+        "Divisor Below Base Number",
+        "Divisor Above Base Number"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open Special Division with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Division by 9 in simple language.",
+        "DEMO": "Model Division by 8 and Similar Bases step by step on the board.",
+        "GUIDED": "Guide the learner through Division by 8 and Similar Bases with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Division by 99 and 98 across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    },
+    {
+      "chapterCode": "L16_CUBES_INTRO",
+      "title": "Lesson 16: The Crowning Gem (Advanced Division)",
+      "learningGoals": [
+        "Use one-line division by two-figure divisors.",
+        "Control remainder strategy deliberately.",
+        "Handle advanced division with flag and bar digits."
+      ],
+      "summaryTopics": [
+        "Single Figure on the Flag Division",
+        "Short Division Remainder Control",
+        "Longer Number Division",
+        "Negative Flag Digits with Bar Numbers",
+        "Decimalising the Remainder"
+      ],
+      "phaseIntentMap": {
+        "INTRO": "Open The Crowning Gem (Advanced Division) with one fast mental-math hook and connect it to prior knowledge.",
+        "EXPLAIN": "Explain the rule behind Single Figure on the Flag Division in simple language.",
+        "DEMO": "Model Short Division Remainder Control step by step on the board.",
+        "GUIDED": "Guide the learner through Short Division Remainder Control with prompt-based support.",
+        "PRACTICE": "Shift to independent practice on Longer Number Division across difficulty levels.",
+        "CHECK": "Diagnose errors and reteach the exact step that broke down.",
+        "CHECKPOINT": "Ask the learner to explain the shortcut before advancing."
+      }
+    }
+  ]
+}

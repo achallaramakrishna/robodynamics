@@ -1,0 +1,22 @@
+{
+  "artifactType": "publish_decision",
+  "generatedAt": "2026-03-10T02:16:38.726Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "decision": "blocked",
+  "publishStatus": "needs_revision",
+  "approvedBy": null,
+  "approvedAt": null,
+  "blockers": [
+    "UI/UX review still has multiple accessibility issues."
+  ],
+  "dbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "MySQL unavailable"
+  },
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/00b71b82-6ae1-40ce-ad1d-57fdaf536999/L1_COMPLETING_WHOLE/deterministic_validation_report.json",
+  "pedagogyReviewPath": "ai-tutor/artifacts/pipeline/vedic_math/00b71b82-6ae1-40ce-ad1d-57fdaf536999/L1_COMPLETING_WHOLE/pedagogy_review_report.json",
+  "uiUxReviewPath": "ai-tutor/artifacts/pipeline/vedic_math/00b71b82-6ae1-40ce-ad1d-57fdaf536999/L1_COMPLETING_WHOLE/ui_ux_review_report.json",
+  "studentSimulationPath": "ai-tutor/artifacts/pipeline/vedic_math/00b71b82-6ae1-40ce-ad1d-57fdaf536999/L1_COMPLETING_WHOLE/student_simulation_report.json"
+}

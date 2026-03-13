@@ -1,0 +1,796 @@
+I’ve got the naming context. I’m adding two root-level framework docs now: one for the agent pipeline and one for the student behavior model, both with
+  explicit OpenAI touchpoints and a fixed Duolingo-style UI constraint.
+
+• Edited 2 files (+805 -0)
+  └ docs\COURSE_AGENT_PIPELINE.md (+412 -0)
+      1 +# Course Agent Pipeline
+      2 +
+      3 +This document defines the recommended multi-agent workflow for building any RoboDynamics tutor course, including development courses, Vedic Math, a
+         nd future skill tracks.
+      4 +
+      5 +## Product Constraint
+      6 +
+      7 +Until launch stabilization is complete, the tutor UI should stay under these constraints:
+      8 +
+      9 +- Duolingo-style
+     10 +- one screen
+     11 +- one active task at a time
+     12 +- minimal chrome
+     13 +- no dashboard-like lesson screen
+     14 +- explanation mode and exercise mode use the same central lesson surface
+     15 +
+     16 +This is a fixed product rule for the current phase.
+     17 +
+     18 +## Why A Multi-Agent Pipeline
+     19 +
+     20 +The course should not be authored as one mixed artifact. Pedagogy, content, conversation, assessment, UX, and verification must be separated so eac
+         h stage can be reviewed independently.
+     21 +
+     22 +This gives:
+     23 +
+     24 +- better lesson quality
+     25 +- clearer ownership
+     26 +- easier debugging
+     27 +- safer AI usage
+     28 +- stronger launch readiness
+     29 +
+     30 +## Core Agents
+     31 +
+     32 +### 1. Pedagogical Architect
+     33 +
+     34 +Owns the learning design.
+     35 +
+     36 +Responsibilities:
+     37 +
+     38 +- define learner outcome
+     39 +- define prerequisite knowledge
+     40 +- define misconception map
+     41 +- define explanation-first vs try-first decisions
+     42 +- define session arc
+     43 +- define checkpoint points
+     44 +- define mastery and review rules
+     45 +
+     46 +Input:
+     47 +
+     48 +- course goal
+     49 +- learner profile
+     50 +- grade / difficulty
+     51 +- platform constraints
+     52 +
+     53 +Output:
+     54 +
+     55 +- lesson blueprint
+     56 +- session progression
+     57 +- misconception map
+     58 +- mastery contract
+     59 +
+     60 +OpenAI use:
+     61 +
+     62 +- review lesson sequence
+     63 +- review pacing
+     64 +- identify hidden misconceptions
+     65 +- suggest scaffold improvements
+     66 +
+     67 +OpenAI should not decide final progression logic by itself.
+     68 +
+     69 +### 2. Curriculum Mapper
+     70 +
+     71 +Owns the structural breakdown.
+     72 +
+     73 +Responsibilities:
+     74 +
+     75 +- split course into chapters
+     76 +- split chapters into lessons
+     77 +- split lessons into sessions
+     78 +- define dependencies
+     79 +- define estimated time
+     80 +
+     81 +Output:
+     82 +
+     83 +- `course_map.json`
+     84 +- chapter list
+     85 +- session map
+     86 +- dependency graph
+     87 +
+     88 +OpenAI use:
+     89 +
+     90 +- optional review for sequencing gaps
+     91 +
+     92 +Primary source of truth should remain structured deterministic data.
+     93 +
+     94 +### 3. Content Creator
+     95 +
+     96 +Owns the authored teaching material.
+     97 +
+     98 +Responsibilities:
+     99 +
+    100 +- teacher explanation
+    101 +- worked examples
+    102 +- micro-practice
+    103 +- challenge tasks
+    104 +- hints
+    105 +- recovery prompts
+    106 +- expected answers
+    107 +
+    108 +Output:
+    109 +
+    110 +- lesson plan markdown
+    111 +- chapter JSON content
+    112 +- worked examples
+    113 +- exercise pools
+    114 +
+    115 +OpenAI use:
+    116 +
+    117 +- rewrite awkward content
+    118 +- simplify teacher lines
+    119 +- generate alternate hints
+    120 +- generate more natural examples
+    121 +
+    122 +OpenAI should not be the only source of final answers.
+    123 +
+    124 +### 4. Conversation Designer
+    125 +
+    126 +Owns the live teacher-student exchange.
+    127 +
+    128 +Responsibilities:
+    129 +
+    130 +- tutor says
+    131 +- tutor asks
+    132 +- tutor waits
+    133 +- tutor reacts to right answer
+    134 +- tutor reacts to wrong answer
+    135 +- tutor encourages
+    136 +- tutor transitions
+    137 +
+    138 +Output:
+    139 +
+    140 +- conversation script
+    141 +- turn-by-turn lesson flow
+    142 +- right/wrong/help/stuck reactions
+    143 +
+    144 +OpenAI use:
+    145 +
+    146 +- improve naturalness
+    147 +- shorten correction lines
+    148 +- improve encouragement
+    149 +- generate tone variants
+    150 +
+    151 +### 5. Assessment Designer
+    152 +
+    153 +Owns mastery checks and evaluation shape.
+    154 +
+    155 +Responsibilities:
+    156 +
+    157 +- concept checks
+    158 +- coding checks
+    159 +- debugging checks
+    160 +- review loops
+    161 +- retry loops
+    162 +- promotion rules
+    163 +
+    164 +Output:
+    165 +
+    166 +- assessment spec
+    167 +- pass / retry / review conditions
+    168 +- rubric
+    169 +
+    170 +OpenAI use:
+    171 +
+    172 +- review question quality
+    173 +- detect weak coverage
+    174 +- detect duplicate checks
+    175 +- suggest missed assessment types
+    176 +
+    177 +Final correctness must remain deterministic.
+    178 +
+    179 +### 6. Exercise Generator
+    180 +
+    181 +Owns scaled practice generation.
+    182 +
+    183 +Responsibilities:
+    184 +
+    185 +- generate easy / medium / hard tasks
+    186 +- create retry variants
+    187 +- create review variants
+    188 +- create stretch tasks
+    189 +
+    190 +Output:
+    191 +
+    192 +- question pools
+    193 +- retry pool
+    194 +- review pool
+    195 +- challenge pool
+    196 +
+    197 +OpenAI use:
+    198 +
+    199 +- propose task variants
+    200 +- improve wording
+    201 +- expand examples
+    202 +
+    203 +Question IDs, expected answers, and promotion criteria must remain deterministic.
+    204 +
+    205 +### 7. UX Tutor Designer
+    206 +
+    207 +Owns the tutor-screen behavior.
+    208 +
+    209 +Responsibilities:
+    210 +
+    211 +- map lesson states to one-screen UI
+    212 +- define progress model
+    213 +- define badge / points moments
+    214 +- keep interface minimal
+    215 +- avoid panel clutter
+    216 +
+    217 +Output:
+    218 +
+    219 +- UI state map
+    220 +- wireframes / implementation spec
+    221 +- CTA rules
+    222 +
+    223 +OpenAI use:
+    224 +
+    225 +- optional critique of clarity
+    226 +
+    227 +UI direction is currently fixed and should not be re-opened during launch hardening.
+    228 +
+    229 +### 8. Student Simulator
+    230 +
+    231 +Owns end-to-end learner playthrough verification.
+    232 +
+    233 +Responsibilities:
+    234 +
+    235 +- simulate chapter flow
+    236 +- test correct-first path
+    237 +- test wrong-first path
+    238 +- test help-seeking path
+    239 +- test slow learner path
+    240 +- score seamlessness
+    241 +
+    242 +Output:
+    243 +
+    244 +- simulator run logs
+    245 +- seamlessness score
+    246 +- chapter score
+    247 +- friction report
+    248 +
+    249 +Current implementation:
+    250 +
+    251 +- script: [simulate_pedagogical_flow.py](C:/roboworkspace/robodynamics/ai-tutor/tutor-api/scripts/simulate_pedagogical_flow.py)
+    252 +- report: [PEDAGOGICAL_SIMULATION_REPORT.md](C:/roboworkspace/robodynamics/docs/vedic_math/PEDAGOGICAL_SIMULATION_REPORT.md)
+    253 +
+    254 +OpenAI use:
+    255 +
+    256 +- review simulator report
+    257 +- summarize probable learner confusion
+    258 +- suggest pedagogical fixes
+    259 +
+    260 +The simulator itself should remain deterministic first.
+    261 +
+    262 +### 9. QA / Release Reviewer
+    263 +
+    264 +Owns launch readiness.
+    265 +
+    266 +Responsibilities:
+    267 +
+    268 +- completeness validation
+    269 +- duplicate ID detection
+    270 +- content/runtime mismatch detection
+    271 +- UX regression detection
+    272 +- deployment signoff
+    273 +
+    274 +Output:
+    275 +
+    276 +- release checklist
+    277 +- blocking issues
+    278 +- go / no-go summary
+    279 +
+    280 +OpenAI use:
+    281 +
+    282 +- summarize final risks
+    283 +- cluster issue patterns
+    284 +
+    285 +## Deterministic vs AI Boundary
+    286 +
+    287 +### Deterministic
+    288 +
+    289 +These must stay rule-based or explicitly authored:
+    290 +
+    291 +- expected answers
+    292 +- question IDs
+    293 +- chapter/session progression
+    294 +- lesson completion percentage
+    295 +- mastery promotion rules
+    296 +- review queue rules
+    297 +- retry count thresholds
+    298 +- badge unlock logic
+    299 +
+    300 +### AI-Assisted
+    301 +
+    302 +These can safely use OpenAI for value-add:
+    303 +
+    304 +- pedagogical review
+    305 +- content polishing
+    306 +- conversation polishing
+    307 +- assessment review
+    308 +- simulator report analysis
+    309 +- release summary
+    310 +
+    311 +## End-To-End Workflow
+    312 +
+    313 +1. Pedagogical Architect creates lesson blueprint.
+    314 +2. Curriculum Mapper creates course/session structure.
+    315 +3. Content Creator authors teaching content and exercises.
+    316 +4. Conversation Designer converts authored content into tutor turns.
+    317 +5. Assessment Designer defines pass/retry/review/mastery rules.
+    318 +6. UX Tutor Designer maps the flow into a minimal one-screen lesson.
+    319 +7. Exercise Generator fills question/task pools.
+    320 +8. Deterministic validators run.
+    321 +9. Student Simulator runs multiple learner paths.
+    322 +10. OpenAI reviews simulator output and content quality.
+    323 +11. Fixes are applied.
+    324 +12. QA / Release Reviewer signs off.
+    325 +13. Production deploy.
+    326 +
+    327 +## Suggested Artifacts
+    328 +
+    329 +For each course, maintain:
+    330 +
+    331 +- `docs/COURSE_AGENT_PIPELINE.md`
+    332 +- `docs/STUDENT_BEHAVIOR_MODEL.md`
+    333 +- `docs/<course>/lesson_plans/*.md`
+    334 +- `docs/<course>/conversation_scripts/*.md`
+    335 +- `docs/<course>/assessment_specs/*.md`
+    336 +- `docs/<course>/PEDAGOGICAL_SIMULATION_REPORT.md`
+    337 +- `ai-tutor/tutor-api/content-template/<course>/chapter/*.json`
+    338 +
+    339 +## Stage-Specific OpenAI Calls
+    340 +
+    341 +### Stage: Pedagogy Review
+    342 +
+    343 +Prompt type:
+    344 +
+    345 +- lesson sequence review
+    346 +- misconception review
+    347 +- pacing review
+    348 +
+    349 +Expected output:
+    350 +
+    351 +- gaps
+    352 +- pacing issues
+    353 +- missing scaffolds
+    354 +
+    355 +### Stage: Content Improvement
+    356 +
+    357 +Prompt type:
+    358 +
+    359 +- rewrite for clarity
+    360 +- simplify for age level
+    361 +- generate alternate examples
+    362 +
+    363 +Expected output:
+    364 +
+    365 +- improved teacher lines
+    366 +- alternate hints
+    367 +- cleaner examples
+    368 +
+    369 +### Stage: Conversation Improvement
+    370 +
+    371 +Prompt type:
+    372 +
+    373 +- shorten turn
+    374 +- soften correction
+    375 +- improve encouragement
+    376 +
+    377 +Expected output:
+    378 +
+    379 +- cleaner live tutoring phrases
+    380 +
+    381 +### Stage: Assessment Review
+    382 +
+    383 +Prompt type:
+    384 +
+    385 +- difficulty calibration
+    386 +- coverage check
+    387 +- duplicate detection
+    388 +
+    389 +Expected output:
+    390 +
+    391 +- missing skill types
+    392 +- duplicate or weak checks
+    393 +
+    394 +### Stage: Simulator Report Review
+    395 +
+    396 +Prompt type:
+    397 +
+    398 +- analyze friction report
+    399 +- identify likely learner pain points
+    400 +
+    401 +Expected output:
+    402 +
+    403 +- prioritized pedagogical fixes
+    404 +
+    405 +## Launch Recommendation
+    406 +
+    407 +For the next release window:
+    408 +
+    409 +- freeze UI direction to minimal Duolingo-style
+    410 +- keep correctness and progression deterministic
+    411 +- use OpenAI only for review, polishing, and report analysis
+    412 +- expand the student simulator before broadening the UI
+
+  └ docs\STUDENT_BEHAVIOR_MODEL.md (+393 -0)
+      1 +# Student Behavior Model
+      2 +
+      3 +This document defines the learner behaviors the tutor must recognize and accommodate during a live course session.
+      4 +
+      5 +The current system handles only part of this space. For launch, behavior handling should be explicit rather than accidental.
+      6 +
+      7 +## Goal
+      8 +
+      9 +The tutor should not react the same way to every learner.
+     10 +
+     11 +It must adapt based on:
+     12 +
+     13 +- speed
+     14 +- correctness
+     15 +- retries
+     16 +- help-seeking
+     17 +- confidence
+     18 +- skip behavior
+     19 +- frustration signals
+     20 +
+     21 +## Behavior Personas
+     22 +
+     23 +### 1. Correct Fast
+     24 +
+     25 +Traits:
+     26 +
+     27 +- answers correctly on first attempt
+     28 +- responds quickly
+     29 +- high streak
+     30 +
+     31 +Tutor response:
+     32 +
+     33 +- keep explanation short
+     34 +- promote faster
+     35 +- offer challenge variant
+     36 +- reward immediately
+     37 +
+     38 +### 2. Careful Correct
+     39 +
+     40 +Traits:
+     41 +
+     42 +- answers correctly
+     43 +- moderate or slow response time
+     44 +- low skip behavior
+     45 +
+     46 +Tutor response:
+     47 +
+     48 +- keep current pace
+     49 +- confirm reasoning
+     50 +- move forward without over-explaining
+     51 +
+     52 +### 3. Hesitant But Teachable
+     53 +
+     54 +Traits:
+     55 +
+     56 +- pauses often
+     57 +- asks for reassurance
+     58 +- succeeds after one hint
+     59 +
+     60 +Tutor response:
+     61 +
+     62 +- give one worked cue
+     63 +- encourage explicitly
+     64 +- ask student to try again quickly
+     65 +
+     66 +### 4. Wrong But Confident
+     67 +
+     68 +Traits:
+     69 +
+     70 +- submits wrong answer quickly
+     71 +- confidence signal is high
+     72 +- repeats similar mistakes
+     73 +
+     74 +Tutor response:
+     75 +
+     76 +- correct misconception directly
+     77 +- show one counter-example
+     78 +- avoid long encouragement-only replies
+     79 +
+     80 +### 5. Repeatedly Confused
+     81 +
+     82 +Traits:
+     83 +
+     84 +- multiple wrong attempts
+     85 +- low mastery trend
+     86 +- same subtopic keeps failing
+     87 +
+     88 +Tutor response:
+     89 +
+     90 +- reteach simpler
+     91 +- break the task into smaller steps
+     92 +- move to review loop if needed
+     93 +
+     94 +### 6. Silent Or Stuck
+     95 +
+     96 +Traits:
+     97 +
+     98 +- long no-response gap
+     99 +- does not type or speak
+    100 +- may reopen help without answering
+    101 +
+    102 +Tutor response:
+    103 +
+    104 +- offer a smaller first step
+    105 +- ask a simpler question
+    106 +- give a starter hint before expecting full answer
+    107 +
+    108 +### 7. Help-Seeking
+    109 +
+    110 +Traits:
+    111 +
+    112 +- asks many doubts
+    113 +- wants examples before answering
+    114 +- chat-heavy behavior
+    115 +
+    116 +Tutor response:
+    117 +
+    118 +- answer briefly
+    119 +- return to task quickly
+    120 +- avoid turning lesson into open-ended chat
+    121 +
+    122 +### 8. Guessing Randomly
+    123 +
+    124 +Traits:
+    125 +
+    126 +- very fast wrong answers
+    127 +- no pattern of reasoning
+    128 +- multiple inconsistent guesses
+    129 +
+    130 +Tutor response:
+    131 +
+    132 +- slow the learner down
+    133 +- require one explicit reasoning step
+    134 +- present one worked example
+    135 +
+    136 +### 9. Frustrated
+    137 +
+    138 +Traits:
+    139 +
+    140 +- repeated wrong answers
+    141 +- skip tendency increases
+    142 +- doubt tone becomes emotional
+    143 +- hearts decline quickly
+    144 +
+    145 +Tutor response:
+    146 +
+    147 +- shorten the task
+    148 +- reduce challenge
+    149 +- use supportive phrasing
+    150 +- create a quick win
+    151 +
+    152 +### 10. Advanced Or Bored
+    153 +
+    154 +Traits:
+    155 +
+    156 +- fast correct streak
+    157 +- very high mastery
+    158 +- low need for help
+    159 +
+    160 +Tutor response:
+    161 +
+    162 +- compress explanation
+    163 +- unlock challenge task
+    164 +- reduce repetition
+    165 +
+    166 +### 11. Skip-Heavy
+    167 +
+    168 +Traits:
+    169 +
+    170 +- uses skip often
+    171 +- moves through lessons without attempts
+    172 +
+    173 +Tutor response:
+    174 +
+    175 +- detect avoidance
+    176 +- present a smaller mandatory attempt
+    177 +- reduce passive progression
+    178 +
+    179 +### 12. Example-First Learner
+    180 +
+    181 +Traits:
+    182 +
+    183 +- prefers explanation before trying
+    184 +- may hesitate if asked to solve immediately
+    185 +
+    186 +Tutor response:
+    187 +
+    188 +- show one mini-example
+    189 +- then immediately ask for attempt
+    190 +
+    191 +### 13. Try-First Learner
+    192 +
+    193 +Traits:
+    194 +
+    195 +- wants to solve before hearing a full explanation
+    196 +
+    197 +Tutor response:
+    198 +
+    199 +- ask student to try first
+    200 +- explain only after answer or failure
+    201 +
+    202 +## Runtime Detection Signals
+    203 +
+    204 +Each behavior should be inferred from signals already available or easy to add.
+    205 +
+    206 +### Existing Signals
+    207 +
+    208 +- `responseTimeMs`
+    209 +- `correct / incorrect`
+    210 +- `attempt count`
+    211 +- `streak`
+    212 +- `hearts`
+    213 +- `masteryPct`
+    214 +- `reviewQueue`
+    215 +- `doubt count`
+    216 +- `skip count`
+    217 +- `confidence`
+    218 +- `voice vs text`
+    219 +
+    220 +### Recommended Additional Signals
+    221 +
+    222 +- no-response timeout count
+    223 +- repeated misconception tag
+    224 +- chat-to-answer ratio
+    225 +- fast-wrong frequency
+    226 +- challenge acceptance rate
+    227 +
+    228 +## Behavior Detection Rules
+    229 +
+    230 +Recommended first deterministic rules:
+    231 +
+    232 +- `correct_fast`
+    233 +  correct on first attempt and `responseTimeMs` below target threshold
+    234 +
+    235 +- `hesitant_but_teachable`
+    236 +  long response time plus correct after one hint/retry
+    237 +
+    238 +- `wrong_but_confident`
+    239 +  wrong answer plus confidence `high`
+    240 +
+    241 +- `repeatedly_confused`
+    242 +  two or more wrong attempts in same step or same subtopic weakness repeated
+    243 +
+    244 +- `silent_or_stuck`
+    245 +  no answer after timeout threshold
+    246 +
+    247 +- `help_seeking`
+    248 +  doubt count above threshold before answer
+    249 +
+    250 +- `guessing_randomly`
+    251 +  multiple fast wrong answers with low consistency
+    252 +
+    253 +- `frustrated`
+    254 +  error streak plus heart drop plus skip increase
+    255 +
+    256 +- `advanced_bored`
+    257 +  repeated correct-fast pattern plus high mastery
+    258 +
+    259 +- `skip_heavy`
+    260 +  skip count above threshold in lesson
+    261 +
+    262 +## Tutor Response Policy
+    263 +
+    264 +For every behavior, define:
+    265 +
+    266 +- explanation length
+    267 +- whether to ask or explain first
+    268 +- whether to show worked example
+    269 +- whether to use hint ladder
+    270 +- whether to simplify
+    271 +- whether to promote
+    272 +- reward tone
+    273 +
+    274 +### Minimal Response Matrix
+    275 +
+    276 +- `correct_fast`
+    277 +  short praise, next challenge
+    278 +
+    279 +- `careful_correct`
+    280 +  confirm method, continue
+    281 +
+    282 +- `hesitant_but_teachable`
+    283 +  one hint, one try prompt
+    284 +
+    285 +- `wrong_but_confident`
+    286 +  direct misconception correction
+    287 +
+    288 +- `repeatedly_confused`
+    289 +  reteach simpler, smaller step
+    290 +
+    291 +- `silent_or_stuck`
+    292 +  starter prompt, partial answer invitation
+    293 +
+    294 +- `help_seeking`
+    295 +  short answer, bring back to task
+    296 +
+    297 +- `guessing_randomly`
+    298 +  require reasoning, then retry
+    299 +
+    300 +- `frustrated`
+    301 +  supportive line, easier success task
+    302 +
+    303 +- `advanced_bored`
+    304 +  compress and promote
+    305 +
+    306 +- `skip_heavy`
+    307 +  limit passive skipping, force small attempt
+    308 +
+    309 +## Content Hooks Required
+    310 +
+    311 +Each lesson step should support these optional fields:
+    312 +
+    313 +- `standardPrompt`
+    314 +- `readAloudPrompt`
+    315 +- `tryPrompt`
+    316 +- `stuckPrompt`
+    317 +- `frustratedPrompt`
+    318 +- `advancedPrompt`
+    319 +- `helpReturnPrompt`
+    320 +- `reviewPrompt`
+    321 +- `instantFeedbackWin`
+    322 +- `instantFeedbackRetry`
+    323 +
+    324 +Without these hooks, behavior adaptation will remain shallow.
+    325 +
+    326 +## UI Constraint
+    327 +
+    328 +Behavior adaptation should not create more panels.
+    329 +
+    330 +The lesson UI must remain:
+    331 +
+    332 +- one main lesson surface
+    333 +- one active prompt
+    334 +- one answer area
+    335 +- one small progress line
+    336 +
+    337 +Behavior changes should alter wording, difficulty, and next action, not create a cluttered screen.
+    338 +
+    339 +## Student Simulator Coverage
+    340 +
+    341 +The simulator should run these paths per chapter:
+    342 +
+    343 +- correct-first path
+    344 +- wrong-first path
+    345 +- help-seeking path
+    346 +- slow response path
+    347 +- repeated-confusion path
+    348 +- skip-heavy path
+    349 +- advanced-fast path
+    350 +
+    351 +Current simulator status:
+    352 +
+    353 +- implemented for correct-first and wrong-first rotation
+    354 +- needs expansion for the rest
+    355 +
+    356 +Reference:
+    357 +
+    358 +- [simulate_pedagogical_flow.py](C:/roboworkspace/robodynamics/ai-tutor/tutor-api/scripts/simulate_pedagogical_flow.py)
+    359 +
+    360 +## OpenAI Touchpoints
+    382 +
+    383 +For the immediate launch window:
+    384 +
+    385 +- support at least these behaviors first:
+    386 +  - correct fast
+    387 +  - hesitant but teachable
+    388 +  - repeatedly confused
+    389 +  - help seeking
+    390 +  - frustrated
+    391 +  - advanced / bored
+    392 +- keep the UI minimal and unchanged
+    393 +- expand behavior intelligence behind the scenes
+
+
+

@@ -1,0 +1,15 @@
+{
+  "agentId": "content_generator",
+  "implementationType": "deterministic_transformer",
+  "purpose": "Convert chapter source metadata and blueprint guidance into a chapter lesson-plan artifact.",
+  "inputs": [
+    "courseId",
+    "chapterCode",
+    "sourcePdfPath",
+    "courseBlueprintPath",
+    "chapterMetadataPath"
+  ],
+  "outputs": [
+    "chapter_lesson_plan.json"
+  ]
+}

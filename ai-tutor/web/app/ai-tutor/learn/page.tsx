@@ -1,6 +1,6 @@
-import VedicTutorPage from "../vedic/page";
+import TutorPageRoute from "../tutor/page";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export default VedicTutorPage;
+export default TutorPageRoute;

@@ -1,0 +1,26 @@
+{
+  "artifactType": "course_build_manifest",
+  "pipelineRunId": "00b71b82-6ae1-40ce-ad1d-57fdaf536999",
+  "agentId": "project_manager",
+  "generatedAt": "2026-03-10T02:16:38.852Z",
+  "courseId": "vedic_math",
+  "courseTitle": "Vedic Math",
+  "stageOrder": [
+    "pedagogical_architect",
+    "content_generator",
+    "deterministic_validator",
+    "pedagogy_reviewer",
+    "ui_ux_reviewer",
+    "student_simulator",
+    "publish_orchestrator"
+  ],
+  "chapterSelection": [
+    "L1_COMPLETING_WHOLE"
+  ],
+  "artifactRoot": "ai-tutor/artifacts/pipeline/vedic_math/00b71b82-6ae1-40ce-ad1d-57fdaf536999",
+  "runDbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "MySQL unavailable"
+  }
+}

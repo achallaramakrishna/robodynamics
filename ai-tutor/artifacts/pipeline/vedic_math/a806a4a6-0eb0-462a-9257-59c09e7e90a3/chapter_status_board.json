@@ -1,0 +1,766 @@
+{
+  "artifactType": "chapter_status_board",
+  "courseId": "vedic_math",
+  "generatedAt": "2026-03-10T01:53:12.609Z",
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "title": "Lesson 1: Completing the Whole",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L1_COMPLETING_WHOLE/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L1_COMPLETING_WHOLE/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L1_COMPLETING_WHOLE/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L1_COMPLETING_WHOLE/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L1_COMPLETING_WHOLE/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L2_DOUBLING_HALVING",
+      "title": "Lesson 2: Doubling and Halving",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L3_MULTIPLY_BY_11",
+      "title": "Lesson 3: Digit Sums and the Nine Point Circle",
+      "nextAgent": "human_approval",
+      "blockers": [],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "ready",
+        "overallScore": 100
+      }
+    },
+    {
+      "chapterCode": "L4_VERTICAL_CROSSWISE",
+      "title": "Lesson 4: Left to Right Arithmetic",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L5_ALL_FROM_9_LAST_FROM_10",
+      "title": "Lesson 5: All from 9 and Last from 10",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L5_ALL_FROM_9_LAST_FROM_10/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L5_ALL_FROM_9_LAST_FROM_10/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L5_ALL_FROM_9_LAST_FROM_10/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L5_ALL_FROM_9_LAST_FROM_10/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L5_ALL_FROM_9_LAST_FROM_10/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L5_ALL_FROM_9_LAST_FROM_10/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L6_NIKHILAM_BASE_10_100",
+      "title": "Lesson 6: Number Splitting",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L7_SQUARES_ENDING_5",
+      "title": "Lesson 7: Base Multiplication",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 70.67
+      }
+    },
+    {
+      "chapterCode": "L8_YAVADUNAM",
+      "title": "Lesson 8: Checking and Divisibility",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L8_YAVADUNAM/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L8_YAVADUNAM/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L8_YAVADUNAM/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L8_YAVADUNAM/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L8_YAVADUNAM/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L8_YAVADUNAM/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L9_GENERAL_MULTIPLICATION",
+      "title": "Lesson 9: Bar Numbers",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L9_GENERAL_MULTIPLICATION/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L9_GENERAL_MULTIPLICATION/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L9_GENERAL_MULTIPLICATION/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L9_GENERAL_MULTIPLICATION/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L9_GENERAL_MULTIPLICATION/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L9_GENERAL_MULTIPLICATION/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L10_DIVISION_BY_9",
+      "title": "Lesson 10: Special Multiplication",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L10_DIVISION_BY_9/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L10_DIVISION_BY_9/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L10_DIVISION_BY_9/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L10_DIVISION_BY_9/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L10_DIVISION_BY_9/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L10_DIVISION_BY_9/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L11_VINCULUM_INTRO",
+      "title": "Lesson 11: General Multiplication",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L11_VINCULUM_INTRO/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L11_VINCULUM_INTRO/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L11_VINCULUM_INTRO/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L11_VINCULUM_INTRO/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L11_VINCULUM_INTRO/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L11_VINCULUM_INTRO/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L12_FRACTIONS_DECIMALS",
+      "title": "Lesson 12: Squaring",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L12_FRACTIONS_DECIMALS/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L13_ALGEBRAIC_IDENTITIES",
+      "title": "Lesson 13: One-Line Equations",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L13_ALGEBRAIC_IDENTITIES/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L13_ALGEBRAIC_IDENTITIES/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L13_ALGEBRAIC_IDENTITIES/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L13_ALGEBRAIC_IDENTITIES/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L13_ALGEBRAIC_IDENTITIES/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L13_ALGEBRAIC_IDENTITIES/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L14_FACTORISATION",
+      "title": "Lesson 14: Fractions",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L14_FACTORISATION/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L15_SQUARES_NEAR_BASE",
+      "title": "Lesson 15: Special Division",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L15_SQUARES_NEAR_BASE/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L15_SQUARES_NEAR_BASE/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L15_SQUARES_NEAR_BASE/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L15_SQUARES_NEAR_BASE/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L15_SQUARES_NEAR_BASE/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L15_SQUARES_NEAR_BASE/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    },
+    {
+      "chapterCode": "L16_CUBES_INTRO",
+      "title": "Lesson 16: The Crowning Gem (Advanced Division)",
+      "nextAgent": "content_generator",
+      "blockers": [
+        "Deterministic validation is not publish-ready.",
+        "Pedagogy review score is below the acceptance floor."
+      ],
+      "stageStatus": {
+        "pedagogical_architect": "complete",
+        "content_generator": "complete",
+        "deterministic_validator": "complete",
+        "pedagogy_reviewer": "complete",
+        "ui_ux_reviewer": "complete",
+        "student_simulator": "complete",
+        "publish_orchestrator": "complete"
+      },
+      "artifacts": {
+        "lessonPlan": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L16_CUBES_INTRO/chapter_lesson_plan.json",
+          "exists": true
+        },
+        "validation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L16_CUBES_INTRO/deterministic_validation_report.json",
+          "exists": true
+        },
+        "pedagogy": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L16_CUBES_INTRO/pedagogy_review_report.json",
+          "exists": true
+        },
+        "uiUx": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L16_CUBES_INTRO/ui_ux_review_report.json",
+          "exists": true
+        },
+        "studentSimulation": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L16_CUBES_INTRO/student_simulation_report.json",
+          "exists": true
+        },
+        "publishDecision": {
+          "path": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L16_CUBES_INTRO/publish_decision.json",
+          "exists": true
+        }
+      },
+      "readiness": {
+        "deterministicStatus": "incomplete",
+        "overallScore": 65.33
+      }
+    }
+  ]
+}

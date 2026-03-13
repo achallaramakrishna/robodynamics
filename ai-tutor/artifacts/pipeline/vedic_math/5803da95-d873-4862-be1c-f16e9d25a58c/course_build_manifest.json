@@ -1,0 +1,26 @@
+{
+  "artifactType": "course_build_manifest",
+  "pipelineRunId": "5803da95-d873-4862-be1c-f16e9d25a58c",
+  "agentId": "project_manager",
+  "generatedAt": "2026-03-10T01:28:53.908Z",
+  "courseId": "vedic_math",
+  "courseTitle": "Vedic Math",
+  "stageOrder": [
+    "pedagogical_architect",
+    "content_generator",
+    "deterministic_validator",
+    "pedagogy_reviewer",
+    "ui_ux_reviewer",
+    "student_simulator",
+    "publish_orchestrator"
+  ],
+  "chapterSelection": [
+    "L1_COMPLETING_WHOLE"
+  ],
+  "artifactRoot": "ai-tutor/artifacts/pipeline/vedic_math/5803da95-d873-4862-be1c-f16e9d25a58c",
+  "runDbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "spawnSync C:\\Users\\Achalla Ramakrishna\\AppData\\Local\\Programs\\Python\\Python313\\python.exe EPERM"
+  }
+}

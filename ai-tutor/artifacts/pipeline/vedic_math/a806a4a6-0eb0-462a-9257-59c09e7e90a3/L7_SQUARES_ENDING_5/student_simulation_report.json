@@ -1,0 +1,29 @@
+{
+  "artifactType": "student_simulation_report",
+  "generatedAt": "2026-03-10T01:53:08.523Z",
+  "simulationMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L7_SQUARES_ENDING_5",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L7_SQUARES_ENDING_5/chapter_lesson_plan.json",
+  "learnerProfile": {
+    "gradeBand": "5-8",
+    "confidence": "medium",
+    "pace": "average",
+    "weaknesses": [
+      "mental subtraction",
+      "multi-step attention"
+    ],
+    "languageComfort": "english"
+  },
+  "status": "simulated",
+  "stuckMoments": [
+    "I needed more fully worked examples before independent practice.",
+    "The lesson still has structural gaps that would block a smooth student flow."
+  ],
+  "repetitionRisks": [],
+  "hintEffectiveness": [],
+  "recommendedFixes": [
+    "Add more worked examples before practice.",
+    "Fix missing content structures before sign-off."
+  ]
+}

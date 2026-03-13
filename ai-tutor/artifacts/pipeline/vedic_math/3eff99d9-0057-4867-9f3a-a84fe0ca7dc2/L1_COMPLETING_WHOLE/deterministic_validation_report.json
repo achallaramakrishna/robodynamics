@@ -1,0 +1,49 @@
+{
+  "artifactType": "deterministic_validation_report",
+  "generatedAt": "2026-03-10T01:12:35.031Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/3eff99d9-0057-4867-9f3a-a84fe0ca7dc2/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+  "status": "ready",
+  "layers": {
+    "l1_schema": {
+      "pass": true,
+      "score": 20,
+      "issues": []
+    },
+    "l2_completeness": {
+      "pass": true,
+      "score": 25,
+      "issues": [],
+      "stats": {
+        "questionPoolCount": 32,
+        "workedExampleCount": 4,
+        "screenplayBeatCount": 63,
+        "difficultyCounts": {
+          "easy": 11,
+          "medium": 12,
+          "hard": 9
+        }
+      }
+    },
+    "l3_math_accuracy": {
+      "pass": true,
+      "score": 30,
+      "issues": [],
+      "stats": {
+        "verified": 26,
+        "wrong": 0,
+        "unverifiable": 10,
+        "totalChecked": 36
+      }
+    }
+  },
+  "overallScore": 100,
+  "blockingIssues": [],
+  "warnings": [],
+  "publishGate": {
+    "threshold": 80,
+    "status": "ready",
+    "readyForReview": true
+  }
+}

@@ -1,0 +1,3345 @@
+{
+  "generatedAt": "2026-03-12T13:44:44.659166+00:00",
+  "courseId": "vedic_math",
+  "module": "VEDIC_MATH",
+  "grade": "8",
+  "overallScore": 98.25,
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "chapterTitle": "Lesson 1: Completing the Whole",
+      "sessionId": "vm_399d3a942dd146509a092c1dddd9b0a8",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 100.0,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Introduction to Completing the Whole",
+          "questionId": "L1_A_H_b582b5",
+          "questionText": "6 + 8 = ?  Explain the method in a sentence, then give the answer.",
+          "expectedAnswer": "14",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "14",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Introduction to Completing the Whole",
+          "questionId": "L1_B_H_0af896",
+          "questionText": "8 + 9 = ?  Use base-10 completion. Give two-step working.",
+          "expectedAnswer": "17",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "18",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "17",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Ten Point Circle",
+          "questionId": "L1_C_M_09110f",
+          "questionText": "What is the complement of 8?  (i.e., 8 + ? = 10)",
+          "expectedAnswer": "2",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "2",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Multiples of Ten",
+          "questionId": "L1_D_M_5b78ee",
+          "questionText": "56 + ___ = 60",
+          "expectedAnswer": "4",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Deficiency from Ten",
+          "questionId": "L1_E_H_243091",
+          "questionText": "If the deficiency of 8 is 2, what is the deficiency of the deficiency?",
+          "expectedAnswer": "8",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "8",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Deficiency from Ten",
+          "questionId": "L1_F_H_5cb643",
+          "questionText": "80 - 73 = ?  Explain the one-step rule.",
+          "expectedAnswer": "7",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "7",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Mental Addition",
+          "questionId": "L1_G_H_8390e3",
+          "questionText": "6 + 9 = ?  Do it mentally using two hops. State the gap.",
+          "expectedAnswer": "15",
+          "completionPct": 77.78,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "15",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Mental Addition",
+          "questionId": "L1_H_M_22a8d1",
+          "questionText": "37 + 6 = ?",
+          "expectedAnswer": "43",
+          "completionPct": 88.89,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "44",
+              "correct": false,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "43",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "By Addition and By Subtraction",
+          "questionId": "L1_I_H_46de89",
+          "questionText": "48 + 9 = ?  Show Path A and Path B. Both must give the same answer.",
+          "expectedAnswer": "57",
+          "completionPct": 100.0,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "57",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L2_DOUBLING_HALVING",
+      "chapterTitle": "Lesson 2: Doubling and Halving",
+      "sessionId": "vm_34432fc8542e42d1a4cd282c66c52d7f",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 100.0,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Doubling \u2014 Multiply by 2",
+          "questionId": "L2_A_E_01",
+          "questionText": "2 \u00d7 14 = ?  (double 14)",
+          "expectedAnswer": "28",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "29",
+              "correct": false,
+              "hearts": 4,
+              "xp": 0,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "28",
+              "correct": true,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Multiply by 4 \u2014 Double Twice",
+          "questionId": "L2_B_H_03",
+          "questionText": "4 \u00d7 54 = ?  (double twice)",
+          "expectedAnswer": "216",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "216",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Multiply by 8 \u2014 Double Three Times",
+          "questionId": "L2_C_E_01",
+          "questionText": "8 \u00d7 11 = ?  (double three times)",
+          "expectedAnswer": "88",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "88",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Halving \u2014 Divide by 2",
+          "questionId": "L2_D_E_01",
+          "questionText": "48 \u00f7 2 = ?",
+          "expectedAnswer": "24",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "25",
+              "correct": false,
+              "hearts": 3,
+              "xp": 30,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "24",
+              "correct": true,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Divide by 4 \u2014 Halve Twice",
+          "questionId": "L2_E_H_03",
+          "questionText": "216 \u00f7 4 = ?  (halve twice)",
+          "expectedAnswer": "54",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "54",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Balancing Trick \u2014 One Doubles, One Halves",
+          "questionId": "L2_F_M_02",
+          "questionText": "14 \u00d7 8 = ?  (use balancing: halve 14, double 8)",
+          "expectedAnswer": "112",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "112",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Multiply by 5 \u2014 Times 10 then Halve",
+          "questionId": "L2_G_H_03",
+          "questionText": "5 \u00d7 142 = ?  (\u00d710 then \u00f72)",
+          "expectedAnswer": "710",
+          "completionPct": 77.78,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "711",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "710",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Multiply by 25 \u2014 Times 100 then Quarter",
+          "questionId": "L2_H_H_03",
+          "questionText": "25 \u00d7 36 = ?  (\u00d7100 then \u00f74)",
+          "expectedAnswer": "900",
+          "completionPct": 88.89,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "900",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Divide by 5 and 25 \u2014 Reverse Trick",
+          "questionId": "L2_I_M_02",
+          "questionText": "135 \u00f7 5 = ?  (\u00d72 then \u00f710)",
+          "expectedAnswer": "27",
+          "completionPct": 100.0,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "27",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L3_MULTIPLY_BY_11",
+      "chapterTitle": "Lesson 3: Digit Sums and the Nine Point Circle",
+      "sessionId": "vm_f8240307ca784f83b6938ce90003eec9",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 100.0,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Adding Digits and Digit Sums",
+          "questionId": "L3_A_DIGIT_SUM_992719",
+          "questionText": "What is the digit sum of 13?",
+          "expectedAnswer": "4",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Two-Step Digit Sums",
+          "questionId": "L3_B_DIGIT_SUM_3ef55e",
+          "questionText": "What is the digit sum of 19?",
+          "expectedAnswer": "1",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1",
+              "correct": true,
+              "hearts": 5,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "The Nine Point Circle",
+          "questionId": "L3_C_NINE_POINT_CIRCLE_b6e042",
+          "questionText": "On the nine point circle, what is the digit sum of 28?",
+          "expectedAnswer": "1",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "2",
+              "correct": false,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "1",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Casting Out Nines",
+          "questionId": "L3_D_CASTING_OUT_9S_44d7fc",
+          "questionText": "What is the digit sum of 24701 after casting out digits that total 9?",
+          "expectedAnswer": "5",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "5",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Digit Sum Puzzles",
+          "questionId": "L3_E_PUZZLE_REASONING_93377b",
+          "questionText": "A two-digit number has digit sum 8 and both digits are the same. What is the number?",
+          "expectedAnswer": "44",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "44",
+              "correct": true,
+              "hearts": 4,
+              "xp": 50,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Digit Sum Check for Addition",
+          "questionId": "L3_F_ADDITION_CHECK_60ccf6",
+          "questionText": "What is 77 + 124?",
+          "expectedAnswer": "201",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "202",
+              "correct": false,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "201",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Digit Sum Check for Multiplication",
+          "questionId": "L3_G_MULTIPLICATION_CHECK_775a89",
+          "questionText": "What is 38 * 3?",
+          "expectedAnswer": "114",
+          "completionPct": 77.78,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "114",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "The Vedic Square and Pattern Design",
+          "questionId": "L3_H_VEDIC_SQUARE_02729c",
+          "questionText": "In row D of the Vedic Square, what is the third number?",
+          "expectedAnswer": "3",
+          "completionPct": 88.89,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "3",
+              "correct": true,
+              "hearts": 3,
+              "xp": 80,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Number Nine",
+          "questionId": "L3_I_NINE_TIMES_TABLE_64d94b",
+          "questionText": "What is 9 * 8?",
+          "expectedAnswer": "72",
+          "completionPct": 100.0,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "73",
+              "correct": false,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "72",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L4_VERTICAL_CROSSWISE",
+      "chapterTitle": "Lesson 4: Left to Right Arithmetic",
+      "sessionId": "vm_41c1c9b27f0140d79e5beb214c4a4eb0",
+      "score": 96.0,
+      "issues": [
+        "Repeated questionId L4_E_EASY_a7b8c9 in chapter L4_VERTICAL_CROSSWISE",
+        "Repeated questionId L4_B_MEDIUM_e1f2a3 in chapter L4_VERTICAL_CROSSWISE"
+      ],
+      "finalHearts": 2,
+      "finalXp": 70,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Two-digit addition from left to right",
+          "questionId": "L4_A_EASY_b2c3d4",
+          "questionText": "88 + 33 = ?",
+          "expectedAnswer": "121",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "121",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Three-digit addition with carries",
+          "questionId": "L4_B_MEDIUM_e1f2a3",
+          "questionText": "348 + 254 = ?",
+          "expectedAnswer": "602",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "603",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "602",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Multiplication from left to right",
+          "questionId": "L4_C_HARD_f8a9b0",
+          "questionText": "446 * 15 = ?",
+          "expectedAnswer": "6690",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6690",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Doubling and halving for easier products",
+          "questionId": "L4_D_MEDIUM_b4c5d6",
+          "questionText": "35 * 22 = ?",
+          "expectedAnswer": "770",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "770",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Two-digit subtraction from left to right",
+          "questionId": "L4_E_EASY_a7b8c9",
+          "questionText": "75 - 28 = ?",
+          "expectedAnswer": "47",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "48",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "47",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Digit-sum check for subtraction",
+          "questionId": "L4_F_MEDIUM_d6e7f8",
+          "questionText": "74 - 58 = ?",
+          "expectedAnswer": "16",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "16",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Three-digit addition with carries",
+          "questionId": "L4_B_MEDIUM_c9d0e1",
+          "questionText": "187 + 446 = ?",
+          "expectedAnswer": "633",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "633",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Two-digit subtraction from left to right",
+          "questionId": "L4_E_EASY_a7b8c9",
+          "questionText": "75 - 28 = ?",
+          "expectedAnswer": "47",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "48",
+              "correct": false,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "47",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Three-digit addition with carries",
+          "questionId": "L4_B_MEDIUM_e1f2a3",
+          "questionText": "348 + 254 = ?",
+          "expectedAnswer": "602",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "602",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L5_ALL_FROM_9_LAST_FROM_10",
+      "chapterTitle": "Lesson 5: All from 9 and Last from 10",
+      "sessionId": "vm_3328dda8408946b1b52f0da4c81d09c6",
+      "score": 96.0,
+      "issues": [
+        "Repeated questionId L5_F_MEDIUM_d6e7f8 in chapter L5_ALL_FROM_9_LAST_FROM_10",
+        "Repeated questionId L5_B_HARD_e7f8a9 in chapter L5_ALL_FROM_9_LAST_FROM_10"
+      ],
+      "finalHearts": 2,
+      "finalXp": 70,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Complements to 10, 100, and 1000",
+          "questionId": "L5_A_EASY_a1b2c3",
+          "questionText": "10 - 7 = ?",
+          "expectedAnswer": "3",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4",
+              "correct": false,
+              "hearts": 4,
+              "xp": 0,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "3",
+              "correct": true,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Complements when zeros appear in the number",
+          "questionId": "L5_B_HARD_e7f8a9",
+          "questionText": "10000000 - 4073100 = ?",
+          "expectedAnswer": "5926900",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "5926900",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Straight subtraction from a base",
+          "questionId": "L5_C_EASY_e5f6a7",
+          "questionText": "1000 - 307 = ?",
+          "expectedAnswer": "693",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "693",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Small subtrahends and leading zeros",
+          "questionId": "L5_D_HARD_f8a9b0",
+          "questionText": "1000 - 7 = ?",
+          "expectedAnswer": "993",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "994",
+              "correct": false,
+              "hearts": 3,
+              "xp": 30,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "993",
+              "correct": true,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Adjusted bases such as 600, 5000, and 8000",
+          "questionId": "L5_E_HARD_b0c1d2",
+          "questionText": "30000 - 63 = ?",
+          "expectedAnswer": "29937",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "29937",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Money and change as complements",
+          "questionId": "L5_F_MEDIUM_d6e7f8",
+          "questionText": "1000 - 864 = ?",
+          "expectedAnswer": "136",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "136",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Complements to 10, 100, and 1000",
+          "questionId": "L5_A_MEDIUM_c9d0e1",
+          "questionText": "10000 - 3883 = ?",
+          "expectedAnswer": "6117",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6118",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "6117",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Money and change as complements",
+          "questionId": "L5_F_MEDIUM_d6e7f8",
+          "questionText": "1000 - 864 = ?",
+          "expectedAnswer": "136",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "136",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Complements when zeros appear in the number",
+          "questionId": "L5_B_HARD_e7f8a9",
+          "questionText": "10000000 - 4073100 = ?",
+          "expectedAnswer": "5926900",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "5926900",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L6_NIKHILAM_BASE_10_100",
+      "chapterTitle": "Lesson 6: Number Splitting",
+      "sessionId": "vm_6bc6e84a6fe94cdfac5582a5ca087b02",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Addition by splitting into two easy chunks",
+          "questionId": "L6_A_EASY_a1b2c3",
+          "questionText": "2345 + 6738 = ?",
+          "expectedAnswer": "9083",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9083",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Choosing the split line to avoid carries",
+          "questionId": "L6_B_MEDIUM_d0e1f2",
+          "questionText": "1234 + 4944 = ?",
+          "expectedAnswer": "6178",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6178",
+              "correct": true,
+              "hearts": 5,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Subtraction by splitting",
+          "questionId": "L6_C_HARD_f8a9b0",
+          "questionText": "7070 - 1526 = ?",
+          "expectedAnswer": "5544",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "5545",
+              "correct": false,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "5544",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Multiplication by splitting without carry",
+          "questionId": "L6_D_EASY_f6a7b8",
+          "questionText": "352 * 2 = ?",
+          "expectedAnswer": "704",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "704",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Division by splitting into two sections",
+          "questionId": "L6_E_MEDIUM_d6e7f8",
+          "questionText": "2849 / 7 = ?",
+          "expectedAnswer": "407",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "407",
+              "correct": true,
+              "hearts": 4,
+              "xp": 50,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Division with three sections and longer numbers",
+          "questionId": "L6_F_HARD_f4a5b6",
+          "questionText": "391352 / 13 = ?",
+          "expectedAnswer": "30104",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "30105",
+              "correct": false,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "30104",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Subtraction by splitting",
+          "questionId": "L6_C_MEDIUM_e1f2a3",
+          "questionText": "3243 - 1319 = ?",
+          "expectedAnswer": "1924",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1924",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Division with three sections and longer numbers",
+          "questionId": "L6_F_HARD_e3f4a5",
+          "questionText": "24453 / 3 = ?",
+          "expectedAnswer": "8151",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "8151",
+              "correct": true,
+              "hearts": 3,
+              "xp": 80,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Multiplication by splitting without carry",
+          "questionId": "L6_D_HARD_b0c1d2",
+          "questionText": "131415 * 3 = ?",
+          "expectedAnswer": "394245",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "394246",
+              "correct": false,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "394245",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L7_SQUARES_ENDING_5",
+      "chapterTitle": "Lesson 7: Base Multiplication",
+      "sessionId": "vm_b458a3db929e4f6e81dadc0521e8f005",
+      "score": 98.0,
+      "issues": [
+        "Repeated questionId L7_C_MEDIUM_c9d0e1 in chapter L7_SQUARES_ENDING_5"
+      ],
+      "finalHearts": 2,
+      "finalXp": 80,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Numbers below 10 by deficiencies from 10",
+          "questionId": "L7_A_EASY_b2c3d4",
+          "questionText": "6 * 7 = ?",
+          "expectedAnswer": "42",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "42",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Numbers just over 10 and table-pattern intuition",
+          "questionId": "L7_B_EASY_d4e5f6",
+          "questionText": "12 * 13 = ?",
+          "expectedAnswer": "156",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "157",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "156",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Numbers close to 100 with carries",
+          "questionId": "L7_C_MEDIUM_c9d0e1",
+          "questionText": "89 * 89 = ?",
+          "expectedAnswer": "7921",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "7921",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Larger numbers near 1000 and above the base",
+          "questionId": "L7_D_HARD_e7f8a9",
+          "questionText": "1234 * 1003 = ?",
+          "expectedAnswer": "1237702",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1237702",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Proportionately and different-base multiplication",
+          "questionId": "L7_E_MEDIUM_c5d6e7",
+          "questionText": "47 * 98 = ?",
+          "expectedAnswer": "4606",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4607",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "4606",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Squaring near a base and method summary",
+          "questionId": "L7_F_HARD_f4a5b6",
+          "questionText": "304 * 304 = ?",
+          "expectedAnswer": "92416",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "92416",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Squaring near a base and method summary",
+          "questionId": "L7_F_EASY_a7b8c9",
+          "questionText": "96 * 96 = ?",
+          "expectedAnswer": "9216",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9216",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Larger numbers near 1000 and above the base",
+          "questionId": "L7_D_MEDIUM_f2a3b4",
+          "questionText": "111 * 111 = ?",
+          "expectedAnswer": "12321",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "12322",
+              "correct": false,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "12321",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Numbers close to 100 with carries",
+          "questionId": "L7_C_MEDIUM_c9d0e1",
+          "questionText": "89 * 89 = ?",
+          "expectedAnswer": "7921",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "7921",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L8_YAVADUNAM",
+      "chapterTitle": "Lesson 8: Checking and Divisibility",
+      "sessionId": "vm_ea52d0fec38845f2a07a8f4ae7f7d40b",
+      "score": 98.0,
+      "issues": [
+        "Repeated questionId L8_A_EASY_a1b2c3 in chapter L8_YAVADUNAM"
+      ],
+      "finalHearts": 2,
+      "finalXp": 80,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Digit-sum check for division",
+          "questionId": "L8_A_EASY_a1b2c3",
+          "questionText": "3451 + 5 = ?",
+          "expectedAnswer": "3456",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "3457",
+              "correct": false,
+              "hearts": 4,
+              "xp": 0,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "3456",
+              "correct": true,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "First by first for approximate answers",
+          "questionId": "L8_B_EASY_c3d4e5",
+          "questionText": "30 * 40 = ?",
+          "expectedAnswer": "1200",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1200",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Last by last for the final digit",
+          "questionId": "L8_C_MEDIUM_b4c5d6",
+          "questionText": "24 * 3 = ?",
+          "expectedAnswer": "72",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "72",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Divisibility by 4 using the ultimate and twice the penultimate",
+          "questionId": "L8_D_EASY_f6a7b8",
+          "questionText": "10 + 4 = ?",
+          "expectedAnswer": "14",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "15",
+              "correct": false,
+              "hearts": 3,
+              "xp": 30,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "14",
+              "correct": true,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Divisibility by 11 and remainders from 11",
+          "questionId": "L8_E_EASY_a7b8c9",
+          "questionText": "18 - 7 = ?",
+          "expectedAnswer": "11",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "11",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Alternative check by remainders after division by 11",
+          "questionId": "L8_F_HARD_b0c1d2",
+          "questionText": "0 * 1 = ?",
+          "expectedAnswer": "0",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "0",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Digit-sum check for division",
+          "questionId": "L8_A_EASY_a1b2c3",
+          "questionText": "3451 + 5 = ?",
+          "expectedAnswer": "3456",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "3457",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "3456",
+              "correct": true,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Divisibility by 4 using the ultimate and twice the penultimate",
+          "questionId": "L8_D_EASY_e5f6a7",
+          "questionText": "14 + 6 = ?",
+          "expectedAnswer": "20",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "20",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Divisibility by 4 using the ultimate and twice the penultimate",
+          "questionId": "L8_D_MEDIUM_c5d6e7",
+          "questionText": "18 + 2 = ?",
+          "expectedAnswer": "20",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "20",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L9_GENERAL_MULTIPLICATION",
+      "chapterTitle": "Lesson 9: Bar Numbers",
+      "sessionId": "vm_4abae22418d142abbc4e0cd66444523b",
+      "score": 96.0,
+      "issues": [
+        "Repeated questionId L9_E_HARD_e7f8a9 in chapter L9_GENERAL_MULTIPLICATION",
+        "Repeated questionId L9_F_HARD_e3f4a5 in chapter L9_GENERAL_MULTIPLICATION"
+      ],
+      "finalHearts": 2,
+      "finalXp": 70,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Removing a single barred digit",
+          "questionId": "L9_A_EASY_d4e5f6",
+          "questionText": "60 - 1 = ?",
+          "expectedAnswer": "59",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "59",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Splitting after the bar",
+          "questionId": "L9_B_EASY_e5f6a7",
+          "questionText": "500 - 33 = ?",
+          "expectedAnswer": "467",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "467",
+              "correct": true,
+              "hearts": 5,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Several barred digits together",
+          "questionId": "L9_C_EASY_f6a7b8",
+          "questionText": "700 - 14 = ?",
+          "expectedAnswer": "686",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "687",
+              "correct": false,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "686",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Subtraction by allowing barred digits",
+          "questionId": "L9_D_MEDIUM_d0e1f2",
+          "questionText": "6767 - 1908 = ?",
+          "expectedAnswer": "4859",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4859",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Creating bar numbers from ordinary numbers",
+          "questionId": "L9_E_HARD_e7f8a9",
+          "questionText": "5000 - 116 = ?",
+          "expectedAnswer": "4884",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4884",
+              "correct": true,
+              "hearts": 4,
+              "xp": 50,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Using bar numbers in sums, subtraction, multiplication, and division",
+          "questionId": "L9_F_HARD_e3f4a5",
+          "questionText": "90 - 3 = ?",
+          "expectedAnswer": "87",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "88",
+              "correct": false,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "87",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Creating bar numbers from ordinary numbers",
+          "questionId": "L9_E_HARD_e7f8a9",
+          "questionText": "5000 - 116 = ?",
+          "expectedAnswer": "4884",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4884",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Using bar numbers in sums, subtraction, multiplication, and division",
+          "questionId": "L9_F_HARD_e3f4a5",
+          "questionText": "90 - 3 = ?",
+          "expectedAnswer": "87",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "87",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Using bar numbers in sums, subtraction, multiplication, and division",
+          "questionId": "L9_F_HARD_a9b0c1",
+          "questionText": "29 + 48 = ?",
+          "expectedAnswer": "77",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "78",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "77",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L10_DIVISION_BY_9",
+      "chapterTitle": "Lesson 10: Special Multiplication",
+      "sessionId": "vm_8be806a158ae4b6e82ab4f308826aead",
+      "score": 98.0,
+      "issues": [
+        "Repeated questionId L10_D_HARD_a3b4c5 in chapter L10_DIVISION_BY_9"
+      ],
+      "finalHearts": 2,
+      "finalXp": 80,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Multiplication by 11 for two-digit numbers",
+          "questionId": "L10_A_EASY_d4e5f6",
+          "questionText": "47 * 11 = ?",
+          "expectedAnswer": "517",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "517",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Multiplication by 11 for longer numbers",
+          "questionId": "L10_B_EASY_f6a7b8",
+          "questionText": "423 * 11 = ?",
+          "expectedAnswer": "4653",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4654",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "4653",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "By one more than the one before",
+          "questionId": "L10_C_MEDIUM_b8c9d0",
+          "questionText": "43 * 47 = ?",
+          "expectedAnswer": "2021",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "2021",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Multiplication by nines",
+          "questionId": "L10_D_HARD_a3b4c5",
+          "questionText": "778 * 999 = ?",
+          "expectedAnswer": "777222",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "777222",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "First by the first and the last by the last, and using the average",
+          "questionId": "L10_E_HARD_c5d6e7",
+          "questionText": "27 * 87 = ?",
+          "expectedAnswer": "2349",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "2350",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "2349",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Special numbers and disguised factors",
+          "questionId": "L10_F_HARD_f4a5b6",
+          "questionText": "12521 - 2883 = ?",
+          "expectedAnswer": "9638",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9638",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "First by the first and the last by the last, and using the average",
+          "questionId": "L10_E_HARD_f8a9b0",
+          "questionText": "28 * 32 = ?",
+          "expectedAnswer": "896",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "896",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Multiplication by nines",
+          "questionId": "L10_D_HARD_a3b4c5",
+          "questionText": "778 * 999 = ?",
+          "expectedAnswer": "777222",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "777223",
+              "correct": false,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "777222",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Multiplication by nines",
+          "questionId": "L10_D_MEDIUM_e1f2a3",
+          "questionText": "89 * 99 = ?",
+          "expectedAnswer": "8811",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "8811",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L11_VINCULUM_INTRO",
+      "chapterTitle": "Lesson 11: General Multiplication",
+      "sessionId": "vm_71715707e4c84163a39fc106fcd0e0be",
+      "score": 98.0,
+      "issues": [
+        "Repeated questionId L11_B_MEDIUM_c9d0e1 in chapter L11_VINCULUM_INTRO"
+      ],
+      "finalHearts": 2,
+      "finalXp": 80,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Revision: multiplying by a single digit from left to right",
+          "questionId": "L11_A_EASY_c3d4e5",
+          "questionText": "827 * 3 = ?",
+          "expectedAnswer": "2481",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "2482",
+              "correct": false,
+              "hearts": 4,
+              "xp": 0,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "2481",
+              "correct": true,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Two-figure multiplication vertically and crosswise",
+          "questionId": "L11_B_MEDIUM_c9d0e1",
+          "questionText": "54 * 64 = ?",
+          "expectedAnswer": "3456",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "3456",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Moving multiplier for long numbers times two digits",
+          "questionId": "L11_C_MEDIUM_f2a3b4",
+          "questionText": "4321 * 32 = ?",
+          "expectedAnswer": "138272",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "138272",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Three-figure extension and pairs of digits",
+          "questionId": "L11_D_HARD_c5d6e7",
+          "questionText": "304 * 412 = ?",
+          "expectedAnswer": "125248",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "125249",
+              "correct": false,
+              "hearts": 3,
+              "xp": 30,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "125248",
+              "correct": true,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Multiplying binomials with the same pattern",
+          "questionId": "L11_E_HARD_f8a9b0",
+          "questionText": "22 + 21 = ?",
+          "expectedAnswer": "43",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "43",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Written right-to-left calculations",
+          "questionId": "L11_F_HARD_e3f4a5",
+          "questionText": "234 * 234 = ?",
+          "expectedAnswer": "54756",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "54756",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Two-figure multiplication vertically and crosswise",
+          "questionId": "L11_B_EASY_f6a7b8",
+          "questionText": "14 * 21 = ?",
+          "expectedAnswer": "294",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "295",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "294",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Two-figure multiplication vertically and crosswise",
+          "questionId": "L11_B_MEDIUM_c9d0e1",
+          "questionText": "54 * 64 = ?",
+          "expectedAnswer": "3456",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "3456",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Written right-to-left calculations",
+          "questionId": "L11_F_HARD_b0c1d2",
+          "questionText": "42 * 31 = ?",
+          "expectedAnswer": "1302",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1302",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L12_FRACTIONS_DECIMALS",
+      "chapterTitle": "Lesson 12: Squaring",
+      "sessionId": "vm_864ba29f7abf4f81b7611386918e5ee6",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Squaring numbers ending in 5",
+          "questionId": "L12_A_EASY_c3d4e5",
+          "questionText": "95 * 95 = ?",
+          "expectedAnswer": "9025",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9025",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Squaring numbers near 50",
+          "questionId": "L12_B_EASY_a7b8c9",
+          "questionText": "44 * 44 = ?",
+          "expectedAnswer": "1936",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1936",
+              "correct": true,
+              "hearts": 5,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "General squaring with duplexes",
+          "questionId": "L12_C_MEDIUM_c9d0e1",
+          "questionText": "43 * 43 = ?",
+          "expectedAnswer": "1849",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1850",
+              "correct": false,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "1849",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Number splitting and algebraic squaring",
+          "questionId": "L12_D_MEDIUM_b4c5d6",
+          "questionText": "312 * 312 = ?",
+          "expectedAnswer": "97344",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "97344",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Digit sums of squares and square roots of perfect squares",
+          "questionId": "L12_E_MEDIUM_c5d6e7",
+          "questionText": "83 * 83 = ?",
+          "expectedAnswer": "6889",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6889",
+              "correct": true,
+              "hearts": 4,
+              "xp": 50,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Three and four-figure numbers by longer duplexes",
+          "questionId": "L12_F_HARD_b0c1d2",
+          "questionText": "131 * 131 = ?",
+          "expectedAnswer": "17161",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "17162",
+              "correct": false,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "17161",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Squaring numbers near 50",
+          "questionId": "L12_B_EASY_d4e5f6",
+          "questionText": "53 * 53 = ?",
+          "expectedAnswer": "2809",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "2809",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "General squaring with duplexes",
+          "questionId": "L12_C_MEDIUM_f2a3b4",
+          "questionText": "23 * 23 = ?",
+          "expectedAnswer": "529",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "529",
+              "correct": true,
+              "hearts": 3,
+              "xp": 80,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Three and four-figure numbers by longer duplexes",
+          "questionId": "L12_F_HARD_f8a9b0",
+          "questionText": "4332 * 4332 = ?",
+          "expectedAnswer": "18766224",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "18766225",
+              "correct": false,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "18766224",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L13_ALGEBRAIC_IDENTITIES",
+      "chapterTitle": "Lesson 13: Equations",
+      "sessionId": "vm_4c921ed4a5dc43618c01caf997352082",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "One-step equations by transpose and apply",
+          "questionId": "L13_A_EASY_b2c3d4",
+          "questionText": "10 + 3 = ?",
+          "expectedAnswer": "13",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "13",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "One-step equations with decimals and fractions",
+          "questionId": "L13_B_EASY_e5f6a7",
+          "questionText": "4.5 + 3.5 = ?",
+          "expectedAnswer": "8",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "8",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Two-step equations",
+          "questionId": "L13_C_MEDIUM_e1f2a3",
+          "questionText": "36 + 4 = ?",
+          "expectedAnswer": "40",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "40",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Two-step equations with a full divided expression",
+          "questionId": "L13_D_MEDIUM_c5d6e7",
+          "questionText": "35 - 4 = ?",
+          "expectedAnswer": "31",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "31",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Three-step equations and brackets",
+          "questionId": "L13_E_HARD_b0c1d2",
+          "questionText": "19 - 4 = ?",
+          "expectedAnswer": "15",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "16",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "15",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Mental one-line solutions and checking",
+          "questionId": "L13_F_HARD_d2e3f4",
+          "questionText": "5 * 8 = ?",
+          "expectedAnswer": "40",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "40",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Three-step equations and brackets",
+          "questionId": "L13_E_HARD_e7f8a9",
+          "questionText": "6 * 5 = ?",
+          "expectedAnswer": "30",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "30",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Two-step equations",
+          "questionId": "L13_C_MEDIUM_d0e1f2",
+          "questionText": "10 / 2 = ?",
+          "expectedAnswer": "5",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6",
+              "correct": false,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "5",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "One-step equations by transpose and apply",
+          "questionId": "L13_A_EASY_a7b8c9",
+          "questionText": "960 / 3 = ?",
+          "expectedAnswer": "320",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "320",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L14_FACTORISATION",
+      "chapterTitle": "Lesson 14: Fractions",
+      "sessionId": "vm_609ef6b16a51438395f6241874edba89",
+      "score": 98.0,
+      "issues": [
+        "Repeated questionId L14_B_EASY_e5f6a7 in chapter L14_FACTORISATION"
+      ],
+      "finalHearts": 2,
+      "finalXp": 80,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Vertically and crosswise for fraction addition and subtraction",
+          "questionId": "L14_A_EASY_b2c3d4",
+          "questionText": "3 * 7 = ?",
+          "expectedAnswer": "21",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "22",
+              "correct": false,
+              "hearts": 4,
+              "xp": 0,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "21",
+              "correct": true,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Mixed numbers and cancellation after combining",
+          "questionId": "L14_B_EASY_e5f6a7",
+          "questionText": "7 + 2 = ?",
+          "expectedAnswer": "9",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Simplification when denominators share a factor",
+          "questionId": "L14_C_MEDIUM_a7b8c9",
+          "questionText": "15 + 14 = ?",
+          "expectedAnswer": "29",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "29",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Comparing fractions by cross-multiplication",
+          "questionId": "L14_D_MEDIUM_e1f2a3",
+          "questionText": "4 * 3 = ?",
+          "expectedAnswer": "12",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "13",
+              "correct": false,
+              "hearts": 3,
+              "xp": 30,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "12",
+              "correct": true,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Multiplication and division of fractions",
+          "questionId": "L14_E_HARD_b4c5d6",
+          "questionText": "1 * 3 = ?",
+          "expectedAnswer": "3",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "3",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Unification of operations on fractions",
+          "questionId": "L14_F_HARD_e3f4a5",
+          "questionText": "5 * 3 = ?",
+          "expectedAnswer": "15",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "15",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Unification of operations on fractions",
+          "questionId": "L14_F_HARD_c1d2e3",
+          "questionText": "12 - 5 = ?",
+          "expectedAnswer": "7",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "8",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "7",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Multiplication and division of fractions",
+          "questionId": "L14_E_HARD_a9b0c1",
+          "questionText": "6 * 3 = ?",
+          "expectedAnswer": "18",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "18",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Mixed numbers and cancellation after combining",
+          "questionId": "L14_B_EASY_e5f6a7",
+          "questionText": "7 + 2 = ?",
+          "expectedAnswer": "9",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L15_SQUARES_NEAR_BASE",
+      "chapterTitle": "Lesson 15: Special Division",
+      "sessionId": "vm_3b3ab257d3204d3b8e4d2a396cc856da",
+      "score": 96.0,
+      "issues": [
+        "Repeated questionId L15_D_MEDIUM_d0e1f2 in chapter L15_SQUARES_NEAR_BASE",
+        "Repeated questionId L15_A_EASY_b2c3d4 in chapter L15_SQUARES_NEAR_BASE"
+      ],
+      "finalHearts": 2,
+      "finalXp": 70,
+      "finalCompletionPct": 66.67,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Division by 9 for short numbers",
+          "questionId": "L15_A_EASY_b2c3d4",
+          "questionText": "5 + 1 = ?",
+          "expectedAnswer": "6",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Longer numbers and shortcut carries in division by 9",
+          "questionId": "L15_B_MEDIUM_d6e7f8",
+          "questionText": "1 + 6 = ?",
+          "expectedAnswer": "7",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "7",
+              "correct": true,
+              "hearts": 5,
+              "xp": 20,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Division by 8, 7, and similar divisors below 10",
+          "questionId": "L15_C_EASY_a7b8c9",
+          "questionText": "3 + 2 = ?",
+          "expectedAnswer": "5",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6",
+              "correct": false,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "5",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Division by 99, 98, and similar divisors near 100",
+          "questionId": "L15_D_MEDIUM_d0e1f2",
+          "questionText": "24 + 13 = ?",
+          "expectedAnswer": "37",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "37",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Divisor below a base number",
+          "questionId": "L15_E_HARD_d2e3f4",
+          "questionText": "88 * 2 = ?",
+          "expectedAnswer": "176",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "176",
+              "correct": true,
+              "hearts": 4,
+              "xp": 50,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Divisor above a base number",
+          "questionId": "L15_F_HARD_b0c1d2",
+          "questionText": "123 * 12 = ?",
+          "expectedAnswer": "1476",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1477",
+              "correct": false,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "1476",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Division by 99, 98, and similar divisors near 100",
+          "questionId": "L15_D_MEDIUM_d0e1f2",
+          "questionText": "24 + 13 = ?",
+          "expectedAnswer": "37",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "37",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Division by 9 for short numbers",
+          "questionId": "L15_A_EASY_b2c3d4",
+          "questionText": "5 + 1 = ?",
+          "expectedAnswer": "6",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "6",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Divisor above a base number",
+          "questionId": "L15_F_HARD_c1d2e3",
+          "questionText": "1476 + 13 = ?",
+          "expectedAnswer": "1489",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1490",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "1489",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chapterCode": "L16_CUBES_INTRO",
+      "chapterTitle": "Lesson 16: The Crowning Gem (Advanced Division)",
+      "sessionId": "vm_85acbff253554879a13863540774d58d",
+      "score": 98.0,
+      "issues": [
+        "Repeated questionId L16_B_M_01 in chapter L16_CUBES_INTRO"
+      ],
+      "finalHearts": 2,
+      "finalXp": 80,
+      "finalCompletionPct": 33.33,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Flag Division",
+          "questionId": "L16_A_E_02",
+          "questionText": "143 / 11 = ?",
+          "expectedAnswer": "13",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "13",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Flag Division",
+          "questionId": "L16_B_M_04",
+          "questionText": "Find the quotient and remainder when 256 is divided by 11.",
+          "expectedAnswer": "23 remainder 3",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "not sure",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "23 remainder 3",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Flag Division",
+          "questionId": "L16_C_H_02",
+          "questionText": "Find the quotient and remainder when 1456 is divided by 12.",
+          "expectedAnswer": "121 remainder 4",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "121 remainder 4",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Flag Division",
+          "questionId": "L16_A_E_06",
+          "questionText": "84 / 12 = ?",
+          "expectedAnswer": "7",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "7",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Flag Division",
+          "questionId": "L16_B_M_01",
+          "questionText": "Find the quotient and remainder when 258 is divided by 12.",
+          "expectedAnswer": "21 remainder 6",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "not sure",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "21 remainder 6",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Flag Division",
+          "questionId": "L16_C_H_05",
+          "questionText": "3456 / 16 = ?",
+          "expectedAnswer": "216",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "216",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Flag Division",
+          "questionId": "L16_B_M_01",
+          "questionText": "Find the quotient and remainder when 258 is divided by 12.",
+          "expectedAnswer": "21 remainder 6",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "21 remainder 6",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Flag Division",
+          "questionId": "L16_A_E_04",
+          "questionText": "156 / 12 = ?",
+          "expectedAnswer": "13",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "14",
+              "correct": false,
+              "hearts": 2,
+              "xp": 60,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "13",
+              "correct": true,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Flag Division",
+          "questionId": "L16_A_E_03",
+          "questionText": "121 / 11 = ?",
+          "expectedAnswer": "11",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "11",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

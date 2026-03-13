@@ -1,0 +1,24 @@
+{
+  "artifactType": "ui_ux_review_report",
+  "generatedAt": "2026-03-10T01:53:07.228Z",
+  "reviewMode": "artifact_heuristic",
+  "courseId": "vedic_math",
+  "chapterCode": "L4_VERTICAL_CROSSWISE",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L4_VERTICAL_CROSSWISE/chapter_lesson_plan.json",
+  "uiSnapshotPaths": [],
+  "uiStateDumpPath": null,
+  "status": "reviewed",
+  "overallRisk": "high",
+  "frictionPoints": [
+    "Learner interaction starts late in the lesson."
+  ],
+  "accessibilityIssues": [],
+  "engagementRisks": [
+    "Structural content gaps will leak into learner experience."
+  ],
+  "suggestedFixes": [
+    "Move a learner response earlier in the flow.",
+    "Resolve deterministic blockers before UI sign-off.",
+    "LLM UI review skipped: No ANTHROPIC_API_KEY or OPENAI_API_KEY configured."
+  ]
+}

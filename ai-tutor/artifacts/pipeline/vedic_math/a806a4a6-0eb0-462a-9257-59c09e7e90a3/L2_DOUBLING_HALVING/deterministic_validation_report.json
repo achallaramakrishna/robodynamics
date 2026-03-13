@@ -1,0 +1,49 @@
+{
+  "artifactType": "deterministic_validation_report",
+  "generatedAt": "2026-03-10T01:53:06.056Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L2_DOUBLING_HALVING",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/chapter_lesson_plan.json",
+  "status": "ready",
+  "layers": {
+    "l1_schema": {
+      "pass": true,
+      "score": 20,
+      "issues": []
+    },
+    "l2_completeness": {
+      "pass": true,
+      "score": 25,
+      "issues": [],
+      "stats": {
+        "questionPoolCount": 27,
+        "workedExampleCount": 4,
+        "screenplayBeatCount": 30,
+        "difficultyCounts": {
+          "easy": 9,
+          "medium": 9,
+          "hard": 9
+        }
+      }
+    },
+    "l3_math_accuracy": {
+      "pass": true,
+      "score": 30,
+      "issues": [],
+      "stats": {
+        "verified": 9,
+        "wrong": 0,
+        "unverifiable": 22,
+        "totalChecked": 31
+      }
+    }
+  },
+  "overallScore": 100,
+  "blockingIssues": [],
+  "warnings": [],
+  "publishGate": {
+    "threshold": 80,
+    "status": "ready",
+    "readyForReview": true
+  }
+}

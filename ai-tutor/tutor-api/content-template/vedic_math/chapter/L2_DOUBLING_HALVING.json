@@ -50,6 +50,201 @@
     "Guided: use balancing to solve 14 × 8.",
     "Independent: use the ×25 trick to solve 25 × 36."
   ],
+  "duolingoLessonArc": {
+    "version": "2026-03-duolingo-vedic-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
+      "coachIntro": "Raj checks language comfort, current confidence, and session goal before starting Doubling and Halving.",
+      "placementRule": "Recommended start level for Lesson 2: beginner. If the learner struggles twice in one step, keep the pace slow and repeat the pattern with a smaller number."
+    },
+    "mission": {
+      "missionTitle": "Doubling and Halving",
+      "missionPromise": "Double and halve any number instantly without paper.",
+      "successCelebration": "Celebrate each correct step in Doubling and Halving with points, a badge pulse, and a quick coach line before moving on."
+    },
+    "microLessonPattern": [
+      "Coach opens with one short hook and names the pattern.",
+      "Coach models one worked move on the board.",
+      "Coach reads the exercise question aloud.",
+      "Niagh tries before the full answer is shown.",
+      "Instant feedback either celebrates or repairs the first mistake.",
+      "A quick review prompt decides whether the learner advances or repeats."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group based on the step position in the lesson path.",
+      "streakRule": "Keep the streak visible on every step and protect it with immediate retries instead of long explanations.",
+      "badgeRule": "Each exercise group has one badge focus tied to the subtopic being learned.",
+      "celebrationStyle": "Short praise, points pulse, and progress-bar movement after every correct response."
+    },
+    "reviewLoop": {
+      "trigger": "If the learner answers incorrectly, hesitates, or shows low confidence, reopen the same pattern with one smaller follow-up.",
+      "practiceStyle": "Use the micro-practice line as the first repair loop before advancing.",
+      "masteryRule": "Advance only after the learner can answer the checkpoint and complete one try in the same subtopic.",
+      "revisitRule": "Weak steps should return in the next session as review cards before new content."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "The learner should see mission progress, the current question, and the main action buttons without long vertical scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Doubling — Multiply by 2",
+        "missionStepTitle": "Exercise A: Doubling — Multiply by 2",
+        "coachHook": "Scene 1: Doubling. To multiply by 2, just add the number to itself. Split tens and units for speed.",
+        "boardDemo": "Show 2×37: split 30+7, double each: 60+14=74. Show the split method clearly.",
+        "readAloudPrompt": "What is 2 × 46? Use the split method.",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "What is 2 × 46? Use the split method.",
+        "instantFeedbackWin": "Correct. Doubling — Multiply by 2 is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Adding a number to itself.",
+        "reviewPrompt": "Micro-practice: double 53 and double 78 in your head.",
+        "xpReward": 10,
+        "badgeFocus": "Doubling — Multiply Star"
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Multiply by 4 — Double Twice",
+        "missionStepTitle": "Exercise B: Multiply by 4 — Double Twice",
+        "coachHook": "Scene 2: ×4 means double twice. First double, then double again.",
+        "boardDemo": "Show 4×23: 23→46→92. Draw two doubling arrows. Show 4×54: 54→108→216.",
+        "readAloudPrompt": "Solve 4 × 23 by doubling twice. What do you get after the first double?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "Solve 4 × 23 by doubling twice. What do you get after the first double?",
+        "instantFeedbackWin": "Correct. Multiply by 4 — Double Twice is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Twice — because 4 = 2 × 2.",
+        "reviewPrompt": "Micro-practice: solve 4×15 and 4×32 by doubling twice.",
+        "xpReward": 10,
+        "badgeFocus": "Multiply by 4 Star"
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Multiply by 8 — Double Three Times",
+        "missionStepTitle": "Exercise C: Multiply by 8 — Double Three Times",
+        "coachHook": "Scene 3: ×8 means double three times. Three arrows, three doublings.",
+        "boardDemo": "Show 8×11: 11→22→44→88. Show 8×25: 25→50→100→200.",
+        "readAloudPrompt": "Solve 8 × 11. What is the number after the second doubling?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "Solve 8 × 11. What is the number after the second doubling?",
+        "instantFeedbackWin": "Correct. Multiply by 8 — Double Three Times is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Three times — 8 = 2³.",
+        "reviewPrompt": "Micro-practice: solve 8×13 by doubling three times.",
+        "xpReward": 12,
+        "badgeFocus": "Multiply by 8 Star"
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Halving — Divide by 2",
+        "missionStepTitle": "Exercise D: Halving — Divide by 2",
+        "coachHook": "Scene 4: Halving is the reverse of doubling. Split odd numbers as whole + remainder.",
+        "boardDemo": "Show 48÷2=24. Show 138÷2: 100÷2=50, 38÷2=19, total=69.",
+        "readAloudPrompt": "Halve 138 using the split method. What is 100÷2?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "Halve 138 using the split method. What is 100÷2?",
+        "instantFeedbackWin": "Correct. Halving — Divide by 2 is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Split into 100 and 38, then halve each.",
+        "reviewPrompt": "Micro-practice: halve 76 and halve 94.",
+        "xpReward": 12,
+        "badgeFocus": "Halving — Divide Star"
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Divide by 4 — Halve Twice",
+        "missionStepTitle": "Exercise E: Divide by 4 — Halve Twice",
+        "coachHook": "Scene 5: ÷4 means halve twice. Two arrows going the other way.",
+        "boardDemo": "Show 48÷4: 48→24→12. Show 92÷4: 92→46→23.",
+        "readAloudPrompt": "Divide 48 by 4. After the first halving, what do you have?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "Divide 48 by 4. After the first halving, what do you have?",
+        "instantFeedbackWin": "Correct. Divide by 4 — Halve Twice is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Twice — because 4 = 2 × 2.",
+        "reviewPrompt": "Micro-practice: solve 64÷4 and 100÷4 by halving twice.",
+        "xpReward": 14,
+        "badgeFocus": "Divide by 4 Star"
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Balancing Trick — One Doubles, One Halves",
+        "missionStepTitle": "Exercise F: Balancing Trick — One Doubles, One Halves",
+        "coachHook": "Scene 6: The Balancing Trick. If one number doubles and the other halves, the product stays the same. This is the most powerful shortcut.",
+        "boardDemo": "Show 16×5: halve 16→8, double 5→10, so 8×10=80. Show scale balance visual.",
+        "readAloudPrompt": "For 16×5, which number did we halve and which did we double?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "For 16×5, which number did we halve and which did we double?",
+        "instantFeedbackWin": "Correct. Balancing Trick — One Doubles, One Halves is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Double it — 5 becomes 10.",
+        "reviewPrompt": "Micro-practice: use balancing to solve 14×8.",
+        "xpReward": 14,
+        "badgeFocus": "Balancing Trick — Star"
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Multiply by 5 — Times 10 then Halve",
+        "missionStepTitle": "Exercise G: Multiply by 5 — Times 10 then Halve",
+        "coachHook": "Scene 7: ×5 shortcut. Multiply by 10 first (add a zero), then halve. Super fast!",
+        "boardDemo": "Show 5×14: 14×10=140, 140÷2=70. Show 5×36: 360÷2=180.",
+        "readAloudPrompt": "Solve 5×14. What do you get after multiplying by 10?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "Solve 5×14. What do you get after multiplying by 10?",
+        "instantFeedbackWin": "Correct. Multiply by 5 — Times 10 then Halve is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Because 5 = 10 ÷ 2.",
+        "reviewPrompt": "Micro-practice: solve 5×28 and 5×56 using the ×5 trick.",
+        "xpReward": 16,
+        "badgeFocus": "Multiply by 5 Star"
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Multiply by 25 — Times 100 then Quarter",
+        "missionStepTitle": "Exercise H: Multiply by 25 — Times 100 then Quarter",
+        "coachHook": "Scene 8: ×25 shortcut. Multiply by 100 first, then divide by 4 (halve twice).",
+        "boardDemo": "Show 25×12: 12×100=1200, 1200÷4=300. Show 25×36: 3600÷4=900.",
+        "readAloudPrompt": "For 25×12, after multiplying by 100 you get 1200. Now halve it twice.",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "For 25×12, after multiplying by 100 you get 1200. Now halve it twice.",
+        "instantFeedbackWin": "Correct. Multiply by 25 — Times 100 then Quarter is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Because 25 = 100 ÷ 4.",
+        "reviewPrompt": "Micro-practice: solve 25×8 and 25×20 using the ×100 ÷4 trick.",
+        "xpReward": 16,
+        "badgeFocus": "Multiply by 25 Star"
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Divide by 5 and 25 — Reverse Trick",
+        "missionStepTitle": "Exercise I: Divide by 5 and 25 — Reverse Trick",
+        "coachHook": "Scene 9: ÷5 and ÷25 reversal. ÷5 = double then divide by 10. ÷25 = ×4 then divide by 100.",
+        "boardDemo": "Show 70÷5: 70×2=140, 140÷10=14. Show 200÷25: 200×4=800, 800÷100=8.",
+        "readAloudPrompt": "Divide 70 by 5. After doubling 70, what do you get?",
+        "tryPrompt": "Niagh, try this one. Say your first step, then your answer.",
+        "masteryCheck": "Divide 70 by 5. After doubling 70, what do you get?",
+        "instantFeedbackWin": "Correct. Divide by 5 and 25 — Reverse Trick is now stronger and ready for the next step.",
+        "instantFeedbackRetry": "Multiply first: ÷5 = ×2 ÷10.",
+        "reviewPrompt": "Micro-practice: solve 90÷5 and 300÷25 using the reverse trick.",
+        "xpReward": 20,
+        "badgeFocus": "Divide by 5 Star"
+      }
+    ]
+  },
   "teachingScript": [
     {
       "stepId": "L2_A",
@@ -164,12 +359,73 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "a_hdr", "x": "40", "y": "30", "text": "Lesson 2: Doubling and Halving", "color": "#1e40af", "size": 16, "delaySec": 0.0, "durationSec": 0.5 },
-        { "kind": "line", "id": "a_div", "x1": "40", "y1": "46", "x2": "540", "y2": "46", "color": "#3b82f6", "width": 2, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "text", "id": "a_sub", "x": "40", "y": "66", "text": "The fastest mental shortcuts in Vedic Math", "color": "#374151", "size": 13, "delaySec": 0.8, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_g1", "x": "60", "y": "100", "text": "×2  →  ×4  →  ×8  (doubling chain)", "color": "#059669", "size": 13, "delaySec": 1.3, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_g2", "x": "60", "y": "125", "text": "÷2  →  ÷4  →  ÷8  (halving chain)", "color": "#7c3aed", "size": 13, "delaySec": 1.7, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_g3", "x": "60", "y": "150", "text": "Balancing trick  →  ×5, ×25, ÷5, ÷25", "color": "#b45309", "size": 13, "delaySec": 2.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "a_hdr",
+          "x": "40",
+          "y": "30",
+          "text": "Lesson 2: Doubling and Halving",
+          "color": "#1e40af",
+          "size": 16,
+          "delaySec": 0,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "line",
+          "id": "a_div",
+          "x1": "40",
+          "y1": "46",
+          "x2": "540",
+          "y2": "46",
+          "color": "#3b82f6",
+          "width": 2,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "a_sub",
+          "x": "40",
+          "y": "66",
+          "text": "The fastest mental shortcuts in Vedic Math",
+          "color": "#374151",
+          "size": 13,
+          "delaySec": 0.8,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_g1",
+          "x": "60",
+          "y": "100",
+          "text": "×2  →  ×4  →  ×8  (doubling chain)",
+          "color": "#059669",
+          "size": 13,
+          "delaySec": 1.3,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_g2",
+          "x": "60",
+          "y": "125",
+          "text": "÷2  →  ÷4  →  ÷8  (halving chain)",
+          "color": "#7c3aed",
+          "size": 13,
+          "delaySec": 1.7,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_g3",
+          "x": "60",
+          "y": "150",
+          "text": "Balancing trick  →  ×5, ×25, ÷5, ÷25",
+          "color": "#b45309",
+          "size": 13,
+          "delaySec": 2.1,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -193,13 +449,85 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "a_e_hdr", "x": "40", "y": "28", "text": "Doubling: 2 × 37", "color": "#1e40af", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_e_split", "x": "60", "y": "60", "text": "37  =  30  +  7", "color": "#374151", "size": 14, "delaySec": 0.5, "durationSec": 0.4 },
-        { "kind": "line", "id": "a_e_arr1", "x1": "100", "y1": "70", "x2": "100", "y2": "95", "color": "#059669", "width": 2, "delaySec": 1.0, "durationSec": 0.3 },
-        { "kind": "line", "id": "a_e_arr2", "x1": "160", "y1": "70", "x2": "160", "y2": "95", "color": "#059669", "width": 2, "delaySec": 1.0, "durationSec": 0.3 },
-        { "kind": "text", "id": "a_e_d1", "x": "75", "y": "110", "text": "×2", "color": "#059669", "size": 12, "delaySec": 1.4, "durationSec": 0.3 },
-        { "kind": "text", "id": "a_e_d2", "x": "140", "y": "110", "text": "×2", "color": "#059669", "size": 12, "delaySec": 1.4, "durationSec": 0.3 },
-        { "kind": "text", "id": "a_e_res", "x": "60", "y": "135", "text": "60  +  14  =  74", "color": "#1e40af", "size": 15, "delaySec": 1.8, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "a_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Doubling: 2 × 37",
+          "color": "#1e40af",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_e_split",
+          "x": "60",
+          "y": "60",
+          "text": "37  =  30  +  7",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 0.5,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "line",
+          "id": "a_e_arr1",
+          "x1": "100",
+          "y1": "70",
+          "x2": "100",
+          "y2": "95",
+          "color": "#059669",
+          "width": 2,
+          "delaySec": 1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "a_e_arr2",
+          "x1": "160",
+          "y1": "70",
+          "x2": "160",
+          "y2": "95",
+          "color": "#059669",
+          "width": 2,
+          "delaySec": 1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "a_e_d1",
+          "x": "75",
+          "y": "110",
+          "text": "×2",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 1.4,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "a_e_d2",
+          "x": "140",
+          "y": "110",
+          "text": "×2",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 1.4,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "a_e_res",
+          "x": "60",
+          "y": "135",
+          "text": "60  +  14  =  74",
+          "color": "#1e40af",
+          "size": 15,
+          "delaySec": 1.8,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -223,10 +551,50 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "a_c_hdr", "x": "40", "y": "28", "text": "Your turn: 2 × 46 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_c_split", "x": "60", "y": "65", "text": "46  =  40  +  6", "color": "#374151", "size": 14, "delaySec": 0.5, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_c_blank", "x": "60", "y": "100", "text": "___ + ___  =  ___", "color": "#b45309", "size": 14, "delaySec": 1.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "a_c_hint", "x": "60", "y": "135", "text": "Hint: double each part separately", "color": "#6b7280", "size": 11, "delaySec": 1.5, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "a_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 2 × 46 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_c_split",
+          "x": "60",
+          "y": "65",
+          "text": "46  =  40  +  6",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 0.5,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_c_blank",
+          "x": "60",
+          "y": "100",
+          "text": "___ + ___  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 1,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "a_c_hint",
+          "x": "60",
+          "y": "135",
+          "text": "Hint: double each part separately",
+          "color": "#6b7280",
+          "size": 11,
+          "delaySec": 1.5,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -250,11 +618,61 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "b_i_hdr", "x": "40", "y": "28", "text": "Multiply by 4 — Double Twice", "color": "#1e40af", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "b_i_chain", "x": "60", "y": "70", "text": "n  →  2n  →  4n", "color": "#374151", "size": 16, "delaySec": 0.6, "durationSec": 0.5 },
-        { "kind": "text", "id": "b_i_label1", "x": "90", "y": "92", "text": "×2", "color": "#059669", "size": 12, "delaySec": 1.2, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_i_label2", "x": "170", "y": "92", "text": "×2", "color": "#059669", "size": 12, "delaySec": 1.5, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_i_rule", "x": "60", "y": "125", "text": "4 = 2 × 2  ∴  ×4 = double twice", "color": "#7c3aed", "size": 12, "delaySec": 2.0, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "b_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Multiply by 4 — Double Twice",
+          "color": "#1e40af",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "b_i_chain",
+          "x": "60",
+          "y": "70",
+          "text": "n  →  2n  →  4n",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.6,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "b_i_label1",
+          "x": "90",
+          "y": "92",
+          "text": "×2",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 1.2,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_i_label2",
+          "x": "170",
+          "y": "92",
+          "text": "×2",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 1.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_i_rule",
+          "x": "60",
+          "y": "125",
+          "text": "4 = 2 × 2  ∴  ×4 = double twice",
+          "color": "#7c3aed",
+          "size": 12,
+          "delaySec": 2,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -278,15 +696,107 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "b_e_hdr", "x": "40", "y": "28", "text": "4 × 23 — double twice", "color": "#1e40af", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "b_e_n1", "x": "60", "y": "75", "text": "23", "color": "#374151", "size": 18, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "b_e_arr1", "x1": "90", "y1": "75", "x2": "140", "y2": "75", "color": "#059669", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_e_x1", "x": "100", "y": "68", "text": "×2", "color": "#059669", "size": 11, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_e_n2", "x": "150", "y": "75", "text": "46", "color": "#059669", "size": 18, "delaySec": 1.3, "durationSec": 0.3 },
-        { "kind": "line", "id": "b_e_arr2", "x1": "180", "y1": "75", "x2": "230", "y2": "75", "color": "#1e40af", "width": 2, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_e_x2", "x": "190", "y": "68", "text": "×2", "color": "#1e40af", "size": 11, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_e_n3", "x": "240", "y": "75", "text": "92", "color": "#1e40af", "size": 18, "delaySec": 2.1, "durationSec": 0.4 },
-        { "kind": "text", "id": "b_e_ans", "x": "60", "y": "115", "text": "4 × 23  =  92", "color": "#7c3aed", "size": 14, "delaySec": 2.6, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "b_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "4 × 23 — double twice",
+          "color": "#1e40af",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "b_e_n1",
+          "x": "60",
+          "y": "75",
+          "text": "23",
+          "color": "#374151",
+          "size": 18,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "b_e_arr1",
+          "x1": "90",
+          "y1": "75",
+          "x2": "140",
+          "y2": "75",
+          "color": "#059669",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_e_x1",
+          "x": "100",
+          "y": "68",
+          "text": "×2",
+          "color": "#059669",
+          "size": 11,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_e_n2",
+          "x": "150",
+          "y": "75",
+          "text": "46",
+          "color": "#059669",
+          "size": 18,
+          "delaySec": 1.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "b_e_arr2",
+          "x1": "180",
+          "y1": "75",
+          "x2": "230",
+          "y2": "75",
+          "color": "#1e40af",
+          "width": 2,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_e_x2",
+          "x": "190",
+          "y": "68",
+          "text": "×2",
+          "color": "#1e40af",
+          "size": 11,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_e_n3",
+          "x": "240",
+          "y": "75",
+          "text": "92",
+          "color": "#1e40af",
+          "size": 18,
+          "delaySec": 2.1,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "b_e_ans",
+          "x": "60",
+          "y": "115",
+          "text": "4 × 23  =  92",
+          "color": "#7c3aed",
+          "size": 14,
+          "delaySec": 2.6,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -310,14 +820,96 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "b_c_hdr", "x": "40", "y": "28", "text": "Your turn: 4 × 54 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "b_c_n1", "x": "60", "y": "75", "text": "54", "color": "#374151", "size": 18, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "b_c_arr1", "x1": "90", "y1": "75", "x2": "140", "y2": "75", "color": "#059669", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_c_x1", "x": "100", "y": "68", "text": "×2", "color": "#059669", "size": 11, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_c_b1", "x": "150", "y": "75", "text": "?", "color": "#b45309", "size": 18, "delaySec": 1.3, "durationSec": 0.3 },
-        { "kind": "line", "id": "b_c_arr2", "x1": "180", "y1": "75", "x2": "230", "y2": "75", "color": "#1e40af", "width": 2, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_c_x2", "x": "190", "y": "68", "text": "×2", "color": "#1e40af", "size": 11, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "b_c_b2", "x": "240", "y": "75", "text": "?", "color": "#b45309", "size": 18, "delaySec": 2.1, "durationSec": 0.3 }
+        {
+          "kind": "text",
+          "id": "b_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 4 × 54 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "b_c_n1",
+          "x": "60",
+          "y": "75",
+          "text": "54",
+          "color": "#374151",
+          "size": 18,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "b_c_arr1",
+          "x1": "90",
+          "y1": "75",
+          "x2": "140",
+          "y2": "75",
+          "color": "#059669",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_c_x1",
+          "x": "100",
+          "y": "68",
+          "text": "×2",
+          "color": "#059669",
+          "size": 11,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_c_b1",
+          "x": "150",
+          "y": "75",
+          "text": "?",
+          "color": "#b45309",
+          "size": 18,
+          "delaySec": 1.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "b_c_arr2",
+          "x1": "180",
+          "y1": "75",
+          "x2": "230",
+          "y2": "75",
+          "color": "#1e40af",
+          "width": 2,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_c_x2",
+          "x": "190",
+          "y": "68",
+          "text": "×2",
+          "color": "#1e40af",
+          "size": 11,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "b_c_b2",
+          "x": "240",
+          "y": "75",
+          "text": "?",
+          "color": "#b45309",
+          "size": 18,
+          "delaySec": 2.1,
+          "durationSec": 0.3
+        }
       ]
     },
     {
@@ -341,12 +933,72 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "c_i_hdr", "x": "40", "y": "28", "text": "Multiply by 8 — Double Three Times", "color": "#1e40af", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "c_i_chain", "x": "40", "y": "70", "text": "n  →  2n  →  4n  →  8n", "color": "#374151", "size": 14, "delaySec": 0.6, "durationSec": 0.5 },
-        { "kind": "text", "id": "c_i_l1", "x": "72", "y": "88", "text": "×2", "color": "#059669", "size": 11, "delaySec": 1.2, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_i_l2", "x": "152", "y": "88", "text": "×2", "color": "#059669", "size": 11, "delaySec": 1.5, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_i_l3", "x": "232", "y": "88", "text": "×2", "color": "#059669", "size": 11, "delaySec": 1.8, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_i_rule", "x": "40", "y": "118", "text": "8 = 2³  ∴  ×8 = double three times", "color": "#7c3aed", "size": 12, "delaySec": 2.2, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "c_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Multiply by 8 — Double Three Times",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "c_i_chain",
+          "x": "40",
+          "y": "70",
+          "text": "n  →  2n  →  4n  →  8n",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 0.6,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "c_i_l1",
+          "x": "72",
+          "y": "88",
+          "text": "×2",
+          "color": "#059669",
+          "size": 11,
+          "delaySec": 1.2,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_i_l2",
+          "x": "152",
+          "y": "88",
+          "text": "×2",
+          "color": "#059669",
+          "size": 11,
+          "delaySec": 1.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_i_l3",
+          "x": "232",
+          "y": "88",
+          "text": "×2",
+          "color": "#059669",
+          "size": 11,
+          "delaySec": 1.8,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_i_rule",
+          "x": "40",
+          "y": "118",
+          "text": "8 = 2³  ∴  ×8 = double three times",
+          "color": "#7c3aed",
+          "size": 12,
+          "delaySec": 2.2,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -370,15 +1022,108 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "c_e_hdr", "x": "40", "y": "28", "text": "8 × 11 — three doublings", "color": "#1e40af", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "c_e_n1", "x": "50", "y": "72", "text": "11", "color": "#374151", "size": 16, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "c_e_a1", "x1": "75", "y1": "72", "x2": "110", "y2": "72", "color": "#059669", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_e_n2", "x": "118", "y": "72", "text": "22", "color": "#059669", "size": 16, "delaySec": 1.3, "durationSec": 0.3 },
-        { "kind": "line", "id": "c_e_a2", "x1": "143", "y1": "72", "x2": "178", "y2": "72", "color": "#1e40af", "width": 2, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_e_n3", "x": "186", "y": "72", "text": "44", "color": "#1e40af", "size": 16, "delaySec": 2.1, "durationSec": 0.3 },
-        { "kind": "line", "id": "c_e_a3", "x1": "211", "y1": "72", "x2": "246", "y2": "72", "color": "#7c3aed", "width": 2, "delaySec": 2.5, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_e_n4", "x": "254", "y": "72", "text": "88", "color": "#7c3aed", "size": 16, "delaySec": 2.9, "durationSec": 0.4 },
-        { "kind": "text", "id": "c_e_ans", "x": "50", "y": "108", "text": "8 × 11  =  88 ✓", "color": "#059669", "size": 14, "delaySec": 3.4, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "c_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "8 × 11 — three doublings",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "c_e_n1",
+          "x": "50",
+          "y": "72",
+          "text": "11",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "c_e_a1",
+          "x1": "75",
+          "y1": "72",
+          "x2": "110",
+          "y2": "72",
+          "color": "#059669",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_e_n2",
+          "x": "118",
+          "y": "72",
+          "text": "22",
+          "color": "#059669",
+          "size": 16,
+          "delaySec": 1.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "c_e_a2",
+          "x1": "143",
+          "y1": "72",
+          "x2": "178",
+          "y2": "72",
+          "color": "#1e40af",
+          "width": 2,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_e_n3",
+          "x": "186",
+          "y": "72",
+          "text": "44",
+          "color": "#1e40af",
+          "size": 16,
+          "delaySec": 2.1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "c_e_a3",
+          "x1": "211",
+          "y1": "72",
+          "x2": "246",
+          "y2": "72",
+          "color": "#7c3aed",
+          "width": 2,
+          "delaySec": 2.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_e_n4",
+          "x": "254",
+          "y": "72",
+          "text": "88",
+          "color": "#7c3aed",
+          "size": 16,
+          "delaySec": 2.9,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "c_e_ans",
+          "x": "50",
+          "y": "108",
+          "text": "8 × 11  =  88 ✓",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 3.4,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -402,14 +1147,97 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "c_c_hdr", "x": "40", "y": "28", "text": "Your turn: 8 × 14 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "c_c_n1", "x": "50", "y": "72", "text": "14", "color": "#374151", "size": 16, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "c_c_a1", "x1": "75", "y1": "72", "x2": "110", "y2": "72", "color": "#6b7280", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_c_b1", "x": "118", "y": "72", "text": "?", "color": "#b45309", "size": 16, "delaySec": 1.3, "durationSec": 0.3 },
-        { "kind": "line", "id": "c_c_a2", "x1": "143", "y1": "72", "x2": "178", "y2": "72", "color": "#6b7280", "width": 2, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_c_b2", "x": "186", "y": "72", "text": "?", "color": "#b45309", "size": 16, "delaySec": 2.1, "durationSec": 0.3 },
-        { "kind": "line", "id": "c_c_a3", "x1": "211", "y1": "72", "x2": "246", "y2": "72", "color": "#6b7280", "width": 2, "delaySec": 2.5, "durationSec": 0.3 },
-        { "kind": "text", "id": "c_c_b3", "x": "254", "y": "72", "text": "?", "color": "#b45309", "size": 16, "delaySec": 2.9, "durationSec": 0.3 }
+        {
+          "kind": "text",
+          "id": "c_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 8 × 14 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "c_c_n1",
+          "x": "50",
+          "y": "72",
+          "text": "14",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "c_c_a1",
+          "x1": "75",
+          "y1": "72",
+          "x2": "110",
+          "y2": "72",
+          "color": "#6b7280",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_c_b1",
+          "x": "118",
+          "y": "72",
+          "text": "?",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 1.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "c_c_a2",
+          "x1": "143",
+          "y1": "72",
+          "x2": "178",
+          "y2": "72",
+          "color": "#6b7280",
+          "width": 2,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_c_b2",
+          "x": "186",
+          "y": "72",
+          "text": "?",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 2.1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "c_c_a3",
+          "x1": "211",
+          "y1": "72",
+          "x2": "246",
+          "y2": "72",
+          "color": "#6b7280",
+          "width": 2,
+          "delaySec": 2.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "c_c_b3",
+          "x": "254",
+          "y": "72",
+          "text": "?",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 2.9,
+          "durationSec": 0.3
+        }
       ]
     },
     {
@@ -433,10 +1261,50 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "d_i_hdr", "x": "40", "y": "28", "text": "Halving — Divide by 2", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_i_ex", "x": "60", "y": "68", "text": "138  ÷  2", "color": "#374151", "size": 16, "delaySec": 0.5, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_i_split", "x": "60", "y": "100", "text": "=  100  +  38", "color": "#6b7280", "size": 13, "delaySec": 1.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_i_half", "x": "60", "y": "128", "text": "=  50   +  19  =  69", "color": "#059669", "size": 14, "delaySec": 1.5, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "d_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Halving — Divide by 2",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_i_ex",
+          "x": "60",
+          "y": "68",
+          "text": "138  ÷  2",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.5,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_i_split",
+          "x": "60",
+          "y": "100",
+          "text": "=  100  +  38",
+          "color": "#6b7280",
+          "size": 13,
+          "delaySec": 1,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_i_half",
+          "x": "60",
+          "y": "128",
+          "text": "=  50   +  19  =  69",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 1.5,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -460,13 +1328,84 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "d_e_hdr", "x": "40", "y": "28", "text": "Halving with split method", "color": "#7c3aed", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_e_ex1", "x": "60", "y": "62", "text": "48  ÷  2  =  24", "color": "#059669", "size": 14, "delaySec": 0.5, "durationSec": 0.4 },
-        { "kind": "line", "id": "d_e_div", "x1": "40", "y1": "80", "x2": "400", "y2": "80", "color": "#e5e7eb", "width": 1, "delaySec": 1.0, "durationSec": 0.2 },
-        { "kind": "text", "id": "d_e_ex2h", "x": "60", "y": "100", "text": "138  ÷  2", "color": "#374151", "size": 14, "delaySec": 1.2, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_e_s1", "x": "60", "y": "124", "text": "100 ÷ 2  =  50", "color": "#6b7280", "size": 12, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "d_e_s2", "x": "60", "y": "144", "text": " 38 ÷ 2  =  19", "color": "#6b7280", "size": 12, "delaySec": 2.0, "durationSec": 0.3 },
-        { "kind": "text", "id": "d_e_tot", "x": "60", "y": "168", "text": "50 + 19  =  69  ✓", "color": "#1e40af", "size": 14, "delaySec": 2.4, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "d_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Halving with split method",
+          "color": "#7c3aed",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_e_ex1",
+          "x": "60",
+          "y": "62",
+          "text": "48  ÷  2  =  24",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 0.5,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "line",
+          "id": "d_e_div",
+          "x1": "40",
+          "y1": "80",
+          "x2": "400",
+          "y2": "80",
+          "color": "#e5e7eb",
+          "width": 1,
+          "delaySec": 1,
+          "durationSec": 0.2
+        },
+        {
+          "kind": "text",
+          "id": "d_e_ex2h",
+          "x": "60",
+          "y": "100",
+          "text": "138  ÷  2",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 1.2,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_e_s1",
+          "x": "60",
+          "y": "124",
+          "text": "100 ÷ 2  =  50",
+          "color": "#6b7280",
+          "size": 12,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "d_e_s2",
+          "x": "60",
+          "y": "144",
+          "text": " 38 ÷ 2  =  19",
+          "color": "#6b7280",
+          "size": 12,
+          "delaySec": 2,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "d_e_tot",
+          "x": "60",
+          "y": "168",
+          "text": "50 + 19  =  69  ✓",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 2.4,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -490,9 +1429,39 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "d_c_hdr", "x": "40", "y": "28", "text": "Your turn: 376 ÷ 2 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_c_split", "x": "60", "y": "70", "text": "376  =  300  +  76", "color": "#374151", "size": 13, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "d_c_blank", "x": "60", "y": "105", "text": "___  +  ___  =  ___", "color": "#b45309", "size": 14, "delaySec": 1.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "d_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 376 ÷ 2 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_c_split",
+          "x": "60",
+          "y": "70",
+          "text": "376  =  300  +  76",
+          "color": "#374151",
+          "size": 13,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "d_c_blank",
+          "x": "60",
+          "y": "105",
+          "text": "___  +  ___  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -516,10 +1485,50 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "e_i_hdr", "x": "40", "y": "28", "text": "Divide by 4 — Halve Twice", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "e_i_chain", "x": "40", "y": "70", "text": "4n  →  2n  →  n", "color": "#374151", "size": 16, "delaySec": 0.6, "durationSec": 0.5 },
-        { "kind": "text", "id": "e_i_l1", "x": "82", "y": "88", "text": "÷2", "color": "#7c3aed", "size": 12, "delaySec": 1.2, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_i_l2", "x": "162", "y": "88", "text": "÷2", "color": "#7c3aed", "size": 12, "delaySec": 1.5, "durationSec": 0.3 }
+        {
+          "kind": "text",
+          "id": "e_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Divide by 4 — Halve Twice",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "e_i_chain",
+          "x": "40",
+          "y": "70",
+          "text": "4n  →  2n  →  n",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.6,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "e_i_l1",
+          "x": "82",
+          "y": "88",
+          "text": "÷2",
+          "color": "#7c3aed",
+          "size": 12,
+          "delaySec": 1.2,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_i_l2",
+          "x": "162",
+          "y": "88",
+          "text": "÷2",
+          "color": "#7c3aed",
+          "size": 12,
+          "delaySec": 1.5,
+          "durationSec": 0.3
+        }
       ]
     },
     {
@@ -543,17 +1552,131 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "e_e_hdr", "x": "40", "y": "28", "text": "48 ÷ 4  and  92 ÷ 4", "color": "#7c3aed", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "e_e_n1a", "x": "50", "y": "70", "text": "48", "color": "#374151", "size": 16, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "e_e_a1", "x1": "75", "y1": "70", "x2": "110", "y2": "70", "color": "#7c3aed", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_e_n2a", "x": "118", "y": "70", "text": "24", "color": "#7c3aed", "size": 16, "delaySec": 1.3, "durationSec": 0.3 },
-        { "kind": "line", "id": "e_e_a2", "x1": "143", "y1": "70", "x2": "178", "y2": "70", "color": "#1e40af", "width": 2, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_e_n3a", "x": "186", "y": "70", "text": "12", "color": "#1e40af", "size": 16, "delaySec": 2.1, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_e_n1b", "x": "50", "y": "115", "text": "92", "color": "#374151", "size": 16, "delaySec": 2.6, "durationSec": 0.3 },
-        { "kind": "line", "id": "e_e_a3", "x1": "75", "y1": "115", "x2": "110", "y2": "115", "color": "#7c3aed", "width": 2, "delaySec": 3.0, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_e_n2b", "x": "118", "y": "115", "text": "46", "color": "#7c3aed", "size": 16, "delaySec": 3.4, "durationSec": 0.3 },
-        { "kind": "line", "id": "e_e_a4", "x1": "143", "y1": "115", "x2": "178", "y2": "115", "color": "#1e40af", "width": 2, "delaySec": 3.8, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_e_n3b", "x": "186", "y": "115", "text": "23", "color": "#1e40af", "size": 16, "delaySec": 4.2, "durationSec": 0.3 }
+        {
+          "kind": "text",
+          "id": "e_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "48 ÷ 4  and  92 ÷ 4",
+          "color": "#7c3aed",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "e_e_n1a",
+          "x": "50",
+          "y": "70",
+          "text": "48",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "e_e_a1",
+          "x1": "75",
+          "y1": "70",
+          "x2": "110",
+          "y2": "70",
+          "color": "#7c3aed",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_e_n2a",
+          "x": "118",
+          "y": "70",
+          "text": "24",
+          "color": "#7c3aed",
+          "size": 16,
+          "delaySec": 1.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "e_e_a2",
+          "x1": "143",
+          "y1": "70",
+          "x2": "178",
+          "y2": "70",
+          "color": "#1e40af",
+          "width": 2,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_e_n3a",
+          "x": "186",
+          "y": "70",
+          "text": "12",
+          "color": "#1e40af",
+          "size": 16,
+          "delaySec": 2.1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_e_n1b",
+          "x": "50",
+          "y": "115",
+          "text": "92",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 2.6,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "e_e_a3",
+          "x1": "75",
+          "y1": "115",
+          "x2": "110",
+          "y2": "115",
+          "color": "#7c3aed",
+          "width": 2,
+          "delaySec": 3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_e_n2b",
+          "x": "118",
+          "y": "115",
+          "text": "46",
+          "color": "#7c3aed",
+          "size": 16,
+          "delaySec": 3.4,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "e_e_a4",
+          "x1": "143",
+          "y1": "115",
+          "x2": "178",
+          "y2": "115",
+          "color": "#1e40af",
+          "width": 2,
+          "delaySec": 3.8,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_e_n3b",
+          "x": "186",
+          "y": "115",
+          "text": "23",
+          "color": "#1e40af",
+          "size": 16,
+          "delaySec": 4.2,
+          "durationSec": 0.3
+        }
       ]
     },
     {
@@ -577,12 +1700,74 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "e_c_hdr", "x": "40", "y": "28", "text": "Your turn: 216 ÷ 4 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "e_c_n1", "x": "50", "y": "75", "text": "216", "color": "#374151", "size": 16, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "e_c_a1", "x1": "82", "y1": "75", "x2": "118", "y2": "75", "color": "#6b7280", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_c_b1", "x": "126", "y": "75", "text": "?", "color": "#b45309", "size": 16, "delaySec": 1.3, "durationSec": 0.3 },
-        { "kind": "line", "id": "e_c_a2", "x1": "151", "y1": "75", "x2": "186", "y2": "75", "color": "#6b7280", "width": 2, "delaySec": 1.7, "durationSec": 0.3 },
-        { "kind": "text", "id": "e_c_b2", "x": "194", "y": "75", "text": "?", "color": "#b45309", "size": 16, "delaySec": 2.1, "durationSec": 0.3 }
+        {
+          "kind": "text",
+          "id": "e_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 216 ÷ 4 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "e_c_n1",
+          "x": "50",
+          "y": "75",
+          "text": "216",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "e_c_a1",
+          "x1": "82",
+          "y1": "75",
+          "x2": "118",
+          "y2": "75",
+          "color": "#6b7280",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_c_b1",
+          "x": "126",
+          "y": "75",
+          "text": "?",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 1.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "e_c_a2",
+          "x1": "151",
+          "y1": "75",
+          "x2": "186",
+          "y2": "75",
+          "color": "#6b7280",
+          "width": 2,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "e_c_b2",
+          "x": "194",
+          "y": "75",
+          "text": "?",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 2.1,
+          "durationSec": 0.3
+        }
       ]
     },
     {
@@ -606,13 +1791,84 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "f_i_hdr", "x": "40", "y": "28", "text": "The Balancing Trick", "color": "#b45309", "size": 16, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_i_rule", "x": "40", "y": "58", "text": "a × b  =  (a÷2) × (b×2)", "color": "#374151", "size": 14, "delaySec": 0.6, "durationSec": 0.5 },
-        { "kind": "line", "id": "f_i_bar", "x1": "180", "y1": "100", "x2": "380", "y2": "100", "color": "#b45309", "width": 3, "delaySec": 1.2, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_i_lhs", "x": "155", "y": "120", "text": "16 × 5", "color": "#1e40af", "size": 13, "delaySec": 1.7, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_i_eq", "x": "268", "y": "88", "text": "=", "color": "#b45309", "size": 16, "delaySec": 2.2, "durationSec": 0.3 },
-        { "kind": "text", "id": "f_i_rhs", "x": "300", "y": "120", "text": "8 × 10", "color": "#059669", "size": 13, "delaySec": 2.2, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_i_ans", "x": "220", "y": "148", "text": "= 80", "color": "#7c3aed", "size": 16, "delaySec": 2.7, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "f_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "The Balancing Trick",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_i_rule",
+          "x": "40",
+          "y": "58",
+          "text": "a × b  =  (a÷2) × (b×2)",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 0.6,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "line",
+          "id": "f_i_bar",
+          "x1": "180",
+          "y1": "100",
+          "x2": "380",
+          "y2": "100",
+          "color": "#b45309",
+          "width": 3,
+          "delaySec": 1.2,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_i_lhs",
+          "x": "155",
+          "y": "120",
+          "text": "16 × 5",
+          "color": "#1e40af",
+          "size": 13,
+          "delaySec": 1.7,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_i_eq",
+          "x": "268",
+          "y": "88",
+          "text": "=",
+          "color": "#b45309",
+          "size": 16,
+          "delaySec": 2.2,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "f_i_rhs",
+          "x": "300",
+          "y": "120",
+          "text": "8 × 10",
+          "color": "#059669",
+          "size": 13,
+          "delaySec": 2.2,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_i_ans",
+          "x": "220",
+          "y": "148",
+          "text": "= 80",
+          "color": "#7c3aed",
+          "size": 16,
+          "delaySec": 2.7,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -636,13 +1892,85 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "f_e_hdr", "x": "40", "y": "28", "text": "Balancing in action", "color": "#b45309", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_e_ex1", "x": "50", "y": "65", "text": "16 × 5", "color": "#374151", "size": 14, "delaySec": 0.5, "durationSec": 0.3 },
-        { "kind": "line", "id": "f_e_a1", "x1": "105", "y1": "65", "x2": "145", "y2": "65", "color": "#b45309", "width": 2, "delaySec": 0.9, "durationSec": 0.3 },
-        { "kind": "text", "id": "f_e_r1", "x": "153", "y": "65", "text": "8 × 10  =  80", "color": "#059669", "size": 14, "delaySec": 1.3, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_e_ex2", "x": "50", "y": "105", "text": "14 × 8", "color": "#374151", "size": 14, "delaySec": 1.9, "durationSec": 0.3 },
-        { "kind": "line", "id": "f_e_a2", "x1": "105", "y1": "105", "x2": "145", "y2": "105", "color": "#b45309", "width": 2, "delaySec": 2.3, "durationSec": 0.3 },
-        { "kind": "text", "id": "f_e_r2", "x": "153", "y": "105", "text": "7 × 16  =  112", "color": "#059669", "size": 14, "delaySec": 2.7, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "f_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Balancing in action",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_e_ex1",
+          "x": "50",
+          "y": "65",
+          "text": "16 × 5",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "f_e_a1",
+          "x1": "105",
+          "y1": "65",
+          "x2": "145",
+          "y2": "65",
+          "color": "#b45309",
+          "width": 2,
+          "delaySec": 0.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "f_e_r1",
+          "x": "153",
+          "y": "65",
+          "text": "8 × 10  =  80",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 1.3,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_e_ex2",
+          "x": "50",
+          "y": "105",
+          "text": "14 × 8",
+          "color": "#374151",
+          "size": 14,
+          "delaySec": 1.9,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "line",
+          "id": "f_e_a2",
+          "x1": "105",
+          "y1": "105",
+          "x2": "145",
+          "y2": "105",
+          "color": "#b45309",
+          "width": 2,
+          "delaySec": 2.3,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "f_e_r2",
+          "x": "153",
+          "y": "105",
+          "text": "7 × 16  =  112",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 2.7,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -666,9 +1994,195 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "f_c_hdr", "x": "40", "y": "28", "text": "Your turn: 25 × 12 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_c_hint", "x": "60", "y": "70", "text": "Hint: double 25, halve 12", "color": "#6b7280", "size": 12, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "f_c_blank", "x": "60", "y": "105", "text": "___ × ___  =  ___", "color": "#b45309", "size": 14, "delaySec": 1.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "f_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 25 × 12 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_c_hint",
+          "x": "60",
+          "y": "70",
+          "text": "Hint: double 25, halve 12",
+          "color": "#6b7280",
+          "size": 12,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_c_blank",
+          "x": "60",
+          "y": "105",
+          "text": "___ × ___  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        }
+      ]
+    },
+    {
+      "beatId": "L2_F_DEMO",
+      "stepId": "L2_F",
+      "exerciseGroup": "F",
+      "subtopic": "Balancing Trick — One Doubles, One Halves",
+      "sequence": 604,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Let me show the balancing trick with a harder number. Fourteen times eight. Halve fourteen to get seven, double eight to get sixteen. Seven times sixteen is one hundred and twelve — same product as fourteen times eight!",
+      "boardAction": "Show 14x8: halve 14=7, double 8=16, then 7x16=112. Balance-scale visual.",
+      "checkpointPrompt": "14x8 and 7x16 both equal 112 — true or false?",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Halve one factor, double the other — the product stays the same.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [
+        {
+          "kind": "text",
+          "id": "f_d_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Balancing Trick: 14 x 8",
+          "color": "#1e40af",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_d_orig",
+          "x": "60",
+          "y": "65",
+          "text": "14  x  8",
+          "color": "#374151",
+          "size": 16,
+          "delaySec": 0.5,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_d_h",
+          "x": "68",
+          "y": "88",
+          "text": "halve",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "f_d_d",
+          "x": "148",
+          "y": "88",
+          "text": "double",
+          "color": "#b45309",
+          "size": 12,
+          "delaySec": 1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "f_d_new",
+          "x": "60",
+          "y": "112",
+          "text": "7  x  16  =  112",
+          "color": "#059669",
+          "size": 16,
+          "delaySec": 1.5,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "f_d_eq",
+          "x": "60",
+          "y": "142",
+          "text": "Same product — balance maintained!",
+          "color": "#7c3aed",
+          "size": 12,
+          "delaySec": 2.1,
+          "durationSec": 0.5
+        }
+      ]
+    },
+    {
+      "beatId": "L2_F_GUIDED",
+      "stepId": "L2_F",
+      "exerciseGroup": "F",
+      "subtopic": "Balancing Trick — One Doubles, One Halves",
+      "sequence": 605,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Now you try. Solve thirty-two times five using the balancing trick. Hint: halve thirty-two first. What do you get after halving?",
+      "boardAction": "Show 32x5 with guided blanks: halve 32=___, double 5=___, ___x___=___",
+      "checkpointPrompt": "What is 32 x 5 using the balancing trick?",
+      "pauseType": "student_response",
+      "holdSec": 0.2,
+      "expectedStudentResponse": "160",
+      "fallbackHint": "Halve 32 to get 16, double 5 to get 10. Then 16 x 10 = 160.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [
+        {
+          "kind": "text",
+          "id": "f_g_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 32 x 5 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_g_step1",
+          "x": "60",
+          "y": "68",
+          "text": "Step 1 — Halve 32:   32 / 2 = ___",
+          "color": "#374151",
+          "size": 13,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_g_step2",
+          "x": "60",
+          "y": "98",
+          "text": "Step 2 — Double 5:   5 x 2  = ___",
+          "color": "#374151",
+          "size": 13,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "f_g_step3",
+          "x": "60",
+          "y": "128",
+          "text": "Step 3 — Multiply:  ___ x ___ = ___",
+          "color": "#b45309",
+          "size": 13,
+          "delaySec": 1.6,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -692,10 +2206,50 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "g_i_hdr", "x": "40", "y": "28", "text": "Multiply by 5 — ×10 then ÷2", "color": "#1e40af", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "g_i_rule", "x": "60", "y": "68", "text": "5 = 10 ÷ 2", "color": "#374151", "size": 15, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "g_i_so", "x": "60", "y": "98", "text": "∴  n × 5  =  (n × 10) ÷ 2", "color": "#059669", "size": 13, "delaySec": 1.1, "durationSec": 0.5 },
-        { "kind": "text", "id": "g_i_ex", "x": "60", "y": "130", "text": "14 × 5  =  140 ÷ 2  =  70", "color": "#1e40af", "size": 13, "delaySec": 1.7, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "g_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Multiply by 5 — ×10 then ÷2",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "g_i_rule",
+          "x": "60",
+          "y": "68",
+          "text": "5 = 10 ÷ 2",
+          "color": "#374151",
+          "size": 15,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "g_i_so",
+          "x": "60",
+          "y": "98",
+          "text": "∴  n × 5  =  (n × 10) ÷ 2",
+          "color": "#059669",
+          "size": 13,
+          "delaySec": 1.1,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "g_i_ex",
+          "x": "60",
+          "y": "130",
+          "text": "14 × 5  =  140 ÷ 2  =  70",
+          "color": "#1e40af",
+          "size": 13,
+          "delaySec": 1.7,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -719,9 +2273,39 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "g_e_hdr", "x": "40", "y": "28", "text": "5 × 36  and  5 × 142", "color": "#1e40af", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "g_e_ex1", "x": "50", "y": "68", "text": "5 × 36  =  36 × 10 ÷ 2  =  360 ÷ 2  =  180", "color": "#059669", "size": 12, "delaySec": 0.5, "durationSec": 0.5 },
-        { "kind": "text", "id": "g_e_ex2", "x": "50", "y": "104", "text": "5 × 142 = 142×10÷2 = 1420÷2 = 710", "color": "#1e40af", "size": 12, "delaySec": 1.1, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "g_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "5 × 36  and  5 × 142",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "g_e_ex1",
+          "x": "50",
+          "y": "68",
+          "text": "5 × 36  =  36 × 10 ÷ 2  =  360 ÷ 2  =  180",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 0.5,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "g_e_ex2",
+          "x": "50",
+          "y": "104",
+          "text": "5 × 142 = 142×10÷2 = 1420÷2 = 710",
+          "color": "#1e40af",
+          "size": 12,
+          "delaySec": 1.1,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -745,9 +2329,39 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "g_c_hdr", "x": "40", "y": "28", "text": "Your turn: 5 × 14 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "g_c_step1", "x": "60", "y": "70", "text": "14 × 10  =  ___", "color": "#b45309", "size": 14, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "g_c_step2", "x": "60", "y": "105", "text": "___ ÷ 2  =  ___", "color": "#b45309", "size": 14, "delaySec": 1.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "g_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 5 × 14 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "g_c_step1",
+          "x": "60",
+          "y": "70",
+          "text": "14 × 10  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "g_c_step2",
+          "x": "60",
+          "y": "105",
+          "text": "___ ÷ 2  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -771,10 +2385,50 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "h_i_hdr", "x": "40", "y": "28", "text": "Multiply by 25 — ×100 then ÷4", "color": "#1e40af", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "h_i_rule", "x": "60", "y": "68", "text": "25  =  100 ÷ 4", "color": "#374151", "size": 15, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "h_i_so", "x": "60", "y": "98", "text": "∴  n × 25  =  (n × 100) ÷ 4", "color": "#059669", "size": 13, "delaySec": 1.1, "durationSec": 0.5 },
-        { "kind": "text", "id": "h_i_ex", "x": "60", "y": "130", "text": "25 × 4 = 400 ÷ 4 = 100", "color": "#1e40af", "size": 13, "delaySec": 1.7, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "h_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Multiply by 25 — ×100 then ÷4",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "h_i_rule",
+          "x": "60",
+          "y": "68",
+          "text": "25  =  100 ÷ 4",
+          "color": "#374151",
+          "size": 15,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "h_i_so",
+          "x": "60",
+          "y": "98",
+          "text": "∴  n × 25  =  (n × 100) ÷ 4",
+          "color": "#059669",
+          "size": 13,
+          "delaySec": 1.1,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "h_i_ex",
+          "x": "60",
+          "y": "130",
+          "text": "25 × 4 = 400 ÷ 4 = 100",
+          "color": "#1e40af",
+          "size": 13,
+          "delaySec": 1.7,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -798,9 +2452,39 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "h_e_hdr", "x": "40", "y": "28", "text": "25 × 12  and  25 × 36", "color": "#1e40af", "size": 14, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "h_e_ex1", "x": "50", "y": "68", "text": "25 × 12 = 12×100÷4 = 1200÷4 = 300", "color": "#059669", "size": 12, "delaySec": 0.5, "durationSec": 0.5 },
-        { "kind": "text", "id": "h_e_ex2", "x": "50", "y": "104", "text": "25 × 36 = 36×100÷4 = 3600÷4 = 900", "color": "#1e40af", "size": 12, "delaySec": 1.1, "durationSec": 0.5 }
+        {
+          "kind": "text",
+          "id": "h_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "25 × 12  and  25 × 36",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "h_e_ex1",
+          "x": "50",
+          "y": "68",
+          "text": "25 × 12 = 12×100÷4 = 1200÷4 = 300",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 0.5,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "text",
+          "id": "h_e_ex2",
+          "x": "50",
+          "y": "104",
+          "text": "25 × 36 = 36×100÷4 = 3600÷4 = 900",
+          "color": "#1e40af",
+          "size": 12,
+          "delaySec": 1.1,
+          "durationSec": 0.5
+        }
       ]
     },
     {
@@ -824,9 +2508,39 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "h_c_hdr", "x": "40", "y": "28", "text": "Your turn: 25 × 4 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "h_c_step1", "x": "60", "y": "70", "text": "4 × 100  =  ___", "color": "#b45309", "size": 14, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "h_c_step2", "x": "60", "y": "105", "text": "___ ÷ 4  =  ___", "color": "#b45309", "size": 14, "delaySec": 1.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "h_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 25 × 4 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "h_c_step1",
+          "x": "60",
+          "y": "70",
+          "text": "4 × 100  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "h_c_step2",
+          "x": "60",
+          "y": "105",
+          "text": "___ ÷ 4  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -850,9 +2564,39 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "i_i_hdr", "x": "40", "y": "28", "text": "Divide by 5 and 25 — Reverse Trick", "color": "#7c3aed", "size": 13, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_i_r1", "x": "60", "y": "68", "text": "÷5  =  ×2  then  ÷10", "color": "#1e40af", "size": 14, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_i_r2", "x": "60", "y": "98", "text": "÷25  =  ×4  then  ÷100", "color": "#059669", "size": 14, "delaySec": 1.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "i_i_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Divide by 5 and 25 — Reverse Trick",
+          "color": "#7c3aed",
+          "size": 13,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_i_r1",
+          "x": "60",
+          "y": "68",
+          "text": "÷5  =  ×2  then  ÷10",
+          "color": "#1e40af",
+          "size": 14,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_i_r2",
+          "x": "60",
+          "y": "98",
+          "text": "÷25  =  ×4  then  ÷100",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -876,10 +2620,50 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "i_e_hdr", "x": "40", "y": "28", "text": "÷5 and ÷25 worked examples", "color": "#7c3aed", "size": 13, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_e_ex1", "x": "50", "y": "62", "text": "70 ÷ 5: 70×2=140, 140÷10 = 14", "color": "#1e40af", "size": 12, "delaySec": 0.5, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_e_ex2", "x": "50", "y": "90", "text": "135÷5: 135×2=270, 270÷10 = 27", "color": "#059669", "size": 12, "delaySec": 1.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_e_ex3", "x": "50", "y": "118", "text": "200÷25: 200×4=800, 800÷100 = 8", "color": "#b45309", "size": 12, "delaySec": 1.5, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "i_e_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "÷5 and ÷25 worked examples",
+          "color": "#7c3aed",
+          "size": 13,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_e_ex1",
+          "x": "50",
+          "y": "62",
+          "text": "70 ÷ 5: 70×2=140, 140÷10 = 14",
+          "color": "#1e40af",
+          "size": 12,
+          "delaySec": 0.5,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_e_ex2",
+          "x": "50",
+          "y": "90",
+          "text": "135÷5: 135×2=270, 270÷10 = 27",
+          "color": "#059669",
+          "size": 12,
+          "delaySec": 1,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_e_ex3",
+          "x": "50",
+          "y": "118",
+          "text": "200÷25: 200×4=800, 800÷100 = 8",
+          "color": "#b45309",
+          "size": 12,
+          "delaySec": 1.5,
+          "durationSec": 0.4
+        }
       ]
     },
     {
@@ -903,10 +2687,182 @@
       "minConfidence": null,
       "maxConfidence": null,
       "svgAnimation": [
-        { "kind": "text", "id": "i_c_hdr", "x": "40", "y": "28", "text": "Your turn: 70 ÷ 5 = ?", "color": "#7c3aed", "size": 15, "delaySec": 0.0, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_c_step1", "x": "60", "y": "70", "text": "70 × 2  =  ___", "color": "#b45309", "size": 14, "delaySec": 0.6, "durationSec": 0.4 },
-        { "kind": "text", "id": "i_c_step2", "x": "60", "y": "105", "text": "___ ÷ 10  =  ___", "color": "#b45309", "size": 14, "delaySec": 1.1, "durationSec": 0.4 }
+        {
+          "kind": "text",
+          "id": "i_c_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Your turn: 70 ÷ 5 = ?",
+          "color": "#7c3aed",
+          "size": 15,
+          "delaySec": 0,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_c_step1",
+          "x": "60",
+          "y": "70",
+          "text": "70 × 2  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 0.6,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "i_c_step2",
+          "x": "60",
+          "y": "105",
+          "text": "___ ÷ 10  =  ___",
+          "color": "#b45309",
+          "size": 14,
+          "delaySec": 1.1,
+          "durationSec": 0.4
+        }
       ]
+    },
+    {
+      "beatId": "L2_LESSON_CLOSE",
+      "stepId": "L2_I",
+      "exerciseGroup": "I",
+      "subtopic": "Divide by 5 and 25 — Reverse Trick",
+      "sequence": 1001,
+      "cue": "checkpoint",
+      "boardMode": "free_draw",
+      "teacherLine": "Fantastic work today! You now have six powerful shortcuts: double, double-twice, double-three-times, the balancing trick, times-five, and times-twenty-five. Remember — every multiplication shortcut you will ever learn is built on doubling and halving. See you in Lesson 3 where we tackle the Nikhilam base method!",
+      "boardAction": "Show summary table: x2 double, x4 double twice, x8 triple double, balancing trick, x5 halved-ten, x25 quartered-hundred.",
+      "checkpointPrompt": "Name one shortcut from Lesson 2.",
+      "pauseType": "none",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Doubling, balancing trick, times-five shortcut, etc.",
+      "performanceTag": "engagement",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [
+        {
+          "kind": "text",
+          "id": "cl_hdr",
+          "x": "40",
+          "y": "28",
+          "text": "Lesson 2 — Shortcuts Mastered!",
+          "color": "#059669",
+          "size": 14,
+          "delaySec": 0,
+          "durationSec": 0.5
+        },
+        {
+          "kind": "line",
+          "id": "cl_div",
+          "x1": "40",
+          "y1": "44",
+          "x2": "540",
+          "y2": "44",
+          "color": "#10b981",
+          "width": 2,
+          "delaySec": 0.5,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "cl_s1",
+          "x": "60",
+          "y": "68",
+          "text": "x2  — double any number instantly",
+          "color": "#374151",
+          "size": 12,
+          "delaySec": 0.8,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "cl_s2",
+          "x": "60",
+          "y": "88",
+          "text": "x4  — double twice",
+          "color": "#374151",
+          "size": 12,
+          "delaySec": 1.1,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "cl_s3",
+          "x": "60",
+          "y": "108",
+          "text": "x8  — double three times",
+          "color": "#374151",
+          "size": 12,
+          "delaySec": 1.4,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "cl_s4",
+          "x": "60",
+          "y": "128",
+          "text": "Balancing trick — halve one, double other",
+          "color": "#b45309",
+          "size": 12,
+          "delaySec": 1.7,
+          "durationSec": 0.3
+        },
+        {
+          "kind": "text",
+          "id": "cl_s5",
+          "x": "60",
+          "y": "148",
+          "text": "x5 = x10 halved  |  x25 = x100 quartered",
+          "color": "#7c3aed",
+          "size": 12,
+          "delaySec": 2,
+          "durationSec": 0.4
+        },
+        {
+          "kind": "text",
+          "id": "cl_next",
+          "x": "40",
+          "y": "175",
+          "text": "Next: Lesson 3 — Nikhilam Base Method!",
+          "color": "#0ea5e9",
+          "size": 12,
+          "delaySec": 2.5,
+          "durationSec": 0.5
+        }
+      ]
+    }
+  ],
+  "teachingFlowStages": [
+    {
+      "phase": "INTRO",
+      "intent": "Set context: doubling and halving are the fastest mental operations and all shortcuts today build on just two moves."
+    },
+    {
+      "phase": "EXPLAIN",
+      "intent": "Concept explained with spoken teacherLine and board animation: split-digit doubling, doubling chains (x4, x8), halving chains, and balancing trick."
+    },
+    {
+      "phase": "DEMO",
+      "intent": "Teacher solves a full worked example on the board: 2x37 split method, 4x23 double-twice chain, 16x5 balancing trick."
+    },
+    {
+      "phase": "GUIDED",
+      "intent": "Student attempts the next step with tutor nudges — halve one factor and double the other to apply the balancing trick."
+    },
+    {
+      "phase": "PRACTICE",
+      "intent": "Student solves independently: x5 shortcut, divide-by-5 reverse, x25 and divide-by-25 tricks with minimal prompts."
+    },
+    {
+      "phase": "CHECK",
+      "intent": "Tutor gives correctness reasoning and correction logic — shows step-by-step solution chain if the student makes an error."
+    },
+    {
+      "phase": "CHECKPOINT",
+      "intent": "Explicit learner-response gate: student confirms understanding of each subtopic before the tutor advances to the next one."
     }
   ],
   "questionPool": [

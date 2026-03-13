@@ -1,0 +1,48 @@
+{
+  "artifactType": "ui_ux_review_report",
+  "generatedAt": "2026-03-10T02:16:38.723Z",
+  "reviewMode": "llm_anthropic",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/00b71b82-6ae1-40ce-ad1d-57fdaf536999/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+  "uiSnapshotPaths": [],
+  "uiStateDumpPath": null,
+  "status": "reviewed",
+  "overallRisk": "medium",
+  "frictionPoints": [
+    "INTRO phase asks students to 'recall what you already know' about a topic they have not yet been taught, creating a cold-start confusion with no prior anchor provided.",
+    "CHECK phase topic 'Mental Addition with Carry' does not appear in any prior phase, board plan, or question sample, making the correction task contextually orphaned.",
+    "Practice checkpoint C references 'By Addition and By Subtraction' which is never introduced in the lesson sequence, board plan, or question sample, leaving students without the conceptual grounding needed to attempt it.",
+    "Practice checkpoint A references 'Introduction to Vedic Mathematics' rather than the lesson's own topic 'Completing the Whole', creating a scope mismatch that may confuse students about what they are being assessed on.",
+    "The CHECKPOINT phase asks students to summarize 'Grouping Numbers into Wholes', a topic not explicitly taught in any prior phase, potentially causing a dead-end response gate.",
+    "Board plan step 6 introduces two-digit column addition (56 + 26) which is significantly more complex than the single-digit bridging covered in all practice questions, creating an unexplained difficulty jump.",
+    "The lesson has seven instructional phases but only three practice checkpoints, leaving phases EXPLAIN, DEMO, and GUIDED without any associated formative check to confirm understanding before progression."
+  ],
+  "accessibilityIssues": [
+    "The Ten Point Circle (DEMO phase and board plan step 3) is described only visually with no verbal or tactile alternative described, excluding students with visual impairments.",
+    "Board plan relies on spatial layout cues ('opposite', 'branch families', 'number jump') without defining these terms, which may be inaccessible to students with spatial processing difficulties or those new to the notation.",
+    "Hints use directional language ('opposite to its complement on the circle') that presupposes the student can see and interpret the circle diagram.",
+    "No reading-level guidance is provided; the mix of informal language ('friendly-number mindset') and technical terms ('deficiency', 'complement', 'base-10 bridging') may be inconsistent for early learners or ELL students.",
+    "Question type is uniformly 'short_answer' with no multiple-choice or visual-selection alternatives, limiting access for students with writing or fine-motor difficulties."
+  ],
+  "engagementRisks": [
+    "All nine questions in the sample are short-answer arithmetic with near-identical structure, offering no variety in format (e.g., drag-and-drop, fill-in-the-circle, word problems) that could sustain motivation.",
+    "The DEMO phase student action is passive ('watch and say the next step'), with no mechanism to verify or record the student's prediction, reducing accountability and engagement.",
+    "Difficulty progression within exercise groups A and B tops out at single-digit bridging (max sum 17), which may feel insufficiently challenging for students who already know basic addition facts.",
+    "The lesson title and INTRO framing do not connect the skill to a real-world context or story, missing an opportunity to build intrinsic motivation.",
+    "The CHECKPOINT summary task ('summarize the method') immediately follows a CHECK phase that already required explanation, making the two final phases feel repetitive and potentially demotivating.",
+    "Exercise group C contains only two easy questions despite being labeled for the Ten Point Circle subtopic, providing insufficient practice depth to consolidate that concept."
+  ],
+  "suggestedFixes": [
+    "Replace the INTRO student action with a low-stakes activation prompt tied to something students already know, e.g., 'What is 5 + 5? How did you know so fast?' to create a genuine prior-knowledge bridge.",
+    "Align CHECK phase topic to a concept already taught in the lesson (e.g., 'Deficiency from Ten' or 'Pairs That Make 10') and provide a worked example with a deliberate error for students to identify.",
+    "Replace Practice C prompt topic 'By Addition and By Subtraction' with 'Completing the Next Ten' or 'Deficiency from Ten' to match taught content, or add a brief teaching moment for the new topic before the checkpoint.",
+    "Update Practice A prompt to reference 'Completing the Whole' or 'Pairs That Make 10' to align with the lesson's own scope rather than the broader Vedic Mathematics course.",
+    "Rename or reframe the CHECKPOINT topic to 'Completing the Whole' and explicitly connect it to the lesson's core method so the summary gate is coherent.",
+    "Add a transitional board step between single-digit bridging and the two-digit example (56 + 26) to scaffold the tens-decomposition step explicitly.",
+    "Add at least one formative micro-check after EXPLAIN and after DEMO phases, such as a single quick question, to ensure understanding gates are present throughout the cycle.",
+    "Provide a text-based description of the Ten Point Circle (e.g., 'a list of pairs: 1-9, 2-8, 3-7, 4-6, 5-5') as an alternative representation for accessibility.",
+    "Introduce at least one non-short-answer question format (e.g., multiple choice, matching pairs, or a fill-in-the-circle diagram) to increase engagement variety.",
+    "Add two or three medium-to-hard questions to Exercise Group C to provide adequate practice depth for the Ten Point Circle subtopic."
+  ]
+}

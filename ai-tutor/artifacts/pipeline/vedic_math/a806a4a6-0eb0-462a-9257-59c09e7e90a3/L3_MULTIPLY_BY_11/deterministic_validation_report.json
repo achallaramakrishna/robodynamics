@@ -1,0 +1,49 @@
+{
+  "artifactType": "deterministic_validation_report",
+  "generatedAt": "2026-03-10T01:53:06.479Z",
+  "courseId": "vedic_math",
+  "chapterCode": "L3_MULTIPLY_BY_11",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L3_MULTIPLY_BY_11/chapter_lesson_plan.json",
+  "status": "ready",
+  "layers": {
+    "l1_schema": {
+      "pass": true,
+      "score": 20,
+      "issues": []
+    },
+    "l2_completeness": {
+      "pass": true,
+      "score": 25,
+      "issues": [],
+      "stats": {
+        "questionPoolCount": 28,
+        "workedExampleCount": 4,
+        "screenplayBeatCount": 37,
+        "difficultyCounts": {
+          "easy": 10,
+          "medium": 9,
+          "hard": 9
+        }
+      }
+    },
+    "l3_math_accuracy": {
+      "pass": true,
+      "score": 30,
+      "issues": [],
+      "stats": {
+        "verified": 17,
+        "wrong": 0,
+        "unverifiable": 15,
+        "totalChecked": 32
+      }
+    }
+  },
+  "overallScore": 100,
+  "blockingIssues": [],
+  "warnings": [],
+  "publishGate": {
+    "threshold": 80,
+    "status": "ready",
+    "readyForReview": true
+  }
+}

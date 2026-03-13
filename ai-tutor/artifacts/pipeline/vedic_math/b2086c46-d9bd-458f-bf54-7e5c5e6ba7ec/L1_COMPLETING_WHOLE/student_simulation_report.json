@@ -1,0 +1,48 @@
+{
+  "artifactType": "student_simulation_report",
+  "generatedAt": "2026-03-10T02:11:17.080Z",
+  "simulationMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/b2086c46-d9bd-458f-bf54-7e5c5e6ba7ec/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+  "learnerProfile": {
+    "gradeBand": "5-8",
+    "confidence": "medium",
+    "pace": "average",
+    "weaknesses": [
+      "mental subtraction",
+      "multi-step attention"
+    ],
+    "languageComfort": "english"
+  },
+  "status": "simulated",
+  "stuckMoments": [
+    "No major stall was predicted in the local simulation."
+  ],
+  "repetitionRisks": [],
+  "hintEffectiveness": [
+    {
+      "hint": "Step 1: How much does 8 need to reach 10?  Step 2: Use the remainder.",
+      "helped": true
+    },
+    {
+      "hint": "First fill 9 to 10, then add what's left from 6.",
+      "helped": true
+    },
+    {
+      "hint": "State the gap from 6 to 10, then add the leftover.",
+      "helped": true
+    },
+    {
+      "hint": "Find the gap from 7 to 10. Then add what remains from 5.",
+      "helped": true
+    },
+    {
+      "hint": "Gap from 6 to 10 = 4. Remaining from 7 = 3.",
+      "helped": true
+    }
+  ],
+  "recommendedFixes": [
+    "Run the lesson with a lower-confidence learner profile next."
+  ]
+}

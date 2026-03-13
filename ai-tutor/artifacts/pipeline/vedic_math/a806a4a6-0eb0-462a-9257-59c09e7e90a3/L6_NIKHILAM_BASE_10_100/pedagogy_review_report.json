@@ -1,0 +1,28 @@
+{
+  "artifactType": "pedagogy_review_report",
+  "generatedAt": "2026-03-10T01:53:07.923Z",
+  "reviewMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L6_NIKHILAM_BASE_10_100",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/chapter_lesson_plan.json",
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L6_NIKHILAM_BASE_10_100/deterministic_validation_report.json",
+  "status": "reviewed",
+  "scores": {
+    "teaching_clarity": 7,
+    "difficulty_progression": 4,
+    "example_quality": 5.5,
+    "engagement": 6.5,
+    "bloom_coverage": 5
+  },
+  "overallScore": 5.6,
+  "overallComments": "LLM review skipped: No ANTHROPIC_API_KEY or OPENAI_API_KEY configured.",
+  "topIssues": [
+    "Deterministic validation is not yet clean.",
+    "Worked examples are too thin for teach-model-practice."
+  ],
+  "suggestedFixes": [
+    "Fix structural blockers before approving pedagogy.",
+    "Add at least two more worked examples."
+  ],
+  "approvalRecommendation": "needs_major_edits"
+}

@@ -1,0 +1,26 @@
+{
+  "artifactType": "pedagogy_review_report",
+  "generatedAt": "2026-03-10T01:53:06.217Z",
+  "reviewMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L2_DOUBLING_HALVING",
+  "lessonPlanPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/chapter_lesson_plan.json",
+  "validationReportPath": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3/L2_DOUBLING_HALVING/deterministic_validation_report.json",
+  "status": "reviewed",
+  "scores": {
+    "teaching_clarity": 7,
+    "difficulty_progression": 7.5,
+    "example_quality": 7.5,
+    "engagement": 6.5,
+    "bloom_coverage": 5
+  },
+  "overallScore": 6.7,
+  "overallComments": "LLM review skipped: No ANTHROPIC_API_KEY or OPENAI_API_KEY configured.",
+  "topIssues": [
+    "No major pedagogy blocker found in the local heuristic review."
+  ],
+  "suggestedFixes": [
+    "Proceed to UI/UX and student simulation review."
+  ],
+  "approvalRecommendation": "needs_major_edits"
+}

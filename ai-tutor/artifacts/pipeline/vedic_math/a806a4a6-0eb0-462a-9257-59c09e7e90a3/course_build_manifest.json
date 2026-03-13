@@ -1,0 +1,41 @@
+{
+  "artifactType": "course_build_manifest",
+  "pipelineRunId": "a806a4a6-0eb0-462a-9257-59c09e7e90a3",
+  "agentId": "project_manager",
+  "generatedAt": "2026-03-10T01:53:12.609Z",
+  "courseId": "vedic_math",
+  "courseTitle": "Vedic Math",
+  "stageOrder": [
+    "pedagogical_architect",
+    "content_generator",
+    "deterministic_validator",
+    "pedagogy_reviewer",
+    "ui_ux_reviewer",
+    "student_simulator",
+    "publish_orchestrator"
+  ],
+  "chapterSelection": [
+    "L1_COMPLETING_WHOLE",
+    "L2_DOUBLING_HALVING",
+    "L3_MULTIPLY_BY_11",
+    "L4_VERTICAL_CROSSWISE",
+    "L5_ALL_FROM_9_LAST_FROM_10",
+    "L6_NIKHILAM_BASE_10_100",
+    "L7_SQUARES_ENDING_5",
+    "L8_YAVADUNAM",
+    "L9_GENERAL_MULTIPLICATION",
+    "L10_DIVISION_BY_9",
+    "L11_VINCULUM_INTRO",
+    "L12_FRACTIONS_DECIMALS",
+    "L13_ALGEBRAIC_IDENTITIES",
+    "L14_FACTORISATION",
+    "L15_SQUARES_NEAR_BASE",
+    "L16_CUBES_INTRO"
+  ],
+  "artifactRoot": "ai-tutor/artifacts/pipeline/vedic_math/a806a4a6-0eb0-462a-9257-59c09e7e90a3",
+  "runDbSync": {
+    "ok": false,
+    "skipped": true,
+    "reason": "MySQL unavailable"
+  }
+}

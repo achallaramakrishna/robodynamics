@@ -17,6 +17,14 @@ export async function callTutorApi(path: string, method: string, body?: unknown)
     throw new Error(`Tutor API ${response.status}: ${text}`);
   }
 
-  return response.json();
+  const text = await response.text();
+  if (!text.trim()) {
+    return {};
+  }
+  try {
+    return JSON.parse(text);
+  } catch {
+    const snippet = text.slice(0, 220);
+    throw new Error(`Tutor API returned non-JSON content: ${snippet}`);
+  }
 }
-

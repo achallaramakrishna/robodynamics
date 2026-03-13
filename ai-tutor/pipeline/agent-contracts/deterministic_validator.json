@@ -1,0 +1,14 @@
+{
+  "agentId": "deterministic_validator",
+  "implementationType": "deterministic_validator",
+  "purpose": "Run schema, completeness, math, and publish-gate checks against the lesson-plan artifact.",
+  "inputs": [
+    "courseId",
+    "chapterCode",
+    "lessonPlanPath",
+    "standardPath"
+  ],
+  "outputs": [
+    "deterministic_validation_report.json"
+  ]
+}

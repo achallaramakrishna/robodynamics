@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "sessionId is required" }, { status: 400 });
     }
     const data = await callTutorApi(
-      `/ai-tutor-api/tutor/orchestrator/state?sessionId=${encodeURIComponent(sessionId)}`,
+      `/ai-tutor-api/vedic/orchestrator/state?sessionId=${encodeURIComponent(sessionId)}`,
       "GET"
     );
     return NextResponse.json(data);

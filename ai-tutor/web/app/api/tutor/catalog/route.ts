@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
   try {
     const courseId = request.nextUrl.searchParams.get("courseId");
     const suffix = courseId ? `?courseId=${encodeURIComponent(courseId)}` : "";
-    const data = await callTutorApi(`/ai-tutor-api/tutor/catalog${suffix}`, "GET");
+    const data = await callTutorApi(`/ai-tutor-api/vedic/catalog${suffix}`, "GET");
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(

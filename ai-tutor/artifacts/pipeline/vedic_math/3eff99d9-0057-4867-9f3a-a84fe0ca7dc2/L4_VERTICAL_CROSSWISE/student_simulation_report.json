@@ -1,0 +1,29 @@
+{
+  "artifactType": "student_simulation_report",
+  "generatedAt": "2026-03-10T01:12:35.042Z",
+  "simulationMode": "heuristic_local",
+  "courseId": "vedic_math",
+  "chapterCode": "L4_VERTICAL_CROSSWISE",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/3eff99d9-0057-4867-9f3a-a84fe0ca7dc2/L4_VERTICAL_CROSSWISE/chapter_lesson_plan.json",
+  "learnerProfile": {
+    "gradeBand": "5-8",
+    "confidence": "medium",
+    "pace": "average",
+    "weaknesses": [
+      "mental subtraction",
+      "multi-step attention"
+    ],
+    "languageComfort": "english"
+  },
+  "status": "simulated",
+  "stuckMoments": [
+    "I needed more fully worked examples before independent practice.",
+    "The lesson still has structural gaps that would block a smooth student flow."
+  ],
+  "repetitionRisks": [],
+  "hintEffectiveness": [],
+  "recommendedFixes": [
+    "Add more worked examples before practice.",
+    "Fix missing content structures before sign-off."
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "generatedAt": "2026-03-12T16:09:19.393298+00:00",
+  "courseId": "vedic_math",
+  "module": "VEDIC_MATH",
+  "grade": "8",
+  "overallScore": 100.0,
+  "chapters": [
+    {
+      "chapterCode": "L1_COMPLETING_WHOLE",
+      "chapterTitle": "Lesson 1: Completing the Whole",
+      "sessionId": "vm_aa7c2b943fee415f834014ef5f0e4293",
+      "score": 100.0,
+      "issues": [],
+      "finalHearts": 2,
+      "finalXp": 90,
+      "finalCompletionPct": 100.0,
+      "groups": [
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Introduction to Completing the Whole",
+          "questionId": "L1_A_E_492c9a",
+          "questionText": "8 + 7 = ?  (use base-10 bridging)",
+          "expectedAnswer": "15",
+          "completionPct": 11.11,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "15",
+              "correct": true,
+              "hearts": 5,
+              "xp": 10,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Introduction to Completing the Whole",
+          "questionId": "L1_B_M_a3df13",
+          "questionText": "6 + 7 = ?",
+          "expectedAnswer": "13",
+          "completionPct": 22.22,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "14",
+              "correct": false,
+              "hearts": 4,
+              "xp": 10,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "13",
+              "correct": true,
+              "hearts": 4,
+              "xp": 20,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Ten Point Circle",
+          "questionId": "L1_C_H_a3e759",
+          "questionText": "List all pairs of single digits that sum to 10.",
+          "expectedAnswer": "1+9, 2+8, 3+7, 4+6, 5+5",
+          "completionPct": 33.33,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "1+9, 2+8, 3+7, 4+6, 5+5",
+              "correct": true,
+              "hearts": 4,
+              "xp": 30,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Multiples of Ten",
+          "questionId": "L1_D_M_5b78ee",
+          "questionText": "56 + ___ = 60",
+          "expectedAnswer": "4",
+          "completionPct": 44.44,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4",
+              "correct": true,
+              "hearts": 4,
+              "xp": 40,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Deficiency from Ten",
+          "questionId": "L1_E_H_243091",
+          "questionText": "If the deficiency of 8 is 2, what is the deficiency of the deficiency?",
+          "expectedAnswer": "8",
+          "completionPct": 55.56,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "9",
+              "correct": false,
+              "hearts": 3,
+              "xp": 40,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "8",
+              "correct": true,
+              "hearts": 3,
+              "xp": 50,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Deficiency from Ten",
+          "questionId": "L1_F_M_57964c",
+          "questionText": "50 - 46 = ?",
+          "expectedAnswer": "4",
+          "completionPct": 66.67,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "4",
+              "correct": true,
+              "hearts": 3,
+              "xp": 60,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Mental Addition",
+          "questionId": "L1_G_E_bf3069",
+          "questionText": "9 + 5 = ?  (Hop 1: 9 + 1 = 10. Hop 2: 10 + ? = ?)",
+          "expectedAnswer": "14",
+          "completionPct": 77.78,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "14",
+              "correct": true,
+              "hearts": 3,
+              "xp": 70,
+              "streak": 3,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Mental Addition",
+          "questionId": "L1_H_M_22a8d1",
+          "questionText": "37 + 6 = ?",
+          "expectedAnswer": "43",
+          "completionPct": 88.89,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "44",
+              "correct": false,
+              "hearts": 2,
+              "xp": 70,
+              "streak": 0,
+              "note": "probe retry loop"
+            },
+            {
+              "answer": "43",
+              "correct": true,
+              "hearts": 2,
+              "xp": 80,
+              "streak": 1,
+              "note": "expected answer"
+            }
+          ]
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "By Addition and By Subtraction",
+          "questionId": "L1_I_E_3e105b",
+          "questionText": "43 + 8 = ?  (Path A: 43 + 7 = 50, then 50 + 1 = ?)",
+          "expectedAnswer": "51",
+          "completionPct": 100.0,
+          "issues": [],
+          "attempts": [
+            {
+              "answer": "51",
+              "correct": true,
+              "hearts": 2,
+              "xp": 90,
+              "streak": 2,
+              "note": "expected answer"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

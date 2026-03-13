@@ -1,0 +1,21 @@
+{
+  "artifactType": "ui_ux_review_report",
+  "generatedAt": "2026-03-10T02:11:17.078Z",
+  "reviewMode": "artifact_heuristic",
+  "courseId": "vedic_math",
+  "chapterCode": "L1_COMPLETING_WHOLE",
+  "lessonJsonPath": "ai-tutor/artifacts/pipeline/vedic_math/b2086c46-d9bd-458f-bf54-7e5c5e6ba7ec/L1_COMPLETING_WHOLE/chapter_lesson_plan.json",
+  "uiSnapshotPaths": [],
+  "uiStateDumpPath": null,
+  "status": "reviewed",
+  "overallRisk": "medium",
+  "frictionPoints": [
+    "Learner interaction starts late in the lesson."
+  ],
+  "accessibilityIssues": [],
+  "engagementRisks": [],
+  "suggestedFixes": [
+    "Move a learner response earlier in the flow.",
+    "LLM UI review skipped: Traceback (most recent call last):\r\n  File \"C:\\roboworkspace\\robodynamics\\ai-tutor\\scripts\\pipeline_llm_review.py\", line 250, in <module>\r\n    main()\r\n    ~~~~^^\r\n  File \"C:\\roboworkspace\\robodynamics\\ai-tutor\\scripts\\pipeline_llm_review.py\", line 245, in main\r\n    payload = call_anthropic(prompt) if provider == \"anthropic\" else call_openai(prompt)\r\n              ~~~~~~~~~~~~~~^^^^^^^^\r\n  File \"C:\\roboworkspace\\robodynamics\\ai-tutor\\scripts\\pipeline_llm_review.py\", line 133, in call_anthropic\r\n    return parse_json_block(text)\r\n  File \"C:\\roboworkspace\\robodynamics\\ai-tutor\\scripts\\pipeline_llm_review.py\", line 96, in parse_json_block\r\n    return json.loads(payload)\r\n           ~~~~~~~~~~^^^^^^^^^\r\n  File \"C:\\Users\\Achalla Ramakrishna\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\json\\__init__.py\", line 346, in loads\r\n    return _default_decoder.decode(s)\r\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^\r\n  File \"C:\\Users\\Achalla Ramakrishna\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\json\\decoder.py\", line 345, in decode\r\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\r\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\Achalla Ramakrishna\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\json\\decoder.py\", line 363, in raw_decode\r\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\r\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+  ]
+}

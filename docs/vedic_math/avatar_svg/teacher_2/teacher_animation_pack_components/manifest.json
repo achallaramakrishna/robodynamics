@@ -1,0 +1,82 @@
+{
+  "sprites": [
+    {
+      "id": "hero_main",
+      "file": "hero_main.png",
+      "width": 265,
+      "height": 335
+    },
+    {
+      "id": "expression_pose_1",
+      "file": "expression_pose_1.png",
+      "width": 155,
+      "height": 225
+    },
+    {
+      "id": "expression_pose_2",
+      "file": "expression_pose_2.png",
+      "width": 153,
+      "height": 225
+    },
+    {
+      "id": "gesture_greeting",
+      "file": "gesture_greeting.png",
+      "width": 155,
+      "height": 228
+    },
+    {
+      "id": "gesture_explain",
+      "file": "gesture_explain.png",
+      "width": 155,
+      "height": 228
+    },
+    {
+      "id": "gesture_point",
+      "file": "gesture_point.png",
+      "width": 155,
+      "height": 228
+    },
+    {
+      "id": "gesture_board_work",
+      "file": "gesture_board_work.png",
+      "width": 155,
+      "height": 228
+    },
+    {
+      "id": "gesture_question",
+      "file": "gesture_question.png",
+      "width": 155,
+      "height": 235
+    },
+    {
+      "id": "gesture_encourage",
+      "file": "gesture_encourage.png",
+      "width": 155,
+      "height": 235
+    },
+    {
+      "id": "gesture_emphasize",
+      "file": "gesture_emphasize.png",
+      "width": 155,
+      "height": 235
+    },
+    {
+      "id": "gesture_conclude",
+      "file": "gesture_conclude.png",
+      "width": 155,
+      "height": 235
+    },
+    {
+      "id": "head_blink_look",
+      "file": "head_blink_look.png",
+      "width": 150,
+      "height": 215
+    },
+    {
+      "id": "head_nod_tilt",
+      "file": "head_nod_tilt.png",
+      "width": 150,
+      "height": 215
+    }
+  ]
+}

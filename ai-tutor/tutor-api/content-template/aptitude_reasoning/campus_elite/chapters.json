@@ -1,0 +1,20 @@
+{
+  "courseId": "aptitude_campus_elite",
+  "courseName": "MindSpark Campus Elite — Dream Company Prep",
+  "tagline": "Amazon. Microsoft. Google. You're Ready.",
+  "targetAudience": "Final year students targeting top-tier tech companies, AMCAT/eLitmus",
+  "avatarTone": "peer-challenger",
+  "hintStyle": "What's the systematic approach here?",
+  "questionFormat": ["MCQ", "timed-set", "explanation-required"],
+  "timerPerQuestion": 60,
+  "chapters": [
+    { "chapterCode": "CE_L1_ADVANCED_QA",     "title": "Advanced Quantitative Aptitude",   "order": 1,  "difficulty": "hard" },
+    { "chapterCode": "CE_L2_PUZZLES_HARD",    "title": "Advanced Puzzles & Cryptarithmetic","order": 2, "difficulty": "hard" },
+    { "chapterCode": "CE_L3_AMCAT_PATTERN",   "title": "AMCAT Pattern — Full Mock",        "order": 3,  "difficulty": "hard" },
+    { "chapterCode": "CE_L4_ELITMUS_PATTERN", "title": "eLitmus pH Test Pattern",          "order": 4,  "difficulty": "hard" },
+    { "chapterCode": "CE_L5_AMAZON_APT",      "title": "Amazon Aptitude Style",            "order": 5,  "difficulty": "hard" },
+    { "chapterCode": "CE_L6_MICROSOFT_APT",   "title": "Microsoft Aptitude Style",         "order": 6,  "difficulty": "hard" },
+    { "chapterCode": "CE_L7_GOOGLE_APT",      "title": "Google-Style Problem Solving",     "order": 7,  "difficulty": "hard" },
+    { "chapterCode": "CE_L8_DI_ADVANCED",     "title": "Advanced DI — Mixed Sets",         "order": 8,  "difficulty": "hard" }
+  ]
+}

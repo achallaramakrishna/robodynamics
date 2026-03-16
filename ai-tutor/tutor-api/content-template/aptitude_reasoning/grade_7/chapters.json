@@ -1,0 +1,20 @@
+{
+  "courseId": "aptitude_reasoning_g7",
+  "courseName": "MindSpark Grade 7 — Aptitude & Reasoning",
+  "tagline": "Think Sharp, Reason Fast",
+  "gradeLevel": 7,
+  "targetAudience": "Grade 7 students (age 12–13)",
+  "avatarTone": "friendly-coach",
+  "hintStyle": "Here's the trick to crack this...",
+  "questionFormat": ["MCQ", "short-text"],
+  "chapters": [
+    { "chapterCode": "AR_G7_L1_SEQUENCES",   "title": "Logical Sequences",          "order": 1, "estimatedMinutes": 16 },
+    { "chapterCode": "AR_G7_L2_BLOOD_REL",   "title": "Blood Relations",            "order": 2, "estimatedMinutes": 17 },
+    { "chapterCode": "AR_G7_L3_DIRECTION",   "title": "Direction & Distance",       "order": 3, "estimatedMinutes": 16 },
+    { "chapterCode": "AR_G7_L4_AGE",         "title": "Age Problems",               "order": 4, "estimatedMinutes": 17 },
+    { "chapterCode": "AR_G7_L5_SYMBOLS",     "title": "Symbol Substitution",        "order": 5, "estimatedMinutes": 15 },
+    { "chapterCode": "AR_G7_L6_GROUPING",    "title": "Classification & Grouping",  "order": 6, "estimatedMinutes": 15 },
+    { "chapterCode": "AR_G7_L7_DATA_GRAPHS", "title": "Data Graphs",                "order": 7, "estimatedMinutes": 17 },
+    { "chapterCode": "AR_G7_L8_CALENDAR",    "title": "Calendar Puzzles",           "order": 8, "estimatedMinutes": 15 }
+  ]
+}

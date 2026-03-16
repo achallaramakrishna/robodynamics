@@ -1,0 +1,645 @@
+{
+  "title": "Lesson 5: Square It! — Numbers Near 50",
+  "gradeBand": "Grade 5",
+  "source": "Vedic Mathematics for Schools | Grade 5",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "What is a square number?",
+    "Squaring 50 — the anchor",
+    "Numbers above 50 — surplus method",
+    "Numbers below 50 — deficit method",
+    "The formula (50±d)² = (25±d)|d²",
+    "Padding the right part to 2 digits",
+    "Word problems with squares",
+    "Speed drill — numbers 46 to 54",
+    "Mixed challenge — numbers 40 to 59"
+  ],
+  "learningGoals": [
+    "Recall that squaring means multiplying a number by itself.",
+    "Use the anchor 50² = 2500 to derive nearby squares quickly.",
+    "Apply (50+d)² = (25+d)|d² and (50−d)² = (25−d)|d².",
+    "Use squares in area and cricket average problems."
+  ],
+  "coreIdeas": [
+    "50 is the anchor — 50² = 2500.",
+    "For numbers above 50: add d to 25 for left, d² for right.",
+    "For numbers below 50: subtract d from 25 for left, d² for right.",
+    "Right part must always be 2 digits — pad with zero if needed."
+  ],
+  "workedExamples": [
+    {
+      "question": "52² = ?",
+      "method": "d = 52−50 = 2. Left = 25+2 = 27. Right = 2² = 04. Answer: 2704.",
+      "answer": "2704"
+    },
+    {
+      "question": "48² = ?",
+      "method": "d = 50−48 = 2. Left = 25−2 = 23. Right = 2² = 04. Answer: 2304.",
+      "answer": "2304"
+    },
+    {
+      "question": "57² = ?",
+      "method": "d = 7. Left = 25+7 = 32. Right = 7² = 49. Answer: 3249.",
+      "answer": "3249"
+    },
+    {
+      "question": "43² = ?",
+      "method": "d = 7. Left = 25−7 = 18. Right = 7² = 49. Answer: 1849.",
+      "answer": "1849"
+    }
+  ],
+  "starterPractice": [
+    "Warm-up: What is 50 × 50?",
+    "Guided: Find 53² using the surplus method.",
+    "Independent: Find 47² using the deficit method."
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya. Today you will find the square of any number near 50 — like 48², 52², 43² — in just two steps. Area problems will feel like lightning!",
+      "placementRule": "If learner knows 50²=2500, start at Group C."
+    },
+    "mission": {
+      "missionTitle": "Squares Near 50 — The 25±d Trick",
+      "missionPromise": "Square any number from 40 to 59 mentally in under 5 seconds.",
+      "successCelebration": "Brilliant! You have unlocked the fastest squaring trick for numbers near 50!"
+    },
+    "microLessonPattern": [
+      "Arya draws the number line showing distance d from 50.",
+      "Student identifies d and whether it is a surplus or deficit.",
+      "Left part computed as 25+d or 25−d.",
+      "Right part computed as d².",
+      "Final answer assembled as a 4-digit number."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 18 XP per group.",
+      "streakRule": "Streak counter visible.",
+      "badgeRule": "Each group earns a square badge.",
+      "celebrationStyle": "Arya cheer, square highlight animation, XP pulse."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers triggers simpler example (53² or 47²).",
+      "practiceStyle": "Re-show the formula board.",
+      "masteryRule": "Advance after checkpoint correct.",
+      "revisitRule": "Missed groups reappear next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "What is a square number?",
+        "missionStepTitle": "Exercise A: Squares warm-up",
+        "coachHook": "A square number is a number multiplied by itself. 4² = 4×4 = 16. The area of a 4 cm square tile is 16 cm²!",
+        "boardDemo": "Draw a 4×4 grid of tiles. Count 16 tiles. Show 4² = 16.",
+        "readAloudPrompt": "What is 5²?",
+        "tryPrompt": "What is 9²?",
+        "masteryCheck": "What is 7²?",
+        "instantFeedbackWin": "Square number recalled! Now let's go bigger.",
+        "instantFeedbackRetry": "7² = 7×7 = 49.",
+        "reviewPrompt": "Quick fire: 3², 6², 8², 9².",
+        "xpReward": 10,
+        "badgeFocus": "Square Number Spotter",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_A1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "A",
+            "subtopic": "Square numbers warm-up",
+            "skill": "recall small squares",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 8²?",
+            "options": ["56", "64", "72", "48"],
+            "correctIndex": 1,
+            "expectedAnswer": "64",
+            "hint": "8 × 8 = ?",
+            "solution": "8² = 8 × 8 = 64."
+          },
+          {
+            "questionId": "VM_G5_L5_A2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "A",
+            "subtopic": "Square numbers warm-up",
+            "skill": "recall small squares",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A square garden has sides of 9 m. What is its area?",
+            "options": ["36 m²", "45 m²", "72 m²", "81 m²"],
+            "correctIndex": 3,
+            "expectedAnswer": "81 m²",
+            "hint": "Area = side² = 9²",
+            "solution": "9² = 81 m²."
+          },
+          {
+            "questionId": "VM_G5_L5_A3",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "A",
+            "subtopic": "Square numbers warm-up",
+            "skill": "recall small squares",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which of these is NOT a perfect square?",
+            "options": ["49", "64", "72", "81"],
+            "correctIndex": 2,
+            "expectedAnswer": "72",
+            "hint": "Check: is √72 a whole number?",
+            "solution": "72 is not a perfect square. √72 ≈ 8.49. Others: 49=7², 64=8², 81=9²."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Squaring 50 — the anchor",
+        "missionStepTitle": "Exercise B: 50 is the anchor",
+        "coachHook": "The anchor of our method is 50² = 2500. All nearby squares are computed relative to this!",
+        "boardDemo": "50 × 50 = 2500. Write this large on the board. Circle it.",
+        "visual": {
+          "kind": "svg",
+          "title": "Squaring Near Base 50",
+          "asset": "squaring_near_base.svg",
+          "caption": "Numbers near 50: surplus d above or deficit d below. Formula: (25±d)|d²."
+        },
+        "readAloudPrompt": "What is 50²?",
+        "tryPrompt": "If 50² = 2500, what would 50² be on a number line?",
+        "masteryCheck": "Confirm: 50 × 50 = ?",
+        "instantFeedbackWin": "Anchor memorised! 50² = 2500 is the foundation.",
+        "instantFeedbackRetry": "50 × 50 = 25 × 100 = 2500.",
+        "reviewPrompt": "Why is 50 a useful anchor for squaring?",
+        "xpReward": 10,
+        "badgeFocus": "Anchor Memorizer",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_B1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "B",
+            "subtopic": "Squaring 50 anchor",
+            "skill": "know 50 squared",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "50² = ?",
+            "options": ["500", "2000", "2500", "5000"],
+            "correctIndex": 2,
+            "expectedAnswer": "2500",
+            "hint": "50 × 50 = 25 × 100",
+            "solution": "50² = 2500."
+          },
+          {
+            "questionId": "VM_G5_L5_B2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "B",
+            "subtopic": "Squaring 50 anchor",
+            "skill": "understand base 50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A square field has sides of 50 m. Area = ?",
+            "options": ["200 m²", "500 m²", "1500 m²", "2500 m²"],
+            "correctIndex": 3,
+            "expectedAnswer": "2500 m²",
+            "hint": "Area = 50²",
+            "solution": "50² = 2500 m²."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Numbers above 50 — surplus method",
+        "missionStepTitle": "Exercise C: Above 50",
+        "coachHook": "For numbers above 50: find d = number − 50. Left part = 25 + d. Right part = d². Join them!",
+        "boardDemo": "52²: d=2. Left=25+2=27. Right=2²=04. Answer: 2704. 53²: d=3. Left=28. Right=09. Answer: 2809.",
+        "readAloudPrompt": "Find 54².",
+        "tryPrompt": "Find 56².",
+        "masteryCheck": "Find 51².",
+        "instantFeedbackWin": "Surplus method mastered! Left goes up, right is d squared.",
+        "instantFeedbackRetry": "51²: d=1. Left=26. Right=01. Answer: 2601.",
+        "reviewPrompt": "Quick: 52², 55², 58².",
+        "xpReward": 12,
+        "badgeFocus": "Surplus Squarer",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_C1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "C",
+            "subtopic": "Numbers above 50",
+            "skill": "square above 50",
+            "difficulty": "easy",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 54² using the surplus method.",
+            "steps": [
+              {"label": "d = 54 − 50 = ?", "answer": "4", "hint": "Distance above 50"},
+              {"label": "Left part = 25 + d = 25 + 4 = ?", "answer": "29", "hint": "25 plus 4"},
+              {"label": "Right part = d² = 4² = ? (pad to 2 digits if needed)", "answer": "16", "hint": "4 squared"},
+              {"label": "Join: 29|16 = ?", "answer": "2916", "hint": "Write 29 then 16"}
+            ],
+            "expectedAnswer": "2916",
+            "hint": "d=4. Left=29. Right=16. Answer: 2916.",
+            "solution": "54² = 2916."
+          },
+          {
+            "questionId": "VM_G5_L5_C2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "C",
+            "subtopic": "Numbers above 50",
+            "skill": "square above 50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "53² = ?",
+            "options": ["2709", "2809", "2909", "2804"],
+            "correctIndex": 1,
+            "expectedAnswer": "2809",
+            "hint": "d=3. Left=28. Right=09.",
+            "solution": "d=3. Left=25+3=28. Right=3²=09. Answer: 2809."
+          },
+          {
+            "questionId": "VM_G5_L5_C3",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "C",
+            "subtopic": "Numbers above 50",
+            "skill": "square above 50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "51² = ?",
+            "options": ["2500", "2601", "2701", "2611"],
+            "correctIndex": 1,
+            "expectedAnswer": "2601",
+            "hint": "d=1. Left=26. Right=01.",
+            "solution": "d=1. Left=26. Right=01. Answer: 2601."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Numbers below 50 — deficit method",
+        "missionStepTitle": "Exercise D: Below 50",
+        "coachHook": "For numbers below 50: find d = 50 − number. Left part = 25 − d. Right part = d². Same right, different left!",
+        "boardDemo": "48²: d=2. Left=25−2=23. Right=04. Answer: 2304. 47²: d=3. Left=22. Right=09. Answer: 2209.",
+        "readAloudPrompt": "Find 46².",
+        "tryPrompt": "Find 44².",
+        "masteryCheck": "Find 49².",
+        "instantFeedbackWin": "Deficit method done! Left goes down, right stays d².",
+        "instantFeedbackRetry": "49²: d=1. Left=24. Right=01. Answer: 2401.",
+        "reviewPrompt": "Quick: 48², 45², 42².",
+        "xpReward": 12,
+        "badgeFocus": "Deficit Squarer",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_D1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "D",
+            "subtopic": "Numbers below 50",
+            "skill": "square below 50",
+            "difficulty": "easy",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 46² using the deficit method.",
+            "steps": [
+              {"label": "d = 50 − 46 = ?", "answer": "4", "hint": "Distance below 50"},
+              {"label": "Left part = 25 − d = 25 − 4 = ?", "answer": "21", "hint": "25 minus 4"},
+              {"label": "Right part = d² = 4² = ? (pad to 2 digits)", "answer": "16", "hint": "4 squared"},
+              {"label": "Join: 21|16 = ?", "answer": "2116", "hint": "Write 21 then 16"}
+            ],
+            "expectedAnswer": "2116",
+            "hint": "d=4. Left=21. Right=16. Answer: 2116.",
+            "solution": "46² = 2116."
+          },
+          {
+            "questionId": "VM_G5_L5_D2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "D",
+            "subtopic": "Numbers below 50",
+            "skill": "square below 50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "47² = ?",
+            "options": ["2109", "2209", "2309", "2219"],
+            "correctIndex": 1,
+            "expectedAnswer": "2209",
+            "hint": "d=3. Left=22. Right=09.",
+            "solution": "d=3. Left=25−3=22. Right=3²=09. Answer: 2209."
+          },
+          {
+            "questionId": "VM_G5_L5_D3",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "D",
+            "subtopic": "Numbers below 50",
+            "skill": "square below 50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "43² = ?",
+            "options": ["1749", "1849", "1949", "1759"],
+            "correctIndex": 1,
+            "expectedAnswer": "1849",
+            "hint": "d=7. Left=18. Right=49.",
+            "solution": "d=7. Left=25−7=18. Right=7²=49. Answer: 1849."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "The formula (50±d)² = (25±d)|d²",
+        "missionStepTitle": "Exercise E: The complete formula",
+        "coachHook": "Let's write it neatly! (50+d)² = (25+d)|d² and (50−d)² = (25−d)|d². Two cases, one beautiful pattern!",
+        "boardDemo": "Write formula. Show: 57²: d=7. Left=32. Right=49. Answer: 3249. And 43²: d=7. Left=18. Right=49. Answer: 1849.",
+        "readAloudPrompt": "Find 58².",
+        "tryPrompt": "Find 42².",
+        "masteryCheck": "Find 55² and 45².",
+        "instantFeedbackWin": "Formula applied perfectly! Left and right parts assembled.",
+        "instantFeedbackRetry": "55²: d=5. Left=30. Right=25. Answer: 3025. 45²: d=5. Left=20. Right=25. Answer: 2025.",
+        "reviewPrompt": "Compare 55² and 45². What do you notice about their right parts?",
+        "xpReward": 14,
+        "badgeFocus": "Formula Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_E1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "E",
+            "subtopic": "Full formula",
+            "skill": "apply 50±d formula",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 57² using (50+d)² = (25+d)|d².",
+            "steps": [
+              {"label": "d = 57 − 50 = ?", "answer": "7", "hint": "57 minus 50"},
+              {"label": "Left = 25 + 7 = ?", "answer": "32", "hint": "25 plus 7"},
+              {"label": "Right = 7² = ?", "answer": "49", "hint": "7 times 7"},
+              {"label": "Answer = 32|49 = ?", "answer": "3249", "hint": "Write 32 then 49"}
+            ],
+            "expectedAnswer": "3249",
+            "hint": "d=7. Left=32. Right=49.",
+            "solution": "57² = 3249."
+          },
+          {
+            "questionId": "VM_G5_L5_E2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "E",
+            "subtopic": "Full formula",
+            "skill": "apply 50±d formula",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "42² = ? (use (50−d)² formula, d=8)",
+            "options": ["1664", "1764", "1864", "1674"],
+            "correctIndex": 1,
+            "expectedAnswer": "1764",
+            "hint": "d=8. Left=25−8=17. Right=8²=64.",
+            "solution": "d=8. Left=17. Right=64. Answer: 1764."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Padding the right part to 2 digits",
+        "missionStepTitle": "Exercise F: Padding reminder",
+        "coachHook": "When d² is a single digit (d=1,2,3), pad the right part with a leading zero. 51²: d=1, right=01 not just 1!",
+        "boardDemo": "51²: d=1. Right=1²=1 → pad to 01. Answer: 2601 not 261.",
+        "readAloudPrompt": "For 52²: right part is 4. What do you write?",
+        "tryPrompt": "49²: right part needs padding?",
+        "masteryCheck": "53²: is the right part padded?",
+        "instantFeedbackWin": "Padding done correctly! Always 2 digits on the right.",
+        "instantFeedbackRetry": "49²: d=1. Right=01. Answer: 2401.",
+        "reviewPrompt": "Which of these need padding: 51², 55², 52², 59²?",
+        "xpReward": 12,
+        "badgeFocus": "Zero Padder",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_F1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "F",
+            "subtopic": "Padding right part",
+            "skill": "pad d² to 2 digits",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 51², d=1, so d²=1. The right part should be written as:",
+            "options": ["1", "10", "01", "100"],
+            "correctIndex": 2,
+            "expectedAnswer": "01",
+            "hint": "Right part must always be exactly 2 digits.",
+            "solution": "d²=1. Pad to 01. So 51²=2601."
+          },
+          {
+            "questionId": "VM_G5_L5_F2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "F",
+            "subtopic": "Padding right part",
+            "skill": "pad d² to 2 digits",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "48² = ? (d=2, right part=04)",
+            "options": ["2304", "2340", "2314", "2404"],
+            "correctIndex": 0,
+            "expectedAnswer": "2304",
+            "hint": "d=2. Left=23. Right=04.",
+            "solution": "d=2. Left=25−2=23. Right=2²=04. Answer: 2304."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Word problems with squares",
+        "missionStepTitle": "Exercise G: Word problems",
+        "coachHook": "Square numbers pop up in area problems all the time! A cricket pitch ground has a side of 52 metres — what is its area?",
+        "boardDemo": "52² = 2704 m². Show the square field diagram.",
+        "readAloudPrompt": "A square classroom floor has sides of 48 m. What is the area?",
+        "tryPrompt": "Solve using the deficit method.",
+        "masteryCheck": "A square banner of side 57 cm — area?",
+        "instantFeedbackWin": "Area problem solved with Vedic squaring! Fast and accurate.",
+        "instantFeedbackRetry": "48²: d=2. Left=23. Right=04. Area=2304 m².",
+        "reviewPrompt": "Create your own area word problem using a number near 50.",
+        "xpReward": 14,
+        "badgeFocus": "Area Calculator",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_G1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "G",
+            "subtopic": "Word problems with squares",
+            "skill": "square near 50 word problem",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "A square farm has sides of 53 m. Find the area in m².",
+            "steps": [
+              {"label": "Set up: 53². d = 53 − 50 = ?", "answer": "3", "hint": "53 minus 50"},
+              {"label": "Left part = 25 + 3 = ?", "answer": "28", "hint": "25 plus 3"},
+              {"label": "Right part = 3² = ? (pad to 2 digits)", "answer": "09", "hint": "3 squared, pad with zero"},
+              {"label": "Area = 28|09 = ? m²", "answer": "2809", "hint": "Join left and right"}
+            ],
+            "expectedAnswer": "2809",
+            "hint": "53² = 2809 m².",
+            "solution": "53² = 2809. Area = 2809 m²."
+          },
+          {
+            "questionId": "VM_G5_L5_G2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "G",
+            "subtopic": "Word problems with squares",
+            "skill": "square near 50 word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A cricket pitch is a square with side 44 m. Area = ?",
+            "options": ["1836 m²", "1936 m²", "1856 m²", "2036 m²"],
+            "correctIndex": 1,
+            "expectedAnswer": "1936 m²",
+            "hint": "44²: d=6. Left=19. Right=36.",
+            "solution": "d=6. Left=25−6=19. Right=6²=36. Area=1936 m²."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill — numbers 46 to 54",
+        "missionStepTitle": "Exercise H: Speed drill core range",
+        "coachHook": "Core range speed drill! Numbers 46 to 54 — these are the most common. Aim for under 5 seconds each!",
+        "boardDemo": "Flash: 49²=2401, 50²=2500, 51²=2601. Notice the left parts: 24, 25, 26!",
+        "readAloudPrompt": "46² = ?",
+        "tryPrompt": "54² = ?",
+        "masteryCheck": "47² = ?",
+        "instantFeedbackWin": "Core range mastered! Squares from 46 to 54 at your fingertips.",
+        "instantFeedbackRetry": "47²: d=3. Left=22. Right=09. Answer: 2209.",
+        "reviewPrompt": "Three in a row: 46², 48², 52².",
+        "xpReward": 15,
+        "badgeFocus": "Core Range Speed Star",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_H1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill 46-54",
+            "skill": "square speed near 50",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 46² = ?",
+            "options": ["2016", "2116", "2216", "2006"],
+            "correctIndex": 1,
+            "expectedAnswer": "2116",
+            "hint": "d=4. Left=21. Right=16.",
+            "solution": "d=4. Left=21. Right=16. Answer: 2116."
+          },
+          {
+            "questionId": "VM_G5_L5_H2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill 46-54",
+            "skill": "square speed near 50",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 54² = ?",
+            "options": ["2816", "2916", "3016", "2906"],
+            "correctIndex": 1,
+            "expectedAnswer": "2916",
+            "hint": "d=4. Left=29. Right=16.",
+            "solution": "d=4. Left=29. Right=16. Answer: 2916."
+          },
+          {
+            "questionId": "VM_G5_L5_H3",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill 46-54",
+            "skill": "square speed near 50",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 49² = ?",
+            "options": ["2300", "2401", "2501", "2411"],
+            "correctIndex": 1,
+            "expectedAnswer": "2401",
+            "hint": "d=1. Left=24. Right=01.",
+            "solution": "d=1. Left=24. Right=01. Answer: 2401."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Mixed challenge — numbers 40 to 59",
+        "missionStepTitle": "Exercise I: Full range challenge",
+        "coachHook": "Boss level! The full range 40 to 59. Large d means large right parts. No padding needed for d ≥ 4, but check d² carefully!",
+        "boardDemo": "59²: d=9. Left=34. Right=81. Answer: 3481. 41²: d=9. Left=16. Right=81. Answer: 1681.",
+        "readAloudPrompt": "Find 59².",
+        "tryPrompt": "Find 41².",
+        "masteryCheck": "Find 45² and 55². What do you notice?",
+        "instantFeedbackWin": "Full range mastered! You can square any number from 40 to 59 mentally.",
+        "instantFeedbackRetry": "45²: d=5. Left=20. Right=25. Answer: 2025. 55²: d=5. Left=30. Right=25. Answer: 3025.",
+        "reviewPrompt": "Challenge: verify 55² using regular multiplication.",
+        "xpReward": 18,
+        "badgeFocus": "Full Range Square Master",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L5_I1",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "I",
+            "subtopic": "Full range 40-59",
+            "skill": "square full range near 50",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 59² using (50+d)² formula.",
+            "steps": [
+              {"label": "d = 59 − 50 = ?", "answer": "9", "hint": "59 minus 50"},
+              {"label": "Left = 25 + 9 = ?", "answer": "34", "hint": "25 plus 9"},
+              {"label": "Right = 9² = ?", "answer": "81", "hint": "9 times 9"},
+              {"label": "Answer = 34|81 = ?", "answer": "3481", "hint": "Write 34 then 81"}
+            ],
+            "expectedAnswer": "3481",
+            "hint": "d=9. Left=34. Right=81.",
+            "solution": "59² = 3481."
+          },
+          {
+            "questionId": "VM_G5_L5_I2",
+            "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+            "exerciseGroup": "I",
+            "subtopic": "Full range 40-59",
+            "skill": "square full range near 50",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "41² = ?",
+            "options": ["1581", "1681", "1781", "1691"],
+            "correctIndex": 1,
+            "expectedAnswer": "1681",
+            "hint": "d=9. Left=25−9=16. Right=9²=81.",
+            "solution": "d=9. Left=16. Right=81. Answer: 1681."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {"stepId": "VM_G5_L5_A", "exerciseGroup": "A", "subtopic": "Square numbers", "boardMode": "svg", "teacherLine": "A square number is a number times itself. 4×4=16. Think of a 4×4 grid of tiles — that is 16 tiles!", "boardAction": "Draw 4×4 grid. Count tiles. Write 4²=16.", "checkpointPrompt": "7²=?", "microPractice": "Quick fire: 3², 6², 8², 9²."},
+    {"stepId": "VM_G5_L5_B", "exerciseGroup": "B", "subtopic": "50 anchor", "boardMode": "svg", "teacherLine": "50 is our magic anchor. 50² = 2500. All numbers from 40 to 59 are measured from this anchor!", "boardAction": "Write 50² = 2500 large. Show visual squaring_near_base.svg.", "checkpointPrompt": "Confirm 50×50=?", "microPractice": "Why is 50 a useful anchor?"},
+    {"stepId": "VM_G5_L5_C", "exerciseGroup": "C", "subtopic": "Above 50", "boardMode": "svg", "teacherLine": "Above 50: add d to 25 for the left. d² for the right. Two steps only!", "boardAction": "Show 52² and 53² side by side with the formula.", "checkpointPrompt": "51²=?", "microPractice": "Quick: 52², 55², 58²."},
+    {"stepId": "VM_G5_L5_D", "exerciseGroup": "D", "subtopic": "Below 50", "boardMode": "svg", "teacherLine": "Below 50: subtract d from 25 for the left. d² still goes on the right. Same right, lower left!", "boardAction": "Show 48² and 47² with formula.", "checkpointPrompt": "49²=?", "microPractice": "Quick: 48², 45², 42²."},
+    {"stepId": "VM_G5_L5_E", "exerciseGroup": "E", "subtopic": "Complete formula", "boardMode": "svg", "teacherLine": "Two formulas, one idea: (50+d)²=(25+d)|d² and (50−d)²=(25−d)|d². Memorise both!", "boardAction": "Write both formulas and apply to 57² and 43².", "checkpointPrompt": "55² and 45².", "microPractice": "Compare 55² and 45²."},
+    {"stepId": "VM_G5_L5_F", "exerciseGroup": "F", "subtopic": "Padding", "boardMode": "svg", "teacherLine": "When d is 1, 2, or 3 — d² is a single digit. Always write it as 2 digits: 01, 04, 09!", "boardAction": "Show 51², 52², 53² with padded right parts.", "checkpointPrompt": "53²: is right padded?", "microPractice": "Which need padding: 51², 55², 52², 59²?"},
+    {"stepId": "VM_G5_L5_G", "exerciseGroup": "G", "subtopic": "Word problems", "boardMode": "svg", "teacherLine": "Area = side². When the side is near 50, use our Vedic formula for instant area!", "boardAction": "Show 52² field problem.", "checkpointPrompt": "57 cm banner area?", "microPractice": "Create your own area problem."},
+    {"stepId": "VM_G5_L5_H", "exerciseGroup": "H", "subtopic": "Speed drill", "boardMode": "svg", "teacherLine": "Core range speed drill! 46 to 54. Aim for 5 seconds each.", "boardAction": "Flash 49², 50², 51² showing the staircase pattern.", "checkpointPrompt": "47² in 5 seconds!", "microPractice": "Three: 46², 48², 52²."},
+    {"stepId": "VM_G5_L5_I", "exerciseGroup": "I", "subtopic": "Full range", "boardMode": "svg", "teacherLine": "Boss level! Full range 40 to 59. Large d values. d² can be up to 81 — two digits always, no padding needed!", "boardAction": "Show 59² and 41² as mirror examples.", "checkpointPrompt": "45² and 55².", "microPractice": "Verify 55² with regular multiplication."}
+  ],
+  "screenplay": [
+    {"beatId": "VM_G5_L5_A_INTRO", "stepId": "VM_G5_L5_A", "exerciseGroup": "A", "subtopic": "Square numbers", "sequence": 101, "cue": "intro", "boardMode": "svg", "teacherLine": "Squaring means multiplying a number by itself. Today we will square numbers near 50 in just two steps!", "boardAction": "Write 50² = 2500 on board as the day's anchor.", "checkpointPrompt": "", "pauseType": "none", "holdSec": 0.4, "expectedStudentResponse": "", "fallbackHint": "50 × 50 = 25 × 100 = 2500.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null},
+    {"beatId": "VM_G5_L5_C_PRACTICE", "stepId": "VM_G5_L5_C", "exerciseGroup": "C", "subtopic": "Above 50", "sequence": 301, "cue": "practice", "boardMode": "svg", "teacherLine": "Your turn! Fill in each step for 54². Use the surplus formula.", "boardAction": "Show fill_step card VM_G5_L5_C1.", "checkpointPrompt": "54²=?", "pauseType": "student_input", "holdSec": 10.0, "expectedStudentResponse": "2916", "fallbackHint": "d=4. Left=29. Right=16. Answer: 2916.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null}
+  ]
+}

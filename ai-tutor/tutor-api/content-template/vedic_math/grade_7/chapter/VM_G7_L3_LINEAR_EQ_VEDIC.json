@@ -1,0 +1,783 @@
+{
+  "title": "Lesson 3: Equation Ninja — Solve Linear Equations by Sutra",
+  "gradeBand": "Grade 7",
+  "source": "Vedic Mathematics for Schools | Grade 7",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "One-step equations",
+    "Two-step equations",
+    "Equations with fractions",
+    "MCQ — identify the operation",
+    "Fill-step 3-step solve",
+    "Word problems",
+    "Unknowns on both sides",
+    "Speed round",
+    "Challenge multi-step"
+  ],
+  "learningGoals": [
+    "Apply Paravartya (transpose) sutra: move any term across = by flipping its sign.",
+    "Use Anurupyena (proportionally) sutra to spot proportional solutions instantly.",
+    "Solve linear equations in one variable including fractional and word-problem forms."
+  ],
+  "coreIdeas": [
+    "Paravartya: any term moves to the other side of = with its sign reversed.",
+    "Anurupyena: if both sides scale proportionally, the solution is immediate.",
+    "Clear fractions by multiplying both sides by the denominator before transposing."
+  ],
+  "workedExamples": [
+    {
+      "question": "x + 7 = 12 — Solve for x.",
+      "method": "Transpose 7: x = 12 − 7 = 5.",
+      "answer": "x = 5"
+    },
+    {
+      "question": "3x − 5 = 10 — Solve for x.",
+      "method": "Transpose −5: 3x = 15. Divide: x = 5.",
+      "answer": "x = 5"
+    },
+    {
+      "question": "x/3 + 2 = 6 — Solve for x.",
+      "method": "Transpose 2: x/3 = 4. Multiply by 3: x = 12.",
+      "answer": "x = 12"
+    },
+    {
+      "question": "2x + 3 = x + 7 — Solve for x.",
+      "method": "Transpose x: 2x − x = 7 − 3. x = 4.",
+      "answer": "x = 4"
+    }
+  ],
+  "starterPractice": [
+    "Warm-up: If 5 + ? = 9, what is ?",
+    "Guided: Transpose 4 in x + 4 = 11 to find x.",
+    "Independent: Solve 2x = 14."
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya. Today you become an Equation Ninja! The Vedic transpose rule lets you solve equations in one move.",
+      "placementRule": "If the learner solves x + 5 = 9 correctly, skip group A and start at group B."
+    },
+    "mission": {
+      "missionTitle": "Equation Ninja — Solve Linear Equations by Sutra",
+      "missionPromise": "Master the Paravartya transpose rule and solve any linear equation at speed.",
+      "successCelebration": "You are an Equation Ninja! Transpose, divide, done — faster than ever."
+    },
+    "microLessonPattern": [
+      "Arya states the sutra and shows one equation solved in a single move.",
+      "Board highlights which term is being transposed.",
+      "Student identifies what to transpose before solving.",
+      "Student fills in each step of the solution.",
+      "Instant feedback pinpoints which step was wrong.",
+      "Review prompt asks student to state the sutra from memory."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 18 XP per exercise group based on difficulty.",
+      "streakRule": "Streak counter visible; correct retry still saves streak.",
+      "badgeRule": "Each group earns an equation-themed badge.",
+      "celebrationStyle": "Coach cheer, XP pulse, progress bar advance."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers triggers a re-teach with a one-step equation.",
+      "practiceStyle": "Re-show the transpose step visually, then give x + a = b.",
+      "masteryRule": "Advance only after student correctly solves the checkpoint.",
+      "revisitRule": "Missed groups reappear next session as warm-up cards."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "One-step equations",
+        "missionStepTitle": "Exercise A: One-step equations",
+        "coachHook": "The Paravartya sutra says: whatever is on one side, flip its sign and move it to the other! Let's try one-step equations.",
+        "boardDemo": "x + 7 = 12 → transpose 7 → x = 12 − 7 = 5.",
+        "readAloudPrompt": "x + 4 = 9. What do you transpose?",
+        "tryPrompt": "Solve: x − 6 = 3.",
+        "masteryCheck": "Solve: x + 11 = 20.",
+        "instantFeedbackWin": "Perfect transpose! One step and the answer appears.",
+        "instantFeedbackRetry": "Transpose 6 by adding it to the right: x = 3 + 6 = 9.",
+        "reviewPrompt": "Quick fire: x + 3 = 8, x − 5 = 7, x + 12 = 20.",
+        "xpReward": 10,
+        "badgeFocus": "One-Step Ninja",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_A1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "A",
+            "subtopic": "One-step equations",
+            "skill": "one-step equation transpose",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: x + 7 = 15",
+            "options": ["x = 7", "x = 8", "x = 22", "x = 6"],
+            "correctIndex": 1,
+            "expectedAnswer": "x = 8",
+            "hint": "Transpose 7: x = 15 − 7.",
+            "solution": "Paravartya: transpose 7 → x = 15 − 7 = 8."
+          },
+          {
+            "questionId": "VM_G7_L3_A2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "A",
+            "subtopic": "One-step equations",
+            "skill": "one-step equation division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 5x = 35",
+            "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
+            "correctIndex": 2,
+            "expectedAnswer": "x = 7",
+            "hint": "Divide both sides by 5.",
+            "solution": "5x = 35 → x = 35 ÷ 5 = 7."
+          },
+          {
+            "questionId": "VM_G7_L3_A3",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "A",
+            "subtopic": "One-step equations",
+            "skill": "one-step equation subtraction",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: x − 9 = 4",
+            "options": ["x = 5", "x = 13", "x = 36", "x = 4"],
+            "correctIndex": 1,
+            "expectedAnswer": "x = 13",
+            "hint": "Transpose −9: x = 4 + 9.",
+            "solution": "Transpose −9 → x = 4 + 9 = 13."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Two-step equations",
+        "missionStepTitle": "Exercise B: Two-step equations",
+        "coachHook": "Two operations? Transpose the constant first, then divide. That is the Vedic order!",
+        "boardDemo": "3x − 5 = 10 → transpose −5 → 3x = 15 → divide by 3 → x = 5.",
+        "readAloudPrompt": "2x + 4 = 12. What is step 1?",
+        "tryPrompt": "Solve: 4x − 3 = 13.",
+        "masteryCheck": "5x + 6 = 31.",
+        "instantFeedbackWin": "Two clean steps! You applied the Vedic order perfectly.",
+        "instantFeedbackRetry": "4x − 3 = 13 → 4x = 16 → x = 4.",
+        "reviewPrompt": "Try: 3x + 7 = 22, 6x − 9 = 15.",
+        "xpReward": 12,
+        "badgeFocus": "Two-Step Equation Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_B1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "B",
+            "subtopic": "Two-step equations",
+            "skill": "two-step equation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 2x + 4 = 12",
+            "options": ["x = 3", "x = 4", "x = 8", "x = 6"],
+            "correctIndex": 1,
+            "expectedAnswer": "x = 4",
+            "hint": "Step 1: 2x = 12−4 = 8. Step 2: x = 4.",
+            "solution": "2x = 8 → x = 4."
+          },
+          {
+            "questionId": "VM_G7_L3_B2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "B",
+            "subtopic": "Two-step equations",
+            "skill": "two-step equation with negative",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 4x − 3 = 13",
+            "options": ["x = 2", "x = 3", "x = 4", "x = 5"],
+            "correctIndex": 2,
+            "expectedAnswer": "x = 4",
+            "hint": "4x = 16. Divide by 4.",
+            "solution": "4x − 3 = 13 → 4x = 16 → x = 4."
+          },
+          {
+            "questionId": "VM_G7_L3_B3",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "B",
+            "subtopic": "Two-step equations",
+            "skill": "two-step equation fill",
+            "difficulty": "easy",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Solve 5x + 6 = 31 step by step.",
+            "steps": [
+              {"label": "Transpose 6: 5x = 31 − 6 = ?", "answer": "25", "hint": "31 minus 6"},
+              {"label": "Divide by 5: x = 25 ÷ 5 = ?", "answer": "5", "hint": "25 divided by 5"},
+              {"label": "Answer: x = ?", "answer": "5", "hint": "x equals 5"}
+            ],
+            "expectedAnswer": "x = 5",
+            "hint": "Transpose then divide.",
+            "solution": "5x = 25 → x = 5."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Equations with fractions",
+        "missionStepTitle": "Exercise C: Equations with fractions",
+        "coachHook": "Fractions in equations? Multiply both sides by the denominator to clear it, then transpose.",
+        "boardDemo": "x/3 + 2 = 6 → transpose 2 → x/3 = 4 → multiply by 3 → x = 12.",
+        "readAloudPrompt": "x/4 + 1 = 5. What do you do first?",
+        "tryPrompt": "Solve: x/5 − 3 = 2.",
+        "masteryCheck": "2x/3 + 1 = 7.",
+        "instantFeedbackWin": "Fraction cleared and solved! Multiply-then-divide is now your superpower.",
+        "instantFeedbackRetry": "x/5 − 3 = 2 → x/5 = 5 → x = 25.",
+        "reviewPrompt": "Solve: x/2 + 4 = 9, 3x/4 − 2 = 7.",
+        "xpReward": 13,
+        "badgeFocus": "Fraction Equation Clearer",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_C1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "C",
+            "subtopic": "Equations with fractions",
+            "skill": "fractional equation",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: x/4 + 1 = 5",
+            "options": ["x = 12", "x = 16", "x = 20", "x = 24"],
+            "correctIndex": 1,
+            "expectedAnswer": "x = 16",
+            "hint": "x/4 = 4. Multiply by 4.",
+            "solution": "x/4 = 4 → x = 16."
+          },
+          {
+            "questionId": "VM_G7_L3_C2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "C",
+            "subtopic": "Equations with fractions",
+            "skill": "fractional equation with coefficient",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Solve 2x/3 + 1 = 7 step by step.",
+            "steps": [
+              {"label": "Transpose 1: 2x/3 = 7 − 1 = ?", "answer": "6", "hint": "7 minus 1"},
+              {"label": "Multiply both sides by 3: 2x = 6 × 3 = ?", "answer": "18", "hint": "6 times 3"},
+              {"label": "Divide by 2: x = 18 ÷ 2 = ?", "answer": "9", "hint": "18 divided by 2"}
+            ],
+            "expectedAnswer": "x = 9",
+            "hint": "Transpose, then multiply by denominator, then divide.",
+            "solution": "2x/3 = 6 → 2x = 18 → x = 9."
+          },
+          {
+            "questionId": "VM_G7_L3_C3",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "C",
+            "subtopic": "Equations with fractions",
+            "skill": "fractional equation",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: x/5 − 3 = 2",
+            "options": ["x = 15", "x = 20", "x = 25", "x = 30"],
+            "correctIndex": 2,
+            "expectedAnswer": "x = 25",
+            "hint": "x/5 = 5. Multiply by 5.",
+            "solution": "x/5 = 5 → x = 25."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "MCQ — identify the operation",
+        "missionStepTitle": "Exercise D: MCQ — identify the operation",
+        "coachHook": "Before you solve, can you name the operation? Identifying the right step is half the battle!",
+        "boardDemo": "For 2x + 5 = 13: first transpose 5 (subtraction), then divide by 2 (division). Two operations identified.",
+        "readAloudPrompt": "What is the first step to solve 3x − 7 = 11?",
+        "tryPrompt": "What operation isolates x in x/4 = 3?",
+        "masteryCheck": "What are both steps to solve 4x + 8 = 24?",
+        "instantFeedbackWin": "Operation identified correctly! Knowing the step name builds equation intuition.",
+        "instantFeedbackRetry": "For x/4 = 3: multiply by 4 to isolate x.",
+        "reviewPrompt": "Name both operations for: 5x − 10 = 15.",
+        "xpReward": 13,
+        "badgeFocus": "Operation Identifier",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_D1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "D",
+            "subtopic": "MCQ — identify the operation",
+            "skill": "identify transpose step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the first step to solve 3x − 7 = 11?",
+            "options": ["Divide by 3", "Add 7 to both sides", "Subtract 11 from both sides", "Multiply by 3"],
+            "correctIndex": 1,
+            "expectedAnswer": "Add 7 to both sides",
+            "hint": "Transpose −7 by adding 7.",
+            "solution": "Paravartya: transpose −7 → add 7. Then 3x = 18 → x = 6."
+          },
+          {
+            "questionId": "VM_G7_L3_D2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "D",
+            "subtopic": "MCQ — identify the operation",
+            "skill": "identify multiplication step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What operation isolates x in x/6 = 5?",
+            "options": ["Divide by 6", "Subtract 5", "Multiply by 6", "Add 6"],
+            "correctIndex": 2,
+            "expectedAnswer": "Multiply by 6",
+            "hint": "To remove the /6, multiply both sides by 6.",
+            "solution": "x/6 = 5 → multiply by 6 → x = 30."
+          },
+          {
+            "questionId": "VM_G7_L3_D3",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "D",
+            "subtopic": "MCQ — identify the operation",
+            "skill": "proportional solution Anurupyena",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "By Anurupyena (proportional sutra), if 2x = 6 then 4x = ?",
+            "options": ["6", "10", "12", "8"],
+            "correctIndex": 2,
+            "expectedAnswer": "12",
+            "hint": "Double both sides: 4x = 2 × 6.",
+            "solution": "Anurupyena: scale both sides by 2. 4x = 12."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Fill-step 3-step solve",
+        "missionStepTitle": "Exercise E: Fill-step 3-step solve",
+        "coachHook": "Three-step equations! Transpose constant, transpose coefficient, verify the answer. Let's fill every box.",
+        "boardDemo": "Work 3x + 8 = 23: step1: 3x = 15, step2: x = 5, step3: check 3(5)+8=23. ✓",
+        "readAloudPrompt": "Fill all steps for 4x − 9 = 19.",
+        "tryPrompt": "Now solve 6x + 5 = 35 step by step.",
+        "masteryCheck": "Solve 7x − 14 = 21 and verify.",
+        "instantFeedbackWin": "All three steps correct! The verification step builds confidence.",
+        "instantFeedbackRetry": "4x − 9 = 19 → 4x = 28 → x = 7. Verify: 4(7)−9=28−9=19. ✓",
+        "reviewPrompt": "Solve 5x + 12 = 47 and verify.",
+        "xpReward": 14,
+        "badgeFocus": "3-Step Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_E1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "E",
+            "subtopic": "Fill-step 3-step solve",
+            "skill": "three-step linear equation",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Solve 4x − 9 = 19 step by step.",
+            "steps": [
+              {"label": "Transpose −9: 4x = 19 + 9 = ?", "answer": "28", "hint": "19 plus 9"},
+              {"label": "Divide by 4: x = 28 ÷ 4 = ?", "answer": "7", "hint": "28 divided by 4"},
+              {"label": "Verify: 4×7 − 9 = 28 − 9 = ?", "answer": "19", "hint": "Check it equals the RHS"}
+            ],
+            "expectedAnswer": "x = 7",
+            "hint": "Transpose, divide, verify.",
+            "solution": "4x = 28 → x = 7. Check: 4(7)−9=19. ✓"
+          },
+          {
+            "questionId": "VM_G7_L3_E2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "E",
+            "subtopic": "Fill-step 3-step solve",
+            "skill": "three-step linear equation with fraction",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Solve 3x/4 + 2 = 11 step by step.",
+            "steps": [
+              {"label": "Transpose 2: 3x/4 = 11 − 2 = ?", "answer": "9", "hint": "11 minus 2"},
+              {"label": "Multiply by 4: 3x = 9 × 4 = ?", "answer": "36", "hint": "9 times 4"},
+              {"label": "Divide by 3: x = 36 ÷ 3 = ?", "answer": "12", "hint": "36 divided by 3"}
+            ],
+            "expectedAnswer": "x = 12",
+            "hint": "Transpose, multiply by denominator, divide.",
+            "solution": "3x/4 = 9 → 3x = 36 → x = 12."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Word problems",
+        "missionStepTitle": "Exercise F: Word problems",
+        "coachHook": "Equations in real life! Identify the unknown, write the equation, solve by Paravartya.",
+        "boardDemo": "Arjun saved ₹500 more than Priya. Together they saved ₹1700. Arjun's savings = x, Priya's = x−500. x + (x−500) = 1700 → 2x = 2200 → x = 1100.",
+        "readAloudPrompt": "A number added to 3 times itself gives 48. Write the equation.",
+        "tryPrompt": "Solve: a train travels at speed v km/h. After 3 hours it is 210 km away. Find v.",
+        "masteryCheck": "A rectangle's length is twice its width. Perimeter = 48 cm. Find the width.",
+        "instantFeedbackWin": "Real-world equation solved! Paravartya works in stories too.",
+        "instantFeedbackRetry": "For 4x = 48: transpose × 4 → divide → x = 12.",
+        "reviewPrompt": "Create your own word problem that leads to a two-step equation.",
+        "xpReward": 14,
+        "badgeFocus": "Word Problem Ninja",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_F1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "F",
+            "subtopic": "Word problems",
+            "skill": "word problem linear equation",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "A number added to 3 times itself gives 48. Find the number.",
+            "steps": [
+              {"label": "Let the number be x. Equation: x + 3x = ?", "answer": "48", "hint": "The sum equals 48"},
+              {"label": "Simplify: 4x = 48. Divide by 4: x = ?", "answer": "12", "hint": "48 divided by 4"},
+              {"label": "Verify: 12 + 3×12 = 12 + 36 = ?", "answer": "48", "hint": "Check it equals 48"}
+            ],
+            "expectedAnswer": "x = 12",
+            "hint": "Let the number = x. Write x + 3x = 48.",
+            "solution": "4x = 48 → x = 12."
+          },
+          {
+            "questionId": "VM_G7_L3_F2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "F",
+            "subtopic": "Word problems",
+            "skill": "distance-speed word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A train travels at v km/h. After 3 hours it covers 210 km. Find v.",
+            "options": ["v = 60", "v = 63", "v = 70", "v = 75"],
+            "correctIndex": 2,
+            "expectedAnswer": "v = 70",
+            "hint": "3v = 210. Divide by 3.",
+            "solution": "3v = 210 → v = 70 km/h."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Unknowns on both sides",
+        "missionStepTitle": "Exercise G: Unknowns on both sides",
+        "coachHook": "Both sides have x! Use Paravartya to collect all x on one side. Transpose the smaller x term.",
+        "boardDemo": "2x + 3 = x + 7 → transpose x → 2x − x = 7 − 3 → x = 4.",
+        "readAloudPrompt": "5x − 2 = 3x + 6. Which x term do you transpose?",
+        "tryPrompt": "Solve: 4x + 1 = 2x + 9.",
+        "masteryCheck": "7x − 3 = 4x + 12.",
+        "instantFeedbackWin": "Both-sides equation solved! You correctly collected like terms.",
+        "instantFeedbackRetry": "4x + 1 = 2x + 9 → 2x = 8 → x = 4.",
+        "reviewPrompt": "Solve three: 3x+5=x+11, 6x−2=4x+8, 5x+7=2x+19.",
+        "xpReward": 15,
+        "badgeFocus": "Both-Sides Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_G1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "G",
+            "subtopic": "Unknowns on both sides",
+            "skill": "equation with x on both sides",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 4x + 1 = 2x + 9",
+            "options": ["x = 2", "x = 3", "x = 4", "x = 5"],
+            "correctIndex": 2,
+            "expectedAnswer": "x = 4",
+            "hint": "Transpose 2x: 2x = 8. Divide by 2.",
+            "solution": "2x = 8 → x = 4."
+          },
+          {
+            "questionId": "VM_G7_L3_G2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "G",
+            "subtopic": "Unknowns on both sides",
+            "skill": "equation both sides step-by-step",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Solve 7x − 3 = 4x + 12 step by step.",
+            "steps": [
+              {"label": "Transpose 4x: 7x − 4x = 12 + 3 = ?", "answer": "15", "hint": "12 plus 3"},
+              {"label": "Simplify left side: 3x = ?", "answer": "15", "hint": "7x − 4x = 3x"},
+              {"label": "Divide by 3: x = ?", "answer": "5", "hint": "15 divided by 3"}
+            ],
+            "expectedAnswer": "x = 5",
+            "hint": "Collect x terms, then divide.",
+            "solution": "3x = 15 → x = 5."
+          },
+          {
+            "questionId": "VM_G7_L3_G3",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "G",
+            "subtopic": "Unknowns on both sides",
+            "skill": "equation both sides",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 5x − 4 = 3x + 10",
+            "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
+            "correctIndex": 2,
+            "expectedAnswer": "x = 7",
+            "hint": "2x = 14. Divide by 2.",
+            "solution": "2x = 14 → x = 7."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed round",
+        "missionStepTitle": "Exercise H: Speed round",
+        "coachHook": "Speed round! Transpose and divide in your head. Answer before the timer hits zero!",
+        "boardDemo": "Flash: x+8=15 → 7; 3x=21 → 7; 2x−4=10 → 7. All equal 7 — Anurupyena in action!",
+        "readAloudPrompt": "x + 14 = 23?",
+        "tryPrompt": "Speed: 6x = 48?",
+        "masteryCheck": "3x + 2 = 17?",
+        "instantFeedbackWin": "Equation speed achieved! Paravartya is now automatic.",
+        "instantFeedbackRetry": "3x + 2 = 17 → 3x = 15 → x = 5.",
+        "reviewPrompt": "Three in a row: x+6=14, 4x=28, 2x−3=9.",
+        "xpReward": 16,
+        "badgeFocus": "Equation Speed Runner",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_H1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "H",
+            "subtopic": "Speed round",
+            "skill": "equation solving speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 3x + 5 = 20",
+            "options": ["x = 4", "x = 5", "x = 6", "x = 7"],
+            "correctIndex": 1,
+            "expectedAnswer": "x = 5",
+            "hint": "3x = 15. x = 5.",
+            "solution": "3x = 15 → x = 5."
+          },
+          {
+            "questionId": "VM_G7_L3_H2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "H",
+            "subtopic": "Speed round",
+            "skill": "equation both sides speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 5x − 3 = 3x + 9",
+            "options": ["x = 4", "x = 5", "x = 6", "x = 7"],
+            "correctIndex": 2,
+            "expectedAnswer": "x = 6",
+            "hint": "2x = 12. x = 6.",
+            "solution": "2x = 12 → x = 6."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge multi-step",
+        "missionStepTitle": "Exercise I: Challenge multi-step",
+        "coachHook": "Boss challenge! Multi-step equations with fractions AND unknowns on both sides. Full Paravartya power required!",
+        "boardDemo": "x/2 + 3 = x/3 + 5 → multiply by 6 → 3x + 18 = 2x + 30 → x = 12.",
+        "readAloudPrompt": "x/2 + 4 = x/3 + 7. How do you clear both fractions?",
+        "tryPrompt": "Solve: x/3 + 2 = x/4 + 3.",
+        "masteryCheck": "Budget problem: Arjun buys n pens at ₹8 each. Priya buys (n+2) pens at ₹6 each. They spend the same. Find n.",
+        "instantFeedbackWin": "Multi-step mastery! You cleared fractions and transposed unknowns like a pro.",
+        "instantFeedbackRetry": "Multiply x/3 + 2 = x/4 + 3 by 12: 4x + 24 = 3x + 36 → x = 12.",
+        "reviewPrompt": "Solve: 2x/3 + 1 = x/2 + 3.",
+        "xpReward": 18,
+        "badgeFocus": "Multi-Step Equation Master",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L3_I1",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge multi-step",
+            "skill": "multi-step equation with fractions",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Solve x/3 + 2 = x/4 + 3 step by step.",
+            "steps": [
+              {"label": "LCM of 3 and 4 = ?. Multiply through.", "answer": "12", "hint": "LCM of 3 and 4"},
+              {"label": "After multiplying by 12: 4x + 24 = 3x + ?", "answer": "36", "hint": "12 × 3"},
+              {"label": "Transpose 3x: x = 36 − 24 = ?", "answer": "12", "hint": "36 minus 24"}
+            ],
+            "expectedAnswer": "x = 12",
+            "hint": "Multiply by LCM first, then transpose.",
+            "solution": "4x + 24 = 3x + 36 → x = 12."
+          },
+          {
+            "questionId": "VM_G7_L3_I2",
+            "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge multi-step",
+            "skill": "word problem multi-step",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Arjun buys n pens at ₹8 each. Priya buys (n+2) pens at ₹6 each. They spend the same amount. Find n.",
+            "options": ["n = 4", "n = 5", "n = 6", "n = 7"],
+            "correctIndex": 2,
+            "expectedAnswer": "n = 6",
+            "hint": "8n = 6(n+2) → 8n = 6n+12 → 2n = 12.",
+            "solution": "8n = 6n + 12 → 2n = 12 → n = 6."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {
+      "stepId": "VM_G7_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "One-step equations",
+      "boardMode": "svg",
+      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "transpose-arrow"},
+      "teacherLine": "The Paravartya sutra says: any term crosses the equals sign with its sign flipped. That is it!",
+      "boardAction": "Draw an equation. Show the term crossing = with an arrow and sign flip.",
+      "checkpointPrompt": "Solve: x + 11 = 20.",
+      "microPractice": "Quick fire: x+3=8, x−5=7, x+12=20."
+    },
+    {
+      "stepId": "VM_G7_L3_B",
+      "exerciseGroup": "B",
+      "subtopic": "Two-step equations",
+      "boardMode": "svg",
+      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "two-step"},
+      "teacherLine": "Two steps: transpose the constant first, then divide by the coefficient.",
+      "boardAction": "Show 3x − 5 = 10. Step 1: 3x = 15. Step 2: x = 5. Box the answer.",
+      "checkpointPrompt": "5x + 6 = 31.",
+      "microPractice": "Try: 3x+7=22, 6x−9=15."
+    },
+    {
+      "stepId": "VM_G7_L3_C",
+      "exerciseGroup": "C",
+      "subtopic": "Equations with fractions",
+      "boardMode": "svg",
+      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "fraction-clear"},
+      "teacherLine": "Clear the fraction first by multiplying both sides by the denominator. Then the equation becomes normal.",
+      "boardAction": "Show x/3 + 2 = 6 → x/3 = 4 → x = 12. Highlight the multiplication step.",
+      "checkpointPrompt": "2x/3 + 1 = 7.",
+      "microPractice": "Solve: x/2+4=9, 3x/4−2=7."
+    },
+    {
+      "stepId": "VM_G7_L3_G",
+      "exerciseGroup": "G",
+      "subtopic": "Unknowns on both sides",
+      "boardMode": "svg",
+      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "collect-x"},
+      "teacherLine": "Both sides have x! Use Paravartya to collect all x on the left. Transpose the smaller x term.",
+      "boardAction": "Show 2x+3=x+7 → x=4. Annotate which x is transposed.",
+      "checkpointPrompt": "7x − 3 = 4x + 12.",
+      "microPractice": "Solve three: 3x+5=x+11, 6x−2=4x+8."
+    },
+    {
+      "stepId": "VM_G7_L3_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge multi-step",
+      "boardMode": "svg",
+      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "multi-step"},
+      "teacherLine": "Boss challenge! Clear fractions by multiplying by LCM, then collect unknowns and solve.",
+      "boardAction": "Show x/2 + 3 = x/3 + 5 → multiply by 6 → 3x+18=2x+30 → x=12.",
+      "checkpointPrompt": "Budget problem: Arjun and Priya spend equally on pens.",
+      "microPractice": "Solve: 2x/3+1=x/2+3."
+    }
+  ],
+  "screenplay": [
+    {
+      "beatId": "VM_G7_L3_A_INTRO",
+      "stepId": "VM_G7_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "One-step equations",
+      "sequence": 101,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "Paravartya sutra: any term moves across = with its sign reversed. One rule, all equations solved!",
+      "boardAction": "Write the sutra in large text. Show arrow crossing = with sign flip.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "+7 crosses = to become −7.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G7_L3_A_EXPLAIN",
+      "stepId": "VM_G7_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "One-step equations",
+      "sequence": 102,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "x + 7 = 15: transpose 7 → x = 15 − 7 = 8. Done in one blink!",
+      "boardAction": "Animate 7 crossing = and flipping to −7.",
+      "checkpointPrompt": "Solve: x + 11 = 20.",
+      "pauseType": "student_input",
+      "holdSec": 4.0,
+      "expectedStudentResponse": "9",
+      "fallbackHint": "Transpose 11: x = 20 − 11 = 9.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G7_L3_A_PRACTICE",
+      "stepId": "VM_G7_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "One-step equations",
+      "sequence": 103,
+      "cue": "practice",
+      "boardMode": "svg",
+      "teacherLine": "Pick the right solution from the choices.",
+      "boardAction": "Show MCQ card VM_G7_L3_A1.",
+      "checkpointPrompt": "x + 7 = 15 → x = ?",
+      "pauseType": "student_input",
+      "holdSec": 5.0,
+      "expectedStudentResponse": "8",
+      "fallbackHint": "15 minus 7.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G7_L3_I_PRACTICE",
+      "stepId": "VM_G7_L3_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge multi-step",
+      "sequence": 903,
+      "cue": "practice",
+      "boardMode": "svg",
+      "teacherLine": "Budget word problem. Set up the equation and solve.",
+      "boardAction": "Show MCQ card VM_G7_L3_I2.",
+      "checkpointPrompt": "Arjun and Priya spend equally — find n.",
+      "pauseType": "student_input",
+      "holdSec": 12.0,
+      "expectedStudentResponse": "6",
+      "fallbackHint": "8n = 6n + 12 → 2n = 12.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    }
+  ]
+}

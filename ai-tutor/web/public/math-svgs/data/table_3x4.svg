@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 160">
+  <!-- Header row -->
+  <rect x="5" y="5" width="270" height="35" rx="4" fill="#1d4ed8"/>
+  <!-- Body rows -->
+  <rect x="5" y="40"  width="270" height="35" fill="#eff6ff"/>
+  <rect x="5" y="75"  width="270" height="35" fill="white"/>
+  <rect x="5" y="110" width="270" height="45" fill="#eff6ff"/>
+  <!-- Column lines -->
+  <line x1="95"  y1="5" x2="95"  y2="155" stroke="#bfdbfe" stroke-width="1.5"/>
+  <line x1="185" y1="5" x2="185" y2="155" stroke="#bfdbfe" stroke-width="1.5"/>
+  <!-- Outer border -->
+  <rect x="5" y="5" width="270" height="150" rx="4" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- Header text -->
+  <text x="50"  y="28" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Category</text>
+  <text x="140" y="28" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Count</text>
+  <text x="232" y="28" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Total</text>
+</svg>

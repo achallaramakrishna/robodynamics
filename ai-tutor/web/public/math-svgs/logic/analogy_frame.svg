@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80">
+  <!-- A box -->
+  <rect x="5" y="15" width="50" height="50" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="30" y="47" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8" text-anchor="middle">A</text>
+  <!-- : colon -->
+  <text x="68" y="47" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#475569" text-anchor="middle">:</text>
+  <!-- B box -->
+  <rect x="80" y="15" width="50" height="50" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="105" y="47" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8" text-anchor="middle">B</text>
+  <!-- :: double colon -->
+  <text x="143" y="47" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#7c3aed" text-anchor="middle">::</text>
+  <!-- C box -->
+  <rect x="158" y="15" width="50" height="50" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="183" y="47" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#1d4ed8" text-anchor="middle">C</text>
+  <!-- : colon -->
+  <text x="220" y="47" font-family="Arial,sans-serif" font-size="20" font-weight="bold" fill="#475569" text-anchor="middle">:</text>
+  <!-- ? box (question) -->
+  <rect x="232" y="15" width="44" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="7,4"/>
+  <text x="254" y="47" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#f59e0b" text-anchor="middle">?</text>
+</svg>

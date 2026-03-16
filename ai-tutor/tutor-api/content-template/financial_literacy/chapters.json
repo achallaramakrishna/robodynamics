@@ -1,0 +1,20 @@
+{
+  "courseId": "financial_literacy",
+  "courseName": "MoneyMind — Financial Literacy AI Tutor",
+  "tagline": "Smart Money, Bright Future",
+  "note": "Chapter JSON files will be created in financial_literacy/chapter/ folder. Course is registered in engine_registry.py already.",
+  "chapters": [
+    { "chapterCode": "FL1_SAVING_BASICS",      "title": "Saving & Budgeting Basics",       "order": 1 },
+    { "chapterCode": "FL2_BANKING",             "title": "Banks, Accounts & ATM",           "order": 2 },
+    { "chapterCode": "FL3_INTEREST",            "title": "Simple & Compound Interest",      "order": 3 },
+    { "chapterCode": "FL4_INCOME_EXPENSES",     "title": "Income, Expenses & Profit",       "order": 4 },
+    { "chapterCode": "FL5_TAXES_BASICS",        "title": "Taxes — What, Why, How",          "order": 5 },
+    { "chapterCode": "FL6_INVESTMENTS",         "title": "Investments — FD, Mutual Funds",  "order": 6 },
+    { "chapterCode": "FL7_INSURANCE",           "title": "Insurance Basics",                "order": 7 },
+    { "chapterCode": "FL8_UPI_DIGITAL",         "title": "Digital Payments & UPI Safety",   "order": 8 },
+    { "chapterCode": "FL9_CREDIT_DEBT",         "title": "Credit, Loans & Debt",            "order": 9 },
+    { "chapterCode": "FL10_STOCK_MARKET",       "title": "Stock Market Basics",             "order": 10 },
+    { "chapterCode": "FL11_GOALS_PLANNING",     "title": "Financial Goal Planning",         "order": 11 },
+    { "chapterCode": "FL12_ENTREPRENEURSHIP",   "title": "Entrepreneurship & Business Basics", "order": 12 }
+  ]
+}

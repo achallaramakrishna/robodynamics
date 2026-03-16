@@ -1,0 +1,192 @@
+{
+  "courseId": "vedic_math_g7",
+  "courseTitle": "MindSutra Grade 7 — Vedic Math",
+  "gradeBand": "Grade 7",
+  "description": "CBSE Grade 7 aligned: squaring near base, rational number shortcuts, linear equation inspection, cubing via Anurupyena, Nikhilam for 3-digit multiplication, exponent patterns, and algebraic identity expansion.",
+  "chapters": [
+    {
+      "chapterCode": "VM_G7_L1_SQUARING_NEAR_BASE",
+      "title": "Power Squaring — Near Base 100 and 1000",
+      "estimatedMinutes": 24,
+      "subtopics": ["Deviation method for squaring", "Near 100: (100+d)²", "Near 1000: (1000+d)²"],
+      "learningGoals": [
+        "Square numbers near 100 using deviation shortcut in under 5 seconds",
+        "Square numbers near 1000 using the same deviation pattern",
+        "Derive the algebraic identity (a+b)² = a²+2ab+b² from the shortcut"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Review: deviation from base 100"},
+        {"exerciseGroup":"B","subtopic":"98², 99², 101², 102²"},
+        {"exerciseGroup":"C","subtopic":"95², 105², 93², 107²"},
+        {"exerciseGroup":"D","subtopic":"Near 1000: 998², 1002²"},
+        {"exerciseGroup":"E","subtopic":"Algebraic link: (a+d)² formula"},
+        {"exerciseGroup":"F","subtopic":"MCQ: compute the square"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: near-1000 deviation"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: near 10000"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L2_RATIONAL_ADD",
+      "title": "Rational Number Speed — LCM-Free Addition",
+      "estimatedMinutes": 22,
+      "subtopics": ["Cross-multiply addition", "Same-denominator shortcut", "Mixed number operations"],
+      "learningGoals": [
+        "Add and subtract fractions using cross-multiply without finding LCM",
+        "Simplify results immediately using GCD inspection",
+        "Operate with mixed numbers and negative rationals fluently"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Cross-multiply addition: a/b + c/d"},
+        {"exerciseGroup":"B","subtopic":"Unlike denominators: 2 fractions"},
+        {"exerciseGroup":"C","subtopic":"3 fractions in one step"},
+        {"exerciseGroup":"D","subtopic":"Negative rational numbers"},
+        {"exerciseGroup":"E","subtopic":"Mixed numbers (integer + fraction)"},
+        {"exerciseGroup":"F","subtopic":"MCQ: result of addition"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: cross-multiply walkthrough"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: complex fractions"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+      "title": "Equation Ninja — Solve Linear Equations by Sutra",
+      "estimatedMinutes": 22,
+      "subtopics": ["Anurupyena proportion method", "Sunyam Samyasamuccaye", "Transpose shortcut"],
+      "learningGoals": [
+        "Solve ax = b type equations by mental division (Anurupyena)",
+        "Solve ax+b = cx+d by zero-sum inspection (Sunyam)",
+        "Apply Paravartya transpose to isolate x in complex equations"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"ax=b: mental division"},
+        {"exerciseGroup":"B","subtopic":"x+a=b: transpose shortcut"},
+        {"exerciseGroup":"C","subtopic":"ax+b=c: two-step"},
+        {"exerciseGroup":"D","subtopic":"ax+b=cx+d: Sunyam inspection"},
+        {"exerciseGroup":"E","subtopic":"Fractional equations"},
+        {"exerciseGroup":"F","subtopic":"MCQ: solve for x"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: Sunyam method"},
+        {"exerciseGroup":"H","subtopic":"Speed drill: 8 equations"},
+        {"exerciseGroup":"I","subtopic":"Challenge: equations with brackets"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L4_CUBING_ANURUPYENA",
+      "title": "Cube It! — Cubing Any 2-Digit Number",
+      "estimatedMinutes": 24,
+      "subtopics": ["a³ via Anurupyena ratios", "Geometric progression pattern", "Cubes of 11–20"],
+      "learningGoals": [
+        "Set up the 4-term Anurupyena row for cubing",
+        "Cube any 2-digit number using the geometric-progression shortcut",
+        "Verify using (a+b)³ = a³+3a²b+3ab²+b³ identity"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Cube basics: 1³ to 10³ (pattern recognition)"},
+        {"exerciseGroup":"B","subtopic":"Anurupyena row setup"},
+        {"exerciseGroup":"C","subtopic":"Cube 11, 12, 13 step by step"},
+        {"exerciseGroup":"D","subtopic":"Cube 14–20"},
+        {"exerciseGroup":"E","subtopic":"Cube 21–30"},
+        {"exerciseGroup":"F","subtopic":"MCQ: compute the cube"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: Anurupyena cubing"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: cube near base (99³, 101³)"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L5_NIKHILAM_3DIG",
+      "title": "Nikhilam Level Up — 3-Digit Multiplication Near 1000",
+      "estimatedMinutes": 25,
+      "subtopics": ["Deficit from 1000", "3-digit Nikhilam cross-subtract", "Larger deviation cases"],
+      "learningGoals": [
+        "Apply Nikhilam to 3-digit numbers near base 1000",
+        "Handle cases where both deficits are 2-3 digits",
+        "Compare efficiency of Nikhilam vs Urdhva-Tiryak for near-base numbers"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Deficit from 1000 concept"},
+        {"exerciseGroup":"B","subtopic":"997×998 (small deficits)"},
+        {"exerciseGroup":"C","subtopic":"990×995 (larger deficits)"},
+        {"exerciseGroup":"D","subtopic":"Above 1000: 1003×1004"},
+        {"exerciseGroup":"E","subtopic":"Mixed: one above, one below"},
+        {"exerciseGroup":"F","subtopic":"MCQ: identify product"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: near-1000 Nikhilam"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: sub-base 500"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L6_EXPONENT_PATTERNS",
+      "title": "Power Patterns — Exponents via Vedic Sequences",
+      "estimatedMinutes": 22,
+      "subtopics": ["Powers of 2 via doubling", "Powers of 3 via tripling", "Powers of 5 via ×5 shortcut", "Negative exponents"],
+      "learningGoals": [
+        "Compute 2ⁿ, 3ⁿ, 5ⁿ for n=1–10 using Vedic doubling/tripling chains",
+        "Identify patterns in last digits of powers",
+        "Evaluate negative exponents as fractions quickly"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Powers of 2: doubling chain up to 2¹⁰"},
+        {"exerciseGroup":"B","subtopic":"Powers of 3: tripling chain"},
+        {"exerciseGroup":"C","subtopic":"Powers of 5: ×5 chain"},
+        {"exerciseGroup":"D","subtopic":"Last-digit patterns in powers"},
+        {"exerciseGroup":"E","subtopic":"Negative exponents: 2⁻¹, 3⁻², 5⁻³"},
+        {"exerciseGroup":"F","subtopic":"MCQ: evaluate the power"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: exponent chain"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: fractional base exponents"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L7_TRIANGLE_SHORTCUTS",
+      "title": "Geometry Speed — Triangle and Area Shortcuts",
+      "estimatedMinutes": 20,
+      "subtopics": ["Pythagorean triplet generation (Vedic)", "Area of triangle without formula memorization", "Heron shortcut for isoceles triangles"],
+      "learningGoals": [
+        "Generate Pythagorean triplets using Vedic odd-number pattern",
+        "Compute triangle area using ½×base×height mentally",
+        "Find triplets for right triangles given one side"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Pythagorean triplet: (3,4,5) and family"},
+        {"exerciseGroup":"B","subtopic":"Vedic triplet generator: n²-1, 2n, n²+1"},
+        {"exerciseGroup":"C","subtopic":"Area of triangle: mental ½bh"},
+        {"exerciseGroup":"D","subtopic":"Find missing side using triplet"},
+        {"exerciseGroup":"E","subtopic":"MCQ: which is a Pythagorean triplet?"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: generate triplet"},
+        {"exerciseGroup":"G","subtopic":"Word problems (ladder/distance)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: Heron's formula shortcut"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+      "title": "Identity Power — Algebraic Expansions at Speed",
+      "estimatedMinutes": 22,
+      "subtopics": ["(a+b)²", "(a−b)²", "(a+b)(a−b)", "Application to numerical squaring"],
+      "learningGoals": [
+        "Expand (a+b)², (a−b)², and (a+b)(a−b) instantly",
+        "Use identities to compute squares and products of numbers",
+        "Factorise simple expressions using reverse identity"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"(a+b)² = a²+2ab+b²"},
+        {"exerciseGroup":"B","subtopic":"(a−b)² = a²−2ab+b²"},
+        {"exerciseGroup":"C","subtopic":"(a+b)(a−b) = a²−b²"},
+        {"exerciseGroup":"D","subtopic":"Apply to numbers: 103×97, 106²"},
+        {"exerciseGroup":"E","subtopic":"Factoring via identities"},
+        {"exerciseGroup":"F","subtopic":"MCQ: expand or factor"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: full expansion"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: (a+b+c)² identity"}
+      ]
+    }
+  ]
+}

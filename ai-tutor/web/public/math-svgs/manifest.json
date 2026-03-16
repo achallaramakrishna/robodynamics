@@ -1,0 +1,155 @@
+{
+  "version": "1.0",
+  "description": "MindSpark reusable SVG symbol library for animated board steps",
+  "usage": "{ kind: 'image', id: 'shape1', x: 100, y: 80, width: 80, height: 80, href: '/math-svgs/shapes/triangle.svg', delaySec: 0.3, durationSec: 0.4 }",
+  "colors": {
+    "blue":   "#1d4ed8",
+    "green":  "#059669",
+    "amber":  "#f59e0b",
+    "red":    "#ef4444",
+    "purple": "#7c3aed",
+    "slate":  "#475569",
+    "question_fill":  "#fef3c7",
+    "question_stroke": "#f59e0b",
+    "correct_fill":   "#f0fdf4",
+    "correct_stroke": "#059669"
+  },
+  "categories": {
+    "shapes": {
+      "description": "Geometric shapes — outline style, blue stroke, transparent fill",
+      "symbols": [
+        { "id": "triangle",       "href": "/math-svgs/shapes/triangle.svg",       "tags": ["geometry", "polygon", "3-sides"] },
+        { "id": "triangle_right", "href": "/math-svgs/shapes/triangle_right.svg", "tags": ["geometry", "right angle", "90deg"] },
+        { "id": "circle",         "href": "/math-svgs/shapes/circle.svg",         "tags": ["geometry", "round"] },
+        { "id": "pentagon",       "href": "/math-svgs/shapes/pentagon.svg",       "tags": ["geometry", "polygon", "5-sides"] },
+        { "id": "square",         "href": "/math-svgs/shapes/square.svg",         "tags": ["geometry", "quadrilateral", "4-sides"] },
+        { "id": "rectangle",      "href": "/math-svgs/shapes/rectangle.svg",      "tags": ["geometry", "quadrilateral"] },
+        { "id": "hexagon",        "href": "/math-svgs/shapes/hexagon.svg",        "tags": ["geometry", "polygon", "6-sides"] },
+        { "id": "rhombus",        "href": "/math-svgs/shapes/rhombus.svg",        "tags": ["geometry", "quadrilateral", "diamond"] },
+        { "id": "trapezoid",      "href": "/math-svgs/shapes/trapezoid.svg",      "tags": ["geometry", "quadrilateral"] },
+        { "id": "parallelogram",  "href": "/math-svgs/shapes/parallelogram.svg",  "tags": ["geometry", "quadrilateral"] },
+        { "id": "star",           "href": "/math-svgs/shapes/star.svg",           "tags": ["pattern", "5-point"] },
+        { "id": "oval",           "href": "/math-svgs/shapes/oval.svg",           "tags": ["geometry", "ellipse"] }
+      ]
+    },
+    "arrows": {
+      "description": "Direction arrows and logical connectors",
+      "symbols": [
+        { "id": "arrow_right",    "href": "/math-svgs/arrows/arrow_right.svg",    "tags": ["direction", "next", "flow"] },
+        { "id": "arrow_left",     "href": "/math-svgs/arrows/arrow_left.svg",     "tags": ["direction", "back"] },
+        { "id": "arrow_up",       "href": "/math-svgs/arrows/arrow_up.svg",       "tags": ["direction", "increase"] },
+        { "id": "arrow_down",     "href": "/math-svgs/arrows/arrow_down.svg",     "tags": ["direction", "decrease"] },
+        { "id": "arrow_ne",       "href": "/math-svgs/arrows/arrow_ne.svg",       "tags": ["direction", "diagonal", "northeast"] },
+        { "id": "arrow_nw",       "href": "/math-svgs/arrows/arrow_nw.svg",       "tags": ["direction", "diagonal", "northwest"] },
+        { "id": "arrow_se",       "href": "/math-svgs/arrows/arrow_se.svg",       "tags": ["direction", "diagonal", "southeast"] },
+        { "id": "arrow_sw",       "href": "/math-svgs/arrows/arrow_sw.svg",       "tags": ["direction", "diagonal", "southwest"] },
+        { "id": "arrow_double",   "href": "/math-svgs/arrows/arrow_double.svg",   "tags": ["bidirectional", "equivalence"] },
+        { "id": "arrow_curved",   "href": "/math-svgs/arrows/arrow_curved.svg",   "tags": ["curved", "rotation", "transform"] },
+        { "id": "arrow_therefore","href": "/math-svgs/arrows/arrow_therefore.svg","tags": ["therefore", "logic", "conclusion"] }
+      ]
+    },
+    "series": {
+      "description": "Number / pattern series boxes and rows",
+      "symbols": [
+        { "id": "box_empty",      "href": "/math-svgs/series/box_empty.svg",      "tags": ["series", "slot"] },
+        { "id": "box_highlight",  "href": "/math-svgs/series/box_highlight.svg",  "tags": ["series", "selected", "focus"] },
+        { "id": "box_question",   "href": "/math-svgs/series/box_question.svg",   "tags": ["series", "missing", "unknown"] },
+        { "id": "box_correct",    "href": "/math-svgs/series/box_correct.svg",    "tags": ["feedback", "correct", "tick"] },
+        { "id": "box_wrong",      "href": "/math-svgs/series/box_wrong.svg",      "tags": ["feedback", "wrong", "cross"] },
+        { "id": "circle_highlight","href": "/math-svgs/series/circle_highlight.svg","tags": ["series", "circle", "focus"] },
+        { "id": "series_row",     "href": "/math-svgs/series/series_row.svg",     "tags": ["series", "5-box", "row", "number series"] },
+        { "id": "series_row_6",   "href": "/math-svgs/series/series_row_6.svg",   "tags": ["series", "6-box", "row", "number series"] }
+      ]
+    },
+    "logic": {
+      "description": "Venn diagrams, grids, syllogism diagrams, analogy frames",
+      "symbols": [
+        { "id": "venn_2",         "href": "/math-svgs/logic/venn_2.svg",          "tags": ["sets", "venn", "2-set", "overlap"] },
+        { "id": "venn_3",         "href": "/math-svgs/logic/venn_3.svg",          "tags": ["sets", "venn", "3-set", "overlap"] },
+        { "id": "grid_2x2",       "href": "/math-svgs/logic/grid_2x2.svg",        "tags": ["matrix", "pattern", "2x2"] },
+        { "id": "grid_3x3",       "href": "/math-svgs/logic/grid_3x3.svg",        "tags": ["matrix", "pattern", "3x3", "missing"] },
+        { "id": "syllogism",      "href": "/math-svgs/logic/syllogism.svg",       "tags": ["logic", "statements", "all-are"] },
+        { "id": "analogy_frame",  "href": "/math-svgs/logic/analogy_frame.svg",   "tags": ["analogy", "A:B::C:?", "proportion", "verbal reasoning"] }
+      ]
+    },
+    "directions": {
+      "description": "Compass, person, turn arrows for direction-sense questions",
+      "symbols": [
+        { "id": "compass",        "href": "/math-svgs/directions/compass.svg",    "tags": ["north", "south", "east", "west", "navigation"] },
+        { "id": "person",         "href": "/math-svgs/directions/person.svg",     "tags": ["student", "facing", "direction"] },
+        { "id": "turn_left",      "href": "/math-svgs/directions/turn_left.svg",  "tags": ["left turn", "direction"] },
+        { "id": "turn_right",     "href": "/math-svgs/directions/turn_right.svg", "tags": ["right turn", "direction"] }
+      ]
+    },
+    "clocks": {
+      "description": "Clock faces for time-based questions",
+      "symbols": [
+        { "id": "clock_face",     "href": "/math-svgs/clocks/clock_face.svg",     "tags": ["time", "clock", "10:10"] },
+        { "id": "clock_3oclock",  "href": "/math-svgs/clocks/clock_3oclock.svg",  "tags": ["time", "clock", "3:00"] },
+        { "id": "clock_6oclock",  "href": "/math-svgs/clocks/clock_6oclock.svg",  "tags": ["time", "clock", "6:00"] },
+        { "id": "clock_9oclock",  "href": "/math-svgs/clocks/clock_9oclock.svg",  "tags": ["time", "clock", "9:00"] },
+        { "id": "clock_12oclock", "href": "/math-svgs/clocks/clock_12oclock.svg", "tags": ["time", "clock", "12:00", "noon", "midnight"] }
+      ]
+    },
+    "seating": {
+      "description": "Seating arrangement diagrams (linear and circular)",
+      "symbols": [
+        { "id": "seat_circle",        "href": "/math-svgs/seating/seat_circle.svg",        "tags": ["seat", "person", "arrangement"] },
+        { "id": "seat_square",        "href": "/math-svgs/seating/seat_square.svg",        "tags": ["seat", "desk", "arrangement"] },
+        { "id": "seating_linear_5",   "href": "/math-svgs/seating/seating_linear_5.svg",   "tags": ["linear", "5-seat", "row", "arrangement"] },
+        { "id": "seating_circular_6", "href": "/math-svgs/seating/seating_circular_6.svg", "tags": ["circular", "6-seat", "round table", "arrangement"] },
+        { "id": "seating_circular_8", "href": "/math-svgs/seating/seating_circular_8.svg", "tags": ["circular", "8-seat", "round table", "arrangement"] }
+      ]
+    },
+    "data": {
+      "description": "Data interpretation charts and tables",
+      "symbols": [
+        { "id": "bar_chart",      "href": "/math-svgs/data/bar_chart.svg",       "tags": ["DI", "bar", "graph", "comparison"] },
+        { "id": "pie_chart_4",    "href": "/math-svgs/data/pie_chart_4.svg",     "tags": ["DI", "pie", "percentage", "proportion"] },
+        { "id": "line_graph",     "href": "/math-svgs/data/line_graph.svg",      "tags": ["DI", "line", "trend", "growth"] },
+        { "id": "table_3x4",      "href": "/math-svgs/data/table_3x4.svg",       "tags": ["DI", "table", "rows", "columns"] }
+      ]
+    },
+    "coding": {
+      "description": "Coding-decoding helpers — alphabet grid and shift arrows",
+      "symbols": [
+        { "id": "alphabet_grid",  "href": "/math-svgs/coding/alphabet_grid.svg",  "tags": ["coding", "alphabet", "A-N", "position"] },
+        { "id": "shift_plus3",    "href": "/math-svgs/coding/shift_plus3.svg",    "tags": ["coding", "shift", "+3", "Caesar"] },
+        { "id": "shift_minus2",   "href": "/math-svgs/coding/shift_minus2.svg",   "tags": ["coding", "shift", "-2", "backward", "Caesar"] }
+      ]
+    },
+    "relations": {
+      "description": "Blood relation / family tree diagrams",
+      "symbols": [
+        { "id": "family_tree",        "href": "/math-svgs/relations/family_tree.svg",        "tags": ["family", "blood relation", "tree", "hierarchy"] },
+        { "id": "blood_relation_node","href": "/math-svgs/relations/blood_relation_node.svg","tags": ["family", "person node", "blood relation"] }
+      ]
+    },
+    "patterns": {
+      "description": "Symmetry, mirror, rotation patterns",
+      "symbols": [
+        { "id": "mirror_line",    "href": "/math-svgs/patterns/mirror_line.svg",   "tags": ["symmetry", "mirror", "reflection"] },
+        { "id": "rotation_90",    "href": "/math-svgs/patterns/rotation_90.svg",   "tags": ["rotation", "90deg", "transform"] },
+        { "id": "rotation_180",   "href": "/math-svgs/patterns/rotation_180.svg",  "tags": ["rotation", "180deg", "transform", "flip"] },
+        { "id": "fold_symmetry",  "href": "/math-svgs/patterns/fold_symmetry.svg", "tags": ["symmetry", "fold", "reflection", "paper fold"] }
+      ]
+    },
+    "vedic": {
+      "description": "Vedic Math sutra explanation diagrams — used in MindSutra G4–G8 chapter questions via visual.asset field",
+      "usage": "{ visual: { kind: 'svg', title: '...', asset: 'nikhilam_base100.svg', caption: '...' } }",
+      "symbols": [
+        { "id": "nikhilam_base100",        "href": "/math-svgs/vedic/nikhilam_base100.svg",        "tags": ["nikhilam", "multiplication", "base 100", "deficit", "G5", "G6", "G7"] },
+        { "id": "criss_cross_2x2",         "href": "/math-svgs/vedic/criss_cross_2x2.svg",         "tags": ["urdhva", "criss-cross", "multiplication", "2-digit", "G4", "G5"] },
+        { "id": "complement_all_from_9",   "href": "/math-svgs/vedic/complement_all_from_9.svg",   "tags": ["nikhilam", "complement", "subtraction", "borrow-free", "G4"] },
+        { "id": "eleven_trick",            "href": "/math-svgs/vedic/eleven_trick.svg",             "tags": ["multiplication", "11", "split-add", "G4"] },
+        { "id": "squaring_near_base",      "href": "/math-svgs/vedic/squaring_near_base.svg",      "tags": ["squaring", "base", "deficit", "G5", "G6", "G7"] },
+        { "id": "vinculum_bar",            "href": "/math-svgs/vedic/vinculum_bar.svg",             "tags": ["vinculum", "bar number", "integers", "G6"] },
+        { "id": "paravartya_division",     "href": "/math-svgs/vedic/paravartya_division.svg",     "tags": ["paravartya", "division", "transpose", "G6", "G8"] },
+        { "id": "square_root_inspection",  "href": "/math-svgs/vedic/square_root_inspection.svg",  "tags": ["square root", "digit grouping", "inspection", "G8"] },
+        { "id": "doubling_chain",          "href": "/math-svgs/vedic/doubling_chain.svg",           "tags": ["doubling", "multiplication", "×4", "×8", "G4"] },
+        { "id": "linear_eq_sutra",         "href": "/math-svgs/vedic/linear_eq_sutra.svg",         "tags": ["algebra", "linear equation", "balance", "G6", "G7", "G8"] },
+        { "id": "cubing_2digit",           "href": "/math-svgs/vedic/cubing_2digit.svg",           "tags": ["cubing", "anurupyena", "2-digit", "G7"] }
+      ]
+    }
+  }
+}

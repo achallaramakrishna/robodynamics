@@ -1,0 +1,579 @@
+{
+  "chapterCode": "AR_G6_L1_SERIES",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Series Completion",
+  "source": "MindSpark Grade 6 Aptitude & Reasoning | Chapter 1: Series Completion",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Arithmetic Progression (AP) Number Series",
+    "Geometric Progression (GP) Number Series",
+    "Difference Pattern Series",
+    "Letter Series A to Z (forward)",
+    "Letter Series Z to A (backward)",
+    "Mixed Letter-Number Series",
+    "Picture and Shape Series",
+    "Combined Type Series",
+    "Speed Round Mixed Series"
+  ],
+  "learningGoals": [
+    "Identify the rule in a number series and find the missing term.",
+    "Recognise letter series patterns using alphabet positions.",
+    "Spot picture and shape series patterns by tracking attribute changes."
+  ],
+  "coreIdeas": [
+    "Always find the gap (difference or ratio) between consecutive terms first.",
+    "For letter series, convert letters to positions (A=1, B=2 … Z=26) and look for the numeric pattern.",
+    "For picture series, track one attribute at a time: size, rotation, shading, count."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "2, 5, 8, 11, __ — What is the next number?",
+      "solution": "Difference between terms: 5-2=3, 8-5=3, 11-8=3. Common difference = 3. Next term = 11+3 = 14.",
+      "concept": "Arithmetic Progression — constant difference"
+    },
+    {
+      "id": "WE2",
+      "problem": "3, 6, 12, 24, __ — What is the next number?",
+      "solution": "Ratio between terms: 6/3=2, 12/6=2, 24/12=2. Common ratio = 2. Next term = 24×2 = 48.",
+      "concept": "Geometric Progression — constant ratio"
+    },
+    {
+      "id": "WE3",
+      "problem": "C, F, I, L, __ — What is the next letter?",
+      "solution": "C=3, F=6, I=9, L=12. Difference = 3 each time. Next position = 12+3=15 → O.",
+      "concept": "Letter series using alphabet positions with constant gap"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g6-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark (the AI coach) checks comfort level and session goal before starting Series Completion. First question is always a warm number-gap example.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers occur in Groups A-B, slow down with halved number ranges and confirm understanding before proceeding."
+    },
+    "mission": {
+      "missionTitle": "Crack the Series Code",
+      "missionPromise": "By the end, you will spot any number, letter, or picture series pattern in seconds — like a detective finding the hidden rule!",
+      "successCelebration": "Award a badge pulse and coach cheer line after every correct group. At lesson end, show 'Series Detective' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with 'Let's crack this code!' hook and names the pattern type.",
+      "Coach writes one worked series on the board, showing the gap or ratio step by step.",
+      "Coach reads the practice question aloud.",
+      "Student attempts the answer before the solution is revealed.",
+      "Instant feedback celebrates correct answers or repairs the first mistake with a hint.",
+      "A review prompt confirms mastery before advancing to the next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 25 XP per exercise group, increasing through the lesson.",
+      "streakRule": "Show streak counter prominently; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one Series badge tied to the pattern type.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts on the same group triggers a mini-reteach with a simpler version of the same pattern.",
+      "practiceStyle": "Offer one easier follow-up question before moving on.",
+      "masteryRule": "Advance only after a correct answer plus one successful tryPrompt attempt.",
+      "revisitRule": "Any group with two errors returns as a review card at the start of the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G6_L1_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hey there, future detective! Welcome to Series Completion — one of the most exciting puzzles in Aptitude & Reasoning! Every series hides a secret rule. Numbers going up by equal steps, letters skipping ahead, shapes rotating — once you know what to look for, cracking a series takes just seconds. Today we will unlock 4 types: AP, GP, letter series, and picture series!",
+        "boardAction": "Write lesson title 'Series Completion' and list the 4 types: (1) AP — equal gaps, (2) GP — equal ratios, (3) Letter series — alphabet positions, (4) Picture series — shape attributes.",
+        "checkpointPrompt": "Quick warm-up: 2, 4, 6, 8, __ — what comes next and what is the pattern called?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "10, AP or equal gap pattern.",
+        "fallbackHint": "The gap between 2 and 4 is +2. Keep adding 2: 8+2=10. This is an Arithmetic Progression — AP for short.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l1_title",
+            "x": "40",
+            "y": "30",
+            "text": "Series Completion — Lesson 1",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l1_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type1",
+            "x": "60",
+            "y": "80",
+            "text": "1. AP — add the same number every step",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type2",
+            "x": "60",
+            "y": "100",
+            "text": "2. GP — multiply by the same number every step",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type3",
+            "x": "60",
+            "y": "120",
+            "text": "3. Letter series — alphabet positions + gap",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type4",
+            "x": "60",
+            "y": "140",
+            "text": "4. Picture series — track one shape attribute",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L1_DEMO_AP",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you the AP trick live. Series: 3, 7, 11, 15, __ I subtract neighbours: 7-3=4, 11-7=4, 15-11=4. The gap is always 4 — that is my rule! Next term: 15+4 = 19. Done in 5 seconds once you see the gap!",
+        "boardAction": "Write 3, 7, 11, 15, __ with arrows between terms. Write '+4' on each arrow. Circle 15+4=19.",
+        "checkpointPrompt": "Your turn: 10, 17, 24, 31, __ — what is the gap and the missing term?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Gap is 7, missing term is 38.",
+        "fallbackHint": "17-10=7, 24-17=7. Gap is +7. 31+7=38.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_series",
+            "x": "60",
+            "y": "60",
+            "text": "3 ——+4——> 7 ——+4——> 11 ——+4——> 15 ——+4——> ?",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.6
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "60",
+            "y": "100",
+            "text": "Missing term: 15 + 4 = 19",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.2,
+            "durationSec": 0.4
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L1_DEMO_LETTER",
+        "type": "DEMO",
+        "sequence": 202,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Now letters! C, F, I, L, __ — I convert each to a position: C=3, F=6, I=9, L=12. The gap is +3 each time. Next position: 12+3=15. Position 15 is the letter O! Alphabet is just a number line — never forget that!",
+        "boardAction": "Write C F I L __ above a row of numbers 3 6 9 12 15. Draw arrows showing +3. Write 15=O circled.",
+        "checkpointPrompt": "Quick: B, E, H, K, __ — convert to positions and find the next letter!",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "N — positions 2,5,8,11 with gap +3, next is 14=N.",
+        "fallbackHint": "B=2, E=5, H=8, K=11. Gap = +3. Next position = 14. Count to 14th letter: N.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_letters",
+            "x": "60",
+            "y": "55",
+            "text": "C    F    I    L    ?",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_positions",
+            "x": "60",
+            "y": "85",
+            "text": "3    6    9    12   15",
+            "color": "#0284c7",
+            "size": 13,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer_letter",
+            "x": "60",
+            "y": "120",
+            "text": "Position 15 = O",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.1,
+            "durationSec": 0.4
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L1_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have the toolkit — AP gaps, GP ratios, letter positions, shape attributes. Now work through Groups A to I and crack each series. I am here if you need a hint. Remember: always find the rule BEFORE you guess the answer!",
+        "boardAction": "Show a 4-step cheatsheet: Step 1 Subtract neighbours (AP?), Step 2 Divide neighbours (GP?), Step 3 Convert letters (Letter?), Step 4 Pick one attribute (Shape?).",
+        "checkpointPrompt": "Before we start the groups — which type of series has a constant RATIO between terms?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "GP — Geometric Progression.",
+        "fallbackHint": "Geometric Progression (GP) has a constant ratio. You multiply (or divide) to get from one term to the next.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_cheatsheet_title",
+            "x": "40",
+            "y": "30",
+            "text": "Series Quick Cheatsheet",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_step1",
+            "x": "60",
+            "y": "65",
+            "text": "Subtract neighbours → same? → AP",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_step2",
+            "x": "60",
+            "y": "88",
+            "text": "Divide neighbours → same? → GP",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_step3",
+            "x": "60",
+            "y": "111",
+            "text": "Letters → convert to positions → AP rule",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_step4",
+            "x": "60",
+            "y": "134",
+            "text": "Shapes → pick one attribute → number rule",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ]
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Arithmetic Progression (AP) Number Series",
+      "missionStepTitle": "Exercise A: AP Number Series",
+      "coachHook": "Let's crack this code! Look at these numbers — they are climbing a staircase with equal steps. Your job: find the step size!",
+      "boardDemo": {
+        "title": "AP Series — Equal Steps",
+        "steps": [
+          "Write the series: 4, 7, 10, 13, __",
+          "Find gap: 7-4=3, 10-7=3, 13-10=3",
+          "Rule: +3 every step",
+          "Missing term: 13+3 = 16"
+        ],
+        "teacherLine": "The secret is the gap. Subtract any two neighbours — if the gap is always the same, you have an AP. Add that gap to the last term and you are done!"
+      },
+      "readAloudPrompt": "Look at: 10, 14, 18, 22, __ — What is the gap between each pair?",
+      "tryPrompt": "Now you try: 5, 9, 13, 17, __ — find the gap, then give me the next number!",
+      "masteryCheck": "21",
+      "instantFeedbackWin": "Yes! Gap is 4, so 17+4 = 21. You found the staircase step — nicely done!",
+      "instantFeedbackRetry": "Here's a trick: subtract 9-5. Got 4? Now subtract 13-9. Still 4! That constant gap is your rule. Add it to 17.",
+      "reviewPrompt": "Quick check: 3, 8, 13, 18, __ — tell me the gap and the next term.",
+      "xpReward": 10,
+      "badgeFocus": "AP Spotter"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Geometric Progression (GP) Number Series",
+      "missionStepTitle": "Exercise B: GP Number Series",
+      "coachHook": "Let's crack this code! Now the numbers are not adding — they are multiplying! Each term jumps by the same multiplier.",
+      "boardDemo": {
+        "title": "GP Series — Multiply Every Step",
+        "steps": [
+          "Write the series: 2, 6, 18, 54, __",
+          "Find ratio: 6÷2=3, 18÷6=3, 54÷18=3",
+          "Rule: ×3 every step",
+          "Missing term: 54×3 = 162"
+        ],
+        "teacherLine": "Divide any term by the one before it. If the answer is always the same number, that is your multiplier — your common ratio. Multiply the last term by it!"
+      },
+      "readAloudPrompt": "Look at: 5, 10, 20, 40, __ — what do you divide to find the ratio?",
+      "tryPrompt": "Your turn: 3, 9, 27, 81, __ — find the ratio, then the next number!",
+      "masteryCheck": "243",
+      "instantFeedbackWin": "Brilliant! 9÷3=3, the ratio is 3. 81×3 = 243. You cracked the GP code!",
+      "instantFeedbackRetry": "Here's a trick: divide 9 by 3 — you get 3. Divide 27 by 9 — still 3. That common ratio is ×3. Multiply 81 by 3.",
+      "reviewPrompt": "Quick check: 4, 8, 16, 32, __ — give me the ratio and the missing term.",
+      "xpReward": 12,
+      "badgeFocus": "GP Multiplier"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Difference Pattern Series",
+      "missionStepTitle": "Exercise C: Difference Patterns",
+      "coachHook": "Let's crack this code! Some series hide their secret in the DIFFERENCES between terms — the differences themselves form a pattern!",
+      "boardDemo": {
+        "title": "Difference Pattern — Two Levels Deep",
+        "steps": [
+          "Series: 1, 2, 4, 7, 11, __",
+          "Level-1 differences: 2-1=1, 4-2=2, 7-4=3, 11-7=4",
+          "Level-1 gaps: 1, 2, 3, 4 — increasing by 1!",
+          "Next gap: 4+1 = 5",
+          "Missing term: 11+5 = 16"
+        ],
+        "teacherLine": "When the gaps are NOT equal, write them out underneath. Look at the gaps themselves — they might form their own AP. Add the next gap to the last term."
+      },
+      "readAloudPrompt": "Series: 2, 3, 5, 8, 12, __ — write out the differences first. What do you notice?",
+      "tryPrompt": "Your turn: 0, 1, 3, 6, 10, __ — write the differences, find the pattern, give the next term!",
+      "masteryCheck": "15",
+      "instantFeedbackWin": "Spot on! Differences are 1, 2, 3, 4 — the next gap is 5. 10+5 = 15. Pattern detective skills activated!",
+      "instantFeedbackRetry": "Here's a trick: write the gaps: 1-0=1, 3-1=2, 6-3=3, 10-6=4. See 1,2,3,4? Next gap is 5. Add 5 to 10.",
+      "reviewPrompt": "Practice: 1, 3, 7, 13, 21, __ — find the difference pattern and the next number.",
+      "xpReward": 14,
+      "badgeFocus": "Difference Detective"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Letter Series A to Z (forward)",
+      "missionStepTitle": "Exercise D: Forward Letter Series",
+      "coachHook": "Let's crack this code! The alphabet is just a number line in disguise — A=1, B=2, all the way to Z=26. Let's use that!",
+      "boardDemo": {
+        "title": "Letter Series — Forward Direction",
+        "steps": [
+          "Series: B, D, F, H, __",
+          "Convert: B=2, D=4, F=6, H=8",
+          "Gaps: 4-2=2, 6-4=2, 8-6=2",
+          "Rule: +2 each step",
+          "Next position: 8+2=10 → J"
+        ],
+        "teacherLine": "Turn every letter into its alphabet number. Find the gap. Then convert the next number back to a letter. Alphabet = number line!"
+      },
+      "readAloudPrompt": "Series: A, C, E, G, __ — convert each to its position number. What is the gap?",
+      "tryPrompt": "Your turn: D, G, J, M, __ — write the position numbers, find the gap, then name the next letter!",
+      "masteryCheck": "P",
+      "instantFeedbackWin": "Perfect! D=4, G=7, J=10, M=13. Gap = 3. Next: 13+3=16 → P. You speak alphabet-number fluently!",
+      "instantFeedbackRetry": "Here's a trick: D is the 4th letter, G is the 7th. 7-4=3. Keep adding 3: J=10, M=13, next is 16. Count to the 16th letter — that is P.",
+      "reviewPrompt": "Quick: C, F, I, L, __ — give me the next letter and state the gap.",
+      "xpReward": 15,
+      "badgeFocus": "Alphabet Coder"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Letter Series Z to A (backward)",
+      "missionStepTitle": "Exercise E: Backward Letter Series",
+      "coachHook": "Let's crack this code! Now the alphabet is running backwards — Z=26 down to A=1. The gap is still your clue, just subtract instead!",
+      "boardDemo": {
+        "title": "Letter Series — Backward Direction",
+        "steps": [
+          "Series: Z, X, V, T, __",
+          "Convert: Z=26, X=24, V=22, T=20",
+          "Gaps: 24-26=-2, 22-24=-2, 20-22=-2",
+          "Rule: -2 each step",
+          "Next position: 20-2=18 → R"
+        ],
+        "teacherLine": "Same trick — convert to numbers. But now the gaps are negative (decreasing). Subtract the gap from the last position and convert back."
+      },
+      "readAloudPrompt": "Series: Y, V, S, P, __ — what is happening to the position numbers?",
+      "tryPrompt": "Your turn: Z, W, T, Q, __ — find the gap (it goes down!) and name the next letter!",
+      "masteryCheck": "N",
+      "instantFeedbackWin": "Excellent! Z=26, W=23, T=20, Q=17. Gap = -3. Next: 17-3=14 → N. Backwards is just forward with a minus sign!",
+      "instantFeedbackRetry": "Here's a trick: Z=26, W=23. 23-26=-3. Keep subtracting 3: T=20, Q=17, next=14. The 14th letter is N.",
+      "reviewPrompt": "Quick: Z, U, P, K, __ — find the gap and the next letter.",
+      "xpReward": 16,
+      "badgeFocus": "Reverse Navigator"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Mixed Letter-Number Series",
+      "missionStepTitle": "Exercise F: Mixed Letter-Number Series",
+      "coachHook": "Let's crack this code! What happens when letters and numbers team up? You handle each channel separately — letters follow one rule, numbers follow another!",
+      "boardDemo": {
+        "title": "Mixed Series — Two Tracks at Once",
+        "steps": [
+          "Series: A1, C3, E5, G7, __",
+          "Letter track: A, C, E, G → positions 1,3,5,7 → +2 each → next: 9=I",
+          "Number track: 1, 3, 5, 7 → +2 each → next: 9",
+          "Combined: I9"
+        ],
+        "teacherLine": "Treat letters and numbers as two separate lanes. Find the pattern in each lane independently, then combine them for the final answer."
+      },
+      "readAloudPrompt": "Series: B2, D4, F6, H8, __ — what pattern do the letters follow? What about the numbers?",
+      "tryPrompt": "Your turn: A3, C6, E9, G12, __ — solve both tracks, then give the complete answer!",
+      "masteryCheck": "I15",
+      "instantFeedbackWin": "Superb! Letters: A,C,E,G,I (+2). Numbers: 3,6,9,12,15 (+3). Put them together: I15. Double-track detective!",
+      "instantFeedbackRetry": "Here's a trick: cover the numbers, look only at A,C,E,G — gap=+2, next is I. Now cover the letters: 3,6,9,12 — gap=+3, next is 15. Combine: I15.",
+      "reviewPrompt": "Quick: Z1, X3, V5, T7, __ — give the next pair (one letter goes down, numbers go up).",
+      "xpReward": 18,
+      "badgeFocus": "Double-Track Solver"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Picture and Shape Series",
+      "missionStepTitle": "Exercise G: Picture and Shape Series",
+      "coachHook": "Let's crack this code! Now there are no numbers or letters — just shapes changing step by step. Track ONE thing at a time: sides, shading, rotation, or count.",
+      "boardDemo": {
+        "title": "Shape Series — Track One Attribute",
+        "steps": [
+          "Series: Triangle (unshaded), Triangle (half-shaded), Triangle (fully shaded), Square (unshaded), __",
+          "Pattern: shading increases: none → half → full, then resets AND shape changes",
+          "After full-shaded Triangle: Square starts the shading cycle again",
+          "Observation: shape upgrades every 3 frames (3 sides → 4 sides)",
+          "Next: Square (half-shaded)"
+        ],
+        "teacherLine": "Pick ONE attribute to follow. Shading? Count sides? How many shapes? Write it as a number series. The hidden rule appears immediately."
+      },
+      "readAloudPrompt": "Imagine: Circle with 1 dot, Circle with 2 dots, Circle with 3 dots, Square with 1 dot, __ — what changes? What stays the same?",
+      "tryPrompt": "Shape series: Pentagon → Pentagon (rotated 36°) → Pentagon (rotated 72°) → Pentagon (rotated 108°) → __ How many degrees is the next rotation?",
+      "masteryCheck": "Pentagon rotated 144 degrees",
+      "instantFeedbackWin": "Outstanding! 0°, 36°, 72°, 108° — the rotation increases by 36° each step. Next: 108+36 = 144°. You spotted the invisible number pattern in shapes!",
+      "instantFeedbackRetry": "Here's a trick: ignore what the shape looks like and just write the rotation degrees: 0, 36, 72, 108. Now find the gap: +36 each time. Add 36 to 108.",
+      "reviewPrompt": "Quick: a row of shapes has 1 star, 2 stars, 4 stars, 8 stars in each box — what is the next box and what pattern type is this?",
+      "xpReward": 20,
+      "badgeFocus": "Shape Pattern Tracker"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Combined Type Series",
+      "missionStepTitle": "Exercise H: Combined Type Series",
+      "coachHook": "Let's crack this code! Champions level! A series can mix AP gaps AND skipped letters. Stay calm — find the rule for each part, then combine.",
+      "boardDemo": {
+        "title": "Combined Series — Mixed Rules",
+        "steps": [
+          "Series: 2, B, 4, D, 6, F, 8, __",
+          "Number sub-series: 2, 4, 6, 8 → +2 each (even numbers)",
+          "Letter sub-series: B, D, F → positions 2,4,6 → +2 each",
+          "After 8 comes the next letter: position 8 = H",
+          "Answer: H"
+        ],
+        "teacherLine": "Separate the two alternating series. Handle numbers alone, then letters alone. Combine at the end — two mini-series inside one!"
+      },
+      "readAloudPrompt": "Series: A1, B3, C5, D7, __ — the letter and number each follow their own rule. What are the two rules?",
+      "tryPrompt": "Your turn: 1A, 3C, 5E, 7G, __ — identify the two patterns and give the next pair!",
+      "masteryCheck": "9I",
+      "instantFeedbackWin": "Fantastic! Numbers: 1,3,5,7,9 (+2). Letters: A,C,E,G,I (+2). Answer: 9I. You handled a double-pattern series like a pro!",
+      "instantFeedbackRetry": "Here's a trick: write out only the numbers: 1,3,5,7 — that is +2, so next is 9. Now only the letters: A,C,E,G — that is +2, so next is I. Combine: 9I.",
+      "reviewPrompt": "Challenge: 2A, 4C, 8E, 16G, __ — numbers multiply, letters add. What is the next pair?",
+      "xpReward": 22,
+      "badgeFocus": "Combo Code Breaker"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Speed Round Mixed Series",
+      "missionStepTitle": "Exercise I: Speed Round",
+      "coachHook": "Let's crack this code — FAST! This is the speed round. Mixed series, one by one. Trust your instincts, apply the rule in seconds. Ready, set, go!",
+      "boardDemo": {
+        "title": "Speed Round — All Types",
+        "steps": [
+          "Rule 1 recap: AP → find constant gap, add to last term",
+          "Rule 2 recap: GP → find constant ratio, multiply last term",
+          "Rule 3 recap: Letter → convert to position, find gap, convert back",
+          "Rule 4 recap: Mixed → split tracks, solve each, combine",
+          "Speed tip: write the gap or ratio first — that saves thinking time"
+        ],
+        "teacherLine": "You have learned 4 series types. In the speed round, you get 30 seconds per question. State the pattern type first, then the answer — pattern name earns you half the XP even if the answer is slightly off!"
+      },
+      "readAloudPrompt": "Ready for the speed round? I will fire 3 quick series at you. Name the type and the missing term for each one!",
+      "tryPrompt": "Speed Q1: 7, 14, 21, 28, __ | Speed Q2: E, H, K, N, __ | Speed Q3: 1, 4, 9, 16, __ — Go!",
+      "masteryCheck": "35 | Q | 25",
+      "instantFeedbackWin": "AMAZING! 35 (AP +7), Q (letters +3, position 17), 25 (perfect squares: 1²,2²,3²,4²,5²). Full marks on the speed round — Series Completion MASTERED!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — 14-7=7, so +7: 28+7=35. Q2 — E=5,H=8,K=11,N=14 — gap=3, next=17=Q. Q3 — 1,4,9,16 are 1²,2²,3²,4², so next is 5²=25.",
+      "reviewPrompt": "Final recap: name the 4 series types you learned today and give one example of each in under 60 seconds.",
+      "xpReward": 25,
+      "badgeFocus": "Series Completion Master"
+    }
+  ]
+}

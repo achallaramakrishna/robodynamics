@@ -1,0 +1,348 @@
+{
+  "chapterCode": "AR_G6_L8_PUZZLES",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Simple Logical Puzzles",
+  "source": "MindSpark Grade 6 — Chapter 8",
+  "estimatedMinutes": 40,
+  "subtopics": [
+    "Height and weight comparison",
+    "Ordering by clues",
+    "Age comparison puzzles",
+    "If-then logic",
+    "Direction after turns",
+    "Odd-one-out by logic"
+  ],
+  "learningGoals": [
+    "Determine ordering (tallest to shortest, heaviest to lightest) from a set of comparison clues",
+    "Solve age puzzles by converting relative age statements into arithmetic",
+    "Apply if-then reasoning correctly and recognise the logical fallacy of affirming the consequent",
+    "Track direction changes after a series of left and right turns",
+    "Identify the odd-one-out based on a logical property that all others share",
+    "Chain multiple clues together to build a complete ordered sequence"
+  ],
+  "coreIdeas": [
+    "Comparison clues: always chain them (A > B, B > C gives A > B > C) to build a complete order",
+    "Age puzzles: assign a variable to the unknown age, then use the given relationships as equations",
+    "If-then: P implies Q does NOT mean Q implies P — the reverse is not automatically true",
+    "Directions: North → right turn → East → right turn → South → right turn → West → right turn → North",
+    "Odd-one-out: identify the single property shared by all others that the odd one lacks",
+    "Logical fallacy: All cats are animals does not mean All animals are cats"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "A is taller than B. B is taller than C. Who is the shortest?",
+      "solution": "Chain the clues: A > B > C. The smallest in the chain is C. Answer: C is the shortest.",
+      "concept": "Comparison chaining — 3 people"
+    },
+    {
+      "id": "WE2",
+      "problem": "Riya is 3 years older than Amit. Amit is 2 years younger than Priya who is 15. How old is Riya?",
+      "solution": "Amit = Priya − 2 = 15 − 2 = 13. Riya = Amit + 3 = 13 + 3 = 16. Answer: Riya is 16.",
+      "concept": "Age puzzle using two-step arithmetic"
+    },
+    {
+      "id": "WE3",
+      "problem": "You face North. Turn right. Turn right again. Which direction are you facing?",
+      "solution": "North → turn right → East → turn right → South. Answer: South.",
+      "concept": "Direction tracking with two right turns"
+    },
+    {
+      "id": "WE4",
+      "problem": "All cats are animals. Some animals are dogs. Is every cat a dog?",
+      "solution": "No. Some animals are dogs, not all. Cats are animals but are not necessarily dogs. Answer: No.",
+      "concept": "If-then logic — avoiding incorrect reversal"
+    },
+    {
+      "id": "WE5",
+      "problem": "Dog, Cat, Lion, Table, Elephant. Find the odd one out.",
+      "solution": "Dog, Cat, Lion, Elephant are all animals. Table is NOT an animal. Answer: Table.",
+      "concept": "Odd-one-out by category property"
+    }
+  ],
+  "duolingoLessonArc": {
+    "onboarding": {
+      "hook": "Logic is a superpower — it lets you answer questions without any numbers, just pure reasoning!",
+      "avatarIntro": "Hello! I am Spark. Today we solve puzzles using pure logic — no formulas needed, just careful thinking. We will compare heights, track directions, crack age puzzles, and spot the odd one out. Let us think our way through!",
+      "priorKnowledge": "You already know how to compare numbers using greater than and less than. Today we apply that same idea to heights, ages, and weights — and extend it to directions and logical statements."
+    },
+    "mission": "Complete 9 exercise groups covering all six puzzle types and earn the Logic Legend badge.",
+    "microLessonPattern": "Pose the puzzle → Draw the logic on board → Build the chain step by step → Student solves → Instant Feedback",
+    "rewardLoop": "10 XP per correct answer; drawing the logic diagram before answering earns 5 bonus XP.",
+    "reviewLoop": "After group E, a flash review presents one comparison puzzle from groups A or B to reinforce the chaining technique.",
+    "uiDirectives": {
+      "boardStyle": "number line for comparison chains; compass rose for direction puzzles; branching diagram for if-then logic",
+      "inputType": "short text or multiple choice (4 options)",
+      "showHintAfterMs": 15000
+    }
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "3-Person Height Comparison",
+      "coachHook": "Three clues, three people — chain them together to find who is shortest!",
+      "boardDemo": {
+        "title": "A is taller than B. B is taller than C. Who is shortest?",
+        "steps": [
+          "Write clue 1: A is taller than B → A > B",
+          "Write clue 2: B is taller than C → B > C",
+          "Chain: A > B > C",
+          "The rightmost (smallest) in the chain: C",
+          "Answer: C is the shortest"
+        ],
+        "teacherLine": "Always write the chain on paper: A > B > C. The person at the far right of the inequality chain is the shortest."
+      },
+      "readAloudPrompt": "A is taller than B. B is taller than C. Chain: A > B > C. Shortest is C.",
+      "tryPrompt": "P is shorter than Q. Q is shorter than R. Who is the tallest?  (a) P  (b) Q  (c) R  (d) Cannot determine",
+      "masteryCheck": "R",
+      "instantFeedbackWin": "Correct! P < Q < R. R is the tallest. Chaining clues makes it instantly clear!",
+      "instantFeedbackRetry": "Chain the clues: P < Q < R. The rightmost is the largest — R is tallest.",
+      "reviewPrompt": "If D is taller than A, extend the chain. Who is the shortest now?",
+      "xpReward": 10,
+      "badgeFocus": "Chain Builder"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "5-Person Ordering from Multiple Clues",
+      "coachHook": "Five people, four clues — build the full chain!",
+      "boardDemo": {
+        "title": "Raj > Priya > Amit. Sana > Priya. Sam < Amit. Order from tallest?",
+        "steps": [
+          "Start with anchor chain: Raj > Priya > Amit",
+          "Add Sana: Sana > Priya, but Sana vs Raj is unknown",
+          "Add Sam: Sam < Amit → Sam is shortest",
+          "Certain: Sam is at the bottom; Priya > Amit > Sam; Raj > Priya; Sana > Priya"
+        ],
+        "teacherLine": "When relative position of two people is not given, note it as uncertain. Only state the certain facts."
+      },
+      "readAloudPrompt": "Certain: Sam is shortest. Priya > Amit > Sam. Raj and Sana are both above Priya but their mutual order is unknown.",
+      "tryPrompt": "From the above clues, who is definitely shorter than Priya?  (a) Raj  (b) Sana  (c) Amit  (d) Sam",
+      "masteryCheck": "Amit",
+      "instantFeedbackWin": "Correct! Priya > Amit is stated directly. Amit is definitely shorter than Priya.",
+      "instantFeedbackRetry": "Raj > Priya and Sana > Priya — both are above Priya. Amit is directly below Priya in the chain: Priya > Amit.",
+      "reviewPrompt": "List all the facts you are certain about from these clues — no assumptions.",
+      "xpReward": 10,
+      "badgeFocus": "Chain Builder"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Age Comparison Puzzle",
+      "coachHook": "Age puzzles use subtraction and addition. Set up the number line in your head!",
+      "boardDemo": {
+        "title": "Riya is 3 years older than Amit. Amit is 2 years younger than Priya (age 15). How old is Riya?",
+        "steps": [
+          "Given: Priya = 15",
+          "Amit = Priya − 2 = 15 − 2 = 13",
+          "Riya = Amit + 3 = 13 + 3 = 16",
+          "Riya is 16 years old"
+        ],
+        "teacherLine": "Work from the known anchor (Priya = 15) outward. First find Amit, then use Amit to find Riya."
+      },
+      "readAloudPrompt": "Priya = 15. Amit = 15 − 2 = 13. Riya = 13 + 3 = 16.",
+      "tryPrompt": "Rahul is 4 years older than Meera. Meera is 3 years younger than Sana, who is 18. How old is Rahul?  (a) 19  (b) 18  (c) 17  (d) 20",
+      "masteryCheck": "19",
+      "instantFeedbackWin": "Correct! Sana=18, Meera=18−3=15, Rahul=15+4=19. Age chain solved!",
+      "instantFeedbackRetry": "Step 1: Meera = Sana − 3 = 18 − 3 = 15. Step 2: Rahul = Meera + 4 = 15 + 4 = 19.",
+      "reviewPrompt": "How old is Sana compared to Rahul? Write a comparison statement.",
+      "xpReward": 10,
+      "badgeFocus": "Age Detective"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "If-Then Logic — Avoiding Incorrect Reversal",
+      "coachHook": "If P then Q does NOT mean if Q then P. Let us see why with a cat example!",
+      "boardDemo": {
+        "title": "All cats are animals. Some animals are dogs. Is every cat a dog?",
+        "steps": [
+          "Draw: Cats circle inside Animals circle",
+          "Draw: Dogs circle partly overlapping Animals circle",
+          "Cats → Animals (all cats are animals, confirmed)",
+          "Some animals are dogs — but cats are in a different part of the animals circle",
+          "There is no arrow from Cats to Dogs",
+          "Answer: No, not every cat is a dog"
+        ],
+        "teacherLine": "Visualise it as circles inside circles. Cats are a subset of Animals. Dogs are also a subset of Animals. Two subsets of the same bigger group are NOT the same as each other."
+      },
+      "readAloudPrompt": "Cats are inside Animals. Dogs are inside Animals. But Cats and Dogs are different subsets. Answer: No.",
+      "tryPrompt": "All roses are flowers. Some flowers are red. Are all roses red?  (a) Yes  (b) No  (c) Cannot determine  (d) Sometimes",
+      "masteryCheck": "No",
+      "instantFeedbackWin": "Correct! Roses are flowers but not all flowers are red, so we cannot conclude all roses are red.",
+      "instantFeedbackRetry": "Roses are inside Flowers. Some Flowers are Red. This does not guarantee Roses are Red.",
+      "reviewPrompt": "Make up your own if-then statement and show why the reverse is not necessarily true.",
+      "xpReward": 10,
+      "badgeFocus": "Logic Gate"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Weight Ordering — 5-Person Chain",
+      "coachHook": "Same technique as height — build the chain from all the clues!",
+      "boardDemo": {
+        "title": "P > Q, Q > R, R > S, S > T. Who is 3rd heaviest?",
+        "steps": [
+          "Chain: P > Q > R > S > T",
+          "Order from heaviest: P (1st), Q (2nd), R (3rd), S (4th), T (5th)",
+          "3rd heaviest = R"
+        ],
+        "teacherLine": "When clues are given in a clean chain, simply write the chain and count positions."
+      },
+      "readAloudPrompt": "Chain: P > Q > R > S > T. 3rd from the top = R.",
+      "tryPrompt": "A > B > C > D > E. Who is 4th lightest (2nd heaviest)?  (a) A  (b) B  (c) D  (d) E",
+      "masteryCheck": "B",
+      "instantFeedbackWin": "Correct! Order: A (1st heaviest), B (2nd heaviest = 4th lightest). Answer is B.",
+      "instantFeedbackRetry": "With 5 people, 4th lightest = 2nd heaviest. Heaviest is A, 2nd heaviest is B.",
+      "reviewPrompt": "In the chain P > Q > R > S > T, what is R's rank from the lightest end?",
+      "xpReward": 10,
+      "badgeFocus": "Order Master"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Direction After Turns",
+      "coachHook": "Every right turn rotates you 90 degrees clockwise. Track it step by step!",
+      "boardDemo": {
+        "title": "Face North. Turn right. Turn right again. Which direction?",
+        "steps": [
+          "Start: facing North",
+          "Turn right (90 degrees clockwise): now facing East",
+          "Turn right again (90 degrees clockwise): now facing South",
+          "Answer: South"
+        ],
+        "teacherLine": "Draw a compass: N at top, E at right, S at bottom, W at left. Each right turn moves you one step clockwise around the compass."
+      },
+      "readAloudPrompt": "North → right → East → right → South. Final direction: South.",
+      "tryPrompt": "You face East. Turn left. Turn left again. Which direction are you facing?  (a) North  (b) South  (c) West  (d) East",
+      "masteryCheck": "West",
+      "instantFeedbackWin": "Correct! East → left → North → left → West. Two left turns from East = West.",
+      "instantFeedbackRetry": "Each left turn moves 90 degrees anti-clockwise. East → left = North. North → left = West.",
+      "reviewPrompt": "Starting from South, how many right turns does it take to face East?",
+      "xpReward": 10,
+      "badgeFocus": "Direction Tracker"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Odd-One-Out by Logic",
+      "coachHook": "Four things share a property. One does not. Find the outsider!",
+      "boardDemo": {
+        "title": "Dog, Cat, Lion, Table, Elephant — find the odd one out.",
+        "steps": [
+          "Check Dog: is it an animal? Yes",
+          "Check Cat: animal? Yes",
+          "Check Lion: animal? Yes",
+          "Check Table: animal? No — it is furniture",
+          "Check Elephant: animal? Yes",
+          "Odd one out: Table"
+        ],
+        "teacherLine": "State the shared property of the group first. Here: all are animals. Then find the one that does NOT have that property."
+      },
+      "readAloudPrompt": "Dog, Cat, Lion, Elephant are all animals. Table is not an animal. Odd one out = Table.",
+      "tryPrompt": "Cricket, Football, Chess, Basketball, Hockey — find the odd one out.  (a) Cricket  (b) Chess  (c) Football  (d) Hockey",
+      "masteryCheck": "Chess",
+      "instantFeedbackWin": "Correct! Cricket, Football, Basketball, Hockey are all physical outdoor sports. Chess is a non-physical indoor board game. Chess is the odd one out.",
+      "instantFeedbackRetry": "All others are physical outdoor sports. Chess is a board game — not physical, not outdoor.",
+      "reviewPrompt": "Make your own odd-one-out puzzle with 5 items and challenge a friend.",
+      "xpReward": 10,
+      "badgeFocus": "Pattern Buster"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "If-Then Chain and Logical Fallacy",
+      "coachHook": "Watch out — knowing the result does not always tell you the cause!",
+      "boardDemo": {
+        "title": "If it rains, the ground is wet. The ground is wet. Did it rain?",
+        "steps": [
+          "Given: Rain → Ground wet",
+          "Observed: Ground is wet",
+          "Question: Does that mean it rained?",
+          "No! Ground could be wet from a pipe leak, sprinkler, or flood",
+          "This is the logical fallacy called Affirming the Consequent",
+          "Answer: Not necessarily"
+        ],
+        "teacherLine": "P → Q (rain causes wet ground). Seeing Q (wet ground) does NOT prove P (rain). Other causes could produce the same result."
+      },
+      "readAloudPrompt": "Rain → Ground wet. But Ground wet does not reverse to: definitely rained. Other causes exist. Answer: Not necessarily.",
+      "tryPrompt": "If a student studies hard, they pass the exam. Raj passed the exam. Did Raj study hard?  (a) Yes, definitely  (b) No, impossible  (c) Not necessarily  (d) Yes, always",
+      "masteryCheck": "Not necessarily",
+      "instantFeedbackWin": "Correct! Raj may have passed due to luck or prior knowledge. The statement only guarantees that studying leads to passing, not the reverse.",
+      "instantFeedbackRetry": "Study → Pass does NOT mean Pass → Studied. Raj passed, but we cannot conclude he studied hard. This is the affirming-the-consequent fallacy.",
+      "reviewPrompt": "Give a real-life example of affirming the consequent — a false reverse conclusion.",
+      "xpReward": 10,
+      "badgeFocus": "Logic Gate"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Speed Logic Round — Mixed Deductions",
+      "coachHook": "Five quick deduction questions — identify the type and solve fast!",
+      "boardDemo": {
+        "title": "Speed Logic Strategy",
+        "steps": [
+          "Comparison puzzle: write the chain immediately",
+          "Direction puzzle: draw a mini compass",
+          "Age puzzle: start from the known age",
+          "If-then: never reverse without checking",
+          "Odd-one-out: state the shared property first"
+        ],
+        "teacherLine": "Identifying the puzzle type takes 3 seconds but prevents wasted effort on the wrong approach."
+      },
+      "readAloudPrompt": "Read, identify type, apply the right technique, answer.",
+      "tryPrompt": "M is heavier than N. N is heavier than O. O is heavier than P. Who is the 2nd lightest?  (a) M  (b) N  (c) O  (d) P",
+      "masteryCheck": "O",
+      "instantFeedbackWin": "Perfect! Chain: M > N > O > P. From lightest: P (1st), O (2nd). Speed round champion!",
+      "instantFeedbackRetry": "Chain: M > N > O > P. From lightest: P is 1st lightest, O is 2nd lightest. Answer: O.",
+      "reviewPrompt": "Explain in two sentences how you would approach a 5-clue ordering problem in an exam.",
+      "xpReward": 15,
+      "badgeFocus": "Logic Legend"
+    }
+  ],
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "B1",
+        "type": "hook",
+        "teacherLine": "Here is a puzzle: All birds can fly. Penguins are birds. Can penguins fly? Most people say yes — but the answer is NO! Penguins are birds but cannot fly. This is why we cannot blindly apply logic rules without thinking carefully. Today we learn to think carefully and catch those traps!",
+        "boardSteps": [
+          "Write: All birds can fly. Penguins are birds.",
+          "Ask: Can penguins fly?",
+          "Reveal: No! The first statement is actually false.",
+          "Lesson: Always question the premises, not just the logic"
+        ],
+        "duration": 60
+      },
+      {
+        "beatId": "B2",
+        "type": "teach",
+        "teacherLine": "Today we cover six puzzle types. Comparison: write the chain. Age: start from the known age. Directions: use the compass. If-then: never reverse without checking. Odd-one-out: state the shared property. Each type has its own technique — master the technique and the puzzle solves itself.",
+        "boardSteps": [
+          "List 6 types with one-line strategy each",
+          "Draw a compass for direction type",
+          "Draw an inequality chain for comparison type",
+          "Show one if-then example with Venn circles"
+        ],
+        "duration": 90
+      },
+      {
+        "beatId": "B3",
+        "type": "practice",
+        "teacherLine": "Try this: You face West. Turn right. Turn right. Turn right. Which direction now? Use the compass — go step by step!",
+        "boardSteps": [
+          "Student draws compass",
+          "West → right → North",
+          "North → right → East",
+          "East → right → South",
+          "Final: South"
+        ],
+        "duration": 90
+      },
+      {
+        "beatId": "B4",
+        "type": "review",
+        "teacherLine": "Logic puzzles are in every competitive exam and in every important decision in life. Remember: chain comparison clues, start age puzzles from the known anchor, draw your compass for directions, and never automatically reverse an if-then statement. You have earned the Logic Legend badge!",
+        "boardSteps": [
+          "Show 6-type summary with one example each",
+          "Highlight the if-then fallacy as a warning",
+          "Display badge: Logic Legend",
+          "Show XP tally"
+        ],
+        "duration": 60
+      }
+    ]
+  }
+}

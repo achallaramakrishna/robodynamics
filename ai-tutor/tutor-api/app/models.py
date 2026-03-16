@@ -124,6 +124,11 @@ class QuestionPayload(BaseModel):
     expectedAnswer: str
     subtopic: Optional[str] = None
     visual: Optional[Dict[str, Any]] = None
+    # ── Rich question types (MCQ, Fill-the-Step, Speed Round) ──
+    questionType: Optional[str] = None          # "text" | "mcq" | "fill_step" | "speed_mcq"
+    options: Optional[List[str]] = None         # MCQ / speed_mcq: answer choices
+    correctIndex: Optional[int] = None          # MCQ / speed_mcq: index of correct option
+    steps: Optional[List[Dict[str, Any]]] = None  # fill_step: [{label, answer, hint?}]
 
 
 class ChapterPayload(BaseModel):
@@ -197,6 +202,9 @@ class CheckAnswerResponse(BaseModel):
     coachTip: Optional[str] = None
     summary: Dict[str, Any]
     sessionProgress: Optional[SessionProgress] = None
+    studentArchetype: Optional[str] = None      # fast_learner | struggling | disengaged | curious | careful_learner
+    silenceRecoveryMs: Optional[int] = None     # ms before coach rescues silent student
+    boardSpeedFactor: Optional[float] = None    # multiplier for board animation speed
 
 
 class DoubtRequest(BaseModel):
@@ -204,6 +212,7 @@ class DoubtRequest(BaseModel):
     message: str
     courseId: Optional[str] = None
     avatarName: Optional[str] = None  # e.g. "Arya", "Ved", "Tara", "Niva"
+    avatarId: Optional[str] = "raj"   # e.g. "raj", "arya", "tara", "ved", "niva"
 
 
 class DoubtResponse(BaseModel):
@@ -217,6 +226,7 @@ class ChatRequest(BaseModel):
     sessionId: str
     message: str
     avatarName: Optional[str] = "Arya"
+    avatarId: Optional[str] = "raj"   # e.g. "raj", "arya", "tara", "ved", "niva"
     courseId: Optional[str] = None
     # Optional hint to the LLM about context ("doubt", "hint_request", "concept_check")
     context: Optional[str] = "doubt"

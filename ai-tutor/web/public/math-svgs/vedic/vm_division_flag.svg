@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230" width="380" height="230" font-family="Nunito,sans-serif">
+  <rect width="380" height="230" rx="14" fill="#f0f9ff"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">Dhvajanka — Flag Division Method</text>
+  <text x="190" y="44" text-anchor="middle" font-size="12" fill="#374151">Example: 196 ÷ 7</text>
+
+  <!-- Divisor box -->
+  <rect x="30" y="56" width="44" height="44" rx="8" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
+  <text x="52" y="84" text-anchor="middle" font-size="28" font-weight="800" fill="#075985">7</text>
+  <text x="52" y="104" text-anchor="middle" font-size="10" fill="#0369a1">divisor</text>
+
+  <!-- Dividend digits -->
+  <rect x="100" y="56" width="44" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="122" y="84" text-anchor="middle" font-size="28" font-weight="800" fill="#b45309">1</text>
+
+  <rect x="156" y="56" width="44" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="178" y="84" text-anchor="middle" font-size="28" font-weight="800" fill="#b45309">9</text>
+
+  <rect x="212" y="56" width="44" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="234" y="84" text-anchor="middle" font-size="28" font-weight="800" fill="#b45309">6</text>
+
+  <!-- Step arrows and working -->
+  <!-- Step 1: 1÷7 → Q=0? No, partial: 1→ carry to 19 -->
+  <text x="122" y="118" text-anchor="middle" font-size="11" fill="#6b7280">↓</text>
+  <text x="122" y="132" text-anchor="middle" font-size="11" fill="#374151">1 carry →</text>
+
+  <!-- Step 2: 19÷7 = 2 rem 5 -->
+  <rect x="150" y="120" width="56" height="28" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="178" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">19÷7=2 r5</text>
+
+  <!-- Step 3: 56÷7 = 8 rem 0 -->
+  <rect x="206" y="120" width="56" height="28" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="234" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">56÷7=8 r0</text>
+
+  <!-- Quotient -->
+  <text x="190" y="170" text-anchor="middle" font-size="13" fill="#374151">Quotient digits: <tspan font-weight="700" fill="#1d4ed8">2</tspan> and <tspan font-weight="700" fill="#1d4ed8">8</tspan></text>
+
+  <!-- Result box -->
+  <rect x="110" y="182" width="160" height="32" rx="10" fill="#075985"/>
+  <text x="190" y="203" text-anchor="middle" font-size="18" font-weight="800" fill="white">196 ÷ 7 = 28</text>
+
+  <text x="190" y="222" text-anchor="middle" font-size="10" fill="#9ca3af">Sutra: Dhvajanka (flag digit carries the remainder)</text>
+</svg>

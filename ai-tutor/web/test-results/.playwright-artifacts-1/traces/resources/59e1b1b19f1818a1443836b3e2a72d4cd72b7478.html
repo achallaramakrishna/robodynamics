@@ -1,0 +1,1784 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AptiPath360 Career Discovery | Robodynamics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f1f8f1;
+      --bg-soft: #e6f2e7;
+      --panel: #ffffff;
+      --panel-soft: #f7fcf7;
+      --line: #c7dec8;
+      --line-soft: #dceadb;
+      --text: #123122;
+      --muted: #486456;
+      --brand: #1d7a47;
+      --brand-deep: #155d35;
+      --accent: #5aa56e;
+      --warning: #f1b956;
+      --shadow: 0 18px 36px rgba(17, 68, 38, 0.12);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 420px at 10% -20%, rgba(90, 165, 110, 0.2), transparent 65%),
+        radial-gradient(900px 320px at 90% 0%, rgba(29, 122, 71, 0.16), transparent 70%),
+        var(--page-bg);
+      font-family: "Nunito", system-ui, -apple-system, Segoe UI, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1160px, 94vw);
+      margin: 0 auto;
+      padding: 1.6rem 0 3.6rem;
+    }
+
+    section {
+      margin-top: 1.4rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 1.2rem;
+      align-items: stretch;
+      background: linear-gradient(180deg, #f4fbf5 0%, #edf7ed 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: clamp(1rem, 2.2vw, 1.8rem);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      background: #dff1e2;
+      border: 1px solid #c5e3cb;
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(1.9rem, 3.8vw, 3rem);
+      line-height: 1.12;
+      color: #0f3925;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 56ch;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.1rem;
+    }
+
+    .hero-meta-item {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 0.55rem 0.7rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero-meta-item strong {
+      display: block;
+      color: var(--brand-deep);
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.05rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.35rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 800;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.72rem 1.2rem;
+      font-size: 0.97rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: 0 12px 22px rgba(29, 122, 71, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--brand-deep);
+      border-color: #b8d7c0;
+      background: #f8fcf8;
+    }
+
+    .hero-media {
+      background: #fff;
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      padding: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid #deebdf;
+    }
+
+    .hero-signal {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-height: 100%;
+    }
+
+    .hero-signal h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      color: #143f27;
+      line-height: 1.28;
+      font-family: "Outfit", sans-serif;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .hero-signal p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .hero-signal .awareness-relevance {
+      font-size: 0.86rem;
+    }
+
+    .media-caption {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      color: #123922;
+    }
+
+    .section-head p {
+      margin: 0.35rem 0 0;
+      color: var(--muted);
+    }
+
+    .insight-grid,
+    .steps,
+    .modules,
+    .careers {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    .insight-grid {
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    .modules,
+    .careers {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .modules {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .module-primary {
+      grid-column: 1 / -1;
+      border: 1px solid #b9dfc2;
+      background: linear-gradient(145deg, #ffffff 0%, #f1fbf3 100%);
+      box-shadow: 0 16px 28px rgba(17, 72, 38, 0.14);
+    }
+
+    .module-secondary {
+      background: #fbfefb;
+      border-color: #d9eadc;
+    }
+
+    .module-badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #b6dbbf;
+      background: #e8f8ec;
+      color: #145b35;
+      border-radius: 999px;
+      padding: 0.2rem 0.58rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .steps {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      box-shadow: 0 10px 24px rgba(16, 64, 34, 0.08);
+    }
+
+    .card h3,
+    .card h4 {
+      margin: 0 0 0.35rem;
+      color: #184b2d;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .insight-value {
+      display: inline-block;
+      font-weight: 800;
+      color: #0f4f2b;
+      background: #ebf8ee;
+      border: 1px solid #cbe6d2;
+      border-radius: 999px;
+      padding: 0.18rem 0.55rem;
+      font-size: 0.82rem;
+      margin-bottom: 0.42rem;
+    }
+
+    .highlight-note {
+      margin-top: 0.8rem;
+      background: #fffdf6;
+      border: 1px solid #eedfbf;
+      border-left: 6px solid var(--warning);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 0.95rem;
+      color: #6d5328;
+      font-size: 0.95rem;
+    }
+
+    .link-panel {
+      margin-top: 0.8rem;
+      background: #f8fcf8;
+      border: 1px dashed #a8cdaf;
+      border-radius: var(--radius-md);
+      padding: 0.8rem 0.95rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .link-panel code {
+      background: #e8f5eb;
+      border-radius: 8px;
+      padding: 0.18rem 0.48rem;
+      color: #145b35;
+      font-size: 0.92rem;
+    }
+
+    .copy-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 0.45rem 0.85rem;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .module-actions {
+      margin-top: 0.7rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .module-primary .module-actions .btn-primary {
+      font-size: 1rem;
+      padding: 0.78rem 1.28rem;
+    }
+
+    .awareness-board {
+      margin-top: 1rem;
+      border: 1px solid #cfe1d1;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #f7fcf8 0%, #edf6ef 100%);
+      padding: 1rem;
+      box-shadow: 0 12px 22px rgba(17, 68, 38, 0.1);
+    }
+
+    .awareness-board,
+    .awareness-board * {
+      box-sizing: border-box;
+    }
+
+    .awareness-topline {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.52rem 0.7rem;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #d9e9dc;
+      color: #18492d;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+
+    .awareness-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1d7a47;
+      box-shadow: 0 0 0 6px rgba(29, 122, 71, 0.14);
+      animation: pulseDot 1.6s ease-in-out infinite;
+      flex: 0 0 10px;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.65; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .awareness-audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.75rem;
+    }
+
+    .awareness-audience-grid > *,
+    .india-focus-grid > * {
+      min-width: 0;
+    }
+
+    .audience-panel {
+      border: 1px solid #d5e6d8;
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .audience-head h3 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      color: #154229;
+      font-size: 1.08rem;
+    }
+
+    .audience-head p {
+      margin: 0.2rem 0 0;
+      color: #4f6759;
+      font-size: 0.86rem;
+    }
+
+    .awareness-card {
+      background: #fff;
+      border: 1px solid #dceadb;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      height: auto;
+    }
+
+    .awareness-hero-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid #e4efe5;
+    }
+
+    .awareness-hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.9rem;
+      min-width: 0;
+    }
+
+    .awareness-hero-content h3 {
+      margin: 0;
+      color: #133d26;
+      font-size: 1.28rem;
+      line-height: 1.25;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .awareness-hero-content p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.95rem;
+    }
+
+    .awareness-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .awareness-side-item {
+      border: 1px solid #dceadb;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 0.7rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .awareness-side-item h4 {
+      margin: 0;
+      color: #184b2d;
+      font-size: 1rem;
+      line-height: 1.28;
+    }
+
+    .awareness-side-item p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.9rem;
+    }
+
+    .awareness-side-row {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 0.55rem;
+      align-items: start;
+    }
+
+    .awareness-side-thumb {
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #deebdf;
+    }
+
+    .awareness-side-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    .awareness-meta {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .awareness-type {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      border: 1px solid #bfe0c7;
+      background: #eaf8ee;
+      color: #145b35;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.16rem 0.5rem;
+    }
+
+    .awareness-readtime {
+      display: inline-flex;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #3f5b4c;
+      background: #eef6ef;
+      border: 1px solid #d7e8da;
+      border-radius: 999px;
+      padding: 0.14rem 0.45rem;
+    }
+
+    .awareness-origin {
+      display: inline-flex;
+      width: fit-content;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0a4a80;
+      background: #e8f3ff;
+      border: 1px solid #c7ddf6;
+      border-radius: 999px;
+      padding: 0.14rem 0.44rem;
+    }
+
+    .awareness-relevance {
+      margin: 0;
+      font-size: 0.83rem;
+      color: #2a5d3e;
+      font-weight: 700;
+    }
+
+    .awareness-link {
+      margin-top: auto;
+      font-weight: 800;
+      color: #155d35;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .awareness-link:hover {
+      text-decoration: underline;
+    }
+
+    .startup-desk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    .startup-desk-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-bottom: 1px solid #e4efe5;
+    }
+
+    .startup-desk-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding: 0.72rem;
+      min-width: 0;
+    }
+
+    .startup-desk-content h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      color: #164428;
+      line-height: 1.26;
+      font-family: "Outfit", sans-serif;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .startup-desk-content p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.89rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .india-focus-strip {
+      border: 1px solid #cfe1d3;
+      border-radius: 13px;
+      background: #f8fcf8;
+      padding: 0.75rem;
+    }
+
+    .india-focus-strip h3 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      font-size: 1.06rem;
+      color: #164328;
+    }
+
+    .india-focus-strip p {
+      margin: 0.2rem 0 0.55rem;
+      font-size: 0.86rem;
+      color: #4e6658;
+    }
+
+    .india-focus-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 0.72rem;
+      align-items: stretch;
+    }
+
+    .india-lead-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-bottom: 1px solid #e4efe5;
+    }
+
+    .india-quick-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.58rem;
+    }
+
+    .india-quick-item {
+      padding: 0.58rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .india-quick-row {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 0.52rem;
+      align-items: start;
+    }
+
+    .india-quick-thumb {
+      width: 78px;
+      height: 78px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #deebdf;
+    }
+
+    .india-quick-copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .india-focus-content {
+      padding: 0.62rem 0.64rem 0.68rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+      min-width: 0;
+    }
+
+    .awareness-hero-content h3,
+    .awareness-side-item h4,
+    .india-focus-content h4,
+    .awareness-relevance,
+    .awareness-link {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .india-focus-content h4 {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.25;
+      color: #17452b;
+    }
+
+    .india-focus-content p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.84rem;
+    }
+
+    .india-builder-strip {
+      margin-top: 0.72rem;
+      border: 1px solid #d6e6d8;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 0.65rem;
+    }
+
+    .india-builder-head h4 {
+      margin: 0;
+      color: #154129;
+      font-size: 1rem;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .india-builder-head p {
+      margin: 0.18rem 0 0.55rem;
+      color: #4d6658;
+      font-size: 0.84rem;
+    }
+
+    .india-builder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.58rem;
+    }
+
+    .india-builder-card {
+      padding: 0.52rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.36rem;
+    }
+
+    .india-builder-card h5 {
+      margin: 0;
+      color: #17452b;
+      font-size: 0.93rem;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .india-builder-card p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.82rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    #indiaLeadTitle,
+    #indiaLeadExcerpt,
+    #indiaLeadBenefit {
+      transition: opacity 0.28s ease;
+    }
+
+    .product-rail {
+      border: 1px solid #cde1d1;
+      border-radius: 12px;
+      background: #fff;
+      padding: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      height: fit-content;
+      margin-top: 0.8rem;
+    }
+
+    .product-rail h4 {
+      margin: 0;
+      color: #123d25;
+      font-size: 1.02rem;
+    }
+
+    .product-rail p {
+      margin: 0;
+      color: #4f6759;
+      font-size: 0.86rem;
+    }
+
+    .product-rail .btn {
+      padding: 0.56rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-media img {
+        min-height: 260px;
+      }
+      .modules {
+        grid-template-columns: 1fr;
+      }
+      .awareness-audience-grid {
+        grid-template-columns: 1fr;
+      }
+      .startup-desk-grid {
+        grid-template-columns: 1fr;
+      }
+      .india-focus-layout {
+        grid-template-columns: 1fr;
+      }
+      .india-builder-grid {
+        grid-template-columns: 1fr;
+      }
+      .india-quick-row {
+        grid-template-columns: 70px 1fr;
+      }
+      .india-quick-thumb {
+        width: 70px;
+        height: 70px;
+      }
+      .awareness-side-row {
+        grid-template-columns: 70px 1fr;
+      }
+      .awareness-side-thumb {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        width: 95vw;
+      }
+      .hero-meta {
+        grid-template-columns: 1fr;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="aptipath-home">
+  
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/resources/css/chat.css">
+
+
+
+
+
+<style>
+  .rd-nav {
+    border-bottom: 1px solid #dbe7df;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
+  }
+
+  .rd-logo {
+    max-height: 46px;
+    width: auto;
+  }
+
+  .rd-brand-text {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #0f2d21;
+  }
+
+  .rd-sub-text {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4a6358;
+    margin-top: -2px;
+  }
+
+  .rd-nav .nav-link {
+    color: #244336;
+    font-weight: 700;
+  }
+
+  .rd-nav .nav-link:hover {
+    color: #0f766e;
+  }
+
+  .rd-nav .btn {
+    white-space: nowrap;
+  }
+
+  .rd-pill {
+    border: 1px solid #cde8dc;
+    background: #ecfdf5;
+    color: #065f46;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    margin-left: 8px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg sticky-top rd-nav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/" aria-label="Robo Dynamics home">
+      <img src="/images/logo.jpg"
+           alt="Robo Dynamics"
+           class="me-2 rd-logo"
+           onerror="this.onerror=null; this.replaceWith(document.createTextNode('Robo Dynamics'));"/>
+      <div>
+        <span class="rd-brand-text">
+          
+            
+            Robo Dynamics
+          
+        </span>
+        <span class="rd-sub-text">
+          
+            
+            Learning platform
+          
+        </span>
+      </div>
+      
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#rdNav"
+            aria-controls="rdNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="rdNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+        
+          
+          
+            <li class="nav-item"><a class="nav-link" href="/">AptiPath360</a></li>
+            <li class="nav-item"><a class="nav-link" href="/exam-prep">ExamPrep360</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tuition-on-demand">Tuition on Demand</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact-us">Contact</a></li>
+          
+        
+
+        <li class="nav-item d-flex gap-2 ms-lg-3 mt-2 mt-lg-0">
+          
+            
+              <a class="btn btn-success btn-sm" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay &#8377;799 + GST</a>
+              <a class="btn btn-outline-dark btn-sm" href="/registerParentChild">Parent Sign Up</a>
+              <a class="btn btn-outline-primary btn-sm" href="/login">Sign In</a>
+            
+            
+          
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<style>
+  .header-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0 1.2rem;
+  }
+
+  .header-module {
+    border-radius: 18px;
+    border: 1px solid rgba(15, 118, 110, 0.4);
+    background: rgba(15, 118, 110, 0.08);
+    padding: 1rem;
+    color: #fff;
+  }
+
+  .header-module.career {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(14, 165, 233, 0.08));
+  }
+
+  .header-module.exam {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(79, 70, 229, 0.08));
+  }
+
+  .header-module.tuition {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.25), rgba(251, 113, 133, 0.08));
+  }
+
+  .header-module .module-icon {
+    font-size: 1.6rem;
+  }
+
+  .header-module p {
+    margin: 0.2rem 0;
+    color: #f8fafc;
+  }
+
+  .header-module a.btn {
+    margin-top: 0.4rem;
+  }
+</style>
+
+
+  <main class="page">
+    
+    
+    
+    
+    
+
+    <section id="career-discover" class="hero">
+      <div class="hero-text">
+        <span class="eyebrow">AptiPath360 Career Discovery</span>
+        <h1>Give your child clear career direction from Grade 8 to College.</h1>
+        <p>
+          Parents do not pay for tests. They pay for confidence. AptiPath360 helps you understand your child&apos;s strengths early,
+          explore the right career paths, and take clear academic steps at every stage from Grade 8, Grade 11-12, and Post-12 college years.
+        </p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <strong>46-72 questions answered</strong>
+            per learner, based on stage
+          </div>
+          <div class="hero-meta-item">
+            <strong>1094-question base</strong>
+            adaptive bank mapped by section depth
+          </div>
+          <div class="hero-meta-item">
+            <strong>&#8377;799</strong>
+            base fee (+ GST at checkout)
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/registerParentChild;jsessionid=81AC40D0F5CD5C7BF28F1925DC06786F?plan=career-basic&redirect=%2fplans%2fcheckout%3fplan%3dcareer-basic">Pay &#8377;799 + GST - Start AptiPath360</a>
+        </div>
+        <p class="media-caption">Final payable amount is shown transparently on the secure checkout page.</p>
+        <p class="media-caption">
+          Already registered? <a href="/login;jsessionid=81AC40D0F5CD5C7BF28F1925DC06786F?intent=aptipath360&redirect=%2faptipath%2fparent%2fhome">Login and continue</a>.
+        </p>
+      </div>
+
+      <figure class="hero-media">
+        <img src="/resources/images/hero_parents.jpg" alt="Parent and daughter discussing future career plans"/>
+        <figcaption class="media-caption">
+          One shared family decision: map your child strengths first, then invest in the right path.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="awareness-updates">
+      <div class="section-head">
+        <h2>India Startup Career Desk (2026-2036)</h2>
+        <p>Each card opens a shareable compiled brief with company-level signals and student skill mapping. Source links are optional references.</p>
+      </div>
+      <div class="startup-desk-grid">
+        
+          <article class="startup-desk-card awareness-card" data-headline="Indian AI Startup Hiring Signals 2026: Sarvam AI, Krutrim, Fractal, Yellow.ai">
+            
+              
+              
+                <img src="/resources/images/Ai2.jpg" alt="Indian AI Startup Hiring Signals 2026: Sarvam AI, Krutrim, Fractal, Yellow.ai" />
+              
+            
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">1 min read</span>
+              </div>
+              <h3>Indian AI Startup Hiring Signals 2026: Sarvam AI, Krutrim, Fractal, Yellow.ai</h3>
+              <p>India AI companies in focus: Sarvam AI (Indian language stack), Krutrim (consumer + platform AI), Fractal (enterprise decision AI), Yellow.ai (conversational automation), and Mad Street Den (retail vision AI). Current hiring movement is strongest in applied ML, data engineering, evaluation, AI product management, and domain analytics. Student starter stack for the next 12 months: Python, SQL, statistics, communication, and mini-project execution.</p>
+              <p class="awareness-relevance">Career Track: AI & Data Careers (2026-2036)</p>
+              <p class="awareness-relevance">Skill Focus: Coding, Statistics, Data Literacy, Product Thinking</p>
+              <p class="awareness-relevance">Parent Action: choose one AI startup use-case with your child and map skill gaps in AptiPath360.</p>
+              <a class="awareness-link" href="/insights/13/indian-ai-startup-hiring-signals-2026-sarvam-ai-krutrim-fractal-yellow-ai">Read Full Brief &rarr;</a>
+              
+              <a class="awareness-link" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360 &rarr;</a>
+            </div>
+          </article>
+        
+          <article class="startup-desk-card awareness-card" data-headline="India EV and Climate Startup Signals 2026: Ather, Ola Electric, Exponent, Log9">
+            
+              
+              
+                <img src="/resources/images/Ai3.jpg" alt="India EV and Climate Startup Signals 2026: Ather, Ola Electric, Exponent, Log9" />
+              
+            
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">1 min read</span>
+              </div>
+              <h3>India EV and Climate Startup Signals 2026: Ather, Ola Electric, Exponent, Log9</h3>
+              <p>Companies in focus: Ather and Ola Electric (EV products), Exponent and Log9 (battery and charging innovation), Ultraviolette (performance EV engineering). Hiring signals: battery systems, embedded electronics, quality operations, vehicle software, and product testing. Student skill map: physics, chemistry, CAD basics, coding fundamentals, and systems thinking.</p>
+              <p class="awareness-relevance">Career Track: EV & ClimateTech Careers (2026-2036)</p>
+              <p class="awareness-relevance">Skill Focus: Science, Product Design, Engineering Basics, Data Use</p>
+              <p class="awareness-relevance">Parent Action: discuss one EV or climate startup with your child and map science-to-career actions in AptiPath360.</p>
+              <a class="awareness-link" href="/insights/12/india-ev-and-climate-startup-signals-2026-ather-ola-electric-exponent-log9">Read Full Brief &rarr;</a>
+              
+                <a class="awareness-link" href="https://www.ecampusnews.com/ai-in-education/2026/02/23/most-students-must-use-ai-for-classwork/" target="_blank" rel="noopener">Reference Source (ecampusnews.com) &rarr;</a>
+              
+              <a class="awareness-link" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360 &rarr;</a>
+            </div>
+          </article>
+        
+          <article class="startup-desk-card awareness-card" data-headline="India Startup and Future Careers Brief 2026: Sector Signals and Student Skill Map">
+            
+              
+              
+                <img src="/resources/images/Ai.jpg" alt="India Startup and Future Careers Brief 2026: Sector Signals and Student Skill Map" />
+              
+            
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">1 min read</span>
+              </div>
+              <h3>India Startup and Future Careers Brief 2026: Sector Signals and Student Skill Map</h3>
+              <p>Compiled brief: Career trends become useful only when converted into weekly student actions. This update maps India-focused future careers to practical learning steps. Hiring signals are stronger in AI/Data, SpaceTech, EV/Climate, and product-led startups. Student skill map: coding fundamentals, data literacy, science-math rigor, communication, and execution discipline through mini projects.</p>
+              <p class="awareness-relevance">Career Track: Future Careers in India (2026-2036)</p>
+              <p class="awareness-relevance">Skill Focus: Core STEM + Communication + Decision Skills</p>
+              <p class="awareness-relevance">Parent Action: use AptiPath360 to convert this insight into a monthly child skill plan.</p>
+              <a class="awareness-link" href="/insights/15/india-startup-and-future-careers-brief-2026-sector-signals-and-student-skill-map">Read Full Brief &rarr;</a>
+              
+              <a class="awareness-link" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360 &rarr;</a>
+            </div>
+          </article>
+        
+          <article class="startup-desk-card awareness-card" data-headline="India Curriculum and Career Shift 2026: What CBSE/NCERT Updates Mean for Students">
+            
+              
+              
+                <img src="/resources/images/mega-olympiad.png" alt="India Curriculum and Career Shift 2026: What CBSE/NCERT Updates Mean for Students" />
+              
+            
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">1 min read</span>
+              </div>
+              <h3>India Curriculum and Career Shift 2026: What CBSE/NCERT Updates Mean for Students</h3>
+              <p>Policy signals are increasingly rewarding application-based learning, project work, and communication depth. Student preparation should combine core subject clarity with skill demonstrations such as coding tasks, data interpretation, writing, and teamwork. Weekly family review can align exam readiness with long-term career goals.</p>
+              <p class="awareness-relevance">Career Track: Academic-to-Career Pathways (2026-2036)</p>
+              <p class="awareness-relevance">Skill Focus: Concept Clarity, Problem Solving, Communication, Consistency</p>
+              <p class="awareness-relevance">Parent Action: convert one policy update into a monthly learning plan in AptiPath360.</p>
+              <a class="awareness-link" href="/insights/14/india-curriculum-and-career-shift-2026-what-cbse-ncert-updates-mean-for-students">Read Full Brief &rarr;</a>
+              
+              <a class="awareness-link" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360 &rarr;</a>
+            </div>
+          </article>
+        
+          <article class="startup-desk-card awareness-card" data-headline="India Curriculum and Career Shift 2026: What CBSE/NCERT Updates Mean for Students">
+            
+              
+              
+                <img src="/resources/images/Ai3.jpg" alt="India Curriculum and Career Shift 2026: What CBSE/NCERT Updates Mean for Students" />
+              
+            
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">1 min read</span>
+              </div>
+              <h3>India Curriculum and Career Shift 2026: What CBSE/NCERT Updates Mean for Students</h3>
+              <p>Policy signals are increasingly rewarding application-based learning, project work, and communication depth. Student preparation should combine core subject clarity with skill demonstrations such as coding tasks, data interpretation, writing, and teamwork. Weekly family review can align exam readiness with long-term career goals.</p>
+              <p class="awareness-relevance">Career Track: Academic-to-Career Pathways (2026-2036)</p>
+              <p class="awareness-relevance">Skill Focus: Concept Clarity, Problem Solving, Communication, Consistency</p>
+              <p class="awareness-relevance">Parent Action: convert one policy update into a monthly learning plan in AptiPath360.</p>
+              <a class="awareness-link" href="/insights/11/india-curriculum-and-career-shift-2026-what-cbse-ncert-updates-mean-for-students">Read Full Brief &rarr;</a>
+              
+                <a class="awareness-link" href="https://www.theguardian.com/education/ng-interactive/2026/mar/03/cheating-machine-or-powerful-assistant-the-ai-anxieties-of-a-trainee-teacher" target="_blank" rel="noopener">Reference Source (theguardian.com) &rarr;</a>
+              
+              <a class="awareness-link" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360 &rarr;</a>
+            </div>
+          </article>
+        
+          <article class="startup-desk-card awareness-card" data-headline="AptiPath360 Weekly Parent Newsletter - 2026-03-05">
+            
+              
+              
+                <img src="/resources/images/robotics.jpg" alt="AptiPath360 Weekly Parent Newsletter - 2026-03-05" />
+              
+            
+            <div class="startup-desk-content">
+              <div class="awareness-meta">
+                <span class="awareness-type">India Startup</span>
+                <span class="awareness-readtime">1 min read</span>
+              </div>
+              <h3>AptiPath360 Weekly Parent Newsletter - 2026-03-05</h3>
+              <p>Compiled brief: Weekly curated newsletter with source links for parents. Click to read full issue. Hiring signals are stronger in AI/Data, SpaceTech, EV/Climate, and product-led startups. Student skill map: coding fundamentals, data literacy, science-math rigor, communication, and execution discipline through mini projects.</p>
+              <p class="awareness-relevance">Career Track: Future Careers in India (2026-2036)</p>
+              <p class="awareness-relevance">Skill Focus: Core STEM + Communication + Decision Skills</p>
+              <p class="awareness-relevance">Parent Action: use AptiPath360 to convert this insight into a monthly child skill plan.</p>
+              <a class="awareness-link" href="/insights/10/aptipath360-weekly-parent-newsletter-2026-03-05">Read Full Brief &rarr;</a>
+              
+              <a class="awareness-link" href="/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360 &rarr;</a>
+            </div>
+          </article>
+        
+      </div>
+
+      <aside class="product-rail">
+        <h4>Convert Insight to Revenue</h4>
+        <p>Keep AptiPath360 as the first action after every story.</p>
+        <a class="btn btn-primary" href="/registerParentChild;jsessionid=81AC40D0F5CD5C7BF28F1925DC06786F?plan=career-basic&redirect=%2fplans%2fcheckout%3fplan%3dcareer-basic">Start AptiPath360</a>
+        <a class="btn btn-secondary" href="/exam-prep">ExamPrep360</a>
+        <a class="btn btn-secondary" href="/tuition-on-demand">Tuition on Demand</a>
+      </aside>
+    </section>
+
+    <section id="career-horizon">
+      <div class="section-head">
+        <h2>Career Horizon Map (2026-2036)</h2>
+        <p>Map startup activity to real career tracks and child skill development.</p>
+      </div>
+      <div class="careers">
+        <article class="card">
+          <h4>SpaceTech & ISRO Tracks</h4>
+          <p>Math, physics, satellite systems, mission planning.</p>
+        </article>
+        <article class="card">
+          <h4>EV & ClimateTech Tracks</h4>
+          <p>Battery systems, product engineering, mobility design.</p>
+        </article>
+        <article class="card">
+          <h4>AI & Data Tracks</h4>
+          <p>Coding, data literacy, responsible AI problem solving.</p>
+        </article>
+        <article class="card">
+          <h4>Startup Product Tracks</h4>
+          <p>Creativity, product thinking, execution, communication.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Preview insights before you pay</h2>
+        <p>Parents can view what type of output they will receive after the test.</p>
+      </div>
+      <div class="insight-grid">
+        <article class="card">
+          <span class="insight-value">Interest Heatmap</span>
+          <h4>What your child naturally enjoys</h4>
+          <p>AI/Tech, Green Careers, Healthcare, or Data decision patterns from actual responses.</p>
+        </article>
+        <article class="card">
+          <span class="insight-value">Learning Behavior</span>
+          <h4>How your child solves problems</h4>
+          <p>Analytical vs creative style, confidence level, and support style recommended for parents.</p>
+        </article>
+        <article class="card">
+          <span class="insight-value">Career Match Score</span>
+          <h4>Top 3 future-ready paths</h4>
+          <p>Practical mapping to roles like AI Engineer, Health AI Builder, Green Systems Designer.</p>
+        </article>
+        <article class="card">
+          <span class="insight-value">Action Roadmap</span>
+          <h4>What to do in next 90 days</h4>
+          <p>Subject focus, project ideas, and skill-building actions by grade and board.</p>
+        </article>
+      </div>
+      <p class="highlight-note">
+        You get a clear report card, not generic motivation text. This is why parents find value before buying coaching.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Simple parent flow</h2>
+        <p>Designed for busy parents: quick setup, clear output, and easy follow-through.</p>
+      </div>
+      <div class="steps">
+        <article class="card">
+          <h4>1. Parent registers first</h4>
+          <p>Create parent and student accounts together in one registration flow.</p>
+        </article>
+        <article class="card">
+          <h4>2. Parent makes payment</h4>
+          <p>Pay once using Razorpay: <strong>&#8377;799 base</strong> + GST for Grade 8 to College/Post-12 learners.</p>
+        </article>
+        <article class="card">
+          <h4>3. Existing parent path</h4>
+          <p>Already registered parents login, finish payment if pending, then continue in parent workspace.</p>
+        </article>
+        <article class="card">
+          <h4>4. Parent shares student link</h4>
+          <p>From parent workspace, generate/share student login link. Student logs in and starts AptiPath360 Career Discovery.</p>
+        </article>
+      </div>
+      <div class="link-panel">
+        <span>Student access link:</span>
+        <code id="studentLink">http://robodynamics.in/login;jsessionid=81AC40D0F5CD5C7BF28F1925DC06786F?redirect=%2faptipath%2fstudent%2fhome</code>
+        <button class="copy-btn" id="copyLink">Copy</button>
+      </div>
+    </section>
+
+    <section id="career-pricing">
+      <div class="section-head">
+        <h2>Modules your family can choose</h2>
+        <p>Start with AptiPath360 Career Discovery for Grade 8 to College, then add targeted support only where needed.</p>
+      </div>
+      <div class="modules">
+        <article class="card module-primary">
+          <span class="module-badge">Recommended First Step</span>
+          <h3>AptiPath360 Career Discovery</h3>
+          <p>Adaptive assessment + career signal report + action roadmap for Grade 8, Grade 11-12, and Post-12 students. Start here before spending on classes, so you invest only where needed.</p>
+          <div class="module-actions">
+            <a class="btn btn-primary" href="/registerParentChild;jsessionid=81AC40D0F5CD5C7BF28F1925DC06786F?plan=career-basic&redirect=%2fplans%2fcheckout%3fplan%3dcareer-basic">Pay &#8377;799 + GST and Start</a>
+            <a class="btn btn-secondary" href="/login;jsessionid=81AC40D0F5CD5C7BF28F1925DC06786F?intent=aptipath360&redirect=%2faptipath%2fparent%2fhome">Open Parent Dashboard</a>
+          </div>
+        </article>
+        <article id="exam-courses" class="card module-secondary">
+          <span class="module-badge">After Discovery</span>
+          <h3>ExamPrep360</h3>
+          <p>Board-focused practice, model answers, and final-exam readiness support.</p>
+          <p><strong>Basic Plan: Rs 1999</strong> one-time.</p>
+          <div class="module-actions">
+            <a class="btn btn-primary" href="/plans/checkout?plan=exam-basic">Start ExamPrep360 - Rs 1999</a>
+            <a class="btn btn-secondary" href="/exam-prep">Explore Exam Prep</a>
+            
+          </div>
+        </article>
+        <article id="tuition-info" class="card module-secondary">
+          <span class="module-badge">After Discovery</span>
+          <h3>Tuition on Demand</h3>
+          <p>One-to-one help only in weak areas identified through the assessment report.</p>
+          <div class="module-actions">
+            <a class="btn btn-secondary" href="/tuition-on-demand">Explore Tuition</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Future career clusters we map</h2>
+      </div>
+      <div class="careers">
+        <article class="card">
+          <h4>AI Engineer Track</h4>
+          <p>Logic, coding comfort, and systems thinking patterns.</p>
+        </article>
+        <article class="card">
+          <h4>Green Energy Track</h4>
+          <p>Sustainability mindset, science curiosity, and design choices.</p>
+        </article>
+        <article class="card">
+          <h4>Health Innovation Track</h4>
+          <p>Empathy, biology interest, and tech-for-people orientation.</p>
+        </article>
+        <article class="card">
+          <h4>Data Strategy Track</h4>
+          <p>Pattern recognition, structured thinking, and decision logic.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  
+
+
+
+
+
+<style>
+#rdAppFooter {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100%;
+}
+
+#rdChatLauncher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 56px;
+  height: 56px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #fff;
+
+  font-size: 24px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#rdChatLauncher:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+}
+
+#rdChatLauncher:active {
+  transform: scale(0.96);
+}
+
+</style>
+<!-- ================= FOOTER ================= -->
+<footer id="rdAppFooter" class="pt-5 pb-4 mt-auto" style="background:#0b1c2d;color:#cfd8dc;">
+  <div class="container">
+    
+      
+      
+        <div class="row gy-4">
+          <div class="col-md-4">
+            <h6 class="text-white fw-semibold">Robo Dynamics</h6>
+            <p class="small">
+              Platform for AptiPath360 Career Discovery, ExamPrep360, and Tuition journeys with
+              parent, student, and mentor workflows.
+            </p>
+          </div>
+
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Products</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="/">AptiPath360 Career Discovery</a></li>
+              <li><a class="text-decoration-none text-light" href="/courses">ExamPrep360</a></li>
+              <li><a class="text-decoration-none text-light" href="/parents/demo?source=footer_tuition_quote">Tuition Guidance</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-3">
+            <h6 class="text-white fw-semibold">Platform</h6>
+            <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="/platform/modules">Parent Dashboard</a></li>
+              <li><a class="text-decoration-none text-light" href="/studentDashboard">Student Dashboard</a></li>
+              <li><a class="text-decoration-none text-light" href="/mentor/dashboard">Mentor Dashboard</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2">
+            <h6 class="text-white fw-semibold">Contact</h6>
+            <ul class="list-unstyled small">
+              <li>Bengaluru, India</li>
+              <li><a class="text-decoration-none text-light" href="tel:+918374377311">+91 83743 77311</a></li>
+              <li><a class="text-decoration-none text-light" href="https://robodynamics.in" target="_blank">robodynamics.in</a></li>
+            </ul>
+          </div>
+        </div>
+      
+    
+
+    <div class="text-center small mt-4 pt-3"
+         style="border-top:1px solid rgba(255,255,255,0.1);color:#b0bec5;">
+      (c) 2026 Robo Dynamics. All rights reserved.
+    </div>
+  </div>
+</footer>
+<!-- ================= CHAT FLOAT BUTTON ================= -->
+
+
+<!-- ================= CHAT OFFCANVAS ================= -->
+<div class="offcanvas offcanvas-end"
+     tabindex="-1"
+     id="chatCanvas"
+     style="width:380px">
+
+  <div class="offcanvas-header">
+    <h6 class="offcanvas-title">Robo Dynamics Chat</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+<div class="offcanvas-body p-0 d-flex flex-column" id="chatCanvasBody">
+    <div class="text-center text-muted mt-4">Loading chat...</div>
+  </div>
+</div>
+
+<!-- ================= BOOTSTRAP JS (ONCE) ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+<!-- ================= GLOBAL CHAT JS ================= -->
+<script>
+  const BASE = '';
+//---- prevent duplicate messages
+  const seenMessageIds = new Set();
+
+
+  let chatCanvas;
+
+  // ---- Conversation state
+  let conversationId = 0;
+  let currentUserId = 0;
+
+  // ---- WebSocket state
+  let stompClient = null;
+  let stompSub = null;
+  let wsConnecting = false;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    chatCanvas = new bootstrap.Offcanvas('#chatCanvas');
+
+    const launcher = document.getElementById('rdChatLauncher');
+    if (launcher) {
+      launcher.addEventListener('click', () => {
+        chatCanvas.show();
+        loadInbox();
+      });
+    }
+  });
+
+  // -----------------------------
+  // Inbox load (HTML fragment)
+  // -----------------------------
+  window.loadInbox = function () {
+    fetch(BASE + '/chat')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('chatCanvasBody').innerHTML = html;
+        // optional: stop subscription when leaving conversation
+        wsUnsubscribe();
+      })
+      .catch(err => console.error('Failed to load inbox', err));
+  };
+
+  // -----------------------------
+  // Open conversation (HTML fragment + WS subscribe)
+  // -----------------------------
+  window.openConversation = function (cid) {
+    fetch(BASE + '/chat/conversation/' + cid)
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('chatCanvasBody').innerHTML = html;
+        seedSeenMessageIdsFromDom();   // ✅ ADD THIS
+        initConversation(cid);
+      })
+      .catch(err => console.error('Failed to open conversation', err));
+  };
+
+  // -----------------------------
+  // Start direct chat (AJAX submit)
+  // IMPORTANT: your controller returns redirect -> HTML fetch will follow it,
+  // but fetch() usually returns the redirected HTML content.
+  // -----------------------------
+  window.startChat = function (form) {
+    const formData = new FormData(form);
+
+    fetch(form.action, { method: 'POST', body: formData })
+      .then(res => res.text())
+      .then(html => {
+        const body = document.getElementById('chatCanvasBody');
+        body.innerHTML = html;
+        
+        seedSeenMessageIdsFromDom();   // ✅ ADD THIS
+
+
+        // read conversationId from conversationRoot
+        const root = body.querySelector('#conversationRoot[data-conversation-id]');
+        if (root && root.dataset.conversationId) {
+          initConversation(Number(root.dataset.conversationId));
+        } else {
+          // fallback: no conversationRoot means server maybe returned inbox/errors
+          wsUnsubscribe();
+        }
+      })
+      .catch(err => console.error('startChat failed', err));
+
+    return false;
+  };
+
+  // -----------------------------
+  // Init conversation state + WS subscribe
+  // -----------------------------
+  function initConversation(cid) {
+    conversationId = Number(cid || 0);
+    if (!conversationId) return;
+
+    wsSubscribe(conversationId);
+    setTimeout(scrollBottom, 60);
+  }
+
+  // -----------------------------
+  // WebSocket connect / subscribe
+  // -----------------------------
+  function wsConnect(cb) {
+    if (stompClient && stompClient.connected) {
+      cb && cb();
+      return;
+    }
+    if (wsConnecting) return;
+
+    wsConnecting = true;
+
+    // SockJS endpoint is relative to contextPath => BASE + '/ws-chat'
+    const socket = new SockJS(BASE + '/ws-chat');
+    stompClient = Stomp.over(socket);
+    stompClient.debug = null; // silence logs
+
+    stompClient.connect({}, () => {
+      wsConnecting = false;
+      cb && cb();
+    }, (err) => {
+      wsConnecting = false;
+      console.error('WS connect error', err);
+    });
+  }
+
+  function wsSubscribe(cid) {
+    wsConnect(() => {
+      wsUnsubscribe();
+      stompSub = stompClient.subscribe('/topic/conversation.' + cid, (frame) => {
+        try {
+          const msg = JSON.parse(frame.body);
+          appendMessage(msg);
+          scrollBottom();
+        } catch (e) {
+          console.error('WS parse error', e);
+        }
+      });
+    });
+  }
+
+  function wsUnsubscribe() {
+    if (stompSub) {
+      try { stompSub.unsubscribe(); } catch (e) {}
+      stompSub = null;
+    }
+  }
+
+  // -----------------------------
+  // Send message via WebSocket
+  // -----------------------------
+  window.sendMessage = function () {
+    const input = document.getElementById("messageText");
+    if (!input) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = "";
+
+    // WS send (server will persist + broadcast)
+    wsConnect(() => {
+      if (!conversationId) return;
+
+      stompClient.send("/app/chat.send", {}, JSON.stringify({
+        conversationId: Number(conversationId),
+        messageText: text
+      }));
+    });
+  };
+
+  // -----------------------------
+  // UI helpers
+  // -----------------------------
+  function scrollBottom() {
+    const box = document.getElementById("chatBox");
+    if (!box) return;
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function seedSeenMessageIdsFromDom() {
+	  seenMessageIds.clear();
+	  document.querySelectorAll('#chatBox .msg[data-id]').forEach(el => {
+	    const id = el.getAttribute('data-id');
+	    if (id) seenMessageIds.add(String(id));
+	  });
+	}
+
+
+  // This was missing in your file but used in poll()
+ function appendMessage(m) {
+  const box = document.getElementById("chatBox");
+  if (!box) return;
+
+  const mid = m.messageId != null ? String(m.messageId) : null;
+
+  // ✅ STOP duplicates here
+  if (mid && seenMessageIds.has(mid)) return;
+
+  const sender = Number(m.senderUserId ?? 0);
+  const text = m.messageText ?? "";
+  const createdAt = m.createdAt ?? "";
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "msg " + (sender === Number(currentUserId) ? "me" : "");
+  if (mid) wrapper.setAttribute("data-id", mid);
+
+  wrapper.innerHTML =
+    '<div class="bubble">' +
+      '<div>' + escapeHtml(text) + '</div>' +
+      '<div class="meta">' +
+        (sender === Number(currentUserId) ? "You" : "Other") +
+        (createdAt ? (" • " + escapeHtml(createdAt)) : "") +
+      '</div>' +
+    '</div>';
+
+  box.appendChild(wrapper);
+
+  if (mid) seenMessageIds.add(mid); // ✅ mark seen
+}
+
+</script>
+
+
+
+  <script>
+    (function () {
+      const copyBtn = document.getElementById("copyLink");
+      const linkEl = document.getElementById("studentLink");
+      if (copyBtn && linkEl) {
+        copyBtn.addEventListener("click", function () {
+          navigator.clipboard.writeText(linkEl.textContent).then(() => {
+            this.textContent = "Copied";
+            setTimeout(() => {
+              this.textContent = "Copy";
+            }, 1200);
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

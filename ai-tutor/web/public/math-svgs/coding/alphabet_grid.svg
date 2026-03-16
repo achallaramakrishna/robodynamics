@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 60">
+  <!-- 26 letter boxes A-Z in a single row -->
+  <rect x="5"   y="5" width="280" height="50" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <!-- Letters A-N -->
+  <text x="19"  y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">A</text>
+  <text x="39"  y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">B</text>
+  <text x="59"  y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">C</text>
+  <text x="79"  y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">D</text>
+  <text x="99"  y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">E</text>
+  <text x="119" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">F</text>
+  <text x="139" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">G</text>
+  <text x="159" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">H</text>
+  <text x="179" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">I</text>
+  <text x="199" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">J</text>
+  <text x="219" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">K</text>
+  <text x="239" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">L</text>
+  <text x="259" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">M</text>
+  <text x="279" y="36" font-family="monospace" font-size="13" fill="#1e293b" text-anchor="middle">N</text>
+  <!-- Numbers 1-14 below -->
+  <text x="19"  y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">1</text>
+  <text x="39"  y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">2</text>
+  <text x="59"  y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">3</text>
+  <text x="79"  y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">4</text>
+  <text x="99"  y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">5</text>
+  <text x="119" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">6</text>
+  <text x="139" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">7</text>
+  <text x="159" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">8</text>
+  <text x="179" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">9</text>
+  <text x="199" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">10</text>
+  <text x="219" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">11</text>
+  <text x="239" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">12</text>
+  <text x="259" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">13</text>
+  <text x="279" y="52" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">14</text>
+</svg>

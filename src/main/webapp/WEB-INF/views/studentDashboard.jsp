@@ -141,6 +141,70 @@
       </c:if>
     </section>
 
+    <c:if test="${hasAnyMindsutraEnabled}">
+    <section class="student-ai-tutor-section">
+      <div class="student-section-head">
+        <div>
+          <h2 class="student-section-title">MindSutra Vedic Math</h2>
+          <p class="student-section-sub">Grade-specific AI Tutor — CBSE-aligned Vedic Math with instant feedback and voice coaching.</p>
+        </div>
+        <span class="course-total-pill">AI Tutor</span>
+      </div>
+      <div class="ai-tutor-card-grid">
+        <c:if test="${mindsutrag4Enabled}">
+        <article class="ai-tutor-card ai-tutor-vedic">
+          <p class="course-kicker">Grade 4 &middot; AI Tutor</p>
+          <h3 class="course-name">MindSutra Grade 4 Vedic Math</h3>
+          <p class="side-note">Complements, tables 11-19, doubling, near-100, and criss-cross multiplication.</p>
+          <a href="${ctx}/ai-tutor/launch?module=VEDIC_MATH_G4" class="btn btn-primary">
+            <i class="fas fa-brain me-1"></i> Launch Tutor
+          </a>
+        </article>
+        </c:if>
+        <c:if test="${mindsutrag5Enabled}">
+        <article class="ai-tutor-card ai-tutor-vedic">
+          <p class="course-kicker">Grade 5 &middot; AI Tutor</p>
+          <h3 class="course-name">MindSutra Grade 5 Vedic Math</h3>
+          <p class="side-note">Nikhilam 3-digit, criss-cross, fractions, decimals, and flag division.</p>
+          <a href="${ctx}/ai-tutor/launch?module=VEDIC_MATH_G5" class="btn btn-primary">
+            <i class="fas fa-brain me-1"></i> Launch Tutor
+          </a>
+        </article>
+        </c:if>
+        <c:if test="${mindsutrag6Enabled}">
+        <article class="ai-tutor-card ai-tutor-vedic">
+          <p class="course-kicker">Grade 6 &middot; AI Tutor</p>
+          <h3 class="course-name">MindSutra Grade 6 Vedic Math</h3>
+          <p class="side-note">Vinculum, integers, HCF/LCM, squares, Paravartya, and intro algebra.</p>
+          <a href="${ctx}/ai-tutor/launch?module=VEDIC_MATH_G6" class="btn btn-primary">
+            <i class="fas fa-brain me-1"></i> Launch Tutor
+          </a>
+        </article>
+        </c:if>
+        <c:if test="${mindsutrag7Enabled}">
+        <article class="ai-tutor-card ai-tutor-vedic">
+          <p class="course-kicker">Grade 7 &middot; AI Tutor</p>
+          <h3 class="course-name">MindSutra Grade 7 Vedic Math</h3>
+          <p class="side-note">Squaring, rational numbers, linear equations, cubics, and identities.</p>
+          <a href="${ctx}/ai-tutor/launch?module=VEDIC_MATH_G7" class="btn btn-primary">
+            <i class="fas fa-brain me-1"></i> Launch Tutor
+          </a>
+        </article>
+        </c:if>
+        <c:if test="${mindsutrag8Enabled}">
+        <article class="ai-tutor-card ai-tutor-vedic">
+          <p class="course-kicker">Grade 8 &middot; AI Tutor</p>
+          <h3 class="course-name">MindSutra Grade 8 Vedic Math</h3>
+          <p class="side-note">Square roots, advanced identities, simultaneous equations, and divisibility.</p>
+          <a href="${ctx}/ai-tutor/launch?module=VEDIC_MATH_G8" class="btn btn-primary">
+            <i class="fas fa-brain me-1"></i> Launch Tutor
+          </a>
+        </article>
+        </c:if>
+      </div>
+    </section>
+    </c:if>
+
     <div class="student-workspace">
       <section class="student-course-section">
         <div class="student-section-head">

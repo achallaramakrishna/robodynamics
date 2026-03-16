@@ -1,0 +1,692 @@
+{
+  "chapterCode": "AR_G6_L4_VENN",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Venn Diagrams",
+  "source": "MindSpark Grade 6 Aptitude & Reasoning | Chapter 4: Venn Diagrams",
+  "estimatedMinutes": 18,
+  "subtopics": [
+    "Reading a 2-Circle Venn — Only A",
+    "Finding the Intersection Count",
+    "Finding Neither (Outside Both Circles)",
+    "Drawing a Venn from Given Numbers",
+    "Word Problem with 2-Circle Venn",
+    "Reading a 3-Circle Venn",
+    "3-Circle Intersection",
+    "Venn with Formula n(A union B)",
+    "Speed Challenge"
+  ],
+  "learningGoals": [
+    "Read a 2-circle Venn diagram and identify Only A, Only B, Both A and B, and Neither.",
+    "Use the formula n(A union B) = n(A) + n(B) - n(A intersection B) to find missing values.",
+    "Interpret a 3-circle Venn diagram and identify regions including the triple intersection."
+  ],
+  "coreIdeas": [
+    "A Venn diagram uses overlapping circles. The overlap (intersection) contains elements that belong to BOTH sets.",
+    "Only A = total A minus the intersection. Only B = total B minus the intersection.",
+    "The union formula avoids double-counting: n(A union B) = n(A) + n(B) - n(A intersection B)."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "In a class of 40 students, 25 play Cricket, 20 play Football, and 10 play both. How many play only Cricket?",
+      "solution": "Only Cricket = Total Cricket - Both = 25 - 10 = 15. Only Football = 20 - 10 = 10. Neither = 40 - (15+10+10) = 5.",
+      "concept": "2-circle Venn: Only A = n(A) - n(A intersection B)"
+    },
+    {
+      "id": "WE2",
+      "problem": "n(A) = 30, n(B) = 25, n(A union B) = 45. Find n(A intersection B).",
+      "solution": "Formula: n(A union B) = n(A) + n(B) - n(A intersection B). So 45 = 30 + 25 - n(A intersection B). n(A intersection B) = 55 - 45 = 10.",
+      "concept": "Union formula to find the intersection"
+    },
+    {
+      "id": "WE3",
+      "problem": "In a Venn diagram with 3 circles A, B, C — the triple intersection (A and B and C) has 4 elements. A and B only (excluding C) has 6. How many are in A and B combined (all regions that include both A and B)?",
+      "solution": "Regions including both A and B: A-and-B-only region = 6, plus A-and-B-and-C = 4. Total in A-intersect-B = 6 + 4 = 10.",
+      "concept": "3-circle Venn: intersection region = pairwise only + triple"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g6-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I have done this before"],
+      "goalOptions": ["School exams", "Olympiad prep", "Brain training"],
+      "coachIntro": "Spark introduces Venn diagrams with a real-life example: students who like Science, students who like Maths, and students who like both. The first warm-up draws a simple 2-circle diagram.",
+      "placementRule": "Start all learners at Group A. If a learner gives correct answers for Groups A, B, C without any hints, skip Group D (draw Venn) and go directly to Group E (word problem)."
+    },
+    "mission": {
+      "missionTitle": "Map the Overlaps",
+      "missionPromise": "By the end you will read, draw, and solve any Venn diagram question — including the tricky 3-circle type — like a data scientist!",
+      "successCelebration": "Show 'Venn Explorer' badge after Group E. Final badge is 'Venn Diagram Master' after Group I."
+    },
+    "microLessonPattern": [
+      "Coach draws the Venn diagram on the board and labels each region.",
+      "Coach reads the numbers from a given scenario into the correct regions.",
+      "Coach asks the student to identify a specific region.",
+      "Student reads the value from the described diagram.",
+      "Instant feedback confirms or shows how to count the correct region.",
+      "Review prompt asks for the next adjacent region to confirm spatial understanding."
+    ],
+    "rewardLoop": {
+      "xpUnit": "10 to 25 XP per group, with formula groups earning more.",
+      "streakRule": "Streak visible on every step; one retry before streak breaks.",
+      "badgeRule": "2-circle badge at Group E, formula badge at Group H, Master badge at Group I.",
+      "celebrationStyle": "Circle overlap animation + XP pulse after each correct region identified."
+    },
+    "reviewLoop": {
+      "trigger": "Confusing Only-A with Both triggers a redraw of the diagram with clearer region labels.",
+      "practiceStyle": "Offer a simpler Venn with smaller numbers before retrying.",
+      "masteryRule": "Advance after correctly identifying two different regions of the same diagram.",
+      "revisitRule": "Formula groups revisited next session as warm-up if any error."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout with Venn diagram prominent in left panel",
+      "primaryFocus": "Venn diagram visual + question card",
+      "secondaryPanels": ["formula reference box", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Venn diagram, region labels, and answer input all visible without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Reading a 2-Circle Venn — Only A",
+        "missionStepTitle": "Exercise A: Read a 2-Circle Venn — Only A",
+        "coachHook": "Imagine two overlapping circles on a page. The LEFT circle is Group A. The RIGHT circle is Group B. Where they overlap in the middle is BOTH. The part of A that does NOT overlap is 'Only A'. Let's read one!",
+        "boardDemo": {
+          "title": "2-Circle Venn — Regions",
+          "steps": [
+            "Draw two overlapping circles. Label left 'Cricket' right 'Football'.",
+            "Write numbers: Only Cricket = 15 (left part), Both = 10 (overlap), Only Football = 10 (right part), Outside both = 5",
+            "Total = 15 + 10 + 10 + 5 = 40",
+            "Region 'Only Cricket' = 15 (left circle minus overlap)"
+          ],
+          "teacherLine": "The overlap is the SHARED zone. Only A means: inside A's circle but NOT inside B's circle — that is the part to the LEFT of the overlap. Read each region one at a time."
+        },
+        "readAloudPrompt": "In the Venn: Only Cricket = 15, Both = 10, Only Football = 10, Neither = 5. How many students play ONLY Cricket?",
+        "tryPrompt": "New Venn: Only Maths = 18, Both Maths and Science = 7, Only Science = 12, Neither = 3. How many students play ONLY Maths?",
+        "masteryCheck": "18",
+        "instantFeedbackWin": "Correct! The 'Only Maths' region holds exactly 18 students — those who like Maths but not Science. You read the Venn perfectly!",
+        "instantFeedbackRetry": "Here's a trick: 'Only Maths' is the LEFT circle region that does NOT overlap with Science. The number written there is 18. Do not confuse it with the Both region (7).",
+        "reviewPrompt": "Same Venn: how many students like ONLY Science?",
+        "xpReward": 10,
+        "badgeFocus": "Venn Region Reader"
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Finding the Intersection Count",
+        "missionStepTitle": "Exercise B: Find the Intersection",
+        "coachHook": "The intersection is the overlap — the 'BOTH' zone. If you know the total for each circle and the sizes of the 'only' regions, you can calculate how many are in both!",
+        "boardDemo": {
+          "title": "Intersection = Total A minus Only A",
+          "steps": [
+            "Total in Circle A (Cricket) = 25",
+            "Only Cricket (left part) = 15",
+            "Intersection = Total A - Only A = 25 - 15 = 10",
+            "Verify: Total B (Football) = 20, Only Football = 10, Intersection = 20 - 10 = 10 (same!)"
+          ],
+          "teacherLine": "The intersection count = n(A) minus Only-A. It must match from both sides. If you compute it from A and from B and get different answers, you have made an error — recheck!"
+        },
+        "readAloudPrompt": "Total in Circle X = 30. Only X (not Y) = 22. What is the size of the X-and-Y intersection?",
+        "tryPrompt": "In a class, 28 students play Chess. 19 play Chess only (not Badminton). How many play BOTH Chess and Badminton?",
+        "masteryCheck": "9",
+        "instantFeedbackWin": "Correct! Intersection = Total Chess - Only Chess = 28 - 19 = 9. Nine students play both games!",
+        "instantFeedbackRetry": "Here's a trick: Total Chess includes those who play ONLY Chess AND those who play BOTH. So Both = Total - Only = 28 - 19 = 9.",
+        "reviewPrompt": "Total Singing = 35. Only Singing = 27. How many are in the Singing and Dancing intersection?",
+        "xpReward": 12,
+        "badgeFocus": "Intersection Finder"
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Finding Neither (Outside Both Circles)",
+        "missionStepTitle": "Exercise C: Find the Neither Region",
+        "coachHook": "Outside BOTH circles is the 'Neither' region — students who belong to neither group. Formula: Neither = Total in class - (Only A + Both + Only B). Everything inside the circles added up!",
+        "boardDemo": {
+          "title": "Neither = Total minus All Inside Circles",
+          "steps": [
+            "Total class = 40",
+            "Only Cricket = 15, Both = 10, Only Football = 10",
+            "All inside circles = 15 + 10 + 10 = 35",
+            "Neither = 40 - 35 = 5"
+          ],
+          "teacherLine": "First add up everything inside the circles (all 3 regions: Only A, Both, Only B). Then subtract from the total. Whatever is left is Neither — the students outside both circles."
+        },
+        "readAloudPrompt": "Total = 50. Only A = 20, Both = 8, Only B = 15. How many are in Neither?",
+        "tryPrompt": "In a group of 60, 25 read Novels only, 10 read both Novels and Comics, 18 read Comics only. How many read neither?",
+        "masteryCheck": "7",
+        "instantFeedbackWin": "Spot on! Inside circles = 25+10+18 = 53. Neither = 60-53 = 7. Seven students read neither!",
+        "instantFeedbackRetry": "Here's a trick: add the three inside regions: 25+10+18 = 53. Now 60-53 = 7. Those 7 are outside both circles — neither group!",
+        "reviewPrompt": "Total = 100. Only P = 40, Both = 15, Only Q = 30. How many are in Neither?",
+        "xpReward": 14,
+        "badgeFocus": "Neither Zone Tracker"
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Drawing a Venn from Given Numbers",
+        "missionStepTitle": "Exercise D: Draw the Venn Diagram",
+        "coachHook": "Now you draw! Given the numbers for each region, you place them in the right zones of the Venn. Start from the MIDDLE (intersection) and work outwards — that is the safest order!",
+        "boardDemo": {
+          "title": "Draw Venn — Fill Regions in Order",
+          "steps": [
+            "Given: Total = 50, n(A) = 30, n(B) = 25, n(A and B) = 10",
+            "Step 1: Draw two overlapping circles",
+            "Step 2: Write intersection = 10 in the overlap",
+            "Step 3: Only A = n(A) - intersection = 30 - 10 = 20",
+            "Step 4: Only B = n(B) - intersection = 25 - 10 = 15",
+            "Step 5: Neither = 50 - (20+10+15) = 5"
+          ],
+          "teacherLine": "Always fill the intersection FIRST from the given n(A intersect B). Then compute Only A and Only B by subtracting. Finally compute Neither from the total. This order prevents mistakes!"
+        },
+        "readAloudPrompt": "Total = 40, n(A) = 22, n(B) = 18, n(A and B) = 6. What is Only A?",
+        "tryPrompt": "Fill all 4 regions: Total = 45, n(P) = 28, n(Q) = 20, n(P and Q) = 8. Give Only P, Only Q, and Neither!",
+        "masteryCheck": "Only P=20, Only Q=12, Neither=5",
+        "instantFeedbackWin": "Outstanding! Only P=28-8=20, Only Q=20-8=12, Inside total=20+8+12=40, Neither=45-40=5. Perfect Venn construction!",
+        "instantFeedbackRetry": "Here's a trick: start with the overlap (8). Then Only P = n(P) - overlap = 28-8=20. Only Q = n(Q) - overlap = 20-8=12. Inside = 20+8+12=40. Neither = 45-40=5.",
+        "reviewPrompt": "Rebuild: Total=60, n(X)=35, n(Y)=30, n(X and Y)=12. Find all 4 regions.",
+        "xpReward": 16,
+        "badgeFocus": "Venn Builder"
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Word Problem with 2-Circle Venn",
+        "missionStepTitle": "Exercise E: Word Problem — 2-Circle Venn",
+        "coachHook": "Real exam questions come as word problems. A class of 50 students — 30 play Cricket, 25 play Football, 15 play both. Read the problem, identify what each number represents, place them in the Venn, then answer the questions!",
+        "boardDemo": {
+          "title": "Word Problem — Step by Step",
+          "steps": [
+            "Total students = 50",
+            "Cricket players n(C) = 30, Football players n(F) = 25, Both = 15",
+            "Only Cricket = 30-15 = 15",
+            "Only Football = 25-15 = 10",
+            "Neither = 50 - (15+15+10) = 10",
+            "Q: How many play only Cricket? Answer: 15"
+          ],
+          "teacherLine": "Read the word problem carefully and match each sentence to a Venn region. 'Play both' is the intersection. 'Play Cricket' is the total for Circle C — it includes both Only-Cricket AND Both. Don't use total-Cricket directly as Only-Cricket!"
+        },
+        "readAloudPrompt": "A school has 60 students. 35 like Science, 28 like Maths, 12 like both. How many like ONLY Science?",
+        "tryPrompt": "In a colony of 80 people, 45 read newspaper A, 38 read newspaper B, and 20 read both. How many read ONLY newspaper A, ONLY newspaper B, and NEITHER?",
+        "masteryCheck": "Only A=25, Only B=18, Neither=17",
+        "instantFeedbackWin": "Excellent word problem solve! Only A=45-20=25, Only B=38-20=18, Inside=25+20+18=63, Neither=80-63=17. Venn mastery in action!",
+        "instantFeedbackRetry": "Here's a trick: place 20 in the overlap. Only A = 45-20=25 (left). Only B = 38-20=18 (right). Total inside = 25+20+18=63. Neither = 80-63=17.",
+        "reviewPrompt": "Word problem: 100 students, 55 play Hockey, 40 play Tennis, 20 play both. Find Only Hockey, Only Tennis, and Neither.",
+        "xpReward": 18,
+        "badgeFocus": "Word Problem Solver"
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Reading a 3-Circle Venn",
+        "missionStepTitle": "Exercise F: Reading a 3-Circle Venn",
+        "coachHook": "Three overlapping circles means 7 regions! Only A, Only B, Only C, A-and-B only, B-and-C only, A-and-C only, and All three. The key: the centre (all three) is the intersection of ALL circles.",
+        "boardDemo": {
+          "title": "3-Circle Venn — 7 Regions",
+          "steps": [
+            "Draw 3 overlapping circles: A, B, C",
+            "Region 1: Only A (inside A, outside B and C)",
+            "Region 2: Only B (inside B, outside A and C)",
+            "Region 3: Only C (inside C, outside A and B)",
+            "Region 4: A and B only (overlap of A,B but not C)",
+            "Region 5: B and C only (overlap of B,C but not A)",
+            "Region 6: A and C only (overlap of A,C but not B)",
+            "Region 7: A and B and C (triple intersection — centre)"
+          ],
+          "teacherLine": "In a 3-circle Venn, ALWAYS label all 7 regions before answering. The most common mistake is confusing 'A and B only' with 'A and B and C'. The triple intersection is the tiny centre region!"
+        },
+        "readAloudPrompt": "3-circle Venn: Only A=10, Only B=8, Only C=12, A-B only=5, B-C only=3, A-C only=4, All three=2. How many are in ONLY A?",
+        "tryPrompt": "Same Venn as above: how many students are in AT LEAST one of A, B, or C? (Add all 7 regions together!)",
+        "masteryCheck": "44",
+        "instantFeedbackWin": "Brilliant! 10+8+12+5+3+4+2 = 44. That is everyone in at least one circle. You read a 3-circle Venn perfectly!",
+        "instantFeedbackRetry": "Here's a trick: add all 7 regions: Only A=10, Only B=8, Only C=12, A-B=5, B-C=3, A-C=4, All=2. Sum: 10+8+12+5+3+4+2=44.",
+        "reviewPrompt": "Same Venn: how many are in the triple intersection (all three circles)?",
+        "xpReward": 19,
+        "badgeFocus": "3-Circle Navigator"
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "3-Circle Intersection",
+        "missionStepTitle": "Exercise G: 3-Circle Intersection Problems",
+        "coachHook": "Now let's find specific intersection counts from a 3-circle Venn! To find all students in 'A and B' (pairwise), add both A-and-B-only AND A-and-B-and-C together — the centre belongs to both pairs!",
+        "boardDemo": {
+          "title": "3-Circle Pairwise Intersection",
+          "steps": [
+            "Given regions: A-B only = 6, A-C only = 4, B-C only = 3, All three = 2",
+            "Question: how many are in A and B (not necessarily only A-B)?",
+            "A and B includes: A-B-only region + All-three region",
+            "A and B = 6 + 2 = 8",
+            "Similarly: B and C = 3 + 2 = 5, A and C = 4 + 2 = 6"
+          ],
+          "teacherLine": "A pairwise intersection (e.g. A and B) ALWAYS includes the triple intersection — because anyone in all three is certainly in both A and B. So n(A intersect B) = (A-B only) + (all three)."
+        },
+        "readAloudPrompt": "3-circle Venn: A-B only = 7, A-C only = 5, B-C only = 4, All three = 3. How many are in A and C altogether?",
+        "tryPrompt": "In a survey of 3 sports fans: Football-Basketball only = 8, Football-Tennis only = 6, Basketball-Tennis only = 5, All three = 4. How many like Football and Basketball combined (pairwise)?",
+        "masteryCheck": "12",
+        "instantFeedbackWin": "Correct! n(Football and Basketball) = Football-Basketball only + All three = 8 + 4 = 12. The triple intersection always adds in!",
+        "instantFeedbackRetry": "Here's a trick: n(A and B) = A-B-only + All-three. That is because anyone who likes all three ALSO likes Football and Basketball. So 8 + 4 = 12.",
+        "reviewPrompt": "Same survey: how many like Basketball and Tennis together?",
+        "xpReward": 21,
+        "badgeFocus": "3-Circle Intersection Expert"
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Venn with Formula n(A union B)",
+        "missionStepTitle": "Exercise H: The Union Formula",
+        "coachHook": "Here is the most important Venn formula: n(A union B) = n(A) + n(B) minus n(A intersection B). Why subtract? Because people in BOTH are counted twice when you add n(A) and n(B) — so you subtract them once!",
+        "boardDemo": {
+          "title": "Union Formula — No Double Counting",
+          "steps": [
+            "Formula: n(A union B) = n(A) + n(B) - n(A intersection B)",
+            "Example: n(A)=30, n(B)=25, n(A and B)=10",
+            "n(A union B) = 30 + 25 - 10 = 45",
+            "Verify: Only A=20, Only B=15, Both=10 — total inside = 20+15+10=45 correct!",
+            "Rearranged: n(A and B) = n(A) + n(B) - n(A union B)"
+          ],
+          "teacherLine": "The formula has 4 values: n(A), n(B), n(A union B), n(A intersection B). If you know any 3, you can find the 4th. In exams, you usually know 3 and must find the intersection or the union."
+        },
+        "readAloudPrompt": "n(A)=40, n(B)=35, n(A and B)=15. Use the formula to find n(A union B).",
+        "tryPrompt": "Use the formula: n(P)=50, n(Q)=45, n(P union Q)=80. Find n(P and Q)!",
+        "masteryCheck": "15",
+        "instantFeedbackWin": "Perfect formula work! n(P and Q) = n(P) + n(Q) - n(P union Q) = 50 + 45 - 80 = 15. The formula is your fastest shortcut!",
+        "instantFeedbackRetry": "Here's a trick: rearrange the formula to solve for intersection: n(P and Q) = n(P) + n(Q) - n(P union Q) = 50+45-80 = 95-80 = 15.",
+        "reviewPrompt": "Formula challenge: n(A)=60, n(B)=55, n(A union B)=90. Find n(A and B).",
+        "xpReward": 23,
+        "badgeFocus": "Formula Operator"
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Speed Challenge",
+        "missionStepTitle": "Exercise I: Speed Challenge",
+        "coachHook": "SPEED CHALLENGE! Full Venn questions — read the problem, identify the values, apply the formula or draw the diagram, answer in 30 seconds. All three types: 2-circle reading, formula, and 3-circle. Go!",
+        "boardDemo": {
+          "title": "Speed Challenge — Venn Recap",
+          "steps": [
+            "2-circle: Only A = n(A) - n(A and B). Neither = Total - All inside.",
+            "Formula: n(A union B) = n(A) + n(B) - n(A and B)",
+            "3-circle pairwise: n(A and B) = A-B-only + All-three",
+            "Speed tip: write the formula first, fill known values, solve for unknown"
+          ],
+          "teacherLine": "In speed rounds, write the formula before filling numbers — it stops you from mixing up values. 30 seconds per question. State the formula type first: 2-circle, formula, or 3-circle."
+        },
+        "readAloudPrompt": "Speed Q1: 80 students, 45 in Drama, 40 in Music, 20 in both. How many in neither? Speed Q2: n(A)=55, n(B)=48, n(A union B)=85. Find n(A and B). Speed Q3: A-B only=9, All-three=3, find n(A intersect B). Go!",
+        "tryPrompt": "Give all 3 answers and the formula you used for each!",
+        "masteryCheck": "15 | 18 | 12",
+        "instantFeedbackWin": "BLAZING! Q1: Inside=45-20+20+40-20=65, Neither=80-65=15. Q2: n(A and B)=55+48-85=18. Q3: n(A and B)=9+3=12. You are a Venn Diagram Master!",
+        "instantFeedbackRetry": "Here's a trick — Q1: Only Drama=45-20=25, Only Music=40-20=20, inside total=25+20+20=65, Neither=80-65=15. Q2: n(A and B)=55+48-85=18. Q3: pairwise includes triple: 9+3=12.",
+        "reviewPrompt": "Final formula test: n(A)=70, n(B)=60, n(A intersect B)=25. Find n(A union B) and n(Neither) if total=120.",
+        "xpReward": 25,
+        "badgeFocus": "Venn Diagram Master"
+      }
+    ]
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G6_L4_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "svg",
+        "teacherLine": "Hello, data detective! Today's topic is Venn Diagrams — one of the most visual and useful tools in all of maths and reasoning! A Venn diagram uses overlapping circles to show how groups relate. Where circles overlap, elements belong to BOTH groups. Where they don't overlap, elements belong to only one. We will go from reading a simple 2-circle Venn all the way to solving problems with the union formula and 3-circle diagrams!",
+        "boardAction": "Draw two overlapping circles. Label left circle 'A', right circle 'B'. Label the 4 regions: 'Only A' (left), 'A and B' (overlap), 'Only B' (right), 'Neither' (outside both). Add sample numbers: Only A=15, Both=10, Only B=10, Neither=5.",
+        "checkpointPrompt": "Warm-up: in the diagram on the board, how many people are in ONLY A (not in B at all)?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "15",
+        "fallbackHint": "The 'Only A' region is the LEFT part of circle A that does NOT overlap with B. The number written there is 15.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l4_title",
+            "x": "40",
+            "y": "25",
+            "text": "Venn Diagrams — Lesson 4",
+            "color": "#0369a1",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "circle",
+            "id": "l4_circleA",
+            "cx": "220",
+            "cy": "130",
+            "r": "70",
+            "fill": "none",
+            "stroke": "#2563eb",
+            "width": 2,
+            "delaySec": 0.6,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "circle",
+            "id": "l4_circleB",
+            "cx": "320",
+            "cy": "130",
+            "r": "70",
+            "fill": "none",
+            "stroke": "#dc2626",
+            "width": 2,
+            "delaySec": 0.9,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "l4_labelA",
+            "x": "170",
+            "y": "90",
+            "text": "A",
+            "color": "#2563eb",
+            "size": 16,
+            "delaySec": 1.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_labelB",
+            "x": "360",
+            "y": "90",
+            "text": "B",
+            "color": "#dc2626",
+            "size": 16,
+            "delaySec": 1.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_onlyA",
+            "x": "175",
+            "y": "135",
+            "text": "15",
+            "color": "#2563eb",
+            "size": 14,
+            "delaySec": 1.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_both",
+            "x": "262",
+            "y": "135",
+            "text": "10",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_onlyB",
+            "x": "353",
+            "y": "135",
+            "text": "10",
+            "color": "#dc2626",
+            "size": 14,
+            "delaySec": 2.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_neither",
+            "x": "460",
+            "y": "135",
+            "text": "5 (Neither)",
+            "color": "#374151",
+            "size": 12,
+            "delaySec": 2.6,
+            "durationSec": 0.3
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L4_DEMO_FORMULA",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me demonstrate the union formula. n(A) = 30, n(B) = 25, n(A and B) = 10. I want n(A union B) — total in at least one circle. Formula: n(A union B) = n(A) + n(B) - n(A and B) = 30 + 25 - 10 = 45. WHY subtract? Because the 10 people in BOTH are counted once in n(A) and again in n(B). If I just add: 30+25=55 — that counts the 10 twice! Subtracting once fixes the double-count.",
+        "boardAction": "Write formula prominently. Show 30+25=55 crossed out as wrong. Show 30+25-10=45 circled as correct. Draw small Venn below: Only A=20, Both=10, Only B=15. Add: 20+10+15=45 confirmed.",
+        "checkpointPrompt": "Test the formula: n(A)=40, n(B)=30, n(A and B)=12. What is n(A union B)?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "58 — 40+30-12=58.",
+        "fallbackHint": "40+30=70. Subtract the intersection: 70-12=58.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo4_formula",
+            "x": "40",
+            "y": "45",
+            "text": "n(A union B) = n(A) + n(B) - n(A and B)",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.6
+          },
+          {
+            "kind": "text",
+            "id": "demo4_values",
+            "x": "40",
+            "y": "78",
+            "text": "= 30 + 25 - 10",
+            "color": "#374151",
+            "size": 14,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo4_result",
+            "x": "40",
+            "y": "110",
+            "text": "= 45",
+            "color": "#059669",
+            "size": 16,
+            "delaySec": 1.5,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo4_why",
+            "x": "40",
+            "y": "145",
+            "text": "Subtract n(A and B) to fix double-counting!",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 2.1,
+            "durationSec": 0.4
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L4_DEMO_3CIRCLE",
+        "type": "DEMO",
+        "sequence": 202,
+        "cue": "demo",
+        "boardMode": "svg",
+        "teacherLine": "Three-circle Venn! I draw circles A, B, C with all three overlapping. The 7 regions are: Only A, Only B, Only C, A-B only, B-C only, A-C only, and All Three. The tiny centre region is All Three — the triple intersection. Reading any value: look at which circles contain that point. The region 'A-B only' is inside A and inside B but OUTSIDE C.",
+        "boardAction": "Draw 3-circle Venn. Label all 7 regions with numbers: Only A=10, Only B=8, Only C=12, A-B only=5, B-C only=3, A-C only=4, All three=2. Total inside = 44.",
+        "checkpointPrompt": "In the 3-circle Venn on the board: how many are in the A-B-only region (inside A and B but not C)?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "5",
+        "fallbackHint": "The A-B only region is the overlap between circle A and circle B that does NOT include the centre (All three). That number is 5.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo3c_title",
+            "x": "40",
+            "y": "28",
+            "text": "3-Circle Venn — 7 Regions",
+            "color": "#0369a1",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "circle",
+            "id": "demo3c_A",
+            "cx": "200",
+            "cy": "110",
+            "r": "65",
+            "fill": "none",
+            "stroke": "#2563eb",
+            "width": 2,
+            "delaySec": 0.6,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "circle",
+            "id": "demo3c_B",
+            "cx": "300",
+            "cy": "110",
+            "r": "65",
+            "fill": "none",
+            "stroke": "#dc2626",
+            "width": 2,
+            "delaySec": 0.9,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "circle",
+            "id": "demo3c_C",
+            "cx": "250",
+            "cy": "185",
+            "r": "65",
+            "fill": "none",
+            "stroke": "#059669",
+            "width": 2,
+            "delaySec": 1.2,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo3c_onlyA",
+            "x": "158",
+            "y": "95",
+            "text": "10",
+            "color": "#2563eb",
+            "size": 13,
+            "delaySec": 1.8,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo3c_onlyB",
+            "x": "335",
+            "y": "95",
+            "text": "8",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 1.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo3c_onlyC",
+            "x": "250",
+            "y": "228",
+            "text": "12",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 2.0,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo3c_ab",
+            "x": "242",
+            "y": "88",
+            "text": "5",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo3c_all",
+            "x": "248",
+            "y": "148",
+            "text": "2",
+            "color": "#374151",
+            "size": 14,
+            "delaySec": 2.4,
+            "durationSec": 0.4
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L4_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You now have all the Venn tools: reading regions, computing Only A and Only B, finding Neither, applying the union formula, and navigating 3-circle diagrams. As you work through Groups A to I, always draw the Venn first — even a rough sketch — before answering. A picture is worth a thousand calculations!",
+        "boardAction": "Show key formula strip: Only A = n(A) - intersection. Neither = Total - all-inside. n(A union B) = n(A) + n(B) - n(A and B). 3-circle pairwise = pairwise-only + all-three.",
+        "checkpointPrompt": "Before Groups begin: what does the overlapping region of two circles in a Venn diagram represent?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Both — elements that belong to both sets or groups.",
+        "fallbackHint": "The overlapping region (intersection) contains elements that belong to BOTH groups simultaneously.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided4_title",
+            "x": "40",
+            "y": "28",
+            "text": "Venn Formula Reference",
+            "color": "#0369a1",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided4_f1",
+            "x": "60",
+            "y": "60",
+            "text": "Only A = n(A) - n(A and B)",
+            "color": "#2563eb",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided4_f2",
+            "x": "60",
+            "y": "82",
+            "text": "Neither = Total - (Only A + Both + Only B)",
+            "color": "#374151",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided4_f3",
+            "x": "60",
+            "y": "104",
+            "text": "n(A union B) = n(A) + n(B) - n(A and B)",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided4_f4",
+            "x": "60",
+            "y": "126",
+            "text": "3-circle n(A and B) = A-B-only + all-three",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ]
+      }
+    ]
+  }
+}

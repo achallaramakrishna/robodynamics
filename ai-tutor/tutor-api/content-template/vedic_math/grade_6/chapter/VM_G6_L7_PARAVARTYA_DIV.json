@@ -1,0 +1,660 @@
+{
+  "title": "Paravartya — Divide by Transpose-and-Adjust",
+  "gradeBand": "Grade 6",
+  "source": "Vedic Mathematics for Schools | Grade 6",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "Division by 9 — Running Sum Method",
+    "Division by 11 — Alternating Subtract Method",
+    "Paravartya Setup — Writing the Complement",
+    "Division by 12, 13, 14 Using Paravartya",
+    "MCQ — What is the Quotient?",
+    "Fill-the-Step: 256 ÷ 12 Using Paravartya",
+    "Mixed Division Practice",
+    "Speed Drill — 5 Divisions",
+    "Challenge — Divide 4-Digit by 2-Digit: 1452 ÷ 12"
+  ],
+  "learningGoals": [
+    "Divide any number by 9 using the running-sum technique in seconds",
+    "Set up and apply the Paravartya sutra to divide by divisors like 12, 13, 14",
+    "Divide a 4-digit number by a 2-digit number using Paravartya step by step"
+  ],
+  "coreIdeas": [
+    "Paravartya means 'transpose and adjust' — rewrite the divisor as its complement from a power of 10",
+    "Division by 9: each digit of the answer is the running sum of dividend digits",
+    "Paravartya turns long division into a series of small multiplications and adjustments"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "135 ÷ 9 — Running Sum",
+      "problem": "Divide 135 by 9",
+      "steps": [
+        "Digits of 135: 1, 3, 5",
+        "Bring down first digit: Q₁ = 1",
+        "Running sum: 1 + 3 = 4 → Q₂ = 4",
+        "Running sum: 4 + 5 = 9 = 9×1 → Q₃ next digit completes",
+        "Quotient = 15, remainder = 0",
+        "Check: 9 × 15 = 135 ✓"
+      ],
+      "answer": "135 ÷ 9 = 15"
+    },
+    {
+      "id": "we2",
+      "title": "253 ÷ 11 — Alternating Subtract",
+      "problem": "Divide 253 by 11",
+      "steps": [
+        "Digits: 2, 5, 3",
+        "Alternating sum (left to right, alternating +−): 2 − 5 + 3 = 0 → divisible",
+        "Paravartya for 11: complement of 11 from 10 is −1",
+        "Step: bring 2, multiply by 1 → add to next: 2+2=... result: Q=23, R=0",
+        "Check: 11 × 23 = 253 ✓"
+      ],
+      "answer": "253 ÷ 11 = 23"
+    },
+    {
+      "id": "we3",
+      "title": "256 ÷ 12 — Paravartya",
+      "problem": "Divide 256 by 12",
+      "steps": [
+        "Divisor 12. Complement from 10: 12 − 10 = 2, so adjust digit is −2",
+        "Set up: 2 | 5 6 with flag digit 2",
+        "Bring down 2 as first quotient digit",
+        "2 × (−2) = −4. 5 + (−4) = 1. Next quotient digit: 1",
+        "1 × (−2) = −2. 6 + (−2) = 4. Remainder = 4",
+        "Quotient = 21, Remainder = 4",
+        "Check: 12 × 21 + 4 = 252 + 4 = 256 ✓"
+      ],
+      "answer": "256 ÷ 12 = 21 remainder 4"
+    },
+    {
+      "id": "we4",
+      "title": "1452 ÷ 12 — Paravartya on 4 Digits",
+      "problem": "Divide 1452 by 12",
+      "steps": [
+        "Divisor 12, flag/adjust digit = −2",
+        "Dividend digits: 1, 4, 5, 2",
+        "Step 1: Bring 1 → Q₁ = 1. 1×(−2) = −2. 4+(−2) = 2",
+        "Step 2: Q₂ = 2. 2×(−2) = −4. 5+(−4) = 1",
+        "Step 3: Q₃ = 1. 1×(−2) = −2. 2+(−2) = 0",
+        "Remainder = 0. Quotient = 121",
+        "Check: 12 × 121 = 1452 ✓"
+      ],
+      "answer": "1452 ÷ 12 = 121"
+    }
+  ],
+  "starterPractice": [
+    {
+      "question": "What is 81 ÷ 9?",
+      "answer": "9"
+    },
+    {
+      "question": "What is 132 ÷ 11?",
+      "answer": "12"
+    },
+    {
+      "question": "What is the remainder when 25 is divided by 6?",
+      "answer": "1"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g6-v1",
+    "onboarding": {
+      "avatarGreeting": "Greetings, Division Detective! Today we learn Paravartya — the Vedic sutra that lets you divide without tears! Division becomes as easy as addition.",
+      "priorKnowledgeCheck": "What is 9 × 15? (Expected: 135)"
+    },
+    "mission": {
+      "title": "Division Decoder",
+      "description": "Master Paravartya and running-sum division for 2-digit divisors",
+      "totalXP": 110,
+      "badge": "Division Decoder Badge"
+    },
+    "microLessonPattern": [
+      "Coach introduces the divisor pattern with a puzzle",
+      "Board shows the Paravartya setup with complement notation",
+      "Student replicates the steps on a new example",
+      "MCQ or fill-step tests understanding of the algorithm",
+      "Speed drill builds fluency",
+      "Challenge applies Paravartya to 4-digit dividends"
+    ],
+    "rewardLoop": {
+      "xpPerCorrect": 10,
+      "streakBonus": "3-correct streak triggers a Division Decoder animation showing complements sliding into place",
+      "badgeUnlock": "Complete all 9 groups to earn the Division Decoder Badge"
+    },
+    "reviewLoop": {
+      "triggerAfterMistakes": 2,
+      "reviewType": "Replay Paravartya setup board demo for the relevant divisor"
+    },
+    "uiDirectives": {
+      "boardStyle": "long division layout with complement flag shown in red above divisor digit",
+      "avatarEmotion": "detective-focused during setup, celebratory on correct answers",
+      "progressBar": "9 division steps on a sliding number line"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Division by 9 — Running Sum Method",
+        "missionStepTitle": "The Nine Secret",
+        "coachHook": "Dividing by 9 has a beautiful shortcut — just keep a running total of the digits! Let me show you.",
+        "boardDemo": {
+          "title": "135 ÷ 9 — Step by Step",
+          "steps": [
+            "Write the digits: 1, 3, 5",
+            "Quotient digit 1 = first digit = 1",
+            "Running sum: 1 + 3 = 4 → next quotient digit = 4",
+            "Running sum: 4 + 5 = 9 → remainder digit",
+            "9 is divisible by 9 once, so quotient = 15, remainder = 0"
+          ]
+        },
+        "readAloudPrompt": "Dividing by 9: carry forward each digit into the next. The last running sum is the remainder check.",
+        "tryPrompt": "Divide 126 by 9 using the running sum method.",
+        "masteryCheck": "126 ÷ 9 = ?",
+        "instantFeedbackWin": "Yes! 126 ÷ 9 = 14. Running sum: 1, 1+2=3... wait, let's check: 9×14=126 ✓",
+        "instantFeedbackRetry": "Digits of 126: 1, 2, 6. Running sums: 1, 1+2=3, hmm... try treating it as 9×14.",
+        "reviewPrompt": "9×14=126. Alternatively: 126÷9=14 remainder 0.",
+        "xpReward": 10,
+        "badgeFocus": "division-by-9",
+        "exercises": [
+          {
+            "questionId": "L7_A_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "A",
+            "subtopic": "Division by 9",
+            "skill": "divide-by-9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 135 ÷ 9 using the running sum method.",
+            "expectedAnswer": "15",
+            "hint": "Digits: 1, 3, 5. Running sums give you the quotient digits.",
+            "solution": "Running sums: 1 → 1+3=4 → check: 9×15=135. Quotient=15."
+          },
+          {
+            "questionId": "L7_A_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "A",
+            "subtopic": "Division by 9",
+            "skill": "divide-by-9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 162 ÷ 9?",
+            "options": ["16", "17", "18", "19"],
+            "correctIndex": 2,
+            "expectedAnswer": "18",
+            "hint": "9 × 18 = 162. Check your running sums.",
+            "solution": "162 ÷ 9 = 18. Verify: 9×18=162 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Division by 11 — Alternating Subtract Method",
+        "missionStepTitle": "The Eleven Dance",
+        "coachHook": "11 has a dance: add one digit, subtract the next, add again... the alternating sum reveals divisibility!",
+        "boardDemo": {
+          "title": "253 ÷ 11",
+          "steps": [
+            "Alternating sum of 253: 2 − 5 + 3 = 0 → divisible by 11",
+            "Now find quotient: think 11 × 23 = 253",
+            "Paravartya for 11: complement digit = −1 (since 11 = 10 + 1)",
+            "Process: bring 2; 2×(−1)=−2; 5+(−2)=3; bring 3; 3×(−1)=−3; 3+(−3)=0",
+            "Quotient = 23, Remainder = 0"
+          ]
+        },
+        "readAloudPrompt": "For divisor 11: the complement is −1. At each step, subtract the running digit from the next dividend digit.",
+        "tryPrompt": "Divide 176 by 11.",
+        "masteryCheck": "176 ÷ 11 = ?",
+        "instantFeedbackWin": "Correct! 176 ÷ 11 = 16. Check: 11 × 16 = 176 ✓",
+        "instantFeedbackRetry": "Alternating sum of 176: 1−7+6=0. So it divides evenly. 11×16=176.",
+        "reviewPrompt": "176 ÷ 11 = 16. Alternating sum = 0 confirms exact divisibility.",
+        "xpReward": 10,
+        "badgeFocus": "division-by-11",
+        "exercises": [
+          {
+            "questionId": "L7_B_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "B",
+            "subtopic": "Division by 11",
+            "skill": "divide-by-11",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 253 ÷ 11 using the Paravartya method.",
+            "expectedAnswer": "23",
+            "hint": "Complement of 11 is −1. Apply the adjustment step by step.",
+            "solution": "Bring 2; 2×(−1)=−2; 5−2=3; 3×(−1)=−3; 3−3=0. Quotient=23, R=0."
+          },
+          {
+            "questionId": "L7_B_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "B",
+            "subtopic": "Division by 11",
+            "skill": "divide-by-11",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "176 ÷ 11 = ?",
+            "options": ["14", "15", "16", "17"],
+            "correctIndex": 2,
+            "expectedAnswer": "16",
+            "hint": "Alternating sum of 176 = 1−7+6 = 0. It divides evenly.",
+            "solution": "176 ÷ 11 = 16. Check: 11×16=176 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Paravartya Setup — Writing the Complement",
+        "missionStepTitle": "Setting the Stage",
+        "coachHook": "Paravartya begins by rewriting the divisor. The key is the complement — what you subtract from the next power of 10!",
+        "boardDemo": {
+          "title": "Writing Paravartya Complements",
+          "steps": [
+            "Divisor 12: nearest higher power of 10 = 10. Flag digit = 12 − 10 = 2 (write as −2 since we subtract)",
+            "Divisor 13: flag digit = 13 − 10 = 3 → adjust by −3",
+            "Divisor 14: flag digit = 14 − 10 = 4 → adjust by −4",
+            "Set up: write dividend digits, place flag digit above divisor unit digit",
+            "At each step: bring down quotient digit q, compute q × (−flag), add to next dividend digit"
+          ]
+        },
+        "readAloudPrompt": "The flag digit is (divisor − base). You subtract (flag × quotient digit) from each successive dividend digit.",
+        "tryPrompt": "What is the flag digit for divisor 13?",
+        "masteryCheck": "Flag digit for 13 = ?",
+        "instantFeedbackWin": "Correct! Flag = 3. So at each step you subtract 3 times the current quotient digit.",
+        "instantFeedbackRetry": "13 − 10 = 3. The flag digit is 3.",
+        "reviewPrompt": "For 13: base=10, flag=13−10=3. Adjustment at each step: −3×q.",
+        "xpReward": 10,
+        "badgeFocus": "paravartya-setup",
+        "exercises": [
+          {
+            "questionId": "L7_C_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "C",
+            "subtopic": "Paravartya Setup",
+            "skill": "complement-setup",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the Paravartya flag digit for dividing by 14?",
+            "options": ["1", "2", "4", "6"],
+            "correctIndex": 2,
+            "expectedAnswer": "4",
+            "hint": "Flag = divisor − 10 = 14 − 10.",
+            "solution": "14 − 10 = 4. Flag digit = 4.",
+            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "Paravartya setup showing divisor 14 with flag 4 above the unit digit" }
+          },
+          {
+            "questionId": "L7_C_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "C",
+            "subtopic": "Paravartya Setup",
+            "skill": "complement-setup",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Write the flag digit and describe the adjustment for dividing by 13.",
+            "expectedAnswer": "Flag = 3; subtract 3 × quotient digit from each successive dividend digit",
+            "hint": "13 − 10 = 3.",
+            "solution": "Flag digit = 13−10 = 3. At each step: adjust by −3×q."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Division by 12, 13, 14 Using Paravartya",
+        "missionStepTitle": "Paravartya in Action",
+        "coachHook": "Now we use the full Paravartya method on real divisions. Let's try 168 ÷ 14!",
+        "boardDemo": {
+          "title": "168 ÷ 14 — Full Paravartya",
+          "steps": [
+            "Divisor 14, flag = 4",
+            "Dividend: 1, 6, 8",
+            "Step 1: Bring 1 → Q₁ = 1. Adjust: 1×(−4) = −4. 6+(−4) = 2",
+            "Step 2: Q₂ = 2. Adjust: 2×(−4) = −8. 8+(−8) = 0",
+            "Remainder = 0. Quotient = 12",
+            "Check: 14 × 12 = 168 ✓"
+          ]
+        },
+        "readAloudPrompt": "At every step: bring a digit as quotient, multiply by flag, subtract from the next digit.",
+        "tryPrompt": "Try 156 ÷ 13 using Paravartya.",
+        "masteryCheck": "156 ÷ 13 = ?",
+        "instantFeedbackWin": "Superb! 156 ÷ 13 = 12. Paravartya made it clean!",
+        "instantFeedbackRetry": "Flag for 13 = 3. Step 1: bring 1, 1×(−3)=−3, 5+(−3)=2. Step 2: bring 2, 2×(−3)=−6, 6+(−6)=0.",
+        "reviewPrompt": "156÷13: flag=3. 1→2→0. Quotient=12, R=0.",
+        "xpReward": 12,
+        "badgeFocus": "paravartya-application",
+        "exercises": [
+          {
+            "questionId": "L7_D_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "D",
+            "subtopic": "Paravartya Division",
+            "skill": "paravartya-12-13-14",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Use Paravartya to find 168 ÷ 14.",
+            "expectedAnswer": "12",
+            "hint": "Flag for 14 = 4. Bring 1, adjust: 6−4=2, then 8−8=0.",
+            "solution": "Flag=4. Step1: Q=1, 6−4=2. Step2: Q=2, 8−8=0. Quotient=12, R=0.",
+            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "Paravartya layout for 168 ÷ 14 showing flag and adjustment columns" }
+          },
+          {
+            "questionId": "L7_D_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "D",
+            "subtopic": "Paravartya Division",
+            "skill": "paravartya-12-13-14",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 156 ÷ 13 using Paravartya?",
+            "options": ["11", "12", "13", "14"],
+            "correctIndex": 1,
+            "expectedAnswer": "12",
+            "hint": "Flag=3. Bring 1; 5−3=2; bring 2; 6−6=0.",
+            "solution": "156÷13: flag=3. Q=1 → 5−3=2 → Q=2 → 6−6=0. Quotient=12."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — What is the Quotient?",
+        "missionStepTitle": "Quotient Quick-Fire",
+        "coachHook": "Four choices, one right answer. Can you see the quotient before your pencil moves?",
+        "boardDemo": {
+          "title": "Mental Division Tips Using Paravartya",
+          "steps": [
+            "÷12: flag=2. Result ≈ dividend ÷ 12",
+            "÷11: alternating sum divisibility check first",
+            "÷9: running sums tell you the quotient",
+            "Always verify: quotient × divisor + remainder = dividend"
+          ]
+        },
+        "readAloudPrompt": "Estimate first — the quotient of a 3-digit number by a teen divisor is roughly a 2-digit number.",
+        "tryPrompt": "What is 180 ÷ 12?",
+        "masteryCheck": "180 ÷ 12 = ?",
+        "instantFeedbackWin": "Yes! 180 ÷ 12 = 15. Flag=2: 1→8−2=6→0−10? Let's use: 12×15=180 ✓",
+        "instantFeedbackRetry": "Think: 12×10=120, 12×15=180. So quotient=15.",
+        "reviewPrompt": "12×15=180. Quotient=15.",
+        "xpReward": 12,
+        "badgeFocus": "quotient-mcq",
+        "exercises": [
+          {
+            "questionId": "L7_E_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ Quotient",
+            "skill": "mental-division-mcq",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 180 ÷ 12?",
+            "options": ["13", "14", "15", "16"],
+            "correctIndex": 2,
+            "expectedAnswer": "15",
+            "hint": "12 × 15 = 180. Verify by multiplication.",
+            "solution": "180 ÷ 12 = 15. Check: 12×15=180 ✓."
+          },
+          {
+            "questionId": "L7_E_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ Quotient",
+            "skill": "mental-division-mcq",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 195 ÷ 13?",
+            "options": ["13", "14", "15", "16"],
+            "correctIndex": 2,
+            "expectedAnswer": "15",
+            "hint": "13×15=195. Use Paravartya to verify.",
+            "solution": "195÷13=15. Flag=3: 1→9−3=6→... 13×15=195 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-Step: 256 ÷ 12 Using Paravartya",
+        "missionStepTitle": "Every Step Matters",
+        "coachHook": "Let us do 256 ÷ 12 together, filling every single step. This is where Paravartya truly shines!",
+        "boardDemo": {
+          "title": "256 ÷ 12 — Full Paravartya Breakdown",
+          "steps": [
+            "Divisor = 12, Flag digit = 12 − 10 = 2",
+            "Dividend digits: 2, 5, 6",
+            "Step 1: Q₁ = 2 (bring first digit). Adjust: 2 × (−2) = −4. 5 + (−4) = 1",
+            "Step 2: Q₂ = 1 (bring adjusted digit). Adjust: 1 × (−2) = −2. 6 + (−2) = 4",
+            "Remainder = 4. Quotient = 21",
+            "Check: 12 × 21 + 4 = 252 + 4 = 256 ✓"
+          ]
+        },
+        "readAloudPrompt": "Flag = 2. Bring each quotient digit, multiply by 2, subtract from next. The last adjusted digit is the remainder.",
+        "tryPrompt": "Fill in all steps for 256 ÷ 12.",
+        "masteryCheck": "Quotient = ?, Remainder = ?",
+        "instantFeedbackWin": "Flawless! 256 ÷ 12 = 21 remainder 4. You have mastered Paravartya!",
+        "instantFeedbackRetry": "Check step 1: 2×(−2)=−4, so 5+(−4)=1. Then step 2: 1×(−2)=−2, so 6+(−2)=4.",
+        "reviewPrompt": "Q=21, R=4. Verify: 12×21+4=256.",
+        "xpReward": 12,
+        "badgeFocus": "fill-step-paravartya",
+        "exercises": [
+          {
+            "questionId": "L7_F_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step: 256 ÷ 12",
+            "skill": "paravartya-fill-step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Divide 256 by 12 using Paravartya. Fill in each step.",
+            "steps": [
+              { "label": "Flag digit for 12", "answer": "2", "hint": "12 − 10 = 2" },
+              { "label": "First quotient digit (bring first dividend digit)", "answer": "2", "hint": "First digit of 256 is 2" },
+              { "label": "Adjustment: 2 × (−2) added to next digit 5", "answer": "1", "hint": "5 + (−4) = 1" },
+              { "label": "Second quotient digit", "answer": "1", "hint": "The adjusted value 1 becomes the next quotient digit" },
+              { "label": "Remainder: 1×(−2) added to last digit 6", "answer": "4", "hint": "6 + (−2) = 4" },
+              { "label": "Final answer: quotient and remainder", "answer": "21 remainder 4", "hint": "Quotient=21, R=4. Verify: 12×21+4=256" }
+            ],
+            "expectedAnswer": "Quotient = 21, Remainder = 4",
+            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "Full Paravartya layout for 256 ÷ 12 with flag and adjustment columns" }
+          },
+          {
+            "questionId": "L7_F_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step",
+            "skill": "paravartya-verify",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Verify 256 ÷ 12 = 21 remainder 4 by computing 12 × 21 + 4.",
+            "expectedAnswer": "256",
+            "hint": "12 × 21 = 252. 252 + 4 = 256.",
+            "solution": "12×21=252, 252+4=256. Verification correct."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Mixed Division Practice",
+        "missionStepTitle": "Mixed Bag Mastery",
+        "coachHook": "Now you see a mix of divisors — 9, 11, 12, 13, 14. Choose the right technique for each!",
+        "boardDemo": {
+          "title": "Method Selection Guide",
+          "steps": [
+            "Divisor 9 → Running sum method",
+            "Divisor 11 → Alternating sum check + Paravartya flag=1",
+            "Divisors 12–14 → Paravartya with flag = divisor − 10",
+            "Always verify your answer with multiplication!"
+          ]
+        },
+        "readAloudPrompt": "Select the method that suits the divisor, apply it cleanly, and verify.",
+        "tryPrompt": "Solve: 144 ÷ 12 and 143 ÷ 11",
+        "masteryCheck": "Both answers?",
+        "instantFeedbackWin": "Excellent! 144÷12=12 and 143÷11=13. Two for two!",
+        "instantFeedbackRetry": "For 12: flag=2. For 11: flag=1. Apply the steps.",
+        "reviewPrompt": "144÷12=12 (12×12=144). 143÷11=13 (11×13=143).",
+        "xpReward": 12,
+        "badgeFocus": "mixed-division",
+        "exercises": [
+          {
+            "questionId": "L7_G_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed Division",
+            "skill": "choose-method-divide",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Use the most suitable Vedic method to find 182 ÷ 14.",
+            "expectedAnswer": "13",
+            "hint": "Flag for 14 = 4. Bring 1; 8−4=4; bring 4; 2−16? Reconsider: 13×14=182.",
+            "solution": "14×13=182. Quotient=13, R=0."
+          },
+          {
+            "questionId": "L7_G_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed Division",
+            "skill": "choose-method-divide",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 117 ÷ 9?",
+            "options": ["11", "12", "13", "14"],
+            "correctIndex": 2,
+            "expectedAnswer": "13",
+            "hint": "Use the running sum method. Digits: 1, 1, 7.",
+            "solution": "9×13=117. Running sums: 1, 1+1=2... result 13, R=0."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed Drill — 5 Divisions",
+        "missionStepTitle": "Division Blitz",
+        "coachHook": "Five problems, one goal: accuracy and speed! Show your Paravartya power!",
+        "boardDemo": {
+          "title": "Speed Division Checklist",
+          "steps": [
+            "Set up the flag digit first",
+            "Process digits left to right",
+            "Last adjusted value = remainder",
+            "Verify with a quick multiplication"
+          ]
+        },
+        "readAloudPrompt": "Precision first, speed will follow naturally with practice.",
+        "tryPrompt": "Solve: 108÷9, 132÷11, 144÷12, 169÷13, 196÷14",
+        "masteryCheck": "All 5 correct?",
+        "instantFeedbackWin": "Division Decoder unlocked! All 5 perfect!",
+        "instantFeedbackRetry": "Check each one: multiply your answer by the divisor to verify.",
+        "reviewPrompt": "Answers: 12, 12, 12, 13, 14.",
+        "xpReward": 15,
+        "badgeFocus": "speed-drill-division",
+        "exercises": [
+          {
+            "questionId": "L7_H_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-paravartya",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed: 169 ÷ 13 = ?",
+            "options": ["11", "12", "13", "14"],
+            "correctIndex": 2,
+            "expectedAnswer": "13",
+            "hint": "13×13=169.",
+            "solution": "169÷13=13. 13×13=169 ✓."
+          },
+          {
+            "questionId": "L7_H_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-paravartya",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 196 ÷ 14 using Paravartya.",
+            "expectedAnswer": "14",
+            "hint": "Flag=4. Bring 1; 9−4=5; bring 5; 6−20? Check: 14×14=196.",
+            "solution": "196÷14=14. Verify: 14×14=196 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge — Divide 4-Digit by 2-Digit: 1452 ÷ 12",
+        "missionStepTitle": "The Grand Division Challenge",
+        "coachHook": "Ready for the ultimate Paravartya challenge? Four digits divided by 12 — let's go step by step!",
+        "boardDemo": {
+          "title": "1452 ÷ 12 — Full Paravartya",
+          "steps": [
+            "Divisor 12, Flag = 2",
+            "Dividend digits: 1, 4, 5, 2",
+            "Step 1: Q₁ = 1. Adjust: 1×(−2)=−2. 4+(−2)=2",
+            "Step 2: Q₂ = 2. Adjust: 2×(−2)=−4. 5+(−4)=1",
+            "Step 3: Q₃ = 1. Adjust: 1×(−2)=−2. 2+(−2)=0",
+            "Remainder = 0. Quotient = 121",
+            "Check: 12 × 121 = 1452 ✓"
+          ]
+        },
+        "readAloudPrompt": "Four digits, same process. Carry through each step and trust the method!",
+        "tryPrompt": "Work through 1452 ÷ 12 on your own.",
+        "masteryCheck": "1452 ÷ 12 = ?",
+        "instantFeedbackWin": "Champion! 1452 ÷ 12 = 121 with remainder 0. Paravartya scales to any size!",
+        "instantFeedbackRetry": "Take it digit by digit: 1→2→1. Each time subtract flag×quotient digit from the next digit.",
+        "reviewPrompt": "Quotient=121, R=0. Verify: 12×121=1452.",
+        "xpReward": 15,
+        "badgeFocus": "4digit-paravartya-challenge",
+        "exercises": [
+          {
+            "questionId": "L7_I_01",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "I",
+            "subtopic": "4-Digit Paravartya Challenge",
+            "skill": "paravartya-4digit",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Divide 1452 by 12 using Paravartya. Show every step.",
+            "steps": [
+              { "label": "Flag digit for 12", "answer": "2", "hint": "12 − 10 = 2" },
+              { "label": "Q₁ (first digit of 1452)", "answer": "1", "hint": "Bring down 1" },
+              { "label": "Adjust: 1×(−2) added to 4", "answer": "2", "hint": "4 − 2 = 2" },
+              { "label": "Q₂ = adjusted value", "answer": "2", "hint": "2 becomes the next quotient digit" },
+              { "label": "Adjust: 2×(−2) added to 5", "answer": "1", "hint": "5 − 4 = 1" },
+              { "label": "Q₃ = adjusted value", "answer": "1", "hint": "1 becomes next quotient digit" },
+              { "label": "Adjust: 1×(−2) added to 2", "answer": "0", "hint": "2 − 2 = 0 = remainder" },
+              { "label": "Quotient and remainder", "answer": "121 remainder 0", "hint": "Quotient = 121, R = 0" }
+            ],
+            "expectedAnswer": "121",
+            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "4-digit Paravartya division: 1452 ÷ 12 with all steps shown" }
+          },
+          {
+            "questionId": "L7_I_02",
+            "chapterCode": "VM_G6_L7",
+            "exerciseGroup": "I",
+            "subtopic": "4-Digit Paravartya Challenge",
+            "skill": "paravartya-4digit",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 1716 ÷ 12?",
+            "options": ["141", "142", "143", "144"],
+            "correctIndex": 2,
+            "expectedAnswer": "143",
+            "hint": "12×143=1716. Use Paravartya with flag=2.",
+            "solution": "1716÷12=143. Verify: 12×143=1716 ✓."
+          }
+        ]
+      }
+    ]
+  }
+}

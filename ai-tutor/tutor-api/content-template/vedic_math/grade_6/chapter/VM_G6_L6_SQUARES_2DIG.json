@@ -1,0 +1,652 @@
+{
+  "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+  "gradeBand": "Grade 6",
+  "source": "Vedic Mathematics for Schools | Grade 6",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "Squares Ending in 5 — The n×(n+1)|25 Pattern",
+    "Squares Near 50 Using (50−d)² Expansion",
+    "Squares Near 100 Using (100−d)² Expansion",
+    "General 2-Digit Squares Using (a+b)² Identity",
+    "MCQ — Find the Square",
+    "Fill-the-Step: 63² Using Base 60",
+    "Patterns in Squares — Odd-Number Differences",
+    "Speed Drill — 5 Squares",
+    "Challenge — 125² Using the Ending-in-5 Rule"
+  ],
+  "learningGoals": [
+    "Square any 2-digit number ending in 5 in under 5 seconds using the n×(n+1)|25 pattern",
+    "Use base proximity (near 50 or 100) to expand and compute squares mentally",
+    "Recognise and apply the algebraic identity (a+b)² = a²+2ab+b² to any 2-digit square"
+  ],
+  "coreIdeas": [
+    "Numbers ending in 5: n² = [n÷10 × (n÷10+1)] followed by 25 — always works",
+    "Proximity method: choose a convenient base (50, 60, 100) and expand the square of (base ± d)",
+    "The differences between consecutive perfect squares grow by 2 each time (odd-number pattern)"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "35² — Ending in 5 Shortcut",
+      "problem": "Find 35²",
+      "steps": [
+        "n = 35, tens digit = 3",
+        "Multiply tens digit by (tens digit + 1): 3 × 4 = 12",
+        "Append 25: answer = 1225"
+      ],
+      "answer": "35² = 1225"
+    },
+    {
+      "id": "we2",
+      "title": "47² — Near 50",
+      "problem": "Find 47²",
+      "steps": [
+        "47 = 50 − 3",
+        "(50−3)² = 50² − 2×50×3 + 3²",
+        "= 2500 − 300 + 9",
+        "= 2209"
+      ],
+      "answer": "47² = 2209"
+    },
+    {
+      "id": "we3",
+      "title": "96² — Near 100",
+      "problem": "Find 96²",
+      "steps": [
+        "96 = 100 − 4",
+        "(100−4)² = 100² − 2×100×4 + 4²",
+        "= 10000 − 800 + 16",
+        "= 9216"
+      ],
+      "answer": "96² = 9216"
+    },
+    {
+      "id": "we4",
+      "title": "63² — Using Base 60",
+      "problem": "Find 63²",
+      "steps": [
+        "63 = 60 + 3",
+        "(60+3)² = 60² + 2×60×3 + 3²",
+        "= 3600 + 360 + 9",
+        "= 3969"
+      ],
+      "answer": "63² = 3969"
+    }
+  ],
+  "starterPractice": [
+    {
+      "question": "What is 5²?",
+      "answer": "25"
+    },
+    {
+      "question": "What is 10²?",
+      "answer": "100"
+    },
+    {
+      "question": "Expand (a+b)² = ?",
+      "answer": "a² + 2ab + b²"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g6-v1",
+    "onboarding": {
+      "avatarGreeting": "Welcome, Number Ninja! Did you know you can square any 2-digit number in your head? The Vedic Anurupyena sutra makes it lightning fast. Let's unlock it!",
+      "priorKnowledgeCheck": "What is (a+b)²? (Expected: a²+2ab+b²)"
+    },
+    "mission": {
+      "title": "Square Speedster",
+      "description": "Master mental squaring of 2-digit numbers using Vedic base methods",
+      "totalXP": 110,
+      "badge": "Square Speedster Badge"
+    },
+    "microLessonPattern": [
+      "Coach reveals the squaring pattern with a surprise demo",
+      "Board shows the algebraic proof behind the shortcut",
+      "Student applies the method to a new example",
+      "MCQ or fill-step locks in the algorithm",
+      "Speed drill builds fluency across number types",
+      "Challenge extends to 3-digit ending-in-5"
+    ],
+    "rewardLoop": {
+      "xpPerCorrect": 10,
+      "streakBonus": "3-correct streak triggers a Square Flash animation showing the number expanding",
+      "badgeUnlock": "Complete all 9 groups to earn the Square Speedster Badge"
+    },
+    "reviewLoop": {
+      "triggerAfterMistakes": 2,
+      "reviewType": "Replay the board demo for the relevant base method"
+    },
+    "uiDirectives": {
+      "boardStyle": "algebraic expansion shown with colour-coded terms (a² in blue, 2ab in green, b² in orange)",
+      "avatarEmotion": "excited on correct, calm and coaching on wrong",
+      "progressBar": "9-step track filling with gold squares as groups complete"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Squares Ending in 5 — The n×(n+1)|25 Pattern",
+        "missionStepTitle": "The Magic of 5s",
+        "coachHook": "Every number ending in 5 has a secret shortcut! Watch: 35² = 1225. See the 3×4=12 before 25? Try it!",
+        "boardDemo": {
+          "title": "35², 45², 65² — The Ending-in-5 Rule",
+          "steps": [
+            "35²: tens digit = 3. Compute 3×4=12. Append 25 → 1225",
+            "45²: tens digit = 4. Compute 4×5=20. Append 25 → 2025",
+            "65²: tens digit = 6. Compute 6×7=42. Append 25 → 4225",
+            "Rule: n² = [⌊n/10⌋ × (⌊n/10⌋+1)] followed by 25"
+          ]
+        },
+        "readAloudPrompt": "Take the tens digit, multiply it by one more, then write 25 at the end. Done!",
+        "tryPrompt": "Now try: 75²",
+        "masteryCheck": "75² = ?",
+        "instantFeedbackWin": "Brilliant! 75² = 5625. Tens digit 7 × 8 = 56, then 25. So 5625!",
+        "instantFeedbackRetry": "Tens digit of 75 is 7. Compute 7×8=56. Write 25 after it.",
+        "reviewPrompt": "75²: ⌊75/10⌋ = 7. 7×8 = 56. Append 25 → 5625.",
+        "xpReward": 10,
+        "badgeFocus": "ending-in-5-squares",
+        "exercises": [
+          {
+            "questionId": "L6_A_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "A",
+            "subtopic": "Squares Ending in 5",
+            "skill": "square-ending-5",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Use the Vedic method to find 75².",
+            "expectedAnswer": "5625",
+            "hint": "Tens digit = 7. Compute 7×8=56. Append 25.",
+            "solution": "75²: tens digit 7, 7×8=56, append 25 → 5625."
+          },
+          {
+            "questionId": "L6_A_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "A",
+            "subtopic": "Squares Ending in 5",
+            "skill": "square-ending-5",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 55²?",
+            "options": ["2025", "3025", "2525", "3125"],
+            "correctIndex": 1,
+            "expectedAnswer": "3025",
+            "hint": "Tens digit of 55 is 5. Compute 5×6=30. Append 25.",
+            "solution": "55²: 5×6=30, append 25 → 3025."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Squares Near 50 Using (50−d)² Expansion",
+        "missionStepTitle": "Base 50 Blitz",
+        "coachHook": "Numbers close to 50 are easy — just measure how far away they are and expand! 47 is 3 away from 50.",
+        "boardDemo": {
+          "title": "47² and 53² Using Base 50",
+          "steps": [
+            "47 = 50−3: (50−3)² = 2500 − 300 + 9 = 2209",
+            "53 = 50+3: (50+3)² = 2500 + 300 + 9 = 2809",
+            "Pattern: 50² = 2500. Adjust by ±2×50×d and +d²"
+          ]
+        },
+        "readAloudPrompt": "For numbers near 50: start with 2500, subtract or add 100×d, then add d².",
+        "tryPrompt": "Find 48² using the base-50 method.",
+        "masteryCheck": "48² = ?",
+        "instantFeedbackWin": "Spot on! 48²=(50−2)²=2500−200+4=2304!",
+        "instantFeedbackRetry": "48 = 50−2, so (50−2)²=50²−2×50×2+2²=2500−200+4.",
+        "reviewPrompt": "48=(50-2). 2500 - 200 + 4 = 2304.",
+        "xpReward": 10,
+        "badgeFocus": "base-50-square",
+        "exercises": [
+          {
+            "questionId": "L6_B_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "B",
+            "subtopic": "Squares Near 50",
+            "skill": "square-near-50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 48² using the base-50 method.",
+            "expectedAnswer": "2304",
+            "hint": "48 = 50−2. Use (50−2)² = 2500−200+4.",
+            "solution": "(50−2)² = 2500 − 200 + 4 = 2304.",
+            "visual": { "type": "svg", "asset": "vm_square_formula", "caption": "(50−d)² expansion shown on a number line near 50" }
+          },
+          {
+            "questionId": "L6_B_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "B",
+            "subtopic": "Squares Near 50",
+            "skill": "square-near-50",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "47² using base-50 method = ?",
+            "options": ["2209", "2149", "2309", "2169"],
+            "correctIndex": 0,
+            "expectedAnswer": "2209",
+            "hint": "47 = 50−3. (50−3)² = 2500 − 300 + 9.",
+            "solution": "2500 − 300 + 9 = 2209."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Squares Near 100 Using (100−d)² Expansion",
+        "missionStepTitle": "Base 100 Power",
+        "coachHook": "Base 100 is even easier — we work with nice round numbers! 96² = just subtract and add in seconds.",
+        "boardDemo": {
+          "title": "96² and 97² Using Base 100",
+          "steps": [
+            "96 = 100−4: (100−4)² = 10000 − 800 + 16 = 9216",
+            "97 = 100−3: (100−3)² = 10000 − 600 + 9 = 9409",
+            "Formula: 100² = 10000. Adjust by −200d, then +d²"
+          ]
+        },
+        "readAloudPrompt": "For numbers near 100: start with 10000, subtract 200 times the gap, add the gap squared.",
+        "tryPrompt": "Find 98² using base 100.",
+        "masteryCheck": "98² = ?",
+        "instantFeedbackWin": "Perfect! 98²=(100−2)²=10000−400+4=9604!",
+        "instantFeedbackRetry": "98=100−2. Subtract 2×100×2=400 from 10000, then add 4.",
+        "reviewPrompt": "(100−2)²=10000−400+4=9604.",
+        "xpReward": 10,
+        "badgeFocus": "base-100-square",
+        "exercises": [
+          {
+            "questionId": "L6_C_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "C",
+            "subtopic": "Squares Near 100",
+            "skill": "square-near-100",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 96² using the base-100 method.",
+            "expectedAnswer": "9216",
+            "hint": "96 = 100−4. Use (100−4)² = 10000 − 800 + 16.",
+            "solution": "(100−4)² = 10000 − 800 + 16 = 9216.",
+            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "(a−b)² = a² − 2ab + b² expanded with a=100, b=4" }
+          },
+          {
+            "questionId": "L6_C_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "C",
+            "subtopic": "Squares Near 100",
+            "skill": "square-near-100",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 97²?",
+            "options": ["9409", "9309", "9449", "9499"],
+            "correctIndex": 0,
+            "expectedAnswer": "9409",
+            "hint": "97 = 100−3. (100−3)² = 10000 − 600 + 9.",
+            "solution": "10000 − 600 + 9 = 9409."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "General 2-Digit Squares Using (a+b)² Identity",
+        "missionStepTitle": "Any 2-Digit Square — Cracked!",
+        "coachHook": "For numbers not near 50 or 100, pick the nearest ten as base. 63 → base 60. Watch!",
+        "boardDemo": {
+          "title": "63² and 78² — Choosing the Right Base",
+          "steps": [
+            "63 = 60+3: (60+3)² = 3600 + 360 + 9 = 3969",
+            "78 = 80−2: (80−2)² = 6400 − 320 + 4 = 6084",
+            "Choose base = nearest multiple of 10",
+            "Apply (base ± d)² = base² ± 2×base×d + d²"
+          ]
+        },
+        "readAloudPrompt": "Round to nearest ten, measure the gap d, then expand (base ± d)².",
+        "tryPrompt": "Find 72² using base 70.",
+        "masteryCheck": "72² = ?",
+        "instantFeedbackWin": "Excellent! 72²=(70+2)²=4900+280+4=5184!",
+        "instantFeedbackRetry": "72=70+2. 70²=4900. 2×70×2=280. 2²=4. Add them up.",
+        "reviewPrompt": "(70+2)²=4900+280+4=5184.",
+        "xpReward": 12,
+        "badgeFocus": "general-2digit-square",
+        "exercises": [
+          {
+            "questionId": "L6_D_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "D",
+            "subtopic": "General 2-Digit Squares",
+            "skill": "square-any-2digit",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 72² using the base-70 method.",
+            "expectedAnswer": "5184",
+            "hint": "72=70+2. (70+2)²=70²+2×70×2+2²=4900+280+4.",
+            "solution": "(70+2)²=4900+280+4=5184.",
+            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "(a+b)² identity applied with a=70, b=2" }
+          },
+          {
+            "questionId": "L6_D_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "D",
+            "subtopic": "General 2-Digit Squares",
+            "skill": "square-any-2digit",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Find 83² using the base-80 method.",
+            "options": ["6889", "6809", "6949", "6969"],
+            "correctIndex": 0,
+            "expectedAnswer": "6889",
+            "hint": "83=80+3. (80+3)²=6400+480+9.",
+            "solution": "(80+3)²=6400+480+9=6889."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — Find the Square",
+        "missionStepTitle": "Choose the Right Square",
+        "coachHook": "Multiple choice — pick the right answer fast. Let your Vedic instincts guide you!",
+        "boardDemo": {
+          "title": "Quick Mental Squaring Review",
+          "steps": [
+            "Ending in 5: use n×(n+1)|25",
+            "Near 100: use (100±d)², start from 10000",
+            "Near 50: use (50±d)², start from 2500",
+            "Others: nearest-ten base + expansion"
+          ]
+        },
+        "readAloudPrompt": "Match the number to the right method — then compute in seconds.",
+        "tryPrompt": "What is 45²? Choose the correct answer.",
+        "masteryCheck": "45² = ?",
+        "instantFeedbackWin": "Nailed it! 45² = 2025. Tens digit 4 × 5 = 20, then 25!",
+        "instantFeedbackRetry": "45 ends in 5. Use the ending-in-5 rule: 4×5=20, append 25.",
+        "reviewPrompt": "45²: 4×5=20, append 25 → 2025.",
+        "xpReward": 12,
+        "badgeFocus": "mcq-square-speed",
+        "exercises": [
+          {
+            "questionId": "L6_E_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ Squares",
+            "skill": "square-mcq",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 45²?",
+            "options": ["1925", "2025", "2125", "2225"],
+            "correctIndex": 1,
+            "expectedAnswer": "2025",
+            "hint": "45 ends in 5. Tens digit 4 × 5 = 20. Append 25.",
+            "solution": "4×5=20, append 25 → 2025."
+          },
+          {
+            "questionId": "L6_E_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ Squares",
+            "skill": "square-mcq",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "99² = ?",
+            "options": ["9801", "9721", "9881", "9901"],
+            "correctIndex": 0,
+            "expectedAnswer": "9801",
+            "hint": "99=100−1. (100−1)²=10000−200+1.",
+            "solution": "10000−200+1=9801."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-Step: 63² Using Base 60",
+        "missionStepTitle": "Build It Step by Step",
+        "coachHook": "Walk through 63² together — every step clear, every number earned!",
+        "boardDemo": {
+          "title": "63² Full Working",
+          "steps": [
+            "Base = 60, gap d = 3",
+            "63 = 60 + 3",
+            "(60+3)² = 60² + 2×60×3 + 3²",
+            "= 3600 + 360 + 9",
+            "= 3969"
+          ]
+        },
+        "readAloudPrompt": "Base squared, plus two times base times gap, plus gap squared. That is the formula.",
+        "tryPrompt": "Fill in each step for 63².",
+        "masteryCheck": "63² = ?",
+        "instantFeedbackWin": "Wonderful! 63² = 3969. Every step was perfect!",
+        "instantFeedbackRetry": "Check your multiplication: 2×60×3 should be 360, not 36.",
+        "reviewPrompt": "60²=3600, 2×60×3=360, 3²=9. Total=3969.",
+        "xpReward": 12,
+        "badgeFocus": "fill-step-squares",
+        "exercises": [
+          {
+            "questionId": "L6_F_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step: 63²",
+            "skill": "square-fill-step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Find 63² step by step using base 60.",
+            "steps": [
+              { "label": "Write 63 as base + gap", "answer": "60 + 3", "hint": "63 is 3 more than 60" },
+              { "label": "Base² = 60²", "answer": "3600", "hint": "60 × 60 = 3600" },
+              { "label": "2 × base × gap = 2 × 60 × 3", "answer": "360", "hint": "2 × 60 × 3 = 360" },
+              { "label": "Gap² = 3²", "answer": "9", "hint": "3 × 3 = 9" },
+              { "label": "63² = sum of all parts", "answer": "3969", "hint": "3600 + 360 + 9 = 3969" }
+            ],
+            "expectedAnswer": "3969",
+            "visual": { "type": "svg", "asset": "vm_square_formula", "caption": "Step-by-step expansion of 63² = (60+3)²" }
+          },
+          {
+            "questionId": "L6_F_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step",
+            "skill": "square-base-method",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 78² using base 80.",
+            "expectedAnswer": "6084",
+            "hint": "78=80−2. (80−2)²=6400−320+4.",
+            "solution": "(80−2)²=6400−320+4=6084."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Patterns in Squares — Odd-Number Differences",
+        "missionStepTitle": "The Odd Pattern Discovery",
+        "coachHook": "Here is something magical: 1²=1, 2²=4, 3²=9, 4²=16 — the gaps are 3, 5, 7 — always odd! Why?",
+        "boardDemo": {
+          "title": "Differences Between Consecutive Squares",
+          "steps": [
+            "1²=1, 2²=4, diff=3",
+            "2²=4, 3²=9, diff=5",
+            "3²=9, 4²=16, diff=7",
+            "Pattern: (n+1)² − n² = 2n+1 (always odd!)",
+            "11²=121, 12²=144, diff=23; 12²=144, 13²=169, diff=25"
+          ]
+        },
+        "readAloudPrompt": "The difference between n² and (n+1)² is always 2n+1, which is always odd.",
+        "tryPrompt": "What is the difference between 14² and 15²?",
+        "masteryCheck": "15² − 14² = ?",
+        "instantFeedbackWin": "Perfect! 15²−14²=225−196=29=2×14+1. The odd pattern!",
+        "instantFeedbackRetry": "Use the formula: (n+1)²−n²=2n+1 with n=14: 2×14+1=29.",
+        "reviewPrompt": "15²=225, 14²=196, difference=29. Formula: 2×14+1=29 ✓.",
+        "xpReward": 12,
+        "badgeFocus": "square-pattern-discovery",
+        "exercises": [
+          {
+            "questionId": "L6_G_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "G",
+            "subtopic": "Square Number Patterns",
+            "skill": "square-difference-pattern",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Without computing both squares, find 15² − 14² using the pattern (n+1)²−n² = 2n+1.",
+            "expectedAnswer": "29",
+            "hint": "Set n=14. The answer is 2×14+1.",
+            "solution": "2×14+1=29. Check: 225−196=29 ✓."
+          },
+          {
+            "questionId": "L6_G_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "G",
+            "subtopic": "Square Number Patterns",
+            "skill": "square-sequence",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "The sequence of differences between 11², 12², 13², 14² is: 23, 25, 27. What is the next difference (14² to 15²)?",
+            "options": ["28", "29", "30", "31"],
+            "correctIndex": 1,
+            "expectedAnswer": "29",
+            "hint": "The differences increase by 2 each time.",
+            "solution": "Differences: 23, 25, 27, 29. Each increases by 2 (odd numbers pattern)."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed Drill — 5 Squares",
+        "missionStepTitle": "Speed Square Showdown",
+        "coachHook": "Five squares, fastest hands win! Use whichever Vedic method fits each number best!",
+        "boardDemo": {
+          "title": "Choose Your Method Quickly",
+          "steps": [
+            "Ends in 5? → n×(n+1)|25",
+            "Near 100? → (100±d)² from 10000",
+            "Near 50? → (50±d)² from 2500",
+            "Others? → nearest-ten base"
+          ]
+        },
+        "readAloudPrompt": "Match the number to the fastest method, compute, move on.",
+        "tryPrompt": "Solve: 25², 99², 52², 68², 85²",
+        "masteryCheck": "All 5 correct?",
+        "instantFeedbackWin": "You are a Square Speedster! All 5 nailed!",
+        "instantFeedbackRetry": "Retry one at a time. Which method suits each number?",
+        "reviewPrompt": "25²=625, 99²=9801, 52²=(50+2)²=2704, 68²=(70−2)²=4624, 85²=7225.",
+        "xpReward": 15,
+        "badgeFocus": "speed-drill-squares",
+        "exercises": [
+          {
+            "questionId": "L6_H_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-square",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed: 85²= ?",
+            "options": ["7025", "7225", "7425", "7125"],
+            "correctIndex": 1,
+            "expectedAnswer": "7225",
+            "hint": "85 ends in 5. Tens digit 8 × 9 = 72. Append 25.",
+            "solution": "8×9=72, append 25 → 7225."
+          },
+          {
+            "questionId": "L6_H_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-square",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 52² using base 50.",
+            "expectedAnswer": "2704",
+            "hint": "52=50+2. (50+2)²=2500+200+4.",
+            "solution": "(50+2)²=2500+200+4=2704."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge — 125² Using the Ending-in-5 Rule",
+        "missionStepTitle": "Beyond 2 Digits!",
+        "coachHook": "The ending-in-5 rule works for 3-digit numbers too! Watch how 125² becomes easy.",
+        "boardDemo": {
+          "title": "125² — Extending the Rule",
+          "steps": [
+            "125 ends in 5",
+            "Remove the 5: we have 12",
+            "Compute 12 × 13 = 156",
+            "Append 25: 125² = 15625",
+            "Verify: 125 × 125 = 15625 ✓"
+          ]
+        },
+        "readAloudPrompt": "For any number ending in 5: take the part before 5, multiply by one more, append 25.",
+        "tryPrompt": "Find 115² using this rule.",
+        "masteryCheck": "115² = ?",
+        "instantFeedbackWin": "Phenomenal! 115²=13225. Vedic maths has no limits!",
+        "instantFeedbackRetry": "115 ends in 5. Remove 5 → 11. Compute 11×12=132. Append 25 → 13225.",
+        "reviewPrompt": "11×12=132, append 25 → 13225.",
+        "xpReward": 15,
+        "badgeFocus": "challenge-3digit-square",
+        "exercises": [
+          {
+            "questionId": "L6_I_01",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 125²",
+            "skill": "square-3digit-ending5",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 125² using the ending-in-5 rule.",
+            "expectedAnswer": "15625",
+            "hint": "Remove the 5: you have 12. Compute 12×13=156. Append 25.",
+            "solution": "12×13=156, append 25 → 15625.",
+            "visual": { "type": "svg", "asset": "vm_square_formula", "caption": "Extended ending-in-5 rule applied to 125" }
+          },
+          {
+            "questionId": "L6_I_02",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 3-digit squares",
+            "skill": "square-3digit-ending5",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 115²?",
+            "options": ["13025", "13225", "13125", "13325"],
+            "correctIndex": 1,
+            "expectedAnswer": "13225",
+            "hint": "115 ends in 5. Take 11, multiply by 12 = 132. Append 25.",
+            "solution": "11×12=132, append 25 → 13225."
+          },
+          {
+            "questionId": "L6_I_03",
+            "chapterCode": "VM_G6_L6",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: General",
+            "skill": "square-challenge",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Find 95² step by step using both methods — ending-in-5 rule AND base-100 method — and confirm they match.",
+            "steps": [
+              { "label": "Ending-in-5: tens digit × (tens digit+1)", "answer": "9 × 10 = 90", "hint": "Tens digit of 95 is 9" },
+              { "label": "Append 25", "answer": "9025", "hint": "90 followed by 25" },
+              { "label": "Base-100: 95 = 100 − ?", "answer": "5", "hint": "100 − 95 = 5" },
+              { "label": "Base-100: (100−5)² = 10000 − 1000 + 25", "answer": "9025", "hint": "10000−1000+25=9025" },
+              { "label": "Both methods give", "answer": "9025", "hint": "Both should be 9025" }
+            ],
+            "expectedAnswer": "9025"
+          }
+        ]
+      }
+    ]
+  }
+}

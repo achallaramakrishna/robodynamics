@@ -1,0 +1,356 @@
+{
+  "benchmark": "L1_COMPLETING_WHOLE",
+  "generatedOn": "2026-03-14",
+  "lessons": [
+    {
+      "file": "L3_MULTIPLY_BY_11.json",
+      "title": "Lesson 3: Digit Sums and the Nine Point Circle",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 9,
+        "teachingScript": 9,
+        "screenplay": 37,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": 0,
+        "teachingScript": 0,
+        "screenplay": -26,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L4_VERTICAL_CROSSWISE.json",
+      "title": "Lesson 4: Left to Right Arithmetic",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 7,
+        "teachingScript": 7,
+        "screenplay": 36,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -2,
+        "teachingScript": -2,
+        "screenplay": -27,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L5_ALL_FROM_9_LAST_FROM_10.json",
+      "title": "Lesson 5: All from 9 and Last from 10",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L6_NIKHILAM_BASE_10_100.json",
+      "title": "Lesson 6: Number Splitting",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L7_SQUARES_ENDING_5.json",
+      "title": "Lesson 7: Base Multiplication",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L8_YAVADUNAM.json",
+      "title": "Lesson 8: Checking and Divisibility",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L9_GENERAL_MULTIPLICATION.json",
+      "title": "Lesson 9: Bar Numbers",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L10_DIVISION_BY_9.json",
+      "title": "Lesson 10: Special Multiplication",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L11_VINCULUM_INTRO.json",
+      "title": "Lesson 11: General Multiplication",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L12_FRACTIONS_DECIMALS.json",
+      "title": "Lesson 12: Squaring",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L13_ALGEBRAIC_IDENTITIES.json",
+      "title": "Lesson 13: Equations",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L14_FACTORISATION.json",
+      "title": "Lesson 14: Fractions",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L15_SQUARES_NEAR_BASE.json",
+      "title": "Lesson 15: Special Division",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 6,
+        "teachingScript": 6,
+        "screenplay": 31,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": -3,
+        "teachingScript": -3,
+        "screenplay": -32,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    },
+    {
+      "file": "L16_CUBES_INTRO.json",
+      "title": "Lesson 16: The Crowning Gem (Advanced Division)",
+      "counts": {
+        "workedExamples": 4,
+        "starterPractice": 4,
+        "sessionFlow": 9,
+        "teachingScript": 9,
+        "screenplay": 46,
+        "questionPool": 32
+      },
+      "deltas": {
+        "workedExamples": 0,
+        "starterPractice": 1,
+        "sessionFlow": 0,
+        "teachingScript": 0,
+        "screenplay": -17,
+        "questionPool": 0
+      },
+      "topLevelKeysMatch": true,
+      "meetsQuestionPoolTarget": true,
+      "meetsWorkedExampleTarget": true,
+      "meetsStarterPracticeTarget": true,
+      "note": "Structurally upgraded, but screenplay is still shorter than L1."
+    }
+  ]
+}

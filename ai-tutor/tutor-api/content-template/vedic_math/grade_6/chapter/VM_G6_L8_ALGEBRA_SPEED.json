@@ -1,0 +1,660 @@
+{
+  "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+  "gradeBand": "Grade 6",
+  "source": "Vedic Mathematics for Schools | Grade 6",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "The Sunyam Samyasamuccaye Sutra — When the Sum is Zero",
+    "Solve by Inspection: Transpose and Balance",
+    "Moving All x Terms Left, Constants Right",
+    "Direct Answer When Coefficients Are Equal",
+    "MCQ — Solve the Equation",
+    "Fill-the-Step: Solve 3(x+2) = 2(x+5)",
+    "Word Problems — Write Equation, Then Solve",
+    "Speed Drill — 5 Equations",
+    "Challenge — Equations with Fractions"
+  ],
+  "learningGoals": [
+    "Recognise when Sunyam Samyasamuccaye applies and solve linear equations by inspection",
+    "Transpose terms systematically to isolate x and find its value",
+    "Solve equations involving brackets and simple fractions confidently"
+  ],
+  "coreIdeas": [
+    "Sunyam Samyasamuccaye: when the total of terms on both sides is zero, the unknown can be found directly",
+    "A linear equation is balanced — whatever you do to one side, do to the other",
+    "Transposing means moving a term to the other side and changing its sign"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "2x + 6 = x + 9",
+      "problem": "Solve 2x + 6 = x + 9",
+      "steps": [
+        "Move x terms to left: 2x − x = 9 − 6",
+        "x = 3",
+        "Check: 2(3)+6 = 12 and 3+9 = 12 ✓"
+      ],
+      "answer": "x = 3"
+    },
+    {
+      "id": "we2",
+      "title": "3x + 7 = x + 15",
+      "problem": "Solve 3x + 7 = x + 15",
+      "steps": [
+        "Move x terms to left: 3x − x = 15 − 7",
+        "2x = 8",
+        "x = 4",
+        "Check: 3(4)+7 = 19 and 4+15 = 19 ✓"
+      ],
+      "answer": "x = 4"
+    },
+    {
+      "id": "we3",
+      "title": "3(x+2) = 2(x+5)",
+      "problem": "Solve 3(x+2) = 2(x+5)",
+      "steps": [
+        "Expand both sides: 3x + 6 = 2x + 10",
+        "Move x terms left: 3x − 2x = 10 − 6",
+        "x = 4",
+        "Check: 3(6) = 18 and 2(10) = 20... wait: 3(4+2)=3(6)=18, 2(4+5)=2(9)=18 ✓"
+      ],
+      "answer": "x = 4"
+    },
+    {
+      "id": "we4",
+      "title": "x/2 + 3 = 7",
+      "problem": "Solve x/2 + 3 = 7",
+      "steps": [
+        "Move constant: x/2 = 7 − 3 = 4",
+        "Multiply both sides by 2: x = 8",
+        "Check: 8/2 + 3 = 4 + 3 = 7 ✓"
+      ],
+      "answer": "x = 8"
+    }
+  ],
+  "starterPractice": [
+    {
+      "question": "What does 'transpose' mean in algebra?",
+      "answer": "Move a term to the other side of the equation and change its sign"
+    },
+    {
+      "question": "Simplify: 5x − 2x",
+      "answer": "3x"
+    },
+    {
+      "question": "If 2x = 10, what is x?",
+      "answer": "5"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g6-v1",
+    "onboarding": {
+      "avatarGreeting": "Hello, Equation Explorer! Today's Vedic sutra — Sunyam Samyasamuccaye — sounds fancy, but it simply means: when both sides balance to zero, the answer pops right out! Let us see it work.",
+      "priorKnowledgeCheck": "What value of x satisfies 2x = 10? (Expected: 5)"
+    },
+    "mission": {
+      "title": "Algebra Ace",
+      "description": "Solve linear equations by inspection and systematic transposition using Vedic algebra",
+      "totalXP": 110,
+      "badge": "Algebra Ace Badge"
+    },
+    "microLessonPattern": [
+      "Coach introduces the sutra with a balance-scale analogy",
+      "Board shows a worked equation with colour-coded transposition steps",
+      "Student solves a similar equation with guided hints",
+      "MCQ or fill-step checks that the algorithm is understood",
+      "Speed drill sharpens fluency on different equation forms",
+      "Challenge introduces fractions and multi-step word problems"
+    ],
+    "rewardLoop": {
+      "xpPerCorrect": 10,
+      "streakBonus": "3-correct streak triggers an Algebra Ace animation with a glowing balance scale",
+      "badgeUnlock": "Complete all 9 groups to earn the Algebra Ace Badge"
+    },
+    "reviewLoop": {
+      "triggerAfterMistakes": 2,
+      "reviewType": "Replay the transposition board demo with colour-coded sign changes"
+    },
+    "uiDirectives": {
+      "boardStyle": "balance scale visual — LHS and RHS shown in equal pans, terms move between pans with arrows",
+      "avatarEmotion": "inquisitive during setup, joyful on correct answers",
+      "progressBar": "9-step algebra path with x values lighting up as groups complete"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "The Sunyam Samyasamuccaye Sutra — When the Sum is Zero",
+        "missionStepTitle": "When Both Sides Cancel",
+        "coachHook": "Sunyam Samyasamuccaye: if the sum of all terms on both sides of the equation equals zero, the unknown cancels and we get the answer directly!",
+        "boardDemo": {
+          "title": "Understanding the Sutra",
+          "steps": [
+            "Sunyam = Zero, Samyasamuccaye = same total on both sides",
+            "Example: if coefficients of x are equal on both sides, subtracting gives 0 = constant",
+            "Example: 3x + 5 = 3x + 8 → subtracting 3x: 5 = 8 (no solution — inconsistent!)",
+            "But: 2x + 6 = x + 9 → coefficients differ, so we can solve for x",
+            "The sutra guides us: simplify until the equation becomes x = number"
+          ]
+        },
+        "readAloudPrompt": "Sunyam Samyasamuccaye means: when both sides of an equation add up the same way, the balance point is zero — and x reveals itself.",
+        "tryPrompt": "Look at this equation: 5x + 3 = 5x + 3. What does this tell you?",
+        "masteryCheck": "What is the solution to 5x + 3 = 5x + 3?",
+        "instantFeedbackWin": "Right! Every value of x works — it is an identity, not an equation with a unique solution!",
+        "instantFeedbackRetry": "Subtract 5x from both sides: 3 = 3. This is always true for any x.",
+        "reviewPrompt": "5x+3=5x+3 simplifies to 3=3. True for all x — infinite solutions.",
+        "xpReward": 10,
+        "badgeFocus": "sutra-understanding",
+        "exercises": [
+          {
+            "questionId": "L8_A_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Sunyam Sutra Introduction",
+            "skill": "sutra-recognition",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For which equation does subtracting x from both sides immediately give the answer?",
+            "options": ["5x + 2 = 3x + 8", "x + 7 = x + 7", "2x + 3 = 2x + 9", "3x = 3x + 1"],
+            "correctIndex": 0,
+            "expectedAnswer": "5x + 2 = 3x + 8",
+            "hint": "You need different x coefficients on both sides to isolate x.",
+            "solution": "5x+2=3x+8: subtract 3x → 2x+2=8 → 2x=6 → x=3. This gives a unique solution.",
+            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing 5x+2 on left and 3x+8 on right" }
+          },
+          {
+            "questionId": "L8_A_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Sunyam Sutra Introduction",
+            "skill": "sutra-recognition",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "What does Sunyam Samyasamuccaye mean in simple terms?",
+            "expectedAnswer": "When the total on both sides is equal (or sums to zero), the unknown cancels out",
+            "hint": "Sunyam = zero, Samyasamuccaye = same total/combination.",
+            "solution": "The sutra states: when the sum of all terms on both sides equals zero, we can directly find the unknown."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Solve by Inspection: Transpose and Balance",
+        "missionStepTitle": "See the Answer, Then Write It",
+        "coachHook": "3x + 7 = x + 15. Can you see that x must be 4? Let us build that instinct — step by step!",
+        "boardDemo": {
+          "title": "Solving 3x + 7 = x + 15 by Inspection",
+          "steps": [
+            "Look: x terms on both sides — subtract x from both",
+            "3x − x + 7 = 15 → 2x + 7 = 15",
+            "Move +7 to right: 2x = 15 − 7 = 8",
+            "Divide by 2: x = 4",
+            "Check: 3(4)+7 = 19, 4+15 = 19 ✓"
+          ]
+        },
+        "readAloudPrompt": "Inspection means you mentally group x terms and constant terms before writing — aim to see the answer before computing.",
+        "tryPrompt": "Solve by inspection: 2x + 6 = x + 9",
+        "masteryCheck": "x = ?",
+        "instantFeedbackWin": "Brilliant! x = 3. 2(3)+6=12 and 3+9=12. Balance confirmed!",
+        "instantFeedbackRetry": "Move x to left: 2x−x=9−6. So x=3.",
+        "reviewPrompt": "2x−x=9−6 → x=3.",
+        "xpReward": 10,
+        "badgeFocus": "inspection-solve",
+        "exercises": [
+          {
+            "questionId": "L8_B_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Solve by Inspection",
+            "skill": "solve-linear-inspection",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve by inspection: 3x + 7 = x + 15",
+            "expectedAnswer": "4",
+            "hint": "Move x terms left, constants right: 2x = 8.",
+            "solution": "3x−x = 15−7 → 2x=8 → x=4. Check: 19=19 ✓."
+          },
+          {
+            "questionId": "L8_B_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Solve by Inspection",
+            "skill": "solve-linear-inspection",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 2x + 6 = x + 9. What is x?",
+            "options": ["2", "3", "4", "5"],
+            "correctIndex": 1,
+            "expectedAnswer": "3",
+            "hint": "Move x to left: 2x − x = 9 − 6.",
+            "solution": "x = 9 − 6 = 3. Check: 2(3)+6=12=3+9 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Moving All x Terms Left, Constants Right",
+        "missionStepTitle": "Sort the Equation",
+        "coachHook": "Think of your equation as two teams — x terms join the left team, numbers join the right. Sign changes when they cross the equals sign!",
+        "boardDemo": {
+          "title": "Transposition Rules",
+          "steps": [
+            "Rule 1: Move an x term to the other side → flip its sign",
+            "4x − 3 = 2x + 5",
+            "Move 2x to left: 4x − 2x − 3 = 5 → 2x − 3 = 5",
+            "Move −3 to right: 2x = 5 + 3 = 8",
+            "x = 4",
+            "Check: 4(4)−3=13 and 2(4)+5=13 ✓"
+          ]
+        },
+        "readAloudPrompt": "Every term that crosses the equals sign changes its sign: plus becomes minus, minus becomes plus.",
+        "tryPrompt": "Solve: 5x − 4 = 2x + 11",
+        "masteryCheck": "x = ?",
+        "instantFeedbackWin": "Correct! x = 5. Move 2x left and 4 right: 3x=15, x=5!",
+        "instantFeedbackRetry": "5x − 2x = 11 + 4. So 3x = 15. Divide by 3.",
+        "reviewPrompt": "3x = 15 → x = 5. Check: 5(5)−4=21, 2(5)+11=21 ✓.",
+        "xpReward": 10,
+        "badgeFocus": "transposition",
+        "exercises": [
+          {
+            "questionId": "L8_C_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Transposition",
+            "skill": "transpose-solve",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve: 4x − 3 = 2x + 5",
+            "expectedAnswer": "4",
+            "hint": "Move 2x to left: 2x−3=5. Move −3 to right: 2x=8.",
+            "solution": "4x−2x=5+3 → 2x=8 → x=4. Check: 4(4)−3=13=2(4)+5 ✓."
+          },
+          {
+            "questionId": "L8_C_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Transposition",
+            "skill": "transpose-solve",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 5x − 4 = 2x + 11",
+            "options": ["3", "4", "5", "6"],
+            "correctIndex": 2,
+            "expectedAnswer": "5",
+            "hint": "Collect x terms: 5x−2x = 11+4 → 3x=15.",
+            "solution": "3x=15 → x=5. Check: 5(5)−4=21=2(5)+11 ✓.",
+            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing transposition of 5x−4 = 2x+11" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Direct Answer When Coefficients Are Equal",
+        "missionStepTitle": "Equal Coefficients — Direct Result",
+        "coachHook": "Sunyam Samyasamuccaye shines when x coefficients are the same on both sides. The x terms vanish and we read off the answer!",
+        "boardDemo": {
+          "title": "Equal Coefficients Case",
+          "steps": [
+            "Example: 3(x+4) = 3(x+2) + 6",
+            "Expand: 3x+12 = 3x+6+6 = 3x+12",
+            "Subtract 3x: 12=12. True for all x — identity!",
+            "Example: 2(x+3) = 2x + 7",
+            "Expand: 2x+6 = 2x+7 → 6=7. No solution!",
+            "Key: same x coefficient → check if the constants balance"
+          ]
+        },
+        "readAloudPrompt": "When x coefficients are the same, subtract them and you get a relationship between constants. This tells you if there is one solution, infinite, or none.",
+        "tryPrompt": "What happens when you try to solve 4x + 5 = 4x + 9?",
+        "masteryCheck": "4x + 5 = 4x + 9 has how many solutions?",
+        "instantFeedbackWin": "Exactly right! 5=9 is false. No solution exists.",
+        "instantFeedbackRetry": "Subtract 4x from both sides. What do you get?",
+        "reviewPrompt": "4x+5=4x+9 → subtract 4x → 5=9. This is false, so no solution.",
+        "xpReward": 12,
+        "badgeFocus": "equal-coefficients",
+        "exercises": [
+          {
+            "questionId": "L8_D_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Equal Coefficients",
+            "skill": "sunyam-direct",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "How many solutions does 4x + 5 = 4x + 9 have?",
+            "options": ["One solution", "Two solutions", "No solution", "Infinite solutions"],
+            "correctIndex": 2,
+            "expectedAnswer": "No solution",
+            "hint": "Subtract 4x from both sides and see what remains.",
+            "solution": "4x+5=4x+9 → 5=9. This is false. No solution."
+          },
+          {
+            "questionId": "L8_D_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Equal Coefficients",
+            "skill": "sunyam-direct",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve: 6x + 4 = 4x + 12",
+            "expectedAnswer": "4",
+            "hint": "Coefficients differ (6 vs 4). Move x terms: 2x = 8.",
+            "solution": "6x−4x=12−4 → 2x=8 → x=4. Check: 6(4)+4=28=4(4)+12 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — Solve the Equation",
+        "missionStepTitle": "Four Choices, One Answer",
+        "coachHook": "Pick fast, but pick right. Use your Vedic instincts to see the answer before you compute!",
+        "boardDemo": {
+          "title": "Speed Solving Tactics",
+          "steps": [
+            "Step 1: Spot the coefficient of x on each side",
+            "Step 2: Are they equal? → special case",
+            "Step 3: If different, transpose: x = (constant diff) ÷ (coefficient diff)",
+            "Step 4: Check by substituting back"
+          ]
+        },
+        "readAloudPrompt": "The answer x = (right constant − left constant) ÷ (left x coefficient − right x coefficient).",
+        "tryPrompt": "Solve: 7x + 1 = 4x + 13",
+        "masteryCheck": "x = ?",
+        "instantFeedbackWin": "Correct! x=4. 7(4)+1=29, 4(4)+13=29 ✓",
+        "instantFeedbackRetry": "7x−4x = 13−1 → 3x=12 → x=4.",
+        "reviewPrompt": "3x=12 → x=4.",
+        "xpReward": 12,
+        "badgeFocus": "mcq-algebra",
+        "exercises": [
+          {
+            "questionId": "L8_E_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ Equations",
+            "skill": "solve-linear-mcq",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 7x + 1 = 4x + 13",
+            "options": ["3", "4", "5", "6"],
+            "correctIndex": 1,
+            "expectedAnswer": "4",
+            "hint": "3x = 12. Divide both sides by 3.",
+            "solution": "7x−4x=13−1 → 3x=12 → x=4."
+          },
+          {
+            "questionId": "L8_E_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ Equations",
+            "skill": "solve-linear-mcq",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the solution to 5x − 10 = 3x + 2?",
+            "options": ["5", "6", "7", "8"],
+            "correctIndex": 1,
+            "expectedAnswer": "6",
+            "hint": "5x−3x = 2+10 → 2x=12.",
+            "solution": "2x=12 → x=6. Check: 5(6)−10=20=3(6)+2 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-Step: Solve 3(x+2) = 2(x+5)",
+        "missionStepTitle": "Brackets to Answer — Every Step",
+        "coachHook": "Brackets change everything! Let us expand, transpose, and solve 3(x+2) = 2(x+5) together.",
+        "boardDemo": {
+          "title": "3(x+2) = 2(x+5) — Full Solution",
+          "steps": [
+            "Expand left: 3×x + 3×2 = 3x + 6",
+            "Expand right: 2×x + 2×5 = 2x + 10",
+            "Equation becomes: 3x + 6 = 2x + 10",
+            "Move 2x to left: x + 6 = 10",
+            "Move 6 to right: x = 10 − 6 = 4",
+            "Check: 3(4+2) = 3(6) = 18, 2(4+5) = 2(9) = 18 ✓"
+          ]
+        },
+        "readAloudPrompt": "Expand brackets first, then group x terms and constants, then divide.",
+        "tryPrompt": "Fill in each step to solve 3(x+2) = 2(x+5).",
+        "masteryCheck": "x = ?",
+        "instantFeedbackWin": "Perfect! x = 4. Three steps from brackets to answer!",
+        "instantFeedbackRetry": "Did you expand both sides? 3(x+2)=3x+6 and 2(x+5)=2x+10.",
+        "reviewPrompt": "3x+6=2x+10 → x=4.",
+        "xpReward": 12,
+        "badgeFocus": "fill-step-brackets",
+        "exercises": [
+          {
+            "questionId": "L8_F_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step: Brackets",
+            "skill": "solve-brackets-fill",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Solve 3(x+2) = 2(x+5) step by step.",
+            "steps": [
+              { "label": "Expand left side: 3(x+2)", "answer": "3x + 6", "hint": "Multiply 3 by each term inside the bracket" },
+              { "label": "Expand right side: 2(x+5)", "answer": "2x + 10", "hint": "Multiply 2 by each term inside the bracket" },
+              { "label": "Move x terms to left (subtract 2x)", "answer": "x + 6 = 10", "hint": "3x − 2x = x remains on the left" },
+              { "label": "Move constant to right (subtract 6)", "answer": "x = 4", "hint": "10 − 6 = 4" },
+              { "label": "Verify: 3(4+2) = 2(4+5)", "answer": "18 = 18", "hint": "3×6=18 and 2×9=18" }
+            ],
+            "expectedAnswer": "4",
+            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing expansion and simplification of 3(x+2) = 2(x+5)" }
+          },
+          {
+            "questionId": "L8_F_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "F",
+            "subtopic": "Brackets",
+            "skill": "solve-brackets",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve: 4(x+1) = 3(x+3)",
+            "expectedAnswer": "5",
+            "hint": "Expand: 4x+4=3x+9. Move x terms left.",
+            "solution": "4x+4=3x+9 → x=5. Check: 4(6)=24=3(8) ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Word Problems — Write Equation, Then Solve",
+        "missionStepTitle": "Words into Algebra",
+        "coachHook": "Every word problem hides an equation. Your job: find it, write it, solve it. The Vedic way makes it elegant!",
+        "boardDemo": {
+          "title": "Word Problem Strategy",
+          "steps": [
+            "Read the problem and identify the unknown — call it x",
+            "Translate each sentence into algebra",
+            "Form the equation",
+            "Solve using transposition",
+            "Check by substituting x back into the original words"
+          ]
+        },
+        "readAloudPrompt": "Unknown → x. Sentence by sentence → algebra. Equation → solution. Words → check.",
+        "tryPrompt": "Rohan has 3 times as many marbles as Sita. Together they have 40. How many does Sita have?",
+        "masteryCheck": "Sita's marbles = ?",
+        "instantFeedbackWin": "Correct! Sita has 10 marbles. Rohan has 30. 10+30=40 ✓",
+        "instantFeedbackRetry": "Let Sita = x. Rohan = 3x. Equation: x + 3x = 40. So 4x=40, x=10.",
+        "reviewPrompt": "4x=40 → x=10.",
+        "xpReward": 12,
+        "badgeFocus": "word-problem-algebra",
+        "exercises": [
+          {
+            "questionId": "L8_G_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "G",
+            "subtopic": "Word Problems",
+            "skill": "word-to-equation",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Rohan has 3 times as many marbles as Sita. Together they have 40. Write an equation and solve for Sita's count.",
+            "expectedAnswer": "10",
+            "hint": "Let Sita = x, Rohan = 3x. Sum = 40.",
+            "solution": "x + 3x = 40 → 4x = 40 → x = 10. Sita has 10, Rohan has 30."
+          },
+          {
+            "questionId": "L8_G_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "G",
+            "subtopic": "Word Problems",
+            "skill": "word-to-equation",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A number increased by 7 equals twice the number minus 3. What is the number?",
+            "options": ["8", "10", "12", "14"],
+            "correctIndex": 1,
+            "expectedAnswer": "10",
+            "hint": "Let the number = x. Equation: x + 7 = 2x − 3.",
+            "solution": "x+7=2x−3 → 7+3=2x−x → x=10. Check: 10+7=17=2(10)−3 ✓.",
+            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Word problem translated to balance scale: x+7 = 2x−3" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed Drill — 5 Equations",
+        "missionStepTitle": "Equation Sprint",
+        "coachHook": "Five equations. No hesitation. Vedic algebra is in your hands now!",
+        "boardDemo": {
+          "title": "Speed Solving Summary",
+          "steps": [
+            "Expand brackets if present",
+            "Collect x on left, numbers on right",
+            "Divide by x coefficient",
+            "Answer in 3 lines or fewer"
+          ]
+        },
+        "readAloudPrompt": "Three lines maximum: expand, collect, divide. Speed is focus, not rush.",
+        "tryPrompt": "Solve: 2x+6=x+9, 4x−3=2x+5, 3(x+1)=2(x+4), 5x=3x+14, x+20=3x+4",
+        "masteryCheck": "All 5 answers?",
+        "instantFeedbackWin": "Algebra Ace! All 5 solved with Vedic speed!",
+        "instantFeedbackRetry": "Check each by substituting your answer back into the equation.",
+        "reviewPrompt": "Answers: x=3, x=4, x=5, x=7, x=8.",
+        "xpReward": 15,
+        "badgeFocus": "speed-drill-algebra",
+        "exercises": [
+          {
+            "questionId": "L8_H_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-algebra",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: 3(x+1) = 2(x+4)",
+            "options": ["4", "5", "6", "7"],
+            "correctIndex": 1,
+            "expectedAnswer": "5",
+            "hint": "Expand: 3x+3=2x+8. Collect: x=5.",
+            "solution": "3x+3=2x+8 → x=5. Check: 3(6)=18=2(9) ✓."
+          },
+          {
+            "questionId": "L8_H_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-algebra",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve: x + 20 = 3x + 4",
+            "expectedAnswer": "8",
+            "hint": "Move x to right or 3x to left: 20−4 = 3x−x → 16=2x.",
+            "solution": "16=2x → x=8. Check: 8+20=28=3(8)+4 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge — Equations with Fractions",
+        "missionStepTitle": "Fraction Frontier",
+        "coachHook": "Fractions in equations? No problem! Multiply both sides by the denominator and they disappear!",
+        "boardDemo": {
+          "title": "Solving x/2 + 3 = 7",
+          "steps": [
+            "Isolate the fraction: x/2 = 7 − 3 = 4",
+            "Multiply both sides by 2: x = 8",
+            "Check: 8/2 + 3 = 4 + 3 = 7 ✓",
+            "Another example: x/3 + 5 = 9",
+            "x/3 = 4 → x = 12",
+            "Check: 12/3 + 5 = 4 + 5 = 9 ✓"
+          ]
+        },
+        "readAloudPrompt": "Move the constant first, then multiply both sides by the denominator to clear the fraction.",
+        "tryPrompt": "Solve: x/2 + 3 = 7",
+        "masteryCheck": "x = ?",
+        "instantFeedbackWin": "Excellent! x = 8. Fractions hold no fear for you now!",
+        "instantFeedbackRetry": "Move 3 to the right: x/2 = 4. Now multiply both sides by 2.",
+        "reviewPrompt": "x/2 = 4 → x = 8.",
+        "xpReward": 15,
+        "badgeFocus": "fraction-equations-challenge",
+        "exercises": [
+          {
+            "questionId": "L8_I_01",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Equations with Fractions",
+            "skill": "solve-fraction-equation",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve: x/2 + 3 = 7",
+            "expectedAnswer": "8",
+            "hint": "Move 3 to the right, then multiply both sides by 2.",
+            "solution": "x/2 = 4 → x = 8. Check: 8/2+3=7 ✓.",
+            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing x/2 + 3 = 7 with fraction clearing step" }
+          },
+          {
+            "questionId": "L8_I_02",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Equations with Fractions",
+            "skill": "solve-fraction-equation",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve: x/3 + 5 = 9",
+            "options": ["10", "12", "15", "18"],
+            "correctIndex": 1,
+            "expectedAnswer": "12",
+            "hint": "x/3 = 4. Multiply both sides by 3.",
+            "solution": "x/3 = 9−5 = 4 → x = 12. Check: 12/3+5=9 ✓."
+          },
+          {
+            "questionId": "L8_I_03",
+            "chapterCode": "VM_G6_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Equations with Fractions",
+            "skill": "fraction-equation-challenge",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Solve x/4 + 2 = 6 step by step.",
+            "steps": [
+              { "label": "Move constant 2 to the right side", "answer": "x/4 = 4", "hint": "6 − 2 = 4" },
+              { "label": "Multiply both sides by 4", "answer": "x = 16", "hint": "4 × 4 = 16" },
+              { "label": "Verify: 16/4 + 2", "answer": "6", "hint": "4 + 2 = 6 ✓" }
+            ],
+            "expectedAnswer": "16",
+            "solution": "x/4=4 → x=16. Check: 16/4+2=6 ✓."
+          }
+        ]
+      }
+    ]
+  }
+}

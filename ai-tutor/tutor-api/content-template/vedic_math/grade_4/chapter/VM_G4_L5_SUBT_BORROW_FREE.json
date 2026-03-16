@@ -1,0 +1,625 @@
+{
+  "title": "Lesson 5: No More Borrowing! — Vedic Subtraction",
+  "gradeBand": "Grade 4",
+  "source": "Vedic Mathematics for Schools | Grade 4",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "Review: All From 9, Last From 10",
+    "Convert and add — the borrow-free method",
+    "3-digit subtraction without borrowing",
+    "4-digit subtraction without borrowing",
+    "Word problem — money",
+    "Word problem — measurement",
+    "Mixed subtraction speed drill",
+    "Fill-step: 4-digit borrow-free",
+    "Challenge: multi-step borrow-free"
+  ],
+  "learningGoals": [
+    "Apply All From 9, Last From 10 to convert and then add — eliminating borrowing from all subtractions.",
+    "Solve 3-digit and 4-digit subtraction problems in money and measurement contexts without borrowing.",
+    "Build speed and confidence by eliminating the mental burden of regrouping entirely."
+  ],
+  "coreIdeas": [
+    "Any subtraction can be converted to an addition using the complement — no borrowing ever needed.",
+    "Find the complement of the number being subtracted, then add it to the starting number.",
+    "The method works equally well for money (rupees/paise), length (cm), and weight (g) problems."
+  ],
+  "workedExamples": [
+    {
+      "question": "534 − 278 = ?",
+      "method": "Complement of 278 from 1000: 10−8=2, 9−7=2, 9−2=7 → 722. Add: 534+722=1256. Subtract 1000: 256.",
+      "answer": "256"
+    },
+    {
+      "question": "1000 − 463 = ?",
+      "method": "All From 9 Last From 10: 10−3=7, 9−6=3, 9−4=5. Answer: 537.",
+      "answer": "537"
+    },
+    {
+      "question": "Rs 500 − Rs 237 = ?",
+      "method": "Complement of 237 from 1000: 763. Add 500+763=1263, subtract 1000: Rs 263.",
+      "answer": "Rs 263"
+    },
+    {
+      "question": "6000 − 2347 = ?",
+      "method": "Complement of 2347 from 10000: 10−7=3, 9−4=5, 9−3=6, 9−2=7 → 7653. Add 6000+7653=13653, subtract 10000: 3653.",
+      "answer": "3653"
+    }
+  ],
+  "starterPractice": [
+    "Find the complement of 246 from 1000.",
+    "Rs 200 − Rs 87 = ? (use complement method)",
+    "852 − 319 = ? (use complement and add)"
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Borrowing is history! Today you learn the Vedic way to subtract — convert, add, done. No borrowing, no stress!",
+      "placementRule": "Start at group A. If the learner already knows complements fluently, jump to group C."
+    },
+    "mission": {
+      "missionTitle": "No More Borrowing!",
+      "missionPromise": "Master borrow-free subtraction for 3 and 4-digit numbers and real-life word problems.",
+      "successCelebration": "Borrowing-free forever! You can subtract any number using complements and addition!"
+    },
+    "microLessonPattern": [
+      "Coach shows the complement of the subtracted number.",
+      "Board demonstrates converting subtraction to an addition.",
+      "Student finds the complement first, then adds, then adjusts.",
+      "Instant feedback highlights which complement digit was wrong.",
+      "Review prompt asks the student to explain why borrowing is not needed."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 18 XP per exercise group based on difficulty.",
+      "streakRule": "Keep the streak counter visible; a correct answer on retry still counts as streak-save.",
+      "badgeRule": "Each group earns a themed badge tied to the borrow-free skill being practised.",
+      "celebrationStyle": "Short coach cheer, XP pulse animation, and progress bar moves forward."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers in one group triggers a mini re-teach with a simpler number.",
+      "practiceStyle": "Re-show the complement derivation, then give a simpler number to try.",
+      "masteryRule": "Advance only after the student answers the checkpoint correctly.",
+      "revisitRule": "Missed groups reappear at the start of the next session as warm-up cards."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Review: All From 9, Last From 10",
+        "missionStepTitle": "Exercise A: Review complements",
+        "coachHook": "Quick warm-up — let's make sure your complement skill is sharp before we use it for subtraction!",
+        "boardDemo": "Flash complements: complement of 37 from 100 = 63, complement of 246 from 1000 = 754.",
+        "readAloudPrompt": "What is the complement of 48 from 100?",
+        "tryPrompt": "Complement of 362 from 1000?",
+        "masteryCheck": "Complement of 79 from 100?",
+        "instantFeedbackWin": "Sharp complements! You are ready for borrow-free subtraction.",
+        "instantFeedbackRetry": "For complement of 79 from 100: 10−9=1, 9−7=2. Answer: 21.",
+        "reviewPrompt": "Quick fire: complement of 53, 127, 385.",
+        "xpReward": 10,
+        "badgeFocus": "Complement Refresher",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_A_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "A",
+            "subtopic": "Review: All From 9, Last From 10",
+            "skill": "complement recall",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Complement of 48 from 100 = ?",
+            "options": ["52", "62", "72", "42"],
+            "correctIndex": 0,
+            "expectedAnswer": "52",
+            "hint": "10−8=2, 9−4=5. Answer: 52.",
+            "solution": "Last from 10: 10−8=2. Other from 9: 9−4=5. Answer: 52."
+          },
+          {
+            "questionId": "VM_G4_L5_A_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "A",
+            "subtopic": "Review: All From 9, Last From 10",
+            "skill": "complement recall",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Complement of 362 from 1000 = ?",
+            "options": ["628", "638", "648", "658"],
+            "correctIndex": 1,
+            "expectedAnswer": "638",
+            "hint": "10−2=8, 9−6=3, 9−3=6. Answer: 638.",
+            "solution": "10−2=8, 9−6=3, 9−3=6. Complement: 638."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Convert and add — the borrow-free method",
+        "missionStepTitle": "Exercise B: Convert subtraction to addition",
+        "coachHook": "Here is the big idea: instead of subtracting, find the complement of what you are subtracting, then ADD it to your starting number!",
+        "boardDemo": "237 − 89: complement of 89 from 100 = 11. 237+11=248. But we added 100 extra, so subtract 100: 248−100=148.",
+        "readAloudPrompt": "237 − 89 = ? (use complement of 89)",
+        "tryPrompt": "352 − 78 = ? (find complement of 78, add, adjust)",
+        "masteryCheck": "425 − 67 = ?",
+        "instantFeedbackWin": "Borrow-free! Convert, add, adjust — you never touched borrowing once.",
+        "instantFeedbackRetry": "For 352−78: complement of 78 = 22. 352+22=374. 374−100=274.",
+        "reviewPrompt": "Try: 543−56, 278−43.",
+        "xpReward": 12,
+        "badgeFocus": "Convert and Add Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_B_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "B",
+            "subtopic": "Convert and add — the borrow-free method",
+            "skill": "borrow-free method",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "352 − 78 = ?",
+            "options": ["264", "274", "284", "294"],
+            "correctIndex": 1,
+            "expectedAnswer": "274",
+            "hint": "Complement of 78 = 22. Add: 352+22=374. Subtract 100: 274.",
+            "solution": "Complement of 78=22. 352+22=374. 374−100=274."
+          },
+          {
+            "questionId": "VM_G4_L5_B_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "B",
+            "subtopic": "Convert and add — the borrow-free method",
+            "skill": "borrow-free method",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "425 − 67 = ?",
+            "expectedAnswer": "358",
+            "hint": "Complement of 67=33. 425+33=458. 458−100=358.",
+            "solution": "Complement of 67=33. 425+33=458. 458−100=358."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "3-digit subtraction without borrowing",
+        "missionStepTitle": "Exercise C: 3-digit borrow-free",
+        "coachHook": "3-digit subtraction — Vedic style! Find the complement from 1000, add, then subtract 1000. Clean and borrow-free!",
+        "boardDemo": "534 − 278: complement of 278 from 1000 = 722. 534+722=1256. 1256−1000=256.",
+        "readAloudPrompt": "534 − 278 = ?",
+        "tryPrompt": "643 − 385 = ?",
+        "masteryCheck": "712 − 456 = ?",
+        "instantFeedbackWin": "Three-digit, zero borrowing! The Vedic way is truly beautiful.",
+        "instantFeedbackRetry": "For 643−385: complement of 385=615. 643+615=1258. 1258−1000=258.",
+        "reviewPrompt": "Try: 521−234, 804−367.",
+        "xpReward": 12,
+        "badgeFocus": "3-Digit Vedic Subtractor",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_C_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "C",
+            "subtopic": "3-digit subtraction without borrowing",
+            "skill": "3-digit borrow-free",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "534 − 278 = ?",
+            "options": ["246", "254", "256", "264"],
+            "correctIndex": 2,
+            "expectedAnswer": "256",
+            "hint": "Complement of 278=722. 534+722=1256. 1256−1000=256.",
+            "solution": "Complement 278→722. 534+722=1256. 1256−1000=256."
+          },
+          {
+            "questionId": "VM_G4_L5_C_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "C",
+            "subtopic": "3-digit subtraction without borrowing",
+            "skill": "3-digit borrow-free",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "712 − 456 = ?",
+            "options": ["246", "254", "256", "266"],
+            "correctIndex": 2,
+            "expectedAnswer": "256",
+            "hint": "Complement of 456=544. 712+544=1256. 1256−1000=256.",
+            "solution": "Complement 456→544. 712+544=1256. 1256−1000=256."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "4-digit subtraction without borrowing",
+        "missionStepTitle": "Exercise D: 4-digit borrow-free",
+        "coachHook": "Four digits, same method! Complement from 10000, add, subtract 10000. The sutra scales perfectly!",
+        "boardDemo": "6000 − 2347: complement of 2347 from 10000 = 7653. 6000+7653=13653. 13653−10000=3653.",
+        "readAloudPrompt": "6000 − 2347 = ?",
+        "tryPrompt": "5000 − 1862 = ?",
+        "masteryCheck": "7000 − 3456 = ?",
+        "instantFeedbackWin": "Four-digit subtraction, zero borrowing! Vedic power at work.",
+        "instantFeedbackRetry": "For 5000−1862: complement of 1862=8138. 5000+8138=13138. 13138−10000=3138.",
+        "reviewPrompt": "Try: 8000−5234, 4000−1789.",
+        "xpReward": 14,
+        "badgeFocus": "4-Digit Vedic Subtractor",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_D_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "D",
+            "subtopic": "4-digit subtraction without borrowing",
+            "skill": "4-digit borrow-free",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "5000 − 1862 = ?",
+            "options": ["3128", "3138", "3148", "3158"],
+            "correctIndex": 1,
+            "expectedAnswer": "3138",
+            "hint": "Complement of 1862=8138. 5000+8138=13138. 13138−10000=3138.",
+            "solution": "Complement 1862→8138. 5000+8138=13138−10000=3138."
+          },
+          {
+            "questionId": "VM_G4_L5_D_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "D",
+            "subtopic": "4-digit subtraction without borrowing",
+            "skill": "4-digit borrow-free",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "7000 − 3456 = ?",
+            "expectedAnswer": "3544",
+            "hint": "Complement of 3456=6544. 7000+6544=13544. 13544−10000=3544.",
+            "solution": "Complement 3456→6544. 7000+6544=13544−10000=3544."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Word problem — money",
+        "missionStepTitle": "Exercise E: Money word problems",
+        "coachHook": "Real life! Let's use our borrow-free method to solve money problems — the kind you face at the market every day!",
+        "boardDemo": "Rani has Rs 500. She spends Rs 237 on books. How much is left? Complement of 237=763. 500+763=1263. 1263−1000=Rs 263.",
+        "readAloudPrompt": "Rani has Rs 500 and spends Rs 237. How much remains?",
+        "tryPrompt": "Mohan has Rs 1000. He buys a bat for Rs 468. How much is left?",
+        "masteryCheck": "A shopkeeper has Rs 750. He pays Rs 283 for stock. What remains?",
+        "instantFeedbackWin": "Brilliant real-life maths! No borrowing in the market either.",
+        "instantFeedbackRetry": "For Rs 1000−Rs 468: complement of 468=532. Answer: Rs 532.",
+        "reviewPrompt": "Try: Rs 600−Rs 245, Rs 800−Rs 379.",
+        "xpReward": 14,
+        "badgeFocus": "Market Mathematician",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_E_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "E",
+            "subtopic": "Word problem — money",
+            "skill": "money word problem",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Rani has Rs 500. She spends Rs 237 on books. How much does she have left?",
+            "steps": [
+              {"label": "Set up: Rs 500 − Rs 237. Find complement of 237 from 1000: ?", "answer": "763", "hint": "10−7=3, 9−3=6, 9−2=7. Complement: 763"},
+              {"label": "Add: 500 + 763 = ?", "answer": "1263", "hint": "500 + 763"},
+              {"label": "Subtract 1000 to adjust: 1263 − 1000 = ?", "answer": "263", "hint": "Remove the extra 1000"}
+            ],
+            "expectedAnswer": "263",
+            "hint": "Complement 237=763. 500+763=1263. 1263−1000=263.",
+            "solution": "Complement of 237=763. 500+763=1263. Rs 1263−Rs 1000=Rs 263."
+          },
+          {
+            "questionId": "VM_G4_L5_E_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "E",
+            "subtopic": "Word problem — money",
+            "skill": "money word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Mohan has Rs 1000. He buys a cricket bat for Rs 468. How much money is left?",
+            "options": ["522", "532", "542", "552"],
+            "correctIndex": 1,
+            "expectedAnswer": "532",
+            "hint": "1000−468. Use All From 9, Last From 10: 10−8=2, 9−6=3, 9−4=5. Answer: 532.",
+            "solution": "1000−468: last from 10: 10−8=2, others from 9: 9−6=3, 9−4=5. Rs 532 left."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Word problem — measurement",
+        "missionStepTitle": "Exercise F: Measurement word problems",
+        "coachHook": "Same trick in science class! Length, weight, capacity — the complement method works everywhere!",
+        "boardDemo": "A rope is 500 cm long. 237 cm is cut off. How much remains? 500−237 = 263 cm. Use same complement steps.",
+        "readAloudPrompt": "A rope of 500 cm has 237 cm cut off. How much remains?",
+        "tryPrompt": "A bag weighs 1000 g. 362 g is removed. How much is left?",
+        "masteryCheck": "A tank holds 5000 L. 2347 L is used. How much remains?",
+        "instantFeedbackWin": "Measurement mastered! The sutra works in every unit.",
+        "instantFeedbackRetry": "For 1000−362: complement of 362=638. Answer: 638 g.",
+        "reviewPrompt": "Try: 1000 m − 457 m, 2000 kg − 834 kg.",
+        "xpReward": 14,
+        "badgeFocus": "Measurement Vedic Star",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_F_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "F",
+            "subtopic": "Word problem — measurement",
+            "skill": "measurement word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A bag of rice weighs 1000 g. A shopkeeper takes out 362 g. How many grams remain?",
+            "options": ["628", "638", "648", "658"],
+            "correctIndex": 1,
+            "expectedAnswer": "638",
+            "hint": "1000−362: complement of 362=638.",
+            "solution": "1000−362: 10−2=8, 9−6=3, 9−3=6. Answer: 638 g."
+          },
+          {
+            "questionId": "VM_G4_L5_F_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "F",
+            "subtopic": "Word problem — measurement",
+            "skill": "measurement word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "A tank holds 5000 L of water. 2347 L is pumped out. How many litres remain?",
+            "expectedAnswer": "2653",
+            "hint": "Complement of 2347 from 10000=7653. 5000+7653=12653. 12653−10000=2653.",
+            "solution": "Complement 2347→7653. 5000+7653=12653−10000=2653 L."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Mixed subtraction speed drill",
+        "missionStepTitle": "Exercise G: Mixed speed drill",
+        "coachHook": "Speed drill! Mix of 2-digit, 3-digit, and word problems. Use your fastest complement — no borrowing allowed!",
+        "boardDemo": "Flash: 100−63=37, 1000−824=176, 500−149=351.",
+        "readAloudPrompt": "1000 − 824 = ?",
+        "tryPrompt": "Speed! 600 − 247 = ?",
+        "masteryCheck": "Rs 800 − Rs 356 = ?",
+        "instantFeedbackWin": "Speed subtractor! Complement method is now fully automatic for you.",
+        "instantFeedbackRetry": "For 600−247: complement of 247=753. 600+753=1353. 1353−1000=353.",
+        "reviewPrompt": "Speed: 700−182, 1000−519, 400−163.",
+        "xpReward": 14,
+        "badgeFocus": "Speed Subtractor",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_G_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed subtraction speed drill",
+            "skill": "mixed borrow-free speed",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "600 − 247 = ?",
+            "options": ["343", "353", "363", "373"],
+            "correctIndex": 1,
+            "expectedAnswer": "353",
+            "hint": "Complement of 247=753. 600+753=1353. 1353−1000=353.",
+            "solution": "Complement 247→753. 600+753=1353−1000=353."
+          },
+          {
+            "questionId": "VM_G4_L5_G_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed subtraction speed drill",
+            "skill": "mixed borrow-free speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Rs 800 − Rs 356 = ?",
+            "expectedAnswer": "444",
+            "hint": "Complement of 356=644. 800+644=1444. 1444−1000=444.",
+            "solution": "Complement 356→644. 800+644=1444−1000=444."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Fill-step: 4-digit borrow-free",
+        "missionStepTitle": "Exercise H: Step-by-step 4-digit subtraction",
+        "coachHook": "Step-by-step for a 4-digit example! Complement, add, adjust — three boxes to fill and you have the answer!",
+        "boardDemo": "6000 − 2347: Box 1: complement of 2347=7653. Box 2: 6000+7653=13653. Box 3: 13653−10000=3653.",
+        "readAloudPrompt": "Fill the three steps for 8000 − 3421.",
+        "tryPrompt": "Now fill steps for 9000 − 5678.",
+        "masteryCheck": "Write all three steps for 7000 − 2845.",
+        "instantFeedbackWin": "Three-step borrow-free 4-digit! You are totally unstoppable.",
+        "instantFeedbackRetry": "For 9000−5678: complement=4322. 9000+4322=13322. 13322−10000=3322.",
+        "reviewPrompt": "Fill steps for 6000−4137 and 5000−2968.",
+        "xpReward": 16,
+        "badgeFocus": "4-Digit Borrow-Free Expert",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_H_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "H",
+            "subtopic": "Fill-step: 4-digit borrow-free",
+            "skill": "fill-step 4-digit borrow-free",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 8000 − 3421 using complement and addition.",
+            "steps": [
+              {"label": "Step 1 — complement of 3421 from 10000: ?", "answer": "6579", "hint": "10−1=9, 9−2=7, 9−4=5, 9−3=6 → 6579"},
+              {"label": "Step 2 — add: 8000 + 6579 = ?", "answer": "14579", "hint": "8000 + 6579"},
+              {"label": "Step 3 — subtract 10000: 14579 − 10000 = ?", "answer": "4579", "hint": "Remove the extra 10000"}
+            ],
+            "expectedAnswer": "4579",
+            "hint": "Complement 3421→6579. 8000+6579=14579. 14579−10000=4579.",
+            "solution": "Complement 3421=6579. 8000+6579=14579. 14579−10000=4579."
+          },
+          {
+            "questionId": "VM_G4_L5_H_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "H",
+            "subtopic": "Fill-step: 4-digit borrow-free",
+            "skill": "fill-step 4-digit borrow-free",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 7000 − 2845 using complement and addition.",
+            "steps": [
+              {"label": "Complement of 2845 from 10000: ?", "answer": "7155", "hint": "10−5=5, 9−4=5, 9−8=1, 9−2=7 → 7155"},
+              {"label": "Add: 7000 + 7155 = ?", "answer": "14155", "hint": "7000 + 7155"},
+              {"label": "Subtract 10000: 14155 − 10000 = ?", "answer": "4155", "hint": "Remove the extra 10000"}
+            ],
+            "expectedAnswer": "4155",
+            "hint": "Complement 2845→7155. 7000+7155=14155−10000=4155.",
+            "solution": "Complement 2845=7155. 7000+7155=14155. 14155−10000=4155."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: multi-step borrow-free",
+        "missionStepTitle": "Exercise I: Multi-step challenge",
+        "coachHook": "Boss challenge! A multi-step problem combining addition and borrow-free subtraction. You have all the tools — go for it!",
+        "boardDemo": "Priya collects 2500 stickers. She gives 1375 to friends and 648 to her sister. How many remain? 2500−1375=1125. 1125−648=477.",
+        "readAloudPrompt": "A farmer has 3000 kg grain. Sells 1248 kg and then 675 kg. How much remains?",
+        "tryPrompt": "Solve the problem in two steps.",
+        "masteryCheck": "Arjun saves Rs 4000. He spends Rs 1563 on books and Rs 892 on stationery. How much is left?",
+        "instantFeedbackWin": "Multi-step mastery! Two borrow-free subtractions back to back — outstanding!",
+        "instantFeedbackRetry": "For 3000−1248: complement=8752, 3000+8752=11752−10000=1752. Then 1752−675: complement=325, 1752+325=2077−1000=1077.",
+        "reviewPrompt": "Create your own two-step problem and solve it borrow-free.",
+        "xpReward": 18,
+        "badgeFocus": "Multi-Step Vedic Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L5_I_Q1",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: multi-step borrow-free",
+            "skill": "multi-step borrow-free",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A farmer has 3000 kg of grain. He sells 1248 kg on Monday and 675 kg on Tuesday. How much grain is left?",
+            "options": ["1057", "1067", "1077", "1087"],
+            "correctIndex": 2,
+            "expectedAnswer": "1077",
+            "hint": "3000−1248=1752. Then 1752−675=1077.",
+            "solution": "3000−1248=1752. 1752−675=1077 kg."
+          },
+          {
+            "questionId": "VM_G4_L5_I_Q2",
+            "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: multi-step borrow-free",
+            "skill": "multi-step borrow-free",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Arjun saves Rs 4000. He spends Rs 1563 on books and Rs 892 on stationery. How much is left?",
+            "expectedAnswer": "1545",
+            "hint": "4000−1563=2437. 2437−892=1545.",
+            "solution": "4000−1563=2437. 2437−892=1545."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {
+      "stepId": "VM_G4_L5_A",
+      "exerciseGroup": "A",
+      "subtopic": "Review: All From 9, Last From 10",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Complement from 9 and 10", "asset": "complement_all_from_9.svg", "caption": "All digits from 9, last digit from 10."},
+      "teacherLine": "Quick complement warm-up! Every subtraction we do today starts with finding the complement — let's make that instant!",
+      "boardAction": "Display complement_all_from_9.svg. Flash 100−48=52 and 1000−362=638.",
+      "checkpointPrompt": "Complement of 79 from 100?",
+      "microPractice": "Quick fire: complement of 53, 127, 385."
+    },
+    {
+      "stepId": "VM_G4_L5_B",
+      "exerciseGroup": "B",
+      "subtopic": "Convert and add — the borrow-free method",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Convert to Addition", "asset": "complement_all_from_9.svg", "caption": "Find complement, add, then subtract the base."},
+      "teacherLine": "The big Vedic idea: turn every subtraction into an addition using the complement. No borrowing, just adding!",
+      "boardAction": "Show arrow: Subtraction → find complement → add → adjust. Work 237−89 step by step.",
+      "checkpointPrompt": "425 − 67 = ?",
+      "microPractice": "Try: 543−56, 278−43."
+    },
+    {
+      "stepId": "VM_G4_L5_H",
+      "exerciseGroup": "H",
+      "subtopic": "Fill-step: 4-digit borrow-free",
+      "boardMode": "steps",
+      "teacherLine": "Three labelled boxes — complement, add, adjust. Fill them carefully and the answer appears without any borrowing!",
+      "boardAction": "Show three empty labelled boxes. Fill in for 8000−3421: complement=6579, sum=14579, final=4579.",
+      "checkpointPrompt": "Write all three steps for 7000 − 2845.",
+      "microPractice": "Fill steps for 6000−4137 and 5000−2968."
+    },
+    {
+      "stepId": "VM_G4_L5_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge: multi-step borrow-free",
+      "boardMode": "steps",
+      "teacherLine": "Two subtractions in one problem — apply the borrow-free method twice. You have all the power you need!",
+      "boardAction": "Show two-step board: 3000−1248=1752, then 1752−675=1077. Each step uses complement method.",
+      "checkpointPrompt": "Arjun saves Rs 4000, spends Rs 1563 and Rs 892. What remains?",
+      "microPractice": "Create your own two-step problem and solve it borrow-free."
+    }
+  ],
+  "screenplay": [
+    {
+      "beatId": "VM_G4_L5_A_INTRO",
+      "stepId": "VM_G4_L5_A",
+      "exerciseGroup": "A",
+      "subtopic": "Review: All From 9, Last From 10",
+      "sequence": 501,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "Borrowing is going to disappear from your life today! All we need is the complement trick you already know.",
+      "boardAction": "Display complement_all_from_9.svg with animated sutra label.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Remember: last digit from 10, all other digits from 9.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G4_L5_E_EXPLAIN",
+      "stepId": "VM_G4_L5_E",
+      "exerciseGroup": "E",
+      "subtopic": "Word problem — money",
+      "sequence": 601,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "At the market, at the bank, anywhere you subtract — the complement method works. Let's use it for Rs 500 − Rs 237!",
+      "boardAction": "Show money problem with rupee symbols. Steps: complement 237→763, 500+763=1263, 1263−1000=Rs 263.",
+      "checkpointPrompt": "Mohan has Rs 1000. He buys a bat for Rs 468. How much is left?",
+      "pauseType": "student_input",
+      "holdSec": 5.0,
+      "expectedStudentResponse": "532",
+      "fallbackHint": "1000−468: complement of 468=532. Answer: Rs 532.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    }
+  ]
+}

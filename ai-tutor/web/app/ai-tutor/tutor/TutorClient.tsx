@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { RobotAvatar, type AvatarExpression, type AvatarVariant } from "./RobotAvatar";
 import { usePathname, useSearchParams } from "next/navigation";
 import type {
   TutorAssetItem,
@@ -66,7 +67,7 @@ type SvgBoardStep =
       durationSec: number;
     };
 
-type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" | "male" };
+type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" | "male" | "robot"; voice: string; variant?: AvatarVariant; };
 type ConversationRole = "tutor" | "student" | "system";
 type ConversationChannel = "voice" | "text" | "doubt" | "system";
 type ConversationTurn = {
@@ -89,18 +90,22 @@ type SavedTutorBookmark = {
   elapsedSec: number;
   savedAt: number;
 };
-const DEFAULT_COURSE_ID = "neet_physics";
+const DEFAULT_COURSE_ID = "vedic_math";
 const MODULE_TO_COURSE_ID: Record<string, string> = {
   VEDIC_MATH: "vedic_math",
   NEET_PHYSICS: "neet_physics",
   NEET_CHEMISTRY: "neet_chemistry",
-  NEET_BIOLOGY: "neet_biology"
+  NEET_BIOLOGY: "neet_biology",
+  APTITUDE_REASONING: "aptitude_reasoning",
+  FINANCIAL_LITERACY: "financial_literacy"
 };
 const COURSE_LABELS: Record<string, string> = {
   vedic_math: "Vedic Math",
   neet_physics: "NEET Physics",
   neet_chemistry: "NEET Chemistry",
-  neet_biology: "NEET Biology"
+  neet_biology: "NEET Biology",
+  aptitude_reasoning: "Aptitude & Reasoning",
+  financial_literacy: "Financial Literacy"
 };
 const EX_GROUP_KEYS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 const TEACHING_CUE_ORDER = ["intro", "explain", "demo", "guided", "practice", "check", "checkpoint"] as const;
@@ -223,12 +228,39 @@ function toAssetUrl(raw: string): string {
 }
 
 const AVATARS: Avatar[] = [
-  { id: "raj",  name: "Raj",  role: "Learning Coach",  color: "#16a34a", style: "male" }
+  { id: "raj",   name: "Raj",   role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "aditya", variant: "screen"  },
+  { id: "nova",  name: "Nova",  role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "aditya", variant: "round"   },
+  { id: "priya", name: "Priya", role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "priya",  variant: "classic" },
 ];
-const STATIC_AVATAR_MODE = true;
+const STATIC_AVATAR_MODE = false;
+
+const WIN_PHRASES = [
+  { emoji: "🌟", text: "Brilliant!" },
+  { emoji: "🎯", text: "You nailed it!" },
+  { emoji: "⭐", text: "Excellent!" },
+  { emoji: "🚀", text: "Outstanding!" },
+  { emoji: "💯", text: "Perfect!" },
+  { emoji: "🏆", text: "Champion!" },
+  { emoji: "✨", text: "Fantastic!" },
+  { emoji: "🎉", text: "Correct!" },
+  { emoji: "🔥", text: "On fire!" },
+  { emoji: "👑", text: "Superb!" },
+  { emoji: "💫", text: "Spot on!" },
+  { emoji: "🎊", text: "Amazing!" },
+];
+
+const CONFETTI_COLORS = ["#E91E8C", "#3B3A8C", "#FFD700", "#00C896", "#FF6B6B", "#4ECDC4", "#FF9F43"];
+const CONFETTI_SPREAD = [
+  { dx: -130, dy: -160 }, { dx: 0,   dy: -190 }, { dx: 130, dy: -160 },
+  { dx: 190,  dy: 0    }, { dx: 155, dy: 130  }, { dx: 65,  dy: 185  },
+  { dx: -65,  dy: 185  }, { dx: -155,dy: 130  }, { dx: -190,dy: 0    },
+  { dx: -90,  dy: -110 }, { dx: 90,  dy: -110 }, { dx: 110, dy: 110  },
+  { dx: -110, dy: 110  }, { dx: 40,  dy: -195 },
+];
 
 const AVATAR_STAGE_ART: Record<string, string> = {
-  raj: "/avatar_1/sprite_r03_c01.svg"
+  raj:   "/avatar_1/sprite_r03_c01.svg",
+  priya: "/teacher_1/svg/view_front.svg",
 };
 
 const BOARD_TEACHER_SVG_BY_CUE: Record<string, string> = {
@@ -376,6 +408,135 @@ const CHAPTER_DEMO_SPEECH: Record<string, string> = {
   L6_NIKHILAM_BASE_10_100: "Watch 97 times 98. Deviations from 100: minus 3 and minus 2. Left part: 95. Right part: 06. Answer: 9506.",
   L7_SQUARES_ENDING_5: "Watch 35 squared. Prefix is 3. Multiply by the next number: 3 times 4 is 12. Attach 25. Answer: 1225. Any number ending in 5 works like this!",
 };
+const ACTUAL_CHAPTER_LABELS: Record<string, string> = {
+  L3_MULTIPLY_BY_11: "Digit Sums and the Nine Point Circle",
+  L4_VERTICAL_CROSSWISE: "Left to Right Arithmetic",
+  L6_NIKHILAM_BASE_10_100: "Number Splitting",
+  L7_SQUARES_ENDING_5: "Base Multiplication",
+  L8_YAVADUNAM: "Checking and Divisibility",
+  L9_GENERAL_MULTIPLICATION: "Bar Numbers",
+  L10_DIVISION_BY_9: "Special Multiplication",
+  L11_VINCULUM_INTRO: "General Multiplication",
+  L12_FRACTIONS_DECIMALS: "Squaring",
+  L13_ALGEBRAIC_IDENTITIES: "Equations",
+  L14_FACTORISATION: "Fractions",
+  L15_SQUARES_NEAR_BASE: "Special Division",
+  L16_CUBES_INTRO: "The Crowning Gem",
+};
+
+const ACTUAL_CHAPTER_DEMO_STEPS: Record<string, Array<{ text: string; color?: string; size?: number }>> = {
+  L3_MULTIPLY_BY_11: [
+    { text: "Question: What is the digit sum of 13?", color: "#334155", size: 14 },
+    { text: "Step 1 - Add the digits: 1 + 3", color: "#0369a1", size: 14 },
+    { text: "Step 2 - Total = 4", color: "#334155", size: 14 },
+    { text: "Answer: digit sum = 4", color: "#065f46", size: 20 },
+    { text: "Digit sums help you check bigger arithmetic fast.", color: "#7c2d12", size: 12 },
+  ],
+  L4_VERTICAL_CROSSWISE: [
+    { text: "Question: 56 + 67 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Add tens first: 50 + 60 = 110", color: "#0369a1", size: 13 },
+    { text: "Step 2 - Add ones: 6 + 7 = 13", color: "#334155", size: 13 },
+    { text: "Step 3 - Combine: 110 + 13 = 123", color: "#334155", size: 13 },
+    { text: "Answer: 123", color: "#065f46", size: 20 },
+  ],
+  L6_NIKHILAM_BASE_10_100: [
+    { text: "Question: 2345 + 6738 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Split 2345 into 2000 and 345", color: "#0369a1", size: 13 },
+    { text: "Step 2 - 6738 + 2000 = 8738", color: "#334155", size: 13 },
+    { text: "Step 3 - 8738 + 345 = 9083", color: "#334155", size: 13 },
+    { text: "Answer: 9083", color: "#065f46", size: 20 },
+  ],
+  L7_SQUARES_ENDING_5: [
+    { text: "Question: 7 x 8 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Think base 10: deficiencies are 3 and 2", color: "#0369a1", size: 13 },
+    { text: "Step 2 - Left part: 7 - 2 = 5", color: "#334155", size: 13 },
+    { text: "Step 3 - Right part: 3 x 2 = 6", color: "#334155", size: 13 },
+    { text: "Answer: 56", color: "#065f46", size: 20 },
+  ],
+  L8_YAVADUNAM: [
+    { text: "Question: Is 462 divisible by 11?", color: "#334155", size: 14 },
+    { text: "Step 1 - Add alternating digits: (4 + 2) - 6", color: "#0369a1", size: 13 },
+    { text: "Step 2 - 6 - 6 = 0", color: "#334155", size: 13 },
+    { text: "Step 3 - Zero means it passes the 11-test", color: "#334155", size: 13 },
+    { text: "Answer: yes, 462 is divisible by 11", color: "#065f46", size: 18 },
+  ],
+  L9_GENERAL_MULTIPLICATION: [
+    { text: "Question: Rewrite 20 - 1 using bar thinking", color: "#334155", size: 14 },
+    { text: "Step 1 - Borrow one ten mentally", color: "#0369a1", size: 13 },
+    { text: "Step 2 - Replace the units cleanly", color: "#334155", size: 13 },
+    { text: "Step 3 - 20 - 1 becomes 19", color: "#334155", size: 13 },
+    { text: "Answer: 19", color: "#065f46", size: 20 },
+  ],
+  L10_DIVISION_BY_9: [
+    { text: "Question: 23 x 11 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Write the outer digits: 2 _ 3", color: "#0369a1", size: 13 },
+    { text: "Step 2 - Insert their sum: 2 + 3 = 5", color: "#334155", size: 13 },
+    { text: "Step 3 - Read the answer: 253", color: "#334155", size: 13 },
+    { text: "Answer: 253", color: "#065f46", size: 20 },
+  ],
+  L11_VINCULUM_INTRO: [
+    { text: "Question: 74 x 8 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Split 74 into 70 and 4", color: "#0369a1", size: 13 },
+    { text: "Step 2 - 70x8 = 560 and 4x8 = 32", color: "#334155", size: 13 },
+    { text: "Step 3 - Add the parts: 560 + 32 = 592", color: "#334155", size: 13 },
+    { text: "Answer: 592", color: "#065f46", size: 20 },
+  ],
+  L12_FRACTIONS_DECIMALS: [
+    { text: "Question: 55 x 55 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Prefix is 5", color: "#0369a1", size: 13 },
+    { text: "Step 2 - 5 x 6 = 30, then attach 25", color: "#334155", size: 13 },
+    { text: "Step 3 - Read the square: 3025", color: "#334155", size: 13 },
+    { text: "Answer: 3025", color: "#065f46", size: 20 },
+  ],
+  L13_ALGEBRAIC_IDENTITIES: [
+    { text: "Question: x + 3 = 10", color: "#334155", size: 14 },
+    { text: "Step 1 - Reverse the +3", color: "#0369a1", size: 13 },
+    { text: "Step 2 - 10 - 3 = 7", color: "#334155", size: 13 },
+    { text: "Step 3 - Check: 7 + 3 = 10", color: "#334155", size: 13 },
+    { text: "Answer: x = 7", color: "#065f46", size: 20 },
+  ],
+  L14_FACTORISATION: [
+    { text: "Question: 1/2 + 1/3 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Common denominator is 6", color: "#0369a1", size: 13 },
+    { text: "Step 2 - 1/2 = 3/6 and 1/3 = 2/6", color: "#334155", size: 13 },
+    { text: "Step 3 - Add: 3/6 + 2/6 = 5/6", color: "#334155", size: 13 },
+    { text: "Answer: 5/6", color: "#065f46", size: 20 },
+  ],
+  L15_SQUARES_NEAR_BASE: [
+    { text: "Question: 123 / 9 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - 9 goes into 12 once", color: "#0369a1", size: 13 },
+    { text: "Step 2 - Carry the remainder into the next digit", color: "#334155", size: 13 },
+    { text: "Step 3 - Final result is 13 remainder 6", color: "#334155", size: 13 },
+    { text: "Answer: 13 R 6", color: "#065f46", size: 20 },
+  ],
+  L16_CUBES_INTRO: [
+    { text: "Question: 132 / 11 = ?", color: "#334155", size: 14 },
+    { text: "Step 1 - Recognize 11 x 12 = 132", color: "#0369a1", size: 13 },
+    { text: "Step 2 - Division reverses multiplication cleanly", color: "#334155", size: 13 },
+    { text: "Step 3 - Quotient = 12, remainder = 0", color: "#334155", size: 13 },
+    { text: "Answer: 12", color: "#065f46", size: 20 },
+  ],
+};
+
+const ACTUAL_CHAPTER_DEMO_SPEECH: Record<string, string> = {
+  L3_MULTIPLY_BY_11: "Watch the digit sum of 13. Add the digits: 1 plus 3 equals 4. That final single digit is the digit sum. This pattern helps you check bigger calculations very quickly.",
+  L4_VERTICAL_CROSSWISE: "Watch 56 plus 67 from left to right. Add the tens first to get 110. Then add the ones to get 13. Combine them and you get 123. The whole calculation stays organized in one flow.",
+  L6_NIKHILAM_BASE_10_100: "Watch me split 2345 plus 6738 into easier parts. First add 2000 to 6738 and get 8738. Then add the remaining 345 to reach 9083. Number splitting keeps the arithmetic calm and accurate.",
+  L7_SQUARES_ENDING_5: "Watch 7 times 8 using base multiplication near 10. Their deficiencies are 3 and 2. Left part: 7 minus 2 gives 5. Right part: 3 times 2 gives 6. Answer: 56.",
+  L8_YAVADUNAM: "Watch the divisibility test for 462 by 11. Add alternating digits: 4 plus 2, then subtract 6. The result is 0, so 462 is divisible by 11. This is a fast mental check before you trust an answer.",
+  L9_GENERAL_MULTIPLICATION: "Watch bar-number thinking turn 20 minus 1 into 19 without confusion. You borrow one ten mentally, then rewrite the units cleanly. Bar numbers help later arithmetic stay compact and organized.",
+  L10_DIVISION_BY_9: "Watch 23 times 11. Write the outer digits 2 and 3. Insert their sum, 5, in the middle. The answer is 253. This chapter is about spotting special multiplication patterns instantly.",
+  L11_VINCULUM_INTRO: "Watch 74 times 8. Split 74 into 70 and 4. Multiply each part by 8, then add 560 and 32 to get 592. General multiplication works when you keep the structure visible all the way through.",
+  L12_FRACTIONS_DECIMALS: "Watch 55 squared. Take the prefix 5, multiply it by the next number 6, and attach 25. The answer is 3025. Squaring becomes much faster when you recognize the right pattern.",
+  L13_ALGEBRAIC_IDENTITIES: "Watch x plus 3 equals 10. Reverse the plus 3 by subtracting 3 from 10. That gives x equals 7. Then check it: 7 plus 3 really does make 10.",
+  L14_FACTORISATION: "Watch one-half plus one-third. The common denominator is 6. Convert the fractions to 3 over 6 and 2 over 6, then add them to get 5 over 6. Fractions become easier when every move is laid out clearly.",
+  L15_SQUARES_NEAR_BASE: "Watch 123 divided by 9. Nine goes into 12 once, then you carry the remainder into the next step. The final result is 13 remainder 6. Special division is about controlling each carry without losing place value.",
+  L16_CUBES_INTRO: "Watch 132 divided by 11. Since 11 times 12 is 132, the quotient is 12 with no remainder. The crowning-gem division lessons focus on seeing those structure clues quickly.",
+};
+
+const CHAPTER_LABEL_MAP = { ...CHAPTER_SUTRAS, ...ACTUAL_CHAPTER_LABELS };
+const CHAPTER_DEMO_STEP_MAP = { ...CHAPTER_DEMO_STEPS, ...ACTUAL_CHAPTER_DEMO_STEPS };
+const CHAPTER_DEMO_SPEECH_MAP = { ...CHAPTER_DEMO_SPEECH, ...ACTUAL_CHAPTER_DEMO_SPEECH };
 
 function AvatarFace({
   avatar,
@@ -435,6 +596,8 @@ function SpeakingTeacher({
 }) {
   const [visemeIdx, setVisemeIdx] = useState(0);
   const [showBlink, setShowBlink] = useState(false);
+  // Eye direction for teacher_1: 'center' | 'left' | 'right'
+  const [eyeDir, setEyeDir] = useState<"center" | "left" | "right">("center");
   // Sprite-cycle index for male teacher speaking animation (0–3)
   const [speakFrame, setSpeakFrame] = useState(0);
 
@@ -474,6 +637,45 @@ function SpeakingTeacher({
     scheduleBlink();
     return () => clearTimeout(t);
   }, []);
+
+  // Eye tracking: look left/right during speaking (teacher_1 only)
+  useEffect(() => {
+    if (STATIC_AVATAR_MODE || avatar.style === "male") { setEyeDir("center"); return; }
+    if (!speaking) { setEyeDir("center"); return; }
+    const SEQ: Array<{ dir: "center" | "left" | "right"; ms: number }> = [
+      { dir: "center", ms: 2000 }, { dir: "left",   ms: 1100 },
+      { dir: "center", ms: 1600 }, { dir: "right",  ms: 1100 },
+    ];
+    let idx = 0;
+    let t: ReturnType<typeof setTimeout>;
+    const step = () => {
+      setEyeDir(SEQ[idx].dir);
+      t = setTimeout(() => { idx = (idx + 1) % SEQ.length; step(); }, SEQ[idx].ms);
+    };
+    step();
+    return () => clearTimeout(t);
+  }, [speaking, avatar.style]);
+
+  // ── RoboDynamics robot avatar (Option C) ─────────────────────────────────
+  if (avatar.style === "robot") {
+    const expression: AvatarExpression =
+      feedback === true  ? "happy"
+      : feedback === false ? "concerned"
+      : speaking          ? "encouraging"
+      : cue === "checkpoint" || cue === "practice" ? "thinking"
+      : "neutral";
+    return (
+      <RobotAvatar
+        speaking={speaking}
+        expression={expression}
+        size={compact ? 80 : 200}
+        accentColor="#E91E8C"
+        baseColor="#3B3A8C"
+        compact={compact}
+        variant={avatar.variant ?? "screen"}
+      />
+    );
+  }
 
   // ── Male teacher: cycling sprite gesture + CSS speaking rhythm ──────────────
   if (avatar.style === "male") {
@@ -537,6 +739,12 @@ function SpeakingTeacher({
         <img src={VISEME_CYCLE_SRCS[visemeIdx]} alt=""
              className="st-layer st-viseme" draggable={false} />
       )}
+      {/* Eye direction overlay (look left / right) */}
+      {eyeDir !== "center" && !showBlink && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={eyeDir === "left" ? "/teacher_1/svg/head_look_left.svg" : "/teacher_1/svg/head_look_right.svg"}
+             alt="" className="st-layer st-blink" draggable={false} />
+      )}
       {/* Blink overlay */}
       {showBlink && (
         /* eslint-disable-next-line @next/next/no-img-element */
@@ -587,7 +795,7 @@ function buildIntroSlideBoardSteps(
     addT("s1_badge", 16, 22, "EXPLAIN  —  Step 1 of 3: Here is the Concept", "#94a3b8", 11);
     addL("s1_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     addT("s1_sutra_lbl", 16, 54, "Vedic Sutra:", "#7c2d12", 13);
-    addT("s1_sutra", 16, 78, `"${CHAPTER_SUTRAS[chapterCode] || "Vedic Method"}"`, avatar.color, 17);
+    addT("s1_sutra", 16, 78, `"${CHAPTER_LABEL_MAP[chapterCode] || "Vedic Method"}"`, avatar.color, 17);
     addL("s1_line", 16, 92, 480, 92, avatar.color, 2);
     addT("s1_goal_lbl", 16, 116, "Today you will learn:", "#334155", 13);
     learningGoals.slice(0, 3).forEach((g, i) => {
@@ -597,7 +805,7 @@ function buildIntroSlideBoardSteps(
     addT("s1_next", 16, 240, "► Next: Watch a worked example on the board", "#64748b", 11);
   } else if (slide === 2) {
     // ── DEMO: Step-by-step worked example ────────────────────────────────
-    const demoLines = CHAPTER_DEMO_STEPS[chapterCode] || [
+    const demoLines = CHAPTER_DEMO_STEP_MAP[chapterCode] || [
       { text: "Step 1 — Identify the base or pattern", color: "#0369a1", size: 14 },
       { text: "Step 2 — Apply the Sutra rule", color: "#334155", size: 14 },
       { text: "Step 3 — Write the answer", color: "#065f46", size: 16 },
@@ -631,7 +839,7 @@ function buildIntroSlideBoardSteps(
 }
 
 function getDemoSpeech(chapterCode: string): string {
-  return CHAPTER_DEMO_SPEECH[chapterCode]
+  return CHAPTER_DEMO_SPEECH_MAP[chapterCode]
     || "Watch how I apply the Vedic method step by step. Each step follows directly from the Sutra rule. Notice how much faster this is than the conventional method.";
 }
 
@@ -646,7 +854,7 @@ function AnimatedBoard({
 }) {
   return (
     <div style={{ width: "100%", border: "1px solid #cbd5e1", borderRadius: "10px", background: "#fff", overflow: "hidden" }}>
-      <svg viewBox="0 0 580 340" width="100%" height="340" role="img" aria-label="AI Tutor Whiteboard">
+      <svg viewBox="0 0 760 380" width="100%" style={{ display: "block", height: "auto", maxHeight: "380px" }} role="img" aria-label="AI Tutor Whiteboard">
         <defs>
           <pattern id="board-grid" width="24" height="24" patternUnits="userSpaceOnUse">
             <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#f1f5f9" strokeWidth="1" />
@@ -794,17 +1002,17 @@ const DEFAULT_CHAPTERS: TutorChapter[] = [
   ),
   makeChapter(
     "L3_MULTIPLY_BY_11",
-    "Chapter 3: Multiplication by 11",
+    "Chapter 3: Digit Sums and the Nine Point Circle",
     20,
-    ["2-digit x 11", "Carry handling", "3-digit extension", "Pattern drills"],
-    ["Apply insert-sum method", "Handle carry correctly", "Scale to bigger numbers"]
+    ["Adding digits and digit sums", "Two-step digit sums", "The Nine Point Circle", "Casting out nines"],
+    ["Find digit sums quickly", "Use casting out nines to check arithmetic", "Read the Vedic Square as a pattern tool"]
   ),
   makeChapter(
     "L4_VERTICAL_CROSSWISE",
-    "Chapter 4: Vertical and Crosswise (2-digit)",
+    "Chapter 4: Left to Right Arithmetic",
     30,
-    ["Vertical step", "Crosswise step", "Carry flow", "2-digit x 2-digit"],
-    ["Follow V-C-V order", "Manage carry", "Solve structured products"]
+    ["Two-digit addition from left to right", "Three-digit addition with carries", "Multiplication from left to right", "Doubling and halving for easier products"],
+    ["Add from left to right", "Use left-to-right multiplication", "Confirm answers with digit sums"]
   ),
   makeChapter(
     "L5_ALL_FROM_9_LAST_FROM_10",
@@ -815,33 +1023,33 @@ const DEFAULT_CHAPTERS: TutorChapter[] = [
   ),
   makeChapter(
     "L6_NIKHILAM_BASE_10_100",
-    "Chapter 6: Nikhilam (Near Base Multiplication)",
+    "Chapter 6: Number Splitting",
     30,
-    ["Base and deviation", "Left-right parts", "Negative deviation", "Near 100 practice"],
-    ["Use near-base strategy", "Write left-right parts correctly", "Reduce long multiplication"]
+    ["Addition by splitting into two easy chunks", "Choosing the split line to avoid carries", "Subtraction by splitting", "Multiplication by splitting without carry"],
+    ["Split long calculations into smaller chunks", "Choose split points that reduce carries", "Use number splitting across operations"]
   ),
   makeChapter(
     "L7_SQUARES_ENDING_5",
-    "Chapter 7: Squares Ending in 5",
+    "Chapter 7: Base Multiplication",
     20,
-    ["n5 pattern", "Prefix x next", "Attach 25", "Speed drills"],
-    ["Square ending-5 quickly", "Use prefix rule", "Build speed"]
+    ["Numbers below 10 by deficiencies from 10", "Numbers just over 10", "Numbers close to 100 with carries", "Larger numbers near 1000"],
+    ["Multiply numbers near a base mentally", "Handle carries across larger bases", "Square numbers near a base with the same deficiency idea"]
   ),
   makeChapter(
     "L8_YAVADUNAM",
-    "Chapter 8: Yavadunam (Deficiency Method)",
+    "Chapter 8: Checking and Divisibility",
     30,
-    ["Deficiency from base", "Cross adjustment", "Right-part digits", "Mixed cases"],
-    ["Apply deficiency method", "Use right width", "Avoid sign errors"]
+    ["Digit-sum check for division", "Approximate answers", "Last-digit checks", "Divisibility by 4 and 11"],
+    ["Check division and multiplication answers quickly", "Use approximate and last-digit checks", "Apply divisibility rules for 4 and 11"]
   ),
-  makeChapter("L9_GENERAL_MULTIPLICATION", "Chapter 9: General Multiplication Strategy", 30, ["Decomposition", "Mental chunking", "Cross-checks", "Mixed drills"], ["Choose efficient strategy", "Break products", "Validate quickly"]),
-  makeChapter("L10_DIVISION_BY_9", "Chapter 10: Quick Division by 9", 25, ["Quotient and remainder", "Progressive sums", "Remainder checks", "qRr format"], ["Divide by 9 quickly", "Write qRr format", "Verify remainder"]),
-  makeChapter("L11_VINCULUM_INTRO", "Chapter 11: Vinculum Numbers (Intro)", 25, ["Negative digits", "Representation rules", "Simple conversions", "Use in simplification"], ["Understand vinculum", "Convert both ways", "Use in simplification"]),
-  makeChapter("L12_FRACTIONS_DECIMALS", "Chapter 12: Fractions and Decimals", 25, ["Benchmark fractions", "Fraction to decimal", "Recurring awareness", "Mental checks"], ["Convert common fractions", "Use benchmarks", "Estimate correctly"]),
-  makeChapter("L13_ALGEBRAIC_IDENTITIES", "Chapter 13: Algebraic Identities", 30, ["(a+b)^2", "(a-b)^2", "a^2-b^2", "Pattern spotting"], ["Expand identities", "Avoid sign errors", "Recognize forms"]),
-  makeChapter("L14_FACTORISATION", "Chapter 14: Factorisation Basics", 30, ["Difference of squares", "Common factors", "Reverse expansion", "Quick verification"], ["Factorize forms", "Reverse expansion", "Check quickly"]),
-  makeChapter("L15_SQUARES_NEAR_BASE", "Chapter 15: Squares Near Base", 25, ["Deviation method", "Left-right writeup", "Below/above base", "Near 100 drills"], ["Square near base", "Handle +/- deviation", "Increase speed"]),
-  makeChapter("L16_CUBES_INTRO", "Chapter 16: Cubes Intro and Review", 30, ["Cube concept", "Small cube patterns", "Mental multiplication chain", "Final review"], ["Compute cubes", "Use multiplication chain", "Connect methods"])
+  makeChapter("L9_GENERAL_MULTIPLICATION", "Chapter 9: Bar Numbers", 30, ["Removing a single barred digit", "Splitting after the bar", "Several barred digits together", "Subtraction with barred digits"], ["Convert between barred and ordinary notation", "Use bar numbers to simplify subtraction", "Recognize when bar form makes later work easier"]),
+  makeChapter("L10_DIVISION_BY_9", "Chapter 10: Special Multiplication", 25, ["Multiplication by 11 for two-digit numbers", "Multiplication by 11 for longer numbers", "By one more than the one before", "Multiplication by nines"], ["Apply special multiplication patterns faster than the general method", "Choose the right shortcut from the number structure", "Keep place value correct with complements and carries"]),
+  makeChapter("L11_VINCULUM_INTRO", "Chapter 11: General Multiplication", 25, ["Revision of single-digit multiplication from left to right", "Two-figure multiplication vertically and crosswise", "Long number times two digits", "Three-figure extension and digit pairs"], ["Use one coherent vertically-and-crosswise pattern", "Merge carries cleanly in mental work", "Transfer the same multiplication structure into algebraic work"]),
+  makeChapter("L12_FRACTIONS_DECIMALS", "Chapter 12: Squaring", 25, ["Squaring numbers ending in 5", "Squaring numbers near 50", "General squaring with duplexes", "Number splitting and algebraic squaring"], ["Choose the right squaring pattern quickly", "Extend squaring methods to larger numbers", "Check square information through digit clues and square roots"]),
+  makeChapter("L13_ALGEBRAIC_IDENTITIES", "Chapter 13: Equations", 30, ["One-step equations by transpose and apply", "One-step equations with decimals and fractions", "Two-step equations", "Two-step equations with a full divided expression"], ["Reverse operations in the correct order", "Handle decimals and fractions without changing the core method", "Compress multi-step solving into one-line mental solutions"]),
+  makeChapter("L14_FACTORISATION", "Chapter 14: Fractions", 30, ["Fraction addition and subtraction", "Mixed numbers and cancellation", "Shared-factor denominators", "Comparing fractions by cross-multiplication"], ["Add, subtract, multiply, and divide fractions through one connected structure", "Handle mixed numbers and shared factors efficiently", "Compare fractions mentally by cross-products"]),
+  makeChapter("L15_SQUARES_NEAR_BASE", "Chapter 15: Special Division", 25, ["Division by 9 for short numbers", "Longer numbers and shortcut carries", "Division by 8, 7, and nearby divisors", "Division by 99, 98, and near-100 divisors"], ["Perform special division mentally", "Track quotient digits and remainder adjustments", "Rebuild the dividend to verify the answer"]),
+  makeChapter("L16_CUBES_INTRO", "Chapter 16: The Crowning Gem (Advanced Division)", 30, ["Single Figure on the Flag Division", "Short division remainder control", "Longer number division", "Negative flag digits with bar numbers"], ["Use one-line division by two-figure divisors", "Control remainder strategy deliberately", "Handle advanced division with flag and bar digits"])
 ];
 const NEET_PHYSICS_FALLBACK_CHAPTERS: TutorChapter[] = [
   makeChapter(
@@ -870,11 +1078,31 @@ const NEET_BIOLOGY_FALLBACK_CHAPTERS: TutorChapter[] = [
     ["Identify living characteristics", "Classify organisms", "Use taxonomy terms correctly"]
   )
 ];
+const APTITUDE_REASONING_FALLBACK_CHAPTERS: TutorChapter[] = [
+  makeChapter(
+    "APT_CH1",
+    "Chapter 1: Number Patterns and Logical Reasoning",
+    30,
+    ["Number series", "Analogies", "Odd-one-out", "Pattern spotting"],
+    ["Recognize common aptitude patterns", "Reason through elimination", "Explain the choice clearly"]
+  )
+];
+const FINANCIAL_LITERACY_FALLBACK_CHAPTERS: TutorChapter[] = [
+  makeChapter(
+    "FIN_CH1",
+    "Chapter 1: Money Basics and Budgeting",
+    30,
+    ["Income and expenses", "Needs vs wants", "Savings habits", "Simple budgeting"],
+    ["Track money decisions", "Build a simple budget", "Choose financially sound actions"]
+  )
+];
 const DEFAULT_CHAPTERS_BY_COURSE: Record<string, TutorChapter[]> = {
   vedic_math: DEFAULT_CHAPTERS,
   neet_physics: NEET_PHYSICS_FALLBACK_CHAPTERS,
   neet_chemistry: NEET_CHEMISTRY_FALLBACK_CHAPTERS,
-  neet_biology: NEET_BIOLOGY_FALLBACK_CHAPTERS
+  neet_biology: NEET_BIOLOGY_FALLBACK_CHAPTERS,
+  aptitude_reasoning: APTITUDE_REASONING_FALLBACK_CHAPTERS,
+  financial_literacy: FINANCIAL_LITERACY_FALLBACK_CHAPTERS
 };
 
 const DEFAULT_EXERCISE_GROUPS: TutorExerciseGroup[] = EX_GROUP_KEYS.map((g) => ({ exerciseGroup: g, title: `Exercise ${g}` }));
@@ -916,11 +1144,24 @@ function TutorContent() {
   const dbCourseIdFromQuery = (params.get("dbCourseId") || "").trim();
   const requestedChapterFromQuery = (params.get("chapterCode") || "").trim();
   const requestedExerciseGroupFromQuery = (params.get("exerciseGroup") || "").trim().toUpperCase();
+  const isDemoMode = params.get("demo") === "1";
+  const isFreshStart = params.get("fresh") === "1";
+  const returnUrl = (params.get("returnUrl") || params.get("backUrl") || "").trim();
   const requestedCourseId = courseIdFromQuery || MODULE_TO_COURSE_ID[moduleFromQuery] || DEFAULT_COURSE_ID;
   const requestedFallbackChapters = fallbackChaptersForCourse(requestedCourseId);
   const defaultRequestedChapter = requestedChapterFromQuery || requestedFallbackChapters[0].chapterCode;
   const defaultRequestedExerciseGroup = requestedExerciseGroupFromQuery || "A";
-  const resumeStorageKey = `aiTutorResume:${requestedCourseId}`;
+  // Scope bookmark to the specific user — prevents one student loading another's saved session
+  const jwtUserId = useMemo(() => {
+    const payload = decodeJwtPayload(token);
+    if (!payload) return "";
+    // child_id takes priority (student), fall back to user_id
+    const uid = payload.child_id ?? payload.user_id ?? payload.sub ?? "";
+    return String(uid).trim();
+  }, [token]);
+  const resumeStorageKey = jwtUserId
+    ? `aiTutorResume:${requestedCourseId}:${jwtUserId}`
+    : `aiTutorResume:${requestedCourseId}`;
 
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
@@ -952,6 +1193,7 @@ function TutorContent() {
   const [selectedExerciseGroup, setSelectedExerciseGroup] = useState(defaultRequestedExerciseGroup);
   const [activeExerciseGroup, setActiveExerciseGroup] = useState(defaultRequestedExerciseGroup);
   const [studentName, setStudentName] = useState("");
+  const [demoGrade, setDemoGrade] = useState("8");
   const [knownLanguage, setKnownLanguage] = useState<KnownLanguage>("english");
   const [learnerLevel, setLearnerLevel] = useState<LearnerLevel>("beginner");
   const [learnerGoal, setLearnerGoal] = useState<LearnerGoal>("school");
@@ -963,6 +1205,8 @@ function TutorContent() {
   const [lastAnswerMode, setLastAnswerMode] = useState<"typed" | "voice">("typed");
   const [confidence, setConfidence] = useState<Confidence>("medium");
   const [check, setCheck] = useState<TutorCheckResponse | null>(null);
+  const [isCelebrating, setIsCelebrating] = useState(false);
+  const [celebrationPhrase, setCelebrationPhrase] = useState<{ emoji: string; text: string }>({ emoji: "🌟", text: "Brilliant!" });
   const [doubt, setDoubt] = useState("");
   const [doubtReply, setDoubtReply] = useState("");
   const [conversationLog, setConversationLog] = useState<ConversationTurn[]>([]);
@@ -971,8 +1215,12 @@ function TutorContent() {
   const [flowState, setFlowState] = useState<TutorOrchestratorState>("idle");
   const [flowVersion, setFlowVersion] = useState(0);
   const [realtimeConnected, setRealtimeConnected] = useState(false);
+  const [showLessonComplete, setShowLessonComplete] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showPurchaseCta, setShowPurchaseCta] = useState(false);
 
   const [selectedAvatarId, setSelectedAvatarId] = useState(AVATARS[0].id);
+  const [teachingPace, setTeachingPace] = useState<"relaxed" | "normal" | "quick">("normal");
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [micPermission, setMicPermission] = useState<MicPermission>("unknown");
   const [isTeachingBoard, setIsTeachingBoard] = useState(false);
@@ -980,7 +1228,9 @@ function TutorContent() {
   const [currentCue, setCurrentCue] = useState<string>("explain");
   const [isListening, setIsListening] = useState(false);
   const [isEvaluatingAnswer, setIsEvaluatingAnswer] = useState(false);
+  const [isLoadingNextQuestion, setIsLoadingNextQuestion] = useState(false);
   const [awaitingStudentResponse, setAwaitingStudentResponse] = useState(false);
+  const [pendingContinue, setPendingContinue] = useState(false);
   const [autoTeachEnabled, setAutoTeachEnabled] = useState(true);
   const [pendingKickoff, setPendingKickoff] = useState<"none" | "welcome" | "teach">("none");
   const [pendingKickoffToken, setPendingKickoffToken] = useState("");
@@ -989,25 +1239,36 @@ function TutorContent() {
   const [boardRunId, setBoardRunId] = useState(0);
   const [boardSpeed, setBoardSpeed] = useState(1);
 
+  // ── Rich question type state ─────────────────────────────────────────────
+  const [selectedMcqIndex, setSelectedMcqIndex] = useState<number | null>(null);
+  const [fillStepIndex, setFillStepIndex] = useState(0);
+  const [fillStepInputs, setFillStepInputs] = useState<string[]>([]);
+  const [fillStepResults, setFillStepResults] = useState<boolean[]>([]);
+
   const boardTimerRef = useRef<number | null>(null);
   const boardWaitResolveRef = useRef<(() => void) | null>(null);
   const answerInputRef = useRef<HTMLInputElement | null>(null);
   const listenTimerRef = useRef<number | null>(null);
+  const continueTimerRef = useRef<number | null>(null);  // auto-continue after correct answer pause
   const speechRecognitionRef = useRef<any>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const audioCtxRef    = useRef<AudioContext | null>(null);          // shared ctx — iOS safe
+  const audioSourceRef = useRef<AudioBufferSourceNode | null>(null); // current playing node
   const audioUnlockedRef = useRef(false);
   const speakSeqRef = useRef(0);
   const teachRunRef = useRef(0);
   const teachingLockRef = useRef(false);   // ref-based lock so teachOnBoard guard is never stale
   const kickoffRunningRef = useRef(false);
   const lastKickoffTokenRef = useRef("");
+  const checkAnswerInFlightRef = useRef(false); // sync guard — prevents double-submit race condition
   const autoListenQuestionRef = useRef("");
   const silenceRecoveryQuestionRef = useRef("");
+  const silenceRecoveryMsRef = useRef(12000);  // updated by BehaviorClassifier via check-answer
   const speakRef = useRef<(text: string) => Promise<void>>(async () => {});
   const teachOnBoardRef = useRef<() => Promise<void>>(async () => {});
   const sessionRecoveryRef = useRef(false);
 
-  const canStart = useMemo(() => token.trim().length > 20, [token]);
+  const canStart = useMemo(() => token.trim().length > 20 && (!isDemoMode || studentName.trim().length > 0), [token, isDemoMode, studentName]);
   const launchTokenGrade = useMemo(() => {
     const payload = decodeJwtPayload(token);
     return normalizeGradeValue(gradeFromQuery) ?? normalizeGradeValue(payload?.grade);
@@ -1176,13 +1437,14 @@ function TutorContent() {
     return index >= 0 ? index : 0;
   }, [lessonPath, activeExerciseGroup]);
   const lessonGroupOrder = useMemo(() => {
-    const raw = lessonPath.length ? lessonPath.map((item) => item.exerciseGroup) : [];
-    const fallback = lessonExerciseFlow.map((item) => item.exerciseGroup);
-    const ordered = (raw.length ? raw : fallback)
+    const pathGroups = lessonPath.map((item) => item.exerciseGroup);
+    const flowGroups = lessonExerciseFlow.map((item) => item.exerciseGroup);
+    const catalogGroups = exerciseGroups.map((item) => item.exerciseGroup);
+    const ordered = (flowGroups.length ? flowGroups : catalogGroups.length ? catalogGroups : pathGroups.length ? pathGroups : EX_GROUP_KEYS)
       .map((value) => String(value || "").trim())
       .filter(Boolean);
     return [...new Set(ordered)];
-  }, [lessonExerciseFlow, lessonPath]);
+  }, [exerciseGroups, lessonExerciseFlow, lessonPath]);
   const missionPrompt =
     teacherUtterance ||
     activeDuolingoStep?.coachHook ||
@@ -1225,11 +1487,15 @@ function TutorContent() {
   const showLessonPathRail = activeUiPanels.size === 0 || activeUiPanels.has("lesson path rail");
   const showWorkedBoardSupport = activeUiPanels.size === 0 || activeUiPanels.has("worked board");
   const showHelpDrawer = activeUiPanels.size === 0 || activeUiPanels.has("help drawer");
+  const hasAnswerReadyQuestion = !!question && !isLoadingNextQuestion && canAttemptAnswer && !sessionProgress.livesDepleted && !isTeachingBoard && !isSpeaking && !isEvaluatingAnswer && !isListening;
   const missionStatusLabel = useMemo(() => {
     if (sessionProgress.livesDepleted) {
       return "Review to refill hearts";
     }
-    if (awaitingStudentResponse) {
+    if (isLoadingNextQuestion) {
+      return "Loading next question";
+    }
+    if (awaitingStudentResponse || hasAnswerReadyQuestion) {
       return "Your turn";
     }
     if (check?.correct) {
@@ -1239,7 +1505,7 @@ function TutorContent() {
       return "Coach is guiding";
     }
     return "Ready for the next step";
-  }, [awaitingStudentResponse, check?.correct, isSpeaking, isTeachingBoard, sessionProgress.livesDepleted]);
+  }, [awaitingStudentResponse, hasAnswerReadyQuestion, check?.correct, isLoadingNextQuestion, isSpeaking, isTeachingBoard, sessionProgress.livesDepleted]);
   const activeAttempt = useMemo(() => {
     if (!question) return null;
     return attemptByQuestion[question.questionId] || null;
@@ -1325,16 +1591,17 @@ function TutorContent() {
   const stageStatusText = useMemo(() => {
     if (isTeachingBoard) return "Teaching on whiteboard...";
     if (isEvaluatingAnswer) return "Evaluating your answer...";
+    if (isLoadingNextQuestion) return "Preparing your next challenge…";
     if (isSpeaking) return "Speaking live...";
     if (isListening) return "Listening to your answer...";
-    if (awaitingStudentResponse) {
+    if (awaitingStudentResponse || hasAnswerReadyQuestion) {
       return micPermission === "denied"
         ? "Your turn now: type your answer and click Check Answer."
         : "Your turn now: answer by voice or text.";
     }
     return "Ready for next step.";
-  }, [isTeachingBoard, isEvaluatingAnswer, isSpeaking, isListening, awaitingStudentResponse, micPermission]);
-  const stageSceneMode = awaitingStudentResponse || isListening || isEvaluatingAnswer || !!check ? "student" : "coach";
+  }, [isTeachingBoard, isEvaluatingAnswer, isLoadingNextQuestion, isSpeaking, isListening, awaitingStudentResponse, hasAnswerReadyQuestion, micPermission]);
+  const stageSceneMode = (isTeachingBoard || isSpeaking || isLoadingNextQuestion || pendingKickoff !== "none") ? "coach" : (awaitingStudentResponse || isListening || isEvaluatingAnswer || !!check || hasAnswerReadyQuestion) ? "student" : "coach";
   const showInlineBoard = showBoardPanel && stageSceneMode === "coach";
   const lessonListenLine = useMemo(() => {
     if (!question) return missionReadPrompt;
@@ -1373,6 +1640,10 @@ function TutorContent() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
+    if (audioSourceRef.current) {
+      try { audioSourceRef.current.stop(); } catch { /* already stopped */ }
+      audioSourceRef.current = null;
+    }
     if (activeAudioRef.current) {
       activeAudioRef.current.onplaying = null;
       activeAudioRef.current.onended = null;
@@ -1389,48 +1660,59 @@ function TutorContent() {
     const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
     if (!AudioCtx) return;
     try {
-      const ctx = new AudioCtx();
+      const ctx = new AudioCtx() as AudioContext;
       const now = ctx.currentTime;
-      const patterns: Record<string, Array<{ hz: number; sec: number; gain: number }>> = {
-        correct: [
-          { hz: 540, sec: 0.08, gain: 0.08 },
-          { hz: 720, sec: 0.1, gain: 0.08 },
-          { hz: 900, sec: 0.12, gain: 0.08 },
-        ],
-        wrong: [
-          { hz: 320, sec: 0.1, gain: 0.08 },
-          { hz: 260, sec: 0.14, gain: 0.08 },
-        ],
-        streak: [
-          { hz: 520, sec: 0.08, gain: 0.08 },
-          { hz: 660, sec: 0.08, gain: 0.08 },
-          { hz: 840, sec: 0.08, gain: 0.08 },
-          { hz: 1040, sec: 0.12, gain: 0.08 },
-        ],
-        depleted: [
-          { hz: 240, sec: 0.14, gain: 0.08 },
-          { hz: 180, sec: 0.2, gain: 0.08 },
-        ],
+
+      // 6 distinct "correct" celebration sounds — picked randomly for variety
+      type Note = { hz: number; sec: number; gain: number; type?: OscillatorType; gap?: number };
+      const CORRECT_SOUNDS: Note[][] = [
+        // 1. Classic rising chime (sine)
+        [{ hz: 540, sec: 0.09, gain: 0.32 }, { hz: 720, sec: 0.1, gain: 0.32 }, { hz: 900, sec: 0.13, gain: 0.35 }],
+        // 2. Level-up scale (triangle — bright & game-like)
+        [{ hz: 392, sec: 0.07, gain: 0.28, type: "triangle" }, { hz: 523, sec: 0.07, gain: 0.28, type: "triangle" },
+         { hz: 659, sec: 0.07, gain: 0.28, type: "triangle" }, { hz: 784, sec: 0.14, gain: 0.32, type: "triangle" }],
+        // 3. Magic sparkle (fast high notes)
+        [{ hz: 660, sec: 0.06, gain: 0.28, gap: 0.01 }, { hz: 880, sec: 0.06, gain: 0.28, gap: 0.01 },
+         { hz: 1100, sec: 0.06, gain: 0.28, gap: 0.01 }, { hz: 1320, sec: 0.12, gain: 0.32, gap: 0.01 }],
+        // 4. Xylophone pop (triangle, wide jump)
+        [{ hz: 880, sec: 0.08, gain: 0.30, type: "triangle" }, { hz: 1108, sec: 0.1, gain: 0.30, type: "triangle" },
+         { hz: 1320, sec: 0.14, gain: 0.34, type: "triangle" }],
+        // 5. Double-ding bell (two overlapping high notes — bell feel)
+        [{ hz: 987, sec: 0.15, gain: 0.30 }, { hz: 1318, sec: 0.15, gain: 0.28, gap: -0.05 }],
+        // 6. Joyful 5-note run
+        [{ hz: 523, sec: 0.06, gain: 0.28 }, { hz: 587, sec: 0.06, gain: 0.28 }, { hz: 659, sec: 0.06, gain: 0.28 },
+         { hz: 784, sec: 0.06, gain: 0.28 }, { hz: 1047, sec: 0.14, gain: 0.35 }],
+      ];
+
+      const patterns: Record<string, Note[]> = {
+        wrong: [{ hz: 320, sec: 0.1, gain: 0.25 }, { hz: 260, sec: 0.16, gain: 0.25 }],
+        streak: [{ hz: 520, sec: 0.07, gain: 0.28, type: "triangle" }, { hz: 660, sec: 0.07, gain: 0.28, type: "triangle" },
+                 { hz: 840, sec: 0.07, gain: 0.28, type: "triangle" }, { hz: 1040, sec: 0.07, gain: 0.28, type: "triangle" },
+                 { hz: 1320, sec: 0.14, gain: 0.35, type: "triangle" }],
+        depleted: [{ hz: 240, sec: 0.14, gain: 0.25 }, { hz: 180, sec: 0.22, gain: 0.25 }],
       };
-      const seq = patterns[kind] || patterns.correct;
+
+      const seq = kind === "correct"
+        ? CORRECT_SOUNDS[Math.floor(Math.random() * CORRECT_SOUNDS.length)]
+        : (patterns[kind] ?? CORRECT_SOUNDS[0]);
+
       let cursor = now;
       for (const n of seq) {
+        cursor += (n.gap ?? 0);          // negative gap allows overlapping notes
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.type = "sine";
+        osc.type = n.type ?? "sine";
         osc.frequency.setValueAtTime(n.hz, cursor);
         gain.gain.setValueAtTime(0.0001, cursor);
-        gain.gain.exponentialRampToValueAtTime(n.gain, cursor + 0.01);
+        gain.gain.exponentialRampToValueAtTime(n.gain, cursor + 0.012);
         gain.gain.exponentialRampToValueAtTime(0.0001, cursor + n.sec);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(cursor);
-        osc.stop(cursor + n.sec);
-        cursor += n.sec + 0.02;
+        osc.stop(cursor + n.sec + 0.02);
+        cursor += n.sec + (n.gap == null ? 0.02 : 0);
       }
-      window.setTimeout(() => {
-        void ctx.close().catch(() => undefined);
-      }, 900);
+      window.setTimeout(() => { void ctx.close().catch(() => undefined); }, 1200);
     } catch {
       // sound effects are optional
     }
@@ -1481,7 +1763,12 @@ function TutorContent() {
         let storedBookmark = null;
         if (typeof window !== "undefined") {
           try {
-            const rawBookmark = window.localStorage.getItem(resumeStorageKey);
+            // If ?fresh=1 is in the URL, wipe any saved bookmark so we always
+            // start a brand-new session (useful for demo share links).
+            if (isFreshStart) {
+              window.localStorage.removeItem(resumeStorageKey);
+            }
+            const rawBookmark = isFreshStart ? null : window.localStorage.getItem(resumeStorageKey);
             storedBookmark = rawBookmark ? JSON.parse(rawBookmark) : null;
           } catch {
             storedBookmark = null;
@@ -1524,6 +1811,9 @@ function TutorContent() {
     }
   }, [voiceEnabled]);
 
+  // ── Start-screen welcome greeting fires inside unlockAudio() ──
+  // (must be inside a user-gesture handler — Chrome/iOS block autoplay on mount)
+
   useEffect(() => {
     if (!classStartedAt) {
       setClassElapsedSec(0);
@@ -1538,6 +1828,10 @@ function TutorContent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    // Demo + fresh: clear any saved name so the student types their own
+    if (isDemoMode) {
+      try { window.localStorage.removeItem("aiTutorStudentName"); } catch { /* ignore */ }
+    }
     if (studentNameFromQuery) {
       setStudentName(studentNameFromQuery);
       window.localStorage.setItem("aiTutorStudentName", studentNameFromQuery);
@@ -1551,6 +1845,12 @@ function TutorContent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    // ?fresh=1 → never show the "resume saved place" card
+    if (isFreshStart) {
+      window.localStorage.removeItem(resumeStorageKey);
+      setSavedBookmark(null);
+      return;
+    }
     try {
       const rawBookmark = window.localStorage.getItem(resumeStorageKey);
       if (!rawBookmark) {
@@ -1575,7 +1875,7 @@ function TutorContent() {
     } catch {
       setSavedBookmark(null);
     }
-  }, [requestedCourseId, resumeStorageKey]);
+  }, [isFreshStart, requestedCourseId, resumeStorageKey]);
   useEffect(() => {
     setConfidence(onboardingConfidence);
   }, [onboardingConfidence]);
@@ -1740,34 +2040,40 @@ function TutorContent() {
         if (!ttsResponse.ok || !ttsData?.audioBase64) {
           continue;
         }
-        const mimeType = String(ttsData.mimeType || "audio/wav");
-        const audio = new Audio(`data:${mimeType};base64,${ttsData.audioBase64}`);
-        activeAudioRef.current = audio;
-        await new Promise<void>((resolve, reject) => {
-          audio.onplaying = () => {
-            if (speakSeq === speakSeqRef.current) {
-              setIsSpeaking(true);
-            }
-          };
-          audio.onended = () => {
-            if (speakSeq === speakSeqRef.current) {
-              setIsSpeaking(false);
-            }
-            resolve();
-          };
-          audio.onerror = () => {
-            if (speakSeq === speakSeqRef.current) {
-              setIsSpeaking(false);
-            }
-            reject(new Error("TTS audio playback failed"));
-          };
-          void audio.play().catch((err) => {
-            reject(err instanceof Error ? err : new Error("TTS audio playback error"));
+        // ── iOS-safe: AudioContext.decodeAudioData instead of new Audio(dataUri) ──
+        // new Audio(dataUri).play() is blocked on iOS Safari after any await.
+        // The shared AudioContext stays unlocked after the user-gesture unlock.
+        const AudioCtxCls = (window as any).AudioContext || (window as any).webkitAudioContext;
+        const ctx: AudioContext | null = audioCtxRef.current ||
+          (AudioCtxCls ? (audioCtxRef.current = new AudioCtxCls()) : null);
+        if (ctx) {
+          if (ctx.state === "suspended") await ctx.resume();
+          const b64 = ttsData.audioBase64 as string;
+          const binStr = atob(b64);
+          const bytes = new Uint8Array(binStr.length);
+          for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
+          const audioBuffer = await ctx.decodeAudioData(bytes.buffer.slice(0));
+          if (speakSeq !== speakSeqRef.current) return; // interrupted mid-decode
+          const source = ctx.createBufferSource();
+          source.buffer = audioBuffer;
+          source.connect(ctx.destination);
+          audioSourceRef.current = source;
+          setIsSpeaking(true);
+          await new Promise<void>((resolve) => { source.onended = () => resolve(); source.start(0); });
+          audioSourceRef.current = null;
+        } else {
+          // Fallback for very old browsers without AudioContext
+          const mimeType = String(ttsData.mimeType || "audio/wav");
+          const audio = new Audio(`data:${mimeType};base64,${ttsData.audioBase64}`);
+          activeAudioRef.current = audio;
+          await new Promise<void>((resolve, reject) => {
+            audio.onplaying = () => { if (speakSeq === speakSeqRef.current) setIsSpeaking(true); };
+            audio.onended  = () => { if (speakSeq === speakSeqRef.current) setIsSpeaking(false); resolve(); };
+            audio.onerror  = () => { if (speakSeq === speakSeqRef.current) setIsSpeaking(false); reject(new Error("audio error")); };
+            void audio.play().catch(reject);
           });
-        });
-        if (speakSeq === speakSeqRef.current) {
-          setIsSpeaking(false);
         }
+        if (speakSeq === speakSeqRef.current) setIsSpeaking(false);
         return;
       }
     } catch {
@@ -2002,6 +2308,16 @@ function TutorContent() {
 
     const customSvgSteps = normalizeSvgBoardSteps((beat as any)?.svgAnimation);
     if (customSvgSteps.length) {
+      // ── Always write the teacherLine as a header so board matches coach speech ──
+      const tLine = (beat as any)?.teacherLine || teachingStep?.teacherLine || "";
+      if (tLine) {
+        const brief = tLine.length > 70 ? tLine.slice(0, 70) + "…" : tLine;
+        steps.push({ kind: "text", id: "svghdr_tl", x: 18, y: 18, text: brief,
+          color: "#3b3a8c", size: 13, delaySec: 0, durationSec: 0.25 });
+        steps.push({ kind: "line", id: "svghdr_div", x1: 18, y1: 28, x2: 742, y2: 28,
+          color: "#c7d2fe", width: 1, delaySec: 0.1, durationSec: 0.2 });
+        delay = 0.3;
+      }
       let maxTimeline = 0;
       for (const step of customSvgSteps) {
         steps.push({
@@ -2023,18 +2339,19 @@ function TutorContent() {
     }
 
     if (!customSvgSteps.length && teachingStep?.boardMode !== "free_draw" && (q.subtopic || "").toLowerCase().includes("ten point circle")) {
-      addText("tpc_intro", 20, 54, "Step 1: I will draw the ten-point circle first.", "#334155", 14);
+      addText("tpc_intro", 30, 54, "Step 1: I will draw the ten-point circle first.", "#334155", 15);
+      // Centred on 760×380 board: cx=380, cy=210, r=140
       const ringPoints = [
-        { x: 520, y: 156, label: "9" },
-        { x: 540, y: 202, label: "8" },
-        { x: 522, y: 250, label: "7" },
-        { x: 472, y: 284, label: "6" },
-        { x: 380, y: 296, label: "5" },
-        { x: 288, y: 284, label: "4" },
-        { x: 238, y: 250, label: "3" },
-        { x: 220, y: 202, label: "2" },
-        { x: 240, y: 156, label: "1" },
-        { x: 380, y: 128, label: "10" },
+        { x: 517, y: 140, label: "9" },
+        { x: 520, y: 210, label: "8" },
+        { x: 517, y: 280, label: "7" },
+        { x: 450, y: 330, label: "6" },
+        { x: 380, y: 350, label: "5" },
+        { x: 310, y: 330, label: "4" },
+        { x: 243, y: 280, label: "3" },
+        { x: 240, y: 210, label: "2" },
+        { x: 243, y: 140, label: "1" },
+        { x: 380,  y: 70, label: "10" },
       ];
       for (let i = 0; i < ringPoints.length; i += 1) {
         const current = ringPoints[i];
@@ -2042,7 +2359,71 @@ function TutorContent() {
         addLine(`tpc_line_${i}`, current.x, current.y, next.x, next.y, "#0ea5e9", 2);
       }
       ringPoints.forEach((p, i) => addText(`tpc_label_${i}`, p.x - 8, p.y - 8, p.label, avatar.color, 14));
-      addText("tpc_labels", 250, 320, "10 at top, then 9..1 clockwise", "#1e293b", 13);
+      addText("tpc_labels", 280, 375, "10 at top, then 9→1 clockwise", "#1e293b", 13);
+    }
+
+    // ── Universal fallback: always draw the teacher line + question on the board ──
+    // Runs whenever no svgAnimation, free_draw, or special case produced content.
+    if (steps.length === 0) {
+      // Subtopic / chapter label at top
+      const subtopicLabel = (teachingStep?.subtopic || q.subtopic || "").trim();
+      if (subtopicLabel) {
+        addText("fb_subtopic", 30, 38, subtopicLabel, "#3b3a8c", 18);
+        addLine("fb_divider", 30, 50, 730, 50, "#e2e8f0", 1);
+      }
+
+      // Teacher line — wrap into ~65-char lines across the board
+      const teacherText = (beat?.teacherLine || teachingStep?.teacherLine || "").trim();
+      if (teacherText) {
+        const words = teacherText.split(" ");
+        const lineLimit = 60;
+        const lines: string[] = [];
+        let current = "";
+        for (const w of words) {
+          if ((current + " " + w).trim().length > lineLimit) {
+            if (current) lines.push(current.trim());
+            current = w;
+          } else {
+            current = (current + " " + w).trim();
+          }
+          if (lines.length >= 3) break; // max 3 lines
+        }
+        if (current && lines.length < 3) lines.push(current.trim());
+        lines.forEach((line, i) => addText(`fb_line_${i}`, 30, 82 + i * 30, line, "#1e293b", 16));
+        delay += 0.3;
+      }
+
+      // Horizontal rule
+      addLine("fb_rule", 30, subtopicLabel ? 175 : 140, 730, subtopicLabel ? 175 : 140, "#e2e8f0", 1);
+
+      // Question on the board
+      const questionText = (q.questionText || "").trim();
+      if (questionText) {
+        addText("fb_q_label", 30, subtopicLabel ? 198 : 163, "Try this:", "#059669", 13);
+        const qWords = questionText.split(" ");
+        const qLines: string[] = [];
+        let qCurrent = "";
+        for (const w of qWords) {
+          if ((qCurrent + " " + w).trim().length > 55) {
+            if (qCurrent) qLines.push(qCurrent.trim());
+            qCurrent = w;
+          } else {
+            qCurrent = (qCurrent + " " + w).trim();
+          }
+          if (qLines.length >= 2) break;
+        }
+        if (qCurrent && qLines.length < 2) qLines.push(qCurrent.trim());
+        const qBaseY = subtopicLabel ? 220 : 185;
+        qLines.forEach((line, i) => addText(`fb_q_${i}`, 30, qBaseY + i * 32, line, "#0f172a", 20));
+      }
+
+      // Worked example hint if available
+      const boardAction = (teachingStep?.boardAction || "").trim();
+      if (boardAction && boardAction.length < 120) {
+        addLine("fb_rule2", 30, 300, 730, 300, "#e2e8f0", 1);
+        addText("fb_hint_label", 30, 320, "Method:", "#7c3aed", 12);
+        addText("fb_hint", 30, 338, boardAction.slice(0, 90), "#475569", 13);
+      }
     }
 
     return steps;
@@ -2161,31 +2542,10 @@ function TutorContent() {
     return /invalid or expired tutor session/i.test(message || "");
   }
 
-  async function recoverExpiredSession(trigger: string) {
-    if (sessionRecoveryRef.current) return;
-    if (!token || token.trim().length <= 20) return;
-    sessionRecoveryRef.current = true;
-    setError("Session expired on server. Reconnecting...");
-    addConversationTurn("system", "system", "Session expired. Recovering a new tutor session.", {
-      source: "session_recovery_start",
-      trigger,
-    });
-    try {
-      await startSession({ preserveClassClock: true });
-      setError("");
-      addConversationTurn("system", "system", "Tutor session recovered.", {
-        source: "session_recovery_success",
-        trigger,
-      });
-    } catch {
-      setError("Session recovery failed. Please click Start Tutor Session.");
-      addConversationTurn("system", "system", "Tutor session recovery failed.", {
-        source: "session_recovery_failed",
-        trigger,
-      });
-    } finally {
-      sessionRecoveryRef.current = false;
-    }
+  async function recoverExpiredSession(_trigger: string) {
+    // Session has expired — show the purchase / registration CTA instead of
+    // silently trying to reconnect. This is the conversion moment.
+    setShowPurchaseCta(true);
   }
 
   async function refreshFlowState() {
@@ -2480,17 +2840,33 @@ function TutorContent() {
     try {
       const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
       if (AudioCtx) {
-        const ctx = new AudioCtx() as AudioContext;
-        const buf = ctx.createBuffer(1, 1, 22050);
-        const src = ctx.createBufferSource();
-        src.buffer = buf;
-        src.connect(ctx.destination);
-        src.start(0);
+        // Create once, store in ref — iOS Safari requires the SAME context for all playback
+        if (!audioCtxRef.current) {
+          audioCtxRef.current = new AudioCtx() as AudioContext;
+        }
+        const ctx = audioCtxRef.current;
         void ctx.resume();
+        const buf = ctx.createBuffer(1, 1, 22050);
+        const src2 = ctx.createBufferSource();
+        src2.buffer = buf;
+        src2.connect(ctx.destination);
+        src2.start(0);
       }
       // Also prime HTMLAudioElement path with a silent data URL
       const sil = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=");
       void sil.play().catch(() => {});
+
+      // Speak the welcome greeting on first interaction using Sarvam AI TTS.
+      // Fired here (inside a user-gesture handler) so Chrome/iOS allow audio.
+      if (status === "idle") {
+        const avatarName = activeAvatar.name;
+        const greetLine = isDemoMode
+          ? `Hi there! I am ${avatarName}, your Vedic Math coach. What is your name and which grade are you in? Tell me below and we will get started!`
+          : minimalDuolingoLayout
+            ? `Hi! I am ${avatarName}. Fill in your details and let us start your Vedic Math mission!`
+            : `Hi! I am ${avatarName}. Ready to learn? Let us start!`;
+        void speak(greetLine);
+      }
     } catch { /* ignore */ }
   }
 
@@ -2537,12 +2913,23 @@ function TutorContent() {
     setPendingKickoffToken("");
     kickoffRunningRef.current = false;
     autoListenQuestionRef.current = "";
+    // reset rich question type state
+    setSelectedMcqIndex(null);
+    setFillStepIndex(0);
+    setFillStepInputs([]);
+    setFillStepResults([]);
     silenceRecoveryQuestionRef.current = "";
     setIsEvaluatingAnswer(false);
+    setIsLoadingNextQuestion(false);
     setLastAnswerMode("typed");
     stopVoicePlayback();
     clearBoard();
     setAwaitingStudentResponse(false);
+    setPendingContinue(false);
+    if (continueTimerRef.current !== null) {
+      window.clearTimeout(continueTimerRef.current);
+      continueTimerRef.current = null;
+    }
     setError("");
   }
 
@@ -2552,6 +2939,10 @@ function TutorContent() {
     const requestedChapterCode = options?.chapterCode || selectedChapter;
     const requestedExerciseGroup = options?.exerciseGroup || selectedExerciseGroup || defaultRequestedExerciseGroup;
     setConfidence(onboardingConfidence);
+    // Apply teaching pace chosen on start screen
+    if (teachingPace === "relaxed") { setBoardSpeed(0.65); silenceRecoveryMsRef.current = 18000; }
+    else if (teachingPace === "quick") { setBoardSpeed(1.3); silenceRecoveryMsRef.current = 7500; }
+    else { setBoardSpeed(1.0); silenceRecoveryMsRef.current = 12000; }
     setStatus("loading");
     setError("");
     resetInteractiveState();
@@ -2624,6 +3015,7 @@ function TutorContent() {
       setSelectedExerciseGroup(nextExerciseGroup);
       setActiveExerciseGroup(nextExerciseGroup);
       setQuestion(data.question);
+      setIsLoadingNextQuestion(false);
       setQuestionShownAt(Date.now());
       setStatus("ready");
       const bookmark = createSavedBookmark({
@@ -2645,11 +3037,18 @@ function TutorContent() {
         `Session started: ${data.lesson.title} | Exercise ${nextExerciseGroup}`,
         { source: "start_session" }
       );
+      void logTutorEvent("LESSON_STARTED", {
+        chapterCode: nextChapterCode,
+        lessonTitle: data.lesson.title,
+        avatar: activeAvatar.id,
+        grade: learnerLevel,
+      });
 
       clearBoard();
       const greetingName = (studentName || "").trim() || "there";
       const coachIntro = data.lesson.duolingoLessonArc?.onboarding?.coachIntro || `Raj will guide you through ${data.lesson.title}.`;
-      const welcomeLine = `Hi ${greetingName}! I am ${activeAvatar.name}, your ${activeAvatar.role}. ${coachIntro} You are starting as ${LEARNER_LEVEL_LABELS[learnerLevel].toLowerCase()} and want help with ${LEARNER_GOAL_LABELS[learnerGoal].toLowerCase()}. I will guide you in ${KNOWN_LANGUAGE_LABELS[knownLanguage]}.`;
+      const gradeLabel = isDemoMode && demoGrade ? `, Grade ${demoGrade} student,` : "";
+      const welcomeLine = `Hi ${greetingName}${gradeLabel}! I am ${activeAvatar.name}, your ${activeAvatar.role}. ${coachIntro} You are starting as ${LEARNER_LEVEL_LABELS[learnerLevel].toLowerCase()} and want help with ${LEARNER_GOAL_LABELS[learnerGoal].toLowerCase()}. I will guide you in ${KNOWN_LANGUAGE_LABELS[knownLanguage]}.`;
       setTeacherUtterance(welcomeLine);
       if (autoTeachEnabled) {
         setPendingKickoffToken(`${Date.now()}_${data.sessionId}_${data.question?.questionId || "q"}_teach`);
@@ -2712,6 +3111,7 @@ function TutorContent() {
       setSelectedExerciseGroup(nextExerciseGroup);
       setActiveExerciseGroup(nextExerciseGroup);
       setQuestion(data.question);
+      setIsLoadingNextQuestion(false);
       setQuestionShownAt(Date.now());
       setStatus("ready");
       const resumeElapsedSec = savedBookmark.elapsedSec || classElapsedSec;
@@ -2755,10 +3155,28 @@ function TutorContent() {
     setTeacherUtterance("Your lesson is paused. Resume when you are ready.");
   }
 
+  function exitToLms() {
+    // Save progress first, then redirect to dashboard
+    const bookmark = createSavedBookmark({
+      elapsedSec: classElapsedSec,
+      savedAt: Date.now(),
+    });
+    if (bookmark) {
+      writeSavedBookmark(bookmark);
+    }
+    stopVoicePlayback();
+    const dest = returnUrl || "https://robodynamics.in";
+    window.location.href = dest;
+  }
+
   async function checkAnswer(answerOverride?: string, source?: "typed" | "voice") {
     if (!sessionId || !question) return;
+    // Synchronous ref guard — catches rapid double-taps/Enter+click before React re-renders
+    if (checkAnswerInFlightRef.current) return;
     if (isEvaluatingAnswer) return;
+    checkAnswerInFlightRef.current = true;
     if (!canAttemptAnswer) {
+      checkAnswerInFlightRef.current = false;
       setError("No hearts left. Start review to refill and continue.");
       setAwaitingStudentResponse(false);
       return;
@@ -2766,6 +3184,7 @@ function TutorContent() {
     const learnerAnswer = (answerOverride ?? answer).trim();
     const answerSource = source || lastAnswerMode;
     if (!learnerAnswer) {
+      checkAnswerInFlightRef.current = false;
       setError("Please type or speak your answer first.");
       setAwaitingStudentResponse(true);
       return;
@@ -2859,38 +3278,56 @@ function TutorContent() {
         },
         { isCorrect: !!data.correct, scoreDelta: data.correct ? 1 : 0 }
       );
+      void logTutorEvent("QUESTION_ATTEMPTED", {
+        chapterCode: activeChapter,
+        exerciseGroup: activeExerciseGroup,
+        correct: !!data.correct,
+        responseMs: questionShownAt ? Date.now() - questionShownAt : null,
+        studentArchetype: data.studentArchetype || null,
+        attempts: data.summary?.attempts ?? null,
+        accuracyPct: data.summary?.accuracyPct ?? null,
+      });
       if (data.summary) {
         setScore(data.summary);
       }
       if (data.sessionProgress) {
         setSessionProgress(data.sessionProgress);
       }
+      // Apply adaptive board speed + silence recovery from BehaviorClassifier
+      if (typeof data.boardSpeedFactor === "number" && data.boardSpeedFactor > 0) {
+        setBoardSpeed(data.boardSpeedFactor);
+      }
+      if (typeof data.silenceRecoveryMs === "number" && data.silenceRecoveryMs > 0) {
+        silenceRecoveryMsRef.current = data.silenceRecoveryMs;
+      }
       setIsEvaluatingAnswer(false);
-      const winLine = activeDuolingoStep?.instantFeedbackWin || "Great work. Moving to the next question.";
-      const retryBaseLine = activeDuolingoStep?.instantFeedbackRetry || `Good attempt. ${activeTeachingStep?.checkpointPrompt || "Let us retry this with one smaller step."}`;
+      const winLine = activeDuolingoStep?.instantFeedbackWin || "Great work! Keep it up.";
+      const retryBaseLine = activeDuolingoStep?.instantFeedbackRetry || `Good try! ${activeTeachingStep?.checkpointPrompt || "Have another go — you are almost there."}`;
       const retrySupportLine = activeDuolingoStep?.reviewPrompt || activeTeachingStep?.microPractice || "";
       const retryLine = retrySupportLine ? `${retryBaseLine} ${retrySupportLine}` : retryBaseLine;
       if (data.correct) {
-        setTeacherUtterance(winLine);
-        if (autoTeachEnabled) {
-          await speakRef.current(winLine);
-          if (data.coachTip) {
-            await speakRef.current(data.coachTip);
-          }
-          await nextQuestion({ directToStudent: true, source: "correct_answer" });
-          return;
-        }
-        await speakRef.current(winLine);
+        // ── 🎉 Celebration overlay (2 s) ────────────────────────────────────
+        const phrase = WIN_PHRASES[Math.floor(Math.random() * WIN_PHRASES.length)];
+        setCelebrationPhrase(phrase);
+        setIsCelebrating(true);
+        setTeacherUtterance(`${phrase.text} ${winLine}`);
+        await new Promise<void>((resolve) => window.setTimeout(resolve, 2000));
+        setIsCelebrating(false);
+        // ── Speak appreciation then immediately advance ───────────────────
+        await speakRef.current(`${phrase.text} ${winLine}`);
         if (data.coachTip) {
           await speakRef.current(data.coachTip);
         }
+        await nextQuestion({ directToStudent: true, source: "correct_answer" });
       } else {
-        setTeacherUtterance(retryLine);
+        stopVoicePlayback();
+        setIsSpeaking(false);
+        setTeacherUtterance(data.coachTip ? `${retryLine} ${data.coachTip}` : retryLine);
+        // Clear the answer field so student can type/tap fresh
+        setAnswer("");
+        setSelectedMcqIndex(null);  // allow MCQ re-tap after wrong answer
         setAwaitingStudentResponse(true);
-        await speakRef.current(retryLine);
-        if (data.coachTip) {
-          await speakRef.current(data.coachTip);
-        }
+        window.setTimeout(() => answerInputRef.current?.focus(), 150);
       }
     } catch (err) {
       const msg = err instanceof Error && err.name === "AbortError"
@@ -2903,6 +3340,7 @@ function TutorContent() {
         message: msg,
       });
     } finally {
+      checkAnswerInFlightRef.current = false;
       setIsEvaluatingAnswer(false);
     }
   }
@@ -2934,9 +3372,7 @@ function TutorContent() {
       ...orderedGroups.slice(0, startIndex),
     ].filter(Boolean);
     const nextGroup = getNextExerciseGroup(current);
-    const preferred = source === "skip"
-      ? [current, ...rotated]
-      : [nextGroup || current, ...rotated.filter((group) => group !== nextGroup)];
+    const preferred = [nextGroup || current, ...rotated.filter((group) => group !== nextGroup)];
 
     return [...new Set(preferred.filter(Boolean))];
   }
@@ -2951,18 +3387,25 @@ function TutorContent() {
     setCheck(null);
     setDoubtReply("");
     setPendingKickoff("none");
+    setSelectedMcqIndex(null);
+    setFillStepIndex(0);
+    setFillStepInputs([]);
+    setFillStepResults([]);
     setPendingKickoffToken("");
     kickoffRunningRef.current = false;
+    checkAnswerInFlightRef.current = false;  // reset for the new question
     autoListenQuestionRef.current = "";
     stopListeningSession();
     setIsEvaluatingAnswer(false);
+    setIsLoadingNextQuestion(true);
     setLastAnswerMode("typed");
     setAwaitingStudentResponse(false);
+    setPendingContinue(false);
 
     const requestBody = {
       sessionId,
       courseId,
-      chapterCode: selectedChapter,
+      chapterCode: activeChapter || selectedChapter,
       exerciseGroup: currentExerciseGroup,
     };
     const fetchNextQuestionPayload = async () => {
@@ -3005,10 +3448,12 @@ function TutorContent() {
     }
 
     if (!response || !data) {
+      setIsLoadingNextQuestion(false);
       setError("Unable to load next question.");
       return;
     }
     if (!response.ok || data.error) {
+      setIsLoadingNextQuestion(false);
       const msg = data.error || "Unable to load next question.";
       setError(msg);
       if (isExpiredSessionError(msg)) {
@@ -3079,13 +3524,21 @@ function TutorContent() {
 
     clearBoard();
     if (options?.directToStudent) {
+      setIsLoadingNextQuestion(false);
       setAwaitingStudentResponse(true);
       void sendOrchestratorCommand("STUDENT_TURN_READY", {
         questionId: data.question?.questionId || "",
         source: options.source || "skip",
       });
+      // Read the question aloud so student doesn't need to read it themselves
+      if (data.question?.questionText) {
+        const readPrompt = data.question.questionText;
+        setTeacherUtterance(readPrompt);
+        void speakRef.current(readPrompt);
+      }
       return;
     }
+    setIsLoadingNextQuestion(false);
     if (autoTeachEnabled) {
       setPendingKickoffToken(`${Date.now()}_${sessionId}_${data.question?.questionId || "q"}_teach`);
       setPendingKickoff("teach");
@@ -3162,7 +3615,7 @@ function TutorContent() {
           await Promise.all([
             waitForBoard(boardDurationMs(slide1, 1.2)),
             speakRef.current(
-              `The Vedic Sutra for today is: "${CHAPTER_SUTRAS[chCode] || "Vedic Method"}". ` +
+              `The Vedic focus for today is: "${CHAPTER_LABEL_MAP[chCode] || "Vedic Method"}". ` +
               `Let me show you a quick worked example so you can see exactly how it works.`
             ),
           ]);
@@ -3248,12 +3701,33 @@ function TutorContent() {
       setIsTeachingBoard(true);
       void sendOrchestratorCommand("SILENCE_RECOVERY", {
         questionId,
-        idleMs: 12000,
+        idleMs: silenceRecoveryMsRef.current,
       });
       void teachOnBoardRef.current();
-    }, 12000);
+    }, silenceRecoveryMsRef.current);
     return () => window.clearTimeout(timer);
   }, [status, question, awaitingStudentResponse, sessionProgress.livesDepleted]);
+
+  // Show lesson-complete screen when backend signals 100% completion
+  useEffect(() => {
+    if (
+      status === "ready" &&
+      !showLessonComplete &&
+      sessionProgress.lessonCompletionPct >= 100 &&
+      score.attempts >= 5
+    ) {
+      stopVoicePlayback();
+      setShowLessonComplete(true);
+      void logTutorEvent("LESSON_COMPLETED", {
+        chapterCode: activeChapter,
+        lessonTitle,
+        xp: missionPoints,
+        accuracyPct: score.accuracyPct,
+        streak: sessionProgress.streak,
+        attempts: score.attempts,
+      });
+    }
+  }, [status, showLessonComplete, sessionProgress.lessonCompletionPct, score.attempts]);
 
   useEffect(() => {
     if (
@@ -3285,9 +3759,38 @@ function TutorContent() {
       {status !== "ready" ? (
       <section className="panel tutor-setup-panel">
         <div className={`tutor-quickstart${minimalDuolingoLayout ? " tutor-quickstart-duo" : ""}`}>
-          <p className="tutor-qs-label">{courseLabel} | {learnerLabel}</p>
+
+          {/* ── Course introduction ─────────────────────────────────────── */}
+          <div className="tutor-course-intro">
+            <p className="tutor-qs-label">🇮🇳 RoboDynamics AI Tutor · {learnerLabel}</p>
+            <h1 className="tutor-course-name">
+              {requestedCourseId === "vedic_math" ? "Vedic Mathematics" : courseLabel}
+            </h1>
+            <p className="tutor-course-desc">
+              {requestedCourseId === "vedic_math"
+                ? "Ancient Indian mental math system — learn to calculate 10× faster without a calculator."
+                : `Master ${courseLabel} step by step with your personal AI coach.`}
+            </p>
+            <div className="tutor-course-chips">
+              {requestedCourseId === "vedic_math" ? (
+                <>
+                  <span className="tutor-feature-chip">📚 16 Chapters</span>
+                  <span className="tutor-feature-chip">🧠 Mental Math</span>
+                  <span className="tutor-feature-chip">🎯 Grades 5–10</span>
+                  <span className="tutor-feature-chip">🤖 AI Coach</span>
+                </>
+              ) : (
+                <>
+                  <span className="tutor-feature-chip">🤖 AI Coach</span>
+                  <span className="tutor-feature-chip">🎯 {learnerLabel}</span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* ── Coach intro ─────────────────────────────────────────────── */}
           <h2 className="tutor-qs-title">
-            {minimalDuolingoLayout ? "Let Raj Set Up Your Learning Path" : "Meet Raj, Your AI Coach"}
+            {minimalDuolingoLayout ? "Set Up Your Learning Path" : "Meet Raj, Your AI Coach"}
           </h2>
 
           {/* Teacher sprite */}
@@ -3302,9 +3805,30 @@ function TutorContent() {
 
           <p className="tutor-qs-tagline">
             {minimalDuolingoLayout
-              ? (lessonDuolingoArc?.onboarding?.coachIntro || "First tell Raj what you know. Then he will choose the right pace and start your mission.")
+              ? (isDemoMode ? `Hi! Enter your name and grade below — I will set the right pace and we will get started!` : (lessonDuolingoArc?.onboarding?.coachIntro || "First tell Raj what you know. Then he will choose the right pace and start your mission."))
               : "I will teach on the board, then push you through focused practice."}
           </p>
+
+          {/* ── Resume Saved Place banner — shown above form when bookmark exists ── */}
+          {minimalDuolingoLayout && savedBookmark ? (
+            <div className="tutor-resume-banner">
+              <div className="tutor-resume-info">
+                <span className="tutor-resume-icon">📌</span>
+                <div>
+                  <p className="tutor-resume-title">Welcome back!</p>
+                  <p className="tutor-resume-sub">{savedBookmark.lessonTitle || savedBookmark.chapterCode} · saved {new Date(savedBookmark.savedAt || Date.now()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="tutor-resume-btn"
+                onClick={() => { unlockAudio(); void resumeSavedSession(); }}
+                disabled={status === "loading"}
+              >
+                ▶ Resume
+              </button>
+            </div>
+          ) : null}
 
           {minimalDuolingoLayout ? (
             <div className="tutor-onboard-card">
@@ -3314,62 +3838,118 @@ function TutorContent() {
                   value={studentName}
                   onChange={(e) => setStudentName(e.target.value)}
                   placeholder="Type your name"
+                  autoFocus={isDemoMode}
                 />
               </label>
 
-              <div className="tutor-onboard-group">
-                <p className="tutor-onboard-label">Session language</p>
-                <div className="tutor-language-pill">English</div>
-              </div>
-
-              <div className="tutor-onboard-group">
-                <p className="tutor-onboard-label">How much Vedic Math do you already know?</p>
-                <div className="tutor-chip-row">
-                  {(["beginner", "familiar", "confident"] as LearnerLevel[]).map((value) => (
-                    <button
-                      key={value}
-                      type="button"
-                      className={`tutor-choice-chip${learnerLevel === value ? " active" : ""}`}
-                      onClick={() => setLearnerLevel(value)}
-                    >
-                      {onboardingLevelChoices[value === "beginner" ? 0 : value === "familiar" ? 1 : 2]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="tutor-onboard-group">
-                <p className="tutor-onboard-label">What do you want from this session?</p>
-                <div className="tutor-chip-row">
-                  {(["school", "speed", "exam"] as LearnerGoal[]).map((value) => (
-                    <button
-                      key={value}
-                      type="button"
-                      className={`tutor-choice-chip${learnerGoal === value ? " active" : ""}`}
-                      onClick={() => setLearnerGoal(value)}
-                    >
-                      {onboardingGoalChoices[value === "school" ? 0 : value === "speed" ? 1 : 2]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {savedBookmark ? (
+              {isDemoMode && (
                 <div className="tutor-onboard-group">
-                  <p className="tutor-onboard-label">Saved place</p>
-                  <p className="tutor-onboard-note">
-                    {savedBookmark.lessonTitle || savedBookmark.chapterCode} | saved {new Date(savedBookmark.savedAt || Date.now()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}
-                  </p>
-                  <button
-                    type="button"
-                    className="button secondary"
-                    onClick={() => { unlockAudio(); void resumeSavedSession(); }}
-                    disabled={status === "loading"}
-                  >
-                    Resume Saved Place
-                  </button>
+                  <p className="tutor-onboard-label">Your grade</p>
+                  <div className="tutor-chip-row" style={{ flexWrap: "wrap", gap: "0.4rem" }}>
+                    {["3","4","5","6","7","8","9","10","11","12","Engineering"].map((g) => (
+                      <button
+                        key={g}
+                        type="button"
+                        className={`tutor-choice-chip${demoGrade === g ? " active" : ""}`}
+                        onClick={() => setDemoGrade(g)}
+                        style={{ minWidth: g === "Engineering" ? "auto" : "3rem" }}
+                      >
+                        {g === "Engineering" ? "🎓 Engg" : `G${g}`}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              ) : null}
+              )}
+
+              <div className="tutor-onboard-group">
+                <p className="tutor-onboard-label">Choose your coach</p>
+                <div className="tutor-avatar-picker">
+                  {AVATARS.map((av) => (
+                    <button
+                      key={av.id}
+                      type="button"
+                      className={`tutor-avatar-card${selectedAvatarId === av.id ? " active" : ""}`}
+                      onClick={() => setSelectedAvatarId(av.id)}
+                    >
+                      <div className="tutor-avatar-card-img">
+                        {av.style === "robot" ? (
+                          <RobotAvatar size={72} expression="encouraging" compact variant={av.variant ?? "screen"} />
+                        ) : (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={AVATAR_STAGE_ART[av.id] ?? "/teacher_1/svg/view_front.svg"} alt={av.name} style={{ height: 72, objectFit: "contain" }} />
+                        )}
+                      </div>
+                      <span className="tutor-avatar-card-name">{av.name}</span>
+                      {selectedAvatarId === av.id && <span className="tutor-avatar-card-check">✓</span>}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Optional sections — 2-column compact grid on desktop, hidden on mobile */}
+              <div className="tutor-onboard-optional-grid tutor-onboard-optional">
+
+                <div className="tutor-onboard-group">
+                  <p className="tutor-onboard-label">Teaching speed</p>
+                  <div className="tutor-chip-row">
+                    {([
+                      { value: "relaxed", label: "🐢 Relaxed", sub: "Slow & clear" },
+                      { value: "normal",  label: "🚶 Normal",  sub: "Steady pace" },
+                      { value: "quick",   label: "⚡ Quick",   sub: "Fast pace"   },
+                    ] as { value: "relaxed"|"normal"|"quick"; label: string; sub: string }[]).map(({ value, label, sub }) => (
+                      <button
+                        key={value}
+                        type="button"
+                        className={`tutor-choice-chip${teachingPace === value ? " active" : ""}`}
+                        onClick={() => setTeachingPace(value)}
+                        title={sub}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="tutor-onboard-group">
+                  <p className="tutor-onboard-label">Session language</p>
+                  <div className="tutor-language-pill">English</div>
+                </div>
+
+                <div className="tutor-onboard-group">
+                  <p className="tutor-onboard-label">Your level</p>
+                  <div className="tutor-chip-row">
+                    {(["beginner", "familiar", "confident"] as LearnerLevel[]).map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        className={`tutor-choice-chip${learnerLevel === value ? " active" : ""}`}
+                        onClick={() => setLearnerLevel(value)}
+                      >
+                        {onboardingLevelChoices[value === "beginner" ? 0 : value === "familiar" ? 1 : 2]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="tutor-onboard-group">
+                  <p className="tutor-onboard-label">Session goal</p>
+                  <div className="tutor-chip-row">
+                    {(["school", "speed", "exam"] as LearnerGoal[]).map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        className={`tutor-choice-chip${learnerGoal === value ? " active" : ""}`}
+                        onClick={() => setLearnerGoal(value)}
+                      >
+                        {onboardingGoalChoices[value === "school" ? 0 : value === "speed" ? 1 : 2]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* savedBookmark resume card is rendered above the form — removed from here */}
 
               {lessonDuolingoArc?.onboarding?.placementRule ? (                <p className="tutor-onboard-note">{lessonDuolingoArc.onboarding.placementRule}</p>
               ) : null}
@@ -3385,6 +3965,9 @@ function TutorContent() {
             >
               {status === "loading" ? "Starting..." : sessionId ? "Restart Mission" : minimalDuolingoLayout ? "Continue to Mission" : "Start Mission"}
             </button>
+            {isDemoMode && !studentName.trim() && (
+              <p className="muted" style={{ fontSize: "0.85rem", marginTop: "0.5rem", textAlign: "center" }}>Please enter your name to get started</p>
+            )}
             {!canStart && (
               <p className="muted" style={{ fontSize: "0.85rem", marginTop: "0.5rem", textAlign: "center" }}>
                 Session token missing — launch from the LMS
@@ -3409,8 +3992,16 @@ function TutorContent() {
           <header className="vedic-topbar">
             <div className="vedic-topbar-row">
               <div className="vedic-topbar-main">
+                <button
+                  className="vedic-topbar-exit"
+                  type="button"
+                  title="Save & go to dashboard"
+                  onClick={exitToLms}
+                >
+                  ← Exit
+                </button>
                 <p className="vedic-topbar-label">Step {activeLessonStepIndex + 1} of {Math.max(lessonPath.length, 1)}</p>
-                <h2 className="vedic-topbar-title">{activeDuolingoStep?.missionStepTitle || question.subtopic || missionTitle}</h2>
+                <h2 className="vedic-topbar-title">{missionTitle || activeDuolingoStep?.missionStepTitle || question.subtopic || activeChapter}</h2>
               </div>
               <div className="vedic-topbar-actions">
                 <div className="vedic-stat-pill heart">{sessionProgress.hearts}/{sessionProgress.maxHearts} hearts</div>
@@ -3471,18 +4062,27 @@ function TutorContent() {
               <div className={`vedic-focus-stage ${stageSceneMode}`}>
                 <div className="vedic-focus-scene">
                   <div className="vedic-focus-coach">
+                    {/* Avatar — col 1 (88px) */}
                     <div className="vedic-focus-avatar">
                       <SpeakingTeacher
                         avatar={activeAvatar}
                         cue={currentCue}
                         speaking={isSpeaking}
                         feedback={check?.correct}
+                        compact={stageSceneMode === "student"}
                       />
                     </div>
-                    <div className="vedic-focus-copy">
-                      <h3>{stageSceneMode === "coach" ? missionPrompt : missionTryPrompt}</h3>
-                      <p>{stageStatusText}</p>
-                    </div>
+                    {/* Speech bubble — col 2 (1fr), shown in coach mode */}
+                    {stageSceneMode === "coach" && (teacherUtterance || missionPrompt) ? (
+                      <div className="rd-speech-bubble">
+                        {teacherUtterance || missionPrompt}
+                      </div>
+                    ) : stageSceneMode !== "coach" ? (
+                      <div className="vedic-focus-copy">
+                        <h3>{missionTryPrompt}</h3>
+                        <p>{stageStatusText}</p>
+                      </div>
+                    ) : null}
                   </div>
 
                   <div className="vedic-focus-content">
@@ -3507,10 +4107,24 @@ function TutorContent() {
                             className="button vedic-primary-btn"
                             type="button"
                             onClick={() => {
+                              teachRunRef.current += 1;
+                              teachingLockRef.current = false;
+                              speakSeqRef.current += 1;
+                              stopVoicePlayback();
                               stopListeningSession();
-                              setAwaitingStudentResponse(true);
+                              setIsTeachingBoard(false);
+                              // Coach reads question aloud, then hands over to student
+                              const qText = question?.questionText || activeDuolingoStep?.readAloudPrompt || "";
+                              const tryLine = activeDuolingoStep?.tryPrompt || "Your turn — try this:";
+                              if (voiceEnabled && qText) {
+                                void speak(`${tryLine} ${qText}`).then(() => {
+                                  setAwaitingStudentResponse(true);
+                                });
+                              } else {
+                                setAwaitingStudentResponse(true);
+                              }
                             }}
-                            disabled={sessionProgress.livesDepleted}
+                            disabled={false}
                           >
                             Try It
                           </button>
@@ -3518,102 +4132,279 @@ function TutorContent() {
                       </>
                     ) : (
                       <>
-                        <div className="vedic-focus-panel question student">
-                          <span className="vedic-prompt-label">Try this</span>
-                          <p className="udemy-question-text"><strong>{question.questionText}</strong></p>
-                          {question.visual?.svg ? (
-                            <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
-                          ) : null}
-                        </div>
-                        <div className="vedic-answer-block vedic-answer-block-inline">
-                          <label
-                            htmlFor="answerInput"
-                            className="udemy-answer-label"
-                            style={{ color: awaitingStudentResponse ? "#166534" : "#334155" }}
-                          >
-                            Your Answer
-                          </label>
-                          <input
-                            id="answerInput"
-                            ref={answerInputRef}
-                            disabled={!canAttemptAnswer}
-                            value={answer}
-                            onChange={(e) => {
-                              setAnswer(e.target.value);
-                              setLastAnswerMode("typed");
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                e.preventDefault();
-                                void checkAnswer();
-                              }
-                            }}
-                            placeholder="Type your answer"
-                            className="vedic-answer-input"
-                          />
-                          <p className="muted udemy-hint">Answer the question above.</p>
-                          {micPermission === "denied" ? (
-                            <p className="muted" style={{ marginTop: "0.35rem", marginBottom: 0 }}>
-                              Microphone access is blocked. Use text input.
-                            </p>
-                          ) : null}
-                          {sessionProgress.livesDepleted ? (
-                            <p className="vedic-alert">No hearts left. Do a review round to continue. {reviewLoopPrompt}</p>
-                          ) : null}
-
-                          <div className="vedic-action-row">
-                            <button className="button vedic-primary-btn" onClick={() => void checkAnswer()} disabled={isEvaluatingAnswer || !canAttemptAnswer}>
-                              {isEvaluatingAnswer ? "Checking..." : "Check"}
-                            </button>
-                            <button
-                              className="button secondary"
-                              type="button"
-                              onClick={() => {
-                                setCheck(null);
-                                stopListeningSession();
-                                setAwaitingStudentResponse(false);
-                                void teachOnBoard();
-                              }}
-                              disabled={isTeachingBoard || isSpeaking}
-                            >
-                              Show Steps
-                            </button>
-                            <button
-                              className="button secondary"
-                              type="button"
-                              onClick={listenAnswer}
-                              disabled={isEvaluatingAnswer || isListening || micPermission === "denied" || !canAttemptAnswer}
-                            >
-                              {micPermission === "denied" ? "Mic Blocked" : isListening ? "Listening..." : "Speak"}
-                            </button>
-                            {isListening ? (
-                              <button
-                                className="button secondary"
-                                type="button"
-                                onClick={() => {
-                                  stopListeningSession();
-                                  setAwaitingStudentResponse(true);
-                                  addConversationTurn("system", "system", "Voice listening stopped by student.", { source: "listen_stop" });
-                                }}
-                              >
-                                Stop
-                              </button>
-                            ) : null}
-                            <button className="button secondary" onClick={() => { void nextQuestion({ directToStudent: true, source: "skip" }); }}>Skip</button>
+                        {isLoadingNextQuestion ? (
+                          <div className="vedic-focus-panel question student">
+                            <span className="vedic-prompt-label">Loading</span>
+                            <p className="udemy-question-text"><strong>Loading the next question...</strong></p>
+                            <p className="muted udemy-hint">Raj is preparing your next step.</p>
                           </div>
-                        </div>
+                        ) : (
+                          <>
+                            <div className="vedic-focus-panel question student">
+                              <span className="vedic-prompt-label">Try this</span>
+                              <p className="udemy-question-text"><strong>{question.questionText}</strong></p>
+                              {question.visual?.svg ? (
+                                <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
+                              ) : question.visual?.asset ? (
+                                <div className="udemy-visual panel vedic-svg-asset">
+                                  <img src={`/math-svgs/vedic/${question.visual.asset.endsWith('.svg') ? question.visual.asset : question.visual.asset + '.svg'}`} alt={question.visual.title || "Vedic Math diagram"} className="vedic-svg-img" />
+                                  {question.visual.caption && <p className="vedic-svg-caption">{question.visual.caption}</p>}
+                                </div>
+                              ) : null}
+                            </div>
+                            <div className="vedic-answer-block vedic-answer-block-inline">
+                              {sessionProgress.livesDepleted ? (
+                                <div className="vedic-review-cta">
+                                  <p className="vedic-alert">💔 No hearts left — answer correctly to refill and continue!</p>
+                                </div>
+                              ) : null}
+
+                              {/* ── MCQ: tap-to-answer grid ── */}
+                              {question.questionType === "mcq" && question.options && question.options.length > 0 ? (
+                                <div className="mcq-grid" key={question.questionId}>
+                                  <p className="udemy-answer-label" style={{ color: awaitingStudentResponse ? "#166534" : "#334155", marginBottom: "0.6rem" }}>Choose your answer:</p>
+                                  <div className="mcq-options">
+                                    {question.options.map((opt, idx) => {
+                                      const isSelected = selectedMcqIndex === idx;
+                                      const isChecked = !!check;
+                                      const isCorrectOpt = question.correctIndex !== undefined
+                                        ? question.correctIndex === idx
+                                        : opt === check?.expectedAnswer;
+                                      let optClass = "mcq-option";
+                                      if (isChecked) {
+                                        if (isCorrectOpt) optClass += " mcq-opt-correct";
+                                        else if (isSelected) optClass += " mcq-opt-wrong";
+                                        else optClass += " mcq-opt-dim";
+                                      } else if (isSelected) {
+                                        optClass += " mcq-opt-selected";
+                                      }
+                                      return (
+                                        <button
+                                          key={idx}
+                                          className={optClass}
+                                          disabled={isEvaluatingAnswer || (isChecked && check?.correct) || !canAttemptAnswer}
+                                          onClick={() => {
+                                            if (isEvaluatingAnswer || (isChecked && check?.correct)) return;
+                                            setSelectedMcqIndex(idx);
+                                            setAnswer(opt);
+                                            setLastAnswerMode("typed");
+                                            void checkAnswer(opt);
+                                          }}
+                                        >
+                                          <span className="mcq-opt-letter">{String.fromCharCode(65 + idx)}</span>
+                                          <span className="mcq-opt-text">{opt}</span>
+                                          {isChecked && isCorrectOpt ? <span className="mcq-opt-tick">✓</span> : null}
+                                          {isChecked && isSelected && !isCorrectOpt ? <span className="mcq-opt-cross">✗</span> : null}
+                                        </button>
+                                      );
+                                    })}
+                                  </div>
+                                  <div className="vedic-action-row" style={{ marginTop: "0.75rem" }}>
+                                    <button
+                                      className="button secondary"
+                                      type="button"
+                                      onClick={() => { setCheck(null); stopListeningSession(); setAwaitingStudentResponse(false); void teachOnBoard(); }}
+                                      disabled={isTeachingBoard || isSpeaking}
+                                    >Show Steps</button>
+                                    <button className="button secondary" onClick={() => { void nextQuestion({ directToStudent: true, source: "skip" }); }}>Skip</button>
+                                  </div>
+                                </div>
+
+                              /* ── Fill-the-Step: guided sutra walk ── */
+                              ) : question.questionType === "fill_step" && question.steps && question.steps.length > 0 ? (
+                                <div className="fill-step-block" key={question.questionId}>
+                                  <p className="udemy-answer-label" style={{ color: awaitingStudentResponse ? "#166534" : "#334155", marginBottom: "0.6rem" }}>Complete each step of the sutra:</p>
+                                  <div className="fill-step-list">
+                                    {question.steps.map((step, idx) => {
+                                      const isDone = fillStepResults[idx] === true;
+                                      const isActive = idx === fillStepIndex && !isDone;
+                                      const isPast = idx < fillStepIndex;
+                                      const isFuture = idx > fillStepIndex;
+                                      return (
+                                        <div key={idx} className={`fill-step-row ${isDone ? "fs-done" : isActive ? "fs-active" : isFuture ? "fs-future" : "fs-past"}`}>
+                                          <div className="fs-label">
+                                            <span className="fs-num">{idx + 1}</span>
+                                            <span className="fs-text">{step.label}</span>
+                                          </div>
+                                          {isDone || isPast ? (
+                                            <div className="fs-done-val">
+                                              <span className="fs-tick">✓</span>
+                                              <span>{fillStepInputs[idx] ?? step.answer}</span>
+                                            </div>
+                                          ) : isActive ? (
+                                            <div className="fs-input-row">
+                                              <input
+                                                autoFocus
+                                                className="vedic-answer-input fs-input"
+                                                placeholder="Your answer"
+                                                value={fillStepInputs[idx] ?? ""}
+                                                disabled={isEvaluatingAnswer}
+                                                onChange={(e) => {
+                                                  const copy = [...fillStepInputs];
+                                                  copy[idx] = e.target.value;
+                                                  setFillStepInputs(copy);
+                                                }}
+                                                onKeyDown={(e) => {
+                                                  if (e.key === "Enter") {
+                                                    e.preventDefault();
+                                                    const val = (fillStepInputs[idx] ?? "").trim();
+                                                    if (!val) return;
+                                                    const expected = (step.answer ?? "").trim().toLowerCase().replace(/\s/g, "");
+                                                    const got = val.toLowerCase().replace(/\s/g, "");
+                                                    const correct = got === expected;
+                                                    const res = [...fillStepResults]; res[idx] = correct;
+                                                    setFillStepResults(res);
+                                                    if (correct) {
+                                                      const nextIdx = idx + 1;
+                                                      setFillStepIndex(nextIdx);
+                                                      if (nextIdx >= (question.steps?.length ?? 0)) {
+                                                        // All steps done — call backend for XP
+                                                        void checkAnswer(question.steps?.[question.steps.length - 1]?.answer ?? val);
+                                                      }
+                                                    }
+                                                  }
+                                                }}
+                                              />
+                                              <button
+                                                className="button vedic-primary-btn fs-submit"
+                                                disabled={isEvaluatingAnswer || !(fillStepInputs[idx] ?? "").trim()}
+                                                onClick={() => {
+                                                  const val = (fillStepInputs[idx] ?? "").trim();
+                                                  if (!val) return;
+                                                  const expected = (step.answer ?? "").trim().toLowerCase().replace(/\s/g, "");
+                                                  const got = val.toLowerCase().replace(/\s/g, "");
+                                                  const correct = got === expected;
+                                                  const res = [...fillStepResults]; res[idx] = correct;
+                                                  setFillStepResults(res);
+                                                  if (correct) {
+                                                    const nextIdx = idx + 1;
+                                                    setFillStepIndex(nextIdx);
+                                                    if (nextIdx >= (question.steps?.length ?? 0)) {
+                                                      void checkAnswer(question.steps?.[question.steps.length - 1]?.answer ?? val);
+                                                    }
+                                                  } else {
+                                                    // wrong step — shake & clear
+                                                    const copy = [...fillStepInputs]; copy[idx] = "";
+                                                    setFillStepInputs(copy);
+                                                  }
+                                                }}
+                                              >
+                                                {isEvaluatingAnswer && idx === fillStepIndex ? "Checking…" : "→"}
+                                              </button>
+                                              {step.hint ? <span className="fs-hint muted">{step.hint}</span> : null}
+                                            </div>
+                                          ) : (
+                                            <div className="fs-future-placeholder">—</div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                  <div className="vedic-action-row" style={{ marginTop: "0.75rem" }}>
+                                    <button
+                                      className="button secondary"
+                                      type="button"
+                                      onClick={() => { setCheck(null); stopListeningSession(); setAwaitingStudentResponse(false); void teachOnBoard(); }}
+                                      disabled={isTeachingBoard || isSpeaking}
+                                    >Show Steps</button>
+                                    <button className="button secondary" onClick={() => { void nextQuestion({ directToStudent: true, source: "skip" }); }}>Skip</button>
+                                  </div>
+                                </div>
+
+                              /* ── Default: text input (existing behaviour) ── */
+                              ) : (
+                                <>
+                                  <label
+                                    htmlFor="answerInput"
+                                    className="udemy-answer-label"
+                                    style={{ color: awaitingStudentResponse ? "#166534" : "#334155" }}
+                                  >
+                                    Your Answer
+                                  </label>
+                                  <input
+                                    key={question?.questionId}
+                                    id="answerInput"
+                                    ref={answerInputRef}
+                                    autoComplete="new-password"
+                                    disabled={isEvaluatingAnswer}
+                                    value={answer}
+                                    onChange={(e) => {
+                                      setAnswer(e.target.value);
+                                      setLastAnswerMode("typed");
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter") {
+                                        e.preventDefault();
+                                        void checkAnswer();
+                                      }
+                                    }}
+                                    placeholder="Type your answer"
+                                    className="vedic-answer-input"
+                                  />
+                                  <p className="muted udemy-hint">Answer the question above.</p>
+                                  {micPermission === "denied" ? (
+                                    <p className="muted" style={{ marginTop: "0.35rem", marginBottom: 0 }}>
+                                      Microphone access is blocked. Use text input.
+                                    </p>
+                                  ) : null}
+                                  <div className="vedic-action-row">
+                                    <button className="button vedic-primary-btn" onClick={() => void checkAnswer()} disabled={isEvaluatingAnswer || !canAttemptAnswer}>
+                                      {isEvaluatingAnswer ? "Checking..." : "Check"}
+                                    </button>
+                                    <button
+                                      className="button secondary"
+                                      type="button"
+                                      onClick={() => {
+                                        setCheck(null);
+                                        stopListeningSession();
+                                        setAwaitingStudentResponse(false);
+                                        void teachOnBoard();
+                                      }}
+                                      disabled={isTeachingBoard || isSpeaking}
+                                    >
+                                      Show Steps
+                                    </button>
+                                    <button
+                                      className="button secondary"
+                                      type="button"
+                                      onClick={listenAnswer}
+                                      disabled={isEvaluatingAnswer || isListening || micPermission === "denied" || !canAttemptAnswer}
+                                    >
+                                      {micPermission === "denied" ? "Mic Blocked" : isListening ? "Listening..." : "Speak"}
+                                    </button>
+                                    {isListening ? (
+                                      <button
+                                        className="button secondary"
+                                        type="button"
+                                        onClick={() => {
+                                          stopListeningSession();
+                                          setAwaitingStudentResponse(true);
+                                          addConversationTurn("system", "system", "Voice listening stopped by student.", { source: "listen_stop" });
+                                        }}
+                                      >
+                                        Stop
+                                      </button>
+                                    ) : null}
+                                    <button className="button secondary" onClick={() => { void nextQuestion({ directToStudent: true, source: "skip" }); }}>Skip</button>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          </>
+                        )}
                       </>
                     )}
 
                     {check ? (
                       <div className={`udemy-feedback ${check.correct ? "correct" : "wrong"}`}>
                         <p className="udemy-feedback-verdict">
-                          {check.correct ? "Correct" : "Try Again"}
+                          {check.correct ? "✅ Correct!" : "Try Again"}
                         </p>
                         <p className="muted">{check.correct ? (activeDuolingoStep?.instantFeedbackWin || missionCelebration) : (activeDuolingoStep?.instantFeedbackRetry || check.encouragement)}</p>
-                        {check.coachTip ? <p className="muted">Tip: {check.coachTip}</p> : null}
-                        <p><strong>Expected:</strong> {check.expectedAnswer}</p>
+                        {check.coachTip ? <p className="muted">💡 Tip: {check.coachTip}</p> : null}
+                        {!check.correct ? <p><strong>Expected:</strong> {check.expectedAnswer}</p> : null}
                         <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
+
                       </div>
                     ) : null}
                   </div>
@@ -3771,6 +4562,11 @@ function TutorContent() {
                   <p className="udemy-question-text"><strong>{question?.questionText}</strong></p>
                   {question?.visual?.svg ? (
                     <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question?.visual?.svg || "" }} />
+                  ) : question?.visual?.asset ? (
+                    <div className="udemy-visual panel vedic-svg-asset">
+                      <img src={`/math-svgs/vedic/${question?.visual?.asset?.endsWith('.svg') ? question?.visual?.asset : (question?.visual?.asset ?? '') + '.svg'}`} alt={question?.visual?.title || "Vedic Math diagram"} className="vedic-svg-img" />
+                      {question?.visual?.caption && <p className="vedic-svg-caption">{question?.visual?.caption}</p>}
+                    </div>
                   ) : null}
                   {showBoardPanel ? (
                     <div className="vedic-inline-board">
@@ -3791,9 +4587,11 @@ function TutorContent() {
                       Your Answer
                     </label>
                     <input
+                      key={question?.questionId}
                       id="answerInput"
                       ref={answerInputRef}
-                      disabled={!canAttemptAnswer}
+                      autoComplete="new-password"
+                      disabled={isEvaluatingAnswer}
                       value={answer}
                       onChange={(e) => {
                         setAnswer(e.target.value);
@@ -3815,7 +4613,9 @@ function TutorContent() {
                       </p>
                     ) : null}
                     {sessionProgress.livesDepleted ? (
-                      <p className="vedic-alert">No hearts left. Do a review round to continue. {reviewLoopPrompt}</p>
+                      <div className="vedic-review-cta">
+                        <p className="vedic-alert">💔 No hearts left — answer this question correctly to refill and continue!</p>
+                      </div>
                     ) : null}
 
                     <div className="vedic-action-row">
@@ -3853,12 +4653,13 @@ function TutorContent() {
                   {check ? (
                       <div className={`udemy-feedback ${check?.correct ? "correct" : "wrong"}`}>
                         <p className="udemy-feedback-verdict">
-                          {check?.correct ? "Correct" : "Try Again"}
+                          {check?.correct ? "✅ Correct!" : "Try Again"}
                         </p>
                       <p className="muted">{check?.correct ? (activeDuolingoStep?.instantFeedbackWin || missionCelebration) : (activeDuolingoStep?.instantFeedbackRetry || check?.encouragement)}</p>
-                      {check?.coachTip ? <p className="muted">Tip: {check?.coachTip}</p> : null}
-                      <p><strong>Expected:</strong> {check?.expectedAnswer}</p>
+                      {check?.coachTip ? <p className="muted">💡 Tip: {check?.coachTip}</p> : null}
+                      {!check?.correct ? <p><strong>Expected:</strong> {check?.expectedAnswer}</p> : null}
                       <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check?.explanation}</p>
+
                     </div>
                   ) : null}
                 </div>
@@ -4136,6 +4937,11 @@ function TutorContent() {
                   <p className="udemy-question-text"><strong>{question.questionText}</strong></p>
                   {question.visual?.svg ? (
                     <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
+                  ) : question.visual?.asset ? (
+                    <div className="udemy-visual panel vedic-svg-asset">
+                      <img src={`/math-svgs/vedic/${question.visual.asset.endsWith('.svg') ? question.visual.asset : question.visual.asset + '.svg'}`} alt={question.visual.title || "Vedic Math diagram"} className="vedic-svg-img" />
+                      {question.visual.caption && <p className="vedic-svg-caption">{question.visual.caption}</p>}
+                    </div>
                   ) : null}
                   <label
                     htmlFor="answerInput"
@@ -4145,9 +4951,11 @@ function TutorContent() {
                     Your Answer
                   </label>
                   <input
+                    key={question?.questionId}
                     id="answerInput"
                     ref={answerInputRef}
-                    disabled={!canAttemptAnswer}
+                    autoComplete="new-password"
+                    disabled={isEvaluatingAnswer}
                     value={answer}
                     onChange={(e) => {
                       setAnswer(e.target.value);
@@ -4174,7 +4982,7 @@ function TutorContent() {
                   ) : null}
                   {sessionProgress.livesDepleted ? (
                     <p style={{ marginTop: "0.35rem", marginBottom: 0, color: "#b91c1c", fontWeight: 700 }}>
-                      💔 No hearts left. Do review to refill and continue.
+                      💔 No hearts left — answer correctly to refill and continue!
                     </p>
                   ) : null}
                   <div className="udemy-answer-actions">
@@ -4314,6 +5122,9 @@ function TutorContent() {
                     <span className="pill">Flow: {flowState} v{flowVersion}</span>
                     <span className="pill">Realtime: {realtimeConnected ? "connected" : "polling"}</span>
                     <span className="pill">Status: {stageStatusText}</span>
+                    <span className="pill">Archetype: {check?.studentArchetype ?? "—"}</span>
+                    <span className="pill">BoardSpeed: {boardSpeed.toFixed(2)}x</span>
+                    <span className="pill">SilenceMs: {silenceRecoveryMsRef.current}</span>
                   </div>
                   {activeTeachingStep ? (
                     <div className="panel teaching-snapshot">
@@ -4458,7 +5269,171 @@ function TutorContent() {
         </div>
         )
       ) : null}
+      {/* ── Celebration overlay ─────────────────────────────────────── */}
+      {isCelebrating && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(0,0,0,0.38)",
+          animation: "celebFadeInOut 1.7s ease-in-out forwards",
+          pointerEvents: "none",
+        }}>
+          {/* Confetti particles */}
+          {CONFETTI_SPREAD.map((s, i) => (
+            <div key={i} style={{
+              position: "absolute",
+              top: "50%", left: "50%",
+              width: i % 3 === 0 ? 14 : 10,
+              height: i % 3 === 0 ? 9  : 10,
+              borderRadius: i % 3 === 0 ? 2 : "50%",
+              backgroundColor: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+              ["--dx" as string]: `${s.dx}px`,
+              ["--dy" as string]: `${s.dy}px`,
+              animationDelay: `${(i * 0.04).toFixed(2)}s`,
+              animation: "confettiFly 1.3s ease-out forwards",
+            }} />
+          ))}
+          {/* Central card */}
+          <div style={{
+            background: "white", borderRadius: 24, padding: "2rem 3rem",
+            textAlign: "center", boxShadow: "0 24px 60px rgba(0,0,0,0.22)",
+            border: "3px solid #E91E8C", position: "relative", zIndex: 2,
+            animation: "celebCardIn 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards",
+          }}>
+            <div style={{ fontSize: "3.8rem", lineHeight: 1, marginBottom: "0.4rem",
+              animation: "emojiPop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards" }}>
+              {celebrationPhrase.emoji}
+            </div>
+            <div style={{ fontSize: "2rem", fontWeight: 800, color: "#3B3A8C" }}>
+              {celebrationPhrase.text}
+            </div>
+            <div style={{ fontSize: "0.85rem", color: "#6b7280", marginTop: "0.3rem" }}>
+              Keep it up! Next question loading…
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Session-expired Purchase CTA ─────────────────────────── */}
+      {showPurchaseCta && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 10000,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(10,10,20,0.88)",
+          padding: "1rem",
+        }}>
+          <div style={{
+            background: "linear-gradient(160deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%)",
+            border: "1.5px solid rgba(233,30,140,0.35)",
+            borderRadius: 20,
+            padding: "2rem 2rem 1.75rem",
+            maxWidth: 420,
+            width: "100%",
+            textAlign: "center",
+            boxShadow: "0 8px 48px rgba(0,0,0,0.7)",
+          }}>
+            {/* Avatar + trophy */}
+            <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>🏆</div>
+            <h2 style={{ color: "#fff", fontSize: "1.35rem", fontWeight: 700, marginBottom: "0.5rem" }}>
+              Great session, {(studentName || "").trim() || "learner"}!
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>
+              Your session has ended. Here&rsquo;s what you achieved:
+            </p>
+
+            {/* Stats row */}
+            <div style={{
+              display: "flex", gap: "0.75rem", justifyContent: "center",
+              flexWrap: "wrap", marginBottom: "1.5rem",
+            }}>
+              {[
+                { icon: "⚡", label: "XP", value: sessionProgress.xp },
+                { icon: "🎯", label: "Accuracy", value: `${Math.round(score.accuracyPct)}%` },
+                { icon: "🔥", label: "Streak", value: sessionProgress.streak },
+              ].map(s => (
+                <div key={s.label} style={{
+                  background: "rgba(255,255,255,0.08)",
+                  borderRadius: 12,
+                  padding: "0.55rem 1rem",
+                  minWidth: 80,
+                }}>
+                  <div style={{ fontSize: "1.4rem" }}>{s.icon}</div>
+                  <div style={{ color: "#fff", fontWeight: 700, fontSize: "1.15rem" }}>{s.value}</div>
+                  <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.72rem" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <a
+              href="https://robodynamics.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                background: "linear-gradient(90deg, #E91E8C, #c2185b)",
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: "1rem",
+                borderRadius: 12,
+                padding: "0.85rem 1rem",
+                textDecoration: "none",
+                marginBottom: "0.75rem",
+                boxShadow: "0 4px 18px rgba(233,30,140,0.45)",
+              }}
+            >
+              🚀 Get Full Vedic Maths AI Tutor
+            </a>
+            <a
+              href={`/ai-tutor/demo?chapter=${defaultRequestedChapter}`}
+              style={{
+                display: "block",
+                color: "rgba(255,255,255,0.55)",
+                fontSize: "0.82rem",
+                textDecoration: "underline",
+                marginBottom: "0.25rem",
+              }}
+            >
+              Try the free demo again
+            </a>
+            <button
+              type="button"
+              onClick={() => { setShowPurchaseCta(false); setStatus("idle"); setError(""); }}
+              style={{
+                background: "none", border: "none", color: "rgba(255,255,255,0.35)",
+                fontSize: "0.78rem", cursor: "pointer", marginTop: "0.25rem",
+              }}
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      )}
+
       <style jsx global>{`
+        @keyframes celebFadeInOut {
+          0%   { opacity: 0; }
+          12%  { opacity: 1; }
+          80%  { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        @keyframes celebCardIn {
+          0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+          55%  { transform: scale(1.1) rotate(3deg);  opacity: 1; }
+          75%  { transform: scale(0.96) rotate(-1deg); }
+          100% { transform: scale(1)   rotate(0);      }
+        }
+        @keyframes emojiPop {
+          0%   { transform: scale(0) rotate(-20deg); }
+          55%  { transform: scale(1.35) rotate(10deg); }
+          75%  { transform: scale(0.9) rotate(-4deg); }
+          100% { transform: scale(1)   rotate(0); }
+        }
+        @keyframes confettiFly {
+          0%   { transform: translate(-50%,-50%) rotate(0deg) scale(1);   opacity: 1; }
+          100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(700deg) scale(0.15); opacity: 0; }
+        }
+
         @keyframes avatarFloat {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-3px); }
@@ -4628,6 +5603,90 @@ function TutorContent() {
           box-shadow: 0 24px 70px rgba(15,23,42,0.12);
           padding: 1.5rem;
         }
+        /* ── Course intro block ───────────────────────────────── */
+        .tutor-course-intro {
+          grid-column: 1 / -1;
+          border-bottom: 1px solid #d9f99d;
+          padding-bottom: 0.9rem;
+          margin-bottom: 0.1rem;
+        }
+        .tutor-course-name {
+          margin: 0.25rem 0 0.45rem;
+          color: #14532d;
+          font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+          font-weight: 900;
+          line-height: 1.05;
+          letter-spacing: -0.01em;
+        }
+        .tutor-course-desc {
+          margin: 0;
+          color: #475569;
+          font-size: 0.98rem;
+          line-height: 1.55;
+        }
+        .tutor-course-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem;
+          margin-top: 0.65rem;
+        }
+        .tutor-feature-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.2rem;
+          padding: 0.28rem 0.78rem;
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          border-radius: 999px;
+          color: #166534;
+          font-size: 0.82rem;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        .tutor-quickstart-duo .tutor-course-intro {
+          padding-bottom: 0.6rem;
+          margin-bottom: 0;
+        }
+        .tutor-quickstart-duo .tutor-course-name {
+          font-size: clamp(1.4rem, 2.2vw, 2rem);
+          margin-bottom: 0.35rem;
+        }
+        .tutor-quickstart-duo .tutor-course-desc {
+          font-size: 0.92rem;
+        }
+        .tutor-quickstart-duo .tutor-feature-chip {
+          font-size: 0.78rem;
+          padding: 0.22rem 0.6rem;
+        }
+        /* ── Duo layout: explicit grid placement ──────────────────
+           Row 1 : course-intro (spans both cols)
+           Col 1 : avatar only, spans all remaining rows
+           Col 2 : tagline → form → actions stacked (auto-flow)
+        */
+        .tutor-quickstart-duo .tutor-qs-title {
+          display: none;          /* redundant — course intro covers this */
+        }
+        .tutor-quickstart-duo .tutor-qs-stage {
+          grid-column: 1;
+          grid-row: 2 / span 10;  /* avatar spans all remaining rows */
+          align-self: center;
+        }
+        /* All right-column items: pin to col 2, let grid auto-stack rows */
+        .tutor-quickstart-duo .tutor-qs-tagline,
+        .tutor-quickstart-duo .tutor-onboard-card,
+        .tutor-quickstart-duo .tutor-qs-actions {
+          grid-column: 2;
+        }
+        .tutor-quickstart-duo .tutor-qs-tagline {
+          margin-bottom: 0.1rem;
+        }
+        .tutor-quickstart-duo .tutor-onboard-card {
+          margin-top: 0;
+        }
+        .tutor-quickstart-duo .tutor-qs-actions {
+          margin-top: 0.5rem;
+        }
+        /* ─────────────────────────────────────────────────────── */
         .tutor-qs-label,
         .vedic-topbar-label,
         .vedic-kicker {
@@ -4667,9 +5726,10 @@ function TutorContent() {
           padding: 0.75rem;
         }
         .tutor-quickstart-duo .tutor-qs-stage {
-          min-height: 220px;
-          max-height: 220px;
-          padding: 0.45rem;
+          min-height: 260px;
+          max-height: 340px;
+          padding: 0.5rem;
+          align-self: stretch;
         }
         .tutor-qs-tagline {
           margin: 0;
@@ -4691,14 +5751,22 @@ function TutorContent() {
           gap: 0.9rem;
         }
         .tutor-quickstart-duo .tutor-onboard-card {
-          margin-top: 0.7rem;
-          padding: 0.85rem;
-          gap: 0.7rem;
+          margin-top: 0;
+          padding: 0.6rem 0.85rem;
+          gap: 0.35rem;
+          max-height: none;
+          overflow-y: visible;
+        }
+        /* Optional sections in 2-column mini-grid to save vertical space */
+        .tutor-quickstart-duo .tutor-onboard-optional-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.35rem;
         }
         .tutor-onboard-field,
         .tutor-onboard-group {
           display: grid;
-          gap: 0.45rem;
+          gap: 0.35rem;
         }
         .tutor-onboard-field span,
         .tutor-onboard-label {
@@ -4728,6 +5796,67 @@ function TutorContent() {
           background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
           color: white;
           font-size: 0.9rem;
+          font-weight: 800;
+        }
+        .tutor-avatar-picker {
+          display: flex;
+          gap: 0.9rem;
+          flex-wrap: wrap;
+        }
+        .tutor-avatar-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.3rem;
+          padding: 0.5rem 0.65rem 0.4rem;
+          border: 2px solid #e2e8f0;
+          border-radius: 16px;
+          background: white;
+          cursor: pointer;
+          position: relative;
+          transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+          min-width: 82px;
+        }
+        .tutor-avatar-card:hover {
+          border-color: #E91E8C;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 14px rgba(233,30,140,0.15);
+        }
+        .tutor-avatar-card.active {
+          border-color: #E91E8C;
+          background: #fff0f7;
+          box-shadow: 0 0 0 3px rgba(233,30,140,0.15);
+        }
+        .tutor-avatar-card-img {
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: visible;
+          border-radius: 12px;
+        }
+        .tutor-avatar-card-name {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #334155;
+        }
+        .tutor-avatar-card.active .tutor-avatar-card-name {
+          color: #E91E8C;
+        }
+        .tutor-avatar-card-check {
+          position: absolute;
+          top: -7px;
+          right: -7px;
+          width: 20px;
+          height: 20px;
+          border-radius: 999px;
+          background: #E91E8C;
+          color: white;
+          font-size: 0.7rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           font-weight: 800;
         }
         .tutor-chip-row {
@@ -4800,11 +5929,61 @@ function TutorContent() {
           cursor: pointer;
           padding: 0;
         }
+        /* ── Resume Saved Place banner ── */
+        .tutor-resume-banner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+          border: 1.5px solid #86efac;
+          border-radius: 16px;
+          padding: 0.75rem 1rem;
+          margin-bottom: 0.15rem;
+        }
+        .tutor-resume-info {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          min-width: 0;
+        }
+        .tutor-resume-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .tutor-resume-title {
+          margin: 0;
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: #166534;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .tutor-resume-sub {
+          margin: 0;
+          font-size: 0.77rem;
+          color: #4ade80;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .tutor-resume-btn {
+          flex-shrink: 0;
+          background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+          color: white;
+          border: 0;
+          border-radius: 12px;
+          padding: 0.5rem 1.1rem;
+          font-size: 0.88rem;
+          font-weight: 800;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(34,197,94,0.35);
+          white-space: nowrap;
+        }
+        .tutor-resume-btn:hover { filter: brightness(1.08); }
+        .tutor-resume-btn:disabled { opacity: 0.6; cursor: wait; }
         .vedic-mission-app {
           min-height: 100dvh;
           padding: 0.75rem;
-          background:
-            linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+          background: linear-gradient(160deg, #fdf0f8 0%, #f0f0ff 50%, #f0f7ff 100%);
           display: grid;
           grid-template-rows: auto 1fr;
           gap: 0.75rem;
@@ -4855,6 +6034,29 @@ function TutorContent() {
           cursor: pointer;
           white-space: nowrap;
         }
+        /* Exit / back-to-dashboard button — left of topbar title */
+        .vedic-topbar-exit {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+          min-height: 30px;
+          border-radius: 999px;
+          border: 1px solid #e2e8f0;
+          background: white;
+          color: #64748b;
+          padding: 0.25rem 0.7rem;
+          font-size: 0.78rem;
+          font-weight: 700;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background 0.15s, color 0.15s;
+          margin-bottom: 0.15rem;
+        }
+        .vedic-topbar-exit:hover {
+          background: #f8fafc;
+          color: #0f172a;
+          border-color: #cbd5e1;
+        }
         .vedic-topbar-btn.active {
           border-color: #86efac;
           background: #f0fdf4;
@@ -4868,35 +6070,47 @@ function TutorContent() {
           text-align: center;
         }
         .vedic-topbar-track {
-          height: 8px;
+          height: 12px;
           border-radius: 999px;
           background: #e2e8f0;
           overflow: hidden;
+          margin-top: 0.3rem;
         }
         .vedic-topbar-track-fill {
           height: 100%;
           border-radius: 999px;
-          background: linear-gradient(90deg, #84cc16, #10b981);
+          background: linear-gradient(90deg, #E91E8C, #3B3A8C);
+          transition: width 0.5s ease;
         }
         .vedic-topbar-stats {
-          display: none;
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          margin-top: 0.4rem;
+          justify-content: center;
+          align-items: center;
         }
         .vedic-stat-pill {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          min-height: 32px;
+          gap: 0.25rem;
+          min-height: 38px;
           flex: 0 0 auto;
           border-radius: 999px;
-          padding: 0.35rem 0.7rem;
+          padding: 0.45rem 1rem;
           background: #f8fafc;
-          border: 1px solid #e2e8f0;
+          border: 1.5px solid #e2e8f0;
           color: #334155;
-          font-size: 0.82rem;
+          font-size: 0.92rem;
           font-weight: 800;
+          letter-spacing: 0.01em;
         }
+        .vedic-stat-pill.heart  { color: #be123c; background: #fff1f2; border-color: #fecdd3; }
+        .vedic-stat-pill.xp     { color: #92400e; background: #fffbeb; border-color: #fde68a; }
+        .vedic-stat-pill.streak { color: #c2410c; background: #fff7ed; border-color: #fed7aa; }
         .vedic-stat-pill.points { color: #854d0e; background: #fef3c7; border-color: #fde68a; }
-        .vedic-stat-pill.muted { color: #64748b; }
+        .vedic-stat-pill.muted  { color: #64748b; background: #f1f5f9; border-color: #e2e8f0; }
         .desktop-only { display: inline-flex; }
         .vedic-focus-shell {
           min-height: 0;
@@ -4909,8 +6123,8 @@ function TutorContent() {
           width: min(920px, 100%);
           display: grid;
           grid-template-rows: auto 1fr auto;
-          gap: 0.5rem;
-          padding: 0.7rem;
+          gap: 0.85rem;
+          padding: 1rem 1.1rem;
           background: rgba(255,255,255,0.98);
           border: 1px solid #e2e8f0;
           border-radius: 20px;
@@ -4928,7 +6142,9 @@ function TutorContent() {
           align-items: center;
         }
         .vedic-focus-top.compact {
-          min-height: 28px;
+          min-height: 32px;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid #f1f5f9;
         }
         .vedic-focus-top h2 {
           margin: 0.1rem 0 0.15rem;
@@ -4953,7 +6169,25 @@ function TutorContent() {
         }
         .vedic-focus-stage {
           min-height: 0;
-          display: block;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        /* COACH MODE: stacked — avatar+speech row on top, board full-width below */
+        .vedic-focus-stage.coach .vedic-focus-scene {
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+          flex: 1;
+          min-height: 0;
+        }
+        /* STUDENT MODE: full-width single column */
+        .vedic-focus-stage.student .vedic-focus-scene {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 0.55rem;
+          flex: 1;
+          min-height: 0;
         }
         .vedic-focus-scene {
           min-height: 0;
@@ -4961,18 +6195,44 @@ function TutorContent() {
           grid-template-columns: 1fr;
           gap: 0.55rem;
         }
+        /* Coach panel: compact horizontal row — avatar left, speech right */
+        .vedic-focus-stage.coach .vedic-focus-coach {
+          grid-template-columns: 92px minmax(0, 1fr);
+          background: linear-gradient(135deg, #f5f0ff 0%, #e8f0fe 100%);
+          border-color: rgba(59,58,140,0.18);
+          padding: 0.7rem 1rem;
+          align-items: center;
+          border-radius: 20px;
+          gap: 0.75rem;
+          flex-shrink: 0;
+        }
+        /* Avatar container — clip to column width so it never bleeds into speech */
+        .vedic-focus-stage.coach .vedic-focus-avatar {
+          width: 92px;
+          min-width: 92px;
+          max-width: 92px;
+          min-height: 88px;
+          max-height: 92px;
+          overflow: hidden;
+          background: transparent;
+          border: none;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         .vedic-focus-coach {
           border-radius: 16px;
           border: 1px solid #e2e8f0;
           background: #f8fafc;
-          padding: 0.55rem 0.65rem;
+          padding: 0.65rem 0.75rem;
           display: grid;
-          grid-template-columns: 64px minmax(0, 1fr);
-          gap: 0.55rem;
+          grid-template-columns: 96px minmax(0, 1fr);
+          gap: 0.65rem;
           align-items: center;
         }
         .vedic-focus-avatar {
-          min-height: 64px;
+          min-height: 96px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -4980,6 +6240,7 @@ function TutorContent() {
           background: white;
           border: 1px solid #e2e8f0;
           overflow: hidden;
+          padding: 4px;
         }
         .vedic-focus-copy h3 {
           margin: 0.1rem 0 0.15rem;
@@ -4996,23 +6257,45 @@ function TutorContent() {
         }
         .vedic-focus-content {
           min-height: 0;
+          flex: 1;
           display: flex;
           flex-direction: column;
           gap: 0.55rem;
           overflow: auto;
           padding-right: 0.1rem;
         }
+        /* Board fills remaining space; actions always visible at bottom */
+        .vedic-focus-stage.coach .vedic-focus-content {
+          overflow: hidden;
+        }
+        .vedic-focus-stage.coach .vedic-inline-board {
+          flex: 1;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .vedic-focus-stage.coach .vedic-focus-actions {
+          flex-shrink: 0;
+          padding-top: 0.35rem;
+        }
+        /* Smooth fade-in when student turn panel appears */
+        @keyframes vedicFadeUp {
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .vedic-focus-stage.student .vedic-focus-content {
+          animation: vedicFadeUp 0.28s ease forwards;
+        }
         .vedic-focus-panel {
-          border-radius: 16px;
+          border-radius: 20px;
           border: 1px solid #e2e8f0;
           background: white;
-          padding: 0.75rem 0.85rem;
+          padding: 1.1rem 1.1rem;
           display: grid;
-          gap: 0.4rem;
+          gap: 0.5rem;
         }
         .vedic-focus-panel.question.student {
-          border-color: #fde68a;
-          background: #fffbeb;
+          border: 2.5px solid rgba(233,30,140,0.18);
+          background: #fff;
         }
         .vedic-focus-panel p {
           margin: 0;
@@ -5024,7 +6307,30 @@ function TutorContent() {
           justify-content: flex-start;
         }
         .vedic-focus-board {
-          min-height: 150px;
+          min-height: 0;
+          width: 100%;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+        .vedic-focus-board > * {
+          flex: 1;
+          min-height: 0;
+        }
+        /* Speech bubble — col 2 of coach card, expands to fill space */
+        .rd-speech-bubble {
+          background: white;
+          border: 2px solid rgba(59,58,140,0.2);
+          border-radius: 4px 16px 16px 16px;
+          padding: 0.85rem 1.1rem;
+          font-size: 1rem;
+          color: #1e293b;
+          line-height: 1.6;
+          margin-bottom: 0;
+          box-shadow: 0 2px 8px rgba(59,58,140,0.08);
+          align-self: stretch;
+          display: flex;
+          align-items: center;
         }
         .vedic-answer-block-inline {
           margin-top: 0;
@@ -5343,24 +6649,169 @@ function TutorContent() {
         }
         .vedic-answer-block {
           margin-top: auto;
-          border-radius: 22px;
-          border: 1px solid #dcfce7;
-          background: rgba(248,250,252,0.98);
+          border-radius: 24px;
+          border: 1.5px solid rgba(59,58,140,0.15);
+          background: rgba(255,255,255,0.98);
           backdrop-filter: blur(10px);
           padding: 0.85rem;
           position: sticky;
           bottom: 0;
-          box-shadow: 0 -10px 24px rgba(15,23,42,0.06);
+          box-shadow: 0 -8px 24px rgba(59,58,140,0.08);
         }
         .vedic-answer-input {
           width: 100%;
-          min-height: 54px;
+          min-height: 60px;
           border-radius: 18px;
-          border: 2px solid #bbf7d0;
-          padding: 0 0.95rem;
-          font-size: 1rem;
+          border: 2.5px solid #3B3A8C;
+          padding: 0 1rem;
+          font-size: 1.1rem;
           color: #0f172a;
           background: white;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .vedic-answer-input:focus {
+          border-color: #E91E8C;
+          box-shadow: 0 0 0 3px rgba(233,30,140,0.15);
+          outline: none;
+        }
+        /* ═══════════════════════════════════════════════════════════════════
+           MCQ — multiple choice option grid
+           ═══════════════════════════════════════════════════════════════════ */
+        .mcq-grid { width: 100%; }
+        .mcq-options {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.55rem;
+          margin-bottom: 0.4rem;
+        }
+        @media (max-width: 480px) { .mcq-options { grid-template-columns: 1fr; } }
+        .mcq-option {
+          display: flex; align-items: center; gap: 0.65rem;
+          padding: 0.75rem 1rem;
+          border: 2.5px solid #3B3A8C;
+          border-radius: 16px;
+          background: #fff;
+          font-size: 1rem; font-weight: 600;
+          color: #0f172a; cursor: pointer;
+          text-align: left;
+          transition: border-color 0.15s, background 0.15s, transform 0.12s, box-shadow 0.15s;
+          position: relative; overflow: hidden;
+        }
+        .mcq-option:hover:not(:disabled) {
+          border-color: #E91E8C;
+          background: #fdf4fa;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(233,30,140,0.15);
+        }
+        .mcq-option:disabled { cursor: default; }
+        .mcq-opt-letter {
+          display: inline-flex; align-items: center; justify-content: center;
+          width: 28px; height: 28px; flex-shrink: 0;
+          border-radius: 50%; border: 2px solid #3B3A8C;
+          font-size: 0.8rem; font-weight: 800; color: #3B3A8C;
+          background: #ede9fe;
+        }
+        .mcq-opt-text { flex: 1; }
+        .mcq-opt-tick, .mcq-opt-cross {
+          font-size: 1.1rem; font-weight: 800; flex-shrink: 0;
+        }
+        .mcq-opt-tick  { color: #16a34a; }
+        .mcq-opt-cross { color: #dc2626; }
+        /* State variants */
+        .mcq-opt-selected {
+          border-color: #E91E8C; background: #fdf4fa;
+          box-shadow: 0 0 0 3px rgba(233,30,140,0.18);
+        }
+        .mcq-opt-selected .mcq-opt-letter {
+          border-color: #E91E8C; background: #E91E8C; color: #fff;
+        }
+        .mcq-opt-correct {
+          border-color: #16a34a; background: #f0fdf4;
+          box-shadow: 0 0 0 3px rgba(22,163,74,0.18);
+        }
+        .mcq-opt-correct .mcq-opt-letter {
+          border-color: #16a34a; background: #16a34a; color: #fff;
+        }
+        .mcq-opt-wrong {
+          border-color: #dc2626; background: #fef2f2;
+          animation: rd-shake 0.4s ease;
+        }
+        .mcq-opt-wrong .mcq-opt-letter {
+          border-color: #dc2626; background: #dc2626; color: #fff;
+        }
+        .mcq-opt-dim { opacity: 0.45; }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Fill-the-Step — guided sutra walk
+           ═══════════════════════════════════════════════════════════════════ */
+        .fill-step-block { width: 100%; }
+        .fill-step-list  { display: flex; flex-direction: column; gap: 0.5rem; }
+        .fill-step-row {
+          display: flex; flex-direction: column; gap: 0.35rem;
+          padding: 0.7rem 0.9rem;
+          border: 2px solid #e2e8f0;
+          border-radius: 14px;
+          background: #f8fafc;
+          transition: border-color 0.2s, background 0.2s;
+        }
+        .fill-step-row.fs-active  { border-color: #3B3A8C; background: #f5f3ff; }
+        .fill-step-row.fs-done    { border-color: #16a34a; background: #f0fdf4; }
+        .fill-step-row.fs-future  { opacity: 0.45; }
+        .fs-label {
+          display: flex; align-items: center; gap: 0.55rem;
+          font-size: 0.9rem; color: #374151; font-weight: 600;
+        }
+        .fs-num {
+          display: inline-flex; align-items: center; justify-content: center;
+          width: 24px; height: 24px; flex-shrink: 0;
+          border-radius: 50%; border: 2px solid #3B3A8C;
+          font-size: 0.75rem; font-weight: 800; color: #3B3A8C;
+          background: #ede9fe;
+        }
+        .fs-done .fs-num { border-color: #16a34a; background: #16a34a; color: #fff; }
+        .fs-text { flex: 1; }
+        .fs-done-val {
+          display: flex; align-items: center; gap: 0.5rem;
+          font-size: 1rem; font-weight: 700; color: #16a34a; padding-left: 2rem;
+        }
+        .fs-tick { font-size: 1.1rem; }
+        .fs-input-row {
+          display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+          padding-left: 2rem;
+        }
+        .fs-input {
+          flex: 1; min-width: 80px; min-height: 44px !important;
+          font-size: 0.95rem !important; padding: 0 0.75rem !important;
+        }
+        .fs-submit {
+          flex-shrink: 0; min-height: 44px !important;
+          padding: 0 1.1rem !important; font-size: 1rem !important;
+          border-radius: 12px !important;
+        }
+        .fs-hint { font-size: 0.8rem; color: #6b7280; width: 100%; padding-left: 0; }
+        .fs-future-placeholder { color: #94a3b8; font-size: 0.85rem; padding-left: 2rem; }
+
+        @keyframes rd-shake {
+          0%,100% { transform: translateX(0); }
+          20%      { transform: translateX(-8px); }
+          40%      { transform: translateX(8px); }
+          60%      { transform: translateX(-5px); }
+          80%      { transform: translateX(5px); }
+        }
+        .rd-wrong-shake { animation: rd-shake 0.45s ease; }
+        @keyframes rd-correct-glow {
+          0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); }
+          100% { box-shadow: 0 0 0 14px rgba(34,197,94,0); }
+        }
+        .rd-correct-glow { animation: rd-correct-glow 0.6s ease; }
+        @keyframes rd-float-xp {
+          0%   { opacity: 1; transform: translateY(0) scale(1); }
+          100% { opacity: 0; transform: translateY(-50px) scale(1.2); }
+        }
+        .rd-xp-float {
+          position: fixed; pointer-events: none; z-index: 500;
+          font-size: 1.2rem; font-weight: 900; color: #E91E8C;
+          animation: rd-float-xp 1.3s ease forwards;
         }
         .vedic-action-row {
           display: flex;
@@ -5370,10 +6821,20 @@ function TutorContent() {
         }
         .vedic-primary-btn {
           min-width: 140px;
-          border-radius: 16px;
-          background: linear-gradient(180deg, #84cc16 0%, #16a34a 100%);
+          border-radius: 20px;
+          background: linear-gradient(135deg, #E91E8C 0%, #3B3A8C 100%);
           border: 0;
           font-weight: 800;
+          letter-spacing: 0.02em;
+          transition: transform 0.1s, box-shadow 0.1s;
+          box-shadow: 0 4px 14px rgba(233,30,140,0.3);
+        }
+        .vedic-primary-btn:hover:not(:disabled) {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 18px rgba(233,30,140,0.4);
+        }
+        .vedic-primary-btn:active:not(:disabled) {
+          transform: translateY(0);
         }
         .vedic-alert { margin: 0.4rem 0 0; color: #b91c1c; font-weight: 800; }
         .vedic-support-grid {
@@ -5888,12 +7349,15 @@ function TutorContent() {
           flex-wrap: wrap;
         }
         .udemy-question-text {
-          font-size: 1.08rem;
+          font-size: clamp(1.2rem, 2.5vw, 1.55rem);
           margin: 0 0 0.75rem;
-          line-height: 1.5;
+          line-height: 1.4;
           color: #0f172a;
         }
         .udemy-visual { margin-bottom: 0.75rem; background: #f8fafc; }
+        .vedic-svg-asset { display: flex; flex-direction: column; align-items: center; padding: 0.75rem; border-radius: 10px; border: 1.5px solid #e2e8f0; }
+        .vedic-svg-img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
+        .vedic-svg-caption { margin-top: 0.4rem; font-size: 0.78rem; color: #64748b; text-align: center; }
         .udemy-answer-label {
           display: block;
           margin-bottom: 0.3rem;
@@ -6007,6 +7471,7 @@ function TutorContent() {
           .tutor-setup-panel {
             padding: 0.75rem;
             overflow: auto;
+            min-height: auto;
           }
           .tutor-quickstart,
           .tutor-quickstart-duo {
@@ -6015,21 +7480,90 @@ function TutorContent() {
             width: min(100%, 560px);
             padding: 0.9rem;
           }
+          /* Reset duo-layout grid-column overrides — single column on mobile */
+          .tutor-quickstart-duo .tutor-qs-stage,
+          .tutor-quickstart-duo .tutor-qs-tagline,
+          .tutor-quickstart-duo .tutor-onboard-card,
+          .tutor-quickstart-duo .tutor-qs-actions {
+            grid-column: 1;
+            grid-row: auto;
+          }
           .tutor-qs-stage,
           .tutor-quickstart-duo .tutor-qs-stage {
-            min-height: 170px;
-            max-height: 170px;
+            min-height: 150px;
+            max-height: 150px;
           }
           .tutor-qs-title {
             font-size: 1.45rem;
           }
+          /* Hide optional form sections on mobile — no scroll needed */
+          .tutor-onboard-optional { display: none; }
           .tutor-onboard-card {
-            margin-top: 0.55rem;
-            padding: 0.8rem;
-            gap: 0.6rem;
+            margin-top: 0.4rem;
+            padding: 0.65rem 0.75rem;
+            gap: 0.45rem;
+            max-height: none !important;
+            overflow-y: visible !important;
           }
+          /* Shrink coach avatar cards on mobile — 3 must fit in one row */
+          .tutor-avatar-card {
+            width: 60px;
+            min-width: 60px;
+            padding: 0.25rem 0.2rem 0.2rem;
+          }
+          .tutor-avatar-card-img {
+            width: 44px;
+            height: 44px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .tutor-avatar-card-img img,
+          .tutor-avatar-card-img svg,
+          .tutor-avatar-card-img > * { max-width: 44px; max-height: 44px; }
+          .tutor-avatar-card-name { font-size: 0.7rem; margin-top: 0.1rem; }
+          .tutor-avatar-picker { gap: 0.4rem; }
+          /* Tighten grid gap */
+          .tutor-quickstart, .tutor-quickstart-duo { gap: 0.5rem; }
+          /* Compact course intro on mobile */
+          .tutor-course-intro {
+            padding-bottom: 0.3rem;
+            gap: 0.25rem;
+          }
+          .tutor-course-intro .tutor-course-desc { display: none; }
+          .tutor-course-chips { display: none; }
+          /* Compact tagline: 2 lines max */
+          .tutor-qs-tagline {
+            font-size: 0.82rem;
+            line-height: 1.3;
+            margin: 0.1rem 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+          /* Avatar stage: fixed height, show from top so head is visible */
+          .tutor-qs-stage,
+          .tutor-quickstart-duo .tutor-qs-stage {
+            min-height: 120px !important;
+            max-height: 120px !important;
+            overflow: hidden;
+            display: flex !important;
+            align-items: flex-start !important;
+            justify-content: center;
+            padding-top: 0.3rem;
+          }
+          .tutor-qs-stage img {
+            max-height: 115px;
+            width: auto;
+            object-fit: contain;
+          }
+          /* Actions: hide hint texts, keep just the button */
+          .tutor-qs-actions .muted,
+          .tutor-qs-actions .tutor-qs-hint { display: none; }
           .tutor-qs-actions {
-            margin-top: 0.6rem;
+            margin-top: 0.4rem;
           }
           .tutor-qs-btn {
             width: 100%;
@@ -6040,7 +7574,61 @@ function TutorContent() {
             gap: 0.55rem;
           }
           .vedic-topbar {
-            padding: 0.7rem 0.75rem;
+            padding: 0.5rem 0.6rem;
+            gap: 0.25rem;
+          }
+          /* Topbar: title + actions in one row on mobile */
+          .vedic-topbar-row {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.35rem;
+          }
+          .vedic-topbar-main {
+            text-align: left;
+            justify-items: start;
+            flex: 1;
+            min-width: 0;
+          }
+          .vedic-topbar-title {
+            font-size: 0.95rem;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .vedic-topbar-label {
+            font-size: 0.68rem;
+          }
+          /* Actions: compact icon-style buttons */
+          .vedic-topbar-actions {
+            flex-wrap: nowrap;
+            gap: 0.3rem;
+            justify-content: flex-end;
+          }
+          .vedic-topbar-btn {
+            min-height: 34px;
+            padding: 0.3rem 0.55rem;
+            font-size: 0.78rem;
+          }
+          /* Stats: single row, smaller pills, show only key 3 */
+          .vedic-topbar-stats {
+            gap: 0.3rem;
+            margin-top: 0.2rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding-bottom: 2px;
+          }
+          .vedic-stat-pill {
+            min-height: 30px;
+            padding: 0.25rem 0.55rem;
+            font-size: 0.78rem;
+          }
+          /* Hide less-critical pills on mobile to save space */
+          .vedic-stat-pill.points,
+          .vedic-stat-pill.muted {
+            display: none;
           }
           .desktop-only {
             display: none;
@@ -6059,7 +7647,11 @@ function TutorContent() {
             justify-content: center;
           }
           .vedic-topbar-title {
-            font-size: 1.1rem;
+            font-size: 1.02rem;
+          }
+          .vedic-topbar-track,
+          .vedic-topbar-stats {
+            display: none;
           }
           .vedic-stat-pill {
             min-height: 30px;
@@ -6073,8 +7665,9 @@ function TutorContent() {
             grid-template-columns: 1fr;
           }
           .vedic-focus-card {
-            padding: 0.6rem;
-            gap: 0.5rem;
+            padding: 0.65rem 0.7rem;
+            gap: 0.55rem;
+            border-radius: 20px;
           }
           .vedic-focus-top {
             flex-direction: row;
@@ -6083,13 +7676,61 @@ function TutorContent() {
           .vedic-focus-scene {
             grid-template-columns: 1fr;
           }
-          .vedic-focus-coach {
-            grid-template-columns: 56px minmax(0, 1fr);
-            padding: 0.5rem 0.55rem;
+          /* Coach mode mobile: already flex column, just tighten avatar */
+          .vedic-focus-stage.coach .vedic-focus-scene {
+            gap: 0.4rem;
+            min-height: unset;
+          }
+          .vedic-focus-stage.coach .vedic-focus-coach {
+            grid-template-columns: 68px minmax(0, 1fr);
+            padding: 0.55rem 0.65rem;
             gap: 0.5rem;
           }
+          .vedic-focus-stage.coach .vedic-focus-avatar {
+            width: 68px;
+            min-height: 68px;
+            max-height: 68px;
+            overflow: hidden;
+            flex-shrink: 0;
+          }
+          /* Speech bubble: show below coach row, full width, bigger text */
+          .rd-speech-bubble {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            padding: 0.75rem 0.9rem;
+            border-radius: 14px;
+            margin-bottom: 0.4rem;
+          }
+          /* Board: full width below coach area, cap height on mobile */
+          .vedic-inline-board.vedic-focus-board {
+            max-height: 200px;
+            overflow: hidden;
+          }
+          /* Try It button: full width, tall, easy to tap */
+          .vedic-focus-actions {
+            flex-direction: column;
+            gap: 0.45rem;
+          }
+          .vedic-focus-actions .button,
+          .vedic-focus-actions .vedic-primary-btn {
+            width: 100%;
+            min-height: 52px;
+            font-size: 1.05rem;
+          }
+          .vedic-focus-coach {
+            grid-template-columns: 48px minmax(0, 1fr);
+            padding: 0.42rem 0.48rem;
+            gap: 0.4rem;
+          }
           .vedic-focus-avatar {
-            min-height: 56px;
+            min-height: 48px;
+          }
+          .vedic-focus-copy h3 {
+            font-size: 0.94rem;
+            margin-bottom: 0.2rem;
+          }
+          .vedic-focus-copy p {
+            display: none;
           }
           .vedic-path-pill {
             min-width: auto;
@@ -6107,8 +7748,33 @@ function TutorContent() {
             padding: 0.7rem;
             border-radius: 18px;
           }
+          .vedic-question-label { font-size: 0.78rem; }
+          .vedic-question-text  { font-size: 1.15rem; line-height: 1.45; }
+          .vedic-hint-card      { font-size: 0.96rem; }
           .vedic-answer-input {
-            min-height: 48px;
+            min-height: 54px;
+            font-size: 1.1rem;
+            border-radius: 16px;
+          }
+          .vedic-answer-block {
+            border-radius: 18px;
+          }
+          /* Question text bigger and easier to read */
+          .udemy-question-text,
+          .vedic-question-text {
+            font-size: 1.2rem;
+            line-height: 1.5;
+          }
+          /* Hint card text */
+          .udemy-hint,
+          .vedic-hint-card {
+            font-size: 0.98rem;
+          }
+          /* Check/Submit button — big thumb-friendly target */
+          .button.primary,
+          .vedic-primary-btn {
+            min-height: 52px;
+            font-size: 1.05rem;
           }
           .vedic-action-row {
             display: grid;
@@ -6140,8 +7806,17 @@ function TutorContent() {
           .ca-body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
           .ca-coach { flex-direction: row; height: 100px; }
           .ca-coach-stage { height: 100px; width: 80px; }
-          .ca-coach-speech { display: none; }
+          .ca-coach-speech { display: block; }
+          .ca-coach-speech p { font-size: 1.05rem; line-height: 1.5; -webkit-line-clamp: 6; }
           .ca-coach-nav { display: none; }
+          .vedic-focus-copy h3 { font-size: 1.18rem; }
+          .vedic-focus-copy p:last-child { font-size: 0.98rem; }
+          .vedic-focus-coach { grid-template-columns: 72px minmax(0,1fr); gap: 0.5rem; }
+          .vedic-focus-avatar { min-height: 72px; }
+          .vedic-focus-panel { padding: 0.6rem 0.65rem; gap: 0.5rem; }
+          .vedic-answer-block { padding: 0.65rem 0.7rem; }
+          .vedic-answer-input { min-height: 52px; font-size: 1.05rem; }
+          .vedic-action-row .button, .vedic-focus-actions .button { font-size: 0.98rem; min-height: 48px; }
           .ca-app { margin: 0 -1rem; }
           .ca-app-minimal .ca-body {
             grid-template-columns: 1fr;
@@ -6156,10 +7831,266 @@ function TutorContent() {
             padding: 0.85rem 0.95rem 1rem;
           }
         }
+
+        /* Mobile chapters FAB — only on small screens */
+        .mobile-chapters-fab {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .mobile-chapters-fab {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 200;
+            background: #0f172a;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            border-radius: 2rem;
+            padding: 0.55rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+          }
+          .mobile-nav-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(0,0,0,0.55);
+            display: flex;
+            align-items: flex-end;
+          }
+          .mobile-nav-drawer {
+            background: #1e293b;
+            width: 100%;
+            max-height: 70dvh;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+          }
+          .mobile-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #334155;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e2e8f0;
+          }
+          .mobile-nav-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+          }
+          .mobile-nav-drawer .ca-coach-nav {
+            display: block;
+            overflow-y: auto;
+            flex: 1;
+            padding: 0.5rem;
+          }
+        }
       `}</style>
+
+      {/* ── Demo mode banner ─────────────────────────────────────────── */}
+      {isDemoMode && status === "ready" && (
+        <div className="demo-banner">
+          <span>🎓 You are in <strong>free demo mode</strong> — first 3 exercises unlocked</span>
+          <a className="demo-banner-cta" href="https://robodynamics.in" target="_blank" rel="noopener noreferrer">
+            Register for full access →
+          </a>
+        </div>
+      )}
+
+      {/* ── Lesson-complete overlay ──────────────────────────────────── */}
+      {showLessonComplete && (
+        <div className="lc-overlay" role="dialog" aria-modal="true" aria-label="Lesson complete">
+          <div className="lc-card">
+            <div className="lc-trophy">🏆</div>
+            <h2 className="lc-title">Lesson Complete!</h2>
+            <p className="lc-subtitle">{lessonTitle || activeChapter}</p>
+
+            <div className="lc-stats">
+              <div className="lc-stat">
+                <span className="lc-stat-val">⭐ {missionPoints}</span>
+                <span className="lc-stat-label">XP Earned</span>
+              </div>
+              <div className="lc-stat">
+                <span className="lc-stat-val">🎯 {score.accuracyPct}%</span>
+                <span className="lc-stat-label">Accuracy</span>
+              </div>
+              <div className="lc-stat">
+                <span className="lc-stat-val">🔥 {sessionProgress.streak}</span>
+                <span className="lc-stat-label">Best Streak</span>
+              </div>
+              <div className="lc-stat">
+                <span className="lc-stat-val">❤️ {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
+                <span className="lc-stat-label">Hearts Left</span>
+              </div>
+            </div>
+
+            <button
+              className="lc-share-btn"
+              onClick={() => {
+                const msg = `🎉 My child just completed "${lessonTitle || activeChapter}" on RoboDynamics AI Tutor!\n⭐ ${missionPoints} XP  🎯 ${score.accuracyPct}% accuracy  🔥 ${sessionProgress.streak} streak\nTry it free 👉 https://robodynamics.in`;
+                void logTutorEvent("SHARE_CLICKED", {
+                  chapterCode: activeChapter,
+                  xp: missionPoints,
+                  accuracyPct: score.accuracyPct,
+                  streak: sessionProgress.streak,
+                });
+                window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+              }}
+            >
+              📲 Share on WhatsApp
+            </button>
+
+            <div className="lc-actions">
+              {(() => {
+                const currentIdx = chapterList.findIndex((c) => c.chapterCode === (activeChapter || selectedChapter));
+                const nextChapter = currentIdx >= 0 && currentIdx < chapterList.length - 1 ? chapterList[currentIdx + 1] : null;
+                return nextChapter ? (
+                  <button
+                    className="button vedic-primary-btn"
+                    onClick={() => {
+                      setShowLessonComplete(false);
+                      setSelectedChapter(nextChapter.chapterCode);
+                      setActiveChapter(nextChapter.chapterCode);
+                      setScore({ attempts: 0, correctCount: 0, accuracyPct: 0 });
+                      setSessionProgress(EMPTY_SESSION_PROGRESS);
+                      void startSession({ chapterCode: nextChapter.chapterCode });
+                    }}
+                  >
+                    Next: {nextChapter.title} →
+                  </button>
+                ) : (
+                  <button className="button vedic-primary-btn" onClick={() => setShowLessonComplete(false)}>
+                    Review Again
+                  </button>
+                );
+              })()}
+              <button className="button secondary" onClick={() => setShowLessonComplete(false)}>
+                Keep Practising
+              </button>
+            </div>
+          </div>
+          <style>{`
+            .lc-overlay {
+              position: fixed; inset: 0; z-index: 1000;
+              background: rgba(0,0,0,0.72);
+              display: flex; align-items: center; justify-content: center;
+              padding: 1rem;
+            }
+            .lc-card {
+              background: #1e293b; border-radius: 1.25rem;
+              padding: 2rem 1.75rem; max-width: 420px; width: 100%;
+              text-align: center; box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            }
+            .lc-trophy { font-size: 3.5rem; line-height: 1; margin-bottom: 0.5rem; }
+            .lc-title { font-size: 1.6rem; font-weight: 700; color: #f8fafc; margin: 0 0 0.25rem; }
+            .lc-subtitle { color: #94a3b8; font-size: 0.95rem; margin: 0 0 1.5rem; }
+            .lc-stats {
+              display: grid; grid-template-columns: 1fr 1fr;
+              gap: 0.75rem; margin-bottom: 1.5rem;
+            }
+            .lc-stat {
+              background: #0f172a; border-radius: 0.75rem;
+              padding: 0.75rem 0.5rem;
+              display: flex; flex-direction: column; gap: 0.2rem;
+            }
+            .lc-stat-val { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; }
+            .lc-stat-label { font-size: 0.75rem; color: #64748b; }
+            .lc-share-btn {
+              width: 100%; padding: 0.75rem 1rem;
+              background: #25d366; color: #fff;
+              border: none; border-radius: 0.75rem;
+              font-size: 1rem; font-weight: 600; cursor: pointer;
+              margin-bottom: 0.75rem;
+            }
+            .lc-share-btn:hover { background: #1ebe5c; }
+            .lc-actions { display: flex; gap: 0.75rem; justify-content: center; }
+            .lc-actions .button { flex: 1; }
+          `}</style>
+          <style>{`
+            .demo-banner {
+              position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+              background: #854d0e; color: #fef9c3;
+              display: flex; align-items: center; justify-content: center;
+              gap: 1rem; padding: 0.5rem 1rem; font-size: 0.82rem;
+              flex-wrap: wrap; text-align: center;
+            }
+            .demo-banner-cta {
+              background: #fef08a; color: #713f12; border-radius: 1rem;
+              padding: 0.25rem 0.75rem; font-weight: 700;
+              text-decoration: none; white-space: nowrap;
+            }
+            .demo-banner-cta:hover { background: #fde047; }
+          `}</style>
+        </div>
+      )}
+
+      {/* Mobile: Floating chapters button + slide-up drawer */}
+      {status === "ready" && (
+        <>
+          <button
+            className="mobile-chapters-fab"
+            onClick={() => setShowMobileNav(true)}
+            aria-label="Show chapters"
+          >
+            ☰ Chapters
+          </button>
+          {showMobileNav && (
+            <div className="mobile-nav-overlay" onClick={() => setShowMobileNav(false)}>
+              <div className="mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+                <div className="mobile-nav-header">
+                  <span>Course Chapters</span>
+                  <button className="mobile-nav-close" onClick={() => setShowMobileNav(false)}>✕</button>
+                </div>
+                <div className="ca-coach-nav">
+                  <p className="ca-nav-label">All Chapters</p>
+                  <div className="ca-chapter-list">
+                    {chapterList.map((ch, idx) => (
+                      <button
+                        key={ch.chapterCode}
+                        className={`ca-chapter-item${activeChapter === ch.chapterCode ? " active" : ""}`}
+                        onClick={() => {
+                          setShowMobileNav(false);
+                          setSelectedChapter(ch.chapterCode);
+                          setActiveChapter(ch.chapterCode);
+                          void startSession({ chapterCode: ch.chapterCode });
+                        }}
+                      >
+                        <span className="ca-ch-num">{String(idx + 1).padStart(2, "0")}</span>
+                        <span className="ca-ch-title">{ch.title}</span>
+                        {activeChapter === ch.chapterCode && <span className="ca-ch-now">Now</span>}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </main>
   );
 }
+
+
+
+
+
+
+
+
+
 
 
 

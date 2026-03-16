@@ -1,0 +1,529 @@
+{
+  "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+  "gradeBand": "Grade 8",
+  "source": "Vedic Mathematics for Schools | Grade 8",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "Deficit from 10000: find the complement",
+    "Both below 10000: 9997×9994",
+    "Both above 10000: 10003×10004",
+    "Mixed: one above, one below: 10002×9998",
+    "MCQ — compute the product near 10000",
+    "Fill-the-step: 9993×9997 near 10000",
+    "Unified view: bases 100, 1000, 10000",
+    "Speed drill",
+    "Challenge: near 5000 using base 5000"
+  ],
+  "learningGoals": [
+    "Compute products of 4-digit numbers near 10000 using Nikhilam deviations",
+    "Handle cases where both numbers are below, both above, or one above one below 10000",
+    "Extend Nikhilam thinking to any convenient base including 5000"
+  ],
+  "coreIdeas": [
+    "Nikhilam: cross-add (or subtract) deviations for the left part; multiply deviations for the right part",
+    "For base B: product = (A+d₂)×B + d₁×d₂ where d₁,d₂ are signed deviations from B",
+    "Near-10000 right part has 4 digits; pad with leading zeros if the product of deviations is smaller"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "9997×9994 (both below 10000)",
+      "steps": [
+        "Deviations: 9997→-3, 9994→-6",
+        "Left part: 9997+(-6) = 9991  OR  9994+(-3) = 9991 (same)",
+        "Right part: (-3)×(-6) = 18 → pad to 4 digits: 0018",
+        "Answer: 9991 0018 = 99910018"
+      ],
+      "answer": "99910018"
+    },
+    {
+      "id": "we2",
+      "title": "10003×10004 (both above 10000)",
+      "steps": [
+        "Deviations: +3 and +4",
+        "Left part: 10003+4 = 10007",
+        "Right part: 3×4 = 12 → pad to 4 digits: 0012",
+        "Answer: 10007 0012 = 100070012"
+      ],
+      "answer": "100070012"
+    },
+    {
+      "id": "we3",
+      "title": "10002×9998 (mixed)",
+      "steps": [
+        "Deviations: +2 and -2",
+        "Left part: 10002+(-2) = 10000",
+        "Right part: (+2)×(-2) = -4 → right part is negative, so borrow: 99999996",
+        "Alternatively: 10002×9998 = (10000+2)(10000-2) = 10000²-4 = 100000000-4 = 99999996"
+      ],
+      "answer": "99999996"
+    },
+    {
+      "id": "we4",
+      "title": "9993×9997",
+      "steps": [
+        "Deviations: -7 and -3",
+        "Left part: 9993+(-3) = 9990",
+        "Right part: (-7)×(-3) = 21 → 0021",
+        "Answer: 9990 0021 = 99900021"
+      ],
+      "answer": "99900021"
+    }
+  ],
+  "starterPractice": [
+    { "q": "What is the deviation (deficit) of 9998 from 10000?", "a": "-2" },
+    { "q": "In Nikhilam near 10000, how many digits does the right part have?", "a": "4 digits" },
+    { "q": "State the Nikhilam rule for the left part.", "a": "Add one number to the deviation of the other" }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g8-v1",
+    "onboarding": {
+      "welcomeMessage": "Near 10000 — tiny deviations do all the work. Nikhilam goes large!",
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "avatarMood": "focused"
+    },
+    "mission": "Multiply 4-digit numbers near 10000 using signed deviations — both below, both above, and mixed cases.",
+    "microLessonPattern": [
+      "Find the signed deviations from 10000",
+      "Compute left part (cross-add)",
+      "Compute right part (multiply deviations)",
+      "Pad right part to 4 digits",
+      "Concatenate for the final answer",
+      "XP reward"
+    ],
+    "rewardLoop": {
+      "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
+      "streakBonus": "5 XP for 3 consecutive correct answers",
+      "badges": ["Deviation Finder", "Nikhilam Near", "Base Master"]
+    },
+    "reviewLoop": {
+      "trigger": "2 wrong answers in a group",
+      "action": "Show deviation table and recompute left and right parts separately"
+    },
+    "uiDirectives": {
+      "boardStyle": "chalk-on-dark",
+      "animationSpeed": "medium",
+      "avatarVoice": "Priya-Hindi-Female"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Deficit from 10000",
+        "missionStepTitle": "Find the Deviation — Distance from 10000",
+        "coachHook": "Every Nikhilam problem starts with deviations. Positive above, negative below!",
+        "boardDemo": "Show a number line near 10000. 9997 is -3 below. 10003 is +3 above. Write d = number - 10000.",
+        "readAloudPrompt": "Read aloud: '9997 minus 10000 is -3. That is its deviation.'",
+        "tryPrompt": "Find the deviation of 9996 and 10005 from 10000.",
+        "masteryCheck": "-4 and +5.",
+        "instantFeedbackWin": "Deviations found!",
+        "instantFeedbackRetry": "9996-10000=-4. 10005-10000=+5.",
+        "reviewPrompt": "Always subtract: d = number - base. Sign tells you above (+) or below (-).",
+        "xpReward": 12,
+        "badgeFocus": "Deviation Finder",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_A1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "A",
+            "subtopic": "Deviation from 10000",
+            "skill": "find-deviation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find the signed deviation of each number from 10000: (a) 9997 (b) 10003 (c) 9990",
+            "expectedAnswer": "-3, +3, -10",
+            "hint": "Deviation = number - 10000.",
+            "solution": "9997-10000=-3. 10003-10000=+3. 9990-10000=-10.",
+            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Number line showing deviations from base 10000" }
+          },
+          {
+            "questionId": "VM_G8_L7_A2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "A",
+            "subtopic": "Deviation from 10000",
+            "skill": "find-deviation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the deviation of 10007 from base 10000?",
+            "options": ["+7", "-7", "+3", "-3"],
+            "correctIndex": 0,
+            "expectedAnswer": "+7",
+            "hint": "10007-10000=+7 (above base).",
+            "solution": "10007 is 7 above 10000. Deviation = +7."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Both below 10000: 9997×9994",
+        "missionStepTitle": "Both Below — Negative Deviations",
+        "coachHook": "Both numbers below 10000 means both deviations are negative. Their product is positive — the right part is positive!",
+        "boardDemo": "9997×9994. d₁=-3, d₂=-6. Left=9997-6=9991. Right=(-3)×(-6)=18→0018. Answer=99910018.",
+        "readAloudPrompt": "Read aloud: 'Left part: first number plus second deviation. Right part: product of deviations.'",
+        "tryPrompt": "Compute 9996×9993.",
+        "masteryCheck": "99890028.",
+        "instantFeedbackWin": "Both-below Nikhilam works!",
+        "instantFeedbackRetry": "d₁=-4, d₂=-7. Left=9996-7=9989. Right=28→0028. Answer=99890028.",
+        "reviewPrompt": "Right part must be 4 digits. 28 becomes 0028.",
+        "xpReward": 12,
+        "badgeFocus": "Deviation Finder",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_B1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "B",
+            "subtopic": "Both below 10000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 9997×9994 using Nikhilam near base 10000.",
+            "expectedAnswer": "99910018",
+            "hint": "d₁=-3, d₂=-6. Left=9997-6=9991. Right=3×6=18→0018.",
+            "solution": "Left=9991. Right=0018. Answer=99910018."
+          },
+          {
+            "questionId": "VM_G8_L7_B2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "B",
+            "subtopic": "Both below 10000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 9996×9993 using Nikhilam near base 10000.",
+            "expectedAnswer": "99890028",
+            "hint": "d₁=-4, d₂=-7. Left=9996-7=9989. Right=4×7=28→0028.",
+            "solution": "Left=9989. Right=0028. Answer=99890028."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Both above 10000: 10003×10004",
+        "missionStepTitle": "Both Above — Positive Deviations",
+        "coachHook": "Both numbers above 10000 — positive deviations. Left part grows beyond 10000!",
+        "boardDemo": "10003×10004. d₁=+3, d₂=+4. Left=10003+4=10007. Right=3×4=12→0012. Answer=100070012.",
+        "readAloudPrompt": "Read aloud: 'Left is 10007 — a 5-digit number. Concatenate with 0012.'",
+        "tryPrompt": "Compute 10002×10005.",
+        "masteryCheck": "100070010.",
+        "instantFeedbackWin": "Both-above case nailed!",
+        "instantFeedbackRetry": "d₁=+2, d₂=+5. Left=10002+5=10007. Right=2×5=10→0010. Answer=100070010.",
+        "reviewPrompt": "When both are above, the left part is a 5-digit number. That is expected.",
+        "xpReward": 12,
+        "badgeFocus": "Deviation Finder",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_C1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "C",
+            "subtopic": "Both above 10000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 10003×10004 using Nikhilam near base 10000.",
+            "expectedAnswer": "100070012",
+            "hint": "d₁=+3, d₂=+4. Left=10003+4=10007. Right=3×4=12→0012.",
+            "solution": "Left=10007. Right=0012. Answer=100070012.",
+            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Both-above case: deviations +3 and +4 from 10000" }
+          },
+          {
+            "questionId": "VM_G8_L7_C2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "C",
+            "subtopic": "Both above 10000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Compute 10002×10003 near base 10000.",
+            "options": ["100050006", "100060006", "100050012", "100040006"],
+            "correctIndex": 0,
+            "expectedAnswer": "100050006",
+            "hint": "d₁=+2, d₂=+3. Left=10002+3=10005. Right=2×3=6→0006.",
+            "solution": "Left=10005. Right=0006. Answer=100050006."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Mixed: one above, one below: 10002×9998",
+        "missionStepTitle": "Mixed Case — One Up, One Down",
+        "coachHook": "Opposite deviations! The right part goes negative — and we need a borrow trick.",
+        "boardDemo": "10002×9998. d₁=+2, d₂=-2. Left=10002-2=10000. Right=(+2)×(-2)=-4. Since right is negative: result = 10000×10000 - 4 = 99999996. Alternatively: (10000+2)(10000-2) = 10000²-4 = 99999996.",
+        "readAloudPrompt": "Read aloud: 'Opposite signs in deviations give a negative right part — subtract 4 from 10000 ten-thousands.'",
+        "tryPrompt": "Compute 10003×9997.",
+        "masteryCheck": "99999991.",
+        "instantFeedbackWin": "Mixed case solved!",
+        "instantFeedbackRetry": "d₁=+3, d₂=-3. Left=10000. Right=+3×-3=-9. Answer=10000×10000-9=99999991.",
+        "reviewPrompt": "For equal and opposite deviations: result = base² - d². For 10000: that is 10^8 - d².",
+        "xpReward": 15,
+        "badgeFocus": "Nikhilam Near",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_D1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "D",
+            "subtopic": "Mixed case",
+            "skill": "nikhilam-multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 10002×9998 using Nikhilam near base 10000.",
+            "expectedAnswer": "99999996",
+            "hint": "Use difference of squares: (10000+2)(10000-2) = 10000²-4.",
+            "solution": "100000000-4=99999996."
+          },
+          {
+            "questionId": "VM_G8_L7_D2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "D",
+            "subtopic": "Mixed case",
+            "skill": "nikhilam-multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Compute 10005×9995 near base 10000.",
+            "options": ["99999975", "100000025", "99999995", "99999950"],
+            "correctIndex": 0,
+            "expectedAnswer": "99999975",
+            "hint": "(10000+5)(10000-5) = 10000²-25 = 100000000-25.",
+            "solution": "10000²-5²=100000000-25=99999975."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — compute the product",
+        "missionStepTitle": "Quiz — Near-10000 Products",
+        "coachHook": "Four options. Use deviations to quickly narrow down the right range, then pick!",
+        "boardDemo": "Show that if both deviations are small (say -3,-5), the product is close to 10000²=100000000 but slightly less.",
+        "readAloudPrompt": "Estimate first: both below 10000 by a few → product just under 10^8.",
+        "tryPrompt": "Solve both MCQs using Nikhilam.",
+        "masteryCheck": "Both correct.",
+        "instantFeedbackWin": "Near-base estimation is razor sharp!",
+        "instantFeedbackRetry": "Check your right part calculation. Remember to pad to 4 digits.",
+        "reviewPrompt": "Right part = product of deviations. If it has fewer than 4 digits, pad left with zeros.",
+        "xpReward": 15,
+        "badgeFocus": "Nikhilam Near",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_E1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ near 10000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Compute 9993×9997 near base 10000.",
+            "options": ["99900021", "99900012", "99910021", "99890021"],
+            "correctIndex": 0,
+            "expectedAnswer": "99900021",
+            "hint": "d₁=-7, d₂=-3. Left=9993-3=9990. Right=7×3=21→0021.",
+            "solution": "Left=9990. Right=0021. Answer=99900021.",
+            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Deviation diagram for 9993 and 9997" }
+          },
+          {
+            "questionId": "VM_G8_L7_E2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ near 10000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Compute 10004×10002 near base 10000.",
+            "options": ["100060008", "100040008", "100060012", "100050008"],
+            "correctIndex": 0,
+            "expectedAnswer": "100060008",
+            "hint": "d₁=+4, d₂=+2. Left=10004+2=10006. Right=4×2=8→0008.",
+            "solution": "Left=10006. Right=0008. Answer=100060008."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: 9993×9997",
+        "missionStepTitle": "Step by Step — 9993×9997 from Scratch",
+        "coachHook": "Fill every step of the Nikhilam process for 9993×9997. No shortcuts, just clarity.",
+        "boardDemo": "Four-row scaffold: deviations, left part, right part raw, right part padded.",
+        "readAloudPrompt": "Read each row label and fill the value.",
+        "tryPrompt": "Complete all 4 steps for 9993×9997.",
+        "masteryCheck": "All steps correct, final answer 99900021.",
+        "instantFeedbackWin": "Full Nikhilam walkthrough complete!",
+        "instantFeedbackRetry": "Check step 3: right part = (-7)×(-3) = 21 (positive because negative×negative).",
+        "reviewPrompt": "9993×9997: d₁=-7, d₂=-3. Left=9990. Right=0021. Answer=99900021.",
+        "xpReward": 15,
+        "badgeFocus": "Nikhilam Near",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_F1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step Nikhilam",
+            "skill": "nikhilam-multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute 9993×9997 near base 10000. Fill each step.",
+            "steps": [
+              { "label": "Deviations d₁ and d₂ (number - 10000)", "answer": "d₁=-7, d₂=-3", "hint": "9993-10000=-7. 9997-10000=-3." },
+              { "label": "Left part (9993 + d₂ OR 9997 + d₁)", "answer": "9990", "hint": "9993+(-3)=9990 or 9997+(-7)=9990." },
+              { "label": "Right part (d₁×d₂)", "answer": "21", "hint": "(-7)×(-3)=21 (positive)." },
+              { "label": "Right part padded to 4 digits", "answer": "0021", "hint": "21 has 2 digits. Pad to 0021." }
+            ],
+            "expectedAnswer": "99900021"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Unified view: bases 100, 1000, 10000",
+        "missionStepTitle": "One Method, Any Base — 100 to 10000",
+        "coachHook": "The same Nikhilam rule works for base 100, base 1000, and base 10000. Only the right-part digit count changes!",
+        "boardDemo": "Base 100: right part = 2 digits. Base 1000: right part = 3 digits. Base 10000: right part = 4 digits. Show 98×97 near 100, 998×997 near 1000, 9998×9997 near 10000.",
+        "readAloudPrompt": "Read aloud: 'Right part digit count equals the number of zeros in the base.'",
+        "tryPrompt": "Use the correct base and compute 998×997.",
+        "masteryCheck": "995006.",
+        "instantFeedbackWin": "Unified base mastery!",
+        "instantFeedbackRetry": "Base 1000: d₁=-2, d₂=-3. Left=998-3=995. Right=6→006. Answer=995006.",
+        "reviewPrompt": "For base 10^n: right part has n digits.",
+        "xpReward": 18,
+        "badgeFocus": "Base Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_G1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "G",
+            "subtopic": "Unified bases",
+            "skill": "nikhilam-multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 998×997 using Nikhilam near base 1000.",
+            "expectedAnswer": "995006",
+            "hint": "d₁=-2, d₂=-3. Left=998-3=995. Right=2×3=6→006 (3 digits for base 1000).",
+            "solution": "Left=995. Right=006. Answer=995006.",
+            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Same Nikhilam method applied to base 1000" }
+          },
+          {
+            "questionId": "VM_G8_L7_G2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "G",
+            "subtopic": "Unified bases",
+            "skill": "nikhilam-multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For Nikhilam near base 100, how many digits should the right part have?",
+            "options": ["2", "3", "4", "1"],
+            "correctIndex": 0,
+            "expectedAnswer": "2",
+            "hint": "Base 100 = 10², so right part has 2 digits.",
+            "solution": "Base 100 has 2 zeros → right part is 2 digits."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill",
+        "missionStepTitle": "Speed Drill — Near-10000 Rapid Fire",
+        "coachHook": "Three Nikhilam problems. Deviations first, then left and right in a flash!",
+        "boardDemo": "Show three problem cards. Timer at 3:00.",
+        "readAloudPrompt": "State the deviations aloud before computing.",
+        "tryPrompt": "Solve all three in under 3 minutes.",
+        "masteryCheck": "All three correct.",
+        "instantFeedbackWin": "Nikhilam speed drilling complete!",
+        "instantFeedbackRetry": "On the wrong one: re-check if you padded the right part correctly.",
+        "reviewPrompt": "Speed comes from instantly seeing the deviations. Practise finding them first.",
+        "xpReward": 18,
+        "badgeFocus": "Base Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_H1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "nikhilam-multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 9995×9998 near base 10000.",
+            "expectedAnswer": "99930010",
+            "hint": "d₁=-5, d₂=-2. Left=9995-2=9993. Right=5×2=10→0010.",
+            "solution": "Left=9993. Right=0010. Answer=99930010."
+          },
+          {
+            "questionId": "VM_G8_L7_H2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "nikhilam-multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Compute 10006×10003 near base 10000.",
+            "options": ["100090018", "100060018", "100090012", "100030018"],
+            "correctIndex": 0,
+            "expectedAnswer": "100090018",
+            "hint": "d₁=+6, d₂=+3. Left=10006+3=10009. Right=6×3=18→0018.",
+            "solution": "Left=10009. Right=0018. Answer=100090018."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: near base 5000",
+        "missionStepTitle": "Final Challenge — Near 5000 Using the Deviation×2 Trick",
+        "coachHook": "5000 is not a power of 10. But 5000=10000÷2. Use base 10000 and multiply deviations by the ratio!",
+        "boardDemo": "To multiply near 5000: use base 5000. Right part has 4 digits. Example: 4997×4998. d₁=-3, d₂=-2. Left=4997-2=4995. Right=6→0006. Answer=49950006. Verify: 4997×4998 = 4997×5000-4997×2 = 24985000-9994 = 24975006. Re-examine: actual answer is 24975006. The method needs adjustment for non-power-of-10 bases. For base 5000: left part = left × 5000, right part = d₁×d₂. So: 4995×5000+6 = 24975000+6 = 24975006.",
+        "readAloudPrompt": "Read aloud: 'For base 5000: left part × 5000, plus right part.'",
+        "tryPrompt": "Compute 4998×4999 near base 5000.",
+        "masteryCheck": "24975002.",
+        "instantFeedbackWin": "Base Master badge — non-standard base conquered!",
+        "instantFeedbackRetry": "d₁=-2, d₂=-1. Left=4998-1=4997. 4997×5000=24985000. Right=2. Answer=24985002.",
+        "reviewPrompt": "For base 5000: product = (left part)×5000 + (right part). Verify 4998×4999: d₁=-2,d₂=-1. Left=4997. 4997×5000=24985000. Right=2. Answer=24985002.",
+        "xpReward": 18,
+        "badgeFocus": "Base Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L7_I1",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge near 5000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute 4998×4999 near base 5000. Formula: product = (left part)×5000 + (d₁×d₂).",
+            "steps": [
+              { "label": "Deviation d₁ for 4998", "answer": "-2", "hint": "4998-5000=-2." },
+              { "label": "Deviation d₂ for 4999", "answer": "-1", "hint": "4999-5000=-1." },
+              { "label": "Left part (4998+d₂ = 4998-1)", "answer": "4997", "hint": "4998-1=4997." },
+              { "label": "Right part (d₁×d₂)", "answer": "2", "hint": "(-2)×(-1)=2." },
+              { "label": "Final product: 4997×5000 + 2", "answer": "24985002", "hint": "4997×5000=24985000. Add 2." }
+            ],
+            "expectedAnswer": "24985002"
+          },
+          {
+            "questionId": "VM_G8_L7_I2",
+            "chapterCode": "VM_G8_L7",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge near 5000",
+            "skill": "nikhilam-multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 5002×5003 near base 5000. Use: product = (left part)×5000 + (d₁×d₂).",
+            "expectedAnswer": "25025006",
+            "hint": "d₁=+2, d₂=+3. Left=5002+3=5005. 5005×5000=25025000. Right=6.",
+            "solution": "Left=5005. 5005×5000=25025000. Right=2×3=6. Answer=25025006."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210" width="360" height="210" font-family="Nunito,sans-serif">
+  <rect width="360" height="210" rx="14" fill="#fefce8"/>
+  <text x="180" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">Square Root by Inspection — √1764</text>
+
+  <!-- Step 1: Group digits -->
+  <text x="20" y="52" font-size="12" fill="#713f12" font-weight="700">Step 1: Group from right in pairs</text>
+  <rect x="60" y="60" width="56" height="38" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="88" y="85" text-anchor="middle" font-size="22" font-weight="800" fill="#a16207">17</text>
+  <rect x="124" y="60" width="56" height="38" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="152" y="85" text-anchor="middle" font-size="22" font-weight="800" fill="#a16207">64</text>
+  <text x="240" y="82" font-size="12" fill="#6b7280">← 2 groups → 2-digit answer</text>
+
+  <!-- Step 2: units digit from last group -->
+  <text x="20" y="118" font-size="12" fill="#713f12" font-weight="700">Step 2: Units digit from last group (64)</text>
+  <text x="20" y="136" font-size="12" fill="#374151">64 ends in 4 → √ ends in <tspan font-weight="800" fill="#16a34a">2</tspan> or <tspan font-weight="800" fill="#16a34a">8</tspan></text>
+
+  <!-- Step 3: tens digit from first group -->
+  <text x="20" y="158" font-size="12" fill="#713f12" font-weight="700">Step 3: Tens digit from first group (17)</text>
+  <text x="20" y="176" font-size="12" fill="#374151">4² = 16 ≤ 17 &lt; 25 = 5²  →  tens digit = <tspan font-weight="800" fill="#16a34a">4</tspan></text>
+
+  <!-- Decide: 42 or 48? -->
+  <text x="20" y="196" font-size="11" fill="#374151">42² = 1764 ✓  → <tspan font-weight="800" fill="#166534">√1764 = 42</tspan></text>
+
+  <!-- Result highlight -->
+  <rect x="230" y="152" width="110" height="40" rx="10" fill="#14532d"/>
+  <text x="285" y="177" text-anchor="middle" font-size="20" font-weight="800" fill="white">√1764 = 42</text>
+</svg>

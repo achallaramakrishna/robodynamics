@@ -1,0 +1,1 @@
+ALTER TABLE rd_courses ADD COLUMN course_type VARCHAR(50) NULL COMMENT 'AI_TUTOR, VIDEO, etc.';

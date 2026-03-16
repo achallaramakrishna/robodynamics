@@ -90,6 +90,13 @@ export type TutorDuolingoLessonArc = {
   sessionFlow: TutorDuolingoLessonStep[];
 };
 
+// Step inside a fill_step question
+export type TutorFillStep = {
+  label: string;   // e.g. "Deficit of 97 from 100"
+  answer: string;  // correct answer for this step
+  hint?: string;
+};
+
 export type TutorQuestion = {
   questionId: string;
   chapterCode: string;
@@ -104,8 +111,15 @@ export type TutorQuestion = {
   visual?: {
     kind: string;
     title: string;
-    svg: string;
+    svg?: string;         // inline SVG string
+    asset?: string;       // filename in /math-svgs/vedic/, e.g. "nikhilam_base100.svg"
+    caption?: string;     // optional caption below visual
   };
+  // ── Rich question types ──────────────────────────────────────────────────
+  questionType?: "text" | "mcq" | "fill_step" | "speed_mcq";
+  options?: string[];           // MCQ / speed_mcq: the 4 answer choices
+  correctIndex?: number;        // MCQ / speed_mcq: index of correct option (0-based)
+  steps?: TutorFillStep[];      // fill_step: ordered sutra steps student completes
 };
 
 export type TutorTeachingStep = {
@@ -201,6 +215,9 @@ export type TutorCheckResponse = {
   encouragement: string;
   tutorAction?: string;
   coachTip?: string;
+  studentArchetype?: string;
+  boardSpeedFactor?: number;
+  silenceRecoveryMs?: number;
   sessionProgress?: TutorSessionProgress;
   summary?: {
     attempts: number;

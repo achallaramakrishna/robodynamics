@@ -1,0 +1,22 @@
+{
+  "courseId": "neet_chemistry",
+  "courseTitle": "NEET Chemistry",
+  "gradeBand": "11-12",
+  "subject": "chemistry",
+  "curriculumContext": "India NEET preparation",
+  "standardPath": "ai-tutor/scripts/standards/neet_chemistry_standard.json",
+  "chapterDir": "ai-tutor/tutor-api/content-template/neet_chemistry/chapter",
+  "sourcePdfDir": "docs/neet_chemistry",
+  "artifactRoot": "ai-tutor/artifacts/pipeline",
+  "targetSessionMinutes": 35,
+  "difficultyModel": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "deliveryModes": [
+    "voice",
+    "board",
+    "text"
+  ]
+}

@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional
 import httpx
 
 from app.models import TutorEvent
+from app.services.session_snapshot import snapshot_store
 
 
 @dataclass
@@ -70,6 +71,16 @@ class SessionStore:
             chapter_code=chapter_code,
             exercise_group=exercise_group,
         )
+        # Rehydrate from last snapshot so progress survives server restarts
+        snap = snapshot_store.load(session.user_id, chapter_code)
+        if snap:
+            for f in ("attempts", "correct_count", "error_streak", "doubt_count",
+                      "total_response_ms", "last_response_ms", "confidence_last",
+                      "hearts", "hearts_max", "xp", "streak",
+                      "question_progress", "group_progress", "subtopic_mastery",
+                      "exercise_group"):
+                if f in snap and snap[f] is not None:
+                    setattr(session, f, snap[f])
         self._sessions[session.session_id] = session
         return session
 
@@ -160,6 +171,8 @@ class SessionStore:
         if topic:
             session.subtopic_mastery.setdefault(topic, 50)
 
+        was_depleted = session.hearts <= 0
+
         if correct:
             session.correct_count += 1
             session.error_streak = 0
@@ -176,6 +189,9 @@ class SessionStore:
                 session.xp += 10
             if topic:
                 session.subtopic_mastery[topic] = min(100, int(session.subtopic_mastery.get(topic, 50)) + 8)
+            # Refill hearts on correct answer during review round (when depleted)
+            if was_depleted:
+                session.hearts = session.hearts_max
         else:
             session.error_streak += 1
             session.streak = 0
@@ -198,6 +214,8 @@ class SessionStore:
 
         if confidence:
             session.confidence_last = confidence.strip().lower()
+        # Persist snapshot asynchronously so a server restart doesn't lose progress
+        snapshot_store.save_async(session)
         return session
 
     def lesson_progress(

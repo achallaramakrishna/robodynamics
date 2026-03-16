@@ -1,0 +1,192 @@
+{
+  "courseId": "vedic_math_g6",
+  "courseTitle": "MindSutra Grade 6 — Vedic Math",
+  "gradeBand": "Grade 6",
+  "description": "CBSE Grade 6 aligned: vinculum numbers, integer multiplication shortcuts, Nikhilam for multiples of 10, ratio/HCF speed methods, squaring 2-digit numbers, Paravartya division, and intro to algebraic inspection. Bridges arithmetic to algebra.",
+  "chapters": [
+    {
+      "chapterCode": "VM_G6_L1_VINCULUM",
+      "title": "Vinculum Numbers — The Bar That Changes Everything",
+      "estimatedMinutes": 22,
+      "subtopics": ["Rekhanka (vinculum/bar) notation", "Convert to vinculum", "Arithmetic with bar digits"],
+      "learningGoals": [
+        "Convert any number to its vinculum (bar) form",
+        "Add and subtract using vinculum to avoid carries",
+        "Explain why vinculum simplifies multi-digit operations"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"What is a vinculum? (bar notation)"},
+        {"exerciseGroup":"B","subtopic":"Convert: single-digit to vinculum"},
+        {"exerciseGroup":"C","subtopic":"Convert: multi-digit to vinculum"},
+        {"exerciseGroup":"D","subtopic":"Add using vinculum form"},
+        {"exerciseGroup":"E","subtopic":"Subtract using vinculum form"},
+        {"exerciseGroup":"F","subtopic":"MCQ: identify vinculum form"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: convert and compute"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: multiply using vinculum"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L2_INTEGER_MULT",
+      "title": "Integer Multiplication Shortcuts",
+      "estimatedMinutes": 20,
+      "subtopics": ["Positive × negative rules", "Sign pattern memory", "×9, ×99, ×999 tricks"],
+      "learningGoals": [
+        "Apply sign rules for integer multiplication fluently",
+        "Multiply by 9 using (×10 − n) shortcut",
+        "Multiply by 99 using (×100 − n) shortcut"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Sign rules: positive × negative"},
+        {"exerciseGroup":"B","subtopic":"×9 shortcut: n×10 − n"},
+        {"exerciseGroup":"C","subtopic":"×99 shortcut: n×100 − n"},
+        {"exerciseGroup":"D","subtopic":"×999 shortcut"},
+        {"exerciseGroup":"E","subtopic":"MCQ: product of integers"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: ×99 method"},
+        {"exerciseGroup":"G","subtopic":"Mixed integer products"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: ×9999, ×11, ×111"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L3_NIKHILAM_BASE10",
+      "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+      "estimatedMinutes": 25,
+      "subtopics": ["Choosing the right base", "Near base 10 multiplication", "Near base 100 and 1000"],
+      "learningGoals": [
+        "Identify the appropriate base for any multiplication",
+        "Apply Nikhilam to numbers near 10, 100, and 1000",
+        "Solve mixed-base problems with correct deviation signs"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Choose base: 10, 100, or 1000?"},
+        {"exerciseGroup":"B","subtopic":"Near base 10: 8×7, 9×6"},
+        {"exerciseGroup":"C","subtopic":"Near base 100: 97×98"},
+        {"exerciseGroup":"D","subtopic":"Near base 1000: 998×997"},
+        {"exerciseGroup":"E","subtopic":"Above base: 103×104"},
+        {"exerciseGroup":"F","subtopic":"MCQ: identify base and product"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: near 1000 walkthrough"},
+        {"exerciseGroup":"H","subtopic":"Speed drill: mixed bases"},
+        {"exerciseGroup":"I","subtopic":"Challenge: sub-base (×50, ×200)"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L4_RATIO_SHORTCUT",
+      "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+      "estimatedMinutes": 20,
+      "subtopics": ["Cross-multiply comparison", "Simplify ratio by GCD", "Equivalent ratios"],
+      "learningGoals": [
+        "Compare two ratios using cross-multiply in one step",
+        "Simplify any ratio to its lowest terms mentally",
+        "Find equivalent ratios for given quantities"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Ratio basics review"},
+        {"exerciseGroup":"B","subtopic":"Cross-multiply comparison"},
+        {"exerciseGroup":"C","subtopic":"Simplify to lowest terms"},
+        {"exerciseGroup":"D","subtopic":"Equivalent ratios (scale up/down)"},
+        {"exerciseGroup":"E","subtopic":"MCQ: which ratio is larger?"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: simplification chain"},
+        {"exerciseGroup":"G","subtopic":"Word problems (mix/share)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: 3-part ratios"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L5_HCF_LCM_VEDIC",
+      "title": "HCF and LCM — Vedic Speed Method",
+      "estimatedMinutes": 22,
+      "subtopics": ["HCF via Vedic subtraction", "LCM from HCF (product rule)", "Applications: fractions, sharing"],
+      "learningGoals": [
+        "Find HCF of two numbers using the Vedic repeated-subtraction method",
+        "Derive LCM using HCF × product formula",
+        "Apply HCF/LCM to fraction simplification and word problems"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Why HCF matters (factor concept)"},
+        {"exerciseGroup":"B","subtopic":"HCF: small numbers (Vedic subtraction)"},
+        {"exerciseGroup":"C","subtopic":"HCF: larger numbers"},
+        {"exerciseGroup":"D","subtopic":"LCM from HCF"},
+        {"exerciseGroup":"E","subtopic":"MCQ: HCF or LCM?"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: HCF chain"},
+        {"exerciseGroup":"G","subtopic":"Word problems"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: HCF of 3 numbers"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L6_SQUARES_2DIG",
+      "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+      "estimatedMinutes": 22,
+      "subtopics": ["Near-base squaring", "Ekadhikena: ending in 5", "General 2-digit squaring"],
+      "learningGoals": [
+        "Square numbers ending in 5 using Ekadhikena Purvena instantly",
+        "Square any 2-digit number using the (a+b)² expansion shortcut",
+        "Compute squares from 11² to 99² in under 6 seconds each"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Numbers ending in 5: Ekadhikena rule"},
+        {"exerciseGroup":"B","subtopic":"25², 35², 45², 55², 65², 75², 85², 95²"},
+        {"exerciseGroup":"C","subtopic":"Near base: 98², 102²"},
+        {"exerciseGroup":"D","subtopic":"General 2-digit: (a+b)² method"},
+        {"exerciseGroup":"E","subtopic":"MCQ: compute the square"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: 2-digit squaring"},
+        {"exerciseGroup":"G","subtopic":"Geometry: area of squares"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: 3-digit near base"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L7_PARAVARTYA_DIV",
+      "title": "Paravartya — Divide by Transpose-and-Adjust",
+      "estimatedMinutes": 24,
+      "subtopics": ["Paravartya setup", "Transpose divisor digits", "One-line quotient"],
+      "learningGoals": [
+        "Set up Paravartya (transpose-and-adjust) for any 2-digit divisor",
+        "Compute quotient digit by digit using the transposed remainder",
+        "Divide 4-digit numbers by 2-digit divisors faster than long division"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Concept: transpose and adjust"},
+        {"exerciseGroup":"B","subtopic":"Divide by 11 using Paravartya"},
+        {"exerciseGroup":"C","subtopic":"Divide by 12, 13"},
+        {"exerciseGroup":"D","subtopic":"Divide by 21, 31 (easy cases)"},
+        {"exerciseGroup":"E","subtopic":"MCQ: first quotient digit"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: full Paravartya walkthrough"},
+        {"exerciseGroup":"G","subtopic":"Compare: long division vs Paravartya"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: 3-digit divisor"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G6_L8_ALGEBRA_SPEED",
+      "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+      "estimatedMinutes": 22,
+      "subtopics": ["When sum of numerators = sum of denominators", "Zero-sum inspection", "Solve ax+b=cx+d instantly"],
+      "learningGoals": [
+        "Identify when Sunyam rule applies to an equation",
+        "Solve linear equations of form ax+b=cx+d by inspection",
+        "Verify solutions and explain the sutra logic"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"What is Sunyam Samyasamuccaye?"},
+        {"exerciseGroup":"B","subtopic":"Pattern: when both sides sum to same"},
+        {"exerciseGroup":"C","subtopic":"Solve: 3x+4 = x+8 by inspection"},
+        {"exerciseGroup":"D","subtopic":"Solve: harder linear equations"},
+        {"exerciseGroup":"E","subtopic":"MCQ: identify the solution"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: inspection method"},
+        {"exerciseGroup":"G","subtopic":"Word problems (age, money)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: fractional equations"}
+      ]
+    }
+  ]
+}

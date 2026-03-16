@@ -1,0 +1,334 @@
+{
+  "chapterCode": "AR_G6_L7_DATA",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Data Tables and Charts",
+  "source": "MindSpark Grade 6 — Chapter 7",
+  "estimatedMinutes": 40,
+  "subtopics": [
+    "Reading tables (max, min, total, average)",
+    "Bar chart reading",
+    "Pie chart percentages",
+    "Line graph trends"
+  ],
+  "learningGoals": [
+    "Extract specific values from a multi-row, multi-column table",
+    "Find the row or column with the maximum or minimum total",
+    "Calculate an average from a row or column of data",
+    "Read bar charts and identify the tallest and shortest bars",
+    "Interpret pie chart sectors as percentages and absolute values",
+    "Describe whether a line graph shows an increasing, decreasing, or fluctuating trend"
+  ],
+  "coreIdeas": [
+    "Always scan the whole table before answering — never assume which row is largest without adding all values",
+    "Average = Total sum divided by number of items",
+    "In a bar chart, bar height equals value; a taller bar means a higher value",
+    "Pie chart actual count = (percentage divided by 100) multiplied by total",
+    "A sector less than 25% of a pie is smaller than one quarter of the whole",
+    "Line graph trend: values generally going up = increasing; generally going down = decreasing; up and down alternately = fluctuating"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Class A: Math=85, Sci=78, Eng=90, SS=72. Class B: Math=92, Sci=80, Eng=85, SS=88. Class C: Math=78, Sci=72, Eng=69, SS=80. Which class has the highest total?",
+      "solution": "Class A total = 85+78+90+72 = 325. Class B total = 92+80+85+88 = 345. Class C total = 78+72+69+80 = 299. Class B has the highest total (345).",
+      "concept": "Reading a table — finding the row with the maximum sum"
+    },
+    {
+      "id": "WE2",
+      "problem": "Class A scores: Math=85, Sci=78, Eng=90, SS=72. Find the average score.",
+      "solution": "Total = 85+78+90+72 = 325. Average = 325 divided by 4 = 81.25, approximately 81.",
+      "concept": "Calculating average from a table row"
+    },
+    {
+      "id": "WE3",
+      "problem": "A pie chart has 4 sectors: 30%, 25%, 25%, 20%. Total students = 200. How many students are in the 30% sector?",
+      "solution": "Students = (30 divided by 100) multiplied by 200 = 60.",
+      "concept": "Pie chart — converting percentage to absolute count"
+    },
+    {
+      "id": "WE4",
+      "problem": "Line graph values for Jan through Jun: 20, 25, 30, 28, 35, 40. Describe the trend.",
+      "solution": "Values generally increase from 20 to 40 over 6 months with one small dip in April. The trend is mostly increasing.",
+      "concept": "Line graph trend identification"
+    },
+    {
+      "id": "WE5",
+      "problem": "A bar chart shows 5 student scores: 45, 72, 68, 90, 55. How many more marks does the topper have than the lowest scorer?",
+      "solution": "Highest = 90, Lowest = 45. Difference = 90 − 45 = 45 marks.",
+      "concept": "Bar chart — finding difference between maximum and minimum"
+    }
+  ],
+  "duolingoLessonArc": {
+    "onboarding": {
+      "hook": "Numbers in a table or chart can tell you the whole story — if you know which question to ask!",
+      "avatarIntro": "Hey! I am Spark. Data Interpretation is the skill of reading organised information quickly and answering questions accurately. Today we work with tables, bar charts, pie charts, and line graphs — all four types!",
+      "priorKnowledge": "You have already added and divided numbers. Today we apply those skills to real data arranged in charts and tables, just like you will see in aptitude tests."
+    },
+    "mission": "Complete 9 exercise groups across all four chart types and earn the Data Detective badge.",
+    "microLessonPattern": "Show the chart → Ask a question → Identify the relevant data → Calculate → Instant Feedback",
+    "rewardLoop": "10 XP per correct answer; showing working before the answer earns 5 bonus XP.",
+    "reviewLoop": "After group E, a flash review picks one question from groups A through D to reinforce table and bar chart skills.",
+    "uiDirectives": {
+      "boardStyle": "grid table or ASCII chart representation with labelled axes",
+      "inputType": "numeric input or multiple choice (4 options)",
+      "showHintAfterMs": 15000
+    }
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Table Reading — Maximum Total",
+      "coachHook": "Scan the table, add the rows, find the champion!",
+      "boardDemo": {
+        "title": "Classes A, B, C with 4 subjects each. Find the class with highest total.",
+        "steps": [
+          "Table: Class A: 85, 78, 90, 72 | Class B: 92, 80, 85, 88 | Class C: 78, 72, 69, 80",
+          "Add Class A: 85+78+90+72 = 325",
+          "Add Class B: 92+80+85+88 = 345",
+          "Add Class C: 78+72+69+80 = 299",
+          "Class B has the highest total: 345"
+        ],
+        "teacherLine": "Never eyeball a table and guess. Always add the rows completely. Class B wins with 345."
+      },
+      "readAloudPrompt": "Add each row completely. Class A = 325, Class B = 345, Class C = 299. Highest total: Class B.",
+      "tryPrompt": "Using the same table, which class has the LOWEST total?  (a) Class A  (b) Class B  (c) Class C  (d) All equal",
+      "masteryCheck": "Class C",
+      "instantFeedbackWin": "Correct! Class C total = 299 — the lowest among the three classes.",
+      "instantFeedbackRetry": "Class C: 78+72+69+80 = 299. That is the smallest of the three totals.",
+      "reviewPrompt": "By how many marks does Class B outscore Class C?",
+      "xpReward": 10,
+      "badgeFocus": "Table Reader"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Table Reading — Average Calculation",
+      "coachHook": "Average = Total divided by number of subjects. Simple but powerful!",
+      "boardDemo": {
+        "title": "Class A: 85, 78, 90, 72 — Find the average score.",
+        "steps": [
+          "Total = 325 (already calculated)",
+          "Number of subjects = 4",
+          "Average = 325 divided by 4 = 81.25",
+          "Round to nearest whole number: 81"
+        ],
+        "teacherLine": "Divide the row total by the number of values. If it does not divide evenly, round to the nearest whole number."
+      },
+      "readAloudPrompt": "Average for Class A = 325 divided by 4 = 81.25, approximately 81.",
+      "tryPrompt": "Class C scores: 78, 72, 69, 80. Find the average (round to nearest whole number).  (a) 74  (b) 75  (c) 73  (d) 76",
+      "masteryCheck": "75",
+      "instantFeedbackWin": "Well done! 299 divided by 4 = 74.75, which rounds to 75. Average calculation nailed!",
+      "instantFeedbackRetry": "Total = 78+72+69+80 = 299. Average = 299 divided by 4 = 74.75, which rounds to 75.",
+      "reviewPrompt": "Which class has the highest average — A, B, or C? Show your working.",
+      "xpReward": 10,
+      "badgeFocus": "Average Expert"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Bar Chart Reading — Highest Bar",
+      "coachHook": "In a bar chart, taller bar = bigger value. Find the peak!",
+      "boardDemo": {
+        "title": "Bar chart: 5 students' scores — Student A=45, B=72, C=68, D=90, E=55",
+        "steps": [
+          "Draw 5 bars of heights: 45, 72, 68, 90, 55",
+          "The tallest bar belongs to Student D (score = 90)",
+          "Answer: Student D has the highest score"
+        ],
+        "teacherLine": "Scan the bars visually for the tallest, but always confirm by reading the exact value on the axis."
+      },
+      "readAloudPrompt": "Bar chart shows 5 bars. Tallest bar = Student D = 90 marks.",
+      "tryPrompt": "From the same bar chart (A=45, B=72, C=68, D=90, E=55), which student scored the LOWEST?  (a) Student A  (b) Student B  (c) Student C  (d) Student E",
+      "masteryCheck": "Student A",
+      "instantFeedbackWin": "Correct! Student A scored 45 — the lowest bar on the chart.",
+      "instantFeedbackRetry": "The shortest bar is Student A with a score of 45.",
+      "reviewPrompt": "List the five students in order from lowest to highest score.",
+      "xpReward": 10,
+      "badgeFocus": "Bar Chart Reader"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Bar Chart — Difference Between Two Bars",
+      "coachHook": "Two bars, two values — how far apart are they?",
+      "boardDemo": {
+        "title": "Topper (Student D = 90) vs Lowest (Student A = 45). Find the difference.",
+        "steps": [
+          "Identify the two bars: D = 90, A = 45",
+          "Difference = 90 − 45 = 45",
+          "Student D scored 45 marks more than Student A"
+        ],
+        "teacherLine": "Always read both values carefully from the axis before subtracting. Estimation alone causes errors."
+      },
+      "readAloudPrompt": "Difference = Highest score − Lowest score = 90 − 45 = 45 marks.",
+      "tryPrompt": "Student B scored 72. Student E scored 55. How many more marks did B score than E?  (a) 17  (b) 15  (c) 18  (d) 12",
+      "masteryCheck": "17",
+      "instantFeedbackWin": "Correct! 72 − 55 = 17. You are reading bar charts accurately!",
+      "instantFeedbackRetry": "Simply subtract: 72 − 55 = 17.",
+      "reviewPrompt": "What is the difference between the second highest and second lowest scorer?",
+      "xpReward": 10,
+      "badgeFocus": "Bar Chart Analyst"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Pie Chart — Converting Percentage to Count",
+      "coachHook": "A pie chart slice's size tells you its share. Convert that share into actual numbers!",
+      "boardDemo": {
+        "title": "Pie chart: 4 sectors — 30%, 25%, 25%, 20%. Total = 200 students. Find count in 30% sector.",
+        "steps": [
+          "Sector = 30%, Total = 200",
+          "Count = (30 divided by 100) multiplied by 200",
+          "= 0.30 multiplied by 200 = 60",
+          "60 students are in the 30% sector"
+        ],
+        "teacherLine": "Percentage means per 100. So 30% of 200 means 30 out of every 100, times 2 groups of 100 = 60."
+      },
+      "readAloudPrompt": "Count = percentage multiplied by total divided by 100 = 30 multiplied by 200 divided by 100 = 60.",
+      "tryPrompt": "Same pie chart. Total = 200. How many students are in the 25% sector?  (a) 40  (b) 50  (c) 55  (d) 25",
+      "masteryCheck": "50",
+      "instantFeedbackWin": "Correct! 25% of 200 = 25 multiplied by 200 divided by 100 = 50 students.",
+      "instantFeedbackRetry": "Count = 25 multiplied by 200 divided by 100 = 50.",
+      "reviewPrompt": "Verify that all four sector counts add to 200 (sectors: 30%, 25%, 25%, 20%).",
+      "xpReward": 10,
+      "badgeFocus": "Pie Chart Pro"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Pie Chart — Identifying the Smallest Sector",
+      "coachHook": "Which slice is smaller than one quarter? Think: one quarter = 25%!",
+      "boardDemo": {
+        "title": "Pie chart sectors: 30%, 25%, 25%, 20%. Which sector is less than 1/4 of the whole?",
+        "steps": [
+          "One quarter of the whole = 25%",
+          "Check each: 30% > 25%, 25% = 25%, 25% = 25%, 20% < 25%",
+          "Only the 20% sector is less than one quarter",
+          "Answer: the 20% sector"
+        ],
+        "teacherLine": "One quarter = 25%. Any sector with a percentage below 25% is smaller than a quarter of the pie."
+      },
+      "readAloudPrompt": "One quarter = 25%. The 20% sector is the only one below 25%, so it is less than one quarter.",
+      "tryPrompt": "A pie chart has sectors: 40%, 35%, 15%, 10%. Which sectors are less than 1/4 (25%)?  (a) 40% and 35%  (b) 15% only  (c) 15% and 10%  (d) 10% only",
+      "masteryCheck": "15% and 10%",
+      "instantFeedbackWin": "Correct! Both 15% and 10% are less than 25% (one quarter). Well spotted!",
+      "instantFeedbackRetry": "One quarter = 25%. Any sector below 25% qualifies: both 15% and 10% are below 25%.",
+      "reviewPrompt": "If a pie chart has a sector of exactly 25%, does it represent less than, equal to, or more than one quarter?",
+      "xpReward": 10,
+      "badgeFocus": "Pie Chart Pro"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Line Graph — Trend Reading",
+      "coachHook": "A line graph tells a story over time. Is it going up, down, or both?",
+      "boardDemo": {
+        "title": "Monthly values Jan to Jun: 20, 25, 30, 28, 35, 40. Describe the trend.",
+        "steps": [
+          "Plot values: Jan=20, Feb=25, Mar=30, Apr=28, May=35, Jun=40",
+          "Check each step: up, up, up, small dip, up, up",
+          "Overall: from 20 to 40 with one small dip in April",
+          "Trend = Mostly Increasing"
+        ],
+        "teacherLine": "A single dip does not reverse the overall trend. Look at the start and end values — from 20 to 40, the overall direction is clearly upward."
+      },
+      "readAloudPrompt": "Start = 20, End = 40. One dip in April. Overall trend = mostly increasing.",
+      "tryPrompt": "Line graph values: 50, 45, 40, 38, 35, 30. What is the trend?  (a) Increasing  (b) Decreasing  (c) Constant  (d) Fluctuating",
+      "masteryCheck": "Decreasing",
+      "instantFeedbackWin": "Correct! From 50 down to 30 — a clear decreasing trend.",
+      "instantFeedbackRetry": "Each value is smaller than the previous: 50, 45, 40, 38, 35, 30. That is a decreasing trend.",
+      "reviewPrompt": "Give a real-life example of something that might show a decreasing line graph over 6 months.",
+      "xpReward": 10,
+      "badgeFocus": "Trend Tracker"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Combined Data Interpretation — Two Questions, One Chart",
+      "coachHook": "One chart, two questions — read it once, answer both!",
+      "boardDemo": {
+        "title": "Bar chart: A=45, B=72, C=68, D=90, E=55. Find (1) max value and (2) difference between B and E.",
+        "steps": [
+          "Question 1: Max value = highest bar = D = 90",
+          "Question 2: Difference B and E = 72 − 55 = 17",
+          "Both answers from one reading of the chart"
+        ],
+        "teacherLine": "In exam DI sets, multiple questions share the same chart. Read all questions first, then scan the chart once for all answers — saves time!"
+      },
+      "readAloudPrompt": "Max = D = 90. Difference B and E = 72 − 55 = 17. Two answers, one chart scan.",
+      "tryPrompt": "Same bar chart. What is the sum of the two lowest scorers (A and E)?  (a) 100  (b) 95  (c) 90  (d) 105",
+      "masteryCheck": "100",
+      "instantFeedbackWin": "Correct! A=45, E=55. Sum = 45+55 = 100.",
+      "instantFeedbackRetry": "Identify the two lowest bars: A=45 and E=55. Sum = 45+55 = 100.",
+      "reviewPrompt": "How many students scored above the overall average (average of all 5 students)?",
+      "xpReward": 10,
+      "badgeFocus": "DI Master"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Speed Round — One Question Per Chart Type",
+      "coachHook": "Final round! One question each from table, bar chart, pie chart, and line graph. Maximum focus!",
+      "boardDemo": {
+        "title": "Speed DI Strategy",
+        "steps": [
+          "Table: add, compare, divide",
+          "Bar chart: read the axis, compare heights",
+          "Pie chart: multiply percentage by total, divide by 100",
+          "Line graph: compare first and last value for trend"
+        ],
+        "teacherLine": "Identify the chart type in 4 seconds, extract key numbers in 10 seconds, calculate in 5 seconds. That is the 4-10-5 DI method."
+      },
+      "readAloudPrompt": "Identify chart type, extract numbers, calculate — in that order.",
+      "tryPrompt": "A pie chart shows 4 sectors: 40%, 30%, 20%, 10%. Total = 500. How many are in the 10% sector?  (a) 50  (b) 100  (c) 40  (d) 10",
+      "masteryCheck": "50",
+      "instantFeedbackWin": "Perfect! 10% of 500 = 50. Speed round complete — you are a Data Detective!",
+      "instantFeedbackRetry": "10% of 500 = (10 divided by 100) multiplied by 500 = 50.",
+      "reviewPrompt": "Name all four chart types covered today and one key question you can answer from each.",
+      "xpReward": 15,
+      "badgeFocus": "Data Detective"
+    }
+  ],
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "B1",
+        "type": "hook",
+        "teacherLine": "Imagine the school announces the top-scoring class in exams — but the data is a messy table. Who won? You need Data Interpretation skills to find out in 30 seconds. That is exactly what we practice today!",
+        "boardSteps": [
+          "Display a 3x4 table of class marks",
+          "Ask: Which class is the winner?",
+          "Prompt student to add each row",
+          "Reveal: Class B wins with 345"
+        ],
+        "duration": 60
+      },
+      {
+        "beatId": "B2",
+        "type": "teach",
+        "teacherLine": "There are four data formats today: tables (you add and compare), bar charts (you compare heights), pie charts (you convert percentage to count), and line graphs (you describe the trend). Different formats, same skill — extract the right numbers and calculate.",
+        "boardSteps": [
+          "Show one example of each chart type",
+          "Label the key feature of each",
+          "Write the core calculation for each type"
+        ],
+        "duration": 90
+      },
+      {
+        "beatId": "B3",
+        "type": "practice",
+        "teacherLine": "Pie chart question: a school has 300 students. 25% are in the Science club. How many students is that? Think: percentage multiplied by total divided by 100.",
+        "boardSteps": [
+          "Draw a pie chart with a 25% sector highlighted",
+          "Student writes: 25 multiplied by 300 divided by 100",
+          "= 75 students",
+          "Confirm on board"
+        ],
+        "duration": 90
+      },
+      {
+        "beatId": "B4",
+        "type": "review",
+        "teacherLine": "Data Interpretation is not about maths alone — it is about reading carefully and calculating accurately. Remember the four types: table, bar, pie, line. You have earned the Data Detective badge today!",
+        "boardSteps": [
+          "Show summary: 4 chart types with one key rule each",
+          "Display badge: Data Detective",
+          "Show XP tally"
+        ],
+        "duration": 60
+      }
+    ]
+  }
+}

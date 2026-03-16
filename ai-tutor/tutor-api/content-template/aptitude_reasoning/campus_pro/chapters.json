@@ -1,0 +1,24 @@
+{
+  "courseId": "aptitude_campus_pro",
+  "courseName": "MindSpark Campus Pro — Placement Aptitude",
+  "tagline": "Get Placed. Get the Edge.",
+  "targetAudience": "Engineering Year 3–4 students preparing for campus placements",
+  "avatarTone": "interview-coach",
+  "hintStyle": "Apply the formula / eliminate options...",
+  "questionFormat": ["MCQ", "timed-set"],
+  "timerPerQuestion": 90,
+  "chapters": [
+    { "chapterCode": "CP_L1_NUMBER_SYSTEMS",   "title": "Number Systems & Series",         "order": 1,  "estimatedMinutes": 25, "companyFocus": ["TCS", "Infosys"] },
+    { "chapterCode": "CP_L2_PERCENTAGES",      "title": "Percentages & Profit/Loss",       "order": 2,  "estimatedMinutes": 25, "companyFocus": ["Wipro", "Accenture"] },
+    { "chapterCode": "CP_L3_TIME_WORK",        "title": "Time, Work & Pipes",              "order": 3,  "estimatedMinutes": 25, "companyFocus": ["TCS", "Cognizant"] },
+    { "chapterCode": "CP_L4_TIME_SPEED",       "title": "Time, Speed & Distance",          "order": 4,  "estimatedMinutes": 25, "companyFocus": ["Infosys", "Wipro"] },
+    { "chapterCode": "CP_L5_AVERAGES",         "title": "Averages, Mixtures & Alligation", "order": 5,  "estimatedMinutes": 22, "companyFocus": ["HCL"] },
+    { "chapterCode": "CP_L6_PERMCOMB",         "title": "Permutations, Combinations & Probability", "order": 6, "estimatedMinutes": 28, "companyFocus": ["Amazon", "TCS"] },
+    { "chapterCode": "CP_L7_DI",               "title": "Data Interpretation",             "order": 7,  "estimatedMinutes": 30, "companyFocus": ["All companies"] },
+    { "chapterCode": "CP_L8_SEATING",          "title": "Logical Reasoning — Arrangements","order": 8,  "estimatedMinutes": 28, "companyFocus": ["Infosys", "Capgemini"] },
+    { "chapterCode": "CP_L9_PUZZLES",          "title": "Logical Reasoning — Puzzles & Syllogisms", "order": 9, "estimatedMinutes": 28, "companyFocus": ["Wipro", "Cognizant"] },
+    { "chapterCode": "CP_L10_VERBAL",          "title": "Verbal Ability",                  "order": 10, "estimatedMinutes": 25, "companyFocus": ["Infosys", "Accenture"] },
+    { "chapterCode": "CP_L11_TCS_NQT",        "title": "TCS NQT Pattern Practice",        "order": 11, "estimatedMinutes": 35, "companyFocus": ["TCS"] },
+    { "chapterCode": "CP_L12_COMPANY_MIX",    "title": "Infosys/Wipro/Accenture Pattern", "order": 12, "estimatedMinutes": 35, "companyFocus": ["Infosys", "Wipro", "Accenture"] }
+  ]
+}

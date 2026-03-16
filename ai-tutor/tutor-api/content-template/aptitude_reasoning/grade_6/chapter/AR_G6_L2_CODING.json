@@ -1,0 +1,618 @@
+{
+  "chapterCode": "AR_G6_L2_CODING",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Coding and Decoding",
+  "source": "MindSpark Grade 6 Aptitude & Reasoning | Chapter 2: Coding and Decoding",
+  "estimatedMinutes": 15,
+  "subtopics": [
+    "Letter Shift +1",
+    "Letter Shift +3",
+    "Letter Shift +2 (Verification)",
+    "Reverse Alphabet Coding",
+    "Number Coding (Letter to Position)",
+    "Word Pattern Coding",
+    "Decoding (Reverse the Code)",
+    "Mixed Number-Letter Coding",
+    "Speed Challenge"
+  ],
+  "learningGoals": [
+    "Encode a word by shifting each letter forward by a fixed number of positions.",
+    "Decode a coded word by reversing the shift.",
+    "Apply reverse alphabet and position-number coding schemes accurately."
+  ],
+  "coreIdeas": [
+    "Shift coding: add (or subtract) the same number to each letter's alphabet position.",
+    "Decode by doing the opposite: if coded by +3, decode by -3.",
+    "Position coding: replace each letter with its alphabet number (A=1 to Z=26)."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "If CAT is coded as FDW using a +3 shift, what is the code for DOG?",
+      "solution": "C(3)+3=F, A(1)+3=D, T(20)+3=W — CAT=FDW. D(4)+3=G, O(15)+3=R, G(7)+3=J — DOG=GRJ.",
+      "concept": "Letter shift +3: add 3 to each letter's alphabet position"
+    },
+    {
+      "id": "WE2",
+      "problem": "If FISH is coded as GJTI using a +1 shift, decode the word IVMM.",
+      "solution": "F(6)+1=G, I(9)+1=J, S(19)+1=T, H(8)+1=I — FISH=GJTI. To decode IVMM: I-1=H, V-1=U, M-1=L, M-1=L — HULL.",
+      "concept": "Letter shift +1 encode and decode"
+    },
+    {
+      "id": "WE3",
+      "problem": "In a code where A=1, B=2 … Z=26, what is the code number for CAT?",
+      "solution": "C=3, A=1, T=20 — CAT is coded as 3-1-20.",
+      "concept": "Position-number coding: replace letters with their alphabet numbers"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g6-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark introduces the concept of a secret code: every letter is shifted by the same amount. First warm-up uses +1 shift on a 3-letter word.",
+      "placementRule": "Start all learners at Group A (+1 shift). If a student gets Groups A and B correct without hints, offer a bonus challenge in Group C."
+    },
+    "mission": {
+      "missionTitle": "Break the Secret Code",
+      "missionPromise": "By the end you will encode AND decode any word in seconds — and understand how real secret agents use substitution ciphers!",
+      "successCelebration": "Show 'Code Breaker' badge animation after Group G (first decode round). Final badge is 'Master Cryptographer'."
+    },
+    "microLessonPattern": [
+      "Coach shows the shift rule as an alphabet number line with arrows.",
+      "Coach encodes one example word letter by letter on the board.",
+      "Coach reads the practice word aloud and asks for the encoded version.",
+      "Student attempts before solution is shown.",
+      "Instant feedback praises correct encoding or shows exactly which letter went wrong.",
+      "Review prompt tests a single letter shift to confirm the rule is solid."
+    ],
+    "rewardLoop": {
+      "xpUnit": "10 to 25 XP per group, higher for decode groups.",
+      "streakRule": "Show streak counter; single retry before streak breaks.",
+      "badgeRule": "Encode badge at Group C, Decode badge at Group G, Master badge at Group I.",
+      "celebrationStyle": "Cipher wheel spin animation + XP pulse after each group."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers on same group triggers a step-by-step single-letter demo.",
+      "practiceStyle": "Offer one 2-letter word before retrying the full word.",
+      "masteryRule": "Advance after correct answer on the full word AND one follow-up letter.",
+      "revisitRule": "Decode groups revisited next session if any error occurred."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "alphabet number line board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Question, alphabet reference strip, and answer input visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G6_L2_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Welcome, future secret agent! Today's lesson is Coding and Decoding — one of the most fun topics in Aptitude and Reasoning! Spies, detectives, and programmers all use codes. The simplest code shifts every letter of the alphabet forward by the same amount. A becomes B, B becomes C — or skip ahead 3 steps and A becomes D. Today we will crack 4 types: letter shift, reverse alphabet, number code, and mixed code. Let's begin!",
+        "boardAction": "Write 'Coding and Decoding — Lesson 2'. Below, show alphabet strip A=1 to Z=26. Draw +3 arrows over C to F, A to D, T to W to preview the Caesar cipher.",
+        "checkpointPrompt": "Warm-up: if A goes to B, B goes to C, C goes to D (shift +1), what does the word CAT become?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "DBU",
+        "fallbackHint": "C(3)+1=4=D, A(1)+1=2=B, T(20)+1=21=U. CAT becomes DBU with shift +1.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l2_title",
+            "x": "40",
+            "y": "28",
+            "text": "Coding and Decoding — Lesson 2",
+            "color": "#b45309",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l2_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#d97706",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_alphabet",
+            "x": "40",
+            "y": "68",
+            "text": "A=1  B=2  C=3  D=4  E=5 ... Z=26",
+            "color": "#374151",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l2_shift_demo",
+            "x": "40",
+            "y": "96",
+            "text": "Shift +3:  C->F   A->D   T->W   (CAT = FDW)",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 1.5,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "l2_types",
+            "x": "40",
+            "y": "128",
+            "text": "4 code types: Shift | Reverse | Number | Mixed",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 2.2,
+            "durationSec": 0.4
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L2_DEMO_ENCODE",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me encode a full word live — FISH with shift +1. F is the 6th letter: 6+1=7=G. I is the 9th: 9+1=10=J. S is the 19th: 19+1=20=T. H is the 8th: 8+1=9=I. FISH becomes GJTI. Notice — I always write the position number in the middle step. That middle step is your safety net — never skip it!",
+        "boardAction": "Write FISH in large letters. Below each letter write its position number. Below each number write +1 and the new number. Below that write the coded letter. Box the final result GJTI.",
+        "checkpointPrompt": "Now you: encode the word BIRD using shift +1. Write position, add 1, convert back.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "CJSE — B(2+1=3=C), I(9+1=10=J), R(18+1=19=S), D(4+1=5=E).",
+        "fallbackHint": "B=2 goes to 3=C. I=9 goes to 10=J. R=18 goes to 19=S. D=4 goes to 5=E. BIRD becomes CJSE.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo2_word",
+            "x": "60",
+            "y": "50",
+            "text": "F    I    S    H",
+            "color": "#1e40af",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo2_pos",
+            "x": "60",
+            "y": "80",
+            "text": "6    9   19    8",
+            "color": "#374151",
+            "size": 13,
+            "delaySec": 0.6,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo2_add",
+            "x": "60",
+            "y": "106",
+            "text": "+1  +1  +1  +1",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.1,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo2_newpos",
+            "x": "60",
+            "y": "130",
+            "text": "7   10  20    9",
+            "color": "#374151",
+            "size": 13,
+            "delaySec": 1.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo2_coded",
+            "x": "60",
+            "y": "160",
+            "text": "G    J    T    I  ->  GJTI",
+            "color": "#059669",
+            "size": 15,
+            "delaySec": 2.0,
+            "durationSec": 0.5
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L2_DEMO_DECODE",
+        "type": "DEMO",
+        "sequence": 202,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Now decoding — the reverse operation! Coded word: IHG. The original was encoded with shift +3. To decode, I subtract 3. I(9)-3=6=F. H(8)-3=5=E. G(7)-3=4=D. IHG decodes to FED! Encoding adds, decoding subtracts — that is the golden rule of all shift codes.",
+        "boardAction": "Write IHG. Below each letter write position. Below that write -3 and new position. Below that write decoded letter. Circle FED. Write rule box: ENCODE = +N, DECODE = -N.",
+        "checkpointPrompt": "Decode PLUQ — the shift was +3. Give me the original word.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "MILN — P(16-3=13=M), L(12-3=9=I), U(21-3=18=L), Q(17-3=14=N).",
+        "fallbackHint": "P=16, 16-3=13=M. L=12, 12-3=9=I. U=21, 21-3=18=L. Q=17, 17-3=14=N. The original word is MILN.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo3_coded",
+            "x": "60",
+            "y": "50",
+            "text": "I    H    G   (coded, shift was +3)",
+            "color": "#dc2626",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo3_sub",
+            "x": "60",
+            "y": "85",
+            "text": "9-3=6   8-3=5   7-3=4",
+            "color": "#374151",
+            "size": 13,
+            "delaySec": 0.7,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo3_decoded",
+            "x": "60",
+            "y": "118",
+            "text": "F        E        D   ->   FED",
+            "color": "#059669",
+            "size": 15,
+            "delaySec": 1.3,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo3_rule",
+            "x": "60",
+            "y": "155",
+            "text": "GOLDEN RULE: Encode = +N  |  Decode = -N",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 1.9,
+            "durationSec": 0.4
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L2_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You now have every tool in the coding toolkit. As you work through Groups A to I, remember: step 1 — identify the code type from the example pair; step 2 — apply the rule letter by letter; step 3 — verify one letter before finalising. Take it one letter at a time and you will crack every code!",
+        "boardAction": "Show quick reference card: Shift +N (add N) | Decode (subtract N) | Reverse (27 minus position) | Number code (A=1 to Z=26).",
+        "checkpointPrompt": "Last warm-up before we start: if the code is reverse alphabet (27 minus position), what does the letter E (position 5) become?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "V — 27-5=22=V.",
+        "fallbackHint": "E is the 5th letter. 27-5=22. The 22nd letter is V.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided2_title",
+            "x": "40",
+            "y": "28",
+            "text": "Coding Quick Reference",
+            "color": "#b45309",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided2_r1",
+            "x": "60",
+            "y": "62",
+            "text": "Shift +N: each position + N",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided2_r2",
+            "x": "60",
+            "y": "84",
+            "text": "Decode: each position - N",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided2_r3",
+            "x": "60",
+            "y": "106",
+            "text": "Reverse: 27 - position",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided2_r4",
+            "x": "60",
+            "y": "128",
+            "text": "Number code: A=1, B=2 ... Z=26",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ]
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Letter Shift +1",
+      "missionStepTitle": "Exercise A: Letter Shift +1",
+      "coachHook": "Imagine every letter moves one step forward in the alphabet. A becomes B, B becomes C — this is the simplest secret code! Let's try it.",
+      "boardDemo": {
+        "title": "Letter Shift +1 — Encode",
+        "steps": [
+          "Rule: every letter goes to the next letter in alphabet (+1)",
+          "Example word: CAT",
+          "C(3) + 1 = 4 = D",
+          "A(1) + 1 = 2 = B",
+          "T(20) + 1 = 21 = U",
+          "CAT codes to DBU"
+        ],
+        "teacherLine": "Write A=1, B=2 up to Z=26 on a strip. Add 1 to each position number. Convert back. Special case: Z(26)+1 wraps to A(1) — the alphabet is a circle."
+      },
+      "readAloudPrompt": "Let's encode SUN using shift +1. S is the 19th letter — what does S become?",
+      "tryPrompt": "Your turn: encode the word PEN using shift +1. Give me all 3 coded letters!",
+      "masteryCheck": "QFO",
+      "instantFeedbackWin": "Brilliant! P(16)+1=Q, E(5)+1=F, N(14)+1=O — PEN = QFO. You just wrote a secret message!",
+      "instantFeedbackRetry": "Here's a trick: P is the 16th letter. 16+1=17=Q. E is the 5th: 5+1=6=F. N is the 14th: 14+1=15=O. Together: QFO.",
+      "reviewPrompt": "Quick encode: encode the word CAT using shift +1.",
+      "xpReward": 10,
+      "badgeFocus": "Shift +1 Encoder"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Letter Shift +3",
+      "missionStepTitle": "Exercise B: Letter Shift +3",
+      "coachHook": "Now we move 3 steps forward — this is the famous Caesar Cipher used by Julius Caesar to send secret war messages! C becomes F, A becomes D, T becomes W. Let's try it!",
+      "boardDemo": {
+        "title": "Letter Shift +3 — Caesar Cipher",
+        "steps": [
+          "Rule: every letter goes to the letter 3 positions forward",
+          "Example word: CAT",
+          "C(3) + 3 = 6 = F",
+          "A(1) + 3 = 4 = D",
+          "T(20) + 3 = 23 = W",
+          "CAT codes to FDW"
+        ],
+        "teacherLine": "Same trick as +1, just add 3 instead. Always use the alphabet number line. If result exceeds 26, wrap around: X(24)+3=27 — 27-26=1=A."
+      },
+      "readAloudPrompt": "Encode FISH using shift +3. F is the 6th letter — what does F become with +3?",
+      "tryPrompt": "Your turn: encode the word SUN using shift +3. Show each step!",
+      "masteryCheck": "VXQ",
+      "instantFeedbackWin": "Excellent! S(19)+3=22=V, U(21)+3=24=X, N(14)+3=17=Q — SUN = VXQ. Caesar himself would be impressed!",
+      "instantFeedbackRetry": "Here's a trick: S=19, 19+3=22=V. U=21, 21+3=24=X. N=14, 14+3=17=Q. Full code: VXQ.",
+      "reviewPrompt": "Quick: encode DOG using shift +3 — give me the 3-letter code.",
+      "xpReward": 12,
+      "badgeFocus": "Caesar Cipher Expert"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Letter Shift +2 (Verification)",
+      "missionStepTitle": "Exercise C: Letter Shift +2",
+      "coachHook": "You have done +1 and +3. Now +2 — and this time we also VERIFY by checking one letter of the answer. Always verify one letter to catch mistakes!",
+      "boardDemo": {
+        "title": "Letter Shift +2 — Encode and Verify",
+        "steps": [
+          "Rule: every letter goes 2 positions forward",
+          "Example word: BOOK",
+          "B(2)+2=4=D, O(15)+2=17=Q, O(15)+2=17=Q, K(11)+2=13=M",
+          "BOOK codes to DQQM",
+          "Verify: check first letter B(2)+2=4=D confirmed"
+        ],
+        "teacherLine": "After encoding a word, pick any one letter and re-check the shift. If it matches, trust the rest. Verification saves you from silly errors in exams!"
+      },
+      "readAloudPrompt": "Encode RAIN using shift +2. R is the 18th letter. After encoding, verify the letter A.",
+      "tryPrompt": "Your turn: encode STAR using shift +2, then verify the letter T!",
+      "masteryCheck": "UVCT",
+      "instantFeedbackWin": "Perfect! S(19)+2=21=U, T(20)+2=22=V, A(1)+2=3=C, R(18)+2=20=T — STAR = UVCT. Verification: T(20)+2=22=V confirmed. Flawless!",
+      "instantFeedbackRetry": "Here's a trick: S=19+2=21=U. T=20+2=22=V. A=1+2=3=C. R=18+2=20=T. Full code: UVCT. Verify T: 20+2=22=V — matches the second letter.",
+      "reviewPrompt": "Encode MANGO using shift +2 — and tell me which letter you verified.",
+      "xpReward": 14,
+      "badgeFocus": "Verified Coder"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Reverse Alphabet Coding",
+      "missionStepTitle": "Exercise D: Reverse Alphabet Coding",
+      "coachHook": "Here's a wild trick — what if A becomes Z, B becomes Y, C becomes X? The whole alphabet is flipped! Formula: coded position = 27 minus original position.",
+      "boardDemo": {
+        "title": "Reverse Alphabet — Mirror Code",
+        "steps": [
+          "Rule: A swaps Z, B swaps Y, C swaps X — position = 27 minus original",
+          "Example: encode CAT",
+          "C = 3 — 27-3 = 24 = X",
+          "A = 1 — 27-1 = 26 = Z",
+          "T = 20 — 27-20 = 7 = G",
+          "CAT codes to XZG"
+        ],
+        "teacherLine": "The trick formula is 27 minus the original position. Test it: A(1) — 27-1=26=Z. The alphabet mirrors itself perfectly."
+      },
+      "readAloudPrompt": "Reverse-code the letter M. M is the 13th letter. What is 27 minus 13?",
+      "tryPrompt": "Your turn: encode the word SUN using reverse alphabet coding. Use the formula 27 minus position for each letter!",
+      "masteryCheck": "HFM",
+      "instantFeedbackWin": "Outstanding! S=19 — 27-19=8=H, U=21 — 27-21=6=F, N=14 — 27-14=13=M — SUN = HFM. The mirror trick works perfectly!",
+      "instantFeedbackRetry": "Here's a trick: S is 19th letter. 27-19=8. Count to 8th letter: H. U is 21st: 27-21=6=F. N is 14th: 27-14=13=M. Together: HFM.",
+      "reviewPrompt": "Reverse-code the word KEY using the 27 minus position formula.",
+      "xpReward": 15,
+      "badgeFocus": "Mirror Coder"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Number Coding (Letter to Position)",
+      "missionStepTitle": "Exercise E: Number Coding",
+      "coachHook": "What if instead of a letter you get a number? In number coding, each letter is replaced by its position: A=1, B=2 all the way to Z=26. Words become a string of numbers!",
+      "boardDemo": {
+        "title": "Number Coding — Letters to Numbers",
+        "steps": [
+          "Rule: replace each letter with its alphabet position number",
+          "Encode example: CAT",
+          "C=3, A=1, T=20",
+          "CAT codes to 3-1-20",
+          "Decode example: 2-9-18-4 — B(2) I(9) R(18) D(4) — BIRD"
+        ],
+        "teacherLine": "Encode: look up each letter's position. Decode: look up which letter sits at that position. Numbers are separated by hyphens to avoid confusion — 12 could be L or A+B without hyphens!"
+      },
+      "readAloudPrompt": "Encode the word SUN into number code. S is position 19 — what are U and N?",
+      "tryPrompt": "Your turn: encode the word KITE into number code. Give me all 4 numbers!",
+      "masteryCheck": "11-9-20-5",
+      "instantFeedbackWin": "Spot on! K=11, I=9, T=20, E=5 — KITE = 11-9-20-5. You speak number-letter fluently!",
+      "instantFeedbackRetry": "Here's a trick: K is the 11th letter. I is the 9th. T is the 20th. E is the 5th. Write: 11-9-20-5.",
+      "reviewPrompt": "Decode this number code back to a word: 4-15-7 — what animal is it?",
+      "xpReward": 16,
+      "badgeFocus": "Number Cipher Analyst"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Word Pattern Coding",
+      "missionStepTitle": "Exercise F: Word Pattern Coding",
+      "coachHook": "Word pattern coding gives you one pair (word and its code) and asks you to find the rule, then apply it to a new word. Detective work — find the rule first!",
+      "boardDemo": {
+        "title": "Word Pattern — Find the Rule",
+        "steps": [
+          "Given: BOOK codes to DQQM (shift +2 for each letter)",
+          "Verify: B(2)+2=4=D confirmed, O(15)+2=17=Q confirmed",
+          "Rule confirmed: shift +2",
+          "Apply to FISH: F(6)+2=8=H, I(9)+2=11=K, S(19)+2=21=U, H(8)+2=10=J",
+          "FISH codes to HKUJ"
+        ],
+        "teacherLine": "Always verify the rule using at least 2 letters from the given pair before applying it to the new word. One check might be coincidence — two checks confirm the pattern!"
+      },
+      "readAloudPrompt": "Given: CAT codes to FDW. What is the shift? Verify using letter A. Then apply the rule to encode PIG.",
+      "tryPrompt": "Given: COLD codes to DPME. Find the shift by checking C and O. Then encode the word WARM!",
+      "masteryCheck": "XBSN",
+      "instantFeedbackWin": "Brilliant detective work! C(3)+1=4=D confirmed, O(15)+1=16=P confirmed — shift is +1. W(23)+1=24=X, A(1)+1=2=B, R(18)+1=19=S, M(13)+1=14=N — WARM = XBSN. Case closed!",
+      "instantFeedbackRetry": "Here's a trick: C(3) went to D(4) — that is +1. Check O(15) went to P(16) — also +1. Rule confirmed: +1. Now W=23+1=24=X, A=1+1=2=B, R=18+1=19=S, M=13+1=14=N. Answer: XBSN.",
+      "reviewPrompt": "Given: SUN codes to VXQ. What is the shift? Apply the same rule to encode MOON.",
+      "xpReward": 18,
+      "badgeFocus": "Pattern Rule Detective"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Decoding (Reverse the Code)",
+      "missionStepTitle": "Exercise G: Decoding",
+      "coachHook": "Now we flip it! If encoding is +3, decoding is minus 3. You get a scrambled message and your job is to reveal the original word. Reverse the shift, letter by letter!",
+      "boardDemo": {
+        "title": "Decoding — Reverse the Shift",
+        "steps": [
+          "Coded word: IHG (shift was +3, so decode by -3)",
+          "I(9) - 3 = 6 = F",
+          "H(8) - 3 = 5 = E",
+          "G(7) - 3 = 4 = D",
+          "IHG decodes to FED"
+        ],
+        "teacherLine": "Encoding adds, decoding subtracts. If the shift is +3, apply -3 to each coded letter. Convert each result back to its letter. The original word appears!"
+      },
+      "readAloudPrompt": "The code PLUQ was made with shift +3. Decode it: P(16)-3 equals what? Give me the full decoded word.",
+      "tryPrompt": "Decode the coded word VJCV — the original was encoded with shift +2. Give me the decoded word!",
+      "masteryCheck": "THAT",
+      "instantFeedbackWin": "Superb! V(22)-2=20=T, J(10)-2=8=H, C(3)-2=1=A, V(22)-2=20=T — VJCV decodes to THAT. The secret message is revealed!",
+      "instantFeedbackRetry": "Here's a trick: shift was +2, so decode by -2. V=22, 22-2=20=T. J=10, 10-2=8=H. C=3, 3-2=1=A. V=22, 22-2=20=T. Answer: THAT!",
+      "reviewPrompt": "Decode the word GRJ — it was encoded with shift +3. What is the original word?",
+      "xpReward": 20,
+      "badgeFocus": "Code Breaker"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Mixed Number-Letter Coding",
+      "missionStepTitle": "Exercise H: Mixed Number-Letter Coding",
+      "coachHook": "What if the code mixes numbers AND letters? Some letters stay, some become numbers. Find the rule for each type separately — letters have their rule, numbers have theirs!",
+      "boardDemo": {
+        "title": "Mixed Code — Letters and Numbers Together",
+        "steps": [
+          "Common pattern: vowels become their position numbers, consonants stay",
+          "Vowels: A=1, E=5, I=9, O=15, U=21",
+          "Example: BOOK — B stays, O becomes 15, O becomes 15, K stays",
+          "BOOK codes to B-15-15-K",
+          "Decode: reverse — numbers become vowels, letters stay"
+        ],
+        "teacherLine": "Mixed codes always have a consistent rule. State what happens to each character type (vowels versus consonants) separately. Then encode or decode by applying each sub-rule."
+      },
+      "readAloudPrompt": "In a code where vowels become position numbers and consonants stay, encode the word RAIN.",
+      "tryPrompt": "Using the same vowel-to-number rule: encode the word LION — vowels become numbers, consonants stay!",
+      "masteryCheck": "L-9-15-N",
+      "instantFeedbackWin": "Correct! L stays L, I becomes 9, O becomes 15, N stays N — LION codes to L-9-15-N. Mixed code mastered!",
+      "instantFeedbackRetry": "Here's a trick: identify vowels in LION: I and O. I is position 9, O is position 15. Consonants L and N stay. Left to right: L, I-becomes-9, O-becomes-15, N. Code: L-9-15-N.",
+      "reviewPrompt": "Using vowels-to-positions rule, encode the word RAIN and then decode the mixed code C-15-D-5.",
+      "xpReward": 22,
+      "badgeFocus": "Mixed Code Analyst"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Speed Challenge",
+      "missionStepTitle": "Exercise I: Speed Challenge",
+      "coachHook": "SPEED CHALLENGE! All coding types in one rapid-fire round. Encode, decode, reverse, number code — 30 seconds per question. State the rule type first, then the answer. Go!",
+      "boardDemo": {
+        "title": "Speed Challenge — All Types Recap",
+        "steps": [
+          "Type 1: Shift +N — add N to each letter's position",
+          "Type 2: Decode shift +N — subtract N from each coded letter",
+          "Type 3: Reverse alphabet — 27 minus position",
+          "Type 4: Number code — A=1 to Z=26",
+          "Speed tip: identify the type in 5 seconds, then execute"
+        ],
+        "teacherLine": "You now have 4 coding tools. In real exams, identify the type from the example pair first — then solve in under 30 seconds. Let's blaze through 3 quick ones!"
+      },
+      "readAloudPrompt": "Ready? Speed Q1: Encode BLUE with shift +3. Speed Q2: Decode JGCF (shift was +2). Speed Q3: Number-code the word ACE.",
+      "tryPrompt": "Fire away — give me the answers to all 3 speed questions: BLUE coded, JGCF decoded, ACE as numbers.",
+      "masteryCheck": "EOXH | HEAD | 1-3-5",
+      "instantFeedbackWin": "BLAZING FAST! BLUE+3: E(5)O(15)X(24)H(8)=EOXH. JGCF-2: H(8)E(5)A(1)D(4)=HEAD. ACE: A(1)C(3)E(5)=1-3-5. You are a Master Cryptographer!",
+      "instantFeedbackRetry": "Here's a trick — Q1: B=2+3=5=E, L=12+3=15=O, U=21+3=24=X, E=5+3=8=H gives EOXH. Q2: J=10-2=8=H, G=7-2=5=E, C=3-2=1=A, F=6-2=4=D gives HEAD. Q3: A=1, C=3, E=5 gives 1-3-5.",
+      "reviewPrompt": "Final mastery: given NIGHT was encoded as QLJKW, what shift was used? Verify with two letters.",
+      "xpReward": 25,
+      "badgeFocus": "Master Cryptographer"
+    }
+  ]
+}

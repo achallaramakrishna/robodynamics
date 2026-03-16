@@ -1,0 +1,622 @@
+{
+  "title": "Lesson 2: Proportionally! — 3-Digit × Single-Digit Speed",
+  "gradeBand": "Grade 5",
+  "source": "Vedic Mathematics for Schools | Grade 5",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Review: single-digit multiplication facts",
+    "Breaking a 3-digit number into H+T+U",
+    "Multiply hundreds separately",
+    "Multiply tens separately",
+    "Multiply units separately",
+    "Combine all three products",
+    "Word problems — 3-digit × 1-digit",
+    "Speed drill — no carrying confusion",
+    "Mixed challenge with carrying"
+  ],
+  "learningGoals": [
+    "Break any 3-digit number into hundreds, tens, and units.",
+    "Apply the Anurupyena sutra to multiply each part separately.",
+    "Combine partial products to get the final answer mentally.",
+    "Solve CBSE Grade 5 word problems involving 3-digit × 1-digit multiplication."
+  ],
+  "coreIdeas": [
+    "Anurupyena means 'proportionally' — scale each part of the number separately.",
+    "Multiply the multiplier with hundreds, then tens, then units.",
+    "Add the three results in position: thousands, hundreds, tens, units.",
+    "This avoids carry confusion by handling each digit independently."
+  ],
+  "workedExamples": [
+    {
+      "question": "324 × 3 = ?",
+      "method": "300×3=900, 20×3=60, 4×3=12. Sum: 900+60+12=972.",
+      "answer": "972"
+    },
+    {
+      "question": "456 × 4 = ?",
+      "method": "400×4=1600, 50×4=200, 6×4=24. Sum: 1600+200+24=1824.",
+      "answer": "1824"
+    },
+    {
+      "question": "738 × 6 = ?",
+      "method": "700×6=4200, 30×6=180, 8×6=48. Sum: 4200+180+48=4428.",
+      "answer": "4428"
+    },
+    {
+      "question": "509 × 7 = ?",
+      "method": "500×7=3500, 0×7=0, 9×7=63. Sum: 3500+0+63=3563.",
+      "answer": "3563"
+    }
+  ],
+  "starterPractice": [
+    "Warm-up: What is 200 × 4?",
+    "Guided: Break 342 into hundreds, tens, units. Multiply each by 2.",
+    "Independent: Find 516 × 3 using Anurupyena."
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya. Today you will multiply any 3-digit number by a single digit — instantly — by breaking it into parts. This is the Anurupyena sutra!",
+      "placementRule": "If learner knows 2-digit × 1-digit, start at Group C."
+    },
+    "mission": {
+      "missionTitle": "Anurupyena — 3-Digit × 1-Digit Speed",
+      "missionPromise": "Multiply 3-digit numbers by a single digit in three mental steps.",
+      "successCelebration": "Superb! You can now multiply 3-digit numbers faster than most adults!"
+    },
+    "microLessonPattern": [
+      "Arya breaks the number on the board with colour coding.",
+      "Student multiplies each coloured part separately.",
+      "Parts are placed in the correct column (H, T, U).",
+      "Partial products are added up.",
+      "Instant feedback shows which column went wrong."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 16 XP per group based on difficulty.",
+      "streakRule": "Streak visible; correct on retry counts.",
+      "badgeRule": "Each group earns a badge tied to the column being mastered.",
+      "celebrationStyle": "Arya cheer, column-highlight animation, XP pulse."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers triggers a simpler 2-digit × 1-digit re-teach.",
+      "practiceStyle": "Re-show the broken-down board, then retry with a simpler number.",
+      "masteryRule": "Advance after checkpoint is answered correctly.",
+      "revisitRule": "Missed groups reappear as warm-up in the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Review: single-digit multiplication facts",
+        "missionStepTitle": "Exercise A: Times tables warm-up",
+        "coachHook": "Before we multiply 3-digit numbers, let's sharpen the times tables. These are the building blocks!",
+        "boardDemo": "Flash: 7×8=56, 9×6=54, 8×7=56. Quick recall mode.",
+        "readAloudPrompt": "What is 8 × 7?",
+        "tryPrompt": "Quick: 9 × 6 = ?",
+        "masteryCheck": "6 × 8 = ?",
+        "instantFeedbackWin": "Sharp recall! Times tables locked in.",
+        "instantFeedbackRetry": "9 × 6: count by 9s six times, or think 10×6=60 then minus 6=54.",
+        "reviewPrompt": "Quick fire: 7×4, 8×6, 9×7, 6×9.",
+        "xpReward": 10,
+        "badgeFocus": "Times Table Ace",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_A1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "A",
+            "subtopic": "Review: single-digit multiplication facts",
+            "skill": "times table recall",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 7 × 8?",
+            "options": ["54", "56", "63", "48"],
+            "correctIndex": 1,
+            "expectedAnswer": "56",
+            "hint": "Count by 7s eight times, or 8×7.",
+            "solution": "7 × 8 = 56."
+          },
+          {
+            "questionId": "VM_G5_L2_A2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "A",
+            "subtopic": "Review: single-digit multiplication facts",
+            "skill": "times table recall",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 9 × 6?",
+            "options": ["45", "54", "56", "63"],
+            "correctIndex": 1,
+            "expectedAnswer": "54",
+            "hint": "10×6=60, then minus 6.",
+            "solution": "9 × 6 = 54."
+          },
+          {
+            "questionId": "VM_G5_L2_A3",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "A",
+            "subtopic": "Review: single-digit multiplication facts",
+            "skill": "times table recall",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 6 × 8?",
+            "options": ["42", "48", "54", "56"],
+            "correctIndex": 1,
+            "expectedAnswer": "48",
+            "hint": "Count by 6s eight times.",
+            "solution": "6 × 8 = 48."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Breaking a 3-digit number into H+T+U",
+        "missionStepTitle": "Exercise B: Break the number",
+        "coachHook": "Every 3-digit number is made of hundreds, tens, and units. 324 = 300 + 20 + 4. That's the Anurupyena idea!",
+        "boardDemo": "Write 324 = 300 + 20 + 4 in colour: hundreds in red, tens in blue, units in green.",
+        "readAloudPrompt": "Break 456 into hundreds + tens + units.",
+        "tryPrompt": "Break 738 into H + T + U.",
+        "masteryCheck": "Break 509 into its parts.",
+        "instantFeedbackWin": "Perfect decomposition! Now we multiply each part.",
+        "instantFeedbackRetry": "509 = 500 + 0 + 9. The tens digit is 0!",
+        "reviewPrompt": "Break these: 261, 405, 730.",
+        "xpReward": 10,
+        "badgeFocus": "Number Decomposer",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_B1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "B",
+            "subtopic": "Breaking a 3-digit number into H+T+U",
+            "skill": "number decomposition",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "456 = ? + ? + ?",
+            "options": ["400+50+6", "456+0+0", "40+50+6", "400+56+0"],
+            "correctIndex": 0,
+            "expectedAnswer": "400+50+6",
+            "hint": "Hundreds digit is 4, tens digit is 5, units digit is 6.",
+            "solution": "456 = 400 + 50 + 6."
+          },
+          {
+            "questionId": "VM_G5_L2_B2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "B",
+            "subtopic": "Breaking a 3-digit number into H+T+U",
+            "skill": "number decomposition",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the tens part of 509?",
+            "options": ["50", "0", "9", "5"],
+            "correctIndex": 1,
+            "expectedAnswer": "0",
+            "hint": "The tens digit of 509 is the middle digit.",
+            "solution": "509 = 500 + 0 + 9. The tens part is 0."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Multiply hundreds separately",
+        "missionStepTitle": "Exercise C: Hundreds part",
+        "coachHook": "Step 1 of Anurupyena: multiply JUST the hundreds part. 324 × 3 → first do 300 × 3 = 900. Easy!",
+        "boardDemo": "324 × 3: Show 300 × 3 = 900 highlighted in red.",
+        "readAloudPrompt": "For 456 × 4: what is 400 × 4?",
+        "tryPrompt": "For 738 × 6: find 700 × 6.",
+        "masteryCheck": "For 509 × 7: find 500 × 7.",
+        "instantFeedbackWin": "Hundreds multiplied! First partial product ready.",
+        "instantFeedbackRetry": "500 × 7: think 5 × 7 = 35, then add two zeros → 3500.",
+        "reviewPrompt": "Hundreds step for: 200×4, 600×3, 800×7.",
+        "xpReward": 10,
+        "badgeFocus": "Hundreds Hero",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_C1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "C",
+            "subtopic": "Multiply hundreds separately",
+            "skill": "multiply hundreds",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 738 × 6, what is 700 × 6?",
+            "options": ["420", "4200", "4260", "42000"],
+            "correctIndex": 1,
+            "expectedAnswer": "4200",
+            "hint": "7 × 6 = 42, then add two zeros.",
+            "solution": "700 × 6 = 7 × 6 × 100 = 42 × 100 = 4200."
+          },
+          {
+            "questionId": "VM_G5_L2_C2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "C",
+            "subtopic": "Multiply hundreds separately",
+            "skill": "multiply hundreds",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 509 × 7, what is 500 × 7?",
+            "options": ["350", "3500", "35007", "35"],
+            "correctIndex": 1,
+            "expectedAnswer": "3500",
+            "hint": "5 × 7 = 35, then add two zeros.",
+            "solution": "500 × 7 = 3500."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Multiply tens and units separately",
+        "missionStepTitle": "Exercise D: Tens and units parts",
+        "coachHook": "Step 2: tens part. Step 3: units part. For 324 × 3: 20×3=60 and 4×3=12. Three separate answers!",
+        "boardDemo": "324 × 3: Red 300×3=900, Blue 20×3=60, Green 4×3=12. Three colours, three partial products.",
+        "readAloudPrompt": "For 456 × 4: what is 50 × 4? And 6 × 4?",
+        "tryPrompt": "For 738 × 6: find 30×6 and 8×6.",
+        "masteryCheck": "Three parts of 642 × 5.",
+        "instantFeedbackWin": "All three parts found! Now just add them.",
+        "instantFeedbackRetry": "30×6=180, 8×6=48. Now add to the hundreds part.",
+        "reviewPrompt": "Three parts for 275 × 4.",
+        "xpReward": 12,
+        "badgeFocus": "Three-Part Multiplier",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_D1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply tens and units separately",
+            "skill": "multiply tens and units",
+            "difficulty": "easy",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Break 324 × 3 into three parts.",
+            "steps": [
+              {"label": "Hundreds: 300 × 3 = ?", "answer": "900", "hint": "3 × 3 = 9, add two zeros"},
+              {"label": "Tens: 20 × 3 = ?", "answer": "60", "hint": "2 × 3 = 6, add one zero"},
+              {"label": "Units: 4 × 3 = ?", "answer": "12", "hint": "4 times 3"}
+            ],
+            "expectedAnswer": "900, 60, 12",
+            "hint": "Multiply each part of 324 by 3 separately.",
+            "solution": "300×3=900, 20×3=60, 4×3=12."
+          },
+          {
+            "questionId": "VM_G5_L2_D2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply tens and units separately",
+            "skill": "multiply tens and units",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 456 × 4: what is the tens part (50 × 4)?",
+            "options": ["20", "200", "2000", "50"],
+            "correctIndex": 1,
+            "expectedAnswer": "200",
+            "hint": "5 × 4 = 20, add one zero.",
+            "solution": "50 × 4 = 200."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Combine all three products",
+        "missionStepTitle": "Exercise E: Add all three parts",
+        "coachHook": "Final step! Add the three partial products. 900 + 60 + 12 = 972. That is your answer for 324 × 3!",
+        "boardDemo": "Column addition: 900 + 60 + 12 = 972. Show the column-wise adding.",
+        "readAloudPrompt": "456 × 4: parts are 1600, 200, 24. Add them.",
+        "tryPrompt": "738 × 6: parts 4200, 180, 48. Final answer?",
+        "masteryCheck": "Find 642 × 5 fully.",
+        "instantFeedbackWin": "Complete! You computed 738×6 with Anurupyena!",
+        "instantFeedbackRetry": "4200 + 180 + 48 = 4428. Add step by step.",
+        "reviewPrompt": "Full method for 275 × 4.",
+        "xpReward": 14,
+        "badgeFocus": "Anurupyena Master",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_E1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "E",
+            "subtopic": "Combine all three products",
+            "skill": "full Anurupyena multiplication",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 456 × 4 using Anurupyena.",
+            "steps": [
+              {"label": "Hundreds: 400 × 4 = ?", "answer": "1600", "hint": "4 × 4 = 16, add two zeros"},
+              {"label": "Tens: 50 × 4 = ?", "answer": "200", "hint": "5 × 4 = 20, add one zero"},
+              {"label": "Units: 6 × 4 = ?", "answer": "24", "hint": "6 times 4"},
+              {"label": "Add: 1600 + 200 + 24 = ?", "answer": "1824", "hint": "Add all three partial products"}
+            ],
+            "expectedAnswer": "1824",
+            "hint": "Three parts, then add.",
+            "solution": "1600+200+24=1824."
+          },
+          {
+            "questionId": "VM_G5_L2_E2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "E",
+            "subtopic": "Combine all three products",
+            "skill": "full Anurupyena multiplication",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "738 × 6 = ?",
+            "options": ["4228", "4428", "4438", "4418"],
+            "correctIndex": 1,
+            "expectedAnswer": "4428",
+            "hint": "700×6=4200, 30×6=180, 8×6=48. Add them.",
+            "solution": "4200+180+48=4428."
+          },
+          {
+            "questionId": "VM_G5_L2_E3",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "E",
+            "subtopic": "Combine all three products",
+            "skill": "full Anurupyena multiplication",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "509 × 7 = ?",
+            "options": ["3553", "3563", "3473", "3573"],
+            "correctIndex": 1,
+            "expectedAnswer": "3563",
+            "hint": "500×7=3500, 0×7=0, 9×7=63.",
+            "solution": "3500+0+63=3563."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Word problems — 3-digit × 1-digit",
+        "missionStepTitle": "Exercise F: Word problems",
+        "coachHook": "Real problems! A school orders 246 books for each of its 4 houses. Total books? Use Anurupyena!",
+        "boardDemo": "246 × 4: 200×4=800, 40×4=160, 6×4=24. Total: 984 books.",
+        "readAloudPrompt": "A cricketer scored 148 runs per match over 6 matches. Total runs?",
+        "tryPrompt": "Solve with Anurupyena.",
+        "masteryCheck": "A shop sells 315 kg of vegetables daily for 8 days. Total kg?",
+        "instantFeedbackWin": "Real-world Anurupyena solved! Great work.",
+        "instantFeedbackRetry": "148×6: 100×6=600, 40×6=240, 8×6=48. Total=888 runs.",
+        "reviewPrompt": "Create a word problem using a 3-digit × 1-digit multiplication.",
+        "xpReward": 14,
+        "badgeFocus": "Word Problem Whiz",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_F1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "F",
+            "subtopic": "Word problems — 3-digit × 1-digit",
+            "skill": "Anurupyena word problem",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "A school buys 246 pencils for each of 4 classes. How many pencils in total?",
+            "steps": [
+              {"label": "Set up: 246 × 4. Hundreds: 200 × 4 = ?", "answer": "800", "hint": "2 × 4 = 8, add two zeros"},
+              {"label": "Tens: 40 × 4 = ?", "answer": "160", "hint": "4 × 4 = 16, add one zero"},
+              {"label": "Units: 6 × 4 = ?", "answer": "24", "hint": "6 times 4"},
+              {"label": "Total pencils: 800 + 160 + 24 = ?", "answer": "984", "hint": "Add all three"}
+            ],
+            "expectedAnswer": "984",
+            "hint": "246 × 4. Break into 200+40+6, multiply each by 4.",
+            "solution": "800+160+24=984 pencils."
+          },
+          {
+            "questionId": "VM_G5_L2_F2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "F",
+            "subtopic": "Word problems — 3-digit × 1-digit",
+            "skill": "Anurupyena word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A baker makes 375 samosas per day. How many will she make in 6 days?",
+            "options": ["2150", "2250", "2350", "2200"],
+            "correctIndex": 1,
+            "expectedAnswer": "2250",
+            "hint": "375 × 6: 300×6=1800, 70×6=420, 5×6=30.",
+            "solution": "1800+420+30=2250 samosas."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Speed drill — no carrying confusion",
+        "missionStepTitle": "Exercise G: Speed drill",
+        "coachHook": "Speed mode! You have the method — now go fast. Three parts, one answer, no carrying needed!",
+        "boardDemo": "Flash: 312×3=936, 204×4=816, 421×5=2105.",
+        "readAloudPrompt": "312 × 3 = ?",
+        "tryPrompt": "421 × 5 = ?",
+        "masteryCheck": "204 × 4 = ?",
+        "instantFeedbackWin": "Speed Anurupyena! You are blazing!",
+        "instantFeedbackRetry": "421×5: 400×5=2000, 20×5=100, 1×5=5. Total=2105.",
+        "reviewPrompt": "Three in a row: 311×3, 102×5, 230×4.",
+        "xpReward": 14,
+        "badgeFocus": "Anurupyena Speed Star",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_G1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "G",
+            "subtopic": "Speed drill",
+            "skill": "Anurupyena speed",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 312 × 3 = ?",
+            "options": ["926", "936", "946", "916"],
+            "correctIndex": 1,
+            "expectedAnswer": "936",
+            "hint": "300×3=900, 10×3=30, 2×3=6.",
+            "solution": "900+30+6=936."
+          },
+          {
+            "questionId": "VM_G5_L2_G2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "G",
+            "subtopic": "Speed drill",
+            "skill": "Anurupyena speed",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 421 × 5 = ?",
+            "options": ["2005", "2105", "2205", "2015"],
+            "correctIndex": 1,
+            "expectedAnswer": "2105",
+            "hint": "400×5=2000, 20×5=100, 1×5=5.",
+            "solution": "2000+100+5=2105."
+          },
+          {
+            "questionId": "VM_G5_L2_G3",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "G",
+            "subtopic": "Speed drill",
+            "skill": "Anurupyena speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 634 × 7 = ?",
+            "options": ["4328", "4438", "4338", "4448"],
+            "correctIndex": 1,
+            "expectedAnswer": "4438",
+            "hint": "600×7=4200, 30×7=210, 4×7=28.",
+            "solution": "4200+210+28=4438."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Mixed challenge with carrying",
+        "missionStepTitle": "Exercise H: Carrying challenge",
+        "coachHook": "Sometimes partial products overlap their columns — you add them column by column. 456×4: 1600+200+24. Notice 24 pushes into tens and hundreds!",
+        "boardDemo": "Column layout: 1600, 200, 24. Add columns right to left: 4, 2+2=4... carry if needed.",
+        "readAloudPrompt": "677 × 8 = ?",
+        "tryPrompt": "786 × 9 = ?",
+        "masteryCheck": "849 × 7 = ?",
+        "instantFeedbackWin": "Carrying handled perfectly! Great column thinking.",
+        "instantFeedbackRetry": "786×9: 700×9=6300, 80×9=720, 6×9=54. Sum=7074.",
+        "reviewPrompt": "Try 539×6 and explain the carry.",
+        "xpReward": 16,
+        "badgeFocus": "Carry Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_H1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "H",
+            "subtopic": "Mixed challenge with carrying",
+            "skill": "Anurupyena with carrying",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 677 × 8 using Anurupyena.",
+            "steps": [
+              {"label": "600 × 8 = ?", "answer": "4800", "hint": "6 × 8 = 48, add two zeros"},
+              {"label": "70 × 8 = ?", "answer": "560", "hint": "7 × 8 = 56, add one zero"},
+              {"label": "7 × 8 = ?", "answer": "56", "hint": "7 times 8"},
+              {"label": "Add: 4800 + 560 + 56 = ?", "answer": "5416", "hint": "Add the three partial products"}
+            ],
+            "expectedAnswer": "5416",
+            "hint": "4800+560+56. Add from right.",
+            "solution": "4800+560+56=5416."
+          },
+          {
+            "questionId": "VM_G5_L2_H2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "H",
+            "subtopic": "Mixed challenge with carrying",
+            "skill": "Anurupyena with carrying",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "786 × 9 = ?",
+            "options": ["7064", "7074", "7084", "6974"],
+            "correctIndex": 1,
+            "expectedAnswer": "7074",
+            "hint": "700×9=6300, 80×9=720, 6×9=54.",
+            "solution": "6300+720+54=7074."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Mixed challenge — largest digits",
+        "missionStepTitle": "Exercise I: Boss level",
+        "coachHook": "Boss level! Large digits, multiple carries. Anurupyena still handles them gracefully. Stay calm and break it into parts!",
+        "boardDemo": "999 × 9: 900×9=8100, 90×9=810, 9×9=81. Sum: 8100+810+81=8991.",
+        "readAloudPrompt": "888 × 8 = ?",
+        "tryPrompt": "997 × 6 = ?",
+        "masteryCheck": "Find 859 × 9.",
+        "instantFeedbackWin": "Boss level conquered! That is Vedic mastery.",
+        "instantFeedbackRetry": "888×8: 800×8=6400, 80×8=640, 8×8=64. Sum=7104.",
+        "reviewPrompt": "Challenge: can you do 999 × 9 in your head?",
+        "xpReward": 18,
+        "badgeFocus": "Anurupyena Grand Master",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L2_I1",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "I",
+            "subtopic": "Mixed challenge — largest digits",
+            "skill": "Anurupyena boss level",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 888 × 8 using Anurupyena.",
+            "steps": [
+              {"label": "800 × 8 = ?", "answer": "6400", "hint": "8 × 8 = 64, add two zeros"},
+              {"label": "80 × 8 = ?", "answer": "640", "hint": "8 × 8 = 64, add one zero"},
+              {"label": "8 × 8 = ?", "answer": "64", "hint": "8 times 8"},
+              {"label": "Sum: 6400 + 640 + 64 = ?", "answer": "7104", "hint": "Add all three carefully"}
+            ],
+            "expectedAnswer": "7104",
+            "hint": "6400+640+64. Start adding from units.",
+            "solution": "6400+640+64=7104."
+          },
+          {
+            "questionId": "VM_G5_L2_I2",
+            "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+            "exerciseGroup": "I",
+            "subtopic": "Mixed challenge — largest digits",
+            "skill": "Anurupyena boss level",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "997 × 6 = ?",
+            "options": ["5972", "5982", "5962", "5992"],
+            "correctIndex": 1,
+            "expectedAnswer": "5982",
+            "hint": "900×6=5400, 90×6=540, 7×6=42.",
+            "solution": "5400+540+42=5982."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {"stepId": "VM_G5_L2_A", "exerciseGroup": "A", "subtopic": "Times table warm-up", "boardMode": "text", "teacherLine": "Before multiplying 3-digit numbers, let's make sure times tables are instant! Quick recall.", "boardAction": "Flash 5 multiplication facts on board.", "checkpointPrompt": "6 × 8 = ?", "microPractice": "Quick fire: 7×4, 8×6, 9×7."},
+    {"stepId": "VM_G5_L2_B", "exerciseGroup": "B", "subtopic": "Break the number", "boardMode": "text", "teacherLine": "Every 3-digit number hides three separate numbers. 324 = 300 + 20 + 4. Let's colour each part!", "boardAction": "Write 324 and split into 300+20+4 with three colours.", "checkpointPrompt": "Break 509 into H+T+U.", "microPractice": "Break these: 261, 405, 730."},
+    {"stepId": "VM_G5_L2_C", "exerciseGroup": "C", "subtopic": "Multiply hundreds", "boardMode": "text", "teacherLine": "Step 1 of Anurupyena: multiply the hundreds digit only. Ignore tens and units for now!", "boardAction": "Show 738×6. Highlight 700 in red. Write 700×6=4200.", "checkpointPrompt": "For 509×7: 500×7=?", "microPractice": "Hundreds step for 200×4, 600×3, 800×7."},
+    {"stepId": "VM_G5_L2_D", "exerciseGroup": "D", "subtopic": "Tens and units", "boardMode": "text", "teacherLine": "Step 2 and 3: tens then units. Three separate little multiplications!", "boardAction": "Show 324×3. All three colours: 300×3=900, 20×3=60, 4×3=12.", "checkpointPrompt": "Three parts of 642×5.", "microPractice": "Three parts for 275×4."},
+    {"stepId": "VM_G5_L2_E", "exerciseGroup": "E", "subtopic": "Combine", "boardMode": "text", "teacherLine": "Final step — add all three parts. Stack them in columns and add!", "boardAction": "Column addition diagram: 900+60+12=972 with alignment.", "checkpointPrompt": "642×5 final answer.", "microPractice": "Full method for 275×4."},
+    {"stepId": "VM_G5_L2_F", "exerciseGroup": "F", "subtopic": "Word problems", "boardMode": "text", "teacherLine": "Real world! Three-digit quantities appear everywhere — recipes, cricket scores, purchases.", "boardAction": "Show pencil problem 246×4=984 with steps.", "checkpointPrompt": "315 kg/day × 8 days = ?", "microPractice": "Create your own 3-digit word problem."},
+    {"stepId": "VM_G5_L2_G", "exerciseGroup": "G", "subtopic": "Speed drill", "boardMode": "text", "teacherLine": "Speed round! Flash-card style. Three parts, one answer, fast!", "boardAction": "Flash problems with countdown.", "checkpointPrompt": "204×4 in 5 seconds!", "microPractice": "Three in a row: 311×3, 102×5, 230×4."},
+    {"stepId": "VM_G5_L2_H", "exerciseGroup": "H", "subtopic": "Carrying challenge", "boardMode": "text", "teacherLine": "When partial products need carries, just add them column by column — Anurupyena keeps it clean.", "boardAction": "677×8. Show column addition of 4800+560+56.", "checkpointPrompt": "849×7=?", "microPractice": "Try 539×6 and explain the carry."},
+    {"stepId": "VM_G5_L2_I", "exerciseGroup": "I", "subtopic": "Boss level", "boardMode": "text", "teacherLine": "Boss level! Large digits, multiple carries. Anurupyena handles all of them.", "boardAction": "999×9 broken into three parts. Final sum=8991.", "checkpointPrompt": "859×9=?", "microPractice": "999×9 in your head!"}
+  ],
+  "screenplay": [
+    {"beatId": "VM_G5_L2_A_INTRO", "stepId": "VM_G5_L2_A", "exerciseGroup": "A", "subtopic": "Times table review", "sequence": 101, "cue": "intro", "boardMode": "text", "teacherLine": "Before we tackle 3-digit numbers, let's make sure our times tables are lightning fast!", "boardAction": "Write 7×8=? on board.", "checkpointPrompt": "", "pauseType": "none", "holdSec": 0.4, "expectedStudentResponse": "", "fallbackHint": "Count by 7s up to eight times.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null},
+    {"beatId": "VM_G5_L2_E_EXPLAIN", "stepId": "VM_G5_L2_E", "exerciseGroup": "E", "subtopic": "Combine all parts", "sequence": 501, "cue": "explain", "boardMode": "text", "teacherLine": "Now add all three parts! Stack them up and add from right to left — just like a column addition.", "boardAction": "Show 1600+200+24=1824 in column format.", "checkpointPrompt": "642×5=?", "pauseType": "student_input", "holdSec": 8.0, "expectedStudentResponse": "3210", "fallbackHint": "600×5=3000, 40×5=200, 2×5=10. Sum=3210.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null}
+  ]
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 100">
+  <!-- Original shape -->
+  <polygon points="20,80 20,30 60,80" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="2.5"/>
+  <!-- 180° rotation arc arrow -->
+  <path d="M75,50 Q110,5 145,50" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="145,44 149,56 137,54" fill="#7c3aed"/>
+  <text x="110" y="18" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7c3aed" text-anchor="middle">180°</text>
+  <!-- Rotated shape (flipped 180°: point at top-right, flat on left) -->
+  <polygon points="200,20 160,20 200,70" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6,3"/>
+</svg>

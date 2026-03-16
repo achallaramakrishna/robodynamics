@@ -1,0 +1,356 @@
+{
+  "chapterCode": "AR_G6_L5_CLOCKS",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Clocks and Time",
+  "source": "MindSpark Grade 6 Aptitude & Reasoning | clocks_and_time.pdf",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Reading Clock Hands",
+    "Minute Hand Angle from 12",
+    "Hour Hand Angle from 12",
+    "Angle Between Clock Hands",
+    "Hands Overlap",
+    "Mirror Image of a Clock",
+    "Water Image of a Clock",
+    "Time After Given Minutes"
+  ],
+  "learningGoals": [
+    "Calculate the angle made by the minute hand and hour hand at any given time.",
+    "Find when clock hands overlap and recognize the pattern.",
+    "Read mirror and water images of a clock correctly."
+  ],
+  "coreIdeas": [
+    "The minute hand moves 6 degrees every minute; the hour hand moves 0.5 degrees every minute.",
+    "The angle between the hands at H hours M minutes is |30H - 5.5M| degrees.",
+    "In a mirror image the left and right sides swap, so a clock showing 3:00 appears as 9:00."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "What is the angle between the hands of a clock at 3:00?",
+      "solution": "At 3:00, H = 3 and M = 0. Angle = |30 × 3 - 5.5 × 0| = |90 - 0| = 90 degrees.",
+      "concept": "Angle Between Clock Hands"
+    },
+    {
+      "id": "WE2",
+      "problem": "What is the angle between the clock hands at 6:30?",
+      "solution": "H = 6, M = 30. Angle = |30 × 6 - 5.5 × 30| = |180 - 165| = 15 degrees.",
+      "concept": "Angle Between Clock Hands"
+    },
+    {
+      "id": "WE3",
+      "problem": "A clock shows 9:00. What time does its mirror image show?",
+      "solution": "Mirror reflection swaps left and right. 9:00 on a mirror shows 3:00. Rule: Mirror time = 12:00 - original time (for times before noon). 12:00 - 9:00 = 3:00.",
+      "concept": "Mirror Image of a Clock"
+    },
+    {
+      "id": "WE4",
+      "problem": "What time will it be 75 minutes after 10:45?",
+      "solution": "10:45 + 75 minutes = 10:45 + 1 hour 15 minutes = 12:00.",
+      "concept": "Time After Given Minutes"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g6-v1",
+    "onboarding": {
+      "hook": "Did you know clocks are secretly full of angles? Every time you look at a clock you are doing geometry without knowing it!",
+      "learnerLevelOptions": [
+        "I find clocks confusing",
+        "I can read a clock but not angles",
+        "I know the basics"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Just for fun"
+      ],
+      "coachIntro": "Coach Spark checks comfort with clock reading and angle concepts before starting the clock journey.",
+      "placementRule": "Start all Grade 6 learners at Group A. If the learner struggles in Groups B or C, revisit the angle formula with a smaller number example."
+    },
+    "mission": {
+      "missionTitle": "Clock Angle Master",
+      "missionPromise": "By the end of this lesson you can calculate any clock angle in 10 seconds flat.",
+      "successCelebration": "Celebrate each correct answer with a clock badge pulse and the coach line: 'You cracked the angle code!'"
+    },
+    "microLessonPattern": [
+      "Coach opens with a one-line hook and names the trick.",
+      "Board demo shows the formula with one worked number.",
+      "Coach reads the question aloud clearly.",
+      "Student tries the answer before the solution is revealed.",
+      "Instant feedback either celebrates or gives the exact missed step.",
+      "Review prompt checks whether to advance or repeat with a simpler number."
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Reading Clock Hands",
+      "coachHook": "Here's a trick — every clock is a circle and circles have 360 degrees. Let's warm up by reading what time a clock shows.",
+      "boardDemo": {
+        "title": "Reading Clock Positions",
+        "steps": [
+          "Draw a clock face with hands at 7:20.",
+          "Point to the short hand (hour hand) — it is between 7 and 8.",
+          "Point to the long hand (minute hand) — it is on 4, which means 20 minutes.",
+          "Read the time: 7:20."
+        ],
+        "teacherLine": "The short hand tells hours, the long hand tells minutes. The minute hand on 4 means 4 × 5 = 20 minutes."
+      },
+      "readAloudPrompt": "A clock has its hour hand between 2 and 3, and its minute hand pointing to 6. What time does it show?",
+      "tryPrompt": "Say the hours first, then the minutes. What is the time?",
+      "masteryCheck": "2:30",
+      "instantFeedbackWin": "Spot on! 2:30 — the minute hand on 6 always means 30 minutes. You are reading clocks like a pro!",
+      "instantFeedbackRetry": "Here's the trick: minute hand on 6 = 6 × 5 = 30 minutes. Hour hand between 2 and 3 means 2. So the time is 2:30.",
+      "reviewPrompt": "Quick check: if the minute hand points to 9, how many minutes is that?",
+      "xpReward": 10,
+      "badgeFocus": "Clock Reader Star"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Minute Hand Angle from 12",
+      "coachHook": "Here's a trick — the minute hand travels 360 degrees in 60 minutes, so every minute it moves 6 degrees. Super simple!",
+      "boardDemo": {
+        "title": "Minute Hand Angle",
+        "steps": [
+          "Write: Minute hand moves 360° ÷ 60 = 6° per minute.",
+          "At 3:00, the minute hand is at 12, so angle from 12 = 0°.",
+          "At 3:15, the minute hand is at 15 minutes: 15 × 6° = 90°.",
+          "At 3:30, the minute hand is at 30 minutes: 30 × 6° = 180°."
+        ],
+        "teacherLine": "Multiply the minutes by 6 to get the minute hand angle from 12 o'clock."
+      },
+      "readAloudPrompt": "At 5:20, what is the angle made by the minute hand from 12?",
+      "tryPrompt": "Remember: minutes × 6. What is 20 × 6?",
+      "masteryCheck": "120",
+      "instantFeedbackWin": "Brilliant! 20 × 6 = 120 degrees. You have got the minute hand formula locked in!",
+      "instantFeedbackRetry": "Here's the step: 20 minutes × 6 degrees per minute = 120 degrees. The minute hand is 120° from 12.",
+      "reviewPrompt": "Practice: at 4:45, what is the minute hand angle from 12?",
+      "xpReward": 12,
+      "badgeFocus": "Minute Hand Angle Star"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Angle Between Clock Hands at 3:00",
+      "coachHook": "Here's a trick — use the magic formula: Angle = |30H - 5.5M|. Let's test it on the easiest time first: 3:00.",
+      "boardDemo": {
+        "title": "Angle Formula at 3:00",
+        "steps": [
+          "Write the formula: Angle = |30H - 5.5M|",
+          "At 3:00, H = 3 and M = 0.",
+          "Angle = |30 × 3 - 5.5 × 0| = |90 - 0| = 90°.",
+          "Draw clock at 3:00 and mark the 90° angle between hands."
+        ],
+        "teacherLine": "At 3:00 the hands form a perfect right angle — exactly 90 degrees. The formula confirms it instantly."
+      },
+      "readAloudPrompt": "Using the formula Angle = |30H - 5.5M|, find the angle between the hands at 9:00.",
+      "tryPrompt": "Plug in H = 9, M = 0. What do you get?",
+      "masteryCheck": "270",
+      "instantFeedbackWin": "Perfect! |30 × 9 - 0| = 270 degrees. But wait — we take the smaller angle, so the answer is 360 - 270 = 90 degrees. Great thinking!",
+      "instantFeedbackRetry": "Step by step: |30 × 9 - 5.5 × 0| = |270| = 270°. Since 270° > 180°, the reflex angle is 360° - 270° = 90°.",
+      "reviewPrompt": "Try the formula at 6:00. What angle do you expect?",
+      "xpReward": 14,
+      "badgeFocus": "Formula Champion Star"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Angle Between Clock Hands at 6:30",
+      "coachHook": "Here's a trick — 6:30 is a favourite exam question because students forget the hour hand has moved past 6. Let's crack it together!",
+      "boardDemo": {
+        "title": "Angle at 6:30 — Tricky One!",
+        "steps": [
+          "H = 6, M = 30. Apply Angle = |30H - 5.5M|.",
+          "30 × 6 = 180.",
+          "5.5 × 30 = 165.",
+          "Angle = |180 - 165| = 15 degrees."
+        ],
+        "teacherLine": "At 6:30 the hour hand has already moved halfway between 6 and 7. The formula handles that automatically — answer is just 15 degrees!"
+      },
+      "readAloudPrompt": "Find the angle between clock hands at 4:20.",
+      "tryPrompt": "Use Angle = |30 × 4 - 5.5 × 20|. Calculate step by step.",
+      "masteryCheck": "10",
+      "instantFeedbackWin": "Excellent! |120 - 110| = 10 degrees. You are nailing the formula!",
+      "instantFeedbackRetry": "Let's work it: 30 × 4 = 120. 5.5 × 20 = 110. |120 - 110| = 10 degrees. Small but exact!",
+      "reviewPrompt": "Challenge: which clock time gives an angle of 0 degrees — when do the hands perfectly overlap?",
+      "xpReward": 16,
+      "badgeFocus": "Angle Detective Star"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Hands Overlap",
+      "coachHook": "Here's a trick — the hands meet 22 times in 24 hours, meaning roughly every 65 minutes 27 seconds. Let's see why!",
+      "boardDemo": {
+        "title": "When Do Hands Overlap?",
+        "steps": [
+          "At 12:00 both hands are together — that is the start.",
+          "Minute hand gains 5.5° per minute over the hour hand.",
+          "To gain 360°, time = 360 ÷ 5.5 = 65.45 minutes.",
+          "So hands meet every 65 minutes 27 seconds after 12:00."
+        ],
+        "teacherLine": "After 12:00, the next overlap is at about 1:05:27. After each overlap, add another 65 minutes 27 seconds."
+      },
+      "readAloudPrompt": "After 12:00, the hands first overlap at approximately 1:05. When do they overlap for the second time?",
+      "tryPrompt": "Add 65 minutes 27 seconds to 1:05:27. What time do you get?",
+      "masteryCheck": "2:10",
+      "instantFeedbackWin": "Great! Around 2:10 is the second overlap. You understand the overlap pattern!",
+      "instantFeedbackRetry": "Here's the pattern: 1st overlap at about 1:05, 2nd at about 2:10, 3rd at about 3:16. Add roughly 65 minutes each time.",
+      "reviewPrompt": "MCQ: How many times do the hands of a clock overlap in 12 hours? (a) 11 (b) 12 (c) 22",
+      "xpReward": 18,
+      "badgeFocus": "Overlap Expert Star"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Mirror Image of a Clock",
+      "coachHook": "Here's a trick — in a mirror, left becomes right. So a clock showing 3:00 looks like 9:00 in a mirror. There is a shortcut formula!",
+      "boardDemo": {
+        "title": "Mirror Time Formula",
+        "steps": [
+          "To find mirror time: Mirror time = 11:60 - original time.",
+          "Clock shows 3:00. Mirror time = 11:60 - 3:00 = 8:60 = 9:00.",
+          "Clock shows 8:15. Mirror time = 11:60 - 8:15 = 3:45.",
+          "Draw both clocks side by side to confirm."
+        ],
+        "teacherLine": "The mirror formula is Mirror time = 11:60 minus original time. If the answer minutes exceed 60, carry over to hours."
+      },
+      "readAloudPrompt": "A clock shows 7:30. What time does its mirror image show?",
+      "tryPrompt": "Apply: 11:60 - 7:30. What is the answer?",
+      "masteryCheck": "4:30",
+      "instantFeedbackWin": "Spot on! 11:60 - 7:30 = 4:30. Mirror clocks hold no secrets for you now!",
+      "instantFeedbackRetry": "Step by step: 11:60 - 7:30. Minutes: 60 - 30 = 30. Hours: 11 - 7 = 4. Mirror time = 4:30.",
+      "reviewPrompt": "Try it: a clock shows 10:10. What is its mirror image?",
+      "xpReward": 18,
+      "badgeFocus": "Mirror Clock Star"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Water Image of a Clock",
+      "coachHook": "Here's a trick — water image flips the clock upside down (top becomes bottom). The formula is: Water time = 17:60 - original time!",
+      "boardDemo": {
+        "title": "Water Image Formula",
+        "steps": [
+          "To find water image: Water time = 17:60 - original time.",
+          "Clock shows 8:00. Water time = 17:60 - 8:00 = 9:60 = 10:00.",
+          "Clock shows 6:30. Water time = 17:60 - 6:30 = 11:30.",
+          "Water image flips the clock vertically — 12 goes to the bottom."
+        ],
+        "teacherLine": "Water image = 17:60 minus the original time. This is the flip-upside-down version of the clock."
+      },
+      "readAloudPrompt": "A clock shows 4:45. What does its water image show?",
+      "tryPrompt": "Apply 17:60 - 4:45. Work out the minutes first, then hours.",
+      "masteryCheck": "13:15",
+      "instantFeedbackWin": "Brilliant! 17:60 - 4:45 = 13:15, which means 1:15 on a 12-hour clock. You have mastered water images!",
+      "instantFeedbackRetry": "Here's the work: 60 - 45 = 15 minutes. 17 - 4 = 13, so 1 PM = 1:15. Water image of 4:45 is 1:15.",
+      "reviewPrompt": "Spot the difference: what is the key difference between mirror image and water image of a clock?",
+      "xpReward": 20,
+      "badgeFocus": "Water Image Star"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Time After Given Minutes",
+      "coachHook": "Here's a trick — adding time is like adding normal numbers, just remember 60 minutes = 1 hour. Convert and carry forward!",
+      "boardDemo": {
+        "title": "Adding Time — 75 Minutes After 10:45",
+        "steps": [
+          "Start time: 10:45.",
+          "Add 75 minutes = 1 hour 15 minutes.",
+          "10:45 + 1:15 = 11:60 = 12:00.",
+          "The answer is 12:00 (noon)."
+        ],
+        "teacherLine": "When minutes cross 60, convert the extra minutes into hours. 10:45 plus 75 minutes = 12:00 exactly."
+      },
+      "readAloudPrompt": "What time is it 95 minutes after 3:30?",
+      "tryPrompt": "95 minutes = 1 hour 35 minutes. Add that to 3:30.",
+      "masteryCheck": "5:05",
+      "instantFeedbackWin": "Fantastic! 3:30 + 1:35 = 5:05. You handle time addition with ease!",
+      "instantFeedbackRetry": "Break it down: 95 minutes = 60 + 35 = 1 hour 35 minutes. 3:30 + 1:35 = 4:65 = 5:05 (since 65 minutes = 1 hour 5 minutes).",
+      "reviewPrompt": "Quick one: what time is 150 minutes after 11:00?",
+      "xpReward": 22,
+      "badgeFocus": "Time Adder Star"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Speed Round — Mixed Clock Problems",
+      "coachHook": "Here's a trick — speed round! All the clock skills together. Quick thinking, fast answers. Go!",
+      "boardDemo": {
+        "title": "Speed Round — All Clock Skills",
+        "steps": [
+          "Formula card: Angle = |30H - 5.5M|.",
+          "Mirror time = 11:60 - original.",
+          "Water image = 17:60 - original.",
+          "Overlap every 65 min 27 sec after 12:00."
+        ],
+        "teacherLine": "Keep all four formulas in mind. The speed round mixes all clock topics — stay sharp!"
+      },
+      "readAloudPrompt": "Angle at 2:15 = ? Mirror of 5:40 = ? Time after 80 minutes from 9:50 = ?",
+      "tryPrompt": "Take each one in order. What are your three answers?",
+      "masteryCheck": "22.5 degrees, 6:20, 11:10",
+      "instantFeedbackWin": "Outstanding! 22.5°, mirror 6:20, and 11:10 — all correct. You are a Clock Master!",
+      "instantFeedbackRetry": "Let us check: Angle at 2:15 = |60 - 82.5| = 22.5°. Mirror of 5:40 = 11:60 - 5:40 = 6:20. 9:50 + 80 min = 9:50 + 1:20 = 11:10.",
+      "reviewPrompt": "Final reflection: which clock formula took you the most effort today?",
+      "xpReward": 30,
+      "badgeFocus": "Clock Master Badge"
+    }
+  ],
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G6_L5_BEAT_1",
+        "phase": "EXPLAIN",
+        "sequence": 1,
+        "teacherLine": "Hey there, future reasoning champion! Did you know a clock is really a tiny maths machine? Every time those hands move, they are drawing angles. Today we unlock the secret formula that tells you the exact angle between the clock hands at ANY time — no drawing needed!",
+        "boardMode": "free_draw",
+        "boardSteps": [
+          "Draw a large clock face.",
+          "Label the 12 positions.",
+          "Write: Full circle = 360 degrees.",
+          "Write: 60 minutes → 360°, so 1 minute = 6° for the minute hand.",
+          "Write: 12 hours → 360°, so 1 hour = 30°, 1 minute = 0.5° for the hour hand."
+        ],
+        "avatarEmotion": "enthusiastic"
+      },
+      {
+        "beatId": "AR_G6_L5_BEAT_2",
+        "phase": "DEMO",
+        "sequence": 2,
+        "teacherLine": "Here is the star formula: Angle = |30H minus 5.5M|. H is the hour, M is the minutes. Let me show you with 3:00 and then 6:30 so you see how smooth it is.",
+        "boardMode": "step_by_step",
+        "boardSteps": [
+          "Write formula: Angle = |30H - 5.5M|",
+          "Example 1: At 3:00 → |30×3 - 5.5×0| = |90| = 90°",
+          "Draw 3:00 clock. Mark 90° angle.",
+          "Example 2: At 6:30 → |30×6 - 5.5×30| = |180 - 165| = 15°",
+          "Draw 6:30 clock. Mark 15° angle."
+        ],
+        "avatarEmotion": "focused"
+      },
+      {
+        "beatId": "AR_G6_L5_BEAT_3",
+        "phase": "GUIDED",
+        "sequence": 3,
+        "teacherLine": "Your turn! We will also explore mirror images and water images of clocks — these are favourite trick questions in school exams and Olympiads. Remember: mirror swaps left-right, water flips upside-down. Two formulas and you conquer both!",
+        "boardMode": "free_draw",
+        "boardSteps": [
+          "Write: Mirror time = 11:60 - original time",
+          "Example: Mirror of 3:00 = 11:60 - 3:00 = 9:00",
+          "Write: Water image = 17:60 - original time",
+          "Example: Water of 6:00 = 17:60 - 6:00 = 11:60 = 12:00",
+          "Side-by-side clock diagrams for both."
+        ],
+        "avatarEmotion": "encouraging"
+      },
+      {
+        "beatId": "AR_G6_L5_BEAT_4",
+        "phase": "GUIDED",
+        "sequence": 4,
+        "teacherLine": "Final skill — adding time. When you add minutes and they cross 60, convert to hours. Simple carry-over, just like addition. After all 9 exercises you will be a certified Clock Angle Master. Let us go!",
+        "boardMode": "free_draw",
+        "boardSteps": [
+          "Show: 10:45 + 75 minutes",
+          "75 min = 1 hr 15 min",
+          "10:45 + 1:15 = 11:60 = 12:00",
+          "Tip box: When minutes ≥ 60, subtract 60 and add 1 to hours."
+        ],
+        "avatarEmotion": "celebratory"
+      }
+    ]
+  }
+}

@@ -1,0 +1,599 @@
+{
+  "chapterCode": "AR_G6_L3_ANALOGIES",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Analogies",
+  "source": "MindSpark Grade 6 Aptitude & Reasoning | Chapter 3: Analogies",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Word Analogies — Objects",
+    "Word Analogies — Categories",
+    "Number Analogies — Operations",
+    "Number Analogies — Patterns",
+    "Letter Analogies — Forward",
+    "Letter Analogies — Backward",
+    "Part-Whole Analogies",
+    "Tool-Purpose Analogies",
+    "Mixed Speed Round"
+  ],
+  "learningGoals": [
+    "Identify the relationship between the first pair in an analogy and apply the same relationship to find the missing word.",
+    "Solve number analogies by spotting arithmetic operations or square/cube patterns.",
+    "Recognise letter analogies using alphabet position differences."
+  ],
+  "coreIdeas": [
+    "Always state the relationship in words before guessing the answer: 'Bird is to Nest as Fish is to __' means 'home of a bird is Nest, so home of a fish is __'.",
+    "For number analogies, test: +, -, x, square, cube — whichever keeps the same rule for both pairs.",
+    "For letter analogies, convert to positions, find the gap, apply the same gap to the second pair."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Bird : Nest :: Fish : ?",
+      "solution": "Relationship: a Bird lives in a Nest (home). Apply same: a Fish lives in a Pond (or Water/River). Answer: Pond.",
+      "concept": "Word analogy — object and its home/habitat"
+    },
+    {
+      "id": "WE2",
+      "problem": "4 : 16 :: 5 : ?",
+      "solution": "4 squared = 16. Apply same operation: 5 squared = 25. Answer: 25.",
+      "concept": "Number analogy — squaring operation"
+    },
+    {
+      "id": "WE3",
+      "problem": "AB : DC :: EF : ?",
+      "solution": "A=1, B=2 — forward pair. D=4, C=3 — reversed next two letters. EF forward (5,6) — next two are G=7, H=8 reversed: HG. Answer: HG.",
+      "concept": "Letter analogy — forward pair followed by reversed next pair"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g6-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark explains that analogies are about relationships: if you know how two things connect, you can find what connects two other things the same way.",
+      "placementRule": "Start at Group A. If learner answers Groups A and B instantly, move directly to Group C without the full board demo."
+    },
+    "mission": {
+      "missionTitle": "Spot the Connection",
+      "missionPromise": "By the end you will see the hidden relationship in any analogy and solve it in under 15 seconds — a superpower for every entrance exam!",
+      "successCelebration": "Award 'Relationship Spotter' badge after Group D. Final badge is 'Analogy Champion' after Group I."
+    },
+    "microLessonPattern": [
+      "Coach names the relationship type and shows a concrete everyday example.",
+      "Coach solves one worked analogy step by step on the board, stating the relationship in plain words first.",
+      "Coach reads the practice analogy aloud.",
+      "Student attempts before solution is shown.",
+      "Instant feedback confirms or repairs with a relationship re-statement.",
+      "Review prompt tests one more analogy of the same type."
+    ],
+    "rewardLoop": {
+      "xpUnit": "10 to 25 XP per group, increasing from Group A to Group I.",
+      "streakRule": "Streak counter visible; one free retry per group.",
+      "badgeRule": "Word badge at Group B, Number badge at Group D, Letter badge at Group F, Master badge at Group I.",
+      "celebrationStyle": "Connection spark animation + XP pulse after each correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers prompt a return to the worked example with a simpler pair.",
+      "practiceStyle": "Offer one everyday analogy (e.g. Pen:Write) before retrying the original.",
+      "masteryRule": "Advance after one correct analogy plus successful statement of the relationship.",
+      "revisitRule": "Any group with an error returns as a warm-up card next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current analogy card with pair displayed prominently",
+      "secondaryPanels": [
+        "relationship board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Both pairs of the analogy and the answer input visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G6_L3_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, future reasoning champion! Today we tackle Analogies — one of the most common question types in every aptitude test, olympiad, and entrance exam. An analogy says: 'these two things have this relationship — now find two other things with the SAME relationship.' Once you learn to spot the 5 key relationship types, every analogy question becomes easy. Let's meet the 5 types: Object-Use, Category, Number, Letter, and Part-Whole!",
+        "boardAction": "Write 'Analogies — Lesson 3' at the top. List the 5 types with a one-word example each: Object-Use (Pen:Write), Category (Rose:Flower), Number (4:16), Letter (AC:EG), Part-Whole (Page:Book).",
+        "checkpointPrompt": "Warm-up: Pen : Write :: Brush : ? — what is a Brush used for?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Paint or Painting.",
+        "fallbackHint": "A Pen is used for Writing. A Brush is used for Painting. That is the Tool-Purpose relationship.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l3_title",
+            "x": "40",
+            "y": "28",
+            "text": "Analogies — Lesson 3",
+            "color": "#0369a1",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l3_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#0284c7",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_t1",
+            "x": "60",
+            "y": "70",
+            "text": "1. Object-Use: Pen : Write",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_t2",
+            "x": "60",
+            "y": "90",
+            "text": "2. Category: Rose : Flower",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.2,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_t3",
+            "x": "60",
+            "y": "110",
+            "text": "3. Number: 4 : 16 (squared)",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_t4",
+            "x": "60",
+            "y": "130",
+            "text": "4. Letter: AC : CE (positions +2)",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 1.8,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_t5",
+            "x": "60",
+            "y": "150",
+            "text": "5. Part-Whole: Page : Book",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L3_DEMO_WORD",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me demo a word analogy: Bird : Nest :: Fish : ? Step 1 — I read Pair 1 and state the relationship: 'A Bird lives in a Nest — so the relationship is animal-to-home.' Step 2 — apply to Pair 2: 'A Fish lives in a Pond (or Water).' Answer: Pond. The KEY is always stating the relationship out loud before guessing. That sentence saves you every time!",
+        "boardAction": "Write 'Bird : Nest :: Fish : ?' Draw a bracket around Bird:Nest, label it 'animal: home'. Draw arrow to Fish:? and write 'same rule: fish:home = ?'. Circle 'Pond'.",
+        "checkpointPrompt": "Apply the same method: Doctor : Hospital :: Teacher : ? — state the relationship, then give the answer.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "School — a Doctor works in a Hospital, so a Teacher works in a School.",
+        "fallbackHint": "Ask: where does a Doctor work? Hospital. Apply: where does a Teacher work? School.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_w1",
+            "x": "60",
+            "y": "55",
+            "text": "Bird : Nest  ::  Fish : ?",
+            "color": "#1e40af",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_w2",
+            "x": "60",
+            "y": "90",
+            "text": "Relationship: animal lives in its home",
+            "color": "#374151",
+            "size": 12,
+            "delaySec": 0.8,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_w3",
+            "x": "60",
+            "y": "120",
+            "text": "Fish lives in a ... Pond!",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.5,
+            "durationSec": 0.5
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L3_DEMO_NUMBER",
+        "type": "DEMO",
+        "sequence": 202,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Number analogy demo: 4 : 16 :: 5 : ? I test squaring: 4 squared = 16 — yes! So 5 squared = 25. Done! If squaring did not work, I would test multiply by 4: 4 x 4 = 16 — same answer here, but check pair 2: 5 x 4 = 20. Two possible answers! When that happens, look at the answer choices — only one will be listed. The key skill is testing quickly.",
+        "boardAction": "Write '4 : 16 :: 5 : ?' Show test table: square (4x4=16, 5x5=25) and multiply by 4 (4x4=16, 5x4=20). Circle 25 as the squaring answer.",
+        "checkpointPrompt": "Quick test: 9 : 81 :: 11 : ? — test squaring first. What do you get?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "121 — 9 squared is 81, 11 squared is 121.",
+        "fallbackHint": "9 x 9 = 81 — that is squaring. Apply: 11 x 11 = 121.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_n1",
+            "x": "60",
+            "y": "50",
+            "text": "4 : 16  ::  5 : ?",
+            "color": "#1e40af",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_n2",
+            "x": "60",
+            "y": "85",
+            "text": "Test: 4 x 4 = 16 (squaring works!)",
+            "color": "#d97706",
+            "size": 13,
+            "delaySec": 0.8,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_n3",
+            "x": "60",
+            "y": "118",
+            "text": "Apply: 5 x 5 = 25",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.5,
+            "durationSec": 0.5
+          }
+        ]
+      },
+      {
+        "beatId": "AR_G6_L3_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have all 5 analogy tools ready. As you work through Groups A to I, use this 3-step method every time: Step 1 — identify the analogy type. Step 2 — state the relationship in a sentence. Step 3 — apply the same relationship to find the answer. Never skip Step 2 — it is your shortcut to accuracy!",
+        "boardAction": "Display a 3-step method card: (1) Identify type, (2) Say the relationship sentence, (3) Apply to Pair 2. Below list the 5 types as a reference strip.",
+        "checkpointPrompt": "Before Groups start: which 3-step do you do FIRST — identify type, state relationship, or apply?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Identify the type first.",
+        "fallbackHint": "Step 1 is always: identify the analogy type (word, number, letter, part-whole, or tool-purpose).",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided3_title",
+            "x": "40",
+            "y": "28",
+            "text": "3-Step Analogy Method",
+            "color": "#0369a1",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided3_s1",
+            "x": "60",
+            "y": "62",
+            "text": "Step 1: Identify the type",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided3_s2",
+            "x": "60",
+            "y": "88",
+            "text": "Step 2: Say the relationship in one sentence",
+            "color": "#d97706",
+            "size": 13,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided3_s3",
+            "x": "60",
+            "y": "114",
+            "text": "Step 3: Apply the same sentence to Pair 2",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ]
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Word Analogies — Objects",
+      "missionStepTitle": "Exercise A: Word Analogies — Objects",
+      "coachHook": "Analogies are all about relationships! Bird : Nest — a bird lives in a nest. So Fish : ? — a fish lives in… what? Same relationship, different objects. That's all an analogy is!",
+      "boardDemo": {
+        "title": "Object Analogy — Home Relationship",
+        "steps": [
+          "Pair 1: Bird : Nest",
+          "State the relationship: a Bird's home is a Nest",
+          "Apply to Pair 2: Dog : ?",
+          "Same relationship: a Dog's home is a Kennel",
+          "Answer: Kennel"
+        ],
+        "teacherLine": "Step 1: read pair 1 aloud. Step 2: say the relationship in one sentence. Step 3: apply that same sentence to pair 2. Never guess without saying the relationship first!"
+      },
+      "readAloudPrompt": "Pen : Write :: Scissors : ? — what does a pen do? Now apply the same to scissors.",
+      "tryPrompt": "Your turn: Book : Read :: Fork : ? — state the relationship, then give the answer!",
+      "masteryCheck": "Eat",
+      "instantFeedbackWin": "Exactly! A Book is used to Read, so a Fork is used to Eat. Perfect relationship spotting!",
+      "instantFeedbackRetry": "Here's a trick: ask yourself — what is a Book for? Reading. So what is a Fork for? Eating. The answer is Eat.",
+      "reviewPrompt": "Quick: Cow : Milk :: Hen : ? — state the relationship.",
+      "xpReward": 10,
+      "badgeFocus": "Object Relationship Spotter"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Word Analogies — Categories",
+      "missionStepTitle": "Exercise B: Word Analogies — Categories",
+      "coachHook": "Some analogies are about categories: Rose is to Flower as Mango is to Fruit. Rose is a type of Flower — Mango is a type of Fruit. Member-to-category relationship!",
+      "boardDemo": {
+        "title": "Category Analogy — Part of a Group",
+        "steps": [
+          "Pair 1: Rose : Flower",
+          "Relationship: Rose is a type of Flower (member : category)",
+          "Apply to Pair 2: Mango : ?",
+          "Mango is a type of Fruit",
+          "Answer: Fruit"
+        ],
+        "teacherLine": "The key question: is the first word a member (individual) and the second word the group (category)? Or the reverse? State that direction clearly before solving."
+      },
+      "readAloudPrompt": "Cricket : Sport :: Piano : ? — Cricket is a type of Sport, so Piano is a type of…?",
+      "tryPrompt": "Your turn: Sparrow : Bird :: Salmon : ? — what is the category that Salmon belongs to?",
+      "masteryCheck": "Fish",
+      "instantFeedbackWin": "Correct! Sparrow is a type of Bird, so Salmon is a type of Fish. Category analogy cracked!",
+      "instantFeedbackRetry": "Here's a trick: ask — what group does a Sparrow belong to? Birds. Now ask — what group does a Salmon belong to? Fish!",
+      "reviewPrompt": "Quick: Chair : Furniture :: Shirt : ? — name the category.",
+      "xpReward": 12,
+      "badgeFocus": "Category Classifier"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Number Analogies — Operations",
+      "missionStepTitle": "Exercise C: Number Analogies — Operations",
+      "coachHook": "Now numbers! 3 : 9 :: 4 : ? — what operation turns 3 into 9? Multiply by 3? Or square it? Find the operation, then apply it to 4!",
+      "boardDemo": {
+        "title": "Number Analogy — Find the Operation",
+        "steps": [
+          "Pair 1: 3 : 9",
+          "Test multiply by 3: 3 x 3 = 9 — works!",
+          "Test square: 3 squared = 9 — also works!",
+          "Check with pair 2 to choose: 4 : ?",
+          "Multiply by 3: 4 x 3 = 12. Square: 4 x 4 = 16.",
+          "If question says 4:16, the operation is squaring."
+        ],
+        "teacherLine": "When two operations both fit Pair 1, test both against Pair 2. Only one operation will match the answer choices. Always test the operation on Pair 1 first before applying to Pair 2."
+      },
+      "readAloudPrompt": "5 : 25 :: 6 : ? — what operation was used on 5 to get 25? Test squaring.",
+      "tryPrompt": "Your turn: 7 : 49 :: 8 : ? — state the operation, then give the answer!",
+      "masteryCheck": "64",
+      "instantFeedbackWin": "Spot on! 7 squared = 49, so 8 squared = 64. Number analogy solved in one step!",
+      "instantFeedbackRetry": "Here's a trick: 7 x 7 = 49 — that is squaring. Apply the same: 8 x 8 = 64.",
+      "reviewPrompt": "Quick: 10 : 100 :: 12 : ? — what operation and what answer?",
+      "xpReward": 14,
+      "badgeFocus": "Operation Identifier"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Number Analogies — Patterns",
+      "missionStepTitle": "Exercise D: Number Analogies — Patterns",
+      "coachHook": "Some number analogies use addition or subtraction patterns: 5 : 8 :: 11 : 14 — the rule is +3. Or they might use doubling: 4 : 8 :: 6 : 12. Find the rule!",
+      "boardDemo": {
+        "title": "Number Analogy — Additive and Multiplicative Patterns",
+        "steps": [
+          "Pair 1: 5 : 8 — difference = 8-5 = 3",
+          "Rule: add 3",
+          "Apply to Pair 2: 11 : ? — 11+3 = 14",
+          "Check doubling: Pair 1: 4 : 8 — 8/4 = 2 (double)",
+          "Apply: 6 : ? — 6 x 2 = 12"
+        ],
+        "teacherLine": "Compute the difference (subtract) AND the ratio (divide) for Pair 1. Whichever gives a clean whole number is your rule. Apply to Pair 2."
+      },
+      "readAloudPrompt": "9 : 18 :: 15 : ? — is the rule adding 9 or doubling? Test both on Pair 1.",
+      "tryPrompt": "Your turn: 7 : 21 :: 5 : ? — find the rule (is it multiply by 3?) then give the answer!",
+      "masteryCheck": "15",
+      "instantFeedbackWin": "Brilliant! 7 x 3 = 21, so 5 x 3 = 15. Pattern analogy mastered!",
+      "instantFeedbackRetry": "Here's a trick: 21 divided by 7 = 3. The rule is multiply by 3. Apply: 5 x 3 = 15.",
+      "reviewPrompt": "Quick: 6 : 36 :: 7 : ? — is it multiply by 6 or squaring?",
+      "xpReward": 15,
+      "badgeFocus": "Pattern Analyst"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Letter Analogies — Forward",
+      "missionStepTitle": "Exercise E: Letter Analogies — Forward",
+      "coachHook": "Letters can form analogies too! AC : EG :: IK : ? — notice each pair skips one letter (A-skip-C, E-skip-G). The gap in positions is +2. Apply the same to the second pair!",
+      "boardDemo": {
+        "title": "Letter Analogy — Forward Gap",
+        "steps": [
+          "Pair 1: AC — A=1, C=3, gap = +2",
+          "Pair 2: EG — E=5, G=7, gap = +2 (same!)",
+          "Pattern: two-letter pairs with internal gap +2",
+          "Apply: IK — I=9, K=11",
+          "Next pair continues: M=13, O=15 — gap +2",
+          "Answer: MO"
+        ],
+        "teacherLine": "Convert all letters to positions. Find the gap within the pair AND the gap between pairs. Both gaps must stay consistent. Then apply to find the missing pair."
+      },
+      "readAloudPrompt": "AB : CD :: EF : ? — what is the gap within the pair? What comes after EF in the same pattern?",
+      "tryPrompt": "Your turn: BD : FH :: JL : ? — convert to positions, check both gaps, give the answer!",
+      "masteryCheck": "NP",
+      "instantFeedbackWin": "Perfect! B=2,D=4 — F=6,H=8 — J=10,L=12 — next is N=14,P=16. Answer: NP. Letter analogy champion!",
+      "instantFeedbackRetry": "Here's a trick: within each pair, gap = +2. Between pair starts: B=2, F=6, J=10 — gap = +4 between starts. Next start: 10+4=14=N. Pair: N=14, P=16. Answer: NP.",
+      "reviewPrompt": "Quick: CE : GI :: KM : ? — give the answer.",
+      "xpReward": 16,
+      "badgeFocus": "Forward Letter Mapper"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Letter Analogies — Backward",
+      "missionStepTitle": "Exercise F: Letter Analogies — Backward",
+      "coachHook": "Now the pairs run backwards! ZX : VT :: RP : ? — Z=26, X=24 (gap -2). V=22, T=20 (gap -2). The whole pattern moves backwards by 4 each time. Keep subtracting!",
+      "boardDemo": {
+        "title": "Letter Analogy — Backward Gap",
+        "steps": [
+          "Pair 1: ZX — Z=26, X=24, internal gap = -2",
+          "Pair 2: VT — V=22, T=20, internal gap = -2 (same)",
+          "Gap between pair starts: Z=26, V=22, R=18 — gap = -4",
+          "Next start: 18-4=14=N",
+          "Next pair: N=14, L=12",
+          "Answer: NL"
+        ],
+        "teacherLine": "Same method as forward — but gaps are negative. Convert to positions, subtract to find gaps. Apply the same subtraction to get the missing pair."
+      },
+      "readAloudPrompt": "YW : US :: QO : ? — check the internal gap and the between-pair gap, then give the answer.",
+      "tryPrompt": "Your turn: ZY : XW :: VU : ? — identify both gaps (they might be -1) and give the next pair!",
+      "masteryCheck": "TS",
+      "instantFeedbackWin": "Excellent! Z=26,Y=25 — X=24,W=23 — V=22,U=21 — next: T=20,S=19. Internal gap = -1. Answer: TS. Backward mastered!",
+      "instantFeedbackRetry": "Here's a trick: within each pair, consecutive letters with gap -1. Pair starts: Z=26, X=24, V=22 — gap = -2. Next start: 22-2=20=T. Pair: T=20, S=19. Answer: TS.",
+      "reviewPrompt": "Quick: ZX : VT :: RP : ? — give the answer.",
+      "xpReward": 17,
+      "badgeFocus": "Backward Letter Tracker"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Part-Whole Analogies",
+      "missionStepTitle": "Exercise G: Part-Whole Analogies",
+      "coachHook": "Part-Whole analogies: Page : Book — a Page is a part of a Book. So Chapter : ? — a Chapter is also a part of a Book! Or try: Wheel : Car — a Wheel is a part of a Car.",
+      "boardDemo": {
+        "title": "Part-Whole — Member to Container",
+        "steps": [
+          "Pair 1: Page : Book",
+          "Relationship: a Page is a part of a Book",
+          "Apply to Pair 2: Chapter : ?",
+          "A Chapter is also a part of a Book",
+          "Answer: Book",
+          "Another: Soldier : Army — Sailor : Navy"
+        ],
+        "teacherLine": "Ask: is the first word a part of the second? Or a member of the second? Apply the exact same relationship direction to Pair 2."
+      },
+      "readAloudPrompt": "Finger : Hand :: Toe : ? — a Finger is part of a Hand. So a Toe is part of…?",
+      "tryPrompt": "Your turn: Petal : Flower :: Brick : ? — state the relationship, then give the answer!",
+      "masteryCheck": "Wall",
+      "instantFeedbackWin": "Perfect! A Petal is a part of a Flower, so a Brick is a part of a Wall. Part-Whole analogy nailed!",
+      "instantFeedbackRetry": "Here's a trick: ask — what is made of petals? A Flower. Now ask — what is made of bricks? A Wall!",
+      "reviewPrompt": "Quick: Leaf : Tree :: Scale : ? — name the whole.",
+      "xpReward": 18,
+      "badgeFocus": "Part-Whole Connector"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Tool-Purpose Analogies",
+      "missionStepTitle": "Exercise H: Tool-Purpose Analogies",
+      "coachHook": "Tool-Purpose: a Pen is to Writing as a Knife is to Cutting. The tool is named first, the purpose (action) second. Find the purpose of the second tool!",
+      "boardDemo": {
+        "title": "Tool-Purpose — What Is It Used For?",
+        "steps": [
+          "Pair 1: Pen : Writing",
+          "Relationship: a Pen is used for Writing",
+          "Apply to Pair 2: Knife : ?",
+          "A Knife is used for Cutting",
+          "Answer: Cutting",
+          "Another: Stethoscope : Listening :: Telescope : Seeing"
+        ],
+        "teacherLine": "Ask: what is the first object used FOR? That is the purpose. Now name the purpose of the second object using the exact same sentence structure."
+      },
+      "readAloudPrompt": "Camera : Photography :: Microscope : ? — a Camera is used for Photography. What is a Microscope used for?",
+      "tryPrompt": "Your turn: Broom : Sweeping :: Needle : ? — what is a Needle used for?",
+      "masteryCheck": "Sewing",
+      "instantFeedbackWin": "Spot on! A Broom is used for Sweeping, so a Needle is used for Sewing. Tool-Purpose analogy solved!",
+      "instantFeedbackRetry": "Here's a trick: think of the main job of a Needle — it stitches cloth together. That action is Sewing.",
+      "reviewPrompt": "Quick: Ladder : Climbing :: Bridge : ? — what is a Bridge used for?",
+      "xpReward": 20,
+      "badgeFocus": "Tool-Purpose Expert"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Mixed Speed Round",
+      "missionStepTitle": "Exercise I: Mixed Speed Round",
+      "coachHook": "SPEED ROUND — all analogy types! For each pair, name the relationship type in 5 seconds, then give the answer in 10 seconds. Object, category, number, letter, part-whole, tool-purpose — you know them all. Go!",
+      "boardDemo": {
+        "title": "Speed Round — All Analogy Types",
+        "steps": [
+          "Type 1 Word: Object-Use / Habitat / Category",
+          "Type 2 Number: find operation (+,-,x, square)",
+          "Type 3 Letter: convert to positions, find both gaps",
+          "Type 4 Part-Whole: part is part of the whole",
+          "Type 5 Tool-Purpose: tool is used for the purpose",
+          "Speed tip: say the type name FIRST, then the answer"
+        ],
+        "teacherLine": "In competitive exams, the fastest solver wins. Identify the type in 3 seconds — you have practised all 5 types. Now speed is your weapon. Ready?"
+      },
+      "readAloudPrompt": "Speed Q1: Lion : Pride :: Fish : ? Speed Q2: 3 : 27 :: 4 : ? Speed Q3: AC : CE :: EG : ? Go!",
+      "tryPrompt": "Give all 3 answers and the relationship type for each!",
+      "masteryCheck": "Shoal | 64 | GI",
+      "instantFeedbackWin": "INCREDIBLE! Q1: Lion:Pride, Fish:Shoal (group/collective noun). Q2: 3 cubed=27, 4 cubed=64 (cube operation). Q3: letter pairs +2 gap, EG to GI (letter forward +2). ANALOGY CHAMPION!",
+      "instantFeedbackRetry": "Here's a trick — Q1: a group of lions is a Pride, a group of fish is a Shoal. Q2: 27=3x3x3=3 cubed, so 4 cubed=64. Q3: A=1,C=3 to C=3,E=5 to E=5,G=7 — each pair starts 2 ahead: next is G=7,I=9 = GI.",
+      "reviewPrompt": "Final: Rose : Red :: Grass : ? — and state the relationship type.",
+      "xpReward": 25,
+      "badgeFocus": "Analogy Champion"
+    }
+  ]
+}

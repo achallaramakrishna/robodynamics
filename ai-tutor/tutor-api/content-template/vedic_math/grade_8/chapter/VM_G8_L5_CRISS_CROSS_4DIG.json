@@ -1,0 +1,538 @@
+{
+  "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+  "gradeBand": "Grade 8",
+  "source": "Vedic Mathematics for Schools | Grade 8",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "Review 2×2 criss-cross — 3 steps warm-up",
+    "2-digit × 3-digit: 4 partial products",
+    "3×3 criss-cross: 5 positions R, CR, M, CL, L",
+    "Compute 123×321 using 5 steps",
+    "MCQ — middle step value for a given 3×3",
+    "Fill-the-step: 213×123 using all 5 steps",
+    "Handle carries: 234×456",
+    "Speed drill",
+    "Challenge: 987×654 with all large digits"
+  ],
+  "learningGoals": [
+    "Apply the Urdhva-Tiryagbhyam (criss-cross) method to 3-digit multiplication",
+    "Name and compute all five partial products: R, CR, M, CL, L",
+    "Handle multi-digit carries accurately in the 5-step method"
+  ],
+  "coreIdeas": [
+    "Criss-cross multiplies column-by-column: right, cross-right, middle, cross-left, left",
+    "Each step produces one digit of the answer (after carrying excess to the next step)",
+    "The method generalises: 2×2 has 3 steps, 3×3 has 5, 4×4 has 7"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "2×2: 23×41",
+      "steps": [
+        "R: 3×1=3",
+        "CR: 2×1+3×4=2+12=14 → write 4 carry 1",
+        "L: 2×4=8+1=9",
+        "Answer: 943"
+      ],
+      "answer": "943"
+    },
+    {
+      "id": "we2",
+      "title": "3×3: 123×321",
+      "steps": [
+        "R: 3×1=3",
+        "CR: 2×1+3×2=2+6=8",
+        "M: 1×1+2×2+3×3=1+4+9=14 → write 4 carry 1",
+        "CL: 1×2+2×3=2+6=8+1=9",
+        "L: 1×3=3",
+        "Answer: 39483"
+      ],
+      "answer": "39483"
+    },
+    {
+      "id": "we3",
+      "title": "3×3: 213×123",
+      "steps": [
+        "R: 3×3=9",
+        "CR: 1×3+3×2=3+6=9",
+        "M: 2×3+1×2+3×1=6+2+3=11 → write 1 carry 1",
+        "CL: 2×2+1×1=4+1=5+1=6",
+        "L: 2×1=2",
+        "Answer: 26199"
+      ],
+      "answer": "26199"
+    },
+    {
+      "id": "we4",
+      "title": "3×3 with carries: 234×456",
+      "steps": [
+        "R: 4×6=24 → write 4 carry 2",
+        "CR: 3×6+4×5=18+20=38+2=40 → write 0 carry 4",
+        "M: 2×6+3×5+4×4=12+15+16=43+4=47 → write 7 carry 4",
+        "CL: 2×5+3×4=10+12=22+4=26 → write 6 carry 2",
+        "L: 2×4=8+2=10",
+        "Answer: 106704"
+      ],
+      "answer": "106704"
+    }
+  ],
+  "starterPractice": [
+    { "q": "How many steps does the 2×2 criss-cross have?", "a": "3 (R, CR, L)" },
+    { "q": "How many steps does the 3×3 criss-cross have?", "a": "5 (R, CR, M, CL, L)" },
+    { "q": "In the middle step M of 3×3, how many products are added?", "a": "3 (outer pairs and center×center)" }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g8-v1",
+    "onboarding": {
+      "welcomeMessage": "Three digits times three digits — five neat steps and you're done. Let's power up Urdhva!",
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "avatarMood": "energetic"
+    },
+    "mission": "Master the 3×3 criss-cross (Urdhva-Tiryagbhyam) with all five partial-product positions.",
+    "microLessonPattern": [
+      "Coach names the next position and shows its multiplication rule",
+      "Student computes the partial product on scratch",
+      "Add carry from previous step",
+      "Write the digit, record the carry",
+      "Instant feedback",
+      "XP reward"
+    ],
+    "rewardLoop": {
+      "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
+      "streakBonus": "5 XP for 3 consecutive correct answers",
+      "badges": ["Cross Starter", "Partial Product Pro", "Urdhva Master"]
+    },
+    "reviewLoop": {
+      "trigger": "2 wrong answers in a group",
+      "action": "Replay the step diagram, show which multiplications belong to each position"
+    },
+    "uiDirectives": {
+      "boardStyle": "chalk-on-dark",
+      "animationSpeed": "medium",
+      "avatarVoice": "Priya-Hindi-Female"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Review 2×2 criss-cross",
+        "missionStepTitle": "Warm-Up — 2×2 in 3 Steps",
+        "coachHook": "Remember 2×2 criss-cross? Three steps: right, cross, left. Let's warm up!",
+        "boardDemo": "Write 23×41 with digit boxes. R=3×1=3. CR=2×1+3×4=14→4 carry 1. L=2×4+1=9. Answer 943.",
+        "readAloudPrompt": "Read aloud: 'Right, Cross-Right, Left. Three steps for 2×2.'",
+        "tryPrompt": "Compute 32×21 using the 3-step criss-cross.",
+        "masteryCheck": "Answer 672.",
+        "instantFeedbackWin": "2×2 warm-up complete!",
+        "instantFeedbackRetry": "R=2×1=2. CR=3×1+2×2=7. L=3×2=6. Answer=672.",
+        "reviewPrompt": "For 2-digit criss-cross, always write digits from right to left: R, CR, L.",
+        "xpReward": 12,
+        "badgeFocus": "Cross Starter",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_A1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "A",
+            "subtopic": "2×2 criss-cross",
+            "skill": "multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Use the 2×2 criss-cross to compute 32×21.",
+            "expectedAnswer": "672",
+            "hint": "R=2×1, CR=3×1+2×2, L=3×2.",
+            "solution": "R=2. CR=3+4=7. L=6. Answer: 672.",
+            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "2×2 criss-cross digit positions" }
+          },
+          {
+            "questionId": "VM_G8_L5_A2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "A",
+            "subtopic": "2×2 criss-cross",
+            "skill": "multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the cross-right (CR) step value when computing 43×12?",
+            "options": ["10", "11", "8", "14"],
+            "correctIndex": 0,
+            "expectedAnswer": "10",
+            "hint": "CR = tens-digit of 43 × units-digit of 12 + units-digit of 43 × tens-digit of 12 = 4×2+3×1.",
+            "solution": "CR = 4×2+3×1 = 8+3 = 11. Wait — 43×12: a=4,b=3,c=1,d=2. CR=a·d+b·c=4·2+3·1=8+3=11.",
+            "correctIndex": 1
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "2-digit × 3-digit: 4 partial products",
+        "missionStepTitle": "Bridge Step — 2×3 Gives 4 Products",
+        "coachHook": "Before 3×3, let's do 2×3: treat the 2-digit number as 02 — same 5 positions but two zeros vanish.",
+        "boardDemo": "Compute 23×123: write as 023×123. R=3×3=9. CR=2×3+3×2=12→2 c1. M=0×3+2×2+3×1=0+4+3=7+1=8. CL=0×2+2×1=2. L=0×1=0. Answer: 2829.",
+        "readAloudPrompt": "Read aloud: 'Padding the shorter number with a leading zero lets us use the 5-step frame.'",
+        "tryPrompt": "Compute 21×123 by padding to 021×123.",
+        "masteryCheck": "Answer 2583.",
+        "instantFeedbackWin": "Bridge step mastered!",
+        "instantFeedbackRetry": "R=1×3=3. CR=2×3+1×2=8. M=0×3+2×2+1×1=5. CL=0×2+2×1=2. L=0. Answer=2583.",
+        "reviewPrompt": "Leading-zero padding is the cleanest way to handle mixed-length multiplications.",
+        "xpReward": 12,
+        "badgeFocus": "Cross Starter",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_B1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "B",
+            "subtopic": "2×3 criss-cross",
+            "skill": "multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 21×123 by treating it as 021×123 (5-step frame, but L step = 0).",
+            "expectedAnswer": "2583",
+            "hint": "R=1×3=3, CR=2×3+1×2=8, M=0×3+2×2+1×1=5, CL=0×2+2×1=2, L=0×1=0.",
+            "solution": "R=3, CR=8, M=5, CL=2, L=0. Reading left to right: 02583 → 2583."
+          },
+          {
+            "questionId": "VM_G8_L5_B2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "B",
+            "subtopic": "2×3 criss-cross",
+            "skill": "multiply",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 12×111.",
+            "expectedAnswer": "1332",
+            "hint": "Treat as 012×111. R=2×1=2, CR=1×1+2×1=3, M=0×1+1×1+2×1=3, CL=0×1+1×1=1, L=0.",
+            "solution": "R=2, CR=3, M=3, CL=1, L=0. Answer: 01332=1332."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "3×3 criss-cross: 5 positions",
+        "missionStepTitle": "Full Power — 5 Positions R CR M CL L",
+        "coachHook": "Three digits on each side — five clean positions. Name them: Right, Cross-Right, Middle, Cross-Left, Left!",
+        "boardDemo": "Label positions on a 3×3 grid. R=units×units. CR=tens×units+units×tens. M=hundreds×units+tens×tens+units×hundreds. CL=hundreds×tens+tens×hundreds. L=hundreds×hundreds. Show with 123×321.",
+        "readAloudPrompt": "Read aloud each position name and count its multiplication terms.",
+        "tryPrompt": "List all 5 partial products for 111×111 before adding carries.",
+        "masteryCheck": "R=1, CR=2, M=3, CL=2, L=1. Answer 12321.",
+        "instantFeedbackWin": "All 5 positions named correctly!",
+        "instantFeedbackRetry": "M has three products: hundreds×units + tens×tens + units×hundreds.",
+        "reviewPrompt": "For 111×111: every term is 1×1=1, so M=3 (three products each=1).",
+        "xpReward": 12,
+        "badgeFocus": "Cross Starter",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_C1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "C",
+            "subtopic": "5-step positions",
+            "skill": "identify",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "In the 3×3 criss-cross, how many multiplication terms are added in the Middle (M) step?",
+            "options": ["3", "2", "4", "1"],
+            "correctIndex": 0,
+            "expectedAnswer": "3",
+            "hint": "M = h₁×u₂ + t₁×t₂ + u₁×h₂ — three products.",
+            "solution": "The Middle step crosses hundreds with units, tens with tens, and units with hundreds — three products."
+          },
+          {
+            "questionId": "VM_G8_L5_C2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "C",
+            "subtopic": "5-step positions",
+            "skill": "compute-partial",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 111×111 using the 5-step criss-cross.",
+            "expectedAnswer": "12321",
+            "hint": "Every digit is 1. R=1, CR=2, M=3, CL=2, L=1.",
+            "solution": "R=1·1=1. CR=1·1+1·1=2. M=1·1+1·1+1·1=3. CL=1·1+1·1=2. L=1·1=1. Answer=12321.",
+            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "5-position criss-cross grid for 3×3 multiplication" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Compute 123×321 using 5 steps",
+        "missionStepTitle": "Classic Demo — 123×321",
+        "coachHook": "These two numbers are mirrors of each other. Watch how the symmetry plays out in each step!",
+        "boardDemo": "Write 123×321. R=3×1=3. CR=2×1+3×2=8. M=1×1+2×2+3×3=14→4 c1. CL=1×2+2×3=8+1=9. L=1×3=3. Answer: 39483.",
+        "readAloudPrompt": "Read each step value as you compute: 'Right=3, Cross-Right=8, Middle=14...'",
+        "tryPrompt": "Verify the answer by computing 123×321 yourself.",
+        "masteryCheck": "All 5 step values match and final answer is 39483.",
+        "instantFeedbackWin": "Mirror multiplication done perfectly!",
+        "instantFeedbackRetry": "Recompute M: 1×1+2×2+3×3=1+4+9=14. Write 4, carry 1.",
+        "reviewPrompt": "Always process from R to L and carry excess digits leftward.",
+        "xpReward": 15,
+        "badgeFocus": "Partial Product Pro",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_D1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "D",
+            "subtopic": "123×321",
+            "skill": "multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute 123×321 step by step using the 5-position criss-cross.",
+            "steps": [
+              { "label": "R: units×units (3×1)", "answer": "3", "hint": "3×1=3, no carry." },
+              { "label": "CR: 2×1+3×2", "answer": "8", "hint": "2+6=8, no carry." },
+              { "label": "M: 1×1+2×2+3×3 (write digit, note carry)", "answer": "4 carry 1", "hint": "1+4+9=14. Write 4, carry 1." },
+              { "label": "CL: 1×2+2×3 + carry", "answer": "9", "hint": "2+6=8, plus carry 1 = 9." },
+              { "label": "L: 1×3", "answer": "3", "hint": "1×3=3, no carry." }
+            ],
+            "expectedAnswer": "39483"
+          },
+          {
+            "questionId": "VM_G8_L5_D2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "D",
+            "subtopic": "5-step computation",
+            "skill": "multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 112×211 using the 5-step criss-cross.",
+            "expectedAnswer": "23632",
+            "hint": "R=2×1=2. CR=1×1+2×1=3. M=1×1+1×1+2×2=6. CL=1×1+1×2=3. L=1×2=2.",
+            "solution": "R=2. CR=3. M=1+1+4=6. CL=1+2=3. L=2. Answer: 23632."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — middle step value",
+        "missionStepTitle": "Quiz — What Is the Middle Step?",
+        "coachHook": "The Middle step is the heart of 3×3. Can you compute it instantly?",
+        "boardDemo": "For 213×123: M = hundreds₁×units₂ + tens₁×tens₂ + units₁×hundreds₂ = 2×3+1×2+3×1=6+2+3=11.",
+        "readAloudPrompt": "Read the three products of M aloud before adding them.",
+        "tryPrompt": "Compute the M step value for the given multiplication.",
+        "masteryCheck": "Correct M value.",
+        "instantFeedbackWin": "Middle step nailed!",
+        "instantFeedbackRetry": "M has exactly three products. List them one by one before summing.",
+        "reviewPrompt": "M = h₁u₂ + t₁t₂ + u₁h₂. Always three terms.",
+        "xpReward": 15,
+        "badgeFocus": "Partial Product Pro",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_E1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ middle step",
+            "skill": "compute-partial",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 213×123, what is the raw (before carry) Middle step value M?",
+            "options": ["11", "8", "14", "9"],
+            "correctIndex": 0,
+            "expectedAnswer": "11",
+            "hint": "M = 2×3 + 1×2 + 3×1 = 6+2+3.",
+            "solution": "M = 2×3+1×2+3×1 = 6+2+3 = 11. Write 1, carry 1.",
+            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "Middle step crosses for 213×123" }
+          },
+          {
+            "questionId": "VM_G8_L5_E2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ middle step",
+            "skill": "compute-partial",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 234×456, what is the raw Middle step value M?",
+            "options": ["43", "38", "47", "35"],
+            "correctIndex": 0,
+            "expectedAnswer": "43",
+            "hint": "M = 2×6 + 3×5 + 4×4 = 12+15+16.",
+            "solution": "M = 12+15+16 = 43. Write 3, carry 4."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: 213×123",
+        "missionStepTitle": "Build It — 213×123 All 5 Steps",
+        "coachHook": "Time to build the full answer step by step. Track every carry!",
+        "boardDemo": "Show carry tracking column: Step | Raw | Carry in | Write | Carry out.",
+        "readAloudPrompt": "Read each carry out loud: 'Raw is 11, I write 1 and carry 1.'",
+        "tryPrompt": "Complete all 5 steps for 213×123, tracking carries.",
+        "masteryCheck": "All 5 steps correct, final answer 26199.",
+        "instantFeedbackWin": "Full 5-step build complete — 26199!",
+        "instantFeedbackRetry": "Check the carry: after M=11, carry 1 must be added to CL.",
+        "reviewPrompt": "213×123: R=9,CR=9,M=11→write1c1,CL=2×2+1×1+carry1=6,L=2×1=2. Answer=26199.",
+        "xpReward": 15,
+        "badgeFocus": "Partial Product Pro",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_F1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step 213×123",
+            "skill": "multiply",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute 213×123 using the 5-step criss-cross. Fill each step (include carry tracking).",
+            "steps": [
+              { "label": "R: 3×3", "answer": "9", "hint": "3×3=9, no carry." },
+              { "label": "CR: 1×3+3×2", "answer": "9", "hint": "3+6=9, no carry." },
+              { "label": "M: 2×3+1×2+3×1 (raw sum, then write digit and carry)", "answer": "11 → write 1 carry 1", "hint": "6+2+3=11. Write 1, carry 1." },
+              { "label": "CL: 2×2+1×1 + carry 1", "answer": "6", "hint": "4+1+carry1=6, no further carry." },
+              { "label": "L: 2×1", "answer": "2", "hint": "2×1=2." }
+            ],
+            "expectedAnswer": "26199"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Handle carries: 234×456",
+        "missionStepTitle": "Carry Management — 234×456",
+        "coachHook": "Larger digits mean bigger partial products and more carries. Stay calm and track each one.",
+        "boardDemo": "234×456: R=4×6=24→4 c2. CR=3×6+4×5=38+2=40→0 c4. M=2×6+3×5+4×4=43+4=47→7 c4. CL=2×5+3×4=22+4=26→6 c2. L=2×4=8+2=10. Answer=106704.",
+        "readAloudPrompt": "Say each carry aloud as you move to the next step.",
+        "tryPrompt": "Compute 132×231 tracking all carries.",
+        "masteryCheck": "Answer 30492.",
+        "instantFeedbackWin": "Carry management perfected!",
+        "instantFeedbackRetry": "Write down carry from each step before moving on. Don't skip it in your head.",
+        "reviewPrompt": "132×231: R=2×1=2. CR=3×1+2×3=9. M=1×1+3×3+2×2=14→4c1. CL=1×3+3×2=9+1=10→0c1. L=1×2+1=3. Answer=30492.",
+        "xpReward": 18,
+        "badgeFocus": "Urdhva Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_G1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "G",
+            "subtopic": "Carry management",
+            "skill": "multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 234×456 using the 5-step criss-cross, tracking all carries.",
+            "expectedAnswer": "106704",
+            "hint": "R=24→4c2. CR=38+2=40→0c4. M=43+4=47→7c4. CL=22+4=26→6c2. L=8+2=10.",
+            "solution": "R: 4×6=24, write 4 carry 2. CR: 3×6+4×5=38, +2=40, write 0 carry 4. M: 2×6+3×5+4×4=43, +4=47, write 7 carry 4. CL: 2×5+3×4=22, +4=26, write 6 carry 2. L: 2×4=8, +2=10, write 10. Answer: 106704.",
+            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "Carry tracking in 5-step 3×3 multiplication" }
+          },
+          {
+            "questionId": "VM_G8_L5_G2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "G",
+            "subtopic": "Carry management",
+            "skill": "multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 132×231 using the 5-step criss-cross.",
+            "expectedAnswer": "30492",
+            "hint": "R=2×1=2. CR=3×1+2×3=9. M=1×1+3×3+2×2=14→4c1. CL=1×3+3×2=9, +1=10→0c1. L=1×2+1=3.",
+            "solution": "R=2. CR=9. M=14→4c1. CL=9+1=10→0c1. L=2+1=3. Answer: 30492."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill",
+        "missionStepTitle": "Speed Drill — Beat Your Record",
+        "coachHook": "Fluency comes from repetition. Two more 3×3 problems — go fast, stay accurate!",
+        "boardDemo": "Timer shown. Two problem cards revealed simultaneously.",
+        "readAloudPrompt": "Pick the problem that looks faster and start with it.",
+        "tryPrompt": "Compute both in under 4 minutes.",
+        "masteryCheck": "Both answers correct.",
+        "instantFeedbackWin": "Speed drill complete — Urdhva reflex is sharp!",
+        "instantFeedbackRetry": "Slow down on the step that tripped you. Recompute just that step.",
+        "reviewPrompt": "Speed comes after accuracy. Never sacrifice correctness for pace.",
+        "xpReward": 18,
+        "badgeFocus": "Urdhva Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_H1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 321×123 using the 5-step criss-cross.",
+            "expectedAnswer": "39483",
+            "hint": "Same digits as 123×321 — multiplication is commutative.",
+            "solution": "321×123 = 123×321 = 39483."
+          },
+          {
+            "questionId": "VM_G8_L5_H2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 222×333?",
+            "options": ["73926", "74926", "72926", "73836"],
+            "correctIndex": 0,
+            "expectedAnswer": "73926",
+            "hint": "R=2×3=6. CR=2×3+2×3=12→2c1. M=2×3+2×3+2×3=18+1=19→9c1. CL=2×3+2×3=12+1=13→3c1. L=2×3=6+1=7.",
+            "solution": "R=6. CR=12→2c1. M=18+1=19→9c1. CL=12+1=13→3c1. L=6+1=7. Answer: 73926."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: 987×654",
+        "missionStepTitle": "Final Boss — All Large Digits: 987×654",
+        "coachHook": "Maximum digit stress test! Large products, heavy carries — but the method never fails.",
+        "boardDemo": "987×654: R=7×4=28→8c2. CR=8×4+7×5=67+2=69→9c6. M=9×4+8×5+7×6=36+40+42=118+6=124→4c12. Wait, recompute: 36+40+42=118; +6(carry)=124→4c12. CL=9×5+8×6=45+48=93+12=105→5c10. L=9×6=54+10=64. Answer=645498.",
+        "readAloudPrompt": "Stay calm with double-digit carries. Write them clearly.",
+        "tryPrompt": "Compute 987×654 yourself tracking every carry.",
+        "masteryCheck": "Answer 645498.",
+        "instantFeedbackWin": "Urdhva Master badge unlocked — all-large-digit challenge conquered!",
+        "instantFeedbackRetry": "Recompute each step. The big numbers just mean bigger carries — trust the method.",
+        "reviewPrompt": "987×654=645498. Verify: 987×600=592200, 987×54=53298. 592200+53298=645498 ✓.",
+        "xpReward": 18,
+        "badgeFocus": "Urdhva Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L5_I1",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge large digits",
+            "skill": "multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 987×654 using the 5-step criss-cross. Track all carries carefully.",
+            "expectedAnswer": "645498",
+            "hint": "R=7×4=28→8c2. CR=8×4+7×5+2=69→9c6. M=9×4+8×5+7×6+6=124→4c12. CL=9×5+8×6+12=105→5c10. L=9×6+10=64.",
+            "solution": "R: 7×4=28, write 8 carry 2. CR: 8×4+7×5+2=69, write 9 carry 6. M: 9×4+8×5+7×6+6=118+6=124, write 4 carry 12. CL: 9×5+8×6+12=93+12=105, write 5 carry 10. L: 9×6+10=64. Answer: 645498."
+          },
+          {
+            "questionId": "VM_G8_L5_I2",
+            "chapterCode": "VM_G8_L5",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge",
+            "skill": "multiply",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute 213×123 again as a speed check — fill R through L.",
+            "steps": [
+              { "label": "R", "answer": "9", "hint": "3×3=9" },
+              { "label": "CR", "answer": "9", "hint": "1×3+3×2=9" },
+              { "label": "M (raw, then digit and carry)", "answer": "11 → write 1 carry 1", "hint": "2×3+1×2+3×1=11" },
+              { "label": "CL (include carry)", "answer": "6", "hint": "2×2+1×1+1=6" },
+              { "label": "L", "answer": "2", "hint": "2×1=2" }
+            ],
+            "expectedAnswer": "26199"
+          }
+        ]
+      }
+    ]
+  }
+}

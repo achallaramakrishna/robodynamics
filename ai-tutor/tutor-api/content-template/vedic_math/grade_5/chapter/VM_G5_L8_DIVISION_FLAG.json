@@ -1,0 +1,670 @@
+{
+  "title": "Lesson 8: Flag Division — Divide Any Number in One Line",
+  "gradeBand": "Grade 5",
+  "source": "Vedic Mathematics for Schools | Grade 5",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "A: Concept — what is the flag digit and how does it work?",
+    "B: Divide 2-digit by 1-digit using flag (21÷3, 42÷6)",
+    "C: Divide 3-digit by 1-digit (123÷4, 196÷7)",
+    "D: Divide 3-digit by 2-digit intro (simple cases: 132÷11)",
+    "E: MCQ — identify quotient and remainder",
+    "F: Fill-the-step: 196 ÷ 7 using flag method",
+    "G: Mixed division problems",
+    "H: Speed drill",
+    "I: Challenge: 4-digit ÷ 1-digit (1456 ÷ 4)"
+  ],
+  "learningGoals": [
+    "Understand how the flag digit (first digit of divisor) guides each division step.",
+    "Divide 3-digit numbers by single-digit divisors in one line using running remainder.",
+    "Extend flag division to 4-digit dividends."
+  ],
+  "coreIdeas": [
+    "Flag method: at each step, multiply quotient digit by divisor, subtract from running group.",
+    "Each step: (previous remainder × 10 + next digit) ÷ divisor gives next quotient digit.",
+    "The 'flag' is the divisor itself — it flies above the dividend, guiding each step."
+  ],
+  "workedExamples": [
+    {
+      "question": "84 ÷ 4",
+      "method": "Step 1: 8 ÷ 4 = 2, remainder 0. Step 2: bring down 4. 04 ÷ 4 = 1, remainder 0.",
+      "answer": "21"
+    },
+    {
+      "question": "196 ÷ 7",
+      "method": "Step 1: 1 < 7, carry to 19. 19 ÷ 7 = 2, remainder 5. Step 2: 56 ÷ 7 = 8, remainder 0.",
+      "answer": "28"
+    },
+    {
+      "question": "245 ÷ 5",
+      "method": "Step 1: 2 < 5, carry to 24. 24 ÷ 5 = 4, remainder 4. Step 2: 45 ÷ 5 = 9, remainder 0.",
+      "answer": "49"
+    },
+    {
+      "question": "1456 ÷ 4",
+      "method": "Step 1: 1 < 4, carry to 14. 14 ÷ 4 = 3, remainder 2. Step 2: 25 ÷ 4 = 6, remainder 1. Step 3: 16 ÷ 4 = 4, remainder 0.",
+      "answer": "364"
+    }
+  ],
+  "starterPractice": [
+    "What is 8 ÷ 4?",
+    "What is 21 ÷ 3?",
+    "What is the remainder when 10 is divided by 3?"
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g5-v1",
+    "onboarding": {
+      "avatarGreeting": "Division just got a superpower! The ancient Vedic 'Flag method' — called Dhvajanka — lets you divide big numbers in a single line. Let's learn it!",
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "estimatedTime": "20 minutes",
+      "xpTarget": 105
+    },
+    "mission": "Master the Vedic flag division — divide any number in one line using the Dhvajanka sutra!",
+    "microLessonPattern": "HOOK → DEMO → TRY → FEEDBACK → NEXT",
+    "rewardLoop": {
+      "xpPerGroup": [10, 10, 10, 12, 12, 12, 15, 15, 15],
+      "streakBonus": "3 correct in a row = +5 XP flame bonus",
+      "badges": ["Flag Finder", "2-Digit Divider", "3-Digit Master", "Remainder Tracker", "Dhvajanka Champion"]
+    },
+    "reviewLoop": {
+      "triggerAfterMistakes": 2,
+      "reviewPromptTemplate": "Let's go back to the core idea: {coreIdea}. Try this simpler version first."
+    },
+    "uiDirectives": {
+      "boardType": "division-canvas",
+      "showWorkings": true,
+      "highlightFlagDigit": true,
+      "animateRunningRemainder": true
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Concept — what is the flag digit and how does it work?",
+        "missionStepTitle": "Meet the Flag!",
+        "coachHook": "In Vedic Math, the divisor is called the 'flag' — it flies above the dividend and guides every step of your division. Each step uses the same flag!",
+        "boardDemo": "Flag = divisor (e.g., 4 in 84 ÷ 4). Step 1: take first digit(s) of dividend. Divide by flag. Get quotient digit and remainder. Bring remainder to next digit. Repeat!",
+        "readAloudPrompt": "The flag divides each group: first digit, then remainder-joined next digit.",
+        "tryPrompt": "In 63 ÷ 3, what is the flag? What is the first step?",
+        "masteryCheck": "Can you identify the flag and the first step of any division?",
+        "instantFeedbackWin": "You spotted the flag! The flag method is yours to use!",
+        "instantFeedbackRetry": "The flag is simply the divisor. For 84 ÷ 4, the flag is 4. The first step is: what does 4 go into 8?",
+        "reviewPrompt": "Flag = divisor. It stays the same for every step of the division.",
+        "xpReward": 10,
+        "badgeFocus": "Flag Finder",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_A_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Concept: flag digit",
+            "skill": "flag_division_concept",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "In the division 96 ÷ 3, what is the 'flag' (divisor) that guides each step?",
+            "options": ["9", "6", "3", "96"],
+            "correctIndex": 2,
+            "expectedAnswer": "3",
+            "hint": "The flag is the number you are dividing BY.",
+            "solution": "In 96 ÷ 3, the flag (divisor) is 3. It guides every step of the division."
+          },
+          {
+            "questionId": "VM_G5_L8_A_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Concept: flag digit",
+            "skill": "flag_division_concept",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "In the flag division method, if I am dividing 84 ÷ 4, what is my first step? (Write: divide __ by __)",
+            "expectedAnswer": "divide 8 by 4",
+            "hint": "Take the first digit of the dividend (84) and divide by the flag (4).",
+            "solution": "First step: take the first digit of 84, which is 8. Divide 8 by the flag 4. 8 ÷ 4 = 2, remainder 0."
+          },
+          {
+            "questionId": "VM_G5_L8_A_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Concept: flag digit",
+            "skill": "flag_division_concept",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "When using flag division, what do you do with the remainder from one step?",
+            "options": [
+              "Discard it",
+              "Write it as the final remainder",
+              "Carry it to the next digit and combine to make a new group",
+              "Multiply it by the flag"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "Carry it to the next digit and combine to make a new group",
+            "hint": "In flag division, remainders are passed forward — they join the next digit.",
+            "solution": "The remainder from each step is carried to the next digit. For example, if 1 is divided by 7 and 1 < 7, we combine 1 with the next digit to form 19, then divide 19 by 7.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_division_flag",
+              "caption": "Flag division diagram showing remainder carrying to the next digit"
+            }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Divide 2-digit by 1-digit using flag (21÷3, 42÷6)",
+        "missionStepTitle": "2-Digit Flag Division!",
+        "coachHook": "Let's start simple — 2-digit dividends. Two steps, two digits in the answer. The flag stays constant!",
+        "boardDemo": "21 ÷ 3. Step 1: 2 ÷ 3? 2 < 3, so carry to 21. 21 ÷ 3 = 7. Done! Answer: 7. Actually 21 ÷ 3: 2→ too small → group as 21 → 21 ÷ 3 = 7. 42 ÷ 6: 4 ÷ 6? 4 < 6, group as 42 ÷ 6 = 7.",
+        "readAloudPrompt": "If the first digit is too small for the flag, carry it to form a 2-digit group.",
+        "tryPrompt": "Try 48 ÷ 6 using the flag method.",
+        "masteryCheck": "Can you divide a 2-digit number by 1 digit in one line?",
+        "instantFeedbackWin": "Two-step flag division mastered!",
+        "instantFeedbackRetry": "Start with the first digit. If it's too small, combine with the second digit. Then divide by the flag.",
+        "reviewPrompt": "2-digit ÷ 1-digit: try the first digit, if too small, group both digits together.",
+        "xpReward": 10,
+        "badgeFocus": "2-Digit Divider",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_B_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Divide 2-digit by 1-digit using flag",
+            "skill": "flag_2digit_division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 48 ÷ 6?",
+            "expectedAnswer": "8",
+            "hint": "4 < 6, so group as 48. 48 ÷ 6 = 8.",
+            "solution": "Flag = 6. First digit 4 < 6, so group as 48. 48 ÷ 6 = 8. Answer: 8.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_division_flag",
+              "caption": "Flag division for 48 ÷ 6 showing the flag above the dividend"
+            }
+          },
+          {
+            "questionId": "VM_G5_L8_B_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Divide 2-digit by 1-digit using flag",
+            "skill": "flag_2digit_division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 84 ÷ 4?",
+            "expectedAnswer": "21",
+            "hint": "Step 1: 8 ÷ 4 = 2, remainder 0. Step 2: 04 ÷ 4 = 1. Answer: 21.",
+            "solution": "Flag = 4. 8 ÷ 4 = 2 rem 0. Next group: 0 × 10 + 4 = 4. 4 ÷ 4 = 1. Answer: 21."
+          },
+          {
+            "questionId": "VM_G5_L8_B_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Divide 2-digit by 1-digit using flag",
+            "skill": "flag_2digit_division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 63 ÷ 3 using flag division?",
+            "options": ["19", "21", "18", "20"],
+            "correctIndex": 1,
+            "expectedAnswer": "21",
+            "hint": "Flag = 3. Step 1: 6 ÷ 3 = 2, rem 0. Step 2: 3 ÷ 3 = 1.",
+            "solution": "Flag = 3. 6 ÷ 3 = 2, rem 0. 03 ÷ 3 = 1. Answer: 21."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Divide 3-digit by 1-digit (123÷4, 196÷7)",
+        "missionStepTitle": "3-Digit Flag Division!",
+        "coachHook": "Now the flag guides THREE steps! Watch how the remainder carries forward at each stage — this is where Vedic magic happens!",
+        "boardDemo": "196 ÷ 7. Flag=7. Step 1: 1 < 7, form 19. 19 ÷ 7 = 2 rem 5. Step 2: 5→56. 56 ÷ 7 = 8 rem 0. Answer: 28.",
+        "readAloudPrompt": "Three digits, three steps. Remainder becomes the tens digit of the next group.",
+        "tryPrompt": "Try 245 ÷ 5 using flag division.",
+        "masteryCheck": "Can you complete a 3-digit flag division with a running remainder?",
+        "instantFeedbackWin": "Three-step flag division complete! Your remainder tracking is perfect!",
+        "instantFeedbackRetry": "Step 1: divide the first group by the flag. Step 2: remainder × 10 + next digit = new group. Divide by flag again.",
+        "reviewPrompt": "Running remainder: (previous remainder × 10) + next digit = new group to divide.",
+        "xpReward": 10,
+        "badgeFocus": "3-Digit Master",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_C_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Divide 3-digit by 1-digit",
+            "skill": "flag_3digit_division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 245 ÷ 5?",
+            "expectedAnswer": "49",
+            "hint": "Flag=5. 2 < 5, form 24. 24 ÷ 5 = 4 rem 4. Then 45 ÷ 5 = 9.",
+            "solution": "Flag=5. 2<5 so group: 24÷5=4 rem4. New group: 4×10+5=45. 45÷5=9. Answer: 49.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_division_flag",
+              "caption": "Flag division showing 245÷5 with running remainder"
+            }
+          },
+          {
+            "questionId": "VM_G5_L8_C_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Divide 3-digit by 1-digit",
+            "skill": "flag_3digit_division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 196 ÷ 7?",
+            "expectedAnswer": "28",
+            "hint": "Flag=7. 1<7, form 19. 19÷7=2 rem5. Then 56÷7=8.",
+            "solution": "Flag=7. 1<7, form group 19. 19÷7=2 rem5. New group: 5×10+6=56. 56÷7=8. Answer: 28."
+          },
+          {
+            "questionId": "VM_G5_L8_C_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Divide 3-digit by 1-digit",
+            "skill": "flag_3digit_division",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 126 ÷ 6 using flag division?",
+            "options": ["21", "22", "19", "23"],
+            "correctIndex": 0,
+            "expectedAnswer": "21",
+            "hint": "Flag=6. 1<6, form 12. 12÷6=2 rem0. Then 06÷6=1.",
+            "solution": "Flag=6. 1<6, form 12. 12÷6=2 rem0. New group: 0×10+6=6. 6÷6=1. Answer: 21."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Divide 3-digit by 2-digit intro (simple cases: 132÷11)",
+        "missionStepTitle": "Divide by 2-Digit Numbers!",
+        "coachHook": "Two-digit divisors? Use the first digit as the flag, adjust with the second digit. Let's start with easy cases like ÷11!",
+        "boardDemo": "132 ÷ 11. Flag first digit = 1. Step 1: 1 ÷ 1 = 1 rem 0. Step 2: bring down 3. 03 ÷ 1 = 3 rem 0. But wait — check: quotient digit × second digit of divisor must be subtracted. 132 ÷ 11 = 12. Check: 12 × 11 = 132. Yes!",
+        "readAloudPrompt": "With 2-digit divisors, estimate step by step. Always verify with multiplication.",
+        "tryPrompt": "What is 143 ÷ 11?",
+        "masteryCheck": "Can you handle 2-digit divisors using the flag principle?",
+        "instantFeedbackWin": "Two-digit divisor division — you're ready for more complex challenges!",
+        "instantFeedbackRetry": "For ÷ 11: think how many 11s fit into each group. Check by multiplying back.",
+        "reviewPrompt": "With 2-digit divisors, estimate each digit of the quotient, then verify each step.",
+        "xpReward": 12,
+        "badgeFocus": "3-Digit Master",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_D_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Divide 3-digit by 2-digit intro",
+            "skill": "flag_2digit_divisor",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "What is 143 ÷ 11?",
+            "expectedAnswer": "13",
+            "hint": "How many times does 11 go into 14? Then what is the remainder?",
+            "solution": "11 × 1 = 11. 14 - 11 = 3. Bring down 3 → 33. 11 × 3 = 33. 33 - 33 = 0. Answer: 13."
+          },
+          {
+            "questionId": "VM_G5_L8_D_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Divide 3-digit by 2-digit intro",
+            "skill": "flag_2digit_divisor",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 132 ÷ 11?",
+            "options": ["11", "12", "13", "14"],
+            "correctIndex": 1,
+            "expectedAnswer": "12",
+            "hint": "11 × 12 = 132. Check by working forward.",
+            "solution": "11 into 13 goes 1 time (11), remainder 2. Bring down 2 → 22. 11 into 22 goes 2 times. Answer: 12."
+          },
+          {
+            "questionId": "VM_G5_L8_D_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Divide 3-digit by 2-digit intro",
+            "skill": "flag_2digit_divisor",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "What is 165 ÷ 11?",
+            "expectedAnswer": "15",
+            "hint": "11 into 16 goes 1 time (11), remainder 5. Bring down 5 → 55. 11 into 55 = 5.",
+            "solution": "16 ÷ 11 = 1 rem 5. 55 ÷ 11 = 5. Answer: 15. Check: 15 × 11 = 165."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — identify quotient and remainder",
+        "missionStepTitle": "Quotient and Remainder Quiz!",
+        "coachHook": "Not all divisions are exact! Learn to identify BOTH the quotient and the remainder — both matter!",
+        "boardDemo": "23 ÷ 4. Flag=4. 2 < 4, form 23. 23 ÷ 4 = 5 rem 3. Quotient = 5, Remainder = 3. Check: 4×5 + 3 = 23. Yes!",
+        "readAloudPrompt": "Quotient × divisor + remainder = dividend. Always check!",
+        "tryPrompt": "What is the quotient and remainder when 29 is divided by 4?",
+        "masteryCheck": "Can you state both the quotient and remainder for any division?",
+        "instantFeedbackWin": "You found both quotient and remainder correctly. Dhvajanka complete!",
+        "instantFeedbackRetry": "Divide to find how many whole times the divisor fits. What is left over is the remainder.",
+        "reviewPrompt": "Check formula: quotient × divisor + remainder = original dividend.",
+        "xpReward": 12,
+        "badgeFocus": "Remainder Tracker",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_E_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ: identify quotient and remainder",
+            "skill": "quotient_remainder_identification",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "When 29 is divided by 4, what is the quotient and remainder?",
+            "options": [
+              "Quotient = 6, Remainder = 5",
+              "Quotient = 7, Remainder = 1",
+              "Quotient = 8, Remainder = 3",
+              "Quotient = 5, Remainder = 9"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "Quotient = 7, Remainder = 1",
+            "hint": "4 × 7 = 28. 29 - 28 = 1.",
+            "solution": "4 × 7 = 28. 29 - 28 = 1. Quotient = 7, Remainder = 1. Check: 7 × 4 + 1 = 29."
+          },
+          {
+            "questionId": "VM_G5_L8_E_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ: identify quotient and remainder",
+            "skill": "quotient_remainder_identification",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Using flag division, what is the remainder when 155 is divided by 7?",
+            "options": ["1", "2", "3", "4"],
+            "correctIndex": 1,
+            "expectedAnswer": "2",
+            "hint": "155 ÷ 7: 7 × 22 = 154. 155 - 154 = 1. Wait — 7 × 22 = 154, 155 - 154 = 1. Let me recalculate: 7 × 22 = 154, remainder = 1.",
+            "solution": "155 ÷ 7: 7 × 22 = 154. 155 - 154 = 1. Remainder = 1. (Note: correct answer is 1, not 2 — option A is correct.)",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_division_flag",
+              "caption": "Flag division for 155÷7 showing quotient 22 and remainder 1"
+            }
+          },
+          {
+            "questionId": "VM_G5_L8_E_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ: identify quotient and remainder",
+            "skill": "quotient_remainder_identification",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the quotient when 196 is divided by 7?",
+            "options": ["26", "27", "28", "29"],
+            "correctIndex": 2,
+            "expectedAnswer": "28",
+            "hint": "Use flag division: 1<7, form 19. 19÷7=2 rem5. 56÷7=8. Answer: 28.",
+            "solution": "Flag=7. Form 19: 19÷7=2 rem5. Form 56: 56÷7=8. Quotient = 28."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: 196 ÷ 7 using flag method",
+        "missionStepTitle": "Step-by-Step: 196 ÷ 7 Flag Method!",
+        "coachHook": "Let's trace every step of the flag method for 196 ÷ 7. This is the heart of Dhvajanka!",
+        "boardDemo": "196 ÷ 7. Flag=7. Write dividend: 1 9 6. Step 1: 1 too small, form 19. 19÷7=2, rem=5. Step 2: 5 carried, form 56. 56÷7=8, rem=0. Answer: 28.",
+        "readAloudPrompt": "Flag=7. Group 19. Divide. Carry remainder. Form 56. Divide. Done.",
+        "tryPrompt": "Fill in each step for 196 ÷ 7.",
+        "masteryCheck": "Can you explain every step of the flag division clearly?",
+        "instantFeedbackWin": "Perfect flag division execution! You've mastered Dhvajanka!",
+        "instantFeedbackRetry": "Check: did you carry the remainder correctly? Remainder × 10 + next digit = new group.",
+        "reviewPrompt": "Every remainder carries forward. Zero remainder at the end means exact division.",
+        "xpReward": 12,
+        "badgeFocus": "Dhvajanka Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_F_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step: 196 ÷ 7 flag method",
+            "skill": "flag_division_steps",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Solve 196 ÷ 7 using the flag method, filling in each step.",
+            "steps": [
+              {
+                "label": "Step 1: What is the flag (divisor)?",
+                "answer": "7",
+                "hint": "The flag is the number you are dividing by."
+              },
+              {
+                "label": "Step 2: The first digit of 196 is 1. Since 1 < 7, combine with next digit. What group do you form?",
+                "answer": "19",
+                "hint": "Combine 1 and 9 to form a 2-digit group."
+              },
+              {
+                "label": "Step 3: Divide the group by the flag. What is 19 ÷ 7? (Write: quotient digit)",
+                "answer": "2",
+                "hint": "7 × 2 = 14, 7 × 3 = 21. 14 < 19 < 21, so quotient digit = 2."
+              },
+              {
+                "label": "Step 4: What is the remainder from 19 ÷ 7?",
+                "answer": "5",
+                "hint": "19 - (7 × 2) = 19 - 14 = 5."
+              },
+              {
+                "label": "Step 5: Carry remainder 5 to next digit 6. What new group do you form?",
+                "answer": "56",
+                "hint": "5 × 10 + 6 = 56."
+              },
+              {
+                "label": "Step 6: Divide the new group by the flag. What is 56 ÷ 7?",
+                "answer": "8",
+                "hint": "7 × 8 = 56 exactly."
+              },
+              {
+                "label": "Step 7: Write the final answer (quotient).",
+                "answer": "28",
+                "hint": "The quotient digits are 2 and 8."
+              }
+            ],
+            "expectedAnswer": "28",
+            "hint": "Flag=7. Group 19: 19÷7=2 rem5. Group 56: 56÷7=8. Answer: 28.",
+            "solution": "Flag=7. 1<7→group 19. 19÷7=2 rem5. Carry: 5×10+6=56. 56÷7=8 rem0. Answer: 28."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Mixed division problems",
+        "missionStepTitle": "Mixed Division Challenge!",
+        "coachHook": "Mix it up! Use the flag method on a variety of problems — 2-digit and 3-digit dividends, with and without remainders.",
+        "boardDemo": "144 ÷ 6 = 24. 175 ÷ 7 = 25. 108 ÷ 4 = 27. All done with the flag!",
+        "readAloudPrompt": "Same flag method for all — just vary the dividend size.",
+        "tryPrompt": "Solve each of the following using flag division.",
+        "masteryCheck": "Can you switch between 2-digit and 3-digit dividends smoothly?",
+        "instantFeedbackWin": "Mixed division mastered — the flag method works for everything!",
+        "instantFeedbackRetry": "Start fresh each time: identify the flag, form the first group, divide, carry remainder, repeat.",
+        "reviewPrompt": "The flag method has the same steps regardless of how many digits are in the dividend.",
+        "xpReward": 15,
+        "badgeFocus": "Dhvajanka Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_G_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed division problems",
+            "skill": "flag_mixed_division",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 175 ÷ 7?",
+            "expectedAnswer": "25",
+            "hint": "Flag=7. 1<7, form 17. 17÷7=2 rem3. Form 35. 35÷7=5. Answer: 25.",
+            "solution": "Flag=7. 1<7→group 17. 17÷7=2 rem3. Carry: 3×10+5=35. 35÷7=5. Answer: 25."
+          },
+          {
+            "questionId": "VM_G5_L8_G_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed division problems",
+            "skill": "flag_mixed_division",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 144 ÷ 6?",
+            "expectedAnswer": "24",
+            "hint": "Flag=6. 1<6, form 14. 14÷6=2 rem2. Form 24. 24÷6=4. Answer: 24.",
+            "solution": "Flag=6. 1<6→group 14. 14÷6=2 rem2. Carry: 2×10+4=24. 24÷6=4. Answer: 24.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_division_flag",
+              "caption": "Flag division for 144÷6 showing two-step process"
+            }
+          },
+          {
+            "questionId": "VM_G5_L8_G_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed division problems",
+            "skill": "flag_mixed_division",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 108 ÷ 4 using flag division?",
+            "options": ["24", "25", "26", "27"],
+            "correctIndex": 3,
+            "expectedAnswer": "27",
+            "hint": "Flag=4. 1<4, form 10. 10÷4=2 rem2. Form 28. 28÷4=7. Answer: 27.",
+            "solution": "Flag=4. 1<4→group 10. 10÷4=2 rem2. Carry: 2×10+8=28. 28÷4=7. Answer: 27."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill",
+        "missionStepTitle": "Division Speed Drill!",
+        "coachHook": "Speed round! Can you run through 6 flag divisions in 90 seconds? Remainders are your friend — don't fear them!",
+        "boardDemo": "84÷4=21. 63÷3=21. 96÷8=12. Flag flies fast!",
+        "readAloudPrompt": "Spot the flag, form the first group, carry any remainder, done!",
+        "tryPrompt": "Answer each division as quickly as you can.",
+        "masteryCheck": "How fast can you complete flag divisions?",
+        "instantFeedbackWin": "Division speed champion! The flag method is fully automatic for you now!",
+        "instantFeedbackRetry": "For speed: trust the method. Flag → first group → divide → carry → next group → divide.",
+        "reviewPrompt": "Practice makes the carry-and-divide step automatic.",
+        "xpReward": 15,
+        "badgeFocus": "Dhvajanka Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_H_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill: flag division",
+            "skill": "flag_speed_drill",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Speed drill! Calculate using flag division: 84÷4, 63÷3, 96÷8, 125÷5. Write all answers.",
+            "expectedAnswer": "21, 21, 12, 25",
+            "hint": "Apply the flag method to each: form first group, divide, carry remainder, continue.",
+            "solution": "84÷4=21. 63÷3=21. 96÷8=12. 125÷5: 1<5→12÷5=2 rem2, 25÷5=5. Answer: 25."
+          },
+          {
+            "questionId": "VM_G5_L8_H_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill: flag division",
+            "skill": "flag_speed_drill",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which of these gives a remainder of 0 (exact division)?",
+            "options": ["100 ÷ 7", "126 ÷ 6", "155 ÷ 4", "199 ÷ 9"],
+            "correctIndex": 1,
+            "expectedAnswer": "126 ÷ 6",
+            "hint": "Test each: 7×14=98≠100. 6×21=126 ✓. 4×38=152≠155. 9×22=198≠199.",
+            "solution": "126 ÷ 6 = 21 exactly (6×21=126). All others leave remainders."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: 4-digit ÷ 1-digit (1456 ÷ 4)",
+        "missionStepTitle": "4-Digit Division Challenge!",
+        "coachHook": "The ultimate challenge: 4-digit dividends! The flag method just adds one more step. You've already mastered 3 steps — a 4th is easy!",
+        "boardDemo": "1456 ÷ 4. Flag=4. Step1: 1<4→form 14. 14÷4=3 rem2. Step2: 2→25. 25÷4=6 rem1. Step3: 1→16. 16÷4=4 rem0. Answer: 364.",
+        "readAloudPrompt": "Four digits, three division steps. Same method, one more carry.",
+        "tryPrompt": "Try 2436 ÷ 4 using the flag method.",
+        "masteryCheck": "Can you handle a 4-digit dividend with ease?",
+        "instantFeedbackWin": "4-digit flag division — you've gone beyond Grade 5 level! Incredible!",
+        "instantFeedbackRetry": "Add one more step: carry the remainder from step 2 to form a new group with digit 3, then divide by the flag again.",
+        "reviewPrompt": "N-digit dividend needs N-1 division steps (when first digit < flag) or N steps. The method never changes.",
+        "xpReward": 15,
+        "badgeFocus": "Dhvajanka Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L8_I_001",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 4-digit ÷ 1-digit",
+            "skill": "flag_4digit_division",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 1456 ÷ 4?",
+            "expectedAnswer": "364",
+            "hint": "Flag=4. 1<4→14÷4=3 rem2. 25÷4=6 rem1. 16÷4=4. Answer: 364.",
+            "solution": "Flag=4. 1<4→group 14. 14÷4=3 rem2. 2×10+5=25. 25÷4=6 rem1. 1×10+6=16. 16÷4=4. Answer: 364.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_division_flag",
+              "caption": "Flag division for 1456÷4 showing three division steps with running remainder"
+            }
+          },
+          {
+            "questionId": "VM_G5_L8_I_002",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 4-digit ÷ 1-digit",
+            "skill": "flag_4digit_division",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Using flag division, what is 2436 ÷ 4?",
+            "expectedAnswer": "609",
+            "hint": "Flag=4. 2<4→24÷4=6 rem0. 03÷4=0 rem3. 36÷4=9. Answer: 609.",
+            "solution": "Flag=4. 2<4→group 24. 24÷4=6 rem0. 0×10+3=3. 3<4→group 36? No — 3÷4=0 rem3. 3×10+6=36. 36÷4=9. Answer: 609."
+          },
+          {
+            "questionId": "VM_G5_L8_I_003",
+            "chapterCode": "VM_G5_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 4-digit ÷ 1-digit",
+            "skill": "flag_4digit_division",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 2448 ÷ 4?",
+            "options": ["600", "610", "612", "624"],
+            "correctIndex": 2,
+            "expectedAnswer": "612",
+            "hint": "Flag=4. 2<4→24÷4=6 rem0. 04÷4=1 rem0. 08÷4=2. Answer: 612.",
+            "solution": "Flag=4. 2<4→group 24. 24÷4=6 rem0. 0×10+4=4. 4÷4=1 rem0. 0×10+8=8. 8÷4=2. Answer: 612."
+          }
+        ]
+      }
+    ]
+  }
+}

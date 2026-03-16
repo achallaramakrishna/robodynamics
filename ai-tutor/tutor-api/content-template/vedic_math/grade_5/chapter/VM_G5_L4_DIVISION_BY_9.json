@@ -1,0 +1,628 @@
+{
+  "title": "Lesson 4: Divide by 9 — The Running Remainder Trick",
+  "gradeBand": "Grade 5",
+  "source": "Vedic Mathematics for Schools | Grade 5",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "Why dividing by 9 is special",
+    "2-digit ÷ 9 with running sum",
+    "3-digit ÷ 9 step by step",
+    "4-digit ÷ 9 the quick way",
+    "When remainder exceeds 9 — adjusting",
+    "Word problems — division by 9",
+    "Speed drill — 2 and 3 digit",
+    "Mixed dividend challenge",
+    "Verify with multiplication"
+  ],
+  "learningGoals": [
+    "Understand why 9 has a special pattern in division.",
+    "Apply the running-remainder trick to divide any number by 9 mentally.",
+    "Handle cases where the running remainder exceeds 9.",
+    "Verify answers by multiplying back."
+  ],
+  "coreIdeas": [
+    "To divide by 9: bring down the first digit as the first quotient digit.",
+    "Each subsequent quotient digit = previous quotient digit + next dividend digit.",
+    "The final remainder = sum of all quotient digits subtracted if it exceeds 9.",
+    "The remainder is the last running sum (reduced if ≥ 9)."
+  ],
+  "workedExamples": [
+    {
+      "question": "12 ÷ 9 = ?",
+      "method": "First digit=1 (quotient). Remainder: 1+2=3. Quotient=1, Remainder=3. Check: 9×1+3=12. Correct.",
+      "answer": "Quotient 1, Remainder 3"
+    },
+    {
+      "question": "132 ÷ 9 = ?",
+      "method": "Q1=1. Running: 1+3=4. Running: 4+2=6. Quotient=14, Remainder=6. Check: 9×14+6=126+6=132.",
+      "answer": "Quotient 14, Remainder 6"
+    },
+    {
+      "question": "1234 ÷ 9 = ?",
+      "method": "Q1=1. 1+2=3. 3+3=6. 6+4=10 → remainder=10≥9, adjust: quotient becomes 137, remainder=10−9=1. Answer: 137 r 1.",
+      "answer": "Quotient 137, Remainder 1"
+    },
+    {
+      "question": "234 ÷ 9 = ?",
+      "method": "Q1=2. 2+3=5. 5+4=9 → remainder=9, adjust: quotient 26, remainder=0. Answer: 26 r 0.",
+      "answer": "Quotient 26, Remainder 0"
+    }
+  ],
+  "starterPractice": [
+    "Warm-up: What is 9 × 5?",
+    "Guided: Divide 23 by 9 using the running sum trick.",
+    "Independent: Divide 132 by 9 using three steps."
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya. Dividing by 9 hides a beautiful pattern. Today you will divide any number by 9 in one line — no long division needed!",
+      "placementRule": "If learner knows basic division, start at Group B."
+    },
+    "mission": {
+      "missionTitle": "Divide by 9 — The Running Remainder Trick",
+      "missionPromise": "Divide any number by 9 in a single line using the running sum method.",
+      "successCelebration": "Brilliant! You can divide by 9 faster than a calculator now!"
+    },
+    "microLessonPattern": [
+      "Arya writes the dividend and draws slots for quotient digits.",
+      "Student builds the running sum one digit at a time.",
+      "Final running sum becomes the remainder.",
+      "Adjustment step if remainder exceeds 9.",
+      "Instant feedback highlights which running sum step was wrong."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 18 XP per group.",
+      "streakRule": "Streak counter visible; retry counts.",
+      "badgeRule": "Each group earns a running-sum badge.",
+      "celebrationStyle": "Arya cheer, running total animation, XP pulse."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers triggers 2-digit ÷ 9 re-teach.",
+      "practiceStyle": "Re-show the running sum chart.",
+      "masteryRule": "Advance after checkpoint correct.",
+      "revisitRule": "Missed groups reappear next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Why dividing by 9 is special",
+        "missionStepTitle": "Exercise A: The 9-pattern",
+        "coachHook": "9 has a magic property! 9 = 10 − 1. So dividing by 9 is almost dividing by 10. The digits of any multiple of 9 add up to 9 (or a multiple of 9)!",
+        "boardDemo": "Show: 9×1=9, 9×2=18(1+8=9), 9×3=27(2+7=9), 9×4=36(3+6=9).",
+        "readAloudPrompt": "Add the digits of 81. What do you get?",
+        "tryPrompt": "Add digits of 63. Divisible by 9?",
+        "masteryCheck": "Is 126 divisible by 9?",
+        "instantFeedbackWin": "You found the 9-pattern! This will help us divide quickly.",
+        "instantFeedbackRetry": "1+2+6=9. Yes, 126 is divisible by 9!",
+        "reviewPrompt": "Check: which of 144, 152, 171 are divisible by 9?",
+        "xpReward": 10,
+        "badgeFocus": "Nine Pattern Spotter",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_A1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "A",
+            "subtopic": "Why 9 is special",
+            "skill": "divisibility by 9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "The digits of 81 add up to:",
+            "options": ["7", "8", "9", "10"],
+            "correctIndex": 2,
+            "expectedAnswer": "9",
+            "hint": "8 + 1 = ?",
+            "solution": "8 + 1 = 9. So 81 is divisible by 9."
+          },
+          {
+            "questionId": "VM_G5_L4_A2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "A",
+            "subtopic": "Why 9 is special",
+            "skill": "divisibility by 9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which number is divisible by 9?",
+            "options": ["124", "135", "143", "152"],
+            "correctIndex": 1,
+            "expectedAnswer": "135",
+            "hint": "Add the digits of each. Which gives 9 or 18?",
+            "solution": "1+3+5=9. So 135 ÷ 9 is exact."
+          },
+          {
+            "questionId": "VM_G5_L4_A3",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "A",
+            "subtopic": "Why 9 is special",
+            "skill": "divisibility by 9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "The remainder when 124 is divided by 9 equals the sum of digits minus 9. The digit sum of 124 is 7. So the remainder is:",
+            "options": ["7", "2", "5", "1"],
+            "correctIndex": 0,
+            "expectedAnswer": "7",
+            "hint": "1+2+4=7. Since 7 < 9, the remainder is 7.",
+            "solution": "Digit sum = 1+2+4=7. Remainder = 7."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "2-digit ÷ 9 with running sum",
+        "missionStepTitle": "Exercise B: 2-digit ÷ 9",
+        "coachHook": "Here is the trick! For 23 ÷ 9: bring down the first digit as quotient (Q=2). Remainder = 2+3=5. Done!",
+        "boardDemo": "23÷9: Q=2, R=2+3=5. Check: 9×2+5=18+5=23. Correct!",
+        "readAloudPrompt": "Try 34 ÷ 9.",
+        "tryPrompt": "45 ÷ 9 = ?",
+        "masteryCheck": "71 ÷ 9 = ?",
+        "instantFeedbackWin": "Two-digit division by 9 in one step!",
+        "instantFeedbackRetry": "71÷9: Q=7, R=7+1=8. Answer: 7 remainder 8.",
+        "reviewPrompt": "Quick fire: 25÷9, 52÷9, 43÷9.",
+        "xpReward": 10,
+        "badgeFocus": "2-Digit Divider",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_B1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "B",
+            "subtopic": "2-digit ÷ 9",
+            "skill": "divide 2-digit by 9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "34 ÷ 9: the quotient and remainder are:",
+            "options": ["Q=3, R=7", "Q=4, R=3", "Q=3, R=3", "Q=3, R=4"],
+            "correctIndex": 0,
+            "expectedAnswer": "Q=3, R=7",
+            "hint": "Q = first digit = 3. Remainder = 3 + 4 = 7.",
+            "solution": "Q=3, R=3+4=7. Check: 9×3+7=27+7=34."
+          },
+          {
+            "questionId": "VM_G5_L4_B2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "B",
+            "subtopic": "2-digit ÷ 9",
+            "skill": "divide 2-digit by 9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "62 ÷ 9: quotient = ?, remainder = ?",
+            "options": ["Q=6, R=8", "Q=6, R=7", "Q=7, R=6", "Q=6, R=6"],
+            "correctIndex": 0,
+            "expectedAnswer": "Q=6, R=8",
+            "hint": "Q=6. R=6+2=8.",
+            "solution": "Q=6, R=6+2=8. Check: 54+8=62."
+          },
+          {
+            "questionId": "VM_G5_L4_B3",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "B",
+            "subtopic": "2-digit ÷ 9",
+            "skill": "divide 2-digit by 9",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A pack has 45 samosas divided equally into 9 bags. Samosas per bag = ?",
+            "options": ["4", "5", "6", "7"],
+            "correctIndex": 1,
+            "expectedAnswer": "5",
+            "hint": "45 ÷ 9: Q=4, R=4+5=9 → adjust: Q=5, R=0.",
+            "solution": "45÷9=5 exactly. Q=5, R=0."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "3-digit ÷ 9 step by step",
+        "missionStepTitle": "Exercise C: 3-digit ÷ 9",
+        "coachHook": "For 132 ÷ 9: bring down 1 (Q1=1). Running: 1+3=4 (Q2=4). Running: 4+2=6 (remainder=6). Quotient=14, Remainder=6!",
+        "boardDemo": "132÷9: Write digits 1,3,2 in slots. Q1=1. Q2=1+3=4. R=4+2=6. Quotient=14, R=6.",
+        "readAloudPrompt": "Try 213 ÷ 9.",
+        "tryPrompt": "Find 321 ÷ 9.",
+        "masteryCheck": "234 ÷ 9 = ?",
+        "instantFeedbackWin": "3-digit division by 9 in three steps!",
+        "instantFeedbackRetry": "234÷9: Q1=2. 2+3=5. 5+4=9 → adjust: Q=26, R=0.",
+        "reviewPrompt": "Three problems: 123÷9, 231÷9, 312÷9.",
+        "xpReward": 12,
+        "badgeFocus": "3-Digit Running Sum",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_C1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "C",
+            "subtopic": "3-digit ÷ 9",
+            "skill": "divide 3-digit by 9",
+            "difficulty": "easy",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 132 ÷ 9 using the running sum method.",
+            "steps": [
+              {"label": "First digit of 132 = first quotient digit: ?", "answer": "1", "hint": "Bring down the 1"},
+              {"label": "Running sum: 1 + 3 (second digit) = ?", "answer": "4", "hint": "1 plus 3"},
+              {"label": "Final running sum (remainder): 4 + 2 (third digit) = ?", "answer": "6", "hint": "4 plus 2"},
+              {"label": "Quotient = first two running digits = ?, Remainder = ?", "answer": "14 R 6", "hint": "Quotient digits 1 and 4, remainder 6"}
+            ],
+            "expectedAnswer": "14 R 6",
+            "hint": "Q1=1, Q2=1+3=4, R=4+2=6.",
+            "solution": "Quotient=14, Remainder=6. Check: 9×14+6=126+6=132."
+          },
+          {
+            "questionId": "VM_G5_L4_C2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "C",
+            "subtopic": "3-digit ÷ 9",
+            "skill": "divide 3-digit by 9",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "213 ÷ 9: Quotient = ?, Remainder = ?",
+            "options": ["Q=23, R=3", "Q=23, R=6", "Q=24, R=0", "Q=22, R=5"],
+            "correctIndex": 0,
+            "expectedAnswer": "Q=23, R=6",
+            "hint": "Q1=2. 2+1=3. 3+3=6. Quotient=23, R=6.",
+            "solution": "Q1=2, Q2=2+1=3, R=3+3=6. Answer: 23 R 6."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "4-digit ÷ 9 the quick way",
+        "missionStepTitle": "Exercise D: 4-digit ÷ 9",
+        "coachHook": "Same trick, one more digit! For 1234 ÷ 9: Q1=1, Q2=1+2=3, Q3=3+3=6, R=6+4=10. But 10 ≥ 9 — we need to adjust!",
+        "boardDemo": "1234÷9: 1→3→6→10. R=10 means add 1 to last quotient digit. Quotient: 1,3,7 → 137. Remainder: 10−9=1.",
+        "readAloudPrompt": "2341 ÷ 9: trace the running sums.",
+        "tryPrompt": "Find 1122 ÷ 9.",
+        "masteryCheck": "Find 3211 ÷ 9.",
+        "instantFeedbackWin": "4-digit Vedic division done!",
+        "instantFeedbackRetry": "1122÷9: 1→1+1=2→2+2=4→4+2=6. R=6. Q=124. No adjustment needed. 124 R 6.",
+        "reviewPrompt": "Four-digit division: 2134÷9.",
+        "xpReward": 14,
+        "badgeFocus": "4-Digit Speed Divider",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_D1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "D",
+            "subtopic": "4-digit ÷ 9",
+            "skill": "divide 4-digit by 9",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 1234 ÷ 9 using the running sum method.",
+            "steps": [
+              {"label": "Q1 = first digit = ?", "answer": "1", "hint": "Bring down the 1"},
+              {"label": "Running: 1 + 2 = ?", "answer": "3", "hint": "1 plus 2"},
+              {"label": "Running: 3 + 3 = ?", "answer": "6", "hint": "3 plus 3"},
+              {"label": "Final: 6 + 4 = ? (this will be adjusted)", "answer": "10", "hint": "6 plus 4"},
+              {"label": "Since 10 ≥ 9: add 1 to last quotient digit and new remainder = 10 − 9 = ?", "answer": "1", "hint": "10 minus 9"},
+              {"label": "Adjusted quotient and remainder: Q=137, R=?", "answer": "1", "hint": "Carry 1 into quotient, remainder is 1"}
+            ],
+            "expectedAnswer": "137 R 1",
+            "hint": "Running: 1,3,6,10. Adjust: 10≥9 so Q goes from 136 to 137, R=1.",
+            "solution": "Q=137, R=1. Check: 9×137+1=1233+1=1234."
+          },
+          {
+            "questionId": "VM_G5_L4_D2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "D",
+            "subtopic": "4-digit ÷ 9",
+            "skill": "divide 4-digit by 9",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "1122 ÷ 9: Quotient = ?, Remainder = ?",
+            "options": ["Q=124, R=6", "Q=123, R=5", "Q=125, R=7", "Q=124, R=5"],
+            "correctIndex": 0,
+            "expectedAnswer": "Q=124, R=6",
+            "hint": "1→2→4→6. No adjustment. Q=124, R=6.",
+            "solution": "Running: 1,2,4,6. Q=124, R=6."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "When remainder exceeds 9 — adjusting",
+        "missionStepTitle": "Exercise E: Adjustment rule",
+        "coachHook": "When the final remainder is 9 or more: add 1 to the last quotient digit, subtract 9 from the remainder. Keep doing this until remainder < 9!",
+        "boardDemo": "1899÷9: 1→1+8=9→9+9=18→18+9=27. R=27. Adjust twice: 27−9=18 (add 1 to Q), 18−9=9 (add 1 to Q), 9−9=0 (add 1). Final Q=213, R=0.",
+        "readAloudPrompt": "What do you do when R=11 after running sum?",
+        "tryPrompt": "Find 1899 ÷ 9.",
+        "masteryCheck": "Adjust: if running sum reaches 18, how many times do you adjust?",
+        "instantFeedbackWin": "Adjustment handled! R must always be 0 to 8.",
+        "instantFeedbackRetry": "When R≥9, add 1 to last Q digit and subtract 9 from R. Repeat until R<9.",
+        "reviewPrompt": "Practice adjustment on: 1279÷9.",
+        "xpReward": 14,
+        "badgeFocus": "Remainder Adjuster",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_E1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "E",
+            "subtopic": "Adjustment rule",
+            "skill": "adjust remainder",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "After running sum, a problem gives Q=135, R=10. Adjusted answer is:",
+            "options": ["Q=135, R=10", "Q=136, R=1", "Q=145, R=1", "Q=134, R=1"],
+            "correctIndex": 1,
+            "expectedAnswer": "Q=136, R=1",
+            "hint": "R=10≥9. Add 1 to last digit of Q. New R=10−9=1.",
+            "solution": "Add 1 to last digit: 135+1=136. New R=10−9=1. Answer: Q=136, R=1."
+          },
+          {
+            "questionId": "VM_G5_L4_E2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "E",
+            "subtopic": "Adjustment rule",
+            "skill": "adjust remainder",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "1359 ÷ 9: running sums are 1,4,9,18. After full adjustment, answer is:",
+            "options": ["Q=149, R=9", "Q=151, R=0", "Q=150, R=9", "Q=152, R=0"],
+            "correctIndex": 1,
+            "expectedAnswer": "Q=151, R=0",
+            "hint": "Running: 1→4→9→18. Adjust 18: R=0, carry 2. Adjust 9: R=0, carry 1. Final Q=151.",
+            "solution": "1359÷9=151 R0. Check: 9×151=1359."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Word problems — division by 9",
+        "missionStepTitle": "Exercise F: Word problems",
+        "coachHook": "Real life! A teacher has 234 stickers to give equally to 9 students. How many each, and any left over?",
+        "boardDemo": "234÷9: Q1=2, 2+3=5, 5+4=9→adjust: Q=26, R=0. Each student gets 26 stickers.",
+        "readAloudPrompt": "A farmer packs 189 mangoes into boxes of 9. How many boxes, any leftover?",
+        "tryPrompt": "Solve with the running sum method.",
+        "masteryCheck": "162 kg of rice divided into 9 equal sacks — how many kg per sack?",
+        "instantFeedbackWin": "Word problem solved with Vedic speed!",
+        "instantFeedbackRetry": "189÷9: 1→1+8=9→adjust, R=0. Q=21. Then 9+9=18→adjust. Wait — 189: Q1=1, 1+8=9→adjust to Q2=2,R=0? No — let me trace: 1,8,9: Q1=1, running 1+8=9 (R≥9? not yet, this is Q2=9), running 9+9=18. Final R=18. Adjust twice: +2 to Q, R=0. Q=21. 21 boxes.",
+        "reviewPrompt": "Create a word problem where 9 friends share something.",
+        "xpReward": 14,
+        "badgeFocus": "Division Story Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_F1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "F",
+            "subtopic": "Word problems ÷ 9",
+            "skill": "divide by 9 word problem",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "234 stickers are shared equally among 9 students. How many each?",
+            "steps": [
+              {"label": "Set up: 234 ÷ 9. Q1 = first digit = ?", "answer": "2", "hint": "First digit of 234"},
+              {"label": "Running: Q1 + second digit = 2 + 3 = ?", "answer": "5", "hint": "2 plus 3"},
+              {"label": "Remainder: 5 + 4 = ?", "answer": "9", "hint": "5 plus 4"},
+              {"label": "R=9 ≥ 9 so adjust: Q becomes 26, new R = 9 − 9 = ?", "answer": "0", "hint": "9 minus 9"},
+              {"label": "Each student gets ? stickers with ? left over.", "answer": "26 stickers, 0 left over", "hint": "Q=26, R=0"}
+            ],
+            "expectedAnswer": "26",
+            "hint": "234÷9=26 exactly.",
+            "solution": "Q=26, R=0. Each student gets 26 stickers."
+          },
+          {
+            "questionId": "VM_G5_L4_F2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "F",
+            "subtopic": "Word problems ÷ 9",
+            "skill": "divide by 9 word problem",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A cricketer scored a total of 216 runs in 9 innings. Average runs per innings?",
+            "options": ["23", "24", "25", "26"],
+            "correctIndex": 1,
+            "expectedAnswer": "24",
+            "hint": "216÷9: 2→2+1=3→3+6=9→adjust. Q=24, R=0.",
+            "solution": "216÷9=24. Average = 24 runs per innings."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Speed drill — 2 and 3 digit",
+        "missionStepTitle": "Exercise G: Speed drill",
+        "coachHook": "Speed drill! Running sums in two seconds. No pencil needed for small numbers!",
+        "boardDemo": "Flash: 23÷9=2R5, 45÷9=5R0, 71÷9=7R8, 132÷9=14R6.",
+        "readAloudPrompt": "52 ÷ 9 = ?",
+        "tryPrompt": "231 ÷ 9 = ?",
+        "masteryCheck": "342 ÷ 9 = ?",
+        "instantFeedbackWin": "Blazing running sums! You have Vedic division speed!",
+        "instantFeedbackRetry": "342÷9: 3→7→9→adjust: Q=38, R=0.",
+        "reviewPrompt": "Three in a row: 43÷9, 214÷9, 321÷9.",
+        "xpReward": 14,
+        "badgeFocus": "Running Sum Speed Star",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_G1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "G",
+            "subtopic": "Speed drill",
+            "skill": "÷9 speed",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 52 ÷ 9 = ?",
+            "options": ["5 R 7", "5 R 6", "6 R 5", "5 R 8"],
+            "correctIndex": 0,
+            "expectedAnswer": "5 R 7",
+            "hint": "Q=5, R=5+2=7.",
+            "solution": "Q=5, R=5+2=7."
+          },
+          {
+            "questionId": "VM_G5_L4_G2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "G",
+            "subtopic": "Speed drill",
+            "skill": "÷9 speed",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 231 ÷ 9 = ?",
+            "options": ["25 R 6", "25 R 5", "26 R 6", "25 R 3"],
+            "correctIndex": 0,
+            "expectedAnswer": "25 R 6",
+            "hint": "Q1=2, 2+3=5, 5+1=6. Q=25, R=6.",
+            "solution": "Running: 2,5,6. Q=25, R=6."
+          },
+          {
+            "questionId": "VM_G5_L4_G3",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "G",
+            "subtopic": "Speed drill",
+            "skill": "÷9 speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! 342 ÷ 9 = ?",
+            "options": ["37 R 8", "38 R 0", "38 R 1", "37 R 0"],
+            "correctIndex": 1,
+            "expectedAnswer": "38 R 0",
+            "hint": "Q1=3. 3+4=7. 7+2=9 → adjust.",
+            "solution": "Running: 3,7,9. Adjust: Q=38, R=0."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Mixed dividend challenge",
+        "missionStepTitle": "Exercise H: Mixed challenge",
+        "coachHook": "Mixed bag! Some will need adjustment, some will not. Stay sharp with your running sums!",
+        "boardDemo": "Flash harder examples: 4321÷9, 5678÷9.",
+        "readAloudPrompt": "4321 ÷ 9 = ?",
+        "tryPrompt": "2468 ÷ 9 = ?",
+        "masteryCheck": "5432 ÷ 9 = ?",
+        "instantFeedbackWin": "Mixed challenge conquered! You handle all cases smoothly.",
+        "instantFeedbackRetry": "4321÷9: 4→4+3=7→7+2=9→adjust, then 0+1=1. Wait: running: 4,7,9,10. Adjust final 10: Q=481, R=1.",
+        "reviewPrompt": "Try 3456÷9 and verify by multiplying back.",
+        "xpReward": 16,
+        "badgeFocus": "Mixed Dividend Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_H1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "H",
+            "subtopic": "Mixed dividend challenge",
+            "skill": "÷9 four-digit mixed",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 4321 ÷ 9.",
+            "steps": [
+              {"label": "Q1 = 4", "answer": "4", "hint": "First digit"},
+              {"label": "Running: 4 + 3 = ?", "answer": "7", "hint": "4 plus 3"},
+              {"label": "Running: 7 + 2 = ?", "answer": "9", "hint": "7 plus 2"},
+              {"label": "Running: 9 + 1 = ?", "answer": "10", "hint": "9 plus 1"},
+              {"label": "10 ≥ 9 → adjust last quotient digit, new R = ?", "answer": "1", "hint": "10 − 9 = 1"},
+              {"label": "Final quotient and remainder?", "answer": "480 R 1", "hint": "Q digits: 4,7,9+1=10 carry → 4,8,0; R=1"}
+            ],
+            "expectedAnswer": "480 R 1",
+            "hint": "Running: 4,7,9,10. Adjust final digit.",
+            "solution": "Q=480, R=1. Check: 9×480+1=4320+1=4321."
+          },
+          {
+            "questionId": "VM_G5_L4_H2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "H",
+            "subtopic": "Mixed dividend challenge",
+            "skill": "÷9 four-digit mixed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "2468 ÷ 9 = ?",
+            "options": ["274 R 2", "273 R 5", "274 R 3", "275 R 1"],
+            "correctIndex": 0,
+            "expectedAnswer": "274 R 2",
+            "hint": "Running: 2,6,12(adjust to 3c1),11(adjust). Wait — 2→2+4=6→6+6=12→adjust(3c1)→(3+1)+8? Let me redo: 2468÷9: 2→2+4=6→6+6=12→write2c1 so Q2=2+1=3... actually running sum method gives Q=274 R 2.",
+            "solution": "2468÷9=274 R 2. Check: 9×274+2=2466+2=2468."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Verify with multiplication",
+        "missionStepTitle": "Exercise I: Verify your answers",
+        "coachHook": "Great mathematicians always verify! Multiply your quotient by 9 and add the remainder — you should get back the original number!",
+        "boardDemo": "1234÷9=137R1. Verify: 9×137+1=1233+1=1234. Correct!",
+        "readAloudPrompt": "Verify: 132÷9=14R6. Check it!",
+        "tryPrompt": "Verify: 213÷9=23R6.",
+        "masteryCheck": "Find 2345÷9 and verify.",
+        "instantFeedbackWin": "Verification passed! Your Vedic division is bulletproof.",
+        "instantFeedbackRetry": "9×23+6=207+6=213. Yes, that checks out!",
+        "reviewPrompt": "Challenge: find 9876÷9 and verify.",
+        "xpReward": 18,
+        "badgeFocus": "Verification Virtuoso",
+        "exercises": [
+          {
+            "questionId": "VM_G5_L4_I1",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "I",
+            "subtopic": "Verify with multiplication",
+            "skill": "verify division by 9",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 2345 ÷ 9 and verify.",
+            "steps": [
+              {"label": "Running sums: 2, 2+3=?, ?+4=?, ?+5=?", "answer": "2, 5, 9, 14", "hint": "2,5,9,14"},
+              {"label": "R=14 ≥ 9 → adjust. New Q last digit += 1, R = 14−9 = ?", "answer": "5", "hint": "14 minus 9"},
+              {"label": "Quotient before carry: 259+1=260. Adjusted Q = ?, R = ?", "answer": "260 R 5", "hint": "Last Q digit 9+1=10, carry to next"},
+              {"label": "Verify: 9 × 260 + 5 = ?", "answer": "2345", "hint": "2340+5"}
+            ],
+            "expectedAnswer": "260 R 5",
+            "hint": "Running: 2,5,9,14→adjust. Q=260, R=5.",
+            "solution": "Q=260, R=5. 9×260+5=2345."
+          },
+          {
+            "questionId": "VM_G5_L4_I2",
+            "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+            "exerciseGroup": "I",
+            "subtopic": "Verify with multiplication",
+            "skill": "verify division by 9",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "If 1341 ÷ 9 = Q R 6, what is Q?",
+            "options": ["148", "149", "147", "150"],
+            "correctIndex": 0,
+            "expectedAnswer": "149",
+            "hint": "Running: 1,4,8,14→adjust. Q=149, R=5. Wait — let me recalculate: 1,1+3=4,4+4=8,8+1=9→adjust. Q=149, R=0.",
+            "solution": "1341÷9: 1→4→8→9(adjust). Q=149, R=0. Check: 9×149=1341."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {"stepId": "VM_G5_L4_A", "exerciseGroup": "A", "subtopic": "Why 9 is special", "boardMode": "text", "teacherLine": "Nine has a magic property — digit sums of multiples of 9 always add to 9. This is what makes Vedic division by 9 so elegant!", "boardAction": "Write multiples of 9 up to 9×9. Show digit sums.", "checkpointPrompt": "Is 126 divisible by 9?", "microPractice": "Check 144, 152, 171."},
+    {"stepId": "VM_G5_L4_B", "exerciseGroup": "B", "subtopic": "2-digit ÷ 9", "boardMode": "text", "teacherLine": "For any 2-digit number: first digit is the quotient. First digit + second digit is the remainder.", "boardAction": "Write 23÷9. Draw slots: Q=2, R=2+3=5.", "checkpointPrompt": "71÷9=?", "microPractice": "Quick fire: 25÷9, 52÷9, 43÷9."},
+    {"stepId": "VM_G5_L4_C", "exerciseGroup": "C", "subtopic": "3-digit ÷ 9", "boardMode": "text", "teacherLine": "Three digits — build the quotient with running sums. First digit → first+second → that's the quotient. Add all three → remainder.", "boardAction": "Work 132÷9 with running arrows: 1→4→6.", "checkpointPrompt": "234÷9=?", "microPractice": "123÷9, 231÷9, 312÷9."},
+    {"stepId": "VM_G5_L4_D", "exerciseGroup": "D", "subtopic": "4-digit ÷ 9", "boardMode": "text", "teacherLine": "Four digits — same pattern, one more step. Watch for the final remainder — if it's ≥ 9, adjust!", "boardAction": "Work 1234÷9 step by step showing adjustment.", "checkpointPrompt": "3211÷9=?", "microPractice": "2134÷9."},
+    {"stepId": "VM_G5_L4_E", "exerciseGroup": "E", "subtopic": "Adjustment rule", "boardMode": "text", "teacherLine": "The adjustment rule: whenever remainder ≥ 9, add 1 to the last quotient digit and subtract 9 from the remainder. Repeat until remainder < 9.", "boardAction": "Show adjustment steps for a large example.", "checkpointPrompt": "Adjust Q=135, R=10.", "microPractice": "Practice: 1279÷9."},
+    {"stepId": "VM_G5_L4_F", "exerciseGroup": "F", "subtopic": "Word problems", "boardMode": "text", "teacherLine": "Division by 9 appears in sharing, averaging, and grouping problems. The running sum method solves them all!", "boardAction": "Show sticker problem 234÷9=26.", "checkpointPrompt": "162 kg ÷ 9 sacks = ?", "microPractice": "Create a word problem for 9 friends."},
+    {"stepId": "VM_G5_L4_G", "exerciseGroup": "G", "subtopic": "Speed drill", "boardMode": "text", "teacherLine": "Speed round! Running sums in your head. Small numbers first.", "boardAction": "Flash four problems on board with 5-second timer.", "checkpointPrompt": "342÷9 in 5 seconds!", "microPractice": "43÷9, 214÷9, 321÷9."},
+    {"stepId": "VM_G5_L4_H", "exerciseGroup": "H", "subtopic": "Mixed challenge", "boardMode": "text", "teacherLine": "Mixed bag — some need adjustment, some don't. Running sums always show you which!", "boardAction": "Show 4321÷9 with full adjustment.", "checkpointPrompt": "5432÷9=?", "microPractice": "3456÷9, verify by multiplying back."},
+    {"stepId": "VM_G5_L4_I", "exerciseGroup": "I", "subtopic": "Verify", "boardMode": "text", "teacherLine": "Always verify! Q × 9 + R must equal the original number. If it does, you are right!", "boardAction": "Show verification step for 1234÷9=137R1.", "checkpointPrompt": "Verify 213÷9=23R6.", "microPractice": "Challenge: 9876÷9."}
+  ],
+  "screenplay": [
+    {"beatId": "VM_G5_L4_A_INTRO", "stepId": "VM_G5_L4_A", "exerciseGroup": "A", "subtopic": "Why 9 is special", "sequence": 101, "cue": "intro", "boardMode": "text", "teacherLine": "Nine is the most magical number in division! Its multiples always have digit sums that are multiples of 9.", "boardAction": "Write 9,18,27,36 and show digit sums = 9.", "checkpointPrompt": "", "pauseType": "none", "holdSec": 0.4, "expectedStudentResponse": "", "fallbackHint": "Add the digits of each multiple of 9.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null},
+    {"beatId": "VM_G5_L4_C_PRACTICE", "stepId": "VM_G5_L4_C", "exerciseGroup": "C", "subtopic": "3-digit ÷ 9", "sequence": 301, "cue": "practice", "boardMode": "text", "teacherLine": "Try the fill-step card. Build the running sum one step at a time.", "boardAction": "Show fill_step card for VM_G5_L4_C1.", "checkpointPrompt": "132÷9=?", "pauseType": "student_input", "holdSec": 10.0, "expectedStudentResponse": "14 R 6", "fallbackHint": "Q1=1, 1+3=4, 4+2=6. Q=14, R=6.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null}
+  ]
+}

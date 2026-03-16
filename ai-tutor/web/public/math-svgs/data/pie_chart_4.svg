@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <!-- Pie chart: 4 segments (25% each for simplicity) -->
+  <circle cx="80" cy="80" r="70" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <!-- Quarter segments -->
+  <path d="M80,80 L80,10 A70,70 0 0,1 150,80 Z" fill="#3b82f6"/>
+  <path d="M80,80 L150,80 A70,70 0 0,1 80,150 Z" fill="#10b981"/>
+  <path d="M80,80 L80,150 A70,70 0 0,1 10,80 Z" fill="#f59e0b"/>
+  <path d="M80,80 L10,80 A70,70 0 0,1 80,10 Z" fill="#ef4444"/>
+  <!-- Labels -->
+  <text x="108" y="52" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">25%</text>
+  <text x="122" y="112" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">25%</text>
+  <text x="52" y="120" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">25%</text>
+  <text x="38" y="55" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">25%</text>
+</svg>

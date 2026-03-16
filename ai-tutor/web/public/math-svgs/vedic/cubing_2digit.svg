@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="380" height="220" font-family="Nunito,sans-serif">
+  <rect width="380" height="220" rx="14" fill="#fdf4ff"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#581c87">Anurupyena Cubing — 12³</text>
+  <text x="190" y="42" text-anchor="middle" font-size="11" fill="#7e22ce">Formula: a=1, b=2 → row pattern a³, a²b, ab², b³</text>
+
+  <!-- Row 1: a³  a²b  ab²  b³ -->
+  <text x="20" y="70" font-size="12" fill="#581c87" font-weight="700">Step 1 — Base row:</text>
+
+  <rect x="30" y="78" width="60" height="36" rx="7" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="60" y="101" text-anchor="middle" font-size="16" font-weight="800" fill="#6d28d9">1</text>
+  <text x="60" y="122" text-anchor="middle" font-size="10" fill="#8b5cf6">a³=1</text>
+
+  <rect x="100" y="78" width="60" height="36" rx="7" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="130" y="101" text-anchor="middle" font-size="16" font-weight="800" fill="#6d28d9">2</text>
+  <text x="130" y="122" text-anchor="middle" font-size="10" fill="#8b5cf6">a²b=2</text>
+
+  <rect x="170" y="78" width="60" height="36" rx="7" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="200" y="101" text-anchor="middle" font-size="16" font-weight="800" fill="#6d28d9">4</text>
+  <text x="200" y="122" text-anchor="middle" font-size="10" fill="#8b5cf6">ab²=4</text>
+
+  <rect x="240" y="78" width="60" height="36" rx="7" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="270" y="101" text-anchor="middle" font-size="16" font-weight="800" fill="#6d28d9">8</text>
+  <text x="270" y="122" text-anchor="middle" font-size="10" fill="#8b5cf6">b³=8</text>
+
+  <!-- Step 2: double middle two -->
+  <text x="20" y="148" font-size="12" fill="#581c87" font-weight="700">Step 2 — Double the middle two:</text>
+  <text x="20" y="166" font-size="12" fill="#374151">Row becomes:  1 | 4 | 8 | 8</text>
+
+  <!-- Step 3: add with offset (like long addition) -->
+  <text x="20" y="184" font-size="12" fill="#581c87" font-weight="700">Step 3 — Diagonal sum (right-shifted):</text>
+
+  <!-- Result -->
+  <rect x="200" y="174" width="160" height="36" rx="8" fill="#581c87"/>
+  <text x="280" y="198" text-anchor="middle" font-size="18" font-weight="800" fill="white">12³ = 1728 ✓</text>
+</svg>

@@ -1,0 +1,193 @@
+{
+  "courseId": "vedic_math_g5",
+  "courseTitle": "MindSutra Grade 5 — Vedic Math",
+  "gradeBand": "Grade 5",
+  "description": "CBSE Grade 5 aligned: Nikhilam near-100 multiplication, 3-digit criss-cross, division by 9, squaring near 50, fraction shortcuts, and straight division. Builds fluency with multi-digit operations.",
+  "chapters": [
+    {
+      "chapterCode": "VM_G5_L1_NIKHILAM_NEAR100",
+      "title": "Nikhilam — Multiply Near Base 100",
+      "estimatedMinutes": 22,
+      "subtopics": ["Deficit from 100", "Cross-subtract method", "Multiply deficits", "Both below / both above / mixed"],
+      "learningGoals": [
+        "Find deficit of any 2-digit number from base 100",
+        "Multiply two numbers near 100 (both below) using Nikhilam",
+        "Handle cases where both numbers are above 100 (surplus)",
+        "Solve 5 Nikhilam problems mentally in under 3 minutes"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Deficit concept: 100 − n"},
+        {"exerciseGroup":"B","subtopic":"Both below 100: 97×98"},
+        {"exerciseGroup":"C","subtopic":"Both below 100: harder cases"},
+        {"exerciseGroup":"D","subtopic":"Both above 100: 103×104"},
+        {"exerciseGroup":"E","subtopic":"Mixed (one above, one below)"},
+        {"exerciseGroup":"F","subtopic":"MCQ: choose correct product"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: guided Nikhilam"},
+        {"exerciseGroup":"H","subtopic":"Speed drill: 8 problems"},
+        {"exerciseGroup":"I","subtopic":"Challenge: near base 1000"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+      "title": "Proportionally! — 3-Digit × Single-Digit Speed",
+      "estimatedMinutes": 20,
+      "subtopics": ["Anurupyena proportionality", "Multiply 3-digit by 1-digit mentally", "Carrying across positions"],
+      "learningGoals": [
+        "Apply Anurupyena proportionality to scale up problems",
+        "Multiply 3-digit numbers by single digits without writing steps",
+        "Carry correctly across hundreds, tens, units positions"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Anurupyena concept: proportional scaling"},
+        {"exerciseGroup":"B","subtopic":"3-digit × 2: doubling"},
+        {"exerciseGroup":"C","subtopic":"3-digit × 3, 4, 5"},
+        {"exerciseGroup":"D","subtopic":"3-digit × 6, 7, 8, 9"},
+        {"exerciseGroup":"E","subtopic":"MCQ: identify product"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: carry across positions"},
+        {"exerciseGroup":"G","subtopic":"Word problems (distance/price)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: 4-digit × single-digit"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L3_CRISS_CROSS_3DIG",
+      "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+      "estimatedMinutes": 25,
+      "subtopics": ["5-step Urdhva pattern", "2-digit × 2-digit review", "3-digit × 3-digit columns"],
+      "learningGoals": [
+        "Apply 5-column Urdhva-Tiryak pattern to 3×3 digit problems",
+        "Identify the correct cross-products for each column position",
+        "Solve 3-digit × 3-digit problems with systematic carry tracking"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Review: 2-digit × 2-digit criss-cross"},
+        {"exerciseGroup":"B","subtopic":"3×3 pattern: column 1 (units)"},
+        {"exerciseGroup":"C","subtopic":"Column 2: two cross-products"},
+        {"exerciseGroup":"D","subtopic":"Column 3: three products (middle)"},
+        {"exerciseGroup":"E","subtopic":"Columns 4 and 5"},
+        {"exerciseGroup":"F","subtopic":"MCQ: middle column value"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: full 3×3 walkthrough"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: include zeros in digits"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+      "title": "Divide by 9 — The Running Remainder Trick",
+      "estimatedMinutes": 20,
+      "subtopics": ["Quotient via running sum", "Remainder", "2-digit and 3-digit dividends"],
+      "learningGoals": [
+        "Find quotient and remainder when dividing by 9 using running-sum method",
+        "Apply to 2-digit and 3-digit dividends instantly",
+        "Verify divisibility by 9 using digit-sum rule"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Divisibility by 9 (digit sum rule)"},
+        {"exerciseGroup":"B","subtopic":"2-digit ÷ 9 (running sum method)"},
+        {"exerciseGroup":"C","subtopic":"3-digit ÷ 9"},
+        {"exerciseGroup":"D","subtopic":"4-digit ÷ 9"},
+        {"exerciseGroup":"E","subtopic":"MCQ: quotient and remainder"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: running sum walkthrough"},
+        {"exerciseGroup":"G","subtopic":"Word problems (share equally)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: divide by 99"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+      "title": "Square It! — Numbers Near 50",
+      "estimatedMinutes": 20,
+      "subtopics": ["Deviation from 50", "Square formula: (50+d)²", "Simplify using 2500 base"],
+      "learningGoals": [
+        "Square any number near 50 using the deviation shortcut",
+        "Apply formula: 25 + deviation | deviation²",
+        "Compute squares of 45–55 in under 5 seconds each"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Square of 50 and why 2500 is the anchor"},
+        {"exerciseGroup":"B","subtopic":"Numbers above 50: 51², 52², 53²"},
+        {"exerciseGroup":"C","subtopic":"Numbers below 50: 49², 48², 47²"},
+        {"exerciseGroup":"D","subtopic":"Larger deviations: 45², 55²"},
+        {"exerciseGroup":"E","subtopic":"MCQ: compute the square"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: deviation formula"},
+        {"exerciseGroup":"G","subtopic":"Connect to area of squares"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: near 500"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L6_FRACTIONS_SPEED",
+      "title": "Fractions Made Fast — Vedic Simplification",
+      "estimatedMinutes": 20,
+      "subtopics": ["GCD via subtraction (Vedic method)", "Reduce fractions in 2 steps", "Compare fractions quickly"],
+      "learningGoals": [
+        "Find GCD using repeated subtraction (Vedic Euclidean)",
+        "Simplify any fraction to lowest terms in 2–3 mental steps",
+        "Compare two fractions using cross-multiply shortcut"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"GCD concept via subtraction"},
+        {"exerciseGroup":"B","subtopic":"Simplify: small fractions"},
+        {"exerciseGroup":"C","subtopic":"Simplify: larger numerator/denominator"},
+        {"exerciseGroup":"D","subtopic":"Compare two fractions (cross-multiply)"},
+        {"exerciseGroup":"E","subtopic":"MCQ: simplest form"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: GCD chain"},
+        {"exerciseGroup":"G","subtopic":"Word problems (pizza/sharing)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: mixed numbers"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L7_DECIMAL_SPEED",
+      "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+      "estimatedMinutes": 20,
+      "subtopics": ["Shift decimal place", "×0.5, ×0.25 shortcuts", "÷0.5, ÷0.25 shortcuts"],
+      "learningGoals": [
+        "Multiply by 0.1, 0.01, 0.5, 0.25 using place-shift shortcut",
+        "Divide by 0.5 and 0.25 by multiplying by 2 and 4",
+        "Solve decimal word problems (price/measurement) mentally"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"×0.1 and ×0.01 (place shift)"},
+        {"exerciseGroup":"B","subtopic":"×0.5 (halving shortcut)"},
+        {"exerciseGroup":"C","subtopic":"×0.25 (quarter shortcut)"},
+        {"exerciseGroup":"D","subtopic":"÷0.5 and ÷0.25"},
+        {"exerciseGroup":"E","subtopic":"MCQ: decimal product"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: ×0.25 chain"},
+        {"exerciseGroup":"G","subtopic":"Word problems (money/length)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: ×1.5, ×2.5"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G5_L8_DIVISION_FLAG",
+      "title": "Flag Division — Divide Any Number in One Line",
+      "estimatedMinutes": 22,
+      "subtopics": ["Dhvajanka (flag digit)", "One-line division setup", "2-digit divisor flag method"],
+      "learningGoals": [
+        "Set up the flag digit for 2-digit divisors",
+        "Compute quotient one digit at a time using the flag method",
+        "Divide 4-digit numbers by 2-digit divisors without long division"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Long division review (why it's slow)"},
+        {"exerciseGroup":"B","subtopic":"Flag method concept: set up"},
+        {"exerciseGroup":"C","subtopic":"Divide by 11, 12 using flag"},
+        {"exerciseGroup":"D","subtopic":"Divide by 13–19 using flag"},
+        {"exerciseGroup":"E","subtopic":"MCQ: quotient digit"},
+        {"exerciseGroup":"F","subtopic":"Fill-the-step: flag division walkthrough"},
+        {"exerciseGroup":"G","subtopic":"Word problems (distribute equally)"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: 5-digit ÷ 2-digit"}
+      ]
+    }
+  ]
+}

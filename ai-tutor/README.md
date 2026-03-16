@@ -64,8 +64,8 @@ npm run dev
 - `AI_TUTOR_ADAPTIVE_POLICY_MIN_OBS` (minimum context support before policy action is used)
 - `AI_TUTOR_TEMPLATE_API_URL` (Java API endpoint for course/session asset template)
 - `AI_TUTOR_DYNAMIC_COURSE_TEMPLATE_ENABLED` (auto-build tutor engine for new `courseId` aliases)
-- `AI_TUTOR_TEMPLATE_COURSE_IDS` (alias->db course id map, e.g. `neet_physics:138,neet_chemistry:131,neet_biology:132`)
-- `AI_TUTOR_NEET_PHYSICS_DB_COURSE_ID`, `AI_TUTOR_NEET_CHEMISTRY_DB_COURSE_ID`, `AI_TUTOR_NEET_BIOLOGY_DB_COURSE_ID`
+- `AI_TUTOR_TEMPLATE_COURSE_IDS` (alias->db course id map, e.g. `neet_physics:138,neet_chemistry:131,neet_biology:132,aptitude_reasoning:201,financial_literacy:202`)
+- `AI_TUTOR_NEET_PHYSICS_DB_COURSE_ID`, `AI_TUTOR_NEET_CHEMISTRY_DB_COURSE_ID`, `AI_TUTOR_NEET_BIOLOGY_DB_COURSE_ID`, `AI_TUTOR_APTITUDE_REASONING_DB_COURSE_ID`, `AI_TUTOR_FINANCIAL_LITERACY_DB_COURSE_ID`
 
 ### Next.js (`ai-tutor/web/.env.example`)
 
@@ -117,10 +117,22 @@ Schema and architecture notes:
 - LMS seeding helpers for NEET AI Tutor:
   - `neet_ai_tutor_lms_seed_2026_03_07.sql` (creates offerings + unit sessions; optional enrollments)
   - `scripts/link_neet_pdf_assets_to_sessions.sh` (maps `session_materials/{courseId}/chapter/*.pdf` into `rd_course_session_details`)
+- Starter pipeline configs are available under `ai-tutor/pipeline/course-configs/` for:
+  - `vedic_math`
+  - `neet_physics`
+  - `neet_chemistry`
+  - `neet_biology`
+  - `aptitude_reasoning`
+  - `financial_literacy`
 - Nginx routing template is available at `docs/ai_tutor_integration_nginx.conf`.
 - Module codes now supported by default:
   - `VEDIC_MATH`
   - `NEET_PHYSICS`
   - `NEET_CHEMISTRY`
   - `NEET_BIOLOGY`
+  - `APTITUDE_REASONING`
+  - `FINANCIAL_LITERACY`
 - Legacy compatibility aliases are still available under `/ai-tutor-api/vedic/*`.
+
+
+

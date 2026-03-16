@@ -1,0 +1,706 @@
+{
+  "title": "Lesson 3: Double Fast, Half Fast — Multiplication Secrets",
+  "gradeBand": "Grade 4",
+  "source": "Vedic Mathematics for Schools | Grade 4",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Doubling 1-digit numbers",
+    "Doubling 2-digit numbers",
+    "Halving even numbers",
+    "Multiply by 4 — double-double",
+    "Multiply by 8 — triple double",
+    "Spot the product — MCQ",
+    "Fill-step: ×8 chain",
+    "Mixed doubling and halving",
+    "Challenge: multiply by 16"
+  ],
+  "learningGoals": [
+    "Double and halve any 2-digit number mentally using the Anurupyena (proportionality) sutra.",
+    "Multiply by 4 by doubling twice and by 8 by doubling three times.",
+    "Recognise the doubling chain as a proportional shortcut that scales to ×16 and beyond."
+  ],
+  "coreIdeas": [
+    "Every multiplication by 4 is just doubling twice — no new skill needed.",
+    "Multiplying by 8 means doubling three times in a row, each step quick and exact.",
+    "Halving is the reverse of doubling — knowing both gives you a full proportional toolkit."
+  ],
+  "workedExamples": [
+    {
+      "question": "23 × 4 = ?",
+      "method": "Double 23 = 46. Double 46 = 92. Answer: 92.",
+      "answer": "92"
+    },
+    {
+      "question": "15 × 8 = ?",
+      "method": "Double 15 = 30. Double 30 = 60. Double 60 = 120. Answer: 120.",
+      "answer": "120"
+    },
+    {
+      "question": "Half of 84 = ?",
+      "method": "Half of 80 = 40. Half of 4 = 2. Total = 42. Answer: 42.",
+      "answer": "42"
+    },
+    {
+      "question": "18 × 16 = ?",
+      "method": "Double 18=36, double 36=72, double 72=144, double 144=288. Answer: 288.",
+      "answer": "288"
+    }
+  ],
+  "starterPractice": [
+    "Double 37 using the split method (double tens + double units).",
+    "Halve 96. Then halve the result. What did you just compute?",
+    "13 × 4 = ? Use double-double."
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will discover that multiplying by 4 and 8 is really just doubling — again and again. Super simple, super fast!",
+      "placementRule": "Start at group A. If the learner can double any 2-digit number instantly, skip to group D."
+    },
+    "mission": {
+      "missionTitle": "Double Fast, Half Fast",
+      "missionPromise": "Master the doubling chain and multiply by 4, 8, and 16 without a pen.",
+      "successCelebration": "Doubling dynamo! You can now multiply by 4, 8, and 16 using just two or three quick doubles!"
+    },
+    "microLessonPattern": [
+      "Coach shows one doubling step with a visual chain.",
+      "Board highlights how each double leads to the next.",
+      "Student practises one doubling step before seeing the chain completed.",
+      "Instant feedback shows which step in the chain was wrong.",
+      "Review prompt asks the student to write the full chain for a new number."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 18 XP per exercise group based on difficulty.",
+      "streakRule": "Keep the streak counter visible; a correct answer on retry still counts as streak-save.",
+      "badgeRule": "Each group earns a themed badge tied to the doubling skill being practised.",
+      "celebrationStyle": "Short coach cheer, XP pulse animation, and progress bar moves forward."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers in one group triggers a mini re-teach with a simpler number.",
+      "practiceStyle": "Re-show the doubling chain, then give a smaller number to try.",
+      "masteryRule": "Advance only after the student answers the checkpoint correctly.",
+      "revisitRule": "Missed groups reappear at the start of the next session as warm-up cards."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Doubling 1-digit numbers",
+        "missionStepTitle": "Exercise A: Doubling 1-digit numbers",
+        "coachHook": "Doubling is the secret superpower in Vedic maths. Let's start small — double each single digit until it feels automatic!",
+        "boardDemo": "Show the doubling table: 1→2, 2→4, 3→6, 4→8, 5→10, 6→12, 7→14, 8→16, 9→18.",
+        "readAloudPrompt": "Double 7 = ?",
+        "tryPrompt": "Double 9 = ?",
+        "masteryCheck": "Double 6 = ?",
+        "instantFeedbackWin": "Perfect double! You are ready to chain these together.",
+        "instantFeedbackRetry": "Think of 2 groups of 9: 9+9=18. That is double 9.",
+        "reviewPrompt": "Quick fire doubles: 3, 7, 5, 8, 4.",
+        "xpReward": 10,
+        "badgeFocus": "Doubling Starter",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_A_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "A",
+            "subtopic": "Doubling 1-digit numbers",
+            "skill": "double 1-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Double 7 = ?",
+            "options": ["12", "13", "14", "15"],
+            "correctIndex": 2,
+            "expectedAnswer": "14",
+            "hint": "7 + 7 = ?",
+            "solution": "7 + 7 = 14. Double 7 = 14."
+          },
+          {
+            "questionId": "VM_G4_L3_A_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "A",
+            "subtopic": "Doubling 1-digit numbers",
+            "skill": "double 1-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Double 9 = ?",
+            "options": ["16", "17", "18", "19"],
+            "correctIndex": 2,
+            "expectedAnswer": "18",
+            "hint": "9 + 9 = ?",
+            "solution": "9 + 9 = 18. Double 9 = 18."
+          },
+          {
+            "questionId": "VM_G4_L3_A_Q3",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "A",
+            "subtopic": "Doubling 1-digit numbers",
+            "skill": "double 1-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Double 8 = ?",
+            "expectedAnswer": "16",
+            "hint": "8 + 8 = ?",
+            "solution": "8 + 8 = 16."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Doubling 2-digit numbers",
+        "missionStepTitle": "Exercise B: Doubling 2-digit numbers",
+        "coachHook": "Now let's double 2-digit numbers! Split them into tens and units, double each part separately, then add them back.",
+        "boardDemo": "Double 34: double tens 30→60, double units 4→8. Add: 60+8=68. Double 47: 80+14=94.",
+        "readAloudPrompt": "Double 34 = ?",
+        "tryPrompt": "Double 47 = ?",
+        "masteryCheck": "Double 56 = ?",
+        "instantFeedbackWin": "Smooth! Splitting makes 2-digit doubling easy.",
+        "instantFeedbackRetry": "For double 47: double 40=80, double 7=14. Add: 80+14=94.",
+        "reviewPrompt": "Double these: 23, 38, 45.",
+        "xpReward": 10,
+        "badgeFocus": "2-Digit Doubler",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_B_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "B",
+            "subtopic": "Doubling 2-digit numbers",
+            "skill": "double 2-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Double 34 = ?",
+            "options": ["64", "66", "68", "70"],
+            "correctIndex": 2,
+            "expectedAnswer": "68",
+            "hint": "Double 30=60, double 4=8. Add: 60+8=68.",
+            "solution": "Double 30=60, double 4=8, 60+8=68."
+          },
+          {
+            "questionId": "VM_G4_L3_B_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "B",
+            "subtopic": "Doubling 2-digit numbers",
+            "skill": "double 2-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Double 56 = ?",
+            "options": ["102", "108", "112", "116"],
+            "correctIndex": 2,
+            "expectedAnswer": "112",
+            "hint": "Double 50=100, double 6=12. Add: 100+12=112.",
+            "solution": "Double 50=100, double 6=12, 100+12=112."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Halving even numbers",
+        "missionStepTitle": "Exercise C: Halving even numbers",
+        "coachHook": "Halving is doubling in reverse! Split the number into tens and units, halve each part, and combine. Watch how easy this is!",
+        "boardDemo": "Half of 84: half of 80=40, half of 4=2. Answer: 42. Half of 96: half of 90=45, half of 6=3. Answer: 48.",
+        "readAloudPrompt": "Half of 84 = ?",
+        "tryPrompt": "Half of 68 = ?",
+        "masteryCheck": "Half of 76 = ?",
+        "instantFeedbackWin": "Perfect halving! Split and halve — done!",
+        "instantFeedbackRetry": "For half of 68: half of 60=30, half of 8=4. Answer: 34.",
+        "reviewPrompt": "Halve these: 52, 88, 46.",
+        "xpReward": 10,
+        "badgeFocus": "Halving Hero",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_C_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "C",
+            "subtopic": "Halving even numbers",
+            "skill": "halving 2-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Half of 84 = ?",
+            "options": ["40", "41", "42", "43"],
+            "correctIndex": 2,
+            "expectedAnswer": "42",
+            "hint": "Half of 80=40, half of 4=2. Add: 42.",
+            "solution": "Half of 80=40, half of 4=2. Answer: 42."
+          },
+          {
+            "questionId": "VM_G4_L3_C_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "C",
+            "subtopic": "Halving even numbers",
+            "skill": "halving 2-digit",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Half of 76 = ?",
+            "expectedAnswer": "38",
+            "hint": "Half of 70=35, half of 6=3. Add: 38.",
+            "solution": "Half of 70=35, half of 6=3. Answer: 38."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Multiply by 4 — double-double",
+        "missionStepTitle": "Exercise D: Multiply by 4",
+        "coachHook": "Multiply by 4 in two steps — just double, then double again! No long multiplication needed at all!",
+        "boardDemo": "23×4: double 23=46, double 46=92. Answer: 92. 17×4: double 17=34, double 34=68. Answer: 68.",
+        "readAloudPrompt": "23 × 4 = ?",
+        "tryPrompt": "17 × 4 = ?",
+        "masteryCheck": "25 × 4 = ?",
+        "instantFeedbackWin": "Double-double done! That is ×4 without any times table memorisation.",
+        "instantFeedbackRetry": "For 17×4: double 17=34, double 34=68. Two quick steps!",
+        "reviewPrompt": "Use double-double: 12×4, 21×4, 13×4.",
+        "xpReward": 12,
+        "badgeFocus": "Double-Double Dynamo",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_D_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply by 4 — double-double",
+            "skill": "multiply by 4",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "23 × 4 = ?",
+            "options": ["86", "88", "92", "96"],
+            "correctIndex": 2,
+            "expectedAnswer": "92",
+            "hint": "Double 23=46. Double 46=92.",
+            "solution": "Double 23=46, double 46=92. Answer: 92."
+          },
+          {
+            "questionId": "VM_G4_L3_D_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply by 4 — double-double",
+            "skill": "multiply by 4",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "25 × 4 = ?",
+            "options": ["90", "95", "100", "105"],
+            "correctIndex": 2,
+            "expectedAnswer": "100",
+            "hint": "Double 25=50. Double 50=100.",
+            "solution": "Double 25=50, double 50=100. Answer: 100."
+          },
+          {
+            "questionId": "VM_G4_L3_D_Q3",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply by 4 — double-double",
+            "skill": "multiply by 4",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "17 × 4 = ?",
+            "expectedAnswer": "68",
+            "hint": "Double 17=34. Double 34=68.",
+            "solution": "Double 17=34, double 34=68. Answer: 68."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Multiply by 8 — triple double",
+        "missionStepTitle": "Exercise E: Multiply by 8",
+        "coachHook": "Add one more double and you have ×8! Three doubles and you are done — this is the Anurupyena sutra in action!",
+        "boardDemo": "15×8: double 15=30, double 30=60, double 60=120. Answer: 120.",
+        "readAloudPrompt": "15 × 8 = ?",
+        "tryPrompt": "12 × 8 = ?",
+        "masteryCheck": "11 × 8 = ?",
+        "instantFeedbackWin": "Triple double complete! That is ×8 with zero memorisation.",
+        "instantFeedbackRetry": "For 12×8: double 12=24, double 24=48, double 48=96. Three steps!",
+        "reviewPrompt": "Use triple double: 13×8, 16×8, 10×8.",
+        "xpReward": 14,
+        "badgeFocus": "Triple Double Master",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_E_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "E",
+            "subtopic": "Multiply by 8 — triple double",
+            "skill": "multiply by 8",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "12 × 8 = ?",
+            "options": ["88", "92", "96", "100"],
+            "correctIndex": 2,
+            "expectedAnswer": "96",
+            "hint": "Double 12=24, double 24=48, double 48=96.",
+            "solution": "Double 12=24, double 24=48, double 48=96. Answer: 96."
+          },
+          {
+            "questionId": "VM_G4_L3_E_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "E",
+            "subtopic": "Multiply by 8 — triple double",
+            "skill": "multiply by 8",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 8 = ?",
+            "options": ["82", "84", "86", "88"],
+            "correctIndex": 3,
+            "expectedAnswer": "88",
+            "hint": "Double 11=22, double 22=44, double 44=88.",
+            "solution": "Double 11=22, double 22=44, double 44=88. Answer: 88."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Spot the product — MCQ",
+        "missionStepTitle": "Exercise F: Spot the correct ×4 or ×8 product",
+        "coachHook": "Detective time! Four options — only one is correct. Use the doubling chain to rule out the fakes!",
+        "boardDemo": "14×8 options: 104, 108, 112, 116. Chain: 14→28→56→112. Spot it!",
+        "readAloudPrompt": "Which answer is 14 × 8?",
+        "tryPrompt": "Spot: 18 × 4 = ?",
+        "masteryCheck": "13 × 8 = ?",
+        "instantFeedbackWin": "Sharp eyes and fast chain! You spotted the right product.",
+        "instantFeedbackRetry": "For 18×4: double 18=36, double 36=72. Compare with options.",
+        "reviewPrompt": "Spot three: 11×4, 16×8, 14×4.",
+        "xpReward": 14,
+        "badgeFocus": "Doubling Detective",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_F_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "F",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "verify ×4 and ×8",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "14 × 8 = ?",
+            "options": ["104", "108", "112", "116"],
+            "correctIndex": 2,
+            "expectedAnswer": "112",
+            "hint": "Double 14=28, double 28=56, double 56=112.",
+            "solution": "Double 14=28, 28→56, 56→112. Answer: 112."
+          },
+          {
+            "questionId": "VM_G4_L3_F_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "F",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "verify ×4 and ×8",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "18 × 4 = ?",
+            "options": ["64", "68", "72", "76"],
+            "correctIndex": 2,
+            "expectedAnswer": "72",
+            "hint": "Double 18=36, double 36=72.",
+            "solution": "Double 18=36, double 36=72. Answer: 72."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Fill-step: ×8 chain",
+        "missionStepTitle": "Exercise G: Step-by-step ×8",
+        "coachHook": "Let's slow down and write every doubling step. You will see exactly how the chain builds from start to finish!",
+        "boardDemo": "13×8: Step 1: 13×2=26. Step 2: 26×2=52. Step 3: 52×2=104. Done.",
+        "readAloudPrompt": "13 × 8 = ?",
+        "tryPrompt": "Fill each step: 16 × 8 = ?",
+        "masteryCheck": "Write all three doubling steps for 19 × 8.",
+        "instantFeedbackWin": "Perfect chain! Three careful doubles and you nailed it.",
+        "instantFeedbackRetry": "For 16×8: 16→32→64→128. Check each step.",
+        "reviewPrompt": "Write full chain for 17 × 8.",
+        "xpReward": 14,
+        "badgeFocus": "Chain Writer",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_G_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "G",
+            "subtopic": "Fill-step: ×8 chain",
+            "skill": "fill-step multiply by 8",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 13 × 8 using three doublings.",
+            "steps": [
+              {"label": "Step 1 — double 13: 13 × 2 = ?", "answer": "26", "hint": "13 + 13 = 26"},
+              {"label": "Step 2 — double again: 26 × 2 = ?", "answer": "52", "hint": "26 + 26 = 52"},
+              {"label": "Step 3 — double once more: 52 × 2 = ?", "answer": "104", "hint": "52 + 52 = 104"}
+            ],
+            "expectedAnswer": "104",
+            "hint": "13→26→52→104. Three doublings = ×8.",
+            "solution": "13×2=26, 26×2=52, 52×2=104. So 13×8=104."
+          },
+          {
+            "questionId": "VM_G4_L3_G_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "G",
+            "subtopic": "Fill-step: ×8 chain",
+            "skill": "fill-step multiply by 8",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 16 × 8 using three doublings.",
+            "steps": [
+              {"label": "Step 1: 16 × 2 = ?", "answer": "32", "hint": "16 + 16"},
+              {"label": "Step 2: 32 × 2 = ?", "answer": "64", "hint": "32 + 32"},
+              {"label": "Step 3: 64 × 2 = ?", "answer": "128", "hint": "64 + 64"}
+            ],
+            "expectedAnswer": "128",
+            "hint": "16→32→64→128.",
+            "solution": "16×2=32, 32×2=64, 64×2=128. So 16×8=128."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Mixed doubling and halving",
+        "missionStepTitle": "Exercise H: Mixed drill",
+        "coachHook": "Mix it up! Some problems need doubling, some need halving, some need both. Your brain is flexible — let's prove it!",
+        "boardDemo": "Ravi has 24 mangoes. He halves them, then doubles the result. How many? Half 24=12, double 12=24. Back to 24!",
+        "readAloudPrompt": "Half of 52, then double it: what do you get?",
+        "tryPrompt": "32 × 4 = ? (use double-double)",
+        "masteryCheck": "Half of 88, then × 8 = ?",
+        "instantFeedbackWin": "Brilliant mixed thinking! Doubling and halving — you own both.",
+        "instantFeedbackRetry": "Half of 88=44. Then 44×8: 44→88→176→352.",
+        "reviewPrompt": "Mixed: 19×4, half of 64, 14×8.",
+        "xpReward": 16,
+        "badgeFocus": "Double-Half Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_H_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "H",
+            "subtopic": "Mixed doubling and halving",
+            "skill": "mixed doubling and halving",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "32 × 4 = ?",
+            "options": ["116", "120", "124", "128"],
+            "correctIndex": 3,
+            "expectedAnswer": "128",
+            "hint": "Double 32=64. Double 64=128.",
+            "solution": "Double 32=64, double 64=128. Answer: 128."
+          },
+          {
+            "questionId": "VM_G4_L3_H_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "H",
+            "subtopic": "Mixed doubling and halving",
+            "skill": "mixed doubling and halving",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Half of 96 = ?",
+            "expectedAnswer": "48",
+            "hint": "Half of 90=45, half of 6=3. Add: 48.",
+            "solution": "Half of 90=45, half of 6=3. Answer: 48."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: multiply by 16",
+        "missionStepTitle": "Exercise I: ×16 challenge",
+        "coachHook": "Boss level — ×16 is just one more double after ×8! Four doublings and you are a multiplication superstar!",
+        "boardDemo": "18×16: 18→36→72→144→288. Four doublings. Answer: 288.",
+        "readAloudPrompt": "18 × 16 = ?",
+        "tryPrompt": "11 × 16 = ?",
+        "masteryCheck": "12 × 16 = ?",
+        "instantFeedbackWin": "Four doublings! You just multiplied by 16 without any pain!",
+        "instantFeedbackRetry": "For 11×16: 11→22→44→88→176. Four steps.",
+        "reviewPrompt": "Challenge yourself: 13 × 16 and 15 × 16.",
+        "xpReward": 18,
+        "badgeFocus": "×16 Legend",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L3_I_Q1",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: multiply by 16",
+            "skill": "multiply by 16",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "18 × 16 = ?",
+            "options": ["272", "280", "288", "296"],
+            "correctIndex": 2,
+            "expectedAnswer": "288",
+            "hint": "Double 18=36, 36→72, 72→144, 144→288.",
+            "solution": "18→36→72→144→288. Four doublings = ×16. Answer: 288."
+          },
+          {
+            "questionId": "VM_G4_L3_I_Q2",
+            "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: multiply by 16",
+            "skill": "multiply by 16",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "12 × 16 = ?",
+            "expectedAnswer": "192",
+            "hint": "Double 12=24, 24→48, 48→96, 96→192.",
+            "solution": "12→24→48→96→192. Four doublings. Answer: 192."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {
+      "stepId": "VM_G4_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "Doubling 1-digit numbers",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Doubling Chain", "asset": "doubling_chain.svg", "caption": "Each arrow doubles the number — follow the chain."},
+      "teacherLine": "Doubling is the key to fast multiplication. Let's lock in every single-digit double until it is instant!",
+      "boardAction": "Display doubling_chain.svg. Show 1→2, 2→4, 3→6 chain with arrows.",
+      "checkpointPrompt": "Double 6 = ?",
+      "microPractice": "Quick fire doubles: 3, 7, 5, 8, 4."
+    },
+    {
+      "stepId": "VM_G4_L3_B",
+      "exerciseGroup": "B",
+      "subtopic": "Doubling 2-digit numbers",
+      "boardMode": "steps",
+      "teacherLine": "Split the 2-digit number into tens and units. Double each part separately. Then add them back together!",
+      "boardAction": "Show double 34: split 30 and 4, double each → 60 and 8, combine → 68.",
+      "checkpointPrompt": "Double 56 = ?",
+      "microPractice": "Double these: 23, 38, 45."
+    },
+    {
+      "stepId": "VM_G4_L3_C",
+      "exerciseGroup": "C",
+      "subtopic": "Halving even numbers",
+      "boardMode": "steps",
+      "teacherLine": "Halving is just doubling in reverse! Split, halve each part, then combine. Watch how smooth this is!",
+      "boardAction": "Show half of 84: split 80 and 4, halve → 40 and 2, combine → 42.",
+      "checkpointPrompt": "Half of 76 = ?",
+      "microPractice": "Halve these: 52, 88, 46."
+    },
+    {
+      "stepId": "VM_G4_L3_D",
+      "exerciseGroup": "D",
+      "subtopic": "Multiply by 4 — double-double",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Double-Double Chain", "asset": "doubling_chain.svg", "caption": "×4 = double, then double again."},
+      "teacherLine": "Multiplying by 4 is just doubling twice! No separate times table for 4 — ever again!",
+      "boardAction": "Show chain: 23 → double → 46 → double → 92. Label ×2 each arrow. Final answer boxed.",
+      "checkpointPrompt": "25 × 4 = ?",
+      "microPractice": "Use double-double: 12×4, 21×4, 13×4."
+    },
+    {
+      "stepId": "VM_G4_L3_E",
+      "exerciseGroup": "E",
+      "subtopic": "Multiply by 8 — triple double",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Triple Double Chain", "asset": "doubling_chain.svg", "caption": "×8 = three doublings in a row."},
+      "teacherLine": "Add one more double to the ×4 chain and you have ×8! That is Anurupyena — proportional thinking!",
+      "boardAction": "Extend chain: 15 → 30 → 60 → 120. Three ×2 arrows. Answer 120 boxed.",
+      "checkpointPrompt": "11 × 8 = ?",
+      "microPractice": "Use triple double: 13×8, 16×8, 10×8."
+    },
+    {
+      "stepId": "VM_G4_L3_F",
+      "exerciseGroup": "F",
+      "subtopic": "Spot the product — MCQ",
+      "boardMode": "steps",
+      "teacherLine": "Detective mode — use the chain to identify the correct answer among the four choices!",
+      "boardAction": "Show 14×8 chain: 14→28→56→112. Compare with four options and circle 112.",
+      "checkpointPrompt": "13 × 8 = ?",
+      "microPractice": "Spot three: 11×4, 16×8, 14×4."
+    },
+    {
+      "stepId": "VM_G4_L3_G",
+      "exerciseGroup": "G",
+      "subtopic": "Fill-step: ×8 chain",
+      "boardMode": "steps",
+      "teacherLine": "Let's write every step of the ×8 chain carefully. Three boxes, three doublings — fill them in and you have your answer!",
+      "boardAction": "Show three empty boxes with ×2 arrows between them: ?→?→?. Fill in for 13: 26→52→104.",
+      "checkpointPrompt": "Write all three doubling steps for 19 × 8.",
+      "microPractice": "Write full chain for 17 × 8."
+    },
+    {
+      "stepId": "VM_G4_L3_H",
+      "exerciseGroup": "H",
+      "subtopic": "Mixed doubling and halving",
+      "boardMode": "steps",
+      "teacherLine": "Mixed drill! Pick the right tool — chain for ×4 or ×8, split for halving. Let's mix it up!",
+      "boardAction": "Show mixed board: half of 52, then 32×4, then 14×8 each with their method.",
+      "checkpointPrompt": "Half of 88, then × 8 = ?",
+      "microPractice": "Mixed: 19×4, half of 64, 14×8."
+    },
+    {
+      "stepId": "VM_G4_L3_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge: multiply by 16",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "×16 Four-Step Chain", "asset": "doubling_chain.svg", "caption": "×16 = four doublings in a row."},
+      "teacherLine": "Boss level — ×16 is four doublings! One more step beyond ×8 and you have unlocked a whole new power!",
+      "boardAction": "Show four-step chain: 18→36→72→144→288. Four ×2 arrows. Answer 288 in a star.",
+      "checkpointPrompt": "12 × 16 = ?",
+      "microPractice": "Challenge: 13 × 16 and 15 × 16."
+    }
+  ],
+  "screenplay": [
+    {
+      "beatId": "VM_G4_L3_A_INTRO",
+      "stepId": "VM_G4_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "Doubling 1-digit numbers",
+      "sequence": 301,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "Doubling is the secret superpower behind multiplying by 4, 8, and 16! Let's start with the basics.",
+      "boardAction": "Show doubling_chain.svg with simple 1-digit chain.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Think of doubling as adding the number to itself.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G4_L3_D_EXPLAIN",
+      "stepId": "VM_G4_L3_D",
+      "exerciseGroup": "D",
+      "subtopic": "Multiply by 4 — double-double",
+      "sequence": 401,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "Here is the secret — ×4 is just double, then double again! Watch: 23 → 46 → 92. That is 23 × 4!",
+      "boardAction": "Animate chain: 23 →(×2)→ 46 →(×2)→ 92. Box the answer.",
+      "checkpointPrompt": "25 × 4 = ?",
+      "pauseType": "student_input",
+      "holdSec": 3.0,
+      "expectedStudentResponse": "100",
+      "fallbackHint": "Double 25=50, double 50=100.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    }
+  ]
+}

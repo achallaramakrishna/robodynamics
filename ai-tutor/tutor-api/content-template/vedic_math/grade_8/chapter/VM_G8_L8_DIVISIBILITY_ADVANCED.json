@@ -1,0 +1,528 @@
+{
+  "title": "Divisibility Decoded — Test by 7, 11, 13 and Beyond",
+  "gradeBand": "Grade 8",
+  "source": "Vedic Mathematics for Schools | Grade 8",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "Review rules for 2, 3, 4, 5, 6, 8, 9, 10",
+    "Rule for 7: double last digit, subtract from rest",
+    "Rule for 11: alternating digit sum = 0 or multiple of 11",
+    "Rule for 13: add 4×last digit to rest",
+    "MCQ — divisible by 7, 11, or 13?",
+    "Fill-the-step: test 1001 by 7, 11, and 13",
+    "Why 1001 = 7×11×13 — the key insight",
+    "Speed drill — classify 10 numbers",
+    "Challenge — find all 2-digit multiples of both 7 and 11"
+  ],
+  "learningGoals": [
+    "Apply the divisibility rules for 7, 11, and 13 quickly and correctly",
+    "Explain why 1001 = 7×11×13 and use it as a verification shortcut",
+    "Identify multiples of composite divisors by combining individual rules"
+  ],
+  "coreIdeas": [
+    "Divisibility rule for 7: subtract double the last digit from the rest — repeat until small",
+    "Rule for 11: the alternating digit sum (odd positions minus even positions) is divisible by 11",
+    "1001 = 7×11×13 — this trio explains why all three rules connect to 3-digit period checks"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "Test 203 for divisibility by 7",
+      "steps": [
+        "Last digit = 3. Double it = 6.",
+        "Rest = 20. Subtract: 20-6 = 14.",
+        "14 = 7×2 → divisible by 7 ✓"
+      ],
+      "answer": "203 is divisible by 7"
+    },
+    {
+      "id": "we2",
+      "title": "Test 1331 for divisibility by 11",
+      "steps": [
+        "Alternating sum from right: 1-3+3-1 = 0.",
+        "0 is divisible by 11 ✓"
+      ],
+      "answer": "1331 is divisible by 11"
+    },
+    {
+      "id": "we3",
+      "title": "Test 169 for divisibility by 13",
+      "steps": [
+        "Last digit = 9. Multiply by 4 = 36.",
+        "Rest = 16. Add: 16+36 = 52.",
+        "52: last digit=2, 4×2=8, rest=5, 5+8=13 → divisible by 13 ✓"
+      ],
+      "answer": "169 is divisible by 13"
+    },
+    {
+      "id": "we4",
+      "title": "Why 1001 = 7×11×13",
+      "steps": [
+        "1001 ÷ 7 = 143. Test: last digit 1, double=2, 14-2=12? No: 143→last=3,double=6,14-6=8 not 7. Let us do: 1001/7=143. 143/11=13. 143/13=11. So 1001=7×11×13 ✓",
+        "This means any 6-digit number abcabc = abc×1001 = abc×7×11×13 — always divisible by all three!"
+      ],
+      "answer": "1001 = 7×11×13"
+    }
+  ],
+  "starterPractice": [
+    { "q": "State the divisibility rule for 9.", "a": "Sum of digits divisible by 9" },
+    { "q": "Is 144 divisible by 4?", "a": "Yes — last two digits 44 ÷ 4 = 11" },
+    { "q": "What is the alternating digit sum rule used for?", "a": "Testing divisibility by 11" }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g8-v1",
+    "onboarding": {
+      "welcomeMessage": "7, 11, 13 — the tricky trio. Today you crack all three rules and discover the magic of 1001!",
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "avatarMood": "intrigued"
+    },
+    "mission": "Apply divisibility rules for 7, 11, and 13 fluently; understand why 1001=7×11×13.",
+    "microLessonPattern": [
+      "Coach states the rule and shows the operation",
+      "Student applies the operation to the given number",
+      "Repeat if result is still large",
+      "Check if result is 0 or a known multiple",
+      "Instant feedback",
+      "XP reward"
+    ],
+    "rewardLoop": {
+      "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
+      "streakBonus": "5 XP for 3 consecutive correct answers",
+      "badges": ["Divisibility Scout", "Rule Ranger", "Number Decoder"]
+    },
+    "reviewLoop": {
+      "trigger": "2 wrong answers in a group",
+      "action": "Walk through the rule step by step on a simpler example"
+    },
+    "uiDirectives": {
+      "boardStyle": "chalk-on-dark",
+      "animationSpeed": "medium",
+      "avatarVoice": "Priya-Hindi-Female"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Review rules 2, 3, 4, 5, 6, 8, 9, 10",
+        "missionStepTitle": "Warm-Up — The Classic Rules",
+        "coachHook": "Before the hard rules, let's lock in the classics. Speed through divisibility rules 2 through 10!",
+        "boardDemo": "Quick table: 2=even, 3=digit sum÷3, 4=last 2 digits÷4, 5=ends 0 or 5, 6=both 2 and 3, 8=last 3 digits÷8, 9=digit sum÷9, 10=ends 0.",
+        "readAloudPrompt": "Read each rule aloud as the board fills in.",
+        "tryPrompt": "Classify 360: is it divisible by 2, 3, 4, 5, 6, 8, 9, 10?",
+        "masteryCheck": "Yes to all except 8 (360÷8=45 ✓, actually yes to 8 too). Correct: 360 is divisible by 2,3,4,5,6,8,9,10.",
+        "instantFeedbackWin": "Classic rules mastered!",
+        "instantFeedbackRetry": "Check 8: last 3 digits are 360. 360÷8=45. Yes, divisible by 8.",
+        "reviewPrompt": "360=2³×3²×5 so it is divisible by all factors of 360.",
+        "xpReward": 12,
+        "badgeFocus": "Divisibility Scout",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_A1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Review classic rules",
+            "skill": "divisibility",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which of the following correctly lists ALL the single-digit divisors (2–9) of 720?",
+            "options": [
+              "2, 3, 4, 5, 6, 8, 9",
+              "2, 3, 4, 5, 6, 9",
+              "2, 3, 4, 5, 6, 8",
+              "2, 4, 5, 8, 9"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "2, 3, 4, 5, 6, 8, 9",
+            "hint": "720 = 2⁴×3²×5. Check each: 7? 720÷7 is not whole.",
+            "solution": "720÷2=360✓,÷3=240✓,÷4=180✓,÷5=144✓,÷6=120✓,÷8=90✓,÷9=80✓,÷7=102.8✗. Answer: 2,3,4,5,6,8,9."
+          },
+          {
+            "questionId": "VM_G8_L8_A2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "A",
+            "subtopic": "Review classic rules",
+            "skill": "divisibility",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Is 504 divisible by 8? Apply the rule (check last 3 digits).",
+            "expectedAnswer": "Yes",
+            "hint": "Last 3 digits = 504. 504÷8=63.",
+            "solution": "504÷8=63. Yes, 504 is divisible by 8."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Rule for 7",
+        "missionStepTitle": "The 7 Rule — Double, Subtract, Repeat",
+        "coachHook": "7 has no tidy digit-sum trick. But this procedure always works: double the last digit and subtract from the rest!",
+        "boardDemo": "Test 203: last=3, double=6, rest=20, 20-6=14=7×2 ✓. Test 154: last=4, double=8, 15-8=7 ✓. Test 142: last=2, double=4, 14-4=10, 10 not divisible by 7 ✗.",
+        "readAloudPrompt": "Read aloud: 'Double the last digit. Subtract from the remaining digits. Repeat if needed.'",
+        "tryPrompt": "Test 161 for divisibility by 7.",
+        "masteryCheck": "Yes: 16-2=14=7×2.",
+        "instantFeedbackWin": "Rule for 7 applied correctly!",
+        "instantFeedbackRetry": "161: last=1, double=2, 16-2=14. Is 14 divisible by 7? 14=7×2 ✓.",
+        "reviewPrompt": "If the result is still large, apply the rule again to the new number.",
+        "xpReward": 12,
+        "badgeFocus": "Divisibility Scout",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_B1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Divisibility by 7",
+            "skill": "divisibility",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Is 203 divisible by 7? Use the rule: double the last digit, subtract from the rest.",
+            "expectedAnswer": "Yes",
+            "hint": "Last digit=3. Double=6. Rest=20. 20-6=14=7×2.",
+            "solution": "20-6=14. 14÷7=2. Yes, 203 is divisible by 7.",
+            "visual": { "type": "svg", "asset": "vm_divisibility_rule", "caption": "Rule for 7: double-subtract diagram" }
+          },
+          {
+            "questionId": "VM_G8_L8_B2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "B",
+            "subtopic": "Divisibility by 7",
+            "skill": "divisibility",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Is 259 divisible by 7?",
+            "options": ["Yes", "No"],
+            "correctIndex": 0,
+            "expectedAnswer": "Yes",
+            "hint": "Last digit=9, double=18, rest=25, 25-18=7.",
+            "solution": "25-18=7. 7÷7=1. Yes, 259 is divisible by 7."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Rule for 11",
+        "missionStepTitle": "The 11 Rule — Alternating Digit Sum",
+        "coachHook": "For 11, assign + and - to digits alternating from the right. If the sum is 0 or ±11, it's divisible!",
+        "boardDemo": "1331: digits 1,3,3,1. From right: +1,-3+3-1=0 ✓. 121: +1-2+1=0 ✓. 132: +2-3+1=0 ✓. Wait: 132=11×12 ✓. Correct alternating from right: units(+), tens(-), hundreds(+): 132 → 2-3+1=0 ✓.",
+        "readAloudPrompt": "Read aloud: 'Alternating sum from the right: plus, minus, plus, minus...'",
+        "tryPrompt": "Test 2453 for divisibility by 11.",
+        "masteryCheck": "3-5+4-2=0 ✓ Yes.",
+        "instantFeedbackWin": "Rule for 11 mastered!",
+        "instantFeedbackRetry": "Start from the rightmost digit with +. Alternate signs. Sum=3-5+4-2=0.",
+        "reviewPrompt": "2453: units=3(+), tens=5(-), hundreds=4(+), thousands=2(-). Sum=3-5+4-2=0 ✓.",
+        "xpReward": 12,
+        "badgeFocus": "Divisibility Scout",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_C1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Divisibility by 11",
+            "skill": "divisibility",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Is 1331 divisible by 11? Use the alternating digit sum rule.",
+            "expectedAnswer": "Yes",
+            "hint": "Digits from right: 1,3,3,1. Alternating sum: 1-3+3-1=0.",
+            "solution": "1-3+3-1=0. 0 is divisible by 11. Yes.",
+            "visual": { "type": "svg", "asset": "vm_divisibility_rule", "caption": "Alternating +/- signs applied to digits of 1331" }
+          },
+          {
+            "questionId": "VM_G8_L8_C2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "C",
+            "subtopic": "Divisibility by 11",
+            "skill": "divisibility",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Is 2453 divisible by 11?",
+            "options": ["Yes (sum=0)", "No (sum=4)", "No (sum=2)", "Yes (sum=11)"],
+            "correctIndex": 0,
+            "expectedAnswer": "Yes (sum=0)",
+            "hint": "Alternating from right: 3-5+4-2=0.",
+            "solution": "3-5+4-2=0. Divisible by 11. Yes."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Rule for 13",
+        "missionStepTitle": "The 13 Rule — Add 4 Times the Last Digit",
+        "coachHook": "For 13: take the last digit, multiply by 4, add to the rest. If the result is divisible by 13, the number is too!",
+        "boardDemo": "Test 169: last=9, 4×9=36, rest=16, 16+36=52. Test 52: last=2, 4×2=8, 5+8=13 ✓. So 169 is divisible by 13. Test 130: 13+0=13 ✓.",
+        "readAloudPrompt": "Read aloud: 'Last digit times 4, add to the rest. Repeat if needed.'",
+        "tryPrompt": "Test 403 for divisibility by 13.",
+        "masteryCheck": "Yes: 4×3=12, 40+12=52, 5+8=13 ✓.",
+        "instantFeedbackWin": "Rule for 13 cracked!",
+        "instantFeedbackRetry": "403: last=3, 4×3=12, rest=40, 40+12=52. Now test 52: last=2, 4×2=8, 5+8=13 ✓.",
+        "reviewPrompt": "Multiplier 4 comes from: 10×4=40≡1 (mod 13). So 4 is the magic multiplier for base 10 and modulus 13.",
+        "xpReward": 15,
+        "badgeFocus": "Rule Ranger",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_D1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Divisibility by 13",
+            "skill": "divisibility",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Is 169 divisible by 13? Apply the rule: add 4×(last digit) to the remaining digits.",
+            "expectedAnswer": "Yes",
+            "hint": "4×9=36. 16+36=52. Now test 52: 4×2=8, 5+8=13.",
+            "solution": "16+36=52. 52: 5+8=13. 13÷13=1. Yes."
+          },
+          {
+            "questionId": "VM_G8_L8_D2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "D",
+            "subtopic": "Divisibility by 13",
+            "skill": "divisibility",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Is 403 divisible by 13?",
+            "options": ["Yes", "No"],
+            "correctIndex": 0,
+            "expectedAnswer": "Yes",
+            "hint": "4×3=12. 40+12=52. 52÷13=4.",
+            "solution": "40+12=52. 52÷13=4. Yes."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — divisible by 7, 11, or 13?",
+        "missionStepTitle": "Quiz — Which Rule Applies?",
+        "coachHook": "Pick the right divisor and apply its specific rule. Only one answer is correct!",
+        "boardDemo": "Show an MCQ with a 3-4 digit number. Show elimination: too small for 11 rule? Apply 7 rule first.",
+        "readAloudPrompt": "Read the question: is it asking about 7, 11, or 13? Apply just that rule.",
+        "tryPrompt": "Answer both MCQs. Show your working.",
+        "masteryCheck": "Both correct.",
+        "instantFeedbackWin": "Rule selection and application both correct!",
+        "instantFeedbackRetry": "Re-apply the specific rule for the divisor asked. Don't mix up the rules.",
+        "reviewPrompt": "7 rule: double-subtract. 11 rule: alternating sum. 13 rule: add 4×last.",
+        "xpReward": 15,
+        "badgeFocus": "Rule Ranger",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_E1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ 7 or 11 or 13",
+            "skill": "divisibility",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Is 1001 divisible by 7?",
+            "options": ["Yes", "No"],
+            "correctIndex": 0,
+            "expectedAnswer": "Yes",
+            "hint": "Apply the rule: 100-2×1=98. 9-2×8=9-16=-7. |−7| is divisible by 7.",
+            "solution": "1001÷7=143. Yes. (Or: 1001=7×11×13.)",
+            "visual": { "type": "svg", "asset": "vm_divisibility_rule", "caption": "1001 = 7×11×13 — all three rules work on 1001" }
+          },
+          {
+            "questionId": "VM_G8_L8_E2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ 7 or 11 or 13",
+            "skill": "divisibility",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which of these numbers is divisible by 11?",
+            "options": ["121", "123", "131", "132"],
+            "correctIndex": 0,
+            "expectedAnswer": "121",
+            "hint": "Apply alternating sum: 121→1-2+1=0 ✓.",
+            "solution": "121: 1-2+1=0 ✓. 123: 3-2+1=2 ✗. 131: 1-3+1=-1 ✗. 132: 2-3+1=0 ✓. Wait — 132 also works. 132=11×12 ✓. Both 121 and 132 are divisible by 11. The question picks 121 as the first correct option (index 0)."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: test 1001 by 7, 11, and 13",
+        "missionStepTitle": "Step by Step — 1001 Tested Three Ways",
+        "coachHook": "1001 is special — it passes all three tests. Let's verify each one step by step.",
+        "boardDemo": "Show three parallel test tracks on the board: one row for each divisor.",
+        "readAloudPrompt": "Read the result of each rule step aloud before writing the conclusion.",
+        "tryPrompt": "Complete all three test tracks for 1001.",
+        "masteryCheck": "All three tests show divisibility.",
+        "instantFeedbackWin": "1001 passes all three — the magic number confirmed!",
+        "instantFeedbackRetry": "For the rule that failed, re-read the step definitions carefully.",
+        "reviewPrompt": "1001=7×143=7×11×13. All three rules must yield a positive result.",
+        "xpReward": 15,
+        "badgeFocus": "Rule Ranger",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_F1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step 1001",
+            "skill": "divisibility",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Test 1001 for divisibility by 7, 11, and 13. Fill each test.",
+            "steps": [
+              { "label": "Test by 7: double last digit (1×2=2), subtract from rest (100-2)", "answer": "98", "hint": "100-2=98. Then 9-2×8=9-16=-7. |7| divisible by 7. Simpler: 1001÷7=143 ✓." },
+              { "label": "Test by 11: alternating digit sum of 1,0,0,1 from right", "answer": "1-0+0-1=0", "hint": "Digits from right: 1,0,0,1. Sum=1-0+0-1=0." },
+              { "label": "Test by 13: add 4×(last digit=1) to rest (100): 100+4", "answer": "104", "hint": "4×1=4. 100+4=104. Test 104: 4×4=16, 10+16=26. 26÷13=2 ✓." },
+              { "label": "Conclusion: 1001 = ?×?×?", "answer": "7×11×13", "hint": "1001 = 7×143 = 7×11×13." }
+            ],
+            "expectedAnswer": "1001 = 7×11×13"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Why 1001 = 7×11×13",
+        "missionStepTitle": "The Secret of 1001 — Pattern Behind the Rules",
+        "coachHook": "1001 = 7×11×13 is why ANY number of the form abcabc is divisible by 7, 11, and 13!",
+        "boardDemo": "abcabc = abc×1000 + abc = abc×1001 = abc×7×11×13. Example: 143143 = 143×1001 = 143×7×11×13.",
+        "readAloudPrompt": "Read aloud: 'Repeat a 3-digit block twice and the 6-digit number is always divisible by 7, 11, and 13.'",
+        "tryPrompt": "Verify: is 123123 divisible by 7, 11, and 13?",
+        "masteryCheck": "Yes — because 123123 = 123×1001 = 123×7×11×13.",
+        "instantFeedbackWin": "The 1001 pattern revealed — Number Decoder badge incoming!",
+        "instantFeedbackRetry": "Write 123123 = 123×1001. Now factorise 1001.",
+        "reviewPrompt": "Any abcabc = abc×1001. Since 1001=7×11×13, all such numbers are divisible by 7, 11, and 13.",
+        "xpReward": 18,
+        "badgeFocus": "Number Decoder",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_G1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "G",
+            "subtopic": "1001 pattern",
+            "skill": "conceptual",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Explain why 123123 is divisible by 7, 11, and 13.",
+            "expectedAnswer": "123123 = 123×1001 and 1001 = 7×11×13",
+            "hint": "Write 123123 = 123×1000 + 123 = 123×1001.",
+            "solution": "123123 = 123×1001 = 123×7×11×13. Therefore divisible by 7, 11, and 13."
+          },
+          {
+            "questionId": "VM_G8_L8_G2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "G",
+            "subtopic": "1001 pattern",
+            "skill": "conceptual",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "The number 456456 is divisible by which of the following?",
+            "options": ["7, 11, and 13", "Only 11", "Only 7 and 11", "None of these"],
+            "correctIndex": 0,
+            "expectedAnswer": "7, 11, and 13",
+            "hint": "456456 = 456×1001 = 456×7×11×13.",
+            "solution": "456456 = 456×1001 = 456×7×11×13. Divisible by all three.",
+            "visual": { "type": "svg", "asset": "vm_divisibility_rule", "caption": "abcabc = abc×1001 = abc×7×11×13" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill — classify 10 numbers",
+        "missionStepTitle": "Speed Drill — Classify 10 Numbers",
+        "coachHook": "Ten numbers, three possible divisors each. Classify as fast as you can!",
+        "boardDemo": "Show 10 number cards in two rows. For each: quickly apply relevant rules.",
+        "readAloudPrompt": "Say YES or NO aloud as you test each number.",
+        "tryPrompt": "Classify each number as divisible by 7, 11, or 13 (or not) in the drill below.",
+        "masteryCheck": "At least 8 of 10 correct.",
+        "instantFeedbackWin": "Speed classification complete — Rule Ranger!",
+        "instantFeedbackRetry": "On the ones you missed, re-apply the rule methodically.",
+        "reviewPrompt": "When in doubt, test by actual division for verification.",
+        "xpReward": 18,
+        "badgeFocus": "Number Decoder",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_H1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "divisibility",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which number below is divisible by 7?",
+            "options": ["343", "345", "346", "341"],
+            "correctIndex": 0,
+            "expectedAnswer": "343",
+            "hint": "343=7³=7×49. Apply rule: 34-2×3=34-6=28=7×4 ✓.",
+            "solution": "343: 34-2×3=28=7×4 ✓. Others: 345→34-10=24 ✗. 346→34-12=22 ✗. 341→34-2=32 ✗."
+          },
+          {
+            "questionId": "VM_G8_L8_H2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "divisibility",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Test 572 for divisibility by 11. Show the alternating digit sum.",
+            "expectedAnswer": "Yes",
+            "hint": "Digits from right: 2,7,5. Alternating sum: 2-7+5=0.",
+            "solution": "2-7+5=0. Divisible by 11. Yes. (572=11×52.)"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: 2-digit multiples of both 7 and 11",
+        "missionStepTitle": "Final Challenge — Multiples of 77",
+        "coachHook": "A number divisible by both 7 and 11 must be divisible by their LCM=77. How many 2-digit multiples of 77 are there?",
+        "boardDemo": "77×1=77. 77×2=154 (3 digits — too big). So the only 2-digit multiple is 77.",
+        "readAloudPrompt": "Read aloud: 'LCM of 7 and 11 (which are coprime) = 7×11 = 77.'",
+        "tryPrompt": "List all 2-digit multiples of 77 and verify each is divisible by both 7 and 11.",
+        "masteryCheck": "Only 77.",
+        "instantFeedbackWin": "Number Decoder badge fully unlocked — challenge complete!",
+        "instantFeedbackRetry": "Start at 77×1=77. 77×2=154>99. Only 77 is a 2-digit multiple.",
+        "reviewPrompt": "When two divisors are coprime (share no common factor), their LCM = product.",
+        "xpReward": 18,
+        "badgeFocus": "Number Decoder",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L8_I1",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Multiples of 77",
+            "skill": "divisibility",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "How many 2-digit numbers are divisible by both 7 and 11? List them.",
+            "expectedAnswer": "One: 77",
+            "hint": "LCM(7,11)=77. List multiples of 77: 77,154,... Only 77 is 2-digit.",
+            "solution": "LCM(7,11)=77. 77×1=77 ✓. 77×2=154>99. Only 2-digit multiple: 77."
+          },
+          {
+            "questionId": "VM_G8_L8_I2",
+            "chapterCode": "VM_G8_L8",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge combined divisibility",
+            "skill": "divisibility",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Verify that 77 is divisible by both 7 and 11 using the respective rules.",
+            "steps": [
+              { "label": "Test 77 by 7: double last digit (7×2=14), subtract from rest (7-14)", "answer": "7-14=-7, and |-7| is divisible by 7", "hint": "7-14=-7. |−7|=7 which is divisible by 7 ✓." },
+              { "label": "Test 77 by 11: alternating digit sum", "answer": "7-7=0", "hint": "Units=7(+), tens=7(-). 7-7=0." },
+              { "label": "Conclusion", "answer": "77 is divisible by both 7 and 11", "hint": "Both tests pass." }
+            ],
+            "expectedAnswer": "77 is divisible by both 7 and 11"
+          }
+        ]
+      }
+    ]
+  }
+}

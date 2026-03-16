@@ -1,0 +1,22 @@
+{
+  "courseId": "neet_biology",
+  "courseTitle": "NEET Biology",
+  "gradeBand": "11-12",
+  "subject": "biology",
+  "curriculumContext": "India NEET preparation",
+  "standardPath": "ai-tutor/scripts/standards/neet_biology_standard.json",
+  "chapterDir": "ai-tutor/tutor-api/content-template/neet_biology/chapter",
+  "sourcePdfDir": "docs/neet_biology",
+  "artifactRoot": "ai-tutor/artifacts/pipeline",
+  "targetSessionMinutes": 35,
+  "difficultyModel": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "deliveryModes": [
+    "voice",
+    "board",
+    "text"
+  ]
+}

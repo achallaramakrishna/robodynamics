@@ -1,0 +1,656 @@
+{
+  "title": "HCF and LCM — Vedic Speed Method",
+  "gradeBand": "Grade 6",
+  "source": "Vedic Mathematics for Schools | Grade 6",
+  "estimatedMinutes": 22,
+  "subtopics": [
+    "HCF by Inspection for Numbers < 50",
+    "Prime Factorisation Speed Method",
+    "LCM Using Prime Factorisation",
+    "HCF × LCM = Product of Two Numbers",
+    "Quick HCF or LCM — MCQ Drill",
+    "Fill-the-Step: HCF and LCM of 48 and 72",
+    "Word Problems — Rows and Common Multiples",
+    "Speed Drill — 5 HCF/LCM Pairs",
+    "Challenge — HCF of Three Numbers"
+  ],
+  "learningGoals": [
+    "Find HCF of two numbers under 50 by inspection in under 10 seconds",
+    "Apply the relationship HCF × LCM = product of two numbers to solve problems",
+    "Use Vedic speed techniques to compute LCM via prime factorisation"
+  ],
+  "coreIdeas": [
+    "HCF is the greatest factor common to all given numbers; spot it by listing factors quickly",
+    "LCM is the smallest multiple shared by all given numbers; build it from highest prime powers",
+    "The identity a × b = HCF(a,b) × LCM(a,b) lets you find one if you know the other"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "HCF by Inspection",
+      "problem": "Find HCF(24, 36)",
+      "steps": [
+        "Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24",
+        "Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36",
+        "Common factors: 1, 2, 3, 4, 6, 12",
+        "Greatest common factor = 12"
+      ],
+      "answer": "HCF(24, 36) = 12"
+    },
+    {
+      "id": "we2",
+      "title": "LCM via Prime Factorisation",
+      "problem": "Find LCM(4, 6)",
+      "steps": [
+        "4 = 2²",
+        "6 = 2 × 3",
+        "Take highest powers: 2², 3",
+        "LCM = 4 × 3 = 12"
+      ],
+      "answer": "LCM(4, 6) = 12"
+    },
+    {
+      "id": "we3",
+      "title": "HCF and LCM Together",
+      "problem": "Find HCF and LCM of 48 and 72",
+      "steps": [
+        "48 = 2⁴ × 3",
+        "72 = 2³ × 3²",
+        "HCF = 2³ × 3 = 8 × 3 = 24",
+        "LCM = 2⁴ × 3² = 16 × 9 = 144",
+        "Check: 48 × 72 = 3456 = 24 × 144 ✓"
+      ],
+      "answer": "HCF = 24, LCM = 144"
+    },
+    {
+      "id": "we4",
+      "title": "HCF of Three Numbers",
+      "problem": "Find HCF(36, 48, 60)",
+      "steps": [
+        "36 = 2² × 3²",
+        "48 = 2⁴ × 3",
+        "60 = 2² × 3 × 5",
+        "Common prime factors with lowest powers: 2², 3",
+        "HCF = 4 × 3 = 12"
+      ],
+      "answer": "HCF(36, 48, 60) = 12"
+    }
+  ],
+  "starterPractice": [
+    {
+      "question": "What are all factors of 18?",
+      "answer": "1, 2, 3, 6, 9, 18"
+    },
+    {
+      "question": "What is HCF(12, 18)?",
+      "answer": "6"
+    },
+    {
+      "question": "What is LCM(3, 5)?",
+      "answer": "15"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g6-v1",
+    "onboarding": {
+      "avatarGreeting": "Hey Mathlete! Today we crack HCF and LCM the Vedic way — super fast, super clear. Ready to outsmart your calculator?",
+      "priorKnowledgeCheck": "Can you list all factors of 12? (Expected: 1, 2, 3, 4, 6, 12)"
+    },
+    "mission": {
+      "title": "Speed Factor Master",
+      "description": "Master HCF and LCM using Vedic inspection and prime-power techniques",
+      "totalXP": 110,
+      "badge": "Factor Flash Badge"
+    },
+    "microLessonPattern": [
+      "Coach introduces concept with a real-world hook",
+      "Board demo shows worked example step by step",
+      "Student tries a guided version with hints",
+      "Quick MCQ or fill-step reinforces the idea",
+      "Speed drill sharpens fluency",
+      "Challenge question stretches the best learners"
+    ],
+    "rewardLoop": {
+      "xpPerCorrect": 10,
+      "streakBonus": "3-correct streak unlocks a Factor Flash animation",
+      "badgeUnlock": "Complete all 9 groups to earn the Factor Flash Badge"
+    },
+    "reviewLoop": {
+      "triggerAfterMistakes": 2,
+      "reviewType": "Replay board demo for the relevant concept group"
+    },
+    "uiDirectives": {
+      "boardStyle": "grid with factor lists highlighted in yellow",
+      "avatarEmotion": "encouraging on correct, gently corrective on wrong",
+      "progressBar": "shows 9 groups, fills green as each is completed"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "HCF by Inspection for Numbers < 50",
+        "missionStepTitle": "Spot the Biggest Sharer",
+        "coachHook": "Look at 24 and 36 — they share factors. The biggest one they share is the HCF. Can you see it?",
+        "boardDemo": {
+          "title": "HCF(24, 36) by Inspection",
+          "steps": [
+            "Write factors of 24: 1, 2, 3, 4, 6, 8, 12, 24",
+            "Write factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36",
+            "Circle common factors: 1, 2, 3, 4, 6, 12",
+            "The greatest is 12 → HCF = 12"
+          ]
+        },
+        "readAloudPrompt": "HCF means the biggest number that divides all the given numbers exactly.",
+        "tryPrompt": "Now you try: find HCF(18, 30)",
+        "masteryCheck": "HCF(18, 30) = ?",
+        "instantFeedbackWin": "Superb! 6 is the biggest factor shared by 18 and 30!",
+        "instantFeedbackRetry": "List factors of 18 and 30 separately, then spot the common ones.",
+        "reviewPrompt": "Factors of 18: 1,2,3,6,9,18. Factors of 30: 1,2,3,5,6,10,15,30. Common: 1,2,3,6. Greatest = 6.",
+        "xpReward": 10,
+        "badgeFocus": "inspection-speed",
+        "exercises": [
+          {
+            "questionId": "L5_A_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "A",
+            "subtopic": "HCF by Inspection",
+            "skill": "find-hcf-inspection",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find HCF(18, 30) by listing factors.",
+            "expectedAnswer": "6",
+            "hint": "List all factors of 18 and 30, then find the largest common one.",
+            "solution": "Factors of 18: 1,2,3,6,9,18. Factors of 30: 1,2,3,5,6,10,15,30. Common: 1,2,3,6. HCF = 6."
+          },
+          {
+            "questionId": "L5_A_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "A",
+            "subtopic": "HCF by Inspection",
+            "skill": "find-hcf-inspection",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is HCF(16, 24)?",
+            "options": ["4", "6", "8", "12"],
+            "correctIndex": 2,
+            "expectedAnswer": "8",
+            "hint": "List factors of both numbers and find the largest common one.",
+            "solution": "Factors of 16: 1,2,4,8,16. Factors of 24: 1,2,3,4,6,8,12,24. Common: 1,2,4,8. HCF = 8."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Prime Factorisation Speed Method",
+        "missionStepTitle": "Prime Power Unlocked",
+        "coachHook": "Prime factorisation is the Vedic shortcut to cracking any HCF. Break each number into its prime building blocks!",
+        "boardDemo": {
+          "title": "Prime Factorisation of 36 and 48",
+          "steps": [
+            "36 ÷ 2 = 18 → 18 ÷ 2 = 9 → 9 ÷ 3 = 3 → 3 ÷ 3 = 1",
+            "36 = 2² × 3²",
+            "48 ÷ 2 = 24 → 24 ÷ 2 = 12 → 12 ÷ 2 = 6 → 6 ÷ 2 = 3 → 3 ÷ 3 = 1",
+            "48 = 2⁴ × 3",
+            "HCF: take lowest power of each common prime → 2² × 3 = 12"
+          ]
+        },
+        "readAloudPrompt": "Break each number into primes, then take the lowest power of each prime that appears in both.",
+        "tryPrompt": "Find the prime factorisation of 60.",
+        "masteryCheck": "60 written as a product of primes = ?",
+        "instantFeedbackWin": "Perfect! 60 = 2² × 3 × 5. You're a prime detective!",
+        "instantFeedbackRetry": "Start dividing 60 by 2 repeatedly, then try 3, then 5.",
+        "reviewPrompt": "60 ÷ 2 = 30 ÷ 2 = 15 ÷ 3 = 5. So 60 = 2² × 3 × 5.",
+        "xpReward": 10,
+        "badgeFocus": "prime-factorisation",
+        "exercises": [
+          {
+            "questionId": "L5_B_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "B",
+            "subtopic": "Prime Factorisation Speed Method",
+            "skill": "prime-factorisation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Write 60 as a product of prime factors.",
+            "expectedAnswer": "2² × 3 × 5",
+            "hint": "Divide by 2, then 3, then 5.",
+            "solution": "60 = 2 × 30 = 2 × 2 × 15 = 2² × 3 × 5"
+          },
+          {
+            "questionId": "L5_B_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "B",
+            "subtopic": "Prime Factorisation Speed Method",
+            "skill": "prime-factorisation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which is the correct prime factorisation of 72?",
+            "options": ["2³ × 3²", "2² × 3³", "2⁴ × 3", "2³ × 3"],
+            "correctIndex": 0,
+            "expectedAnswer": "2³ × 3²",
+            "hint": "72 ÷ 2 = 36 ÷ 2 = 18 ÷ 2 = 9 ÷ 3 = 3 ÷ 3 = 1",
+            "solution": "72 = 8 × 9 = 2³ × 3²"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "LCM Using Prime Factorisation",
+        "missionStepTitle": "Smallest Shared Multiple",
+        "coachHook": "LCM is like finding the smallest meeting point for two number trains on the track. Use highest prime powers!",
+        "boardDemo": {
+          "title": "LCM(12, 18)",
+          "steps": [
+            "12 = 2² × 3",
+            "18 = 2 × 3²",
+            "For LCM: take HIGHEST power of each prime",
+            "2² from 12, 3² from 18",
+            "LCM = 4 × 9 = 36"
+          ]
+        },
+        "readAloudPrompt": "LCM uses the highest power of every prime that appears in any of the numbers.",
+        "tryPrompt": "Find LCM(4, 6) using prime factorisation.",
+        "masteryCheck": "LCM(4, 6) = ?",
+        "instantFeedbackWin": "Brilliant! LCM(4,6) = 12. Both 4 and 6 divide into 12 evenly!",
+        "instantFeedbackRetry": "4 = 2², 6 = 2×3. Take highest powers: 2² and 3. Multiply them.",
+        "reviewPrompt": "4 = 2², 6 = 2 × 3. Highest powers: 2², 3¹. LCM = 4 × 3 = 12.",
+        "xpReward": 10,
+        "badgeFocus": "lcm-prime",
+        "exercises": [
+          {
+            "questionId": "L5_C_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "C",
+            "subtopic": "LCM Using Prime Factorisation",
+            "skill": "find-lcm-prime",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find LCM(4, 6) using prime factorisation.",
+            "expectedAnswer": "12",
+            "hint": "4 = 2², 6 = 2 × 3. Take highest powers of all primes.",
+            "solution": "4 = 2², 6 = 2 × 3. Highest powers: 2², 3. LCM = 4 × 3 = 12."
+          },
+          {
+            "questionId": "L5_C_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "C",
+            "subtopic": "LCM Using Prime Factorisation",
+            "skill": "find-lcm-prime",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Find LCM(8, 12).",
+            "options": ["24", "48", "96", "16"],
+            "correctIndex": 0,
+            "expectedAnswer": "24",
+            "hint": "8 = 2³, 12 = 2² × 3. Take highest powers.",
+            "solution": "8 = 2³, 12 = 2² × 3. LCM = 2³ × 3 = 8 × 3 = 24."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "HCF × LCM = Product of Two Numbers",
+        "missionStepTitle": "The Magic Identity",
+        "coachHook": "Here's a Vedic shortcut: HCF × LCM always equals a × b. Know one, find the other instantly!",
+        "boardDemo": {
+          "title": "Using a × b = HCF × LCM",
+          "steps": [
+            "a = 48, b = 72",
+            "a × b = 48 × 72 = 3456",
+            "HCF(48, 72) = 24",
+            "LCM = a × b ÷ HCF = 3456 ÷ 24 = 144",
+            "Check: 24 × 144 = 3456 ✓"
+          ]
+        },
+        "readAloudPrompt": "For any two numbers: HCF × LCM = first number × second number.",
+        "tryPrompt": "HCF of two numbers is 6 and their product is 216. Find their LCM.",
+        "masteryCheck": "LCM = product ÷ HCF = 216 ÷ 6 = ?",
+        "instantFeedbackWin": "Spot on! LCM = 36. The identity works like a charm!",
+        "instantFeedbackRetry": "Use the formula: LCM = product ÷ HCF = 216 ÷ 6.",
+        "reviewPrompt": "LCM = 216 ÷ 6 = 36.",
+        "xpReward": 12,
+        "badgeFocus": "identity-application",
+        "exercises": [
+          {
+            "questionId": "L5_D_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "D",
+            "subtopic": "HCF × LCM = Product",
+            "skill": "identity-hcf-lcm",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "The HCF of two numbers is 6 and their product is 216. Find their LCM.",
+            "expectedAnswer": "36",
+            "hint": "Use: LCM = (product of numbers) ÷ HCF",
+            "solution": "LCM = 216 ÷ 6 = 36."
+          },
+          {
+            "questionId": "L5_D_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "D",
+            "subtopic": "HCF × LCM = Product",
+            "skill": "identity-hcf-lcm",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Two numbers have HCF = 4 and LCM = 48. What is their product?",
+            "options": ["52", "192", "144", "96"],
+            "correctIndex": 1,
+            "expectedAnswer": "192",
+            "hint": "Product = HCF × LCM",
+            "solution": "Product = 4 × 48 = 192."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Quick HCF or LCM — MCQ Drill",
+        "missionStepTitle": "Speed Quiz Time!",
+        "coachHook": "No pencil needed — train your brain to see HCF and LCM at a glance. Go!",
+        "boardDemo": {
+          "title": "Mental HCF/LCM Tips",
+          "steps": [
+            "If one number divides the other, HCF = smaller number",
+            "Example: HCF(12, 36) = 12 (since 12 divides 36)",
+            "If numbers share no common factors, HCF = 1",
+            "LCM of co-prime numbers = their product"
+          ]
+        },
+        "readAloudPrompt": "If a divides b evenly, HCF(a,b) = a and LCM(a,b) = b.",
+        "tryPrompt": "What is HCF(12, 36) — can you see it without writing?",
+        "masteryCheck": "HCF(12, 36) = ?",
+        "instantFeedbackWin": "Yes! HCF = 12 because 12 divides 36 perfectly!",
+        "instantFeedbackRetry": "Does 12 go into 36? Yes! So 12 is already the HCF.",
+        "reviewPrompt": "36 ÷ 12 = 3 exactly, so 12 is a factor of 36, making HCF = 12.",
+        "xpReward": 12,
+        "badgeFocus": "mental-hcf-lcm",
+        "exercises": [
+          {
+            "questionId": "L5_E_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "E",
+            "subtopic": "Quick MCQ Drill",
+            "skill": "mental-hcf",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which pair has HCF = 15?",
+            "options": ["25 and 40", "30 and 45", "15 and 25", "20 and 35"],
+            "correctIndex": 1,
+            "expectedAnswer": "30 and 45",
+            "hint": "HCF(30, 45): 30 = 2×3×5, 45 = 3²×5. Common: 3×5 = 15.",
+            "solution": "HCF(30,45) = 15. Check: 30÷15=2, 45÷15=3. Both exact."
+          },
+          {
+            "questionId": "L5_E_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "E",
+            "subtopic": "Quick MCQ Drill",
+            "skill": "mental-lcm",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "LCM(5, 7) = ?",
+            "options": ["12", "35", "70", "25"],
+            "correctIndex": 1,
+            "expectedAnswer": "35",
+            "hint": "5 and 7 share no common factors (they are co-prime).",
+            "solution": "5 and 7 are co-prime, so LCM = 5 × 7 = 35."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-Step: HCF and LCM of 48 and 72",
+        "missionStepTitle": "Step-by-Step Proof",
+        "coachHook": "Let's prove HCF(48,72)=24 and LCM(48,72)=144 together, one step at a time!",
+        "boardDemo": {
+          "title": "HCF and LCM of 48, 72 — Full Working",
+          "steps": [
+            "48 = 2 × 24 = 2 × 2 × 12 = 2⁴ × 3",
+            "72 = 2 × 36 = 2 × 2 × 18 = 2³ × 3²",
+            "HCF: lowest powers → 2³ × 3¹ = 8 × 3 = 24",
+            "LCM: highest powers → 2⁴ × 3² = 16 × 9 = 144",
+            "Verify: 48 × 72 = 3456 = 24 × 144 ✓"
+          ]
+        },
+        "readAloudPrompt": "For HCF take lowest powers; for LCM take highest powers of all prime factors.",
+        "tryPrompt": "Fill in the blanks to find HCF and LCM of 48 and 72.",
+        "masteryCheck": "Complete the steps: 48 = 2⁴ × 3, 72 = 2³ × 3², HCF = ?, LCM = ?",
+        "instantFeedbackWin": "Excellent! HCF = 24 and LCM = 144. The identity holds: 48×72 = 24×144!",
+        "instantFeedbackRetry": "For HCF pick lowest powers of each prime; for LCM pick highest powers.",
+        "reviewPrompt": "HCF = 2³ × 3 = 24. LCM = 2⁴ × 3² = 144.",
+        "xpReward": 12,
+        "badgeFocus": "fill-step-accuracy",
+        "exercises": [
+          {
+            "questionId": "L5_F_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step",
+            "skill": "hcf-lcm-fill-step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Find HCF and LCM of 48 and 72 step by step.",
+            "steps": [
+              { "label": "Prime factorisation of 48", "answer": "2⁴ × 3", "hint": "48 = 2×24 = 2×2×12 = 2×2×2×6 = 2×2×2×2×3" },
+              { "label": "Prime factorisation of 72", "answer": "2³ × 3²", "hint": "72 = 2×36 = 2×2×18 = 2×2×2×9 = 2³×3²" },
+              { "label": "HCF (lowest powers)", "answer": "24", "hint": "Min power of 2 is 3, min power of 3 is 1: 2³×3 = 24" },
+              { "label": "LCM (highest powers)", "answer": "144", "hint": "Max power of 2 is 4, max power of 3 is 2: 2⁴×3² = 144" }
+            ],
+            "expectedAnswer": "HCF = 24, LCM = 144",
+            "visual": { "type": "svg", "asset": "vm_hcf_venn", "caption": "Venn diagram showing shared prime factors of 48 and 72" }
+          },
+          {
+            "questionId": "L5_F_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-Step",
+            "skill": "identity-verify",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Verify: does 48 × 72 = HCF(48,72) × LCM(48,72)?",
+            "expectedAnswer": "Yes, both equal 3456",
+            "hint": "48 × 72 = 3456. HCF × LCM = 24 × 144 = 3456.",
+            "solution": "48 × 72 = 3456 and 24 × 144 = 3456. Identity confirmed."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Word Problems — Rows and Common Multiples",
+        "missionStepTitle": "Real World HCF/LCM",
+        "coachHook": "Vedic teachers used HCF and LCM for everyday arrangements — tiling floors, arranging armies in rows. Let's try!",
+        "boardDemo": {
+          "title": "Word Problem: Arranging Items in Equal Rows",
+          "steps": [
+            "Problem: 36 apples and 48 oranges arranged in equal rows, no fruit mixed. Max row size?",
+            "Answer = HCF(36, 48)",
+            "36 = 2² × 3², 48 = 2⁴ × 3",
+            "HCF = 2² × 3 = 12",
+            "So maximum 12 items per row"
+          ]
+        },
+        "readAloudPrompt": "When we need the largest group size with no remainder, we use HCF. For smallest shared repeat, we use LCM.",
+        "tryPrompt": "Bells ring every 8 minutes and 12 minutes. When do they next ring together?",
+        "masteryCheck": "LCM(8, 12) = ?",
+        "instantFeedbackWin": "Correct! They ring together after 24 minutes. LCM = 24!",
+        "instantFeedbackRetry": "Find LCM(8,12): 8=2³, 12=2²×3. LCM = 2³×3 = 24.",
+        "reviewPrompt": "LCM(8, 12) = 24. Bells ring together every 24 minutes.",
+        "xpReward": 12,
+        "badgeFocus": "word-problem-hcf-lcm",
+        "exercises": [
+          {
+            "questionId": "L5_G_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "G",
+            "subtopic": "Word Problems",
+            "skill": "apply-lcm-word",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Two bells ring every 8 minutes and 12 minutes. After how many minutes will they ring together?",
+            "expectedAnswer": "24",
+            "hint": "Find LCM(8, 12).",
+            "solution": "LCM(8,12): 8=2³, 12=2²×3. LCM=2³×3=24 minutes.",
+            "visual": { "type": "svg", "asset": "vm_hcf_venn", "caption": "Number line showing multiples of 8 and 12 meeting at 24" }
+          },
+          {
+            "questionId": "L5_G_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "G",
+            "subtopic": "Word Problems",
+            "skill": "apply-hcf-word",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "36 mangoes and 48 bananas are to be packed in equal boxes with no fruit mixed. What is the maximum number of fruits per box?",
+            "expectedAnswer": "12",
+            "hint": "Find HCF(36, 48).",
+            "solution": "HCF(36,48): 36=2²×3², 48=2⁴×3. HCF=2²×3=12."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed Drill — 5 HCF/LCM Pairs",
+        "missionStepTitle": "Lightning Round",
+        "coachHook": "You've got the tools. Now build the speed! Solve all 5 pairs as fast as you can!",
+        "boardDemo": {
+          "title": "Speed Tips",
+          "steps": [
+            "If one number is a multiple of the other: HCF = smaller, LCM = larger",
+            "Co-prime numbers: HCF = 1, LCM = product",
+            "Always cross-check: HCF × LCM = product of numbers"
+          ]
+        },
+        "readAloudPrompt": "Speed and accuracy together — that is the Vedic way!",
+        "tryPrompt": "Ready? Solve: HCF(20, 30), LCM(6, 10), HCF(15, 25), LCM(9, 12), HCF(42, 56)",
+        "masteryCheck": "All 5 answers correct?",
+        "instantFeedbackWin": "Lightning fast! You are a Vedic Speed Factor Master!",
+        "instantFeedbackRetry": "Take each pair one at a time. Use prime factorisation if needed.",
+        "reviewPrompt": "Answers: HCF(20,30)=10, LCM(6,10)=30, HCF(15,25)=5, LCM(9,12)=36, HCF(42,56)=14",
+        "xpReward": 15,
+        "badgeFocus": "speed-drill",
+        "exercises": [
+          {
+            "questionId": "L5_H_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-hcf-lcm",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed drill: What is HCF(42, 56)?",
+            "options": ["7", "14", "21", "28"],
+            "correctIndex": 1,
+            "expectedAnswer": "14",
+            "hint": "42 = 2×3×7, 56 = 2³×7. Common prime factors?",
+            "solution": "42 = 2×3×7, 56 = 2³×7. HCF = 2×7 = 14."
+          },
+          {
+            "questionId": "L5_H_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "H",
+            "subtopic": "Speed Drill",
+            "skill": "speed-hcf-lcm",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find LCM(9, 12) using prime factorisation.",
+            "expectedAnswer": "36",
+            "hint": "9 = 3², 12 = 2² × 3. Take highest powers.",
+            "solution": "9 = 3², 12 = 2² × 3. LCM = 2² × 3² = 4 × 9 = 36."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge — HCF of Three Numbers",
+        "missionStepTitle": "Triple Threat Challenge",
+        "coachHook": "Think you can handle HCF of THREE numbers at once? The Vedic method scales up perfectly!",
+        "boardDemo": {
+          "title": "HCF(36, 48, 60)",
+          "steps": [
+            "36 = 2² × 3²",
+            "48 = 2⁴ × 3",
+            "60 = 2² × 3 × 5",
+            "Common primes in ALL three: 2 and 3",
+            "Lowest power of 2: min(2,4,2) = 2 → 2²",
+            "Lowest power of 3: min(2,1,1) = 1 → 3¹",
+            "HCF = 2² × 3 = 4 × 3 = 12"
+          ]
+        },
+        "readAloudPrompt": "For HCF of three numbers, take primes common to ALL three and use the lowest power each time.",
+        "tryPrompt": "Find HCF(36, 48, 60) on your own now.",
+        "masteryCheck": "HCF(36, 48, 60) = ?",
+        "instantFeedbackWin": "Outstanding! HCF = 12. You've mastered the three-number challenge!",
+        "instantFeedbackRetry": "Find prime factorisations of all three, then take lowest powers of common primes only.",
+        "reviewPrompt": "36=2²×3², 48=2⁴×3, 60=2²×3×5. Common to all: 2 and 3. HCF=2²×3=12.",
+        "xpReward": 15,
+        "badgeFocus": "triple-hcf-challenge",
+        "exercises": [
+          {
+            "questionId": "L5_I_01",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "I",
+            "subtopic": "HCF of Three Numbers",
+            "skill": "hcf-three-numbers",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find HCF(36, 48, 60) using prime factorisation.",
+            "expectedAnswer": "12",
+            "hint": "Factorise all three, then take the lowest power of each prime common to all.",
+            "solution": "36=2²×3², 48=2⁴×3, 60=2²×3×5. Common primes: 2 and 3. HCF=2²×3=12.",
+            "visual": { "type": "svg", "asset": "vm_hcf_venn", "caption": "Three-circle Venn diagram for 36, 48, 60 showing common factor 12" }
+          },
+          {
+            "questionId": "L5_I_02",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "I",
+            "subtopic": "HCF of Three Numbers",
+            "skill": "lcm-three-numbers",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is LCM(4, 6, 9)?",
+            "options": ["18", "36", "72", "54"],
+            "correctIndex": 1,
+            "expectedAnswer": "36",
+            "hint": "4=2², 6=2×3, 9=3². Take highest powers: 2², 3².",
+            "solution": "4=2², 6=2×3, 9=3². Highest powers: 2², 3². LCM = 4×9 = 36."
+          },
+          {
+            "questionId": "L5_I_03",
+            "chapterCode": "VM_G6_L5",
+            "exerciseGroup": "I",
+            "subtopic": "HCF of Three Numbers",
+            "skill": "hcf-three-challenge",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Find HCF(24, 36, 48) step by step.",
+            "steps": [
+              { "label": "Prime factorisation of 24", "answer": "2³ × 3", "hint": "24 = 8 × 3" },
+              { "label": "Prime factorisation of 36", "answer": "2² × 3²", "hint": "36 = 4 × 9" },
+              { "label": "Prime factorisation of 48", "answer": "2⁴ × 3", "hint": "48 = 16 × 3" },
+              { "label": "HCF (lowest common powers)", "answer": "12", "hint": "Min power of 2 is 2, min power of 3 is 1: 2²×3=12" }
+            ],
+            "expectedAnswer": "12",
+            "solution": "24=2³×3, 36=2²×3², 48=2⁴×3. HCF=2²×3=12."
+          }
+        ]
+      }
+    ]
+  }
+}

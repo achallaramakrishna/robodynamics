@@ -1,0 +1,86 @@
+{
+  "_comment": "Adaptive teaching policy v1. Keys: chapter=...|exercise=...|confidence=...|error=...|speed=... Actions: reteach_simpler, hint_ladder_up, increase_challenge, steady_practice. support = observations backing this (min 5).",
+  "contexts": {
+
+    "global|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 20 },
+    "global|error=high|speed=steady": { "bestAction": "hint_ladder_up",    "support": 20 },
+    "global|error=high|speed=fast":   { "bestAction": "hint_ladder_up",    "support": 15 },
+    "global|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 15 },
+    "global|error=medium|speed=steady":{ "bestAction": "steady_practice",  "support": 15 },
+    "global|error=medium|speed=fast": { "bestAction": "increase_challenge","support": 15 },
+    "global|error=low|speed=slow":    { "bestAction": "steady_practice",   "support": 15 },
+    "global|error=low|speed=steady":  { "bestAction": "steady_practice",   "support": 15 },
+    "global|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 20 },
+    "global": { "bestAction": "steady_practice", "support": 10 },
+
+    "chapter=l1_completing_whole|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l1_completing_whole|error=high|speed=steady": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l1_completing_whole|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+    "chapter=l1_completing_whole|confidence=low":          { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l1_completing_whole|confidence=high":         { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l2_doubling_halving|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l2_doubling_halving|error=high|speed=steady": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l2_doubling_halving|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+    "chapter=l2_doubling_halving|confidence=low":          { "bestAction": "hint_ladder_up",    "support": 10 },
+
+    "chapter=l3_nikhilam_base|error=high|speed=slow":      { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l3_nikhilam_base|error=medium|speed=slow":    { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l3_nikhilam_base|error=low|speed=fast":       { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l4_multiplication_sutra|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l4_multiplication_sutra|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l4_multiplication_sutra|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l5_anurupyena|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l5_anurupyena|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l5_anurupyena|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l6_vertically_crosswise|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l6_vertically_crosswise|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l6_vertically_crosswise|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l7_division_flag|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l7_division_flag|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l7_division_flag|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+    "chapter=l7_division_flag|confidence=low":          { "bestAction": "reteach_simpler",   "support": 10 },
+
+    "chapter=l8_squares_near_base|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l8_squares_near_base|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l8_squares_near_base|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l9_square_easy|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l9_square_easy|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l9_square_easy|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l10_cuberoot_two_digit|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l10_cuberoot_two_digit|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l10_cuberoot_two_digit|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+    "chapter=l10_cuberoot_two_digit|confidence=low":          { "bestAction": "reteach_simpler",   "support": 10 },
+
+    "chapter=l11_vedic_fractions|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l11_vedic_fractions|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l11_vedic_fractions|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l12_addition_subtraction|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l12_addition_subtraction|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l12_addition_subtraction|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l13_special_products|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l13_special_products|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l13_special_products|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l14_factorisation|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l14_factorisation|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l14_factorisation|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l15_hcf_lcm|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l15_hcf_lcm|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l15_hcf_lcm|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+
+    "chapter=l16_cubes_intro|error=high|speed=slow":   { "bestAction": "reteach_simpler",   "support": 10 },
+    "chapter=l16_cubes_intro|error=medium|speed=slow": { "bestAction": "hint_ladder_up",    "support": 10 },
+    "chapter=l16_cubes_intro|error=low|speed=fast":    { "bestAction": "increase_challenge","support": 10 },
+    "chapter=l16_cubes_intro|confidence=low":          { "bestAction": "hint_ladder_up",    "support": 10 }
+  }
+}

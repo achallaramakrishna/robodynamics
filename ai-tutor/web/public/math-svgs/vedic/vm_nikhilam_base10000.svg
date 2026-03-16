@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230" width="380" height="230" font-family="Nunito,sans-serif">
+  <rect width="380" height="230" rx="14" fill="#f0fdf4"/>
+  <text x="190" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Nikhilam — Deficit from Base 10000</text>
+
+  <!-- BASE label -->
+  <rect x="130" y="36" width="120" height="28" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="190" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Base = 10000</text>
+
+  <!-- Number A: 9997 -->
+  <text x="75" y="108" text-anchor="middle" font-size="26" font-weight="800" fill="#1e3a5f">9997</text>
+  <line x1="75" y1="115" x2="75" y2="148" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="75" y="163" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="700">−3</text>
+  <text x="75" y="178" text-anchor="middle" font-size="11" fill="#64748b">(deficit)</text>
+
+  <!-- Number B: 9994 -->
+  <text x="305" y="108" text-anchor="middle" font-size="26" font-weight="800" fill="#1e3a5f">9994</text>
+  <line x1="305" y1="115" x2="305" y2="148" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="305" y="163" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="700">−6</text>
+  <text x="305" y="178" text-anchor="middle" font-size="11" fill="#64748b">(deficit)</text>
+
+  <!-- × symbol -->
+  <text x="190" y="112" text-anchor="middle" font-size="26" fill="#64748b" font-weight="700">×</text>
+
+  <!-- Arrows -->
+  <line x1="130" y1="50" x2="100" y2="85" stroke="#22c55e" stroke-width="1.5" marker-end="url(#a4)"/>
+  <line x1="250" y1="50" x2="280" y2="85" stroke="#22c55e" stroke-width="1.5" marker-end="url(#a4)"/>
+
+  <!-- Steps -->
+  <text x="190" y="198" text-anchor="middle" font-size="11" fill="#374151">Cross: 9997 − 6 = <tspan font-weight="700" fill="#1d4ed8">9991</tspan>  |  3 × 6 = <tspan font-weight="700" fill="#1d4ed8">0018</tspan></text>
+
+  <!-- Result box -->
+  <rect x="100" y="207" width="180" height="20" rx="6" fill="#166534"/>
+  <text x="190" y="221" text-anchor="middle" font-size="12" font-weight="700" fill="white">9997 × 9994 = 99 910 018</text>
+
+  <defs>
+    <marker id="a4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#22c55e"/>
+    </marker>
+  </defs>
+</svg>

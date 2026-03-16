@@ -1,0 +1,670 @@
+{
+  "title": "Lesson 4: The 11-Trick — Multiply Any 2-Digit Number by 11",
+  "gradeBand": "Grade 4",
+  "source": "Vedic Mathematics for Schools | Grade 4",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Eleven-trick — no carry examples",
+    "Eleven-trick — carry examples",
+    "Pattern recognition: when does carry happen?",
+    "Multiply 3-digit numbers by 11",
+    "Spot the product — MCQ",
+    "Fill-step: carry worked example",
+    "Mixed ×11 practice",
+    "Speed round ×11",
+    "Challenge: 4-digit × 11"
+  ],
+  "learningGoals": [
+    "Multiply any 2-digit number by 11 mentally by splitting digits and inserting their sum in the middle.",
+    "Handle carry correctly when the digit sum is 10 or more.",
+    "Extend the 11-trick to 3-digit and 4-digit numbers using adjacent pair sums."
+  ],
+  "coreIdeas": [
+    "For ×11: keep the outer digits, insert the digit sum in the middle.",
+    "When the digit sum is ≥ 10, the middle digit is the units of the sum and 1 is carried to the left digit.",
+    "The same pattern extends to 3-digit numbers by summing adjacent digit pairs along the number."
+  ],
+  "workedExamples": [
+    {
+      "question": "11 × 32 = ?",
+      "method": "Digits 3 and 2. Sum = 3+2 = 5. No carry. Answer: 352.",
+      "answer": "352"
+    },
+    {
+      "question": "11 × 76 = ?",
+      "method": "Digits 7 and 6. Sum = 13 ≥ 10. Middle = 3, carry 1. Left digit 7+1=8. Answer: 836.",
+      "answer": "836"
+    },
+    {
+      "question": "11 × 54 = ?",
+      "method": "5+4=9. No carry. Answer: 594.",
+      "answer": "594"
+    },
+    {
+      "question": "11 × 341 = ?",
+      "method": "Right=1, 4+1=5, 3+4=7, left=3. Answer: 3751.",
+      "answer": "3751"
+    }
+  ],
+  "starterPractice": [
+    "11 × 43 = ? (no carry)",
+    "11 × 85 = ? (carry needed)",
+    "11 × 251 = ? (extend to 3 digits)"
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you get the full 11-trick — multiply any number by 11 in one second, with or without carry!",
+      "placementRule": "Start at group A. If the learner handles no-carry examples instantly, skip to group B."
+    },
+    "mission": {
+      "missionTitle": "The 11-Trick",
+      "missionPromise": "Master the 11-trick for any 2-digit number and extend it to 3 and 4 digits.",
+      "successCelebration": "11-trick legend! You can now multiply any number by 11 in one eye-blink!"
+    },
+    "microLessonPattern": [
+      "Coach shows the split-and-insert rule with a coloured diagram.",
+      "Board highlights the outer digits and the inserted middle sum.",
+      "Student fills in the middle digit before seeing the answer.",
+      "Carry rule is introduced as a natural extension, not a new concept.",
+      "Instant feedback shows exactly which digit was placed incorrectly."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 18 XP per exercise group based on difficulty.",
+      "streakRule": "Keep the streak counter visible; a correct answer on retry still counts as streak-save.",
+      "badgeRule": "Each group earns a themed badge tied to the ×11 skill being practised.",
+      "celebrationStyle": "Short coach cheer, XP pulse animation, and progress bar moves forward."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers in one group triggers a mini re-teach with a simpler number.",
+      "practiceStyle": "Re-show the digit-split diagram, then give a smaller two-digit number to try.",
+      "masteryRule": "Advance only after the student answers the checkpoint correctly.",
+      "revisitRule": "Missed groups reappear at the start of the next session as warm-up cards."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Eleven-trick — no carry examples",
+        "missionStepTitle": "Exercise A: 11-trick (no carry)",
+        "coachHook": "The 11-trick is the coolest shortcut in Grade 4 maths — you will never multiply by 11 the slow way again!",
+        "boardDemo": "11×32: outer digits 3 and 2, sum=5, insert → 352. 11×43: 4 and 3, sum=7 → 473.",
+        "readAloudPrompt": "11 × 32 = ?",
+        "tryPrompt": "Now you: 11 × 43 = ?",
+        "masteryCheck": "11 × 21 = ?",
+        "instantFeedbackWin": "Brilliant! Split, sum, insert — one-second multiplication!",
+        "instantFeedbackRetry": "For 11×43: outer digits 4 and 3, sum=7. Write 4 7 3 = 473.",
+        "reviewPrompt": "Try 11×12, 11×31, 11×24 — all no-carry.",
+        "xpReward": 10,
+        "badgeFocus": "Eleven Starter",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_A_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "A",
+            "subtopic": "Eleven-trick — no carry examples",
+            "skill": "11-trick no carry",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 32 = ?",
+            "options": ["342", "352", "362", "372"],
+            "correctIndex": 1,
+            "expectedAnswer": "352",
+            "hint": "Digits 3 and 2. Sum = 5. Write 3 5 2.",
+            "solution": "Outer digits 3 and 2, sum=5, insert middle. Answer: 352."
+          },
+          {
+            "questionId": "VM_G4_L4_A_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "A",
+            "subtopic": "Eleven-trick — no carry examples",
+            "skill": "11-trick no carry",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 43 = ?",
+            "options": ["463", "473", "483", "493"],
+            "correctIndex": 1,
+            "expectedAnswer": "473",
+            "hint": "4+3=7. Write 4 7 3.",
+            "solution": "Digits 4 and 3, sum=7. Answer: 473."
+          },
+          {
+            "questionId": "VM_G4_L4_A_Q3",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "A",
+            "subtopic": "Eleven-trick — no carry examples",
+            "skill": "11-trick no carry",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "11 × 54 = ?",
+            "expectedAnswer": "594",
+            "hint": "5+4=9. Write 5 9 4.",
+            "solution": "Digits 5 and 4, sum=9. Answer: 594."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Eleven-trick — carry examples",
+        "missionStepTitle": "Exercise B: 11-trick with carry",
+        "coachHook": "When the two digits add up to 10 or more, we carry 1 to the left. It is the same carry you know from addition — just in a new place!",
+        "boardDemo": "11×76: 7+6=13. Middle=3, carry 1 → left digit 7+1=8. Answer: 836.",
+        "readAloudPrompt": "11 × 76 = ?",
+        "tryPrompt": "Now with carry: 11 × 85 = ?",
+        "masteryCheck": "11 × 94 = ?",
+        "instantFeedbackWin": "Carry handled perfectly! That is the full 11-trick.",
+        "instantFeedbackRetry": "For 11×85: 8+5=13. Middle=3, carry 1 → 8+1=9. Answer: 935.",
+        "reviewPrompt": "Try carry examples: 11×67, 11×38, 11×49.",
+        "xpReward": 12,
+        "badgeFocus": "Carry Conqueror",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_B_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "B",
+            "subtopic": "Eleven-trick — carry examples",
+            "skill": "11-trick with carry",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 76 = ?",
+            "options": ["816", "826", "836", "846"],
+            "correctIndex": 2,
+            "expectedAnswer": "836",
+            "hint": "7+6=13. Middle=3, carry 1. Left: 7+1=8. Answer: 836.",
+            "solution": "7+6=13. Middle=3, carry 1 to 7 → 8. Answer: 836."
+          },
+          {
+            "questionId": "VM_G4_L4_B_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "B",
+            "subtopic": "Eleven-trick — carry examples",
+            "skill": "11-trick with carry",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 85 = ?",
+            "options": ["915", "925", "935", "945"],
+            "correctIndex": 2,
+            "expectedAnswer": "935",
+            "hint": "8+5=13. Middle=3, carry 1 → 8+1=9. Answer: 935.",
+            "solution": "8+5=13. Middle=3, carry to 8 → 9. Answer: 935."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Pattern recognition: when does carry happen?",
+        "missionStepTitle": "Exercise C: When to carry?",
+        "coachHook": "Can you predict before multiplying whether carry will happen? If the digit sum is 10 or more, carry is needed. Let's train that eye!",
+        "boardDemo": "11×35: 3+5=8 < 10 → no carry. 11×64: 6+4=10 ≥ 10 → carry! 11×82: 8+2=10 → carry!",
+        "readAloudPrompt": "Will 11 × 46 need a carry?",
+        "tryPrompt": "Does 11 × 73 need a carry?",
+        "masteryCheck": "11 × 55 = ? (does it carry?)",
+        "instantFeedbackWin": "Great instinct! You predicted the carry correctly.",
+        "instantFeedbackRetry": "For 11×73: 7+3=10 ≥ 10 → carry needed. Middle=0, left 7+1=8. Answer: 803.",
+        "reviewPrompt": "Predict carry for: 11×27, 11×91, 11×64.",
+        "xpReward": 12,
+        "badgeFocus": "Pattern Predictor",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_C_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "C",
+            "subtopic": "Pattern recognition: when does carry happen?",
+            "skill": "carry prediction",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 55 = ?",
+            "options": ["595", "600", "605", "610"],
+            "correctIndex": 2,
+            "expectedAnswer": "605",
+            "hint": "5+5=10. Middle=0, carry 1 → 5+1=6. Answer: 605.",
+            "solution": "5+5=10. Middle=0, carry 1 to 5 → 6. Answer: 605."
+          },
+          {
+            "questionId": "VM_G4_L4_C_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "C",
+            "subtopic": "Pattern recognition: when does carry happen?",
+            "skill": "carry prediction",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 73 = ?",
+            "options": ["793", "800", "803", "813"],
+            "correctIndex": 2,
+            "expectedAnswer": "803",
+            "hint": "7+3=10. Middle=0, carry 1 to 7 → 8. Answer: 803.",
+            "solution": "7+3=10. Middle=0, left 7+1=8. Answer: 803."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Multiply 3-digit numbers by 11",
+        "missionStepTitle": "Exercise D: 3-digit × 11",
+        "coachHook": "The 11-trick stretches! For 3-digit numbers, keep the outer digits and insert adjacent pair sums in between. Amazing!",
+        "boardDemo": "11×123: right=3, pair 2+3=5, pair 1+2=3, left=1 → 1353. 11×231: right=1, 3+1=4, 2+3=5, left=2 → 2541.",
+        "readAloudPrompt": "11 × 123 = ?",
+        "tryPrompt": "Now try: 11 × 231 = ?",
+        "masteryCheck": "11 × 312 = ?",
+        "instantFeedbackWin": "You just did 3-digit × 11 in your head! That is incredible!",
+        "instantFeedbackRetry": "For 11×312: right=2, 1+2=3, 3+1=4, left=3 → 3432.",
+        "reviewPrompt": "Try 3-digit: 11×121, 11×213, 11×132.",
+        "xpReward": 14,
+        "badgeFocus": "3-Digit Eleven Star",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_D_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply 3-digit numbers by 11",
+            "skill": "3-digit × 11",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 231 = ?",
+            "options": ["2431", "2531", "2541", "2641"],
+            "correctIndex": 2,
+            "expectedAnswer": "2541",
+            "hint": "Right=1, 3+1=4, 2+3=5, left=2 → 2541.",
+            "solution": "11×231: digits 2,3,1. Right=1, 3+1=4, 2+3=5, left=2. Answer: 2541."
+          },
+          {
+            "questionId": "VM_G4_L4_D_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply 3-digit numbers by 11",
+            "skill": "3-digit × 11",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "11 × 312 = ?",
+            "expectedAnswer": "3432",
+            "hint": "Right=2, 1+2=3, 3+1=4, left=3 → 3432.",
+            "solution": "11×312: right=2, 1+2=3, 3+1=4, left=3. Answer: 3432."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "Spot the product — MCQ",
+        "missionStepTitle": "Exercise E: Spot the correct ×11 product",
+        "coachHook": "Four options, one is right — spot it using the 11-trick! The wrong ones are designed to catch common carry mistakes.",
+        "boardDemo": "11×47: distractors 507, 517, 527, 537. Compute: 4+7=11, middle=1, carry → 4+1=5. Answer: 517.",
+        "readAloudPrompt": "Spot the correct answer for 11 × 47.",
+        "tryPrompt": "Now spot: 11 × 68 = ?",
+        "masteryCheck": "Spot: 11 × 95 = ?",
+        "instantFeedbackWin": "Spot on! You identified the carry mistake in the wrong options.",
+        "instantFeedbackRetry": "For 11×68: 6+8=14. Middle=4, carry 1 → 6+1=7. Answer: 748.",
+        "reviewPrompt": "Spot three: 11×39, 11×58, 11×77.",
+        "xpReward": 14,
+        "badgeFocus": "Eleven Detective",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_E_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "E",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "spot correct product",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 47 = ?",
+            "options": ["507", "517", "527", "537"],
+            "correctIndex": 1,
+            "expectedAnswer": "517",
+            "hint": "4+7=11. Middle=1, carry 1 to 4 → 5. Answer: 517.",
+            "solution": "4+7=11. Middle=1, left 4+1=5. Answer: 517."
+          },
+          {
+            "questionId": "VM_G4_L4_E_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "E",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "spot correct product",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 68 = ?",
+            "options": ["728", "738", "748", "758"],
+            "correctIndex": 2,
+            "expectedAnswer": "748",
+            "hint": "6+8=14. Middle=4, carry 1 → 6+1=7. Answer: 748.",
+            "solution": "6+8=14. Middle=4, carry to 6 → 7. Answer: 748."
+          },
+          {
+            "questionId": "VM_G4_L4_E_Q3",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "E",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "spot correct product",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 95 = ?",
+            "options": ["1035", "1045", "1045", "1055"],
+            "correctIndex": 1,
+            "expectedAnswer": "1045",
+            "hint": "9+5=14. Middle=4, carry 1 → 9+1=10. So 1|0|4|5 = 1045.",
+            "solution": "9+5=14. Middle=4, carry 1 to 9 → 10. Prefix 1. Answer: 1045."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-step: carry worked example",
+        "missionStepTitle": "Exercise F: Step-by-step carry",
+        "coachHook": "Let's slow it down and fill in every step of a carry example. Three boxes — digit sum, middle digit, left digit. Ready?",
+        "boardDemo": "11×47: Box 1: digit sum = 4+7 = 11. Box 2: middle = 1. Box 3: carry → left = 4+1 = 5. Answer: 517.",
+        "readAloudPrompt": "Fill the steps for 11 × 58.",
+        "tryPrompt": "Now fill steps for 11 × 69.",
+        "masteryCheck": "Write all three steps for 11 × 87.",
+        "instantFeedbackWin": "Perfect three-step carry! You have this completely mastered.",
+        "instantFeedbackRetry": "For 11×69: sum=6+9=15, middle=5, carry 1 → 6+1=7. Answer: 759.",
+        "reviewPrompt": "Write steps for 11×79 and 11×86.",
+        "xpReward": 14,
+        "badgeFocus": "Step-by-Step Scholar",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_F_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-step: carry worked example",
+            "skill": "fill-step ×11 carry",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 11 × 58 step by step.",
+            "steps": [
+              {"label": "Digit sum: 5 + 8 = ?", "answer": "13", "hint": "Add the two digits of 58"},
+              {"label": "Middle digit (units of 13) = ?", "answer": "3", "hint": "Units digit of 13"},
+              {"label": "Left digit with carry: 5 + 1 = ?", "answer": "6", "hint": "5 plus the carry of 1"}
+            ],
+            "expectedAnswer": "638",
+            "hint": "Sum=13, middle=3, left=5+1=6. Answer: 638.",
+            "solution": "5+8=13. Middle=3, carry 1 to 5 → 6. Answer: 638."
+          },
+          {
+            "questionId": "VM_G4_L4_F_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-step: carry worked example",
+            "skill": "fill-step ×11 carry",
+            "difficulty": "medium",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 11 × 87 step by step.",
+            "steps": [
+              {"label": "Digit sum: 8 + 7 = ?", "answer": "15", "hint": "8 + 7 = 15"},
+              {"label": "Middle digit (units of 15) = ?", "answer": "5", "hint": "Units digit of 15 is 5"},
+              {"label": "Left digit with carry: 8 + 1 = ?", "answer": "9", "hint": "8 plus carry 1"}
+            ],
+            "expectedAnswer": "957",
+            "hint": "Sum=15, middle=5, left=8+1=9. Answer: 957.",
+            "solution": "8+7=15. Middle=5, carry 1 to 8 → 9. Answer: 957."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Mixed ×11 practice",
+        "missionStepTitle": "Exercise G: Mixed ×11",
+        "coachHook": "Mixed bag — some will carry, some won't. Predict, then compute. You have all the tools now!",
+        "boardDemo": "Flash: 11×24=264, 11×38=418 (carry), 11×51=561, 11×77=847 (carry).",
+        "readAloudPrompt": "11 × 38 = ?",
+        "tryPrompt": "11 × 62 = ?",
+        "masteryCheck": "11 × 77 = ?",
+        "instantFeedbackWin": "Brilliant mixed performance! Carry or no carry, you handled it.",
+        "instantFeedbackRetry": "For 11×77: 7+7=14. Middle=4, carry 1 → 7+1=8. Answer: 847.",
+        "reviewPrompt": "Mixed six: 11×13, 11×48, 11×61, 11×29.",
+        "xpReward": 14,
+        "badgeFocus": "Mixed Eleven Master",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_G_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed ×11 practice",
+            "skill": "mixed ×11",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 38 = ?",
+            "options": ["408", "418", "428", "438"],
+            "correctIndex": 1,
+            "expectedAnswer": "418",
+            "hint": "3+8=11. Middle=1, carry 1 → 3+1=4. Answer: 418.",
+            "solution": "3+8=11. Middle=1, left 3+1=4. Answer: 418."
+          },
+          {
+            "questionId": "VM_G4_L4_G_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed ×11 practice",
+            "skill": "mixed ×11",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "11 × 62 = ?",
+            "expectedAnswer": "682",
+            "hint": "6+2=8. No carry. Write 6 8 2.",
+            "solution": "6+2=8, no carry. Answer: 682."
+          },
+          {
+            "questionId": "VM_G4_L4_G_Q3",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed ×11 practice",
+            "skill": "mixed ×11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 77 = ?",
+            "options": ["827", "837", "847", "857"],
+            "correctIndex": 2,
+            "expectedAnswer": "847",
+            "hint": "7+7=14. Middle=4, carry 1 → 7+1=8. Answer: 847.",
+            "solution": "7+7=14. Middle=4, left 7+1=8. Answer: 847."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed round ×11",
+        "missionStepTitle": "Exercise H: Speed round ×11",
+        "coachHook": "Speed round! One-second ×11 — let's see how fast your brain can run the 11-trick!",
+        "boardDemo": "Flash: 11×26=286, 11×48=528, 11×93=1023. Show answer after 3 seconds each.",
+        "readAloudPrompt": "Speed! 11 × 26 = ?",
+        "tryPrompt": "Quick! 11 × 48 = ?",
+        "masteryCheck": "11 × 93 = ?",
+        "instantFeedbackWin": "Lightning fast! You are running the 11-trick at full speed.",
+        "instantFeedbackRetry": "For 11×93: 9+3=12. Middle=2, carry 1 → 9+1=10. So 1023.",
+        "reviewPrompt": "Speed: 11×35, 11×74, 11×88 — as fast as you can.",
+        "xpReward": 16,
+        "badgeFocus": "Speed Eleven Racer",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_H_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "H",
+            "subtopic": "Speed round ×11",
+            "skill": "speed ×11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Speed! 11 × 48 = ?",
+            "expectedAnswer": "528",
+            "hint": "4+8=12. Middle=2, carry 1 → 4+1=5. Answer: 528.",
+            "solution": "4+8=12. Middle=2, left 4+1=5. Answer: 528."
+          },
+          {
+            "questionId": "VM_G4_L4_H_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "H",
+            "subtopic": "Speed round ×11",
+            "skill": "speed ×11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Speed! 11 × 93 = ?",
+            "expectedAnswer": "1023",
+            "hint": "9+3=12. Middle=2, carry 1 → 9+1=10. Prefix 1. Answer: 1023.",
+            "solution": "9+3=12. Middle=2, 9+1=10, prefix 1. Answer: 1023."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: 4-digit × 11",
+        "missionStepTitle": "Exercise I: 4-digit × 11 challenge",
+        "coachHook": "Ultimate challenge — the 11-trick with a 4-digit number! Five digits in the answer, same adjacent-pair rule. You are ready!",
+        "boardDemo": "11×2341: right=1, 4+1=5, 3+4=7, 2+3=5, left=2. Answer: 25751.",
+        "readAloudPrompt": "11 × 2341 = ?",
+        "tryPrompt": "Try: 11 × 1213 = ?",
+        "masteryCheck": "11 × 3121 = ?",
+        "instantFeedbackWin": "Extraordinary! A 4-digit ×11 in your head — you are a Vedic maths champion!",
+        "instantFeedbackRetry": "For 11×1213: right=3, 1+3=4, 2+1=3, 1+2=3, left=1. Answer: 13343.",
+        "reviewPrompt": "Try 11×2112 and 11×1321.",
+        "xpReward": 18,
+        "badgeFocus": "4-Digit Eleven Legend",
+        "exercises": [
+          {
+            "questionId": "VM_G4_L4_I_Q1",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 4-digit × 11",
+            "skill": "4-digit × 11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "11 × 2341 = ?",
+            "options": ["25641", "25741", "25751", "25851"],
+            "correctIndex": 2,
+            "expectedAnswer": "25751",
+            "hint": "Right=1, 4+1=5, 3+4=7, 2+3=5, left=2. Answer: 25751.",
+            "solution": "11×2341: right=1, 4+1=5, 3+4=7, 2+3=5, left=2. Answer: 25751."
+          },
+          {
+            "questionId": "VM_G4_L4_I_Q2",
+            "chapterCode": "VM_G4_L4_MULT_BY_11",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 4-digit × 11",
+            "skill": "4-digit × 11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "11 × 1213 = ?",
+            "expectedAnswer": "13343",
+            "hint": "Right=3, 1+3=4, 2+1=3, 1+2=3, left=1. Answer: 13343.",
+            "solution": "11×1213: right=3, 1+3=4, 2+1=3, 1+2=3, left=1. Answer: 13343."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {
+      "stepId": "VM_G4_L4_A",
+      "exerciseGroup": "A",
+      "subtopic": "Eleven-trick — no carry examples",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "The Eleven Trick", "asset": "eleven_trick.svg", "caption": "Keep outer digits, insert digit sum in the middle."},
+      "teacherLine": "The 11-trick is simple: keep the left digit, keep the right digit, and put their sum in the middle!",
+      "boardAction": "Display eleven_trick.svg. Show 11×32: 3 _ 2, reveal 3+2=5, write 352.",
+      "checkpointPrompt": "11 × 21 = ?",
+      "microPractice": "Try 11×12, 11×31, 11×24."
+    },
+    {
+      "stepId": "VM_G4_L4_B",
+      "exerciseGroup": "B",
+      "subtopic": "Eleven-trick — carry examples",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Eleven Trick with Carry", "asset": "eleven_trick.svg", "caption": "Sum ≥ 10: middle = units, carry 1 left."},
+      "teacherLine": "When the digit sum reaches 10 or more, the carry rule kicks in — just like in addition. No new skill needed!",
+      "boardAction": "Show 11×76: 7+6=13. Arrow pointing middle=3, arrow pointing carry 1 to 7 → 8. Write 836.",
+      "checkpointPrompt": "11 × 94 = ?",
+      "microPractice": "Try carry: 11×67, 11×38, 11×49."
+    },
+    {
+      "stepId": "VM_G4_L4_F",
+      "exerciseGroup": "F",
+      "subtopic": "Fill-step: carry worked example",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "Three-Step Carry", "asset": "eleven_trick.svg", "caption": "Three boxes: digit sum, middle digit, left digit with carry."},
+      "teacherLine": "Three boxes, three steps — fill them in order and you will never lose a carry again!",
+      "boardAction": "Show three labelled boxes: [sum] [middle] [left+carry]. Fill in for 11×58: 13, 3, 6. Write 638.",
+      "checkpointPrompt": "Write all three steps for 11 × 87.",
+      "microPractice": "Write steps for 11×79 and 11×86."
+    },
+    {
+      "stepId": "VM_G4_L4_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge: 4-digit × 11",
+      "boardMode": "svg",
+      "visual": {"kind": "svg", "title": "4-Digit Eleven Trick", "asset": "eleven_trick.svg", "caption": "Add adjacent pairs across all four digits."},
+      "teacherLine": "The 11-trick never stops growing! For 4 digits, add adjacent pairs one by one across the number — and you have your answer!",
+      "boardAction": "Show 11×2341 with digit labels and adjacent pair arrows: 2,3,4,1 → 2|5|7|5|1 = 25751.",
+      "checkpointPrompt": "11 × 3121 = ?",
+      "microPractice": "Try 11×2112 and 11×1321."
+    }
+  ],
+  "screenplay": [
+    {
+      "beatId": "VM_G4_L4_A_INTRO",
+      "stepId": "VM_G4_L4_A",
+      "exerciseGroup": "A",
+      "subtopic": "Eleven-trick — no carry examples",
+      "sequence": 401,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "Welcome to the 11-trick! This is the most-loved shortcut in Grade 4 Vedic maths. One look and you will never forget it.",
+      "boardAction": "Show eleven_trick.svg with animated split-and-insert demo.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Watch the outer digits stay in place and the sum appears in the middle.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G4_L4_B_EXPLAIN",
+      "stepId": "VM_G4_L4_B",
+      "exerciseGroup": "B",
+      "subtopic": "Eleven-trick — carry examples",
+      "sequence": 501,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "7+6=13 — that is over 9! So the middle digit is 3 and we add 1 to the left digit. 7+1=8. Answer: 836!",
+      "boardAction": "Animate carry arrow from middle to left digit. Show 7 → 8 with +1 highlighted.",
+      "checkpointPrompt": "11 × 85 = ?",
+      "pauseType": "student_input",
+      "holdSec": 4.0,
+      "expectedStudentResponse": "935",
+      "fallbackHint": "8+5=13. Middle=3, carry 1 to 8 → 9. Answer: 935.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "courseId": "aptitude_reasoning_g6",
+  "courseName": "MindSpark Grade 6 — Aptitude & Reasoning",
+  "tagline": "Think Sharp, Reason Fast",
+  "gradeLevel": 6,
+  "targetAudience": "Grade 6 students (age 11–12)",
+  "avatarTone": "friendly-coach",
+  "hintStyle": "Here's a trick...",
+  "questionFormat": ["MCQ", "short-text"],
+  "chapters": [
+    {
+      "chapterCode": "AR_G6_L1_SERIES",
+      "title": "Series Completion",
+      "estimatedMinutes": 16,
+      "order": 1,
+      "svgCategory": "series"
+    },
+    {
+      "chapterCode": "AR_G6_L2_CODING",
+      "title": "Coding and Decoding",
+      "estimatedMinutes": 15,
+      "order": 2,
+      "svgCategory": "coding"
+    },
+    {
+      "chapterCode": "AR_G6_L3_ANALOGIES",
+      "title": "Analogies",
+      "estimatedMinutes": 16,
+      "order": 3,
+      "svgCategory": "logic"
+    },
+    {
+      "chapterCode": "AR_G6_L4_VENN",
+      "title": "Venn Diagrams",
+      "estimatedMinutes": 17,
+      "order": 4,
+      "svgCategory": "logic"
+    },
+    {
+      "chapterCode": "AR_G6_L5_CLOCKS",
+      "title": "Clocks and Time",
+      "estimatedMinutes": 18,
+      "order": 5,
+      "svgCategory": "clocks"
+    },
+    {
+      "chapterCode": "AR_G6_L6_RANKINGS",
+      "title": "Rankings and Positions",
+      "estimatedMinutes": 14,
+      "order": 6,
+      "svgCategory": "seating"
+    },
+    {
+      "chapterCode": "AR_G6_L7_DATA",
+      "title": "Data Tables and Charts",
+      "estimatedMinutes": 18,
+      "order": 7,
+      "svgCategory": "data"
+    },
+    {
+      "chapterCode": "AR_G6_L8_PUZZLES",
+      "title": "Simple Logical Puzzles",
+      "estimatedMinutes": 16,
+      "order": 8,
+      "svgCategory": "logic"
+    }
+  ]
+}

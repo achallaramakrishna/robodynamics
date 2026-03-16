@@ -570,6 +570,9 @@ public class RDSubscriptionCheckoutController {
             }
             return "/aptipath/parent/home";
         }
+        if (plan != null && "ai-tutor".equals(plan.getTrackType())) {
+            return "/ai-tutor?subscribed=true&plan=" + plan.getKey();
+        }
         return "/plans/success";
     }
 
@@ -723,7 +726,52 @@ public class RDSubscriptionCheckoutController {
                         "Custom quote by grade and subject selection",
                         "Higher intensity mentoring slots",
                         "Personalized weak-topic remediation plan",
-                        "Priority mentor interventions and parent strategy call"));
+                        "Priority mentor interventions and parent strategy call")),
+
+        // ── MindSutra AI Tutor Plans ──────────────────────────────────────────
+        MINDSUTRAFULL(
+                "mindsutrafull",
+                "MindSutra Full — All 16 Chapters",
+                499,
+                "Unlimited AI-powered Vedic Math tutoring for your child, all 16 chapters.",
+                "ai-tutor",
+                "month",
+                Arrays.asList(
+                        "All 16 Vedic Math chapters unlocked",
+                        "AI avatar tutoring with voice narration",
+                        "Adaptive difficulty — adjusts to your child",
+                        "XP, streaks, and WhatsApp progress sharing",
+                        "Doubt resolution powered by Claude AI",
+                        "Works on mobile and tablet")),
+
+        MINDSUTRAANNUAL(
+                "mindsutraannual",
+                "MindSutra Annual — Best Value",
+                3999,
+                "Full year of AI-powered Vedic Math. Save ₹1,989 vs monthly.",
+                "ai-tutor",
+                "year",
+                Arrays.asList(
+                        "Everything in Full plan",
+                        "All 16 Vedic Math chapters for 12 months",
+                        "Priority support for parents",
+                        "Free access to MindSpark when available",
+                        "Save 33% vs monthly billing")),
+
+        MINDSUTRAFOUNDING(
+                "founding-member",
+                "MindSutra Founding Member — Lifetime",
+                1999,
+                "One-time lifetime access. First 100 families only. Never pay again.",
+                "ai-tutor",
+                "lifetime",
+                Arrays.asList(
+                        "Lifetime access to all current chapters",
+                        "Free upgrades as new chapters are added",
+                        "Founding Member badge on your child's profile",
+                        "Early access to MindSpark Aptitude tutor",
+                        "Priority support forever",
+                        "Limited to first 100 families"));
 
         private final String key;
         private final String displayName;

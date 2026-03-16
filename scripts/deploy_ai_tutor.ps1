@@ -11,7 +11,7 @@
 
 param(
     [string]$ServerHost = "168.231.123.108",
-    [string]$User = "Jatni",
+    [string]$User = "root",
     [string]$RepoRoot = "$PSScriptRoot\.."
 )
 
@@ -43,9 +43,56 @@ Write-Host "=== AI Tutor Deploy ===" -ForegroundColor Cyan
 Write-Host "Uploading files to /tmp ..."
 
 Scp-File "$ai\tutor-api\app\main.py"                                                               "/tmp/ai_main.py"
+Scp-File "$ai\tutor-api\app\models.py"                                                            "/tmp/ai_models.py"
 Scp-File "$ai\tutor-api\app\services\generic_course_engine.py"                                    "/tmp/ai_generic_course_engine.py"
-Scp-File "$ai\web\app\ai-tutor\vedic\VedicTutorClient.tsx"                                        "/tmp/ai_VedicTutorClient.tsx"
-Scp-File "$ai\tutor-api\content-template\vedic_math\chapter\L2_DOUBLING_HALVING.json"            "/tmp/ai_L2_DOUBLING_HALVING.json"
+Scp-File "$ai\tutor-api\app\services\course_script_loader.py"                                     "/tmp/ai_course_script_loader.py"
+Scp-File "$ai\tutor-api\app\services\engine_registry.py"                                          "/tmp/ai_engine_registry.py"
+Scp-File "$ai\tutor-api\app\services\behavior_classifier.py"                                      "/tmp/ai_behavior_classifier.py"
+Scp-File "$ai\tutor-api\app\services\conversation_engine.py"                                      "/tmp/ai_conversation_engine.py"
+Scp-File "$ai\tutor-api\app\services\session_store.py"                                            "/tmp/ai_session_store.py"
+Scp-File "$ai\tutor-api\app\services\session_snapshot.py"                                         "/tmp/ai_session_snapshot.py"
+Scp-File "$ai\tutor-api\app\services\token_service.py"                                            "/tmp/ai_token_service.py"
+Scp-File "$ai\web\lib\types.ts"                                                                    "/tmp/ai_types.ts"
+Scp-File "$ai\web\app\ai-tutor\tutor\TutorClient.tsx"                                             "/tmp/ai_TutorClient.tsx"
+Scp-File "$ai\web\app\ai-tutor\tutor\RobotAvatar.tsx"                                             "/tmp/ai_RobotAvatar.tsx"
+Scp-File "$ai\web\lib\avatarVoices.ts"                                                             "/tmp/ai_avatarVoices.ts"
+Scp-File "$ai\web\app\ai-tutor\demo\page.tsx"                                                     "/tmp/ai_demo_page.tsx"
+Scp-File "$ai\web\app\ai-tutor\page.tsx"                                                          "/tmp/ai_aitutor_root_page.tsx"
+Scp-File "$ai\tutor-api\policies\adaptive_policy_v1.json"                                         "/tmp/adaptive_policy_v1.json"
+
+# ── All 16 Vedic Math chapter JSONs ──────────────────────────────────────────
+Write-Host "Uploading Vedic Math chapter JSONs ..." -ForegroundColor Yellow
+$chapterDir = "$ai\tutor-api\content-template\vedic_math\chapter"
+Get-ChildItem "$chapterDir\*.json" | ForEach-Object {
+    Scp-File $_.FullName "/tmp/chapter_$($_.Name)"
+}
+
+# ── MindSpark G6 chapter JSONs + index ───────────────────────────────────────
+Write-Host "Uploading MindSpark Grade 6 chapter JSONs ..." -ForegroundColor Yellow
+$g6ChapterDir = "$ai\tutor-api\content-template\aptitude_reasoning\grade_6\chapter"
+Get-ChildItem "$g6ChapterDir\*.json" | ForEach-Object {
+    Scp-File $_.FullName "/tmp/ms_g6_chapter_$($_.Name)"
+}
+Scp-File "$ai\tutor-api\content-template\aptitude_reasoning\grade_6\chapters.json" "/tmp/ms_g6_chapters_index.json"
+
+# ── MindSutra Vedic Math grade chapters (G4–G8) ──────────────────────────────
+Write-Host "Uploading MindSutra Vedic Math grade chapters (G4-G8) ..." -ForegroundColor Yellow
+foreach ($g in @(4,5,6,7,8)) {
+    $gradeDir = "$ai\tutor-api\content-template\vedic_math\grade_$g\chapter"
+    if (Test-Path $gradeDir) {
+        Get-ChildItem "$gradeDir\*.json" | ForEach-Object {
+            Scp-File $_.FullName "/tmp/vm_g${g}_chapter_$($_.Name)"
+        }
+        Scp-File "$ai\tutor-api\content-template\vedic_math\grade_$g\chapters.json" "/tmp/vm_g${g}_chapters_index.json"
+    }
+}
+
+# ── New vm_* SVG assets ────────────────────────────────────────────────────────
+Write-Host "Uploading new Vedic Math SVG assets ..." -ForegroundColor Yellow
+$svgDir = "$ai\web\public\math-svgs\vedic"
+Get-ChildItem "$svgDir\vm_*.svg" | ForEach-Object {
+    Scp-File $_.FullName "/tmp/vm_svg_$($_.Name)"
+}
 
 Write-Host "Installing files, building, restarting ..." -ForegroundColor Cyan
 
@@ -53,9 +100,66 @@ $remote = @'
 set -euo pipefail
 
 install -D -m 644 /tmp/ai_main.py                    /opt/robodynamics/ai-tutor/tutor-api/app/main.py
+install -D -m 644 /tmp/ai_models.py                  /opt/robodynamics/ai-tutor/tutor-api/app/models.py
 install -D -m 644 /tmp/ai_generic_course_engine.py   /opt/robodynamics/ai-tutor/tutor-api/app/services/generic_course_engine.py
-install -D -m 644 /tmp/ai_VedicTutorClient.tsx        /opt/robodynamics/ai-tutor/web/app/ai-tutor/vedic/VedicTutorClient.tsx
-install -D -m 644 /tmp/ai_L2_DOUBLING_HALVING.json   /opt/robodynamics/ai-tutor/tutor-api/content-template/vedic_math/chapter/L2_DOUBLING_HALVING.json
+install -D -m 644 /tmp/ai_course_script_loader.py    /opt/robodynamics/ai-tutor/tutor-api/app/services/course_script_loader.py
+install -D -m 644 /tmp/ai_engine_registry.py         /opt/robodynamics/ai-tutor/tutor-api/app/services/engine_registry.py
+install -D -m 644 /tmp/ai_behavior_classifier.py     /opt/robodynamics/ai-tutor/tutor-api/app/services/behavior_classifier.py
+install -D -m 644 /tmp/ai_conversation_engine.py     /opt/robodynamics/ai-tutor/tutor-api/app/services/conversation_engine.py
+install -D -m 644 /tmp/ai_session_store.py           /opt/robodynamics/ai-tutor/tutor-api/app/services/session_store.py
+install -D -m 644 /tmp/ai_session_snapshot.py        /opt/robodynamics/ai-tutor/tutor-api/app/services/session_snapshot.py
+install -D -m 644 /tmp/ai_token_service.py           /opt/robodynamics/ai-tutor/tutor-api/app/services/token_service.py
+install -D -m 644 /tmp/ai_types.ts                   /opt/robodynamics/ai-tutor/web/lib/types.ts
+install -D -m 644 /tmp/ai_TutorClient.tsx            /opt/robodynamics/ai-tutor/web/app/ai-tutor/tutor/TutorClient.tsx
+install -D -m 644 /tmp/ai_RobotAvatar.tsx            /opt/robodynamics/ai-tutor/web/app/ai-tutor/tutor/RobotAvatar.tsx
+install -D -m 644 /tmp/ai_avatarVoices.ts            /opt/robodynamics/ai-tutor/web/lib/avatarVoices.ts
+install -D -m 644 /tmp/ai_demo_page.tsx              /opt/robodynamics/ai-tutor/web/app/ai-tutor/demo/page.tsx
+install -D -m 644 /tmp/ai_aitutor_root_page.tsx     /opt/robodynamics/ai-tutor/web/app/ai-tutor/page.tsx
+install -D -m 644 /tmp/adaptive_policy_v1.json        /opt/robodynamics/vedic_math/policies/adaptive_policy_v1.json
+mkdir -p /opt/robodynamics/ai-tutor/data
+
+# Install all chapter JSONs
+CHAPTER_DEST=/opt/robodynamics/ai-tutor/tutor-api/content-template/vedic_math/chapter
+mkdir -p $CHAPTER_DEST
+for f in /tmp/chapter_*.json; do
+  name=$(basename "$f" | sed 's/^chapter_//')
+  install -m 644 "$f" "$CHAPTER_DEST/$name"
+done
+echo "CHAPTERS_INSTALLED"
+
+# Install MindSpark G6 chapters
+MS_G6_DEST=/opt/robodynamics/ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_6/chapter
+mkdir -p $MS_G6_DEST
+for f in /tmp/ms_g6_chapter_*.json; do
+  name=$(basename "$f" | sed 's/^ms_g6_chapter_//')
+  install -m 644 "$f" "$MS_G6_DEST/$name"
+done
+install -m 644 /tmp/ms_g6_chapters_index.json /opt/robodynamics/ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_6/chapters.json
+echo "MINDSPARK_G6_INSTALLED"
+
+# Install MindSutra Vedic Math grade chapters (G4-G8)
+for g in 4 5 6 7 8; do
+  VM_GRADE_DEST=/opt/robodynamics/ai-tutor/tutor-api/content-template/vedic_math/grade_${g}/chapter
+  mkdir -p $VM_GRADE_DEST
+  for f in /tmp/vm_g${g}_chapter_*.json; do
+    [ -e "$f" ] || continue
+    name=$(basename "$f" | sed "s/^vm_g${g}_chapter_//")
+    install -m 644 "$f" "$VM_GRADE_DEST/$name"
+  done
+  INDEX=/tmp/vm_g${g}_chapters_index.json
+  [ -f "$INDEX" ] && install -m 644 "$INDEX" /opt/robodynamics/ai-tutor/tutor-api/content-template/vedic_math/grade_${g}/chapters.json
+done
+echo "VEDIC_GRADES_INSTALLED"
+
+# Install new vm_* SVG assets
+SVG_DEST=/opt/robodynamics/ai-tutor/web/public/math-svgs/vedic
+mkdir -p $SVG_DEST
+for f in /tmp/vm_svg_vm_*.svg; do
+  [ -e "$f" ] || continue
+  name=$(basename "$f" | sed 's/^vm_svg_//')
+  install -m 644 "$f" "$SVG_DEST/$name"
+done
+echo "SVG_ASSETS_INSTALLED"
 
 echo "FILES_INSTALLED"
 
@@ -63,6 +167,12 @@ cd /opt/robodynamics/ai-tutor/web
 npm run build >/tmp/rd_ai_tutor_web_build_latest.log 2>&1 || (tail -n 120 /tmp/rd_ai_tutor_web_build_latest.log; exit 1)
 
 echo "BUILD_OK"
+
+# Sync public + static assets into standalone output (required for node server.js)
+cp -r /opt/robodynamics/ai-tutor/web/public /opt/robodynamics/ai-tutor/web/.next/standalone/
+cp -r /opt/robodynamics/ai-tutor/web/.next/static /opt/robodynamics/ai-tutor/web/.next/standalone/.next/
+
+echo "STANDALONE_SYNCED"
 
 systemctl restart rd-ai-tutor-api
 systemctl restart rd-ai-tutor-web

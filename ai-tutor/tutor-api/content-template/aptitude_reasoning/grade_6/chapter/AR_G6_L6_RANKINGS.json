@@ -1,0 +1,331 @@
+{
+  "chapterCode": "AR_G6_L6_RANKINGS",
+  "courseId": "aptitude_reasoning_g6",
+  "title": "Rankings and Positions",
+  "source": "MindSpark Grade 6 — Chapter 6",
+  "estimatedMinutes": 35,
+  "subtopics": [
+    "Rank from top and rank from bottom",
+    "Formula: Total = rank_top + rank_bottom − 1",
+    "People between two students",
+    "Row-column positions",
+    "Alphabetical ranking"
+  ],
+  "learningGoals": [
+    "Convert rank from top to rank from bottom using the total formula",
+    "Find the total number of students when both top and bottom ranks are given",
+    "Calculate the number of people between two students in a row",
+    "Determine position from the right end in a row given column and total columns",
+    "Rank a name alphabetically in a given list"
+  ],
+  "coreIdeas": [
+    "Rank from top + Rank from bottom − 1 = Total students (the student is counted only once)",
+    "People between two students = Total − Rank from left − Rank from right (when counted from opposite ends)",
+    "Position from right = Total columns − Column number + 1",
+    "Alphabetical ranking: sort names A to Z and count the position",
+    "When new students join above someone, their rank from top increases by the number of new students"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Riya is 5th from the top in a class of 30. What is her rank from the bottom?",
+      "solution": "Rank from bottom = Total − Rank from top + 1 = 30 − 5 + 1 = 26.",
+      "concept": "Converting rank from top to rank from bottom"
+    },
+    {
+      "id": "WE2",
+      "problem": "Arjun is 8th from the top and 12th from the bottom. How many students are there in total?",
+      "solution": "Total = Rank from top + Rank from bottom − 1 = 8 + 12 − 1 = 19.",
+      "concept": "Finding total using both ranks"
+    },
+    {
+      "id": "WE3",
+      "problem": "Priya is 6th from the left and Raj is 4th from the right in a row of 15. How many people sit between them?",
+      "solution": "People between = Total − Rank from left − Rank from right = 15 − 6 − 4 = 5.",
+      "concept": "People between two students in a row"
+    },
+    {
+      "id": "WE4",
+      "problem": "A student sits in column 4 out of 8 columns. What is their position from the right?",
+      "solution": "Position from right = Total columns − Column number + 1 = 8 − 4 + 1 = 5.",
+      "concept": "Row-column position from right end"
+    },
+    {
+      "id": "WE5",
+      "problem": "Rank PRIYA among: AMIT, MEERA, PRIYA, RAHUL, SANA in alphabetical order.",
+      "solution": "Alphabetical order: AMIT (1st), MEERA (2nd), PRIYA (3rd), RAHUL (4th), SANA (5th). PRIYA is ranked 3rd.",
+      "concept": "Alphabetical ranking"
+    }
+  ],
+  "duolingoLessonArc": {
+    "onboarding": {
+      "hook": "Who is first? Who is last? Who is in the middle? Ranking questions are everywhere in exams — and one formula cracks most of them!",
+      "avatarIntro": "Hi! I am Spark. Today we tackle ranking questions — the type where you are told someone is 5th from the top and need to find their rank from the bottom. Sounds tricky? One formula makes it instant!",
+      "priorKnowledge": "You already know how to count positions in a queue. Today we formalise that into a formula and extend it to rows, columns, and alphabetical lists."
+    },
+    "mission": "Work through 9 exercise groups covering all ranking types and earn the Rankings Ruler badge.",
+    "microLessonPattern": "Hook → Formula on board → Worked example → Student solves → Instant Feedback",
+    "rewardLoop": "10 XP per correct answer; correctly writing the formula before solving earns 5 bonus XP.",
+    "reviewLoop": "After group E, a flash question revisits the core formula from groups A and B.",
+    "uiDirectives": {
+      "boardStyle": "vertical number line for top-to-bottom rankings; horizontal line for row positions",
+      "inputType": "numeric input or multiple choice (4 options)",
+      "showHintAfterMs": 12000
+    }
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Rank from Top — Converting to Rank from Bottom",
+      "coachHook": "One student, two ranks — one from the top, one from the bottom. They are linked by the total!",
+      "boardDemo": {
+        "title": "Riya is 5th from top in class of 30. Find her rank from bottom.",
+        "steps": [
+          "Draw a vertical list of 30 students",
+          "Riya is at position 5 from the top",
+          "Formula: Rank from bottom = Total − Rank from top + 1",
+          "= 30 − 5 + 1 = 26",
+          "Riya is 26th from the bottom"
+        ],
+        "teacherLine": "Why +1? Because Riya herself is included in both counts. Without +1, we would leave her out. Always use: Total − Rank + 1."
+      },
+      "readAloudPrompt": "Riya is 5th from the top in a class of 30. Rank from bottom = 30 − 5 + 1 = 26.",
+      "tryPrompt": "Sam is 7th from the top in a class of 25. What is his rank from the bottom?  (a) 18  (b) 19  (c) 17  (d) 20",
+      "masteryCheck": "19",
+      "instantFeedbackWin": "Correct! 25 − 7 + 1 = 19. Sam is 19th from the bottom. Formula applied perfectly!",
+      "instantFeedbackRetry": "Use: Total − Rank from top + 1 = 25 − 7 + 1 = 19. The +1 accounts for Sam himself.",
+      "reviewPrompt": "Write the formula for rank from bottom given rank from top and total.",
+      "xpReward": 10,
+      "badgeFocus": "Rank Converter"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Finding Total Using Both Ranks",
+      "coachHook": "If you know rank from top AND rank from bottom, you can find the total in one step!",
+      "boardDemo": {
+        "title": "Arjun is 8th from top and 12th from bottom. Find total students.",
+        "steps": [
+          "Formula: Total = Rank from top + Rank from bottom − 1",
+          "Total = 8 + 12 − 1 = 19",
+          "Verify: 19 − 8 + 1 = 12 from bottom. Correct!"
+        ],
+        "teacherLine": "The formula subtracts 1 because Arjun is counted in BOTH his top rank and his bottom rank. Without subtracting 1, he gets counted twice."
+      },
+      "readAloudPrompt": "Total = rank from top + rank from bottom − 1 = 8 + 12 − 1 = 19.",
+      "tryPrompt": "Priya is 6th from top and 14th from bottom. Total students?  (a) 20  (b) 19  (c) 21  (d) 18",
+      "masteryCheck": "19",
+      "instantFeedbackWin": "Correct! 6 + 14 − 1 = 19. Total is 19 students. You have nailed the core formula!",
+      "instantFeedbackRetry": "Total = 6 + 14 − 1 = 19. Do not forget the −1, otherwise you count Priya twice.",
+      "reviewPrompt": "Why do we subtract 1 in the total formula?",
+      "xpReward": 15,
+      "badgeFocus": "Total Finder"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "People Between Two Students",
+      "coachHook": "Two students stand in the same row but different spots. How many people are between them?",
+      "boardDemo": {
+        "title": "Priya is 6th from left, Raj is 4th from right. Row of 15. People between?",
+        "steps": [
+          "Draw a row of 15 positions",
+          "Mark Priya at position 6 from left",
+          "Mark Raj at position 4 from right",
+          "People between = Total − left rank − right rank",
+          "= 15 − 6 − 4 = 5"
+        ],
+        "teacherLine": "Shortcut: Total − left rank − right rank = people between, when the two students are counted from opposite ends."
+      },
+      "readAloudPrompt": "People between Priya and Raj = 15 − 6 − 4 = 5.",
+      "tryPrompt": "Amit is 5th from left, Riya is 3rd from right in a row of 20. People between them?  (a) 12  (b) 13  (c) 11  (d) 10",
+      "masteryCheck": "12",
+      "instantFeedbackWin": "Excellent! 20 − 5 − 3 = 12 people between Amit and Riya.",
+      "instantFeedbackRetry": "People between = Total − left rank − right rank = 20 − 5 − 3 = 12.",
+      "reviewPrompt": "Does this formula work if both students are counted from the same end?",
+      "xpReward": 10,
+      "badgeFocus": "Gap Finder"
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "New Students Joining — Rank Shift",
+      "coachHook": "When new students join above someone, their rank from top goes up!",
+      "boardDemo": {
+        "title": "Riya was 5th from top. 3 new students join above her. New rank?",
+        "steps": [
+          "Originally Riya was 5th from top",
+          "3 new students are added above her",
+          "Each new student pushes Riya down by 1",
+          "New rank from top = 5 + 3 = 8"
+        ],
+        "teacherLine": "New students joining above push everyone below them down. Add the number of new entrants to the current top rank."
+      },
+      "readAloudPrompt": "Riya was 5th. 3 new students join above her. New rank = 5 + 3 = 8.",
+      "tryPrompt": "Sam was 4th from top. 5 new students join above him. What is his new rank?  (a) 9  (b) 1  (c) 5  (d) 10",
+      "masteryCheck": "9",
+      "instantFeedbackWin": "Correct! 4 + 5 = 9. Sam is now 9th from the top.",
+      "instantFeedbackRetry": "New students above push Sam's rank up. 4 + 5 = 9.",
+      "reviewPrompt": "If 2 students leave from above Riya (now 8th), what is her new rank?",
+      "xpReward": 10,
+      "badgeFocus": "Rank Shifter"
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Linear Arrangement with Conditions",
+      "coachHook": "Clues given one by one — build the order step by step!",
+      "boardDemo": {
+        "title": "5 students: A, B, C, D, E. A is 2nd, C is 4th, B is just before C.",
+        "steps": [
+          "Place certain positions first: A is 2nd, C is 4th",
+          "B is just before C, so B is 3rd",
+          "Remaining positions 1st and 5th go to D and E",
+          "Possible order: D A B C E"
+        ],
+        "teacherLine": "Place the certain positions first, then use relative clues to fill the rest. Draw blank slots and fill them in order."
+      },
+      "readAloudPrompt": "A is 2nd, C is 4th, B is just before C so B is 3rd. The order is _ A B C _.",
+      "tryPrompt": "In a row of 5: P is 3rd. Q is just after P. R is 1st. Find Q's position.  (a) 2nd  (b) 4th  (c) 5th  (d) 1st",
+      "masteryCheck": "4th",
+      "instantFeedbackWin": "Correct! P is 3rd, Q is just after P, so Q is 4th.",
+      "instantFeedbackRetry": "P is 3rd. Q is just AFTER P — one position further down = 4th.",
+      "reviewPrompt": "Write out the full order R _ P Q _ using the given clues.",
+      "xpReward": 10,
+      "badgeFocus": "Arrangement Expert"
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Alphabetical Ranking",
+      "coachHook": "The alphabet is the world's oldest ranking system. Let's use it!",
+      "boardDemo": {
+        "title": "Rank PRIYA among: AMIT, MEERA, PRIYA, RAHUL, SANA",
+        "steps": [
+          "Sort alphabetically by first letter: A, M, P, R, S",
+          "AMIT → A (1st), MEERA → M (2nd), PRIYA → P (3rd)",
+          "RAHUL → R (4th), SANA → S (5th)",
+          "PRIYA is ranked 3rd"
+        ],
+        "teacherLine": "When first letters differ, sort by first letter. If two names share the same first letter, compare the second letter."
+      },
+      "readAloudPrompt": "Alphabetical order: AMIT, MEERA, PRIYA, RAHUL, SANA. PRIYA is 3rd.",
+      "tryPrompt": "Rank KIRAN among: ANIL, DEEPA, KIRAN, MOHAN, SURESH.  (a) 2nd  (b) 3rd  (c) 4th  (d) 1st",
+      "masteryCheck": "3rd",
+      "instantFeedbackWin": "Correct! ANIL, DEEPA, KIRAN, MOHAN, SURESH. KIRAN is 3rd alphabetically.",
+      "instantFeedbackRetry": "Sort by first letter: A, D, K, M, S. KIRAN starts with K — that is the 3rd position.",
+      "reviewPrompt": "If BHANU is added to the list, what rank does KIRAN move to?",
+      "xpReward": 10,
+      "badgeFocus": "Alpha Ranker"
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Row-Column Position from Right",
+      "coachHook": "Seats have two coordinates — row and column. Let's find position from the right end!",
+      "boardDemo": {
+        "title": "Student sits in row 3, column 4. 8 columns total. Position from right?",
+        "steps": [
+          "Total columns = 8, Student is in column 4",
+          "Formula: Position from right = Total columns − Column + 1",
+          "= 8 − 4 + 1 = 5",
+          "The student is 5th from the right in row 3"
+        ],
+        "teacherLine": "This is the same formula as rank from bottom. The +1 avoids leaving the student uncounted."
+      },
+      "readAloudPrompt": "Position from right = Total columns − Column + 1 = 8 − 4 + 1 = 5.",
+      "tryPrompt": "A student sits in column 3 of a row with 10 columns. Position from right?  (a) 7  (b) 8  (c) 6  (d) 9",
+      "masteryCheck": "8",
+      "instantFeedbackWin": "Correct! 10 − 3 + 1 = 8. The student is 8th from the right.",
+      "instantFeedbackRetry": "Position from right = 10 − 3 + 1 = 8. Same formula as rank from bottom!",
+      "reviewPrompt": "A student is 6th from both the left and right. How many columns are there?",
+      "xpReward": 10,
+      "badgeFocus": "Grid Navigator"
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Middle Student from Three Ranks",
+      "coachHook": "Three students, three ranks — who is in the middle position?",
+      "boardDemo": {
+        "title": "A is 3rd, B is 7th, C is 5th from top. Who is in the middle?",
+        "steps": [
+          "Sort ranks numerically: 3 (A), 5 (C), 7 (B)",
+          "Middle rank = 5 → middle student = C"
+        ],
+        "teacherLine": "Sort the three ranks numerically. The middle value belongs to the middle student."
+      },
+      "readAloudPrompt": "Sort ranks: 3, 5, 7. Middle rank is 5. That is student C.",
+      "tryPrompt": "P is 2nd from top, Q is 8th, R is 5th. Who is the middle student?  (a) P  (b) R  (c) Q  (d) Cannot determine",
+      "masteryCheck": "R",
+      "instantFeedbackWin": "Correct! Ranks sorted: 2, 5, 8. Middle rank = 5 = student R.",
+      "instantFeedbackRetry": "Sort the three ranks: 2, 5, 8. The middle rank is 5, which belongs to R.",
+      "reviewPrompt": "If a 4th student S joins at rank 6, who is now the 2nd from the top among these four?",
+      "xpReward": 10,
+      "badgeFocus": "Middle Finder"
+    },
+    {
+      "exerciseGroup": "I",
+      "subtopic": "Speed Round — All Ranking Types",
+      "coachHook": "Final speed round! Four types of ranking in quick succession. Identify the type and apply the right formula!",
+      "boardDemo": {
+        "title": "Ranking Speed Strategy",
+        "steps": [
+          "Type 1 (top to bottom): Rank_bottom = Total − Rank_top + 1",
+          "Type 2 (find total): Total = Rank_top + Rank_bottom − 1",
+          "Type 3 (people between): Total − Left − Right",
+          "Type 4 (row-column): Total_cols − Col + 1"
+        ],
+        "teacherLine": "Four formulas, four seconds each. Practice until they are automatic!"
+      },
+      "readAloudPrompt": "Identify the type from the question, recall the formula, substitute, solve.",
+      "tryPrompt": "Meera is 9th from the top and 6th from the bottom of a queue. How many people are in the queue?  (a) 14  (b) 15  (c) 16  (d) 13",
+      "masteryCheck": "14",
+      "instantFeedbackWin": "Brilliant! 9 + 6 − 1 = 14. Speed round cleared!",
+      "instantFeedbackRetry": "Total = rank from top + rank from bottom − 1 = 9 + 6 − 1 = 14.",
+      "reviewPrompt": "Write all four ranking formulas from memory.",
+      "xpReward": 15,
+      "badgeFocus": "Rankings Ruler"
+    }
+  ],
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "B1",
+        "type": "hook",
+        "teacherLine": "You are 5th in a queue of 20 people. Quick — what is your rank from the back? There is a formula that gets you there in one second. Let's see it!",
+        "boardSteps": [
+          "Draw a queue of 20",
+          "Mark position 5 from the front",
+          "Reveal formula: Total − Rank + 1 = 20 − 5 + 1 = 16"
+        ],
+        "duration": 60
+      },
+      {
+        "beatId": "B2",
+        "type": "teach",
+        "teacherLine": "Four key ranking formulas today. One: Rank from bottom = Total − Rank from top + 1. Two: Total = Rank from top + Rank from bottom − 1. Three: People between = Total − Left rank − Right rank. Four: Position from right = Total columns − Column + 1.",
+        "boardSteps": [
+          "Write all four formulas",
+          "Highlight the +1 and −1 in each",
+          "Show one worked example per formula"
+        ],
+        "duration": 90
+      },
+      {
+        "beatId": "B3",
+        "type": "practice",
+        "teacherLine": "Arjun is 8th from the top and 12th from the bottom. How many students are in the class? Use formula 2!",
+        "boardSteps": [
+          "Student writes: Total = 8 + 12 − 1 = 19",
+          "Verify: 19 − 8 + 1 = 12. Check!"
+        ],
+        "duration": 90
+      },
+      {
+        "beatId": "B4",
+        "type": "review",
+        "teacherLine": "Rankings appear in every competitive exam. Master these four formulas and you will never lose a ranking mark again. You have earned the Rankings Ruler badge!",
+        "boardSteps": [
+          "Recap all four formulas",
+          "Display badge: Rankings Ruler",
+          "Show XP tally"
+        ],
+        "duration": 60
+      }
+    ]
+  }
+}

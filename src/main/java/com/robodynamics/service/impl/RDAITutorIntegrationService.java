@@ -60,6 +60,20 @@ public class RDAITutorIntegrationService {
     private Integer neetChemistryDbCourseId;
     @Value("${rd.ai.tutor.neet.biology.db-course-id:0}")
     private Integer neetBiologyDbCourseId;
+    @Value("${rd.ai.tutor.aptitude.reasoning.db-course-id:0}")
+    private Integer aptitudeReasoningDbCourseId;
+    @Value("${rd.ai.tutor.financial.literacy.db-course-id:0}")
+    private Integer financialLiteracyDbCourseId;
+    @Value("${rd.ai.tutor.vedic.g4.db-course-id:173}")
+    private Integer vedicG4DbCourseId;
+    @Value("${rd.ai.tutor.vedic.g5.db-course-id:174}")
+    private Integer vedicG5DbCourseId;
+    @Value("${rd.ai.tutor.vedic.g6.db-course-id:175}")
+    private Integer vedicG6DbCourseId;
+    @Value("${rd.ai.tutor.vedic.g7.db-course-id:176}")
+    private Integer vedicG7DbCourseId;
+    @Value("${rd.ai.tutor.vedic.g8.db-course-id:177}")
+    private Integer vedicG8DbCourseId;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -104,6 +118,8 @@ public class RDAITutorIntegrationService {
                 .append("/ai-tutor/learn?token=").append(encoded)
                 .append("&module=").append(URLEncoder.encode(normalizedModule, StandardCharsets.UTF_8))
                 .append("&courseId=").append(URLEncoder.encode(courseId, StandardCharsets.UTF_8));
+        String moduleGrade = gradeForModule(normalizedModule);
+        if (moduleGrade != null) out.append("&grade=").append(moduleGrade);
         if (enrollmentId != null && enrollmentId.intValue() > 0) out.append("&enrollmentId=").append(enrollmentId.intValue());
         if (dbCourseId != null && dbCourseId.intValue() > 0) out.append("&dbCourseId=").append(dbCourseId.intValue());
         String cleanName = safe(learnerName, "").trim();
@@ -412,14 +428,93 @@ public class RDAITutorIntegrationService {
     private String upper(String value) { return value == null ? null : value.trim().toUpperCase(Locale.ENGLISH); }
 
     private String resolveRole(RDUser user) { return user.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue() ? "STUDENT" : "PARENT"; }
-    private String normalizeModule(String module) { String value = safe(module, DEFAULT_MODULE).trim(); return value.isEmpty() ? DEFAULT_MODULE : value.toUpperCase(Locale.ENGLISH); }
-    private String courseIdForModule(String module) { String mapped = MODULE_COURSE_MAP.get(normalizeModule(module)); return mapped == null || mapped.isBlank() ? "vedic_math" : mapped; }
+
+    public String normalizeRequestedModule(String module) {
+        String value = safe(module, DEFAULT_MODULE).trim();
+        if (value.isEmpty()) return DEFAULT_MODULE;
+        String normalized = value.toUpperCase(Locale.ENGLISH).replace('-', '_').replace(' ', '_');
+        switch (normalized) {
+            case "VEDIC":
+            case "VEDIC_MATHS":
+            case "VEDIC_MATHEMATICS":
+                return "VEDIC_MATH";
+            case "VEDIC_MATH_G4": case "VEDIC_G4": case "VEDIC_MATH_GRADE4": case "VEDIC_MATH_GRADE_4":
+                return "VEDIC_MATH_G4";
+            case "VEDIC_MATH_G5": case "VEDIC_G5": case "VEDIC_MATH_GRADE5": case "VEDIC_MATH_GRADE_5":
+                return "VEDIC_MATH_G5";
+            case "VEDIC_MATH_G6": case "VEDIC_G6": case "VEDIC_MATH_GRADE6": case "VEDIC_MATH_GRADE_6":
+                return "VEDIC_MATH_G6";
+            case "VEDIC_MATH_G7": case "VEDIC_G7": case "VEDIC_MATH_GRADE7": case "VEDIC_MATH_GRADE_7":
+                return "VEDIC_MATH_G7";
+            case "VEDIC_MATH_G8": case "VEDIC_G8": case "VEDIC_MATH_GRADE8": case "VEDIC_MATH_GRADE_8":
+                return "VEDIC_MATH_G8";
+            case "PHYSICS":
+            case "NEETPHYSICS":
+            case "NEET_PHYSICS_TUTOR":
+                return "NEET_PHYSICS";
+            case "CHEMISTRY":
+            case "NEETCHEMISTRY":
+            case "NEET_CHEMISTRY_TUTOR":
+                return "NEET_CHEMISTRY";
+            case "BIOLOGY":
+            case "BIO":
+            case "NEETBIOLOGY":
+            case "NEET_BIOLOGY_TUTOR":
+                return "NEET_BIOLOGY";
+            case "APTITUDE":
+            case "REASONING":
+            case "APTITUDE_TUTOR":
+            case "REASONING_TUTOR":
+            case "APTITUDE_REASONING_TUTOR":
+                return "APTITUDE_REASONING";
+            case "FINANCE":
+            case "FINANCIAL":
+            case "FINANCIAL_TUTOR":
+            case "FINANCIAL_LITERACY_TUTOR":
+                return "FINANCIAL_LITERACY";
+            default:
+                return normalized;
+        }
+    }
+
+    public boolean requiresEnrollment(String module) {
+        switch (normalizeRequestedModule(module)) {
+            case "NEET_PHYSICS":
+            case "NEET_CHEMISTRY":
+            case "NEET_BIOLOGY":
+            case "APTITUDE_REASONING":
+            case "FINANCIAL_LITERACY":
+            case "VEDIC_MATH_G4":
+            case "VEDIC_MATH_G5":
+            case "VEDIC_MATH_G6":
+            case "VEDIC_MATH_G7":
+            case "VEDIC_MATH_G8":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public String resolveCourseAliasForModule(String module) {
+        String mapped = MODULE_COURSE_MAP.get(normalizeRequestedModule(module));
+        return mapped == null || mapped.isBlank() ? "vedic_math" : mapped;
+    }
+
+    private String normalizeModule(String module) { return normalizeRequestedModule(module); }
+    private String courseIdForModule(String module) { return resolveCourseAliasForModule(module); }
 
     public Integer resolveDbCourseIdForModule(String module) {
         switch (normalizeModule(module)) {
             case "NEET_PHYSICS": return sanitizeCourseId(neetPhysicsDbCourseId);
             case "NEET_CHEMISTRY": return sanitizeCourseId(neetChemistryDbCourseId);
             case "NEET_BIOLOGY": return sanitizeCourseId(neetBiologyDbCourseId);
+            case "APTITUDE_REASONING": return sanitizeCourseId(aptitudeReasoningDbCourseId);
+            case "FINANCIAL_LITERACY": return sanitizeCourseId(financialLiteracyDbCourseId);
+            case "VEDIC_MATH_G4": return sanitizeCourseId(vedicG4DbCourseId);
+            case "VEDIC_MATH_G5": return sanitizeCourseId(vedicG5DbCourseId);
+            case "VEDIC_MATH_G6": return sanitizeCourseId(vedicG6DbCourseId);
+            case "VEDIC_MATH_G7": return sanitizeCourseId(vedicG7DbCourseId);
+            case "VEDIC_MATH_G8": return sanitizeCourseId(vedicG8DbCourseId);
             default: return null;
         }
     }
@@ -434,6 +529,32 @@ public class RDAITutorIntegrationService {
             case "NEET_PHYSICS": return courseName.contains("neet physics") || courseName.contains("physics");
             case "NEET_CHEMISTRY": return courseName.contains("neet chemistry") || courseName.contains("chemistry");
             case "NEET_BIOLOGY": return courseName.contains("neet biology") || courseName.contains("biology");
+            case "APTITUDE_REASONING":
+                return courseName.contains("aptitude")
+                        || courseName.contains("reasoning")
+                        || courseName.contains("logical reasoning")
+                        || courseName.contains("quantitative aptitude");
+            case "FINANCIAL_LITERACY":
+                return courseName.contains("financial literacy")
+                        || courseName.contains("personal finance")
+                        || courseName.contains("financial")
+                        || courseName.contains("money")
+                        || courseName.contains("banking");
+            case "VEDIC_MATH_G4":
+                return courseName.contains("grade 4 vedic") || courseName.contains("vedic math grade 4")
+                        || (courseName.contains("mindsut") && courseName.contains("grade 4"));
+            case "VEDIC_MATH_G5":
+                return courseName.contains("grade 5 vedic") || courseName.contains("vedic math grade 5")
+                        || (courseName.contains("mindsut") && courseName.contains("grade 5"));
+            case "VEDIC_MATH_G6":
+                return courseName.contains("grade 6 vedic") || courseName.contains("vedic math grade 6")
+                        || (courseName.contains("mindsut") && courseName.contains("grade 6"));
+            case "VEDIC_MATH_G7":
+                return courseName.contains("grade 7 vedic") || courseName.contains("vedic math grade 7")
+                        || (courseName.contains("mindsut") && courseName.contains("grade 7"));
+            case "VEDIC_MATH_G8":
+                return courseName.contains("grade 8 vedic") || courseName.contains("vedic math grade 8")
+                        || (courseName.contains("mindsut") && courseName.contains("grade 8"));
             default: return false;
         }
     }
@@ -462,9 +583,28 @@ public class RDAITutorIntegrationService {
     private static Map<String, String> buildModuleCourseMap() {
         Map<String, String> map = new HashMap<>();
         map.put("VEDIC_MATH", "vedic_math");
+        map.put("VEDIC_MATH_G4", "vedic_math_g4");
+        map.put("VEDIC_MATH_G5", "vedic_math_g5");
+        map.put("VEDIC_MATH_G6", "vedic_math_g6");
+        map.put("VEDIC_MATH_G7", "vedic_math_g7");
+        map.put("VEDIC_MATH_G8", "vedic_math_g8");
         map.put("NEET_PHYSICS", "neet_physics");
         map.put("NEET_CHEMISTRY", "neet_chemistry");
         map.put("NEET_BIOLOGY", "neet_biology");
+        map.put("APTITUDE_REASONING", "aptitude_reasoning");
+        map.put("FINANCIAL_LITERACY", "financial_literacy");
         return map;
     }
+
+    public String gradeForModule(String module) {
+        switch (normalizeModule(module)) {
+            case "VEDIC_MATH_G4": return "4";
+            case "VEDIC_MATH_G5": return "5";
+            case "VEDIC_MATH_G6": return "6";
+            case "VEDIC_MATH_G7": return "7";
+            case "VEDIC_MATH_G8": return "8";
+            default: return null;
+        }
+    }
 }
+

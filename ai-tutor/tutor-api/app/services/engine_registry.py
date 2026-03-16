@@ -30,6 +30,8 @@ class TutorEngineRegistry:
         "NEET_PHYSICS": "neet_physics",
         "NEET_CHEMISTRY": "neet_chemistry",
         "NEET_BIOLOGY": "neet_biology",
+        "APTITUDE_REASONING": "aptitude_reasoning",
+        "FINANCIAL_LITERACY": "financial_literacy",
     }
 
     def __init__(self, engines: Dict[str, TutorEngine]) -> None:
@@ -52,8 +54,34 @@ class TutorEngineRegistry:
             return "neet_chemistry"
         if cid in {"biology", "bio", "neetbiology", "neet_biology", "neet-biology"}:
             return "neet_biology"
+        if cid in {
+            "aptitude",
+            "reasoning",
+            "aptitude_reasoning",
+            "aptitude-reasoning",
+            "logical_reasoning",
+            "quantitative_aptitude",
+        }:
+            return "aptitude_reasoning"
+        if cid in {
+            "finance",
+            "financial",
+            "financial_literacy",
+            "financial-literacy",
+            "personal_finance",
+        }:
+            return "financial_literacy"
         if cid in {"phonics"}:
             return "phonics"
+        # Grade-based MindSpark variants: aptitude_g6 / mindspark_g6 → aptitude_reasoning_g6
+        import re as _re
+        _ms_match = _re.match(r"^(?:aptitude|mindspark|mindsp[ae]r[ck])_g(?:rade)?(\d+)$", cid, _re.IGNORECASE)
+        if _ms_match:
+            return f"aptitude_reasoning_g{_ms_match.group(1)}"
+        # Campus tiers: aptitude_campus_pro, mindspark_campus_pro → aptitude_campus_pro
+        _campus_match = _re.match(r"^(?:aptitude(?:_reasoning)?|mindspark|mindsp[ae]r[ck])_(campus_\w+)$", cid, _re.IGNORECASE)
+        if _campus_match:
+            return f"aptitude_{_campus_match.group(1).lower()}"
         return cid
 
     def resolve_course_id(self, requested_course_id: str | None, module_code: str | None = None) -> str:
@@ -97,3 +125,5 @@ class TutorEngineRegistry:
             title = "Vedic Math" if cid == "vedic_math" else cid.replace("_", " ").title()
             out.append({"courseId": cid, "title": title})
         return out
+
+

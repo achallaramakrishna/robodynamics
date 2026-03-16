@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Diagonal arrow pointing northeast -->
+  <line x1="20" y1="80" x2="78" y2="22" stroke="#1d4ed8" stroke-width="4" stroke-linecap="round"/>
+  <!-- Arrowhead at northeast tip -->
+  <polygon points="78,22 58,26 74,42" fill="#1d4ed8"/>
+</svg>

@@ -37,6 +37,7 @@ from app.services.conversation_engine import ConversationEngine
 from app.services.engine_registry import TutorEngineRegistry
 from app.services.generic_course_engine import CourseTemplateRuleEngine, resolve_template_course_id
 from app.services.rule_engine import VedicRuleEngine
+from app.services.behavior_classifier import BehaviorClassifier
 from app.services.orchestrator import TutorOrchestrator
 from app.services.quality_refresh import QualityRefreshService
 from app.services.session_store import SessionStore
@@ -76,6 +77,7 @@ engine_registry = TutorEngineRegistry(
     }
 )
 quality_refresh_service = QualityRefreshService()
+behavior_classifier = BehaviorClassifier()
 conversation_engine = ConversationEngine()
 session_store = SessionStore()
 orchestrator = TutorOrchestrator()
@@ -128,6 +130,14 @@ async def catalog(courseId: str | None = None, x_ai_tutor_key: str | None = Head
         "exerciseGroups": engine.exercises(),
         "courses": engine_registry.courses(),
     }
+
+
+@app.get("/ai-tutor-api/tutor/guest-token")
+@app.get("/ai-tutor-api/vedic/guest-token")
+async def guest_token(chapter: str = "L1_COMPLETING_WHOLE", grade: str = "8") -> dict:
+    """Issue a short-lived demo JWT so guests can try the tutor without logging in."""
+    token = token_service.issue_guest(chapter_code=chapter, grade=grade)
+    return {"token": token, "chapterCode": chapter, "isDemo": True, "maxGroups": 3}
 
 
 @app.post("/ai-tutor-api/tutor/start", response_model=StartResponse)
@@ -378,6 +388,7 @@ async def check_answer(
         active_exercise_group=session.exercise_group,
     )
 
+    archetype = behavior_classifier.classify(summary)
     quality = await quality_refresh_service.maybe_refresh(
         summary,
         {
@@ -386,6 +397,7 @@ async def check_answer(
             "exerciseGroup": session.exercise_group,
             "subtopic": question.get("subtopic", ""),
             "questionType": question.get("type", ""),
+            "studentArchetype": archetype,
         },
         bool(result["correct"]),
     )
@@ -415,6 +427,9 @@ async def check_answer(
             },
         )
     )
+    silence_ms = behavior_classifier.silence_recovery_ms(archetype)
+    board_speed = behavior_classifier.board_speed_factor(archetype)
+
     await orchestrator.notify(
         session.session_id,
         "ANSWER_SUBMITTED",
@@ -425,6 +440,7 @@ async def check_answer(
             "responseTimeMs": payload.responseTimeMs,
             "tutorAction": quality.get("tutorAction"),
             "coachTip": quality.get("coachTip"),
+            "studentArchetype": archetype,
         },
     )
 
@@ -438,6 +454,9 @@ async def check_answer(
         coachTip=quality.get("coachTip"),
         summary=summary,
         sessionProgress=session_progress,
+        studentArchetype=archetype,
+        silenceRecoveryMs=silence_ms,
+        boardSpeedFactor=board_speed,
     )
 
 
@@ -466,6 +485,8 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
     )
     history = session_store.get_conversation(payload.sessionId)
     avatar_name = (payload.avatarName or "Arya").strip()
+    avatar_id = (payload.avatarId or "raj").strip().lower()
+    archetype = behavior_classifier.classify(summary)
 
     # Ask the LLM — falls back gracefully if no API key is set
     try:
@@ -478,6 +499,8 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
             current_question=session.current_question or None,
             teaching_context="doubt resolution",
             grade=session.grade,
+            archetype=archetype,
+            avatar_id=avatar_id,
         )
     except Exception:
         reply = engine.doubt_reply(payload.message, session.chapter_code)
@@ -556,7 +579,9 @@ async def chat(payload: ChatRequest, x_ai_tutor_key: str | None = Header(default
     )
     history = session_store.get_conversation(payload.sessionId)
     avatar_name = (payload.avatarName or "Arya").strip()
+    avatar_id = (payload.avatarId or "raj").strip().lower()
     teaching_context = (payload.context or "doubt").strip()
+    archetype = behavior_classifier.classify(summary)
 
     try:
         reply = await conversation_engine.chat(
@@ -568,6 +593,8 @@ async def chat(payload: ChatRequest, x_ai_tutor_key: str | None = Header(default
             current_question=session.current_question or None,
             teaching_context=teaching_context,
             grade=session.grade,
+            archetype=archetype,
+            avatar_id=avatar_id,
         )
     except Exception:
         reply = engine.doubt_reply(payload.message, session.chapter_code)

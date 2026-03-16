@@ -1,0 +1,192 @@
+{
+  "courseId": "vedic_math_g8",
+  "courseTitle": "MindSutra Grade 8 — Vedic Math",
+  "gradeBand": "Grade 8",
+  "description": "CBSE Grade 8 aligned: square roots by digit-grouping, cube root inspection, algebraic identities, 2-variable simultaneous equations, 4-digit criss-cross, percentage decomposition, and advanced divisibility.",
+  "chapters": [
+    {
+      "chapterCode": "VM_G8_L1_SQUARE_ROOTS",
+      "title": "Square Root by Inspection — Vedic Digit-Grouping",
+      "estimatedMinutes": 25,
+      "subtopics": ["Digit-grouping method", "Last-digit clue (units digit of perfect square)", "Non-perfect square approximation"],
+      "learningGoals": [
+        "Find square root of any perfect square up to 10,000 by inspection",
+        "Use last-digit pattern to identify the units digit of the root",
+        "Approximate square root of non-perfect squares to 1 decimal place"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Last-digit pattern (1²–9²)"},
+        {"exerciseGroup":"B","subtopic":"2-digit square roots: 16, 25, 36…"},
+        {"exerciseGroup":"C","subtopic":"3-digit square roots: 144, 169, 196…"},
+        {"exerciseGroup":"D","subtopic":"4-digit square roots: 1024–9801"},
+        {"exerciseGroup":"E","subtopic":"Non-perfect: approximate √50, √72"},
+        {"exerciseGroup":"F","subtopic":"MCQ: compute square root"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: digit-group method"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: √ of 6-digit numbers"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L2_CUBE_ROOTS",
+      "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+      "estimatedMinutes": 22,
+      "subtopics": ["Cube units-digit pattern (1³–9³)", "2-digit cube root by inspection", "Perfect cube recognition"],
+      "learningGoals": [
+        "Memorize units-digit pattern of cubes 1–9",
+        "Find cube root of any 4-6 digit perfect cube by inspection",
+        "Determine if a number is a perfect cube from its digit pattern"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"1³ to 9³: units-digit pattern"},
+        {"exerciseGroup":"B","subtopic":"3-digit cube roots: 125, 216, 343"},
+        {"exerciseGroup":"C","subtopic":"4-digit cube roots: 1331, 1728"},
+        {"exerciseGroup":"D","subtopic":"5-6 digit cube roots: 29791, 97336"},
+        {"exerciseGroup":"E","subtopic":"Is this a perfect cube?"},
+        {"exerciseGroup":"F","subtopic":"MCQ: find cube root"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: inspection method"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: estimate non-perfect cube root"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L3_ALGEBRAIC_IDENTITIES_ADV",
+      "title": "Identity Champion — Advanced Algebraic Identities",
+      "estimatedMinutes": 24,
+      "subtopics": ["(a+b)³", "(a−b)³", "(a+b+c)²", "Sum and product of roots"],
+      "learningGoals": [
+        "Expand (a+b)³ and (a−b)³ using Vedic pattern",
+        "Apply (a+b+c)² identity for 3-term expressions",
+        "Use identities to evaluate numerical expressions like 103³"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Review: (a+b)² and (a−b)²"},
+        {"exerciseGroup":"B","subtopic":"(a+b)³ = a³+3a²b+3ab²+b³"},
+        {"exerciseGroup":"C","subtopic":"(a−b)³ shortcut"},
+        {"exerciseGroup":"D","subtopic":"Evaluate 103³, 99³ using identity"},
+        {"exerciseGroup":"E","subtopic":"(a+b+c)²: expand and simplify"},
+        {"exerciseGroup":"F","subtopic":"MCQ: expand the expression"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: (a+b)³ walkthrough"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: sum/product of roots"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L4_SIMULTANEOUS_EQ",
+      "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+      "estimatedMinutes": 25,
+      "subtopics": ["Paravartya cross-multiply method", "Elimination by substitution speed", "Word problem setup"],
+      "learningGoals": [
+        "Solve 2-variable linear systems using Paravartya cross-multiply in one step",
+        "Identify when elimination is faster vs substitution",
+        "Set up simultaneous equations from word problems and solve instantly"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"System setup: 2 equations, 2 unknowns"},
+        {"exerciseGroup":"B","subtopic":"Paravartya cross-multiply for x and y"},
+        {"exerciseGroup":"C","subtopic":"Simple systems: x+y=10, x−y=2"},
+        {"exerciseGroup":"D","subtopic":"Harder systems: 2x+3y=12, x+y=5"},
+        {"exerciseGroup":"E","subtopic":"Word problems: age, coins, mixture"},
+        {"exerciseGroup":"F","subtopic":"MCQ: solve for x"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: Paravartya cross-multiply"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: 3-variable system (intro)"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L5_CRISS_CROSS_4DIG",
+      "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+      "estimatedMinutes": 26,
+      "subtopics": ["7-column Urdhva pattern", "4-digit × 4-digit setup", "Carry tracking"],
+      "learningGoals": [
+        "Set up the 7-column Urdhva-Tiryak grid for 4×4 digit multiplication",
+        "Identify all cross-products for each column systematically",
+        "Compute 4-digit × 4-digit products without a calculator"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Review: 3×3 Urdhva (5 columns)"},
+        {"exerciseGroup":"B","subtopic":"4×4 column structure (7 columns)"},
+        {"exerciseGroup":"C","subtopic":"Column 1: units × units"},
+        {"exerciseGroup":"D","subtopic":"Columns 2 and 3: building up"},
+        {"exerciseGroup":"E","subtopic":"Column 4 (middle): 4 cross-products"},
+        {"exerciseGroup":"F","subtopic":"Columns 5, 6, 7: mirror collapse"},
+        {"exerciseGroup":"G","subtopic":"MCQ: value of a specific column"},
+        {"exerciseGroup":"H","subtopic":"Fill-the-step: full 4×4 walkthrough"},
+        {"exerciseGroup":"I","subtopic":"Challenge: include zeros, verify result"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L6_PERCENTAGE_SPEED",
+      "title": "Percentage Power — Mental % in 3 Seconds",
+      "estimatedMinutes": 22,
+      "subtopics": ["Benchmark % (10%, 1%, 5%, 25%)", "Vedic decomposition: 37% = 25%+10%+2%", "Reverse %: find base from percentage"],
+      "learningGoals": [
+        "Calculate any percentage by decomposing into benchmarks",
+        "Find 15%, 37%, 62% of any 3-digit number mentally",
+        "Solve reverse percentage problems (find base) instantly"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Benchmarks: 10%, 1%, 5% of any number"},
+        {"exerciseGroup":"B","subtopic":"Compose: 15%=10%+5%, 25%=10%+10%+5%"},
+        {"exerciseGroup":"C","subtopic":"Complex %: 37%, 62%, 73%"},
+        {"exerciseGroup":"D","subtopic":"Discount and markup problems"},
+        {"exerciseGroup":"E","subtopic":"Reverse %: X% of ? = 60"},
+        {"exerciseGroup":"F","subtopic":"MCQ: compute the percentage"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: decomposition method"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: compound interest mental estimate"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L7_NIKHILAM_LARGE",
+      "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+      "estimatedMinutes": 25,
+      "subtopics": ["Base 10000 Nikhilam", "4-digit deficit computation", "Sub-base techniques"],
+      "learningGoals": [
+        "Apply Nikhilam to 4-digit numbers near base 10000",
+        "Handle mixed cases (above/below base) with correct sign management",
+        "Use sub-base technique for numbers near 5000"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Review Nikhilam near 100 and 1000"},
+        {"exerciseGroup":"B","subtopic":"Near 10000: 9997×9998"},
+        {"exerciseGroup":"C","subtopic":"Larger deviations: 9990×9985"},
+        {"exerciseGroup":"D","subtopic":"Above 10000: 10002×10003"},
+        {"exerciseGroup":"E","subtopic":"Sub-base 5000"},
+        {"exerciseGroup":"F","subtopic":"MCQ: identify product"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: 4-digit Nikhilam"},
+        {"exerciseGroup":"H","subtopic":"Speed drill"},
+        {"exerciseGroup":"I","subtopic":"Challenge: near-base with decimals"}
+      ]
+    },
+    {
+      "chapterCode": "VM_G8_L8_DIVISIBILITY_ADVANCED",
+      "title": "Divisibility Decoded — Test by 7, 11, 13 and Beyond",
+      "estimatedMinutes": 22,
+      "subtopics": ["Osculator method for divisibility by 7", "Alternating sum rule for 11", "Vestanam (osculator) for 13, 17, 19"],
+      "learningGoals": [
+        "Apply Vedic osculator method to test divisibility by 7",
+        "Use alternating-digit-sum rule for divisibility by 11",
+        "Derive osculator for 13 and test divisibility"
+      ],
+      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseFlow": [
+        {"exerciseGroup":"A","subtopic":"Review: divisibility by 2, 3, 5, 9"},
+        {"exerciseGroup":"B","subtopic":"Divisibility by 11: alternating sum"},
+        {"exerciseGroup":"C","subtopic":"Osculator concept for 7"},
+        {"exerciseGroup":"D","subtopic":"Apply osculator: test 3-digit numbers"},
+        {"exerciseGroup":"E","subtopic":"Osculator for 13"},
+        {"exerciseGroup":"F","subtopic":"MCQ: is this divisible by 7?"},
+        {"exerciseGroup":"G","subtopic":"Fill-the-step: osculator reduction"},
+        {"exerciseGroup":"H","subtopic":"Speed drill: test 10 numbers"},
+        {"exerciseGroup":"I","subtopic":"Challenge: divisibility by 17 and 19"}
+      ]
+    }
+  ]
+}

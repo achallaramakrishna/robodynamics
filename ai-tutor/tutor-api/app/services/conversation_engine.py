@@ -66,9 +66,47 @@ def _grade_profile(grade: str) -> dict:
     return _GRADE_PROFILES["secondary"]  # fallback
 
 
+# ── Avatar persona paragraphs ─────────────────────────────────────────────────
+_AVATAR_PERSONAS: dict = {
+    "raj": (
+        "You are RAJ — the calm, patient 'wise uncle' coach. "
+        "You speak with quiet confidence and methodical precision. "
+        "You use phrases like 'Let me show you one clear step at a time.' "
+        "You never rush. You celebrate effort before correcting errors."
+    ),
+    "arya": (
+        "You are ARYA — energetic, warm, and endlessly encouraging. "
+        "You celebrate every correct answer enthusiastically. "
+        "You use short, punchy sentences and upbeat phrases like "
+        "'Yes! That is it!' and 'You are doing amazing — let us try the next one!' "
+        "You make learning feel like a game."
+    ),
+    "tara": (
+        "You are TARA — sharp, focused, and exam-mode precise. "
+        "You are concise and direct. You connect every answer to exam patterns. "
+        "You use phrases like 'Correct — that is exactly the approach. "
+        "Now apply it to this harder case.' Brief praise, then immediately raise the bar."
+    ),
+    "ved": (
+        "You are VED — a storyteller who teaches through real-life analogies. "
+        "You connect every concept to something tangible: money, sports, coding, cooking. "
+        "You use phrases like 'Think of it this way...' and "
+        "'This is exactly how banks calculate interest.' "
+        "You make abstract ideas feel concrete and useful."
+    ),
+    "niva": (
+        "You are NIVA — playful, curious, and puzzle-loving. "
+        "You teach through riddles, patterns, and mini challenges. "
+        "You use phrases like 'Can you spot the pattern?' and "
+        "'Here is a little puzzle for you — ready?' "
+        "You make young learners feel clever and capable."
+    ),
+}
+
 # ── System prompt template ───────────────────────────────────────────────────
 _SYSTEM_TEMPLATE = """\
-You are {avatar_name}, a warm and expert Vedic Mathematics AI tutor at RoboDynamics.
+You are {avatar_name}, an expert AI tutor at RoboDynamics.
+{avatar_persona}
 
 TODAY'S LESSON: "{lesson_title}"
 Subtopics: {subtopics}
@@ -79,6 +117,9 @@ STUDENT CONTEXT:
 - Grade: {grade}
 - Attempts so far: {attempts}, Accuracy: {accuracy_pct}%, Error streak: {error_streak}
 - Current question: {current_question}
+
+STUDENT BEHAVIOUR RIGHT NOW:
+{archetype_note}
 
 YOUR TEACHING STYLE (Grade {grade} student):
 - {lang_instruction}
@@ -92,10 +133,9 @@ YOUR TEACHING STYLE (Grade {grade} student):
 - If the student asks about something unrelated, gently redirect: "Let's stay focused on today's lesson!"
 - When the student is on an error streak ({error_streak}+ wrong), immediately switch to a simpler analogy and shorter steps
 
-VEDIC MATHS TEACHING METHOD:
-- Always name the Vedic Sutra (formula) being used, e.g. "By the Completion" or "All from 9, Last from 10"
-- Show the mental shortcut first, then the written verification
-- Praise the Vedic method over the conventional method: "See how much faster this is!"
+SUBJECT TEACHING METHOD:
+- Always explain the core concept or formula being used
+- Show the shortcut or method first, then verify with a simple worked example
 - After explaining, always ask ONE check question to confirm understanding
 
 CURRENT TEACHING CONTEXT: {teaching_context}
@@ -155,6 +195,8 @@ class ConversationEngine:
         current_question: Optional[Dict[str, Any]],
         teaching_context: str = "doubt resolution",
         grade: str = "8",
+        archetype: str = "careful_learner",
+        avatar_id: str = "raj",
     ) -> str:
         """
         Generate a tutoring reply for the student's message.
@@ -162,18 +204,21 @@ class ConversationEngine:
         Args:
             message:          What the student just said/typed.
             history:          Prior conversation turns (Anthropic/OpenAI format).
-            avatar_name:      E.g. "Arya", "Ved", "Tara", "Niva".
+            avatar_name:      E.g. "Raj", "Arya", "Tara", "Niva".
             lesson:           Lesson dict from engine.lesson(chapter_code).
             summary:          Session summary dict (attempts, accuracy, error_streak …).
             current_question: The question currently displayed to the student.
             teaching_context: Human-readable label, e.g. "doubt resolution" or "hint request".
             grade:            Student's grade level string, e.g. "8".
+            archetype:        Student behaviour archetype from BehaviorClassifier.
+            avatar_id:        Avatar identifier (raj/arya/tara/ved/niva).
 
         Returns:
             Tutor reply as a plain string.
         """
         system = self._build_system_prompt(
-            avatar_name, lesson, summary, current_question, teaching_context, grade
+            avatar_name, lesson, summary, current_question, teaching_context, grade,
+            archetype=archetype, avatar_id=avatar_id,
         )
         # Trim history to last N turns (2 messages per turn)
         trimmed = history[-(self._max_history_turns * 2):]
@@ -202,16 +247,23 @@ class ConversationEngine:
         current_question: Optional[Dict[str, Any]],
         teaching_context: str,
         grade: str,
+        archetype: str = "careful_learner",
+        avatar_id: str = "raj",
     ) -> str:
+        from app.services.behavior_classifier import BehaviorClassifier
+
         learning_goals = "\n".join(
             f"  - {g}" for g in lesson.get("learningGoals", ["Understand the core concepts"])
         )
         subtopics = ", ".join(lesson.get("subtopics", ["core concepts"]))
         question_text = (current_question or {}).get("questionText", "not set yet")
         profile = _grade_profile(grade or "8")
+        avatar_persona = _AVATAR_PERSONAS.get(avatar_id.lower(), _AVATAR_PERSONAS["raj"])
+        archetype_note = BehaviorClassifier.coaching_note(archetype)
 
         return _SYSTEM_TEMPLATE.format(
             avatar_name=avatar_name or "Arya",
+            avatar_persona=avatar_persona,
             lesson_title=lesson.get("title", "this lesson"),
             subtopics=subtopics,
             learning_goals=learning_goals,
@@ -221,6 +273,7 @@ class ConversationEngine:
             error_streak=summary.get("errorStreak", 0),
             current_question=question_text,
             teaching_context=teaching_context,
+            archetype_note=archetype_note,
             lang_instruction=profile["language"],
             numbers_instruction=profile["numbers"],
             pace_instruction=profile["pace"],

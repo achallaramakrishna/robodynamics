@@ -1,0 +1,22 @@
+{
+  "courseId": "financial_literacy",
+  "courseTitle": "Financial Literacy",
+  "gradeBand": "8-12",
+  "subject": "financial_literacy",
+  "curriculumContext": "India life skills and decision-making",
+  "standardPath": "ai-tutor/scripts/standards/financial_literacy_standard.json",
+  "chapterDir": "ai-tutor/tutor-api/content-template/financial_literacy/chapter",
+  "sourcePdfDir": "docs/financial_literacy",
+  "artifactRoot": "ai-tutor/artifacts/pipeline",
+  "targetSessionMinutes": 30,
+  "difficultyModel": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "deliveryModes": [
+    "voice",
+    "board",
+    "text"
+  ]
+}

@@ -202,6 +202,18 @@ public class RDStudentDashboardController {
 		m.addAttribute("neetBiologyTutorEnabled", neetBiologyTutorEnabled);
 		m.addAttribute("hasAnyNeetTutorEnabled",
 				neetPhysicsTutorEnabled || neetChemistryTutorEnabled || neetBiologyTutorEnabled);
+		boolean mindsutrag4Enabled = hasAiTutorEnrollment(studentEnrollments, "VEDIC_MATH_G4");
+		boolean mindsutrag5Enabled = hasAiTutorEnrollment(studentEnrollments, "VEDIC_MATH_G5");
+		boolean mindsutrag6Enabled = hasAiTutorEnrollment(studentEnrollments, "VEDIC_MATH_G6");
+		boolean mindsutrag7Enabled = hasAiTutorEnrollment(studentEnrollments, "VEDIC_MATH_G7");
+		boolean mindsutrag8Enabled = hasAiTutorEnrollment(studentEnrollments, "VEDIC_MATH_G8");
+		m.addAttribute("mindsutrag4Enabled", mindsutrag4Enabled);
+		m.addAttribute("mindsutrag5Enabled", mindsutrag5Enabled);
+		m.addAttribute("mindsutrag6Enabled", mindsutrag6Enabled);
+		m.addAttribute("mindsutrag7Enabled", mindsutrag7Enabled);
+		m.addAttribute("mindsutrag8Enabled", mindsutrag8Enabled);
+		m.addAttribute("hasAnyMindsutraEnabled",
+				mindsutrag4Enabled || mindsutrag5Enabled || mindsutrag6Enabled || mindsutrag7Enabled || mindsutrag8Enabled);
 
 		// Fetch the total quizzes taken by the user
 		int totalQuizzes = quizResultService.countQuizzesTakenByUser(rdUser.getUserID());

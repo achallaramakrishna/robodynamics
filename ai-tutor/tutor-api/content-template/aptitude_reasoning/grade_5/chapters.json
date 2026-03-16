@@ -1,0 +1,19 @@
+{
+  "courseId": "aptitude_reasoning_g5",
+  "courseName": "MindSpark Grade 5 — Aptitude & Reasoning",
+  "tagline": "Think Sharp, Reason Fast",
+  "gradeLevel": 5,
+  "targetAudience": "Grade 5 students (age 10–11)",
+  "avatarTone": "warm-encouraging",
+  "hintStyle": "Let's think together...",
+  "questionFormat": ["MCQ", "visual"],
+  "chapters": [
+    { "chapterCode": "AR_G5_L1_NUMBER_SERIES", "title": "Number Series",             "order": 1, "estimatedMinutes": 14 },
+    { "chapterCode": "AR_G5_L2_LETTER_CODING", "title": "Letter Coding Basics",      "order": 2, "estimatedMinutes": 14 },
+    { "chapterCode": "AR_G5_L3_CALENDAR",      "title": "Calendar Basics",           "order": 3, "estimatedMinutes": 15 },
+    { "chapterCode": "AR_G5_L4_SHAPES",        "title": "Shape Classification",      "order": 4, "estimatedMinutes": 13 },
+    { "chapterCode": "AR_G5_L5_SPATIAL",       "title": "Spatial Reasoning",         "order": 5, "estimatedMinutes": 15 },
+    { "chapterCode": "AR_G5_L6_ANALOGIES",     "title": "Basic Analogies",           "order": 6, "estimatedMinutes": 14 },
+    { "chapterCode": "AR_G5_L7_DATA_CHARTS",   "title": "Reading Data Charts",       "order": 7, "estimatedMinutes": 15 }
+  ]
+}

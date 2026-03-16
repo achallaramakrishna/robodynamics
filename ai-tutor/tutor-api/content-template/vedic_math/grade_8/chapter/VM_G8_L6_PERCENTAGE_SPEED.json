@@ -1,0 +1,524 @@
+{
+  "title": "Percentage Power — Mental % in 3 Seconds",
+  "gradeBand": "Grade 8",
+  "source": "Vedic Mathematics for Schools | Grade 8",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "10% anchor — any percentage as multiple of 10%",
+    "Commutative trick: x% of y = y% of x",
+    "Build-up method: decompose to 10%, 5%, 1%",
+    "Compound discounts: successive % — formula (100-x)(100-y)/100",
+    "MCQ — find the percentage",
+    "Fill-the-step: 37% of 200 using build-up",
+    "Word problems — profit/loss, discount, tax",
+    "Speed drill — 6 problems in 90 seconds",
+    "Challenge — compound interest 2 years at 10% on ₹1000"
+  ],
+  "learningGoals": [
+    "Compute any percentage mentally using the 10% anchor and build-up",
+    "Apply the commutative trick (x% of y = y% of x) to simplify calculations",
+    "Calculate compound discounts and compound interest without a calculator"
+  ],
+  "coreIdeas": [
+    "10% of any number = number ÷ 10 — all other percentages build from here",
+    "x% of y = y% of x — choose whichever direction is easier",
+    "Successive discounts compound: 20% then 10% = 28% total, not 30%"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "16% of 25 using commutative trick",
+      "steps": [
+        "16% of 25 = 25% of 16",
+        "25% of 16 = 16÷4 = 4"
+      ],
+      "answer": "4"
+    },
+    {
+      "id": "we2",
+      "title": "37% of 200 by build-up",
+      "steps": [
+        "30% of 200 = 60",
+        "5% of 200 = 10",
+        "2% of 200 = 4",
+        "Total = 60+10+4 = 74"
+      ],
+      "answer": "74"
+    },
+    {
+      "id": "we3",
+      "title": "Successive discounts 20% then 10%",
+      "steps": [
+        "After 20% off: 100×0.8 = 80",
+        "After 10% off 80: 80×0.9 = 72",
+        "Total discount = 100-72 = 28%"
+      ],
+      "answer": "28% total discount"
+    },
+    {
+      "id": "we4",
+      "title": "CI at 10% for 2 years on ₹1000",
+      "steps": [
+        "Year 1: ₹1000 + 10% = ₹1100",
+        "Year 2: ₹1100 + 10% = ₹1210",
+        "Interest earned = ₹1210 - ₹1000 = ₹210"
+      ],
+      "answer": "₹1210 (interest ₹210)"
+    }
+  ],
+  "starterPractice": [
+    { "q": "What is 10% of 350?", "a": "35" },
+    { "q": "State the commutative trick for percentages.", "a": "x% of y = y% of x" },
+    { "q": "Are two successive 10% discounts the same as one 20% discount?", "a": "No — they give 19% total, not 20%" }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g8-v1",
+    "onboarding": {
+      "welcomeMessage": "Every price tag, every exam mark, every sale — percentages are everywhere. Master them in 3 seconds!",
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "avatarMood": "enthusiastic"
+    },
+    "mission": "Compute any percentage mentally using the 10% anchor, commutative trick, build-up, and compound formulas.",
+    "microLessonPattern": [
+      "Coach shows the anchor value (10% of the number)",
+      "Build the target percentage from anchors",
+      "Apply trick or formula",
+      "State the answer aloud",
+      "Instant feedback",
+      "XP reward"
+    ],
+    "rewardLoop": {
+      "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
+      "streakBonus": "5 XP for 3 consecutive correct answers",
+      "badges": ["Percent Pilot", "Discount Detective", "Compound Champion"]
+    },
+    "reviewLoop": {
+      "trigger": "2 wrong answers in a group",
+      "action": "Show anchor value and rebuild the target step by step"
+    },
+    "uiDirectives": {
+      "boardStyle": "chalk-on-dark",
+      "animationSpeed": "medium",
+      "avatarVoice": "Priya-Hindi-Female"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "10% anchor",
+        "missionStepTitle": "Anchor at 10% — Your Starting Block",
+        "coachHook": "10% is just divide by 10. From there you can build ANY percentage!",
+        "boardDemo": "Write: 10% of 460 = 46. Then 20%=92, 30%=138, 5%=23, 15%=69. Show the pattern.",
+        "readAloudPrompt": "Read aloud: '10% of 460 is 46. Double it for 20%. Halve it for 5%.'",
+        "tryPrompt": "Find 10%, 20%, and 5% of 380.",
+        "masteryCheck": "38, 76, 19.",
+        "instantFeedbackWin": "Anchor skill locked in!",
+        "instantFeedbackRetry": "10% = 380÷10 = 38. 20% = 38×2. 5% = 38÷2.",
+        "reviewPrompt": "5% = 10%÷2. 15% = 10%+5%. 25% = number÷4.",
+        "xpReward": 12,
+        "badgeFocus": "Percent Pilot",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_A1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "A",
+            "subtopic": "10% anchor",
+            "skill": "compute-percent",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Find 10%, 20%, and 5% of 380.",
+            "expectedAnswer": "38, 76, 19",
+            "hint": "10%=380÷10. 20%=2×10%. 5%=10%÷2.",
+            "solution": "10%=38. 20%=76. 5%=19."
+          },
+          {
+            "questionId": "VM_G8_L6_A2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "A",
+            "subtopic": "10% anchor",
+            "skill": "compute-percent",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 15% of 200?",
+            "options": ["30", "25", "35", "20"],
+            "correctIndex": 0,
+            "expectedAnswer": "30",
+            "hint": "10% of 200=20. 5% of 200=10. 15%=20+10.",
+            "solution": "10%=20, 5%=10, 15%=30.",
+            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "10% anchor bar showing 10%, 20%, 5% segments" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Commutative trick",
+        "missionStepTitle": "Flip It — x% of y = y% of x",
+        "coachHook": "16% of 25 looks hard. But 25% of 16 = 16÷4 = 4. Same answer, way easier!",
+        "boardDemo": "Show 16% of 25 → flip → 25% of 16 = 4. Then 4% of 75 → 75% of 4 = 3.",
+        "readAloudPrompt": "Read aloud: 'If one direction is ugly, flip — multiplication is commutative.'",
+        "tryPrompt": "Compute 4% of 25 using the flip trick.",
+        "masteryCheck": "1.",
+        "instantFeedbackWin": "Flip trick mastered!",
+        "instantFeedbackRetry": "4% of 25 = 25% of 4 = 1.",
+        "reviewPrompt": "Always check: does flipping give a nicer percentage (25%, 50%, 10%)?",
+        "xpReward": 12,
+        "badgeFocus": "Percent Pilot",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_B1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "B",
+            "subtopic": "Commutative trick",
+            "skill": "compute-percent",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 16% of 25 using the commutative trick (x% of y = y% of x).",
+            "expectedAnswer": "4",
+            "hint": "Flip: 25% of 16 = 16÷4.",
+            "solution": "16% of 25 = 25% of 16 = 16÷4 = 4."
+          },
+          {
+            "questionId": "VM_G8_L6_B2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "B",
+            "subtopic": "Commutative trick",
+            "skill": "compute-percent",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which flip makes 8% of 50 easiest to compute?",
+            "options": ["50% of 8 = 4", "8% of 50 directly = 4", "80% of 5 = 4", "All give 4"],
+            "correctIndex": 3,
+            "expectedAnswer": "All give 4",
+            "hint": "50% of 8 = 4. 8% of 50 = 4. They all equal 4.",
+            "solution": "8% of 50 = 50% of 8 = 8÷2 = 4. All options give the correct answer 4."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Build-up method",
+        "missionStepTitle": "Build Up — Decompose and Conquer",
+        "coachHook": "Any percentage = sum of simpler ones. 37% = 30%+5%+2%. Build it brick by brick!",
+        "boardDemo": "37% of 200: 30%=60, 5%=10, 2%=4. Total=74. Show on a bar segment diagram.",
+        "readAloudPrompt": "Read aloud: 'Decompose 37% into 30, 5, and 2 percent. Add the three parts.'",
+        "tryPrompt": "Compute 23% of 300 using the build-up method.",
+        "masteryCheck": "69.",
+        "instantFeedbackWin": "Build-up mastered!",
+        "instantFeedbackRetry": "20% of 300=60. 3% of 300=9. 60+9=69.",
+        "reviewPrompt": "Choose decompositions that are multiples of 10%, 5%, or 1% for easy mental math.",
+        "xpReward": 12,
+        "badgeFocus": "Percent Pilot",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_C1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "C",
+            "subtopic": "Build-up method",
+            "skill": "compute-percent",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 37% of 200 using the build-up method (30%+5%+2%).",
+            "expectedAnswer": "74",
+            "hint": "30% of 200=60. 5% of 200=10. 2% of 200=4. Add them.",
+            "solution": "30%=60, 5%=10, 2%=4. Total=74.",
+            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "Bar divided into 30%, 5%, 2% segments for build-up" }
+          },
+          {
+            "questionId": "VM_G8_L6_C2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "C",
+            "subtopic": "Build-up method",
+            "skill": "compute-percent",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 23% of 300 using build-up (20%+3%).",
+            "expectedAnswer": "69",
+            "hint": "20% of 300=60. 3% of 300=9.",
+            "solution": "20%=60, 3%=9. Total=69."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Compound discounts",
+        "missionStepTitle": "Compound Discounts — Why 20%+10% ≠ 30%",
+        "coachHook": "A shopkeeper gives 20% off, then 10% more off. You'd expect 30% total — but it's actually 28%!",
+        "boardDemo": "Price=100. After 20%: 80. After 10% on 80: 72. Total discount=28. Formula: 100-[(100-20)×(100-10)/100]=100-72=28.",
+        "readAloudPrompt": "Read aloud: 'Successive discounts multiply, not add. Always.'",
+        "tryPrompt": "Find the total discount for 25% then 20% off.",
+        "masteryCheck": "40% total discount.",
+        "instantFeedbackWin": "Compound discount decoded!",
+        "instantFeedbackRetry": "Start with 100. After 25%: 75. After 20% of 75: 60. Discount=40.",
+        "reviewPrompt": "(100-25)(100-20)/100 = 75×80/100 = 60. Discount = 40%.",
+        "xpReward": 15,
+        "badgeFocus": "Discount Detective",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_D1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "D",
+            "subtopic": "Compound discounts",
+            "skill": "compound-percent",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "A shirt has successive discounts of 20% and 10%. What is the total percentage discount on the original price?",
+            "expectedAnswer": "28%",
+            "hint": "Start with ₹100. After 20%: ₹80. After 10%: ₹72. Discount = ₹28.",
+            "solution": "100 → 80 (after 20%) → 72 (after 10% of 80). Total discount = 28%."
+          },
+          {
+            "questionId": "VM_G8_L6_D2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "D",
+            "subtopic": "Compound discounts",
+            "skill": "compound-percent",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Successive discounts of 10% and 10% are equivalent to a single discount of?",
+            "options": ["19%", "20%", "18%", "21%"],
+            "correctIndex": 0,
+            "expectedAnswer": "19%",
+            "hint": "100 → 90 → 81. Discount = 19.",
+            "solution": "100×0.9×0.9 = 81. Total discount = 19%."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — find the percentage",
+        "missionStepTitle": "Quiz Mode — Which Percentage?",
+        "coachHook": "Four options but only one correct percentage. Use your anchor and build-up skills to check.",
+        "boardDemo": "Show a MCQ where wrong options correspond to common errors (e.g. adding instead of compounding).",
+        "readAloudPrompt": "Estimate first, then pick the option closest to your estimate.",
+        "tryPrompt": "Solve both MCQs without a calculator.",
+        "masteryCheck": "Both correct.",
+        "instantFeedbackWin": "Sharp percentage sense!",
+        "instantFeedbackRetry": "Double-check by computing your chosen answer's percentage of the base.",
+        "reviewPrompt": "Estimation is powerful: 37% of 200 ≈ 40% of 200 = 80 — so the answer is just under 80.",
+        "xpReward": 15,
+        "badgeFocus": "Discount Detective",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_E1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ percentage",
+            "skill": "compute-percent",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 37% of 200?",
+            "options": ["74", "70", "77", "80"],
+            "correctIndex": 0,
+            "expectedAnswer": "74",
+            "hint": "30%=60, 5%=10, 2%=4. Total=74.",
+            "solution": "37% of 200: 30%=60, 5%=10, 2%=4. Sum=74.",
+            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "Build-up: 30+5+2 percent of 200" }
+          },
+          {
+            "questionId": "VM_G8_L6_E2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ percentage",
+            "skill": "compute-percent",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 6% of 150?",
+            "options": ["9", "8", "10", "7"],
+            "correctIndex": 0,
+            "expectedAnswer": "9",
+            "hint": "Use flip trick or build-up: 6% of 150 = 1% of 150 × 6 = 1.5×6 = 9.",
+            "solution": "1% of 150=1.5. 6×1.5=9."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: 37% of 200",
+        "missionStepTitle": "Step by Step — Build 37% of 200",
+        "coachHook": "Let's make the build-up method visible. Fill each building block.",
+        "boardDemo": "Three-row table: row 1=30%, row 2=5%, row 3=2%. Compute each row, then add.",
+        "readAloudPrompt": "Read each percentage block aloud as you fill it.",
+        "tryPrompt": "Complete the fill-the-step for 37% of 200.",
+        "masteryCheck": "All three parts correct and sum correct.",
+        "instantFeedbackWin": "Build-up complete — 74 constructed perfectly!",
+        "instantFeedbackRetry": "Check: 2% of 200 = 200÷50 = 4. Not 2!",
+        "reviewPrompt": "2% of 200: 1% of 200=2, so 2%=4.",
+        "xpReward": 15,
+        "badgeFocus": "Discount Detective",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_F1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step build-up",
+            "skill": "compute-percent",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Find 37% of 200 using the build-up method. Fill each block.",
+            "steps": [
+              { "label": "30% of 200", "answer": "60", "hint": "10% of 200=20. 30%=3×20=60." },
+              { "label": "5% of 200", "answer": "10", "hint": "5% = half of 10%. 10%=20, so 5%=10." },
+              { "label": "2% of 200", "answer": "4", "hint": "1% of 200=2. 2%=4." },
+              { "label": "Total (30%+5%+2%)", "answer": "74", "hint": "60+10+4=74." }
+            ],
+            "expectedAnswer": "74"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Word problems — profit/loss/discount/tax",
+        "missionStepTitle": "Real Life — Percentages in Context",
+        "coachHook": "Every shop sale, every exam score, every tax bill uses percentages. Time for real problems!",
+        "boardDemo": "Example: A book costs ₹250, 20% discount. Discount = 20% of 250 = 50. Final price = 200.",
+        "readAloudPrompt": "Read the word problem and identify: what is the base? What is the percentage? What is asked?",
+        "tryPrompt": "Solve both word problems.",
+        "masteryCheck": "Both correct with correct interpretation.",
+        "instantFeedbackWin": "Real-world percentage champion!",
+        "instantFeedbackRetry": "Identify the base (the whole = 100%) before computing the percentage.",
+        "reviewPrompt": "Profit% = (profit/cost price)×100. Discount% = (discount/marked price)×100.",
+        "xpReward": 18,
+        "badgeFocus": "Compound Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_G1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "G",
+            "subtopic": "Word problem profit",
+            "skill": "word-problem",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "A trader buys a bicycle for ₹1200 and sells it for ₹1500. Find the profit percentage.",
+            "expectedAnswer": "25%",
+            "hint": "Profit = ₹1500-₹1200 = ₹300. Profit% = (300/1200)×100.",
+            "solution": "Profit = 300. Profit% = 300/1200×100 = 25%."
+          },
+          {
+            "questionId": "VM_G8_L6_G2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "G",
+            "subtopic": "Word problem discount",
+            "skill": "word-problem",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "A TV is marked at ₹20000 and sold at 15% discount. Find the selling price.",
+            "expectedAnswer": "₹17000",
+            "hint": "15% of 20000 = 3000. Selling price = 20000-3000.",
+            "solution": "10% of 20000=2000. 5% of 20000=1000. 15%=3000. SP=17000."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill — 6 problems in 90 seconds",
+        "missionStepTitle": "Speed Drill — 6 Percentage Problems",
+        "coachHook": "Can you crack 6 percentage questions in 90 seconds? Use every trick you know!",
+        "boardDemo": "Show 6 question cards. Timer at 1:30.",
+        "readAloudPrompt": "Say the answer aloud as soon as you see the question.",
+        "tryPrompt": "Attempt all 6 questions. Aim for speed and accuracy.",
+        "masteryCheck": "At least 5 of 6 correct.",
+        "instantFeedbackWin": "Speed round crushed — Discount Detective badge!",
+        "instantFeedbackRetry": "Review the two tricks most useful for speed: flip and 10% anchor.",
+        "reviewPrompt": "For x% of round numbers: always start with 10% and build or flip.",
+        "xpReward": 18,
+        "badgeFocus": "Compound Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_H1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "compute-percent",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Speed round: compute 45% of 80.",
+            "expectedAnswer": "36",
+            "hint": "Flip: 80% of 45 = 4×45÷5 = 36. Or: 50% of 80=40, minus 5% of 80=4 → 36.",
+            "solution": "50% of 80=40. 5% of 80=4. 45%=40-4=36."
+          },
+          {
+            "questionId": "VM_G8_L6_H2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "compute-percent",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is 12.5% of 400?",
+            "options": ["50", "40", "60", "48"],
+            "correctIndex": 0,
+            "expectedAnswer": "50",
+            "hint": "12.5% = 1/8. 400÷8 = 50.",
+            "solution": "12.5% = 1/8. 400/8 = 50.",
+            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "12.5% as one-eighth of the bar" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge — compound interest 2 years",
+        "missionStepTitle": "Final Challenge — Compound Interest Mentally",
+        "coachHook": "Compound interest means interest on interest! At 10% for 2 years on ₹1000 — compute it purely mentally.",
+        "boardDemo": "Year 1: 1000+10%=1100. Year 2: 1100+10%=1210. CI=210. Simple interest would be 200. Extra=₹10.",
+        "readAloudPrompt": "Read aloud: 'Compound interest earns interest on the interest from year 1.'",
+        "tryPrompt": "Compute compound interest at 10% for 2 years on ₹2000.",
+        "masteryCheck": "₹420.",
+        "instantFeedbackWin": "Compound Champion badge unlocked!",
+        "instantFeedbackRetry": "Year 1: 2000+200=2200. Year 2: 2200+220=2420. CI=420.",
+        "reviewPrompt": "CI for 2 years at r% on P = P[(1+r/100)²-1]. At 10%: P×0.21.",
+        "xpReward": 18,
+        "badgeFocus": "Compound Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L6_I1",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "I",
+            "subtopic": "Compound interest",
+            "skill": "compound-interest",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute compound interest on ₹1000 at 10% per year for 2 years.",
+            "steps": [
+              { "label": "Amount after Year 1", "answer": "₹1100", "hint": "1000 + 10% of 1000 = 1000+100 = 1100." },
+              { "label": "Interest in Year 2 (10% of ₹1100)", "answer": "₹110", "hint": "10% of 1100 = 110." },
+              { "label": "Amount after Year 2", "answer": "₹1210", "hint": "1100+110=1210." },
+              { "label": "Total compound interest (Amount - Principal)", "answer": "₹210", "hint": "1210-1000=210." }
+            ],
+            "expectedAnswer": "₹210"
+          },
+          {
+            "questionId": "VM_G8_L6_I2",
+            "chapterCode": "VM_G8_L6",
+            "exerciseGroup": "I",
+            "subtopic": "Compound interest vs simple interest",
+            "skill": "compound-interest",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "On ₹1000 at 10% for 2 years, compound interest is ₹210 while simple interest is ₹200. What is the extra amount due to compounding?",
+            "options": ["₹10", "₹20", "₹5", "₹15"],
+            "correctIndex": 0,
+            "expectedAnswer": "₹10",
+            "hint": "CI=₹210. SI=₹200. Difference=₹10.",
+            "solution": "The extra ₹10 is 10% of ₹100 (the Year 1 interest), earned as interest-on-interest in Year 2."
+          }
+        ]
+      }
+    ]
+  }
+}

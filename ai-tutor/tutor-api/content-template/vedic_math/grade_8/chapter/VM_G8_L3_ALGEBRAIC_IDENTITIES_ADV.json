@@ -1,0 +1,544 @@
+{
+  "title": "Identity Champion — Advanced Algebraic Identities",
+  "gradeBand": "Grade 8",
+  "source": "Vedic Mathematics for Schools | Grade 8",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "Review (a+b)² and (a-b)²",
+    "(a+b)³ expansion — coefficients 1,3,3,1",
+    "(a-b)³ expansion — sign pattern",
+    "Sum of cubes: a³+b³ = (a+b)(a²-ab+b²)",
+    "Expand or factorise — MCQ practice",
+    "Fill-the-step: expand (2x+3)³",
+    "Mental computation: 101³",
+    "Speed drill — expansions and factorisations",
+    "Difference of cubes: a³-b³ = (a-b)(a²+ab+b²)"
+  ],
+  "learningGoals": [
+    "Expand cube identities (a+b)³ and (a-b)³ with confidence",
+    "Factorise sum and difference of cubes using standard identities",
+    "Apply cube identities to compute numeric expressions mentally"
+  ],
+  "coreIdeas": [
+    "Binomial cube coefficients follow Pascal's triangle row 1,3,3,1",
+    "Sum/difference of cubes always factor into a linear × quadratic term",
+    "Substituting numbers into identities enables rapid mental arithmetic"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "Expand (x+2)³",
+      "steps": [
+        "Use (a+b)³ = a³+3a²b+3ab²+b³ with a=x, b=2",
+        "= x³ + 3·x²·2 + 3·x·4 + 8",
+        "= x³ + 6x² + 12x + 8"
+      ],
+      "answer": "x³ + 6x² + 12x + 8"
+    },
+    {
+      "id": "we2",
+      "title": "Expand (2x+3)³",
+      "steps": [
+        "a=2x, b=3",
+        "a³ = 8x³, 3a²b = 3·4x²·3 = 36x², 3ab² = 3·2x·9 = 54x, b³ = 27",
+        "= 8x³ + 36x² + 54x + 27"
+      ],
+      "answer": "8x³ + 36x² + 54x + 27"
+    },
+    {
+      "id": "we3",
+      "title": "Compute 101³ mentally",
+      "steps": [
+        "Write 101 = 100+1, so a=100, b=1",
+        "101³ = 100³ + 3·100²·1 + 3·100·1 + 1 = 1000000 + 30000 + 300 + 1",
+        "= 1030301"
+      ],
+      "answer": "1030301"
+    },
+    {
+      "id": "we4",
+      "title": "Factorise 8+27",
+      "steps": [
+        "Recognise 8=2³ and 27=3³, so a=2, b=3",
+        "a³+b³ = (a+b)(a²-ab+b²) = (2+3)(4-6+9)",
+        "= 5×7 = 35"
+      ],
+      "answer": "35"
+    }
+  ],
+  "starterPractice": [
+    { "q": "Expand (a+b)² using the identity.", "a": "a²+2ab+b²" },
+    { "q": "What are the coefficients in (a+b)³?", "a": "1, 3, 3, 1" },
+    { "q": "State the factorisation of a³+b³.", "a": "(a+b)(a²-ab+b²)" }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g8-v1",
+    "onboarding": {
+      "welcomeMessage": "Welcome, Identity Champion! Today you master cube identities that unlock lightning-fast mental math.",
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "avatarMood": "excited"
+    },
+    "mission": "Master cube expansions and cube factorisations — handle (a+b)³, (a-b)³, a³+b³, and a³-b³ fluently.",
+    "microLessonPattern": [
+      "Coach introduces concept with board demo",
+      "Student reads aloud the identity",
+      "Try one guided example",
+      "Instant feedback + tip",
+      "Solo attempt on similar problem",
+      "XP reward and badge unlock"
+    ],
+    "rewardLoop": {
+      "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
+      "streakBonus": "5 XP for 3 consecutive correct answers",
+      "badges": ["Binomial Beginner", "Cube Cracker", "Identity Master"]
+    },
+    "reviewLoop": {
+      "trigger": "2 wrong answers in a group",
+      "action": "Show worked example, then retry with new numbers"
+    },
+    "uiDirectives": {
+      "boardStyle": "chalk-on-dark",
+      "animationSpeed": "medium",
+      "avatarVoice": "Priya-Hindi-Female"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Review (a+b)² and (a-b)²",
+        "missionStepTitle": "Warm-Up — Square Identities",
+        "coachHook": "Before we climb to cubes, let's polish our squares!",
+        "boardDemo": "Write (a+b)²=a²+2ab+b² and (a-b)²=a²-2ab+b² side by side. Highlight sign difference.",
+        "readAloudPrompt": "Read aloud: 'a plus b squared equals a squared plus 2ab plus b squared.'",
+        "tryPrompt": "Expand (x+3)² and (x-3)².",
+        "masteryCheck": "Both expansions correct with correct signs.",
+        "instantFeedbackWin": "Brilliant! You remembered both sign patterns.",
+        "instantFeedbackRetry": "Check the middle term sign — plus for (a+b)², minus for (a-b)².",
+        "reviewPrompt": "Revisit the sign rule: (a-b)² has -2ab in the middle.",
+        "xpReward": 12,
+        "badgeFocus": "Binomial Beginner",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_A1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "A",
+            "subtopic": "Review square identities",
+            "skill": "expand",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (x+5)² using the identity (a+b)²=a²+2ab+b².",
+            "expectedAnswer": "x²+10x+25",
+            "hint": "Set a=x and b=5, then substitute.",
+            "solution": "(x+5)² = x² + 2·x·5 + 5² = x² + 10x + 25"
+          },
+          {
+            "questionId": "VM_G8_L3_A2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "A",
+            "subtopic": "Review square identities",
+            "skill": "expand",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (y-4)² using the identity (a-b)²=a²-2ab+b².",
+            "expectedAnswer": "y²-8y+16",
+            "hint": "Set a=y and b=4. Note the negative middle term.",
+            "solution": "(y-4)² = y² - 2·y·4 + 4² = y² - 8y + 16"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "(a+b)³ expansion",
+        "missionStepTitle": "The Cube Formula — 1,3,3,1",
+        "coachHook": "Squares had 3 terms. Cubes have 4! Meet Pascal's triangle row: 1, 3, 3, 1.",
+        "boardDemo": "Write (a+b)³ = a³+3a²b+3ab²+b³. Circle coefficients 1,3,3,1. Show a=x,b=2 example.",
+        "readAloudPrompt": "Read aloud the full expansion: 'a cubed plus 3 a-squared b plus 3 a b-squared plus b cubed.'",
+        "tryPrompt": "Expand (x+2)³ step by step.",
+        "masteryCheck": "All four terms correct.",
+        "instantFeedbackWin": "Perfect cube expansion!",
+        "instantFeedbackRetry": "List the four terms one by one: a³, then 3a²b, then 3ab², then b³.",
+        "reviewPrompt": "Memorise the pattern: powers of a go 3,2,1,0 and powers of b go 0,1,2,3.",
+        "xpReward": 12,
+        "badgeFocus": "Binomial Beginner",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_B1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "B",
+            "subtopic": "(a+b)³ expansion",
+            "skill": "expand",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (x+2)³ using (a+b)³ = a³+3a²b+3ab²+b³.",
+            "expectedAnswer": "x³+6x²+12x+8",
+            "hint": "a=x, b=2. Compute each term: x³, 3x²·2, 3x·4, 8.",
+            "solution": "(x+2)³ = x³ + 3·x²·2 + 3·x·4 + 8 = x³ + 6x² + 12x + 8",
+            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "Pascal's triangle coefficients for cube expansion" }
+          },
+          {
+            "questionId": "VM_G8_L3_B2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "B",
+            "subtopic": "(a+b)³ expansion",
+            "skill": "expand",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the expansion of (p+1)³?",
+            "options": [
+              "p³+3p²+3p+1",
+              "p³+p²+p+1",
+              "p³+3p+1",
+              "p³+6p²+12p+8"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "p³+3p²+3p+1",
+            "hint": "Use a=p, b=1 in (a+b)³.",
+            "solution": "(p+1)³ = p³ + 3p²·1 + 3p·1 + 1 = p³+3p²+3p+1"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "(a-b)³ expansion — sign pattern",
+        "missionStepTitle": "Cube Minus — The Sign Flip",
+        "coachHook": "Subtract b instead of adding? Two terms go negative. Spot the pattern!",
+        "boardDemo": "Write (a-b)³ = a³-3a²b+3ab²-b³. Highlight alternating signs. Compare with (a+b)³.",
+        "readAloudPrompt": "Read aloud: 'a cubed MINUS 3 a-squared b PLUS 3 ab-squared MINUS b cubed.'",
+        "tryPrompt": "Expand (x-3)³.",
+        "masteryCheck": "Correct signs on all four terms.",
+        "instantFeedbackWin": "The sign pattern is locked in!",
+        "instantFeedbackRetry": "Odd-positioned terms are negative: -3a²b and -b³.",
+        "reviewPrompt": "Remember: (a-b)³ has signs +,-,+,- on terms 1-4 if you factor out a-b direction.",
+        "xpReward": 12,
+        "badgeFocus": "Binomial Beginner",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_C1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "C",
+            "subtopic": "(a-b)³ expansion",
+            "skill": "expand",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (x-3)³ using (a-b)³ = a³-3a²b+3ab²-b³.",
+            "expectedAnswer": "x³-9x²+27x-27",
+            "hint": "a=x, b=3. Check signs carefully: -, then +, then -.",
+            "solution": "(x-3)³ = x³ - 3x²·3 + 3x·9 - 27 = x³ - 9x² + 27x - 27"
+          },
+          {
+            "questionId": "VM_G8_L3_C2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "C",
+            "subtopic": "(a-b)³ expansion",
+            "skill": "expand",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Expand (2-y)³. Which option is correct?",
+            "options": [
+              "8-12y+6y²-y³",
+              "8+12y+6y²+y³",
+              "8-12y-6y²-y³",
+              "8-6y²+y³"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "8-12y+6y²-y³",
+            "hint": "a=2, b=y. (a-b)³ = a³-3a²b+3ab²-b³.",
+            "solution": "(2-y)³ = 8 - 3·4·y + 3·2·y² - y³ = 8 - 12y + 6y² - y³"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Sum of cubes: a³+b³",
+        "missionStepTitle": "Factorise — Sum of Cubes",
+        "coachHook": "Two perfect cubes added together? One formula breaks them apart every time.",
+        "boardDemo": "Write a³+b³=(a+b)(a²-ab+b²). Verify with a=2,b=3: 8+27=35=(5)(4-6+9)=(5)(7)=35 ✓",
+        "readAloudPrompt": "Read aloud: 'a cubed plus b cubed equals a plus b, times a squared minus ab plus b squared.'",
+        "tryPrompt": "Factorise x³+8.",
+        "masteryCheck": "Correctly identifies a=x, b=2 and writes (x+2)(x²-2x+4).",
+        "instantFeedbackWin": "Cube cracker! You split the sum perfectly.",
+        "instantFeedbackRetry": "In the quadratic factor, the middle term is -ab (negative). Check your sign.",
+        "reviewPrompt": "The quadratic a²-ab+b² never factors further over integers.",
+        "xpReward": 15,
+        "badgeFocus": "Cube Cracker",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_D1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "D",
+            "subtopic": "Sum of cubes",
+            "skill": "factorise",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Factorise x³+8 using a³+b³=(a+b)(a²-ab+b²).",
+            "expectedAnswer": "(x+2)(x²-2x+4)",
+            "hint": "Recognise 8=2³. Set a=x, b=2.",
+            "solution": "x³+8 = x³+2³ = (x+2)(x²-2x+4)",
+            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "Sum of cubes factorisation pattern" }
+          },
+          {
+            "questionId": "VM_G8_L3_D2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "D",
+            "subtopic": "Sum of cubes",
+            "skill": "factorise",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Evaluate 8+27 using the sum of cubes identity.",
+            "expectedAnswer": "35",
+            "hint": "8=2³, 27=3³. Use a³+b³=(a+b)(a²-ab+b²) then compute numerically.",
+            "solution": "8+27=2³+3³=(2+3)(4-6+9)=5×7=35"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — expand or factorise",
+        "missionStepTitle": "Quiz Time — Spot the Identity",
+        "coachHook": "Four options, one truth. Use your identity knowledge to eliminate wrong answers.",
+        "boardDemo": "Show two MCQ examples on board, crossing out wrong options with reasoning.",
+        "readAloudPrompt": "Read each option carefully before selecting.",
+        "tryPrompt": "Answer the MCQ questions — no shortcuts!",
+        "masteryCheck": "At least 2 of 3 MCQs correct.",
+        "instantFeedbackWin": "Sharp eye — you picked the right identity!",
+        "instantFeedbackRetry": "Substitute a small value like a=1,b=1 to check which option matches.",
+        "reviewPrompt": "Plug in numbers to verify: if a=1,b=1, (a+b)³=8, not 4 or 6.",
+        "xpReward": 15,
+        "badgeFocus": "Cube Cracker",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_E1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ expand or factorise",
+            "skill": "expand",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "What is the correct expansion of (2x+3)³?",
+            "options": [
+              "8x³+36x²+54x+27",
+              "8x³+12x²+18x+27",
+              "6x³+36x²+54x+27",
+              "8x³+36x²+54x+9"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "8x³+36x²+54x+27",
+            "hint": "a=2x, b=3. Compute each term: (2x)³=8x³, 3(2x)²·3=36x², 3(2x)·9=54x, 3³=27.",
+            "solution": "(2x+3)³ = 8x³ + 3·4x²·3 + 3·2x·9 + 27 = 8x³+36x²+54x+27"
+          },
+          {
+            "questionId": "VM_G8_L3_E2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ factorise",
+            "skill": "factorise",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which is the correct factorisation of 27+64?",
+            "options": [
+              "(3+4)(9-12+16)",
+              "(3+4)(9+12+16)",
+              "(3-4)(9-12+16)",
+              "(3+4)(9-16)"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "(3+4)(9-12+16)",
+            "hint": "27=3³, 64=4³. Use a³+b³=(a+b)(a²-ab+b²) with a=3, b=4.",
+            "solution": "27+64=3³+4³=(3+4)(9-12+16)=7×13=91"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: expand (2x+3)³",
+        "missionStepTitle": "Step by Step — Build the Cube",
+        "coachHook": "No shortcuts here — fill each step and watch the expansion build itself.",
+        "boardDemo": "Show the 4-step scaffold: term1=a³, term2=3a²b, term3=3ab², term4=b³.",
+        "readAloudPrompt": "Read each step label aloud as you fill it in.",
+        "tryPrompt": "Complete the fill-the-step exercise for (2x+3)³.",
+        "masteryCheck": "All steps filled correctly.",
+        "instantFeedbackWin": "Full marks on every step — you built the cube!",
+        "instantFeedbackRetry": "Go back to the step that is wrong. Recalculate just that term.",
+        "reviewPrompt": "For (2x+3)³: a=2x so a³=8x³; 3a²b = 3·4x²·3 = 36x².",
+        "xpReward": 15,
+        "badgeFocus": "Cube Cracker",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_F1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step expand",
+            "skill": "expand",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Expand (2x+3)³ step by step. Fill each term.",
+            "steps": [
+              { "label": "Step 1: a³ where a=2x", "answer": "8x³", "hint": "(2x)³ = 8x³" },
+              { "label": "Step 2: 3a²b where a=2x, b=3", "answer": "36x²", "hint": "3·(2x)²·3 = 3·4x²·3 = 36x²" },
+              { "label": "Step 3: 3ab² where a=2x, b=3", "answer": "54x", "hint": "3·2x·9 = 54x" },
+              { "label": "Step 4: b³ where b=3", "answer": "27", "hint": "3³=27" }
+            ],
+            "expectedAnswer": "8x³+36x²+54x+27"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Mental computation: 101³",
+        "missionStepTitle": "Mental Power — 101³ in Seconds",
+        "coachHook": "101 is just 100+1. Use the identity and mental math does the rest!",
+        "boardDemo": "Write 101=(100+1). Apply (a+b)³ with a=100,b=1. Show each term: 1000000+30000+300+1.",
+        "readAloudPrompt": "Read aloud: '100 cubed is 1 million. 3 times 100 squared is 30 thousand.'",
+        "tryPrompt": "Compute 102³ mentally using the same method.",
+        "masteryCheck": "Correct value for 102³ = 1061208.",
+        "instantFeedbackWin": "Lightning mental computation!",
+        "instantFeedbackRetry": "102=(100+2). Terms: 100³=1000000, 3·10000·2=60000, 3·100·4=1200, 8.",
+        "reviewPrompt": "Choose a=100 as a round base to keep arithmetic easy.",
+        "xpReward": 18,
+        "badgeFocus": "Identity Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_G1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "G",
+            "subtopic": "Mental cube computation",
+            "skill": "mental-math",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 101³ mentally. Write 101 = 100+1 and apply the cube identity.",
+            "expectedAnswer": "1030301",
+            "hint": "101³ = 100³ + 3·100²·1 + 3·100·1² + 1³",
+            "solution": "101³ = 1000000 + 30000 + 300 + 1 = 1030301",
+            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "Splitting 101 as 100+1 to apply cube identity" }
+          },
+          {
+            "questionId": "VM_G8_L3_G2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "G",
+            "subtopic": "Mental cube computation",
+            "skill": "mental-math",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 99³ mentally. Write 99 = 100-1 and apply (a-b)³.",
+            "expectedAnswer": "970299",
+            "hint": "99³ = 100³ - 3·100²·1 + 3·100·1 - 1",
+            "solution": "99³ = 1000000 - 30000 + 300 - 1 = 970299"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill — expansions and factorisations",
+        "missionStepTitle": "Speed Drill — 5 Problems, Beat the Clock",
+        "coachHook": "You know the identities. Now prove your speed — 5 problems, keep the flow!",
+        "boardDemo": "Show a timer graphic and 5 blank slots. Each problem is short and direct.",
+        "readAloudPrompt": "Go! Say each answer aloud as you write it.",
+        "tryPrompt": "Complete all exercises as fast as you can.",
+        "masteryCheck": "At least 4 of 5 correct.",
+        "instantFeedbackWin": "Speed champion! Identity reflexes are sharp.",
+        "instantFeedbackRetry": "Slow down on the one you got wrong and re-derive it.",
+        "reviewPrompt": "Speed comes from pattern recognition — review the identity you missed.",
+        "xpReward": 18,
+        "badgeFocus": "Identity Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_H1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "expand",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (a+1)³.",
+            "expectedAnswer": "a³+3a²+3a+1",
+            "hint": "b=1, so b³=1 and 3ab²=3a.",
+            "solution": "(a+1)³ = a³+3a²+3a+1"
+          },
+          {
+            "questionId": "VM_G8_L3_H2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "factorise",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Factorise 64+125. Which answer is correct?",
+            "options": [
+              "(4+5)(16-20+25)",
+              "(4+5)(16+20+25)",
+              "(4-5)(16-20+25)",
+              "(4+5)(16-25)"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "(4+5)(16-20+25)",
+            "hint": "64=4³, 125=5³. Use a³+b³=(a+b)(a²-ab+b²).",
+            "solution": "64+125=4³+5³=(4+5)(16-20+25)=9×21=189"
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Difference of cubes: a³-b³",
+        "missionStepTitle": "Final Boss — Difference of Cubes",
+        "coachHook": "Last identity: a³-b³. The sign in the quadratic flips. Master this and you own all four cube rules!",
+        "boardDemo": "Write a³-b³=(a-b)(a²+ab+b²). Compare with sum of cubes — only (a-b) and +ab differ. Verify with a=3,b=2: 27-8=19=(1)(9+6+4)=19 ✓",
+        "readAloudPrompt": "Read aloud: 'a cubed MINUS b cubed equals a MINUS b, times a squared PLUS ab plus b squared.'",
+        "tryPrompt": "Factorise x³-27.",
+        "masteryCheck": "(x-3)(x²+3x+9) with all signs correct.",
+        "instantFeedbackWin": "All four cube identities mastered — Identity Champion unlocked!",
+        "instantFeedbackRetry": "Compare with sum of cubes: here the linear factor is (a-b) and the middle sign in the quadratic is +ab.",
+        "reviewPrompt": "Memory trick — the quadratic always has +ab for difference, -ab for sum.",
+        "xpReward": 18,
+        "badgeFocus": "Identity Master",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L3_I1",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "I",
+            "subtopic": "Difference of cubes",
+            "skill": "factorise",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Factorise x³-27 using a³-b³=(a-b)(a²+ab+b²).",
+            "expectedAnswer": "(x-3)(x²+3x+9)",
+            "hint": "27=3³. Set a=x, b=3. The quadratic factor is a²+ab+b².",
+            "solution": "x³-27 = x³-3³ = (x-3)(x²+3x+9)"
+          },
+          {
+            "questionId": "VM_G8_L3_I2",
+            "chapterCode": "VM_G8_L3",
+            "exerciseGroup": "I",
+            "subtopic": "Difference of cubes",
+            "skill": "factorise",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Factorise 125-8 using the difference of cubes identity.",
+            "steps": [
+              { "label": "Identify a and b (a³=125, b³=8)", "answer": "a=5, b=2", "hint": "5³=125 and 2³=8" },
+              { "label": "Write linear factor (a-b)", "answer": "(5-2)", "hint": "a-b = 5-2 = 3" },
+              { "label": "Write quadratic factor (a²+ab+b²)", "answer": "(25+10+4)", "hint": "25+5·2+4 = 39" },
+              { "label": "Final numerical result", "answer": "117", "hint": "3×39=117" }
+            ],
+            "expectedAnswer": "117"
+          }
+        ]
+      }
+    ]
+  }
+}

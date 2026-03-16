@@ -16,10 +16,35 @@ class CourseScriptLoader:
         # Root precedence:
         # 1) externally mounted course content
         # 2) bundled tutor-api content-template (release-safe fallback)
-        # 3) docs fallback for legacy setups
+        # 3) grade-based sub-folder inside a parent course content dir
+        #    e.g. aptitude_reasoning_g6 → content-template/aptitude_reasoning/grade_6/
+        # 4) docs fallback for legacy setups
         raw_roots = [
             base / course_id,
             local_api_root / "content-template" / course_id,
+        ]
+        # Grade-based sub-folder resolution: "aptitude_reasoning_g6" →
+        # content-template/aptitude_reasoning/grade_6/
+        # Supports both _g6 suffix and _grade6 suffix patterns.
+        import re as _re
+        _grade_match = _re.match(r"^(.+?)_g(?:rade)?(\d+)$", course_id, _re.IGNORECASE)
+        if _grade_match:
+            _parent_course = _grade_match.group(1)
+            _grade_num = _grade_match.group(2)
+            raw_roots += [
+                base / _parent_course / f"grade_{_grade_num}",
+                local_api_root / "content-template" / _parent_course / f"grade_{_grade_num}",
+            ]
+        # Campus-tier resolution: "aptitude_campus_pro" →
+        # content-template/aptitude_reasoning/campus_pro/
+        _campus_match = _re.match(r"^(.+?)_(campus_\w+)$", course_id, _re.IGNORECASE)
+        if _campus_match:
+            _parent_course = _campus_match.group(1) + "_reasoning"
+            _tier = _campus_match.group(2).lower()
+            raw_roots += [
+                local_api_root / "content-template" / _parent_course / _tier,
+            ]
+        raw_roots += [
             base / "docs" / course_id,
             repo_root / "docs" / course_id,
         ]

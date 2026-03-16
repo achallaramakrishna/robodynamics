@@ -1,0 +1,87 @@
+{
+  "_comment": "Question type examples for MindSutra chapter JSON authors.",
+  "_usage": "Add questionType + relevant fields to any question inside sessionFlow[].exercises[]",
+
+  "examples": [
+
+    {
+      "_type": "MCQ — tap one of 4 options (mobile-friendly, zero typing)",
+      "questionId": "vm_g6_ex_A1",
+      "questionType": "mcq",
+      "questionText": "Using the Nikhilam sutra, what is 97 × 98?",
+      "options": ["9506", "9406", "9606", "9306"],
+      "correctIndex": 0,
+      "expectedAnswer": "9506",
+      "hint": "Both numbers are near base 100. Find their deficits first.",
+      "solution": "97 deficit=3, 98 deficit=2. Cross-subtract: 97−2=95. Multiply deficits: 3×2=06. Answer: 9506.",
+      "skill": "nikhilam_multiplication",
+      "difficulty": "medium",
+      "type": "practice"
+    },
+
+    {
+      "_type": "FILL_STEP — guided sutra walk, student completes each step sequentially",
+      "questionId": "vm_g6_ex_B1",
+      "questionType": "fill_step",
+      "questionText": "Complete the Nikhilam steps for 97 × 98:",
+      "steps": [
+        { "label": "Deficit of 97 from base 100",      "answer": "3",    "hint": "100 − 97 = ?" },
+        { "label": "Deficit of 98 from base 100",      "answer": "2",    "hint": "100 − 98 = ?" },
+        { "label": "Cross-subtract: 97 − 2 (or 98−3)", "answer": "95",   "hint": "This gives the left part of the answer" },
+        { "label": "Multiply the two deficits: 3 × 2", "answer": "6",    "hint": "This gives the right part (write as 2 digits: 06)" },
+        { "label": "Final answer (left | right)",       "answer": "9506", "hint": "Write as: 95 | 06 → 9506" }
+      ],
+      "expectedAnswer": "9506",
+      "hint": "Follow Nikhilam: deficit → cross subtract → multiply deficits → combine.",
+      "solution": "97 deficit=3, 98 deficit=2. Left: 97−2=95. Right: 3×2=06. Answer: 9506.",
+      "skill": "nikhilam_multiplication",
+      "difficulty": "medium",
+      "type": "guided"
+    },
+
+    {
+      "_type": "TEXT (default) — student types a numeric or word answer",
+      "questionId": "vm_g6_ex_C1",
+      "questionType": "text",
+      "questionText": "Calculate 96 × 97 using the Nikhilam sutra.",
+      "expectedAnswer": "9312",
+      "hint": "Both numbers are near base 100. Find each deficit.",
+      "solution": "96 deficit=4, 97 deficit=3. Left: 96−3=93. Right: 4×3=12. Answer: 9312.",
+      "skill": "nikhilam_multiplication",
+      "difficulty": "hard",
+      "type": "practice"
+    },
+
+    {
+      "_type": "MCQ — spot-the-sutra pattern recognition",
+      "questionId": "vm_g6_ex_D1",
+      "questionType": "mcq",
+      "questionText": "Which Vedic shortcut works BEST for 103 × 104?",
+      "options": [
+        "Nikhilam — both near base 100",
+        "Urdhva-Tiryak — criss-cross digits",
+        "Ekadhikena — one more than previous",
+        "Paravartya — transposition"
+      ],
+      "correctIndex": 0,
+      "expectedAnswer": "Nikhilam — both near base 100",
+      "hint": "Look at where 103 and 104 sit relative to a round number.",
+      "solution": "103 and 104 are just above base 100 (surpluses of 3 and 4). Nikhilam works perfectly: 103×104 = (103+4)|(3×4) = 107|12 = 10712.",
+      "skill": "sutra_selection",
+      "difficulty": "medium",
+      "type": "reasoning"
+    }
+  ],
+
+  "_svgAssets": {
+    "_comment": "SVG visual to show alongside a question on the board",
+    "example": {
+      "questionId": "vm_g6_ex_A1_visual",
+      "visual": {
+        "kind": "grid",
+        "title": "Nikhilam Setup",
+        "svg": "<svg viewBox='0 0 200 80'><text x='10' y='30'>97 → deficit 3</text><text x='10' y='60'>98 → deficit 2</text></svg>"
+      }
+    }
+  }
+}

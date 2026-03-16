@@ -1,0 +1,22 @@
+{
+  "courseId": "aptitude_reasoning",
+  "courseTitle": "Aptitude and Reasoning",
+  "gradeBand": "8-12",
+  "subject": "aptitude_reasoning",
+  "curriculumContext": "India exam readiness and placement preparation",
+  "standardPath": "ai-tutor/scripts/standards/aptitude_reasoning_standard.json",
+  "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/chapter",
+  "sourcePdfDir": "docs/aptitude_reasoning",
+  "artifactRoot": "ai-tutor/artifacts/pipeline",
+  "targetSessionMinutes": 30,
+  "difficultyModel": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "deliveryModes": [
+    "voice",
+    "board",
+    "text"
+  ]
+}

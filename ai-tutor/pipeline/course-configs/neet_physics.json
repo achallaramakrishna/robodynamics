@@ -1,0 +1,22 @@
+{
+  "courseId": "neet_physics",
+  "courseTitle": "NEET Physics",
+  "gradeBand": "11-12",
+  "subject": "physics",
+  "curriculumContext": "India NEET preparation",
+  "standardPath": "ai-tutor/scripts/standards/neet_physics_standard.json",
+  "chapterDir": "ai-tutor/tutor-api/content-template/neet_physics/chapter",
+  "sourcePdfDir": "docs/neet_physics",
+  "artifactRoot": "ai-tutor/artifacts/pipeline",
+  "targetSessionMinutes": 35,
+  "difficultyModel": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "deliveryModes": [
+    "voice",
+    "board",
+    "text"
+  ]
+}

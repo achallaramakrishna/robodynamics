@@ -1,0 +1,881 @@
+{
+  "title": "Lesson 8: Identity Power — Algebraic Expansions at Speed",
+  "gradeBand": "Grade 7",
+  "source": "Vedic Mathematics for Schools | Grade 7",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "(a+b)² expansion by inspection",
+    "(a-b)² expansion — spot the sign",
+    "(a+b)(a-b) = a² − b² difference of squares",
+    "Numerical application: compute squares at speed",
+    "MCQ checkpoint — expand the expression",
+    "Fill-the-step: expand (3x+4)²",
+    "Factorise using identities",
+    "Speed drill — expand or factorise",
+    "Challenge: (a+b+c)² expansion"
+  ],
+  "learningGoals": [
+    "Expand (a+b)², (a−b)², and (a+b)(a−b) from the Anurupyena identity pattern at speed.",
+    "Apply the (a+b)² identity numerically to compute squares of numbers like 51, 103 mentally.",
+    "Factorise perfect-square trinomials and difference-of-squares expressions using identity recognition."
+  ],
+  "coreIdeas": [
+    "Anurupyena (proportionality): (a+b)² = a² + 2ab + b². The middle term 2ab is always double the product of the two parts.",
+    "Difference of squares: (a+b)(a−b) = a²−b². The cross terms cancel — making it the fastest multiplication identity.",
+    "Factorisation is the identity run backwards: recognise the pattern, read off a and b, write the factored form."
+  ],
+  "workedExamples": [
+    {
+      "question": "Expand (x+5)²",
+      "method": "a=x, b=5. (x+5)² = x² + 2(x)(5) + 5² = x² + 10x + 25.",
+      "answer": "x² + 10x + 25"
+    },
+    {
+      "question": "Compute 51² mentally.",
+      "method": "51 = 50+1. (50+1)² = 50² + 2×50×1 + 1² = 2500 + 100 + 1 = 2601.",
+      "answer": "2601"
+    },
+    {
+      "question": "Expand (2x−3)²",
+      "method": "a=2x, b=3. (2x−3)² = (2x)² − 2(2x)(3) + 3² = 4x² − 12x + 9.",
+      "answer": "4x² − 12x + 9"
+    },
+    {
+      "question": "Factorise x² + 6x + 9",
+      "method": "Recognise perfect square: a²+2ab+b² with a=x, b=3. So (x+3)².",
+      "answer": "(x+3)²"
+    }
+  ],
+  "starterPractice": [
+    "Warm-up: What is a² + 2ab + b² when a=2 and b=3? Evaluate both sides.",
+    "Guided: Expand (x+4)² step by step using the identity.",
+    "Independent: Compute 99² using (100−1)² identity."
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
+      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "coachIntro": "Hi! I am Arya. Algebraic identities are the Vedic shortcuts of algebra. Learn them once, use them forever — for both expansion and factorisation!",
+      "placementRule": "If the learner can state (a+b)² correctly, skip group A and start at group B."
+    },
+    "mission": {
+      "missionTitle": "Identity Power — Algebraic Expansions at Speed",
+      "missionPromise": "Master all three core identities and apply them to expand, compute, and factorise in seconds.",
+      "successCelebration": "Identity Master! You have unlocked the algebraic speed layer of Vedic mathematics."
+    },
+    "microLessonPattern": [
+      "Arya writes the identity on the board and colour-codes each term.",
+      "Board shows a geometric proof — a square divided into four regions.",
+      "Student identifies a and b, then fills in each term.",
+      "Student checks: is the middle term sign correct?",
+      "Instant feedback names which term is wrong.",
+      "Review prompt asks student to state the identity from memory."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group based on difficulty.",
+      "streakRule": "Keep the streak counter visible; correct on retry counts as streak-save.",
+      "badgeRule": "Each group earns a themed badge.",
+      "celebrationStyle": "Coach cheer, XP pulse, progress bar advances."
+    },
+    "reviewLoop": {
+      "trigger": "Two wrong answers triggers mini re-teach.",
+      "practiceStyle": "Re-show worked board step, give simpler problem.",
+      "masteryRule": "Advance only after correct checkpoint answer.",
+      "revisitRule": "Missed groups reappear next session as warm-up."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "noScrollGoal": "Student sees question, progress and buttons without scrolling."
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "(a+b)² expansion by inspection",
+        "missionStepTitle": "Exercise A: (a+b)² = a² + 2ab + b²",
+        "coachHook": "The square of a sum has three terms: the square of the first, twice the product, and the square of the second. See them in the pattern and expansion is instant!",
+        "boardDemo": "(x+3)²: a=x, b=3. First: x². Middle: 2×x×3=6x. Last: 9. Answer: x²+6x+9.",
+        "readAloudPrompt": "In (a+b)², what is the middle term?",
+        "tryPrompt": "Expand (x+4)².",
+        "masteryCheck": "(y+7)² = ?",
+        "instantFeedbackWin": "Expansion by inspection! Three terms, three seconds.",
+        "instantFeedbackRetry": "(y+7)²: y², 2×7y=14y, 49. Answer: y²+14y+49.",
+        "reviewPrompt": "Expand: (x+2)², (m+9)², (t+1)².",
+        "xpReward": 10,
+        "badgeFocus": "(a+b)² Pattern Spotter",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_A_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "A",
+            "subtopic": "(a+b)² expansion",
+            "skill": "expand (a+b)² simple",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Expand (x+3)².",
+            "options": [
+              "x² + 3x + 9",
+              "x² + 6x + 9",
+              "x² + 9x + 6",
+              "x² + 6x + 6"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "x² + 6x + 9",
+            "hint": "a=x, b=3. Middle term = 2×x×3 = 6x.",
+            "solution": "(x+3)² = x² + 2(x)(3) + 3² = x² + 6x + 9.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_identity_expand",
+              "caption": "(a+b)² geometric proof"
+            }
+          },
+          {
+            "questionId": "VM_G7_L8_A_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "A",
+            "subtopic": "(a+b)² expansion",
+            "skill": "expand with larger b",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (y+7)².",
+            "expectedAnswer": "y² + 14y + 49",
+            "hint": "a=y, b=7. Middle=2×7y=14y. Last=49.",
+            "solution": "(y+7)² = y² + 2(y)(7) + 7² = y² + 14y + 49."
+          },
+          {
+            "questionId": "VM_G7_L8_A_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "A",
+            "subtopic": "(a+b)² expansion",
+            "skill": "identify middle term",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "In the expansion of (m+5)², what is the middle term?",
+            "options": ["5m", "10m", "25", "m²"],
+            "correctIndex": 1,
+            "expectedAnswer": "10m",
+            "hint": "Middle term = 2 × m × 5 = 10m.",
+            "solution": "2 × m × 5 = 10m. Middle term of (m+5)² is 10m."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "(a-b)² expansion — spot the sign",
+        "missionStepTitle": "Exercise B: (a−b)² = a² − 2ab + b²",
+        "coachHook": "One sign change makes all the difference! The middle term of (a−b)² is negative. Everything else is the same as (a+b)².",
+        "boardDemo": "(x−4)²: a=x, b=4. First: x². Middle: −2×4x=−8x. Last: 16. Answer: x²−8x+16.",
+        "readAloudPrompt": "What is the sign of the middle term in (a−b)²?",
+        "tryPrompt": "Expand (y−5)².",
+        "masteryCheck": "(2x−3)² = ?",
+        "instantFeedbackWin": "Sign spotted! The negative middle term is the only difference from (a+b)².",
+        "instantFeedbackRetry": "(2x−3)²: (2x)²=4x². Middle=−2×2x×3=−12x. Last=9. Answer: 4x²−12x+9.",
+        "reviewPrompt": "Expand: (x−2)², (m−6)², (3t−1)².",
+        "xpReward": 10,
+        "badgeFocus": "(a−b)² Sign Watcher",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_B_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "B",
+            "subtopic": "(a-b)² expansion",
+            "skill": "expand (a-b)² simple",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Expand (x−4)².",
+            "options": [
+              "x² − 4x + 16",
+              "x² + 8x + 16",
+              "x² − 8x + 16",
+              "x² − 8x − 16"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "x² − 8x + 16",
+            "hint": "a=x, b=4. Middle = −2×x×4 = −8x.",
+            "solution": "(x−4)² = x² − 2(x)(4) + 4² = x² − 8x + 16."
+          },
+          {
+            "questionId": "VM_G7_L8_B_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "B",
+            "subtopic": "(a-b)² expansion",
+            "skill": "expand with coefficient",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Expand (2x − 3)².",
+            "expectedAnswer": "4x² − 12x + 9",
+            "hint": "a=2x, b=3. First=(2x)²=4x². Middle=−2×2x×3=−12x. Last=9.",
+            "solution": "(2x−3)² = 4x² − 12x + 9."
+          },
+          {
+            "questionId": "VM_G7_L8_B_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "B",
+            "subtopic": "(a-b)² expansion",
+            "skill": "last term always positive",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "In (a−b)², the last term b² is always ___.",
+            "options": ["negative", "positive", "zero", "equal to −2ab"],
+            "correctIndex": 1,
+            "expectedAnswer": "positive",
+            "hint": "b² = b×b. A number squared is always non-negative.",
+            "solution": "b² is always positive (or zero). Only the middle term −2ab is negative."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "(a+b)(a-b) = a² − b²",
+        "missionStepTitle": "Exercise C: (a+b)(a−b) = a² − b²",
+        "coachHook": "The fastest identity: multiply a sum by a difference and the middle terms cancel perfectly. Just two terms in the result!",
+        "boardDemo": "(x+5)(x−5) = x²−25. (3+y)(3−y) = 9−y². The cross terms +5x and −5x cancel.",
+        "readAloudPrompt": "What happens to the middle terms in (a+b)(a−b)?",
+        "tryPrompt": "Expand (x+7)(x−7).",
+        "masteryCheck": "(2x+3)(2x−3) = ?",
+        "instantFeedbackWin": "Cross terms cancelled! This identity is the fastest multiplication in algebra.",
+        "instantFeedbackRetry": "(2x+3)(2x−3) = (2x)²−3² = 4x²−9.",
+        "reviewPrompt": "Expand: (m+11)(m−11), (5+n)(5−n), (4x+1)(4x−1).",
+        "xpReward": 10,
+        "badgeFocus": "Difference-of-Squares Expert",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_C_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "C",
+            "subtopic": "(a+b)(a-b) difference of squares",
+            "skill": "difference of squares basic",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "(x+7)(x−7) = ?",
+            "options": ["x² − 49", "x² + 49", "x² − 14x − 49", "x² + 14x − 49"],
+            "correctIndex": 0,
+            "expectedAnswer": "x² − 49",
+            "hint": "(a+b)(a−b) = a²−b². a=x, b=7. Answer: x²−49.",
+            "solution": "(x+7)(x−7) = x² − 7² = x² − 49."
+          },
+          {
+            "questionId": "VM_G7_L8_C_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "C",
+            "subtopic": "(a+b)(a-b) difference of squares",
+            "skill": "difference of squares with coefficient",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "(2x+3)(2x−3) = ?",
+            "expectedAnswer": "4x² − 9",
+            "hint": "a=2x, b=3. a²=(2x)²=4x². b²=9. Answer: 4x²−9.",
+            "solution": "(2x+3)(2x−3) = (2x)²−3² = 4x²−9."
+          },
+          {
+            "questionId": "VM_G7_L8_C_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "C",
+            "subtopic": "(a+b)(a-b) difference of squares",
+            "skill": "why cross terms cancel",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Why does (a+b)(a−b) have only two terms?",
+            "options": [
+              "Because a and b are always equal",
+              "Because the +ab and −ab middle terms cancel each other",
+              "Because of a special rule for sums",
+              "Because b² is always zero"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "Because the +ab and −ab middle terms cancel each other",
+            "hint": "Expand: a²−ab+ab−b² = a²−b². The two middle terms are opposites.",
+            "solution": "Expanding: a(a−b)+b(a−b) = a²−ab+ab−b² = a²−b². The +ab and −ab cancel."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Numerical application — squares at speed",
+        "missionStepTitle": "Exercise D: Compute squares numerically",
+        "coachHook": "Use (a+b)² or (a−b)² to compute squares of numbers near round numbers. Faster than long multiplication every time!",
+        "boardDemo": "51² = (50+1)² = 2500+100+1 = 2601. 99² = (100−1)² = 10000−200+1 = 9801. 103² = (100+3)² = 10000+600+9 = 10609.",
+        "readAloudPrompt": "Express 98 as (100 − something) and compute 98².",
+        "tryPrompt": "Compute 52² using (50+2)².",
+        "masteryCheck": "Compute 103².",
+        "instantFeedbackWin": "Numerical identity applied! Round-number strategy saves 80% of the work.",
+        "instantFeedbackRetry": "52²=(50+2)²=2500+200+4=2704. 103²=(100+3)²=10000+600+9=10609.",
+        "reviewPrompt": "Compute: 49², 101², 97², 202².",
+        "xpReward": 12,
+        "badgeFocus": "Numerical Identity Applier",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_D_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "D",
+            "subtopic": "Numerical squares",
+            "skill": "square near 50",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 51² using the identity (50+1)².",
+            "expectedAnswer": "2601",
+            "hint": "50² + 2×50×1 + 1² = 2500 + 100 + 1 = 2601.",
+            "solution": "(50+1)² = 2500 + 100 + 1 = 2601."
+          },
+          {
+            "questionId": "VM_G7_L8_D_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "D",
+            "subtopic": "Numerical squares",
+            "skill": "square near 100 using (a-b)²",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "99² = (100−1)² = ?",
+            "options": ["9900", "9801", "9999", "9802"],
+            "correctIndex": 1,
+            "expectedAnswer": "9801",
+            "hint": "100² − 2×100×1 + 1² = 10000 − 200 + 1 = 9801.",
+            "solution": "(100−1)² = 10000 − 200 + 1 = 9801."
+          },
+          {
+            "questionId": "VM_G7_L8_D_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "D",
+            "subtopic": "Numerical squares",
+            "skill": "square above 100",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 103² using (100+3)².",
+            "expectedAnswer": "10609",
+            "hint": "100² + 2×100×3 + 3² = 10000 + 600 + 9 = 10609.",
+            "solution": "(100+3)² = 10000 + 600 + 9 = 10609."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ checkpoint — expand the expression",
+        "missionStepTitle": "Exercise E: MCQ checkpoint — expand",
+        "coachHook": "Checkpoint! Four MCQs — mix of all three identities. Pick the correct expansion instantly.",
+        "boardDemo": "Rapid recall: (a+b)²=a²+2ab+b², (a−b)²=a²−2ab+b², (a+b)(a−b)=a²−b².",
+        "readAloudPrompt": "Which identity has only two terms in the result?",
+        "tryPrompt": "MCQ: (3x+2)² = ?",
+        "masteryCheck": "(5−y)(5+y) = ?",
+        "instantFeedbackWin": "Checkpoint cleared! All three identities are in your toolkit.",
+        "instantFeedbackRetry": "(3x+2)²=9x²+12x+4. (5+y)(5−y)=25−y².",
+        "reviewPrompt": "Expand: (x−6)², (2+m)(2−m), (4y+1)².",
+        "xpReward": 12,
+        "badgeFocus": "Identity Checkpoint Champion",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_E_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ checkpoint",
+            "skill": "expand (a+b)² with coefficient",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "(3x+2)² = ?",
+            "options": [
+              "9x² + 6x + 4",
+              "9x² + 12x + 4",
+              "3x² + 12x + 4",
+              "9x² + 12x + 2"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "9x² + 12x + 4",
+            "hint": "a=3x, b=2. (3x)²=9x². 2×3x×2=12x. 2²=4.",
+            "solution": "(3x+2)² = 9x² + 12x + 4."
+          },
+          {
+            "questionId": "VM_G7_L8_E_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ checkpoint",
+            "skill": "difference of squares numerical",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "(5+y)(5−y) = ?",
+            "options": ["25 − y", "25 − y²", "25 + y²", "10y − y²"],
+            "correctIndex": 1,
+            "expectedAnswer": "25 − y²",
+            "hint": "a=5, b=y. a²−b² = 25−y².",
+            "solution": "(5+y)(5−y) = 5²−y² = 25−y²."
+          },
+          {
+            "questionId": "VM_G7_L8_E_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ checkpoint",
+            "skill": "expand (a-b)² MCQ",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "(4y − 1)² = ?",
+            "options": [
+              "4y² − 8y + 1",
+              "16y² + 8y + 1",
+              "16y² − 8y + 1",
+              "16y² − 4y + 1"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "16y² − 8y + 1",
+            "hint": "a=4y, b=1. (4y)²=16y². −2×4y×1=−8y. 1²=1.",
+            "solution": "(4y−1)² = 16y² − 8y + 1."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: expand (3x+4)²",
+        "missionStepTitle": "Exercise F: Fill-the-step — expand (3x+4)²",
+        "coachHook": "Fill every term of (3x+4)² step by step. The three-box method makes the identity automatic!",
+        "boardDemo": "Box 1: a=3x, b=4. Box 2: a²=(3x)²=9x². Box 3: 2ab=2×3x×4=24x. Box 4: b²=16. Answer: 9x²+24x+16.",
+        "readAloudPrompt": "What is a² when a=3x?",
+        "tryPrompt": "Fill all boxes for (3x+4)².",
+        "masteryCheck": "Now expand (5x+2)² using the same method.",
+        "instantFeedbackWin": "Perfect expansion! Each box is a clear identity step.",
+        "instantFeedbackRetry": "(3x+4)²: 9x², 24x, 16. Answer: 9x²+24x+16.",
+        "reviewPrompt": "Fill-step: (2x+7)², (x−5)².",
+        "xpReward": 12,
+        "badgeFocus": "Fill-Step Expansion Expert",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_F_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step (3x+4)²",
+            "skill": "expand (a+b)² step by step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Expand (3x+4)² step by step.",
+            "steps": [
+              {"label": "Identify a and b: a = ?, b = ?", "answer": "a=3x, b=4", "hint": "First term is a, second is b"},
+              {"label": "a² = (3x)² = ?", "answer": "9x²", "hint": "3² × x² = 9x²"},
+              {"label": "2ab = 2 × 3x × 4 = ?", "answer": "24x", "hint": "2 × 3 × 4 × x = 24x"},
+              {"label": "b² = 4² = ?", "answer": "16", "hint": "4 × 4 = 16"},
+              {"label": "Final expansion: a² + 2ab + b²", "answer": "9x² + 24x + 16", "hint": "Join the three terms"}
+            ],
+            "expectedAnswer": "9x² + 24x + 16",
+            "hint": "a=3x, b=4. Three terms: a², 2ab, b².",
+            "solution": "(3x+4)² = 9x² + 24x + 16.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_identity_expand",
+              "caption": "Fill-step expansion of (3x+4)²"
+            }
+          },
+          {
+            "questionId": "VM_G7_L8_F_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step (5x+2)²",
+            "skill": "expand (a+b)² fill alternate",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Expand (5x+2)² step by step.",
+            "steps": [
+              {"label": "a² = (5x)² = ?", "answer": "25x²", "hint": "5² × x² = 25x²"},
+              {"label": "2ab = 2 × 5x × 2 = ?", "answer": "20x", "hint": "2 × 5 × 2 × x"},
+              {"label": "b² = 2² = ?", "answer": "4", "hint": "2 × 2"},
+              {"label": "Final answer", "answer": "25x² + 20x + 4", "hint": "Join the three terms"}
+            ],
+            "expectedAnswer": "25x² + 20x + 4",
+            "hint": "a=5x, b=2. Compute a², 2ab, b².",
+            "solution": "(5x+2)² = 25x² + 20x + 4."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Factorise using identities",
+        "missionStepTitle": "Exercise G: Factorise using identities",
+        "coachHook": "Factorisation is the identity read backwards. Look at the trinomial and ask: is it a perfect square? Or is it a difference of two squares?",
+        "boardDemo": "x²+6x+9: a=x, b=3 (since 2ab=6x and b²=9). So (x+3)². x²−25: a=x, b=5. So (x+5)(x−5).",
+        "readAloudPrompt": "How do you identify a perfect-square trinomial?",
+        "tryPrompt": "Factorise x²+10x+25.",
+        "masteryCheck": "Factorise 4x²−9.",
+        "instantFeedbackWin": "Factorised by identity! Pattern recognition is faster than trial and error.",
+        "instantFeedbackRetry": "x²+10x+25=(x+5)². 4x²−9=(2x+3)(2x−3).",
+        "reviewPrompt": "Factorise: y²−14y+49, 9m²−16, x²+4x+4.",
+        "xpReward": 15,
+        "badgeFocus": "Identity Factoriser",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_G_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "G",
+            "subtopic": "Factorise using identities",
+            "skill": "factorise perfect square trinomial",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Factorise x² + 6x + 9.",
+            "options": ["(x+3)(x−3)", "(x+6)(x+1)", "(x+3)²", "(x+9)(x+1)"],
+            "correctIndex": 2,
+            "expectedAnswer": "(x+3)²",
+            "hint": "Check: is the last term a perfect square? Is the middle term 2×x×3? Yes → (x+3)².",
+            "solution": "x²+6x+9: a=x, b=3. 2ab=6x ✓. b²=9 ✓. So (x+3)²."
+          },
+          {
+            "questionId": "VM_G7_L8_G_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "G",
+            "subtopic": "Factorise using identities",
+            "skill": "factorise difference of squares",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Factorise 4x² − 9.",
+            "expectedAnswer": "(2x+3)(2x−3)",
+            "hint": "4x²=(2x)², 9=3². Difference of squares: (2x+3)(2x−3).",
+            "solution": "4x²−9 = (2x)²−3² = (2x+3)(2x−3)."
+          },
+          {
+            "questionId": "VM_G7_L8_G_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "G",
+            "subtopic": "Factorise using identities",
+            "skill": "factorise (a-b)² pattern",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Factorise y² − 14y + 49.",
+            "options": ["(y−7)²", "(y+7)²", "(y−7)(y+7)", "(y−49)²"],
+            "correctIndex": 0,
+            "expectedAnswer": "(y−7)²",
+            "hint": "Last term 49=7². Middle −14y=−2×7×y. This is (a−b)² with a=y, b=7.",
+            "solution": "y²−14y+49 = (y−7)². Check: (y−7)²=y²−14y+49 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill — expand or factorise",
+        "missionStepTitle": "Exercise H: Speed drill — expand or factorise 5 expressions",
+        "coachHook": "Speed drill! Mix of expansion and factorisation. Identify the identity first, then compute. Five problems, two minutes!",
+        "boardDemo": "Flash: (x+9)², (m−4)², (3+n)(3−n), factorise x²−16, factorise 9y²+12y+4.",
+        "readAloudPrompt": "(x+9)² = ?",
+        "tryPrompt": "Speed: (m−4)² = ?",
+        "masteryCheck": "Speed: factorise x²−16.",
+        "instantFeedbackWin": "Speed drill complete! Expansion and factorisation are mirror skills.",
+        "instantFeedbackRetry": "x²−16=(x+4)(x−4). 9y²+12y+4=(3y+2)².",
+        "reviewPrompt": "Rapid fire: (2x+5)², factorise 25m²−4, (y−8)².",
+        "xpReward": 15,
+        "badgeFocus": "Identity Speed Caster",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_H_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "speed expansion (a+b)²",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! (x+9)² = ?",
+            "options": [
+              "x² + 9x + 81",
+              "x² + 18x + 81",
+              "x² + 18x + 18",
+              "x² + 81"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "x² + 18x + 81",
+            "hint": "2×x×9=18x. 9²=81.",
+            "solution": "(x+9)² = x² + 18x + 81."
+          },
+          {
+            "questionId": "VM_G7_L8_H_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "speed expansion (a-b)²",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! (m−4)² = ?",
+            "options": [
+              "m² − 4m + 16",
+              "m² − 8m + 16",
+              "m² + 8m + 16",
+              "m² − 8m − 16"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "m² − 8m + 16",
+            "hint": "−2×m×4=−8m. 4²=16.",
+            "solution": "(m−4)² = m² − 8m + 16."
+          },
+          {
+            "questionId": "VM_G7_L8_H_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "speed factorise difference of squares",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Speed! Factorise x² − 16.",
+            "options": ["(x−4)²", "(x+4)(x−4)", "(x+8)(x−2)", "(x−16)(x+1)"],
+            "correctIndex": 1,
+            "expectedAnswer": "(x+4)(x−4)",
+            "hint": "16=4². Difference of squares: (x+4)(x−4).",
+            "solution": "x²−16 = x²−4² = (x+4)(x−4)."
+          },
+          {
+            "questionId": "VM_G7_L8_H_Q4",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "speed factorise perfect square",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Factorise 9y² + 12y + 4.",
+            "options": ["(3y+4)²", "(3y+2)²", "(9y+4)(y+1)", "(3y+2)(3y−2)"],
+            "correctIndex": 1,
+            "expectedAnswer": "(3y+2)²",
+            "hint": "9y²=(3y)². 4=2². 2×3y×2=12y ✓. So (3y+2)².",
+            "solution": "9y²+12y+4 = (3y+2)². Check: (3y+2)²=9y²+12y+4 ✓."
+          },
+          {
+            "questionId": "VM_G7_L8_H_Q5",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "speed numerical square",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Compute 49² using the identity (50−1)².",
+            "expectedAnswer": "2401",
+            "hint": "50²−2×50×1+1²=2500−100+1=2401.",
+            "solution": "(50−1)²=2500−100+1=2401."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge: (a+b+c)² expansion",
+        "missionStepTitle": "Exercise I: Challenge — (a+b+c)² expansion",
+        "coachHook": "Ultimate challenge! Extend the identity to three terms. (a+b+c)² = a²+b²+c²+2ab+2bc+2ca. Six terms — a pattern of squares and cross-products.",
+        "boardDemo": "(x+y+z)² = x²+y²+z²+2xy+2yz+2zx. Count the terms: three squares and three double cross-products.",
+        "readAloudPrompt": "How many cross-product terms are there in (a+b+c)²?",
+        "tryPrompt": "Expand (x+2+3)² = (x+5)² numerically or (x+y+1)² algebraically.",
+        "masteryCheck": "Expand (1+x+x²)².",
+        "instantFeedbackWin": "Three-variable identity mastered! This structure appears in physics and competitive maths.",
+        "instantFeedbackRetry": "(x+2+3)²=(x+5)²=x²+10x+25. Or (a+b+c)² with a=x,b=2,c=3: x²+4+9+4x+12+6x=x²+10x+25.",
+        "reviewPrompt": "Expand (p+q+2)² leaving in terms of p and q.",
+        "xpReward": 20,
+        "badgeFocus": "Three-Variable Identity Grandmaster",
+        "exercises": [
+          {
+            "questionId": "VM_G7_L8_I_Q1",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge (a+b+c)²",
+            "skill": "(a+b+c)² full expansion",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Expand (x + y + z)² using the three-variable identity.",
+            "steps": [
+              {"label": "Square terms: a²+b²+c² = ?", "answer": "x²+y²+z²", "hint": "Square each variable"},
+              {"label": "Cross term 2ab = 2×x×y = ?", "answer": "2xy", "hint": "2×x×y"},
+              {"label": "Cross term 2bc = 2×y×z = ?", "answer": "2yz", "hint": "2×y×z"},
+              {"label": "Cross term 2ca = 2×z×x = ?", "answer": "2zx", "hint": "2×z×x"},
+              {"label": "Full expansion: join all six terms", "answer": "x²+y²+z²+2xy+2yz+2zx", "hint": "Three squares + three double cross-products"}
+            ],
+            "expectedAnswer": "x²+y²+z²+2xy+2yz+2zx",
+            "hint": "Six terms: three squares and three 2× cross-products.",
+            "solution": "(x+y+z)² = x²+y²+z²+2xy+2yz+2zx.",
+            "visual": {
+              "type": "svg",
+              "asset": "vm_cube_expand",
+              "caption": "(a+b+c)² term structure"
+            }
+          },
+          {
+            "questionId": "VM_G7_L8_I_Q2",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge (a+b+c)²",
+            "skill": "(a+b+c)² with numbers",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Using the identity, (1+2+3)² = 1²+2²+3²+2(1×2)+2(2×3)+2(3×1). What is the result?",
+            "options": ["30", "36", "32", "42"],
+            "correctIndex": 1,
+            "expectedAnswer": "36",
+            "hint": "1+4+9+4+12+6=36. Also (1+2+3)²=6²=36.",
+            "solution": "1+4+9+2(2)+2(6)+2(3) = 14+4+12+6 = 36. Confirms: 6²=36."
+          },
+          {
+            "questionId": "VM_G7_L8_I_Q3",
+            "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge (a+b+c)²",
+            "skill": "count cross-product terms",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "In (a+b+c)², how many distinct cross-product terms (of the form 2×□×□) are there?",
+            "options": ["1", "2", "3", "4"],
+            "correctIndex": 2,
+            "expectedAnswer": "3",
+            "hint": "Pairs from {a,b,c}: (a,b), (b,c), (c,a). Three pairs → three cross-product terms.",
+            "solution": "Three pairs: 2ab, 2bc, 2ca. So three distinct cross-product terms."
+          }
+        ]
+      }
+    ]
+  },
+  "teachingScript": [
+    {
+      "stepId": "VM_G7_L8_A",
+      "exerciseGroup": "A",
+      "subtopic": "(a+b)² expansion",
+      "boardMode": "svg",
+      "visual": {"asset": "vm_identity_expand", "highlight": "square-regions"},
+      "teacherLine": "Draw a large square with side (a+b). Split it into four rectangles: a×a, a×b, b×a, b×b. Total = a²+2ab+b². The identity is visible!",
+      "boardAction": "Draw (a+b)×(a+b) square divided into 4 regions. Label each. Sum = a²+2ab+b².",
+      "checkpointPrompt": "(y+7)² = ?",
+      "microPractice": "Expand (x+2)², (m+9)²."
+    },
+    {
+      "stepId": "VM_G7_L8_C",
+      "exerciseGroup": "C",
+      "subtopic": "(a+b)(a-b) difference of squares",
+      "boardMode": "svg",
+      "visual": {"asset": "vm_identity_expand", "highlight": "cross-cancel"},
+      "teacherLine": "The difference-of-squares identity is the fastest multiplication in algebra. The +ab and −ab cancel perfectly.",
+      "boardAction": "Show FOIL expansion of (a+b)(a−b): a²−ab+ab−b². Box: the −ab and +ab cancel. Result: a²−b².",
+      "checkpointPrompt": "(3x+2)(3x−2) = ?",
+      "microPractice": "Expand: (m+11)(m−11), (4x+1)(4x−1)."
+    },
+    {
+      "stepId": "VM_G7_L8_G",
+      "exerciseGroup": "G",
+      "subtopic": "Factorise using identities",
+      "boardMode": "svg",
+      "visual": {"asset": "vm_identity_expand", "highlight": "reverse-identity"},
+      "teacherLine": "Factorisation is expansion in reverse. Look at the trinomial: check the last term (is it a perfect square?), then check the middle (is it 2ab?).",
+      "boardAction": "Show x²+6x+9 → ask: last term? 9=3². Middle term? 6x=2×x×3. So (x+3)². Arrow pointing backwards from expanded to factored form.",
+      "checkpointPrompt": "Factorise x²+10x+25.",
+      "microPractice": "Factorise: y²−14y+49, 9m²−16."
+    },
+    {
+      "stepId": "VM_G7_L8_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge (a+b+c)²",
+      "boardMode": "svg",
+      "visual": {"asset": "vm_cube_expand", "highlight": "three-variable"},
+      "teacherLine": "Three variables: three squares plus three double cross-products. The pattern is: every variable squared, plus twice every pair multiplied.",
+      "boardAction": "Write (a+b+c)² = a²+b²+c²+2ab+2bc+2ca with colour-coded grouping.",
+      "checkpointPrompt": "Expand (1+x+x²)².",
+      "microPractice": "Expand (p+q+2)²."
+    }
+  ],
+  "screenplay": [
+    {
+      "beatId": "VM_G7_L8_A_INTRO",
+      "stepId": "VM_G7_L8_A",
+      "exerciseGroup": "A",
+      "subtopic": "(a+b)² expansion",
+      "sequence": 101,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "A square on (a+b) breaks into four pieces. Add them up and you get the most useful identity in algebra: (a+b)² = a²+2ab+b².",
+      "boardAction": "Animate a large square being divided into 4 colour-coded rectangles.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Three terms: first squared, twice the product, second squared.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G7_L8_D_EXPLAIN",
+      "stepId": "VM_G7_L8_D",
+      "exerciseGroup": "D",
+      "subtopic": "Numerical squares",
+      "sequence": 401,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "Use identities to square numbers in your head. 51 = 50+1. (50+1)²=2500+100+1=2601. No long multiplication!",
+      "boardAction": "Show 51² with the identity split. Circle 2500, 100, and 1. Add visually.",
+      "checkpointPrompt": "Compute 99² using (100−1)².",
+      "pauseType": "student_input",
+      "holdSec": 12.0,
+      "expectedStudentResponse": "9801",
+      "fallbackHint": "10000−200+1=9801.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G7_L8_F_PRACTICE",
+      "stepId": "VM_G7_L8_F",
+      "exerciseGroup": "F",
+      "subtopic": "Fill-the-step (3x+4)²",
+      "sequence": 601,
+      "cue": "practice",
+      "boardMode": "svg",
+      "teacherLine": "Five boxes, five seconds each. Fill the expansion of (3x+4)² completely — every term matters!",
+      "boardAction": "Show blank 5-box template for (3x+4)².",
+      "checkpointPrompt": "Fill all five boxes.",
+      "pauseType": "student_input",
+      "holdSec": 25.0,
+      "expectedStudentResponse": "9x² + 24x + 16",
+      "fallbackHint": "9x², 24x, 16.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    },
+    {
+      "beatId": "VM_G7_L8_I_CHALLENGE",
+      "stepId": "VM_G7_L8_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge (a+b+c)²",
+      "sequence": 901,
+      "cue": "challenge",
+      "boardMode": "svg",
+      "teacherLine": "Champion challenge — (a+b+c)² has six terms. Three squares and three cross-products. Show every term!",
+      "boardAction": "Show blank (x+y+z)² expansion with six empty slots.",
+      "checkpointPrompt": "Expand (x+y+z)² completely.",
+      "pauseType": "student_input",
+      "holdSec": 30.0,
+      "expectedStudentResponse": "x²+y²+z²+2xy+2yz+2zx",
+      "fallbackHint": "Three squares + 2xy + 2yz + 2zx.",
+      "performanceTag": "stretch",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null
+    }
+  ]
+}

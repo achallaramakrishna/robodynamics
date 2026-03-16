@@ -73,6 +73,7 @@ public class RDAITutorIntegrationController {
         }
 
         RDAITutorSessionInitRequest resolved = request == null ? new RDAITutorSessionInitRequest() : request;
+        String normalizedModule = aiTutorIntegrationService.normalizeRequestedModule(resolved.getModule());
         Integer childId = resolveChildId(me, resolved.getChildId());
         if (isParent(me) && childId == null) {
             return ResponseEntity.badRequest().body(Map.of(
@@ -80,11 +81,11 @@ public class RDAITutorIntegrationController {
             ));
         }
 
-        if (isEnrollmentRequiredModule(resolved.getModule())
-                && !isStudentEnrolledForModule(childId, resolved.getModule())) {
+        if (aiTutorIntegrationService.requiresEnrollment(normalizedModule)
+                && !isStudentEnrolledForModule(childId, normalizedModule)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of(
                     "error", "AI Tutor access denied. Student is not enrolled in this module course offering.",
-                    "module", normalizeModule(resolved.getModule()),
+                    "module", normalizedModule,
                     "childId", childId
             ));
         }
@@ -92,23 +93,23 @@ public class RDAITutorIntegrationController {
         String token = aiTutorIntegrationService.createLaunchToken(
                 me,
                 childId,
-                resolved.getModule(),
+                normalizedModule,
                 resolved.getGrade()
         );
         String learnerName = resolveLearnerName(me, childId);
-        ModuleEnrollmentContext launchContext = resolveEnrollmentForModule(childId, resolved.getModule());
+        ModuleEnrollmentContext launchContext = resolveEnrollmentForModule(childId, normalizedModule);
         RDAITutorSessionInitResponse response = new RDAITutorSessionInitResponse();
         response.setLaunchUrl(
                 aiTutorIntegrationService.buildLaunchUrl(
                         token,
                         learnerName,
-                        resolved.getModule(),
+                        normalizedModule,
                         launchContext == null ? null : launchContext.enrollmentId,
                         launchContext == null ? null : launchContext.courseId
                 )
         );
         response.setExpiresInSec(aiTutorIntegrationService.getTokenTtlSeconds());
-        response.setModule(resolved.getModule() == null ? "VEDIC_MATH" : resolved.getModule());
+        response.setModule(normalizedModule);
         response.setGrade(resolved.getGrade() == null ? safeGrade(me) : resolved.getGrade());
         response.setChildId(childId);
         return ResponseEntity.ok(response);
@@ -562,20 +563,6 @@ public class RDAITutorIntegrationController {
             }
         }
         return null;
-    }
-
-    private static String normalizeModule(String module) {
-        if (module == null || module.isBlank()) {
-            return "VEDIC_MATH";
-        }
-        return module.trim().toUpperCase(Locale.ENGLISH);
-    }
-
-    private static boolean isEnrollmentRequiredModule(String module) {
-        String normalized = normalizeModule(module);
-        return "NEET_PHYSICS".equals(normalized)
-                || "NEET_CHEMISTRY".equals(normalized)
-                || "NEET_BIOLOGY".equals(normalized);
     }
 
     private String resolveLearnerName(RDUser me, Integer childId) {

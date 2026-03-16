@@ -27,6 +27,12 @@ public class RDHeaderController {
         return "pricing";
     }
 
+    @GetMapping("/ai-tutor/pricing")
+    public String mindsutraPricing(Model model) {
+        model.addAttribute("title", "MindSutra — AI Vedic Math Tutor Pricing");
+        return "mindsutara-pricing";
+    }
+
     @GetMapping("/contact-us")
     public String contact(Model model) {
         model.addAttribute("title", "Contact Us");

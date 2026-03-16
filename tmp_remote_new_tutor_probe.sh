@@ -1,0 +1,3 @@
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; SELECT 'EXISTING' AS tag, course_id, course_name, course_category_id, category, course_level, grade_range, is_active FROM rd_courses WHERE LOWER(course_name) IN ('aptitude and reasoning','financial literacy') ORDER BY course_id;"
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; SELECT 'CATEGORY' AS tag, course_category_id, category_name FROM rd_course_categories ORDER BY course_category_id;"
+mysql -uroot -pJatni@752050 -Nse "USE robodynamics_db; SELECT 'NEET' AS tag, course_id, course_name, course_category_id, category FROM rd_courses WHERE course_id IN (138,131,132,155,156,157) OR LOWER(course_name) LIKE 'neet%' ORDER BY course_id;"

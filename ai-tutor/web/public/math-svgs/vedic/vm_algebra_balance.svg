@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230" width="380" height="230" font-family="Nunito,sans-serif">
+  <rect width="380" height="230" rx="14" fill="#fdf4ff"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#581c87">Equation Balance — Both Sides Equal</text>
+  <text x="190" y="44" text-anchor="middle" font-size="12" fill="#6d28d9">3(x + 2) = 2(x + 5)</text>
+
+  <!-- Balance beam -->
+  <line x1="190" y1="140" x2="190" y2="80" stroke="#78350f" stroke-width="3"/>
+  <line x1="60" y1="80" x2="320" y2="80" stroke="#78350f" stroke-width="3"/>
+  <!-- Triangle support -->
+  <polygon points="190,156 178,180 202,180" fill="#a16207"/>
+
+  <!-- Left pan -->
+  <line x1="60" y1="80" x2="60" y2="110" stroke="#78350f" stroke-width="2"/>
+  <rect x="20" y="110" width="80" height="44" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="60" y="128" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">3(x+2)</text>
+  <text x="60" y="146" text-anchor="middle" font-size="11" fill="#6d28d9">= 3x + 6</text>
+
+  <!-- Right pan -->
+  <line x1="320" y1="80" x2="320" y2="110" stroke="#78350f" stroke-width="2"/>
+  <rect x="280" y="110" width="80" height="44" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="320" y="128" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">2(x+5)</text>
+  <text x="320" y="146" text-anchor="middle" font-size="11" fill="#166534">= 2x + 10</text>
+
+  <!-- Equals -->
+  <text x="190" y="120" text-anchor="middle" font-size="20" font-weight="800" fill="#64748b">=</text>
+
+  <!-- Steps -->
+  <text x="190" y="192" text-anchor="middle" font-size="12" fill="#374151">3x + 6 = 2x + 10   →   x = 10 − 6 = <tspan font-weight="700" fill="#dc2626">4</tspan></text>
+
+  <!-- Result -->
+  <rect x="120" y="204" width="140" height="22" rx="8" fill="#6d28d9"/>
+  <text x="190" y="220" text-anchor="middle" font-size="12" font-weight="700" fill="white">Solution: x = 4</text>
+</svg>

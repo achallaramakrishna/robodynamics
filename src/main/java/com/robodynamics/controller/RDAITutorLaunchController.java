@@ -48,22 +48,25 @@ public class RDAITutorLaunchController {
             }
         }
 
-        if (isEnrollmentRequiredModule(module) && !isStudentEnrolledForModule(effectiveChildId, module)) {
+        String normalizedModule = aiTutorIntegrationService.normalizeRequestedModule(module);
+
+        if (aiTutorIntegrationService.requiresEnrollment(normalizedModule)
+                && !isStudentEnrolledForModule(effectiveChildId, normalizedModule)) {
             String redirectPath = me.getProfile_id() == RDUser.profileType.ROBO_STUDENT.getValue()
                     ? "/studentDashboard"
                     : "/home";
             return "redirect:" + redirectPath
                     + "?aiTutorAccessDenied=1&module="
-                    + URLEncoder.encode(normalizeModule(module), StandardCharsets.UTF_8);
+                    + URLEncoder.encode(normalizedModule, StandardCharsets.UTF_8);
         }
 
         String learnerName = resolveLearnerName(me, effectiveChildId);
-        String token = aiTutorIntegrationService.createLaunchToken(me, effectiveChildId, module, grade);
-        ModuleEnrollmentContext launchContext = resolveEnrollmentForModule(effectiveChildId, module);
+        String token = aiTutorIntegrationService.createLaunchToken(me, effectiveChildId, normalizedModule, grade);
+        ModuleEnrollmentContext launchContext = resolveEnrollmentForModule(effectiveChildId, normalizedModule);
         String launchUrl = aiTutorIntegrationService.buildLaunchUrl(
                 token,
                 learnerName,
-                module,
+                normalizedModule,
                 launchContext == null ? null : launchContext.enrollmentId,
                 launchContext == null ? null : launchContext.courseId
         );
@@ -141,19 +144,5 @@ public class RDAITutorLaunchController {
             this.enrollmentId = enrollmentId;
             this.courseId = courseId;
         }
-    }
-
-    private String normalizeModule(String module) {
-        if (module == null || module.isBlank()) {
-            return "VEDIC_MATH";
-        }
-        return module.trim().toUpperCase();
-    }
-
-    private boolean isEnrollmentRequiredModule(String module) {
-        String normalized = normalizeModule(module);
-        return "NEET_PHYSICS".equals(normalized)
-                || "NEET_CHEMISTRY".equals(normalized)
-                || "NEET_BIOLOGY".equals(normalized);
     }
 }

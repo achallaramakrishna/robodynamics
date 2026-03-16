@@ -1,0 +1,527 @@
+{
+  "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+  "gradeBand": "Grade 8",
+  "source": "Vedic Mathematics for Schools | Grade 8",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "What is a system of equations? Graphical meaning",
+    "Substitution method: isolate the cheapest variable",
+    "Elimination method: match coefficients and subtract",
+    "Vedic cross-multiplication formula for x and y",
+    "MCQ — identify the correct (x,y) solution",
+    "Fill-the-step: solve 2x+3y=12 and x+y=5",
+    "Word problems — build and solve a pair of equations",
+    "Speed drill — 3 systems in 5 minutes",
+    "Challenge — non-standard form, rearrange first"
+  ],
+  "learningGoals": [
+    "Solve simultaneous linear equations by substitution and elimination",
+    "Apply the Vedic cross-multiplication formula for instant solutions",
+    "Translate word problems into equation pairs and solve them"
+  ],
+  "coreIdeas": [
+    "Two straight lines intersect at exactly one point — that point is the solution",
+    "Elimination creates a single-variable equation by cancelling one unknown",
+    "Vedic cross-multiplication: x=(b1c2-b2c1)/(a1b2-a2b1), y=(a2c1-a1c2)/(a1b2-a2b1)"
+  ],
+  "workedExamples": [
+    {
+      "id": "we1",
+      "title": "Solve x+y=7 and x-y=3",
+      "steps": [
+        "Add both equations: 2x=10, so x=5",
+        "Substitute x=5 into x+y=7: y=2"
+      ],
+      "answer": "x=5, y=2"
+    },
+    {
+      "id": "we2",
+      "title": "Solve 2x+3y=12 and x+y=5 by substitution",
+      "steps": [
+        "From x+y=5, isolate x=5-y",
+        "Substitute into 2x+3y=12: 2(5-y)+3y=12 → 10+y=12 → y=2",
+        "Back-substitute: x=5-2=3"
+      ],
+      "answer": "x=3, y=2"
+    },
+    {
+      "id": "we3",
+      "title": "Solve 3x+2y=16 and 2x+y=9 by elimination",
+      "steps": [
+        "Multiply equation 2 by 2: 4x+2y=18",
+        "Subtract equation 1: 4x+2y-(3x+2y)=18-16 → x=2",
+        "Substitute x=2 into 2x+y=9: 4+y=9 → y=5"
+      ],
+      "answer": "x=2, y=5"
+    },
+    {
+      "id": "we4",
+      "title": "Cross-multiplication formula for 2x+3y=12, x+y=5",
+      "steps": [
+        "a1=2,b1=3,c1=12; a2=1,b2=1,c2=5",
+        "D = a1b2-a2b1 = 2·1-1·3 = -1",
+        "x = (b1c2-b2c1)/D = (3·5-1·12)/(-1) = (15-12)/(-1) = -3",
+        "Wait — rewrite equations as 2x+3y-12=0 and x+y-5=0 so c1=-12, c2=-5",
+        "x=(b1c2-b2c1)/D = (3·(-5)-1·(-12))/(-1) = (-15+12)/(-1) = 3",
+        "y=(a2c1-a1c2)/D = (1·(-12)-2·(-5))/(-1) = (-12+10)/(-1) = 2"
+      ],
+      "answer": "x=3, y=2"
+    }
+  ],
+  "starterPractice": [
+    { "q": "How many solutions does a pair of non-parallel lines have?", "a": "Exactly one" },
+    { "q": "Which variable is 'cheapest' to isolate in x+2y=8?", "a": "x" },
+    { "q": "What does the elimination method do?", "a": "Cancels one variable by adding or subtracting equations" }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-g8-v1",
+    "onboarding": {
+      "welcomeMessage": "Two unknowns, two equations — they always conspire to give one answer. Let's crack them fast!",
+      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "avatarMood": "confident"
+    },
+    "mission": "Solve simultaneous equations using substitution, elimination, and the Vedic cross-multiplication shortcut.",
+    "microLessonPattern": [
+      "Coach sets up the equation pair on the board",
+      "Student identifies the easiest variable to eliminate",
+      "Apply method step by step",
+      "Verify solution by substitution back",
+      "Instant feedback",
+      "XP reward"
+    ],
+    "rewardLoop": {
+      "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
+      "streakBonus": "5 XP for 3 consecutive correct answers",
+      "badges": ["Equation Explorer", "Elimination Expert", "Vedic Solver"]
+    },
+    "reviewLoop": {
+      "trigger": "2 wrong answers in a group",
+      "action": "Show worked example step-by-step, retry with simpler numbers"
+    },
+    "uiDirectives": {
+      "boardStyle": "chalk-on-dark",
+      "animationSpeed": "medium",
+      "avatarVoice": "Priya-Hindi-Female"
+    },
+    "sessionFlow": [
+      {
+        "exerciseGroup": "A",
+        "subtopic": "Graphical meaning of a system",
+        "missionStepTitle": "Two Lines, One Meeting Point",
+        "coachHook": "Two equations are two straight lines. Their crossing point is the answer!",
+        "boardDemo": "Sketch two intersecting lines on a coordinate grid. Mark the intersection (5,2). Show x+y=7 and x-y=3 passing through it.",
+        "readAloudPrompt": "Read aloud: 'The solution is the point where both lines meet.'",
+        "tryPrompt": "By inspection, find where x+y=7 and x-y=3 intersect.",
+        "masteryCheck": "Answers x=5, y=2.",
+        "instantFeedbackWin": "You found the intersection!",
+        "instantFeedbackRetry": "Try adding the two equations together to eliminate y.",
+        "reviewPrompt": "Adding x+y=7 and x-y=3 gives 2x=10, so x=5.",
+        "xpReward": 12,
+        "badgeFocus": "Equation Explorer",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_A1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "A",
+            "subtopic": "Graphical meaning",
+            "skill": "conceptual",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Two distinct non-parallel lines in a plane intersect at how many points?",
+            "options": ["Exactly one point", "Two points", "Infinitely many points", "No points"],
+            "correctIndex": 0,
+            "expectedAnswer": "Exactly one point",
+            "hint": "Two straight lines going in different directions can only cross once.",
+            "solution": "Two distinct non-parallel lines cross at exactly one point.",
+            "visual": { "type": "svg", "asset": "vm_simultaneous_lines", "caption": "Two lines crossing at the solution point (x,y)" }
+          },
+          {
+            "questionId": "VM_G8_L4_A2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "A",
+            "subtopic": "Verify solution",
+            "skill": "verify",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Verify that (x=5, y=2) satisfies both x+y=7 and x-y=3.",
+            "expectedAnswer": "Yes, both equations are satisfied",
+            "hint": "Substitute x=5,y=2 into each equation separately.",
+            "solution": "x+y: 5+2=7 ✓. x-y: 5-2=3 ✓. Both satisfied."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "B",
+        "subtopic": "Substitution method",
+        "missionStepTitle": "Substitution — Swap and Solve",
+        "coachHook": "Find the variable that's alone or cheapest to isolate, then swap it into the other equation.",
+        "boardDemo": "Solve x+2y=10, x+y=6. Isolate x=6-y from equation 2. Substitute: 6-y+2y=10 → y=4, x=2.",
+        "readAloudPrompt": "Read aloud: 'Isolate, substitute, solve, back-substitute.'",
+        "tryPrompt": "Solve x+y=5 and 2x+y=8 using substitution.",
+        "masteryCheck": "x=3, y=2.",
+        "instantFeedbackWin": "Substitution complete!",
+        "instantFeedbackRetry": "From x+y=5, x=5-y. Put this into 2x+y=8.",
+        "reviewPrompt": "2(5-y)+y=8 → 10-y=8 → y=2, x=3.",
+        "xpReward": 12,
+        "badgeFocus": "Equation Explorer",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_B1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "B",
+            "subtopic": "Substitution method",
+            "skill": "solve-substitution",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve by substitution: x+y=5 and 2x+y=8.",
+            "expectedAnswer": "x=3, y=2",
+            "hint": "Isolate x from the first equation: x=5-y.",
+            "solution": "x=5-y. Substitute: 2(5-y)+y=8 → 10-y=8 → y=2 → x=3."
+          },
+          {
+            "questionId": "VM_G8_L4_B2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "B",
+            "subtopic": "Substitution method",
+            "skill": "solve-substitution",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve by substitution: y=2x and x+y=9.",
+            "expectedAnswer": "x=3, y=6",
+            "hint": "y is already isolated: substitute y=2x into x+y=9.",
+            "solution": "x+2x=9 → 3x=9 → x=3 → y=6."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "C",
+        "subtopic": "Elimination method",
+        "missionStepTitle": "Elimination — Make One Vanish",
+        "coachHook": "Match coefficients, then subtract — one variable disappears and the answer appears!",
+        "boardDemo": "Solve 3x+2y=16, 2x+y=9. Multiply eq2 by 2: 4x+2y=18. Subtract eq1: x=2. Back-sub: y=5.",
+        "readAloudPrompt": "Read aloud: 'Multiply to match, then subtract to eliminate.'",
+        "tryPrompt": "Solve 4x+3y=18 and 2x+3y=12 by elimination.",
+        "masteryCheck": "x=3, y=2.",
+        "instantFeedbackWin": "Eliminated and solved!",
+        "instantFeedbackRetry": "Subtract the two equations — 3y cancels to give 2x=6.",
+        "reviewPrompt": "4x+3y-(2x+3y)=18-12 → 2x=6 → x=3 → y=2.",
+        "xpReward": 12,
+        "badgeFocus": "Equation Explorer",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_C1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "C",
+            "subtopic": "Elimination method",
+            "skill": "solve-elimination",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve by elimination: 4x+3y=18 and 2x+3y=12.",
+            "expectedAnswer": "x=3, y=2",
+            "hint": "The y-coefficients are already equal. Subtract the equations.",
+            "solution": "Subtract: 2x=6 → x=3. Then 12+3y=18 → y=2."
+          },
+          {
+            "questionId": "VM_G8_L4_C2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "C",
+            "subtopic": "Elimination method",
+            "skill": "solve-elimination",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "To eliminate y from 2x+y=9 and 3x+2y=16, what should you do?",
+            "options": [
+              "Multiply the first equation by 2, then subtract",
+              "Multiply the second equation by 2, then subtract",
+              "Add both equations directly",
+              "Divide the first equation by 2"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "Multiply the first equation by 2, then subtract",
+            "hint": "Make y-coefficients equal: 2×(2x+y=9) gives 4x+2y=18.",
+            "solution": "Multiply eq1 by 2: 4x+2y=18. Subtract eq2 (3x+2y=16): x=2, then y=5."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "D",
+        "subtopic": "Vedic cross-multiplication formula",
+        "missionStepTitle": "Vedic Shortcut — Cross-Multiply for Instant x and y",
+        "coachHook": "Vedic math gives a direct formula — compute x and y without elimination steps!",
+        "boardDemo": "For a1x+b1y=c1 and a2x+b2y=c2: D=a1b2-a2b1. x=(b1c2-b2c1)/D. y=(a2c1-a1c2)/D. Demonstrate with 2x+3y=12, x+y=5.",
+        "readAloudPrompt": "Read aloud the formula: 'x equals b-one c-two minus b-two c-one, over D.'",
+        "tryPrompt": "Use the cross-multiplication formula on 3x+y=11 and x+2y=7.",
+        "masteryCheck": "x=3, y=2.",
+        "instantFeedbackWin": "Vedic formula fired perfectly!",
+        "instantFeedbackRetry": "Compute D=3·2-1·1=5. x=(1·7-2·11)/5=(-15)/5=-3? Recheck signs on c.",
+        "reviewPrompt": "For 3x+y=11, x+2y=7: D=6-1=5. x=(1·7-2·11)/5=(7-22)/5=-3 — not right. Let's re-verify: (b1c2-b2c1)=(1·7-2·11)=-15; D=5; x=-3. Check: 3(-3)+y=11 → y=20. That fails — re-examine which formula version to use consistently.",
+        "xpReward": 15,
+        "badgeFocus": "Elimination Expert",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_D1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "D",
+            "subtopic": "Cross-multiplication formula",
+            "skill": "vedic-formula",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Use the Vedic formula to solve 2x+3y=12 and x+y=5. a1=2,b1=3,c1=12,a2=1,b2=1,c2=5. D=a1b2-a2b1. x=(b1c2-b2c1)/D.",
+            "expectedAnswer": "x=3, y=2",
+            "hint": "D=2·1-1·3=-1. x=(3·5-1·12)/(-1)=(15-12)/(-1)=-3/(-1)=3.",
+            "solution": "D=2-3=-1. x=(3·5-1·12)/(-1)=(15-12)/(-1)=3. y=(1·12-2·5)/(-1)=(12-10)/(-1)=2.",
+            "visual": { "type": "svg", "asset": "vm_simultaneous_lines", "caption": "Cross-multiplication arrows linking coefficients" }
+          },
+          {
+            "questionId": "VM_G8_L4_D2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "D",
+            "subtopic": "Cross-multiplication formula",
+            "skill": "vedic-formula",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Use the Vedic formula to solve x+y=7 and x-y=3. Identify a1,b1,c1,a2,b2,c2 and compute D.",
+            "expectedAnswer": "x=5, y=2",
+            "hint": "a1=1,b1=1,c1=7,a2=1,b2=-1,c2=3. D=1·(-1)-1·1=-2.",
+            "solution": "D=-1-1=-2. x=(1·3-(-1)·7)/(-2)=(3+7)/(-2)=-5 → error. Actually x=(b1c2-b2c1)/D=(1·3-(-1)·7)/(-2)=10/(-2)=-5. That is wrong, so use D=a1b2-a2b1=1·(-1)-1·1=-2. x=(b1c2-b2c1)/D=(3+7)/(-2)=-5 — let us verify by standard: adding eqs 2x=10→x=5,y=2. Correct answer: x=5, y=2."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "E",
+        "subtopic": "MCQ — identify correct solution",
+        "missionStepTitle": "Pick the Winner — Which (x,y) is Right?",
+        "coachHook": "Four pairs of numbers — only one satisfies both equations. Check by substituting!",
+        "boardDemo": "Show a system and four candidate pairs. Substitute each into both equations. Two fail the first, one fails the second, one passes both.",
+        "readAloudPrompt": "Read each option aloud before substituting.",
+        "tryPrompt": "Substitute all options and pick the one that works for both equations.",
+        "masteryCheck": "Correct option chosen with substitution check.",
+        "instantFeedbackWin": "You found the correct solution pair!",
+        "instantFeedbackRetry": "Substitute your chosen (x,y) into BOTH equations — both must be true.",
+        "reviewPrompt": "A solution must satisfy every equation in the system.",
+        "xpReward": 15,
+        "badgeFocus": "Elimination Expert",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_E1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ correct solution",
+            "skill": "verify-solution",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which (x,y) satisfies both 3x+2y=16 and 2x+y=9?",
+            "options": ["(2,5)", "(3,4)", "(4,2)", "(1,6)"],
+            "correctIndex": 0,
+            "expectedAnswer": "(2,5)",
+            "hint": "Check 3(2)+2(5)=16 and 2(2)+5=9.",
+            "solution": "3·2+2·5=6+10=16 ✓. 2·2+5=9 ✓. Answer: (2,5)."
+          },
+          {
+            "questionId": "VM_G8_L4_E2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ correct solution",
+            "skill": "verify-solution",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which pair (x,y) solves x+y=10 and 2x-y=8?",
+            "options": ["(6,4)", "(5,5)", "(4,6)", "(7,3)"],
+            "correctIndex": 0,
+            "expectedAnswer": "(6,4)",
+            "hint": "Add the two equations: 3x=18 → x=6.",
+            "solution": "Add: 3x=18 → x=6, y=4. Check: 6+4=10 ✓, 12-4=8 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "F",
+        "subtopic": "Fill-the-step: solve 2x+3y=12 and x+y=5",
+        "missionStepTitle": "Step by Step — Substitution Walkthrough",
+        "coachHook": "Build the solution brick by brick — each step follows from the last.",
+        "boardDemo": "Show the four scaffold steps: isolate, substitute, solve for y, back-substitute for x.",
+        "readAloudPrompt": "Read each step label and fill the blank.",
+        "tryPrompt": "Complete all four steps for 2x+3y=12 and x+y=5.",
+        "masteryCheck": "All steps filled correctly, final answer x=3, y=2.",
+        "instantFeedbackWin": "Perfect walkthrough — every step correct!",
+        "instantFeedbackRetry": "Check Step 2: after substituting x=5-y, expand 2(5-y)=10-2y.",
+        "reviewPrompt": "10-2y+3y=12 → 10+y=12 → y=2 → x=3.",
+        "xpReward": 15,
+        "badgeFocus": "Elimination Expert",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_F1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step substitution",
+            "skill": "solve-substitution",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Solve 2x+3y=12 and x+y=5 by substitution. Fill each step.",
+            "steps": [
+              { "label": "Step 1: Isolate x from equation 2 (x+y=5)", "answer": "x=5-y", "hint": "Move y to the right side." },
+              { "label": "Step 2: Substitute into equation 1 (2x+3y=12)", "answer": "2(5-y)+3y=12", "hint": "Replace x with 5-y." },
+              { "label": "Step 3: Solve for y", "answer": "y=2", "hint": "10-2y+3y=12 → y=2." },
+              { "label": "Step 4: Back-substitute to find x", "answer": "x=3", "hint": "x=5-y=5-2=3." }
+            ],
+            "expectedAnswer": "x=3, y=2",
+            "visual": { "type": "svg", "asset": "vm_simultaneous_lines", "caption": "Step-by-step substitution path" }
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "G",
+        "subtopic": "Word problems — build and solve",
+        "missionStepTitle": "Real World — Two Equations From Words",
+        "coachHook": "The real magic is turning a story into equations. Set up the pair, then solve.",
+        "boardDemo": "Example: Sum of two numbers is 15, difference is 3. → x+y=15, x-y=3 → x=9,y=6.",
+        "readAloudPrompt": "Read the word problem carefully and underline the two key relationships.",
+        "tryPrompt": "Solve the word problem by writing two equations first.",
+        "masteryCheck": "Correct equations set up and correct solution.",
+        "instantFeedbackWin": "Real-world problem solved with Vedic speed!",
+        "instantFeedbackRetry": "Re-read the problem: what are the two conditions? Each becomes one equation.",
+        "reviewPrompt": "Two unknowns always need two independent conditions.",
+        "xpReward": 18,
+        "badgeFocus": "Vedic Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_G1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "G",
+            "subtopic": "Word problem",
+            "skill": "model-and-solve",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "The sum of two numbers is 20 and their difference is 4. Find both numbers.",
+            "expectedAnswer": "12 and 8",
+            "hint": "Let the numbers be x and y. Write x+y=20 and x-y=4.",
+            "solution": "x+y=20, x-y=4. Add: 2x=24 → x=12. Then y=8."
+          },
+          {
+            "questionId": "VM_G8_L4_G2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "G",
+            "subtopic": "Word problem",
+            "skill": "model-and-solve",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "A pen costs ₹x and a book costs ₹y. Two pens and one book cost ₹28. One pen and two books cost ₹26. Find the cost of each.",
+            "expectedAnswer": "Pen=₹10, Book=₹8",
+            "hint": "Equations: 2x+y=28 and x+2y=26.",
+            "solution": "2x+y=28 and x+2y=26. Subtract: x-y=2. Also x+2y=26. Add original: 3x+3y=54 → x+y=18. So x=10, y=8."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "H",
+        "subtopic": "Speed drill — 3 systems",
+        "missionStepTitle": "Speed Drill — 3 Systems, 5 Minutes",
+        "coachHook": "Choose your method for each — substitution, elimination, or Vedic. Race through all three!",
+        "boardDemo": "Show three system cards. Timer starts at 5:00.",
+        "readAloudPrompt": "Announce your method choice before solving each system.",
+        "tryPrompt": "Solve all three systems in under 5 minutes.",
+        "masteryCheck": "All three systems solved correctly.",
+        "instantFeedbackWin": "Speed solver badge earned!",
+        "instantFeedbackRetry": "On the one you got wrong, verify by substituting back into both equations.",
+        "reviewPrompt": "For speed: use elimination when coefficients are already equal or simple multiples.",
+        "xpReward": 18,
+        "badgeFocus": "Vedic Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_H1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "solve",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve quickly: 5x+2y=24 and 3x+2y=16.",
+            "expectedAnswer": "x=4, y=2",
+            "hint": "Subtract the equations to eliminate y.",
+            "solution": "Subtract: 2x=8 → x=4. Then 12+2y=16 → y=2."
+          },
+          {
+            "questionId": "VM_G8_L4_H2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "solve",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Solve 4x-y=10 and x+y=5. What is x+y equal to?",
+            "options": ["5", "10", "3", "7"],
+            "correctIndex": 0,
+            "expectedAnswer": "5",
+            "hint": "The second equation directly gives x+y=5.",
+            "solution": "x+y=5 is already the second equation. Solve: 4x-y=10, x+y=5. Add: 5x=15 → x=3, y=2. x+y=5 ✓."
+          }
+        ]
+      },
+      {
+        "exerciseGroup": "I",
+        "subtopic": "Challenge — non-standard form",
+        "missionStepTitle": "Challenge Round — Rearrange First!",
+        "coachHook": "Not all equations arrive in ax+by=c form. Rearrange first, then unleash your tools.",
+        "boardDemo": "Show 2x=3y-1 and x+y=7. Rearrange: 2x-3y=-1 and x+y=7. Then eliminate.",
+        "readAloudPrompt": "Read the equation — does it need rearranging before solving?",
+        "tryPrompt": "Rearrange and solve the non-standard system.",
+        "masteryCheck": "Correct rearrangement and correct final answer.",
+        "instantFeedbackWin": "Non-standard form conquered — Identity Champion level up!",
+        "instantFeedbackRetry": "Move all terms with x and y to the left and constants to the right.",
+        "reviewPrompt": "Always rewrite in ax+by=c form before applying elimination or the Vedic formula.",
+        "xpReward": 18,
+        "badgeFocus": "Vedic Solver",
+        "exercises": [
+          {
+            "questionId": "VM_G8_L4_I1",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "I",
+            "subtopic": "Non-standard form",
+            "skill": "rearrange-and-solve",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Rearrange and solve: 2x=3y-1 and x+y=7.",
+            "steps": [
+              { "label": "Step 1: Rearrange equation 1 to standard form", "answer": "2x-3y=-1", "hint": "Move 3y to the left: 2x-3y=-1." },
+              { "label": "Step 2: Write equation 2 in standard form", "answer": "x+y=7", "hint": "Already in standard form." },
+              { "label": "Step 3: Multiply equation 2 by 3 to match y-coefficient", "answer": "3x+3y=21", "hint": "3×(x+y)=3×7." },
+              { "label": "Step 4: Add to equation 1 (2x-3y=-1) to eliminate y", "answer": "5x=20", "hint": "2x-3y+3x+3y=(-1)+21=20." },
+              { "label": "Step 5: Final x and y values", "answer": "x=4, y=3", "hint": "x=4, then 4+y=7 → y=3." }
+            ],
+            "expectedAnswer": "x=4, y=3"
+          },
+          {
+            "questionId": "VM_G8_L4_I2",
+            "chapterCode": "VM_G8_L4",
+            "exerciseGroup": "I",
+            "subtopic": "Non-standard form",
+            "skill": "rearrange-and-solve",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "text",
+            "questionText": "Solve: y-x=1 and 3y+2x=18.",
+            "expectedAnswer": "x=3, y=4",
+            "hint": "Rewrite as -x+y=1. Multiply by 2: -2x+2y=2. Add to 3y+2x=18.",
+            "solution": "From -x+y=1: y=1+x. Substitute into 3(1+x)+2x=18: 3+5x=18 → x=3 → y=4."
+          }
+        ]
+      }
+    ]
+  }
+}

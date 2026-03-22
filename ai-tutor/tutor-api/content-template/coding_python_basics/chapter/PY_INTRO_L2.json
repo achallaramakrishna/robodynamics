@@ -1,0 +1,174 @@
+{
+  "title": "Python Basics: Strings and Helpers",
+  "gradeBand": "Coding Beginners",
+  "source": "RoboDynamics Coding Tutor Pack",
+  "estimatedMinutes": 28,
+  "subtopics": [
+    "Working with string input",
+    "Building a helper function",
+    "Testing edge cases"
+  ],
+  "learningGoals": [
+    "Write a function that transforms a string.",
+    "Use Python string methods in a controlled way.",
+    "Check normal and edge-case test inputs."
+  ],
+  "exerciseFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Working with string input"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Building a helper function"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Testing edge cases"
+    }
+  ],
+  "teachingScript": [
+    {
+      "stepId": "PY_INTRO_L2_A",
+      "exerciseGroup": "A",
+      "subtopic": "Working with string input",
+      "boardMode": "free_draw",
+      "teacherLine": "Strings are pieces of text. A helper function can clean or transform that text for us.",
+      "boardAction": "Write a sample word and show how lower() changes it.",
+      "checkpointPrompt": "What should happen to HELLO if we want a lowercase answer?",
+      "microPractice": "Predict the lowercase form of Python."
+    },
+    {
+      "stepId": "PY_INTRO_L2_B",
+      "exerciseGroup": "B",
+      "subtopic": "Building a helper function",
+      "boardMode": "free_draw",
+      "teacherLine": "A helper function can take one string and return a cleaned version without changing the original prompt.",
+      "boardAction": "Write def make_slug(text): return text.lower().replace(\" \", \"-\") on the board.",
+      "checkpointPrompt": "If the input is Hello World, what should the function return?",
+      "microPractice": "Predict the output for Data Science."
+    },
+    {
+      "stepId": "PY_INTRO_L2_C",
+      "exerciseGroup": "C",
+      "subtopic": "Testing edge cases",
+      "boardMode": "free_draw",
+      "teacherLine": "A good coder also tests short inputs, repeated spaces, and already-clean values.",
+      "boardAction": "List a normal case, an already-lowercase case, and a one-word case.",
+      "checkpointPrompt": "Which test would prove the function handles a single word safely?",
+      "microPractice": "Suggest one extra test for a lowercase phrase."
+    }
+  ],
+  "coreIdeas": [
+    "String methods can transform text step by step.",
+    "A helper function should return a predictable result.",
+    "Tests should include both normal and simple edge cases."
+  ],
+  "workedExamples": [
+    {
+      "question": "Write a function that turns a phrase into lowercase hyphen-separated text.",
+      "method": "Lowercase the string first, then replace spaces with hyphens.",
+      "answer": "def make_slug(text):\n    return text.lower().replace(\" \", \"-\")"
+    }
+  ],
+  "starterPractice": [
+    "Predict the lowercase form of HELLO.",
+    "Turn two words into one hyphenated phrase.",
+    "Check what happens with a single lowercase word."
+  ],
+  "questionPool": [
+    {
+      "questionId": "PY_INTRO_L2_Q1",
+      "exerciseGroup": "A",
+      "subtopic": "Working with string input",
+      "skill": "String basics",
+      "difficulty": "easy",
+      "type": "practice",
+      "questionType": "mcq",
+      "questionText": "Which Python string method turns HELLO into hello?",
+      "hint": "Choose the method that makes letters lowercase.",
+      "solution": "lower() converts uppercase letters to lowercase.",
+      "expectedAnswer": "lower()",
+      "options": [
+        "append()",
+        "lower()",
+        "sort()",
+        "clear()"
+      ],
+      "correctIndex": 1,
+      "acceptableAnswers": [
+        "lower",
+        "lower()"
+      ]
+    },
+    {
+      "questionId": "PY_INTRO_L2_Q2",
+      "exerciseGroup": "B",
+      "subtopic": "Building a helper function",
+      "skill": "String function writing",
+      "difficulty": "medium",
+      "type": "practice",
+      "questionType": "code",
+      "questionText": "Write a Python function make_slug(text) that returns the lowercase version of text with spaces replaced by hyphens.",
+      "hint": "Use text.lower().replace(\" \", \"-\").",
+      "solution": "The function should return text.lower().replace(\" \", \"-\").",
+      "expectedAnswer": "Pass all tests for make_slug(text)",
+      "starterCode": "def make_slug(text):\n    # lowercase the text and replace spaces with hyphens\n    pass\n",
+      "tests": [
+        {
+          "name": "two_words",
+          "target": "make_slug",
+          "args": [
+            "Hello World"
+          ],
+          "expected": "hello-world"
+        },
+        {
+          "name": "single_word",
+          "target": "make_slug",
+          "args": [
+            "Python"
+          ],
+          "expected": "python"
+        },
+        {
+          "name": "mixed_case_phrase",
+          "target": "make_slug",
+          "args": [
+            "Data Science"
+          ],
+          "expected": "data-science"
+        }
+      ],
+      "rubric": {
+        "success": "Function returns lowercase text with spaces changed to hyphens.",
+        "commonMistake": "Calling print instead of return, or forgetting lower()."
+      }
+    },
+    {
+      "questionId": "PY_INTRO_L2_Q3",
+      "exerciseGroup": "C",
+      "subtopic": "Testing edge cases",
+      "skill": "Test reasoning",
+      "difficulty": "medium",
+      "type": "practice",
+      "questionType": "fill_step",
+      "questionText": "Complete the expected outputs: make_slug(\"Hello World\") -> __ ; make_slug(\"Python\") -> __ .",
+      "hint": "Lowercase both answers and add a hyphen for the two-word phrase.",
+      "solution": "The outputs are hello-world and python.",
+      "expectedAnswer": "hello-world | python",
+      "steps": [
+        {
+          "label": "Output for Hello World",
+          "answer": "hello-world",
+          "hint": "Two lowercase words with a hyphen"
+        },
+        {
+          "label": "Output for Python",
+          "answer": "python",
+          "hint": "Single lowercase word"
+        }
+      ]
+    }
+  ]
+}

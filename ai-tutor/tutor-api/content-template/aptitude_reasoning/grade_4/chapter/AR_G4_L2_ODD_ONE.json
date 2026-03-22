@@ -1,0 +1,500 @@
+{
+  "chapterCode": "AR_G4_L2_ODD_ONE",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Odd One Out",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 2: Odd One Out",
+  "estimatedMinutes": 12,
+  "subtopics": [
+    "Odd one out by colour",
+    "Odd one out by shape",
+    "Odd one out by size",
+    "Odd one out by category (animals, fruits, vehicles)",
+    "Odd one out by number property (even/odd, multiples)",
+    "Odd one out by letter property"
+  ],
+  "learningGoals": [
+    "Spot the one item that does not belong in a group.",
+    "Explain WHY an item is different using a clear reason.",
+    "Identify the common property shared by the other items."
+  ],
+  "coreIdeas": [
+    "First, find what THREE of the four items have in common.",
+    "The item that does NOT share that common property is the odd one out.",
+    "Always give a reason — 'because all the others are...' makes your answer complete."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Apple, Mango, Carrot, Banana — which is the odd one out?",
+      "solution": "Apple, Mango, and Banana are all fruits. Carrot is a vegetable. So Carrot is the odd one out.",
+      "concept": "Category grouping — fruits vs vegetables"
+    },
+    {
+      "id": "WE2",
+      "problem": "2, 4, 6, 7, 8 — which is the odd one out?",
+      "solution": "2, 4, 6, and 8 are all even numbers. 7 is an odd number. So 7 is the odd one out.",
+      "concept": "Number property — even vs odd"
+    },
+    {
+      "id": "WE3",
+      "problem": "Circle, Square, Triangle, Ball — which is the odd one out?",
+      "solution": "Circle, Square, and Triangle are flat 2D shapes. Ball is a 3D object. So Ball is the odd one out.",
+      "concept": "Shape property — 2D vs 3D"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach shows four everyday objects — three matching, one different — and asks: 'Which one does not belong?' to get the learner thinking visually. Then Spark explains the 'find the common thread' strategy before the first exercise.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers occur in Groups A–B, walk through the three-step reasoning method again before continuing."
+    },
+    "mission": {
+      "missionTitle": "Find the Odd One Out",
+      "missionPromise": "By the end, you will always find the item that does not belong AND explain your reason like a true logic champion!",
+      "successCelebration": "Award a badge pulse and a coach cheer after every correct group. At lesson end, show 'Logic Lens' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a fun category hook.",
+      "Coach shows a worked group on the board and highlights the common property.",
+      "Coach reads the practice question aloud.",
+      "Student picks the odd one out and gives a reason.",
+      "Instant feedback praises or explains the common property.",
+      "Review question confirms mastery before next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one badge tied to the category type.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach focusing on the common property of the three similar items.",
+      "practiceStyle": "Offer one easier follow-up question with more obvious differences.",
+      "masteryRule": "Advance only after a correct answer with a stated reason.",
+      "revisitRule": "Any group with two errors returns as a review card at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L2_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hey there, logic star! Today we play 'Odd One Out' — one of the most fun puzzles ever! You will see four things. Three of them share a secret — they all belong to the same group. But ONE of them is different, it sneaks in from a different group! Your job is to find the sneaky one and say WHY it does not belong. Ready to think like a detective?",
+        "boardAction": "Write 'Odd One Out' as the title. Below, list the 3-step method: Step 1 — Look at all four items. Step 2 — Find what THREE have in common. Step 3 — The fourth one is the odd one out!",
+        "checkpointPrompt": "Quick warm-up: Dog, Cat, Fish, Rose — which is the odd one out and why?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Rose — because dog, cat, and fish are animals but rose is a flower/plant.",
+        "fallbackHint": "Dog, Cat, and Fish are all animals. Rose is a plant. The odd one out is Rose!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l2_title",
+            "x": "40",
+            "y": "30",
+            "text": "Odd One Out — Chapter 2",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l2_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_step1",
+            "x": "60",
+            "y": "80",
+            "text": "Step 1: Look at all four items carefully",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_step2",
+            "x": "60",
+            "y": "108",
+            "text": "Step 2: Find what THREE of them share",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_step3",
+            "x": "60",
+            "y": "136",
+            "text": "Step 3: The one that does NOT share = Odd one out!",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "triangle.svg",
+          "title": "Odd One Out",
+          "caption": "Screenplay beat for Odd One Out."
+        }
+      },
+      {
+        "beatId": "AR_G4_L2_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you! Here are four things: Bus, Car, Truck, Bicycle. I ask myself: what do Bus, Car, and Truck have in common? They all have engines — they run on fuel! Bicycle has no engine; you pedal it. So Bicycle is the odd one out — because all the others have engines. See how I gave a reason? That is the key!",
+        "boardAction": "Write Bus, Car, Truck, Bicycle in a row. Circle Bus, Car, Truck and write 'have engines' below them. Draw a cross on Bicycle and write 'no engine — odd one out!'",
+        "checkpointPrompt": "Your turn: Sparrow, Crow, Eagle, Frog — which is the odd one out and why?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Frog — because sparrow, crow, and eagle are birds but frog is not a bird.",
+        "fallbackHint": "Sparrow, Crow, and Eagle all have wings and can fly — they are birds. Frog is an amphibian, not a bird. So Frog is the odd one out!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_items",
+            "x": "60",
+            "y": "60",
+            "text": "Bus   Car   Truck   Bicycle",
+            "color": "#1e40af",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_common",
+            "x": "60",
+            "y": "100",
+            "text": "Bus, Car, Truck → have engines (run on fuel)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.8,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "60",
+            "y": "130",
+            "text": "Bicycle → no engine → ODD ONE OUT!",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 1.4,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "triangle.svg",
+          "title": "Odd One Out",
+          "caption": "Screenplay beat for Odd One Out."
+        }
+      },
+      {
+        "beatId": "AR_G4_L2_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You know the three-step method. Now work through Groups A to F and find every odd one out! Remember: spotting it is half the job — giving a clear reason is the other half. Go for it, detective!",
+        "boardAction": "Show a mini cheatsheet: Types of properties to check — Category (what group?), Shape, Colour, Size, Number property, Letter property.",
+        "checkpointPrompt": "Before we start — if three items are red and one is blue, what is the odd one out's different property?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Colour — the blue one is different in colour.",
+        "fallbackHint": "The three red items share the same colour. The blue one has a different colour — so colour is the property that makes it odd.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Properties to Check",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_p1",
+            "x": "60",
+            "y": "65",
+            "text": "Category: animal / fruit / vehicle / shape?",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_p2",
+            "x": "60",
+            "y": "90",
+            "text": "Number: even / odd / multiple?",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_p3",
+            "x": "60",
+            "y": "115",
+            "text": "Visual: colour / shape / size?",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "triangle.svg",
+          "title": "Odd One Out",
+          "caption": "Screenplay beat for Odd One Out."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Odd one out by category (animals, fruits, vehicles)",
+      "missionStepTitle": "Exercise A: Category Groups",
+      "coachHook": "Let's figure this out together! Three belong to the same family — one is an outsider. Find the outsider!",
+      "boardDemo": {
+        "title": "Category — Same Family?",
+        "steps": [
+          "Items: Lion, Tiger, Elephant, Rose",
+          "Lion, Tiger, Elephant are animals",
+          "Rose is a flower (plant)",
+          "Odd one out: Rose — because all others are animals"
+        ],
+        "teacherLine": "Ask yourself: what group do three of these belong to? The one that does not fit that group is the odd one out!"
+      },
+      "readAloudPrompt": "Look at: Mango, Banana, Orange, Potato — what category do three of them belong to?",
+      "tryPrompt": "Now you try: Bus, Car, Train, Chair — which one is the odd one out and why?",
+      "masteryCheck": "Chair — because Bus, Car, and Train are vehicles but Chair is furniture.",
+      "instantFeedbackWin": "You nailed it! Bus, Car, Train are all vehicles for travelling. Chair is furniture. Great reasoning!",
+      "instantFeedbackRetry": "Here's a trick: Bus, Car, and Train all take you from one place to another — they are vehicles. Chair does not move you around — it is furniture!",
+      "reviewPrompt": "Quick check: Sparrow, Parrot, Pigeon, Dolphin — odd one out and reason?",
+      "xpReward": 10,
+      "badgeFocus": "Category Sorter",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Odd One Out",
+        "caption": "Group A for Odd One Out."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Odd one out by shape",
+      "missionStepTitle": "Exercise B: Shape Groups",
+      "coachHook": "Let's figure this out together! All shapes have sides, corners, and special properties. Find the shape that breaks the pattern!",
+      "boardDemo": {
+        "title": "Shape — Count the Sides",
+        "steps": [
+          "Shapes: Square, Rectangle, Triangle, Circle",
+          "Square has 4 sides, Rectangle has 4 sides, Triangle has 3 sides",
+          "Circle has 0 sides — it is curved!",
+          "Odd one out: Circle — it is the only curved shape"
+        ],
+        "teacherLine": "Count the sides or look for curved vs straight edges. The shape with a different number of sides — or the only curved one — is the odd one out."
+      },
+      "readAloudPrompt": "Look at these shapes: Pentagon (5 sides), Square (4 sides), Rectangle (4 sides), Rhombus (4 sides) — which one has a different number of sides?",
+      "tryPrompt": "Your turn: Triangle, Square, Circle, Rectangle — which is the odd one out?",
+      "masteryCheck": "Circle — because Triangle, Square, and Rectangle are polygons with straight sides, but Circle is curved.",
+      "instantFeedbackWin": "Perfect! Triangle, Square, and Rectangle all have straight sides. Circle is round with no sides. Circle is the odd one out!",
+      "instantFeedbackRetry": "Here's a trick: count the corners. Triangle has 3, Square has 4, Rectangle has 4 — they all have corners. Does a circle have any corners? No! So Circle is different.",
+      "reviewPrompt": "Quick: Circle, Oval, Sphere, Square — which is the odd one out?",
+      "xpReward": 10,
+      "badgeFocus": "Shape Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Odd One Out",
+        "caption": "Group B for Odd One Out."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Odd one out by colour",
+      "missionStepTitle": "Exercise C: Colour Groups",
+      "coachHook": "Let's figure this out together! When colours group up, one stands alone. Find the colour that does not match the others!",
+      "boardDemo": {
+        "title": "Colour — Same Shade Family?",
+        "steps": [
+          "Colours: Red, Orange, Yellow, Blue",
+          "Red, Orange, Yellow are warm colours",
+          "Blue is a cool colour",
+          "Odd one out: Blue — it is the only cool colour"
+        ],
+        "teacherLine": "Look for a shared colour property: same family (warm/cool), same darkness, or same type. The one that does not share the property is different."
+      },
+      "readAloudPrompt": "Look at: Green, Teal, Lime, Pink — which colour seems to be from a completely different colour family?",
+      "tryPrompt": "Your turn: Red, Blue, Green, Pink — three are primary colours. Which is NOT a primary colour and is the odd one out?",
+      "masteryCheck": "Pink — because Red, Blue, and Green are primary colours but Pink is not.",
+      "instantFeedbackWin": "Correct! Red, Blue, Green are the three primary colours in light. Pink is made by mixing — it is not a primary colour. Great eye!",
+      "instantFeedbackRetry": "Here's a trick: primary colours are the basic building-block colours. Red, Blue, Green (or in paints: Red, Blue, Yellow). Pink is a lighter shade of Red — not a primary colour on its own.",
+      "reviewPrompt": "Quick: White, Grey, Black, Orange — which is the odd one out? (Hint: think about shades vs bright colours.)",
+      "xpReward": 10,
+      "badgeFocus": "Colour Eye",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Odd One Out",
+        "caption": "Group C for Odd One Out."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Odd one out by number property (even/odd, multiples)",
+      "missionStepTitle": "Exercise D: Number Property Groups",
+      "coachHook": "Let's figure this out together! Numbers have families too — evens, odds, and multiples. Find the number that broke away from the family!",
+      "boardDemo": {
+        "title": "Number Property — Even or Odd?",
+        "steps": [
+          "Numbers: 12, 18, 24, 15",
+          "12 is even, 18 is even, 24 is even",
+          "15 is odd (ends in 5)",
+          "Odd one out: 15 — it is the only odd number"
+        ],
+        "teacherLine": "Check each number: does it end in 0, 2, 4, 6, or 8 (even) or 1, 3, 5, 7, 9 (odd)? The one that breaks the pattern is the odd one out!"
+      },
+      "readAloudPrompt": "Look at: 5, 10, 15, 12 — three are multiples of 5. Which one is NOT a multiple of 5?",
+      "tryPrompt": "Your turn: 2, 4, 7, 6 — which is the odd one out and why?",
+      "masteryCheck": "7 — because 2, 4, and 6 are even numbers but 7 is odd.",
+      "instantFeedbackWin": "Brilliant! 2, 4, 6 are all even numbers. 7 is an odd number — it does not belong with the evens!",
+      "instantFeedbackRetry": "Here's a trick: check the last digit. 2, 4, 6 all end in even digits. 7 ends in an odd digit. So 7 is the odd one out.",
+      "reviewPrompt": "Quick: 10, 20, 25, 30 — which is not a multiple of 10?",
+      "xpReward": 12,
+      "badgeFocus": "Number Family Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Odd One Out",
+        "caption": "Group D for Odd One Out."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Odd one out by letter property",
+      "missionStepTitle": "Exercise E: Letter Groups",
+      "coachHook": "Let's figure this out together! Letters have properties too — vowels, consonants, and alphabet positions. Find the letter that does not belong!",
+      "boardDemo": {
+        "title": "Letters — Vowels vs Consonants",
+        "steps": [
+          "Letters: A, E, I, B, O",
+          "A, E, I, O are vowels",
+          "B is a consonant",
+          "Odd one out: B — it is the only consonant"
+        ],
+        "teacherLine": "The five vowels are A, E, I, O, U. Every other letter is a consonant. When three or four vowels are together and one consonant sneaks in — that consonant is the odd one out!"
+      },
+      "readAloudPrompt": "Look at: B, C, D, A — which is the odd one out? (Hint: think vowels and consonants.)",
+      "tryPrompt": "Your turn: A, U, E, K — which is the odd one out and why?",
+      "masteryCheck": "K — because A, U, and E are vowels but K is a consonant.",
+      "instantFeedbackWin": "Perfect! A, U, E are all vowels. K is a consonant. You know your vowels and consonants!",
+      "instantFeedbackRetry": "Here's a trick: remember A, E, I, O, U are the five vowels. Everything else is a consonant. Check each letter — A, U, E are on the vowels list. K is not!",
+      "reviewPrompt": "Quick: P, Q, I, R — which is the odd one out?",
+      "xpReward": 12,
+      "badgeFocus": "Alphabet Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Odd One Out",
+        "caption": "Group E for Odd One Out."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Odd one out by size",
+      "missionStepTitle": "Exercise F: Size Groups",
+      "coachHook": "Let's figure this out together! Sometimes three things are about the same size and one is much bigger or much smaller. Find the size outlier!",
+      "boardDemo": {
+        "title": "Size — Big or Small?",
+        "steps": [
+          "Animals: Ant, Bee, Butterfly, Elephant",
+          "Ant, Bee, Butterfly are all small insects",
+          "Elephant is a huge animal",
+          "Odd one out: Elephant — it is much larger than the others"
+        ],
+        "teacherLine": "Compare sizes. If three things are small and one is huge — or three are big and one is tiny — the different-sized one is the odd one out!"
+      },
+      "readAloudPrompt": "Look at: Football, Tennis ball, Cricket ball, Bus — which one is very different in size?",
+      "tryPrompt": "Your turn: Pencil, Pen, Crayon, Building — which is the odd one out by size?",
+      "masteryCheck": "Building — because Pencil, Pen, and Crayon are small writing tools but a Building is enormous.",
+      "instantFeedbackWin": "Exactly! Pencil, Pen, and Crayon all fit in your hand. A Building is huge! Building is clearly the odd one out by size.",
+      "instantFeedbackRetry": "Here's a trick: can you hold all four in your hand? Pencil — yes, Pen — yes, Crayon — yes, Building — no way! The one you cannot hold is the odd one out.",
+      "reviewPrompt": "Final challenge: Sparrow, Eagle, Mountain, Crow — which is the odd one out by size?",
+      "xpReward": 14,
+      "badgeFocus": "Size Detector",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Odd One Out",
+        "caption": "Group F for Odd One Out."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "triangle",
+      "kind": "svg",
+      "asset": "triangle.svg",
+      "title": "Odd One Out",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

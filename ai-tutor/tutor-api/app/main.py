@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
-
-# ── Load .env for local development (no-op in prod where env vars are injected) ──
+# Load .env for local development (no-op in prod where env vars are injected)
 _env_file = Path(__file__).parent.parent / ".env"
 if _env_file.exists():
     for _ln in _env_file.read_text(encoding="utf-8").splitlines():
@@ -35,6 +35,8 @@ from app.models import (
 )
 from app.services.conversation_engine import ConversationEngine
 from app.services.engine_registry import TutorEngineRegistry
+from app.services.domain_tool_agent import DomainToolAgent
+from app.services.guard_policy import GuardPolicyService
 from app.services.generic_course_engine import CourseTemplateRuleEngine, resolve_template_course_id
 from app.services.rule_engine import VedicRuleEngine
 from app.services.behavior_classifier import BehaviorClassifier
@@ -78,6 +80,8 @@ engine_registry = TutorEngineRegistry(
 )
 quality_refresh_service = QualityRefreshService()
 behavior_classifier = BehaviorClassifier()
+domain_tool_agent = DomainToolAgent()
+guard_policy_service = GuardPolicyService()
 conversation_engine = ConversationEngine()
 session_store = SessionStore()
 orchestrator = TutorOrchestrator()
@@ -91,6 +95,42 @@ def require_internal_key(provided: str | None) -> None:
         raise HTTPException(status_code=401, detail="Invalid internal key")
 
 
+def ensure_guarded_payload(course_id: str, lesson: dict, question: dict | None = None) -> None:
+    try:
+        guard_policy_service.validate_runtime_payload(course_id, lesson, question)
+    except ValueError as ex:
+        raise HTTPException(status_code=500, detail=str(ex)) from ex
+
+def infer_grade_specific_vedic_course_id(grade: str | None, chapter_code: str | None) -> str | None:
+    chapter = (chapter_code or "").strip().upper()
+    grade_value = str(grade or "").strip()
+
+    chapter_match = re.match(r"^VM_G([4-8])_", chapter)
+    if chapter_match:
+        return f"vedic_math_g{chapter_match.group(1)}"
+
+    if grade_value in {"4", "5", "6", "7", "8"}:
+        return f"vedic_math_g{grade_value}"
+
+    return None
+
+
+def resolve_requested_course_id(
+    requested_course_id: str | None,
+    module_code: str | None,
+    grade: str | None,
+    chapter_code: str | None,
+) -> str | None:
+    course_id = (requested_course_id or "").strip()
+    module = (module_code or "").strip().upper()
+
+    if module == "VEDIC_MATH" and (not course_id or course_id.lower() == "vedic_math"):
+        inferred_course_id = infer_grade_specific_vedic_course_id(grade, chapter_code)
+        if inferred_course_id:
+            return inferred_course_id
+
+    return requested_course_id
+
 def build_session_snapshot(session_id: str, lesson: dict, active_exercise_group: str | None = None) -> tuple[dict, dict]:
     summary = session_store.summary(session_id)
     session_progress = session_store.lesson_progress(
@@ -100,8 +140,130 @@ def build_session_snapshot(session_id: str, lesson: dict, active_exercise_group:
     )
     return summary, session_progress
 
+_MAX_WRONG_RETRIES = 2  # After this many wrong attempts, treat question as "practiced enough" and stop blocking group advance
+
+
+def auto_advance_group_if_done(
+    lesson: dict,
+    engine,
+    current_group: str,
+    question_progress: dict[str, dict] | None,
+) -> str:
+    """
+    Return the next exercise group when every question in *current_group* is done.
+    A question is "done" if it is solved correctly OR has been attempted >= _MAX_WRONG_RETRIES
+    times without success (student struggled — move on rather than looping forever).
+    Returns *current_group* unchanged when the group is not yet done or
+    when there is no authored question pool (dynamic / fallback questions).
+    """
+    pool = lesson.get("questionPool") if isinstance(lesson, dict) else None
+    if not isinstance(pool, list) or not pool:
+        return current_group
+
+    normalized = engine.normalize_exercise_group(current_group)
+    group_pool = [
+        q for q in pool
+        if isinstance(q, dict) and engine.normalize_exercise_group(q.get("exerciseGroup")) == normalized
+    ]
+    if not group_pool:
+        return current_group
+
+    progress = question_progress or {}
+    all_done = all(
+        bool(progress.get(str(q.get("questionId", "")), {}).get("solved")) or
+        int(progress.get(str(q.get("questionId", "")), {}).get("attempts", 0)) >= _MAX_WRONG_RETRIES
+        for q in group_pool
+    )
+    if not all_done:
+        return current_group
+
+    # Advance to the next group in EXERCISE_GROUPS sequence
+    groups = list(engine.EXERCISE_GROUPS)
+    try:
+        idx = groups.index(normalized)
+        if idx + 1 < len(groups):
+            return groups[idx + 1]
+    except ValueError:
+        pass
+    return current_group
+
+
+def pick_scripted_question(lesson: dict, engine, exercise_group: str, question_progress: dict[str, dict[str, Any]] | None = None, exclude_question_id: str | None = None) -> dict | None:
+    """
+    Progress-aware question selector. Three-pass strategy:
+      Pass 1 — Never-attempted questions, in authored order (no repeats within a lesson).
+      Pass 2 — Attempted-but-wrong questions (retry), in authored order, after all have been seen.
+      Pass 3 — All solved (mastery reached): cycle from start but skip the just-answered one.
+    Within every pass the question equal to exclude_question_id is always skipped so the
+    same question never appears back-to-back regardless of correct/incorrect.
+    """
+    pool = lesson.get("questionPool") if isinstance(lesson, dict) else None
+    if not isinstance(pool, list) or not pool:
+        return None
+
+    normalized_group = engine.normalize_exercise_group(exercise_group)
+    group_pool = [
+        dict(item)
+        for item in pool
+        if isinstance(item, dict) and engine.normalize_exercise_group(item.get("exerciseGroup")) == normalized_group
+    ]
+    if not group_pool:
+        return None
+
+    progress = question_progress or {}
+    excl = str(exclude_question_id) if exclude_question_id else None
+
+    def _qid(q: dict) -> str:
+        return str(q.get("questionId", "")).strip()
+
+    def _stat(q: dict) -> dict:
+        return progress.get(_qid(q), {})
+
+    def _not_excluded(q: dict) -> bool:
+        return _qid(q) != excl if excl else True
+
+    def _patch(q: dict) -> dict:
+        """Ensure chapterCode and type fields survive RuntimeQuestion serialisation.
+        RuntimeQuestion serialises the source 'type' field as rawType (practice/assessment
+        category), while 'questionType' holds the form (mcq/short_answer/fill_step).
+        QuestionPayload.type is used as the form discriminator by the frontend and tests,
+        so prefer questionType over rawType when populating it.
+        """
+        r = dict(q)
+        if not r.get("chapterCode"):
+            r["chapterCode"] = str(lesson.get("chapterCode") or lesson.get("lessonId") or "")
+        if not r.get("type"):
+            r["type"] = str(r.get("questionType") or r.get("rawType") or "short_answer")
+        return r
+
+    # Pass 1: unattempted questions (attempts == 0), preserve authored order
+    unattempted = [q for q in group_pool if int(_stat(q).get("attempts", 0)) == 0 and _not_excluded(q)]
+    if unattempted:
+        return _patch(unattempted[0])
+
+    # Pass 2: attempted-but-wrong, up to _MAX_WRONG_RETRIES total attempts, preserve authored order
+    retry = [q for q in group_pool if int(_stat(q).get("attempts", 0)) > 0 and not bool(_stat(q).get("solved")) and int(_stat(q).get("attempts", 0)) < _MAX_WRONG_RETRIES and _not_excluded(q)]
+    if retry:
+        return _patch(retry[0])
+
+    # Pass 3: all questions solved — mastery cycle, skip last answered only
+    mastery_pool = [q for q in group_pool if _not_excluded(q)]
+    chosen = mastery_pool[0] if mastery_pool else (group_pool[0] if group_pool else None)
+    if chosen is None:
+        return None
+    # RuntimeQuestion.model_dump() drops chapterCode and uses rawType instead of type.
+    # Re-attach them so QuestionPayload validation succeeds.
+    result = dict(chosen)
+    if not result.get("chapterCode"):
+        result["chapterCode"] = str(lesson.get("chapterCode") or lesson.get("lessonId") or "")
+    if not result.get("type"):
+        result["type"] = str(result.get("rawType") or "practice")
+    return result
+
+
 
 @app.get("/health")
+@app.get("/ai-tutor-api/health")
 def health() -> dict:
     return {
         "ok": True,
@@ -119,9 +281,15 @@ async def courses(x_ai_tutor_key: str | None = Header(default=None)) -> dict:
 
 @app.get("/ai-tutor-api/tutor/catalog")
 @app.get("/ai-tutor-api/vedic/catalog")
-async def catalog(courseId: str | None = None, x_ai_tutor_key: str | None = Header(default=None)) -> dict:
+async def catalog(
+    courseId: str | None = None,
+    grade: str | None = None,
+    chapterCode: str | None = None,
+    x_ai_tutor_key: str | None = Header(default=None),
+) -> dict:
     require_internal_key(x_ai_tutor_key)
-    resolved_course_id = engine_registry.resolve_course_id(courseId, "VEDIC_MATH")
+    requested_course_id = resolve_requested_course_id(courseId, "VEDIC_MATH", grade, chapterCode)
+    resolved_course_id = engine_registry.resolve_course_id(requested_course_id, "VEDIC_MATH")
     engine = engine_registry.engine(resolved_course_id)
     return {
         "courseId": resolved_course_id,
@@ -151,15 +319,17 @@ async def start(payload: StartRequest, x_ai_tutor_key: str | None = Header(defau
 
     module_code = str(claims.get("module", "VEDIC_MATH"))
     grade = str(claims.get("grade", "6"))
-    course_id = engine_registry.resolve_course_id(payload.courseId, module_code)
+    requested_chapter_code = payload.chapterCode or str(claims.get("chapter_code", "") or "").strip() or None
+    requested_course_id = resolve_requested_course_id(payload.courseId, module_code, grade, requested_chapter_code)
+    course_id = engine_registry.resolve_course_id(requested_course_id, module_code)
     engine = engine_registry.engine(course_id)
-
-    chapter_code = engine.normalize_chapter(payload.chapterCode)
+    chapter_code = engine.normalize_chapter(requested_chapter_code)
     exercise_group = engine.normalize_exercise_group(payload.exerciseGroup)
-    lesson = engine.lesson(chapter_code)
-    question = engine.next_question(chapter_code, exercise_group, grade)
+    lesson = engine_registry.runtime_lesson(course_id, chapter_code, engine.lesson(chapter_code), module_code)
 
     session = session_store.create(claims, course_id, module_code, grade, chapter_code, exercise_group)
+    question = pick_scripted_question(lesson, engine, exercise_group, session.question_progress) or engine.next_question(chapter_code, exercise_group, grade)
+    ensure_guarded_payload(course_id, lesson, question)
     session_store.set_question(session.session_id, question)
     await orchestrator.bootstrap(
         session_id=session.session_id,
@@ -236,8 +406,9 @@ async def resume(sessionId: str, x_ai_tutor_key: str | None = Header(default=Non
         raise HTTPException(status_code=404, detail=str(ex)) from ex
 
     engine = engine_registry.engine(session.course_id)
-    lesson = engine.lesson(session.chapter_code)
+    lesson = engine_registry.runtime_lesson(session.course_id, session.chapter_code, engine.lesson(session.chapter_code), session.module_code)
     question = session.current_question or engine.next_question(session.chapter_code, session.exercise_group, session.grade)
+    ensure_guarded_payload(session.course_id, lesson, question)
     if not session.current_question:
         session_store.set_question(session.session_id, question)
 
@@ -295,15 +466,20 @@ async def next_question(payload: NextQuestionRequest, x_ai_tutor_key: str | None
         # Clear conversation history when switching chapters so context stays accurate
         session_store.clear_conversation(payload.sessionId)
 
-    requested_group = engine.normalize_exercise_group(payload.exerciseGroup or session.exercise_group)
+    # Load lesson once — needed for both group auto-advance and question selection.
+    lesson = engine_registry.runtime_lesson(session.course_id, session.chapter_code, engine.lesson(session.chapter_code), session.module_code)
+    # Honour an explicit client group request; otherwise auto-advance when current group is fully mastered.
+    previous_group = session.exercise_group
+    if payload.exerciseGroup:
+        requested_group = engine.normalize_exercise_group(payload.exerciseGroup)
+    else:
+        requested_group = auto_advance_group_if_done(lesson, engine, session.exercise_group, session.question_progress)
     if requested_group != session.exercise_group:
         session = session_store.set_exercise_group(payload.sessionId, requested_group)
-
-    # Pass current question ID to avoid immediate repeat
     last_question_id = session.current_question.get("questionId") if session.current_question else None
-    question = engine.next_question(session.chapter_code, session.exercise_group, session.grade, exclude_question_id=last_question_id)
+    question = pick_scripted_question(lesson, engine, session.exercise_group, session.question_progress, exclude_question_id=last_question_id) or engine.next_question(session.chapter_code, session.exercise_group, session.grade, exclude_question_id=last_question_id)
     session_store.set_question(payload.sessionId, question)
-    lesson = engine.lesson(session.chapter_code)
+    ensure_guarded_payload(session.course_id, lesson, question)
     session_summary, session_progress = build_session_snapshot(
         payload.sessionId,
         lesson,
@@ -348,6 +524,7 @@ async def next_question(payload: NextQuestionRequest, x_ai_tutor_key: str | None
         "question": question,
         "activeChapterCode": session.chapter_code,
         "activeExerciseGroup": session.exercise_group,
+        "groupAdvanced": session.exercise_group != previous_group,
         "sessionProgress": session_progress,
         "lesson": lesson,
     }
@@ -372,6 +549,14 @@ async def check_answer(
         raise HTTPException(status_code=400, detail="Question mismatch for session")
 
     result = engine.evaluate(question, payload.learnerAnswer)
+    lesson = engine_registry.runtime_lesson(session.course_id, session.chapter_code, engine.lesson(session.chapter_code), session.module_code)
+    ensure_guarded_payload(session.course_id, lesson, session.current_question or None)
+    tool_run = domain_tool_agent.run_for_question(lesson, question, payload.learnerAnswer)
+    if tool_run.get("executed") and tool_run.get("pass") and not bool(result.get("correct")):
+        result["correct"] = True
+        result["explanation"] = str(result.get("explanation", "") or tool_run.get("result", ""))
+    elif tool_run.get("executed") and not tool_run.get("pass") and bool(result.get("correct")) and question.get("questionType") in {"mcq", "speed_mcq", "number", "text"}:
+        result["correct"] = False
     session = session_store.update_score(
         payload.sessionId,
         bool(result["correct"]),
@@ -381,7 +566,6 @@ async def check_answer(
         response_time_ms=payload.responseTimeMs,
         confidence=payload.confidence,
     )
-    lesson = engine.lesson(session.chapter_code)
     summary, session_progress = build_session_snapshot(
         payload.sessionId,
         lesson,
@@ -422,6 +606,7 @@ async def check_answer(
                 "responseTimeMs": payload.responseTimeMs,
                 "confidence": payload.confidence,
                 "tutorAction": quality.get("tutorAction"),
+                "toolRun": tool_run,
                 "sessionSummary": summary,
                 "sessionProgress": session_progress,
             },
@@ -457,6 +642,7 @@ async def check_answer(
         studentArchetype=archetype,
         silenceRecoveryMs=silence_ms,
         boardSpeedFactor=board_speed,
+        toolRun=tool_run,
     )
 
 
@@ -477,7 +663,8 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
     session = session_store.note_doubt(payload.sessionId)
 
     # Build context for the LLM
-    lesson = engine.lesson(session.chapter_code)
+    lesson = engine_registry.runtime_lesson(session.course_id, session.chapter_code, engine.lesson(session.chapter_code), session.module_code)
+    ensure_guarded_payload(session.course_id, lesson, session.current_question or None)
     summary, session_progress = build_session_snapshot(
         payload.sessionId,
         lesson,
@@ -488,7 +675,7 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
     avatar_id = (payload.avatarId or "raj").strip().lower()
     archetype = behavior_classifier.classify(summary)
 
-    # Ask the LLM — falls back gracefully if no API key is set
+    # Ask the LLM - falls back gracefully if no API key is set
     try:
         reply = await conversation_engine.chat(
             message=payload.message,
@@ -504,6 +691,8 @@ async def doubt(payload: DoubtRequest, x_ai_tutor_key: str | None = Header(defau
         )
     except Exception:
         reply = engine.doubt_reply(payload.message, session.chapter_code)
+    policy_result = guard_policy_service.enforce_reply_policy(lesson, reply)
+    reply = str(policy_result["reply"])
 
     # Persist the turn in rolling history
     session_store.add_to_conversation(payload.sessionId, "user", payload.message)
@@ -571,7 +760,8 @@ async def chat(payload: ChatRequest, x_ai_tutor_key: str | None = Header(default
         session = session_store.set_course_id(payload.sessionId, resolved_course_id)
 
     engine = engine_registry.engine(session.course_id)
-    lesson = engine.lesson(session.chapter_code)
+    lesson = engine_registry.runtime_lesson(session.course_id, session.chapter_code, engine.lesson(session.chapter_code), session.module_code)
+    ensure_guarded_payload(session.course_id, lesson, session.current_question or None)
     summary, session_progress = build_session_snapshot(
         payload.sessionId,
         lesson,
@@ -598,6 +788,8 @@ async def chat(payload: ChatRequest, x_ai_tutor_key: str | None = Header(default
         )
     except Exception:
         reply = engine.doubt_reply(payload.message, session.chapter_code)
+    policy_result = guard_policy_service.enforce_reply_policy(lesson, reply)
+    reply = str(policy_result["reply"])
 
     # Persist both turns
     session_store.add_to_conversation(payload.sessionId, "user", payload.message)
@@ -672,7 +864,8 @@ async def ingest_event(payload: EventIngestRequest, x_ai_tutor_key: str | None =
     lesson_code = payload.lessonCode or session.chapter_code
     meta = payload.meta if isinstance(payload.meta, dict) else {}
     engine = engine_registry.engine(session.course_id)
-    lesson = engine.lesson(session.chapter_code)
+    lesson = engine_registry.runtime_lesson(session.course_id, session.chapter_code, engine.lesson(session.chapter_code), session.module_code)
+    ensure_guarded_payload(session.course_id, lesson, session.current_question or None)
     summary, session_progress = build_session_snapshot(
         payload.sessionId,
         lesson,
@@ -760,4 +953,6 @@ async def orchestrator_ws(websocket: WebSocket, session_id: str) -> None:
         pass
     finally:
         await orchestrator.unsubscribe(session_id, queue)
+
+
 

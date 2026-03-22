@@ -56,9 +56,21 @@
     "version": "2026-03-mindspark-g6-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya. Ratios are everywhere — in cooking, shopping, cricket statistics! Today we learn Vedic shortcuts to compare and simplify ratios without tedious cross-multiplication.",
       "placementRule": "Start at beginner level. If the student simplifies ratios correctly in Group A, skip to Group C."
     },
@@ -89,7 +101,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -118,11 +134,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In a cricket team, 7 players are batsmen and 4 are bowlers. What is the ratio of batsmen to bowlers?",
-            "options": ["4:7", "7:4", "7:11", "4:11"],
+            "options": [
+              "4:7",
+              "7:4",
+              "7:11",
+              "4:11"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "7:4",
             "hint": "Ratio of batsmen to bowlers = number of batsmen : number of bowlers.",
-            "solution": "7 batsmen to 4 bowlers → ratio 7:4."
+            "solution": "7 batsmen to 4 bowlers → ratio 7:4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group A for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_A2",
@@ -134,11 +161,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Simplify the ratio 24 : 36.",
-            "options": ["6:9", "2:3", "4:6", "8:12"],
+            "options": [
+              "6:9",
+              "2:3",
+              "4:6",
+              "8:12"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2:3",
             "hint": "HCF of 24 and 36 is 12. Divide both by 12.",
-            "solution": "HCF(24,36)=12. 24÷12=2, 36÷12=3. Simplified: 2:3."
+            "solution": "HCF(24,36)=12. 24÷12=2, 36÷12=3. Simplified: 2:3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group A for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_A3",
@@ -150,13 +188,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A recipe needs 15 cups of flour and 25 cups of water. The ratio flour:water in simplest form is:",
-            "options": ["15:25", "5:3", "3:5", "1:5"],
+            "options": [
+              "15:25",
+              "5:3",
+              "3:5",
+              "1:5"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "3:5",
             "hint": "HCF(15,25)=5. 15÷5=3, 25÷5=5.",
-            "solution": "HCF=5. 15/5=3, 25/5=5. Ratio: 3:5."
+            "solution": "HCF=5. 15/5=3, 25/5=5. Ratio: 3:5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group A for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group A for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -183,11 +238,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Simplify 56 : 72 using HCF.",
-            "options": ["7:8", "7:9", "8:9", "6:9"],
+            "options": [
+              "7:8",
+              "7:9",
+              "8:9",
+              "6:9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "7:9",
             "hint": "HCF(56,72)=8. 56÷8=7, 72÷8=9.",
-            "solution": "HCF=8. 56÷8=7, 72÷8=9. Ratio: 7:9."
+            "solution": "HCF=8. 56÷8=7, 72÷8=9. Ratio: 7:9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group B for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_B2",
@@ -199,11 +265,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A school has 84 boys and 60 girls. The ratio boys:girls in simplest form is:",
-            "options": ["7:5", "84:60", "14:10", "7:6"],
+            "options": [
+              "7:5",
+              "84:60",
+              "14:10",
+              "7:6"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "7:5",
             "hint": "HCF(84,60)=12. 84÷12=7, 60÷12=5.",
-            "solution": "HCF=12. 84÷12=7, 60÷12=5. Ratio: 7:5."
+            "solution": "HCF=12. 84÷12=7, 60÷12=5. Ratio: 7:5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group B for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_B3",
@@ -215,13 +292,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of these ratios is already in simplest form?",
-            "options": ["6:9", "14:21", "5:8", "12:16"],
+            "options": [
+              "6:9",
+              "14:21",
+              "5:8",
+              "12:16"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "5:8",
             "hint": "A ratio is in simplest form when HCF of the two terms is 1.",
-            "solution": "HCF(5,8)=1. So 5:8 is already in simplest form. Others can be simplified further."
+            "solution": "HCF(5,8)=1. So 5:8 is already in simplest form. Others can be simplified further.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group B for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group B for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -248,11 +342,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which ratio is greater: 3/5 or 4/7?",
-            "options": ["3/5", "4/7", "They are equal", "Cannot be determined"],
+            "options": [
+              "3/5",
+              "4/7",
+              "They are equal",
+              "Cannot be determined"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3/5",
             "hint": "Cross products: 3×7=21, 4×5=20. Compare 21 and 20.",
-            "solution": "3×7=21, 4×5=20. Since 21>20, 3/5 > 4/7."
+            "solution": "3×7=21, 4×5=20. Since 21>20, 3/5 > 4/7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group C for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_C2",
@@ -264,11 +369,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Arjun got 7 out of 11 in Test A and 5 out of 8 in Test B. In which test did he perform better?",
-            "options": ["Test A (7/11)", "Test B (5/8)", "Equal performance", "Not enough data"],
+            "options": [
+              "Test A (7/11)",
+              "Test B (5/8)",
+              "Equal performance",
+              "Not enough data"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Test B (5/8)",
             "hint": "Compare 7/11 and 5/8. Cross products: 7×8=56, 5×11=55.",
-            "solution": "7×8=56, 5×11=55. Since 56>55, 7/11 > 5/8. So Test A was better. (Correct answer A)."
+            "solution": "7×8=56, 5×11=55. Since 56>55, 7/11 > 5/8. So Test A was better. (Correct answer A).",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group C for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_C3",
@@ -280,13 +396,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Compare 3/7 and 5/12. Which is larger?",
-            "options": ["3/7", "5/12", "Equal", "Cannot compare"],
+            "options": [
+              "3/7",
+              "5/12",
+              "Equal",
+              "Cannot compare"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3/7",
             "hint": "Cross products: 3×12=36, 5×7=35. Which is bigger?",
-            "solution": "3×12=36, 5×7=35. Since 36>35, 3/7 > 5/12."
+            "solution": "3×12=36, 5×7=35. Since 36>35, 3/7 > 5/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group C for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group C for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -313,11 +446,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "If 3:4 = 6:8, what does Alternando give? (Swap the middle two terms)",
-            "options": ["3:6 = 4:8", "3:8 = 4:6", "6:4 = 8:3", "3:4 = 8:6"],
+            "options": [
+              "3:6 = 4:8",
+              "3:8 = 4:6",
+              "6:4 = 8:3",
+              "3:4 = 8:6"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3:6 = 4:8",
             "hint": "Alternando swaps inner terms: a:b=c:d becomes a:c=b:d.",
-            "solution": "3:4=6:8. Alternando: 3:6=4:8. Check: 3/6=1/2 and 4/8=1/2. Correct!"
+            "solution": "3:4=6:8. Alternando: 3:6=4:8. Check: 3/6=1/2 and 4/8=1/2. Correct!",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group D for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_D2",
@@ -329,13 +473,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In a proportion 5:8 = 15:x, find x using Alternando or direct proportion.",
-            "options": ["16", "20", "24", "18"],
+            "options": [
+              "16",
+              "20",
+              "24",
+              "18"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "24",
             "hint": "5:8=15:x → x = 8×15÷5 = 24.",
-            "solution": "5×x = 8×15. x = 120÷5 = 24."
+            "solution": "5×x = 8×15. x = 120÷5 = 24.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group D for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group D for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -362,11 +523,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Apply Componendo to the ratio 5:3 (add numerator and denominator, keep denominator):",
-            "options": ["5:8", "8:3", "8:5", "3:8"],
+            "options": [
+              "5:8",
+              "8:3",
+              "8:5",
+              "3:8"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "8:3",
             "hint": "Componendo: (a+b):b. Here a=5, b=3. (5+3):3 = 8:3.",
-            "solution": "Componendo: (5+3):3 = 8:3."
+            "solution": "Componendo: (5+3):3 = 8:3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group E for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_E2",
@@ -379,16 +551,44 @@
             "questionType": "fill_step",
             "questionText": "Verify Componendo: if 3:5 = 9:15, apply Componendo to both sides and check they are equal.",
             "steps": [
-              {"label": "Componendo on left (3:5): (3+5):5 = ?:5", "answer": "8:5", "hint": "3+5=8"},
-              {"label": "Componendo on right (9:15): (9+15):15 = ?:15", "answer": "24:15", "hint": "9+15=24"},
-              {"label": "Simplify 24:15: ?", "answer": "8:5", "hint": "HCF(24,15)=3. 24÷3=8, 15÷3=5"},
-              {"label": "Are both sides equal?", "answer": "Yes, both are 8:5", "hint": "Compare the two simplified ratios"}
+              {
+                "label": "Componendo on left (3:5): (3+5):5 = ?:5",
+                "answer": "8:5",
+                "hint": "3+5=8"
+              },
+              {
+                "label": "Componendo on right (9:15): (9+15):15 = ?:15",
+                "answer": "24:15",
+                "hint": "9+15=24"
+              },
+              {
+                "label": "Simplify 24:15: ?",
+                "answer": "8:5",
+                "hint": "HCF(24,15)=3. 24÷3=8, 15÷3=5"
+              },
+              {
+                "label": "Are both sides equal?",
+                "answer": "Yes, both are 8:5",
+                "hint": "Compare the two simplified ratios"
+              }
             ],
             "expectedAnswer": "Yes, both are 8:5",
             "hint": "Componendo gives equal results on both sides of a true proportion.",
-            "solution": "Left: 8:5. Right: 24:15 = 8:5. Equal — confirmed."
+            "solution": "Left: 8:5. Right: 24:15 = 8:5. Equal — confirmed.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group E for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group E for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -415,11 +615,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Apply Dividendo to 9:4 (subtract denominator from numerator, keep denominator):",
-            "options": ["5:4", "9:5", "4:5", "13:4"],
+            "options": [
+              "5:4",
+              "9:5",
+              "4:5",
+              "13:4"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "5:4",
             "hint": "Dividendo: (a−b):b. Here (9−4):4 = 5:4.",
-            "solution": "(9−4):4 = 5:4."
+            "solution": "(9−4):4 = 5:4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group F for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_F2",
@@ -431,13 +642,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "If 10:3 = 20:6, apply Dividendo to the right ratio (20:6):",
-            "options": ["14:6", "7:3", "14:3", "26:6"],
+            "options": [
+              "14:6",
+              "7:3",
+              "14:3",
+              "26:6"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "7:3",
             "hint": "Dividendo: (20−6):6 = 14:6 = 7:3.",
-            "solution": "(20−6):6 = 14:6 = 7:3. Dividendo on left: (10−3):3 = 7:3. Equal!"
+            "solution": "(20−6):6 = 14:6 = 7:3. Dividendo on left: (10−3):3 = 7:3. Equal!",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group F for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group F for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -464,11 +692,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A recipe uses 3 cups of rice for 5 cups of water. If you want to cook 12 cups of rice, how much water do you need?",
-            "options": ["15 cups", "18 cups", "20 cups", "24 cups"],
+            "options": [
+              "15 cups",
+              "18 cups",
+              "20 cups",
+              "24 cups"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "20 cups",
             "hint": "Ratio rice:water = 3:5. For 12 cups rice: 12/3 = 4 times. Water = 5×4.",
-            "solution": "3:5 ratio. 12 cups rice = 4 × 3. So water = 4 × 5 = 20 cups."
+            "solution": "3:5 ratio. 12 cups rice = 4 × 3. So water = 4 × 5 = 20 cups.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group G for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_G2",
@@ -480,11 +719,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A shopkeeper offers ₹20 discount on every ₹80 item. Another offers ₹15 discount on every ₹60 item. Which is a better deal (higher discount ratio)?",
-            "options": ["First shopkeeper (20:80)", "Second shopkeeper (15:60)", "Equal", "Not enough data"],
+            "options": [
+              "First shopkeeper (20:80)",
+              "Second shopkeeper (15:60)",
+              "Equal",
+              "Not enough data"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "Equal",
             "hint": "Compare 20/80 and 15/60. Simplify both.",
-            "solution": "20/80 = 1/4. 15/60 = 1/4. Both offer exactly 25% discount. Equal!"
+            "solution": "20/80 = 1/4. 15/60 = 1/4. Both offer exactly 25% discount. Equal!",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group G for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_G3",
@@ -496,13 +746,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Cement and sand are mixed in ratio 2:5. If 16 kg of cement is used, what is the total weight of the mixture?",
-            "options": ["40 kg", "56 kg", "40 kg", "51 kg"],
+            "options": [
+              "40 kg",
+              "56 kg",
+              "40 kg",
+              "51 kg"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "56 kg",
             "hint": "Cement 2 parts = 16 kg → 1 part = 8 kg. Sand = 5×8 = 40 kg. Total = 16+40.",
-            "solution": "Cement 2 parts = 16 kg, so 1 part = 8 kg. Sand = 5×8 = 40 kg. Total = 56 kg."
+            "solution": "Cement 2 parts = 16 kg, so 1 part = 8 kg. Sand = 5×8 = 40 kg. Total = 56 kg.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group G for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group G for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -529,11 +796,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! Simplify 42:56:",
-            "options": ["6:8", "3:4", "7:8", "21:28"],
+            "options": [
+              "6:8",
+              "3:4",
+              "7:8",
+              "21:28"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3:4",
             "hint": "HCF(42,56)=14. 42÷14=3, 56÷14=4.",
-            "solution": "HCF=14. 42÷14=3, 56÷14=4. Ratio: 3:4."
+            "solution": "HCF=14. 42÷14=3, 56÷14=4. Ratio: 3:4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group H for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_H2",
@@ -545,13 +823,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! If 3:8 = x:24, find x.",
-            "options": ["6", "9", "8", "12"],
+            "options": [
+              "6",
+              "9",
+              "8",
+              "12"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "9",
             "hint": "3:8 = x:24. Scale factor = 24÷8=3. x = 3×3=9.",
-            "solution": "24/8=3. x = 3×3 = 9."
+            "solution": "24/8=3. x = 3×3 = 9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group H for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group H for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -578,11 +873,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A:B = 2:3 and B:C = 4:5. What is A:C?",
-            "options": ["8:15", "2:5", "10:15", "6:15"],
+            "options": [
+              "8:15",
+              "2:5",
+              "10:15",
+              "6:15"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "8:15",
             "hint": "A:B=2:3=8:12. B:C=4:5=12:15. So A:C=8:15.",
-            "solution": "A:B=2:3, so scale B to 12: A:B=8:12. B:C=4:5, scale B to 12: B:C=12:15. A:C=8:15."
+            "solution": "A:B=2:3, so scale B to 12: A:B=8:12. B:C=4:5, scale B to 12: B:C=12:15. A:C=8:15.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group I for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_I2",
@@ -594,11 +900,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "₹1200 is divided among Anil, Bina, and Chetan in ratio 3:4:5. How much does Bina get?",
-            "options": ["₹300", "₹400", "₹500", "₹450"],
+            "options": [
+              "₹300",
+              "₹400",
+              "₹500",
+              "₹450"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "₹400",
             "hint": "Total parts = 3+4+5=12. Each part = 1200÷12=100. Bina's share = 4×100.",
-            "solution": "12 total parts. ₹100 per part. Bina=4 parts=₹400."
+            "solution": "12 total parts. ₹100 per part. Bina=4 parts=₹400.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group I for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           },
           {
             "questionId": "VM_G6_L4_I3",
@@ -610,13 +927,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Apply both Componendo and Dividendo to ratio 7:2. What is (Componendo result) : (Dividendo result)?",
-            "options": ["9:5", "5:9", "9:2", "7:5"],
+            "options": [
+              "9:5",
+              "5:9",
+              "9:2",
+              "7:5"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9:5",
             "hint": "Componendo: (7+2):2=9:2. Dividendo: (7−2):2=5:2. Ratio of numerators: 9:5.",
-            "solution": "Componendo → 9:2. Dividendo → 5:2. Numerators ratio: 9:5."
+            "solution": "Componendo → 9:2. Dividendo → 5:2. Numerators ratio: 9:5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+              "caption": "Group I for Ratio Racing — Compare and Simplify Ratios Fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "caption": "Group I for Ratio Racing — Compare and Simplify Ratios Fast."
+        }
       }
     ]
   },
@@ -629,7 +963,13 @@
       "teacherLine": "A ratio compares two quantities. Always simplify by finding the HCF first!",
       "boardAction": "Show ratio 18:12 with HCF=6 circled. Divide to get 3:2.",
       "checkpointPrompt": "Simplify 20:35.",
-      "microPractice": "Simplify: 24:36, 15:45, 8:20."
+      "microPractice": "Simplify: 24:36, 15:45, 8:20.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Teaching step for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
     },
     {
       "stepId": "VM_G6_L4_C",
@@ -639,7 +979,13 @@
       "teacherLine": "To compare a/b and c/d without full cross-multiplication: compute a×d and b×c mentally. The larger product tells you which fraction is bigger!",
       "boardAction": "Show 3/5 vs 4/7: compute 21 and 20 side by side. Circle the winner.",
       "checkpointPrompt": "Compare 3/7 and 5/12.",
-      "microPractice": "Rank: 2/3, 3/5, 5/8 from smallest to largest."
+      "microPractice": "Rank: 2/3, 3/5, 5/8 from smallest to largest.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Teaching step for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
     },
     {
       "stepId": "VM_G6_L4_E",
@@ -649,7 +995,13 @@
       "teacherLine": "Componendo: add the denominator to the numerator to create a new equal ratio. It is a powerful tool for solving proportion equations!",
       "boardAction": "Show 3:5 and (3+5):5 = 8:5. Verify with the right side of the proportion.",
       "checkpointPrompt": "Apply Componendo to 4:7.",
-      "microPractice": "Verify: if 3:7=9:21, does Componendo match on both sides?"
+      "microPractice": "Verify: if 3:7=9:21, does Componendo match on both sides?",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Teaching step for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
     },
     {
       "stepId": "VM_G6_L4_I",
@@ -659,7 +1011,13 @@
       "teacherLine": "Ratio chains connect three or more quantities. Express all ratios in terms of a common middle term!",
       "boardAction": "Show A:B=2:3 and B:C=4:5 merged into A:B:C=8:12:15.",
       "checkpointPrompt": "A shopkeeper divides ₹1200 in ratio 3:4:5.",
-      "microPractice": "Verify ratio chain by multiplying back."
+      "microPractice": "Verify ratio chain by multiplying back.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Teaching step for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
     }
   ],
   "screenplay": [
@@ -682,7 +1040,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Screenplay beat for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
     },
     {
       "beatId": "VM_G6_L4_E_PRACTICE",
@@ -696,14 +1060,20 @@
       "boardAction": "Show fill_step card VM_G6_L4_E2.",
       "checkpointPrompt": "Complete all four steps.",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "Yes, both are 8:5",
       "fallbackHint": "Left: (3+5):5=8:5. Right: (9+15):15=24:15=8:5.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Screenplay beat for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
     },
     {
       "beatId": "VM_G6_L4_I_PRACTICE",
@@ -717,14 +1087,31 @@
       "boardAction": "Show MCQ card VM_G6_L4_I2: ₹1200 distribution.",
       "checkpointPrompt": "How much does Bina get from ₹1200 in ratio 3:4:5?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "₹400",
       "fallbackHint": "12 total parts, 100 per part. Bina has 4 parts.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+        "caption": "Screenplay beat for Ratio Racing — Compare and Simplify Ratios Fast."
+      }
+    }
+  ],
+  "chapterCode": "VM_G6_L4_RATIO_SHORTCUT",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "nikhilam_base100",
+      "kind": "svg",
+      "asset": "nikhilam_base100.svg",
+      "title": "Lesson 4: Ratio Racing — Compare and Simplify Ratios Fast",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

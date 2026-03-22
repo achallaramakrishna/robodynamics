@@ -55,9 +55,21 @@
     "version": "2026-03-mindspark-g7-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Competitive exams",
+        "Mental speed"
+      ],
       "coachIntro": "Hi! I am Arya. Today geometry becomes as fast as arithmetic. Pythagorean triples, area shortcuts, and Heron's formula — all in your head!",
       "placementRule": "If the learner can state the 3-4-5 triple and compute ½×6×8=24 instantly, skip group A and start at group B."
     },
@@ -89,7 +101,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees question, progress and buttons without scrolling."
     },
     "sessionFlow": [
@@ -118,15 +134,21 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which set of numbers forms a Pythagorean triple?",
-            "options": ["(4, 5, 6)", "(5, 12, 13)", "(6, 7, 8)", "(3, 4, 6)"],
+            "options": [
+              "(4, 5, 6)",
+              "(5, 12, 13)",
+              "(6, 7, 8)",
+              "(3, 4, 6)"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "(5, 12, 13)",
             "hint": "Check: 5²+12² = 25+144 = 169 = 13².",
             "solution": "5²+12²=169=13². So (5,12,13) is a Pythagorean triple.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_triangle_area",
-              "caption": "Right triangle with Pythagorean triple sides"
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group A for Geometry Speed — Triangle and Area Shortcuts."
             }
           },
           {
@@ -139,11 +161,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "(9, 12, 15) is a scaled Pythagorean triple. What is the scale factor?",
-            "options": ["2", "3", "4", "5"],
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "9 = 3×3, 12 = 3×4, 15 = 3×5.",
-            "solution": "9-12-15 = 3 × (3-4-5). Scale factor = 3."
+            "solution": "9-12-15 = 3 × (3-4-5). Scale factor = 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group A for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_A_Q3",
@@ -155,13 +188,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which is NOT a Pythagorean triple?",
-            "options": ["(3, 4, 5)", "(6, 8, 10)", "(5, 12, 13)", "(4, 5, 7)"],
+            "options": [
+              "(3, 4, 5)",
+              "(6, 8, 10)",
+              "(5, 12, 13)",
+              "(4, 5, 7)"
+            ],
             "correctIndex": 3,
             "expectedAnswer": "(4, 5, 7)",
             "hint": "Check: 4²+5² = 16+25 = 41 ≠ 49 = 7².",
-            "solution": "4²+5²=41 ≠ 7²=49. So (4,5,7) is not a triple."
+            "solution": "4²+5²=41 ≠ 7²=49. So (4,5,7) is not a triple.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group A for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group A for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -190,7 +240,13 @@
             "questionText": "Find the area of a triangle with base = 14 cm and height = 9 cm.",
             "expectedAnswer": "63",
             "hint": "Area = ½ × 14 × 9. Halve 14 first: 7 × 9 = 63.",
-            "solution": "Area = ½ × 14 × 9 = 7 × 9 = 63 cm²."
+            "solution": "Area = ½ × 14 × 9 = 7 × 9 = 63 cm².",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group B for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_B_Q2",
@@ -202,11 +258,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Triangle with base = 16 cm and height = 7.5 cm. Area = ?",
-            "options": ["56", "60", "54", "63"],
+            "options": [
+              "56",
+              "60",
+              "54",
+              "63"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "60",
             "hint": "Area = ½ × 16 × 7.5. Halve 16 → 8. 8 × 7.5 = 60.",
-            "solution": "½ × 16 × 7.5 = 8 × 7.5 = 60 cm²."
+            "solution": "½ × 16 × 7.5 = 8 × 7.5 = 60 cm².",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group B for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_B_Q3",
@@ -227,9 +294,21 @@
             "correctIndex": 2,
             "expectedAnswer": "Both give whole numbers; halving 8 first is simpler",
             "hint": "Halving 8 gives 4 (whole). Halving 15 gives 7.5. Prefer halving even numbers.",
-            "solution": "Halve 8 → 4. 15 × 4 = 60. Simpler since 8 is even."
+            "solution": "Halve 8 → 4. 15 × 4 = 60. Simpler since 8 is even.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group B for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group B for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -258,7 +337,13 @@
             "questionText": "A triangle has sides 3k, 4k, 5k where k = 7. What is the perimeter?",
             "expectedAnswer": "84",
             "hint": "Perimeter = k × (3+4+5) = 7 × 12 = 84.",
-            "solution": "Perimeter = 7 × 12 = 84 cm."
+            "solution": "Perimeter = 7 × 12 = 84 cm.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group C for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_C_Q2",
@@ -270,11 +355,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "An isosceles triangle has equal sides of 17 cm and base 12 cm. Perimeter = ?",
-            "options": ["42", "44", "46", "48"],
+            "options": [
+              "42",
+              "44",
+              "46",
+              "48"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "46",
             "hint": "2×17 + 12 = 34 + 12 = 46.",
-            "solution": "Perimeter = 2 × 17 + 12 = 34 + 12 = 46 cm."
+            "solution": "Perimeter = 2 × 17 + 12 = 34 + 12 = 46 cm.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group C for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_C_Q3",
@@ -288,9 +384,21 @@
             "questionText": "Perimeter of a 5-12-13 triangle scaled by factor 4.",
             "expectedAnswer": "120",
             "hint": "Perimeter = 4 × (5+12+13) = 4 × 30 = 120.",
-            "solution": "4 × (5+12+13) = 4 × 30 = 120 cm."
+            "solution": "4 × (5+12+13) = 4 × 30 = 120 cm.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group C for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group C for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -321,9 +429,10 @@
             "hint": "s = (3+4+5) / 2 = 12 / 2 = 6.",
             "solution": "s = (3+4+5)/2 = 6.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_triangle_area",
-              "caption": "3-4-5 right triangle"
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group D for Geometry Speed — Triangle and Area Shortcuts."
             }
           },
           {
@@ -336,11 +445,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Area of triangle with sides 6, 8, 10 using Heron's formula.",
-            "options": ["20", "24", "28", "30"],
+            "options": [
+              "20",
+              "24",
+              "28",
+              "30"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "24",
             "hint": "s=12. Area=√(12×6×4×2)=√576=24.",
-            "solution": "s=(6+8+10)/2=12. Area=√(12×6×4×2)=√576=24."
+            "solution": "s=(6+8+10)/2=12. Area=√(12×6×4×2)=√576=24.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group D for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_D_Q3",
@@ -352,13 +472,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For a right triangle with legs a and b, Heron's formula should give the same area as ½ab. For legs 5 and 12, Heron's gives area = ?",
-            "options": ["25", "30", "60", "35"],
+            "options": [
+              "25",
+              "30",
+              "60",
+              "35"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "30",
             "hint": "Hypotenuse=13. s=15. √(15×10×3×2)=√900=30. Also ½×5×12=30.",
-            "solution": "s=(5+12+13)/2=15. Area=√(15×10×3×2)=30. Confirms ½×5×12=30."
+            "solution": "s=(5+12+13)/2=15. Area=√(15×10×3×2)=30. Confirms ½×5×12=30.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group D for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group D for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -385,11 +522,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Is (8, 15, 17) a right triangle?",
-            "options": ["No, 8²+15² ≠ 17²", "Yes, 8²+15² = 17²", "Yes, but it is not a Pythagorean triple", "Cannot tell without drawing"],
+            "options": [
+              "No, 8²+15² ≠ 17²",
+              "Yes, 8²+15² = 17²",
+              "Yes, but it is not a Pythagorean triple",
+              "Cannot tell without drawing"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Yes, 8²+15² = 17²",
             "hint": "8²=64, 15²=225, 64+225=289=17².",
-            "solution": "8²+15²=64+225=289=17². Yes, right triangle."
+            "solution": "8²+15²=64+225=289=17². Yes, right triangle.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group E for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_E_Q2",
@@ -401,11 +549,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Area of the 8-15-17 right triangle.",
-            "options": ["60", "68", "120", "30"],
+            "options": [
+              "60",
+              "68",
+              "120",
+              "30"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "60",
             "hint": "Legs are 8 and 15. Area = ½ × 8 × 15 = 60.",
-            "solution": "Right triangle: legs 8, 15. Area = ½ × 8 × 15 = 60 sq units."
+            "solution": "Right triangle: legs 8, 15. Area = ½ × 8 × 15 = 60 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group E for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_E_Q3",
@@ -417,13 +576,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which triangle is NOT a right triangle?",
-            "options": ["(3, 4, 5)", "(5, 12, 13)", "(6, 8, 11)", "(8, 15, 17)"],
+            "options": [
+              "(3, 4, 5)",
+              "(5, 12, 13)",
+              "(6, 8, 11)",
+              "(8, 15, 17)"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "(6, 8, 11)",
             "hint": "6²+8²=36+64=100 ≠ 121=11².",
-            "solution": "6²+8²=100 ≠ 11²=121. Not a right triangle."
+            "solution": "6²+8²=100 ≠ 11²=121. Not a right triangle.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group E for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group E for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -451,20 +627,45 @@
             "questionType": "fill_step",
             "questionText": "Find the area of triangle with sides 3, 4, 5 using Heron's formula.",
             "steps": [
-              {"label": "Semi-perimeter s = (3+4+5) ÷ 2", "answer": "6", "hint": "12 ÷ 2 = 6"},
-              {"label": "s − a = 6 − 3", "answer": "3", "hint": "6 − 3"},
-              {"label": "s − b = 6 − 4", "answer": "2", "hint": "6 − 4"},
-              {"label": "s − c = 6 − 5", "answer": "1", "hint": "6 − 5"},
-              {"label": "Product: s(s−a)(s−b)(s−c) = 6×3×2×1", "answer": "36", "hint": "6×3=18, 18×2=36, 36×1=36"},
-              {"label": "Area = √36", "answer": "6", "hint": "√36 = 6"}
+              {
+                "label": "Semi-perimeter s = (3+4+5) ÷ 2",
+                "answer": "6",
+                "hint": "12 ÷ 2 = 6"
+              },
+              {
+                "label": "s − a = 6 − 3",
+                "answer": "3",
+                "hint": "6 − 3"
+              },
+              {
+                "label": "s − b = 6 − 4",
+                "answer": "2",
+                "hint": "6 − 4"
+              },
+              {
+                "label": "s − c = 6 − 5",
+                "answer": "1",
+                "hint": "6 − 5"
+              },
+              {
+                "label": "Product: s(s−a)(s−b)(s−c) = 6×3×2×1",
+                "answer": "36",
+                "hint": "6×3=18, 18×2=36, 36×1=36"
+              },
+              {
+                "label": "Area = √36",
+                "answer": "6",
+                "hint": "√36 = 6"
+              }
             ],
             "expectedAnswer": "6",
             "hint": "s=6. Product=36. Area=6.",
             "solution": "s=6. 6×3×2×1=36. √36=6. Area=6 sq units.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_triangle_area",
-              "caption": "Heron's formula steps for 3-4-5"
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group F for Geometry Speed — Triangle and Area Shortcuts."
             }
           },
           {
@@ -478,16 +679,44 @@
             "questionType": "fill_step",
             "questionText": "Find the area of triangle with sides 6, 8, 10 using Heron's formula.",
             "steps": [
-              {"label": "s = (6+8+10) ÷ 2", "answer": "12", "hint": "24 ÷ 2"},
-              {"label": "s−a=12−6, s−b=12−8, s−c=12−10", "answer": "6, 4, 2", "hint": "12−6=6, 12−8=4, 12−10=2"},
-              {"label": "Product: 12×6×4×2", "answer": "576", "hint": "12×6=72, 72×4=288, 288×2=576"},
-              {"label": "Area = √576", "answer": "24", "hint": "24×24=576"}
+              {
+                "label": "s = (6+8+10) ÷ 2",
+                "answer": "12",
+                "hint": "24 ÷ 2"
+              },
+              {
+                "label": "s−a=12−6, s−b=12−8, s−c=12−10",
+                "answer": "6, 4, 2",
+                "hint": "12−6=6, 12−8=4, 12−10=2"
+              },
+              {
+                "label": "Product: 12×6×4×2",
+                "answer": "576",
+                "hint": "12×6=72, 72×4=288, 288×2=576"
+              },
+              {
+                "label": "Area = √576",
+                "answer": "24",
+                "hint": "24×24=576"
+              }
             ],
             "expectedAnswer": "24",
             "hint": "s=12. Product=576. √576=24.",
-            "solution": "s=12. 12×6×4×2=576. √576=24. Area=24 sq units."
+            "solution": "s=12. 12×6×4×2=576. √576=24. Area=24 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group F for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group F for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -514,11 +743,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A quadrilateral is split by a diagonal into two triangles with the same base 10. Their heights are 6 and 4. Total area = ?",
-            "options": ["40", "50", "60", "30"],
+            "options": [
+              "40",
+              "50",
+              "60",
+              "30"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "50",
             "hint": "½×10×6 + ½×10×4 = 30+20 = 50.",
-            "solution": "Triangle 1: ½×10×6=30. Triangle 2: ½×10×4=20. Total: 50 sq units."
+            "solution": "Triangle 1: ½×10×6=30. Triangle 2: ½×10×4=20. Total: 50 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group G for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_G_Q2",
@@ -532,7 +772,13 @@
             "questionText": "An L-shaped figure is split into two rectangles: 8×4 and 3×2. Total area = ?",
             "expectedAnswer": "38",
             "hint": "8×4 = 32. 3×2 = 6. Total = 38.",
-            "solution": "Rectangle 1: 8×4=32. Rectangle 2: 3×2=6. Total area=38 sq units."
+            "solution": "Rectangle 1: 8×4=32. Rectangle 2: 3×2=6. Total area=38 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group G for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_G_Q3",
@@ -544,13 +790,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A parallelogram with base 12 and height 7 is split into two equal triangles. Area of the parallelogram = ?",
-            "options": ["42", "72", "84", "56"],
+            "options": [
+              "42",
+              "72",
+              "84",
+              "56"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "84",
             "hint": "Each triangle = ½×12×7=42. Two triangles: 2×42=84.",
-            "solution": "2 × (½×12×7) = 2×42 = 84 sq units. Confirms: base×height = 12×7 = 84."
+            "solution": "2 × (½×12×7) = 2×42 = 84 sq units. Confirms: base×height = 12×7 = 84.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group G for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group G for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -577,11 +840,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! Area of 5-12-13 right triangle.",
-            "options": ["25", "30", "60", "65"],
+            "options": [
+              "25",
+              "30",
+              "60",
+              "65"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "30",
             "hint": "Legs 5 and 12. Area=½×5×12=30.",
-            "solution": "Area = ½×5×12 = 30 sq units."
+            "solution": "Area = ½×5×12 = 30 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group H for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_H_Q2",
@@ -595,7 +869,13 @@
             "questionText": "Perimeter of a 3-4-5 triangle scaled by factor 5.",
             "expectedAnswer": "60",
             "hint": "5 × (3+4+5) = 5 × 12 = 60.",
-            "solution": "5 × 12 = 60 cm."
+            "solution": "5 × 12 = 60 cm.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group H for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_H_Q3",
@@ -616,7 +896,13 @@
             "correctIndex": 1,
             "expectedAnswer": "Yes, it equals 2×(5,12,13)",
             "hint": "10=2×5, 24=2×12, 26=2×13. Check: 100+576=676=26².",
-            "solution": "(10,24,26) = 2×(5,12,13). 10²+24²=676=26². Yes, Pythagorean triple."
+            "solution": "(10,24,26) = 2×(5,12,13). 10²+24²=676=26². Yes, Pythagorean triple.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group H for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_H_Q4",
@@ -630,7 +916,13 @@
             "questionText": "Area of 10-24-26 right triangle.",
             "expectedAnswer": "120",
             "hint": "Legs are 10 and 24 (hypotenuse 26). Area = ½×10×24 = 120.",
-            "solution": "½ × 10 × 24 = 120 sq units."
+            "solution": "½ × 10 × 24 = 120 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group H for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_H_Q5",
@@ -642,13 +934,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! Triangle with base 20 and height 11. Area = ?",
-            "options": ["100", "110", "220", "55"],
+            "options": [
+              "100",
+              "110",
+              "220",
+              "55"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "110",
             "hint": "½×20×11 = 10×11 = 110.",
-            "solution": "Area = ½×20×11 = 10×11 = 110 sq units."
+            "solution": "Area = ½×20×11 = 10×11 = 110 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group H for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group H for Geometry Speed — Triangle and Area Shortcuts."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -676,16 +985,46 @@
             "questionType": "fill_step",
             "questionText": "Prove (7, 24, 25) is a Pythagorean triple and find its area.",
             "steps": [
-              {"label": "7² = ?", "answer": "49", "hint": "7×7"},
-              {"label": "24² = ?", "answer": "576", "hint": "24×24"},
-              {"label": "7² + 24² = ?", "answer": "625", "hint": "49 + 576"},
-              {"label": "25² = ?", "answer": "625", "hint": "25×25"},
-              {"label": "Is 7²+24² = 25²? (yes/no)", "answer": "yes", "hint": "625 = 625"},
-              {"label": "Area = ½ × 7 × 24 = ?", "answer": "84", "hint": "7 × 12 = 84"}
+              {
+                "label": "7² = ?",
+                "answer": "49",
+                "hint": "7×7"
+              },
+              {
+                "label": "24² = ?",
+                "answer": "576",
+                "hint": "24×24"
+              },
+              {
+                "label": "7² + 24² = ?",
+                "answer": "625",
+                "hint": "49 + 576"
+              },
+              {
+                "label": "25² = ?",
+                "answer": "625",
+                "hint": "25×25"
+              },
+              {
+                "label": "Is 7²+24² = 25²? (yes/no)",
+                "answer": "yes",
+                "hint": "625 = 625"
+              },
+              {
+                "label": "Area = ½ × 7 × 24 = ?",
+                "answer": "84",
+                "hint": "7 × 12 = 84"
+              }
             ],
             "expectedAnswer": "84",
             "hint": "7²+24²=625=25². Area=½×7×24=84.",
-            "solution": "49+576=625=25². Triple confirmed. Area=½×7×24=84 sq units."
+            "solution": "49+576=625=25². Triple confirmed. Area=½×7×24=84 sq units.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group I for Geometry Speed — Triangle and Area Shortcuts."
+            }
           },
           {
             "questionId": "VM_G7_L7_I_Q2",
@@ -697,13 +1036,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For the 7-24-25 triangle, Heron's formula gives s=28. The product s(s−7)(s−24)(s−25) = ?",
-            "options": ["5096", "6400", "7056", "8100"],
+            "options": [
+              "5096",
+              "6400",
+              "7056",
+              "8100"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "7056",
             "hint": "28×21×4×3 = 28×21=588, 588×4=2352, 2352×3=7056.",
-            "solution": "28×21×4×3: 28×21=588, 588×4=2352, 2352×3=7056. √7056=84. Confirms area=84."
+            "solution": "28×21×4×3: 28×21=588, 588×4=2352, 2352×3=7056. √7056=84. Confirms area=84.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Geometry Speed — Triangle and Area Shortcuts",
+              "caption": "Group I for Geometry Speed — Triangle and Area Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "caption": "Group I for Geometry Speed — Triangle and Area Shortcuts."
+        }
       }
     ]
   },
@@ -713,7 +1069,12 @@
       "exerciseGroup": "A",
       "subtopic": "Pythagorean triples",
       "boardMode": "svg",
-      "visual": {"asset": "vm_triangle_area", "highlight": "triple-families"},
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Teaching step for Geometry Speed — Triangle and Area Shortcuts."
+      },
       "teacherLine": "Three seed triples: 3-4-5, 5-12-13, 8-15-17. Multiply all three sides by any positive integer to get a new triple. The Vedic insight: proportionality preserves the right angle.",
       "boardAction": "Draw the three seed triples. Show 2×(3-4-5)=6-8-10 by scaling arrows.",
       "checkpointPrompt": "Is (9,12,15) a Pythagorean triple?",
@@ -724,7 +1085,12 @@
       "exerciseGroup": "D",
       "subtopic": "Heron's formula",
       "boardMode": "svg",
-      "visual": {"asset": "vm_triangle_area", "highlight": "heron-steps"},
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Teaching step for Geometry Speed — Triangle and Area Shortcuts."
+      },
       "teacherLine": "Heron's formula: s = half perimeter. Area = √(s(s−a)(s−b)(s−c)). For integer-side triangles the product under the square root is always a perfect square.",
       "boardAction": "Show 5-12-13 Heron's calculation with each factor highlighted.",
       "checkpointPrompt": "Apply Heron's to 6-8-10.",
@@ -735,7 +1101,12 @@
       "exerciseGroup": "F",
       "subtopic": "Fill-the-step Heron's",
       "boardMode": "svg",
-      "visual": {"asset": "vm_triangle_area", "highlight": "fill-step"},
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Teaching step for Geometry Speed — Triangle and Area Shortcuts."
+      },
       "teacherLine": "Six boxes, six seconds each. Fill the Heron's template and the answer reveals itself.",
       "boardAction": "Show blank 6-box Heron's template for 3-4-5. Walk through one box at a time.",
       "checkpointPrompt": "Fill all 6 steps for 6-8-10.",
@@ -746,7 +1117,12 @@
       "exerciseGroup": "I",
       "subtopic": "Challenge 7-24-25",
       "boardMode": "svg",
-      "visual": {"asset": "vm_triangle_area", "highlight": "7-24-25"},
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Teaching step for Geometry Speed — Triangle and Area Shortcuts."
+      },
       "teacherLine": "The 7-24-25 triple is lesser known but just as beautiful. Prove it, compute the area two ways, and you have mastered every triangle tool in this lesson.",
       "boardAction": "Write 7²+24²=49+576=625=25². Box the proof. Then show area both ways.",
       "checkpointPrompt": "Verify Heron's also gives 84.",
@@ -773,7 +1149,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Screenplay beat for Geometry Speed — Triangle and Area Shortcuts."
+      }
     },
     {
       "beatId": "VM_G7_L7_D_EXPLAIN",
@@ -787,14 +1169,20 @@
       "boardAction": "Show Heron's calculation for 5-12-13 with each multiplication step labelled.",
       "checkpointPrompt": "Apply Heron's to 6-8-10.",
       "pauseType": "student_input",
-      "holdSec": 20.0,
+      "holdSec": 20,
       "expectedStudentResponse": "24",
       "fallbackHint": "s=12. 12×6×4×2=576. √576=24.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Screenplay beat for Geometry Speed — Triangle and Area Shortcuts."
+      }
     },
     {
       "beatId": "VM_G7_L7_F_PRACTICE",
@@ -808,14 +1196,20 @@
       "boardAction": "Show blank fill-step card for 3-4-5.",
       "checkpointPrompt": "Fill all six steps.",
       "pauseType": "student_input",
-      "holdSec": 30.0,
+      "holdSec": 30,
       "expectedStudentResponse": "6",
       "fallbackHint": "s=6, 6×3×2×1=36, √36=6.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Screenplay beat for Geometry Speed — Triangle and Area Shortcuts."
+      }
     },
     {
       "beatId": "VM_G7_L7_I_CHALLENGE",
@@ -829,14 +1223,31 @@
       "boardAction": "Show empty proof template: □²+□²=□²? Area by legs. Area by Heron's.",
       "checkpointPrompt": "Complete the proof and area.",
       "pauseType": "student_input",
-      "holdSec": 30.0,
+      "holdSec": 30,
       "expectedStudentResponse": "84",
       "fallbackHint": "7²+24²=625=25². Area=½×7×24=84.",
       "performanceTag": "stretch",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Geometry Speed — Triangle and Area Shortcuts",
+        "caption": "Screenplay beat for Geometry Speed — Triangle and Area Shortcuts."
+      }
+    }
+  ],
+  "chapterCode": "VM_G7_L7_TRIANGLE_SHORTCUTS",
+  "courseId": "vedic_math_g7",
+  "visualLibrary": [
+    {
+      "visualId": "vm_mult_by_5_25",
+      "kind": "svg",
+      "asset": "vm_mult_by_5_25.svg",
+      "title": "Lesson 7: Geometry Speed — Triangle and Area Shortcuts",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

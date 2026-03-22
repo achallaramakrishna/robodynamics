@@ -1,70 +1,82 @@
 {
-  "title": "Lesson 6: ×5 and ×25 in a Flash — Base Multiplication",
+  "title": "Lesson 6: x5 and x25 in a Flash - Base Multiplication",
   "gradeBand": "Grade 4",
   "source": "Vedic Mathematics for Schools | Grade 4",
   "estimatedMinutes": 18,
   "subtopics": [
-    "Multiply by 5 — halve then ×10",
+    "Multiply by 5 - halve then x10",
     "Multiply by 5 with odd numbers",
-    "Multiply by 25 — quarter then ×100",
+    "Multiply by 25 - quarter then x100",
     "Multiply by 25 with remainders",
-    "Word problem — ×5 context",
-    "Word problem — ×25 context",
-    "Spot the product — MCQ",
-    "Fill-step: ×25 chain",
-    "Challenge: ×50 and ×125"
+    "Word problem - x5 context",
+    "Word problem - x25 context",
+    "Spot the product - MCQ",
+    "Fill-step: x25 chain",
+    "Challenge: x50 and x125"
   ],
   "learningGoals": [
     "Multiply any number by 5 using the halve-and-multiply-by-10 shortcut.",
     "Multiply any number by 25 using the quarter-and-multiply-by-100 shortcut.",
-    "Extend the base multiplication idea to ×50 and ×125 using proportional scaling."
+    "Extend the base multiplication idea to x50 and x125 using proportional scaling."
   ],
   "coreIdeas": [
-    "×5 = halve the number then multiply by 10 — because 5 = 10 ÷ 2.",
-    "×25 = divide the number by 4 then multiply by 100 — because 25 = 100 ÷ 4.",
+    "x5 = halve the number then multiply by 10 - because 5 = 10 / 2.",
+    "x25 = divide the number by 4 then multiply by 100 - because 25 = 100 / 4.",
     "When the number is odd, multiply by 10 (or 100) first, then divide to avoid fractions."
   ],
   "workedExamples": [
     {
-      "question": "36 × 5 = ?",
-      "method": "Half of 36 = 18. 18 × 10 = 180. Answer: 180.",
+      "question": "36 x 5 = ?",
+      "method": "Half of 36 = 18. 18 x 10 = 180. Answer: 180.",
       "answer": "180"
     },
     {
-      "question": "13 × 5 = ?",
-      "method": "13 × 10 = 130. Half of 130 = 65. Answer: 65.",
+      "question": "13 x 5 = ?",
+      "method": "13 x 10 = 130. Half of 130 = 65. Answer: 65.",
       "answer": "65"
     },
     {
-      "question": "28 × 25 = ?",
-      "method": "28 ÷ 4 = 7. 7 × 100 = 700. Answer: 700.",
+      "question": "28 x 25 = ?",
+      "method": "28 / 4 = 7. 7 x 100 = 700. Answer: 700.",
       "answer": "700"
     },
     {
-      "question": "34 × 25 = ?",
-      "method": "34 ÷ 4 = 8 remainder 2. 8×100 = 800. Remainder 2 × 25 = 50. Total = 850.",
+      "question": "34 x 25 = ?",
+      "method": "34 / 4 = 8 remainder 2. 8x100 = 800. Remainder 2 x 25 = 50. Total = 850.",
       "answer": "850"
     }
   ],
   "starterPractice": [
-    "44 × 5 = ? (halve then ×10)",
-    "20 × 25 = ? (quarter then ×100)",
-    "17 × 5 = ? (odd number — ×10 first, then halve)"
+    "44 x 5 = ? (halve then x10)",
+    "20 x 25 = ? (quarter then x100)",
+    "17 x 5 = ? (odd number - x10 first, then halve)"
   ],
   "duolingoLessonArc": {
-    "version": "2026-03-mindspark-g4-v1",
+    "version": "2026-03-mindsutra-g4-v2",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
-      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will multiply by 5 and 25 in a flash — using halving and quartering instead of long multiplication!",
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
+      "coachIntro": "Today you will see that x5 and x25 are really base tricks in disguise, using halving or quartering instead of long multiplication.",
       "placementRule": "Start at group A. If halving is already automatic, jump to group C."
     },
     "mission": {
-      "missionTitle": "×5 and ×25 in a Flash",
-      "missionPromise": "Master the halve-and-×10 trick for ×5 and the quarter-and-×100 trick for ×25.",
-      "successCelebration": "Base multiplication master! You will never struggle with ×5 or ×25 again!"
+      "missionTitle": "x5 and x25 in a Flash",
+      "missionPromise": "Learn the x5 shortcut first, then stretch the same base idea into x25 with steady, simple steps.",
+      "successCelebration": "Base multiplication master! You will never struggle with x5 or x25 again!"
     },
     "microLessonPattern": [
       "Coach explains the base relationship: 5 is half of 10, 25 is a quarter of 100.",
@@ -76,7 +88,7 @@
     "rewardLoop": {
       "xpUnit": "Award 10 to 18 XP per exercise group based on difficulty.",
       "streakRule": "Keep the streak counter visible; a correct answer on retry still counts as streak-save.",
-      "badgeRule": "Each group earns a themed badge tied to the ×5/×25 skill being practised.",
+      "badgeRule": "Each group earns a themed badge tied to the x5/x25 skill being practised.",
       "celebrationStyle": "Short coach cheer, XP pulse animation, and progress bar moves forward."
     },
     "reviewLoop": {
@@ -88,87 +100,172 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
       {
         "exerciseGroup": "A",
-        "subtopic": "Multiply by 5 — halve then ×10",
-        "missionStepTitle": "Exercise A: Multiply by 5 (even numbers)",
-        "coachHook": "Here is the ×5 secret: 5 is just half of 10! So halve the number and then multiply by 10 — two easy steps!",
-        "boardDemo": "36×5: half of 36=18. 18×10=180. 44×5: half of 44=22. 22×10=220.",
-        "readAloudPrompt": "36 × 5 = ?",
-        "tryPrompt": "Your turn: 44 × 5 = ?",
-        "masteryCheck": "52 × 5 = ?",
-        "instantFeedbackWin": "Brilliant! Halve and ×10 — ×5 is now a two-step breeze!",
-        "instantFeedbackRetry": "For 44×5: half of 44=22. 22×10=220.",
-        "reviewPrompt": "Try: 24×5, 36×5, 48×5.",
+        "subtopic": "Multiply by 5 - halve then x10",
+        "missionStepTitle": "Exercise A: x5 with even numbers",
+        "coachHook": "Let us open with the cleanest version of the trick. Since 5 is half of 10, we halve the number first and then attach the x10 step.",
+        "boardDemo": "Show 36 x 5 as half of 36 = 18, then 18 x 10 = 180. Then show 44 x 5 as half of 44 = 22, then 22 x 10 = 220.",
+        "readAloudPrompt": "Follow the two steps. What is 36 x 5?",
+        "tryPrompt": "Your turn: what is 44 x 5 after halving first?",
+        "masteryCheck": "What is 52 x 5?",
+        "instantFeedbackWin": "Correct. You halved first and finished the x10 step cleanly.",
+        "instantFeedbackRetry": "Start with half of 44, which is 22. Then multiply 22 by 10 to get 220.",
+        "reviewPrompt": "Try these x5 questions: 24 x 5, 36 x 5, and 48 x 5.",
         "xpReward": 10,
-        "badgeFocus": "×5 Starter",
+        "badgeFocus": "x5 Starter",
         "exercises": [
           {
             "questionId": "VM_G4_L6_A_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "A",
-            "subtopic": "Multiply by 5 — halve then ×10",
+            "subtopic": "Multiply by 5 - halve then x10",
             "skill": "multiply by 5 even",
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "36 × 5 = ?",
-            "options": ["160", "170", "180", "190"],
+            "questionText": "36 x 5 = ?",
+            "options": [
+              "160",
+              "170",
+              "180",
+              "190"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "180",
-            "hint": "Half of 36=18. 18×10=180.",
-            "solution": "Half 36=18. ×10=180. Answer: 180."
+            "hint": "Half of 36=18. 18x10=180.",
+            "solution": "Half 36=18. x10=180. Answer: 180.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with even numbers",
+              "caption": "Half the number first, then multiply by 10."
+            }
           },
           {
             "questionId": "VM_G4_L6_A_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "A",
-            "subtopic": "Multiply by 5 — halve then ×10",
+            "subtopic": "Multiply by 5 - halve then x10",
             "skill": "multiply by 5 even",
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "44 × 5 = ?",
-            "options": ["200", "210", "220", "230"],
+            "questionText": "44 x 5 = ?",
+            "options": [
+              "200",
+              "210",
+              "220",
+              "230"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "220",
-            "hint": "Half of 44=22. 22×10=220.",
-            "solution": "Half 44=22. ×10=220. Answer: 220."
+            "hint": "Half of 44=22. 22x10=220.",
+            "solution": "Half 44=22. x10=220. Answer: 220.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with even numbers",
+              "caption": "Half the number first, then multiply by 10."
+            }
           },
           {
             "questionId": "VM_G4_L6_A_Q3",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "A",
-            "subtopic": "Multiply by 5 — halve then ×10",
+            "subtopic": "Multiply by 5 - halve then x10",
             "skill": "multiply by 5 even",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "52 × 5 = ?",
+            "questionType": "short_answer",
+            "questionText": "52 x 5 = ?",
             "expectedAnswer": "260",
-            "hint": "Half of 52=26. 26×10=260.",
-            "solution": "Half 52=26. ×10=260."
+            "hint": "Half of 52=26. 26x10=260.",
+            "solution": "Half 52=26. x10=260.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with even numbers",
+              "caption": "Half the number first, then multiply by 10."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_A_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "A",
+            "subtopic": "Multiply by 5 - halve then x10",
+            "skill": "multiply by 5 even",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "48 x 5 = ?",
+            "expectedAnswer": "240",
+            "hint": "Half of 48=24. 24x10=240.",
+            "solution": "Half 48=24. 24x10=240. Answer: 240.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with even numbers",
+              "caption": "Half the number first, then multiply by 10."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_A_Q5",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "A",
+            "subtopic": "Multiply by 5 - halve then x10",
+            "skill": "multiply by 5 even",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "24 x 5 = ?",
+            "options": [
+              "110",
+              "120",
+              "130",
+              "140"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "120",
+            "hint": "Half of 24=12. 12x10=120.",
+            "solution": "Half 24=12. 12x10=120. Answer: 120.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with even numbers",
+              "caption": "Half the number first, then multiply by 10."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x5 with even numbers",
+          "caption": "Half the number first, then multiply by 10."
+        }
       },
       {
         "exerciseGroup": "B",
         "subtopic": "Multiply by 5 with odd numbers",
-        "missionStepTitle": "Exercise B: ×5 with odd numbers",
-        "coachHook": "Odd numbers cannot be halved cleanly — so flip the order! Multiply by 10 first, then halve. Same answer, no fractions!",
-        "boardDemo": "13×5: 13×10=130. Half of 130=65. 17×5: 17×10=170. Half of 170=85.",
-        "readAloudPrompt": "13 × 5 = ?",
-        "tryPrompt": "17 × 5 = ?",
-        "masteryCheck": "23 × 5 = ?",
-        "instantFeedbackWin": "Smart flip! ×10 first, then halve — works perfectly for odd numbers.",
-        "instantFeedbackRetry": "For 17×5: 17×10=170. Half 170=85.",
-        "reviewPrompt": "Try odd: 11×5, 19×5, 27×5.",
+        "missionStepTitle": "Exercise B: x5 with odd numbers",
+        "coachHook": "Odd numbers cannot be halved cleanly - so flip the order! Multiply by 10 first, then halve. Same answer, no fractions!",
+        "boardDemo": "13x5: 13x10=130. Half of 130=65. 17x5: 17x10=170. Half of 170=85.",
+        "readAloudPrompt": "13 x 5 = ?",
+        "tryPrompt": "17 x 5 = ?",
+        "masteryCheck": "23 x 5 = ?",
+        "instantFeedbackWin": "Smart flip! x10 first, then halve - works perfectly for odd numbers.",
+        "instantFeedbackRetry": "For 17x5: 17x10=170. Half 170=85.",
+        "reviewPrompt": "Try odd: 11x5, 19x5, 27x5.",
         "xpReward": 10,
-        "badgeFocus": "Odd-Number ×5 Hero",
+        "badgeFocus": "Odd-Number x5 Hero",
         "exercises": [
           {
             "questionId": "VM_G4_L6_B_Q1",
@@ -179,12 +276,23 @@
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "17 × 5 = ?",
-            "options": ["75", "80", "85", "90"],
+            "questionText": "17 x 5 = ?",
+            "options": [
+              "75",
+              "80",
+              "85",
+              "90"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "85",
-            "hint": "17×10=170. Half of 170=85.",
-            "solution": "17×10=170, half=85. Answer: 85."
+            "hint": "17x10=170. Half of 170=85.",
+            "solution": "17x10=170, half=85. Answer: 85.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with odd numbers",
+              "caption": "Multiply by 10 first, then halve to avoid fractions."
+            }
           },
           {
             "questionId": "VM_G4_L6_B_Q2",
@@ -194,77 +302,211 @@
             "skill": "multiply by 5 odd",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "23 × 5 = ?",
+            "questionType": "short_answer",
+            "questionText": "23 x 5 = ?",
             "expectedAnswer": "115",
-            "hint": "23×10=230. Half of 230=115.",
-            "solution": "23×10=230, half=115. Answer: 115."
+            "hint": "23x10=230. Half of 230=115.",
+            "solution": "23x10=230, half=115. Answer: 115.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with odd numbers",
+              "caption": "Multiply by 10 first, then halve to avoid fractions."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_B_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "B",
+            "subtopic": "Multiply by 5 with odd numbers",
+            "skill": "multiply by 5 odd",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "19 x 5 = ?",
+            "options": [
+              "85",
+              "90",
+              "95",
+              "100"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "95",
+            "hint": "19x10=190. Half of 190=95.",
+            "solution": "19x10=190. Half 190=95. Answer: 95.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with odd numbers",
+              "caption": "Multiply by 10 first, then halve to avoid fractions."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_B_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "B",
+            "subtopic": "Multiply by 5 with odd numbers",
+            "skill": "multiply by 5 odd",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "27 x 5 = ?",
+            "expectedAnswer": "135",
+            "hint": "27x10=270. Half of 270=135.",
+            "solution": "27x10=270. Half 270=135. Answer: 135.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 with odd numbers",
+              "caption": "Multiply by 10 first, then halve to avoid fractions."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x5 with odd numbers",
+          "caption": "Multiply by 10 first, then halve to avoid fractions."
+        }
       },
       {
         "exerciseGroup": "C",
-        "subtopic": "Multiply by 25 — quarter then ×100",
+        "subtopic": "Multiply by 25 - quarter then x100",
         "missionStepTitle": "Exercise C: Multiply by 25 (multiples of 4)",
-        "coachHook": "25 is a quarter of 100! So divide by 4 and then multiply by 100 — ×25 becomes super fast for multiples of 4!",
-        "boardDemo": "28×25: 28÷4=7. 7×100=700. 40×25: 40÷4=10. 10×100=1000.",
-        "readAloudPrompt": "28 × 25 = ?",
-        "tryPrompt": "40 × 25 = ?",
-        "masteryCheck": "16 × 25 = ?",
-        "instantFeedbackWin": "Quarter and ×100 — you just did ×25 mentally in two steps!",
-        "instantFeedbackRetry": "For 40×25: 40÷4=10. 10×100=1000.",
-        "reviewPrompt": "Try: 20×25, 32×25, 8×25.",
+        "coachHook": "25 is a quarter of 100. So divide by 4 and then multiply by 100. This makes x25 clean and reliable for multiples of 4.",
+        "boardDemo": "28x25: 28/4=7. 7x100=700. 40x25: 40/4=10. 10x100=1000.",
+        "readAloudPrompt": "28 x 25 = ?",
+        "tryPrompt": "40 x 25 = ?",
+        "masteryCheck": "16 x 25 = ?",
+        "instantFeedbackWin": "Quarter and x100 - you just did x25 mentally in two steps!",
+        "instantFeedbackRetry": "For 40x25: 40/4=10. 10x100=1000.",
+        "reviewPrompt": "Try: 20x25, 32x25, 8x25.",
         "xpReward": 12,
-        "badgeFocus": "×25 Starter",
+        "badgeFocus": "x25 Starter",
         "exercises": [
           {
             "questionId": "VM_G4_L6_C_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "C",
-            "subtopic": "Multiply by 25 — quarter then ×100",
+            "subtopic": "Multiply by 25 - quarter then x100",
             "skill": "multiply by 25 exact quarter",
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "28 × 25 = ?",
-            "options": ["650", "675", "700", "725"],
+            "questionText": "28 x 25 = ?",
+            "options": [
+              "650",
+              "675",
+              "700",
+              "725"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "700",
-            "hint": "28÷4=7. 7×100=700.",
-            "solution": "28÷4=7. 7×100=700. Answer: 700."
+            "hint": "28/4=7. 7x100=700.",
+            "solution": "28/4=7. 7x100=700. Answer: 700.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with exact quarters",
+              "caption": "Quarter the number first, then multiply by 100."
+            }
           },
           {
             "questionId": "VM_G4_L6_C_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "C",
-            "subtopic": "Multiply by 25 — quarter then ×100",
+            "subtopic": "Multiply by 25 - quarter then x100",
             "skill": "multiply by 25 exact quarter",
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "16 × 25 = ?",
-            "options": ["350", "375", "400", "425"],
+            "questionText": "16 x 25 = ?",
+            "options": [
+              "350",
+              "375",
+              "400",
+              "425"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "400",
-            "hint": "16÷4=4. 4×100=400.",
-            "solution": "16÷4=4. 4×100=400. Answer: 400."
+            "hint": "16/4=4. 4x100=400.",
+            "solution": "16/4=4. 4x100=400. Answer: 400.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with exact quarters",
+              "caption": "Quarter the number first, then multiply by 100."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_C_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "C",
+            "subtopic": "Multiply by 25 - quarter then x100",
+            "skill": "multiply by 25 exact quarter",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "32 x 25 = ?",
+            "options": [
+              "700",
+              "750",
+              "800",
+              "850"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "800",
+            "hint": "32/4=8. 8x100=800.",
+            "solution": "32/4=8. 8x100=800. Answer: 800.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with exact quarters",
+              "caption": "Quarter the number first, then multiply by 100."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_C_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "C",
+            "subtopic": "Multiply by 25 - quarter then x100",
+            "skill": "multiply by 25 exact quarter",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "8 x 25 = ?",
+            "expectedAnswer": "200",
+            "hint": "8/4=2. 2x100=200.",
+            "solution": "8/4=2. 2x100=200. Answer: 200.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with exact quarters",
+              "caption": "Quarter the number first, then multiply by 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x25 with exact quarters",
+          "caption": "Quarter the number first, then multiply by 100."
+        }
       },
       {
         "exerciseGroup": "D",
         "subtopic": "Multiply by 25 with remainders",
-        "missionStepTitle": "Exercise D: ×25 with remainders",
-        "coachHook": "What if dividing by 4 leaves a remainder? No problem — handle the quotient and remainder separately, then add!",
-        "boardDemo": "34×25: 34÷4=8 remainder 2. 8×100=800. Remainder 2×25=50. Total: 800+50=850.",
-        "readAloudPrompt": "34 × 25 = ?",
-        "tryPrompt": "22 × 25 = ?",
-        "masteryCheck": "38 × 25 = ?",
-        "instantFeedbackWin": "Remainder handled perfectly! That is advanced ×25 thinking.",
-        "instantFeedbackRetry": "For 22×25: 22÷4=5 remainder 2. 5×100=500. 2×25=50. Total: 550.",
-        "reviewPrompt": "Try: 26×25, 30×25, 14×25.",
+        "missionStepTitle": "Exercise D: x25 with remainders",
+        "coachHook": "What if dividing by 4 leaves a remainder? No problem - handle the quotient and remainder separately, then add!",
+        "boardDemo": "34x25: 34/4=8 remainder 2. 8x100=800. Remainder 2x25=50. Total: 800+50=850.",
+        "readAloudPrompt": "34 x 25 = ?",
+        "tryPrompt": "22 x 25 = ?",
+        "masteryCheck": "38 x 25 = ?",
+        "instantFeedbackWin": "Remainder handled perfectly! That is advanced x25 thinking.",
+        "instantFeedbackRetry": "For 22x25: 22/4=5 remainder 2. 5x100=500. 2x25=50. Total: 550.",
+        "reviewPrompt": "Try: 26x25, 30x25, 14x25.",
         "xpReward": 12,
-        "badgeFocus": "Remainder ×25 Master",
+        "badgeFocus": "Remainder x25 Master",
         "exercises": [
           {
             "questionId": "VM_G4_L6_D_Q1",
@@ -275,12 +517,23 @@
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "34 × 25 = ?",
-            "options": ["820", "840", "850", "860"],
+            "questionText": "34 x 25 = ?",
+            "options": [
+              "820",
+              "840",
+              "850",
+              "860"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "850",
-            "hint": "34÷4=8 rem 2. 8×100=800. 2×25=50. Total=850.",
-            "solution": "34÷4=8 r2. 8×100=800, 2×25=50. Answer: 850."
+            "hint": "34/4=8 rem 2. 8x100=800. 2x25=50. Total=850.",
+            "solution": "34/4=8 r2. 8x100=800, 2x25=50. Answer: 850.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with remainders",
+              "caption": "Handle the quotient and leftover part separately, then combine."
+            }
           },
           {
             "questionId": "VM_G4_L6_D_Q2",
@@ -290,120 +543,319 @@
             "skill": "multiply by 25 with remainder",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "22 × 25 = ?",
+            "questionType": "short_answer",
+            "questionText": "22 x 25 = ?",
             "expectedAnswer": "550",
-            "hint": "22÷4=5 rem 2. 5×100=500. 2×25=50. Total=550.",
-            "solution": "22÷4=5 r2. 5×100=500, 2×25=50. Answer: 550."
+            "hint": "22/4=5 rem 2. 5x100=500. 2x25=50. Total=550.",
+            "solution": "22/4=5 r2. 5x100=500, 2x25=50. Answer: 550.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with remainders",
+              "caption": "Handle the quotient and leftover part separately, then combine."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_D_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply by 25 with remainders",
+            "skill": "multiply by 25 with remainder",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "38 x 25 = ?",
+            "options": [
+              "925",
+              "940",
+              "950",
+              "960"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "950",
+            "hint": "38/4=9 rem 2. 9x100=900. 2x25=50. Total=950.",
+            "solution": "38/4=9 r2. 9x100=900, 2x25=50. Answer: 950.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with remainders",
+              "caption": "Handle the quotient and leftover part separately, then combine."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_D_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "D",
+            "subtopic": "Multiply by 25 with remainders",
+            "skill": "multiply by 25 with remainder",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "26 x 25 = ?",
+            "expectedAnswer": "650",
+            "hint": "26/4=6 rem 2. 6x100=600. 2x25=50. Total=650.",
+            "solution": "26/4=6 r2. 6x100=600, 2x25=50. Answer: 650.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 with remainders",
+              "caption": "Handle the quotient and leftover part separately, then combine."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x25 with remainders",
+          "caption": "Handle the quotient and leftover part separately, then combine."
+        }
       },
       {
         "exerciseGroup": "E",
-        "subtopic": "Word problem — ×5 context",
-        "missionStepTitle": "Exercise E: Word problems with ×5",
-        "coachHook": "Real life! Cricket scores, market prices — they love the number 5. Let's solve some real problems!",
-        "boardDemo": "A cricket team scores 46 runs per over for 5 overs. Total = 46×5: half 46=23, 23×10=230 runs.",
+        "subtopic": "Word problem - x5 context",
+        "missionStepTitle": "Exercise E: Word problems with x5",
+        "coachHook": "Real life! Cricket scores, market prices - they love the number 5. Let's solve some real problems!",
+        "boardDemo": "A cricket team scores 46 runs per over for 5 overs. Total = 46x5: half 46=23, 23x10=230 runs.",
         "readAloudPrompt": "A cricket team scores 46 runs per over for 5 overs. What is their total?",
         "tryPrompt": "A farmer plants 38 seeds in each of 5 rows. How many seeds total?",
         "masteryCheck": "Each bus ticket costs Rs 15. Priya buys 5 tickets. How much does she pay?",
-        "instantFeedbackWin": "Real-world ×5 — halve and ×10 even in a word problem!",
-        "instantFeedbackRetry": "For 38×5: half 38=19, 19×10=190 seeds.",
-        "reviewPrompt": "Make your own ×5 word problem and solve it.",
+        "instantFeedbackWin": "Real-world x5 - halve and x10 even in a word problem!",
+        "instantFeedbackRetry": "For 38x5: half 38=19, 19x10=190 seeds.",
+        "reviewPrompt": "Make your own x5 word problem and solve it.",
         "xpReward": 12,
-        "badgeFocus": "×5 Real-World Solver",
+        "badgeFocus": "x5 Real-World Solver",
         "exercises": [
           {
             "questionId": "VM_G4_L6_E_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "E",
-            "subtopic": "Word problem — ×5 context",
-            "skill": "word problem ×5",
+            "subtopic": "Word problem - x5 context",
+            "skill": "word problem x5",
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A cricket team scores 46 runs per over for 5 overs. What is their total score?",
-            "options": ["210", "220", "230", "240"],
+            "options": [
+              "210",
+              "220",
+              "230",
+              "240"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "230",
-            "hint": "46×5: half 46=23. 23×10=230.",
-            "solution": "46÷2=23. 23×10=230 runs."
+            "hint": "46x5: half 46=23. 23x10=230.",
+            "solution": "46/2=23. 23x10=230 runs.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 word problems",
+              "caption": "Use the x5 shortcut in real-life contexts like scores and prices."
+            }
           },
           {
             "questionId": "VM_G4_L6_E_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "E",
-            "subtopic": "Word problem — ×5 context",
-            "skill": "word problem ×5",
+            "subtopic": "Word problem - x5 context",
+            "skill": "word problem x5",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "Each bus ticket costs Rs 15. Priya buys 5 tickets. How much does she pay?",
             "expectedAnswer": "75",
-            "hint": "15×5: 15×10=150, half=75.",
-            "solution": "15×10=150, half=75. Priya pays Rs 75."
+            "hint": "15x5: 15x10=150, half=75.",
+            "solution": "15x10=150, half=75. Priya pays Rs 75.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 word problems",
+              "caption": "Use the x5 shortcut in real-life contexts like scores and prices."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_E_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "E",
+            "subtopic": "Word problem - x5 context",
+            "skill": "word problem x5",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "A bag of 36 oranges costs Rs 5 each. What is the total cost?",
+            "expectedAnswer": "180",
+            "hint": "36x5. Half of 36=18. 18x10=180.",
+            "solution": "36x5: Half 36=18. 18x10=180. Total: Rs 180.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 word problems",
+              "caption": "Use the x5 shortcut in real-life contexts like scores and prices."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_E_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "E",
+            "subtopic": "Word problem - x5 context",
+            "skill": "word problem x5",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A school orders 46 chairs at Rs 5 each. Total cost?",
+            "options": [
+              "220",
+              "225",
+              "230",
+              "235"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "230",
+            "hint": "46x5. Half of 46=23. 23x10=230.",
+            "solution": "46x5: Half 46=23. 23x10=230. Answer: Rs 230.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x5 word problems",
+              "caption": "Use the x5 shortcut in real-life contexts like scores and prices."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x5 word problems",
+          "caption": "Use the x5 shortcut in real-life contexts like scores and prices."
+        }
       },
       {
         "exerciseGroup": "F",
-        "subtopic": "Word problem — ×25 context",
-        "missionStepTitle": "Exercise F: Word problems with ×25",
-        "coachHook": "₹25 coins, 25-minute intervals, 25-litre jerrycans — the number 25 is everywhere! Let's solve real problems!",
-        "boardDemo": "Ravi collects 24 coins worth Rs 25 each. Total = 24×25: 24÷4=6, 6×100=Rs 600.",
+        "subtopic": "Word problem - x25 context",
+        "missionStepTitle": "Exercise F: Word problems with x25",
+        "coachHook": "₹25 coins, 25-minute intervals, 25-litre jerrycans - the number 25 is everywhere! Let's solve real problems!",
+        "boardDemo": "Ravi collects 24 coins worth Rs 25 each. Total = 24x25: 24/4=6, 6x100=Rs 600.",
         "readAloudPrompt": "Ravi has 24 coins of Rs 25 each. What is the total amount?",
-        "tryPrompt": "A tank fills at 32 litres every 25 minutes. After 1 interval, how many litres? (i.e., 32×25 = ?)",
+        "tryPrompt": "A tank fills at 32 litres every 25 minutes. After 1 interval, how many litres? (i.e., 32x25 = ?)",
         "masteryCheck": "A field has 36 rows of 25 plants each. How many plants total?",
-        "instantFeedbackWin": "Rs 25 word problem solved with zero long multiplication — brilliant!",
-        "instantFeedbackRetry": "For 36×25: 36÷4=9. 9×100=900 plants.",
+        "instantFeedbackWin": "Rs 25 word problem solved with zero long multiplication - brilliant!",
+        "instantFeedbackRetry": "For 36x25: 36/4=9. 9x100=900 plants.",
         "reviewPrompt": "Try: 28 coins of Rs 25, 40 rows of 25.",
         "xpReward": 12,
-        "badgeFocus": "×25 Story Solver",
+        "badgeFocus": "x25 Story Solver",
         "exercises": [
           {
             "questionId": "VM_G4_L6_F_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "F",
-            "subtopic": "Word problem — ×25 context",
-            "skill": "word problem ×25",
+            "subtopic": "Word problem - x25 context",
+            "skill": "word problem x25",
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Ravi has 24 coins of Rs 25 each. What is the total amount?",
-            "options": ["550", "575", "600", "625"],
+            "options": [
+              "550",
+              "575",
+              "600",
+              "625"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "600",
-            "hint": "24×25: 24÷4=6. 6×100=600.",
-            "solution": "24÷4=6. 6×100=Rs 600."
+            "hint": "24x25: 24/4=6. 6x100=600.",
+            "solution": "24/4=6. 6x100=Rs 600.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 word problems",
+              "caption": "Use the x25 shortcut in coins, rows, and grouped quantities."
+            }
           },
           {
             "questionId": "VM_G4_L6_F_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "F",
-            "subtopic": "Word problem — ×25 context",
-            "skill": "word problem ×25",
+            "subtopic": "Word problem - x25 context",
+            "skill": "word problem x25",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "A field has 36 rows of 25 plants each. How many plants are there in total?",
             "expectedAnswer": "900",
-            "hint": "36×25: 36÷4=9. 9×100=900.",
-            "solution": "36÷4=9. 9×100=900 plants."
+            "hint": "36x25: 36/4=9. 9x100=900.",
+            "solution": "36/4=9. 9x100=900 plants.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 word problems",
+              "caption": "Use the x25 shortcut in coins, rows, and grouped quantities."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_F_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "F",
+            "subtopic": "Word problem - x25 context",
+            "skill": "word problem x25",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "A box holds 20 items and each item costs Rs 25. What is the cost of one box?",
+            "options": [
+              "400",
+              "450",
+              "500",
+              "550"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "500",
+            "hint": "20x25. 20/4=5. 5x100=500.",
+            "solution": "20x25: 20/4=5. 5x100=500. Answer: Rs 500.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 word problems",
+              "caption": "Use the x25 shortcut in coins, rows, and grouped quantities."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_F_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "F",
+            "subtopic": "Word problem - x25 context",
+            "skill": "word problem x25",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "Ravi buys 12 notebooks at Rs 25 each. Total amount paid?",
+            "expectedAnswer": "300",
+            "hint": "12x25. 12/4=3. 3x100=300.",
+            "solution": "12x25: 12/4=3. 3x100=300. Answer: Rs 300.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x25 word problems",
+              "caption": "Use the x25 shortcut in coins, rows, and grouped quantities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x25 word problems",
+          "caption": "Use the x25 shortcut in coins, rows, and grouped quantities."
+        }
       },
       {
         "exerciseGroup": "G",
-        "subtopic": "Spot the product — MCQ",
+        "subtopic": "Spot the product - MCQ",
         "missionStepTitle": "Exercise G: Spot the correct product",
-        "coachHook": "Detective! Four answers — one is right for ×5 or ×25. Use the shortcut to spot the correct one fast!",
-        "boardDemo": "17×5 options: 75, 80, 85, 90. Compute: 17×10=170, half=85. Spot 85!",
-        "readAloudPrompt": "Spot the correct answer for 17 × 5.",
-        "tryPrompt": "Spot: 44 × 25 = ?",
-        "masteryCheck": "Spot: 26 × 25 = ?",
+        "coachHook": "Detective! Four answers - one is right for x5 or x25. Use the shortcut to spot the correct one fast!",
+        "boardDemo": "17x5 options: 75, 80, 85, 90. Compute: 17x10=170, half=85. Spot 85!",
+        "readAloudPrompt": "Spot the correct answer for 17 x 5.",
+        "tryPrompt": "Spot: 44 x 25 = ?",
+        "masteryCheck": "Spot: 26 x 25 = ?",
         "instantFeedbackWin": "Perfect spot! Shortcut was faster than all four distractors combined.",
-        "instantFeedbackRetry": "For 44×25: 44÷4=11. 11×100=1100.",
-        "reviewPrompt": "Spot three: 34×5, 12×25, 19×5.",
+        "instantFeedbackRetry": "For 44x25: 44/4=11. 11x100=1100.",
+        "reviewPrompt": "Spot three: 34x5, 12x25, 19x5.",
         "xpReward": 14,
         "badgeFocus": "Base-Multiplication Detective",
         "exercises": [
@@ -411,137 +863,401 @@
             "questionId": "VM_G4_L6_G_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "G",
-            "subtopic": "Spot the product — MCQ",
-            "skill": "spot ×5/×25 product",
+            "subtopic": "Spot the product - MCQ",
+            "skill": "spot x5/x25 product",
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "17 × 5 = ?",
-            "options": ["75", "80", "85", "90"],
+            "questionText": "17 x 5 = ?",
+            "options": [
+              "75",
+              "80",
+              "85",
+              "90"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "85",
-            "hint": "17×10=170. Half=85.",
-            "solution": "17×10=170, half=85. Answer: 85."
+            "hint": "17x10=170. Half=85.",
+            "solution": "17x10=170, half=85. Answer: 85.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Spot the product",
+              "caption": "Use the shortcut mentally to eliminate wrong options fast."
+            }
           },
           {
             "questionId": "VM_G4_L6_G_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "G",
-            "subtopic": "Spot the product — MCQ",
-            "skill": "spot ×5/×25 product",
+            "subtopic": "Spot the product - MCQ",
+            "skill": "spot x5/x25 product",
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "26 × 25 = ?",
-            "options": ["625", "640", "650", "660"],
+            "questionText": "26 x 25 = ?",
+            "options": [
+              "625",
+              "640",
+              "650",
+              "660"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "650",
-            "hint": "26÷4=6 rem 2. 6×100=600. 2×25=50. Total=650.",
-            "solution": "26÷4=6 r2. 6×100=600, 2×25=50. Answer: 650."
+            "hint": "26/4=6 rem 2. 6x100=600. 2x25=50. Total=650.",
+            "solution": "26/4=6 r2. 6x100=600, 2x25=50. Answer: 650.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Spot the product",
+              "caption": "Use the shortcut mentally to eliminate wrong options fast."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_G_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "G",
+            "subtopic": "Spot the product - MCQ",
+            "skill": "spot x5/x25 product",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "64 x 5 = ?",
+            "expectedAnswer": "320",
+            "hint": "Half of 64=32. 32x10=320.",
+            "solution": "Half 64=32. 32x10=320. Answer: 320.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Spot the product",
+              "caption": "Use the shortcut mentally to eliminate wrong options fast."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_G_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "G",
+            "subtopic": "Spot the product - MCQ",
+            "skill": "spot x5/x25 product",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which equals 36 x 25?",
+            "options": [
+              "800",
+              "875",
+              "900",
+              "950"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "900",
+            "hint": "36/4=9. 9x100=900.",
+            "solution": "36/4=9. 9x100=900. Answer: 900.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Spot the product",
+              "caption": "Use the shortcut mentally to eliminate wrong options fast."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Spot the product",
+          "caption": "Use the shortcut mentally to eliminate wrong options fast."
+        }
       },
       {
         "exerciseGroup": "H",
-        "subtopic": "Fill-step: ×25 chain",
-        "missionStepTitle": "Exercise H: Step-by-step ×25",
-        "coachHook": "Let's trace every step of a ×25 multiplication! Quotient, remainder, multiply, add — four boxes, one clear answer!",
-        "boardDemo": "34×25: Box 1: 34÷4=8 rem 2. Box 2: 8×100=800. Box 3: 2×25=50. Box 4: 800+50=850.",
-        "readAloudPrompt": "Fill the steps for 38 × 25.",
-        "tryPrompt": "Now fill steps for 26 × 25.",
-        "masteryCheck": "Write all steps for 42 × 25.",
-        "instantFeedbackWin": "Perfect four-step ×25! You traced every part of the shortcut.",
-        "instantFeedbackRetry": "For 26×25: 26÷4=6 rem 2, 6×100=600, 2×25=50. Total=650.",
-        "reviewPrompt": "Fill steps for 30×25 and 22×25.",
+        "subtopic": "Fill-step: x25 chain",
+        "missionStepTitle": "Exercise H: Step-by-step x25",
+        "coachHook": "Let's trace every step of a x25 multiplication! Quotient, remainder, multiply, add - four boxes, one clear answer!",
+        "boardDemo": "34x25: Box 1: 34/4=8 rem 2. Box 2: 8x100=800. Box 3: 2x25=50. Box 4: 800+50=850.",
+        "readAloudPrompt": "Fill the steps for 38 x 25.",
+        "tryPrompt": "Now fill steps for 26 x 25.",
+        "masteryCheck": "Write all steps for 42 x 25.",
+        "instantFeedbackWin": "Perfect four-step x25! You traced every part of the shortcut.",
+        "instantFeedbackRetry": "For 26x25: 26/4=6 rem 2, 6x100=600, 2x25=50. Total=650.",
+        "reviewPrompt": "Fill steps for 30x25 and 22x25.",
         "xpReward": 14,
-        "badgeFocus": "×25 Step Tracer",
+        "badgeFocus": "x25 Step Tracer",
         "exercises": [
           {
             "questionId": "VM_G4_L6_H_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "H",
-            "subtopic": "Fill-step: ×25 chain",
-            "skill": "fill-step ×25",
+            "subtopic": "Fill-step: x25 chain",
+            "skill": "fill-step x25",
             "difficulty": "hard",
             "type": "guided",
             "questionType": "fill_step",
-            "questionText": "Find 38 × 25 step by step.",
+            "questionText": "Find 38 x 25 step by step.",
             "steps": [
-              {"label": "Divide 38 by 4: quotient = ?, remainder = ?", "answer": "9 rem 2", "hint": "38÷4 = 9 with remainder 2"},
-              {"label": "Quotient × 100: 9 × 100 = ?", "answer": "900", "hint": "9 × 100"},
-              {"label": "Remainder × 25: 2 × 25 = ?", "answer": "50", "hint": "2 × 25 = 50"}
+              {
+                "label": "Divide 38 by 4: quotient = ?, remainder = ?",
+                "answer": "9 rem 2",
+                "hint": "38/4 = 9 with remainder 2"
+              },
+              {
+                "label": "Quotient x 100: 9 x 100 = ?",
+                "answer": "900",
+                "hint": "9 x 100"
+              },
+              {
+                "label": "Remainder x 25: 2 x 25 = ?",
+                "answer": "50",
+                "hint": "2 x 25 = 50"
+              }
             ],
             "expectedAnswer": "950",
-            "hint": "38÷4=9 rem 2. 9×100=900, 2×25=50. Total=950.",
-            "solution": "38÷4=9 r2. 9×100=900, 2×25=50. Total: 950."
+            "hint": "38/4=9 rem 2. 9x100=900, 2x25=50. Total=950.",
+            "solution": "38/4=9 r2. 9x100=900, 2x25=50. Total: 950.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Fill the x25 steps",
+              "caption": "Write quotient, remainder, product, and final sum in order."
+            }
           },
           {
             "questionId": "VM_G4_L6_H_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "H",
-            "subtopic": "Fill-step: ×25 chain",
-            "skill": "fill-step ×25",
+            "subtopic": "Fill-step: x25 chain",
+            "skill": "fill-step x25",
             "difficulty": "hard",
             "type": "guided",
             "questionType": "fill_step",
-            "questionText": "Find 42 × 25 step by step.",
+            "questionText": "Find 42 x 25 step by step.",
             "steps": [
-              {"label": "Divide 42 by 4: quotient = ?, remainder = ?", "answer": "10 rem 2", "hint": "42÷4=10 remainder 2"},
-              {"label": "Quotient × 100: 10 × 100 = ?", "answer": "1000", "hint": "10 × 100"},
-              {"label": "Remainder × 25: 2 × 25 = ?", "answer": "50", "hint": "2 groups of 25"}
+              {
+                "label": "Divide 42 by 4: quotient = ?, remainder = ?",
+                "answer": "10 rem 2",
+                "hint": "42/4=10 remainder 2"
+              },
+              {
+                "label": "Quotient x 100: 10 x 100 = ?",
+                "answer": "1000",
+                "hint": "10 x 100"
+              },
+              {
+                "label": "Remainder x 25: 2 x 25 = ?",
+                "answer": "50",
+                "hint": "2 groups of 25"
+              }
             ],
             "expectedAnswer": "1050",
-            "hint": "42÷4=10 rem 2. 10×100=1000, 2×25=50. Total=1050.",
-            "solution": "42÷4=10 r2. 10×100=1000, 2×25=50. Total: 1050."
+            "hint": "42/4=10 rem 2. 10x100=1000, 2x25=50. Total=1050.",
+            "solution": "42/4=10 r2. 10x100=1000, 2x25=50. Total: 1050.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Fill the x25 steps",
+              "caption": "Write quotient, remainder, product, and final sum in order."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_H_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "H",
+            "subtopic": "Fill-step: x25 chain",
+            "skill": "fill-step x25",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "fill_step",
+            "questionText": "Find 26 x 25 step by step.",
+            "steps": [
+              {
+                "label": "Divide 26 by 4: quotient = ?, remainder = ?",
+                "answer": "6 rem 2",
+                "hint": "26/4=6 remainder 2"
+              },
+              {
+                "label": "Quotient x 100: 6 x 100 = ?",
+                "answer": "600",
+                "hint": "6 x 100"
+              },
+              {
+                "label": "Remainder x 25: 2 x 25 = ?",
+                "answer": "50",
+                "hint": "2 groups of 25"
+              }
+            ],
+            "expectedAnswer": "650",
+            "hint": "26/4=6 rem 2. 6x100=600, 2x25=50. Total=650.",
+            "solution": "26/4=6 r2. 6x100=600, 2x25=50. Total: 650.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Fill the x25 steps",
+              "caption": "Write quotient, remainder, product, and final sum in order."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_H_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "H",
+            "subtopic": "Fill-step: x25 chain",
+            "skill": "fill-step x25",
+            "difficulty": "hard",
+            "type": "guided",
+            "questionType": "short_answer",
+            "questionText": "30 x 25 = ?",
+            "expectedAnswer": "750",
+            "hint": "30/4=7 rem 2. 7x100=700, 2x25=50. Total=750.",
+            "solution": "30/4=7 r2. 7x100=700, 2x25=50. Total: 750.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "Fill the x25 steps",
+              "caption": "Write quotient, remainder, product, and final sum in order."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "Fill the x25 steps",
+          "caption": "Write quotient, remainder, product, and final sum in order."
+        }
       },
       {
         "exerciseGroup": "I",
-        "subtopic": "Challenge: ×50 and ×125",
-        "missionStepTitle": "Exercise I: ×50 and ×125 challenge",
-        "coachHook": "Boss level! ×50 = halve then ×100. ×125 = divide by 8 then ×1000. The same proportional idea just scaled up!",
-        "boardDemo": "18×50: half 18=9, 9×100=900. 8×125: 8÷8=1, 1×1000=1000.",
-        "readAloudPrompt": "18 × 50 = ?",
-        "tryPrompt": "24 × 50 = ?",
-        "masteryCheck": "16 × 125 = ?",
-        "instantFeedbackWin": "×50 and ×125 — you scaled the shortcut perfectly. Vedic champion!",
-        "instantFeedbackRetry": "For 24×50: half 24=12, 12×100=1200. For 16×125: 16÷8=2, 2×1000=2000.",
-        "reviewPrompt": "Try: 36×50, 8×125, 32×125.",
+        "subtopic": "Challenge: x50 and x125",
+        "missionStepTitle": "Exercise I: x50 and x125 challenge",
+        "coachHook": "Now scale the same proportional idea upward. x50 means halve then x100, and x125 means divide by 8 then x1000.",
+        "boardDemo": "18x50: half 18=9, 9x100=900. 8x125: 8/8=1, 1x1000=1000.",
+        "readAloudPrompt": "18 x 50 = ?",
+        "tryPrompt": "24 x 50 = ?",
+        "masteryCheck": "16 x 125 = ?",
+        "instantFeedbackWin": "Correct. You scaled the same shortcut idea to x50 and x125.",
+        "instantFeedbackRetry": "For 24x50: half 24=12, 12x100=1200. For 16x125: 16/8=2, 2x1000=2000.",
+        "reviewPrompt": "Try: 36x50, 8x125, 32x125.",
         "xpReward": 18,
-        "badgeFocus": "×50 and ×125 Legend",
+        "badgeFocus": "x50 and x125 Legend",
         "exercises": [
           {
             "questionId": "VM_G4_L6_I_Q1",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "I",
-            "subtopic": "Challenge: ×50 and ×125",
+            "subtopic": "Challenge: x50 and x125",
             "skill": "multiply by 50",
             "difficulty": "hard",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "24 × 50 = ?",
-            "options": ["1100", "1150", "1200", "1250"],
+            "questionText": "24 x 50 = ?",
+            "options": [
+              "1100",
+              "1150",
+              "1200",
+              "1250"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "1200",
-            "hint": "Half of 24=12. 12×100=1200.",
-            "solution": "Half 24=12. 12×100=1200. Answer: 1200."
+            "hint": "Half of 24=12. 12x100=1200.",
+            "solution": "Half 24=12. 12x100=1200. Answer: 1200.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x50 and x125 challenge",
+              "caption": "Extend the same base-scaling idea to bigger multipliers."
+            }
           },
           {
             "questionId": "VM_G4_L6_I_Q2",
             "chapterCode": "VM_G4_L6_MULT_BY_5_25",
             "exerciseGroup": "I",
-            "subtopic": "Challenge: ×50 and ×125",
+            "subtopic": "Challenge: x50 and x125",
             "skill": "multiply by 125",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "16 × 125 = ?",
+            "questionType": "short_answer",
+            "questionText": "16 x 125 = ?",
             "expectedAnswer": "2000",
-            "hint": "16÷8=2. 2×1000=2000.",
-            "solution": "16÷8=2. 2×1000=2000. Answer: 2000."
+            "hint": "16/8=2. 2x1000=2000.",
+            "solution": "16/8=2. 2x1000=2000. Answer: 2000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x50 and x125 challenge",
+              "caption": "Extend the same base-scaling idea to bigger multipliers."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_I_Q3",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: x50 and x125",
+            "skill": "multiply by 50",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "36 x 50 = ?",
+            "expectedAnswer": "1800",
+            "hint": "Half of 36=18. 18x100=1800.",
+            "solution": "Half 36=18. 18x100=1800. Answer: 1800.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x50 and x125 challenge",
+              "caption": "Extend the same base-scaling idea to bigger multipliers."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_I_Q4",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: x50 and x125",
+            "skill": "multiply by 125",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "32 x 125 = ?",
+            "options": [
+              "3000",
+              "3500",
+              "4000",
+              "4500"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "4000",
+            "hint": "32/8=4. 4x1000=4000.",
+            "solution": "32/8=4. 4x1000=4000. Answer: 4000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x50 and x125 challenge",
+              "caption": "Extend the same base-scaling idea to bigger multipliers."
+            }
+          },
+          {
+            "questionId": "VM_G4_L6_I_Q5",
+            "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: x50 and x125",
+            "skill": "multiply by 50",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "14 x 50 = ?",
+            "expectedAnswer": "700",
+            "hint": "Half of 14=7. 7x100=700.",
+            "solution": "Half 14=7. 7x100=700. Answer: 700.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_5_25.svg",
+              "title": "x50 and x125 challenge",
+              "caption": "Extend the same base-scaling idea to bigger multipliers."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_5_25.svg",
+          "title": "x50 and x125 challenge",
+          "caption": "Extend the same base-scaling idea to bigger multipliers."
+        }
       }
     ]
   },
@@ -549,52 +1265,82 @@
     {
       "stepId": "VM_G4_L6_A",
       "exerciseGroup": "A",
-      "subtopic": "Multiply by 5 — halve then ×10",
+      "subtopic": "Multiply by 5 - halve then x10",
       "boardMode": "steps",
-      "teacherLine": "5 = 10 ÷ 2! So ×5 means halve the number then put a zero on the end. Two steps, done!",
-      "boardAction": "Show relationship: 5 = 10/2. Chain: 36 → halve → 18 → ×10 → 180.",
-      "checkpointPrompt": "52 × 5 = ?",
-      "microPractice": "Try: 24×5, 36×5, 48×5."
+      "teacherLine": "5 = 10 / 2! So x5 means halve the number then put a zero on the end. Two steps, done!",
+      "boardAction": "Show relationship: 5 = 10/2. Chain: 36 -> halve -> 18 -> x10 -> 180.",
+      "checkpointPrompt": "52 x 5 = ?",
+      "microPractice": "Try: 24x5, 36x5, 48x5.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "x5 with even numbers",
+        "caption": "Half the number first, then multiply by 10."
+      }
     },
     {
       "stepId": "VM_G4_L6_B",
       "exerciseGroup": "B",
       "subtopic": "Multiply by 5 with odd numbers",
       "boardMode": "steps",
-      "teacherLine": "Odd numbers first need ×10, then halving — flip the order and fractions disappear entirely!",
-      "boardAction": "Show: 13 → ×10 → 130 → halve → 65. Compare with 14→halve→7→×10→70.",
-      "checkpointPrompt": "23 × 5 = ?",
-      "microPractice": "Try odd: 11×5, 19×5, 27×5."
+      "teacherLine": "Odd numbers first need x10, then halving - flip the order and fractions disappear entirely!",
+      "boardAction": "Show: 13 -> x10 -> 130 -> halve -> 65. Compare with 14->halve->7->x10->70.",
+      "checkpointPrompt": "23 x 5 = ?",
+      "microPractice": "Try odd: 11x5, 19x5, 27x5.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "x5 with odd numbers",
+        "caption": "Multiply by 10 first, then halve to avoid fractions."
+      }
     },
     {
       "stepId": "VM_G4_L6_C",
       "exerciseGroup": "C",
-      "subtopic": "Multiply by 25 — quarter then ×100",
+      "subtopic": "Multiply by 25 - quarter then x100",
       "boardMode": "steps",
-      "teacherLine": "25 = 100 ÷ 4! So ×25 means divide by 4 then put two zeros. Quarter and ×100 — two easy steps!",
-      "boardAction": "Show: 25=100/4. Chain: 28 → ÷4 → 7 → ×100 → 700.",
-      "checkpointPrompt": "16 × 25 = ?",
-      "microPractice": "Try: 20×25, 32×25, 8×25."
+      "teacherLine": "25 = 100 / 4! So x25 means divide by 4 then put two zeros. Quarter and x100 - two easy steps!",
+      "boardAction": "Show: 25=100/4. Chain: 28 -> /4 -> 7 -> x100 -> 700.",
+      "checkpointPrompt": "16 x 25 = ?",
+      "microPractice": "Try: 20x25, 32x25, 8x25.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "x25 with exact quarters",
+        "caption": "Quarter the number first, then multiply by 100."
+      }
     },
     {
       "stepId": "VM_G4_L6_H",
       "exerciseGroup": "H",
-      "subtopic": "Fill-step: ×25 chain",
+      "subtopic": "Fill-step: x25 chain",
       "boardMode": "steps",
-      "teacherLine": "When there is a remainder, handle it separately! Quotient part ×100, remainder part ×25, then add. Three clear steps!",
-      "boardAction": "Show four labelled boxes for 34×25: [÷4] [×100] [rem×25] [total]. Fill in: 8, 800, 50, 850.",
-      "checkpointPrompt": "Write all steps for 42 × 25.",
-      "microPractice": "Fill steps for 30×25 and 22×25."
+      "teacherLine": "When there is a remainder, handle it separately! Quotient part x100, remainder part x25, then add. Three clear steps!",
+      "boardAction": "Show four labelled boxes for 34x25: [/4] [x100] [remx25] [total]. Fill in: 8, 800, 50, 850.",
+      "checkpointPrompt": "Write all steps for 42 x 25.",
+      "microPractice": "Fill steps for 30x25 and 22x25.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "Fill the x25 steps",
+        "caption": "Write quotient, remainder, product, and final sum in order."
+      }
     },
     {
       "stepId": "VM_G4_L6_I",
       "exerciseGroup": "I",
-      "subtopic": "Challenge: ×50 and ×125",
+      "subtopic": "Challenge: x50 and x125",
       "boardMode": "steps",
-      "teacherLine": "The same proportional idea scales up — ×50 is halve then ×100, ×125 is divide by 8 then ×1000. Proportional power!",
-      "boardAction": "Show two chains side by side: 18→×50 and 8→×125. Label each step with the base division.",
-      "checkpointPrompt": "16 × 125 = ?",
-      "microPractice": "Try: 36×50, 8×125, 32×125."
+      "teacherLine": "The same proportional idea scales up - x50 is halve then x100, x125 is divide by 8 then x1000. Proportional power!",
+      "boardAction": "Show two chains side by side: 18->x50 and 8->x125. Label each step with the base division.",
+      "checkpointPrompt": "16 x 125 = ?",
+      "microPractice": "Try: 36x50, 8x125, 32x125.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "x50 and x125 challenge",
+        "caption": "Extend the same base-scaling idea to bigger multipliers."
+      }
     }
   ],
   "screenplay": [
@@ -602,43 +1348,102 @@
       "beatId": "VM_G4_L6_A_INTRO",
       "stepId": "VM_G4_L6_A",
       "exerciseGroup": "A",
-      "subtopic": "Multiply by 5 — halve then ×10",
+      "subtopic": "Multiply by 5 - halve then x10",
       "sequence": 601,
       "cue": "intro",
       "boardMode": "steps",
-      "teacherLine": "Did you know that 5 is just half of 10? That means ×5 is the same as halving and then multiplying by 10!",
-      "boardAction": "Write on board: 5 = 10 ÷ 2. Show arrow: ×5 → halve → ×10.",
+      "teacherLine": "Did you know that 5 is just half of 10? That means x5 is the same as halving and then multiplying by 10!",
+      "boardAction": "Write on board: 5 = 10 / 2. Show arrow: x5 -> halve -> x10.",
       "checkpointPrompt": "",
       "pauseType": "none",
       "holdSec": 0.4,
       "expectedStudentResponse": "",
-      "fallbackHint": "Think: if 5 is half of 10, then multiplying by 5 is the same as halving and then ×10.",
+      "fallbackHint": "Think: if 5 is half of 10, then multiplying by 5 is the same as halving and then x10.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "x5 with even numbers",
+        "caption": "Half the number first, then multiply by 10."
+      }
+    },
+    {
+      "beatId": "VM_G4_L6_A_DEMO",
+      "stepId": "VM_G4_L6_A",
+      "exerciseGroup": "A",
+      "subtopic": "Multiply by 5 - halve then x10",
+      "sequence": 602,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Watch this! 48 x 5. First: half of 48 = 24. Then: 24 x 10 = 240. That is it! Answer: 240.",
+      "boardAction": "Show 48 x 5 on board. Step 1: halve 48 = 24 (highlight). Step 2: 24 x 10 = 240 (box the answer).",
+      "checkpointPrompt": "Watch how two steps replace the long multiplication.",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "5 = 10/2. So x5 means halve first, then x10.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L6_A_GUIDED",
+      "stepId": "VM_G4_L6_A",
+      "exerciseGroup": "A",
+      "subtopic": "Multiply by 5 - halve then x10",
+      "sequence": 603,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Your turn! Try: 36 x 5. Half of 36 = 18. Now x 10 = ?",
+      "boardAction": "Show 36 x 5. Box the blank: 18 x 10 = ___.",
+      "checkpointPrompt": "What is 18 x 10?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "180",
+      "fallbackHint": "18 x 10 = 180. Just add a zero!",
+      "performanceTag": "core",
+      "svgAnimation": []
     },
     {
       "beatId": "VM_G4_L6_C_EXPLAIN",
       "stepId": "VM_G4_L6_C",
       "exerciseGroup": "C",
-      "subtopic": "Multiply by 25 — quarter then ×100",
+      "subtopic": "Multiply by 25 - quarter then x100",
       "sequence": 701,
       "cue": "explain",
       "boardMode": "steps",
-      "teacherLine": "25 is a quarter of 100! Watch: 28×25 → divide 28 by 4 → 7 → times 100 → 700. Two steps, done!",
-      "boardAction": "Animate: 28 ÷4→ 7 ×100→ 700. Box the final answer.",
-      "checkpointPrompt": "16 × 25 = ?",
+      "teacherLine": "25 is a quarter of 100! Watch: 28x25 -> divide 28 by 4 -> 7 -> times 100 -> 700. Two steps, done!",
+      "boardAction": "Animate: 28 /4-> 7 x100-> 700. Box the final answer.",
+      "checkpointPrompt": "16 x 25 = ?",
       "pauseType": "student_input",
-      "holdSec": 3.0,
+      "holdSec": 3,
       "expectedStudentResponse": "400",
-      "fallbackHint": "16÷4=4. 4×100=400.",
+      "fallbackHint": "16/4=4. 4x100=400.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_mult_by_5_25.svg",
+        "title": "x25 with exact quarters",
+        "caption": "Quarter the number first, then multiply by 100."
+      }
+    }
+  ],
+  "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+  "courseId": "vedic_math_g4",
+  "visualLibrary": [
+    {
+      "visualId": "vm_mult_by_5_25",
+      "kind": "svg",
+      "asset": "vm_mult_by_5_25.svg",
+      "title": "x5 and x25 Shortcuts",
+      "caption": "Use halving for x5 and quartering for x25 with base 10 or 100."
     }
   ]
 }

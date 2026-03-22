@@ -1,0 +1,511 @@
+{
+  "chapterCode": "AR_G4_L6_ANALOGY",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Simple Analogies",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 6: Simple Analogies",
+  "estimatedMinutes": 12,
+  "subtopics": [
+    "Object and its use (pen : writing :: scissors : ?)",
+    "Animal and its young (cat : kitten :: dog : ?)",
+    "Part and whole (wheel : car :: wing : ?)",
+    "Object and where it is found (fish : water :: bird : ?)",
+    "Antonym analogies (hot : cold :: day : ?)",
+    "Number analogies (2 : 4 :: 3 : ?)"
+  ],
+  "learningGoals": [
+    "Understand the 'A is to B as C is to D' relationship.",
+    "Identify the relationship between the first pair and apply it to the second pair.",
+    "Solve analogies from six common relationship types."
+  ],
+  "coreIdeas": [
+    "An analogy says: A is related to B in the same way that C is related to D.",
+    "First, find the relationship between A and B. Then apply that same relationship to C.",
+    "Common relationships: use, young one, part-whole, home/habitat, opposite, number rule."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Pen : Writing :: Scissors : ?",
+      "solution": "A pen is used for writing. In the same way, scissors are used for cutting. Answer: Cutting.",
+      "concept": "Object and its use"
+    },
+    {
+      "id": "WE2",
+      "problem": "Cat : Kitten :: Dog : ?",
+      "solution": "A kitten is the young one of a cat. In the same way, a puppy is the young one of a dog. Answer: Puppy.",
+      "concept": "Animal and its young one"
+    },
+    {
+      "id": "WE3",
+      "problem": "2 : 4 :: 5 : ?",
+      "solution": "2 doubled = 4. In the same way, 5 doubled = 10. Answer: 10.",
+      "concept": "Number analogy — doubling"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach opens Simple Analogies with: 'Eye is to See as Ear is to...?' — pausing for the learner to complete it. Then Spark explains the A:B::C:D format and the six relationship types using everyday examples that 9-year-olds recognise.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers in Groups A–B, spell out the relationship in a sentence before trying the next question."
+    },
+    "mission": {
+      "missionTitle": "Complete the Relationship",
+      "missionPromise": "By the end, you will solve any simple analogy by spotting the relationship and applying it — just like completing a sentence!",
+      "successCelebration": "Award a badge pulse and coach cheer after every correct group. At lesson end, show 'Analogy Ace' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a relatable pair from daily life.",
+      "Coach says the relationship aloud as a sentence: 'A is the ___ of B'.",
+      "Coach reads the practice analogy.",
+      "Student completes the analogy with a word.",
+      "Instant feedback repeats the relationship sentence to reinforce.",
+      "Review question confirms mastery before next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one badge tied to the analogy relationship type.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach by writing the relationship as a full sentence.",
+      "practiceStyle": "Offer a simpler pair with very familiar objects.",
+      "masteryRule": "Advance only after a correct answer with the relationship stated.",
+      "revisitRule": "Any group with two errors returns at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L6_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, smart thinker! Welcome to Simple Analogies — where you find the hidden connection between words! An analogy is like a matching puzzle. You are told: 'A is to B' — that means A and B are related in some way. Then you are asked: 'C is to ___' — you must find D so that C and D share the SAME type of relationship as A and B. Today we learn six fun relationships: use, young one, part-whole, home, opposite, and number. Let us go!",
+        "boardAction": "Write 'A : B :: C : D' on the board. Below, list the 6 relationship types with one example each.",
+        "checkpointPrompt": "Warm-up analogy: Eye : See :: Ear : ___?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Hear — eyes are used to see, ears are used to hear.",
+        "fallbackHint": "Eyes help you SEE. What do ears help you do? They help you HEAR! Same relationship: organ : its action.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l6_title",
+            "x": "40",
+            "y": "30",
+            "text": "Simple Analogies — Chapter 6",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l6_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_format",
+            "x": "60",
+            "y": "75",
+            "text": "A : B  ::  C : D   (A relates to B the same way C relates to D)",
+            "color": "#1e40af",
+            "size": 12,
+            "delaySec": 0.8,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l6_r1",
+            "x": "60",
+            "y": "105",
+            "text": "1. Use        Pen : Write :: Knife : Cut",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 1.2,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_r2",
+            "x": "60",
+            "y": "125",
+            "text": "2. Young one  Cat : Kitten :: Dog : Puppy",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_r3",
+            "x": "60",
+            "y": "145",
+            "text": "3. Part-whole  Wheel : Car :: Wing : Bird",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.8,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_r4",
+            "x": "60",
+            "y": "165",
+            "text": "4. Home        Fish : Water :: Bird : Sky",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Simple Analogies",
+          "caption": "Screenplay beat for Simple Analogies."
+        }
+      },
+      {
+        "beatId": "AR_G4_L6_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you how I solve an analogy! Question: Cow : Calf :: Horse : ??? Step 1: I say the relationship aloud — 'Calf is the young one of a Cow.' Step 2: Apply the same relationship to Horse — 'The young one of a Horse is a...' FOAL! Answer: Foal. Always say the relationship as a sentence first — that is the secret weapon!",
+        "boardAction": "Write 'Cow : Calf :: Horse : ?' in the centre. Below: 'Calf = young one of Cow' (circle calf). Then write 'Young one of Horse = FOAL' and circle FOAL.",
+        "checkpointPrompt": "Your turn: Teacher : School :: Doctor : ___?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Hospital — a teacher works in a school, a doctor works in a hospital.",
+        "fallbackHint": "A teacher works IN a school. Where does a doctor work? In a hospital! Same relationship: person : their workplace.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_q",
+            "x": "60",
+            "y": "55",
+            "text": "Cow : Calf  ::  Horse : ?",
+            "color": "#1e40af",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_rel",
+            "x": "60",
+            "y": "90",
+            "text": "Relationship: Calf = young one of Cow",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 0.7,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_ans",
+            "x": "60",
+            "y": "125",
+            "text": "Young one of Horse = FOAL",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Simple Analogies",
+          "caption": "Screenplay beat for Simple Analogies."
+        }
+      },
+      {
+        "beatId": "AR_G4_L6_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have the secret weapon — always say the relationship as a sentence first! Work through Groups A to F and complete every analogy. Remember the six types: use, young one, part-whole, home, opposite, number. Let's go!",
+        "boardAction": "Write the 6 relationship types as a reference: 1.Use 2.Young one 3.Part-whole 4.Home/Habitat 5.Opposite 6.Number rule.",
+        "checkpointPrompt": "Quick check: what are the two words that go in an analogy format? (A : B :: ___ : ___)",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "C and D — C is to D in the same way A is to B.",
+        "fallbackHint": "The format is A : B :: C : D. You are given A, B, and C. You must find D so the relationship C:D matches the relationship A:B.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "6 Analogy Relationship Types",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_types",
+            "x": "60",
+            "y": "70",
+            "text": "1.Use  2.Young one  3.Part-whole  4.Home  5.Opposite  6.Number",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.6,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "guided_tip",
+            "x": "60",
+            "y": "105",
+            "text": "Tip: Say the relationship as a SENTENCE first!",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.2,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Simple Analogies",
+          "caption": "Screenplay beat for Simple Analogies."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Object and its use",
+      "missionStepTitle": "Exercise A: What Is It Used For?",
+      "coachHook": "Let's figure this out together! Find what the first object is USED FOR — then find the same action for the second object!",
+      "boardDemo": {
+        "title": "Use Analogy",
+        "steps": [
+          "Broom : Sweep :: Eraser : ?",
+          "Relationship: a broom is used to SWEEP",
+          "Apply: an eraser is used to... ERASE",
+          "Answer: Erase"
+        ],
+        "teacherLine": "Say it as a sentence: 'A broom is used for sweeping. An eraser is used for ___?' Fill in the blank — that is your answer!"
+      },
+      "readAloudPrompt": "Pen : Write :: Knife : ___? What do you use a knife for?",
+      "tryPrompt": "Now you try: Camera : Photograph :: Broom : ___?",
+      "masteryCheck": "Sweep",
+      "instantFeedbackWin": "Yes! A camera is used to take photographs. A broom is used to sweep. Same relationship!",
+      "instantFeedbackRetry": "Here's a trick: say it as a sentence. 'A camera is used for photographing.' Now say: 'A broom is used for ___.' That blank is your answer: sweeping/sweep.",
+      "reviewPrompt": "Quick: Needle : Sew :: Scissors : ___?",
+      "xpReward": 10,
+      "badgeFocus": "Use Connector",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Simple Analogies",
+        "caption": "Group A for Simple Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Animal and its young one",
+      "missionStepTitle": "Exercise B: Parent and Baby Animals",
+      "coachHook": "Let's figure this out together! Every animal parent has a special name for its baby. Match the right baby to the right parent!",
+      "boardDemo": {
+        "title": "Animal Young Ones",
+        "steps": [
+          "Hen : Chick :: Cow : ?",
+          "Relationship: Chick is the young one of a Hen",
+          "Apply: the young one of a Cow is a... CALF",
+          "Answer: Calf"
+        ],
+        "teacherLine": "Learn common animal babies: Hen→Chick, Cow→Calf, Dog→Puppy, Cat→Kitten, Horse→Foal, Lion→Cub, Frog→Tadpole."
+      },
+      "readAloudPrompt": "Cat : Kitten :: Dog : ___? What is the young one of a dog called?",
+      "tryPrompt": "Your turn: Lion : Cub :: Frog : ___?",
+      "masteryCheck": "Tadpole",
+      "instantFeedbackWin": "Wonderful! A cub is the young of a lion. A tadpole is the young of a frog. You know your animal babies!",
+      "instantFeedbackRetry": "Here's a trick: a tiny frog that lives in water before it grows legs is called a TADPOLE. That is the young one of a frog — just like a cub is the young one of a lion.",
+      "reviewPrompt": "Quick: Horse : Foal :: Hen : ___?",
+      "xpReward": 10,
+      "badgeFocus": "Animal Family Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Simple Analogies",
+        "caption": "Group B for Simple Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Part and whole",
+      "missionStepTitle": "Exercise C: Part of the Whole",
+      "coachHook": "Let's figure this out together! The first word is a PART of the second word. Find what the third word is a part of!",
+      "boardDemo": {
+        "title": "Part-Whole Analogy",
+        "steps": [
+          "Wheel : Car :: Wing : ?",
+          "Relationship: a wheel is a PART of a car",
+          "Apply: a wing is a part of a... BIRD (or Aeroplane)",
+          "Answer: Bird (or Aeroplane)"
+        ],
+        "teacherLine": "Ask: 'A wheel is a part of what?' Then ask: 'A wing is a part of what?' Make sure the relationship direction is the same in both pairs."
+      },
+      "readAloudPrompt": "Page : Book :: Key : ___? A page is part of a book. A key is part of what?",
+      "tryPrompt": "Your turn: Finger : Hand :: Toe : ___?",
+      "masteryCheck": "Foot",
+      "instantFeedbackWin": "Perfect! A finger is part of a hand. A toe is part of a foot. Brilliant part-whole thinking!",
+      "instantFeedbackRetry": "Here's a trick: 'A finger is part of a ___' = hand. Same relationship: 'A toe is part of a ___' = foot. Think of your own body!",
+      "reviewPrompt": "Quick: Petal : Flower :: Leaf : ___?",
+      "xpReward": 12,
+      "badgeFocus": "Part-Whole Matcher",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Simple Analogies",
+        "caption": "Group C for Simple Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Object and where it is found (home/habitat)",
+      "missionStepTitle": "Exercise D: Where Does It Live?",
+      "coachHook": "Let's figure this out together! Every animal or thing has a place where it belongs. Find the home for the second word just like you found it for the first!",
+      "boardDemo": {
+        "title": "Home/Habitat Analogy",
+        "steps": [
+          "Fish : Water :: Bird : ?",
+          "Relationship: a fish lives in WATER",
+          "Apply: a bird lives in... SKY (or tree/nest)",
+          "Answer: Sky"
+        ],
+        "teacherLine": "Think of where each living thing naturally lives. Fish→water, Bird→sky, Lion→jungle, Bee→hive, Rabbit→burrow. Each place is the 'home' in the analogy!"
+      },
+      "readAloudPrompt": "Lion : Jungle :: Bee : ___? Where does a bee live?",
+      "tryPrompt": "Your turn: Rabbit : Burrow :: Ant : ___?",
+      "masteryCheck": "Anthill",
+      "instantFeedbackWin": "Yes! A rabbit lives in a burrow. An ant lives in an anthill. You know animal homes perfectly!",
+      "instantFeedbackRetry": "Here's a trick: ants build tunnels underground that form a hill shape — that is their home, called an anthill. Just like a rabbit's home is a burrow.",
+      "reviewPrompt": "Quick: Bear : Cave :: Bird : ___?",
+      "xpReward": 12,
+      "badgeFocus": "Habitat Mapper",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Simple Analogies",
+        "caption": "Group D for Simple Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Antonym analogies",
+      "missionStepTitle": "Exercise E: Opposites Analogy",
+      "coachHook": "Let's figure this out together! Sometimes the relationship is OPPOSITES. Hot is the opposite of Cold — find the opposite of the second word!",
+      "boardDemo": {
+        "title": "Opposite Analogy",
+        "steps": [
+          "Hot : Cold :: Day : ?",
+          "Relationship: Cold is the OPPOSITE of Hot",
+          "Apply: the opposite of Day is... NIGHT",
+          "Answer: Night"
+        ],
+        "teacherLine": "Opposite analogies are the easiest! Just find the opposite word. Hot-Cold, Day-Night, Big-Small, Fast-Slow, Up-Down, Happy-Sad."
+      },
+      "readAloudPrompt": "Fast : Slow :: Big : ___? What is the opposite of Big?",
+      "tryPrompt": "Your turn: Happy : Sad :: Open : ___?",
+      "masteryCheck": "Closed",
+      "instantFeedbackWin": "Exactly! Sad is opposite to Happy. Closed is opposite to Open. You know your opposites!",
+      "instantFeedbackRetry": "Here's a trick: when a door is not OPEN, what is it? CLOSED. So the opposite of Open is Closed — just like the opposite of Happy is Sad.",
+      "reviewPrompt": "Quick: Light : Dark :: Tall : ___?",
+      "xpReward": 12,
+      "badgeFocus": "Opposite Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Simple Analogies",
+        "caption": "Group E for Simple Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Number analogies",
+      "missionStepTitle": "Exercise F: Number Relationships",
+      "coachHook": "Let's figure this out together! The numbers are linked by a maths rule — double, half, add 10, square. Find the rule in the first pair and apply it to the second!",
+      "boardDemo": {
+        "title": "Number Analogy — Find the Maths Rule",
+        "steps": [
+          "3 : 9 :: 4 : ?",
+          "Relationship: 3 × 3 = 9 (the number is squared!)",
+          "Apply: 4 × 4 = 16",
+          "Answer: 16"
+        ],
+        "teacherLine": "Always find the maths operation between the first pair. Is it ×2 (double)? ÷2 (half)? +10? Square (×itself)? Confirm with the numbers, then apply to the third number."
+      },
+      "readAloudPrompt": "2 : 4 :: 5 : ___? What operation turns 2 into 4? Apply the same to 5.",
+      "tryPrompt": "Your turn: 10 : 5 :: 20 : ___? Find the rule and complete the analogy!",
+      "masteryCheck": "10",
+      "instantFeedbackWin": "Brilliant! 10 ÷ 2 = 5. Same rule: 20 ÷ 2 = 10. The rule is halving. Number analogy mastered!",
+      "instantFeedbackRetry": "Here's a trick: 10 to 5 is getting smaller. 10 ÷ 2 = 5 — the rule is divide by 2 (halve). Apply the same: 20 ÷ 2 = 10.",
+      "reviewPrompt": "Final: 3 : 6 :: 7 : ___? (What operation connects 3 and 6?)",
+      "xpReward": 14,
+      "badgeFocus": "Analogy Ace",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Simple Analogies",
+        "caption": "Group F for Simple Analogies."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "analogy_frame",
+      "kind": "svg",
+      "asset": "analogy_frame.svg",
+      "title": "Simple Analogies",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

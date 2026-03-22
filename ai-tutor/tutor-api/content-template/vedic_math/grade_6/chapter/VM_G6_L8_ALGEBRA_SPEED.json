@@ -155,12 +155,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For which equation does subtracting x from both sides immediately give the answer?",
-            "options": ["5x + 2 = 3x + 8", "x + 7 = x + 7", "2x + 3 = 2x + 9", "3x = 3x + 1"],
+            "options": [
+              "5x + 2 = 3x + 8",
+              "x + 7 = x + 7",
+              "2x + 3 = 2x + 9",
+              "3x = 3x + 1"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "5x + 2 = 3x + 8",
             "hint": "You need different x coefficients on both sides to isolate x.",
             "solution": "5x+2=3x+8: subtract 3x → 2x+2=8 → 2x=6 → x=3. This gives a unique solution.",
-            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing 5x+2 on left and 3x+8 on right" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group A for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_A_02",
@@ -174,9 +184,21 @@
             "questionText": "What does Sunyam Samyasamuccaye mean in simple terms?",
             "expectedAnswer": "When the total on both sides is equal (or sums to zero), the unknown cancels out",
             "hint": "Sunyam = zero, Samyasamuccaye = same total/combination.",
-            "solution": "The sutra states: when the sum of all terms on both sides equals zero, we can directly find the unknown."
+            "solution": "The sutra states: when the sum of all terms on both sides equals zero, we can directly find the unknown.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group A for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group A for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -214,7 +236,13 @@
             "questionText": "Solve by inspection: 3x + 7 = x + 15",
             "expectedAnswer": "4",
             "hint": "Move x terms left, constants right: 2x = 8.",
-            "solution": "3x−x = 15−7 → 2x=8 → x=4. Check: 19=19 ✓."
+            "solution": "3x−x = 15−7 → 2x=8 → x=4. Check: 19=19 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group B for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_B_02",
@@ -226,13 +254,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 2x + 6 = x + 9. What is x?",
-            "options": ["2", "3", "4", "5"],
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "Move x to left: 2x − x = 9 − 6.",
-            "solution": "x = 9 − 6 = 3. Check: 2(3)+6=12=3+9 ✓."
+            "solution": "x = 9 − 6 = 3. Check: 2(3)+6=12=3+9 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group B for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group B for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -271,7 +316,13 @@
             "questionText": "Solve: 4x − 3 = 2x + 5",
             "expectedAnswer": "4",
             "hint": "Move 2x to left: 2x−3=5. Move −3 to right: 2x=8.",
-            "solution": "4x−2x=5+3 → 2x=8 → x=4. Check: 4(4)−3=13=2(4)+5 ✓."
+            "solution": "4x−2x=5+3 → 2x=8 → x=4. Check: 4(4)−3=13=2(4)+5 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group C for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_C_02",
@@ -283,14 +334,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 5x − 4 = 2x + 11",
-            "options": ["3", "4", "5", "6"],
+            "options": [
+              "3",
+              "4",
+              "5",
+              "6"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "5",
             "hint": "Collect x terms: 5x−2x = 11+4 → 3x=15.",
             "solution": "3x=15 → x=5. Check: 5(5)−4=21=2(5)+11 ✓.",
-            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing transposition of 5x−4 = 2x+11" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group C for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group C for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -327,11 +394,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "How many solutions does 4x + 5 = 4x + 9 have?",
-            "options": ["One solution", "Two solutions", "No solution", "Infinite solutions"],
+            "options": [
+              "One solution",
+              "Two solutions",
+              "No solution",
+              "Infinite solutions"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "No solution",
             "hint": "Subtract 4x from both sides and see what remains.",
-            "solution": "4x+5=4x+9 → 5=9. This is false. No solution."
+            "solution": "4x+5=4x+9 → 5=9. This is false. No solution.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group D for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_D_02",
@@ -345,9 +423,21 @@
             "questionText": "Solve: 6x + 4 = 4x + 12",
             "expectedAnswer": "4",
             "hint": "Coefficients differ (6 vs 4). Move x terms: 2x = 8.",
-            "solution": "6x−4x=12−4 → 2x=8 → x=4. Check: 6(4)+4=28=4(4)+12 ✓."
+            "solution": "6x−4x=12−4 → 2x=8 → x=4. Check: 6(4)+4=28=4(4)+12 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group D for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group D for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -382,11 +472,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 7x + 1 = 4x + 13",
-            "options": ["3", "4", "5", "6"],
+            "options": [
+              "3",
+              "4",
+              "5",
+              "6"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "4",
             "hint": "3x = 12. Divide both sides by 3.",
-            "solution": "7x−4x=13−1 → 3x=12 → x=4."
+            "solution": "7x−4x=13−1 → 3x=12 → x=4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group E for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_E_02",
@@ -398,13 +499,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the solution to 5x − 10 = 3x + 2?",
-            "options": ["5", "6", "7", "8"],
+            "options": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "6",
             "hint": "5x−3x = 2+10 → 2x=12.",
-            "solution": "2x=12 → x=6. Check: 5(6)−10=20=3(6)+2 ✓."
+            "solution": "2x=12 → x=6. Check: 5(6)−10=20=3(6)+2 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group E for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group E for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -442,14 +560,39 @@
             "questionType": "fill_step",
             "questionText": "Solve 3(x+2) = 2(x+5) step by step.",
             "steps": [
-              { "label": "Expand left side: 3(x+2)", "answer": "3x + 6", "hint": "Multiply 3 by each term inside the bracket" },
-              { "label": "Expand right side: 2(x+5)", "answer": "2x + 10", "hint": "Multiply 2 by each term inside the bracket" },
-              { "label": "Move x terms to left (subtract 2x)", "answer": "x + 6 = 10", "hint": "3x − 2x = x remains on the left" },
-              { "label": "Move constant to right (subtract 6)", "answer": "x = 4", "hint": "10 − 6 = 4" },
-              { "label": "Verify: 3(4+2) = 2(4+5)", "answer": "18 = 18", "hint": "3×6=18 and 2×9=18" }
+              {
+                "label": "Expand left side: 3(x+2)",
+                "answer": "3x + 6",
+                "hint": "Multiply 3 by each term inside the bracket"
+              },
+              {
+                "label": "Expand right side: 2(x+5)",
+                "answer": "2x + 10",
+                "hint": "Multiply 2 by each term inside the bracket"
+              },
+              {
+                "label": "Move x terms to left (subtract 2x)",
+                "answer": "x + 6 = 10",
+                "hint": "3x − 2x = x remains on the left"
+              },
+              {
+                "label": "Move constant to right (subtract 6)",
+                "answer": "x = 4",
+                "hint": "10 − 6 = 4"
+              },
+              {
+                "label": "Verify: 3(4+2) = 2(4+5)",
+                "answer": "18 = 18",
+                "hint": "3×6=18 and 2×9=18"
+              }
             ],
             "expectedAnswer": "4",
-            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing expansion and simplification of 3(x+2) = 2(x+5)" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group F for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_F_02",
@@ -463,9 +606,21 @@
             "questionText": "Solve: 4(x+1) = 3(x+3)",
             "expectedAnswer": "5",
             "hint": "Expand: 4x+4=3x+9. Move x terms left.",
-            "solution": "4x+4=3x+9 → x=5. Check: 4(6)=24=3(8) ✓."
+            "solution": "4x+4=3x+9 → x=5. Check: 4(6)=24=3(8) ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group F for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group F for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -503,7 +658,13 @@
             "questionText": "Rohan has 3 times as many marbles as Sita. Together they have 40. Write an equation and solve for Sita's count.",
             "expectedAnswer": "10",
             "hint": "Let Sita = x, Rohan = 3x. Sum = 40.",
-            "solution": "x + 3x = 40 → 4x = 40 → x = 10. Sita has 10, Rohan has 30."
+            "solution": "x + 3x = 40 → 4x = 40 → x = 10. Sita has 10, Rohan has 30.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group G for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_G_02",
@@ -515,14 +676,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A number increased by 7 equals twice the number minus 3. What is the number?",
-            "options": ["8", "10", "12", "14"],
+            "options": [
+              "8",
+              "10",
+              "12",
+              "14"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "10",
             "hint": "Let the number = x. Equation: x + 7 = 2x − 3.",
             "solution": "x+7=2x−3 → 7+3=2x−x → x=10. Check: 10+7=17=2(10)−3 ✓.",
-            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Word problem translated to balance scale: x+7 = 2x−3" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group G for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group G for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -557,11 +734,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 3(x+1) = 2(x+4)",
-            "options": ["4", "5", "6", "7"],
+            "options": [
+              "4",
+              "5",
+              "6",
+              "7"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "5",
             "hint": "Expand: 3x+3=2x+8. Collect: x=5.",
-            "solution": "3x+3=2x+8 → x=5. Check: 3(6)=18=2(9) ✓."
+            "solution": "3x+3=2x+8 → x=5. Check: 3(6)=18=2(9) ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group H for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_H_02",
@@ -575,9 +763,21 @@
             "questionText": "Solve: x + 20 = 3x + 4",
             "expectedAnswer": "8",
             "hint": "Move x to right or 3x to left: 20−4 = 3x−x → 16=2x.",
-            "solution": "16=2x → x=8. Check: 8+20=28=3(8)+4 ✓."
+            "solution": "16=2x → x=8. Check: 8+20=28=3(8)+4 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group H for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group H for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -617,7 +817,12 @@
             "expectedAnswer": "8",
             "hint": "Move 3 to the right, then multiply both sides by 2.",
             "solution": "x/2 = 4 → x = 8. Check: 8/2+3=7 ✓.",
-            "visual": { "type": "svg", "asset": "vm_algebra_balance", "caption": "Balance scale showing x/2 + 3 = 7 with fraction clearing step" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group I for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_I_02",
@@ -629,11 +834,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: x/3 + 5 = 9",
-            "options": ["10", "12", "15", "18"],
+            "options": [
+              "10",
+              "12",
+              "15",
+              "18"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "12",
             "hint": "x/3 = 4. Multiply both sides by 3.",
-            "solution": "x/3 = 9−5 = 4 → x = 12. Check: 12/3+5=9 ✓."
+            "solution": "x/3 = 9−5 = 4 → x = 12. Check: 12/3+5=9 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group I for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           },
           {
             "questionId": "L8_I_03",
@@ -646,15 +862,50 @@
             "questionType": "fill_step",
             "questionText": "Solve x/4 + 2 = 6 step by step.",
             "steps": [
-              { "label": "Move constant 2 to the right side", "answer": "x/4 = 4", "hint": "6 − 2 = 4" },
-              { "label": "Multiply both sides by 4", "answer": "x = 16", "hint": "4 × 4 = 16" },
-              { "label": "Verify: 16/4 + 2", "answer": "6", "hint": "4 + 2 = 6 ✓" }
+              {
+                "label": "Move constant 2 to the right side",
+                "answer": "x/4 = 4",
+                "hint": "6 − 2 = 4"
+              },
+              {
+                "label": "Multiply both sides by 4",
+                "answer": "x = 16",
+                "hint": "4 × 4 = 16"
+              },
+              {
+                "label": "Verify: 16/4 + 2",
+                "answer": "6",
+                "hint": "4 + 2 = 6 ✓"
+              }
             ],
             "expectedAnswer": "16",
-            "solution": "x/4=4 → x=16. Check: 16/4+2=6 ✓."
+            "solution": "x/4=4 → x=16. Check: 16/4+2=6 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+              "caption": "Group I for Algebra by Inspection — Sunyam Samyasamuccaye."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "caption": "Group I for Algebra by Inspection — Sunyam Samyasamuccaye."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G6_L8_ALGEBRA_SPEED",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "linear_eq_sutra",
+      "kind": "svg",
+      "asset": "linear_eq_sutra.svg",
+      "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

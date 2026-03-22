@@ -71,15 +71,28 @@
     }
   ],
   "starterPractice": [
-    { "q": "What is the deviation (deficit) of 9998 from 10000?", "a": "-2" },
-    { "q": "In Nikhilam near 10000, how many digits does the right part have?", "a": "4 digits" },
-    { "q": "State the Nikhilam rule for the left part.", "a": "Add one number to the deviation of the other" }
+    {
+      "q": "What is the deviation (deficit) of 9998 from 10000?",
+      "a": "-2"
+    },
+    {
+      "q": "In Nikhilam near 10000, how many digits does the right part have?",
+      "a": "4 digits"
+    },
+    {
+      "q": "State the Nikhilam rule for the left part.",
+      "a": "Add one number to the deviation of the other"
+    }
   ],
   "duolingoLessonArc": {
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "welcomeMessage": "Near 10000 — tiny deviations do all the work. Nikhilam goes large!",
-      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "goalOptions": [
+        "School math",
+        "Competitive exams",
+        "Mental speed"
+      ],
       "avatarMood": "focused"
     },
     "mission": "Multiply 4-digit numbers near 10000 using signed deviations — both below, both above, and mixed cases.",
@@ -94,7 +107,11 @@
     "rewardLoop": {
       "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
       "streakBonus": "5 XP for 3 consecutive correct answers",
-      "badges": ["Deviation Finder", "Nikhilam Near", "Base Master"]
+      "badges": [
+        "Deviation Finder",
+        "Nikhilam Near",
+        "Base Master"
+      ]
     },
     "reviewLoop": {
       "trigger": "2 wrong answers in a group",
@@ -134,7 +151,12 @@
             "expectedAnswer": "-3, +3, -10",
             "hint": "Deviation = number - 10000.",
             "solution": "9997-10000=-3. 10003-10000=+3. 9990-10000=-10.",
-            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Number line showing deviations from base 10000" }
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group A for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_A2",
@@ -146,13 +168,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the deviation of 10007 from base 10000?",
-            "options": ["+7", "-7", "+3", "-3"],
+            "options": [
+              "+7",
+              "-7",
+              "+3",
+              "-3"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "+7",
             "hint": "10007-10000=+7 (above base).",
-            "solution": "10007 is 7 above 10000. Deviation = +7."
+            "solution": "10007 is 7 above 10000. Deviation = +7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group A for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group A for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -181,7 +220,13 @@
             "questionText": "Compute 9997×9994 using Nikhilam near base 10000.",
             "expectedAnswer": "99910018",
             "hint": "d₁=-3, d₂=-6. Left=9997-6=9991. Right=3×6=18→0018.",
-            "solution": "Left=9991. Right=0018. Answer=99910018."
+            "solution": "Left=9991. Right=0018. Answer=99910018.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group B for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_B2",
@@ -195,9 +240,21 @@
             "questionText": "Compute 9996×9993 using Nikhilam near base 10000.",
             "expectedAnswer": "99890028",
             "hint": "d₁=-4, d₂=-7. Left=9996-7=9989. Right=4×7=28→0028.",
-            "solution": "Left=9989. Right=0028. Answer=99890028."
+            "solution": "Left=9989. Right=0028. Answer=99890028.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group B for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group B for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -227,7 +284,12 @@
             "expectedAnswer": "100070012",
             "hint": "d₁=+3, d₂=+4. Left=10003+4=10007. Right=3×4=12→0012.",
             "solution": "Left=10007. Right=0012. Answer=100070012.",
-            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Both-above case: deviations +3 and +4 from 10000" }
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group C for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_C2",
@@ -239,13 +301,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Compute 10002×10003 near base 10000.",
-            "options": ["100050006", "100060006", "100050012", "100040006"],
+            "options": [
+              "100050006",
+              "100060006",
+              "100050012",
+              "100040006"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "100050006",
             "hint": "d₁=+2, d₂=+3. Left=10002+3=10005. Right=2×3=6→0006.",
-            "solution": "Left=10005. Right=0006. Answer=100050006."
+            "solution": "Left=10005. Right=0006. Answer=100050006.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group C for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group C for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -274,7 +353,13 @@
             "questionText": "Compute 10002×9998 using Nikhilam near base 10000.",
             "expectedAnswer": "99999996",
             "hint": "Use difference of squares: (10000+2)(10000-2) = 10000²-4.",
-            "solution": "100000000-4=99999996."
+            "solution": "100000000-4=99999996.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group D for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_D2",
@@ -286,13 +371,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Compute 10005×9995 near base 10000.",
-            "options": ["99999975", "100000025", "99999995", "99999950"],
+            "options": [
+              "99999975",
+              "100000025",
+              "99999995",
+              "99999950"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "99999975",
             "hint": "(10000+5)(10000-5) = 10000²-25 = 100000000-25.",
-            "solution": "10000²-5²=100000000-25=99999975."
+            "solution": "10000²-5²=100000000-25=99999975.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group D for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group D for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -319,12 +421,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Compute 9993×9997 near base 10000.",
-            "options": ["99900021", "99900012", "99910021", "99890021"],
+            "options": [
+              "99900021",
+              "99900012",
+              "99910021",
+              "99890021"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "99900021",
             "hint": "d₁=-7, d₂=-3. Left=9993-3=9990. Right=7×3=21→0021.",
             "solution": "Left=9990. Right=0021. Answer=99900021.",
-            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Deviation diagram for 9993 and 9997" }
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group E for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_E2",
@@ -336,13 +448,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Compute 10004×10002 near base 10000.",
-            "options": ["100060008", "100040008", "100060012", "100050008"],
+            "options": [
+              "100060008",
+              "100040008",
+              "100060012",
+              "100050008"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "100060008",
             "hint": "d₁=+4, d₂=+2. Left=10004+2=10006. Right=4×2=8→0008.",
-            "solution": "Left=10006. Right=0008. Answer=100060008."
+            "solution": "Left=10006. Right=0008. Answer=100060008.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group E for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group E for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -370,14 +499,42 @@
             "questionType": "fill_step",
             "questionText": "Compute 9993×9997 near base 10000. Fill each step.",
             "steps": [
-              { "label": "Deviations d₁ and d₂ (number - 10000)", "answer": "d₁=-7, d₂=-3", "hint": "9993-10000=-7. 9997-10000=-3." },
-              { "label": "Left part (9993 + d₂ OR 9997 + d₁)", "answer": "9990", "hint": "9993+(-3)=9990 or 9997+(-7)=9990." },
-              { "label": "Right part (d₁×d₂)", "answer": "21", "hint": "(-7)×(-3)=21 (positive)." },
-              { "label": "Right part padded to 4 digits", "answer": "0021", "hint": "21 has 2 digits. Pad to 0021." }
+              {
+                "label": "Deviations d₁ and d₂ (number - 10000)",
+                "answer": "d₁=-7, d₂=-3",
+                "hint": "9993-10000=-7. 9997-10000=-3."
+              },
+              {
+                "label": "Left part (9993 + d₂ OR 9997 + d₁)",
+                "answer": "9990",
+                "hint": "9993+(-3)=9990 or 9997+(-7)=9990."
+              },
+              {
+                "label": "Right part (d₁×d₂)",
+                "answer": "21",
+                "hint": "(-7)×(-3)=21 (positive)."
+              },
+              {
+                "label": "Right part padded to 4 digits",
+                "answer": "0021",
+                "hint": "21 has 2 digits. Pad to 0021."
+              }
             ],
-            "expectedAnswer": "99900021"
+            "expectedAnswer": "99900021",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group F for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group F for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -407,7 +564,12 @@
             "expectedAnswer": "995006",
             "hint": "d₁=-2, d₂=-3. Left=998-3=995. Right=2×3=6→006 (3 digits for base 1000).",
             "solution": "Left=995. Right=006. Answer=995006.",
-            "visual": { "type": "svg", "asset": "vm_nikhilam_base10000", "caption": "Same Nikhilam method applied to base 1000" }
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group G for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_G2",
@@ -419,13 +581,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For Nikhilam near base 100, how many digits should the right part have?",
-            "options": ["2", "3", "4", "1"],
+            "options": [
+              "2",
+              "3",
+              "4",
+              "1"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2",
             "hint": "Base 100 = 10², so right part has 2 digits.",
-            "solution": "Base 100 has 2 zeros → right part is 2 digits."
+            "solution": "Base 100 has 2 zeros → right part is 2 digits.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group G for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group G for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -454,7 +633,13 @@
             "questionText": "Compute 9995×9998 near base 10000.",
             "expectedAnswer": "99930010",
             "hint": "d₁=-5, d₂=-2. Left=9995-2=9993. Right=5×2=10→0010.",
-            "solution": "Left=9993. Right=0010. Answer=99930010."
+            "solution": "Left=9993. Right=0010. Answer=99930010.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group H for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_H2",
@@ -466,13 +651,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Compute 10006×10003 near base 10000.",
-            "options": ["100090018", "100060018", "100090012", "100030018"],
+            "options": [
+              "100090018",
+              "100060018",
+              "100090012",
+              "100030018"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "100090018",
             "hint": "d₁=+6, d₂=+3. Left=10006+3=10009. Right=6×3=18→0018.",
-            "solution": "Left=10009. Right=0018. Answer=100090018."
+            "solution": "Left=10009. Right=0018. Answer=100090018.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group H for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group H for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -500,13 +702,39 @@
             "questionType": "fill_step",
             "questionText": "Compute 4998×4999 near base 5000. Formula: product = (left part)×5000 + (d₁×d₂).",
             "steps": [
-              { "label": "Deviation d₁ for 4998", "answer": "-2", "hint": "4998-5000=-2." },
-              { "label": "Deviation d₂ for 4999", "answer": "-1", "hint": "4999-5000=-1." },
-              { "label": "Left part (4998+d₂ = 4998-1)", "answer": "4997", "hint": "4998-1=4997." },
-              { "label": "Right part (d₁×d₂)", "answer": "2", "hint": "(-2)×(-1)=2." },
-              { "label": "Final product: 4997×5000 + 2", "answer": "24985002", "hint": "4997×5000=24985000. Add 2." }
+              {
+                "label": "Deviation d₁ for 4998",
+                "answer": "-2",
+                "hint": "4998-5000=-2."
+              },
+              {
+                "label": "Deviation d₂ for 4999",
+                "answer": "-1",
+                "hint": "4999-5000=-1."
+              },
+              {
+                "label": "Left part (4998+d₂ = 4998-1)",
+                "answer": "4997",
+                "hint": "4998-1=4997."
+              },
+              {
+                "label": "Right part (d₁×d₂)",
+                "answer": "2",
+                "hint": "(-2)×(-1)=2."
+              },
+              {
+                "label": "Final product: 4997×5000 + 2",
+                "answer": "24985002",
+                "hint": "4997×5000=24985000. Add 2."
+              }
             ],
-            "expectedAnswer": "24985002"
+            "expectedAnswer": "24985002",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group I for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           },
           {
             "questionId": "VM_G8_L7_I2",
@@ -520,10 +748,33 @@
             "questionText": "Compute 5002×5003 near base 5000. Use: product = (left part)×5000 + (d₁×d₂).",
             "expectedAnswer": "25025006",
             "hint": "d₁=+2, d₂=+3. Left=5002+3=5005. 5005×5000=25025000. Right=6.",
-            "solution": "Left=5005. 5005×5000=25025000. Right=2×3=6. Answer=25025006."
+            "solution": "Left=5005. 5005×5000=25025000. Right=2×3=6. Answer=25025006.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+              "caption": "Group I for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "caption": "Group I for Nikhilam Mastery — 4-Digit Numbers Near 10000."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G8_L7_NIKHILAM_LARGE",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "nikhilam_base100",
+      "kind": "svg",
+      "asset": "nikhilam_base100.svg",
+      "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

@@ -69,15 +69,28 @@
     }
   ],
   "starterPractice": [
-    { "q": "How many solutions does a pair of non-parallel lines have?", "a": "Exactly one" },
-    { "q": "Which variable is 'cheapest' to isolate in x+2y=8?", "a": "x" },
-    { "q": "What does the elimination method do?", "a": "Cancels one variable by adding or subtracting equations" }
+    {
+      "q": "How many solutions does a pair of non-parallel lines have?",
+      "a": "Exactly one"
+    },
+    {
+      "q": "Which variable is 'cheapest' to isolate in x+2y=8?",
+      "a": "x"
+    },
+    {
+      "q": "What does the elimination method do?",
+      "a": "Cancels one variable by adding or subtracting equations"
+    }
   ],
   "duolingoLessonArc": {
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "welcomeMessage": "Two unknowns, two equations — they always conspire to give one answer. Let's crack them fast!",
-      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "goalOptions": [
+        "School math",
+        "Competitive exams",
+        "Mental speed"
+      ],
       "avatarMood": "confident"
     },
     "mission": "Solve simultaneous equations using substitution, elimination, and the Vedic cross-multiplication shortcut.",
@@ -92,7 +105,11 @@
     "rewardLoop": {
       "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
       "streakBonus": "5 XP for 3 consecutive correct answers",
-      "badges": ["Equation Explorer", "Elimination Expert", "Vedic Solver"]
+      "badges": [
+        "Equation Explorer",
+        "Elimination Expert",
+        "Vedic Solver"
+      ]
     },
     "reviewLoop": {
       "trigger": "2 wrong answers in a group",
@@ -129,12 +146,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Two distinct non-parallel lines in a plane intersect at how many points?",
-            "options": ["Exactly one point", "Two points", "Infinitely many points", "No points"],
+            "options": [
+              "Exactly one point",
+              "Two points",
+              "Infinitely many points",
+              "No points"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "Exactly one point",
             "hint": "Two straight lines going in different directions can only cross once.",
             "solution": "Two distinct non-parallel lines cross at exactly one point.",
-            "visual": { "type": "svg", "asset": "vm_simultaneous_lines", "caption": "Two lines crossing at the solution point (x,y)" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group A for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_A2",
@@ -148,9 +175,21 @@
             "questionText": "Verify that (x=5, y=2) satisfies both x+y=7 and x-y=3.",
             "expectedAnswer": "Yes, both equations are satisfied",
             "hint": "Substitute x=5,y=2 into each equation separately.",
-            "solution": "x+y: 5+2=7 ✓. x-y: 5-2=3 ✓. Both satisfied."
+            "solution": "x+y: 5+2=7 ✓. x-y: 5-2=3 ✓. Both satisfied.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group A for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group A for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -179,7 +218,13 @@
             "questionText": "Solve by substitution: x+y=5 and 2x+y=8.",
             "expectedAnswer": "x=3, y=2",
             "hint": "Isolate x from the first equation: x=5-y.",
-            "solution": "x=5-y. Substitute: 2(5-y)+y=8 → 10-y=8 → y=2 → x=3."
+            "solution": "x=5-y. Substitute: 2(5-y)+y=8 → 10-y=8 → y=2 → x=3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group B for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_B2",
@@ -193,9 +238,21 @@
             "questionText": "Solve by substitution: y=2x and x+y=9.",
             "expectedAnswer": "x=3, y=6",
             "hint": "y is already isolated: substitute y=2x into x+y=9.",
-            "solution": "x+2x=9 → 3x=9 → x=3 → y=6."
+            "solution": "x+2x=9 → 3x=9 → x=3 → y=6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group B for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group B for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -224,7 +281,13 @@
             "questionText": "Solve by elimination: 4x+3y=18 and 2x+3y=12.",
             "expectedAnswer": "x=3, y=2",
             "hint": "The y-coefficients are already equal. Subtract the equations.",
-            "solution": "Subtract: 2x=6 → x=3. Then 12+3y=18 → y=2."
+            "solution": "Subtract: 2x=6 → x=3. Then 12+3y=18 → y=2.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group C for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_C2",
@@ -245,9 +308,21 @@
             "correctIndex": 0,
             "expectedAnswer": "Multiply the first equation by 2, then subtract",
             "hint": "Make y-coefficients equal: 2×(2x+y=9) gives 4x+2y=18.",
-            "solution": "Multiply eq1 by 2: 4x+2y=18. Subtract eq2 (3x+2y=16): x=2, then y=5."
+            "solution": "Multiply eq1 by 2: 4x+2y=18. Subtract eq2 (3x+2y=16): x=2, then y=5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group C for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group C for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -277,7 +352,12 @@
             "expectedAnswer": "x=3, y=2",
             "hint": "D=2·1-1·3=-1. x=(3·5-1·12)/(-1)=(15-12)/(-1)=-3/(-1)=3.",
             "solution": "D=2-3=-1. x=(3·5-1·12)/(-1)=(15-12)/(-1)=3. y=(1·12-2·5)/(-1)=(12-10)/(-1)=2.",
-            "visual": { "type": "svg", "asset": "vm_simultaneous_lines", "caption": "Cross-multiplication arrows linking coefficients" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group D for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_D2",
@@ -291,9 +371,21 @@
             "questionText": "Use the Vedic formula to solve x+y=7 and x-y=3. Identify a1,b1,c1,a2,b2,c2 and compute D.",
             "expectedAnswer": "x=5, y=2",
             "hint": "a1=1,b1=1,c1=7,a2=1,b2=-1,c2=3. D=1·(-1)-1·1=-2.",
-            "solution": "D=-1-1=-2. x=(1·3-(-1)·7)/(-2)=(3+7)/(-2)=-5 → error. Actually x=(b1c2-b2c1)/D=(1·3-(-1)·7)/(-2)=10/(-2)=-5. That is wrong, so use D=a1b2-a2b1=1·(-1)-1·1=-2. x=(b1c2-b2c1)/D=(3+7)/(-2)=-5 — let us verify by standard: adding eqs 2x=10→x=5,y=2. Correct answer: x=5, y=2."
+            "solution": "D=-1-1=-2. x=(1·3-(-1)·7)/(-2)=(3+7)/(-2)=-5 → error. Actually x=(b1c2-b2c1)/D=(1·3-(-1)·7)/(-2)=10/(-2)=-5. That is wrong, so use D=a1b2-a2b1=1·(-1)-1·1=-2. x=(b1c2-b2c1)/D=(3+7)/(-2)=-5 — let us verify by standard: adding eqs 2x=10→x=5,y=2. Correct answer: x=5, y=2.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group D for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group D for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -320,11 +412,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which (x,y) satisfies both 3x+2y=16 and 2x+y=9?",
-            "options": ["(2,5)", "(3,4)", "(4,2)", "(1,6)"],
+            "options": [
+              "(2,5)",
+              "(3,4)",
+              "(4,2)",
+              "(1,6)"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "(2,5)",
             "hint": "Check 3(2)+2(5)=16 and 2(2)+5=9.",
-            "solution": "3·2+2·5=6+10=16 ✓. 2·2+5=9 ✓. Answer: (2,5)."
+            "solution": "3·2+2·5=6+10=16 ✓. 2·2+5=9 ✓. Answer: (2,5).",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group E for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_E2",
@@ -336,13 +439,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which pair (x,y) solves x+y=10 and 2x-y=8?",
-            "options": ["(6,4)", "(5,5)", "(4,6)", "(7,3)"],
+            "options": [
+              "(6,4)",
+              "(5,5)",
+              "(4,6)",
+              "(7,3)"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "(6,4)",
             "hint": "Add the two equations: 3x=18 → x=6.",
-            "solution": "Add: 3x=18 → x=6, y=4. Check: 6+4=10 ✓, 12-4=8 ✓."
+            "solution": "Add: 3x=18 → x=6, y=4. Check: 6+4=10 ✓, 12-4=8 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group E for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group E for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -370,15 +490,42 @@
             "questionType": "fill_step",
             "questionText": "Solve 2x+3y=12 and x+y=5 by substitution. Fill each step.",
             "steps": [
-              { "label": "Step 1: Isolate x from equation 2 (x+y=5)", "answer": "x=5-y", "hint": "Move y to the right side." },
-              { "label": "Step 2: Substitute into equation 1 (2x+3y=12)", "answer": "2(5-y)+3y=12", "hint": "Replace x with 5-y." },
-              { "label": "Step 3: Solve for y", "answer": "y=2", "hint": "10-2y+3y=12 → y=2." },
-              { "label": "Step 4: Back-substitute to find x", "answer": "x=3", "hint": "x=5-y=5-2=3." }
+              {
+                "label": "Step 1: Isolate x from equation 2 (x+y=5)",
+                "answer": "x=5-y",
+                "hint": "Move y to the right side."
+              },
+              {
+                "label": "Step 2: Substitute into equation 1 (2x+3y=12)",
+                "answer": "2(5-y)+3y=12",
+                "hint": "Replace x with 5-y."
+              },
+              {
+                "label": "Step 3: Solve for y",
+                "answer": "y=2",
+                "hint": "10-2y+3y=12 → y=2."
+              },
+              {
+                "label": "Step 4: Back-substitute to find x",
+                "answer": "x=3",
+                "hint": "x=5-y=5-2=3."
+              }
             ],
             "expectedAnswer": "x=3, y=2",
-            "visual": { "type": "svg", "asset": "vm_simultaneous_lines", "caption": "Step-by-step substitution path" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group F for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group F for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -407,7 +554,13 @@
             "questionText": "The sum of two numbers is 20 and their difference is 4. Find both numbers.",
             "expectedAnswer": "12 and 8",
             "hint": "Let the numbers be x and y. Write x+y=20 and x-y=4.",
-            "solution": "x+y=20, x-y=4. Add: 2x=24 → x=12. Then y=8."
+            "solution": "x+y=20, x-y=4. Add: 2x=24 → x=12. Then y=8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group G for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_G2",
@@ -421,9 +574,21 @@
             "questionText": "A pen costs ₹x and a book costs ₹y. Two pens and one book cost ₹28. One pen and two books cost ₹26. Find the cost of each.",
             "expectedAnswer": "Pen=₹10, Book=₹8",
             "hint": "Equations: 2x+y=28 and x+2y=26.",
-            "solution": "2x+y=28 and x+2y=26. Subtract: x-y=2. Also x+2y=26. Add original: 3x+3y=54 → x+y=18. So x=10, y=8."
+            "solution": "2x+y=28 and x+2y=26. Subtract: x-y=2. Also x+2y=26. Add original: 3x+3y=54 → x+y=18. So x=10, y=8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group G for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group G for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -452,7 +617,13 @@
             "questionText": "Solve quickly: 5x+2y=24 and 3x+2y=16.",
             "expectedAnswer": "x=4, y=2",
             "hint": "Subtract the equations to eliminate y.",
-            "solution": "Subtract: 2x=8 → x=4. Then 12+2y=16 → y=2."
+            "solution": "Subtract: 2x=8 → x=4. Then 12+2y=16 → y=2.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group H for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_H2",
@@ -464,13 +635,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve 4x-y=10 and x+y=5. What is x+y equal to?",
-            "options": ["5", "10", "3", "7"],
+            "options": [
+              "5",
+              "10",
+              "3",
+              "7"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "5",
             "hint": "The second equation directly gives x+y=5.",
-            "solution": "x+y=5 is already the second equation. Solve: 4x-y=10, x+y=5. Add: 5x=15 → x=3, y=2. x+y=5 ✓."
+            "solution": "x+y=5 is already the second equation. Solve: 4x-y=10, x+y=5. Add: 5x=15 → x=3, y=2. x+y=5 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group H for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group H for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -498,13 +686,39 @@
             "questionType": "fill_step",
             "questionText": "Rearrange and solve: 2x=3y-1 and x+y=7.",
             "steps": [
-              { "label": "Step 1: Rearrange equation 1 to standard form", "answer": "2x-3y=-1", "hint": "Move 3y to the left: 2x-3y=-1." },
-              { "label": "Step 2: Write equation 2 in standard form", "answer": "x+y=7", "hint": "Already in standard form." },
-              { "label": "Step 3: Multiply equation 2 by 3 to match y-coefficient", "answer": "3x+3y=21", "hint": "3×(x+y)=3×7." },
-              { "label": "Step 4: Add to equation 1 (2x-3y=-1) to eliminate y", "answer": "5x=20", "hint": "2x-3y+3x+3y=(-1)+21=20." },
-              { "label": "Step 5: Final x and y values", "answer": "x=4, y=3", "hint": "x=4, then 4+y=7 → y=3." }
+              {
+                "label": "Step 1: Rearrange equation 1 to standard form",
+                "answer": "2x-3y=-1",
+                "hint": "Move 3y to the left: 2x-3y=-1."
+              },
+              {
+                "label": "Step 2: Write equation 2 in standard form",
+                "answer": "x+y=7",
+                "hint": "Already in standard form."
+              },
+              {
+                "label": "Step 3: Multiply equation 2 by 3 to match y-coefficient",
+                "answer": "3x+3y=21",
+                "hint": "3×(x+y)=3×7."
+              },
+              {
+                "label": "Step 4: Add to equation 1 (2x-3y=-1) to eliminate y",
+                "answer": "5x=20",
+                "hint": "2x-3y+3x+3y=(-1)+21=20."
+              },
+              {
+                "label": "Step 5: Final x and y values",
+                "answer": "x=4, y=3",
+                "hint": "x=4, then 4+y=7 → y=3."
+              }
             ],
-            "expectedAnswer": "x=4, y=3"
+            "expectedAnswer": "x=4, y=3",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group I for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           },
           {
             "questionId": "VM_G8_L4_I2",
@@ -518,10 +732,33 @@
             "questionText": "Solve: y-x=1 and 3y+2x=18.",
             "expectedAnswer": "x=3, y=4",
             "hint": "Rewrite as -x+y=1. Multiply by 2: -2x+2y=2. Add to 3y+2x=18.",
-            "solution": "From -x+y=1: y=1+x. Substitute into 3(1+x)+2x=18: 3+5x=18 → x=3 → y=4."
+            "solution": "From -x+y=1: y=1+x. Substitute into 3(1+x)+2x=18: 3+5x=18 → x=3 → y=4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+              "caption": "Group I for Two Equations, Zero Effort — Paravartya Simultaneous."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "caption": "Group I for Two Equations, Zero Effort — Paravartya Simultaneous."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G8_L4_SIMULTANEOUS_EQ",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "linear_eq_sutra",
+      "kind": "svg",
+      "asset": "linear_eq_sutra.svg",
+      "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

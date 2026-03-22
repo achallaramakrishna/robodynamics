@@ -229,7 +229,7 @@ function toAssetUrl(raw: string): string {
 
 const AVATARS: Avatar[] = [
   { id: "raj",   name: "Raj",   role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "aditya", variant: "screen"  },
-  { id: "nova",  name: "Nova",  role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "aditya", variant: "round"   },
+  { id: "nova",  name: "Nova",  role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "priya",  variant: "round"   },
   { id: "priya", name: "Priya", role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "priya",  variant: "classic" },
 ];
 const STATIC_AVATAR_MODE = false;
@@ -854,7 +854,7 @@ function AnimatedBoard({
 }) {
   return (
     <div style={{ width: "100%", border: "1px solid #cbd5e1", borderRadius: "10px", background: "#fff", overflow: "hidden" }}>
-      <svg viewBox="0 0 760 380" width="100%" style={{ display: "block", height: "auto", maxHeight: "380px" }} role="img" aria-label="AI Tutor Whiteboard">
+      <svg viewBox="0 0 760 380" width="100%" style={{ display: "block", height: "auto", maxHeight: "min(42vh, 280px)" }} role="img" aria-label="AI Tutor Whiteboard">
         <defs>
           <pattern id="board-grid" width="24" height="24" patternUnits="userSpaceOnUse">
             <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#f1f5f9" strokeWidth="1" />
@@ -1124,6 +1124,29 @@ function fallbackChaptersForCourse(courseId: string): TutorChapter[] {
   return DEFAULT_CHAPTERS_BY_COURSE[courseId] || DEFAULT_CHAPTERS_BY_COURSE[DEFAULT_COURSE_ID];
 }
 
+// ── Debug logging helpers (module-level — stable, no re-render cost) ─────────
+const _DBG_COLORS: Record<string, string> = {
+  STATE:  "#6366f1",   // indigo  — React state transitions
+  FLOW:   "#f59e0b",   // amber   — flow / kickoff / pendingKickoff
+  SPEAK:  "#10b981",   // emerald — TTS / voice
+  API:    "#3b82f6",   // blue    — fetch calls
+  ANSWER: "#ef4444",   // red     — answer evaluation
+  FILL:   "#8b5cf6",   // purple  — fill_step interactions
+  NAV:    "#06b6d4",   // cyan    — question navigation
+};
+function _dbg(enabled: boolean, cat: string, ev: string, data?: unknown) {
+  if (!enabled) return;
+  const color = _DBG_COLORS[cat] ?? "#94a3b8";
+  const ts = new Date().toISOString().slice(11, 23);
+  if (data !== undefined) {
+    console.groupCollapsed(`%c[${ts}][${cat}] ${ev}`, `color:${color};font-weight:700;font-family:monospace`);
+    console.log(data);
+    console.groupEnd();
+  } else {
+    console.log(`%c[${ts}][${cat}] ${ev}`, `color:${color};font-weight:700;font-family:monospace`);
+  }
+}
+
 export default function TutorPage() {
   return (
     <Suspense fallback={<main className="container"><section className="panel">Loading tutor...</section></main>}>
@@ -1151,6 +1174,14 @@ function TutorContent() {
   const requestedFallbackChapters = fallbackChaptersForCourse(requestedCourseId);
   const defaultRequestedChapter = requestedChapterFromQuery || requestedFallbackChapters[0].chapterCode;
   const defaultRequestedExerciseGroup = requestedExerciseGroupFromQuery || "A";
+
+  // ── Debug mode: add ?debug=1 to URL, or run localStorage.setItem('aiTutorDebug','1') in console ──
+  const debugMode = params.get("debug") === "1" ||
+    (typeof window !== "undefined" && window.localStorage?.getItem("aiTutorDebug") === "1");
+  // Short helper — stable ref to module fn, plus debugMode flag bound in closure
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const dbg = (cat: string, ev: string, data?: unknown) => _dbg(debugMode, cat, ev, data);
+
   // Scope bookmark to the specific user — prevents one student loading another's saved session
   const jwtUserId = useMemo(() => {
     const payload = decodeJwtPayload(token);
@@ -1212,7 +1243,7 @@ function TutorContent() {
   const [conversationLog, setConversationLog] = useState<ConversationTurn[]>([]);
   const [score, setScore] = useState({ attempts: 0, correctCount: 0, accuracyPct: 0 });
   const [attemptByQuestion, setAttemptByQuestion] = useState<Record<string, { correct: boolean; confidence: Confidence }>>({});
-  const [flowState, setFlowState] = useState<TutorOrchestratorState>("idle");
+  const [flowState, setFlowState] = useState<TutorOrchestratorState>("boot");
   const [flowVersion, setFlowVersion] = useState(0);
   const [realtimeConnected, setRealtimeConnected] = useState(false);
   const [showLessonComplete, setShowLessonComplete] = useState(false);
@@ -1244,6 +1275,8 @@ function TutorContent() {
   const [fillStepIndex, setFillStepIndex] = useState(0);
   const [fillStepInputs, setFillStepInputs] = useState<string[]>([]);
   const [fillStepResults, setFillStepResults] = useState<boolean[]>([]);
+  const [fillStepErrors, setFillStepErrors] = useState<string[]>([]);       // per-step error message
+  const [fillStepWrongCounts, setFillStepWrongCounts] = useState<number[]>([]); // wrong attempt count per step
 
   const boardTimerRef = useRef<number | null>(null);
   const boardWaitResolveRef = useRef<(() => void) | null>(null);
@@ -1264,7 +1297,7 @@ function TutorContent() {
   const autoListenQuestionRef = useRef("");
   const silenceRecoveryQuestionRef = useRef("");
   const silenceRecoveryMsRef = useRef(12000);  // updated by BehaviorClassifier via check-answer
-  const speakRef = useRef<(text: string) => Promise<void>>(async () => {});
+  const speakRef = useRef<(text: string, opts?: { noUtterance?: boolean }) => Promise<void>>(async () => {});
   const teachOnBoardRef = useRef<() => Promise<void>>(async () => {});
   const sessionRecoveryRef = useRef(false);
 
@@ -1467,7 +1500,7 @@ function TutorContent() {
   const missionHintPrompt =
     activeDuolingoStep?.reviewPrompt ||
     question?.hint ||
-    "Use the method Raj just showed you.";
+    `Use the method ${activeAvatar.name} just showed you.`;
   const rewardUnitPrompt =
     lessonDuolingoArc?.rewardLoop?.xpUnit ||
     "Earn XP on each step and keep your streak alive.";
@@ -1476,7 +1509,7 @@ function TutorContent() {
     "Short praise and visible progress after every correct answer.";
   const reviewLoopPrompt =
     lessonDuolingoArc?.reviewLoop?.trigger ||
-    "If you get stuck, Raj will reopen the pattern with one smaller step.";
+    `If you get stuck, ${activeAvatar.name} will reopen the pattern with one smaller step.`;
   const reviewPracticePrompt =
     lessonDuolingoArc?.reviewLoop?.practiceStyle ||
     missionHintPrompt;
@@ -1601,8 +1634,37 @@ function TutorContent() {
     }
     return "Ready for next step.";
   }, [isTeachingBoard, isEvaluatingAnswer, isLoadingNextQuestion, isSpeaking, isListening, awaitingStudentResponse, hasAnswerReadyQuestion, micPermission]);
-  const stageSceneMode = (isTeachingBoard || isSpeaking || isLoadingNextQuestion || pendingKickoff !== "none") ? "coach" : (awaitingStudentResponse || isListening || isEvaluatingAnswer || !!check || hasAnswerReadyQuestion) ? "student" : "coach";
+  // "coach" only when the coach is actively teaching or loading — not while just reading the question
+  // aloud to a student who already has control (awaitingStudentResponse / evaluating / answered).
+  const studentHasControl = awaitingStudentResponse || isListening || isEvaluatingAnswer || !!check || hasAnswerReadyQuestion;
+  const stageSceneMode = (isTeachingBoard || isLoadingNextQuestion || (pendingKickoff !== "none" && pendingKickoff !== "teach") || (isSpeaking && !studentHasControl))
+    ? "coach"
+    : studentHasControl
+      ? "student"
+      : "coach";
   const showInlineBoard = showBoardPanel && stageSceneMode === "coach";
+
+  // ── Debug: state-change watchers ────────────────────────────────────────────
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("STATE", `stageSceneMode → ${stageSceneMode}`, { isSpeaking, studentHasControl, isTeachingBoard, isLoadingNextQuestion, pendingKickoff, awaitingStudentResponse }); }, [stageSceneMode]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("NAV",   `question → ${question?.questionId ?? "null"}`, { type: question?.questionType, text: question?.questionText?.slice(0, 80) }); }, [question?.questionId]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("SPEAK", `isSpeaking → ${isSpeaking}`); }, [isSpeaking]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("STATE", `awaitingStudentResponse → ${awaitingStudentResponse}`); }, [awaitingStudentResponse]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("FLOW",  `flowState → ${flowState}`); }, [flowState]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("FLOW",  `pendingKickoff → ${pendingKickoff}`); }, [pendingKickoff]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { if (teacherUtterance) dbg("SPEAK", `teacherUtterance set → "${teacherUtterance.slice(0, 80)}"`); }, [teacherUtterance]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("STATE", `isEvaluatingAnswer → ${isEvaluatingAnswer}`); }, [isEvaluatingAnswer]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { dbg("STATE", `isLoadingNextQuestion → ${isLoadingNextQuestion}`); }, [isLoadingNextQuestion]);
+  // ────────────────────────────────────────────────────────────────────────────
+
   const lessonListenLine = useMemo(() => {
     if (!question) return missionReadPrompt;
     if (stageSceneMode === "coach") return missionReadPrompt;
@@ -2002,7 +2064,7 @@ function TutorContent() {
     return () => window.clearTimeout(id);
   }, [awaitingStudentResponse, isListening]);
 
-  async function speak(text: string): Promise<void> {
+  async function speak(text: string, opts?: { noUtterance?: boolean }): Promise<void> {
     // Resolve {{studentName}} template placeholder left in chapter JSON content
     const line = (text || "")
       .replace(/\{\{studentName\}\}/g, (studentName || "").trim() || "friend")
@@ -2011,7 +2073,9 @@ function TutorContent() {
       setIsSpeaking(false);
       return;
     }
-    setTeacherUtterance(line);
+    dbg("SPEAK", `speak() ← "${line.slice(0, 80)}"`, { voiceEnabled, avatarId: activeAvatar.id, noUtterance: opts?.noUtterance });
+    // noUtterance: TTS reads aloud but coach bubble is NOT updated (student already has the question in the panel)
+    if (!opts?.noUtterance) setTeacherUtterance(line);
     addConversationTurn("tutor", voiceEnabled ? "voice" : "text", line, { source: "speak" });
     if (!voiceEnabled || typeof window === "undefined") {
       setIsSpeaking(false);
@@ -2047,7 +2111,11 @@ function TutorContent() {
         const ctx: AudioContext | null = audioCtxRef.current ||
           (AudioCtxCls ? (audioCtxRef.current = new AudioCtxCls()) : null);
         if (ctx) {
-          if (ctx.state === "suspended") await ctx.resume();
+          // Resume with a 3s timeout — headless Chromium can hang on ctx.resume()
+          // if AudioContext stays suspended (no audio device / autoplay policy).
+          if (ctx.state === "suspended") {
+            await Promise.race([ctx.resume(), new Promise<void>((r) => setTimeout(r, 3000))]);
+          }
           const b64 = ttsData.audioBase64 as string;
           const binStr = atob(b64);
           const bytes = new Uint8Array(binStr.length);
@@ -2059,7 +2127,13 @@ function TutorContent() {
           source.connect(ctx.destination);
           audioSourceRef.current = source;
           setIsSpeaking(true);
-          await new Promise<void>((resolve) => { source.onended = () => resolve(); source.start(0); });
+          // Safety timeout: audio duration + 4s buffer. Guards against onended
+          // never firing when AudioContext is stuck (headless, no audio device, etc.).
+          const playbackTimeoutMs = Math.ceil(audioBuffer.duration * 1000) + 4000;
+          await Promise.race([
+            new Promise<void>((resolve) => { source.onended = () => resolve(); source.start(0); }),
+            new Promise<void>((resolve) => setTimeout(resolve, playbackTimeoutMs)),
+          ]);
           audioSourceRef.current = null;
         } else {
           // Fallback for very old browsers without AudioContext
@@ -2082,19 +2156,36 @@ function TutorContent() {
 
     if ("speechSynthesis" in window) {
       const utter = new SpeechSynthesisUtterance(line);
-      // Pick the best available male voice for the browser fallback.
-      // Priority: Google/Microsoft quality voices → any male en-IN voice → any en-IN voice
+      // Pick an energetic gender-matched Windows/browser voice as Sarvam fallback.
+      // Raj → male  |  Nova, Priya → female
+      const isMale = activeAvatar.id === "raj";
       const voices = window.speechSynthesis.getVoices();
-      const pick =
-        voices.find(v => /google.*en.*in/i.test(v.name)) ||
-        voices.find(v => /microsoft.*ravi/i.test(v.name)) ||  // Microsoft Ravi — Indian male
-        voices.find(v => v.lang === "en-IN" && v.name.toLowerCase().includes("male")) ||
-        voices.find(v => v.lang === "en-IN") ||
-        voices.find(v => v.lang.startsWith("en") && !v.name.toLowerCase().includes("female")) ||
-        null;
+      let pick: SpeechSynthesisVoice | null = null;
+      if (isMale) {
+        pick =
+          voices.find(v => /microsoft.*ravi/i.test(v.name))   ||   // Windows en-IN male (best match)
+          voices.find(v => /microsoft.*guy/i.test(v.name))    ||   // Windows en-US energetic male
+          voices.find(v => /microsoft.*david/i.test(v.name))  ||   // Windows en-US male
+          voices.find(v => /google.*uk.*male/i.test(v.name))  ||   // Chrome UK male
+          voices.find(v => v.lang === "en-IN" && !/female|heera|zira|eva|aria/i.test(v.name)) ||
+          voices.find(v => v.lang.startsWith("en") && !/female|heera|zira|eva|aria/i.test(v.name)) ||
+          null;
+      } else {
+        pick =
+          voices.find(v => /microsoft.*heera/i.test(v.name))  ||   // Windows en-IN female (best match)
+          voices.find(v => /microsoft.*aria/i.test(v.name))   ||   // Windows en-US natural female
+          voices.find(v => /microsoft.*eva/i.test(v.name))    ||   // Windows en-US female
+          voices.find(v => /microsoft.*zira/i.test(v.name))   ||   // Windows en-US female
+          voices.find(v => /google.*uk.*female/i.test(v.name))||   // Chrome UK female
+          voices.find(v => v.lang === "en-IN" && /female|heera|priya/i.test(v.name)) ||
+          voices.find(v => v.lang === "en-IN") ||
+          voices.find(v => v.lang.startsWith("en") && /female|zira|aria|eva|heera/i.test(v.name)) ||
+          null;
+      }
       if (pick) utter.voice = pick;
-      utter.rate  = 1.0;   // natural pace — lively for Grade 4-8
-      utter.pitch = 1.05;  // slightly bright without sounding unnatural
+      // Energetic settings — lively pace for Grade 4-8 students
+      utter.rate  = isMale ? 1.1 : 1.08;   // slightly faster than default
+      utter.pitch = isMale ? 0.95 : 1.12;  // male: slightly deeper; female: brighter
       await new Promise<void>((resolve) => {
         utter.onstart = () => {
           if (speakSeq === speakSeqRef.current) {
@@ -2905,6 +2996,8 @@ function TutorContent() {
   }
 
   function resetInteractiveState() {
+    dbg("FLOW", "resetInteractiveState()");
+    setTeacherUtterance("");          // clear stale coach text so old question never leaks into next question
     setAnswer("");
     setCheck(null);
     setDoubt("");
@@ -2918,6 +3011,8 @@ function TutorContent() {
     setFillStepIndex(0);
     setFillStepInputs([]);
     setFillStepResults([]);
+    setFillStepErrors([]);
+    setFillStepWrongCounts([]);
     silenceRecoveryQuestionRef.current = "";
     setIsEvaluatingAnswer(false);
     setIsLoadingNextQuestion(false);
@@ -2946,7 +3041,7 @@ function TutorContent() {
     setStatus("loading");
     setError("");
     resetInteractiveState();
-    setFlowState("idle");
+    setFlowState("boot");
     setFlowVersion(0);
     setRealtimeConnected(false);
     setAttemptByQuestion({});
@@ -3046,7 +3141,9 @@ function TutorContent() {
 
       clearBoard();
       const greetingName = (studentName || "").trim() || "there";
-      const coachIntro = data.lesson.duolingoLessonArc?.onboarding?.coachIntro || `Raj will guide you through ${data.lesson.title}.`;
+      const rawCoachIntro = data.lesson.duolingoLessonArc?.onboarding?.coachIntro || `${activeAvatar.name} will guide you through ${data.lesson.title}.`;
+      // Strip any hardcoded "Hi! I am [Name], your [role]." prefix — the welcomeLine already adds it dynamically.
+      const coachIntro = rawCoachIntro.replace(/^Hi[!.]?\s+I\s+am\s+\w[\w\s]*,?\s+your\s+[^.]+\.\s*/i, "").trim() || rawCoachIntro;
       const gradeLabel = isDemoMode && demoGrade ? `, Grade ${demoGrade} student,` : "";
       const welcomeLine = `Hi ${greetingName}${gradeLabel}! I am ${activeAvatar.name}, your ${activeAvatar.role}. ${coachIntro} You are starting as ${LEARNER_LEVEL_LABELS[learnerLevel].toLowerCase()} and want help with ${LEARNER_GOAL_LABELS[learnerGoal].toLowerCase()}. I will guide you in ${KNOWN_LANGUAGE_LABELS[knownLanguage]}.`;
       setTeacherUtterance(welcomeLine);
@@ -3190,6 +3287,7 @@ function TutorContent() {
       return;
     }
 
+    dbg("ANSWER", `checkAnswer() ← "${learnerAnswer}"`, { questionId: question.questionId, source: answerSource });
     setIsEvaluatingAnswer(true);
     setCheck(null);
     setDoubtReply("");
@@ -3238,6 +3336,7 @@ function TutorContent() {
         return;
       }
 
+      dbg("ANSWER", `checkAnswer() → ${data.correct ? "✅ correct" : "❌ wrong"}`, { explanation: data.explanation?.slice(0, 60), xp: data.sessionProgress?.xp });
       setCheck(data);
       setAttemptByQuestion((prev) => ({
         ...prev,
@@ -3383,6 +3482,8 @@ function TutorContent() {
     const previousQuestionId = question?.questionId || "";
     const previousQuestionText = question?.questionText || "";
 
+    dbg("NAV", `nextQuestion() ←`, { src: options?.source, directToStudent: options?.directToStudent, prevQ: previousQuestionId.slice(-8) });
+    setTeacherUtterance("");           // clear old question text immediately so coach bubble stays clean
     setAnswer("");
     setCheck(null);
     setDoubtReply("");
@@ -3391,6 +3492,8 @@ function TutorContent() {
     setFillStepIndex(0);
     setFillStepInputs([]);
     setFillStepResults([]);
+    setFillStepErrors([]);
+    setFillStepWrongCounts([]);
     setPendingKickoffToken("");
     kickoffRunningRef.current = false;
     checkAnswerInFlightRef.current = false;  // reset for the new question
@@ -3462,6 +3565,7 @@ function TutorContent() {
       return;
     }
 
+    dbg("NAV", `nextQuestion() → received`, { questionId: data.question?.questionId?.slice(-8), type: data.question?.questionType, text: data.question?.questionText?.slice(0, 60), exerciseGroup: resolvedExerciseGroup });
     setQuestion(data.question);
     addConversationTurn(
       "system",
@@ -3530,11 +3634,12 @@ function TutorContent() {
         questionId: data.question?.questionId || "",
         source: options.source || "skip",
       });
-      // Read the question aloud so student doesn't need to read it themselves
+      // Read the question aloud — coach bubble shows coaching prompt, NOT the question text
+      // (question text is already displayed in the question panel; showing it in the bubble = duplication).
       if (data.question?.questionText) {
-        const readPrompt = data.question.questionText;
-        setTeacherUtterance(readPrompt);
-        void speakRef.current(readPrompt);
+        const tryPrompt = activeDuolingoStep?.tryPrompt || `Your turn! ${activeAvatar.name} is listening.`;
+        setTeacherUtterance(tryPrompt);
+        void speakRef.current(data.question.questionText, { noUtterance: true });
       }
       return;
     }
@@ -3601,7 +3706,8 @@ function TutorContent() {
           const greetingName = (studentName || "").trim() || "there";
           const chCode = activeChapter;
           const goals = lessonLearningGoals.length ? lessonLearningGoals : (previewChapter?.learningGoals || []);
-          const coachIntro = lessonDuolingoArc?.onboarding?.coachIntro || `Raj checks your comfort level before starting ${lessonTitle || previewChapter?.title || "this chapter"}.`;
+          const rawCoachIntro2 = lessonDuolingoArc?.onboarding?.coachIntro || `${activeAvatar.name} will guide you through ${lessonTitle || previewChapter?.title || "this chapter"}.`;
+          const coachIntro = rawCoachIntro2.replace(/^Hi[!.]?\s+I\s+am\s+\w[\w\s]*,?\s+your\s+[^.]+\.\s*/i, "").trim() || rawCoachIntro2;
           const welcomeLine = `Hi ${greetingName}! I am ${activeAvatar.name}, your ${activeAvatar.role}. ${coachIntro} I will guide you in ${KNOWN_LANGUAGE_LABELS[knownLanguage]} and keep the pace right for ${LEARNER_LEVEL_LABELS[learnerLevel].toLowerCase()}.`;
           setTeacherUtterance(welcomeLine);
           await speakRef.current(welcomeLine);
@@ -3790,7 +3896,7 @@ function TutorContent() {
 
           {/* ── Coach intro ─────────────────────────────────────────────── */}
           <h2 className="tutor-qs-title">
-            {minimalDuolingoLayout ? "Set Up Your Learning Path" : "Meet Raj, Your AI Coach"}
+            {minimalDuolingoLayout ? "Set Up Your Learning Path" : `Meet ${activeAvatar.name}, Your AI Coach`}
           </h2>
 
           {/* Teacher sprite */}
@@ -3805,7 +3911,7 @@ function TutorContent() {
 
           <p className="tutor-qs-tagline">
             {minimalDuolingoLayout
-              ? (isDemoMode ? `Hi! Enter your name and grade below — I will set the right pace and we will get started!` : (lessonDuolingoArc?.onboarding?.coachIntro || "First tell Raj what you know. Then he will choose the right pace and start your mission."))
+              ? (isDemoMode ? `Hi! Enter your name and grade below — I will set the right pace and we will get started!` : (lessonDuolingoArc?.onboarding?.coachIntro || `First tell ${activeAvatar.name} what you know. Then ${activeAvatar.name} will choose the right pace and start your mission.`))
               : "I will teach on the board, then push you through focused practice."}
           </p>
 
@@ -3958,23 +4064,24 @@ function TutorContent() {
 
           {/* Start button */}
           <div className="tutor-qs-actions">
+            {token.trim().length <= 20 && minimalDuolingoLayout && (
+              <p className="tutor-qs-token-notice">
+                🔒 Open this from your RoboDynamics dashboard to start
+              </p>
+            )}
             <button
               className="button tutor-qs-btn"
               onClick={() => { unlockAudio(); void startSession(); }}
               disabled={!canStart || status === "loading"}
+              title={!canStart && token.trim().length <= 20 ? "Launch from your RoboDynamics dashboard" : undefined}
             >
-              {status === "loading" ? "Starting..." : sessionId ? "Restart Mission" : minimalDuolingoLayout ? "Continue to Mission" : "Start Mission"}
+              {status === "loading" ? "Starting…" : sessionId ? "↩ Restart Mission" : minimalDuolingoLayout ? "▶ Continue to Mission" : "Start Mission"}
             </button>
             {isDemoMode && !studentName.trim() && (
-              <p className="muted" style={{ fontSize: "0.85rem", marginTop: "0.5rem", textAlign: "center" }}>Please enter your name to get started</p>
-            )}
-            {!canStart && (
-              <p className="muted" style={{ fontSize: "0.85rem", marginTop: "0.5rem", textAlign: "center" }}>
-                Session token missing — launch from the LMS
-              </p>
+              <p className="muted" style={{ fontSize: "0.8rem", textAlign: "center" }}>Enter your name above to get started</p>
             )}
             <p className="tutor-qs-hint muted">
-              Voice {voiceEnabled ? "on" : "off"} |{" "}
+              Voice {voiceEnabled ? "on" : "off"} ·{" "}
               <button type="button" className="link-btn" onClick={() => setVoiceEnabled(v => !v)}>
                 {voiceEnabled ? "turn off" : "turn on"}
               </button>
@@ -4136,7 +4243,7 @@ function TutorContent() {
                           <div className="vedic-focus-panel question student">
                             <span className="vedic-prompt-label">Loading</span>
                             <p className="udemy-question-text"><strong>Loading the next question...</strong></p>
-                            <p className="muted udemy-hint">Raj is preparing your next step.</p>
+                            <p className="muted udemy-hint">{activeAvatar.name} is preparing your next step.</p>
                           </div>
                         ) : (
                           <>
@@ -4235,7 +4342,7 @@ function TutorContent() {
                                             <div className="fs-input-row">
                                               <input
                                                 autoFocus
-                                                className="vedic-answer-input fs-input"
+                                                className={`vedic-answer-input fs-input${fillStepErrors[idx] ? " fs-input-error" : ""}`}
                                                 placeholder="Your answer"
                                                 value={fillStepInputs[idx] ?? ""}
                                                 disabled={isEvaluatingAnswer}
@@ -4243,6 +4350,11 @@ function TutorContent() {
                                                   const copy = [...fillStepInputs];
                                                   copy[idx] = e.target.value;
                                                   setFillStepInputs(copy);
+                                                  // clear error when user starts typing
+                                                  if (fillStepErrors[idx]) {
+                                                    const errs = [...fillStepErrors]; errs[idx] = "";
+                                                    setFillStepErrors(errs);
+                                                  }
                                                 }}
                                                 onKeyDown={(e) => {
                                                   if (e.key === "Enter") {
@@ -4252,14 +4364,36 @@ function TutorContent() {
                                                     const expected = (step.answer ?? "").trim().toLowerCase().replace(/\s/g, "");
                                                     const got = val.toLowerCase().replace(/\s/g, "");
                                                     const correct = got === expected;
-                                                    const res = [...fillStepResults]; res[idx] = correct;
-                                                    setFillStepResults(res);
                                                     if (correct) {
+                                                      dbg("FILL", `step ${idx} ✅ correct (Enter)`, { val, expected });
+                                                      const res = [...fillStepResults]; res[idx] = true;
+                                                      setFillStepResults(res);
                                                       const nextIdx = idx + 1;
                                                       setFillStepIndex(nextIdx);
                                                       if (nextIdx >= (question.steps?.length ?? 0)) {
-                                                        // All steps done — call backend for XP
                                                         void checkAnswer(question.steps?.[question.steps.length - 1]?.answer ?? val);
+                                                      }
+                                                    } else {
+                                                      const wrongCount = (fillStepWrongCounts[idx] ?? 0) + 1;
+                                                      dbg("FILL", `step ${idx} ❌ wrong #${wrongCount} (Enter)`, { val, expected });
+                                                      const wc = [...fillStepWrongCounts]; wc[idx] = wrongCount;
+                                                      setFillStepWrongCounts(wc);
+                                                      const errs = [...fillStepErrors];
+                                                      errs[idx] = wrongCount >= 3 ? `The answer is ${step.answer}` : "Not quite — try again!";
+                                                      setFillStepErrors(errs);
+                                                      if (wrongCount >= 3) {
+                                                        // Auto-reveal and advance after 3 wrong attempts
+                                                        const inp = [...fillStepInputs]; inp[idx] = step.answer ?? "";
+                                                        setFillStepInputs(inp);
+                                                        window.setTimeout(() => {
+                                                          const res = [...fillStepResults]; res[idx] = true;
+                                                          setFillStepResults(res);
+                                                          const nextIdx = idx + 1;
+                                                          setFillStepIndex(nextIdx);
+                                                          if (nextIdx >= (question.steps?.length ?? 0)) {
+                                                            void checkAnswer(question.steps?.[question.steps.length - 1]?.answer ?? step.answer ?? "");
+                                                          }
+                                                        }, 1200);
                                                       }
                                                     }
                                                   }
@@ -4274,24 +4408,47 @@ function TutorContent() {
                                                   const expected = (step.answer ?? "").trim().toLowerCase().replace(/\s/g, "");
                                                   const got = val.toLowerCase().replace(/\s/g, "");
                                                   const correct = got === expected;
-                                                  const res = [...fillStepResults]; res[idx] = correct;
-                                                  setFillStepResults(res);
                                                   if (correct) {
+                                                    dbg("FILL", `step ${idx} ✅ correct (click)`, { val, expected });
+                                                    const res = [...fillStepResults]; res[idx] = true;
+                                                    setFillStepResults(res);
                                                     const nextIdx = idx + 1;
                                                     setFillStepIndex(nextIdx);
                                                     if (nextIdx >= (question.steps?.length ?? 0)) {
                                                       void checkAnswer(question.steps?.[question.steps.length - 1]?.answer ?? val);
                                                     }
                                                   } else {
-                                                    // wrong step — shake & clear
-                                                    const copy = [...fillStepInputs]; copy[idx] = "";
-                                                    setFillStepInputs(copy);
+                                                    const wrongCount = (fillStepWrongCounts[idx] ?? 0) + 1;
+                                                    dbg("FILL", `step ${idx} ❌ wrong #${wrongCount} (click)`, { val, expected });
+                                                    const wc = [...fillStepWrongCounts]; wc[idx] = wrongCount;
+                                                    setFillStepWrongCounts(wc);
+                                                    const errs = [...fillStepErrors];
+                                                    errs[idx] = wrongCount >= 3 ? `The answer is ${step.answer}` : "Not quite — try again! ❌";
+                                                    setFillStepErrors(errs);
+                                                    if (wrongCount >= 3) {
+                                                      // Reveal answer, auto-advance after 1.2s
+                                                      const inp = [...fillStepInputs]; inp[idx] = step.answer ?? "";
+                                                      setFillStepInputs(inp);
+                                                      window.setTimeout(() => {
+                                                        const res = [...fillStepResults]; res[idx] = true;
+                                                        setFillStepResults(res);
+                                                        const nextIdx = idx + 1;
+                                                        setFillStepIndex(nextIdx);
+                                                        if (nextIdx >= (question.steps?.length ?? 0)) {
+                                                          void checkAnswer(question.steps?.[question.steps.length - 1]?.answer ?? step.answer ?? "");
+                                                        }
+                                                      }, 1200);
+                                                    }
                                                   }
                                                 }}
                                               >
                                                 {isEvaluatingAnswer && idx === fillStepIndex ? "Checking…" : "→"}
                                               </button>
-                                              {step.hint ? <span className="fs-hint muted">{step.hint}</span> : null}
+                                              {fillStepErrors[idx] ? (
+                                                <span className={`fs-error${(fillStepWrongCounts[idx] ?? 0) >= 3 ? " fs-reveal" : ""}`}>
+                                                  {fillStepErrors[idx]}
+                                                </span>
+                                              ) : step.hint ? <span className="fs-hint muted">{step.hint}</span> : null}
                                             </div>
                                           ) : (
                                             <div className="fs-future-placeholder">—</div>
@@ -5410,2494 +5567,6 @@ function TutorContent() {
         </div>
       )}
 
-      <style jsx global>{`
-        @keyframes celebFadeInOut {
-          0%   { opacity: 0; }
-          12%  { opacity: 1; }
-          80%  { opacity: 1; }
-          100% { opacity: 0; }
-        }
-        @keyframes celebCardIn {
-          0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
-          55%  { transform: scale(1.1) rotate(3deg);  opacity: 1; }
-          75%  { transform: scale(0.96) rotate(-1deg); }
-          100% { transform: scale(1)   rotate(0);      }
-        }
-        @keyframes emojiPop {
-          0%   { transform: scale(0) rotate(-20deg); }
-          55%  { transform: scale(1.35) rotate(10deg); }
-          75%  { transform: scale(0.9) rotate(-4deg); }
-          100% { transform: scale(1)   rotate(0); }
-        }
-        @keyframes confettiFly {
-          0%   { transform: translate(-50%,-50%) rotate(0deg) scale(1);   opacity: 1; }
-          100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(700deg) scale(0.15); opacity: 0; }
-        }
-
-        @keyframes avatarFloat {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-3px); }
-        }
-        @keyframes avatarTalk {
-          0%, 100% { transform: translateY(0) scale(1); }
-          25% { transform: translateY(-2px) scale(1.01); }
-          50% { transform: translateY(-1px) scale(1.015); }
-          75% { transform: translateY(-2px) scale(1.01); }
-        }
-        .teacher-stage-avatar {
-          position: relative;
-          width: min(100%, 240px);
-          aspect-ratio: 3 / 4;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          transform-origin: 50% 88%;
-          animation: none;
-        }
-        .teacher-stage-avatar.speaking {
-          animation: none;
-        }
-        .teacher-stage-glow {
-          position: absolute;
-          inset: 12% 8% 10%;
-          border-radius: 28px;
-          background: radial-gradient(circle at 50% 30%, var(--teacher-accent, #0ea5e9) 0%, rgba(255,255,255,0) 72%);
-          filter: blur(14px);
-          opacity: 0.18;
-          pointer-events: none;
-        }
-        .teacher-stage-image {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          object-position: center bottom;
-          filter: drop-shadow(0 10px 18px rgba(15,23,42,0.22));
-          position: relative;
-          z-index: 1;
-        }
-        @keyframes boardDrawLine { to { stroke-dashoffset: 0; } }
-        @keyframes boardFadeText { to { opacity: 1; } }
-
-        /* ── Speaking Teacher (layered sprite avatar) ───────────────────── */
-        .speaking-teacher {
-          position: relative;
-          width: min(100%, 240px);
-          aspect-ratio: 180 / 219;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          transform-origin: 50% 88%;
-          animation: none;
-        }
-        .speaking-teacher.speaking {
-          animation: none;
-        }
-        .speaking-teacher.compact {
-          width: 80px;
-        }
-        /* ── Male teacher (static sprite + CSS animation) ──────────────── */
-        .speaking-teacher.male-teacher {
-          aspect-ratio: unset;
-          width: min(100%, 200px);
-          height: 220px;
-          align-items: center;
-          justify-content: center;
-        }
-        .speaking-teacher.male-teacher.compact {
-          width: 70px;
-          height: 80px;
-        }
-        @keyframes spriteFadeIn {
-          from { opacity: 0; transform: scale(0.96); }
-          to   { opacity: 1; transform: scale(1); }
-        }
-        .male-teacher-sprite {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          filter: drop-shadow(0 8px 14px rgba(15,23,42,0.20));
-          z-index: 2;
-          position: relative;
-          animation: none;
-        }
-        /* Gentle float when idle */
-        .speaking-teacher.male-teacher:not(.speaking) {
-          animation: none;
-        }
-        /* Speaking rhythm: subtle body energy — no gesture changes, CSS does all the work */
-        .speaking-teacher.male-teacher.speaking {
-          animation: none;
-          transform-origin: 50% 30%;
-        }
-        @keyframes maleSpeak {
-          0%, 100% { transform: translateY(0)     scaleY(1); }
-          22%       { transform: translateY(-3px)  scaleY(1.012); }
-          55%       { transform: translateY(0.5px) scaleY(0.997); }
-          78%       { transform: translateY(-2px)  scaleY(1.007); }
-        }
-        .teacher-glow {
-          position: absolute;
-          inset: 12% 8% 10%;
-          border-radius: 28px;
-          background: radial-gradient(circle at 50% 30%, var(--teacher-accent, #0ea5e9) 0%, rgba(255,255,255,0) 72%);
-          filter: blur(14px);
-          opacity: 0.18;
-          pointer-events: none;
-        }
-        /* Base layer – full body */
-        .st-layer { position: absolute; pointer-events: none; }
-        .st-body { inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 1; filter: drop-shadow(0 10px 18px rgba(15,23,42,0.22)); }
-        /* Gesture – arm overlay (bottom half of figure) */
-        .st-gesture {
-          z-index: 2;
-          bottom: 0; left: 50%; transform: translateX(-50%);
-          width: auto; height: 58%;
-          object-fit: contain;
-          transition: opacity 0.3s ease;
-        }
-        /* Expression – face overlay (top ~38% of figure) */
-        .st-expression {
-          z-index: 3;
-          top: 4%; left: 50%; transform: translateX(-50%);
-          width: 38%; height: 38%;
-          object-fit: contain;
-          transition: opacity 0.25s ease;
-        }
-        /* Viseme – mouth overlay (~30% from top, centred) */
-        .st-viseme {
-          z-index: 4;
-          top: 28%; left: 50%; transform: translateX(-50%);
-          width: 52%; height: auto;
-          object-fit: contain;
-        }
-        /* Blink – eyes overlay (very top, centred) */
-        .st-blink {
-          z-index: 5;
-          top: 2%; left: 50%; transform: translateX(-50%);
-          width: 35%; height: auto;
-          object-fit: contain;
-        }
-        .tutor-setup-panel {
-          min-height: 100dvh;
-          margin: 0;
-          border-radius: 0;
-          border: 0;
-          background:
-            radial-gradient(circle at top left, rgba(251,191,36,0.22), transparent 28%),
-            radial-gradient(circle at top right, rgba(34,197,94,0.18), transparent 32%),
-            linear-gradient(180deg, #fefce8 0%, #ecfccb 100%);
-          display: grid;
-          place-items: center;
-          padding: 1rem;
-          overflow: hidden;
-        }
-        .tutor-quickstart {
-          width: min(980px, 100%);
-          display: grid;
-          grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
-          gap: 1.25rem;
-          align-items: center;
-          background: rgba(255,255,255,0.9);
-          border: 1px solid rgba(190,242,100,0.8);
-          border-radius: 32px;
-          box-shadow: 0 24px 70px rgba(15,23,42,0.12);
-          padding: 1.5rem;
-        }
-        /* ── Course intro block ───────────────────────────────── */
-        .tutor-course-intro {
-          grid-column: 1 / -1;
-          border-bottom: 1px solid #d9f99d;
-          padding-bottom: 0.9rem;
-          margin-bottom: 0.1rem;
-        }
-        .tutor-course-name {
-          margin: 0.25rem 0 0.45rem;
-          color: #14532d;
-          font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-          font-weight: 900;
-          line-height: 1.05;
-          letter-spacing: -0.01em;
-        }
-        .tutor-course-desc {
-          margin: 0;
-          color: #475569;
-          font-size: 0.98rem;
-          line-height: 1.55;
-        }
-        .tutor-course-chips {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.4rem;
-          margin-top: 0.65rem;
-        }
-        .tutor-feature-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.2rem;
-          padding: 0.28rem 0.78rem;
-          background: #f0fdf4;
-          border: 1px solid #bbf7d0;
-          border-radius: 999px;
-          color: #166534;
-          font-size: 0.82rem;
-          font-weight: 700;
-          white-space: nowrap;
-        }
-        .tutor-quickstart-duo .tutor-course-intro {
-          padding-bottom: 0.6rem;
-          margin-bottom: 0;
-        }
-        .tutor-quickstart-duo .tutor-course-name {
-          font-size: clamp(1.4rem, 2.2vw, 2rem);
-          margin-bottom: 0.35rem;
-        }
-        .tutor-quickstart-duo .tutor-course-desc {
-          font-size: 0.92rem;
-        }
-        .tutor-quickstart-duo .tutor-feature-chip {
-          font-size: 0.78rem;
-          padding: 0.22rem 0.6rem;
-        }
-        /* ── Duo layout: explicit grid placement ──────────────────
-           Row 1 : course-intro (spans both cols)
-           Col 1 : avatar only, spans all remaining rows
-           Col 2 : tagline → form → actions stacked (auto-flow)
-        */
-        .tutor-quickstart-duo .tutor-qs-title {
-          display: none;          /* redundant — course intro covers this */
-        }
-        .tutor-quickstart-duo .tutor-qs-stage {
-          grid-column: 1;
-          grid-row: 2 / span 10;  /* avatar spans all remaining rows */
-          align-self: center;
-        }
-        /* All right-column items: pin to col 2, let grid auto-stack rows */
-        .tutor-quickstart-duo .tutor-qs-tagline,
-        .tutor-quickstart-duo .tutor-onboard-card,
-        .tutor-quickstart-duo .tutor-qs-actions {
-          grid-column: 2;
-        }
-        .tutor-quickstart-duo .tutor-qs-tagline {
-          margin-bottom: 0.1rem;
-        }
-        .tutor-quickstart-duo .tutor-onboard-card {
-          margin-top: 0;
-        }
-        .tutor-quickstart-duo .tutor-qs-actions {
-          margin-top: 0.5rem;
-        }
-        /* ─────────────────────────────────────────────────────── */
-        .tutor-qs-label,
-        .vedic-topbar-label,
-        .vedic-kicker {
-          margin: 0;
-          color: #3f6212;
-          font-size: 0.78rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-        }
-        .tutor-qs-title {
-          margin: 0.35rem 0 0.6rem;
-          color: #14532d;
-          font-size: clamp(1.8rem, 3vw, 2.5rem);
-          line-height: 1.05;
-        }
-        .tutor-quickstart-duo {
-          max-height: calc(100dvh - 3rem);
-          grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-          gap: 1rem;
-          padding: 1rem 1.1rem;
-          align-items: start;
-          overflow: hidden;
-        }
-        .tutor-quickstart-duo .tutor-qs-title {
-          font-size: clamp(1.5rem, 2.3vw, 2.1rem);
-          margin-bottom: 0.35rem;
-        }
-        .tutor-qs-stage {
-          min-height: 320px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(220,252,231,0.9));
-          border: 1px solid rgba(190,242,100,0.75);
-          border-radius: 28px;
-          padding: 0.75rem;
-        }
-        .tutor-quickstart-duo .tutor-qs-stage {
-          min-height: 260px;
-          max-height: 340px;
-          padding: 0.5rem;
-          align-self: stretch;
-        }
-        .tutor-qs-tagline {
-          margin: 0;
-          color: #334155;
-          font-size: 1rem;
-          line-height: 1.55;
-        }
-        .tutor-quickstart-duo .tutor-qs-tagline {
-          font-size: 0.94rem;
-          line-height: 1.45;
-        }
-        .tutor-onboard-card {
-          margin-top: 1rem;
-          padding: 1rem;
-          border-radius: 24px;
-          background: #f8fafc;
-          border: 1px solid #d9f99d;
-          display: grid;
-          gap: 0.9rem;
-        }
-        .tutor-quickstart-duo .tutor-onboard-card {
-          margin-top: 0;
-          padding: 0.6rem 0.85rem;
-          gap: 0.35rem;
-          max-height: none;
-          overflow-y: visible;
-        }
-        /* Optional sections in 2-column mini-grid to save vertical space */
-        .tutor-quickstart-duo .tutor-onboard-optional-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.35rem;
-        }
-        .tutor-onboard-field,
-        .tutor-onboard-group {
-          display: grid;
-          gap: 0.35rem;
-        }
-        .tutor-onboard-field span,
-        .tutor-onboard-label {
-          margin: 0;
-          color: #166534;
-          font-size: 0.86rem;
-          font-weight: 700;
-        }
-        .tutor-onboard-field input {
-          height: 48px;
-          border-radius: 16px;
-          border: 1px solid #cbd5e1;
-          padding: 0 0.9rem;
-          font-size: 1rem;
-          color: #0f172a;
-          background: white;
-        }
-        .tutor-language-pill {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: fit-content;
-          min-height: 38px;
-          padding: 0.45rem 0.9rem;
-          border-radius: 999px;
-          border: 1px solid #16a34a;
-          background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
-          color: white;
-          font-size: 0.9rem;
-          font-weight: 800;
-        }
-        .tutor-avatar-picker {
-          display: flex;
-          gap: 0.9rem;
-          flex-wrap: wrap;
-        }
-        .tutor-avatar-card {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.3rem;
-          padding: 0.5rem 0.65rem 0.4rem;
-          border: 2px solid #e2e8f0;
-          border-radius: 16px;
-          background: white;
-          cursor: pointer;
-          position: relative;
-          transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-          min-width: 82px;
-        }
-        .tutor-avatar-card:hover {
-          border-color: #E91E8C;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 14px rgba(233,30,140,0.15);
-        }
-        .tutor-avatar-card.active {
-          border-color: #E91E8C;
-          background: #fff0f7;
-          box-shadow: 0 0 0 3px rgba(233,30,140,0.15);
-        }
-        .tutor-avatar-card-img {
-          width: 60px;
-          height: 60px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: visible;
-          border-radius: 12px;
-        }
-        .tutor-avatar-card-name {
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: #334155;
-        }
-        .tutor-avatar-card.active .tutor-avatar-card-name {
-          color: #E91E8C;
-        }
-        .tutor-avatar-card-check {
-          position: absolute;
-          top: -7px;
-          right: -7px;
-          width: 20px;
-          height: 20px;
-          border-radius: 999px;
-          background: #E91E8C;
-          color: white;
-          font-size: 0.7rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 800;
-        }
-        .tutor-chip-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.55rem;
-        }
-        .tutor-quickstart-duo .tutor-chip-row {
-          gap: 0.45rem;
-        }
-        .tutor-choice-chip {
-          border: 1px solid #cbd5e1;
-          background: white;
-          color: #334155;
-          border-radius: 999px;
-          padding: 0.62rem 0.95rem;
-          font-size: 0.9rem;
-          font-weight: 700;
-          cursor: pointer;
-        }
-        .tutor-quickstart-duo .tutor-choice-chip {
-          padding: 0.52rem 0.82rem;
-          font-size: 0.84rem;
-        }
-        .tutor-choice-chip.active {
-          color: white;
-          border-color: #16a34a;
-          background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
-          box-shadow: 0 10px 22px rgba(22,163,74,0.22);
-        }
-        .tutor-onboard-note {
-          margin: 0;
-          padding: 0.7rem 0.85rem;
-          border-radius: 16px;
-          background: #fef9c3;
-          color: #854d0e;
-          font-size: 0.86rem;
-          line-height: 1.45;
-        }
-        .tutor-qs-actions {
-          margin-top: 1rem;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.55rem;
-        }
-        .tutor-quickstart-duo .tutor-qs-actions {
-          margin-top: 0.75rem;
-        }
-        .tutor-qs-btn {
-          min-width: 220px;
-          min-height: 52px;
-          border-radius: 18px;
-          background: linear-gradient(180deg, #84cc16 0%, #16a34a 100%);
-          border: 0;
-          box-shadow: 0 16px 30px rgba(34,197,94,0.22);
-          font-size: 1rem;
-          font-weight: 800;
-        }
-        .tutor-quickstart-duo .tutor-qs-btn {
-          min-width: 210px;
-          min-height: 48px;
-        }
-        .link-btn {
-          border: 0;
-          background: transparent;
-          color: #166534;
-          font: inherit;
-          font-weight: 700;
-          cursor: pointer;
-          padding: 0;
-        }
-        /* ── Resume Saved Place banner ── */
-        .tutor-resume-banner {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.75rem;
-          background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-          border: 1.5px solid #86efac;
-          border-radius: 16px;
-          padding: 0.75rem 1rem;
-          margin-bottom: 0.15rem;
-        }
-        .tutor-resume-info {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          min-width: 0;
-        }
-        .tutor-resume-icon { font-size: 1.3rem; flex-shrink: 0; }
-        .tutor-resume-title {
-          margin: 0;
-          font-size: 0.88rem;
-          font-weight: 700;
-          color: #166534;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .tutor-resume-sub {
-          margin: 0;
-          font-size: 0.77rem;
-          color: #4ade80;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .tutor-resume-btn {
-          flex-shrink: 0;
-          background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
-          color: white;
-          border: 0;
-          border-radius: 12px;
-          padding: 0.5rem 1.1rem;
-          font-size: 0.88rem;
-          font-weight: 800;
-          cursor: pointer;
-          box-shadow: 0 4px 12px rgba(34,197,94,0.35);
-          white-space: nowrap;
-        }
-        .tutor-resume-btn:hover { filter: brightness(1.08); }
-        .tutor-resume-btn:disabled { opacity: 0.6; cursor: wait; }
-        .vedic-mission-app {
-          min-height: 100dvh;
-          padding: 0.75rem;
-          background: linear-gradient(160deg, #fdf0f8 0%, #f0f0ff 50%, #f0f7ff 100%);
-          display: grid;
-          grid-template-rows: auto 1fr;
-          gap: 0.75rem;
-        }
-        .vedic-topbar,
-        .vedic-coach-card,
-        .vedic-path-card,
-        .vedic-question-card {
-          background: rgba(255,255,255,0.98);
-          border: 1px solid #e2e8f0;
-          border-radius: 20px;
-          box-shadow: 0 8px 24px rgba(15,23,42,0.05);
-        }
-        .vedic-topbar {
-          padding: 0.6rem 0.75rem;
-          display: grid;
-          gap: 0.35rem;
-        }
-        .vedic-topbar-row {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 0.55rem;
-        }
-        .vedic-topbar-main {
-          min-width: 0;
-          display: grid;
-          justify-items: center;
-          text-align: center;
-        }
-        .vedic-topbar-actions {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          gap: 0.35rem;
-        }
-        .vedic-topbar-btn {
-          min-height: 36px;
-          border-radius: 999px;
-          border: 1px solid #dbeafe;
-          background: #eff6ff;
-          color: #1d4ed8;
-          padding: 0.35rem 0.8rem;
-          font-size: 0.82rem;
-          font-weight: 800;
-          cursor: pointer;
-          white-space: nowrap;
-        }
-        /* Exit / back-to-dashboard button — left of topbar title */
-        .vedic-topbar-exit {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.25rem;
-          min-height: 30px;
-          border-radius: 999px;
-          border: 1px solid #e2e8f0;
-          background: white;
-          color: #64748b;
-          padding: 0.25rem 0.7rem;
-          font-size: 0.78rem;
-          font-weight: 700;
-          cursor: pointer;
-          white-space: nowrap;
-          transition: background 0.15s, color 0.15s;
-          margin-bottom: 0.15rem;
-        }
-        .vedic-topbar-exit:hover {
-          background: #f8fafc;
-          color: #0f172a;
-          border-color: #cbd5e1;
-        }
-        .vedic-topbar-btn.active {
-          border-color: #86efac;
-          background: #f0fdf4;
-          color: #166534;
-        }
-        .vedic-topbar-title {
-          margin: 0.1rem 0 0;
-          color: #0f172a;
-          font-size: clamp(1rem, 1.5vw, 1.2rem);
-          line-height: 1.15;
-          text-align: center;
-        }
-        .vedic-topbar-track {
-          height: 12px;
-          border-radius: 999px;
-          background: #e2e8f0;
-          overflow: hidden;
-          margin-top: 0.3rem;
-        }
-        .vedic-topbar-track-fill {
-          height: 100%;
-          border-radius: 999px;
-          background: linear-gradient(90deg, #E91E8C, #3B3A8C);
-          transition: width 0.5s ease;
-        }
-        .vedic-topbar-stats {
-          display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-          margin-top: 0.4rem;
-          justify-content: center;
-          align-items: center;
-        }
-        .vedic-stat-pill {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.25rem;
-          min-height: 38px;
-          flex: 0 0 auto;
-          border-radius: 999px;
-          padding: 0.45rem 1rem;
-          background: #f8fafc;
-          border: 1.5px solid #e2e8f0;
-          color: #334155;
-          font-size: 0.92rem;
-          font-weight: 800;
-          letter-spacing: 0.01em;
-        }
-        .vedic-stat-pill.heart  { color: #be123c; background: #fff1f2; border-color: #fecdd3; }
-        .vedic-stat-pill.xp     { color: #92400e; background: #fffbeb; border-color: #fde68a; }
-        .vedic-stat-pill.streak { color: #c2410c; background: #fff7ed; border-color: #fed7aa; }
-        .vedic-stat-pill.points { color: #854d0e; background: #fef3c7; border-color: #fde68a; }
-        .vedic-stat-pill.muted  { color: #64748b; background: #f1f5f9; border-color: #e2e8f0; }
-        .desktop-only { display: inline-flex; }
-        .vedic-focus-shell {
-          min-height: 0;
-          display: grid;
-          place-items: start center;
-        }
-        .vedic-focus-card {
-          min-height: 0;
-          height: 100%;
-          width: min(920px, 100%);
-          display: grid;
-          grid-template-rows: auto 1fr auto;
-          gap: 0.85rem;
-          padding: 1rem 1.1rem;
-          background: rgba(255,255,255,0.98);
-          border: 1px solid #e2e8f0;
-          border-radius: 20px;
-          box-shadow: 0 8px 24px rgba(15,23,42,0.05);
-          overflow: hidden;
-        }
-        .vedic-focus-card.spotlight {
-          border-color: #86efac;
-          box-shadow: 0 12px 30px rgba(34,197,94,0.1);
-        }
-        .vedic-focus-top {
-          display: flex;
-          justify-content: space-between;
-          gap: 0.5rem;
-          align-items: center;
-        }
-        .vedic-focus-top.compact {
-          min-height: 32px;
-          padding-bottom: 0.5rem;
-          border-bottom: 1px solid #f1f5f9;
-        }
-        .vedic-focus-top h2 {
-          margin: 0.1rem 0 0.15rem;
-          color: #0f172a;
-          font-size: clamp(1.1rem, 1.7vw, 1.45rem);
-          line-height: 1.2;
-        }
-        .vedic-turn-stack {
-          display: grid;
-          gap: 0.25rem;
-          justify-items: end;
-        }
-        .vedic-stage-pill {
-          border-radius: 999px;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          color: #475569;
-          padding: 0.35rem 0.65rem;
-          font-size: 0.76rem;
-          font-weight: 800;
-          white-space: nowrap;
-        }
-        .vedic-focus-stage {
-          min-height: 0;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-        /* COACH MODE: stacked — avatar+speech row on top, board full-width below */
-        .vedic-focus-stage.coach .vedic-focus-scene {
-          display: flex;
-          flex-direction: column;
-          gap: 0.65rem;
-          flex: 1;
-          min-height: 0;
-        }
-        /* STUDENT MODE: full-width single column */
-        .vedic-focus-stage.student .vedic-focus-scene {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 0.55rem;
-          flex: 1;
-          min-height: 0;
-        }
-        .vedic-focus-scene {
-          min-height: 0;
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 0.55rem;
-        }
-        /* Coach panel: compact horizontal row — avatar left, speech right */
-        .vedic-focus-stage.coach .vedic-focus-coach {
-          grid-template-columns: 92px minmax(0, 1fr);
-          background: linear-gradient(135deg, #f5f0ff 0%, #e8f0fe 100%);
-          border-color: rgba(59,58,140,0.18);
-          padding: 0.7rem 1rem;
-          align-items: center;
-          border-radius: 20px;
-          gap: 0.75rem;
-          flex-shrink: 0;
-        }
-        /* Avatar container — clip to column width so it never bleeds into speech */
-        .vedic-focus-stage.coach .vedic-focus-avatar {
-          width: 92px;
-          min-width: 92px;
-          max-width: 92px;
-          min-height: 88px;
-          max-height: 92px;
-          overflow: hidden;
-          background: transparent;
-          border: none;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .vedic-focus-coach {
-          border-radius: 16px;
-          border: 1px solid #e2e8f0;
-          background: #f8fafc;
-          padding: 0.65rem 0.75rem;
-          display: grid;
-          grid-template-columns: 96px minmax(0, 1fr);
-          gap: 0.65rem;
-          align-items: center;
-        }
-        .vedic-focus-avatar {
-          min-height: 96px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 14px;
-          background: white;
-          border: 1px solid #e2e8f0;
-          overflow: hidden;
-          padding: 4px;
-        }
-        .vedic-focus-copy h3 {
-          margin: 0.1rem 0 0.15rem;
-          color: #0f172a;
-          font-size: 0.98rem;
-          line-height: 1.2;
-          font-weight: 700;
-        }
-        .vedic-focus-copy p:last-child {
-          margin: 0;
-          color: #475569;
-          line-height: 1.4;
-          font-size: 0.82rem;
-        }
-        .vedic-focus-content {
-          min-height: 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 0.55rem;
-          overflow: auto;
-          padding-right: 0.1rem;
-        }
-        /* Board fills remaining space; actions always visible at bottom */
-        .vedic-focus-stage.coach .vedic-focus-content {
-          overflow: hidden;
-        }
-        .vedic-focus-stage.coach .vedic-inline-board {
-          flex: 1;
-          min-height: 0;
-          overflow: hidden;
-        }
-        .vedic-focus-stage.coach .vedic-focus-actions {
-          flex-shrink: 0;
-          padding-top: 0.35rem;
-        }
-        /* Smooth fade-in when student turn panel appears */
-        @keyframes vedicFadeUp {
-          from { opacity: 0; transform: translateY(8px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .vedic-focus-stage.student .vedic-focus-content {
-          animation: vedicFadeUp 0.28s ease forwards;
-        }
-        .vedic-focus-panel {
-          border-radius: 20px;
-          border: 1px solid #e2e8f0;
-          background: white;
-          padding: 1.1rem 1.1rem;
-          display: grid;
-          gap: 0.5rem;
-        }
-        .vedic-focus-panel.question.student {
-          border: 2.5px solid rgba(233,30,140,0.18);
-          background: #fff;
-        }
-        .vedic-focus-panel p {
-          margin: 0;
-        }
-        .vedic-focus-actions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.45rem;
-          justify-content: flex-start;
-        }
-        .vedic-focus-board {
-          min-height: 0;
-          width: 100%;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-        }
-        .vedic-focus-board > * {
-          flex: 1;
-          min-height: 0;
-        }
-        /* Speech bubble — col 2 of coach card, expands to fill space */
-        .rd-speech-bubble {
-          background: white;
-          border: 2px solid rgba(59,58,140,0.2);
-          border-radius: 4px 16px 16px 16px;
-          padding: 0.85rem 1.1rem;
-          font-size: 1rem;
-          color: #1e293b;
-          line-height: 1.6;
-          margin-bottom: 0;
-          box-shadow: 0 2px 8px rgba(59,58,140,0.08);
-          align-self: stretch;
-          display: flex;
-          align-items: center;
-        }
-        .vedic-answer-block-inline {
-          margin-top: 0;
-          position: static;
-          box-shadow: none;
-          background: white;
-          border-color: #e2e8f0;
-        }
-        .vedic-inline-tools-compact {
-          margin-top: 0.2rem;
-        }
-        .vedic-main-layout {
-          min-height: 0;
-          display: grid;
-          grid-template-columns: minmax(0, 1fr);
-          gap: 0.75rem;
-        }
-        .vedic-sidekick {
-          display: none;
-        }
-        .vedic-coach-card,
-        .vedic-path-card {
-          padding: 1rem;
-        }
-        .vedic-coach-head {
-          display: grid;
-          grid-template-columns: 132px minmax(0, 1fr);
-          gap: 0.85rem;
-          align-items: center;
-        }
-        .vedic-coach-avatar {
-          min-height: 164px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          border-radius: 22px;
-          background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
-          padding: 0.4rem;
-        }
-        .vedic-coach-copy h3,
-        .vedic-path-header h3,
-        .vedic-question-top h2 {
-          margin: 0.2rem 0 0.3rem;
-          color: #14532d;
-          line-height: 1.15;
-        }
-        .vedic-coach-copy p:last-child,
-        .vedic-question-subtitle {
-          margin: 0;
-          color: #475569;
-          line-height: 1.5;
-        }
-        .vedic-status-row {
-          margin-top: 0.9rem;
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 0.6rem;
-        }
-        .vedic-status-tile {
-          border-radius: 18px;
-          background: #f8fafc;
-          border: 1px solid #dcfce7;
-          padding: 0.7rem 0.8rem;
-          display: grid;
-          gap: 0.2rem;
-        }
-        .vedic-status-tile span { color: #64748b; font-size: 0.72rem; font-weight: 700; }
-        .vedic-status-tile strong { color: #14532d; font-size: 1rem; }
-        .vedic-coach-note {
-          margin: 0.8rem 0 0;
-          color: #475569;
-          font-size: 0.84rem;
-          line-height: 1.45;
-        }
-        .vedic-badge-strip {
-          margin-top: 0.9rem;
-          display: grid;
-          gap: 0.5rem;
-        }
-        .vedic-badge-chip {
-          display: flex;
-          align-items: center;
-          gap: 0.55rem;
-          border-radius: 16px;
-          padding: 0.65rem 0.8rem;
-          border: 1px solid #d9f99d;
-          background: #f8fafc;
-          color: #475569;
-          font-weight: 700;
-        }
-        .vedic-badge-chip.active { background: #fef9c3; border-color: #facc15; color: #854d0e; }
-        .vedic-path-header {
-          display: flex;
-          justify-content: space-between;
-          gap: 0.7rem;
-          align-items: flex-start;
-          margin-bottom: 0.85rem;
-        }
-        .vedic-path-track {
-          display: grid;
-          gap: 0.7rem;
-          align-content: start;
-          max-height: 100%;
-          overflow: auto;
-          padding-right: 0.2rem;
-        }
-        .vedic-path-node {
-          display: grid;
-          grid-template-columns: 42px minmax(0, 1fr);
-          gap: 0.7rem;
-          align-items: center;
-          padding: 0.75rem;
-          border-radius: 20px;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          margin-left: var(--path-offset, 0);
-        }
-        .vedic-path-node.active { background: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%); border-color: #22c55e; }
-        .vedic-path-node.locked { opacity: 0.55; }
-        .vedic-path-badge {
-          width: 42px;
-          height: 42px;
-          border-radius: 50%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: white;
-          border: 1px solid #d9f99d;
-          font-weight: 800;
-          color: #166534;
-        }
-        .vedic-path-name { color: #334155; font-size: 0.9rem; font-weight: 700; line-height: 1.3; }
-        .vedic-stage { min-height: 0; }
-        .vedic-question-card {
-          min-height: 100%;
-          display: grid;
-          grid-template-rows: auto auto auto 1fr;
-          padding: 0.9rem;
-          gap: 0.75rem;
-        }
-        .vedic-question-card.spotlight { border-color: #22c55e; box-shadow: 0 22px 44px rgba(34,197,94,0.12); }
-        .vedic-question-top {
-          display: flex;
-          justify-content: space-between;
-          gap: 1rem;
-          align-items: flex-start;
-        }
-        .vedic-turn-chip {
-          border-radius: 999px;
-          background: #dcfce7;
-          border: 1px solid #86efac;
-          color: #166534;
-          padding: 0.35rem 0.65rem;
-          font-weight: 800;
-          font-size: 0.8rem;
-          white-space: nowrap;
-        }
-        .vedic-inline-coach {
-          display: grid;
-          grid-template-columns: 96px minmax(0, 1fr) auto;
-          gap: 0.75rem;
-          align-items: center;
-          border-radius: 22px;
-          border: 1px solid #d9f99d;
-          background: linear-gradient(180deg, #f8fafc 0%, #f0fdf4 100%);
-          padding: 0.7rem 0.8rem;
-        }
-        .vedic-inline-avatar {
-          min-height: 96px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          border-radius: 18px;
-          background: white;
-          border: 1px solid #dcfce7;
-          overflow: hidden;
-        }
-        .vedic-inline-copy h3 {
-          margin: 0.15rem 0 0.2rem;
-          color: #14532d;
-          line-height: 1.15;
-        }
-        .vedic-inline-copy p:last-child {
-          margin: 0;
-          color: #475569;
-          line-height: 1.4;
-        }
-        .vedic-inline-stats {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(90px, 1fr));
-          gap: 0.5rem;
-        }
-        .vedic-inline-stat {
-          border-radius: 16px;
-          padding: 0.55rem 0.7rem;
-          background: white;
-          border: 1px solid #dcfce7;
-          display: grid;
-          gap: 0.15rem;
-        }
-        .vedic-inline-stat span {
-          color: #64748b;
-          font-size: 0.68rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
-        }
-        .vedic-inline-stat strong {
-          color: #14532d;
-          font-size: 0.95rem;
-        }
-        .vedic-path-strip {
-          display: flex;
-          gap: 0.4rem;
-          overflow-x: auto;
-          padding-bottom: 0.1rem;
-        }
-        .vedic-path-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.3rem;
-          min-width: auto;
-          padding: 0.35rem 0.45rem;
-          border-radius: 999px;
-          border: 1px solid #e2e8f0;
-          background: white;
-          color: #475569;
-          font-size: 0.78rem;
-          font-weight: 700;
-          white-space: nowrap;
-        }
-        .vedic-path-pill.active {
-          background: #f0fdf4;
-          border-color: #86efac;
-          color: #14532d;
-        }
-        .vedic-path-pill.completed {
-          color: #166534;
-        }
-        .vedic-path-pill.locked {
-          opacity: 0.55;
-        }
-        .vedic-path-pill-badge {
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          font-size: 0.68rem;
-          font-weight: 800;
-        }
-        .vedic-path-pill-text {
-          display: none;
-        }
-        .vedic-question-scroll {
-          min-height: 0;
-          overflow: auto;
-          padding-right: 0.2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.7rem;
-        }
-        .vedic-prompt-stack {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 0.7rem;
-          margin-bottom: 0.8rem;
-        }
-        .vedic-prompt-card {
-          border-radius: 20px;
-          padding: 0.85rem 0.95rem;
-          border: 1px solid #d9f99d;
-          background: #f8fafc;
-          display: grid;
-          gap: 0.35rem;
-        }
-        .vedic-prompt-card.coach {
-          background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
-        }
-        .vedic-prompt-card.try {
-          background: linear-gradient(180deg, #fef9c3 0%, #fef3c7 100%);
-          border-color: #fcd34d;
-        }
-        .vedic-prompt-label {
-          color: #166534;
-          font-size: 0.72rem;
-          font-weight: 800;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-        .vedic-prompt-card.try .vedic-prompt-label {
-          color: #92400e;
-        }
-        .vedic-prompt-card p {
-          margin: 0;
-          color: #1e293b;
-          font-size: 0.92rem;
-          font-weight: 700;
-          line-height: 1.45;
-        }
-        .vedic-progress-copy {
-          margin: 0;
-          color: #64748b;
-          font-size: 0.82rem;
-          line-height: 1.45;
-        }
-        .vedic-inline-board {
-          min-height: 160px;
-          border-radius: 20px;
-          overflow: hidden;
-          border: 1px solid #bfdbfe;
-          background: white;
-        }
-        .vedic-answer-block {
-          margin-top: auto;
-          border-radius: 24px;
-          border: 1.5px solid rgba(59,58,140,0.15);
-          background: rgba(255,255,255,0.98);
-          backdrop-filter: blur(10px);
-          padding: 0.85rem;
-          position: sticky;
-          bottom: 0;
-          box-shadow: 0 -8px 24px rgba(59,58,140,0.08);
-        }
-        .vedic-answer-input {
-          width: 100%;
-          min-height: 60px;
-          border-radius: 18px;
-          border: 2.5px solid #3B3A8C;
-          padding: 0 1rem;
-          font-size: 1.1rem;
-          color: #0f172a;
-          background: white;
-          transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .vedic-answer-input:focus {
-          border-color: #E91E8C;
-          box-shadow: 0 0 0 3px rgba(233,30,140,0.15);
-          outline: none;
-        }
-        /* ═══════════════════════════════════════════════════════════════════
-           MCQ — multiple choice option grid
-           ═══════════════════════════════════════════════════════════════════ */
-        .mcq-grid { width: 100%; }
-        .mcq-options {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.55rem;
-          margin-bottom: 0.4rem;
-        }
-        @media (max-width: 480px) { .mcq-options { grid-template-columns: 1fr; } }
-        .mcq-option {
-          display: flex; align-items: center; gap: 0.65rem;
-          padding: 0.75rem 1rem;
-          border: 2.5px solid #3B3A8C;
-          border-radius: 16px;
-          background: #fff;
-          font-size: 1rem; font-weight: 600;
-          color: #0f172a; cursor: pointer;
-          text-align: left;
-          transition: border-color 0.15s, background 0.15s, transform 0.12s, box-shadow 0.15s;
-          position: relative; overflow: hidden;
-        }
-        .mcq-option:hover:not(:disabled) {
-          border-color: #E91E8C;
-          background: #fdf4fa;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 18px rgba(233,30,140,0.15);
-        }
-        .mcq-option:disabled { cursor: default; }
-        .mcq-opt-letter {
-          display: inline-flex; align-items: center; justify-content: center;
-          width: 28px; height: 28px; flex-shrink: 0;
-          border-radius: 50%; border: 2px solid #3B3A8C;
-          font-size: 0.8rem; font-weight: 800; color: #3B3A8C;
-          background: #ede9fe;
-        }
-        .mcq-opt-text { flex: 1; }
-        .mcq-opt-tick, .mcq-opt-cross {
-          font-size: 1.1rem; font-weight: 800; flex-shrink: 0;
-        }
-        .mcq-opt-tick  { color: #16a34a; }
-        .mcq-opt-cross { color: #dc2626; }
-        /* State variants */
-        .mcq-opt-selected {
-          border-color: #E91E8C; background: #fdf4fa;
-          box-shadow: 0 0 0 3px rgba(233,30,140,0.18);
-        }
-        .mcq-opt-selected .mcq-opt-letter {
-          border-color: #E91E8C; background: #E91E8C; color: #fff;
-        }
-        .mcq-opt-correct {
-          border-color: #16a34a; background: #f0fdf4;
-          box-shadow: 0 0 0 3px rgba(22,163,74,0.18);
-        }
-        .mcq-opt-correct .mcq-opt-letter {
-          border-color: #16a34a; background: #16a34a; color: #fff;
-        }
-        .mcq-opt-wrong {
-          border-color: #dc2626; background: #fef2f2;
-          animation: rd-shake 0.4s ease;
-        }
-        .mcq-opt-wrong .mcq-opt-letter {
-          border-color: #dc2626; background: #dc2626; color: #fff;
-        }
-        .mcq-opt-dim { opacity: 0.45; }
-
-        /* ═══════════════════════════════════════════════════════════════════
-           Fill-the-Step — guided sutra walk
-           ═══════════════════════════════════════════════════════════════════ */
-        .fill-step-block { width: 100%; }
-        .fill-step-list  { display: flex; flex-direction: column; gap: 0.5rem; }
-        .fill-step-row {
-          display: flex; flex-direction: column; gap: 0.35rem;
-          padding: 0.7rem 0.9rem;
-          border: 2px solid #e2e8f0;
-          border-radius: 14px;
-          background: #f8fafc;
-          transition: border-color 0.2s, background 0.2s;
-        }
-        .fill-step-row.fs-active  { border-color: #3B3A8C; background: #f5f3ff; }
-        .fill-step-row.fs-done    { border-color: #16a34a; background: #f0fdf4; }
-        .fill-step-row.fs-future  { opacity: 0.45; }
-        .fs-label {
-          display: flex; align-items: center; gap: 0.55rem;
-          font-size: 0.9rem; color: #374151; font-weight: 600;
-        }
-        .fs-num {
-          display: inline-flex; align-items: center; justify-content: center;
-          width: 24px; height: 24px; flex-shrink: 0;
-          border-radius: 50%; border: 2px solid #3B3A8C;
-          font-size: 0.75rem; font-weight: 800; color: #3B3A8C;
-          background: #ede9fe;
-        }
-        .fs-done .fs-num { border-color: #16a34a; background: #16a34a; color: #fff; }
-        .fs-text { flex: 1; }
-        .fs-done-val {
-          display: flex; align-items: center; gap: 0.5rem;
-          font-size: 1rem; font-weight: 700; color: #16a34a; padding-left: 2rem;
-        }
-        .fs-tick { font-size: 1.1rem; }
-        .fs-input-row {
-          display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
-          padding-left: 2rem;
-        }
-        .fs-input {
-          flex: 1; min-width: 80px; min-height: 44px !important;
-          font-size: 0.95rem !important; padding: 0 0.75rem !important;
-        }
-        .fs-submit {
-          flex-shrink: 0; min-height: 44px !important;
-          padding: 0 1.1rem !important; font-size: 1rem !important;
-          border-radius: 12px !important;
-        }
-        .fs-hint { font-size: 0.8rem; color: #6b7280; width: 100%; padding-left: 0; }
-        .fs-future-placeholder { color: #94a3b8; font-size: 0.85rem; padding-left: 2rem; }
-
-        @keyframes rd-shake {
-          0%,100% { transform: translateX(0); }
-          20%      { transform: translateX(-8px); }
-          40%      { transform: translateX(8px); }
-          60%      { transform: translateX(-5px); }
-          80%      { transform: translateX(5px); }
-        }
-        .rd-wrong-shake { animation: rd-shake 0.45s ease; }
-        @keyframes rd-correct-glow {
-          0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); }
-          100% { box-shadow: 0 0 0 14px rgba(34,197,94,0); }
-        }
-        .rd-correct-glow { animation: rd-correct-glow 0.6s ease; }
-        @keyframes rd-float-xp {
-          0%   { opacity: 1; transform: translateY(0) scale(1); }
-          100% { opacity: 0; transform: translateY(-50px) scale(1.2); }
-        }
-        .rd-xp-float {
-          position: fixed; pointer-events: none; z-index: 500;
-          font-size: 1.2rem; font-weight: 900; color: #E91E8C;
-          animation: rd-float-xp 1.3s ease forwards;
-        }
-        .vedic-action-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.55rem;
-          margin-top: 0.85rem;
-        }
-        .vedic-primary-btn {
-          min-width: 140px;
-          border-radius: 20px;
-          background: linear-gradient(135deg, #E91E8C 0%, #3B3A8C 100%);
-          border: 0;
-          font-weight: 800;
-          letter-spacing: 0.02em;
-          transition: transform 0.1s, box-shadow 0.1s;
-          box-shadow: 0 4px 14px rgba(233,30,140,0.3);
-        }
-        .vedic-primary-btn:hover:not(:disabled) {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 18px rgba(233,30,140,0.4);
-        }
-        .vedic-primary-btn:active:not(:disabled) {
-          transform: translateY(0);
-        }
-        .vedic-alert { margin: 0.4rem 0 0; color: #b91c1c; font-weight: 800; }
-        .vedic-support-grid {
-          display: none;
-        }
-        .vedic-inline-tools {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 0.65rem;
-          margin-top: 0.75rem;
-        }
-        .vedic-inline-fold {
-          border: 1px solid #d9f99d;
-          border-radius: 18px;
-          overflow: hidden;
-          background: #f8fafc;
-        }
-        .vedic-fold {
-          border: 1px solid #d9f99d;
-          border-radius: 22px;
-          overflow: hidden;
-          background: #f8fafc;
-        }
-        .vedic-fold summary {
-          cursor: pointer;
-          list-style: none;
-          padding: 0.9rem 1rem;
-          background: #f0fdf4;
-          color: #166534;
-          font-weight: 800;
-        }
-        .vedic-fold summary::-webkit-details-marker { display: none; }
-        .vedic-fold-body {
-          padding: 0.9rem 1rem 1rem;
-          display: grid;
-          gap: 0.8rem;
-        }
-        .vedic-board-frame {
-          min-height: 220px;
-          border-radius: 18px;
-          background: white;
-          border: 1px solid #dbeafe;
-          overflow: hidden;
-        }
-        .vedic-board-frame.compact {
-          min-height: 180px;
-        }
-        .vedic-board-actions { display: flex; gap: 0.55rem; flex-wrap: wrap; }
-        .vedic-help-panel {
-          margin-top: 0;
-          padding: 0;
-          border: 0;
-          background: transparent;
-        }
-        .vedic-help-note {
-          margin: 0 0 0.7rem;
-          color: #475569;
-          font-size: 0.82rem;
-          line-height: 1.45;
-        }
-
-        /* ── Coach-A Layout ─────────────────────────────────────────────── */
-        .ca-app {
-          display: flex;
-          flex-direction: column;
-          height: 100dvh;
-          overflow: hidden;
-          background: #f1f5f9;
-          margin: 0 -1.5rem;
-        }
-        .tutor-shell-live {
-          max-width: none;
-          padding: 0;
-          height: 100dvh;
-          overflow: hidden;
-        }
-        .ca-app-minimal {
-          height: 100dvh;
-          background:
-            radial-gradient(circle at top left, rgba(187,247,208,0.65), transparent 34%),
-            linear-gradient(180deg, #f7fee7 0%, #ecfccb 100%);
-          margin: 0;
-        }
-
-        /* Progress strip */
-        .ca-strip {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          padding: 0 1.25rem;
-          background: #0f172a;
-          color: white;
-          height: 46px;
-          flex-shrink: 0;
-          overflow: hidden;
-        }
-        .ca-strip-chapter {
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: #e2e8f0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: 200px;
-        }
-        .ca-strip-bar-wrap {
-          flex: 1;
-          height: 5px;
-          background: #334155;
-          border-radius: 999px;
-          overflow: hidden;
-          min-width: 60px;
-        }
-        .ca-strip-bar {
-          height: 100%;
-          background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-          border-radius: 999px;
-          transition: width 0.5s ease;
-        }
-        .ca-strip-stat {
-          font-size: 0.72rem;
-          color: #94a3b8;
-          white-space: nowrap;
-        }
-        .ca-strip-stat.muted { color: #475569; }
-        .ca-strip-points {
-          color: #facc15;
-          font-weight: 700;
-        }
-        .ca-app-minimal .ca-strip {
-          margin: 1rem 1rem 0;
-          border-radius: 18px;
-          background: rgba(255,255,255,0.92);
-          border: 1px solid #d9f99d;
-          box-shadow: 0 12px 30px rgba(22,101,52,0.08);
-          color: #0f172a;
-        }
-        .ca-app-minimal .ca-strip-bar-wrap {
-          background: #dbeafe;
-        }
-        .ca-app-minimal .ca-strip-bar {
-          background: linear-gradient(90deg, #84cc16, #10b981);
-        }
-        .ca-app-minimal .ca-strip-chapter,
-        .ca-app-minimal .ca-strip-stat {
-          color: #334155;
-        }
-        .ca-app-minimal .ca-strip-stat.muted {
-          color: #64748b;
-        }
-
-        /* Body: left coach + right content */
-        .ca-body {
-          display: grid;
-          grid-template-columns: 260px 1fr;
-          flex: 1;
-          min-height: 0;
-          overflow: hidden;
-        }
-
-        /* Left coach panel */
-        .ca-coach {
-          display: flex;
-          flex-direction: column;
-          background: linear-gradient(180deg, #0f172a 0%, #1e293b 55%, #162032 100%);
-          border-right: 1px solid #1e3a5f;
-          overflow-y: auto;
-          overflow-x: hidden;
-        }
-        .ca-coach-stage {
-          height: 280px;
-          flex-shrink: 0;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          padding-bottom: 0;
-        }
-        .ca-coach-speech {
-          margin: 0.5rem 0.75rem;
-          background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.10);
-          border-radius: 10px;
-          padding: 0.55rem 0.75rem;
-          min-height: 50px;
-          flex-shrink: 0;
-        }
-        .ca-coach-speech p {
-          font-size: 0.80rem;
-          color: #cbd5e1;
-          line-height: 1.45;
-          margin: 0;
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        /* Chapter + exercise nav */
-        .ca-coach-nav {
-          flex: 1;
-          padding: 0 0.5rem 1rem;
-          overflow-y: auto;
-        }
-        .ca-nav-label {
-          font-size: 0.66rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: #475569;
-          padding: 0.3rem 0.5rem 0.2rem;
-          margin: 0;
-        }
-        .ca-chapter-list { display: flex; flex-direction: column; gap: 1px; }
-        .ca-chapter-item {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.3rem 0.5rem;
-          border-radius: 6px;
-          cursor: default;
-          transition: background 0.15s;
-        }
-        .ca-chapter-item.active {
-          background: rgba(14,165,233,0.18);
-        }
-        .ca-ch-num {
-          font-size: 0.65rem;
-          color: #475569;
-          font-weight: 700;
-          width: 18px;
-          flex-shrink: 0;
-        }
-        .ca-ch-name {
-          font-size: 0.72rem;
-          color: #64748b;
-          flex: 1;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .ca-chapter-item.active .ca-ch-name { color: #e2e8f0; font-weight: 600; }
-        .ca-ch-badge {
-          font-size: 0.6rem;
-          font-weight: 700;
-          background: #0ea5e9;
-          color: white;
-          padding: 0.1rem 0.35rem;
-          border-radius: 999px;
-          flex-shrink: 0;
-        }
-
-        .ca-ex-list { display: flex; flex-direction: column; gap: 2px; }
-        .ca-ex-item {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-          padding: 0.22rem 0.5rem;
-          border-radius: 5px;
-          font-size: 0.70rem;
-          color: #64748b;
-        }
-        .ca-ex-item.active { background: rgba(255,255,255,0.06); color: #94a3b8; }
-        .ca-ex-dot { width: 14px; flex-shrink: 0; font-size: 0.65rem; }
-        .ca-ex-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .ca-ex-grp {
-          font-size: 0.6rem;
-          color: #475569;
-          background: rgba(255,255,255,0.06);
-          padding: 0.05rem 0.3rem;
-          border-radius: 4px;
-          flex-shrink: 0;
-        }
-
-        .ca-mini-stats {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.4rem;
-          margin-top: 0.8rem;
-          padding: 0 0.25rem;
-        }
-        .ca-mini-stat {
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: 8px;
-          padding: 0.35rem 0.5rem;
-          display: flex;
-          flex-direction: column;
-        }
-        .ca-mini-stat span { font-size: 0.62rem; color: #475569; }
-        .ca-mini-stat strong { font-size: 0.82rem; color: #94a3b8; font-weight: 700; }
-        .ca-mission-card {
-          padding: 0.8rem;
-          border-radius: 14px;
-          background: linear-gradient(180deg, rgba(22,163,74,0.2) 0%, rgba(15,23,42,0.18) 100%);
-          border: 1px solid rgba(74,222,128,0.18);
-          margin: 0.2rem 0.25rem 0.65rem;
-        }
-        .ca-mission-title {
-          margin: 0.2rem 0 0.25rem;
-          color: #f8fafc;
-          font-size: 0.98rem;
-          line-height: 1.3;
-        }
-        .ca-mission-copy {
-          margin: 0;
-          color: #cbd5e1;
-          font-size: 0.75rem;
-          line-height: 1.45;
-        }
-        .ca-reward-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.45rem;
-          margin-top: 0.7rem;
-        }
-        .ca-reward-chip {
-          display: inline-flex;
-          align-items: center;
-          border-radius: 999px;
-          padding: 0.24rem 0.55rem;
-          font-size: 0.68rem;
-          font-weight: 700;
-          color: #ecfccb;
-          background: rgba(15,23,42,0.28);
-          border: 1px solid rgba(255,255,255,0.09);
-        }
-        .ca-badge-row {
-          display: grid;
-          gap: 0.45rem;
-          margin-top: 0.75rem;
-        }
-        .ca-badge {
-          display: flex;
-          align-items: center;
-          gap: 0.45rem;
-          padding: 0.45rem 0.55rem;
-          border-radius: 10px;
-          background: rgba(15,23,42,0.28);
-          border: 1px solid rgba(255,255,255,0.06);
-          color: #94a3b8;
-          font-size: 0.72rem;
-        }
-        .ca-badge strong {
-          color: #e2e8f0;
-          font-size: 0.64rem;
-          letter-spacing: 0.08em;
-        }
-        .ca-badge.active {
-          color: #f8fafc;
-          border-color: rgba(250,204,21,0.4);
-          background: rgba(250,204,21,0.12);
-        }
-
-        /* Right content panel */
-        .ca-content {
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-          background: white;
-        }
-
-        /* Board */
-        .ca-board {
-          flex: 1;
-          min-height: 0;
-          background: #f8fafc;
-          border-bottom: 1px solid #e2e8f0;
-          overflow: hidden;
-          position: relative;
-        }
-        .ca-board-idle {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-          color: #94a3b8;
-          gap: 0.4rem;
-        }
-        .ca-idle-icon { font-size: 2rem; }
-        .ca-idle-text { font-size: 0.9rem; font-weight: 600; color: #64748b; margin: 0; }
-
-        /* Board toolbar */
-        .ca-board-bar {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.4rem 0.75rem;
-          background: #f8fafc;
-          border-bottom: 1px solid #e2e8f0;
-          flex-shrink: 0;
-          flex-wrap: wrap;
-        }
-        .ca-speed-row {
-          display: flex;
-          align-items: center;
-          gap: 0.3rem;
-          font-size: 0.75rem;
-          color: #475569;
-        }
-        .ca-speed-row input[type="range"] { width: 70px; }
-
-        /* Question zone */
-        .ca-question {
-          padding: 0.9rem 1.25rem 1rem;
-          background: white;
-          overflow-y: auto;
-          flex-shrink: 0;
-          max-height: 46vh;
-          border-top: 2px solid #e2e8f0;
-        }
-        .ca-question.spotlight {
-          background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-          border-top-color: #10b981;
-        }
-        .ca-question-head {
-          margin-bottom: 0.55rem;
-        }
-        .ca-question-label {
-          margin: 0 0 0.15rem;
-          font-size: 0.72rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: #16a34a;
-        }
-        .ca-question-subtle {
-          margin: 0;
-          color: #475569;
-          font-size: 0.8rem;
-        }
-        .ca-app-minimal .ca-body {
-          grid-template-columns: 240px minmax(0, 1fr);
-          gap: 1rem;
-          padding: 1rem;
-        }
-        .ca-app-minimal .ca-coach {
-          border-radius: 24px;
-          border: 1px solid rgba(255,255,255,0.6);
-          box-shadow: 0 18px 40px rgba(15,23,42,0.12);
-        }
-        .ca-app-minimal .ca-coach-stage {
-          height: 180px;
-          padding-top: 0.5rem;
-        }
-        .ca-app-minimal .ca-coach-speech {
-          margin-top: 0;
-        }
-        .ca-app-minimal .ca-coach-nav {
-          padding-bottom: 0.75rem;
-        }
-        .ca-app-minimal .ca-ex-list {
-          max-height: 220px;
-          overflow-y: auto;
-        }
-        .ca-app-minimal .ca-content {
-          gap: 0.85rem;
-          background: transparent;
-        }
-        .ca-app-minimal .ca-board,
-        .ca-app-minimal .ca-board-bar,
-        .ca-app-minimal .ca-question {
-          border-radius: 24px;
-          border: 1px solid #d9f99d;
-          box-shadow: 0 18px 40px rgba(15,23,42,0.08);
-        }
-        .ca-app-minimal .ca-board {
-          flex: 0 0 44%;
-          background: rgba(255,255,255,0.96);
-        }
-        .ca-app-minimal .ca-board-bar {
-          background: rgba(255,255,255,0.96);
-          border-bottom: 0;
-          padding: 0.6rem 0.85rem;
-        }
-        .ca-app-minimal .ca-question {
-          flex: 1;
-          min-height: 0;
-          max-height: none;
-          background: rgba(255,255,255,0.97);
-          border-top-width: 1px;
-        }
-        .ca-help-drawer {
-          margin-top: 0.85rem;
-          border: 1px solid #d9f99d;
-          border-radius: 18px;
-          background: #f8fafc;
-          overflow: hidden;
-        }
-        .ca-help-drawer summary {
-          cursor: pointer;
-          list-style: none;
-          padding: 0.8rem 1rem;
-          font-weight: 700;
-          color: #166534;
-          background: #f0fdf4;
-        }
-        .ca-help-drawer summary::-webkit-details-marker {
-          display: none;
-        }
-        .ca-help-dock {
-          margin-top: 0;
-          border: 0;
-          border-radius: 0;
-        }
-
-        /* Keep udemy-question-meta / text / feedback / qa-dock classes used inside ca-question */
-        .udemy-question-meta {
-          display: flex;
-          gap: 0.4rem;
-          margin-bottom: 0.6rem;
-          flex-wrap: wrap;
-        }
-        .udemy-question-text {
-          font-size: clamp(1.2rem, 2.5vw, 1.55rem);
-          margin: 0 0 0.75rem;
-          line-height: 1.4;
-          color: #0f172a;
-        }
-        .udemy-visual { margin-bottom: 0.75rem; background: #f8fafc; }
-        .vedic-svg-asset { display: flex; flex-direction: column; align-items: center; padding: 0.75rem; border-radius: 10px; border: 1.5px solid #e2e8f0; }
-        .vedic-svg-img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
-        .vedic-svg-caption { margin-top: 0.4rem; font-size: 0.78rem; color: #64748b; text-align: center; }
-        .udemy-answer-label {
-          display: block;
-          margin-bottom: 0.3rem;
-          font-weight: 700;
-          font-size: 0.9rem;
-        }
-        .udemy-hint { margin-top: 0.4rem; margin-bottom: 0; font-size: 0.82rem; }
-        .udemy-answer-actions {
-          display: flex;
-          gap: 0.4rem;
-          margin-top: 0.75rem;
-          flex-wrap: wrap;
-        }
-
-        /* Feedback */
-        .udemy-feedback {
-          border-radius: 10px;
-          padding: 1rem 1.1rem;
-          border-left: 4px solid #cbd5e1;
-          background: #f8fafc;
-          margin-top: 0.75rem;
-        }
-        .udemy-feedback.correct { border-left-color: #059669; background: #ecfdf5; }
-        .udemy-feedback.wrong   { border-left-color: #dc2626; background: #fef2f2; }
-        .udemy-feedback-verdict { font-size: 1.05rem; font-weight: 700; margin: 0 0 0.4rem; }
-        .udemy-feedback.correct .udemy-feedback-verdict { color: #065f46; }
-        .udemy-feedback.wrong   .udemy-feedback-verdict { color: #991b1b; }
-
-        /* Q&A dock */
-        .udemy-qa-dock {
-          background: white;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px;
-          padding: 1rem 1.1rem;
-          margin-top: 0.75rem;
-        }
-        .udemy-qa-title { margin: 0 0 0.7rem; font-size: 0.95rem; font-weight: 700; color: #1e293b; }
-        .udemy-chat-history {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          max-height: 280px;
-          overflow-y: auto;
-          margin-bottom: 0.75rem;
-          padding: 0.5rem;
-          background: #f8fafc;
-          border-radius: 8px;
-          border: 1px solid #e2e8f0;
-        }
-        .udemy-chat-bubble { display: flex; flex-direction: column; max-width: 85%; }
-        .udemy-chat-bubble.student { align-self: flex-end; align-items: flex-end; }
-        .udemy-chat-bubble.tutor   { align-self: flex-start; align-items: flex-start; }
-        .udemy-bubble-text {
-          padding: 0.5rem 0.75rem;
-          font-size: 0.88rem;
-          line-height: 1.5;
-          white-space: pre-wrap;
-          word-break: break-word;
-        }
-        .udemy-chat-bubble.student .udemy-bubble-text {
-          background: var(--accent, #0ea5e9);
-          color: white;
-          border-radius: 12px 12px 2px 12px;
-        }
-        .udemy-chat-bubble.tutor .udemy-bubble-text {
-          background: white;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px 12px 12px 2px;
-        }
-        .udemy-bubble-name { font-size: 0.72rem; color: #94a3b8; margin-top: 2px; }
-        .udemy-chat-input-row { display: flex; gap: 0.5rem; align-items: flex-end; }
-        .udemy-chat-input {
-          flex: 1;
-          border-radius: 8px;
-          border: 1px solid #cbd5e1;
-          padding: 0.5rem 0.75rem;
-          font-size: 0.88rem;
-          resize: none;
-          font-family: inherit;
-        }
-
-        /* Developer tools */
-        .udemy-devtools {
-          margin: 0.5rem 0.75rem 0.75rem;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-        .udemy-devtools > summary {
-          cursor: pointer;
-          padding: 0.5rem 0.75rem;
-          font-size: 0.78rem;
-          font-weight: 600;
-          color: #64748b;
-          background: #f8fafc;
-          user-select: none;
-          list-style: none;
-        }
-        .udemy-devtools > summary::before { content: "▶  "; font-size: 0.6rem; }
-        .udemy-devtools[open] > summary::before { content: "▼  "; }
-        .udemy-devtools-body {
-          padding: 0.75rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        /* Mobile: stack vertically */
-        @media (max-width: 768px) {
-          .tutor-setup-panel {
-            padding: 0.75rem;
-            overflow: auto;
-            min-height: auto;
-          }
-          .tutor-quickstart,
-          .tutor-quickstart-duo {
-            grid-template-columns: 1fr;
-            max-height: none;
-            width: min(100%, 560px);
-            padding: 0.9rem;
-          }
-          /* Reset duo-layout grid-column overrides — single column on mobile */
-          .tutor-quickstart-duo .tutor-qs-stage,
-          .tutor-quickstart-duo .tutor-qs-tagline,
-          .tutor-quickstart-duo .tutor-onboard-card,
-          .tutor-quickstart-duo .tutor-qs-actions {
-            grid-column: 1;
-            grid-row: auto;
-          }
-          .tutor-qs-stage,
-          .tutor-quickstart-duo .tutor-qs-stage {
-            min-height: 150px;
-            max-height: 150px;
-          }
-          .tutor-qs-title {
-            font-size: 1.45rem;
-          }
-          /* Hide optional form sections on mobile — no scroll needed */
-          .tutor-onboard-optional { display: none; }
-          .tutor-onboard-card {
-            margin-top: 0.4rem;
-            padding: 0.65rem 0.75rem;
-            gap: 0.45rem;
-            max-height: none !important;
-            overflow-y: visible !important;
-          }
-          /* Shrink coach avatar cards on mobile — 3 must fit in one row */
-          .tutor-avatar-card {
-            width: 60px;
-            min-width: 60px;
-            padding: 0.25rem 0.2rem 0.2rem;
-          }
-          .tutor-avatar-card-img {
-            width: 44px;
-            height: 44px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .tutor-avatar-card-img img,
-          .tutor-avatar-card-img svg,
-          .tutor-avatar-card-img > * { max-width: 44px; max-height: 44px; }
-          .tutor-avatar-card-name { font-size: 0.7rem; margin-top: 0.1rem; }
-          .tutor-avatar-picker { gap: 0.4rem; }
-          /* Tighten grid gap */
-          .tutor-quickstart, .tutor-quickstart-duo { gap: 0.5rem; }
-          /* Compact course intro on mobile */
-          .tutor-course-intro {
-            padding-bottom: 0.3rem;
-            gap: 0.25rem;
-          }
-          .tutor-course-intro .tutor-course-desc { display: none; }
-          .tutor-course-chips { display: none; }
-          /* Compact tagline: 2 lines max */
-          .tutor-qs-tagline {
-            font-size: 0.82rem;
-            line-height: 1.3;
-            margin: 0.1rem 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }
-          /* Avatar stage: fixed height, show from top so head is visible */
-          .tutor-qs-stage,
-          .tutor-quickstart-duo .tutor-qs-stage {
-            min-height: 120px !important;
-            max-height: 120px !important;
-            overflow: hidden;
-            display: flex !important;
-            align-items: flex-start !important;
-            justify-content: center;
-            padding-top: 0.3rem;
-          }
-          .tutor-qs-stage img {
-            max-height: 115px;
-            width: auto;
-            object-fit: contain;
-          }
-          /* Actions: hide hint texts, keep just the button */
-          .tutor-qs-actions .muted,
-          .tutor-qs-actions .tutor-qs-hint { display: none; }
-          .tutor-qs-actions {
-            margin-top: 0.4rem;
-          }
-          .tutor-qs-btn {
-            width: 100%;
-            min-width: 0;
-          }
-          .vedic-mission-app {
-            padding: 0.55rem;
-            gap: 0.55rem;
-          }
-          .vedic-topbar {
-            padding: 0.5rem 0.6rem;
-            gap: 0.25rem;
-          }
-          /* Topbar: title + actions in one row on mobile */
-          .vedic-topbar-row {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.35rem;
-          }
-          .vedic-topbar-main {
-            text-align: left;
-            justify-items: start;
-            flex: 1;
-            min-width: 0;
-          }
-          .vedic-topbar-title {
-            font-size: 0.95rem;
-            text-align: left;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          .vedic-topbar-label {
-            font-size: 0.68rem;
-          }
-          /* Actions: compact icon-style buttons */
-          .vedic-topbar-actions {
-            flex-wrap: nowrap;
-            gap: 0.3rem;
-            justify-content: flex-end;
-          }
-          .vedic-topbar-btn {
-            min-height: 34px;
-            padding: 0.3rem 0.55rem;
-            font-size: 0.78rem;
-          }
-          /* Stats: single row, smaller pills, show only key 3 */
-          .vedic-topbar-stats {
-            gap: 0.3rem;
-            margin-top: 0.2rem;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            justify-content: flex-start;
-            padding-bottom: 2px;
-          }
-          .vedic-stat-pill {
-            min-height: 30px;
-            padding: 0.25rem 0.55rem;
-            font-size: 0.78rem;
-          }
-          /* Hide less-critical pills on mobile to save space */
-          .vedic-stat-pill.points,
-          .vedic-stat-pill.muted {
-            display: none;
-          }
-          .desktop-only {
-            display: none;
-          }
-          .vedic-topbar-row {
-            gap: 0.35rem;
-            align-items: center;
-          }
-          .vedic-topbar-actions {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-          }
-          .vedic-topbar-btn {
-            justify-content: center;
-          }
-          .vedic-topbar-title {
-            font-size: 1.02rem;
-          }
-          .vedic-topbar-track,
-          .vedic-topbar-stats {
-            display: none;
-          }
-          .vedic-stat-pill {
-            min-height: 30px;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.76rem;
-          }
-          .vedic-topbar-stats .vedic-stat-pill:nth-child(n + 5) {
-            display: none;
-          }
-          .vedic-main-layout {
-            grid-template-columns: 1fr;
-          }
-          .vedic-focus-card {
-            padding: 0.65rem 0.7rem;
-            gap: 0.55rem;
-            border-radius: 20px;
-          }
-          .vedic-focus-top {
-            flex-direction: row;
-            gap: 0.4rem;
-          }
-          .vedic-focus-scene {
-            grid-template-columns: 1fr;
-          }
-          /* Coach mode mobile: already flex column, just tighten avatar */
-          .vedic-focus-stage.coach .vedic-focus-scene {
-            gap: 0.4rem;
-            min-height: unset;
-          }
-          .vedic-focus-stage.coach .vedic-focus-coach {
-            grid-template-columns: 68px minmax(0, 1fr);
-            padding: 0.55rem 0.65rem;
-            gap: 0.5rem;
-          }
-          .vedic-focus-stage.coach .vedic-focus-avatar {
-            width: 68px;
-            min-height: 68px;
-            max-height: 68px;
-            overflow: hidden;
-            flex-shrink: 0;
-          }
-          /* Speech bubble: show below coach row, full width, bigger text */
-          .rd-speech-bubble {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            padding: 0.75rem 0.9rem;
-            border-radius: 14px;
-            margin-bottom: 0.4rem;
-          }
-          /* Board: full width below coach area, cap height on mobile */
-          .vedic-inline-board.vedic-focus-board {
-            max-height: 200px;
-            overflow: hidden;
-          }
-          /* Try It button: full width, tall, easy to tap */
-          .vedic-focus-actions {
-            flex-direction: column;
-            gap: 0.45rem;
-          }
-          .vedic-focus-actions .button,
-          .vedic-focus-actions .vedic-primary-btn {
-            width: 100%;
-            min-height: 52px;
-            font-size: 1.05rem;
-          }
-          .vedic-focus-coach {
-            grid-template-columns: 48px minmax(0, 1fr);
-            padding: 0.42rem 0.48rem;
-            gap: 0.4rem;
-          }
-          .vedic-focus-avatar {
-            min-height: 48px;
-          }
-          .vedic-focus-copy h3 {
-            font-size: 0.94rem;
-            margin-bottom: 0.2rem;
-          }
-          .vedic-focus-copy p {
-            display: none;
-          }
-          .vedic-path-pill {
-            min-width: auto;
-            padding: 0.28rem 0.35rem;
-          }
-          .vedic-path-pill-badge {
-            width: 20px;
-            height: 20px;
-            font-size: 0.62rem;
-          }
-          .vedic-focus-panel {
-            padding: 0.65rem 0.7rem;
-          }
-          .vedic-answer-block {
-            padding: 0.7rem;
-            border-radius: 18px;
-          }
-          .vedic-question-label { font-size: 0.78rem; }
-          .vedic-question-text  { font-size: 1.15rem; line-height: 1.45; }
-          .vedic-hint-card      { font-size: 0.96rem; }
-          .vedic-answer-input {
-            min-height: 54px;
-            font-size: 1.1rem;
-            border-radius: 16px;
-          }
-          .vedic-answer-block {
-            border-radius: 18px;
-          }
-          /* Question text bigger and easier to read */
-          .udemy-question-text,
-          .vedic-question-text {
-            font-size: 1.2rem;
-            line-height: 1.5;
-          }
-          /* Hint card text */
-          .udemy-hint,
-          .vedic-hint-card {
-            font-size: 0.98rem;
-          }
-          /* Check/Submit button — big thumb-friendly target */
-          .button.primary,
-          .vedic-primary-btn {
-            min-height: 52px;
-            font-size: 1.05rem;
-          }
-          .vedic-action-row {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.45rem;
-          }
-          .vedic-action-row .button {
-            width: 100%;
-            min-width: 0;
-            margin: 0;
-          }
-          .vedic-focus-actions {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-          .vedic-focus-actions .button {
-            width: 100%;
-            min-width: 0;
-          }
-          .vedic-inline-tools {
-            grid-template-columns: 1fr;
-          }
-          .vedic-fold summary {
-            padding: 0.75rem 0.85rem;
-          }
-          .vedic-fold-body {
-            padding: 0.8rem 0.85rem 0.85rem;
-          }
-          .ca-body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-          .ca-coach { flex-direction: row; height: 100px; }
-          .ca-coach-stage { height: 100px; width: 80px; }
-          .ca-coach-speech { display: block; }
-          .ca-coach-speech p { font-size: 1.05rem; line-height: 1.5; -webkit-line-clamp: 6; }
-          .ca-coach-nav { display: none; }
-          .vedic-focus-copy h3 { font-size: 1.18rem; }
-          .vedic-focus-copy p:last-child { font-size: 0.98rem; }
-          .vedic-focus-coach { grid-template-columns: 72px minmax(0,1fr); gap: 0.5rem; }
-          .vedic-focus-avatar { min-height: 72px; }
-          .vedic-focus-panel { padding: 0.6rem 0.65rem; gap: 0.5rem; }
-          .vedic-answer-block { padding: 0.65rem 0.7rem; }
-          .vedic-answer-input { min-height: 52px; font-size: 1.05rem; }
-          .vedic-action-row .button, .vedic-focus-actions .button { font-size: 0.98rem; min-height: 48px; }
-          .ca-app { margin: 0 -1rem; }
-          .ca-app-minimal .ca-body {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto 1fr;
-            padding: 0.75rem;
-          }
-          .ca-app-minimal .ca-board {
-            flex: 0 0 34%;
-            min-height: 220px;
-          }
-          .ca-app-minimal .ca-question {
-            padding: 0.85rem 0.95rem 1rem;
-          }
-        }
-
-        /* Mobile chapters FAB — only on small screens */
-        .mobile-chapters-fab {
-          display: none;
-        }
-        @media (max-width: 768px) {
-          .mobile-chapters-fab {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 200;
-            background: #0f172a;
-            color: #e2e8f0;
-            border: 1px solid #334155;
-            border-radius: 2rem;
-            padding: 0.55rem 1rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-          }
-          .mobile-nav-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 300;
-            background: rgba(0,0,0,0.55);
-            display: flex;
-            align-items: flex-end;
-          }
-          .mobile-nav-drawer {
-            background: #1e293b;
-            width: 100%;
-            max-height: 70dvh;
-            border-radius: 1rem 1rem 0 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-          }
-          .mobile-nav-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.85rem 1rem;
-            border-bottom: 1px solid #334155;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #e2e8f0;
-          }
-          .mobile-nav-close {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 1.1rem;
-            cursor: pointer;
-            padding: 0.2rem 0.4rem;
-          }
-          .mobile-nav-drawer .ca-coach-nav {
-            display: block;
-            overflow-y: auto;
-            flex: 1;
-            padding: 0.5rem;
-          }
-        }
-      `}</style>
 
       {/* ── Demo mode banner ─────────────────────────────────────────── */}
       {isDemoMode && status === "ready" && (
@@ -8078,6 +5747,26 @@ function TutorContent() {
             </div>
           )}
         </>
+      )}
+
+      {/* ── Debug overlay — visible when ?debug=1 or localStorage.aiTutorDebug=1 ── */}
+      {debugMode && (
+        <div className="debug-overlay">
+          <details>
+            <summary>🐛 Debug</summary>
+            <div><b>Q:</b> {question?.questionId?.slice(-8) ?? "—"} <span style={{color:"#94a3b8"}}>({question?.questionType ?? "—"})</span></div>
+            <div><b>Scene:</b> <span style={{color: stageSceneMode === "student" ? "#10b981" : "#f59e0b"}}>{stageSceneMode}</span></div>
+            <div><b>Flow:</b> {flowState}</div>
+            <div><b>Kickoff:</b> {pendingKickoff}</div>
+            <div><b>Speaking:</b> <span style={{color: isSpeaking ? "#ef4444" : "#64748b"}}>{String(isSpeaking)}</span></div>
+            <div><b>Awaiting:</b> <span style={{color: awaitingStudentResponse ? "#10b981" : "#64748b"}}>{String(awaitingStudentResponse)}</span></div>
+            <div><b>Evaluating:</b> {String(isEvaluatingAnswer)}</div>
+            <div><b>LoadingQ:</b> {String(isLoadingNextQuestion)}</div>
+            <div><b>HasCtrl:</b> <span style={{color: studentHasControl ? "#10b981" : "#64748b"}}>{String(studentHasControl)}</span></div>
+            <div><b>FillStep:</b> {fillStepIndex}/{question?.steps?.length ?? 0}</div>
+            <div><b>Coach:</b> &quot;{teacherUtterance.slice(0, 45)}&quot;</div>
+          </details>
+        </div>
       )}
     </main>
   );

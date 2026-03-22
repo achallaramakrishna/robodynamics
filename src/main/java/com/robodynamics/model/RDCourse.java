@@ -106,6 +106,12 @@ public class RDCourse {
     @Column(name = "promo_video_url") // Mapping the new column
     private String promoVideoUrl;
 
+    @Column(name = "course_type", length = 80)
+    private String courseType;  // AI-tutor engine course ID, e.g. "vedic_math_g5"
+
+    public String getCourseType() { return courseType; }
+    public void setCourseType(String courseType) { this.courseType = courseType; }
+
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<RDCourseOffering> courseOfferings;

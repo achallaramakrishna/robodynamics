@@ -49,9 +49,21 @@
     "version": "2026-03-mindspark-ar-g6-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I have done this before"],
-      "goalOptions": ["School exams", "Olympiad prep", "Brain training"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
       "coachIntro": "Spark introduces Venn diagrams with a real-life example: students who like Science, students who like Maths, and students who like both. The first warm-up draws a simple 2-circle diagram.",
       "placementRule": "Start all learners at Group A. If a learner gives correct answers for Groups A, B, C without any hints, skip Group D (draw Venn) and go directly to Group E (word problem)."
     },
@@ -83,7 +95,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout with Venn diagram prominent in left panel",
       "primaryFocus": "Venn diagram visual + question card",
-      "secondaryPanels": ["formula reference box", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "formula reference box",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Venn diagram, region labels, and answer input all visible without scrolling."
     },
     "sessionFlow": [
@@ -109,7 +125,13 @@
         "instantFeedbackRetry": "Here's a trick: 'Only Maths' is the LEFT circle region that does NOT overlap with Science. The number written there is 18. Do not confuse it with the Both region (7).",
         "reviewPrompt": "Same Venn: how many students like ONLY Science?",
         "xpReward": 10,
-        "badgeFocus": "Venn Region Reader"
+        "badgeFocus": "Venn Region Reader",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group A for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -133,7 +155,13 @@
         "instantFeedbackRetry": "Here's a trick: Total Chess includes those who play ONLY Chess AND those who play BOTH. So Both = Total - Only = 28 - 19 = 9.",
         "reviewPrompt": "Total Singing = 35. Only Singing = 27. How many are in the Singing and Dancing intersection?",
         "xpReward": 12,
-        "badgeFocus": "Intersection Finder"
+        "badgeFocus": "Intersection Finder",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group B for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -157,7 +185,13 @@
         "instantFeedbackRetry": "Here's a trick: add the three inside regions: 25+10+18 = 53. Now 60-53 = 7. Those 7 are outside both circles — neither group!",
         "reviewPrompt": "Total = 100. Only P = 40, Both = 15, Only Q = 30. How many are in Neither?",
         "xpReward": 14,
-        "badgeFocus": "Neither Zone Tracker"
+        "badgeFocus": "Neither Zone Tracker",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group C for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -183,7 +217,13 @@
         "instantFeedbackRetry": "Here's a trick: start with the overlap (8). Then Only P = n(P) - overlap = 28-8=20. Only Q = n(Q) - overlap = 20-8=12. Inside = 20+8+12=40. Neither = 45-40=5.",
         "reviewPrompt": "Rebuild: Total=60, n(X)=35, n(Y)=30, n(X and Y)=12. Find all 4 regions.",
         "xpReward": 16,
-        "badgeFocus": "Venn Builder"
+        "badgeFocus": "Venn Builder",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group D for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -209,7 +249,13 @@
         "instantFeedbackRetry": "Here's a trick: place 20 in the overlap. Only A = 45-20=25 (left). Only B = 38-20=18 (right). Total inside = 25+20+18=63. Neither = 80-63=17.",
         "reviewPrompt": "Word problem: 100 students, 55 play Hockey, 40 play Tennis, 20 play both. Find Only Hockey, Only Tennis, and Neither.",
         "xpReward": 18,
-        "badgeFocus": "Word Problem Solver"
+        "badgeFocus": "Word Problem Solver",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group E for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -237,7 +283,13 @@
         "instantFeedbackRetry": "Here's a trick: add all 7 regions: Only A=10, Only B=8, Only C=12, A-B=5, B-C=3, A-C=4, All=2. Sum: 10+8+12+5+3+4+2=44.",
         "reviewPrompt": "Same Venn: how many are in the triple intersection (all three circles)?",
         "xpReward": 19,
-        "badgeFocus": "3-Circle Navigator"
+        "badgeFocus": "3-Circle Navigator",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group F for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -262,7 +314,13 @@
         "instantFeedbackRetry": "Here's a trick: n(A and B) = A-B-only + All-three. That is because anyone who likes all three ALSO likes Football and Basketball. So 8 + 4 = 12.",
         "reviewPrompt": "Same survey: how many like Basketball and Tennis together?",
         "xpReward": 21,
-        "badgeFocus": "3-Circle Intersection Expert"
+        "badgeFocus": "3-Circle Intersection Expert",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group G for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -287,7 +345,13 @@
         "instantFeedbackRetry": "Here's a trick: rearrange the formula to solve for intersection: n(P and Q) = n(P) + n(Q) - n(P union Q) = 50+45-80 = 95-80 = 15.",
         "reviewPrompt": "Formula challenge: n(A)=60, n(B)=55, n(A union B)=90. Find n(A and B).",
         "xpReward": 23,
-        "badgeFocus": "Formula Operator"
+        "badgeFocus": "Formula Operator",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group H for Venn Diagrams."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -311,7 +375,13 @@
         "instantFeedbackRetry": "Here's a trick — Q1: Only Drama=45-20=25, Only Music=40-20=20, inside total=25+20+20=65, Neither=80-65=15. Q2: n(A and B)=55+48-85=18. Q3: pairwise includes triple: 9+3=12.",
         "reviewPrompt": "Final formula test: n(A)=70, n(B)=60, n(A intersect B)=25. Find n(A union B) and n(Neither) if total=120.",
         "xpReward": 25,
-        "badgeFocus": "Venn Diagram Master"
+        "badgeFocus": "Venn Diagram Master",
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Group I for Venn Diagrams."
+        }
       }
     ]
   },
@@ -433,7 +503,13 @@
             "delaySec": 2.6,
             "durationSec": 0.3
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Screenplay beat for Venn Diagrams."
+        }
       },
       {
         "beatId": "AR_G6_L4_DEMO_FORMULA",
@@ -494,7 +570,13 @@
             "delaySec": 2.1,
             "durationSec": 0.4
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Screenplay beat for Venn Diagrams."
+        }
       },
       {
         "beatId": "AR_G6_L4_DEMO_3CIRCLE",
@@ -588,7 +670,7 @@
             "text": "12",
             "color": "#059669",
             "size": 13,
-            "delaySec": 2.0,
+            "delaySec": 2,
             "durationSec": 0.3
           },
           {
@@ -613,7 +695,13 @@
             "delaySec": 2.4,
             "durationSec": 0.4
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Screenplay beat for Venn Diagrams."
+        }
       },
       {
         "beatId": "AR_G6_L4_GUIDED",
@@ -685,8 +773,23 @@
             "delaySec": 1.7,
             "durationSec": 0.3
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Venn Diagrams",
+          "caption": "Screenplay beat for Venn Diagrams."
+        }
       }
     ]
-  }
+  },
+  "visualLibrary": [
+    {
+      "visualId": "venn_2",
+      "kind": "svg",
+      "asset": "venn_2.svg",
+      "title": "Venn Diagrams",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

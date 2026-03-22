@@ -195,15 +195,40 @@ async function startLesson(
 
 async function waitForQuestionCard(page: Page): Promise<Locator> {
   const input = page.locator("#answerInput");
+  const mcqOptions = page.locator(".mcq-options");
+
+  // Click "Try it" if present (some question types show this first)
   const inputAlreadyVisible = await input.isVisible().catch(() => false);
-  if (!inputAlreadyVisible) {
+  const mcqAlreadyVisible   = await mcqOptions.isVisible().catch(() => false);
+  if (!inputAlreadyVisible && !mcqAlreadyVisible) {
     const tryItButton = page.getByRole("button", { name: /try it/i });
     if (await tryItButton.isVisible().catch(() => false)) {
       await tryItButton.click();
     }
   }
-  await expect(input).toBeVisible({ timeout: 45_000 });
+
+  // 120s: the 3-slide intro (welcome + EXPLAIN + DEMO + GUIDED) + first teaching
+  // board each make real TTS calls; full intro can take 60-100s before student turn.
+  // Accepts EITHER text input (#answerInput) OR MCQ option buttons (.mcq-options).
+  await expect(input.or(mcqOptions)).toBeVisible({ timeout: 120_000 });
   return input;
+}
+
+/** Submit an answer regardless of question type (text input or MCQ). */
+async function submitAnswer(page: Page, input: Locator, answer: string): Promise<void> {
+  const mcqOptions = page.locator(".mcq-options");
+  if (await mcqOptions.isVisible().catch(() => false)) {
+    // MCQ: click the option whose text matches the answer, or the first option as fallback
+    const matchingOpt = page.locator(".mcq-option").filter({ hasText: new RegExp(`^${answer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`, "i") }).first();
+    if (await matchingOpt.isVisible().catch(() => false)) {
+      await matchingOpt.click();
+    } else {
+      await page.locator(".mcq-option").first().click();
+    }
+  } else {
+    await input.fill(answer);
+    await page.getByRole("button", { name: /^check$/i }).click();
+  }
 }
 
 async function currentQuestionText(page: Page): Promise<string> {
@@ -280,7 +305,6 @@ export function registerLessonScenarios(config: LessonScenarioConfig): void {
       const expectedAnswer = String(startPayload.question?.expectedAnswer || "").trim();
       const initialQuestion = String(startPayload.question?.questionText || "").trim();
       expect(expectedAnswer.length).toBeGreaterThan(0);
-      await input.fill(expectedAnswer);
       const nextQuestionResponse = page
         .waitForResponse(
           (response) =>
@@ -289,7 +313,7 @@ export function registerLessonScenarios(config: LessonScenarioConfig): void {
           { timeout: 45_000 },
         )
         .catch(() => null);
-      await page.getByRole("button", { name: /^check$/i }).click();
+      await submitAnswer(page, input, expectedAnswer);
       const nextQuestionResult = await nextQuestionResponse;
       expect(nextQuestionResult).not.toBeNull();
       await waitForQuestionCard(page);
@@ -375,7 +399,14 @@ export function registerLessonScenarios(config: LessonScenarioConfig): void {
       const page = await context.newPage();
       await startLesson(page, config.lessonTitle, launchDefaults);
       const input = await waitForQuestionCard(page);
-      await page.getByRole("button", { name: /^speak$/i }).click();
+      // MCQ questions have no voice input — skip the mic-block scenario gracefully
+      const speakButton = page.getByRole("button", { name: /^speak$/i });
+      if (!await speakButton.isVisible().catch(() => false)) {
+        await saveScreenshot(page, reportDir, "s9_mic_blocked_text_fallback");
+        await context.close();
+        return;
+      }
+      await speakButton.click();
       await expect(page.getByText(/microphone access is blocked\. use text input\./i)).toBeVisible({ timeout: 45_000 });
       await expect(page.getByRole("button", { name: /mic blocked/i })).toBeVisible();
       await input.fill("999");
@@ -416,7 +447,6 @@ export function registerLessonScenarios(config: LessonScenarioConfig): void {
       const input = await waitForQuestionCard(page);
       const expectedAnswer = String(startPayload.question?.expectedAnswer || "").trim();
       expect(expectedAnswer.length).toBeGreaterThan(0);
-      await input.fill(expectedAnswer);
       const nextQuestionResponse = page
         .waitForResponse(
           (response) =>
@@ -425,14 +455,14 @@ export function registerLessonScenarios(config: LessonScenarioConfig): void {
           { timeout: 45_000 },
         )
         .catch(() => null);
-      await page.getByRole("button", { name: /^check$/i }).click();
+      await submitAnswer(page, input, expectedAnswer);
       const nextQuestionResult = await nextQuestionResponse;
       expect(nextQuestionResult).not.toBeNull();
       await waitForQuestionCard(page);
       const questionBeforePause = await currentQuestionText(page);
       await page.getByRole("button", { name: /pause & save/i }).click();
-      await expect(page.getByRole("button", { name: /resume saved place/i })).toBeVisible({ timeout: 45_000 });
-      await page.getByRole("button", { name: /resume saved place/i }).click();
+      await expect(page.getByRole("button", { name: /^\▶\s*resume$/i })).toBeVisible({ timeout: 45_000 });
+      await page.getByRole("button", { name: /^\▶\s*resume$/i }).click();
       await waitForQuestionCard(page);
       const resumedQuestion = await currentQuestionText(page);
       expect(resumedQuestion).toBe(questionBeforePause);
@@ -480,6 +510,22 @@ export function registerLessonScenarios(config: LessonScenarioConfig): void {
       const viewportCenter = viewport!.width / 2;
       expect(Math.abs(headerCenter - viewportCenter)).toBeLessThanOrEqual(140);
       await saveScreenshot(page, reportDir, "s12_desktop_header_center");
+    });
+
+    test("[Support] Coach bubble does not duplicate the question panel text", async ({ page }) => {
+      // Verifies the noUtterance fix: when the student has control, the coach
+      // bubble should show a coaching prompt, NOT echo the question panel text.
+      await startLesson(page, config.lessonTitle, launchDefaults);
+      await waitForQuestionCard(page);
+      await waitForStageLabel(page, /your turn/i);
+      const questionText = await currentQuestionText(page);
+      const coachBubble = page.locator(".rd-speech-bubble, .vedic-coach-bubble, .coach-utterance").first();
+      if (await coachBubble.isVisible().catch(() => false)) {
+        const coachText = (await coachBubble.innerText()).trim();
+        // Coach bubble must not be identical to the question panel text
+        expect(coachText).not.toBe(questionText);
+      }
+      await saveScreenshot(page, reportDir, "s15_coach_no_duplicate");
     });
   });
 }

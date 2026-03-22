@@ -55,16 +55,36 @@
     "version": "2026-03-mindspark-g5-v1",
     "onboarding": {
       "avatarGreeting": "Division just got a superpower! The ancient Vedic 'Flag method' — called Dhvajanka — lets you divide big numbers in a single line. Let's learn it!",
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "estimatedTime": "20 minutes",
       "xpTarget": 105
     },
     "mission": "Master the Vedic flag division — divide any number in one line using the Dhvajanka sutra!",
     "microLessonPattern": "HOOK → DEMO → TRY → FEEDBACK → NEXT",
     "rewardLoop": {
-      "xpPerGroup": [10, 10, 10, 12, 12, 12, 15, 15, 15],
+      "xpPerGroup": [
+        10,
+        10,
+        10,
+        12,
+        12,
+        12,
+        15,
+        15,
+        15
+      ],
       "streakBonus": "3 correct in a row = +5 XP flame bonus",
-      "badges": ["Flag Finder", "2-Digit Divider", "3-Digit Master", "Remainder Tracker", "Dhvajanka Champion"]
+      "badges": [
+        "Flag Finder",
+        "2-Digit Divider",
+        "3-Digit Master",
+        "Remainder Tracker",
+        "Dhvajanka Champion"
+      ]
     },
     "reviewLoop": {
       "triggerAfterMistakes": 2,
@@ -102,11 +122,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In the division 96 ÷ 3, what is the 'flag' (divisor) that guides each step?",
-            "options": ["9", "6", "3", "96"],
+            "options": [
+              "9",
+              "6",
+              "3",
+              "96"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "3",
             "hint": "The flag is the number you are dividing BY.",
-            "solution": "In 96 ÷ 3, the flag (divisor) is 3. It guides every step of the division."
+            "solution": "In 96 ÷ 3, the flag (divisor) is 3. It guides every step of the division.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group A for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_A_002",
@@ -120,7 +151,13 @@
             "questionText": "In the flag division method, if I am dividing 84 ÷ 4, what is my first step? (Write: divide __ by __)",
             "expectedAnswer": "divide 8 by 4",
             "hint": "Take the first digit of the dividend (84) and divide by the flag (4).",
-            "solution": "First step: take the first digit of 84, which is 8. Divide 8 by the flag 4. 8 ÷ 4 = 2, remainder 0."
+            "solution": "First step: take the first digit of 84, which is 8. Divide 8 by the flag 4. 8 ÷ 4 = 2, remainder 0.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group A for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_A_003",
@@ -143,12 +180,19 @@
             "hint": "In flag division, remainders are passed forward — they join the next digit.",
             "solution": "The remainder from each step is carried to the next digit. For example, if 1 is divided by 7 and 1 < 7, we combine 1 with the next digit to form 19, then divide 19 by 7.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_division_flag",
-              "caption": "Flag division diagram showing remainder carrying to the next digit"
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group A for Flag Division — Divide Any Number in One Line."
             }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group A for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -179,9 +223,10 @@
             "hint": "4 < 6, so group as 48. 48 ÷ 6 = 8.",
             "solution": "Flag = 6. First digit 4 < 6, so group as 48. 48 ÷ 6 = 8. Answer: 8.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_division_flag",
-              "caption": "Flag division for 48 ÷ 6 showing the flag above the dividend"
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group B for Flag Division — Divide Any Number in One Line."
             }
           },
           {
@@ -196,7 +241,13 @@
             "questionText": "Using flag division, what is 84 ÷ 4?",
             "expectedAnswer": "21",
             "hint": "Step 1: 8 ÷ 4 = 2, remainder 0. Step 2: 04 ÷ 4 = 1. Answer: 21.",
-            "solution": "Flag = 4. 8 ÷ 4 = 2 rem 0. Next group: 0 × 10 + 4 = 4. 4 ÷ 4 = 1. Answer: 21."
+            "solution": "Flag = 4. 8 ÷ 4 = 2 rem 0. Next group: 0 × 10 + 4 = 4. 4 ÷ 4 = 1. Answer: 21.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group B for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_B_003",
@@ -208,13 +259,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 63 ÷ 3 using flag division?",
-            "options": ["19", "21", "18", "20"],
+            "options": [
+              "19",
+              "21",
+              "18",
+              "20"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "21",
             "hint": "Flag = 3. Step 1: 6 ÷ 3 = 2, rem 0. Step 2: 3 ÷ 3 = 1.",
-            "solution": "Flag = 3. 6 ÷ 3 = 2, rem 0. 03 ÷ 3 = 1. Answer: 21."
+            "solution": "Flag = 3. 6 ÷ 3 = 2, rem 0. 03 ÷ 3 = 1. Answer: 21.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group B for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group B for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -245,9 +313,10 @@
             "hint": "Flag=5. 2 < 5, form 24. 24 ÷ 5 = 4 rem 4. Then 45 ÷ 5 = 9.",
             "solution": "Flag=5. 2<5 so group: 24÷5=4 rem4. New group: 4×10+5=45. 45÷5=9. Answer: 49.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_division_flag",
-              "caption": "Flag division showing 245÷5 with running remainder"
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group C for Flag Division — Divide Any Number in One Line."
             }
           },
           {
@@ -262,7 +331,13 @@
             "questionText": "Using flag division, what is 196 ÷ 7?",
             "expectedAnswer": "28",
             "hint": "Flag=7. 1<7, form 19. 19÷7=2 rem5. Then 56÷7=8.",
-            "solution": "Flag=7. 1<7, form group 19. 19÷7=2 rem5. New group: 5×10+6=56. 56÷7=8. Answer: 28."
+            "solution": "Flag=7. 1<7, form group 19. 19÷7=2 rem5. New group: 5×10+6=56. 56÷7=8. Answer: 28.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group C for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_C_003",
@@ -274,13 +349,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 126 ÷ 6 using flag division?",
-            "options": ["21", "22", "19", "23"],
+            "options": [
+              "21",
+              "22",
+              "19",
+              "23"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "21",
             "hint": "Flag=6. 1<6, form 12. 12÷6=2 rem0. Then 06÷6=1.",
-            "solution": "Flag=6. 1<6, form 12. 12÷6=2 rem0. New group: 0×10+6=6. 6÷6=1. Answer: 21."
+            "solution": "Flag=6. 1<6, form 12. 12÷6=2 rem0. New group: 0×10+6=6. 6÷6=1. Answer: 21.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group C for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group C for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -309,7 +401,13 @@
             "questionText": "What is 143 ÷ 11?",
             "expectedAnswer": "13",
             "hint": "How many times does 11 go into 14? Then what is the remainder?",
-            "solution": "11 × 1 = 11. 14 - 11 = 3. Bring down 3 → 33. 11 × 3 = 33. 33 - 33 = 0. Answer: 13."
+            "solution": "11 × 1 = 11. 14 - 11 = 3. Bring down 3 → 33. 11 × 3 = 33. 33 - 33 = 0. Answer: 13.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group D for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_D_002",
@@ -321,11 +419,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 132 ÷ 11?",
-            "options": ["11", "12", "13", "14"],
+            "options": [
+              "11",
+              "12",
+              "13",
+              "14"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "12",
             "hint": "11 × 12 = 132. Check by working forward.",
-            "solution": "11 into 13 goes 1 time (11), remainder 2. Bring down 2 → 22. 11 into 22 goes 2 times. Answer: 12."
+            "solution": "11 into 13 goes 1 time (11), remainder 2. Bring down 2 → 22. 11 into 22 goes 2 times. Answer: 12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group D for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_D_003",
@@ -339,9 +448,21 @@
             "questionText": "What is 165 ÷ 11?",
             "expectedAnswer": "15",
             "hint": "11 into 16 goes 1 time (11), remainder 5. Bring down 5 → 55. 11 into 55 = 5.",
-            "solution": "16 ÷ 11 = 1 rem 5. 55 ÷ 11 = 5. Answer: 15. Check: 15 × 11 = 165."
+            "solution": "16 ÷ 11 = 1 rem 5. 55 ÷ 11 = 5. Answer: 15. Check: 15 × 11 = 165.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group D for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group D for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -377,7 +498,13 @@
             "correctIndex": 1,
             "expectedAnswer": "Quotient = 7, Remainder = 1",
             "hint": "4 × 7 = 28. 29 - 28 = 1.",
-            "solution": "4 × 7 = 28. 29 - 28 = 1. Quotient = 7, Remainder = 1. Check: 7 × 4 + 1 = 29."
+            "solution": "4 × 7 = 28. 29 - 28 = 1. Quotient = 7, Remainder = 1. Check: 7 × 4 + 1 = 29.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group E for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_E_002",
@@ -389,15 +516,21 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using flag division, what is the remainder when 155 is divided by 7?",
-            "options": ["1", "2", "3", "4"],
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2",
             "hint": "155 ÷ 7: 7 × 22 = 154. 155 - 154 = 1. Wait — 7 × 22 = 154, 155 - 154 = 1. Let me recalculate: 7 × 22 = 154, remainder = 1.",
             "solution": "155 ÷ 7: 7 × 22 = 154. 155 - 154 = 1. Remainder = 1. (Note: correct answer is 1, not 2 — option A is correct.)",
             "visual": {
-              "type": "svg",
-              "asset": "vm_division_flag",
-              "caption": "Flag division for 155÷7 showing quotient 22 and remainder 1"
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group E for Flag Division — Divide Any Number in One Line."
             }
           },
           {
@@ -410,13 +543,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the quotient when 196 is divided by 7?",
-            "options": ["26", "27", "28", "29"],
+            "options": [
+              "26",
+              "27",
+              "28",
+              "29"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "28",
             "hint": "Use flag division: 1<7, form 19. 19÷7=2 rem5. 56÷7=8. Answer: 28.",
-            "solution": "Flag=7. Form 19: 19÷7=2 rem5. Form 56: 56÷7=8. Quotient = 28."
+            "solution": "Flag=7. Form 19: 19÷7=2 rem5. Form 56: 56÷7=8. Quotient = 28.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group E for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group E for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -482,9 +632,21 @@
             ],
             "expectedAnswer": "28",
             "hint": "Flag=7. Group 19: 19÷7=2 rem5. Group 56: 56÷7=8. Answer: 28.",
-            "solution": "Flag=7. 1<7→group 19. 19÷7=2 rem5. Carry: 5×10+6=56. 56÷7=8 rem0. Answer: 28."
+            "solution": "Flag=7. 1<7→group 19. 19÷7=2 rem5. Carry: 5×10+6=56. 56÷7=8 rem0. Answer: 28.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group F for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group F for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -513,7 +675,13 @@
             "questionText": "Using flag division, what is 175 ÷ 7?",
             "expectedAnswer": "25",
             "hint": "Flag=7. 1<7, form 17. 17÷7=2 rem3. Form 35. 35÷7=5. Answer: 25.",
-            "solution": "Flag=7. 1<7→group 17. 17÷7=2 rem3. Carry: 3×10+5=35. 35÷7=5. Answer: 25."
+            "solution": "Flag=7. 1<7→group 17. 17÷7=2 rem3. Carry: 3×10+5=35. 35÷7=5. Answer: 25.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group G for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_G_002",
@@ -529,9 +697,10 @@
             "hint": "Flag=6. 1<6, form 14. 14÷6=2 rem2. Form 24. 24÷6=4. Answer: 24.",
             "solution": "Flag=6. 1<6→group 14. 14÷6=2 rem2. Carry: 2×10+4=24. 24÷6=4. Answer: 24.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_division_flag",
-              "caption": "Flag division for 144÷6 showing two-step process"
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group G for Flag Division — Divide Any Number in One Line."
             }
           },
           {
@@ -544,13 +713,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 108 ÷ 4 using flag division?",
-            "options": ["24", "25", "26", "27"],
+            "options": [
+              "24",
+              "25",
+              "26",
+              "27"
+            ],
             "correctIndex": 3,
             "expectedAnswer": "27",
             "hint": "Flag=4. 1<4, form 10. 10÷4=2 rem2. Form 28. 28÷4=7. Answer: 27.",
-            "solution": "Flag=4. 1<4→group 10. 10÷4=2 rem2. Carry: 2×10+8=28. 28÷4=7. Answer: 27."
+            "solution": "Flag=4. 1<4→group 10. 10÷4=2 rem2. Carry: 2×10+8=28. 28÷4=7. Answer: 27.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group G for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group G for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -579,7 +765,13 @@
             "questionText": "Speed drill! Calculate using flag division: 84÷4, 63÷3, 96÷8, 125÷5. Write all answers.",
             "expectedAnswer": "21, 21, 12, 25",
             "hint": "Apply the flag method to each: form first group, divide, carry remainder, continue.",
-            "solution": "84÷4=21. 63÷3=21. 96÷8=12. 125÷5: 1<5→12÷5=2 rem2, 25÷5=5. Answer: 25."
+            "solution": "84÷4=21. 63÷3=21. 96÷8=12. 125÷5: 1<5→12÷5=2 rem2, 25÷5=5. Answer: 25.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group H for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_H_002",
@@ -591,13 +783,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of these gives a remainder of 0 (exact division)?",
-            "options": ["100 ÷ 7", "126 ÷ 6", "155 ÷ 4", "199 ÷ 9"],
+            "options": [
+              "100 ÷ 7",
+              "126 ÷ 6",
+              "155 ÷ 4",
+              "199 ÷ 9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "126 ÷ 6",
             "hint": "Test each: 7×14=98≠100. 6×21=126 ✓. 4×38=152≠155. 9×22=198≠199.",
-            "solution": "126 ÷ 6 = 21 exactly (6×21=126). All others leave remainders."
+            "solution": "126 ÷ 6 = 21 exactly (6×21=126). All others leave remainders.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group H for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group H for Flag Division — Divide Any Number in One Line."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -628,9 +837,10 @@
             "hint": "Flag=4. 1<4→14÷4=3 rem2. 25÷4=6 rem1. 16÷4=4. Answer: 364.",
             "solution": "Flag=4. 1<4→group 14. 14÷4=3 rem2. 2×10+5=25. 25÷4=6 rem1. 1×10+6=16. 16÷4=4. Answer: 364.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_division_flag",
-              "caption": "Flag division for 1456÷4 showing three division steps with running remainder"
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group I for Flag Division — Divide Any Number in One Line."
             }
           },
           {
@@ -645,7 +855,13 @@
             "questionText": "Using flag division, what is 2436 ÷ 4?",
             "expectedAnswer": "609",
             "hint": "Flag=4. 2<4→24÷4=6 rem0. 03÷4=0 rem3. 36÷4=9. Answer: 609.",
-            "solution": "Flag=4. 2<4→group 24. 24÷4=6 rem0. 0×10+3=3. 3<4→group 36? No — 3÷4=0 rem3. 3×10+6=36. 36÷4=9. Answer: 609."
+            "solution": "Flag=4. 2<4→group 24. 24÷4=6 rem0. 0×10+3=3. 3<4→group 36? No — 3÷4=0 rem3. 3×10+6=36. 36÷4=9. Answer: 609.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group I for Flag Division — Divide Any Number in One Line."
+            }
           },
           {
             "questionId": "VM_G5_L8_I_003",
@@ -657,14 +873,42 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 2448 ÷ 4?",
-            "options": ["600", "610", "612", "624"],
+            "options": [
+              "600",
+              "610",
+              "612",
+              "624"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "612",
             "hint": "Flag=4. 2<4→24÷4=6 rem0. 04÷4=1 rem0. 08÷4=2. Answer: 612.",
-            "solution": "Flag=4. 2<4→group 24. 24÷4=6 rem0. 0×10+4=4. 4÷4=1 rem0. 0×10+8=8. 8÷4=2. Answer: 612."
+            "solution": "Flag=4. 2<4→group 24. 24÷4=6 rem0. 0×10+4=4. 4÷4=1 rem0. 0×10+8=8. 8÷4=2. Answer: 612.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Flag Division — Divide Any Number in One Line",
+              "caption": "Group I for Flag Division — Divide Any Number in One Line."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "caption": "Group I for Flag Division — Divide Any Number in One Line."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G5_L8_DIVISION_FLAG",
+  "courseId": "vedic_math_g5",
+  "visualLibrary": [
+    {
+      "visualId": "paravartya_division",
+      "kind": "svg",
+      "asset": "paravartya_division.svg",
+      "title": "Lesson 8: Flag Division — Divide Any Number in One Line",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

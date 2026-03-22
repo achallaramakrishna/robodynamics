@@ -55,9 +55,21 @@
     "version": "2026-03-mindspark-g6-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hello! I am Arya. Grade 6 introduces negative numbers, and today we combine CBSE sign rules with the Vedic Nikhilam shortcut. Multiplication of integers will feel like a superpower!",
       "placementRule": "Start at beginner level. If sign rules are answered correctly in Groups A and B, allow skipping to Group C."
     },
@@ -88,7 +100,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -117,11 +133,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the sign of the product (−6) × (−4)?",
-            "options": ["Negative (−)", "Positive (+)", "Zero", "Cannot be determined"],
+            "options": [
+              "Negative (−)",
+              "Positive (+)",
+              "Zero",
+              "Cannot be determined"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Positive (+)",
             "hint": "Same signs multiply to give a positive result.",
-            "solution": "(−) × (−) = (+). So (−6) × (−4) is positive."
+            "solution": "(−) × (−) = (+). So (−6) × (−4) is positive.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group A for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_A2",
@@ -133,11 +160,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In winter, temperature drops 8°C every hour. After 5 hours, the total change is (+5) × (−8). What is the sign of the result?",
-            "options": ["Positive", "Negative", "Zero", "Depends on starting temperature"],
+            "options": [
+              "Positive",
+              "Negative",
+              "Zero",
+              "Depends on starting temperature"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Negative",
             "hint": "Different signs give a negative result.",
-            "solution": "(+5) × (−8): different signs → negative. The temperature change is −40°C."
+            "solution": "(+5) × (−8): different signs → negative. The temperature change is −40°C.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group A for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_A3",
@@ -149,13 +187,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "How many of these products are POSITIVE? (−3)×(−2), (+4)×(−5), (−6)×(−7), (+2)×(+9)",
-            "options": ["1", "2", "3", "4"],
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "3",
             "hint": "Count the same-sign pairs.",
-            "solution": "(−3)×(−2)=+, (+4)×(−5)=−, (−6)×(−7)=+, (+2)×(+9)=+. Three are positive."
+            "solution": "(−3)×(−2)=+, (+4)×(−5)=−, (−6)×(−7)=+, (+2)×(+9)=+. Three are positive.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group A for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group A for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -182,11 +237,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using Nikhilam (base 10), find 9 × 8.",
-            "options": ["63", "72", "81", "64"],
+            "options": [
+              "63",
+              "72",
+              "81",
+              "64"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "72",
             "hint": "Deviations: 9→−1, 8→−2. Cross: 9−2=7. Right: 1×2=2. Answer: 72.",
-            "solution": "9×8: deviations −1, −2. Left: 9−2=7. Right: 1×2=2. Answer: 72."
+            "solution": "9×8: deviations −1, −2. Left: 9−2=7. Right: 1×2=2. Answer: 72.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group B for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_B2",
@@ -198,11 +264,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Nikhilam: 7 × 8 = ?",
-            "options": ["54", "56", "58", "64"],
+            "options": [
+              "54",
+              "56",
+              "58",
+              "64"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "56",
             "hint": "Deviations: −3 and −2. Cross: 7−2=5. Right: 3×2=6.",
-            "solution": "7×8: deviations −3, −2. Left: 7−2=5. Right: 3×2=6. Answer: 56."
+            "solution": "7×8: deviations −3, −2. Left: 7−2=5. Right: 3×2=6. Answer: 56.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group B for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_B3",
@@ -214,13 +291,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A cricketer bats 9 matches and averages 8 runs each. Total runs using Nikhilam:",
-            "options": ["72", "81", "63", "78"],
+            "options": [
+              "72",
+              "81",
+              "63",
+              "78"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "72",
             "hint": "9 × 8 using Nikhilam.",
-            "solution": "9×8: deviations −1, −2. Left: 7. Right: 2. Total: 72 runs."
+            "solution": "9×8: deviations −1, −2. Left: 7. Right: 2. Total: 72 runs.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group B for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group B for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -247,11 +341,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "(−9) × (+7) = ?",
-            "options": ["63", "−63", "−72", "72"],
+            "options": [
+              "63",
+              "−63",
+              "−72",
+              "72"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−63",
             "hint": "Sign: different signs → negative. Magnitude: 9×7=63.",
-            "solution": "Sign: (−)×(+)=−. Nikhilam: 9×7 → deviations −1, −3. Left: 9−3=6. Right: 3. Answer: −63."
+            "solution": "Sign: (−)×(+)=−. Nikhilam: 9×7 → deviations −1, −3. Left: 9−3=6. Right: 3. Answer: −63.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group C for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_C2",
@@ -263,13 +368,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A diver descends 8 m every minute for 9 minutes. Total depth change: (−8) × (+9) = ?",
-            "options": ["72 m", "−72 m", "−63 m", "−81 m"],
+            "options": [
+              "72 m",
+              "−72 m",
+              "−63 m",
+              "−81 m"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−72 m",
             "hint": "Descent is negative. 8 × 9 = 72 (Nikhilam).",
-            "solution": "Sign: negative (descent). Magnitude: 8×9=72. Answer: −72 m."
+            "solution": "Sign: negative (descent). Magnitude: 8×9=72. Answer: −72 m.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group C for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group C for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -296,11 +418,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "(−8) × (−7) = ?",
-            "options": ["−56", "56", "−63", "63"],
+            "options": [
+              "−56",
+              "56",
+              "−63",
+              "63"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "56",
             "hint": "(−)×(−)=positive. Magnitude: 8×7=56.",
-            "solution": "Sign: positive. Nikhilam: 8×7 → deviations −2, −3. Left: 8−3=5. Right: 6. Answer: +56."
+            "solution": "Sign: positive. Nikhilam: 8×7 → deviations −2, −3. Left: 8−3=5. Right: 6. Answer: +56.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group D for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_D2",
@@ -312,11 +445,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A debt of ₹9 is cancelled 8 times. In integers: (−9) × (−8) = ?",
-            "options": ["−72", "72", "81", "−81"],
+            "options": [
+              "−72",
+              "72",
+              "81",
+              "−81"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "72",
             "hint": "Cancelling a debt (negative debt removal) gives a positive result.",
-            "solution": "(−9)×(−8)=+72. You gained ₹72 by cancelling the debt 8 times."
+            "solution": "(−9)×(−8)=+72. You gained ₹72 by cancelling the debt 8 times.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group D for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_D3",
@@ -328,13 +472,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "(−6) × (−9) = ?",
-            "options": ["−54", "54", "−63", "48"],
+            "options": [
+              "−54",
+              "54",
+              "−63",
+              "48"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "54",
             "hint": "Sign positive. Nikhilam: 6×9, deviations −4, −1.",
-            "solution": "(−)×(−)=+. 6×9: deviations −4, −1. Left: 6−1=5. Right: 4. Answer: +54."
+            "solution": "(−)×(−)=+. 6×9: deviations −4, −1. Left: 6−1=5. Right: 4. Answer: +54.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group D for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group D for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -362,16 +523,46 @@
             "questionType": "fill_step",
             "questionText": "Find (+9) × (−8) using sign rules and Nikhilam (base 10).",
             "steps": [
-              {"label": "Step 1: Sign of result. (+)×(−) = ?", "answer": "−", "hint": "Different signs give negative"},
-              {"label": "Step 2: Deviation of 9 from base 10: 9−10 = ?", "answer": "−1", "hint": "9 is 1 below 10"},
-              {"label": "Step 3: Deviation of 8 from base 10: 8−10 = ?", "answer": "−2", "hint": "8 is 2 below 10"},
-              {"label": "Step 4: Left part: 9 + (−2) = ?", "answer": "7", "hint": "Cross-add 9 and deviation −2"},
-              {"label": "Step 5: Right part: (−1) × (−2) = ?", "answer": "2", "hint": "Product of deviations"},
-              {"label": "Step 6: Magnitude = ? Final answer with sign = ?", "answer": "72; −72", "hint": "Left=7, Right=2 → 72. Apply negative sign."}
+              {
+                "label": "Step 1: Sign of result. (+)×(−) = ?",
+                "answer": "−",
+                "hint": "Different signs give negative"
+              },
+              {
+                "label": "Step 2: Deviation of 9 from base 10: 9−10 = ?",
+                "answer": "−1",
+                "hint": "9 is 1 below 10"
+              },
+              {
+                "label": "Step 3: Deviation of 8 from base 10: 8−10 = ?",
+                "answer": "−2",
+                "hint": "8 is 2 below 10"
+              },
+              {
+                "label": "Step 4: Left part: 9 + (−2) = ?",
+                "answer": "7",
+                "hint": "Cross-add 9 and deviation −2"
+              },
+              {
+                "label": "Step 5: Right part: (−1) × (−2) = ?",
+                "answer": "2",
+                "hint": "Product of deviations"
+              },
+              {
+                "label": "Step 6: Magnitude = ? Final answer with sign = ?",
+                "answer": "72; −72",
+                "hint": "Left=7, Right=2 → 72. Apply negative sign."
+              }
             ],
             "expectedAnswer": "−72",
             "hint": "Sign first, then Nikhilam for magnitude.",
-            "solution": "Sign: −. Nikhilam: deviations −1, −2. Left: 7. Right: 2. Magnitude: 72. Answer: −72."
+            "solution": "Sign: −. Nikhilam: deviations −1, −2. Left: 7. Right: 2. Magnitude: 72. Answer: −72.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group E for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_E2",
@@ -383,13 +574,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A football team loses 7 points per match for 8 matches. Total: (−7) × (+8) = ?",
-            "options": ["56", "−56", "63", "−63"],
+            "options": [
+              "56",
+              "−56",
+              "63",
+              "−63"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−56",
             "hint": "Sign: different signs → negative. Magnitude: 7×8=56.",
-            "solution": "(−7)×(+8): sign=−. Nikhilam: 7×8=56. Answer: −56 points."
+            "solution": "(−7)×(+8): sign=−. Nikhilam: 7×8=56. Answer: −56 points.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group E for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group E for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -417,16 +625,46 @@
             "questionType": "fill_step",
             "questionText": "Find (−6) × (−9) using step-by-step Nikhilam.",
             "steps": [
-              {"label": "Sign: (−) × (−) = ?", "answer": "+", "hint": "Same signs → positive"},
-              {"label": "Deviation of 6: 6−10 = ?", "answer": "−4", "hint": "6 is 4 below 10"},
-              {"label": "Deviation of 9: 9−10 = ?", "answer": "−1", "hint": "9 is 1 below 10"},
-              {"label": "Left part: 6 + (−1) = ?", "answer": "5", "hint": "6 minus 1"},
-              {"label": "Right part: (−4) × (−1) = ?", "answer": "4", "hint": "Negative × negative = positive"},
-              {"label": "Answer with sign:", "answer": "+54", "hint": "Left=5, Right=4 → 54. Sign is positive."}
+              {
+                "label": "Sign: (−) × (−) = ?",
+                "answer": "+",
+                "hint": "Same signs → positive"
+              },
+              {
+                "label": "Deviation of 6: 6−10 = ?",
+                "answer": "−4",
+                "hint": "6 is 4 below 10"
+              },
+              {
+                "label": "Deviation of 9: 9−10 = ?",
+                "answer": "−1",
+                "hint": "9 is 1 below 10"
+              },
+              {
+                "label": "Left part: 6 + (−1) = ?",
+                "answer": "5",
+                "hint": "6 minus 1"
+              },
+              {
+                "label": "Right part: (−4) × (−1) = ?",
+                "answer": "4",
+                "hint": "Negative × negative = positive"
+              },
+              {
+                "label": "Answer with sign:",
+                "answer": "+54",
+                "hint": "Left=5, Right=4 → 54. Sign is positive."
+              }
             ],
             "expectedAnswer": "+54",
             "hint": "Sign positive. Nikhilam gives magnitude 54.",
-            "solution": "(−6)×(−9): sign +. Deviations −4, −1. Left: 5. Right: 4. Answer: +54."
+            "solution": "(−6)×(−9): sign +. Deviations −4, −1. Left: 5. Right: 4. Answer: +54.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group F for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_F2",
@@ -438,13 +676,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "(−7) × (+6) using Nikhilam: what is the left part (before determining sign)?",
-            "options": ["3", "4", "5", "6"],
+            "options": [
+              "3",
+              "4",
+              "5",
+              "6"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3",
             "hint": "Deviations: 7→−3, 6→−4. Cross: 7+(−4)=3.",
-            "solution": "7+(−4)=3. Left part is 3. Right: 3×4=12 (need to handle carry). For near-10: 7×6=42, so left=3, right=12 → 3|12 → 42. Answer with sign: −42."
+            "solution": "7+(−4)=3. Left part is 3. Right: 3×4=12 (need to handle carry). For near-10: 7×6=42, so left=3, right=12 → 3|12 → 42. Answer with sign: −42.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group F for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group F for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -471,11 +726,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "(−6) × (−6) = ?",
-            "options": ["−36", "36", "−48", "48"],
+            "options": [
+              "−36",
+              "36",
+              "−48",
+              "48"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "36",
             "hint": "(−)×(−)=+. Nikhilam: 6×6, deviations −4, −4.",
-            "solution": "Sign: +. 6×6: deviations −4, −4. Left: 6−4=2. Right: 4×4=16 → 2|16=36. Answer: +36."
+            "solution": "Sign: +. 6×6: deviations −4, −4. Left: 6−4=2. Right: 4×4=16 → 2|16=36. Answer: +36.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group G for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_G2",
@@ -487,11 +753,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Score in a game: you lose 7 points per round. After 9 rounds, your score change is (−7)×9 = ?",
-            "options": ["63", "−63", "−54", "54"],
+            "options": [
+              "63",
+              "−63",
+              "−54",
+              "54"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−63",
             "hint": "Different signs → negative. Magnitude: 7×9=63.",
-            "solution": "(−7)×(+9): sign −. Nikhilam: 7×9=63. Score change: −63."
+            "solution": "(−7)×(+9): sign −. Nikhilam: 7×9=63. Score change: −63.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group G for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_G3",
@@ -503,13 +780,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which product gives the largest positive value? A: (−9)×(−8), B: (+7)×(+7), C: (−6)×(+9), D: (+8)×(−8)",
-            "options": ["A: (−9)×(−8)=72", "B: (+7)×(+7)=49", "C: value is negative", "D: value is negative"],
+            "options": [
+              "A: (−9)×(−8)=72",
+              "B: (+7)×(+7)=49",
+              "C: value is negative",
+              "D: value is negative"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "A: (−9)×(−8)=72",
             "hint": "Only same-sign products are positive. Compare 72 and 49.",
-            "solution": "(−9)×(−8)=+72, (+7)×(+7)=+49. Others are negative. Largest positive is 72."
+            "solution": "(−9)×(−8)=+72, (+7)×(+7)=+49. Others are negative. Largest positive is 72.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group G for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group G for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -536,11 +830,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! (−9) × (−7) = ?",
-            "options": ["−63", "63", "−72", "72"],
+            "options": [
+              "−63",
+              "63",
+              "−72",
+              "72"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "63",
             "hint": "(−)×(−)=+. 9×7=63.",
-            "solution": "Sign: positive. Nikhilam: 9×7=63. Answer: +63."
+            "solution": "Sign: positive. Nikhilam: 9×7=63. Answer: +63.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group H for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_H2",
@@ -552,13 +857,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! (+8) × (−8) = ?",
-            "options": ["64", "−64", "−72", "72"],
+            "options": [
+              "64",
+              "−64",
+              "−72",
+              "72"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−64",
             "hint": "Different signs → negative. 8×8=64.",
-            "solution": "Sign: negative. 8×8=64. Answer: −64."
+            "solution": "Sign: negative. 8×8=64. Answer: −64.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group H for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group H for Integer Multiplication Shortcuts."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -585,11 +907,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A submarine descends 9 m every minute for 8 minutes. What is the total depth change (in metres)?",
-            "options": ["72 m", "−72 m", "−81 m", "81 m"],
+            "options": [
+              "72 m",
+              "−72 m",
+              "−81 m",
+              "81 m"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−72 m",
             "hint": "Descent is negative. (−9) × 8.",
-            "solution": "(−9) × (+8) = −72. The submarine is 72 m below the surface."
+            "solution": "(−9) × (+8) = −72. The submarine is 72 m below the surface.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group I for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_I2",
@@ -601,11 +934,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A shopkeeper has a debt of ₹7 for each customer for 8 customers. If the debt is then fully cancelled (multiplied by −1 each), net change: (−7) × (−8) = ?",
-            "options": ["−56", "56", "−49", "49"],
+            "options": [
+              "−56",
+              "56",
+              "−49",
+              "49"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "56",
             "hint": "(−7)×(−8): same signs → positive.",
-            "solution": "(−7)×(−8)=+56. Cancelling debts creates a positive gain of ₹56."
+            "solution": "(−7)×(−8)=+56. Cancelling debts creates a positive gain of ₹56.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group I for Integer Multiplication Shortcuts."
+            }
           },
           {
             "questionId": "VM_G6_L2_I3",
@@ -617,13 +961,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Rohit's score changes by −8 points per wrong answer. He gets 9 questions wrong. Which expression gives his total score change, and what is the value?",
-            "options": ["(+8)×(+9)=72", "(−8)×(−9)=72", "(−8)×(+9)=−72", "(+8)×(−9)=−72"],
+            "options": [
+              "(+8)×(+9)=72",
+              "(−8)×(−9)=72",
+              "(−8)×(+9)=−72",
+              "(+8)×(−9)=−72"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "(−8)×(+9)=−72",
             "hint": "Loss per question is −8. Number of wrong answers is +9.",
-            "solution": "(−8)×(+9)=−72. Rohit's total score change is −72 points."
+            "solution": "(−8)×(+9)=−72. Rohit's total score change is −72 points.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Integer Multiplication Shortcuts",
+              "caption": "Group I for Integer Multiplication Shortcuts."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Integer Multiplication Shortcuts",
+          "caption": "Group I for Integer Multiplication Shortcuts."
+        }
       }
     ]
   },
@@ -636,7 +997,13 @@
       "teacherLine": "Same signs give positive, different signs give negative. This is the golden rule for integer multiplication!",
       "boardAction": "Show four sign combinations with colour coding. Green for same-sign (positive), red for different-sign (negative).",
       "checkpointPrompt": "What is the sign of (−4) × (+7)?",
-      "microPractice": "Quick fire signs: (+)×(−), (−)×(+), (−)×(−), (+)×(+)."
+      "microPractice": "Quick fire signs: (+)×(−), (−)×(+), (−)×(−), (+)×(+).",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Teaching step for Integer Multiplication Shortcuts."
+      }
     },
     {
       "stepId": "VM_G6_L2_B",
@@ -646,7 +1013,13 @@
       "teacherLine": "Nikhilam for positive integers near 10: write deviation from 10, cross-add, multiply deviations. Two steps!",
       "boardAction": "Show 9×8: write |9|−1| and |8|−2|. Cross: 9−2=7. Right: 1×2=2. Answer: 72.",
       "checkpointPrompt": "Nikhilam: 7 × 8 = ?",
-      "microPractice": "Rapid: 6×9, 8×8, 7×7 using Nikhilam."
+      "microPractice": "Rapid: 6×9, 8×8, 7×7 using Nikhilam.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Teaching step for Integer Multiplication Shortcuts."
+      }
     },
     {
       "stepId": "VM_G6_L2_E",
@@ -656,7 +1029,13 @@
       "teacherLine": "Full four-step method: determine sign, write deviations, cross-add, multiply deviations. Apply to any integer near 10!",
       "boardAction": "Full example: (−9)×(+8). Step-by-step table with sign row and deviation rows.",
       "checkpointPrompt": "(−8) × (+6) = ?",
-      "microPractice": "Apply the full four-step method to (+7) × (−9)."
+      "microPractice": "Apply the full four-step method to (+7) × (−9).",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Teaching step for Integer Multiplication Shortcuts."
+      }
     },
     {
       "stepId": "VM_G6_L2_I",
@@ -666,7 +1045,13 @@
       "teacherLine": "Integer multiplication is everywhere: finance, physics, sports! Identify the integer, determine sign, apply Nikhilam.",
       "boardAction": "Show three contexts: temperature drop, debt cancellation, cricket score deduction. Solve each.",
       "checkpointPrompt": "A submarine descends 9 m/min for 8 minutes. Total depth change?",
-      "microPractice": "Create your own CBSE-style word problem using integer multiplication."
+      "microPractice": "Create your own CBSE-style word problem using integer multiplication.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Teaching step for Integer Multiplication Shortcuts."
+      }
     }
   ],
   "screenplay": [
@@ -689,7 +1074,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Screenplay beat for Integer Multiplication Shortcuts."
+      }
     },
     {
       "beatId": "VM_G6_L2_A_EXPLAIN",
@@ -703,14 +1094,20 @@
       "boardAction": "Show the four sign combinations with colour-coded arrows.",
       "checkpointPrompt": "Sign of (−4) × (−5)?",
       "pauseType": "student_input",
-      "holdSec": 3.0,
+      "holdSec": 3,
       "expectedStudentResponse": "positive",
       "fallbackHint": "Same signs → positive.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Screenplay beat for Integer Multiplication Shortcuts."
+      }
     },
     {
       "beatId": "VM_G6_L2_E_PRACTICE",
@@ -724,14 +1121,20 @@
       "boardAction": "Show fill_step card VM_G6_L2_E1.",
       "checkpointPrompt": "Complete all six steps.",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "−72",
       "fallbackHint": "Step 1: sign. Steps 2-3: deviations. Steps 4-5: cross and multiply. Step 6: final.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Screenplay beat for Integer Multiplication Shortcuts."
+      }
     },
     {
       "beatId": "VM_G6_L2_I_PRACTICE",
@@ -745,14 +1148,31 @@
       "boardAction": "Show MCQ card VM_G6_L2_I1: submarine problem.",
       "checkpointPrompt": "Submarine descends 9 m/min for 8 minutes.",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "−72 m",
       "fallbackHint": "Descent = negative. (−9) × 8.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Integer Multiplication Shortcuts",
+        "caption": "Screenplay beat for Integer Multiplication Shortcuts."
+      }
+    }
+  ],
+  "chapterCode": "VM_G6_L2_INTEGER_MULT",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "nikhilam_base100",
+      "kind": "svg",
+      "asset": "nikhilam_base100.svg",
+      "title": "Lesson 2: Integer Multiplication Shortcuts",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

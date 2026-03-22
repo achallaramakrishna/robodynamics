@@ -55,9 +55,21 @@
     "version": "2026-03-mindspark-g7-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya. Today you become an Equation Ninja! The Vedic transpose rule lets you solve equations in one move.",
       "placementRule": "If the learner solves x + 5 = 9 correctly, skip group A and start at group B."
     },
@@ -89,7 +101,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -118,11 +134,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: x + 7 = 15",
-            "options": ["x = 7", "x = 8", "x = 22", "x = 6"],
+            "options": [
+              "x = 7",
+              "x = 8",
+              "x = 22",
+              "x = 6"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "x = 8",
             "hint": "Transpose 7: x = 15 − 7.",
-            "solution": "Paravartya: transpose 7 → x = 15 − 7 = 8."
+            "solution": "Paravartya: transpose 7 → x = 15 − 7 = 8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group A for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_A2",
@@ -134,11 +161,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 5x = 35",
-            "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
+            "options": [
+              "x = 5",
+              "x = 6",
+              "x = 7",
+              "x = 8"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "x = 7",
             "hint": "Divide both sides by 5.",
-            "solution": "5x = 35 → x = 35 ÷ 5 = 7."
+            "solution": "5x = 35 → x = 35 ÷ 5 = 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group A for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_A3",
@@ -150,13 +188,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: x − 9 = 4",
-            "options": ["x = 5", "x = 13", "x = 36", "x = 4"],
+            "options": [
+              "x = 5",
+              "x = 13",
+              "x = 36",
+              "x = 4"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "x = 13",
             "hint": "Transpose −9: x = 4 + 9.",
-            "solution": "Transpose −9 → x = 4 + 9 = 13."
+            "solution": "Transpose −9 → x = 4 + 9 = 13.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group A for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group A for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -183,11 +238,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 2x + 4 = 12",
-            "options": ["x = 3", "x = 4", "x = 8", "x = 6"],
+            "options": [
+              "x = 3",
+              "x = 4",
+              "x = 8",
+              "x = 6"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "x = 4",
             "hint": "Step 1: 2x = 12−4 = 8. Step 2: x = 4.",
-            "solution": "2x = 8 → x = 4."
+            "solution": "2x = 8 → x = 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group B for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_B2",
@@ -199,11 +265,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 4x − 3 = 13",
-            "options": ["x = 2", "x = 3", "x = 4", "x = 5"],
+            "options": [
+              "x = 2",
+              "x = 3",
+              "x = 4",
+              "x = 5"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "x = 4",
             "hint": "4x = 16. Divide by 4.",
-            "solution": "4x − 3 = 13 → 4x = 16 → x = 4."
+            "solution": "4x − 3 = 13 → 4x = 16 → x = 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group B for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_B3",
@@ -216,15 +293,39 @@
             "questionType": "fill_step",
             "questionText": "Solve 5x + 6 = 31 step by step.",
             "steps": [
-              {"label": "Transpose 6: 5x = 31 − 6 = ?", "answer": "25", "hint": "31 minus 6"},
-              {"label": "Divide by 5: x = 25 ÷ 5 = ?", "answer": "5", "hint": "25 divided by 5"},
-              {"label": "Answer: x = ?", "answer": "5", "hint": "x equals 5"}
+              {
+                "label": "Transpose 6: 5x = 31 − 6 = ?",
+                "answer": "25",
+                "hint": "31 minus 6"
+              },
+              {
+                "label": "Divide by 5: x = 25 ÷ 5 = ?",
+                "answer": "5",
+                "hint": "25 divided by 5"
+              },
+              {
+                "label": "Answer: x = ?",
+                "answer": "5",
+                "hint": "x equals 5"
+              }
             ],
             "expectedAnswer": "x = 5",
             "hint": "Transpose then divide.",
-            "solution": "5x = 25 → x = 5."
+            "solution": "5x = 25 → x = 5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group B for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group B for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -251,11 +352,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: x/4 + 1 = 5",
-            "options": ["x = 12", "x = 16", "x = 20", "x = 24"],
+            "options": [
+              "x = 12",
+              "x = 16",
+              "x = 20",
+              "x = 24"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "x = 16",
             "hint": "x/4 = 4. Multiply by 4.",
-            "solution": "x/4 = 4 → x = 16."
+            "solution": "x/4 = 4 → x = 16.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group C for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_C2",
@@ -268,13 +380,31 @@
             "questionType": "fill_step",
             "questionText": "Solve 2x/3 + 1 = 7 step by step.",
             "steps": [
-              {"label": "Transpose 1: 2x/3 = 7 − 1 = ?", "answer": "6", "hint": "7 minus 1"},
-              {"label": "Multiply both sides by 3: 2x = 6 × 3 = ?", "answer": "18", "hint": "6 times 3"},
-              {"label": "Divide by 2: x = 18 ÷ 2 = ?", "answer": "9", "hint": "18 divided by 2"}
+              {
+                "label": "Transpose 1: 2x/3 = 7 − 1 = ?",
+                "answer": "6",
+                "hint": "7 minus 1"
+              },
+              {
+                "label": "Multiply both sides by 3: 2x = 6 × 3 = ?",
+                "answer": "18",
+                "hint": "6 times 3"
+              },
+              {
+                "label": "Divide by 2: x = 18 ÷ 2 = ?",
+                "answer": "9",
+                "hint": "18 divided by 2"
+              }
             ],
             "expectedAnswer": "x = 9",
             "hint": "Transpose, then multiply by denominator, then divide.",
-            "solution": "2x/3 = 6 → 2x = 18 → x = 9."
+            "solution": "2x/3 = 6 → 2x = 18 → x = 9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group C for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_C3",
@@ -286,13 +416,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: x/5 − 3 = 2",
-            "options": ["x = 15", "x = 20", "x = 25", "x = 30"],
+            "options": [
+              "x = 15",
+              "x = 20",
+              "x = 25",
+              "x = 30"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "x = 25",
             "hint": "x/5 = 5. Multiply by 5.",
-            "solution": "x/5 = 5 → x = 25."
+            "solution": "x/5 = 5 → x = 25.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group C for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group C for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -319,11 +466,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the first step to solve 3x − 7 = 11?",
-            "options": ["Divide by 3", "Add 7 to both sides", "Subtract 11 from both sides", "Multiply by 3"],
+            "options": [
+              "Divide by 3",
+              "Add 7 to both sides",
+              "Subtract 11 from both sides",
+              "Multiply by 3"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Add 7 to both sides",
             "hint": "Transpose −7 by adding 7.",
-            "solution": "Paravartya: transpose −7 → add 7. Then 3x = 18 → x = 6."
+            "solution": "Paravartya: transpose −7 → add 7. Then 3x = 18 → x = 6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group D for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_D2",
@@ -335,11 +493,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What operation isolates x in x/6 = 5?",
-            "options": ["Divide by 6", "Subtract 5", "Multiply by 6", "Add 6"],
+            "options": [
+              "Divide by 6",
+              "Subtract 5",
+              "Multiply by 6",
+              "Add 6"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "Multiply by 6",
             "hint": "To remove the /6, multiply both sides by 6.",
-            "solution": "x/6 = 5 → multiply by 6 → x = 30."
+            "solution": "x/6 = 5 → multiply by 6 → x = 30.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group D for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_D3",
@@ -351,13 +520,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "By Anurupyena (proportional sutra), if 2x = 6 then 4x = ?",
-            "options": ["6", "10", "12", "8"],
+            "options": [
+              "6",
+              "10",
+              "12",
+              "8"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "12",
             "hint": "Double both sides: 4x = 2 × 6.",
-            "solution": "Anurupyena: scale both sides by 2. 4x = 12."
+            "solution": "Anurupyena: scale both sides by 2. 4x = 12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group D for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group D for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -385,13 +571,31 @@
             "questionType": "fill_step",
             "questionText": "Solve 4x − 9 = 19 step by step.",
             "steps": [
-              {"label": "Transpose −9: 4x = 19 + 9 = ?", "answer": "28", "hint": "19 plus 9"},
-              {"label": "Divide by 4: x = 28 ÷ 4 = ?", "answer": "7", "hint": "28 divided by 4"},
-              {"label": "Verify: 4×7 − 9 = 28 − 9 = ?", "answer": "19", "hint": "Check it equals the RHS"}
+              {
+                "label": "Transpose −9: 4x = 19 + 9 = ?",
+                "answer": "28",
+                "hint": "19 plus 9"
+              },
+              {
+                "label": "Divide by 4: x = 28 ÷ 4 = ?",
+                "answer": "7",
+                "hint": "28 divided by 4"
+              },
+              {
+                "label": "Verify: 4×7 − 9 = 28 − 9 = ?",
+                "answer": "19",
+                "hint": "Check it equals the RHS"
+              }
             ],
             "expectedAnswer": "x = 7",
             "hint": "Transpose, divide, verify.",
-            "solution": "4x = 28 → x = 7. Check: 4(7)−9=19. ✓"
+            "solution": "4x = 28 → x = 7. Check: 4(7)−9=19. ✓",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group E for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_E2",
@@ -404,15 +608,39 @@
             "questionType": "fill_step",
             "questionText": "Solve 3x/4 + 2 = 11 step by step.",
             "steps": [
-              {"label": "Transpose 2: 3x/4 = 11 − 2 = ?", "answer": "9", "hint": "11 minus 2"},
-              {"label": "Multiply by 4: 3x = 9 × 4 = ?", "answer": "36", "hint": "9 times 4"},
-              {"label": "Divide by 3: x = 36 ÷ 3 = ?", "answer": "12", "hint": "36 divided by 3"}
+              {
+                "label": "Transpose 2: 3x/4 = 11 − 2 = ?",
+                "answer": "9",
+                "hint": "11 minus 2"
+              },
+              {
+                "label": "Multiply by 4: 3x = 9 × 4 = ?",
+                "answer": "36",
+                "hint": "9 times 4"
+              },
+              {
+                "label": "Divide by 3: x = 36 ÷ 3 = ?",
+                "answer": "12",
+                "hint": "36 divided by 3"
+              }
             ],
             "expectedAnswer": "x = 12",
             "hint": "Transpose, multiply by denominator, divide.",
-            "solution": "3x/4 = 9 → 3x = 36 → x = 12."
+            "solution": "3x/4 = 9 → 3x = 36 → x = 12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group E for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group E for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -440,13 +668,31 @@
             "questionType": "fill_step",
             "questionText": "A number added to 3 times itself gives 48. Find the number.",
             "steps": [
-              {"label": "Let the number be x. Equation: x + 3x = ?", "answer": "48", "hint": "The sum equals 48"},
-              {"label": "Simplify: 4x = 48. Divide by 4: x = ?", "answer": "12", "hint": "48 divided by 4"},
-              {"label": "Verify: 12 + 3×12 = 12 + 36 = ?", "answer": "48", "hint": "Check it equals 48"}
+              {
+                "label": "Let the number be x. Equation: x + 3x = ?",
+                "answer": "48",
+                "hint": "The sum equals 48"
+              },
+              {
+                "label": "Simplify: 4x = 48. Divide by 4: x = ?",
+                "answer": "12",
+                "hint": "48 divided by 4"
+              },
+              {
+                "label": "Verify: 12 + 3×12 = 12 + 36 = ?",
+                "answer": "48",
+                "hint": "Check it equals 48"
+              }
             ],
             "expectedAnswer": "x = 12",
             "hint": "Let the number = x. Write x + 3x = 48.",
-            "solution": "4x = 48 → x = 12."
+            "solution": "4x = 48 → x = 12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group F for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_F2",
@@ -458,13 +704,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A train travels at v km/h. After 3 hours it covers 210 km. Find v.",
-            "options": ["v = 60", "v = 63", "v = 70", "v = 75"],
+            "options": [
+              "v = 60",
+              "v = 63",
+              "v = 70",
+              "v = 75"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "v = 70",
             "hint": "3v = 210. Divide by 3.",
-            "solution": "3v = 210 → v = 70 km/h."
+            "solution": "3v = 210 → v = 70 km/h.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group F for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group F for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -491,11 +754,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 4x + 1 = 2x + 9",
-            "options": ["x = 2", "x = 3", "x = 4", "x = 5"],
+            "options": [
+              "x = 2",
+              "x = 3",
+              "x = 4",
+              "x = 5"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "x = 4",
             "hint": "Transpose 2x: 2x = 8. Divide by 2.",
-            "solution": "2x = 8 → x = 4."
+            "solution": "2x = 8 → x = 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group G for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_G2",
@@ -508,13 +782,31 @@
             "questionType": "fill_step",
             "questionText": "Solve 7x − 3 = 4x + 12 step by step.",
             "steps": [
-              {"label": "Transpose 4x: 7x − 4x = 12 + 3 = ?", "answer": "15", "hint": "12 plus 3"},
-              {"label": "Simplify left side: 3x = ?", "answer": "15", "hint": "7x − 4x = 3x"},
-              {"label": "Divide by 3: x = ?", "answer": "5", "hint": "15 divided by 3"}
+              {
+                "label": "Transpose 4x: 7x − 4x = 12 + 3 = ?",
+                "answer": "15",
+                "hint": "12 plus 3"
+              },
+              {
+                "label": "Simplify left side: 3x = ?",
+                "answer": "15",
+                "hint": "7x − 4x = 3x"
+              },
+              {
+                "label": "Divide by 3: x = ?",
+                "answer": "5",
+                "hint": "15 divided by 3"
+              }
             ],
             "expectedAnswer": "x = 5",
             "hint": "Collect x terms, then divide.",
-            "solution": "3x = 15 → x = 5."
+            "solution": "3x = 15 → x = 5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group G for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_G3",
@@ -526,13 +818,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve: 5x − 4 = 3x + 10",
-            "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
+            "options": [
+              "x = 5",
+              "x = 6",
+              "x = 7",
+              "x = 8"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "x = 7",
             "hint": "2x = 14. Divide by 2.",
-            "solution": "2x = 14 → x = 7."
+            "solution": "2x = 14 → x = 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group G for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group G for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -559,11 +868,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 3x + 5 = 20",
-            "options": ["x = 4", "x = 5", "x = 6", "x = 7"],
+            "options": [
+              "x = 4",
+              "x = 5",
+              "x = 6",
+              "x = 7"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "x = 5",
             "hint": "3x = 15. x = 5.",
-            "solution": "3x = 15 → x = 5."
+            "solution": "3x = 15 → x = 5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group H for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_H2",
@@ -575,13 +895,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 5x − 3 = 3x + 9",
-            "options": ["x = 4", "x = 5", "x = 6", "x = 7"],
+            "options": [
+              "x = 4",
+              "x = 5",
+              "x = 6",
+              "x = 7"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "x = 6",
             "hint": "2x = 12. x = 6.",
-            "solution": "2x = 12 → x = 6."
+            "solution": "2x = 12 → x = 6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group H for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group H for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -609,13 +946,31 @@
             "questionType": "fill_step",
             "questionText": "Solve x/3 + 2 = x/4 + 3 step by step.",
             "steps": [
-              {"label": "LCM of 3 and 4 = ?. Multiply through.", "answer": "12", "hint": "LCM of 3 and 4"},
-              {"label": "After multiplying by 12: 4x + 24 = 3x + ?", "answer": "36", "hint": "12 × 3"},
-              {"label": "Transpose 3x: x = 36 − 24 = ?", "answer": "12", "hint": "36 minus 24"}
+              {
+                "label": "LCM of 3 and 4 = ?. Multiply through.",
+                "answer": "12",
+                "hint": "LCM of 3 and 4"
+              },
+              {
+                "label": "After multiplying by 12: 4x + 24 = 3x + ?",
+                "answer": "36",
+                "hint": "12 × 3"
+              },
+              {
+                "label": "Transpose 3x: x = 36 − 24 = ?",
+                "answer": "12",
+                "hint": "36 minus 24"
+              }
             ],
             "expectedAnswer": "x = 12",
             "hint": "Multiply by LCM first, then transpose.",
-            "solution": "4x + 24 = 3x + 36 → x = 12."
+            "solution": "4x + 24 = 3x + 36 → x = 12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group I for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           },
           {
             "questionId": "VM_G7_L3_I2",
@@ -627,13 +982,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Arjun buys n pens at ₹8 each. Priya buys (n+2) pens at ₹6 each. They spend the same amount. Find n.",
-            "options": ["n = 4", "n = 5", "n = 6", "n = 7"],
+            "options": [
+              "n = 4",
+              "n = 5",
+              "n = 6",
+              "n = 7"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "n = 6",
             "hint": "8n = 6(n+2) → 8n = 6n+12 → 2n = 12.",
-            "solution": "8n = 6n + 12 → 2n = 12 → n = 6."
+            "solution": "8n = 6n + 12 → 2n = 12 → n = 6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Equation Ninja — Solve Linear Equations by Sutra",
+              "caption": "Group I for Equation Ninja — Solve Linear Equations by Sutra."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "caption": "Group I for Equation Ninja — Solve Linear Equations by Sutra."
+        }
       }
     ]
   },
@@ -643,7 +1015,12 @@
       "exerciseGroup": "A",
       "subtopic": "One-step equations",
       "boardMode": "svg",
-      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "transpose-arrow"},
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Teaching step for Equation Ninja — Solve Linear Equations by Sutra."
+      },
       "teacherLine": "The Paravartya sutra says: any term crosses the equals sign with its sign flipped. That is it!",
       "boardAction": "Draw an equation. Show the term crossing = with an arrow and sign flip.",
       "checkpointPrompt": "Solve: x + 11 = 20.",
@@ -654,7 +1031,12 @@
       "exerciseGroup": "B",
       "subtopic": "Two-step equations",
       "boardMode": "svg",
-      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "two-step"},
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Teaching step for Equation Ninja — Solve Linear Equations by Sutra."
+      },
       "teacherLine": "Two steps: transpose the constant first, then divide by the coefficient.",
       "boardAction": "Show 3x − 5 = 10. Step 1: 3x = 15. Step 2: x = 5. Box the answer.",
       "checkpointPrompt": "5x + 6 = 31.",
@@ -665,7 +1047,12 @@
       "exerciseGroup": "C",
       "subtopic": "Equations with fractions",
       "boardMode": "svg",
-      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "fraction-clear"},
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Teaching step for Equation Ninja — Solve Linear Equations by Sutra."
+      },
       "teacherLine": "Clear the fraction first by multiplying both sides by the denominator. Then the equation becomes normal.",
       "boardAction": "Show x/3 + 2 = 6 → x/3 = 4 → x = 12. Highlight the multiplication step.",
       "checkpointPrompt": "2x/3 + 1 = 7.",
@@ -676,7 +1063,12 @@
       "exerciseGroup": "G",
       "subtopic": "Unknowns on both sides",
       "boardMode": "svg",
-      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "collect-x"},
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Teaching step for Equation Ninja — Solve Linear Equations by Sutra."
+      },
       "teacherLine": "Both sides have x! Use Paravartya to collect all x on the left. Transpose the smaller x term.",
       "boardAction": "Show 2x+3=x+7 → x=4. Annotate which x is transposed.",
       "checkpointPrompt": "7x − 3 = 4x + 12.",
@@ -687,7 +1079,12 @@
       "exerciseGroup": "I",
       "subtopic": "Challenge multi-step",
       "boardMode": "svg",
-      "visual": {"asset": "linear_eq_sutra.svg", "highlight": "multi-step"},
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Teaching step for Equation Ninja — Solve Linear Equations by Sutra."
+      },
       "teacherLine": "Boss challenge! Clear fractions by multiplying by LCM, then collect unknowns and solve.",
       "boardAction": "Show x/2 + 3 = x/3 + 5 → multiply by 6 → 3x+18=2x+30 → x=12.",
       "checkpointPrompt": "Budget problem: Arjun and Priya spend equally on pens.",
@@ -714,7 +1111,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Screenplay beat for Equation Ninja — Solve Linear Equations by Sutra."
+      }
     },
     {
       "beatId": "VM_G7_L3_A_EXPLAIN",
@@ -728,14 +1131,20 @@
       "boardAction": "Animate 7 crossing = and flipping to −7.",
       "checkpointPrompt": "Solve: x + 11 = 20.",
       "pauseType": "student_input",
-      "holdSec": 4.0,
+      "holdSec": 4,
       "expectedStudentResponse": "9",
       "fallbackHint": "Transpose 11: x = 20 − 11 = 9.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Screenplay beat for Equation Ninja — Solve Linear Equations by Sutra."
+      }
     },
     {
       "beatId": "VM_G7_L3_A_PRACTICE",
@@ -749,14 +1158,20 @@
       "boardAction": "Show MCQ card VM_G7_L3_A1.",
       "checkpointPrompt": "x + 7 = 15 → x = ?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "8",
       "fallbackHint": "15 minus 7.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Screenplay beat for Equation Ninja — Solve Linear Equations by Sutra."
+      }
     },
     {
       "beatId": "VM_G7_L3_I_PRACTICE",
@@ -770,14 +1185,31 @@
       "boardAction": "Show MCQ card VM_G7_L3_I2.",
       "checkpointPrompt": "Arjun and Priya spend equally — find n.",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "6",
       "fallbackHint": "8n = 6n + 12 → 2n = 12.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "linear_eq_sutra.svg",
+        "title": "Equation Ninja — Solve Linear Equations by Sutra",
+        "caption": "Screenplay beat for Equation Ninja — Solve Linear Equations by Sutra."
+      }
+    }
+  ],
+  "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+  "courseId": "vedic_math_g7",
+  "visualLibrary": [
+    {
+      "visualId": "linear_eq_sutra",
+      "kind": "svg",
+      "asset": "linear_eq_sutra.svg",
+      "title": "Lesson 3: Equation Ninja — Solve Linear Equations by Sutra",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

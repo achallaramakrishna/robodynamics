@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Deploy AI Tutor changes (backend + frontend) to production.
 .DESCRIPTION
@@ -54,20 +54,49 @@ Scp-File "$ai\tutor-api\app\services\session_snapshot.py"                       
 Scp-File "$ai\tutor-api\app\services\token_service.py"                                            "/tmp/ai_token_service.py"
 Scp-File "$ai\web\lib\types.ts"                                                                    "/tmp/ai_types.ts"
 Scp-File "$ai\web\app\ai-tutor\tutor\TutorClient.tsx"                                             "/tmp/ai_TutorClient.tsx"
+Scp-File "$ai\web\app\ai-tutor\tutor\tutor.css"                                                   "/tmp/ai_tutor_css.css"
+Scp-File "$ai\web\app\ai-tutor\tutor\page.tsx"                                                    "/tmp/ai_tutor_page.tsx"
 Scp-File "$ai\web\app\ai-tutor\tutor\RobotAvatar.tsx"                                             "/tmp/ai_RobotAvatar.tsx"
 Scp-File "$ai\web\lib\avatarVoices.ts"                                                             "/tmp/ai_avatarVoices.ts"
 Scp-File "$ai\web\app\ai-tutor\demo\page.tsx"                                                     "/tmp/ai_demo_page.tsx"
 Scp-File "$ai\web\app\ai-tutor\page.tsx"                                                          "/tmp/ai_aitutor_root_page.tsx"
 Scp-File "$ai\tutor-api\policies\adaptive_policy_v1.json"                                         "/tmp/adaptive_policy_v1.json"
 
-# ── All 16 Vedic Math chapter JSONs ──────────────────────────────────────────
+# â”€â”€ Home + product landing pages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Write-Host "Uploading home + product landing pages ..." -ForegroundColor Yellow
+Scp-File "$ai\web\app\page.tsx"                                                                    "/tmp/ms_home_page.tsx"
+Scp-File "$ai\web\app\mindsutra\page.tsx"                                                          "/tmp/ms_mindsutra_landing.tsx"
+
+# â”€â”€ MindSutra storefront + auth + checkout + dashboards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Write-Host "Uploading MindSutra storefront pages ..." -ForegroundColor Yellow
+Scp-File "$ai\web\app\vedic-math\page.tsx"                                                        "/tmp/ms_vedic_root.tsx"
+Scp-File "$ai\web\app\vedic-math\[grade]\layout.tsx"                                              "/tmp/ms_vedic_grade_layout.tsx"
+Scp-File "$ai\web\app\vedic-math\[grade]\page.tsx"                                                "/tmp/ms_vedic_grade_page.tsx"
+Scp-File "$ai\web\app\vedic-math\[grade]\VedicMathGradeClient.tsx"                                "/tmp/ms_vedic_grade_client.tsx"
+Scp-File "$ai\web\app\auth\register\page.tsx"                                                     "/tmp/ms_auth_register.tsx"
+Scp-File "$ai\web\app\auth\login\page.tsx"                                                        "/tmp/ms_auth_login.tsx"
+Scp-File "$ai\web\app\checkout\[grade]\page.tsx"                                                  "/tmp/ms_checkout_grade.tsx"
+Scp-File "$ai\web\app\checkout\success\page.tsx"                                                  "/tmp/ms_checkout_success.tsx"
+Scp-File "$ai\web\lib\mindsutraChapters.ts"                                                       "/tmp/ms_mindsutra_chapters.ts"
+Scp-File "$ai\web\app\student\home\page.tsx"                                                      "/tmp/ms_student_home_page.tsx"
+Scp-File "$ai\web\app\student\home\StudentHomeClient.tsx"                                         "/tmp/ms_student_home_client.tsx"
+Scp-File "$ai\web\app\parent\dashboard\page.tsx"                                                  "/tmp/ms_parent_dash_page.tsx"
+Scp-File "$ai\web\app\parent\dashboard\ParentDashboardClient.tsx"                                 "/tmp/ms_parent_dash_client.tsx"
+Scp-File "$ai\web\app\api\auth\register\route.ts"                                                 "/tmp/ms_api_auth_register.ts"
+Scp-File "$ai\web\app\api\auth\login\route.ts"                                                    "/tmp/ms_api_auth_login.ts"
+Scp-File "$ai\web\app\api\auth\otp\send\route.ts"                                                 "/tmp/ms_api_otp_send.ts"
+Scp-File "$ai\web\app\api\auth\otp\verify\route.ts"                                               "/tmp/ms_api_otp_verify.ts"
+Scp-File "$ai\web\app\api\payment\create-order\route.ts"                                          "/tmp/ms_api_payment_order.ts"
+Scp-File "$ai\web\app\api\payment\verify\route.ts"                                                "/tmp/ms_api_payment_verify.ts"
+
+# â”€â”€ All 16 Vedic Math chapter JSONs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Write-Host "Uploading Vedic Math chapter JSONs ..." -ForegroundColor Yellow
 $chapterDir = "$ai\tutor-api\content-template\vedic_math\chapter"
 Get-ChildItem "$chapterDir\*.json" | ForEach-Object {
     Scp-File $_.FullName "/tmp/chapter_$($_.Name)"
 }
 
-# ── MindSpark G6 chapter JSONs + index ───────────────────────────────────────
+# â”€â”€ MindSpark G6 chapter JSONs + index â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Write-Host "Uploading MindSpark Grade 6 chapter JSONs ..." -ForegroundColor Yellow
 $g6ChapterDir = "$ai\tutor-api\content-template\aptitude_reasoning\grade_6\chapter"
 Get-ChildItem "$g6ChapterDir\*.json" | ForEach-Object {
@@ -75,7 +104,7 @@ Get-ChildItem "$g6ChapterDir\*.json" | ForEach-Object {
 }
 Scp-File "$ai\tutor-api\content-template\aptitude_reasoning\grade_6\chapters.json" "/tmp/ms_g6_chapters_index.json"
 
-# ── MindSutra Vedic Math grade chapters (G4–G8) ──────────────────────────────
+# â”€â”€ MindSutra Vedic Math grade chapters (G4â€“G8) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Write-Host "Uploading MindSutra Vedic Math grade chapters (G4-G8) ..." -ForegroundColor Yellow
 foreach ($g in @(4,5,6,7,8)) {
     $gradeDir = "$ai\tutor-api\content-template\vedic_math\grade_$g\chapter"
@@ -87,7 +116,7 @@ foreach ($g in @(4,5,6,7,8)) {
     }
 }
 
-# ── New vm_* SVG assets ────────────────────────────────────────────────────────
+# â”€â”€ New vm_* SVG assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Write-Host "Uploading new Vedic Math SVG assets ..." -ForegroundColor Yellow
 $svgDir = "$ai\web\public\math-svgs\vedic"
 Get-ChildItem "$svgDir\vm_*.svg" | ForEach-Object {
@@ -111,12 +140,41 @@ install -D -m 644 /tmp/ai_session_snapshot.py        /opt/robodynamics/ai-tutor/
 install -D -m 644 /tmp/ai_token_service.py           /opt/robodynamics/ai-tutor/tutor-api/app/services/token_service.py
 install -D -m 644 /tmp/ai_types.ts                   /opt/robodynamics/ai-tutor/web/lib/types.ts
 install -D -m 644 /tmp/ai_TutorClient.tsx            /opt/robodynamics/ai-tutor/web/app/ai-tutor/tutor/TutorClient.tsx
+install -D -m 644 /tmp/ai_tutor_css.css              /opt/robodynamics/ai-tutor/web/app/ai-tutor/tutor/tutor.css
+install -D -m 644 /tmp/ai_tutor_page.tsx             /opt/robodynamics/ai-tutor/web/app/ai-tutor/tutor/page.tsx
 install -D -m 644 /tmp/ai_RobotAvatar.tsx            /opt/robodynamics/ai-tutor/web/app/ai-tutor/tutor/RobotAvatar.tsx
 install -D -m 644 /tmp/ai_avatarVoices.ts            /opt/robodynamics/ai-tutor/web/lib/avatarVoices.ts
 install -D -m 644 /tmp/ai_demo_page.tsx              /opt/robodynamics/ai-tutor/web/app/ai-tutor/demo/page.tsx
-install -D -m 644 /tmp/ai_aitutor_root_page.tsx     /opt/robodynamics/ai-tutor/web/app/ai-tutor/page.tsx
+install -D -m 644 /tmp/ai_aitutor_root_page.tsx      /opt/robodynamics/ai-tutor/web/app/ai-tutor/page.tsx
 install -D -m 644 /tmp/adaptive_policy_v1.json        /opt/robodynamics/vedic_math/policies/adaptive_policy_v1.json
 mkdir -p /opt/robodynamics/ai-tutor/data
+
+# Home + product landing pages
+WEB=/opt/robodynamics/ai-tutor/web/app
+install -D -m 644 /tmp/ms_home_page.tsx              $WEB/page.tsx
+install -D -m 644 /tmp/ms_mindsutra_landing.tsx      $WEB/mindsutra/page.tsx
+
+# MindSutra storefront + auth + checkout + dashboards
+install -D -m 644 /tmp/ms_vedic_root.tsx             $WEB/vedic-math/page.tsx
+install -D -m 644 /tmp/ms_vedic_grade_layout.tsx     "$WEB/vedic-math/[grade]/layout.tsx"
+install -D -m 644 /tmp/ms_vedic_grade_page.tsx       "$WEB/vedic-math/[grade]/page.tsx"
+install -D -m 644 /tmp/ms_vedic_grade_client.tsx    "$WEB/vedic-math/[grade]/VedicMathGradeClient.tsx"
+install -D -m 644 /tmp/ms_auth_register.tsx          $WEB/auth/register/page.tsx
+install -D -m 644 /tmp/ms_auth_login.tsx             $WEB/auth/login/page.tsx
+install -D -m 644 /tmp/ms_checkout_grade.tsx         "$WEB/checkout/[grade]/page.tsx"
+install -D -m 644 /tmp/ms_checkout_success.tsx       $WEB/checkout/success/page.tsx
+install -D -m 644 /tmp/ms_mindsutra_chapters.ts      /opt/robodynamics/ai-tutor/web/lib/mindsutraChapters.ts
+install -D -m 644 /tmp/ms_student_home_page.tsx      $WEB/student/home/page.tsx
+install -D -m 644 /tmp/ms_student_home_client.tsx    $WEB/student/home/StudentHomeClient.tsx
+install -D -m 644 /tmp/ms_parent_dash_page.tsx       $WEB/parent/dashboard/page.tsx
+install -D -m 644 /tmp/ms_parent_dash_client.tsx     $WEB/parent/dashboard/ParentDashboardClient.tsx
+install -D -m 644 /tmp/ms_api_auth_register.ts       $WEB/api/auth/register/route.ts
+install -D -m 644 /tmp/ms_api_auth_login.ts          $WEB/api/auth/login/route.ts
+install -D -m 644 /tmp/ms_api_otp_send.ts            $WEB/api/auth/otp/send/route.ts
+install -D -m 644 /tmp/ms_api_otp_verify.ts          $WEB/api/auth/otp/verify/route.ts
+install -D -m 644 /tmp/ms_api_payment_order.ts       $WEB/api/payment/create-order/route.ts
+install -D -m 644 /tmp/ms_api_payment_verify.ts      $WEB/api/payment/verify/route.ts
+echo "STOREFRONT_INSTALLED"
 
 # Install all chapter JSONs
 CHAPTER_DEST=/opt/robodynamics/ai-tutor/tutor-api/content-template/vedic_math/chapter
@@ -187,3 +245,4 @@ curl -ksS -o /dev/null -w "HEALTH=%{http_code}\n" "https://robodynamics.in/ai-tu
 Run-Remote $remote
 
 Write-Host "=== Deploy complete ===" -ForegroundColor Green
+

@@ -52,9 +52,21 @@
     "version": "2026-03-mindspark-g5-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya. You already know the 2-digit Urdhva cross trick. Today we extend it to 3-digit numbers — 5 steps, one brilliant pattern!",
       "placementRule": "If learner recalls 2-digit Urdhva, start at Group C."
     },
@@ -85,7 +97,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -114,11 +130,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using 2-digit Urdhva: 23 × 12 = ?",
-            "options": ["266", "276", "286", "256"],
+            "options": [
+              "266",
+              "276",
+              "286",
+              "256"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "276",
             "hint": "Step1: 3×2=6. Step2: 2×2+3×1=7. Step3: 2×1=2. Read: 276.",
-            "solution": "3×2=6, 2×2+3×1=7, 2×1=2. Answer: 276."
+            "solution": "3×2=6, 2×2+3×1=7, 2×1=2. Answer: 276.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group A for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_A2",
@@ -130,13 +157,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using 2-digit Urdhva: 14 × 12 = ?",
-            "options": ["158", "168", "148", "178"],
+            "options": [
+              "158",
+              "168",
+              "148",
+              "178"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "168",
             "hint": "Step1: 4×2=8. Step2: 1×2+4×1=6. Step3: 1×1=1. Answer: 168.",
-            "solution": "4×2=8, 1×2+4×1=6, 1×1=1. Answer: 168."
+            "solution": "4×2=8, 1×2+4×1=6, 1×1=1. Answer: 168.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group A for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group A for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -146,9 +190,9 @@
         "boardDemo": "Draw a 3×3 grid. Label columns right-to-left: Step1=C×F, Step2=BF+CE, Step3=AF+BE+CD, Step4=AE+BD, Step5=AD.",
         "visual": {
           "kind": "svg",
-          "title": "Urdhva 3×3 Lattice Grid",
           "asset": "criss_cross_2x2.svg",
-          "caption": "5-step Urdhva pattern: vertical at edges, criss-cross in middle, triple cross at centre."
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group B for Triple Cross — 3-Digit × 3-Digit Urdhva."
         },
         "readAloudPrompt": "In ABC × DEF, which pairs multiply at Step 3 (the middle)?",
         "tryPrompt": "Name the two pairs in Step 2.",
@@ -169,11 +213,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For ABC × DEF, Step 1 (units position) is:",
-            "options": ["A × D", "B × E", "C × F", "A × F + C × D"],
+            "options": [
+              "A × D",
+              "B × E",
+              "C × F",
+              "A × F + C × D"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "C × F",
             "hint": "Step 1 is the rightmost digits of each number multiplied.",
-            "solution": "Units × units = C × F. That is Step 1."
+            "solution": "Units × units = C × F. That is Step 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group B for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_B2",
@@ -185,11 +240,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For ABC × DEF, the centre step (Step 3) involves how many products?",
-            "options": ["1", "2", "3", "4"],
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "3",
             "hint": "Step 3 = AF + BE + CD. That is 3 products.",
-            "solution": "A×F, B×E, C×D — three products. Sum them for Step 3."
+            "solution": "A×F, B×E, C×D — three products. Sum them for Step 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group B for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
         ]
       },
@@ -218,11 +284,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 231 × 132, Step 1 (units × units) = ?",
-            "options": ["3", "2", "6", "1"],
-            "correctIndex": 2,
-            "expectedAnswer": "6",
+            "options": [
+              "3",
+              "2",
+              "6",
+              "1"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "2",
             "hint": "Units of 231 is 1. Units of 132 is 2. Multiply them.",
-            "solution": "1 × 2 = 2. Wait — units of 231 = 1, units of 132 = 2. 1×2=2."
+            "solution": "1 × 2 = 2. Wait — units of 231 = 1, units of 132 = 2. 1×2=2.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group C for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_C2",
@@ -234,13 +311,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 321 × 123, Step 5 (hundreds × hundreds) = ?",
-            "options": ["3", "6", "9", "12"],
+            "options": [
+              "3",
+              "6",
+              "9",
+              "12"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3",
             "hint": "Hundreds of 321=3. Hundreds of 123=1. Multiply.",
-            "solution": "3 × 1 = 3. Step 5 = 3."
+            "solution": "3 × 1 = 3. Step 5 = 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group C for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group C for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -268,13 +362,31 @@
             "questionType": "fill_step",
             "questionText": "For 123 × 321, find Step 2 (tens position cross).",
             "steps": [
-              {"label": "B × F: tens of 123 × units of 321 = 2 × 1 = ?", "answer": "2", "hint": "2 times 1"},
-              {"label": "C × E: units of 123 × tens of 321 = 3 × 2 = ?", "answer": "6", "hint": "3 times 2"},
-              {"label": "Step 2 sum = 2 + 6 = ?", "answer": "8", "hint": "Add the two cross products"}
+              {
+                "label": "B × F: tens of 123 × units of 321 = 2 × 1 = ?",
+                "answer": "2",
+                "hint": "2 times 1"
+              },
+              {
+                "label": "C × E: units of 123 × tens of 321 = 3 × 2 = ?",
+                "answer": "6",
+                "hint": "3 times 2"
+              },
+              {
+                "label": "Step 2 sum = 2 + 6 = ?",
+                "answer": "8",
+                "hint": "Add the two cross products"
+              }
             ],
             "expectedAnswer": "8",
             "hint": "Step 2 = BF + CE for ABC × DEF.",
-            "solution": "2×1=2, 3×2=6. Step 2 = 8."
+            "solution": "2×1=2, 3×2=6. Step 2 = 8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group D for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_D2",
@@ -286,13 +398,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 123 × 321, Step 4 (AE + BD) = ?",
-            "options": ["6", "7", "8", "9"],
+            "options": [
+              "6",
+              "7",
+              "8",
+              "9"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "8",
             "hint": "A=1,B=2; D=3,E=2. 1×2+2×3=2+6=8.",
-            "solution": "A×E+B×D = 1×2+2×3 = 2+6 = 8."
+            "solution": "A×E+B×D = 1×2+2×3 = 2+6 = 8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group D for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group D for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -320,14 +449,36 @@
             "questionType": "fill_step",
             "questionText": "For 123 × 321, compute Step 3 (A×F + B×E + C×D).",
             "steps": [
-              {"label": "A×F: hundreds of 123 × units of 321 = 1 × 1 = ?", "answer": "1", "hint": "1 times 1"},
-              {"label": "B×E: tens of 123 × tens of 321 = 2 × 2 = ?", "answer": "4", "hint": "2 times 2"},
-              {"label": "C×D: units of 123 × hundreds of 321 = 3 × 3 = ?", "answer": "9", "hint": "3 times 3"},
-              {"label": "Step 3 sum = 1 + 4 + 9 = ?", "answer": "14", "hint": "Add all three products"}
+              {
+                "label": "A×F: hundreds of 123 × units of 321 = 1 × 1 = ?",
+                "answer": "1",
+                "hint": "1 times 1"
+              },
+              {
+                "label": "B×E: tens of 123 × tens of 321 = 2 × 2 = ?",
+                "answer": "4",
+                "hint": "2 times 2"
+              },
+              {
+                "label": "C×D: units of 123 × hundreds of 321 = 3 × 3 = ?",
+                "answer": "9",
+                "hint": "3 times 3"
+              },
+              {
+                "label": "Step 3 sum = 1 + 4 + 9 = ?",
+                "answer": "14",
+                "hint": "Add all three products"
+              }
             ],
             "expectedAnswer": "14",
             "hint": "Three products, add them. Write units digit, carry tens.",
-            "solution": "1+4+9=14. Write 4, carry 1."
+            "solution": "1+4+9=14. Write 4, carry 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group E for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_E2",
@@ -339,13 +490,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 112 × 221, Step 3 (AF+BE+CD) = ?",
-            "options": ["6", "7", "8", "9"],
+            "options": [
+              "6",
+              "7",
+              "8",
+              "9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "7",
             "hint": "A=1,B=1,C=2; D=2,E=2,F=1. 1×1+1×2+2×2=1+2+4=7.",
-            "solution": "1×1+1×2+2×2=1+2+4=7."
+            "solution": "1×1+1×2+2×2=1+2+4=7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group E for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group E for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -373,16 +541,46 @@
             "questionType": "fill_step",
             "questionText": "Find 112 × 111 using all 5 Urdhva steps.",
             "steps": [
-              {"label": "Step 1 (C×F = 2×1): ?", "answer": "2", "hint": "Units × units"},
-              {"label": "Step 2 (BF+CE = 1×1+2×1): ?", "answer": "3", "hint": "1+2=3"},
-              {"label": "Step 3 (AF+BE+CD = 1×1+1×1+2×1): ?", "answer": "4", "hint": "1+1+2=4"},
-              {"label": "Step 4 (AE+BD = 1×1+1×1): ?", "answer": "2", "hint": "1+1=2"},
-              {"label": "Step 5 (AD = 1×1): ?", "answer": "1", "hint": "Hundreds × hundreds"},
-              {"label": "Read steps left-to-right: 1|2|4|3|2 = ?", "answer": "12432", "hint": "Combine all steps"}
+              {
+                "label": "Step 1 (C×F = 2×1): ?",
+                "answer": "2",
+                "hint": "Units × units"
+              },
+              {
+                "label": "Step 2 (BF+CE = 1×1+2×1): ?",
+                "answer": "3",
+                "hint": "1+2=3"
+              },
+              {
+                "label": "Step 3 (AF+BE+CD = 1×1+1×1+2×1): ?",
+                "answer": "4",
+                "hint": "1+1+2=4"
+              },
+              {
+                "label": "Step 4 (AE+BD = 1×1+1×1): ?",
+                "answer": "2",
+                "hint": "1+1=2"
+              },
+              {
+                "label": "Step 5 (AD = 1×1): ?",
+                "answer": "1",
+                "hint": "Hundreds × hundreds"
+              },
+              {
+                "label": "Read steps left-to-right: 1|2|4|3|2 = ?",
+                "answer": "12432",
+                "hint": "Combine all steps"
+              }
             ],
             "expectedAnswer": "12432",
             "hint": "5 steps from right to left, then read left to right.",
-            "solution": "S1=2, S2=3, S3=4, S4=2, S5=1 → 12432."
+            "solution": "S1=2, S2=3, S3=4, S4=2, S5=1 → 12432.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group F for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_F2",
@@ -394,13 +592,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "123 × 321 = ?",
-            "options": ["39363", "39483", "39583", "38483"],
+            "options": [
+              "39363",
+              "39483",
+              "39583",
+              "38483"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "39483",
             "hint": "Steps: S1=3, S2=8, S3=14(write4,carry1), S4=8+1=9, S5=3.",
-            "solution": "S1=3,S2=8,S3=14→4c1,S4=9,S5=3. Answer: 39483."
+            "solution": "S1=3,S2=8,S3=14→4c1,S4=9,S5=3. Answer: 39483.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group F for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group F for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -427,11 +642,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "132 × 23 = ?",
-            "options": ["3026", "3036", "2936", "3136"],
+            "options": [
+              "3036",
+              "3026",
+              "3136",
+              "2936"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3036",
             "hint": "132 × 023. S1=2×3=6, S2=3×3+2×2=13→3c1, S3=1×3+3×2+2×0=9+1=10→0c1, S4=1×2+3×0=2+1=3, S5=1×0=0.",
-            "solution": "132×23=3036."
+            "solution": "123 x 24 = 123 x (20 + 4) = 2460 + 492 = 2952 is not right for this prompt. Rework directly: 132 x 23 = 132 x (20 + 3) = 2640 + 396 = 3036.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group G for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_G2",
@@ -443,13 +669,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "312 × 21 = ?",
-            "options": ["6452", "6552", "6352", "6542"],
+            "options": [
+              "6452",
+              "6552",
+              "6352",
+              "6542"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "6552",
             "hint": "312 × 021. S1=2×1=2, S2=1×1+2×2=5, S3=3×1+1×2+2×0=5, S4=3×2+1×0=6, S5=0. Answer: 6552.",
-            "solution": "312×21=6552."
+            "solution": "312×21=6552.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group G for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group G for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -476,11 +719,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "111 × 111 = ?",
-            "options": ["12211", "12321", "11321", "12331"],
+            "options": [
+              "12211",
+              "12321",
+              "11321",
+              "12331"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "12321",
             "hint": "S1=1,S2=2,S3=3,S4=2,S5=1 → 12321.",
-            "solution": "S1=1×1=1, S2=1+1=2, S3=1+1+1=3, S4=2, S5=1. Answer: 12321."
+            "solution": "S1=1×1=1, S2=1+1=2, S3=1+1+1=3, S4=2, S5=1. Answer: 12321.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group H for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_H2",
@@ -492,13 +746,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "211 × 112 = ?",
-            "options": ["23522", "23632", "23432", "23642"],
+            "options": [
+              "23522",
+              "23632",
+              "23432",
+              "23642"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "23632",
             "hint": "S1=1×2=2, S2=1×2+1×1=3, S3=2×2+1×1+1×1=6, S4=2×1+1×1=3, S5=2×1=2. Answer: 23632.",
-            "solution": "S1=2,S2=3,S3=6,S4=3,S5=2. Answer: 23632."
+            "solution": "S1=2,S2=3,S3=6,S4=3,S5=2. Answer: 23632.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group H for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group H for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -526,16 +797,46 @@
             "questionType": "fill_step",
             "questionText": "Find 231 × 132 using all 5 Urdhva steps (ABC=231, DEF=132).",
             "steps": [
-              {"label": "Step 1 (C×F = 1×2): ?", "answer": "2", "hint": "1 times 2"},
-              {"label": "Step 2 (B×F + C×E = 3×2 + 1×3): ?", "answer": "9", "hint": "6+3=9"},
-              {"label": "Step 3 (A×F + B×E + C×D = 2×2+3×3+1×1): ?", "answer": "14", "hint": "4+9+1=14, write 4 carry 1"},
-              {"label": "Step 4 (A×E + B×D = 2×3+3×1) + carry: ?", "answer": "10", "hint": "6+3+1carry=10, write 0 carry 1"},
-              {"label": "Step 5 (A×D = 2×1) + carry: ?", "answer": "3", "hint": "2+1carry=3"},
-              {"label": "Read steps right-to-left as digits: ?", "answer": "30492", "hint": "3|0|4|9|2 = 30492"}
+              {
+                "label": "Step 1 (C×F = 1×2): ?",
+                "answer": "2",
+                "hint": "1 times 2"
+              },
+              {
+                "label": "Step 2 (B×F + C×E = 3×2 + 1×3): ?",
+                "answer": "9",
+                "hint": "6+3=9"
+              },
+              {
+                "label": "Step 3 (A×F + B×E + C×D = 2×2+3×3+1×1): ?",
+                "answer": "14",
+                "hint": "4+9+1=14, write 4 carry 1"
+              },
+              {
+                "label": "Step 4 (A×E + B×D = 2×3+3×1) + carry: ?",
+                "answer": "10",
+                "hint": "6+3+1carry=10, write 0 carry 1"
+              },
+              {
+                "label": "Step 5 (A×D = 2×1) + carry: ?",
+                "answer": "3",
+                "hint": "2+1carry=3"
+              },
+              {
+                "label": "Read steps right-to-left as digits: ?",
+                "answer": "30492",
+                "hint": "3|0|4|9|2 = 30492"
+              }
             ],
             "expectedAnswer": "30492",
             "hint": "Work step by step, carry forward the tens of each step.",
-            "solution": "S1=2,S2=9,S3=14→4c1,S4=10→0c1,S5=3. Answer: 30492."
+            "solution": "S1=2,S2=9,S3=14→4c1,S4=10→0c1,S5=3. Answer: 30492.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group I for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           },
           {
             "questionId": "VM_G5_L3_I2",
@@ -547,29 +848,244 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "213 × 321 = ?",
-            "options": ["68273", "68373", "68473", "67373"],
+            "options": [
+              "68273",
+              "68373",
+              "68473",
+              "67373"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "68373",
             "hint": "S1=3×1=3, S2=1×1+3×2=7, S3=2×1+1×2+3×3=13→3c1, S4=2×2+1×3+1=8, S5=2×3=6. Answer: 68373.",
-            "solution": "S1=3,S2=7,S3=13→3c1,S4=8,S5=6. Answer: 68373."
+            "solution": "S1=3,S2=7,S3=13→3c1,S4=8,S5=6. Answer: 68373.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+              "caption": "Group I for Triple Cross — 3-Digit × 3-Digit Urdhva."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "caption": "Group I for Triple Cross — 3-Digit × 3-Digit Urdhva."
+        }
       }
     ]
   },
   "teachingScript": [
-    {"stepId": "VM_G5_L3_A", "exerciseGroup": "A", "subtopic": "2-digit Urdhva review", "boardMode": "svg", "teacherLine": "The 2-digit Urdhva method was three steps. The 3-digit version is just five steps — same idea, extended!", "boardAction": "Quickly recap 2-digit: right, cross, left with example 23×12.", "checkpointPrompt": "14×12=?", "microPractice": "Three in a row: 11×11, 12×13, 21×12."},
-    {"stepId": "VM_G5_L3_B", "exerciseGroup": "B", "subtopic": "5-step pattern", "boardMode": "svg", "teacherLine": "The 5-step pattern for 3 digits: C×F | BF+CE | AF+BE+CD | AE+BD | A×D. Memorise the shape!", "boardAction": "Draw the lattice grid. Show the 5 positions with colour arrows.", "checkpointPrompt": "What is at Step 3?", "microPractice": "List all 5 steps for 123×456."},
-    {"stepId": "VM_G5_L3_C", "exerciseGroup": "C", "subtopic": "Edge steps 1 and 5", "boardMode": "svg", "teacherLine": "Steps 1 and 5 are the easiest — one product each, just like the ends of the 2-digit method.", "boardAction": "Highlight units digits and hundreds digits. Show single product each.", "checkpointPrompt": "Step1 and Step5 for 321×123.", "microPractice": "Edge steps for 214×312."},
-    {"stepId": "VM_G5_L3_D", "exerciseGroup": "D", "subtopic": "Side crosses", "boardMode": "svg", "teacherLine": "Steps 2 and 4 each have two cross products — like the 2-digit cross, but just shifted to the sides.", "boardAction": "Show arrows for BF+CE and AE+BD with colour coding.", "checkpointPrompt": "Steps 2 and 4 for 123×321.", "microPractice": "Side crosses for 214×312."},
-    {"stepId": "VM_G5_L3_E", "exerciseGroup": "E", "subtopic": "Triple centre cross", "boardMode": "svg", "teacherLine": "Step 3 is the centre — three products! AF, BE, CD. Add all three. If the sum is two digits, write the units and carry the tens.", "boardAction": "Show three arrows in the centre of the lattice. Compute 1+4+9=14.", "checkpointPrompt": "Step 3 for 213×132.", "microPractice": "Step 3 for 214×312."},
-    {"stepId": "VM_G5_L3_F", "exerciseGroup": "F", "subtopic": "Full assembly", "boardMode": "svg", "teacherLine": "All 5 steps computed — now assemble! Write the units digit of each step and carry the rest to the next step.", "boardAction": "Show complete 123×321 with all steps, carries annotated, final answer boxed.", "checkpointPrompt": "321×123=?", "microPractice": "Full method for 111×111."},
-    {"stepId": "VM_G5_L3_G", "exerciseGroup": "G", "subtopic": "3×2 warm-up", "boardMode": "svg", "teacherLine": "For 3-digit × 2-digit, pad the 2-digit number with a leading zero. Then the 5-step method works perfectly!", "boardAction": "Show 132×23 as 132×023. Apply all 5 steps.", "checkpointPrompt": "312×21=?", "microPractice": "Three drills: 321×12, 231×13, 132×21."},
-    {"stepId": "VM_G5_L3_H", "exerciseGroup": "H", "subtopic": "Speed drill", "boardMode": "svg", "teacherLine": "Speed mode! Flash cards with 3-digit numbers. Aim for 30 seconds per problem.", "boardAction": "Flash 111×111 and 121×111 with 30-second timer.", "checkpointPrompt": "211×112=?", "microPractice": "Three in a row: 112×112, 121×121, 211×211."},
-    {"stepId": "VM_G5_L3_I", "exerciseGroup": "I", "subtopic": "Boss level", "boardMode": "svg", "teacherLine": "Boss level! Large digits, multiple carries. Stay systematic — the method never fails if you track your carries.", "boardAction": "Full worked example 231×132 with all carries shown in boxes.", "checkpointPrompt": "213×321=?", "microPractice": "Challenge: 333×222."}
+    {
+      "stepId": "VM_G5_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "2-digit Urdhva review",
+      "boardMode": "svg",
+      "teacherLine": "The 2-digit Urdhva method was three steps. The 3-digit version is just five steps — same idea, extended!",
+      "boardAction": "Quickly recap 2-digit: right, cross, left with example 23×12.",
+      "checkpointPrompt": "14×12=?",
+      "microPractice": "Three in a row: 11×11, 12×13, 21×12.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_B",
+      "exerciseGroup": "B",
+      "subtopic": "5-step pattern",
+      "boardMode": "svg",
+      "teacherLine": "The 5-step pattern for 3 digits: C×F | BF+CE | AF+BE+CD | AE+BD | A×D. Memorise the shape!",
+      "boardAction": "Draw the lattice grid. Show the 5 positions with colour arrows.",
+      "checkpointPrompt": "What is at Step 3?",
+      "microPractice": "List all 5 steps for 123×456.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_C",
+      "exerciseGroup": "C",
+      "subtopic": "Edge steps 1 and 5",
+      "boardMode": "svg",
+      "teacherLine": "Steps 1 and 5 are the easiest — one product each, just like the ends of the 2-digit method.",
+      "boardAction": "Highlight units digits and hundreds digits. Show single product each.",
+      "checkpointPrompt": "Step1 and Step5 for 321×123.",
+      "microPractice": "Edge steps for 214×312.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_D",
+      "exerciseGroup": "D",
+      "subtopic": "Side crosses",
+      "boardMode": "svg",
+      "teacherLine": "Steps 2 and 4 each have two cross products — like the 2-digit cross, but just shifted to the sides.",
+      "boardAction": "Show arrows for BF+CE and AE+BD with colour coding.",
+      "checkpointPrompt": "Steps 2 and 4 for 123×321.",
+      "microPractice": "Side crosses for 214×312.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_E",
+      "exerciseGroup": "E",
+      "subtopic": "Triple centre cross",
+      "boardMode": "svg",
+      "teacherLine": "Step 3 is the centre — three products! AF, BE, CD. Add all three. If the sum is two digits, write the units and carry the tens.",
+      "boardAction": "Show three arrows in the centre of the lattice. Compute 1+4+9=14.",
+      "checkpointPrompt": "Step 3 for 213×132.",
+      "microPractice": "Step 3 for 214×312.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_F",
+      "exerciseGroup": "F",
+      "subtopic": "Full assembly",
+      "boardMode": "svg",
+      "teacherLine": "All 5 steps computed — now assemble! Write the units digit of each step and carry the rest to the next step.",
+      "boardAction": "Show complete 123×321 with all steps, carries annotated, final answer boxed.",
+      "checkpointPrompt": "321×123=?",
+      "microPractice": "Full method for 111×111.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_G",
+      "exerciseGroup": "G",
+      "subtopic": "3×2 warm-up",
+      "boardMode": "svg",
+      "teacherLine": "For 3-digit × 2-digit, pad the 2-digit number with a leading zero. Then the 5-step method works perfectly!",
+      "boardAction": "Show 132×23 as 132×023. Apply all 5 steps.",
+      "checkpointPrompt": "312×21=?",
+      "microPractice": "Three drills: 321×12, 231×13, 132×21.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_H",
+      "exerciseGroup": "H",
+      "subtopic": "Speed drill",
+      "boardMode": "svg",
+      "teacherLine": "Speed mode! Flash cards with 3-digit numbers. Aim for 30 seconds per problem.",
+      "boardAction": "Flash 111×111 and 121×111 with 30-second timer.",
+      "checkpointPrompt": "211×112=?",
+      "microPractice": "Three in a row: 112×112, 121×121, 211×211.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "stepId": "VM_G5_L3_I",
+      "exerciseGroup": "I",
+      "subtopic": "Boss level",
+      "boardMode": "svg",
+      "teacherLine": "Boss level! Large digits, multiple carries. Stay systematic — the method never fails if you track your carries.",
+      "boardAction": "Full worked example 231×132 with all carries shown in boxes.",
+      "checkpointPrompt": "213×321=?",
+      "microPractice": "Challenge: 333×222.",
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Teaching step for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    }
   ],
   "screenplay": [
-    {"beatId": "VM_G5_L3_A_INTRO", "stepId": "VM_G5_L3_A", "exerciseGroup": "A", "subtopic": "2-digit Urdhva review", "sequence": 101, "cue": "intro", "boardMode": "svg", "teacherLine": "The 2-digit Urdhva had three steps. Today's 3-digit version has five — but the same beautiful crosswise logic!", "boardAction": "Recap 2-digit lattice quickly on board.", "checkpointPrompt": "", "pauseType": "none", "holdSec": 0.4, "expectedStudentResponse": "", "fallbackHint": "Right, cross, left — that was the 2-digit pattern.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null},
-    {"beatId": "VM_G5_L3_B_EXPLAIN", "stepId": "VM_G5_L3_B", "exerciseGroup": "B", "subtopic": "5-step pattern", "sequence": 201, "cue": "explain", "boardMode": "svg", "teacherLine": "The lattice shows all 5 positions. Today we will fill each one — right to left, step by step.", "boardAction": "Show full criss_cross_2x2.svg extended to 3-digit with 5 step labels.", "checkpointPrompt": "What is Step 3?", "pauseType": "student_input", "holdSec": 5.0, "expectedStudentResponse": "AF+BE+CD", "fallbackHint": "Three products: A×F, B×E, C×D. Add them all.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null}
+    {
+      "beatId": "VM_G5_L3_A_INTRO",
+      "stepId": "VM_G5_L3_A",
+      "exerciseGroup": "A",
+      "subtopic": "2-digit Urdhva review",
+      "sequence": 101,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "The 2-digit Urdhva had three steps. Today's 3-digit version has five — but the same beautiful crosswise logic!",
+      "boardAction": "Recap 2-digit lattice quickly on board.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Right, cross, left — that was the 2-digit pattern.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Screenplay beat for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    },
+    {
+      "beatId": "VM_G5_L3_B_EXPLAIN",
+      "stepId": "VM_G5_L3_B",
+      "exerciseGroup": "B",
+      "subtopic": "5-step pattern",
+      "sequence": 201,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "The lattice shows all 5 positions. Today we will fill each one — right to left, step by step.",
+      "boardAction": "Show full criss_cross_2x2.svg extended to 3-digit with 5 step labels.",
+      "checkpointPrompt": "What is Step 3?",
+      "pauseType": "student_input",
+      "holdSec": 5,
+      "expectedStudentResponse": "AF+BE+CD",
+      "fallbackHint": "Three products: A×F, B×E, C×D. Add them all.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "criss_cross_2x2.svg",
+        "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+        "caption": "Screenplay beat for Triple Cross — 3-Digit × 3-Digit Urdhva."
+      }
+    }
+  ],
+  "chapterCode": "VM_G5_L3_CRISS_CROSS_3DIG",
+  "courseId": "vedic_math_g5",
+  "visualLibrary": [
+    {
+      "visualId": "criss_cross_2x2",
+      "kind": "svg",
+      "asset": "criss_cross_2x2.svg",
+      "title": "Lesson 3: Triple Cross — 3-Digit × 3-Digit Urdhva",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
   ]
 }

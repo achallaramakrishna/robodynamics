@@ -1,0 +1,530 @@
+{
+  "chapterCode": "AR_G8_L6_DATA_INTERP",
+  "courseId": "aptitude_reasoning_g8",
+  "title": "Data Interpretation",
+  "source": "MindSpark Grade 8 Aptitude & Reasoning | Chapter 6: Data Interpretation",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Reading and interpreting bar charts",
+    "Reading and interpreting line graphs",
+    "Reading and interpreting pie charts",
+    "Calculating percentage change between two periods",
+    "Finding ratios, totals, and differences from charts",
+    "Inference questions: which category grew most, which declined"
+  ],
+  "learningGoals": [
+    "Extract exact values from bar, line, and pie charts accurately",
+    "Calculate percentage change: (new - old) / old × 100",
+    "Find the ratio between two categories in the same chart",
+    "Determine which category had the highest absolute or percentage growth",
+    "Answer inference questions by combining data from multiple chart elements"
+  ],
+  "coreIdeas": [
+    "Bar charts: compare bar heights; read Y-axis scale carefully",
+    "Line graphs: slope direction indicates increase/decrease; steepest slope = fastest change",
+    "Pie charts: angle or percentage given; absolute value = (percentage / 100) × total",
+    "Percentage change formula: ((New − Old) / Old) × 100",
+    "Ratio: express as fraction, simplify; always specify which quantity is in the numerator"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "A bar chart shows sales (units) for 4 products: A=200, B=350, C=150, D=300. What is the ratio of B's sales to C's sales?",
+      "solution": "Ratio B:C = 350:150 = 7:3. Answer: 7:3.",
+      "concept": "Ratio from bar chart"
+    },
+    {
+      "id": "WE2",
+      "problem": "A company's revenue was ₹40 lakh in 2022 and ₹52 lakh in 2023. What is the percentage increase?",
+      "solution": "Percentage increase = (52 - 40) / 40 × 100 = 12/40 × 100 = 30%. Answer: 30%.",
+      "concept": "Percentage change calculation"
+    },
+    {
+      "id": "WE3",
+      "problem": "A pie chart shows 5 categories with percentages: A=25%, B=30%, C=15%, D=20%, E=10%. Total value = 800 units. What is the absolute value of category B?",
+      "solution": "B = 30/100 × 800 = 240 units. Answer: 240.",
+      "concept": "Pie chart percentage to absolute value"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g8-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Competitive exam prep"
+      ],
+      "coachIntro": "Data interpretation is the most practical reasoning skill — and one of the highest-scoring sections in competitive exams. Charts are not complicated once you know exactly where to look. Let's turn raw charts into easy marks.",
+      "placementRule": "If learner picks 'I have done this before', skip Exercise A–B and start at Exercise C."
+    },
+    "mission": {
+      "missionTitle": "Data Decoded: Charts to Insights",
+      "missionPromise": "You will read any bar, line, or pie chart and calculate percentage change, ratios, totals, and inference answers in under 2 minutes.",
+      "successCelebration": "Data Ace badge unlocked! You extracted every insight from every chart without a single error!"
+    },
+    "microLessonPattern": [
+      "Read and extract values from a simple bar chart",
+      "Calculate ratio and difference from chart values",
+      "Read a line graph and identify growth trends",
+      "Work with a pie chart to find absolute values",
+      "Calculate percentage change across two periods",
+      "Answer 2-3 inference questions about the same chart"
+    ],
+    "rewardLoop": {
+      "xpUnit": "spark",
+      "streakRule": "3 correct in a row = Streak Flame + 5 bonus sparks",
+      "badgeRule": "Complete all 8 exercises with ≥ 80% accuracy = Data Ace badge",
+      "celebrationStyle": "Chart bars animate to correct heights + confetti + Data Ace badge reveal"
+    },
+    "reviewLoop": {
+      "trigger": "Two consecutive percentage-change errors",
+      "practiceStyle": "Reteach: step-by-step formula application with a worked example on the board",
+      "masteryRule": "3 correct percentage-change calculations = mastered",
+      "revisitRule": "Pie-chart absolute value errors revisited in Exercise H"
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G8_L6_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Data interpretation has one golden rule: read the scale first, values second. A bar chart is useless if you misread the Y-axis scale. Is it in units, hundreds, or thousands? Once you know the scale, reading each bar is straightforward. Let me walk you through a 4-bar chart step by step.",
+        "boardAction": "Draw a bar chart with 4 bars: Products A, B, C, D at heights 200, 350, 150, 300. Y-axis: 0 to 400 in steps of 50. Label the scale clearly. Point out the scale-reading step explicitly.",
+        "checkpointPrompt": "In the chart with Y-axis in units: which product had the highest sales and what was it?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "B with 350 units",
+        "fallbackHint": "Look for the tallest bar. B reaches 350 on the Y-axis.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Bar Chart — Read Scale First!",
+            "x": "120",
+            "y": "50",
+            "fontSize": 20,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "A=200  B=350  C=150  D=300",
+            "x": "60",
+            "y": "110",
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "80",
+            "x2": "40",
+            "y2": "260",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "Y-axis: 0 to 400 (scale = 50 per unit)",
+            "x": "55",
+            "y": "275",
+            "fontSize": 14,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "bar_chart.svg",
+          "title": "Data Interpretation",
+          "caption": "Screenplay beat for Data Interpretation."
+        }
+      },
+      {
+        "beatId": "AR_G8_L6_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Now let me calculate a percentage change from a line graph. Revenue: 2022 = ₹40 lakh, 2023 = ₹52 lakh. Formula: (New − Old) / Old × 100. = (52 − 40) / 40 × 100 = 12/40 × 100 = 30%. The revenue grew by 30%. Notice: always divide by the OLD value, not the new one.",
+        "boardAction": "Draw a line graph with two points: 2022 at 40, 2023 at 52. Show the formula. Calculate step by step: 52-40=12, 12/40=0.3, 0.3×100=30%.",
+        "checkpointPrompt": "A product's price was ₹80 in March and ₹100 in April. What is the percentage increase?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "25%",
+        "fallbackHint": "(100-80)/80 × 100 = 20/80 × 100 = 25%.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "% Change = (New - Old) / Old × 100",
+            "x": "50",
+            "y": "70",
+            "fontSize": 18,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "= (52 - 40) / 40 × 100",
+            "x": "80",
+            "y": "120",
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "= 12/40 × 100 = 30%",
+            "x": "80",
+            "y": "165",
+            "fontSize": 20,
+            "color": "#69F0AE"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "95",
+            "x2": "500",
+            "y2": "95",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "bar_chart.svg",
+          "title": "Data Interpretation",
+          "caption": "Screenplay beat for Data Interpretation."
+        }
+      },
+      {
+        "beatId": "AR_G8_L6_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your turn with a pie chart. Total students = 800. Pie shows: Science 25%, Arts 30%, Commerce 15%, Tech 20%, Others 10%. Find the absolute number of Arts students. Use: (percentage / 100) × total. Try it now.",
+        "boardAction": "Draw a pie chart with 5 labeled sectors. Highlight the Arts sector (30%). Write the formula and calculate: 30/100 × 800 = 240.",
+        "checkpointPrompt": "Using the same pie chart (total=800), how many students are in Tech?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "160",
+        "fallbackHint": "Tech = 20% of 800 = 20/100 × 800 = 160.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Pie Chart: Total = 800",
+            "x": "160",
+            "y": "50",
+            "fontSize": 18,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "Arts = 30%  →  30/100 × 800 = 240",
+            "x": "60",
+            "y": "110",
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Tech = 20%  →  20/100 × 800 = 160",
+            "x": "60",
+            "y": "155",
+            "fontSize": 17,
+            "color": "#69F0AE"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "80",
+            "x2": "520",
+            "y2": "80",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 1
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "bar_chart.svg",
+          "title": "Data Interpretation",
+          "caption": "Screenplay beat for Data Interpretation."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Bar chart — read and extract",
+      "missionStepTitle": "Exercise A: Bar Chart Basics",
+      "coachHook": "Scale. Bars. Values. That's all a bar chart is. Master the sequence.",
+      "boardDemo": {
+        "title": "Reading a bar chart",
+        "steps": [
+          "Read the Y-axis scale and its unit",
+          "Identify the tallest and shortest bars",
+          "Read exact values for each bar",
+          "Calculate sum, difference, and ratio as required"
+        ],
+        "teacherLine": "If the Y-axis goes in steps of 50, a bar halfway between 100 and 150 = 125. Interpolate confidently."
+      },
+      "readAloudPrompt": "Name the scale unit of the Y-axis before answering any question.",
+      "tryPrompt": "Bar chart shows monthly sales (thousands): Jan=45, Feb=60, Mar=55, Apr=70. Which month had the highest sales and what was the Jan-to-Apr increase?",
+      "masteryCheck": "April (70,000 units); increase = 25,000 units",
+      "instantFeedbackWin": "Correct! April has the tallest bar at 70. Jan to Apr: 70-45=25 (thousands) = 25,000 units.",
+      "instantFeedbackRetry": "Here's a trick: Identify the tallest bar first (April=70). Difference: 70-45=25 thousands.",
+      "reviewPrompt": "How do you read a bar that falls between two Y-axis gridlines?",
+      "xpReward": 10,
+      "badgeFocus": "Chart Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group A for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Bar chart — ratio and comparison",
+      "missionStepTitle": "Exercise B: Ratios from Charts",
+      "coachHook": "Ratios in 30 seconds. Read two bars, divide, simplify.",
+      "boardDemo": {
+        "title": "Calculating ratios from bar charts",
+        "steps": [
+          "Identify the two bars you are comparing",
+          "Write them as a fraction",
+          "Simplify by finding the HCF",
+          "Express as A:B"
+        ],
+        "teacherLine": "Simplify ratios before presenting. 200:350 simplifies to 4:7."
+      },
+      "readAloudPrompt": "Practice: simplify 350:150 in your head (HCF=50 → 7:3).",
+      "tryPrompt": "Bar chart: Product P=240, Q=180, R=320, S=160. What is the ratio of R to S? What is the ratio of P to Q?",
+      "masteryCheck": "R:S = 2:1; P:Q = 4:3",
+      "instantFeedbackWin": "Excellent! R:S = 320:160 = 2:1. P:Q = 240:180 = 4:3 (HCF=60).",
+      "instantFeedbackRetry": "Here's a trick: R:S = 320:160. Divide both by 160 → 2:1. P:Q = 240:180. Divide both by 60 → 4:3.",
+      "reviewPrompt": "What is the HCF of 240 and 180?",
+      "xpReward": 12,
+      "badgeFocus": "Ratio Extractor",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group B for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Line graph — trend analysis",
+      "missionStepTitle": "Exercise C: Line Graph Trends",
+      "coachHook": "The slope tells the story. Steep up = fast growth. Flat = stagnant. Steep down = decline.",
+      "boardDemo": {
+        "title": "Reading trends from line graphs",
+        "steps": [
+          "Identify whether each segment goes up, down, or flat",
+          "Steepest segment = fastest rate of change",
+          "Read the exact values at start and end of each segment",
+          "Calculate percentage change for the steepest segment"
+        ],
+        "teacherLine": "For 'which year showed the highest growth', calculate percentage change for each year — don't just look at the slope visually."
+      },
+      "readAloudPrompt": "Say: 'Biggest absolute change ≠ biggest percentage change. Calculate both.'",
+      "tryPrompt": "Line graph — exports ($M): 2020=50, 2021=60, 2022=75, 2023=90. Which year showed the highest percentage growth?",
+      "masteryCheck": "2022 (25% growth from 60 to 75)",
+      "instantFeedbackWin": "Correct! 2021: (60-50)/50×100=20%. 2022: (75-60)/60×100=25%. 2023: (90-75)/75×100=20%. Highest % growth: 2022.",
+      "instantFeedbackRetry": "Here's a trick: Calculate % growth for each year: 20%, 25%, 20%. The middle year 2022 had the most.",
+      "reviewPrompt": "Why might the year with the biggest absolute increase NOT have the highest percentage increase?",
+      "xpReward": 14,
+      "badgeFocus": "Trend Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group C for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Pie chart — percentage and absolute",
+      "missionStepTitle": "Exercise D: Pie Chart Precision",
+      "coachHook": "Pie charts hide the absolute numbers. You have to calculate them. One formula: (% / 100) × total.",
+      "boardDemo": {
+        "title": "Pie chart absolute value calculation",
+        "steps": [
+          "Note the total value given in the problem",
+          "Read the percentage for the required sector",
+          "Calculate: (percentage / 100) × total",
+          "Double-check: all sector values should sum to total"
+        ],
+        "teacherLine": "If the total is not given, you can find the ratio between any two sectors directly from their percentages."
+      },
+      "readAloudPrompt": "Recite: (sector % / 100) × total = absolute value.",
+      "tryPrompt": "Pie chart of 1200 students: Maths=35%, Science=25%, English=20%, History=12%, Others=8%. How many students study Maths? What is the ratio of Science to English students?",
+      "masteryCheck": "Maths = 420; Science:English = 5:4",
+      "instantFeedbackWin": "Spot on! Maths = 35/100 × 1200 = 420. Science = 300, English = 240. Ratio = 300:240 = 5:4.",
+      "instantFeedbackRetry": "Here's a trick: Maths = 0.35 × 1200 = 420. Science:English = 25:20 = 5:4 (you can use percentages directly for ratio).",
+      "reviewPrompt": "Why can you calculate the ratio of two pie sectors directly from their percentages without using the total?",
+      "xpReward": 12,
+      "badgeFocus": "Pie Chart Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group D for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Percentage change calculations",
+      "missionStepTitle": "Exercise E: Percent Change Drills",
+      "coachHook": "The formula: (New − Old) / Old × 100. Memorise it. Tattoo it. Use it every time.",
+      "boardDemo": {
+        "title": "Percentage change with different scenarios",
+        "steps": [
+          "Increase: New > Old → positive %",
+          "Decrease: New < Old → negative % (percentage decrease)",
+          "Find new value given old value and % change",
+          "Find old value given new value and % change"
+        ],
+        "teacherLine": "Reverse calculation: if new = old × (1 + rate), then old = new / (1 + rate)."
+      },
+      "readAloudPrompt": "Verify: if old=200 and % increase=15%, new = 200 × 1.15 = 230.",
+      "tryPrompt": "A store's revenue fell from ₹5 lakh to ₹4 lakh. (a) What is the % decrease? (b) If revenue then rises 25% from ₹4 lakh, what is the new revenue?",
+      "masteryCheck": "(a) 20%; (b) ₹5 lakh",
+      "instantFeedbackWin": "Precise! (a) (5-4)/5 × 100 = 20%. (b) 4 × 1.25 = 5 lakh.",
+      "instantFeedbackRetry": "Here's a trick: (a) decrease = (5-4)/5 × 100 = 20%. (b) new = 4 × (1 + 25/100) = 4 × 1.25 = 5.",
+      "reviewPrompt": "A price drops 20% and then rises 20%. Is the final price the same as the original? Explain.",
+      "xpReward": 14,
+      "badgeFocus": "Percent Pro",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group E for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Two-chart comparison",
+      "missionStepTitle": "Exercise F: Two Charts, One Conclusion",
+      "coachHook": "Two charts = double the data. Combine them to answer inference questions.",
+      "boardDemo": {
+        "title": "Combining data from two charts",
+        "steps": [
+          "Read Chart 1: note values for each category",
+          "Read Chart 2: note values for each category",
+          "Calculate derived metric: ratio, difference, or % change across both",
+          "Compare across categories to answer 'which is highest/lowest'"
+        ],
+        "teacherLine": "Inference questions ask 'which department earned the most profit?' — you may need revenue from one chart and cost from another."
+      },
+      "readAloudPrompt": "Say the values from each chart aloud before computing anything.",
+      "tryPrompt": "Bar chart 1 — Revenue (₹L): A=80, B=60, C=100, D=70. Bar chart 2 — Cost (₹L): A=50, B=45, C=80, D=40. Which department has the highest profit? Which has the highest profit margin (profit/revenue)?",
+      "masteryCheck": "Highest profit: A (30L); Highest margin: D (30/70 ≈ 42.9%)",
+      "instantFeedbackWin": "Excellent analysis! Profits: A=30, B=15, C=20, D=30. A and D both have profit 30, but D has revenue 70 vs A's 80. Margin: D=30/70=42.9%, A=30/80=37.5%. D wins on margin!",
+      "instantFeedbackRetry": "Here's a trick: Profit = Revenue − Cost. A:30, B:15, C:20, D:30. For margin: divide each profit by its revenue. D=30/70 beats A=30/80.",
+      "reviewPrompt": "Distinguish between absolute profit and profit margin.",
+      "xpReward": 14,
+      "badgeFocus": "Dual Chart Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group F for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Inference and approximation",
+      "missionStepTitle": "Exercise G: Read Between the Lines",
+      "coachHook": "Inference questions need thinking, not just reading. Combine, compare, conclude.",
+      "boardDemo": {
+        "title": "Inference from chart data",
+        "steps": [
+          "Identify what the question is really asking",
+          "Determine which data points you need",
+          "Calculate the required value",
+          "Check if the conclusion matches any answer option"
+        ],
+        "teacherLine": "Most DI inference errors happen because students calculate the wrong thing. Always re-read the question after your calculation."
+      },
+      "readAloudPrompt": "Re-read the question AFTER calculating to confirm you answered what was asked.",
+      "tryPrompt": "Line graph — company profits (₹Cr): 2019=12, 2020=9, 2021=15, 2022=18, 2023=14. In how many years did profit DECREASE compared to the previous year? What was the average annual profit?",
+      "masteryCheck": "Decreased in 2 years (2020 and 2023); Average = 13.6 Cr",
+      "instantFeedbackWin": "Correct! Decreases: 2020 (12→9) and 2023 (18→14) = 2 years. Sum = 12+9+15+18+14=68. Average = 68/5 = 13.6 Cr.",
+      "instantFeedbackRetry": "Here's a trick: Mark each year: increase/decrease. Decreases at 2020 and 2023. Average = (12+9+15+18+14)/5 = 68/5 = 13.6.",
+      "reviewPrompt": "How do you calculate the average from a set of 5 data points on a line graph?",
+      "xpReward": 14,
+      "badgeFocus": "Inference Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group G for Data Interpretation."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Boss challenge — full 3-question DI set",
+      "missionStepTitle": "Exercise H: Olympiad Boss — 3-Question DI Set",
+      "coachHook": "Three questions, one chart, 4 minutes. Olympiad format. Go.",
+      "boardDemo": {
+        "title": "Full DI set strategy",
+        "steps": [
+          "Read the chart fully before answering any question",
+          "Jot down all values you will likely need",
+          "Solve questions in order — don't skip",
+          "For percentage questions: always divide by old value"
+        ],
+        "teacherLine": "Fastest students read the chart once, write all values down, then answer all 3 questions without looking at the chart again."
+      },
+      "readAloudPrompt": "Extract and write all values from the chart before answering.",
+      "tryPrompt": "Pie chart — Budget allocation (Total: ₹2400 Cr): Education=30%, Health=25%, Infrastructure=20%, Defence=15%, Others=10%. Q1: How much is allocated to Infrastructure? Q2: What is the ratio of Education to Health? Q3: If Education budget increases by 20% next year (with same total), what % of the total will Education be?",
+      "masteryCheck": "Q1: ₹480 Cr; Q2: 6:5; Q3: 36%",
+      "instantFeedbackWin": "Outstanding! Q1: 20/100×2400=480. Q2: Education=720, Health=600, ratio=720:600=6:5. Q3: New Education = 720×1.2=864. % of total = 864/2400×100=36%.",
+      "instantFeedbackRetry": "Here's a trick: Q1: 20% of 2400=480. Q2: 30%:25% = 6:5 (direct from percentages). Q3: 720×1.2=864; 864/2400=0.36=36%.",
+      "reviewPrompt": "In Q3, why did we use 720 (original Education value) rather than 2400 as the base for the 20% increase?",
+      "xpReward": 18,
+      "badgeFocus": "Data Ace",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Data Interpretation",
+        "caption": "Group H for Data Interpretation."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "bar_chart",
+      "kind": "svg",
+      "asset": "bar_chart.svg",
+      "title": "Data Interpretation",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

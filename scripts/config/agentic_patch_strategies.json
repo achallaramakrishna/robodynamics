@@ -1,0 +1,32 @@
+﻿{
+  "vedic_math": [
+    { "pattern": "square root", "symbolId": "square_root_inspection" },
+    { "pattern": "cube root|cubing", "symbolId": "cubing_2digit" },
+    { "pattern": "squares|square any|squaring", "symbolId": "squaring_near_base" },
+    { "pattern": "simultaneous|linear equation|equation pair|cross multiplication formula|system of equations|substitution method|elimination method|algebra", "symbolId": "linear_eq_sutra" },
+    { "pattern": "division by 9|divide by 9|division|divisibility|running remainder", "symbolId": "paravartya_division" },
+    { "pattern": "paravartya", "symbolId": "linear_eq_sutra" },
+    { "pattern": "criss cross|crosswise|urdhva", "symbolId": "criss_cross_2x2" },
+    { "pattern": "nikhilam|near 100|near base", "symbolId": "nikhilam_base100" },
+    { "pattern": "vinculum", "symbolId": "vinculum_bar" },
+    { "pattern": "11|eleven", "symbolId": "eleven_trick" },
+    { "pattern": "doubling|halving|x4|x8|x16", "symbolId": "doubling_chain" },
+    { "pattern": "borrow|subtraction|all from 9", "symbolId": "complement_all_from_9" }
+  ],
+  "aptitude_reasoning": [
+    { "pattern": "clock|time", "symbolId": "clock_face" },
+    { "pattern": "calendar|day of the week|month|leap year", "symbolId": "clock_face" },
+    { "pattern": "syllogism", "symbolId": "syllogism" },
+    { "pattern": "data interpretation|data|chart|graph|table|pie", "symbolId": "bar_chart" },
+    { "pattern": "seating|circular table|sits around|sits in a row", "symbolId": "seat_circle" },
+    { "pattern": "ordering|ranking|queue|race|position from top|position from bottom", "symbolId": "series_row" },
+    { "pattern": "direction|distance|north|south|east|west", "symbolId": "compass" },
+    { "pattern": "blood relation|family", "symbolId": "family_tree" },
+    { "pattern": "coding|decoding|letter code", "symbolId": "alphabet_grid" },
+    { "pattern": "analogy", "symbolId": "analogy_frame" },
+    { "pattern": "venn", "symbolId": "venn_2" },
+    { "pattern": "critical reason", "symbolId": "syllogism" },
+    { "pattern": "series|pattern|sequence", "symbolId": "series_row" },
+    { "pattern": "shape|polygon|triangle|square|odd one", "symbolId": "triangle" }
+  ]
+}

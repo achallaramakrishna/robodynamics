@@ -49,9 +49,21 @@
     "version": "2026-03-mindspark-g7-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya. Today you will cube 2-digit numbers in four steps using the Anurupyena pattern. No calculator needed!",
       "placementRule": "If the learner knows 2³=8 and 3³=27 instantly, skip group A and start at group B."
     },
@@ -83,7 +95,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -112,11 +128,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For a=1, b=2, what is the 4-term row for cubing?",
-            "options": ["1, 2, 4, 8", "1, 4, 2, 8", "2, 4, 6, 8", "1, 3, 9, 27"],
+            "options": [
+              "1, 2, 4, 8",
+              "1, 4, 2, 8",
+              "2, 4, 6, 8",
+              "1, 3, 9, 27"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "1, 2, 4, 8",
             "hint": "Terms are a³, a²b, ab², b³.",
-            "solution": "1³=1, 1²×2=2, 1×4=4, 2³=8. Row: 1,2,4,8."
+            "solution": "1³=1, 1²×2=2, 1×4=4, 2³=8. Row: 1,2,4,8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group A for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_A2",
@@ -128,11 +155,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In the 4-term row 1, 3, 9, 27, what is the common ratio?",
-            "options": ["2", "3", "4", "9"],
+            "options": [
+              "2",
+              "3",
+              "4",
+              "9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "Each term is multiplied by b/a = 3/1 = 3.",
-            "solution": "1×3=3, 3×3=9, 9×3=27. Ratio = 3."
+            "solution": "1×3=3, 3×3=9, 9×3=27. Ratio = 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group A for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_A3",
@@ -144,13 +182,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Write the 4-term row for a=2, b=1.",
-            "options": ["8, 4, 2, 1", "4, 2, 1, 8", "2, 4, 8, 1", "8, 2, 4, 1"],
+            "options": [
+              "8, 4, 2, 1",
+              "4, 2, 1, 8",
+              "2, 4, 8, 1",
+              "8, 2, 4, 1"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "8, 4, 2, 1",
             "hint": "a³=8, a²b=4, ab²=2, b³=1.",
-            "solution": "2³=8, 4×1=4, 2×1=2, 1³=1. Row: 8,4,2,1."
+            "solution": "2³=8, 4×1=4, 2×1=2, 1³=1. Row: 8,4,2,1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group A for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group A for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -177,11 +232,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "11³ = ?",
-            "options": ["1111", "1331", "1221", "1441"],
+            "options": [
+              "1111",
+              "1331",
+              "1221",
+              "1441"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "1331",
             "hint": "Row for a=1,b=1: 1,1,1,1. Doubled: 1,2,2,1. Add: 1331.",
-            "solution": "Row: 1,1,1,1. Doubled: 1,2,2,1. Diagonal: 1|3|3|1 = 1331."
+            "solution": "Row: 1,1,1,1. Doubled: 1,2,2,1. Diagonal: 1|3|3|1 = 1331.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group B for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_B2",
@@ -193,11 +259,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "12³ = ?",
-            "options": ["1628", "1728", "1828", "1928"],
+            "options": [
+              "1628",
+              "1728",
+              "1828",
+              "1928"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "1728",
             "hint": "Row: 1,2,4,8. Doubled: 1,4,8,8. Diagonal sum.",
-            "solution": "Row: 1,4,8,8. Diagonal addition: 1728."
+            "solution": "Row: 1,4,8,8. Diagonal addition: 1728.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group B for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_B3",
@@ -210,16 +287,44 @@
             "questionType": "fill_step",
             "questionText": "Find 13³ using the Anurupyena method.",
             "steps": [
-              {"label": "a=1, b=3. Row: 1³, 1²×3, 1×3², 3³ = ?", "answer": "1, 3, 9, 27", "hint": "1, 3, 9, 27"},
-              {"label": "Double the two middle terms: 1, ?, ?, 27", "answer": "1, 6, 18, 27", "hint": "3×2=6, 9×2=18"},
-              {"label": "Add diagonally right-to-left. Units: 7 carry ?", "answer": "2", "hint": "27 → digit 7, carry 2"},
-              {"label": "Next: 18+2=20 → digit 0 carry 2. Then: 6+2=8. Then: 1. Answer: ?", "answer": "2197", "hint": "Combine: 2, 1, 9, 7"}
+              {
+                "label": "a=1, b=3. Row: 1³, 1²×3, 1×3², 3³ = ?",
+                "answer": "1, 3, 9, 27",
+                "hint": "1, 3, 9, 27"
+              },
+              {
+                "label": "Double the two middle terms: 1, ?, ?, 27",
+                "answer": "1, 6, 18, 27",
+                "hint": "3×2=6, 9×2=18"
+              },
+              {
+                "label": "Add diagonally right-to-left. Units: 7 carry ?",
+                "answer": "2",
+                "hint": "27 → digit 7, carry 2"
+              },
+              {
+                "label": "Next: 18+2=20 → digit 0 carry 2. Then: 6+2=8. Then: 1. Answer: ?",
+                "answer": "2197",
+                "hint": "Combine: 2, 1, 9, 7"
+              }
             ],
             "expectedAnswer": "2197",
             "hint": "Row, double, diagonal add.",
-            "solution": "1,6,18,27 → diagonal → 2197."
+            "solution": "1,6,18,27 → diagonal → 2197.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group B for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group B for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -246,11 +351,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of these is a perfect cube?",
-            "options": ["100", "125", "200", "300"],
+            "options": [
+              "100",
+              "125",
+              "200",
+              "300"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "125",
             "hint": "5³ = 125.",
-            "solution": "5³ = 125. The others are not perfect cubes."
+            "solution": "5³ = 125. The others are not perfect cubes.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group C for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_C2",
@@ -262,11 +378,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the cube root of 8000?",
-            "options": ["10", "20", "25", "40"],
+            "options": [
+              "10",
+              "20",
+              "25",
+              "40"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "20",
             "hint": "20³ = 8000.",
-            "solution": "20³ = 20×20×20 = 8000."
+            "solution": "20³ = 20×20×20 = 8000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group C for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_C3",
@@ -278,13 +405,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Is 1331 a perfect cube? If yes, what is its cube root?",
-            "options": ["No", "Yes, cube root = 11", "Yes, cube root = 12", "Yes, cube root = 13"],
+            "options": [
+              "No",
+              "Yes, cube root = 11",
+              "Yes, cube root = 12",
+              "Yes, cube root = 13"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Yes, cube root = 11",
             "hint": "11³ = 1331.",
-            "solution": "11³ = 1331. Cube root = 11."
+            "solution": "11³ = 1331. Cube root = 11.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group C for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group C for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -311,11 +455,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 21³ (a=2, b=1), what is the doubled 4-term row?",
-            "options": ["8, 4, 2, 1", "8, 8, 4, 1", "8, 8, 2, 1", "4, 8, 2, 1"],
+            "options": [
+              "8, 4, 2, 1",
+              "8, 8, 4, 1",
+              "8, 8, 2, 1",
+              "4, 8, 2, 1"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "8, 4, 2, 1",
             "hint": "Row: 8,4,2,1. Middle two doubled: 8 and 4 → 8 is the third? Recheck: a=2,b=1: 8,4,2,1. Middle are 4 and 2 → doubled: 8,8,4,1.",
-            "solution": "Row: 8,4,2,1. Double middle (4 and 2): 8,8,4,1."
+            "solution": "Row: 8,4,2,1. Double middle (4 and 2): 8,8,4,1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group D for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_D2",
@@ -327,11 +482,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "21³ = ?",
-            "options": ["9261", "9126", "9612", "9261"],
+            "options": [
+              "9261",
+              "9126",
+              "9612",
+              "9261"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9261",
             "hint": "Row: 8,8,4,1. Diagonal: 9261.",
-            "solution": "8,8,4,1 → diagonal add → 9261."
+            "solution": "8,8,4,1 → diagonal add → 9261.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group D for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_D3",
@@ -343,13 +509,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Why do we double the two middle terms in the Anurupyena method?",
-            "options": ["To make the number bigger", "Because (a+b)³ has 3a²b and 3ab² but we split into 2 middle terms each counted once, needing doubling", "To simplify the row", "It is just a trick with no reason"],
+            "options": [
+              "To make the number bigger",
+              "Because (a+b)³ has 3a²b and 3ab² but we split into 2 middle terms each counted once, needing doubling",
+              "To simplify the row",
+              "It is just a trick with no reason"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Because (a+b)³ has 3a²b and 3ab² but we split into 2 middle terms each counted once, needing doubling",
             "hint": "(a+b)³ = a³ + 3a²b + 3ab² + b³. The 3 coefficient comes from combining the doubling.",
-            "solution": "The expansion (a+b)³ has 3a²b and 3ab². Writing the row once and doubling gives the correct coefficients."
+            "solution": "The expansion (a+b)³ has 3a²b and 3ab². Writing the row once and doubling gives the correct coefficients.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group D for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group D for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -377,14 +560,36 @@
             "questionType": "fill_step",
             "questionText": "Find 14³ step by step.",
             "steps": [
-              {"label": "a=1, b=4. Write 4-term row: a³, a²b, ab², b³ = ?", "answer": "1, 4, 16, 64", "hint": "1,4,16,64"},
-              {"label": "Double the two middle terms: 1, ?, ?, 64", "answer": "1, 8, 32, 64", "hint": "4×2=8, 16×2=32"},
-              {"label": "Diagonal add from right: 64 → digit 4 carry ?", "answer": "6", "hint": "64 → 4 with carry 6"},
-              {"label": "32+6=38 → digit 8 carry 3. 8+3=11 → digit 1 carry 1. 1+1=2. Answer: ?", "answer": "2744", "hint": "Combine: 2,7,4,4"}
+              {
+                "label": "a=1, b=4. Write 4-term row: a³, a²b, ab², b³ = ?",
+                "answer": "1, 4, 16, 64",
+                "hint": "1,4,16,64"
+              },
+              {
+                "label": "Double the two middle terms: 1, ?, ?, 64",
+                "answer": "1, 8, 32, 64",
+                "hint": "4×2=8, 16×2=32"
+              },
+              {
+                "label": "Diagonal add from right: 64 → digit 4 carry ?",
+                "answer": "6",
+                "hint": "64 → 4 with carry 6"
+              },
+              {
+                "label": "32+6=38 → digit 8 carry 3. 8+3=11 → digit 1 carry 1. 1+1=2. Answer: ?",
+                "answer": "2744",
+                "hint": "Combine: 2,7,4,4"
+              }
             ],
             "expectedAnswer": "2744",
             "hint": "Row, double, diagonal add with carries.",
-            "solution": "Row: 1,8,32,64 → diagonal → 2744."
+            "solution": "Row: 1,8,32,64 → diagonal → 2744.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group E for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_E2",
@@ -397,15 +602,39 @@
             "questionType": "fill_step",
             "questionText": "Find 22³ step by step.",
             "steps": [
-              {"label": "a=2, b=2. Row: 8, ?, ?, 8", "answer": "8, 8, 8, 8", "hint": "a²b=4×2=8, ab²=2×4=8"},
-              {"label": "Double middle: 8, ?, ?, 8", "answer": "8, 16, 16, 8", "hint": "8×2=16"},
-              {"label": "Diagonal add: right-to-left gives ?", "answer": "10648", "hint": "8, 6 carry 1, 16+1=17 → 7 carry 1, 16+1=17 → 7 carry 1, 8+1=9? Recheck: 10648"}
+              {
+                "label": "a=2, b=2. Row: 8, ?, ?, 8",
+                "answer": "8, 8, 8, 8",
+                "hint": "a²b=4×2=8, ab²=2×4=8"
+              },
+              {
+                "label": "Double middle: 8, ?, ?, 8",
+                "answer": "8, 16, 16, 8",
+                "hint": "8×2=16"
+              },
+              {
+                "label": "Diagonal add: right-to-left gives ?",
+                "answer": "10648",
+                "hint": "8, 6 carry 1, 16+1=17 → 7 carry 1, 16+1=17 → 7 carry 1, 8+1=9? Recheck: 10648"
+              }
             ],
             "expectedAnswer": "10648",
             "hint": "Row: 8,16,16,8. Diagonal add.",
-            "solution": "8,16,16,8 → 10648."
+            "solution": "8,16,16,8 → 10648.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group E for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group E for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -432,11 +661,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Estimate 29³ by rounding. Which is the best estimate?",
-            "options": ["Around 9000", "Around 20000", "Around 27000", "Around 36000"],
+            "options": [
+              "Around 9000",
+              "Around 20000",
+              "Around 27000",
+              "Around 36000"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "Around 27000",
             "hint": "29 ≈ 30. 30³ = 27000.",
-            "solution": "29 ≈ 30. 30³ = 27000. So 29³ ≈ 27000."
+            "solution": "29 ≈ 30. 30³ = 27000. So 29³ ≈ 27000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group F for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_F2",
@@ -448,13 +688,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A student calculates 15³ = 3375. Is this reasonable?",
-            "options": ["No, it is too large", "Yes, it is reasonable", "No, it should be around 1000", "No, it should be around 10000"],
+            "options": [
+              "No, it is too large",
+              "Yes, it is reasonable",
+              "No, it should be around 1000",
+              "No, it should be around 10000"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Yes, it is reasonable",
             "hint": "10³=1000, 20³=8000. So 15³ should be between 1000 and 8000.",
-            "solution": "15 is between 10 and 20. 15³ = 3375 is between 1000 and 8000. Reasonable."
+            "solution": "15 is between 10 and 20. 15³ = 3375 is between 1000 and 8000. Reasonable.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group F for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group F for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -481,11 +738,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 15³ = ?",
-            "options": ["3265", "3375", "3475", "3575"],
+            "options": [
+              "3265",
+              "3375",
+              "3475",
+              "3575"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3375",
             "hint": "Row: 1,10,50,125. Diagonal: 3375.",
-            "solution": "Row:1,5,25,125. Doubled:1,10,50,125. Diagonal: 3375."
+            "solution": "Row:1,5,25,125. Doubled:1,10,50,125. Diagonal: 3375.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group G for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_G2",
@@ -497,11 +765,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 20³ = ?",
-            "options": ["6000", "7000", "8000", "9000"],
+            "options": [
+              "6000",
+              "7000",
+              "8000",
+              "9000"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "8000",
             "hint": "20³ = 20×20×20.",
-            "solution": "20×20=400. 400×20=8000."
+            "solution": "20×20=400. 400×20=8000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group G for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_G3",
@@ -513,13 +792,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 25³ = ?",
-            "options": ["14625", "15625", "16625", "17625"],
+            "options": [
+              "14625",
+              "15625",
+              "16625",
+              "17625"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "15625",
             "hint": "Row:8,20,50,125. Doubled:8,40,100,125. Diagonal:15625.",
-            "solution": "a=2,b=5. Row:8,20,50,125. Doubled:8,40,100,125. Diagonal:15625."
+            "solution": "a=2,b=5. Row:8,20,50,125. Doubled:8,40,100,125. Diagonal:15625.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group G for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group G for Cube It! — Cubing Any 2-Digit Number."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -546,11 +842,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "101³ = ?",
-            "options": ["1030301", "1003001", "1030001", "1003301"],
+            "options": [
+              "1030301",
+              "1003001",
+              "1030001",
+              "1003301"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "1030301",
             "hint": "Row: 1000,200,20,1. Diagonal: 1030301.",
-            "solution": "a=10,b=1. Row:1000,100,10,1. Doubled:1000,200,20,1. Diagonal:1030301."
+            "solution": "a=10,b=1. Row:1000,100,10,1. Doubled:1000,200,20,1. Diagonal:1030301.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group H for Cube It! — Cubing Any 2-Digit Number."
+            }
           },
           {
             "questionId": "VM_G7_L4_H2",
@@ -562,13 +869,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A student claims 110³ = 1331000. How can you verify this quickly?",
-            "options": ["Check 11³ = 1331, then multiply by 1000 since 110 = 11×10", "Use a calculator", "It cannot be verified", "Add three zeros to 110²"],
+            "options": [
+              "Check 11³ = 1331, then multiply by 1000 since 110 = 11×10",
+              "Use a calculator",
+              "It cannot be verified",
+              "Add three zeros to 110²"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "Check 11³ = 1331, then multiply by 1000 since 110 = 11×10",
             "hint": "110³ = (11×10)³ = 11³ × 10³.",
-            "solution": "110³ = 11³ × 10³ = 1331 × 1000 = 1331000."
+            "solution": "110³ = 11³ × 10³ = 1331 × 1000 = 1331000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "cubing_2digit.svg",
+              "title": "Cube It! — Cubing Any 2-Digit Number",
+              "caption": "Group H for Cube It! — Cubing Any 2-Digit Number."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "cubing_2digit.svg",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "caption": "Group H for Cube It! — Cubing Any 2-Digit Number."
+        }
       }
     ]
   },
@@ -578,7 +902,12 @@
       "exerciseGroup": "A",
       "subtopic": "Pattern recognition",
       "boardMode": "svg",
-      "visual": {"asset": "cubing_2digit.svg", "highlight": "4-term-row"},
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Teaching step for Cube It! — Cubing Any 2-Digit Number."
+      },
       "teacherLine": "Cubing hides a beautiful pattern. The 4-term row a³, a²b, ab², b³ follows the Anurupyena proportionality principle.",
       "boardAction": "Write the 4-term row for a=1, b=2. Show how each term is (b/a) times the previous.",
       "checkpointPrompt": "Write the row for a=2, b=3.",
@@ -589,7 +918,12 @@
       "exerciseGroup": "B",
       "subtopic": "2-digit cubing",
       "boardMode": "svg",
-      "visual": {"asset": "cubing_2digit.svg", "highlight": "double-middle"},
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Teaching step for Cube It! — Cubing Any 2-Digit Number."
+      },
       "teacherLine": "Three steps: write the row, double the two middle terms, add diagonally from right to left with carries.",
       "boardAction": "Show 12³ in full: row=1,2,4,8 → doubled=1,4,8,8 → diagonal→1728.",
       "checkpointPrompt": "13³ = ?",
@@ -600,7 +934,12 @@
       "exerciseGroup": "E",
       "subtopic": "Full cube fill-step",
       "boardMode": "svg",
-      "visual": {"asset": "cubing_2digit.svg", "highlight": "diagonal-add"},
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Teaching step for Cube It! — Cubing Any 2-Digit Number."
+      },
       "teacherLine": "Fill every box step by step. Slow practice locks the process into muscle memory.",
       "boardAction": "Show blank fill-step template. Walk through 14³ one box at a time.",
       "checkpointPrompt": "Find 31³ giving all steps.",
@@ -611,7 +950,12 @@
       "exerciseGroup": "H",
       "subtopic": "Challenge 3-digit",
       "boardMode": "svg",
-      "visual": {"asset": "cubing_2digit.svg", "highlight": "scale-up"},
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Teaching step for Cube It! — Cubing Any 2-Digit Number."
+      },
       "teacherLine": "The 4-term method scales! For 101³ treat a=10, b=1 and the row is 1000, 200, 20, 1.",
       "boardAction": "Show 101³ row with a=10, b=1. Box 1030301.",
       "checkpointPrompt": "201³ = ?",
@@ -638,7 +982,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Screenplay beat for Cube It! — Cubing Any 2-Digit Number."
+      }
     },
     {
       "beatId": "VM_G7_L4_B_INTRO",
@@ -659,7 +1009,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Screenplay beat for Cube It! — Cubing Any 2-Digit Number."
+      }
     },
     {
       "beatId": "VM_G7_L4_B_EXPLAIN",
@@ -673,14 +1029,20 @@
       "boardAction": "Show full worked 12³ with carry tracking. Box 1728.",
       "checkpointPrompt": "What is 13³?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "2197",
       "fallbackHint": "Row: 1,3,9,27. Doubled: 1,6,18,27. Diagonal: 2197.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Screenplay beat for Cube It! — Cubing Any 2-Digit Number."
+      }
     },
     {
       "beatId": "VM_G7_L4_G_PRACTICE",
@@ -694,14 +1056,31 @@
       "boardAction": "Show MCQ card VM_G7_L4_G1.",
       "checkpointPrompt": "15³ = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "3375",
       "fallbackHint": "Row:1,10,50,125 → 3375.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "cubing_2digit.svg",
+        "title": "Cube It! — Cubing Any 2-Digit Number",
+        "caption": "Screenplay beat for Cube It! — Cubing Any 2-Digit Number."
+      }
+    }
+  ],
+  "chapterCode": "VM_G7_L4_CUBING_ANURUPYENA",
+  "courseId": "vedic_math_g7",
+  "visualLibrary": [
+    {
+      "visualId": "cubing_2digit",
+      "kind": "svg",
+      "asset": "cubing_2digit.svg",
+      "title": "Lesson 4: Cube It! — Cubing Any 2-Digit Number",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

@@ -1,0 +1,450 @@
+{
+  "action": "apply",
+  "write": true,
+  "courses": [
+    {
+      "productSlug": "mindspark",
+      "family": "aptitude_reasoning",
+      "courseId": "aptitude_reasoning_g8",
+      "courseKey": "grade_8",
+      "chapterCount": 7,
+      "wroteIndex": false,
+      "chapters": [
+        {
+          "chapterCode": "AR_G8_L1_SEQUENCES",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L1_SEQUENCES.json",
+          "symbol": {
+            "id": "clock_face",
+            "asset": "clock_face.svg",
+            "category": "clocks",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        },
+        {
+          "chapterCode": "AR_G8_L2_SEATING",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L2_SEATING.json",
+          "symbol": {
+            "id": "seat_circle",
+            "asset": "seat_circle.svg",
+            "category": "seating",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        },
+        {
+          "chapterCode": "AR_G8_L3_SYLLOGISM",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L3_SYLLOGISM.json",
+          "symbol": {
+            "id": "syllogism",
+            "asset": "syllogism.svg",
+            "category": "logic",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        },
+        {
+          "chapterCode": "AR_G8_L4_BLOOD_REL",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L4_BLOOD_REL.json",
+          "symbol": {
+            "id": "clock_face",
+            "asset": "clock_face.svg",
+            "category": "clocks",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        },
+        {
+          "chapterCode": "AR_G8_L5_CODING",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L5_CODING.json",
+          "symbol": {
+            "id": "bar_chart",
+            "asset": "bar_chart.svg",
+            "category": "data",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        },
+        {
+          "chapterCode": "AR_G8_L6_DATA_INTERP",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L6_DATA_INTERP.json",
+          "symbol": {
+            "id": "bar_chart",
+            "asset": "bar_chart.svg",
+            "category": "data",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        },
+        {
+          "chapterCode": "AR_G8_L7_CRITICAL",
+          "file": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter/AR_G8_L7_CRITICAL.json",
+          "symbol": {
+            "id": "syllogism",
+            "asset": "syllogism.svg",
+            "category": "logic",
+            "reason": "strategy",
+            "forced": true
+          },
+          "before": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "after": {
+            "sessionFlow": {
+              "total": 8,
+              "withVisual": 8
+            },
+            "exercises": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "teachingScript": {
+              "total": 0,
+              "withVisual": 0
+            },
+            "screenplay": {
+              "total": 3,
+              "withVisual": 3
+            },
+            "hasVisualLibrary": true
+          },
+          "changed": {
+            "text": false,
+            "metadata": false,
+            "library": true,
+            "visuals": {
+              "flow": 8,
+              "exercises": 0,
+              "teaching": 0,
+              "screenplay": 3
+            },
+            "index": false
+          },
+          "wrote": true
+        }
+      ]
+    }
+  ]
+}

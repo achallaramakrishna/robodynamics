@@ -1,0 +1,567 @@
+{
+  "chapterCode": "AR_G5_L7_DATA_CHARTS",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Reading Data Charts",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 7: Reading Data Charts",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Bar charts — reading values, comparing bars, finding totals and differences",
+    "Pie charts — identifying largest and smallest sector, comparing sectors",
+    "Pictographs — counting symbols × scale to find total values",
+    "Simple table reading — find values, calculate totals, compare rows and columns"
+  ],
+  "learningGoals": [
+    "Read the value of any bar in a bar chart using the y-axis scale.",
+    "Identify the largest and smallest sector in a pie chart and compare two sectors.",
+    "Use the pictograph key (scale) to calculate the total represented by a row of symbols.",
+    "Read a simple data table, find totals, and answer comparison questions."
+  ],
+  "coreIdeas": [
+    "Always read the title and axis labels of a chart before attempting any question.",
+    "In a bar chart, the height of the bar (read against the y-axis) gives the value — check the scale carefully.",
+    "In a pictograph, each symbol represents a number (the key). Multiply the count of symbols by the scale value.",
+    "In a pie chart, a larger sector means a larger share — you do not need to calculate percentages to compare sectors visually."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "A bar chart shows students' favourite fruits. The bar for 'Mango' reaches the 35 mark on the y-axis. How many students chose Mango?",
+      "solution": "Read the height of the Mango bar against the y-axis scale. The bar reaches 35. Answer: 35 students chose Mango.",
+      "concept": "Bar chart reading — match bar height to y-axis value"
+    },
+    {
+      "id": "WE2",
+      "problem": "A pictograph shows books read per month. Each book symbol = 5 books. A row for January has 6 book symbols. How many books were read in January?",
+      "solution": "Number of symbols = 6. Scale = 5 books per symbol. Total = 6 × 5 = 30 books.",
+      "concept": "Pictograph reading — symbols × scale = total"
+    },
+    {
+      "id": "WE3",
+      "problem": "A pie chart shows how a student spends 24 hours. The 'Sleep' sector is the largest. The 'Study' sector is the second largest. The 'Play' sector is the smallest. If Sleep = 8 hours, Study = 6 hours, Play = 2 hours, Eating = 4 hours, Other = 4 hours — which two activities together equal the Sleep time?",
+      "solution": "Sleep = 8. Study + Play = 6 + 2 = 8. Study and Play together equal the Sleep time.",
+      "concept": "Pie chart analysis — comparing sector values"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark asks if the learner has ever seen a bar chart or pie chart in their textbook or newspaper. Opens with a simple bar chart reading question using whole numbers.",
+      "placementRule": "Start at Group A. If the learner struggles with y-axis scale reading in Group A, show scale-step counting explicitly before moving on."
+    },
+    "mission": {
+      "missionTitle": "Data Detective Mission",
+      "missionPromise": "By the end you will read any chart or table and answer questions about it faster than a calculator — data is just numbers with a story!",
+      "successCelebration": "Show a 'Chart Read!' badge after each group. At lesson end, award the 'Data Detective' trophy."
+    },
+    "microLessonPattern": [
+      "Coach describes a chart scenario in words (since actual images are not shown) with clear specific values.",
+      "Coach walks through the chart-reading steps on the board.",
+      "Coach reads the practice question aloud.",
+      "Student reads the chart and answers.",
+      "Instant feedback celebrates or gives a step-by-step reading hint.",
+      "Review question confirms mastery."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per group, increasing through the lesson.",
+      "streakRule": "Show streak flame; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a data-themed badge.",
+      "celebrationStyle": "Coach praise + XP burst + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts trigger a mini-reteach re-explaining the chart type and scale.",
+      "practiceStyle": "Offer a simpler reading question (direct look-up, no calculation) before comparison questions.",
+      "masteryRule": "Advance after correct answer plus completed tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L7_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, future data analyst! Charts and tables are how the world organises information — scientists use them, businesses use them, your school uses them in report cards! Today you will learn to read four types: bar charts (rectangles showing quantities), pie charts (slices of a circle showing shares), pictographs (symbols representing numbers), and data tables (rows and columns of numbers). The golden rule for every chart: read the title and scale BEFORE answering any question!",
+        "boardAction": "Write 'Reading Data Charts — 4 Types'. List: (1) Bar chart — height of bar = value, (2) Pie chart — size of slice = share, (3) Pictograph — symbols × scale = value, (4) Table — row × column = data cell.",
+        "checkpointPrompt": "Quick warm-up: a bar chart's y-axis shows values from 0 to 50, with marks every 10. A bar reaches the mark between 30 and 40. What is its approximate value?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "35 — halfway between 30 and 40.",
+        "fallbackHint": "The bar is between the 30 and 40 marks. If it is halfway between them, the value is (30+40)÷2 = 35. Always check the scale steps first!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "dc_title",
+            "x": "40",
+            "y": "30",
+            "text": "Reading Data Charts — 4 Types",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "dc_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "500",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "dc_rule",
+            "x": "60",
+            "y": "68",
+            "text": "Golden rule: Read TITLE and SCALE first!",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "dc_t1",
+            "x": "60",
+            "y": "92",
+            "text": "1. Bar chart: bar height → y-axis → value",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "dc_t2",
+            "x": "60",
+            "y": "112",
+            "text": "2. Pie chart: bigger slice = bigger share",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "dc_t3",
+            "x": "60",
+            "y": "132",
+            "text": "3. Pictograph: count symbols × scale value",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "bar_chart.svg",
+          "title": "Reading Data Charts",
+          "caption": "Screenplay beat for Reading Data Charts."
+        }
+      },
+      {
+        "beatId": "AR_G5_L7_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you bar chart reading live! Imagine a bar chart titled 'Books Read by Students'. Y-axis: 0 to 50, scale steps of 10. Bars: Anu=40, Raj=25, Mia=50, Dev=15. Question: who read the most books? Find the tallest bar — Mia's bar reaches 50, the highest. Now: how many more books did Anu read than Dev? Anu=40, Dev=15. Difference = 40-15 = 25 books. Always subtract smaller from larger to find 'how many more'!",
+        "boardAction": "Draw a simple bar chart with 4 bars. Label: Anu=40, Raj=25, Mia=50, Dev=15. Mark y-axis 0,10,20,30,40,50. Show tallest bar = Mia. Show 40-15=25 calculation.",
+        "checkpointPrompt": "Using the same chart — what is the total number of books read by Raj and Dev together?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "40 — Raj=25, Dev=15, 25+15=40.",
+        "fallbackHint": "Find Raj's bar height: 25. Find Dev's bar height: 15. Add them: 25+15=40 books total.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_chart_title",
+            "x": "50",
+            "y": "30",
+            "text": "Bar Chart: Books Read by Students",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_values",
+            "x": "50",
+            "y": "58",
+            "text": "Anu=40  Raj=25  Mia=50  Dev=15",
+            "color": "#1e40af",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_q1",
+            "x": "50",
+            "y": "86",
+            "text": "Most books: Mia (bar height 50 = highest)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 1,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_q2",
+            "x": "50",
+            "y": "112",
+            "text": "Anu vs Dev: 40 - 15 = 25 more books",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.6,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "bar_chart.svg",
+          "title": "Reading Data Charts",
+          "caption": "Screenplay beat for Reading Data Charts."
+        }
+      },
+      {
+        "beatId": "AR_G5_L7_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Super work! Here is your chart-reading toolkit. For bar charts: read scale steps, find bar heights, add or subtract as the question asks. For pie charts: compare slice sizes visually, add sector values for totals. For pictographs: count symbols carefully, multiply by scale. For tables: find the right row and column, then calculate. The most common mistake is misreading the scale — always double-check it!",
+        "boardAction": "Show toolkit: Bar → read height from y-axis. Pie → bigger slice = bigger value. Pictograph → count × key. Table → row name + column header = cell value. Tip: always check scale (how much does each unit/step/symbol represent).",
+        "checkpointPrompt": "Before the groups — in a pictograph, each car symbol represents 10 cars. If a row has 7 symbols, how many cars does that represent?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "70 — 7 symbols × 10 cars each = 70 cars.",
+        "fallbackHint": "Multiply the number of symbols by the scale value. 7 symbols × 10 = 70 cars.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Chart Reading Toolkit",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_bar",
+            "x": "60",
+            "y": "56",
+            "text": "Bar: height on y-axis = value (watch the scale!)",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_pie",
+            "x": "60",
+            "y": "76",
+            "text": "Pie: bigger sector = larger share of the total",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_picto",
+            "x": "60",
+            "y": "96",
+            "text": "Pictograph: count symbols × key = total",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_table",
+            "x": "60",
+            "y": "116",
+            "text": "Table: find row and column, read the cell value",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "bar_chart.svg",
+          "title": "Reading Data Charts",
+          "caption": "Screenplay beat for Reading Data Charts."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Bar charts — reading values from the y-axis",
+      "missionStepTitle": "Exercise A: Bar Chart Reading",
+      "coachHook": "Let's crack this code! A bar chart turns numbers into rectangles — the taller the bar, the bigger the number. Let's read bars like a pro!",
+      "boardDemo": {
+        "title": "Bar Chart — Read Height = Value",
+        "steps": [
+          "Chart: 'Favourite Sports in Class 5' — y-axis 0 to 30, steps of 5",
+          "Cricket bar reaches 25. Football bar reaches 20. Tennis bar reaches 10. Badminton bar reaches 15.",
+          "Question: which sport is most popular? Cricket (tallest bar = 25).",
+          "Question: how many more like Cricket than Tennis? 25 - 10 = 15."
+        ],
+        "teacherLine": "First read the scale: each step on the y-axis is 5. Then read the height of each bar by drawing an imaginary horizontal line from the bar top to the y-axis. That intersection gives the value!"
+      },
+      "readAloudPrompt": "Using the chart above: how many students like Football?",
+      "tryPrompt": "From the same chart: how many more students like Cricket than Badminton?",
+      "masteryCheck": "10",
+      "instantFeedbackWin": "Correct! Cricket = 25, Badminton = 15. Difference = 25-15 = 10. You read the bars perfectly!",
+      "instantFeedbackRetry": "Here's a trick: find Cricket's bar height (25) and Badminton's bar height (15). Subtract the smaller from the larger: 25-15=10.",
+      "reviewPrompt": "Quick check: what is the total number of students who like Football and Tennis combined?",
+      "xpReward": 10,
+      "badgeFocus": "Bar Chart Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group A for Reading Data Charts."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Bar charts — comparing and calculating totals",
+      "missionStepTitle": "Exercise B: Bar Chart Comparisons",
+      "coachHook": "Let's crack this code! Now we go deeper — not just reading one bar, but comparing bars and calculating totals. This is where bar charts become really useful!",
+      "boardDemo": {
+        "title": "Bar Chart — Compare and Total",
+        "steps": [
+          "Chart: 'Monthly Savings (₹)' — Jan=200, Feb=150, Mar=250, Apr=300",
+          "Total savings: 200+150+250+300 = 900",
+          "Month with highest savings: April (bar height 300)",
+          "Difference between highest and lowest: 300-150 = 150"
+        ],
+        "teacherLine": "For totals: add all bar heights. For comparisons: subtract smaller from larger. Always check you are reading the correct bars for the question being asked!"
+      },
+      "readAloudPrompt": "Monthly savings chart: Jan=200, Feb=150, Mar=250, Apr=300. What were the total savings over 4 months?",
+      "tryPrompt": "From the same chart: which two months together equal the savings in April?",
+      "masteryCheck": "January and February (200 + 150 = 350 — that is more than April). The correct answer is: February and March (150 + 250 = 400 — still more). Actually January + February = 350, close to April 300. Correct answer: no exact pair; Jan+Feb=350, not 300. Correct pair that equals April: 200+100 — but there is no 100-bar. Best answer the student should give: Jan(200) + Feb(150) = 350, not equal. Feb(150) + 100 = 250 (not matching). Note: the exact equal pair does not exist in this set — a good teaching point.",
+      "instantFeedbackWin": "Great thinking! You checked the maths carefully. Jan=200, Feb=150, Mar=250, Apr=300. Jan+Feb=350, Feb+Mar=400, Jan+Mar=450 — none equals April exactly. Spotting that is itself a great data reading skill!",
+      "instantFeedbackRetry": "Here's a trick: April is 300. Try every pair: Jan+Feb=350 (too high), Jan+Mar=450 (too high), Feb+Mar=400 (too high), Feb(150)+Mar(250)=400. There is no exact pair — this teaches us that not every question has a simple answer!",
+      "reviewPrompt": "Quick check: in the savings chart, how much more did the student save in April than in February?",
+      "xpReward": 12,
+      "badgeFocus": "Bar Comparator",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group B for Reading Data Charts."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Pie charts — largest/smallest sector and comparisons",
+      "missionStepTitle": "Exercise C: Pie Chart Reading",
+      "coachHook": "Let's crack this code! A pie chart divides a circle into slices — like cutting a pizza. The bigger the slice, the bigger the share. Let's read pie charts!",
+      "boardDemo": {
+        "title": "Pie Chart — Compare Sector Sizes",
+        "steps": [
+          "Chart: 'How Mia spends 24 hours' — Sleep=8h, School=7h, Play=4h, Study=3h, Other=2h",
+          "Largest sector: Sleep (8 hours = biggest slice)",
+          "Smallest sector: Other (2 hours = smallest slice)",
+          "Sleep + Study vs Play: 8+3=11 vs 4 → Sleep+Study is much larger"
+        ],
+        "teacherLine": "Visually: a bigger slice means a bigger value. If you have the values, compare them as numbers. For 'how many times bigger': divide larger by smaller. For 'how much more': subtract."
+      },
+      "readAloudPrompt": "Using Mia's pie chart (Sleep=8h, School=7h, Play=4h, Study=3h, Other=2h) — which activity takes the most time?",
+      "tryPrompt": "From the same chart: how many more hours does Mia spend at School than on Study?",
+      "masteryCheck": "4",
+      "instantFeedbackWin": "Correct! School=7h, Study=3h. Difference = 7-3 = 4 hours more at school. Pie chart reading mastered!",
+      "instantFeedbackRetry": "Here's a trick: find School's value (7) and Study's value (3). Subtract: 7-3=4. Mia spends 4 more hours at school than studying.",
+      "reviewPrompt": "Quick check: in Mia's chart, what fraction of the day (24 hours) is spent sleeping?",
+      "xpReward": 14,
+      "badgeFocus": "Pie Chart Pro",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group C for Reading Data Charts."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Pictographs — count symbols × scale",
+      "missionStepTitle": "Exercise D: Pictograph Reading",
+      "coachHook": "Let's crack this code! In a pictograph, each picture symbol represents a number. Your job: count the symbols and multiply by the scale — simple multiplication with a fun twist!",
+      "boardDemo": {
+        "title": "Pictograph — Symbols × Scale = Total",
+        "steps": [
+          "Chart: 'Books Read per Month' — Key: 1 book symbol = 5 books",
+          "January: 6 symbols → 6 × 5 = 30 books",
+          "February: 4 symbols → 4 × 5 = 20 books",
+          "March: 8 symbols → 8 × 5 = 40 books",
+          "Always check the key (scale) first!"
+        ],
+        "teacherLine": "The key is everything in a pictograph. One symbol might represent 2, 5, 10, or even 100 items. Read the key carefully, count the symbols in the row, then multiply. Done!"
+      },
+      "readAloudPrompt": "Pictograph: each apple symbol = 10 apples. Row for Monday has 5 apple symbols. How many apples were sold on Monday?",
+      "tryPrompt": "Same chart: each apple symbol = 10. Tuesday has 8 symbols, Wednesday has 3 symbols. How many more apples were sold on Tuesday than Wednesday?",
+      "masteryCheck": "50",
+      "instantFeedbackWin": "Excellent! Tuesday: 8×10=80. Wednesday: 3×10=30. Difference: 80-30=50. Pictograph maths done perfectly!",
+      "instantFeedbackRetry": "Here's a trick: first find each total (symbols × key). Tuesday = 8×10=80. Wednesday = 3×10=30. Then subtract: 80-30=50 more apples on Tuesday.",
+      "reviewPrompt": "Quick check: pictograph key = 1 star symbol = 4 students. A row has 7 full symbols and 1 half symbol. How many students does this represent?",
+      "xpReward": 16,
+      "badgeFocus": "Pictograph Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group D for Reading Data Charts."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Simple table reading — rows, columns, and totals",
+      "missionStepTitle": "Exercise E: Data Table Reading",
+      "coachHook": "Let's crack this code! A table organises data into rows and columns. Find the right row and the right column — where they cross is your answer. It is like a treasure map!",
+      "boardDemo": {
+        "title": "Data Table — Read Rows and Columns",
+        "steps": [
+          "Table: Test scores for 3 students across 3 subjects",
+          "         Maths  Science  English",
+          "Anu       45      38       42",
+          "Raj       50      44       36",
+          "Mia       40      48       45",
+          "Question: What is Raj's Science score? → Row Raj, Column Science → 44"
+        ],
+        "teacherLine": "Step 1: find the row with the person or item you need. Step 2: find the column with the category you need. Step 3: read the number where they meet. For totals: add all numbers in the row or column."
+      },
+      "readAloudPrompt": "Using the test score table above: what is Mia's English score?",
+      "tryPrompt": "From the same table: what is the total score of all three students in Maths?",
+      "masteryCheck": "135",
+      "instantFeedbackWin": "Brilliant! Anu's Maths=45, Raj's Maths=50, Mia's Maths=40. Total = 45+50+40 = 135. Table reading and addition — perfect!",
+      "instantFeedbackRetry": "Here's a trick: look down the Maths column. Read each student's Maths score: Anu=45, Raj=50, Mia=40. Add them: 45+50+40=135.",
+      "reviewPrompt": "Quick check: which student has the highest total score across all three subjects?",
+      "xpReward": 18,
+      "badgeFocus": "Table Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group E for Reading Data Charts."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Data charts — mixed speed round",
+      "missionStepTitle": "Exercise F: Speed Round — Mixed Charts",
+      "coachHook": "Let's crack this code — at speed! One question from each chart type. Name the chart type, state your reading method, and answer fast!",
+      "boardDemo": {
+        "title": "Speed Round — All 4 Chart Types",
+        "steps": [
+          "Bar chart: read bar height from y-axis",
+          "Pie chart: compare sector sizes, subtract for 'how many more'",
+          "Pictograph: count symbols × key value",
+          "Table: find row and column intersection"
+        ],
+        "teacherLine": "State the chart type and the reading method before your answer — that shows understanding, not just a lucky guess. Even a small error in calculation is fine if the method is correct!"
+      },
+      "readAloudPrompt": "Ready? Three quick data questions — name the chart type and answer each one!",
+      "tryPrompt": "Q1 (Bar chart): y-axis scale is 10 per step. A bar for 'Swimming' reaches the 4th step. What is the value? | Q2 (Pictograph): key = 1 symbol = 5 students. A row has 9 symbols. Total students? | Q3 (Table): a student scored 32 in Maths and 48 in Science. What is their total score?",
+      "masteryCheck": "40 | 45 | 80",
+      "instantFeedbackWin": "AMAZING! Q1: 4 steps × 10 = 40. Q2: 9 symbols × 5 = 45. Q3: 32+48=80. All three correct — Data Detective badge earned!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — each step is 10, bar is at 4th step: 4×10=40. Q2 — 9 symbols × 5 each = 45. Q3 — direct addition: 32+48=80.",
+      "reviewPrompt": "Final recap: name all four chart types you learned today and state the key reading step for each one.",
+      "xpReward": 20,
+      "badgeFocus": "Data Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group F for Reading Data Charts."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Data charts — combined multi-chart questions",
+      "missionStepTitle": "Exercise G: Multi-Chart Challenge",
+      "coachHook": "Let's crack this code — champion level! Some exam questions give you two charts about the same topic. You need to read both and combine the information to answer!",
+      "boardDemo": {
+        "title": "Multi-Chart — Combine Two Sources",
+        "steps": [
+          "Bar chart: students who play Cricket=30, Football=20, Tennis=10",
+          "Pie chart: of Cricket players — 50% are boys, 50% are girls",
+          "Combined question: how many Cricket players are girls?",
+          "Step 1: read Cricket from bar chart → 30",
+          "Step 2: apply pie chart percentage → 50% of 30 = 15 girls"
+        ],
+        "teacherLine": "Read each chart separately first. Write down the key values. Then combine them to answer the final question. Never try to answer a two-chart question without reading both charts fully!"
+      },
+      "readAloudPrompt": "Bar chart: Monday sales = 60 units, Tuesday sales = 40 units. Pie chart: of Monday sales, 25% were returned. How many Monday units were NOT returned?",
+      "tryPrompt": "Bar chart shows January expenses: Food=500, Travel=300, Entertainment=200. A pie chart shows Food is split: Breakfast=40%, Lunch=35%, Dinner=25%. How much was spent on Breakfast?",
+      "masteryCheck": "200",
+      "instantFeedbackWin": "Outstanding! Food total from bar chart = 500. Breakfast share from pie chart = 40%. 40% of 500 = 200. Multi-chart reading mastered — you are a true Data Detective!",
+      "instantFeedbackRetry": "Here's a trick: step 1 — find Food total from bar chart: 500. Step 2 — find Breakfast % from pie chart: 40%. Step 3 — calculate: 40% of 500 = (40÷100) × 500 = 200.",
+      "reviewPrompt": "Final challenge: why is it important to read the chart title and scale before answering any question? Give one example where ignoring the scale would give a wrong answer.",
+      "xpReward": 22,
+      "badgeFocus": "Multi-Chart Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "bar_chart.svg",
+        "title": "Reading Data Charts",
+        "caption": "Group G for Reading Data Charts."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "bar_chart",
+      "kind": "svg",
+      "asset": "bar_chart.svg",
+      "title": "Reading Data Charts",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

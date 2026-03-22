@@ -99,7 +99,13 @@
       "instantFeedbackRetry": "Chain the clues: P < Q < R. The rightmost is the largest — R is tallest.",
       "reviewPrompt": "If D is taller than A, extend the chain. Who is the shortest now?",
       "xpReward": 10,
-      "badgeFocus": "Chain Builder"
+      "badgeFocus": "Chain Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group A for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "B",
@@ -122,7 +128,13 @@
       "instantFeedbackRetry": "Raj > Priya and Sana > Priya — both are above Priya. Amit is directly below Priya in the chain: Priya > Amit.",
       "reviewPrompt": "List all the facts you are certain about from these clues — no assumptions.",
       "xpReward": 10,
-      "badgeFocus": "Chain Builder"
+      "badgeFocus": "Chain Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group B for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "C",
@@ -145,7 +157,13 @@
       "instantFeedbackRetry": "Step 1: Meera = Sana − 3 = 18 − 3 = 15. Step 2: Rahul = Meera + 4 = 15 + 4 = 19.",
       "reviewPrompt": "How old is Sana compared to Rahul? Write a comparison statement.",
       "xpReward": 10,
-      "badgeFocus": "Age Detective"
+      "badgeFocus": "Age Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group C for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "D",
@@ -170,7 +188,13 @@
       "instantFeedbackRetry": "Roses are inside Flowers. Some Flowers are Red. This does not guarantee Roses are Red.",
       "reviewPrompt": "Make up your own if-then statement and show why the reverse is not necessarily true.",
       "xpReward": 10,
-      "badgeFocus": "Logic Gate"
+      "badgeFocus": "Logic Gate",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group D for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "E",
@@ -192,7 +216,13 @@
       "instantFeedbackRetry": "With 5 people, 4th lightest = 2nd heaviest. Heaviest is A, 2nd heaviest is B.",
       "reviewPrompt": "In the chain P > Q > R > S > T, what is R's rank from the lightest end?",
       "xpReward": 10,
-      "badgeFocus": "Order Master"
+      "badgeFocus": "Order Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group E for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "F",
@@ -215,7 +245,13 @@
       "instantFeedbackRetry": "Each left turn moves 90 degrees anti-clockwise. East → left = North. North → left = West.",
       "reviewPrompt": "Starting from South, how many right turns does it take to face East?",
       "xpReward": 10,
-      "badgeFocus": "Direction Tracker"
+      "badgeFocus": "Direction Tracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group F for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "G",
@@ -240,7 +276,13 @@
       "instantFeedbackRetry": "All others are physical outdoor sports. Chess is a board game — not physical, not outdoor.",
       "reviewPrompt": "Make your own odd-one-out puzzle with 5 items and challenge a friend.",
       "xpReward": 10,
-      "badgeFocus": "Pattern Buster"
+      "badgeFocus": "Pattern Buster",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group G for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "H",
@@ -265,7 +307,13 @@
       "instantFeedbackRetry": "Study → Pass does NOT mean Pass → Studied. Raj passed, but we cannot conclude he studied hard. This is the affirming-the-consequent fallacy.",
       "reviewPrompt": "Give a real-life example of affirming the consequent — a false reverse conclusion.",
       "xpReward": 10,
-      "badgeFocus": "Logic Gate"
+      "badgeFocus": "Logic Gate",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group H for Simple Logical Puzzles."
+      }
     },
     {
       "exerciseGroup": "I",
@@ -289,7 +337,13 @@
       "instantFeedbackRetry": "Chain: M > N > O > P. From lightest: P is 1st lightest, O is 2nd lightest. Answer: O.",
       "reviewPrompt": "Explain in two sentences how you would approach a 5-clue ordering problem in an exam.",
       "xpReward": 15,
-      "badgeFocus": "Logic Legend"
+      "badgeFocus": "Logic Legend",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Simple Logical Puzzles",
+        "caption": "Group I for Simple Logical Puzzles."
+      }
     }
   ],
   "screenplay": {
@@ -304,7 +358,13 @@
           "Reveal: No! The first statement is actually false.",
           "Lesson: Always question the premises, not just the logic"
         ],
-        "duration": 60
+        "duration": 60,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Simple Logical Puzzles",
+          "caption": "Screenplay beat for Simple Logical Puzzles."
+        }
       },
       {
         "beatId": "B2",
@@ -316,7 +376,13 @@
           "Draw an inequality chain for comparison type",
           "Show one if-then example with Venn circles"
         ],
-        "duration": 90
+        "duration": 90,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Simple Logical Puzzles",
+          "caption": "Screenplay beat for Simple Logical Puzzles."
+        }
       },
       {
         "beatId": "B3",
@@ -329,7 +395,13 @@
           "East → right → South",
           "Final: South"
         ],
-        "duration": 90
+        "duration": 90,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Simple Logical Puzzles",
+          "caption": "Screenplay beat for Simple Logical Puzzles."
+        }
       },
       {
         "beatId": "B4",
@@ -341,8 +413,23 @@
           "Display badge: Logic Legend",
           "Show XP tally"
         ],
-        "duration": 60
+        "duration": 60,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Simple Logical Puzzles",
+          "caption": "Screenplay beat for Simple Logical Puzzles."
+        }
       }
     ]
-  }
+  },
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Simple Logical Puzzles",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

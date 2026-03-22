@@ -168,7 +168,13 @@
             "questionText": "Find 135 ÷ 9 using the running sum method.",
             "expectedAnswer": "15",
             "hint": "Digits: 1, 3, 5. Running sums give you the quotient digits.",
-            "solution": "Running sums: 1 → 1+3=4 → check: 9×15=135. Quotient=15."
+            "solution": "Running sums: 1 → 1+3=4 → check: 9×15=135. Quotient=15.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group A for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_A_02",
@@ -180,13 +186,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 162 ÷ 9?",
-            "options": ["16", "17", "18", "19"],
+            "options": [
+              "16",
+              "17",
+              "18",
+              "19"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "18",
             "hint": "9 × 18 = 162. Check your running sums.",
-            "solution": "162 ÷ 9 = 18. Verify: 9×18=162 ✓."
+            "solution": "162 ÷ 9 = 18. Verify: 9×18=162 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group A for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group A for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -224,7 +247,13 @@
             "questionText": "Find 253 ÷ 11 using the Paravartya method.",
             "expectedAnswer": "23",
             "hint": "Complement of 11 is −1. Apply the adjustment step by step.",
-            "solution": "Bring 2; 2×(−1)=−2; 5−2=3; 3×(−1)=−3; 3−3=0. Quotient=23, R=0."
+            "solution": "Bring 2; 2×(−1)=−2; 5−2=3; 3×(−1)=−3; 3−3=0. Quotient=23, R=0.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group B for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_B_02",
@@ -236,13 +265,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "176 ÷ 11 = ?",
-            "options": ["14", "15", "16", "17"],
+            "options": [
+              "14",
+              "15",
+              "16",
+              "17"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "16",
             "hint": "Alternating sum of 176 = 1−7+6 = 0. It divides evenly.",
-            "solution": "176 ÷ 11 = 16. Check: 11×16=176 ✓."
+            "solution": "176 ÷ 11 = 16. Check: 11×16=176 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group B for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group B for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -278,12 +324,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the Paravartya flag digit for dividing by 14?",
-            "options": ["1", "2", "4", "6"],
+            "options": [
+              "1",
+              "2",
+              "4",
+              "6"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "4",
             "hint": "Flag = divisor − 10 = 14 − 10.",
             "solution": "14 − 10 = 4. Flag digit = 4.",
-            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "Paravartya setup showing divisor 14 with flag 4 above the unit digit" }
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group C for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_C_02",
@@ -297,9 +353,21 @@
             "questionText": "Write the flag digit and describe the adjustment for dividing by 13.",
             "expectedAnswer": "Flag = 3; subtract 3 × quotient digit from each successive dividend digit",
             "hint": "13 − 10 = 3.",
-            "solution": "Flag digit = 13−10 = 3. At each step: adjust by −3×q."
+            "solution": "Flag digit = 13−10 = 3. At each step: adjust by −3×q.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group C for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group C for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -339,7 +407,12 @@
             "expectedAnswer": "12",
             "hint": "Flag for 14 = 4. Bring 1, adjust: 6−4=2, then 8−8=0.",
             "solution": "Flag=4. Step1: Q=1, 6−4=2. Step2: Q=2, 8−8=0. Quotient=12, R=0.",
-            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "Paravartya layout for 168 ÷ 14 showing flag and adjustment columns" }
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group D for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_D_02",
@@ -351,13 +424,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 156 ÷ 13 using Paravartya?",
-            "options": ["11", "12", "13", "14"],
+            "options": [
+              "11",
+              "12",
+              "13",
+              "14"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "12",
             "hint": "Flag=3. Bring 1; 5−3=2; bring 2; 6−6=0.",
-            "solution": "156÷13: flag=3. Q=1 → 5−3=2 → Q=2 → 6−6=0. Quotient=12."
+            "solution": "156÷13: flag=3. Q=1 → 5−3=2 → Q=2 → 6−6=0. Quotient=12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group D for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group D for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -392,11 +482,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 180 ÷ 12?",
-            "options": ["13", "14", "15", "16"],
+            "options": [
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "15",
             "hint": "12 × 15 = 180. Verify by multiplication.",
-            "solution": "180 ÷ 12 = 15. Check: 12×15=180 ✓."
+            "solution": "180 ÷ 12 = 15. Check: 12×15=180 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group E for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_E_02",
@@ -408,13 +509,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 195 ÷ 13?",
-            "options": ["13", "14", "15", "16"],
+            "options": [
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "15",
             "hint": "13×15=195. Use Paravartya to verify.",
-            "solution": "195÷13=15. Flag=3: 1→9−3=6→... 13×15=195 ✓."
+            "solution": "195÷13=15. Flag=3: 1→9−3=6→... 13×15=195 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group E for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group E for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -452,15 +570,44 @@
             "questionType": "fill_step",
             "questionText": "Divide 256 by 12 using Paravartya. Fill in each step.",
             "steps": [
-              { "label": "Flag digit for 12", "answer": "2", "hint": "12 − 10 = 2" },
-              { "label": "First quotient digit (bring first dividend digit)", "answer": "2", "hint": "First digit of 256 is 2" },
-              { "label": "Adjustment: 2 × (−2) added to next digit 5", "answer": "1", "hint": "5 + (−4) = 1" },
-              { "label": "Second quotient digit", "answer": "1", "hint": "The adjusted value 1 becomes the next quotient digit" },
-              { "label": "Remainder: 1×(−2) added to last digit 6", "answer": "4", "hint": "6 + (−2) = 4" },
-              { "label": "Final answer: quotient and remainder", "answer": "21 remainder 4", "hint": "Quotient=21, R=4. Verify: 12×21+4=256" }
+              {
+                "label": "Flag digit for 12",
+                "answer": "2",
+                "hint": "12 − 10 = 2"
+              },
+              {
+                "label": "First quotient digit (bring first dividend digit)",
+                "answer": "2",
+                "hint": "First digit of 256 is 2"
+              },
+              {
+                "label": "Adjustment: 2 × (−2) added to next digit 5",
+                "answer": "1",
+                "hint": "5 + (−4) = 1"
+              },
+              {
+                "label": "Second quotient digit",
+                "answer": "1",
+                "hint": "The adjusted value 1 becomes the next quotient digit"
+              },
+              {
+                "label": "Remainder: 1×(−2) added to last digit 6",
+                "answer": "4",
+                "hint": "6 + (−2) = 4"
+              },
+              {
+                "label": "Final answer: quotient and remainder",
+                "answer": "21 remainder 4",
+                "hint": "Quotient=21, R=4. Verify: 12×21+4=256"
+              }
             ],
             "expectedAnswer": "Quotient = 21, Remainder = 4",
-            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "Full Paravartya layout for 256 ÷ 12 with flag and adjustment columns" }
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group F for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_F_02",
@@ -474,9 +621,21 @@
             "questionText": "Verify 256 ÷ 12 = 21 remainder 4 by computing 12 × 21 + 4.",
             "expectedAnswer": "256",
             "hint": "12 × 21 = 252. 252 + 4 = 256.",
-            "solution": "12×21=252, 252+4=256. Verification correct."
+            "solution": "12×21=252, 252+4=256. Verification correct.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group F for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group F for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -513,7 +672,13 @@
             "questionText": "Use the most suitable Vedic method to find 182 ÷ 14.",
             "expectedAnswer": "13",
             "hint": "Flag for 14 = 4. Bring 1; 8−4=4; bring 4; 2−16? Reconsider: 13×14=182.",
-            "solution": "14×13=182. Quotient=13, R=0."
+            "solution": "14×13=182. Quotient=13, R=0.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group G for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_G_02",
@@ -525,13 +690,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 117 ÷ 9?",
-            "options": ["11", "12", "13", "14"],
+            "options": [
+              "11",
+              "12",
+              "13",
+              "14"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "13",
             "hint": "Use the running sum method. Digits: 1, 1, 7.",
-            "solution": "9×13=117. Running sums: 1, 1+1=2... result 13, R=0."
+            "solution": "9×13=117. Running sums: 1, 1+1=2... result 13, R=0.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group G for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group G for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -566,11 +748,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed: 169 ÷ 13 = ?",
-            "options": ["11", "12", "13", "14"],
+            "options": [
+              "11",
+              "12",
+              "13",
+              "14"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "13",
             "hint": "13×13=169.",
-            "solution": "169÷13=13. 13×13=169 ✓."
+            "solution": "169÷13=13. 13×13=169 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group H for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_H_02",
@@ -584,9 +777,21 @@
             "questionText": "Find 196 ÷ 14 using Paravartya.",
             "expectedAnswer": "14",
             "hint": "Flag=4. Bring 1; 9−4=5; bring 5; 6−20? Check: 14×14=196.",
-            "solution": "196÷14=14. Verify: 14×14=196 ✓."
+            "solution": "196÷14=14. Verify: 14×14=196 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group H for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group H for Paravartya — Divide by Transpose-and-Adjust."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -625,17 +830,54 @@
             "questionType": "fill_step",
             "questionText": "Divide 1452 by 12 using Paravartya. Show every step.",
             "steps": [
-              { "label": "Flag digit for 12", "answer": "2", "hint": "12 − 10 = 2" },
-              { "label": "Q₁ (first digit of 1452)", "answer": "1", "hint": "Bring down 1" },
-              { "label": "Adjust: 1×(−2) added to 4", "answer": "2", "hint": "4 − 2 = 2" },
-              { "label": "Q₂ = adjusted value", "answer": "2", "hint": "2 becomes the next quotient digit" },
-              { "label": "Adjust: 2×(−2) added to 5", "answer": "1", "hint": "5 − 4 = 1" },
-              { "label": "Q₃ = adjusted value", "answer": "1", "hint": "1 becomes next quotient digit" },
-              { "label": "Adjust: 1×(−2) added to 2", "answer": "0", "hint": "2 − 2 = 0 = remainder" },
-              { "label": "Quotient and remainder", "answer": "121 remainder 0", "hint": "Quotient = 121, R = 0" }
+              {
+                "label": "Flag digit for 12",
+                "answer": "2",
+                "hint": "12 − 10 = 2"
+              },
+              {
+                "label": "Q₁ (first digit of 1452)",
+                "answer": "1",
+                "hint": "Bring down 1"
+              },
+              {
+                "label": "Adjust: 1×(−2) added to 4",
+                "answer": "2",
+                "hint": "4 − 2 = 2"
+              },
+              {
+                "label": "Q₂ = adjusted value",
+                "answer": "2",
+                "hint": "2 becomes the next quotient digit"
+              },
+              {
+                "label": "Adjust: 2×(−2) added to 5",
+                "answer": "1",
+                "hint": "5 − 4 = 1"
+              },
+              {
+                "label": "Q₃ = adjusted value",
+                "answer": "1",
+                "hint": "1 becomes next quotient digit"
+              },
+              {
+                "label": "Adjust: 1×(−2) added to 2",
+                "answer": "0",
+                "hint": "2 − 2 = 0 = remainder"
+              },
+              {
+                "label": "Quotient and remainder",
+                "answer": "121 remainder 0",
+                "hint": "Quotient = 121, R = 0"
+              }
             ],
             "expectedAnswer": "121",
-            "visual": { "type": "svg", "asset": "vm_paravartya_steps", "caption": "4-digit Paravartya division: 1452 ÷ 12 with all steps shown" }
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group I for Paravartya — Divide by Transpose-and-Adjust."
+            }
           },
           {
             "questionId": "L7_I_02",
@@ -647,14 +889,42 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 1716 ÷ 12?",
-            "options": ["141", "142", "143", "144"],
+            "options": [
+              "141",
+              "142",
+              "143",
+              "144"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "143",
             "hint": "12×143=1716. Use Paravartya with flag=2.",
-            "solution": "1716÷12=143. Verify: 12×143=1716 ✓."
+            "solution": "1716÷12=143. Verify: 12×143=1716 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "paravartya_division.svg",
+              "title": "Paravartya — Divide by Transpose-and-Adjust",
+              "caption": "Group I for Paravartya — Divide by Transpose-and-Adjust."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "paravartya_division.svg",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "caption": "Group I for Paravartya — Divide by Transpose-and-Adjust."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G6_L7_PARAVARTYA_DIV",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "paravartya_division",
+      "kind": "svg",
+      "asset": "paravartya_division.svg",
+      "title": "Paravartya — Divide by Transpose-and-Adjust",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

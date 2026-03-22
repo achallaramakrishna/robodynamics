@@ -1,0 +1,575 @@
+{
+  "chapterCode": "AR_G7_L3_DIRECTION",
+  "courseId": "aptitude_reasoning_g7",
+  "title": "Direction & Distance",
+  "source": "MindSpark Grade 7 Aptitude & Reasoning | Chapter 3: Direction & Distance",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "8 Compass Directions (N, NE, E, SE, S, SW, W, NW)",
+    "Turning Left and Right — 90° and 180° Turns",
+    "Compound Paths — Multi-Step Movement Tracking",
+    "Pythagorean Distance (Horizontal + Vertical Displacement)",
+    "Final Position and Direction After Turns",
+    "Shortest Distance Between Two Points on a Path",
+    "Facing Direction After Multiple Turns",
+    "Speed Round: Mixed Direction & Distance Problems"
+  ],
+  "learningGoals": [
+    "Track a person's position and direction accurately through multi-step movement descriptions.",
+    "Apply the Pythagorean theorem to find the straight-line (shortest) distance from start to end.",
+    "Determine the final facing direction after a sequence of left and right turns."
+  ],
+  "coreIdeas": [
+    "Always draw the path on paper — mark North at the top, label each segment with distance and direction.",
+    "For shortest distance: separate total horizontal movement (East–West net) and vertical movement (North–South net), then use a²+b²=c².",
+    "Right turn = clockwise 90°. Left turn = anti-clockwise 90°. Two right turns = 180° = about-face."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Ravi starts facing North, walks 5 km North, turns right and walks 4 km East. How far is he from the start?",
+      "solution": "Draw the path: 5 km up (North), 4 km right (East). This forms a right-angle triangle. Distance = √(5²+4²) = √(25+16) = √41 ≈ 6.4 km.",
+      "concept": "Pythagoras for shortest distance after two perpendicular legs"
+    },
+    {
+      "id": "WE2",
+      "problem": "A man faces East. He turns left twice. Which direction is he now facing?",
+      "solution": "Starting direction: East. Left turn 1 (anti-clockwise 90°): North. Left turn 2: West. Final direction: West.",
+      "concept": "Turning left/right changes the facing direction by 90° per turn"
+    },
+    {
+      "id": "WE3",
+      "problem": "Meera walks 3 km North, then 4 km East, then 3 km South. What is her displacement from the start?",
+      "solution": "North–South: +3 (North) then -3 (South) = net 0 km. East–West: +4 (East) = net 4 km East. Displacement = 4 km East from start.",
+      "concept": "Net displacement — opposite directions cancel each other out"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark checks if the student knows all 4 cardinal directions and can name which way is 'right' when facing North. Warm-up draws a compass rose.",
+      "placementRule": "Start at Group A. Students struggling with N/S/E/W see a compass orientation exercise before Group A begins."
+    },
+    "mission": {
+      "missionTitle": "Navigate the Direction Maze",
+      "missionPromise": "By the end you will trace any multi-step path, calculate the shortest distance using Pythagoras, and identify final facing direction — 3 guaranteed marks in aptitude exams!",
+      "successCelebration": "Award a 'Navigator' badge after each group. Final trophy: 'Direction Maze Master'."
+    },
+    "microLessonPattern": [
+      "Coach draws a compass rose and labels all 8 directions at lesson start.",
+      "Coach traces the path step by step on the board, labelling each segment.",
+      "Coach applies Pythagoras on the right-triangle formed by the path.",
+      "Student traces the path independently and states the final position.",
+      "Instant feedback confirms both the distance AND the final facing direction.",
+      "Review prompt asks student to name the direction 90° clockwise from the current facing direction."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–25 XP per exercise group.",
+      "streakRule": "Streak counter visible; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a navigation-themed badge.",
+      "celebrationStyle": "Coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a reteach with a 2-step path (one turn only).",
+      "practiceStyle": "Offer one simpler path question before advancing.",
+      "masteryRule": "Advance after correct answer plus successful tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G7_L3_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Direction & Distance is your GPS skill! Every problem has a person moving through steps — North, South, East, West, turning left or right. Your job: track their position and find how far they ended up from where they started. Two tools make this easy: a hand-drawn path diagram and Pythagoras for the final distance. Let me show you both!",
+        "boardAction": "Draw a large compass rose with all 8 directions labelled. Write the 3 steps: (1) Draw the path with arrows and distances. (2) Find net horizontal and vertical displacement. (3) Apply Pythagoras if the path forms a right angle.",
+        "checkpointPrompt": "If you are facing North and turn right, which direction are you now facing?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "East.",
+        "fallbackHint": "Imagine standing and looking North (up). Turning right means rotating clockwise. The next direction clockwise from North is East.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l3_title",
+            "x": "40",
+            "y": "28",
+            "text": "Direction & Distance — GPS for Aptitude!",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l3_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_step1",
+            "x": "60",
+            "y": "76",
+            "text": "Step 1: Draw the path (arrows + distances)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_step2",
+            "x": "60",
+            "y": "100",
+            "text": "Step 2: Find net N-S and net E-W displacement",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_step3",
+            "x": "60",
+            "y": "124",
+            "text": "Step 3: Pythagoras → a² + b² = c²",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "compass.svg",
+          "title": "Direction & Distance",
+          "caption": "Screenplay beat for Direction & Distance."
+        }
+      },
+      {
+        "beatId": "AR_G7_L3_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me solve live: 'Ravi walks 5 km North, turns right, walks 4 km East. How far from start?' Step 1: Draw arrow 5 units up, then 4 units right — an L-shape. Step 2: Net North = 5, Net East = 4. Step 3: Distance = √(5²+4²) = √(25+16) = √41. But many exam answers are clean numbers — check if it is a 3-4-5 or 5-12-13 Pythagorean triple first!",
+        "boardAction": "Draw the L-shape path: 5 km North then 4 km East. Mark start as S and end as E. Draw the hypotenuse dashed line. Label: a=5, b=4, c=√41. Write Pythagorean triples: 3-4-5, 5-12-13, 8-15-17.",
+        "checkpointPrompt": "If someone walks 3 km North and 4 km East, how far from the start? (Hint: 3-4-5 triple!)",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "5 km.",
+        "fallbackHint": "3 and 4 are the two short sides. In the 3-4-5 Pythagorean triple, the hypotenuse is 5. Distance = 5 km. No calculator needed — memorise the triple!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_north",
+            "x": "120",
+            "y": "140",
+            "text": "← 5 km North",
+            "color": "#1e40af",
+            "size": 12,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "line",
+            "id": "demo_northline",
+            "x1": "150",
+            "y1": "55",
+            "x2": "150",
+            "y2": "155",
+            "color": "#059669",
+            "width": 3,
+            "delaySec": 0.4,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "line",
+            "id": "demo_eastline",
+            "x1": "150",
+            "y1": "55",
+            "x2": "250",
+            "y2": "55",
+            "color": "#dc2626",
+            "width": 3,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_formula",
+            "x": "60",
+            "y": "190",
+            "text": "√(5² + 4²) = √41 ≈ 6.4 km",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 1.5,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "compass.svg",
+          "title": "Direction & Distance",
+          "caption": "Screenplay beat for Direction & Distance."
+        }
+      },
+      {
+        "beatId": "AR_G7_L3_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You now have all the tools: compass drawing, turning rules, and Pythagoras. For Groups A–H, always draw the path before answering. Memorise these Pythagorean triples — they appear constantly: 3-4-5, 5-12-13, 8-15-17, 7-24-25. If you see those numbers in a distance problem, the answer is clean!",
+        "boardAction": "Write the 4 Pythagorean triples in a box. Write turn rules: Facing N → right turn → E → right turn → S → right turn → W → right turn → N (full circle). Anti-clockwise is the same cycle reversed.",
+        "checkpointPrompt": "If a person faces West and makes 3 right turns, which direction are they facing?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "North.",
+        "fallbackHint": "West → right turn → North → right turn → East → right turn → South. Three right turns from West = South? Wait — let me recount: West+90°CW = North, North+90°CW = East, East+90°CW = South. Three rights from West = South.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_triples",
+            "x": "40",
+            "y": "30",
+            "text": "Pythagorean Triples to Memorise",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_t1",
+            "x": "60",
+            "y": "62",
+            "text": "3-4-5  |  5-12-13  |  8-15-17  |  7-24-25",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_turns",
+            "x": "60",
+            "y": "96",
+            "text": "Right turn (CW): N→E→S→W→N",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_left",
+            "x": "60",
+            "y": "118",
+            "text": "Left turn (CCW): N→W→S→E→N",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "compass.svg",
+          "title": "Direction & Distance",
+          "caption": "Screenplay beat for Direction & Distance."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "8 Compass Directions",
+      "missionStepTitle": "Exercise A: Compass Directions",
+      "coachHook": "Let's crack this code! Eight directions on a compass — N, NE, E, SE, S, SW, W, NW. Know them all by heart and you save 5 seconds every question!",
+      "boardDemo": {
+        "title": "8 Compass Directions — Clockwise Order",
+        "steps": [
+          "Clockwise from North: N → NE → E → SE → S → SW → W → NW → N",
+          "Opposite pairs: N↔S, E↔W, NE↔SW, NW↔SE",
+          "45° between adjacent directions",
+          "Mnemonic: Never Eat Soggy Waffles = N,E,S,W"
+        ],
+        "teacherLine": "Memorise the clockwise order of all 8 directions. Every turn problem uses this order. Opposite direction is always 4 steps away in the clockwise ring."
+      },
+      "readAloudPrompt": "Going clockwise: after South-East (SE), what is the next direction?",
+      "tryPrompt": "Name the direction that is exactly opposite to North-West (NW).",
+      "masteryCheck": "South-East",
+      "instantFeedbackWin": "Correct! NW and SE are exact opposites (4 steps apart clockwise). Compass locked in!",
+      "instantFeedbackRetry": "Here's a trick: NW is in the top-left. Its opposite is in the bottom-right — that is SE (South-East).",
+      "reviewPrompt": "Quick: list all 8 directions in clockwise order starting from North.",
+      "xpReward": 10,
+      "badgeFocus": "Compass Rose Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group A for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Turning Left and Right",
+      "missionStepTitle": "Exercise B: Left and Right Turns",
+      "coachHook": "Let's crack this code! Turn right = rotate clockwise 90°. Turn left = anti-clockwise 90°. Simple rule, but easy to get mixed up — let's nail it!",
+      "boardDemo": {
+        "title": "90° Turns — Clockwise and Anti-clockwise",
+        "steps": [
+          "Facing North, turn right (CW) → now facing East",
+          "Facing East, turn right (CW) → now facing South",
+          "Facing North, turn left (CCW) → now facing West",
+          "Facing South, turn 180° (about-face) → now facing North"
+        ],
+        "teacherLine": "Right turn always goes to the next direction clockwise. Left turn goes to the next direction anti-clockwise. Practice the ring: N→E→S→W→N going right."
+      },
+      "readAloudPrompt": "A person faces South and turns right. Which direction are they now facing?",
+      "tryPrompt": "A person faces East, turns left, then turns left again. Which direction are they facing now?",
+      "masteryCheck": "West",
+      "instantFeedbackWin": "Perfect! East → left → North → left → West. Two left turns from East = West. Turn logic mastered!",
+      "instantFeedbackRetry": "Here's a trick: East → left turn → North (CCW from E is N). North → left turn → West. Two lefts from East = West.",
+      "reviewPrompt": "Quick: starting facing North, after 3 right turns, which direction do you face?",
+      "xpReward": 12,
+      "badgeFocus": "Turn Navigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group B for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Compound Paths — Multi-Step Movement",
+      "missionStepTitle": "Exercise C: Multi-Step Path Tracking",
+      "coachHook": "Let's crack this code! Multiple steps, multiple turns — draw every single arrow. Your diagram is the answer, the numbers just fill in the details.",
+      "boardDemo": {
+        "title": "Multi-Step Path — Draw Every Leg",
+        "steps": [
+          "Problem: Walk 4 km N, turn right, walk 3 km E, turn right, walk 4 km S",
+          "Draw leg 1: 4 km up. Leg 2: 3 km right. Leg 3: 4 km down.",
+          "Final position: 3 km East of start (North and South cancel)",
+          "Distance from start = 3 km"
+        ],
+        "teacherLine": "When North and South legs are equal, they cancel perfectly. Same for East and West. Always compute net displacement on each axis before applying Pythagoras."
+      },
+      "readAloudPrompt": "Path: 6 km North, 6 km South. What is the net North-South displacement?",
+      "tryPrompt": "Full path: 5 km North, 5 km East, 5 km South. What is the shortest distance from the start? Draw it!",
+      "masteryCheck": "5 km East",
+      "instantFeedbackWin": "Correct! North and South cancel (5-5=0). Net displacement = 5 km East. Distance from start = 5 km. Clean answer — no Pythagoras needed!",
+      "instantFeedbackRetry": "Here's a trick: 5 km N then 5 km S — those cancel: net N-S = 0. Remaining: 5 km E. The person is just 5 km East of start.",
+      "reviewPrompt": "Practice: 3 km N, 4 km E, 3 km N, 4 km W. How far and in what direction from start?",
+      "xpReward": 14,
+      "badgeFocus": "Path Tracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group C for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Pythagorean Distance",
+      "missionStepTitle": "Exercise D: Shortest Distance Using Pythagoras",
+      "coachHook": "Let's crack this code! When your path makes an L-shape, Pythagoras gives you the straight-line shortcut home. a²+b²=c² — the most powerful tool in direction problems!",
+      "boardDemo": {
+        "title": "Pythagoras in Direction Problems",
+        "steps": [
+          "L-shaped path: a km in one direction, b km perpendicular",
+          "The start, turn point, and end form a right triangle",
+          "Hypotenuse c = √(a² + b²)",
+          "Check for Pythagorean triples first: 3-4-5, 5-12-13, 8-15-17"
+        ],
+        "teacherLine": "The Pythagorean triple check saves time in exams. See 3 and 4? Answer is 5. See 5 and 12? Answer is 13. Recognise the triple instantly."
+      },
+      "readAloudPrompt": "A girl walks 12 km East then 5 km North. What is the straight-line distance back to start?",
+      "tryPrompt": "A boy walks 8 km West then 15 km North. What is the shortest distance from his starting point?",
+      "masteryCheck": "17 km",
+      "instantFeedbackWin": "Outstanding! 8 and 15 — that is the 8-15-17 Pythagorean triple! Distance = 17 km. You recognised the triple instantly — that is exam speed!",
+      "instantFeedbackRetry": "Here's a trick: 8²+15² = 64+225 = 289. √289 = 17. Distance = 17 km. Remember the 8-15-17 triple!",
+      "reviewPrompt": "Quick: someone walks 7 km South and 24 km East. What is the shortest distance from start?",
+      "xpReward": 16,
+      "badgeFocus": "Pythagorean Pathfinder",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group D for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Final Position and Direction After Turns",
+      "missionStepTitle": "Exercise E: Final Position After Multiple Turns",
+      "coachHook": "Let's crack this code! Track both WHERE the person is AND which way they are facing at the end. Two answers needed — position and facing direction.",
+      "boardDemo": {
+        "title": "Position + Final Facing Direction",
+        "steps": [
+          "Problem: Start facing North. Walk 4 km N. Turn right. Walk 3 km E. Turn right. Walk 2 km S.",
+          "After all moves: 2 km North and 3 km East of start",
+          "Facing direction: started N, turned right (→E), turned right again (→S)",
+          "Final facing: South"
+        ],
+        "teacherLine": "Track the facing direction separately from the position. Each right turn adds one step clockwise in the direction ring. Count the total turns to find final facing."
+      },
+      "readAloudPrompt": "A person starts facing East, walks 3 km, turns left, walks 4 km, turns right. What direction are they now facing?",
+      "tryPrompt": "Start facing North. Walk 5 km North, turn left, walk 3 km West, turn right. (1) Final facing direction? (2) How far from start?",
+      "masteryCheck": "North | √34 km (or approx 5.8 km)",
+      "instantFeedbackWin": "Correct! Turns: N → left (W) → right (N). Final facing = North. Position: 5N-3W, distance = √(25+9) = √34 ≈ 5.8 km. Both answers — full marks!",
+      "instantFeedbackRetry": "Here's a trick: track turns separately. Start N, turn left = face W, turn right = face N again. For distance: 5 km N and 3 km W form a right triangle: √(5²+3²)=√34.",
+      "reviewPrompt": "Quick: start facing South, turn right twice, walk 5 km, turn left. What direction are you facing?",
+      "xpReward": 17,
+      "badgeFocus": "Position and Heading Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group E for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Shortest Distance Between Two Points on a Path",
+      "missionStepTitle": "Exercise F: Shortest Path Between Two Points",
+      "coachHook": "Let's crack this code! Sometimes you need the distance between the person's current position and a specific point they passed earlier — not the start!",
+      "boardDemo": {
+        "title": "Distance Between Mid-Path Points",
+        "steps": [
+          "Problem: Walk 6 km N (Point A), then 8 km E (Point B), then 6 km S (Point C).",
+          "Distance from A to C? A is at (0,6) relative to start, C is at (8,0) relative to start.",
+          "Horizontal diff: 8, Vertical diff: 6. Distance AC = √(8²+6²) = √(64+36) = √100 = 10 km."
+        ],
+        "teacherLine": "Mark coordinates for each point in your diagram. Use (East, North) as (x, y). Distance between two points = √((x2-x1)² + (y2-y1)²)."
+      },
+      "readAloudPrompt": "A man walks 3 km East to Point A, then 4 km North to Point B. What is the direct distance from his start to Point B?",
+      "tryPrompt": "A woman walks 9 km East, then 12 km North. What is the straight-line distance from her start to her current position?",
+      "masteryCheck": "15 km",
+      "instantFeedbackWin": "Brilliant! 9 and 12 — that is a 9-12-15 triple (multiple of 3-4-5). Distance = 15 km. Recognised the triple: 3×(3-4-5) = 9-12-15. Pro move!",
+      "instantFeedbackRetry": "Here's a trick: 9²+12² = 81+144 = 225. √225 = 15. Or notice 9=3×3, 12=3×4 — it is 3×(3-4-5), so hypotenuse = 3×5=15.",
+      "reviewPrompt": "Practice: walk 5 km North to A, then 12 km East to B, then 5 km South to C. Distance from A to C?",
+      "xpReward": 18,
+      "badgeFocus": "Distance Calculator",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group F for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Facing Direction After Multiple Turns",
+      "missionStepTitle": "Exercise G: Facing Direction After Many Turns",
+      "coachHook": "Let's crack this code! Long chains of turns — 5, 6, even 8 turns. Instead of tracing each one, use modular arithmetic: 4 right turns = full circle = back to start!",
+      "boardDemo": {
+        "title": "Modular Turn Counting — 4 Turns = Full Cycle",
+        "steps": [
+          "4 right turns = full 360° = same direction as start",
+          "Count net right turns: subtract left turns from right turns",
+          "Net 1 right = 90° CW, net 2 right = 180° (opposite), net 3 right = 270° CW (=90° CCW)",
+          "Example: 5 right turns − 1 left turn = 4 net rights = back to start direction"
+        ],
+        "teacherLine": "Divide the net number of right turns by 4 — only the remainder matters! Remainder 0 = same direction. Remainder 1 = 90° CW. Remainder 2 = 180° flip. Remainder 3 = 90° CCW."
+      },
+      "readAloudPrompt": "Starting facing East: 6 right turns and 2 left turns. Net right turns = 4. What direction are you facing?",
+      "tryPrompt": "Start facing North: 7 right turns, 3 left turns. Net rights = 4. Remainder = 0. What is the final facing direction?",
+      "masteryCheck": "North",
+      "instantFeedbackWin": "Spot on! Net 4 rights = full circle = back to North. Modular turn counting wins! You just solved 10 turns in 3 seconds.",
+      "instantFeedbackRetry": "Here's a trick: 7 right - 3 left = 4 net right turns. 4 right turns = 360° = full circle. You end facing the same direction you started: North.",
+      "reviewPrompt": "Quick: start facing West, 9 right turns, 5 left turns. Net = 4. Final direction?",
+      "xpReward": 20,
+      "badgeFocus": "Modular Turn Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group G for Direction & Distance."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Speed Round: Mixed Direction & Distance",
+      "missionStepTitle": "Exercise H: Olympiad Speed Round",
+      "coachHook": "Let's crack this code — FAST! Mixed direction and distance problems at Olympiad pace. Draw fast, calculate fast, state both position and facing direction!",
+      "boardDemo": {
+        "title": "Speed Checklist — 3 Questions in 90 Seconds",
+        "steps": [
+          "Step 1: Draw path immediately (no hesitation)",
+          "Step 2: Cancel opposite-direction legs",
+          "Step 3: Check for Pythagorean triples before using √",
+          "Step 4: Count net turns (mod 4) for facing direction",
+          "Goal: under 30 seconds per question"
+        ],
+        "teacherLine": "Olympiad direction questions always have clean answers — Pythagorean triples or exact cancellations. If your answer looks messy (like √41), check your diagram before committing."
+      },
+      "readAloudPrompt": "Ready for the speed round? 3 questions coming. State the distance AND the final facing direction.",
+      "tryPrompt": "Q1: Walk 15 km N, 20 km E — distance from start? | Q2: Face S, turn right 3 times — facing direction? | Q3: Walk 6 N, 8 E, 6 S — distance from start?",
+      "masteryCheck": "25 km | West | 8 km East",
+      "instantFeedbackWin": "INCREDIBLE! Q1: 15-20-25 triple (5×3-4-5). Q2: S+3 rights = S→W→N→E = East. Wait — S,W,N,E: 3 rights from S = East. Q3: N and S cancel, net 8 km East = 8 km. Direction Maze fully navigated!",
+      "instantFeedbackRetry": "Here's a trick: Q1: 15=5×3, 20=5×4 → hypotenuse=5×5=25. Q2: S→right→W→right→N→right→E, so 3 rights from S = East. Q3: 6N and 6S cancel, only 8E remains.",
+      "reviewPrompt": "Final recap: state the three steps for solving any direction and distance problem.",
+      "xpReward": 25,
+      "badgeFocus": "Direction Maze Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Direction & Distance",
+        "caption": "Group H for Direction & Distance."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "compass",
+      "kind": "svg",
+      "asset": "compass.svg",
+      "title": "Direction & Distance",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

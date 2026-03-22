@@ -1,0 +1,534 @@
+{
+  "chapterCode": "AR_G4_L5_CODING",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Simple Coding",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 5: Simple Coding",
+  "estimatedMinutes": 13,
+  "subtopics": [
+    "Letter-shift coding (A=B, B=C ...)",
+    "Reverse alphabet coding (A=Z, B=Y ...)",
+    "Number-for-letter coding (A=1, B=2 ...)",
+    "Simple symbol substitution",
+    "Word coding — encode a word using the rule",
+    "Decode a coded message back to the original"
+  ],
+  "learningGoals": [
+    "Apply a letter-shift rule to encode and decode simple words.",
+    "Use a number code (A=1, B=2...) to encode and decode short words.",
+    "Spot the coding rule from one given example and apply it to a new word."
+  ],
+  "coreIdeas": [
+    "A code replaces each letter with a different letter, number, or symbol using a fixed rule.",
+    "To crack a code: find what rule changes A to the coded letter, then apply that same rule to every letter.",
+    "Encoding means hiding the message; decoding means finding the original message."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "In a code, A is written as B, B as C, C as D. How is CAT written in this code?",
+      "solution": "Each letter shifts +1 forward. C→D, A→B, T→U. So CAT is coded as DBU.",
+      "concept": "Letter-shift coding (+1 forward)"
+    },
+    {
+      "id": "WE2",
+      "problem": "In a code, A=1, B=2, C=3 ... Z=26. How is DOG written in numbers?",
+      "solution": "D=4, O=15, G=7. So DOG is coded as 4-15-7.",
+      "concept": "Number-for-letter coding (A=1, B=2 ...)"
+    },
+    {
+      "id": "WE3",
+      "problem": "In a code, A is written as Z, B as Y, C as X (reverse alphabet). How is CAT written?",
+      "solution": "C→X, A→Z, T→G. So CAT is coded as XZG.",
+      "concept": "Reverse alphabet coding (A=Z, B=Y ...)"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach opens Simple Coding by pretending to send a secret message: 'BFF = AGG if we shift each letter back by one!' This instantly sparks curiosity. Spark then explains the encode/decode concept and the three types of codes before the first exercise.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers in Groups A–B, slow down and work letter-by-letter using the alphabet strip before continuing."
+    },
+    "mission": {
+      "missionTitle": "Crack the Secret Code",
+      "missionPromise": "By the end, you will encode and decode secret messages using shift codes, number codes, and reverse codes — just like a real spy!",
+      "successCelebration": "Award a badge pulse and coach cheer after every correct group. At lesson end, show 'Code Breaker' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a spy-themed hook.",
+      "Coach shows a worked encode/decode example step by step.",
+      "Coach reads the practice question with the code rule stated clearly.",
+      "Student applies the rule to encode or decode the word.",
+      "Instant feedback shows the letter-by-letter working.",
+      "Review question confirms mastery before next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 22 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one badge tied to the code type.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach writing out the alphabet with the coded version directly below.",
+      "practiceStyle": "Offer a shorter 2-letter word to encode/decode.",
+      "masteryRule": "Advance only after a correct full encoding or decoding.",
+      "revisitRule": "Any group with two errors returns at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L5_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, secret agent! Welcome to Simple Coding — where you learn to write and crack secret messages! Spies use codes all the time. A code takes each letter of a word and changes it using a special rule. If you know the rule, you can encode any message and decode any mystery! Today we will learn three cool codes: the shift code, the number code, and the reverse alphabet code. Ready to go undercover?",
+        "boardAction": "Write 'Simple Coding' as the title. Below, list the three codes: (1) Shift code — move each letter forward or backward, (2) Number code — A=1, B=2..., (3) Reverse code — A=Z, B=Y...",
+        "checkpointPrompt": "Quick warm-up: if A is written as B and B is written as C, what letter does D become?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "E — each letter moves one step forward.",
+        "fallbackHint": "The rule is: add 1 to the letter's position. D is the 4th letter; 4+1=5; the 5th letter is E!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l5_title",
+            "x": "40",
+            "y": "30",
+            "text": "Simple Coding — Chapter 5",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l5_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l5_code1",
+            "x": "60",
+            "y": "80",
+            "text": "1. Shift code:    A→B, B→C, C→D ...",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l5_code2",
+            "x": "60",
+            "y": "108",
+            "text": "2. Number code:   A=1, B=2, C=3 ...",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l5_code3",
+            "x": "60",
+            "y": "136",
+            "text": "3. Reverse code:  A=Z, B=Y, C=X ...",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "alphabet_grid.svg",
+          "title": "Simple Coding",
+          "caption": "Screenplay beat for Simple Coding."
+        }
+      },
+      {
+        "beatId": "AR_G4_L5_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me encode a word using the +1 shift code! I want to encode the word CAT. Rule: each letter moves one step forward in the alphabet. C is the 3rd letter — one step forward is D. A is the 1st — one step forward is B. T is the 20th — one step forward is U. So CAT becomes DBU. To decode DBU, I just reverse the rule — move each letter one step BACK: D→C, B→A, U→T. That gives me back CAT!",
+        "boardAction": "Write C → D, A → B, T → U on the board side by side. Circle DBU as the coded word. Below, show decoding: D → C, B → A, U → T → CAT.",
+        "checkpointPrompt": "Your turn: encode the word SUN using the +1 shift code.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "TVO — S→T, U→V, N→O.",
+        "fallbackHint": "S is the 19th letter; 19+1=20=T. U is 21st; 21+1=22=V. N is 14th; 14+1=15=O. SUN = TVO.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_encode",
+            "x": "60",
+            "y": "60",
+            "text": "Encode CAT with +1 shift:",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_letters",
+            "x": "60",
+            "y": "95",
+            "text": "C(3) → D(4)    A(1) → B(2)    T(20) → U(21)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.7,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_result",
+            "x": "60",
+            "y": "130",
+            "text": "CAT is coded as: D B U",
+            "color": "#dc2626",
+            "size": 14,
+            "delaySec": 1.4,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "alphabet_grid.svg",
+          "title": "Simple Coding",
+          "caption": "Screenplay beat for Simple Coding."
+        }
+      },
+      {
+        "beatId": "AR_G4_L5_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have all three code types — shift, number, and reverse. Now it is time to put on your spy hat! Work through Groups A to G. For every question, first write down the rule, then apply it letter by letter. Never rush — secret agents are careful and accurate!",
+        "boardAction": "Write alphabet strip A=1 through Z=26 for reference. Show reverse code pairs: A-Z, B-Y, C-X, D-W, E-V, F-U, G-T, H-S, I-R, J-Q, K-P, L-O, M-N.",
+        "checkpointPrompt": "Quick check: in the number code A=1, B=2 ... what is the number for the letter M?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "13 — M is the 13th letter.",
+        "fallbackHint": "Count the alphabet: A=1, B=2, C=3 ... J=10, K=11, L=12, M=13. M is number 13!",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Alphabet Reference Strip",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_strip1",
+            "x": "40",
+            "y": "65",
+            "text": "A=1  B=2  C=3  D=4  E=5  F=6  G=7  H=8  I=9",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_strip2",
+            "x": "40",
+            "y": "90",
+            "text": "J=10  K=11  L=12  M=13  N=14  O=15  P=16  Q=17",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_strip3",
+            "x": "40",
+            "y": "115",
+            "text": "R=18  S=19  T=20  U=21  V=22  W=23  X=24  Y=25  Z=26",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "alphabet_grid.svg",
+          "title": "Simple Coding",
+          "caption": "Screenplay beat for Simple Coding."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Letter-shift coding (+1 forward)",
+      "missionStepTitle": "Exercise A: Shift Each Letter Forward",
+      "coachHook": "Let's figure this out together! Move every letter one step forward in the alphabet. A→B, B→C, C→D ...",
+      "boardDemo": {
+        "title": "+1 Shift Code — Encode",
+        "steps": [
+          "Rule: every letter moves +1 forward",
+          "Word: BIG",
+          "B(2) → C(3), I(9) → J(10), G(7) → H(8)",
+          "BIG encoded = CJH"
+        ],
+        "teacherLine": "Write the alphabet positions under each letter. Add 1 to each position. Write the new letter above. That is your coded word!"
+      },
+      "readAloudPrompt": "Using the +1 shift code, what does the word RUN become when encoded?",
+      "tryPrompt": "Now you try: encode the word CAP using the +1 shift rule.",
+      "masteryCheck": "DBQ",
+      "instantFeedbackWin": "Spot on! C→D, A→B, P→Q. CAP becomes DBQ. Secret agent approved!",
+      "instantFeedbackRetry": "Here's a trick: write the position of each letter — C=3, A=1, P=16. Add 1: 4, 2, 17. Convert back: D, B, Q. So CAP = DBQ.",
+      "reviewPrompt": "Quick: encode the word HAT using the +1 shift rule.",
+      "xpReward": 10,
+      "badgeFocus": "Shift Encoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group A for Simple Coding."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Letter-shift coding — decode",
+      "missionStepTitle": "Exercise B: Decode the Shift Message",
+      "coachHook": "Let's figure this out together! To decode a +1 shift message, reverse the rule — move every letter one step BACK.",
+      "boardDemo": {
+        "title": "+1 Shift Code — Decode",
+        "steps": [
+          "Coded word: FPY",
+          "Rule to decode: move each letter -1 back",
+          "F(6) → E(5), P(16) → O(15), Y(25) → X(24)",
+          "FPY decoded = EOX",
+          "Wait — let us check: EOX does not make a word. Try: F→E, P→O, Y→X. EOX. Sometimes coded words do not spell real words — that is the secret!"
+        ],
+        "teacherLine": "Decoding is just encoding in reverse. If the rule was +1, to decode you do -1. Move every letter one step BACK in the alphabet."
+      },
+      "readAloudPrompt": "A secret message says TVO. If the code was +1 shift, what is the original word?",
+      "tryPrompt": "Your turn: decode the message IFM using the +1 shift code (move each letter back by 1).",
+      "masteryCheck": "HEL",
+      "instantFeedbackWin": "Great decoding! I(9)→H(8), F(6)→E(5), M(13)→L(12). IFM decoded = HEL. Mission accomplished!",
+      "instantFeedbackRetry": "Here's a trick: coding was +1, so decoding is −1. I is the 9th letter, minus 1 = 8th = H. F is 6th, minus 1 = 5th = E. M is 13th, minus 1 = 12th = L.",
+      "reviewPrompt": "Quick: decode DBQ using the +1 shift code.",
+      "xpReward": 12,
+      "badgeFocus": "Shift Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group B for Simple Coding."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Number-for-letter coding (A=1, B=2 ...)",
+      "missionStepTitle": "Exercise C: Numbers as Letters",
+      "coachHook": "Let's figure this out together! Every letter has a number — A=1, B=2 right up to Z=26. Turn the word into a number sequence!",
+      "boardDemo": {
+        "title": "Number Code — A=1, B=2 ...",
+        "steps": [
+          "Word: SUN",
+          "S=19, U=21, N=14",
+          "Coded message: 19-21-14",
+          "To decode: replace each number with its letter (count to that position)"
+        ],
+        "teacherLine": "The number code is like turning every letter into its position in the alphabet. S is the 19th letter, so S=19. Decode by counting to that position in the alphabet."
+      },
+      "readAloudPrompt": "What is the number code for the word CAT? (A=1, B=2 ... C=3, T=20)",
+      "tryPrompt": "Your turn: encode the word DOG using the number code (D=4, O=15, G=7).",
+      "masteryCheck": "4-15-7",
+      "instantFeedbackWin": "Yes! D=4, O=15, G=7. DOG becomes 4-15-7. You cracked the number code!",
+      "instantFeedbackRetry": "Here's a trick: count D in the alphabet — A=1, B=2, C=3, D=4. Count O: that is the 15th letter. G is the 7th. So DOG = 4-15-7.",
+      "reviewPrompt": "Quick: decode 2-9-7 using the number code (A=1, B=2 ...).",
+      "xpReward": 12,
+      "badgeFocus": "Number Coder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group C for Simple Coding."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Reverse alphabet coding (A=Z, B=Y ...)",
+      "missionStepTitle": "Exercise D: Reverse Alphabet Code",
+      "coachHook": "Let's figure this out together! In the reverse code, A becomes Z and Z becomes A — the alphabet is flipped upside down!",
+      "boardDemo": {
+        "title": "Reverse Code — Mirror the Alphabet",
+        "steps": [
+          "A(1) ↔ Z(26), B(2) ↔ Y(25), C(3) ↔ X(24) ...",
+          "Rule: add the position + reverse position = 27 always!",
+          "Word: CAT → C(3)=X(24), A(1)=Z(26), T(20)=G(7)",
+          "CAT in reverse code = XZG"
+        ],
+        "teacherLine": "Magic trick: to find the reverse code of any letter, subtract its position from 27. C=3, 27−3=24=X. A=1, 27−1=26=Z. T=20, 27−20=7=G."
+      },
+      "readAloudPrompt": "In the reverse code, what does the letter M (position 13) become? (Hint: 27 − 13 = ?)",
+      "tryPrompt": "Your turn: encode the word BIG using the reverse code (27 minus position of each letter).",
+      "masteryCheck": "YRT — B(2)=Y(25), I(9)=R(18), G(7)=T(20)",
+      "instantFeedbackWin": "Brilliant! B=2 → 27-2=25=Y. I=9 → 27-9=18=R. G=7 → 27-7=20=T. BIG = YRT. Reverse code mastered!",
+      "instantFeedbackRetry": "Here's a trick: use the magic formula 27 − position = reverse. B is position 2: 27−2=25, the 25th letter is Y. I is position 9: 27−9=18=R. G is 7: 27−7=20=T.",
+      "reviewPrompt": "Quick: decode YRT back to the original word using the reverse code.",
+      "xpReward": 14,
+      "badgeFocus": "Reverse Coder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group D for Simple Coding."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Spot the coding rule from one example",
+      "missionStepTitle": "Exercise E: Find the Code Rule",
+      "coachHook": "Let's figure this out together! You are given one coded example. Use it to figure out the secret rule — then apply it to a new word!",
+      "boardDemo": {
+        "title": "Crack the Rule from One Clue",
+        "steps": [
+          "Given: if CAT is coded as DBU",
+          "Compare: C→D, A→B, T→U",
+          "C(3)→D(4): moved +1 forward",
+          "A(1)→B(2): moved +1 forward",
+          "T(20)→U(21): moved +1 forward",
+          "Rule found: +1 shift. Now apply to any new word!"
+        ],
+        "teacherLine": "To find the rule, compare the original letter with the coded letter. Find what number was added or subtracted to the position. Confirm with a second letter. Once confirmed, apply the same rule to the new word."
+      },
+      "readAloudPrompt": "If DOG is coded as EPH, what is the rule? (D=4, E=5; O=15, P=16; G=7, H=8)",
+      "tryPrompt": "Given that CAT = DBU, how would you write the word SUN in the same code?",
+      "masteryCheck": "TVO — S(19)→T(20), U(21)→V(22), N(14)→O(15)",
+      "instantFeedbackWin": "You got it! Rule = +1 shift. S→T, U→V, N→O. SUN = TVO. Rule-spotting champion!",
+      "instantFeedbackRetry": "Here's a trick: C→D is +1. Use that rule on every letter of SUN. S is 19, add 1 = 20 = T. U is 21, add 1 = 22 = V. N is 14, add 1 = 15 = O.",
+      "reviewPrompt": "Quick: if A is coded as C, B as D, C as E — what is the code rule and what does the word BIG become?",
+      "xpReward": 16,
+      "badgeFocus": "Rule Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group E for Simple Coding."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Simple symbol substitution",
+      "missionStepTitle": "Exercise F: Symbol Codes",
+      "coachHook": "Let's figure this out together! Sometimes letters are replaced by symbols — stars, circles, triangles. Crack the symbol table and decode the message!",
+      "boardDemo": {
+        "title": "Symbol Substitution Code",
+        "steps": [
+          "Code table: A=★, B=●, C=▲, D=■, E=◆",
+          "Coded message: ▲★● ■◆",
+          "Decode: ▲=C, ★=A, ●=B, ■=D, ◆=E",
+          "Message: C A B  D E → CAB DE"
+        ],
+        "teacherLine": "A symbol code is the same as any other code — just look up the symbol in the code table to find the letter. Always decode one symbol at a time, left to right."
+      },
+      "readAloudPrompt": "Code table: A=1, E=2, I=3, O=4, U=5. What does the code '3 4 5' say?",
+      "tryPrompt": "Your turn: if ★=S, ●=U, ▲=N — what word does ★●▲ spell?",
+      "masteryCheck": "SUN",
+      "instantFeedbackWin": "Correct! ★=S, ●=U, ▲=N. ★●▲ = SUN. Symbol decoding unlocked!",
+      "instantFeedbackRetry": "Here's a trick: use the code table like a dictionary. Look up each symbol one at a time. ★ = S, ● = U, ▲ = N. Put them together: SUN.",
+      "reviewPrompt": "Create your own mini symbol code for 3 letters and encode a 3-letter word. Then ask a friend to decode it!",
+      "xpReward": 18,
+      "badgeFocus": "Symbol Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group F for Simple Coding."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Decode a coded message back to the original",
+      "missionStepTitle": "Exercise G: Full Message Decode Challenge",
+      "coachHook": "Let's figure this out together — this is the big mission! A full coded sentence is waiting. Find the rule, decode every word, and reveal the secret message!",
+      "boardDemo": {
+        "title": "Full Decode — Step by Step",
+        "steps": [
+          "Coded message: IFMMP (using +1 shift code)",
+          "Decode each letter: I→H, F→E, M→L, M→L, P→O",
+          "Decoded: H E L L O",
+          "Message: HELLO",
+          "Always apply the decode rule (reverse of encode rule) to every letter"
+        ],
+        "teacherLine": "Decode word by word, letter by letter. Write the decode rule at the top of your working area. Then go through every letter patiently. Accuracy beats speed here!"
+      },
+      "readAloudPrompt": "Using the +1 shift decode (move each letter back by 1), what does XPSME mean?",
+      "tryPrompt": "Final challenge: decode the message 23-15-18-12-4 using the number code (A=1, B=2 ...).",
+      "masteryCheck": "WORLD — W=23, O=15, R=18, L=12, D=4",
+      "instantFeedbackWin": "AMAZING! 23=W, 15=O, 18=R, 12=L, 4=D. The message says WORLD. You decoded a full message like a true spy!",
+      "instantFeedbackRetry": "Here's a trick: convert each number to its alphabet position. 23=W (count to 23rd letter), 15=O, 18=R, 12=L, 4=D. Put them together: WORLD.",
+      "reviewPrompt": "Final review: encode the word STAR using the +1 shift code, then swap with a classmate to decode!",
+      "xpReward": 22,
+      "badgeFocus": "Master Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Simple Coding",
+        "caption": "Group G for Simple Coding."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "alphabet_grid",
+      "kind": "svg",
+      "asset": "alphabet_grid.svg",
+      "title": "Simple Coding",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

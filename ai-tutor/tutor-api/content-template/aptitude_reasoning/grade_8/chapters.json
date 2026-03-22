@@ -1,0 +1,20 @@
+{
+  "courseId": "aptitude_reasoning_g8",
+  "courseName": "MindSpark Grade 8 — Aptitude & Reasoning",
+  "tagline": "Think Sharp, Reason Fast",
+  "gradeLevel": 8,
+  "targetAudience": "Grade 8 students (age 13–14)",
+  "avatarTone": "challenging-mentor",
+  "hintStyle": "Think systematically — here's the key insight...",
+  "questionFormat": ["MCQ", "short-text"],
+  "chapters": [
+    { "chapterCode": "AR_G8_L1_SEQUENCES",   "title": "Advanced Sequences",          "order": 1, "estimatedMinutes": 18 },
+    { "chapterCode": "AR_G8_L2_SEATING",     "title": "Seating Arrangements",        "order": 2, "estimatedMinutes": 20 },
+    { "chapterCode": "AR_G8_L3_SYLLOGISM",   "title": "Syllogisms",                  "order": 3, "estimatedMinutes": 18 },
+    { "chapterCode": "AR_G8_L4_BLOOD_REL",   "title": "Complex Blood Relations",     "order": 4, "estimatedMinutes": 18 },
+    { "chapterCode": "AR_G8_L5_CODING",      "title": "Advanced Coding-Decoding",    "order": 5, "estimatedMinutes": 18 },
+    { "chapterCode": "AR_G8_L6_DATA_INTERP", "title": "Data Interpretation",         "order": 6, "estimatedMinutes": 20 },
+    { "chapterCode": "AR_G8_L7_CRITICAL",    "title": "Critical Reasoning",          "order": 7, "estimatedMinutes": 20 },
+    { "chapterCode": "AR_G8_L8_PUZZLES",     "title": "Complex Logical Puzzles",     "order": 8, "estimatedMinutes": 20 }
+  ]
+}

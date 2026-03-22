@@ -1,0 +1,568 @@
+{
+  "chapterCode": "AR_G5_L1_NUMBER_SERIES",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Number Series",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 1: Number Series",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Arithmetic Progression (AP) — constant difference",
+    "Geometric Progression (GP) — constant ratio",
+    "Alternate series — odd-position and even-position terms",
+    "Square number series (1, 4, 9, 16 …)",
+    "Cube number series (1, 8, 27, 64 …)",
+    "Prime number series (2, 3, 5, 7, 11 …)"
+  ],
+  "learningGoals": [
+    "Find the missing term in an AP by identifying the constant difference.",
+    "Find the missing term in a GP by identifying the constant ratio.",
+    "Recognise alternate series by separating odd and even position terms.",
+    "Identify square, cube, and prime number series by their known patterns."
+  ],
+  "coreIdeas": [
+    "Always subtract neighbouring terms first — if the gap is constant, it is an AP.",
+    "If subtraction gives unequal gaps, try dividing — a constant quotient means GP.",
+    "Alternate series have two interleaved patterns; write odd-position and even-position terms separately.",
+    "Memorise squares up to 12² and cubes up to 6³ so you can spot them instantly."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "3, 7, 11, 15, __ — What is the next number?",
+      "solution": "Differences: 7-3=4, 11-7=4, 15-11=4. Common difference = 4. Next term = 15+4 = 19.",
+      "concept": "Arithmetic Progression — constant difference of 4"
+    },
+    {
+      "id": "WE2",
+      "problem": "2, 6, 18, 54, __ — What is the next number?",
+      "solution": "Ratios: 6÷2=3, 18÷6=3, 54÷18=3. Common ratio = 3. Next term = 54×3 = 162.",
+      "concept": "Geometric Progression — constant ratio of 3"
+    },
+    {
+      "id": "WE3",
+      "problem": "1, 4, 2, 8, 3, 16, 4, __ — What is the next number?",
+      "solution": "Odd positions: 1, 2, 3, 4 — AP with +1. Even positions: 4, 8, 16 — GP with ×2. Next term is in even position: 16×2 = 32.",
+      "concept": "Alternate series — two interleaved patterns"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark (the AI coach) greets the learner by name and asks their goal. The first question is a simple AP series with single-digit terms to build confidence.",
+      "placementRule": "Start at Group A for everyone. If two consecutive errors occur in Groups A–B, reteach with simpler two-term examples before continuing."
+    },
+    "mission": {
+      "missionTitle": "Crack the Number Code",
+      "missionPromise": "By the end you will spot AP, GP, alternate, square, cube, and prime series in seconds — like a maths superhero!",
+      "successCelebration": "Show an XP burst and coach cheer after each correct group. At lesson end, award the 'Number Detective' trophy with a confetti animation."
+    },
+    "microLessonPattern": [
+      "Coach opens each group with a 'Let's crack this code!' hook naming the series type.",
+      "Coach works one example on the board step-by-step, showing the gap or ratio.",
+      "Coach reads the practice question aloud slowly.",
+      "Student attempts the answer before the solution is shown.",
+      "Instant feedback celebrates correct answers or gives a targeted hint on first error.",
+      "A short review question confirms mastery before the next group begins."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per exercise group, increasing through the lesson.",
+      "streakRule": "Show streak flame; allow one free retry before the streak resets.",
+      "badgeRule": "Each group unlocks one badge tied to the series type mastered.",
+      "celebrationStyle": "Coach praise line + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts on the same group trigger a mini-reteach with a simpler version of the pattern.",
+      "practiceStyle": "Offer one easier follow-up question before advancing.",
+      "masteryRule": "Advance only when the student answers correctly and completes the tryPrompt.",
+      "revisitRule": "Any group with two errors returns as a review card at the start of the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L1_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hi there, curious mind! Welcome to Number Series — one of the coolest puzzles in all of maths! Every series hides a secret rule. Your job is to find that rule and complete the series. Today we will explore six exciting types: AP (equal gaps), GP (equal multipliers), alternate series, square numbers, cube numbers, and prime numbers. Once you know the types, spotting the rule takes just a few seconds!",
+        "boardAction": "Write 'Number Series — 6 Types' at the top. List: (1) AP — add same gap, (2) GP — multiply same ratio, (3) Alternate — two patterns in one, (4) Squares — 1,4,9,16…, (5) Cubes — 1,8,27,64…, (6) Primes — 2,3,5,7,11…",
+        "checkpointPrompt": "Quick warm-up: 2, 5, 8, 11, __ — what comes next and what is this pattern called?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "14, AP or arithmetic progression.",
+        "fallbackHint": "Subtract neighbours: 5-2=3, 8-5=3. The gap is always +3. Add 3 to 11 to get 14. This is an AP — Arithmetic Progression.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l1_title",
+            "x": "40",
+            "y": "30",
+            "text": "Number Series — 6 Types",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l1_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "520",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type1",
+            "x": "60",
+            "y": "74",
+            "text": "1. AP — add the same number every step",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type2",
+            "x": "60",
+            "y": "96",
+            "text": "2. GP — multiply by the same number every step",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type3",
+            "x": "60",
+            "y": "118",
+            "text": "3. Alternate — two mini-series mixed together",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type4",
+            "x": "60",
+            "y": "140",
+            "text": "4. Squares 5. Cubes 6. Primes — memorise & spot",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Number Series",
+          "caption": "Screenplay beat for Number Series."
+        }
+      },
+      {
+        "beatId": "AR_G5_L1_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you the AP trick live! Series: 4, 9, 14, 19, __ I subtract neighbours: 9-4=5, 14-9=5, 19-14=5. The gap is always 5 — that is my rule! Next term: 19+5 = 24. Now let me show a square series: 1, 4, 9, 16, 25 — these are 1², 2², 3², 4², 5². If you see a series like that, think squares first!",
+        "boardAction": "Write '4 → 9 → 14 → 19 → ?' with '+5' on each arrow. Circle 24. Below, write 1, 4, 9, 16, 25 and label 1², 2², 3², 4², 5².",
+        "checkpointPrompt": "Your turn: 6, 10, 14, 18, __ — what is the gap and the missing term?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Gap is 4, missing term is 22.",
+        "fallbackHint": "10-6=4, 14-10=4. The gap is +4. 18+4=22.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_ap_series",
+            "x": "50",
+            "y": "55",
+            "text": "4 —+5→ 9 —+5→ 14 —+5→ 19 —+5→ ?",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.6
+          },
+          {
+            "kind": "text",
+            "id": "demo_ap_answer",
+            "x": "50",
+            "y": "85",
+            "text": "Next term: 19 + 5 = 24",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "line",
+            "id": "demo_div2",
+            "x1": "50",
+            "y1": "105",
+            "x2": "500",
+            "y2": "105",
+            "color": "#d1d5db",
+            "width": 1,
+            "delaySec": 1.5,
+            "durationSec": 0.2
+          },
+          {
+            "kind": "text",
+            "id": "demo_squares",
+            "x": "50",
+            "y": "130",
+            "text": "Squares: 1² 2² 3² 4² 5² = 1, 4, 9, 16, 25",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 1.8,
+            "durationSec": 0.5
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Number Series",
+          "caption": "Screenplay beat for Number Series."
+        }
+      },
+      {
+        "beatId": "AR_G5_L1_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Excellent! You have the toolkit now. Remember the four-step check: first subtract (AP?), then divide (GP?), then split odd and even positions (alternate?), then recall squares, cubes, primes. Work through the groups below and I will be right here if you need a hint. Trust yourself — you are ready!",
+        "boardAction": "Show a quick reference: Step 1 Subtract neighbours (same gap → AP), Step 2 Divide neighbours (same ratio → GP), Step 3 Separate odd/even positions (two patterns → Alternate), Step 4 Recognise 1,4,9… / 1,8,27… / 2,3,5,7… (special series).",
+        "checkpointPrompt": "Before we start — which series goes 2, 4, 8, 16, 32? AP or GP?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "GP — each term is multiplied by 2.",
+        "fallbackHint": "Check: 4÷2=2, 8÷4=2, 16÷8=2 — the ratio is always 2. That constant multiplier means it is a GP — Geometric Progression.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "4-Step Series Checker",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_s1",
+            "x": "60",
+            "y": "62",
+            "text": "1. Subtract → same gap? → AP",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s2",
+            "x": "60",
+            "y": "84",
+            "text": "2. Divide → same ratio? → GP",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s3",
+            "x": "60",
+            "y": "106",
+            "text": "3. Split odd/even positions → Alternate",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s4",
+            "x": "60",
+            "y": "128",
+            "text": "4. Recognise squares / cubes / primes",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Number Series",
+          "caption": "Screenplay beat for Number Series."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Arithmetic Progression (AP) — constant difference",
+      "missionStepTitle": "Exercise A: AP Number Series",
+      "coachHook": "Let's crack this code! These numbers climb a staircase with equal steps — your job is to find the step size!",
+      "boardDemo": {
+        "title": "AP Series — Equal Steps",
+        "steps": [
+          "Write the series: 5, 9, 13, 17, __",
+          "Subtract neighbours: 9-5=4, 13-9=4, 17-13=4",
+          "Rule: add 4 every step",
+          "Missing term: 17+4 = 21"
+        ],
+        "teacherLine": "The gap is your secret weapon. Subtract any two neighbours — same answer each time means AP. Add that gap to the last term!"
+      },
+      "readAloudPrompt": "Look at: 8, 13, 18, 23, __ — what is the gap between each pair of neighbours?",
+      "tryPrompt": "Now you try: 6, 11, 16, 21, __ — find the gap, then give the next number!",
+      "masteryCheck": "26",
+      "instantFeedbackWin": "Yes! Gap is 5, so 21+5 = 26. You found the staircase step — brilliant!",
+      "instantFeedbackRetry": "Here's a trick: subtract 11-6. Got 5? Now 16-11 — still 5! That constant gap is your rule. Add 5 to 21.",
+      "reviewPrompt": "Quick check: 4, 10, 16, 22, __ — tell me the gap and the missing term.",
+      "xpReward": 10,
+      "badgeFocus": "AP Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group A for Number Series."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Geometric Progression (GP) — constant ratio",
+      "missionStepTitle": "Exercise B: GP Number Series",
+      "coachHook": "Let's crack this code! Now numbers are not adding — they are multiplying! Each term jumps by the same multiplier.",
+      "boardDemo": {
+        "title": "GP Series — Multiply Every Step",
+        "steps": [
+          "Write the series: 3, 9, 27, 81, __",
+          "Find ratio: 9÷3=3, 27÷9=3, 81÷27=3",
+          "Rule: multiply by 3 every step",
+          "Missing term: 81×3 = 243"
+        ],
+        "teacherLine": "Divide any term by the one before it. Same answer every time? That is your multiplier — the common ratio. Multiply the last term by it!"
+      },
+      "readAloudPrompt": "Look at: 2, 10, 50, 250, __ — what do you divide to find the ratio?",
+      "tryPrompt": "Your turn: 4, 8, 16, 32, __ — find the ratio, then the next number!",
+      "masteryCheck": "64",
+      "instantFeedbackWin": "Fantastic! 8÷4=2, ratio is 2. 32×2 = 64. You cracked the GP code!",
+      "instantFeedbackRetry": "Here's a trick: divide 8 by 4 — you get 2. Divide 16 by 8 — still 2. The common ratio is ×2. Multiply 32 by 2.",
+      "reviewPrompt": "Quick check: 5, 15, 45, 135, __ — give the ratio and the missing term.",
+      "xpReward": 12,
+      "badgeFocus": "GP Multiplier",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group B for Number Series."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Alternate series — odd and even position terms",
+      "missionStepTitle": "Exercise C: Alternate Series",
+      "coachHook": "Let's crack this code! Some series have TWO secret rules hiding inside — one for the odd positions and one for the even positions!",
+      "boardDemo": {
+        "title": "Alternate Series — Two Patterns in One",
+        "steps": [
+          "Series: 1, 3, 2, 6, 3, 12, 4, __",
+          "Odd positions (1st,3rd,5th,7th): 1, 2, 3, 4 → AP +1",
+          "Even positions (2nd,4th,6th): 3, 6, 12 → GP ×2",
+          "Next term is 8th (even): 12×2 = 24"
+        ],
+        "teacherLine": "Separate the series into two lists — odd-position terms and even-position terms. Find each list's rule independently, then answer for the correct position."
+      },
+      "readAloudPrompt": "Series: 2, 5, 4, 10, 6, 20, 8, __ — write out position 1,3,5,7 separately and position 2,4,6 separately. What rules do you see?",
+      "tryPrompt": "Your turn: 1, 2, 3, 4, 5, 8, 7, __ — separate odd and even positions and find the missing term!",
+      "masteryCheck": "16",
+      "instantFeedbackWin": "Excellent! Odd positions: 1,3,5,7 (+2). Even positions: 2,4,8 (×2). Next even: 8×2=16. You unlocked the double-pattern superpower!",
+      "instantFeedbackRetry": "Here's a trick: write only the 2nd, 4th, 6th terms: 2, 4, 8. That is ×2 each time. The 8th term continues this: 8×2=16.",
+      "reviewPrompt": "Quick check: 5, 1, 10, 2, 15, 3, 20, __ — identify the two patterns and give the next term.",
+      "xpReward": 14,
+      "badgeFocus": "Alternate Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group C for Number Series."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Square number series (1, 4, 9, 16, 25 …)",
+      "missionStepTitle": "Exercise D: Square Number Series",
+      "coachHook": "Let's crack this code! Squares are everywhere in maths — 1, 4, 9, 16, 25… Once you recognise them, you'll never miss a square series again!",
+      "boardDemo": {
+        "title": "Square Series — Perfect Squares",
+        "steps": [
+          "Remember: 1²=1, 2²=4, 3²=9, 4²=16, 5²=25, 6²=36",
+          "Series: 4, 9, 16, 25, 36, __",
+          "These are 2², 3², 4², 5², 6²",
+          "Next: 7² = 49"
+        ],
+        "teacherLine": "When differences are 3,5,7,9 — increasing odd numbers — think squares! The gaps between consecutive perfect squares always go up by 2."
+      },
+      "readAloudPrompt": "Series: 1, 4, 9, 16, 25, __ — these are squares of 1,2,3,4,5. What is the next square number?",
+      "tryPrompt": "Your turn: 9, 16, 25, 36, 49, __ — name the squares and give the next term!",
+      "masteryCheck": "64",
+      "instantFeedbackWin": "Perfect! 3²,4²,5²,6²,7² — next is 8²=64. You are a square-spotter now!",
+      "instantFeedbackRetry": "Here's a trick: 9=3², 16=4², 25=5², 36=6², 49=7². The next number is 8²=64.",
+      "reviewPrompt": "Quick check: 4, 16, 36, 64, __ — these are squares of even numbers. What comes next?",
+      "xpReward": 14,
+      "badgeFocus": "Square Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group D for Number Series."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Cube number series (1, 8, 27, 64 …)",
+      "missionStepTitle": "Exercise E: Cube Number Series",
+      "coachHook": "Let's crack this code! Cubes are squares taken one step further — 1, 8, 27, 64 are the first four cubes. Let's learn to spot them!",
+      "boardDemo": {
+        "title": "Cube Series — Perfect Cubes",
+        "steps": [
+          "Remember: 1³=1, 2³=8, 3³=27, 4³=64, 5³=125",
+          "Series: 8, 27, 64, 125, __",
+          "These are 2³, 3³, 4³, 5³",
+          "Next: 6³ = 216"
+        ],
+        "teacherLine": "Cube numbers grow very fast. Memorise the first six: 1, 8, 27, 64, 125, 216. When you see a series with those numbers, it is a cube series!"
+      },
+      "readAloudPrompt": "Series: 1, 8, 27, 64, 125, __ — these are cubes of 1,2,3,4,5. What is 6³?",
+      "tryPrompt": "Your turn: 27, 64, 125, 216, __ — name the cubes and give the next term!",
+      "masteryCheck": "343",
+      "instantFeedbackWin": "Amazing! 3³,4³,5³,6³ — next is 7³=343. Your cube knowledge is powerful!",
+      "instantFeedbackRetry": "Here's a trick: 27=3³, 64=4³, 125=5³, 216=6³. The next cube is 7³=7×7×7=343.",
+      "reviewPrompt": "Quick check: 1, 8, 27, __, 125 — what is the missing cube number?",
+      "xpReward": 16,
+      "badgeFocus": "Cube Cruncher",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group E for Number Series."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Prime number series (2, 3, 5, 7, 11 …)",
+      "missionStepTitle": "Exercise F: Prime Number Series",
+      "coachHook": "Let's crack this code! Prime numbers are special — they can only be divided by 1 and themselves. Recognising them quickly is a real superpower in reasoning!",
+      "boardDemo": {
+        "title": "Prime Series — Only Divisible by 1 and Itself",
+        "steps": [
+          "Primes in order: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29",
+          "Series: 3, 5, 7, 11, 13, __",
+          "These are consecutive prime numbers",
+          "Next prime after 13: 17"
+        ],
+        "teacherLine": "Memorise the first ten primes: 2,3,5,7,11,13,17,19,23,29. A prime series uses consecutive primes — just find where you are in that list and pick the next one."
+      },
+      "readAloudPrompt": "Series: 2, 3, 5, 7, 11, __ — these are the first five primes. What is the 6th prime number?",
+      "tryPrompt": "Your turn: 5, 7, 11, 13, 17, __ — name the next prime in this series!",
+      "masteryCheck": "19",
+      "instantFeedbackWin": "Spot on! Primes: 5,7,11,13,17,19. Next is 19. You are a Prime Detector!",
+      "instantFeedbackRetry": "Here's a trick: after 17 the next prime is 18? No — 18 is divisible by 2. Try 19 — is it divisible by anything other than 1 and 19? No! So 19 is prime.",
+      "reviewPrompt": "Quick check: 11, 13, 17, 19, 23, __ — what is the next prime number?",
+      "xpReward": 18,
+      "badgeFocus": "Prime Detector",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group F for Number Series."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Mixed series — speed round",
+      "missionStepTitle": "Exercise G: Speed Round — Mixed Series",
+      "coachHook": "Let's crack this code — FAST! One question from each type. Apply your 4-step check, trust your memory, and go!",
+      "boardDemo": {
+        "title": "Speed Round — All 6 Types",
+        "steps": [
+          "AP → subtract neighbours, add gap to last term",
+          "GP → divide neighbours, multiply ratio to last term",
+          "Alternate → separate odd/even positions, solve each",
+          "Squares → 1,4,9,16,25,36,49,64…",
+          "Cubes → 1,8,27,64,125,216…",
+          "Primes → 2,3,5,7,11,13,17,19,23,29…"
+        ],
+        "teacherLine": "You have all six tools. In the speed round, name the type first — that earns half the XP even if the answer needs a second try!"
+      },
+      "readAloudPrompt": "Ready? I'll give you three quick questions — name the type and the missing term for each!",
+      "tryPrompt": "Q1: 7, 12, 17, 22, __ | Q2: 4, 16, 36, 64, __ | Q3: 2, 3, 5, 7, 11, 13, __ — Go!",
+      "masteryCheck": "27 | 100 | 17",
+      "instantFeedbackWin": "AMAZING! Q1: AP +5 → 27. Q2: squares of even numbers (2²,4²,6²,8²,10²) → 100. Q3: primes → 17. Full marks — you are a Number Series Master!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — 12-7=5, add 5 to 22 → 27. Q2 — 4=2², 16=4², 36=6², 64=8², next is 10²=100. Q3 — primes after 13 is 17.",
+      "reviewPrompt": "Final recap: name all 6 series types you learned today and give one example of each!",
+      "xpReward": 20,
+      "badgeFocus": "Number Series Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Series",
+        "caption": "Group G for Number Series."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Number Series",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

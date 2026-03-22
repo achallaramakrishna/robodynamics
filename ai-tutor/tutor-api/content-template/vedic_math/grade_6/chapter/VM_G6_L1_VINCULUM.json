@@ -55,9 +55,21 @@
     "version": "2026-03-mindspark-g6-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Namaste! I am Arya, your Vedic Maths guide. Today we learn a magical notation called Vinculum — a bar that turns big, messy digits into small, friendly ones. Once you see this trick, arithmetic will never feel hard again!",
       "placementRule": "Start at beginner level. If the learner correctly identifies all digits > 5 immediately, skip Group A and start at Group B."
     },
@@ -88,7 +100,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -106,7 +122,12 @@
         "reviewPrompt": "Explain to Arya: why would we want to replace a digit like 9?",
         "xpReward": 10,
         "badgeFocus": "Vinculum Explorer",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "digits_above_5" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group A for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_A1",
@@ -118,11 +139,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In Vedic Maths, which digit is considered 'large' and a candidate for vinculum replacement?",
-            "options": ["3", "5", "7", "4"],
+            "options": [
+              "3",
+              "5",
+              "7",
+              "4"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "7",
             "hint": "Large digits are those greater than 5.",
-            "solution": "7 > 5, so it is a large digit that can be replaced using vinculum notation."
+            "solution": "7 > 5, so it is a large digit that can be replaced using vinculum notation.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group A for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_A2",
@@ -134,11 +166,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Ria says digit 4 is a 'large' Vedic digit. Is she correct?",
-            "options": ["Yes, 4 is large", "No, 4 is small — only digits above 5 are large", "Yes, anything above 3 is large", "No, only 9 is large"],
+            "options": [
+              "Yes, 4 is large",
+              "No, 4 is small — only digits above 5 are large",
+              "Yes, anything above 3 is large",
+              "No, only 9 is large"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "No, 4 is small — only digits above 5 are large",
             "hint": "Large means greater than 5.",
-            "solution": "Only 6, 7, 8, 9 are considered large in Vedic vinculum notation."
+            "solution": "Only 6, 7, 8, 9 are considered large in Vedic vinculum notation.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group A for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_A3",
@@ -150,11 +193,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "How many of the digits {2, 6, 8, 3, 9} are 'large' Vedic digits?",
-            "options": ["1", "2", "3", "4"],
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "3",
             "hint": "Count those greater than 5: 6, 8, 9.",
-            "solution": "6, 8, and 9 are greater than 5. That is 3 large digits."
+            "solution": "6, 8, and 9 are greater than 5. That is 3 large digits.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group A for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -172,7 +226,12 @@
         "reviewPrompt": "Quick fire: vinculum replacements for 6, 7, 8, 9.",
         "xpReward": 10,
         "badgeFocus": "Bar Notation Starter",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "single_digit_conversion" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group B for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_B1",
@@ -184,11 +243,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the vinculum (barred) replacement for the digit 6?",
-            "options": ["4̄ (barred 4)", "6̄ (barred 6)", "3̄ (barred 3)", "5̄ (barred 5)"],
+            "options": [
+              "4̄ (barred 4)",
+              "6̄ (barred 6)",
+              "3̄ (barred 3)",
+              "5̄ (barred 5)"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "4̄ (barred 4)",
             "hint": "10 − 6 = 4, so the barred digit is 4̄.",
-            "solution": "10 − 6 = 4. Replace 6 with 4̄ and carry 1 to the next position."
+            "solution": "10 − 6 = 4. Replace 6 with 4̄ and carry 1 to the next position.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group B for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_B2",
@@ -200,11 +270,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "The vinculum replacement for digit 9 is:",
-            "options": ["9̄", "2̄", "1̄", "3̄"],
+            "options": [
+              "9̄",
+              "2̄",
+              "1̄",
+              "3̄"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "1̄",
             "hint": "10 − 9 = 1.",
-            "solution": "10 − 9 = 1, so the barred digit is 1̄."
+            "solution": "10 − 9 = 1, so the barred digit is 1̄.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group B for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_B3",
@@ -216,11 +297,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For digit 7, the barred replacement is 3̄. What does 3̄ mean in value?",
-            "options": ["+3", "−3", "30", "0.3"],
+            "options": [
+              "+3",
+              "−3",
+              "30",
+              "0.3"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−3",
             "hint": "A bar above a digit means it is negative.",
-            "solution": "3̄ means negative 3. So 7 in vinculum is treated as (10 − 3) with a borrow."
+            "solution": "3̄ means negative 3. So 7 in vinculum is treated as (10 − 3) with a borrow.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group B for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -238,7 +330,12 @@
         "reviewPrompt": "Convert 28 and 47 to vinculum form and verify both.",
         "xpReward": 12,
         "badgeFocus": "2-Digit Converter",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "two_digit_conversion" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group C for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_C1",
@@ -250,11 +347,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Convert 18 to vinculum form.",
-            "options": ["1 8̄", "2 2̄", "1 2̄", "2 8̄"],
+            "options": [
+              "1 8̄",
+              "2 2̄",
+              "1 2̄",
+              "2 8̄"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2 2̄",
             "hint": "Units 8 is large: 10−8=2 (barred). Carry 1 to tens: 1+1=2.",
-            "solution": "18: units 8 → 2̄, carry 1 to tens → tens becomes 2. Vinculum: 2 2̄ = 20−2 = 18."
+            "solution": "18: units 8 → 2̄, carry 1 to tens → tens becomes 2. Vinculum: 2 2̄ = 20−2 = 18.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group C for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_C2",
@@ -266,11 +374,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "The vinculum form of 29 is:",
-            "options": ["3 1̄", "2 9̄", "3 9̄", "2 1̄"],
+            "options": [
+              "3 1̄",
+              "2 9̄",
+              "3 9̄",
+              "2 1̄"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3 1̄",
             "hint": "Units 9 is large: 10−9=1 (barred). Carry 1 to tens: 2+1=3.",
-            "solution": "29: units 9 → 1̄, carry to tens: 2+1=3. Vinculum: 3 1̄ = 30−1 = 29."
+            "solution": "29: units 9 → 1̄, carry to tens: 2+1=3. Vinculum: 3 1̄ = 30−1 = 29.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group C for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_C3",
@@ -282,11 +401,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of these is the vinculum form of 47?",
-            "options": ["4 7̄", "5 3̄", "4 3̄", "5 7̄"],
+            "options": [
+              "4 7̄",
+              "5 3̄",
+              "4 3̄",
+              "5 7̄"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "5 3̄",
             "hint": "Units 7 is large: 10−7=3 (barred). Carry 1 to tens: 4+1=5.",
-            "solution": "47: units 7 → 3̄, tens 4+1=5. Vinculum: 5 3̄ = 50−3 = 47."
+            "solution": "47: units 7 → 3̄, tens 4+1=5. Vinculum: 5 3̄ = 50−3 = 47.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group C for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -304,7 +434,12 @@
         "reviewPrompt": "Decode these: 3 2̄, 5 1̄, 4 3̄.",
         "xpReward": 12,
         "badgeFocus": "Bar Decoder",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "decoding" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group D for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_D1",
@@ -316,11 +451,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "The vinculum number 3 1̄ equals:",
-            "options": ["31", "29", "28", "32"],
+            "options": [
+              "31",
+              "29",
+              "28",
+              "32"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "29",
             "hint": "3 1̄ = 30 − 1.",
-            "solution": "3 1̄ = 30 − 1 = 29."
+            "solution": "3 1̄ = 30 − 1 = 29.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group D for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_D2",
@@ -332,11 +478,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 5 3̄ in standard form?",
-            "options": ["53", "43", "57", "47"],
+            "options": [
+              "53",
+              "43",
+              "57",
+              "47"
+            ],
             "correctIndex": 3,
             "expectedAnswer": "47",
             "hint": "5 3̄ = 50 − 3.",
-            "solution": "5 3̄ = 50 − 3 = 47."
+            "solution": "5 3̄ = 50 − 3 = 47.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group D for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_D3",
@@ -348,11 +505,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Decode 4 2̄:",
-            "options": ["42", "38", "36", "40"],
+            "options": [
+              "42",
+              "38",
+              "36",
+              "40"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "38",
             "hint": "4 2̄ = 40 − 2.",
-            "solution": "4 2̄ = 40 − 2 = 38."
+            "solution": "4 2̄ = 40 − 2 = 38.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group D for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -370,7 +538,12 @@
         "reviewPrompt": "Scan: 45, 28, 33, 79. Which need vinculum conversion?",
         "xpReward": 12,
         "badgeFocus": "Vinculum Spotter",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "identification" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group E for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_E1",
@@ -382,11 +555,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of these numbers NEEDS vinculum conversion (has a large digit)?",
-            "options": ["23", "45", "67", "31"],
+            "options": [
+              "23",
+              "45",
+              "67",
+              "31"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "67",
             "hint": "Look for a digit greater than 5.",
-            "solution": "67 has the digit 7 in units place. 7 > 5, so 67 needs vinculum conversion."
+            "solution": "67 has the digit 7 in units place. 7 > 5, so 67 needs vinculum conversion.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group E for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_E2",
@@ -398,11 +582,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A shopkeeper has bills for ₹18, ₹25, ₹39, and ₹44. Which bill amounts need vinculum conversion for easy calculation?",
-            "options": ["₹25 and ₹44", "₹18 and ₹39", "₹18 only", "All of them"],
+            "options": [
+              "₹25 and ₹44",
+              "₹18 and ₹39",
+              "₹18 only",
+              "All of them"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "₹18 and ₹39",
             "hint": "18 has digit 8, 39 has digit 9 — both are large.",
-            "solution": "18 (digit 8 > 5) and 39 (digit 9 > 5) need vinculum conversion. 25 and 44 have small units digits."
+            "solution": "18 (digit 8 > 5) and 39 (digit 9 > 5) need vinculum conversion. 25 and 44 have small units digits.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group E for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_E3",
@@ -414,11 +609,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In a cricket match, Virat scored 78 runs. Which digit in 78 is the 'large' digit?",
-            "options": ["7 (tens place)", "8 (units place)", "Both 7 and 8", "Neither"],
+            "options": [
+              "7 (tens place)",
+              "8 (units place)",
+              "Both 7 and 8",
+              "Neither"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "Both 7 and 8",
             "hint": "Both 7 and 8 are greater than 5.",
-            "solution": "7 > 5 and 8 > 5, so both digits in 78 are large. Both can be converted to vinculum form."
+            "solution": "7 > 5 and 8 > 5, so both digits in 78 are large. Both can be converted to vinculum form.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group E for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -436,7 +642,12 @@
         "reviewPrompt": "Verify your answer: expand the vinculum form and check it equals the original number.",
         "xpReward": 14,
         "badgeFocus": "Step-by-Step Scholar",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "step_process" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group F for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_F1",
@@ -449,15 +660,41 @@
             "questionType": "fill_step",
             "questionText": "Convert 38 to vinculum form step by step.",
             "steps": [
-              {"label": "Is the units digit 8 large (> 5)?", "answer": "Yes", "hint": "8 > 5, so yes."},
-              {"label": "10 − 8 = ? (this becomes the barred units digit)", "answer": "2", "hint": "10 minus 8"},
-              {"label": "Add 1 to tens digit: 3 + 1 = ?", "answer": "4", "hint": "Carry 1 to tens"},
-              {"label": "Vinculum form (tens digit, then barred units): ?", "answer": "4 2̄", "hint": "Combine 4 and 2̄"},
-              {"label": "Verify: 4 × 10 − 2 = ?", "answer": "38", "hint": "40 − 2 = 38"}
+              {
+                "label": "Is the units digit 8 large (> 5)?",
+                "answer": "Yes",
+                "hint": "8 > 5, so yes."
+              },
+              {
+                "label": "10 − 8 = ? (this becomes the barred units digit)",
+                "answer": "2",
+                "hint": "10 minus 8"
+              },
+              {
+                "label": "Add 1 to tens digit: 3 + 1 = ?",
+                "answer": "4",
+                "hint": "Carry 1 to tens"
+              },
+              {
+                "label": "Vinculum form (tens digit, then barred units): ?",
+                "answer": "4 2̄",
+                "hint": "Combine 4 and 2̄"
+              },
+              {
+                "label": "Verify: 4 × 10 − 2 = ?",
+                "answer": "38",
+                "hint": "40 − 2 = 38"
+              }
             ],
             "expectedAnswer": "4 2̄",
             "hint": "Units digit 8 → 10−8=2̄, carry 1 to tens.",
-            "solution": "38: 10−8=2̄, tens 3+1=4. Vinculum: 4 2̄ = 40−2 = 38."
+            "solution": "38: 10−8=2̄, tens 3+1=4. Vinculum: 4 2̄ = 40−2 = 38.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group F for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_F2",
@@ -470,14 +707,36 @@
             "questionType": "fill_step",
             "questionText": "Convert 49 to vinculum form step by step.",
             "steps": [
-              {"label": "Units digit 9 is large. 10 − 9 = ?", "answer": "1", "hint": "10 minus 9"},
-              {"label": "Carry 1 to tens: 4 + 1 = ?", "answer": "5", "hint": "4 plus 1"},
-              {"label": "Write vinculum form:", "answer": "5 1̄", "hint": "Tens=5, barred units=1̄"},
-              {"label": "Verify: 50 − 1 = ?", "answer": "49", "hint": "Check it equals the original"}
+              {
+                "label": "Units digit 9 is large. 10 − 9 = ?",
+                "answer": "1",
+                "hint": "10 minus 9"
+              },
+              {
+                "label": "Carry 1 to tens: 4 + 1 = ?",
+                "answer": "5",
+                "hint": "4 plus 1"
+              },
+              {
+                "label": "Write vinculum form:",
+                "answer": "5 1̄",
+                "hint": "Tens=5, barred units=1̄"
+              },
+              {
+                "label": "Verify: 50 − 1 = ?",
+                "answer": "49",
+                "hint": "Check it equals the original"
+              }
             ],
             "expectedAnswer": "5 1̄",
             "hint": "9 → 1̄, carry 1 to tens.",
-            "solution": "49: 10−9=1̄, tens 4+1=5. Vinculum: 5 1̄ = 50−1 = 49."
+            "solution": "49: 10−9=1̄, tens 4+1=5. Vinculum: 5 1̄ = 50−1 = 49.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group F for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -495,7 +754,12 @@
         "reviewPrompt": "Compare: solve 63 − 29 with and without vinculum. Which is faster?",
         "xpReward": 14,
         "badgeFocus": "Subtraction Simplifier",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "subtraction_application" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group G for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_G1",
@@ -507,11 +771,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Use vinculum to find 52 − 18. (Hint: 18 = 2 2̄ = 20 − 2)",
-            "options": ["32", "34", "36", "30"],
+            "options": [
+              "32",
+              "34",
+              "36",
+              "30"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "34",
             "hint": "52 − (20 − 2) = 52 − 20 + 2 = 32 + 2.",
-            "solution": "18 = 2 2̄. 52 − (20−2) = 52 − 20 + 2 = 34."
+            "solution": "18 = 2 2̄. 52 − (20−2) = 52 − 20 + 2 = 34.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group G for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_G2",
@@ -523,11 +798,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In a construction project, a beam of 74 cm is to be cut, leaving 38 cm unused. Using vinculum (38 = 4 2̄), find the cut length.",
-            "options": ["38 cm", "34 cm", "36 cm", "40 cm"],
+            "options": [
+              "38 cm",
+              "34 cm",
+              "36 cm",
+              "40 cm"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "36 cm",
             "hint": "74 − 38. Use 38 = 4 2̄ = 40−2. So 74 − 40 + 2.",
-            "solution": "38 = 4 2̄. 74 − (40−2) = 74 − 40 + 2 = 34 + 2 = 36 cm."
+            "solution": "38 = 4 2̄. 74 − (40−2) = 74 − 40 + 2 = 34 + 2 = 36 cm.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group G for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_G3",
@@ -539,11 +825,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A shopkeeper had ₹93. He spent ₹47 on supplies. Use vinculum to find the change. (47 = 5 3̄)",
-            "options": ["₹44", "₹46", "₹42", "₹50"],
+            "options": [
+              "₹44",
+              "₹46",
+              "₹42",
+              "₹50"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "₹46",
             "hint": "93 − 47. 47 = 5 3̄ = 50 − 3. So 93 − 50 + 3.",
-            "solution": "47 = 5 3̄. 93 − (50−3) = 93 − 50 + 3 = 43 + 3 = 46."
+            "solution": "47 = 5 3̄. 93 − (50−3) = 93 − 50 + 3 = 43 + 3 = 46.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group G for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -561,7 +858,12 @@
         "reviewPrompt": "Create your own mixed problem and solve it for Arya.",
         "xpReward": 16,
         "badgeFocus": "Mixed Vinculum Pro",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "mixed" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group H for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_H1",
@@ -573,11 +875,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Convert 58 to vinculum form:",
-            "options": ["5 8̄", "6 2̄", "5 2̄", "6 8̄"],
+            "options": [
+              "5 8̄",
+              "6 2̄",
+              "5 2̄",
+              "6 8̄"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "6 2̄",
             "hint": "Units 8 → 2̄, tens 5+1=6.",
-            "solution": "58: 10−8=2̄, tens 5+1=6. Vinculum: 6 2̄ = 60−2 = 58."
+            "solution": "58: 10−8=2̄, tens 5+1=6. Vinculum: 6 2̄ = 60−2 = 58.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group H for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_H2",
@@ -589,11 +902,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Rohan's cricket score was 82. He was given out for mistakes and 39 runs were deducted. Using vinculum (39 = 4 1̄), what is his final score?",
-            "options": ["43", "41", "45", "47"],
+            "options": [
+              "43",
+              "41",
+              "45",
+              "47"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "43",
             "hint": "82 − 39. 39 = 4 1̄ = 40−1. So 82 − 40 + 1.",
-            "solution": "39 = 4 1̄. 82 − (40−1) = 82 − 40 + 1 = 42 + 1 = 43."
+            "solution": "39 = 4 1̄. 82 − (40−1) = 82 − 40 + 1 = 42 + 1 = 43.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group H for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       },
@@ -611,7 +935,12 @@
         "reviewPrompt": "Explain to a friend: how does vinculum connect to integer arithmetic in CBSE Grade 6?",
         "xpReward": 18,
         "badgeFocus": "Vinculum Champion",
-        "visual": { "asset": "vinculum_bar.svg", "highlight": "challenge" },
+        "visual": {
+          "kind": "svg",
+          "asset": "vinculum_bar.svg",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "caption": "Group I for Vinculum Numbers — The Bar That Changes Everything."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L1_I1",
@@ -623,11 +952,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Temperature in Shimla was 12°C. It dropped by 19°C overnight. Using vinculum (19 = 2 1̄), what is the new temperature?",
-            "options": ["−5°C", "−7°C", "−8°C", "7°C"],
+            "options": [
+              "−5°C",
+              "−7°C",
+              "−8°C",
+              "7°C"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−7°C",
             "hint": "12 − 19. Convert 19 = 2 1̄ = 20−1. So 12 − 20 + 1.",
-            "solution": "19 = 2 1̄. 12 − (20−1) = 12 − 20 + 1 = −8 + 1 = −7°C."
+            "solution": "19 = 2 1̄. 12 − (20−1) = 12 − 20 + 1 = −8 + 1 = −7°C.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group I for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_I2",
@@ -639,11 +979,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A submarine is at depth 45 m below sea level (−45). It rises 28 m. Using vinculum (28 = 3 2̄), what is the new depth?",
-            "options": ["−17 m", "−18 m", "−15 m", "−19 m"],
+            "options": [
+              "−17 m",
+              "−18 m",
+              "−15 m",
+              "−19 m"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "−17 m",
             "hint": "−45 + 28. Use 28 = 3 2̄ = 30−2. So −45 + 30 − 2.",
-            "solution": "−45 + 28 = −45 + (30−2) = −45 + 30 − 2 = −15 − 2 = −17 m."
+            "solution": "−45 + 28 = −45 + (30−2) = −45 + 30 − 2 = −15 − 2 = −17 m.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group I for Vinculum Numbers — The Bar That Changes Everything."
+            }
           },
           {
             "questionId": "VM_G6_L1_I3",
@@ -655,11 +1006,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A student converts 85 to vinculum form and gets 9 5̄. Is this correct?",
-            "options": ["Yes, 9 5̄ = 85", "No, it should be 9 1̄", "No, 85 has no large digits", "Yes, any form is acceptable"],
+            "options": [
+              "Yes, 9 5̄ = 85",
+              "No, it should be 9 1̄",
+              "No, 85 has no large digits",
+              "Yes, any form is acceptable"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "No, it should be 9 1̄",
             "hint": "Units 5 is not large (5 is the boundary). Units 8: but wait — units digit of 85 is 5, tens is 8. Check which is large.",
-            "solution": "85: units digit is 5 (not > 5, so not large). Tens digit is 8 (large). 10−8=2̄, hundreds 0+1=1. Actually for 2-digit: tens 8 → replace with 2̄, hundreds carry: 0+1=1. But this converts the tens digit. Simpler: for units-only approach, 85 has units=5 (not large). Tens=8 is large: 85 = 90−5 → wait: 9 × 10 − 5... this gets complex. Standard interpretation: 85 → units 5 not large, keep. Tens 8: 10−8=2̄ with carry → 1 2̄ 5 = 100−20+5=85. So 9 5̄ is wrong. The correct vinculum has 9 1̄ only if units were 9. Here units=5, so 85 stays as 85 or is written differently. Correct answer: 9 5̄ is not the right form."
+            "solution": "85: units digit is 5 (not > 5, so not large). Tens digit is 8 (large). 10−8=2̄, hundreds 0+1=1. Actually for 2-digit: tens 8 → replace with 2̄, hundreds carry: 0+1=1. But this converts the tens digit. Simpler: for units-only approach, 85 has units=5 (not large). Tens=8 is large: 85 = 90−5 → wait: 9 × 10 − 5... this gets complex. Standard interpretation: 85 → units 5 not large, keep. Tens 8: 10−8=2̄ with carry → 1 2̄ 5 = 100−20+5=85. So 9 5̄ is wrong. The correct vinculum has 9 1̄ only if units were 9. Here units=5, so 85 stays as 85 or is written differently. Correct answer: 9 5̄ is not the right form.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vinculum_bar.svg",
+              "title": "Vinculum Numbers — The Bar That Changes Everything",
+              "caption": "Group I for Vinculum Numbers — The Bar That Changes Everything."
+            }
           }
         ]
       }
@@ -674,7 +1036,13 @@
       "teacherLine": "In Vedic Maths, digits 6, 7, 8, and 9 are called large digits. A bar notation transforms them into small ones!",
       "boardAction": "Draw digit 8 on board. Show 8 → 10−8=2 with a bar. Animate the transformation.",
       "checkpointPrompt": "Name all four large digits in Vedic Maths.",
-      "microPractice": "Quick: is 5 a large digit? Is 6 a large digit?"
+      "microPractice": "Quick: is 5 a large digit? Is 6 a large digit?",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_B",
@@ -684,7 +1052,13 @@
       "teacherLine": "To convert digit 7: subtract from 10 to get 3. Put a bar over 3. This 3̄ means minus 3. Simple!",
       "boardAction": "Show table: 6→4̄, 7→3̄, 8→2̄, 9→1̄. Colour the barred digits in red.",
       "checkpointPrompt": "What is the barred form of 8?",
-      "microPractice": "Rapid fire: vinculum replacements for 6, 7, 8, 9."
+      "microPractice": "Rapid fire: vinculum replacements for 6, 7, 8, 9.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_C",
@@ -694,7 +1068,13 @@
       "teacherLine": "For a 2-digit number, convert the units digit if it is large. Then add 1 to the tens digit. Watch!",
       "boardAction": "Show 18: units 8 → 2̄, tens 1+1=2. Vinculum: 2 2̄. Verify: 20−2=18.",
       "checkpointPrompt": "Convert 29 to vinculum form.",
-      "microPractice": "Convert 28 and 47 to vinculum and verify both."
+      "microPractice": "Convert 28 and 47 to vinculum and verify both.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_D",
@@ -704,7 +1084,13 @@
       "teacherLine": "Reading vinculum: the barred digit is negative. So 4 2̄ = 40 − 2 = 38. Decode by subtracting!",
       "boardAction": "Show 3 1̄ → 30−1 = 29. Show 5 3̄ → 50−3 = 47. Highlight the pattern.",
       "checkpointPrompt": "Decode 6 4̄.",
-      "microPractice": "Decode: 3 2̄, 5 1̄, 4 3̄."
+      "microPractice": "Decode: 3 2̄, 5 1̄, 4 3̄.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_E",
@@ -714,7 +1100,13 @@
       "teacherLine": "Before converting, first CHECK — does the number have a large digit? If not, leave it as is!",
       "boardAction": "Show examples: 24 (no large digit, skip). 38 (8 is large, convert). 67 (7 is large, convert).",
       "checkpointPrompt": "Which of 42, 36, 18 needs vinculum conversion?",
-      "microPractice": "Scan: 45, 28, 33, 79. Which need vinculum conversion?"
+      "microPractice": "Scan: 45, 28, 33, 79. Which need vinculum conversion?",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_F",
@@ -724,7 +1116,13 @@
       "teacherLine": "Let's trace all four steps for converting any 2-digit number to vinculum form. Every step matters!",
       "boardAction": "Write four steps on board. Apply to 38. Then apply to 49. Ask student to fill steps.",
       "checkpointPrompt": "Convert 56 step by step.",
-      "microPractice": "Verify: expand your vinculum form and check it equals the original."
+      "microPractice": "Verify: expand your vinculum form and check it equals the original.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_G",
@@ -734,7 +1132,13 @@
       "teacherLine": "The real payoff! Convert the number you are subtracting. Then add instead of borrowing. Watch borrowing disappear!",
       "boardAction": "Show 52 − 18: convert 18 to 2 2̄. Rewrite as 52 − 20 + 2 = 34. No borrowing!",
       "checkpointPrompt": "Use vinculum: 74 − 38 = ?",
-      "microPractice": "Solve 63 − 29 with vinculum. Then verify without vinculum."
+      "microPractice": "Solve 63 − 29 with vinculum. Then verify without vinculum.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_H",
@@ -744,7 +1148,13 @@
       "teacherLine": "Mixed round! You need to switch between conversion, decoding, and subtraction. Show your full skill set!",
       "boardAction": "Rapid board: convert 58, decode 6 4̄, subtract 81−39 using vinculum. All three types.",
       "checkpointPrompt": "Full round: convert 67, decode 5 2̄, compute 82 − 49.",
-      "microPractice": "Create your own mixed problem and solve it."
+      "microPractice": "Create your own mixed problem and solve it.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "stepId": "VM_G6_L1_I",
@@ -754,7 +1164,13 @@
       "teacherLine": "Champion challenge! Vinculum connects directly to integers — positive, negative, and real-world contexts!",
       "boardAction": "Show integer subtraction 12 − 19 using vinculum: 19 = 2 1̄. 12 − 20 + 1 = −7. Plot on number line.",
       "checkpointPrompt": "Temperature drops from 5°C by 18°C. Use vinculum to find the result.",
-      "microPractice": "Explain to a friend how vinculum helps with negative integers."
+      "microPractice": "Explain to a friend how vinculum helps with negative integers.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Teaching step for Vinculum Numbers — The Bar That Changes Everything."
+      }
     }
   ],
   "screenplay": [
@@ -777,7 +1193,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Screenplay beat for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "beatId": "VM_G6_L1_A_EXPLAIN",
@@ -791,14 +1213,20 @@
       "boardAction": "Show: digit 8 → 10−8=2 with a bar. Animate the replacement.",
       "checkpointPrompt": "Name all four large Vedic digits.",
       "pauseType": "student_input",
-      "holdSec": 3.0,
+      "holdSec": 3,
       "expectedStudentResponse": "6, 7, 8, 9",
       "fallbackHint": "They are all greater than 5.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Screenplay beat for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "beatId": "VM_G6_L1_A_PRACTICE",
@@ -812,14 +1240,20 @@
       "boardAction": "Show MCQ card VM_G6_L1_A1.",
       "checkpointPrompt": "Which digit is a candidate for vinculum replacement?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "7",
       "fallbackHint": "7 > 5, so it is large.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Screenplay beat for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "beatId": "VM_G6_L1_F_PRACTICE",
@@ -833,14 +1267,20 @@
       "boardAction": "Show fill_step card VM_G6_L1_F1: Convert 38.",
       "checkpointPrompt": "Complete all five steps for converting 38.",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "4 2̄",
       "fallbackHint": "Step 1: is 8 large? Step 2: 10−8. Step 3: carry. Step 4: write vinculum. Step 5: verify.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Screenplay beat for Vinculum Numbers — The Bar That Changes Everything."
+      }
     },
     {
       "beatId": "VM_G6_L1_I_PRACTICE",
@@ -854,14 +1294,31 @@
       "boardAction": "Show MCQ card VM_G6_L1_I1: temperature problem.",
       "checkpointPrompt": "Temperature drops from 12°C by 19°C. Use vinculum.",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "−7°C",
       "fallbackHint": "12 − 19 = 12 − (20−1) = 12 − 20 + 1.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vinculum_bar.svg",
+        "title": "Vinculum Numbers — The Bar That Changes Everything",
+        "caption": "Screenplay beat for Vinculum Numbers — The Bar That Changes Everything."
+      }
+    }
+  ],
+  "chapterCode": "VM_G6_L1_VINCULUM",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "vinculum_bar",
+      "kind": "svg",
+      "asset": "vinculum_bar.svg",
+      "title": "Lesson 1: Vinculum Numbers — The Bar That Changes Everything",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

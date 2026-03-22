@@ -67,15 +67,28 @@
     }
   ],
   "starterPractice": [
-    { "q": "What is 10% of 350?", "a": "35" },
-    { "q": "State the commutative trick for percentages.", "a": "x% of y = y% of x" },
-    { "q": "Are two successive 10% discounts the same as one 20% discount?", "a": "No — they give 19% total, not 20%" }
+    {
+      "q": "What is 10% of 350?",
+      "a": "35"
+    },
+    {
+      "q": "State the commutative trick for percentages.",
+      "a": "x% of y = y% of x"
+    },
+    {
+      "q": "Are two successive 10% discounts the same as one 20% discount?",
+      "a": "No — they give 19% total, not 20%"
+    }
   ],
   "duolingoLessonArc": {
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "welcomeMessage": "Every price tag, every exam mark, every sale — percentages are everywhere. Master them in 3 seconds!",
-      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "goalOptions": [
+        "School math",
+        "Competitive exams",
+        "Mental speed"
+      ],
       "avatarMood": "enthusiastic"
     },
     "mission": "Compute any percentage mentally using the 10% anchor, commutative trick, build-up, and compound formulas.",
@@ -90,7 +103,11 @@
     "rewardLoop": {
       "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
       "streakBonus": "5 XP for 3 consecutive correct answers",
-      "badges": ["Percent Pilot", "Discount Detective", "Compound Champion"]
+      "badges": [
+        "Percent Pilot",
+        "Discount Detective",
+        "Compound Champion"
+      ]
     },
     "reviewLoop": {
       "trigger": "2 wrong answers in a group",
@@ -129,7 +146,13 @@
             "questionText": "Find 10%, 20%, and 5% of 380.",
             "expectedAnswer": "38, 76, 19",
             "hint": "10%=380÷10. 20%=2×10%. 5%=10%÷2.",
-            "solution": "10%=38. 20%=76. 5%=19."
+            "solution": "10%=38. 20%=76. 5%=19.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group A for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_A2",
@@ -141,14 +164,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 15% of 200?",
-            "options": ["30", "25", "35", "20"],
+            "options": [
+              "30",
+              "25",
+              "35",
+              "20"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "30",
             "hint": "10% of 200=20. 5% of 200=10. 15%=20+10.",
             "solution": "10%=20, 5%=10, 15%=30.",
-            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "10% anchor bar showing 10%, 20%, 5% segments" }
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group A for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group A for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -177,7 +216,13 @@
             "questionText": "Compute 16% of 25 using the commutative trick (x% of y = y% of x).",
             "expectedAnswer": "4",
             "hint": "Flip: 25% of 16 = 16÷4.",
-            "solution": "16% of 25 = 25% of 16 = 16÷4 = 4."
+            "solution": "16% of 25 = 25% of 16 = 16÷4 = 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group B for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_B2",
@@ -189,13 +234,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which flip makes 8% of 50 easiest to compute?",
-            "options": ["50% of 8 = 4", "8% of 50 directly = 4", "80% of 5 = 4", "All give 4"],
+            "options": [
+              "50% of 8 = 4",
+              "8% of 50 directly = 4",
+              "80% of 5 = 4",
+              "All give 4"
+            ],
             "correctIndex": 3,
             "expectedAnswer": "All give 4",
             "hint": "50% of 8 = 4. 8% of 50 = 4. They all equal 4.",
-            "solution": "8% of 50 = 50% of 8 = 8÷2 = 4. All options give the correct answer 4."
+            "solution": "8% of 50 = 50% of 8 = 8÷2 = 4. All options give the correct answer 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group B for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group B for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -225,7 +287,12 @@
             "expectedAnswer": "74",
             "hint": "30% of 200=60. 5% of 200=10. 2% of 200=4. Add them.",
             "solution": "30%=60, 5%=10, 2%=4. Total=74.",
-            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "Bar divided into 30%, 5%, 2% segments for build-up" }
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group C for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_C2",
@@ -239,9 +306,21 @@
             "questionText": "Compute 23% of 300 using build-up (20%+3%).",
             "expectedAnswer": "69",
             "hint": "20% of 300=60. 3% of 300=9.",
-            "solution": "20%=60, 3%=9. Total=69."
+            "solution": "20%=60, 3%=9. Total=69.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group C for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group C for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -270,7 +349,13 @@
             "questionText": "A shirt has successive discounts of 20% and 10%. What is the total percentage discount on the original price?",
             "expectedAnswer": "28%",
             "hint": "Start with ₹100. After 20%: ₹80. After 10%: ₹72. Discount = ₹28.",
-            "solution": "100 → 80 (after 20%) → 72 (after 10% of 80). Total discount = 28%."
+            "solution": "100 → 80 (after 20%) → 72 (after 10% of 80). Total discount = 28%.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group D for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_D2",
@@ -282,13 +367,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Successive discounts of 10% and 10% are equivalent to a single discount of?",
-            "options": ["19%", "20%", "18%", "21%"],
+            "options": [
+              "19%",
+              "20%",
+              "18%",
+              "21%"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "19%",
             "hint": "100 → 90 → 81. Discount = 19.",
-            "solution": "100×0.9×0.9 = 81. Total discount = 19%."
+            "solution": "100×0.9×0.9 = 81. Total discount = 19%.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group D for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group D for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -315,12 +417,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 37% of 200?",
-            "options": ["74", "70", "77", "80"],
+            "options": [
+              "74",
+              "70",
+              "77",
+              "80"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "74",
             "hint": "30%=60, 5%=10, 2%=4. Total=74.",
             "solution": "37% of 200: 30%=60, 5%=10, 2%=4. Sum=74.",
-            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "Build-up: 30+5+2 percent of 200" }
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group E for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_E2",
@@ -332,13 +444,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 6% of 150?",
-            "options": ["9", "8", "10", "7"],
+            "options": [
+              "9",
+              "8",
+              "10",
+              "7"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9",
             "hint": "Use flip trick or build-up: 6% of 150 = 1% of 150 × 6 = 1.5×6 = 9.",
-            "solution": "1% of 150=1.5. 6×1.5=9."
+            "solution": "1% of 150=1.5. 6×1.5=9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group E for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group E for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -366,14 +495,42 @@
             "questionType": "fill_step",
             "questionText": "Find 37% of 200 using the build-up method. Fill each block.",
             "steps": [
-              { "label": "30% of 200", "answer": "60", "hint": "10% of 200=20. 30%=3×20=60." },
-              { "label": "5% of 200", "answer": "10", "hint": "5% = half of 10%. 10%=20, so 5%=10." },
-              { "label": "2% of 200", "answer": "4", "hint": "1% of 200=2. 2%=4." },
-              { "label": "Total (30%+5%+2%)", "answer": "74", "hint": "60+10+4=74." }
+              {
+                "label": "30% of 200",
+                "answer": "60",
+                "hint": "10% of 200=20. 30%=3×20=60."
+              },
+              {
+                "label": "5% of 200",
+                "answer": "10",
+                "hint": "5% = half of 10%. 10%=20, so 5%=10."
+              },
+              {
+                "label": "2% of 200",
+                "answer": "4",
+                "hint": "1% of 200=2. 2%=4."
+              },
+              {
+                "label": "Total (30%+5%+2%)",
+                "answer": "74",
+                "hint": "60+10+4=74."
+              }
             ],
-            "expectedAnswer": "74"
+            "expectedAnswer": "74",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group F for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group F for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -402,7 +559,13 @@
             "questionText": "A trader buys a bicycle for ₹1200 and sells it for ₹1500. Find the profit percentage.",
             "expectedAnswer": "25%",
             "hint": "Profit = ₹1500-₹1200 = ₹300. Profit% = (300/1200)×100.",
-            "solution": "Profit = 300. Profit% = 300/1200×100 = 25%."
+            "solution": "Profit = 300. Profit% = 300/1200×100 = 25%.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group G for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_G2",
@@ -416,9 +579,21 @@
             "questionText": "A TV is marked at ₹20000 and sold at 15% discount. Find the selling price.",
             "expectedAnswer": "₹17000",
             "hint": "15% of 20000 = 3000. Selling price = 20000-3000.",
-            "solution": "10% of 20000=2000. 5% of 20000=1000. 15%=3000. SP=17000."
+            "solution": "10% of 20000=2000. 5% of 20000=1000. 15%=3000. SP=17000.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group G for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group G for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -447,7 +622,13 @@
             "questionText": "Speed round: compute 45% of 80.",
             "expectedAnswer": "36",
             "hint": "Flip: 80% of 45 = 4×45÷5 = 36. Or: 50% of 80=40, minus 5% of 80=4 → 36.",
-            "solution": "50% of 80=40. 5% of 80=4. 45%=40-4=36."
+            "solution": "50% of 80=40. 5% of 80=4. 45%=40-4=36.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group H for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_H2",
@@ -459,14 +640,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 12.5% of 400?",
-            "options": ["50", "40", "60", "48"],
+            "options": [
+              "50",
+              "40",
+              "60",
+              "48"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "50",
             "hint": "12.5% = 1/8. 400÷8 = 50.",
             "solution": "12.5% = 1/8. 400/8 = 50.",
-            "visual": { "type": "svg", "asset": "vm_percentage_bar", "caption": "12.5% as one-eighth of the bar" }
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group H for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group H for Percentage Power — Mental % in 3 Seconds."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -494,12 +691,34 @@
             "questionType": "fill_step",
             "questionText": "Compute compound interest on ₹1000 at 10% per year for 2 years.",
             "steps": [
-              { "label": "Amount after Year 1", "answer": "₹1100", "hint": "1000 + 10% of 1000 = 1000+100 = 1100." },
-              { "label": "Interest in Year 2 (10% of ₹1100)", "answer": "₹110", "hint": "10% of 1100 = 110." },
-              { "label": "Amount after Year 2", "answer": "₹1210", "hint": "1100+110=1210." },
-              { "label": "Total compound interest (Amount - Principal)", "answer": "₹210", "hint": "1210-1000=210." }
+              {
+                "label": "Amount after Year 1",
+                "answer": "₹1100",
+                "hint": "1000 + 10% of 1000 = 1000+100 = 1100."
+              },
+              {
+                "label": "Interest in Year 2 (10% of ₹1100)",
+                "answer": "₹110",
+                "hint": "10% of 1100 = 110."
+              },
+              {
+                "label": "Amount after Year 2",
+                "answer": "₹1210",
+                "hint": "1100+110=1210."
+              },
+              {
+                "label": "Total compound interest (Amount - Principal)",
+                "answer": "₹210",
+                "hint": "1210-1000=210."
+              }
             ],
-            "expectedAnswer": "₹210"
+            "expectedAnswer": "₹210",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group I for Percentage Power — Mental % in 3 Seconds."
+            }
           },
           {
             "questionId": "VM_G8_L6_I2",
@@ -511,14 +730,42 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "On ₹1000 at 10% for 2 years, compound interest is ₹210 while simple interest is ₹200. What is the extra amount due to compounding?",
-            "options": ["₹10", "₹20", "₹5", "₹15"],
+            "options": [
+              "₹10",
+              "₹20",
+              "₹5",
+              "₹15"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "₹10",
             "hint": "CI=₹210. SI=₹200. Difference=₹10.",
-            "solution": "The extra ₹10 is 10% of ₹100 (the Year 1 interest), earned as interest-on-interest in Year 2."
+            "solution": "The extra ₹10 is 10% of ₹100 (the Year 1 interest), earned as interest-on-interest in Year 2.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Percentage Power — Mental % in 3 Seconds",
+              "caption": "Group I for Percentage Power — Mental % in 3 Seconds."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "caption": "Group I for Percentage Power — Mental % in 3 Seconds."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G8_L6_PERCENTAGE_SPEED",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "vm_near_100",
+      "kind": "svg",
+      "asset": "vm_near_100.svg",
+      "title": "Percentage Power — Mental % in 3 Seconds",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

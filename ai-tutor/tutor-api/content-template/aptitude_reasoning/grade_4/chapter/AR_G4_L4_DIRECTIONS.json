@@ -1,0 +1,514 @@
+{
+  "chapterCode": "AR_G4_L4_DIRECTIONS",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Basic Directions",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 4: Basic Directions",
+  "estimatedMinutes": 12,
+  "subtopics": [
+    "The four main directions: North, South, East, West",
+    "Opposite directions (North-South, East-West)",
+    "Turning left and turning right",
+    "Where are you facing after a turn?",
+    "Simple map reading — moving on a grid",
+    "Shadow and Sun direction clues"
+  ],
+  "learningGoals": [
+    "Name and point to the four main directions.",
+    "Work out which direction you face after turning left or right.",
+    "Follow a simple set of direction steps on a grid and find the final position."
+  ],
+  "coreIdeas": [
+    "Never Eat Soggy Waffles — North, East, South, West going clockwise.",
+    "Opposite of North is South; opposite of East is West.",
+    "Turning RIGHT means the next direction clockwise; turning LEFT means going anticlockwise."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Priya is facing North. She turns right. Which direction is she facing now?",
+      "solution": "Going clockwise from North: North → East. She is now facing East.",
+      "concept": "Turn right = move one step clockwise"
+    },
+    {
+      "id": "WE2",
+      "problem": "Ravi walks 3 steps East and then 3 steps South. In which direction is he from the starting point?",
+      "solution": "Going East moves him right; going South moves him down. He is now to the South-East of the starting point.",
+      "concept": "Grid movement — combining two directions"
+    },
+    {
+      "id": "WE3",
+      "problem": "The sun rises in the East. Tina is watching the sunrise. Which direction is behind her?",
+      "solution": "If East is in front of Tina, then West is directly behind her — they are opposites.",
+      "concept": "Opposite directions — East and West"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach starts Directions by drawing a compass on the board and asking the learner: 'If you stand facing the rising sun, which direction are you facing?' to build intuition. Then Spark teaches the clockwise NESW order and the turning rules before exercises.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers in Groups A–B, redraw the compass rose and physically demonstrate turns before continuing."
+    },
+    "mission": {
+      "missionTitle": "Navigate Like an Explorer",
+      "missionPromise": "By the end, you will know all four directions, turn left or right without confusion, and read a simple map — like a real explorer!",
+      "successCelebration": "Award a badge pulse and coach cheer after every correct group. At lesson end, show 'Navigator' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a real-world navigation hook.",
+      "Coach draws a compass rose and labels directions.",
+      "Coach reads the practice question with a physical turning cue.",
+      "Student answers the direction question.",
+      "Instant feedback refers back to the compass rose.",
+      "Review question confirms mastery before next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one badge tied to the direction skill.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach with the compass rose drawn fresh.",
+      "practiceStyle": "Offer a simpler question with only two directions involved.",
+      "masteryRule": "Advance only after a correct answer with direction named clearly.",
+      "revisitRule": "Any group with two errors returns at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L4_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hey there, explorer! Have you ever wondered how people find their way without Google Maps? They use directions — North, South, East, and West! These four directions are like the four walls of a room for the whole world. Today you will learn to use them perfectly and navigate your way through any map or direction puzzle. Here is a secret memory trick: Never Eat Soggy Waffles — that is North, East, South, West going clockwise!",
+        "boardAction": "Draw a large compass rose in the centre. Label N at top, E at right, S at bottom, W at left. Write 'NESW clockwise' beside it. Below write: Opposite pairs — N↔S, E↔W.",
+        "checkpointPrompt": "Quick warm-up: If you face North and turn so your back is to the North, which direction are you facing now?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "South — it is opposite to North.",
+        "fallbackHint": "North and South are directly opposite. If North is in front, turning your back to it means you now face South.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l4_title",
+            "x": "40",
+            "y": "30",
+            "text": "Basic Directions — Chapter 4",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l4_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_compass",
+            "x": "200",
+            "y": "90",
+            "text": "N",
+            "color": "#dc2626",
+            "size": 18,
+            "delaySec": 0.8,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_east",
+            "x": "300",
+            "y": "155",
+            "text": "E",
+            "color": "#059669",
+            "size": 18,
+            "delaySec": 1.1,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_south",
+            "x": "200",
+            "y": "220",
+            "text": "S",
+            "color": "#0284c7",
+            "size": 18,
+            "delaySec": 1.4,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_west",
+            "x": "100",
+            "y": "155",
+            "text": "W",
+            "color": "#d97706",
+            "size": 18,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "compass.svg",
+          "title": "Basic Directions",
+          "caption": "Screenplay beat for Basic Directions."
+        }
+      },
+      {
+        "beatId": "AR_G4_L4_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me do a turning problem! Sam is facing North. He turns right. Where is he facing? I look at the compass — clockwise from North is East. So Sam is facing East. Now he turns right AGAIN — clockwise from East is South. Easy! The rule is: turn right = next direction clockwise. Turn left = go the opposite way (anticlockwise).",
+        "boardAction": "Draw compass rose. Draw arrow pointing N. Label it 'Sam faces North'. Draw curved clockwise arrow to E. Write '+1 right turn = East'. Draw another curved clockwise arrow to S. Write '+1 more right turn = South'.",
+        "checkpointPrompt": "Your turn: Meena is facing West. She turns left once. Which direction is she facing?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "South — turning left from West goes anticlockwise: West → South.",
+        "fallbackHint": "Left turn = anticlockwise. Going anticlockwise from West: W → S. Meena faces South!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_start",
+            "x": "60",
+            "y": "60",
+            "text": "Sam faces NORTH",
+            "color": "#1e40af",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_turn1",
+            "x": "60",
+            "y": "95",
+            "text": "Turn RIGHT (clockwise): North → East",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 0.7,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_turn2",
+            "x": "60",
+            "y": "130",
+            "text": "Turn RIGHT again: East → South",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "compass.svg",
+          "title": "Basic Directions",
+          "caption": "Screenplay beat for Basic Directions."
+        }
+      },
+      {
+        "beatId": "AR_G4_L4_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Compass in your head — you are ready! Work through Groups A to F. Keep the compass rose in mind for every question. Left = anticlockwise, Right = clockwise. And remember: opposite pairs are N-S and E-W. Go explore!",
+        "boardAction": "Show cheatsheet: Clockwise order N→E→S→W→N. Anticlockwise order N→W→S→E→N. Opposite pairs: N↔S, E↔W. Sunrise in East, Sunset in West.",
+        "checkpointPrompt": "Before we start — what are the two opposite direction pairs?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "North-South and East-West.",
+        "fallbackHint": "Look at the compass: N is at top, S at bottom — they are directly opposite. E is on the right, W on the left — opposite too. So N↔S and E↔W.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Directions Cheatsheet",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_cw",
+            "x": "60",
+            "y": "65",
+            "text": "Clockwise (RIGHT turns): N → E → S → W → N",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_acw",
+            "x": "60",
+            "y": "90",
+            "text": "Anticlockwise (LEFT turns): N → W → S → E → N",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_opp",
+            "x": "60",
+            "y": "115",
+            "text": "Opposites: North ↔ South,  East ↔ West",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "compass.svg",
+          "title": "Basic Directions",
+          "caption": "Screenplay beat for Basic Directions."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "The four main directions: North, South, East, West",
+      "missionStepTitle": "Exercise A: Name the Four Directions",
+      "coachHook": "Let's figure this out together! N, E, S, W — once you know the order, direction questions are easy!",
+      "boardDemo": {
+        "title": "Compass Rose — Four Directions",
+        "steps": [
+          "Draw a compass: North at top, East at right, South at bottom, West at left",
+          "Memory trick: Never Eat Soggy Waffles (N-E-S-W clockwise)",
+          "Opposite pairs: North ↔ South, East ↔ West"
+        ],
+        "teacherLine": "Hold your right hand out — that is East! Your left hand is West. Face North (towards East's rising sun side) and South is behind you."
+      },
+      "readAloudPrompt": "If North is in front of you and you are facing the board, which direction is on your right?",
+      "tryPrompt": "In which direction does the sun set every evening?",
+      "masteryCheck": "West",
+      "instantFeedbackWin": "Correct! The sun sets in the West every evening. East for sunrise, West for sunset — now you will never forget!",
+      "instantFeedbackRetry": "Here's a trick: the sun rises in the East and sets in the West. Sunset = West. West is on the left side of the compass.",
+      "reviewPrompt": "Quick: what is the direction OPPOSITE to East?",
+      "xpReward": 10,
+      "badgeFocus": "Compass Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Basic Directions",
+        "caption": "Group A for Basic Directions."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Opposite directions",
+      "missionStepTitle": "Exercise B: Opposite Directions",
+      "coachHook": "Let's figure this out together! Every direction has an opposite — they face away from each other like two people standing back to back.",
+      "boardDemo": {
+        "title": "Opposites on the Compass",
+        "steps": [
+          "North (top) ↔ South (bottom) — exactly opposite",
+          "East (right) ↔ West (left) — exactly opposite",
+          "If you face North, behind you is South",
+          "If you face East, behind you is West"
+        ],
+        "teacherLine": "Opposites are always across the compass from each other. Imagine a see-saw — one end goes up while the other goes down. North and South are like that see-saw!"
+      },
+      "readAloudPrompt": "Ananya is walking towards the North. In which direction is she moving away from?",
+      "tryPrompt": "Your turn: Kabir is facing West. What direction is directly behind him?",
+      "masteryCheck": "East",
+      "instantFeedbackWin": "Yes! West and East are opposites. If Kabir faces West, East is directly behind him!",
+      "instantFeedbackRetry": "Here's a trick: East ↔ West are opposites, just like North ↔ South. If you face West, you have your back to the East.",
+      "reviewPrompt": "Quick: a bird flies North. In what direction is it flying away from its starting point according to the opposite direction?",
+      "xpReward": 10,
+      "badgeFocus": "Opposite Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Basic Directions",
+        "caption": "Group B for Basic Directions."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Turning left and turning right",
+      "missionStepTitle": "Exercise C: Left Turns and Right Turns",
+      "coachHook": "Let's figure this out together! Left and right turns change which way you face. Use the compass to track every turn!",
+      "boardDemo": {
+        "title": "Turning on the Compass",
+        "steps": [
+          "Start: facing North",
+          "One right turn (clockwise): facing East",
+          "Two right turns: facing South",
+          "Three right turns: facing West",
+          "Four right turns: back to North (full circle!)"
+        ],
+        "teacherLine": "Think of turning right as moving your finger clockwise around the compass — like the hands of a clock. Every right turn moves you one step clockwise: N→E→S→W→N."
+      },
+      "readAloudPrompt": "Priya faces North and turns right twice. Which direction is she facing now?",
+      "tryPrompt": "Your turn: Rohan faces South and turns left once. Which direction is he facing?",
+      "masteryCheck": "East",
+      "instantFeedbackWin": "Perfect! Left from South = anticlockwise: South → East. Rohan faces East!",
+      "instantFeedbackRetry": "Here's a trick: left turn = anticlockwise. From South, going anticlockwise: S → E. So Rohan faces East.",
+      "reviewPrompt": "Quick: if you face East and turn right twice, which direction do you face?",
+      "xpReward": 12,
+      "badgeFocus": "Turn Navigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Basic Directions",
+        "caption": "Group C for Basic Directions."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Where are you facing after a turn?",
+      "missionStepTitle": "Exercise D: After the Turn",
+      "coachHook": "Let's figure this out together! Multiple turns can be tricky — count each turn carefully on the compass!",
+      "boardDemo": {
+        "title": "Multiple Turns — Count Each One",
+        "steps": [
+          "Start: facing West",
+          "Turn right: West → North",
+          "Turn right again: North → East",
+          "Final direction: East",
+          "Shortcut: 2 right turns = move 2 steps clockwise from start"
+        ],
+        "teacherLine": "For multiple turns, simply count the steps clockwise (for right) or anticlockwise (for left) from where you started. You can use fingers on the compass to count!"
+      },
+      "readAloudPrompt": "Sana faces North. She turns left 3 times. What direction does she face after all three turns?",
+      "tryPrompt": "Your turn: Dev faces East. He turns right 3 times. Which direction is he facing now?",
+      "masteryCheck": "North",
+      "instantFeedbackWin": "Brilliant! 3 right turns clockwise from East: East→South→West→North. Dev faces North!",
+      "instantFeedbackRetry": "Here's a trick: count 3 clockwise steps from East on the compass: E (start), S (turn 1), W (turn 2), N (turn 3). Dev faces North.",
+      "reviewPrompt": "Quick: start facing South, turn left twice — which direction now?",
+      "xpReward": 12,
+      "badgeFocus": "Multi-Turn Tracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Basic Directions",
+        "caption": "Group D for Basic Directions."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Simple map reading — moving on a grid",
+      "missionStepTitle": "Exercise E: Moving on a Grid",
+      "coachHook": "Let's figure this out together! A grid is like a map. North = up, South = down, East = right, West = left. Follow the steps and find where you land!",
+      "boardDemo": {
+        "title": "Grid Movement",
+        "steps": [
+          "Start at a dot in the middle of the grid",
+          "Move 2 steps North (up 2 squares)",
+          "Move 3 steps East (right 3 squares)",
+          "Mark the final position",
+          "Final position: 2 up and 3 to the right of start"
+        ],
+        "teacherLine": "On a grid, North is always up, South is down, East is right, and West is left. Move step by step — do not try to jump ahead. Mark each position as you go!"
+      },
+      "readAloudPrompt": "A robot starts at the centre of a grid. It moves 4 steps East. Where is it now relative to the centre?",
+      "tryPrompt": "Your turn: a cat starts at position A. It walks 2 steps North, then 2 steps East. Describe its final position.",
+      "masteryCheck": "2 squares above and 2 squares to the right of position A.",
+      "instantFeedbackWin": "Exactly! North = up 2, East = right 2. The cat is at the top-right from where it started. Super grid navigation!",
+      "instantFeedbackRetry": "Here's a trick: each step in a direction moves you one square that way. North = up. East = right. Move 2 up first, then 2 right. Mark where you end up!",
+      "reviewPrompt": "Quick: from start, go 3 steps West and 1 step South. Where is your final position relative to the start?",
+      "xpReward": 14,
+      "badgeFocus": "Grid Explorer",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Basic Directions",
+        "caption": "Group E for Basic Directions."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Shadow and Sun direction clues",
+      "missionStepTitle": "Exercise F: Sun and Shadow Clues",
+      "coachHook": "Let's figure this out together! The sun gives us direction clues every day. Sunrise = East, Sunset = West, Noon sun = South (in India). Shadows always point away from the sun!",
+      "boardDemo": {
+        "title": "Sun Clues for Directions",
+        "steps": [
+          "Sunrise is always in the East",
+          "Sunset is always in the West",
+          "At noon, the sun is in the South (in India)",
+          "Shadows point AWAY from the sun",
+          "If the sun is in the East (morning), shadows point West"
+        ],
+        "teacherLine": "Shadows are like arrows pointing away from the sun. If you know where the sun is, you know where the shadow points — and that tells you East or West!"
+      },
+      "readAloudPrompt": "In the morning, the sun is in the East. A tree casts a shadow. Which direction does the shadow point?",
+      "tryPrompt": "Your turn: at sunset, the sun is in the West. Which direction does a pole's shadow point?",
+      "masteryCheck": "East — the shadow points away from the sun (West), so it points East.",
+      "instantFeedbackWin": "Correct! Sun in West → shadow points the opposite way → East. You read the sun like a compass!",
+      "instantFeedbackRetry": "Here's a trick: shadows always run away from the sun. Sun is in the West = shadow runs towards the East (the opposite direction).",
+      "reviewPrompt": "Final: at noon, the sun is roughly in the South. Which direction does your shadow point?",
+      "xpReward": 14,
+      "badgeFocus": "Sun Compass Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "compass.svg",
+        "title": "Basic Directions",
+        "caption": "Group F for Basic Directions."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "compass",
+      "kind": "svg",
+      "asset": "compass.svg",
+      "title": "Basic Directions",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

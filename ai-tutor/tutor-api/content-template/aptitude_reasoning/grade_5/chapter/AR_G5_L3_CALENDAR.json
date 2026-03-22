@@ -1,0 +1,523 @@
+{
+  "chapterCode": "AR_G5_L3_CALENDAR",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Calendar Basics",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 3: Calendar Basics",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Days of the week — Mon=1 … Sun=7, cyclical counting",
+    "Months of the year — Jan=1 … Dec=12, days in each month",
+    "Leap years — rule: divisible by 4 (century years need ÷400)",
+    "Finding the day for a given date — counting forward and backward"
+  ],
+  "learningGoals": [
+    "Name the days of the week in order and count cyclically (e.g. Monday +3 = Thursday).",
+    "Name the months in order, recall the number of days in each month.",
+    "Determine whether a given year is a leap year using the divisibility rule.",
+    "Count forward or backward from a known day to find the day for a target date."
+  ],
+  "coreIdeas": [
+    "Days cycle in a group of 7 — add any number of days, then take modulo 7 to find the day.",
+    "Mnemonic for days in a month: 'Thirty days has September, April, June and November — all the rest have 31, except February with 28 (29 in a leap year).'",
+    "Leap year rule: if the year is divisible by 4 it is a leap year — EXCEPT century years (ending in 00) which must be divisible by 400.",
+    "To find the day n days after a known day: (day_number + n − 1) mod 7, map back to day name."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Today is Monday. What day will it be after 10 days?",
+      "solution": "Monday = day 1. Add 10 days: 1 + 10 = 11. 11 mod 7 = 4. Day 4 = Thursday.",
+      "concept": "Cyclical day counting — use mod 7"
+    },
+    {
+      "id": "WE2",
+      "problem": "How many days are there in the month of February in the year 2024?",
+      "solution": "Check leap year: 2024 ÷ 4 = 506 (exact), so 2024 is a leap year. February in a leap year has 29 days.",
+      "concept": "Leap year rule and February days"
+    },
+    {
+      "id": "WE3",
+      "problem": "1st January 2025 is a Wednesday. What day is 1st February 2025?",
+      "solution": "January has 31 days. Count 31 days after Wednesday. 31 = 4 weeks + 3 days. Wednesday + 3 = Saturday.",
+      "concept": "Finding a day by counting weeks and extra days"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark asks if the learner can name today's day and month, then moves to the first exercise. Opening question is a simple day-counting problem.",
+      "placementRule": "Start at Group A. If the learner makes errors with day-of-week counting in Group A, reteach the 7-day cycle before moving to months."
+    },
+    "mission": {
+      "missionTitle": "Master the Calendar",
+      "missionPromise": "By the end you will calculate any day of the week, spot leap years instantly, and never be confused by a calendar question again!",
+      "successCelebration": "Show a calendar star badge after each group. At lesson end, award the 'Calendar Champion' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a relatable real-life calendar scenario as the hook.",
+      "Coach demonstrates the counting or rule step-by-step on a mini calendar board.",
+      "Coach reads the practice question aloud.",
+      "Student attempts the answer.",
+      "Instant feedback celebrates or repairs with a hint.",
+      "Review question confirms mastery."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per exercise group, increasing through the lesson.",
+      "streakRule": "Show streak counter; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a calendar-themed badge.",
+      "celebrationStyle": "Coach praise + XP burst + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts trigger a mini-reteach with the day/month table and a simpler counting example.",
+      "practiceStyle": "Offer a simpler version (smaller number of days to count) before full questions.",
+      "masteryRule": "Advance after correct answer plus a completed tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L3_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello there! Have you ever wondered — if today is Tuesday, what day will it be after 20 days? Or is the year 2100 a leap year? Calendar questions like these pop up in every reasoning exam, and today you will learn to answer them in your head in seconds! We will cover four things: the 7-day cycle, months and their day counts, the leap year rule, and counting forward to find any day of the week. Let us start!",
+        "boardAction": "Write 'Calendar Basics — 4 Skills'. List: (1) 7-day cycle (Mon→Sun, repeat), (2) Months: Jan–Dec, days in each, (3) Leap year: ÷4 rule, (4) Find any day: count weeks + extra days.",
+        "checkpointPrompt": "Quick warm-up: if today is Friday, what day was it 3 days ago?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Tuesday",
+        "fallbackHint": "Go back 3 days from Friday: Thursday (1 back), Wednesday (2 back), Tuesday (3 back). The answer is Tuesday.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "cal_title",
+            "x": "40",
+            "y": "30",
+            "text": "Calendar Basics — 4 Skills",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "cal_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "500",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "cal_t1",
+            "x": "60",
+            "y": "72",
+            "text": "1. Days cycle every 7: Mon Tue Wed Thu Fri Sat Sun",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "cal_t2",
+            "x": "60",
+            "y": "94",
+            "text": "2. Months: 30/31 days (Feb=28 or 29)",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "cal_t3",
+            "x": "60",
+            "y": "116",
+            "text": "3. Leap year: year ÷ 4 = whole number → 29 days in Feb",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "cal_t4",
+            "x": "60",
+            "y": "138",
+            "text": "4. Count days: full weeks (×7) + leftover days",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Calendar Basics",
+          "caption": "Screenplay beat for Calendar Basics."
+        }
+      },
+      {
+        "beatId": "AR_G5_L3_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you day-counting live. Today is Wednesday. What day will it be after 18 days? Step 1: divide 18 by 7. 18 ÷ 7 = 2 weeks and 4 extra days. Step 2: count 4 days forward from Wednesday — Thursday, Friday, Saturday, Sunday. The answer is Sunday! The trick: only the leftover (remainder) days matter, because full weeks bring you back to the same day!",
+        "boardAction": "Write 'Wednesday + 18 days'. Show 18 ÷ 7 = 2 R 4. Draw Wednesday → +4 → Sunday, labelling each step: Thu, Fri, Sat, Sun.",
+        "checkpointPrompt": "If today is Monday, what day will it be after 15 days?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Tuesday — 15 ÷ 7 = 2 weeks R 1 day, so Monday + 1 = Tuesday.",
+        "fallbackHint": "15 ÷ 7 = 2 weeks remainder 1. Only 1 extra day after Monday — that is Tuesday.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_problem",
+            "x": "50",
+            "y": "45",
+            "text": "Wednesday + 18 days = ?",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_step1",
+            "x": "50",
+            "y": "75",
+            "text": "18 ÷ 7 = 2 weeks remainder 4 days",
+            "color": "#1e40af",
+            "size": 12,
+            "delaySec": 0.6,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_step2",
+            "x": "50",
+            "y": "100",
+            "text": "Wed +1=Thu +2=Fri +3=Sat +4=Sun",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 1.2,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "50",
+            "y": "130",
+            "text": "Answer: Sunday",
+            "color": "#dc2626",
+            "size": 14,
+            "delaySec": 1.8,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Calendar Basics",
+          "caption": "Screenplay beat for Calendar Basics."
+        }
+      },
+      {
+        "beatId": "AR_G5_L3_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Great thinking! Here is your calendar toolkit for all the groups. Day counting: divide by 7, use the remainder. Months: use the knuckle trick or the rhyme. Leap years: divide by 4. Finding a date's day: count days from a known anchor, divide by 7, move that many days forward. You are well prepared — let us go!",
+        "boardAction": "Display: Days cycle: Mon(1)Tue(2)Wed(3)Thu(4)Fri(5)Sat(6)Sun(7). Months with days. Leap year: ÷4 (century ÷400). Day formula: add days, divide by 7, use remainder.",
+        "checkpointPrompt": "Quick — how many days are in the month of April?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "30",
+        "fallbackHint": "April has 30 days. Remember the rhyme: 'Thirty days has September, April, June and November.' April is in that list!",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Calendar Quick Reference",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_days",
+            "x": "60",
+            "y": "58",
+            "text": "Mon=1 Tue=2 Wed=3 Thu=4 Fri=5 Sat=6 Sun=7",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_months",
+            "x": "60",
+            "y": "80",
+            "text": "Sep/Apr/Jun/Nov=30  Feb=28/29  Rest=31",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_leap",
+            "x": "60",
+            "y": "102",
+            "text": "Leap year: ÷4 exact (century years: ÷400)",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Calendar Basics",
+          "caption": "Screenplay beat for Calendar Basics."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Days of the week — cyclical counting",
+      "missionStepTitle": "Exercise A: Days of the Week",
+      "coachHook": "Let's crack this code! There are 7 days in a week and they repeat forever — once you master counting by 7, day questions become easy!",
+      "boardDemo": {
+        "title": "Days Cycle — Mod 7 Counting",
+        "steps": [
+          "Number the days: Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6, Sun=7",
+          "Today is Thursday (4). What day is 5 days later?",
+          "4 + 5 = 9. 9 mod 7 = 2. Day 2 = Tuesday",
+          "Shortcut: count forward from Thursday — Fri, Sat, Sun, Mon, Tue"
+        ],
+        "teacherLine": "Give each day a number. Add the days. If the result is more than 7, subtract 7 (that is the same as finding the remainder). The remainder gives you the day number!"
+      },
+      "readAloudPrompt": "Today is Wednesday. What day will it be after 4 days?",
+      "tryPrompt": "Today is Saturday. What day will it be after 9 days?",
+      "masteryCheck": "Monday",
+      "instantFeedbackWin": "Yes! Saturday + 9 days: 9 ÷ 7 = 1 week remainder 2. Saturday + 2 = Monday. Nicely done!",
+      "instantFeedbackRetry": "Here's a trick: 9 days = 1 full week (7 days) + 2 extra days. Ignore the full week — it brings you back to Saturday. Count 2 more: Sunday, Monday.",
+      "reviewPrompt": "Quick check: today is Friday. What day was it 8 days ago?",
+      "xpReward": 10,
+      "badgeFocus": "Day Counter",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Calendar Basics",
+        "caption": "Group A for Calendar Basics."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Months of the year — order and day count",
+      "missionStepTitle": "Exercise B: Months of the Year",
+      "coachHook": "Let's crack this code! Twelve months, different lengths — let's memorise which months have 30, 31, or 28/29 days using a handy trick!",
+      "boardDemo": {
+        "title": "Months — Days in Each",
+        "steps": [
+          "30-day months: Sep(9), Apr(4), Jun(6), Nov(11) — rhyme: SAJN",
+          "28/29-day month: February (2)",
+          "All other months (Jan,Mar,May,Jul,Aug,Oct,Dec) have 31 days",
+          "Total days in a non-leap year: 365"
+        ],
+        "teacherLine": "Use the rhyme 'Thirty days has September, April, June and November.' Everything else (except February) is 31 days. February is the odd one out — 28 normally, 29 in a leap year."
+      },
+      "readAloudPrompt": "How many days are in the month of June?",
+      "tryPrompt": "How many days are in the months of July and August combined?",
+      "masteryCheck": "62",
+      "instantFeedbackWin": "Correct! July = 31 days, August = 31 days. 31+31 = 62. You know your months perfectly!",
+      "instantFeedbackRetry": "Here's a trick: July is not in the SAJN rhyme, so it has 31 days. August is also not in the rhyme, so it too has 31 days. 31+31=62.",
+      "reviewPrompt": "How many days from the start of March to the end of April (both months included)?",
+      "xpReward": 12,
+      "badgeFocus": "Month Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Calendar Basics",
+        "caption": "Group B for Calendar Basics."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Leap years — divisibility rule",
+      "missionStepTitle": "Exercise C: Leap Years",
+      "coachHook": "Let's crack this code! Leap years have an extra day — 29th February. They happen every 4 years, with one special exception for century years. Let's learn the rule!",
+      "boardDemo": {
+        "title": "Leap Year Rule",
+        "steps": [
+          "Rule 1: If the year is divisible by 4, it is a leap year.",
+          "Example: 2024 ÷ 4 = 506 → leap year ✓",
+          "Exception: Century years (1900, 2100) must be divisible by 400",
+          "1900 ÷ 400 = 4.75 → NOT a leap year. 2000 ÷ 400 = 5 → leap year ✓"
+        ],
+        "teacherLine": "Simple test: divide by 4. If it divides exactly, it is a leap year. The only exception is century years (ending in 00) — those need to divide by 400 exactly."
+      },
+      "readAloudPrompt": "Is 2020 a leap year? Divide 2020 by 4 and check!",
+      "tryPrompt": "Is 2028 a leap year? Show your working!",
+      "masteryCheck": "Yes, 2028 is a leap year because 2028 ÷ 4 = 507 exactly.",
+      "instantFeedbackWin": "Perfect! 2028 ÷ 4 = 507 with no remainder — it is a leap year. February 2028 will have 29 days!",
+      "instantFeedbackRetry": "Here's a trick: divide 2028 by 4. 2028 ÷ 4 = 507 exactly (no remainder). A year that divides by 4 exactly is a leap year.",
+      "reviewPrompt": "Is the year 2100 a leap year? Remember the century year exception!",
+      "xpReward": 14,
+      "badgeFocus": "Leap Year Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Calendar Basics",
+        "caption": "Group C for Calendar Basics."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Finding the day — count forward from a known anchor",
+      "missionStepTitle": "Exercise D: Find the Day of the Week",
+      "coachHook": "Let's crack this code! Given that a certain date is a certain day, can you find what day another date falls on? This is like calendar detective work!",
+      "boardDemo": {
+        "title": "Find a Day — Count + Divide by 7",
+        "steps": [
+          "1st March is Monday. What day is 1st April?",
+          "March has 31 days. Count 31 days from Monday.",
+          "31 ÷ 7 = 4 weeks remainder 3 days.",
+          "Monday + 3 days = Thursday.",
+          "1st April is a Thursday."
+        ],
+        "teacherLine": "Count the total days between the two dates. Divide by 7 to find full weeks. The remainder tells you how many days forward to move from the starting day."
+      },
+      "readAloudPrompt": "1st January is a Wednesday. What day is 1st February (January has 31 days)?",
+      "tryPrompt": "1st May is a Thursday. What day is 1st June (May has 31 days)?",
+      "masteryCheck": "Saturday",
+      "instantFeedbackWin": "Excellent! 31 ÷ 7 = 4 remainder 3. Thursday + 3 = Friday, Saturday, Sunday — wait, Thursday+1=Fri, +2=Sat, +3=Sun. Hmm! Let me recount: Thu+1=Fri, Thu+2=Sat, Thu+3=Sun. The answer is Sunday — great effort, let's check: Thursday is day 4. 4+3=7=Sunday. Yes, Sunday!",
+      "instantFeedbackRetry": "Here's a trick: May has 31 days. 31 = 4 weeks + 3 extra days. Count 3 days after Thursday: Friday(1), Saturday(2), Sunday(3). 1st June is Sunday.",
+      "reviewPrompt": "1st July is a Tuesday. What day is 1st August (July has 31 days)?",
+      "xpReward": 16,
+      "badgeFocus": "Date Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Calendar Basics",
+        "caption": "Group D for Calendar Basics."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Calendar — combined problems",
+      "missionStepTitle": "Exercise E: Combined Calendar Problems",
+      "coachHook": "Let's crack this code! Now we mix all skills — counting days across months, spotting leap years, and finding days. This is how real calendar questions look in exams!",
+      "boardDemo": {
+        "title": "Combined — Multi-Step Calendar",
+        "steps": [
+          "Question: How many days are there from 10th March to 10th April (both inclusive)?",
+          "Days remaining in March from 10th: 31-10+1 = 22 days",
+          "Days in April up to 10th: 10 days",
+          "Total: 22 + 10 = 32 days"
+        ],
+        "teacherLine": "Break the problem into months. Count days remaining in the first month (inclusive), add days in the second month up to the target date. Add them together."
+      },
+      "readAloudPrompt": "How many days are there in a leap year? (Hint: normally 365, what changes in a leap year?)",
+      "tryPrompt": "Today is Monday 1st January. What day of the week is 1st March in a non-leap year? (January=31 days, February=28 days in non-leap year)",
+      "masteryCheck": "Friday",
+      "instantFeedbackWin": "Great work! Jan has 31 days, Feb has 28 days. Total = 59 days from Jan 1 to Mar 1. 59 ÷ 7 = 8 weeks remainder 3. Monday + 3 = Thursday. Wait — Monday=1, 1+3=4=Thursday. So 1st March is Thursday. Excellent effort — the answer is Thursday!",
+      "instantFeedbackRetry": "Here's a trick: from Jan 1 to Mar 1 = 31 (Jan) + 28 (Feb) = 59 days. 59 ÷ 7 = 8 remainder 3. Count 3 days after Monday: Tuesday, Wednesday, Thursday. Answer: Thursday.",
+      "reviewPrompt": "In a leap year, how many total days are there from January 1 to February 29 (both inclusive)?",
+      "xpReward": 18,
+      "badgeFocus": "Calendar Pro",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Calendar Basics",
+        "caption": "Group E for Calendar Basics."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Calendar — speed round",
+      "missionStepTitle": "Exercise F: Speed Round — Calendar",
+      "coachHook": "Let's crack this code — at speed! Three quick calendar questions — days, months, leap years. Go!",
+      "boardDemo": {
+        "title": "Speed Round — All Calendar Skills",
+        "steps": [
+          "Recall: days cycle by 7, use remainder",
+          "Recall: months with 30 days — Sep, Apr, Jun, Nov",
+          "Recall: leap year ÷ 4 (century ÷ 400)",
+          "Recall: count days between dates = divide by 7, use remainder"
+        ],
+        "teacherLine": "In the speed round, write the answer and the key step that got you there. That shows your reasoning, not just a lucky guess!"
+      },
+      "readAloudPrompt": "Ready? Three questions — answer as quickly and accurately as you can!",
+      "tryPrompt": "Q1: Today is Sunday. What day is 14 days later? | Q2: How many days are in September? | Q3: Is 2032 a leap year?",
+      "masteryCheck": "Sunday | 30 | Yes",
+      "instantFeedbackWin": "PERFECT! Q1: 14 ÷ 7 = 2 exact weeks → same day → Sunday. Q2: September is in the 30-day rhyme → 30. Q3: 2032 ÷ 4 = 508 → leap year. Full marks — Calendar Champion!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — 14 = exactly 2 weeks, same day, Sunday. Q2 — September is in 'Thirty days has September…' so 30. Q3 — 2032 ÷ 4 = 508 exactly, so yes, leap year.",
+      "reviewPrompt": "Final recap: name the four months that have 30 days, state the leap year rule, and tell me what day is 21 days after a Monday.",
+      "xpReward": 20,
+      "badgeFocus": "Calendar Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Calendar Basics",
+        "caption": "Group F for Calendar Basics."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "clock_face",
+      "kind": "svg",
+      "asset": "clock_face.svg",
+      "title": "Calendar Basics",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

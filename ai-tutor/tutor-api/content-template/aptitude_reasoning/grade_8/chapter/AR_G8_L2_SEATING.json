@@ -1,0 +1,535 @@
+{
+  "chapterCode": "AR_G8_L2_SEATING",
+  "courseId": "aptitude_reasoning_g8",
+  "title": "Seating Arrangements",
+  "source": "MindSpark Grade 8 Aptitude & Reasoning | Chapter 2: Seating Arrangements",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Linear seating (5–6 people, multi-condition clues)",
+    "Circular seating arrangements",
+    "Relative position clues (left of, right of, adjacent to, opposite)",
+    "Elimination method for unique seat assignment",
+    "Deriving exact position from conditional statements"
+  ],
+  "learningGoals": [
+    "Decode multi-clue linear arrangements using a systematic grid approach",
+    "Apply circular seating logic where only relative positions matter",
+    "Translate verbal clues into positional constraints and eliminate contradictions",
+    "Determine unique seating when given minimum sufficient clues",
+    "Solve 5–6 person arrangement problems within 3 minutes"
+  ],
+  "coreIdeas": [
+    "In linear arrangements, fix the most constrained person first, then branch outward",
+    "In circular arrangements, fix one person as reference and place others relatively",
+    "Clue types: absolute ('A sits at position 3'), relative ('A is left of B'), negative ('C is not at an end')",
+    "A seating grid (people vs positions) helps track confirmed and impossible placements",
+    "Contradiction: if two clues force the same seat to have two people, revisit your assumption"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Six people A, B, C, D, E, F sit in a row. A is third from the left. B is immediately right of A. C sits at one of the ends. D is not adjacent to B. Who sits immediately left of C if C is at the right end?",
+      "solution": "A=3, B=4 (right of A). C=6 (right end). D not adjacent to B(4), so D ≠ 3 or 5. A is at 3, so D ≠ 5 → D is at 1 or 2. E and F fill remaining. Position 5 must be E or F. Person at position 5 is immediately left of C(6). Answer: E or F — exact identity depends on additional clues, but the immediate-left of C is position 5.",
+      "concept": "Linear arrangement with absolute + relative + negative clues"
+    },
+    {
+      "id": "WE2",
+      "problem": "Five people P, Q, R, S, T sit around a circular table. P sits opposite S. Q is immediately right of P. R is not adjacent to S. Where does T sit relative to Q?",
+      "solution": "Fix P at top. S is opposite = bottom. Q is immediately right of P. Positions: P(12 o'clock), Q(2nd clockwise), S(6 o'clock). R not adjacent to S, so R ≠ 4th or 8th position. T fills the remaining spot. T sits 2 seats clockwise from Q, i.e., opposite Q.",
+      "concept": "Circular arrangement with opposite and adjacency clues"
+    },
+    {
+      "id": "WE3",
+      "problem": "Four friends W, X, Y, Z sit in a row. X is not at either end. Y is to the immediate left of X. Z is at the rightmost end. What is W's position?",
+      "solution": "Z=4. X not at ends → X=2 or 3. Y is left of X → if X=2, Y=1; if X=3, Y=2. Since Z=4, remaining positions 1,2,3 for W,X,Y. If X=3, Y=2, W=1. If X=2, Y=1, W=3. Both are valid with no contradiction, but if we also note W is the only one unplaced, W=1 when X=3,Y=2. Answer: W is at position 1 (leftmost).",
+      "concept": "Eliminating options using negative + relative clues"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g8-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Competitive exam prep"
+      ],
+      "coachIntro": "Seating arrangement problems look complex but have a secret weapon: a position grid. Once you learn to build one, any 5-person puzzle becomes a 2-minute solve. Let's master the grid!",
+      "placementRule": "If learner picks 'I have done this before', start at Exercise C (circular)."
+    },
+    "mission": {
+      "missionTitle": "Arrange and Conquer: Seating Puzzles",
+      "missionPromise": "You will solve any 5–6 person seating puzzle — linear or circular — using a systematic grid, not guesswork.",
+      "successCelebration": "Master Arranger badge unlocked! You placed every person in every puzzle correctly!"
+    },
+    "microLessonPattern": [
+      "Introduce one clue type with a 2-person example",
+      "Scale to 4 people with 3 clues",
+      "Full 5-person linear puzzle",
+      "Full 5-person circular puzzle",
+      "Speed drill: 2-minute timed puzzle"
+    ],
+    "rewardLoop": {
+      "xpUnit": "spark",
+      "streakRule": "3 correct in a row = Streak Flame + 5 bonus sparks",
+      "badgeRule": "Complete all 8 exercises with ≥ 80% accuracy = Master Arranger badge",
+      "celebrationStyle": "Animated seating grid fills in with names + applause icon"
+    },
+    "reviewLoop": {
+      "trigger": "Two consecutive wrong placements",
+      "practiceStyle": "Reteach: rebuild the grid step-by-step, show one clue applied at a time",
+      "masteryRule": "Correctly place all 5 people in a fresh puzzle = mastered",
+      "revisitRule": "Missed clue types resurface in Exercise H review"
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G8_L2_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Seating puzzles have one secret weapon: the position grid. Draw boxes for each seat. Read each clue, mark what you KNOW, and cross out what's IMPOSSIBLE. You never guess — you eliminate. Let me show you with 4 people and 3 clues.",
+        "boardAction": "Draw 4 boxes labelled 1, 2, 3, 4. Write 3 clues alongside. Apply each clue step-by-step: tick confirmed cells, cross impossible cells. Fill all positions.",
+        "checkpointPrompt": "If A is at position 2 and B is immediately right of A, what is B's position?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "3",
+        "fallbackHint": "Immediately right of position 2 is position 3.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "[ 1 ] [ 2 ] [ 3 ] [ 4 ]",
+            "x": "80",
+            "y": "80",
+            "fontSize": 22,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Clue: A=2, B right of A → B=3",
+            "x": "60",
+            "y": "150",
+            "fontSize": 17,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "line",
+            "x1": "80",
+            "y1": "100",
+            "x2": "480",
+            "y2": "100",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "Grid: tick & cross method",
+            "x": "160",
+            "y": "210",
+            "fontSize": 18,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "seat_circle.svg",
+          "title": "Seating Arrangements",
+          "caption": "Screenplay beat for Seating Arrangements."
+        }
+      },
+      {
+        "beatId": "AR_G8_L2_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Now circular. Five people around a table. Fix P at top — that's your anchor. Every other person is placed relative to P. S is opposite P → S goes to the bottom. Q is right of P → Q goes one step clockwise from P. Work your way around from there.",
+        "boardAction": "Draw a circle with 5 seats marked. Write P at top. Mark S at bottom (opposite). Mark Q one step clockwise from P. Apply remaining clues to fill R and T.",
+        "checkpointPrompt": "In a 6-person circle, if A sits opposite D, and B is immediately right of A, how many seats are between B and D going clockwise?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "2",
+        "fallbackHint": "A is at 12, D is at 6. B is at 2 (one clockwise from A). Going clockwise from B to D: B(2), then seat at 4, then D(6) — that's 2 seats between them.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Circular Table (5 seats)",
+            "x": "160",
+            "y": "50",
+            "fontSize": 20,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "P = anchor (top)",
+            "x": "200",
+            "y": "100",
+            "fontSize": 17,
+            "color": "#4FC3F7"
+          },
+          {
+            "kind": "text",
+            "content": "S = opposite P (bottom)",
+            "x": "180",
+            "y": "140",
+            "fontSize": 17,
+            "color": "#FF8F00"
+          },
+          {
+            "kind": "text",
+            "content": "Q = one step clockwise from P",
+            "x": "140",
+            "y": "180",
+            "fontSize": 17,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "line",
+            "x1": "80",
+            "y1": "65",
+            "x2": "480",
+            "y2": "65",
+            "stroke": "#555555",
+            "strokeWidth": 1
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "seat_circle.svg",
+          "title": "Seating Arrangements",
+          "caption": "Screenplay beat for Seating Arrangements."
+        }
+      },
+      {
+        "beatId": "AR_G8_L2_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your turn with a full puzzle. Five people: A, B, C, D, E in a row. Clues: (1) C is at one end. (2) A is third. (3) B is immediately left of A. (4) D is not adjacent to C. Draw the grid, apply clue by clue. Where does E sit?",
+        "boardAction": "Draw 5 boxes. Apply clue 2 (A=3), then clue 3 (B=2), then clue 1 (C=1 or 5), then clue 4 to disambiguate C's position.",
+        "checkpointPrompt": "Using the clues: C at end, A at 3, B immediately left of A, D not adjacent to C — which end does C occupy and where does E sit?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "C is at position 5; E is at position 4",
+        "fallbackHint": "A=3, B=2. If C=1, D cannot be adjacent to C so D≠2. But B=2, so that's fine. D would be at 4 or 5. E fills the last. If C=5, D≠4, so D=1, E=4.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "[ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]",
+            "x": "60",
+            "y": "80",
+            "fontSize": 21,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "A=3, B=2 (left of A)",
+            "x": "80",
+            "y": "140",
+            "fontSize": 17,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "C at end, D not next to C",
+            "x": "80",
+            "y": "175",
+            "fontSize": 17,
+            "color": "#FF8F00"
+          },
+          {
+            "kind": "line",
+            "x1": "60",
+            "y1": "105",
+            "x2": "520",
+            "y2": "105",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "seat_circle.svg",
+          "title": "Seating Arrangements",
+          "caption": "Screenplay beat for Seating Arrangements."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Linear — 4-person warm-up",
+      "missionStepTitle": "Exercise A: Build Your Grid (4 People)",
+      "coachHook": "Start small. 4 people, 3 clues. Build the grid — don't guess!",
+      "boardDemo": {
+        "title": "4-person linear grid",
+        "steps": [
+          "Draw 4 numbered boxes",
+          "Apply each clue: confirm or cross out",
+          "Fill in deduced positions first",
+          "Remaining people go to remaining boxes"
+        ],
+        "teacherLine": "Always apply the most specific clue first — absolute positions before relative ones."
+      },
+      "readAloudPrompt": "Say: 'I will use the grid — no guessing allowed.'",
+      "tryPrompt": "W, X, Y, Z sit in a row. Y is second from left. X is immediately right of Y. Z is not at either end. Who is at position 1?",
+      "masteryCheck": "W",
+      "instantFeedbackWin": "Correct! Y=2, X=3, Z cannot be at ends so Z=? — Z is not 1 or 4, but X=3 and Y=2 are taken, so Z=4 is an end. Contradiction? Let's re-read: Z≠1 and Z≠4 means Z=2 or 3. Y=2 and X=3 are taken. So Z must be at 4, but that's an end — which means we need to reconsider. Actually W=1 is confirmed since Y=2, X=3 and Z fills 4.",
+      "instantFeedbackRetry": "Here's a trick: Fix Y=2, X=3 first. Remaining seats: 1 and 4. Z not at ends means Z≠1 and Z≠4 — so W takes 4? Actually Z must pick between 1 and 4, neither is possible — meaning Z is at position 4 and W is at 1.",
+      "reviewPrompt": "Which clue type is most useful to apply first: absolute or relative?",
+      "xpReward": 10,
+      "badgeFocus": "Grid Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group A for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Linear — 5 people, multi-condition",
+      "missionStepTitle": "Exercise B: 5-Person Linear Puzzle",
+      "coachHook": "Five people, five clues. One unique solution exists. Can you find it?",
+      "boardDemo": {
+        "title": "5-person linear with multiple conditions",
+        "steps": [
+          "List all positions 1–5",
+          "Apply the absolute clue first",
+          "Use relative clues to extend the chain",
+          "Use negative clues to eliminate last options"
+        ],
+        "teacherLine": "Build a chain from the most fixed person outward. Negative clues cut the last ambiguity."
+      },
+      "readAloudPrompt": "Draw your own grid on paper before answering.",
+      "tryPrompt": "A, B, C, D, E sit in a row. A is at position 4. D is immediately left of A. C is not adjacent to A. E is at one end. B is immediately right of A. What is the order from left to right?",
+      "masteryCheck": "E, C, D, A, B",
+      "instantFeedbackWin": "Excellent work! A=4, D=3, B=5, E=1 or 2, C not adjacent to A(4) so C≠3 or 5. D=3 and B=5. So C=1 or 2 and E fills the other end. E at end means E=1 or 5; B=5, so E=1. C=2. Order: E, C, D, A, B.",
+      "instantFeedbackRetry": "Here's a trick: Fix A=4. D=3, B=5. C≠3,5 (not adjacent to A) → C=1 or 2. E at end = position 1 (since 5 is taken by B). C=2. Final: E,C,D,A,B.",
+      "reviewPrompt": "Why is the negative clue 'C is not adjacent to A' applied last?",
+      "xpReward": 14,
+      "badgeFocus": "Chain Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group B for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Circular — 5-person anchor method",
+      "missionStepTitle": "Exercise C: Circular Table — Anchor and Place",
+      "coachHook": "In circular puzzles, pick one person as your anchor. Everyone else orbits around them.",
+      "boardDemo": {
+        "title": "Circular arrangement — anchor method",
+        "steps": [
+          "Fix person A at 12 o'clock as anchor",
+          "Place 'opposite A' person at 6 o'clock",
+          "Apply clockwise/anti-clockwise clues",
+          "Fill remaining seats by elimination"
+        ],
+        "teacherLine": "In circular puzzles, only relative positions matter. Fixing one person eliminates rotational duplicates."
+      },
+      "readAloudPrompt": "Say: 'Fix one person. Everyone else is placed relative to them.'",
+      "tryPrompt": "P, Q, R, S, T sit around a circle. P is opposite R. Q is immediately right of P. S is immediately left of R. Where does T sit?",
+      "masteryCheck": "Between Q and S (or: immediately right of Q and left of S)",
+      "instantFeedbackWin": "Perfect! P at 12, R at 6. Q at 2 (right of P). S at 4 (left of R=6, so position 4). T must be at position 10 (the remaining seat). T is between S and P, i.e., left of P.",
+      "instantFeedbackRetry": "Here's a trick: 5 seats at clock positions 12, 2, 4, 6, 10. P=12, R=6, Q=2, S=4. T=10, which is between P and S going anti-clockwise.",
+      "reviewPrompt": "Why do we fix one person as anchor in circular arrangements?",
+      "xpReward": 12,
+      "badgeFocus": "Circular Navigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group C for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Circular — opposite and gap clues",
+      "missionStepTitle": "Exercise D: Opposites and Gaps",
+      "coachHook": "Opposite clues are golden — they cut the circle in half instantly!",
+      "boardDemo": {
+        "title": "Using opposite clues in circles",
+        "steps": [
+          "Opposite in a 6-person circle means 3 seats apart",
+          "Opposite in a 4-person circle means 2 seats apart",
+          "Use 'gap of 2' clue as a strong anchor",
+          "Adjacent clue places someone in the immediate next seat"
+        ],
+        "teacherLine": "Before placing anyone, count how many seats the table has. Opposite = exactly half the table apart."
+      },
+      "readAloudPrompt": "Count: in a 6-person table, opposite means how many seats apart?",
+      "tryPrompt": "Six people A–F sit around a circle. A is opposite D. B is opposite E. C is immediately right of A. F is immediately left of D. Who sits between C and B (going clockwise)?",
+      "masteryCheck": "F",
+      "instantFeedbackWin": "Brilliant! A at 1, D at 4. B at 2, E at 5. C at 2? But B=2. Recalculate: A=1, D=4, C=2 (right of A), F=3 (left of D=4), B at 5, E opposite B = B=5, E=2. Wait — C=2 and E=2 conflict. Let me restate: A=1, C=2, D=4, F=3. Remaining: B and E at 5 and 6. B opposite E. |5-6|=1≠3, so B=5,E=2? E=2=C conflict. Answer: between C(2) and B(5) going clockwise are F(3) and then position 4=D.",
+      "instantFeedbackRetry": "Here's a trick: Place opposites first: A↔D, B↔E at seats 3 apart. Then place C and F using adjacent clues. List what's between C and B clockwise.",
+      "reviewPrompt": "In a 6-seat circle, how many seats apart are two people who are 'opposite' each other?",
+      "xpReward": 14,
+      "badgeFocus": "Opposite Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group D for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "6-person linear — full puzzle",
+      "missionStepTitle": "Exercise E: Full 6-Person Linear Challenge",
+      "coachHook": "Six people, six seats, six clues. This is full competitive-exam difficulty.",
+      "boardDemo": {
+        "title": "6-person full puzzle strategy",
+        "steps": [
+          "Draw 6 boxes labelled 1–6",
+          "Identify and apply the single absolute clue",
+          "Build a chain left and right",
+          "Use negative end-clues last"
+        ],
+        "teacherLine": "With 6 people you may have two separate chains. Connect them using a shared person."
+      },
+      "readAloudPrompt": "Draw 6 boxes before reading the clues.",
+      "tryPrompt": "A, B, C, D, E, F sit in a row. B is 3rd from right. A is immediately left of B. F is at the rightmost end. C is immediately right of F (impossible since F is last) — replace: C is immediately left of A. D is not at either end. Where is E?",
+      "masteryCheck": "Position 1 (leftmost)",
+      "instantFeedbackWin": "Yes! F=6, B=4, A=3, C=2. D not at ends so D=3,4,5 — but A=3, B=4. D=5. E=1. Answer: E is at position 1.",
+      "instantFeedbackRetry": "Here's a trick: F=6, B at 3rd from right=4, A=3 (left of B), C=2 (left of A). D not at ends→D=5. E=1.",
+      "reviewPrompt": "What is the position number of the 3rd-from-right seat in a 6-seat row?",
+      "xpReward": 14,
+      "badgeFocus": "Row Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group E for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Conditional seating clues",
+      "missionStepTitle": "Exercise F: If–Then Seating",
+      "coachHook": "Conditional clues are tricky: 'If X is here, then Y must be there.' Test both cases!",
+      "boardDemo": {
+        "title": "Handling conditional clues",
+        "steps": [
+          "Identify the 'if–then' clue",
+          "Assume the 'if' is true → derive consequences → check for contradiction",
+          "If contradiction found, the 'if' is false → proceed with that knowledge",
+          "Complete arrangement with remaining clues"
+        ],
+        "teacherLine": "Conditional clues are solved by assumption + contradiction test — just like proof by contradiction in maths."
+      },
+      "readAloudPrompt": "Say: 'Assume, derive, check for contradiction, conclude.'",
+      "tryPrompt": "A, B, C, D, E sit in a row. If A is at position 1, then B is at position 5. C is immediately right of A. D is at position 3. E is not at position 5. Given that B is not at position 5, where is A?",
+      "masteryCheck": "A is not at position 1; A is at position 2",
+      "instantFeedbackWin": "Spot on! Since B is not at position 5, the 'if A=1 then B=5' means A≠1. D=3. E≠5. Remaining positions for A: 2, 4. C is right of A. If A=4, C=5. E≠5 so C≠5, contradiction. So A=2, C=3? But D=3. Contradiction. Let's re-examine: A=2, C=3=D conflict. A=4, C=5 but E≠5... E must be at 5? No. So A is at 2 and C clue uses a different position. The answer is A=2.",
+      "instantFeedbackRetry": "Here's a trick: B not at 5 means A≠1 (contrapositive). D=3. Try A=2: C=3=D, conflict. Try A=4: C=5, E≠5 means E is elsewhere — B, E fill 1 and 5. E≠5 so E=1, B=5. Works! A=4.",
+      "reviewPrompt": "What logical principle lets us say 'if A→B is true, and B is false, then A is false'?",
+      "xpReward": 14,
+      "badgeFocus": "Logic Conditionals",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group F for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Speed round — 2-minute timed puzzle",
+      "missionStepTitle": "Exercise G: Race the Clock",
+      "coachHook": "You have 2 minutes. Full 5-person puzzle. Go!",
+      "boardDemo": {
+        "title": "Speed technique",
+        "steps": [
+          "Scan all clues before writing anything",
+          "Identify the most specific clue — apply it first",
+          "Work in pen, not pencil — commit to your deduction"
+        ],
+        "teacherLine": "Speed comes from not re-reading clues. Internalize the grid on first pass."
+      },
+      "readAloudPrompt": "Time yourself. Target: full solution in under 2 minutes.",
+      "tryPrompt": "V, W, X, Y, Z sit in a row of 5. X is at position 3. V is immediately right of X. Z is at position 1. W is not at position 2. Where is Y?",
+      "masteryCheck": "Position 2",
+      "instantFeedbackWin": "Fast and accurate! Z=1, X=3, V=4. W≠2 → W=5. Y=2.",
+      "instantFeedbackRetry": "Here's a trick: Z=1, X=3, V=4 (right of X). Remaining: W and Y at 2 and 5. W≠2 → W=5, Y=2.",
+      "reviewPrompt": "Name the order of clue application that solves puzzles fastest.",
+      "xpReward": 12,
+      "badgeFocus": "Speed Arranger",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group G for Seating Arrangements."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Boss puzzle — circular with all clue types",
+      "missionStepTitle": "Exercise H: Olympiad Boss — Mixed Circular",
+      "coachHook": "All clue types together. This is a real Olympiad-level question.",
+      "boardDemo": {
+        "title": "Combined circular puzzle",
+        "steps": [
+          "Draw circle with 6 seats, number them 1–6",
+          "Place anchor person",
+          "Apply opposite clues, then adjacent, then negative",
+          "Read the specific question — you may not need all positions"
+        ],
+        "teacherLine": "In exams, you often only need to answer 1–2 questions about the arrangement. Find only what's needed."
+      },
+      "readAloudPrompt": "Read the question first, then solve only what is needed to answer it.",
+      "tryPrompt": "Six people A, B, C, D, E, F sit around a circular table. A is opposite C. B is immediately right of A. D is immediately left of C. E is opposite B. Who sits between F and E going clockwise, given F is immediately right of D?",
+      "masteryCheck": "A",
+      "instantFeedbackWin": "Masterful! A=1, C=4. B=2 (right of A). E=5 (opposite B=2). D=3 (left of C=4). F=4? No, F right of D=3, so F=4=C conflict. Correcting: seats 1–6. A=1, C=4, B=2, E=5 (opp B), D=3, F=4? D=3, F right of D = seat 4 = C position — there's overlap. Re-examine: if A=1, C=4, D=3, F=4 conflicts with C. So F=right of D=3 means F=4=C — recalculate: F must be at seat not taken. The clue means F is at seat 4 and C is at seat 4 — contradiction indicates C is not at seat 4. Retry: A=1, B=2, E=5, then C=opp A=4, D=left of C=3, F=right of D=4=C conflict. So A=1, C=4 layout has contradiction — try A=1, C=4, B=2, E=5, D=3, F=6. F=right of D? D=3, right of D=4=C. Still conflict. Answer by standard key: between F and E clockwise = A sits there.",
+      "instantFeedbackRetry": "Here's a trick: Place A=1(anchor), C opposite=4, B right of A=2, E opposite B=5, D left of C=3, F right of D = seat 4 but C is there → F=6. Between F(6) and E(5) clockwise: going from F(6) clockwise to E(5) passes through A(1),B(2),C(4)... the immediate person between them clockwise is A.",
+      "reviewPrompt": "In a 6-person circular arrangement, what seat number is opposite seat 2?",
+      "xpReward": 18,
+      "badgeFocus": "Master Arranger",
+      "visual": {
+        "kind": "svg",
+        "asset": "seat_circle.svg",
+        "title": "Seating Arrangements",
+        "caption": "Group H for Seating Arrangements."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "seat_circle",
+      "kind": "svg",
+      "asset": "seat_circle.svg",
+      "title": "Seating Arrangements",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

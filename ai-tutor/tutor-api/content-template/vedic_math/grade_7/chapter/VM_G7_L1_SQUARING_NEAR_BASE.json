@@ -55,9 +55,21 @@
     "version": "2026-03-mindspark-g7-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will learn to square numbers near 100 and 1000 in your head — faster than any calculator!",
       "placementRule": "If the learner correctly states the deficit of 97 from 100, skip group A and start at group B."
     },
@@ -89,7 +101,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -118,11 +134,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the deficit of 97 from 100?",
-            "options": ["2", "3", "4", "7"],
+            "options": [
+              "2",
+              "3",
+              "4",
+              "7"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "Deficit = 100 − 97",
-            "solution": "100 − 97 = 3. The deficit is 3."
+            "solution": "100 − 97 = 3. The deficit is 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group A for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_A2",
@@ -134,11 +161,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the surplus of 106 above 100?",
-            "options": ["4", "5", "6", "7"],
+            "options": [
+              "4",
+              "5",
+              "6",
+              "7"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "6",
             "hint": "Surplus = 106 − 100",
-            "solution": "106 − 100 = 6. The surplus is 6."
+            "solution": "106 − 100 = 6. The surplus is 6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group A for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_A3",
@@ -150,13 +188,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the deficit of 993 from 1000?",
-            "options": ["5", "6", "7", "8"],
+            "options": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "7",
             "hint": "Deficit = 1000 − 993",
-            "solution": "1000 − 993 = 7. The deficit is 7."
+            "solution": "1000 − 993 = 7. The deficit is 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group A for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group A for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -183,11 +238,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "98² = ?",
-            "options": ["9604", "9406", "9504", "9806"],
+            "options": [
+              "9604",
+              "9406",
+              "9504",
+              "9806"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9604",
             "hint": "Deficit = 2. Left = 96, Right = 04.",
-            "solution": "Deficit=2, left=96, right=2²=04. Answer: 9604."
+            "solution": "Deficit=2, left=96, right=2²=04. Answer: 9604.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group B for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_B2",
@@ -199,11 +265,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "103² = ?",
-            "options": ["10069", "10609", "10906", "10600"],
+            "options": [
+              "10069",
+              "10609",
+              "10906",
+              "10600"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "10609",
             "hint": "Surplus = 3. Left = 103+3 = 106, Right = 09.",
-            "solution": "Surplus=3, left=106, right=3²=09. Answer: 10609."
+            "solution": "Surplus=3, left=106, right=3²=09. Answer: 10609.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group B for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_B3",
@@ -216,16 +293,44 @@
             "questionType": "fill_step",
             "questionText": "Find 97² using the near-base formula.",
             "steps": [
-              {"label": "Deficit of 97 from 100: 100 − 97 = ?", "answer": "3", "hint": "100 minus 97"},
-              {"label": "Left part: 97 − 3 = ?", "answer": "94", "hint": "Subtract deficit from 97"},
-              {"label": "Right part: 3² = ? (write as 2-digit)", "answer": "09", "hint": "3 squared = 9, padded to 09"},
-              {"label": "Final answer (left part then right part): ?", "answer": "9409", "hint": "Combine 94 and 09"}
+              {
+                "label": "Deficit of 97 from 100: 100 − 97 = ?",
+                "answer": "3",
+                "hint": "100 minus 97"
+              },
+              {
+                "label": "Left part: 97 − 3 = ?",
+                "answer": "94",
+                "hint": "Subtract deficit from 97"
+              },
+              {
+                "label": "Right part: 3² = ? (write as 2-digit)",
+                "answer": "09",
+                "hint": "3 squared = 9, padded to 09"
+              },
+              {
+                "label": "Final answer (left part then right part): ?",
+                "answer": "9409",
+                "hint": "Combine 94 and 09"
+              }
             ],
             "expectedAnswer": "9409",
             "hint": "Deficit=3, left=94, right=09.",
-            "solution": "Deficit=3, left=94, right=3²=09. Answer: 9409."
+            "solution": "Deficit=3, left=94, right=3²=09. Answer: 9409.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group B for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group B for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -252,11 +357,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "997² = ?",
-            "options": ["994009", "994090", "993009", "994900"],
+            "options": [
+              "994009",
+              "994090",
+              "993009",
+              "994900"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "994009",
             "hint": "Deficit=3, left=994, right=009.",
-            "solution": "Deficit=3, left=994, right=3²=009. Answer: 994009."
+            "solution": "Deficit=3, left=994, right=3²=009. Answer: 994009.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group C for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_C2",
@@ -268,11 +384,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "1004² = ?",
-            "options": ["1008016", "1008160", "1006016", "1004016"],
+            "options": [
+              "1008016",
+              "1008160",
+              "1006016",
+              "1004016"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "1008016",
             "hint": "Surplus=4, left=1008, right=016.",
-            "solution": "Surplus=4, left=1008, right=4²=016. Answer: 1008016."
+            "solution": "Surplus=4, left=1008, right=4²=016. Answer: 1008016.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group C for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_C3",
@@ -285,16 +412,44 @@
             "questionType": "fill_step",
             "questionText": "Find 996² step by step.",
             "steps": [
-              {"label": "Deficit of 996 from 1000: 1000 − 996 = ?", "answer": "4", "hint": "1000 minus 996"},
-              {"label": "Left part: 996 − 4 = ?", "answer": "992", "hint": "Subtract deficit"},
-              {"label": "Right part: 4² = ? (write as 3-digit)", "answer": "016", "hint": "4 squared = 16, padded to 016"},
-              {"label": "Final answer: ?", "answer": "992016", "hint": "Combine 992 and 016"}
+              {
+                "label": "Deficit of 996 from 1000: 1000 − 996 = ?",
+                "answer": "4",
+                "hint": "1000 minus 996"
+              },
+              {
+                "label": "Left part: 996 − 4 = ?",
+                "answer": "992",
+                "hint": "Subtract deficit"
+              },
+              {
+                "label": "Right part: 4² = ? (write as 3-digit)",
+                "answer": "016",
+                "hint": "4 squared = 16, padded to 016"
+              },
+              {
+                "label": "Final answer: ?",
+                "answer": "992016",
+                "hint": "Combine 992 and 016"
+              }
             ],
             "expectedAnswer": "992016",
             "hint": "Deficit=4, left=992, right=016.",
-            "solution": "Deficit=4, left=992, right=4²=016. Answer: 992016."
+            "solution": "Deficit=4, left=992, right=4²=016. Answer: 992016.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group C for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group C for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -321,11 +476,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "95² = ?",
-            "options": ["9025", "9125", "9025", "8825"],
+            "options": [
+              "9025",
+              "9125",
+              "9025",
+              "8825"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9025",
             "hint": "Base 100, deficit=5, left=90, right=25.",
-            "solution": "Deficit=5, left=90, right=5²=25. Answer: 9025."
+            "solution": "Deficit=5, left=90, right=5²=25. Answer: 9025.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group D for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_D2",
@@ -337,11 +503,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "1007² = ?",
-            "options": ["1014049", "1014490", "1004049", "1014049"],
+            "options": [
+              "1014049",
+              "1014490",
+              "1004049",
+              "1014049"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "1014049",
             "hint": "Base 1000, surplus=7, left=1014, right=049.",
-            "solution": "Surplus=7, left=1014, right=7²=049. Answer: 1014049."
+            "solution": "Surplus=7, left=1014, right=7²=049. Answer: 1014049.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group D for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_D3",
@@ -353,13 +530,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A student says 96² = 9216. Is that correct?",
-            "options": ["Yes, it is correct", "No, the answer is 9316", "No, the answer is 9116", "No, the answer is 9024"],
+            "options": [
+              "Yes, it is correct",
+              "No, the answer is 9316",
+              "No, the answer is 9116",
+              "No, the answer is 9024"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "Yes, it is correct",
             "hint": "Deficit=4, left=92, right=4²=16. Check: 9216.",
-            "solution": "Deficit=4, left=92, right=16. Answer: 9216. The student is correct."
+            "solution": "Deficit=4, left=92, right=16. Answer: 9216. The student is correct.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group D for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group D for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -386,11 +580,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In the formula n² = (n − d) × 100 + d², what does 'd' represent?",
-            "options": ["The answer", "The digit sum", "The deficit from 100", "The left part"],
+            "options": [
+              "The answer",
+              "The digit sum",
+              "The deficit from 100",
+              "The left part"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "The deficit from 100",
             "hint": "d is how far n is below 100.",
-            "solution": "d is the deficit, i.e., how much n falls short of 100."
+            "solution": "d is the deficit, i.e., how much n falls short of 100.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group E for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_E2",
@@ -402,11 +607,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "101² = ?",
-            "options": ["10021", "10201", "10211", "10121"],
+            "options": [
+              "10021",
+              "10201",
+              "10211",
+              "10121"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "10201",
             "hint": "Surplus=1, left=102, right=01.",
-            "solution": "Surplus=1, left=102, right=1²=01. Answer: 10201."
+            "solution": "Surplus=1, left=102, right=1²=01. Answer: 10201.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group E for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_E3",
@@ -418,13 +634,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 999² using base 1000, the right part is 1² = 1. How should this be written?",
-            "options": ["1", "01", "001", "0001"],
+            "options": [
+              "1",
+              "01",
+              "001",
+              "0001"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "001",
             "hint": "Base 1000 has 3 zeros, so right part needs 3 digits.",
-            "solution": "Base 1000 → right part must have 3 digits. 1² = 1 → pad to 001."
+            "solution": "Base 1000 → right part must have 3 digits. 1² = 1 → pad to 001.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group E for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group E for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -452,14 +685,36 @@
             "questionType": "fill_step",
             "questionText": "Find 993² step by step.",
             "steps": [
-              {"label": "Deficit of 993 from 1000: 1000 − 993 = ?", "answer": "7", "hint": "1000 minus 993"},
-              {"label": "Left part: 993 − 7 = ?", "answer": "986", "hint": "Subtract deficit from 993"},
-              {"label": "Right part: 7² = ? (write as 3-digit)", "answer": "049", "hint": "7²=49, padded to 049"},
-              {"label": "Final answer: ?", "answer": "986049", "hint": "Combine 986 and 049"}
+              {
+                "label": "Deficit of 993 from 1000: 1000 − 993 = ?",
+                "answer": "7",
+                "hint": "1000 minus 993"
+              },
+              {
+                "label": "Left part: 993 − 7 = ?",
+                "answer": "986",
+                "hint": "Subtract deficit from 993"
+              },
+              {
+                "label": "Right part: 7² = ? (write as 3-digit)",
+                "answer": "049",
+                "hint": "7²=49, padded to 049"
+              },
+              {
+                "label": "Final answer: ?",
+                "answer": "986049",
+                "hint": "Combine 986 and 049"
+              }
             ],
             "expectedAnswer": "986049",
             "hint": "Deficit=7, left=986, right=049.",
-            "solution": "Deficit=7, left=986, right=7²=049. Answer: 986049."
+            "solution": "Deficit=7, left=986, right=7²=049. Answer: 986049.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group F for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_F2",
@@ -472,16 +727,44 @@
             "questionType": "fill_step",
             "questionText": "Find 1009² step by step.",
             "steps": [
-              {"label": "Surplus of 1009 above 1000: 1009 − 1000 = ?", "answer": "9", "hint": "1009 minus 1000"},
-              {"label": "Left part: 1009 + 9 = ?", "answer": "1018", "hint": "Add surplus to 1009"},
-              {"label": "Right part: 9² = ? (write as 3-digit)", "answer": "081", "hint": "9²=81, padded to 081"},
-              {"label": "Final answer: ?", "answer": "1018081", "hint": "Combine 1018 and 081"}
+              {
+                "label": "Surplus of 1009 above 1000: 1009 − 1000 = ?",
+                "answer": "9",
+                "hint": "1009 minus 1000"
+              },
+              {
+                "label": "Left part: 1009 + 9 = ?",
+                "answer": "1018",
+                "hint": "Add surplus to 1009"
+              },
+              {
+                "label": "Right part: 9² = ? (write as 3-digit)",
+                "answer": "081",
+                "hint": "9²=81, padded to 081"
+              },
+              {
+                "label": "Final answer: ?",
+                "answer": "1018081",
+                "hint": "Combine 1018 and 081"
+              }
             ],
             "expectedAnswer": "1018081",
             "hint": "Surplus=9, left=1018, right=081.",
-            "solution": "Surplus=9, left=1018, right=9²=081. Answer: 1018081."
+            "solution": "Surplus=9, left=1018, right=9²=081. Answer: 1018081.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group F for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group F for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -508,11 +791,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 94² = ?",
-            "options": ["8836", "8736", "8936", "8816"],
+            "options": [
+              "8836",
+              "8736",
+              "8936",
+              "8816"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "8836",
             "hint": "Deficit=6, left=88, right=36.",
-            "solution": "Deficit=6, left=88, right=6²=36. Answer: 8836."
+            "solution": "Deficit=6, left=88, right=6²=36. Answer: 8836.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group G for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_G2",
@@ -524,11 +818,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 1003² = ?",
-            "options": ["1006009", "1003009", "1006090", "1009006"],
+            "options": [
+              "1006009",
+              "1003009",
+              "1006090",
+              "1009006"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "1006009",
             "hint": "Surplus=3, left=1006, right=009.",
-            "solution": "Surplus=3, left=1006, right=3²=009. Answer: 1006009."
+            "solution": "Surplus=3, left=1006, right=3²=009. Answer: 1006009.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group G for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_G3",
@@ -540,13 +845,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 105² = ?",
-            "options": ["11025", "10525", "11225", "11005"],
+            "options": [
+              "11025",
+              "10525",
+              "11225",
+              "11005"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "11025",
             "hint": "Surplus=5, left=110, right=25.",
-            "solution": "Surplus=5, left=110, right=5²=25. Answer: 11025."
+            "solution": "Surplus=5, left=110, right=5²=25. Answer: 11025.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group G for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group G for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -573,11 +895,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "988² = ?",
-            "options": ["976144", "975144", "976244", "986144"],
+            "options": [
+              "976144",
+              "975144",
+              "976244",
+              "986144"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "976144",
             "hint": "Deficit=12, left=976, right=12²=144.",
-            "solution": "Deficit=12, left=976, right=12²=144. Answer: 976144."
+            "solution": "Deficit=12, left=976, right=12²=144. Answer: 976144.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group H for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_H2",
@@ -590,16 +923,44 @@
             "questionType": "fill_step",
             "questionText": "Find 992² step by step.",
             "steps": [
-              {"label": "Deficit: 1000 − 992 = ?", "answer": "8", "hint": "1000 minus 992"},
-              {"label": "Left part: 992 − 8 = ?", "answer": "984", "hint": "Subtract deficit"},
-              {"label": "Right part: 8² = ? (3-digit)", "answer": "064", "hint": "64 padded to 064"},
-              {"label": "Final answer: ?", "answer": "984064", "hint": "Combine 984 and 064"}
+              {
+                "label": "Deficit: 1000 − 992 = ?",
+                "answer": "8",
+                "hint": "1000 minus 992"
+              },
+              {
+                "label": "Left part: 992 − 8 = ?",
+                "answer": "984",
+                "hint": "Subtract deficit"
+              },
+              {
+                "label": "Right part: 8² = ? (3-digit)",
+                "answer": "064",
+                "hint": "64 padded to 064"
+              },
+              {
+                "label": "Final answer: ?",
+                "answer": "984064",
+                "hint": "Combine 984 and 064"
+              }
             ],
             "expectedAnswer": "984064",
             "hint": "Deficit=8, left=984, right=064.",
-            "solution": "Deficit=8, left=984, right=8²=064. Answer: 984064."
+            "solution": "Deficit=8, left=984, right=8²=064. Answer: 984064.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group H for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group H for Power Squaring — Near Base 100 and 1000."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -626,11 +987,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "9997² = ?",
-            "options": ["99940009", "99970009", "99940090", "99930009"],
+            "options": [
+              "99940009",
+              "99970009",
+              "99940090",
+              "99930009"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "99940009",
             "hint": "Deficit=3, left=9994, right=0009.",
-            "solution": "Deficit=3, left=9994, right=3²=0009. Answer: 99940009."
+            "solution": "Deficit=3, left=9994, right=3²=0009. Answer: 99940009.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group I for Power Squaring — Near Base 100 and 1000."
+            }
           },
           {
             "questionId": "VM_G7_L1_I2",
@@ -642,13 +1014,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "10003² = ?",
-            "options": ["100060009", "100030009", "100060090", "100009006"],
+            "options": [
+              "100060009",
+              "100030009",
+              "100060090",
+              "100009006"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "100060009",
             "hint": "Surplus=3, left=10006, right=0009.",
-            "solution": "Surplus=3, left=10006, right=3²=0009. Answer: 100060009."
+            "solution": "Surplus=3, left=10006, right=3²=0009. Answer: 100060009.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Power Squaring — Near Base 100 and 1000",
+              "caption": "Group I for Power Squaring — Near Base 100 and 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "caption": "Group I for Power Squaring — Near Base 100 and 1000."
+        }
       }
     ]
   },
@@ -658,7 +1047,12 @@
       "exerciseGroup": "A",
       "subtopic": "Deficit and surplus review",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "number-line-100"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Before squaring, let's get sharp on the gap between a number and its base. This gap is the deficit or surplus.",
       "boardAction": "Draw a number line at 100. Mark 97 (deficit 3) and 103 (surplus 3). Annotate both gaps.",
       "checkpointPrompt": "What is the deficit of 994 from 1000?",
@@ -669,7 +1063,12 @@
       "exerciseGroup": "B",
       "subtopic": "Squaring numbers near 100",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "base-100-formula"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Now for the magic formula. For n near 100: n² = (n − deficit) × 100 + deficit². Two parts and done!",
       "boardAction": "Write the formula. Show 98² → deficit=2, left=96, right=04. Box 9604.",
       "checkpointPrompt": "Apply to 97².",
@@ -680,7 +1079,12 @@
       "exerciseGroup": "C",
       "subtopic": "Squaring numbers near 1000",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "base-1000-formula"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Same formula, bigger base. Near 1000: left part × 1000, right part needs THREE digits.",
       "boardAction": "Show 997² → deficit=3, left=994, right=009. Emphasise three-digit padding. Box 994009.",
       "checkpointPrompt": "Solve 1004².",
@@ -691,7 +1095,12 @@
       "exerciseGroup": "D",
       "subtopic": "Mixed near-base squaring",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "base-choice"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Mixed problems! First decide: is the number near 100 or near 1000? Then apply the right formula.",
       "boardAction": "Write two columns: near-100 examples and near-1000 examples. Show base identification step.",
       "checkpointPrompt": "1007² = ?",
@@ -702,7 +1111,12 @@
       "exerciseGroup": "E",
       "subtopic": "MCQ checkpoint",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "formula-recap"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Checkpoint! Let's confirm your understanding of the formula with MCQ questions.",
       "boardAction": "Write the formula for both bases. Ask MCQ about formula concepts.",
       "checkpointPrompt": "If deficit = 6 for a near-100 squaring, what is the right part?",
@@ -713,7 +1127,12 @@
       "exerciseGroup": "F",
       "subtopic": "Step-by-step squaring near 1000",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "step-annotation"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Fill in every step for near-1000 squaring. Slow is smooth, smooth is fast!",
       "boardAction": "Show fill_step template for 993². Walk through each box.",
       "checkpointPrompt": "Solve 998² giving all three steps.",
@@ -724,7 +1143,12 @@
       "exerciseGroup": "G",
       "subtopic": "Speed drill",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "speed-mode"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Speed mode! Flash a number, answer in three seconds. The formula is automatic now.",
       "boardAction": "Flash three problems: 94², 1003², 105². Show answers after 3 seconds.",
       "checkpointPrompt": "105² = ?",
@@ -735,7 +1159,12 @@
       "exerciseGroup": "H",
       "subtopic": "3-digit squaring near 1000",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "large-deficit"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Larger deficits now! When deficit is 10 or more, the right part may already have 3 digits — no extra padding needed.",
       "boardAction": "Show 988²: deficit=12, left=976, right=144. Contrast with deficit=2 where we pad to 004.",
       "checkpointPrompt": "1012² = ?",
@@ -746,7 +1175,12 @@
       "exerciseGroup": "I",
       "subtopic": "4-digit challenge",
       "boardMode": "svg",
-      "visual": {"asset": "squaring_near_base.svg", "highlight": "base-10000"},
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Teaching step for Power Squaring — Near Base 100 and 1000."
+      },
       "teacherLine": "Boss level! Base 10000 — the right part needs FOUR digits. Same formula, bigger canvas.",
       "boardAction": "Demonstrate 9998²: deficit=2, left=9996, right=0004. Box 99960004.",
       "checkpointPrompt": "9994² = ?",
@@ -773,7 +1207,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_A_EXPLAIN",
@@ -787,14 +1227,20 @@
       "boardAction": "Annotate the number line gaps in colour.",
       "checkpointPrompt": "What is the deficit of 994 from 1000?",
       "pauseType": "student_input",
-      "holdSec": 4.0,
+      "holdSec": 4,
       "expectedStudentResponse": "6",
       "fallbackHint": "1000 − 994 = 6.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_A_PRACTICE",
@@ -808,14 +1254,20 @@
       "boardAction": "Show MCQ card VM_G7_L1_A1.",
       "checkpointPrompt": "What is the deficit of 97 from 100?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "3",
       "fallbackHint": "100 minus 97.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_B_INTRO",
@@ -836,7 +1288,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_B_EXPLAIN",
@@ -850,14 +1308,20 @@
       "boardAction": "Show 98² worked with colour for left and right parts.",
       "checkpointPrompt": "What is 97²?",
       "pauseType": "student_input",
-      "holdSec": 6.0,
+      "holdSec": 6,
       "expectedStudentResponse": "9409",
       "fallbackHint": "Deficit=3, left=94, right=09.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_B_PRACTICE",
@@ -871,14 +1335,20 @@
       "boardAction": "Show MCQ card VM_G7_L1_B1.",
       "checkpointPrompt": "98² = ?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "9604",
       "fallbackHint": "Deficit=2, left=96, right=04.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_C_INTRO",
@@ -899,7 +1369,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_C_EXPLAIN",
@@ -913,14 +1389,20 @@
       "boardAction": "Show 997² with three-digit right-part padding highlighted.",
       "checkpointPrompt": "Solve 1004².",
       "pauseType": "student_input",
-      "holdSec": 7.0,
+      "holdSec": 7,
       "expectedStudentResponse": "1008016",
       "fallbackHint": "Surplus=4, left=1008, right=016.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_C_PRACTICE",
@@ -934,14 +1416,20 @@
       "boardAction": "Show fill_step card VM_G7_L1_C3.",
       "checkpointPrompt": "Complete all steps for 996².",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "992016",
       "fallbackHint": "Deficit=4, left=992, right=016.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_I_INTRO",
@@ -962,7 +1450,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_I_EXPLAIN",
@@ -976,14 +1470,20 @@
       "boardAction": "Show four-digit right-part padding. Box 99960004.",
       "checkpointPrompt": "9994² = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "99880036",
       "fallbackHint": "Deficit=6, left=9988, right=0036.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
     },
     {
       "beatId": "VM_G7_L1_I_PRACTICE",
@@ -997,14 +1497,31 @@
       "boardAction": "Show MCQ card VM_G7_L1_I1.",
       "checkpointPrompt": "9997² = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "99940009",
       "fallbackHint": "Deficit=3, left=9994, right=0009.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Power Squaring — Near Base 100 and 1000",
+        "caption": "Screenplay beat for Power Squaring — Near Base 100 and 1000."
+      }
+    }
+  ],
+  "chapterCode": "VM_G7_L1_SQUARING_NEAR_BASE",
+  "courseId": "vedic_math_g7",
+  "visualLibrary": [
+    {
+      "visualId": "nikhilam_base100",
+      "kind": "svg",
+      "asset": "nikhilam_base100.svg",
+      "title": "Lesson 1: Power Squaring — Near Base 100 and 1000",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

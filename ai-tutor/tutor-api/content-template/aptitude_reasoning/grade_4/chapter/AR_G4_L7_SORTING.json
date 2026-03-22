@@ -1,0 +1,504 @@
+{
+  "chapterCode": "AR_G4_L7_SORTING",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Ordering and Ranking",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 7: Ordering and Ranking",
+  "estimatedMinutes": 12,
+  "subtopics": [
+    "Ordering numbers from smallest to largest",
+    "Ordering numbers from largest to smallest",
+    "Ordering objects by size, weight, or height",
+    "Ranking people in a queue or race",
+    "Finding position from top and bottom",
+    "Who is taller/heavier/older — comparison puzzles"
+  ],
+  "learningGoals": [
+    "Arrange a set of numbers or objects in the correct order.",
+    "Find the rank (position) of a person or object in a given ordering.",
+    "Solve simple comparison puzzles to determine who is first, tallest, or heaviest."
+  ],
+  "coreIdeas": [
+    "Ordering means putting things in a line based on a rule (smallest to largest, shortest to tallest).",
+    "Rank = position in the ordered line (1st = smallest or first, depending on the rule).",
+    "For comparison puzzles, use the clues one by one to build the order step by step."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Arrange in order from smallest to largest: 42, 17, 35, 8, 56.",
+      "solution": "Find the smallest first: 8. Then 17, 35, 42, 56. Order: 8, 17, 35, 42, 56.",
+      "concept": "Ascending order (smallest to largest)"
+    },
+    {
+      "id": "WE2",
+      "problem": "In a race, Arjun finishes before Priya, and Priya finishes before Sam. Who finishes first?",
+      "solution": "Arjun finishes before Priya who finishes before Sam. Order: Arjun, Priya, Sam. Arjun finishes first.",
+      "concept": "Ranking from clues — logical ordering"
+    },
+    {
+      "id": "WE3",
+      "problem": "In a queue of 10 children, Kavya is 3rd from the front. What is her position from the back?",
+      "solution": "Position from back = Total − Position from front + 1 = 10 − 3 + 1 = 8. She is 8th from the back.",
+      "concept": "Position from front and back"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach opens Ordering and Ranking by asking: 'If 5 friends stand in a line shortest to tallest, who is at the front?' using three friends of clearly different heights. Then Spark explains ascending vs descending order and the front-back position formula before exercises.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers in Groups A–B, draw the order visually as a number line or height chart before continuing."
+    },
+    "mission": {
+      "missionTitle": "Sort It, Rank It!",
+      "missionPromise": "By the end, you will arrange any set of numbers or objects in perfect order AND find anyone's rank in a queue without counting on your fingers!",
+      "successCelebration": "Award a badge pulse and coach cheer after every correct group. At lesson end, show 'Ranking Champion' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a relatable ordering challenge (heights, race positions).",
+      "Coach writes a worked order on the board one item at a time.",
+      "Coach reads the practice question.",
+      "Student arranges the items or states the rank.",
+      "Instant feedback shows the full ordered list.",
+      "Review question confirms mastery before next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one Ordering badge.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach by drawing the order visually.",
+      "practiceStyle": "Offer only 3 items to order instead of 5.",
+      "masteryRule": "Advance only after the full correct order or rank is given.",
+      "revisitRule": "Any group with two errors returns at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L7_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hey there, sorting superstar! Welcome to Ordering and Ranking — the chapter about putting things in the RIGHT order! When you line up for lunch at school, you are in a queue — that is ordering! When someone wins a race, they get a rank — 1st, 2nd, 3rd. Today we will learn to sort numbers and objects, work out positions in a queue, and solve clue-based ordering puzzles. Ready to line everything up?",
+        "boardAction": "Write 'Ordering and Ranking'. Draw an arrow labelled 'Ascending — smallest to largest'. Draw an arrow in the opposite direction labelled 'Descending — largest to smallest'. Below, draw a simple 5-person queue with position numbers.",
+        "checkpointPrompt": "Quick warm-up: arrange these numbers in ascending order — 9, 3, 7, 1, 5.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "1, 3, 5, 7, 9.",
+        "fallbackHint": "Ascending means smallest first. Find the smallest: 1. Then the next smallest: 3. Then 5, 7, 9. Done!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l7_title",
+            "x": "40",
+            "y": "30",
+            "text": "Ordering and Ranking — Chapter 7",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l7_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l7_asc",
+            "x": "60",
+            "y": "85",
+            "text": "Ascending:  1  <  3  <  5  <  7  <  9  (small to large)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.8,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l7_desc",
+            "x": "60",
+            "y": "115",
+            "text": "Descending: 9  >  7  >  5  >  3  >  1  (large to small)",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l7_rank",
+            "x": "60",
+            "y": "150",
+            "text": "Rank: position in the ordered line  →  1st, 2nd, 3rd ...",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.8,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Ordering and Ranking",
+          "caption": "Screenplay beat for Ordering and Ranking."
+        }
+      },
+      {
+        "beatId": "AR_G4_L7_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you a ranking puzzle! Three friends — Anita, Ben, and Chitra — are in a race. Anita finishes before Ben, and Ben finishes before Chitra. I write a number line: Anita → Ben → Chitra. Anita is 1st, Ben is 2nd, Chitra is 3rd. The key is: process the clues one at a time and build the line step by step. Never jump ahead!",
+        "boardAction": "Write three names. Use clue 1 to place Anita before Ben. Use clue 2 to place Ben before Chitra. Show the final order: Anita (1st) → Ben (2nd) → Chitra (3rd).",
+        "checkpointPrompt": "Your turn: Raj is taller than Sana. Sana is taller than Pooja. Who is the shortest of the three?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Pooja — Raj > Sana > Pooja, so Pooja is shortest.",
+        "fallbackHint": "Raj > Sana and Sana > Pooja. So the order tallest to shortest is: Raj, Sana, Pooja. The shortest is Pooja.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_clue1",
+            "x": "60",
+            "y": "60",
+            "text": "Clue 1: Anita finishes BEFORE Ben",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_clue2",
+            "x": "60",
+            "y": "95",
+            "text": "Clue 2: Ben finishes BEFORE Chitra",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0.7,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_order",
+            "x": "60",
+            "y": "135",
+            "text": "Order: Anita (1st)  →  Ben (2nd)  →  Chitra (3rd)",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Ordering and Ranking",
+          "caption": "Screenplay beat for Ordering and Ranking."
+        }
+      },
+      {
+        "beatId": "AR_G4_L7_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You know ascending, descending, ranking by clues, and position puzzles. Work through Groups A to F. For every problem, write out the order first and THEN answer the question. That one extra step saves you from making mistakes!",
+        "boardAction": "Write the front-back formula: Position from back = Total − Position from front + 1. Also show the ascending/descending key words.",
+        "checkpointPrompt": "Quick check: in a class of 30, if Ravi is 5th from the front, what is his position from the back?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "26th from the back — 30 − 5 + 1 = 26.",
+        "fallbackHint": "Use the formula: Position from back = Total − Position from front + 1. 30 − 5 + 1 = 26. Ravi is 26th from the back.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Ranking Cheatsheet",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_formula",
+            "x": "60",
+            "y": "70",
+            "text": "Position from back = Total − Position from front + 1",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 0.6,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_asc",
+            "x": "60",
+            "y": "105",
+            "text": "Ascending = smallest first  |  Descending = largest first",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 1.1,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_clue",
+            "x": "60",
+            "y": "135",
+            "text": "Clue puzzles: process clues one at a time and build the line",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.6,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Ordering and Ranking",
+          "caption": "Screenplay beat for Ordering and Ranking."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Ordering numbers from smallest to largest (ascending)",
+      "missionStepTitle": "Exercise A: Smallest to Largest",
+      "coachHook": "Let's figure this out together! Pick the smallest number first, then the next smallest — keep going until all numbers are lined up!",
+      "boardDemo": {
+        "title": "Ascending Order — Smallest First",
+        "steps": [
+          "Numbers: 14, 3, 27, 9, 18",
+          "Find smallest: 3",
+          "Next smallest: 9",
+          "Then: 14, 18, 27",
+          "Ascending order: 3, 9, 14, 18, 27"
+        ],
+        "teacherLine": "Scan all the numbers. Circle the smallest. Write it first. Cross it out and find the next smallest. Repeat until all are placed!"
+      },
+      "readAloudPrompt": "Arrange in ascending order: 50, 23, 67, 11, 38.",
+      "tryPrompt": "Now you try: arrange in ascending order — 7, 25, 4, 16, 31.",
+      "masteryCheck": "4, 7, 16, 25, 31",
+      "instantFeedbackWin": "Excellent! 4 is smallest, then 7, 16, 25, 31. Perfect ascending order!",
+      "instantFeedbackRetry": "Here's a trick: circle the smallest number first — that is 4. Then from the remaining (7, 25, 16, 31), circle 7. Keep finding the next smallest: 16, 25, 31.",
+      "reviewPrompt": "Quick: arrange in ascending order — 100, 45, 72, 18, 63.",
+      "xpReward": 10,
+      "badgeFocus": "Ascending Arranger",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Ordering and Ranking",
+        "caption": "Group A for Ordering and Ranking."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Ordering numbers from largest to smallest (descending)",
+      "missionStepTitle": "Exercise B: Largest to Smallest",
+      "coachHook": "Let's figure this out together! This time we go from the BIGGEST to the smallest. Pick the largest number first!",
+      "boardDemo": {
+        "title": "Descending Order — Largest First",
+        "steps": [
+          "Numbers: 8, 35, 12, 47, 20",
+          "Find largest: 47",
+          "Next largest: 35",
+          "Then: 20, 12, 8",
+          "Descending order: 47, 35, 20, 12, 8"
+        ],
+        "teacherLine": "Descending is the reverse of ascending — pick the LARGEST first, then work down to the smallest. Think of a countdown: 10, 9, 8, 7 ..."
+      },
+      "readAloudPrompt": "Arrange in descending order: 15, 42, 6, 28, 53.",
+      "tryPrompt": "Your turn: arrange in descending order — 9, 30, 17, 5, 44.",
+      "masteryCheck": "44, 30, 17, 9, 5",
+      "instantFeedbackWin": "Spot on! 44 first, then 30, 17, 9, 5. Counting down perfectly!",
+      "instantFeedbackRetry": "Here's a trick: descending = countdown. Find the biggest (44), write it first. Cross it out. Next biggest from remaining: 30. Keep going: 17, 9, 5.",
+      "reviewPrompt": "Quick: arrange in descending order — 82, 15, 64, 7, 49.",
+      "xpReward": 10,
+      "badgeFocus": "Descending Arranger",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Ordering and Ranking",
+        "caption": "Group B for Ordering and Ranking."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Ordering objects by height or size",
+      "missionStepTitle": "Exercise C: Order by Height or Size",
+      "coachHook": "Let's figure this out together! Not just numbers — we can also order objects by their size, height, or weight. Use the same idea: smallest first or tallest first!",
+      "boardDemo": {
+        "title": "Order by Height — Shortest to Tallest",
+        "steps": [
+          "People: Mia (110 cm), Raj (135 cm), Sana (125 cm), Dev (145 cm)",
+          "Sort heights: 110, 125, 135, 145",
+          "Shortest to tallest: Mia, Sana, Raj, Dev",
+          "Tallest person: Dev"
+        ],
+        "teacherLine": "Replace each name with their measurement. Sort the numbers. Then swap numbers back for names. You are sorting numbers — just dressed up as heights!"
+      },
+      "readAloudPrompt": "Three boxes weigh: Box A = 5 kg, Box B = 12 kg, Box C = 8 kg. Arrange by weight, lightest first.",
+      "tryPrompt": "Your turn: four children have heights 130 cm, 115 cm, 142 cm, 128 cm. Who is the tallest?",
+      "masteryCheck": "142 cm child is tallest",
+      "instantFeedbackWin": "Correct! The tallest height is 142 cm. Ordering by measurement works the same as ordering numbers!",
+      "instantFeedbackRetry": "Here's a trick: write all heights in a row: 130, 115, 142, 128. Circle the biggest: 142. That child is the tallest.",
+      "reviewPrompt": "Quick: three friends weigh 35 kg, 28 kg, and 41 kg. Who is the heaviest? Who is the lightest?",
+      "xpReward": 12,
+      "badgeFocus": "Measurement Ranker",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Ordering and Ranking",
+        "caption": "Group C for Ordering and Ranking."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Ranking people in a queue or race",
+      "missionStepTitle": "Exercise D: Race and Queue Rankings",
+      "coachHook": "Let's figure this out together! Use the clues one at a time to build the order. Write each person's name in the right place on a line!",
+      "boardDemo": {
+        "title": "Race Ranking from Clues",
+        "steps": [
+          "Clue 1: Ananya finishes before Kabir",
+          "Clue 2: Kabir finishes before Diya",
+          "Build the line: Ananya → Kabir → Diya",
+          "Rankings: Ananya = 1st, Kabir = 2nd, Diya = 3rd"
+        ],
+        "teacherLine": "Process clues one at a time. Each clue adds one person to the order. Use arrows on the board: who is to the left (first) and who is to the right (later/after)."
+      },
+      "readAloudPrompt": "In a spelling bee: Tanya scored higher than Mohan, and Mohan scored higher than Priya. Who scored the most? Who scored the least?",
+      "tryPrompt": "Your turn: In a running race, Vikram ran faster than Shreya. Shreya ran faster than Abdul. Who came first in the race?",
+      "masteryCheck": "Vikram came first.",
+      "instantFeedbackWin": "Yes! Vikram > Shreya > Abdul. Vikram is the fastest and came first!",
+      "instantFeedbackRetry": "Here's a trick: faster = finishes sooner = higher rank. Vikram is faster than Shreya who is faster than Abdul. So the order is: Vikram (1st), Shreya (2nd), Abdul (3rd).",
+      "reviewPrompt": "Quick: Ali is older than Renu, Renu is older than Suresh. Who is the youngest of the three?",
+      "xpReward": 12,
+      "badgeFocus": "Race Ranker",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Ordering and Ranking",
+        "caption": "Group D for Ordering and Ranking."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Finding position from top and bottom (front and back)",
+      "missionStepTitle": "Exercise E: Front and Back Positions",
+      "coachHook": "Let's figure this out together! If someone is 3rd from the front, what are they from the back? Use the magic formula!",
+      "boardDemo": {
+        "title": "Position from Front and Back",
+        "steps": [
+          "Total children in queue: 8",
+          "Reema is 2nd from the front",
+          "Formula: Position from back = Total − Position from front + 1",
+          "= 8 − 2 + 1 = 7",
+          "Reema is 7th from the back"
+        ],
+        "teacherLine": "The formula is: back position = Total − front position + 1. The +1 is because we count the person themselves. It works the other way too — if you know the back position, use the same formula to get the front position!"
+      },
+      "readAloudPrompt": "In a queue of 10, Anil is 4th from the front. What is his position from the back?",
+      "tryPrompt": "Your turn: in a class of 20 students, Pooja is 6th from the front. What is her position from the back?",
+      "masteryCheck": "15th from the back — 20 − 6 + 1 = 15",
+      "instantFeedbackWin": "Correct! 20 − 6 + 1 = 15. Pooja is 15th from the back. That formula is so handy!",
+      "instantFeedbackRetry": "Here's a trick: Total − front position + 1. Fill in: 20 − 6 + 1. Do it step by step: 20 − 6 = 14, then 14 + 1 = 15.",
+      "reviewPrompt": "Quick: in a queue of 15, Zara is 9th from the back. What is her position from the front?",
+      "xpReward": 14,
+      "badgeFocus": "Position Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Ordering and Ranking",
+        "caption": "Group E for Ordering and Ranking."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Comparison puzzles (tallest, heaviest, oldest)",
+      "missionStepTitle": "Exercise F: Who Is Tallest, Heaviest, Oldest?",
+      "coachHook": "Let's figure this out together! A mix of clues — build the order step by step and answer the comparison question at the end!",
+      "boardDemo": {
+        "title": "Comparison Puzzle — Build the Order",
+        "steps": [
+          "Clue 1: Mia is taller than Jai",
+          "Clue 2: Jai is taller than Tom",
+          "Clue 3: Tom is taller than Lucy",
+          "Order tallest to shortest: Mia, Jai, Tom, Lucy",
+          "Shortest person: Lucy"
+        ],
+        "teacherLine": "Write each person on the board in order as you process each clue. Use > symbols: Mia > Jai > Tom > Lucy. The person at the far right is the shortest; far left is the tallest."
+      },
+      "readAloudPrompt": "A is heavier than B. C is lighter than B. Who is lightest — A, B, or C?",
+      "tryPrompt": "Your turn: Pari is older than Neha. Rohan is older than Pari. Who is the youngest?",
+      "masteryCheck": "Neha is the youngest.",
+      "instantFeedbackWin": "Spot on! Rohan > Pari > Neha in age. Neha is the youngest of the three!",
+      "instantFeedbackRetry": "Here's a trick: write the chain: Rohan is older than Pari, and Pari is older than Neha. So: Rohan (oldest) → Pari → Neha (youngest).",
+      "reviewPrompt": "Final: five friends scored 45, 72, 38, 91, 60 in a test. Who scored second highest?",
+      "xpReward": 16,
+      "badgeFocus": "Ranking Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Ordering and Ranking",
+        "caption": "Group F for Ordering and Ranking."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Ordering and Ranking",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

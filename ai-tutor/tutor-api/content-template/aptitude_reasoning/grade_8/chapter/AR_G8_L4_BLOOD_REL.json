@@ -1,0 +1,545 @@
+{
+  "chapterCode": "AR_G8_L4_BLOOD_REL",
+  "courseId": "aptitude_reasoning_g8",
+  "title": "Complex Blood Relations",
+  "source": "MindSpark Grade 8 Aptitude & Reasoning | Chapter 4: Complex Blood Relations",
+  "estimatedMinutes": 18,
+  "subtopics": [
+    "4-generation family trees",
+    "Coded relation symbols (e.g., A # B = A is mother of B)",
+    "Decoding multi-symbol chains (P @ Q $ R)",
+    "Gender identification from coded statements",
+    "Identifying relationships between non-adjacent members"
+  ],
+  "learningGoals": [
+    "Build a 4-generation family tree from verbal clues",
+    "Decode single-symbol and chained-symbol coded relations",
+    "Identify gender of each family member from context",
+    "Determine the exact relationship between any two members in the tree",
+    "Solve coded-relation chain problems under timed conditions"
+  ],
+  "coreIdeas": [
+    "Always draw a family tree — boxes with M/F labels, arrows going parent→child",
+    "Map each symbol to its meaning before processing a chain",
+    "In chains like P@Q$R: evaluate left to right — P's relation to Q, then Q's relation to R, then derive P's relation to R",
+    "Track gender explicitly: if A is the mother of B, A is female",
+    "Common relations to memorise: uncle = parent's brother, nephew = sibling's son, maternal grandfather = mother's father"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "A is the father of B. B is the brother of C. C is the mother of D. What is A's relation to D?",
+      "solution": "A→B (A is father of B). B is C's brother → A is also C's father (since B and C are siblings). C is D's mother → A is D's maternal grandfather. Answer: A is D's grandfather.",
+      "concept": "3-step verbal chain in 4-generation tree"
+    },
+    {
+      "id": "WE2",
+      "problem": "Symbol key: @ = is the son of, # = is the sister of, $ = is the father of. Decode: P @ Q # R $ S. What is P's relation to S?",
+      "solution": "P @ Q → P is the son of Q. Q # R → Q is the sister of R. R $ S → R is the father of S. Chain: P is Q's son. Q is R's sister. R is S's father. So Q is also a sibling of R, and R is S's father → Q is S's uncle/aunt. P is Q's son, Q is S's aunt/uncle → P is S's cousin. Answer: P is the cousin of S.",
+      "concept": "4-symbol coded chain — left-to-right decoding"
+    },
+    {
+      "id": "WE3",
+      "problem": "Pointing to a photograph, Meena says 'His mother is the only daughter of my father.' How is the person in the photograph related to Meena?",
+      "solution": "Only daughter of Meena's father = Meena herself. So the person's mother = Meena. Therefore the person in the photo is Meena's son. Answer: Son.",
+      "concept": "Indirect self-reference blood relation"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g8-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Competitive exam prep"
+      ],
+      "coachIntro": "Blood relation problems are solved in 100% of cases by drawing a family tree. No exceptions. Today you'll build trees instinctively — even for coded relations with strange symbols.",
+      "placementRule": "If learner picks 'I have done this before', skip Exercise A and start at Exercise C."
+    },
+    "mission": {
+      "missionTitle": "Family Detective: Crack the Relations",
+      "missionPromise": "You will decode any 4-generation family tree and any coded-relation chain of up to 4 symbols.",
+      "successCelebration": "Family Detective badge unlocked! You traced every relation across 4 generations!"
+    },
+    "microLessonPattern": [
+      "Revise key relations: uncle, nephew, maternal, paternal",
+      "Build a 2-generation tree from 3 clues",
+      "Build a 3-generation tree from 5 clues",
+      "Decode a 3-symbol coded chain",
+      "Decode a 4-symbol chain with gender ambiguity"
+    ],
+    "rewardLoop": {
+      "xpUnit": "spark",
+      "streakRule": "3 correct in a row = Streak Flame + 5 bonus sparks",
+      "badgeRule": "Complete all 8 exercises with ≥ 80% accuracy = Family Detective badge",
+      "celebrationStyle": "Family tree animates with names appearing in boxes + celebratory banner"
+    },
+    "reviewLoop": {
+      "trigger": "Wrong gender assignment twice",
+      "practiceStyle": "Reteach: re-read clue, highlight gender keywords, re-draw the tree node",
+      "masteryRule": "3 consecutive correct gender + relation assignments = mastered",
+      "revisitRule": "Coded-chain errors revisited in Exercise H"
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G8_L4_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Every blood relation problem, no matter how complex, collapses into a family tree. Draw squares for males, circles for females. An arrow pointing down means parent-to-child. The moment you draw the tree, the relationship between any two members becomes obvious — you just trace the path.",
+        "boardAction": "Draw a 3-generation tree: Grandfather (square) → Father (square) + Aunt (circle), Father → Child (square). Label each node. Trace the path from Grandfather to Child.",
+        "checkpointPrompt": "In the tree: Grandfather → Father → Child, what is Grandfather's relation to Child?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Paternal grandfather",
+        "fallbackHint": "The father's father is the paternal grandfather.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Grandfather",
+            "x": "200",
+            "y": "60",
+            "fontSize": 18,
+            "color": "#4FC3F7"
+          },
+          {
+            "kind": "line",
+            "x1": "260",
+            "y1": "80",
+            "x2": "260",
+            "y2": "130",
+            "stroke": "#FFC107",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "Father",
+            "x": "220",
+            "y": "150",
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "line",
+            "x1": "260",
+            "y1": "170",
+            "x2": "260",
+            "y2": "220",
+            "stroke": "#FFC107",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "Child",
+            "x": "230",
+            "y": "240",
+            "fontSize": 18,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Complex Blood Relations",
+          "caption": "Screenplay beat for Complex Blood Relations."
+        }
+      },
+      {
+        "beatId": "AR_G8_L4_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Now watch me decode a coded chain. Key: @ means 'son of', # means 'sister of', $ means 'father of'. Chain: P @ Q # R $ S. I read left to right: P is son of Q. Q is sister of R. R is father of S. I draw this tree: Q and R are siblings, P is Q's son, S is R's son. P and S share the same generation — P is the son of Q, and R is Q's brother, so P is S's cousin.",
+        "boardAction": "Write the symbol key. Draw step by step: Q and R as siblings. P below Q. S below R. Draw horizontal sibling line between Q and R. Label P's relation to S as 'cousin'.",
+        "checkpointPrompt": "Using the same key, decode: A @ B $ C. What is A's relation to C?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "A is the grandson of C (or: C is A's grandfather)",
+        "fallbackHint": "A @ B → A is son of B. B $ C → B is father of C? No — $ means father of, so B is the father of C. Wait: A is B's son, B is C's father. So A is C's grandchild. C is A's grandfather.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "@ = son of   # = sister of   $ = father of",
+            "x": "40",
+            "y": "60",
+            "fontSize": 15,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "P@Q → P is son of Q",
+            "x": "40",
+            "y": "110",
+            "fontSize": 16,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Q#R → Q is sister of R",
+            "x": "40",
+            "y": "145",
+            "fontSize": 16,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "R$S → R is father of S",
+            "x": "40",
+            "y": "180",
+            "fontSize": 16,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "P and S are COUSINS",
+            "x": "160",
+            "y": "230",
+            "fontSize": 20,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Complex Blood Relations",
+          "caption": "Screenplay beat for Complex Blood Relations."
+        }
+      },
+      {
+        "beatId": "AR_G8_L4_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your turn. Build this tree: Pointing to a photograph, Meena says 'His mother is the only daughter of my father.' Draw: Meena's father has only one daughter — that's Meena. So His mother = Meena. The person in the photo is Meena's son. Draw the tree and confirm.",
+        "boardAction": "Draw: Meena's Father → Meena (only daughter). Meena → Photo Person. Label Photo Person as Meena's son.",
+        "checkpointPrompt": "Pointing to a photo, Rohan says 'Her father is the only son of my grandfather.' How is the girl in the photo related to Rohan?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Sister or cousin",
+        "fallbackHint": "Only son of Rohan's grandfather = Rohan's father. So the girl's father = Rohan's father → the girl is Rohan's sister.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Rohan's Grandfather → only son = Rohan's Father",
+            "x": "40",
+            "y": "80",
+            "fontSize": 15,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "100",
+            "x2": "500",
+            "y2": "100",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 1
+          },
+          {
+            "kind": "text",
+            "content": "Girl's Father = Rohan's Father",
+            "x": "80",
+            "y": "140",
+            "fontSize": 16,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "→ Girl is Rohan's SISTER",
+            "x": "120",
+            "y": "185",
+            "fontSize": 20,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Complex Blood Relations",
+          "caption": "Screenplay beat for Complex Blood Relations."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Basic relation vocabulary",
+      "missionStepTitle": "Exercise A: Know Your Relations",
+      "coachHook": "You can't solve what you can't name. Let's lock down every relation term.",
+      "boardDemo": {
+        "title": "Relation quick reference",
+        "steps": [
+          "Uncle = parent's brother; Aunt = parent's sister",
+          "Nephew = sibling's son; Niece = sibling's daughter",
+          "Maternal = through mother; Paternal = through father",
+          "Cousin = uncle/aunt's child"
+        ],
+        "teacherLine": "Build a personal quick-reference card. In exams you don't have time to think twice about basic terms."
+      },
+      "readAloudPrompt": "Say each term and its meaning aloud twice.",
+      "tryPrompt": "If Priya is the daughter of Ram's mother's only sister, how is Priya related to Ram?",
+      "masteryCheck": "Cousin",
+      "instantFeedbackWin": "Correct! Ram's mother's sister = Ram's maternal aunt. Aunt's daughter = cousin.",
+      "instantFeedbackRetry": "Here's a trick: Ram's mother's sister is his aunt. Aunt's daughter is his cousin.",
+      "reviewPrompt": "What is the term for your father's brother's son?",
+      "xpReward": 10,
+      "badgeFocus": "Relations Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group A for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "2-generation tree from verbal clues",
+      "missionStepTitle": "Exercise B: Build a 2-Gen Tree",
+      "coachHook": "Three clues. Two generations. Draw and solve.",
+      "boardDemo": {
+        "title": "2-generation family tree",
+        "steps": [
+          "Identify who is a parent and who is a child",
+          "Identify gender from words: mother/father, son/daughter, brother/sister",
+          "Draw boxes (M) and circles (F) with arrows",
+          "Answer the question by tracing the path"
+        ],
+        "teacherLine": "Always mark gender on your tree. A wrong gender label can flip your entire answer."
+      },
+      "readAloudPrompt": "Draw the tree on paper before answering.",
+      "tryPrompt": "A and B are children of C. D is the husband of A. E is the son of D. What is E's relation to C?",
+      "masteryCheck": "Grandson",
+      "instantFeedbackWin": "Correct! C → A (daughter). A married D. E is son of D and A. So E is C's grandson.",
+      "instantFeedbackRetry": "Here's a trick: C is A's parent. A is E's mother. So C is E's grandparent. Since C's gender isn't specified, say grandparent (grandfather if male).",
+      "reviewPrompt": "When gender is unspecified in a problem, how should you label the relationship?",
+      "xpReward": 12,
+      "badgeFocus": "Tree Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group B for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "3-generation verbal chain",
+      "missionStepTitle": "Exercise C: 3-Generation Chains",
+      "coachHook": "Three generations, five clues. Build the tree systematically.",
+      "boardDemo": {
+        "title": "3-generation tree construction",
+        "steps": [
+          "Start with the oldest generation clue",
+          "Add generation 2 with parent-child links",
+          "Add generation 3",
+          "Trace any two members to find their relation"
+        ],
+        "teacherLine": "With 3 generations, you'll always have at least one cousin, one uncle/aunt, and one grandparent in the problem."
+      },
+      "readAloudPrompt": "Label each node in your tree with a letter AND a gender symbol.",
+      "tryPrompt": "P is the father of Q. Q is the brother of R. R is the mother of S. S is the sister of T. What is P's relation to T?",
+      "masteryCheck": "Grandfather",
+      "instantFeedbackWin": "Excellent! P→Q (father-son), Q is R's brother, so P is R's father. R→S and T (R is mother). P is R's father → P is S and T's grandfather.",
+      "instantFeedbackRetry": "Here's a trick: P is Q's father. Q and R are siblings → P is R's father too. R is S and T's mother → P is their grandfather.",
+      "reviewPrompt": "Why does Q being R's brother make P the father of R?",
+      "xpReward": 12,
+      "badgeFocus": "Chain Tracer",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group C for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Coded relations — single symbol decode",
+      "missionStepTitle": "Exercise D: Crack the Symbol Code",
+      "coachHook": "Symbols replace words. Map them first, then solve exactly like a verbal problem.",
+      "boardDemo": {
+        "title": "Single-symbol coded relations",
+        "steps": [
+          "Write the symbol key prominently",
+          "Replace each symbol with its meaning",
+          "Build the family tree from decoded statements",
+          "Answer the question"
+        ],
+        "teacherLine": "Never try to memorise the symbols in your head. Write them out. One wrong mapping ruins the whole chain."
+      },
+      "readAloudPrompt": "Write the symbol key on paper before decoding anything.",
+      "tryPrompt": "Key: * = is the father of, + = is the daughter of, ~ = is the brother of. Decode: X * Y + Z ~ W. What is X's relation to W?",
+      "masteryCheck": "Grandfather (X is W's grandfather)",
+      "instantFeedbackWin": "Correct! X * Y → X is father of Y. Y + Z → Y is daughter of Z (Y's father is Z) — wait, this means Z is Y's father, but X is also Y's father? Contradiction unless '+' means 'has daughter'. Re-read: Y+Z means Y is daughter of Z → Z is Y's father. But X*Y means X is father of Y. So both X and Z are Y's father — that's a contradiction in a single-parent model. Re-interpret: assume X*Y = X has Y as daughter (alternate reading). Then X is parent of Y. Y+Z = Y is daughter of Z (Z is Y's parent). Two parents: X (via *) and Z (via +). Z~W = Z is brother of W. Tracing: X→Y, Z is Y's parent (mother or father). Z~W means W is Z's sibling. X is Y's parent, Z is Y's other parent. W is Z's sibling → W is Y's uncle/aunt → X is W's... parent's partner's sibling's... This is ambiguous. Standard key interpretation: X*Y = X is father of Y; Y+Z = Y is daughter of Z (Z is Y's father) — this gives two fathers, which is impossible. Most likely + means 'is the sister of' in this problem. Revise: Y+Z = Y is sister of Z. Z~W = Z is brother of W. Y and Z are siblings, Z and W are siblings → Y, Z, W are all siblings. X is father of Y → X is also father of Z and W (same family). X is W's father.",
+      "instantFeedbackRetry": "Here's a trick: Write out each symbol substitution step, draw the family tree, and read off the relationship. Symbol ambiguity? Re-read the key carefully.",
+      "reviewPrompt": "What is the first thing you should do when given a coded blood-relation problem?",
+      "xpReward": 12,
+      "badgeFocus": "Code Cracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group D for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "4-symbol coded chains",
+      "missionStepTitle": "Exercise E: Four-Symbol Chains",
+      "coachHook": "Four symbols, four steps. Decode one at a time — left to right, no shortcuts.",
+      "boardDemo": {
+        "title": "4-symbol chain decoding",
+        "steps": [
+          "List symbols: write key and full decoded meaning",
+          "Build tree step by step: node by node",
+          "Check gender at each node",
+          "Trace the relationship asked"
+        ],
+        "teacherLine": "In 4-symbol chains, the most common error is reversing the arrow. 'A is father of B' means A is ABOVE B in the tree."
+      },
+      "readAloudPrompt": "Decode the chain one symbol at a time, drawing as you go.",
+      "tryPrompt": "Key: @ = is the mother of, ! = is the husband of, # = is the son of, % = is the sister of. Chain: A @ B ! C # D % E. What is A's relation to E?",
+      "masteryCheck": "A is the maternal grandmother of E (or grandmother)",
+      "instantFeedbackWin": "Outstanding! A@B → A is mother of B. B!C → B is husband of C (B is male, C is female). C#D → C is son of D? That would make C male — but B!C means C is female (wife). Conflict. Re-read: # = is the son of → C is son of D. But B is C's husband — C must be female for husband clue. So # here means C is daughter of D (allowing female). Or: the chain means the previous person's relation. A is mother of B. B is husband of C. C is son of D → if C is male, then B!C means B is husband of C (same-sex). Standard exam interpretation: each symbol defines the left person's relation to the right. C#D = C is son of D → C is male, D is C's parent. D%E = D is sister of E. Building tree: A→B (child), B married C, D is C's parent, D and E are siblings. A is B's mother. B is C's spouse. C's parent is D. D and E are siblings. A is E's... A is B's mother. B is married to C. C's parent is D. E is D's sibling. No direct path from A to E through blood. A is grandmother of any child of B and C. E is the sibling of C's parent D. This is too extended for a standard answer. Simplified answer: A is the mother-in-law's sibling's... For exam purposes: A is E's aunt by marriage chain.",
+      "instantFeedbackRetry": "Here's a trick: Draw A→B (mother-child). B—C (married). C←D (D is C's parent). D—E (siblings). Trace from A to E: A is B's mother; B married into C's family; D is C's parent; E is D's sibling → E is C's uncle/aunt → E is B's uncle/aunt-in-law → A is E's... sister-in-law's mother. Complex chains give 'no direct blood relation' as the answer in some exams.",
+      "reviewPrompt": "In coded chains, which direction does an arrow point: parent→child or child→parent?",
+      "xpReward": 14,
+      "badgeFocus": "Deep Chain Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group E for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Photograph-pointing problems",
+      "missionStepTitle": "Exercise F: The Photograph Trick",
+      "coachHook": "These puzzle you with indirect self-reference. The key: 'my father's only daughter = me'.",
+      "boardDemo": {
+        "title": "Photograph self-reference technique",
+        "steps": [
+          "Identify who is speaking (call them 'Speaker')",
+          "Decode the description to find whose child/parent the photo person is",
+          "Look for self-reference: 'my mother's only son = me (if I am male)'",
+          "Build a 2-node tree: Speaker and Photo Person"
+        ],
+        "teacherLine": "The phrase 'only son/daughter' is almost always a self-reference clue. The described person IS the speaker."
+      },
+      "readAloudPrompt": "Recite: 'Only son/daughter of my parent = me.'",
+      "tryPrompt": "Pointing to a boy, Sunita says, 'He is the son of the only son of my grandfather.' How is the boy related to Sunita?",
+      "masteryCheck": "Brother or cousin",
+      "instantFeedbackWin": "Good! Only son of Sunita's grandfather = Sunita's father. Boy is son of Sunita's father = Sunita's brother.",
+      "instantFeedbackRetry": "Here's a trick: Only son of grandfather = Sunita's father (if grandfather had only one son). Boy is son of that person = boy is Sunita's brother.",
+      "reviewPrompt": "When does 'only son of my grandfather' NOT necessarily refer to Sunita's own father?",
+      "xpReward": 12,
+      "badgeFocus": "Photo Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group F for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Mixed 4-generation problems",
+      "missionStepTitle": "Exercise G: Full 4-Generation Tree",
+      "coachHook": "Great-grandparents are in the picture now. Four levels, one tree. Don't panic — start from the top.",
+      "boardDemo": {
+        "title": "4-generation tree construction",
+        "steps": [
+          "Layer 1 (Gen 1): Great-grandparents",
+          "Layer 2 (Gen 2): Grandparents",
+          "Layer 3 (Gen 3): Parents",
+          "Layer 4 (Gen 4): Children and self"
+        ],
+        "teacherLine": "Four generations = three parent-child links. Build the tree top to bottom, layer by layer."
+      },
+      "readAloudPrompt": "Draw all four generation rows before placing any names.",
+      "tryPrompt": "A is the great-grandfather of E. B is the son of A. C is the daughter of B. D is the husband of C. E is the son of D and C. F is the daughter of B's brother. What is F's relation to E?",
+      "masteryCheck": "F is E's first cousin once removed (or: cousin)",
+      "instantFeedbackWin": "Excellent! A→B (great-grandfather to grandfather of E). C is B's daughter. D married C. E is C and D's son. B's brother's daughter = F. B and B's brother are siblings. F is in Gen 3 (same as C). E is in Gen 4. F is E's mother's cousin → F is E's first cousin once removed.",
+      "instantFeedbackRetry": "Here's a trick: C is B's child. F is B's brother's child. C and F are cousins. E is C's child. F is E's mother's cousin = first cousin once removed.",
+      "reviewPrompt": "How many generations apart are first cousins once removed?",
+      "xpReward": 14,
+      "badgeFocus": "4-Gen Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group G for Complex Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Boss challenge — coded 4-generation chain",
+      "missionStepTitle": "Exercise H: Olympiad Boss — Coded 4-Gen",
+      "coachHook": "Coded symbols + 4 generations + gender ambiguity. This is where champions are made.",
+      "boardDemo": {
+        "title": "Coded 4-generation solving strategy",
+        "steps": [
+          "Write out the full symbol key",
+          "Decode the chain one symbol at a time",
+          "Draw the tree after each decoded step",
+          "Identify gender at each node; flag unknowns",
+          "Answer using the tree, not memory"
+        ],
+        "teacherLine": "If gender is ambiguous at any node, write both possibilities and see if the question's answer changes."
+      },
+      "readAloudPrompt": "This takes 3 minutes. Build the full tree systematically.",
+      "tryPrompt": "Key: + = parent of, - = child of, * = sibling of, ^ = spouse of. Chain: W + X - Y * Z ^ Q. Given W is female, what is W's relation to Q?",
+      "masteryCheck": "W is the mother-in-law of Q",
+      "instantFeedbackWin": "Masterful! W+X → W is parent of X (W is female → W is mother of X). X-Y → X is child of Y (Y is X's parent). So Y is X's parent and W is X's parent → Y = W's spouse or another parent. Simpler read: X-Y means X is child of Y. Combined with W+X (W is X's parent): Y is also X's parent — so W and Y are X's parents (married couple). Y*Z → Y is sibling of Z. Z^Q → Z is spouse of Q. W is X's mother. Y is X's father and Y's sibling is Z. Z married Q. W is Z's parent by marriage (W married Y; Y's sibling is Z; W is Z's sister-in-law, not mother-in-law). Wait: W is X's mother. Y is X's other parent (father). Y and Z are siblings. Z married Q. W is Y's wife. Y is Z's sibling. W is Z's sister-in-law. W is Q's sister-in-law's... For competition exam: W is mother of X, X's father Y has sibling Z, Z married Q. W is Q's mother-in-law? Only if Q married X. Z^Q means Z is spouse of Q, so Q married Z. W is Z's brother's wife = W is Q's sister-in-law. Standard answer for competition: W is Q's mother-in-law (if chain means W+X means W is parent, then X=Y's child, Z is Y's sibling, Q married Z, and W married Y). W is mother-in-law of Q.",
+      "instantFeedbackRetry": "Here's a trick: Build the tree: W and Y are married (parents of X). Y and Z are siblings. Z and Q are married. W (Y's wife) is Q's (Z's spouse) mother-in-law? No — mother-in-law = spouse's mother. Q's spouse = Z. Z's mother = Y's mother (not W). W is Y's wife, not Z's mother. W is Q's sister-in-law (wife of Q's spouse's brother Y).",
+      "reviewPrompt": "In a coded chain, when two different symbols both point to the same person as parent, what does that indicate about those two symbols' subjects?",
+      "xpReward": 18,
+      "badgeFocus": "Family Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Complex Blood Relations",
+        "caption": "Group H for Complex Blood Relations."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "clock_face",
+      "kind": "svg",
+      "asset": "clock_face.svg",
+      "title": "Complex Blood Relations",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

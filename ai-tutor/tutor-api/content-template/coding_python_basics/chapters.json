@@ -1,0 +1,36 @@
+{
+  "chapters": [
+    {
+      "chapterCode": "PY_INTRO_L1",
+      "title": "Python Basics: Functions and Returns",
+      "estimatedMinutes": 25,
+      "gradeBand": "Coding Beginners",
+      "subtopics": [
+        "What a function does",
+        "Parameters and return values",
+        "Testing your solution"
+      ],
+      "learningGoals": [
+        "Write a small Python function from a prompt.",
+        "Return computed values instead of printing them.",
+        "Use simple tests to verify behavior."
+      ]
+    },
+    {
+      "chapterCode": "PY_INTRO_L2",
+      "title": "Python Basics: Strings and Helpers",
+      "estimatedMinutes": 28,
+      "gradeBand": "Coding Beginners",
+      "subtopics": [
+        "Working with string input",
+        "Building a helper function",
+        "Testing edge cases"
+      ],
+      "learningGoals": [
+        "Write a function that transforms a string.",
+        "Use Python string methods in a controlled way.",
+        "Check normal and edge-case test inputs."
+      ]
+    }
+  ]
+}

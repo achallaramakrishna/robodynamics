@@ -1,0 +1,522 @@
+{
+  "chapterCode": "AR_G5_L6_ANALOGIES",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Basic Analogies",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 6: Basic Analogies",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Word:Word analogies — Lion:Roar :: Dog:Bark",
+    "Part-to-whole analogies — Wheel:Car :: Page:Book",
+    "Material-object analogies — Cotton:Shirt :: Leather:Shoes",
+    "Action analogies — Doctor:Treats :: Teacher:Teaches"
+  ],
+  "learningGoals": [
+    "Identify the relationship between the first word pair and apply it to find the missing word.",
+    "Solve part-to-whole analogies by recognising that the first word is a part of the second word.",
+    "Solve material-object analogies by identifying what material is used to make which object.",
+    "Solve action analogies by matching a person or animal to their characteristic action."
+  ],
+  "coreIdeas": [
+    "In any analogy A:B :: C:D, the relationship between A and B is exactly the same as the relationship between C and D.",
+    "Always state the relationship in a sentence first: 'A is the __ of B' — then apply the same sentence to C to find D.",
+    "Common relationship types: sound (animal → sound), habitat (animal → home), young (animal → baby), tool (job → tool), material (raw material → object), part-whole.",
+    "If two answers seem possible, pick the one where the relationship is most precise and specific."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Lion : Roar :: Dog : ?",
+      "solution": "Relationship: A lion's sound is a roar. A dog's sound is a bark. Answer: Bark.",
+      "concept": "Word:Word analogy — animal to its characteristic sound"
+    },
+    {
+      "id": "WE2",
+      "problem": "Wheel : Car :: Page : ?",
+      "solution": "Relationship: A wheel is a part of a car. A page is a part of a book. Answer: Book.",
+      "concept": "Part-to-whole analogy — the first word is a component of the second"
+    },
+    {
+      "id": "WE3",
+      "problem": "Cotton : Shirt :: Leather : ?",
+      "solution": "Relationship: A shirt is made from cotton. Shoes (or a belt or a bag) are made from leather. Most common answer: Shoes.",
+      "concept": "Material-object analogy — raw material to the object made from it"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark introduces analogies with a relatable example ('Pen is to writing as fork is to eating — they both serve a purpose!'). Opens with a simple word:word analogy.",
+      "placementRule": "Start at Group A. If the learner cannot articulate the relationship, provide the sentence frame 'A is the __ of B' and practice two examples before continuing."
+    },
+    "mission": {
+      "missionTitle": "Analogy Ace Challenge",
+      "missionPromise": "By the end you will solve any word analogy in seconds by always finding the relationship first — a skill that boosts vocabulary, logic, and reading comprehension!",
+      "successCelebration": "Show an 'Analogy Solved!' badge after each group. At lesson end, award the 'Analogy Ace' trophy."
+    },
+    "microLessonPattern": [
+      "Coach names the analogy type and gives a real-life hook example.",
+      "Coach works a full example on the board, stating the relationship in a sentence.",
+      "Coach reads the practice question aloud.",
+      "Student states the relationship and then gives the answer.",
+      "Instant feedback celebrates correct relationships and answers.",
+      "Review question confirms mastery."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per group, increasing through the lesson.",
+      "streakRule": "Show streak flame; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks an analogy-themed badge.",
+      "celebrationStyle": "Coach praise + XP burst + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts trigger a mini-reteach showing the relationship-sentence method.",
+      "practiceStyle": "Offer the completed relationship sentence and ask only for the missing word.",
+      "masteryRule": "Advance after correct answer plus completed tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L6_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, language detective! An analogy is a connection between two pairs of words where the same relationship links both pairs. Here is an example: pen is to writing as fork is to eating — the relationship is 'tool used for the action'. Today we will practise four types of analogies: word-to-word (sounds, habitats, babies), part-to-whole, material-to-object, and action analogies. The golden rule for ALL analogies: always find the relationship first, then apply it!",
+        "boardAction": "Write 'Analogies — A:B :: C:D'. Explain: 'The relationship between A and B is the SAME as between C and D.' List 4 types: (1) Word:Word (sound/home/young), (2) Part:Whole, (3) Material:Object, (4) Action analogy.",
+        "checkpointPrompt": "Quick warm-up: Cat : Kitten :: Dog : ? (Hint: kitten is a baby cat — what is a baby dog?)",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Puppy",
+        "fallbackHint": "The relationship is 'animal : its young (baby)'. A baby cat is called a kitten. A baby dog is called a puppy.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "an_title",
+            "x": "40",
+            "y": "30",
+            "text": "Analogies — A:B :: C:D",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "an_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "500",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "an_rule",
+            "x": "60",
+            "y": "68",
+            "text": "Golden rule: find the relationship, then apply it",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "an_t1",
+            "x": "60",
+            "y": "92",
+            "text": "1. Word:Word — sound, home, young",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "an_t2",
+            "x": "60",
+            "y": "112",
+            "text": "2. Part:Whole — Wheel:Car, Page:Book",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "an_t3",
+            "x": "60",
+            "y": "132",
+            "text": "3. Material:Object — Cotton:Shirt, Leather:Shoes",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Basic Analogies",
+          "caption": "Screenplay beat for Basic Analogies."
+        }
+      },
+      {
+        "beatId": "AR_G5_L6_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me demonstrate the relationship-first method! Question: Cow : Milk :: Hen : ? Step 1 — state the relationship: 'A cow gives milk.' Step 2 — apply it: 'A hen gives ___.' The answer is eggs! One more: Pen : Ink :: Brush : ? Relationship: 'A pen uses ink.' Apply: 'A brush uses ___.' Answer: Paint! Always say the relationship out loud — it makes the answer obvious almost every time!",
+        "boardAction": "Write 'Cow:Milk :: Hen:?' with relationship: 'A cow gives milk → a hen gives EGGS'. Write 'Pen:Ink :: Brush:?' with relationship: 'A pen uses ink → a brush uses PAINT'. Circle the answers.",
+        "checkpointPrompt": "Try this one: Carpenter : Wood :: Potter : ? State the relationship first!",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Clay — a carpenter works with wood, a potter works with clay.",
+        "fallbackHint": "The relationship is 'person : the material they work with'. A carpenter works with wood. What does a potter work with? Clay — potters shape clay to make pots.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_ex1",
+            "x": "50",
+            "y": "42",
+            "text": "Cow : Milk :: Hen : ?",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_rel1",
+            "x": "50",
+            "y": "66",
+            "text": "Relationship: A cow gives milk → A hen gives EGGS",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.6,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_ex2",
+            "x": "50",
+            "y": "96",
+            "text": "Pen : Ink :: Brush : ?",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 1.1,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_rel2",
+            "x": "50",
+            "y": "120",
+            "text": "Relationship: A pen uses ink → A brush uses PAINT",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Basic Analogies",
+          "caption": "Screenplay beat for Basic Analogies."
+        }
+      },
+      {
+        "beatId": "AR_G5_L6_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Excellent! Your analogy toolkit is ready. Step 1: read the given pair. Step 2: state the relationship in a sentence. Step 3: apply that same relationship to the second pair to find the missing word. When two answers seem possible, pick the most specific, direct relationship. Work through Groups A to F — state the relationship for every question!",
+        "boardAction": "Show analogy framework: 'A is the [relationship] of B. Therefore, C is the [relationship] of ___.' List common relationships: sound (roar/bark/moo), young (kitten/puppy/calf), home (kennel/nest/den), material (cotton/leather/wood), part-whole, action.",
+        "checkpointPrompt": "Before the groups — what is the relationship in: Fish : Scales :: Bird : ?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Feathers — a fish is covered in scales, a bird is covered in feathers.",
+        "fallbackHint": "The relationship is 'animal : its body covering'. A fish has scales. A bird has feathers.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Analogy Toolkit",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_frame",
+            "x": "60",
+            "y": "56",
+            "text": "Frame: A is the [R] of B → C is the [R] of ?",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_rels",
+            "x": "60",
+            "y": "78",
+            "text": "Sound | Young | Home | Material | Part-Whole | Action",
+            "color": "#0284c7",
+            "size": 10,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_tip",
+            "x": "60",
+            "y": "100",
+            "text": "Tip: always say the relationship out loud first!",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Basic Analogies",
+          "caption": "Screenplay beat for Basic Analogies."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Word:Word analogies — animal sounds",
+      "missionStepTitle": "Exercise A: Animal Sound Analogies",
+      "coachHook": "Let's crack this code! Animals have their own languages — lions roar, cows moo, frogs croak. Let's turn these facts into analogy superpowers!",
+      "boardDemo": {
+        "title": "Animal Sound Analogies",
+        "steps": [
+          "Lion : Roar → a lion makes the sound roar",
+          "Apply: Duck : ? → a duck makes the sound quack",
+          "More pairs: Cat:Meow, Cow:Moo, Frog:Croak, Bee:Buzz",
+          "Relationship sentence: 'An X makes the sound ___'"
+        ],
+        "teacherLine": "Say the relationship out loud: 'A lion makes the sound roar.' Now say: 'A dog makes the sound ___.' The answer pops right out — bark! This sentence method works every time."
+      },
+      "readAloudPrompt": "Lion : Roar :: Cat : ? (What sound does a cat make?)",
+      "tryPrompt": "Complete: Bee : Buzz :: Frog : ?",
+      "masteryCheck": "Croak",
+      "instantFeedbackWin": "Perfect! A bee makes a buzz, and a frog makes a croak. Relationship: animal : its sound. Brilliant!",
+      "instantFeedbackRetry": "Here's a trick: say it out loud — 'A bee buzzes, so a frog ___.' A frog makes the sound croak.",
+      "reviewPrompt": "Quick check: Snake : Hiss :: Cow : ?",
+      "xpReward": 10,
+      "badgeFocus": "Sound Matcher",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Basic Analogies",
+        "caption": "Group A for Basic Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Word:Word analogies — animal homes",
+      "missionStepTitle": "Exercise B: Animal Home Analogies",
+      "coachHook": "Let's crack this code! Every animal has a home with a special name — a dog has a kennel, a bee has a hive. Knowing these is key for analogy questions!",
+      "boardDemo": {
+        "title": "Animal Home Analogies",
+        "steps": [
+          "Dog : Kennel → a dog lives in a kennel",
+          "Bee : Hive → a bee lives in a hive",
+          "Bird : Nest, Lion : Den, Horse : Stable, Rabbit : Burrow",
+          "Apply: Dog : Kennel :: Bird : ? → Nest"
+        ],
+        "teacherLine": "The relationship is 'animal : its home/dwelling'. Memorise common pairs: Dog-Kennel, Bird-Nest, Bee-Hive, Lion-Den, Horse-Stable, Rabbit-Burrow, Fish-Aquarium."
+      },
+      "readAloudPrompt": "Dog : Kennel :: Bird : ? (Where does a bird live?)",
+      "tryPrompt": "Complete: Bee : Hive :: Horse : ?",
+      "masteryCheck": "Stable",
+      "instantFeedbackWin": "Excellent! A bee lives in a hive, and a horse lives in a stable. Relationship: animal : its home. Perfect!",
+      "instantFeedbackRetry": "Here's a trick: a bee's home is a hive. A horse's home is a stable (that big building where horses are kept on farms).",
+      "reviewPrompt": "Quick check: Fish : Aquarium :: Rabbit : ?",
+      "xpReward": 12,
+      "badgeFocus": "Home Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Basic Analogies",
+        "caption": "Group B for Basic Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Part-to-whole analogies",
+      "missionStepTitle": "Exercise C: Part-to-Whole Analogies",
+      "coachHook": "Let's crack this code! A wheel is part of a car. A page is part of a book. In part-to-whole analogies, the first word is always a piece or component of the second word!",
+      "boardDemo": {
+        "title": "Part-to-Whole Analogies",
+        "steps": [
+          "Wheel : Car → a wheel is a part of a car",
+          "Apply: Page : ? → a page is a part of a BOOK",
+          "More: Key : Keyboard, Petal : Flower, Branch : Tree, Spoke : Wheel",
+          "Relationship: 'A is a part/component of B'"
+        ],
+        "teacherLine": "Ask yourself: is the first word a piece of something? If yes, it is a part-to-whole analogy. Find what larger thing the second pair's first word is a part of!"
+      },
+      "readAloudPrompt": "Wheel : Car :: Petal : ? (A petal is a part of which larger thing?)",
+      "tryPrompt": "Complete: Key : Keyboard :: Spoke : ?",
+      "masteryCheck": "Wheel",
+      "instantFeedbackWin": "Spot on! A key is a part of a keyboard, and a spoke is a part of a wheel. Part-to-whole identified perfectly!",
+      "instantFeedbackRetry": "Here's a trick: a key is part of a keyboard. A spoke is that thin rod that goes from the centre of a wheel to the rim — so a spoke is part of a wheel.",
+      "reviewPrompt": "Quick check: Chapter : Book :: Branch : ?",
+      "xpReward": 14,
+      "badgeFocus": "Whole Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Basic Analogies",
+        "caption": "Group C for Basic Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Material-object analogies",
+      "missionStepTitle": "Exercise D: Material-to-Object Analogies",
+      "coachHook": "Let's crack this code! Cotton makes shirts, leather makes shoes, wood makes furniture. Material-to-object analogies test whether you know what things are made from!",
+      "boardDemo": {
+        "title": "Material-to-Object Analogies",
+        "steps": [
+          "Cotton : Shirt → cotton is the material used to make a shirt",
+          "Apply: Leather : ? → leather is used to make SHOES (or belt, bag)",
+          "More pairs: Wood:Furniture, Gold:Jewellery, Clay:Pot, Glass:Window, Wool:Sweater",
+          "Relationship: 'A is the raw material used to make B'"
+        ],
+        "teacherLine": "State the relationship: 'Cotton is used to make shirts.' Then apply: 'Leather is used to make ___.' Shoes, belts, and bags are all made of leather — pick the most common exam answer: Shoes."
+      },
+      "readAloudPrompt": "Cotton : Shirt :: Leather : ? (What is leather commonly used to make?)",
+      "tryPrompt": "Complete: Wood : Furniture :: Gold : ?",
+      "masteryCheck": "Jewellery",
+      "instantFeedbackWin": "Brilliant! Wood is used to make furniture, and gold is used to make jewellery. Material-to-object relationship perfectly identified!",
+      "instantFeedbackRetry": "Here's a trick: what shiny objects do people wear that are made of gold? Rings, necklaces, bangles — all types of jewellery. Gold : Jewellery.",
+      "reviewPrompt": "Quick check: Clay : Pot :: Glass : ?",
+      "xpReward": 14,
+      "badgeFocus": "Material Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Basic Analogies",
+        "caption": "Group D for Basic Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Action analogies — person or animal to action",
+      "missionStepTitle": "Exercise E: Action Analogies",
+      "coachHook": "Let's crack this code! Doctors treat patients, teachers teach students, birds fly — action analogies link a person or animal to what they characteristically do!",
+      "boardDemo": {
+        "title": "Action Analogies",
+        "steps": [
+          "Doctor : Treats :: Teacher : ? → a doctor treats (patients), a teacher TEACHES (students)",
+          "Bird : Flies :: Fish : ? → a bird flies, a fish SWIMS",
+          "Soldier : Fights :: Farmer : ? → a soldier fights, a farmer GROWS (crops)/FARMS",
+          "Relationship: 'A characteristically does action B'"
+        ],
+        "teacherLine": "The relationship is 'X : their main action'. Say: 'A doctor treats. A teacher ___.' The most direct, specific action is the answer. Avoid vague words — be precise!"
+      },
+      "readAloudPrompt": "Doctor : Treats :: Teacher : ? (What does a teacher do?)",
+      "tryPrompt": "Complete: Bird : Flies :: Fish : ?",
+      "masteryCheck": "Swims",
+      "instantFeedbackWin": "Perfect! A bird flies, and a fish swims. Both actions are how these animals move through their environment. Excellent analogy!",
+      "instantFeedbackRetry": "Here's a trick: a bird moves through air by flying. A fish moves through water by swimming. Bird:Flies :: Fish:Swims.",
+      "reviewPrompt": "Quick check: Soldier : Fights :: Farmer : ?",
+      "xpReward": 16,
+      "badgeFocus": "Action Analogist",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Basic Analogies",
+        "caption": "Group E for Basic Analogies."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Analogies — mixed speed round",
+      "missionStepTitle": "Exercise F: Speed Round — Mixed Analogies",
+      "coachHook": "Let's crack this code — at speed! Four analogy types, three quick questions. State the type and answer fast!",
+      "boardDemo": {
+        "title": "Speed Round — All Analogy Types",
+        "steps": [
+          "Word:Word — name the relationship (sound, young, home, body covering)",
+          "Part:Whole — first word is a piece of the second",
+          "Material:Object — first word is used to make the second",
+          "Action — first word characteristically performs the action"
+        ],
+        "teacherLine": "For every question: say the type, say the relationship sentence, then give the answer. This takes 10 seconds and is always correct!"
+      },
+      "readAloudPrompt": "Ready? Three quick analogy questions — name the type and answer!",
+      "tryPrompt": "Q1: Lion : Roar :: Frog : ? | Q2: Petal : Flower :: Key : ? | Q3: Wool : Sweater :: Clay : ?",
+      "masteryCheck": "Croak | Keyboard | Pot",
+      "instantFeedbackWin": "AMAZING! Q1: sound analogy — frog croaks. Q2: part-to-whole — key is part of keyboard. Q3: material-object — clay is used to make a pot. Full marks — Analogy Ace!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — lion's sound is roar, frog's sound is croak. Q2 — petal is part of flower, key is part of keyboard. Q3 — wool makes a sweater, clay makes a pot.",
+      "reviewPrompt": "Final challenge: create your own analogy for each type — Word:Word, Part:Whole, Material:Object, and Action. Share all four!",
+      "xpReward": 20,
+      "badgeFocus": "Analogy Ace",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Basic Analogies",
+        "caption": "Group F for Basic Analogies."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "analogy_frame",
+      "kind": "svg",
+      "asset": "analogy_frame.svg",
+      "title": "Basic Analogies",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

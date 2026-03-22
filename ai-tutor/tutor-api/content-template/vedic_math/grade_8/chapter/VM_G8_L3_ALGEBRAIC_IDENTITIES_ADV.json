@@ -67,15 +67,28 @@
     }
   ],
   "starterPractice": [
-    { "q": "Expand (a+b)² using the identity.", "a": "a²+2ab+b²" },
-    { "q": "What are the coefficients in (a+b)³?", "a": "1, 3, 3, 1" },
-    { "q": "State the factorisation of a³+b³.", "a": "(a+b)(a²-ab+b²)" }
+    {
+      "q": "Expand (a+b)² using the identity.",
+      "a": "a²+2ab+b²"
+    },
+    {
+      "q": "What are the coefficients in (a+b)³?",
+      "a": "1, 3, 3, 1"
+    },
+    {
+      "q": "State the factorisation of a³+b³.",
+      "a": "(a+b)(a²-ab+b²)"
+    }
   ],
   "duolingoLessonArc": {
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "welcomeMessage": "Welcome, Identity Champion! Today you master cube identities that unlock lightning-fast mental math.",
-      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "goalOptions": [
+        "School math",
+        "Competitive exams",
+        "Mental speed"
+      ],
       "avatarMood": "excited"
     },
     "mission": "Master cube expansions and cube factorisations — handle (a+b)³, (a-b)³, a³+b³, and a³-b³ fluently.",
@@ -90,7 +103,11 @@
     "rewardLoop": {
       "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
       "streakBonus": "5 XP for 3 consecutive correct answers",
-      "badges": ["Binomial Beginner", "Cube Cracker", "Identity Master"]
+      "badges": [
+        "Binomial Beginner",
+        "Cube Cracker",
+        "Identity Master"
+      ]
     },
     "reviewLoop": {
       "trigger": "2 wrong answers in a group",
@@ -129,7 +146,13 @@
             "questionText": "Expand (x+5)² using the identity (a+b)²=a²+2ab+b².",
             "expectedAnswer": "x²+10x+25",
             "hint": "Set a=x and b=5, then substitute.",
-            "solution": "(x+5)² = x² + 2·x·5 + 5² = x² + 10x + 25"
+            "solution": "(x+5)² = x² + 2·x·5 + 5² = x² + 10x + 25",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group A for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_A2",
@@ -143,9 +166,21 @@
             "questionText": "Expand (y-4)² using the identity (a-b)²=a²-2ab+b².",
             "expectedAnswer": "y²-8y+16",
             "hint": "Set a=y and b=4. Note the negative middle term.",
-            "solution": "(y-4)² = y² - 2·y·4 + 4² = y² - 8y + 16"
+            "solution": "(y-4)² = y² - 2·y·4 + 4² = y² - 8y + 16",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group A for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group A for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -175,7 +210,12 @@
             "expectedAnswer": "x³+6x²+12x+8",
             "hint": "a=x, b=2. Compute each term: x³, 3x²·2, 3x·4, 8.",
             "solution": "(x+2)³ = x³ + 3·x²·2 + 3·x·4 + 8 = x³ + 6x² + 12x + 8",
-            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "Pascal's triangle coefficients for cube expansion" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group B for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_B2",
@@ -196,9 +236,21 @@
             "correctIndex": 0,
             "expectedAnswer": "p³+3p²+3p+1",
             "hint": "Use a=p, b=1 in (a+b)³.",
-            "solution": "(p+1)³ = p³ + 3p²·1 + 3p·1 + 1 = p³+3p²+3p+1"
+            "solution": "(p+1)³ = p³ + 3p²·1 + 3p·1 + 1 = p³+3p²+3p+1",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group B for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group B for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -227,7 +279,13 @@
             "questionText": "Expand (x-3)³ using (a-b)³ = a³-3a²b+3ab²-b³.",
             "expectedAnswer": "x³-9x²+27x-27",
             "hint": "a=x, b=3. Check signs carefully: -, then +, then -.",
-            "solution": "(x-3)³ = x³ - 3x²·3 + 3x·9 - 27 = x³ - 9x² + 27x - 27"
+            "solution": "(x-3)³ = x³ - 3x²·3 + 3x·9 - 27 = x³ - 9x² + 27x - 27",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group C for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_C2",
@@ -248,9 +306,21 @@
             "correctIndex": 0,
             "expectedAnswer": "8-12y+6y²-y³",
             "hint": "a=2, b=y. (a-b)³ = a³-3a²b+3ab²-b³.",
-            "solution": "(2-y)³ = 8 - 3·4·y + 3·2·y² - y³ = 8 - 12y + 6y² - y³"
+            "solution": "(2-y)³ = 8 - 3·4·y + 3·2·y² - y³ = 8 - 12y + 6y² - y³",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group C for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group C for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -280,7 +350,12 @@
             "expectedAnswer": "(x+2)(x²-2x+4)",
             "hint": "Recognise 8=2³. Set a=x, b=2.",
             "solution": "x³+8 = x³+2³ = (x+2)(x²-2x+4)",
-            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "Sum of cubes factorisation pattern" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group D for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_D2",
@@ -294,9 +369,21 @@
             "questionText": "Evaluate 8+27 using the sum of cubes identity.",
             "expectedAnswer": "35",
             "hint": "8=2³, 27=3³. Use a³+b³=(a+b)(a²-ab+b²) then compute numerically.",
-            "solution": "8+27=2³+3³=(2+3)(4-6+9)=5×7=35"
+            "solution": "8+27=2³+3³=(2+3)(4-6+9)=5×7=35",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group D for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group D for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -332,7 +419,13 @@
             "correctIndex": 0,
             "expectedAnswer": "8x³+36x²+54x+27",
             "hint": "a=2x, b=3. Compute each term: (2x)³=8x³, 3(2x)²·3=36x², 3(2x)·9=54x, 3³=27.",
-            "solution": "(2x+3)³ = 8x³ + 3·4x²·3 + 3·2x·9 + 27 = 8x³+36x²+54x+27"
+            "solution": "(2x+3)³ = 8x³ + 3·4x²·3 + 3·2x·9 + 27 = 8x³+36x²+54x+27",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group E for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_E2",
@@ -353,9 +446,21 @@
             "correctIndex": 0,
             "expectedAnswer": "(3+4)(9-12+16)",
             "hint": "27=3³, 64=4³. Use a³+b³=(a+b)(a²-ab+b²) with a=3, b=4.",
-            "solution": "27+64=3³+4³=(3+4)(9-12+16)=7×13=91"
+            "solution": "27+64=3³+4³=(3+4)(9-12+16)=7×13=91",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group E for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group E for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -383,14 +488,42 @@
             "questionType": "fill_step",
             "questionText": "Expand (2x+3)³ step by step. Fill each term.",
             "steps": [
-              { "label": "Step 1: a³ where a=2x", "answer": "8x³", "hint": "(2x)³ = 8x³" },
-              { "label": "Step 2: 3a²b where a=2x, b=3", "answer": "36x²", "hint": "3·(2x)²·3 = 3·4x²·3 = 36x²" },
-              { "label": "Step 3: 3ab² where a=2x, b=3", "answer": "54x", "hint": "3·2x·9 = 54x" },
-              { "label": "Step 4: b³ where b=3", "answer": "27", "hint": "3³=27" }
+              {
+                "label": "Step 1: a³ where a=2x",
+                "answer": "8x³",
+                "hint": "(2x)³ = 8x³"
+              },
+              {
+                "label": "Step 2: 3a²b where a=2x, b=3",
+                "answer": "36x²",
+                "hint": "3·(2x)²·3 = 3·4x²·3 = 36x²"
+              },
+              {
+                "label": "Step 3: 3ab² where a=2x, b=3",
+                "answer": "54x",
+                "hint": "3·2x·9 = 54x"
+              },
+              {
+                "label": "Step 4: b³ where b=3",
+                "answer": "27",
+                "hint": "3³=27"
+              }
             ],
-            "expectedAnswer": "8x³+36x²+54x+27"
+            "expectedAnswer": "8x³+36x²+54x+27",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group F for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group F for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -420,7 +553,12 @@
             "expectedAnswer": "1030301",
             "hint": "101³ = 100³ + 3·100²·1 + 3·100·1² + 1³",
             "solution": "101³ = 1000000 + 30000 + 300 + 1 = 1030301",
-            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "Splitting 101 as 100+1 to apply cube identity" }
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group G for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_G2",
@@ -434,9 +572,21 @@
             "questionText": "Compute 99³ mentally. Write 99 = 100-1 and apply (a-b)³.",
             "expectedAnswer": "970299",
             "hint": "99³ = 100³ - 3·100²·1 + 3·100·1 - 1",
-            "solution": "99³ = 1000000 - 30000 + 300 - 1 = 970299"
+            "solution": "99³ = 1000000 - 30000 + 300 - 1 = 970299",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group G for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group G for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -465,7 +615,13 @@
             "questionText": "Expand (a+1)³.",
             "expectedAnswer": "a³+3a²+3a+1",
             "hint": "b=1, so b³=1 and 3ab²=3a.",
-            "solution": "(a+1)³ = a³+3a²+3a+1"
+            "solution": "(a+1)³ = a³+3a²+3a+1",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group H for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_H2",
@@ -486,9 +642,21 @@
             "correctIndex": 0,
             "expectedAnswer": "(4+5)(16-20+25)",
             "hint": "64=4³, 125=5³. Use a³+b³=(a+b)(a²-ab+b²).",
-            "solution": "64+125=4³+5³=(4+5)(16-20+25)=9×21=189"
+            "solution": "64+125=4³+5³=(4+5)(16-20+25)=9×21=189",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group H for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group H for Identity Champion — Advanced Algebraic Identities."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -517,7 +685,13 @@
             "questionText": "Factorise x³-27 using a³-b³=(a-b)(a²+ab+b²).",
             "expectedAnswer": "(x-3)(x²+3x+9)",
             "hint": "27=3³. Set a=x, b=3. The quadratic factor is a²+ab+b².",
-            "solution": "x³-27 = x³-3³ = (x-3)(x²+3x+9)"
+            "solution": "x³-27 = x³-3³ = (x-3)(x²+3x+9)",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group I for Identity Champion — Advanced Algebraic Identities."
+            }
           },
           {
             "questionId": "VM_G8_L3_I2",
@@ -530,15 +704,54 @@
             "questionType": "fill_step",
             "questionText": "Factorise 125-8 using the difference of cubes identity.",
             "steps": [
-              { "label": "Identify a and b (a³=125, b³=8)", "answer": "a=5, b=2", "hint": "5³=125 and 2³=8" },
-              { "label": "Write linear factor (a-b)", "answer": "(5-2)", "hint": "a-b = 5-2 = 3" },
-              { "label": "Write quadratic factor (a²+ab+b²)", "answer": "(25+10+4)", "hint": "25+5·2+4 = 39" },
-              { "label": "Final numerical result", "answer": "117", "hint": "3×39=117" }
+              {
+                "label": "Identify a and b (a³=125, b³=8)",
+                "answer": "a=5, b=2",
+                "hint": "5³=125 and 2³=8"
+              },
+              {
+                "label": "Write linear factor (a-b)",
+                "answer": "(5-2)",
+                "hint": "a-b = 5-2 = 3"
+              },
+              {
+                "label": "Write quadratic factor (a²+ab+b²)",
+                "answer": "(25+10+4)",
+                "hint": "25+5·2+4 = 39"
+              },
+              {
+                "label": "Final numerical result",
+                "answer": "117",
+                "hint": "3×39=117"
+              }
             ],
-            "expectedAnswer": "117"
+            "expectedAnswer": "117",
+            "visual": {
+              "kind": "svg",
+              "asset": "linear_eq_sutra.svg",
+              "title": "Identity Champion — Advanced Algebraic Identities",
+              "caption": "Group I for Identity Champion — Advanced Algebraic Identities."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "linear_eq_sutra.svg",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "caption": "Group I for Identity Champion — Advanced Algebraic Identities."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G8_L3_ALGEBRAIC_IDENTITIES_ADV",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "linear_eq_sutra",
+      "kind": "svg",
+      "asset": "linear_eq_sutra.svg",
+      "title": "Identity Champion — Advanced Algebraic Identities",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

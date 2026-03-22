@@ -55,9 +55,21 @@
     "version": "2026-03-mindspark-g6-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hello! I am Arya. Today we unlock the FULL power of Nikhilam — multiplying numbers near 10, 100, and 1000. You will be doing 3-digit multiplication in your head that would stun your classmates!",
       "placementRule": "If the student correctly does Nikhilam near 10 in Group A, jump to Group B (near 100)."
     },
@@ -88,7 +100,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -106,7 +122,12 @@
         "reviewPrompt": "Rapid: 7×9, 8×8, 6×6 using Nikhilam base 10.",
         "xpReward": 10,
         "badgeFocus": "Base-10 Refresher",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "base10" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group A for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_A1",
@@ -118,11 +139,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using Nikhilam (base 10): 7 × 8 = ?",
-            "options": ["54", "56", "48", "64"],
+            "options": [
+              "54",
+              "56",
+              "48",
+              "64"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "56",
             "hint": "Deviations: −3 and −2. Left: 7−2=5. Right: 3×2=6.",
-            "solution": "7×8: deviations −3, −2. Left: 5. Right: 6. Answer: 56."
+            "solution": "7×8: deviations −3, −2. Left: 5. Right: 6. Answer: 56.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group A for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_A2",
@@ -134,11 +166,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Nikhilam near base 10: what is the deviation of 6 from base 10?",
-            "options": ["4", "−4", "6", "−6"],
+            "options": [
+              "4",
+              "−4",
+              "6",
+              "−6"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "−4",
             "hint": "6 − 10 = −4.",
-            "solution": "Deviation = 6 − 10 = −4. The number 6 is 4 below the base 10."
+            "solution": "Deviation = 6 − 10 = −4. The number 6 is 4 below the base 10.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group A for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_A3",
@@ -150,11 +193,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "9 × 6 using Nikhilam. Left part = 9 + (−4) = 5. Right part = 1 × 4 = 04. Answer is:",
-            "options": ["45", "504", "54", "540"],
+            "options": [
+              "45",
+              "504",
+              "54",
+              "540"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "54",
             "hint": "Left=5, Right=4 (1 digit for base 10). Answer: 54.",
-            "solution": "Left=5, Right=04 (one digit) → 54."
+            "solution": "Left=5, Right=04 (one digit) → 54.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group A for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -172,7 +226,12 @@
         "reviewPrompt": "Try: 97×97, 99×95, 96×98 using base 100.",
         "xpReward": 12,
         "badgeFocus": "Base-100 Master",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "base100" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group B for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_B1",
@@ -184,11 +243,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using Nikhilam (base 100): 98 × 97 = ?",
-            "options": ["9506", "9406", "9516", "9416"],
+            "options": [
+              "9506",
+              "9406",
+              "9516",
+              "9416"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9506",
             "hint": "Deviations: −2, −3. Left: 98−3=95. Right: 2×3=06.",
-            "solution": "98×97: deviations −2, −3. Left: 95. Right: 06. Answer: 9506."
+            "solution": "98×97: deviations −2, −3. Left: 95. Right: 06. Answer: 9506.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group B for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_B2",
@@ -209,7 +279,13 @@
             "correctIndex": 0,
             "expectedAnswer": "Because 100 has two zeros",
             "hint": "Number of digits in right part = number of zeros in the base.",
-            "solution": "Base 100 has 2 zeros, so the right part must have exactly 2 digits (pad with leading zero if needed)."
+            "solution": "Base 100 has 2 zeros, so the right part must have exactly 2 digits (pad with leading zero if needed).",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group B for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_B3",
@@ -221,11 +297,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "99 × 97 using Nikhilam base 100:",
-            "options": ["9603", "9503", "9703", "9403"],
+            "options": [
+              "9603",
+              "9503",
+              "9703",
+              "9403"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9603",
             "hint": "Deviations: −1, −3. Left: 99−3=96. Right: 1×3=03.",
-            "solution": "99×97: deviations −1, −3. Left: 96. Right: 03. Answer: 9603."
+            "solution": "99×97: deviations −1, −3. Left: 96. Right: 03. Answer: 9603.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group B for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -243,7 +330,12 @@
         "reviewPrompt": "Challenge: 997×998, 999×996, 995×994.",
         "xpReward": 14,
         "badgeFocus": "Base-1000 Champion",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "base1000" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group C for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_C1",
@@ -255,11 +347,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using Nikhilam (base 1000): 997 × 996 = ?",
-            "options": ["993012", "993012", "992012", "993112"],
+            "options": [
+              "993012",
+              "993012",
+              "992012",
+              "993112"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "993012",
             "hint": "Deviations: −3, −4. Left: 997−4=993. Right: 3×4=012.",
-            "solution": "997×996: deviations −3, −4. Left: 993. Right: 012. Answer: 993012."
+            "solution": "997×996: deviations −3, −4. Left: 993. Right: 012. Answer: 993012.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group C for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_C2",
@@ -271,11 +374,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "999 × 998 using Nikhilam base 1000:",
-            "options": ["998001", "997002", "998002", "999002"],
+            "options": [
+              "998001",
+              "997002",
+              "998002",
+              "999002"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "998002",
             "hint": "Deviations: −1, −2. Left: 999−2=997. Right: 1×2=002.",
-            "solution": "999×998: deviations −1, −2. Left: 997. Right: 002. Answer: 997002."
+            "solution": "999×998: deviations −1, −2. Left: 997. Right: 002. Answer: 997002.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group C for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_C3",
@@ -287,11 +401,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A factory produces 995 units per day for 994 days. Use Nikhilam base 1000 to find total units.",
-            "options": ["989030", "989030", "988030", "990030"],
+            "options": [
+              "989030",
+              "989030",
+              "988030",
+              "990030"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "989030",
             "hint": "995×994: deviations −5, −6. Left: 995−6=989. Right: 5×6=030.",
-            "solution": "995×994: deviations −5, −6. Left: 989. Right: 030. Answer: 989030."
+            "solution": "995×994: deviations −5, −6. Left: 989. Right: 030. Answer: 989030.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group C for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -309,7 +434,12 @@
         "reviewPrompt": "For each: 89×91, 1003×1002, 49×51 — which base?",
         "xpReward": 12,
         "badgeFocus": "Smart Base Picker",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "base_selection" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group D for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_D1",
@@ -321,11 +451,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which base is most efficient for multiplying 103 × 107?",
-            "options": ["Base 10", "Base 100", "Base 1000", "Base 50"],
+            "options": [
+              "Base 10",
+              "Base 100",
+              "Base 1000",
+              "Base 50"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "Base 100",
             "hint": "103 and 107 are both close to 100.",
-            "solution": "103 and 107 are both within 10 of 100, making base 100 the ideal choice."
+            "solution": "103 and 107 are both within 10 of 100, making base 100 the ideal choice.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group D for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_D2",
@@ -337,11 +478,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 998 × 996, which base gives the smallest deviations?",
-            "options": ["Base 10", "Base 100", "Base 1000", "Base 500"],
+            "options": [
+              "Base 10",
+              "Base 100",
+              "Base 1000",
+              "Base 500"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "Base 1000",
             "hint": "998 and 996 are both very close to 1000.",
-            "solution": "998 and 996 deviate by only −2 and −4 from 1000. Base 1000 is optimal."
+            "solution": "998 and 996 deviate by only −2 and −4 from 1000. Base 1000 is optimal.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group D for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_D3",
@@ -353,11 +505,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A student wants to multiply 11 × 12. Which base should she use?",
-            "options": ["Base 100", "Base 1000", "Base 10", "Base 50"],
+            "options": [
+              "Base 100",
+              "Base 1000",
+              "Base 10",
+              "Base 50"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "Base 10",
             "hint": "11 and 12 are close to 10.",
-            "solution": "11 and 12 are near 10. Deviations are +1 and +2. Base 10 is the right choice."
+            "solution": "11 and 12 are near 10. Deviations are +1 and +2. Base 10 is the right choice.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group D for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -375,7 +538,12 @@
         "reviewPrompt": "Verify your answer by checking left × 1000 + right equals the product.",
         "xpReward": 14,
         "badgeFocus": "1000-Method Expert",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "fill_steps_1000" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group E for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_E1",
@@ -388,16 +556,46 @@
             "questionType": "fill_step",
             "questionText": "Find 998 × 994 using Nikhilam (base 1000).",
             "steps": [
-              {"label": "Deviation of 998 from 1000: 998 − 1000 = ?", "answer": "−2", "hint": "998 is 2 below 1000"},
-              {"label": "Deviation of 994 from 1000: 994 − 1000 = ?", "answer": "−6", "hint": "994 is 6 below 1000"},
-              {"label": "Left part: 998 + (−6) = ?", "answer": "992", "hint": "998 minus 6"},
-              {"label": "Right part: (−2) × (−6) = ?", "answer": "12", "hint": "2 × 6"},
-              {"label": "Right part with 3 digits (pad if needed): ?", "answer": "012", "hint": "12 → 012"},
-              {"label": "Final answer (left part | right part): ?", "answer": "992012", "hint": "992 | 012"}
+              {
+                "label": "Deviation of 998 from 1000: 998 − 1000 = ?",
+                "answer": "−2",
+                "hint": "998 is 2 below 1000"
+              },
+              {
+                "label": "Deviation of 994 from 1000: 994 − 1000 = ?",
+                "answer": "−6",
+                "hint": "994 is 6 below 1000"
+              },
+              {
+                "label": "Left part: 998 + (−6) = ?",
+                "answer": "992",
+                "hint": "998 minus 6"
+              },
+              {
+                "label": "Right part: (−2) × (−6) = ?",
+                "answer": "12",
+                "hint": "2 × 6"
+              },
+              {
+                "label": "Right part with 3 digits (pad if needed): ?",
+                "answer": "012",
+                "hint": "12 → 012"
+              },
+              {
+                "label": "Final answer (left part | right part): ?",
+                "answer": "992012",
+                "hint": "992 | 012"
+              }
             ],
             "expectedAnswer": "992012",
             "hint": "Deviations −2 and −6. Left: 992. Right: 012.",
-            "solution": "998×994: deviations −2, −6. Left: 992. Right: 2×6=12=012. Answer: 992012."
+            "solution": "998×994: deviations −2, −6. Left: 992. Right: 2×6=12=012. Answer: 992012.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group E for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_E2",
@@ -410,16 +608,46 @@
             "questionType": "fill_step",
             "questionText": "Find 996 × 995 using Nikhilam (base 1000).",
             "steps": [
-              {"label": "Deviation of 996: ?", "answer": "−4", "hint": "996 − 1000"},
-              {"label": "Deviation of 995: ?", "answer": "−5", "hint": "995 − 1000"},
-              {"label": "Left part: 996 + (−5) = ?", "answer": "991", "hint": "996 − 5"},
-              {"label": "Right part: 4 × 5 = ?", "answer": "20", "hint": "Multiply magnitudes"},
-              {"label": "Right part padded to 3 digits:", "answer": "020", "hint": "20 → 020"},
-              {"label": "Answer:", "answer": "991020", "hint": "991 | 020"}
+              {
+                "label": "Deviation of 996: ?",
+                "answer": "−4",
+                "hint": "996 − 1000"
+              },
+              {
+                "label": "Deviation of 995: ?",
+                "answer": "−5",
+                "hint": "995 − 1000"
+              },
+              {
+                "label": "Left part: 996 + (−5) = ?",
+                "answer": "991",
+                "hint": "996 − 5"
+              },
+              {
+                "label": "Right part: 4 × 5 = ?",
+                "answer": "20",
+                "hint": "Multiply magnitudes"
+              },
+              {
+                "label": "Right part padded to 3 digits:",
+                "answer": "020",
+                "hint": "20 → 020"
+              },
+              {
+                "label": "Answer:",
+                "answer": "991020",
+                "hint": "991 | 020"
+              }
             ],
             "expectedAnswer": "991020",
             "hint": "Left: 991. Right: 020.",
-            "solution": "996×995: deviations −4, −5. Left: 991. Right: 020. Answer: 991020."
+            "solution": "996×995: deviations −4, −5. Left: 991. Right: 020. Answer: 991020.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group E for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -437,7 +665,12 @@
         "reviewPrompt": "Three rapid: 7×9, 99×96, 998×997. Different bases each time!",
         "xpReward": 14,
         "badgeFocus": "Base Switcher",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "mixed_bases" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group F for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_F1",
@@ -449,11 +682,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Choose base and solve: 88 × 92",
-            "options": ["8006 (base 100)", "8096 (base 100)", "8196 (base 100)", "8016 (base 100)"],
+            "options": [
+              "8006 (base 100)",
+              "8096 (base 100)",
+              "8196 (base 100)",
+              "8016 (base 100)"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "8096 (base 100)",
             "hint": "88 and 92 near 100: deviations −12 and −8. Left: 88−8=80. Right: 12×8=96.",
-            "solution": "Base 100. Deviations: −12, −8. Left: 80. Right: 96. Answer: 8096."
+            "solution": "Base 100. Deviations: −12, −8. Left: 80. Right: 96. Answer: 8096.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group F for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_F2",
@@ -465,11 +709,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "104 × 106 — both above base 100. Deviations are +4 and +6. Answer:",
-            "options": ["11024", "10824", "11044", "10924"],
+            "options": [
+              "11024",
+              "10824",
+              "11044",
+              "10924"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "11024",
             "hint": "Left: 104+6=110. Right: 4×6=24. Answer: 11024.",
-            "solution": "Base 100. Deviations +4, +6. Left: 104+6=110. Right: 4×6=24. Answer: 11024."
+            "solution": "Base 100. Deviations +4, +6. Left: 104+6=110. Right: 4×6=24. Answer: 11024.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group F for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_F3",
@@ -481,11 +736,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A school orders 998 chairs per floor for 997 floors. Using Nikhilam (base 1000), total chairs:",
-            "options": ["995006", "994006", "996006", "993006"],
+            "options": [
+              "995006",
+              "994006",
+              "996006",
+              "993006"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "995006",
             "hint": "998×997: deviations −2, −3. Left: 998−3=995. Right: 2×3=006.",
-            "solution": "Nikhilam base 1000. Left: 995. Right: 006. Answer: 995006."
+            "solution": "Nikhilam base 1000. Left: 995. Right: 006. Answer: 995006.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group F for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -503,7 +769,12 @@
         "reviewPrompt": "Three rapid-fire: 6×8, 97×99, 996×999.",
         "xpReward": 16,
         "badgeFocus": "Nikhilam Ninja",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "speed" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group G for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_G1",
@@ -515,11 +786,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 99 × 96 = ?",
-            "options": ["9404", "9504", "9304", "9604"],
+            "options": [
+              "9404",
+              "9504",
+              "9304",
+              "9604"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "9504",
             "hint": "Base 100: deviations −1, −4. Left: 99−4=95. Right: 1×4=04.",
-            "solution": "Base 100. Deviations −1, −4. Left: 95. Right: 04. Answer: 9504."
+            "solution": "Base 100. Deviations −1, −4. Left: 95. Right: 04. Answer: 9504.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group G for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_G2",
@@ -531,11 +813,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 998 × 999 = ?",
-            "options": ["997002", "996002", "997102", "998001"],
+            "options": [
+              "997002",
+              "996002",
+              "997102",
+              "998001"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "997002",
             "hint": "Base 1000: deviations −2, −1. Left: 997. Right: 002.",
-            "solution": "998×999: deviations −2, −1. Left: 997. Right: 002. Answer: 997002."
+            "solution": "998×999: deviations −2, −1. Left: 997. Right: 002. Answer: 997002.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group G for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -553,7 +846,12 @@
         "reviewPrompt": "Try sub-base 500: 497 × 498 = ?",
         "xpReward": 16,
         "badgeFocus": "Sub-Base Pioneer",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "sub_base" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group H for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_H1",
@@ -565,11 +863,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using sub-base 50: 47 × 48 = ? (Sub-base method: deviations −3, −2. Left=45. Left×50 + right = 45×50+6)",
-            "options": ["2256", "2246", "2266", "2356"],
+            "options": [
+              "2256",
+              "2246",
+              "2266",
+              "2356"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2256",
             "hint": "Left=45, Right=6. Answer: 45×50+6 = 2250+6.",
-            "solution": "Sub-base 50. Deviations: −3, −2. Left=45. Right=6. 45×50+6=2256."
+            "solution": "Sub-base 50. Deviations: −3, −2. Left=45. Right=6. 45×50+6=2256.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group H for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_H2",
@@ -581,11 +890,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "49 × 47 using sub-base 50:",
-            "options": ["2303", "2313", "2393", "2203"],
+            "options": [
+              "2303",
+              "2313",
+              "2393",
+              "2203"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2303",
             "hint": "Deviations −1, −3. Left=49−3=46. Right=1×3=3. 46×50+3=2300+3.",
-            "solution": "Sub-base 50. Deviations −1, −3. Left=46. Right=3. 46×50+3=2303."
+            "solution": "Sub-base 50. Deviations −1, −3. Left=46. Right=3. 46×50+3=2303.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group H for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       },
@@ -603,7 +923,12 @@
         "reviewPrompt": "Explain to your friend when Nikhilam is faster than standard multiplication.",
         "xpReward": 18,
         "badgeFocus": "Nikhilam Grand Master",
-        "visual": { "asset": "nikhilam_base100.svg", "highlight": "challenge" },
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "caption": "Group I for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+        },
         "exercises": [
           {
             "questionId": "VM_G6_L3_I1",
@@ -615,11 +940,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "102 × 108 using Nikhilam base 100 (both above the base):",
-            "options": ["11016", "10816", "11116", "10916"],
+            "options": [
+              "11016",
+              "10816",
+              "11116",
+              "10916"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "11016",
             "hint": "Deviations +2, +8. Left: 102+8=110. Right: 2×8=16. Answer: 11016.",
-            "solution": "Base 100. Deviations +2, +8. Left=110. Right=16. Answer: 11016."
+            "solution": "Base 100. Deviations +2, +8. Left=110. Right=16. Answer: 11016.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group I for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_I2",
@@ -631,11 +967,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "1002 × 1005 using Nikhilam base 1000:",
-            "options": ["1007010", "1007110", "1008010", "1006010"],
+            "options": [
+              "1007010",
+              "1007110",
+              "1008010",
+              "1006010"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "1007010",
             "hint": "Deviations +2, +5. Left: 1007. Right: 010.",
-            "solution": "1002×1005: deviations +2, +5. Left=1007. Right=010. Answer: 1007010."
+            "solution": "1002×1005: deviations +2, +5. Left=1007. Right=010. Answer: 1007010.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group I for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           },
           {
             "questionId": "VM_G6_L3_I3",
@@ -647,11 +994,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A construction project needs 9997 tiles for 9998 rooms. Total tiles using Nikhilam base 10000:",
-            "options": ["99950006", "99960006", "99940006", "99970006"],
+            "options": [
+              "99950006",
+              "99960006",
+              "99940006",
+              "99970006"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "99950006",
             "hint": "Deviations −3, −2. Left: 9997−2=9995. Right: 3×2=0006.",
-            "solution": "9997×9998: deviations −3, −2. Left=9995. Right=0006. Answer: 99950006."
+            "solution": "9997×9998: deviations −3, −2. Left=9995. Right=0006. Answer: 99950006.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+              "caption": "Group I for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+            }
           }
         ]
       }
@@ -666,7 +1024,13 @@
       "teacherLine": "Nikhilam means: write the deviation from the base, cross-add for left, multiply deviations for right.",
       "boardAction": "Show the deviation table for 7×8: two rows, deviation column, left = cross-add, right = multiply.",
       "checkpointPrompt": "9 × 6 using Nikhilam — what is the left part?",
-      "microPractice": "Rapid: 7×9, 8×8, 6×6."
+      "microPractice": "Rapid: 7×9, 8×8, 6×6.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Teaching step for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     },
     {
       "stepId": "VM_G6_L3_B",
@@ -676,7 +1040,13 @@
       "teacherLine": "Same method, same table — but now numbers are near 100. And the right part MUST have 2 digits!",
       "boardAction": "Show 98×97 table: deviations −2, −3. Left=95. Right=06 (padded!). Answer: 9506.",
       "checkpointPrompt": "98 × 96 — what is the right part?",
-      "microPractice": "Try: 97×97, 99×95, 96×98."
+      "microPractice": "Try: 97×97, 99×95, 96×98.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Teaching step for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     },
     {
       "stepId": "VM_G6_L3_C",
@@ -686,7 +1056,13 @@
       "teacherLine": "Near 1000! Three-digit right part. Write deviations from 1000 and multiply. The right part has 3 digits.",
       "boardAction": "Show 997×996 table with labelled 3-digit right part. Emphasise the '012' padding.",
       "checkpointPrompt": "999 × 998 = ?",
-      "microPractice": "Challenge: 997×998, 999×996, 995×994."
+      "microPractice": "Challenge: 997×998, 999×996, 995×994.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Teaching step for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     },
     {
       "stepId": "VM_G6_L3_E",
@@ -696,7 +1072,13 @@
       "teacherLine": "Every step matters for base 1000. Let's fill them in carefully — deviation, cross, multiply, pad, combine!",
       "boardAction": "Show empty step table for 998×994. Ask student to fill each row.",
       "checkpointPrompt": "998 × 997 — show all steps.",
-      "microPractice": "Verify: expand left×1000+right and check it equals your answer."
+      "microPractice": "Verify: expand left×1000+right and check it equals your answer.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Teaching step for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     },
     {
       "stepId": "VM_G6_L3_I",
@@ -706,7 +1088,13 @@
       "teacherLine": "Champion challenge! Numbers above the base use positive deviations — same method, but deviations are positive!",
       "boardAction": "Show 102×108: deviations +2, +8. Left=110. Right=16. Answer: 11016.",
       "checkpointPrompt": "1002 × 1005 = ?",
-      "microPractice": "Explain when Nikhilam is faster than standard multiplication."
+      "microPractice": "Explain when Nikhilam is faster than standard multiplication.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Teaching step for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     }
   ],
   "screenplay": [
@@ -729,7 +1117,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Screenplay beat for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     },
     {
       "beatId": "VM_G6_L3_E_PRACTICE",
@@ -743,14 +1137,20 @@
       "boardAction": "Show fill_step card VM_G6_L3_E1.",
       "checkpointPrompt": "Complete all six steps.",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "992012",
       "fallbackHint": "Step 3: 998−6=992. Step 4: 2×6=12. Step 5: 012. Step 6: 992012.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Screenplay beat for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
     },
     {
       "beatId": "VM_G6_L3_I_PRACTICE",
@@ -764,14 +1164,31 @@
       "boardAction": "Show MCQ card VM_G6_L3_I1: 102 × 108.",
       "checkpointPrompt": "What is 102 × 108?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "11016",
       "fallbackHint": "Deviations +2, +8. Left=110. Right=16.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+        "caption": "Screenplay beat for Nikhilam — Multiply Near Any Base (10, 100, 1000)."
+      }
+    }
+  ],
+  "chapterCode": "VM_G6_L3_NIKHILAM_BASE10",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "nikhilam_base100",
+      "kind": "svg",
+      "asset": "nikhilam_base100.svg",
+      "title": "Lesson 3: Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

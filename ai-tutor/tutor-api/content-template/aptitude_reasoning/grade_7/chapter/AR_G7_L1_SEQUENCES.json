@@ -1,0 +1,565 @@
+{
+  "chapterCode": "AR_G7_L1_SEQUENCES",
+  "courseId": "aptitude_reasoning_g7",
+  "title": "Logical Sequences",
+  "source": "MindSpark Grade 7 Aptitude & Reasoning | Chapter 1: Logical Sequences",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Square + AP Mixed Series",
+    "Fibonacci-Style Series",
+    "Two-Step Difference Series",
+    "Increasing-Step Sequences",
+    "Decreasing Sequences with Multipliers",
+    "Letter-Number Mixed Sequences",
+    "Double-Rule Alternating Sequences",
+    "Speed Round: Mixed Sequence Types"
+  ],
+  "learningGoals": [
+    "Identify and extend complex number series involving squares, Fibonacci sums, and two-level differences.",
+    "Decode letter-number mixed sequences by tracking each component independently.",
+    "Apply multiple rules simultaneously to solve decreasing and alternating sequences."
+  ],
+  "coreIdeas": [
+    "When the differences are not constant, write the second-level differences — they often form an AP.",
+    "Fibonacci-style series: each term = sum of the two terms before it. Check by adding backwards.",
+    "For letter-number mixed sequences, split into two tracks and find each rule independently."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "1, 4, 9, 16, 25, __ — What comes next?",
+      "solution": "Terms are perfect squares: 1²=1, 2²=4, 3²=9, 4²=16, 5²=25. Next term = 6² = 36.",
+      "concept": "Perfect square series — nth term = n²"
+    },
+    {
+      "id": "WE2",
+      "problem": "2, 3, 5, 8, 13, 21, __ — What comes next?",
+      "solution": "Check: 2+3=5, 3+5=8, 5+8=13, 8+13=21. Each term = sum of previous two (Fibonacci rule). Next = 13+21 = 34.",
+      "concept": "Fibonacci-style series — each term is the sum of the two preceding terms"
+    },
+    {
+      "id": "WE3",
+      "problem": "3, 5, 9, 15, 23, __ — What comes next?",
+      "solution": "Differences: 5-3=2, 9-5=4, 15-9=6, 23-15=8. The differences are 2, 4, 6, 8 — AP with gap +2. Next difference: 10. Answer: 23+10 = 33.",
+      "concept": "Two-step difference series — differences themselves form an AP"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark checks your comfort with number patterns and series before starting. First question is always a straightforward AP or GP to build confidence.",
+      "placementRule": "Start at Group A for all learners. If two consecutive errors occur in Groups A–B, offer a simpler AP warm-up before continuing."
+    },
+    "mission": {
+      "missionTitle": "Crack the Sequence Vault",
+      "missionPromise": "By the end you will decode Fibonacci patterns, two-step differences, and mixed letter-number sequences — skills that ace Olympiad paper Section A!",
+      "successCelebration": "Award an XP pulse and a 'Sequence Sleuth' badge after every group. Final trophy: 'Sequence Vault Unlocked'."
+    },
+    "microLessonPattern": [
+      "Coach opens with a competitive hook — 'Top scorers solve this in under 10 seconds!'",
+      "Coach writes one worked series on the board, labelling each step clearly.",
+      "Coach reads the practice question aloud and invites the student to spot the rule.",
+      "Student states the rule first, then gives the answer.",
+      "Instant feedback praises correct rule identification, not just the final number.",
+      "Review prompt asks student to name the pattern type before moving on."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–25 XP per exercise group, increasing with difficulty.",
+      "streakRule": "Streak counter visible; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one badge tied to the sequence type.",
+      "celebrationStyle": "Coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts on the same group triggers a mini-reteach with a simpler version.",
+      "practiceStyle": "Offer one easier follow-up question before advancing.",
+      "masteryRule": "Advance only after correct answer plus successful tryPrompt.",
+      "revisitRule": "Any group with two errors returns as a review card at next session start."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G7_L1_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Welcome to Grade 7 Logical Sequences — where patterns get serious! You already know AP and GP. Now we level up: perfect square series, Fibonacci-style sums, and two-step difference patterns. These appear in every competitive exam. Learn these three upgrades and you will solve sequence questions faster than most adults!",
+        "boardAction": "Write 'Grade 7 Sequences — 3 Upgrades' at top. List: (1) Square series: 1, 4, 9, 16... (2) Fibonacci: each term = sum of previous two. (3) Two-step diff: differences form their own AP.",
+        "checkpointPrompt": "Quick check: 1, 4, 9, 16, __ — what is the pattern and the next term?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Perfect squares, next term is 25.",
+        "fallbackHint": "1=1², 4=2², 9=3², 16=4². The next square is 5²=25.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l1_title",
+            "x": "40",
+            "y": "30",
+            "text": "Grade 7 Sequences — 3 Power Upgrades",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l1_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_sq",
+            "x": "60",
+            "y": "78",
+            "text": "1. Square series: 1, 4, 9, 16, 25 ... (n²)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_fib",
+            "x": "60",
+            "y": "102",
+            "text": "2. Fibonacci: 1, 1, 2, 3, 5, 8 ... (a+b=next)",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_twostep",
+            "x": "60",
+            "y": "126",
+            "text": "3. Two-step diff: gaps form their own AP",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Logical Sequences",
+          "caption": "Screenplay beat for Logical Sequences."
+        }
+      },
+      {
+        "beatId": "AR_G7_L1_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me crack a two-step difference series live. Series: 3, 5, 9, 15, 23, __ Step 1: write differences underneath — 2, 4, 6, 8. Step 2: those differences go up by 2 each time. Next difference must be 10. Step 3: answer is 23+10 = 33. Two levels deep — that is the pro move!",
+        "boardAction": "Write: 3  5  9  15  23  __. Below: diffs 2  4  6  8. Below that: +2 +2 +2. Circle next diff = 10. Show 23+10=33.",
+        "checkpointPrompt": "Your turn: 2, 4, 8, 14, 22, __ — write the differences first, then find the next term.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Differences are 2, 4, 6, 8 — next diff is 10, answer is 32.",
+        "fallbackHint": "4-2=2, 8-4=4, 14-8=6, 22-14=8. Differences: 2,4,6,8 — gap +2. Next diff = 10. So 22+10=32.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_series",
+            "x": "40",
+            "y": "55",
+            "text": "3    5    9    15    23    ?",
+            "color": "#1e40af",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_diffs",
+            "x": "55",
+            "y": "82",
+            "text": "diffs:  2    4    6    8    (10)",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 0.7,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "40",
+            "y": "112",
+            "text": "23 + 10 = 33",
+            "color": "#059669",
+            "size": 15,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Logical Sequences",
+          "caption": "Screenplay beat for Logical Sequences."
+        }
+      },
+      {
+        "beatId": "AR_G7_L1_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You are now armed with three advanced sequence tools. Before each question, name the pattern type — square, Fibonacci, two-step diff, or a combo. Naming the pattern earns you half the XP even if the final number is off. Work through Groups A to H and aim for the Sequence Vault trophy!",
+        "boardAction": "Show a decision flowchart: Is each term n²? → Square series. Does term = previous two added? → Fibonacci. Are differences forming an AP? → Two-step diff. Is it letters + numbers? → Split tracks.",
+        "checkpointPrompt": "State one key difference between a Fibonacci series and a two-step difference series.",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Fibonacci adds the two previous terms; two-step diff adds an increasing gap to the last term.",
+        "fallbackHint": "Fibonacci: term = (term-1) + (term-2). Two-step: the gaps between terms themselves form an AP — you add a growing difference each time.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Sequence Decision Chart",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_sq",
+            "x": "60",
+            "y": "65",
+            "text": "n²? → Square series",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_fib",
+            "x": "60",
+            "y": "88",
+            "text": "prev + prev2 = curr? → Fibonacci",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_twostep",
+            "x": "60",
+            "y": "111",
+            "text": "Diffs form AP? → Two-step difference",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Logical Sequences",
+          "caption": "Screenplay beat for Logical Sequences."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Square + AP Mixed Series",
+      "missionStepTitle": "Exercise A: Square Series",
+      "coachHook": "Let's crack this code! The squares are hiding in plain sight — 1, 4, 9, 16... recognise them instantly and you gain 5 seconds on every exam!",
+      "boardDemo": {
+        "title": "Perfect Square Series",
+        "steps": [
+          "Series: 4, 9, 16, 25, __",
+          "Recognise: 4=2², 9=3², 16=4², 25=5²",
+          "Pattern: consecutive perfect squares",
+          "Next term: 6² = 36"
+        ],
+        "teacherLine": "Memorise squares up to 15² = 225. When you see 4, 9, 16, 25 — your brain should shout 'square series' immediately. That instant recognition is the competitive edge."
+      },
+      "readAloudPrompt": "Look at: 1, 4, 9, 16, 25, 36 — can you name each as a perfect square?",
+      "tryPrompt": "Your turn: 9, 16, 25, 36, __ — name the series type and the next term!",
+      "masteryCheck": "49",
+      "instantFeedbackWin": "Spot on! 3², 4², 5², 6², so next is 7² = 49. Your square recognition is sharp!",
+      "instantFeedbackRetry": "Here's a trick: 9=3², 16=4², 25=5², 36=6². Count up: next square root is 7. So 7²=49.",
+      "reviewPrompt": "Quick: 25, 36, 49, 64, __ — what is the next perfect square?",
+      "xpReward": 10,
+      "badgeFocus": "Square Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group A for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Fibonacci-Style Series",
+      "missionStepTitle": "Exercise B: Fibonacci-Style Series",
+      "coachHook": "Let's crack this code! Fibonacci is famous in maths, art, and nature. Each term is the sum of the two before it — a sneaky but beautiful rule!",
+      "boardDemo": {
+        "title": "Fibonacci Rule — Sum of Previous Two",
+        "steps": [
+          "Series: 1, 2, 3, 5, 8, 13, __",
+          "Check: 1+2=3 ✓, 2+3=5 ✓, 3+5=8 ✓, 5+8=13 ✓",
+          "Rule: each term = previous term + term before it",
+          "Next: 8+13 = 21"
+        ],
+        "teacherLine": "To verify Fibonacci, always add the two terms BEFORE the one you are checking. If the sum matches, you have a Fibonacci series. Then add the last two terms for the answer."
+      },
+      "readAloudPrompt": "Series: 2, 3, 5, 8, 13, 21, __ — add 13 and 21 in your head. What do you get?",
+      "tryPrompt": "Your turn: 3, 4, 7, 11, 18, __ — check if it is Fibonacci, then find the next term!",
+      "masteryCheck": "29",
+      "instantFeedbackWin": "Yes! 3+4=7 ✓, 4+7=11 ✓, 7+11=18 ✓. It is Fibonacci! 11+18=29. You spotted the Fibonacci fingerprint!",
+      "instantFeedbackRetry": "Here's a trick: check 4+7 — do you get 11? Check 7+11 — do you get 18? Yes! So add the last two: 11+18=29.",
+      "reviewPrompt": "Quick: 5, 8, 13, 21, 34, __ — is this Fibonacci? Give the next term.",
+      "xpReward": 12,
+      "badgeFocus": "Fibonacci Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group B for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Two-Step Difference Series",
+      "missionStepTitle": "Exercise C: Two-Step Differences",
+      "coachHook": "Let's crack this code! The differences between terms are hiding their OWN pattern. Two layers deep — this is serious detective work!",
+      "boardDemo": {
+        "title": "Two-Step Differences — AP Within Gaps",
+        "steps": [
+          "Series: 5, 7, 11, 17, 25, __",
+          "Level-1 diffs: 2, 4, 6, 8 (increasing by 2)",
+          "Level-2 diffs: 2, 2, 2 (constant — pure AP!)",
+          "Next level-1 diff: 8+2 = 10",
+          "Answer: 25+10 = 35"
+        ],
+        "teacherLine": "Always write the differences under the series. If those differences are not equal, write the SECOND level of differences. One of the levels will always be constant in a well-formed series."
+      },
+      "readAloudPrompt": "Series: 1, 3, 7, 13, 21, __ — write the differences: 2, 4, 6, 8. What is the next difference?",
+      "tryPrompt": "Your turn: 4, 6, 10, 16, 24, __ — write both levels of differences and find the next term!",
+      "masteryCheck": "34",
+      "instantFeedbackWin": "Excellent! Diffs: 2, 4, 6, 8 — gap +2, so next diff = 10. 24+10 = 34. Two-level detective work, done!",
+      "instantFeedbackRetry": "Here's a trick: 6-4=2, 10-6=4, 16-10=6, 24-16=8. Diffs are 2,4,6,8. The next diff is 10. Add 10 to 24.",
+      "reviewPrompt": "Practice: 0, 2, 6, 12, 20, __ — show the two difference levels and give the answer.",
+      "xpReward": 14,
+      "badgeFocus": "Two-Layer Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group C for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Increasing-Step Sequences",
+      "missionStepTitle": "Exercise D: Increasing-Step Sequences",
+      "coachHook": "Let's crack this code! What if the step itself gets bigger every time — +1, +2, +3, +4? The staircase grows as you climb it!",
+      "boardDemo": {
+        "title": "Increasing Steps — Gap Grows by 1 Each Time",
+        "steps": [
+          "Series: 1, 2, 4, 7, 11, __",
+          "Diffs: +1, +2, +3, +4",
+          "Each step increases by 1",
+          "Next step: +5",
+          "Answer: 11+5 = 16"
+        ],
+        "teacherLine": "If the differences are 1, 2, 3, 4, 5... the steps are simply counting upwards. Find which step you are on, add 1 to it, and add that to the last term."
+      },
+      "readAloudPrompt": "Series: 3, 4, 6, 9, 13, __ — differences are 1, 2, 3, 4. What is the next difference?",
+      "tryPrompt": "Your turn: 5, 6, 8, 11, 15, __ — identify the increasing step and find the next term!",
+      "masteryCheck": "20",
+      "instantFeedbackWin": "Perfect! Diffs: 1, 2, 3, 4 — next step is 5. 15+5=20. Increasing-step sequence mastered!",
+      "instantFeedbackRetry": "Here's a trick: 6-5=1, 8-6=2, 11-8=3, 15-11=4. Steps are 1,2,3,4. Next step is 5. Add 5 to 15.",
+      "reviewPrompt": "Quick: 0, 1, 3, 6, 10, 15, __ — state the step pattern and the next term.",
+      "xpReward": 15,
+      "badgeFocus": "Growing Step Solver",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group D for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Decreasing Sequences with Multipliers",
+      "missionStepTitle": "Exercise E: Decreasing with Multipliers",
+      "coachHook": "Let's crack this code! Numbers shrinking by division or subtraction with a twist — the multiplier makes it tricky. Stay sharp!",
+      "boardDemo": {
+        "title": "Decreasing Series — Divide or Subtract with Pattern",
+        "steps": [
+          "Series: 96, 48, 24, 12, __",
+          "Check division: 48/96=0.5, 24/48=0.5, 12/24=0.5",
+          "Rule: divide by 2 each step (GP with ratio 1/2)",
+          "Answer: 12÷2 = 6"
+        ],
+        "teacherLine": "Decreasing series often use a constant divisor — that is a GP going down. Divide any term by the one before it. If the ratio is the same (like 1/2 or 1/3), multiply the last term by that ratio."
+      },
+      "readAloudPrompt": "Series: 243, 81, 27, 9, __ — what do you divide to get from one term to the next?",
+      "tryPrompt": "Your turn: 162, 54, 18, 6, __ — find the ratio and the next term!",
+      "masteryCheck": "2",
+      "instantFeedbackWin": "Brilliant! 54/162=1/3, 18/54=1/3. Ratio = ÷3 each step. 6÷3=2. Decreasing GP cracked!",
+      "instantFeedbackRetry": "Here's a trick: divide 54 by 162 — you get 1/3. Same for 18÷54=1/3. Keep dividing by 3: 6÷3=2.",
+      "reviewPrompt": "Quick: 128, 64, 32, 16, __ — name the ratio and the next term.",
+      "xpReward": 16,
+      "badgeFocus": "Descending GP Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group E for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Letter-Number Mixed Sequences",
+      "missionStepTitle": "Exercise F: Letter-Number Mixed Sequences",
+      "coachHook": "Let's crack this code! Two patterns in one — letters doing one thing, numbers doing another. Split and conquer!",
+      "boardDemo": {
+        "title": "Mixed Sequences — Two Tracks",
+        "steps": [
+          "Series: A2, C6, E18, G54, __",
+          "Letter track: A=1, C=3, E=5, G=7 → +2 each → next: 9 = I",
+          "Number track: 2, 6, 18, 54 → ×3 each → next: 162",
+          "Combined answer: I162"
+        ],
+        "teacherLine": "Letters and numbers can each follow completely different rules. One might be AP, the other GP. Always separate them, solve each, then put the answer back together."
+      },
+      "readAloudPrompt": "Series: B4, D8, F16, H32, __ — what rule do the letters follow? What rule do the numbers follow?",
+      "tryPrompt": "Your turn: A1, C4, E9, G16, __ — the numbers are perfect squares! Find both tracks and combine.",
+      "masteryCheck": "I25",
+      "instantFeedbackWin": "Outstanding! Letters: A,C,E,G,I (+2 positions). Numbers: 1,4,9,16,25 (perfect squares). Answer: I25. Double-pattern champion!",
+      "instantFeedbackRetry": "Here's a trick: letters A,C,E,G — gap=+2, next is I. Numbers 1,4,9,16 — those are 1²,2²,3²,4², next is 5²=25. Combine: I25.",
+      "reviewPrompt": "Quick: Z2, X6, V18, T54, __ — letters decrease, numbers ×3. Give the next pair.",
+      "xpReward": 18,
+      "badgeFocus": "Mixed Track Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group F for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Double-Rule Alternating Sequences",
+      "missionStepTitle": "Exercise G: Alternating Double-Rule Series",
+      "coachHook": "Let's crack this code! Some series hide TWO interleaved rules — odd positions follow one rule, even positions follow another. Separate the odd and even terms!",
+      "boardDemo": {
+        "title": "Alternating Series — Odd and Even Terms Separate",
+        "steps": [
+          "Series: 2, 3, 4, 6, 6, 12, 8, __",
+          "Odd positions (1,3,5,7): 2, 4, 6, 8 → +2 (AP)",
+          "Even positions (2,4,6): 3, 6, 12 → ×2 (GP)",
+          "8th term is an even-position term: 12×2 = 24"
+        ],
+        "teacherLine": "When a series looks irregular, separate the odd-indexed terms from the even-indexed terms. Each sub-series almost always follows a simple AP or GP rule."
+      },
+      "readAloudPrompt": "Series: 1, 2, 4, 6, 7, 18, 10, __ — odd terms: 1, 4, 7, 10 (+3 AP). Even terms: 2, 6, 18 (×3 GP). What is the 8th term?",
+      "tryPrompt": "Your turn: 5, 1, 10, 3, 15, 9, 20, __ — separate odd and even positions, then find the next term!",
+      "masteryCheck": "27",
+      "instantFeedbackWin": "Superb! Odd: 5, 10, 15, 20 (+5). Even: 1, 3, 9, 27 (×3). The 8th term is an even-position term: 9×3=27. Alternating series decoded!",
+      "instantFeedbackRetry": "Here's a trick: write only the even-position terms: 1, 3, 9. That is ×3 each time (GP). The 8th term is the 4th even-position term: 9×3=27.",
+      "reviewPrompt": "Quick: 2, 1, 4, 3, 8, 9, 16, __ — separate the tracks. Which is the next even-position term?",
+      "xpReward": 20,
+      "badgeFocus": "Alternating Pattern Ace",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group G for Logical Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Speed Round: Mixed Sequence Types",
+      "missionStepTitle": "Exercise H: Olympiad Speed Round",
+      "coachHook": "Let's crack this code — FAST! This is the competitive round. Name the pattern type in 5 seconds, answer in 10. Olympiad champions do exactly this!",
+      "boardDemo": {
+        "title": "Speed Round — All 7 Sequence Types",
+        "steps": [
+          "Square: 1, 4, 9, 16, 25, 36 (n²)",
+          "Fibonacci: 1, 1, 2, 3, 5, 8 (sum of prev two)",
+          "Two-step: 1, 3, 7, 13, 21 (diffs form AP)",
+          "Decreasing GP: 81, 27, 9, 3 (÷3)",
+          "Speed tip: name the type first — it halves your solving time"
+        ],
+        "teacherLine": "In Olympiad exams, you get about 30 seconds per sequence question. Name the type aloud, write the differences if needed, and commit to the answer. Speed + accuracy = top score."
+      },
+      "readAloudPrompt": "I will fire 4 sequences. Name the type AND the answer for each. Ready?",
+      "tryPrompt": "Q1: 2, 6, 12, 20, 30, __ | Q2: 1, 3, 4, 7, 11, __ | Q3: 64, 32, 16, 8, __ | Q4: A2, C4, E8, G16, __ — Go!",
+      "masteryCheck": "42 | 18 | 4 | I32",
+      "instantFeedbackWin": "INCREDIBLE! Q1: diffs 4,6,8,10,12 → 30+12=42. Q2: Fibonacci (3+4=7, 4+7=11, 7+11=18). Q3: ÷2 GP → 4. Q4: letters +2, numbers ×2 → I32. Sequence Vault fully unlocked!",
+      "instantFeedbackRetry": "Here's a trick: Q1 diffs are 4,6,8,10 — next is 12, so 30+12=42. Q2: 4+7=11, 7+11=18. Q3: 8÷2=4. Q4: letters A,C,E,G,I and numbers 2,4,8,16,32 → I32.",
+      "reviewPrompt": "Final: name the 4 most common sequence types at Grade 7 level, give one example of each.",
+      "xpReward": 25,
+      "badgeFocus": "Sequence Vault Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Logical Sequences",
+        "caption": "Group H for Logical Sequences."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Logical Sequences",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

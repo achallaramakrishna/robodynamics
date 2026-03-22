@@ -1,0 +1,551 @@
+{
+  "chapterCode": "AR_G5_L5_SPATIAL",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Spatial Reasoning",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 5: Spatial Reasoning",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Mirror images — left-right reflection of shapes and letters",
+    "Water reflections — top-bottom (vertical flip) of shapes",
+    "Folded paper — predict the hole/cut pattern when unfolded",
+    "Cube nets — identify which flat net folds into a cube",
+    "Embedded figures — find a smaller shape hidden inside a larger shape"
+  ],
+  "learningGoals": [
+    "Identify the correct mirror image of a figure (left-right flip).",
+    "Identify the correct water reflection of a figure (top-bottom flip).",
+    "Predict the position of holes when folded paper is unfolded.",
+    "Recognise which net of squares can fold into a complete cube.",
+    "Spot a given smaller shape that is embedded (hidden) inside a complex figure."
+  ],
+  "coreIdeas": [
+    "Mirror image: flip left-right — the shape looks the same but reversed horizontally.",
+    "Water reflection: flip top-bottom — the shape is inverted vertically.",
+    "Folded paper: a hole punched in folded paper appears symmetrically on all layers when unfolded.",
+    "A cube net must have exactly 6 squares arranged so opposite faces can fold together — L-shapes, T-shapes, and Z-shapes of 6 squares work; the key invalid pattern is 2×3 (rectangle).",
+    "Embedded figures: trace the outline of the target shape inside the complex figure — rotate if needed."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "The letter 'b' — what does its mirror image look like?",
+      "solution": "The mirror image of 'b' (left-right flip) is 'd'. The vertical line stays vertical but the bump moves from the right side to the left side.",
+      "concept": "Mirror image — horizontal (left-right) reflection"
+    },
+    {
+      "id": "WE2",
+      "problem": "A square piece of paper is folded in half from left to right. A hole is punched in the top-right corner. When unfolded, where are the holes?",
+      "solution": "The paper is folded left-right, so when unfolded the hole appears at the top-right AND at its mirror position top-left. There are 2 holes.",
+      "concept": "Folded paper — holes appear symmetrically when unfolded"
+    },
+    {
+      "id": "WE3",
+      "problem": "Which of these arrangements of 6 squares is NOT a valid cube net: (a) a cross shape, (b) an L-shape with 4 in a row and 2 extending, (c) a 2×3 rectangle?",
+      "solution": "A 2×3 rectangle (2 rows of 3 squares) is NOT a valid cube net — when you fold it, opposite pairs of squares do not align correctly. The cross and L-shapes are valid nets.",
+      "concept": "Cube nets — a 2×3 rectangle cannot fold into a cube"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark introduces spatial reasoning by asking the learner to hold up their hand and look at its mirror in a window. Opens with a simple mirror-image question.",
+      "placementRule": "Start at Group A. If the learner struggles to distinguish left-right from top-bottom flips, reteach with a hands-on 'hold a letter up to light' analogy before proceeding."
+    },
+    "mission": {
+      "missionTitle": "Spatial Spy Mission",
+      "missionPromise": "By the end your brain will instantly rotate, flip, and fold shapes mentally — a skill used by architects, engineers, and game designers!",
+      "successCelebration": "Show a 'Vision Unlocked!' badge after each group. At lesson end, award the 'Spatial Genius' trophy."
+    },
+    "microLessonPattern": [
+      "Coach introduces each spatial skill with a relatable physical analogy (mirror, water, folding paper).",
+      "Coach demonstrates the transformation step-by-step on the board.",
+      "Coach reads the practice question aloud.",
+      "Student attempts the spatial answer.",
+      "Instant feedback celebrates or gives a step-by-step hint.",
+      "Review question confirms mastery."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per group, increasing through the lesson.",
+      "streakRule": "Show streak flame; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a spatial-themed badge (Mirror Master, Reflection Ranger, etc.).",
+      "celebrationStyle": "Coach praise + XP burst + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts trigger a mini-reteach with a simpler example and explicit axis labels.",
+      "practiceStyle": "Offer a simpler shape (just a letter or arrow) before complex figures.",
+      "masteryRule": "Advance after correct answer plus completed tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L5_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Welcome to Spatial Reasoning — the ability to picture shapes moving, flipping, and folding in your mind! This skill is used by architects designing buildings, engineers making machines, and even video game creators. Today we will train your mental eye in five ways: mirror images (left-right flips), water reflections (top-bottom flips), folded paper puzzles, cube nets, and embedded figures. Let us awaken your inner architect!",
+        "boardAction": "Write 'Spatial Reasoning — 5 Skills'. List: (1) Mirror — flip left-right, (2) Water — flip top-bottom, (3) Folded paper — holes appear symmetrically, (4) Cube nets — 6 squares that fold into a cube, (5) Embedded — find shape inside shape.",
+        "checkpointPrompt": "Quick warm-up: if I hold the letter 'd' in front of a mirror, what letter do I see?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "b",
+        "fallbackHint": "A mirror flips left and right. The bump of 'd' is on the left side. In the mirror it will be on the right side — that makes it look like 'b'.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "sp_title",
+            "x": "40",
+            "y": "30",
+            "text": "Spatial Reasoning — 5 Skills",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "sp_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "500",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sp_t1",
+            "x": "60",
+            "y": "72",
+            "text": "1. Mirror image: flip left ↔ right",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sp_t2",
+            "x": "60",
+            "y": "94",
+            "text": "2. Water reflection: flip top ↔ bottom",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sp_t3",
+            "x": "60",
+            "y": "116",
+            "text": "3. Folded paper: holes appear in mirror positions",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sp_t4",
+            "x": "60",
+            "y": "138",
+            "text": "4. Cube nets: 6 squares folding into 6 faces",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Spatial Reasoning",
+          "caption": "Screenplay beat for Spatial Reasoning."
+        }
+      },
+      {
+        "beatId": "AR_G5_L5_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me demonstrate mirror image vs. water reflection. Take an arrow pointing to the upper-right corner. Mirror image (left-right flip): the arrow now points to the upper-LEFT corner — left and right swap, but up-down stays the same. Water reflection (top-bottom flip): the arrow now points to the LOWER-right corner — up and down swap, but left-right stays the same. The rule: mirror = left-right swap, water = top-bottom swap!",
+        "boardAction": "Draw arrow pointing upper-right. Mirror: draw arrow pointing upper-left (flip horizontal). Water: draw arrow pointing lower-right (flip vertical). Label each clearly.",
+        "checkpointPrompt": "An arrow points left. What does its mirror image look like — and what about its water reflection?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Mirror: arrow points right. Water reflection: arrow still points left (up-down flip of a horizontal arrow looks the same).",
+        "fallbackHint": "Mirror flips left-right: left arrow becomes right arrow. Water flips top-bottom: a horizontal left arrow, when flipped top-to-bottom, still points left — it looks the same because it is horizontal!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_orig",
+            "x": "50",
+            "y": "40",
+            "text": "Original arrow → upper-right",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_mirror",
+            "x": "50",
+            "y": "70",
+            "text": "Mirror (L-R flip) → arrow points upper-LEFT",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.6,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_water",
+            "x": "50",
+            "y": "98",
+            "text": "Water (T-B flip) → arrow points lower-RIGHT",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.2,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "line",
+            "id": "demo_rule_line",
+            "x1": "50",
+            "y1": "118",
+            "x2": "480",
+            "y2": "118",
+            "color": "#d1d5db",
+            "width": 1,
+            "delaySec": 1.7,
+            "durationSec": 0.2
+          },
+          {
+            "kind": "text",
+            "id": "demo_rule",
+            "x": "50",
+            "y": "136",
+            "text": "Rule: Mirror = L-R swap | Water = T-B swap",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 2,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Spatial Reasoning",
+          "caption": "Screenplay beat for Spatial Reasoning."
+        }
+      },
+      {
+        "beatId": "AR_G5_L5_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have the spatial toolkit! Mirror = flip left-right. Water = flip top-bottom. Folded paper holes appear symmetrically — mirror the hole through the fold line. Cube net = 6 connected squares — avoid 2×3 and 1×6 and any with more than 4 in a straight line. Embedded figure = trace the target shape's outline within the complex figure. Work through the groups — take your time and visualise!",
+        "boardAction": "Show cheatsheet: Mirror L-R, Water T-B, Folded paper symmetry, Valid cube net examples (cross, T, L, Z shapes), Embedded = trace outline.",
+        "checkpointPrompt": "Before starting — how many faces does a cube have?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "6",
+        "fallbackHint": "A cube has 6 faces: top, bottom, front, back, left, right. A cube net must have exactly 6 squares — one for each face.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Spatial Toolkit — Quick Reference",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_s1",
+            "x": "60",
+            "y": "56",
+            "text": "Mirror: left ↔ right (vertical axis)",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s2",
+            "x": "60",
+            "y": "76",
+            "text": "Water: top ↔ bottom (horizontal axis)",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s3",
+            "x": "60",
+            "y": "96",
+            "text": "Cube net: exactly 6 squares, no 2×3 rectangle",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s4",
+            "x": "60",
+            "y": "116",
+            "text": "Embedded: trace the smaller shape's outline inside",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Spatial Reasoning",
+          "caption": "Screenplay beat for Spatial Reasoning."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Mirror images — left-right reflection",
+      "missionStepTitle": "Exercise A: Mirror Images",
+      "coachHook": "Let's crack this code! Stand in front of a mirror — your right hand appears on the left side of the reflection. That is the mirror rule: left and right swap!",
+      "boardDemo": {
+        "title": "Mirror Image — Left-Right Flip",
+        "steps": [
+          "Draw the letter 'F' — the horizontal lines extend to the right",
+          "Mirror image: flip left-right → horizontal lines now extend to the LEFT",
+          "The vertical line stays vertical; only the side the horizontals extend changes",
+          "Check: the mirror line is in between original and reflection"
+        ],
+        "teacherLine": "Think of the vertical mirror line in the middle. Everything on the left side of the original goes to the right in the reflection, and vice versa. Up-down positions stay exactly the same!"
+      },
+      "readAloudPrompt": "The letter 'p' — does its mirror image look like 'q' or 'd'?",
+      "tryPrompt": "What is the mirror image of the letter 'b'? Write the letter it looks like.",
+      "masteryCheck": "d",
+      "instantFeedbackWin": "Brilliant! The bump of 'b' is on the right; in the mirror it moves to the left, making it look like 'd'. Perfect mirror thinking!",
+      "instantFeedbackRetry": "Here's a trick: 'b' has its bump on the RIGHT side. Mirror flips left-right, so the bump moves to the LEFT. A letter with a bump on the LEFT is 'd'.",
+      "reviewPrompt": "Quick check: what is the mirror image of the number '2'? Describe what it looks like.",
+      "xpReward": 10,
+      "badgeFocus": "Mirror Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Spatial Reasoning",
+        "caption": "Group A for Spatial Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Water reflections — top-bottom flip",
+      "missionStepTitle": "Exercise B: Water Reflections",
+      "coachHook": "Let's crack this code! Look at a tree reflected in a still pond — the tree's top now appears at the bottom. That is a water reflection: up and down swap!",
+      "boardDemo": {
+        "title": "Water Reflection — Top-Bottom Flip",
+        "steps": [
+          "Draw an arrow pointing upward",
+          "Water reflection: flip top-bottom → arrow now points downward",
+          "Left-right positions stay the same; only up-down reverses",
+          "The reflection line is horizontal (like the water surface)"
+        ],
+        "teacherLine": "In a water reflection the horizontal line is the mirror. Everything above the line appears below it — the same distance below as it was above. Left and right positions do not change at all!"
+      },
+      "readAloudPrompt": "The letter 'A' — does its water reflection look the same or upside down?",
+      "tryPrompt": "An arrow pointing to the upper-right has a water reflection. Where does the reflected arrow point?",
+      "masteryCheck": "Lower-right",
+      "instantFeedbackWin": "Excellent! Water flips top-bottom. Upper-right becomes lower-right — the right direction stays, but the upper becomes lower. Spot on!",
+      "instantFeedbackRetry": "Here's a trick: water reflection only flips UP and DOWN. The arrow pointed upper-right. Keep the right direction. Flip upper to lower. Answer: lower-right.",
+      "reviewPrompt": "Quick check: a triangle with its apex (top point) pointing up — where does its apex point in its water reflection?",
+      "xpReward": 12,
+      "badgeFocus": "Reflection Ranger",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Spatial Reasoning",
+        "caption": "Group B for Spatial Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Folded paper — predict holes when unfolded",
+      "missionStepTitle": "Exercise C: Folded Paper Puzzles",
+      "coachHook": "Let's crack this code! When you fold paper and punch a hole, the hole goes through all layers — and when you unfold, you see holes in mirror positions. Can you predict where?",
+      "boardDemo": {
+        "title": "Folded Paper — Symmetrical Holes",
+        "steps": [
+          "Fold a square paper in half from left to right (fold line is vertical, centre)",
+          "Punch one hole near the top-right corner of the folded paper",
+          "Unfold: the hole appears at top-right AND at top-left (mirror of top-right through the fold line)",
+          "Rule: each hole appears + its mirror image through every fold line"
+        ],
+        "teacherLine": "Every fold doubles the number of holes. One fold = 2 holes. Two folds = 4 holes. Mirror each hole through each fold line to find all the positions when fully unfolded."
+      },
+      "readAloudPrompt": "Paper is folded in half top-to-bottom. One hole is punched in the top-left of the folded paper. How many holes appear when unfolded?",
+      "tryPrompt": "Square paper is folded left-to-right. A hole is punched in the middle of the right edge of the folded paper. When unfolded, where are the holes?",
+      "masteryCheck": "Two holes: one on the right edge and one on the left edge, both at the same height (middle).",
+      "instantFeedbackWin": "Perfect! The fold line was vertical (left-right fold). The hole on the right edge mirrors through the fold line to the left edge at the same height. Two holes total!",
+      "instantFeedbackRetry": "Here's a trick: the fold line is in the middle (vertical). Mirror the hole from the right edge through the fold line — it lands on the left edge at the same height. So there are 2 holes: right edge and left edge, same row.",
+      "reviewPrompt": "A square is folded left-to-right then top-to-bottom. One hole is punched in the top-right corner of the resulting folded square. How many holes appear when fully unfolded?",
+      "xpReward": 14,
+      "badgeFocus": "Paper Folder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Spatial Reasoning",
+        "caption": "Group C for Spatial Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Cube nets — which net folds into a cube?",
+      "missionStepTitle": "Exercise D: Cube Nets",
+      "coachHook": "Let's crack this code! A cube has 6 faces. If you unfold it flat, you get a net of 6 connected squares. The challenge: can you spot which nets fold into a cube and which ones do not?",
+      "boardDemo": {
+        "title": "Cube Net — Valid and Invalid",
+        "steps": [
+          "Valid net: a cross shape (4 in a column, 1 on each side of the middle) → folds into a cube",
+          "Valid net: T-shape of 6 squares → folds into a cube",
+          "Invalid: a 2×3 rectangle → opposite faces do not pair correctly",
+          "Invalid: a straight line of 6 squares (1×6) → some faces overlap",
+          "Key rule: no more than 4 squares in a single straight line"
+        ],
+        "teacherLine": "To test a net, mentally fold each square up. Check that all 6 faces close up and that no two squares land on the same face. The quickest invalid check: 4 or more squares in a straight line without branches is usually invalid."
+      },
+      "readAloudPrompt": "A net has 4 squares in a row with one square on top of the 2nd square and one square on top of the 3rd square. Does this look like it could be a valid cube net?",
+      "tryPrompt": "A net has 3 squares in a row, with 3 more squares forming a column going up from the leftmost square. Is this a valid cube net? (Yes or No, and state why.)",
+      "masteryCheck": "Yes — this is an L-shaped net of 6 squares that can fold into a cube.",
+      "instantFeedbackWin": "Correct! An L-shaped arrangement where 3 go one direction and 3 branch off is a valid cube net. No row has more than 4 squares in a line, and all 6 faces can pair up correctly. Excellent spatial thinking!",
+      "instantFeedbackRetry": "Here's a trick: count the squares in any single straight line. If a line has 5 or more, the net is likely invalid. For this L-shape, the longest line has 3 squares — well within the limit, so it can fold into a cube.",
+      "reviewPrompt": "Quick check: a net has 6 squares arranged in a straight line (1×6). Can it fold into a cube? Why or why not?",
+      "xpReward": 16,
+      "badgeFocus": "Cube Net Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Spatial Reasoning",
+        "caption": "Group D for Spatial Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Embedded figures — find shape within shape",
+      "missionStepTitle": "Exercise E: Embedded Figures",
+      "coachHook": "Let's crack this code! Sometimes a small shape is hiding inside a bigger, more complicated figure. Your job is to trace its outline and find where it is hiding!",
+      "boardDemo": {
+        "title": "Embedded Figures — Trace the Outline",
+        "steps": [
+          "Target shape: a triangle",
+          "Complex figure: a Star of David (two overlapping triangles)",
+          "Look for three lines that form a triangle within the complex figure",
+          "Trace: top point → lower-right → lower-left → top point ✓",
+          "The triangle is embedded in the star"
+        ],
+        "teacherLine": "Fix your target shape in your mind. Then scan the complex figure for those same lines — the same angles, the same proportions. Ignore all the extra lines and focus only on tracing the target shape."
+      },
+      "readAloudPrompt": "Imagine a large rectangle with an X drawn inside it (diagonals). Is a triangle embedded in this figure?",
+      "tryPrompt": "A complex figure is made of a rectangle with both diagonals drawn. How many triangles are embedded in this figure?",
+      "masteryCheck": "4 triangles",
+      "instantFeedbackWin": "Well spotted! The two diagonals of a rectangle divide it into 4 triangles — top, bottom, left, right. All 4 are embedded in the figure. Excellent embedded-figure vision!",
+      "instantFeedbackRetry": "Here's a trick: the rectangle has 2 diagonals crossing in the centre. Each diagonal cuts the rectangle in half. Together they create 4 triangles: one pointing up, one down, one left, one right.",
+      "reviewPrompt": "A hexagon has all 3 long diagonals drawn (connecting opposite vertices). How many triangles are embedded in this figure?",
+      "xpReward": 18,
+      "badgeFocus": "Embedded Figure Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Spatial Reasoning",
+        "caption": "Group E for Spatial Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Spatial reasoning — mixed speed round",
+      "missionStepTitle": "Exercise F: Speed Round — Spatial Reasoning",
+      "coachHook": "Let's crack this code — fast! Five spatial skills, three quick questions. Visualise, then answer!",
+      "boardDemo": {
+        "title": "Speed Round — All Spatial Skills",
+        "steps": [
+          "Mirror: flip left-right → left features move right, right features move left",
+          "Water: flip top-bottom → up features move down, down features move up",
+          "Folded paper: 1 fold = 2 holes; 2 folds = 4 holes",
+          "Cube net: 6 squares, no 1×6 line, no 2×3 block",
+          "Embedded: count distinct triangles/shapes formed"
+        ],
+        "teacherLine": "Name the skill type before answering — that shows you are applying the rule consciously, not guessing!"
+      },
+      "readAloudPrompt": "Ready? Three spatial questions — identify the skill and give your answer!",
+      "tryPrompt": "Q1: Mirror image of the letter 'R' — does it look like a reversed R (like Я)? | Q2: A square piece of paper is folded twice (left-right, then top-bottom). One hole is punched. How many holes appear when unfolded? | Q3: Is a 1×6 straight line of squares a valid cube net?",
+      "masteryCheck": "Yes, the mirror of R looks like Я | 4 holes | No, it is not a valid cube net.",
+      "instantFeedbackWin": "AMAZING! Q1: Mirror of R is Я — left-right flip correct. Q2: Two folds give 2²=4 holes when unfolded. Q3: A 1×6 line cannot fold into a cube (too many in a row, faces overlap). Full marks — Spatial Genius!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — mirror flips L-R, so R's leg moves to the left, giving Я. Q2 — each fold doubles the holes: 1 fold=2, 2 folds=4. Q3 — a 1×6 line has 6 squares in a single row; folding causes overlapping faces, so it is not a valid net.",
+      "reviewPrompt": "Final challenge: a square paper is folded left-to-right only once. Two holes are punched side by side on the folded paper. How many holes appear when unfolded?",
+      "xpReward": 20,
+      "badgeFocus": "Spatial Genius",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Spatial Reasoning",
+        "caption": "Group F for Spatial Reasoning."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Spatial Reasoning",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

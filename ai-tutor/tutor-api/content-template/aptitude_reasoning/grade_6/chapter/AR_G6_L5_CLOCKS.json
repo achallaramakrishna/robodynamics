@@ -103,7 +103,13 @@
       "instantFeedbackRetry": "Here's the trick: minute hand on 6 = 6 × 5 = 30 minutes. Hour hand between 2 and 3 means 2. So the time is 2:30.",
       "reviewPrompt": "Quick check: if the minute hand points to 9, how many minutes is that?",
       "xpReward": 10,
-      "badgeFocus": "Clock Reader Star"
+      "badgeFocus": "Clock Reader Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group A for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "B",
@@ -126,7 +132,13 @@
       "instantFeedbackRetry": "Here's the step: 20 minutes × 6 degrees per minute = 120 degrees. The minute hand is 120° from 12.",
       "reviewPrompt": "Practice: at 4:45, what is the minute hand angle from 12?",
       "xpReward": 12,
-      "badgeFocus": "Minute Hand Angle Star"
+      "badgeFocus": "Minute Hand Angle Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group B for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "C",
@@ -149,7 +161,13 @@
       "instantFeedbackRetry": "Step by step: |30 × 9 - 5.5 × 0| = |270| = 270°. Since 270° > 180°, the reflex angle is 360° - 270° = 90°.",
       "reviewPrompt": "Try the formula at 6:00. What angle do you expect?",
       "xpReward": 14,
-      "badgeFocus": "Formula Champion Star"
+      "badgeFocus": "Formula Champion Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group C for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "D",
@@ -172,7 +190,13 @@
       "instantFeedbackRetry": "Let's work it: 30 × 4 = 120. 5.5 × 20 = 110. |120 - 110| = 10 degrees. Small but exact!",
       "reviewPrompt": "Challenge: which clock time gives an angle of 0 degrees — when do the hands perfectly overlap?",
       "xpReward": 16,
-      "badgeFocus": "Angle Detective Star"
+      "badgeFocus": "Angle Detective Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group D for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "E",
@@ -195,7 +219,13 @@
       "instantFeedbackRetry": "Here's the pattern: 1st overlap at about 1:05, 2nd at about 2:10, 3rd at about 3:16. Add roughly 65 minutes each time.",
       "reviewPrompt": "MCQ: How many times do the hands of a clock overlap in 12 hours? (a) 11 (b) 12 (c) 22",
       "xpReward": 18,
-      "badgeFocus": "Overlap Expert Star"
+      "badgeFocus": "Overlap Expert Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group E for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "F",
@@ -218,7 +248,13 @@
       "instantFeedbackRetry": "Step by step: 11:60 - 7:30. Minutes: 60 - 30 = 30. Hours: 11 - 7 = 4. Mirror time = 4:30.",
       "reviewPrompt": "Try it: a clock shows 10:10. What is its mirror image?",
       "xpReward": 18,
-      "badgeFocus": "Mirror Clock Star"
+      "badgeFocus": "Mirror Clock Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group F for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "G",
@@ -241,7 +277,13 @@
       "instantFeedbackRetry": "Here's the work: 60 - 45 = 15 minutes. 17 - 4 = 13, so 1 PM = 1:15. Water image of 4:45 is 1:15.",
       "reviewPrompt": "Spot the difference: what is the key difference between mirror image and water image of a clock?",
       "xpReward": 20,
-      "badgeFocus": "Water Image Star"
+      "badgeFocus": "Water Image Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group G for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "H",
@@ -264,7 +306,13 @@
       "instantFeedbackRetry": "Break it down: 95 minutes = 60 + 35 = 1 hour 35 minutes. 3:30 + 1:35 = 4:65 = 5:05 (since 65 minutes = 1 hour 5 minutes).",
       "reviewPrompt": "Quick one: what time is 150 minutes after 11:00?",
       "xpReward": 22,
-      "badgeFocus": "Time Adder Star"
+      "badgeFocus": "Time Adder Star",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group H for Clocks and Time."
+      }
     },
     {
       "exerciseGroup": "I",
@@ -287,7 +335,13 @@
       "instantFeedbackRetry": "Let us check: Angle at 2:15 = |60 - 82.5| = 22.5°. Mirror of 5:40 = 11:60 - 5:40 = 6:20. 9:50 + 80 min = 9:50 + 1:20 = 11:10.",
       "reviewPrompt": "Final reflection: which clock formula took you the most effort today?",
       "xpReward": 30,
-      "badgeFocus": "Clock Master Badge"
+      "badgeFocus": "Clock Master Badge",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Clocks and Time",
+        "caption": "Group I for Clocks and Time."
+      }
     }
   ],
   "screenplay": {
@@ -305,7 +359,13 @@
           "Write: 60 minutes → 360°, so 1 minute = 6° for the minute hand.",
           "Write: 12 hours → 360°, so 1 hour = 30°, 1 minute = 0.5° for the hour hand."
         ],
-        "avatarEmotion": "enthusiastic"
+        "avatarEmotion": "enthusiastic",
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Clocks and Time",
+          "caption": "Screenplay beat for Clocks and Time."
+        }
       },
       {
         "beatId": "AR_G6_L5_BEAT_2",
@@ -320,7 +380,13 @@
           "Example 2: At 6:30 → |30×6 - 5.5×30| = |180 - 165| = 15°",
           "Draw 6:30 clock. Mark 15° angle."
         ],
-        "avatarEmotion": "focused"
+        "avatarEmotion": "focused",
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Clocks and Time",
+          "caption": "Screenplay beat for Clocks and Time."
+        }
       },
       {
         "beatId": "AR_G6_L5_BEAT_3",
@@ -335,7 +401,13 @@
           "Example: Water of 6:00 = 17:60 - 6:00 = 11:60 = 12:00",
           "Side-by-side clock diagrams for both."
         ],
-        "avatarEmotion": "encouraging"
+        "avatarEmotion": "encouraging",
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Clocks and Time",
+          "caption": "Screenplay beat for Clocks and Time."
+        }
       },
       {
         "beatId": "AR_G6_L5_BEAT_4",
@@ -349,8 +421,23 @@
           "10:45 + 1:15 = 11:60 = 12:00",
           "Tip box: When minutes ≥ 60, subtract 60 and add 1 to hours."
         ],
-        "avatarEmotion": "celebratory"
+        "avatarEmotion": "celebratory",
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Clocks and Time",
+          "caption": "Screenplay beat for Clocks and Time."
+        }
       }
     ]
-  }
+  },
+  "visualLibrary": [
+    {
+      "visualId": "clock_face",
+      "kind": "svg",
+      "asset": "clock_face.svg",
+      "title": "Clocks and Time",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

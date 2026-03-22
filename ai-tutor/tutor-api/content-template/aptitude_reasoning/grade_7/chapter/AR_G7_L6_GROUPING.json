@@ -1,0 +1,564 @@
+{
+  "chapterCode": "AR_G7_L6_GROUPING",
+  "courseId": "aptitude_reasoning_g7",
+  "title": "Classification & Grouping",
+  "source": "MindSpark Grade 7 Aptitude & Reasoning | Chapter 6: Classification & Grouping",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Category-Based Odd One Out (Animals, Plants, Objects)",
+    "Number Classification (Odd/Even/Prime/Composite/Perfect Square)",
+    "Word Groups by Shared Property",
+    "Two-Tier Classification (Primary + Secondary Property)",
+    "Number Groups by Mathematical Property",
+    "Alphabet/Letter Group Classification",
+    "Analogy-Based Grouping",
+    "Speed Round: Mixed Classification Problems"
+  ],
+  "learningGoals": [
+    "Identify the common property shared by a group and find the item that does not fit.",
+    "Classify numbers accurately as prime, composite, perfect square, or other mathematical categories.",
+    "Apply two-tier classification by checking both the primary category and a secondary distinguishing property."
+  ],
+  "coreIdeas": [
+    "In odd-one-out problems, there is ONE property that unites the group — your job is to find that property, not just spot a 'different-looking' item.",
+    "Never stop at the first valid classification — there may be a more specific property that changes the odd one out.",
+    "For numbers: always check prime status (no factors other than 1 and itself) and perfect square status (√n is an integer)."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Find the odd one out: Dog, Cat, Parrot, Mango.",
+      "solution": "Dog, Cat, and Parrot are animals. Mango is a fruit/plant. Odd one out: Mango.",
+      "concept": "Category classification — living kingdom (animal vs plant)"
+    },
+    {
+      "id": "WE2",
+      "problem": "Find the odd one out: 4, 9, 16, 18, 25.",
+      "solution": "4=2², 9=3², 16=4², 25=5² are perfect squares. 18 is NOT a perfect square (√18 is not an integer). Odd one out: 18.",
+      "concept": "Number classification — perfect squares"
+    },
+    {
+      "id": "WE3",
+      "problem": "Find the odd one out: January, March, May, June, July.",
+      "solution": "January (31), March (31), May (31), July (31) all have 31 days. June has 30 days. Odd one out: June.",
+      "concept": "Property-based classification — number of days in a month"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark asks the student to name two properties that all prime numbers share (odd except 2, exactly two factors). Warm-up checks number classification readiness.",
+      "placementRule": "Start at Group A. If errors on basic category classification in A–B, provide a vocabulary table (animal/plant/object) before continuing."
+    },
+    "mission": {
+      "missionTitle": "Find the Impostor",
+      "missionPromise": "By the end you will spot the odd one out in any group — number, word, or concept — by identifying the shared rule rather than guessing by appearance!",
+      "successCelebration": "Award an 'Impostor Spotter' badge after each group. Final trophy: 'Classification Champion'."
+    },
+    "microLessonPattern": [
+      "Coach names the group and asks student to spot the shared property before revealing the odd one out.",
+      "Coach states the property out loud, confirms all other items fit, and identifies the outsider.",
+      "Student independently names the shared property for the practice question.",
+      "Instant feedback rewards property identification, not just the correct item name.",
+      "Review prompt gives a new group and asks for both the property AND the odd item."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–25 XP per exercise group.",
+      "streakRule": "Streak counter visible; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a classification-themed badge.",
+      "celebrationStyle": "Coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a reteach with a simple animal/plant category question.",
+      "practiceStyle": "Offer one clearer question with the shared property given before advancing.",
+      "masteryRule": "Advance after naming the property AND identifying the odd item.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G7_L6_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Classification & Grouping is about detective logic — finding WHAT makes things the same and spotting the one that breaks the pattern. The key skill is naming the property, not just pointing at the odd item. Anyone can guess; you are going to find the rule! There are three levels: category classification, number property classification, and two-tier classification where you check a secondary property.",
+        "boardAction": "Write: Level 1 — Category (animal/plant/object/place). Level 2 — Number property (prime/composite/perfect square/odd/even). Level 3 — Two-tier: primary category + secondary specific property. List the 3 levels with an example for each.",
+        "checkpointPrompt": "Quick: is 17 a prime number? Why?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Yes, because 17 has no factors other than 1 and 17.",
+        "fallbackHint": "A prime number has exactly two factors: 1 and itself. Check divisibility by 2, 3, 5, 7 — 17 is not divisible by any of these. So 17 is prime.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l6_title",
+            "x": "40",
+            "y": "28",
+            "text": "Classification — Find the Rule, Find the Impostor",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l6_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_l1",
+            "x": "60",
+            "y": "76",
+            "text": "Level 1: Category (animal/plant/object)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_l2",
+            "x": "60",
+            "y": "100",
+            "text": "Level 2: Number property (prime/square/odd)",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l6_l3",
+            "x": "60",
+            "y": "124",
+            "text": "Level 3: Two-tier — primary + secondary property",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Classification & Grouping",
+          "caption": "Screenplay beat for Classification & Grouping."
+        }
+      },
+      {
+        "beatId": "AR_G7_L6_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me do a two-tier classification live. Group: 4, 9, 16, 18, 25. Step 1 — state the shared property of the majority: these look like perfect squares. Step 2 — verify each: 4=2², 9=3², 16=4², 25=5² — all squares. Check 18: √18 = 4.24... not a whole number, so 18 is NOT a perfect square. Odd one out: 18. Property stated, impostor found!",
+        "boardAction": "Write group. Mark each as square: 4=2² ✓, 9=3² ✓, 16=4² ✓, 18=? ✗, 25=5² ✓. Circle 18 as odd one out.",
+        "checkpointPrompt": "Quick check: is 36 a perfect square? Is 50?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "36 yes (6²), 50 no.",
+        "fallbackHint": "36 = 6×6 = 6². Perfect square. 50: √50 ≈ 7.07 — not a whole number, so NOT a perfect square.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_group",
+            "x": "40",
+            "y": "50",
+            "text": "Group: 4,  9,  16,  18,  25",
+            "color": "#1e40af",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_check",
+            "x": "40",
+            "y": "82",
+            "text": "2²=4 ✓  3²=9 ✓  4²=16 ✓  18=? ✗  5²=25 ✓",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 0.6,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "40",
+            "y": "114",
+            "text": "Odd one out: 18 (not a perfect square)",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 1.2,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Classification & Grouping",
+          "caption": "Screenplay beat for Classification & Grouping."
+        }
+      },
+      {
+        "beatId": "AR_G7_L6_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "For every classification group from A to H: name the shared property first, then identify the odd one out. A complete answer is: 'The shared property is __, and __ does not fit because __.' Three-part answer earns full marks in Olympiad. Never just give the item — explain why!",
+        "boardAction": "Write the 3-part answer format: (1) Shared property = ___. (2) Odd one out = ___. (3) Because ___ does not have/fit this property. Show a filled-in example.",
+        "checkpointPrompt": "Classify: 2, 3, 5, 7, 9. Which number is the odd one out from the prime numbers group?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "9 is the odd one out because 9=3×3 is not prime.",
+        "fallbackHint": "2, 3, 5, 7 are all prime (only factors: 1 and themselves). 9 = 3×3 — it has 3 as a factor, so it is NOT prime. Odd one out: 9.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "3-Part Answer Format",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_p1",
+            "x": "60",
+            "y": "62",
+            "text": "1. Shared property = ___",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_p2",
+            "x": "60",
+            "y": "84",
+            "text": "2. Odd one out = ___",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_p3",
+            "x": "60",
+            "y": "106",
+            "text": "3. Because ___ does not fit this property",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Classification & Grouping",
+          "caption": "Screenplay beat for Classification & Grouping."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Category-Based Odd One Out",
+      "missionStepTitle": "Exercise A: Category Classification",
+      "coachHook": "Let's crack this code! Animals, plants, objects, places — sort them into kingdoms. The odd one out belongs to a different kingdom from the rest.",
+      "boardDemo": {
+        "title": "Kingdom Classification — Animal vs Plant",
+        "steps": [
+          "Group: Lion, Tiger, Elephant, Rose",
+          "Lion, Tiger, Elephant are animals (kingdom Animalia)",
+          "Rose is a plant (kingdom Plantae)",
+          "Odd one out: Rose"
+        ],
+        "teacherLine": "State the kingdom for each item. If one item is from a different kingdom, that is the odd one out. The rule: 3 in one kingdom, 1 in another."
+      },
+      "readAloudPrompt": "Group: Oak, Mango, Neem, Sparrow — state the kingdom for each.",
+      "tryPrompt": "Find the odd one out: Chair, Table, Lamp, Pencil, Book.",
+      "masteryCheck": "Lamp (the only thing that produces light; others are storage/writing/sitting objects)",
+      "instantFeedbackWin": "Sharp thinking! Chair, Table, Pencil, Book are all furniture or stationery used for sitting, writing, or reading. Lamp is a lighting object — different function. Odd one out: Lamp. Property-based reasoning!",
+      "instantFeedbackRetry": "Here's a trick: ask what is each item USED for. Chair=sitting, Table=surface, Pencil=writing, Book=reading — all classroom items. Lamp=lighting — different purpose.",
+      "reviewPrompt": "Quick: find the odd one out and name the shared property: Eagle, Crow, Bat, Sparrow.",
+      "xpReward": 10,
+      "badgeFocus": "Kingdom Classifier",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group A for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Number Classification — Odd/Even/Prime/Composite",
+      "missionStepTitle": "Exercise B: Number Property Classification",
+      "coachHook": "Let's crack this code! Numbers hide their identity — prime, composite, perfect square, odd, even. Know the definitions cold and spot the impostor instantly!",
+      "boardDemo": {
+        "title": "Number Identity Check",
+        "steps": [
+          "Prime: exactly 2 factors (1 and itself). Example: 7",
+          "Composite: more than 2 factors. Example: 12",
+          "Perfect square: n² for some integer n. Example: 16=4²",
+          "Odd: not divisible by 2. Even: divisible by 2"
+        ],
+        "teacherLine": "Quick prime check: test divisibility by 2, 3, 5, 7. If none divide evenly and the number is less than 121, it is prime."
+      },
+      "readAloudPrompt": "Group: 2, 3, 5, 7, 9. Which is the only composite number?",
+      "tryPrompt": "Find the odd one out: 4, 8, 15, 16, 20. (Hint: check perfect squares!)",
+      "masteryCheck": "15 (not divisible by 4, and not a perfect square)",
+      "instantFeedbackWin": "Correct! 4, 8, 16, 20 are all divisible by 4. 15 is not (15÷4=3.75). Alternatively: 4=2², 16=4² are perfect squares; 8 and 20 are multiples of 4. The most consistent property is divisibility by 4 — and 15 breaks it. Well spotted!",
+      "instantFeedbackRetry": "Here's a trick: test divisibility by 4: 4÷4=1 ✓, 8÷4=2 ✓, 16÷4=4 ✓, 20÷4=5 ✓, 15÷4=3.75 ✗. Odd one out: 15.",
+      "reviewPrompt": "Quick: 11, 13, 17, 19, 21 — find the odd one out and explain why.",
+      "xpReward": 12,
+      "badgeFocus": "Number Identity Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group B for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Word Groups by Shared Property",
+      "missionStepTitle": "Exercise C: Word Groups — Shared Property",
+      "coachHook": "Let's crack this code! Words in a group share a hidden property — profession, material, function, origin. Name the property before picking the odd one out.",
+      "boardDemo": {
+        "title": "Word Groups — Property First",
+        "steps": [
+          "Group: Doctor, Engineer, Teacher, Mango",
+          "Doctor, Engineer, Teacher are professions",
+          "Mango is a fruit — different category",
+          "Odd one out: Mango",
+          "Property: human professions"
+        ],
+        "teacherLine": "Try multiple properties — sometimes a group shares two possible properties. Pick the most specific one that excludes exactly one item."
+      },
+      "readAloudPrompt": "Group: January, March, July, November, April. State the months with 31 days — which is the odd one out?",
+      "tryPrompt": "Find the odd one out: Copper, Gold, Silver, Iron, Diamond.",
+      "masteryCheck": "Diamond (the only non-metal; all others are metals)",
+      "instantFeedbackWin": "Excellent! Copper, Gold, Silver, Iron are all metals. Diamond is a non-metal (pure carbon in crystal form). Odd one out: Diamond. Property: metals!",
+      "instantFeedbackRetry": "Here's a trick: ask 'which ones are metals?' Copper ✓, Gold ✓, Silver ✓, Iron ✓, Diamond ✗ (it is carbon, not a metal). Diamond is the odd one out.",
+      "reviewPrompt": "Quick: Mercury, Venus, Earth, Sun, Mars — find the odd one out and name the property.",
+      "xpReward": 13,
+      "badgeFocus": "Property Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group C for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Two-Tier Classification",
+      "missionStepTitle": "Exercise D: Two-Tier Classification",
+      "coachHook": "Let's crack this code! Two layers: all items might be in the same primary category (e.g., all animals), but one fails the secondary property (e.g., all are mammals except one). Go deeper!",
+      "boardDemo": {
+        "title": "Two Tiers — Primary Category + Secondary Property",
+        "steps": [
+          "Group: Whale, Shark, Dolphin, Seal",
+          "Primary: all are aquatic animals",
+          "Secondary: Whale, Dolphin, Seal are mammals (breathe air, feed young with milk). Shark is a fish.",
+          "Odd one out: Shark (Primary same, Secondary different)"
+        ],
+        "teacherLine": "If all items share the primary category, dig into the secondary property. This is the trick in hard classification questions — the odd one out is a member of the primary group but an outsider in the secondary property."
+      },
+      "readAloudPrompt": "Group: Crow, Eagle, Bat, Sparrow. Primary: all fly. Secondary: Crow, Eagle, Sparrow are birds. Bat is a __ ?",
+      "tryPrompt": "Find the two-tier odd one out: Red, Blue, Green, White, Yellow.",
+      "masteryCheck": "White (the only non-spectral/non-rainbow colour; all others are in VIBGYOR)",
+      "instantFeedbackWin": "Sharp! Red, Blue, Green, Yellow are colours of the visible spectrum (ROYGBIV). White is not a spectral colour — it is a combination of all colours. Two-tier classification: all are colours, but white is not a rainbow colour!",
+      "instantFeedbackRetry": "Here's a trick: all are colours (primary category same). Now check: which ones appear in a rainbow? Red ✓, Blue ✓, Green ✓, Yellow ✓, White ✗ (white is not in the rainbow spectrum). White is the odd one out.",
+      "reviewPrompt": "Two-tier: Potato, Carrot, Radish, Spinach, Onion — all are vegetables, but which one is a leaf vegetable?",
+      "xpReward": 15,
+      "badgeFocus": "Two-Tier Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group D for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Number Groups by Mathematical Property",
+      "missionStepTitle": "Exercise E: Advanced Number Grouping",
+      "coachHook": "Let's crack this code! Primes, perfect squares, multiples, Fibonacci numbers — classify each number and find the one that breaks the mathematical rule.",
+      "boardDemo": {
+        "title": "Advanced Number Properties",
+        "steps": [
+          "Group: 1, 1, 2, 3, 5, 8, 13, 20",
+          "Test Fibonacci: each term = sum of previous two",
+          "1,1,2,3,5,8,13 ✓ Fibonacci",
+          "20: previous two are 8 and 13, 8+13=21 ≠ 20",
+          "Odd one out: 20 (should be 21 in Fibonacci)"
+        ],
+        "teacherLine": "For advanced number groups, test the mathematical rule on EVERY item. The one that fails the rule is the odd one out — no matter how close to the correct value it looks."
+      },
+      "readAloudPrompt": "Group: 1, 4, 9, 16, 26, 36. Which number breaks the perfect square rule?",
+      "tryPrompt": "Group: 2, 3, 5, 7, 11, 13, 15. Identify the odd one out and explain why.",
+      "masteryCheck": "15 (not prime: 15 = 3 × 5)",
+      "instantFeedbackWin": "Spot on! 2, 3, 5, 7, 11, 13 are all prime numbers. 15 = 3×5 has factors other than 1 and itself — NOT prime. Mathematical property checked, impostor caught!",
+      "instantFeedbackRetry": "Here's a trick: check each number for primality. 2 ✓, 3 ✓, 5 ✓, 7 ✓, 11 ✓, 13 ✓. Now 15: 15÷3=5 — so 15 has factor 3. NOT prime. Odd one out: 15.",
+      "reviewPrompt": "Quick: 8, 27, 64, 100, 125 — which number is the odd one out? (Hint: check perfect cubes.)",
+      "xpReward": 17,
+      "badgeFocus": "Number Rule Enforcer",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group E for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Alphabet and Letter Classification",
+      "missionStepTitle": "Exercise F: Letter Group Classification",
+      "coachHook": "Let's crack this code! Letters can be classified by their shape (symmetrical/asymmetrical), type (vowel/consonant), or position (first half/second half of alphabet). Which property holds the group together?",
+      "boardDemo": {
+        "title": "Letter Classification — Shape, Type, Position",
+        "steps": [
+          "Vowels: A, E, I, O, U — all others are consonants",
+          "Symmetrical letters: A, H, I, M, O, T, U, V, W, X, Y",
+          "Alphabet position: A-M = first 13, N-Z = last 13",
+          "Example: A, E, I, O, K — K is the odd one out (consonant)"
+        ],
+        "teacherLine": "For letter classification, always first ask: vowel or consonant? Then shape symmetry. Then position. These three properties cover most exam questions."
+      },
+      "readAloudPrompt": "Group: B, D, E, F, G. Which letter is the odd one out? (Hint: look at vowels.)",
+      "tryPrompt": "Find the odd one out: A, H, I, O, T, G. (Hint: check left-right symmetry.)",
+      "masteryCheck": "G (the only letter without left-right symmetry; all others are symmetric)",
+      "instantFeedbackWin": "Brilliant! A, H, I, O, T all look the same when you flip them left-right (symmetrical). G is asymmetrical — it has that curved hook that breaks the symmetry. Odd one out: G!",
+      "instantFeedbackRetry": "Here's a trick: fold each letter down a vertical line. A — symmetric ✓, H — symmetric ✓, I — symmetric ✓, O — symmetric ✓, T — symmetric ✓, G — NOT symmetric (the hook is only on the right). Odd one out: G.",
+      "reviewPrompt": "Quick: M, N, O, P, Q. Which is the only vowel?",
+      "xpReward": 18,
+      "badgeFocus": "Letter Classifier",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group F for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Analogy-Based Grouping",
+      "missionStepTitle": "Exercise G: Analogy Groups",
+      "coachHook": "Let's crack this code! In analogy grouping, the shared relationship matters — not just the category. 'Doctor:Hospital' pairs go with 'Teacher:School', not 'Teacher:Book'.",
+      "boardDemo": {
+        "title": "Analogy Group — Shared Relationship",
+        "steps": [
+          "Group: Doctor:Hospital, Teacher:School, Lawyer:Court, Pilot:Cockpit",
+          "Relationship: person → their workplace",
+          "All fit the same relationship type",
+          "Now add Writer:Pen — relationship is person→tool, NOT workplace",
+          "Writer:Pen breaks the analogy group — odd one out"
+        ],
+        "teacherLine": "State the RELATIONSHIP TYPE before checking each pair. Every pair in the group must share the same type of relationship. A different relationship type = odd one out."
+      },
+      "readAloudPrompt": "Group: Pen:Write, Knife:Cut, Hammer:Nail, Brush:Paint. What is the shared relationship? Which pair is the odd one out?",
+      "tryPrompt": "Group: Brick:Wall, Plank:Floor, Tile:Roof, Sand:Beach. What is the relationship for the first three? Which is the odd one out?",
+      "masteryCheck": "Sand:Beach (the others are material:construction, Sand:Beach is material:natural landform)",
+      "instantFeedbackWin": "Excellent! Brick:Wall, Plank:Floor, Tile:Roof all follow 'building material:part of a building'. Sand:Beach is 'natural material:natural landform' — different relationship type. Sand:Beach is the odd one out!",
+      "instantFeedbackRetry": "Here's a trick: ask 'what is the relationship?' Brick→Wall (builds it), Plank→Floor (builds it), Tile→Roof (builds it). All are construction relationships. Sand→Beach? Beach is not built from sand — it is a natural landform. Different relationship!",
+      "reviewPrompt": "Quick: Eye:See, Ear:Hear, Nose:Taste, Tongue:Taste. Find the odd one out.",
+      "xpReward": 20,
+      "badgeFocus": "Analogy Grouper",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group G for Classification & Grouping."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Speed Round: Mixed Classification",
+      "missionStepTitle": "Exercise H: Olympiad Speed Round",
+      "coachHook": "Let's crack this code — FAST! Mixed classification: category, number property, letter, analogy — all in one round. Name the property and the odd item in under 15 seconds each!",
+      "boardDemo": {
+        "title": "Speed Classification — Name Property First",
+        "steps": [
+          "Speed tip: say the shared property out loud before looking for the odd item",
+          "Avoid guessing by appearance — verify each item against the stated property",
+          "Two-tier: if primary category is same for all, check the secondary property",
+          "Target: 15 seconds per classification question"
+        ],
+        "teacherLine": "In Olympiad, classification questions are worth quick marks IF you have a method. Method = name property → verify each → identify outsider. Never guess."
+      },
+      "readAloudPrompt": "Ready for the speed round? Four classification groups. Name property and odd item for each!",
+      "tryPrompt": "Q1: 4, 9, 14, 16, 25 | Q2: Rose, Lotus, Jasmine, Sunflower, Mango | Q3: A, E, I, O, B | Q4: Crow, Kite, Sparrow, Eagle, Bat",
+      "masteryCheck": "14 (not square) | Mango (not a flower) | B (consonant) | Bat (not a bird/mammal)",
+      "instantFeedbackWin": "INCREDIBLE! Q1: 4=2², 9=3², 14 ✗, 16=4², 25=5² — 14 not a perfect square. Q2: all flowers except Mango (fruit). Q3: A,E,I,O are vowels, B is consonant. Q4: Crow,Kite,Sparrow,Eagle are birds; Bat is a mammal. Classification Champion!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — check each as n²: √14≈3.7 not integer. Q2 — what is Mango? A fruit, not a flower. Q3 — B has no vowel sound. Q4 — Bat has fur and feeds milk to young → mammal, not bird.",
+      "reviewPrompt": "Final recap: state the 3 levels of classification you learned today.",
+      "xpReward": 25,
+      "badgeFocus": "Classification Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Classification & Grouping",
+        "caption": "Group H for Classification & Grouping."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "analogy_frame",
+      "kind": "svg",
+      "asset": "analogy_frame.svg",
+      "title": "Classification & Grouping",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

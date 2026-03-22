@@ -1,0 +1,20 @@
+{
+  "courseId": "aptitude_reasoning_g4",
+  "courseName": "MindSpark Grade 4 — Aptitude & Reasoning",
+  "tagline": "Think Sharp, Reason Fast",
+  "gradeLevel": 4,
+  "targetAudience": "Grade 4 students (age 9–10)",
+  "avatarTone": "warm-encouraging",
+  "hintStyle": "Let's figure this out together!",
+  "questionFormat": ["MCQ", "visual"],
+  "chapters": [
+    { "chapterCode": "AR_G4_L1_PATTERNS",   "title": "Number Patterns",         "order": 1, "estimatedMinutes": 12 },
+    { "chapterCode": "AR_G4_L2_ODD_ONE",    "title": "Odd One Out",             "order": 2, "estimatedMinutes": 12 },
+    { "chapterCode": "AR_G4_L3_PICTURE",    "title": "Picture Series",          "order": 3, "estimatedMinutes": 13 },
+    { "chapterCode": "AR_G4_L4_DIRECTIONS", "title": "Basic Directions",        "order": 4, "estimatedMinutes": 12 },
+    { "chapterCode": "AR_G4_L5_CODING",     "title": "Simple Coding",           "order": 5, "estimatedMinutes": 13 },
+    { "chapterCode": "AR_G4_L6_ANALOGY",    "title": "Simple Analogies",        "order": 6, "estimatedMinutes": 12 },
+    { "chapterCode": "AR_G4_L7_SORTING",    "title": "Ordering and Ranking",    "order": 7, "estimatedMinutes": 12 },
+    { "chapterCode": "AR_G4_L8_CALENDAR",   "title": "Days and Calendar",       "order": 8, "estimatedMinutes": 12 }
+  ]
+}

@@ -1,8 +1,8 @@
 /**
  * /ai-tutor/demo?chapter=L1_COMPLETING_WHOLE
  *
- * Self-serve demo — no login required.
- * Fetches a guest JWT from the FastAPI backend and redirects to the tutor.
+ * Launcher used by both free demos and enrolled learner flows.
+ * Free previews keep demo=1; enrolled launches skip demo onboarding.
  */
 import { redirect } from "next/navigation";
 
@@ -20,6 +20,8 @@ export default async function DemoPage({ searchParams }: Props) {
   const chapter = String(searchParams.chapter ?? "L1_COMPLETING_WHOLE").toUpperCase();
   const grade = String(searchParams.grade ?? "8");
   const fresh = searchParams.fresh === "1" ? "1" : "0";
+  const enrolled = searchParams.enrolled === "1";
+  const debug = searchParams.debug === "1";
 
   let token = "";
   try {
@@ -42,16 +44,14 @@ export default async function DemoPage({ searchParams }: Props) {
     return (
       <main style={{ padding: "2rem", fontFamily: "sans-serif", textAlign: "center" }}>
         <h2>Demo unavailable</h2>
-        <p>Could not start the demo session. Please try again shortly.</p>
-        <a href="https://robodynamics.in" style={{ color: "#0ea5e9" }}>← Back to RoboDynamics</a>
+        <p>Could not start the session. Please try again shortly.</p>
+        <a href="https://robodynamics.in" style={{ color: "#0ea5e9" }}>Back to RoboDynamics</a>
       </main>
     );
   }
 
-  // Redirect to the /learn path so the Duolingo-style layout activates.
-  // Pass fresh=1 when the caller wants a guaranteed brand-new session
-  // (clears any saved localStorage bookmark in the client).
   redirect(
-    `/ai-tutor/learn?token=${encodeURIComponent(token)}&chapterCode=${encodeURIComponent(chapter)}&demo=1${fresh === "1" ? "&fresh=1" : ""}`
+    `/ai-tutor/learn?token=${encodeURIComponent(token)}&chapterCode=${encodeURIComponent(chapter)}${enrolled ? "&enrolled=1" : "&demo=1"}${fresh === "1" ? "&fresh=1" : ""}${debug ? "&debug=1" : ""}`
   );
 }
+

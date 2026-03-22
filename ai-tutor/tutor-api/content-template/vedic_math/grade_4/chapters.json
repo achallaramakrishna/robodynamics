@@ -1,191 +1,520 @@
 {
   "courseId": "vedic_math_g4",
-  "courseTitle": "MindSutra Grade 4 — Vedic Math",
+  "courseTitle": "MindSutra Grade 4 - Vedic Math",
   "gradeBand": "Grade 4",
   "description": "CBSE Grade 4 aligned: fast addition, multiplication tables, borrow-free subtraction, and intro to 2-digit cross-multiplication. Builds number sense and mental math confidence.",
   "chapters": [
     {
       "chapterCode": "VM_G4_L1_FAST_ADDITION",
-      "title": "All From 9, Last From 10 — Magic Subtraction",
-      "estimatedMinutes": 20,
-      "subtopics": ["Complement method", "Subtraction without borrowing", "Base 10 complements"],
-      "learningGoals": [
-        "Find complement of any digit from 9 (and last from 10)",
-        "Subtract 3-digit numbers without borrowing using Nikhilam",
-        "Apply shortcut to at least 5 problems in under 2 minutes"
+      "title": "Completing the Whole - Fast Addition Trick",
+      "estimatedMinutes": 25,
+      "subtopics": [
+        "What is a complement?",
+        "Complement pairs to 10",
+        "Making 10, 100 and 1000 quickly"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "learningGoals": [
+        "Find complements to 10, 100 and 1000 instantly",
+        "Use complements to complete round numbers mentally",
+        "Spot number pairs that always make a whole"
+      ],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"Intro: complement concept"},
-        {"exerciseGroup":"B","subtopic":"Single-digit complements drill"},
-        {"exerciseGroup":"C","subtopic":"2-digit borrow-free subtraction"},
-        {"exerciseGroup":"D","subtopic":"3-digit borrow-free subtraction"},
-        {"exerciseGroup":"E","subtopic":"MCQ: spot the complement"},
-        {"exerciseGroup":"F","subtopic":"Fill-the-step: 3-digit problem"},
-        {"exerciseGroup":"G","subtopic":"Mixed practice"},
-        {"exerciseGroup":"H","subtopic":"Speed drill"},
-        {"exerciseGroup":"I","subtopic":"Challenge: 4-digit"}
+        {
+          "subtopic": "What is a complement?",
+          "exerciseGroup": "A"
+        },
+        {
+          "subtopic": "Complement pairs to 10",
+          "exerciseGroup": "B"
+        },
+        {
+          "subtopic": "Complements to 10 and 100",
+          "exerciseGroup": "C"
+        },
+        {
+          "subtopic": "Complements to 1000",
+          "exerciseGroup": "D"
+        },
+        {
+          "subtopic": "MCQ: spot the whole pair",
+          "exerciseGroup": "E"
+        },
+        {
+          "subtopic": "Fill-the-step: complete the whole",
+          "exerciseGroup": "F"
+        },
+        {
+          "subtopic": "Mixed practice",
+          "exerciseGroup": "G"
+        },
+        {
+          "subtopic": "Speed drill",
+          "exerciseGroup": "H"
+        },
+        {
+          "subtopic": "Challenge: bigger whole numbers",
+          "exerciseGroup": "I"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
-      "title": "Lightning Tables 11–19 — Ekadhikena Pattern",
+      "title": "Lightning Tables 11-19 - Ekadhikena Pattern",
       "estimatedMinutes": 20,
-      "subtopics": ["Table of 11", "Tables 12–19 shortcut", "Ekadhikena Purvena"],
+      "subtopics": [
+        "Table of 11",
+        "Tables 12-19 shortcut",
+        "Ekadhikena Purvena"
+      ],
       "learningGoals": [
         "Recite table of 11 using the sum-of-digits pattern",
-        "Use Ekadhikena to build any table from 12–19 mentally",
-        "Multiply 2-digit × 11, 12, 13 in under 5 seconds"
+        "Use Ekadhikena to build any table from 12-19 mentally",
+        "Multiply 2-digit x 11, 12, 13 in under 5 seconds"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"Table of 11: digit-sum pattern"},
-        {"exerciseGroup":"B","subtopic":"Table of 12 shortcut"},
-        {"exerciseGroup":"C","subtopic":"Tables 13–15"},
-        {"exerciseGroup":"D","subtopic":"Tables 16–19"},
-        {"exerciseGroup":"E","subtopic":"MCQ: identify product"},
-        {"exerciseGroup":"F","subtopic":"Fill-the-step: ×11 pattern"},
-        {"exerciseGroup":"G","subtopic":"Mixed tables drill"},
-        {"exerciseGroup":"H","subtopic":"Speed round: 10 problems"},
-        {"exerciseGroup":"I","subtopic":"Challenge: 3-digit × 11"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Table of 11: digit-sum pattern"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Table of 12 shortcut"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Tables 13-15"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Tables 16-19"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "MCQ: identify product"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Fill-the-step: x11 pattern"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Mixed tables drill"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Speed round: 10 problems"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: 3-digit x 11"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
-      "title": "Double Fast, Half Fast — Multiplication Secrets",
+      "title": "Double Fast, Half Fast - Multiplication Secrets",
       "estimatedMinutes": 18,
-      "subtopics": ["Doubling chain", "Halving chain", "×4 = double-double", "×8 = double-double-double"],
-      "learningGoals": [
-        "Double and halve 2-3 digit numbers instantly",
-        "Multiply by 4 using double-double shortcut",
-        "Multiply by 8 using triple-double shortcut"
+      "subtopics": [
+        "Doubling chain",
+        "Halving chain",
+        "x4 = double-double",
+        "x8 = double-double-double"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "learningGoals": [
+        "Double and halve 2-digit and simple 3-digit numbers instantly",
+        "Multiply by 4 using the double-double shortcut",
+        "Multiply by 8 and 16 using repeated doubling"
+      ],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"Doubling 1-digit numbers"},
-        {"exerciseGroup":"B","subtopic":"Doubling 2-digit numbers"},
-        {"exerciseGroup":"C","subtopic":"Halving even numbers"},
-        {"exerciseGroup":"D","subtopic":"Multiply by 4 (double-double)"},
-        {"exerciseGroup":"E","subtopic":"Multiply by 8"},
-        {"exerciseGroup":"F","subtopic":"MCQ: pick the shortcut"},
-        {"exerciseGroup":"G","subtopic":"Fill-the-step: ×8 chain"},
-        {"exerciseGroup":"H","subtopic":"Mixed practice"},
-        {"exerciseGroup":"I","subtopic":"Challenge: ×16, ×32"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Doubling 1-digit numbers"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Doubling 2-digit numbers"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Halving even numbers"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Multiply by 4 (double-double)"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Multiply by 8 (triple double)"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "MCQ: pick the shortcut"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Fill-the-step: x8 chain"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Mixed doubling and halving"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: x16"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L4_MULT_BY_11",
-      "title": "The 11-Trick — Multiply Any 2-Digit Number by 11",
+      "title": "The 11-Trick - Multiply Any 2-Digit Number by 11",
       "estimatedMinutes": 18,
-      "subtopics": ["Split-and-add rule", "Carry rule for sum > 9", "3-digit × 11"],
-      "learningGoals": [
-        "Apply split-and-add rule for any 2-digit × 11",
-        "Handle carry when middle digit sum exceeds 9",
-        "Extend technique to 3-digit × 11"
+      "subtopics": [
+        "Split-and-add rule",
+        "Carry rule for sum >= 10",
+        "3-digit x 11"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "learningGoals": [
+        "Apply the split-and-add rule for any 2-digit x 11",
+        "Handle carry when the middle sum reaches 10 or more",
+        "Extend the same pattern to 3-digit and 4-digit x 11"
+      ],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"2-digit × 11, no carry"},
-        {"exerciseGroup":"B","subtopic":"2-digit × 11, with carry"},
-        {"exerciseGroup":"C","subtopic":"Pattern recognition"},
-        {"exerciseGroup":"D","subtopic":"3-digit × 11"},
-        {"exerciseGroup":"E","subtopic":"MCQ: which answer is correct"},
-        {"exerciseGroup":"F","subtopic":"Fill-the-step: carry example"},
-        {"exerciseGroup":"G","subtopic":"Mixed drill"},
-        {"exerciseGroup":"H","subtopic":"Speed round"},
-        {"exerciseGroup":"I","subtopic":"Challenge: 4-digit × 11"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "2-digit x 11, no carry"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "2-digit x 11, with carry"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Pattern recognition"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "3-digit x 11"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "MCQ: which answer is correct"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Fill-the-step: carry example"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Mixed drill"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Speed round"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: 4-digit x 11"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
-      "title": "No More Borrowing! — Vedic Subtraction",
+      "title": "No More Borrowing! - Vedic Subtraction",
       "estimatedMinutes": 20,
-      "subtopics": ["Rekhanka (vinculum) concept", "Convert and subtract", "4-digit borrow-free"],
-      "learningGoals": [
-        "Convert subtrahend digits using All-From-9 rule",
-        "Subtract 3-digit numbers without any borrowing",
-        "Apply to 4-digit problems involving money/measurement"
+      "subtopics": [
+        "Review: All From 9, Last From 10",
+        "Convert and add - the borrow-free method",
+        "3-digit subtraction without borrowing"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "learningGoals": [
+        "Apply All From 9, Last From 10 to convert subtraction into addition",
+        "Solve 3-digit and 4-digit subtraction without borrowing",
+        "Use the same method in money and measurement word problems"
+      ],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"Concept: why borrowing is unnecessary"},
-        {"exerciseGroup":"B","subtopic":"2-digit borrow-free examples"},
-        {"exerciseGroup":"C","subtopic":"3-digit borrow-free"},
-        {"exerciseGroup":"D","subtopic":"Money word problems"},
-        {"exerciseGroup":"E","subtopic":"MCQ: method identification"},
-        {"exerciseGroup":"F","subtopic":"Fill-the-step: 4-digit example"},
-        {"exerciseGroup":"G","subtopic":"Mixed practice"},
-        {"exerciseGroup":"H","subtopic":"Speed drill"},
-        {"exerciseGroup":"I","subtopic":"Challenge: 5-digit subtraction"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Concept: why borrowing is unnecessary"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "2-digit borrow-free examples"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "3-digit borrow-free"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Money word problems"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "MCQ: method identification"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Fill-the-step: 4-digit example"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Mixed practice"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Speed drill"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: 5-digit subtraction"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L6_MULT_BY_5_25",
-      "title": "×5 and ×25 in a Flash — Base Multiplication",
+      "title": "x5 and x25 in a Flash - Base Multiplication",
       "estimatedMinutes": 18,
-      "subtopics": ["×5 = ÷2 then ×10", "×25 = ÷4 then ×100", "×125 extension"],
-      "learningGoals": [
-        "Multiply any number by 5 using divide-by-2 shortcut",
-        "Multiply any number by 25 using divide-by-4 shortcut",
-        "Understand why these shortcuts work (base 10 logic)"
+      "subtopics": [
+        "x5 = half then x10",
+        "x25 = quarter then x100",
+        "x125 extension"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "learningGoals": [
+        "Multiply by 5 using the half-then-x10 shortcut",
+        "Multiply by 25 using the quarter-then-x100 shortcut",
+        "Extend the same base idea to x50 and x125"
+      ],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"×5 shortcut concept"},
-        {"exerciseGroup":"B","subtopic":"×5 drill: 2-digit numbers"},
-        {"exerciseGroup":"C","subtopic":"×25 shortcut concept"},
-        {"exerciseGroup":"D","subtopic":"×25 drill"},
-        {"exerciseGroup":"E","subtopic":"MCQ: apply correct shortcut"},
-        {"exerciseGroup":"F","subtopic":"Fill-the-step: ×25 process"},
-        {"exerciseGroup":"G","subtopic":"Mixed ×5 and ×25"},
-        {"exerciseGroup":"H","subtopic":"Speed round"},
-        {"exerciseGroup":"I","subtopic":"Challenge: ×125, ×50"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "x5 shortcut concept"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "x5 drill: 2-digit numbers"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "x25 shortcut concept"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "x25 drill"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "Word problem: x5"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Word problem: x25"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "MCQ: spot the product"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Fill-the-step: x25 process"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: x125, x50"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L7_NEAR_100",
-      "title": "Near 100 Magic — Add and Subtract Close Numbers",
+      "title": "Near 100 Magic - Add and Subtract Close Numbers",
       "estimatedMinutes": 20,
-      "subtopics": ["Deviation from 100", "Quick addition near 100", "Quick subtraction near 100"],
+      "subtopics": [
+        "Deviation from 100",
+        "Quick addition near 100",
+        "Quick subtraction near 100"
+      ],
       "learningGoals": [
         "Add numbers close to 100 using surplus method",
         "Subtract numbers close to 100 using deficit method",
         "Solve 3 such problems mentally in under 30 seconds"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"Deviation concept (near 100)"},
-        {"exerciseGroup":"B","subtopic":"Addition: 98+97, 99+96 style"},
-        {"exerciseGroup":"C","subtopic":"Subtraction: 100-style"},
-        {"exerciseGroup":"D","subtopic":"Mixed addition and subtraction"},
-        {"exerciseGroup":"E","subtopic":"MCQ: pick the deviation"},
-        {"exerciseGroup":"F","subtopic":"Fill-the-step: combined example"},
-        {"exerciseGroup":"G","subtopic":"Word problems"},
-        {"exerciseGroup":"H","subtopic":"Speed drill"},
-        {"exerciseGroup":"I","subtopic":"Challenge: near 1000"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Deviation concept (near 100)"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Addition: 98+97, 99+96 style"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Subtraction: 100-style"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Mixed addition and subtraction"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "MCQ: pick the deviation"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Fill-the-step: combined example"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Word problems"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Speed drill"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: near 1000"
+        }
       ]
     },
     {
       "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
-      "title": "The X-Factor — Urdhva Criss-Cross Multiplication",
+      "title": "The X-Factor - Urdhva Criss-Cross Multiplication",
       "estimatedMinutes": 22,
-      "subtopics": ["Vertical-crosswise pattern", "2-digit × 2-digit (intro)", "Step-by-step criss-cross"],
-      "learningGoals": [
-        "Understand the 3-step Urdhva-Tiryak pattern visually",
-        "Multiply any 2-digit × 2-digit using criss-cross",
-        "Verify answers and identify carry positions"
+      "subtopics": [
+        "Vertically and crosswise pattern",
+        "2-digit x 2-digit (intro)",
+        "Carry handling in criss-cross"
       ],
-      "exerciseGroups": ["A","B","C","D","E","F","G","H","I"],
+      "learningGoals": [
+        "Understand the vertically-and-crosswise multiplication pattern",
+        "Multiply any 2-digit x 2-digit using criss-cross",
+        "Handle carries correctly step by step"
+      ],
+      "exerciseGroups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
       "exerciseFlow": [
-        {"exerciseGroup":"A","subtopic":"Pattern introduction (SVG demo)"},
-        {"exerciseGroup":"B","subtopic":"Step 1: units column"},
-        {"exerciseGroup":"C","subtopic":"Step 2: cross multiply + add"},
-        {"exerciseGroup":"D","subtopic":"Step 3: tens column"},
-        {"exerciseGroup":"E","subtopic":"Full 2-digit × 2-digit"},
-        {"exerciseGroup":"F","subtopic":"MCQ: identify middle step"},
-        {"exerciseGroup":"G","subtopic":"Fill-the-step: complete problem"},
-        {"exerciseGroup":"H","subtopic":"Speed round"},
-        {"exerciseGroup":"I","subtopic":"Challenge: include carry"}
+        {
+          "exerciseGroup": "A",
+          "subtopic": "Vertical multiplication basics"
+        },
+        {
+          "exerciseGroup": "B",
+          "subtopic": "Crosswise middle step"
+        },
+        {
+          "exerciseGroup": "C",
+          "subtopic": "Full 2-digit x 2-digit"
+        },
+        {
+          "exerciseGroup": "D",
+          "subtopic": "Carry handling"
+        },
+        {
+          "exerciseGroup": "E",
+          "subtopic": "MCQ: choose the correct product"
+        },
+        {
+          "exerciseGroup": "F",
+          "subtopic": "Fill-the-step: criss-cross method"
+        },
+        {
+          "exerciseGroup": "G",
+          "subtopic": "Mixed drill"
+        },
+        {
+          "exerciseGroup": "H",
+          "subtopic": "Speed round"
+        },
+        {
+          "exerciseGroup": "I",
+          "subtopic": "Challenge: bigger 2-digit products"
+        }
       ]
     }
   ]

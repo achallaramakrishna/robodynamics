@@ -45,6 +45,9 @@ class CourseTemplateRuleEngine:
                 chapters = [c for c in payload if isinstance(c, dict)]
 
         if not chapters:
+            chapters = self._script_loader.chapter_entries()
+
+        if not chapters:
             intro_code = self._fallback_chapter_code or "INTRO"
             chapters = [
                 {
@@ -64,34 +67,45 @@ class CourseTemplateRuleEngine:
             code = self._norm_chapter(str(chapter.get("chapterCode", "")))
             if not code:
                 continue
-            title = str(chapter.get("title", f"{self._title} - {code}")).strip() or f"{self._title} - {code}"
+            chapter_script = self._script_loader.chapter_script(code)
+            chapter_data = chapter_script if isinstance(chapter_script, dict) else {}
+            title = str(chapter.get("title") or chapter_data.get("title") or f"{self._title} - {code}").strip() or f"{self._title} - {code}"
             try:
-                estimated_minutes = int(chapter.get("estimatedMinutes", 20))
+                estimated_minutes = int(chapter.get("estimatedMinutes", chapter_data.get("estimatedMinutes", 20)))
             except Exception:
                 estimated_minutes = 20
             estimated_minutes = max(10, min(120, estimated_minutes))
-            subtopics = self._list_str(chapter.get("subtopics")) or [title]
-            learning_goals = self._list_str(chapter.get("learningGoals")) or [
+            subtopics = self._list_str(chapter.get("subtopics")) or self._list_str(chapter_data.get("subtopics")) or [title]
+            learning_goals = self._list_str(chapter.get("learningGoals")) or self._list_str(chapter_data.get("learningGoals")) or [
                 f"Understand core ideas in {title}.",
                 "Build speed and accuracy through guided practice.",
             ]
-            chapter_script = self._script_loader.chapter_script(code)
-            exercise_flow = self._exercise_flow_from_payload(chapter, subtopics)
-            teaching_script = self._teaching_script(code, exercise_flow, chapter_script)
-            screenplay = self._screenplay_from_script_or_default(teaching_script, chapter_script)
-            assets = chapter.get("assets") if isinstance(chapter.get("assets"), dict) else {}
-            raw_asset_items = chapter.get("assetItems")
+            flow_source = chapter if isinstance(chapter.get("exerciseFlow"), list) else chapter_data
+            exercise_flow = self._exercise_flow_from_payload(flow_source, subtopics)
+            teaching_script = self._teaching_script(code, exercise_flow, chapter_data)
+            screenplay = self._screenplay_from_script_or_default(teaching_script, chapter_data)
+            assets = chapter.get("assets") if isinstance(chapter.get("assets"), dict) else (chapter_data.get("assets") if isinstance(chapter_data.get("assets"), dict) else {})
+            raw_asset_items = chapter.get("assetItems") if isinstance(chapter.get("assetItems"), list) else chapter_data.get("assetItems")
             asset_items = raw_asset_items if isinstance(raw_asset_items, list) else []
+            question_pool_source = chapter.get("questionPool") if isinstance(chapter.get("questionPool"), list) else chapter_data.get("questionPool")
 
             source_label = f"RoboDynamics Course Template ({self._title})"
             if self._template_course_id:
                 source_label = f"{source_label} [courseId={self._template_course_id}]"
 
+            worked_examples = chapter_data.get("workedExamples") if isinstance(chapter_data.get("workedExamples"), list) and chapter_data.get("workedExamples") else [
+                {
+                    "question": f"{title} - worked example 1",
+                    "method": "Explain, checkpoint, practice.",
+                    "answer": "Step-by-step reasoning with final answer.",
+                }
+            ]
+
             lessons[code] = {
                 "lessonId": code,
                 "title": title,
-                "gradeBand": "NEET/Exam Prep",
-                "source": str(chapter_script.get("source", source_label)),
+                "gradeBand": str(chapter.get("gradeBand") or chapter_data.get("gradeBand") or "NEET/Exam Prep"),
+                "source": str(chapter_data.get("source", source_label)),
                 "dbCourseId": int(self._template_course_id) if str(self._template_course_id).isdigit() else None,
                 "estimatedMinutes": estimated_minutes,
                 "subtopics": subtopics,
@@ -100,28 +114,29 @@ class CourseTemplateRuleEngine:
                 "exerciseFlow": exercise_flow,
                 "teachingScript": teaching_script,
                 "screenplay": screenplay,
-                "duolingoLessonArc": chapter_script.get("duolingoLessonArc") if isinstance(chapter_script.get("duolingoLessonArc"), dict) else None,
-                "coreIdeas": [
+                "duolingoLessonArc": chapter_data.get("duolingoLessonArc") if isinstance(chapter_data.get("duolingoLessonArc"), dict) else None,
+                "coreIdeas": self._list_str(chapter_data.get("coreIdeas")) or [
                     "Start with concept clarity.",
                     "Practice with active recall.",
                     "Use mistakes as feedback loops.",
                 ],
-                "workedExamples": [
-                    {
-                        "question": f"{title} - worked example 1",
-                        "method": "Explain, checkpoint, practice.",
-                        "answer": "Step-by-step reasoning with final answer.",
-                    }
-                ],
-                "starterPractice": [
+                "workedExamples": worked_examples,
+                "starterPractice": self._list_str(chapter_data.get("starterPractice")) or [
                     "Attempt one easy checkpoint.",
                     "Attempt one timed question.",
                     "Review one error and retry.",
                 ],
                 "assets": assets,
                 "assetItems": self._normalize_asset_items(asset_items),
+                # questionPool is back-filled after pools are built so pick_scripted_question
+                # can use full progress-aware deduplication instead of random.choice fallback.
+                "questionPool": [],
             }
-            pools[code] = self._normalize_question_pool(code, chapter.get("questionPool"))
+            pools[code] = self._normalize_question_pool(code, question_pool_source, chapter_data)
+
+        # Back-fill questionPool into lessons so the runtime lesson dict is self-contained.
+        for code in lessons:
+            lessons[code]["questionPool"] = pools.get(code, [])
 
         self._lessons = lessons
         self._question_pool = pools
@@ -310,7 +325,7 @@ class CourseTemplateRuleEngine:
     ) -> List[Dict[str, Any]]:
         scripted = chapter_script.get("screenplay")
         if isinstance(scripted, list) and scripted:
-            out = [s for s in scripted if isinstance(s, dict)]
+            out = self._upgrade_screenplay([s for s in scripted if isinstance(s, dict)], teaching_script, chapter_script)
             if out:
                 return out
 
@@ -338,32 +353,212 @@ class CourseTemplateRuleEngine:
             )
         return beats
 
-    def _normalize_question_pool(self, chapter_code: str, raw_pool: Any) -> List[Dict[str, Any]]:
-        pool: List[Dict[str, Any]] = []
-        if isinstance(raw_pool, list):
-            for item in raw_pool:
-                if not isinstance(item, dict):
-                    continue
-                expected = str(item.get("expectedAnswer", "")).strip()
-                text = str(item.get("questionText", "")).strip()
-                if not text:
-                    continue
-                pool.append(
+    def _upgrade_screenplay(
+        self,
+        scripted: List[Dict[str, Any]],
+        teaching_script: List[Dict[str, Any]],
+        chapter_script: Dict[str, Any],
+    ) -> List[Dict[str, Any]]:
+        if not scripted:
+            return []
+
+        by_group: Dict[str, List[Dict[str, Any]]] = {}
+        for beat in scripted:
+            group = self.normalize_exercise_group(beat.get("exerciseGroup"))
+            by_group.setdefault(group, []).append(dict(beat))
+
+        duolingo_arc = chapter_script.get("duolingoLessonArc") if isinstance(chapter_script.get("duolingoLessonArc"), dict) else {}
+        onboarding = duolingo_arc.get("onboarding") if isinstance(duolingo_arc.get("onboarding"), dict) else {}
+        worked_examples = chapter_script.get("workedExamples") if isinstance(chapter_script.get("workedExamples"), list) else []
+
+        upgraded: List[Dict[str, Any]] = []
+        sequence = 1
+        for step_index, step in enumerate(teaching_script):
+            group = self.normalize_exercise_group(step.get("exerciseGroup"))
+            existing = sorted(by_group.get(group, []), key=lambda item: int(item.get("sequence", 0) or 0))
+            existing_cues = {str(item.get("cue", "")).strip().lower() for item in existing}
+            non_waiting_beats: List[Dict[str, Any]] = []
+            waiting_beats: List[Dict[str, Any]] = []
+            for item in existing:
+                pause_type = str(item.get("pauseType", "none")).strip().lower()
+                cue = str(item.get("cue", "")).strip().lower()
+                if pause_type == "student_response" or cue in {"check", "guided", "checkpoint"}:
+                    waiting_beats.append(item)
+                else:
+                    non_waiting_beats.append(item)
+
+            def append_beat(beat: Dict[str, Any]) -> None:
+                nonlocal sequence
+                next_beat = dict(beat)
+                next_beat["sequence"] = sequence
+                upgraded.append(next_beat)
+                sequence += 1
+
+            if "intro" not in existing_cues:
+                intro_line = str(onboarding.get("coachIntro", "")).strip() if step_index == 0 else f"Let us begin {step.get('subtopic', 'this step')}."
+                append_beat(
                     {
-                        "questionId": str(item.get("questionId") or uuid.uuid4()),
-                        "chapterCode": chapter_code,
-                        "exerciseGroup": self.normalize_exercise_group(item.get("exerciseGroup")),
-                        "skill": str(item.get("skill", self._title)),
-                        "difficulty": str(item.get("difficulty", "medium")).lower(),
-                        "type": str(item.get("type", "multiple_choice")),
-                        "questionText": text,
-                        "hint": str(item.get("hint", "Use the core rule and compute step-by-step.")),
-                        "solution": str(item.get("solution", "Review concept and solve with one clear step.")),
-                        "expectedAnswer": expected,
-                        "subtopic": str(item.get("subtopic", "")),
-                        "visual": item.get("visual") if isinstance(item.get("visual"), dict) else None,
+                        "beatId": f"{step['stepId']}_INTRO",
+                        "stepId": step["stepId"],
+                        "exerciseGroup": group,
+                        "subtopic": step["subtopic"],
+                        "cue": "intro",
+                        "boardMode": step["boardMode"],
+                        "teacherLine": intro_line or step["teacherLine"],
+                        "boardAction": step["boardAction"],
+                        "checkpointPrompt": step["checkpointPrompt"],
+                        "pauseType": "none",
+                        "holdSec": 0.5,
+                        "expectedStudentResponse": "",
+                        "fallbackHint": step["microPractice"],
+                        "performanceTag": "core",
+                        "svgAnimation": [],
                     }
                 )
+
+            if "explain" not in existing_cues:
+                append_beat(
+                    {
+                        "beatId": f"{step['stepId']}_EXPLAIN",
+                        "stepId": step["stepId"],
+                        "exerciseGroup": group,
+                        "subtopic": step["subtopic"],
+                        "cue": "explain",
+                        "boardMode": step["boardMode"],
+                        "teacherLine": step["teacherLine"],
+                        "boardAction": step["boardAction"],
+                        "checkpointPrompt": step["checkpointPrompt"],
+                        "pauseType": "none",
+                        "holdSec": 0.4,
+                        "expectedStudentResponse": "",
+                        "fallbackHint": step["microPractice"],
+                        "performanceTag": "core",
+                        "svgAnimation": [],
+                    }
+                )
+
+            for item in non_waiting_beats:
+                append_beat(item)
+
+            if "demo" not in existing_cues:
+                example = worked_examples[min(step_index, len(worked_examples) - 1)] if worked_examples else {}
+                demo_line = str(example.get("method", "")).strip() or f"Let me show one worked example for {step['subtopic']}."
+                append_beat(
+                    {
+                        "beatId": f"{step['stepId']}_DEMO",
+                        "stepId": step["stepId"],
+                        "exerciseGroup": group,
+                        "subtopic": step["subtopic"],
+                        "cue": "demo",
+                        "boardMode": step["boardMode"],
+                        "teacherLine": demo_line,
+                        "boardAction": step["boardAction"],
+                        "checkpointPrompt": step["checkpointPrompt"],
+                        "pauseType": "none",
+                        "holdSec": 0.6,
+                        "expectedStudentResponse": "",
+                        "fallbackHint": step["microPractice"],
+                        "performanceTag": "core",
+                        "svgAnimation": [],
+                    }
+                )
+
+            if waiting_beats:
+                guided_emitted = False
+                for item in waiting_beats:
+                    next_item = dict(item)
+                    cue = str(next_item.get("cue", "")).strip().lower()
+                    if not guided_emitted and cue in {"check", "checkpoint"}:
+                        next_item["cue"] = "guided"
+                        next_item["teacherLine"] = str(next_item.get("teacherLine", "")).strip() or "Let us try one together."
+                        guided_emitted = True
+                    append_beat(next_item)
+            else:
+                append_beat(
+                    {
+                        "beatId": f"{step['stepId']}_GUIDED",
+                        "stepId": step["stepId"],
+                        "exerciseGroup": group,
+                        "subtopic": step["subtopic"],
+                        "cue": "guided",
+                        "boardMode": step["boardMode"],
+                        "teacherLine": "Let us try one together before your first real question.",
+                        "boardAction": "Pause and let the learner answer with support.",
+                        "checkpointPrompt": step["checkpointPrompt"],
+                        "pauseType": "student_response",
+                        "holdSec": 0.3,
+                        "expectedStudentResponse": str(step["checkpointPrompt"]),
+                        "fallbackHint": step["microPractice"],
+                        "performanceTag": "core",
+                        "svgAnimation": [],
+                    }
+                )
+
+        return upgraded
+    def _normalize_question_pool(self, chapter_code: str, raw_pool: Any, chapter_data: Dict[str, Any] | None = None) -> List[Dict[str, Any]]:
+        authored_items: List[Dict[str, Any]] = []
+        if isinstance(raw_pool, list):
+            authored_items.extend(item for item in raw_pool if isinstance(item, dict))
+
+        duolingo_arc = chapter_data.get("duolingoLessonArc") if isinstance(chapter_data, dict) else None
+        if isinstance(duolingo_arc, dict):
+            session_flow = duolingo_arc.get("sessionFlow")
+            if isinstance(session_flow, list):
+                for step in session_flow:
+                    if not isinstance(step, dict):
+                        continue
+                    fallback_group = self.normalize_exercise_group(step.get("exerciseGroup"))
+                    fallback_subtopic = str(step.get("subtopic", "")).strip()
+                    exercises = step.get("exercises")
+                    if not isinstance(exercises, list):
+                        continue
+                    for exercise in exercises:
+                        if not isinstance(exercise, dict):
+                            continue
+                        merged = dict(exercise)
+                        merged.setdefault("exerciseGroup", fallback_group)
+                        merged.setdefault("subtopic", fallback_subtopic)
+                        authored_items.append(merged)
+
+        pool: List[Dict[str, Any]] = []
+        for item in authored_items:
+            text = str(item.get("questionText", "")).strip()
+            if not text:
+                continue
+            expected = str(item.get("expectedAnswer", "")).strip()
+            question_type = str(item.get("questionType", item.get("type", "text"))).strip().lower() or "text"
+            options = item.get("options") if isinstance(item.get("options"), list) else None
+            steps = item.get("steps") if isinstance(item.get("steps"), list) else None
+            correct_index = item.get("correctIndex")
+            try:
+                correct_index = int(correct_index) if correct_index is not None else None
+            except Exception:
+                correct_index = None
+            pool.append(
+                {
+                    "questionId": str(item.get("questionId") or uuid.uuid4()),
+                    "chapterCode": chapter_code,
+                    "exerciseGroup": self.normalize_exercise_group(item.get("exerciseGroup")),
+                    "skill": str(item.get("skill", self._title)),
+                    "difficulty": str(item.get("difficulty", "medium")).lower(),
+                    "type": str(item.get("type", "practice")),
+                    "questionType": question_type,
+                    "questionText": text,
+                    "hint": str(item.get("hint", "Use the core rule and compute step-by-step.")),
+                    "solution": str(item.get("solution", "Review concept and solve with one clear step.")),
+                    "expectedAnswer": expected,
+                    "acceptableAnswers": [str(opt) for opt in item.get("acceptableAnswers", []) if str(opt).strip()] if isinstance(item.get("acceptableAnswers"), list) else [],
+                    "subtopic": str(item.get("subtopic", "")),
+                    "visual": item.get("visual") if isinstance(item.get("visual"), dict) else None,
+                    "passage": item.get("passage") if isinstance(item.get("passage"), dict) else None,
+                    "starterCode": str(item.get("starterCode", "")) or None,
+                    "tests": item.get("tests") if isinstance(item.get("tests"), list) else [],
+                    "rubric": item.get("rubric") if isinstance(item.get("rubric"), dict) else None,
+                    "options": [str(opt) for opt in options] if options else None,
+                    "correctIndex": correct_index,
+                    "steps": steps,
+                }
+            )
         return pool
 
     def _normalize_asset_items(self, raw_items: Any) -> List[Dict[str, str]]:
@@ -429,10 +624,10 @@ class CourseTemplateRuleEngine:
     def _normalize(value: str) -> str:
         lowered = value.strip().lower()
         lowered = (
-            lowered.replace("âˆ’", "-")
-            .replace("â€”", "-")
-            .replace("Ã—", "x")
-            .replace("Ã·", "/")
+            lowered.replace("\u2212", "-")
+            .replace("\u2014", "-")
+            .replace("\u00d7", "x")
+            .replace("\u00f7", "/")
         )
         return "".join(ch for ch in lowered if ch.isalnum() or ch in "+-*/^|().")
 

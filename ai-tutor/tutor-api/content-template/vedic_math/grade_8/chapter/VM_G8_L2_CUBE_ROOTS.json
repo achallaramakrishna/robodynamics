@@ -57,9 +57,21 @@
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["CBSE board prep", "Mental speed", "Competitive exams"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "CBSE board prep",
+        "Mental speed",
+        "Competitive exams"
+      ],
       "coachIntro": "Hi! I am Arya. Today you will find cube roots of 6-digit numbers in your head — without any long calculations. The secret: a unique units digit map. This is board-exam magic!",
       "placementRule": "If the learner recites the units digit map in group A without errors, fast-track to group C."
     },
@@ -91,7 +103,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "cube units digit table", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "cube units digit table",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -120,11 +136,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A perfect cube ends in 2. The units digit of its cube root is:",
-            "options": ["2", "4", "8", "6"],
+            "options": [
+              "2",
+              "4",
+              "8",
+              "6"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "8",
             "hint": "Which single digit, when cubed, gives a number ending in 2?",
-            "solution": "8³=512, which ends in 2. So if a cube ends in 2, the root ends in 8."
+            "solution": "8³=512, which ends in 2. So if a cube ends in 2, the root ends in 8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group A for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_A2",
@@ -136,11 +163,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A perfect cube ends in 7. The units digit of its cube root is:",
-            "options": ["7", "3", "9", "1"],
+            "options": [
+              "7",
+              "3",
+              "9",
+              "1"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "3³=27. What does 27 end in?",
-            "solution": "3³=27, which ends in 7. So if a cube ends in 7, the root ends in 3."
+            "solution": "3³=27, which ends in 7. So if a cube ends in 7, the root ends in 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group A for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_A3",
@@ -152,13 +190,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which units digit is its own cube root units digit? (i.e., cube ends in n and root also ends in n)",
-            "options": ["2 and 8", "1, 4, 5, 6, 9, 0", "3 and 7", "All digits"],
+            "options": [
+              "2 and 8",
+              "1, 4, 5, 6, 9, 0",
+              "3 and 7",
+              "All digits"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "1, 4, 5, 6, 9, 0",
             "hint": "Check: 1³=1, 4³=64, 5³=125, 6³=216, 9³=729, 0³=0.",
-            "solution": "1,4,5,6,9,0 all map to themselves. Only 2↔8 and 3↔7 are swapped pairs."
+            "solution": "1,4,5,6,9,0 all map to themselves. Only 2↔8 and 3↔7 are swapped pairs.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group A for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group A for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -185,11 +240,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛54872 = ?",
-            "options": ["32", "38", "42", "48"],
+            "options": [
+              "32",
+              "38",
+              "42",
+              "48"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "38",
             "hint": "Units digit 2 → root ends 8. Remaining digits 54. Which two consecutive integer cubes bracket 54?",
-            "solution": "Units 2→root ends 8. Remaining 54: 3³=27≤54<64=4³. Tens 3. Answer: 38. Verify: 38³=54872."
+            "solution": "Units 2→root ends 8. Remaining 54: 3³=27≤54<64=4³. Tens 3. Answer: 38. Verify: 38³=54872.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group B for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_B2",
@@ -201,13 +267,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛19683 = ?",
-            "options": ["23", "27", "29", "33"],
+            "options": [
+              "23",
+              "27",
+              "29",
+              "33"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "27",
             "hint": "Units digit 3 → root ends 7. Remaining digits 19. Which n has n³≤19?",
-            "solution": "Units 3→root ends 7. Remaining 19: 2³=8≤19<27=3³. Tens 2. Answer: 27. Verify: 27³=19683."
+            "solution": "Units 3→root ends 7. Remaining 19: 2³=8≤19<27=3³. Tens 2. Answer: 27. Verify: 27³=19683.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group B for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group B for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -234,11 +317,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛74088 = ?",
-            "options": ["38", "42", "44", "48"],
+            "options": [
+              "38",
+              "42",
+              "44",
+              "48"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "42",
             "hint": "Units digit 8 → root ends 2. Remaining 74: find n where n³≤74<(n+1)³.",
-            "solution": "Units 8→root ends 2. 4³=64≤74<125=5³. Tens 4. Answer: 42. 42³=74088."
+            "solution": "Units 8→root ends 2. 4³=64≤74<125=5³. Tens 4. Answer: 42. 42³=74088.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group C for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_C2",
@@ -250,13 +344,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛148877 = ?",
-            "options": ["53", "57", "63", "67"],
+            "options": [
+              "53",
+              "57",
+              "63",
+              "67"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "53",
             "hint": "Units digit 7 → root ends 3. Remaining 148: find n where n³≤148.",
-            "solution": "Units 7→root ends 3. 5³=125≤148<216=6³. Tens 5. Answer: 53. 53³=148877."
+            "solution": "Units 7→root ends 3. 5³=125≤148<216=6³. Tens 5. Answer: 53. 53³=148877.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group C for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group C for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -283,11 +394,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛373248 = ?",
-            "options": ["62", "68", "72", "78"],
+            "options": [
+              "62",
+              "68",
+              "72",
+              "78"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "72",
             "hint": "Units digit 8 → root ends 2. Remaining 373: find n where n³≤373.",
-            "solution": "Units 8→root ends 2. 7³=343≤373<512=8³. Tens 7. Answer: 72. 72³=373248."
+            "solution": "Units 8→root ends 2. 7³=343≤373<512=8³. Tens 7. Answer: 72. 72³=373248.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group D for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_D2",
@@ -299,13 +421,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛970299 = ?",
-            "options": ["89", "93", "97", "99"],
+            "options": [
+              "89",
+              "93",
+              "97",
+              "99"
+            ],
             "correctIndex": 3,
             "expectedAnswer": "99",
             "hint": "Units digit 9 → root ends 9. Remaining 970: which n has n³≤970?",
-            "solution": "Units 9→root ends 9. 9³=729≤970<1000=10³. Tens 9. Answer: 99. 99³=970299."
+            "solution": "Units 9→root ends 9. 9³=729≤970<1000=10³. Tens 9. Answer: 99. 99³=970299.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group D for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group D for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -333,14 +472,36 @@
             "questionType": "fill_step",
             "questionText": "Find ∛17576 showing all steps.",
             "steps": [
-              {"label": "Units digit of 17576 is 6. Root ends in: ?", "answer": "6", "hint": "6³=216, ends in 6. Map: 6→6"},
-              {"label": "Drop last 3 digits. Remaining digits are: ?", "answer": "17", "hint": "17576 → drop 576 → 17"},
-              {"label": "Find n where n³≤17<(n+1)³. n = ?", "answer": "2", "hint": "2³=8≤17 and 3³=27>17"},
-              {"label": "Cube root = tens digit joined with units digit: ?", "answer": "26", "hint": "Tens=2, units=6 → 26. Verify: 26³=17576"}
+              {
+                "label": "Units digit of 17576 is 6. Root ends in: ?",
+                "answer": "6",
+                "hint": "6³=216, ends in 6. Map: 6→6"
+              },
+              {
+                "label": "Drop last 3 digits. Remaining digits are: ?",
+                "answer": "17",
+                "hint": "17576 → drop 576 → 17"
+              },
+              {
+                "label": "Find n where n³≤17<(n+1)³. n = ?",
+                "answer": "2",
+                "hint": "2³=8≤17 and 3³=27>17"
+              },
+              {
+                "label": "Cube root = tens digit joined with units digit: ?",
+                "answer": "26",
+                "hint": "Tens=2, units=6 → 26. Verify: 26³=17576"
+              }
             ],
             "expectedAnswer": "26",
             "hint": "Units map then bracket the remaining digits.",
-            "solution": "Units 6→root ends 6. Remaining 17: 2³=8≤17<27=3³. Tens 2. Answer: 26."
+            "solution": "Units 6→root ends 6. Remaining 17: 2³=8≤17<27=3³. Tens 2. Answer: 26.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group E for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_E2",
@@ -353,16 +514,44 @@
             "questionType": "fill_step",
             "questionText": "Find ∛195112 showing all steps.",
             "steps": [
-              {"label": "Units digit of 195112 is 2. Root ends in: ?", "answer": "8", "hint": "8³=512 ends in 2. Map: 2→8"},
-              {"label": "Drop last 3 digits. Remaining: ?", "answer": "195", "hint": "195112 → drop 112 → 195"},
-              {"label": "Find n where n³≤195<(n+1)³. n = ?", "answer": "5", "hint": "5³=125≤195 and 6³=216>195"},
-              {"label": "Cube root is: ?", "answer": "58", "hint": "Tens=5, units=8 → 58. Verify: 58³=195112"}
+              {
+                "label": "Units digit of 195112 is 2. Root ends in: ?",
+                "answer": "8",
+                "hint": "8³=512 ends in 2. Map: 2→8"
+              },
+              {
+                "label": "Drop last 3 digits. Remaining: ?",
+                "answer": "195",
+                "hint": "195112 → drop 112 → 195"
+              },
+              {
+                "label": "Find n where n³≤195<(n+1)³. n = ?",
+                "answer": "5",
+                "hint": "5³=125≤195 and 6³=216>195"
+              },
+              {
+                "label": "Cube root is: ?",
+                "answer": "58",
+                "hint": "Tens=5, units=8 → 58. Verify: 58³=195112"
+              }
             ],
             "expectedAnswer": "58",
             "hint": "Units map: 2→8. Bracket 195 between consecutive cubes.",
-            "solution": "Units 2→root ends 8. Remaining 195: 5³=125≤195<216=6³. Tens 5. Answer: 58."
+            "solution": "Units 2→root ends 8. Remaining 195: 5³=125≤195<216=6³. Tens 5. Answer: 58.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group E for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group E for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -389,11 +578,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛753571 = ?",
-            "options": ["87", "91", "93", "97"],
+            "options": [
+              "87",
+              "91",
+              "93",
+              "97"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "93",
             "hint": "Units digit 1 → root ends 1 or ... wait — cube map: 1→1. Remaining 753: find n where n³≤753.",
-            "solution": "Units 1→root ends 1. Remaining 753: 9³=729≤753<1000=10³. Tens 9. Answer: 91? Check: 91³=753571. Yes! Answer: 91."
+            "solution": "Units 1→root ends 1. Remaining 753: 9³=729≤753<1000=10³. Tens 9. Answer: 91? Check: 91³=753571. Yes! Answer: 91.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group F for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_F2",
@@ -414,9 +614,21 @@
             "correctIndex": 1,
             "expectedAnswer": "A cube with tens digit 8",
             "hint": "8³=512 exactly. What does that mean for the tens digit?",
-            "solution": "8³=512 exactly. So remaining digits 512 mean the tens digit of the cube root is exactly 8."
+            "solution": "8³=512 exactly. So remaining digits 512 mean the tens digit of the cube root is exactly 8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group F for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group F for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -443,11 +655,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛614125 = ?",
-            "options": ["75", "85", "87", "95"],
+            "options": [
+              "75",
+              "85",
+              "87",
+              "95"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "85",
             "hint": "Units digit 5 → root ends 5. Remaining 614: find n where n³≤614.",
-            "solution": "Units 5→root ends 5. 8³=512≤614<729=9³. Tens 8. Answer: 85. 85³=614125."
+            "solution": "Units 5→root ends 5. 8³=512≤614<729=9³. Tens 8. Answer: 85. 85³=614125.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group G for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_G2",
@@ -459,13 +682,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛531441 = ?",
-            "options": ["71", "73", "77", "81"],
+            "options": [
+              "71",
+              "73",
+              "77",
+              "81"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "77",
             "hint": "Units digit 1 → root ends 1. Remaining 531: find n where n³≤531.",
-            "solution": "Units 1→root ends 1. 8³=512≤531<729=9³. Tens 8. Hmm, check: 81³=531441. Answer: 81."
+            "solution": "Units 1→root ends 1. 8³=512≤531<729=9³. Tens 8. Hmm, check: 81³=531441. Answer: 81.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group G for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group G for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -492,11 +732,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "∛857375 = ?",
-            "options": ["93", "95", "97", "99"],
+            "options": [
+              "93",
+              "95",
+              "97",
+              "99"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "95",
             "hint": "Units digit 5 → root ends 5. Remaining 857: find n where n³≤857.",
-            "solution": "Units 5→root ends 5. 9³=729≤857<1000=10³. Tens 9. Answer: 95. 95³=857375."
+            "solution": "Units 5→root ends 5. 9³=729≤857<1000=10³. Tens 9. Answer: 95. 95³=857375.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group H for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_H2",
@@ -509,16 +760,44 @@
             "questionType": "fill_step",
             "questionText": "Find ∛830584 showing all steps.",
             "steps": [
-              {"label": "Units digit of 830584 is 4. Root ends in: ?", "answer": "4", "hint": "4³=64 ends in 4. Map: 4→4"},
-              {"label": "Drop last 3 digits of 830584. Remaining: ?", "answer": "830", "hint": "830584 → drop 584 → 830"},
-              {"label": "Find n where n³≤830<(n+1)³. n = ?", "answer": "9", "hint": "9³=729≤830 and 10³=1000>830"},
-              {"label": "Cube root is: ?", "answer": "94", "hint": "Tens=9, units=4 → 94. Verify: 94³=830584"}
+              {
+                "label": "Units digit of 830584 is 4. Root ends in: ?",
+                "answer": "4",
+                "hint": "4³=64 ends in 4. Map: 4→4"
+              },
+              {
+                "label": "Drop last 3 digits of 830584. Remaining: ?",
+                "answer": "830",
+                "hint": "830584 → drop 584 → 830"
+              },
+              {
+                "label": "Find n where n³≤830<(n+1)³. n = ?",
+                "answer": "9",
+                "hint": "9³=729≤830 and 10³=1000>830"
+              },
+              {
+                "label": "Cube root is: ?",
+                "answer": "94",
+                "hint": "Tens=9, units=4 → 94. Verify: 94³=830584"
+              }
             ],
             "expectedAnswer": "94",
             "hint": "Units 4→4. Bracket 830 between 9³ and 10³.",
-            "solution": "Units 4→root ends 4. Remaining 830: 9³=729≤830<1000. Tens 9. Answer: 94."
+            "solution": "Units 4→root ends 4. Remaining 830: 9³=729≤830<1000. Tens 9. Answer: 94.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group H for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group H for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -545,11 +824,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Solve both: √6241 = p and ∛17576 = q. What is p + q?",
-            "options": ["103", "105", "107", "109"],
+            "options": [
+              "103",
+              "105",
+              "107",
+              "109"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "103",
             "hint": "√6241: group 62|41, bound 62 → tens 7, units 1→ends 1 or 9. ∛17576: units 6→root ends 6, remaining 17→tens 2.",
-            "solution": "√6241=79 (79²=6241). ∛17576=26 (26³=17576). p+q=79+26=105. Wait: 79+26=105. Answer: 105."
+            "solution": "√6241=79 (79²=6241). ∛17576=26 (26³=17576). p+q=79+26=105. Wait: 79+26=105. Answer: 105.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group I for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           },
           {
             "questionId": "VM_G8_L2_I2",
@@ -570,9 +860,21 @@
             "correctIndex": 0,
             "expectedAnswer": "Correct — units 1 → root ends 1, and 71 ends in 1",
             "hint": "Check the units digit mapping for cubes ending in 1.",
-            "solution": "Map: cube ends 1 → root ends 1. 71 ends in 1 — consistent. Remaining 357: 7³=343≤357<512=8³ → tens 7. Answer 71 is correct."
+            "solution": "Map: cube ends 1 → root ends 1. 71 ends in 1 — consistent. Remaining 357: 7³=343≤357<512=8³ → tens 7. Answer 71 is correct.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+              "caption": "Group I for Cube Root by Magic — Vedic Units-Digit Inspection."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "caption": "Group I for Cube Root by Magic — Vedic Units-Digit Inspection."
+        }
       }
     ]
   },
@@ -585,7 +887,13 @@
       "teacherLine": "Cubes are unique: each units digit maps to exactly one root units digit. Memorise: 1→1, 2→8, 3→7, 4→4, 5→5, 6→6, 7→3, 8→2, 9→9, 0→0.",
       "boardAction": "Draw the mapping table. Derive each entry: 1³=1, 2³=8, 3³=27, 4³=64, 5³=125, 6³=216, 7³=343, 8³=512, 9³=729.",
       "checkpointPrompt": "A perfect cube ends in 2. What is the units digit of its cube root?",
-      "microPractice": "Quick fire: units digits of cube roots when cube ends in 8, 3, 6, 9."
+      "microPractice": "Quick fire: units digits of cube roots when cube ends in 8, 3, 6, 9.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_B",
@@ -595,7 +903,13 @@
       "teacherLine": "Two steps: units digit from the map, tens digit by bracketing the remaining digits. Two steps, one answer, no long division.",
       "boardAction": "Full demo: ∛17576 → units 6→root ends 6; remaining 17 → 2³≤17<3³ → tens 2. Answer: 26.",
       "checkpointPrompt": "∛9261 = ?",
-      "microPractice": "Practice: ∛13824 and ∛32768."
+      "microPractice": "Practice: ∛13824 and ∛32768.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_C",
@@ -605,7 +919,13 @@
       "teacherLine": "For 5-digit and 6-digit cubes, the remaining digits after stripping the last three are compared to consecutive integer cubes. One bounding check gives the tens digit.",
       "boardAction": "Show: remaining 74 → 4³=64≤74<125=5³ → tens 4. Remaining 373 → 7³=343≤373<512=8³ → tens 7.",
       "checkpointPrompt": "∛97336: remaining digits are 97. What is the tens digit?",
-      "microPractice": "Guided estimation for ∛103823."
+      "microPractice": "Guided estimation for ∛103823.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_D",
@@ -615,7 +935,13 @@
       "teacherLine": "MCQ cube roots are solved in two blinks: units map eliminates three of four options, bracketing confirms the tens digit.",
       "boardAction": "Demo: ∛373248 → units 8→ends 2 (eliminates 62, 68, 78). Remaining 373→7. Answer: 72.",
       "checkpointPrompt": "∛970299 = ?",
-      "microPractice": "Rapid MCQ: ∛357911, ∛531441."
+      "microPractice": "Rapid MCQ: ∛357911, ∛531441.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_E",
@@ -625,7 +951,13 @@
       "teacherLine": "Board exam written answer: four numbered steps, verification included. This earns full step marks.",
       "boardAction": "Show four-step template for ∛54872. Number each step, box the final answer.",
       "checkpointPrompt": "Complete all steps for ∛195112.",
-      "microPractice": "Guided write-out for ∛250047."
+      "microPractice": "Guided write-out for ∛250047.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_F",
@@ -635,7 +967,13 @@
       "teacherLine": "One bounding check replaces all trial and error. Know your cubes 1³ to 10³ and the bracketing is instant.",
       "boardAction": "Cubes reference: 1,8,27,64,125,216,343,512,729,1000. Show bounding examples.",
       "checkpointPrompt": "Remaining digits are 340. What is the tens digit?",
-      "microPractice": "Bounding practice for remaining digits 27, 64, 125, 216, 343."
+      "microPractice": "Bounding practice for remaining digits 27, 64, 125, 216, 343.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_G",
@@ -645,7 +983,13 @@
       "teacherLine": "Competition speed! Units map in one blink, bracket in one check. Timer running. Go!",
       "boardAction": "Flash three problems: ∛438976, ∛614125, ∛884736. Show answers after 10 seconds each.",
       "checkpointPrompt": "∛531441 = ?",
-      "microPractice": "Speed trio: ∛438976, ∛531441, ∛658503."
+      "microPractice": "Speed trio: ∛438976, ∛531441, ∛658503.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_H",
@@ -655,7 +999,13 @@
       "teacherLine": "6-digit cubes — board Section D level. Same two-step method. No shortcuts taken, no marks lost.",
       "boardAction": "Full demo: ∛970299. Show all steps. Box answer 99.",
       "checkpointPrompt": "∛830584 = ?",
-      "microPractice": "Challenge: ∛857375 and ∛830584."
+      "microPractice": "Challenge: ∛857375 and ∛830584.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "stepId": "VM_G8_L2_I",
@@ -665,7 +1015,13 @@
       "teacherLine": "Mixed questions in board papers require you to switch methods fluidly. Square roots: units digit gives two options; cube roots: units digit gives exactly one option.",
       "boardAction": "Side-by-side comparison: square root inspection vs cube root inspection. Highlight the key difference.",
       "checkpointPrompt": "√7921 and ∛9261 — solve both.",
-      "microPractice": "Create one perfect square and one perfect cube problem for a classmate."
+      "microPractice": "Create one perfect square and one perfect cube problem for a classmate.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Teaching step for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     }
   ],
   "screenplay": [
@@ -688,7 +1044,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_A_EXPLAIN",
@@ -702,14 +1064,20 @@
       "boardAction": "Circle the swapped pairs: 2↔8 and 3↔7. Show that 1,4,5,6,9,0 all map to themselves.",
       "checkpointPrompt": "A perfect cube ends in 7. What is the units digit of its root?",
       "pauseType": "student_input",
-      "holdSec": 4.0,
+      "holdSec": 4,
       "expectedStudentResponse": "3",
       "fallbackHint": "7 is part of the swapped pair 3↔7. So the root ends in 3.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_A_PRACTICE",
@@ -723,14 +1091,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_A1.",
       "checkpointPrompt": "A perfect cube ends in 2. Root ends in?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "8",
       "fallbackHint": "2 and 8 are a swapped pair. 8³=512 ends in 2.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_B_INTRO",
@@ -751,7 +1125,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_B_EXPLAIN",
@@ -765,14 +1145,20 @@
       "boardAction": "Show complete working for ∛54872. Annotate each step with labels.",
       "checkpointPrompt": "∛9261 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "21",
       "fallbackHint": "Units 1→root ends 1. Remaining 9: 2³=8≤9<27. Tens 2. Answer: 21.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_B_PRACTICE",
@@ -786,14 +1172,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_B1.",
       "checkpointPrompt": "∛54872 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "38",
       "fallbackHint": "Units 2→8. Remaining 54→3³≤54<4³. Tens 3. Answer: 38.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_C_INTRO",
@@ -814,7 +1206,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_C_EXPLAIN",
@@ -828,14 +1226,20 @@
       "boardAction": "Show full working for ∛74088 with cubes reference alongside.",
       "checkpointPrompt": "∛148877: remaining digits after stripping last 3 are 148. What is the tens digit?",
       "pauseType": "student_input",
-      "holdSec": 6.0,
+      "holdSec": 6,
       "expectedStudentResponse": "5",
       "fallbackHint": "5³=125≤148 and 6³=216>148. Tens digit 5.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_C_PRACTICE",
@@ -849,14 +1253,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_C1.",
       "checkpointPrompt": "∛74088 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "42",
       "fallbackHint": "Units 8→2. Remaining 74: 4³≤74<5³. Tens 4. Answer: 42.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_D_INTRO",
@@ -877,7 +1287,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_D_EXPLAIN",
@@ -891,14 +1307,20 @@
       "boardAction": "Show MCQ elimination for ∛970299. Cross out incorrect options one by one.",
       "checkpointPrompt": "∛373248 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "72",
       "fallbackHint": "Units 8→root ends 2. Remaining 373→7³=343≤373<8³. Tens 7. Answer: 72.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_D_PRACTICE",
@@ -912,14 +1334,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_D1.",
       "checkpointPrompt": "∛373248 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "72",
       "fallbackHint": "Units 8→ends 2. Remaining 373→7³≤373<8³. Answer: 72.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_E_INTRO",
@@ -940,7 +1368,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_E_EXPLAIN",
@@ -954,14 +1388,20 @@
       "boardAction": "Write all four steps for ∛54872 numbered on board. Box the final answer.",
       "checkpointPrompt": "Complete all steps for ∛17576.",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "26",
       "fallbackHint": "Units 6→6. Strip last 3 → 17. 2³=8≤17<27=3³. Tens 2. Answer: 26.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_E_PRACTICE",
@@ -975,14 +1415,20 @@
       "boardAction": "Show fill_step card VM_G8_L2_E1.",
       "checkpointPrompt": "Complete all steps.",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "26",
       "fallbackHint": "Step 1: units map. Step 2: strip last 3. Step 3: bracket. Step 4: write answer.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_F_INTRO",
@@ -1003,7 +1449,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_F_EXPLAIN",
@@ -1017,14 +1469,20 @@
       "boardAction": "Show the bracketing process for remaining values 91 and 512 against the cubes chart.",
       "checkpointPrompt": "Remaining digits are 340. What is the tens digit?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "7",
       "fallbackHint": "7³=343. But 343>340. So 6³=216≤340<343=7³. Tens digit is 7? Check: 7³=343>340. So 6³=216≤340<343. Tens=7 means we need 7³≤340 which is false. Try 6: 6³=216≤340 and 7³=343>340. Tens=6. Wait, no: 7³=343>340 so tens=6.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_F_PRACTICE",
@@ -1038,14 +1496,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_F1.",
       "checkpointPrompt": "∛753571 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "91",
       "fallbackHint": "Units 1→1. Remaining 753: 9³=729≤753<1000. Tens 9. Answer: 91.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_G_INTRO",
@@ -1066,7 +1530,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_G_EXPLAIN",
@@ -1080,14 +1550,20 @@
       "boardAction": "Show rapid solve for ∛614125. Annotate timing in margin.",
       "checkpointPrompt": "∛884736 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "96",
       "fallbackHint": "Units 6→6. Remaining 884: 9³=729≤884<1000. Tens 9. Answer: 96.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_G_PRACTICE",
@@ -1101,14 +1577,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_G1.",
       "checkpointPrompt": "∛614125 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "85",
       "fallbackHint": "Units 5→5. Remaining 614→8³≤614<9³. Tens 8. Answer: 85.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_H_INTRO",
@@ -1129,7 +1611,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_H_EXPLAIN",
@@ -1143,14 +1631,20 @@
       "boardAction": "Write complete solution for ∛970299. Box the answer. Write 'Board exam full marks' note.",
       "checkpointPrompt": "∛857375 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "95",
       "fallbackHint": "Units 5→5. Remaining 857: 9³=729≤857<1000. Tens 9. Answer: 95.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_H_PRACTICE",
@@ -1164,14 +1658,20 @@
       "boardAction": "Show MCQ card VM_G8_L2_H1.",
       "checkpointPrompt": "∛857375 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "95",
       "fallbackHint": "Units 5→5. Remaining 857→9³≤857<10³. Tens 9. Answer: 95.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_I_INTRO",
@@ -1192,7 +1692,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_I_EXPLAIN",
@@ -1206,14 +1712,20 @@
       "boardAction": "Show both solutions side by side. Annotate method differences.",
       "checkpointPrompt": "√7921 = ? and ∛9261 = ?",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "89 and 21",
       "fallbackHint": "√7921: 79|21, tens 8, units 1→ends 1 or 9, 89²=7921=89. ∛9261: units 1→1, remaining 9→2³≤9<3³, tens 2. Answer: 21.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
     },
     {
       "beatId": "VM_G8_L2_I_PRACTICE",
@@ -1227,14 +1739,31 @@
       "boardAction": "Show MCQ card VM_G8_L2_I1.",
       "checkpointPrompt": "√6241 + ∛17576 = ?",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "105",
       "fallbackHint": "√6241=79. ∛17576=26. Sum=105.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+        "caption": "Screenplay beat for Cube Root by Magic — Vedic Units-Digit Inspection."
+      }
+    }
+  ],
+  "chapterCode": "VM_G8_L2_CUBE_ROOTS",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "square_root_inspection",
+      "kind": "svg",
+      "asset": "square_root_inspection.svg",
+      "title": "Lesson 2: Cube Root by Magic — Vedic Units-Digit Inspection",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

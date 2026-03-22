@@ -1,0 +1,537 @@
+{
+  "chapterCode": "AR_G5_L2_LETTER_CODING",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Letter Coding Basics",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 2: Letter Coding Basics",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Letter-to-number coding (A=1, B=2 … Z=26)",
+    "Shift-based coding — forward shift (e.g. A→D means +3)",
+    "Reverse coding — mirror code (A=Z, B=Y, C=X …)",
+    "Word coding — apply the same rule to every letter of a word"
+  ],
+  "learningGoals": [
+    "Convert any letter to its alphabet position (A=1 through Z=26) without counting on fingers.",
+    "Decode and encode words using a forward or backward shift.",
+    "Apply reverse coding (A↔Z mirror) to letters and short words.",
+    "Identify the coding rule from a given example and apply it to a new word."
+  ],
+  "coreIdeas": [
+    "The alphabet is a number line: A=1, B=2 … Z=26. Memorise positions for A, E, I, M, O, S, Z as anchors.",
+    "Shift coding: find the gap between a given letter and its code letter, then apply the same shift to all letters.",
+    "Reverse coding: A+Z=27, B+Y=27 — any letter and its reverse-code letter always add to 27.",
+    "Decode = reverse the rule. If encoding is +3, decoding is -3."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "If A=1, B=2 … Z=26, what number does the word CAT represent (sum of letter values)?",
+      "solution": "C=3, A=1, T=20. Sum = 3+1+20 = 24.",
+      "concept": "Letter-to-number coding — convert each letter to its position and operate"
+    },
+    {
+      "id": "WE2",
+      "problem": "In a code, A is written as D, B as E, C as F. Using this code, how is the word DOG written?",
+      "solution": "The shift is +3 (A→D means move forward 3 letters). D+3=G, O+3=R, G+3=J. DOG is coded as GRJ.",
+      "concept": "Shift-based forward coding — add the same shift to every letter"
+    },
+    {
+      "id": "WE3",
+      "problem": "In a reverse code, A is written as Z, B as Y, C as X. What is the code for CAT?",
+      "solution": "C (position 3) → reverse = position 26-3+1 = 24 = X. A (1) → Z. T (20) → G (26-20+1=7). CAT = XZG.",
+      "concept": "Reverse coding — each letter maps to its mirror: position p maps to position 27-p"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark greets the learner and explains they will become a secret-code decoder today. The first question is a simple A=1 lookup to warm up.",
+      "placementRule": "Start at Group A. If two consecutive errors in Groups A–B, slow down and drill the alphabet-position table with a fill-in exercise before continuing."
+    },
+    "mission": {
+      "missionTitle": "Break the Letter Code",
+      "missionPromise": "By the end you will decode secret messages in seconds — just like a spy handling top-secret data!",
+      "successCelebration": "Show a 'Code Cracked!' badge pulse after each group. At lesson end, award the 'Master Decoder' trophy."
+    },
+    "microLessonPattern": [
+      "Coach reveals the type of code for the group with a fun spy-themed hook.",
+      "Coach works one full encoding and one full decoding example on the board.",
+      "Coach reads the practice question aloud.",
+      "Student attempts the answer.",
+      "Instant feedback celebrates or gives a targeted hint.",
+      "Review prompt confirms mastery before the next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per exercise group, increasing through the lesson.",
+      "streakRule": "Show streak flame; allow one free retry before streak resets.",
+      "badgeRule": "Each group unlocks a spy-themed badge (Letter Agent, Shift Spy, Mirror Master, Word Decoder).",
+      "celebrationStyle": "Coach praise + XP burst + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts trigger a mini-reteach showing the alphabet-number table and re-working the example.",
+      "practiceStyle": "Offer a simpler two-letter word before returning to four-letter words.",
+      "masteryRule": "Advance after correct answer plus a completed tryPrompt.",
+      "revisitRule": "Any group with two errors appears as a review card next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L2_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Welcome, future spy! Letter Coding is one of the most fun topics in reasoning. Secret agents use codes to send messages — and in today's lesson, you will learn to crack four types of letter codes! Type 1 — number coding: A=1, B=2 up to Z=26. Type 2 — shift coding: every letter moves forward or backward by the same amount. Type 3 — reverse coding: A becomes Z, B becomes Y — the alphabet flips! Type 4 — word coding: apply one of those rules to a whole word. Let us begin!",
+        "boardAction": "Write 'Letter Coding — 4 Types'. Below, write: (1) A=1 … Z=26, (2) Shift — A→D means +3, (3) Reverse — A↔Z, B↔Y, (4) Word — apply rule to every letter.",
+        "checkpointPrompt": "Quick check: If A=1 and Z=26, what is the position of the letter M?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "13",
+        "fallbackHint": "Count from A: A=1, B=2 … M is the 13th letter. You can also remember: the alphabet has 26 letters, M is right in the middle area — position 13.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "lc_title",
+            "x": "40",
+            "y": "30",
+            "text": "Letter Coding — 4 Types",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "lc_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "500",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "lc_t1",
+            "x": "60",
+            "y": "74",
+            "text": "1. Number code: A=1, B=2, … Z=26",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "lc_t2",
+            "x": "60",
+            "y": "96",
+            "text": "2. Shift code: every letter moves +n or -n",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "lc_t3",
+            "x": "60",
+            "y": "118",
+            "text": "3. Reverse code: A↔Z, B↔Y (position + code = 27)",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "lc_t4",
+            "x": "60",
+            "y": "140",
+            "text": "4. Word code: apply same rule to every letter",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "alphabet_grid.svg",
+          "title": "Letter Coding Basics",
+          "caption": "Screenplay beat for Letter Coding Basics."
+        }
+      },
+      {
+        "beatId": "AR_G5_L2_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me show you shift coding step by step. Suppose A is coded as C — that means the shift is +2. To encode DOG: D+2=F, O+2=Q, G+2=I. So DOG becomes FQI. To decode FQI back: F-2=D, Q-2=O, I-2=G. Same shift, opposite direction. The golden rule: find the shift first, then apply it to every letter!",
+        "boardAction": "Write 'A→C means shift +2'. Show DOG: D→F, O→Q, G→I → FQI. Draw decoding arrows: FQI → DOG (subtract 2 from each).",
+        "checkpointPrompt": "If the shift is +4 and the original letter is B, what is the coded letter?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "F — B is position 2, 2+4=6, 6th letter is F.",
+        "fallbackHint": "B is the 2nd letter. Add 4: position 2+4=6. Count to the 6th letter: A,B,C,D,E,F. So the code is F.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_shift_rule",
+            "x": "50",
+            "y": "45",
+            "text": "A → C means shift = +2",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_encode",
+            "x": "50",
+            "y": "75",
+            "text": "D+2=F   O+2=Q   G+2=I   →   DOG = FQI",
+            "color": "#1e40af",
+            "size": 12,
+            "delaySec": 0.6,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "demo_div",
+            "x1": "50",
+            "y1": "95",
+            "x2": "480",
+            "y2": "95",
+            "color": "#d1d5db",
+            "width": 1,
+            "delaySec": 1.2,
+            "durationSec": 0.2
+          },
+          {
+            "kind": "text",
+            "id": "demo_decode",
+            "x": "50",
+            "y": "118",
+            "text": "Decode: F-2=D  Q-2=O  I-2=G  →  FQI = DOG",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 1.5,
+            "durationSec": 0.5
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "alphabet_grid.svg",
+          "title": "Letter Coding Basics",
+          "caption": "Screenplay beat for Letter Coding Basics."
+        }
+      },
+      {
+        "beatId": "AR_G5_L2_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Great work! Here is your decoder toolkit: step 1 — find the shift by comparing a given letter to its code (or check if it is a number code or reverse code). Step 2 — apply the same rule to every letter in the word. Step 3 — to decode, reverse the rule. Work through Groups A to F and remember: spies stay calm under pressure!",
+        "boardAction": "Show a mini toolkit: (1) Find shift: code_letter − original_letter = n. (2) Encode: original + n. (3) Decode: code − n. (4) Reverse: code position = 27 − original position.",
+        "checkpointPrompt": "Before the groups — in reverse coding, what does A become?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Z",
+        "fallbackHint": "In reverse coding, A=1 and Z=26. Their positions add to 27. So A maps to 27-1=26th letter = Z.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Decoder Toolkit",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_s1",
+            "x": "60",
+            "y": "58",
+            "text": "1. Shift = code letter position − original position",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s2",
+            "x": "60",
+            "y": "78",
+            "text": "2. Encode: original position + shift",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s3",
+            "x": "60",
+            "y": "98",
+            "text": "3. Decode: code position − shift",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s4",
+            "x": "60",
+            "y": "118",
+            "text": "4. Reverse code: original + code = 27",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "alphabet_grid.svg",
+          "title": "Letter Coding Basics",
+          "caption": "Screenplay beat for Letter Coding Basics."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Letter-to-number coding (A=1 … Z=26)",
+      "missionStepTitle": "Exercise A: Letter-to-Number Code",
+      "coachHook": "Let's crack this code! The alphabet is a number line — A=1, B=2, all the way to Z=26. Let's practise until this feels automatic!",
+      "boardDemo": {
+        "title": "A=1 … Z=26 — Position Look-up",
+        "steps": [
+          "Anchor letters to memorise: A=1, E=5, J=10, M=13, S=19, Z=26",
+          "Find position of H: count from A — H is the 8th letter → 8",
+          "Find letter for position 14: count up — N is the 14th letter",
+          "Sum of CAT: C=3, A=1, T=20 → 3+1+20 = 24"
+        ],
+        "teacherLine": "Memorise these anchors and you will never be stuck: A=1, E=5, J=10, M=13, S=19, Z=26. Count from the nearest anchor to reach any letter quickly!"
+      },
+      "readAloudPrompt": "What is the position of the letter P in the alphabet?",
+      "tryPrompt": "If A=1 and Z=26, what is the sum of letter values in the word SUN?",
+      "masteryCheck": "54",
+      "instantFeedbackWin": "Brilliant! S=19, U=21, N=14. Sum = 19+21+14 = 54. Your alphabet-to-number conversion is spot on!",
+      "instantFeedbackRetry": "Here's a trick: S is the 19th letter, U is the 21st (after T=20), N is the 14th. Add them: 19+21+14=54.",
+      "reviewPrompt": "Quick check: what is the sum of letter values in the word DOG?",
+      "xpReward": 10,
+      "badgeFocus": "Letter Agent",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Letter Coding Basics",
+        "caption": "Group A for Letter Coding Basics."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Shift-based coding — forward shift",
+      "missionStepTitle": "Exercise B: Forward Shift Coding",
+      "coachHook": "Let's crack this code! In shift coding every letter jumps forward by the same number of steps — like soldiers marching in the alphabet!",
+      "boardDemo": {
+        "title": "Shift Coding — Move Forward +n",
+        "steps": [
+          "Rule example: A is coded as D → shift = D-A = 4-1 = +3",
+          "Apply shift +3 to every letter of CAT",
+          "C(3)+3=6=F, A(1)+3=4=D, T(20)+3=23=W",
+          "CAT is coded as FDW"
+        ],
+        "teacherLine": "Find the shift from the example pair, then add it to every letter's position. Convert the new position back to a letter — that is your code!"
+      },
+      "readAloudPrompt": "If A=B (shift +1), how is the letter G coded?",
+      "tryPrompt": "Shift is +2. Encode the word PEN!",
+      "masteryCheck": "RGP",
+      "instantFeedbackWin": "Yes! P(16)+2=18=R, E(5)+2=7=G, N(14)+2=16=P. PEN becomes RGP. Perfect encoding!",
+      "instantFeedbackRetry": "Here's a trick: P is position 16, add 2 → 18 → R. E is position 5, add 2 → 7 → G. N is 14, add 2 → 16 → P. So PEN = RGP.",
+      "reviewPrompt": "If the code for A is E (shift +4), what is the code for the word CAR?",
+      "xpReward": 12,
+      "badgeFocus": "Shift Spy",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Letter Coding Basics",
+        "caption": "Group B for Letter Coding Basics."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Shift-based coding — decoding",
+      "missionStepTitle": "Exercise C: Decoding Shift Messages",
+      "coachHook": "Let's crack this code! You just encoded — now flip it! Decoding means subtracting the shift. A real spy must do both directions!",
+      "boardDemo": {
+        "title": "Decoding — Reverse the Shift",
+        "steps": [
+          "Coded message: GRJ. Clue: A is coded as D (shift = +3).",
+          "Decode G: G=7, 7-3=4=D",
+          "Decode R: R=18, 18-3=15=O",
+          "Decode J: J=10, 10-3=7=G",
+          "GRJ decodes to DOG"
+        ],
+        "teacherLine": "Encoding adds the shift, decoding subtracts it. Always identify the shift from the clue first, then reverse it on every letter of the coded word."
+      },
+      "readAloudPrompt": "Coded word: FCB. Shift is +3. What is the original word?",
+      "tryPrompt": "Coded word: KPI. The shift is +2. Decode the word!",
+      "masteryCheck": "ING",
+      "instantFeedbackWin": "Excellent! K(11)-2=9=I, P(16)-2=14=N, I(9)-2=7=G. KPI = ING. Decoding mastered!",
+      "instantFeedbackRetry": "Here's a trick: subtract 2 from each letter's position. K=11 → 9=I. P=16 → 14=N. I=9 → 7=G. Put them together: ING.",
+      "reviewPrompt": "Coded word: FMTKX. Shift is +5. Decode the word.",
+      "xpReward": 14,
+      "badgeFocus": "Decoder Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Letter Coding Basics",
+        "caption": "Group C for Letter Coding Basics."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Reverse coding — A=Z mirror",
+      "missionStepTitle": "Exercise D: Reverse Mirror Code",
+      "coachHook": "Let's crack this code! In the mirror code the alphabet flips — A becomes Z, B becomes Y, C becomes X. It is like looking in a mirror!",
+      "boardDemo": {
+        "title": "Reverse Code — Mirror the Alphabet",
+        "steps": [
+          "Rule: position of original + position of code = 27",
+          "A(1) ↔ Z(26): 1+26=27 ✓",
+          "B(2) ↔ Y(25): 2+25=27 ✓",
+          "Encode CAT: C(3)→X(24), A(1)→Z(26), T(20)→G(7)",
+          "CAT = XZG"
+        ],
+        "teacherLine": "The magic number is 27. Take a letter's position, subtract from 27, and you get the code position. A+Z=27, B+Y=27 — always 27!"
+      },
+      "readAloudPrompt": "In reverse coding, what does the letter M become? (Hint: M=13, what is 27-13?)",
+      "tryPrompt": "Use reverse coding to encode the word SUN!",
+      "masteryCheck": "HFM",
+      "instantFeedbackWin": "Perfect! S(19)→H(8): 27-19=8. U(21)→F(6): 27-21=6. N(14)→M(13): 27-14=13. SUN = HFM. Mirror-code master!",
+      "instantFeedbackRetry": "Here's a trick: for each letter, do 27 minus its position to get the code position. S=19, 27-19=8=H. U=21, 27-21=6=F. N=14, 27-14=13=M.",
+      "reviewPrompt": "Quick check: use reverse coding to encode the word KEY.",
+      "xpReward": 16,
+      "badgeFocus": "Mirror Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Letter Coding Basics",
+        "caption": "Group D for Letter Coding Basics."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Word coding — find the rule from an example pair",
+      "missionStepTitle": "Exercise E: Word Coding",
+      "coachHook": "Let's crack this code! In word coding problems you are given one example pair — one word and its code — and you must figure out the rule, then apply it to a new word!",
+      "boardDemo": {
+        "title": "Word Coding — Find the Rule First",
+        "steps": [
+          "Given: COLD is coded as FROG (each letter shifted differently?)",
+          "Compare letter by letter: C→F (+3), O→R (+3), L→O (+3), D→G (+3)",
+          "Rule: every letter shifts +3",
+          "Apply to WARM: W+3=Z, A+3=D, R+3=U, M+3=P → WARM = ZDVP",
+          "Wait — W+3=Z, A+3=D, R+3=U, M+3=P → ZDUP"
+        ],
+        "teacherLine": "Always compare the given word and its code letter by letter. Once you find the shift (or reverse rule), apply it uniformly to the new word. Check your work by re-encoding the example."
+      },
+      "readAloudPrompt": "FISH is coded as ILWK. What is the shift? (Compare F to I, I to L...)",
+      "tryPrompt": "Using the same shift (+3), encode the word BIRD!",
+      "masteryCheck": "ELUG",
+      "instantFeedbackWin": "Spot on! B(2)+3=5=E, I(9)+3=12=L, R(18)+3=21=U, D(4)+3=7=G. BIRD = ELUG. You found the rule and applied it perfectly!",
+      "instantFeedbackRetry": "Here's a trick: the shift is +3. B=2, add 3=5=E. I=9, add 3=12=L. R=18, add 3=21=U. D=4, add 3=7=G. So BIRD becomes ELUG.",
+      "reviewPrompt": "If APPLE is coded as DSSOH (shift +3), what is the code for MANGO?",
+      "xpReward": 18,
+      "badgeFocus": "Word Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Letter Coding Basics",
+        "caption": "Group E for Letter Coding Basics."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Mixed letter coding — speed round",
+      "missionStepTitle": "Exercise F: Speed Round — Mixed Coding",
+      "coachHook": "Let's crack this code — fast! Three questions, three different code types. Identify the type, apply the rule, answer quickly!",
+      "boardDemo": {
+        "title": "Speed Round — All Code Types",
+        "steps": [
+          "Number code: find each letter's position, sum or compare",
+          "Shift code: find shift from given pair, apply to new word",
+          "Reverse code: code position = 27 − original position",
+          "Word code: compare example pair → find shift → encode new word"
+        ],
+        "teacherLine": "State the code type before your answer — that shows you understood the rule, not just guessed. Type identification earns half the XP even with a calculation error!"
+      },
+      "readAloudPrompt": "Ready for the speed round? Name the type and give the answer for each!",
+      "tryPrompt": "Q1: A=1…Z=26 — what is the value of the word CAT? | Q2: Shift +5, encode the word HI. | Q3: Reverse code — encode the letter R.",
+      "masteryCheck": "24 | MN | I",
+      "instantFeedbackWin": "AMAZING! Q1: C=3,A=1,T=20 → 24 (number code). Q2: H(8)+5=13=M, I(9)+5=14=N → MN (shift code). Q3: R=18, 27-18=9=I → I (reverse code). Full marks!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — C=3,A=1,T=20, sum=24. Q2 — H=8, +5=13=M; I=9, +5=14=N → MN. Q3 — R=18, 27−18=9=I.",
+      "reviewPrompt": "Final challenge: PENCIL is coded as SHQFLO (each letter +3). Decode the word VKLOW.",
+      "xpReward": 20,
+      "badgeFocus": "Master Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "alphabet_grid.svg",
+        "title": "Letter Coding Basics",
+        "caption": "Group F for Letter Coding Basics."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "alphabet_grid",
+      "kind": "svg",
+      "asset": "alphabet_grid.svg",
+      "title": "Letter Coding Basics",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

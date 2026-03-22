@@ -55,16 +55,36 @@
     "version": "2026-03-mindspark-g5-v1",
     "onboarding": {
       "avatarGreeting": "Decimals don't scare us! Today you'll multiply and divide decimals at lightning speed — all in your head!",
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "estimatedTime": "20 minutes",
       "xpTarget": 105
     },
     "mission": "Master decimal multiplication — shift the point, count the places, and calculate decimals faster than a calculator!",
     "microLessonPattern": "HOOK → DEMO → TRY → FEEDBACK → NEXT",
     "rewardLoop": {
-      "xpPerGroup": [10, 10, 10, 12, 12, 12, 15, 15, 15],
+      "xpPerGroup": [
+        10,
+        10,
+        10,
+        12,
+        12,
+        12,
+        15,
+        15,
+        15
+      ],
       "streakBonus": "3 correct in a row = +5 XP flame bonus",
-      "badges": ["Point Shifter", "Decimal Multiplier", "Place Counter", "Word Problem Solver", "Decimal Lightning"]
+      "badges": [
+        "Point Shifter",
+        "Decimal Multiplier",
+        "Place Counter",
+        "Word Problem Solver",
+        "Decimal Lightning"
+      ]
     },
     "reviewLoop": {
       "triggerAfterMistakes": 2,
@@ -106,9 +126,10 @@
             "hint": "Shift the decimal point one place to the right.",
             "solution": "2.7 × 10 = 27. The decimal shifts right by 1 place: 2.7 → 27.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_decimal_shift",
-              "caption": "Decimal point shifting right when multiplying by 10"
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group A for Decimal Lightning — Multiply and Divide Decimals Mentally."
             }
           },
           {
@@ -121,11 +142,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 4.56 × 100?",
-            "options": ["4.5600", "45.6", "456", "0.456"],
+            "options": [
+              "4.5600",
+              "45.6",
+              "456",
+              "0.456"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "456",
             "hint": "Shift the decimal point two places to the right (100 has 2 zeros).",
-            "solution": "4.56 × 100: shift right by 2 places. 4.56 → 45.6 → 456."
+            "solution": "4.56 × 100: shift right by 2 places. 4.56 → 45.6 → 456.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group A for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_A_003",
@@ -139,9 +171,21 @@
             "questionText": "What is 1.234 × 1000?",
             "expectedAnswer": "1234",
             "hint": "Shift the decimal point three places to the right.",
-            "solution": "1.234 × 1000: shift right by 3 places. 1.234 → 1234."
+            "solution": "1.234 × 1000: shift right by 3 places. 1.234 → 1234.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group A for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group A for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -172,9 +216,10 @@
             "hint": "Shift the decimal point one place to the left.",
             "solution": "56.7 ÷ 10: shift left by 1. 56.7 → 5.67.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_decimal_shift",
-              "caption": "Decimal point shifting left when dividing by 10"
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group B for Decimal Lightning — Multiply and Divide Decimals Mentally."
             }
           },
           {
@@ -187,11 +232,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 350 ÷ 1000?",
-            "options": ["35", "3.5", "0.35", "0.035"],
+            "options": [
+              "35",
+              "3.5",
+              "0.35",
+              "0.035"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "0.35",
             "hint": "Shift the decimal point three places to the left.",
-            "solution": "350 ÷ 1000: shift left by 3. 350. → 0.350 = 0.35."
+            "solution": "350 ÷ 1000: shift left by 3. 350. → 0.350 = 0.35.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group B for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_B_003",
@@ -205,9 +261,21 @@
             "questionText": "What is 4.8 ÷ 100?",
             "expectedAnswer": "0.048",
             "hint": "Shift the decimal point two places to the left.",
-            "solution": "4.8 ÷ 100: shift left by 2. 4.8 → 0.48 → 0.048."
+            "solution": "4.8 ÷ 100: shift left by 2. 4.8 → 0.48 → 0.048.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group B for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group B for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -236,7 +304,13 @@
             "questionText": "What is 3.5 × 6?",
             "expectedAnswer": "21",
             "hint": "Treat as 35 × 6 = 210. 3.5 has 1 decimal place, so answer = 21.0 = 21.",
-            "solution": "Ignore decimal: 35 × 6 = 210. One decimal place in 3.5 → 21.0 = 21."
+            "solution": "Ignore decimal: 35 × 6 = 210. One decimal place in 3.5 → 21.0 = 21.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group C for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_C_002",
@@ -248,11 +322,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 1.4 × 5?",
-            "options": ["0.7", "7", "70", "0.07"],
+            "options": [
+              "0.7",
+              "7",
+              "70",
+              "0.07"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "7",
             "hint": "14 × 5 = 70. One decimal place → 7.0 = 7.",
-            "solution": "Ignore decimal: 14 × 5 = 70. One decimal place in 1.4 → 7.0 = 7."
+            "solution": "Ignore decimal: 14 × 5 = 70. One decimal place in 1.4 → 7.0 = 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group C for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_C_003",
@@ -266,9 +351,21 @@
             "questionText": "What is 2.5 × 4?",
             "expectedAnswer": "10",
             "hint": "25 × 4 = 100. One decimal place → 10.0 = 10.",
-            "solution": "Ignore decimal: 25 × 4 = 100. One decimal place in 2.5 → 10.0 = 10."
+            "solution": "Ignore decimal: 25 × 4 = 100. One decimal place in 2.5 → 10.0 = 10.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group C for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group C for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -297,7 +394,13 @@
             "questionText": "What is 2.5 × 1.2?",
             "expectedAnswer": "3",
             "hint": "25 × 12 = 300. Total decimal places = 1 + 1 = 2. Answer: 3.00 = 3.",
-            "solution": "Ignore decimals: 25 × 12 = 300. Total decimal places = 1 + 1 = 2. 300 → 3.00 = 3."
+            "solution": "Ignore decimals: 25 × 12 = 300. Total decimal places = 1 + 1 = 2. 300 → 3.00 = 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group D for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_D_002",
@@ -309,11 +412,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 1.5 × 2.4?",
-            "options": ["3.6", "36", "0.36", "360"],
+            "options": [
+              "3.6",
+              "36",
+              "0.36",
+              "360"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3.6",
             "hint": "15 × 24 = 360. Total decimal places = 1 + 1 = 2. But 360 has 3 digits, count 2 from right: 3.60.",
-            "solution": "Ignore decimals: 15 × 24 = 360. Total decimal places = 1 + 1 = 2. 360 → 3.60 = 3.6."
+            "solution": "Ignore decimals: 15 × 24 = 360. Total decimal places = 1 + 1 = 2. 360 → 3.60 = 3.6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group D for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_D_003",
@@ -327,9 +441,21 @@
             "questionText": "What is 1.2 × 3.4?",
             "expectedAnswer": "4.08",
             "hint": "12 × 34 = 408. Two decimal places total → 4.08.",
-            "solution": "12 × 34 = 408. Total decimal places = 1 + 1 = 2. 408 → 4.08."
+            "solution": "12 × 34 = 408. Total decimal places = 1 + 1 = 2. 408 → 4.08.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group D for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group D for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -356,11 +482,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "If 36 × 25 = 900, what is 3.6 × 2.5?",
-            "options": ["900", "90.0", "9.00", "0.900"],
+            "options": [
+              "900",
+              "90.0",
+              "9",
+              "0.900"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "9",
             "hint": "3.6 has 1 decimal place and 2.5 has 1 decimal place. Total = 2 places.",
-            "solution": "Total decimal places = 1 + 1 = 2. 900 with 2 decimal places from right = 9.00 = 9."
+            "solution": "Total decimal places = 1 + 1 = 2. Place the decimal two places from the right in 900 to get 9.00, which is 9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group E for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_E_002",
@@ -372,11 +509,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "If 234 × 12 = 2808, what is 2.34 × 12?",
-            "options": ["280.8", "28.08", "2.808", "2808"],
+            "options": [
+              "280.8",
+              "28.08",
+              "2.808",
+              "2808"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "28.08",
             "hint": "2.34 has 2 decimal places. 12 is a whole number (0 decimal places). Total = 2.",
-            "solution": "2.34 has 2 decimal places. Total = 2. 2808 with point 2 from right = 28.08."
+            "solution": "2.34 has 2 decimal places. Total = 2. 2808 with point 2 from right = 28.08.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group E for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_E_003",
@@ -388,13 +536,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "If 125 × 48 = 6000, what is 1.25 × 4.8?",
-            "options": ["600", "60", "6", "0.6"],
+            "options": [
+              "600",
+              "60",
+              "6",
+              "0.6"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "6",
             "hint": "1.25 has 2 decimal places, 4.8 has 1. Total = 3 decimal places.",
-            "solution": "Total decimal places = 2 + 1 = 3. 6000 with 3 decimal places from right = 6.000 = 6."
+            "solution": "Total decimal places = 2 + 1 = 3. 6000 with 3 decimal places from right = 6.000 = 6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group E for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group E for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -445,9 +610,21 @@
             ],
             "expectedAnswer": "28.08",
             "hint": "2.34 has 2 decimal places. 234 × 12 = 2808. Place point 2 from right.",
-            "solution": "2 decimal places in 2.34. 234 × 12 = 2808. Decimal placed: 28.08."
+            "solution": "2 decimal places in 2.34. 234 × 12 = 2808. Decimal placed: 28.08.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group F for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group F for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -476,7 +653,13 @@
             "questionText": "A book costs ₹12.5. Priya buys 4 books. What is the total cost?",
             "expectedAnswer": "₹50",
             "hint": "Calculate 12.5 × 4. Ignore decimal: 125 × 4 = 500. One decimal place → 50.0 = 50.",
-            "solution": "12.5 × 4: ignore decimal → 125 × 4 = 500. One decimal place → 50.0 = ₹50."
+            "solution": "12.5 × 4: ignore decimal → 125 × 4 = 500. One decimal place → 50.0 = ₹50.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group G for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_G_002",
@@ -490,7 +673,13 @@
             "questionText": "A ribbon is 2.4 metres long. Rahul buys 5 such ribbons. What is the total length?",
             "expectedAnswer": "12 metres",
             "hint": "Calculate 2.4 × 5. Treat as 24 × 5 = 120. One decimal place → 12.0.",
-            "solution": "2.4 × 5: ignore decimal → 24 × 5 = 120. One decimal place → 12.0 = 12 metres."
+            "solution": "2.4 × 5: ignore decimal → 24 × 5 = 120. One decimal place → 12.0 = 12 metres.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group G for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_G_003",
@@ -502,13 +691,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Oranges cost ₹2.5 each. Mom buys 8 oranges. What does she pay?",
-            "options": ["₹16", "₹20", "₹18", "₹25"],
+            "options": [
+              "₹16",
+              "₹20",
+              "₹18",
+              "₹25"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "₹20",
             "hint": "2.5 × 8: treat as 25 × 8 = 200. One decimal place → 20.",
-            "solution": "2.5 × 8: ignore decimal → 25 × 8 = 200. One decimal place → 20.0 = ₹20."
+            "solution": "2.5 × 8: ignore decimal → 25 × 8 = 200. One decimal place → 20.0 = ₹20.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group G for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group G for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -537,7 +743,13 @@
             "questionText": "Speed drill! Calculate: 1.5×4, 0.3×9, 2.5×8, 1.1×7. Write all answers.",
             "expectedAnswer": "6, 2.7, 20, 7.7",
             "hint": "Ignore decimal, multiply, count decimal places, place point.",
-            "solution": "1.5×4=6. 0.3×9=2.7. 2.5×8=20. 1.1×7=7.7."
+            "solution": "1.5×4=6. 0.3×9=2.7. 2.5×8=20. 1.1×7=7.7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group H for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_H_002",
@@ -549,18 +761,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which calculation is INCORRECT?",
-            "options": ["1.2 × 5 = 6", "2.4 × 3 = 7.2", "3.5 × 2 = 7", "1.5 × 6 = 9.0"],
-            "correctIndex": 3,
-            "expectedAnswer": "1.5 × 6 = 9.0",
-            "hint": "Check each: 15×5=75→7.5? No, 12×5=60→6. 24×3=72→7.2. 35×2=70→7. 15×6=90→9.0.",
-            "solution": "1.2×5: 12×5=60, 1 decimal→6.0=6. 2.4×3: 24×3=72→7.2. 3.5×2: 35×2=70→7.0=7. 1.5×6: 15×6=90→9.0=9. All are correct — wait, 1.5×6=9 not 9.0 is the same. Let me recheck: 3.5×2=7 is correct. Actually all options shown are mathematically correct, so the 'incorrect' one is a distractor format issue. 1.5 × 6 = 9, which equals 9.0. This tests careful reading.",
+            "options": [
+              "1.2 × 5 = 6",
+              "2.4 × 3 = 7.2",
+              "3.5 × 2 = 6.5",
+              "1.5 × 6 = 9.0"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "3.5 × 2 = 6.5",
+            "hint": "Check each product carefully. Three are correct, but one gives the wrong result.",
+            "solution": "1.2 × 5 = 6 is correct. 2.4 × 3 = 7.2 is correct. 1.5 × 6 = 9.0 is also correct because 9.0 = 9. But 3.5 × 2 = 7, not 6.5, so that option is the incorrect calculation.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_decimal_shift",
-              "caption": "Decimal multiplication verification chart"
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group H for Decimal Lightning — Multiply and Divide Decimals Mentally."
             }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group H for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -589,7 +813,13 @@
             "questionText": "Calculate 1.25 × 48 mentally. (Hint: think of 125 × 48, and use 125 × 8 = 1000.)",
             "expectedAnswer": "60",
             "hint": "125 × 48 = 125 × 8 × 6 = 1000 × 6 = 6000. Two decimal places in 1.25 → 60.00 = 60.",
-            "solution": "Ignore decimal: 125 × 48. Break 48 = 8 × 6. 125 × 8 = 1000. 1000 × 6 = 6000. 1.25 has 2 decimal places → 60.00 = 60."
+            "solution": "Ignore decimal: 125 × 48. Break 48 = 8 × 6. 125 × 8 = 1000. 1000 × 6 = 6000. 1.25 has 2 decimal places → 60.00 = 60.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group I for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_I_002",
@@ -601,11 +831,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Using the same method, what is 1.25 × 32?",
-            "options": ["4", "40", "400", "0.4"],
+            "options": [
+              "4",
+              "40",
+              "400",
+              "0.4"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "40",
             "hint": "125 × 32 = 125 × 8 × 4 = 1000 × 4 = 4000. Two decimal places → 40.",
-            "solution": "125 × 32: use 32 = 8 × 4. 125 × 8 = 1000. 1000 × 4 = 4000. 1.25 has 2 decimal places → 40.00 = 40."
+            "solution": "125 × 32: use 32 = 8 × 4. 125 × 8 = 1000. 1000 × 4 = 4000. 1.25 has 2 decimal places → 40.00 = 40.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group I for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           },
           {
             "questionId": "VM_G5_L7_I_003",
@@ -619,10 +860,33 @@
             "questionText": "A packet of biscuits costs ₹1.25. A shop orders 48 packets. What is the total cost?",
             "expectedAnswer": "₹60",
             "hint": "1.25 × 48. Use the shortcut: 125 × 48 = 6000. Two decimal places → 60.",
-            "solution": "1.25 × 48 = 60. Total cost = ₹60."
+            "solution": "1.25 × 48 = 60. Total cost = ₹60.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_complements_whole.svg",
+              "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+              "caption": "Group I for Decimal Lightning — Multiply and Divide Decimals Mentally."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_complements_whole.svg",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "caption": "Group I for Decimal Lightning — Multiply and Divide Decimals Mentally."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G5_L7_DECIMAL_SPEED",
+  "courseId": "vedic_math_g5",
+  "visualLibrary": [
+    {
+      "visualId": "vm_complements_whole",
+      "kind": "svg",
+      "asset": "vm_complements_whole.svg",
+      "title": "Lesson 7: Decimal Lightning — Multiply and Divide Decimals Mentally",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

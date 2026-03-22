@@ -67,6 +67,11 @@ public class RDHomeController {
         return "home"; // /WEB-INF/views/home.jsp
     }
 
+    @GetMapping("/aptipath360")
+    public String aptiPath360Landing() {
+        return "aptipath360";
+    }
+
     @GetMapping({"/insights/{postId}", "/insights/{postId}/{slug}"})
     public String insightArticle(@PathVariable("postId") int postId,
                                  @PathVariable(value = "slug", required = false) String slug,

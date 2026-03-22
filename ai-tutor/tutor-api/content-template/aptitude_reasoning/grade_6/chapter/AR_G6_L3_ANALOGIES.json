@@ -198,7 +198,13 @@
             "delaySec": 2.1,
             "durationSec": 0.3
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Analogies",
+          "caption": "Screenplay beat for Analogies."
+        }
       },
       {
         "beatId": "AR_G6_L3_DEMO_WORD",
@@ -248,7 +254,13 @@
             "delaySec": 1.5,
             "durationSec": 0.5
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Analogies",
+          "caption": "Screenplay beat for Analogies."
+        }
       },
       {
         "beatId": "AR_G6_L3_DEMO_NUMBER",
@@ -298,7 +310,13 @@
             "delaySec": 1.5,
             "durationSec": 0.5
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Analogies",
+          "caption": "Screenplay beat for Analogies."
+        }
       },
       {
         "beatId": "AR_G6_L3_GUIDED",
@@ -359,7 +377,13 @@
             "delaySec": 1.3,
             "durationSec": 0.3
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "analogy_frame.svg",
+          "title": "Analogies",
+          "caption": "Screenplay beat for Analogies."
+        }
       }
     ]
   },
@@ -387,7 +411,13 @@
       "instantFeedbackRetry": "Here's a trick: ask yourself — what is a Book for? Reading. So what is a Fork for? Eating. The answer is Eat.",
       "reviewPrompt": "Quick: Cow : Milk :: Hen : ? — state the relationship.",
       "xpReward": 10,
-      "badgeFocus": "Object Relationship Spotter"
+      "badgeFocus": "Object Relationship Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group A for Analogies."
+      }
     },
     {
       "exerciseGroup": "B",
@@ -412,7 +442,13 @@
       "instantFeedbackRetry": "Here's a trick: ask — what group does a Sparrow belong to? Birds. Now ask — what group does a Salmon belong to? Fish!",
       "reviewPrompt": "Quick: Chair : Furniture :: Shirt : ? — name the category.",
       "xpReward": 12,
-      "badgeFocus": "Category Classifier"
+      "badgeFocus": "Category Classifier",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group B for Analogies."
+      }
     },
     {
       "exerciseGroup": "C",
@@ -438,7 +474,13 @@
       "instantFeedbackRetry": "Here's a trick: 7 x 7 = 49 — that is squaring. Apply the same: 8 x 8 = 64.",
       "reviewPrompt": "Quick: 10 : 100 :: 12 : ? — what operation and what answer?",
       "xpReward": 14,
-      "badgeFocus": "Operation Identifier"
+      "badgeFocus": "Operation Identifier",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group C for Analogies."
+      }
     },
     {
       "exerciseGroup": "D",
@@ -463,7 +505,13 @@
       "instantFeedbackRetry": "Here's a trick: 21 divided by 7 = 3. The rule is multiply by 3. Apply: 5 x 3 = 15.",
       "reviewPrompt": "Quick: 6 : 36 :: 7 : ? — is it multiply by 6 or squaring?",
       "xpReward": 15,
-      "badgeFocus": "Pattern Analyst"
+      "badgeFocus": "Pattern Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group D for Analogies."
+      }
     },
     {
       "exerciseGroup": "E",
@@ -489,7 +537,13 @@
       "instantFeedbackRetry": "Here's a trick: within each pair, gap = +2. Between pair starts: B=2, F=6, J=10 — gap = +4 between starts. Next start: 10+4=14=N. Pair: N=14, P=16. Answer: NP.",
       "reviewPrompt": "Quick: CE : GI :: KM : ? — give the answer.",
       "xpReward": 16,
-      "badgeFocus": "Forward Letter Mapper"
+      "badgeFocus": "Forward Letter Mapper",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group E for Analogies."
+      }
     },
     {
       "exerciseGroup": "F",
@@ -515,7 +569,13 @@
       "instantFeedbackRetry": "Here's a trick: within each pair, consecutive letters with gap -1. Pair starts: Z=26, X=24, V=22 — gap = -2. Next start: 22-2=20=T. Pair: T=20, S=19. Answer: TS.",
       "reviewPrompt": "Quick: ZX : VT :: RP : ? — give the answer.",
       "xpReward": 17,
-      "badgeFocus": "Backward Letter Tracker"
+      "badgeFocus": "Backward Letter Tracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group F for Analogies."
+      }
     },
     {
       "exerciseGroup": "G",
@@ -541,7 +601,13 @@
       "instantFeedbackRetry": "Here's a trick: ask — what is made of petals? A Flower. Now ask — what is made of bricks? A Wall!",
       "reviewPrompt": "Quick: Leaf : Tree :: Scale : ? — name the whole.",
       "xpReward": 18,
-      "badgeFocus": "Part-Whole Connector"
+      "badgeFocus": "Part-Whole Connector",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group G for Analogies."
+      }
     },
     {
       "exerciseGroup": "H",
@@ -567,7 +633,13 @@
       "instantFeedbackRetry": "Here's a trick: think of the main job of a Needle — it stitches cloth together. That action is Sewing.",
       "reviewPrompt": "Quick: Ladder : Climbing :: Bridge : ? — what is a Bridge used for?",
       "xpReward": 20,
-      "badgeFocus": "Tool-Purpose Expert"
+      "badgeFocus": "Tool-Purpose Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group H for Analogies."
+      }
     },
     {
       "exerciseGroup": "I",
@@ -593,7 +665,22 @@
       "instantFeedbackRetry": "Here's a trick — Q1: a group of lions is a Pride, a group of fish is a Shoal. Q2: 27=3x3x3=3 cubed, so 4 cubed=64. Q3: A=1,C=3 to C=3,E=5 to E=5,G=7 — each pair starts 2 ahead: next is G=7,I=9 = GI.",
       "reviewPrompt": "Final: Rose : Red :: Grass : ? — and state the relationship type.",
       "xpReward": 25,
-      "badgeFocus": "Analogy Champion"
+      "badgeFocus": "Analogy Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "analogy_frame.svg",
+        "title": "Analogies",
+        "caption": "Group I for Analogies."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "analogy_frame",
+      "kind": "svg",
+      "asset": "analogy_frame.svg",
+      "title": "Analogies",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

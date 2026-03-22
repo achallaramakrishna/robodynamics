@@ -96,7 +96,13 @@
       "instantFeedbackRetry": "Use: Total − Rank from top + 1 = 25 − 7 + 1 = 19. The +1 accounts for Sam himself.",
       "reviewPrompt": "Write the formula for rank from bottom given rank from top and total.",
       "xpReward": 10,
-      "badgeFocus": "Rank Converter"
+      "badgeFocus": "Rank Converter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group A for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "B",
@@ -118,7 +124,13 @@
       "instantFeedbackRetry": "Total = 6 + 14 − 1 = 19. Do not forget the −1, otherwise you count Priya twice.",
       "reviewPrompt": "Why do we subtract 1 in the total formula?",
       "xpReward": 15,
-      "badgeFocus": "Total Finder"
+      "badgeFocus": "Total Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group B for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "C",
@@ -142,7 +154,13 @@
       "instantFeedbackRetry": "People between = Total − left rank − right rank = 20 − 5 − 3 = 12.",
       "reviewPrompt": "Does this formula work if both students are counted from the same end?",
       "xpReward": 10,
-      "badgeFocus": "Gap Finder"
+      "badgeFocus": "Gap Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group C for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "D",
@@ -165,7 +183,13 @@
       "instantFeedbackRetry": "New students above push Sam's rank up. 4 + 5 = 9.",
       "reviewPrompt": "If 2 students leave from above Riya (now 8th), what is her new rank?",
       "xpReward": 10,
-      "badgeFocus": "Rank Shifter"
+      "badgeFocus": "Rank Shifter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group D for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "E",
@@ -188,7 +212,13 @@
       "instantFeedbackRetry": "P is 3rd. Q is just AFTER P — one position further down = 4th.",
       "reviewPrompt": "Write out the full order R _ P Q _ using the given clues.",
       "xpReward": 10,
-      "badgeFocus": "Arrangement Expert"
+      "badgeFocus": "Arrangement Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group E for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "F",
@@ -211,7 +241,13 @@
       "instantFeedbackRetry": "Sort by first letter: A, D, K, M, S. KIRAN starts with K — that is the 3rd position.",
       "reviewPrompt": "If BHANU is added to the list, what rank does KIRAN move to?",
       "xpReward": 10,
-      "badgeFocus": "Alpha Ranker"
+      "badgeFocus": "Alpha Ranker",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group F for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "G",
@@ -234,7 +270,13 @@
       "instantFeedbackRetry": "Position from right = 10 − 3 + 1 = 8. Same formula as rank from bottom!",
       "reviewPrompt": "A student is 6th from both the left and right. How many columns are there?",
       "xpReward": 10,
-      "badgeFocus": "Grid Navigator"
+      "badgeFocus": "Grid Navigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group G for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "H",
@@ -255,7 +297,13 @@
       "instantFeedbackRetry": "Sort the three ranks: 2, 5, 8. The middle rank is 5, which belongs to R.",
       "reviewPrompt": "If a 4th student S joins at rank 6, who is now the 2nd from the top among these four?",
       "xpReward": 10,
-      "badgeFocus": "Middle Finder"
+      "badgeFocus": "Middle Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group H for Rankings and Positions."
+      }
     },
     {
       "exerciseGroup": "I",
@@ -278,7 +326,13 @@
       "instantFeedbackRetry": "Total = rank from top + rank from bottom − 1 = 9 + 6 − 1 = 14.",
       "reviewPrompt": "Write all four ranking formulas from memory.",
       "xpReward": 15,
-      "badgeFocus": "Rankings Ruler"
+      "badgeFocus": "Rankings Ruler",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Rankings and Positions",
+        "caption": "Group I for Rankings and Positions."
+      }
     }
   ],
   "screenplay": {
@@ -292,7 +346,13 @@
           "Mark position 5 from the front",
           "Reveal formula: Total − Rank + 1 = 20 − 5 + 1 = 16"
         ],
-        "duration": 60
+        "duration": 60,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Rankings and Positions",
+          "caption": "Screenplay beat for Rankings and Positions."
+        }
       },
       {
         "beatId": "B2",
@@ -303,7 +363,13 @@
           "Highlight the +1 and −1 in each",
           "Show one worked example per formula"
         ],
-        "duration": 90
+        "duration": 90,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Rankings and Positions",
+          "caption": "Screenplay beat for Rankings and Positions."
+        }
       },
       {
         "beatId": "B3",
@@ -313,7 +379,13 @@
           "Student writes: Total = 8 + 12 − 1 = 19",
           "Verify: 19 − 8 + 1 = 12. Check!"
         ],
-        "duration": 90
+        "duration": 90,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Rankings and Positions",
+          "caption": "Screenplay beat for Rankings and Positions."
+        }
       },
       {
         "beatId": "B4",
@@ -324,8 +396,23 @@
           "Display badge: Rankings Ruler",
           "Show XP tally"
         ],
-        "duration": 60
+        "duration": 60,
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Rankings and Positions",
+          "caption": "Screenplay beat for Rankings and Positions."
+        }
       }
     ]
-  }
+  },
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Rankings and Positions",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

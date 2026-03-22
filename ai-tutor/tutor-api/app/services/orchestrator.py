@@ -16,14 +16,26 @@ class OrchestratorSession:
     user_id: int
     chapter_code: str
     exercise_group: str
-    state: str = "idle"
+    state: str = "boot"
     version: int = 0
     updated_at: str = field(default_factory=_utc_now)
     context: Dict[str, Any] = field(default_factory=dict)
 
 
 class TutorOrchestrator:
-    ALLOWED_STATES = {"idle", "intro", "teach", "checkpoint", "practice", "feedback", "adapt"}
+    ALLOWED_STATES = {
+        "boot",
+        "entry",
+        "coach_intro",
+        "coach_demo",
+        "student_turn",
+        "evaluate",
+        "feedback",
+        "remediate",
+        "review",
+        "complete",
+        "error",
+    }
 
     def __init__(self) -> None:
         self._sessions: Dict[str, OrchestratorSession] = {}
@@ -46,7 +58,7 @@ class TutorOrchestrator:
                     user_id=user_id,
                     chapter_code=chapter_code,
                     exercise_group=exercise_group,
-                    state="intro",
+                    state="entry",
                     version=1,
                     updated_at=_utc_now(),
                     context=dict(context or {}),
@@ -56,7 +68,7 @@ class TutorOrchestrator:
                 runtime.chapter_code = chapter_code
                 runtime.exercise_group = exercise_group
                 runtime.context.update(context or {})
-                runtime.state = "intro"
+                runtime.state = "entry"
                 runtime.version += 1
                 runtime.updated_at = _utc_now()
             snapshot = self._snapshot(runtime)
@@ -118,20 +130,14 @@ class TutorOrchestrator:
         if not event_name:
             return self._snapshot(runtime)
 
-        state = runtime.state
-        if event_name == "QUESTION_DELIVERED":
-            state = "teach"
-        elif event_name == "ANSWER_SUBMITTED":
-            state = "feedback"
-        elif event_name == "DOUBT_ASKED":
-            state = "practice"
+        payload = dict(meta or {})
+        state = self._derive_state_from_event(runtime.state, event_name, payload)
 
         if state != runtime.state:
             runtime.state = state
             runtime.version += 1
             runtime.updated_at = _utc_now()
 
-        payload = dict(meta or {})
         runtime.context.update(payload)
         snapshot = self._snapshot(runtime)
         await self._publish(session_id, event_name, runtime.state, payload, runtime.version)
@@ -164,24 +170,66 @@ class TutorOrchestrator:
 
     def _derive_next_state(self, current: str, command: str, meta: Dict[str, Any]) -> str:
         if command == "START_LOOP":
-            return "teach"
+            return "coach_intro"
         if command == "BOARD_COMPLETE":
-            return "checkpoint"
+            return "student_turn"
         if command == "STUDENT_RESPONSE":
-            return "practice"
+            return "evaluate"
         if command == "ANSWER_EVALUATED":
-            return "adapt"
+            if meta.get("completed") is True:
+                return "complete"
+            return "feedback" if self._is_correct_signal(meta.get("isCorrect")) else "remediate"
         if command == "NEXT_QUESTION":
-            return "teach"
+            return "coach_intro"
         if command == "ASK_DOUBT":
-            return "practice"
+            return "review"
         if command == "STOP_LOOP":
-            return "idle"
+            if meta.get("error") or meta.get("failed"):
+                return "error"
+            return "complete" if meta.get("completed") else "entry"
         if command == "SET_STATE":
             requested = str(meta.get("state", "")).strip().lower()
             if requested in self.ALLOWED_STATES:
                 return requested
         return current
+
+    def _derive_state_from_event(self, current: str, event_name: str, meta: Dict[str, Any]) -> str:
+        if event_name == "SESSION_BOOTSTRAPPED":
+            return "entry"
+        if event_name == "SESSION_STARTED":
+            return "coach_intro"
+        if event_name == "SESSION_RESUMED":
+            return "student_turn"
+        if event_name == "QUESTION_DELIVERED":
+            return "coach_demo"
+        if event_name == "ANSWER_SUBMITTED":
+            if meta.get("livesDepleted") or meta.get("fatalError"):
+                return "error"
+            if meta.get("lessonCompleted") or meta.get("completed"):
+                return "complete"
+            return "feedback" if self._is_correct_signal(meta.get("isCorrect")) else "remediate"
+        if event_name == "DOUBT_ASKED":
+            return "review"
+        if event_name == "CHAT_TURN":
+            suggest = str(meta.get("suggestNextAction", "")).strip().lower()
+            if suggest == "reteach":
+                return "remediate"
+            if suggest == "practice":
+                return "student_turn"
+            return "review"
+        if event_name.endswith("ERROR") or meta.get("error") or meta.get("failed"):
+            return "error"
+        return current
+
+    @staticmethod
+    def _is_correct_signal(value: Any) -> bool:
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.strip().lower() in {"1", "true", "yes", "y", "correct"}
+        if isinstance(value, (int, float)):
+            return bool(value)
+        return False
 
     async def _publish(
         self,
@@ -222,4 +270,3 @@ class TutorOrchestrator:
             "updatedAt": runtime.updated_at,
             "context": dict(runtime.context),
         }
-

@@ -1374,39 +1374,85 @@ class VedicRuleEngine:
         raw_pool = chapter_script.get("questionPool")
         if not isinstance(raw_pool, list):
             raw_pool = chapter_script.get("exercises")
-        if not isinstance(raw_pool, list):
+
+        authored_items: List[Dict[str, Any]] = []
+        if isinstance(raw_pool, list):
+            authored_items.extend(item for item in raw_pool if isinstance(item, dict))
+
+        duolingo_arc = chapter_script.get("duolingoLessonArc")
+        if isinstance(duolingo_arc, dict):
+            session_flow = duolingo_arc.get("sessionFlow")
+            if isinstance(session_flow, list):
+                for step in session_flow:
+                    if not isinstance(step, dict):
+                        continue
+                    fallback_group = self.normalize_exercise_group(step.get("exerciseGroup"))
+                    fallback_subtopic = str(step.get("subtopic", "")).strip()
+                    exercises = step.get("exercises")
+                    if not isinstance(exercises, list):
+                        continue
+                    for exercise in exercises:
+                        if not isinstance(exercise, dict):
+                            continue
+                        merged = dict(exercise)
+                        merged.setdefault("exerciseGroup", fallback_group)
+                        merged.setdefault("subtopic", fallback_subtopic)
+                        authored_items.append(merged)
+
+        if not authored_items:
             return []
 
         out: List[Dict[str, Any]] = []
-        for idx, item in enumerate(raw_pool):
-            if not isinstance(item, dict):
-                continue
-            text = str(item.get("questionText", "")).strip()
-            if not text:
-                continue
-            group = self.normalize_exercise_group(item.get("exerciseGroup"))
-            expected = str(item.get("expectedAnswer", "")).strip()
-            qid = str(item.get("questionId", "")).strip()
-            if not qid:
-                seed = "|".join([chapter_code, group, text.lower(), expected.lower(), str(idx)])
-                qid = str(uuid.uuid5(uuid.NAMESPACE_URL, seed))
-            out.append(
-                {
-                    "questionId": qid,
-                    "chapterCode": chapter_code,
-                    "exerciseGroup": group,
-                    "subtopic": str(item.get("subtopic", "")).strip() or self._subtopic_for_group(chapter_code, group),
-                    "skill": str(item.get("skill", "")).strip() or self._subtopic_for_group(chapter_code, group),
-                    "difficulty": str(item.get("difficulty", self._difficulty(group))).strip().lower(),
-                    "type": str(item.get("type", "short_answer")).strip() or "short_answer",
-                    "questionText": text,
-                    "hint": str(item.get("hint", "Use the Vedic step for this group.")).strip(),
-                    "solution": str(item.get("solution", "Follow the base-completion method step-by-step.")).strip(),
-                    "expectedAnswer": expected,
-                    "visual": item.get("visual") if isinstance(item.get("visual"), dict) else None,
-                }
-            )
+        for idx, item in enumerate(authored_items):
+            normalized = self._normalize_authored_question(chapter_code, item, idx)
+            if normalized:
+                out.append(normalized)
         return out
+
+    def _normalize_authored_question(self, chapter_code: str, item: Dict[str, Any], idx: int) -> Dict[str, Any] | None:
+        text = str(item.get("questionText", "")).strip()
+        if not text:
+            return None
+        group = self.normalize_exercise_group(item.get("exerciseGroup"))
+        expected = str(item.get("expectedAnswer", "")).strip()
+        qid = str(item.get("questionId", "")).strip()
+        if not qid:
+            seed = "|".join([chapter_code, group, text.lower(), expected.lower(), str(idx)])
+            qid = str(uuid.uuid5(uuid.NAMESPACE_URL, seed))
+
+        question_type = str(item.get("questionType", item.get("type", "text"))).strip().lower() or "text"
+        options = item.get("options") if isinstance(item.get("options"), list) else None
+        steps = item.get("steps") if isinstance(item.get("steps"), list) else None
+        correct_index = item.get("correctIndex")
+        try:
+            correct_index = int(correct_index) if correct_index is not None else None
+        except Exception:
+            correct_index = None
+
+        normalized: Dict[str, Any] = {
+            "questionId": qid,
+            "chapterCode": chapter_code,
+            "exerciseGroup": group,
+            "subtopic": str(item.get("subtopic", "")).strip() or self._subtopic_for_group(chapter_code, group),
+            "skill": str(item.get("skill", "")).strip() or self._subtopic_for_group(chapter_code, group),
+            "difficulty": str(item.get("difficulty", self._difficulty(group))).strip().lower(),
+            "type": str(item.get("type", "practice")).strip() or "practice",
+            "questionType": question_type,
+            "questionText": text,
+            "hint": str(item.get("hint", "Use the Vedic step for this group.")).strip(),
+            "solution": str(item.get("solution", "Follow the base-completion method step-by-step.")).strip(),
+            "expectedAnswer": expected,
+            "acceptableAnswers": [str(opt) for opt in item.get("acceptableAnswers", []) if str(opt).strip()] if isinstance(item.get("acceptableAnswers"), list) else [],
+            "visual": item.get("visual") if isinstance(item.get("visual"), dict) else None,
+            "passage": item.get("passage") if isinstance(item.get("passage"), dict) else None,
+            "starterCode": str(item.get("starterCode", "")) or None,
+            "tests": item.get("tests") if isinstance(item.get("tests"), list) else [],
+            "rubric": item.get("rubric") if isinstance(item.get("rubric"), dict) else None,
+            "options": [str(opt) for opt in options] if options else None,
+            "correctIndex": correct_index,
+            "steps": steps,
+        }
+        return normalized
 
     @staticmethod
     def _normalize(value: str) -> str:

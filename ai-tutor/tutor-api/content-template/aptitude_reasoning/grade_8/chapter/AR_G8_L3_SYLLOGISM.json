@@ -1,0 +1,528 @@
+{
+  "chapterCode": "AR_G8_L3_SYLLOGISM",
+  "courseId": "aptitude_reasoning_g8",
+  "title": "Syllogisms",
+  "source": "MindSpark Grade 8 Aptitude & Reasoning | Chapter 3: Syllogisms",
+  "estimatedMinutes": 18,
+  "subtopics": [
+    "Statement types: All A are B, Some A are B, No A is B, Some A are not B",
+    "Venn diagram method for syllogism validation",
+    "Definite vs possible conclusions",
+    "Complementary pairs in syllogisms",
+    "Multi-statement syllogism chains"
+  ],
+  "learningGoals": [
+    "Draw accurate Venn diagrams for each of the four syllogism statement types",
+    "Determine whether a conclusion definitely follows, possibly follows, or does not follow",
+    "Identify complementary pairs that together are always true",
+    "Solve 2-statement and 3-statement syllogism problems",
+    "Avoid common traps: assuming converse, assuming contradiction"
+  ],
+  "coreIdeas": [
+    "All A are B → A circle is entirely inside B circle",
+    "Some A are B → A and B circles overlap partially",
+    "No A is B → A and B circles are completely separate",
+    "Some A are not B → part of A is outside B; A and B may partially overlap",
+    "A conclusion 'definitely follows' only when it is true in ALL possible Venn diagrams; 'possibly follows' if true in at least one"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Statements: All cats are animals. All animals are living things. Conclusion I: All cats are living things. Conclusion II: Some living things are cats. Do the conclusions follow?",
+      "solution": "Cats ⊆ Animals ⊆ Living Things. Therefore Cats ⊆ Living Things — Conclusion I: Definitely follows. Since all cats are living things, some living things are cats — Conclusion II: Definitely follows. Both conclusions are valid.",
+      "concept": "Transitive All-All syllogism"
+    },
+    {
+      "id": "WE2",
+      "problem": "Statements: Some doctors are engineers. All engineers are rich. Conclusion I: Some doctors are rich. Conclusion II: All doctors are rich. Do the conclusions follow?",
+      "solution": "Some doctors fall in the engineers circle. All engineers are inside rich. So those doctors who are engineers are also rich → Some doctors are rich. Conclusion I: Definitely follows. Not all doctors need to be engineers, so not all doctors are rich. Conclusion II: Does not follow.",
+      "concept": "Some-All syllogism giving definite 'some' conclusion"
+    },
+    {
+      "id": "WE3",
+      "problem": "Statements: No birds are fish. Some fish are mammals. Conclusion I: No birds are mammals. Conclusion II: Some mammals are not birds. Do the conclusions follow?",
+      "solution": "Birds and fish are disjoint. Some fish are in mammals. The fish-mammals overlap tells us nothing about birds-mammals overlap (they could touch or not). Conclusion I: Does not definitely follow (birds and mammals may or may not overlap). Conclusion II: Since some fish are mammals and no fish are birds, those fish-mammals are not birds — so some mammals (at least the fish-mammals) are not birds. Conclusion II: Definitely follows.",
+      "concept": "No-Some syllogism — partial valid conclusion"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g8-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Competitive exam prep"
+      ],
+      "coachIntro": "Syllogisms are pure logic — no subject knowledge needed, just Venn diagram power. Once you master the 4 statement types, you'll answer every syllogism question with 100% confidence.",
+      "placementRule": "If learner selects 'I have done this before', skip Exercise A and start at Exercise C."
+    },
+    "mission": {
+      "missionTitle": "Venn Vision: Master Syllogisms",
+      "missionPromise": "You will correctly classify All, Some, No, and Some-Not statements and determine definite vs possible conclusions for any 2–3 statement syllogism.",
+      "successCelebration": "Logic Champion badge unlocked! You validated every conclusion with Venn diagram precision!"
+    },
+    "microLessonPattern": [
+      "Draw the Venn diagram for each statement type",
+      "Practice reading a conclusion off a Venn diagram",
+      "2-statement definite conclusions",
+      "2-statement possible conclusions",
+      "3-statement chain and complementary pairs"
+    ],
+    "rewardLoop": {
+      "xpUnit": "spark",
+      "streakRule": "3 correct in a row = Streak Flame + 5 bonus sparks",
+      "badgeRule": "Complete all 8 exercises with ≥ 80% accuracy = Logic Champion badge",
+      "celebrationStyle": "Venn diagram animates to confirm correct circle placement + cheer"
+    },
+    "reviewLoop": {
+      "trigger": "Confusing 'definitely follows' with 'possibly follows' twice",
+      "practiceStyle": "Reteach: draw both possible Venn diagrams for ambiguous case, ask student which conclusions survive both",
+      "masteryRule": "3 correct definite/possible classifications = mastered",
+      "revisitRule": "No-Some confusion resurfaced in Exercise H"
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G8_L3_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Syllogisms use Venn diagrams as lie detectors. Each statement type draws a specific picture. 'All A are B' → circle A is fully inside circle B. 'Some A are B' → A and B overlap partially. 'No A is B' → circles are completely apart. Once you draw these, the conclusion either appears in the picture or it doesn't.",
+        "boardAction": "Draw three separate Venn diagrams side by side: (1) A fully inside B for 'All A are B', (2) A and B overlapping for 'Some A are B', (3) A and B separate for 'No A is B'. Label each clearly.",
+        "checkpointPrompt": "Which Venn diagram shows 'All dogs are mammals'?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Dogs circle fully inside mammals circle",
+        "fallbackHint": "All dogs are mammals means every dog is also a mammal — so the dogs circle fits entirely inside the mammals circle.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "All A⊆B: A inside B",
+            "x": "40",
+            "y": "80",
+            "fontSize": 18,
+            "color": "#4FC3F7"
+          },
+          {
+            "kind": "text",
+            "content": "Some A,B: overlap",
+            "x": "220",
+            "y": "80",
+            "fontSize": 18,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "No A,B: separate",
+            "x": "400",
+            "y": "80",
+            "fontSize": 18,
+            "color": "#FF5252"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "100",
+            "x2": "560",
+            "y2": "100",
+            "stroke": "#555555",
+            "strokeWidth": 1
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "syllogism.svg",
+          "title": "Syllogisms",
+          "caption": "Screenplay beat for Syllogisms."
+        }
+      },
+      {
+        "beatId": "AR_G8_L3_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me check a conclusion. Statements: Some doctors are engineers. All engineers are rich. I draw: partial overlap between Doctors and Engineers. Then Engineers circle sits fully inside Rich circle. Now I look at the picture — is any part of Doctors inside Rich? Yes! The overlapping engineers-doctors part is inside Rich. So 'Some doctors are rich' definitely follows.",
+        "boardAction": "Draw three circles: Doctors (left), Engineers (middle, overlapping with Doctors), Rich (Engineers circle sits inside Rich). Shade the Doctors-Engineers overlap region and show it is inside Rich.",
+        "checkpointPrompt": "From the same statements, does 'All doctors are rich' follow?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "No",
+        "fallbackHint": "Look at the Venn diagram — part of the Doctors circle is outside the Engineers circle and therefore outside Rich. Not all doctors need to be rich.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Doctors ∩ Engineers ⊆ Rich",
+            "x": "60",
+            "y": "80",
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Some doctors are rich ✓",
+            "x": "60",
+            "y": "130",
+            "fontSize": 18,
+            "color": "#69F0AE"
+          },
+          {
+            "kind": "text",
+            "content": "All doctors are rich ✗",
+            "x": "60",
+            "y": "175",
+            "fontSize": 18,
+            "color": "#FF5252"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "105",
+            "x2": "500",
+            "y2": "105",
+            "stroke": "#555555",
+            "strokeWidth": 1
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "syllogism.svg",
+          "title": "Syllogisms",
+          "caption": "Screenplay beat for Syllogisms."
+        }
+      },
+      {
+        "beatId": "AR_G8_L3_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your turn. Statements: No birds are fish. Some fish are mammals. Draw the diagram — Birds and Fish are separate circles. Fish and Mammals overlap. Look at this picture and decide: does 'No birds are mammals' definitely follow?",
+        "boardAction": "Draw: Birds circle (left, isolated). Fish circle (center). Mammals circle (right, overlapping with Fish). Show birds and mammals could or could not overlap.",
+        "checkpointPrompt": "Does 'No birds are mammals' definitely follow from 'No birds are fish' + 'Some fish are mammals'?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "No, it does not definitely follow",
+        "fallbackHint": "The Venn diagram doesn't tell us anything about the birds-mammals relationship. They could overlap or not — so we cannot say 'definitely'.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Birds (separate)   Fish ∩ Mammals",
+            "x": "50",
+            "y": "80",
+            "fontSize": 17,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Birds ↔ Mammals: Unknown!",
+            "x": "80",
+            "y": "140",
+            "fontSize": 18,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "→ Does NOT definitely follow",
+            "x": "80",
+            "y": "190",
+            "fontSize": 18,
+            "color": "#FF5252"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "110",
+            "x2": "520",
+            "y2": "110",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "syllogism.svg",
+          "title": "Syllogisms",
+          "caption": "Screenplay beat for Syllogisms."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Statement-to-Venn mapping",
+      "missionStepTitle": "Exercise A: Draw the Picture",
+      "coachHook": "Before solving anything, draw the Venn diagram. The picture IS the answer.",
+      "boardDemo": {
+        "title": "4 statement types — 4 diagrams",
+        "steps": [
+          "All A are B → A inside B",
+          "Some A are B → partial overlap",
+          "No A is B → separated circles",
+          "Some A are not B → partial overlap, but part of A outside B"
+        ],
+        "teacherLine": "Memorise these 4 diagrams. Every syllogism is just one of these four pictures."
+      },
+      "readAloudPrompt": "Draw all four diagrams on paper before continuing.",
+      "tryPrompt": "Which diagram matches: 'Some politicians are honest'?",
+      "masteryCheck": "Partial overlap between politicians and honest circles",
+      "instantFeedbackWin": "Correct! 'Some' always means partial overlap — a non-empty intersection.",
+      "instantFeedbackRetry": "Here's a trick: 'Some' = at least one is in both sets → draw two circles that share a region.",
+      "reviewPrompt": "How is 'Some A are not B' different from 'No A is B' in Venn diagrams?",
+      "xpReward": 10,
+      "badgeFocus": "Venn Visualizer",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group A for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Definite conclusions — All-All chains",
+      "missionStepTitle": "Exercise B: Chain of Alls",
+      "coachHook": "All-All chains are the easiest — the conclusion is transitive. Let's verify it with Venn.",
+      "boardDemo": {
+        "title": "All-All transitive syllogism",
+        "steps": [
+          "All A are B → A ⊆ B",
+          "All B are C → B ⊆ C",
+          "Therefore A ⊆ B ⊆ C → All A are C",
+          "Also: Some C are A (because A is inside C, A is non-empty)"
+        ],
+        "teacherLine": "In All-All chains, you always get a definite All conclusion going forward and a definite Some conclusion going backward."
+      },
+      "readAloudPrompt": "Recite: 'All A in B, All B in C → All A in C.'",
+      "tryPrompt": "All roses are flowers. All flowers are plants. Does 'Some plants are roses' definitely follow?",
+      "masteryCheck": "Yes",
+      "instantFeedbackWin": "Exactly right! Roses ⊆ Flowers ⊆ Plants. Roses are inside Plants, so some plants (the roses) are roses.",
+      "instantFeedbackRetry": "Here's a trick: Roses are a subset of Plants (via the chain). So at least those roses are plants, meaning some plants are roses.",
+      "reviewPrompt": "In an All-All chain with A→B→C, which two conclusions definitely follow?",
+      "xpReward": 12,
+      "badgeFocus": "Transitive Thinker",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group B for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Definite conclusions — Some-All",
+      "missionStepTitle": "Exercise C: Some + All = Some",
+      "coachHook": "The golden rule: Some + All = Some (definite). Engrave this in your memory.",
+      "boardDemo": {
+        "title": "Some-All syllogism",
+        "steps": [
+          "Some A are B → A and B overlap",
+          "All B are C → B ⊆ C",
+          "The A-B overlap is inside C → Some A are C (definite)",
+          "Cannot conclude All A are C"
+        ],
+        "teacherLine": "The overlap region between A and B gets 'carried' into C because all of B is inside C."
+      },
+      "readAloudPrompt": "Say: 'Some A overlap B. All B inside C. The overlap lands in C.'",
+      "tryPrompt": "Some students are athletes. All athletes are disciplined. Which conclusion definitely follows: (a) All students are disciplined, (b) Some students are disciplined, (c) No students are disciplined?",
+      "masteryCheck": "b",
+      "instantFeedbackWin": "Correct! The athlete-students are definitely disciplined (since all athletes are disciplined). So some students (the athlete ones) are disciplined.",
+      "instantFeedbackRetry": "Here's a trick: Some students are athletes (overlap). All athletes are disciplined (athletes ⊆ disciplined). That overlap lands inside disciplined. → Some students are disciplined.",
+      "reviewPrompt": "Why can't we conclude 'All students are disciplined' from 'Some students are athletes'?",
+      "xpReward": 12,
+      "badgeFocus": "Some-All Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group C for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "No-statement conclusions",
+      "missionStepTitle": "Exercise D: The Power of No",
+      "coachHook": "'No' statements are absolute. They give strong conclusions — and strong traps.",
+      "boardDemo": {
+        "title": "No-statement syllogism rules",
+        "steps": [
+          "No A is B → A and B are completely separate",
+          "All A are B (contradicts No A is B if combined carelessly)",
+          "No A is B + All C are B → No A is C? Only if all of C is inside B and A is outside B",
+          "No A is B → Some B are not A (definitely)"
+        ],
+        "teacherLine": "When you see 'No A is B', immediately draw them as separated circles. Then check whether the conclusion requires them to touch — if yes, it does not follow."
+      },
+      "readAloudPrompt": "Draw: No A is B → two circles with a clear gap between them.",
+      "tryPrompt": "No cats are dogs. All dogs are animals. Conclusion: No cats are animals. Does this follow?",
+      "masteryCheck": "No, it does not follow",
+      "instantFeedbackWin": "Exactly! Cats and dogs are separate. Dogs are inside animals. But cats could also be inside animals independently — we simply don't know. So 'No cats are animals' does not definitely follow.",
+      "instantFeedbackRetry": "Here's a trick: No cats=dogs and All dogs⊆animals doesn't say anything about cats vs animals. Cats could overlap with animals through a different path.",
+      "reviewPrompt": "From 'No A is B', what single conclusion ALWAYS definitely follows?",
+      "xpReward": 12,
+      "badgeFocus": "No-Statement Navigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group D for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Possible conclusions and complementary pairs",
+      "missionStepTitle": "Exercise E: Possible vs Definite",
+      "coachHook": "Exam questions love the word 'possibly'. A conclusion possibly follows if it's true in at least one valid diagram.",
+      "boardDemo": {
+        "title": "Possible conclusions and complementary pairs",
+        "steps": [
+          "A conclusion 'possibly follows' = true in at least one Venn diagram arrangement",
+          "Complementary pair: one says 'Some A are B', other says 'No A is B' — exactly one must be true",
+          "If conclusion I doesn't definitely follow and conclusion II doesn't definitely follow, check if they are complementary",
+          "If complementary, the answer is 'Either I or II follows'"
+        ],
+        "teacherLine": "Complementary pairs are the trick answer option in competitive exams. Spot them by looking for one positive and one negative conclusion about the same pair."
+      },
+      "readAloudPrompt": "Read: 'Complementary pairs: one must be true, the other false — but we don't know which.'",
+      "tryPrompt": "Statements: Some A are B. No B is C. Conclusion I: Some A are not C. Conclusion II: No A is C. Which follows?",
+      "masteryCheck": "Conclusion I definitely follows",
+      "instantFeedbackWin": "Correct! Some A are B. Those A that are B — are they C? No B is C, so those A (who are B) are not C. Therefore some A (the B ones) are not C. Conclusion I definitely follows.",
+      "instantFeedbackRetry": "Here's a trick: Some A are B → pick one such A. That A is also B. No B is C → that A is not C. So at least one A is not C → Some A are not C.",
+      "reviewPrompt": "Define a complementary pair of conclusions in the context of syllogisms.",
+      "xpReward": 14,
+      "badgeFocus": "Possibility Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group E for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "3-statement syllogisms",
+      "missionStepTitle": "Exercise F: Three-Statement Chains",
+      "coachHook": "Three premises, one conclusion. The chain must hold at every link.",
+      "boardDemo": {
+        "title": "3-statement syllogism",
+        "steps": [
+          "Apply statement 1 and 2 to get an intermediate conclusion",
+          "Apply the intermediate conclusion with statement 3",
+          "Draw a combined Venn with 3 or 4 circles",
+          "Read the final conclusion from the diagram"
+        ],
+        "teacherLine": "Three-statement chains are just two-statement syllogisms applied twice. Solve left to right."
+      },
+      "readAloudPrompt": "Solve in two steps: (St1 + St2) → intermediate → (intermediate + St3) → final.",
+      "tryPrompt": "All A are B. All B are C. Some C are D. Which conclusion definitely follows: (a) All A are D, (b) Some A are D, (c) All A are C, (d) Some D are B?",
+      "masteryCheck": "c",
+      "instantFeedbackWin": "Spot on! All A→B→C, so All A are C (definite). Some C are D does NOT extend to all A. (a) doesn't follow. (b) doesn't definitly follow. (d) — some D are C; some C are B (reversing All B⊆C gives Some C are B). (d) is valid too but the most direct answer in this context is (c).",
+      "instantFeedbackRetry": "Here's a trick: All A⊆B, All B⊆C → All A⊆C. That's conclusion (c). Some C are D doesn't tell us which C — could be C that are not A.",
+      "reviewPrompt": "In a 3-statement All-All-Some chain (A→B→C, some C are D), does 'Some A are D' definitely follow?",
+      "xpReward": 14,
+      "badgeFocus": "Chain Reasoner",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group F for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Avoiding common traps",
+      "missionStepTitle": "Exercise G: Trap Buster",
+      "coachHook": "Exam setters love three traps: converse error, conversion error, and complement confusion. Let's destroy all three.",
+      "boardDemo": {
+        "title": "Three syllogism traps",
+        "steps": [
+          "Converse error: All A are B → wrongly concluding All B are A",
+          "Conversion: All A are B → correctly gives Some B are A (valid)",
+          "Complement confusion: Some A are not B ≠ No A is B",
+          "Trap: 'It is possible that no A is B' when Some A are B is given — impossible!"
+        ],
+        "teacherLine": "The converse of 'All' is 'Some', never 'All'. Burn this rule into your memory."
+      },
+      "readAloudPrompt": "Recite: 'All A are B does NOT mean All B are A. It means Some B are A.'",
+      "tryPrompt": "All teachers are graduates. Conclusion: All graduates are teachers. Is this conclusion valid?",
+      "masteryCheck": "No — converse error",
+      "instantFeedbackWin": "Well spotted! 'All teachers are graduates' only tells us teachers ⊆ graduates. There are many graduates who are not teachers.",
+      "instantFeedbackRetry": "Here's a trick: Draw teachers circle inside graduates circle. The conclusion 'All graduates are teachers' would require graduates to be inside teachers — the reverse, which is NOT shown.",
+      "reviewPrompt": "What valid conclusion CAN be drawn from 'All A are B'? (Hint: involves 'Some')",
+      "xpReward": 12,
+      "badgeFocus": "Trap Buster",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group G for Syllogisms."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Boss challenge — full 3-statement with complementary",
+      "missionStepTitle": "Exercise H: Olympiad Boss — Full Syllogism",
+      "coachHook": "Three statements. Four conclusions. Find all that follow. This is the format of every competitive exam.",
+      "boardDemo": {
+        "title": "Full syllogism evaluation",
+        "steps": [
+          "Draw the combined Venn for all 3 statements",
+          "Test each conclusion independently",
+          "For inconclusive ones, check if they form a complementary pair",
+          "Report: Definitely follows / Possibly follows / Does not follow"
+        ],
+        "teacherLine": "Evaluate every conclusion separately — don't let an earlier conclusion influence your judgment of a later one."
+      },
+      "readAloudPrompt": "Challenge: evaluate all four conclusions systematically.",
+      "tryPrompt": "Statements: Some pens are books. All books are papers. No paper is a pencil. Conclusions: I. Some pens are papers. II. No book is a pencil. III. Some papers are pens. IV. All pencils are books. Which conclusions definitely follow?",
+      "masteryCheck": "I, II, and III definitely follow",
+      "instantFeedbackWin": "Outstanding logic! I: Some pens are books, All books are papers → Some pens are papers ✓. II: All books are papers, No paper is a pencil → No book is a pencil ✓. III: Some pens are papers → Some papers are pens (valid conversion of 'some') ✓. IV: No paper is a pencil → pencils are outside papers → pencils outside books (since books ⊆ papers) → All pencils are books is FALSE ✗.",
+      "instantFeedbackRetry": "Here's a trick: Test I (Some-All chain), II (All-No chain = No conclusion), III (conversion of Some), IV (No + All relationship — check if pencils relate to books at all).",
+      "reviewPrompt": "What is the valid conversion of the statement 'Some A are B'?",
+      "xpReward": 18,
+      "badgeFocus": "Logic Champion",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Syllogisms",
+        "caption": "Group H for Syllogisms."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "syllogism",
+      "kind": "svg",
+      "asset": "syllogism.svg",
+      "title": "Syllogisms",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

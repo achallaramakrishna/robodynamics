@@ -1,0 +1,553 @@
+{
+  "chapterCode": "AR_G7_L5_SYMBOLS",
+  "courseId": "aptitude_reasoning_g7",
+  "title": "Symbol Substitution",
+  "source": "MindSpark Grade 7 Aptitude & Reasoning | Chapter 5: Symbol Substitution",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Symbols Replacing Basic Operations (+, −, ×, ÷)",
+    "Evaluating Symbol Expressions (Left to Right vs. BODMAS)",
+    "Single-Symbol Substitution Problems",
+    "Multi-Symbol Substitution (4 Symbols at Once)",
+    "Finding Missing Values in Symbol Equations",
+    "Comparing Two Symbol Expressions",
+    "Reverse Mapping — Identify Which Symbol is Which Operation",
+    "Speed Round: Mixed Symbol Problems"
+  ],
+  "learningGoals": [
+    "Replace custom symbols with their actual operations and evaluate the expression correctly.",
+    "Apply BODMAS order of operations after substituting symbols.",
+    "Identify which symbol corresponds to which operation by working backwards from a given result."
+  ],
+  "coreIdeas": [
+    "Read the symbol key carefully first — the same symbol can mean different operations in different questions.",
+    "After substitution, always apply BODMAS: Brackets → Orders → Division → Multiplication → Addition → Subtraction.",
+    "For reverse mapping problems, try each operation for the unknown symbol and check which gives the correct result."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "If ★ means +, ◆ means ×, evaluate: 3 ◆ 4 ★ 5",
+      "solution": "Substitute: 3 × 4 + 5. Apply BODMAS: multiply first: 12 + 5 = 17.",
+      "concept": "Single substitution then BODMAS — multiplication before addition"
+    },
+    {
+      "id": "WE2",
+      "problem": "If @ means −, # means ÷, evaluate: 20 # 4 @ 2",
+      "solution": "Substitute: 20 ÷ 4 − 2. BODMAS: division first: 5 − 2 = 3.",
+      "concept": "Two-symbol substitution with BODMAS — division before subtraction"
+    },
+    {
+      "id": "WE3",
+      "problem": "If ♠ means one of +/−/×/÷ and 8 ♠ 4 = 2, what operation does ♠ represent?",
+      "solution": "Try each: 8+4=12 ✗, 8-4=4 ✗, 8×4=32 ✗, 8÷4=2 ✓. ♠ means ÷.",
+      "concept": "Reverse mapping — test each operation to find the one that gives the required result"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark checks BODMAS recall before starting — asks student to evaluate 4+3×2 without symbols. Warm-up confirms order of operations is solid.",
+      "placementRule": "Start at Group A. If BODMAS errors in Group A–B, do a quick BODMAS refresher before continuing."
+    },
+    "mission": {
+      "missionTitle": "Break the Symbol Code",
+      "missionPromise": "By the end you will decode any 4-symbol key and evaluate complex expressions in under 20 seconds — a guaranteed quick win in every aptitude exam!",
+      "successCelebration": "Award a 'Decoder' badge after each group. Final trophy: 'Symbol Master'."
+    },
+    "microLessonPattern": [
+      "Coach presents the symbol key in a clearly labelled table.",
+      "Coach writes the expression, substitutes symbols, and applies BODMAS step by step.",
+      "Student rewrites the expression with real operations before evaluating.",
+      "Instant feedback praises both the correct substitution AND the correct evaluation order.",
+      "Review prompt gives a new expression using the same symbol key."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–25 XP per exercise group.",
+      "streakRule": "Streak counter visible; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a symbol-themed badge.",
+      "celebrationStyle": "Coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a reteach with a single-symbol substitution.",
+      "practiceStyle": "Offer one simpler expression with the same symbol key before advancing.",
+      "masteryRule": "Advance after correct substitution AND correct final answer.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G7_L5_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Symbol Substitution is like a secret code where alien symbols replace our familiar maths operations. The exam gives you a key — for example, ★ means + and ◆ means ×. Your job: decode the expression by swapping symbols for operations, then calculate normally using BODMAS. Two steps: SWAP, then CALCULATE. Let's master both!",
+        "boardAction": "Write the 2-step method: Step 1 — SWAP: replace every symbol with the real operation. Step 2 — CALCULATE: apply BODMAS strictly. Show example key: ★=+ ◆=× @=- #=÷",
+        "checkpointPrompt": "BODMAS quick check — no symbols yet: what is 6 + 2 × 3?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "12.",
+        "fallbackHint": "BODMAS says multiply before adding: 2×3=6 first, then 6+6=12.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l5_title",
+            "x": "40",
+            "y": "28",
+            "text": "Symbol Substitution — SWAP then CALCULATE",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l5_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l5_key",
+            "x": "60",
+            "y": "76",
+            "text": "Key: ★=+   ◆=×   @=−   #=÷",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l5_step1",
+            "x": "60",
+            "y": "104",
+            "text": "Step 1: SWAP symbols → real operations",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l5_step2",
+            "x": "60",
+            "y": "126",
+            "text": "Step 2: CALCULATE using BODMAS",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "box_question.svg",
+          "title": "Symbol Substitution",
+          "caption": "Screenplay beat for Symbol Substitution."
+        }
+      },
+      {
+        "beatId": "AR_G7_L5_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me decode and evaluate live! Key: @ means −, # means ÷, ◆ means ×. Expression: 20 # 4 ◆ 2 @ 3. Step 1 SWAP: 20 ÷ 4 × 2 − 3. Step 2 CALCULATE with BODMAS: division and multiplication left to right first — 20÷4=5, then 5×2=10. Now subtraction: 10−3=7. Answer: 7. Every time: SWAP first, CALCULATE second!",
+        "boardAction": "Write expression. Draw arrow to substituted form. Show BODMAS steps: circle ÷ and × first, then −. Box final answer 7.",
+        "checkpointPrompt": "Same key. Evaluate: 15 # 3 ◆ 4 @ 2.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "18.",
+        "fallbackHint": "Swap: 15÷3×4-2. BODMAS: 15÷3=5, 5×4=20, 20-2=18.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_expr",
+            "x": "40",
+            "y": "50",
+            "text": "20 # 4 ◆ 2 @ 3",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_swap",
+            "x": "40",
+            "y": "80",
+            "text": "SWAP: 20 ÷ 4 × 2 − 3",
+            "color": "#1e40af",
+            "size": 14,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_bodmas",
+            "x": "40",
+            "y": "110",
+            "text": "BODMAS: 5 × 2 − 3 = 10 − 3 = 7",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.1,
+            "durationSec": 0.5
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "box_question.svg",
+          "title": "Symbol Substitution",
+          "caption": "Screenplay beat for Symbol Substitution."
+        }
+      },
+      {
+        "beatId": "AR_G7_L5_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have the two-step method: SWAP then CALCULATE. For every group from A to H, read the symbol key first, then tackle the expression. For reverse mapping problems, test each of the four operations — the one that gives the correct answer IS the symbol's meaning. Let's go — Break the Symbol Code!",
+        "boardAction": "Write BODMAS order in full: B-O-D-M-A-S. Note: D and M are equal priority — go LEFT to RIGHT. Same for A and S. Write: never add before multiplying!",
+        "checkpointPrompt": "Quick BODMAS: after substitution you get 4 × 3 + 8 ÷ 2. What is the answer?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "16.",
+        "fallbackHint": "×  and ÷ first (left to right): 4×3=12, 8÷2=4. Then add: 12+4=16.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "BODMAS — Order of Operations",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_bodmas",
+            "x": "60",
+            "y": "62",
+            "text": "B → O → D,M (L to R) → A,S (L to R)",
+            "color": "#dc2626",
+            "size": 13,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_note",
+            "x": "60",
+            "y": "92",
+            "text": "D and M same priority: go LEFT to RIGHT",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "box_question.svg",
+          "title": "Symbol Substitution",
+          "caption": "Screenplay beat for Symbol Substitution."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Symbols Replacing Basic Operations",
+      "missionStepTitle": "Exercise A: Single-Symbol Substitution",
+      "coachHook": "Let's crack this code! One symbol, one operation — the simplest form. Master this step before adding more symbols.",
+      "boardDemo": {
+        "title": "One Symbol Swap",
+        "steps": [
+          "Key: ★ means ×",
+          "Expression: 7 ★ 8",
+          "Swap: 7 × 8",
+          "Calculate: 56"
+        ],
+        "teacherLine": "Just one swap here — but practice the habit: write the substituted expression on the next line before calculating. Never substitute AND calculate in your head at the same time."
+      },
+      "readAloudPrompt": "Key: @ means +. Evaluate: 13 @ 7.",
+      "tryPrompt": "Key: ◆ means −. Evaluate: 25 ◆ 9.",
+      "masteryCheck": "16",
+      "instantFeedbackWin": "Correct! ◆ means −. 25−9=16. Swap habit is strong!",
+      "instantFeedbackRetry": "Here's a trick: replace ◆ with a minus sign: 25 − 9 = 16.",
+      "reviewPrompt": "Quick: Key: # means ÷. Evaluate 48 # 6.",
+      "xpReward": 10,
+      "badgeFocus": "Symbol Decoder Rookie",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group A for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Multi-Symbol Substitution — 4 Symbols",
+      "missionStepTitle": "Exercise B: Four-Symbol Key",
+      "coachHook": "Let's crack this code! Four symbols, four operations — the full decoder ring! Look up every symbol in the key before writing the substituted expression.",
+      "boardDemo": {
+        "title": "4-Symbol Key — Full Swap First",
+        "steps": [
+          "Key: ★=+, ◆=×, @=−, #=÷",
+          "Expression: 8 ◆ 3 ★ 4",
+          "Swap: 8 × 3 + 4",
+          "BODMAS: 24 + 4 = 28"
+        ],
+        "teacherLine": "Write the symbol key on the side of your paper. Cross-reference each symbol in the expression. Swap ALL symbols before calculating — never calculate mid-swap."
+      },
+      "readAloudPrompt": "Key: ★=+, ◆=×, @=−, #=÷. What is 16 # 4 ◆ 3?",
+      "tryPrompt": "Same key: Evaluate 5 ◆ 4 @ 6 ★ 7.",
+      "masteryCheck": "21",
+      "instantFeedbackWin": "Superb! Swap: 5×4-6+7. BODMAS: 20-6+7=21. Four symbols decoded perfectly!",
+      "instantFeedbackRetry": "Here's a trick: swap all symbols first: 5×4 - 6 + 7. Multiply first: 20. Then left to right: 20-6=14, 14+7=21.",
+      "reviewPrompt": "Same key: Evaluate 18 # 3 ★ 2 ◆ 5.",
+      "xpReward": 12,
+      "badgeFocus": "4-Symbol Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group B for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "BODMAS After Substitution",
+      "missionStepTitle": "Exercise C: Strict BODMAS Order",
+      "coachHook": "Let's crack this code! After swapping symbols, BODMAS is the law. The most common mistake: adding before multiplying. Not on our watch!",
+      "boardDemo": {
+        "title": "BODMAS Trap — Multiplication Before Addition",
+        "steps": [
+          "Key: ★=+, ◆=×",
+          "Expression: 3 ★ 4 ◆ 5",
+          "Swap: 3 + 4 × 5",
+          "WRONG: (3+4)×5 = 35. RIGHT: 3 + (4×5) = 3+20 = 23",
+          "BODMAS: multiply 4×5=20 FIRST"
+        ],
+        "teacherLine": "The expression 3+4×5 is a classic BODMAS trap. Multiplication always comes before addition, even if addition appears first in the expression."
+      },
+      "readAloudPrompt": "Key: @=−, ◆=×. Evaluate 2 ◆ 6 @ 4. Which operation do you do first?",
+      "tryPrompt": "Key: ★=+, #=÷, ◆=×. Evaluate: 6 ◆ 3 ★ 12 # 4.",
+      "masteryCheck": "21",
+      "instantFeedbackWin": "Excellent! Swap: 6×3 + 12÷4. BODMAS: ×÷ first: 18+3=21. BODMAS trap avoided!",
+      "instantFeedbackRetry": "Here's a trick: swap all: 6×3 + 12÷4. Do × and ÷ before +: 6×3=18, 12÷4=3. Now add: 18+3=21.",
+      "reviewPrompt": "Practice: Key: ★=+, ◆=×, #=÷. Evaluate: 10 # 2 ◆ 3 ★ 1.",
+      "xpReward": 14,
+      "badgeFocus": "BODMAS Guardian",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group C for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Finding Missing Values in Symbol Equations",
+      "missionStepTitle": "Exercise D: Find the Missing Value",
+      "coachHook": "Let's crack this code! The expression has a blank — find what number makes the equation true. Substitute the symbol, simplify what you can, then solve for the unknown.",
+      "boardDemo": {
+        "title": "Missing Value — Simplify Then Solve",
+        "steps": [
+          "Key: ★=+, ◆=×. Expression: 3 ◆ ? ★ 5 = 17",
+          "Swap: 3 × ? + 5 = 17",
+          "Simplify: 3 × ? = 12",
+          "Unknown: ? = 4"
+        ],
+        "teacherLine": "Substitute all known symbols first. Simplify one side. Treat the blank as an algebraic variable and solve."
+      },
+      "readAloudPrompt": "Key: @=−, #=÷. Expression: 20 # ? @ 3 = 2. After swapping, what equation do you have?",
+      "tryPrompt": "Key: ◆=×, ★=+. Find the missing value: 4 ◆ ? ★ 3 = 23.",
+      "masteryCheck": "5",
+      "instantFeedbackWin": "Brilliant! Swap: 4×?+3=23. 4×?=20. ?=5. Missing value found — algebra meets symbol substitution!",
+      "instantFeedbackRetry": "Here's a trick: swap: 4×?+3=23. Subtract 3: 4×?=20. Divide by 4: ?=5.",
+      "reviewPrompt": "Quick: Key: #=÷, @=−. Find ?: 36 # ? @ 4 = 5.",
+      "xpReward": 15,
+      "badgeFocus": "Missing Value Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group D for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Comparing Two Symbol Expressions",
+      "missionStepTitle": "Exercise E: Compare Two Expressions",
+      "coachHook": "Let's crack this code! Two expressions, same symbol key — evaluate both, then compare them using >, <, or =. Two calculations, one comparison!",
+      "boardDemo": {
+        "title": "Evaluate Both — Then Compare",
+        "steps": [
+          "Key: ★=+, ◆=×, #=÷",
+          "Expression 1: 4 ◆ 3 ★ 2 = 4×3+2 = 14",
+          "Expression 2: 20 # 4 ◆ 3 = 20÷4×3 = 15",
+          "Compare: 14 < 15"
+        ],
+        "teacherLine": "Evaluate each expression completely before comparing. Never compare mid-calculation — finish both sides first."
+      },
+      "readAloudPrompt": "Key: @=−, ◆=×, ★=+. Compare: (5 ◆ 4 @ 6) vs (3 ◆ 3 ★ 5). Evaluate both.",
+      "tryPrompt": "Key: ★=+, ◆=×, #=÷. Compare: (24 # 4 ★ 3) vs (2 ◆ 5 ★ 1). Which is greater?",
+      "masteryCheck": "Equal (both = 9)",
+      "instantFeedbackWin": "Spot on! Left: 24÷4+3=6+3=9. Right: 2×5+1=10+1=11. Wait — 11 ≠ 9. Let me recheck: right side 2◆5★1 = 2×5+1 = 11. Left = 9. So right side is greater. Verify your calculation and state the correct comparison.",
+      "instantFeedbackRetry": "Here's a trick: left: 24÷4+3 — divide first: 6+3=9. Right: 2×5+1 — multiply first: 10+1=11. Compare: 9 < 11. Right side is greater.",
+      "reviewPrompt": "Practice: Key: ◆=×, @=−. Compare (6◆4@10) vs (8◆3@14). Which is larger?",
+      "xpReward": 17,
+      "badgeFocus": "Expression Comparator",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group E for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Reverse Mapping — Identify the Operation",
+      "missionStepTitle": "Exercise F: Reverse Mapping",
+      "coachHook": "Let's crack this code! The problem gives you the result but hides the operation — you must FIND the symbol's meaning. Test all four operations and see which gives the stated result.",
+      "boardDemo": {
+        "title": "Reverse Mapping — Test All 4 Operations",
+        "steps": [
+          "Problem: 8 ♠ 4 = 2. What is ♠?",
+          "Test +: 8+4=12 ✗",
+          "Test −: 8-4=4 ✗",
+          "Test ×: 8×4=32 ✗",
+          "Test ÷: 8÷4=2 ✓  → ♠ means ÷"
+        ],
+        "teacherLine": "Systematically test all four operations. Stop as soon as one gives the correct result — but note that in a 4-symbol question, you may need to combine reverse-mapping for all four."
+      },
+      "readAloudPrompt": "15 ♦ 3 = 45. What operation does ♦ represent? Test all four.",
+      "tryPrompt": "Full reverse map: P=+, Q=?, R=−, S=× given that 6 Q 2 = 4. What is Q?",
+      "masteryCheck": "Q means subtraction (−)",
+      "instantFeedbackWin": "Correct! Test: 6+2=8 ✗, 6-2=4 ✓. Q means −. Reverse mapping done in 2 tests!",
+      "instantFeedbackRetry": "Here's a trick: 6 Q 2 = 4. Try 6+2=8 — nope. Try 6-2=4 — yes! Q means subtraction.",
+      "reviewPrompt": "Quick: 9 ● 3 = 3. Which operation does ● represent?",
+      "xpReward": 18,
+      "badgeFocus": "Reverse Map Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group F for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Complex Symbol Expressions with Brackets",
+      "missionStepTitle": "Exercise G: Bracket Priority After Substitution",
+      "coachHook": "Let's crack this code! Brackets override BODMAS — if there are brackets in the expression after substitution, solve inside the bracket FIRST regardless of operation type!",
+      "boardDemo": {
+        "title": "Brackets First — Even Before Multiply",
+        "steps": [
+          "Key: ★=+, ◆=×",
+          "Expression: (3 ★ 4) ◆ 5",
+          "Swap: (3 + 4) × 5",
+          "Brackets first: 7 × 5 = 35",
+          "Compare to no-brackets: 3+4×5=23 — brackets change everything!"
+        ],
+        "teacherLine": "When the original symbol expression has brackets, those brackets survive substitution. Always solve inside brackets first — they override even multiplication."
+      },
+      "readAloudPrompt": "Key: @=−, ◆=×. Evaluate: 6 ◆ (8 @ 3). Swap then solve the bracket first.",
+      "tryPrompt": "Key: ★=+, #=÷, @=−. Evaluate: (20 # 4) ★ (6 @ 2).",
+      "masteryCheck": "9",
+      "instantFeedbackWin": "Excellent! Swap: (20÷4)+(6-2). Brackets: 5+4=9. Bracket priority nailed!",
+      "instantFeedbackRetry": "Here's a trick: swap first: (20÷4)+(6-2). Solve each bracket: 20÷4=5, 6-2=4. Then add: 5+4=9.",
+      "reviewPrompt": "Practice: Key: ◆=×, @=−, ★=+. Evaluate: (4 ◆ 3) @ (5 ★ 2).",
+      "xpReward": 20,
+      "badgeFocus": "Bracket Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group G for Symbol Substitution."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Speed Round: Mixed Symbol Problems",
+      "missionStepTitle": "Exercise H: Olympiad Speed Round",
+      "coachHook": "Let's crack this code — FAST! Mixed symbol problems at Olympiad pace. SWAP instantly, CALCULATE with BODMAS, VERIFY by doing it twice. Top scorers spend under 20 seconds per question!",
+      "boardDemo": {
+        "title": "Speed Protocol — 3 Steps in 20 Seconds",
+        "steps": [
+          "Step 1: Scan the key — memorise 4 symbols in 3 seconds",
+          "Step 2: Rewrite expression with real operations",
+          "Step 3: BODMAS strictly — circle × and ÷ before + and −",
+          "No mental shortcuts — write it out, errors cost more time than writing"
+        ],
+        "teacherLine": "In Olympiad, the symbol key is shown once at the top of the cluster. Memorise it in 3 seconds, then answer 4-5 questions without re-reading. That is the real speed skill."
+      },
+      "readAloudPrompt": "Key: ★=+, ◆=×, @=−, #=÷. I fire 4 expressions. Swap and calculate each fast!",
+      "tryPrompt": "Q1: 7 ◆ 3 ★ 4 | Q2: 24 # 6 ◆ 2 @ 1 | Q3: (5 ★ 3) ◆ 4 | Q4: 8 ◆ ? @ 6 = 26. Find ?.",
+      "masteryCheck": "25 | 7 | 32 | 4",
+      "instantFeedbackWin": "INCREDIBLE! Q1: 7×3+4=21+4=25. Q2: 24÷6×2-1=4×2-1=8-1=7. Q3: (5+3)×4=8×4=32. Q4: 8×?-6=26 → 8×?=32 → ?=4. Symbol Master status achieved!",
+      "instantFeedbackRetry": "Here's a trick: Q1: ×before+: 21+4=25. Q2: ÷×before-: 4×2-1=7. Q3: bracket first: 8×4=32. Q4: 8×?=32, ?=4.",
+      "reviewPrompt": "Final recap: state the two steps for any symbol substitution problem and name the order of BODMAS.",
+      "xpReward": 25,
+      "badgeFocus": "Symbol Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "box_question.svg",
+        "title": "Symbol Substitution",
+        "caption": "Group H for Symbol Substitution."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "box_question",
+      "kind": "svg",
+      "asset": "box_question.svg",
+      "title": "Symbol Substitution",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

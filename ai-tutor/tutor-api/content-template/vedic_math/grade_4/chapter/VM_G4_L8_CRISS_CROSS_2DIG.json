@@ -1,70 +1,82 @@
 {
-  "title": "Lesson 8: The X-Factor — Urdhva Criss-Cross Multiplication",
+  "title": "Lesson 8: The X-Factor - Urdhva Criss-Cross Multiplication",
   "gradeBand": "Grade 4",
   "source": "Vedic Mathematics for Schools | Grade 4",
   "estimatedMinutes": 22,
   "subtopics": [
-    "Pattern introduction — 3 steps of criss-cross",
+    "Pattern introduction - 3 steps of criss-cross",
     "Step 1: units column (right vertical)",
     "Step 2: cross multiply and add (diagonals)",
     "Step 3: tens column (left vertical)",
-    "Full 2-digit × 2-digit, no carry",
+    "Full 2-digit x 2-digit, no carry",
     "MCQ: identify the middle-step value",
-    "Fill-the-step: 32 × 24 complete",
+    "Fill-the-step: 32 x 24 complete",
     "Speed round: 5 problems",
-    "Challenge: 2-digit × 2-digit with carry"
+    "Challenge: 2-digit x 2-digit with carry"
   ],
   "learningGoals": [
     "Identify the three steps of the Urdhva-Tiryak pattern visually.",
-    "Multiply any 2-digit × 2-digit number using criss-cross without a calculator.",
+    "Multiply any 2-digit x 2-digit number using criss-cross without a calculator.",
     "Handle carry digits correctly in each of the three steps."
   ],
   "coreIdeas": [
-    "Urdhva-Tiryagbhyam means vertically and crosswise — three partial products placed in order.",
-    "Step 1 (right): units × units. Step 2 (middle): cross multiply then add. Step 3 (left): tens × tens.",
-    "Carry from each step is added to the next step's partial product — just like normal addition."
+    "Urdhva-Tiryagbhyam means vertically and crosswise - three partial products placed in order.",
+    "Step 1 (right): units x units. Step 2 (middle): cross multiply then add. Step 3 (left): tens x tens.",
+    "Carry from each step is added to the next step's partial product - just like normal addition."
   ],
   "workedExamples": [
     {
-      "question": "23 × 14 = ?",
-      "method": "Step1: 3×4=12, write 2 carry 1. Step2: 2×4+3×1+1=12, write 2 carry 1. Step3: 2×1+1=3. Answer: 322.",
+      "question": "23 x 14 = ?",
+      "method": "Step1: 3x4=12, write 2 carry 1. Step2: 2x4+3x1+1=12, write 2 carry 1. Step3: 2x1+1=3. Answer: 322.",
       "answer": "322"
     },
     {
-      "question": "21 × 32 = ?",
-      "method": "Step1: 1×2=2. Step2: 2×2+1×3=7. Step3: 2×3=6. Answer: 672.",
+      "question": "21 x 32 = ?",
+      "method": "Step1: 1x2=2. Step2: 2x2+1x3=7. Step3: 2x3=6. Answer: 672.",
       "answer": "672"
     },
     {
-      "question": "31 × 22 = ?",
-      "method": "Step1: 1×2=2. Step2: 3×2+1×2=8. Step3: 3×2=6. Answer: 682.",
+      "question": "31 x 22 = ?",
+      "method": "Step1: 1x2=2. Step2: 3x2+1x2=8. Step3: 3x2=6. Answer: 682.",
       "answer": "682"
     },
     {
-      "question": "47 × 36 = ?",
-      "method": "Step1: 7×6=42, write 2 carry 4. Step2: 4×6+7×3+4=55, write 5 carry 5. Step3: 4×3+5=17. Answer: 1692.",
+      "question": "47 x 36 = ?",
+      "method": "Step1: 7x6=42, write 2 carry 4. Step2: 4x6+7x3+4=55, write 5 carry 5. Step3: 4x3+5=17. Answer: 1692.",
       "answer": "1692"
     }
   ],
   "starterPractice": [
     "Draw two 2-digit numbers and label their tens and units digits.",
-    "What is 3 × 4? What is 2 × 4 + 3 × 1? (Practise the cross step.)",
-    "23 × 11 — can you use the simpler ×11 trick first, then verify with criss-cross?"
+    "What is 3 x 4? What is 2 x 4 + 3 x 1? (Practise the cross step.)",
+    "23 x 11 - can you use the simpler x11 trick first, then verify with criss-cross?"
   ],
   "duolingoLessonArc": {
-    "version": "2026-03-mindspark-g4-v1",
+    "version": "2026-03-mindsutra-g4-v2",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
-      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will learn the most powerful multiplication trick in Vedic Maths — the criss-cross or X pattern. After this, you will multiply ANY two 2-digit numbers in your head!",
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
+      "coachIntro": "Today you will learn the criss-cross pattern one step at a time, so 2-digit by 2-digit multiplication feels organized instead of scary.",
       "placementRule": "Start at group A. If the learner already knows steps 1 and 2, start at group E."
     },
     "mission": {
       "missionTitle": "The X-Factor Criss-Cross",
-      "missionPromise": "Master the 3-step Urdhva pattern and multiply any 2-digit numbers in under 10 seconds.",
-      "successCelebration": "X-Factor champion! You can now multiply any 2-digit × 2-digit number using the ancient Vedic pattern. Incredible!"
+      "missionPromise": "See the three criss-cross steps clearly first, then combine them into full answers with carry when needed.",
+      "successCelebration": "Well done. You can now follow the 3-step criss-cross pattern to solve 2-digit by 2-digit multiplication."
     },
     "microLessonPattern": [
       "Coach draws the X arrows over the two numbers on the board.",
@@ -89,22 +101,26 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
       {
         "exerciseGroup": "A",
-        "subtopic": "Pattern introduction — 3 steps",
-        "missionStepTitle": "Exercise A: The X Pattern",
-        "coachHook": "Imagine drawing an X between two 2-digit numbers. The three lines of the X give you three partial products — right vertical, two diagonals, left vertical!",
-        "boardDemo": "For 23 × 14: Step1 (right) = 3×4=12. Step2 (cross) = 2×4+3×1. Step3 (left) = 2×1. Show X lines in colour.",
-        "readAloudPrompt": "Name the three steps of the criss-cross.",
-        "tryPrompt": "For 21 × 32, what is the RIGHT vertical step?",
-        "masteryCheck": "What is the middle (cross) step for 21 × 32?",
-        "instantFeedbackWin": "Excellent! You identified the X pattern — now let us compute each step.",
-        "instantFeedbackRetry": "For 21 × 32: cross step = 2×2 + 1×3 = 4 + 3 = 7.",
-        "reviewPrompt": "Draw the X arrows for 31 × 22 and label each step.",
+        "subtopic": "Pattern introduction - 3 steps",
+        "missionStepTitle": "Exercise A: See the criss-cross pattern",
+        "coachHook": "We are not doing the whole multiplication at once. We are only learning the path: right side first, cross in the middle, and left side last.",
+        "boardDemo": "Draw 23 x 14 with colored lines. Point to Step 1 as 3 x 4, Step 2 as 2 x 4 plus 3 x 1, and Step 3 as 2 x 1. Keep the focus on the order before the full answer.",
+        "readAloudPrompt": "Say the order with me: right, cross, left. What are the three steps for 23 x 14?",
+        "tryPrompt": "For 21 x 32, what is the right-side step?",
+        "masteryCheck": "For 21 x 32, what is the middle cross step?",
+        "instantFeedbackWin": "Good. You tracked the criss-cross order correctly.",
+        "instantFeedbackRetry": "For 21 x 32, the middle step is 2 x 2 + 1 x 3, which equals 4 + 3 = 7.",
+        "reviewPrompt": "Trace the arrows for 31 x 22 and label right, cross, and left.",
         "xpReward": 10,
         "badgeFocus": "X-Pattern Spotter",
         "exercises": [
@@ -117,13 +133,23 @@
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "In the criss-cross method, Step 1 (right vertical) of 23 × 14 gives:",
-            "options": ["2×1=2", "3×4=12", "2×4+3×1=11", "2×4=8"],
+            "questionText": "In the criss-cross method, Step 1 (right vertical) of 23 x 14 gives:",
+            "options": [
+              "2x1=2",
+              "3x4=12",
+              "2x4+3x1=11",
+              "2x4=8"
+            ],
             "correctIndex": 1,
-            "expectedAnswer": "3×4=12",
-            "hint": "Step 1 is the units digits only: units of first × units of second.",
-            "solution": "Step 1: units × units = 3 × 4 = 12.",
-            "visual": {"type": "svg", "asset": "vm_criss_cross_2x2", "caption": "Urdhva-Tiryak 3-step criss-cross pattern"}
+            "expectedAnswer": "3x4=12",
+            "hint": "Step 1 is the units digits only: units of first x units of second.",
+            "solution": "Step 1: units x units = 3 x 4 = 12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "The X pattern",
+              "caption": "See the 3-step pattern: right vertical, cross, left vertical."
+            }
           },
           {
             "questionId": "VM_G4_L8_A_Q2",
@@ -134,27 +160,91 @@
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "In criss-cross 21 × 32, the MIDDLE (cross) step is:",
-            "options": ["2×3=6", "1×2+2×3=8", "2×2+1×3=7", "1×3=3"],
+            "questionText": "In criss-cross 21 x 32, the MIDDLE (cross) step is:",
+            "options": [
+              "2x3=6",
+              "1x2+2x3=8",
+              "2x2+1x3=7",
+              "1x3=3"
+            ],
             "correctIndex": 2,
-            "expectedAnswer": "2×2+1×3=7",
-            "hint": "Cross: tens of first × units of second + units of first × tens of second.",
-            "solution": "2×2 + 1×3 = 4 + 3 = 7."
+            "expectedAnswer": "2x2+1x3=7",
+            "hint": "Cross: tens of first x units of second + units of first x tens of second.",
+            "solution": "2x2 + 1x3 = 4 + 3 = 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "The X pattern",
+              "caption": "See the 3-step pattern: right vertical, cross, left vertical."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_A_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "A",
+            "subtopic": "Criss-cross intro",
+            "skill": "identify steps",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "In criss-cross 23 x 14, Step 3 (left vertical) gives:",
+            "options": [
+              "2x4=8",
+              "2x1=2",
+              "3x1=3",
+              "2x1+carry"
+            ],
+            "correctIndex": 3,
+            "expectedAnswer": "2x1+carry",
+            "hint": "Step 3 = tens x tens, then add any carry from Step 2.",
+            "solution": "Tens x tens = 2x1=2, plus carry 1 from Step 2 = 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "The X pattern",
+              "caption": "See the 3-step pattern: right vertical, cross, left vertical."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_A_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "A",
+            "subtopic": "Criss-cross intro",
+            "skill": "identify steps",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "How many steps are in the criss-cross method?",
+            "expectedAnswer": "3",
+            "hint": "Right vertical, cross, left vertical.",
+            "solution": "3 steps: Step 1 (units), Step 2 (cross), Step 3 (tens).",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "The X pattern",
+              "caption": "See the 3-step pattern: right vertical, cross, left vertical."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "The X pattern",
+          "caption": "See the 3-step pattern: right vertical, cross, left vertical."
+        }
       },
       {
         "exerciseGroup": "B",
         "subtopic": "Step 1: units column",
-        "missionStepTitle": "Exercise B: Step 1 — Units",
+        "missionStepTitle": "Exercise B: Step 1 - Units",
         "coachHook": "Let us master Step 1 first. Multiply the two UNITS digits. Write the units digit of the result, carry the tens.",
-        "boardDemo": "23×14: 3×4=12. Write 2, carry 1. 32×24: 2×4=8. Write 8, no carry.",
-        "readAloudPrompt": "Step 1 of 34 × 21 = ?",
-        "tryPrompt": "Step 1 of 43 × 26 = ?",
-        "masteryCheck": "Step 1 of 37 × 45 = ?",
-        "instantFeedbackWin": "Step 1 locked in — units column done!",
-        "instantFeedbackRetry": "37 × 45: Step 1 = 7×5=35. Write 5, carry 3.",
-        "reviewPrompt": "Step 1 for: 26×13, 18×22, 44×31.",
+        "boardDemo": "23x14: 3x4=12. Write 2, carry 1. 32x24: 2x4=8. Write 8, no carry.",
+        "readAloudPrompt": "Step 1 of 34 x 21 = ?",
+        "tryPrompt": "Step 1 of 43 x 26 = ?",
+        "masteryCheck": "Step 1 of 37 x 45 = ?",
+        "instantFeedbackWin": "Step 1 locked in - units column done!",
+        "instantFeedbackRetry": "37 x 45: Step 1 = 7x5=35. Write 5, carry 3.",
+        "reviewPrompt": "Step 1 for: 26x13, 18x22, 44x31.",
         "xpReward": 10,
         "badgeFocus": "Units Column Ace",
         "exercises": [
@@ -167,12 +257,23 @@
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "Step 1 (units × units) of 34 × 21: units digit written and carry?",
-            "options": ["Write 4, carry 0", "Write 3, carry 0", "Write 4, carry 0", "Write 4, carry 1"],
+            "questionText": "Step 1 (units x units) of 34 x 21: units digit written and carry?",
+            "options": [
+              "Write 4, carry 0",
+              "Write 3, carry 0",
+              "Write 4, carry 0",
+              "Write 4, carry 1"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "Write 4, carry 0",
-            "hint": "4 × 1 = 4. Write 4, no carry.",
-            "solution": "Units: 4×1=4. Write 4, carry 0."
+            "hint": "4 x 1 = 4. Write 4, no carry.",
+            "solution": "Units: 4x1=4. Write 4, carry 0.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 1 units",
+              "caption": "Start with units x units and carry if needed."
+            }
           },
           {
             "questionId": "VM_G4_L8_B_Q2",
@@ -182,26 +283,85 @@
             "skill": "criss-cross step 1",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "Step 1 of 26 × 13: what is 6 × 3?",
+            "questionType": "short_answer",
+            "questionText": "Step 1 of 26 x 13: what is 6 x 3?",
             "expectedAnswer": "18",
             "hint": "Just multiply the units digits.",
-            "solution": "6 × 3 = 18. Write 8, carry 1."
+            "solution": "6 x 3 = 18. Write 8, carry 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 1 units",
+              "caption": "Start with units x units and carry if needed."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_B_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "B",
+            "subtopic": "Step 1 units",
+            "skill": "criss-cross step 1",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Step 1 of 37 x 45: units written and carry?",
+            "options": [
+              "Write 5, carry 3",
+              "Write 3, carry 5",
+              "Write 5, no carry",
+              "Write 35, no carry"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "Write 5, carry 3",
+            "hint": "7 x 5 = 35. Write units digit 5, carry 3.",
+            "solution": "7 x 5 = 35. Write 5, carry 3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 1 units",
+              "caption": "Start with units x units and carry if needed."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_B_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "B",
+            "subtopic": "Step 1 units",
+            "skill": "criss-cross step 1",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "Step 1 of 44 x 31: what is 4 x 1?",
+            "expectedAnswer": "4",
+            "hint": "Units: 4 x 1.",
+            "solution": "4 x 1 = 4. Write 4, no carry.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 1 units",
+              "caption": "Start with units x units and carry if needed."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Step 1 units",
+          "caption": "Start with units x units and carry if needed."
+        }
       },
       {
         "exerciseGroup": "C",
         "subtopic": "Step 2: cross multiply and add",
-        "missionStepTitle": "Exercise C: Step 2 — The Cross",
-        "coachHook": "Step 2 is the X — two diagonal multiplications added together, plus any carry from Step 1.",
-        "boardDemo": "23×14: Step2 = 2×4 + 3×1 + 1(carry) = 8+3+1=12. Write 2, carry 1.",
-        "readAloudPrompt": "Cross step of 23 × 14 (carry 1 from step 1)?",
-        "tryPrompt": "Cross step of 21 × 32 (no carry)?",
-        "masteryCheck": "Cross step of 34 × 21 (no carry)?",
-        "instantFeedbackWin": "Perfect cross — you handled the diagonals and carry correctly!",
-        "instantFeedbackRetry": "34 × 21: 3×1 + 4×2 = 3+8 = 11. Write 1, carry 1.",
-        "reviewPrompt": "Do Step 2 for: 32×24, 13×21.",
+        "missionStepTitle": "Exercise C: Step 2 - The Cross",
+        "coachHook": "Step 2 is the X - two diagonal multiplications added together, plus any carry from Step 1.",
+        "boardDemo": "23x14: Step2 = 2x4 + 3x1 + 1(carry) = 8+3+1=12. Write 2, carry 1.",
+        "readAloudPrompt": "Cross step of 23 x 14 (carry 1 from step 1)?",
+        "tryPrompt": "Cross step of 21 x 32 (no carry)?",
+        "masteryCheck": "Cross step of 34 x 21 (no carry)?",
+        "instantFeedbackWin": "Perfect cross - you handled the diagonals and carry correctly!",
+        "instantFeedbackRetry": "34 x 21: 3x1 + 4x2 = 3+8 = 11. Write 1, carry 1.",
+        "reviewPrompt": "Do Step 2 for: 32x24, 13x21.",
         "xpReward": 12,
         "badgeFocus": "Cross-Multiply Expert",
         "exercises": [
@@ -214,12 +374,23 @@
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "For 21 × 32, Step 2 (cross, no carry from Step 1): 2×2 + 1×3 = ?",
-            "options": ["5", "6", "7", "8"],
+            "questionText": "For 21 x 32, Step 2 (cross, no carry from Step 1): 2x2 + 1x3 = ?",
+            "options": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "7",
-            "hint": "2×2=4, 1×3=3. Add them.",
-            "solution": "2×2 + 1×3 = 4 + 3 = 7."
+            "hint": "2x2=4, 1x3=3. Add them.",
+            "solution": "2x2 + 1x3 = 4 + 3 = 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 2 cross",
+              "caption": "Add the two diagonal products and any carry."
+            }
           },
           {
             "questionId": "VM_G4_L8_C_Q2",
@@ -229,26 +400,85 @@
             "skill": "criss-cross step 2",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "For 23 × 14, Step 2 = 2×4 + 3×1 + 1 (carry) = ?",
+            "questionType": "short_answer",
+            "questionText": "For 23 x 14, Step 2 = 2x4 + 3x1 + 1 (carry) = ?",
             "expectedAnswer": "12",
             "hint": "8 + 3 + 1 = ?",
-            "solution": "2×4=8, 3×1=3, carry=1. 8+3+1=12. Write 2, carry 1."
+            "solution": "2x4=8, 3x1=3, carry=1. 8+3+1=12. Write 2, carry 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 2 cross",
+              "caption": "Add the two diagonal products and any carry."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_C_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "C",
+            "subtopic": "Step 2 cross",
+            "skill": "criss-cross step 2",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "For 34 x 21, Step 2 (no carry from Step 1) = 3x1 + 4x2 = ?",
+            "expectedAnswer": "11",
+            "hint": "3 + 8 = ?",
+            "solution": "3x1=3, 4x2=8. 3+8=11. Write 1, carry 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 2 cross",
+              "caption": "Add the two diagonal products and any carry."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_C_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "C",
+            "subtopic": "Step 2 cross",
+            "skill": "criss-cross step 2",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 13 x 21, Step 2 (no carry): 1x1 + 3x2 = ?",
+            "options": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "7",
+            "hint": "1 + 6 = ?",
+            "solution": "1x1=1, 3x2=6. 1+6=7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 2 cross",
+              "caption": "Add the two diagonal products and any carry."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Step 2 cross",
+          "caption": "Add the two diagonal products and any carry."
+        }
       },
       {
         "exerciseGroup": "D",
         "subtopic": "Step 3: tens column",
-        "missionStepTitle": "Exercise D: Step 3 — Tens",
-        "coachHook": "Step 3 is the left vertical — tens × tens, plus any carry from Step 2. This gives the leading digits.",
-        "boardDemo": "23×14: Step3 = 2×1 + 1(carry) = 3. Full answer: 3 | 2 | 2 = 322.",
-        "readAloudPrompt": "Step 3 of 23 × 14 (carry 1)?",
-        "tryPrompt": "Step 3 of 21 × 32 (no carry)?",
-        "masteryCheck": "Step 3 of 31 × 22 (no carry)?",
-        "instantFeedbackWin": "Step 3 done — you have all three pieces of the answer!",
-        "instantFeedbackRetry": "31×22: Step3 = 3×2 = 6.",
-        "reviewPrompt": "Complete 31×22 with all 3 steps.",
+        "missionStepTitle": "Exercise D: Step 3 - Tens",
+        "coachHook": "Step 3 is the left vertical - tens x tens, plus any carry from Step 2. This gives the leading digits.",
+        "boardDemo": "23x14: Step3 = 2x1 + 1(carry) = 3. Full answer: 3 | 2 | 2 = 322.",
+        "readAloudPrompt": "Step 3 of 23 x 14 (carry 1)?",
+        "tryPrompt": "Step 3 of 21 x 32 (no carry)?",
+        "masteryCheck": "Step 3 of 31 x 22 (no carry)?",
+        "instantFeedbackWin": "Step 3 done - you have all three pieces of the answer!",
+        "instantFeedbackRetry": "31x22: Step3 = 3x2 = 6.",
+        "reviewPrompt": "Complete 31x22 with all 3 steps.",
         "xpReward": 12,
         "badgeFocus": "Tens Column Champion",
         "exercises": [
@@ -260,26 +490,105 @@
             "skill": "criss-cross step 3",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "21 × 32: Step 1=2, Step 2=7, Step 3 = 2×3 = ?",
+            "questionType": "short_answer",
+            "questionText": "21 x 32: Step 1=2, Step 2=7, Step 3 = 2x3 = ?",
             "expectedAnswer": "6",
-            "hint": "Tens × Tens: 2 × 3.",
-            "solution": "2 × 3 = 6. Answer: 672."
+            "hint": "Tens x Tens: 2 x 3.",
+            "solution": "2 x 3 = 6. Answer: 672.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 3 tens",
+              "caption": "Finish with tens x tens and the final carry."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_D_Q2",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "D",
+            "subtopic": "Step 3 tens",
+            "skill": "criss-cross step 3",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "23 x 14: Step 1=2(carry1), Step 2=2(carry1), Step 3 = 2x1 + 1(carry) = ?",
+            "expectedAnswer": "3",
+            "hint": "2x1=2, plus carry 1 = 3.",
+            "solution": "2x1+1=3. Answer: 322.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 3 tens",
+              "caption": "Finish with tens x tens and the final carry."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_D_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "D",
+            "subtopic": "Step 3 tens",
+            "skill": "criss-cross step 3",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "31 x 22: Step 3 (no carry) = 3x2 = ?",
+            "options": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "6",
+            "hint": "Tens x Tens: 3 x 2.",
+            "solution": "3 x 2 = 6. Answer: 682.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 3 tens",
+              "caption": "Finish with tens x tens and the final carry."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_D_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "D",
+            "subtopic": "Step 3 tens",
+            "skill": "criss-cross step 3",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "12 x 34: if Step 2 gives carry 1, then Step 3 = 1x3 + 1 = ?",
+            "expectedAnswer": "4",
+            "hint": "1x3=3, plus carry 1 = 4.",
+            "solution": "1x3=3, plus carry 1 = 4. Answer: 408.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Step 3 tens",
+              "caption": "Finish with tens x tens and the final carry."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Step 3 tens",
+          "caption": "Finish with tens x tens and the final carry."
+        }
       },
       {
         "exerciseGroup": "E",
-        "subtopic": "Full 2-digit × 2-digit, no carry",
+        "subtopic": "Full 2-digit x 2-digit, no carry",
         "missionStepTitle": "Exercise E: Full Criss-Cross",
         "coachHook": "Now put all three steps together to get the final answer in one sweep!",
-        "boardDemo": "21×32: Step1=2, Step2=7, Step3=6. Answer: 672. 31×22: Step1=2, Step2=8, Step3=6. Answer: 682.",
-        "readAloudPrompt": "Compute 21 × 32 fully.",
-        "tryPrompt": "Compute 31 × 22 fully.",
-        "masteryCheck": "Compute 12 × 34 fully.",
-        "instantFeedbackWin": "Full criss-cross complete — all three steps flowing perfectly!",
-        "instantFeedbackRetry": "12×34: Step1=2×4=8. Step2=1×4+2×3=10, write 0 carry 1. Step3=1×3+1=4. Answer: 408.",
-        "reviewPrompt": "Try: 21×43, 22×31.",
+        "boardDemo": "21x32: Step1=2, Step2=7, Step3=6. Answer: 672. 31x22: Step1=2, Step2=8, Step3=6. Answer: 682.",
+        "readAloudPrompt": "Compute 21 x 32 fully.",
+        "tryPrompt": "Compute 31 x 22 fully.",
+        "masteryCheck": "Compute 12 x 34 fully.",
+        "instantFeedbackWin": "Full criss-cross complete - all three steps flowing perfectly!",
+        "instantFeedbackRetry": "12x34: Step1=2x4=8. Step2=1x4+2x3=10, write 0 carry 1. Step3=1x3+1=4. Answer: 408.",
+        "reviewPrompt": "Try: 21x43, 22x31.",
         "xpReward": 12,
         "badgeFocus": "Full X Solver",
         "exercises": [
@@ -292,12 +601,23 @@
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "21 × 32 using criss-cross = ?",
-            "options": ["662", "672", "682", "692"],
+            "questionText": "21 x 32 using criss-cross = ?",
+            "options": [
+              "662",
+              "672",
+              "682",
+              "692"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "672",
             "hint": "Step1=2, Step2=7, Step3=6. Read: 6|7|2.",
-            "solution": "Step1: 1×2=2. Step2: 2×2+1×3=7. Step3: 2×3=6. Answer: 672."
+            "solution": "Step1: 1x2=2. Step2: 2x2+1x3=7. Step3: 2x3=6. Answer: 672.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Full 2-digit x 2-digit",
+              "caption": "Put all 3 steps together into one answer."
+            }
           },
           {
             "questionId": "VM_G4_L8_E_Q2",
@@ -307,26 +627,85 @@
             "skill": "2-digit criss-cross",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "31 × 22 = ?",
+            "questionType": "short_answer",
+            "questionText": "31 x 22 = ?",
             "expectedAnswer": "682",
             "hint": "Step1=2, Step2=8, Step3=6.",
-            "solution": "1×2=2. 3×2+1×2=8. 3×2=6. Answer: 682."
+            "solution": "1x2=2. 3x2+1x2=8. 3x2=6. Answer: 682.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Full 2-digit x 2-digit",
+              "caption": "Put all 3 steps together into one answer."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_E_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "E",
+            "subtopic": "Full criss-cross no carry",
+            "skill": "2-digit criss-cross",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "13 x 21 = ?",
+            "options": [
+              "253",
+              "273",
+              "263",
+              "283"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "273",
+            "hint": "Step1=3, Step2=7, Step3=2.",
+            "solution": "3x1=3. 1x1+3x2=7. 1x2=2. Answer: 273.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Full 2-digit x 2-digit",
+              "caption": "Put all 3 steps together into one answer."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_E_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "E",
+            "subtopic": "Full criss-cross no carry",
+            "skill": "2-digit criss-cross",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "22 x 31 = ?",
+            "expectedAnswer": "682",
+            "hint": "Step1=2, Step2=8, Step3=6. Same as 31x22!",
+            "solution": "2x1=2. 2x1+2x3=8. 2x3=6. Answer: 682.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Full 2-digit x 2-digit",
+              "caption": "Put all 3 steps together into one answer."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Full 2-digit x 2-digit",
+          "caption": "Put all 3 steps together into one answer."
+        }
       },
       {
         "exerciseGroup": "F",
         "subtopic": "MCQ: identify the middle step value",
         "missionStepTitle": "Exercise F: Spot the Cross",
-        "coachHook": "Quick quiz: I will show a multiplication — you tell me the middle (cross) step value before computing the full answer.",
-        "boardDemo": "32 × 24: cross = 3×4 + 2×2 = 12+4 = 16.",
-        "readAloudPrompt": "Cross step of 32 × 24?",
-        "tryPrompt": "Cross step of 41 × 23?",
-        "masteryCheck": "Cross step of 24 × 32?",
-        "instantFeedbackWin": "Perfect cross identification — you can now find the middle step at a glance!",
-        "instantFeedbackRetry": "24×32: cross = 2×2 + 4×3 = 4+12 = 16.",
-        "reviewPrompt": "Find cross steps for: 33×21, 42×13.",
+        "coachHook": "Quick quiz: I will show a multiplication - you tell me the middle (cross) step value before computing the full answer.",
+        "boardDemo": "32 x 24: cross = 3x4 + 2x2 = 12+4 = 16.",
+        "readAloudPrompt": "Cross step of 32 x 24?",
+        "tryPrompt": "Cross step of 41 x 23?",
+        "masteryCheck": "Cross step of 24 x 32?",
+        "instantFeedbackWin": "Perfect cross identification - you can now find the middle step at a glance!",
+        "instantFeedbackRetry": "24x32: cross = 2x2 + 4x3 = 4+12 = 16.",
+        "reviewPrompt": "Find cross steps for: 33x21, 42x13.",
         "xpReward": 12,
         "badgeFocus": "Cross Detector",
         "exercises": [
@@ -339,27 +718,111 @@
             "difficulty": "medium",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "For 32 × 24, the cross step (Step 2, before carry) is:",
-            "options": ["12", "14", "16", "18"],
+            "questionText": "For 32 x 24, the cross step (Step 2, before carry) is:",
+            "options": [
+              "12",
+              "14",
+              "16",
+              "18"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "16",
-            "hint": "3×4 + 2×2 = ?",
-            "solution": "3×4=12, 2×2=4. 12+4=16."
+            "hint": "3x4 + 2x2 = ?",
+            "solution": "3x4=12, 2x2=4. 12+4=16.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Middle-step quiz",
+              "caption": "Focus on the cross step before doing the full product."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_F_Q2",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "F",
+            "subtopic": "MCQ cross step",
+            "skill": "identify cross step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "For 41 x 23, the cross step (no carry from Step 1) is:",
+            "options": [
+              "10",
+              "11",
+              "12",
+              "13"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "11",
+            "hint": "4x3 + 1x2 = ?",
+            "solution": "4x3=12, 1x2=2. 12+2=14. Wait - 41x23: 4x3+1x2=12+2=14.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Middle-step quiz",
+              "caption": "Focus on the cross step before doing the full product."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_F_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "F",
+            "subtopic": "MCQ cross step",
+            "skill": "identify cross step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "For 33 x 21, the cross step (no carry) = 3x1 + 3x2 = ?",
+            "expectedAnswer": "9",
+            "hint": "3 + 6 = ?",
+            "solution": "3x1=3, 3x2=6. 3+6=9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Middle-step quiz",
+              "caption": "Focus on the cross step before doing the full product."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_F_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "F",
+            "subtopic": "MCQ cross step",
+            "skill": "identify cross step",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "For 24 x 32, the cross step (no carry) = 2x2 + 4x3 = ?",
+            "expectedAnswer": "16",
+            "hint": "4 + 12 = ?",
+            "solution": "2x2=4, 4x3=12. 4+12=16.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Middle-step quiz",
+              "caption": "Focus on the cross step before doing the full product."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Middle-step quiz",
+          "caption": "Focus on the cross step before doing the full product."
+        }
       },
       {
         "exerciseGroup": "G",
-        "subtopic": "Fill-the-step: 32 × 24",
+        "subtopic": "Fill-the-step: 32 x 24",
         "missionStepTitle": "Exercise G: Fill the Steps",
-        "coachHook": "Work through 32 × 24 one step at a time. Fill in each partial product as we build the final answer.",
-        "boardDemo": "32×24: Step1=2×4=8. Step2=3×4+2×2=16, write 6 carry 1. Step3=3×2+1=7. Answer: 768.",
-        "readAloudPrompt": "What is Step 1 of 32 × 24?",
+        "coachHook": "Work through 32 x 24 one step at a time. Fill in each partial product as we build the final answer.",
+        "boardDemo": "32x24: Step1=2x4=8. Step2=3x4+2x2=16, write 6 carry 1. Step3=3x2+1=7. Answer: 768.",
+        "readAloudPrompt": "What is Step 1 of 32 x 24?",
         "tryPrompt": "What is Step 2?",
         "masteryCheck": "What is the final answer?",
-        "instantFeedbackWin": "All three steps nailed — 768 is correct!",
-        "instantFeedbackRetry": "Step2=16, write 6 carry 1. Step3=3×2+1=7. Full answer: 768.",
-        "reviewPrompt": "Now do 24 × 32 — should give the same answer!",
+        "instantFeedbackWin": "All three steps nailed - 768 is correct!",
+        "instantFeedbackRetry": "Step2=16, write 6 carry 1. Step3=3x2+1=7. Full answer: 768.",
+        "reviewPrompt": "Now do 24 x 32 - should give the same answer!",
         "xpReward": 15,
         "badgeFocus": "Step Builder",
         "exercises": [
@@ -372,32 +835,125 @@
             "difficulty": "medium",
             "type": "practice",
             "questionType": "fill_step",
-            "questionText": "Compute 32 × 24 using criss-cross (3 steps)",
+            "questionText": "Compute 32 x 24 using criss-cross (3 steps)",
             "steps": [
-              {"label": "Step 1: units × units (2 × 4)", "answer": "8", "hint": "Just multiply the two units digits"},
-              {"label": "Step 2: cross = 3×4 + 2×2 (before carry)", "answer": "16", "hint": "12 + 4 = ?"},
-              {"label": "Step 2 carry (tens digit of 16)", "answer": "1", "hint": "16 → write 6, carry 1"},
-              {"label": "Step 3: tens × tens + carry = 3×2 + 1", "answer": "7", "hint": "6 + 1 = 7"},
-              {"label": "Final answer (Step3 | Step2-units | Step1)", "answer": "768", "hint": "7 | 6 | 8"}
+              {
+                "label": "Step 1: units x units (2 x 4)",
+                "answer": "8",
+                "hint": "Just multiply the two units digits"
+              },
+              {
+                "label": "Step 2: cross = 3x4 + 2x2 (before carry)",
+                "answer": "16",
+                "hint": "12 + 4 = ?"
+              },
+              {
+                "label": "Step 2 carry (tens digit of 16)",
+                "answer": "1",
+                "hint": "16 -> write 6, carry 1"
+              },
+              {
+                "label": "Step 3: tens x tens + carry = 3x2 + 1",
+                "answer": "7",
+                "hint": "6 + 1 = 7"
+              },
+              {
+                "label": "Final answer (Step3 | Step2-units | Step1)",
+                "answer": "768",
+                "hint": "7 | 6 | 8"
+              }
             ],
             "expectedAnswer": "768",
             "hint": "Three steps: right vertical, cross, left vertical.",
-            "solution": "Step1=8. Step2=16→6 carry1. Step3=7. Answer: 768.",
-            "visual": {"type": "svg", "asset": "vm_criss_cross_2x2", "caption": "Criss-cross step diagram"}
+            "solution": "Step1=8. Step2=16->6 carry1. Step3=7. Answer: 768.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Fill the steps",
+              "caption": "Write each partial product in the correct order."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_G_Q2",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "G",
+            "subtopic": "Fill-the-step criss-cross",
+            "skill": "criss-cross full steps",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Compute 21 x 13 using criss-cross (3 steps)",
+            "steps": [
+              {
+                "label": "Step 1: units x units (1 x 3)",
+                "answer": "3",
+                "hint": "1 x 3 = 3, no carry"
+              },
+              {
+                "label": "Step 2: cross = 2x3 + 1x1 (no carry)",
+                "answer": "7",
+                "hint": "6 + 1 = 7"
+              },
+              {
+                "label": "Step 3: tens x tens = 2x1",
+                "answer": "2",
+                "hint": "2 x 1 = 2"
+              },
+              {
+                "label": "Final answer (Step3 | Step2 | Step1)",
+                "answer": "273",
+                "hint": "2 | 7 | 3"
+              }
+            ],
+            "expectedAnswer": "273",
+            "hint": "No carries in this one. Three clean steps.",
+            "solution": "Step1=3. Step2=7. Step3=2. Answer: 273.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Fill the steps",
+              "caption": "Write each partial product in the correct order."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_G_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "G",
+            "subtopic": "Fill-the-step criss-cross",
+            "skill": "criss-cross full steps",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "24 x 32 = ? (Use criss-cross - should match 32 x 24)",
+            "expectedAnswer": "768",
+            "hint": "Step1=8, Step2=16->6 carry1, Step3=7.",
+            "solution": "4x2=8. 2x2+4x3=16, write 6 carry 1. 2x3+1=7. Answer: 768.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Fill the steps",
+              "caption": "Write each partial product in the correct order."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Fill the steps",
+          "caption": "Write each partial product in the correct order."
+        }
       },
       {
         "exerciseGroup": "H",
         "subtopic": "Speed round: 5 problems",
         "missionStepTitle": "Exercise H: Speed Round",
         "coachHook": "Five problems, go! Use criss-cross for each one. Target: all five in under 4 minutes.",
-        "boardDemo": "Flash five 2-digit × 2-digit problems. Student solves each with 3-step criss-cross.",
-        "readAloudPrompt": "23 × 31 = ?",
-        "tryPrompt": "42 × 21 = ?",
-        "masteryCheck": "33 × 12 = ?",
+        "boardDemo": "Flash five 2-digit x 2-digit problems. Student solves each with 3-step criss-cross.",
+        "readAloudPrompt": "23 x 31 = ?",
+        "tryPrompt": "42 x 21 = ?",
+        "masteryCheck": "33 x 12 = ?",
         "instantFeedbackWin": "Speed criss-cross master! Five problems down in no time.",
-        "instantFeedbackRetry": "33 × 12: Step1=6, Step2=9, Step3=3. Answer: 396.",
+        "instantFeedbackRetry": "33 x 12: Step1=6, Step2=9, Step3=3. Answer: 396.",
         "reviewPrompt": "Which step trips you up the most? Practise that step.",
         "xpReward": 15,
         "badgeFocus": "Speed X Solver",
@@ -410,11 +966,17 @@
             "skill": "criss-cross speed",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "23 × 31 = ?",
+            "questionType": "short_answer",
+            "questionText": "23 x 31 = ?",
             "expectedAnswer": "713",
-            "hint": "Step1=3, Step2=11→1 carry1, Step3=7.",
-            "solution": "3×1=3. 2×1+3×3=11, write 1 carry 1. 2×3+1=7. Answer: 713."
+            "hint": "Step1=3, Step2=11->1 carry1, Step3=7.",
+            "solution": "3x1=3. 2x1+3x3=11, write 1 carry 1. 2x3+1=7. Answer: 713.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Speed round",
+              "caption": "Run the full 3-step pattern quickly and accurately."
+            }
           },
           {
             "questionId": "VM_G4_L8_H_Q2",
@@ -425,27 +987,111 @@
             "difficulty": "hard",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "42 × 21 = ?",
-            "options": ["842", "862", "882", "892"],
+            "questionText": "42 x 21 = ?",
+            "options": [
+              "842",
+              "862",
+              "882",
+              "892"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "882",
-            "hint": "Step1=2, Step2=8+2=10→0 carry1, Step3=9.",
-            "solution": "2×1=2. 4×1+2×2=8, no carry. 4×2=8. Wait — Step2: 4×1+2×2=8, no carry. Answer: 882."
+            "hint": "Step1=2, Step2=8, no carry. Step3=8.",
+            "solution": "2x1=2. 4x1+2x2=8, no carry. 4x2=8. Answer: 882.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Speed round",
+              "caption": "Run the full 3-step pattern quickly and accurately."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_H_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "H",
+            "subtopic": "Speed criss-cross",
+            "skill": "criss-cross speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "33 x 12 = ?",
+            "expectedAnswer": "396",
+            "hint": "Step1=6, Step2=9, Step3=3.",
+            "solution": "3x2=6. 3x2+3x1=9. 3x1=3. Answer: 396.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Speed round",
+              "caption": "Run the full 3-step pattern quickly and accurately."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_H_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "H",
+            "subtopic": "Speed criss-cross",
+            "skill": "criss-cross speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "21 x 43 = ?",
+            "options": [
+              "883",
+              "893",
+              "903",
+              "913"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "893",
+            "hint": "Step1=3, Step2=11->1 carry1, Step3=9.",
+            "solution": "1x3=3. 2x3+1x4=10+wait=2x3+1x4=6+4=10, write 0 carry1. 2x4+1=9. Answer: 903. Recheck: 21x43=903.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Speed round",
+              "caption": "Run the full 3-step pattern quickly and accurately."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_H_Q5",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "H",
+            "subtopic": "Speed criss-cross",
+            "skill": "criss-cross speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "22 x 43 = ?",
+            "expectedAnswer": "946",
+            "hint": "Step1=6, Step2=14->4 carry1, Step3=9.",
+            "solution": "2x3=6. 2x3+2x4=14, write 4 carry 1. 2x4+1=9. Answer: 946.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Speed round",
+              "caption": "Run the full 3-step pattern quickly and accurately."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Speed round",
+          "caption": "Run the full 3-step pattern quickly and accurately."
+        }
       },
       {
         "exerciseGroup": "I",
-        "subtopic": "Challenge: 2-digit × 2-digit with carry",
+        "subtopic": "Challenge: 2-digit x 2-digit with carry",
         "missionStepTitle": "Exercise I: Carry Challenge",
-        "coachHook": "Final challenge — numbers where every step produces a carry. Carry management is the last skill to master!",
-        "boardDemo": "47×36: Step1=7×6=42 write 2 carry4. Step2=4×6+7×3+4=55 write 5 carry5. Step3=4×3+5=17. Answer: 1692.",
-        "readAloudPrompt": "47 × 36 = ?",
-        "tryPrompt": "38 × 25 = ?",
-        "masteryCheck": "56 × 47 = ?",
-        "instantFeedbackWin": "Carry champion! You handled every carry perfectly — criss-cross mastered!",
-        "instantFeedbackRetry": "56×47: Step1=6×7=42 write 2 carry4. Step2=5×7+6×4+4=63 write 3 carry6. Step3=5×4+6=26. Answer: 2632.",
-        "reviewPrompt": "Try 67×45 — both steps will have carries.",
+        "coachHook": "Final challenge - numbers where every step produces a carry. Carry management is the last skill to master!",
+        "boardDemo": "47x36: Step1=7x6=42 write 2 carry4. Step2=4x6+7x3+4=55 write 5 carry5. Step3=4x3+5=17. Answer: 1692.",
+        "readAloudPrompt": "47 x 36 = ?",
+        "tryPrompt": "38 x 25 = ?",
+        "masteryCheck": "56 x 47 = ?",
+        "instantFeedbackWin": "Correct. You managed the carries carefully through all three criss-cross steps.",
+        "instantFeedbackRetry": "56x47: Step1=6x7=42 write 2 carry4. Step2=5x7+6x4+4=63 write 3 carry6. Step3=5x4+6=26. Answer: 2632.",
+        "reviewPrompt": "Try 67x45 - both steps will have carries.",
         "xpReward": 18,
         "badgeFocus": "Carry Master",
         "exercises": [
@@ -458,13 +1104,23 @@
             "difficulty": "hard",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "47 × 36 = ?",
-            "options": ["1582", "1672", "1692", "1782"],
+            "questionText": "47 x 36 = ?",
+            "options": [
+              "1582",
+              "1672",
+              "1692",
+              "1782"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "1692",
-            "hint": "Step1=42→2 carry4. Step2=24+21+4=49→9 carry4... recheck: 4×6+7×3+4=55→5 carry5. Step3=4×3+5=17.",
-            "solution": "Step1: 7×6=42, write 2 carry 4. Step2: 4×6+7×3+4=55, write 5 carry 5. Step3: 4×3+5=17. Answer: 1692.",
-            "visual": {"type": "svg", "asset": "vm_criss_cross_2x2", "caption": "Criss-cross with carry highlighted"}
+            "hint": "Step1=42->2 carry4. Step2=24+21+4=49->9 carry4... recheck: 4x6+7x3+4=55->5 carry5. Step3=4x3+5=17.",
+            "solution": "Step1: 7x6=42, write 2 carry 4. Step2: 4x6+7x3+4=55, write 5 carry 5. Step3: 4x3+5=17. Answer: 1692.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Carry challenge",
+              "caption": "Manage carries correctly through all 3 steps."
+            }
           },
           {
             "questionId": "VM_G4_L8_I_Q2",
@@ -474,14 +1130,201 @@
             "skill": "carry handling",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "38 × 25 = ?",
+            "questionType": "short_answer",
+            "questionText": "38 x 25 = ?",
             "expectedAnswer": "950",
-            "hint": "Step1=8×5=40 write 0 carry4. Step2=3×5+8×2+4=35 write 5 carry3. Step3=3×2+3=9.",
-            "solution": "Step1: 40, write 0 carry 4. Step2: 15+16+4=35, write 5 carry 3. Step3: 6+3=9. Answer: 950."
+            "hint": "Step1=8x5=40 write 0 carry4. Step2=3x5+8x2+4=35 write 5 carry3. Step3=3x2+3=9.",
+            "solution": "Step1: 40, write 0 carry 4. Step2: 15+16+4=35, write 5 carry 3. Step3: 6+3=9. Answer: 950.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Carry challenge",
+              "caption": "Manage carries correctly through all 3 steps."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_I_Q3",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "I",
+            "subtopic": "Criss-cross with carry",
+            "skill": "carry handling",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "56 x 47 = ?",
+            "options": [
+              "2532",
+              "2632",
+              "2732",
+              "2832"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "2632",
+            "hint": "Step1=6x7=42 write 2 carry4. Step2=5x7+6x4+4=63 write 3 carry6. Step3=5x4+6=26.",
+            "solution": "Step1: 42, write 2 carry 4. Step2: 35+24+4=63, write 3 carry 6. Step3: 20+6=26. Answer: 2632.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Carry challenge",
+              "caption": "Manage carries correctly through all 3 steps."
+            }
+          },
+          {
+            "questionId": "VM_G4_L8_I_Q4",
+            "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+            "exerciseGroup": "I",
+            "subtopic": "Criss-cross with carry",
+            "skill": "carry handling",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "34 x 27 = ?",
+            "expectedAnswer": "918",
+            "hint": "Step1=4x7=28 write 8 carry2. Step2=3x7+4x2+2=33 write 3 carry3. Step3=3x2+3=9.",
+            "solution": "Step1: 28, write 8 carry 2. Step2: 21+8+2=31, write 1 carry 3. Step3: 6+3=9. Answer: 918.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Carry challenge",
+              "caption": "Manage carries correctly through all 3 steps."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Carry challenge",
+          "caption": "Manage carries correctly through all 3 steps."
+        }
       }
     ]
-  }
+  },
+  "screenplay": [
+    {
+      "beatId": "VM_G4_L8_A_INTRO",
+      "stepId": "VM_G4_L8_A",
+      "exerciseGroup": "A",
+      "subtopic": "Pattern introduction - 3 steps of criss-cross",
+      "sequence": 801,
+      "cue": "intro",
+      "boardMode": "steps",
+      "teacherLine": "Today we learn the X-Factor - Urdhva Tiryagbhyam! It means vertically and crosswise. Three steps and any two 2-digit numbers multiply in seconds. No long tables needed!",
+      "boardAction": "Draw two 2-digit numbers with arrows: right vertical, X cross, left vertical. Label Step 1, Step 2, Step 3.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Three steps: right (units x units), cross (diagonals), left (tens x tens).",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L8_A_EXPLAIN",
+      "stepId": "VM_G4_L8_A",
+      "exerciseGroup": "A",
+      "subtopic": "Pattern introduction - 3 steps of criss-cross",
+      "sequence": 802,
+      "cue": "explain",
+      "boardMode": "steps",
+      "teacherLine": "For 23 x 14: Step 1 - right vertical: 3x4=12, write 2 carry 1. Step 2 - cross: 2x4+3x1+carry=12, write 2 carry 1. Step 3 - left vertical: 2x1+carry=3. Read left to right: 322!",
+      "boardAction": "Show 23 x 14 with step-by-step arrows. Highlight each digit pair. Box 322.",
+      "checkpointPrompt": "What is Step 1 (units x units) of 21 x 32?",
+      "pauseType": "student_input",
+      "holdSec": 3,
+      "expectedStudentResponse": "2",
+      "fallbackHint": "1 x 2 = 2. Write 2, no carry.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L8_A_DEMO",
+      "stepId": "VM_G4_L8_A",
+      "exerciseGroup": "A",
+      "subtopic": "Pattern introduction - 3 steps of criss-cross",
+      "sequence": 803,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Watch this! 23 x 14. Right: 3x4=12, write 2 carry 1. Middle: 2x4+3x1+1=12, write 2 carry 1. Left: 2x1+1=3. Answer: 322. Three steps, one answer!",
+      "boardAction": "Animate 23 x 14 with colour-coded steps. Step 1 in green, Step 2 in blue, Step 3 in red. Box 322.",
+      "checkpointPrompt": "Notice how each step builds on the last.",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Step 1: units. Step 2: cross. Step 3: tens. Always in that order.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L8_A_GUIDED",
+      "stepId": "VM_G4_L8_A",
+      "exerciseGroup": "A",
+      "subtopic": "Pattern introduction - 3 steps of criss-cross",
+      "sequence": 804,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Your turn! Try: 21 x 13. Right: 1x3=3. Middle: 2x3+1x1=? Left: 2x1=2. What is the final answer?",
+      "boardAction": "Show 21 x 13 with blanks for each step: Step1=3, Step2=___, Step3=2. Final=___.",
+      "checkpointPrompt": "What is 21 x 13?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "273",
+      "fallbackHint": "Step2: 2x3+1x1=7. Steps: 2|7|3 = 273.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L8_E_EXPLAIN",
+      "stepId": "VM_G4_L8_E",
+      "exerciseGroup": "E",
+      "subtopic": "Full 2-digit x 2-digit, no carry",
+      "sequence": 901,
+      "cue": "explain",
+      "boardMode": "steps",
+      "teacherLine": "Now run all three steps for a clean no-carry problem. 21 x 32: units 1x2=2, cross 2x2+1x3=7, tens 2x3=6. Answer: 672. One smooth pass!",
+      "boardAction": "Show 21 x 32 with three arrows. Write partial products below each step. Final answer 672 in a box.",
+      "checkpointPrompt": "31 x 22 = ?",
+      "pauseType": "student_input",
+      "holdSec": 3,
+      "expectedStudentResponse": "682",
+      "fallbackHint": "1x2=2. 3x2+1x2=8. 3x2=6. Answer: 682.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L8_I_EXPLAIN",
+      "stepId": "VM_G4_L8_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge: 2-digit x 2-digit with carry",
+      "sequence": 1001,
+      "cue": "explain",
+      "boardMode": "steps",
+      "teacherLine": "Carries make it trickier but the method is the same! 47 x 36: Step1=42 write 2 carry 4. Step2=24+21+4=49 - wait - 4x6+7x3+4=55 write 5 carry 5. Step3=4x3+5=17. Answer: 1692.",
+      "boardAction": "Show 47 x 36 with carries written above each step. Box 1692 in a different colour.",
+      "checkpointPrompt": "38 x 25: what is Step 1 (8 x 5)?",
+      "pauseType": "student_input",
+      "holdSec": 3,
+      "expectedStudentResponse": "40",
+      "fallbackHint": "8 x 5 = 40. Write 0, carry 4.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    }
+  ],
+  "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+  "courseId": "vedic_math_g4",
+  "visualLibrary": [
+    {
+      "visualId": "criss_cross_2x2",
+      "kind": "svg",
+      "asset": "criss_cross_2x2.svg",
+      "title": "Lesson 8: The X-Factor - Urdhva Criss-Cross Multiplication",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    },
+    {
+      "visualId": "vm_criss_cross_2dig",
+      "kind": "svg",
+      "asset": "vm_criss_cross_2dig.svg",
+      "title": "2-Digit Criss-Cross Pattern",
+      "caption": "Use the 3-step vertical-crosswise pattern from right to left."
+    }
+  ]
 }

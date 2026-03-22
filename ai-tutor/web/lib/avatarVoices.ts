@@ -7,7 +7,8 @@ export const AVATAR_SPEAKER_MAP: Record<string, string> = {
   ved:   process.env.SARVAM_SPEAKER_VED   || "aditya",
   tara:  process.env.SARVAM_SPEAKER_TARA  || "ritu",
   niva:  process.env.SARVAM_SPEAKER_NIVA  || "priya",
-  raj:   process.env.SARVAM_SPEAKER_RAJ   || "aditya",   // Raj  → male voice
+  raj:   process.env.SARVAM_SPEAKER_RAJ   || "aditya",   // Raj   → male voice
+  nova:  process.env.SARVAM_SPEAKER_NOVA  || "priya",    // Nova  → female voice
   priya: process.env.SARVAM_SPEAKER_PRIYA || "priya",    // Priya → female voice
 };
 

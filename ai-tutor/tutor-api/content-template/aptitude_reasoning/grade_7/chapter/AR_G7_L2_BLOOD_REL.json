@@ -1,0 +1,578 @@
+{
+  "chapterCode": "AR_G7_L2_BLOOD_REL",
+  "courseId": "aptitude_reasoning_g7",
+  "title": "Blood Relations",
+  "source": "MindSpark Grade 7 Aptitude & Reasoning | Chapter 2: Blood Relations",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Basic Family Terms (Parent, Sibling, Spouse, Child)",
+    "Reading Relation Statements (X is the father of Y)",
+    "Generation Charts (2-generation families)",
+    "3-Generation Family Tree Problems",
+    "Compound Relation Chains (A→B→C, find A's relation to C)",
+    "Gender-Based Relation Deduction",
+    "Coded Blood Relation Problems",
+    "Speed Round: Mixed Blood Relation Puzzles"
+  ],
+  "learningGoals": [
+    "Interpret 'X is the __ of Y' statements accurately and build a family tree diagram.",
+    "Solve 3-generation family tree problems by tracking both generation level and gender.",
+    "Decode compound relation chains to find the relationship between the first and last person."
+  ],
+  "coreIdeas": [
+    "Always draw the family tree — never solve blood relations purely in your head.",
+    "Two rules: Generation (up = parent/grandparent, down = child/grandchild) and Gender (M/F determines uncle vs aunt, nephew vs niece).",
+    "In a relation chain A→B→C: A's relation to C depends on A's relation to B AND B's relation to C — work one step at a time."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Priya is the mother of Arjun. Arjun is the brother of Meera. What is Priya's relation to Meera?",
+      "solution": "Draw tree: Priya (top) → Arjun (son) and Meera (daughter). Priya is one generation above Meera. Since Priya is Arjun's mother and Meera is Arjun's sister, Priya is also Meera's mother.",
+      "concept": "Two-generation family tree — shared parent"
+    },
+    {
+      "id": "WE2",
+      "problem": "Rajan is the son of Suresh. Suresh is the brother of Kavitha. What is Rajan's relation to Kavitha?",
+      "solution": "Suresh and Kavitha are siblings → same generation, same parents. Rajan is Suresh's son → Rajan is one level below Suresh. Kavitha is Suresh's sister → Kavitha is Rajan's aunt (father's sister). Rajan is Kavitha's nephew.",
+      "concept": "Compound chain — nephew/aunt relation across two steps"
+    },
+    {
+      "id": "WE3",
+      "problem": "Pointing to a man, Sita says, 'His mother is the only daughter of my father.' How is the man related to Sita?",
+      "solution": "Only daughter of Sita's father = Sita herself. So the man's mother = Sita. Therefore the man is Sita's son.",
+      "concept": "Coded relation — 'only daughter of my father' means the speaker herself"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark checks if the student can name basic family relations before starting. First warm-up asks: who is your mother's mother to you?",
+      "placementRule": "Start at Group A. If errors on sibling/parent terms in Groups A–B, revisit the basic family terms chart before advancing."
+    },
+    "mission": {
+      "missionTitle": "Untangle the Family Tree",
+      "missionPromise": "By the end you will solve any 3-generation family puzzle in under 30 seconds — a guaranteed 2 marks in every competitive exam!",
+      "successCelebration": "Award a 'Family Tree' badge after each group. Final trophy: 'Genealogy Expert'."
+    },
+    "microLessonPattern": [
+      "Coach introduces the relation type with a real-life family analogy.",
+      "Coach draws a mini family tree on the board step by step.",
+      "Coach reads the problem aloud and says 'draw before you answer'.",
+      "Student draws the tree and states the relation.",
+      "Instant feedback explains WHY the relation is correct using generation + gender logic.",
+      "Review prompt asks student to name the relation in the reverse direction too."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–25 XP per exercise group.",
+      "streakRule": "Streak counter visible; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a family-themed badge.",
+      "celebrationStyle": "Coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a reteach using a simpler 2-person relation.",
+      "practiceStyle": "Offer one easier follow-up question before advancing.",
+      "masteryRule": "Advance after correct answer plus successful tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G7_L2_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Blood Relations is about figuring out HOW two people in a family are connected. The secret weapon? Draw a tree — ALWAYS. Every box is a person, lines go down to children, horizontal lines connect spouses. Once your tree is drawn, any question becomes a matter of counting levels and checking gender. Let me show you the two magic rules: Generation Level and Gender.",
+        "boardAction": "Draw a 3-level family tree: Grandparent → Parent + Uncle/Aunt → Child. Label each level. Write: Rule 1 = Generation level (up = older, down = younger). Rule 2 = Gender (M/F gives uncle/aunt, nephew/niece).",
+        "checkpointPrompt": "Quick: your mother's father is your __ ?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Maternal grandfather.",
+        "fallbackHint": "Your mother is one level above you. Her father is two levels above you. Father + two levels up = grandfather. Since he is on your mother's side, he is your maternal grandfather.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l2_title",
+            "x": "40",
+            "y": "28",
+            "text": "Blood Relations — Draw First, Answer Second",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l2_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_rule1",
+            "x": "60",
+            "y": "76",
+            "text": "Rule 1: Generation — up=older, down=younger",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_rule2",
+            "x": "60",
+            "y": "100",
+            "text": "Rule 2: Gender — M/F → uncle vs aunt, nephew vs niece",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l2_mantra",
+            "x": "60",
+            "y": "124",
+            "text": "Golden rule: ALWAYS draw the tree first!",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "family_tree.svg",
+          "title": "Blood Relations",
+          "caption": "Screenplay beat for Blood Relations."
+        }
+      },
+      {
+        "beatId": "AR_G7_L2_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me solve a 3-generation problem live. Statement: 'Rajan is the son of Suresh. Suresh is the brother of Kavitha. What is Rajan's relation to Kavitha?' Step 1: Draw Rajan under Suresh. Step 2: Place Kavitha beside Suresh (same level = siblings). Step 3: Kavitha is one generation above Rajan. She is female. Father's sister = Aunt. So Kavitha is Rajan's Aunt!",
+        "boardAction": "Draw: [Grandparent level] → [Suresh (M)] — [Kavitha (F)] at same level → [Rajan (M)] below Suresh. Label relation: Rajan to Kavitha = Nephew to Aunt.",
+        "checkpointPrompt": "In the same tree, what is Suresh's relation to Rajan?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Suresh is Rajan's father.",
+        "fallbackHint": "The problem says 'Rajan is the son of Suresh' — so Suresh is directly Rajan's father.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_suresh",
+            "x": "160",
+            "y": "50",
+            "text": "Suresh (M)",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_kavitha",
+            "x": "300",
+            "y": "50",
+            "text": "Kavitha (F)",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0.4,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "line",
+            "id": "demo_sibling",
+            "x1": "215",
+            "y1": "57",
+            "x2": "300",
+            "y2": "57",
+            "color": "#6b7280",
+            "width": 2,
+            "delaySec": 0.8,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo_rajan",
+            "x": "160",
+            "y": "110",
+            "text": "Rajan (M) — nephew of Kavitha",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 1.2,
+            "durationSec": 0.5
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "family_tree.svg",
+          "title": "Blood Relations",
+          "caption": "Screenplay beat for Blood Relations."
+        }
+      },
+      {
+        "beatId": "AR_G7_L2_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your toolkit: draw the tree, apply generation level, apply gender rule. Now tackle Groups A through H — each group adds one more layer of complexity. In competitive exams, blood relation questions appear in clusters of 4-5. If you draw the tree for the first question, you solve the whole cluster from the same diagram!",
+        "boardAction": "Show a quick reference card: Parent (1 up) | Grandparent (2 up) | Child (1 down) | Grandchild (2 down) | Sibling (same level, same parents) | Uncle/Aunt (same level as parent) | Nephew/Niece (1 below sibling).",
+        "checkpointPrompt": "Quick recall: if a woman is your mother's sister, what is she to you?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Maternal aunt.",
+        "fallbackHint": "She is at your mother's level (same generation). She is female. She is on your mother's side. That makes her your maternal aunt.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Family Relation Quick Reference",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_up",
+            "x": "60",
+            "y": "62",
+            "text": "1 level up = Parent | 2 levels up = Grandparent",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_down",
+            "x": "60",
+            "y": "84",
+            "text": "1 level down = Child | 2 levels down = Grandchild",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_side",
+            "x": "60",
+            "y": "106",
+            "text": "Same level, same parents = Sibling",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "family_tree.svg",
+          "title": "Blood Relations",
+          "caption": "Screenplay beat for Blood Relations."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Basic Family Terms",
+      "missionStepTitle": "Exercise A: Basic Family Terms",
+      "coachHook": "Let's crack this code! Before we climb the family tree, lock in the basic terms — parent, sibling, child, spouse. These are the building blocks.",
+      "boardDemo": {
+        "title": "Core Family Vocabulary",
+        "steps": [
+          "Parent = one generation above you (mother or father)",
+          "Sibling = same generation, same parents (brother or sister)",
+          "Child = one generation below you (son or daughter)",
+          "Spouse = same generation, married partner"
+        ],
+        "teacherLine": "Every complex blood relation question reduces to these 4 relationships. If you can state any relation in terms of parent/sibling/child, you can solve it."
+      },
+      "readAloudPrompt": "Your father's son who is NOT you — what relation is he to you?",
+      "tryPrompt": "Now: your mother's daughter who is NOT you — what relation is she to you?",
+      "masteryCheck": "Sister",
+      "instantFeedbackWin": "Correct! Your mother's daughter who is not you must be your sister. Perfect use of basic terms!",
+      "instantFeedbackRetry": "Here's a trick: your mother has daughters. You are one of them. The other daughters are your sisters — same mother, same generation.",
+      "reviewPrompt": "Quick: is a spouse in the same generation or a different generation from you?",
+      "xpReward": 10,
+      "badgeFocus": "Family Vocabulary Ace",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group A for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Reading Relation Statements",
+      "missionStepTitle": "Exercise B: Reading Relation Statements",
+      "coachHook": "Let's crack this code! 'X is the father of Y' — four words, one arrow in your tree. Read every relation statement as a drawing instruction!",
+      "boardDemo": {
+        "title": "Statement → Tree Arrow",
+        "steps": [
+          "Statement: 'Anil is the father of Bimal'",
+          "Draw: [Anil] → [Bimal] (arrow means 'parent of')",
+          "Statement: 'Bimal is the brother of Charu'",
+          "Draw: [Bimal] — [Charu] at the same level under Anil"
+        ],
+        "teacherLine": "Every statement gives you one arrow in the tree. Collect all arrows from the problem before answering the question."
+      },
+      "readAloudPrompt": "Statement: 'Sonal is the mother of Deepak. Deepak is the father of Esha.' — how many generations does your tree need?",
+      "tryPrompt": "Draw the tree for: 'Priya is the daughter of Gopal. Gopal is the son of Hema.' Then answer: What is Priya's relation to Hema?",
+      "masteryCheck": "Granddaughter",
+      "instantFeedbackWin": "Excellent! Hema → Gopal (son) → Priya (daughter). Priya is 2 levels below Hema. 2 levels down = granddaughter. Tree reading mastered!",
+      "instantFeedbackRetry": "Here's a trick: draw Hema at top, Gopal below, Priya at the bottom. Count the levels from Hema to Priya: 2 levels down = granddaughter.",
+      "reviewPrompt": "Practice: 'Rekha is the sister of Suresh. Suresh is the son of Mohan.' What is Rekha's relation to Mohan?",
+      "xpReward": 12,
+      "badgeFocus": "Tree Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group B for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "2-Generation Family Trees",
+      "missionStepTitle": "Exercise C: 2-Generation Family Trees",
+      "coachHook": "Let's crack this code! Two generations: parents and children. The classic family setup — master this level before adding grandparents.",
+      "boardDemo": {
+        "title": "2-Generation Tree — Full Family",
+        "steps": [
+          "Family: Father + Mother (top level)",
+          "Children: Son and Daughter (bottom level)",
+          "Father's daughter = daughter",
+          "Mother's son = son",
+          "Son's sister = daughter"
+        ],
+        "teacherLine": "In a 2-generation tree, every relation is just one step: parent-child or sibling-sibling. The only trick is gender — male vs female child, male vs female parent."
+      },
+      "readAloudPrompt": "In a family: Ram (father), Sunita (mother), Rahul (son), Priya (daughter). What is Priya's relation to Ram?",
+      "tryPrompt": "Same family: what is Rahul's relation to Sunita?",
+      "masteryCheck": "Son",
+      "instantFeedbackWin": "Correct! Sunita is the mother. Rahul is her son. One-step relation — perfectly read!",
+      "instantFeedbackRetry": "Here's a trick: Sunita is the mother. She has two children: Rahul and Priya. Rahul is her son (male child), Priya is her daughter.",
+      "reviewPrompt": "Quick: In the same family, what is Priya's relation to Rahul?",
+      "xpReward": 13,
+      "badgeFocus": "2-Gen Navigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group C for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "3-Generation Family Tree Problems",
+      "missionStepTitle": "Exercise D: 3-Generation Family Trees",
+      "coachHook": "Let's crack this code! Add grandparents and the tree has 3 floors. More steps, but same two rules: generation level + gender.",
+      "boardDemo": {
+        "title": "3-Generation Tree — Grandparents Included",
+        "steps": [
+          "Level 1 (top): Grandparents — Grandfather + Grandmother",
+          "Level 2 (middle): Parents + Uncles/Aunts",
+          "Level 3 (bottom): Children (you and your cousins)",
+          "Grandfather's son's daughter = your cousin (if not your sister)"
+        ],
+        "teacherLine": "When the problem has 3 generations, always label the levels: G1, G2, G3. Then any relation is just: how many levels apart, and what gender?"
+      },
+      "readAloudPrompt": "Statement: 'Kiran is the son of Vijay. Vijay is the son of Ranga. What is Kiran's relation to Ranga?'",
+      "tryPrompt": "Now: 'Maya is the daughter of Aruna. Aruna is the daughter of Sheela. What is Maya's relation to Sheela?' Draw it, then answer.",
+      "masteryCheck": "Granddaughter",
+      "instantFeedbackWin": "Perfect! Sheela (G1) → Aruna (G2) → Maya (G3). Maya is 2 levels below Sheela. Female → granddaughter. Tree thinking is paying off!",
+      "instantFeedbackRetry": "Here's a trick: Sheela is at the top. Aruna is Sheela's daughter (1 level down). Maya is Aruna's daughter (2 levels down from Sheela). 2 levels down = granddaughter.",
+      "reviewPrompt": "Challenge: 'Rohan is the son of Deepa. Deepa is the sister of Arun. Arun is the son of Hari.' What is Rohan's relation to Hari?",
+      "xpReward": 15,
+      "badgeFocus": "3-Gen Tree Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group D for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Compound Relation Chains",
+      "missionStepTitle": "Exercise E: Compound Relation Chains",
+      "coachHook": "Let's crack this code! A chain: A's relation to B, B's relation to C — what is A's relation to C? Walk the chain one step at a time.",
+      "boardDemo": {
+        "title": "Relation Chain — Step by Step",
+        "steps": [
+          "Problem: A is B's father. B is C's brother. C is D's mother. Who is A to D?",
+          "Step 1: A → B (father-son)",
+          "Step 2: B → C (siblings, same level under A)",
+          "Step 3: C → D (mother-child, D is one level below C and A)",
+          "Result: A is D's grandfather"
+        ],
+        "teacherLine": "Never skip steps. Draw each arrow in the chain one by one. After drawing all arrows, count the levels between the first and last person."
+      },
+      "readAloudPrompt": "'Leela is the sister of Manu. Manu is the father of Nisha.' — how many steps in this chain?",
+      "tryPrompt": "'Prem is the son of Qila. Qila is the sister of Rajan. Rajan is the father of Sona.' — draw the full chain and state Prem's relation to Sona.",
+      "masteryCheck": "Cousin",
+      "instantFeedbackWin": "Brilliant! Qila and Rajan are siblings → Prem and Sona are children of those siblings → they are cousins. Chain decoded!",
+      "instantFeedbackRetry": "Here's a trick: Qila and Rajan are at the same generation (siblings). Prem is Qila's son, Sona is Rajan's daughter. Same generation, children of siblings = cousins.",
+      "reviewPrompt": "'Asha is the wife of Balu. Balu is the brother of Charu. Charu is the mother of Dev.' What is Asha's relation to Dev?",
+      "xpReward": 17,
+      "badgeFocus": "Chain Tracer",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group E for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Gender-Based Relation Deduction",
+      "missionStepTitle": "Exercise F: Gender Deduction",
+      "coachHook": "Let's crack this code! Sometimes you must DEDUCE gender from the relation name. 'Nephew' tells you the person is male. 'Aunt' tells you the person is female. Gender clues are hidden in every relation word!",
+      "boardDemo": {
+        "title": "Gender Hidden in Relation Words",
+        "steps": [
+          "Nephew = male (son of sibling)",
+          "Niece = female (daughter of sibling)",
+          "Uncle = male (sibling of parent)",
+          "Aunt = female (sibling of parent)",
+          "Using gender: 'X is the nephew of Y' → X is male"
+        ],
+        "teacherLine": "Whenever a problem gives you a relation name, immediately note the gender it implies. Write M or F next to the name in your tree. This prevents wrong answers."
+      },
+      "readAloudPrompt": "Statement: 'Tarun is the nephew of Usha.' What do you know about Tarun's gender and generation relative to Usha?",
+      "tryPrompt": "'Vani is the niece of Waman. Waman is the uncle of Vani.' Confirm: is Waman male or female? Is Vani male or female?",
+      "masteryCheck": "Waman is male, Vani is female",
+      "instantFeedbackWin": "Spot on! Uncle = male, so Waman is male. Niece = female, so Vani is female. Gender from relation words — expert level!",
+      "instantFeedbackRetry": "Here's a trick: 'uncle' is always a male word, 'niece' is always a female word. The relation name itself tells you the gender.",
+      "reviewPrompt": "Quick: 'Xena is the maternal aunt of Yash.' Is Xena male or female? Is Yash male or female?",
+      "xpReward": 18,
+      "badgeFocus": "Gender Decoder",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group F for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Coded Blood Relation Problems",
+      "missionStepTitle": "Exercise G: Coded Blood Relations",
+      "coachHook": "Let's crack this code! Competitive exams disguise family clues in tricky coded language — 'only daughter of my father', 'mother of my mother's only son'. Decode the code, then draw!",
+      "boardDemo": {
+        "title": "Coded Clues — Decode Then Draw",
+        "steps": [
+          "Code: 'only son of my mother' = the speaker himself (if male) or the speaker's brother (if only one)",
+          "Code: 'only daughter of my father' = the speaker herself",
+          "Code: 'mother of my father' = the speaker's paternal grandmother",
+          "Key trick: when a code leads back to the speaker, the person being described is the speaker's child"
+        ],
+        "teacherLine": "Coded questions try to confuse you with circular phrases. Always substitute step by step: 'my father's only daughter' → who is the only daughter of my father? → me. So if someone's mother is me, that person is my child."
+      },
+      "readAloudPrompt": "A man says: 'The woman in the photo is the mother of my son's wife.' What relation is the woman to the man?",
+      "tryPrompt": "Sita points to a boy and says: 'His mother is the only daughter of my mother.' What is the boy's relation to Sita?",
+      "masteryCheck": "Son",
+      "instantFeedbackWin": "Excellent! Only daughter of Sita's mother = Sita. So the boy's mother = Sita. Therefore the boy is Sita's son. Coded relation cracked!",
+      "instantFeedbackRetry": "Here's a trick: 'only daughter of my mother' — Sita's mother has one daughter, that's Sita. So the boy's mother is Sita → the boy is Sita's son.",
+      "reviewPrompt": "Challenge: 'Pointing to a girl, Raj says — her father is the only son of my grandfather.' What is the girl's relation to Raj?",
+      "xpReward": 20,
+      "badgeFocus": "Code Breaker",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group G for Blood Relations."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Speed Round: Mixed Blood Relation Puzzles",
+      "missionStepTitle": "Exercise H: Olympiad Speed Round",
+      "coachHook": "Let's crack this code — FAST! In competitive exams, blood relation questions come in clusters. Draw once, answer many. Speed + accuracy = full marks!",
+      "boardDemo": {
+        "title": "Speed Strategy — One Tree, Multiple Answers",
+        "steps": [
+          "Read all statements in the cluster FIRST",
+          "Draw ONE complete family tree from all statements",
+          "Answer all questions from the same tree",
+          "Double-check each answer using generation level + gender",
+          "Time target: 45 seconds per cluster of 3 questions"
+        ],
+        "teacherLine": "In Olympiad papers, 3-5 questions share the same family. Build the complete tree once — then every question is just a lookup in your diagram."
+      },
+      "readAloudPrompt": "Family: Arjun is married to Bela. They have two children: Chetan (son) and Divya (daughter). Divya is married to Eshaan. They have a son Farhan. How many levels does this tree have?",
+      "tryPrompt": "From the same family: (1) What is Farhan's relation to Arjun? (2) What is Bela's relation to Farhan? (3) What is Chetan's relation to Eshaan?",
+      "masteryCheck": "Grandson | Grandmother | Brother-in-law",
+      "instantFeedbackWin": "PERFECT! Farhan is Arjun's grandson (2 levels down, male). Bela is Farhan's grandmother (2 levels up, female). Chetan is Eshaan's brother-in-law (husband of wife's brother). One tree, three answers — you are a family tree machine!",
+      "instantFeedbackRetry": "Here's a trick: draw the tree fully first. Arjun+Bela (top) → Chetan and Divya (middle) → Farhan (bottom). Farhan to Arjun = 2 levels down = grandson. Bela to Farhan = 2 levels up = grandmother. Chetan to Eshaan = Divya's brother to Divya's husband = brother-in-law.",
+      "reviewPrompt": "Final recap: state the two rules for solving any blood relation question.",
+      "xpReward": 25,
+      "badgeFocus": "Genealogy Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "family_tree.svg",
+        "title": "Blood Relations",
+        "caption": "Group H for Blood Relations."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "family_tree",
+      "kind": "svg",
+      "asset": "family_tree.svg",
+      "title": "Blood Relations",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

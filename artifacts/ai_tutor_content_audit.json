@@ -1,0 +1,1522 @@
+[
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L1_PATTERNS.json",
+    "chapterCode": "AR_G4_L1_PATTERNS",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Number Patterns",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: 6, 9, 12, 15, __ — find the jump, then give me the missing number!",
+      "masteryCheck": "18",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L2_ODD_ONE.json",
+    "chapterCode": "AR_G4_L2_ODD_ONE",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Odd One Out",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: Bus, Car, Train, Chair — which one is the odd one out and why?",
+      "masteryCheck": "Chair — because Bus, Car, and Train are vehicles but Chair is furniture.",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L3_PICTURE.json",
+    "chapterCode": "AR_G4_L3_PICTURE",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Picture Series",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn: Box 1 = 5 dots, Box 2 = 10 dots, Box 3 = 15 dots, Box 4 = __ dots. How many?",
+      "masteryCheck": "20 dots",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L4_DIRECTIONS.json",
+    "chapterCode": "AR_G4_L4_DIRECTIONS",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Basic Directions",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "In which direction does the sun set every evening?",
+      "masteryCheck": "West",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L5_CODING.json",
+    "chapterCode": "AR_G4_L5_CODING",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Simple Coding",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 7,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 7,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: encode the word CAP using the +1 shift rule.",
+      "masteryCheck": "DBQ",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L6_ANALOGY.json",
+    "chapterCode": "AR_G4_L6_ANALOGY",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Simple Analogies",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: Camera : Photograph :: Broom : ___?",
+      "masteryCheck": "Sweep",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L7_SORTING.json",
+    "chapterCode": "AR_G4_L7_SORTING",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Ordering and Ranking",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: arrange in ascending order — 7, 25, 4, 16, 31.",
+      "masteryCheck": "4, 7, 16, 25, 31",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_4\\chapter\\AR_G4_L8_CALENDAR.json",
+    "chapterCode": "AR_G4_L8_CALENDAR",
+    "courseId": "aptitude_reasoning_g4",
+    "title": "Days and Calendar",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: what is the day that comes two days before Sunday?",
+      "masteryCheck": "Friday",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L1_NUMBER_SERIES.json",
+    "chapterCode": "AR_G5_L1_NUMBER_SERIES",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Number Series",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 7,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 7,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: 6, 11, 16, 21, __ — find the gap, then give the next number!",
+      "masteryCheck": "26",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L2_LETTER_CODING.json",
+    "chapterCode": "AR_G5_L2_LETTER_CODING",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Letter Coding Basics",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "If A=1 and Z=26, what is the sum of letter values in the word SUN?",
+      "masteryCheck": "54",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L3_CALENDAR.json",
+    "chapterCode": "AR_G5_L3_CALENDAR",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Calendar Basics",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Today is Saturday. What day will it be after 9 days?",
+      "masteryCheck": "Monday",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L4_SHAPES.json",
+    "chapterCode": "AR_G5_L4_SHAPES",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Shape Classification",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "A stop sign has 8 sides. What is the name of this shape?",
+      "masteryCheck": "Octagon",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L5_SPATIAL.json",
+    "chapterCode": "AR_G5_L5_SPATIAL",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Spatial Reasoning",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "What is the mirror image of the letter 'b'? Write the letter it looks like.",
+      "masteryCheck": "d",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L6_ANALOGIES.json",
+    "chapterCode": "AR_G5_L6_ANALOGIES",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Basic Analogies",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 6,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 6,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Complete: Bee : Buzz :: Frog : ?",
+      "masteryCheck": "Croak",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_5\\chapter\\AR_G5_L7_DATA_CHARTS.json",
+    "chapterCode": "AR_G5_L7_DATA_CHARTS",
+    "courseId": "aptitude_reasoning_g5",
+    "title": "Reading Data Charts",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 7,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 7,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "From the same chart: how many more students like Cricket than Badminton?",
+      "masteryCheck": "10",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L1_SERIES.json",
+    "chapterCode": "AR_G6_L1_SERIES",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Series Completion",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: 5, 9, 13, 17, __ — find the gap, then give me the next number!",
+      "masteryCheck": "21",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L2_CODING.json",
+    "chapterCode": "AR_G6_L2_CODING",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Coding and Decoding",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn: encode the word PEN using shift +1. Give me all 3 coded letters!",
+      "masteryCheck": "QFO",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L3_ANALOGIES.json",
+    "chapterCode": "AR_G6_L3_ANALOGIES",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Analogies",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn: Book : Read :: Fork : ? — state the relationship, then give the answer!",
+      "masteryCheck": "Eat",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L4_VENN.json",
+    "chapterCode": "AR_G6_L4_VENN",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Venn Diagrams",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "New Venn: Only Maths = 18, Both Maths and Science = 7, Only Science = 12, Neither = 3. How many students play ONLY Maths?",
+      "masteryCheck": "18",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L5_CLOCKS.json",
+    "chapterCode": "AR_G6_L5_CLOCKS",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Clocks and Time",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Say the hours first, then the minutes. What is the time?",
+      "masteryCheck": "2:30",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L6_RANKINGS.json",
+    "chapterCode": "AR_G6_L6_RANKINGS",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Rankings and Positions",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Sam is 7th from the top in a class of 25. What is his rank from the bottom?  (a) 18  (b) 19  (c) 17  (d) 20",
+      "masteryCheck": "19",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L7_DATA.json",
+    "chapterCode": "AR_G6_L7_DATA",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Data Tables and Charts",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Using the same table, which class has the LOWEST total?  (a) Class A  (b) Class B  (c) Class C  (d) All equal",
+      "masteryCheck": "Class C",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_6\\chapter\\AR_G6_L8_PUZZLES.json",
+    "chapterCode": "AR_G6_L8_PUZZLES",
+    "courseId": "aptitude_reasoning_g6",
+    "title": "Simple Logical Puzzles",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "P is shorter than Q. Q is shorter than R. Who is the tallest?  (a) P  (b) Q  (c) R  (d) Cannot determine",
+      "masteryCheck": "R",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_7\\chapter\\AR_G7_L1_SEQUENCES.json",
+    "chapterCode": "AR_G7_L1_SEQUENCES",
+    "courseId": "aptitude_reasoning_g7",
+    "title": "Logical Sequences",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn: 9, 16, 25, 36, __ — name the series type and the next term!",
+      "masteryCheck": "49",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_7\\chapter\\AR_G7_L2_BLOOD_REL.json",
+    "chapterCode": "AR_G7_L2_BLOOD_REL",
+    "courseId": "aptitude_reasoning_g7",
+    "title": "Blood Relations",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now: your mother's daughter who is NOT you — what relation is she to you?",
+      "masteryCheck": "Sister",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_7\\chapter\\AR_G7_L3_DIRECTION.json",
+    "chapterCode": "AR_G7_L3_DIRECTION",
+    "courseId": "aptitude_reasoning_g7",
+    "title": "Direction & Distance",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Name the direction that is exactly opposite to North-West (NW).",
+      "masteryCheck": "South-East",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_7\\chapter\\AR_G7_L4_AGE.json",
+    "chapterCode": "AR_G7_L4_AGE",
+    "courseId": "aptitude_reasoning_g7",
+    "title": "Age Problems",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Solve: Elan is twice as old as Farida. Together their ages add up to 36. Find both ages!",
+      "masteryCheck": "Farida = 12, Elan = 24",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_7\\chapter\\AR_G7_L5_SYMBOLS.json",
+    "chapterCode": "AR_G7_L5_SYMBOLS",
+    "courseId": "aptitude_reasoning_g7",
+    "title": "Symbol Substitution",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Key: ◆ means −. Evaluate: 25 ◆ 9.",
+      "masteryCheck": "16",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_7\\chapter\\AR_G7_L6_GROUPING.json",
+    "chapterCode": "AR_G7_L6_GROUPING",
+    "courseId": "aptitude_reasoning_g7",
+    "title": "Classification & Grouping",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Find the odd one out: Chair, Table, Lamp, Pencil, Book.",
+      "masteryCheck": "Lamp (the only thing that produces light; others are storage/writing/sitting objects)",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L1_SEQUENCES.json",
+    "chapterCode": "AR_G8_L1_SEQUENCES",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Advanced Sequences",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "What is the 8th term of the series 2, 6, 12, 20, 30, 42, ...?",
+      "masteryCheck": "72",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L2_SEATING.json",
+    "chapterCode": "AR_G8_L2_SEATING",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Seating Arrangements",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "W, X, Y, Z sit in a row. Y is second from left. X is immediately right of Y. Z is not at either end. Who is at position 1?",
+      "masteryCheck": "W",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L3_SYLLOGISM.json",
+    "chapterCode": "AR_G8_L3_SYLLOGISM",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Syllogisms",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Which diagram matches: 'Some politicians are honest'?",
+      "masteryCheck": "Partial overlap between politicians and honest circles",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L4_BLOOD_REL.json",
+    "chapterCode": "AR_G8_L4_BLOOD_REL",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Complex Blood Relations",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "If Priya is the daughter of Ram's mother's only sister, how is Priya related to Ram?",
+      "masteryCheck": "Cousin",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L5_CODING.json",
+    "chapterCode": "AR_G8_L5_CODING",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Advanced Coding-Decoding",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "What are the alphabet positions of S, T, A, R?",
+      "masteryCheck": "S=19, T=20, A=1, R=18",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L6_DATA_INTERP.json",
+    "chapterCode": "AR_G8_L6_DATA_INTERP",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Data Interpretation",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Bar chart shows monthly sales (thousands): Jan=45, Feb=60, Mar=55, Apr=70. Which month had the highest sales and what was the Jan-to-Apr increase?",
+      "masteryCheck": "April (70,000 units); increase = 25,000 units",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "aptitude_reasoning",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\aptitude_reasoning\\grade_8\\chapter\\AR_G8_L7_CRITICAL.json",
+    "chapterCode": "AR_G8_L7_CRITICAL",
+    "courseId": "aptitude_reasoning_g8",
+    "title": "Critical Reasoning",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 8,
+    "sessionExercises": 0,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Argument: 'Since regular exercise improves mental health, and mental health affects academic performance, students who exercise regularly should do better in exams.' Identify the conclusion.",
+      "masteryCheck": "Students who exercise regularly should do better in exams",
+      "hasExercises": false
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L1_FAST_ADDITION.json",
+    "chapterCode": "VM_G4_L1_FAST_ADDITION",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 1: Completing the Whole - Fast Addition Trick",
+    "badEncoding": false,
+    "screenplayCount": 18,
+    "sessionSteps": 9,
+    "sessionExercises": 22,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn: what joins with 8 to make 10?",
+      "masteryCheck": "Say the complement of 6 to make 10.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L2_TABLES_11_TO_19.json",
+    "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 2: Lightning Tables 11-19 - Ekadhikena Pattern",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 9,
+    "sessionExercises": 23,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn — 11 × 41 = ?",
+      "masteryCheck": "11 × 52 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L3_DOUBLING_HALVING.json",
+    "chapterCode": "VM_G4_L3_DOUBLING_HALVING",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 3: Double Fast, Half Fast - Multiplication Secrets",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 20,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Double 9 = ?",
+      "masteryCheck": "Double 6 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L4_MULT_BY_11.json",
+    "chapterCode": "VM_G4_L4_MULT_BY_11",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 4: The 11-Trick - Multiply Any 2-Digit Number by 11",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 21,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you: 11 x 43 = ?",
+      "masteryCheck": "11 x 21 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L5_SUBT_BORROW_FREE.json",
+    "chapterCode": "VM_G4_L5_SUBT_BORROW_FREE",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 5: No More Borrowing! - Vedic Subtraction",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 18,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Complement of 362 from 1000?",
+      "masteryCheck": "Complement of 79 from 100?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L6_MULT_BY_5_25.json",
+    "chapterCode": "VM_G4_L6_MULT_BY_5_25",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 6: x5 and x25 in a Flash - Base Multiplication",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 19,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn: 44 x 5 = ?",
+      "masteryCheck": "52 x 5 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L7_NEAR_100.json",
+    "chapterCode": "VM_G4_L7_NEAR_100",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 7: Near 100 Magic - Add and Subtract Close Numbers",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Find the deviation of 102 from 100.",
+      "masteryCheck": "What is the deviation of 95?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_4",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_4\\chapter\\VM_G4_L8_CRISS_CROSS_2DIG.json",
+    "chapterCode": "VM_G4_L8_CRISS_CROSS_2DIG",
+    "courseId": "vedic_math_g4",
+    "title": "Lesson 8: The X-Factor - Urdhva Criss-Cross Multiplication",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 15,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "For 21 x 32, what is the RIGHT vertical step?",
+      "masteryCheck": "What is the middle (cross) step for 21 x 32?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L1_NIKHILAM_NEAR100.json",
+    "chapterCode": "VM_G5_L1_NIKHILAM_NEAR100",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 1: Nikhilam — Multiply Near Base 100",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 9,
+    "sessionExercises": 22,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Your turn — what is the deficit of 94?",
+      "masteryCheck": "Find the deficit of 92 from 100.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L2_ANURUPYENA_3DIG.json",
+    "chapterCode": "VM_G5_L2_ANURUPYENA_3DIG",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 2: Proportionally! — 3-Digit × Single-Digit Speed",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 21,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Quick: 9 × 6 = ?",
+      "masteryCheck": "6 × 8 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L3_CRISS_CROSS_3DIG.json",
+    "chapterCode": "VM_G5_L3_CRISS_CROSS_3DIG",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 3: Triple Cross — 3-Digit × 3-Digit Urdhva",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 18,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Quick: 22 × 11 = ?",
+      "masteryCheck": "14 × 12 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L4_DIVISION_BY_9.json",
+    "chapterCode": "VM_G5_L4_DIVISION_BY_9",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 4: Divide by 9 — The Running Remainder Trick",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 21,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Add digits of 63. Divisible by 9?",
+      "masteryCheck": "Is 126 divisible by 9?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L5_SQUARES_NEAR50.json",
+    "chapterCode": "VM_G5_L5_SQUARES_NEAR50",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 5: Square It! — Numbers Near 50",
+    "badEncoding": false,
+    "screenplayCount": 2,
+    "sessionSteps": 9,
+    "sessionExercises": 22,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "What is 9²?",
+      "masteryCheck": "What is 7²?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L6_FRACTIONS_SPEED.json",
+    "chapterCode": "VM_G5_L6_FRACTIONS_SPEED",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 6: Fractions Made Fast — Vedic Simplification",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 22,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you find the HCF of 8 and 12.",
+      "masteryCheck": "Can you spot the HCF just by looking, without listing all factors?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L7_DECIMAL_SPEED.json",
+    "chapterCode": "VM_G5_L7_DECIMAL_SPEED",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 7: Decimal Lightning — Multiply and Divide Decimals Mentally",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 24,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "What is 2.7 × 10? And 2.7 × 100?",
+      "masteryCheck": "Can you shift the decimal point without writing anything down?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_5",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_5\\chapter\\VM_G5_L8_DIVISION_FLAG.json",
+    "chapterCode": "VM_G5_L8_DIVISION_FLAG",
+    "courseId": "vedic_math_g5",
+    "title": "Lesson 8: Flag Division — Divide Any Number in One Line",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 24,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "In 63 ÷ 3, what is the flag? What is the first step?",
+      "masteryCheck": "Can you identify the flag and the first step of any division?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L1_VINCULUM.json",
+    "chapterCode": "VM_G6_L1_VINCULUM",
+    "courseId": "vedic_math_g6",
+    "title": "Lesson 1: Vinculum Numbers — The Bar That Changes Everything",
+    "badEncoding": false,
+    "screenplayCount": 5,
+    "sessionSteps": 9,
+    "sessionExercises": 25,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Is the digit 7 a 'large' digit in Vedic Maths?",
+      "masteryCheck": "Name all digits that Vedic Maths considers large (above 5).",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L2_INTEGER_MULT.json",
+    "chapterCode": "VM_G6_L2_INTEGER_MULT",
+    "courseId": "vedic_math_g6",
+    "title": "Lesson 2: Integer Multiplication Shortcuts",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 23,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Sign of (−4) × (+7)?",
+      "masteryCheck": "State the sign rule for (−)×(−).",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L3_NIKHILAM_BASE10.json",
+    "chapterCode": "VM_G6_L3_NIKHILAM_BASE10",
+    "courseId": "vedic_math_g6",
+    "title": "Lesson 3: Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 9,
+    "sessionExercises": 24,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Nikhilam: 8 × 6 = ?",
+      "masteryCheck": "9 × 6 = ? using Nikhilam.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L4_RATIO_SHORTCUT.json",
+    "chapterCode": "VM_G6_L4_RATIO_SHORTCUT",
+    "courseId": "vedic_math_g6",
+    "title": "Lesson 4: Ratio Racing — Compare and Simplify Ratios Fast",
+    "badEncoding": false,
+    "screenplayCount": 3,
+    "sessionSteps": 9,
+    "sessionExercises": 23,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "A bag has 8 red and 12 blue marbles. What is the ratio of red to blue?",
+      "masteryCheck": "Express 20:35 in simplest form.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L5_HCF_LCM_VEDIC.json",
+    "chapterCode": "VM_G6_L5_HCF_LCM_VEDIC",
+    "courseId": "vedic_math_g6",
+    "title": "HCF and LCM — Vedic Speed Method",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 19,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now you try: find HCF(18, 30)",
+      "masteryCheck": "HCF(18, 30) = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L6_SQUARES_2DIG.json",
+    "chapterCode": "VM_G6_L6_SQUARES_2DIG",
+    "courseId": "vedic_math_g6",
+    "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 19,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Now try: 75²",
+      "masteryCheck": "75² = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L7_PARAVARTYA_DIV.json",
+    "chapterCode": "VM_G6_L7_PARAVARTYA_DIV",
+    "courseId": "vedic_math_g6",
+    "title": "Paravartya — Divide by Transpose-and-Adjust",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 18,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Divide 126 by 9 using the running sum method.",
+      "masteryCheck": "126 ÷ 9 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_6",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_6\\chapter\\VM_G6_L8_ALGEBRA_SPEED.json",
+    "chapterCode": "VM_G6_L8_ALGEBRA_SPEED",
+    "courseId": "vedic_math_g6",
+    "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 19,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Look at this equation: 5x + 3 = 5x + 3. What does this tell you?",
+      "masteryCheck": "What is the solution to 5x + 3 = 5x + 3?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L1_SQUARING_NEAR_BASE.json",
+    "chapterCode": "VM_G7_L1_SQUARING_NEAR_BASE",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 1: Power Squaring — Near Base 100 and 1000",
+    "badEncoding": false,
+    "screenplayCount": 12,
+    "sessionSteps": 9,
+    "sessionExercises": 24,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "What is the surplus of 102 from 100?",
+      "masteryCheck": "What is the deficit of 994 from 1000?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L2_RATIONAL_ADD.json",
+    "chapterCode": "VM_G7_L2_RATIONAL_ADD",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 2: Rational Number Speed — LCM-Free Addition",
+    "badEncoding": false,
+    "screenplayCount": 5,
+    "sessionSteps": 8,
+    "sessionExercises": 21,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Use the formula: 1/4 + 1/5 = ?",
+      "masteryCheck": "2/3 + 1/4 = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L3_LINEAR_EQ_VEDIC.json",
+    "chapterCode": "VM_G7_L3_LINEAR_EQ_VEDIC",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 3: Equation Ninja — Solve Linear Equations by Sutra",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 23,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Solve: x − 6 = 3.",
+      "masteryCheck": "Solve: x + 11 = 20.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L4_CUBING_ANURUPYENA.json",
+    "chapterCode": "VM_G7_L4_CUBING_ANURUPYENA",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 4: Cube It! — Cubing Any 2-Digit Number",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 8,
+    "sessionExercises": 21,
+    "questionPool": 0,
+    "promptBackedSteps": 8,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Write the 4-term row for a=1, b=3.",
+      "masteryCheck": "Write the row for a=2, b=3.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L5_NIKHILAM_3DIG.json",
+    "chapterCode": "VM_G7_L5_NIKHILAM_3DIG",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 5: Nikhilam Level Up — 3-Digit Multiplication Near 1000",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 25,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Find the deficit of 985 and the surplus of 1008.",
+      "masteryCheck": "What is the deviation (sign and value) of 1015 from 1000?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L6_EXPONENT_PATTERNS.json",
+    "chapterCode": "VM_G7_L6_EXPONENT_PATTERNS",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 6: Power Patterns — Exponents via Vedic Sequences",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 25,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Extend the chain: what is 2⁹?",
+      "masteryCheck": "What is 2¹⁰?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L7_TRIANGLE_SHORTCUTS.json",
+    "chapterCode": "VM_G7_L7_TRIANGLE_SHORTCUTS",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 7: Geometry Speed — Triangle and Area Shortcuts",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 27,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Is (5, 12, 13) a Pythagorean triple? Verify.",
+      "masteryCheck": "Is (9, 12, 15) a Pythagorean triple?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_7",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_7\\chapter\\VM_G7_L8_ALGEBRAIC_IDENTITIES.json",
+    "chapterCode": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+    "courseId": "vedic_math_g7",
+    "title": "Lesson 8: Identity Power — Algebraic Expansions at Speed",
+    "badEncoding": false,
+    "screenplayCount": 4,
+    "sessionSteps": 9,
+    "sessionExercises": 28,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Expand (x+4)².",
+      "masteryCheck": "(y+7)² = ?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L1_SQUARE_ROOTS.json",
+    "chapterCode": "VM_G8_L1_SQUARE_ROOTS",
+    "courseId": "vedic_math_g8",
+    "title": "Lesson 1: Square Root by Inspection — Vedic Digit-Grouping",
+    "badEncoding": false,
+    "screenplayCount": 27,
+    "sessionSteps": 9,
+    "sessionExercises": 19,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Group 5329 right-to-left. How many groups?",
+      "masteryCheck": "Group 152100. How many digits will the square root have?",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L2_CUBE_ROOTS.json",
+    "chapterCode": "VM_G8_L2_CUBE_ROOTS",
+    "courseId": "vedic_math_g8",
+    "title": "Lesson 2: Cube Root by Magic — Vedic Units-Digit Inspection",
+    "badEncoding": false,
+    "screenplayCount": 27,
+    "sessionSteps": 9,
+    "sessionExercises": 19,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "A perfect cube ends in 7. What is the units digit of its cube root?",
+      "masteryCheck": "Recite the full mapping table from memory.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L3_ALGEBRAIC_IDENTITIES_ADV.json",
+    "chapterCode": "VM_G8_L3_ALGEBRAIC_IDENTITIES_ADV",
+    "courseId": "vedic_math_g8",
+    "title": "Identity Champion — Advanced Algebraic Identities",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Expand (x+3)² and (x-3)².",
+      "masteryCheck": "Both expansions correct with correct signs.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L4_SIMULTANEOUS_EQ.json",
+    "chapterCode": "VM_G8_L4_SIMULTANEOUS_EQ",
+    "courseId": "vedic_math_g8",
+    "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "By inspection, find where x+y=7 and x-y=3 intersect.",
+      "masteryCheck": "Answers x=5, y=2.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L5_CRISS_CROSS_4DIG.json",
+    "chapterCode": "VM_G8_L5_CRISS_CROSS_4DIG",
+    "courseId": "vedic_math_g8",
+    "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Compute 32×21 using the 3-step criss-cross.",
+      "masteryCheck": "Answer 672.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L6_PERCENTAGE_SPEED.json",
+    "chapterCode": "VM_G8_L6_PERCENTAGE_SPEED",
+    "courseId": "vedic_math_g8",
+    "title": "Percentage Power — Mental % in 3 Seconds",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Find 10%, 20%, and 5% of 380.",
+      "masteryCheck": "38, 76, 19.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L7_NIKHILAM_LARGE.json",
+    "chapterCode": "VM_G8_L7_NIKHILAM_LARGE",
+    "courseId": "vedic_math_g8",
+    "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Find the deviation of 9996 and 10005 from 10000.",
+      "masteryCheck": "-4 and +5.",
+      "hasExercises": true
+    }
+  },
+  {
+    "family": "vedic_math",
+    "courseKey": "grade_8",
+    "file": "C:\\roboworkspace\\robodynamics\\ai-tutor\\tutor-api\\content-template\\vedic_math\\grade_8\\chapter\\VM_G8_L8_DIVISIBILITY_ADVANCED.json",
+    "chapterCode": "VM_G8_L8_DIVISIBILITY_ADVANCED",
+    "courseId": "vedic_math_g8",
+    "title": "Divisibility Decoded — Test by 7, 11, 13 and Beyond",
+    "badEncoding": false,
+    "screenplayCount": 0,
+    "sessionSteps": 9,
+    "sessionExercises": 17,
+    "questionPool": 0,
+    "promptBackedSteps": 9,
+    "firstPrompt": {
+      "group": "A",
+      "tryPrompt": "Classify 360: is it divisible by 2, 3, 4, 5, 6, 8, 9, 10?",
+      "masteryCheck": "Yes to all except 8 (360÷8=45 ✓, actually yes to 8 too). Correct: 360 is divisible by 2,3,4,5,6,8,9,10.",
+      "hasExercises": true
+    }
+  }
+]

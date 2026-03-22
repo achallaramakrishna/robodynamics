@@ -10,7 +10,17 @@
     "test:prod:l1": "playwright test tests/prod/l1-scenarios.spec.ts -c playwright.prod.config.ts --reporter=line",
     "test:prod:lesson": "node scripts/run-prod-lesson-test.mjs",
     "test:prod:l2": "node scripts/run-prod-lesson-test.mjs L2_DOUBLING_HALVING",
-    "test:prod:all": "node scripts/run-prod-all-lessons-test.mjs"
+    "test:prod:all": "node scripts/run-prod-all-lessons-test.mjs",
+    "test:prod:all:smoke": "node scripts/run-prod-all-lessons-test.mjs --smoke",
+    "test:prod:mindsutra": "node scripts/run-prod-all-lessons-test.mjs --course mindsutra",
+    "test:prod:mindsutra:smoke": "node scripts/run-prod-all-lessons-test.mjs --course mindsutra --smoke",
+    "test:prod:mindspark": "node scripts/run-prod-all-lessons-test.mjs --course mindspark",
+    "test:prod:mindspark:smoke": "node scripts/run-prod-all-lessons-test.mjs --course mindspark --smoke",
+    "test:prod:g4": "node scripts/run-prod-all-lessons-test.mjs --grade 4",
+    "test:prod:g5": "node scripts/run-prod-all-lessons-test.mjs --grade 5",
+    "test:prod:g6": "node scripts/run-prod-all-lessons-test.mjs --grade 6",
+    "test:prod:g7": "node scripts/run-prod-all-lessons-test.mjs --grade 7",
+    "test:prod:g8": "node scripts/run-prod-all-lessons-test.mjs --grade 8"
   },
   "dependencies": {
     "next": "14.2.5",

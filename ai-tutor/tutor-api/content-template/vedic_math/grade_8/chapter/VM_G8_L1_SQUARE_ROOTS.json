@@ -57,9 +57,21 @@
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["CBSE board prep", "Mental speed", "Competitive exams"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "CBSE board prep",
+        "Mental speed",
+        "Competitive exams"
+      ],
       "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will decode square roots in seconds — no long division, just pattern recognition. This is board-exam level technique!",
       "placementRule": "If the learner identifies units digit patterns correctly in group A, fast-track to group C."
     },
@@ -91,7 +103,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "units digit table", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "units digit table",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -120,11 +136,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "When you group 3969 right-to-left in pairs, you get:",
-            "options": ["3 | 969", "39 | 69", "396 | 9", "3 | 9 | 6 | 9"],
+            "options": [
+              "3 | 969",
+              "39 | 69",
+              "396 | 9",
+              "3 | 9 | 6 | 9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "39 | 69",
             "hint": "Start grouping from the units digit, two at a time.",
-            "solution": "3969 → 39|69. Two groups means a 2-digit square root."
+            "solution": "3969 → 39|69. Two groups means a 2-digit square root.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group A for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_A2",
@@ -136,13 +163,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "The number of digits in √5625 is:",
-            "options": ["1", "2", "3", "4"],
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2",
             "hint": "Group 5625 from the right: 56|25. Count the groups.",
-            "solution": "5625 → 56|25. Two groups → 2-digit root. √5625 = 75."
+            "solution": "5625 → 56|25. Two groups → 2-digit root. √5625 = 75.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group A for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group A for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -169,11 +213,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A perfect square ends in 4. The units digit of its square root must be:",
-            "options": ["4 or 6", "2 or 8", "3 or 7", "1 or 9"],
+            "options": [
+              "4 or 6",
+              "2 or 8",
+              "3 or 7",
+              "1 or 9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2 or 8",
             "hint": "Which single-digit numbers, when squared, give a units digit of 4?",
-            "solution": "2²=4 and 8²=64. Both end in 4, so the root ends in 2 or 8."
+            "solution": "2²=4 and 8²=64. Both end in 4, so the root ends in 2 or 8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group B for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_B2",
@@ -185,11 +240,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which perfect square could have a square root ending in 7?",
-            "options": ["...4", "...6", "...9", "...5"],
+            "options": [
+              "...4",
+              "...6",
+              "...9",
+              "...5"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "...9",
             "hint": "What is 7 × 7? What does it end in?",
-            "solution": "7²=49, which ends in 9. So if the root ends in 7, the square ends in 9."
+            "solution": "7²=49, which ends in 9. So if the root ends in 7, the square ends in 9.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group B for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_B3",
@@ -201,13 +267,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√2916 — the units digit of the root must be:",
-            "options": ["2 or 8", "4 or 6", "6 only", "4 only"],
+            "options": [
+              "2 or 8",
+              "4 or 6",
+              "6 only",
+              "4 only"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "4 or 6",
             "hint": "What is the units digit of 2916? Use the units digit table.",
-            "solution": "2916 ends in 6. The root ends in 4 or 6 (4²=16, 6²=36). √2916 = 54."
+            "solution": "2916 ends in 6. The root ends in 4 or 6 (4²=16, 6²=36). √2916 = 54.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group B for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group B for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -234,11 +317,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For √3969, the first group is 39. The tens digit of the root is:",
-            "options": ["5", "6", "7", "8"],
+            "options": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "6",
             "hint": "Find n where n²≤39<(n+1)². Try 6: 36≤39 and 7²=49>39.",
-            "solution": "6²=36≤39 and 7²=49>39, so the tens digit is 6. √3969=63."
+            "solution": "6²=36≤39 and 7²=49>39, so the tens digit is 6. √3969=63.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group C for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_C2",
@@ -250,13 +344,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√6241 — the first group is 62. The tens digit of the root is:",
-            "options": ["6", "7", "8", "9"],
+            "options": [
+              "6",
+              "7",
+              "8",
+              "9"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "8",
             "hint": "8²=64? No, 8²=64>62. Try 7: 7²=49≤62 and 8²=64>62.",
-            "solution": "7²=49≤62 and 8²=64>62. Tens digit=7. Units of 6241 is 1 → root ends 1 or 9. 79²=6241. Answer: 79."
+            "solution": "7²=49≤62 and 8²=64>62. Tens digit=7. Units of 6241 is 1 → root ends 1 or 9. 79²=6241. Answer: 79.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group C for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group C for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -283,11 +394,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√7056 = ?",
-            "options": ["76", "84", "86", "94"],
+            "options": [
+              "76",
+              "84",
+              "86",
+              "94"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "84",
             "hint": "Group 70|56. First group 70 → tens digit 8 (8²=64≤70<81). Units of 56 is 6 → ends 4 or 6.",
-            "solution": "Group 70|56. Tens digit 8. Units of 7056 ends 6 → root ends 4 or 6. 84²=7056. Answer: 84."
+            "solution": "Group 70|56. Tens digit 8. Units of 7056 ends 6 → root ends 4 or 6. 84²=7056. Answer: 84.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group D for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_D2",
@@ -299,13 +421,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√8281 = ?",
-            "options": ["89", "91", "87", "83"],
+            "options": [
+              "89",
+              "91",
+              "87",
+              "83"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "91",
             "hint": "Group 82|81. First group 82 → tens digit 9 (9²=81≤82<100). Units of 81 ends 1 → root ends 1 or 9.",
-            "solution": "Group 82|81. Tens digit 9. Units 1 → root ends 1 or 9. 91²=8281. Answer: 91."
+            "solution": "Group 82|81. Tens digit 9. Units 1 → root ends 1 or 9. 91²=8281. Answer: 91.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group D for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group D for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -333,14 +472,36 @@
             "questionType": "fill_step",
             "questionText": "Find √2916 step by step.",
             "steps": [
-              {"label": "Group 2916 right-to-left in pairs: ?", "answer": "29|16", "hint": "Two digits from right: 16, rest: 29"},
-              {"label": "First group 29 — largest n with n²≤29: ?", "answer": "5", "hint": "5²=25≤29 and 6²=36>29"},
-              {"label": "Units digit of 2916 is 6 — root ends in ? or ?", "answer": "4 or 6", "hint": "4²=16, 6²=36, both end in 6"},
-              {"label": "Check: 54²=2916? Write the answer: ?", "answer": "54", "hint": "54²=2916. Verify mentally: (50+4)²=2500+400+16=2916"}
+              {
+                "label": "Group 2916 right-to-left in pairs: ?",
+                "answer": "29|16",
+                "hint": "Two digits from right: 16, rest: 29"
+              },
+              {
+                "label": "First group 29 — largest n with n²≤29: ?",
+                "answer": "5",
+                "hint": "5²=25≤29 and 6²=36>29"
+              },
+              {
+                "label": "Units digit of 2916 is 6 — root ends in ? or ?",
+                "answer": "4 or 6",
+                "hint": "4²=16, 6²=36, both end in 6"
+              },
+              {
+                "label": "Check: 54²=2916? Write the answer: ?",
+                "answer": "54",
+                "hint": "54²=2916. Verify mentally: (50+4)²=2500+400+16=2916"
+              }
             ],
             "expectedAnswer": "54",
             "hint": "Group → tens digit by bounding → units digit by pattern → verify.",
-            "solution": "29|16. Tens digit 5. Units 6 → root ends 4 or 6. 54²=2916. Answer: 54."
+            "solution": "29|16. Tens digit 5. Units 6 → root ends 4 or 6. 54²=2916. Answer: 54.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group E for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_E2",
@@ -353,16 +514,44 @@
             "questionType": "fill_step",
             "questionText": "Find √4761 step by step.",
             "steps": [
-              {"label": "Group 4761 right-to-left: ?", "answer": "47|61", "hint": "Last two digits form the right group"},
-              {"label": "First group 47 — largest n with n²≤47: ?", "answer": "6", "hint": "6²=36≤47 and 7²=49>47"},
-              {"label": "Units digit of 4761 is 1 — root ends in ? or ?", "answer": "1 or 9", "hint": "1²=1, 9²=81, both end in 1"},
-              {"label": "Check candidates 61 and 69: which squares to 4761? ?", "answer": "69", "hint": "69²=4761. Confirm: (70-1)²=4900-140+1=4761"}
+              {
+                "label": "Group 4761 right-to-left: ?",
+                "answer": "47|61",
+                "hint": "Last two digits form the right group"
+              },
+              {
+                "label": "First group 47 — largest n with n²≤47: ?",
+                "answer": "6",
+                "hint": "6²=36≤47 and 7²=49>47"
+              },
+              {
+                "label": "Units digit of 4761 is 1 — root ends in ? or ?",
+                "answer": "1 or 9",
+                "hint": "1²=1, 9²=81, both end in 1"
+              },
+              {
+                "label": "Check candidates 61 and 69: which squares to 4761? ?",
+                "answer": "69",
+                "hint": "69²=4761. Confirm: (70-1)²=4900-140+1=4761"
+              }
             ],
             "expectedAnswer": "69",
             "hint": "Candidates are 61 and 69. Check which one works.",
-            "solution": "47|61. Tens 6. Units 1 → ends 1 or 9. 69²=4761. Answer: 69."
+            "solution": "47|61. Tens 6. Units 1 → ends 1 or 9. 69²=4761. Answer: 69.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group E for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group E for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -389,11 +578,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of the following is definitely NOT a perfect square?",
-            "options": ["2916", "3481", "4752", "6889"],
+            "options": [
+              "2916",
+              "3481",
+              "4752",
+              "6889"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "4752",
             "hint": "Check the units digit of each number. Which units digit cannot appear in a perfect square?",
-            "solution": "4752 ends in 2. No perfect square ends in 2, 3, 7, or 8. The others are perfect squares: 54², 59², 83²."
+            "solution": "4752 ends in 2. No perfect square ends in 2, 3, 7, or 8. The others are perfect squares: 54², 59², 83².",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group F for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_F2",
@@ -414,9 +614,21 @@
             "correctIndex": 1,
             "expectedAnswer": "5387 ends in 7, so it cannot be a perfect square",
             "hint": "What units digits are allowed for perfect squares?",
-            "solution": "Perfect squares can only end in 0,1,4,5,6,9. A number ending in 7 can never be a perfect square."
+            "solution": "Perfect squares can only end in 0,1,4,5,6,9. A number ending in 7 can never be a perfect square.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group F for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group F for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -443,11 +655,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√7921 = ?",
-            "options": ["87", "89", "91", "93"],
+            "options": [
+              "87",
+              "89",
+              "91",
+              "93"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "89",
             "hint": "Group 79|21. Tens digit: what n² ≤79? Units of 7921 is 1 → root ends 1 or 9.",
-            "solution": "Group 79|21. 8²=64≤79<81=9². Tens=8. Units 1 → root ends 1 or 9. 89²=7921. Answer: 89."
+            "solution": "Group 79|21. 8²=64≤79<81=9². Tens=8. Units 1 → root ends 1 or 9. 89²=7921. Answer: 89.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group G for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_G2",
@@ -460,16 +683,44 @@
             "questionType": "fill_step",
             "questionText": "Find √8464 showing all steps.",
             "steps": [
-              {"label": "Group 8464 right-to-left: ?", "answer": "84|64", "hint": "Last two digits 64, first group 84"},
-              {"label": "Largest n with n²≤84: ?", "answer": "9", "hint": "9²=81≤84 and 10²=100>84"},
-              {"label": "Units digit of 8464 is 4 — root ends in ? or ?", "answer": "2 or 8", "hint": "2²=4, 8²=64"},
-              {"label": "Candidates are 92 and 98. Which equals √8464? ?", "answer": "92", "hint": "92²=8464. Check: (90+2)²=8100+360+4=8464"}
+              {
+                "label": "Group 8464 right-to-left: ?",
+                "answer": "84|64",
+                "hint": "Last two digits 64, first group 84"
+              },
+              {
+                "label": "Largest n with n²≤84: ?",
+                "answer": "9",
+                "hint": "9²=81≤84 and 10²=100>84"
+              },
+              {
+                "label": "Units digit of 8464 is 4 — root ends in ? or ?",
+                "answer": "2 or 8",
+                "hint": "2²=4, 8²=64"
+              },
+              {
+                "label": "Candidates are 92 and 98. Which equals √8464? ?",
+                "answer": "92",
+                "hint": "92²=8464. Check: (90+2)²=8100+360+4=8464"
+              }
             ],
             "expectedAnswer": "92",
             "hint": "Tens digit 9, units either 2 or 8. Check 92².",
-            "solution": "84|64. Tens 9. Units 4 → ends 2 or 8. 92²=8464. Answer: 92."
+            "solution": "84|64. Tens 9. Units 4 → ends 2 or 8. 92²=8464. Answer: 92.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group G for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group G for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -496,11 +747,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√12769 = ?",
-            "options": ["111", "113", "117", "119"],
+            "options": [
+              "111",
+              "113",
+              "117",
+              "119"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "113",
             "hint": "Group 1|27|69. Three groups → 3-digit root. Units of 12769 is 9 → root ends 3 or 7.",
-            "solution": "Group 1|27|69. Hundreds digit 1. 113²=12769. Units 9 → ends 3 or 7. Answer: 113."
+            "solution": "Group 1|27|69. Hundreds digit 1. 113²=12769. Units 9 → ends 3 or 7. Answer: 113.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group H for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_H2",
@@ -512,13 +774,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√17161 = ?",
-            "options": ["129", "131", "133", "137"],
+            "options": [
+              "129",
+              "131",
+              "133",
+              "137"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "131",
             "hint": "Group 1|71|61. Units of 17161 is 1 → root ends 1 or 9.",
-            "solution": "Group 1|71|61. Units 1 → ends 1 or 9. 131²=17161. Answer: 131."
+            "solution": "Group 1|71|61. Units 1 → ends 1 or 9. 131²=17161. Answer: 131.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group H for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group H for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -545,11 +824,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "√250000 = ?",
-            "options": ["400", "450", "500", "550"],
+            "options": [
+              "400",
+              "450",
+              "500",
+              "550"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "500",
             "hint": "Group 25|00|00. Three groups → 3-digit root. First group 25 → hundreds digit 5.",
-            "solution": "Group 25|00|00. 5²=25 exactly. Root starts with 5. Units 0 → ends 0. 500²=250000. Answer: 500."
+            "solution": "Group 25|00|00. 5²=25 exactly. Root starts with 5. Units 0 → ends 0. 500²=250000. Answer: 500.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group I for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           },
           {
             "questionId": "VM_G8_L1_I2",
@@ -562,16 +852,44 @@
             "questionType": "fill_step",
             "questionText": "Find √274576 step by step.",
             "steps": [
-              {"label": "Group 274576 right-to-left in pairs: ?", "answer": "27|45|76", "hint": "Three groups of two from the right"},
-              {"label": "First group 27 — hundreds digit of root (largest n with n²≤27): ?", "answer": "5", "hint": "5²=25≤27 and 6²=36>27"},
-              {"label": "Units digit of 274576 is 6 — root ends in ? or ?", "answer": "4 or 6", "hint": "4²=16, 6²=36, both end in 6"},
-              {"label": "Root is 5_4 or 5_6. Given the middle group 4745, the answer is: ?", "answer": "524", "hint": "524²=274576. Verify: (500+24)²=250000+24000+576=274576"}
+              {
+                "label": "Group 274576 right-to-left in pairs: ?",
+                "answer": "27|45|76",
+                "hint": "Three groups of two from the right"
+              },
+              {
+                "label": "First group 27 — hundreds digit of root (largest n with n²≤27): ?",
+                "answer": "5",
+                "hint": "5²=25≤27 and 6²=36>27"
+              },
+              {
+                "label": "Units digit of 274576 is 6 — root ends in ? or ?",
+                "answer": "4 or 6",
+                "hint": "4²=16, 6²=36, both end in 6"
+              },
+              {
+                "label": "Root is 5_4 or 5_6. Given the middle group 4745, the answer is: ?",
+                "answer": "524",
+                "hint": "524²=274576. Verify: (500+24)²=250000+24000+576=274576"
+              }
             ],
             "expectedAnswer": "524",
             "hint": "Hundreds digit 5, units digit 4 or 6, middle digit from intermediate calculation.",
-            "solution": "27|45|76. Hundreds 5. Units 6 → ends 4 or 6. 524²=274576. Answer: 524."
+            "solution": "27|45|76. Hundreds 5. Units 6 → ends 4 or 6. 524²=274576. Answer: 524.",
+            "visual": {
+              "kind": "svg",
+              "asset": "square_root_inspection.svg",
+              "title": "Square Root by Inspection — Vedic Digit-Grouping",
+              "caption": "Group I for Square Root by Inspection — Vedic Digit-Grouping."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "square_root_inspection.svg",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "caption": "Group I for Square Root by Inspection — Vedic Digit-Grouping."
+        }
       }
     ]
   },
@@ -584,7 +902,13 @@
       "teacherLine": "The first move in Vedic square roots: group from the right in pairs. The number of groups tells you the digit count of the root.",
       "boardAction": "Write 1764 → group as 17|64. Write 9801 → group as 98|01. Both give 2 groups → 2-digit roots.",
       "checkpointPrompt": "Group 5329 right-to-left. How many groups?",
-      "microPractice": "Group 676 and 4096. How many digits in each root?"
+      "microPractice": "Group 676 and 4096. How many digits in each root?",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_B",
@@ -594,7 +918,13 @@
       "teacherLine": "Memorise this board-exam table: square ends 1→root ends 1 or 9; ends 4→root ends 2 or 8; ends 9→root ends 3 or 7; ends 6→root ends 4 or 6; ends 5→root ends 5; ends 0→root ends 0.",
       "boardAction": "Draw units digit table. Show derivation: 1²=1, 9²=81 → both end 1.",
       "checkpointPrompt": "A perfect square ends in 9. What are the two possible units digits of its root?",
-      "microPractice": "Quick test: what units digit does a root have if the square ends in 1? In 4?"
+      "microPractice": "Quick test: what units digit does a root have if the square ends in 1? In 4?",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_C",
@@ -604,7 +934,13 @@
       "teacherLine": "Find the largest integer whose square does not exceed the first group. That is your tens digit. Combine with the units digit and you have the answer.",
       "boardAction": "Show example: first group 17 → 4²=16≤17<25=5² → tens digit 4.",
       "checkpointPrompt": "What is the tens digit of √5329? First group is 53.",
-      "microPractice": "Practice tens digits for first groups: 7, 15, 42, 63."
+      "microPractice": "Practice tens digits for first groups: 7, 15, 42, 63.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_D",
@@ -614,7 +950,13 @@
       "teacherLine": "Combine both steps and eliminate MCQ options in seconds. Tens digit bounds, units digit pattern — two-step demolition of a 4-option MCQ.",
       "boardAction": "Demonstrate on √4489: tens 6, units 9→ends 3 or 7. Only 67 works. 67²=4489.",
       "checkpointPrompt": "√5776 = ?",
-      "microPractice": "Two more: √9604 and √3364."
+      "microPractice": "Two more: √9604 and √3364.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_E",
@@ -624,7 +966,13 @@
       "teacherLine": "Write out every step for full marks in board exams: group, bound first group, identify units, verify by squaring.",
       "boardAction": "Full worked example: √5329 with all four steps annotated and boxed.",
       "checkpointPrompt": "Complete all steps for √4761.",
-      "microPractice": "Guided write-out: all four steps for √2601."
+      "microPractice": "Guided write-out: all four steps for √2601.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_F",
@@ -634,7 +982,13 @@
       "teacherLine": "One-second filter: if the units digit is 2, 3, 7, or 8, it cannot be a perfect square. Use this as a first-pass eliminator in board MCQs.",
       "boardAction": "Show units digits 0,1,4,5,6,9 as allowed; 2,3,7,8 as forbidden for perfect squares.",
       "checkpointPrompt": "Which is not a perfect square: 7921, 6243, 3844, 5387?",
-      "microPractice": "Reasons why numbers ending in 2, 3, 7, 8 cannot be perfect squares."
+      "microPractice": "Reasons why numbers ending in 2, 3, 7, 8 cannot be perfect squares.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_G",
@@ -644,7 +998,13 @@
       "teacherLine": "Board exams love 4-digit perfect squares. Apply the full method at exam speed.",
       "boardAction": "Rapid board demo: √9801=99, √7921=89. Show two-step for each.",
       "checkpointPrompt": "√8464 = ?",
-      "microPractice": "Rapid fire: √3025, √5041, √8836."
+      "microPractice": "Rapid fire: √3025, √5041, √8836.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_H",
@@ -654,7 +1014,13 @@
       "teacherLine": "Three-pair grouping for 6-digit numbers gives 3-digit roots. You have the tools — now apply them at competitive exam speed.",
       "boardAction": "Show 6-digit grouping: 166464 → 16|64|64. Three groups → 3-digit root.",
       "checkpointPrompt": "√17161 = ?",
-      "microPractice": "Three in a row: √10201, √12321, √14161."
+      "microPractice": "Three in a row: √10201, √12321, √14161.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "stepId": "VM_G8_L1_I",
@@ -664,7 +1030,13 @@
       "teacherLine": "Elite Olympiad level! 6-digit perfect squares, 3-digit roots. Three groups, three steps, one answer. You are operating at championship level.",
       "boardAction": "Full demo: √274576 with all steps. Highlight hundreds, tens, units digit extraction.",
       "checkpointPrompt": "√274576 = ?",
-      "microPractice": "Create a 6-digit perfect square and challenge a classmate."
+      "microPractice": "Create a 6-digit perfect square and challenge a classmate.",
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Teaching step for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     }
   ],
   "screenplay": [
@@ -687,7 +1059,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_A_EXPLAIN",
@@ -701,14 +1079,20 @@
       "boardAction": "Show 5329 → [53][29]. Annotate: 2 groups → 2-digit root. Show 625 → [6][25] → 2 groups still.",
       "checkpointPrompt": "Group 3969 right-to-left. What do you get?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "39|69",
       "fallbackHint": "Start from the right: last two digits = 69, remainder = 39.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_A_PRACTICE",
@@ -722,14 +1106,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_A1.",
       "checkpointPrompt": "How does 3969 group right-to-left?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "39|69",
       "fallbackHint": "From the right: 69 is the first group, 39 is the second.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_B_INTRO",
@@ -750,7 +1140,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_B_EXPLAIN",
@@ -764,14 +1160,20 @@
       "boardAction": "Show derivation: 2²=4, 8²=64 → both end in 4. Highlight the symmetry (n and 10-n always give the same units digit when squared).",
       "checkpointPrompt": "A perfect square ends in 9. What are the two possible units digits of its root?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "3 or 7",
       "fallbackHint": "3²=9 and 7²=49. Both end in 9.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_B_PRACTICE",
@@ -785,14 +1187,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_B1.",
       "checkpointPrompt": "A perfect square ends in 4. Root ends in?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "2 or 8",
       "fallbackHint": "Check: which digits, when squared, give units digit 4?",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_C_INTRO",
@@ -813,7 +1221,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_C_EXPLAIN",
@@ -827,14 +1241,20 @@
       "boardAction": "Show bounding for 53: 7²=49≤53<64=8². Circle 7 as the tens digit. Then show how tens+units gives the candidate root.",
       "checkpointPrompt": "What is the tens digit of √3969? First group 39.",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "6",
       "fallbackHint": "6²=36≤39 and 7²=49>39. Tens digit is 6.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_C_PRACTICE",
@@ -848,14 +1268,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_C1.",
       "checkpointPrompt": "Tens digit of √3969?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "6",
       "fallbackHint": "6²=36≤39 and 7²=49>39.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_D_INTRO",
@@ -876,7 +1302,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_D_EXPLAIN",
@@ -890,14 +1322,20 @@
       "boardAction": "Show full two-step process for √7056. Highlight elimination of wrong MCQ options.",
       "checkpointPrompt": "√5776 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "76",
       "fallbackHint": "Group 57|76. Tens: 7. Units 6 → ends 4 or 6. 76²=5776.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_D_PRACTICE",
@@ -911,14 +1349,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_D1.",
       "checkpointPrompt": "√7056 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "84",
       "fallbackHint": "Group 70|56. Tens 8. Units 6 → ends 4 or 6. 84²=7056.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_E_INTRO",
@@ -939,7 +1383,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_E_EXPLAIN",
@@ -953,14 +1403,20 @@
       "boardAction": "Write all four steps for √5329 with numbered labels. Box the final answer 73.",
       "checkpointPrompt": "Complete all steps for √2916.",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "54",
       "fallbackHint": "29|16. Bound 29 → tens 5. Units 6 → ends 4 or 6. 54²=2916.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_E_PRACTICE",
@@ -974,14 +1430,20 @@
       "boardAction": "Show fill_step card VM_G8_L1_E1.",
       "checkpointPrompt": "Complete all four steps.",
       "pauseType": "student_input",
-      "holdSec": 12.0,
+      "holdSec": 12,
       "expectedStudentResponse": "54",
       "fallbackHint": "Step 1: group. Step 2: bound first group. Step 3: units pattern. Step 4: verify.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_F_INTRO",
@@ -1002,7 +1464,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_F_EXPLAIN",
@@ -1016,14 +1484,20 @@
       "boardAction": "Show full units digits of squares 1²–9²: 1,4,9,6,5,6,9,4,1. Circle the missing digits: 2,3,7,8.",
       "checkpointPrompt": "From this list, identify the non-perfect-square: 7921, 6243, 3844.",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "6243",
       "fallbackHint": "6243 ends in 3. No perfect square ends in 3.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_F_PRACTICE",
@@ -1037,14 +1511,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_F1.",
       "checkpointPrompt": "Which of 2916, 3481, 4752, 6889 is NOT a perfect square?",
       "pauseType": "student_input",
-      "holdSec": 6.0,
+      "holdSec": 6,
       "expectedStudentResponse": "4752",
       "fallbackHint": "4752 ends in 2 — forbidden units digit for perfect squares.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_G_INTRO",
@@ -1065,7 +1545,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_G_EXPLAIN",
@@ -1079,14 +1565,20 @@
       "boardAction": "Write full board-exam solution for √9801 with four numbered steps.",
       "checkpointPrompt": "√7921 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "89",
       "fallbackHint": "Group 79|21. Bound 79 → 8. Units 1 → ends 1 or 9. 89²=7921.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_G_PRACTICE",
@@ -1100,14 +1592,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_G1.",
       "checkpointPrompt": "√7921 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "89",
       "fallbackHint": "79|21. Tens 8. Units 1 → ends 1 or 9. 89²=7921.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_H_INTRO",
@@ -1128,7 +1626,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_H_EXPLAIN",
@@ -1142,14 +1646,20 @@
       "boardAction": "Show rapid inspection: groups, hundreds digit, units pattern, answer. Highlight speed.",
       "checkpointPrompt": "√17161 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "131",
       "fallbackHint": "Group 1|71|61. Units 1 → ends 1 or 9. 131²=17161.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_H_PRACTICE",
@@ -1163,14 +1673,20 @@
       "boardAction": "Show MCQ card VM_G8_L1_H1.",
       "checkpointPrompt": "√12769 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "113",
       "fallbackHint": "Groups 1|27|69. Hundreds 1. Units 9 → ends 3 or 7. 113²=12769.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_I_INTRO",
@@ -1191,7 +1707,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_I_EXPLAIN",
@@ -1205,14 +1727,20 @@
       "boardAction": "Show complete three-group analysis for √274576. Box the answer 524.",
       "checkpointPrompt": "√250000 = ?",
       "pauseType": "student_input",
-      "holdSec": 10.0,
+      "holdSec": 10,
       "expectedStudentResponse": "500",
       "fallbackHint": "Group 25|00|00. Hundreds 5. Units 0 → ends 0. 500²=250000.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
     },
     {
       "beatId": "VM_G8_L1_I_PRACTICE",
@@ -1226,14 +1754,31 @@
       "boardAction": "Show fill_step card VM_G8_L1_I2.",
       "checkpointPrompt": "Complete all steps for √274576.",
       "pauseType": "student_input",
-      "holdSec": 15.0,
+      "holdSec": 15,
       "expectedStudentResponse": "524",
       "fallbackHint": "Step 1: group 27|45|76. Step 2: hundreds 5. Step 3: units 6 → ends 4 or 6. Step 4: 524²=274576.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "square_root_inspection.svg",
+        "title": "Square Root by Inspection — Vedic Digit-Grouping",
+        "caption": "Screenplay beat for Square Root by Inspection — Vedic Digit-Grouping."
+      }
+    }
+  ],
+  "chapterCode": "VM_G8_L1_SQUARE_ROOTS",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "square_root_inspection",
+      "kind": "svg",
+      "asset": "square_root_inspection.svg",
+      "title": "Lesson 1: Square Root by Inspection — Vedic Digit-Grouping",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

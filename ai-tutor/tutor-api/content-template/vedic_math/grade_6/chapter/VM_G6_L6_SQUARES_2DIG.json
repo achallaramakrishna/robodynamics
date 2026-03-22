@@ -157,7 +157,13 @@
             "questionText": "Use the Vedic method to find 75².",
             "expectedAnswer": "5625",
             "hint": "Tens digit = 7. Compute 7×8=56. Append 25.",
-            "solution": "75²: tens digit 7, 7×8=56, append 25 → 5625."
+            "solution": "75²: tens digit 7, 7×8=56, append 25 → 5625.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group A for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_A_02",
@@ -169,13 +175,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 55²?",
-            "options": ["2025", "3025", "2525", "3125"],
+            "options": [
+              "2025",
+              "3025",
+              "2525",
+              "3125"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3025",
             "hint": "Tens digit of 55 is 5. Compute 5×6=30. Append 25.",
-            "solution": "55²: 5×6=30, append 25 → 3025."
+            "solution": "55²: 5×6=30, append 25 → 3025.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group A for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group A for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -212,7 +235,12 @@
             "expectedAnswer": "2304",
             "hint": "48 = 50−2. Use (50−2)² = 2500−200+4.",
             "solution": "(50−2)² = 2500 − 200 + 4 = 2304.",
-            "visual": { "type": "svg", "asset": "vm_square_formula", "caption": "(50−d)² expansion shown on a number line near 50" }
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group B for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_B_02",
@@ -224,13 +252,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "47² using base-50 method = ?",
-            "options": ["2209", "2149", "2309", "2169"],
+            "options": [
+              "2209",
+              "2149",
+              "2309",
+              "2169"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2209",
             "hint": "47 = 50−3. (50−3)² = 2500 − 300 + 9.",
-            "solution": "2500 − 300 + 9 = 2209."
+            "solution": "2500 − 300 + 9 = 2209.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group B for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group B for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -267,7 +312,12 @@
             "expectedAnswer": "9216",
             "hint": "96 = 100−4. Use (100−4)² = 10000 − 800 + 16.",
             "solution": "(100−4)² = 10000 − 800 + 16 = 9216.",
-            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "(a−b)² = a² − 2ab + b² expanded with a=100, b=4" }
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group C for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_C_02",
@@ -279,13 +329,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 97²?",
-            "options": ["9409", "9309", "9449", "9499"],
+            "options": [
+              "9409",
+              "9309",
+              "9449",
+              "9499"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9409",
             "hint": "97 = 100−3. (100−3)² = 10000 − 600 + 9.",
-            "solution": "10000 − 600 + 9 = 9409."
+            "solution": "10000 − 600 + 9 = 9409.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group C for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group C for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -323,7 +390,12 @@
             "expectedAnswer": "5184",
             "hint": "72=70+2. (70+2)²=70²+2×70×2+2²=4900+280+4.",
             "solution": "(70+2)²=4900+280+4=5184.",
-            "visual": { "type": "svg", "asset": "vm_identity_expand", "caption": "(a+b)² identity applied with a=70, b=2" }
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group D for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_D_02",
@@ -335,13 +407,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Find 83² using the base-80 method.",
-            "options": ["6889", "6809", "6949", "6969"],
+            "options": [
+              "6889",
+              "6809",
+              "6949",
+              "6969"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "6889",
             "hint": "83=80+3. (80+3)²=6400+480+9.",
-            "solution": "(80+3)²=6400+480+9=6889."
+            "solution": "(80+3)²=6400+480+9=6889.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group D for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group D for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -376,11 +465,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 45²?",
-            "options": ["1925", "2025", "2125", "2225"],
+            "options": [
+              "1925",
+              "2025",
+              "2125",
+              "2225"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2025",
             "hint": "45 ends in 5. Tens digit 4 × 5 = 20. Append 25.",
-            "solution": "4×5=20, append 25 → 2025."
+            "solution": "4×5=20, append 25 → 2025.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group E for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_E_02",
@@ -392,13 +492,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "99² = ?",
-            "options": ["9801", "9721", "9881", "9901"],
+            "options": [
+              "9801",
+              "9721",
+              "9881",
+              "9901"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "9801",
             "hint": "99=100−1. (100−1)²=10000−200+1.",
-            "solution": "10000−200+1=9801."
+            "solution": "10000−200+1=9801.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group E for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group E for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -435,14 +552,39 @@
             "questionType": "fill_step",
             "questionText": "Find 63² step by step using base 60.",
             "steps": [
-              { "label": "Write 63 as base + gap", "answer": "60 + 3", "hint": "63 is 3 more than 60" },
-              { "label": "Base² = 60²", "answer": "3600", "hint": "60 × 60 = 3600" },
-              { "label": "2 × base × gap = 2 × 60 × 3", "answer": "360", "hint": "2 × 60 × 3 = 360" },
-              { "label": "Gap² = 3²", "answer": "9", "hint": "3 × 3 = 9" },
-              { "label": "63² = sum of all parts", "answer": "3969", "hint": "3600 + 360 + 9 = 3969" }
+              {
+                "label": "Write 63 as base + gap",
+                "answer": "60 + 3",
+                "hint": "63 is 3 more than 60"
+              },
+              {
+                "label": "Base² = 60²",
+                "answer": "3600",
+                "hint": "60 × 60 = 3600"
+              },
+              {
+                "label": "2 × base × gap = 2 × 60 × 3",
+                "answer": "360",
+                "hint": "2 × 60 × 3 = 360"
+              },
+              {
+                "label": "Gap² = 3²",
+                "answer": "9",
+                "hint": "3 × 3 = 9"
+              },
+              {
+                "label": "63² = sum of all parts",
+                "answer": "3969",
+                "hint": "3600 + 360 + 9 = 3969"
+              }
             ],
             "expectedAnswer": "3969",
-            "visual": { "type": "svg", "asset": "vm_square_formula", "caption": "Step-by-step expansion of 63² = (60+3)²" }
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group F for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_F_02",
@@ -456,9 +598,21 @@
             "questionText": "Find 78² using base 80.",
             "expectedAnswer": "6084",
             "hint": "78=80−2. (80−2)²=6400−320+4.",
-            "solution": "(80−2)²=6400−320+4=6084."
+            "solution": "(80−2)²=6400−320+4=6084.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group F for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group F for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -496,7 +650,13 @@
             "questionText": "Without computing both squares, find 15² − 14² using the pattern (n+1)²−n² = 2n+1.",
             "expectedAnswer": "29",
             "hint": "Set n=14. The answer is 2×14+1.",
-            "solution": "2×14+1=29. Check: 225−196=29 ✓."
+            "solution": "2×14+1=29. Check: 225−196=29 ✓.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group G for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_G_02",
@@ -508,13 +668,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "The sequence of differences between 11², 12², 13², 14² is: 23, 25, 27. What is the next difference (14² to 15²)?",
-            "options": ["28", "29", "30", "31"],
+            "options": [
+              "28",
+              "29",
+              "30",
+              "31"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "29",
             "hint": "The differences increase by 2 each time.",
-            "solution": "Differences: 23, 25, 27, 29. Each increases by 2 (odd numbers pattern)."
+            "solution": "Differences: 23, 25, 27, 29. Each increases by 2 (odd numbers pattern).",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group G for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group G for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -549,11 +726,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed: 85²= ?",
-            "options": ["7025", "7225", "7425", "7125"],
+            "options": [
+              "7025",
+              "7225",
+              "7425",
+              "7125"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "7225",
             "hint": "85 ends in 5. Tens digit 8 × 9 = 72. Append 25.",
-            "solution": "8×9=72, append 25 → 7225."
+            "solution": "8×9=72, append 25 → 7225.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group H for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_H_02",
@@ -567,9 +755,21 @@
             "questionText": "Find 52² using base 50.",
             "expectedAnswer": "2704",
             "hint": "52=50+2. (50+2)²=2500+200+4.",
-            "solution": "(50+2)²=2500+200+4=2704."
+            "solution": "(50+2)²=2500+200+4=2704.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group H for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group H for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -608,7 +808,12 @@
             "expectedAnswer": "15625",
             "hint": "Remove the 5: you have 12. Compute 12×13=156. Append 25.",
             "solution": "12×13=156, append 25 → 15625.",
-            "visual": { "type": "svg", "asset": "vm_square_formula", "caption": "Extended ending-in-5 rule applied to 125" }
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group I for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_I_02",
@@ -620,11 +825,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 115²?",
-            "options": ["13025", "13225", "13125", "13325"],
+            "options": [
+              "13025",
+              "13225",
+              "13125",
+              "13325"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "13225",
             "hint": "115 ends in 5. Take 11, multiply by 12 = 132. Append 25.",
-            "solution": "11×12=132, append 25 → 13225."
+            "solution": "11×12=132, append 25 → 13225.",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group I for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           },
           {
             "questionId": "L6_I_03",
@@ -637,16 +853,59 @@
             "questionType": "fill_step",
             "questionText": "Find 95² step by step using both methods — ending-in-5 rule AND base-100 method — and confirm they match.",
             "steps": [
-              { "label": "Ending-in-5: tens digit × (tens digit+1)", "answer": "9 × 10 = 90", "hint": "Tens digit of 95 is 9" },
-              { "label": "Append 25", "answer": "9025", "hint": "90 followed by 25" },
-              { "label": "Base-100: 95 = 100 − ?", "answer": "5", "hint": "100 − 95 = 5" },
-              { "label": "Base-100: (100−5)² = 10000 − 1000 + 25", "answer": "9025", "hint": "10000−1000+25=9025" },
-              { "label": "Both methods give", "answer": "9025", "hint": "Both should be 9025" }
+              {
+                "label": "Ending-in-5: tens digit × (tens digit+1)",
+                "answer": "9 × 10 = 90",
+                "hint": "Tens digit of 95 is 9"
+              },
+              {
+                "label": "Append 25",
+                "answer": "9025",
+                "hint": "90 followed by 25"
+              },
+              {
+                "label": "Base-100: 95 = 100 − ?",
+                "answer": "5",
+                "hint": "100 − 95 = 5"
+              },
+              {
+                "label": "Base-100: (100−5)² = 10000 − 1000 + 25",
+                "answer": "9025",
+                "hint": "10000−1000+25=9025"
+              },
+              {
+                "label": "Both methods give",
+                "answer": "9025",
+                "hint": "Both should be 9025"
+              }
             ],
-            "expectedAnswer": "9025"
+            "expectedAnswer": "9025",
+            "visual": {
+              "kind": "svg",
+              "asset": "squaring_near_base.svg",
+              "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+              "caption": "Group I for Square Any 2-Digit Number — The Anurupyena Formula."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "squaring_near_base.svg",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "caption": "Group I for Square Any 2-Digit Number — The Anurupyena Formula."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G6_L6_SQUARES_2DIG",
+  "courseId": "vedic_math_g6",
+  "visualLibrary": [
+    {
+      "visualId": "squaring_near_base",
+      "kind": "svg",
+      "asset": "squaring_near_base.svg",
+      "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

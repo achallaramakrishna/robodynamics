@@ -57,9 +57,21 @@
     "version": "2026-03-mindspark-g5-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will learn to multiply numbers near 100 — like 97×96 — in just three steps. No long multiplication needed!",
       "placementRule": "If learner knows what a deficit is, skip Group A and start at Group B."
     },
@@ -90,7 +102,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -119,11 +135,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the deficit of 96 from 100?",
-            "options": ["3", "4", "6", "14"],
+            "options": [
+              "3",
+              "4",
+              "6",
+              "14"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "4",
             "hint": "Deficit = 100 − 96",
-            "solution": "100 − 96 = 4. The deficit of 96 is 4."
+            "solution": "100 − 96 = 4. The deficit of 96 is 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group A for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_A2",
@@ -135,11 +162,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A shopkeeper ordered 100 kg of rice but received only 93 kg. What is the deficit (shortage)?",
-            "options": ["7", "8", "13", "93"],
+            "options": [
+              "7",
+              "8",
+              "13",
+              "93"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "7",
             "hint": "Deficit = 100 − 93",
-            "solution": "100 − 93 = 7 kg short. The deficit is 7."
+            "solution": "100 − 93 = 7 kg short. The deficit is 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group A for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_A3",
@@ -151,13 +189,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which number has a deficit of 8 from 100?",
-            "options": ["88", "92", "108", "98"],
+            "options": [
+              "88",
+              "92",
+              "108",
+              "98"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "92",
             "hint": "100 − ? = 8, so the number is 100 − 8",
-            "solution": "100 − 8 = 92. So 92 has a deficit of 8 from 100."
+            "solution": "100 − 8 = 92. So 92 has a deficit of 8 from 100.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group A for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group A for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -184,11 +239,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 98 × 95, what are the two deficits?",
-            "options": ["2 and 4", "2 and 5", "3 and 5", "8 and 5"],
+            "options": [
+              "2 and 4",
+              "2 and 5",
+              "3 and 5",
+              "8 and 5"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "2 and 5",
             "hint": "Deficit of 98 = 100−98. Deficit of 95 = 100−95.",
-            "solution": "100−98=2, 100−95=5. Deficits are 2 and 5."
+            "solution": "100−98=2, 100−95=5. Deficits are 2 and 5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group B for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_B2",
@@ -200,13 +266,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 94 × 93, what are the deficits?",
-            "options": ["4 and 3", "6 and 7", "4 and 7", "6 and 3"],
+            "options": [
+              "4 and 3",
+              "6 and 7",
+              "4 and 7",
+              "6 and 3"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "6 and 7",
             "hint": "100−94 and 100−93",
-            "solution": "100−94=6, 100−93=7. Deficits are 6 and 7."
+            "solution": "100−94=6, 100−93=7. Deficits are 6 and 7.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group B for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group B for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -234,13 +317,31 @@
             "questionType": "fill_step",
             "questionText": "For 98 × 95, find the left part using cross-subtraction.",
             "steps": [
-              {"label": "Deficit of 95 from 100: 100 − 95 = ?", "answer": "5", "hint": "100 minus 95"},
-              {"label": "Cross-subtract: 98 − 5 = ?", "answer": "93", "hint": "98 minus 5"},
-              {"label": "Left part of the answer = ?", "answer": "93", "hint": "That is your left part"}
+              {
+                "label": "Deficit of 95 from 100: 100 − 95 = ?",
+                "answer": "5",
+                "hint": "100 minus 95"
+              },
+              {
+                "label": "Cross-subtract: 98 − 5 = ?",
+                "answer": "93",
+                "hint": "98 minus 5"
+              },
+              {
+                "label": "Left part of the answer = ?",
+                "answer": "93",
+                "hint": "That is your left part"
+              }
             ],
             "expectedAnswer": "93",
             "hint": "Subtract the second number's deficit from the first number.",
-            "solution": "Deficit of 95 = 5. Left part = 98 − 5 = 93."
+            "solution": "Deficit of 95 = 5. Left part = 98 − 5 = 93.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group C for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_C2",
@@ -252,13 +353,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 97 × 94, the left part of the answer is:",
-            "options": ["90", "91", "92", "93"],
+            "options": [
+              "90",
+              "91",
+              "92",
+              "93"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "91",
             "hint": "Deficit of 94 = 6. Left part = 97 − 6.",
-            "solution": "Deficit of 94 = 6. Left part = 97 − 6 = 91."
+            "solution": "Deficit of 94 = 6. Left part = 97 − 6 = 91.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group C for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group C for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -285,11 +403,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 99 × 97, deficits are 1 and 3. The right part (padded to 2 digits) is:",
-            "options": ["13", "3", "03", "30"],
+            "options": [
+              "13",
+              "3",
+              "03",
+              "30"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "03",
             "hint": "1 × 3 = 3. Pad to 2 digits → 03",
-            "solution": "1 × 3 = 3. Since it is a single digit, pad to 03."
+            "solution": "1 × 3 = 3. Since it is a single digit, pad to 03.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group D for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_D2",
@@ -301,11 +430,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 96 × 93, deficits are 4 and 7. The right part is:",
-            "options": ["47", "28", "27", "11"],
+            "options": [
+              "47",
+              "28",
+              "27",
+              "11"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "28",
             "hint": "4 × 7 = ?",
-            "solution": "4 × 7 = 28. The right part is 28."
+            "solution": "4 × 7 = 28. The right part is 28.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group D for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_D3",
@@ -317,13 +457,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 99 × 98, what is the right part?",
-            "options": ["02", "12", "20", "98"],
+            "options": [
+              "02",
+              "12",
+              "20",
+              "98"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "02",
             "hint": "Deficits are 1 and 2. Multiply them.",
-            "solution": "Deficits: 1 and 2. 1×2=2. Padded to 2 digits: 02."
+            "solution": "Deficits: 1 and 2. 1×2=2. Padded to 2 digits: 02.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group D for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group D for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -333,9 +490,9 @@
         "boardDemo": "97×96: Left=93, Right=12 → 9312. 98×95: Left=93, Right=10 → 9310.",
         "visual": {
           "kind": "svg",
-          "title": "Nikhilam Base 100 Method",
           "asset": "nikhilam_base100.svg",
-          "caption": "Two numbers near 100: deficits on the right, cross-subtract for left, multiply deficits for right part."
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group E for Nikhilam — Multiply Near Base 100."
         },
         "readAloudPrompt": "For 97×94: Left=91, Right=18. Write the final answer.",
         "tryPrompt": "Full method: find 96×93.",
@@ -357,15 +514,41 @@
             "questionType": "fill_step",
             "questionText": "Find 97 × 96 using the Nikhilam method.",
             "steps": [
-              {"label": "Deficit of 97 from 100: 100 − 97 = ?", "answer": "3", "hint": "100 minus 97"},
-              {"label": "Deficit of 96 from 100: 100 − 96 = ?", "answer": "4", "hint": "100 minus 96"},
-              {"label": "Left part — cross-subtract: 97 − 4 = ?", "answer": "93", "hint": "97 minus the deficit of 96"},
-              {"label": "Right part — multiply deficits: 3 × 4 = ?", "answer": "12", "hint": "3 times 4"},
-              {"label": "Join left|right: 93|12 = ?", "answer": "9312", "hint": "Write 93 then 12 side by side"}
+              {
+                "label": "Deficit of 97 from 100: 100 − 97 = ?",
+                "answer": "3",
+                "hint": "100 minus 97"
+              },
+              {
+                "label": "Deficit of 96 from 100: 100 − 96 = ?",
+                "answer": "4",
+                "hint": "100 minus 96"
+              },
+              {
+                "label": "Left part — cross-subtract: 97 − 4 = ?",
+                "answer": "93",
+                "hint": "97 minus the deficit of 96"
+              },
+              {
+                "label": "Right part — multiply deficits: 3 × 4 = ?",
+                "answer": "12",
+                "hint": "3 times 4"
+              },
+              {
+                "label": "Join left|right: 93|12 = ?",
+                "answer": "9312",
+                "hint": "Write 93 then 12 side by side"
+              }
             ],
             "expectedAnswer": "9312",
             "hint": "Follow all five steps: deficit, deficit, cross, multiply, join.",
-            "solution": "Deficits: 3,4. Left: 97−4=93. Right: 3×4=12. Answer: 9312."
+            "solution": "Deficits: 3,4. Left: 97−4=93. Right: 3×4=12. Answer: 9312.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group E for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_E2",
@@ -377,11 +560,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "98 × 97 = ?",
-            "options": ["9406", "9506", "9606", "9516"],
+            "options": [
+              "9506",
+              "9406",
+              "9606",
+              "9516"
+            ],
             "correctIndex": 0,
-            "expectedAnswer": "9406",
+            "expectedAnswer": "9506",
             "hint": "Deficits: 2 and 3. Left=98−3=95. Right=2×3=06.",
-            "solution": "Deficits 2,3. Left=95. Right=06. Answer: 9506."
+            "solution": "Deficits 2,3. Left=95. Right=06. Answer: 9506.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group E for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_E3",
@@ -393,11 +587,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "94 × 93 = ?",
-            "options": ["8642", "8742", "8842", "8752"],
+            "options": [
+              "8642",
+              "8742",
+              "8842",
+              "8752"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "8742",
             "hint": "Deficits: 6 and 7. Left=94−7=87. Right=6×7=42.",
-            "solution": "Deficits 6,7. Left=87. Right=42. Answer: 8742."
+            "solution": "Deficits 6,7. Left=87. Right=42. Answer: 8742.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group E for Nikhilam — Multiply Near Base 100."
+            }
           }
         ]
       },
@@ -427,15 +632,41 @@
             "questionType": "fill_step",
             "questionText": "A mela stall sells 98 packets of popcorn per day for 97 days. How many packets are sold in total?",
             "steps": [
-              {"label": "Set up: 98 × 97. Deficit of 98: 100 − 98 = ?", "answer": "2", "hint": "100 minus 98"},
-              {"label": "Deficit of 97: 100 − 97 = ?", "answer": "3", "hint": "100 minus 97"},
-              {"label": "Left part: 98 − 3 = ?", "answer": "95", "hint": "First number minus deficit of second"},
-              {"label": "Right part: 2 × 3 = ? (pad to 2 digits)", "answer": "06", "hint": "2 times 3, pad with zero"},
-              {"label": "Total packets sold = ?", "answer": "9506", "hint": "Join 95 and 06"}
+              {
+                "label": "Set up: 98 × 97. Deficit of 98: 100 − 98 = ?",
+                "answer": "2",
+                "hint": "100 minus 98"
+              },
+              {
+                "label": "Deficit of 97: 100 − 97 = ?",
+                "answer": "3",
+                "hint": "100 minus 97"
+              },
+              {
+                "label": "Left part: 98 − 3 = ?",
+                "answer": "95",
+                "hint": "First number minus deficit of second"
+              },
+              {
+                "label": "Right part: 2 × 3 = ? (pad to 2 digits)",
+                "answer": "06",
+                "hint": "2 times 3, pad with zero"
+              },
+              {
+                "label": "Total packets sold = ?",
+                "answer": "9506",
+                "hint": "Join 95 and 06"
+              }
             ],
             "expectedAnswer": "9506",
             "hint": "98 × 97. Deficits 2 and 3.",
-            "solution": "Deficits 2,3. Left=95. Right=06. Answer: 9506 packets."
+            "solution": "Deficits 2,3. Left=95. Right=06. Answer: 9506 packets.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group F for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_F2",
@@ -447,13 +678,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A recipe needs 96 grams of flour for one batch. If you make 94 batches, how many grams of flour are needed?",
-            "options": ["8924", "9024", "9024", "9024"],
-            "correctIndex": 0,
+            "options": [
+              "8924",
+              "9024",
+              "9124",
+              "9026"
+            ],
+            "correctIndex": 1,
             "expectedAnswer": "9024",
             "hint": "96 × 94. Deficits 4 and 6. Left=90. Right=24.",
-            "solution": "Deficits 4,6. Left=96−6=90. Right=4×6=24. Answer: 9024 grams."
+            "solution": "Deficits 4 and 6. Left part = 96 - 6 = 90. Right part = 4 x 6 = 24. Answer: 9024 grams.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group F for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group F for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -480,11 +728,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 99 × 98 = ?",
-            "options": ["9602", "9702", "9802", "9612"],
+            "options": [
+              "9602",
+              "9702",
+              "9802",
+              "9612"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "9702",
             "hint": "Deficits 1,2. Left=97. Right=02.",
-            "solution": "Deficits 1,2. Left=97. Right=02. Answer: 9702."
+            "solution": "Deficits 1,2. Left=97. Right=02. Answer: 9702.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group G for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_G2",
@@ -496,11 +755,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 95 × 92 = ?",
-            "options": ["8640", "8740", "8850", "8760"],
+            "options": [
+              "8640",
+              "8740",
+              "8850",
+              "8760"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "8740",
             "hint": "Deficits 5,8. Left=87. Right=40.",
-            "solution": "Deficits 5,8. Left=95−8=87. Right=5×8=40. Answer: 8740."
+            "solution": "Deficits 5,8. Left=95−8=87. Right=5×8=40. Answer: 8740.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group G for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_G3",
@@ -512,13 +782,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 91 × 89 = ?",
-            "options": ["8099", "8099", "8199", "8099"],
+            "options": [
+              "8099",
+              "8099",
+              "8199",
+              "8099"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "8099",
             "hint": "Deficits 9,11. Left=91−11=80. Right=9×11=99.",
-            "solution": "Deficits 9 and 11. Left=80. Right=99. Answer: 8099."
+            "solution": "Deficits 9 and 11. Left=80. Right=99. Answer: 8099.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group G for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group G for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -546,15 +833,41 @@
             "questionType": "fill_step",
             "questionText": "Find 103 × 97 using the Nikhilam method.",
             "steps": [
-              {"label": "103 is above 100. Surplus = 103 − 100 = ?", "answer": "3", "hint": "103 minus 100"},
-              {"label": "97 is below 100. Deficit = 100 − 97 = ?", "answer": "3", "hint": "100 minus 97"},
-              {"label": "Cross-subtract: 103 − 3 = ? (subtract the deficit from 103)", "answer": "100", "hint": "103 minus 3"},
-              {"label": "Product of surplus × deficit: 3 × 3 = ? (will be subtracted)", "answer": "9", "hint": "3 times 3"},
-              {"label": "Answer: 100 × 100 − 9 = ?", "answer": "9991", "hint": "10000 minus 9"}
+              {
+                "label": "103 is above 100. Surplus = 103 − 100 = ?",
+                "answer": "3",
+                "hint": "103 minus 100"
+              },
+              {
+                "label": "97 is below 100. Deficit = 100 − 97 = ?",
+                "answer": "3",
+                "hint": "100 minus 97"
+              },
+              {
+                "label": "Cross-subtract: 103 − 3 = ? (subtract the deficit from 103)",
+                "answer": "100",
+                "hint": "103 minus 3"
+              },
+              {
+                "label": "Product of surplus × deficit: 3 × 3 = ? (will be subtracted)",
+                "answer": "9",
+                "hint": "3 times 3"
+              },
+              {
+                "label": "Answer: 100 × 100 − 9 = ?",
+                "answer": "9991",
+                "hint": "10000 minus 9"
+              }
             ],
             "expectedAnswer": "9991",
             "hint": "Left=100. Right=−9 means 10000−9=9991.",
-            "solution": "Surplus=3, Deficit=3. Left=100. Right=3×3=9 (negative). Answer: 10000−9=9991."
+            "solution": "Surplus=3, Deficit=3. Left=100. Right=3×3=9 (negative). Answer: 10000−9=9991.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group H for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_H2",
@@ -566,13 +879,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "102 × 98 = ? (hint: surplus 2, deficit 2)",
-            "options": ["9994", "9996", "10196", "9986"],
+            "options": [
+              "9994",
+              "9996",
+              "10196",
+              "9986"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "9996",
             "hint": "Left=100. Right=2×2=4 (negative) → 10000−4=9996.",
-            "solution": "Cross=100. Product=4 (negative). Answer: 10000−4=9996."
+            "solution": "Cross=100. Product=4 (negative). Answer: 10000−4=9996.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group H for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group H for Nikhilam — Multiply Near Base 100."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -600,15 +930,41 @@
             "questionType": "fill_step",
             "questionText": "Find 997 × 996 using base 1000.",
             "steps": [
-              {"label": "Deficit of 997 from 1000: 1000 − 997 = ?", "answer": "3", "hint": "1000 minus 997"},
-              {"label": "Deficit of 996 from 1000: 1000 − 996 = ?", "answer": "4", "hint": "1000 minus 996"},
-              {"label": "Left part: 997 − 4 = ?", "answer": "993", "hint": "997 minus deficit of 996"},
-              {"label": "Right part: 3 × 4 = ? (pad to 3 digits for base 1000)", "answer": "012", "hint": "3 times 4 = 12, pad to 012"},
-              {"label": "Answer (join left|right): ?", "answer": "993012", "hint": "993 followed by 012"}
+              {
+                "label": "Deficit of 997 from 1000: 1000 − 997 = ?",
+                "answer": "3",
+                "hint": "1000 minus 997"
+              },
+              {
+                "label": "Deficit of 996 from 1000: 1000 − 996 = ?",
+                "answer": "4",
+                "hint": "1000 minus 996"
+              },
+              {
+                "label": "Left part: 997 − 4 = ?",
+                "answer": "993",
+                "hint": "997 minus deficit of 996"
+              },
+              {
+                "label": "Right part: 3 × 4 = ? (pad to 3 digits for base 1000)",
+                "answer": "012",
+                "hint": "3 times 4 = 12, pad to 012"
+              },
+              {
+                "label": "Answer (join left|right): ?",
+                "answer": "993012",
+                "hint": "993 followed by 012"
+              }
             ],
             "expectedAnswer": "993012",
             "hint": "Base 1000: right part must be 3 digits.",
-            "solution": "Deficits 3,4. Left=993. Right=012. Answer: 993012."
+            "solution": "Deficits 3,4. Left=993. Right=012. Answer: 993012.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group I for Nikhilam — Multiply Near Base 100."
+            }
           },
           {
             "questionId": "VM_G5_L1_I2",
@@ -620,30 +976,271 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "999 × 998 = ? (base 1000, deficits 1 and 2)",
-            "options": ["997002", "998002", "997998", "996002"],
+            "options": [
+              "997002",
+              "998002",
+              "997998",
+              "996002"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "997002",
             "hint": "Left=997. Right=1×2=002.",
-            "solution": "Deficits 1,2. Left=997. Right=002. Answer: 997002."
+            "solution": "Deficits 1,2. Left=997. Right=002. Answer: 997002.",
+            "visual": {
+              "kind": "svg",
+              "asset": "nikhilam_base100.svg",
+              "title": "Nikhilam — Multiply Near Base 100",
+              "caption": "Group I for Nikhilam — Multiply Near Base 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "nikhilam_base100.svg",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "caption": "Group I for Nikhilam — Multiply Near Base 100."
+        }
       }
     ]
   },
   "teachingScript": [
-    {"stepId": "VM_G5_L1_A", "exerciseGroup": "A", "subtopic": "What is a deficit from 100?", "boardMode": "svg", "teacherLine": "When a number is near 100 but less than it, the gap is called a deficit. 97 has deficit 3 because 100−97=3.", "boardAction": "Draw number line. Mark 97 and 100. Show arrow of length 3 labeled 'deficit'.", "checkpointPrompt": "Find the deficit of 92.", "microPractice": "Quick fire: deficits of 99, 97, 95."},
-    {"stepId": "VM_G5_L1_B", "exerciseGroup": "B", "subtopic": "Both numbers below 100", "boardMode": "svg", "teacherLine": "For Nikhilam, we need BOTH deficits. Find deficit of each number from 100.", "boardAction": "Write 97×96. Below 97 write deficit=3, below 96 write deficit=4.", "checkpointPrompt": "Deficits for 94×93?", "microPractice": "List both deficits for 96×91."},
-    {"stepId": "VM_G5_L1_C", "exerciseGroup": "C", "subtopic": "Cross-subtract to get left part", "boardMode": "svg", "teacherLine": "Cross-subtract: take the first number and subtract the second number's deficit. This gives the left part!", "boardAction": "Arrow from 96's deficit (4) pointing to 97. Show 97−4=93 in blue box.", "checkpointPrompt": "Left part for 96×91?", "microPractice": "Find left part for 97×92."},
-    {"stepId": "VM_G5_L1_D", "exerciseGroup": "D", "subtopic": "Multiply deficits to get right part", "boardMode": "svg", "teacherLine": "Now multiply the two deficits. That is the right part — but pad it to 2 digits if it is a single digit!", "boardAction": "Show deficit 3 × deficit 4 = 12. Also show 1×3=3 padded to 03.", "checkpointPrompt": "Right part for 99×97?", "microPractice": "What is the right part for 95×92?"},
-    {"stepId": "VM_G5_L1_E", "exerciseGroup": "E", "subtopic": "Joining the two parts", "boardMode": "svg", "teacherLine": "Combine! Left part on the left, right part on the right. Write them together — that is your answer!", "boardAction": "Show 93|12 → 9312 with big equals sign and box.", "checkpointPrompt": "98×97 full answer?", "microPractice": "Try 95×92 end-to-end."},
-    {"stepId": "VM_G5_L1_F", "exerciseGroup": "F", "subtopic": "Word problems near 100", "boardMode": "svg", "teacherLine": "Real life! Cricket grounds, recipe quantities, school chairs — Nikhilam handles them all.", "boardAction": "Show the popcorn stall problem. Write each step clearly.", "checkpointPrompt": "96 rows × 94 seats. How many?", "microPractice": "Create your own word problem with two numbers near 100."},
-    {"stepId": "VM_G5_L1_G", "exerciseGroup": "G", "subtopic": "Speed drill", "boardMode": "svg", "teacherLine": "Speed round! Flash-card mode. Nikhilam in under 5 seconds!", "boardAction": "Flash three problems with 3-second countdown each.", "checkpointPrompt": "96×95 in under 5 seconds!", "microPractice": "Three in a row: 99×95, 97×93, 96×92."},
-    {"stepId": "VM_G5_L1_H", "exerciseGroup": "H", "subtopic": "One above, one below 100", "boardMode": "svg", "teacherLine": "New challenge! One number above 100, one below. The surplus and deficit cancel in the cross step.", "boardAction": "Show 103×97. Mark +3 and −3. Cross=100. Product=−9. Final answer=9991.", "checkpointPrompt": "101×99=?", "microPractice": "Explain in words what changes when one number is above 100."},
-    {"stepId": "VM_G5_L1_I", "exerciseGroup": "I", "subtopic": "Near base 1000", "boardMode": "svg", "teacherLine": "Boss level! Same sutra, base 1000. The right part now needs 3 digits!", "boardAction": "Show 997×996. Deficits 3 and 4. Left=993. Right=012. Answer: 993012.", "checkpointPrompt": "996×993=?", "microPractice": "What changes when the base is 1000 instead of 100?"}
+    {
+      "stepId": "VM_G5_L1_A",
+      "exerciseGroup": "A",
+      "subtopic": "What is a deficit from 100?",
+      "boardMode": "svg",
+      "teacherLine": "When a number is near 100 but less than it, the gap is called a deficit. 97 has deficit 3 because 100−97=3.",
+      "boardAction": "Draw number line. Mark 97 and 100. Show arrow of length 3 labeled 'deficit'.",
+      "checkpointPrompt": "Find the deficit of 92.",
+      "microPractice": "Quick fire: deficits of 99, 97, 95.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_B",
+      "exerciseGroup": "B",
+      "subtopic": "Both numbers below 100",
+      "boardMode": "svg",
+      "teacherLine": "For Nikhilam, we need BOTH deficits. Find deficit of each number from 100.",
+      "boardAction": "Write 97×96. Below 97 write deficit=3, below 96 write deficit=4.",
+      "checkpointPrompt": "Deficits for 94×93?",
+      "microPractice": "List both deficits for 96×91.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_C",
+      "exerciseGroup": "C",
+      "subtopic": "Cross-subtract to get left part",
+      "boardMode": "svg",
+      "teacherLine": "Cross-subtract: take the first number and subtract the second number's deficit. This gives the left part!",
+      "boardAction": "Arrow from 96's deficit (4) pointing to 97. Show 97−4=93 in blue box.",
+      "checkpointPrompt": "Left part for 96×91?",
+      "microPractice": "Find left part for 97×92.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_D",
+      "exerciseGroup": "D",
+      "subtopic": "Multiply deficits to get right part",
+      "boardMode": "svg",
+      "teacherLine": "Now multiply the two deficits. That is the right part — but pad it to 2 digits if it is a single digit!",
+      "boardAction": "Show deficit 3 × deficit 4 = 12. Also show 1×3=3 padded to 03.",
+      "checkpointPrompt": "Right part for 99×97?",
+      "microPractice": "What is the right part for 95×92?",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_E",
+      "exerciseGroup": "E",
+      "subtopic": "Joining the two parts",
+      "boardMode": "svg",
+      "teacherLine": "Combine! Left part on the left, right part on the right. Write them together — that is your answer!",
+      "boardAction": "Show 93|12 → 9312 with big equals sign and box.",
+      "checkpointPrompt": "98×97 full answer?",
+      "microPractice": "Try 95×92 end-to-end.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_F",
+      "exerciseGroup": "F",
+      "subtopic": "Word problems near 100",
+      "boardMode": "svg",
+      "teacherLine": "Real life! Cricket grounds, recipe quantities, school chairs — Nikhilam handles them all.",
+      "boardAction": "Show the popcorn stall problem. Write each step clearly.",
+      "checkpointPrompt": "96 rows × 94 seats. How many?",
+      "microPractice": "Create your own word problem with two numbers near 100.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_G",
+      "exerciseGroup": "G",
+      "subtopic": "Speed drill",
+      "boardMode": "svg",
+      "teacherLine": "Speed round! Flash-card mode. Nikhilam in under 5 seconds!",
+      "boardAction": "Flash three problems with 3-second countdown each.",
+      "checkpointPrompt": "96×95 in under 5 seconds!",
+      "microPractice": "Three in a row: 99×95, 97×93, 96×92.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_H",
+      "exerciseGroup": "H",
+      "subtopic": "One above, one below 100",
+      "boardMode": "svg",
+      "teacherLine": "New challenge! One number above 100, one below. The surplus and deficit cancel in the cross step.",
+      "boardAction": "Show 103×97. Mark +3 and −3. Cross=100. Product=−9. Final answer=9991.",
+      "checkpointPrompt": "101×99=?",
+      "microPractice": "Explain in words what changes when one number is above 100.",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "stepId": "VM_G5_L1_I",
+      "exerciseGroup": "I",
+      "subtopic": "Near base 1000",
+      "boardMode": "svg",
+      "teacherLine": "Boss level! Same sutra, base 1000. The right part now needs 3 digits!",
+      "boardAction": "Show 997×996. Deficits 3 and 4. Left=993. Right=012. Answer: 993012.",
+      "checkpointPrompt": "996×993=?",
+      "microPractice": "What changes when the base is 1000 instead of 100?",
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Teaching step for Nikhilam — Multiply Near Base 100."
+      }
+    }
   ],
   "screenplay": [
-    {"beatId": "VM_G5_L1_A_INTRO", "stepId": "VM_G5_L1_A", "exerciseGroup": "A", "subtopic": "What is a deficit from 100?", "sequence": 101, "cue": "intro", "boardMode": "svg", "teacherLine": "When a number is near 100 but slightly less, the gap is called a deficit. 97 is 3 short of 100!", "boardAction": "Draw number line from 95 to 100. Mark 97 and show the gap of 3.", "checkpointPrompt": "", "pauseType": "none", "holdSec": 0.4, "expectedStudentResponse": "", "fallbackHint": "Think: how far is 97 from 100?", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null},
-    {"beatId": "VM_G5_L1_A_PRACTICE", "stepId": "VM_G5_L1_A", "exerciseGroup": "A", "subtopic": "What is a deficit from 100?", "sequence": 102, "cue": "practice", "boardMode": "svg", "teacherLine": "Try the question — find the deficit of 96 from 100.", "boardAction": "Show MCQ card VM_G5_L1_A1.", "checkpointPrompt": "Deficit of 96?", "pauseType": "student_input", "holdSec": 5.0, "expectedStudentResponse": "4", "fallbackHint": "100 − 96 = ?", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null},
-    {"beatId": "VM_G5_L1_E_EXPLAIN", "stepId": "VM_G5_L1_E", "exerciseGroup": "E", "subtopic": "Joining the two parts", "sequence": 501, "cue": "explain", "boardMode": "svg", "teacherLine": "Left part and right part — put them together side by side. That is your final answer!", "boardAction": "Show visual asset nikhilam_base100.svg with 97×96 worked fully.", "checkpointPrompt": "98×97=?", "pauseType": "student_input", "holdSec": 8.0, "expectedStudentResponse": "9506", "fallbackHint": "Deficits 2,3. Left=95. Right=06. Answer: 9506.", "performanceTag": "core", "useWhenCorrect": null, "useWhenIncorrect": null, "minConfidence": null, "maxConfidence": null}
+    {
+      "beatId": "VM_G5_L1_A_INTRO",
+      "stepId": "VM_G5_L1_A",
+      "exerciseGroup": "A",
+      "subtopic": "What is a deficit from 100?",
+      "sequence": 101,
+      "cue": "intro",
+      "boardMode": "svg",
+      "teacherLine": "When a number is near 100 but slightly less, the gap is called a deficit. 97 is 3 short of 100!",
+      "boardAction": "Draw number line from 95 to 100. Mark 97 and show the gap of 3.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Think: how far is 97 from 100?",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Screenplay beat for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "beatId": "VM_G5_L1_A_PRACTICE",
+      "stepId": "VM_G5_L1_A",
+      "exerciseGroup": "A",
+      "subtopic": "What is a deficit from 100?",
+      "sequence": 102,
+      "cue": "practice",
+      "boardMode": "svg",
+      "teacherLine": "Try the question — find the deficit of 96 from 100.",
+      "boardAction": "Show MCQ card VM_G5_L1_A1.",
+      "checkpointPrompt": "Deficit of 96?",
+      "pauseType": "student_input",
+      "holdSec": 5,
+      "expectedStudentResponse": "4",
+      "fallbackHint": "100 − 96 = ?",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Screenplay beat for Nikhilam — Multiply Near Base 100."
+      }
+    },
+    {
+      "beatId": "VM_G5_L1_E_EXPLAIN",
+      "stepId": "VM_G5_L1_E",
+      "exerciseGroup": "E",
+      "subtopic": "Joining the two parts",
+      "sequence": 501,
+      "cue": "explain",
+      "boardMode": "svg",
+      "teacherLine": "Left part and right part — put them together side by side. That is your final answer!",
+      "boardAction": "Show visual asset nikhilam_base100.svg with 97×96 worked fully.",
+      "checkpointPrompt": "98×97=?",
+      "pauseType": "student_input",
+      "holdSec": 8,
+      "expectedStudentResponse": "9506",
+      "fallbackHint": "Deficits 2,3. Left=95. Right=06. Answer: 9506.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "nikhilam_base100.svg",
+        "title": "Nikhilam — Multiply Near Base 100",
+        "caption": "Screenplay beat for Nikhilam — Multiply Near Base 100."
+      }
+    }
+  ],
+  "chapterCode": "VM_G5_L1_NIKHILAM_NEAR100",
+  "courseId": "vedic_math_g5",
+  "visualLibrary": [
+    {
+      "visualId": "nikhilam_base100",
+      "kind": "svg",
+      "asset": "nikhilam_base100.svg",
+      "title": "Lesson 1: Nikhilam — Multiply Near Base 100",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
   ]
 }

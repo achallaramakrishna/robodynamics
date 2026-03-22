@@ -1,5 +1,5 @@
 {
-  "title": "Lesson 7: Near 100 Magic — Add and Subtract Close Numbers",
+  "title": "Lesson 7: Near 100 Magic - Add and Subtract Close Numbers",
   "gradeBand": "Grade 4",
   "source": "Vedic Mathematics for Schools | Grade 4",
   "estimatedMinutes": 20,
@@ -8,7 +8,7 @@
     "Add two numbers near 100",
     "Subtract near 100 (no borrowing)",
     "Mixed addition and subtraction",
-    "MCQ — pick the correct deviation",
+    "MCQ - pick the correct deviation",
     "Fill-the-step: near-100 addition",
     "Word problems near 100",
     "Speed drill: 6 problems",
@@ -20,14 +20,14 @@
     "Subtract from 100 and 1000 without any borrowing."
   ],
   "coreIdeas": [
-    "Every number near 100 has a deviation: 97 = 100 − 3, so its deficit is 3.",
-    "To add 97 + 98: deviations are −3 and −2. Sum = 200 − 5 = 195.",
-    "To subtract: 100 − 37, use All-From-9 Last-From-10. Instant answer."
+    "Every number near 100 has a deviation: 97 = 100 - 3, so its deficit is 3.",
+    "To add 97 + 98: deviations are -3 and -2. Sum = 200 - 5 = 195.",
+    "To subtract: 100 - 37, use All-From-9 Last-From-10. Instant answer."
   ],
   "workedExamples": [
     {
       "question": "97 + 98 = ?",
-      "method": "Both near 100. Deviations: 97→−3, 98→−2. 200 + (−3) + (−2) = 200 − 5 = 195.",
+      "method": "Both near 100. Deviations: 97->-3, 98->-2. 200 + (-3) + (-2) = 200 - 5 = 195.",
       "answer": "195"
     },
     {
@@ -36,39 +36,51 @@
       "answer": "207"
     },
     {
-      "question": "100 − 43 = ?",
-      "method": "All-From-9 Last-From-10: 9−4=5, 10−3=7. Answer: 57.",
+      "question": "100 - 43 = ?",
+      "method": "All-From-9 Last-From-10: 9-4=5, 10-3=7. Answer: 57.",
       "answer": "57"
     },
     {
-      "question": "1000 − 364 = ?",
-      "method": "All-From-9 Last-From-10: 9−3=6, 9−6=3, 10−4=6. Answer: 636.",
+      "question": "1000 - 364 = ?",
+      "method": "All-From-9 Last-From-10: 9-3=6, 9-6=3, 10-4=6. Answer: 636.",
       "answer": "636"
     }
   ],
   "starterPractice": [
     "What is the deviation of 96 from 100? Is it a deficit or surplus?",
     "Add 99 + 97 using the deviation method.",
-    "Find 100 − 58 without borrowing."
+    "Find 100 - 58 without borrowing."
   ],
   "duolingoLessonArc": {
-    "version": "2026-03-mindspark-g4-v1",
+    "version": "2026-03-mindsutra-g4-v2",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
-      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will discover how numbers near 100 have a secret shortcut — we call it the deviation trick!",
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
+      "coachIntro": "Today you will work with numbers that sit close to 100 and use their small gaps or extra parts to add faster.",
       "placementRule": "Start at group A. If the learner already knows deviations, jump to group C."
     },
     "mission": {
       "missionTitle": "Near 100 Magic",
-      "missionPromise": "Add and subtract numbers close to 100 in your head — no pencil needed!",
-      "successCelebration": "Brilliant! You have mastered the Near-100 shortcut. Your brain is now faster than a calculator for these!"
+      "missionPromise": "First learn to spot each number's distance from 100, then use that idea to add and subtract with less effort.",
+      "successCelebration": "Well done. You can now use near-100 thinking to add and subtract these numbers more smoothly."
     },
     "microLessonPattern": [
       "Coach reveals the deviation concept with a number line pointing to 100.",
-      "Board shows: 97 is 3 below 100 — draw the gap visually.",
+      "Board shows: 97 is 3 below 100 - draw the gap visually.",
       "Student reads the deviation aloud before computing.",
       "Student finds the deviation of a new number before adding.",
       "Instant feedback highlights the deviation that was wrong.",
@@ -89,22 +101,26 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
       {
         "exerciseGroup": "A",
         "subtopic": "What is deviation from 100?",
-        "missionStepTitle": "Exercise A: Deviation Concept",
-        "coachHook": "Every number near 100 has a gap from 100 — we call it the deviation. Watch: 97 is 3 below 100, so its deviation is −3. Simple!",
-        "boardDemo": "97 → 100 − 97 = 3, deviation = −3. 103 → 103 − 100 = 3, deviation = +3. Show the number line.",
-        "readAloudPrompt": "What is the deviation of 96 from 100?",
-        "tryPrompt": "Find the deviation of 102 from 100.",
-        "masteryCheck": "What is the deviation of 95?",
-        "instantFeedbackWin": "Excellent! You spotted the deviation instantly — that is the key to the whole trick!",
-        "instantFeedbackRetry": "Deviation = 100 − number (if below 100). 95 is 5 below 100, so deviation = −5.",
-        "reviewPrompt": "Find deviations of 97, 103, 98, 101.",
+        "missionStepTitle": "Exercise A: Spot the distance from 100",
+        "coachHook": "Imagine 100 as home base. A number like 97 is only 3 steps below it, and 103 is 3 steps above it. That small distance is the secret we use.",
+        "boardDemo": "Draw a short number line with 100 in the center. Mark 97 as 3 below 100 and 103 as 3 above 100 so the gap can be seen before it is named.",
+        "readAloudPrompt": "Home base is 100. What is the distance of 96 from 100?",
+        "tryPrompt": "Now find the distance of 102 from 100.",
+        "masteryCheck": "What is the deviation of 95 from 100?",
+        "instantFeedbackWin": "Yes. You found the distance from 100, which is the key move in this lesson.",
+        "instantFeedbackRetry": "95 sits 5 below 100, so its deviation is -5. Think of the gap first, not the full subtraction.",
+        "reviewPrompt": "Find the deviations of 97, 103, 98, and 101.",
         "xpReward": 10,
         "badgeFocus": "Deviation Spotter",
         "exercises": [
@@ -118,12 +134,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the deviation of 97 from 100?",
-            "options": ["3", "-3", "7", "103"],
+            "options": [
+              "3",
+              "-3",
+              "7",
+              "103"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "-3",
             "hint": "97 is below 100, so it is a deficit (negative deviation).",
-            "solution": "100 − 97 = 3. Since 97 is below 100, deviation = −3.",
-            "visual": {"type": "svg", "asset": "vm_near_100_deficit", "caption": "Deviation from base 100"}
+            "solution": "100 - 97 = 3. Since 97 is below 100, deviation = -3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Deviation from 100",
+              "caption": "Check whether the number is below or above 100 and measure the gap."
+            }
           },
           {
             "questionId": "VM_G4_L7_A_Q2",
@@ -135,25 +161,89 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the deviation of 103 from 100?",
-            "options": ["-3", "3", "97", "103"],
+            "options": [
+              "-3",
+              "3",
+              "97",
+              "103"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "103 is above 100, so its deviation is positive.",
-            "solution": "103 − 100 = 3. Surplus = +3."
+            "solution": "103 - 100 = 3. Surplus = +3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Deviation from 100",
+              "caption": "Check whether the number is below or above 100 and measure the gap."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_A_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "A",
+            "subtopic": "Deviation from 100",
+            "skill": "find deviation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "What is the deviation of 95 from 100? (write as -5 if deficit)",
+            "expectedAnswer": "-5",
+            "hint": "95 is 5 below 100. It is a deficit, so write -5.",
+            "solution": "100 - 95 = 5. Since below 100, deviation = -5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Deviation from 100",
+              "caption": "Check whether the number is below or above 100 and measure the gap."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_A_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "A",
+            "subtopic": "Deviation from 100",
+            "skill": "find deviation",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "Which number has a deviation of +6 from 100?",
+            "options": [
+              "94",
+              "96",
+              "104",
+              "106"
+            ],
+            "correctIndex": 3,
+            "expectedAnswer": "106",
+            "hint": "A positive deviation means the number is above 100.",
+            "solution": "100 + 6 = 106. Deviation = +6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Deviation from 100",
+              "caption": "Check whether the number is below or above 100 and measure the gap."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Deviation from 100",
+          "caption": "Check whether the number is below or above 100 and measure the gap."
+        }
       },
       {
         "exerciseGroup": "B",
         "subtopic": "Add two numbers near 100",
         "missionStepTitle": "Exercise B: Adding Near 100",
-        "coachHook": "To add two near-100 numbers, start from 200 and adjust by both deviations. 97 + 98 = 200 − 3 − 2 = 195. That is it!",
-        "boardDemo": "97 + 98: deviations −3 and −2. 200 + (−3) + (−2) = 195. Show on board.",
+        "coachHook": "To add two near-100 numbers, start from 200 and adjust by both deviations. 97 + 98 = 200 - 3 - 2 = 195. That is it!",
+        "boardDemo": "97 + 98: deviations -3 and -2. 200 + (-3) + (-2) = 195. Show on board.",
         "readAloudPrompt": "96 + 99 = ?",
         "tryPrompt": "Add 97 + 95.",
         "masteryCheck": "Add 98 + 97.",
         "instantFeedbackWin": "Perfect! You added the deviations and hit the right answer instantly.",
-        "instantFeedbackRetry": "97 + 95: deviations are −3 and −5. 200 − 3 − 5 = 192.",
+        "instantFeedbackRetry": "97 + 95: deviations are -3 and -5. 200 - 3 - 5 = 192.",
         "reviewPrompt": "Add: 96 + 98, 99 + 97.",
         "xpReward": 10,
         "badgeFocus": "Near-100 Adder",
@@ -168,11 +258,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "97 + 98 = ?",
-            "options": ["193", "195", "196", "197"],
+            "options": [
+              "193",
+              "195",
+              "196",
+              "197"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "195",
-            "hint": "Deviations: −3 and −2. Start from 200.",
-            "solution": "200 − 3 − 2 = 195."
+            "hint": "Deviations: -3 and -2. Start from 200.",
+            "solution": "200 - 3 - 2 = 195.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Adding near 100",
+              "caption": "Start from 200 and adjust by both deviations."
+            }
           },
           {
             "questionId": "VM_G4_L7_B_Q2",
@@ -182,26 +283,85 @@
             "skill": "near-100 addition",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "96 + 99 = ?",
             "expectedAnswer": "195",
-            "hint": "96 deviation: −4. 99 deviation: −1. 200 − 4 − 1 = ?",
-            "solution": "200 − 4 − 1 = 195."
+            "hint": "96 deviation: -4. 99 deviation: -1. 200 - 4 - 1 = ?",
+            "solution": "200 - 4 - 1 = 195.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Adding near 100",
+              "caption": "Start from 200 and adjust by both deviations."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_B_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "B",
+            "subtopic": "Add near 100",
+            "skill": "near-100 addition",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "98 + 97 = ?",
+            "expectedAnswer": "195",
+            "hint": "Deviations: -2 and -3. 200 - 5 = ?",
+            "solution": "200 - 2 - 3 = 195.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Adding near 100",
+              "caption": "Start from 200 and adjust by both deviations."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_B_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "B",
+            "subtopic": "Add near 100",
+            "skill": "near-100 addition with surplus",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "103 + 104 = ?",
+            "options": [
+              "205",
+              "207",
+              "209",
+              "210"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "207",
+            "hint": "Both above 100. Surpluses: +3 and +4. Start from 200.",
+            "solution": "200 + 3 + 4 = 207.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Adding near 100",
+              "caption": "Start from 200 and adjust by both deviations."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Adding near 100",
+          "caption": "Start from 200 and adjust by both deviations."
+        }
       },
       {
         "exerciseGroup": "C",
         "subtopic": "Subtract near 100 (no borrowing)",
         "missionStepTitle": "Exercise C: Subtract from 100",
         "coachHook": "Subtraction from 100 is even easier! Use All-From-9 Last-From-10. Each digit from 9 except the last digit which comes from 10.",
-        "boardDemo": "100 − 43: 9−4=5, 10−3=7. Answer 57. 100 − 68: 9−6=3, 10−8=2. Answer 32.",
-        "readAloudPrompt": "100 − 37 = ?",
-        "tryPrompt": "100 − 52 = ?",
-        "masteryCheck": "100 − 29 = ?",
-        "instantFeedbackWin": "No borrowing needed — the sutra did all the work!",
-        "instantFeedbackRetry": "100 − 29: last digit from 10: 10−9=1. Other digit from 9: 9−2=7. Answer: 71.",
-        "reviewPrompt": "Find: 100−45, 100−76, 100−13.",
+        "boardDemo": "100 - 43: 9-4=5, 10-3=7. Answer 57. 100 - 68: 9-6=3, 10-8=2. Answer 32.",
+        "readAloudPrompt": "100 - 37 = ?",
+        "tryPrompt": "100 - 52 = ?",
+        "masteryCheck": "100 - 29 = ?",
+        "instantFeedbackWin": "No borrowing needed - the sutra did all the work!",
+        "instantFeedbackRetry": "100 - 29: last digit from 10: 10-9=1. Other digit from 9: 9-2=7. Answer: 71.",
+        "reviewPrompt": "Find: 100-45, 100-76, 100-13.",
         "xpReward": 10,
         "badgeFocus": "Borrow-Free Subtractor",
         "exercises": [
@@ -214,12 +374,23 @@
             "difficulty": "easy",
             "type": "practice",
             "questionType": "mcq",
-            "questionText": "100 − 43 = ?",
-            "options": ["47", "53", "57", "63"],
+            "questionText": "100 - 43 = ?",
+            "options": [
+              "47",
+              "53",
+              "57",
+              "63"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "57",
-            "hint": "9−4=5, 10−3=7. Read the digits together.",
-            "solution": "All-From-9: 9−4=5. Last-From-10: 10−3=7. Answer: 57."
+            "hint": "9-4=5, 10-3=7. Read the digits together.",
+            "solution": "All-From-9: 9-4=5. Last-From-10: 10-3=7. Answer: 57.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Subtract from 100",
+              "caption": "Use All-From-9 Last-From-10 for fast subtraction from 100."
+            }
           },
           {
             "questionId": "VM_G4_L7_C_Q2",
@@ -229,26 +400,85 @@
             "skill": "All-From-9 Last-From-10",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "100 − 68 = ?",
+            "questionType": "short_answer",
+            "questionText": "100 - 68 = ?",
             "expectedAnswer": "32",
-            "hint": "9−6=3, 10−8=2.",
-            "solution": "9−6=3, 10−8=2. Answer: 32."
+            "hint": "9-6=3, 10-8=2.",
+            "solution": "9-6=3, 10-8=2. Answer: 32.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Subtract from 100",
+              "caption": "Use All-From-9 Last-From-10 for fast subtraction from 100."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_C_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "C",
+            "subtopic": "Subtract from 100",
+            "skill": "All-From-9 Last-From-10",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "100 - 29 = ?",
+            "expectedAnswer": "71",
+            "hint": "9-2=7, 10-9=1.",
+            "solution": "9-2=7, 10-9=1. Answer: 71.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Subtract from 100",
+              "caption": "Use All-From-9 Last-From-10 for fast subtraction from 100."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_C_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "C",
+            "subtopic": "Subtract from 100",
+            "skill": "All-From-9 Last-From-10",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "100 - 76 = ?",
+            "options": [
+              "24",
+              "26",
+              "34",
+              "36"
+            ],
+            "correctIndex": 0,
+            "expectedAnswer": "24",
+            "hint": "9-7=2, 10-6=4.",
+            "solution": "9-7=2, 10-6=4. Answer: 24.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Subtract from 100",
+              "caption": "Use All-From-9 Last-From-10 for fast subtraction from 100."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Subtract from 100",
+          "caption": "Use All-From-9 Last-From-10 for fast subtraction from 100."
+        }
       },
       {
         "exerciseGroup": "D",
         "subtopic": "Mixed addition and subtraction near 100",
         "missionStepTitle": "Exercise D: Mixed Practice",
         "coachHook": "Now mix it up! Some problems need addition, some need subtraction. Choose your method quickly.",
-        "boardDemo": "103 + 104 = 200+3+4=207. 100−57=43. Show both on board.",
+        "boardDemo": "103 + 104 = 200+3+4=207. 100-57=43. Show both on board.",
         "readAloudPrompt": "102 + 99 = ?",
-        "tryPrompt": "100 − 71 = ?",
+        "tryPrompt": "100 - 71 = ?",
         "masteryCheck": "98 + 103 = ?",
-        "instantFeedbackWin": "Great switching between methods — you are thinking like a Vedic mathematician!",
-        "instantFeedbackRetry": "98 + 103: 200 + (−2) + 3 = 201.",
-        "reviewPrompt": "Try: 101+102, 100−84, 99+98.",
+        "instantFeedbackWin": "Good switch. You chose the right method for the problem and used it correctly.",
+        "instantFeedbackRetry": "98 + 103: 200 + (-2) + 3 = 201.",
+        "reviewPrompt": "Try: 101+102, 100-84, 99+98.",
         "xpReward": 12,
         "badgeFocus": "Mixed Method Master",
         "exercises": [
@@ -262,11 +492,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "102 + 103 = ?",
-            "options": ["203", "205", "207", "201"],
+            "options": [
+              "203",
+              "205",
+              "207",
+              "201"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "205",
             "hint": "Both above 100. Surpluses: +2 and +3. Start from 200.",
-            "solution": "200 + 2 + 3 = 205."
+            "solution": "200 + 2 + 3 = 205.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Mixed near 100",
+              "caption": "Choose addition or subtraction quickly from the situation."
+            }
           },
           {
             "questionId": "VM_G4_L7_D_Q2",
@@ -276,25 +517,84 @@
             "skill": "choose method",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "100 − 71 = ?",
+            "questionType": "short_answer",
+            "questionText": "100 - 71 = ?",
             "expectedAnswer": "29",
-            "hint": "9−7=2, 10−1=9.",
-            "solution": "9−7=2, 10−1=9. Answer: 29."
+            "hint": "9-7=2, 10-1=9.",
+            "solution": "9-7=2, 10-1=9. Answer: 29.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Mixed near 100",
+              "caption": "Choose addition or subtraction quickly from the situation."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_D_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "D",
+            "subtopic": "Mixed near-100",
+            "skill": "choose method",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "98 + 103 = ?",
+            "expectedAnswer": "201",
+            "hint": "98 deficit -2, 103 surplus +3. 200 + 1 = ?",
+            "solution": "200 - 2 + 3 = 201.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Mixed near 100",
+              "caption": "Choose addition or subtraction quickly from the situation."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_D_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "D",
+            "subtopic": "Mixed near-100",
+            "skill": "choose method",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "100 - 84 = ?",
+            "options": [
+              "14",
+              "16",
+              "18",
+              "26"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "16",
+            "hint": "9-8=1, 10-4=6.",
+            "solution": "9-8=1, 10-4=6. Answer: 16.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Mixed near 100",
+              "caption": "Choose addition or subtraction quickly from the situation."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Mixed near 100",
+          "caption": "Choose addition or subtraction quickly from the situation."
+        }
       },
       {
         "exerciseGroup": "E",
-        "subtopic": "MCQ — identify the correct deviation",
+        "subtopic": "MCQ - identify the correct deviation",
         "missionStepTitle": "Exercise E: Deviation Quiz",
         "coachHook": "Quick quiz time! Can you spot the correct deviation and answer in one shot?",
-        "boardDemo": "95 + 97: both below 100. Deviations −5 and −3. 200 − 8 = 192.",
+        "boardDemo": "95 + 97: both below 100. Deviations -5 and -3. 200 - 8 = 192.",
         "readAloudPrompt": "95 + 97 = ?",
         "tryPrompt": "104 + 98 = ?",
         "masteryCheck": "96 + 107 = ?",
         "instantFeedbackWin": "Spot on! You read the deviations and computed in a flash.",
-        "instantFeedbackRetry": "96 + 107: deviations −4 and +7. 200 + (−4) + 7 = 203.",
+        "instantFeedbackRetry": "96 + 107: deviations -4 and +7. 200 + (-4) + 7 = 203.",
         "reviewPrompt": "Four quick ones: 98+99, 103+97, 95+106, 102+101.",
         "xpReward": 12,
         "badgeFocus": "Deviation Detective",
@@ -309,11 +609,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "95 + 97 = ?",
-            "options": ["190", "192", "194", "193"],
+            "options": [
+              "190",
+              "192",
+              "194",
+              "193"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "192",
-            "hint": "Deviations: −5 and −3. 200 − 8 = ?",
-            "solution": "200 − 5 − 3 = 192."
+            "hint": "Deviations: -5 and -3. 200 - 8 = ?",
+            "solution": "200 - 5 - 3 = 192.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Spot the correct answer",
+              "caption": "Use the deviation method mentally to eliminate wrong options."
+            }
           },
           {
             "questionId": "VM_G4_L7_E_Q2",
@@ -325,25 +636,89 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "104 + 98 = ?",
-            "options": ["200", "201", "202", "203"],
+            "options": [
+              "200",
+              "201",
+              "202",
+              "203"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "202",
-            "hint": "104 surplus +4, 98 deficit −2. 200 + 4 − 2 = ?",
-            "solution": "200 + 4 − 2 = 202."
+            "hint": "104 surplus +4, 98 deficit -2. 200 + 4 - 2 = ?",
+            "solution": "200 + 4 - 2 = 202.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Spot the correct answer",
+              "caption": "Use the deviation method mentally to eliminate wrong options."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_E_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ deviation",
+            "skill": "near-100 computation",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "96 + 107 = ?",
+            "options": [
+              "199",
+              "201",
+              "203",
+              "205"
+            ],
+            "correctIndex": 2,
+            "expectedAnswer": "203",
+            "hint": "96 deficit -4, 107 surplus +7. 200 + 3 = ?",
+            "solution": "200 - 4 + 7 = 203.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Spot the correct answer",
+              "caption": "Use the deviation method mentally to eliminate wrong options."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_E_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "E",
+            "subtopic": "MCQ deviation",
+            "skill": "near-100 computation",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "99 + 99 = ?",
+            "expectedAnswer": "198",
+            "hint": "Both have deviation -1. 200 - 1 - 1 = ?",
+            "solution": "200 - 1 - 1 = 198.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Spot the correct answer",
+              "caption": "Use the deviation method mentally to eliminate wrong options."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Spot the correct answer",
+          "caption": "Use the deviation method mentally to eliminate wrong options."
+        }
       },
       {
         "exerciseGroup": "F",
         "subtopic": "Fill-the-step: near-100 addition",
         "missionStepTitle": "Exercise F: Step-by-Step",
         "coachHook": "Let us work through a near-100 addition step by step so you can see every part of the method.",
-        "boardDemo": "97 × 96 using Nikhilam: deficit 3 and 4. Cross: 97−4=93. Product: 3×4=12. Answer: 9312.",
+        "boardDemo": "96 + 97: deviations are -4 and -3. Start from 200. 200 - 4 - 3 = 193. Show both deficits clearly on the board.",
         "readAloudPrompt": "Solve 96 + 97 step by step.",
         "tryPrompt": "Work out 98 + 95 using deviations.",
         "masteryCheck": "Add 94 + 103 step by step.",
-        "instantFeedbackWin": "Perfect steps — you followed the method exactly!",
-        "instantFeedbackRetry": "94 + 103: deviations −6 and +3. 200 + (−6) + 3 = 197.",
+        "instantFeedbackWin": "Perfect steps - you followed the method exactly!",
+        "instantFeedbackRetry": "94 + 103: deviations -6 and +3. 200 + (-6) + 3 = 197.",
         "reviewPrompt": "Try the same method for 99 + 96.",
         "xpReward": 12,
         "badgeFocus": "Step-by-Step Solver",
@@ -359,29 +734,140 @@
             "questionType": "fill_step",
             "questionText": "Add 96 + 97 using the deviation method",
             "steps": [
-              {"label": "Deviation of 96 from 100", "answer": "-4", "hint": "100 − 96 = 4, it is below 100"},
-              {"label": "Deviation of 97 from 100", "answer": "-3", "hint": "100 − 97 = 3, it is below 100"},
-              {"label": "Sum of deviations (−4) + (−3)", "answer": "-7", "hint": "Add the two negative deviations"},
-              {"label": "Final answer: 200 + (−7)", "answer": "193", "hint": "200 − 7 = ?"}
+              {
+                "label": "Deviation of 96 from 100",
+                "answer": "-4",
+                "hint": "100 - 96 = 4, it is below 100"
+              },
+              {
+                "label": "Deviation of 97 from 100",
+                "answer": "-3",
+                "hint": "100 - 97 = 3, it is below 100"
+              },
+              {
+                "label": "Sum of deviations (-4) + (-3)",
+                "answer": "-7",
+                "hint": "Add the two negative deviations"
+              },
+              {
+                "label": "Final answer: 200 + (-7)",
+                "answer": "193",
+                "hint": "200 - 7 = ?"
+              }
             ],
             "expectedAnswer": "193",
             "hint": "Start from 200. Subtract both deficits.",
-            "solution": "Deviations: −4 and −3. 200 − 4 − 3 = 193.",
-            "visual": {"type": "svg", "asset": "vm_near_100_deficit", "caption": "Deviation from base 100"}
+            "solution": "Deviations: -4 and -3. 200 - 4 - 3 = 193.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Step-by-step near 100",
+              "caption": "Write both deviations, combine them, and adjust from 200."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_F_Q2",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step near-100",
+            "skill": "deviation addition steps",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Add 98 + 95 using the deviation method",
+            "steps": [
+              {
+                "label": "Deviation of 98 from 100",
+                "answer": "-2",
+                "hint": "100 - 98 = 2, it is below 100"
+              },
+              {
+                "label": "Deviation of 95 from 100",
+                "answer": "-5",
+                "hint": "100 - 95 = 5, it is below 100"
+              },
+              {
+                "label": "Sum of deviations (-2) + (-5)",
+                "answer": "-7",
+                "hint": "Add the two negative deviations"
+              },
+              {
+                "label": "Final answer: 200 + (-7)",
+                "answer": "193",
+                "hint": "200 - 7 = ?"
+              }
+            ],
+            "expectedAnswer": "193",
+            "hint": "Start from 200. Subtract both deficits.",
+            "solution": "Deviations: -2 and -5. 200 - 2 - 5 = 193.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Step-by-step near 100",
+              "caption": "Write both deviations, combine them, and adjust from 200."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_F_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-the-step near-100",
+            "skill": "deviation addition steps",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "fill_step",
+            "questionText": "Add 94 + 103 using the deviation method",
+            "steps": [
+              {
+                "label": "Deviation of 94 from 100",
+                "answer": "-6",
+                "hint": "94 is 6 below 100"
+              },
+              {
+                "label": "Deviation of 103 from 100",
+                "answer": "+3",
+                "hint": "103 is 3 above 100"
+              },
+              {
+                "label": "Sum of deviations (-6) + (+3)",
+                "answer": "-3",
+                "hint": "-6 + 3 = -3"
+              },
+              {
+                "label": "Final answer: 200 + (-3)",
+                "answer": "197",
+                "hint": "200 - 3 = ?"
+              }
+            ],
+            "expectedAnswer": "197",
+            "hint": "Deficit -6, surplus +3. Net = -3. 200 - 3 = 197.",
+            "solution": "Deviations: -6 and +3. 200 - 3 = 197.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Step-by-step near 100",
+              "caption": "Write both deviations, combine them, and adjust from 200."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Step-by-step near 100",
+          "caption": "Write both deviations, combine them, and adjust from 200."
+        }
       },
       {
         "exerciseGroup": "G",
         "subtopic": "Word problems near 100",
         "missionStepTitle": "Exercise G: Real-World Problems",
-        "coachHook": "Let us use the near-100 trick in real-life situations — shopping, distances, scores!",
-        "boardDemo": "Riya scored 97 in Maths and 98 in Science. Total = 200 − 3 − 2 = 195.",
+        "coachHook": "Let us use the near-100 trick in real-life situations - shopping, distances, scores!",
+        "boardDemo": "Riya scored 97 in Maths and 98 in Science. Total = 200 - 3 - 2 = 195.",
         "readAloudPrompt": "A book costs ₹97 and a pen costs ₹96. Total = ?",
         "tryPrompt": "Two baskets have 103 and 98 apples. Total = ?",
         "masteryCheck": "Distance A is 995 m and B is 998 m. Total = ?",
         "instantFeedbackWin": "Real-world Vedic speed! You solved it without writing anything down.",
-        "instantFeedbackRetry": "995 + 998: near 1000. Deviations −5 and −2. 2000 − 7 = 1993.",
+        "instantFeedbackRetry": "995 + 998: near 1000. Deviations -5 and -2. 2000 - 7 = 1993.",
         "reviewPrompt": "Create your own near-100 word problem and solve it.",
         "xpReward": 15,
         "badgeFocus": "Real-World Solver",
@@ -394,11 +880,17 @@
             "skill": "apply near-100",
             "difficulty": "medium",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "Riya scored 97 in Maths and 98 in Science. What is her total score?",
             "expectedAnswer": "195",
-            "hint": "Both scores near 100. Deviations: −3 and −2.",
-            "solution": "200 − 3 − 2 = 195."
+            "hint": "Both scores near 100. Deviations: -3 and -2.",
+            "solution": "200 - 3 - 2 = 195.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 100 word problems",
+              "caption": "Use the same deviation trick in scores and shopping totals."
+            }
           },
           {
             "questionId": "VM_G4_L7_G_Q2",
@@ -410,13 +902,70 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A shopkeeper sold 103 mangoes on Monday and 97 on Tuesday. Total mangoes sold = ?",
-            "options": ["198", "200", "202", "201"],
+            "options": [
+              "198",
+              "200",
+              "202",
+              "201"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "200",
-            "hint": "103 surplus +3, 97 deficit −3. They cancel out!",
-            "solution": "200 + 3 − 3 = 200."
+            "hint": "103 surplus +3, 97 deficit -3. They cancel out!",
+            "solution": "200 + 3 - 3 = 200.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 100 word problems",
+              "caption": "Use the same deviation trick in scores and shopping totals."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_G_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "G",
+            "subtopic": "Word problem near 100",
+            "skill": "apply near-100",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "Two friends run 96 m and 98 m respectively. What is the total distance?",
+            "expectedAnswer": "194",
+            "hint": "Both near 100. Deviations: -4 and -2. 200 - 6 = ?",
+            "solution": "200 - 4 - 2 = 194.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 100 word problems",
+              "caption": "Use the same deviation trick in scores and shopping totals."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_G_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "G",
+            "subtopic": "Word problem near 100",
+            "skill": "apply near-100",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "A book has 102 pages in Part 1 and 101 pages in Part 2. Total pages = ?",
+            "expectedAnswer": "203",
+            "hint": "Both above 100. Surpluses: +2 and +1.",
+            "solution": "200 + 2 + 1 = 203.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 100 word problems",
+              "caption": "Use the same deviation trick in scores and shopping totals."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Near 100 word problems",
+          "caption": "Use the same deviation trick in scores and shopping totals."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -427,8 +976,8 @@
         "readAloudPrompt": "98 + 96 = ?",
         "tryPrompt": "103 + 99 = ?",
         "masteryCheck": "107 + 95 = ?",
-        "instantFeedbackWin": "Speed demon! Six correct at lightning speed — Vedic Math is in your blood!",
-        "instantFeedbackRetry": "107 + 95: deviations +7 and −5. 200 + 2 = 202.",
+        "instantFeedbackWin": "Strong work. You solved the full speed set accurately.",
+        "instantFeedbackRetry": "107 + 95: deviations +7 and -5. 200 + 2 = 202.",
         "reviewPrompt": "Which pair was hardest? Practise that type again.",
         "xpReward": 15,
         "badgeFocus": "Speed Champ",
@@ -441,11 +990,17 @@
             "skill": "near-100 speed",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "98 + 96 = ?",
             "expectedAnswer": "194",
-            "hint": "200 − 2 − 4 = ?",
-            "solution": "200 − 2 − 4 = 194."
+            "hint": "200 - 2 - 4 = ?",
+            "solution": "200 - 2 - 4 = 194.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Speed drill",
+              "caption": "Apply the near-100 shortcut in one quick mental pass."
+            }
           },
           {
             "questionId": "VM_G4_L7_H_Q2",
@@ -457,26 +1012,103 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "103 + 99 = ?",
-            "options": ["200", "201", "202", "203"],
+            "options": [
+              "200",
+              "201",
+              "202",
+              "203"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "202",
-            "hint": "+3 and −1. 200 + 2 = ?",
-            "solution": "200 + 3 − 1 = 202."
+            "hint": "+3 and -1. 200 + 2 = ?",
+            "solution": "200 + 3 - 1 = 202.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Speed drill",
+              "caption": "Apply the near-100 shortcut in one quick mental pass."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_H_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "near-100 speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "101 + 99 = ?",
+            "expectedAnswer": "200",
+            "hint": "+1 and -1. They cancel.",
+            "solution": "200 + 1 - 1 = 200.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Speed drill",
+              "caption": "Apply the near-100 shortcut in one quick mental pass."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_H_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "near-100 speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "107 + 95 = ?",
+            "expectedAnswer": "202",
+            "hint": "+7 and -5. 200 + 2 = ?",
+            "solution": "200 + 7 - 5 = 202.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Speed drill",
+              "caption": "Apply the near-100 shortcut in one quick mental pass."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_H_Q5",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill",
+            "skill": "near-100 speed",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "94 + 97 = ?",
+            "expectedAnswer": "191",
+            "hint": "-6 and -3. 200 - 9 = ?",
+            "solution": "200 - 6 - 3 = 191.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Speed drill",
+              "caption": "Apply the near-100 shortcut in one quick mental pass."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Speed drill",
+          "caption": "Apply the near-100 shortcut in one quick mental pass."
+        }
       },
       {
         "exerciseGroup": "I",
         "subtopic": "Challenge: near 1000",
         "missionStepTitle": "Exercise I: Near-1000 Challenge",
-        "coachHook": "The same trick works for 1000! Deviations from 1000 instead of 100. 997 + 998 = 2000 − 3 − 2 = 1995.",
-        "boardDemo": "997 + 998: deviations −3 and −2. 2000 − 5 = 1995. 1000 − 364 = 636.",
+        "coachHook": "The same trick works for 1000! Deviations from 1000 instead of 100. 997 + 998 = 2000 - 3 - 2 = 1995.",
+        "boardDemo": "997 + 998: deviations -3 and -2. 2000 - 5 = 1995. 1000 - 364 = 636.",
         "readAloudPrompt": "997 + 995 = ?",
-        "tryPrompt": "1000 − 473 = ?",
+        "tryPrompt": "1000 - 473 = ?",
         "masteryCheck": "998 + 1003 = ?",
         "instantFeedbackWin": "You extended the sutra to a new base! That is true Vedic thinking.",
-        "instantFeedbackRetry": "998 + 1003: deviations −2 and +3. 2000 + 1 = 2001.",
-        "reviewPrompt": "Try: 999+996, 1000−287.",
+        "instantFeedbackRetry": "998 + 1003: deviations -2 and +3. 2000 + 1 = 2001.",
+        "reviewPrompt": "Try: 999+996, 1000-287.",
         "xpReward": 18,
         "badgeFocus": "Base-1000 Explorer",
         "exercises": [
@@ -490,12 +1122,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "997 + 998 = ?",
-            "options": ["1993", "1994", "1995", "1996"],
+            "options": [
+              "1993",
+              "1994",
+              "1995",
+              "1996"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "1995",
-            "hint": "Near 1000. Deviations: −3 and −2. 2000 − 5 = ?",
-            "solution": "2000 − 3 − 2 = 1995.",
-            "visual": {"type": "svg", "asset": "vm_nikhilam_base1000", "caption": "Deviation from base 1000"}
+            "hint": "Near 1000. Deviations: -3 and -2. 2000 - 5 = ?",
+            "solution": "2000 - 3 - 2 = 1995.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 1000 extension",
+              "caption": "The same idea works with deviations from 1000."
+            }
           },
           {
             "questionId": "VM_G4_L7_I_Q2",
@@ -505,14 +1147,194 @@
             "skill": "extend to base 1000",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
-            "questionText": "1000 − 473 = ?",
+            "questionType": "short_answer",
+            "questionText": "1000 - 473 = ?",
             "expectedAnswer": "527",
-            "hint": "All-From-9: 9−4=5, 9−7=2. Last-From-10: 10−3=7.",
-            "solution": "9−4=5, 9−7=2, 10−3=7. Answer: 527."
+            "hint": "All-From-9: 9-4=5, 9-7=2. Last-From-10: 10-3=7.",
+            "solution": "9-4=5, 9-7=2, 10-3=7. Answer: 527.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 1000 extension",
+              "caption": "The same idea works with deviations from 1000."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_I_Q3",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "I",
+            "subtopic": "Near 1000",
+            "skill": "extend to base 1000",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "999 + 996 = ?",
+            "expectedAnswer": "1995",
+            "hint": "Near 1000. Deviations: -1 and -4. 2000 - 5 = ?",
+            "solution": "2000 - 1 - 4 = 1995.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 1000 extension",
+              "caption": "The same idea works with deviations from 1000."
+            }
+          },
+          {
+            "questionId": "VM_G4_L7_I_Q4",
+            "chapterCode": "VM_G4_L7_NEAR_100",
+            "exerciseGroup": "I",
+            "subtopic": "Near 1000",
+            "skill": "extend to base 1000",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "mcq",
+            "questionText": "998 + 1003 = ?",
+            "options": [
+              "1999",
+              "2001",
+              "2003",
+              "2005"
+            ],
+            "correctIndex": 1,
+            "expectedAnswer": "2001",
+            "hint": "998 deficit -2, 1003 surplus +3. 2000 + 1 = ?",
+            "solution": "2000 - 2 + 3 = 2001.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_near_100.svg",
+              "title": "Near 1000 extension",
+              "caption": "The same idea works with deviations from 1000."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_near_100.svg",
+          "title": "Near 1000 extension",
+          "caption": "The same idea works with deviations from 1000."
+        }
       }
     ]
-  }
+  },
+  "screenplay": [
+    {
+      "beatId": "VM_G4_L7_A_INTRO",
+      "stepId": "VM_G4_L7_A",
+      "exerciseGroup": "A",
+      "subtopic": "Deviation from 100",
+      "sequence": 701,
+      "cue": "intro",
+      "boardMode": "steps",
+      "teacherLine": "Every number near 100 has a secret gap - its deviation! 97 is 3 below 100, so its deviation is -3. 103 is 3 above, so +3. We will use these gaps to add and subtract in a flash!",
+      "boardAction": "Write on board: 97 -> deviation -3. 103 -> deviation +3. Draw a number line around 100.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 0.4,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Deviation = how far the number is from 100. Below 100 is negative, above is positive.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L7_A_EXPLAIN",
+      "stepId": "VM_G4_L7_A",
+      "exerciseGroup": "A",
+      "subtopic": "Deviation from 100",
+      "sequence": 702,
+      "cue": "explain",
+      "boardMode": "steps",
+      "teacherLine": "To add 97 + 98: instead of adding directly, find both deviations from 100. They are -3 and -2. Start from 200 and apply both: 200 - 3 - 2 = 195. Done in one mental step!",
+      "boardAction": "Show: 97->-3, 98->-2. Animate: 200 - 3 - 2 = 195. Box the answer.",
+      "checkpointPrompt": "What is the deviation of 96 from 100?",
+      "pauseType": "student_input",
+      "holdSec": 3,
+      "expectedStudentResponse": "-4",
+      "fallbackHint": "96 is 4 below 100, so deviation = -4.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L7_A_DEMO",
+      "stepId": "VM_G4_L7_A",
+      "exerciseGroup": "A",
+      "subtopic": "Deviation from 100",
+      "sequence": 703,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Watch this! 98 + 97. Deviations: -2 and -3. Base sum: 200. Total deviation: -5. Answer: 195. No long addition needed!",
+      "boardAction": "Show 98 + 97 on board. Highlight deviations: -2 (for 98) and -3 (for 97). Show: 200 - 5 = 195. Box 195.",
+      "checkpointPrompt": "Notice how both steps use only small numbers.",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Deviations are the gaps from 100. Sum of gaps is -5. Subtract from 200.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L7_A_GUIDED",
+      "stepId": "VM_G4_L7_A",
+      "exerciseGroup": "A",
+      "subtopic": "Deviation from 100",
+      "sequence": 704,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Your turn! Try: 99 + 96. What are their deviations from 100? Find both, add them up, and subtract from 200.",
+      "boardAction": "Show 99 + 96. Box two blank spaces: deviation of 99 = ___, deviation of 96 = ___. Final: 200 + ___ = ___.",
+      "checkpointPrompt": "What is 99 + 96?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "195",
+      "fallbackHint": "99 deviation: -1. 96 deviation: -4. 200 - 5 = 195.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L7_B_EXPLAIN",
+      "stepId": "VM_G4_L7_B",
+      "exerciseGroup": "B",
+      "subtopic": "Add two numbers near 100",
+      "sequence": 801,
+      "cue": "explain",
+      "boardMode": "steps",
+      "teacherLine": "Adding near-100 numbers is always fast. Start from 200, find the two deviations, add them up, and apply to 200. Works whether both are below, both above, or one of each!",
+      "boardAction": "Show three cases: both deficit, both surplus, one each. Animate the sum for each.",
+      "checkpointPrompt": "103 + 104 = ?",
+      "pauseType": "student_input",
+      "holdSec": 3,
+      "expectedStudentResponse": "207",
+      "fallbackHint": "Surpluses +3 and +4. 200 + 7 = 207.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    },
+    {
+      "beatId": "VM_G4_L7_G_EXPLAIN",
+      "stepId": "VM_G4_L7_G",
+      "exerciseGroup": "G",
+      "subtopic": "Word problems near 100",
+      "sequence": 901,
+      "cue": "explain",
+      "boardMode": "steps",
+      "teacherLine": "Near-100 Vedic math works perfectly in real life! Prices, scores, distances - any two numbers near 100 can be added in one mental flash.",
+      "boardAction": "Show: Riya 97 + 98 Science. Animate: 200 - 3 - 2 = 195. Box total score.",
+      "checkpointPrompt": "A book costs 96 rupees and a pen costs 97 rupees. Total cost?",
+      "pauseType": "student_input",
+      "holdSec": 3,
+      "expectedStudentResponse": "193",
+      "fallbackHint": "Deviations -4 and -3. 200 - 7 = 193.",
+      "performanceTag": "core",
+      "svgAnimation": []
+    }
+  ],
+  "chapterCode": "VM_G4_L7_NEAR_100",
+  "courseId": "vedic_math_g4",
+  "visualLibrary": [
+    {
+      "visualId": "vm_near_100",
+      "kind": "svg",
+      "asset": "vm_near_100.svg",
+      "title": "Near 100 Deviation Method",
+      "caption": "Use deficits and surpluses around 100 to add or subtract quickly."
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "title": "Lesson 2: Lightning Tables 11–19 — Ekadhikena Pattern",
+  "title": "Lesson 2: Lightning Tables 11-19 - Ekadhikena Pattern",
   "gradeBand": "Grade 4",
   "source": "Vedic Mathematics for Schools | Grade 4",
   "estimatedMinutes": 22,
@@ -52,19 +52,31 @@
     "11 × 54 = ? (check: does the middle digit need a carry?)"
   ],
   "duolingoLessonArc": {
-    "version": "2026-03-mindspark-g4-v1",
+    "version": "2026-03-mindsutra-g4-v2",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
-      "coachIntro": "Hi! I am Arya, your Vedic Maths coach. Today you will learn the lightning trick for tables 11 to 19 — you will never need to memorise them one by one again!",
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
+      "coachIntro": "Today you will spot the pattern inside tables 11 to 19, so you can build the answers instead of memorising them one by one.",
       "placementRule": "Start at group A. If the learner already knows table of 11 perfectly, jump to group C."
     },
     "mission": {
       "missionTitle": "Lightning Tables 11–19",
-      "missionPromise": "Learn the Ekadhikena pattern and recall any product from tables 11–19 in seconds.",
-      "successCelebration": "Table champion! You have cracked the lightning pattern for all tables 11 to 19!"
+      "missionPromise": "Spot the pattern for 11 first, then climb through 12 to 19 with fast, steady number steps.",
+      "successCelebration": "Well done. You can now use the pattern to build products from tables 11 to 19 with confidence."
     },
     "microLessonPattern": [
       "Coach reveals the pattern with one punchy demonstration.",
@@ -89,22 +101,26 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
       {
         "exerciseGroup": "A",
         "subtopic": "Table of 11 — digit-sum pattern",
-        "missionStepTitle": "Exercise A: Table of 11",
-        "coachHook": "The table of 11 has a magic pattern — just put the digit sum in the middle! Watch this, it is amazing!",
-        "boardDemo": "11×23: write 2 _ 3. Middle = 2+3 = 5. Answer: 253. Try 11×34: 3 _ 4, middle=7, Answer: 374.",
-        "readAloudPrompt": "11 × 23 = ?",
-        "tryPrompt": "Your turn — 11 × 41 = ?",
-        "masteryCheck": "11 × 52 = ?",
-        "instantFeedbackWin": "Brilliant! Split, sum, place — three steps, done!",
-        "instantFeedbackRetry": "Remember: keep the outer digits and put their sum in the middle. 11×41: 4 _ 1, middle=5, Answer: 451.",
-        "reviewPrompt": "Try 11×13, 11×22, 11×31 using the pattern.",
+        "missionStepTitle": "Exercise A: Build the table of 11",
+        "coachHook": "Let us start with one number that feels magical. In the table of 11, the outside digits stay in place, and their sum slips into the middle.",
+        "boardDemo": "Show 11 x 23 as 2 _ 3. Add 2 + 3 = 5, so the answer becomes 253. Then show 11 x 34 as 3 _ 4 and fill 7 in the middle to make 374.",
+        "readAloudPrompt": "Say the rule with me: outside digits stay, middle is their sum. Now what is 11 x 23?",
+        "tryPrompt": "Your turn: build 11 x 41 by keeping 4 and 1 outside and filling the middle.",
+        "masteryCheck": "What is 11 x 52 when you use the same pattern?",
+        "instantFeedbackWin": "Yes. You kept the outside digits and built the middle correctly.",
+        "instantFeedbackRetry": "Keep 4 and 1 outside first. Then add 4 + 1 = 5 and place it in the middle. That gives 451.",
+        "reviewPrompt": "Quick pattern check: 11 x 13, 11 x 22, and 11 x 31.",
         "xpReward": 10,
         "badgeFocus": "Eleven Explorer",
         "exercises": [
@@ -118,11 +134,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "11 × 23 = ?",
-            "options": ["243", "253", "263", "233"],
+            "options": [
+              "243",
+              "253",
+              "263",
+              "233"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "253",
             "hint": "Keep outer digits 2 and 3. Put their sum (2+3=5) in the middle.",
-            "solution": "11×23: outer digits 2 and 3, middle = 2+3 = 5. Answer: 253."
+            "solution": "11×23: outer digits 2 and 3, middle = 2+3 = 5. Answer: 253.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "The Eleven Trick",
+              "caption": "Keep the outer digits and place their sum in the middle."
+            }
           },
           {
             "questionId": "VM_G4_L2_A_Q2",
@@ -134,11 +161,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "11 × 41 = ?",
-            "options": ["441", "451", "461", "431"],
+            "options": [
+              "441",
+              "451",
+              "461",
+              "431"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "451",
             "hint": "Outer digits 4 and 1, middle = 4+1 = 5.",
-            "solution": "11×41: digits 4 and 1, middle = 5. Answer: 451."
+            "solution": "11×41: digits 4 and 1, middle = 5. Answer: 451.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "The Eleven Trick",
+              "caption": "Keep the outer digits and place their sum in the middle."
+            }
           },
           {
             "questionId": "VM_G4_L2_A_Q3",
@@ -148,13 +186,65 @@
             "skill": "table of 11 — digit sum",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "11 × 34 = ?",
             "expectedAnswer": "374",
             "hint": "Outer digits 3 and 4, middle = 3+4 = 7.",
-            "solution": "11×34: middle = 3+4 = 7. Answer: 374."
+            "solution": "11×34: middle = 3+4 = 7. Answer: 374.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "The Eleven Trick",
+              "caption": "Keep the outer digits and place their sum in the middle."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_A_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "A",
+            "subtopic": "Table of 11 — digit-sum pattern",
+            "skill": "table of 11 — digit sum",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 52 = ?",
+            "expectedAnswer": "572",
+            "hint": "Outer digits 5 and 2. Sum = 5+2 = 7. Write 572.",
+            "solution": "5+2=7. Answer: 572.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "The Eleven Trick",
+              "caption": "Keep outer digits, place sum in middle."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_A_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "A",
+            "subtopic": "Table of 11 — digit-sum pattern",
+            "skill": "table of 11 — digit sum",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 13 = ?",
+            "expectedAnswer": "143",
+            "hint": "Outer digits 1 and 3. Sum = 1+3 = 4. Write 143.",
+            "solution": "1+3=4. Answer: 143.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "The Eleven Trick",
+              "caption": "Keep outer digits, place sum in middle."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "eleven_trick.svg",
+          "title": "The Eleven Trick",
+          "caption": "Keep the outer digits and place their sum in the middle."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -181,11 +271,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "12 × 7 = ?",
-            "options": ["74", "82", "84", "86"],
+            "options": [
+              "74",
+              "82",
+              "84",
+              "86"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "84",
             "hint": "12×6=72. Add 12 more.",
-            "solution": "12×6=72, 72+12=84. So 12×7=84."
+            "solution": "12×6=72, 72+12=84. So 12×7=84.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Table of 12 chain",
+              "caption": "Add 12 each time to build the next row."
+            }
           },
           {
             "questionId": "VM_G4_L2_B_Q2",
@@ -197,19 +298,96 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "12 × 9 = ?",
-            "options": ["98", "106", "108", "110"],
+            "options": [
+              "98",
+              "106",
+              "108",
+              "110"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "108",
             "hint": "12×8=96. Add 12 more.",
-            "solution": "12×8=96, 96+12=108. So 12×9=108."
+            "solution": "12×8=96, 96+12=108. So 12×9=108.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Table of 12 chain",
+              "caption": "Add 12 each time to build the next row."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_B_Q3",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "B",
+            "subtopic": "Table of 12 — progressive addition",
+            "skill": "table of 12",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "12 × 6 = ?",
+            "expectedAnswer": "72",
+            "hint": "12×5=60. Add 12: 72.",
+            "solution": "60+12=72.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Table of 12 chain",
+              "caption": "Add 12 each time."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_B_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "B",
+            "subtopic": "Table of 12 — progressive addition",
+            "skill": "table of 12",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "12 × 8 = ?",
+            "expectedAnswer": "96",
+            "hint": "12×7=84. Add 12: 96.",
+            "solution": "84+12=96.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Table of 12 chain",
+              "caption": "Add 12 each time."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_B_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "B",
+            "subtopic": "Table of 12 — progressive addition",
+            "skill": "table of 12",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "12 × 10 = ?",
+            "expectedAnswer": "120",
+            "hint": "12×9=108. Add 12: 120.",
+            "solution": "108+12=120.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Table of 12 chain",
+              "caption": "Add 12 each time."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_tables_11_19.svg",
+          "title": "Table of 12 chain",
+          "caption": "Add 12 each time to build the next row."
+        }
       },
       {
         "exerciseGroup": "C",
         "subtopic": "Tables of 13, 14 and 15",
         "missionStepTitle": "Exercise C: Tables 13, 14 and 15",
-        "coachHook": "Same trick, bigger step! For 13 add 13 each time, for 14 add 14, for 15 add 15. Watch how fast you build them!",
+        "coachHook": "Same trick, bigger step. For 13 add 13 each time, for 14 add 14, and for 15 add 15. Build the rows steadily and watch the pattern hold.",
         "boardDemo": "13×4=52 (13,26,39,52). 14×5=70 (14,28,42,56,70). 15×3=45 (15,30,45).",
         "readAloudPrompt": "13 × 6 = ?",
         "tryPrompt": "14 × 4 = ?",
@@ -230,11 +408,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "13 × 6 = ?",
-            "options": ["68", "76", "78", "86"],
+            "options": [
+              "68",
+              "76",
+              "78",
+              "86"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "78",
             "hint": "13×5=65. Add 13 more.",
-            "solution": "13×5=65, 65+13=78. So 13×6=78."
+            "solution": "13×5=65, 65+13=78. So 13×6=78.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 13 to 15",
+              "caption": "Each table grows by the same number every row."
+            }
           },
           {
             "questionId": "VM_G4_L2_C_Q2",
@@ -246,11 +435,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "15 × 6 = ?",
-            "options": ["80", "85", "90", "95"],
+            "options": [
+              "80",
+              "85",
+              "90",
+              "95"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "90",
             "hint": "15×5=75. Add 15 more.",
-            "solution": "15×5=75, 75+15=90. So 15×6=90."
+            "solution": "15×5=75, 75+15=90. So 15×6=90.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 13 to 15",
+              "caption": "Each table grows by the same number every row."
+            }
           },
           {
             "questionId": "VM_G4_L2_C_Q3",
@@ -260,13 +460,65 @@
             "skill": "tables 13-15",
             "difficulty": "easy",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "14 × 4 = ?",
             "expectedAnswer": "56",
             "hint": "14, 28, 42, 56 — count four steps.",
-            "solution": "14×1=14, ×2=28, ×3=42, ×4=56."
+            "solution": "14×1=14, ×2=28, ×3=42, ×4=56.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 13 to 15",
+              "caption": "Each table grows by the same number every row."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_C_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "C",
+            "subtopic": "Tables of 13, 14 and 15",
+            "skill": "tables 13-15",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "13 × 5 = ?",
+            "expectedAnswer": "65",
+            "hint": "13×4=52. Add 13: 65.",
+            "solution": "52+13=65.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 13 to 15",
+              "caption": "Each table grows by the same number every row."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_C_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "C",
+            "subtopic": "Tables of 13, 14 and 15",
+            "skill": "tables 13-15",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "15 × 4 = ?",
+            "expectedAnswer": "60",
+            "hint": "15×3=45. Add 15: 60.",
+            "solution": "45+15=60.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 13 to 15",
+              "caption": "Each table grows by the same number every row."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_tables_11_19.svg",
+          "title": "Tables 13 to 15",
+          "caption": "Each table grows by the same number every row."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -293,11 +545,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "16 × 5 = ?",
-            "options": ["70", "74", "80", "86"],
+            "options": [
+              "70",
+              "74",
+              "80",
+              "86"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "80",
             "hint": "16×4=64. Add 16 more.",
-            "solution": "16×4=64, 64+16=80. So 16×5=80."
+            "solution": "16×4=64, 64+16=80. So 16×5=80.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 16 to 19",
+              "caption": "The same chain method works for bigger teen tables."
+            }
           },
           {
             "questionId": "VM_G4_L2_D_Q2",
@@ -309,13 +572,90 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "19 × 5 = ?",
-            "options": ["85", "90", "95", "100"],
+            "options": [
+              "85",
+              "90",
+              "95",
+              "100"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "95",
             "hint": "19×4=76. Add 19 more.",
-            "solution": "19×4=76, 76+19=95. So 19×5=95."
+            "solution": "19×4=76, 76+19=95. So 19×5=95.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 16 to 19",
+              "caption": "The same chain method works for bigger teen tables."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_D_Q3",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "D",
+            "subtopic": "Tables of 16, 17, 18 and 19",
+            "skill": "tables 16-19",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "18 × 4 = ?",
+            "expectedAnswer": "72",
+            "hint": "18×3=54. Add 18: 72.",
+            "solution": "54+18=72.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 16 to 19",
+              "caption": "The same chain method works for bigger teen tables."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_D_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "D",
+            "subtopic": "Tables of 16, 17, 18 and 19",
+            "skill": "tables 16-19",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "17 × 6 = ?",
+            "expectedAnswer": "102",
+            "hint": "17×5=85. Add 17: 102.",
+            "solution": "85+17=102.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 16 to 19",
+              "caption": "The same chain method works for bigger teen tables."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_D_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "D",
+            "subtopic": "Tables of 16, 17, 18 and 19",
+            "skill": "tables 16-19",
+            "difficulty": "easy",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "16 × 6 = ?",
+            "expectedAnswer": "96",
+            "hint": "16×5=80. Add 16: 96.",
+            "solution": "80+16=96.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Tables 16 to 19",
+              "caption": "The same chain method works for bigger teen tables."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_tables_11_19.svg",
+          "title": "Tables 16 to 19",
+          "caption": "The same chain method works for bigger teen tables."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -342,11 +682,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "13 × 7 = ?",
-            "options": ["88", "91", "94", "97"],
+            "options": [
+              "88",
+              "91",
+              "94",
+              "97"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "91",
             "hint": "13×6=78. Add 13: 78+13=91.",
-            "solution": "13×6=78, 78+13=91. Answer: 91."
+            "solution": "13×6=78, 78+13=91. Answer: 91.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Spot the product",
+              "caption": "Use the chain to verify the correct product."
+            }
           },
           {
             "questionId": "VM_G4_L2_E_Q2",
@@ -358,11 +709,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "17 × 4 = ?",
-            "options": ["62", "64", "68", "72"],
+            "options": [
+              "62",
+              "64",
+              "68",
+              "72"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "68",
             "hint": "17×3=51. Add 17: 51+17=68.",
-            "solution": "17×3=51, 51+17=68. Answer: 68."
+            "solution": "17×3=51, 51+17=68. Answer: 68.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Spot the product",
+              "caption": "Use the chain to verify the correct product."
+            }
           },
           {
             "questionId": "VM_G4_L2_E_Q3",
@@ -374,13 +736,70 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "15 × 8 = ?",
-            "options": ["110", "115", "120", "125"],
+            "options": [
+              "110",
+              "115",
+              "120",
+              "125"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "120",
             "hint": "15×7=105. Add 15: 105+15=120.",
-            "solution": "15×7=105, 105+15=120. Answer: 120."
+            "solution": "15×7=105, 105+15=120. Answer: 120.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Spot the product",
+              "caption": "Use the chain to verify the correct product."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_E_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "E",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "recall and verify",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "14 × 6 = ?",
+            "expectedAnswer": "84",
+            "hint": "14×5=70. Add 14: 84.",
+            "solution": "70+14=84.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Spot the product",
+              "caption": "Use the chain to verify the correct product."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_E_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "E",
+            "subtopic": "Spot the product — MCQ",
+            "skill": "recall and verify",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "18 × 3 = ?",
+            "expectedAnswer": "54",
+            "hint": "18×2=36. Add 18: 54.",
+            "solution": "36+18=54.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Spot the product",
+              "caption": "Use the chain to verify the correct product."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_tables_11_19.svg",
+          "title": "Spot the product",
+          "caption": "Use the chain to verify the correct product."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -408,14 +827,36 @@
             "questionType": "fill_step",
             "questionText": "Find 11 × 58 step by step.",
             "steps": [
-              {"label": "Digit sum: 5 + 8 = ?", "answer": "13", "hint": "Add the two digits of 58"},
-              {"label": "Middle digit (units of sum): 13 → units digit = ?", "answer": "3", "hint": "Units digit of 13 is 3"},
-              {"label": "Carry 1 to left digit: 5 + 1 = ?", "answer": "6", "hint": "5 plus 1 carry"},
-              {"label": "Answer (left | middle | right): ?", "answer": "638", "hint": "6 | 3 | 8 = 638"}
+              {
+                "label": "Digit sum: 5 + 8 = ?",
+                "answer": "13",
+                "hint": "Add the two digits of 58"
+              },
+              {
+                "label": "Middle digit (units of sum): 13 → units digit = ?",
+                "answer": "3",
+                "hint": "Units digit of 13 is 3"
+              },
+              {
+                "label": "Carry 1 to left digit: 5 + 1 = ?",
+                "answer": "6",
+                "hint": "5 plus 1 carry"
+              },
+              {
+                "label": "Answer (left | middle | right): ?",
+                "answer": "638",
+                "hint": "6 | 3 | 8 = 638"
+              }
             ],
             "expectedAnswer": "638",
             "hint": "Sum=13, middle=3, carry 1 to 5 → 6. Answer: 638.",
-            "solution": "5+8=13. Middle=3, carry 1 → left digit 5+1=6. Answer: 638."
+            "solution": "5+8=13. Middle=3, carry 1 → left digit 5+1=6. Answer: 638.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "Eleven Trick with carry",
+              "caption": "If the middle sum is 10 or more, carry 1 to the left digit."
+            }
           },
           {
             "questionId": "VM_G4_L2_F_Q2",
@@ -427,13 +868,70 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "11 × 69 = ?",
-            "options": ["749", "759", "769", "779"],
+            "options": [
+              "749",
+              "759",
+              "769",
+              "779"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "759",
             "hint": "6+9=15. Middle=5, carry 1 → left=7. Answer: 759.",
-            "solution": "6+9=15. Middle digit=5, carry 1 to 6 → 7. Answer: 759."
+            "solution": "6+9=15. Middle digit=5, carry 1 to 6 → 7. Answer: 759.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "Eleven Trick with carry",
+              "caption": "If the middle sum is 10 or more, carry 1 to the left digit."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_F_Q3",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-step: ×11 with carry",
+            "skill": "eleven-trick with carry",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 75 = ?",
+            "expectedAnswer": "825",
+            "hint": "7+5=12. Middle=2, carry 1 to 7 → 8. Answer: 825.",
+            "solution": "7+5=12. Middle=2, left 7+1=8. Answer: 825.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "Eleven Trick with carry",
+              "caption": "If the middle sum is 10 or more, carry 1 to the left digit."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_F_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "F",
+            "subtopic": "Fill-step: ×11 with carry",
+            "skill": "eleven-trick with carry",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 84 = ?",
+            "expectedAnswer": "924",
+            "hint": "8+4=12. Middle=2, carry 1 to 8 → 9. Answer: 924.",
+            "solution": "8+4=12. Middle=2, left 8+1=9. Answer: 924.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "Eleven Trick with carry",
+              "caption": "If the middle sum is 10 or more, carry 1 to the left digit."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "eleven_trick.svg",
+          "title": "Eleven Trick with carry",
+          "caption": "If the middle sum is 10 or more, carry 1 to the left digit."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -460,11 +958,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "14 × 8 = ?",
-            "options": ["102", "108", "112", "116"],
+            "options": [
+              "102",
+              "108",
+              "112",
+              "116"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "112",
             "hint": "14×7=98. Add 14: 98+14=112.",
-            "solution": "14×7=98, 98+14=112. Answer: 112."
+            "solution": "14×7=98, 98+14=112. Answer: 112.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Mixed tables 11–19",
+              "caption": "Choose the fastest method for each table."
+            }
           },
           {
             "questionId": "VM_G4_L2_G_Q2",
@@ -476,11 +985,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "11 × 63 = ?",
-            "options": ["683", "693", "703", "713"],
+            "options": [
+              "683",
+              "693",
+              "703",
+              "713"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "693",
             "hint": "6+3=9, no carry. Middle=9. Answer: 693.",
-            "solution": "Digits 6 and 3, sum=9, no carry. Answer: 693."
+            "solution": "Digits 6 and 3, sum=9, no carry. Answer: 693.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Mixed tables 11–19",
+              "caption": "Choose the fastest method for each table."
+            }
           },
           {
             "questionId": "VM_G4_L2_G_Q3",
@@ -490,13 +1010,65 @@
             "skill": "mixed tables",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "16 × 6 = ?",
             "expectedAnswer": "96",
             "hint": "16×5=80. Add 16: 80+16=96.",
-            "solution": "16×5=80, 80+16=96. Answer: 96."
+            "solution": "16×5=80, 80+16=96. Answer: 96.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Mixed tables 11–19",
+              "caption": "Choose the fastest method for each table."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_G_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed tables 11–19",
+            "skill": "mixed tables",
+            "difficulty": "medium",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "13 × 9 = ?",
+            "expectedAnswer": "117",
+            "hint": "13×8=104. Add 13: 117.",
+            "solution": "104+13=117.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Mixed tables 11–19",
+              "caption": "Choose the fastest method for each table."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_G_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "G",
+            "subtopic": "Mixed tables 11–19",
+            "skill": "mixed tables",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 72 = ?",
+            "expectedAnswer": "792",
+            "hint": "7+2=9, no carry. Write 7|9|2 = 792.",
+            "solution": "7+2=9. Answer: 792.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Mixed tables 11–19",
+              "caption": "Choose the fastest method for each table."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_tables_11_19.svg",
+          "title": "Mixed tables 11–19",
+          "caption": "Choose the fastest method for each table."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -521,11 +1093,17 @@
             "skill": "speed recall",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "Speed! 13 × 8 = ?",
             "expectedAnswer": "104",
             "hint": "13×7=91. Add 13: 91+13=104.",
-            "solution": "13×7=91, 91+13=104. Answer: 104."
+            "solution": "13×7=91, 91+13=104. Answer: 104.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Speed tables race",
+              "caption": "Recall the product quickly using the pattern or the chain."
+            }
           },
           {
             "questionId": "VM_G4_L2_H_Q2",
@@ -535,11 +1113,17 @@
             "skill": "speed recall",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "Speed! 11 × 55 = ?",
             "expectedAnswer": "605",
             "hint": "5+5=10. Middle=0, carry 1 to 5 → 6. Answer: 605.",
-            "solution": "5+5=10. Middle=0, carry 1 to left 5 → 6. Answer: 605."
+            "solution": "5+5=10. Middle=0, carry 1 to left 5 → 6. Answer: 605.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Speed tables race",
+              "caption": "Recall the product quickly using the pattern or the chain."
+            }
           },
           {
             "questionId": "VM_G4_L2_H_Q3",
@@ -549,24 +1133,76 @@
             "skill": "speed recall",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "Speed! 19 × 6 = ?",
             "expectedAnswer": "114",
             "hint": "19×5=95. Add 19: 95+19=114.",
-            "solution": "19×5=95, 95+19=114. Answer: 114."
+            "solution": "19×5=95, 95+19=114. Answer: 114.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Speed tables race",
+              "caption": "Recall the product quickly using the pattern or the chain."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_H_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill — tables race",
+            "skill": "speed recall",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "Speed! 12 × 9 = ?",
+            "expectedAnswer": "108",
+            "hint": "12×8=96. Add 12: 108.",
+            "solution": "96+12=108.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Speed tables race",
+              "caption": "Recall the product quickly."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_H_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "H",
+            "subtopic": "Speed drill — tables race",
+            "skill": "speed recall",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "Speed! 17 × 7 = ?",
+            "expectedAnswer": "119",
+            "hint": "17×6=102. Add 17: 119.",
+            "solution": "102+17=119.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_tables_11_19.svg",
+              "title": "Speed tables race",
+              "caption": "Recall the product quickly."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_tables_11_19.svg",
+          "title": "Speed tables race",
+          "caption": "Recall the product quickly using the pattern or the chain."
+        }
       },
       {
         "exerciseGroup": "I",
         "subtopic": "Challenge: 3-digit × 11",
         "missionStepTitle": "Exercise I: 3-digit × 11 challenge",
-        "coachHook": "Boss level — multiply a 3-digit number by 11! The pattern extends: outer digits stay, middle digits get added in pairs. You can do this!",
+        "coachHook": "Now extend the x11 pattern to a 3-digit number. The outer digits stay, and the middle digits come from adjacent pair sums.",
         "boardDemo": "11×123: right=3, next pair=2+3=5, next pair=1+2=3, left=1. Answer: 1353.",
         "readAloudPrompt": "11 × 231 = ?",
         "tryPrompt": "Try the 3-digit trick: 11 × 132 = ?",
         "masteryCheck": "11 × 214 = ?",
-        "instantFeedbackWin": "Incredible! You just multiplied a 3-digit number by 11 in your head!",
+        "instantFeedbackWin": "Good work. You used the same x11 pattern correctly on a 3-digit number.",
         "instantFeedbackRetry": "For 11×231: right=1, 3+1=4, 2+3=5, left=2. Answer: 2541.",
         "reviewPrompt": "Try 11×312 and 11×121 using the extended pattern.",
         "xpReward": 18,
@@ -582,11 +1218,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "11 × 123 = ?",
-            "options": ["1243", "1343", "1353", "1453"],
+            "options": [
+              "1243",
+              "1343",
+              "1353",
+              "1453"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "1353",
             "hint": "Right=3, 2+3=5, 1+2=3, left=1. Answer: 1353.",
-            "solution": "11×123: right digit=3, 2+3=5, 1+2=3, left=1. Answer: 1353."
+            "solution": "11×123: right digit=3, 2+3=5, 1+2=3, left=1. Answer: 1353.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "3-digit times 11",
+              "caption": "Extend the 11-trick by adding adjacent digit pairs."
+            }
           },
           {
             "questionId": "VM_G4_L2_I_Q2",
@@ -596,13 +1243,85 @@
             "skill": "3-digit × 11",
             "difficulty": "hard",
             "type": "practice",
-            "questionType": "text",
+            "questionType": "short_answer",
             "questionText": "11 × 214 = ?",
             "expectedAnswer": "2354",
             "hint": "Right=4, 1+4=5, 2+1=3, left=2. Answer: 2354.",
-            "solution": "11×214: right=4, 1+4=5, 2+1=3, left=2. Answer: 2354."
+            "solution": "11×214: right=4, 1+4=5, 2+1=3, left=2. Answer: 2354.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "3-digit times 11",
+              "caption": "Extend the 11-trick by adding adjacent digit pairs."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_I_Q3",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 3-digit × 11",
+            "skill": "3-digit × 11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 231 = ?",
+            "expectedAnswer": "2541",
+            "hint": "Right=1, 3+1=4, 2+3=5, left=2. Answer: 2541.",
+            "solution": "11×231: right=1, 3+1=4, 2+3=5, left=2. Answer: 2541.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "3-digit times 11",
+              "caption": "Extend the 11-trick by adding adjacent digit pairs."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_I_Q4",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 3-digit × 11",
+            "skill": "3-digit × 11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 132 = ?",
+            "expectedAnswer": "1452",
+            "hint": "Right=2, 3+2=5, 1+3=4, left=1. Answer: 1452.",
+            "solution": "11×132: right=2, 3+2=5, 1+3=4, left=1. Answer: 1452.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "3-digit times 11",
+              "caption": "Extend the 11-trick by adding adjacent digit pairs."
+            }
+          },
+          {
+            "questionId": "VM_G4_L2_I_Q5",
+            "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+            "exerciseGroup": "I",
+            "subtopic": "Challenge: 3-digit × 11",
+            "skill": "3-digit × 11",
+            "difficulty": "hard",
+            "type": "practice",
+            "questionType": "short_answer",
+            "questionText": "11 × 312 = ?",
+            "expectedAnswer": "3432",
+            "hint": "Right=2, 1+2=3, 3+1=4, left=3. Answer: 3432.",
+            "solution": "11×312: right=2, 1+2=3, 3+1=4, left=3. Answer: 3432.",
+            "visual": {
+              "kind": "svg",
+              "asset": "eleven_trick.svg",
+              "title": "3-digit times 11",
+              "caption": "Extend the 11-trick by adding adjacent digit pairs."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "eleven_trick.svg",
+          "title": "3-digit times 11",
+          "caption": "Extend the 11-trick by adding adjacent digit pairs."
+        }
       }
     ]
   },
@@ -612,8 +1331,13 @@
       "exerciseGroup": "A",
       "subtopic": "Table of 11 — digit-sum pattern",
       "boardMode": "svg",
-      "visual": {"kind": "svg", "title": "The Eleven Trick", "asset": "eleven_trick.svg", "caption": "Split the digits and place their sum in the middle."},
-      "teacherLine": "The table of 11 has a magic pattern — keep the outer digits and put their sum in the middle!",
+      "visual": {
+        "kind": "svg",
+        "title": "The Eleven Trick",
+        "asset": "eleven_trick.svg",
+        "caption": "Split the digits and place their sum in the middle."
+      },
+      "teacherLine": "The table of 11 follows a simple pattern: keep the outer digits and put their sum in the middle.",
       "boardAction": "Show 11×23: write 2 _ 3 on board, reveal middle = 2+3 = 5, write 253.",
       "checkpointPrompt": "11 × 52 = ?",
       "microPractice": "Try 11×13, 11×22, 11×31."
@@ -626,7 +1350,13 @@
       "teacherLine": "Table of 12 — just add 12 each time! Build the chain and you will never forget it.",
       "boardAction": "Write 12, 24, 36, 48, 60, 72, 84, 96, 108, 120 in a chain with +12 arrows.",
       "checkpointPrompt": "12 × 9 = ?",
-      "microPractice": "Write the full table of 12 from memory."
+      "microPractice": "Write the full table of 12 from memory.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Table of 12 chain",
+        "caption": "Add 12 each time to build the next row."
+      }
     },
     {
       "stepId": "VM_G4_L2_C",
@@ -636,17 +1366,29 @@
       "teacherLine": "Same chain for 13, 14, and 15. Pick any table, start from zero, and add that number each row!",
       "boardAction": "Show chains for 13 and 15 side by side with +13 and +15 arrows.",
       "checkpointPrompt": "15 × 6 = ?",
-      "microPractice": "Build the chain for 14 from row 1 to row 7."
+      "microPractice": "Build the chain for 14 from row 1 to row 7.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Tables 13 to 15",
+        "caption": "Each table grows by the same number every row."
+      }
     },
     {
       "stepId": "VM_G4_L2_D",
       "exerciseGroup": "D",
       "subtopic": "Tables of 16, 17, 18 and 19",
       "boardMode": "steps",
-      "teacherLine": "You have the power now — 16 to 19 use the same chain. Bigger step, same magic!",
+      "teacherLine": "You already know the method now. Tables 16 to 19 use the same chain with a bigger step.",
       "boardAction": "Show 19 chain: 19, 38, 57, 76, 95 with +19 arrows and highlight the pattern.",
       "checkpointPrompt": "19 × 5 = ?",
-      "microPractice": "Quick fire: 16×3, 17×4, 19×3."
+      "microPractice": "Quick fire: 16×3, 17×4, 19×3.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Tables 16 to 19",
+        "caption": "The same chain method works for bigger teen tables."
+      }
     },
     {
       "stepId": "VM_G4_L2_E",
@@ -656,14 +1398,25 @@
       "teacherLine": "Detective mode! Spot the correct answer using the chain — the wrong answers are close but not quite right.",
       "boardAction": "Show four options for 13×7. Build chain on board to verify the correct one.",
       "checkpointPrompt": "Which is 15 × 8 — 110, 115, 120 or 125?",
-      "microPractice": "Spot three more: 14×6, 18×3, 16×7."
+      "microPractice": "Spot three more: 14×6, 18×3, 16×7.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Spot the product",
+        "caption": "Use the chain to verify the correct product."
+      }
     },
     {
       "stepId": "VM_G4_L2_F",
       "exerciseGroup": "F",
       "subtopic": "Fill-step: ×11 with carry",
       "boardMode": "svg",
-      "visual": {"kind": "svg", "title": "Eleven Trick with Carry", "asset": "eleven_trick.svg", "caption": "When digit sum ≥ 10, carry 1 to the left digit."},
+      "visual": {
+        "kind": "svg",
+        "title": "Eleven Trick with Carry",
+        "asset": "eleven_trick.svg",
+        "caption": "When digit sum ≥ 10, carry 1 to the left digit."
+      },
       "teacherLine": "When the two digits add up to 10 or more, we carry 1 to the left digit — just like normal addition!",
       "boardAction": "Show 11×47: 4+7=11, middle=1, carry 1 to 4 → 5. Write 517 with carry arrow.",
       "checkpointPrompt": "11 × 75 = ?",
@@ -677,7 +1430,13 @@
       "teacherLine": "Mixed bag! You choose the fastest method — chain or pattern. Your brain, your strategy!",
       "boardAction": "Flash four mixed problems with different tables and show chosen method for each.",
       "checkpointPrompt": "11 × 63 = ?",
-      "microPractice": "Three mixed: 13×9, 18×6, 11×72."
+      "microPractice": "Three mixed: 13×9, 18×6, 11×72.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Mixed tables 11–19",
+        "caption": "Choose the fastest method for each table."
+      }
     },
     {
       "stepId": "VM_G4_L2_H",
@@ -687,15 +1446,26 @@
       "teacherLine": "Speed round — answer before the timer runs out! Go as fast as your mind can fly!",
       "boardAction": "Flash problems quickly: 13×8, 11×55, 19×6. Show for 3 seconds then reveal answer.",
       "checkpointPrompt": "11 × 55 = ?",
-      "microPractice": "Speed: 12×9, 17×7, 18×8 — answer each in under 5 seconds."
+      "microPractice": "Speed: 12×9, 17×7, 18×8 — answer each in under 5 seconds.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Speed tables race",
+        "caption": "Recall the product quickly using the pattern or the chain."
+      }
     },
     {
       "stepId": "VM_G4_L2_I",
       "exerciseGroup": "I",
       "subtopic": "Challenge: 3-digit × 11",
       "boardMode": "svg",
-      "visual": {"kind": "svg", "title": "3-Digit Eleven Trick", "asset": "eleven_trick.svg", "caption": "Extend the pattern: add adjacent digit pairs across the number."},
-      "teacherLine": "Boss level — the 11-trick extends to 3-digit numbers! Add adjacent digit pairs across and you have your answer!",
+      "visual": {
+        "kind": "svg",
+        "title": "3-Digit Eleven Trick",
+        "asset": "eleven_trick.svg",
+        "caption": "Extend the pattern: add adjacent digit pairs across the number."
+      },
+      "teacherLine": "The 11-trick extends to 3-digit numbers too. Add adjacent digit pairs across the number and read the answer in order.",
       "boardAction": "Show 11×123: right=3, 2+3=5, 1+2=3, left=1 → 1353. Annotate each step with arrows.",
       "checkpointPrompt": "11 × 214 = ?",
       "microPractice": "Try 11×312 and 11×121."
@@ -710,7 +1480,7 @@
       "sequence": 201,
       "cue": "intro",
       "boardMode": "svg",
-      "teacherLine": "The table of 11 has a magic pattern — keep the outer digits and put their sum in the middle!",
+      "teacherLine": "The table of 11 follows a simple pattern: keep the outer digits and put their sum in the middle.",
       "boardAction": "Display the eleven_trick.svg showing the split-digit layout.",
       "checkpointPrompt": "",
       "pauseType": "none",
@@ -721,7 +1491,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "The Eleven Trick",
+        "caption": "Keep the outer digits and place their sum in the middle."
+      }
     },
     {
       "beatId": "VM_G4_L2_A_EXPLAIN",
@@ -735,14 +1511,76 @@
       "boardAction": "Animate: 2 _ 3, reveal 2+3=5 in the gap, box 253.",
       "checkpointPrompt": "11 × 41 = ?",
       "pauseType": "student_input",
-      "holdSec": 3.0,
+      "holdSec": 3,
       "expectedStudentResponse": "451",
       "fallbackHint": "Outer digits 4 and 1. 4+1=5. Place 5 in the middle: 451.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "The Eleven Trick",
+        "caption": "Keep the outer digits and place their sum in the middle."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_A_DEMO",
+      "stepId": "VM_G4_L2_A",
+      "exerciseGroup": "A",
+      "subtopic": "Table of 11 — digit-sum pattern",
+      "sequence": 203,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Watch me: 23 × 11. Keep the outer digits — 2 on the left, 3 on the right. Middle = 2+3 = 5. So the answer is 2 | 5 | 3 = 253. Simple!",
+      "boardAction": "Write 23 × 11. Draw blank: 2 _ 3. Reveal sum 2+3=5. Fill in 253. Box the answer.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Outer digits stay. Their sum goes in the middle.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "The Eleven Trick — Demo",
+        "caption": "Watch: 23 × 11 = 2 | 2+3 | 3 = 253."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_A_GUIDED",
+      "stepId": "VM_G4_L2_A",
+      "exerciseGroup": "A",
+      "subtopic": "Table of 11 — digit-sum pattern",
+      "sequence": 204,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Your turn — let us do it together! 34 × 11. Outer digits: 3 and 4. What goes in the middle? 3+4 = ?",
+      "boardAction": "Write 34 × 11. Draw blank: 3 _ 4. Wait for student. Reveal 7. Write 374.",
+      "checkpointPrompt": "34 × 11 = 3 _ 4. What is the middle digit?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "7",
+      "fallbackHint": "Add 3 + 4 to get the middle digit.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "Guided: 34 × 11",
+        "caption": "Fill in 3+4 = ? in the middle."
+      }
     },
     {
       "beatId": "VM_G4_L2_F_EXPLAIN",
@@ -756,14 +1594,486 @@
       "boardAction": "Show 11×47 with carry arrow: 4+7=11, middle=1, left 4+1=5. Write 517.",
       "checkpointPrompt": "11 × 58 = ?",
       "pauseType": "student_input",
-      "holdSec": 4.0,
+      "holdSec": 4,
       "expectedStudentResponse": "638",
       "fallbackHint": "5+8=13. Middle=3, carry 1 to 5 → 6. Answer: 638.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "Eleven Trick with carry",
+        "caption": "If the middle sum is 10 or more, carry 1 to the left digit."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_F_DEMO",
+      "stepId": "VM_G4_L2_F",
+      "exerciseGroup": "F",
+      "subtopic": "Fill-step: ×11 with carry",
+      "sequence": 602,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Watch the carry. 11 × 47: digit sum = 4+7 = 11. Middle digit = 1 (units of 11). Carry 1 to the left: 4+1 = 5. Answer: 517. The carry is just like normal addition!",
+      "boardAction": "Show 11×47: write 4+7=11. Arrow to middle → 1. Carry arrow to left 4 → 5. Write 517.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Middle = units digit of the sum. Carry 1 to the left.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "Eleven Trick carry — Demo",
+        "caption": "4+7=11: middle=1, carry 1 to left → 517."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_F_GUIDED",
+      "stepId": "VM_G4_L2_F",
+      "exerciseGroup": "F",
+      "subtopic": "Fill-step: ×11 with carry",
+      "sequence": 603,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Together: 11 × 36. Digit sum = 3+6 = 9. Is there a carry? No — 9 is less than 10. So answer is 3 | 9 | 6 = 396. What is the digit sum 3+6?",
+      "boardAction": "Write 36. Show 3+6=9. No carry arrow. Write 396.",
+      "checkpointPrompt": "11 × 36: sum = 3+6 = ?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "9",
+      "fallbackHint": "3+6=9, no carry needed.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "Guided: 11 × 36",
+        "caption": "Sum 3+6=9, no carry. Answer: 396."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_B_DEMO",
+      "stepId": "VM_G4_L2_B",
+      "exerciseGroup": "B",
+      "subtopic": "Table of 12 — progressive addition",
+      "sequence": 301,
+      "cue": "demo",
+      "boardMode": "steps",
+      "teacherLine": "Watch the table of 12 build: 12, 24, 36, 48, 60, 72, 84, 96, 108, 120. Each row is just the previous row plus 12. That is the Ekadhikena sutra — one more each time!",
+      "boardAction": "Write chain: 12 +12→ 24 +12→ 36 ... +12→ 120. Highlight each +12 arrow.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Each step is just adding 12 one more time.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Table of 12 chain — Demo",
+        "caption": "Each row adds 12 to the one before."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_B_GUIDED",
+      "stepId": "VM_G4_L2_B",
+      "exerciseGroup": "B",
+      "subtopic": "Table of 12 — progressive addition",
+      "sequence": 302,
+      "cue": "guided",
+      "boardMode": "steps",
+      "teacherLine": "Let us do one together. We know 12 × 5 = 60. What is 12 × 6? Just add 12 more to 60.",
+      "boardAction": "Show 12×5=60 on board. Write +12 arrow. Wait for student. Reveal 72.",
+      "checkpointPrompt": "12 × 6 = 60 + 12 = ?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "72",
+      "fallbackHint": "60 + 12 = 72.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Guided: 12 × 6",
+        "caption": "Add 12 to 12×5=60 to find 12×6."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_C_DEMO",
+      "stepId": "VM_G4_L2_C",
+      "exerciseGroup": "C",
+      "subtopic": "Tables of 13, 14 and 15",
+      "sequence": 401,
+      "cue": "demo",
+      "boardMode": "steps",
+      "teacherLine": "Same trick for 13. Watch: 13, 26, 39, 52, 65, 78. Each step adds 13. So 13 × 6 = 78. And for 15: 15, 30, 45, 60, 75. So 15 × 5 = 75.",
+      "boardAction": "Show two short chains side by side: 13 chain (6 rows) and 15 chain (5 rows) with +13 and +15 labels.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Count the rows and add the table number each time.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Tables 13 & 15 chains — Demo",
+        "caption": "Count steps and add the same number each time."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_C_GUIDED",
+      "stepId": "VM_G4_L2_C",
+      "exerciseGroup": "C",
+      "subtopic": "Tables of 13, 14 and 15",
+      "sequence": 402,
+      "cue": "guided",
+      "boardMode": "steps",
+      "teacherLine": "Together: 14 × 4. Start from 0 and add 14 four times. 14, 28, 42, ___ ? What is the last step?",
+      "boardAction": "Write chain: 14 → 28 → 42 → ___. Wait for student. Reveal 56.",
+      "checkpointPrompt": "14, 28, 42, ___ = 14 × 4?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "56",
+      "fallbackHint": "42 + 14 = 56.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Guided: 14 × 4",
+        "caption": "Complete the last step: 42 + 14 = ?"
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_D_DEMO",
+      "stepId": "VM_G4_L2_D",
+      "exerciseGroup": "D",
+      "subtopic": "Tables of 16, 17, 18 and 19",
+      "sequence": 501,
+      "cue": "demo",
+      "boardMode": "steps",
+      "teacherLine": "Bigger step, same trick. Watch 17: 17, 34, 51, 68, 85. So 17 × 5 = 85. And 19: 19, 38, 57, 76, 95. So 19 × 5 = 95. The chain always works!",
+      "boardAction": "Show 17 chain and 19 chain side by side, five rows each, with +17 and +19 labels.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Just keep adding the same number and count the steps.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Tables 17 & 19 chains — Demo",
+        "caption": "Bigger steps, same Ekadhikena pattern."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_D_GUIDED",
+      "stepId": "VM_G4_L2_D",
+      "exerciseGroup": "D",
+      "subtopic": "Tables of 16, 17, 18 and 19",
+      "sequence": 502,
+      "cue": "guided",
+      "boardMode": "steps",
+      "teacherLine": "Together: 18 × 4. Chain: 18, 36, 54, ___. Add 18 one more time. What is the answer?",
+      "boardAction": "Write chain: 18 → 36 → 54 → ___. Wait for student. Reveal 72.",
+      "checkpointPrompt": "18, 36, 54, ___ = 18 × 4?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "72",
+      "fallbackHint": "54 + 18 = 72.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Guided: 18 × 4",
+        "caption": "Complete the last step: 54 + 18 = ?"
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_E_DEMO",
+      "stepId": "VM_G4_L2_E",
+      "exerciseGroup": "E",
+      "subtopic": "Spot the product — MCQ",
+      "sequence": 601,
+      "cue": "demo",
+      "boardMode": "steps",
+      "teacherLine": "Watch me spot it. 14 × 6: chain 14, 28, 42, 56, 70, 84. The answer is 84. If the options were 80, 82, 84, 86 — I circle 84 immediately!",
+      "boardAction": "Show four options for 14×6: 80, 82, 84, 86. Build chain on board. Circle 84.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Build the chain to the row you need, then match with the options.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Spot the product — Demo",
+        "caption": "Build the chain and match with the choices."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_E_GUIDED",
+      "stepId": "VM_G4_L2_E",
+      "exerciseGroup": "E",
+      "subtopic": "Spot the product — MCQ",
+      "sequence": 602,
+      "cue": "guided",
+      "boardMode": "steps",
+      "teacherLine": "Together now: 16 × 4. Options: 60, 62, 64, 66. Build the chain: 16, 32, 48, ___. Which option is correct?",
+      "boardAction": "Write chain: 16 → 32 → 48 → ___. Options shown. Wait. Reveal 64.",
+      "checkpointPrompt": "16 × 4 = 16, 32, 48, ___ — which option?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "64",
+      "fallbackHint": "48 + 16 = 64.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Guided: Spot 16 × 4",
+        "caption": "Complete the chain and pick the right option."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_G_DEMO",
+      "stepId": "VM_G4_L2_G",
+      "exerciseGroup": "G",
+      "subtopic": "Mixed tables 11–19",
+      "sequence": 701,
+      "cue": "demo",
+      "boardMode": "steps",
+      "teacherLine": "Mixed bag — pick the best method. 11×45: pattern gives 4|9|5 = 495. 13×7: chain 13,26,39,52,65,78,91. Each method fits its table.",
+      "boardAction": "Show 11×45 with digit-sum method and 13×7 with chain. Label which method used for each.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Use digit-sum pattern for ×11. Use chain for others.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Mixed tables — Demo",
+        "caption": "Two methods shown — choose the fastest for each table."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_G_GUIDED",
+      "stepId": "VM_G4_L2_G",
+      "exerciseGroup": "G",
+      "subtopic": "Mixed tables 11–19",
+      "sequence": 702,
+      "cue": "guided",
+      "boardMode": "steps",
+      "teacherLine": "Together: 12 × 8. Use the chain: 12, 24, 36, 48, 60, 72, 84, ___. What is 12 × 8?",
+      "boardAction": "Show chain 12→24→36→...→84→___. Wait. Reveal 96.",
+      "checkpointPrompt": "12 × 8 using chain = ?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "96",
+      "fallbackHint": "84 + 12 = 96.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Guided: 12 × 8",
+        "caption": "Complete the last step in the chain."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_H_DEMO",
+      "stepId": "VM_G4_L2_H",
+      "exerciseGroup": "H",
+      "subtopic": "Speed drill — tables race",
+      "sequence": 801,
+      "cue": "demo",
+      "boardMode": "steps",
+      "teacherLine": "Speed round! I will answer 11×55 in one look: 5+5=10, middle=0, carry 1 to left 5 → 6. Answer 605. Done in under 3 seconds!",
+      "boardAction": "Flash 11×55. Show working in 3 quick steps. Reveal 605 with a star.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "The carry rule works even at speed.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Speed drill — Demo",
+        "caption": "11×55 = 605 solved in one quick pass."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_H_GUIDED",
+      "stepId": "VM_G4_L2_H",
+      "exerciseGroup": "H",
+      "subtopic": "Speed drill — tables race",
+      "sequence": 802,
+      "cue": "guided",
+      "boardMode": "steps",
+      "teacherLine": "Now fast together: 11 × 72. Outer digits 7 and 2. Sum = 7+2 = ?",
+      "boardAction": "Write 11×72. Blank 7 _ 2. Wait for sum. Reveal 9. Write 792.",
+      "checkpointPrompt": "11 × 72: middle = 7+2 = ?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "9",
+      "fallbackHint": "7+2=9, no carry. Answer: 792.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_tables_11_19.svg",
+        "title": "Guided speed: 11 × 72",
+        "caption": "7+2=9, no carry. Answer: 792."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_I_DEMO",
+      "stepId": "VM_G4_L2_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge: 3-digit × 11",
+      "sequence": 901,
+      "cue": "demo",
+      "boardMode": "svg",
+      "teacherLine": "Watch: 11 × 123. Right digit stays: 3. Next pair: 2+3=5. Next pair: 1+2=3. Left digit stays: 1. Read left to right: 1 | 3 | 5 | 3 = 1353!",
+      "boardAction": "Write 123. Add adjacent pair arrows: 1+2=3, 2+3=5. Surround: 1|3|5|3=1353.",
+      "checkpointPrompt": "",
+      "pauseType": "none",
+      "holdSec": 1.5,
+      "expectedStudentResponse": "",
+      "fallbackHint": "Work from right to left for each adjacent pair.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "3-digit × 11 — Demo",
+        "caption": "11 × 123 = 1|3|5|3 = 1353."
+      }
+    },
+    {
+      "beatId": "VM_G4_L2_I_GUIDED",
+      "stepId": "VM_G4_L2_I",
+      "exerciseGroup": "I",
+      "subtopic": "Challenge: 3-digit × 11",
+      "sequence": 902,
+      "cue": "guided",
+      "boardMode": "svg",
+      "teacherLine": "Together: 11 × 231. Right digit = 1. Next pair: 3+1 = 4. Next pair: 2+3 = 5. Left digit = 2. Answer = 2541. What is the pair 2+3?",
+      "boardAction": "Write 231. Show pair arrows. Blank the 2+3 step. Wait. Reveal 5. Write 2541.",
+      "checkpointPrompt": "11 × 231: pair 2+3 = ?",
+      "pauseType": "student_response",
+      "holdSec": 0.5,
+      "expectedStudentResponse": "5",
+      "fallbackHint": "2+3=5. Answer: 2541.",
+      "performanceTag": "core",
+      "useWhenCorrect": null,
+      "useWhenIncorrect": null,
+      "minConfidence": null,
+      "maxConfidence": null,
+      "svgAnimation": [],
+      "visual": {
+        "kind": "svg",
+        "asset": "eleven_trick.svg",
+        "title": "Guided: 11 × 231",
+        "caption": "2+3 = 5 goes in the second-inner slot."
+      }
+    }
+  ],
+  "chapterCode": "VM_G4_L2_TABLES_11_TO_19",
+  "courseId": "vedic_math_g4",
+  "visualLibrary": [
+    {
+      "visualId": "eleven_trick",
+      "kind": "svg",
+      "asset": "eleven_trick.svg",
+      "title": "The Eleven Trick",
+      "caption": "Keep the outer digits and place their sum in the middle."
+    },
+    {
+      "visualId": "vm_tables_11_19",
+      "kind": "svg",
+      "asset": "vm_tables_11_19.svg",
+      "title": "Lightning Tables 11–19",
+      "caption": "Build the next row by adding the same table number again."
     }
   ]
 }

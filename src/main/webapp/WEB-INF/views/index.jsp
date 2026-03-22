@@ -6,332 +6,359 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Robo Dynamics — Learn & Teach</title>
+  <title>RoboDynamics — AI Tutors &amp; Learning for India</title>
+  <meta name="description" content="RoboDynamics builds AI tutors for Indian students. MindSutra (Vedic Maths), AptiPath360 (Career Discovery), Tuition on Demand."/>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <style>
-    body { background:#f7fafc; color:#1b1f23; font-family: Arial, sans-serif; }
-    .rd-container { max-width: 1200px; }
-    .btn-accent { background:#FF8A00; color:#fff; border:0; }
-    .btn-accent:hover { background:#e67a00; color:#fff; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Inter', Arial, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; }
+    a { text-decoration: none; }
 
-    /* hero split */
-    .hero{ display:grid; grid-template-columns: 1fr 1fr; min-height:64vh; }
-    .hero-col{ padding: clamp(1.25rem, 3vw, 3rem); color:#fff; display:flex; align-items:center; }
-
-    /* Use Unsplash Source for temporary hero imagery */
-    .hero-left{
-      background:
-        linear-gradient(0deg, rgba(30,136,229,.90), rgba(30,136,229,.90)),
-        url('https://source.unsplash.com/1200x800/?parents,study,education') center/cover no-repeat;
+    /* ── Hero ── */
+    .rd-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f2d1e 100%);
+      color: #f1f5f9;
+      padding: clamp(48px, 7vw, 88px) 24px clamp(56px, 8vw, 96px);
+      text-align: center;
     }
-    .hero-right{
-      background:
-        linear-gradient(0deg, rgba(0,168,107,.92), rgba(0,168,107,.92)),
-        url('https://source.unsplash.com/1200x800/?teacher,online,classroom') center/cover no-repeat;
+    .rd-hero-eyebrow {
+      display: inline-block;
+      background: rgba(59,130,246,.18); border: 1px solid rgba(59,130,246,.35);
+      color: #93c5fd; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 22px;
+    }
+    .rd-hero h1 {
+      font-size: clamp(28px, 5vw, 54px); font-weight: 900; line-height: 1.12;
+      letter-spacing: -.02em; margin: 0 0 18px;
+    }
+    .rd-hero h1 span { color: #60a5fa; }
+    .rd-hero p { color: #94a3b8; font-size: clamp(15px, 2vw, 18px); max-width: 580px; margin: 0 auto 36px; line-height: 1.65; }
+    .rd-hero-badges { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .rd-hero-badge { color: #64748b; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .rd-hero-badge::before { content: "●"; color: #22c55e; font-size: 8px; }
+
+    /* ── Section chrome ── */
+    .rd-section { padding: clamp(48px, 6vw, 72px) 24px; }
+    .rd-section-title { font-size: clamp(22px, 3vw, 32px); font-weight: 900; letter-spacing: -.03em; margin: 0 0 8px; }
+    .rd-section-sub { color: #64748b; font-size: 15px; margin: 0 0 40px; }
+
+    /* ── Product cards ── */
+    .rd-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .rd-product-card {
+      background: #fff; border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      padding: 32px 28px; display: flex; flex-direction: column; gap: 14px;
+      border: 1px solid #e2e8f0; transition: transform .18s, box-shadow .18s;
+      position: relative; overflow: hidden;
+    }
+    .rd-product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
+    .rd-product-card .card-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .rd-product-card .card-title { font-size: 20px; font-weight: 900; color: #0f172a; margin: 0; }
+    .rd-product-card .card-tag { font-size: 12px; font-weight: 700; color: #6b7280; margin: -4px 0 0; }
+    .rd-product-card .card-desc { color: #4b5563; font-size: 14px; line-height: 1.7; margin: 0; }
+    .rd-product-card .card-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rd-product-card .card-chip { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid; }
+    .rd-product-card .card-cta { margin-top: auto; display: block; text-align: center; padding: 11px 16px; border-radius: 9px; font-weight: 700; font-size: 14px; }
+    .rd-product-card .card-sublinks { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .rd-product-card .card-sublink { font-size: 13px; font-weight: 600; }
+
+    /* card colour themes */
+    .card-mindsutra .card-icon { background: linear-gradient(135deg,#dbeafe,#ede9fe); }
+    .card-mindsutra .card-chip { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .card-mindsutra .card-cta { background: #2563eb; color: #fff; }
+    .card-aptipath  .card-icon { background: linear-gradient(135deg,#dcfce7,#d1fae5); }
+    .card-aptipath  .card-chip { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
+    .card-aptipath  .card-cta { background: #16a34a; color: #fff; }
+    .card-tuition   .card-icon { background: linear-gradient(135deg,#fff7ed,#fef3c7); }
+    .card-tuition   .card-chip { background: #fff7ed; border-color: #fed7aa; color: #c2410c; }
+    .card-tuition   .card-cta { background: #ea580c; color: #fff; }
+
+    .rd-live-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: #dcfce7; border: 1px solid #86efac; color: #15803d;
+      font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 20px;
+    }
+    .rd-soon-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: #f1f5f9; border: 1px solid #cbd5e1; color: #64748b;
+      font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 20px;
     }
 
-    .hero h1{ font-weight:800; line-height:1.1; font-size: clamp(2rem, 3.5vw, 3.2rem); }
+    /* ── How it works ── */
+    .rd-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 24px; }
+    .rd-step { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; }
+    .rd-step-num { font-size: 11px; font-weight: 800; color: #2563eb; letter-spacing: .1em; margin-bottom: 10px; }
+    .rd-step h6 { font-weight: 800; font-size: 15px; margin: 0 0 6px; }
+    .rd-step p  { color: #64748b; font-size: 13px; line-height: 1.7; margin: 0; }
 
-    /* compact cards */
-    .course-card, .mentor-card, .feature, .blog-card { border:0; border-radius:16px; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.06); }
-    .course-card:hover, .mentor-card:hover, .feature:hover, .blog-card:hover{ transform: translateY(-3px); box-shadow:0 12px 24px rgba(0,0,0,.12); }
-    .course-img{ height:140px; object-fit:cover; border-top-left-radius:16px; border-top-right-radius:16px; }
-    .badge-demo{ background:#FF8A00; }
+    /* ── Tutors (Tuition on demand section) ── */
+    .rd-mentor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 16px; }
+    .rd-mentor-card { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:20px 16px; text-align:center; transition: transform .15s; }
+    .rd-mentor-card:hover { transform: translateY(-2px); }
+    .rd-mentor-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; border: 2px solid #e2e8f0; margin-bottom: 10px; }
+    .rd-mentor-name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+    .rd-mentor-exp  { color: #64748b; font-size: 12px; }
 
-    /* dense trending grid */
-    .trending-grid .row{ --bs-gutter-x:.75rem; --bs-gutter-y:.75rem; }
-    .trending-grid .card-body{ padding:10px 12px; }
-    .trending-grid .card-title{ font-size:0.98rem; line-height:1.2; margin-bottom:6px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    /* ── Trust strip ── */
+    .rd-trust { background: #0f172a; color: #f1f5f9; padding: 40px 24px; text-align: center; }
+    .rd-trust-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+    .rd-trust-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .rd-trust-num { font-size: 28px; font-weight: 900; color: #60a5fa; }
+    .rd-trust-label { font-size: 13px; color: #94a3b8; }
 
-    .avatar { width:72px; height:72px; border-radius:50%; object-fit:cover; }
-    @media (max-width: 991px){ .hero{ grid-template-columns: 1fr; } }
+    /* ── Footer ── */
+    .rd-footer { background: #020a12; color: #475569; padding: 36px 24px; font-size: 13px; }
+    .rd-footer a { color: #64748b; text-decoration: none; }
+    .rd-footer a:hover { color: #f1f5f9; }
+    .rd-footer-grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; max-width: 1100px; margin: 0 auto 24px; }
+    .rd-footer-col h6 { color: #f1f5f9; font-weight: 700; font-size: 13px; margin-bottom: 12px; letter-spacing: .05em; text-transform: uppercase; }
+    .rd-footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .rd-footer-bottom { text-align: center; border-top: 1px solid #1e293b; padding-top: 20px; max-width: 1100px; margin: 0 auto; color: #334155; font-size: 12px; }
+
+    @media (max-width: 640px) {
+      .rd-products { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
   <jsp:include page="header.jsp" />
 
-  <!-- viewer switch -->
-  <div class="container rd-container pt-2 text-end small">
-    <c:choose>
-      <c:when test="${viewer == 'mentor'}">
-        <a class="text-decoration-none" href="${pageContext.request.contextPath}/?viewer=parent">Switch to Parent view</a>
-      </c:when>
-      <c:otherwise>
-        <a class="text-decoration-none" href="${pageContext.request.contextPath}/?viewer=mentor">I’m a Mentor</a>
-      </c:otherwise>
-    </c:choose>
-  </div>
-
-  <!-- HERO SPLIT -->
-  <section class="hero mb-4">
-    <div class="hero-col hero-left">
-      <div class="container rd-container">
-        <span class="badge rounded-pill px-3 py-2 mb-3 bg-light text-dark">For Parents/Students</span>
-        <h1 class="mb-3">Find the Best Tutors for Your Child</h1>
-        <p class="lead mb-4">Math • Science • Coding • Robotics • Languages • Olympiad</p>
-        <a href="${pageContext.request.contextPath}/parents" class="btn btn-light btn-lg px-4"><i class="bi bi-mortarboard"></i> Explore Courses</a>
-      </div>
+  <%-- ══ HERO ══════════════════════════════════════════════════════════════ --%>
+  <section class="rd-hero">
+    <div class="rd-hero-eyebrow">🇮🇳 AI-powered learning for Indian students</div>
+    <h1>Learn Smarter.<br><span>Achieve More.</span></h1>
+    <p>Specialist AI tutors, adaptive career discovery, and on-demand mentors — all built for the Indian curriculum and exam system.</p>
+    <div class="rd-hero-badges">
+      <span class="rd-hero-badge">CBSE &amp; NCERT aligned</span>
+      <span class="rd-hero-badge">Indian English voice</span>
+      <span class="rd-hero-badge">Works on any phone</span>
+      <span class="rd-hero-badge">No annual renewals</span>
     </div>
-    <div class="hero-col hero-right">
-      <div class="container rd-container">
-        <span class="badge rounded-pill px-3 py-2 mb-3 bg-light text-dark">For Teachers</span>
-        <h1 class="mb-3">Teach. <span style="color:#FFEB3B;">Earn.</span> Inspire.</h1>
-        <p class="lead mb-4">Join high‑demand batches & open your own.</p>
-        <a href="${pageContext.request.contextPath}/mentors" class="btn btn-light btn-lg px-4"><i class="bi bi-person-workspace"></i> Teach with Us</a>
+  </section>
+
+  <%-- ══ PRODUCTS ══════════════════════════════════════════════════════════ --%>
+  <section class="rd-section" style="background:#f8fafc;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p class="rd-section-title text-center">Our Products</p>
+      <p class="rd-section-sub text-center">Three ways we help your child succeed — pick what fits your goal right now.</p>
+
+      <div class="rd-products">
+
+        <%-- MindSutra --%>
+        <div class="rd-product-card card-mindsutra">
+          <span class="rd-live-badge">● Live</span>
+          <div class="d-flex align-items-center gap-3">
+            <div class="card-icon">🧮</div>
+            <div>
+              <div class="card-title">MindSutra</div>
+              <div class="card-tag">Vedic Maths AI Tutor · Grade 4–8</div>
+            </div>
+          </div>
+          <p class="card-desc">An AI tutor that teaches Vedic Maths interactively. It detects when your child is stuck, re-explains in a different way, and adapts to their learning speed. Available 24/7 on any phone.</p>
+          <div class="card-chips">
+            <span class="card-chip">CBSE Grade 4–8</span>
+            <span class="card-chip">8 chapters/grade</span>
+            <span class="card-chip">Parent dashboard</span>
+            <span class="card-chip">₹1,499 lifetime</span>
+          </div>
+          <a href="${pageContext.request.contextPath}/robodynamics/vedic-math/grade-5" class="card-cta">Explore MindSutra →</a>
+          <div class="card-sublinks">
+            <a href="${pageContext.request.contextPath}/robodynamics/ai-tutor/demo?grade=5&chapter=VM_G5_L1_NIKHILAM_NEAR100&fresh=1" class="card-sublink" style="color:#2563eb;">▶ Free demo (no login)</a>
+            <a href="${pageContext.request.contextPath}/robodynamics/mindsutra" class="card-sublink" style="color:#94a3b8;">All grades →</a>
+          </div>
+        </div>
+
+        <%-- AptiPath360 --%>
+        <div class="rd-product-card card-aptipath" id="aptipath">
+          <span class="rd-live-badge">● Live</span>
+          <div class="d-flex align-items-center gap-3">
+            <div class="card-icon">🧭</div>
+            <div>
+              <div class="card-title">AptiPath360</div>
+              <div class="card-tag">Career Discovery · Grade 8 to College</div>
+            </div>
+          </div>
+          <p class="card-desc">Adaptive career discovery that maps your child's aptitude, interests, and learning style to the right career path. 46–72 intelligent questions. Output: Career Horizon Map + Action Roadmap.</p>
+          <div class="card-chips">
+            <span class="card-chip">Grade 8–12 &amp; College</span>
+            <span class="card-chip">46–72 questions</span>
+            <span class="card-chip">Career Horizon Map</span>
+            <span class="card-chip">₹799 + GST</span>
+          </div>
+          <a href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic" class="card-cta">Start Career Discovery →</a>
+          <div class="card-sublinks">
+            <a href="${pageContext.request.contextPath}/home" class="card-sublink" style="color:#16a34a;">View sample report</a>
+            <a href="${pageContext.request.contextPath}/resources/manuals/AptiPath_Basic_Parent_Flow_Manual.html" target="_blank" class="card-sublink" style="color:#94a3b8;">Parent guide →</a>
+          </div>
+        </div>
+
+        <%-- Tuition on Demand --%>
+        <div class="rd-product-card card-tuition">
+          <span class="rd-live-badge">● Live</span>
+          <div class="d-flex align-items-center gap-3">
+            <div class="card-icon">🧑‍🏫</div>
+            <div>
+              <div class="card-title">Tuition on Demand</div>
+              <div class="card-tag">Live Mentor Booking · All Subjects</div>
+            </div>
+          </div>
+          <p class="card-desc">Book verified mentors for any subject within hours. Progress trackers, session recordings, and parent check-ins included. Maths, Science, Coding, Robotics, Olympiad prep.</p>
+          <div class="card-chips">
+            <span class="card-chip">All subjects</span>
+            <span class="card-chip">Verified mentors</span>
+            <span class="card-chip">Progress tracking</span>
+            <span class="card-chip">Flexible schedule</span>
+          </div>
+          <a href="${pageContext.request.contextPath}/tuition-on-demand" class="card-cta">Book a Mentor →</a>
+          <div class="card-sublinks">
+            <a href="${pageContext.request.contextPath}/parents/demo?source=home_tuition_card" class="card-sublink" style="color:#ea580c;">Request free demo</a>
+            <a href="${pageContext.request.contextPath}/mentors" class="card-sublink" style="color:#94a3b8;">Browse mentors →</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SEARCH (tabs for course vs mentor intent) -->
-  <section class="container rd-container mb-4">
-    <ul class="nav nav-pills justify-content-center mb-3">
-      <li class="nav-item">
-        <a class="nav-link ${viewer != 'mentor' ? 'active' : ''}" href="${pageContext.request.contextPath}/?viewer=parent">Find Courses</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link ${viewer == 'mentor' ? 'active' : ''}" href="${pageContext.request.contextPath}/teach-search">Find Courses to Teach</a>
-      </li>
-    </ul>
-    <form class="row g-2" method="get" action="${pageContext.request.contextPath}/">
-      <input type="hidden" name="viewer" value="${viewer}"/>
-      <div class="col-12 col-lg-8">
-        <div class="input-group">
-          <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-          <input name="q" class="form-control form-control-lg" placeholder="Try 'Robotics for Class 6' or 'Olympiad'"
-                 value="${fn:escapeXml(param.q)}"/>
+  <%-- ══ HOW IT WORKS ══════════════════════════════════════════════════════ --%>
+  <section class="rd-section" style="background:#fff; border-top: 1px solid #e2e8f0;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p class="rd-section-title text-center">How it works</p>
+      <p class="rd-section-sub text-center">From first visit to measurable results in 3 simple steps.</p>
+      <div class="rd-steps">
+        <div class="rd-step">
+          <div class="rd-step-num">STEP 01</div>
+          <div style="font-size:26px; margin-bottom:10px;">🎯</div>
+          <h6>Pick your goal</h6>
+          <p>Improve Maths marks → MindSutra. Find the right career → AptiPath360. Need a tutor fast → Tuition on Demand.</p>
+        </div>
+        <div class="rd-step">
+          <div class="rd-step-num">STEP 02</div>
+          <div style="font-size:26px; margin-bottom:10px;">▶️</div>
+          <h6>Try free — no login needed</h6>
+          <p>Every product has a free demo. See the AI tutor in action, take a sample assessment, or meet a mentor before committing.</p>
+        </div>
+        <div class="rd-step">
+          <div class="rd-step-num">STEP 03</div>
+          <div style="font-size:26px; margin-bottom:10px;">📈</div>
+          <h6>Track progress, see results</h6>
+          <p>Every session is tracked. Parents get dashboards showing XP, accuracy, completion, and weak areas — updated in real time.</p>
         </div>
       </div>
-      <div class="col-12 col-lg-4 d-grid d-lg-flex">
-        <button class="btn btn-primary btn-lg w-100 w-lg-auto">Search</button>
-        <a class="btn btn-outline-secondary btn-lg ms-lg-2 w-100 w-lg-auto" href="${pageContext.request.contextPath}/?viewer=${viewer}">Clear</a>
+    </div>
+  </section>
+
+  <%-- ══ FEATURED MENTORS ══════════════════════════════════════════════════ --%>
+  <c:if test="${not empty featuredTeachers}">
+  <section class="rd-section" style="background:#f8fafc; border-top: 1px solid #e2e8f0;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <p class="rd-section-title mb-0">🌟 Our Mentors</p>
+        <a href="${pageContext.request.contextPath}/mentors" style="color:#2563eb; font-weight:600; font-size:14px;">See all →</a>
       </div>
-    </form>
-  </section>
-
-  <!-- COLLECTIONS (with placeholder fallback) -->
-  <section class="container rd-container mb-5">
-    <div class="d-flex align-items-center justify-content-between mb-2">
-      <h4 class="mb-0">🗂️ Collections</h4>
-      <a class="text-decoration-none" href="${pageContext.request.contextPath}/collections">See all</a>
-    </div>
-    <div class="row g-3">
-      <c:forEach var="col" items="${collections}">
-        <div class="col-12 col-md-4">
-          <a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/collections/${col.slug}">
-            <div class="feature h-100">
-              <c:choose>
-                <c:when test="${not empty col.bannerUrl}">
-                  <c:choose>
-                    <c:when test="${fn:startsWith(col.bannerUrl,'http')}">
-                      <img src="${col.bannerUrl}" class="w-100" style="height:130px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;" alt="${col.title}"/>
-                    </c:when>
-                    <c:otherwise>
-                      <img src="${pageContext.request.contextPath}${col.bannerUrl}" class="w-100" style="height:130px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;" alt="${col.title}"/>
-                    </c:otherwise>
-                  </c:choose>
-                </c:when>
-                <c:otherwise>
-                  <img src="https://via.placeholder.com/600x130?text=Collection+Banner" class="w-100" style="height:130px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;" alt="${col.title}"/>
-                </c:otherwise>
-              </c:choose>
-              <div class="p-3">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h6 class="mb-0">${col.title}</h6>
-                  <small class="text-muted">${fn:length(col.courseIds)} courses</small>
-                </div>
-                <small class="text-muted">${col.description}</small>
-              </div>
-            </div>
-          </a>
-        </div>
-      </c:forEach>
-    </div>
-  </section>
-
-  <!-- TRENDING COURSES -->
-  <section class="container rd-container trending-grid mb-5">
-    <div class="d-flex align-items-center justify-content-between mb-2">
-      <h4 class="mb-0">🔥 Trending Courses</h4>
-      <a class="text-decoration-none" href="${pageContext.request.contextPath}/parents#trending">See all</a>
-    </div>
-
-    <div class="row g-4">
-      <c:choose>
-        <c:when test="${not empty trendingCourses}">
-          <c:forEach var="c" items="${trendingCourses}">
-            <c:url var="detailsUrl" value="/course/details"><c:param name="courseId" value="${c.courseId}"/></c:url>
-            <c:set var="enrollUrl" value="${empty c.registrationLink ? detailsUrl : c.registrationLink}"/>
-
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-              <div class="card course-card h-100">
-                <c:choose>
-                  <c:when test="${not empty c.courseImageUrl}">
-                    <c:choose>
-                      <c:when test="${fn:startsWith(c.courseImageUrl,'http')}">
-                        <img class="course-img" src="${c.courseImageUrl}" alt="${c.courseName}"/>
-                      </c:when>
-                      <c:otherwise>
-                        <img class="course-img" src="${pageContext.request.contextPath}${c.courseImageUrl}" alt="${c.courseName}"/>
-                      </c:otherwise>
-                    </c:choose>
-                  </c:when>
-                  <c:otherwise>
-                    <img class="course-img" src="https://via.placeholder.com/300x140?text=Course+Image" alt="${c.courseName}"/>
-                  </c:otherwise>
-                </c:choose>
-
-                <div class="card-body">
-                  <h6 class="card-title" title="${c.courseName}">${c.courseName}</h6>
-                  <c:if test="${not empty c.courseInstructor}">
-                    <div class="text-muted small mb-1">by ${c.courseInstructor}</div>
-                  </c:if>
-
-                  <div class="d-flex align-items-center gap-2 mb-2">
-                    <c:if test="${not empty c.promoVideoUrl}">
-                      <span class="badge badge-demo">Preview</span>
-                    </c:if>
-                    <c:if test="${not empty c.courseAgeGroup}">
-                      <small class="text-muted">${c.courseAgeGroup}</small>
-                    </c:if>
-                  </div>
-
-                  <div class="d-grid">
-                    <c:choose>
-                      <c:when test="${viewer == 'mentor'}">
-                        <a href="${pageContext.request.contextPath}/teach/apply?courseId=${c.courseId}" class="btn btn-sm btn-success">Teach this course</a>
-                        <a href="${detailsUrl}" class="btn btn-sm btn-outline-secondary mt-1">Preview syllabus</a>
-                      </c:when>
-                      <c:otherwise>
-                        <a href="${enrollUrl}" class="btn btn-sm btn-primary">Enroll</a>
-                        <c:if test="${not empty c.promoVideoUrl}">
-                          <a href="${c.promoVideoUrl}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-success mt-1">Watch Preview</a>
-                        </c:if>
-                      </c:otherwise>
-                    </c:choose>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </c:forEach>
-        </c:when>
-        <c:otherwise>
-          <div class="col-12"><div class="alert alert-light border text-center mb-0">No courses to show yet.</div></div>
-        </c:otherwise>
-      </c:choose>
-    </div>
-  </section>
-
-  <!-- NEEDS MENTORS NOW -->
-  <c:if test="${viewer == 'mentor' && not empty coursesNeedingMentors}">
-    <section class="container rd-container mb-5">
-      <h5 class="mb-2">🚀 Needs Mentors Now</h5>
-      <div class="d-flex flex-row flex-wrap gap-2">
-        <c:forEach var="m" items="${coursesNeedingMentors}">
-          <a class="btn btn-sm btn-outline-danger"
-             href="${pageContext.request.contextPath}/teach/apply?courseId=${m.courseId}">
-            ${m.courseName}
-          </a>
-        </c:forEach>
-      </div>
-    </section>
-  </c:if>
-
-  <!-- MENTOR SPOTLIGHT (avatar fallback) -->
-  <section class="container rd-container mb-5">
-    <div class="d-flex align-items-center justify-content-between mb-2">
-      <h4 class="mb-0">🌟 Mentor Spotlight</h4>
-      <a class="text-decoration-none" href="${pageContext.request.contextPath}/mentors">See all</a>
-    </div>
-    <div class="row g-3">
-      <c:forEach var="m" items="${featuredTeachers}">
-        <div class="col-6 col-md-3">
-          <div class="mentor-card text-center p-3 h-100">
+      <p class="rd-section-sub">Verified teachers for live tuition sessions, Olympiad prep, and coding.</p>
+      <div class="rd-mentor-grid">
+        <c:forEach var="m" items="${featuredTeachers}">
+          <div class="rd-mentor-card">
             <c:choose>
               <c:when test="${not empty m.photoUrl}">
                 <c:choose>
                   <c:when test="${fn:startsWith(m.photoUrl,'http')}">
-                    <img class="avatar mx-auto mb-2" src="${m.photoUrl}" alt="${m.name}">
+                    <img class="rd-mentor-avatar mx-auto d-block" src="${m.photoUrl}" alt="${m.name}">
                   </c:when>
                   <c:otherwise>
-                    <img class="avatar mx-auto mb-2" src="${pageContext.request.contextPath}${m.photoUrl}" alt="${m.name}">
+                    <img class="rd-mentor-avatar mx-auto d-block" src="${pageContext.request.contextPath}${m.photoUrl}" alt="${m.name}">
                   </c:otherwise>
                 </c:choose>
               </c:when>
               <c:otherwise>
-                <img class="avatar mx-auto mb-2" src="https://via.placeholder.com/72?text=Avatar" alt="${m.name}">
+                <div class="rd-mentor-avatar mx-auto d-flex align-items-center justify-content-center" style="background:#e2e8f0; font-size:24px;">👤</div>
               </c:otherwise>
             </c:choose>
-            <div class="fw-semibold">${m.name}</div>
-            <div class="text-muted small">${m.expertise}</div>
-            <div class="small mt-1">${m.headline}</div>
-            <div class="d-grid mt-2">
-              <a href="${pageContext.request.contextPath}/teacher/${m.id}" class="btn btn-outline-primary btn-sm">View Profile</a>
-            </div>
+            <div class="rd-mentor-name">${m.name}</div>
+            <div class="rd-mentor-exp">${m.expertise}</div>
+            <a href="${pageContext.request.contextPath}/teacher/${m.id}" class="btn btn-outline-primary btn-sm w-100 mt-2" style="font-size:12px;">View Profile</a>
           </div>
-        </div>
-      </c:forEach>
+        </c:forEach>
+      </div>
     </div>
   </section>
+  </c:if>
 
-  <!-- UPCOMING FREE SESSIONS (image not shown here; slug & text only) -->
-  <section class="container rd-container mb-5">
-    <h4 class="mb-2"><i class="bi bi-calendar2-week me-2"></i>Upcoming Free Sessions</h4>
-    <div class="vstack gap-2 mb-2">
-      <c:forEach var="d" items="${upcomingDemos}">
-        <div class="d-flex align-items-center justify-content-between p-3 bg-white rounded-3 shadow-sm">
-          <div class="d-flex align-items-center">
-            <i class="bi bi-calendar-event text-primary fs-5 me-3"></i>
-            <div>
-              <div class="fw-semibold">${d.title}</div>
-              <small class="text-muted">${d.meta}</small>
-            </div>
-          </div>
-          <a class="btn btn-accent" href="${pageContext.request.contextPath}/demos/${d.slug}">View Session</a>
-        </div>
-      </c:forEach>
+  <%-- ══ TRUST STRIP ═══════════════════════════════════════════════════════ --%>
+  <div class="rd-trust">
+    <div class="rd-trust-grid">
+      <div class="rd-trust-item"><span class="rd-trust-num">5,000+</span><span class="rd-trust-label">Students learning</span></div>
+      <div class="rd-trust-item"><span class="rd-trust-num">16</span><span class="rd-trust-label">Vedic Maths chapters</span></div>
+      <div class="rd-trust-item"><span class="rd-trust-num">G4–G8</span><span class="rd-trust-label">CBSE grades covered</span></div>
+      <div class="rd-trust-item"><span class="rd-trust-num">₹1,499</span><span class="rd-trust-label">Once. No renewals.</span></div>
+      <div class="rd-trust-item"><span class="rd-trust-num">30-day</span><span class="rd-trust-label">Money-back guarantee</span></div>
     </div>
-  </section>
+  </div>
 
-  <!-- BLOG (image fallback) -->
-  <section class="container rd-container mb-5">
-    <h4 class="mb-3"><i class="bi bi-book me-2"></i>Parenting & Learning Tips</h4>
-    <div class="row g-3">
-      <c:forEach var="p" items="${blogPosts}">
-        <div class="col-md-4">
-          <a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}${p.href}">
-            <div class="blog-card h-100">
-              <c:choose>
-                <c:when test="${not empty p.imageUrl}">
-                  <c:choose>
-                    <c:when test="${fn:startsWith(p.imageUrl,'http')}">
-                      <img src="${p.imageUrl}" class="w-100" style="height:180px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;" alt="${p.title}"/>
-                    </c:when>
-                    <c:otherwise>
-                      <img src="${pageContext.request.contextPath}${p.imageUrl}" class="w-100" style="height:180px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;" alt="${p.title}"/>
-                    </c:otherwise>
-                  </c:choose>
-                </c:when>
-                <c:otherwise>
-                  <img src="https://via.placeholder.com/400x180?text=Blog+Image" class="w-100" style="height:180px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;" alt="${p.title}"/>
-                </c:otherwise>
-              </c:choose>
-              <div class="p-3">
-                <h6 class="mb-1">${p.title}</h6>
-                <small class="text-muted">${p.excerpt}</small>
-              </div>
-            </div>
-          </a>
-        </div>
-      </c:forEach>
+  <%-- ══ FOOTER ══════════════════════════════════════════════════════════════ --%>
+  <footer class="rd-footer">
+    <div class="rd-footer-grid">
+      <div class="rd-footer-col">
+        <h6>RoboDynamics</h6>
+        <ul>
+          <li><a href="${pageContext.request.contextPath}/about">About us</a></li>
+          <li><a href="${pageContext.request.contextPath}/contact-us">Contact</a></li>
+          <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+          <li><a href="${pageContext.request.contextPath}/registerParentChild">Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="rd-footer-col">
+        <h6>MindSutra — Vedic Maths</h6>
+        <ul>
+          <li><a href="${pageContext.request.contextPath}/robodynamics/mindsutra">Product overview</a></li>
+          <li><a href="${pageContext.request.contextPath}/robodynamics/vedic-math/grade-4">Grade 4</a></li>
+          <li><a href="${pageContext.request.contextPath}/robodynamics/vedic-math/grade-5">Grade 5</a></li>
+          <li><a href="${pageContext.request.contextPath}/robodynamics/vedic-math/grade-6">Grade 6</a></li>
+          <li><a href="${pageContext.request.contextPath}/robodynamics/vedic-math/grade-7">Grade 7</a></li>
+          <li><a href="${pageContext.request.contextPath}/robodynamics/vedic-math/grade-8">Grade 8</a></li>
+        </ul>
+      </div>
+      <div class="rd-footer-col">
+        <h6>AptiPath360</h6>
+        <ul>
+          <li><a href="${pageContext.request.contextPath}/#aptipath">Career Discovery</a></li>
+          <li><a href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic">Start ₹799</a></li>
+          <li><a href="${pageContext.request.contextPath}/resources/manuals/AptiPath_Basic_Parent_Flow_Manual.html" target="_blank">Parent guide</a></li>
+        </ul>
+      </div>
+      <div class="rd-footer-col">
+        <h6>Tuition on Demand</h6>
+        <ul>
+          <li><a href="${pageContext.request.contextPath}/tuition-on-demand">How it works</a></li>
+          <li><a href="${pageContext.request.contextPath}/mentors">Browse mentors</a></li>
+          <li><a href="${pageContext.request.contextPath}/parents/demo?source=footer">Request demo</a></li>
+        </ul>
+      </div>
+      <div class="rd-footer-col">
+        <h6>Legal</h6>
+        <ul>
+          <li><a href="${pageContext.request.contextPath}/privacy-policy">Privacy Policy</a></li>
+          <li><a href="${pageContext.request.contextPath}/terms">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
     </div>
-  </section>
+    <div class="rd-footer-bottom">
+      © 2026 RoboDynamics Pvt Ltd · Bengaluru, India ·
+      <a href="mailto:hello@robodynamics.in">hello@robodynamics.in</a>
+    </div>
+  </footer>
 
-  <jsp:include page="/WEB-INF/views/footer.jsp" />
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

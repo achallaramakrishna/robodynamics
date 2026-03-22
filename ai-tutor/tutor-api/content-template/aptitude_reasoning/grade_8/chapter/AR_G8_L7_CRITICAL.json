@@ -1,0 +1,530 @@
+{
+  "chapterCode": "AR_G8_L7_CRITICAL",
+  "courseId": "aptitude_reasoning_g8",
+  "title": "Critical Reasoning",
+  "source": "MindSpark Grade 8 Aptitude & Reasoning | Chapter 7: Critical Reasoning",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Identifying assumptions in arguments",
+    "Strengthening and weakening an argument",
+    "Finding the conclusion of an argument",
+    "Inference vs stated information",
+    "Cause-and-effect analysis",
+    "Logical paradoxes and their resolution"
+  ],
+  "learningGoals": [
+    "Distinguish between stated facts, assumptions, and conclusions",
+    "Identify which answer choice strengthens or weakens a given argument",
+    "Find the unstated assumption required for an argument to hold",
+    "Determine whether a statement is a valid inference or goes beyond the facts",
+    "Analyse cause-and-effect relationships and identify alternate causes"
+  ],
+  "coreIdeas": [
+    "An argument = Premise(s) + Assumption(s) → Conclusion",
+    "Assumption: an unstated belief the argument depends on; if the assumption is false, the argument fails",
+    "Strengthen: add a fact that makes the conclusion more likely to be true",
+    "Weaken: add a fact that makes the conclusion less likely to be true or provides an alternate explanation",
+    "Inference: a conclusion that must be true given the premises — does not go beyond the stated facts",
+    "Cause-and-effect: correlation does not imply causation; look for confounding variables"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Argument: Students who sleep 8 hours perform better in exams. Therefore, Ravi should sleep 8 hours to improve his exam scores. What is the underlying assumption?",
+      "solution": "Assumption: Ravi currently sleeps less than 8 hours. If he already sleeps 8 hours, the recommendation is irrelevant. The argument assumes the intervention is needed.",
+      "concept": "Identifying the necessary assumption"
+    },
+    {
+      "id": "WE2",
+      "problem": "Argument: The city installed more streetlights last year, and crime rates fell. Therefore, more streetlights reduce crime. Which choice WEAKENS this argument? (A) Studies show streetlights deter criminal activity. (B) The city also increased police patrols last year.",
+      "solution": "Choice (B) weakens the argument by providing an alternative cause for the crime reduction — increased police patrols. This means the streetlights may not be responsible. (A) strengthens the argument.",
+      "concept": "Weakening via alternate cause"
+    },
+    {
+      "id": "WE3",
+      "problem": "Passage: All top athletes train for more than 4 hours daily. Maria trains for 5 hours daily. Can we infer that Maria is a top athlete?",
+      "solution": "No. The passage says all top athletes train >4 hours, but it does not say that everyone who trains >4 hours is a top athlete. Maria training 5 hours is necessary but not sufficient. This is the converse error — a common inference trap.",
+      "concept": "Inference trap — converse fallacy"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g8-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Competitive exam prep"
+      ],
+      "coachIntro": "Critical reasoning is the skill that separates average students from exceptional ones. Most people argue from emotion — you will argue from logic. By the end of this chapter, you'll be able to find flaws in any argument, spot hidden assumptions, and evaluate evidence like a lawyer.",
+      "placementRule": "If learner picks 'I have done this before', skip Exercise A and start at Exercise C."
+    },
+    "mission": {
+      "missionTitle": "Logic Court: Argue, Analyse, Decide",
+      "missionPromise": "You will identify assumptions, strengthen/weaken arguments, and distinguish valid inferences from overreaches — the three most common critical reasoning question types.",
+      "successCelebration": "Logic Advocate badge unlocked! You argued and analysed like a champion!"
+    },
+    "microLessonPattern": [
+      "Dissect an argument into premise and conclusion",
+      "Find the hidden assumption",
+      "Strengthen an argument with a supporting fact",
+      "Weaken an argument by providing alternate explanation",
+      "Identify valid inferences vs overreaches"
+    ],
+    "rewardLoop": {
+      "xpUnit": "spark",
+      "streakRule": "3 correct in a row = Streak Flame + 5 bonus sparks",
+      "badgeRule": "Complete all 8 exercises with ≥ 80% accuracy = Logic Advocate badge",
+      "celebrationStyle": "Gavel icon + argument diagram animates to show premise → conclusion → verdict"
+    },
+    "reviewLoop": {
+      "trigger": "Two consecutive assumption identification errors",
+      "practiceStyle": "Reteach: negate the assumption and check if the argument collapses; if yes, it's the right assumption",
+      "masteryRule": "3 correct assumption identifications = mastered",
+      "revisitRule": "Inference trap revisited in Exercise H"
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G8_L7_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Every argument has three parts: Premises (the facts given), an Assumption (an unstated belief that connects the premises to the conclusion), and a Conclusion (the claim being made). The assumption is the hidden link. If you negate the assumption and the argument collapses, you've found the right one. Let me demonstrate.",
+        "boardAction": "Draw an argument diagram: two Premise boxes → Assumption box (dashed, hidden) → Conclusion box. Label each box. Write a sample argument and identify each part.",
+        "checkpointPrompt": "Argument: 'All students who study regularly pass. Priya passes. Therefore, Priya studies regularly.' Is this argument valid?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "No — it commits the converse fallacy",
+        "fallbackHint": "The premise says regular studiers pass — but many other students might also pass. Priya passing doesn't prove she studies regularly.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Premise → [Assumption] → Conclusion",
+            "x": "60",
+            "y": "80",
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "line",
+            "x1": "60",
+            "y1": "105",
+            "x2": "520",
+            "y2": "105",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "Assumption = hidden bridge",
+            "x": "140",
+            "y": "150",
+            "fontSize": 17,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "Negate it → argument collapses = found it!",
+            "x": "60",
+            "y": "200",
+            "fontSize": 16,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "syllogism.svg",
+          "title": "Critical Reasoning",
+          "caption": "Screenplay beat for Critical Reasoning."
+        }
+      },
+      {
+        "beatId": "AR_G8_L7_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me weaken an argument. Argument: The city installed more streetlights and crime fell. Therefore streetlights reduce crime. To weaken, I find an alternative explanation for the drop in crime — like increased police patrols. If patrols caused the drop, streetlights are not the cause. That's a weaker argument. The key: weaken = provide alternate cause or show the correlation is coincidental.",
+        "boardAction": "Write the argument in a box. Draw a second box for the weakening statement: 'The city also increased police patrols.' Show an arrow from this new fact pointing to the conclusion with a 'breaks link' annotation.",
+        "checkpointPrompt": "Which statement STRENGTHENS the streetlights argument? (A) Another city reduced crime without streetlights. (B) Darkness is a proven factor that enables criminal activity.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "B",
+        "fallbackHint": "(B) provides a mechanism — darkness enables crime, so light deters it — that supports the argument. (A) actually weakens it.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Weaken: alternate cause breaks the link",
+            "x": "50",
+            "y": "70",
+            "fontSize": 17,
+            "color": "#FF5252"
+          },
+          {
+            "kind": "text",
+            "content": "Strengthen: supports the mechanism",
+            "x": "50",
+            "y": "115",
+            "fontSize": 17,
+            "color": "#69F0AE"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "90",
+            "x2": "520",
+            "y2": "90",
+            "stroke": "#555555",
+            "strokeWidth": 1
+          },
+          {
+            "kind": "text",
+            "content": "(B) Darkness enables crime → light deters ✓",
+            "x": "50",
+            "y": "165",
+            "fontSize": 16,
+            "color": "#FFC107"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "syllogism.svg",
+          "title": "Critical Reasoning",
+          "caption": "Screenplay beat for Critical Reasoning."
+        }
+      },
+      {
+        "beatId": "AR_G8_L7_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your turn. Passage: 'All engineers are good at maths. Rahul is good at maths. Therefore Rahul is an engineer.' Identify the flaw in this reasoning and explain it clearly.",
+        "boardAction": "Draw: Engineers circle inside Good-at-Maths circle. Mark Rahul as a point inside Good-at-Maths. Show Rahul could be outside Engineers.",
+        "checkpointPrompt": "What logical flaw does the Rahul argument commit?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Converse fallacy — being good at maths is necessary but not sufficient to be an engineer",
+        "fallbackHint": "The Venn diagram shows engineers ⊆ good-at-maths, but good-at-maths ⊄ engineers. Rahul can be in the non-engineer part of good-at-maths.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "Engineers ⊂ Good-at-Maths",
+            "x": "80",
+            "y": "80",
+            "fontSize": 18,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Rahul = good at maths ≠ engineer",
+            "x": "80",
+            "y": "130",
+            "fontSize": 17,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "text",
+            "content": "Converse Fallacy!",
+            "x": "160",
+            "y": "190",
+            "fontSize": 22,
+            "color": "#FF5252"
+          },
+          {
+            "kind": "line",
+            "x1": "60",
+            "y1": "110",
+            "x2": "480",
+            "y2": "110",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "syllogism.svg",
+          "title": "Critical Reasoning",
+          "caption": "Screenplay beat for Critical Reasoning."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Premise vs conclusion identification",
+      "missionStepTitle": "Exercise A: Dissect the Argument",
+      "coachHook": "You can't analyse what you can't label. Identify premises and conclusions first.",
+      "boardDemo": {
+        "title": "Argument anatomy",
+        "steps": [
+          "Conclusion keywords: therefore, thus, hence, so, consequently",
+          "Premise keywords: because, since, as, given that",
+          "If no keyword: the main claim is the conclusion",
+          "Supporting statements are premises"
+        ],
+        "teacherLine": "Circle conclusion keywords. Underline premises. The structure becomes visible immediately."
+      },
+      "readAloudPrompt": "Read the argument. Circle the word 'therefore' or 'so'. Everything after it is the conclusion.",
+      "tryPrompt": "Argument: 'Since regular exercise improves mental health, and mental health affects academic performance, students who exercise regularly should do better in exams.' Identify the conclusion.",
+      "masteryCheck": "Students who exercise regularly should do better in exams",
+      "instantFeedbackWin": "Exactly right! The word 'should' flags the conclusion. Everything before is premises building toward this claim.",
+      "instantFeedbackRetry": "Here's a trick: Find the final claim being made. 'Should do better in exams' is the author's recommendation/claim = conclusion.",
+      "reviewPrompt": "What word in the argument signals the conclusion?",
+      "xpReward": 10,
+      "badgeFocus": "Argument Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group A for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Identifying assumptions — negation test",
+      "missionStepTitle": "Exercise B: The Negation Test",
+      "coachHook": "Negate each option. If the argument collapses, you found the assumption.",
+      "boardDemo": {
+        "title": "Negation test for assumptions",
+        "steps": [
+          "Read the argument fully",
+          "Take each answer option and negate it",
+          "Check: does negating it make the conclusion impossible?",
+          "The option whose negation destroys the argument is the assumption"
+        ],
+        "teacherLine": "The negation test is 100% reliable. Never try to identify assumptions by 'feeling' — always negate and test."
+      },
+      "readAloudPrompt": "Practice negating: 'Students study more before exams' → negate → 'Students do NOT study more before exams'.",
+      "tryPrompt": "Argument: 'This school has the best teachers. Therefore, its students will score highest in the state exam.' What is the key assumption?",
+      "masteryCheck": "Good teachers are the primary (or a sufficient) factor determining exam scores",
+      "instantFeedbackWin": "Correct! Negate: 'Good teachers are NOT a primary factor.' If that's true, having the best teachers doesn't lead to top scores — argument collapses.",
+      "instantFeedbackRetry": "Here's a trick: Negate 'Good teachers → top scores'. If teachers don't determine scores, the whole argument fails. That's the assumption.",
+      "reviewPrompt": "What happens to an argument when its central assumption is negated?",
+      "xpReward": 12,
+      "badgeFocus": "Assumption Hunter",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group B for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Strengthening arguments",
+      "missionStepTitle": "Exercise C: Build a Stronger Case",
+      "coachHook": "Strengthen = add a fact that makes the conclusion more probable or provides a mechanism.",
+      "boardDemo": {
+        "title": "What strengthens an argument",
+        "steps": [
+          "Identify the conclusion and the gap between premise and conclusion",
+          "A strengthener fills the gap or provides a supporting mechanism",
+          "A strengthener does NOT repeat the premise",
+          "A strengthener does NOT introduce irrelevant information"
+        ],
+        "teacherLine": "The best strengthener directly supports the causal link claimed in the argument."
+      },
+      "readAloudPrompt": "For each option, ask: does this make the conclusion MORE likely to be true?",
+      "tryPrompt": "Argument: 'Students who attend coaching classes score 20% higher on average. The government should fund coaching centres.' Which strengthens this? (A) Coaching is expensive and unaffordable for many. (B) The 20% improvement holds across all income groups and subjects.",
+      "masteryCheck": "B",
+      "instantFeedbackWin": "Exactly right! (B) eliminates a potential objection — that the benefit is limited to certain groups. It makes the policy recommendation stronger. (A) actually raises a concern that could weaken the policy.",
+      "instantFeedbackRetry": "Here's a trick: (A) introduces a counterpoint. (B) expands the evidence supporting the claim universally → strengthens.",
+      "reviewPrompt": "What is the difference between a strengthener and a premise that is already stated?",
+      "xpReward": 12,
+      "badgeFocus": "Argument Strengthener",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group C for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Weakening arguments",
+      "missionStepTitle": "Exercise D: Find the Flaw",
+      "coachHook": "Weaken = break the causal link. Alternate causes are your best weapon.",
+      "boardDemo": {
+        "title": "Techniques to weaken an argument",
+        "steps": [
+          "Provide an alternative cause for the observed effect",
+          "Show the premise is based on a flawed sample or faulty data",
+          "Show the conclusion does not follow from the premises logically",
+          "Identify a confounding variable"
+        ],
+        "teacherLine": "Correlation ≠ causation. Any time an argument jumps from 'A happened and B happened' to 'A caused B', you can weaken it by pointing to alternate causes."
+      },
+      "readAloudPrompt": "Ask: 'Could something else explain the observation?' That's your weakening statement.",
+      "tryPrompt": "Argument: 'Countries with high chocolate consumption have more Nobel Prize winners. Therefore, eating chocolate improves cognitive ability.' Which weakens this argument most? (A) Chocolate is delicious and widely available. (B) High chocolate consumption correlates with national wealth, which also funds better education.",
+      "masteryCheck": "B",
+      "instantFeedbackWin": "Brilliant! (B) introduces a confounding variable — national wealth explains both chocolate consumption AND Nobel Prize rates without any causal link between them. Classic correlation ≠ causation.",
+      "instantFeedbackRetry": "Here's a trick: (B) explains the correlation through a third variable (wealth) without needing chocolate as the cause. That breaks the argument.",
+      "reviewPrompt": "Define a confounding variable and explain how it weakens a causal argument.",
+      "xpReward": 14,
+      "badgeFocus": "Argument Weakener",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group D for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Inference vs overreach",
+      "missionStepTitle": "Exercise E: Infer — Don't Overreach",
+      "coachHook": "A valid inference must be 100% supported by the given facts. If you're guessing, it's an overreach.",
+      "boardDemo": {
+        "title": "Valid inference vs overreach",
+        "steps": [
+          "A valid inference: true in ALL scenarios where the premises are true",
+          "Overreach: true in SOME scenarios but not all",
+          "Test: can I construct a case where the premises are true but the conclusion is false?",
+          "If yes → overreach. If no → valid inference."
+        ],
+        "teacherLine": "The most reliable test for valid inference: try to imagine a counterexample. If you can, it's not a valid inference."
+      },
+      "readAloudPrompt": "For each answer option, try to construct a counterexample. If impossible, it's a valid inference.",
+      "tryPrompt": "Passage: 'No student in Class 8A got below 70% in the test. Riya is in Class 8A.' Which is a valid inference? (A) Riya scored above 70%. (B) Riya is one of the top scorers. (C) Riya scored exactly 70%. (D) Riya's score is at least 70%.",
+      "masteryCheck": "D",
+      "instantFeedbackWin": "Exactly! 'No student got below 70%' means every student scored ≥ 70%. Riya is in the class → Riya scored ≥ 70%. (A) says 'above 70%' — but Riya could be exactly 70%. (D) 'at least 70%' is the precise valid inference.",
+      "instantFeedbackRetry": "Here's a trick: 'Not below 70%' means ≥ 70%. 'Above 70%' excludes exactly 70% — could be wrong. 'At least 70%' = ≥ 70% = exactly what we know.",
+      "reviewPrompt": "Why is 'Riya scored above 70%' not a valid inference if the passage says 'not below 70%'?",
+      "xpReward": 12,
+      "badgeFocus": "Inference Judge",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group E for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Cause and effect analysis",
+      "missionStepTitle": "Exercise F: Cause or Coincidence?",
+      "coachHook": "Just because B follows A doesn't mean A caused B. Prove the causal link!",
+      "boardDemo": {
+        "title": "Cause and effect vs coincidence",
+        "steps": [
+          "Temporal sequence: A happened before B (necessary but not sufficient for causation)",
+          "Correlation: A and B vary together (necessary but not sufficient)",
+          "Mechanism: there is a known process by which A causes B",
+          "Elimination: no other variable explains B"
+        ],
+        "teacherLine": "For a true causal claim, you need all four: sequence, correlation, mechanism, and no better explanation."
+      },
+      "readAloudPrompt": "Say: 'A before B + A correlates with B + known mechanism + no alternate cause = causation.'",
+      "tryPrompt": "Data shows that cities with more ice cream sales also have more drowning deaths. Does ice cream cause drowning? Explain.",
+      "masteryCheck": "No — both are caused by hot weather (confounding variable); no causal mechanism exists",
+      "instantFeedbackWin": "Perfect reasoning! Hot weather causes both more ice cream sales AND more swimming/drowning. Ice cream doesn't cause drowning — there's no mechanism and the correlation is explained by a third variable.",
+      "instantFeedbackRetry": "Here's a trick: What explains both? Hot weather → more swimming → more drowning AND hot weather → more ice cream sales. No mechanism links ice cream directly to drowning.",
+      "reviewPrompt": "List the four requirements for establishing a causal relationship.",
+      "xpReward": 14,
+      "badgeFocus": "Causation Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group F for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Logical paradoxes",
+      "missionStepTitle": "Exercise G: Crack the Paradox",
+      "coachHook": "Paradoxes seem self-contradictory. The resolution is a distinction you haven't made yet.",
+      "boardDemo": {
+        "title": "Resolving logical paradoxes",
+        "steps": [
+          "State the apparent contradiction clearly",
+          "Identify the implicit assumption causing the paradox",
+          "Introduce a distinction or missing fact that resolves it",
+          "Verify: does the contradiction disappear with this new information?"
+        ],
+        "teacherLine": "Most paradoxes dissolve when you realise two terms are being used with slightly different meanings."
+      },
+      "readAloudPrompt": "Identify the two contradictory statements. Then ask: what assumption creates the contradiction?",
+      "tryPrompt": "Paradox: 'A fitness programme promises weight loss for everyone. But studies show 30% of participants actually gained weight.' Resolve the paradox.",
+      "masteryCheck": "The programme may cause weight loss on average, but it is not universally effective — 'everyone' is an overstatement; individual results vary based on diet, metabolism, and compliance",
+      "instantFeedbackWin": "Sharp! The paradox comes from interpreting 'everyone' as absolute. In reality, 'everyone' is a marketing claim, not a statistical guarantee. 30% non-compliance or reverse effects is still consistent with an average weight loss.",
+      "instantFeedbackRetry": "Here's a trick: The word 'everyone' is the faulty assumption. Restate it as 'most people' and the contradiction disappears.",
+      "reviewPrompt": "What is the most common source of logical paradoxes in everyday arguments?",
+      "xpReward": 14,
+      "badgeFocus": "Paradox Resolver",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group G for Critical Reasoning."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Boss challenge — full argument evaluation",
+      "missionStepTitle": "Exercise H: Olympiad Boss — Full Argument",
+      "coachHook": "Four questions about one argument. Every skill you've learned. Maximum focus.",
+      "boardDemo": {
+        "title": "Full argument evaluation protocol",
+        "steps": [
+          "Step 1: Identify premises and conclusion",
+          "Step 2: Find the core assumption (use negation test)",
+          "Step 3: Evaluate each answer as strengthener, weakener, or inference",
+          "Step 4: Check for logical fallacy (converse, correlation, overreach)"
+        ],
+        "teacherLine": "In competitive exams, full argument sets test all four skills together. Solve methodically — don't rush."
+      },
+      "readAloudPrompt": "Label each answer option before deciding: S=Strengthen, W=Weaken, I=Inference, A=Assumption.",
+      "tryPrompt": "Argument: 'Students who read fiction books score higher on empathy tests. To improve students' empathy, schools should assign fiction reading as homework.' Q1: What is the conclusion? Q2: What is the main assumption? Q3: Which weakens it: (a) many students already read fiction voluntarily, or (b) the correlation exists only for literary fiction, not genre fiction? Q4: Is this a valid inference: 'Non-fiction reading does not improve empathy'?",
+      "masteryCheck": "Q1: Schools should assign fiction reading. Q2: Reading fiction in school (as homework) will produce the same empathy improvement as voluntary fiction reading. Q3: (b) weakens more. Q4: No — it is an overreach; the passage only talks about fiction, not non-fiction.",
+      "instantFeedbackWin": "Outstanding critical analysis! Q1 ✓. Q2: If school-assigned reading has a different effect than self-chosen reading, the policy fails — core assumption. Q3: (b) is a direct attack on the evidence (not all fiction works); (a) is interesting but doesn't break the argument. Q4: The passage doesn't mention non-fiction — inferring it doesn't improve empathy goes beyond the data.",
+      "instantFeedbackRetry": "Here's a trick: Q2 — negate 'assigned fiction works as well as chosen fiction'. Argument collapses. Q4 — never infer about what wasn't mentioned. Absence of evidence ≠ evidence of absence.",
+      "reviewPrompt": "State the logical principle: 'Absence of evidence is not evidence of absence' — how does it apply to inference questions?",
+      "xpReward": 18,
+      "badgeFocus": "Logic Advocate",
+      "visual": {
+        "kind": "svg",
+        "asset": "syllogism.svg",
+        "title": "Critical Reasoning",
+        "caption": "Group H for Critical Reasoning."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "syllogism",
+      "kind": "svg",
+      "asset": "syllogism.svg",
+      "title": "Critical Reasoning",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

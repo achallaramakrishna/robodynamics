@@ -1,0 +1,513 @@
+{
+  "chapterCode": "AR_G4_L8_CALENDAR",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Days and Calendar",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 8: Days and Calendar",
+  "estimatedMinutes": 12,
+  "subtopics": [
+    "Days of the week and their order",
+    "Months of the year and their order",
+    "Number of days in each month",
+    "What day comes before or after?",
+    "Counting forward and backward on the calendar",
+    "Simple date puzzles — finding a day after N days"
+  ],
+  "learningGoals": [
+    "Name the seven days and twelve months in correct order.",
+    "Find the day that comes a given number of days before or after a known day.",
+    "Solve simple date puzzles using a calendar or day-number counting."
+  ],
+  "coreIdeas": [
+    "Days cycle every 7: after Sunday comes Monday again.",
+    "Months cycle every 12: after December comes January again.",
+    "To find a day N days later, count forward; use the 7-day cycle to avoid counting one by one."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Today is Tuesday. What day will it be after 5 days?",
+      "solution": "Count forward 5 days from Tuesday: Wed, Thu, Fri, Sat, Sun. The answer is Sunday.",
+      "concept": "Counting forward on the week cycle"
+    },
+    {
+      "id": "WE2",
+      "problem": "Today is Friday. What day was it 3 days ago?",
+      "solution": "Count backward 3 days from Friday: Thu, Wed, Tue. The answer is Tuesday.",
+      "concept": "Counting backward on the week cycle"
+    },
+    {
+      "id": "WE3",
+      "problem": "If 1st January is a Monday, what day is 8th January?",
+      "solution": "8th January is 7 days after 1st January. 7 days is exactly one week, so 8th January is also Monday.",
+      "concept": "7-day cycle — same day one week later"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach opens Days and Calendar by asking: 'What day is 3 days after Monday?' and lets the learner count on their fingers. Spark then teaches the 7-day cycle trick to avoid finger-counting for large jumps, and reviews all 12 months before the exercises start.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers in Groups A–B, draw a circular day clock (Mon–Sun) and have the learner trace the counting before continuing."
+    },
+    "mission": {
+      "missionTitle": "Master the Calendar",
+      "missionPromise": "By the end, you will know all 7 days, all 12 months, and solve day-counting puzzles in your head without a real calendar!",
+      "successCelebration": "Award a badge pulse and coach cheer after every correct group. At lesson end, show 'Calendar Whiz' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a real-life calendar hook (birthday, holiday, school event).",
+      "Coach writes a worked day-counting example on the board.",
+      "Coach reads the practice question.",
+      "Student counts forward or backward and names the day.",
+      "Instant feedback traces the count on the day cycle.",
+      "Review question confirms mastery before next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one Calendar badge.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach by tracing the day cycle on the board.",
+      "practiceStyle": "Offer a question with a smaller jump (1 or 2 days).",
+      "masteryRule": "Advance only after a correct day name is given.",
+      "revisitRule": "Any group with two errors returns at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L8_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, time traveller! Welcome to Days and Calendar — the chapter about navigating time! Every single day you use the calendar without thinking about it. But did you know there are sneaky patterns hiding inside it? There are only 7 days in a week and they repeat forever in the same order. There are 12 months in a year. Learn the patterns and you can find any day in the past or future — no actual calendar needed! Let us jump in!",
+        "boardAction": "Write the 7 days in a circle (like a clock): Mon, Tue, Wed, Thu, Fri, Sat, Sun. Draw an arrow showing the cycle. Below, write all 12 months in order 1 through 12.",
+        "checkpointPrompt": "Warm-up: what day comes after Friday?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Saturday.",
+        "fallbackHint": "The days in order are: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. After Friday comes Saturday!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l8_title",
+            "x": "40",
+            "y": "30",
+            "text": "Days and Calendar — Chapter 8",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l8_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l8_days",
+            "x": "60",
+            "y": "80",
+            "text": "7 Days:  Mon  Tue  Wed  Thu  Fri  Sat  Sun  (then Mon again!)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "l8_months1",
+            "x": "60",
+            "y": "115",
+            "text": "12 Months: Jan Feb Mar Apr May Jun",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l8_months2",
+            "x": "60",
+            "y": "140",
+            "text": "           Jul Aug Sep Oct Nov Dec (then Jan again!)",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.9,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Days and Calendar",
+          "caption": "Screenplay beat for Days and Calendar."
+        }
+      },
+      {
+        "beatId": "AR_G4_L8_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me count forward on the day cycle! Today is Wednesday. What day is it 4 days from now? I count forward from Wednesday: Thursday (1), Friday (2), Saturday (3), Sunday (4). The answer is Sunday! Pro trick: if the jump is 7 or more days, divide by 7. The remainder tells you how many extra days to count. For example, 10 days = 7 + 3. So count 3 days forward from Wednesday: Thu, Fri, SAT. Answer: Saturday!",
+        "boardAction": "Write the day cycle. Start at Wednesday, draw 4 arrows forward: Thu, Fri, Sat, Sun. Circle Sunday. Then show the 10-day trick: 10 ÷ 7 = 1 remainder 3. Count 3 days from Wednesday → Saturday.",
+        "checkpointPrompt": "Your turn: today is Monday. What day will it be after 6 days?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Sunday — Mon+6: Tue, Wed, Thu, Fri, Sat, Sun.",
+        "fallbackHint": "Count 6 days forward from Monday: Tue (1), Wed (2), Thu (3), Fri (4), Sat (5), Sun (6). Answer: Sunday!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_start",
+            "x": "60",
+            "y": "55",
+            "text": "Today = Wednesday. Count 4 days forward:",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_count",
+            "x": "60",
+            "y": "90",
+            "text": "Wed → Thu(1) → Fri(2) → Sat(3) → Sun(4)",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 0.7,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "60",
+            "y": "130",
+            "text": "Answer: SUNDAY",
+            "color": "#dc2626",
+            "size": 15,
+            "delaySec": 1.4,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Days and Calendar",
+          "caption": "Screenplay beat for Days and Calendar."
+        }
+      },
+      {
+        "beatId": "AR_G4_L8_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have the day cycle, the 7-day shortcut, and the month order. Work through Groups A to F. For each question, start by writing the day cycle on your board. Count forward or backward carefully. And remember: every 7 days, you are back to the same day!",
+        "boardAction": "Show the day cycle as a reference strip: Mon(1) Tue(2) Wed(3) Thu(4) Fri(5) Sat(6) Sun(7). Show months with number of days: Jan=31, Feb=28/29, Mar=31, Apr=30, May=31, Jun=30, Jul=31, Aug=31, Sep=30, Oct=31, Nov=30, Dec=31.",
+        "checkpointPrompt": "Quick check: how many days are in the month of June?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "30 days.",
+        "fallbackHint": "A helpful trick: use your knuckles! Knuckle = 31 days, valley between knuckles = 30 days (or 28/29 for Feb). June falls on a valley — so 30 days.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Calendar Reference",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_days",
+            "x": "60",
+            "y": "65",
+            "text": "Days: Mon Tue Wed Thu Fri Sat Sun (7-day cycle)",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_shortcut",
+            "x": "60",
+            "y": "90",
+            "text": "Shortcut: N days later → use remainder of N ÷ 7",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 1,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_months",
+            "x": "60",
+            "y": "115",
+            "text": "31 days: Jan Mar May Jul Aug Oct Dec",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_months2",
+            "x": "60",
+            "y": "138",
+            "text": "30 days: Apr Jun Sep Nov   |  Feb = 28 (or 29 leap year)",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.9,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Days and Calendar",
+          "caption": "Screenplay beat for Days and Calendar."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Days of the week and their order",
+      "missionStepTitle": "Exercise A: Day Order",
+      "coachHook": "Let's figure this out together! The 7 days go round and round in the same order every week. Can you recite them forwards AND backwards?",
+      "boardDemo": {
+        "title": "Days of the Week — Forward and Back",
+        "steps": [
+          "Forward: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
+          "Backward: Sunday, Saturday, Friday, Thursday, Wednesday, Tuesday, Monday",
+          "After Sunday → Monday (the cycle repeats!)"
+        ],
+        "teacherLine": "Say the days out loud: Mon-Tue-Wed-Thu-Fri-Sat-Sun. Now say them backwards: Sun-Sat-Fri-Thu-Wed-Tue-Mon. Both directions are useful for calendar puzzles!"
+      },
+      "readAloudPrompt": "Name the day that comes exactly in the middle of the week (4th day counting from Monday as day 1).",
+      "tryPrompt": "Now you try: what is the day that comes two days before Sunday?",
+      "masteryCheck": "Friday",
+      "instantFeedbackWin": "Correct! Going back 2 days from Sunday: Saturday, Friday. Two days before Sunday is Friday!",
+      "instantFeedbackRetry": "Here's a trick: count backwards from Sunday. One day before Sunday = Saturday. Two days before Sunday = Friday.",
+      "reviewPrompt": "Quick: what day comes 3 days after Thursday?",
+      "xpReward": 10,
+      "badgeFocus": "Day Order Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Days and Calendar",
+        "caption": "Group A for Days and Calendar."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Months of the year and their order",
+      "missionStepTitle": "Exercise B: Month Order",
+      "coachHook": "Let's figure this out together! There are 12 months — from January to December. Let us lock their order in your memory!",
+      "boardDemo": {
+        "title": "12 Months in Order",
+        "steps": [
+          "1=January, 2=February, 3=March, 4=April, 5=May, 6=June",
+          "7=July, 8=August, 9=September, 10=October, 11=November, 12=December",
+          "After December comes January again (new year!)"
+        ],
+        "teacherLine": "Months have numbers too! January = 1, February = 2, and so on. If someone says 'the 9th month', you can quickly say September. March is month 3, October is month 10."
+      },
+      "readAloudPrompt": "Which month comes right after June? And which month comes just before October?",
+      "tryPrompt": "Your turn: what is the 5th month of the year?",
+      "masteryCheck": "May",
+      "instantFeedbackWin": "Yes! Jan(1), Feb(2), Mar(3), Apr(4), May(5). The 5th month is May!",
+      "instantFeedbackRetry": "Here's a trick: count the months: Jan=1, Feb=2, Mar=3, Apr=4, May=5. May is in position 5 — it is the 5th month!",
+      "reviewPrompt": "Quick: what is the 10th month of the year?",
+      "xpReward": 10,
+      "badgeFocus": "Month Order Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Days and Calendar",
+        "caption": "Group B for Days and Calendar."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Number of days in each month",
+      "missionStepTitle": "Exercise C: Days in Each Month",
+      "coachHook": "Let's figure this out together! Some months have 31 days, some have 30, and February has only 28 (sometimes 29)! Learn the pattern using your knuckles!",
+      "boardDemo": {
+        "title": "Days in Each Month — Knuckle Trick",
+        "steps": [
+          "Make a fist. Starting from the little-finger knuckle, count across.",
+          "Knuckle = 31 days. Valley between knuckles = 30 days (Feb = 28).",
+          "Knuckle 1 = Jan(31), Valley = Feb(28), Knuckle 2 = Mar(31), Valley = Apr(30) ...",
+          "31-day months: Jan, Mar, May, Jul, Aug, Oct, Dec",
+          "30-day months: Apr, Jun, Sep, Nov",
+          "February = 28 days (29 in a leap year)"
+        ],
+        "teacherLine": "The knuckle trick works perfectly! High knuckle = 31 days. Low valley = 30 days (except Feb = 28). Try it on your fist right now!"
+      },
+      "readAloudPrompt": "How many days are in the month of September?",
+      "tryPrompt": "Your turn: a school event is planned for the last day of April. What date is it?",
+      "masteryCheck": "30th April",
+      "instantFeedbackWin": "Correct! April has 30 days. The last day of April is the 30th. Knuckle trick works!",
+      "instantFeedbackRetry": "Here's a trick: April falls on a valley in the knuckle trick — that means 30 days. So the last day of April is 30th.",
+      "reviewPrompt": "Quick: how many days are in December?",
+      "xpReward": 12,
+      "badgeFocus": "Month-Days Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Days and Calendar",
+        "caption": "Group C for Days and Calendar."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Counting forward on the calendar",
+      "missionStepTitle": "Exercise D: Count Forward on the Week",
+      "coachHook": "Let's figure this out together! Count hop by hop through the days — but use the 7-day shortcut for big jumps!",
+      "boardDemo": {
+        "title": "Count Forward — Step by Step",
+        "steps": [
+          "Today = Tuesday",
+          "What day is it in 3 days?",
+          "Count: Wed(1), Thu(2), Fri(3)",
+          "Answer: Friday",
+          "Pro shortcut for 10 days: 10 ÷ 7 = 1 remainder 3. Count 3 days from Tuesday: Wed, Thu, Fri = Friday!"
+        ],
+        "teacherLine": "For small jumps, just count. For big jumps (more than 7 days), divide by 7 and use only the remainder. The same answer, much faster!"
+      },
+      "readAloudPrompt": "Today is Thursday. What day is it 4 days from now?",
+      "tryPrompt": "Your turn: today is Monday. What day will it be 9 days from today?",
+      "masteryCheck": "Wednesday — 9 ÷ 7 = 1 remainder 2. Count 2 days from Monday: Tue, Wed.",
+      "instantFeedbackWin": "Brilliant! 9 days = 7 + 2. Skip the full week, count 2 more from Monday: Tuesday, Wednesday. Answer: Wednesday!",
+      "instantFeedbackRetry": "Here's a trick: 9 ÷ 7 = 1 full week (skip it) remainder 2. Count 2 days from Monday: Mon → Tue(1) → Wed(2). Answer: Wednesday.",
+      "reviewPrompt": "Quick: today is Saturday. What day will it be in 5 days?",
+      "xpReward": 12,
+      "badgeFocus": "Forward Day Counter",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Days and Calendar",
+        "caption": "Group D for Days and Calendar."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Counting backward on the calendar",
+      "missionStepTitle": "Exercise E: Count Backward on the Week",
+      "coachHook": "Let's figure this out together! Going backwards is just like going forwards — but in reverse. Count backwards through the day order!",
+      "boardDemo": {
+        "title": "Count Backward — Go Back in Time!",
+        "steps": [
+          "Today = Friday",
+          "What day was it 3 days ago?",
+          "Count backwards: Thu(1 day ago), Wed(2 days ago), Tue(3 days ago)",
+          "Answer: Tuesday"
+        ],
+        "teacherLine": "Going back means going in reverse order through the days: Fri → Thu → Wed → Tue → Mon → Sun → Sat. Three days back from Friday is Tuesday!"
+      },
+      "readAloudPrompt": "Today is Wednesday. What day was it 2 days ago?",
+      "tryPrompt": "Your turn: today is Sunday. What day was it 5 days ago?",
+      "masteryCheck": "Tuesday — Sun → Sat(1) → Fri(2) → Thu(3) → Wed(4) → Tue(5)",
+      "instantFeedbackWin": "Correct! Count backwards 5 days from Sunday: Sat, Fri, Thu, Wed, Tue. Five days ago it was Tuesday!",
+      "instantFeedbackRetry": "Here's a trick: go backwards through the days: Sun → Sat → Fri → Thu → Wed → Tue. Count those 5 steps. The 5th step back is Tuesday.",
+      "reviewPrompt": "Quick: today is Friday. What day was it 4 days ago?",
+      "xpReward": 12,
+      "badgeFocus": "Backward Day Counter",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Days and Calendar",
+        "caption": "Group E for Days and Calendar."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Simple date puzzles — finding a day after N days",
+      "missionStepTitle": "Exercise F: Date Puzzles",
+      "coachHook": "Let's figure this out together — the full challenge! You are given a date and a day. Find what day another date falls on by counting carefully!",
+      "boardDemo": {
+        "title": "Date Puzzle — Use the 7-Day Cycle",
+        "steps": [
+          "1st March is a Monday. What day is 15th March?",
+          "15th − 1st = 14 days later",
+          "14 ÷ 7 = 2 (exactly 2 weeks, remainder 0)",
+          "0 extra days → same day as Monday",
+          "Answer: 15th March is a Monday"
+        ],
+        "teacherLine": "Find the number of days between the two dates. Divide by 7. If remainder is 0, same day of the week. Otherwise count the remainder days forward from the start day."
+      },
+      "readAloudPrompt": "1st April is a Thursday. What day is 8th April?",
+      "tryPrompt": "Your turn: if 1st June is a Wednesday, what day is 10th June?",
+      "masteryCheck": "Friday — 10 − 1 = 9 days. 9 ÷ 7 = 1 remainder 2. Count 2 days from Wednesday: Thu, Fri.",
+      "instantFeedbackWin": "Brilliant! 9 days = 7+2. One full week lands on Wednesday again, then 2 more: Thu, Fri. 10th June is Friday!",
+      "instantFeedbackRetry": "Here's a trick: 10th June is 9 days after 1st June. Divide 9 by 7: remainder is 2. Count 2 days forward from Wednesday: Thursday (1), Friday (2). Answer: Friday.",
+      "reviewPrompt": "Final: 1st January is a Sunday. What day is 20th January?",
+      "xpReward": 16,
+      "badgeFocus": "Calendar Whiz",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Days and Calendar",
+        "caption": "Group F for Days and Calendar."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "clock_face",
+      "kind": "svg",
+      "asset": "clock_face.svg",
+      "title": "Days and Calendar",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

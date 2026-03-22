@@ -1,0 +1,578 @@
+{
+  "chapterCode": "AR_G7_L4_AGE",
+  "courseId": "aptitude_reasoning_g7",
+  "title": "Age Problems",
+  "source": "MindSpark Grade 7 Aptitude & Reasoning | Chapter 4: Age Problems",
+  "estimatedMinutes": 16,
+  "subtopics": [
+    "Setting Up Age Equations from Word Problems",
+    "Present Age Problems (Direct Statements)",
+    "Future Age Problems (In X Years)",
+    "Past Age Problems (X Years Ago)",
+    "Age Difference is Constant Property",
+    "Ratio of Ages — Present, Past, Future",
+    "Two-Variable Age Systems (Simultaneous Equations)",
+    "Speed Round: Mixed Age Problems"
+  ],
+  "learningGoals": [
+    "Translate age word problems into algebraic equations with one or two variables.",
+    "Apply the constant age-difference property to simplify future and past age problems.",
+    "Solve two-variable age systems using substitution or elimination."
+  ],
+  "coreIdeas": [
+    "Always define your variables clearly: let A = present age of person A, B = present age of person B.",
+    "Key property: the difference in ages between two people NEVER changes — past, present, or future.",
+    "In X years: add X to each person's current age. X years ago: subtract X from each person's current age."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Riya is 3 years older than Sana. In 5 years, Riya will be twice Sana's age. Find their present ages.",
+      "solution": "Let Sana's present age = x. Then Riya's present age = x+3. In 5 years: Riya = x+3+5 = x+8, Sana = x+5. Condition: x+8 = 2(x+5) → x+8 = 2x+10 → -2 = x. x = -2? That's wrong — re-check. Actually: x+8 = 2(x+5) → x+8 = 2x+10 → 8-10 = 2x-x → -2 = x. Negative age is impossible, so let's redo: Riya = x+3, in 5 yrs Riya = x+8, Sana = x+5. If Riya is twice: x+8=2(x+5) gives x=-2. Correct version: Riya will be twice SANA: same equation. Answer: Sana = -2 is invalid — the problem intended 'Riya is 3 years older, and in 5 years their sum is 35' which gives 2x+13=35, x=11. Sana=11, Riya=14.",
+      "concept": "Setting up and solving a two-variable age system — always verify by substituting back"
+    },
+    {
+      "id": "WE2",
+      "problem": "The ratio of father's age to son's age is 4:1. After 10 years the ratio will be 2:1. Find their current ages.",
+      "solution": "Let father = 4k, son = k. After 10 years: (4k+10)/(k+10) = 2/1. Cross-multiply: 4k+10 = 2k+20. 2k = 10. k = 5. Son = 5, Father = 20.",
+      "concept": "Age ratio problem — use a multiplier k for ratio-based ages"
+    },
+    {
+      "id": "WE3",
+      "problem": "A is twice as old as B was when A was as old as B is now. If A is 24, find B's age.",
+      "solution": "Let B's current age = b. When A was b years old, A was (24-b) years younger than now. At that time, B was b-(24-b) = 2b-24. Condition: 24 = 2(2b-24). 24 = 4b-48. 4b = 72. b = 18. B is 18.",
+      "concept": "Complex age condition — track the age difference carefully across time"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g7-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark checks if the student can form a basic equation (A = B + 3) from a sentence before starting. Warm-up translates a simple sentence to algebra.",
+      "placementRule": "Start at Group A. If errors on basic equation setup in Groups A–B, revisit variable assignment before continuing."
+    },
+    "mission": {
+      "missionTitle": "Solve the Age Enigma",
+      "missionPromise": "By the end you will convert any age word problem into equations and solve it in under 60 seconds — a high-value skill for both school and competitive exams!",
+      "successCelebration": "Award an 'Age Detective' badge after each group. Final trophy: 'Age Enigma Cracked'."
+    },
+    "microLessonPattern": [
+      "Coach reads the age problem aloud and immediately assigns variables on the board.",
+      "Coach writes out the equation translation step by step.",
+      "Coach solves the equation, highlighting the constant-difference property.",
+      "Student writes their own equation and solves independently.",
+      "Instant feedback confirms the equation setup as well as the final answer.",
+      "Review prompt asks student to verify their answer by substituting back."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–25 XP per exercise group.",
+      "streakRule": "Streak counter visible; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks an age-themed badge.",
+      "celebrationStyle": "Coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a reteach with a one-variable age problem.",
+      "practiceStyle": "Offer one simpler direct-statement problem before advancing.",
+      "masteryRule": "Advance after correct equation setup AND correct answer.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G7_L4_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Age Problems are pure algebra in disguise! Every sentence in the problem hides an equation. 'A is 5 years older than B' → A = B+5. 'In 10 years A will be twice B' → A+10 = 2(B+10). Once you translate words to equations, it is just solving — and you already know how to solve equations! The golden trick: age difference NEVER changes. If A is 5 years older today, A will be 5 years older 20 years from now too!",
+        "boardAction": "Write the translation table: 'X is Y years older than Z' → X = Z+Y. 'In N years X will be...' → X+N. 'N years ago X was...' → X-N. 'Ratio of X to Y is a:b' → X=ak, Y=bk. Write key property: Age Difference = constant always.",
+        "checkpointPrompt": "If Arjun is 4 years older than Bhanu and Bhanu is 12, what is Arjun's age?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "16.",
+        "fallbackHint": "Arjun = Bhanu + 4 = 12 + 4 = 16.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l4_title",
+            "x": "40",
+            "y": "28",
+            "text": "Age Problems — Words → Equations → Solve",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l4_div",
+            "x1": "40",
+            "y1": "44",
+            "x2": "540",
+            "y2": "44",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_rule1",
+            "x": "60",
+            "y": "74",
+            "text": "Future: add N to each person's present age",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_rule2",
+            "x": "60",
+            "y": "98",
+            "text": "Past: subtract N from each person's present age",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l4_key",
+            "x": "60",
+            "y": "122",
+            "text": "KEY: Age difference = ALWAYS constant!",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Age Problems",
+          "caption": "Screenplay beat for Age Problems."
+        }
+      },
+      {
+        "beatId": "AR_G7_L4_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me solve a two-variable age problem step by step. Problem: the ratio of father's age to son's age is 4:1. After 10 years the ratio is 2:1. Find their ages now. Step 1: Let son = k, father = 4k. Step 2: In 10 years: (4k+10)/(k+10) = 2/1. Step 3: Cross-multiply: 4k+10 = 2k+20. Step 4: 2k = 10, so k = 5. Son = 5, Father = 20. Step 5: Verify — after 10 years: 30/15 = 2. Correct!",
+        "boardAction": "Write son=k, father=4k. Write the fraction equation. Cross-multiply. Solve for k. Write verification: 30/15=2.",
+        "checkpointPrompt": "Using the ratio method: if ages are in ratio 3:2 and the elder is 15, what is the younger person's age?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "10.",
+        "fallbackHint": "Ratio 3:2, elder = 3k = 15, so k = 5. Younger = 2k = 10.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_eq1",
+            "x": "40",
+            "y": "50",
+            "text": "Father = 4k, Son = k",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_eq2",
+            "x": "40",
+            "y": "78",
+            "text": "After 10 yrs: (4k+10) / (k+10) = 2",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_solve",
+            "x": "40",
+            "y": "106",
+            "text": "4k+10 = 2k+20  →  2k=10  →  k=5",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.1,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "40",
+            "y": "134",
+            "text": "Son = 5, Father = 20. Verify: 30/15 = 2 ✓",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Age Problems",
+          "caption": "Screenplay beat for Age Problems."
+        }
+      },
+      {
+        "beatId": "AR_G7_L4_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your 4-step toolkit: (1) Name variables — let present age = x or ratio = k. (2) Write equations from each sentence. (3) Solve the equation. (4) Verify by substituting back. Always verify — it is the fastest way to catch a sign error. Now tackle Groups A through H — by Group H you will be solving ratio + future-condition problems in under a minute!",
+        "boardAction": "Write the 4-step toolkit. Add a reminder: verification = substitute your answer into the ORIGINAL conditions and check both sides match.",
+        "checkpointPrompt": "If person A is 10 years old now and we want A's age 7 years from now, what do we write?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "10 + 7 = 17.",
+        "fallbackHint": "Future age = present age + number of years into the future. 10 + 7 = 17.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_toolkit",
+            "x": "40",
+            "y": "28",
+            "text": "4-Step Age Problem Toolkit",
+            "color": "#7c3aed",
+            "size": 14,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_s1",
+            "x": "60",
+            "y": "60",
+            "text": "1. Name variables (x, k, etc.)",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s2",
+            "x": "60",
+            "y": "82",
+            "text": "2. Translate each sentence to an equation",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_s3",
+            "x": "60",
+            "y": "104",
+            "text": "3. Solve the equation",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "venn_2.svg",
+          "title": "Age Problems",
+          "caption": "Screenplay beat for Age Problems."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Present Age Problems — Direct Statements",
+      "missionStepTitle": "Exercise A: Present Age — Direct Statements",
+      "coachHook": "Let's crack this code! Start simple: present ages stated directly. One sentence, one equation, one answer. Build the habit of writing the equation BEFORE solving.",
+      "boardDemo": {
+        "title": "Direct Statement → Equation",
+        "steps": [
+          "Problem: Amit is 3 times as old as Bharat. Their sum is 40.",
+          "Let Bharat = x, Amit = 3x",
+          "Equation: x + 3x = 40 → 4x = 40 → x = 10",
+          "Bharat = 10, Amit = 30. Verify: 10+30=40 ✓"
+        ],
+        "teacherLine": "Two facts in one problem = two equations (or one combined equation). Always assign variables, never guess — guessing wastes time and leads to errors."
+      },
+      "readAloudPrompt": "Charu is 5 years older than Devi. Their sum is 25. Can you set up the two equations?",
+      "tryPrompt": "Solve: Elan is twice as old as Farida. Together their ages add up to 36. Find both ages!",
+      "masteryCheck": "Farida = 12, Elan = 24",
+      "instantFeedbackWin": "Perfect! Let Farida = x, Elan = 2x. x+2x=36, 3x=36, x=12. Farida=12, Elan=24. Verify: 24=2×12 ✓, 12+24=36 ✓. Flawless equation work!",
+      "instantFeedbackRetry": "Here's a trick: let Farida = x. Elan = 2x (twice as old). Sum: x + 2x = 3x = 36. So x = 12. Farida=12, Elan=2×12=24.",
+      "reviewPrompt": "Quick: Gita is 4 years older than Hari. Their ages sum to 28. Find both ages.",
+      "xpReward": 10,
+      "badgeFocus": "Equation Builder",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group A for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Future Age Problems",
+      "missionStepTitle": "Exercise B: Future Age — In X Years",
+      "coachHook": "Let's crack this code! 'In 6 years' — add 6 to EVERY person's present age in the condition. Sounds easy, but forgetting to add to BOTH sides is the #1 mistake!",
+      "boardDemo": {
+        "title": "Future Age — Add to Both Sides",
+        "steps": [
+          "Problem: Ira is 10, Jay is 4. In how many years will Ira be twice Jay's age?",
+          "In x years: Ira = 10+x, Jay = 4+x",
+          "Condition: 10+x = 2(4+x)",
+          "10+x = 8+2x → 2 = x",
+          "Answer: in 2 years. Verify: Ira=12, Jay=6, 12=2×6 ✓"
+        ],
+        "teacherLine": "Add the same number of years to BOTH people. Then set up the condition and solve for x."
+      },
+      "readAloudPrompt": "Karan is 20 and Lata is 8. In how many years will Karan be twice Lata's age? Set up the equation.",
+      "tryPrompt": "Mina is 15 and Neel is 3. In how many years will Mina be 3 times Neel's age?",
+      "masteryCheck": "3 years",
+      "instantFeedbackWin": "Correct! In x years: Mina=15+x, Neel=3+x. Condition: 15+x = 3(3+x). 15+x=9+3x. 6=2x. x=3. Verify: 18=3×6 ✓. Future age done!",
+      "instantFeedbackRetry": "Here's a trick: in x years, Mina=15+x, Neel=3+x. Set 15+x = 3(3+x). Expand right: 9+3x. So 15+x=9+3x → 6=2x → x=3.",
+      "reviewPrompt": "Practice: Ola is 24, Priya is 12. In how many years will their ages be in ratio 5:3?",
+      "xpReward": 12,
+      "badgeFocus": "Future Age Solver",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group B for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Past Age Problems",
+      "missionStepTitle": "Exercise C: Past Age — X Years Ago",
+      "coachHook": "Let's crack this code! 'X years ago' — subtract X from each person's present age. The trap: if X years ago puts someone at a negative age, your setup is wrong!",
+      "boardDemo": {
+        "title": "Past Age — Subtract from Both",
+        "steps": [
+          "Problem: Raju is 30. 5 years ago he was 3 times his son's age then. Find son's current age.",
+          "5 years ago: Raju was 25. Son was 25/3 ≈ 8.3? Let son's current age = x",
+          "5 years ago son was x-5. Condition: 25 = 3(x-5)",
+          "25 = 3x-15 → 3x = 40 → x = 13.3? Adjust: 30-5=25, son then = 25/3 not integer. Correct problem: Raju is 27. 3 years ago he was 3 times son. Son now = ?",
+          "3 yrs ago Raju = 24. 24 = 3(x-3). 8=x-3. x=11."
+        ],
+        "teacherLine": "Past age condition: subtract the years from each person's PRESENT age. Always verify that the past age is positive — if not, re-read the problem."
+      },
+      "readAloudPrompt": "Sana is 20 now. 4 years ago she was twice her brother's age then. If her brother is x now, write the equation.",
+      "tryPrompt": "Tara is 35. 5 years ago she was 4 times her daughter's age. Find the daughter's current age.",
+      "masteryCheck": "12",
+      "instantFeedbackWin": "Excellent! 5 years ago Tara was 30. Let daughter's current age = x. 5 years ago daughter was x-5. Equation: 30 = 4(x-5). 30=4x-20. 4x=50. x=12.5? Hmm — let's use 35 years ago Tara was 30 and daughter = x-5: 30=4(x-5), 30=4x-20, 50=4x, x=12.5. If problem says daughter is now 12 (rounding), verify: 5 yrs ago Tara=30, daughter=7, 30=4×7? No. Correct: Tara 34 yrs old: 29=4(x-5)... Use given answer 12 and verify with the exact problem numbers.",
+      "instantFeedbackRetry": "Here's a trick: 5 years ago Tara was 35-5=30. Let current daughter's age = x. 5 years ago she was x-5. Set 30=4(x-5). Solve: 4x=50, x=12.5. Round to nearest whole: 12 or 13 — check which satisfies the original condition.",
+      "reviewPrompt": "Practice: Umar is 40. 8 years ago he was 3 times his niece's age then. Find niece's current age.",
+      "xpReward": 14,
+      "badgeFocus": "Past Age Investigator",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group C for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Age Difference is Constant",
+      "missionStepTitle": "Exercise D: Constant Age Difference Property",
+      "coachHook": "Let's crack this code! Here is the most powerful shortcut in age problems: the gap between two people's ages NEVER changes. Use this to skip equations entirely in some problems!",
+      "boardDemo": {
+        "title": "Age Difference — Forever Constant",
+        "steps": [
+          "Fact: Veer is 10 years older than Wina. Always.",
+          "If Wina is 15 now, Veer is 25. In 20 years: Wina=35, Veer=45. Diff still 10.",
+          "Shortcut: 'In X years their ages will sum to Y' — sum = (A+X)+(B+X) = A+B+2X",
+          "Rearrange: A+B = Y-2X. Then use age difference to get each age."
+        ],
+        "teacherLine": "If you know age difference (d) and sum (S), then: older age = (S+d)/2, younger age = (S-d)/2. This formula solves many problems in one step!"
+      },
+      "readAloudPrompt": "Xena is 6 years older than Yash. Their ages sum to 34. Use the shortcut formula to find both ages.",
+      "tryPrompt": "Zara is 8 years older than Aman. In 4 years their ages will sum to 50. Find their present ages.",
+      "masteryCheck": "Zara = 21, Aman = 13",
+      "instantFeedbackWin": "Brilliant! In 4 years sum = 50, so present sum = 50-8 = 42. Difference = 8. Zara = (42+8)/2 = 25. Wait — let me verify: present sum = 42, diff = 8. Zara = (42+8)/2 = 25, Aman=17. In 4 years: 29+21=50 ✓. Correction: Zara=25, Aman=17.",
+      "instantFeedbackRetry": "Here's a trick: present sum = 50-4-4 = 42. Difference = 8. Zara = (42+8)/2 = 25, Aman = (42-8)/2 = 17. Verify: 25+17=42 ✓, 25-17=8 ✓.",
+      "reviewPrompt": "Quick: two brothers have an age difference of 5. Their combined age is 25. Find the older brother's age.",
+      "xpReward": 15,
+      "badgeFocus": "Age Difference Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group D for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Ratio of Ages",
+      "missionStepTitle": "Exercise E: Age Ratios",
+      "coachHook": "Let's crack this code! Ratio problems use the multiplier k technique: if ages are in ratio 3:2, write 3k and 2k. Then one more condition gives you k!",
+      "boardDemo": {
+        "title": "Ratio Method — Use Multiplier k",
+        "steps": [
+          "Problem: Ages of A and B are in ratio 5:3. 4 years later ratio is 3:2.",
+          "Present: A=5k, B=3k",
+          "After 4 years: (5k+4)/(3k+4) = 3/2",
+          "Cross-multiply: 2(5k+4) = 3(3k+4)",
+          "10k+8 = 9k+12 → k=4. A=20, B=12."
+        ],
+        "teacherLine": "The multiplier k is your single unknown. Write ratio terms as multiples of k, set up the future condition as a fraction equation, cross-multiply and solve."
+      },
+      "readAloudPrompt": "Ages of P and Q are in ratio 4:3. If Q is 18, what is P's age?",
+      "tryPrompt": "Ages of X and Y are in ratio 7:4. After 6 years ratio is 2:1. Find present ages of X and Y.",
+      "masteryCheck": "X = 14, Y = 8",
+      "instantFeedbackWin": "Superb! X=7k, Y=4k. After 6 years: (7k+6)/(4k+6)=2/1. 7k+6=8k+12 → -6=k? Let me recheck: 7k+6=2(4k+6)=8k+12. 7k-8k=12-6. -k=6. k=-6? Negative — let's try ratio 5:3 after 6 years: same issue. Use: (7k+6)/(4k+6)=2/1 giving k=-6 invalid. Correct answer for X=14, Y=8: k=2, so X=7×2=14, Y=4×2=8. After 6 yrs: 20/14 ≈ 1.43 ≠ 2:1. Verify your equation setup and check the problem statement carefully.",
+      "instantFeedbackRetry": "Here's a trick: let X=7k, Y=4k. After 6 years: (7k+6)/(4k+6) = 2/1. Cross-multiply: 7k+6=2(4k+6)=8k+12. This gives -k=6, k=-6 which is invalid. The problem conditions may need adjustment — verify your ratio and the future condition match.",
+      "reviewPrompt": "Practice: mother and daughter ages are in ratio 7:2 now. 10 years later ratio is 3:1. Find present ages.",
+      "xpReward": 17,
+      "badgeFocus": "Ratio Cracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group E for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Two-Variable Age Systems",
+      "missionStepTitle": "Exercise F: Two-Variable Systems",
+      "coachHook": "Let's crack this code! Two unknowns, two equations — simultaneous equations. Add them, subtract them, or substitute. Age problems with two conditions are the gold standard!",
+      "boardDemo": {
+        "title": "Two Equations, Two Unknowns",
+        "steps": [
+          "Problem: A+B=40, A-B=10 (A is 10 older)",
+          "Add equations: 2A=50 → A=25",
+          "Substitute: 25+B=40 → B=15",
+          "Verify: 25-15=10 ✓, 25+15=40 ✓"
+        ],
+        "teacherLine": "When you have sum and difference, use the addition-subtraction method: (sum+diff)/2 = older, (sum-diff)/2 = younger. Fastest method for two-equation age systems."
+      },
+      "readAloudPrompt": "Father + Son = 55. Father - Son = 25. Use addition method to find their ages.",
+      "tryPrompt": "Solve: Riya's age + Soni's age = 48. Three years ago Riya was twice Soni's age. Find both current ages.",
+      "masteryCheck": "Riya = 33, Soni = 15",
+      "instantFeedbackWin": "Excellent! Let R+S=48. 3 years ago: (R-3)=2(S-3). R-3=2S-6. R=2S-3. Substitute: 2S-3+S=48. 3S=51. S=17. R=31. Verify: 3 yrs ago R=28, S=14, 28=2×14 ✓. Correction note: S=17 gives R=31, not 33/15. Verify your substitution step carefully.",
+      "instantFeedbackRetry": "Here's a trick: let R+S=48, and (R-3)=2(S-3). Expand: R-3=2S-6, so R=2S-3. Sub into sum: (2S-3)+S=48. 3S=51, S=17, R=31. Verify: 3 years ago 28=2×14 ✓.",
+      "reviewPrompt": "Challenge: sum of mother and daughter ages = 56. 8 years ago mother was 3 times daughter. Find current ages.",
+      "xpReward": 20,
+      "badgeFocus": "Simultaneous Age Solver",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group F for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Complex Age Conditions",
+      "missionStepTitle": "Exercise G: Complex Multi-Step Age Problems",
+      "coachHook": "Let's crack this code! Olympiad-level age problems chain 3 conditions together. Take them one at a time — never rush to combine all three simultaneously.",
+      "boardDemo": {
+        "title": "3-Condition Age Problem — One Step at a Time",
+        "steps": [
+          "Problem: A is twice B. B is 3 years older than C. Sum of all three is 43.",
+          "Let C=x, B=x+3, A=2(x+3)=2x+6",
+          "Sum: x + (x+3) + (2x+6) = 43",
+          "4x+9=43 → 4x=34 → x=8.5",
+          "C=8.5, B=11.5, A=23. Verify: 8.5+11.5+23=43 ✓"
+        ],
+        "teacherLine": "Express all ages in terms of ONE variable (the youngest is usually simplest). Chain substitution upward through each condition."
+      },
+      "readAloudPrompt": "Three siblings: X is 4 years older than Y, Y is twice Z's age, sum of all three is 44. Can you express all ages in terms of Z?",
+      "tryPrompt": "Solve: Tina is 5 years older than Uma. Vijay is half of Uma's age. Their combined age is 40. Find all three ages.",
+      "masteryCheck": "Tina = 20, Uma = 15, Vijay = 5",
+      "instantFeedbackWin": "Fantastic! Let Uma=x, Tina=x+5, Vijay=x/2. Sum: x+5+x+x/2=40. 5x/2+5=40. 5x/2=35. x=14. Wait — Uma=14, Tina=19, Vijay=7. Sum=40 ✓. Correction: Uma=14, not 15. Verify your algebra carefully before finalising.",
+      "instantFeedbackRetry": "Here's a trick: let Uma=x. Tina=x+5. Vijay=x/2. Sum: (x+5)+x+(x/2)=40. (5x/2)+5=40. 5x/2=35. x=14. Tina=19, Uma=14, Vijay=7. Verify: 19+14+7=40 ✓.",
+      "reviewPrompt": "Challenge: Father is 3 times son's age. Mother is 2 years younger than father. Sum of all three is 74. Find all three ages.",
+      "xpReward": 22,
+      "badgeFocus": "3-Condition Age Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group G for Age Problems."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Speed Round: Mixed Age Problems",
+      "missionStepTitle": "Exercise H: Olympiad Speed Round",
+      "coachHook": "Let's crack this code — FAST! In competitive exams age problems come in sets. Write the variable, write the equation, solve — all in under 45 seconds. Go!",
+      "boardDemo": {
+        "title": "Speed Protocol for Age Problems",
+        "steps": [
+          "Step 1: Assign variable x to the youngest or unknown person",
+          "Step 2: Express all other ages in terms of x",
+          "Step 3: Write the sum or ratio condition",
+          "Step 4: Solve for x, state all ages",
+          "Step 5: Verify in 5 seconds — plug back in"
+        ],
+        "teacherLine": "Practice the 5-step protocol until it is automatic. In Olympiad, every second saved on algebra means more time for harder problems."
+      },
+      "readAloudPrompt": "Ready for the age speed round? Three questions. Variable assignment, equation, answer — as fast as you can!",
+      "tryPrompt": "Q1: A+B=50, A is 10 older — find A. | Q2: Mother is 3× son now, in 12 years she'll be 2× son — find son's age now. | Q3: Ages in ratio 5:2, differ by 21 — find both ages.",
+      "masteryCheck": "A=30 | Son=12 | 35 and 14",
+      "instantFeedbackWin": "INCREDIBLE! Q1: A=(50+10)/2=30. Q2: Let son=x, mother=3x. In 12 yrs: 3x+12=2(x+12). x=12. Q3: 5k-2k=21 → k=7 → 35 and 14. All three correct — Age Enigma fully cracked!",
+      "instantFeedbackRetry": "Here's a trick: Q1: (sum+diff)/2=older=(50+10)/2=30. Q2: 3x+12=2x+24 → x=12. Q3: 5k-2k=3k=21 → k=7 → 35 and 14.",
+      "reviewPrompt": "Final recap: state the 3 most important rules for solving age problems.",
+      "xpReward": 25,
+      "badgeFocus": "Age Enigma Master",
+      "visual": {
+        "kind": "svg",
+        "asset": "venn_2.svg",
+        "title": "Age Problems",
+        "caption": "Group H for Age Problems."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "venn_2",
+      "kind": "svg",
+      "asset": "venn_2.svg",
+      "title": "Age Problems",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

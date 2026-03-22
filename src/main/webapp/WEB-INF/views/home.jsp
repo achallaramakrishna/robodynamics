@@ -1,1152 +1,557 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>AptiPath360 Career Discovery | Robodynamics</title>
+  <title>RoboDynamics | AptiPath360 and AI Tutor Products</title>
+  <meta name="description" content="Explore AptiPath360, MindSutra, MindSpark, and MoneyMind from one clean RoboDynamics product home."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --page-bg: #f1f8f1;
-      --bg-soft: #e6f2e7;
+      --bg: #f6f8fb;
+      --ink: #102033;
+      --muted: #5b6b7c;
+      --line: #d9e3ee;
       --panel: #ffffff;
-      --panel-soft: #f7fcf7;
-      --line: #c7dec8;
-      --line-soft: #dceadb;
-      --text: #123122;
-      --muted: #486456;
-      --brand: #1d7a47;
-      --brand-deep: #155d35;
-      --accent: #5aa56e;
-      --warning: #f1b956;
-      --shadow: 0 18px 36px rgba(17, 68, 38, 0.12);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
+      --shadow: 0 18px 46px rgba(16, 32, 51, 0.09);
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --orange: #ea580c;
+      --orange-soft: #ffedd5;
+      --amber: #b45309;
+      --amber-soft: #fef3c7;
+      --slate: #0f172a;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
       --radius-md: 14px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      color: var(--text);
       background:
-        radial-gradient(1200px 420px at 10% -20%, rgba(90, 165, 110, 0.2), transparent 65%),
-        radial-gradient(900px 320px at 90% 0%, rgba(29, 122, 71, 0.16), transparent 70%),
-        var(--page-bg);
-      font-family: "Nunito", system-ui, -apple-system, Segoe UI, sans-serif;
-      line-height: 1.5;
+        radial-gradient(900px 380px at 8% -10%, rgba(37,99,235,.10), transparent 65%),
+        radial-gradient(720px 300px at 92% 0%, rgba(234,88,12,.08), transparent 62%),
+        var(--bg);
+      color: var(--ink);
+      font-family: "Manrope", system-ui, sans-serif;
     }
 
-    .page {
+    a { text-decoration: none; }
+
+    .shell {
       width: min(1160px, 94vw);
       margin: 0 auto;
-      padding: 1.6rem 0 3.6rem;
-    }
-
-    section {
-      margin-top: 1.4rem;
+      padding: 22px 0 72px;
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 1.2rem;
-      align-items: stretch;
-      background: linear-gradient(180deg, #f4fbf5 0%, #edf7ed 100%);
-      border: 1px solid var(--line);
+      background: linear-gradient(135deg, #0f172a 0%, #13263c 52%, #1f4065 100%);
+      color: #f8fafc;
       border-radius: var(--radius-xl);
-      padding: clamp(1rem, 2.2vw, 1.8rem);
+      padding: clamp(28px, 5vw, 52px);
       box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
     }
 
-    .hero-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      justify-content: center;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -90px -120px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(96,165,250,.24), rgba(96,165,250,0));
+      pointer-events: none;
     }
 
     .eyebrow {
       display: inline-flex;
-      width: fit-content;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: var(--brand-deep);
-      background: #dff1e2;
-      border: 1px solid #c5e3cb;
+      align-items: center;
+      gap: 8px;
+      background: rgba(96,165,250,.12);
+      color: #93c5fd;
+      border: 1px solid rgba(147,197,253,.24);
       border-radius: 999px;
-      padding: 0.25rem 0.65rem;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: stretch;
     }
 
     .hero h1 {
-      margin: 0;
+      margin: 0 0 14px;
       font-family: "Outfit", sans-serif;
-      font-size: clamp(1.9rem, 3.8vw, 3rem);
-      line-height: 1.12;
-      color: #0f3925;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -.03em;
     }
 
     .hero p {
       margin: 0;
-      color: var(--muted);
-      font-size: 1.02rem;
-      max-width: 56ch;
-    }
-
-    .hero-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.65rem;
-      margin-top: 0.1rem;
-    }
-
-    .hero-meta-item {
-      background: #ffffff;
-      border: 1px solid var(--line-soft);
-      border-radius: 12px;
-      padding: 0.55rem 0.7rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .hero-meta-item strong {
-      display: block;
-      color: var(--brand-deep);
-      font-size: 1rem;
-      font-weight: 800;
-      margin-bottom: 0.05rem;
+      color: #cbd5e1;
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 62ch;
     }
 
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 0.35rem;
+      gap: 12px;
+      margin-top: 26px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
-      font-weight: 800;
       border-radius: 999px;
+      padding: 13px 18px;
+      font-size: 14px;
+      font-weight: 800;
       border: 1px solid transparent;
-      padding: 0.72rem 1.2rem;
-      font-size: 0.97rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: #fff; color: #0f172a; box-shadow: 0 12px 24px rgba(15,23,42,.25); }
+    .btn-secondary { background: transparent; color: #e2e8f0; border-color: rgba(226,232,240,.22); }
 
-    .btn-primary {
-      color: #fff;
-      background: linear-gradient(135deg, var(--brand), var(--accent));
-      box-shadow: 0 12px 22px rgba(29, 122, 71, 0.28);
-    }
-
-    .btn-secondary {
-      color: var(--brand-deep);
-      border-color: #b8d7c0;
-      background: #f8fcf8;
-    }
-
-    .hero-media {
-      background: #fff;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      padding: 0.6rem;
+    .hero-panel {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
       display: flex;
       flex-direction: column;
-      gap: 0.55rem;
+      gap: 16px;
     }
 
-    .hero-media img {
-      width: 100%;
-      height: 100%;
-      min-height: 300px;
-      max-height: 420px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid #deebdf;
-    }
-
-    .hero-signal {
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      min-height: 100%;
-    }
-
-    .hero-signal h3 {
+    .hero-panel h3 {
       margin: 0;
-      font-size: 1.18rem;
-      color: #143f27;
-      line-height: 1.28;
-      font-family: "Outfit", sans-serif;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .hero-signal p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.92rem;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .hero-signal .awareness-relevance {
-      font-size: 0.86rem;
-    }
-
-    .media-caption {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-family: "Outfit", sans-serif;
-      font-size: clamp(1.35rem, 2.4vw, 2rem);
-      color: #123922;
-    }
-
-    .section-head p {
-      margin: 0.35rem 0 0;
-      color: var(--muted);
-    }
-
-    .insight-grid,
-    .steps,
-    .modules,
-    .careers {
-      display: grid;
-      gap: 0.9rem;
-      margin-top: 0.8rem;
-    }
-
-    .insight-grid {
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    }
-
-    .modules,
-    .careers {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-
-    .modules {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .module-primary {
-      grid-column: 1 / -1;
-      border: 1px solid #b9dfc2;
-      background: linear-gradient(145deg, #ffffff 0%, #f1fbf3 100%);
-      box-shadow: 0 16px 28px rgba(17, 72, 38, 0.14);
-    }
-
-    .module-secondary {
-      background: #fbfefb;
-      border-color: #d9eadc;
-    }
-
-    .module-badge {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid #b6dbbf;
-      background: #e8f8ec;
-      color: #145b35;
-      border-radius: 999px;
-      padding: 0.2rem 0.58rem;
-      font-size: 0.76rem;
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      color: #f8fafc;
     }
 
-    .steps {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    .signal-list {
+      display: grid;
+      gap: 12px;
     }
 
-    .card {
+    .signal-item {
+      background: rgba(15,23,42,.42);
+      border-radius: 16px;
+      padding: 14px 14px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .signal-item strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .signal-item span {
+      display: block;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .section {
+      margin-top: 28px;
       background: var(--panel);
-      border: 1px solid var(--line-soft);
-      border-radius: var(--radius-lg);
-      padding: 1rem;
-      box-shadow: 0 10px 24px rgba(16, 64, 34, 0.08);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
     }
 
-    .card h3,
-    .card h4 {
-      margin: 0 0 0.35rem;
-      color: #184b2d;
+    .section h2 {
+      margin: 0 0 8px;
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(24px, 3.2vw, 34px);
+      letter-spacing: -.03em;
     }
 
-    .card p {
-      margin: 0;
+    .section p.lead {
+      margin: 0 0 26px;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 72ch;
     }
 
-    .insight-value {
-      display: inline-block;
-      font-weight: 800;
-      color: #0f4f2b;
-      background: #ebf8ee;
-      border: 1px solid #cbe6d2;
-      border-radius: 999px;
-      padding: 0.18rem 0.55rem;
-      font-size: 0.82rem;
-      margin-bottom: 0.42rem;
-    }
-
-    .highlight-note {
-      margin-top: 0.8rem;
-      background: #fffdf6;
-      border: 1px solid #eedfbf;
-      border-left: 6px solid var(--warning);
-      border-radius: var(--radius-md);
-      padding: 0.8rem 0.95rem;
-      color: #6d5328;
-      font-size: 0.95rem;
-    }
-
-    .link-panel {
-      margin-top: 0.8rem;
-      background: #f8fcf8;
-      border: 1px dashed #a8cdaf;
-      border-radius: var(--radius-md);
-      padding: 0.8rem 0.95rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
-    }
-
-    .link-panel code {
-      background: #e8f5eb;
-      border-radius: 8px;
-      padding: 0.18rem 0.48rem;
-      color: #145b35;
-      font-size: 0.92rem;
-    }
-
-    .copy-btn {
-      border: none;
-      border-radius: 8px;
-      padding: 0.45rem 0.85rem;
-      background: var(--brand);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .module-actions {
-      margin-top: 0.7rem;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .module-primary .module-actions .btn-primary {
-      font-size: 1rem;
-      padding: 0.78rem 1.28rem;
-    }
-
-    .awareness-board {
-      margin-top: 1rem;
-      border: 1px solid #cfe1d1;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, #f7fcf8 0%, #edf6ef 100%);
-      padding: 1rem;
-      box-shadow: 0 12px 22px rgba(17, 68, 38, 0.1);
-    }
-
-    .awareness-board,
-    .awareness-board * {
-      box-sizing: border-box;
-    }
-
-    .awareness-topline {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      padding: 0.52rem 0.7rem;
-      border-radius: 12px;
-      background: #ffffff;
-      border: 1px solid #d9e9dc;
-      color: #18492d;
-      font-weight: 800;
-      margin-bottom: 0.8rem;
-    }
-
-    .awareness-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #1d7a47;
-      box-shadow: 0 0 0 6px rgba(29, 122, 71, 0.14);
-      animation: pulseDot 1.6s ease-in-out infinite;
-      flex: 0 0 10px;
-    }
-
-    @keyframes pulseDot {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.65; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .awareness-audience-grid {
+    .product-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-top: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
     }
 
-    .awareness-audience-grid > *,
-    .india-focus-grid > * {
-      min-width: 0;
-    }
-
-    .audience-panel {
-      border: 1px solid #d5e6d8;
-      border-radius: 14px;
-      background: #ffffff;
-      padding: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-    }
-
-    .audience-head h3 {
-      margin: 0;
-      font-family: "Outfit", sans-serif;
-      color: #154229;
-      font-size: 1.08rem;
-    }
-
-    .audience-head p {
-      margin: 0.2rem 0 0;
-      color: #4f6759;
-      font-size: 0.86rem;
-    }
-
-    .awareness-card {
+    .product-card {
+      border-radius: 22px;
+      padding: 22px;
       background: #fff;
-      border: 1px solid #dceadb;
-      border-radius: 14px;
-      overflow: hidden;
+      border: 1px solid var(--line);
       display: flex;
       flex-direction: column;
-      min-height: 0;
-      height: auto;
+      gap: 14px;
+      box-shadow: 0 8px 22px rgba(15,23,42,.04);
+      position: relative;
+      min-height: 280px;
     }
 
-    .awareness-hero-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-bottom: 1px solid #e4efe5;
-    }
+    .product-card.live { border-width: 2px; }
+    .product-card.mindsutra.live { border-color: #bfdbfe; }
+    .product-card.aptipath.live { border-color: #bbf7d0; }
+    .product-card.mindspark { border-color: #d1fae5; }
+    .product-card.moneymind { border-color: #fde68a; }
 
-    .awareness-hero-content {
+    .product-top {
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 0.9rem;
-      min-width: 0;
-    }
-
-    .awareness-hero-content h3 {
-      margin: 0;
-      color: #133d26;
-      font-size: 1.28rem;
-      line-height: 1.25;
-      font-family: "Outfit", sans-serif;
-    }
-
-    .awareness-hero-content p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.95rem;
-    }
-
-    .awareness-side-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .awareness-side-item {
-      border: 1px solid #dceadb;
-      border-radius: 12px;
-      background: #ffffff;
-      padding: 0.7rem 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .awareness-side-item h4 {
-      margin: 0;
-      color: #184b2d;
-      font-size: 1rem;
-      line-height: 1.28;
-    }
-
-    .awareness-side-item p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.9rem;
-    }
-
-    .awareness-side-row {
-      display: grid;
-      grid-template-columns: 84px 1fr;
-      gap: 0.55rem;
-      align-items: start;
-    }
-
-    .awareness-side-thumb {
-      width: 84px;
-      height: 84px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid #deebdf;
-    }
-
-    .awareness-side-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      min-width: 0;
-    }
-
-    .awareness-meta {
-      display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
       align-items: center;
+      gap: 12px;
     }
 
-    .awareness-type {
+    .product-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex: 0 0 52px;
+    }
+
+    .mindsutra .product-icon { background: var(--blue-soft); }
+    .aptipath .product-icon { background: var(--green-soft); }
+    .mindspark .product-icon { background: #d1fae5; }
+    .moneymind .product-icon { background: var(--amber-soft); }
+
+    .product-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .product-sub {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .product-card p {
+      margin: 0;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
       display: inline-flex;
-      width: fit-content;
+      align-items: center;
       border-radius: 999px;
-      border: 1px solid #bfe0c7;
-      background: #eaf8ee;
-      color: #145b35;
-      font-size: 0.74rem;
+      padding: 5px 10px;
+      font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      border: 1px solid;
+    }
+
+    .mindsutra .pill { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .aptipath .pill { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
+    .mindspark .pill { background: #ecfdf5; border-color: #a7f3d0; color: #047857; }
+    .moneymind .pill { background: #fffbeb; border-color: #fde68a; color: #a16207; }
+
+    .status-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .04em;
       text-transform: uppercase;
-      padding: 0.16rem 0.5rem;
     }
 
-    .awareness-readtime {
-      display: inline-flex;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #3f5b4c;
-      background: #eef6ef;
-      border: 1px solid #d7e8da;
-      border-radius: 999px;
-      padding: 0.14rem 0.45rem;
-    }
+    .status-live { background: #dcfce7; color: #15803d; }
+    .status-soon { background: #f1f5f9; color: #64748b; }
 
-    .awareness-origin {
-      display: inline-flex;
-      width: fit-content;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #0a4a80;
-      background: #e8f3ff;
-      border: 1px solid #c7ddf6;
-      border-radius: 999px;
-      padding: 0.14rem 0.44rem;
-    }
-
-    .awareness-relevance {
-      margin: 0;
-      font-size: 0.83rem;
-      color: #2a5d3e;
-      font-weight: 700;
-    }
-
-    .awareness-link {
+    .card-actions {
       margin-top: auto;
-      font-weight: 800;
-      color: #155d35;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .awareness-link:hover {
-      text-decoration: underline;
-    }
-
-    .startup-desk-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin-top: 0.9rem;
-    }
-
-    .startup-desk-card img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      border-bottom: 1px solid #e4efe5;
-    }
-
-    .startup-desk-content {
       display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      padding: 0.72rem;
-      min-width: 0;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .startup-desk-content h3 {
-      margin: 0;
-      font-size: 1.08rem;
-      color: #164428;
-      line-height: 1.26;
-      font-family: "Outfit", sans-serif;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .startup-desk-content p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.89rem;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .india-focus-strip {
-      border: 1px solid #cfe1d3;
-      border-radius: 13px;
-      background: #f8fcf8;
-      padding: 0.75rem;
-    }
-
-    .india-focus-strip h3 {
-      margin: 0;
-      font-family: "Outfit", sans-serif;
-      font-size: 1.06rem;
-      color: #164328;
-    }
-
-    .india-focus-strip p {
-      margin: 0.2rem 0 0.55rem;
-      font-size: 0.86rem;
-      color: #4e6658;
-    }
-
-    .india-focus-layout {
-      display: grid;
-      grid-template-columns: 1.35fr 0.9fr;
-      gap: 0.72rem;
-      align-items: stretch;
-    }
-
-    .india-lead-card img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      border-bottom: 1px solid #e4efe5;
-    }
-
-    .india-quick-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.58rem;
-    }
-
-    .india-quick-item {
-      padding: 0.58rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-
-    .india-quick-row {
-      display: grid;
-      grid-template-columns: 78px 1fr;
-      gap: 0.52rem;
-      align-items: start;
-    }
-
-    .india-quick-thumb {
-      width: 78px;
-      height: 78px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid #deebdf;
-    }
-
-    .india-quick-copy {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .india-focus-content {
-      padding: 0.62rem 0.64rem 0.68rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.38rem;
-      min-width: 0;
-    }
-
-    .awareness-hero-content h3,
-    .awareness-side-item h4,
-    .india-focus-content h4,
-    .awareness-relevance,
-    .awareness-link {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .india-focus-content h4 {
-      margin: 0;
-      font-size: 0.96rem;
-      line-height: 1.25;
-      color: #17452b;
-    }
-
-    .india-focus-content p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.84rem;
-    }
-
-    .india-builder-strip {
-      margin-top: 0.72rem;
-      border: 1px solid #d6e6d8;
+    .card-link {
+      flex: 1 1 160px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
       border-radius: 12px;
-      background: #ffffff;
-      padding: 0.65rem;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid transparent;
     }
 
-    .india-builder-head h4 {
-      margin: 0;
-      color: #154129;
-      font-size: 1rem;
-      font-family: "Outfit", sans-serif;
+    .mindsutra .card-link.primary { background: var(--blue); color: #fff; }
+    .aptipath .card-link.primary { background: var(--green); color: #fff; }
+    .mindspark .card-link.primary { background: #0f766e; color: #fff; }
+    .moneymind .card-link.primary { background: var(--amber); color: #fff; }
+
+    .card-link.secondary {
+      background: #f8fafc;
+      color: #334155;
+      border-color: #dbe5ef;
     }
 
-    .india-builder-head p {
-      margin: 0.18rem 0 0.55rem;
-      color: #4d6658;
-      font-size: 0.84rem;
-    }
-
-    .india-builder-grid {
+    .flow-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.58rem;
+      gap: 16px;
     }
 
-    .india-builder-card {
-      padding: 0.52rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.36rem;
+    .flow-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fbfdff;
     }
 
-    .india-builder-card h5 {
+    .flow-card strong {
+      display: block;
+      font-size: 12px;
+      color: var(--blue);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .flow-card h4 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .flow-card p {
       margin: 0;
-      color: #17452b;
-      font-size: 0.93rem;
-      line-height: 1.25;
-      overflow-wrap: anywhere;
-      word-break: break-word;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
     }
 
-    .india-builder-card p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.82rem;
-      overflow-wrap: anywhere;
-      word-break: break-word;
+    .wireframe-note {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.75;
     }
 
-    #indiaLeadTitle,
-    #indiaLeadExcerpt,
-    #indiaLeadBenefit {
-      transition: opacity 0.28s ease;
-    }
+    .wireframe-note strong { color: #0f172a; }
 
-    .product-rail {
-      border: 1px solid #cde1d1;
-      border-radius: 12px;
-      background: #fff;
-      padding: 0.72rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      height: fit-content;
-      margin-top: 0.8rem;
-    }
-
-    .product-rail h4 {
-      margin: 0;
-      color: #123d25;
-      font-size: 1.02rem;
-    }
-
-    .product-rail p {
-      margin: 0;
-      color: #4f6759;
-      font-size: 0.86rem;
-    }
-
-    .product-rail .btn {
-      padding: 0.56rem 0.8rem;
-      font-size: 0.85rem;
-    }
-
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-media img {
-        min-height: 260px;
-      }
-      .modules {
-        grid-template-columns: 1fr;
-      }
-      .awareness-audience-grid {
-        grid-template-columns: 1fr;
-      }
-      .startup-desk-grid {
-        grid-template-columns: 1fr;
-      }
-      .india-focus-layout {
-        grid-template-columns: 1fr;
-      }
-      .india-builder-grid {
-        grid-template-columns: 1fr;
-      }
-      .india-quick-row {
-        grid-template-columns: 70px 1fr;
-      }
-      .india-quick-thumb {
-        width: 70px;
-        height: 70px;
-      }
-      .awareness-side-row {
-        grid-template-columns: 70px 1fr;
-      }
-      .awareness-side-thumb {
-        width: 70px;
-        height: 70px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .page {
-        width: 95vw;
-      }
-      .hero-meta {
-        grid-template-columns: 1fr;
-      }
-      .btn {
-        width: 100%;
-      }
+    @media (max-width: 920px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .flow-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body class="aptipath-home">
-  <jsp:include page="header.jsp"/>
+<body>
+  <jsp:include page="header.jsp" />
 
-  <main class="page">
-    <c:url var="newParentStartUrl" value="/registerParentChild">
-      <c:param name="plan" value="career-basic" />
-      <c:param name="redirect" value="/plans/checkout?plan=career-basic" />
-    </c:url>
-    <c:url var="existingParentLoginUrl" value="/login">
-      <c:param name="intent" value="aptipath360" />
-      <c:param name="redirect" value="/aptipath/parent/home" />
-    </c:url>
-    <c:url var="studentPortalLoginUrl" value="/login">
-      <c:param name="redirect" value="/aptipath/student/home" />
-    </c:url>
-    <c:set var="pid" value="${sessionScope.rdUser != null ? sessionScope.rdUser.profile_id : 0}" />
-    <c:set var="isParentOrAdmin" value="${pid == 4 or pid == 1 or pid == 2}" />
+  <c:url var="newParentStartUrl" value="/registerParentChild">
+    <c:param name="plan" value="career-basic" />
+    <c:param name="redirect" value="/plans/checkout?plan=career-basic" />
+  </c:url>
 
-    <section id="career-discover" class="hero">
-      <div class="hero-text">
-        <span class="eyebrow">AptiPath360 Career Discovery</span>
-        <h1>Give your child clear career direction from Grade 8 to College.</h1>
-        <p>
-          Parents do not pay for tests. They pay for confidence. AptiPath360 helps you understand your child&apos;s strengths early,
-          explore the right career paths, and take clear academic steps at every stage from Grade 8, Grade 11-12, and Post-12 college years.
-        </p>
-
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <strong>46-72 questions answered</strong>
-            per learner, based on stage
-          </div>
-          <div class="hero-meta-item">
-            <strong>1094-question base</strong>
-            adaptive bank mapped by section depth
-          </div>
-          <div class="hero-meta-item">
-            <strong>&#8377;799</strong>
-            base fee (+ GST at checkout)
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Products for parents and students</div>
+          <h1>Start with the right product.<br/>Then move into the right learning path.</h1>
+          <p>
+            Explore AptiPath360 for career discovery and the AI tutor families for guided learning.
+            Pick the product first, then go deeper into grade, curriculum, demo, pricing, and progress.
+            The homepage stays clean so the next action is always clear.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#products">Explore Products</a>
+            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/aptipath360">View AptiPath360</a>
           </div>
         </div>
-
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Pay &#8377;799 + GST - Start AptiPath360</a>
-        </div>
-        <p class="media-caption">Final payable amount is shown transparently on the secure checkout page.</p>
-        <p class="media-caption">
-          Already registered? <a href="${pageContext.request.contextPath}${existingParentLoginUrl}">Login and continue</a>.
-        </p>
-      </div>
-
-      <figure class="hero-media">
-        <img src="/resources/images/hero_parents.jpg" alt="Parent and daughter discussing future career plans"/>
-        <figcaption class="media-caption">
-          One shared family decision: map your child strengths first, then invest in the right path.
-        </figcaption>
-      </figure>
-    </section>
-
-    <section id="awareness-updates">
-      <div class="section-head">
-        <h2>India Startup Career Desk (2026-2036)</h2>
-        <p>Each card opens a shareable compiled brief with company-level signals and student skill mapping. Source links are optional references.</p>
-      </div>
-      <div class="startup-desk-grid">
-        <c:forEach var="u" items="${startupCareerUpdates}" varStatus="st">
-          <article class="startup-desk-card awareness-card" data-headline="${fn:escapeXml(u.title)}">
-            <c:choose>
-              <c:when test="${fn:startsWith(u.imageUrl, 'http')}">
-                <img src="${u.imageUrl}" alt="${u.title}" />
-              </c:when>
-              <c:otherwise>
-                <img src="${pageContext.request.contextPath}${u.imageUrl}" alt="${u.title}" />
-              </c:otherwise>
-            </c:choose>
-            <div class="startup-desk-content">
-              <div class="awareness-meta">
-                <span class="awareness-type">India Startup</span>
-                <span class="awareness-readtime">${u.readTime}</span>
-              </div>
-              <h3>${u.title}</h3>
-              <p>${u.fullInfo}</p>
-              <p class="awareness-relevance">Career Track: ${u.careerTrack}</p>
-              <p class="awareness-relevance">Skill Focus: ${u.skillFocus}</p>
-              <p class="awareness-relevance">${u.parentAction}</p>
-              <a class="awareness-link" href="${pageContext.request.contextPath}${u.href}">${u.ctaLabel} &rarr;</a>
-              <c:if test="${not empty u.sourceUrl}">
-                <a class="awareness-link" href="${u.sourceUrl}" target="_blank" rel="noopener">Reference Source (${u.sourceLabel}) &rarr;</a>
-              </c:if>
-              <a class="awareness-link" href="${pageContext.request.contextPath}${u.productCtaHref}">${u.productCtaLabel} &rarr;</a>
+        <aside class="hero-panel">
+          <h3>How families can start</h3>
+          <div class="signal-list">
+            <div class="signal-item">
+              <strong>Choose the need first</strong>
+              <span>Pick career discovery, guided AI tutoring, reasoning practice, or financial learning.</span>
             </div>
-          </article>
-        </c:forEach>
-      </div>
-
-      <aside class="product-rail">
-        <h4>Convert Insight to Revenue</h4>
-        <p>Keep AptiPath360 as the first action after every story.</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Start AptiPath360</a>
-        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep">ExamPrep360</a>
-        <a class="btn btn-secondary" href="${pageContext.request.contextPath}/tuition-on-demand">Tuition on Demand</a>
-      </aside>
-    </section>
-
-    <section id="career-horizon">
-      <div class="section-head">
-        <h2>Career Horizon Map (2026-2036)</h2>
-        <p>Map startup activity to real career tracks and child skill development.</p>
-      </div>
-      <div class="careers">
-        <article class="card">
-          <h4>SpaceTech & ISRO Tracks</h4>
-          <p>Math, physics, satellite systems, mission planning.</p>
-        </article>
-        <article class="card">
-          <h4>EV & ClimateTech Tracks</h4>
-          <p>Battery systems, product engineering, mobility design.</p>
-        </article>
-        <article class="card">
-          <h4>AI & Data Tracks</h4>
-          <p>Coding, data literacy, responsible AI problem solving.</p>
-        </article>
-        <article class="card">
-          <h4>Startup Product Tracks</h4>
-          <p>Creativity, product thinking, execution, communication.</p>
-        </article>
+            <div class="signal-item">
+              <strong>See the product details</strong>
+              <span>Each product page should show the right path, lesson coverage, outcomes, demo, and pricing.</span>
+            </div>
+            <div class="signal-item">
+              <strong>Begin and track progress</strong>
+              <span>Student starts from the right page, and parents should be able to see progress clearly after that.</span>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section>
-      <div class="section-head">
-        <h2>Preview insights before you pay</h2>
-        <p>Parents can view what type of output they will receive after the test.</p>
-      </div>
-      <div class="insight-grid">
-        <article class="card">
-          <span class="insight-value">Interest Heatmap</span>
-          <h4>What your child naturally enjoys</h4>
-          <p>AI/Tech, Green Careers, Healthcare, or Data decision patterns from actual responses.</p>
-        </article>
-        <article class="card">
-          <span class="insight-value">Learning Behavior</span>
-          <h4>How your child solves problems</h4>
-          <p>Analytical vs creative style, confidence level, and support style recommended for parents.</p>
-        </article>
-        <article class="card">
-          <span class="insight-value">Career Match Score</span>
-          <h4>Top 3 future-ready paths</h4>
-          <p>Practical mapping to roles like AI Engineer, Health AI Builder, Green Systems Designer.</p>
-        </article>
-        <article class="card">
-          <span class="insight-value">Action Roadmap</span>
-          <h4>What to do in next 90 days</h4>
-          <p>Subject focus, project ideas, and skill-building actions by grade and board.</p>
-        </article>
-      </div>
-      <p class="highlight-note">
-        You get a clear report card, not generic motivation text. This is why parents find value before buying coaching.
-      </p>
-    </section>
+    <section id="products" class="section">
+      <h2>Products</h2>
+      <p class="lead">The homepage should show only the main product families. Parents decide the program first. Course depth, grade choice, demo, and enrollment happen inside each product experience.</p>
 
-    <section>
-      <div class="section-head">
-        <h2>Simple parent flow</h2>
-        <p>Designed for busy parents: quick setup, clear output, and easy follow-through.</p>
-      </div>
-      <div class="steps">
-        <article class="card">
-          <h4>1. Parent registers first</h4>
-          <p>Create parent and student accounts together in one registration flow.</p>
-        </article>
-        <article class="card">
-          <h4>2. Parent makes payment</h4>
-          <p>Pay once using Razorpay: <strong>&#8377;799 base</strong> + GST for Grade 8 to College/Post-12 learners.</p>
-        </article>
-        <article class="card">
-          <h4>3. Existing parent path</h4>
-          <p>Already registered parents login, finish payment if pending, then continue in parent workspace.</p>
-        </article>
-        <article class="card">
-          <h4>4. Parent shares student link</h4>
-          <p>From parent workspace, generate/share student login link. Student logs in and starts AptiPath360 Career Discovery.</p>
-        </article>
-      </div>
-      <div class="link-panel">
-        <span>Student access link:</span>
-        <code id="studentLink">${pageContext.request.scheme}://${pageContext.request.serverName}${pageContext.request.contextPath}${studentPortalLoginUrl}</code>
-        <button class="copy-btn" id="copyLink">Copy</button>
-      </div>
-    </section>
-
-    <section id="career-pricing">
-      <div class="section-head">
-        <h2>Modules your family can choose</h2>
-        <p>Start with AptiPath360 Career Discovery for Grade 8 to College, then add targeted support only where needed.</p>
-      </div>
-      <div class="modules">
-        <article class="card module-primary">
-          <span class="module-badge">Recommended First Step</span>
-          <h3>AptiPath360 Career Discovery</h3>
-          <p>Adaptive assessment + career signal report + action roadmap for Grade 8, Grade 11-12, and Post-12 students. Start here before spending on classes, so you invest only where needed.</p>
-          <div class="module-actions">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}${newParentStartUrl}">Pay &#8377;799 + GST and Start</a>
-            <a class="btn btn-secondary" href="${pageContext.request.contextPath}${existingParentLoginUrl}">Open Parent Dashboard</a>
+      <div class="product-grid">
+        <article id="aptipath" class="product-card aptipath live">
+          <span class="status-badge status-live">Live</span>
+          <div class="product-top">
+            <div class="product-icon">🧭</div>
+            <div>
+              <h3 class="product-title">AptiPath360</h3>
+              <p class="product-sub">Career Discovery · Grade 8 to College</p>
+            </div>
+          </div>
+          <p>Career discovery for families who want clarity before choosing a stream, coaching path, or exam direction for the student.</p>
+          <div class="pill-row">
+            <span class="pill">46–72 questions</span>
+            <span class="pill">Career roadmap</span>
+            <span class="pill">Parent visibility</span>
+            <span class="pill">₹799 + GST</span>
+          </div>
+          <div class="card-actions">
+            <a class="card-link primary" href="${pageContext.request.contextPath}/aptipath360">Explore AptiPath360</a>
+            <a class="card-link secondary" href="${pageContext.request.contextPath}${newParentStartUrl}">Start AptiPath360</a>
           </div>
         </article>
-        <article id="exam-courses" class="card module-secondary">
-          <span class="module-badge">After Discovery</span>
-          <h3>ExamPrep360</h3>
-          <p>Board-focused practice, model answers, and final-exam readiness support.</p>
-          <p><strong>Basic Plan: Rs 1999</strong> one-time.</p>
-          <div class="module-actions">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">Start ExamPrep360 - Rs 1999</a>
-            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep">Explore Exam Prep</a>
-            <c:if test="${isParentOrAdmin}">
-              <a class="btn btn-secondary" href="${pageContext.request.contextPath}/exam-prep/create">Create Exam Paper</a>
-            </c:if>
+
+        <article id="mindsutra" class="product-card mindsutra live">
+          <span class="status-badge status-live">Live</span>
+          <div class="product-top">
+            <div class="product-icon">🧮</div>
+            <div>
+              <h3 class="product-title">MindSutra</h3>
+              <p class="product-sub">Vedic Maths AI Tutor · Grade 4 to 8</p>
+            </div>
+          </div>
+          <p>AI tutor for Vedic Maths that teaches step by step, checks understanding, and helps the child build speed with confidence.</p>
+          <div class="pill-row">
+            <span class="pill">Grades 4–8</span>
+            <span class="pill">Demo available</span>
+            <span class="pill">Parent dashboard</span>
+            <span class="pill">Lifetime pricing</span>
+          </div>
+          <div class="card-actions">
+            <a class="card-link primary" href="${pageContext.request.contextPath}/mindsutra">Explore MindSutra</a>
+            <a class="card-link secondary" href="${pageContext.request.contextPath}/vedic-math/grade-4">Start with Grade 4</a>
           </div>
         </article>
-        <article id="tuition-info" class="card module-secondary">
-          <span class="module-badge">After Discovery</span>
-          <h3>Tuition on Demand</h3>
-          <p>One-to-one help only in weak areas identified through the assessment report.</p>
-          <div class="module-actions">
-            <a class="btn btn-secondary" href="${pageContext.request.contextPath}/tuition-on-demand">Explore Tuition</a>
+
+        <article id="mindspark" class="product-card mindspark">
+          <span class="status-badge status-soon">Coming Soon</span>
+          <div class="product-top">
+            <div class="product-icon">🧠</div>
+            <div>
+              <h3 class="product-title">MindSpark</h3>
+              <p class="product-sub">Aptitude &amp; Reasoning AI Tutor · Grade 4 to 8</p>
+            </div>
+          </div>
+          <p>AI tutor for reasoning, logic, and aptitude practice, designed to build thinking skills through guided problem solving.</p>
+          <div class="pill-row">
+            <span class="pill">Grades 4–8</span>
+            <span class="pill">Reasoning</span>
+            <span class="pill">Same tutor engine</span>
+          </div>
+          <div class="card-actions">
+            <span class="card-link primary" style="opacity:.72; cursor:default;">MindSpark Landing Next</span>
+            <a class="card-link secondary" href="#products">Keep homepage simple</a>
+          </div>
+        </article>
+
+        <article id="moneymind" class="product-card moneymind">
+          <span class="status-badge status-soon">Coming Soon</span>
+          <div class="product-top">
+            <div class="product-icon">💰</div>
+            <div>
+              <h3 class="product-title">MoneyMind</h3>
+              <p class="product-sub">Financial Literacy AI Tutor</p>
+            </div>
+          </div>
+          <p>Financial literacy for children through guided lessons on money basics, choices, habits, and real-world understanding.</p>
+          <div class="pill-row">
+            <span class="pill">Money basics</span>
+            <span class="pill">Story-led learning</span>
+            <span class="pill">Future product page</span>
+          </div>
+          <div class="card-actions">
+            <span class="card-link primary" style="opacity:.72; cursor:default;">MoneyMind Landing Next</span>
+            <a class="card-link secondary" href="#products">Product family first</a>
           </div>
         </article>
       </div>
     </section>
 
-    <section>
-      <div class="section-head">
-        <h2>Future career clusters we map</h2>
+    <section class="section">
+      <h2>What Parents Can Expect</h2>
+      <p class="lead">Every product should give parents a clear picture of what it offers, how the student will start, and what happens after enrolment.</p>
+      <div class="flow-grid">
+        <div class="flow-card">
+          <strong>AptiPath360</strong>
+          <h4>Career direction with clarity</h4>
+          <p>Parents can understand aptitude, interests, and likely-fit paths before choosing the wrong stream, coaching spend, or exam direction.</p>
+        </div>
+        <div class="flow-card">
+          <strong>MindSutra & MindSpark</strong>
+          <h4>Guided AI tutoring by level</h4>
+          <p>Families can explore the right grade or learning level, see lesson coverage, try a demo, and understand how the tutor teaches step by step.</p>
+        </div>
+        <div class="flow-card">
+          <strong>Progress & Visibility</strong>
+          <h4>Parents and students should see growth</h4>
+          <p>Each product should make progress visible through lesson tracking, milestones, results, and the next recommended action.</p>
+        </div>
       </div>
-      <div class="careers">
-        <article class="card">
-          <h4>AI Engineer Track</h4>
-          <p>Logic, coding comfort, and systems thinking patterns.</p>
-        </article>
-        <article class="card">
-          <h4>Green Energy Track</h4>
-          <p>Sustainability mindset, science curiosity, and design choices.</p>
-        </article>
-        <article class="card">
-          <h4>Health Innovation Track</h4>
-          <p>Empathy, biology interest, and tech-for-people orientation.</p>
-        </article>
-        <article class="card">
-          <h4>Data Strategy Track</h4>
-          <p>Pattern recognition, structured thinking, and decision logic.</p>
-        </article>
+      <div class="wireframe-note">
+        <strong>Simple rule:</strong> start with the product that matches the family need, then go deeper into grade, curriculum, demo, pricing, and progress inside that product experience.
       </div>
     </section>
   </main>
 
   <jsp:include page="footer.jsp"/>
-  <script>
-    (function () {
-      const copyBtn = document.getElementById("copyLink");
-      const linkEl = document.getElementById("studentLink");
-      if (copyBtn && linkEl) {
-        copyBtn.addEventListener("click", function () {
-          navigator.clipboard.writeText(linkEl.textContent).then(() => {
-            this.textContent = "Copied";
-            setTimeout(() => {
-              this.textContent = "Copy";
-            }, 1200);
-          });
-        });
-      }
-    })();
-  </script>
 </body>
 </html>

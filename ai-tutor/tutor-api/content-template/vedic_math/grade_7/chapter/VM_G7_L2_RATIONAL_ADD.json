@@ -54,9 +54,21 @@
     "version": "2026-03-mindspark-g7-v1",
     "onboarding": {
       "askLearnerName": true,
-      "knownLanguageOptions": ["English", "English + Hindi", "Hindi"],
-      "learnerLevelOptions": ["I am a beginner", "I know a little", "I already practice"],
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I already practice"
+      ],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "coachIntro": "Hi! I am Arya. Today you will add fractions without hunting for the LCM. One formula, instant answer!",
       "placementRule": "If the learner correctly cross-multiplies 1/2 + 1/3, skip group A and start at group B."
     },
@@ -88,7 +100,11 @@
     "uiDirectives": {
       "layout": "single-screen mission layout",
       "primaryFocus": "current question card",
-      "secondaryPanels": ["worked board", "help drawer", "lesson path rail"],
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
       "noScrollGoal": "Student sees mission progress, question card, and action buttons without scrolling."
     },
     "sessionFlow": [
@@ -117,11 +133,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "1/3 + 1/4 = ?",
-            "options": ["7/12", "2/7", "7/7", "2/12"],
+            "options": [
+              "7/12",
+              "2/7",
+              "7/7",
+              "2/12"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "7/12",
             "hint": "Numerator = 1×4 + 1×3 = 7. Denominator = 3×4 = 12.",
-            "solution": "(1×4 + 1×3)/(3×4) = 7/12."
+            "solution": "(1×4 + 1×3)/(3×4) = 7/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group A for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_A2",
@@ -133,11 +160,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "2/5 + 3/7 = ?",
-            "options": ["5/12", "29/35", "14/35", "5/35"],
+            "options": [
+              "5/12",
+              "29/35",
+              "14/35",
+              "5/35"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "29/35",
             "hint": "Numerator = 2×7 + 3×5 = 14+15 = 29. Denominator = 35.",
-            "solution": "(2×7 + 3×5)/(5×7) = 29/35."
+            "solution": "(2×7 + 3×5)/(5×7) = 29/35.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group A for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_A3",
@@ -150,16 +188,44 @@
             "questionType": "fill_step",
             "questionText": "Find 1/4 + 1/6 using cross-multiply and simplify.",
             "steps": [
-              {"label": "Numerator: 1×6 + 1×4 = ?", "answer": "10", "hint": "6 plus 4"},
-              {"label": "Denominator: 4×6 = ?", "answer": "24", "hint": "4 times 6"},
-              {"label": "Fraction before simplification: ?", "answer": "10/24", "hint": "Numerator over denominator"},
-              {"label": "Simplified (divide by HCF=2): ?", "answer": "5/12", "hint": "10÷2=5, 24÷2=12"}
+              {
+                "label": "Numerator: 1×6 + 1×4 = ?",
+                "answer": "10",
+                "hint": "6 plus 4"
+              },
+              {
+                "label": "Denominator: 4×6 = ?",
+                "answer": "24",
+                "hint": "4 times 6"
+              },
+              {
+                "label": "Fraction before simplification: ?",
+                "answer": "10/24",
+                "hint": "Numerator over denominator"
+              },
+              {
+                "label": "Simplified (divide by HCF=2): ?",
+                "answer": "5/12",
+                "hint": "10÷2=5, 24÷2=12"
+              }
             ],
             "expectedAnswer": "5/12",
             "hint": "Cross-multiply then simplify by HCF.",
-            "solution": "10/24 → divide by 2 → 5/12."
+            "solution": "10/24 → divide by 2 → 5/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group A for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group A for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -186,11 +252,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "−1/4 + 2/3 = ?",
-            "options": ["5/12", "−5/12", "3/12", "1/12"],
+            "options": [
+              "5/12",
+              "−5/12",
+              "3/12",
+              "1/12"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "5/12",
             "hint": "Numerator = (−3) + 8 = 5. Denominator = 12.",
-            "solution": "(−1×3 + 2×4)/12 = 5/12."
+            "solution": "(−1×3 + 2×4)/12 = 5/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group B for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_B2",
@@ -202,11 +279,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "−3/5 + 1/4 = ?",
-            "options": ["−7/20", "7/20", "−2/20", "−11/20"],
+            "options": [
+              "−7/20",
+              "7/20",
+              "−2/20",
+              "−11/20"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "−7/20",
             "hint": "Numerator = (−3×4) + (1×5) = −12+5 = −7. Denominator = 20.",
-            "solution": "(−12 + 5)/20 = −7/20."
+            "solution": "(−12 + 5)/20 = −7/20.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group B for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_B3",
@@ -219,17 +307,49 @@
             "questionType": "fill_step",
             "questionText": "Find −2/3 + 3/5 step by step.",
             "steps": [
-              {"label": "ad: −2 × 5 = ?", "answer": "−10", "hint": "−2 times 5"},
-              {"label": "bc: 3 × 3 = ?", "answer": "9", "hint": "3 times 3"},
-              {"label": "Numerator (ad + bc): −10 + 9 = ?", "answer": "−1", "hint": "−10 plus 9"},
-              {"label": "Denominator: 3 × 5 = ?", "answer": "15", "hint": "3 times 5"},
-              {"label": "Answer: ?", "answer": "−1/15", "hint": "Numerator over denominator"}
+              {
+                "label": "ad: −2 × 5 = ?",
+                "answer": "−10",
+                "hint": "−2 times 5"
+              },
+              {
+                "label": "bc: 3 × 3 = ?",
+                "answer": "9",
+                "hint": "3 times 3"
+              },
+              {
+                "label": "Numerator (ad + bc): −10 + 9 = ?",
+                "answer": "−1",
+                "hint": "−10 plus 9"
+              },
+              {
+                "label": "Denominator: 3 × 5 = ?",
+                "answer": "15",
+                "hint": "3 times 5"
+              },
+              {
+                "label": "Answer: ?",
+                "answer": "−1/15",
+                "hint": "Numerator over denominator"
+              }
             ],
             "expectedAnswer": "−1/15",
             "hint": "Track the negative sign through the calculation.",
-            "solution": "(−10 + 9)/15 = −1/15."
+            "solution": "(−10 + 9)/15 = −1/15.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group B for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group B for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -256,11 +376,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Convert 2 3/4 to an improper fraction.",
-            "options": ["9/4", "11/4", "8/4", "7/4"],
+            "options": [
+              "9/4",
+              "11/4",
+              "8/4",
+              "7/4"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "11/4",
             "hint": "2 × 4 + 3 = 11. So 11/4.",
-            "solution": "2 × 4 + 3 = 11. Improper fraction = 11/4."
+            "solution": "2 × 4 + 3 = 11. Improper fraction = 11/4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group C for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_C2",
@@ -272,11 +403,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "1 1/2 + 1 1/3 = ?",
-            "options": ["2 5/6", "2 2/5", "3 1/6", "2 5/5"],
+            "options": [
+              "2 5/6",
+              "2 2/5",
+              "3 1/6",
+              "2 5/5"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2 5/6",
             "hint": "3/2 + 4/3: (9+8)/6 = 17/6 = 2 5/6.",
-            "solution": "5/3 not right — 3/2 + 4/3 = 17/6 = 2 5/6."
+            "solution": "5/3 not right — 3/2 + 4/3 = 17/6 = 2 5/6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group C for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_C3",
@@ -289,17 +431,49 @@
             "questionType": "fill_step",
             "questionText": "Find 1 2/3 + 2 1/4 step by step.",
             "steps": [
-              {"label": "Convert 1 2/3 to improper: 1×3+2 = ?/3", "answer": "5/3", "hint": "3+2=5"},
-              {"label": "Convert 2 1/4 to improper: 2×4+1 = ?/4", "answer": "9/4", "hint": "8+1=9"},
-              {"label": "Numerator: 5×4 + 9×3 = ?", "answer": "47", "hint": "20+27=47"},
-              {"label": "Denominator: 3×4 = ?", "answer": "12", "hint": "3 times 4"},
-              {"label": "As mixed number: 47/12 = ?", "answer": "3 11/12", "hint": "47÷12=3 remainder 11"}
+              {
+                "label": "Convert 1 2/3 to improper: 1×3+2 = ?/3",
+                "answer": "5/3",
+                "hint": "3+2=5"
+              },
+              {
+                "label": "Convert 2 1/4 to improper: 2×4+1 = ?/4",
+                "answer": "9/4",
+                "hint": "8+1=9"
+              },
+              {
+                "label": "Numerator: 5×4 + 9×3 = ?",
+                "answer": "47",
+                "hint": "20+27=47"
+              },
+              {
+                "label": "Denominator: 3×4 = ?",
+                "answer": "12",
+                "hint": "3 times 4"
+              },
+              {
+                "label": "As mixed number: 47/12 = ?",
+                "answer": "3 11/12",
+                "hint": "47÷12=3 remainder 11"
+              }
             ],
             "expectedAnswer": "3 11/12",
             "hint": "Convert → cross-multiply → convert back.",
-            "solution": "5/3 + 9/4 = 47/12 = 3 11/12."
+            "solution": "5/3 + 9/4 = 47/12 = 3 11/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group C for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group C for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -326,11 +500,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "3/8 + 1/6 = ? (simplify the answer)",
-            "options": ["13/24", "4/14", "11/24", "10/24"],
+            "options": [
+              "13/24",
+              "4/14",
+              "11/24",
+              "10/24"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "13/24",
             "hint": "Numerator = 3×6 + 1×8 = 26. Denominator = 48. Simplify: 26/48 = 13/24.",
-            "solution": "(18+8)/48 = 26/48 = 13/24."
+            "solution": "(18+8)/48 = 26/48 = 13/24.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group D for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_D2",
@@ -342,11 +527,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Simplify 18/24.",
-            "options": ["2/3", "3/4", "9/12", "6/8"],
+            "options": [
+              "2/3",
+              "3/4",
+              "9/12",
+              "6/8"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3/4",
             "hint": "HCF of 18 and 24 is 6.",
-            "solution": "HCF=6. 18÷6=3, 24÷6=4. Simplified: 3/4."
+            "solution": "HCF=6. 18÷6=3, 24÷6=4. Simplified: 3/4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group D for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_D3",
@@ -358,13 +554,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "5/6 + 1/4 = ? (simplified)",
-            "options": ["13/12", "6/10", "5/12", "17/12"],
+            "options": [
+              "13/12",
+              "6/10",
+              "5/12",
+              "17/12"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "13/12",
             "hint": "Numerator = 5×4 + 1×6 = 26. Denominator = 24. Simplify: 26/24 = 13/12.",
-            "solution": "(20+6)/24 = 26/24 = 13/12."
+            "solution": "(20+6)/24 = 26/24 = 13/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group D for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group D for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -392,14 +605,36 @@
             "questionType": "fill_step",
             "questionText": "Simplify 36/48 using repeated division.",
             "steps": [
-              {"label": "Both even? Divide by 2: 36÷2 = ?, 48÷2 = ?", "answer": "18/24", "hint": "36÷2=18, 48÷2=24"},
-              {"label": "Both even again? Divide by 2: 18÷2 = ?, 24÷2 = ?", "answer": "9/12", "hint": "18÷2=9, 24÷2=12"},
-              {"label": "Both divisible by 3? Divide: 9÷3 = ?, 12÷3 = ?", "answer": "3/4", "hint": "9÷3=3, 12÷3=4"},
-              {"label": "Simplified fraction: ?", "answer": "3/4", "hint": "No more common factors"}
+              {
+                "label": "Both even? Divide by 2: 36÷2 = ?, 48÷2 = ?",
+                "answer": "18/24",
+                "hint": "36÷2=18, 48÷2=24"
+              },
+              {
+                "label": "Both even again? Divide by 2: 18÷2 = ?, 24÷2 = ?",
+                "answer": "9/12",
+                "hint": "18÷2=9, 24÷2=12"
+              },
+              {
+                "label": "Both divisible by 3? Divide: 9÷3 = ?, 12÷3 = ?",
+                "answer": "3/4",
+                "hint": "9÷3=3, 12÷3=4"
+              },
+              {
+                "label": "Simplified fraction: ?",
+                "answer": "3/4",
+                "hint": "No more common factors"
+              }
             ],
             "expectedAnswer": "3/4",
             "hint": "Halve, halve, divide by 3.",
-            "solution": "36/48 → 18/24 → 9/12 → 3/4."
+            "solution": "36/48 → 18/24 → 9/12 → 3/4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group E for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_E2",
@@ -412,15 +647,39 @@
             "questionType": "fill_step",
             "questionText": "Simplify 42/56.",
             "steps": [
-              {"label": "Both even? Divide by 2: 42÷2 = ?, 56÷2 = ?", "answer": "21/28", "hint": "42÷2=21, 56÷2=28"},
-              {"label": "21 is odd. Check common factor: divide by 7: 21÷7 = ?, 28÷7 = ?", "answer": "3/4", "hint": "21÷7=3, 28÷7=4"},
-              {"label": "Simplified fraction: ?", "answer": "3/4", "hint": "GCD check: 3 and 4 share no factors"}
+              {
+                "label": "Both even? Divide by 2: 42÷2 = ?, 56÷2 = ?",
+                "answer": "21/28",
+                "hint": "42÷2=21, 56÷2=28"
+              },
+              {
+                "label": "21 is odd. Check common factor: divide by 7: 21÷7 = ?, 28÷7 = ?",
+                "answer": "3/4",
+                "hint": "21÷7=3, 28÷7=4"
+              },
+              {
+                "label": "Simplified fraction: ?",
+                "answer": "3/4",
+                "hint": "GCD check: 3 and 4 share no factors"
+              }
             ],
             "expectedAnswer": "3/4",
             "hint": "Halve once, then divide by 7.",
-            "solution": "42/56 → 21/28 → 3/4."
+            "solution": "42/56 → 21/28 → 3/4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group E for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group E for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -448,14 +707,36 @@
             "questionType": "fill_step",
             "questionText": "Raju spends 1/3 of his pocket money on snacks and 1/4 on stationery. What fraction does he spend in total?",
             "steps": [
-              {"label": "Set up: 1/3 + 1/4. Numerator = 1×4 + 1×3 = ?", "answer": "7", "hint": "4 plus 3"},
-              {"label": "Denominator = 3×4 = ?", "answer": "12", "hint": "3 times 4"},
-              {"label": "Fraction spent: ?", "answer": "7/12", "hint": "7 over 12"},
-              {"label": "Fraction of money remaining: 1 − 7/12 = ?", "answer": "5/12", "hint": "12/12 − 7/12"}
+              {
+                "label": "Set up: 1/3 + 1/4. Numerator = 1×4 + 1×3 = ?",
+                "answer": "7",
+                "hint": "4 plus 3"
+              },
+              {
+                "label": "Denominator = 3×4 = ?",
+                "answer": "12",
+                "hint": "3 times 4"
+              },
+              {
+                "label": "Fraction spent: ?",
+                "answer": "7/12",
+                "hint": "7 over 12"
+              },
+              {
+                "label": "Fraction of money remaining: 1 − 7/12 = ?",
+                "answer": "5/12",
+                "hint": "12/12 − 7/12"
+              }
             ],
             "expectedAnswer": "7/12",
             "hint": "Cross-multiply 1/3 + 1/4.",
-            "solution": "1/3 + 1/4 = 7/12 spent. Remaining = 5/12."
+            "solution": "1/3 + 1/4 = 7/12 spent. Remaining = 5/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group F for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_F2",
@@ -467,13 +748,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "A cricket team scored 2/5 of the target in the first innings and 1/4 more. What fraction of the target did they score in total?",
-            "options": ["13/20", "3/9", "3/20", "7/20"],
+            "options": [
+              "13/20",
+              "3/9",
+              "3/20",
+              "7/20"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "13/20",
             "hint": "2/5 + 1/4: (8+5)/20 = 13/20.",
-            "solution": "(2×4 + 1×5)/(5×4) = 13/20."
+            "solution": "(2×4 + 1×5)/(5×4) = 13/20.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group F for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group F for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -500,11 +798,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 3/4 + 2/5 = ?",
-            "options": ["23/20", "5/9", "14/20", "5/20"],
+            "options": [
+              "23/20",
+              "5/9",
+              "14/20",
+              "5/20"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "23/20",
             "hint": "Numerator = 15+8 = 23. Denominator = 20.",
-            "solution": "(3×5 + 2×4)/20 = 23/20."
+            "solution": "(3×5 + 2×4)/20 = 23/20.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group G for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_G2",
@@ -516,11 +825,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 2/7 + 3/8 = ?",
-            "options": ["37/56", "5/15", "16/56", "37/58"],
+            "options": [
+              "37/56",
+              "5/15",
+              "16/56",
+              "37/58"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "37/56",
             "hint": "Numerator = 16+21 = 37. Denominator = 56.",
-            "solution": "(2×8 + 3×7)/56 = 37/56."
+            "solution": "(2×8 + 3×7)/56 = 37/56.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group G for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_G3",
@@ -532,13 +852,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Speed! 5/6 + 7/9 = ? (simplified)",
-            "options": ["29/18", "12/15", "32/18", "29/27"],
+            "options": [
+              "29/18",
+              "12/15",
+              "32/18",
+              "29/27"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "29/18",
             "hint": "Numerator = 45+42=87? No: 5×9+7×6=45+42=87, denominator=54. Simplify 87/54: HCF=3 → 29/18.",
-            "solution": "(45+42)/54 = 87/54 = 29/18."
+            "solution": "(45+42)/54 = 87/54 = 29/18.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group G for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group G for Rational Number Speed — LCM-Free Addition."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -566,15 +903,41 @@
             "questionType": "fill_step",
             "questionText": "Find −1 1/2 + 2 2/3.",
             "steps": [
-              {"label": "Convert −1 1/2: −(2+1)/2 = ?", "answer": "−3/2", "hint": "Negative mixed: −3/2"},
-              {"label": "Convert 2 2/3: (6+2)/3 = ?", "answer": "8/3", "hint": "8 over 3"},
-              {"label": "Numerator: (−3×3) + (8×2) = ?", "answer": "7", "hint": "−9 + 16 = 7"},
-              {"label": "Denominator: 2×3 = ?", "answer": "6", "hint": "2 times 3"},
-              {"label": "Final answer as mixed number: 7/6 = ?", "answer": "1 1/6", "hint": "7÷6=1 remainder 1"}
+              {
+                "label": "Convert −1 1/2: −(2+1)/2 = ?",
+                "answer": "−3/2",
+                "hint": "Negative mixed: −3/2"
+              },
+              {
+                "label": "Convert 2 2/3: (6+2)/3 = ?",
+                "answer": "8/3",
+                "hint": "8 over 3"
+              },
+              {
+                "label": "Numerator: (−3×3) + (8×2) = ?",
+                "answer": "7",
+                "hint": "−9 + 16 = 7"
+              },
+              {
+                "label": "Denominator: 2×3 = ?",
+                "answer": "6",
+                "hint": "2 times 3"
+              },
+              {
+                "label": "Final answer as mixed number: 7/6 = ?",
+                "answer": "1 1/6",
+                "hint": "7÷6=1 remainder 1"
+              }
             ],
             "expectedAnswer": "1 1/6",
             "hint": "Convert both, then cross-multiply, then convert back.",
-            "solution": "−3/2 + 8/3 = 7/6 = 1 1/6."
+            "solution": "−3/2 + 8/3 = 7/6 = 1 1/6.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group H for Rational Number Speed — LCM-Free Addition."
+            }
           },
           {
             "questionId": "VM_G7_L2_H2",
@@ -586,13 +949,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Priya walks −3/4 km (back) then 5/3 km forward. Net distance?",
-            "options": ["11/12", "2/7", "−11/12", "8/12"],
+            "options": [
+              "11/12",
+              "2/7",
+              "−11/12",
+              "8/12"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "11/12",
             "hint": "−3/4 + 5/3: (−9+20)/12 = 11/12.",
-            "solution": "(−3×3 + 5×4)/12 = (−9+20)/12 = 11/12 km forward."
+            "solution": "(−3×3 + 5×4)/12 = (−9+20)/12 = 11/12 km forward.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_criss_cross_2dig.svg",
+              "title": "Rational Number Speed — LCM-Free Addition",
+              "caption": "Group H for Rational Number Speed — LCM-Free Addition."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_criss_cross_2dig.svg",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "caption": "Group H for Rational Number Speed — LCM-Free Addition."
+        }
       }
     ]
   },
@@ -605,7 +985,13 @@
       "teacherLine": "Forget LCM! The cross-multiply formula is a/b + c/d = (ad+bc)/bd. Let me show you how fast it is.",
       "boardAction": "Write the formula. Show 1/3 + 1/4: numerator=4+3=7, denominator=12. Answer: 7/12.",
       "checkpointPrompt": "2/3 + 1/4 = ?",
-      "microPractice": "Quick fire: 1/5 + 1/6, 2/3 + 1/5."
+      "microPractice": "Quick fire: 1/5 + 1/6, 2/3 + 1/5.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_B",
@@ -615,7 +1001,13 @@
       "teacherLine": "Same formula with negatives. The only change is tracking the sign in the numerator.",
       "boardAction": "Show −1/4 + 2/3 = (−3+8)/12 = 5/12. Circle the negative sign.",
       "checkpointPrompt": "−3/7 + 1/2 = ?",
-      "microPractice": "Try: −1/5 + 2/3, −3/4 + 1/2."
+      "microPractice": "Try: −1/5 + 2/3, −3/4 + 1/2.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_C",
@@ -625,7 +1017,13 @@
       "teacherLine": "Mixed numbers first need converting to improper fractions. Then cross-multiply as usual.",
       "boardAction": "Show 1 2/3 → 5/3 and 2 1/4 → 9/4. Then cross-multiply: (20+27)/12 = 47/12.",
       "checkpointPrompt": "2 2/3 + 1 3/4 = ?",
-      "microPractice": "Try: 3 1/4 + 2 2/5."
+      "microPractice": "Try: 3 1/4 + 2 2/5.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_D",
@@ -635,7 +1033,13 @@
       "teacherLine": "Checkpoint! Confirm the cross-multiply formula and simplification method with MCQ.",
       "boardAction": "Write the formula and HCF chain for 18/24 → 3/4.",
       "checkpointPrompt": "Simplify 18/24 using HCF.",
-      "microPractice": "Solve 5/6 + 2/9 and simplify fully."
+      "microPractice": "Solve 5/6 + 2/9 and simplify fully.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_E",
@@ -645,7 +1049,13 @@
       "teacherLine": "Vedic simplification: keep dividing by small primes until you cannot divide any more.",
       "boardAction": "Show the chain: 36/48 → 18/24 → 9/12 → 3/4 with each step annotated.",
       "checkpointPrompt": "Simplify 60/84.",
-      "microPractice": "Simplify 72/108 using the chain method."
+      "microPractice": "Simplify 72/108 using the chain method.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_F",
@@ -655,7 +1065,13 @@
       "teacherLine": "Real life fractions! Identify the operation, set up the addition, cross-multiply, simplify.",
       "boardAction": "Show the running problem: 3/5 + 2/7 = 31/35 km. Annotate each step.",
       "checkpointPrompt": "Cricket team fraction problem.",
-      "microPractice": "Create your own fraction word problem."
+      "microPractice": "Create your own fraction word problem.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_G",
@@ -665,7 +1081,13 @@
       "teacherLine": "Speed mode! Flash fractions, answer before I move on. Cross-multiply is now instinctive.",
       "boardAction": "Flash three fractions rapidly with answers shown after 4 seconds.",
       "checkpointPrompt": "2/7 + 3/8 = ?",
-      "microPractice": "Three in a row: 1/3+1/7, 2/5+1/4, 3/8+1/6."
+      "microPractice": "Three in a row: 1/3+1/7, 2/5+1/4, 3/8+1/6.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "stepId": "VM_G7_L2_H",
@@ -675,7 +1097,13 @@
       "teacherLine": "Challenge! Mix negative rationals and mixed numbers. Two conversions plus sign tracking.",
       "boardAction": "Show −1 1/2 + 2 2/3 = −3/2 + 8/3 = 7/6 = 1 1/6. Annotate sign tracking.",
       "checkpointPrompt": "Distance problem with negative rational.",
-      "microPractice": "Try: −2 2/5 + 3 1/4."
+      "microPractice": "Try: −2 2/5 + 3 1/4.",
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Teaching step for Rational Number Speed — LCM-Free Addition."
+      }
     }
   ],
   "screenplay": [
@@ -698,7 +1126,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Screenplay beat for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "beatId": "VM_G7_L2_A_EXPLAIN",
@@ -712,14 +1146,20 @@
       "boardAction": "Show cross arrows for ad and bc in colour. Box 7/12.",
       "checkpointPrompt": "2/3 + 1/4 = ?",
       "pauseType": "student_input",
-      "holdSec": 6.0,
+      "holdSec": 6,
       "expectedStudentResponse": "11/12",
       "fallbackHint": "Numerator = 8+3 = 11. Denominator = 12.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Screenplay beat for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "beatId": "VM_G7_L2_A_PRACTICE",
@@ -733,14 +1173,20 @@
       "boardAction": "Show MCQ card VM_G7_L2_A1.",
       "checkpointPrompt": "1/3 + 1/4 = ?",
       "pauseType": "student_input",
-      "holdSec": 5.0,
+      "holdSec": 5,
       "expectedStudentResponse": "7/12",
       "fallbackHint": "Numerator = 4+3 = 7. Denominator = 12.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Screenplay beat for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "beatId": "VM_G7_L2_H_INTRO",
@@ -761,7 +1207,13 @@
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Screenplay beat for Rational Number Speed — LCM-Free Addition."
+      }
     },
     {
       "beatId": "VM_G7_L2_H_PRACTICE",
@@ -775,14 +1227,31 @@
       "boardAction": "Show MCQ card VM_G7_L2_H2.",
       "checkpointPrompt": "Net distance = −3/4 + 5/3 = ?",
       "pauseType": "student_input",
-      "holdSec": 8.0,
+      "holdSec": 8,
       "expectedStudentResponse": "11/12",
       "fallbackHint": "(−9+20)/12 = 11/12.",
       "performanceTag": "core",
       "useWhenCorrect": null,
       "useWhenIncorrect": null,
       "minConfidence": null,
-      "maxConfidence": null
+      "maxConfidence": null,
+      "visual": {
+        "kind": "svg",
+        "asset": "vm_criss_cross_2dig.svg",
+        "title": "Rational Number Speed — LCM-Free Addition",
+        "caption": "Screenplay beat for Rational Number Speed — LCM-Free Addition."
+      }
+    }
+  ],
+  "chapterCode": "VM_G7_L2_RATIONAL_ADD",
+  "courseId": "vedic_math_g7",
+  "visualLibrary": [
+    {
+      "visualId": "vm_criss_cross_2dig",
+      "kind": "svg",
+      "asset": "vm_criss_cross_2dig.svg",
+      "title": "Lesson 2: Rational Number Speed — LCM-Free Addition",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
     }
   ]
 }

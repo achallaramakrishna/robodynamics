@@ -55,16 +55,36 @@
     "version": "2026-03-mindspark-g5-v1",
     "onboarding": {
       "avatarGreeting": "Hey there! Today we're going to make fractions super fast using Vedic tricks. Ready to become a fraction ninja?",
-      "goalOptions": ["School math", "Mental speed", "Exam practice"],
+      "goalOptions": [
+        "School math",
+        "Mental speed",
+        "Exam practice"
+      ],
       "estimatedTime": "20 minutes",
       "xpTarget": 105
     },
     "mission": "Master Vedic fraction simplification — find HCF in a flash, compare fractions without LCM, and add fractions mentally!",
     "microLessonPattern": "HOOK → DEMO → TRY → FEEDBACK → NEXT",
     "rewardLoop": {
-      "xpPerGroup": [10, 10, 10, 12, 12, 12, 15, 15, 15],
+      "xpPerGroup": [
+        10,
+        10,
+        10,
+        12,
+        12,
+        12,
+        15,
+        15,
+        15
+      ],
       "streakBonus": "3 correct in a row = +5 XP flame bonus",
-      "badges": ["HCF Hunter", "Fraction Fixer", "Cross-Multiply Champion", "LCM Legend", "Fraction Master"]
+      "badges": [
+        "HCF Hunter",
+        "Fraction Fixer",
+        "Cross-Multiply Champion",
+        "LCM Legend",
+        "Fraction Master"
+      ]
     },
     "reviewLoop": {
       "triggerAfterMistakes": 2,
@@ -104,7 +124,13 @@
             "questionText": "What is the HCF of 8 and 12?",
             "expectedAnswer": "4",
             "hint": "List the factors of 8: 1, 2, 4, 8. Which of these also divides 12?",
-            "solution": "Factors of 8: 1, 2, 4, 8. Factors of 12: 1, 2, 3, 4, 6, 12. Common factors: 1, 2, 4. Largest = 4."
+            "solution": "Factors of 8: 1, 2, 4, 8. Factors of 12: 1, 2, 3, 4, 6, 12. Common factors: 1, 2, 4. Largest = 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group A for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_A_002",
@@ -116,15 +142,21 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the HCF of 6 and 9?",
-            "options": ["2", "3", "6", "9"],
+            "options": [
+              "2",
+              "3",
+              "6",
+              "9"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "3",
             "hint": "Which number divides both 6 and 9 without leaving a remainder?",
             "solution": "6 ÷ 3 = 2 (exact). 9 ÷ 3 = 3 (exact). No higher number divides both. HCF = 3.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_hcf_venn",
-              "caption": "Venn diagram showing common factors of 6 and 9"
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group A for Fractions Made Fast — Vedic Simplification."
             }
           },
           {
@@ -139,9 +171,21 @@
             "questionText": "What is the HCF of 15 and 20?",
             "expectedAnswer": "5",
             "hint": "Both 15 and 20 end in 0 or 5 — try dividing by 5.",
-            "solution": "15 ÷ 5 = 3. 20 ÷ 5 = 4. No higher common factor exists. HCF = 5."
+            "solution": "15 ÷ 5 = 3. 20 ÷ 5 = 4. No higher common factor exists. HCF = 5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group A for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group A for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -172,9 +216,10 @@
             "hint": "HCF of 10 and 15 is 5. Divide both by 5.",
             "solution": "HCF(10, 15) = 5. 10÷5 = 2, 15÷5 = 3. Simplified: 2/3.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_fractions_cancel",
-              "caption": "Cancellation diagram showing 10/15 simplifying to 2/3"
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group B for Fractions Made Fast — Vedic Simplification."
             }
           },
           {
@@ -189,7 +234,13 @@
             "questionText": "Simplify the fraction 16/24.",
             "expectedAnswer": "2/3",
             "hint": "HCF of 16 and 24 is 8. Divide both by 8.",
-            "solution": "HCF(16, 24) = 8. 16÷8 = 2, 24÷8 = 3. Simplified: 2/3."
+            "solution": "HCF(16, 24) = 8. 16÷8 = 2, 24÷8 = 3. Simplified: 2/3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group B for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_B_003",
@@ -201,13 +252,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 18/27 in simplest form?",
-            "options": ["2/3", "3/4", "6/9", "9/13"],
+            "options": [
+              "2/3",
+              "3/4",
+              "6/9",
+              "9/13"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2/3",
             "hint": "HCF of 18 and 27 is 9.",
-            "solution": "HCF(18, 27) = 9. 18÷9 = 2, 27÷9 = 3. Simplified: 2/3."
+            "solution": "HCF(18, 27) = 9. 18÷9 = 2, 27÷9 = 3. Simplified: 2/3.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group B for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group B for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -234,11 +302,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which fraction is greater: 2/3 or 3/5?",
-            "options": ["2/3", "3/5", "They are equal", "Cannot be determined"],
+            "options": [
+              "2/3",
+              "3/5",
+              "They are equal",
+              "Cannot be determined"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "2/3",
             "hint": "Cross multiply: 2×5 = 10 and 3×3 = 9. Compare 10 and 9.",
-            "solution": "Cross multiply: 2×5 = 10, 3×3 = 9. Since 10 > 9, we have 2/3 > 3/5."
+            "solution": "Cross multiply: 2×5 = 10, 3×3 = 9. Since 10 > 9, we have 2/3 > 3/5.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group C for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_C_002",
@@ -254,12 +333,19 @@
             "hint": "Multiply 4×9 and 5×7. Which product is bigger?",
             "solution": "4×9 = 36, 5×7 = 35. Since 36 > 35, we have 4/7 > 5/9.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_fractions_cancel",
-              "caption": "Cross-multiplication diagram for 4/7 and 5/9"
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group C for Fractions Made Fast — Vedic Simplification."
             }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group C for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -288,7 +374,13 @@
             "questionText": "Add 1/3 + 1/4.",
             "expectedAnswer": "7/12",
             "hint": "LCM of 3 and 4 is 12. Convert: 1/3 = 4/12 and 1/4 = 3/12.",
-            "solution": "LCM(3,4) = 12. 1/3 = 4/12, 1/4 = 3/12. 4/12 + 3/12 = 7/12."
+            "solution": "LCM(3,4) = 12. 1/3 = 4/12, 1/4 = 3/12. 4/12 + 3/12 = 7/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group D for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_D_002",
@@ -302,7 +394,13 @@
             "questionText": "Add 1/5 + 1/3.",
             "expectedAnswer": "8/15",
             "hint": "LCM of 5 and 3 is 15.",
-            "solution": "LCM(5,3) = 15. 1/5 = 3/15, 1/3 = 5/15. 3/15 + 5/15 = 8/15."
+            "solution": "LCM(5,3) = 15. 1/5 = 3/15, 1/3 = 5/15. 3/15 + 5/15 = 8/15.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group D for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_D_003",
@@ -314,13 +412,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 1/4 + 1/6?",
-            "options": ["2/10", "5/12", "1/5", "1/12"],
+            "options": [
+              "2/10",
+              "5/12",
+              "1/5",
+              "1/12"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "5/12",
             "hint": "LCM of 4 and 6 is 12.",
-            "solution": "LCM(4,6) = 12. 1/4 = 3/12, 1/6 = 2/12. 3/12 + 2/12 = 5/12."
+            "solution": "LCM(4,6) = 12. 1/4 = 3/12, 1/6 = 2/12. 3/12 + 2/12 = 5/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group D for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group D for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -347,11 +462,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which of the following fractions is already in its simplest form?",
-            "options": ["4/6", "5/8", "6/9", "8/12"],
+            "options": [
+              "4/6",
+              "5/8",
+              "6/9",
+              "8/12"
+            ],
             "correctIndex": 1,
             "expectedAnswer": "5/8",
             "hint": "Check HCF of each pair. The one with HCF = 1 is in simplest form.",
-            "solution": "HCF(4,6)=2 (not simplest), HCF(5,8)=1 (simplest!), HCF(6,9)=3 (not simplest), HCF(8,12)=4 (not simplest)."
+            "solution": "HCF(4,6)=2 (not simplest), HCF(5,8)=1 (simplest!), HCF(6,9)=3 (not simplest), HCF(8,12)=4 (not simplest).",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group E for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_E_002",
@@ -363,13 +489,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "Which fraction is NOT in its simplest form?",
-            "options": ["3/7", "5/11", "4/10", "7/13"],
+            "options": [
+              "3/7",
+              "5/11",
+              "4/10",
+              "7/13"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "4/10",
             "hint": "Check which fraction has a common factor greater than 1.",
-            "solution": "HCF(3,7)=1, HCF(5,11)=1, HCF(4,10)=2 (not simplest!), HCF(7,13)=1."
+            "solution": "HCF(3,7)=1, HCF(5,11)=1, HCF(4,10)=2 (not simplest!), HCF(7,13)=1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group E for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group E for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -422,12 +565,19 @@
             "hint": "HCF of 48 and 72 is 24.",
             "solution": "HCF(48,72)=24. 48÷24=2. 72÷24=3. Simplified: 2/3.",
             "visual": {
-              "type": "svg",
-              "asset": "vm_hcf_venn",
-              "caption": "HCF diagram for 48 and 72 showing common factor 24"
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group F for Fractions Made Fast — Vedic Simplification."
             }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group F for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -456,7 +606,13 @@
             "questionText": "Add 6/9 + 4/12. (Hint: simplify each fraction first.)",
             "expectedAnswer": "1",
             "hint": "6/9 = 2/3 and 4/12 = 1/3. Now add them.",
-            "solution": "6/9 → HCF(6,9)=3 → 2/3. 4/12 → HCF(4,12)=4 → 1/3. 2/3 + 1/3 = 3/3 = 1."
+            "solution": "6/9 → HCF(6,9)=3 → 2/3. 4/12 → HCF(4,12)=4 → 1/3. 2/3 + 1/3 = 3/3 = 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group G for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_G_002",
@@ -470,7 +626,13 @@
             "questionText": "Add 8/12 + 6/18.",
             "expectedAnswer": "1",
             "hint": "Simplify 8/12 → 2/3 and 6/18 → 1/3 first.",
-            "solution": "8/12 → HCF(8,12)=4 → 2/3. 6/18 → HCF(6,18)=6 → 1/3. 2/3 + 1/3 = 1."
+            "solution": "8/12 → HCF(8,12)=4 → 2/3. 6/18 → HCF(6,18)=6 → 1/3. 2/3 + 1/3 = 1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group G for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_G_003",
@@ -482,13 +644,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 10/15 + 4/16 in simplest form?",
-            "options": ["5/6", "11/12", "7/12", "17/24"],
+            "options": [
+              "5/6",
+              "11/12",
+              "7/12",
+              "17/24"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "7/12",
             "hint": "Simplify 10/15 to 2/3 and 4/16 to 1/4. Then find LCM(3,4) = 12.",
-            "solution": "10/15 = 2/3, 4/16 = 1/4. LCM(3,4)=12. 2/3 = 8/12, 1/4 = 3/12. 8/12 + 3/12 = 11/12."
+            "solution": "10/15 = 2/3, 4/16 = 1/4. LCM(3,4)=12. 2/3 = 8/12, 1/4 = 3/12. 8/12 + 3/12 = 11/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group G for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group G for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -517,7 +696,13 @@
             "questionText": "Speed drill! Simplify: 12/16, 15/25, 9/27, 14/21, 20/30, 18/24. Write all answers.",
             "expectedAnswer": "3/4, 3/5, 1/3, 2/3, 2/3, 3/4",
             "hint": "For each fraction, find the HCF of numerator and denominator.",
-            "solution": "12/16→HCF=4→3/4. 15/25→HCF=5→3/5. 9/27→HCF=9→1/3. 14/21→HCF=7→2/3. 20/30→HCF=10→2/3. 18/24→HCF=6→3/4."
+            "solution": "12/16→HCF=4→3/4. 15/25→HCF=5→3/5. 9/27→HCF=9→1/3. 14/21→HCF=7→2/3. 20/30→HCF=10→2/3. 18/24→HCF=6→3/4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group H for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_H_002",
@@ -538,9 +723,21 @@
             "correctIndex": 0,
             "expectedAnswer": "12/16=3/4, 15/25=3/5, 9/27=1/3",
             "hint": "Check each simplification: 12÷4=3, 16÷4=4. 15÷5=3, 25÷5=5. 9÷9=1, 27÷9=3.",
-            "solution": "HCF(12,16)=4→3/4. HCF(15,25)=5→3/5. HCF(9,27)=9→1/3. Option A is all correct."
+            "solution": "HCF(12,16)=4→3/4. HCF(15,25)=5→3/5. HCF(9,27)=9→1/3. Option A is all correct.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group H for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group H for Fractions Made Fast — Vedic Simplification."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -569,7 +766,13 @@
             "questionText": "Add 1/2 + 1/4 + 1/8.",
             "expectedAnswer": "7/8",
             "hint": "LCM of 2, 4, and 8 is 8. Convert all fractions to eighths.",
-            "solution": "LCM(2,4,8)=8. 1/2=4/8, 1/4=2/8, 1/8=1/8. 4/8 + 2/8 + 1/8 = 7/8."
+            "solution": "LCM(2,4,8)=8. 1/2=4/8, 1/4=2/8, 1/8=1/8. 4/8 + 2/8 + 1/8 = 7/8.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group I for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_I_002",
@@ -583,7 +786,13 @@
             "questionText": "Add 1/2 + 1/3 + 1/6.",
             "expectedAnswer": "1",
             "hint": "LCM of 2, 3, and 6 is 6.",
-            "solution": "LCM(2,3,6)=6. 1/2=3/6, 1/3=2/6, 1/6=1/6. 3/6+2/6+1/6=6/6=1."
+            "solution": "LCM(2,3,6)=6. 1/2=3/6, 1/3=2/6, 1/6=1/6. 3/6+2/6+1/6=6/6=1.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group I for Fractions Made Fast — Vedic Simplification."
+            }
           },
           {
             "questionId": "VM_G5_L6_I_003",
@@ -595,14 +804,42 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 1/2 + 1/3 + 1/4?",
-            "options": ["3/9", "11/12", "13/12", "1/4"],
+            "options": [
+              "3/9",
+              "11/12",
+              "13/12",
+              "1/4"
+            ],
             "correctIndex": 2,
             "expectedAnswer": "13/12",
             "hint": "LCM of 2, 3, and 4 is 12. Convert all three fractions.",
-            "solution": "LCM(2,3,4)=12. 1/2=6/12, 1/3=4/12, 1/4=3/12. 6/12+4/12+3/12=13/12."
+            "solution": "LCM(2,3,4)=12. 1/2=6/12, 1/3=4/12, 1/4=3/12. 6/12+4/12+3/12=13/12.",
+            "visual": {
+              "kind": "svg",
+              "asset": "vm_mult_by_11.svg",
+              "title": "Fractions Made Fast — Vedic Simplification",
+              "caption": "Group I for Fractions Made Fast — Vedic Simplification."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "vm_mult_by_11.svg",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "caption": "Group I for Fractions Made Fast — Vedic Simplification."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G5_L6_FRACTIONS_SPEED",
+  "courseId": "vedic_math_g5",
+  "visualLibrary": [
+    {
+      "visualId": "vm_mult_by_11",
+      "kind": "svg",
+      "asset": "vm_mult_by_11.svg",
+      "title": "Lesson 6: Fractions Made Fast — Vedic Simplification",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

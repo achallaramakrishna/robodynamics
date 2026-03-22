@@ -95,6 +95,14 @@ class LessonPayload(BaseModel):
     title: str
     gradeBand: str
     source: str
+    productId: Optional[str] = None
+    courseId: Optional[str] = None
+    chapterCode: Optional[str] = None
+    subjectDomain: Optional[str] = None
+    goals: List[str] = Field(default_factory=list)
+    policyTags: List[str] = Field(default_factory=list)
+    toolRequirements: List[Dict[str, Any]] = Field(default_factory=list)
+    scenarioRules: List[Dict[str, Any]] = Field(default_factory=list)
     dbCourseId: Optional[int] = None
     estimatedMinutes: int
     subtopics: List[str]
@@ -122,9 +130,14 @@ class QuestionPayload(BaseModel):
     hint: str
     solution: str
     expectedAnswer: str
+    acceptableAnswers: List[str] = Field(default_factory=list)
     subtopic: Optional[str] = None
     visual: Optional[Dict[str, Any]] = None
-    # ── Rich question types (MCQ, Fill-the-Step, Speed Round) ──
+    passage: Optional[Dict[str, Any]] = None
+    starterCode: Optional[str] = None
+    tests: List[Dict[str, Any]] = Field(default_factory=list)
+    rubric: Optional[Dict[str, Any]] = None
+    # Rich question types (MCQ, Fill-the-Step, Speed Round)
     questionType: Optional[str] = None          # "text" | "mcq" | "fill_step" | "speed_mcq"
     options: Optional[List[str]] = None         # MCQ / speed_mcq: answer choices
     correctIndex: Optional[int] = None          # MCQ / speed_mcq: index of correct option
@@ -205,6 +218,7 @@ class CheckAnswerResponse(BaseModel):
     studentArchetype: Optional[str] = None      # fast_learner | struggling | disengaged | curious | careful_learner
     silenceRecoveryMs: Optional[int] = None     # ms before coach rescues silent student
     boardSpeedFactor: Optional[float] = None    # multiplier for board animation speed
+    toolRun: Optional[Dict[str, Any]] = None
 
 
 class DoubtRequest(BaseModel):

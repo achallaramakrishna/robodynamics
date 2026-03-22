@@ -77,15 +77,28 @@
     }
   ],
   "starterPractice": [
-    { "q": "How many steps does the 2×2 criss-cross have?", "a": "3 (R, CR, L)" },
-    { "q": "How many steps does the 3×3 criss-cross have?", "a": "5 (R, CR, M, CL, L)" },
-    { "q": "In the middle step M of 3×3, how many products are added?", "a": "3 (outer pairs and center×center)" }
+    {
+      "q": "How many steps does the 2×2 criss-cross have?",
+      "a": "3 (R, CR, L)"
+    },
+    {
+      "q": "How many steps does the 3×3 criss-cross have?",
+      "a": "5 (R, CR, M, CL, L)"
+    },
+    {
+      "q": "In the middle step M of 3×3, how many products are added?",
+      "a": "3 (outer pairs and center×center)"
+    }
   ],
   "duolingoLessonArc": {
     "version": "2026-03-mindspark-g8-v1",
     "onboarding": {
       "welcomeMessage": "Three digits times three digits — five neat steps and you're done. Let's power up Urdhva!",
-      "goalOptions": ["School math", "Competitive exams", "Mental speed"],
+      "goalOptions": [
+        "School math",
+        "Competitive exams",
+        "Mental speed"
+      ],
       "avatarMood": "energetic"
     },
     "mission": "Master the 3×3 criss-cross (Urdhva-Tiryagbhyam) with all five partial-product positions.",
@@ -100,7 +113,11 @@
     "rewardLoop": {
       "xpPerGroup": "12 (A-C) / 15 (D-F) / 18 (G-I)",
       "streakBonus": "5 XP for 3 consecutive correct answers",
-      "badges": ["Cross Starter", "Partial Product Pro", "Urdhva Master"]
+      "badges": [
+        "Cross Starter",
+        "Partial Product Pro",
+        "Urdhva Master"
+      ]
     },
     "reviewLoop": {
       "trigger": "2 wrong answers in a group",
@@ -140,7 +157,12 @@
             "expectedAnswer": "672",
             "hint": "R=2×1, CR=3×1+2×2, L=3×2.",
             "solution": "R=2. CR=3+4=7. L=6. Answer: 672.",
-            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "2×2 criss-cross digit positions" }
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group A for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_A2",
@@ -152,14 +174,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is the cross-right (CR) step value when computing 43×12?",
-            "options": ["10", "11", "8", "14"],
-            "correctIndex": 0,
+            "options": [
+              "10",
+              "11",
+              "8",
+              "14"
+            ],
+            "correctIndex": 1,
             "expectedAnswer": "10",
             "hint": "CR = tens-digit of 43 × units-digit of 12 + units-digit of 43 × tens-digit of 12 = 4×2+3×1.",
             "solution": "CR = 4×2+3×1 = 8+3 = 11. Wait — 43×12: a=4,b=3,c=1,d=2. CR=a·d+b·c=4·2+3·1=8+3=11.",
-            "correctIndex": 1
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group A for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group A for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "B",
@@ -188,7 +226,13 @@
             "questionText": "Compute 21×123 by treating it as 021×123 (5-step frame, but L step = 0).",
             "expectedAnswer": "2583",
             "hint": "R=1×3=3, CR=2×3+1×2=8, M=0×3+2×2+1×1=5, CL=0×2+2×1=2, L=0×1=0.",
-            "solution": "R=3, CR=8, M=5, CL=2, L=0. Reading left to right: 02583 → 2583."
+            "solution": "R=3, CR=8, M=5, CL=2, L=0. Reading left to right: 02583 → 2583.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group B for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_B2",
@@ -202,9 +246,21 @@
             "questionText": "Compute 12×111.",
             "expectedAnswer": "1332",
             "hint": "Treat as 012×111. R=2×1=2, CR=1×1+2×1=3, M=0×1+1×1+2×1=3, CL=0×1+1×1=1, L=0.",
-            "solution": "R=2, CR=3, M=3, CL=1, L=0. Answer: 01332=1332."
+            "solution": "R=2, CR=3, M=3, CL=1, L=0. Answer: 01332=1332.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group B for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group B for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "C",
@@ -231,11 +287,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "In the 3×3 criss-cross, how many multiplication terms are added in the Middle (M) step?",
-            "options": ["3", "2", "4", "1"],
+            "options": [
+              "3",
+              "2",
+              "4",
+              "1"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "3",
             "hint": "M = h₁×u₂ + t₁×t₂ + u₁×h₂ — three products.",
-            "solution": "The Middle step crosses hundreds with units, tens with tens, and units with hundreds — three products."
+            "solution": "The Middle step crosses hundreds with units, tens with tens, and units with hundreds — three products.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group C for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_C2",
@@ -250,9 +317,20 @@
             "expectedAnswer": "12321",
             "hint": "Every digit is 1. R=1, CR=2, M=3, CL=2, L=1.",
             "solution": "R=1·1=1. CR=1·1+1·1=2. M=1·1+1·1+1·1=3. CL=1·1+1·1=2. L=1·1=1. Answer=12321.",
-            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "5-position criss-cross grid for 3×3 multiplication" }
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group C for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group C for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "D",
@@ -280,13 +358,39 @@
             "questionType": "fill_step",
             "questionText": "Compute 123×321 step by step using the 5-position criss-cross.",
             "steps": [
-              { "label": "R: units×units (3×1)", "answer": "3", "hint": "3×1=3, no carry." },
-              { "label": "CR: 2×1+3×2", "answer": "8", "hint": "2+6=8, no carry." },
-              { "label": "M: 1×1+2×2+3×3 (write digit, note carry)", "answer": "4 carry 1", "hint": "1+4+9=14. Write 4, carry 1." },
-              { "label": "CL: 1×2+2×3 + carry", "answer": "9", "hint": "2+6=8, plus carry 1 = 9." },
-              { "label": "L: 1×3", "answer": "3", "hint": "1×3=3, no carry." }
+              {
+                "label": "R: units×units (3×1)",
+                "answer": "3",
+                "hint": "3×1=3, no carry."
+              },
+              {
+                "label": "CR: 2×1+3×2",
+                "answer": "8",
+                "hint": "2+6=8, no carry."
+              },
+              {
+                "label": "M: 1×1+2×2+3×3 (write digit, note carry)",
+                "answer": "4 carry 1",
+                "hint": "1+4+9=14. Write 4, carry 1."
+              },
+              {
+                "label": "CL: 1×2+2×3 + carry",
+                "answer": "9",
+                "hint": "2+6=8, plus carry 1 = 9."
+              },
+              {
+                "label": "L: 1×3",
+                "answer": "3",
+                "hint": "1×3=3, no carry."
+              }
             ],
-            "expectedAnswer": "39483"
+            "expectedAnswer": "39483",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group D for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_D2",
@@ -300,9 +404,21 @@
             "questionText": "Compute 112×211 using the 5-step criss-cross.",
             "expectedAnswer": "23632",
             "hint": "R=2×1=2. CR=1×1+2×1=3. M=1×1+1×1+2×2=6. CL=1×1+1×2=3. L=1×2=2.",
-            "solution": "R=2. CR=3. M=1+1+4=6. CL=1+2=3. L=2. Answer: 23632."
+            "solution": "R=2. CR=3. M=1+1+4=6. CL=1+2=3. L=2. Answer: 23632.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group D for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group D for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "E",
@@ -329,12 +445,22 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 213×123, what is the raw (before carry) Middle step value M?",
-            "options": ["11", "8", "14", "9"],
+            "options": [
+              "11",
+              "8",
+              "14",
+              "9"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "11",
             "hint": "M = 2×3 + 1×2 + 3×1 = 6+2+3.",
             "solution": "M = 2×3+1×2+3×1 = 6+2+3 = 11. Write 1, carry 1.",
-            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "Middle step crosses for 213×123" }
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group E for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_E2",
@@ -346,13 +472,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "For 234×456, what is the raw Middle step value M?",
-            "options": ["43", "38", "47", "35"],
+            "options": [
+              "43",
+              "38",
+              "47",
+              "35"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "43",
             "hint": "M = 2×6 + 3×5 + 4×4 = 12+15+16.",
-            "solution": "M = 12+15+16 = 43. Write 3, carry 4."
+            "solution": "M = 12+15+16 = 43. Write 3, carry 4.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group E for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group E for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "F",
@@ -380,15 +523,47 @@
             "questionType": "fill_step",
             "questionText": "Compute 213×123 using the 5-step criss-cross. Fill each step (include carry tracking).",
             "steps": [
-              { "label": "R: 3×3", "answer": "9", "hint": "3×3=9, no carry." },
-              { "label": "CR: 1×3+3×2", "answer": "9", "hint": "3+6=9, no carry." },
-              { "label": "M: 2×3+1×2+3×1 (raw sum, then write digit and carry)", "answer": "11 → write 1 carry 1", "hint": "6+2+3=11. Write 1, carry 1." },
-              { "label": "CL: 2×2+1×1 + carry 1", "answer": "6", "hint": "4+1+carry1=6, no further carry." },
-              { "label": "L: 2×1", "answer": "2", "hint": "2×1=2." }
+              {
+                "label": "R: 3×3",
+                "answer": "9",
+                "hint": "3×3=9, no carry."
+              },
+              {
+                "label": "CR: 1×3+3×2",
+                "answer": "9",
+                "hint": "3+6=9, no carry."
+              },
+              {
+                "label": "M: 2×3+1×2+3×1 (raw sum, then write digit and carry)",
+                "answer": "11 → write 1 carry 1",
+                "hint": "6+2+3=11. Write 1, carry 1."
+              },
+              {
+                "label": "CL: 2×2+1×1 + carry 1",
+                "answer": "6",
+                "hint": "4+1+carry1=6, no further carry."
+              },
+              {
+                "label": "L: 2×1",
+                "answer": "2",
+                "hint": "2×1=2."
+              }
             ],
-            "expectedAnswer": "26199"
+            "expectedAnswer": "26199",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group F for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group F for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "G",
@@ -418,7 +593,12 @@
             "expectedAnswer": "106704",
             "hint": "R=24→4c2. CR=38+2=40→0c4. M=43+4=47→7c4. CL=22+4=26→6c2. L=8+2=10.",
             "solution": "R: 4×6=24, write 4 carry 2. CR: 3×6+4×5=38, +2=40, write 0 carry 4. M: 2×6+3×5+4×4=43, +4=47, write 7 carry 4. CL: 2×5+3×4=22, +4=26, write 6 carry 2. L: 2×4=8, +2=10, write 10. Answer: 106704.",
-            "visual": { "type": "svg", "asset": "vm_criss_cross_4x4", "caption": "Carry tracking in 5-step 3×3 multiplication" }
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group G for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_G2",
@@ -432,9 +612,21 @@
             "questionText": "Compute 132×231 using the 5-step criss-cross.",
             "expectedAnswer": "30492",
             "hint": "R=2×1=2. CR=3×1+2×3=9. M=1×1+3×3+2×2=14→4c1. CL=1×3+3×2=9, +1=10→0c1. L=1×2+1=3.",
-            "solution": "R=2. CR=9. M=14→4c1. CL=9+1=10→0c1. L=2+1=3. Answer: 30492."
+            "solution": "R=2. CR=9. M=14→4c1. CL=9+1=10→0c1. L=2+1=3. Answer: 30492.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group G for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group G for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "H",
@@ -463,7 +655,13 @@
             "questionText": "Compute 321×123 using the 5-step criss-cross.",
             "expectedAnswer": "39483",
             "hint": "Same digits as 123×321 — multiplication is commutative.",
-            "solution": "321×123 = 123×321 = 39483."
+            "solution": "321×123 = 123×321 = 39483.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group H for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_H2",
@@ -475,13 +673,30 @@
             "type": "practice",
             "questionType": "mcq",
             "questionText": "What is 222×333?",
-            "options": ["73926", "74926", "72926", "73836"],
+            "options": [
+              "73926",
+              "74926",
+              "72926",
+              "73836"
+            ],
             "correctIndex": 0,
             "expectedAnswer": "73926",
             "hint": "R=2×3=6. CR=2×3+2×3=12→2c1. M=2×3+2×3+2×3=18+1=19→9c1. CL=2×3+2×3=12+1=13→3c1. L=2×3=6+1=7.",
-            "solution": "R=6. CR=12→2c1. M=18+1=19→9c1. CL=12+1=13→3c1. L=6+1=7. Answer: 73926."
+            "solution": "R=6. CR=12→2c1. M=18+1=19→9c1. CL=12+1=13→3c1. L=6+1=7. Answer: 73926.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group H for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group H for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       },
       {
         "exerciseGroup": "I",
@@ -510,7 +725,13 @@
             "questionText": "Compute 987×654 using the 5-step criss-cross. Track all carries carefully.",
             "expectedAnswer": "645498",
             "hint": "R=7×4=28→8c2. CR=8×4+7×5+2=69→9c6. M=9×4+8×5+7×6+6=124→4c12. CL=9×5+8×6+12=105→5c10. L=9×6+10=64.",
-            "solution": "R: 7×4=28, write 8 carry 2. CR: 8×4+7×5+2=69, write 9 carry 6. M: 9×4+8×5+7×6+6=118+6=124, write 4 carry 12. CL: 9×5+8×6+12=93+12=105, write 5 carry 10. L: 9×6+10=64. Answer: 645498."
+            "solution": "R: 7×4=28, write 8 carry 2. CR: 8×4+7×5+2=69, write 9 carry 6. M: 9×4+8×5+7×6+6=118+6=124, write 4 carry 12. CL: 9×5+8×6+12=93+12=105, write 5 carry 10. L: 9×6+10=64. Answer: 645498.",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group I for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           },
           {
             "questionId": "VM_G8_L5_I2",
@@ -523,16 +744,59 @@
             "questionType": "fill_step",
             "questionText": "Compute 213×123 again as a speed check — fill R through L.",
             "steps": [
-              { "label": "R", "answer": "9", "hint": "3×3=9" },
-              { "label": "CR", "answer": "9", "hint": "1×3+3×2=9" },
-              { "label": "M (raw, then digit and carry)", "answer": "11 → write 1 carry 1", "hint": "2×3+1×2+3×1=11" },
-              { "label": "CL (include carry)", "answer": "6", "hint": "2×2+1×1+1=6" },
-              { "label": "L", "answer": "2", "hint": "2×1=2" }
+              {
+                "label": "R",
+                "answer": "9",
+                "hint": "3×3=9"
+              },
+              {
+                "label": "CR",
+                "answer": "9",
+                "hint": "1×3+3×2=9"
+              },
+              {
+                "label": "M (raw, then digit and carry)",
+                "answer": "11 → write 1 carry 1",
+                "hint": "2×3+1×2+3×1=11"
+              },
+              {
+                "label": "CL (include carry)",
+                "answer": "6",
+                "hint": "2×2+1×1+1=6"
+              },
+              {
+                "label": "L",
+                "answer": "2",
+                "hint": "2×1=2"
+              }
             ],
-            "expectedAnswer": "26199"
+            "expectedAnswer": "26199",
+            "visual": {
+              "kind": "svg",
+              "asset": "criss_cross_2x2.svg",
+              "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+              "caption": "Group I for 4-Digit Criss-Cross — Urdhva at Full Power."
+            }
           }
-        ]
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "criss_cross_2x2.svg",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "caption": "Group I for 4-Digit Criss-Cross — Urdhva at Full Power."
+        }
       }
     ]
-  }
+  },
+  "chapterCode": "VM_G8_L5_CRISS_CROSS_4DIG",
+  "courseId": "vedic_math_g8",
+  "visualLibrary": [
+    {
+      "visualId": "criss_cross_2x2",
+      "kind": "svg",
+      "asset": "criss_cross_2x2.svg",
+      "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
 }

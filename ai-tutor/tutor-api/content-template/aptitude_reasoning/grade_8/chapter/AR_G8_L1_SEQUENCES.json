@@ -1,0 +1,535 @@
+{
+  "chapterCode": "AR_G8_L1_SEQUENCES",
+  "courseId": "aptitude_reasoning_g8",
+  "title": "Advanced Sequences",
+  "source": "MindSpark Grade 8 Aptitude & Reasoning | Chapter 1: Advanced Sequences",
+  "estimatedMinutes": 18,
+  "subtopics": [
+    "n² + n and n² − n series",
+    "Fibonacci variants and extensions",
+    "Two interleaved series (odd/even position rules)",
+    "Alternating-operation series (+k, ×k patterns)",
+    "Series where differences form a GP"
+  ],
+  "learningGoals": [
+    "Identify the underlying formula or rule in complex number sequences",
+    "Detect and separate two interleaved series from a single sequence",
+    "Recognize alternating operations and predict the next term",
+    "Verify when successive differences themselves form a geometric progression",
+    "Solve IMO/Olympiad-style sequence questions under timed conditions"
+  ],
+  "coreIdeas": [
+    "Position-based formulas: term T(n) = n² + n gives 2, 6, 12, 20, 30…",
+    "Interleaved series: odd positions follow one rule, even positions another — split and treat independently",
+    "Alternating ops: +2, ×3, +2, ×3 — apply operations cyclically, track which step you are on",
+    "Difference GP: if differences are 2, 4, 8, 16… (ratio 2), you can calculate any term directly",
+    "Fibonacci extension: F(n) = F(n-1) + F(n-2); variants include F(n) = F(n-1) + F(n-2) + F(n-3)"
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Find the next term: 2, 6, 12, 20, 30, ?",
+      "solution": "T(n) = n² + n. T(1)=2, T(2)=6, T(3)=12, T(4)=20, T(5)=30, T(6)=42. Answer: 42.",
+      "concept": "n² + n formula series"
+    },
+    {
+      "id": "WE2",
+      "problem": "Find the missing term: 3, 5, 9, 11, 15, 17, ?, 23",
+      "solution": "Odd positions: 3, 9, 15, 21 (+6 each). Even positions: 5, 11, 17, 23 (+6 each). Missing term (7th, odd position) = 15 + 6 = 21. Answer: 21.",
+      "concept": "Interleaved two-series detection"
+    },
+    {
+      "id": "WE3",
+      "problem": "Series: 4, 6, 18, 20, 60, 62, ?. Find the next term.",
+      "solution": "Pattern: +2, ×3, +2, ×3, +2, ×3. So 62 × 3 = 186. Answer: 186.",
+      "concept": "Alternating operations (+2, ×3) series"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g8-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Competitive exam prep"
+      ],
+      "coachIntro": "Welcome to Advanced Sequences! This is where most Olympiad students gain a serious edge. We'll decode hidden patterns that trip up 80% of test-takers. Ready to level up?",
+      "placementRule": "If learner selects 'I have done this before', skip Exercise A and begin at Exercise B."
+    },
+    "mission": {
+      "missionTitle": "Crack the Code: Advanced Sequences",
+      "missionPromise": "By the end of this mission you will instantly spot n²+n series, interleaved sequences, and alternating-operation patterns — the three most common traps in Olympiad papers.",
+      "successCelebration": "Sequence Sorcerer badge unlocked! You cracked all 8 sequence types. Most students take 3 attempts — you nailed it!"
+    },
+    "microLessonPattern": [
+      "Hook: show a sequence, ask 'what comes next?' — no explanation yet",
+      "Reveal: expose the rule step-by-step on the board",
+      "Guided try: learner applies the rule to a new sequence",
+      "Speed drill: 3 rapid-fire questions with 20-second timer",
+      "Boss challenge: mixed sequence requiring two skills"
+    ],
+    "rewardLoop": {
+      "xpUnit": "spark",
+      "streakRule": "3 correct in a row = Streak Flame + 5 bonus sparks",
+      "badgeRule": "Complete all 8 exercises with ≥ 80% accuracy = Sequence Sorcerer badge",
+      "celebrationStyle": "Animated board explosion + trophy icon + encouraging mentor line"
+    },
+    "reviewLoop": {
+      "trigger": "Two consecutive wrong answers on the same subtopic",
+      "practiceStyle": "Micro-reteach: show worked example on board, then give a near-identical practice question",
+      "masteryRule": "3 correct answers on a subtopic = mastered; move on",
+      "revisitRule": "Any subtopic below 67% accuracy reappears in the final review round"
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G8_L1_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Look at this: 2, 6, 12, 20, 30. What do you notice? The gaps are 4, 6, 8, 10 — they increase by 2 each time. That means the differences form an AP. The formula hiding here is T(n) = n² + n. Recognising the difference pattern is the master key to any advanced sequence.",
+        "boardAction": "Write the sequence 2, 6, 12, 20, 30 across the top. Below, draw arcs showing differences 4, 6, 8, 10. Then write T(n) = n² + n and verify T(1)=2, T(2)=6 in a small table.",
+        "checkpointPrompt": "Using T(n) = n² + n, what is the 7th term?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "56",
+        "fallbackHint": "Substitute n=7: 7² + 7 = 49 + 7 = 56.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "2, 6, 12, 20, 30",
+            "x": "60",
+            "y": "80",
+            "fontSize": 22,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "+4  +6  +8  +10",
+            "x": "80",
+            "y": "130",
+            "fontSize": 16,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "line",
+            "x1": "60",
+            "y1": "100",
+            "x2": "520",
+            "y2": "100",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "T(n) = n² + n",
+            "x": "180",
+            "y": "200",
+            "fontSize": 24,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Advanced Sequences",
+          "caption": "Screenplay beat for Advanced Sequences."
+        }
+      },
+      {
+        "beatId": "AR_G8_L1_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Now watch me tackle an interleaved series: 3, 5, 9, 11, 15, 17, ?, 23. First I separate odd positions — 3, 9, 15 — they go +6 each time, so the missing 7th term is 21. Even positions — 5, 11, 17, 23 — also +6. Two independent ladders hidden in one sequence. That's the trap!",
+        "boardAction": "Write full sequence. Circle odd-position terms in blue: 3, 9, 15, ?. Circle even-position terms in orange: 5, 11, 17, 23. Draw separate ladders for each group. Fill in the blank: 21.",
+        "checkpointPrompt": "In the series 2, 7, 4, 14, 6, 21, 8, ?, what is the missing term?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "28",
+        "fallbackHint": "Even positions: 7, 14, 21, ? — they multiply by 7 each term step. Actually each even term = 7 × (position index): 7×1=7, 7×2=14, 7×3=21, 7×4=28.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "3  5  9  11  15  17  ?  23",
+            "x": "40",
+            "y": "80",
+            "fontSize": 20,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": "Odd:  3 → 9 → 15 → 21  (+6)",
+            "x": "40",
+            "y": "150",
+            "fontSize": 17,
+            "color": "#4FC3F7"
+          },
+          {
+            "kind": "text",
+            "content": "Even: 5 → 11 → 17 → 23  (+6)",
+            "x": "40",
+            "y": "200",
+            "fontSize": 17,
+            "color": "#FF8F00"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "120",
+            "x2": "540",
+            "y2": "120",
+            "stroke": "#555555",
+            "strokeWidth": 1
+          },
+          {
+            "kind": "text",
+            "content": "Answer: 21",
+            "x": "200",
+            "y": "260",
+            "fontSize": 22,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Advanced Sequences",
+          "caption": "Screenplay beat for Advanced Sequences."
+        }
+      },
+      {
+        "beatId": "AR_G8_L1_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Your turn. Series: 4, 6, 18, 20, 60, 62, ?. Spot the operation pattern before you guess. Count the steps, label each gap as + or ×, and the rule will jump out at you.",
+        "boardAction": "Write the sequence. Leave a blank arrow space between each term for the student to label. Show +2 and ×3 labels appearing step-by-step after the student responds.",
+        "checkpointPrompt": "What is the next term after 62 in the series 4, 6, 18, 20, 60, 62, ?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "186",
+        "fallbackHint": "Pattern is +2, ×3, +2, ×3 ... . After 62, the next operation is ×3. So 62 × 3 = 186.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "content": "4   6   18   20   60   62   ?",
+            "x": "40",
+            "y": "90",
+            "fontSize": 20,
+            "color": "#FFFFFF"
+          },
+          {
+            "kind": "text",
+            "content": " +2  ×3   +2   ×3   +2   ×3",
+            "x": "55",
+            "y": "140",
+            "fontSize": 16,
+            "color": "#FFC107"
+          },
+          {
+            "kind": "line",
+            "x1": "40",
+            "y1": "110",
+            "x2": "550",
+            "y2": "110",
+            "stroke": "#4FC3F7",
+            "strokeWidth": 2
+          },
+          {
+            "kind": "text",
+            "content": "62 × 3 = 186",
+            "x": "180",
+            "y": "200",
+            "fontSize": 22,
+            "color": "#69F0AE"
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "clock_face.svg",
+          "title": "Advanced Sequences",
+          "caption": "Screenplay beat for Advanced Sequences."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "n² + n and n² − n series",
+      "missionStepTitle": "Exercise A: Formula-Based Series",
+      "coachHook": "Can you spot the formula? These aren't random numbers — there's a perfect algebraic rule beneath them.",
+      "boardDemo": {
+        "title": "Recognising n² ± n series",
+        "steps": [
+          "Write sequence: 0, 2, 6, 12, 20",
+          "Calculate differences: 2, 4, 6, 8 — an AP with common difference 2",
+          "Guess formula: T(n) = n² − n. Verify: T(1)=0, T(2)=2, T(3)=6 ✓",
+          "Predict T(6) = 36 − 6 = 30"
+        ],
+        "teacherLine": "When differences form an AP themselves, look for an n² formula. Add or subtract n depending on the starting value."
+      },
+      "readAloudPrompt": "Say aloud: 'First find the differences, then find the difference of differences.'",
+      "tryPrompt": "What is the 8th term of the series 2, 6, 12, 20, 30, 42, ...?",
+      "masteryCheck": "72",
+      "instantFeedbackWin": "Spot on! T(8) = 64 + 8 = 72. You're reading formulas like a pro!",
+      "instantFeedbackRetry": "Here's a trick: T(n) = n² + n. For n=8: 8×8=64, 64+8=72.",
+      "reviewPrompt": "Which formula fits the series 0, 2, 6, 12, 20? Write T(n) = ?",
+      "xpReward": 12,
+      "badgeFocus": "Formula Finder",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group A for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Fibonacci variants",
+      "missionStepTitle": "Exercise B: Fibonacci & Tribonacci",
+      "coachHook": "The Fibonacci sequence is famous, but Olympiads love its twisted cousins. Let's meet them.",
+      "boardDemo": {
+        "title": "Fibonacci variants",
+        "steps": [
+          "Classic Fibonacci: 1, 1, 2, 3, 5, 8, 13 — each term = sum of previous two",
+          "Variant: 1, 2, 3, 5, 8, 13 — same rule, different start",
+          "Tribonacci: 1, 1, 2, 4, 7, 13 — each term = sum of previous THREE",
+          "Verify: 1+1+2=4, 1+2+4=7, 2+4+7=13 ✓"
+        ],
+        "teacherLine": "Always check: is the term the sum of the last 2 or last 3? That one question separates Fibonacci from Tribonacci."
+      },
+      "readAloudPrompt": "Read this: 'In a Fibonacci variant, identify how many previous terms are summed.'",
+      "tryPrompt": "In the series 1, 1, 2, 4, 7, 13, 24, what is the next term?",
+      "masteryCheck": "44",
+      "instantFeedbackWin": "Excellent! 7+13+24 = 44. You've mastered Tribonacci!",
+      "instantFeedbackRetry": "Here's a trick: each term = sum of previous 3. So 7 + 13 + 24 = 44.",
+      "reviewPrompt": "What distinguishes a Tribonacci series from a Fibonacci series?",
+      "xpReward": 12,
+      "badgeFocus": "Fibonacci Wizard",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group B for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Interleaved series",
+      "missionStepTitle": "Exercise C: The Hidden Two-Series Trap",
+      "coachHook": "This is the #1 Olympiad trap — two sequences disguised as one. Split and conquer!",
+      "boardDemo": {
+        "title": "Detecting interleaved series",
+        "steps": [
+          "Sequence: 1, 4, 3, 8, 5, 12, 7, 16",
+          "Odd positions (1st, 3rd, 5th, 7th): 1, 3, 5, 7 — AP with d=2",
+          "Even positions (2nd, 4th, 6th, 8th): 4, 8, 12, 16 — AP with d=4",
+          "Next term (9th, odd position) = 7 + 2 = 9"
+        ],
+        "teacherLine": "Whenever a sequence looks irregular, immediately try separating odd and even positions."
+      },
+      "readAloudPrompt": "Say: 'Odd terms have one rule. Even terms have another rule.'",
+      "tryPrompt": "Find the missing term: 2, 3, 6, 9, 18, 27, ?, 81",
+      "masteryCheck": "54",
+      "instantFeedbackWin": "Brilliant! Odd positions: 2, 6, 18, 54 (×3). Even: 3, 9, 27, 81 (×3). Missing = 54.",
+      "instantFeedbackRetry": "Here's a trick: Split — odd positions: 2, 6, 18, ? (each ×3). So ? = 18×3 = 54.",
+      "reviewPrompt": "How many terms does each sub-sequence have when you split an 8-term interleaved series?",
+      "xpReward": 14,
+      "badgeFocus": "Interleave Inspector",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group C for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Alternating-operation series",
+      "missionStepTitle": "Exercise D: Alternating Operations",
+      "coachHook": "Operations can alternate like a pendulum — +k then ×k then +k again. Track the rhythm!",
+      "boardDemo": {
+        "title": "Alternating +/× series",
+        "steps": [
+          "Series: 5, 8, 24, 27, 81, 84",
+          "Gaps: +3, ×3, +3, ×3, +3",
+          "Operations alternate: +3, ×3, +3, ×3, +3, ×3 ...",
+          "Next: 84 × 3 = 252"
+        ],
+        "teacherLine": "Label each gap as + or × before doing any arithmetic. The operation label always comes before the calculation."
+      },
+      "readAloudPrompt": "Label each operation aloud as you move through the series.",
+      "tryPrompt": "Series: 7, 9, 18, 20, 40, 42, ?. What is the next term?",
+      "masteryCheck": "84",
+      "instantFeedbackWin": "Perfect! +2, ×2, +2, ×2, +2, ×2. So 42 × 2 = 84.",
+      "instantFeedbackRetry": "Here's a trick: The pattern is +2, ×2 alternating. After +2 we get 42, so next is ×2: 42×2=84.",
+      "reviewPrompt": "In an alternating-op series, how do you determine which operation applies to a given position?",
+      "xpReward": 12,
+      "badgeFocus": "Operation Tracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group D for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Differences forming a GP",
+      "missionStepTitle": "Exercise E: Geometric Difference Series",
+      "coachHook": "When differences multiply instead of adding, the next term explodes. Buckle up!",
+      "boardDemo": {
+        "title": "Series with differences in GP",
+        "steps": [
+          "Series: 3, 5, 9, 17, 33",
+          "Differences: 2, 4, 8, 16 — GP with ratio 2",
+          "Next difference = 32",
+          "Next term = 33 + 32 = 65"
+        ],
+        "teacherLine": "If the differences multiply by a constant each time, you have a geometric difference series. Find the common ratio of differences, extend, and add."
+      },
+      "readAloudPrompt": "Verify: 2×2=4, 4×2=8, 8×2=16. The differences double every step.",
+      "tryPrompt": "Series: 2, 3, 5, 9, 17, 33, ?. What comes next?",
+      "masteryCheck": "65",
+      "instantFeedbackWin": "Excellent! Differences: 1, 2, 4, 8, 16, 32. Next term = 33 + 32 = 65.",
+      "instantFeedbackRetry": "Here's a trick: Find differences — 1, 2, 4, 8, 16, 32 (doubling GP). Add 32 to 33.",
+      "reviewPrompt": "What is the common ratio of the difference series in 1, 2, 5, 14, 41?",
+      "xpReward": 14,
+      "badgeFocus": "GP Difference Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group E for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Mixed sequence identification",
+      "missionStepTitle": "Exercise F: Identify the Rule First",
+      "coachHook": "No label given. Classify the series type, then find the missing term. The toughest Olympiad format.",
+      "boardDemo": {
+        "title": "Classification before calculation",
+        "steps": [
+          "Step 1: Calculate all differences",
+          "Step 2: Check if differences are constant (AP), in GP, or alternating",
+          "Step 3: Apply the correct rule",
+          "Step 4: Double-check with the known terms"
+        ],
+        "teacherLine": "Never rush to guess the rule. Compute differences first, classify second, calculate third."
+      },
+      "readAloudPrompt": "Read: 'Differences reveal the rule. Always compute them first.'",
+      "tryPrompt": "Classify and find the next term: 1, 2, 5, 10, 17, 26, ?",
+      "masteryCheck": "37",
+      "instantFeedbackWin": "Spot on! Differences: 1, 3, 5, 7, 9, 11 — an AP (d=2). Next diff=11, so 26+11=37.",
+      "instantFeedbackRetry": "Here's a trick: differences are 1,3,5,7,9 — odd numbers (AP). Next odd number is 11. Add to 26.",
+      "reviewPrompt": "In the series 1, 2, 5, 10, 17, 26 — what is the type of the difference series?",
+      "xpReward": 14,
+      "badgeFocus": "Series Classifier",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group F for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "G",
+      "subtopic": "Speed drill — mixed types",
+      "missionStepTitle": "Exercise G: Speed Challenge",
+      "coachHook": "20 seconds per question. Olympiad clock is ticking. Go!",
+      "boardDemo": {
+        "title": "Speed strategy",
+        "steps": [
+          "Glance at first 3 terms — guess the type",
+          "Verify with one more term",
+          "Calculate and move on"
+        ],
+        "teacherLine": "In timed exams, your first instinct after seeing 3 terms should already suggest the rule. Practice builds that reflex."
+      },
+      "readAloudPrompt": "Challenge: solve each in under 20 seconds.",
+      "tryPrompt": "Boss question — two parts: (a) Find next term in 5, 11, 23, 47, 95, ? (b) Find missing: 4, 7, 13, _, 31, 43",
+      "masteryCheck": "(a) 191  (b) 21",
+      "instantFeedbackWin": "Outstanding! (a) Rule: ×2+1 → 95×2+1=191. (b) Differences 3,6,_,12 are AP? No — 3,6,8 breaks it. Check: +3,+6,+8,+12 — actually +3,+6,+8 is off. Correct differences: 3,6,9,12,... so missing = 13+8=21.",
+      "instantFeedbackRetry": "Here's a trick: For (a) each term = previous×2+1. For (b) differences are 3,6,?→try AP d=3 → next diff=9 → 13+8=21.",
+      "reviewPrompt": "What single test distinguishes a ×2+1 series from a pure ×2 series?",
+      "xpReward": 16,
+      "badgeFocus": "Speed Sequencer",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group G for Advanced Sequences."
+      }
+    },
+    {
+      "exerciseGroup": "H",
+      "subtopic": "Boss challenge — Olympiad level",
+      "missionStepTitle": "Exercise H: Olympiad Boss Round",
+      "coachHook": "This is Olympiad difficulty. Two concepts in one question. Stay calm, split the problem.",
+      "boardDemo": {
+        "title": "Composite sequence challenge",
+        "steps": [
+          "Read the full sequence before computing anything",
+          "Check for interleaving first (most common trap)",
+          "If not interleaved, compute differences",
+          "Combine rule if necessary (e.g., differences of differences form GP)"
+        ],
+        "teacherLine": "Elite Olympiad questions layer two patterns. Your job: peel them one at a time."
+      },
+      "readAloudPrompt": "Breathe and read: identify the pattern type before touching a number.",
+      "tryPrompt": "Find the next term: 1, 1, 2, 3, 4, 9, 8, 27, 16, 81, ?",
+      "masteryCheck": "32",
+      "instantFeedbackWin": "Masterful! Odd positions: 1, 2, 4, 8, 16, ? → ×2 → 32. Even positions: 1, 3, 9, 27, 81 → ×3. Next odd-position term = 32.",
+      "instantFeedbackRetry": "Here's a trick: Split into odd and even positions. Odd: powers of 2. Even: powers of 3. 11th term is odd-position = 2^5 = 32.",
+      "reviewPrompt": "In the series 1, 1, 2, 3, 4, 9, 8, 27, 16, 81 — what are the two geometric ratios?",
+      "xpReward": 18,
+      "badgeFocus": "Sequence Sorcerer",
+      "visual": {
+        "kind": "svg",
+        "asset": "clock_face.svg",
+        "title": "Advanced Sequences",
+        "caption": "Group H for Advanced Sequences."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "clock_face",
+      "kind": "svg",
+      "asset": "clock_face.svg",
+      "title": "Advanced Sequences",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

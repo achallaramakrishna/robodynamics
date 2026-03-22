@@ -12,6 +12,14 @@ export type TutorStartResponse = {
     title: string;
     gradeBand: string;
     source: string;
+    productId?: string;
+    courseId?: string;
+    chapterCode?: string;
+    subjectDomain?: string;
+    goals?: string[];
+    policyTags?: string[];
+    toolRequirements?: Array<Record<string, unknown>>;
+    scenarioRules?: Array<Record<string, unknown>>;
     dbCourseId?: number;
     estimatedMinutes: number;
     subtopics: string[];
@@ -107,6 +115,7 @@ export type TutorQuestion = {
   questionText: string;
   hint: string;
   solution: string;
+  acceptableAnswers?: string[];
   subtopic?: string;
   visual?: {
     kind: string;
@@ -115,12 +124,70 @@ export type TutorQuestion = {
     asset?: string;       // filename in /math-svgs/vedic/, e.g. "nikhilam_base100.svg"
     caption?: string;     // optional caption below visual
   };
-  // ── Rich question types ──────────────────────────────────────────────────
-  questionType?: "text" | "mcq" | "fill_step" | "speed_mcq";
+  passage?: Record<string, unknown>;
+  starterCode?: string;
+  tests?: Array<Record<string, unknown>>;
+  rubric?: Record<string, unknown>;
+  // Rich question types
+  questionType?: "text" | "mcq" | "fill_step" | "speed_mcq" | "code";
   options?: string[];           // MCQ / speed_mcq: the 4 answer choices
   correctIndex?: number;        // MCQ / speed_mcq: index of correct option (0-based)
   steps?: TutorFillStep[];      // fill_step: ordered sutra steps student completes
 };
+
+export type TutorBoardAnimationStep =
+  | {
+      kind: "line";
+      id: string;
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      color?: string;
+      width?: number;
+      delaySec: number;
+      durationSec: number;
+    }
+  | {
+      kind: "text";
+      id: string;
+      x: number;
+      y: number;
+      text: string;
+      size?: number;
+      color?: string;
+      delaySec: number;
+      durationSec: number;
+      fontWeight?: number | string;
+      opacity?: number;
+    }
+  | {
+      kind: "image";
+      id: string;
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      href: string;
+      opacity?: number;
+      delaySec: number;
+      durationSec: number;
+    }
+  | {
+      kind: "rect";
+      id: string;
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      fill?: string;
+      stroke?: string;
+      strokeWidth?: number;
+      radius?: number;
+      opacity?: number;
+      delaySec: number;
+      durationSec: number;
+    };
 
 export type TutorTeachingStep = {
   stepId: string;
@@ -131,6 +198,7 @@ export type TutorTeachingStep = {
   boardAction: string;
   checkpointPrompt: string;
   microPractice: string;
+  svgAnimation?: TutorBoardAnimationStep[];
 };
 
 export type TutorScreenplayBeat = {
@@ -153,43 +221,7 @@ export type TutorScreenplayBeat = {
   useWhenIncorrect?: boolean;
   minConfidence?: "low" | "medium" | "high";
   maxConfidence?: "low" | "medium" | "high";
-  svgAnimation?: Array<
-    | {
-        kind: "line";
-        id: string;
-        x1: number;
-        y1: number;
-        x2: number;
-        y2: number;
-        color?: string;
-        width?: number;
-        delaySec: number;
-        durationSec: number;
-      }
-    | {
-        kind: "text";
-        id: string;
-        x: number;
-        y: number;
-        text: string;
-        size?: number;
-        color?: string;
-        delaySec: number;
-        durationSec: number;
-      }
-    | {
-        kind: "image";
-        id: string;
-        x: number;
-        y: number;
-        width: number;
-        height: number;
-        href: string;
-        opacity?: number;
-        delaySec: number;
-        durationSec: number;
-      }
-  >;
+  svgAnimation?: TutorBoardAnimationStep[];
 };
 
 export type TutorChapter = {
@@ -219,6 +251,7 @@ export type TutorCheckResponse = {
   boardSpeedFactor?: number;
   silenceRecoveryMs?: number;
   sessionProgress?: TutorSessionProgress;
+  toolRun?: Record<string, unknown>;
   summary?: {
     attempts: number;
     correctCount: number;
@@ -245,6 +278,14 @@ export type TutorNextQuestionResponse = {
     title: string;
     gradeBand: string;
     source: string;
+    productId?: string;
+    courseId?: string;
+    chapterCode?: string;
+    subjectDomain?: string;
+    goals?: string[];
+    policyTags?: string[];
+    toolRequirements?: Array<Record<string, unknown>>;
+    scenarioRules?: Array<Record<string, unknown>>;
     dbCourseId?: number;
     estimatedMinutes: number;
     subtopics: string[];
@@ -271,13 +312,17 @@ export type TutorCatalogResponse = {
 };
 
 export type TutorOrchestratorState =
-  | "idle"
-  | "intro"
-  | "teach"
-  | "checkpoint"
-  | "practice"
+  | "boot"
+  | "entry"
+  | "coach_intro"
+  | "coach_demo"
+  | "student_turn"
+  | "evaluate"
   | "feedback"
-  | "adapt";
+  | "remediate"
+  | "review"
+  | "complete"
+  | "error";
 
 export type TutorOrchestratorSnapshot = {
   sessionId: string;

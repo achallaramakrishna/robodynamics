@@ -3,6 +3,9 @@ from __future__ import annotations
 import os
 from typing import Any, Dict, List, Protocol
 
+from app.services.product_adapters import ProductAdapterRegistry
+from app.services.runtime_contract import RuntimeLesson, runtime_lesson_to_legacy_payload
+
 
 class TutorEngine(Protocol):
     DEFAULT_CHAPTER: str
@@ -32,10 +35,12 @@ class TutorEngineRegistry:
         "NEET_BIOLOGY": "neet_biology",
         "APTITUDE_REASONING": "aptitude_reasoning",
         "FINANCIAL_LITERACY": "financial_literacy",
+        "CODING": "coding_python_basics",
     }
 
     def __init__(self, engines: Dict[str, TutorEngine]) -> None:
         self._engines = {self._normalize_course_id(k): v for k, v in engines.items()}
+        self._adapters = ProductAdapterRegistry()
         self._dynamic_enabled = str(os.getenv("AI_TUTOR_DYNAMIC_COURSE_TEMPLATE_ENABLED", "true")).strip().lower() in {
             "1",
             "true",
@@ -73,12 +78,12 @@ class TutorEngineRegistry:
             return "financial_literacy"
         if cid in {"phonics"}:
             return "phonics"
-        # Grade-based MindSpark variants: aptitude_g6 / mindspark_g6 → aptitude_reasoning_g6
+        if cid in {"coding", "python", "python_basics", "coding_python_basics", "coding-python-basics"}:
+            return "coding_python_basics"
         import re as _re
         _ms_match = _re.match(r"^(?:aptitude|mindspark|mindsp[ae]r[ck])_g(?:rade)?(\d+)$", cid, _re.IGNORECASE)
         if _ms_match:
             return f"aptitude_reasoning_g{_ms_match.group(1)}"
-        # Campus tiers: aptitude_campus_pro, mindspark_campus_pro → aptitude_campus_pro
         _campus_match = _re.match(r"^(?:aptitude(?:_reasoning)?|mindspark|mindsp[ae]r[ck])_(campus_\w+)$", cid, _re.IGNORECASE)
         if _campus_match:
             return f"aptitude_{_campus_match.group(1).lower()}"
@@ -102,7 +107,6 @@ class TutorEngineRegistry:
         resolved = self.resolve_course_id(course_id)
         engine = self._engines.get(resolved)
         if not engine and self._dynamic_enabled and resolved:
-            # Lazy-create course template engines for new courses without code changes.
             from app.services.generic_course_engine import CourseTemplateRuleEngine, resolve_template_course_id
 
             title = resolved.replace("_", " ").strip().title()
@@ -115,15 +119,24 @@ class TutorEngineRegistry:
             )
             self._engines[resolved] = engine
         if not engine:
-            # fallback to first configured engine
             return next(iter(self._engines.values()))
         return engine
+
+    def runtime_lesson(
+        self,
+        course_id: str | None,
+        chapter_code: str | None,
+        raw_lesson: Dict[str, Any],
+        module_code: str | None = None,
+    ) -> Dict[str, Any]:
+        resolved_course_id = self.resolve_course_id(course_id, module_code)
+        normalized_chapter_code = str(chapter_code or raw_lesson.get("lessonId") or raw_lesson.get("chapterCode") or "").strip()
+        runtime_lesson: RuntimeLesson = self._adapters.normalize_lesson(raw_lesson, resolved_course_id, normalized_chapter_code)
+        return runtime_lesson_to_legacy_payload(runtime_lesson)
 
     def courses(self) -> List[Dict[str, str]]:
         out: List[Dict[str, str]] = []
         for cid in sorted(self._engines.keys()):
-            title = "Vedic Math" if cid == "vedic_math" else cid.replace("_", " ").title()
+            title = "Vedic Math (Legacy Archive)" if cid == "vedic_math" else cid.replace("_", " ").title()
             out.append({"courseId": cid, "title": title})
         return out
-
-

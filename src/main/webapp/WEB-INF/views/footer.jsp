@@ -61,29 +61,30 @@
       <c:when test="${rdIsBrandHome}">
         <div class="row gy-4">
           <div class="col-md-4">
-            <h6 class="text-white fw-semibold">AptiPath360 Career Discovery</h6>
+            <h6 class="text-white fw-semibold">RoboDynamics Learning Products</h6>
             <p class="small">
-              Parent-first module for Grade 8 to College/Post-12 career direction, student intake,
-              transparent reports, and step-by-step roadmap planning.
+              Product-first learning platform with AptiPath360 for career discovery and AI tutor families
+              for guided learning, progress visibility, and parent confidence.
             </p>
           </div>
 
           <div class="col-md-3">
-            <h6 class="text-white fw-semibold">Core Modules</h6>
+            <h6 class="text-white fw-semibold">Products</h6>
             <ul class="list-unstyled small">
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#career-discover">AptiPath360</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#exam-courses">ExamPrep360</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#tuition-info">Tuition</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/aptipath360">AptiPath360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/mindsutra">MindSutra</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#mindspark">MindSpark</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#moneymind">MoneyMind</a></li>
             </ul>
           </div>
 
           <div class="col-md-3">
-            <h6 class="text-white fw-semibold">Parent Start</h6>
+            <h6 class="text-white fw-semibold">Start</h6>
             <ul class="list-unstyled small">
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Pay &#8377;799 + GST and Start</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/plans/checkout?plan=exam-basic">ExamPrep360 Basic - Rs 1999</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/login?redirect=/aptipath/parent/home">Existing Parent Login</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/resources/manuals/AptiPath_Basic_Parent_Flow_Manual.html" target="_blank">Flow Manual</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/aptipath360">Explore AptiPath360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/registerParentChild?plan=career-basic&redirect=/plans/checkout?plan=career-basic">Start AptiPath360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/mindsutra">Explore MindSutra</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/resources/manuals/AptiPath_Basic_Parent_Flow_Manual.html" target="_blank">AptiPath360 Parent Guide</a></li>
             </ul>
           </div>
 
@@ -100,28 +101,30 @@
       <c:otherwise>
         <div class="row gy-4">
           <div class="col-md-4">
-            <h6 class="text-white fw-semibold">Robo Dynamics</h6>
+            <h6 class="text-white fw-semibold">RoboDynamics Learning Products</h6>
             <p class="small">
-              Platform for AptiPath360 Career Discovery, ExamPrep360, and Tuition journeys with
-              parent, student, and mentor workflows.
+              AptiPath360 helps families discover the right path. MindSutra, MindSpark, and MoneyMind
+              extend that journey into guided AI learning products.
             </p>
           </div>
 
           <div class="col-md-3">
             <h6 class="text-white fw-semibold">Products</h6>
             <ul class="list-unstyled small">
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/">AptiPath360 Career Discovery</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/courses">ExamPrep360</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/parents/demo?source=footer_tuition_quote">Tuition Guidance</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/aptipath360">AptiPath360</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/mindsutra">MindSutra</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#mindspark">MindSpark</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/#moneymind">MoneyMind</a></li>
             </ul>
           </div>
 
           <div class="col-md-3">
-            <h6 class="text-white fw-semibold">Platform</h6>
+            <h6 class="text-white fw-semibold">Access</h6>
             <ul class="list-unstyled small">
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/registerParentChild">Sign Up</a></li>
+              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/login">Sign In</a></li>
               <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/platform/modules">Parent Dashboard</a></li>
               <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/studentDashboard">Student Dashboard</a></li>
-              <li><a class="text-decoration-none text-light" href="${pageContext.request.contextPath}/mentor/dashboard">Mentor Dashboard</a></li>
             </ul>
           </div>
 

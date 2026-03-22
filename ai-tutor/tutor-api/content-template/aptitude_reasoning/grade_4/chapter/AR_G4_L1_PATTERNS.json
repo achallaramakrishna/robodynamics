@@ -1,0 +1,492 @@
+{
+  "chapterCode": "AR_G4_L1_PATTERNS",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Number Patterns",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 1: Number Patterns",
+  "estimatedMinutes": 12,
+  "subtopics": [
+    "Counting-on patterns (add the same number)",
+    "Skip counting by 2s, 5s, and 10s",
+    "Patterns with subtraction (decreasing sequences)",
+    "Doubling patterns",
+    "Patterns using even and odd numbers",
+    "Find the missing number in a pattern"
+  ],
+  "learningGoals": [
+    "Recognise a repeating addition rule in a number sequence.",
+    "Find the missing number in a simple number pattern.",
+    "Tell whether a pattern goes up (increasing) or comes down (decreasing)."
+  ],
+  "coreIdeas": [
+    "In a number pattern, the same action happens every step — add, subtract, or double.",
+    "To find the rule, look at what you do to one number to get the next.",
+    "Once you know the rule, you can find any missing number in the pattern."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "2, 4, 6, 8, __ — What comes next?",
+      "solution": "Each number goes up by 2. So after 8, add 2 more: 8 + 2 = 10.",
+      "concept": "Add-2 pattern (skip counting by 2s)"
+    },
+    {
+      "id": "WE2",
+      "problem": "30, 25, 20, 15, __ — What comes next?",
+      "solution": "Each number goes down by 5. So after 15, subtract 5: 15 − 5 = 10.",
+      "concept": "Subtract-5 pattern (decreasing sequence)"
+    },
+    {
+      "id": "WE3",
+      "problem": "1, 2, 4, 8, __ — What comes next?",
+      "solution": "Each number is doubled: 1×2=2, 2×2=4, 4×2=8. So next: 8×2 = 16.",
+      "concept": "Doubling pattern"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach welcomes you to Number Patterns and asks: 'Can you count by 2s up to 20?' to check your starting point. Then Spark shows a simple add-2 staircase on the board to build confidence before the first question.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers occur in Groups A–B, repeat the worked example with smaller numbers before continuing."
+    },
+    "mission": {
+      "missionTitle": "Crack the Number Staircase",
+      "missionPromise": "By the end, you will spot add, subtract, and double patterns instantly — and never leave a blank in a number sequence again!",
+      "successCelebration": "Award a badge pulse and a coach cheer after every correct group. At lesson end, show 'Pattern Spotter' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a friendly hook and names the pattern type.",
+      "Coach writes one worked example on the board step by step.",
+      "Coach reads the practice question aloud slowly.",
+      "Student tries the answer before the solution appears.",
+      "Instant feedback praises correct answers or gives a gentle hint.",
+      "A quick review question confirms understanding before moving on."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group, increasing through the lesson.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one Pattern badge tied to the pattern type.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts on the same group triggers a mini-reteach with a simpler version.",
+      "practiceStyle": "Offer one easier follow-up question before moving on.",
+      "masteryRule": "Advance only after a correct answer plus one successful tryPrompt.",
+      "revisitRule": "Any group with two errors returns as a review card at the next session start."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L1_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, superstar! Welcome to Number Patterns — one of the coolest puzzles in maths! Did you know numbers love to follow rules? Some go up by the same amount every time, some come down, and some double up like magic! Today we will learn to spot those secret rules and fill in the missing numbers like a pro!",
+        "boardAction": "Write 'Number Patterns' as the title. Below it, draw three staircases labelled: (1) +2 pattern, (2) −5 pattern, (3) ×2 doubling.",
+        "checkpointPrompt": "Quick warm-up: 5, 10, 15, 20, __ — what comes next? And what is the rule?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "25; add 5 each time.",
+        "fallbackHint": "Look at the jump from 5 to 10 — that is +5. From 10 to 15 — also +5. Keep adding 5: 20 + 5 = 25!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l1_title",
+            "x": "40",
+            "y": "30",
+            "text": "Number Patterns — Chapter 1",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l1_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type1",
+            "x": "60",
+            "y": "80",
+            "text": "1. Add the same number every step  →  2, 4, 6, 8 ...",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type2",
+            "x": "60",
+            "y": "108",
+            "text": "2. Subtract the same number        →  20, 15, 10, 5 ...",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l1_type3",
+            "x": "60",
+            "y": "136",
+            "text": "3. Double every time               →  1, 2, 4, 8, 16 ...",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Number Patterns",
+          "caption": "Screenplay beat for Number Patterns."
+        }
+      },
+      {
+        "beatId": "AR_G4_L1_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Watch me crack this pattern live! Series: 3, 6, 9, 12, __ I look at the jump from 3 to 6 — that is +3. From 6 to 9 — also +3. From 9 to 12 — still +3! The rule is 'add 3 every step'. So the missing number is 12 + 3 = 15. Easy once you spot the jump!",
+        "boardAction": "Write 3, 6, 9, 12, __ with curved arrows between each pair. Label each arrow '+3'. Then write '12 + 3 = 15' and circle 15.",
+        "checkpointPrompt": "Your turn: 10, 20, 30, 40, __ — what is the jump and what is the missing number?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "Jump is +10; missing number is 50.",
+        "fallbackHint": "20 − 10 = 10, so the jump is +10. Keep adding 10: 40 + 10 = 50.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_series",
+            "x": "60",
+            "y": "60",
+            "text": "3 ——+3——> 6 ——+3——> 9 ——+3——> 12 ——+3——> ?",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.6
+          },
+          {
+            "kind": "text",
+            "id": "demo_answer",
+            "x": "60",
+            "y": "100",
+            "text": "Missing number: 12 + 3 = 15",
+            "color": "#059669",
+            "size": 14,
+            "delaySec": 1.2,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Number Patterns",
+          "caption": "Screenplay beat for Number Patterns."
+        }
+      },
+      {
+        "beatId": "AR_G4_L1_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have got the three pattern types — adding, subtracting, and doubling. Now work through Groups A to F and fill in those missing numbers! Remember: always find the rule first, THEN answer. I am right here if you need a clue!",
+        "boardAction": "Show a mini cheatsheet: Step 1 — Find the jump (subtract neighbours). Step 2 — Is it the same every time? Step 3 — Add, subtract, or double to find the missing number.",
+        "checkpointPrompt": "Quick check before we start — if a pattern goes 40, 30, 20, 10, __ — is it an adding or subtracting pattern?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Subtracting — take away 10 each time.",
+        "fallbackHint": "40 to 30 is going DOWN by 10. That is a subtracting pattern. 10 − 10 = 0.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Pattern Cheatsheet",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_step1",
+            "x": "60",
+            "y": "65",
+            "text": "Step 1: Subtract neighbours to find the jump",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_step2",
+            "x": "60",
+            "y": "90",
+            "text": "Step 2: Is the jump the same every time?",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_step3",
+            "x": "60",
+            "y": "115",
+            "text": "Step 3: Use the rule to find the missing number",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Number Patterns",
+          "caption": "Screenplay beat for Number Patterns."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Counting-on patterns (add the same number)",
+      "missionStepTitle": "Exercise A: Add-a-Number Patterns",
+      "coachHook": "Let's figure this out together! These numbers are climbing a staircase — each step is the same size. Find the step size and you are done!",
+      "boardDemo": {
+        "title": "Add Pattern — Equal Steps",
+        "steps": [
+          "Write the series: 4, 7, 10, 13, __",
+          "Jump from 4 to 7: 7 − 4 = 3",
+          "Jump from 7 to 10: 10 − 7 = 3",
+          "Rule: add 3 every step",
+          "Missing number: 13 + 3 = 16"
+        ],
+        "teacherLine": "Subtract any two neighbours. If you always get the same answer, that is your jump. Add the jump to the last number!"
+      },
+      "readAloudPrompt": "Look at: 2, 5, 8, 11, __ — what is the jump between each pair of numbers?",
+      "tryPrompt": "Now you try: 6, 9, 12, 15, __ — find the jump, then give me the missing number!",
+      "masteryCheck": "18",
+      "instantFeedbackWin": "Wonderful! Jump is +3, so 15 + 3 = 18. You climbed that staircase perfectly!",
+      "instantFeedbackRetry": "Here's a trick: 9 − 6 = 3, that is your jump. Keep adding 3: 12, 15, next is 15 + 3 = 18.",
+      "reviewPrompt": "Quick check: 10, 13, 16, 19, __ — what is the missing number?",
+      "xpReward": 10,
+      "badgeFocus": "Staircase Climber",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Patterns",
+        "caption": "Group A for Number Patterns."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Skip counting by 2s, 5s, and 10s",
+      "missionStepTitle": "Exercise B: Skip Counting Patterns",
+      "coachHook": "Let's figure this out together! These numbers skip ahead in equal hops — by 2, by 5, or by 10. Spot the hop size!",
+      "boardDemo": {
+        "title": "Skip Counting — Hop, Hop, Hop!",
+        "steps": [
+          "Series: 0, 5, 10, 15, 20, __",
+          "Each hop: 5 − 0 = 5, 10 − 5 = 5, 15 − 10 = 5",
+          "Rule: skip count by 5",
+          "Missing number: 20 + 5 = 25"
+        ],
+        "teacherLine": "Skip counting is just adding the same number over and over. Say the pattern out loud — 0, 5, 10, 15 — and your brain will hear the next number!"
+      },
+      "readAloudPrompt": "Say aloud: 10, 20, 30, 40, __ — can you hear the skip? What is the hop size?",
+      "tryPrompt": "Your turn: 2, 4, 6, 8, __ — skip count the pattern and give the next number!",
+      "masteryCheck": "10",
+      "instantFeedbackWin": "Brilliant! Hopping by 2s: 8 + 2 = 10. You are a skip-count champion!",
+      "instantFeedbackRetry": "Here's a trick: 4 − 2 = 2. Every hop is +2. So after 8, hop again: 8 + 2 = 10.",
+      "reviewPrompt": "Quick: 25, 30, 35, 40, __ — name the hop size and the missing number.",
+      "xpReward": 12,
+      "badgeFocus": "Hop Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Patterns",
+        "caption": "Group B for Number Patterns."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Patterns with subtraction (decreasing sequences)",
+      "missionStepTitle": "Exercise C: Counting-Down Patterns",
+      "coachHook": "Let's figure this out together! Now the numbers are coming down the staircase instead of going up. Find how many steps it goes down each time!",
+      "boardDemo": {
+        "title": "Subtract Pattern — Coming Down",
+        "steps": [
+          "Series: 20, 16, 12, 8, __",
+          "Jump down: 20 − 16 = 4, 16 − 12 = 4, 12 − 8 = 4",
+          "Rule: subtract 4 every step",
+          "Missing number: 8 − 4 = 4"
+        ],
+        "teacherLine": "When numbers go down, subtract neighbours to find the drop. Then subtract that same drop from the last number to get the missing one."
+      },
+      "readAloudPrompt": "Look at: 50, 45, 40, 35, __ — is this going up or down? What is the drop each step?",
+      "tryPrompt": "Your turn: 30, 25, 20, 15, __ — find the drop and give the next number!",
+      "masteryCheck": "10",
+      "instantFeedbackWin": "Yes! Drop is 5 each time. 15 − 5 = 10. You counted down perfectly!",
+      "instantFeedbackRetry": "Here's a trick: 30 − 25 = 5. That is the drop. Keep subtracting 5: 20, 15, then 15 − 5 = 10.",
+      "reviewPrompt": "Quick check: 40, 32, 24, 16, __ — what is the drop and the next number?",
+      "xpReward": 12,
+      "badgeFocus": "Countdown Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Patterns",
+        "caption": "Group C for Number Patterns."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Doubling patterns",
+      "missionStepTitle": "Exercise D: Doubling Patterns",
+      "coachHook": "Let's figure this out together! These numbers are not just adding — they are doubling! Each number is twice the one before it. Watch how fast they grow!",
+      "boardDemo": {
+        "title": "Double Pattern — Times 2 Every Step",
+        "steps": [
+          "Series: 1, 2, 4, 8, __",
+          "Check: 2 ÷ 1 = 2, 4 ÷ 2 = 2, 8 ÷ 4 = 2",
+          "Rule: multiply by 2 every step",
+          "Missing number: 8 × 2 = 16"
+        ],
+        "teacherLine": "Divide one number by the one before it. If the answer is always 2, it is a doubling pattern! Multiply the last number by 2 to get the next."
+      },
+      "readAloudPrompt": "Look at: 3, 6, 12, 24, __ — what do you multiply each time to get to the next number?",
+      "tryPrompt": "Your turn: 2, 4, 8, 16, __ — double it and give the next number!",
+      "masteryCheck": "32",
+      "instantFeedbackWin": "Fantastic! 16 × 2 = 32. That doubling pattern is growing so fast — great spotting!",
+      "instantFeedbackRetry": "Here's a trick: 4 ÷ 2 = 2. Each step multiplies by 2. So 16 × 2 = 32.",
+      "reviewPrompt": "Quick: 5, 10, 20, 40, __ — is it doubling? What comes next?",
+      "xpReward": 14,
+      "badgeFocus": "Doubling Dynamo",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Patterns",
+        "caption": "Group D for Number Patterns."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Patterns using even and odd numbers",
+      "missionStepTitle": "Exercise E: Even and Odd Patterns",
+      "coachHook": "Let's figure this out together! Even numbers end in 0, 2, 4, 6, or 8. Odd numbers end in 1, 3, 5, 7, or 9. Can you spot which type is in the pattern?",
+      "boardDemo": {
+        "title": "Even Numbers — Skip Count by 2",
+        "steps": [
+          "Even numbers: 2, 4, 6, 8, 10, 12 ...",
+          "Odd numbers: 1, 3, 5, 7, 9, 11 ...",
+          "Series: 11, 13, 15, 17, __",
+          "These are odd numbers counting up by 2",
+          "Missing number: 17 + 2 = 19"
+        ],
+        "teacherLine": "Even numbers are divisible by 2. Odd numbers are not. Both can form patterns — just spot whether you are hopping through evens or odds, then find the hop size!"
+      },
+      "readAloudPrompt": "Look at: 4, 6, 8, 10, __ — are these even or odd numbers? What is the hop?",
+      "tryPrompt": "Your turn: 1, 3, 5, 7, __ — even or odd? What is the next number?",
+      "masteryCheck": "9",
+      "instantFeedbackWin": "Spot on! These are odd numbers, hopping by 2. 7 + 2 = 9. You know your evens and odds!",
+      "instantFeedbackRetry": "Here's a trick: 1, 3, 5, 7 — all end in odd digits! They go up by 2. So 7 + 2 = 9.",
+      "reviewPrompt": "Quick: 20, 22, 24, 26, __ — even or odd? Next number?",
+      "xpReward": 14,
+      "badgeFocus": "Even-Odd Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Patterns",
+        "caption": "Group E for Number Patterns."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Find the missing number in a pattern",
+      "missionStepTitle": "Exercise F: Fill the Gap!",
+      "coachHook": "Let's figure this out together — the missing number is hiding INSIDE the pattern, not just at the end! Use the rule to track it down!",
+      "boardDemo": {
+        "title": "Missing Number in the Middle",
+        "steps": [
+          "Series: 3, 6, __, 12, 15",
+          "Find the rule: 6 − 3 = 3, 12 − 15 = 3 (going backwards)",
+          "Rule: add 3 each step",
+          "Missing number: 6 + 3 = 9",
+          "Check: 9, 12 → 12 − 9 = 3 ✓"
+        ],
+        "teacherLine": "When the missing number is in the middle, use the numbers on BOTH sides to figure out the rule. Then fill the gap. Always check your answer by subtracting!"
+      },
+      "readAloudPrompt": "Look at: 10, __, 30, 40, 50 — can you guess the rule and find what is hiding in the blank?",
+      "tryPrompt": "Your turn: 5, 10, __, 20, 25 — find the missing number in the middle!",
+      "masteryCheck": "15",
+      "instantFeedbackWin": "You got it! Rule is +5, so 10 + 5 = 15. And 15 + 5 = 20 confirms it. Pattern Detective badge earned!",
+      "instantFeedbackRetry": "Here's a trick: look at 10 and 20 — they have a gap of 10. Split that in two equal hops: 10 + 5 = 15, 15 + 5 = 20. The missing number is 15.",
+      "reviewPrompt": "Final challenge: 8, 12, __, 20, 24 — what is the missing number?",
+      "xpReward": 16,
+      "badgeFocus": "Pattern Filler",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Number Patterns",
+        "caption": "Group F for Number Patterns."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Number Patterns",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

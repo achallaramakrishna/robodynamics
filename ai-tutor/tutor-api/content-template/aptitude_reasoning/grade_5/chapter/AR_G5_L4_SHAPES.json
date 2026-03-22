@@ -1,0 +1,537 @@
+{
+  "chapterCode": "AR_G5_L4_SHAPES",
+  "courseId": "aptitude_reasoning_g5",
+  "title": "Shape Classification",
+  "source": "MindSpark Grade 5 Aptitude & Reasoning | Chapter 4: Shape Classification",
+  "estimatedMinutes": 14,
+  "subtopics": [
+    "Classify by number of sides — triangle(3), quadrilateral(4), pentagon(5), hexagon(6), heptagon(7), octagon(8)",
+    "Classify by type — polygon vs. circle/oval (curved shapes)",
+    "Classify by symmetry — line symmetry (mirror) and rotational symmetry",
+    "Classify by angle type — acute, right, obtuse, and reflex angles in shapes"
+  ],
+  "learningGoals": [
+    "Name any polygon by counting its sides and match it to the correct name.",
+    "Distinguish between polygons (straight sides only) and curved shapes (circle, oval, semicircle).",
+    "Identify shapes that have line symmetry and state the number of lines of symmetry.",
+    "Classify triangles and quadrilaterals by their angle types (acute, right, obtuse)."
+  ],
+  "coreIdeas": [
+    "A polygon is a closed shape with straight sides only — no curves.",
+    "The number of lines of symmetry of a regular polygon equals its number of sides.",
+    "A shape has rotational symmetry if it looks identical after being rotated less than 360°.",
+    "In a triangle: acute = all angles < 90°, right = one angle = 90°, obtuse = one angle > 90°."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "A shape has 6 equal sides. What is its name? How many lines of symmetry does a regular version have?",
+      "solution": "A shape with 6 sides is a hexagon. A regular hexagon has 6 lines of symmetry (one through each pair of opposite vertices and one through each pair of opposite mid-points).",
+      "concept": "Polygon naming by number of sides + lines of symmetry for regular polygons"
+    },
+    {
+      "id": "WE2",
+      "problem": "A triangle has angles of 35°, 65°, and 80°. What type of triangle is it?",
+      "solution": "All three angles are less than 90°. A triangle with all angles less than 90° is an acute-angled triangle.",
+      "concept": "Classifying triangles by angle type"
+    },
+    {
+      "id": "WE3",
+      "problem": "Which of these has rotational symmetry of order 4: a square, an equilateral triangle, or a rectangle?",
+      "solution": "A square looks identical after rotating 90°, 180°, 270°, and 360° — that is order 4. A rectangle has order 2. An equilateral triangle has order 3. Answer: the square.",
+      "concept": "Rotational symmetry — order = number of times the shape looks the same in one full turn"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g5-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark introduces the lesson by asking the learner to spot shapes around them. The first question is a simple polygon naming exercise.",
+      "placementRule": "Start at Group A. If the learner confuses polygon names in Group A, show the sides-to-name table and drill it before moving on."
+    },
+    "mission": {
+      "missionTitle": "Shape Sorter Challenge",
+      "missionPromise": "By the end you will classify any shape by sides, type, symmetry, or angles — like a geometry architect!",
+      "successCelebration": "Show a 'Shape Sorted!' badge pulse after each group. At lesson end, award the 'Geometry Architect' trophy."
+    },
+    "microLessonPattern": [
+      "Coach introduces the classification rule for the group with a visual real-world example.",
+      "Coach demonstrates classification of 2–3 shapes on the board.",
+      "Coach reads the practice question aloud.",
+      "Student attempts classification.",
+      "Instant feedback celebrates or gives a targeted hint.",
+      "Review question confirms mastery."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10–20 XP per exercise group, increasing through the lesson.",
+      "streakRule": "Show streak flame; one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks a geometry-themed badge.",
+      "celebrationStyle": "Coach praise + XP burst + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts trigger a mini-reteach showing the classification table.",
+      "practiceStyle": "Offer a simpler shape identification before complex multi-attribute questions.",
+      "masteryRule": "Advance after correct answer plus completed tryPrompt.",
+      "revisitRule": "Groups with two errors return as review cards next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G5_L4_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, future architect! Shapes are everywhere — from tiles on the floor to road signs to leaves on trees. In Shape Classification, we organise shapes into groups based on their properties. Today we will classify shapes in four ways: by number of sides, by type (polygon or curved), by symmetry (mirror or rotation), and by angle type. Once you know these four questions to ask, classifying any shape takes just seconds!",
+        "boardAction": "Write 'Shape Classification — 4 Ways'. List: (1) Count sides → name, (2) Straight sides only? → polygon, (3) Line symmetry / rotational symmetry, (4) Angle types: acute / right / obtuse.",
+        "checkpointPrompt": "Quick warm-up: how many sides does an octagon have?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "8",
+        "fallbackHint": "Octagon — the prefix 'octa' means 8 (like an octopus has 8 arms). An octagon has 8 sides.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "sh_title",
+            "x": "40",
+            "y": "30",
+            "text": "Shape Classification — 4 Ways",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "sh_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "500",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sh_t1",
+            "x": "60",
+            "y": "72",
+            "text": "1. Sides: 3=triangle 4=quad 5=penta 6=hexa 8=octa",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "sh_t2",
+            "x": "60",
+            "y": "94",
+            "text": "2. Polygon = closed shape, straight sides only",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sh_t3",
+            "x": "60",
+            "y": "116",
+            "text": "3. Symmetry: line (mirror) or rotational (spin)",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "sh_t4",
+            "x": "60",
+            "y": "138",
+            "text": "4. Angles: acute <90° right =90° obtuse >90°",
+            "color": "#dc2626",
+            "size": 11,
+            "delaySec": 2.1,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "triangle.svg",
+          "title": "Shape Classification",
+          "caption": "Screenplay beat for Shape Classification."
+        }
+      },
+      {
+        "beatId": "AR_G5_L4_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me classify a regular hexagon using all four methods! Method 1 — sides: count them — 1, 2, 3, 4, 5, 6 — six sides — hexagon. Method 2 — type: all sides are straight — it is a polygon. Method 3 — symmetry: a regular hexagon has 6 lines of symmetry and rotational symmetry of order 6. Method 4 — angles: each interior angle of a regular hexagon is 120° — that is obtuse! Four questions, four answers — that is full classification!",
+        "boardAction": "Draw a hexagon. Label: (1) 6 sides → hexagon, (2) straight sides → polygon, (3) 6 mirror lines drawn, rotational order 6, (4) interior angle = 120° → obtuse.",
+        "checkpointPrompt": "Classify a square using method 3 — how many lines of symmetry does a square have?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "4 — two through opposite sides, two through opposite corners.",
+        "fallbackHint": "A square has 4 lines of symmetry: one horizontal, one vertical, and two diagonal lines. Count the sides — a regular polygon has as many lines of symmetry as it has sides.",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_shape",
+            "x": "50",
+            "y": "40",
+            "text": "Regular Hexagon — Full Classification",
+            "color": "#7c3aed",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_c1",
+            "x": "50",
+            "y": "68",
+            "text": "1. 6 sides → Hexagon",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo_c2",
+            "x": "50",
+            "y": "88",
+            "text": "2. All sides straight → Polygon",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo_c3",
+            "x": "50",
+            "y": "108",
+            "text": "3. 6 lines of symmetry, rotational order 6",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "demo_c4",
+            "x": "50",
+            "y": "128",
+            "text": "4. Interior angles = 120° → Obtuse angles",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "triangle.svg",
+          "title": "Shape Classification",
+          "caption": "Screenplay beat for Shape Classification."
+        }
+      },
+      {
+        "beatId": "AR_G5_L4_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "Well done! Here is your shape-sorting toolkit. When you see a shape: first count its sides and name it, then check for curves (polygon or not?), then check symmetry (how many mirror lines?), and finally look at the angles (acute, right, or obtuse?). You do not need to answer all four every time — the question will tell you which property to focus on. Let us practise!",
+        "boardAction": "Show polygon name table: 3=triangle, 4=quadrilateral, 5=pentagon, 6=hexagon, 7=heptagon, 8=octagon. Show symmetry rule: regular polygon lines = number of sides. Show angle rule: <90 acute, =90 right, >90 obtuse.",
+        "checkpointPrompt": "Before the groups — is a circle a polygon? Why or why not?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "No — a circle has no straight sides, it is a curved shape.",
+        "fallbackHint": "A polygon must have straight sides only. A circle is entirely curved — it has no sides at all. So a circle is NOT a polygon.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "28",
+            "text": "Shape Sorter Toolkit",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_names",
+            "x": "60",
+            "y": "56",
+            "text": "3=tri 4=quad 5=penta 6=hexa 7=hepta 8=octa",
+            "color": "#059669",
+            "size": 11,
+            "delaySec": 0.5,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_sym",
+            "x": "60",
+            "y": "78",
+            "text": "Regular polygon: lines of symmetry = no. of sides",
+            "color": "#0284c7",
+            "size": 11,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_angles",
+            "x": "60",
+            "y": "100",
+            "text": "Angles: acute <90°  right =90°  obtuse >90°",
+            "color": "#d97706",
+            "size": 11,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "triangle.svg",
+          "title": "Shape Classification",
+          "caption": "Screenplay beat for Shape Classification."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Classify by number of sides — polygon naming",
+      "missionStepTitle": "Exercise A: Polygon Naming",
+      "coachHook": "Let's crack this code! Every polygon has a name based on how many sides it has — 3 sides, 4 sides, 5, 6… Let's nail all the names!",
+      "boardDemo": {
+        "title": "Polygon Names — Sides to Name",
+        "steps": [
+          "3 sides = triangle (tri = 3)",
+          "4 sides = quadrilateral (quad = 4)",
+          "5 sides = pentagon (penta = 5)",
+          "6 sides = hexagon (hexa = 6)",
+          "7 = heptagon, 8 = octagon"
+        ],
+        "teacherLine": "The prefixes are the key: tri=3, quad=4, penta=5, hexa=6, hepta=7, octa=8. Link them to words you know — quadricycle (4 wheels), pentagon building, octopus (8 arms)!"
+      },
+      "readAloudPrompt": "What is the name of a shape with 5 sides?",
+      "tryPrompt": "A stop sign has 8 sides. What is the name of this shape?",
+      "masteryCheck": "Octagon",
+      "instantFeedbackWin": "Brilliant! 8 sides = octagon. Octa = 8, just like an octopus. Perfect!",
+      "instantFeedbackRetry": "Here's a trick: octa means 8 — think of an octopus with 8 arms. A shape with 8 sides is an octagon.",
+      "reviewPrompt": "Quick check: name the polygon with 6 sides and the one with 4 sides.",
+      "xpReward": 10,
+      "badgeFocus": "Polygon Namer",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Shape Classification",
+        "caption": "Group A for Shape Classification."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Classify by type — polygon vs. curved shapes",
+      "missionStepTitle": "Exercise B: Polygon or Curved Shape?",
+      "coachHook": "Let's crack this code! Not all shapes are polygons. Some have curves — circles, ovals, semicircles. Can you tell the difference in a flash?",
+      "boardDemo": {
+        "title": "Polygon vs. Curved Shape",
+        "steps": [
+          "Polygon = closed shape with ONLY straight sides",
+          "Circle = curved, no sides → NOT a polygon",
+          "Semicircle = one curved side + one straight side → NOT a polygon",
+          "Triangle, square, hexagon → all straight sides → polygons"
+        ],
+        "teacherLine": "One curved edge is enough to disqualify a shape from being a polygon. Check every edge — if even one is curved, it is not a polygon!"
+      },
+      "readAloudPrompt": "Is an oval a polygon? Explain why or why not.",
+      "tryPrompt": "Sort these into polygon or curved shape: triangle, circle, rectangle, semicircle, pentagon.",
+      "masteryCheck": "Polygons: triangle, rectangle, pentagon. Curved: circle, semicircle.",
+      "instantFeedbackWin": "Spot on! Triangle, rectangle, and pentagon have only straight sides — polygons. Circle and semicircle have curves — not polygons. Excellent sorting!",
+      "instantFeedbackRetry": "Here's a trick: check each shape for any curved edge. Circle — all curved, not a polygon. Semicircle — one curved edge, not a polygon. Triangle, rectangle, pentagon — all straight, polygons.",
+      "reviewPrompt": "Is a shape with 4 straight sides and one rounded corner a polygon? Why?",
+      "xpReward": 12,
+      "badgeFocus": "Shape Sorter",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Shape Classification",
+        "caption": "Group B for Shape Classification."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Classify by line symmetry",
+      "missionStepTitle": "Exercise C: Line Symmetry",
+      "coachHook": "Let's crack this code! A shape has line symmetry if you can fold it in half and both halves match perfectly — like a butterfly's wings!",
+      "boardDemo": {
+        "title": "Line Symmetry — Mirror Lines",
+        "steps": [
+          "Square: fold top-bottom → match. Fold left-right → match. Fold diagonally → match. 4 lines.",
+          "Rectangle: fold top-bottom → match. Fold left-right → match. Diagonal fold → no match. 2 lines.",
+          "Equilateral triangle: 3 lines of symmetry",
+          "Regular pentagon: 5 lines of symmetry",
+          "Regular polygon rule: number of lines = number of sides"
+        ],
+        "teacherLine": "Imagine folding the shape along a straight line. If both halves sit perfectly on top of each other, that fold line is a line of symmetry. Regular polygons have the same number of symmetry lines as sides!"
+      },
+      "readAloudPrompt": "How many lines of symmetry does an equilateral triangle have?",
+      "tryPrompt": "How many lines of symmetry does a regular hexagon have?",
+      "masteryCheck": "6",
+      "instantFeedbackWin": "Perfect! A regular hexagon has 6 sides, so it has 6 lines of symmetry. The regular polygon rule always works!",
+      "instantFeedbackRetry": "Here's a trick: for any regular polygon, the number of lines of symmetry equals the number of sides. A hexagon has 6 sides, so 6 lines of symmetry.",
+      "reviewPrompt": "Quick check: how many lines of symmetry does a rectangle (not a square) have?",
+      "xpReward": 14,
+      "badgeFocus": "Symmetry Spotter",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Shape Classification",
+        "caption": "Group C for Shape Classification."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Classify by rotational symmetry",
+      "missionStepTitle": "Exercise D: Rotational Symmetry",
+      "coachHook": "Let's crack this code! Rotational symmetry is about spinning — a shape has rotational symmetry if it looks exactly the same after you spin it by less than a full turn!",
+      "boardDemo": {
+        "title": "Rotational Symmetry — Order of Symmetry",
+        "steps": [
+          "Spin a square: looks same at 90°, 180°, 270°, 360° → order 4",
+          "Spin an equilateral triangle: same at 120°, 240°, 360° → order 3",
+          "Spin a rectangle (not square): same at 180°, 360° → order 2",
+          "Order = how many times it looks the same in one full 360° turn"
+        ],
+        "teacherLine": "To find the order of rotational symmetry, divide 360° by the minimum angle of rotation that gives the same shape. For regular polygons: order = number of sides!"
+      },
+      "readAloudPrompt": "A regular pentagon is spun. At what angle does it first look the same as the original?",
+      "tryPrompt": "What is the order of rotational symmetry of a regular hexagon?",
+      "masteryCheck": "6",
+      "instantFeedbackWin": "Excellent! A regular hexagon has 6 sides, so its order of rotational symmetry is 6. It looks the same every 60° (360÷6=60). Geometry genius!",
+      "instantFeedbackRetry": "Here's a trick: for a regular polygon, order of rotational symmetry = number of sides. A hexagon has 6 sides, so the order is 6.",
+      "reviewPrompt": "Quick check: what is the order of rotational symmetry of a square? And of an equilateral triangle?",
+      "xpReward": 14,
+      "badgeFocus": "Rotation Expert",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Shape Classification",
+        "caption": "Group D for Shape Classification."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Classify by angle type — acute, right, obtuse",
+      "missionStepTitle": "Exercise E: Angle Types in Shapes",
+      "coachHook": "Let's crack this code! Angles inside shapes tell us a lot about the shape. Is the corner sharp (acute), like a perfect square corner (right), or wide and open (obtuse)?",
+      "boardDemo": {
+        "title": "Angle Types — Classify Triangles and Quadrilaterals",
+        "steps": [
+          "Acute angle: less than 90° — like a sharp point",
+          "Right angle: exactly 90° — like the corner of a book",
+          "Obtuse angle: greater than 90° but less than 180°",
+          "Acute triangle: all three angles less than 90°",
+          "Right triangle: one angle exactly 90°",
+          "Obtuse triangle: one angle greater than 90°"
+        ],
+        "teacherLine": "Check the largest angle in a triangle to classify it. If all three are sharp (less than 90°), it is acute. If one is exactly 90°, it is a right triangle. If one is wider than 90°, it is obtuse."
+      },
+      "readAloudPrompt": "A triangle has angles 40°, 60°, and 80°. Are all angles less than 90°? What type is it?",
+      "tryPrompt": "A triangle has angles 30°, 90°, and 60°. What type of triangle is it?",
+      "masteryCheck": "Right-angled triangle",
+      "instantFeedbackWin": "Perfect! One angle is exactly 90° — that makes it a right-angled triangle. You spotted the right angle instantly!",
+      "instantFeedbackRetry": "Here's a trick: check each angle. Is any angle exactly 90°? Yes! 90° is present. A triangle with one 90° angle is a right-angled triangle.",
+      "reviewPrompt": "Quick check: a triangle has angles 110°, 40°, and 30°. What type is it?",
+      "xpReward": 16,
+      "badgeFocus": "Angle Analyst",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Shape Classification",
+        "caption": "Group E for Shape Classification."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Shape classification — mixed speed round",
+      "missionStepTitle": "Exercise F: Speed Round — Mixed Classification",
+      "coachHook": "Let's crack this code — at speed! Three shapes, four classification methods. Answer the question asked and state the property used!",
+      "boardDemo": {
+        "title": "Speed Round — All 4 Classification Methods",
+        "steps": [
+          "Name by sides: count them, use prefix",
+          "Polygon check: any curved edge? If yes, not a polygon",
+          "Symmetry: regular polygon lines = sides; order = sides",
+          "Angles: check for <90°, =90°, or >90°"
+        ],
+        "teacherLine": "Name the classification method before giving your answer — that demonstrates your understanding and earns bonus recognition even if you need a second attempt!"
+      },
+      "readAloudPrompt": "Ready for the speed round? Three questions — go!",
+      "tryPrompt": "Q1: A shape has 7 sides — what is it called? | Q2: Does a circle have line symmetry? | Q3: A triangle has angles 45°, 45°, 90° — what type is it?",
+      "masteryCheck": "Heptagon | Yes, infinite lines | Right-angled triangle",
+      "instantFeedbackWin": "AMAZING! Q1: 7 sides = heptagon (hepta = 7). Q2: A circle has infinite lines of symmetry — any diameter is a line of symmetry! Q3: One angle is 90° → right-angled triangle. Full marks!",
+      "instantFeedbackRetry": "Here's a trick: Q1 — hepta = 7, so heptagon. Q2 — a circle can be folded along any diameter and both halves match, so infinite lines of symmetry. Q3 — one angle is 90°, so it is a right-angled triangle.",
+      "reviewPrompt": "Final recap: name all polygon types from 3 to 8 sides, and state the rule for lines of symmetry in a regular polygon.",
+      "xpReward": 20,
+      "badgeFocus": "Geometry Architect",
+      "visual": {
+        "kind": "svg",
+        "asset": "triangle.svg",
+        "title": "Shape Classification",
+        "caption": "Group F for Shape Classification."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "triangle",
+      "kind": "svg",
+      "asset": "triangle.svg",
+      "title": "Shape Classification",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

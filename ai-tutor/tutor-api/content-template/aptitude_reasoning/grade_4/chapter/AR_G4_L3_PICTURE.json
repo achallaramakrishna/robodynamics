@@ -1,0 +1,519 @@
+{
+  "chapterCode": "AR_G4_L3_PICTURE",
+  "courseId": "aptitude_reasoning_g4",
+  "title": "Picture Series",
+  "source": "MindSpark Grade 4 Aptitude & Reasoning | Chapter 3: Picture Series",
+  "estimatedMinutes": 13,
+  "subtopics": [
+    "Picture series by count (number of objects increases or decreases)",
+    "Picture series by shading (empty to filled)",
+    "Picture series by rotation (shape turns each step)",
+    "Picture series by size (growing or shrinking)",
+    "Picture series by adding or removing parts",
+    "Mixed picture series (two attributes change)"
+  ],
+  "learningGoals": [
+    "Track ONE attribute at a time to find the rule in a picture series.",
+    "Predict what comes next in a visual pattern.",
+    "Describe the rule in words: 'Each step, the shape...'"
+  ],
+  "coreIdeas": [
+    "Look at ONE thing at a time — count, shading, rotation, or size.",
+    "Turn what you see into a simple number pattern to find the rule.",
+    "The next picture in the series must follow the SAME rule every step."
+  ],
+  "workedExamples": [
+    {
+      "id": "WE1",
+      "problem": "Box 1: one star. Box 2: two stars. Box 3: three stars. Box 4: __ stars.",
+      "solution": "The count goes up by 1 each box. Rule: add 1 star. Box 4 will have four stars.",
+      "concept": "Count pattern — add 1 each step"
+    },
+    {
+      "id": "WE2",
+      "problem": "Box 1: circle (empty). Box 2: circle (half shaded). Box 3: circle (fully shaded). Box 4: square (empty). What is Box 5?",
+      "solution": "Shading resets every 3 boxes AND the shape changes. Box 5 = square (half shaded).",
+      "concept": "Shading cycle + shape change"
+    },
+    {
+      "id": "WE3",
+      "problem": "An arrow points UP. Next it points RIGHT. Next it points DOWN. Next it points LEFT. What comes next?",
+      "solution": "The arrow rotates 90° clockwise each step. After LEFT comes UP again — it is a cycle of 4.",
+      "concept": "Rotation pattern — 90° clockwise, cycle of 4"
+    }
+  ],
+  "duolingoLessonArc": {
+    "version": "2026-03-mindspark-ar-g4-v1",
+    "onboarding": {
+      "askLearnerName": true,
+      "knownLanguageOptions": [
+        "English",
+        "English + Hindi",
+        "Hindi"
+      ],
+      "learnerLevelOptions": [
+        "I am a beginner",
+        "I know a little",
+        "I have done this before"
+      ],
+      "goalOptions": [
+        "School exams",
+        "Olympiad prep",
+        "Brain training"
+      ],
+      "coachIntro": "Spark the coach opens Picture Series by showing a simple count pattern (1 dot, 2 dots, 3 dots) and asks: 'What comes in the next box?' to prove the idea instantly. Then Spark teaches the 'track one thing at a time' strategy before exercises begin.",
+      "placementRule": "Start at Group A for all learners. If two consecutive wrong answers in Groups A–B, slow down and describe the attribute changing step by step before trying again."
+    },
+    "mission": {
+      "missionTitle": "Finish the Picture Story",
+      "missionPromise": "By the end, you will look at any picture series and spot the changing rule in seconds — like reading a visual comic strip!",
+      "successCelebration": "Award a badge pulse and coach cheer after every correct group. At lesson end, show 'Visual Genius' trophy."
+    },
+    "microLessonPattern": [
+      "Coach opens with a visual hook — a partially drawn series on the board.",
+      "Coach tracks one attribute out loud and converts it to a number.",
+      "Coach reads the practice question and describes each picture.",
+      "Student picks the next picture in the series.",
+      "Instant feedback explains the rule clearly if wrong.",
+      "Review question confirms mastery before the next group."
+    ],
+    "rewardLoop": {
+      "xpUnit": "Award 10 to 20 XP per exercise group.",
+      "streakRule": "Show streak counter; protect with one free retry before streak breaks.",
+      "badgeRule": "Each group unlocks one badge tied to the attribute type.",
+      "celebrationStyle": "Quick coach praise + XP pulse + progress rail tick after every correct answer."
+    },
+    "reviewLoop": {
+      "trigger": "Two incorrect attempts triggers a mini-reteach by writing the numeric version of the visual pattern.",
+      "practiceStyle": "Offer a simpler version with only one obvious change.",
+      "masteryRule": "Advance only after correct answer plus description of the rule.",
+      "revisitRule": "Any group with two errors returns at the next session."
+    },
+    "uiDirectives": {
+      "layout": "single-screen mission layout",
+      "primaryFocus": "current question card",
+      "secondaryPanels": [
+        "worked board",
+        "help drawer",
+        "lesson path rail"
+      ],
+      "noScrollGoal": "Mission progress, question, and action buttons visible without scrolling."
+    }
+  },
+  "screenplay": {
+    "beats": [
+      {
+        "beatId": "AR_G4_L3_EXPLAIN",
+        "type": "EXPLAIN",
+        "sequence": 101,
+        "cue": "intro",
+        "boardMode": "free_draw",
+        "teacherLine": "Hello, visual superstar! Welcome to Picture Series — where pictures tell a story and YOU figure out what comes next! Every picture series has a rule. Something changes in the same way every single step. It could be the COUNT of things, the SHADING, the SIZE, or the DIRECTION. Your special trick: track ONE thing at a time. Turn what you see into a number and you will crack the rule instantly!",
+        "boardAction": "Draw 3 boxes in a row. Box 1: one circle. Box 2: two circles. Box 3: three circles. Then draw a blank 4th box with a question mark. Write '1 → 2 → 3 → ?' below.",
+        "checkpointPrompt": "Quick warm-up: Box 1 has 1 dot, Box 2 has 2 dots, Box 3 has 3 dots — how many dots will Box 4 have?",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "4 dots.",
+        "fallbackHint": "The count goes 1, 2, 3 — adding 1 each time. So Box 4 will have 1 more: 3 + 1 = 4 dots!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "l3_title",
+            "x": "40",
+            "y": "30",
+            "text": "Picture Series — Chapter 3",
+            "color": "#7c3aed",
+            "size": 16,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "line",
+            "id": "l3_div",
+            "x1": "40",
+            "y1": "46",
+            "x2": "540",
+            "y2": "46",
+            "color": "#8b5cf6",
+            "width": 2,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "l3_rule",
+            "x": "60",
+            "y": "80",
+            "text": "Track ONE thing: count / shading / size / direction",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l3_example",
+            "x": "60",
+            "y": "115",
+            "text": "Example:  [1 dot]  [2 dots]  [3 dots]  [? dots]",
+            "color": "#1e40af",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "l3_number",
+            "x": "60",
+            "y": "145",
+            "text": "As numbers:  1 → 2 → 3 → 4   (add 1 each step)",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.8,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Picture Series",
+          "caption": "Screenplay beat for Picture Series."
+        }
+      },
+      {
+        "beatId": "AR_G4_L3_DEMO",
+        "type": "DEMO",
+        "sequence": 201,
+        "cue": "demo",
+        "boardMode": "free_draw",
+        "teacherLine": "Let me demonstrate the shading trick! Box 1: an empty triangle. Box 2: triangle with the bottom half shaded. Box 3: triangle fully shaded. I write the shading as numbers: 0, half, full — that is 0, 1, 2. The rule is 'add one layer of shading each step'. So Box 4 resets back to empty (start a new shape or cycle back). Easy once you see the number pattern hidden in the shading!",
+        "boardAction": "Draw three triangles: empty, half-shaded, fully shaded. Below each write 0, 1, 2. Arrow showing +1. Then draw Box 4 with an empty square (reset/new shape) and explain the cycle.",
+        "checkpointPrompt": "Your turn: Picture 1 = small star, Picture 2 = medium star, Picture 3 = large star — describe the rule and what Picture 4 will look like.",
+        "pauseType": "student_response",
+        "holdSec": 0.3,
+        "expectedStudentResponse": "The star grows each step; Picture 4 will be an extra-large star.",
+        "fallbackHint": "The size goes small → medium → large. The rule is 'get one size bigger each step'. So Picture 4 is an extra-large star!",
+        "performanceTag": "core",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "demo_shading",
+            "x": "60",
+            "y": "60",
+            "text": "[empty △]  [half-shaded △]  [full △]  [?]",
+            "color": "#1e40af",
+            "size": 13,
+            "delaySec": 0,
+            "durationSec": 0.5
+          },
+          {
+            "kind": "text",
+            "id": "demo_numbers",
+            "x": "60",
+            "y": "95",
+            "text": "Shading level:  0 ——+1——> 1 ——+1——> 2 ——+1——> 3",
+            "color": "#7c3aed",
+            "size": 12,
+            "delaySec": 0.8,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "demo_rule",
+            "x": "60",
+            "y": "130",
+            "text": "Rule: add one shading level each step!",
+            "color": "#059669",
+            "size": 13,
+            "delaySec": 1.4,
+            "durationSec": 0.4
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Picture Series",
+          "caption": "Screenplay beat for Picture Series."
+        }
+      },
+      {
+        "beatId": "AR_G4_L3_GUIDED",
+        "type": "GUIDED",
+        "sequence": 301,
+        "cue": "practice",
+        "boardMode": "free_draw",
+        "teacherLine": "You have the visual toolkit! Remember: count, shading, size, direction — track ONE at a time. Work through Groups A to F. Describe what you see before you answer. Ready? Let's finish those picture stories!",
+        "boardAction": "Show a cheatsheet: Attribute → Convert to number → Find rule → Apply to next step. List the 4 attributes: Count, Shading (0=empty, 1=half, 2=full), Size (S/M/L), Direction (U/R/D/L).",
+        "checkpointPrompt": "Quick check: if an arrow points Up in Step 1 and Right in Step 2 — which direction does it rotate each step?",
+        "pauseType": "student_response",
+        "holdSec": 0.2,
+        "expectedStudentResponse": "Clockwise — it turns 90° to the right each step.",
+        "fallbackHint": "Up → Right is a quarter-turn clockwise. That is 90° to the right. If the same rule continues, Right → Down next.",
+        "performanceTag": "recap",
+        "svgAnimation": [
+          {
+            "kind": "text",
+            "id": "guided_title",
+            "x": "40",
+            "y": "30",
+            "text": "Picture Series Cheatsheet",
+            "color": "#7c3aed",
+            "size": 15,
+            "delaySec": 0,
+            "durationSec": 0.4
+          },
+          {
+            "kind": "text",
+            "id": "guided_c1",
+            "x": "60",
+            "y": "65",
+            "text": "Count: 1, 2, 3 ... → add or subtract",
+            "color": "#059669",
+            "size": 12,
+            "delaySec": 0.5,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_c2",
+            "x": "60",
+            "y": "90",
+            "text": "Shading: empty(0) → half(1) → full(2)",
+            "color": "#0284c7",
+            "size": 12,
+            "delaySec": 0.9,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_c3",
+            "x": "60",
+            "y": "115",
+            "text": "Size: Small → Medium → Large",
+            "color": "#d97706",
+            "size": 12,
+            "delaySec": 1.3,
+            "durationSec": 0.3
+          },
+          {
+            "kind": "text",
+            "id": "guided_c4",
+            "x": "60",
+            "y": "140",
+            "text": "Rotation: Up → Right → Down → Left → Up ...",
+            "color": "#dc2626",
+            "size": 12,
+            "delaySec": 1.7,
+            "durationSec": 0.3
+          }
+        ],
+        "visual": {
+          "kind": "svg",
+          "asset": "series_row.svg",
+          "title": "Picture Series",
+          "caption": "Screenplay beat for Picture Series."
+        }
+      }
+    ]
+  },
+  "sessionFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "Picture series by count",
+      "missionStepTitle": "Exercise A: Counting Up in Pictures",
+      "coachHook": "Let's figure this out together! Count the objects in each box. The number tells the story!",
+      "boardDemo": {
+        "title": "Count Pattern in Pictures",
+        "steps": [
+          "Box 1: 2 apples, Box 2: 4 apples, Box 3: 6 apples",
+          "Count: 2, 4, 6 — adding 2 each time",
+          "Rule: +2 apples every box",
+          "Box 4: 6 + 2 = 8 apples"
+        ],
+        "teacherLine": "Write the count under each box as a number. Now you have a number pattern — find the rule and apply it to the next box!"
+      },
+      "readAloudPrompt": "Box 1: 1 flower. Box 2: 2 flowers. Box 3: 3 flowers. Box 4: __ flowers. What is the count pattern?",
+      "tryPrompt": "Your turn: Box 1 = 5 dots, Box 2 = 10 dots, Box 3 = 15 dots, Box 4 = __ dots. How many?",
+      "masteryCheck": "20 dots",
+      "instantFeedbackWin": "Yes! 5, 10, 15 — adding 5 each time. Box 4 = 15 + 5 = 20 dots!",
+      "instantFeedbackRetry": "Here's a trick: write the counts: 5, 10, 15. Subtract: 10 − 5 = 5. The rule is +5. So 15 + 5 = 20.",
+      "reviewPrompt": "Quick: Box 1 = 3 stars, Box 2 = 6 stars, Box 3 = 9 stars. What is Box 4?",
+      "xpReward": 10,
+      "badgeFocus": "Count Tracker",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Picture Series",
+        "caption": "Group A for Picture Series."
+      }
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Picture series by shading",
+      "missionStepTitle": "Exercise B: Shading Patterns",
+      "coachHook": "Let's figure this out together! Watch the shading — is the shape getting more filled or less filled each step?",
+      "boardDemo": {
+        "title": "Shading Pattern — Filling Up",
+        "steps": [
+          "Picture 1: empty square (no shading)",
+          "Picture 2: quarter shaded",
+          "Picture 3: half shaded",
+          "Picture 4: three-quarters shaded",
+          "Rule: add one quarter of shading each step",
+          "Picture 5: fully shaded square"
+        ],
+        "teacherLine": "Think of shading as filling a glass with water. Each step adds more. How much is added each time? That is your rule!"
+      },
+      "readAloudPrompt": "Picture 1 = empty circle. Picture 2 = half-shaded circle. Picture 3 = fully shaded circle. Picture 4 = empty circle (new). What is happening?",
+      "tryPrompt": "Your turn: Picture 1 = empty box. Picture 2 = half-shaded box. Picture 3 = __ (what comes next in the shading)?",
+      "masteryCheck": "Fully shaded box",
+      "instantFeedbackWin": "Exactly! Empty → half → full. The shading grows step by step. Picture 3 is fully shaded!",
+      "instantFeedbackRetry": "Here's a trick: empty is 0, half is 1, full is 2. Pattern: 0, 1, 2 — adding 1 each step. After 1 (half) comes 2 (full).",
+      "reviewPrompt": "Quick: if the shading goes full → half → empty, what is the rule and what comes after empty?",
+      "xpReward": 10,
+      "badgeFocus": "Shading Reader",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Picture Series",
+        "caption": "Group B for Picture Series."
+      }
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Picture series by rotation",
+      "missionStepTitle": "Exercise C: Turning and Rotating",
+      "coachHook": "Let's figure this out together! The shape is turning like the hands of a clock. Find out which direction and how far each step!",
+      "boardDemo": {
+        "title": "Rotation Pattern — Quarter Turns",
+        "steps": [
+          "Step 1: Arrow pointing UP (North)",
+          "Step 2: Arrow pointing RIGHT (East)",
+          "Step 3: Arrow pointing DOWN (South)",
+          "Step 4: Arrow pointing LEFT (West)",
+          "Rule: rotate 90° clockwise each step",
+          "Step 5: Arrow pointing UP again (full cycle)"
+        ],
+        "teacherLine": "Think of a clock: 12 o'clock, 3 o'clock, 6 o'clock, 9 o'clock. A 90° clockwise turn moves the same way. After 4 steps it comes back to the start — it is a cycle of 4!"
+      },
+      "readAloudPrompt": "An arrow: Step 1 points Right, Step 2 points Down, Step 3 points Left, Step 4 = ? Which direction?",
+      "tryPrompt": "Your turn: Letter L is upright in Step 1. It is rotated 90° clockwise in Step 2 (looks like an upside-down T). Step 3 = rotated another 90° clockwise. What does Step 3 look like?",
+      "masteryCheck": "L rotated 180° — it looks like an upside-down L (pointing up-left)",
+      "instantFeedbackWin": "Brilliant! Each step is a 90° clockwise turn. Two steps = 180°. The L flips upside down. Great visualising!",
+      "instantFeedbackRetry": "Here's a trick: one 90° clockwise turn is like turning a page to the right. After two 90° turns, the shape is completely upside down — rotated 180°.",
+      "reviewPrompt": "Quick: a triangle pointing UP rotates 90° clockwise each step. Step 1=UP, Step 2=RIGHT, Step 3=DOWN, Step 4=?",
+      "xpReward": 12,
+      "badgeFocus": "Rotation Watcher",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Picture Series",
+        "caption": "Group C for Picture Series."
+      }
+    },
+    {
+      "exerciseGroup": "D",
+      "subtopic": "Picture series by size",
+      "missionStepTitle": "Exercise D: Growing and Shrinking",
+      "coachHook": "Let's figure this out together! The shape is changing size each step. Is it growing or shrinking? By how much?",
+      "boardDemo": {
+        "title": "Size Pattern — Getting Bigger",
+        "steps": [
+          "Box 1: tiny square (1 unit × 1 unit)",
+          "Box 2: small square (2 units × 2 units)",
+          "Box 3: medium square (3 units × 3 units)",
+          "Rule: side length increases by 1 each step",
+          "Box 4: large square (4 units × 4 units)"
+        ],
+        "teacherLine": "Label the size as Small, Medium, Large, Extra Large or use 1, 2, 3, 4. Find the step — does it go up by 1 size or jump by 2? Then apply the same step to the next box."
+      },
+      "readAloudPrompt": "Picture 1: tiny circle. Picture 2: small circle. Picture 3: medium circle. Picture 4: __ circle. What size comes next?",
+      "tryPrompt": "Your turn: the shape goes Large → Medium → Small. What comes after Small?",
+      "masteryCheck": "Tiny (extra-small) — the shape is shrinking one size each step.",
+      "instantFeedbackWin": "Correct! Large → Medium → Small → Tiny. Each step shrinks by one size. Great pattern reading!",
+      "instantFeedbackRetry": "Here's a trick: the shape is getting smaller each step. Large is 3, Medium is 2, Small is 1. What comes after 1? Zero — so Tiny (the smallest possible).",
+      "reviewPrompt": "Quick: Tiny → Small → Medium → Large → ?",
+      "xpReward": 12,
+      "badgeFocus": "Size Guesser",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Picture Series",
+        "caption": "Group D for Picture Series."
+      }
+    },
+    {
+      "exerciseGroup": "E",
+      "subtopic": "Picture series by adding or removing parts",
+      "missionStepTitle": "Exercise E: Parts Added or Removed",
+      "coachHook": "Let's figure this out together! Each step, a new part appears — or one disappears. Count the parts and find the rule!",
+      "boardDemo": {
+        "title": "Parts Pattern — Building a Shape",
+        "steps": [
+          "Step 1: a square with 0 dots inside",
+          "Step 2: a square with 1 dot inside",
+          "Step 3: a square with 2 dots inside",
+          "Rule: add 1 dot per step",
+          "Step 4: a square with 3 dots inside"
+        ],
+        "teacherLine": "Count the parts (dots, lines, shapes inside) for each picture. Write those counts as a number series. Now you have a normal number pattern to solve!"
+      },
+      "readAloudPrompt": "Step 1: a triangle with 1 line inside. Step 2: triangle with 2 lines inside. Step 3: triangle with 3 lines inside. Step 4: __ lines inside?",
+      "tryPrompt": "Your turn: a star starts with 5 points. Each step, one point is removed. Step 1 = 5 points, Step 2 = 4 points, Step 3 = 3 points. Step 4 = __ points?",
+      "masteryCheck": "2 points",
+      "instantFeedbackWin": "Spot on! 5 → 4 → 3 → 2. Subtracting 1 point each step. You tracked those parts perfectly!",
+      "instantFeedbackRetry": "Here's a trick: count the points at each step: 5, 4, 3. That is minus 1 each time. So 3 − 1 = 2 points in Step 4.",
+      "reviewPrompt": "Quick: Step 1 = 2 petals, Step 2 = 4 petals, Step 3 = 6 petals. How many petals in Step 4?",
+      "xpReward": 14,
+      "badgeFocus": "Part Counter",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Picture Series",
+        "caption": "Group E for Picture Series."
+      }
+    },
+    {
+      "exerciseGroup": "F",
+      "subtopic": "Mixed picture series (two attributes change)",
+      "missionStepTitle": "Exercise F: Two Things Change at Once!",
+      "coachHook": "Let's figure this out together — this is the challenge round! Two things change at the same time. Track each one separately, then combine!",
+      "boardDemo": {
+        "title": "Mixed Pattern — Two Attributes",
+        "steps": [
+          "Box 1: small empty circle",
+          "Box 2: medium half-shaded circle",
+          "Box 3: large fully shaded circle",
+          "Attribute 1 (size): small → medium → large (+1 size)",
+          "Attribute 2 (shading): empty → half → full (+1 shading level)",
+          "Box 4: extra-large fully shaded circle (size resets or continues; shading resets to empty)"
+        ],
+        "teacherLine": "Split the problem into two simpler ones. Handle size alone. Handle shading alone. Solve each, then describe the next picture with both answers combined!"
+      },
+      "readAloudPrompt": "Picture 1: tiny UP-arrow. Picture 2: medium RIGHT-arrow. Picture 3: large DOWN-arrow. What is Picture 4 — describe the size AND direction!",
+      "tryPrompt": "Your turn: Box 1 = 1 red star, Box 2 = 2 blue stars, Box 3 = 3 red stars. Box 4 = __ stars and what colour?",
+      "masteryCheck": "4 blue stars — count adds 1 each step; colour alternates red/blue/red/blue.",
+      "instantFeedbackWin": "Amazing! Count: 1,2,3,4 (+1 each step). Colour: red,blue,red,blue (alternating). Box 4 = 4 blue stars! You cracked a two-attribute series!",
+      "instantFeedbackRetry": "Here's a trick: cover the colour, just count: 1,2,3 → next is 4. Now cover the count, just look at colour: red,blue,red — it alternates! After red comes blue. So: 4 blue stars.",
+      "reviewPrompt": "Final: Box 1 = small triangle, Box 2 = medium square, Box 3 = large pentagon. What shape and size is Box 4?",
+      "xpReward": 16,
+      "badgeFocus": "Dual Attribute Detective",
+      "visual": {
+        "kind": "svg",
+        "asset": "series_row.svg",
+        "title": "Picture Series",
+        "caption": "Group F for Picture Series."
+      }
+    }
+  ],
+  "visualLibrary": [
+    {
+      "visualId": "series_row",
+      "kind": "svg",
+      "asset": "series_row.svg",
+      "title": "Picture Series",
+      "caption": "Shared lesson visual selected by the agentic content patch engine."
+    }
+  ]
+}

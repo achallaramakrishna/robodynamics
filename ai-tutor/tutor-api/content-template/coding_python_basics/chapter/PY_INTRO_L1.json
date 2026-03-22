@@ -1,0 +1,177 @@
+{
+  "title": "Python Basics: Functions and Returns",
+  "gradeBand": "Coding Beginners",
+  "source": "RoboDynamics Coding Tutor Pack",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "What a function does",
+    "Parameters and return values",
+    "Testing your solution"
+  ],
+  "learningGoals": [
+    "Write a small Python function from a prompt.",
+    "Return computed values instead of printing them.",
+    "Use simple tests to verify behavior."
+  ],
+  "exerciseFlow": [
+    {
+      "exerciseGroup": "A",
+      "subtopic": "What a function does"
+    },
+    {
+      "exerciseGroup": "B",
+      "subtopic": "Parameters and return values"
+    },
+    {
+      "exerciseGroup": "C",
+      "subtopic": "Testing your solution"
+    }
+  ],
+  "teachingScript": [
+    {
+      "stepId": "PY_INTRO_L1_A",
+      "exerciseGroup": "A",
+      "subtopic": "What a function does",
+      "boardMode": "free_draw",
+      "teacherLine": "A function is a named mini-machine. It takes input, does one job, and gives back output.",
+      "boardAction": "Show a box named add with arrows for inputs a and b and one output.",
+      "checkpointPrompt": "If I call add(2, 3), what output should come back?",
+      "microPractice": "Say what a function named double should return for input 4."
+    },
+    {
+      "stepId": "PY_INTRO_L1_B",
+      "exerciseGroup": "B",
+      "subtopic": "Parameters and return values",
+      "boardMode": "free_draw",
+      "teacherLine": "Parameters are the values we feed in. Return is the answer the function sends back.",
+      "boardAction": "Write def add(a, b): return a + b and label parameters and return.",
+      "checkpointPrompt": "Why is return better than print when another test wants to reuse the answer?",
+      "microPractice": "Predict the return value for add(7, 0)."
+    },
+    {
+      "stepId": "PY_INTRO_L1_C",
+      "exerciseGroup": "C",
+      "subtopic": "Testing your solution",
+      "boardMode": "free_draw",
+      "teacherLine": "A good coding answer is not just written. It should pass clear tests.",
+      "boardAction": "List two example calls and expected outputs beside the function.",
+      "checkpointPrompt": "What should our test check for add(10, 5)?",
+      "microPractice": "Describe one wrong solution that prints instead of returns."
+    }
+  ],
+  "coreIdeas": [
+    "Functions are reusable named actions.",
+    "Return values are easier to test than printed text.",
+    "Tiny tests help catch mistakes early."
+  ],
+  "workedExamples": [
+    {
+      "question": "Write a function that returns the sum of two numbers.",
+      "method": "Define the function, name two parameters, and return their sum.",
+      "answer": "def add(a, b):\n    return a + b"
+    }
+  ],
+  "starterPractice": [
+    "Explain what add(2, 3) should return.",
+    "Spot the difference between return a + b and print(a + b).",
+    "Predict the result of add(9, 1)."
+  ],
+  "questionPool": [
+    {
+      "questionId": "PY_INTRO_L1_Q1",
+      "exerciseGroup": "A",
+      "subtopic": "What a function does",
+      "skill": "Function basics",
+      "difficulty": "easy",
+      "type": "practice",
+      "questionType": "mcq",
+      "questionText": "What should a function do when it needs to send an answer back to the program?",
+      "hint": "Choose the option about sending a value back.",
+      "solution": "A function should return the result so other code and tests can use it.",
+      "expectedAnswer": "Return the value",
+      "options": [
+        "Draw the answer",
+        "Return the value",
+        "Delete the inputs",
+        "Rename the program"
+      ],
+      "correctIndex": 1,
+      "acceptableAnswers": [
+        "return",
+        "return the value"
+      ]
+    },
+    {
+      "questionId": "PY_INTRO_L1_Q2",
+      "exerciseGroup": "B",
+      "subtopic": "Parameters and return values",
+      "skill": "Function writing",
+      "difficulty": "medium",
+      "type": "practice",
+      "questionType": "code",
+      "questionText": "Write a Python function add(a, b) that returns the sum of a and b.",
+      "hint": "Use def add(a, b): and return a + b.",
+      "solution": "The function should return a + b, not print it.",
+      "expectedAnswer": "Pass all tests for add(a, b)",
+      "starterCode": "def add(a, b):\n    # return the sum\n    pass\n",
+      "tests": [
+        {
+          "name": "adds_small",
+          "target": "add",
+          "args": [
+            2,
+            3
+          ],
+          "expected": 5
+        },
+        {
+          "name": "adds_zero",
+          "target": "add",
+          "args": [
+            7,
+            0
+          ],
+          "expected": 7
+        },
+        {
+          "name": "adds_negative",
+          "target": "add",
+          "args": [
+            -2,
+            5
+          ],
+          "expected": 3
+        }
+      ],
+      "rubric": {
+        "success": "Function is named add and returns the correct sum for all tests.",
+        "commonMistake": "Using print instead of return."
+      }
+    },
+    {
+      "questionId": "PY_INTRO_L1_Q3",
+      "exerciseGroup": "C",
+      "subtopic": "Testing your solution",
+      "skill": "Test reasoning",
+      "difficulty": "medium",
+      "type": "practice",
+      "questionType": "fill_step",
+      "questionText": "Complete the two testing ideas: first run add(2, 3) and expect __ ; then run add(7, 0) and expect __ .",
+      "hint": "Use the correct outputs from the add examples.",
+      "solution": "The expected outputs are 5 and 7.",
+      "expectedAnswer": "5 | 7",
+      "steps": [
+        {
+          "label": "Output of add(2, 3)",
+          "answer": "5",
+          "hint": "2 + 3"
+        },
+        {
+          "label": "Output of add(7, 0)",
+          "answer": "7",
+          "hint": "7 + 0"
+        }
+      ]
+    }
+  ]
+}

@@ -431,11 +431,7 @@ export default function HomePage() {
         <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", height: 64, gap: 32 }}>
           {/* Logo */}
           <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <span style={{ fontSize: 24 }}>🤖</span>
-            <div>
-              <div style={{ color: "#fff", fontWeight: 800, fontSize: 16, lineHeight: 1.1 }}>RoboDynamics</div>
-              <div style={{ color: "#64748b", fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase" }}>Where Kids Become Innovators</div>
-            </div>
+            <img src="/rd-logo.png" alt="RoboDynamics" style={{ height: 40, objectFit: "contain" }} />
           </a>
 
           {/* Links */}
@@ -448,8 +444,9 @@ export default function HomePage() {
           </div>
 
           <div style={{ marginLeft: "auto", display: "flex", gap: 10 }}>
+            <a href="/register/bootcamp" style={{ background: "linear-gradient(135deg,#F97316,#EF4444)", color: "#fff", borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>🏕️ Register Now</a>
             <a href="tel:8374377311" style={{ color: "#fbbf24", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid #fbbf24", borderRadius: 6, padding: "6px 14px" }}>📞 83743 77311</a>
-            <a href="/auth/login" style={{ background: "#F97316", color: "#fff", borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>Login</a>
+            <a href="/auth/login" style={{ background: "#fff", color: "#1e293b", borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>Login</a>
           </div>
         </div>
       </nav>
@@ -500,6 +497,31 @@ export default function HomePage() {
                 <div style={{ color: "#64748b", fontSize: 12 }}>{label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROMO VIDEO ──────────────────────────────────────────────────── */}
+      <section style={{ padding: "0 32px 64px", background: "#0A0A0F" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 24 }}>
+            <h2 style={{ color: "#fff", fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 900, margin: "0 0 8px" }}>See What Our Students Build</h2>
+            <p style={{ color: "#64748b", fontSize: 15 }}>Real projects from our robotics boot camp students</p>
+          </div>
+          <div style={{ position: "relative", borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 64px rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <video
+              src="/robotics-camp-2026.mp4"
+              autoPlay muted loop playsInline controls
+              style={{ width: "100%", display: "block", maxHeight: 520, objectFit: "cover" }}
+            />
+          </div>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 24 }}>
+            <a href="/register/bootcamp" style={{ background: "linear-gradient(135deg,#F97316,#EF4444)", color: "#fff", borderRadius: 10, padding: "14px 32px", fontWeight: 800, fontSize: 15, textDecoration: "none" }}>
+              🚀 Register for Boot Camp
+            </a>
+            <a href="tel:8374377311" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff", borderRadius: 10, padding: "14px 32px", fontWeight: 600, fontSize: 15, textDecoration: "none" }}>
+              📞 Call 83743 77311
+            </a>
           </div>
         </div>
       </section>
@@ -674,8 +696,8 @@ export default function HomePage() {
             Robotics Summer Camp 2026 enrollments are open. AI Tutor demo is free — no login needed. Give your child the head start they deserve.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginBottom: 32 }}>
-            <a href="tel:8374377311" style={{ background: "linear-gradient(135deg,#F97316,#EF4444)", color: "#fff", borderRadius: 10, padding: "16px 36px", fontWeight: 800, fontSize: 16, textDecoration: "none" }}>
-              📞 Enroll in Summer Camp
+            <a href="/register/bootcamp" style={{ background: "linear-gradient(135deg,#F97316,#EF4444)", color: "#fff", borderRadius: 10, padding: "16px 36px", fontWeight: 800, fontSize: 16, textDecoration: "none" }}>
+              🏕️ Register for Boot Camp
             </a>
             <a href="/ai-tutor/demo?grade=4&chapter=VM_G4_L1_FAST_ADDITION&fresh=1" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", borderRadius: 10, padding: "16px 36px", fontWeight: 700, fontSize: 16, textDecoration: "none" }}>
               🧮 Try AI Tutor Free
@@ -692,11 +714,7 @@ export default function HomePage() {
         <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <span style={{ fontSize: 24 }}>🤖</span>
-              <div>
-                <div style={{ color: "#fff", fontWeight: 800, fontSize: 16 }}>RoboDynamics</div>
-                <div style={{ color: "#64748b", fontSize: 11 }}>Where Kids Become Innovators</div>
-              </div>
+              <img src="/rd-logo.png" alt="RoboDynamics" style={{ height: 44, objectFit: "contain" }} />
             </div>
             <div style={{ color: "#64748b", fontSize: 13, lineHeight: 1.8 }}>
               Above Agarwal Bhavan, Chambenhalli<br />

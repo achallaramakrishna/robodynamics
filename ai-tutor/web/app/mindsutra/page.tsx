@@ -195,10 +195,54 @@ function CourseCard({ g, idx }: { g: typeof GRADES[0]; idx: number }) {
           transition: "all 0.2s ease",
           cursor: "pointer",
         }}>
-          {/* Thumbnail */}
-          <div style={{ background: g.gradient, height: 160, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: 20, position: "relative" }}>
-            <div style={{ fontSize: 52 }}>{g.icon}</div>
-            <div style={{ color: "rgba(255,255,255,0.9)", fontSize: 13, fontWeight: 700 }}>Grade {g.num} · {g.chapters} chapters</div>
+          {/* Thumbnail with child illustration */}
+          <div style={{ background: g.gradient, height: 170, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, padding: "12px 20px 8px", position: "relative", overflow: "hidden" }}>
+            {/* Decorative circles */}
+            <div style={{ position: "absolute", top: -20, right: -20, width: 90, height: 90, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
+            <div style={{ position: "absolute", bottom: -10, left: -15, width: 60, height: 60, borderRadius: "50%", background: "rgba(255,255,255,0.06)" }} />
+            {/* Child SVG illustration */}
+            <svg width="90" height="100" viewBox="0 0 90 100" xmlns="http://www.w3.org/2000/svg">
+              {/* Desk */}
+              <rect x="5" y="78" width="80" height="7" rx="3.5" fill="rgba(255,255,255,0.28)" />
+              <rect x="18" y="85" width="8" height="14" rx="2" fill="rgba(255,255,255,0.15)" />
+              <rect x="64" y="85" width="8" height="14" rx="2" fill="rgba(255,255,255,0.15)" />
+              {/* Notebook on desk */}
+              <rect x="22" y="68" width="46" height="13" rx="3" fill="rgba(255,255,255,0.65)" />
+              <line x1="45" y1="68" x2="45" y2="81" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
+              {/* Subject icon on notebook */}
+              <text x="45" y="78" textAnchor="middle" fontSize="9" fill="rgba(0,0,0,0.5)" fontWeight="bold">{g.icon}</text>
+              {/* Arms */}
+              <ellipse cx="25" cy="70" rx="12" ry="6" fill="rgba(255,220,140,0.75)" />
+              <ellipse cx="65" cy="70" rx="12" ry="6" fill="rgba(255,220,140,0.75)" />
+              {/* Torso */}
+              <rect x="28" y="44" width="34" height="30" rx="10" fill="rgba(255,255,255,0.32)" />
+              {/* Collar accent */}
+              <path d="M35 47 Q45 54 55 47" stroke="rgba(255,255,255,0.5)" strokeWidth="2" fill="none" strokeLinecap="round" />
+              {/* Neck */}
+              <rect x="39" y="39" width="12" height="10" rx="4" fill="rgba(255,220,140,0.8)" />
+              {/* Head */}
+              <circle cx="45" cy="27" r="19" fill="rgba(255,220,140,0.92)" />
+              {/* Hair */}
+              <ellipse cx="45" cy="12" rx="16" ry="9" fill="rgba(60,30,5,0.65)" />
+              <rect x="29" y="10" width="8" height="16" rx="4" fill="rgba(60,30,5,0.55)" />
+              <rect x="53" y="10" width="8" height="16" rx="4" fill="rgba(60,30,5,0.55)" />
+              {/* Eyes */}
+              <ellipse cx="38" cy="26" rx="4" ry="4.5" fill="white" />
+              <ellipse cx="52" cy="26" rx="4" ry="4.5" fill="white" />
+              <circle cx="39" cy="27" r="2.5" fill="#1E293B" />
+              <circle cx="53" cy="27" r="2.5" fill="#1E293B" />
+              <circle cx="40" cy="26" r="1" fill="white" />
+              <circle cx="54" cy="26" r="1" fill="white" />
+              {/* Eyebrows */}
+              <path d="M34 20 Q38 18 42 20" stroke="rgba(60,30,5,0.6)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+              <path d="M48 20 Q52 18 56 20" stroke="rgba(60,30,5,0.6)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+              {/* Smile */}
+              <path d="M37 33 Q45 39 53 33" stroke="rgba(120,60,10,0.6)" strokeWidth="2" fill="none" strokeLinecap="round" />
+              {/* Rosy cheeks */}
+              <ellipse cx="33" cy="32" rx="4" ry="3" fill="rgba(255,150,100,0.3)" />
+              <ellipse cx="57" cy="32" rx="4" ry="3" fill="rgba(255,150,100,0.3)" />
+            </svg>
+            <div style={{ color: "rgba(255,255,255,0.95)", fontSize: 12, fontWeight: 800, letterSpacing: 0.5 }}>Grade {g.num} · {g.chapters} chapters</div>
             <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(0,0,0,0.3)", color: "#FFF", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 4 }}>
               {g.level}
             </div>

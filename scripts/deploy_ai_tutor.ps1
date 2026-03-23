@@ -88,6 +88,13 @@ Scp-File "$ai\web\app\api\auth\otp\send\route.ts"                               
 Scp-File "$ai\web\app\api\auth\otp\verify\route.ts"                                               "/tmp/ms_api_otp_verify.ts"
 Scp-File "$ai\web\app\api\payment\create-order\route.ts"                                          "/tmp/ms_api_payment_order.ts"
 Scp-File "$ai\web\app\api\payment\verify\route.ts"                                                "/tmp/ms_api_payment_verify.ts"
+Scp-File "$ai\web\app\api\auth\demo\route.ts"                                                     "/tmp/ms_api_auth_demo.ts"
+Scp-File "$ai\web\app\mindspark\page.tsx"                                                         "/tmp/ms_mindspark_landing.tsx"
+Scp-File "$ai\web\app\student\course\[grade]\page.tsx"                                            "/tmp/ms_student_course_page.tsx"
+Scp-File "$ai\web\app\student\course\[grade]\StudentCourseHubClient.tsx"                          "/tmp/ms_student_course_client.tsx"
+Scp-File "$ai\web\lib\appSession.ts"                                                              "/tmp/ms_appSession.ts"
+Scp-File "$ai\web\lib\courseCatalog.ts"                                                           "/tmp/ms_courseCatalog.ts"
+Scp-File "$ai\web\lib\mindsutraCatalog.ts"                                                        "/tmp/ms_mindsutraCatalog.ts"
 
 # â”€â”€ All 16 Vedic Math chapter JSONs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Write-Host "Uploading Vedic Math chapter JSONs ..." -ForegroundColor Yellow
@@ -174,6 +181,13 @@ install -D -m 644 /tmp/ms_api_otp_send.ts            $WEB/api/auth/otp/send/rout
 install -D -m 644 /tmp/ms_api_otp_verify.ts          $WEB/api/auth/otp/verify/route.ts
 install -D -m 644 /tmp/ms_api_payment_order.ts       $WEB/api/payment/create-order/route.ts
 install -D -m 644 /tmp/ms_api_payment_verify.ts      $WEB/api/payment/verify/route.ts
+install -D -m 644 /tmp/ms_api_auth_demo.ts           $WEB/api/auth/demo/route.ts
+install -D -m 644 /tmp/ms_mindspark_landing.tsx       $WEB/mindspark/page.tsx
+install -D -m 644 /tmp/ms_student_course_page.tsx    "$WEB/student/course/[grade]/page.tsx"
+install -D -m 644 /tmp/ms_student_course_client.tsx  "$WEB/student/course/[grade]/StudentCourseHubClient.tsx"
+install -D -m 644 /tmp/ms_appSession.ts              /opt/robodynamics/ai-tutor/web/lib/appSession.ts
+install -D -m 644 /tmp/ms_courseCatalog.ts           /opt/robodynamics/ai-tutor/web/lib/courseCatalog.ts
+install -D -m 644 /tmp/ms_mindsutraCatalog.ts        /opt/robodynamics/ai-tutor/web/lib/mindsutraCatalog.ts
 echo "STOREFRONT_INSTALLED"
 
 # Install all chapter JSONs

@@ -1,0 +1,80 @@
+{
+  "chapterCode": "FIN_L5_CH1",
+  "title": "Grow & Protect: The Money Garden",
+  "estimatedMinutes": 30,
+  "subtopics": [
+    "Compounding Interest",
+    "Gold vs Fixed Deposits",
+    "Money Garden Simulator"
+  ],
+  "learningGoals": [
+    "Explain the power of compounding in wealth creation",
+    "Contrast low-risk (FD) with physical assets (Gold)",
+    "Visualize the long-term growth of small investments"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "COMPOUNDING_INTRO",
+      "exerciseGroup": "A",
+      "subtopic": "The Magic of Compounding",
+      "boardMode": "rich_board",
+      "teacherLine": "Albert Einstein called compounding the 'Eighth Wonder of the World'. When your interest earns interest, your money grows like a garden!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Compound Interest",
+          "points": [
+            "Year 1: ₹100 + ₹10 interest = ₹110",
+            "Year 2: ₹110 + ₹11 interest = ₹121",
+            "Year 10: Your money has doubled without doing anything!"
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "MONEY_GARDEN",
+      "exerciseGroup": "B",
+      "subtopic": "Investing Assets",
+      "boardMode": "rich_board",
+      "teacherLine": "In India, people love Gold and Fixed Deposits (FDs). Both grow your money, but in different ways. Gold's value changes every day, while FD is steady and safe.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Investment Garden",
+          "sections": [
+            {
+              "label": "Fixed Deposit (FD)",
+              "items": ["Guaranteed return", "Very safe", "Locked for fixed time"],
+              "color": "#10b981"
+            },
+            {
+              "label": "Physical Gold",
+              "items": ["Value can go up/down", "Physical asset", "Hedge against inflation"],
+              "color": "#f59e0b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "MONEY_GARDEN_LAB",
+      "exerciseGroup": "C",
+      "subtopic": "Growth Simulator",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's see the future. I have planted a tiny ₹1,000 seed for you in this garden. Move the 'Time Slider' to see how it grows over 30 years compared to just keeping it in a piggy bank!",
+      "board": {
+        "type": "money_garden",
+        "data": {}
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L5_101",
+      "exerciseGroup": "A",
+      "questionText": "If interest is calculated on both the initial amount and the interest already earned, it is called _____ interest.",
+      "expectedAnswer": "compound",
+      "hint": "C_m_o_u_d"
+    }
+  ]
+}

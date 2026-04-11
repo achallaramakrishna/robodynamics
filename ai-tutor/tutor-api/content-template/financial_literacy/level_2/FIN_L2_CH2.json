@@ -1,0 +1,59 @@
+{
+  "chapterCode": "FIN_L2_CH2",
+  "title": "Bank & ATM Explorer: ATM Mission",
+  "estimatedMinutes": 30,
+  "subtopics": [
+    "How ATMs Work",
+    "Card & PIN Safety",
+    "Withdrawing Cash"
+  ],
+  "learningGoals": [
+    "Operate an ATM simulator correctly",
+    "Identify critical safety rules for ATM usage",
+    "Keep the PIN secret and secure"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "ATM_MISSION",
+      "exerciseGroup": "A",
+      "subtopic": "ATM Simulation",
+      "boardMode": "rich_board",
+      "teacherLine": "Need cash? An ATM (Automated Teller Machine) is your 24/7 bank assistant. Let's try to withdraw ₹500 safely.",
+      "board": {
+        "type": "atm_simulator",
+        "data": {}
+      }
+    },
+    {
+      "stepId": "ATM_SAFETY",
+      "exerciseGroup": "B",
+      "subtopic": "Safety Rules",
+      "boardMode": "rich_board",
+      "teacherLine": "Safety is #1! Always remember the Golden Rules of the ATM.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "ATM Golden Rules",
+          "points": [
+            "Never share your PIN with anyone.",
+            "Cover the keypad with your hand when typing.",
+            "Always take your card and receipt immediately."
+          ],
+          "remember": [
+            "Don't accept help from strangers at the machine.",
+            "Check for any loose parts on the card slot."
+          ]
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L2_201",
+      "exerciseGroup": "A",
+      "questionText": "What does PIN stand for?",
+      "expectedAnswer": "personal identification number",
+      "hint": "P.I.N."
+    }
+  ]
+}

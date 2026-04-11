@@ -1,0 +1,79 @@
+{
+  "chapterCode": "FIN_L1_CH2",
+  "title": "My Money World: Needs vs Wants",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Understanding Needs",
+    "Identifying Wants",
+    "The Shopping Bag Challenge"
+  ],
+  "learningGoals": [
+    "Differentiate between survival needs and optional wants",
+    "Prioritize spending within a budget",
+    "Make smart shopping decisions"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "NEEDS_DEFINITION",
+      "exerciseGroup": "A",
+      "subtopic": "Needs vs Wants",
+      "boardMode": "rich_board",
+      "teacherLine": "To be smart with money, we must know: What do we NEED (to live) and what do we WANT (for fun)?",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Priority Thinking",
+          "sections": [
+            {
+              "label": "NEEDS",
+              "items": ["Water & Food", "Shelter", "Medicine", "School Supplies"],
+              "color": "#22c55e"
+            },
+            {
+              "label": "WANTS",
+              "items": ["Video Games", "Ice Cream", "Fancy Toys", "Movies"],
+              "color": "#f59e0b"
+            }
+          ],
+          "takeaway": "Always buy your Needs before your Wants!"
+        }
+      }
+    },
+    {
+      "stepId": "SHOPPING_BAG",
+      "exerciseGroup": "B",
+      "subtopic": "The Shopping Bag",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's go shopping! You have ₹500 in your shopping bag. Try to pick items that are mostly needs.",
+      "board": {
+        "type": "shopping_simulation",
+        "data": {
+          "budget": 500,
+          "items": [
+            {"name": "Milk", "price": 40, "type": "need"},
+            {"name": "Chocolate Bar", "price": 80, "type": "want"},
+            {"name": "Vegetables", "price": 100, "type": "need"},
+            {"name": "Toy Robot", "price": 250, "type": "want"},
+            {"name": "Notebook", "price": 60, "type": "need"}
+          ]
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L1_201",
+      "exerciseGroup": "A",
+      "questionText": "Is 'Drinking Water' a Need or a Want?",
+      "expectedAnswer": "need",
+      "hint": "Can you live without it for a week?"
+    },
+    {
+      "questionId": "Q_L1_202",
+      "exerciseGroup": "B",
+      "questionText": "If you have ₹200 and you need a Book (₹150) and want a Toy (₹100), which one should you buy first?",
+      "expectedAnswer": "book",
+      "hint": "Books are for learning and often considered needs for school."
+    }
+  ]
+}

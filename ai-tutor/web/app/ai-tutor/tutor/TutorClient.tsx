@@ -4,6 +4,9 @@ import Image from "next/image";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { RobotAvatar, type AvatarExpression, type AvatarVariant } from "./RobotAvatar";
 import { usePathname, useSearchParams } from "next/navigation";
+import MoneyMindBoard from "@/components/moneymind/MoneyMindBoard";
+import { resolveMathSvgAssetUrl } from "@/lib/mathSvgAssets";
+
 import type {
   TutorAssetItem,
   TutorCatalogResponse,
@@ -67,7 +70,7 @@ type SvgBoardStep =
       durationSec: number;
     };
 
-type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" | "male" | "robot"; voice: string; variant?: AvatarVariant; };
+type Avatar = { id: string; name: string; role: string; color: string; style: "boy" | "girl" | "male" | "robot" | "female" | "student"; voice: string; variant?: AvatarVariant; };
 type ConversationRole = "tutor" | "student" | "system";
 type ConversationChannel = "voice" | "text" | "doubt" | "system";
 type ConversationTurn = {
@@ -97,15 +100,17 @@ const MODULE_TO_COURSE_ID: Record<string, string> = {
   NEET_CHEMISTRY: "neet_chemistry",
   NEET_BIOLOGY: "neet_biology",
   APTITUDE_REASONING: "aptitude_reasoning",
-  FINANCIAL_LITERACY: "financial_literacy"
+  FINANCIAL_LITERACY: "financial_literacy",
+  ROBOTICS: "robotics"
 };
 const COURSE_LABELS: Record<string, string> = {
   vedic_math: "Vedic Math",
-  neet_physics: "NEET Physics",
-  neet_chemistry: "NEET Chemistry",
-  neet_biology: "NEET Biology",
-  aptitude_reasoning: "Aptitude & Reasoning",
-  financial_literacy: "Financial Literacy"
+  neet_physics: "Meera: NEET Physics",
+  neet_chemistry: "Meera: NEET Chemistry",
+  neet_biology: "Meera: NEET Biology",
+  aptitude_reasoning: "MindSparc Aptitude",
+  financial_literacy: "MoneyMind Finance",
+  robotics: "SparQ Robotics"
 };
 const EX_GROUP_KEYS = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 const TEACHING_CUE_ORDER = ["intro", "explain", "demo", "guided", "practice", "check", "checkpoint"] as const;
@@ -228,25 +233,27 @@ function toAssetUrl(raw: string): string {
 }
 
 const AVATARS: Avatar[] = [
-  { id: "raj",   name: "Raj",   role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "aditya", variant: "screen"  },
-  { id: "nova",  name: "Nova",  role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "priya",  variant: "round"   },
-  { id: "priya", name: "Priya", role: "Learning Coach", color: "#E91E8C", style: "robot", voice: "priya",  variant: "classic" },
+  { id: "raj",   name: "Raj",   role: "Learning Coach", color: "#E91E8C", style: "robot",   voice: "aditya", variant: "screen"  },
+  { id: "nova",  name: "Nova",  role: "Learning Coach", color: "#E91E8C", style: "robot",   voice: "priya",  variant: "round"   },
+  { id: "maya",  name: "Maya",  role: "Learning Coach", color: "#E91E8C", style: "robot",   voice: "priya",  variant: "classic" },
+  { id: "priya", name: "Priya", role: "Learning Coach", color: "#7C3AED", style: "female",  voice: "priya"  },
+  { id: "arjun", name: "Arjun", role: "Learning Coach", color: "#2563EB", style: "student", voice: "aditya" },
 ];
 const STATIC_AVATAR_MODE = false;
 
 const WIN_PHRASES = [
-  { emoji: "🌟", text: "Brilliant!" },
-  { emoji: "🎯", text: "You nailed it!" },
-  { emoji: "⭐", text: "Excellent!" },
-  { emoji: "🚀", text: "Outstanding!" },
-  { emoji: "💯", text: "Perfect!" },
-  { emoji: "🏆", text: "Champion!" },
-  { emoji: "✨", text: "Fantastic!" },
-  { emoji: "🎉", text: "Correct!" },
-  { emoji: "🔥", text: "On fire!" },
-  { emoji: "👑", text: "Superb!" },
-  { emoji: "💫", text: "Spot on!" },
-  { emoji: "🎊", text: "Amazing!" },
+  { emoji: "??", text: "Brilliant!" },
+  { emoji: "??", text: "You nailed it!" },
+  { emoji: "?", text: "Excellent!" },
+  { emoji: "??", text: "Outstanding!" },
+  { emoji: "??", text: "Perfect!" },
+  { emoji: "??", text: "Champion!" },
+  { emoji: "?", text: "Fantastic!" },
+  { emoji: "??", text: "Correct!" },
+  { emoji: "??", text: "On fire!" },
+  { emoji: "??", text: "Superb!" },
+  { emoji: "??", text: "Spot on!" },
+  { emoji: "??", text: "Amazing!" },
 ];
 
 const CONFETTI_COLORS = ["#E91E8C", "#3B3A8C", "#FFD700", "#00C896", "#FF6B6B", "#4ECDC4", "#FF9F43"];
@@ -260,7 +267,9 @@ const CONFETTI_SPREAD = [
 
 const AVATAR_STAGE_ART: Record<string, string> = {
   raj:   "/avatar_1/sprite_r03_c01.svg",
-  priya: "/teacher_1/svg/view_front.svg",
+  maya:  "/teacher_1/svg/view_front.svg",
+  priya: "/teacher_2/svg/pose_idle.svg",
+  arjun: "/student_1/svg/pose_idle.svg",
 };
 
 const BOARD_TEACHER_SVG_BY_CUE: Record<string, string> = {
@@ -274,7 +283,7 @@ const BOARD_TEACHER_SVG_BY_CUE: Record<string, string> = {
   default: "/teacher_1/svg/idle_hands_clasped.svg"
 };
 
-// ── Speaking teacher – gesture per cue ────────────────────────────────────
+// -- Speaking teacher  gesture per cue ------------------------------------
 const TEACHER_GESTURE_BY_CUE: Record<string, string> = {
   intro:      "/teacher_1/svg/gesture_greeting.svg",
   explain:    "/teacher_1/svg/gesture_explain_1.svg",
@@ -286,7 +295,7 @@ const TEACHER_GESTURE_BY_CUE: Record<string, string> = {
   default:    "/teacher_1/svg/idle_hands_clasped.svg"
 };
 
-// ── Viseme sequence for lip-sync ───────────────────────────────────────────
+// -- Viseme sequence for lip-sync -------------------------------------------
 const VISEME_CYCLE_SRCS = [
   "/teacher_1/svg/viseme_rest.svg",
   "/teacher_1/svg/viseme_a.svg",
@@ -298,8 +307,8 @@ const VISEME_CYCLE_SRCS = [
   "/teacher_1/svg/viseme_rest.svg",
 ];
 
-// ── Male teacher (avatar_1) – full-body SVG per cue ───────────────────────
-// Cue → single best-fit sprite from the 51-sprite pack (r=row, c=col).
+// -- Male teacher (avatar_1)  full-body SVG per cue -----------------------
+// Cue ? single best-fit sprite from the 51-sprite pack (r=row, c=col).
 const MALE_TEACHER_SPRITE_BY_CUE: Record<string, string> = {
   intro:      "/avatar_1/sprite_r03_c06.svg",  // friendly wave / greeting
   explain:    "/avatar_1/sprite_r02_c01.svg",  // arms spread, enthusiastic explain
@@ -311,13 +320,49 @@ const MALE_TEACHER_SPRITE_BY_CUE: Record<string, string> = {
   default:    "/avatar_1/sprite_r01_c11.svg",  // relaxed open-arms pose
 };
 
-// Sprites cycled while speaking — slow gesture changes (2.5 s each), crossfaded smoothly.
-// Pick poses that feel "engaged explaining" — not wildly different so crossfade looks natural.
+// Sprites cycled while speaking  slow gesture changes (2.5 s each), crossfaded smoothly.
+// Pick poses that feel "engaged explaining"  not wildly different so crossfade looks natural.
 const MALE_TEACHER_SPEAKING_CYCLE = [
-  "/avatar_1/sprite_r01_c11.svg",  // open arms — neutral engaging
-  "/avatar_1/sprite_r02_c01.svg",  // arms spread — enthusiastic
-  "/avatar_1/sprite_r03_c05.svg",  // pointing/guiding — confident
-  "/avatar_1/sprite_r04_c04.svg",  // hands together — thoughtful
+  "/avatar_1/sprite_r01_c11.svg",  // open arms  neutral engaging
+  "/avatar_1/sprite_r02_c01.svg",  // arms spread  enthusiastic
+  "/avatar_1/sprite_r03_c05.svg",  // pointing/guiding  confident
+  "/avatar_1/sprite_r04_c04.svg",  // hands together  thoughtful
+];
+
+// -- Female teacher (teacher_2) pose per cue ----------------------------------
+const FEMALE_TEACHER_SPRITE_BY_CUE: Record<string, string> = {
+  intro:      "/teacher_2/svg/pose_greeting.svg",
+  explain:    "/teacher_2/svg/pose_explain.svg",
+  demo:       "/teacher_2/svg/pose_demo.svg",
+  guided:     "/teacher_2/svg/pose_ask_question.svg",
+  practice:   "/teacher_2/svg/pose_practice.svg",
+  check:      "/teacher_2/svg/pose_ok_good.svg",
+  checkpoint: "/teacher_2/svg/pose_encourage.svg",
+  default:    "/teacher_2/svg/pose_idle.svg",
+};
+const FEMALE_TEACHER_SPEAKING_CYCLE = [
+  "/teacher_2/svg/pose_explain.svg",
+  "/teacher_2/svg/pose_ask_question.svg",
+  "/teacher_2/svg/pose_encourage.svg",
+  "/teacher_2/svg/pose_demo.svg",
+];
+
+// -- Male student (student_1) pose per cue ------------------------------------
+const STUDENT_SPRITE_BY_CUE: Record<string, string> = {
+  intro:      "/student_1/svg/pose_happy.svg",
+  explain:    "/student_1/svg/pose_thinking.svg",
+  demo:       "/student_1/svg/pose_writing.svg",
+  guided:     "/student_1/svg/pose_raise_hand.svg",
+  practice:   "/student_1/svg/pose_writing.svg",
+  check:      "/student_1/svg/pose_happy.svg",
+  checkpoint: "/student_1/svg/pose_raise_hand.svg",
+  default:    "/student_1/svg/pose_idle.svg",
+};
+const STUDENT_SPEAKING_CYCLE = [
+  "/student_1/svg/pose_idle.svg",
+  "/student_1/svg/pose_thinking.svg",
+  "/student_1/svg/pose_raise_hand.svg",
+  "/student_1/svg/pose_writing.svg",
 ];
 
 function boardTeacherSvgForCue(cue?: string): string {
@@ -325,80 +370,80 @@ function boardTeacherSvgForCue(cue?: string): string {
   return BOARD_TEACHER_SVG_BY_CUE[key] || BOARD_TEACHER_SVG_BY_CUE.default;
 }
 
-// ── Vedic Sutra names per chapter ─────────────────────────────────────────────
+// -- Vedic Sutra names per chapter ---------------------------------------------
 const CHAPTER_SUTRAS: Record<string, string> = {
   L1_COMPLETING_WHOLE: "By the Completion or Non-Completion",
   L2_DOUBLING_HALVING: "Alternate Elimination and Retention",
-  L3_MULTIPLY_BY_11: "Anurupyena — Proportionality",
-  L4_VERTICAL_CROSSWISE: "Urdhva-Tiryagbhyam — Vertical and Crosswise",
+  L3_MULTIPLY_BY_11: "Anurupyena  Proportionality",
+  L4_VERTICAL_CROSSWISE: "Urdhva-Tiryagbhyam  Vertical and Crosswise",
   L5_ALL_FROM_9_LAST_FROM_10: "All from 9 and the Last from 10",
-  L6_NIKHILAM_BASE_10_100: "Nikhilam — Near Base Method",
+  L6_NIKHILAM_BASE_10_100: "Nikhilam  Near Base Method",
   L7_SQUARES_ENDING_5: "By One More than the One Before",
-  L8_YAVADUNAM: "Yavadunam — Whatever the Deficiency",
-  L9_GENERAL_MULTIPLICATION: "Urdhva-Tiryagbhyam — General Case",
-  L10_DIVISION_BY_9: "Paravartya Yojayet — Transpose and Apply",
-  L11_VINCULUM_INTRO: "Vinculum — Negative Digit Representation",
-  L12_FRACTIONS_DECIMALS: "Anurupyena — Proportional Fractions",
-  L13_ALGEBRAIC_IDENTITIES: "Anurupye Sunyam — Proportionately Zero",
-  L14_FACTORISATION: "Adyam Adyena — First by First",
-  L15_SQUARES_NEAR_BASE: "Yavadunam — Near Base Squares",
-  L16_CUBES_INTRO: "Anurupyena — Cubes by Pattern",
+  L8_YAVADUNAM: "Yavadunam  Whatever the Deficiency",
+  L9_GENERAL_MULTIPLICATION: "Urdhva-Tiryagbhyam  General Case",
+  L10_DIVISION_BY_9: "Paravartya Yojayet  Transpose and Apply",
+  L11_VINCULUM_INTRO: "Vinculum  Negative Digit Representation",
+  L12_FRACTIONS_DECIMALS: "Anurupyena  Proportional Fractions",
+  L13_ALGEBRAIC_IDENTITIES: "Anurupye Sunyam  Proportionately Zero",
+  L14_FACTORISATION: "Adyam Adyena  First by First",
+  L15_SQUARES_NEAR_BASE: "Yavadunam  Near Base Squares",
+  L16_CUBES_INTRO: "Anurupyena  Cubes by Pattern",
 };
 
-// ── Worked example lines for DEMO slide (board animation) ────────────────────
+// -- Worked example lines for DEMO slide (board animation) --------------------
 const CHAPTER_DEMO_STEPS: Record<string, Array<{ text: string; color?: string; size?: number }>> = {
   L1_COMPLETING_WHOLE: [
     { text: "Question: What adds to 7 to reach 10?", color: "#334155", size: 14 },
-    { text: "Step 1 — Base = 10  (our target)", color: "#0369a1", size: 14 },
-    { text: "Step 2 — 7 + ? = 10", color: "#334155", size: 15 },
-    { text: "Answer:  10 − 7 = 3", color: "#065f46", size: 18 },
-    { text: "Check: 7 + 3 = 10  ✓   (Sutra confirmed!)", color: "#7c2d12", size: 12 },
+    { text: "Step 1  Base = 10  (our target)", color: "#0369a1", size: 14 },
+    { text: "Step 2  7 + ? = 10", color: "#334155", size: 15 },
+    { text: "Answer:  10 - 7 = 3", color: "#065f46", size: 18 },
+    { text: "Check: 7 + 3 = 10  ?   (Sutra confirmed!)", color: "#7c2d12", size: 12 },
   ],
   L2_DOUBLING_HALVING: [
     { text: "Question: Double 36", color: "#334155", size: 14 },
-    { text: "Step 1 — Split: 36 = 30 + 6", color: "#0369a1", size: 14 },
-    { text: "Step 2 — Double each: 60 + 12", color: "#334155", size: 14 },
+    { text: "Step 1  Split: 36 = 30 + 6", color: "#0369a1", size: 14 },
+    { text: "Step 2  Double each: 60 + 12", color: "#334155", size: 14 },
     { text: "Answer: 60 + 12 = 72", color: "#065f46", size: 18 },
     { text: "Twice as fast as long multiplication!", color: "#7c2d12", size: 12 },
   ],
   L3_MULTIPLY_BY_11: [
     { text: "Question: 34 × 11 = ?", color: "#334155", size: 14 },
-    { text: "Step 1 — Write the outer digits: 3 _ 4", color: "#0369a1", size: 14 },
-    { text: "Step 2 — Insert their sum: 3+4 = 7", color: "#334155", size: 14 },
+    { text: "Step 1  Write the outer digits: 3 _ 4", color: "#0369a1", size: 14 },
+    { text: "Step 2  Insert their sum: 3+4 = 7", color: "#334155", size: 14 },
     { text: "Answer: 374", color: "#065f46", size: 20 },
     { text: "No multiplication table needed!", color: "#7c2d12", size: 12 },
   ],
   L4_VERTICAL_CROSSWISE: [
     { text: "Question: 23 × 14 = ?", color: "#334155", size: 14 },
-    { text: "V-Right: 3×4=12 → write 2, carry 1", color: "#0369a1", size: 13 },
-    { text: "Crosswise: 2×4+3×1=11+1=12 → write 2, carry 1", color: "#334155", size: 12 },
+    { text: "V-Right: 3×4=12 ? write 2, carry 1", color: "#0369a1", size: 13 },
+    { text: "Crosswise: 2×4+3×1=11+1=12 ? write 2, carry 1", color: "#334155", size: 12 },
     { text: "V-Left: 2×1=2+1=3", color: "#334155", size: 13 },
     { text: "Answer: 322", color: "#065f46", size: 20 },
   ],
   L5_ALL_FROM_9_LAST_FROM_10: [
-    { text: "Question: 100 − 37 = ?", color: "#334155", size: 14 },
-    { text: "Step 1 — 'All from 9': 9 − 3 = 6", color: "#0369a1", size: 14 },
-    { text: "Step 2 — 'Last from 10': 10 − 7 = 3", color: "#334155", size: 14 },
+    { text: "Question: 100 - 37 = ?", color: "#334155", size: 14 },
+    { text: "Step 1  'All from 9': 9 - 3 = 6", color: "#0369a1", size: 14 },
+    { text: "Step 2  'Last from 10': 10 - 7 = 3", color: "#334155", size: 14 },
     { text: "Answer: 63", color: "#065f46", size: 20 },
-    { text: "Instant subtraction — no borrowing!", color: "#7c2d12", size: 12 },
+    { text: "Instant subtraction  no borrowing!", color: "#7c2d12", size: 12 },
   ],
   L6_NIKHILAM_BASE_10_100: [
     { text: "Question: 97 × 98 (base 100)", color: "#334155", size: 14 },
-    { text: "Step 1 — Deviations: 97→−3,  98→−2", color: "#0369a1", size: 13 },
-    { text: "Step 2 — Left: 97+(−2)=95  or  98+(−3)=95", color: "#334155", size: 12 },
-    { text: "Step 3 — Right: (−3)×(−2)=06", color: "#334155", size: 13 },
+    { text: "Step 1  Deviations: 97?-3,  98?-2", color: "#0369a1", size: 13 },
+    { text: "Step 2  Left: 97+(-2)=95  or  98+(-3)=95", color: "#334155", size: 12 },
+    { text: "Step 3  Right: (-3)×(-2)=06", color: "#334155", size: 13 },
     { text: "Answer: 9506", color: "#065f46", size: 20 },
   ],
   L7_SQUARES_ENDING_5: [
     { text: "Question: 35² = ?", color: "#334155", size: 14 },
-    { text: "Step 1 — Prefix: 3 × (3+1) = 3 × 4 = 12", color: "#0369a1", size: 13 },
-    { text: "Step 2 — Attach 25", color: "#334155", size: 14 },
+    { text: "Step 1  Prefix: 3 × (3+1) = 3 × 4 = 12", color: "#0369a1", size: 13 },
+    { text: "Step 2  Attach 25", color: "#334155", size: 14 },
     { text: "Answer: 1225", color: "#065f46", size: 20 },
     { text: "Any number ending in 5, instant square!", color: "#7c2d12", size: 12 },
   ],
 };
 
-// ── Spoken DEMO narration per chapter ─────────────────────────────────────────
+// -- Spoken DEMO narration per chapter -----------------------------------------
 const CHAPTER_DEMO_SPEECH: Record<string, string> = {
   L1_COMPLETING_WHOLE: "Watch how I find what adds to 7 to make 10. Our base is 10. Seven plus what equals ten? Ten minus 7 is 3. So the answer is 3. Seven plus 3 equals 10. The Sutra works!",
   L2_DOUBLING_HALVING: "Watch me double 36. I split it: 30 and 6. Double 30 is 60. Double 6 is 12. Add them: 72. No calculator needed!",
@@ -580,7 +625,7 @@ function AvatarFace({
   );
 }
 
-// ── Speaking teacher avatar (layered sprite system) ────────────────────────
+// -- Speaking teacher avatar (layered sprite system) ------------------------
 function SpeakingTeacher({
   cue = "explain",
   speaking = false,
@@ -598,7 +643,7 @@ function SpeakingTeacher({
   const [showBlink, setShowBlink] = useState(false);
   // Eye direction for teacher_1: 'center' | 'left' | 'right'
   const [eyeDir, setEyeDir] = useState<"center" | "left" | "right">("center");
-  // Sprite-cycle index for male teacher speaking animation (0–3)
+  // Sprite-cycle index for male teacher speaking animation (03)
   const [speakFrame, setSpeakFrame] = useState(0);
 
   // Male teacher gesture cycling: swap pose every 2.5 s while speaking
@@ -612,7 +657,7 @@ function SpeakingTeacher({
     return () => clearInterval(tid);
   }, [speaking, avatar.style]);
 
-  // Viseme cycling when speaking (~110 ms per shape = ~9 fps) — SVG teacher_1 only
+  // Viseme cycling when speaking (~110 ms per shape = ~9 fps)  SVG teacher_1 only
   useEffect(() => {
     if (STATIC_AVATAR_MODE) { setVisemeIdx(0); return; }
     if (avatar.style === "male" || !speaking) { setVisemeIdx(0); return; }
@@ -623,7 +668,7 @@ function SpeakingTeacher({
     return () => clearInterval(tid);
   }, [speaking, avatar.style]);
 
-  // Periodic auto-blink every 3–7 s
+  // Periodic auto-blink every 37 s
   useEffect(() => {
     if (STATIC_AVATAR_MODE) { setShowBlink(false); return; }
     let t: ReturnType<typeof setTimeout>;
@@ -656,7 +701,7 @@ function SpeakingTeacher({
     return () => clearTimeout(t);
   }, [speaking, avatar.style]);
 
-  // ── RoboDynamics robot avatar (Option C) ─────────────────────────────────
+  // -- RoboDynamics robot avatar (Option C) ---------------------------------
   if (avatar.style === "robot") {
     const expression: AvatarExpression =
       feedback === true  ? "happy"
@@ -677,15 +722,15 @@ function SpeakingTeacher({
     );
   }
 
-  // ── Male teacher: cycling sprite gesture + CSS speaking rhythm ──────────────
+  // -- Male teacher: cycling sprite gesture + CSS speaking rhythm --------------
   if (avatar.style === "male") {
     const cueKey = (cue || "").toLowerCase();
     // Cue/feedback-based sprite (shown when idle, or when feedback overrides)
     const cueSrc =
-      feedback === true  ? "/avatar_1/sprite_r03_c06.svg"   // happy wave — correct!
-      : feedback === false ? "/avatar_1/sprite_r05_c05.svg"  // concerned — wrong answer
+      feedback === true  ? "/avatar_1/sprite_r03_c06.svg"   // happy wave  correct!
+      : feedback === false ? "/avatar_1/sprite_r05_c05.svg"  // concerned  wrong answer
       : (MALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? MALE_TEACHER_SPRITE_BY_CUE.default);
-    // While speaking (no feedback override) → cycle through 4 gesture sprites
+    // While speaking (no feedback override) ? cycle through 4 gesture sprites
     const activeSrc = STATIC_AVATAR_MODE
       ? MALE_TEACHER_SPRITE_BY_CUE.default
       : (speaking && feedback == null)
@@ -698,7 +743,57 @@ function SpeakingTeacher({
         aria-label={`${avatar.name} teacher avatar`}
       >
         <div className="teacher-glow" aria-hidden="true" />
-        {/* key changes when sprite changes → triggers spriteFadeIn CSS animation */}
+        {/* key changes when sprite changes ? triggers spriteFadeIn CSS animation */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img key={activeSrc} src={activeSrc} alt={avatar.name} className="male-teacher-sprite" draggable={false} />
+      </div>
+    );
+  }
+
+  // -- Female teacher (teacher_2): cycling sprite per cue ----------------------
+  if (avatar.style === "female") {
+    const cueKey = (cue || "").toLowerCase();
+    const cueSrc =
+      feedback === true  ? "/teacher_2/svg/pose_happy.svg"
+      : feedback === false ? "/teacher_2/svg/pose_concerned.svg"
+      : (FEMALE_TEACHER_SPRITE_BY_CUE[cueKey] ?? FEMALE_TEACHER_SPRITE_BY_CUE.default);
+    const activeSrc = STATIC_AVATAR_MODE
+      ? FEMALE_TEACHER_SPRITE_BY_CUE.default
+      : (speaking && feedback == null)
+        ? FEMALE_TEACHER_SPEAKING_CYCLE[speakFrame]
+        : cueSrc;
+    return (
+      <div
+        className={`speaking-teacher male-teacher${!STATIC_AVATAR_MODE && speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
+        style={{ ["--teacher-accent" as any]: avatar.color }}
+        aria-label={`${avatar.name} teacher avatar`}
+      >
+        <div className="teacher-glow" aria-hidden="true" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img key={activeSrc} src={activeSrc} alt={avatar.name} className="male-teacher-sprite" draggable={false} />
+      </div>
+    );
+  }
+
+  // -- Male student (student_1): cycling sprite per cue ------------------------
+  if (avatar.style === "student") {
+    const cueKey = (cue || "").toLowerCase();
+    const cueSrc =
+      feedback === true  ? "/student_1/svg/pose_happy.svg"
+      : feedback === false ? "/student_1/svg/pose_confused.svg"
+      : (STUDENT_SPRITE_BY_CUE[cueKey] ?? STUDENT_SPRITE_BY_CUE.default);
+    const activeSrc = STATIC_AVATAR_MODE
+      ? STUDENT_SPRITE_BY_CUE.default
+      : (speaking && feedback == null)
+        ? STUDENT_SPEAKING_CYCLE[speakFrame]
+        : cueSrc;
+    return (
+      <div
+        className={`speaking-teacher male-teacher${!STATIC_AVATAR_MODE && speaking ? " speaking" : ""}${compact ? " compact" : ""}`}
+        style={{ ["--teacher-accent" as any]: avatar.color }}
+        aria-label={`${avatar.name} student avatar`}
+      >
+        <div className="teacher-glow" aria-hidden="true" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img key={activeSrc} src={activeSrc} alt={avatar.name} className="male-teacher-sprite" draggable={false} />
       </div>
@@ -721,19 +816,19 @@ function SpeakingTeacher({
       aria-label={`${avatar.name} teacher avatar`}
     >
       <div className="teacher-glow" aria-hidden="true" />
-      {/* Body base – full figure */}
+      {/* Body base  full figure */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/teacher_1/svg/view_front.svg" alt={avatar.name}
            className="st-layer st-body" draggable={false} />
-      {/* Gesture overlay – arms (cue-dependent) */}
+      {/* Gesture overlay  arms (cue-dependent) */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img key={gestureSrc} src={gestureSrc} alt=""
            className="st-layer st-gesture" draggable={false} />
-      {/* Expression overlay – face */}
+      {/* Expression overlay  face */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img key={expressionSrc} src={expressionSrc} alt=""
            className="st-layer st-expression" draggable={false} />
-      {/* Viseme / lip-sync overlay – mouth */}
+      {/* Viseme / lip-sync overlay  mouth */}
       {speaking && (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img src={VISEME_CYCLE_SRCS[visemeIdx]} alt=""
@@ -755,9 +850,9 @@ function SpeakingTeacher({
   );
 }
 
-// ── Lesson intro slide builder ────────────────────────────────────────────────
-// Builds SVG board steps for the 3-slide lesson intro (EXPLAIN → DEMO → GUIDED).
-// Runs BEFORE the first question. Pure function — no React hooks.
+// -- Lesson intro slide builder ------------------------------------------------
+// Builds SVG board steps for the 3-slide lesson intro (EXPLAIN ? DEMO ? GUIDED).
+// Runs BEFORE the first question. Pure function  no React hooks.
 function buildIntroSlideBoardSteps(
   slide: 1 | 2 | 3,
   chapterCode: string,
@@ -791,26 +886,26 @@ function buildIntroSlideBoardSteps(
   };
 
   if (slide === 1) {
-    // ── EXPLAIN: Sutra name + learning goals ──────────────────────────────
-    addT("s1_badge", 16, 22, "EXPLAIN  —  Step 1 of 3: Here is the Concept", "#94a3b8", 11);
+    // -- EXPLAIN: Sutra name + learning goals ------------------------------
+    addT("s1_badge", 16, 22, "EXPLAIN    Step 1 of 3: Here is the Concept", "#94a3b8", 11);
     addL("s1_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     addT("s1_sutra_lbl", 16, 54, "Vedic Sutra:", "#7c2d12", 13);
     addT("s1_sutra", 16, 78, `"${CHAPTER_LABEL_MAP[chapterCode] || "Vedic Method"}"`, avatar.color, 17);
     addL("s1_line", 16, 92, 480, 92, avatar.color, 2);
     addT("s1_goal_lbl", 16, 116, "Today you will learn:", "#334155", 13);
     learningGoals.slice(0, 3).forEach((g, i) => {
-      const truncated = g.length > 70 ? `${g.slice(0, 68)}…` : g;
-      addT(`s1_g${i}`, 24, 138 + i * 24, `• ${truncated}`, "#0f172a", 13);
+      const truncated = g.length > 70 ? `${g.slice(0, 68)}` : g;
+      addT(`s1_g${i}`, 24, 138 + i * 24, ` ${truncated}`, "#0f172a", 13);
     });
-    addT("s1_next", 16, 240, "► Next: Watch a worked example on the board", "#64748b", 11);
+    addT("s1_next", 16, 240, "? Next: Watch a worked example on the board", "#64748b", 11);
   } else if (slide === 2) {
-    // ── DEMO: Step-by-step worked example ────────────────────────────────
+    // -- DEMO: Step-by-step worked example --------------------------------
     const demoLines = CHAPTER_DEMO_STEP_MAP[chapterCode] || [
-      { text: "Step 1 — Identify the base or pattern", color: "#0369a1", size: 14 },
-      { text: "Step 2 — Apply the Sutra rule", color: "#334155", size: 14 },
-      { text: "Step 3 — Write the answer", color: "#065f46", size: 16 },
+      { text: "Step 1  Identify the base or pattern", color: "#0369a1", size: 14 },
+      { text: "Step 2  Apply the Sutra rule", color: "#334155", size: 14 },
+      { text: "Step 3  Write the answer", color: "#065f46", size: 16 },
     ];
-    addT("s2_badge", 16, 22, "DEMO  —  Step 2 of 3: Watch Me Solve One", "#94a3b8", 11);
+    addT("s2_badge", 16, 22, "DEMO    Step 2 of 3: Watch Me Solve One", "#94a3b8", 11);
     addL("s2_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     let y = 58;
     demoLines.forEach((line, i) => {
@@ -820,19 +915,19 @@ function buildIntroSlideBoardSteps(
       addT(`s2_l${i}`, 16, y, line.text, line.color || "#0f172a", line.size || 14);
       y += (line.size || 14) + 16;
     });
-    addT("s2_next", 16, 310, "► Next: Your turn!", "#64748b", 11);
+    addT("s2_next", 16, 310, "? Next: Your turn!", "#64748b", 11);
   } else {
-    // ── GUIDED: Student transition ────────────────────────────────────────
-    addT("s3_badge", 16, 22, "GUIDED  —  Step 3 of 3: Now You Try", "#94a3b8", 11);
+    // -- GUIDED: Student transition ----------------------------------------
+    addT("s3_badge", 16, 22, "GUIDED    Step 3 of 3: Now You Try", "#94a3b8", 11);
     addL("s3_sep", 16, 30, 570, 30, "#e2e8f0", 1);
     addT("s3_l1", 16, 68, "Apply the same method to each question.", "#334155", 15);
     addT("s3_l2", 16, 96, "I will guide you if you are stuck.", avatar.color, 14);
     addL("s3_line", 16, 114, 440, 114, avatar.color, 2);
-    addT("s3_r1", 28, 140, "• Read the question carefully", "#0f172a", 13);
-    addT("s3_r2", 28, 162, "• Use the Sutra step by step", "#0f172a", 13);
-    addT("s3_r3", 28, 184, "• Type your answer and click Check Answer", "#0f172a", 13);
-    addT("s3_r4", 28, 206, "• Ask me a doubt any time using the doubt panel", "#0f172a", 13);
-    addT("s3_ready", 16, 248, "Ready? Let us begin! ✓", avatar.color, 17);
+    addT("s3_r1", 28, 140, " Read the question carefully", "#0f172a", 13);
+    addT("s3_r2", 28, 162, " Use the Sutra step by step", "#0f172a", 13);
+    addT("s3_r3", 28, 184, " Type your answer and click Check Answer", "#0f172a", 13);
+    addT("s3_r4", 28, 206, " Ask me a doubt any time using the doubt panel", "#0f172a", 13);
+    addT("s3_ready", 16, 248, "Ready? Let us begin! ?", avatar.color, 17);
   }
 
   return steps;
@@ -1124,15 +1219,15 @@ function fallbackChaptersForCourse(courseId: string): TutorChapter[] {
   return DEFAULT_CHAPTERS_BY_COURSE[courseId] || DEFAULT_CHAPTERS_BY_COURSE[DEFAULT_COURSE_ID];
 }
 
-// ── Debug logging helpers (module-level — stable, no re-render cost) ─────────
+// -- Debug logging helpers (module-level  stable, no re-render cost) ---------
 const _DBG_COLORS: Record<string, string> = {
-  STATE:  "#6366f1",   // indigo  — React state transitions
-  FLOW:   "#f59e0b",   // amber   — flow / kickoff / pendingKickoff
-  SPEAK:  "#10b981",   // emerald — TTS / voice
-  API:    "#3b82f6",   // blue    — fetch calls
-  ANSWER: "#ef4444",   // red     — answer evaluation
-  FILL:   "#8b5cf6",   // purple  — fill_step interactions
-  NAV:    "#06b6d4",   // cyan    — question navigation
+  STATE:  "#6366f1",   // indigo   React state transitions
+  FLOW:   "#f59e0b",   // amber    flow / kickoff / pendingKickoff
+  SPEAK:  "#10b981",   // emerald  TTS / voice
+  API:    "#3b82f6",   // blue     fetch calls
+  ANSWER: "#ef4444",   // red      answer evaluation
+  FILL:   "#8b5cf6",   // purple   fill_step interactions
+  NAV:    "#06b6d4",   // cyan     question navigation
 };
 function _dbg(enabled: boolean, cat: string, ev: string, data?: unknown) {
   if (!enabled) return;
@@ -1175,14 +1270,14 @@ function TutorContent() {
   const defaultRequestedChapter = requestedChapterFromQuery || requestedFallbackChapters[0].chapterCode;
   const defaultRequestedExerciseGroup = requestedExerciseGroupFromQuery || "A";
 
-  // ── Debug mode: add ?debug=1 to URL, or run localStorage.setItem('aiTutorDebug','1') in console ──
+  // -- Debug mode: add ?debug=1 to URL, or run localStorage.setItem('aiTutorDebug','1') in console --
   const debugMode = params.get("debug") === "1" ||
     (typeof window !== "undefined" && window.localStorage?.getItem("aiTutorDebug") === "1");
-  // Short helper — stable ref to module fn, plus debugMode flag bound in closure
+  // Short helper  stable ref to module fn, plus debugMode flag bound in closure
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const dbg = (cat: string, ev: string, data?: unknown) => _dbg(debugMode, cat, ev, data);
 
-  // Scope bookmark to the specific user — prevents one student loading another's saved session
+  // Scope bookmark to the specific user  prevents one student loading another's saved session
   const jwtUserId = useMemo(() => {
     const payload = decodeJwtPayload(token);
     if (!payload) return "";
@@ -1237,7 +1332,7 @@ function TutorContent() {
   const [confidence, setConfidence] = useState<Confidence>("medium");
   const [check, setCheck] = useState<TutorCheckResponse | null>(null);
   const [isCelebrating, setIsCelebrating] = useState(false);
-  const [celebrationPhrase, setCelebrationPhrase] = useState<{ emoji: string; text: string }>({ emoji: "🌟", text: "Brilliant!" });
+  const [celebrationPhrase, setCelebrationPhrase] = useState<{ emoji: string; text: string }>({ emoji: "??", text: "Brilliant!" });
   const [doubt, setDoubt] = useState("");
   const [doubtReply, setDoubtReply] = useState("");
   const [conversationLog, setConversationLog] = useState<ConversationTurn[]>([]);
@@ -1251,6 +1346,15 @@ function TutorContent() {
   const [showPurchaseCta, setShowPurchaseCta] = useState(false);
 
   const [selectedAvatarId, setSelectedAvatarId] = useState(AVATARS[0].id);
+  const themeClass = useMemo(() => {
+    const cid = (courseId || "").toLowerCase();
+    const rcid = (requestedCourseId || "").toLowerCase();
+    const target = cid || rcid;
+    if (target.includes("financial") || target.startsWith("mm_") || target.includes("moneymind")) return "theme-moneymind";
+    if (target.includes("vedic")) return "theme-mindsutra";
+    if (target.includes("aptitude") || target.includes("sparc") || target.includes("reasoning")) return "theme-mindsparc";
+    return "";
+  }, [courseId, requestedCourseId]);
   const [teachingPace, setTeachingPace] = useState<"relaxed" | "normal" | "quick">("normal");
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [micPermission, setMicPermission] = useState<MicPermission>("unknown");
@@ -1270,7 +1374,7 @@ function TutorContent() {
   const [boardRunId, setBoardRunId] = useState(0);
   const [boardSpeed, setBoardSpeed] = useState(1);
 
-  // ── Rich question type state ─────────────────────────────────────────────
+  // -- Rich question type state ---------------------------------------------
   const [selectedMcqIndex, setSelectedMcqIndex] = useState<number | null>(null);
   const [fillStepIndex, setFillStepIndex] = useState(0);
   const [fillStepInputs, setFillStepInputs] = useState<string[]>([]);
@@ -1285,7 +1389,7 @@ function TutorContent() {
   const continueTimerRef = useRef<number | null>(null);  // auto-continue after correct answer pause
   const speechRecognitionRef = useRef<any>(null);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
-  const audioCtxRef    = useRef<AudioContext | null>(null);          // shared ctx — iOS safe
+  const audioCtxRef    = useRef<AudioContext | null>(null);          // shared ctx  iOS safe
   const audioSourceRef = useRef<AudioBufferSourceNode | null>(null); // current playing node
   const audioUnlockedRef = useRef(false);
   const speakSeqRef = useRef(0);
@@ -1293,7 +1397,7 @@ function TutorContent() {
   const teachingLockRef = useRef(false);   // ref-based lock so teachOnBoard guard is never stale
   const kickoffRunningRef = useRef(false);
   const lastKickoffTokenRef = useRef("");
-  const checkAnswerInFlightRef = useRef(false); // sync guard — prevents double-submit race condition
+  const checkAnswerInFlightRef = useRef(false); // sync guard  prevents double-submit race condition
   const autoListenQuestionRef = useRef("");
   const silenceRecoveryQuestionRef = useRef("");
   const silenceRecoveryMsRef = useRef(12000);  // updated by BehaviorClassifier via check-answer
@@ -1321,7 +1425,7 @@ function TutorContent() {
     return parsedLessonGradeBand.max !== null ? parsedLessonGradeBand.max <= 6 : false;
   }, [learnerGrade, parsedLessonGradeBand.max]);
   const isLearnRoute = (pathname || "").includes("/ai-tutor/learn");
-  const minimalDuolingoLayout = isLearnRoute || isJuniorLayout;
+  const minimalDuolingoLayout = false; // Duolingo style decommissioned as per user request
   const learnerLabel = useMemo(() => {
     if (learnerGrade !== null) {
       return `Grade ${learnerGrade}`;
@@ -1619,12 +1723,15 @@ function TutorContent() {
   }, [lessonScreenplay, question, activeAttempt, confidence, screenplayMode]);
   // Always show both panels: board above for teaching, question card below for answering
   const showExercisePanel = true;
-  const showBoardPanel = useMemo(() => boardSteps.length > 0, [boardSteps]);
+  const showBoardPanel = useMemo(() => {
+    if (activeTeachingStep?.boardMode === "rich_board") return true;
+    return boardSteps.length > 0;
+  }, [boardSteps, activeTeachingStep]);
 
   const stageStatusText = useMemo(() => {
     if (isTeachingBoard) return "Teaching on whiteboard...";
     if (isEvaluatingAnswer) return "Evaluating your answer...";
-    if (isLoadingNextQuestion) return "Preparing your next challenge…";
+    if (isLoadingNextQuestion) return "Preparing your next challenge";
     if (isSpeaking) return "Speaking live...";
     if (isListening) return "Listening to your answer...";
     if (awaitingStudentResponse || hasAnswerReadyQuestion) {
@@ -1634,7 +1741,7 @@ function TutorContent() {
     }
     return "Ready for next step.";
   }, [isTeachingBoard, isEvaluatingAnswer, isLoadingNextQuestion, isSpeaking, isListening, awaitingStudentResponse, hasAnswerReadyQuestion, micPermission]);
-  // "coach" only when the coach is actively teaching or loading — not while just reading the question
+  // "coach" only when the coach is actively teaching or loading  not while just reading the question
   // aloud to a student who already has control (awaitingStudentResponse / evaluating / answered).
   const studentHasControl = awaitingStudentResponse || isListening || isEvaluatingAnswer || !!check || hasAnswerReadyQuestion;
   const stageSceneMode = (isTeachingBoard || isLoadingNextQuestion || (pendingKickoff !== "none" && pendingKickoff !== "teach") || (isSpeaking && !studentHasControl))
@@ -1644,26 +1751,26 @@ function TutorContent() {
       : "coach";
   const showInlineBoard = showBoardPanel && stageSceneMode === "coach";
 
-  // ── Debug: state-change watchers ────────────────────────────────────────────
+  // -- Debug: state-change watchers --------------------------------------------
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("STATE", `stageSceneMode → ${stageSceneMode}`, { isSpeaking, studentHasControl, isTeachingBoard, isLoadingNextQuestion, pendingKickoff, awaitingStudentResponse }); }, [stageSceneMode]);
+  useEffect(() => { dbg("STATE", `stageSceneMode ? ${stageSceneMode}`, { isSpeaking, studentHasControl, isTeachingBoard, isLoadingNextQuestion, pendingKickoff, awaitingStudentResponse }); }, [stageSceneMode]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("NAV",   `question → ${question?.questionId ?? "null"}`, { type: question?.questionType, text: question?.questionText?.slice(0, 80) }); }, [question?.questionId]);
+  useEffect(() => { dbg("NAV",   `question ? ${question?.questionId ?? "null"}`, { type: question?.questionType, text: question?.questionText?.slice(0, 80) }); }, [question?.questionId]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("SPEAK", `isSpeaking → ${isSpeaking}`); }, [isSpeaking]);
+  useEffect(() => { dbg("SPEAK", `isSpeaking ? ${isSpeaking}`); }, [isSpeaking]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("STATE", `awaitingStudentResponse → ${awaitingStudentResponse}`); }, [awaitingStudentResponse]);
+  useEffect(() => { dbg("STATE", `awaitingStudentResponse ? ${awaitingStudentResponse}`); }, [awaitingStudentResponse]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("FLOW",  `flowState → ${flowState}`); }, [flowState]);
+  useEffect(() => { dbg("FLOW",  `flowState ? ${flowState}`); }, [flowState]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("FLOW",  `pendingKickoff → ${pendingKickoff}`); }, [pendingKickoff]);
+  useEffect(() => { dbg("FLOW",  `pendingKickoff ? ${pendingKickoff}`); }, [pendingKickoff]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { if (teacherUtterance) dbg("SPEAK", `teacherUtterance set → "${teacherUtterance.slice(0, 80)}"`); }, [teacherUtterance]);
+  useEffect(() => { if (teacherUtterance) dbg("SPEAK", `teacherUtterance set ? "${teacherUtterance.slice(0, 80)}"`); }, [teacherUtterance]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("STATE", `isEvaluatingAnswer → ${isEvaluatingAnswer}`); }, [isEvaluatingAnswer]);
+  useEffect(() => { dbg("STATE", `isEvaluatingAnswer ? ${isEvaluatingAnswer}`); }, [isEvaluatingAnswer]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { dbg("STATE", `isLoadingNextQuestion → ${isLoadingNextQuestion}`); }, [isLoadingNextQuestion]);
-  // ────────────────────────────────────────────────────────────────────────────
+  useEffect(() => { dbg("STATE", `isLoadingNextQuestion ? ${isLoadingNextQuestion}`); }, [isLoadingNextQuestion]);
+  // ----------------------------------------------------------------------------
 
   const lessonListenLine = useMemo(() => {
     if (!question) return missionReadPrompt;
@@ -1725,12 +1832,12 @@ function TutorContent() {
       const ctx = new AudioCtx() as AudioContext;
       const now = ctx.currentTime;
 
-      // 6 distinct "correct" celebration sounds — picked randomly for variety
+      // 6 distinct "correct" celebration sounds  picked randomly for variety
       type Note = { hz: number; sec: number; gain: number; type?: OscillatorType; gap?: number };
       const CORRECT_SOUNDS: Note[][] = [
         // 1. Classic rising chime (sine)
         [{ hz: 540, sec: 0.09, gain: 0.32 }, { hz: 720, sec: 0.1, gain: 0.32 }, { hz: 900, sec: 0.13, gain: 0.35 }],
-        // 2. Level-up scale (triangle — bright & game-like)
+        // 2. Level-up scale (triangle  bright & game-like)
         [{ hz: 392, sec: 0.07, gain: 0.28, type: "triangle" }, { hz: 523, sec: 0.07, gain: 0.28, type: "triangle" },
          { hz: 659, sec: 0.07, gain: 0.28, type: "triangle" }, { hz: 784, sec: 0.14, gain: 0.32, type: "triangle" }],
         // 3. Magic sparkle (fast high notes)
@@ -1739,7 +1846,7 @@ function TutorContent() {
         // 4. Xylophone pop (triangle, wide jump)
         [{ hz: 880, sec: 0.08, gain: 0.30, type: "triangle" }, { hz: 1108, sec: 0.1, gain: 0.30, type: "triangle" },
          { hz: 1320, sec: 0.14, gain: 0.34, type: "triangle" }],
-        // 5. Double-ding bell (two overlapping high notes — bell feel)
+        // 5. Double-ding bell (two overlapping high notes  bell feel)
         [{ hz: 987, sec: 0.15, gain: 0.30 }, { hz: 1318, sec: 0.15, gain: 0.28, gap: -0.05 }],
         // 6. Joyful 5-note run
         [{ hz: 523, sec: 0.06, gain: 0.28 }, { hz: 587, sec: 0.06, gain: 0.28 }, { hz: 659, sec: 0.06, gain: 0.28 },
@@ -1800,6 +1907,19 @@ function TutorContent() {
     }
     setIsListening(false);
   }
+
+  // -- AUTO-START MISSION: Bypass the 'Start Mission' screen if chapter is specified --
+  useEffect(() => {
+    if (status === "idle" && requestedChapterFromQuery && canStart) {
+       // Short delay to ensure catalog is loaded and settings are stable
+       const timer = setTimeout(() => {
+         if (status === "idle" && !sessionId) {
+            void startSession();
+         }
+       }, 500);
+       return () => clearTimeout(timer);
+    }
+  }, [status, requestedChapterFromQuery, canStart, sessionId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1873,8 +1993,8 @@ function TutorContent() {
     }
   }, [voiceEnabled]);
 
-  // ── Start-screen welcome greeting fires inside unlockAudio() ──
-  // (must be inside a user-gesture handler — Chrome/iOS block autoplay on mount)
+  // -- Start-screen welcome greeting fires inside unlockAudio() --
+  // (must be inside a user-gesture handler  Chrome/iOS block autoplay on mount)
 
   useEffect(() => {
     if (!classStartedAt) {
@@ -1907,7 +2027,7 @@ function TutorContent() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    // ?fresh=1 → never show the "resume saved place" card
+    // ?fresh=1 ? never show the "resume saved place" card
     if (isFreshStart) {
       window.localStorage.removeItem(resumeStorageKey);
       setSavedBookmark(null);
@@ -2073,7 +2193,7 @@ function TutorContent() {
       setIsSpeaking(false);
       return;
     }
-    dbg("SPEAK", `speak() ← "${line.slice(0, 80)}"`, { voiceEnabled, avatarId: activeAvatar.id, noUtterance: opts?.noUtterance });
+    dbg("SPEAK", `speak() ? "${line.slice(0, 80)}"`, { voiceEnabled, avatarId: activeAvatar.id, noUtterance: opts?.noUtterance });
     // noUtterance: TTS reads aloud but coach bubble is NOT updated (student already has the question in the panel)
     if (!opts?.noUtterance) setTeacherUtterance(line);
     addConversationTurn("tutor", voiceEnabled ? "voice" : "text", line, { source: "speak" });
@@ -2104,14 +2224,14 @@ function TutorContent() {
         if (!ttsResponse.ok || !ttsData?.audioBase64) {
           continue;
         }
-        // ── iOS-safe: AudioContext.decodeAudioData instead of new Audio(dataUri) ──
+        // -- iOS-safe: AudioContext.decodeAudioData instead of new Audio(dataUri) --
         // new Audio(dataUri).play() is blocked on iOS Safari after any await.
         // The shared AudioContext stays unlocked after the user-gesture unlock.
         const AudioCtxCls = (window as any).AudioContext || (window as any).webkitAudioContext;
         const ctx: AudioContext | null = audioCtxRef.current ||
           (AudioCtxCls ? (audioCtxRef.current = new AudioCtxCls()) : null);
         if (ctx) {
-          // Resume with a 3s timeout — headless Chromium can hang on ctx.resume()
+          // Resume with a 3s timeout  headless Chromium can hang on ctx.resume()
           // if AudioContext stays suspended (no audio device / autoplay policy).
           if (ctx.state === "suspended") {
             await Promise.race([ctx.resume(), new Promise<void>((r) => setTimeout(r, 3000))]);
@@ -2155,38 +2275,46 @@ function TutorContent() {
     }
 
     if ("speechSynthesis" in window) {
-      const utter = new SpeechSynthesisUtterance(line);
-      // Pick an energetic gender-matched Windows/browser voice as Sarvam fallback.
-      // Raj → male  |  Nova, Priya → female
-      const isMale = activeAvatar.id === "raj";
-      const voices = window.speechSynthesis.getVoices();
-      let pick: SpeechSynthesisVoice | null = null;
-      if (isMale) {
-        pick =
-          voices.find(v => /microsoft.*ravi/i.test(v.name))   ||   // Windows en-IN male (best match)
-          voices.find(v => /microsoft.*guy/i.test(v.name))    ||   // Windows en-US energetic male
-          voices.find(v => /microsoft.*david/i.test(v.name))  ||   // Windows en-US male
-          voices.find(v => /google.*uk.*male/i.test(v.name))  ||   // Chrome UK male
-          voices.find(v => v.lang === "en-IN" && !/female|heera|zira|eva|aria/i.test(v.name)) ||
-          voices.find(v => v.lang.startsWith("en") && !/female|heera|zira|eva|aria/i.test(v.name)) ||
-          null;
-      } else {
-        pick =
-          voices.find(v => /microsoft.*heera/i.test(v.name))  ||   // Windows en-IN female (best match)
-          voices.find(v => /microsoft.*aria/i.test(v.name))   ||   // Windows en-US natural female
-          voices.find(v => /microsoft.*eva/i.test(v.name))    ||   // Windows en-US female
-          voices.find(v => /microsoft.*zira/i.test(v.name))   ||   // Windows en-US female
-          voices.find(v => /google.*uk.*female/i.test(v.name))||   // Chrome UK female
-          voices.find(v => v.lang === "en-IN" && /female|heera|priya/i.test(v.name)) ||
-          voices.find(v => v.lang === "en-IN") ||
-          voices.find(v => v.lang.startsWith("en") && /female|zira|aria|eva|heera/i.test(v.name)) ||
-          null;
-      }
-      if (pick) utter.voice = pick;
-      // Energetic settings — lively pace for Grade 4-8 students
-      utter.rate  = isMale ? 1.1 : 1.08;   // slightly faster than default
-      utter.pitch = isMale ? 0.95 : 1.12;  // male: slightly deeper; female: brighter
-      await new Promise<void>((resolve) => {
+      const stopSpeak = () => {
+        window.speechSynthesis.cancel();
+      };
+      
+      const doSpeak = () => {
+        const utter = new SpeechSynthesisUtterance(line);
+        // Pick an energetic gender-matched Windows/browser voice as Sarvam fallback.
+        // Raj, Arjun → male  |  Nova, Priya, Meera → female
+        const isMale = activeAvatar.id === "raj" || activeAvatar.id === "arjun";
+        const voices = window.speechSynthesis.getVoices();
+        let pick: SpeechSynthesisVoice | null = null;
+        if (isMale) {
+          pick =
+            voices.find(v => /google.*en.*in/i.test(v.name) && !/female/i.test(v.name)) ||
+            voices.find(v => /microsoft.*ravi/i.test(v.name))   ||   // Windows en-IN male
+            voices.find(v => /microsoft.*prabhat/i.test(v.name))||   // Windows en-IN male
+            voices.find(v => /microsoft.*guy/i.test(v.name))    ||   // Windows en-US energetic male
+            voices.find(v => /google.*uk.*male/i.test(v.name))  ||   // Chrome UK male
+            voices.find(v => v.lang === "en-IN" && !/female|heera|neerja|vani/i.test(v.name)) ||
+            voices.find(v => v.lang.startsWith("en") && !/female/i.test(v.name)) ||
+            null;
+        } else {
+          pick =
+            voices.find(v => /google.*en.*in.*fem/i.test(v.name)) ||
+            voices.find(v => /google.*en.*in/i.test(v.name)) ||
+            voices.find(v => /microsoft.*neerja/i.test(v.name)) ||
+            voices.find(v => /microsoft.*heera/i.test(v.name)) ||
+            voices.find(v => /microsoft.*zira/i.test(v.name)) ||
+            voices.find(v => /vani|neerja|heera|priya|veena|lekha/i.test(v.name)) ||
+            voices.find(v => v.lang === "en-IN") ||
+            voices.find(v => /female|samantha|aria|eva/i.test(v.name)) ||
+            voices.find(v => v.lang.startsWith("en")) ||
+            null;
+        }
+        if (pick) utter.voice = pick;
+        // Energetic settings — lively pace for Grade 4-8 students
+        utter.lang = "en-IN";
+        utter.rate  = isMale ? 1.1 : 1.08;   // slightly faster than default
+        utter.pitch = isMale ? 0.95 : 1.12;  // male: slightly deeper; female: brighter
+        
         utter.onstart = () => {
           if (speakSeq === speakSeqRef.current) {
             setIsSpeaking(true);
@@ -2196,19 +2324,25 @@ function TutorContent() {
           if (speakSeq === speakSeqRef.current) {
             setIsSpeaking(false);
           }
-          resolve();
         };
         utter.onerror = () => {
           if (speakSeq === speakSeqRef.current) {
             setIsSpeaking(false);
           }
-          resolve();
         };
-        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(utter);
-      });
-      if (speakSeq === speakSeqRef.current) {
-        setIsSpeaking(false);
+      };
+
+      stopSpeak();
+      const currentVoices = window.speechSynthesis.getVoices();
+      if (currentVoices.length > 0) {
+        doSpeak();
+      } else {
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.onvoiceschanged = null;
+          doSpeak();
+        };
+        setTimeout(doSpeak, 250);
       }
       return;
     }
@@ -2399,10 +2533,10 @@ function TutorContent() {
 
     const customSvgSteps = normalizeSvgBoardSteps((beat as any)?.svgAnimation);
     if (customSvgSteps.length) {
-      // ── Always write the teacherLine as a header so board matches coach speech ──
+      // -- Always write the teacherLine as a header so board matches coach speech --
       const tLine = (beat as any)?.teacherLine || teachingStep?.teacherLine || "";
       if (tLine) {
-        const brief = tLine.length > 70 ? tLine.slice(0, 70) + "…" : tLine;
+        const brief = tLine.length > 70 ? tLine.slice(0, 70) + "" : tLine;
         steps.push({ kind: "text", id: "svghdr_tl", x: 18, y: 18, text: brief,
           color: "#3b3a8c", size: 13, delaySec: 0, durationSec: 0.25 });
         steps.push({ kind: "line", id: "svghdr_div", x1: 18, y1: 28, x2: 742, y2: 28,
@@ -2450,10 +2584,10 @@ function TutorContent() {
         addLine(`tpc_line_${i}`, current.x, current.y, next.x, next.y, "#0ea5e9", 2);
       }
       ringPoints.forEach((p, i) => addText(`tpc_label_${i}`, p.x - 8, p.y - 8, p.label, avatar.color, 14));
-      addText("tpc_labels", 280, 375, "10 at top, then 9→1 clockwise", "#1e293b", 13);
+      addText("tpc_labels", 280, 375, "10 at top, then 9?1 clockwise", "#1e293b", 13);
     }
 
-    // ── Universal fallback: always draw the teacher line + question on the board ──
+    // -- Universal fallback: always draw the teacher line + question on the board --
     // Runs whenever no svgAnimation, free_draw, or special case produced content.
     if (steps.length === 0) {
       // Subtopic / chapter label at top
@@ -2463,7 +2597,7 @@ function TutorContent() {
         addLine("fb_divider", 30, 50, 730, 50, "#e2e8f0", 1);
       }
 
-      // Teacher line — wrap into ~65-char lines across the board
+      // Teacher line  wrap into ~65-char lines across the board
       const teacherText = (beat?.teacherLine || teachingStep?.teacherLine || "").trim();
       if (teacherText) {
         const words = teacherText.split(" ");
@@ -2602,7 +2736,7 @@ function TutorContent() {
     if (!sessionId || typeof window === "undefined" || !navigator?.clipboard) return;
     try {
       await navigator.clipboard.writeText(sessionId);
-      setTeacherUtterance("📌 Session ID copied.");
+      setTeacherUtterance("?? Session ID copied.");
     } catch {
       // ignore clipboard failure
     }
@@ -2634,7 +2768,7 @@ function TutorContent() {
   }
 
   async function recoverExpiredSession(_trigger: string) {
-    // Session has expired — show the purchase / registration CTA instead of
+    // Session has expired  show the purchase / registration CTA instead of
     // silently trying to reconnect. This is the conversion moment.
     setShowPurchaseCta(true);
   }
@@ -2923,7 +3057,7 @@ function TutorContent() {
     recog.start();
   }
 
-  // Unlock browser audio context on first user gesture — must happen synchronously
+  // Unlock browser audio context on first user gesture  must happen synchronously
   // before any async call, otherwise autoplay is blocked on mobile/strict browsers.
   function unlockAudio() {
     if (audioUnlockedRef.current || typeof window === "undefined") return;
@@ -2931,7 +3065,7 @@ function TutorContent() {
     try {
       const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
       if (AudioCtx) {
-        // Create once, store in ref — iOS Safari requires the SAME context for all playback
+        // Create once, store in ref  iOS Safari requires the SAME context for all playback
         if (!audioCtxRef.current) {
           audioCtxRef.current = new AudioCtx() as AudioContext;
         }
@@ -3142,7 +3276,7 @@ function TutorContent() {
       clearBoard();
       const greetingName = (studentName || "").trim() || "there";
       const rawCoachIntro = data.lesson.duolingoLessonArc?.onboarding?.coachIntro || `${activeAvatar.name} will guide you through ${data.lesson.title}.`;
-      // Strip any hardcoded "Hi! I am [Name], your [role]." prefix — the welcomeLine already adds it dynamically.
+      // Strip any hardcoded "Hi! I am [Name], your [role]." prefix  the welcomeLine already adds it dynamically.
       const coachIntro = rawCoachIntro.replace(/^Hi[!.]?\s+I\s+am\s+\w[\w\s]*,?\s+your\s+[^.]+\.\s*/i, "").trim() || rawCoachIntro;
       const gradeLabel = isDemoMode && demoGrade ? `, Grade ${demoGrade} student,` : "";
       const welcomeLine = `Hi ${greetingName}${gradeLabel}! I am ${activeAvatar.name}, your ${activeAvatar.role}. ${coachIntro} You are starting as ${LEARNER_LEVEL_LABELS[learnerLevel].toLowerCase()} and want help with ${LEARNER_GOAL_LABELS[learnerGoal].toLowerCase()}. I will guide you in ${KNOWN_LANGUAGE_LABELS[knownLanguage]}.`;
@@ -3268,7 +3402,7 @@ function TutorContent() {
 
   async function checkAnswer(answerOverride?: string, source?: "typed" | "voice") {
     if (!sessionId || !question) return;
-    // Synchronous ref guard — catches rapid double-taps/Enter+click before React re-renders
+    // Synchronous ref guard  catches rapid double-taps/Enter+click before React re-renders
     if (checkAnswerInFlightRef.current) return;
     if (isEvaluatingAnswer) return;
     checkAnswerInFlightRef.current = true;
@@ -3287,7 +3421,7 @@ function TutorContent() {
       return;
     }
 
-    dbg("ANSWER", `checkAnswer() ← "${learnerAnswer}"`, { questionId: question.questionId, source: answerSource });
+    dbg("ANSWER", `checkAnswer() ? "${learnerAnswer}"`, { questionId: question.questionId, source: answerSource });
     setIsEvaluatingAnswer(true);
     setCheck(null);
     setDoubtReply("");
@@ -3336,7 +3470,7 @@ function TutorContent() {
         return;
       }
 
-      dbg("ANSWER", `checkAnswer() → ${data.correct ? "✅ correct" : "❌ wrong"}`, { explanation: data.explanation?.slice(0, 60), xp: data.sessionProgress?.xp });
+      dbg("ANSWER", `checkAnswer() ? ${data.correct ? "? correct" : "? wrong"}`, { explanation: data.explanation?.slice(0, 60), xp: data.sessionProgress?.xp });
       setCheck(data);
       setAttemptByQuestion((prev) => ({
         ...prev,
@@ -3350,7 +3484,7 @@ function TutorContent() {
       if (data.correct) {
         if (nextStreak > 0 && nextStreak % 3 === 0) {
           playMotivationSound("streak");
-          setTeacherUtterance(`🔥 ${nextStreak} streak! Outstanding consistency, keep going.`);
+          setTeacherUtterance(`?? ${nextStreak} streak! Outstanding consistency, keep going.`);
         } else {
           playMotivationSound("correct");
         }
@@ -3401,18 +3535,18 @@ function TutorContent() {
       }
       setIsEvaluatingAnswer(false);
       const winLine = activeDuolingoStep?.instantFeedbackWin || "Great work! Keep it up.";
-      const retryBaseLine = activeDuolingoStep?.instantFeedbackRetry || `Good try! ${activeTeachingStep?.checkpointPrompt || "Have another go — you are almost there."}`;
+      const retryBaseLine = activeDuolingoStep?.instantFeedbackRetry || `Good try! ${activeTeachingStep?.checkpointPrompt || "Have another go  you are almost there."}`;
       const retrySupportLine = activeDuolingoStep?.reviewPrompt || activeTeachingStep?.microPractice || "";
       const retryLine = retrySupportLine ? `${retryBaseLine} ${retrySupportLine}` : retryBaseLine;
       if (data.correct) {
-        // ── 🎉 Celebration overlay (2 s) ────────────────────────────────────
+        // -- ?? Celebration overlay (2 s) ------------------------------------
         const phrase = WIN_PHRASES[Math.floor(Math.random() * WIN_PHRASES.length)];
         setCelebrationPhrase(phrase);
         setIsCelebrating(true);
         setTeacherUtterance(`${phrase.text} ${winLine}`);
         await new Promise<void>((resolve) => window.setTimeout(resolve, 2000));
         setIsCelebrating(false);
-        // ── Speak appreciation then immediately advance ───────────────────
+        // -- Speak appreciation then immediately advance -------------------
         await speakRef.current(`${phrase.text} ${winLine}`);
         if (data.coachTip) {
           await speakRef.current(data.coachTip);
@@ -3482,7 +3616,7 @@ function TutorContent() {
     const previousQuestionId = question?.questionId || "";
     const previousQuestionText = question?.questionText || "";
 
-    dbg("NAV", `nextQuestion() ←`, { src: options?.source, directToStudent: options?.directToStudent, prevQ: previousQuestionId.slice(-8) });
+    dbg("NAV", `nextQuestion() ?`, { src: options?.source, directToStudent: options?.directToStudent, prevQ: previousQuestionId.slice(-8) });
     setTeacherUtterance("");           // clear old question text immediately so coach bubble stays clean
     setAnswer("");
     setCheck(null);
@@ -3565,7 +3699,7 @@ function TutorContent() {
       return;
     }
 
-    dbg("NAV", `nextQuestion() → received`, { questionId: data.question?.questionId?.slice(-8), type: data.question?.questionType, text: data.question?.questionText?.slice(0, 60), exerciseGroup: resolvedExerciseGroup });
+    dbg("NAV", `nextQuestion() ? received`, { questionId: data.question?.questionId?.slice(-8), type: data.question?.questionType, text: data.question?.questionText?.slice(0, 60), exerciseGroup: resolvedExerciseGroup });
     setQuestion(data.question);
     addConversationTurn(
       "system",
@@ -3634,7 +3768,7 @@ function TutorContent() {
         questionId: data.question?.questionId || "",
         source: options.source || "skip",
       });
-      // Read the question aloud — coach bubble shows coaching prompt, NOT the question text
+      // Read the question aloud  coach bubble shows coaching prompt, NOT the question text
       // (question text is already displayed in the question panel; showing it in the bubble = duplication).
       if (data.question?.questionText) {
         const tryPrompt = activeDuolingoStep?.tryPrompt || `Your turn! ${activeAvatar.name} is listening.`;
@@ -3713,7 +3847,7 @@ function TutorContent() {
           await speakRef.current(welcomeLine);
           if (cancelled) return;
 
-          // ── Slide 1: EXPLAIN — Sutra name + learning goals ────────────────
+          // -- Slide 1: EXPLAIN  Sutra name + learning goals ----------------
           const slide1 = buildIntroSlideBoardSteps(1, chCode, goals, activeAvatar, boardSpeed);
           setBoardSteps(slide1);
           setBoardRunId((v) => v + 1);
@@ -3728,7 +3862,7 @@ function TutorContent() {
           setIsTeachingBoard(false);
           if (cancelled) return;
 
-          // ── Slide 2: DEMO — Step-by-step worked example ───────────────────
+          // -- Slide 2: DEMO  Step-by-step worked example -------------------
           const slide2 = buildIntroSlideBoardSteps(2, chCode, goals, activeAvatar, boardSpeed);
           setBoardSteps(slide2);
           setBoardRunId((v) => v + 1);
@@ -3740,7 +3874,7 @@ function TutorContent() {
           setIsTeachingBoard(false);
           if (cancelled) return;
 
-          // ── Slide 3: GUIDED transition — "Now you try" ────────────────────
+          // -- Slide 3: GUIDED transition  "Now you try" --------------------
           const slide3 = buildIntroSlideBoardSteps(3, chCode, goals, activeAvatar, boardSpeed);
           setBoardSteps(slide3);
           setBoardRunId((v) => v + 1);
@@ -3860,46 +3994,53 @@ function TutorContent() {
   }, [status, question, autoTeachEnabled, voiceEnabled, micPermission, isFirstScene, awaitingStudentResponse, isListening, isSpeaking]);
 
   return (
-    <main className={`container tutor-shell${status === "ready" ? " tutor-shell-live" : ""}`}>
-      {/* ── Quick-start screen: Raj intro → start ───────────────── */}
+    <main className={`container tutor-shell${status === "ready" ? " tutor-shell-live" : ""} ${themeClass}`}>
       {status !== "ready" ? (
       <section className="panel tutor-setup-panel">
-        <div className={`tutor-quickstart${minimalDuolingoLayout ? " tutor-quickstart-duo" : ""}`}>
+        <div className="tutor-quickstart">
 
-          {/* ── Course introduction ─────────────────────────────────────── */}
+          {/* -- Course introduction --------------------------------------- */}
           <div className="tutor-course-intro">
-            <p className="tutor-qs-label">🇮🇳 RoboDynamics AI Tutor · {learnerLabel}</p>
+            <p className="tutor-qs-label">RoboDynamics AI Tutor · {learnerLabel}</p>
             <h1 className="tutor-course-name">
               {requestedCourseId === "vedic_math" ? "Vedic Mathematics" : courseLabel}
             </h1>
             <p className="tutor-course-desc">
               {requestedCourseId === "vedic_math"
                 ? "Ancient Indian mental math system — learn to calculate 10× faster without a calculator."
-                : `Master ${courseLabel} step by step with your personal AI coach.`}
+                : isMoneyMind
+                  ? "Master the rules of money. Build real-world wealth skills — from ATM basics to Salary Secrets."
+                  : `Master ${courseLabel} step by step with your personal AI coach.`}
             </p>
             <div className="tutor-course-chips">
               {requestedCourseId === "vedic_math" ? (
                 <>
-                  <span className="tutor-feature-chip">📚 16 Chapters</span>
+                  <span className="tutor-feature-chip">🎯 16 Chapters</span>
                   <span className="tutor-feature-chip">🧠 Mental Math</span>
-                  <span className="tutor-feature-chip">🎯 Grades 5–10</span>
+                  <span className="tutor-feature-chip">📈 Grades 5–10</span>
+                  <span className="tutor-feature-chip">🤖 AI Coach</span>
+                </>
+              ) : isMoneyMind ? (
+                <>
+                  <span className="tutor-feature-chip">🏦 6 Levels</span>
+                  <span className="tutor-feature-chip">💼 Finance Labs</span>
+                  <span className="tutor-feature-chip">📈 Grades 4–12</span>
                   <span className="tutor-feature-chip">🤖 AI Coach</span>
                 </>
               ) : (
                 <>
                   <span className="tutor-feature-chip">🤖 AI Coach</span>
-                  <span className="tutor-feature-chip">🎯 {learnerLabel}</span>
+                  <span className="tutor-feature-chip">📈 {learnerLabel}</span>
                 </>
               )}
             </div>
           </div>
 
-          {/* ── Coach intro ─────────────────────────────────────────────── */}
+          {/* -- Coach intro ----------------------------------------------- */}
           <h2 className="tutor-qs-title">
-            {minimalDuolingoLayout ? "Set Up Your Learning Path" : `Meet ${activeAvatar.name}, Your AI Coach`}
+            {`Meet ${activeAvatar.name}, Your AI Coach`}
           </h2>
 
-          {/* Teacher sprite */}
           <div className="tutor-qs-stage">
             <SpeakingTeacher
               avatar={activeAvatar}
@@ -3910,33 +4051,10 @@ function TutorContent() {
           </div>
 
           <p className="tutor-qs-tagline">
-            {minimalDuolingoLayout
-              ? (isDemoMode ? `Hi! Enter your name and grade below — I will set the right pace and we will get started!` : (lessonDuolingoArc?.onboarding?.coachIntro || `First tell ${activeAvatar.name} what you know. Then ${activeAvatar.name} will choose the right pace and start your mission.`))
-              : "I will teach on the board, then push you through focused practice."}
+            I will teach on the board, then push you through focused practice.
           </p>
 
-          {/* ── Resume Saved Place banner — shown above form when bookmark exists ── */}
-          {minimalDuolingoLayout && savedBookmark ? (
-            <div className="tutor-resume-banner">
-              <div className="tutor-resume-info">
-                <span className="tutor-resume-icon">📌</span>
-                <div>
-                  <p className="tutor-resume-title">Welcome back!</p>
-                  <p className="tutor-resume-sub">{savedBookmark.lessonTitle || savedBookmark.chapterCode} · saved {new Date(savedBookmark.savedAt || Date.now()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="tutor-resume-btn"
-                onClick={() => { unlockAudio(); void resumeSavedSession(); }}
-                disabled={status === "loading"}
-              >
-                ▶ Resume
-              </button>
-            </div>
-          ) : null}
-
-          {minimalDuolingoLayout ? (
+          {(isDemoMode || status === "idle") && (
             <div className="tutor-onboard-card">
               <label className="tutor-onboard-field">
                 <span>Your name</span>
@@ -3986,22 +4104,22 @@ function TutorContent() {
                         )}
                       </div>
                       <span className="tutor-avatar-card-name">{av.name}</span>
-                      {selectedAvatarId === av.id && <span className="tutor-avatar-card-check">✓</span>}
+                      {selectedAvatarId === av.id && <span className="tutor-avatar-card-check">?</span>}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Optional sections — 2-column compact grid on desktop, hidden on mobile */}
+              {/* Optional sections  2-column compact grid on desktop, hidden on mobile */}
               <div className="tutor-onboard-optional-grid tutor-onboard-optional">
 
                 <div className="tutor-onboard-group">
                   <p className="tutor-onboard-label">Teaching speed</p>
                   <div className="tutor-chip-row">
                     {([
-                      { value: "relaxed", label: "🐢 Relaxed", sub: "Slow & clear" },
-                      { value: "normal",  label: "🚶 Normal",  sub: "Steady pace" },
-                      { value: "quick",   label: "⚡ Quick",   sub: "Fast pace"   },
+                      { value: "relaxed", label: "?? Relaxed", sub: "Slow & clear" },
+                      { value: "normal",  label: "?? Normal",  sub: "Steady pace" },
+                      { value: "quick",   label: "? Quick",   sub: "Fast pace"   },
                     ] as { value: "relaxed"|"normal"|"quick"; label: string; sub: string }[]).map(({ value, label, sub }) => (
                       <button
                         key={value}
@@ -4055,7 +4173,7 @@ function TutorContent() {
 
               </div>
 
-              {/* savedBookmark resume card is rendered above the form — removed from here */}
+              {/* savedBookmark resume card is rendered above the form  removed from here */}
 
               {lessonDuolingoArc?.onboarding?.placementRule ? (                <p className="tutor-onboard-note">{lessonDuolingoArc.onboarding.placementRule}</p>
               ) : null}
@@ -4066,7 +4184,7 @@ function TutorContent() {
           <div className="tutor-qs-actions">
             {token.trim().length <= 20 && minimalDuolingoLayout && (
               <p className="tutor-qs-token-notice">
-                🔒 Open this from your RoboDynamics dashboard to start
+                ?? Open this from your RoboDynamics dashboard to start
               </p>
             )}
             <button
@@ -4075,7 +4193,7 @@ function TutorContent() {
               disabled={!canStart || status === "loading"}
               title={!canStart && token.trim().length <= 20 ? "Launch from your RoboDynamics dashboard" : undefined}
             >
-              {status === "loading" ? "Starting…" : sessionId ? "↩ Restart Mission" : minimalDuolingoLayout ? "▶ Continue to Mission" : "Start Mission"}
+              {status === "loading" ? "Starting" : sessionId ? "? Restart Mission" : minimalDuolingoLayout ? "? Continue to Mission" : "Start Mission"}
             </button>
             {isDemoMode && !studentName.trim() && (
               <p className="muted" style={{ fontSize: "0.8rem", textAlign: "center" }}>Enter your name above to get started</p>
@@ -4105,7 +4223,7 @@ function TutorContent() {
                   title="Save & go to dashboard"
                   onClick={exitToLms}
                 >
-                  ← Exit
+                  ? Exit
                 </button>
                 <p className="vedic-topbar-label">Step {activeLessonStepIndex + 1} of {Math.max(lessonPath.length, 1)}</p>
                 <h2 className="vedic-topbar-title">{missionTitle || activeDuolingoStep?.missionStepTitle || question.subtopic || activeChapter}</h2>
@@ -4148,11 +4266,11 @@ function TutorContent() {
               <div className="vedic-topbar-track-fill" style={{ width: `${sessionProgress.lessonCompletionPct}%` }} />
             </div>
             <div className="vedic-topbar-stats">
-              <div className="vedic-stat-pill heart">♥ {sessionProgress.hearts}/{sessionProgress.maxHearts}</div>
-              <div className="vedic-stat-pill xp">⚡ {sessionProgress.xp} XP</div>
-              <div className="vedic-stat-pill streak">🔥 {sessionProgress.streak}</div>
+              <div className="vedic-stat-pill heart">? {sessionProgress.hearts}/{sessionProgress.maxHearts}</div>
+              <div className="vedic-stat-pill xp">? {sessionProgress.xp} XP</div>
+              <div className="vedic-stat-pill streak">?? {sessionProgress.streak}</div>
               <div className="vedic-stat-pill points">{missionPoints} pts</div>
-              <div className="vedic-stat-pill">🎯 {score.accuracyPct}%</div>
+              <div className="vedic-stat-pill">?? {score.accuracyPct}%</div>
               <div className="vedic-stat-pill muted">{classElapsedLabel}</div>
             </div>
           </header>
@@ -4169,7 +4287,7 @@ function TutorContent() {
               <div className={`vedic-focus-stage ${stageSceneMode}`}>
                 <div className="vedic-focus-scene">
                   <div className="vedic-focus-coach">
-                    {/* Avatar — col 1 (88px) */}
+                    {/* Avatar  col 1 (88px) */}
                     <div className="vedic-focus-avatar">
                       <SpeakingTeacher
                         avatar={activeAvatar}
@@ -4179,7 +4297,7 @@ function TutorContent() {
                         compact={stageSceneMode === "student"}
                       />
                     </div>
-                    {/* Speech bubble — col 2 (1fr), shown in coach mode */}
+                    {/* Speech bubble  col 2 (1fr), shown in coach mode */}
                     {stageSceneMode === "coach" && (teacherUtterance || missionPrompt) ? (
                       <div className="rd-speech-bubble">
                         {teacherUtterance || missionPrompt}
@@ -4222,7 +4340,7 @@ function TutorContent() {
                               setIsTeachingBoard(false);
                               // Coach reads question aloud, then hands over to student
                               const qText = question?.questionText || activeDuolingoStep?.readAloudPrompt || "";
-                              const tryLine = activeDuolingoStep?.tryPrompt || "Your turn — try this:";
+                              const tryLine = activeDuolingoStep?.tryPrompt || "Your turn  try this:";
                               if (voiceEnabled && qText) {
                                 void speak(`${tryLine} ${qText}`).then(() => {
                                   setAwaitingStudentResponse(true);
@@ -4254,7 +4372,7 @@ function TutorContent() {
                                 <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
                               ) : question.visual?.asset ? (
                                 <div className="udemy-visual panel vedic-svg-asset">
-                                  <img src={`/math-svgs/vedic/${question.visual.asset.endsWith('.svg') ? question.visual.asset : question.visual.asset + '.svg'}`} alt={question.visual.title || "Vedic Math diagram"} className="vedic-svg-img" />
+                                  <img src={resolveMathSvgAssetUrl(question.visual.asset) || ""} alt={question.visual.title || "Vedic Math diagram"} className="vedic-svg-img" />
                                   {question.visual.caption && <p className="vedic-svg-caption">{question.visual.caption}</p>}
                                 </div>
                               ) : null}
@@ -4262,11 +4380,11 @@ function TutorContent() {
                             <div className="vedic-answer-block vedic-answer-block-inline">
                               {sessionProgress.livesDepleted ? (
                                 <div className="vedic-review-cta">
-                                  <p className="vedic-alert">💔 No hearts left — answer correctly to refill and continue!</p>
+                                  <p className="vedic-alert">?? No hearts left  answer correctly to refill and continue!</p>
                                 </div>
                               ) : null}
 
-                              {/* ── MCQ: tap-to-answer grid ── */}
+                              {/* -- MCQ: tap-to-answer grid -- */}
                               {question.questionType === "mcq" && question.options && question.options.length > 0 ? (
                                 <div className="mcq-grid" key={question.questionId}>
                                   <p className="udemy-answer-label" style={{ color: awaitingStudentResponse ? "#166534" : "#334155", marginBottom: "0.6rem" }}>Choose your answer:</p>
@@ -4300,8 +4418,8 @@ function TutorContent() {
                                         >
                                           <span className="mcq-opt-letter">{String.fromCharCode(65 + idx)}</span>
                                           <span className="mcq-opt-text">{opt}</span>
-                                          {isChecked && isCorrectOpt ? <span className="mcq-opt-tick">✓</span> : null}
-                                          {isChecked && isSelected && !isCorrectOpt ? <span className="mcq-opt-cross">✗</span> : null}
+                                          {isChecked && isCorrectOpt ? <span className="mcq-opt-tick">?</span> : null}
+                                          {isChecked && isSelected && !isCorrectOpt ? <span className="mcq-opt-cross">?</span> : null}
                                         </button>
                                       );
                                     })}
@@ -4317,7 +4435,7 @@ function TutorContent() {
                                   </div>
                                 </div>
 
-                              /* ── Fill-the-Step: guided sutra walk ── */
+                              /* -- Fill-the-Step: guided sutra walk -- */
                               ) : question.questionType === "fill_step" && question.steps && question.steps.length > 0 ? (
                                 <div className="fill-step-block" key={question.questionId}>
                                   <p className="udemy-answer-label" style={{ color: awaitingStudentResponse ? "#166534" : "#334155", marginBottom: "0.6rem" }}>Complete each step of the sutra:</p>
@@ -4335,7 +4453,7 @@ function TutorContent() {
                                           </div>
                                           {isDone || isPast ? (
                                             <div className="fs-done-val">
-                                              <span className="fs-tick">✓</span>
+                                              <span className="fs-tick">?</span>
                                               <span>{fillStepInputs[idx] ?? step.answer}</span>
                                             </div>
                                           ) : isActive ? (
@@ -4365,7 +4483,7 @@ function TutorContent() {
                                                     const got = val.toLowerCase().replace(/\s/g, "");
                                                     const correct = got === expected;
                                                     if (correct) {
-                                                      dbg("FILL", `step ${idx} ✅ correct (Enter)`, { val, expected });
+                                                      dbg("FILL", `step ${idx} ? correct (Enter)`, { val, expected });
                                                       const res = [...fillStepResults]; res[idx] = true;
                                                       setFillStepResults(res);
                                                       const nextIdx = idx + 1;
@@ -4375,11 +4493,11 @@ function TutorContent() {
                                                       }
                                                     } else {
                                                       const wrongCount = (fillStepWrongCounts[idx] ?? 0) + 1;
-                                                      dbg("FILL", `step ${idx} ❌ wrong #${wrongCount} (Enter)`, { val, expected });
+                                                      dbg("FILL", `step ${idx} ? wrong #${wrongCount} (Enter)`, { val, expected });
                                                       const wc = [...fillStepWrongCounts]; wc[idx] = wrongCount;
                                                       setFillStepWrongCounts(wc);
                                                       const errs = [...fillStepErrors];
-                                                      errs[idx] = wrongCount >= 3 ? `The answer is ${step.answer}` : "Not quite — try again!";
+                                                      errs[idx] = wrongCount >= 3 ? `The answer is ${step.answer}` : "Not quite  try again!";
                                                       setFillStepErrors(errs);
                                                       if (wrongCount >= 3) {
                                                         // Auto-reveal and advance after 3 wrong attempts
@@ -4409,7 +4527,7 @@ function TutorContent() {
                                                   const got = val.toLowerCase().replace(/\s/g, "");
                                                   const correct = got === expected;
                                                   if (correct) {
-                                                    dbg("FILL", `step ${idx} ✅ correct (click)`, { val, expected });
+                                                    dbg("FILL", `step ${idx} ? correct (click)`, { val, expected });
                                                     const res = [...fillStepResults]; res[idx] = true;
                                                     setFillStepResults(res);
                                                     const nextIdx = idx + 1;
@@ -4419,11 +4537,11 @@ function TutorContent() {
                                                     }
                                                   } else {
                                                     const wrongCount = (fillStepWrongCounts[idx] ?? 0) + 1;
-                                                    dbg("FILL", `step ${idx} ❌ wrong #${wrongCount} (click)`, { val, expected });
+                                                    dbg("FILL", `step ${idx} ? wrong #${wrongCount} (click)`, { val, expected });
                                                     const wc = [...fillStepWrongCounts]; wc[idx] = wrongCount;
                                                     setFillStepWrongCounts(wc);
                                                     const errs = [...fillStepErrors];
-                                                    errs[idx] = wrongCount >= 3 ? `The answer is ${step.answer}` : "Not quite — try again! ❌";
+                                                    errs[idx] = wrongCount >= 3 ? `The answer is ${step.answer}` : "Not quite  try again! ?";
                                                     setFillStepErrors(errs);
                                                     if (wrongCount >= 3) {
                                                       // Reveal answer, auto-advance after 1.2s
@@ -4442,7 +4560,7 @@ function TutorContent() {
                                                   }
                                                 }}
                                               >
-                                                {isEvaluatingAnswer && idx === fillStepIndex ? "Checking…" : "→"}
+                                                {isEvaluatingAnswer && idx === fillStepIndex ? "Checking" : "?"}
                                               </button>
                                               {fillStepErrors[idx] ? (
                                                 <span className={`fs-error${(fillStepWrongCounts[idx] ?? 0) >= 3 ? " fs-reveal" : ""}`}>
@@ -4451,7 +4569,7 @@ function TutorContent() {
                                               ) : step.hint ? <span className="fs-hint muted">{step.hint}</span> : null}
                                             </div>
                                           ) : (
-                                            <div className="fs-future-placeholder">—</div>
+                                            <div className="fs-future-placeholder"></div>
                                           )}
                                         </div>
                                       );
@@ -4468,7 +4586,7 @@ function TutorContent() {
                                   </div>
                                 </div>
 
-                              /* ── Default: text input (existing behaviour) ── */
+                              /* -- Default: text input (existing behaviour) -- */
                               ) : (
                                 <>
                                   <label
@@ -4555,10 +4673,10 @@ function TutorContent() {
                     {check ? (
                       <div className={`udemy-feedback ${check.correct ? "correct" : "wrong"}`}>
                         <p className="udemy-feedback-verdict">
-                          {check.correct ? "✅ Correct!" : "Try Again"}
+                          {check.correct ? "? Correct!" : "Try Again"}
                         </p>
                         <p className="muted">{check.correct ? (activeDuolingoStep?.instantFeedbackWin || missionCelebration) : (activeDuolingoStep?.instantFeedbackRetry || check.encouragement)}</p>
-                        {check.coachTip ? <p className="muted">💡 Tip: {check.coachTip}</p> : null}
+                        {check.coachTip ? <p className="muted">?? Tip: {check.coachTip}</p> : null}
                         {!check.correct ? <p><strong>Expected:</strong> {check.expectedAnswer}</p> : null}
                         <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
 
@@ -4631,7 +4749,7 @@ function TutorContent() {
                       style={{ ["--path-offset" as string]: `${idx % 2 === 0 ? 0 : 18}px` }}
                     >
                       <span className="vedic-path-badge">
-                        {item.status === "completed" ? "✓" : item.status === "locked" ? "🔒" : item.exerciseGroup}
+                        {item.status === "completed" ? "?" : item.status === "locked" ? "??" : item.exerciseGroup}
                       </span>
                       <span className="vedic-path-name">{item.subtopic}</span>
                     </div>
@@ -4690,7 +4808,7 @@ function TutorContent() {
                         className={`vedic-path-pill ${item.status} ${item.exerciseGroup === activeExerciseGroup ? "active" : ""}`}
                       >
                         <span className="vedic-path-pill-badge">
-                          {item.status === "completed" ? "✓" : item.status === "locked" ? "🔒" : item.exerciseGroup}
+                          {item.status === "completed" ? "?" : item.status === "locked" ? "??" : item.exerciseGroup}
                         </span>
                         <span>{item.subtopic}</span>
                       </div>
@@ -4721,7 +4839,7 @@ function TutorContent() {
                     <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question?.visual?.svg || "" }} />
                   ) : question?.visual?.asset ? (
                     <div className="udemy-visual panel vedic-svg-asset">
-                      <img src={`/math-svgs/vedic/${question?.visual?.asset?.endsWith('.svg') ? question?.visual?.asset : (question?.visual?.asset ?? '') + '.svg'}`} alt={question?.visual?.title || "Vedic Math diagram"} className="vedic-svg-img" />
+                      <img src={resolveMathSvgAssetUrl(question?.visual?.asset) || ""} alt={question?.visual?.title || "Vedic Math diagram"} className="vedic-svg-img" />
                       {question?.visual?.caption && <p className="vedic-svg-caption">{question?.visual?.caption}</p>}
                     </div>
                   ) : null}
@@ -4771,7 +4889,7 @@ function TutorContent() {
                     ) : null}
                     {sessionProgress.livesDepleted ? (
                       <div className="vedic-review-cta">
-                        <p className="vedic-alert">💔 No hearts left — answer this question correctly to refill and continue!</p>
+                        <p className="vedic-alert">?? No hearts left  answer this question correctly to refill and continue!</p>
                       </div>
                     ) : null}
 
@@ -4810,10 +4928,10 @@ function TutorContent() {
                   {check ? (
                       <div className={`udemy-feedback ${check?.correct ? "correct" : "wrong"}`}>
                         <p className="udemy-feedback-verdict">
-                          {check?.correct ? "✅ Correct!" : "Try Again"}
+                          {check?.correct ? "? Correct!" : "Try Again"}
                         </p>
                       <p className="muted">{check?.correct ? (activeDuolingoStep?.instantFeedbackWin || missionCelebration) : (activeDuolingoStep?.instantFeedbackRetry || check?.encouragement)}</p>
-                      {check?.coachTip ? <p className="muted">💡 Tip: {check?.coachTip}</p> : null}
+                      {check?.coachTip ? <p className="muted">?? Tip: {check?.coachTip}</p> : null}
                       {!check?.correct ? <p><strong>Expected:</strong> {check?.expectedAnswer}</p> : null}
                       <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check?.explanation}</p>
 
@@ -4837,12 +4955,12 @@ function TutorContent() {
                           <div className="ca-board-idle">
                             {awaitingStudentResponse ? (
                               <>
-                                <span className="ca-idle-icon">✏️</span>
+                                <span className="ca-idle-icon">??</span>
                                 <p className="ca-idle-text">Try it first, then open the board if needed.</p>
                               </>
                             ) : (
                               <>
-                                <span className="ca-idle-icon">📋</span>
+                                <span className="ca-idle-icon">??</span>
                                 <p className="ca-idle-text">Raj can show the steps on the board.</p>
                               </>
                             )}
@@ -4914,26 +5032,26 @@ function TutorContent() {
         ) : (
         <div className={`ca-app${minimalDuolingoLayout ? " ca-app-minimal" : ""}`}>
 
-          {/* ── Slim progress strip ───────────────────────────── */}
+          {/* -- Slim progress strip ----------------------------- */}
           <div className="ca-strip">
             <span className="ca-strip-chapter">{missionTitle}</span>
             <div className="ca-strip-bar-wrap">
               <div className="ca-strip-bar" style={{ width: `${sessionProgress.lessonCompletionPct}%` }} />
             </div>
-            <span className="ca-strip-stat">♥ {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
-            <span className="ca-strip-stat">⚡ {sessionProgress.xp} XP</span>
-            <span className="ca-strip-stat">🔥 {sessionProgress.streak}</span>
+            <span className="ca-strip-stat">? {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
+            <span className="ca-strip-stat">? {sessionProgress.xp} XP</span>
+            <span className="ca-strip-stat">?? {sessionProgress.streak}</span>
             {minimalDuolingoLayout ? (
               <span className="ca-strip-stat ca-strip-points">{missionPoints} pts</span>
             ) : null}
-            <span className="ca-strip-stat">🎯 {score.accuracyPct}%</span>
+            <span className="ca-strip-stat">?? {score.accuracyPct}%</span>
             <span className="ca-strip-stat muted">{classElapsedLabel}</span>
           </div>
 
-          {/* ── Coach layout: left panel + right content ─────── */}
+          {/* -- Coach layout: left panel + right content ------- */}
           <div className="ca-body">
 
-            {/* ── LEFT: Coach panel ─────────────────────────── */}
+            {/* -- LEFT: Coach panel --------------------------- */}
             <div className="ca-coach">
 
               {/* Raj sprite */}
@@ -5010,7 +5128,7 @@ function TutorContent() {
                       }
                     >
                       <span className="ca-ex-dot">
-                        {item.status === "completed" ? "✓" : item.status === "locked" ? "🔒" : "›"}
+                        {item.status === "completed" ? "?" : item.status === "locked" ? "??" : ""}
                       </span>
                       <span className="ca-ex-name">{item.subtopic}</span>
                       <span className="ca-ex-grp">{item.exerciseGroup}</span>
@@ -5028,27 +5146,35 @@ function TutorContent() {
               </div>
             </div>
 
-            {/* ── RIGHT: Content panel ──────────────────────── */}
+            {/* -- RIGHT: Content panel ------------------------ */}
             <div className="ca-content">
 
               {/* Board */}
               <div className="ca-board">
                 {showBoardPanel ? (
-                  <AnimatedBoard
-                    steps={boardSteps}
-                    runId={boardRunId}
-                    showPrompt={isTeachingBoard}
-                  />
+                  activeTeachingStep?.boardMode === "rich_board" && activeTeachingStep.board ? (
+                    <MoneyMindBoard
+                      boardType={activeTeachingStep.board.type}
+                      data={activeTeachingStep.board.data}
+                      userId={jwtUserId}
+                    />
+                  ) : (
+                    <AnimatedBoard
+                      steps={boardSteps}
+                      runId={boardRunId}
+                      showPrompt={isTeachingBoard}
+                    />
+                  )
                 ) : (
                   <div className="ca-board-idle">
                     {awaitingStudentResponse ? (
                       <>
-                        <span className="ca-idle-icon">✏️</span>
+                        <span className="ca-idle-icon">??</span>
                         <p className="ca-idle-text">Answer the question below!</p>
                       </>
                     ) : (
                       <>
-                        <span className="ca-idle-icon">📋</span>
+                        <span className="ca-idle-icon">??</span>
                         <p className="ca-idle-text">Board ready — click Teach on Board</p>
                       </>
                     )}
@@ -5068,10 +5194,10 @@ function TutorContent() {
                   />
                 </div>
                 <button className="button" type="button" onClick={() => void teachOnBoard()} disabled={isTeachingBoard || isSpeaking}>
-                  ▶ Teach on Board
+                  ? Teach on Board
                 </button>
                 <button className="button secondary" type="button" onClick={() => void speak(`${question.questionText}. ${question.hint}`)}>
-                  🔊 Speak
+                  ?? Speak
                 </button>
                 <button className="button secondary" type="button" onClick={clearBoard}>
                   Clear
@@ -5096,7 +5222,7 @@ function TutorContent() {
                     <div className="udemy-visual panel" dangerouslySetInnerHTML={{ __html: question.visual.svg }} />
                   ) : question.visual?.asset ? (
                     <div className="udemy-visual panel vedic-svg-asset">
-                      <img src={`/math-svgs/vedic/${question.visual.asset.endsWith('.svg') ? question.visual.asset : question.visual.asset + '.svg'}`} alt={question.visual.title || "Vedic Math diagram"} className="vedic-svg-img" />
+                      <img src={resolveMathSvgAssetUrl(question.visual.asset) || ""} alt={question.visual.title || "Vedic Math diagram"} className="vedic-svg-img" />
                       {question.visual.caption && <p className="vedic-svg-caption">{question.visual.caption}</p>}
                     </div>
                   ) : null}
@@ -5139,12 +5265,12 @@ function TutorContent() {
                   ) : null}
                   {sessionProgress.livesDepleted ? (
                     <p style={{ marginTop: "0.35rem", marginBottom: 0, color: "#b91c1c", fontWeight: 700 }}>
-                      💔 No hearts left — answer correctly to refill and continue!
+                      ?? No hearts left  answer correctly to refill and continue!
                     </p>
                   ) : null}
                   <div className="udemy-answer-actions">
                     <button className="button" onClick={() => void checkAnswer()} disabled={isEvaluatingAnswer || !canAttemptAnswer}>
-                      {isEvaluatingAnswer ? "Checking..." : "Check ✅"}
+                      {isEvaluatingAnswer ? "Checking..." : "Check ?"}
                     </button>
                     <button
                       className="button secondary"
@@ -5174,10 +5300,10 @@ function TutorContent() {
                   {check ? (
                     <div className={`udemy-feedback ${check.correct ? "correct" : "wrong"}`}>
                       <p className="udemy-feedback-verdict">
-                        {check.correct ? "✅ Correct! 🎉" : "❌ Try Again 💪"}
+                        {check.correct ? "? Correct! ??" : "? Try Again ??"}
                       </p>
                       <p className="muted">{check.encouragement}</p>
-                      {check.coachTip ? <p className="muted">💡 Tip: {check.coachTip}</p> : null}
+                      {check.coachTip ? <p className="muted">?? Tip: {check.coachTip}</p> : null}
                       <p><strong>Expected:</strong> {check.expectedAnswer}</p>
                       <p style={{ marginBottom: 0 }}><strong>Explanation:</strong> {check.explanation}</p>
                     </div>
@@ -5279,7 +5405,7 @@ function TutorContent() {
                     <span className="pill">Flow: {flowState} v{flowVersion}</span>
                     <span className="pill">Realtime: {realtimeConnected ? "connected" : "polling"}</span>
                     <span className="pill">Status: {stageStatusText}</span>
-                    <span className="pill">Archetype: {check?.studentArchetype ?? "—"}</span>
+                    <span className="pill">Archetype: {check?.studentArchetype ?? ""}</span>
                     <span className="pill">BoardSpeed: {boardSpeed.toFixed(2)}x</span>
                     <span className="pill">SilenceMs: {silenceRecoveryMsRef.current}</span>
                   </div>
@@ -5426,7 +5552,7 @@ function TutorContent() {
         </div>
         )
       ) : null}
-      {/* ── Celebration overlay ─────────────────────────────────────── */}
+      {/* -- Celebration overlay --------------------------------------- */}
       {isCelebrating && (
         <div style={{
           position: "fixed", inset: 0, zIndex: 9999,
@@ -5465,13 +5591,13 @@ function TutorContent() {
               {celebrationPhrase.text}
             </div>
             <div style={{ fontSize: "0.85rem", color: "#6b7280", marginTop: "0.3rem" }}>
-              Keep it up! Next question loading…
+              Keep it up! Next question loading
             </div>
           </div>
         </div>
       )}
 
-      {/* ── Session-expired Purchase CTA ─────────────────────────── */}
+      {/* -- Session-expired Purchase CTA --------------------------- */}
       {showPurchaseCta && (
         <div style={{
           position: "fixed", inset: 0, zIndex: 10000,
@@ -5490,7 +5616,7 @@ function TutorContent() {
             boxShadow: "0 8px 48px rgba(0,0,0,0.7)",
           }}>
             {/* Avatar + trophy */}
-            <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>🏆</div>
+            <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>??</div>
             <h2 style={{ color: "#fff", fontSize: "1.35rem", fontWeight: 700, marginBottom: "0.5rem" }}>
               Great session, {(studentName || "").trim() || "learner"}!
             </h2>
@@ -5504,9 +5630,9 @@ function TutorContent() {
               flexWrap: "wrap", marginBottom: "1.5rem",
             }}>
               {[
-                { icon: "⚡", label: "XP", value: sessionProgress.xp },
-                { icon: "🎯", label: "Accuracy", value: `${Math.round(score.accuracyPct)}%` },
-                { icon: "🔥", label: "Streak", value: sessionProgress.streak },
+                { icon: "?", label: "XP", value: sessionProgress.xp },
+                { icon: "??", label: "Accuracy", value: `${Math.round(score.accuracyPct)}%` },
+                { icon: "??", label: "Streak", value: sessionProgress.streak },
               ].map(s => (
                 <div key={s.label} style={{
                   background: "rgba(255,255,255,0.08)",
@@ -5539,7 +5665,7 @@ function TutorContent() {
                 boxShadow: "0 4px 18px rgba(233,30,140,0.45)",
               }}
             >
-              🚀 Get Full Vedic Maths AI Tutor
+              ?? Get Full Vedic Maths AI Tutor
             </a>
             <a
               href={`/ai-tutor/demo?chapter=${defaultRequestedChapter}`}
@@ -5568,39 +5694,39 @@ function TutorContent() {
       )}
 
 
-      {/* ── Demo mode banner ─────────────────────────────────────────── */}
+      {/* -- Demo mode banner ------------------------------------------- */}
       {isDemoMode && status === "ready" && (
         <div className="demo-banner">
-          <span>🎓 You are in <strong>free demo mode</strong> — first 3 exercises unlocked</span>
+          <span>?? You are in <strong>free demo mode</strong>  first 3 exercises unlocked</span>
           <a className="demo-banner-cta" href="https://robodynamics.in" target="_blank" rel="noopener noreferrer">
-            Register for full access →
+            Register for full access ?
           </a>
         </div>
       )}
 
-      {/* ── Lesson-complete overlay ──────────────────────────────────── */}
+      {/* -- Lesson-complete overlay ------------------------------------ */}
       {showLessonComplete && (
         <div className="lc-overlay" role="dialog" aria-modal="true" aria-label="Lesson complete">
           <div className="lc-card">
-            <div className="lc-trophy">🏆</div>
+            <div className="lc-trophy">??</div>
             <h2 className="lc-title">Lesson Complete!</h2>
             <p className="lc-subtitle">{lessonTitle || activeChapter}</p>
 
             <div className="lc-stats">
               <div className="lc-stat">
-                <span className="lc-stat-val">⭐ {missionPoints}</span>
+                <span className="lc-stat-val">? {missionPoints}</span>
                 <span className="lc-stat-label">XP Earned</span>
               </div>
               <div className="lc-stat">
-                <span className="lc-stat-val">🎯 {score.accuracyPct}%</span>
+                <span className="lc-stat-val">?? {score.accuracyPct}%</span>
                 <span className="lc-stat-label">Accuracy</span>
               </div>
               <div className="lc-stat">
-                <span className="lc-stat-val">🔥 {sessionProgress.streak}</span>
+                <span className="lc-stat-val">?? {sessionProgress.streak}</span>
                 <span className="lc-stat-label">Best Streak</span>
               </div>
               <div className="lc-stat">
-                <span className="lc-stat-val">❤️ {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
+                <span className="lc-stat-val">?? {sessionProgress.hearts}/{sessionProgress.maxHearts}</span>
                 <span className="lc-stat-label">Hearts Left</span>
               </div>
             </div>
@@ -5608,7 +5734,7 @@ function TutorContent() {
             <button
               className="lc-share-btn"
               onClick={() => {
-                const msg = `🎉 My child just completed "${lessonTitle || activeChapter}" on RoboDynamics AI Tutor!\n⭐ ${missionPoints} XP  🎯 ${score.accuracyPct}% accuracy  🔥 ${sessionProgress.streak} streak\nTry it free 👉 https://robodynamics.in`;
+                const msg = `?? My child just completed "${lessonTitle || activeChapter}" on RoboDynamics AI Tutor!\n? ${missionPoints} XP  ?? ${score.accuracyPct}% accuracy  ?? ${sessionProgress.streak} streak\nTry it free ?? https://robodynamics.in`;
                 void logTutorEvent("SHARE_CLICKED", {
                   chapterCode: activeChapter,
                   xp: missionPoints,
@@ -5618,7 +5744,7 @@ function TutorContent() {
                 window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
               }}
             >
-              📲 Share on WhatsApp
+              ?? Share on WhatsApp
             </button>
 
             <div className="lc-actions">
@@ -5637,7 +5763,7 @@ function TutorContent() {
                       void startSession({ chapterCode: nextChapter.chapterCode });
                     }}
                   >
-                    Next: {nextChapter.title} →
+                    Next: {nextChapter.title} ?
                   </button>
                 ) : (
                   <button className="button vedic-primary-btn" onClick={() => setShowLessonComplete(false)}>
@@ -5713,14 +5839,14 @@ function TutorContent() {
             onClick={() => setShowMobileNav(true)}
             aria-label="Show chapters"
           >
-            ☰ Chapters
+            ? Chapters
           </button>
           {showMobileNav && (
             <div className="mobile-nav-overlay" onClick={() => setShowMobileNav(false)}>
               <div className="mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
                 <div className="mobile-nav-header">
                   <span>Course Chapters</span>
-                  <button className="mobile-nav-close" onClick={() => setShowMobileNav(false)}>✕</button>
+                  <button className="mobile-nav-close" onClick={() => setShowMobileNav(false)}>?</button>
                 </div>
                 <div className="ca-coach-nav">
                   <p className="ca-nav-label">All Chapters</p>
@@ -5749,12 +5875,12 @@ function TutorContent() {
         </>
       )}
 
-      {/* ── Debug overlay — visible when ?debug=1 or localStorage.aiTutorDebug=1 ── */}
+      {/* -- Debug overlay  visible when ?debug=1 or localStorage.aiTutorDebug=1 -- */}
       {debugMode && (
         <div className="debug-overlay">
           <details>
-            <summary>🐛 Debug</summary>
-            <div><b>Q:</b> {question?.questionId?.slice(-8) ?? "—"} <span style={{color:"#94a3b8"}}>({question?.questionType ?? "—"})</span></div>
+            <summary>?? Debug</summary>
+            <div><b>Q:</b> {question?.questionId?.slice(-8) ?? ""} <span style={{color:"#94a3b8"}}>({question?.questionType ?? ""})</span></div>
             <div><b>Scene:</b> <span style={{color: stageSceneMode === "student" ? "#10b981" : "#f59e0b"}}>{stageSceneMode}</span></div>
             <div><b>Flow:</b> {flowState}</div>
             <div><b>Kickoff:</b> {pendingKickoff}</div>
@@ -5771,6 +5897,8 @@ function TutorContent() {
     </main>
   );
 }
+
+
 
 
 

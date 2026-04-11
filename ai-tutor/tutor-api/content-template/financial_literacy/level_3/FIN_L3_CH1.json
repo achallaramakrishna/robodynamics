@@ -1,0 +1,55 @@
+{
+  "chapterCode": "FIN_L3_CH1",
+  "title": "Digital Safety Lab: UPI Mastery",
+  "estimatedMinutes": 30,
+  "subtopics": [
+    "What is UPI?",
+    "Scanning QR Codes",
+    "PIN Safety"
+  ],
+  "learningGoals": [
+    "Explain how UPI connects bank accounts to phone numbers",
+    "Identify correct merchant details before payment",
+    "Handle a UPI payment simulation correctly"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "UPI_INTRO",
+      "exerciseGroup": "A",
+      "subtopic": "Intro to UPI",
+      "boardMode": "rich_board",
+      "teacherLine": "Digital payments are like magic! In India, we use UPI (Unified Payments Interface) to send money instantly. You don't need a wallet, just your phone!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "How UPI Works",
+          "points": [
+            "Link: Your phone number is linked to your many bank accounts.",
+            "VPA: You get a unique address like 'name@okpay'.",
+            "Instant: Money moves in seconds, 24/7."
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "UPI_SIM",
+      "exerciseGroup": "B",
+      "subtopic": "UPI Payment Lab",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's try the UPI Lab! Try to buy a sketchbook from the 'School Stationery Shop' by scanning their QR code.",
+      "board": {
+        "type": "upi_simulator",
+        "data": {}
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L3_101",
+      "exerciseGroup": "A",
+      "questionText": "Do you need to share your Bank Account Number with someone to receive money via UPI?",
+      "expectedAnswer": "no",
+      "hint": "You only need to share your VPA like 'user@upi'."
+    }
+  ]
+}

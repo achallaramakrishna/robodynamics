@@ -1,0 +1,81 @@
+{
+  "chapterCode": "FIN_L3_CH2",
+  "title": "Digital Safety Lab: Fraud Protection",
+  "estimatedMinutes": 30,
+  "subtopics": [
+    "Spotting Fake QRs",
+    "OTP Shield",
+    "The Scam Detector Lab"
+  ],
+  "learningGoals": [
+    "Differentiate between legitimate and fraudulent payment requests",
+    "Understand that PIN is only for SENDING money, not RECEIVING",
+    "Identify red flags in suspicious messages"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "PIN_GOLDEN_RULE",
+      "exerciseGroup": "A",
+      "subtopic": "The Golden Rule",
+      "boardMode": "rich_board",
+      "teacherLine": "Listen carefully! This is the most important lesson in digital safety: You enter your UPI PIN ONLY to SEND money. You NEVER need a PIN to RECEIVE money.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The PIN Shield",
+          "sections": [
+            {
+              "label": "When to PIN?",
+              "items": ["Buying toys", "Sending money to friends", "Paying bills"],
+              "color": "#3b82f6"
+            },
+            {
+              "label": "NEVER use PIN",
+              "items": ["To win a prize", "To receive a refund", "If a stranger sends a request"],
+              "color": "#ef4444"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "OTP_SHIELD",
+      "exerciseGroup": "B",
+      "subtopic": "OTP Safety",
+      "boardMode": "rich_board",
+      "teacherLine": "What about OTP (One Time Password)? This is the final lock on your money. Never share your OTP with anyone — not even the bank!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The OTP Guard",
+          "points": [
+            "OTP = Secret Key",
+            "Valid for 5-10 minutes only",
+            "Sharing it = Giving access to your bank"
+          ],
+          "takeaway": "If someone asks for an OTP over a call, it's a SCAM!"
+        }
+      }
+    },
+    {
+      "stepId": "SCAM_MISSION",
+      "exerciseGroup": "C",
+      "subtopic": "The Scam Detector",
+      "boardMode": "rich_board",
+      "teacherLine": "Time for a live test! You will receive 4 messages on this phone. Based on what you've learned, decide: should you Trust, Block, or Report?",
+      "board": {
+        "type": "scam_simulator",
+        "data": {}
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L3_201",
+      "exerciseGroup": "A",
+      "questionText": "A stranger sends you a payment request for ₹500 and says 'Enter PIN to collect your prize!'. What do you do?",
+      "expectedAnswer": "decline",
+      "hint": "Remember the PIN rule: Only for SENDING."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "chapterCode": "FIN_L5_CH2",
+  "title": "Grow & Protect: Insurance Logic",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "What is Risk?",
+    "Managing the Unexpected",
+    "Life & Health Insurance"
+  ],
+  "learningGoals": [
+    "Define financial risk and its impact",
+    "Explain how insurance pools risk among many people",
+    "Identify common types of insurance in India"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "INSURANCE_CONCEPT",
+      "exerciseGroup": "A",
+      "subtopic": "What is Insurance?",
+      "boardMode": "rich_board",
+      "teacherLine": "Insurance is like an umbrella. You don't enjoy carrying it on a sunny day, but you're very glad you have it when it rains!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Insurance Umbrella",
+          "points": [
+            "Premium: The small amount you pay monthly.",
+            "Risk: The chance of something bad happening.",
+            "Claim: When the company pays for the damage."
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "TYPES_OF_INSURANCE",
+      "exerciseGroup": "B",
+      "subtopic": "Categories",
+      "boardMode": "rich_board",
+      "teacherLine": "There are different umbrellas for different risks. Health insurance for hospital bills, Life insurance for your family, and Motor insurance for your car.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Protection Types",
+          "sections": [
+            {
+              "label": "Health",
+              "items": ["Doctor fees", "Surgeries", "Medicines"],
+              "color": "#3b82f6"
+            },
+            {
+              "label": "Motor",
+              "items": ["Car accidents", "Theft", "Natural disasters"],
+              "color": "#64748b"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L5_201",
+      "exerciseGroup": "A",
+      "questionText": "The small amount you pay periodically to an insurance company is called a _____.",
+      "expectedAnswer": "premium",
+      "hint": "P_e_i_m"
+    }
+  ]
+}

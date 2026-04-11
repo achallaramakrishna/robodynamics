@@ -1,0 +1,80 @@
+{
+  "chapterCode": "FIN_L6_CH1",
+  "title": "Future Ready: Salary & Taxes",
+  "estimatedMinutes": 40,
+  "subtopics": [
+    "Gross vs Net Salary",
+    "Understanding Deductions",
+    "The Payslip Decoder Lab"
+  ],
+  "learningGoals": [
+    "Analyze a professional salary slip",
+    "Calculate take-home pay after taxes and PF",
+    "Identify common Indian tax components (TDS, Professional Tax)"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "SALARY_SLIP_INTRO",
+      "exerciseGroup": "A",
+      "subtopic": "Reading a Salary Slip",
+      "boardMode": "rich_board",
+      "teacherLine": "When you get your first job, you'll receive a Salary Slip. It's not just one number — it has many parts! Let's decode it.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Salary Breakdown",
+          "points": [
+            "Gross Salary: Total payout promised by the company.",
+            "Deductions: Taxes, Provident Fund (PF), and Insurance.",
+            "Net Salary: The actual cash that hits your bank account!"
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "TAX_BASICS",
+      "exerciseGroup": "B",
+      "subtopic": "Income Tax",
+      "boardMode": "rich_board",
+      "teacherLine": "In India, the government takes a small portion of your high salary to build roads, schools, and hospitals. This is called Income Tax.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Taxes & PF",
+          "sections": [
+            {
+              "label": "TDS",
+              "items": ["Tax Deducted at Source", "Paid to the Government", "Depends on your income bracket"],
+              "color": "#ef4444"
+            },
+            {
+              "label": "EPF",
+              "items": ["Employee Provident Fund", "Long-term savings for retirement", "For your own future"],
+              "color": "#3b82f6"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "SALARY_LAB",
+      "exerciseGroup": "C",
+      "subtopic": "The Payslip Decoder",
+      "boardMode": "rich_board",
+      "teacherLine": "Time to act like a pro. Here is a realistic Indian salary slip for an employee earning ₹75,000 per month. Click on each section to decode the 'Pro Secrets' behind Basic Pay, HRA, and TDS!",
+      "board": {
+        "type": "salary_decoder",
+        "data": {}
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L6_101",
+      "exerciseGroup": "A",
+      "questionText": "If your Gross Salary is ₹50,000 and the total deductions are ₹5,000, what is your Net Salary?",
+      "expectedAnswer": "45000",
+      "hint": "Gross - Deductions = Net"
+    }
+  ]
+}

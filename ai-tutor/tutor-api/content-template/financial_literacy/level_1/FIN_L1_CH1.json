@@ -1,0 +1,98 @@
+{
+  "chapterCode": "FIN_L1_CH1",
+  "title": "My Money World: Rupee Basics",
+  "estimatedMinutes": 20,
+  "subtopics": [
+    "Introduction to the Rupee",
+    "Counting My First Notes",
+    "Pocket Money Manager"
+  ],
+  "learningGoals": [
+    "Identify Indian Rupee notes and coins",
+    "Perform basic addition of money values",
+    "Start tracking personal savings"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "INTRO_RUPEE",
+      "exerciseGroup": "A",
+      "subtopic": "Introduction",
+      "boardMode": "rich_board",
+      "teacherLine": "Welcome to Level 1! Today we learn about the Rupee (₹). Before money, people swapped things — like a toy for an apple. Now, we use magic tokens called Rupees!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Magic Token: ₹",
+          "points": [
+            "Ancient times: Barter system (trading goods)",
+            "Today: The Rupee (INR) is our official currency",
+            "Every note has Mahatma Gandhi on it!"
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "COUNTING_NOTES",
+      "exerciseGroup": "B",
+      "subtopic": "Counting Money",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's count! If you have two ₹10 notes and one ₹20 note, how much total money do you have?",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Note Math",
+          "sections": [
+            {
+              "label": "My Wallet",
+              "items": ["₹10 Note", "₹10 Note", "₹20 Note"],
+              "color": "#3b82f6"
+            }
+          ],
+          "takeaway": "Total: 10 + 10 + 20 = ₹40!"
+        }
+      }
+    },
+    {
+      "stepId": "EARN_MISSION",
+      "exerciseGroup": "C",
+      "subtopic": "How to Earn Money",
+      "boardMode": "rich_board",
+      "teacherLine": "Money doesn't just appear — we earn it by doing valuable work! In MoneyMind, your parents can set 'Rewards' for real-world chores. When you finish a task (like cleaning your desk), you earn virtual coins to spend in our simulators!",
+      "board": {
+        "type": "parent_dashboard",
+        "data": {}
+      }
+    },
+    {
+      "stepId": "POCKET_MONEY",
+      "exerciseGroup": "C",
+      "subtopic": "Pocket Money Manager",
+      "boardMode": "rich_board",
+      "teacherLine": "Every week, you might get pocket money. Let's see how to manage it. If you want a new Sketchbook for ₹100, how much do you need to save each week?",
+      "board": {
+        "type": "goal_tracker",
+        "data": {
+          "goalName": "New Sketchbook",
+          "targetAmount": 100,
+          "currentAmount": 30
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L1_101",
+      "exerciseGroup": "A",
+      "questionText": "What is the symbol of the Indian Rupee?",
+      "expectedAnswer": "₹",
+      "hint": "It looks like the Hindi 'Ra' with an extra line."
+    },
+    {
+      "questionId": "Q_L1_102",
+      "exerciseGroup": "B",
+      "questionText": "₹50 + ₹20 = how many Rupees?",
+      "expectedAnswer": "70",
+      "hint": "5 + 2 = 7, so 50 + 20 = ?"
+    }
+  ]
+}

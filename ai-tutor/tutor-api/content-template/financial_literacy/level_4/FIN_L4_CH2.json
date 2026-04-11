@@ -1,0 +1,65 @@
+{
+  "chapterCode": "FIN_L4_CH2",
+  "title": "Smart Spending: Subscription Tracker",
+  "estimatedMinutes": 30,
+  "subtopics": [
+    "Recurring Costs",
+    "Identifying 'Ghost' Subs",
+    "Annual vs Monthly"
+  ],
+  "learningGoals": [
+    "Identify recurring subscription costs",
+    "Calculate the annual impact of monthly habits",
+    "Audit a list of services for value"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "SUBS_CONCEPT",
+      "exerciseGroup": "A",
+      "subtopic": "What is a Subscription?",
+      "boardMode": "rich_board",
+      "teacherLine": "A subscription is a payment that repeats every month or year. It feels small (just ₹199!), but it adds up quickly!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Subscription Trap",
+          "points": [
+            "Monthly: ₹200",
+            "Yearly: 200 x 12 = ₹2,400",
+            "Hidden: Do you still use that game you bought last year?"
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "SUBS_TRACKER",
+      "exerciseGroup": "B",
+      "subtopic": "Financial Audit",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's audit these subscriptions. Which ones should we keep and which ones should we cancel to save for a new bike?",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "My Digital Audit",
+          "sections": [
+            {
+              "label": "Active Subs",
+              "items": ["OTT App (₹299/mo)", "Mobile Data (₹199/mo)", "Gaming Pass (₹499/mo)", "Learning App (₹150/mo)"],
+              "color": "#3b82f6"
+            }
+          ],
+          "takeaway": "Total Monthly: ₹1,147! Total Yearly: ₹13,764!"
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L4_201",
+      "exerciseGroup": "A",
+      "questionText": "If you cancel a ₹300 per month subscription, how much have you saved after ONE YEAR?",
+      "expectedAnswer": "3600",
+      "hint": "300 x 12"
+    }
+  ]
+}

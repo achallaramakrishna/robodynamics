@@ -1,0 +1,120 @@
+{
+  "chapterCode": "FIN_CH1",
+  "title": "Money Basics and Budgeting",
+  "estimatedMinutes": 30,
+  "subtopics": [
+    "Introduction to Money",
+    "ATM and Cash",
+    "Needs vs Wants",
+    "Building a Budget"
+  ],
+  "learningGoals": [
+    "Identify different forms of money",
+    "Understand how to use an ATM safely",
+    "Distinguish between essential needs and flexible wants",
+    "Create a basic monthly budget"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "FIN_CH1_INTRO",
+      "exerciseGroup": "A",
+      "subtopic": "Introduction to Money",
+      "boardMode": "rich_board",
+      "teacherLine": "Welcome to MoneyMind! Today, we are going to start your journey into financial literacy. First, let's look at what the Bangalore Math Championship taught us about value.",
+      "board": {
+        "type": "mission_card",
+        "data": {
+          "title": "Your Financial Journey Begins",
+          "headline": "Welcome to MoneyMind!",
+          "challenge": "By the end of this session, you will earn your first virtual ₹500 for your wallet!",
+          "points": [
+            "Learn how money flows",
+            "Master the ATM",
+            "Start your first savings goal"
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "FIN_CH1_ATM",
+      "exerciseGroup": "B",
+      "subtopic": "ATM and Cash",
+      "boardMode": "rich_board",
+      "teacherLine": "To spend money, we often need to get it from a bank. An ATM or Automated Teller Machine is like a magic box that gives you your money even when the bank is closed.",
+      "board": {
+        "type": "atm_simulator",
+        "data": {}
+      }
+    },
+    {
+      "stepId": "FIN_CH1_NEEDS",
+      "exerciseGroup": "C",
+      "subtopic": "Needs vs Wants",
+      "boardMode": "rich_board",
+      "teacherLine": "Now that you have some cash, you need to decide how to spend it. In personal finance, we distinguish between Needs (things you MUST have) and Wants (things that are NICE to have).",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Golden Rule: Needs vs Wants",
+          "sections": [
+            {
+              "label": "Needs",
+              "color": "#22c55e",
+              "items": ["Food & Water", "Housing/Rent", "School Books", "Basic Medicine"]
+            },
+            {
+              "label": "Wants",
+              "color": "#f59e0b",
+              "items": ["Video Games", "Designer Shoes", "Movie Tickets", "Ice Cream"]
+            }
+          ],
+          "takeaway": "Always pay for your Needs before your Wants!"
+        }
+      }
+    },
+    {
+      "stepId": "FIN_CH1_SHOPPING",
+      "exerciseGroup": "D",
+      "subtopic": "Shopping Simulation",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's practice! You have ₹1000. Try to pick items that are mostly needs while staying within your budget.",
+      "board": {
+        "type": "shopping_simulation",
+        "data": {
+          "budget": 1000,
+          "items": [
+            {"name": "Apples", "price": 100, "type": "need"},
+            {"name": "Comic Book", "price": 150, "type": "want"},
+            {"name": "Notebook", "price": 80, "type": "need"},
+            {"name": "Toy Car", "price": 300, "type": "want"},
+            {"name": "Milk", "price": 60, "type": "need"},
+            {"name": "Pizza", "price": 400, "type": "want"}
+          ]
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_FIN_101",
+      "exerciseGroup": "A",
+      "questionText": "What is the primary purpose of money?",
+      "expectedAnswer": "medium of exchange",
+      "hint": "It's used to swap for goods and services."
+    },
+    {
+      "questionId": "Q_FIN_102",
+      "exerciseGroup": "B",
+      "questionText": "A machine used to withdraw cash from a bank account is called an _____.",
+      "expectedAnswer": "atm",
+      "hint": "Automated Teller Machine"
+    },
+    {
+      "questionId": "Q_FIN_103",
+      "exerciseGroup": "C",
+      "questionText": "Is a 'New PlayStation' a Need or a Want?",
+      "expectedAnswer": "want",
+      "hint": "Do you need it to survive or go to school?"
+    }
+  ]
+}

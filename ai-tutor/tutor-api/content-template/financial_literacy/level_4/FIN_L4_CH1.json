@@ -1,0 +1,66 @@
+{
+  "chapterCode": "FIN_L4_CH1",
+  "title": "Smart Spending: Birthday Party Planner",
+  "estimatedMinutes": 35,
+  "subtopics": [
+    "Setting a Budget",
+    "Cost Comparison",
+    "Making the List"
+  ],
+  "learningGoals": [
+    "Plan a multi-item budget for an event",
+    "Compare unit prices to find the best deal",
+    "Trade off between luxury items and core needs"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "BUDGET_INTRO",
+      "exerciseGroup": "A",
+      "subtopic": "Intro to Budgeting",
+      "boardMode": "rich_board",
+      "teacherLine": "Planning a party is fun, but it can be expensive! A budget helps you have a great time without spending too much.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Party Budget",
+          "points": [
+            "Goal: Plan a party for 10 friends.",
+            "Budget: ₹2,000 max.",
+            "Items: Cake, Balloons, Snacks, Returns."
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "PARTY_PLANNER",
+      "exerciseGroup": "B",
+      "subtopic": "Planner Tool",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's use the Birthday Party Planner. Drag the items you want into your list and stay under ₹2,000!",
+      "board": {
+        "type": "shopping_simulation",
+        "data": {
+          "title": "Party Planner Portfolio",
+          "budget": 2000,
+          "items": [
+            {"name": "Standard Cake", "price": 600, "type": "need"},
+            {"name": "Luxury Chocolate Cake", "price": 1200, "type": "want"},
+            {"name": "Balloon Pack", "price": 200, "type": "need"},
+            {"name": "Samosa Box (10 pcs)", "price": 300, "type": "need"},
+            {"name": "Magic Show", "price": 1000, "type": "want"},
+            {"name": "Party Hats", "price": 150, "type": "want"}
+          ]
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L4_101",
+      "exerciseGroup": "A",
+      "questionText": "If a pack of 5 balloons is ₹50 and a pack of 10 is ₹80, which one is cheaper per balloon?",
+      "expectedAnswer": "pack of 10",
+      "hint": "Divide the price by the number of balloons."
+    }
+  ]
+}

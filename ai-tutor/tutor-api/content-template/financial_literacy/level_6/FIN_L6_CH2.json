@@ -1,0 +1,70 @@
+{
+  "chapterCode": "FIN_L6_CH2",
+  "title": "Future Ready: Debt & EMIs",
+  "estimatedMinutes": 35,
+  "subtopics": [
+    "Good Debt vs Bad Debt",
+    "How EMIs Work",
+    "Avoiding the Debt Trap"
+  ],
+  "learningGoals": [
+    "Distinguish between productive debt and consumer debt",
+    "Identify hidden costs in 'Empty Interest' / No-Cost EMIs",
+    "Explain the long-term impact of credit card interest"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "EMI_CONCEPT",
+      "exerciseGroup": "A",
+      "subtopic": "What is an EMI?",
+      "boardMode": "rich_board",
+      "teacherLine": "EMI stands for Equated Monthly Installment. It allows you to buy expensive things like a house or a car today and pay over many months.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Understanding EMI",
+          "points": [
+            "Principal: The original amount you borrowed.",
+            "Interest: The 'rent' you pay for using the bank's money.",
+            "Tenure: How many months you have to pay back."
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "DEBT_TRAP_SHIELD",
+      "exerciseGroup": "B",
+      "subtopic": "Debt Safety",
+      "boardMode": "rich_board",
+      "teacherLine": "A 'Debt Trap' is when you borrow more than you can pay back. Always try to keep your total EMIs below 40% of your take-home salary!",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "The Debt Trap Shield",
+          "sections": [
+            {
+              "label": "Good Debt",
+              "items": ["Home Loan", "Education Loan", "Business Loan"],
+              "color": "#10b981"
+            },
+            {
+              "label": "Bad Debt",
+              "items": ["Credit Card (overspending)", "Luxury items you can't afford", "High-interest personal loans"],
+              "color": "#ef4444"
+            }
+          ],
+          "takeaway": "Never spend money you haven't earned yet on things you don't need!"
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L6_201",
+      "exerciseGroup": "A",
+      "questionText": "If you buy a phone for ₹30,000 on a 12-month No-Cost EMI, how much is your monthly EMI?",
+      "expectedAnswer": "2500",
+      "hint": "30,000 / 12"
+    }
+  ]
+}

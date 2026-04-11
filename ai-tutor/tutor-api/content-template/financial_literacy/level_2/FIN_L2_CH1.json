@@ -1,0 +1,57 @@
+{
+  "chapterCode": "FIN_L2_CH1",
+  "title": "Bank & ATM Explorer: Banking Basics",
+  "estimatedMinutes": 25,
+  "subtopics": [
+    "What is a Bank?",
+    "Opening an Account",
+    "Interest & Growth"
+  ],
+  "learningGoals": [
+    "Understand the safety benefits of a bank",
+    "Identify the steps to open a bank account",
+    "Understand how banks help money grow over time"
+  ],
+  "teachingScript": [
+    {
+      "stepId": "WHAT_IS_BANK",
+      "exerciseGroup": "A",
+      "subtopic": "The Bank",
+      "boardMode": "rich_board",
+      "teacherLine": "A bank is like a fortress for your money. Instead of keeping cash under your pillow, you keep it in a secure place called a Bank Account.",
+      "board": {
+        "type": "concept_card",
+        "data": {
+          "title": "Why Use a Bank?",
+          "points": [
+            "Safety: Vaults and security protect your cash.",
+            "Record Keeping: A Passbook tracks every Paise.",
+            "Growth: Banks give you extra money (Interest) for saving."
+          ]
+        }
+      }
+    },
+    {
+      "stepId": "BANK_PORTAL",
+      "exerciseGroup": "B",
+      "subtopic": "Digital Banking",
+      "boardMode": "rich_board",
+      "teacherLine": "Let's look at your Bank Portal. Here you can see your balance and transactions.",
+      "board": {
+        "type": "bank_portal",
+        "data": {
+          "view": "overview"
+        }
+      }
+    }
+  ],
+  "questionPool": [
+    {
+      "questionId": "Q_L2_101",
+      "exerciseGroup": "A",
+      "questionText": "What is the document that tracks your bank transactions called?",
+      "expectedAnswer": "passbook",
+      "hint": "It's a book that shows where your money goes. Also available as a digital statement."
+    }
+  ]
+}

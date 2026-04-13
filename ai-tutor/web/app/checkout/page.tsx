@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { FLAGS } from "../../lib/featureFlags";
 
@@ -56,6 +56,7 @@ interface RazorpayOptions {
   name: string;
   description: string;
   order_id: string;
+  image?: string;
   handler: (response: RazorpayResponse) => void;
   prefill?: { name?: string; email?: string; contact?: string };
   theme?: { color?: string };
@@ -97,6 +98,14 @@ function CheckoutDisabled() {
 // ─── Main Checkout Page ───────────────────────────────────────────────────────
 
 export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div style={{ background: "#0F172A", minHeight: "100vh" }} />}>
+      <CheckoutInner />
+    </Suspense>
+  );
+}
+
+function CheckoutInner() {
   const searchParams = useSearchParams();
   const bundleKey = searchParams.get("bundle") ?? "moneymind-6-levels";
   const bundle = BUNDLES[bundleKey];

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { FLAGS } from "../../../lib/featureFlags";
 
@@ -46,6 +46,14 @@ const CONFETTI_COLORS = ["#F59E0B", "#10B981", "#3B82F6", "#EF4444", "#8B5CF6", 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function LevelCompletePage() {
+  return (
+    <Suspense fallback={<div style={{ background: "#0F172A", minHeight: "100vh" }} />}>
+      <LevelCompleteInner />
+    </Suspense>
+  );
+}
+
+function LevelCompleteInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
 

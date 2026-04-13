@@ -8,20 +8,47 @@ import UpiSimulator from "@/components/moneymind/UpiSimulator";
 import BankPortal from "@/components/moneymind/BankPortal";
 import PocketMoneyPlanner from "@/components/moneymind/PocketMoneyPlanner";
 import PassbookViewer from "@/components/moneymind/PassbookViewer";
+import { getBoardIllustration } from "@/components/moneymind/MoneyMindIllustrations";
+
+// ─── Global CSS keyframes ─────────────────────────────────────────────────────
+const GLOBAL_CSS = `
+  @keyframes mmSlideUp   { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes mmFadeIn    { from { opacity:0; } to { opacity:1; } }
+  @keyframes mmPopIn     { 0% { transform:scale(.5); opacity:0; } 70% { transform:scale(1.1); } 100% { transform:scale(1); opacity:1; } }
+  @keyframes mmShimmer   { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+  @keyframes mmDot1      { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
+  @keyframes mmDot2      { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
+  @keyframes mmDot3      { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
+  @keyframes mmConfetti  { 0%{transform:translateY(0) rotate(0deg);opacity:1;} 100%{transform:translateY(80px) rotate(540deg);opacity:0;} }
+  @keyframes mmCorrect   { 0%{transform:scale(1);} 30%{transform:scale(1.08);} 60%{transform:scale(.97);} 100%{transform:scale(1);} }
+  @keyframes mmMeeraPulse{ 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.4);} 50%{box-shadow:0 0 0 8px rgba(59,130,246,0);} }
+  .mm-board-enter        { animation: mmSlideUp .45s cubic-bezier(.22,1,.36,1) both; }
+  .mm-fade-in            { animation: mmFadeIn .35s ease both; }
+  .mm-meera-dot1         { animation: mmDot1 1.4s ease-in-out infinite; }
+  .mm-meera-dot2         { animation: mmDot2 1.4s ease-in-out .2s infinite; }
+  .mm-meera-dot3         { animation: mmDot3 1.4s ease-in-out .4s infinite; }
+  .mm-avatar-pulse       { animation: mmMeeraPulse 2s ease-in-out infinite; }
+  .mm-correct-burst      { animation: mmCorrect .5s ease both; }
+  .mm-progress-shimmer   {
+    background: linear-gradient(90deg, #10B981 0%, #34D399 40%, #10B981 60%, #059669 100%);
+    background-size: 200% 100%;
+    animation: mmShimmer 2s linear infinite;
+  }
+`;
 
 // ─── Board Renderer ───────────────────────────────────────────────────────────
 
-function BoardCard({ step }: { step: MoneyMindLessonStep }) {
+function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: number }) {
   const { type, data } = step.board;
+  const illustration = getBoardIllustration(type, data.headline ?? data.title, data.emoji);
+  const showIllustration = !["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(type);
 
   if (type === "intro_card" || type === "mission_card") {
     return (
       <div style={{ background: "linear-gradient(135deg, #1E3A5F, #0F172A)", border: "2px solid #3B82F6", borderRadius: 20, padding: "32px 28px", textAlign: "center" }}>
-        {data.assetPath && (
-          <div style={{ fontSize: 72, marginBottom: 16 }}>
-            {data.emoji ?? "💰"}
-          </div>
-        )}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 4 }}>
+          {getBoardIllustration(type, data.headline ?? data.title, data.emoji)}
+        </div>
         <div style={{ color: "#93C5FD", fontSize: 12, fontWeight: 800, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>
           {type === "mission_card" ? "🎯 Mission" : "📚 Today's Lesson"}
         </div>
@@ -401,24 +428,39 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
 
   return (
     <div style={{ background: "#030712", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#F1F5F9" }}>
+      <style>{GLOBAL_CSS}</style>
 
       {/* Top bar */}
-      <div style={{ background: "#0F172A", borderBottom: "1px solid #1E293B", padding: "0 20px", height: 56, display: "flex", alignItems: "center", gap: 16, position: "sticky", top: 0, zIndex: 100 }}>
-        <a href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#64748B", textDecoration: "none", fontSize: 13, flexShrink: 0 }}>
-          ← Back
-        </a>
-        <div style={{ flex: 1, background: "#1E293B", borderRadius: 100, height: 6, overflow: "hidden" }}>
-          <div style={{ height: "100%", background: "linear-gradient(90deg, #10B981, #3B82F6)", width: `${progress}%`, transition: "width 0.4s ease", borderRadius: 100 }} />
+      <div style={{ background: "#0F172A", borderBottom: "1px solid #1E293B", padding: "0 20px", position: "sticky", top: 0, zIndex: 100 }}>
+        <div style={{ height: 50, display: "flex", alignItems: "center", gap: 16 }}>
+          <a href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#64748B", textDecoration: "none", fontSize: 13, flexShrink: 0 }}>
+            ← Back
+          </a>
+          <div style={{ flex: 1, background: "#1E293B", borderRadius: 100, height: 7, overflow: "hidden" }}>
+            <div className="mm-progress-shimmer" style={{ height: "100%", width: `${progress}%`, transition: "width 0.5s cubic-bezier(.22,1,.36,1)", borderRadius: 100 }} />
+          </div>
+          <button
+            onClick={() => setChatOpen(c => !c)}
+            style={{ background: chatOpen ? "#3B82F6" : "#1E293B", border: "1px solid #334155", color: chatOpen ? "#fff" : "#93C5FD", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer", flexShrink: 0, transition: "all .2s" }}
+          >
+            🤖 Ask Meera
+          </button>
         </div>
-        <span style={{ color: "#64748B", fontSize: 12, flexShrink: 0 }}>
-          {stepIndex + 1} / {totalSteps}
-        </span>
-        <button
-          onClick={() => setChatOpen(c => !c)}
-          style={{ background: "#1E293B", border: "1px solid #334155", color: "#93C5FD", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer", flexShrink: 0 }}
-        >
-          🤖 Ask Meera
-        </button>
+        {/* Step dots */}
+        <div style={{ display: "flex", justifyContent: "center", gap: 6, paddingBottom: 8 }}>
+          {lesson.steps.map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: i === stepIndex ? 20 : 7,
+                height: 7,
+                borderRadius: 4,
+                background: i < stepIndex ? "#10B981" : i === stepIndex ? "#3B82F6" : "#334155",
+                transition: "all 0.35s cubic-bezier(.22,1,.36,1)",
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Content */}
@@ -435,25 +477,33 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
         </div>
 
         {/* Meera speech bubble */}
-        <div style={{ display: "flex", gap: 14, alignItems: "flex-start", marginBottom: 24 }}>
-          <div style={{ background: "linear-gradient(135deg, #1D4ED8, #7C3AED)", borderRadius: "50%", width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, flexShrink: 0 }}>
+        {/* Meera speech */}
+        <div className="mm-fade-in" key={`speech-${stepIndex}`} style={{ display: "flex", gap: 14, alignItems: "flex-start", marginBottom: 24 }}>
+          <div className="mm-avatar-pulse" style={{ background: "linear-gradient(135deg, #1D4ED8, #7C3AED)", borderRadius: "50%", width: 52, height: 52, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, flexShrink: 0 }}>
             🤖
           </div>
-          <div style={{ background: "#1E293B", border: "1px solid #334155", borderRadius: "0 16px 16px 16px", padding: "14px 18px", color: "#CBD5E1", fontSize: 14, lineHeight: 1.7, flex: 1 }}>
+          <div style={{ background: "#1E293B", border: "1px solid #3B82F6", borderRadius: "0 18px 18px 18px", padding: "14px 18px", color: "#CBD5E1", fontSize: 14, lineHeight: 1.8, flex: 1, position: "relative" }}>
+            <div style={{ position: "absolute", top: -6, left: -1, width: 12, height: 12, background: "#1E293B", borderLeft: "1px solid #3B82F6", borderTop: "1px solid #3B82F6", transform: "rotate(45deg)" }} />
             {step.tutorText}
           </div>
         </div>
 
         {/* Step label chip */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
-          <span style={{ background: "#1E293B", border: "1px solid #334155", color: "#94A3B8", borderRadius: 100, padding: "4px 14px", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.8 }}>
+          <span style={{ background: "rgba(59,130,246,0.12)", border: "1px solid #3B82F640", color: "#60A5FA", borderRadius: 100, padding: "5px 18px", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
             {step.label}
           </span>
         </div>
 
-        {/* Board */}
-        <div style={{ marginBottom: 24 }}>
-          <BoardCard step={step} />
+        {/* Board — animated on every step change */}
+        <div key={`board-${stepIndex}`} className="mm-board-enter" style={{ marginBottom: 24 }}>
+          {/* Illustration header (non-simulator boards) */}
+          {!["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(step.board.type) && (
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: -16, position: "relative", zIndex: 2 }}>
+              {getBoardIllustration(step.board.type, step.board.data.headline ?? step.board.data.title, step.board.data.emoji)}
+            </div>
+          )}
+          <BoardCard step={step} stepKey={stepIndex} />
         </div>
 
         {/* Explanation block */}
@@ -526,8 +576,25 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             )}
 
             {feedback && (
-              <div style={{ background: feedback.correct ? "rgba(16,185,129,0.15)" : "rgba(239,68,68,0.15)", border: `1px solid ${feedback.correct ? "#10B981" : "#EF4444"}`, borderRadius: 10, padding: "12px 14px", color: feedback.correct ? "#6EE7B7" : "#FCA5A5", fontSize: 13, fontWeight: 600, marginBottom: 12 }}>
-                {feedback.message}
+              <div className={feedback.correct ? "mm-correct-burst" : "mm-fade-in"} style={{ background: feedback.correct ? "rgba(16,185,129,0.15)" : "rgba(239,68,68,0.15)", border: `1px solid ${feedback.correct ? "#10B981" : "#EF4444"}`, borderRadius: 12, padding: "14px 16px", color: feedback.correct ? "#6EE7B7" : "#FCA5A5", fontSize: 14, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 22 }}>{feedback.correct ? "🎉" : "💡"}</span>
+                <span>{feedback.message}</span>
+              </div>
+            )}
+            {/* Confetti particles on correct */}
+            {feedback?.correct && (
+              <div style={{ position: "relative", height: 0, overflow: "visible", pointerEvents: "none" }}>
+                {["#F59E0B","#10B981","#3B82F6","#EF4444","#8B5CF6","#FCD34D"].map((color, i) => (
+                  <div key={i} style={{
+                    position: "absolute",
+                    top: -20,
+                    left: `${15 + i * 13}%`,
+                    width: 8, height: 8,
+                    background: color,
+                    borderRadius: i % 2 === 0 ? "50%" : 2,
+                    animation: `mmConfetti ${0.8 + i * 0.1}s ease-out ${i * 0.07}s both`,
+                  }} />
+                ))}
               </div>
             )}
 

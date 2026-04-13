@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import Link from "next/link";
 import type { MoneyMindLessonPayload, MoneyMindLessonStep } from "@/lib/moneyMindLessonTypes";
 import { getNextLessonId } from "@/lib/moneyMindLessonRegistry";
 import AtmSimulator from "@/components/moneymind/AtmSimulator";
@@ -9,27 +10,23 @@ import BankPortal from "@/components/moneymind/BankPortal";
 import PocketMoneyPlanner from "@/components/moneymind/PocketMoneyPlanner";
 import PassbookViewer from "@/components/moneymind/PassbookViewer";
 import { getBoardIllustration } from "@/components/moneymind/MoneyMindIllustrations";
+import MoneyMindAvatar, { type MeeraMood, type MeeraGesture } from "./MoneyMindAvatar";
 
-// ─── Global CSS keyframes ─────────────────────────────────────────────────────
+// ─── CSS keyframes ────────────────────────────────────────────────────────────
 const GLOBAL_CSS = `
-  @keyframes mmSlideUp   { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes mmFadeIn    { from { opacity:0; } to { opacity:1; } }
-  @keyframes mmPopIn     { 0% { transform:scale(.5); opacity:0; } 70% { transform:scale(1.1); } 100% { transform:scale(1); opacity:1; } }
-  @keyframes mmShimmer   { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
-  @keyframes mmDot1      { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
-  @keyframes mmDot2      { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
-  @keyframes mmDot3      { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
-  @keyframes mmConfetti  { 0%{transform:translateY(0) rotate(0deg);opacity:1;} 100%{transform:translateY(80px) rotate(540deg);opacity:0;} }
-  @keyframes mmCorrect   { 0%{transform:scale(1);} 30%{transform:scale(1.08);} 60%{transform:scale(.97);} 100%{transform:scale(1);} }
-  @keyframes mmMeeraPulse{ 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.4);} 50%{box-shadow:0 0 0 8px rgba(59,130,246,0);} }
-  .mm-board-enter        { animation: mmSlideUp .45s cubic-bezier(.22,1,.36,1) both; }
-  .mm-fade-in            { animation: mmFadeIn .35s ease both; }
-  .mm-meera-dot1         { animation: mmDot1 1.4s ease-in-out infinite; }
-  .mm-meera-dot2         { animation: mmDot2 1.4s ease-in-out .2s infinite; }
-  .mm-meera-dot3         { animation: mmDot3 1.4s ease-in-out .4s infinite; }
-  .mm-avatar-pulse       { animation: mmMeeraPulse 2s ease-in-out infinite; }
-  .mm-correct-burst      { animation: mmCorrect .5s ease both; }
-  .mm-progress-shimmer   {
+  @keyframes mmSlideUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes mmFadeIn   { from{opacity:0} to{opacity:1} }
+  @keyframes mmPopIn    { 0%{transform:scale(.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+  @keyframes mmShimmer  { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+  @keyframes mmConfetti { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(80px) rotate(540deg);opacity:0} }
+  @keyframes mmCorrect  { 0%{transform:scale(1)} 30%{transform:scale(1.07)} 60%{transform:scale(.97)} 100%{transform:scale(1)} }
+  @keyframes mmGlow     { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.35)} 50%{box-shadow:0 0 0 8px rgba(16,185,129,0)} }
+  @keyframes mmBoardIn  { from{opacity:0;transform:translateY(18px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .mm-board-enter { animation: mmBoardIn .42s cubic-bezier(.34,1.56,.64,1) both; }
+  .mm-fade-in     { animation: mmFadeIn .35s ease both; }
+  .mm-correct     { animation: mmCorrect .5s ease both; }
+  .mm-glow        { animation: mmGlow 2s ease-in-out infinite; }
+  .mm-shimmer {
     background: linear-gradient(90deg, #10B981 0%, #34D399 40%, #10B981 60%, #059669 100%);
     background-size: 200% 100%;
     animation: mmShimmer 2s linear infinite;
@@ -37,35 +34,22 @@ const GLOBAL_CSS = `
 `;
 
 // ─── Board Renderer ───────────────────────────────────────────────────────────
-
 function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: number }) {
   const { type, data } = step.board;
-  const illustration = getBoardIllustration(type, data.headline ?? data.title, data.emoji);
-  const showIllustration = !["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(type);
 
   if (type === "intro_card" || type === "mission_card") {
     return (
-      <div style={{ background: "linear-gradient(135deg, #1E3A5F, #0F172A)", border: "2px solid #3B82F6", borderRadius: 20, padding: "32px 28px", textAlign: "center" }}>
+      <div style={{ background: "linear-gradient(135deg,#1E3A5F,#0F172A)", border: "2px solid #3B82F6", borderRadius: 20, padding: "32px 28px", textAlign: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 4 }}>
           {getBoardIllustration(type, data.headline ?? data.title, data.emoji)}
         </div>
         <div style={{ color: "#93C5FD", fontSize: 12, fontWeight: 800, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>
           {type === "mission_card" ? "🎯 Mission" : "📚 Today's Lesson"}
         </div>
-        <div style={{ color: "#fff", fontWeight: 900, fontSize: 24, marginBottom: 12, lineHeight: 1.3 }}>
-          {data.headline ?? data.title}
-        </div>
-        {data.example && (
-          <div style={{ background: "rgba(59,130,246,0.15)", border: "1px solid #3B82F6", borderRadius: 10, padding: "12px 16px", marginBottom: 12, color: "#93C5FD", fontSize: 14 }}>
-            {data.example}
-          </div>
-        )}
-        {data.goal && (
-          <div style={{ color: "#D1FAE5", fontSize: 14, lineHeight: 1.6 }}>🏁 Goal: {data.goal}</div>
-        )}
-        {data.scenario && (
-          <div style={{ color: "#FDE68A", fontSize: 14, lineHeight: 1.6, marginTop: 8 }}>{data.scenario}</div>
-        )}
+        <div style={{ color: "#fff", fontWeight: 900, fontSize: 24, marginBottom: 12, lineHeight: 1.3 }}>{data.headline ?? data.title}</div>
+        {data.example && <div style={{ background: "rgba(59,130,246,0.15)", border: "1px solid #3B82F6", borderRadius: 10, padding: "12px 16px", marginBottom: 12, color: "#93C5FD", fontSize: 14 }}>{data.example}</div>}
+        {data.goal && <div style={{ color: "#D1FAE5", fontSize: 14, lineHeight: 1.6 }}>🏁 Goal: {data.goal}</div>}
+        {data.scenario && <div style={{ color: "#FDE68A", fontSize: 14, lineHeight: 1.6, marginTop: 8 }}>{data.scenario}</div>}
       </div>
     );
   }
@@ -73,9 +57,7 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "concept_card") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #334155", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#F59E0B", fontWeight: 900, fontSize: 18, marginBottom: 16 }}>
-          {data.emoji ?? "💡"} {data.title}
-        </div>
+        <div style={{ color: "#F59E0B", fontWeight: 900, fontSize: 18, marginBottom: 16 }}>{data.emoji ?? "💡"} {data.title}</div>
         <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
           {(data.points ?? data.concepts ?? []).map((pt: string, i: number) => (
             <li key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 12, color: "#E2E8F0", fontSize: 14, lineHeight: 1.6 }}>
@@ -87,22 +69,10 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
         {data.table && (
           <div style={{ marginTop: 16, overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-              <thead>
-                <tr>
-                  {data.table.headers.map((h: string) => (
-                    <th key={h} style={{ background: "#334155", color: "#F59E0B", padding: "8px 12px", textAlign: "left", fontWeight: 700 }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.table.rows.map((row: string[], ri: number) => (
-                  <tr key={ri}>
-                    {row.map((cell, ci) => (
-                      <td key={ci} style={{ padding: "8px 12px", color: "#CBD5E1", borderBottom: "1px solid #334155" }}>{cell}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
+              <thead><tr>{data.table.headers.map((h: string) => <th key={h} style={{ background: "#334155", color: "#F59E0B", padding: "8px 12px", textAlign: "left", fontWeight: 700 }}>{h}</th>)}</tr></thead>
+              <tbody>{data.table.rows.map((row: string[], ri: number) => (
+                <tr key={ri}>{row.map((cell, ci) => <td key={ci} style={{ padding: "8px 12px", color: "#CBD5E1", borderBottom: "1px solid #334155" }}>{cell}</td>)}</tr>
+              ))}</tbody>
             </table>
           </div>
         )}
@@ -113,14 +83,8 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "worked_example") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #8B5CF6", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#A78BFA", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>
-          🔢 Worked Example
-        </div>
-        {data.expression && (
-          <div style={{ background: "#0F172A", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontFamily: "monospace", color: "#FCD34D", fontSize: 18, textAlign: "center" }}>
-            {data.expression}
-          </div>
-        )}
+        <div style={{ color: "#A78BFA", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>🔢 Worked Example</div>
+        {data.expression && <div style={{ background: "#0F172A", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontFamily: "monospace", color: "#FCD34D", fontSize: 18, textAlign: "center" }}>{data.expression}</div>}
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {(data.steps ?? []).map((s: string, i: number) => (
             <div key={i} style={{ display: "flex", gap: 12, alignItems: "center" }}>
@@ -130,9 +94,7 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
           ))}
         </div>
         {data.result !== undefined && (
-          <div style={{ marginTop: 16, background: "#064E3B", border: "1px solid #10B981", borderRadius: 10, padding: "12px 16px", color: "#6EE7B7", fontWeight: 800, fontSize: 16, textAlign: "center" }}>
-            ✓ Result: {data.result}
-          </div>
+          <div style={{ marginTop: 16, background: "#064E3B", border: "1px solid #10B981", borderRadius: 10, padding: "12px 16px", color: "#6EE7B7", fontWeight: 800, fontSize: 16, textAlign: "center" }}>✓ Result: {data.result}</div>
         )}
       </div>
     );
@@ -141,19 +103,9 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "practice_board") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #F59E0B", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 16, marginBottom: 12 }}>
-          ✏️ {data.headline ?? "Practice Time"}
-        </div>
-        {data.prompt && (
-          <p style={{ color: "#CBD5E1", fontSize: 14, lineHeight: 1.6, marginBottom: 0 }}>{data.prompt}</p>
-        )}
-        {data.items && (
-          <ul style={{ margin: "12px 0 0", paddingLeft: 20 }}>
-            {data.items.map((item: string, i: number) => (
-              <li key={i} style={{ color: "#E2E8F0", fontSize: 14, marginBottom: 8 }}>{item}</li>
-            ))}
-          </ul>
-        )}
+        <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 16, marginBottom: 12 }}>✏️ {data.headline ?? "Practice Time"}</div>
+        {data.prompt && <p style={{ color: "#CBD5E1", fontSize: 14, lineHeight: 1.6, marginBottom: 0 }}>{data.prompt}</p>}
+        {data.items && <ul style={{ margin: "12px 0 0", paddingLeft: 20 }}>{data.items.map((item: string, i: number) => <li key={i} style={{ color: "#E2E8F0", fontSize: 14, marginBottom: 8 }}>{item}</li>)}</ul>}
       </div>
     );
   }
@@ -165,16 +117,10 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
         {(data.scenarios ?? []).map((sc: any, i: number) => (
           <div key={i} style={{ background: "#0F172A", borderRadius: 10, padding: "14px", marginBottom: 10, border: `1px solid ${sc.isScam ? "#EF4444" : "#10B981"}` }}>
             <div style={{ color: "#E2E8F0", fontSize: 13, marginBottom: 6 }}>{sc.message}</div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: sc.isScam ? "#EF4444" : "#10B981" }}>
-              {sc.isScam ? "🚫 SCAM" : "✅ SAFE"} — {sc.reason}
-            </div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: sc.isScam ? "#EF4444" : "#10B981" }}>{sc.isScam ? "🚫 SCAM" : "✅ SAFE"} — {sc.reason}</div>
           </div>
         ))}
-        {data.scenario && (
-          <div style={{ background: "#0F172A", borderRadius: 10, padding: "14px", color: "#FDE68A", fontSize: 14 }}>
-            {data.scenario}
-          </div>
-        )}
+        {data.scenario && <div style={{ background: "#0F172A", borderRadius: 10, padding: "14px", color: "#FDE68A", fontSize: 14 }}>{data.scenario}</div>}
       </div>
     );
   }
@@ -182,9 +128,7 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "budget_planner" || type === "shopping_simulation") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #10B981", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>
-          {type === "budget_planner" ? "💰 Budget Planner" : "🛒 Shopping Challenge"}
-        </div>
+        <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>{type === "budget_planner" ? "💰 Budget Planner" : "🛒 Shopping Challenge"}</div>
         {data.budget !== undefined && (
           <div style={{ background: "#064E3B", borderRadius: 10, padding: "12px 16px", marginBottom: 14, display: "flex", justifyContent: "space-between" }}>
             <span style={{ color: "#A7F3D0", fontSize: 13 }}>Total Budget</span>
@@ -194,57 +138,34 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
         {(data.items ?? data.categories ?? []).map((item: any, i: number) => (
           <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #334155" }}>
             <span style={{ color: "#CBD5E1", fontSize: 13 }}>{item.name ?? item.category ?? item}</span>
-            {item.cost !== undefined && (
-              <span style={{ color: "#FCD34D", fontWeight: 700, fontSize: 13 }}>₹{item.cost}</span>
-            )}
+            {item.cost !== undefined && <span style={{ color: "#FCD34D", fontWeight: 700, fontSize: 13 }}>₹{item.cost}</span>}
           </div>
         ))}
-        {data.challenge && (
-          <div style={{ marginTop: 14, background: "rgba(245,158,11,0.1)", border: "1px solid #F59E0B", borderRadius: 8, padding: "10px 14px", color: "#FDE68A", fontSize: 13 }}>
-            Challenge: {data.challenge}
-          </div>
-        )}
+        {data.challenge && <div style={{ marginTop: 14, background: "rgba(245,158,11,0.1)", border: "1px solid #F59E0B", borderRadius: 8, padding: "10px 14px", color: "#FDE68A", fontSize: 13 }}>Challenge: {data.challenge}</div>}
       </div>
     );
   }
 
   if (type === "recap_summary") {
     return (
-      <div style={{ background: "linear-gradient(135deg, #1E293B, #0F172A)", border: "2px solid #10B981", borderRadius: 20, padding: "28px 24px", textAlign: "center" }}>
+      <div style={{ background: "linear-gradient(135deg,#1E293B,#0F172A)", border: "2px solid #10B981", borderRadius: 20, padding: "28px 24px", textAlign: "center" }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
         <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 20, marginBottom: 16 }}>{data.title ?? "Lesson Complete!"}</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, textAlign: "left" }}>
           {(data.keyPoints ?? data.points ?? []).map((pt: string, i: number) => (
-            <div key={i} style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)", borderRadius: 8, padding: "10px 12px", color: "#A7F3D0", fontSize: 12, lineHeight: 1.5 }}>
-              ✓ {pt}
-            </div>
+            <div key={i} style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)", borderRadius: 8, padding: "10px 12px", color: "#A7F3D0", fontSize: 12, lineHeight: 1.5 }}>✓ {pt}</div>
           ))}
         </div>
       </div>
     );
   }
 
-  if (type === "atm_simulator") {
-    return <div style={{ display: "flex", justifyContent: "center" }}><AtmSimulator userId={101} /></div>;
-  }
+  if (type === "atm_simulator")       return <div style={{ display: "flex", justifyContent: "center" }}><AtmSimulator userId={101} /></div>;
+  if (type === "upi_simulator")       return <div style={{ display: "flex", justifyContent: "center" }}><UpiSimulator userId={101} /></div>;
+  if (type === "bank_simulator")      return <BankPortal userId={101} />;
+  if (type === "pocket_money_planner") return <PocketMoneyPlanner />;
+  if (type === "passbook_viewer")     return <PassbookViewer />;
 
-  if (type === "upi_simulator") {
-    return <div style={{ display: "flex", justifyContent: "center" }}><UpiSimulator userId={101} /></div>;
-  }
-
-  if (type === "bank_simulator") {
-    return <BankPortal userId={101} />;
-  }
-
-  if (type === "pocket_money_planner") {
-    return <PocketMoneyPlanner />;
-  }
-
-  if (type === "passbook_viewer") {
-    return <PassbookViewer />;
-  }
-
-  // fallback
   return (
     <div style={{ background: "#1E293B", borderRadius: 20, padding: "28px 24px", color: "#CBD5E1", fontSize: 14, lineHeight: 1.7 }}>
       {data.headline && <div style={{ color: "#F59E0B", fontWeight: 800, fontSize: 16, marginBottom: 10 }}>{data.headline}</div>}
@@ -254,16 +175,7 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
 }
 
 // ─── Chat Panel ───────────────────────────────────────────────────────────────
-
-function ChatPanel({
-  lesson,
-  step,
-  onClose,
-}: {
-  lesson: MoneyMindLessonPayload;
-  step: MoneyMindLessonStep;
-  onClose: () => void;
-}) {
+function ChatPanel({ lesson, step, onClose }: { lesson: MoneyMindLessonPayload; step: MoneyMindLessonStep; onClose: () => void }) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<{ role: "user" | "ai"; text: string }[]>([
@@ -271,9 +183,7 @@ function ChatPanel({
   ]);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [history]);
+  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [history]);
 
   const send = async () => {
     const q = input.trim();
@@ -286,11 +196,8 @@ function ChatPanel({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          lessonId: lesson.lesson.id,
-          lessonTitle: lesson.lesson.title,
-          stepLabel: step.label,
-          stepTutorText: step.tutorText,
-          question: q,
+          lessonId: lesson.lesson.id, lessonTitle: lesson.lesson.title,
+          stepLabel: step.label, stepTutorText: step.tutorText, question: q,
           history: history.map(m => ({ role: m.role === "ai" ? "assistant" : "user", content: m.text })),
         }),
       });
@@ -303,12 +210,7 @@ function ChatPanel({
   };
 
   return (
-    <div style={{
-      position: "fixed", right: 0, top: 0, bottom: 0, width: "min(380px, 100vw)",
-      background: "#0F172A", borderLeft: "1px solid #1E3A5F", display: "flex", flexDirection: "column",
-      zIndex: 200, boxShadow: "-8px 0 24px rgba(0,0,0,0.4)",
-    }}>
-      {/* Header */}
+    <div style={{ position: "fixed", right: 0, top: 0, bottom: 0, width: "min(380px,100vw)", background: "#0F172A", borderLeft: "1px solid #1E3A5F", display: "flex", flexDirection: "column", zIndex: 200, boxShadow: "-8px 0 24px rgba(0,0,0,0.4)" }}>
       <div style={{ padding: "16px 20px", borderBottom: "1px solid #1E293B", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ color: "#fff", fontWeight: 800, fontSize: 15 }}>🤖 Ask Meera</div>
@@ -316,54 +218,26 @@ function ChatPanel({
         </div>
         <button onClick={onClose} style={{ background: "none", border: "none", color: "#64748B", cursor: "pointer", fontSize: 20 }}>✕</button>
       </div>
-
-      {/* Messages */}
       <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
         {history.map((m, i) => (
           <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
-            <div style={{
-              maxWidth: "82%", padding: "10px 14px", borderRadius: 14,
-              background: m.role === "user" ? "#3B82F6" : "#1E293B",
-              color: m.role === "user" ? "#fff" : "#E2E8F0",
-              fontSize: 13, lineHeight: 1.6,
-              borderTopRightRadius: m.role === "user" ? 4 : 14,
-              borderTopLeftRadius: m.role === "ai" ? 4 : 14,
-            }}>
+            <div style={{ maxWidth: "82%", padding: "10px 14px", borderRadius: 14, background: m.role === "user" ? "#3B82F6" : "#1E293B", color: m.role === "user" ? "#fff" : "#E2E8F0", fontSize: 13, lineHeight: 1.6, borderTopRightRadius: m.role === "user" ? 4 : 14, borderTopLeftRadius: m.role === "ai" ? 4 : 14 }}>
               {m.text}
             </div>
           </div>
         ))}
-        {loading && (
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
-            <div style={{ background: "#1E293B", borderRadius: 14, padding: "10px 14px", color: "#64748B", fontSize: 13 }}>Meera is thinking…</div>
-          </div>
-        )}
+        {loading && <div style={{ display: "flex", justifyContent: "flex-start" }}><div style={{ background: "#1E293B", borderRadius: 14, padding: "10px 14px", color: "#64748B", fontSize: 13 }}>Meera is thinking…</div></div>}
         <div ref={bottomRef} />
       </div>
-
-      {/* Input */}
       <div style={{ padding: "12px 16px", borderTop: "1px solid #1E293B", display: "flex", gap: 10 }}>
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && send()}
-          placeholder="Ask anything about this lesson…"
-          style={{ flex: 1, background: "#1E293B", border: "1px solid #334155", borderRadius: 10, padding: "10px 14px", color: "#F1F5F9", fontSize: 13, outline: "none" }}
-        />
-        <button
-          onClick={send}
-          disabled={loading || !input.trim()}
-          style={{ background: "#3B82F6", color: "#fff", border: "none", borderRadius: 10, padding: "10px 16px", fontWeight: 700, cursor: "pointer", opacity: loading ? 0.6 : 1, fontSize: 13 }}
-        >
-          Send
-        </button>
+        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} placeholder="Ask anything…" style={{ flex: 1, background: "#1E293B", border: "1px solid #334155", borderRadius: 10, padding: "10px 14px", color: "#F1F5F9", fontSize: 13, outline: "none" }} />
+        <button onClick={send} disabled={loading || !input.trim()} style={{ background: "#3B82F6", color: "#fff", border: "none", borderRadius: 10, padding: "10px 16px", fontWeight: 700, cursor: "pointer", opacity: loading ? 0.6 : 1, fontSize: 13 }}>Send</button>
       </div>
     </div>
   );
 }
 
 // ─── Main LessonPlayer ────────────────────────────────────────────────────────
-
 export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMindLessonPayload; userId?: number }) {
   const [stepIndex, setStepIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -372,274 +246,450 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
   const [checked, setChecked] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [finishing, setFinishing] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
+  const [viewportWidth, setViewportWidth] = useState(1280);
 
-  const step = lesson.steps[stepIndex];
+  const activeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const speechKeyRef = useRef(0);
+
+  const step      = lesson.steps[stepIndex];
   const totalSteps = lesson.steps.length;
   const isLastStep = stepIndex === totalSteps - 1;
   const hasPractice = !!step.practice;
-  const needsCheck = hasPractice && !checked;
-  const nextLesson = getNextLessonId(lesson.lesson.id);
+  const needsCheck  = hasPractice && !checked;
+  const nextLesson  = getNextLessonId(lesson.lesson.id);
+  const progress    = ((stepIndex + 1) / totalSteps) * 100;
+  const isNarrow    = viewportWidth < 1024;
+
+  // ── Avatar mood / gesture ─────────────────────────────────────────────────
+  const avatarMood = useMemo((): MeeraMood => {
+    if (feedback?.correct) return "celebrating";
+    if (feedback && !feedback.correct) return "concerned";
+    if (isSpeaking) return "encouraging";
+    const id = step.id;
+    if (id === "intro" || id === "intro_card") return "happy";
+    if (id === "concept") return "thinking";
+    if (id === "worked_example") return "serious";
+    if (id === "practice" || id === "practice_board") return "neutral";
+    if (id === "recap" || id === "recap_summary") return "happy";
+    return "neutral";
+  }, [feedback, isSpeaking, step.id]);
+
+  const avatarGesture = useMemo((): MeeraGesture => {
+    const id = step.id;
+    if (id === "intro" || id === "intro_card") return "greet";
+    if (id === "concept") return "explain";
+    if (id === "worked_example") return "write";
+    if (id === "practice" || id === "practice_board") return "question";
+    if (id === "recap" || id === "recap_summary") return "celebrate";
+    return "explain";
+  }, [step.id]);
+
+  // ── Viewport ──────────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sync = () => setViewportWidth(window.innerWidth);
+    sync();
+    window.addEventListener("resize", sync);
+    return () => window.removeEventListener("resize", sync);
+  }, []);
+
+  // ── Keyboard nav ──────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handler = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === "INPUT") return;
+      if (e.key === "ArrowLeft" && stepIndex > 0) moveToStep(stepIndex - 1);
+      if (e.key === "ArrowRight" && !isLastStep && !needsCheck) moveToStep(stepIndex + 1);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepIndex, isLastStep, needsCheck]);
+
+  // ── Voice ─────────────────────────────────────────────────────────────────
+  function stopSpeaking() {
+    speechKeyRef.current += 1;
+    if (activeAudioRef.current) {
+      activeAudioRef.current.pause();
+      activeAudioRef.current.src = "";
+      activeAudioRef.current = null;
+    }
+    if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+    setIsSpeaking(false);
+  }
+
+  function speakWithBrowser(text: string) {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const speak = () => {
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-IN"; utter.rate = 1.05; utter.pitch = 1.1;
+      const voices = window.speechSynthesis.getVoices();
+      const pick =
+        voices.find(v => /google.*en.*in/i.test(v.name)) ||
+        voices.find(v => /microsoft.*neerja|heera|ravi/i.test(v.name)) ||
+        voices.find(v => v.lang === "en-IN") ||
+        voices.find(v => /female|samantha|zira|aria/i.test(v.name)) ||
+        voices.find(v => v.lang.startsWith("en"));
+      if (pick) utter.voice = pick;
+      utter.onstart = () => { setIsSpeaking(true); setVoiceStatus("Playing…"); };
+      utter.onend   = () => { setIsSpeaking(false); setVoiceStatus("Ready"); };
+      utter.onerror = () => { setIsSpeaking(false); };
+      window.speechSynthesis.speak(utter);
+    };
+    const currentVoices = window.speechSynthesis.getVoices();
+    if (currentVoices.length > 0) { speak(); }
+    else { window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.onvoiceschanged = null; speak(); }; setTimeout(speak, 250); }
+  }
+
+  async function speakText(text: string) {
+    const clean = text.trim();
+    if (!clean || !voiceEnabled) return;
+    stopSpeaking();
+    const myKey = speechKeyRef.current;
+    try {
+      setVoiceStatus("Preparing…");
+      const resp = await fetch("/api/voice/tts", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: clean, avatarId: "priya", pace: 0.98 }),
+      });
+      const data = await resp.json().catch(() => null);
+      if (myKey !== speechKeyRef.current) return;
+      if (resp.ok && data?.audioBase64) {
+        const audio = new Audio(`data:${data.mimeType ?? "audio/wav"};base64,${data.audioBase64}`);
+        activeAudioRef.current = audio;
+        audio.onplaying = () => { if (myKey === speechKeyRef.current) { setIsSpeaking(true); setVoiceStatus("Playing…"); } };
+        audio.onended  = () => { if (myKey === speechKeyRef.current) { setIsSpeaking(false); setVoiceStatus("Ready"); } };
+        audio.onerror  = () => { if (myKey === speechKeyRef.current) { setIsSpeaking(false); speakWithBrowser(clean); } };
+        await audio.play();
+        return;
+      }
+      speakWithBrowser(clean);
+    } catch { if (myKey === speechKeyRef.current) speakWithBrowser(clean); }
+  }
+
+  // Auto-speak on step change
+  useEffect(() => {
+    setFeedback(null); setChecked(false); setSelectedAnswer(null); setNumericAnswer("");
+    if (voiceEnabled) void speakText(step.tutorText);
+    else stopSpeaking();
+    return () => { stopSpeaking(); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepIndex]);
+
+  useEffect(() => {
+    if (!voiceEnabled) { stopSpeaking(); setVoiceStatus("Muted"); }
+    else setVoiceStatus("Ready");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [voiceEnabled]);
+
+  // ── Navigation ────────────────────────────────────────────────────────────
+  function moveToStep(idx: number) {
+    setStepIndex(Math.max(0, Math.min(totalSteps - 1, idx)));
+    setFeedback(null); setChecked(false); setSelectedAnswer(null); setNumericAnswer("");
+  }
 
   const checkAnswer = () => {
     if (!step.practice) return;
     const ans = step.practice.mode === "numeric" ? numericAnswer : selectedAnswer;
-    const correct =
-      step.practice.mode === "numeric"
-        ? Math.abs(Number(ans) - Number(step.practice.answer)) < 0.01
-        : String(ans).toLowerCase() === String(step.practice.answer).toLowerCase();
-    setFeedback({
-      correct,
-      message: correct
-        ? `Correct! 🎉 ${step.practice.hints?.[0] ?? ""}`
-        : `Not quite. The answer is: ${step.practice.answer}`,
-    });
+    const correct = step.practice.mode === "numeric"
+      ? Math.abs(Number(ans) - Number(step.practice.answer)) < 0.01
+      : String(ans).toLowerCase() === String(step.practice.answer).toLowerCase();
+    setFeedback({ correct, message: correct ? `Correct! 🎉 ${step.practice.hints?.[0] ?? ""}` : `Not quite. The answer is: ${step.practice.answer}` });
     setChecked(true);
+    if (voiceEnabled) void speakText(correct ? "Excellent work! That is correct." : "Not quite — let me explain the answer.");
   };
 
   const advance = async () => {
     if (isLastStep) {
       setFinishing(true);
       await fetch("/api/moneymind/progress/complete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: userId,
-          lesson_id: lesson.lesson.id,
-          level_id: lesson.course.levelId,
-          xp_earned: lesson.lesson.xpReward,
-        }),
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, lesson_id: lesson.lesson.id, level_id: lesson.course.levelId, xp_earned: lesson.lesson.xpReward }),
       }).catch(() => {});
-      // Check if it's the last lesson in the level
-      if (!nextLesson) {
-        window.location.href = `/moneymind/level-complete?level=${lesson.course.levelId}`;
-      } else {
-        window.location.href = `/moneymind/learn/${lesson.course.levelSlug}/${nextLesson}`;
-      }
+      if (!nextLesson) window.location.href = `/moneymind/level-complete?level=${lesson.course.levelId}`;
+      else window.location.href = `/moneymind/learn/${lesson.course.levelSlug}/${nextLesson}`;
       return;
     }
-    setStepIndex(s => s + 1);
-    setSelectedAnswer(null);
-    setNumericAnswer("");
-    setFeedback(null);
-    setChecked(false);
+    moveToStep(stepIndex + 1);
   };
 
-  const progress = ((stepIndex + 1) / totalSteps) * 100;
+  const C = {
+    sidebarBg: "#FFFFFF",
+    headerBg: "#065F46",
+    avatarCard: "linear-gradient(160deg, #064E3B, #065F46, #047857)",
+    mainBg: "#F8FAFC",
+    dark: "#0F172A",
+    green: "#10B981",
+    accent: "#F59E0B",
+  };
 
   return (
-    <div style={{ background: "#030712", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#F1F5F9" }}>
+    <main style={{ minHeight: "100vh", background: C.mainBg, color: C.dark, fontFamily: "'Inter', 'Segoe UI', sans-serif" }}>
       <style>{GLOBAL_CSS}</style>
 
-      {/* Top bar */}
-      <div style={{ background: "#0F172A", borderBottom: "1px solid #1E293B", padding: "0 20px", position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ height: 50, display: "flex", alignItems: "center", gap: 16 }}>
-          <a href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#64748B", textDecoration: "none", fontSize: 13, flexShrink: 0 }}>
-            ← Back
-          </a>
-          <div style={{ flex: 1, background: "#1E293B", borderRadius: 100, height: 7, overflow: "hidden" }}>
-            <div className="mm-progress-shimmer" style={{ height: "100%", width: `${progress}%`, transition: "width 0.5s cubic-bezier(.22,1,.36,1)", borderRadius: 100 }} />
+      {/* ── Top header ────────────────────────────────────────────────────── */}
+      <header style={{ background: C.headerBg, color: "#F8FAFC", padding: "14px 24px", position: "sticky", top: 0, zIndex: 110, borderBottom: "1px solid #064E3B" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <div>
+            <div style={{ fontSize: 11, color: "#A7F3D0", textTransform: "uppercase", letterSpacing: 1.1 }}>{lesson.course.title}</div>
+            <div style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.2 }}>{lesson.lesson.title}</div>
           </div>
+          <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{ background: "#F1F5F9", borderRadius: 100, height: 6, width: 160, overflow: "hidden" }}>
+              <div className="mm-shimmer" style={{ height: "100%", width: `${progress}%`, transition: "width .5s", borderRadius: 100 }} />
+            </div>
+            <button onClick={() => setVoiceEnabled(v => !v)} style={{ border: "1px solid rgba(255,255,255,0.3)", background: voiceEnabled ? "rgba(255,255,255,0.15)" : "transparent", color: "#F8FAFC", borderRadius: 10, padding: "8px 12px", cursor: "pointer", fontWeight: 700, fontSize: 12 }}>
+              {voiceEnabled ? "🔊 Voice on" : "🔇 Voice off"}
+            </button>
+            <Link href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#D1FAE5", textDecoration: "none", fontWeight: 700, fontSize: 13 }}>← Course</Link>
+          </div>
+        </div>
+      </header>
+
+      {/* ── Two-panel layout ──────────────────────────────────────────────── */}
+      <section style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "320px minmax(0,1fr)", minHeight: "calc(100vh - 68px)" }}>
+
+        {/* ──────────── LEFT SIDEBAR ──────────── */}
+        <aside style={{ background: C.sidebarBg, borderRight: "1px solid #E2E8F0", padding: 20, display: "grid", alignContent: "start", gap: 16, position: isNarrow ? "static" : "sticky", top: 68, height: isNarrow ? "auto" : "calc(100vh - 68px)", overflowY: "auto" }}>
+
+          {/* Avatar card */}
+          <div style={{ background: C.avatarCard, borderRadius: 18, padding: 18, color: "#FFFFFF" }}>
+            <div style={{ fontSize: 11, color: "#A7F3D0", textTransform: "uppercase", letterSpacing: 1.1, marginBottom: 10 }}>MoneyMind Coach</div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <MoneyMindAvatar speaking={isSpeaking} mood={avatarMood} gesture={avatarGesture} size={isNarrow ? 120 : 155} />
+            </div>
+            <div style={{ display: "flex", gap: 10, marginTop: 12, flexWrap: "wrap" }}>
+              <button
+                onClick={() => isSpeaking ? stopSpeaking() : void speakText(step.tutorText)}
+                style={{ flex: 1, border: "none", background: "#F8FAFC", color: "#065F46", borderRadius: 10, padding: "10px 12px", cursor: "pointer", fontWeight: 800, fontSize: 12 }}
+              >
+                {isSpeaking ? "⏹ Stop" : "▶ Listen"}
+              </button>
+              <button
+                onClick={() => setVoiceEnabled(v => !v)}
+                style={{ border: "1px solid rgba(255,255,255,0.3)", background: "transparent", color: "#F8FAFC", borderRadius: 10, padding: "10px 12px", cursor: "pointer", fontWeight: 700, fontSize: 12 }}
+              >
+                {voiceEnabled ? "Mute" : "Unmute"}
+              </button>
+            </div>
+            {voiceStatus && <div style={{ marginTop: 8, fontSize: 11, color: "#A7F3D0" }}>{voiceStatus}</div>}
+            <div key={`speech-${stepIndex}`} className="mm-fade-in" style={{ marginTop: 14, fontSize: 13, lineHeight: 1.75, color: "#D1FAE5" }}>
+              {step.tutorText}
+            </div>
+          </div>
+
+          {/* Step list */}
+          <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 18, padding: 16 }}>
+            <div style={{ fontSize: 12, color: "#64748B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>Lesson Steps</div>
+            <div style={{ display: "grid", gap: 8 }}>
+              {lesson.steps.map((s, i) => {
+                const active = i === stepIndex;
+                const done   = i < stepIndex;
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => moveToStep(i)}
+                    style={{
+                      textAlign: "left",
+                      border: active ? `2px solid ${C.green}` : done ? "1px solid #DCFCE7" : "1px solid #E2E8F0",
+                      background: active ? "#F0FDF4" : done ? "#F9FFF9" : "#FFFFFF",
+                      borderRadius: 12, padding: "10px 12px", cursor: "pointer",
+                    }}
+                  >
+                    <div style={{ fontSize: 11, color: done ? C.green : "#64748B" }}>{done ? "✓ " : ""}Step {i + 1}</div>
+                    <div style={{ fontWeight: 700, color: active ? "#065F46" : "#0F172A", fontSize: 13 }}>{s.label}</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Ask Meera */}
           <button
             onClick={() => setChatOpen(c => !c)}
-            style={{ background: chatOpen ? "#3B82F6" : "#1E293B", border: "1px solid #334155", color: chatOpen ? "#fff" : "#93C5FD", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer", flexShrink: 0, transition: "all .2s" }}
+            style={{ background: chatOpen ? C.green : "#065F46", color: "#FFFFFF", border: "none", borderRadius: 14, padding: "14px 16px", fontWeight: 800, fontSize: 14, cursor: "pointer", textAlign: "left" }}
           >
-            🤖 Ask Meera
+            🤖 Ask Meera →
+            <div style={{ fontSize: 11, fontWeight: 400, color: "#A7F3D0", marginTop: 2 }}>Ask any question about this lesson</div>
           </button>
-        </div>
-        {/* Step dots */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 6, paddingBottom: 8 }}>
-          {lesson.steps.map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: i === stepIndex ? 20 : 7,
-                height: 7,
-                borderRadius: 4,
-                background: i < stepIndex ? "#10B981" : i === stepIndex ? "#3B82F6" : "#334155",
-                transition: "all 0.35s cubic-bezier(.22,1,.36,1)",
-              }}
-            />
-          ))}
-        </div>
-      </div>
+        </aside>
 
-      {/* Content */}
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "32px 20px 100px" }}>
+        {/* ──────────── RIGHT MAIN ──────────── */}
+        <section style={{ padding: "24px 28px", display: "grid", alignContent: "start", gap: 18, paddingBottom: 48 }}>
 
-        {/* Lesson title */}
-        <div style={{ marginBottom: 24, textAlign: "center" }}>
-          <div style={{ color: "#64748B", fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>
-            {lesson.course.title} · Lesson {lesson.lesson.order}
+          {/* Meta row */}
+          <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "minmax(0,1fr) 130px 130px", gap: 12 }}>
+            <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 16, padding: "14px 18px" }}>
+              <div style={{ fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: 1 }}>Objective</div>
+              <div style={{ fontWeight: 800, fontSize: 18, marginTop: 4, lineHeight: 1.3 }}>{lesson.lesson.objective ?? lesson.lesson.title}</div>
+            </div>
+            <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 16, padding: "14px 18px" }}>
+              <div style={{ fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: 1 }}>XP Reward</div>
+              <div style={{ fontWeight: 800, fontSize: 22, color: C.accent, marginTop: 4 }}>+{lesson.lesson.xpReward}</div>
+            </div>
+            <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 16, padding: "14px 18px" }}>
+              <div style={{ fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: 1 }}>Progress</div>
+              <div style={{ fontWeight: 800, fontSize: 16, marginTop: 4, color: C.green }}>{stepIndex + 1} / {totalSteps}</div>
+            </div>
           </div>
-          <h1 style={{ color: "#F1F5F9", fontWeight: 900, fontSize: "clamp(20px, 4vw, 28px)", margin: "6px 0 0" }}>
-            {lesson.lesson.title}
-          </h1>
-        </div>
 
-        {/* Meera speech bubble */}
-        {/* Meera speech */}
-        <div className="mm-fade-in" key={`speech-${stepIndex}`} style={{ display: "flex", gap: 14, alignItems: "flex-start", marginBottom: 24 }}>
-          <div className="mm-avatar-pulse" style={{ background: "linear-gradient(135deg, #1D4ED8, #7C3AED)", borderRadius: "50%", width: 52, height: 52, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, flexShrink: 0 }}>
-            🤖
+          {/* Step dots */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 6 }}>
+            {lesson.steps.map((_, i) => (
+              <div key={i} onClick={() => moveToStep(i)} style={{
+                width: i === stepIndex ? 24 : 8, height: 8, borderRadius: 4,
+                background: i < stepIndex ? C.green : i === stepIndex ? "#065F46" : "#CBD5E1",
+                transition: "all 0.35s", cursor: "pointer",
+              }} />
+            ))}
           </div>
-          <div style={{ background: "#1E293B", border: "1px solid #3B82F6", borderRadius: "0 18px 18px 18px", padding: "14px 18px", color: "#CBD5E1", fontSize: 14, lineHeight: 1.8, flex: 1, position: "relative" }}>
-            <div style={{ position: "absolute", top: -6, left: -1, width: 12, height: 12, background: "#1E293B", borderLeft: "1px solid #3B82F6", borderTop: "1px solid #3B82F6", transform: "rotate(45deg)" }} />
-            {step.tutorText}
+
+          {/* Step label */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <span style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)", color: "#065F46", borderRadius: 100, padding: "5px 20px", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
+              {step.label}
+            </span>
           </div>
-        </div>
 
-        {/* Step label chip */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
-          <span style={{ background: "rgba(59,130,246,0.12)", border: "1px solid #3B82F640", color: "#60A5FA", borderRadius: 100, padding: "5px 18px", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
-            {step.label}
-          </span>
-        </div>
+          {/* Board */}
+          <div key={`board-${stepIndex}`} className="mm-board-enter">
+            {!["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(step.board.type) && (
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: -14, position: "relative", zIndex: 2 }}>
+                {getBoardIllustration(step.board.type, step.board.data.headline ?? step.board.data.title, step.board.data.emoji)}
+              </div>
+            )}
+            <BoardCard step={step} stepKey={stepIndex} />
+          </div>
 
-        {/* Board — animated on every step change */}
-        <div key={`board-${stepIndex}`} className="mm-board-enter" style={{ marginBottom: 24 }}>
-          {/* Illustration header (non-simulator boards) */}
-          {!["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(step.board.type) && (
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: -16, position: "relative", zIndex: 2 }}>
-              {getBoardIllustration(step.board.type, step.board.data.headline ?? step.board.data.title, step.board.data.emoji)}
+          {/* Explanation */}
+          {step.explanation && (
+            <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.3)", borderRadius: 14, padding: "14px 18px" }}>
+              <div style={{ color: "#B45309", fontWeight: 700, fontSize: 13, marginBottom: 6 }}>💡 {step.explanation.title}</div>
+              <div style={{ color: "#78350F", fontSize: 13, lineHeight: 1.6 }}>{step.explanation.body}</div>
+              {step.explanation.mistakeTip && (
+                <div style={{ marginTop: 10, background: "#FEF2F2", border: "1px solid #FCA5A5", borderRadius: 10, padding: "10px 12px", color: "#991B1B", fontSize: 12 }}>
+                  ⚠️ {step.explanation.mistakeTip}
+                </div>
+              )}
             </div>
           )}
-          <BoardCard step={step} stepKey={stepIndex} />
-        </div>
 
-        {/* Explanation block */}
-        {step.explanation && (
-          <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.3)", borderRadius: 14, padding: "14px 18px", marginBottom: 24 }}>
-            <div style={{ color: "#FCD34D", fontWeight: 700, fontSize: 13, marginBottom: 6 }}>💡 {step.explanation.title}</div>
-            <div style={{ color: "#FDE68A", fontSize: 13, lineHeight: 1.6 }}>{step.explanation.body}</div>
-          </div>
-        )}
+          {/* Practice */}
+          {hasPractice && step.practice && (
+            <div style={{ background: "#FFFFFF", border: `2px solid ${checked ? (feedback?.correct ? C.green : "#EF4444") : "#CBD5E1"}`, borderRadius: 18, padding: "22px 20px" }}>
+              <div style={{ color: "#065F46", fontWeight: 800, fontSize: 13, marginBottom: 14, textTransform: "uppercase", letterSpacing: 0.8 }}>✏️ Quick Check</div>
+              <p style={{ color: "#0F172A", fontSize: 15, fontWeight: 600, marginBottom: 18, lineHeight: 1.5 }}>{step.practice.prompt}</p>
 
-        {/* Practice */}
-        {hasPractice && step.practice && (
-          <div style={{ background: "#1E293B", border: `2px solid ${checked ? (feedback?.correct ? "#10B981" : "#EF4444") : "#3B82F6"}`, borderRadius: 18, padding: "22px 20px", marginBottom: 24 }}>
-            <div style={{ color: "#93C5FD", fontWeight: 800, fontSize: 13, marginBottom: 14, textTransform: "uppercase", letterSpacing: 0.8 }}>
-              ✏️ Quick Check
-            </div>
-            <p style={{ color: "#E2E8F0", fontSize: 15, fontWeight: 600, marginBottom: 18, lineHeight: 1.5 }}>
-              {step.practice.prompt}
-            </p>
+              {step.practice.mode === "mcq" && step.practice.options && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
+                  {step.practice.options.map((opt, i) => {
+                    const isSel   = selectedAnswer === opt;
+                    const isRight = checked && opt === String(step.practice!.answer);
+                    const isWrong = checked && isSel && !isRight;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => !checked && setSelectedAnswer(opt)}
+                        style={{
+                          background: isRight ? "#F0FDF4" : isWrong ? "#FEF2F2" : isSel ? "#EFF6FF" : "#F8FAFC",
+                          border: `2px solid ${isRight ? C.green : isWrong ? "#EF4444" : isSel ? "#3B82F6" : "#E2E8F0"}`,
+                          borderRadius: 12, padding: "12px 14px", color: "#0F172A", fontSize: 13,
+                          fontWeight: isSel ? 700 : 400, cursor: checked ? "default" : "pointer",
+                          textAlign: "left", transition: "all 0.15s",
+                        }}
+                      >
+                        {isRight ? "✓ " : isWrong ? "✗ " : ""}{opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
 
-            {step.practice.mode === "mcq" && step.practice.options && (
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
-                {step.practice.options.map((opt, i) => {
-                  const isSelected = selectedAnswer === opt;
-                  const isCorrect = checked && opt === String(step.practice!.answer);
-                  const isWrong = checked && isSelected && !isCorrect;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => !checked && setSelectedAnswer(opt)}
-                      style={{
-                        background: isCorrect ? "rgba(16,185,129,0.2)" : isWrong ? "rgba(239,68,68,0.2)" : isSelected ? "rgba(59,130,246,0.2)" : "#0F172A",
-                        border: `2px solid ${isCorrect ? "#10B981" : isWrong ? "#EF4444" : isSelected ? "#3B82F6" : "#334155"}`,
-                        borderRadius: 10, padding: "12px 14px", color: "#E2E8F0", fontSize: 13, fontWeight: isSelected ? 700 : 400,
-                        cursor: checked ? "default" : "pointer", textAlign: "left", transition: "all 0.15s",
-                      }}
-                    >
-                      {isCorrect ? "✓ " : isWrong ? "✗ " : ""}{opt}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {step.practice.mode === "numeric" && (
-              <div style={{ marginBottom: 16 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ color: "#F59E0B", fontSize: 20, fontWeight: 800 }}>₹</span>
+              {(step.practice.mode === "numeric" || step.practice.mode === "text") && (
+                <div style={{ marginBottom: 16 }}>
                   <input
-                    type="number"
+                    type={step.practice.mode === "numeric" ? "number" : "text"}
                     value={numericAnswer}
                     onChange={e => !checked && setNumericAnswer(e.target.value)}
-                    placeholder="Enter your answer"
-                    style={{ background: "#0F172A", border: `2px solid ${checked ? (feedback?.correct ? "#10B981" : "#EF4444") : "#334155"}`, borderRadius: 10, padding: "12px 16px", color: "#F1F5F9", fontSize: 16, fontWeight: 700, width: 160, outline: "none" }}
+                    onKeyDown={e => e.key === "Enter" && !checked && checkAnswer()}
+                    placeholder={step.practice.mode === "numeric" ? "Enter your answer" : "Type your answer…"}
+                    style={{ width: "100%", background: "#F8FAFC", border: `2px solid ${checked ? (feedback?.correct ? C.green : "#EF4444") : "#E2E8F0"}`, borderRadius: 12, padding: "12px 16px", color: "#0F172A", fontSize: 16, fontWeight: 700, outline: "none", boxSizing: "border-box", transition: "border-color .2s" }}
+                    onFocus={e => { if (!checked) e.currentTarget.style.borderColor = C.green; }}
+                    onBlur={e => { if (!checked) e.currentTarget.style.borderColor = "#E2E8F0"; }}
                   />
                 </div>
-              </div>
-            )}
+              )}
 
-            {step.practice.mode === "text" && (
-              <div style={{ marginBottom: 16 }}>
-                <input
-                  type="text"
-                  value={numericAnswer}
-                  onChange={e => !checked && setNumericAnswer(e.target.value)}
-                  placeholder="Type your answer…"
-                  style={{ width: "100%", background: "#0F172A", border: `2px solid ${checked ? (feedback?.correct ? "#10B981" : "#EF4444") : "#334155"}`, borderRadius: 10, padding: "12px 16px", color: "#F1F5F9", fontSize: 14, outline: "none", boxSizing: "border-box" }}
-                />
-              </div>
-            )}
+              {feedback && (
+                <div className={feedback.correct ? "mm-correct" : "mm-fade-in"} style={{
+                  background: feedback.correct ? "#F0FDF4" : "#FEF2F2",
+                  border: `1px solid ${feedback.correct ? C.green : "#FCA5A5"}`,
+                  borderRadius: 12, padding: "14px 16px",
+                  color: feedback.correct ? "#065F46" : "#991B1B",
+                  fontSize: 14, fontWeight: 700, marginBottom: 12,
+                  display: "flex", alignItems: "center", gap: 10,
+                }}>
+                  <span style={{ fontSize: 22 }}>{feedback.correct ? "🎉" : "💡"}</span>
+                  <span>{feedback.message}</span>
+                </div>
+              )}
 
-            {feedback && (
-              <div className={feedback.correct ? "mm-correct-burst" : "mm-fade-in"} style={{ background: feedback.correct ? "rgba(16,185,129,0.15)" : "rgba(239,68,68,0.15)", border: `1px solid ${feedback.correct ? "#10B981" : "#EF4444"}`, borderRadius: 12, padding: "14px 16px", color: feedback.correct ? "#6EE7B7" : "#FCA5A5", fontSize: 14, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 22 }}>{feedback.correct ? "🎉" : "💡"}</span>
-                <span>{feedback.message}</span>
-              </div>
-            )}
-            {/* Confetti particles on correct */}
-            {feedback?.correct && (
-              <div style={{ position: "relative", height: 0, overflow: "visible", pointerEvents: "none" }}>
-                {["#F59E0B","#10B981","#3B82F6","#EF4444","#8B5CF6","#FCD34D"].map((color, i) => (
-                  <div key={i} style={{
-                    position: "absolute",
-                    top: -20,
-                    left: `${15 + i * 13}%`,
-                    width: 8, height: 8,
-                    background: color,
-                    borderRadius: i % 2 === 0 ? "50%" : 2,
-                    animation: `mmConfetti ${0.8 + i * 0.1}s ease-out ${i * 0.07}s both`,
-                  }} />
-                ))}
-              </div>
-            )}
+              {feedback?.correct && (
+                <div style={{ position: "relative", height: 0, overflow: "visible", pointerEvents: "none" }}>
+                  {["#F59E0B","#10B981","#3B82F6","#EF4444","#8B5CF6","#FCD34D"].map((color, i) => (
+                    <div key={i} style={{ position: "absolute", top: -20, left: `${15 + i * 13}%`, width: 8, height: 8, background: color, borderRadius: i % 2 === 0 ? "50%" : 2, animation: `mmConfetti ${0.8 + i * 0.1}s ease-out ${i * 0.07}s both` }} />
+                  ))}
+                </div>
+              )}
 
-            {!checked && (
-              <button
-                onClick={checkAnswer}
-                disabled={!selectedAnswer && !numericAnswer}
-                style={{ background: "#3B82F6", color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 800, fontSize: 14, cursor: "pointer", opacity: (!selectedAnswer && !numericAnswer) ? 0.5 : 1 }}
-              >
-                Check Answer
-              </button>
-            )}
+              {!checked && (
+                <button
+                  onClick={checkAnswer}
+                  disabled={!selectedAnswer && !numericAnswer}
+                  style={{ background: C.green, color: "#fff", border: "none", borderRadius: 12, padding: "12px 28px", fontWeight: 800, fontSize: 14, cursor: "pointer", opacity: (!selectedAnswer && !numericAnswer) ? 0.5 : 1, boxShadow: "0 4px 12px rgba(16,185,129,0.3)" }}
+                >
+                  Check Answer
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Navigation */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 8 }}>
+            <button
+              onClick={() => moveToStep(stepIndex - 1)}
+              disabled={stepIndex === 0}
+              style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", color: "#64748B", borderRadius: 12, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: stepIndex === 0 ? "not-allowed" : "pointer", opacity: stepIndex === 0 ? 0.4 : 1 }}
+            >
+              ← Prev
+            </button>
+
+            <div style={{ fontSize: 12, color: "#94A3B8", fontWeight: 600 }}>Step {stepIndex + 1} of {totalSteps}</div>
+
+            <button
+              onClick={advance}
+              disabled={needsCheck || finishing}
+              style={{
+                background: isLastStep ? `linear-gradient(90deg, #FCD34D, ${C.accent})` : C.green,
+                color: isLastStep ? "#451A03" : "#fff",
+                border: "none", borderRadius: 12, padding: "12px 28px",
+                fontWeight: 900, fontSize: 14,
+                cursor: (needsCheck || finishing) ? "not-allowed" : "pointer",
+                opacity: (needsCheck || finishing) ? 0.5 : 1,
+                boxShadow: needsCheck ? "none" : isLastStep ? "0 4px 12px rgba(245,158,11,0.4)" : "0 4px 12px rgba(16,185,129,0.3)",
+              }}
+            >
+              {finishing ? "Saving…" : isLastStep ? "🏆 Complete Lesson" : "Next →"}
+            </button>
           </div>
-        )}
-      </div>
+        </section>
+      </section>
 
-      {/* Bottom nav bar */}
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#0F172A", borderTop: "1px solid #1E293B", padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 100 }}>
-        <button
-          onClick={() => { if (stepIndex > 0) { setStepIndex(s => s - 1); setSelectedAnswer(null); setNumericAnswer(""); setFeedback(null); setChecked(false); } }}
-          disabled={stepIndex === 0}
-          style={{ background: "#1E293B", border: "1px solid #334155", color: "#94A3B8", borderRadius: 10, padding: "12px 20px", fontWeight: 700, fontSize: 14, cursor: stepIndex === 0 ? "not-allowed" : "pointer", opacity: stepIndex === 0 ? 0.4 : 1 }}
-        >
-          ← Prev
-        </button>
-
-        <div style={{ color: "#475569", fontSize: 12 }}>Step {stepIndex + 1} of {totalSteps}</div>
-
-        <button
-          onClick={advance}
-          disabled={needsCheck || finishing}
-          style={{
-            background: isLastStep ? "linear-gradient(90deg, #FCD34D, #F59E0B)" : "#3B82F6",
-            color: isLastStep ? "#451A03" : "#fff",
-            border: "none", borderRadius: 10, padding: "12px 24px", fontWeight: 900, fontSize: 14,
-            cursor: (needsCheck || finishing) ? "not-allowed" : "pointer",
-            opacity: (needsCheck || finishing) ? 0.5 : 1,
-          }}
-        >
-          {finishing ? "Saving…" : isLastStep ? "🏆 Complete Lesson" : "Next →"}
-        </button>
-      </div>
-
-      {/* Chat panel */}
       {chatOpen && <ChatPanel lesson={lesson} step={step} onClose={() => setChatOpen(false)} />}
-    </div>
+    </main>
   );
 }

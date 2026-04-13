@@ -22,7 +22,7 @@ export default function UpiSimulator({ userId = 101 }) {
     try {
       const resp = await fetch(`${API_BASE}/merchants`);
       const data = await resp.json();
-      setMerchants(data);
+      setMerchants(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
     }
@@ -64,7 +64,7 @@ export default function UpiSimulator({ userId = 101 }) {
 
   return (
     <div style={{
-      width: '360px',
+      width: 'min(360px, 100%)',
       height: '640px',
       background: '#fff',
       borderRadius: '40px',

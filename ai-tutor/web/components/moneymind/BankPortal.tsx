@@ -20,7 +20,7 @@ export default function BankPortal({ userId = 1 }) {
     try {
       const resp = await fetch(`${API_BASE}/bank/accounts/${userId}`);
       const data = await resp.json();
-      setAccounts(data);
+      setAccounts(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
     }
@@ -47,7 +47,7 @@ export default function BankPortal({ userId = 1 }) {
     try {
       const resp = await fetch(`${API_BASE}/bank/transactions/${account.id}`);
       const data = await resp.json();
-      setTransactions(data);
+      setTransactions(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
     }

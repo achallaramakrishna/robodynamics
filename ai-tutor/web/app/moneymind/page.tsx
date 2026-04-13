@@ -32,7 +32,8 @@ function LevelCard({ level, index }: { level: MoneyMindLevel; index: number }) {
     "linear-gradient(135deg, #1D4ED8, #3B82F6)",
     "linear-gradient(135deg, #D97706, #F59E0B)",
     "linear-gradient(135deg, #6D28D9, #8B5CF6)",
-    "linear-gradient(135deg, #BE185D, #E11D48)"
+    "linear-gradient(135deg, #BE185D, #E11D48)",
+    "linear-gradient(135deg, #B45309, #F43F5E)",
   ];
   
   return (
@@ -125,7 +126,7 @@ export default function MoneyMindPage() {
               </span>
             </h1>
             <p style={{ color: THEME.textSub, fontSize: 17, lineHeight: 1.7, marginBottom: 32, maxWidth: 620, marginLeft: "auto", marginRight: "auto" }}>
-              Our AI bridges the gap between structured education and actual financial literacy. From understanding "Needs vs Wants" to mastering "Compound Interest" and "Startup Equity," we structure financial sovereignty via a 5-Tier interactive journey.
+              Our AI bridges the gap between structured education and actual financial literacy. From understanding "Needs vs Wants" to mastering "Compound Interest" and "Startup Equity," we structure financial sovereignty via a 6-Tier interactive journey.
             </p>
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginBottom: 36 }}>
@@ -148,14 +149,14 @@ export default function MoneyMindPage() {
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 900, color: THEME.textMain, margin: "0 0 12px" }}>
-              The 5 Growth Tiers
+              The 6 Growth Tiers
             </h2>
             <p style={{ color: THEME.textSub, fontSize: 16, maxWidth: 560, margin: "0 auto" }}>
               Master compounding, tax strategy, and capital allocation through interactive real-world AI situations.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 28, position: "relative" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: 28, position: "relative" }}>
             {MONEYMIND_LEVELS.map((level, i) => (
               <LevelCard key={level.id} level={level} index={i} />
             ))}
@@ -166,10 +167,10 @@ export default function MoneyMindPage() {
       {/* ── 5-Level Bundle Upsell ────────────────────────────────────────────────── */}
       <section style={{ padding: "0 32px 64px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div style={{ background: "linear-gradient(135deg, #1E293B, #0F172A)", border: `2px solid ${THEME.accentSecondary}`, borderRadius: 20, padding: "40px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 28, boxShadow: `0 12px 48px ${THEME.accentSecondary}20` }}>
+          <div style={{ background: "linear-gradient(135deg, #1E293B, #0F172A)", border: `2px solid ${THEME.accentSecondary}`, borderRadius: 20, padding: "clamp(24px, 4vw, 40px) clamp(20px, 4vw, 48px)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 28, boxShadow: `0 12px 48px ${THEME.accentSecondary}20` }}>
             <div>
               <div style={{ color: THEME.accentPrimary, fontSize: 13, fontWeight: 900, marginBottom: 6, letterSpacing: 0.8, textTransform: "uppercase" }}>Generational Wealth Bundle</div>
-              <div style={{ color: "#fff", fontWeight: 900, fontSize: 26, marginBottom: 8 }}>Get All 5 Money Mind Levels</div>
+              <div style={{ color: "#fff", fontWeight: 900, fontSize: 26, marginBottom: 8 }}>Get All 6 Money Mind Levels</div>
               <p style={{ color: THEME.textSub, fontSize: 15, margin: "0 0 16px", maxWidth: 480, lineHeight: 1.6 }}>
                 Secure lifetime access to the entire financial literacy syllabus. Set your children up for absolute fiscal freedom before they even hit college.
               </p>
@@ -179,7 +180,7 @@ export default function MoneyMindPage() {
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 200 }}>
-              <a href="/checkout?bundle=moneymind-5-levels" style={{ background: THEME.accentPrimary, color: "#451A03", borderRadius: 10, padding: "14px 32px", fontWeight: 800, fontSize: 15, textDecoration: "none", textAlign: "center" }}>
+              <a href="/checkout?bundle=moneymind-6-levels" style={{ background: THEME.accentPrimary, color: "#451A03", borderRadius: 10, padding: "14px 32px", fontWeight: 800, fontSize: 15, textDecoration: "none", textAlign: "center" }}>
                 Unlock All Levels
               </a>
             </div>

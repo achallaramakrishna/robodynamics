@@ -23,7 +23,7 @@ export default function AtmSimulator({ userId = 1 }) {
     try {
       const resp = await fetch(`${API_BASE}/wallet/${userId}`);
       const data = await resp.json();
-      setWallet(data.balance);
+      setWallet(data?.balance ?? 0);
     } catch (e) {
       console.error("Failed to fetch wallet", e);
     }
@@ -33,8 +33,9 @@ export default function AtmSimulator({ userId = 1 }) {
     try {
       const resp = await fetch(`${API_BASE}/bank/accounts/${userId}`);
       const data = await resp.json();
-      setAccounts(data);
-      if (data.length > 0) setSelectedAccount(data[0]);
+      const accs = Array.isArray(data) ? data : [];
+      setAccounts(accs);
+      if (accs.length > 0) setSelectedAccount(accs[0]);
     } catch (e) {
       console.error("Failed to fetch accounts", e);
     }

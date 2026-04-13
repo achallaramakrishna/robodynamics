@@ -25,8 +25,10 @@ export default function SavingsGoalTracker({ userId = 101 }) {
         fetch(`${API_BASE}/goals/${userId}`),
         fetch(`${API_BASE}/wallet/${userId}`)
       ]);
-      setGoals(await goalsResp.json());
-      setWallet((await walletResp.json()).balance);
+      const goalsData = await goalsResp.json();
+      setGoals(Array.isArray(goalsData) ? goalsData : []);
+      const walletData = await walletResp.json();
+      setWallet(walletData?.balance ?? 0);
     } catch (e) {
       console.error(e);
     }

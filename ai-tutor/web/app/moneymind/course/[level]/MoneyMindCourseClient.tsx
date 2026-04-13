@@ -11,7 +11,7 @@ function statusColor(status: string) {
   return { bg: "#E2E8F0", fg: "#475569", label: "Locked" };
 }
 
-export default function MoneyMindCourseClient({ payload }: { payload: MoneyMindCoursePayload }) {
+export default function MoneyMindCourseClient({ payload, userId = 101 }: { payload: MoneyMindCoursePayload; userId?: number }) {
   const [selectedId, setSelectedId] = useState(payload.selectedLesson.id);
   const selectedLesson = useMemo(
     () => payload.lessons.find((lesson) => lesson.id === selectedId) ?? payload.lessons[0],
@@ -36,9 +36,9 @@ export default function MoneyMindCourseClient({ payload }: { payload: MoneyMindC
           `Explore ${selectedLesson.skill} with interactive labs.`,
           `Earn MoneyMind XP and build real-world knowledge.`,
         ],
-        startUrl: `/ai-tutor/tutor?courseId=financial_literacy&chapterCode=${selectedLesson.id.replace("MM_", "FIN_")}`,
+        startUrl: `/moneymind/learn/${payload.course.levelSlug}/${selectedLesson.id}`,
         resumeUrl: selectedLesson.status === "current" || selectedLesson.status === "completed"
-          ? `/ai-tutor/tutor?courseId=financial_literacy&chapterCode=${selectedLesson.id.replace("MM_", "FIN_")}&resume=1`
+          ? `/moneymind/learn/${payload.course.levelSlug}/${selectedLesson.id}`
           : undefined,
       };
   }, [selectedLesson, payload.selectedLesson]);

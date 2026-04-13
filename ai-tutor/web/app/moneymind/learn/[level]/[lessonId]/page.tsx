@@ -9,7 +9,9 @@ interface Props {
 export function generateStaticParams() {
   const pairs = [
     { level: "level-1", lessonId: "MM_L1_1" }, { level: "level-1", lessonId: "MM_L1_2" },
+    { level: "level-1", lessonId: "MM_L1_3" }, { level: "level-1", lessonId: "MM_L1_4" },
     { level: "level-2", lessonId: "MM_L2_1" }, { level: "level-2", lessonId: "MM_L2_2" },
+    { level: "level-2", lessonId: "MM_L2_3" }, { level: "level-2", lessonId: "MM_L2_4" },
     { level: "level-3", lessonId: "MM_L3_1" }, { level: "level-3", lessonId: "MM_L3_2" },
     { level: "level-3", lessonId: "MM_L3_3" }, { level: "level-3", lessonId: "MM_L3_4" },
     { level: "level-4", lessonId: "MM_L4_1" }, { level: "level-4", lessonId: "MM_L4_2" },

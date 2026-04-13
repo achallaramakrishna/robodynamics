@@ -6,6 +6,8 @@ import { getNextLessonId } from "@/lib/moneyMindLessonRegistry";
 import AtmSimulator from "@/components/moneymind/AtmSimulator";
 import UpiSimulator from "@/components/moneymind/UpiSimulator";
 import BankPortal from "@/components/moneymind/BankPortal";
+import PocketMoneyPlanner from "@/components/moneymind/PocketMoneyPlanner";
+import PassbookViewer from "@/components/moneymind/PassbookViewer";
 
 // ─── Board Renderer ───────────────────────────────────────────────────────────
 
@@ -205,6 +207,14 @@ function BoardCard({ step }: { step: MoneyMindLessonStep }) {
 
   if (type === "bank_simulator") {
     return <BankPortal userId={101} />;
+  }
+
+  if (type === "pocket_money_planner") {
+    return <PocketMoneyPlanner />;
+  }
+
+  if (type === "passbook_viewer") {
+    return <PassbookViewer />;
   }
 
   // fallback

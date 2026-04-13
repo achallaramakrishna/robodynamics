@@ -1,6 +1,8 @@
 import type { MoneyMindLessonPayload } from "./moneyMindLessonTypes";
 import { MM_L1_1_LESSON, MM_L1_2_LESSON } from "./moneyMindLessons";
+import { MM_L1_3_LESSON, MM_L1_4_LESSON } from "./moneyMindLessonsL1Rest";
 import { MM_L2_1_LESSON, MM_L2_2_LESSON } from "./moneyMindLessonsL2";
+import { MM_L2_3_LESSON, MM_L2_4_LESSON } from "./moneyMindLessonsL2Rest";
 import { MM_L3_1_LESSON, MM_L3_2_LESSON, MM_L3_3_LESSON, MM_L3_4_LESSON } from "./moneyMindLessonsL3";
 import { MM_L4_1_LESSON, MM_L4_2_LESSON, MM_L4_3_LESSON, MM_L4_4_LESSON } from "./moneyMindLessonsL4";
 import { MM_L5_1_LESSON, MM_L5_2_LESSON, MM_L5_3_LESSON, MM_L5_4_LESSON } from "./moneyMindLessonsL5";
@@ -9,8 +11,12 @@ import { MM_L6_1_LESSON, MM_L6_2_LESSON, MM_L6_3_LESSON, MM_L6_4_LESSON } from "
 export const MONEYMIND_LESSON_REGISTRY: Record<string, MoneyMindLessonPayload> = {
   MM_L1_1: MM_L1_1_LESSON,
   MM_L1_2: MM_L1_2_LESSON,
+  MM_L1_3: MM_L1_3_LESSON,
+  MM_L1_4: MM_L1_4_LESSON,
   MM_L2_1: MM_L2_1_LESSON,
   MM_L2_2: MM_L2_2_LESSON,
+  MM_L2_3: MM_L2_3_LESSON,
+  MM_L2_4: MM_L2_4_LESSON,
   MM_L3_1: MM_L3_1_LESSON,
   MM_L3_2: MM_L3_2_LESSON,
   MM_L3_3: MM_L3_3_LESSON,

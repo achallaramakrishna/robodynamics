@@ -93,55 +93,85 @@ export function BarterVsMoneyViz() {
   );
 }
 
-// ─── Viz 2: Rupee Notes Gallery (MM_L1_1 / visual_id) ─────────────────────────
-const NOTES = [
-  { value: 10,  color: "#7C3AED", bg: "#4C1D95", accent: "#A78BFA", emoji: "🟣" },
-  { value: 20,  color: "#059669", bg: "#064E3B", accent: "#6EE7B7", emoji: "🟢" },
-  { value: 50,  color: "#0369A1", bg: "#0C4A6E", accent: "#7DD3FC", emoji: "🔵" },
-  { value: 100, bg: "#1E3A5F",   color: "#2563EB", accent: "#93C5FD", emoji: "💙" },
-];
+// ─── Viz 2: Real Rupee Notes (MM_L1_1 / visual_id) ────────────────────────────
+function RupeeNote({ value, revealed, delay }: { value: number; revealed: boolean; delay: number }) {
+  const cfg: Record<number, { bg1: string; bg2: string; stripe: string; text: string; name: string; hindi: string }> = {
+    10:  { bg1: "#6D28D9", bg2: "#4C1D95", stripe: "#A78BFA", text: "#EDE9FE", name: "Violet",           hindi: "दस" },
+    20:  { bg1: "#065F46", bg2: "#064E3B", stripe: "#6EE7B7", text: "#D1FAE5", name: "Greenish Yellow",  hindi: "बीस" },
+    50:  { bg1: "#0369A1", bg2: "#1E3A5F", stripe: "#38BDF8", text: "#E0F2FE", name: "Fluorescent Blue", hindi: "पचास" },
+    100: { bg1: "#1D4ED8", bg2: "#1E3A5F", stripe: "#93C5FD", text: "#DBEAFE", name: "Lavender Blue",    hindi: "सौ" },
+  };
+  const c = cfg[value];
+  return (
+    <div style={{
+      opacity: revealed ? 1 : 0,
+      transform: revealed ? "rotateY(0deg) scale(1)" : "rotateY(90deg) scale(.85)",
+      transition: `opacity .5s ${delay}s, transform .6s ${delay}s`,
+      perspective: 800,
+    }}>
+      {/* Note outer */}
+      <div style={{
+        background: `linear-gradient(135deg, ${c.bg1} 0%, ${c.bg2} 100%)`,
+        borderRadius: 10, overflow: "hidden", position: "relative",
+        border: `1.5px solid ${c.stripe}44`,
+        boxShadow: revealed ? `0 6px 24px ${c.bg1}88` : "none",
+        aspectRatio: "2.3 / 1",
+      }}>
+        {/* Security thread (vertical stripe) */}
+        <div style={{ position: "absolute", left: "28%", top: 0, bottom: 0, width: 4, background: `linear-gradient(${c.stripe}, ${c.bg1}, ${c.stripe})`, opacity: .6 }} />
+        {/* Watermark circle (Gandhi position) */}
+        <div style={{ position: "absolute", left: "6%", top: "50%", transform: "translateY(-50%)", width: 36, height: 44, borderRadius: "50%", background: `${c.stripe}22`, border: `1px dashed ${c.stripe}55`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>🧑‍🦳</div>
+        {/* Left band */}
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "28%", background: `${c.bg2}cc`, borderRight: `1px solid ${c.stripe}33`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2 }}>
+          <div style={{ color: c.stripe, fontWeight: 900, fontSize: 9, letterSpacing: .5 }}>भारत</div>
+          <div style={{ color: c.text, fontWeight: 900, fontSize: 9, letterSpacing: .5 }}>INDIA</div>
+        </div>
+        {/* Main content */}
+        <div style={{ marginLeft: "30%", padding: "8px 10px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          {/* Top row */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+            <div>
+              <div style={{ color: c.stripe, fontSize: 8, fontWeight: 700 }}>भारतीय रिज़र्व बैंक</div>
+              <div style={{ color: c.text, fontSize: 7.5 }}>RESERVE BANK OF INDIA</div>
+            </div>
+            <div style={{ color: c.text, fontSize: 8, textAlign: "right", opacity: .7 }}>
+              <div>₹{value}</div>
+            </div>
+          </div>
+          {/* Big denomination */}
+          <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
+            <div style={{ color: c.text, fontWeight: 900, fontSize: 26, lineHeight: 1 }}>₹{value}</div>
+            <div style={{ color: c.stripe, fontWeight: 700, fontSize: 12 }}>{c.hindi}</div>
+          </div>
+          {/* Bottom row */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <div style={{ color: `${c.text}99`, fontSize: 7 }}>Promise to pay bearer</div>
+            <div style={{ background: c.stripe, color: c.bg2, fontSize: 8, fontWeight: 800, padding: "1px 5px", borderRadius: 4 }}>{c.name}</div>
+          </div>
+        </div>
+        {/* Denomination corners */}
+        <div style={{ position: "absolute", top: 4, right: 6, color: c.stripe, fontSize: 9, fontWeight: 900, opacity: .7 }}>{value}</div>
+        <div style={{ position: "absolute", bottom: 4, left: "31%", color: c.stripe, fontSize: 9, fontWeight: 900, opacity: .7 }}>{value}</div>
+      </div>
+    </div>
+  );
+}
 
 export function RupeeNotesViz() {
   const [revealed, setRevealed] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setRevealed(r => r < NOTES.length ? r + 1 : r), 700);
+    const id = setInterval(() => setRevealed(r => r < 4 ? r + 1 : r), 700);
     return () => clearInterval(id);
   }, []);
 
   return (
     <div style={{ background: "#0F172A", borderRadius: 20, padding: "20px 16px" }}>
       <style>{GLOBAL_VIZ_CSS}</style>
-      <div style={{ textAlign: "center", color: "#FCD34D", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 16 }}>
-        Indian Rupee Notes — Spot the Difference!
+      <div style={{ textAlign: "center", color: "#FCD34D", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 14 }}>
+        Indian Rupee Notes — Spot the Colors!
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-        {NOTES.map((note, i) => (
-          <div
-            key={note.value}
-            style={{
-              background: `linear-gradient(135deg,${note.bg},${note.color}33)`,
-              border: `2px solid ${note.accent}`,
-              borderRadius: 14,
-              padding: "16px 14px",
-              opacity: i < revealed ? 1 : 0,
-              transform: i < revealed ? "scale(1)" : "scale(.8)",
-              transition: "opacity .5s, transform .5s",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Gandhi watermark area */}
-            <div style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", opacity: .15, fontSize: 36 }}>🧑‍🦳</div>
-            <div style={{ fontSize: 24, fontWeight: 900, color: note.accent, lineHeight: 1 }}>₹{note.value}</div>
-            <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 4 }}>भारत • INDIA</div>
-            <div style={{ marginTop: 8, display: "flex", gap: 4, alignItems: "center" }}>
-              <div style={{ width: 12, height: 12, background: note.accent, borderRadius: "50%" }} />
-              <div style={{ fontSize: 10, color: note.accent, fontWeight: 600 }}>
-                {note.value === 50 ? "Fluorescent Blue" : note.value === 20 ? "Emerald Green" : note.value === 10 ? "Violet" : "Marine Blue"}
-              </div>
-            </div>
-          </div>
-        ))}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        {[10, 20, 50, 100].map((v, i) => <RupeeNote key={v} value={v} revealed={i < revealed} delay={0} />)}
       </div>
       <div style={{ marginTop: 14, textAlign: "center", color: "#6EE7B7", fontSize: 12, fontWeight: 700 }}>
         👴 Every note has Gandhi Ji — India's Father of the Nation
@@ -597,6 +627,300 @@ export function RecapViz({ takeaway, points }: { takeaway: string; points: strin
   );
 }
 
+// ─── L1_3: Saving for a Goal ──────────────────────────────────────────────────
+
+export function CricketBatGoalViz() {
+  const GOAL = 850, SAVED = 150;
+  const [displayed, setDisplayed] = useState(SAVED);
+  useEffect(() => {
+    const step = 50, max = GOAL;
+    const id = setInterval(() => setDisplayed(d => d < max ? Math.min(d + step, max) : d), 120);
+    return () => clearInterval(id);
+  }, []);
+  const pct = Math.min((displayed / GOAL) * 100, 100);
+
+  return (
+    <div style={{ background: "linear-gradient(135deg,#1E3A5F,#0F172A)", borderRadius: 20, padding: "24px 20px" }}>
+      <style>{GLOBAL_VIZ_CSS}</style>
+      <div style={{ textAlign: "center", marginBottom: 18 }}>
+        <div style={{ fontSize: 52, animation: "vFloat 2.5s ease-in-out infinite" }}>🏏</div>
+        <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 16, marginTop: 6 }}>Cricket Bat — ₹850</div>
+        <div style={{ color: "#94A3B8", fontSize: 12, marginTop: 2 }}>Save ₹100/week → reach goal in 7 weeks</div>
+      </div>
+
+      {/* Progress bar */}
+      <div style={{ background: "#1E293B", borderRadius: 999, height: 20, overflow: "hidden", marginBottom: 8, position: "relative" }}>
+        <div style={{
+          height: "100%", borderRadius: 999,
+          background: pct >= 100 ? "#FCD34D" : "linear-gradient(90deg,#10B981,#34D399)",
+          width: `${pct}%`, transition: "width .15s linear",
+          display: "flex", alignItems: "center", justifyContent: "flex-end", paddingRight: 8,
+        }}>
+          {pct > 20 && <span style={{ color: "#064E3B", fontWeight: 900, fontSize: 11 }}>₹{displayed}</span>}
+        </div>
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#64748B", marginBottom: 16 }}>
+        <span>₹0</span><span style={{ color: "#FCD34D", fontWeight: 700 }}>Goal: ₹{GOAL}</span>
+      </div>
+
+      {/* Week dots */}
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
+        {[1,2,3,4,5,6,7].map(w => {
+          const weekAmt = SAVED + w * 100;
+          const done = displayed >= weekAmt;
+          return (
+            <div key={w} style={{ textAlign: "center" }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: "50%",
+                background: done ? "#10B981" : "#1E293B",
+                border: `2px solid ${done ? "#6EE7B7" : "#334155"}`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: done ? "#fff" : "#64748B", fontWeight: 800, fontSize: 12,
+                transition: "all .3s",
+              }}>{w}</div>
+              <div style={{ color: "#64748B", fontSize: 9, marginTop: 3 }}>₹{weekAmt}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      {displayed >= GOAL && (
+        <div style={{ marginTop: 14, textAlign: "center", color: "#FCD34D", fontWeight: 900, fontSize: 16, animation: "vBounce .7s ease both" }}>
+          🎉 Goal Reached! Bat is yours!
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function SavingFormulaViz() {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const t1 = setTimeout(() => setStep(1), 1200);
+    const t2 = setTimeout(() => setStep(2), 2600);
+    const t3 = setTimeout(() => setStep(3), 4000);
+    return () => [t1,t2,t3].forEach(clearTimeout);
+  }, []);
+
+  const boxes = [
+    { label: "INCOME",   value: "₹200/week",  icon: "💵", color: "#10B981", bg: "#064E3B", op: "+ pocket money" },
+    { label: "EXPENSE",  value: "₹120/week",  icon: "🛒", color: "#EF4444", bg: "#450A0A", op: "− canteen, stationery" },
+    { label: "SAVINGS",  value: "₹80/week",   icon: "🐷", color: "#F59E0B", bg: "#451A03", op: "= left over for goal" },
+  ];
+
+  return (
+    <div style={{ background: "#0F172A", borderRadius: 20, padding: "24px 16px", textAlign: "center" }}>
+      <style>{GLOBAL_VIZ_CSS}</style>
+      <div style={{ color: "#A7F3D0", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 18 }}>
+        The Saving Formula
+      </div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
+        {boxes.map((b, i) => (
+          <>
+            <div
+              key={b.label}
+              style={{
+                background: b.bg, border: `2px solid ${b.color}`, borderRadius: 16, padding: "14px 16px", minWidth: 90,
+                opacity: i <= step ? 1 : 0,
+                transform: i <= step ? "translateY(0)" : "translateY(20px)",
+                transition: "all .5s ease",
+              }}
+            >
+              <div style={{ fontSize: 28 }}>{b.icon}</div>
+              <div style={{ color: b.color, fontWeight: 900, fontSize: 11, marginTop: 6, textTransform: "uppercase" }}>{b.label}</div>
+              <div style={{ color: "#F8FAFC", fontWeight: 800, fontSize: 15, marginTop: 2 }}>{b.value}</div>
+              <div style={{ color: "#94A3B8", fontSize: 10, marginTop: 4, lineHeight: 1.4 }}>{b.op}</div>
+            </div>
+            {i < boxes.length - 1 && (
+              <div key={`arrow-${i}`} style={{ color: "#64748B", fontSize: 22, opacity: i < step ? 1 : .2, transition: "opacity .4s" }}>=</div>
+            )}
+          </>
+        ))}
+      </div>
+      {step >= 3 && (
+        <div style={{ marginTop: 16, color: "#6EE7B7", fontSize: 13, fontWeight: 700, animation: "vSlideU .5s ease both" }}>
+          💡 ₹80/week × 7 weeks = ₹560 → reach your ₹700 gap in 9 weeks!
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function PiggyBankFillingViz() {
+  const [week, setWeek] = useState(0);
+  const WEEKS = 7, START = 150, PER_WEEK = 100, GOAL = 850;
+  const current = START + week * PER_WEEK;
+  const pct = (current / GOAL) * 100;
+
+  return (
+    <div style={{ background: "#0F172A", borderRadius: 20, padding: "24px 20px", textAlign: "center" }}>
+      <style>{GLOBAL_VIZ_CSS}</style>
+      <div style={{ color: "#FCD34D", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 16 }}>
+        Arjun's Savings Journey
+      </div>
+
+      {/* Piggy bank SVG */}
+      <div style={{ position: "relative", display: "inline-block", marginBottom: 16 }}>
+        <svg width="110" height="90" viewBox="0 0 110 90">
+          {/* Body */}
+          <ellipse cx="55" cy="56" rx="40" ry="32" fill={week >= 7 ? "#FCD34D" : week >= 4 ? "#F59E0B" : "#1E3A5F"} stroke="#334155" strokeWidth="2"/>
+          {/* Fill level */}
+          <clipPath id="pigClip"><ellipse cx="55" cy="56" rx="38" ry="30"/></clipPath>
+          <rect x="17" y={86 - (pct * 0.6)} width="76" height={pct * 0.6} fill={week >= 7 ? "#F59E0B" : "#10B981"} clipPath="url(#pigClip)" opacity=".7"/>
+          {/* Snout */}
+          <ellipse cx="90" cy="56" rx="10" ry="8" fill="#1E3A5F" stroke="#334155" strokeWidth="1.5"/>
+          <circle cx="87" cy="54" r="2" fill="#64748B"/><circle cx="93" cy="54" r="2" fill="#64748B"/>
+          {/* Ear */}
+          <ellipse cx="30" cy="28" rx="10" ry="8" fill="#1E3A5F" stroke="#334155" strokeWidth="1.5" transform="rotate(-20 30 28)"/>
+          {/* Eye */}
+          <circle cx="70" cy="46" r="3" fill="#F8FAFC"/><circle cx="71" cy="46" r="1.5" fill="#0F172A"/>
+          {/* Legs */}
+          {[30,43,62,75].map(x => <rect key={x} x={x} y="84" width="8" height="6" rx="2" fill="#1E3A5F" stroke="#334155" strokeWidth="1"/>)}
+          {/* Coin slot */}
+          <rect x="48" y="24" width="14" height="3" rx="1.5" fill="#334155"/>
+          {/* Amount */}
+          <text x="55" y="62" textAnchor="middle" fill="#fff" fontWeight="bold" fontSize="11">₹{current}</text>
+        </svg>
+      </div>
+
+      {/* Bar */}
+      <div style={{ background: "#1E293B", borderRadius: 999, height: 10, overflow: "hidden", marginBottom: 6 }}>
+        <div style={{ height: "100%", background: "linear-gradient(90deg,#10B981,#34D399)", borderRadius: 999, width: `${pct}%`, transition: "width .6s ease" }} />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#64748B", marginBottom: 16 }}>
+        <span>₹0</span><span style={{ color: "#FCD34D" }}>🏏 ₹850</span>
+      </div>
+
+      {/* Week buttons */}
+      <div style={{ display: "flex", gap: 6, justifyContent: "center", flexWrap: "wrap", marginBottom: 8 }}>
+        {Array.from({ length: WEEKS + 1 }, (_, w) => (
+          <button
+            key={w}
+            onClick={() => setWeek(w)}
+            style={{
+              background: w <= week ? "#10B981" : "#1E293B",
+              border: `1.5px solid ${w <= week ? "#6EE7B7" : "#334155"}`,
+              color: w <= week ? "#fff" : "#64748B",
+              borderRadius: 8, padding: "5px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer",
+            }}
+          >{w === 0 ? "Start" : `Wk ${w}`}</button>
+        ))}
+      </div>
+      {week >= WEEKS && <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 15, animation: "vBounce .7s ease both" }}>🏏 Bat unlocked!</div>}
+    </div>
+  );
+}
+
+// ─── L1_4: Pocket Money Manager ───────────────────────────────────────────────
+
+export function BudgetPieViz() {
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => setPhase(1), 800);
+    return () => clearTimeout(t);
+  }, []);
+
+  const slices = [
+    { label: "Needs 50%",    pct: 50, color: "#10B981", amount: 250, icon: "🏠", desc: "Food, transport, uniform" },
+    { label: "Wants 30%",    pct: 30, color: "#F59E0B", amount: 150, icon: "🎮", desc: "Games, snacks, fun" },
+    { label: "Savings 20%",  pct: 20, color: "#3B82F6", amount: 100, icon: "🐷", desc: "Goal tracker" },
+  ];
+
+  // Simple SVG pie
+  let cumulative = 0;
+  const r = 60, cx = 70, cy = 70;
+  const paths = slices.map(s => {
+    const start = cumulative;
+    cumulative += s.pct;
+    const startAngle = (start / 100) * 2 * Math.PI - Math.PI / 2;
+    const endAngle   = ((start + s.pct) / 100) * 2 * Math.PI - Math.PI / 2;
+    const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+    const x2 = cx + r * Math.cos(endAngle),   y2 = cy + r * Math.sin(endAngle);
+    const large = s.pct > 50 ? 1 : 0;
+    return { ...s, d: `M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`, startAngle, endAngle };
+  });
+
+  return (
+    <div style={{ background: "#0F172A", borderRadius: 20, padding: "20px 16px" }}>
+      <style>{GLOBAL_VIZ_CSS}</style>
+      <div style={{ textAlign: "center", color: "#A7F3D0", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 14 }}>
+        50-30-20 Rule — ₹500 Budget
+      </div>
+      <div style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "center", flexWrap: "wrap" }}>
+        {/* Pie */}
+        <svg width="140" height="140" style={{ flexShrink: 0 }}>
+          {paths.map((p, i) => (
+            <path key={i} d={p.d} fill={p.color}
+              style={{ opacity: phase ? 1 : 0, transform: phase ? "scale(1)" : "scale(.3)", transformOrigin: `${cx}px ${cy}px`, transition: `all .6s ${i * .2}s ease` }}
+            />
+          ))}
+          <circle cx={cx} cy={cy} r="28" fill="#0F172A"/>
+          <text x={cx} y={cy + 4} textAnchor="middle" fill="#F8FAFC" fontSize="10" fontWeight="bold">₹500</text>
+        </svg>
+
+        {/* Legend */}
+        <div style={{ display: "grid", gap: 8 }}>
+          {slices.map(s => (
+            <div key={s.label} style={{ display: "flex", gap: 10, alignItems: "center", background: "#1E293B", borderRadius: 10, padding: "8px 12px" }}>
+              <div style={{ width: 12, height: 12, borderRadius: 3, background: s.color, flexShrink: 0 }} />
+              <div>
+                <div style={{ color: "#F8FAFC", fontWeight: 700, fontSize: 12 }}>{s.icon} ₹{s.amount} <span style={{ color: s.color }}>{s.label}</span></div>
+                <div style={{ color: "#64748B", fontSize: 10 }}>{s.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function RavisBudgetViz() {
+  const [shown, setShown] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setShown(s => s < 5 ? s + 1 : s), 600);
+    return () => clearInterval(id);
+  }, []);
+
+  const expenses = [
+    { label: "🍱 School Canteen", amount: 80,  color: "#10B981" },
+    { label: "✏️ Stationery",      amount: 50,  color: "#3B82F6" },
+    { label: "🎮 Gaming Credits",  amount: 100, color: "#F59E0B" },
+    { label: "🍿 Snacks",          amount: 70,  color: "#F59E0B" },
+    { label: "🛺 Transport",       amount: 60,  color: "#10B981" },
+  ];
+  const total = expenses.reduce((s, e) => s + e.amount, 0);
+  const savings = 500 - total;
+
+  return (
+    <div style={{ background: "#0F172A", borderRadius: 20, padding: "20px 16px" }}>
+      <style>{GLOBAL_VIZ_CSS}</style>
+      <div style={{ textAlign: "center", color: "#A7F3D0", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 14 }}>
+        Ravi's Week — ₹500 Income
+      </div>
+      <div style={{ display: "grid", gap: 8, marginBottom: 14 }}>
+        {expenses.map((e, i) => (
+          <div key={e.label} style={{ opacity: i < shown ? 1 : 0, transform: i < shown ? "translateX(0)" : "translateX(-24px)", transition: "all .4s ease" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+              <span style={{ color: "#CBD5E1", fontSize: 12 }}>{e.label}</span>
+              <span style={{ color: "#F8FAFC", fontWeight: 700, fontSize: 12 }}>₹{e.amount}</span>
+            </div>
+            <div style={{ background: "#1E293B", borderRadius: 999, height: 8 }}>
+              <div style={{ height: "100%", borderRadius: 999, background: e.color, width: i < shown ? `${(e.amount / 500) * 100}%` : "0%", transition: "width .6s ease" }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      {shown >= expenses.length && (
+        <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid #334155", paddingTop: 12, animation: "vSlideU .5s ease both" }}>
+          <span style={{ color: "#94A3B8", fontSize: 13 }}>Total Spent: <strong style={{ color: "#F87171" }}>₹{total}</strong></span>
+          <span style={{ color: "#94A3B8", fontSize: 13 }}>Saved: <strong style={{ color: "#10B981" }}>₹{savings} ({Math.round(savings/5)}%)</strong></span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Registry: stepId → Visual component ──────────────────────────────────────
 type VizProps = { lessonId: string; stepId: string; boardData?: Record<string, unknown> };
 
@@ -634,6 +958,43 @@ export function StepVisual({ lessonId, stepId, boardData }: VizProps) {
           "WANTS: Toys, Treats, Entertainment — only after needs",
           "Always plan spending based on priorities",
           "Ask a parent before making any purchase!",
+        ]}
+      />;
+    }
+  }
+
+  // MM_L1_3 — Saving for a Goal
+  if (lessonId === "MM_L1_3") {
+    if (stepId === "intro")           return <CricketBatGoalViz />;
+    if (stepId === "concept")         return <SavingFormulaViz />;
+    if (stepId === "worked_example")  return <PiggyBankFillingViz />;
+    if (stepId === "goal_tracker")    return <CricketBatGoalViz />;
+    if (stepId === "recap") {
+      return <RecapViz
+        takeaway="Save small every week — reach big goals!"
+        points={[
+          "Savings = Income − Expenses",
+          "Set a clear goal with a price tag",
+          "Weeks needed = Goal Amount ÷ Weekly Savings",
+          "Track progress every week — every rupee counts!",
+        ]}
+      />;
+    }
+  }
+
+  // MM_L1_4 — Pocket Money Manager
+  if (lessonId === "MM_L1_4") {
+    if (stepId === "intro")           return <BudgetPieViz />;
+    if (stepId === "concept")         return <BudgetPieViz />;
+    if (stepId === "worked_example")  return <RavisBudgetViz />;
+    if (stepId === "recap") {
+      return <RecapViz
+        takeaway="Budget BEFORE you spend — not after!"
+        points={[
+          "Income − Expenses = Savings",
+          "50% Needs, 30% Wants, 20% Savings (50-30-20 rule)",
+          "Plan your budget before you receive money",
+          "Cut variable expenses to save more",
         ]}
       />;
     }

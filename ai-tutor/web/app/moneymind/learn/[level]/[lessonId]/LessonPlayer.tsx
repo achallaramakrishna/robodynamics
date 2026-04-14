@@ -588,7 +588,10 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
         </aside>
 
         {/* ──────────── RIGHT MAIN ──────────── */}
-        <section style={{ padding: "24px 28px", display: "grid", alignContent: "start", gap: 18, paddingBottom: 48 }}>
+        <section style={{ display: "flex", flexDirection: "column", height: isNarrow ? "auto" : "calc(100vh - 68px)", overflow: isNarrow ? "visible" : "hidden" }}>
+
+          {/* ── Scrollable content area ── */}
+          <div style={{ flex: 1, overflowY: "auto", padding: "24px 28px", display: "grid", alignContent: "start", gap: 18 }}>
 
           {/* Meta row */}
           <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "minmax(0,1fr) 130px 130px", gap: 12 }}>
@@ -604,17 +607,6 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
               <div style={{ fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: 1 }}>Progress</div>
               <div style={{ fontWeight: 800, fontSize: 16, marginTop: 4, color: C.green }}>{stepIndex + 1} / {totalSteps}</div>
             </div>
-          </div>
-
-          {/* Step dots */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 6 }}>
-            {lesson.steps.map((_, i) => (
-              <div key={i} onClick={() => moveToStep(i)} style={{
-                width: i === stepIndex ? 24 : 8, height: 8, borderRadius: 4,
-                background: i < stepIndex ? C.green : i === stepIndex ? "#065F46" : "#CBD5E1",
-                transition: "all 0.35s", cursor: "pointer",
-              }} />
-            ))}
           </div>
 
           {/* Step label */}
@@ -734,8 +726,17 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             </div>
           )}
 
-          {/* Navigation */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 8 }}>
+          </div>{/* end scrollable content */}
+
+          {/* ── Sticky nav bar — always visible ── */}
+          <div style={{
+            flexShrink: 0,
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            padding: "14px 28px",
+            background: "#F8FAFC",
+            borderTop: "2px solid #E2E8F0",
+            boxShadow: "0 -4px 16px rgba(0,0,0,0.06)",
+          }}>
             <button
               onClick={() => moveToStep(stepIndex - 1)}
               disabled={stepIndex === 0}
@@ -744,7 +745,18 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
               ← Prev
             </button>
 
-            <div style={{ fontSize: 12, color: "#94A3B8", fontWeight: 600 }}>Step {stepIndex + 1} of {totalSteps}</div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 12, color: "#94A3B8", fontWeight: 600 }}>Step {stepIndex + 1} of {totalSteps}</div>
+              <div style={{ display: "flex", gap: 5, marginTop: 5, justifyContent: "center" }}>
+                {lesson.steps.map((_, i) => (
+                  <div key={i} onClick={() => moveToStep(i)} style={{
+                    width: i === stepIndex ? 18 : 6, height: 6, borderRadius: 3,
+                    background: i < stepIndex ? C.green : i === stepIndex ? "#065F46" : "#CBD5E1",
+                    transition: "all 0.3s", cursor: "pointer",
+                  }} />
+                ))}
+              </div>
+            </div>
 
             <button
               onClick={advance}
@@ -753,10 +765,11 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
                 background: isLastStep ? `linear-gradient(90deg, #FCD34D, ${C.accent})` : C.green,
                 color: isLastStep ? "#451A03" : "#fff",
                 border: "none", borderRadius: 12, padding: "12px 28px",
-                fontWeight: 900, fontSize: 14,
+                fontWeight: 900, fontSize: 15,
                 cursor: (needsCheck || finishing) ? "not-allowed" : "pointer",
                 opacity: (needsCheck || finishing) ? 0.5 : 1,
-                boxShadow: needsCheck ? "none" : isLastStep ? "0 4px 12px rgba(245,158,11,0.4)" : "0 4px 12px rgba(16,185,129,0.3)",
+                boxShadow: needsCheck ? "none" : isLastStep ? "0 4px 16px rgba(245,158,11,0.4)" : "0 4px 16px rgba(16,185,129,0.35)",
+                animation: (!needsCheck && !finishing) ? "mmGlow 2s ease-in-out infinite" : undefined,
               }}
             >
               {finishing ? "Saving…" : isLastStep ? "🏆 Complete Lesson" : "Next →"}

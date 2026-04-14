@@ -16,6 +16,8 @@ import { StepComic } from "./MoneyMindComics";
 
 // ─── CSS keyframes ────────────────────────────────────────────────────────────
 const GLOBAL_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  body, * { box-sizing: border-box; }
   @keyframes mmSlideUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes mmFadeIn   { from{opacity:0} to{opacity:1} }
   @keyframes mmPopIn    { 0%{transform:scale(.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
@@ -28,16 +30,30 @@ const GLOBAL_CSS = `
   @keyframes mmCorrect  { 0%{transform:scale(1)} 30%{transform:scale(1.07)} 60%{transform:scale(.97)} 100%{transform:scale(1)} }
   @keyframes mmGlow     { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.35)} 50%{box-shadow:0 0 0 8px rgba(16,185,129,0)} }
   @keyframes mmBoardIn  { from{opacity:0;transform:translateY(18px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  @keyframes mmWipeLeft  { from{opacity:0;transform:translateX(50px)}  to{opacity:1;transform:translateX(0)} }
+  @keyframes mmWipeRight { from{opacity:0;transform:translateX(-50px)} to{opacity:1;transform:translateX(0)} }
   .mm-board-enter { animation: mmBoardIn .42s cubic-bezier(.34,1.56,.64,1) both; }
   .mm-fade-in     { animation: mmFadeIn .35s ease both; }
   .mm-correct     { animation: mmCorrect .5s ease both; }
   .mm-glow        { animation: mmGlow 2s ease-in-out infinite; }
+  .mm-wipe-forward { animation: mmWipeLeft  .35s cubic-bezier(.25,.46,.45,.94) both; }
+  .mm-wipe-back    { animation: mmWipeRight .35s cubic-bezier(.25,.46,.45,.94) both; }
   .mm-shimmer {
     background: linear-gradient(90deg, #10B981 0%, #34D399 40%, #10B981 60%, #059669 100%);
     background-size: 200% 100%;
     animation: mmShimmer 2s linear infinite;
   }
 `;
+
+// ─── Per-level color palette ──────────────────────────────────────────────────
+const LEVEL_PALETTE: Record<string, { primary: string; light: string; bg: string; headerBg: string; shimmer: string }> = {
+  "level-1": { primary: "#F59E0B", light: "#FEF3C7", bg: "#FFFBEB", headerBg: "#92400E", shimmer: "linear-gradient(90deg,#F59E0B,#FCD34D,#F59E0B)" },
+  "level-2": { primary: "#3B82F6", light: "#DBEAFE", bg: "#EFF6FF", headerBg: "#1E3A8A", shimmer: "linear-gradient(90deg,#3B82F6,#93C5FD,#3B82F6)" },
+  "level-3": { primary: "#8B5CF6", light: "#EDE9FE", bg: "#F5F3FF", headerBg: "#4C1D95", shimmer: "linear-gradient(90deg,#8B5CF6,#C4B5FD,#8B5CF6)" },
+  "level-4": { primary: "#F97316", light: "#FFEDD5", bg: "#FFF7ED", headerBg: "#7C2D12", shimmer: "linear-gradient(90deg,#F97316,#FED7AA,#F97316)" },
+  "level-5": { primary: "#14B8A6", light: "#CCFBF1", bg: "#F0FDFA", headerBg: "#134E4A", shimmer: "linear-gradient(90deg,#14B8A6,#99F6E4,#14B8A6)" },
+  "level-6": { primary: "#D97706", light: "#FDE68A", bg: "#FFFBEB", headerBg: "#78350F", shimmer: "linear-gradient(90deg,#D97706,#FCD34D,#D97706)" },
+};
 
 // ─── Board Renderer ───────────────────────────────────────────────────────────
 function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: number }) {
@@ -49,13 +65,13 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 4 }}>
           {getBoardIllustration(type, data.headline ?? data.title, data.emoji)}
         </div>
-        <div style={{ color: "#93C5FD", fontSize: 12, fontWeight: 800, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>
+        <div style={{ color: "#93C5FD", fontSize: 13, fontWeight: 800, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>
           {type === "mission_card" ? "🎯 Mission" : "📚 Today's Lesson"}
         </div>
-        <div style={{ color: "#fff", fontWeight: 900, fontSize: 24, marginBottom: 12, lineHeight: 1.3 }}>{data.headline ?? data.title}</div>
-        {data.example && <div style={{ background: "rgba(59,130,246,0.15)", border: "1px solid #3B82F6", borderRadius: 10, padding: "12px 16px", marginBottom: 12, color: "#93C5FD", fontSize: 14 }}>{data.example}</div>}
-        {data.goal && <div style={{ color: "#D1FAE5", fontSize: 14, lineHeight: 1.6 }}>🏁 Goal: {data.goal}</div>}
-        {data.scenario && <div style={{ color: "#FDE68A", fontSize: 14, lineHeight: 1.6, marginTop: 8 }}>{data.scenario}</div>}
+        <div style={{ color: "#fff", fontWeight: 900, fontSize: 28, marginBottom: 12, lineHeight: 1.3 }}>{data.headline ?? data.title}</div>
+        {data.example && <div style={{ background: "rgba(59,130,246,0.15)", border: "1px solid #3B82F6", borderRadius: 10, padding: "12px 16px", marginBottom: 12, color: "#93C5FD", fontSize: 17 }}>{data.example}</div>}
+        {data.goal && <div style={{ color: "#D1FAE5", fontSize: 17, lineHeight: 1.6 }}>🏁 Goal: {data.goal}</div>}
+        {data.scenario && <div style={{ color: "#FDE68A", fontSize: 17, lineHeight: 1.6, marginTop: 8 }}>{data.scenario}</div>}
       </div>
     );
   }
@@ -63,10 +79,10 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "concept_card") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #334155", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#F59E0B", fontWeight: 900, fontSize: 18, marginBottom: 16 }}>{data.emoji ?? "💡"} {data.title}</div>
+        <div style={{ color: "#F59E0B", fontWeight: 900, fontSize: 22, marginBottom: 16 }}>{data.emoji ?? "💡"} {data.title}</div>
         <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
           {(data.points ?? data.concepts ?? []).map((pt: string, i: number) => (
-            <li key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 12, color: "#E2E8F0", fontSize: 14, lineHeight: 1.6 }}>
+            <li key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 12, color: "#E2E8F0", fontSize: 16, lineHeight: 1.6 }}>
               <span style={{ color: "#10B981", fontWeight: 800, minWidth: 20 }}>→</span>
               <span>{pt}</span>
             </li>
@@ -74,7 +90,7 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
         </ul>
         {data.table && (
           <div style={{ marginTop: 16, overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 16 }}>
               <thead><tr>{data.table.headers.map((h: string) => <th key={h} style={{ background: "#334155", color: "#F59E0B", padding: "8px 12px", textAlign: "left", fontWeight: 700 }}>{h}</th>)}</tr></thead>
               <tbody>{data.table.rows.map((row: string[], ri: number) => (
                 <tr key={ri}>{row.map((cell, ci) => <td key={ci} style={{ padding: "8px 12px", color: "#CBD5E1", borderBottom: "1px solid #334155" }}>{cell}</td>)}</tr>
@@ -89,13 +105,13 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "worked_example") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #8B5CF6", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#A78BFA", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>🔢 Worked Example</div>
+        <div style={{ color: "#A78BFA", fontWeight: 900, fontSize: 22, marginBottom: 16 }}>🔢 Worked Example</div>
         {data.expression && <div style={{ background: "#0F172A", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontFamily: "monospace", color: "#FCD34D", fontSize: 18, textAlign: "center" }}>{data.expression}</div>}
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {(data.steps ?? []).map((s: string, i: number) => (
             <div key={i} style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              <span style={{ background: "#8B5CF6", color: "#fff", borderRadius: "50%", width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
-              <span style={{ color: "#E2E8F0", fontSize: 14 }}>{s}</span>
+              <span style={{ background: "#8B5CF6", color: "#fff", borderRadius: "50%", width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
+              <span style={{ color: "#E2E8F0", fontSize: 16 }}>{s}</span>
             </div>
           ))}
         </div>
@@ -109,9 +125,9 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "practice_board") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #F59E0B", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 16, marginBottom: 12 }}>✏️ {data.headline ?? "Practice Time"}</div>
-        {data.prompt && <p style={{ color: "#CBD5E1", fontSize: 14, lineHeight: 1.6, marginBottom: 0 }}>{data.prompt}</p>}
-        {data.items && <ul style={{ margin: "12px 0 0", paddingLeft: 20 }}>{data.items.map((item: string, i: number) => <li key={i} style={{ color: "#E2E8F0", fontSize: 14, marginBottom: 8 }}>{item}</li>)}</ul>}
+        <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 22, marginBottom: 12 }}>✏️ {data.headline ?? "Practice Time"}</div>
+        {data.prompt && <p style={{ color: "#CBD5E1", fontSize: 18, lineHeight: 1.6, marginBottom: 0 }}>{data.prompt}</p>}
+        {data.items && <ul style={{ margin: "12px 0 0", paddingLeft: 20 }}>{data.items.map((item: string, i: number) => <li key={i} style={{ color: "#E2E8F0", fontSize: 16, marginBottom: 8 }}>{item}</li>)}</ul>}
       </div>
     );
   }
@@ -119,11 +135,11 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "scam_detector") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #EF4444", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#FCA5A5", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>🚨 Scam or Safe?</div>
+        <div style={{ color: "#FCA5A5", fontWeight: 900, fontSize: 22, marginBottom: 16 }}>🚨 Scam or Safe?</div>
         {(data.scenarios ?? []).map((sc: any, i: number) => (
           <div key={i} style={{ background: "#0F172A", borderRadius: 10, padding: "14px", marginBottom: 10, border: `1px solid ${sc.isScam ? "#EF4444" : "#10B981"}` }}>
-            <div style={{ color: "#E2E8F0", fontSize: 13, marginBottom: 6 }}>{sc.message}</div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: sc.isScam ? "#EF4444" : "#10B981" }}>{sc.isScam ? "🚫 SCAM" : "✅ SAFE"} — {sc.reason}</div>
+            <div style={{ color: "#E2E8F0", fontSize: 16, marginBottom: 6 }}>{sc.message}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: sc.isScam ? "#EF4444" : "#10B981" }}>{sc.isScam ? "🚫 SCAM" : "✅ SAFE"} — {sc.reason}</div>
           </div>
         ))}
         {data.scenario && <div style={{ background: "#0F172A", borderRadius: 10, padding: "14px", color: "#FDE68A", fontSize: 14 }}>{data.scenario}</div>}
@@ -134,17 +150,17 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "budget_planner" || type === "shopping_simulation") {
     return (
       <div style={{ background: "#1E293B", border: "2px solid #10B981", borderRadius: 20, padding: "28px 24px" }}>
-        <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 16, marginBottom: 16 }}>{type === "budget_planner" ? "💰 Budget Planner" : "🛒 Shopping Challenge"}</div>
+        <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 22, marginBottom: 16 }}>{type === "budget_planner" ? "💰 Budget Planner" : "🛒 Shopping Challenge"}</div>
         {data.budget !== undefined && (
           <div style={{ background: "#064E3B", borderRadius: 10, padding: "12px 16px", marginBottom: 14, display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#A7F3D0", fontSize: 13 }}>Total Budget</span>
+            <span style={{ color: "#A7F3D0", fontSize: 16 }}>Total Budget</span>
             <span style={{ color: "#6EE7B7", fontWeight: 800, fontSize: 18 }}>₹{data.budget}</span>
           </div>
         )}
         {(data.items ?? data.categories ?? []).map((item: any, i: number) => (
           <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #334155" }}>
-            <span style={{ color: "#CBD5E1", fontSize: 13 }}>{item.name ?? item.category ?? item}</span>
-            {item.cost !== undefined && <span style={{ color: "#FCD34D", fontWeight: 700, fontSize: 13 }}>₹{item.cost}</span>}
+            <span style={{ color: "#CBD5E1", fontSize: 16 }}>{item.name ?? item.category ?? item}</span>
+            {item.cost !== undefined && <span style={{ color: "#FCD34D", fontWeight: 700, fontSize: 16 }}>₹{item.cost}</span>}
           </div>
         ))}
         {data.challenge && <div style={{ marginTop: 14, background: "rgba(245,158,11,0.1)", border: "1px solid #F59E0B", borderRadius: 8, padding: "10px 14px", color: "#FDE68A", fontSize: 13 }}>Challenge: {data.challenge}</div>}
@@ -156,10 +172,10 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
     return (
       <div style={{ background: "linear-gradient(135deg,#1E293B,#0F172A)", border: "2px solid #10B981", borderRadius: 20, padding: "28px 24px", textAlign: "center" }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
-        <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 20, marginBottom: 16 }}>{data.title ?? "Lesson Complete!"}</div>
+        <div style={{ color: "#6EE7B7", fontWeight: 900, fontSize: 28, marginBottom: 16 }}>{data.title ?? "Lesson Complete!"}</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, textAlign: "left" }}>
           {(data.keyPoints ?? data.points ?? []).map((pt: string, i: number) => (
-            <div key={i} style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)", borderRadius: 8, padding: "10px 12px", color: "#A7F3D0", fontSize: 12, lineHeight: 1.5 }}>✓ {pt}</div>
+            <div key={i} style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)", borderRadius: 8, padding: "10px 12px", color: "#A7F3D0", fontSize: 13, lineHeight: 1.5 }}>✓ {pt}</div>
           ))}
         </div>
       </div>
@@ -173,8 +189,8 @@ function BoardCard({ step, stepKey }: { step: MoneyMindLessonStep; stepKey: numb
   if (type === "passbook_viewer")     return <PassbookViewer />;
 
   return (
-    <div style={{ background: "#1E293B", borderRadius: 20, padding: "28px 24px", color: "#CBD5E1", fontSize: 14, lineHeight: 1.7 }}>
-      {data.headline && <div style={{ color: "#F59E0B", fontWeight: 800, fontSize: 16, marginBottom: 10 }}>{data.headline}</div>}
+    <div style={{ background: "#1E293B", borderRadius: 20, padding: "28px 24px", color: "#CBD5E1", fontSize: 16, lineHeight: 1.7 }}>
+      {data.headline && <div style={{ color: "#F59E0B", fontWeight: 800, fontSize: 22, marginBottom: 10 }}>{data.headline}</div>}
       {data.prompt && <p style={{ margin: 0 }}>{data.prompt}</p>}
     </div>
   );
@@ -259,70 +275,88 @@ function CourseContentList({ currentLessonId, currentLevelSlug, green }: {
   green: string;
 }) {
   const [openLevel, setOpenLevel] = useState<string>(currentLevelSlug);
-
-  // Group registry by level
   const grouped = useMemo(() => {
-    const map: Record<string, { id: string; title: string; slug: string }[]> = {};
+    const map: Record<string, { id: string; title: string }[]> = {};
     Object.entries(MONEYMIND_LESSON_REGISTRY).forEach(([id, payload]) => {
       const slug = payload.course.levelSlug;
       if (!map[slug]) map[slug] = [];
-      map[slug].push({ id, title: payload.lesson.title, slug });
+      map[slug].push({ id, title: payload.lesson.title });
     });
     return map;
   }, []);
 
+  const LEVEL_ICONS = ["🌱","🏦","📱","💰","📈","🎓"];
+  const LEVEL_COLORS_MAP: Record<string, string> = {
+    "level-1":"#F59E0B","level-2":"#3B82F6","level-3":"#8B5CF6",
+    "level-4":"#F97316","level-5":"#14B8A6","level-6":"#D97706",
+  };
+
   return (
     <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 18, overflow: "hidden" }}>
-      <div style={{ padding: "12px 16px", borderBottom: "1px solid #E2E8F0", fontSize: 12, color: "#64748B", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>
-        Course Content
+      <div style={{ padding: "14px 16px", borderBottom: "1px solid #E2E8F0", display: "flex", alignItems: "center", gap: 8 }}>
+        <span style={{ fontSize: 16 }}>🗺️</span>
+        <span style={{ fontSize: 13, fontWeight: 800, color: "#1E293B" }}>Your Learning Journey</span>
       </div>
-      {LEVEL_META.map(({ slug, label }) => {
-        const isOpen    = openLevel === slug;
-        const lessons   = grouped[slug] ?? [];
+      {LEVEL_META.map(({ slug, label }, li) => {
+        const isOpen = openLevel === slug;
         const isCurrent = slug === currentLevelSlug;
+        const lessons = grouped[slug] ?? [];
+        const color = LEVEL_COLORS_MAP[slug] ?? green;
+        const icon = LEVEL_ICONS[li] ?? "📚";
+        const currentIdx = lessons.findIndex(l => l.id === currentLessonId);
+
         return (
           <div key={slug} style={{ borderBottom: "1px solid #F1F5F9" }}>
-            {/* Level header */}
             <button
               onClick={() => setOpenLevel(isOpen ? "" : slug)}
-              style={{
-                width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
-                padding: "12px 16px", background: isCurrent ? "#F0FDF4" : "#FAFAFA",
-                border: "none", cursor: "pointer", textAlign: "left",
-              }}
+              style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: isCurrent ? `${color}12` : "#FAFAFA", border: "none", cursor: "pointer", textAlign: "left" }}
             >
-              <span style={{ fontWeight: 700, fontSize: 13, color: isCurrent ? "#065F46" : "#1E293B" }}>{label}</span>
-              <span style={{ fontSize: 11, color: "#94A3B8", marginLeft: 8 }}>{isOpen ? "▲" : "▼"}</span>
+              <div style={{ width: 32, height: 32, borderRadius: "50%", background: isCurrent ? color : "#E2E8F0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, flexShrink: 0, boxShadow: isCurrent ? `0 0 0 3px ${color}33` : "none" }}>
+                {icon}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: 13, color: isCurrent ? color : "#475569", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{label.split(" — ")[1] ?? label}</div>
+                <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 1 }}>{lessons.length} lessons</div>
+              </div>
+              <span style={{ fontSize: 10, color: "#CBD5E1" }}>{isOpen ? "▲" : "▼"}</span>
             </button>
-            {/* Lessons list */}
             {isOpen && (
-              <div style={{ background: "#FFFFFF" }}>
+              <div style={{ padding: "8px 14px 12px 20px" }}>
                 {lessons.map((ls, i) => {
-                  const isActiveLesson = ls.id === currentLessonId;
+                  const isActive = ls.id === currentLessonId;
+                  const isDone = isCurrent ? i < currentIdx : false;
                   return (
-                    <Link
-                      key={ls.id}
-                      href={`/moneymind/learn/${slug}/${ls.id}`}
-                      style={{
-                        display: "flex", alignItems: "center", gap: 10,
-                        padding: "10px 20px",
-                        background: isActiveLesson ? "#ECFDF5" : "transparent",
-                        borderLeft: isActiveLesson ? `3px solid ${green}` : "3px solid transparent",
-                        textDecoration: "none",
-                        borderBottom: "1px solid #F8FAFC",
-                      }}
-                    >
-                      <span style={{
-                        width: 22, height: 22, borderRadius: "50%", flexShrink: 0,
-                        background: isActiveLesson ? green : "#E2E8F0",
-                        color: isActiveLesson ? "#fff" : "#64748B",
-                        fontSize: 11, fontWeight: 800,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                      }}>{i + 1}</span>
-                      <span style={{ fontSize: 13, fontWeight: isActiveLesson ? 700 : 500, color: isActiveLesson ? "#065F46" : "#334155", lineHeight: 1.4 }}>
-                        {ls.title}
-                      </span>
-                    </Link>
+                    <div key={ls.id} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      {/* Dot + line */}
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+                        <Link href={`/moneymind/learn/${slug}/${ls.id}`} style={{ textDecoration: "none" }}>
+                          <div style={{
+                            width: 28, height: 28, borderRadius: "50%",
+                            background: isActive ? color : isDone ? color : "#E2E8F0",
+                            border: isActive ? `3px solid ${color}` : isDone ? `2px solid ${color}` : "2px solid #CBD5E1",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            fontSize: 12, fontWeight: 800,
+                            color: (isActive || isDone) ? "#fff" : "#94A3B8",
+                            boxShadow: isActive ? `0 0 0 4px ${color}30, 0 2px 8px ${color}40` : "none",
+                            animation: isActive ? `mmGlow 2s ease-in-out infinite` : "none",
+                            transition: "all .2s",
+                            cursor: "pointer",
+                          }}>
+                            {isDone ? "✓" : i + 1}
+                          </div>
+                        </Link>
+                        {i < lessons.length - 1 && (
+                          <div style={{ width: 0, height: 24, borderLeft: isDone ? `2px solid ${color}60` : "2px dashed #CBD5E1", margin: "2px 0" }} />
+                        )}
+                      </div>
+                      {/* Label */}
+                      <Link href={`/moneymind/learn/${slug}/${ls.id}`} style={{ textDecoration: "none", flex: 1, paddingTop: 4, paddingBottom: i < lessons.length - 1 ? 20 : 0 }}>
+                        <div style={{ fontSize: 13, fontWeight: isActive ? 800 : 500, color: isActive ? color : "#334155", lineHeight: 1.4 }}>
+                          {ls.title}
+                        </div>
+                        {isActive && <div style={{ fontSize: 10, color: color, fontWeight: 700, marginTop: 2 }}>▶ Currently here</div>}
+                      </Link>
+                    </div>
                   );
                 })}
               </div>
@@ -331,6 +365,95 @@ function CourseContentList({ currentLessonId, currentLevelSlug, green }: {
         );
       })}
     </div>
+  );
+}
+
+// ─── Mascot Sticker ───────────────────────────────────────────────────────────
+function MascotSticker({ lessonId }: { lessonId: string }) {
+  const level = parseInt(lessonId.replace("MM_L","").split("_")[0]) || 1;
+  // Level 1-2: Rahul, Level 3-4: Priya, Level 5-6: Arjun
+  if (level <= 2) {
+    return (
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        {/* Rahul — spiky hair, blue shirt, thumbs up */}
+        <circle cx="45" cy="28" r="18" fill="#FBBF24"/>
+        {/* Spiky hair */}
+        {[-12,-6,0,6,12].map((x,i) => <polygon key={i} points={`${45+x},10 ${45+x-4},18 ${45+x+4},18`} fill="#1E293B"/>)}
+        {/* Eyes */}
+        <ellipse cx="39" cy="26" rx="3" ry="3.5" fill="#1E293B"/>
+        <ellipse cx="51" cy="26" rx="3" ry="3.5" fill="#1E293B"/>
+        <circle cx="40" cy="25" r="1" fill="#fff"/>
+        <circle cx="52" cy="25" r="1" fill="#fff"/>
+        {/* Big smile */}
+        <path d="M37 34 Q45 42 53 34" stroke="#1E293B" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+        {/* Rosy cheeks */}
+        <circle cx="36" cy="31" r="4" fill="#FCA5A5" opacity="0.6"/>
+        <circle cx="54" cy="31" r="4" fill="#FCA5A5" opacity="0.6"/>
+        {/* Blue shirt body */}
+        <rect x="28" y="46" width="34" height="30" rx="8" fill="#3B82F6"/>
+        {/* Thumbs up arm */}
+        <rect x="62" y="50" width="10" height="18" rx="5" fill="#FBBF24"/>
+        <circle cx="67" cy="48" r="7" fill="#FBBF24"/>
+        {/* Stars */}
+        <text x="10" y="20" fontSize="14">⭐</text>
+        <text x="65" y="15" fontSize="12">✨</text>
+        <text x="5" y="60" fontSize="11">🎉</text>
+      </svg>
+    );
+  }
+  if (level <= 4) {
+    return (
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        {/* Priya — pigtails, pink ribbons, jumping */}
+        <circle cx="45" cy="28" r="18" fill="#FBBF24"/>
+        {/* Hair */}
+        <path d="M27 24 Q25 15 35 18" stroke="#1E293B" strokeWidth="4" fill="none"/>
+        <path d="M63 24 Q65 15 55 18" stroke="#1E293B" strokeWidth="4" fill="none"/>
+        <rect x="27" y="10" width="36" height="16" rx="8" fill="#1E293B"/>
+        {/* Pigtail ribbons */}
+        <circle cx="27" cy="22" r="5" fill="#EC4899"/>
+        <circle cx="63" cy="22" r="5" fill="#EC4899"/>
+        {/* Eyes happy arcs */}
+        <path d="M38 25 Q41 21 44 25" stroke="#1E293B" strokeWidth="2" fill="none"/>
+        <path d="M46 25 Q49 21 52 25" stroke="#1E293B" strokeWidth="2" fill="none"/>
+        {/* Big smile */}
+        <path d="M37 33 Q45 42 53 33" stroke="#1E293B" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+        <circle cx="36" cy="30" r="4" fill="#FCA5A5" opacity="0.6"/>
+        <circle cx="54" cy="30" r="4" fill="#FCA5A5" opacity="0.6"/>
+        {/* Pink top */}
+        <rect x="30" y="46" width="30" height="28" rx="8" fill="#EC4899"/>
+        {/* Arms up */}
+        <line x1="30" y1="52" x2="18" y2="40" stroke="#FBBF24" strokeWidth="6" strokeLinecap="round"/>
+        <line x1="60" y1="52" x2="72" y2="40" stroke="#FBBF24" strokeWidth="6" strokeLinecap="round"/>
+        <text x="12" y="18" fontSize="13">⭐</text>
+        <text x="62" y="12" fontSize="12">💖</text>
+      </svg>
+    );
+  }
+  return (
+    <svg width="90" height="90" viewBox="0 0 90 90">
+      {/* Arjun — curly hair, green shirt, fist pump */}
+      <circle cx="45" cy="28" r="18" fill="#FBBF24"/>
+      {/* Curly hair */}
+      {[33,39,45,51,57].map((x,i) => <circle key={i} cx={x} cy={14+(i%2)*3} r="5" fill="#1E293B"/>)}
+      <rect x="27" y="16" width="36" height="14" rx="0" fill="#1E293B"/>
+      {/* Eyes */}
+      <ellipse cx="39" cy="27" rx="3" ry="3" fill="#1E293B"/>
+      <ellipse cx="51" cy="27" rx="3" ry="3" fill="#1E293B"/>
+      <circle cx="40" cy="26" r="1" fill="#fff"/>
+      <circle cx="52" cy="26" r="1" fill="#fff"/>
+      {/* Big smile */}
+      <path d="M37 34 Q45 42 53 34" stroke="#1E293B" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+      <circle cx="36" cy="31" r="4" fill="#FCA5A5" opacity="0.6"/>
+      <circle cx="54" cy="31" r="4" fill="#FCA5A5" opacity="0.6"/>
+      {/* Green shirt */}
+      <rect x="30" y="46" width="30" height="28" rx="8" fill="#059669"/>
+      {/* Fist pump */}
+      <rect x="62" y="38" width="10" height="18" rx="5" fill="#FBBF24"/>
+      <circle cx="67" cy="36" r="7" fill="#FBBF24"/>
+      <text x="8" y="18" fontSize="14">🏆</text>
+      <text x="62" y="14" fontSize="12">✨</text>
+    </svg>
   );
 }
 
@@ -347,6 +470,8 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
   const [streak, setStreak] = useState(0);
   const [coinBurst, setCoinBurst] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [stepDir, setStepDir] = useState<'forward' | 'back'>('forward');
+  const [meeraBouncing, setMeeraBouncing] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
   const [viewportWidth, setViewportWidth] = useState(1280);
@@ -491,9 +616,45 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
   }, [voiceEnabled]);
 
   // ── Navigation ────────────────────────────────────────────────────────────
-  function moveToStep(idx: number) {
-    setStepIndex(Math.max(0, Math.min(totalSteps - 1, idx)));
-    setFeedback(null); setChecked(false); setSelectedAnswer(null); setNumericAnswer("");
+  function moveToStep(i: number) {
+    setStepDir(i > stepIndex ? 'forward' : 'back');
+    setStepIndex(Math.max(0, Math.min(totalSteps - 1, i)));
+    setChecked(false); setFeedback(null); setSelectedAnswer(null); setNumericAnswer("");
+  }
+
+  function playSound(type: 'correct' | 'wrong' | 'coin') {
+    try {
+      if (typeof window === 'undefined') return;
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      if (type === 'correct') {
+        [523, 659, 784].forEach((freq, i) => {
+          const osc = ctx.createOscillator(); const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.frequency.value = freq; osc.type = 'sine';
+          const t = ctx.currentTime + i * 0.13;
+          gain.gain.setValueAtTime(0.28, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
+          osc.start(t); osc.stop(t + 0.45);
+        });
+      } else if (type === 'wrong') {
+        const osc = ctx.createOscillator(); const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.frequency.setValueAtTime(300, ctx.currentTime); osc.frequency.linearRampToValueAtTime(180, ctx.currentTime + 0.35);
+        osc.type = 'sawtooth';
+        gain.gain.setValueAtTime(0.18, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+        osc.start(); osc.stop(ctx.currentTime + 0.45);
+      } else if (type === 'coin') {
+        [1046, 1318, 1568].forEach((freq, i) => {
+          const osc = ctx.createOscillator(); const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.frequency.value = freq; osc.type = 'triangle';
+          const t = ctx.currentTime + i * 0.09;
+          gain.gain.setValueAtTime(0.22, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+          osc.start(t); osc.stop(t + 0.22);
+        });
+      }
+    } catch { /* ignore AudioContext errors */ }
   }
 
   const checkAnswer = () => {
@@ -509,8 +670,13 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
       setStreak(s => s + 1);
       setCoinBurst(true);
       setTimeout(() => setCoinBurst(false), 1000);
+      playSound('correct');
+      setTimeout(() => playSound('coin'), 400);
+      setMeeraBouncing(true);
+      setTimeout(() => setMeeraBouncing(false), 900);
     } else {
       setStreak(0);
+      playSound('wrong');
     }
     if (voiceEnabled) void speakText(correct ? "Excellent work! That is correct." : "Not quite — let me explain the answer.");
   };
@@ -529,19 +695,32 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
     moveToStep(stepIndex + 1);
   };
 
+  const palette = LEVEL_PALETTE[lesson.course.levelSlug] ?? LEVEL_PALETTE["level-1"];
+
   const C = {
-    sidebarBg: "#FFFFFF",
-    headerBg: "#065F46",
-    avatarCard: "linear-gradient(160deg, #064E3B, #065F46, #047857)",
-    mainBg: "#F8FAFC",
+    green: palette.primary,
+    accent: palette.primary,
     dark: "#0F172A",
-    green: "#10B981",
-    accent: "#F59E0B",
+    mainBg: palette.bg,
+    sidebarBg: "#FFFFFF",
+    headerBg: palette.headerBg,
+    avatarCard: `linear-gradient(160deg, ${palette.headerBg}, ${palette.primary}88)`,
   };
 
   return (
-    <main style={{ minHeight: "100vh", background: C.mainBg, color: C.dark, fontFamily: "'Inter', 'Segoe UI', sans-serif" }}>
-      <style>{GLOBAL_CSS}</style>
+    <main style={{ minHeight: "100vh", background: C.mainBg, color: C.dark, fontFamily: "'Nunito', 'Inter', 'Segoe UI', sans-serif" }}>
+      <style>{GLOBAL_CSS + `
+  .mm-shimmer {
+    background: ${palette.shimmer};
+    background-size: 200% 100%;
+    animation: mmShimmer 2s linear infinite;
+  }
+  .mm-glow { animation: mmGlow-${lesson.course.levelSlug} 2s ease-in-out infinite; }
+  @keyframes mmGlow-${lesson.course.levelSlug} {
+    0%,100%{box-shadow:0 0 0 0 ${palette.primary}55}
+    50%{box-shadow:0 0 0 8px ${palette.primary}00}
+  }
+`}</style>
 
       {/* ── Top header ────────────────────────────────────────────────────── */}
       <header style={{ background: C.headerBg, color: "#F8FAFC", padding: isMobile ? "10px 14px" : "14px 24px", position: "sticky", top: 0, zIndex: 110, borderBottom: "1px solid #064E3B" }}>
@@ -586,7 +765,7 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
       {isMobile && (
         <div style={{ background: C.avatarCard, padding: "12px 16px", display: "flex", gap: 12, alignItems: "flex-start" }}>
           <div style={{ flexShrink: 0 }}>
-            <MoneyMindAvatar speaking={isSpeaking} mood={avatarMood} gesture={avatarGesture} size={56} />
+            <MoneyMindAvatar speaking={isSpeaking} mood={avatarMood} gesture={avatarGesture} size={56} bouncing={meeraBouncing} />
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 10, color: "#A7F3D0", fontWeight: 800, letterSpacing: 1, marginBottom: 4 }}>MEERA</div>
@@ -611,10 +790,10 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
         <aside style={{ background: C.sidebarBg, borderRight: "1px solid #E2E8F0", padding: 20, display: "grid", alignContent: "start", gap: 16, position: isNarrow ? "static" : "sticky", top: 68, height: isNarrow ? "auto" : "calc(100vh - 68px)", overflowY: "auto" }}>
 
           {/* Avatar card */}
-          <div style={{ background: C.avatarCard, borderRadius: 18, padding: 18, color: "#FFFFFF" }}>
+          <div style={{ background: C.avatarCard, borderRadius: 18, padding: 18, color: "#FFFFFF", position: "relative" }}>
             <div style={{ fontSize: 11, color: "#A7F3D0", textTransform: "uppercase", letterSpacing: 1.1, marginBottom: 10 }}>MoneyMind Coach</div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <MoneyMindAvatar speaking={isSpeaking} mood={avatarMood} gesture={avatarGesture} size={isNarrow ? 120 : 155} />
+              <MoneyMindAvatar speaking={isSpeaking} mood={avatarMood} gesture={avatarGesture} size={isNarrow ? 120 : 155} bouncing={meeraBouncing} />
             </div>
             <div style={{ display: "flex", gap: 10, marginTop: 12, flexWrap: "wrap" }}>
               <button
@@ -631,9 +810,14 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
               </button>
             </div>
             {voiceStatus && <div style={{ marginTop: 8, fontSize: 11, color: "#A7F3D0" }}>{voiceStatus}</div>}
-            <div key={`speech-${stepIndex}`} className="mm-fade-in" style={{ marginTop: 14, fontSize: 13, lineHeight: 1.75, color: "#D1FAE5" }}>
+            <div key={`speech-${stepIndex}`} className="mm-fade-in" style={{ marginTop: 14, fontSize: 15, lineHeight: 1.75, color: "#D1FAE5" }}>
               {step.tutorText}
             </div>
+            {feedback?.correct && (
+              <div style={{ position: "absolute", right: 16, bottom: 16, animation: "mmPopIn .5s ease both", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.2))" }}>
+                <MascotSticker lessonId={lesson.lesson.id} />
+              </div>
+            )}
           </div>
 
           {/* Full course content — all levels & lessons */}
@@ -693,25 +877,25 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             </span>
           </div>
 
-          {/* ── Comic strip ── */}
-          <div key={`comic-${stepIndex}`} className="mm-board-enter">
+          {/* ── Wipe wrapper: comic + visual + board ── */}
+          <div key={`content-${stepIndex}`} className={stepDir === 'forward' ? 'mm-wipe-forward' : 'mm-wipe-back'}>
+
+            {/* ── Comic strip ── */}
             <StepComic lessonId={lesson.lesson.id} stepId={step.id} />
-          </div>
 
-          {/* ── Step Visual (animated SVG illustration) ── */}
-          {(() => {
-            const viz = <StepVisual lessonId={lesson.lesson.id} stepId={step.id} boardData={step.board.data as Record<string, unknown>} />;
-            return <div key={`viz-${stepIndex}`} className="mm-board-enter">{viz}</div>;
-          })()}
+            {/* ── Step Visual (animated SVG illustration) ── */}
+            <StepVisual lessonId={lesson.lesson.id} stepId={step.id} boardData={step.board.data as Record<string, unknown>} />
 
-          {/* Board */}
-          <div key={`board-${stepIndex}`} className="mm-board-enter">
-            {!["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(step.board.type) && (
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: -14, position: "relative", zIndex: 2 }}>
-                {getBoardIllustration(step.board.type, step.board.data.headline ?? step.board.data.title, step.board.data.emoji)}
-              </div>
-            )}
-            <BoardCard step={step} stepKey={stepIndex} />
+            {/* Board */}
+            <div>
+              {!["atm_simulator","upi_simulator","bank_simulator","pocket_money_planner","passbook_viewer"].includes(step.board.type) && (
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: -14, position: "relative", zIndex: 2 }}>
+                  {getBoardIllustration(step.board.type, step.board.data.headline ?? step.board.data.title, step.board.data.emoji)}
+                </div>
+              )}
+              <BoardCard step={step} stepKey={stepIndex} />
+            </div>
+
           </div>
 
           {/* Explanation */}
@@ -731,7 +915,7 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
           {hasPractice && step.practice && (
             <div style={{ background: "#FFFFFF", border: `2px solid ${checked ? (feedback?.correct ? C.green : "#EF4444") : "#CBD5E1"}`, borderRadius: 18, padding: "22px 20px" }}>
               <div style={{ color: "#065F46", fontWeight: 800, fontSize: 13, marginBottom: 14, textTransform: "uppercase", letterSpacing: 0.8 }}>✏️ Quick Check</div>
-              <p style={{ color: "#0F172A", fontSize: 15, fontWeight: 600, marginBottom: 18, lineHeight: 1.5 }}>{step.practice.prompt}</p>
+              <p style={{ color: "#0F172A", fontSize: 18, fontWeight: 600, marginBottom: 18, lineHeight: 1.5 }}>{step.practice.prompt}</p>
 
               {step.practice.mode === "mcq" && step.practice.options && (
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
@@ -746,7 +930,7 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
                         style={{
                           background: isRight ? "#F0FDF4" : isWrong ? "#FEF2F2" : isSel ? "#EFF6FF" : "#F8FAFC",
                           border: `2px solid ${isRight ? C.green : isWrong ? "#EF4444" : isSel ? "#3B82F6" : "#E2E8F0"}`,
-                          borderRadius: 12, padding: "12px 14px", color: "#0F172A", fontSize: 13,
+                          borderRadius: 12, padding: "12px 14px", color: "#0F172A", fontSize: 16,
                           fontWeight: isSel ? 700 : 400, cursor: checked ? "default" : "pointer",
                           textAlign: "left", transition: "all 0.15s",
                         }}

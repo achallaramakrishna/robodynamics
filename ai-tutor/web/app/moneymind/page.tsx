@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MONEYMIND_LEVELS, MoneyMindLevel } from "../../lib/moneyMindCatalog";
 
 // ─── Theme ────────────────────────────────────────────────────────────────────
@@ -22,6 +22,48 @@ const BIZ_BADGES = [
   { label: "Taxes", color: "#EF4444" },
   { label: "Startups", color: "#8B5CF6" },
 ];
+
+// ─── Streak Banner ────────────────────────────────────────────────────────────
+function StreakBanner() {
+  const [streak, setStreak] = useState(0);
+  const [coins, setCoins] = useState(0);
+  useEffect(() => {
+    try {
+      const today = new Date().toDateString();
+      const data = JSON.parse(localStorage.getItem('mm_streak') || '{"streak":0,"lastDate":"","coins":0}');
+      let newStreak = data.streak;
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      if (data.lastDate === today) { newStreak = data.streak; }
+      else if (data.lastDate === yesterday) { newStreak = data.streak + 1; }
+      else { newStreak = 1; }
+      const newCoins = (data.coins || 0);
+      localStorage.setItem('mm_streak', JSON.stringify({ streak: newStreak, lastDate: today, coins: newCoins }));
+      setStreak(newStreak);
+      setCoins(newCoins);
+    } catch { setStreak(1); }
+  }, []);
+  if (streak < 1) return null;
+  return (
+    <div style={{ display: "flex", gap: 12, justifyContent: "center", alignItems: "center", flexWrap: "wrap", margin: "0 auto 24px", maxWidth: 600 }}>
+      <div style={{ background: "linear-gradient(135deg,#92400E,#D97706)", borderRadius: 16, padding: "12px 22px", display: "flex", alignItems: "center", gap: 10, boxShadow: "0 4px 16px rgba(217,119,6,0.3)" }}>
+        <span style={{ fontSize: 28 }}>{streak >= 7 ? "🔥" : streak >= 3 ? "⚡" : "✨"}</span>
+        <div>
+          <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 18, lineHeight: 1 }}>{streak} Day{streak > 1 ? "s" : ""} Streak!</div>
+          <div style={{ color: "#FDE68A", fontSize: 12, marginTop: 2 }}>Keep going — you&apos;re on fire!</div>
+        </div>
+      </div>
+      {coins > 0 && (
+        <div style={{ background: "linear-gradient(135deg,#065F46,#10B981)", borderRadius: 16, padding: "12px 22px", display: "flex", alignItems: "center", gap: 8, boxShadow: "0 4px 16px rgba(16,185,129,0.3)" }}>
+          <span style={{ fontSize: 24 }}>🪙</span>
+          <div>
+            <div style={{ color: "#D1FAE5", fontWeight: 900, fontSize: 18, lineHeight: 1 }}>{coins} Coins</div>
+            <div style={{ color: "#A7F3D0", fontSize: 12, marginTop: 2 }}>Total earned</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── Level Card Component ─────────────────────────────────────────────────────
 
@@ -147,6 +189,7 @@ export default function MoneyMindPage() {
       {/* ── 5 Adaptive Levels ────────────────────────────────────────────────── */}
       <section id="levels" style={{ padding: "72px 32px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <StreakBanner />
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 900, color: THEME.textMain, margin: "0 0 12px" }}>
               The 6 Growth Tiers

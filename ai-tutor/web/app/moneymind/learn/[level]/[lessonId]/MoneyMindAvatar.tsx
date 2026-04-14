@@ -26,15 +26,17 @@ export type MeeraMood    = keyof typeof EXPRESSION_MAP;
 export type MeeraGesture = keyof typeof GESTURE_MAP;
 
 export default function MoneyMindAvatar({
-  speaking = false,
-  mood     = "neutral",
-  gesture  = "idle",
-  size     = 160,
+  speaking  = false,
+  mood      = "neutral",
+  gesture   = "idle",
+  size      = 160,
+  bouncing  = false,
 }: {
-  speaking?: boolean;
-  mood?:     MeeraMood;
-  gesture?:  MeeraGesture;
-  size?:     number;
+  speaking?:  boolean;
+  mood?:      MeeraMood;
+  gesture?:   MeeraGesture;
+  size?:      number;
+  bouncing?:  boolean;
 }) {
   const [blinking, setBlinking] = useState(false);
   const blinkRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,6 +61,7 @@ export default function MoneyMindAvatar({
   const stageH = Math.max(290, Math.round(size * 2.05));
 
   return (
+    <div style={{ display: "inline-block", animation: bouncing ? 'meeraBounce 0.8s cubic-bezier(.36,.07,.19,.97) both' : 'none', width: "100%" }}>
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: "100%" }}>
       <div style={{
         position: "relative",
@@ -153,7 +156,16 @@ export default function MoneyMindAvatar({
           from { transform: scale(1.12);    }
           to   { transform: scale(1.145); }
         }
+        @keyframes meeraBounce {
+          0%,100%{transform:translateY(0) scale(1)}
+          20%{transform:translateY(-18px) scale(1.05,0.95)}
+          40%{transform:translateY(-28px) scale(0.95,1.05)}
+          60%{transform:translateY(-12px) scale(1.02,0.98)}
+          80%{transform:translateY(-6px) scale(0.99,1.01)}
+        }
+        @keyframes mmAvSpeak { 0%{transform:scale(1) translateY(0)} 100%{transform:scale(1.025) translateY(-3px)} }
       `}</style>
+    </div>
     </div>
   );
 }

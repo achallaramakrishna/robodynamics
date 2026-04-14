@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import type { MoneyMindLessonPayload, MoneyMindLessonStep } from "@/lib/moneyMindLessonTypes";
-import { getNextLessonId } from "@/lib/moneyMindLessonRegistry";
+import { getNextLessonId, MONEYMIND_LESSON_REGISTRY } from "@/lib/moneyMindLessonRegistry";
 import AtmSimulator from "@/components/moneymind/AtmSimulator";
 import UpiSimulator from "@/components/moneymind/UpiSimulator";
 import BankPortal from "@/components/moneymind/BankPortal";
@@ -233,6 +233,97 @@ function ChatPanel({ lesson, step, onClose }: { lesson: MoneyMindLessonPayload; 
         <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} placeholder="Ask anything…" style={{ flex: 1, background: "#1E293B", border: "1px solid #334155", borderRadius: 10, padding: "10px 14px", color: "#F1F5F9", fontSize: 13, outline: "none" }} />
         <button onClick={send} disabled={loading || !input.trim()} style={{ background: "#3B82F6", color: "#fff", border: "none", borderRadius: 10, padding: "10px 16px", fontWeight: 700, cursor: "pointer", opacity: loading ? 0.6 : 1, fontSize: 13 }}>Send</button>
       </div>
+    </div>
+  );
+}
+
+// ─── Course content sidebar: all 6 levels × 4 lessons ────────────────────────
+const LEVEL_META: { slug: string; label: string; levelId: string }[] = [
+  { slug: "level-1", label: "Level 1 — My First Money World", levelId: "L1" },
+  { slug: "level-2", label: "Level 2 — Earning & Saving",     levelId: "L2" },
+  { slug: "level-3", label: "Level 3 — Smart Spending",       levelId: "L3" },
+  { slug: "level-4", label: "Level 4 — Banking Basics",       levelId: "L4" },
+  { slug: "level-5", label: "Level 5 — Digital Money",        levelId: "L5" },
+  { slug: "level-6", label: "Level 6 — Money Mindset",        levelId: "L6" },
+];
+
+function CourseContentList({ currentLessonId, currentLevelSlug, green }: {
+  currentLessonId: string;
+  currentLevelSlug: string;
+  green: string;
+}) {
+  const [openLevel, setOpenLevel] = useState<string>(currentLevelSlug);
+
+  // Group registry by level
+  const grouped = useMemo(() => {
+    const map: Record<string, { id: string; title: string; slug: string }[]> = {};
+    Object.entries(MONEYMIND_LESSON_REGISTRY).forEach(([id, payload]) => {
+      const slug = payload.course.levelSlug;
+      if (!map[slug]) map[slug] = [];
+      map[slug].push({ id, title: payload.lesson.title, slug });
+    });
+    return map;
+  }, []);
+
+  return (
+    <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 18, overflow: "hidden" }}>
+      <div style={{ padding: "12px 16px", borderBottom: "1px solid #E2E8F0", fontSize: 12, color: "#64748B", textTransform: "uppercase", letterSpacing: 1, fontWeight: 700 }}>
+        Course Content
+      </div>
+      {LEVEL_META.map(({ slug, label }) => {
+        const isOpen    = openLevel === slug;
+        const lessons   = grouped[slug] ?? [];
+        const isCurrent = slug === currentLevelSlug;
+        return (
+          <div key={slug} style={{ borderBottom: "1px solid #F1F5F9" }}>
+            {/* Level header */}
+            <button
+              onClick={() => setOpenLevel(isOpen ? "" : slug)}
+              style={{
+                width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "12px 16px", background: isCurrent ? "#F0FDF4" : "#FAFAFA",
+                border: "none", cursor: "pointer", textAlign: "left",
+              }}
+            >
+              <span style={{ fontWeight: 700, fontSize: 13, color: isCurrent ? "#065F46" : "#1E293B" }}>{label}</span>
+              <span style={{ fontSize: 11, color: "#94A3B8", marginLeft: 8 }}>{isOpen ? "▲" : "▼"}</span>
+            </button>
+            {/* Lessons list */}
+            {isOpen && (
+              <div style={{ background: "#FFFFFF" }}>
+                {lessons.map((ls, i) => {
+                  const isActiveLesson = ls.id === currentLessonId;
+                  return (
+                    <Link
+                      key={ls.id}
+                      href={`/moneymind/learn/${slug}/${ls.id}`}
+                      style={{
+                        display: "flex", alignItems: "center", gap: 10,
+                        padding: "10px 20px",
+                        background: isActiveLesson ? "#ECFDF5" : "transparent",
+                        borderLeft: isActiveLesson ? `3px solid ${green}` : "3px solid transparent",
+                        textDecoration: "none",
+                        borderBottom: "1px solid #F8FAFC",
+                      }}
+                    >
+                      <span style={{
+                        width: 22, height: 22, borderRadius: "50%", flexShrink: 0,
+                        background: isActiveLesson ? green : "#E2E8F0",
+                        color: isActiveLesson ? "#fff" : "#64748B",
+                        fontSize: 11, fontWeight: 800,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                      }}>{i + 1}</span>
+                      <span style={{ fontSize: 13, fontWeight: isActiveLesson ? 700 : 500, color: isActiveLesson ? "#065F46" : "#334155", lineHeight: 1.4 }}>
+                        {ls.title}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -482,31 +573,8 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             </div>
           </div>
 
-          {/* Step list */}
-          <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 18, padding: 16 }}>
-            <div style={{ fontSize: 12, color: "#64748B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>Lesson Steps</div>
-            <div style={{ display: "grid", gap: 8 }}>
-              {lesson.steps.map((s, i) => {
-                const active = i === stepIndex;
-                const done   = i < stepIndex;
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => moveToStep(i)}
-                    style={{
-                      textAlign: "left",
-                      border: active ? `2px solid ${C.green}` : done ? "1px solid #DCFCE7" : "1px solid #E2E8F0",
-                      background: active ? "#F0FDF4" : done ? "#F9FFF9" : "#FFFFFF",
-                      borderRadius: 12, padding: "10px 12px", cursor: "pointer",
-                    }}
-                  >
-                    <div style={{ fontSize: 11, color: done ? C.green : "#64748B" }}>{done ? "✓ " : ""}Step {i + 1}</div>
-                    <div style={{ fontWeight: 700, color: active ? "#065F46" : "#0F172A", fontSize: 13 }}>{s.label}</div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          {/* Full course content — all levels & lessons */}
+          <CourseContentList currentLessonId={lesson.lesson.id} currentLevelSlug={lesson.course.levelSlug} green={C.green} />
 
           {/* Ask Meera */}
           <button

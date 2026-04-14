@@ -1007,8 +1007,8 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
           {/* ── Sticky nav bar — always visible ── */}
           <div style={{
             flexShrink: 0,
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-            padding: isMobile ? "12px 14px" : "14px 28px",
+            display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8,
+            padding: isMobile ? "10px 12px" : "14px 28px",
             background: "#F8FAFC",
             borderTop: "2px solid #E2E8F0",
             boxShadow: "0 -4px 16px rgba(0,0,0,0.06)",
@@ -1016,42 +1016,72 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             bottom: isMobile ? 0 : "auto",
             zIndex: 20,
           }}>
+            {/* Prev button — never shrinks */}
             <button
               onClick={() => moveToStep(stepIndex - 1)}
               disabled={stepIndex === 0}
-              style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", color: "#64748B", borderRadius: 12, padding: isMobile ? "11px 16px" : "12px 24px", fontWeight: 700, fontSize: isMobile ? 13 : 14, cursor: stepIndex === 0 ? "not-allowed" : "pointer", opacity: stepIndex === 0 ? 0.4 : 1 }}
+              style={{
+                flexShrink: 0,
+                background: "#FFFFFF", border: "1px solid #E2E8F0", color: "#64748B",
+                borderRadius: 12, padding: isMobile ? "12px 14px" : "12px 24px",
+                fontWeight: 700, fontSize: isMobile ? 14 : 14,
+                cursor: stepIndex === 0 ? "not-allowed" : "pointer",
+                opacity: stepIndex === 0 ? 0.35 : 1,
+                whiteSpace: "nowrap",
+              }}
             >
-              ← Prev
+              ← {isMobile ? "" : "Prev"}
             </button>
 
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 11, color: "#94A3B8", fontWeight: 600 }}>{stepIndex + 1} / {totalSteps}</div>
-              <div style={{ display: "flex", gap: 4, marginTop: 4, justifyContent: "center" }}>
-                {lesson.steps.map((_, i) => (
-                  <div key={i} onClick={() => moveToStep(i)} style={{
-                    width: i === stepIndex ? 16 : 5, height: 5, borderRadius: 3,
-                    background: i < stepIndex ? C.green : i === stepIndex ? "#065F46" : "#CBD5E1",
-                    transition: "all 0.3s", cursor: "pointer",
-                  }} />
-                ))}
+            {/* Centre: step counter + dots (dots hidden on mobile) */}
+            <div style={{ textAlign: "center", flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: isMobile ? 13 : 11, color: "#64748B", fontWeight: 800 }}>
+                {stepIndex + 1} / {totalSteps}
               </div>
+              {!isMobile && (
+                <div style={{ display: "flex", gap: 4, marginTop: 4, justifyContent: "center" }}>
+                  {lesson.steps.map((_, i) => (
+                    <div key={i} onClick={() => moveToStep(i)} style={{
+                      width: i === stepIndex ? 16 : 5, height: 5, borderRadius: 3,
+                      background: i < stepIndex ? C.green : i === stepIndex ? "#065F46" : "#CBD5E1",
+                      transition: "all 0.3s", cursor: "pointer",
+                    }} />
+                  ))}
+                </div>
+              )}
+              {/* Mobile: tiny dot row, no expanding dots */}
+              {isMobile && (
+                <div style={{ display: "flex", gap: 3, marginTop: 3, justifyContent: "center" }}>
+                  {lesson.steps.map((_, i) => (
+                    <div key={i} onClick={() => moveToStep(i)} style={{
+                      width: 6, height: 6, borderRadius: "50%",
+                      background: i < stepIndex ? C.green : i === stepIndex ? C.green : "#CBD5E1",
+                      flexShrink: 0, cursor: "pointer",
+                    }} />
+                  ))}
+                </div>
+              )}
             </div>
 
+            {/* Next button — never shrinks, always fully visible */}
             <button
               onClick={advance}
               disabled={needsCheck || finishing}
               style={{
-                background: isLastStep ? `linear-gradient(90deg, #FCD34D, ${C.accent})` : C.green,
-                color: isLastStep ? "#451A03" : "#fff",
-                border: "none", borderRadius: 12, padding: isMobile ? "11px 18px" : "12px 28px",
-                fontWeight: 900, fontSize: isMobile ? 13 : 15,
+                flexShrink: 0,
+                background: needsCheck ? "#E2E8F0" : isLastStep ? `linear-gradient(90deg, #FCD34D, ${C.accent})` : C.green,
+                color: needsCheck ? "#94A3B8" : isLastStep ? "#451A03" : "#fff",
+                border: "none", borderRadius: 12,
+                padding: isMobile ? "12px 18px" : "12px 28px",
+                fontWeight: 900, fontSize: isMobile ? 14 : 15,
                 cursor: (needsCheck || finishing) ? "not-allowed" : "pointer",
-                opacity: (needsCheck || finishing) ? 0.5 : 1,
+                opacity: finishing ? 0.6 : 1,
                 boxShadow: needsCheck ? "none" : isLastStep ? "0 4px 16px rgba(245,158,11,0.4)" : "0 4px 16px rgba(16,185,129,0.35)",
                 animation: (!needsCheck && !finishing) ? "mmGlow 2s ease-in-out infinite" : undefined,
+                whiteSpace: "nowrap",
               }}
             >
-              {finishing ? "Saving…" : isLastStep ? "🏆 Done" : "Next →"}
+              {finishing ? "⏳" : isLastStep ? "🏆 Done" : isMobile ? "Next →" : "Next →"}
             </button>
           </div>
         </section>

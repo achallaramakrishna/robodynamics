@@ -38,8 +38,10 @@ export function BarterVsMoneyViz() {
   return (
     <div style={{ background: "linear-gradient(135deg,#0F172A,#1E293B)", borderRadius: 20, padding: "24px 20px", overflow: "hidden", position: "relative" }}>
       <style>{GLOBAL_VIZ_CSS}</style>
-      <div style={{ textAlign: "center", color: "#A7F3D0", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 18 }}>
-        How Money Evolved
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <span style={{ display: "inline-block", background: "rgba(16,185,129,0.2)", border: "1px solid rgba(16,185,129,0.4)", borderRadius: 30, padding: "6px 20px", color: "#A7F3D0", fontSize: 14, fontWeight: 900, letterSpacing: 1.2, textTransform: "uppercase" }}>
+          💡 How Money Evolved
+        </span>
       </div>
 
       {/* Two panels side by side */}
@@ -47,13 +49,13 @@ export function BarterVsMoneyViz() {
 
         {/* BARTER side */}
         <div style={{ background: "#1E3A5F", borderRadius: 16, padding: "16px 12px", textAlign: "center", border: `2px solid ${phase < 2 ? "#3B82F6" : "#334155"}`, transition: "border-color .6s" }}>
-          <div style={{ fontSize: 11, color: "#93C5FD", fontWeight: 800, marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>BARTER</div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 10, animation: "vFloat 2.5s ease-in-out infinite" }}>
-            {["✏️","✏️","✏️"].map((e,i) => <span key={i} style={{ fontSize: 22 }}>{e}</span>)}
+          <div style={{ fontSize: 13, color: "#93C5FD", fontWeight: 900, marginBottom: 14, textTransform: "uppercase", letterSpacing: 1.2 }}>BARTER</div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 6, marginBottom: 10, animation: "vFloat 2.5s ease-in-out infinite" }}>
+            {["✏️","✏️","✏️"].map((e,i) => <span key={i} style={{ fontSize: 32 }}>{e}</span>)}
           </div>
-          <div style={{ color: "#CBD5E1", fontSize: 12 }}>3 Pencils</div>
+          <div style={{ color: "#CBD5E1", fontSize: 15, fontWeight: 700 }}>3 Pencils</div>
           {phase >= 1 && (
-            <div style={{ marginTop: 10, padding: "8px", background: "#EF44441a", border: "1px solid #EF4444", borderRadius: 8, color: "#FCA5A5", fontSize: 11, animation: "vSlideU .5s ease both" }}>
+            <div style={{ marginTop: 12, padding: "10px 12px", background: "#EF44441a", border: "1px solid #EF4444", borderRadius: 10, color: "#FCA5A5", fontSize: 14, fontWeight: 700, animation: "vSlideU .5s ease both" }}>
               ❌ What if they don't want pencils?
             </div>
           )}
@@ -69,13 +71,13 @@ export function BarterVsMoneyViz() {
 
         {/* MONEY side */}
         <div style={{ background: "#064E3B", borderRadius: 16, padding: "16px 12px", textAlign: "center", border: `2px solid ${phase >= 2 ? "#10B981" : "#334155"}`, transition: "border-color .6s" }}>
-          <div style={{ fontSize: 11, color: "#6EE7B7", fontWeight: 800, marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>MONEY</div>
+          <div style={{ fontSize: 13, color: "#6EE7B7", fontWeight: 900, marginBottom: 14, textTransform: "uppercase", letterSpacing: 1.2 }}>MONEY</div>
           <div style={{ animation: phase >= 2 ? "vBounce 1s ease both" : undefined }}>
-            <div style={{ fontSize: 40, lineHeight: 1 }}>₹</div>
-            <div style={{ color: "#A7F3D0", fontSize: 12, marginTop: 4 }}>Rupee Note</div>
+            <div style={{ fontSize: 56, lineHeight: 1, filter: "drop-shadow(0 4px 12px rgba(16,185,129,0.5))" }}>₹</div>
+            <div style={{ color: "#A7F3D0", fontSize: 15, fontWeight: 700, marginTop: 6 }}>Rupee Note</div>
           </div>
           {phase >= 3 && (
-            <div style={{ marginTop: 10, padding: "8px", background: "#10B9811a", border: "1px solid #10B981", borderRadius: 8, color: "#6EE7B7", fontSize: 11, animation: "vSlideU .5s ease both" }}>
+            <div style={{ marginTop: 12, padding: "10px 12px", background: "#10B9811a", border: "1px solid #10B981", borderRadius: 10, color: "#6EE7B7", fontSize: 14, fontWeight: 700, animation: "vSlideU .5s ease both" }}>
               ✅ Everyone accepts ₹!
             </div>
           )}
@@ -83,11 +85,13 @@ export function BarterVsMoneyViz() {
       </div>
 
       {/* Bottom wisdom */}
-      <div style={{ marginTop: 16, textAlign: "center", color: "#94A3B8", fontSize: 12, lineHeight: 1.6, padding: "0 8px" }}>
-        {phase === 0 && "People used to swap goods directly…"}
-        {phase === 1 && "Problem: What if the other person doesn't want what you have?"}
-        {phase === 2 && "💡 Money is a token everyone agrees has value!"}
-        {phase === 3 && <span style={{ color: "#6EE7B7", fontWeight: 700 }}>🇮🇳 The Rupee (₹) is India's universal money token</span>}
+      <div style={{ marginTop: 18, textAlign: "center", background: "rgba(255,255,255,0.05)", borderRadius: 14, padding: "14px 16px" }}>
+        <div style={{ color: "#E2E8F0", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>
+          {phase === 0 && "👀 People used to swap goods directly…"}
+          {phase === 1 && "😬 Problem: What if the other person doesn't want what you have?"}
+          {phase === 2 && "💡 Money is a token everyone agrees has value!"}
+          {phase === 3 && <span style={{ color: "#6EE7B7", fontWeight: 800 }}>🇮🇳 The Rupee (₹) is India's universal money token!</span>}
+        </div>
       </div>
     </div>
   );
@@ -278,41 +282,82 @@ export function BarterIntroViz() {
   const swapVisible = tick % 2 === 1;
 
   return (
-    <div style={{ background: "linear-gradient(135deg,#1E3A5F,#0F172A)", borderRadius: 20, padding: "28px 20px" }}>
+    <div style={{ background: "linear-gradient(135deg,#1E3A5F,#0F172A)", borderRadius: 24, padding: "28px 20px", boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
       <style>{GLOBAL_VIZ_CSS}</style>
-      <div style={{ textAlign: "center", color: "#93C5FD", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 20 }}>
-        Before Money — Barter System
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
-        {/* Rahul */}
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 44, animation: "vFloat 2s ease-in-out infinite" }}>🧑</div>
-          <div style={{ color: "#CBD5E1", fontSize: 12, marginTop: 6 }}>Rahul</div>
-          <div style={{ marginTop: 8, display: "flex", gap: 4 }}>
-            {[0,1,2].map(i => <span key={i} style={{ fontSize: 20, opacity: swapVisible ? .4 : 1, transition: "opacity .4s" }}>✏️</span>)}
-          </div>
-          <div style={{ color: "#93C5FD", fontSize: 11, marginTop: 4 }}>3 Pencils</div>
-        </div>
-
-        {/* Swap arrow */}
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 32, color: "#F59E0B", animation: "vPulse 1.6s ease-in-out infinite" }}>⇄</div>
-          <div style={{ color: "#FCD34D", fontSize: 11, fontWeight: 700, marginTop: 4 }}>SWAP</div>
-        </div>
-
-        {/* Priya */}
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 44, animation: "vFloat 2s ease-in-out infinite", animationDelay: ".8s" }}>👧</div>
-          <div style={{ color: "#CBD5E1", fontSize: 12, marginTop: 6 }}>Priya</div>
-          <div style={{ marginTop: 8 }}>
-            <span style={{ fontSize: 26, opacity: swapVisible ? 1 : .4, transition: "opacity .4s" }}>🍫</span>
-          </div>
-          <div style={{ color: "#93C5FD", fontSize: 11, marginTop: 4 }}>1 Chocolate</div>
+      {/* Big bold header */}
+      <div style={{ textAlign: "center", marginBottom: 24 }}>
+        <div style={{ display: "inline-block", background: "rgba(59,130,246,0.2)", border: "1px solid rgba(59,130,246,0.4)", borderRadius: 30, padding: "6px 20px", color: "#93C5FD", fontSize: 14, fontWeight: 900, letterSpacing: 1.2, textTransform: "uppercase" }}>
+          📜 Before Money — Barter System
         </div>
       </div>
 
-      <div style={{ marginTop: 20, textAlign: "center", background: "rgba(249,115,22,.1)", border: "1px solid #FB923C", borderRadius: 12, padding: "12px 16px", color: "#FED7AA", fontSize: 13 }}>
-        💭 But what if Priya doesn't want pencils? Problem!
+      <div style={{ display: "flex", justifyContent: "space-around", alignItems: "flex-end", gap: 8 }}>
+        {/* Rahul — big character card */}
+        <div style={{ textAlign: "center", flex: 1 }}>
+          {/* Big character avatar */}
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <div style={{ fontSize: 80, lineHeight: 1, animation: "vFloat 2s ease-in-out infinite", filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.5))" }}>🧒</div>
+            {/* Item bubble */}
+            <div style={{
+              position: "absolute", top: -12, right: -18,
+              background: swapVisible ? "rgba(59,130,246,0.3)" : "#1D4ED8",
+              borderRadius: 14, padding: "6px 10px",
+              display: "flex", gap: 3, alignItems: "center",
+              transition: "all .4s", boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              border: "2px solid rgba(147,197,253,0.4)",
+            }}>
+              {[0,1,2].map(i => <span key={i} style={{ fontSize: 22, opacity: swapVisible ? 0.3 : 1, transition: "opacity .4s" }}>✏️</span>)}
+            </div>
+          </div>
+          <div style={{ marginTop: 14 }}>
+            <div style={{ color: "#F8FAFC", fontSize: 20, fontWeight: 900 }}>Rahul</div>
+            <div style={{ color: "#93C5FD", fontSize: 15, fontWeight: 700, marginTop: 4 }}>Has 3 Pencils</div>
+            <div style={{ marginTop: 8, background: "rgba(59,130,246,0.15)", borderRadius: 10, padding: "6px 12px", color: "#BFDBFE", fontSize: 13, fontWeight: 600 }}>
+              Wants 🍫 chocolate
+            </div>
+          </div>
+        </div>
+
+        {/* Swap arrow — big and animated */}
+        <div style={{ textAlign: "center", flexShrink: 0, padding: "0 4px" }}>
+          <div style={{ fontSize: 52, color: "#F59E0B", animation: "vPulse 1.6s ease-in-out infinite", filter: "drop-shadow(0 4px 12px rgba(245,158,11,0.5))" }}>⇄</div>
+          <div style={{ color: "#FCD34D", fontSize: 14, fontWeight: 900, marginTop: 6, letterSpacing: 0.5 }}>SWAP</div>
+          <div style={{ color: "#94A3B8", fontSize: 12, marginTop: 2 }}>direct trade</div>
+        </div>
+
+        {/* Priya — big character card */}
+        <div style={{ textAlign: "center", flex: 1 }}>
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <div style={{ fontSize: 80, lineHeight: 1, animation: "vFloat 2s ease-in-out infinite", animationDelay: ".8s", filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.5))" }}>👧</div>
+            {/* Item bubble */}
+            <div style={{
+              position: "absolute", top: -12, left: -18,
+              background: swapVisible ? "#065F46" : "rgba(16,185,129,0.3)",
+              borderRadius: 14, padding: "6px 12px",
+              transition: "all .4s", boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              border: "2px solid rgba(110,231,183,0.4)",
+            }}>
+              <span style={{ fontSize: 32, opacity: swapVisible ? 1 : 0.3, transition: "opacity .4s" }}>🍫</span>
+            </div>
+          </div>
+          <div style={{ marginTop: 14 }}>
+            <div style={{ color: "#F8FAFC", fontSize: 20, fontWeight: 900 }}>Priya</div>
+            <div style={{ color: "#6EE7B7", fontSize: 15, fontWeight: 700, marginTop: 4 }}>Has Chocolate</div>
+            <div style={{ marginTop: 8, background: "rgba(16,185,129,0.15)", borderRadius: 10, padding: "6px 12px", color: "#A7F3D0", fontSize: 13, fontWeight: 600 }}>
+              Wants ✏️ pencils
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ marginTop: 24, textAlign: "center", background: "rgba(249,115,22,.15)", border: "2px solid #F97316", borderRadius: 16, padding: "16px 20px" }}>
+        <div style={{ fontSize: 22, marginBottom: 6 }}>🤔</div>
+        <div style={{ color: "#FED7AA", fontSize: 17, fontWeight: 800, lineHeight: 1.5 }}>
+          But what if Priya doesn't want pencils?
+        </div>
+        <div style={{ color: "#FB923C", fontSize: 14, fontWeight: 700, marginTop: 4 }}>
+          This is the big problem with barter!
+        </div>
       </div>
     </div>
   );

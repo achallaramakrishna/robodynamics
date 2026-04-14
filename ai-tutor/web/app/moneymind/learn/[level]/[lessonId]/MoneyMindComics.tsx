@@ -96,15 +96,15 @@ function CharacterFace({
 // ─── Speech Bubble ─────────────────────────────────────────────────────────────
 function Bubble({ text, color = "#1E3A5F", tail = "left" }: { text: string; color?: string; tail?: "left"|"right" }) {
   return (
-    <div style={{ position: "relative", background: color, borderRadius: 14, padding: "8px 12px", maxWidth: 180, fontSize: 12, fontWeight: 600, color: "#F8FAFC", lineHeight: 1.5, boxShadow: "0 3px 12px rgba(0,0,0,.2)" }}>
+    <div style={{ position: "relative", background: color, borderRadius: 18, padding: "12px 16px", maxWidth: 240, fontSize: 15, fontWeight: 700, color: "#F8FAFC", lineHeight: 1.55, boxShadow: "0 4px 16px rgba(0,0,0,.3)", letterSpacing: 0.1 }}>
       {text}
       <div style={{
         position: "absolute",
-        bottom: -7, [tail === "left" ? "left" : "right"]: 16,
+        bottom: -10, [tail === "left" ? "left" : "right"]: 20,
         width: 0, height: 0,
-        borderLeft: "7px solid transparent",
-        borderRight: "7px solid transparent",
-        borderTop: `7px solid ${color}`,
+        borderLeft: "10px solid transparent",
+        borderRight: "10px solid transparent",
+        borderTop: `10px solid ${color}`,
       }}/>
     </div>
   );
@@ -128,31 +128,38 @@ function ComicStrip({ panels, bg = "#1E3A5F" }: { panels: Panel[]; bg?: string }
   }, [panels.length]);
 
   return (
-    <div style={{ background: bg, borderRadius: 20, padding: "14px 12px", display: "flex", gap: 8, alignItems: "flex-end", justifyContent: "center", flexWrap: "nowrap", overflow: "hidden" }}>
+    <div style={{
+      background: `linear-gradient(135deg, ${bg}, #0F172A)`,
+      borderRadius: 24, padding: "24px 16px 20px",
+      display: "flex", gap: 10, alignItems: "flex-end", justifyContent: "center",
+      flexWrap: "nowrap", overflow: "hidden",
+      boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
+      border: "1px solid rgba(255,255,255,0.08)",
+    }}>
       {panels.map((panel, i) => (
         <div
           key={i}
           style={{
-            display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 12,
             flex: 1, minWidth: 0,
             opacity: i < shown ? 1 : 0,
-            transform: i < shown ? "translateY(0)" : "translateY(16px)",
-            transition: `all .45s ease ${i * .1}s`,
+            transform: i < shown ? "translateY(0) scale(1)" : "translateY(24px) scale(0.9)",
+            transition: `all .5s cubic-bezier(.34,1.56,.64,1) ${i * .15}s`,
           }}
         >
           <Bubble text={panel.speech} color={panel.bubbleColor ?? "#1D4ED8"} tail={panel.flip ? "right" : "left"} />
           <div style={{ position: "relative", transform: panel.flip ? "scaleX(-1)" : undefined }}>
-            <CharacterFace name={panel.character} expression={panel.expression} size={56} />
+            <CharacterFace name={panel.character} expression={panel.expression} size={92} />
             {panel.item && (
-              <span style={{ position: "absolute", bottom: 2, right: -6, fontSize: 20, transform: panel.flip ? "scaleX(-1)" : undefined }}>
+              <span style={{ position: "absolute", bottom: 4, right: -10, fontSize: 28, transform: panel.flip ? "scaleX(-1)" : undefined, filter: "drop-shadow(0 2px 4px rgba(0,0,0,.4))" }}>
                 {panel.item}
               </span>
             )}
           </div>
-          {/* Panel divider */}
-          {i < panels.length - 1 && (
-            <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 2, background: "#0F172A", opacity: .3 }}/>
-          )}
+          {/* Character name tag */}
+          <div style={{ background: "rgba(255,255,255,0.12)", borderRadius: 20, padding: "3px 12px", fontSize: 12, fontWeight: 800, color: "#E2E8F0", letterSpacing: 0.5, textTransform: "uppercase" }}>
+            {panel.character.charAt(0).toUpperCase() + panel.character.slice(1)}
+          </div>
         </div>
       ))}
     </div>

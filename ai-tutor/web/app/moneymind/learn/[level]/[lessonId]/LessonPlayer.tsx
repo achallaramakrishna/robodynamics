@@ -472,12 +472,15 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
     } catch { if (myKey === speechKeyRef.current) speakWithBrowser(clean); }
   }
 
-  // Auto-speak on step change
+  // Auto-speak on step change (1.5s delay on first step so page fully loads before TTS call)
   useEffect(() => {
     setFeedback(null); setChecked(false); setSelectedAnswer(null); setNumericAnswer("");
-    if (voiceEnabled) void speakText(step.tutorText);
-    else stopSpeaking();
-    return () => { stopSpeaking(); };
+    const delay = stepIndex === 0 ? 1500 : 0;
+    const timer = setTimeout(() => {
+      if (voiceEnabled) void speakText(step.tutorText);
+      else stopSpeaking();
+    }, delay);
+    return () => { clearTimeout(timer); stopSpeaking(); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepIndex]);
 

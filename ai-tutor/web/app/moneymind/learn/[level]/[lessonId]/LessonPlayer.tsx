@@ -362,6 +362,7 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
   const nextLesson  = getNextLessonId(lesson.lesson.id);
   const progress    = ((stepIndex + 1) / totalSteps) * 100;
   const isNarrow    = viewportWidth < 1024;
+  const isMobile    = viewportWidth < 768;
 
   // ── Avatar mood / gesture ─────────────────────────────────────────────────
   const avatarMood = useMemo((): MeeraMood => {
@@ -540,39 +541,70 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
       <style>{GLOBAL_CSS}</style>
 
       {/* ── Top header ────────────────────────────────────────────────────── */}
-      <header style={{ background: C.headerBg, color: "#F8FAFC", padding: "14px 24px", position: "sticky", top: 0, zIndex: 110, borderBottom: "1px solid #064E3B" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-          <div>
-            <div style={{ fontSize: 11, color: "#A7F3D0", textTransform: "uppercase", letterSpacing: 1.1 }}>{lesson.course.title}</div>
-            <div style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.2 }}>{lesson.lesson.title}</div>
+      <header style={{ background: C.headerBg, color: "#F8FAFC", padding: isMobile ? "10px 14px" : "14px 24px", position: "sticky", top: 0, zIndex: 110, borderBottom: "1px solid #064E3B" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            {!isMobile && <div style={{ fontSize: 11, color: "#A7F3D0", textTransform: "uppercase", letterSpacing: 1.1 }}>{lesson.course.title}</div>}
+            <div style={{ fontSize: isMobile ? 15 : 20, fontWeight: 800, lineHeight: 1.2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{lesson.lesson.title}</div>
           </div>
-          <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-            <div style={{ background: "#F1F5F9", borderRadius: 100, height: 6, width: 160, overflow: "hidden" }}>
-              <div className="mm-shimmer" style={{ height: "100%", width: `${progress}%`, transition: "width .5s", borderRadius: 100 }} />
-            </div>
-            <button onClick={() => setVoiceEnabled(v => !v)} style={{ border: "1px solid rgba(255,255,255,0.3)", background: voiceEnabled ? "rgba(255,255,255,0.15)" : "transparent", color: "#F8FAFC", borderRadius: 10, padding: "8px 12px", cursor: "pointer", fontWeight: 700, fontSize: 12 }}>
-              {voiceEnabled ? "🔊 Voice on" : "🔇 Voice off"}
-            </button>
-            {/* Coin counter */}
-            <div style={{ display: "flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,.12)", borderRadius: 20, padding: "6px 12px" }}>
-              <span style={{ fontSize: 16, animation: coinBurst ? "mmCounter .4s ease both" : undefined }}>🪙</span>
-              <span style={{ color: "#FCD34D", fontWeight: 900, fontSize: 14, minWidth: 28, animation: coinBurst ? "mmCounter .4s ease both" : undefined }}>{coins}</span>
-            </div>
-            {streak >= 2 && (
-              <div style={{ display: "flex", alignItems: "center", gap: 4, background: "rgba(245,158,11,.2)", border: "1px solid #F59E0B", borderRadius: 20, padding: "6px 10px", animation: "mmStreak .5s ease both" }}>
-                <span style={{ fontSize: 14 }}>🔥</span>
-                <span style={{ color: "#FCD34D", fontWeight: 900, fontSize: 12 }}>{streak} streak!</span>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+            {!isMobile && (
+              <div style={{ background: "#F1F5F9", borderRadius: 100, height: 6, width: 160, overflow: "hidden" }}>
+                <div className="mm-shimmer" style={{ height: "100%", width: `${progress}%`, transition: "width .5s", borderRadius: 100 }} />
               </div>
             )}
-            <Link href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#D1FAE5", textDecoration: "none", fontWeight: 700, fontSize: 13 }}>← Course</Link>
+            {isMobile && (
+              <div style={{ background: "rgba(255,255,255,0.15)", borderRadius: 100, height: 5, width: 80, overflow: "hidden" }}>
+                <div className="mm-shimmer" style={{ height: "100%", width: `${progress}%`, transition: "width .5s", borderRadius: 100 }} />
+              </div>
+            )}
+            {!isMobile && (
+              <button onClick={() => setVoiceEnabled(v => !v)} style={{ border: "1px solid rgba(255,255,255,0.3)", background: voiceEnabled ? "rgba(255,255,255,0.15)" : "transparent", color: "#F8FAFC", borderRadius: 10, padding: "8px 12px", cursor: "pointer", fontWeight: 700, fontSize: 12 }}>
+                {voiceEnabled ? "🔊 Voice on" : "🔇 Voice off"}
+              </button>
+            )}
+            {/* Coin counter */}
+            <div style={{ display: "flex", alignItems: "center", gap: 4, background: "rgba(255,255,255,.12)", borderRadius: 20, padding: isMobile ? "5px 10px" : "6px 12px" }}>
+              <span style={{ fontSize: isMobile ? 14 : 16, animation: coinBurst ? "mmCounter .4s ease both" : undefined }}>🪙</span>
+              <span style={{ color: "#FCD34D", fontWeight: 900, fontSize: isMobile ? 13 : 14, minWidth: 24, animation: coinBurst ? "mmCounter .4s ease both" : undefined }}>{coins}</span>
+            </div>
+            {streak >= 2 && (
+              <div style={{ display: "flex", alignItems: "center", gap: 3, background: "rgba(245,158,11,.2)", border: "1px solid #F59E0B", borderRadius: 20, padding: "5px 8px", animation: "mmStreak .5s ease both" }}>
+                <span style={{ fontSize: 13 }}>🔥</span>
+                {!isMobile && <span style={{ color: "#FCD34D", fontWeight: 900, fontSize: 12 }}>{streak}</span>}
+              </div>
+            )}
+            <Link href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#D1FAE5", textDecoration: "none", fontWeight: 700, fontSize: isMobile ? 12 : 13 }}>← Course</Link>
           </div>
         </div>
       </header>
 
-      {/* ── Two-panel layout ──────────────────────────────────────────────── */}
-      <section style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "320px minmax(0,1fr)", minHeight: "calc(100vh - 68px)" }}>
+      {/* ── Mobile speech bar (avatar + tutor text, collapsed row) ── */}
+      {isMobile && (
+        <div style={{ background: C.avatarCard, padding: "12px 16px", display: "flex", gap: 12, alignItems: "flex-start" }}>
+          <div style={{ flexShrink: 0 }}>
+            <MoneyMindAvatar speaking={isSpeaking} mood={avatarMood} gesture={avatarGesture} size={56} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 10, color: "#A7F3D0", fontWeight: 800, letterSpacing: 1, marginBottom: 4 }}>MEERA</div>
+            <div key={`mspeech-${stepIndex}`} className="mm-fade-in" style={{ fontSize: 13, color: "#D1FAE5", lineHeight: 1.6 }}>
+              {step.tutorText}
+            </div>
+          </div>
+          <button
+            onClick={() => isSpeaking ? stopSpeaking() : void speakText(step.tutorText)}
+            style={{ flexShrink: 0, border: "none", background: "rgba(255,255,255,0.15)", color: "#fff", borderRadius: 8, padding: "8px 10px", cursor: "pointer", fontWeight: 800, fontSize: 11 }}
+          >
+            {isSpeaking ? "⏹" : "▶"}
+          </button>
+        </div>
+      )}
 
-        {/* ──────────── LEFT SIDEBAR ──────────── */}
+      {/* ── Two-panel layout ──────────────────────────────────────────────── */}
+      <section style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isNarrow ? "1fr" : "320px minmax(0,1fr)", minHeight: isMobile ? "auto" : "calc(100vh - 68px)" }}>
+
+        {/* ──────────── LEFT SIDEBAR (hidden on mobile) ──────────── */}
+        {!isMobile && (
         <aside style={{ background: C.sidebarBg, borderRight: "1px solid #E2E8F0", padding: 20, display: "grid", alignContent: "start", gap: 16, position: isNarrow ? "static" : "sticky", top: 68, height: isNarrow ? "auto" : "calc(100vh - 68px)", overflowY: "auto" }}>
 
           {/* Avatar card */}
@@ -613,14 +645,28 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             <div style={{ fontSize: 11, fontWeight: 400, color: "#A7F3D0", marginTop: 2 }}>Ask any question about this lesson</div>
           </button>
         </aside>
+        )}
 
         {/* ──────────── RIGHT MAIN ──────────── */}
-        <section style={{ display: "flex", flexDirection: "column", height: isNarrow ? "auto" : "calc(100vh - 68px)", overflow: isNarrow ? "visible" : "hidden" }}>
+        <section style={{ display: "flex", flexDirection: "column", height: isMobile ? "auto" : isNarrow ? "auto" : "calc(100vh - 68px)", overflow: isMobile ? "visible" : isNarrow ? "visible" : "hidden" }}>
 
           {/* ── Scrollable content area ── */}
-          <div style={{ flex: 1, overflowY: "auto", padding: "24px 28px", display: "grid", alignContent: "start", gap: 18 }}>
+          <div style={{ flex: 1, overflowY: isMobile ? "visible" : "auto", padding: isMobile ? "16px 14px" : "24px 28px", display: "grid", alignContent: "start", gap: isMobile ? 14 : 18 }}>
 
           {/* Meta row */}
+          {/* On mobile: hide objective card to save space, show inline step + progress pill */}
+          {isMobile ? (
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <div style={{ flex: 1, background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, padding: "10px 14px" }}>
+                <div style={{ fontSize: 10, color: "#64748B", textTransform: "uppercase", letterSpacing: 1 }}>Now learning</div>
+                <div style={{ fontWeight: 800, fontSize: 14, marginTop: 2, lineHeight: 1.3, color: "#0F172A" }}>{lesson.lesson.title}</div>
+              </div>
+              <div style={{ background: C.green, color: "#fff", borderRadius: 12, padding: "10px 14px", textAlign: "center", minWidth: 64 }}>
+                <div style={{ fontSize: 10, fontWeight: 700 }}>Step</div>
+                <div style={{ fontWeight: 900, fontSize: 18 }}>{stepIndex + 1}/{totalSteps}</div>
+              </div>
+            </div>
+          ) : (
           <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "minmax(0,1fr) 130px 130px", gap: 12 }}>
             <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 16, padding: "14px 18px" }}>
               <div style={{ fontSize: 11, color: "#64748B", textTransform: "uppercase", letterSpacing: 1 }}>Objective</div>
@@ -635,6 +681,7 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
               <div style={{ fontWeight: 800, fontSize: 16, marginTop: 4, color: C.green }}>{stepIndex + 1} / {totalSteps}</div>
             </div>
           </div>
+          )}
 
           {/* Step label */}
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -774,25 +821,28 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
           <div style={{
             flexShrink: 0,
             display: "flex", justifyContent: "space-between", alignItems: "center",
-            padding: "14px 28px",
+            padding: isMobile ? "12px 14px" : "14px 28px",
             background: "#F8FAFC",
             borderTop: "2px solid #E2E8F0",
             boxShadow: "0 -4px 16px rgba(0,0,0,0.06)",
+            position: isMobile ? "sticky" : "relative",
+            bottom: isMobile ? 0 : "auto",
+            zIndex: 20,
           }}>
             <button
               onClick={() => moveToStep(stepIndex - 1)}
               disabled={stepIndex === 0}
-              style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", color: "#64748B", borderRadius: 12, padding: "12px 24px", fontWeight: 700, fontSize: 14, cursor: stepIndex === 0 ? "not-allowed" : "pointer", opacity: stepIndex === 0 ? 0.4 : 1 }}
+              style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", color: "#64748B", borderRadius: 12, padding: isMobile ? "11px 16px" : "12px 24px", fontWeight: 700, fontSize: isMobile ? 13 : 14, cursor: stepIndex === 0 ? "not-allowed" : "pointer", opacity: stepIndex === 0 ? 0.4 : 1 }}
             >
               ← Prev
             </button>
 
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 12, color: "#94A3B8", fontWeight: 600 }}>Step {stepIndex + 1} of {totalSteps}</div>
-              <div style={{ display: "flex", gap: 5, marginTop: 5, justifyContent: "center" }}>
+              <div style={{ fontSize: 11, color: "#94A3B8", fontWeight: 600 }}>{stepIndex + 1} / {totalSteps}</div>
+              <div style={{ display: "flex", gap: 4, marginTop: 4, justifyContent: "center" }}>
                 {lesson.steps.map((_, i) => (
                   <div key={i} onClick={() => moveToStep(i)} style={{
-                    width: i === stepIndex ? 18 : 6, height: 6, borderRadius: 3,
+                    width: i === stepIndex ? 16 : 5, height: 5, borderRadius: 3,
                     background: i < stepIndex ? C.green : i === stepIndex ? "#065F46" : "#CBD5E1",
                     transition: "all 0.3s", cursor: "pointer",
                   }} />
@@ -806,19 +856,38 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
               style={{
                 background: isLastStep ? `linear-gradient(90deg, #FCD34D, ${C.accent})` : C.green,
                 color: isLastStep ? "#451A03" : "#fff",
-                border: "none", borderRadius: 12, padding: "12px 28px",
-                fontWeight: 900, fontSize: 15,
+                border: "none", borderRadius: 12, padding: isMobile ? "11px 18px" : "12px 28px",
+                fontWeight: 900, fontSize: isMobile ? 13 : 15,
                 cursor: (needsCheck || finishing) ? "not-allowed" : "pointer",
                 opacity: (needsCheck || finishing) ? 0.5 : 1,
                 boxShadow: needsCheck ? "none" : isLastStep ? "0 4px 16px rgba(245,158,11,0.4)" : "0 4px 16px rgba(16,185,129,0.35)",
                 animation: (!needsCheck && !finishing) ? "mmGlow 2s ease-in-out infinite" : undefined,
               }}
             >
-              {finishing ? "Saving…" : isLastStep ? "🏆 Complete Lesson" : "Next →"}
+              {finishing ? "Saving…" : isLastStep ? "🏆 Done" : "Next →"}
             </button>
           </div>
         </section>
       </section>
+
+      {/* Mobile FAB: Ask Meera */}
+      {isMobile && (
+        <button
+          onClick={() => setChatOpen(c => !c)}
+          style={{
+            position: "fixed", bottom: 80, right: 16, zIndex: 50,
+            width: 52, height: 52, borderRadius: "50%",
+            background: chatOpen ? C.green : "#065F46",
+            color: "#fff", border: "none",
+            boxShadow: "0 4px 20px rgba(6,95,70,0.45)",
+            fontSize: 22, cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+          title="Ask Meera"
+        >
+          🤖
+        </button>
+      )}
 
       {chatOpen && <ChatPanel lesson={lesson} step={step} onClose={() => setChatOpen(false)} />}
     </main>

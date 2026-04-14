@@ -164,14 +164,38 @@ export function RupeeNotesViz() {
     return () => clearInterval(id);
   }, []);
 
+  const notes = [
+    { value: 10,  img: "/moneymind/notes/note_10.jpg",  label: "₹10 — Violet", fact: "Sun Temple, Konark" },
+    { value: 20,  img: "/moneymind/notes/note_20.jpg",  label: "₹20 — Greenish Yellow", fact: "Ellora Caves" },
+    { value: 50,  img: "/moneymind/notes/note_50.jpg",  label: "₹50 — Fluorescent Blue", fact: "Hampi with Chariot" },
+    { value: 100, img: "/moneymind/notes/note_100.png", label: "₹100 — Lavender Blue", fact: "Rani ki Vav, Gujarat" },
+  ];
+
   return (
     <div style={{ background: "#0F172A", borderRadius: 20, padding: "20px 16px" }}>
       <style>{GLOBAL_VIZ_CSS}</style>
       <div style={{ textAlign: "center", color: "#FCD34D", fontSize: 11, fontWeight: 800, letterSpacing: 1.4, textTransform: "uppercase", marginBottom: 14 }}>
-        Indian Rupee Notes — Spot the Colors!
+        Real Indian Rupee Notes — Spot the Colors!
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-        {[10, 20, 50, 100].map((v, i) => <RupeeNote key={v} value={v} revealed={i < revealed} delay={0} />)}
+        {notes.map((n, i) => (
+          <div key={n.value} style={{
+            opacity: i < revealed ? 1 : 0.1,
+            transform: i < revealed ? "rotateY(0deg) scale(1)" : "rotateY(90deg) scale(.85)",
+            transition: `opacity .5s ${i * 0.15}s, transform .6s ${i * 0.15}s`,
+          }}>
+            {/* Real note photo */}
+            <div style={{ position: "relative", borderRadius: 10, overflow: "hidden", boxShadow: i < revealed ? "0 6px 20px rgba(0,0,0,.6)" : "none", border: "2px solid rgba(255,255,255,0.15)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={n.img} alt={`₹${n.value} note`} style={{ width: "100%", display: "block", aspectRatio: "2.3/1", objectFit: "cover" }} />
+              {/* Overlay label */}
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(0,0,0,0.75))", padding: "6px 8px" }}>
+                <div style={{ color: "#FCD34D", fontSize: 10, fontWeight: 800 }}>{n.label}</div>
+              </div>
+            </div>
+            <div style={{ color: "#6EE7B7", fontSize: 10, fontWeight: 600, marginTop: 5, textAlign: "center" }}>🏛️ {n.fact}</div>
+          </div>
+        ))}
       </div>
       <div style={{ marginTop: 14, textAlign: "center", color: "#6EE7B7", fontSize: 12, fontWeight: 700 }}>
         👴 Every note has Gandhi Ji — India's Father of the Nation

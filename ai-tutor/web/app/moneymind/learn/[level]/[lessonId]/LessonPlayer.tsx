@@ -11,6 +11,7 @@ import PocketMoneyPlanner from "@/components/moneymind/PocketMoneyPlanner";
 import PassbookViewer from "@/components/moneymind/PassbookViewer";
 import { getBoardIllustration } from "@/components/moneymind/MoneyMindIllustrations";
 import MoneyMindAvatar, { type MeeraMood, type MeeraGesture } from "./MoneyMindAvatar";
+import { StepVisual } from "./MoneyMindVisuals";
 
 // ─── CSS keyframes ────────────────────────────────────────────────────────────
 const GLOBAL_CSS = `
@@ -622,6 +623,13 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
               {step.label}
             </span>
           </div>
+
+          {/* ── Step Visual (animated SVG illustration) ── */}
+          {(() => {
+            const viz = <StepVisual lessonId={lesson.lesson.id} stepId={step.id} boardData={step.board.data as Record<string, unknown>} />;
+            // Only render if StepVisual returns non-null (checked via wrapper)
+            return <div key={`viz-${stepIndex}`} className="mm-board-enter">{viz}</div>;
+          })()}
 
           {/* Board */}
           <div key={`board-${stepIndex}`} className="mm-board-enter">

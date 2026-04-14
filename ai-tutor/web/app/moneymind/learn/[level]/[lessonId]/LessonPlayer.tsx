@@ -12,6 +12,7 @@ import PassbookViewer from "@/components/moneymind/PassbookViewer";
 import { getBoardIllustration } from "@/components/moneymind/MoneyMindIllustrations";
 import MoneyMindAvatar, { type MeeraMood, type MeeraGesture } from "./MoneyMindAvatar";
 import { StepVisual } from "./MoneyMindVisuals";
+import { StepComic } from "./MoneyMindComics";
 
 // ─── CSS keyframes ────────────────────────────────────────────────────────────
 const GLOBAL_CSS = `
@@ -20,6 +21,10 @@ const GLOBAL_CSS = `
   @keyframes mmPopIn    { 0%{transform:scale(.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
   @keyframes mmShimmer  { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
   @keyframes mmConfetti { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(80px) rotate(540deg);opacity:0} }
+  @keyframes mmCoinFly  { 0%{transform:translate(0,0) scale(1);opacity:1} 60%{opacity:1} 100%{transform:translate(var(--cx),var(--cy)) scale(.4);opacity:0} }
+  @keyframes mmCoinPop  { 0%{transform:scale(0) rotate(-20deg);opacity:0} 60%{transform:scale(1.2) rotate(5deg);opacity:1} 100%{transform:scale(1) rotate(0);opacity:1} }
+  @keyframes mmCounter  { 0%{transform:scale(1)} 30%{transform:scale(1.4)} 100%{transform:scale(1)} }
+  @keyframes mmStreak   { 0%{transform:scale(.4) translateY(10px);opacity:0} 60%{transform:scale(1.15) translateY(-4px);opacity:1} 100%{transform:scale(1) translateY(0);opacity:1} }
   @keyframes mmCorrect  { 0%{transform:scale(1)} 30%{transform:scale(1.07)} 60%{transform:scale(.97)} 100%{transform:scale(1)} }
   @keyframes mmGlow     { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.35)} 50%{box-shadow:0 0 0 8px rgba(16,185,129,0)} }
   @keyframes mmBoardIn  { from{opacity:0;transform:translateY(18px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
@@ -338,6 +343,9 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
   const [checked, setChecked] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [finishing, setFinishing] = useState(false);
+  const [coins, setCoins] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [coinBurst, setCoinBurst] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [voiceStatus, setVoiceStatus] = useState<string | null>(null);
@@ -492,6 +500,14 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
       : String(ans).toLowerCase() === String(step.practice.answer).toLowerCase();
     setFeedback({ correct, message: correct ? `Correct! 🎉 ${step.practice.hints?.[0] ?? ""}` : `Not quite. The answer is: ${step.practice.answer}` });
     setChecked(true);
+    if (correct) {
+      setCoins(c => c + 10);
+      setStreak(s => s + 1);
+      setCoinBurst(true);
+      setTimeout(() => setCoinBurst(false), 1000);
+    } else {
+      setStreak(0);
+    }
     if (voiceEnabled) void speakText(correct ? "Excellent work! That is correct." : "Not quite — let me explain the answer.");
   };
 
@@ -537,6 +553,17 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             <button onClick={() => setVoiceEnabled(v => !v)} style={{ border: "1px solid rgba(255,255,255,0.3)", background: voiceEnabled ? "rgba(255,255,255,0.15)" : "transparent", color: "#F8FAFC", borderRadius: 10, padding: "8px 12px", cursor: "pointer", fontWeight: 700, fontSize: 12 }}>
               {voiceEnabled ? "🔊 Voice on" : "🔇 Voice off"}
             </button>
+            {/* Coin counter */}
+            <div style={{ display: "flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,.12)", borderRadius: 20, padding: "6px 12px" }}>
+              <span style={{ fontSize: 16, animation: coinBurst ? "mmCounter .4s ease both" : undefined }}>🪙</span>
+              <span style={{ color: "#FCD34D", fontWeight: 900, fontSize: 14, minWidth: 28, animation: coinBurst ? "mmCounter .4s ease both" : undefined }}>{coins}</span>
+            </div>
+            {streak >= 2 && (
+              <div style={{ display: "flex", alignItems: "center", gap: 4, background: "rgba(245,158,11,.2)", border: "1px solid #F59E0B", borderRadius: 20, padding: "6px 10px", animation: "mmStreak .5s ease both" }}>
+                <span style={{ fontSize: 14 }}>🔥</span>
+                <span style={{ color: "#FCD34D", fontWeight: 900, fontSize: 12 }}>{streak} streak!</span>
+              </div>
+            )}
             <Link href={`/moneymind/course/${lesson.course.levelSlug}`} style={{ color: "#D1FAE5", textDecoration: "none", fontWeight: 700, fontSize: 13 }}>← Course</Link>
           </div>
         </div>
@@ -616,10 +643,14 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
             </span>
           </div>
 
+          {/* ── Comic strip ── */}
+          <div key={`comic-${stepIndex}`} className="mm-board-enter">
+            <StepComic lessonId={lesson.lesson.id} stepId={step.id} />
+          </div>
+
           {/* ── Step Visual (animated SVG illustration) ── */}
           {(() => {
             const viz = <StepVisual lessonId={lesson.lesson.id} stepId={step.id} boardData={step.board.data as Record<string, unknown>} />;
-            // Only render if StepVisual returns non-null (checked via wrapper)
             return <div key={`viz-${stepIndex}`} className="mm-board-enter">{viz}</div>;
           })()}
 
@@ -708,9 +739,20 @@ export default function LessonPlayer({ lesson, userId = 101 }: { lesson: MoneyMi
 
               {feedback?.correct && (
                 <div style={{ position: "relative", height: 0, overflow: "visible", pointerEvents: "none" }}>
+                  {/* Confetti */}
                   {["#F59E0B","#10B981","#3B82F6","#EF4444","#8B5CF6","#FCD34D"].map((color, i) => (
                     <div key={i} style={{ position: "absolute", top: -20, left: `${15 + i * 13}%`, width: 8, height: 8, background: color, borderRadius: i % 2 === 0 ? "50%" : 2, animation: `mmConfetti ${0.8 + i * 0.1}s ease-out ${i * 0.07}s both` }} />
                   ))}
+                  {/* Coins flying up */}
+                  {[0,1,2].map(i => (
+                    <div key={`coin-${i}`} style={{
+                      position: "absolute", top: -10, left: `${30 + i * 18}%`,
+                      fontSize: 18, animation: `mmCoinFly .9s ease-out ${i * 0.12}s both`,
+                      "--cx": `${(i - 1) * 40}px`, "--cy": "-80px",
+                    } as React.CSSProperties}>🪙</div>
+                  ))}
+                  {/* +10 XP pop */}
+                  <div style={{ position: "absolute", top: -36, right: "10%", color: "#FCD34D", fontWeight: 900, fontSize: 16, animation: "mmCoinPop .6s ease both", textShadow: "0 2px 8px rgba(0,0,0,.4)" }}>+10 🪙</div>
                 </div>
               )}
 

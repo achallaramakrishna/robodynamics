@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model StudentLessonProgress {
+  id        Int      @id @default(autoincrement())
+  studentId String   @db.VarChar(255)
+  lessonId  String   @db.VarChar(100)
+  topicId   String   @db.VarChar(100)
+  accuracy  Float    // 0-100
+  timeSpent Int      @default(0) // in seconds
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentId])
+  @@index([lessonId])
+  @@index([createdAt])
+}
+
+model StudentLessonMetrics {
+  id               Int      @id @default(autoincrement())
+  studentId        String   @unique @db.VarChar(255)
+  lessonId         String   @db.VarChar(100)
+  totalTopics      Int      @default(0)
+  completedTopics  Int      @default(0)
+  overallAccuracy  Float    @default(0)
+  averageTimePerTopic Int  @default(0)
+  lastAccessedAt   DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([studentId])
+  @@index([lessonId])
+}

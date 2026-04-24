@@ -406,8 +406,8 @@ export default function NeetTutorClient({
             {/* SVG Diagram (if applicable) */}
             {currentSlide.diagramSrc && (
               <div className="mb-8">
-                <div className="bg-white rounded-lg p-6 border border-slate-600 overflow-auto" style={{ maxHeight: "400px" }}>
-                  <img src={currentSlide.diagramSrc} alt={currentSlide.diagramCaption || "Diagram"} className="w-full h-auto" />
+                <div className="bg-white rounded-lg border border-slate-600" style={{ minHeight: "300px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <embed src={currentSlide.diagramSrc} type="image/svg+xml" style={{ width: "100%", height: "auto", minHeight: "300px" }} />
                 </div>
                 {currentSlide.diagramCaption && (
                   <p className="text-sm text-slate-400 mt-3 italic">{currentSlide.diagramCaption}</p>

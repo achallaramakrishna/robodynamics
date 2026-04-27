@@ -1,40 +1,64 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import { ChevronRight, Check, X, AlertCircle, Zap, BookOpen } from "lucide-react";
-import SVGExplanationPlayer from "../../../components/SVGExplanationPlayer";
-import MeeraInsights from "../../../components/MeeraInsights";
-import { getChapterIntro, type IntroSlide } from "../../../lib/neetIntroConstants";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
-interface NeetQuestion {
-  questionId: string;
-  chapterCode: string;
-  subject: string;
-  questionText: string;
-  options: {
-    A: string;
-    B: string;
-    C: string;
-    D: string;
-  };
-  correctOption: string;
-  explanation: string;
-  allOptionExplanations?: Record<string, string>;
-  difficulty: string;
-  topic: string;
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Phase = "loading" | "teaching" | "practice" | "error";
+
+interface StepTiming {
+  step: number;
+  startTime: number;
+  narration: string;
 }
 
-interface CheckAnswerResponse {
+interface Slide {
+  slide: string;
+  title: string;
+  description: string;
+  keyPoints?: string[];
+  demoSteps?: string[];
+  demoSpeech?: string;
+  demoStepTiming?: StepTiming[];
+  diagramSrc?: string;
+  diagramCaption?: string;
+}
+
+interface Lesson {
+  code: string;
+  title: string;
+  slides: Slide[];
+}
+
+interface MCQOptions {
+  A: string;
+  B: string;
+  C: string;
+  D: string;
+}
+
+interface Question {
+  questionId: string;
+  questionText: string;
+  options: MCQOptions;
+  correctOption: string;
+  explanation: string;
+  topic?: string;
+  difficulty?: string;
+  allOptionExplanations?: Record<string, string>;
+  neetYear?: string;
+}
+
+interface Feedback {
   isCorrect: boolean;
   correctOption: string;
   selectedOption: string;
   explanation: string;
   allOptionExplanations?: Record<string, string>;
-  commonMistakeWarning?: string;
-  encouragement: string;
   meeraMessage: string;
   scoreChange: number;
   newScore: number;
+  encouragement: string;
   correct: number;
   wrong: number;
 }
@@ -42,466 +66,906 @@ interface CheckAnswerResponse {
 interface NeetTutorClientProps {
   initialSubject: string;
   initialChapter: string;
-  studentClass?: string | null;
+  studentClass: string | null;
 }
 
-export default function NeetTutorClient({
-  initialSubject,
-  initialChapter,
-  studentClass,
-}: NeetTutorClientProps) {
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [question, setQuestion] = useState<NeetQuestion | null>(null);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [checkResult, setCheckResult] = useState<CheckAnswerResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [score, setScore] = useState(0);
-  const [questionCount, setQuestionCount] = useState(0);
-  const [showExplanation, setShowExplanation] = useState(false);
-  const [svgData, setSvgData] = useState<string | null>(null);
-  const [subject] = useState(initialSubject.toLowerCase());
-  const [chapter] = useState(initialChapter);
-  const [pendingKickoff, setPendingKickoff] = useState<"welcome" | "ready">("welcome");
-  const [currentIntroSlideIndex, setCurrentIntroSlideIndex] = useState(0);
-  const [introSlides, setIntroSlides] = useState<IntroSlide[]>([]);
-  const [exerciseGroups, setExerciseGroups] = useState<{ group: string; subtopic: string; status: string; accuracy: number }[]>([]);
-  const [currentExerciseGroup, setCurrentExerciseGroup] = useState("A");
-  const [suggestedNextAction, setSuggestedNextAction] = useState<"reteach" | "practice" | "continue" | null>(null);
-  const [groupAttempts, setGroupAttempts] = useState<Record<string, { attempts: number; correct: number }>>({
-    A: { attempts: 0, correct: 0 },
-    B: { attempts: 0, correct: 0 },
-    C: { attempts: 0, correct: 0 },
-    D: { attempts: 0, correct: 0 },
-  });
-  const [showMeeraInsights, setShowMeeraInsights] = useState(false);
+// ─── Avatar Component ─────────────────────────────────────────────────────────
 
-  // Initialize intro slides
+function MeeraAvatar({ size = 80, mood = "teaching", color = "#8B5CF6" }: { size?: number; mood?: string; color?: string }) {
+  return (
+    <div style={{
+      width: size,
+      height: size,
+      borderRadius: "50%",
+      overflow: "hidden",
+      border: `3px solid ${color}`,
+      boxShadow: `0 0 0 4px ${color}25, 0 0 28px ${color}35`,
+      background: "#1E293B",
+      flexShrink: 0,
+      position: "relative",
+    }}>
+      <img
+        src="/avatars/3.svg"
+        alt="MEERA AI Tutor"
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        onError={(e) => {
+          // Fallback if avatar doesn't load
+          (e.target as HTMLImageElement).style.display = "none";
+          const parent = (e.target as HTMLImageElement).parentElement;
+          if (parent) {
+            parent.style.background = `linear-gradient(135deg, #6D28D9, #8B5CF6)`;
+            parent.innerHTML = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:${size * 0.4}px;font-weight:900;color:#fff">M</div>`;
+          }
+        }}
+      />
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export default function NeetTutorClient({ initialSubject, initialChapter, studentClass }: NeetTutorClientProps) {
+  const subject = initialSubject.toLowerCase();
+  const chapter = initialChapter;
+  const subjectColor = { biology: "#8B5CF6", physics: "#3B82F6", chemistry: "#10B981" }[subject] || "#8B5CF6";
+
+  // Phase & lesson
+  const [phase, setPhase] = useState<Phase>("loading");
+  const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // TTS / audio
+  const [audioSrc, setAudioSrc] = useState<string | null>(null);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Practice
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [question, setQuestion] = useState<Question | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [answered, setAnswered] = useState(false);
+  const [score, setScore] = useState(0);
+  const [questionNum, setQuestionNum] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [practiceLoading, setPracticeLoading] = useState(false);
+
+  // ─── Load lesson on mount ─────────────────────────────────────────────────
+
   useEffect(() => {
-    const chapterIntro = getChapterIntro(chapter);
-    if (chapterIntro) {
-      setIntroSlides(chapterIntro.slides);
-      setCurrentIntroSlideIndex(0);
-      setPendingKickoff("welcome");
+    async function loadLesson() {
+      try {
+        const res = await fetch(`/ai-tutor-api/neet/intro?chapter=${chapter}`);
+        if (!res.ok) throw new Error(`${res.status}`);
+        const data: Lesson = await res.json();
+        if (data && data.slides && data.slides.length > 0) {
+          setLesson(data);
+          setPhase("teaching");
+        } else {
+          throw new Error("No slides returned");
+        }
+      } catch {
+        // No lesson intro available — go straight to practice
+        setPhase("practice");
+        doStartPractice();
+      }
     }
+    loadLesson();
   }, [chapter]);
 
-  // Initialize session only when user completes intro
-  useEffect(() => {
-    const initSession = async () => {
-      if (pendingKickoff !== "ready") return;
+  // ─── TTS narration ────────────────────────────────────────────────────────
 
-      try {
-        setLoading(true);
-        const response = await fetch("/ai-tutor-api/neet/start", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            subject,
-            chapterCode: chapter,
-            examTarget: "2027",
-          }),
-        });
+  const playNarration = useCallback(async (text: string) => {
+    if (!text || isLoadingAudio) return;
 
-        if (!response.ok) throw new Error("Failed to start session");
-
-        const data = await response.json();
-        setSessionId(data.sessionId);
-        setQuestion(data.question);
-        setScore(0);
-        setQuestionCount(1);
-        setSelectedOption(null);
-        setIsSubmitted(false);
-        setCheckResult(null);
-        setShowExplanation(false);
-        setError(null);
-        setCurrentExerciseGroup("A");
-
-        // Load exercise groups progress
-        if (data.exerciseGroups) {
-          setExerciseGroups(data.exerciseGroups);
-          // Reconstruct groupAttempts from accuracy data
-          const attempts: Record<string, { attempts: number; correct: number }> = {
-            A: { attempts: 0, correct: 0 },
-            B: { attempts: 0, correct: 0 },
-            C: { attempts: 0, correct: 0 },
-            D: { attempts: 0, correct: 0 },
-          };
-          for (const group of data.exerciseGroups) {
-            if (group.accuracy > 0 && attempts[group.group]) {
-              // Rough estimate: assume attempts based on accuracy (we'll refine with actual data from backend)
-              attempts[group.group].accuracy = group.accuracy;
-            }
-          }
-          setGroupAttempts(attempts);
-        } else {
-          // Default exercise groups
-          setExerciseGroups([
-            { group: "A", subtopic: "Foundation", status: "active", accuracy: 0 },
-            { group: "B", subtopic: "Core Concepts", status: "locked", accuracy: 0 },
-            { group: "C", subtopic: "Application", status: "locked", accuracy: 0 },
-            { group: "D", subtopic: "Advanced", status: "locked", accuracy: 0 },
-          ]);
-        }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to initialize session");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initSession();
-  }, [pendingKickoff, subject, chapter]);
-
-  // Fetch SVG explanation when answer is revealed
-  useEffect(() => {
-    if (isSubmitted && checkResult?.isCorrect === false && question && !svgData) {
-      const fetchSVG = async () => {
-        try {
-          const response = await fetch("/ai-tutor-api/neet/explain", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              question: question.questionText,
-              subject,
-              chapterCode: chapter,
-              options: question.options,
-              correctOption: question.correctOption,
-            }),
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            setSvgData(data.svg);
-          }
-        } catch (err) {
-          console.error("Failed to fetch SVG explanation:", err);
-        }
-      };
-
-      fetchSVG();
+    // Stop any existing audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
-  }, [isSubmitted, checkResult, question, subject, chapter, svgData]);
-
-  const handleSelectOption = (option: string) => {
-    if (!isSubmitted) {
-      setSelectedOption(option);
-    }
-  };
-
-  const handleIntroNext = () => {
-    if (currentIntroSlideIndex < introSlides.length - 1) {
-      setCurrentIntroSlideIndex(currentIntroSlideIndex + 1);
-    } else {
-      // Intro complete, start practice
-      setPendingKickoff("ready");
-    }
-  };
-
-  const handleIntroBack = () => {
-    if (currentIntroSlideIndex > 0) {
-      setCurrentIntroSlideIndex(currentIntroSlideIndex - 1);
-    }
-  };
-
-  const handleSubmitAnswer = async () => {
-    if (!selectedOption || !sessionId || !question) return;
+    setIsPlaying(false);
+    setAudioSrc(null);
+    setCurrentStep(0);
+    setIsLoadingAudio(true);
 
     try {
-      setLoading(true);
-      const response = await fetch("/ai-tutor-api/neet/check-answer", {
+      const res = await fetch("/api/voice/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sessionId,
-          questionId: question.questionId,
-          selectedOption,
-        }),
+        body: JSON.stringify({ text, avatarId: "meera", languageCode: "en-IN" }),
       });
+      const data = await res.json();
 
-      if (!response.ok) throw new Error("Failed to check answer");
+      if (data.audioBase64) {
+        const src = `data:${data.mimeType || "audio/mpeg"};base64,${data.audioBase64}`;
+        setAudioSrc(src);
+        // isPlaying will be set via the onPlay event
+      } else if (data.provider === "browser") {
+        // Browser speech synthesis fallback
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "en-IN";
+        utter.rate = 0.9;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utter);
+        setIsPlaying(true);
+        utter.onend = () => setIsPlaying(false);
+      }
+    } catch {
+      // Silent fail — TTS is optional
+    } finally {
+      setIsLoadingAudio(false);
+    }
+  }, [isLoadingAudio]);
 
-      const data = await response.json();
-      setCheckResult(data);
-      setIsSubmitted(true);
+  // Step sync based on audio time
+  function handleTimeUpdate(currentTime: number) {
+    const demoSlide = lesson?.slides.find((s) => s.demoStepTiming && s.demoStepTiming.length > 0);
+    if (!demoSlide?.demoStepTiming) return;
+    let active = 0;
+    for (const st of demoSlide.demoStepTiming) {
+      if (currentTime >= st.startTime) active = st.step;
+    }
+    setCurrentStep(active);
+  }
+
+  // ─── Start Practice ───────────────────────────────────────────────────────
+
+  async function doStartPractice() {
+    setPracticeLoading(true);
+    try {
+      const res = await fetch("/ai-tutor-api/neet/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subject, chapterCode: chapter, examTarget: "2027" }),
+      });
+      if (!res.ok) throw new Error(`Start failed: ${res.status}`);
+      const data = await res.json();
+      setSessionId(data.sessionId);
+
+      // Check if question is a valid MCQ
+      const q = data.question;
+      const isValidMCQ = q && q.options && typeof q.options === "object" && Object.keys(q.options).length === 4;
+
+      if (isValidMCQ) {
+        setQuestion(q as Question);
+        setQuestionNum(1);
+      } else {
+        // Fetch a proper MCQ via next-question
+        await doFetchNextQuestion(data.sessionId);
+      }
+    } catch (err) {
+      setErrorMsg(String(err));
+      setPhase("error");
+    } finally {
+      setPracticeLoading(false);
+    }
+  }
+
+  async function doFetchNextQuestion(sid?: string) {
+    const activeSession = sid || sessionId;
+    if (!activeSession) return;
+    setPracticeLoading(true);
+    try {
+      const res = await fetch("/ai-tutor-api/neet/next-question", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId: activeSession, chapterCode: chapter, exerciseGroup: "A" }),
+      });
+      if (!res.ok) throw new Error(`Next question failed: ${res.status}`);
+      const data = await res.json();
+      const q = data.question;
+      const isValidMCQ = q && q.options && typeof q.options === "object" && Object.keys(q.options).length === 4;
+      if (isValidMCQ) {
+        setQuestion(q as Question);
+        setQuestionNum((n) => n + 1);
+        setSelected(null);
+        setFeedback(null);
+        setAnswered(false);
+      } else {
+        // Retry once more
+        console.warn("Question not valid MCQ:", q);
+      }
+    } catch (err) {
+      console.error("Failed to fetch next question:", err);
+    } finally {
+      setPracticeLoading(false);
+    }
+  }
+
+  async function doCheckAnswer() {
+    if (!selected || !sessionId || !question || answered) return;
+    setPracticeLoading(true);
+    try {
+      const res = await fetch("/ai-tutor-api/neet/check-answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId, questionId: question.questionId, selectedOption: selected }),
+      });
+      if (!res.ok) throw new Error(`Check answer failed: ${res.status}`);
+      const data: Feedback = await res.json();
+      setFeedback(data);
+      setAnswered(true);
       setScore(data.newScore);
-      setShowExplanation(!data.isCorrect); // Auto-open explanation for wrong answers
-
-      // Update group attempts and correct count
-      const isCorrect = data.isCorrect;
-      const newGroupAttempts = { ...groupAttempts };
-      newGroupAttempts[currentExerciseGroup] = {
-        attempts: newGroupAttempts[currentExerciseGroup].attempts + 1,
-        correct: newGroupAttempts[currentExerciseGroup].correct + (isCorrect ? 1 : 0),
-      };
-      setGroupAttempts(newGroupAttempts);
-
-      // Calculate accuracy for current group
-      const groupStats = newGroupAttempts[currentExerciseGroup];
-      const groupAccuracy = Math.round((groupStats.correct / groupStats.attempts) * 100);
-
-      // Update exercise groups with new accuracy and unlock next group if complete
-      const updatedGroups = exerciseGroups.map((group) => {
-        if (group.group === currentExerciseGroup) {
-          return { ...group, accuracy: groupAccuracy };
-        }
-        // Unlock next group if current group has at least 1 correct answer
-        if (isCorrect && groupStats.correct === 1) {
-          const groupOrder = ["A", "B", "C", "D"];
-          const currentIdx = groupOrder.indexOf(currentExerciseGroup);
-          if (currentIdx >= 0 && currentIdx < groupOrder.length - 1) {
-            const nextGroup = groupOrder[currentIdx + 1];
-            if (group.group === nextGroup && group.status === "locked") {
-              return { ...group, status: "active" };
-            }
-          }
-        }
-        return group;
-      });
-      setExerciseGroups(updatedGroups);
-
-      // Save progress to backend
-      const totalAttempts = Object.values(newGroupAttempts).reduce((sum, g) => sum + g.attempts, 0);
-      const totalCorrect = Object.values(newGroupAttempts).reduce((sum, g) => sum + g.correct, 0);
-
-      await fetch("/ai-tutor-api/neet/progress/save", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sessionId,
-          chapterCode: chapter,
-          subject,
-          exerciseGroups: updatedGroups,
-          attempts: totalAttempts,
-          correctCount: totalCorrect,
-        }),
-      }).catch(() => {}); // Silent fail for progress save
-
-      // Get adaptive learning suggestion
-      if (data.suggestedNextAction) {
-        setSuggestedNextAction(data.suggestedNextAction);
-      }
+      if (data.isCorrect) setCorrectCount((n) => n + 1);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to check answer");
+      console.error("Check answer error:", err);
     } finally {
-      setLoading(false);
+      setPracticeLoading(false);
     }
-  };
+  }
 
-  const handleNextQuestion = async () => {
-    if (!sessionId) return;
+  function goToPractice() {
+    setPhase("practice");
+    if (!sessionId) doStartPractice();
+  }
 
-    try {
-      setLoading(true);
-      const response = await fetch("/ai-tutor-api/neet/next-question", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sessionId,
-          chapterCode: chapter,
-          exerciseGroup: currentExerciseGroup,
-        }),
-      });
+  // ─── Teaching Phase ───────────────────────────────────────────────────────
 
-      if (!response.ok) throw new Error("Failed to fetch next question");
-
-      const data = await response.json();
-      setQuestion(data.question);
-      setSelectedOption(null);
-      setIsSubmitted(false);
-      setCheckResult(null);
-      setShowExplanation(false);
-      setSvgData(null);
-      setQuestionCount((prev) => prev + 1);
-      setSuggestedNextAction(null);
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load next question");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSwitchExerciseGroup = (group: string) => {
-    if (exerciseGroups.find((g) => g.group === group)?.status !== "locked") {
-      setCurrentExerciseGroup(group);
-      setQuestionCount(1);
-      setSelectedOption(null);
-      setIsSubmitted(false);
-      setCheckResult(null);
-      setShowExplanation(false);
-      setSvgData(null);
-      setSuggestedNextAction(null);
-      // Fetch first question of new group
-      if (sessionId) {
-        handleNextQuestion();
-      }
-    }
-  };
-
-  // Show intro slides
-  if (pendingKickoff === "welcome" && introSlides.length > 0) {
-    const currentSlide = introSlides[currentIntroSlideIndex];
-    const slideTypes = {
-      explain: { icon: "📚", color: "from-blue-500 to-blue-600" },
-      demo: { icon: "🎬", color: "from-purple-500 to-purple-600" },
-      guided: { icon: "🎯", color: "from-green-500 to-green-600" },
-    };
-    const slideConfig = slideTypes[currentSlide.slide];
+  function renderTeaching() {
+    if (!lesson) return null;
+    const demoSlide = lesson.slides.find((s) => s.demoSpeech) || lesson.slides[0];
+    const steps = demoSlide?.demoStepTiming || [];
+    const activeNarration = steps.find((s) => s.step === currentStep)?.narration;
+    const speechPreview = demoSlide?.demoSpeech?.slice(0, 130) + (demoSlide?.demoSpeech && demoSlide.demoSpeech.length > 130 ? "..." : "");
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 flex flex-col">
-        {/* Progress */}
-        <div className="max-w-4xl mx-auto w-full mb-8">
-          <div className="flex gap-2 mb-4">
-            {introSlides.map((_, idx) => (
-              <div
-                key={idx}
-                className={`h-1 flex-1 rounded-full transition-colors ${
-                  idx === currentIntroSlideIndex
-                    ? "bg-gradient-to-r from-purple-500 to-blue-500"
-                    : idx < currentIntroSlideIndex
-                    ? "bg-green-500"
-                    : "bg-slate-700"
-                }`}
-              />
-            ))}
+      <div style={{ minHeight: "100vh", background: "#0F172A", display: "flex", fontFamily: "Inter, system-ui, sans-serif" }}>
+
+        {/* ── LEFT: MEERA Panel ── */}
+        <div style={{
+          width: 280, minHeight: "100vh", background: "#0A0F1E",
+          borderRight: "1px solid #1E293B", display: "flex", flexDirection: "column",
+          alignItems: "center", padding: "28px 16px", gap: 16, flexShrink: 0,
+        }}>
+          <MeeraAvatar size={88} mood="teaching" color={subjectColor} />
+
+          <div style={{ textAlign: "center" }}>
+            <div style={{ color: "#F8FAFC", fontWeight: 900, fontSize: 18, letterSpacing: 0.3 }}>MEERA</div>
+            <div style={{ color: subjectColor, fontSize: 10, fontWeight: 700, letterSpacing: 2, marginTop: 2 }}>AI TUTOR</div>
+            <div style={{
+              marginTop: 10, display: "inline-flex", alignItems: "center", gap: 6,
+              background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)",
+              borderRadius: 99, padding: "4px 12px",
+            }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#10B981", display: "inline-block" }} />
+              <span style={{ color: "#6EE7B7", fontSize: 11, fontWeight: 700 }}>LIVE TEACHING</span>
+            </div>
           </div>
-          <div className="text-sm text-slate-400">
-            Slide {currentIntroSlideIndex + 1} of {introSlides.length}
+
+          {/* Speech bubble */}
+          <div style={{
+            background: "#1E293B", borderRadius: 14, padding: "14px 16px",
+            border: `1px solid ${subjectColor}30`, width: "100%",
+          }}>
+            <div style={{ fontSize: 10, color: subjectColor, fontWeight: 800, marginBottom: 8, letterSpacing: 0.5 }}>
+              💬 MEERA SAYS
+            </div>
+            <p style={{ color: "#CBD5E1", fontSize: 12, lineHeight: 1.7, margin: 0 }}>
+              {isPlaying && activeNarration ? activeNarration : speechPreview || "Let's explore this chapter together!"}
+            </p>
           </div>
+
+          {/* Play button */}
+          <button
+            onClick={() => playNarration(demoSlide?.demoSpeech || "")}
+            disabled={isLoadingAudio || !demoSlide?.demoSpeech}
+            style={{
+              width: "100%", padding: "11px 16px", borderRadius: 10, border: "none",
+              background: isLoadingAudio
+                ? "#334155"
+                : isPlaying
+                ? `linear-gradient(135deg, #10B981, #059669)`
+                : `linear-gradient(135deg, ${subjectColor}, ${subjectColor}BB)`,
+              color: "#fff", fontWeight: 700, fontSize: 13,
+              cursor: isLoadingAudio ? "not-allowed" : "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              boxShadow: isPlaying ? "0 4px 16px rgba(16,185,129,0.35)" : `0 4px 16px ${subjectColor}35`,
+              transition: "all 0.2s",
+            }}
+          >
+            <span style={{ fontSize: 16 }}>
+              {isLoadingAudio ? "⏳" : isPlaying ? "🔊" : "▶"}
+            </span>
+            {isLoadingAudio ? "Loading audio..." : isPlaying ? "Playing..." : "Play Narration"}
+          </button>
+
+          {/* Hidden audio */}
+          {audioSrc && (
+            <audio
+              ref={audioRef}
+              src={audioSrc}
+              autoPlay
+              onPlay={() => setIsPlaying(true)}
+              onEnded={() => { setIsPlaying(false); setCurrentStep(0); }}
+              onTimeUpdate={(e) => handleTimeUpdate(e.currentTarget.currentTime)}
+              style={{ display: "none" }}
+            />
+          )}
+
+          <div style={{ flex: 1 }} />
+
+          {/* Chapter meta */}
+          <div style={{ background: "#1E293B", borderRadius: 12, padding: "12px 14px", border: "1px solid #334155", width: "100%" }}>
+            <div style={{ fontSize: 9, color: "#64748B", fontWeight: 700, marginBottom: 4, letterSpacing: 0.5 }}>CHAPTER</div>
+            <div style={{ color: "#F8FAFC", fontWeight: 800, fontSize: 13, lineHeight: 1.3 }}>{lesson.title}</div>
+            <div style={{ color: subjectColor, fontSize: 11, fontWeight: 600, textTransform: "capitalize", marginTop: 3 }}>{subject}</div>
+          </div>
+
+          {/* CTA */}
+          <button
+            onClick={goToPractice}
+            style={{
+              width: "100%", padding: "14px", borderRadius: 12, border: "none",
+              background: `linear-gradient(135deg, ${subjectColor}, ${subjectColor}99)`,
+              color: "#fff", fontWeight: 900, fontSize: 14,
+              cursor: "pointer", boxShadow: `0 6px 20px ${subjectColor}40`,
+              letterSpacing: 0.3,
+            }}
+          >
+            ⚡ Start Practice
+          </button>
         </div>
 
-        {/* Content */}
-        <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col justify-center">
-          <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 mb-6">
-            {/* Slide Type Badge */}
-            <div className={`inline-flex items-center gap-2 mb-6 px-4 py-2 bg-gradient-to-r ${slideConfig.color} rounded-lg`}>
-              <span className="text-xl">{slideConfig.icon}</span>
-              <span className="text-white font-semibold capitalize">{currentSlide.slide}</span>
-            </div>
+        {/* ── RIGHT: Lesson Content ── */}
+        <div style={{ flex: 1, overflowY: "auto", maxHeight: "100vh", padding: "28px 36px" }}>
 
-            {/* Slide Title */}
-            <h2 className="text-3xl font-bold text-white mb-4">{currentSlide.title}</h2>
-
-            {/* Slide Description */}
-            <p className="text-lg text-slate-300 mb-8 leading-relaxed">{currentSlide.description}</p>
-
-            {/* Key Points */}
-            <div className="mb-8">
-              <h3 className="text-lg font-semibold text-slate-200 mb-4">Key Points:</h3>
-              <ul className="space-y-3">
-                {currentSlide.keyPoints.map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-purple-500/20 border border-purple-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs text-purple-300">{idx + 1}</span>
-                    </div>
-                    <span className="text-slate-300">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* SVG Diagram (if applicable) */}
-            {currentSlide.diagramSrc && (
-              <div className="mb-8">
-                <div className="bg-white rounded-lg border border-slate-600" style={{ minHeight: "300px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <embed src={currentSlide.diagramSrc} type="image/svg+xml" style={{ width: "100%", height: "auto", minHeight: "300px" }} />
+          {/* Step tracker */}
+          {steps.length > 0 && (
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
+              <span style={{ color: "#64748B", fontSize: 12, fontWeight: 600 }}>Steps</span>
+              {steps.map((s) => (
+                <div
+                  key={s.step}
+                  style={{
+                    width: 30, height: 30, borderRadius: "50%",
+                    background: s.step <= currentStep ? subjectColor : "#1E293B",
+                    border: `2px solid ${s.step <= currentStep ? subjectColor : "#334155"}`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 11, fontWeight: 700, transition: "all 0.4s",
+                    color: s.step <= currentStep ? "#fff" : "#475569",
+                    boxShadow: s.step === currentStep ? `0 0 10px ${subjectColor}80` : "none",
+                  }}
+                >
+                  {s.step}
                 </div>
-                {currentSlide.diagramCaption && (
-                  <p className="text-sm text-slate-400 mt-3 italic">{currentSlide.diagramCaption}</p>
-                )}
-              </div>
-            )}
+              ))}
+            </div>
+          )}
 
-            {/* Demo Steps (if applicable) */}
-            {currentSlide.demoSteps && (
-              <div className="mb-8 bg-blue-900/20 border border-blue-500/30 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-300 mb-4">Demo Steps:</h3>
-                <ol className="space-y-2">
-                  {currentSlide.demoSteps.map((step, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="font-semibold text-blue-400 min-w-fit">{idx + 1}.</span>
-                      <span className="text-slate-200">{step}</span>
-                    </li>
-                  ))}
-                </ol>
+          {/* Active step narration banner */}
+          {currentStep > 0 && activeNarration && (
+            <div style={{
+              background: `${subjectColor}12`, border: `1px solid ${subjectColor}35`,
+              borderRadius: 12, padding: "12px 18px", marginBottom: 24,
+              display: "flex", gap: 10, alignItems: "flex-start",
+            }}>
+              <span style={{ fontSize: 16 }}>🎙</span>
+              <div>
+                <span style={{ color: subjectColor, fontWeight: 700, fontSize: 11 }}>STEP {currentStep}  </span>
+                <span style={{ color: "#CBD5E1", fontSize: 13 }}>{activeNarration}</span>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Demo Speech (if applicable) */}
-            {currentSlide.demoSpeech && (
-              <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl">🎙️</span>
-                  <div>
-                    <h3 className="text-sm font-semibold text-purple-300 mb-2">Meera's Explanation:</h3>
-                    <p className="text-slate-300 leading-relaxed italic">{currentSlide.demoSpeech}</p>
-                  </div>
-                </div>
-              </div>
-            )}
+          {/* Title + description */}
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 10 }}>
+              <span style={{
+                background: `${subjectColor}20`, color: subjectColor,
+                padding: "4px 12px", borderRadius: 99, fontSize: 11,
+                fontWeight: 800, border: `1px solid ${subjectColor}40`,
+              }}>
+                {subject.toUpperCase()}
+              </span>
+            </div>
+            <h1 style={{ color: "#F8FAFC", fontSize: 28, fontWeight: 900, margin: "0 0 10px", lineHeight: 1.2 }}>
+              {demoSlide?.title || lesson.title}
+            </h1>
+            <p style={{ color: "#94A3B8", fontSize: 15, margin: 0, lineHeight: 1.7 }}>
+              {demoSlide?.description}
+            </p>
           </div>
-        </div>
 
-        {/* Navigation Buttons */}
-        <div className="max-w-4xl mx-auto w-full">
-          <div className="flex gap-4 justify-between">
-            <button
-              onClick={handleIntroBack}
-              disabled={currentIntroSlideIndex === 0}
-              className="px-6 py-3 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed text-slate-300 rounded-lg font-semibold transition flex items-center gap-2"
-            >
-              ← Back
-            </button>
-
-            <div className="flex gap-4">
-              {currentIntroSlideIndex < introSlides.length - 1 ? (
-                <button
-                  onClick={handleIntroNext}
-                  className="px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg font-semibold transition flex items-center gap-2"
-                >
-                  Next
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              ) : (
-                <button
-                  onClick={handleIntroNext}
-                  className="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg font-semibold transition flex items-center gap-2"
-                >
-                  Start Practice
-                  <Zap className="w-4 h-4" />
-                </button>
+          {/* SVG Diagram */}
+          {demoSlide?.diagramSrc && (
+            <div style={{
+              background: "#1E293B", borderRadius: 16, border: "1px solid #334155",
+              padding: 24, marginBottom: 24,
+            }}>
+              <h3 style={{ color: "#CBD5E1", fontSize: 14, fontWeight: 800, margin: "0 0 16px" }}>
+                📊 Visual Reference
+              </h3>
+              <div style={{
+                background: "#0F172A", borderRadius: 12, padding: "20px",
+                display: "flex", alignItems: "center", justifyContent: "center", minHeight: 220,
+              }}>
+                <img
+                  src={demoSlide.diagramSrc}
+                  alt="Lesson Diagram"
+                  style={{ maxWidth: "100%", maxHeight: 340, objectFit: "contain" }}
+                />
+              </div>
+              {demoSlide.diagramCaption && (
+                <p style={{ color: "#64748B", fontSize: 12, marginTop: 12, textAlign: "center", fontStyle: "italic", lineHeight: 1.5 }}>
+                  {demoSlide.diagramCaption}
+                </p>
               )}
             </div>
+          )}
+
+          {/* Key concepts + step-by-step from all slides */}
+          {lesson.slides.map((slide, idx) => (
+            <React.Fragment key={idx}>
+              {slide.keyPoints && slide.keyPoints.length > 0 && (
+                <div style={{
+                  background: "#1E293B", borderRadius: 16, border: "1px solid #334155",
+                  padding: 24, marginBottom: 20,
+                }}>
+                  <h3 style={{ color: "#F8FAFC", fontSize: 15, fontWeight: 900, margin: "0 0 18px" }}>
+                    🎯 Key Concepts for NEET
+                  </h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {slide.keyPoints.map((point, j) => (
+                      <div key={j} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                        <div style={{
+                          width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
+                          background: `${subjectColor}20`, border: `1px solid ${subjectColor}60`,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          fontSize: 12, fontWeight: 900, color: subjectColor,
+                        }}>
+                          {j + 1}
+                        </div>
+                        <span style={{ color: "#CBD5E1", fontSize: 14, lineHeight: 1.75 }}>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {slide.demoSteps && slide.demoSteps.length > 0 && (
+                <div style={{
+                  background: "rgba(37,99,235,0.07)", borderRadius: 16,
+                  border: "1px solid rgba(59,130,246,0.2)", padding: 24, marginBottom: 20,
+                }}>
+                  <h3 style={{ color: "#60A5FA", fontSize: 15, fontWeight: 900, margin: "0 0 18px" }}>
+                    🔬 Step-by-Step Process
+                  </h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    {slide.demoSteps.map((step, j) => (
+                      <div key={j} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                        <div style={{
+                          width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
+                          background: "rgba(59,130,246,0.15)", border: "1px solid rgba(59,130,246,0.4)",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          fontSize: 12, fontWeight: 900, color: "#60A5FA",
+                        }}>
+                          {j + 1}
+                        </div>
+                        <span style={{ color: "#CBD5E1", fontSize: 14, lineHeight: 1.75 }}>{step}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
+          ))}
+
+          {/* Start Practice CTA */}
+          <div style={{ paddingTop: 8, paddingBottom: 48, display: "flex", justifyContent: "center" }}>
+            <button
+              onClick={goToPractice}
+              style={{
+                padding: "18px 56px", borderRadius: 14, border: "none",
+                background: `linear-gradient(135deg, ${subjectColor}, ${subjectColor}99)`,
+                color: "#fff", fontWeight: 900, fontSize: 17,
+                cursor: "pointer", boxShadow: `0 8px 32px ${subjectColor}40`,
+                letterSpacing: 0.5,
+              }}
+            >
+              ⚡ Start Practice Now
+            </button>
           </div>
         </div>
       </div>
     );
   }
 
-  if (loading && !question) {
+  // ─── Practice Phase ───────────────────────────────────────────────────────
+
+  function renderPractice() {
+    const accuracy = questionNum > 0 ? Math.round((correctCount / questionNum) * 100) : 0;
+    const meeraMsg = feedback?.meeraMessage
+      || (selected ? "Good choice! Click 'Check Answer' to see if you're right." : "Choose the best answer from the options below.");
+
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="text-center">
-          <div className="w-12 h-12 rounded-full border-3 border-purple-500/30 border-t-purple-500 animate-spin mx-auto mb-4" />
-          <p className="text-slate-300 text-lg">Loading question...</p>
+      <div style={{ minHeight: "100vh", background: "#0F172A", display: "flex", fontFamily: "Inter, system-ui, sans-serif" }}>
+
+        {/* ── LEFT: MEERA Panel ── */}
+        <div style={{
+          width: 280, minHeight: "100vh", background: "#0A0F1E",
+          borderRight: "1px solid #1E293B", display: "flex", flexDirection: "column",
+          alignItems: "center", padding: "28px 16px", gap: 16, flexShrink: 0,
+        }}>
+          <MeeraAvatar
+            size={88}
+            mood={feedback?.isCorrect ? "celebrating" : answered && feedback && !feedback.isCorrect ? "encouraging" : "thinking"}
+            color={subjectColor}
+          />
+
+          <div style={{ textAlign: "center" }}>
+            <div style={{ color: "#F8FAFC", fontWeight: 900, fontSize: 18, letterSpacing: 0.3 }}>MEERA</div>
+            <div style={{ color: subjectColor, fontSize: 10, fontWeight: 700, letterSpacing: 2, marginTop: 2 }}>AI TUTOR</div>
+          </div>
+
+          {/* Meera's message */}
+          <div style={{
+            background: "#1E293B", borderRadius: 14, padding: "14px 16px",
+            border: `1px solid ${subjectColor}30`, width: "100%",
+          }}>
+            <div style={{ fontSize: 10, color: subjectColor, fontWeight: 800, marginBottom: 8, letterSpacing: 0.5 }}>
+              💬 MEERA SAYS
+            </div>
+            <p style={{ color: "#CBD5E1", fontSize: 12, lineHeight: 1.7, margin: 0 }}>
+              {meeraMsg}
+            </p>
+          </div>
+
+          {/* Score + Accuracy */}
+          <div style={{ display: "flex", gap: 8, width: "100%" }}>
+            <div style={{
+              flex: 1, background: "#1E293B", borderRadius: 12, padding: "12px 8px",
+              border: "1px solid #334155", textAlign: "center",
+            }}>
+              <div style={{ color: "#C084FC", fontWeight: 900, fontSize: 22, lineHeight: 1 }}>{score}</div>
+              <div style={{ color: "#64748B", fontSize: 9, fontWeight: 700, marginTop: 4 }}>SCORE</div>
+            </div>
+            <div style={{
+              flex: 1, background: "#1E293B", borderRadius: 12, padding: "12px 8px",
+              border: "1px solid #334155", textAlign: "center",
+            }}>
+              <div style={{
+                fontWeight: 900, fontSize: 22, lineHeight: 1,
+                color: accuracy >= 60 ? "#4ADE80" : "#F87171",
+              }}>{accuracy}%</div>
+              <div style={{ color: "#64748B", fontSize: 9, fontWeight: 700, marginTop: 4 }}>ACCURACY</div>
+            </div>
+          </div>
+
+          {/* Question counter */}
+          <div style={{
+            background: "#1E293B", borderRadius: 12, padding: "10px 14px",
+            border: "1px solid #334155", width: "100%", textAlign: "center",
+          }}>
+            <div style={{ color: "#F8FAFC", fontWeight: 900, fontSize: 22 }}>Q{questionNum}</div>
+            <div style={{ color: "#64748B", fontSize: 10, fontWeight: 700, marginTop: 2 }}>
+              {correctCount} correct · {questionNum - correctCount} wrong
+            </div>
+          </div>
+
+          {/* Chapter info */}
+          <div style={{
+            background: "#1E293B", borderRadius: 12, padding: "12px 14px",
+            border: "1px solid #334155", width: "100%",
+          }}>
+            <div style={{ fontSize: 9, color: "#64748B", fontWeight: 700, marginBottom: 4, letterSpacing: 0.5 }}>CHAPTER</div>
+            <div style={{ color: "#F8FAFC", fontWeight: 800, fontSize: 12, lineHeight: 1.3 }}>
+              {lesson?.title || chapter.replace(/_/g, " ")}
+            </div>
+            <div style={{ color: subjectColor, fontSize: 11, fontWeight: 600, textTransform: "capitalize", marginTop: 3 }}>
+              {subject}
+            </div>
+          </div>
+
+          <div style={{ flex: 1 }} />
+
+          {/* Back to lesson */}
+          {lesson && (
+            <button
+              onClick={() => setPhase("teaching")}
+              style={{
+                width: "100%", padding: "11px", borderRadius: 10, border: "1px solid #334155",
+                background: "#1E293B", color: "#94A3B8", fontWeight: 600, fontSize: 12, cursor: "pointer",
+              }}
+            >
+              ← Review Lesson
+            </button>
+          )}
+        </div>
+
+        {/* ── RIGHT: Question Panel ── */}
+        <div style={{ flex: 1, overflowY: "auto", maxHeight: "100vh", padding: "28px 36px" }}>
+
+          {/* Header bar */}
+          <div style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            marginBottom: 28, paddingBottom: 20, borderBottom: "1px solid #1E293B",
+          }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span style={{
+                background: `${subjectColor}20`, color: subjectColor,
+                padding: "5px 14px", borderRadius: 99, fontSize: 11,
+                fontWeight: 800, border: `1px solid ${subjectColor}40`,
+              }}>
+                {subject.toUpperCase()}
+              </span>
+              <span style={{ color: "#475569", fontSize: 12 }}>•</span>
+              <span style={{ color: "#475569", fontSize: 12 }}>{chapter.replace(/_/g, " ")}</span>
+            </div>
+            <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+              <span style={{ color: "#4ADE80", fontWeight: 700, fontSize: 13 }}>+4 / -1 marking</span>
+            </div>
+          </div>
+
+          {/* Loading */}
+          {practiceLoading && (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 280 }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>⏳</div>
+                <p style={{ color: "#64748B", fontSize: 14 }}>Loading question...</p>
+              </div>
+            </div>
+          )}
+
+          {/* No question yet */}
+          {!practiceLoading && !question && (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 280 }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>📚</div>
+                <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 20 }}>Ready to practice?</p>
+                <button
+                  onClick={() => doStartPractice()}
+                  style={{
+                    padding: "14px 32px", borderRadius: 12, border: "none",
+                    background: `linear-gradient(135deg, ${subjectColor}, ${subjectColor}CC)`,
+                    color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer",
+                  }}
+                >
+                  Load Question
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Question card */}
+          {!practiceLoading && question && (
+            <>
+              <div style={{
+                background: "#1E293B", borderRadius: 18, border: "1px solid #334155",
+                padding: "32px 36px", marginBottom: 20,
+              }}>
+                {/* Topic + difficulty */}
+                <div style={{ display: "flex", gap: 8, marginBottom: 18, flexWrap: "wrap" }}>
+                  {question.topic && (
+                    <span style={{
+                      fontSize: 11, color: "#94A3B8", background: "#0F172A",
+                      padding: "3px 12px", borderRadius: 99, border: "1px solid #334155",
+                    }}>
+                      {question.topic}
+                    </span>
+                  )}
+                  {question.difficulty && (
+                    <span style={{
+                      fontSize: 11, padding: "3px 12px", borderRadius: 99,
+                      background: question.difficulty === "easy"
+                        ? "rgba(74,222,128,0.1)" : question.difficulty === "hard"
+                        ? "rgba(239,68,68,0.1)" : "rgba(251,191,36,0.1)",
+                      color: question.difficulty === "easy" ? "#4ADE80" : question.difficulty === "hard" ? "#F87171" : "#FBBF24",
+                      border: `1px solid ${question.difficulty === "easy" ? "#4ADE8040" : question.difficulty === "hard" ? "#EF444440" : "#FBBF2440"}`,
+                    }}>
+                      {question.difficulty}
+                    </span>
+                  )}
+                  {question.neetYear && (
+                    <span style={{
+                      fontSize: 11, color: "#F59E0B", background: "rgba(245,158,11,0.1)",
+                      padding: "3px 12px", borderRadius: 99, border: "1px solid rgba(245,158,11,0.3)",
+                    }}>
+                      NEET {question.neetYear}
+                    </span>
+                  )}
+                </div>
+
+                {/* Question text */}
+                <h2 style={{
+                  color: "#F8FAFC", fontSize: 19, fontWeight: 600,
+                  lineHeight: 1.65, margin: "0 0 28px",
+                }}>
+                  {question.questionText}
+                </h2>
+
+                {/* Options */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {(["A", "B", "C", "D"] as const).map((key) => {
+                    if (!question.options[key]) return null;
+                    const isSelected = selected === key;
+                    const isCorrectOption = feedback && key === feedback.correctOption;
+                    const isWrongSelected = feedback && isSelected && !feedback.isCorrect;
+
+                    let bg = "#0F172A";
+                    let border = "#2D3748";
+                    let labelBg = "#1E293B";
+                    let labelColor = "#64748B";
+
+                    if (isCorrectOption && feedback) {
+                      bg = "rgba(74,222,128,0.08)";
+                      border = "#4ADE80";
+                      labelBg = "#4ADE80";
+                      labelColor = "#fff";
+                    } else if (isWrongSelected) {
+                      bg = "rgba(239,68,68,0.08)";
+                      border = "#EF4444";
+                      labelBg = "#EF4444";
+                      labelColor = "#fff";
+                    } else if (isSelected) {
+                      bg = `${subjectColor}12`;
+                      border = subjectColor;
+                      labelBg = subjectColor;
+                      labelColor = "#fff";
+                    }
+
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => !answered && setSelected(key)}
+                        disabled={answered}
+                        style={{
+                          textAlign: "left", padding: "16px 20px", borderRadius: 12,
+                          background: bg, border: `2px solid ${border}`,
+                          cursor: answered ? "default" : "pointer",
+                          transition: "all 0.2s", display: "flex", alignItems: "flex-start", gap: 16,
+                          outline: "none",
+                        }}
+                      >
+                        <div style={{
+                          width: 34, height: 34, borderRadius: "50%", flexShrink: 0,
+                          background: labelBg, display: "flex", alignItems: "center",
+                          justifyContent: "center", fontWeight: 700, fontSize: 13, color: labelColor,
+                          transition: "all 0.2s",
+                        }}>
+                          {isCorrectOption && feedback ? "✓" : isWrongSelected ? "✗" : key}
+                        </div>
+                        <div style={{ flex: 1, paddingTop: 7 }}>
+                          <span style={{ color: "#E2E8F0", fontSize: 15, lineHeight: 1.6 }}>
+                            {question.options[key]}
+                          </span>
+                          {feedback && feedback.allOptionExplanations?.[key] && (
+                            <p style={{ margin: "8px 0 0", fontSize: 12, color: "#64748B", lineHeight: 1.6 }}>
+                              {feedback.allOptionExplanations[key]}
+                            </p>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Feedback card */}
+              {feedback && (
+                <div style={{
+                  background: feedback.isCorrect ? "rgba(74,222,128,0.07)" : "rgba(239,68,68,0.07)",
+                  border: `1px solid ${feedback.isCorrect ? "rgba(74,222,128,0.3)" : "rgba(239,68,68,0.25)"}`,
+                  borderRadius: 16, padding: "24px 28px", marginBottom: 20,
+                }}>
+                  <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 28, flexShrink: 0 }}>
+                      {feedback.isCorrect ? "🎉" : "📖"}
+                    </span>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                        <span style={{
+                          fontWeight: 900, fontSize: 17,
+                          color: feedback.isCorrect ? "#4ADE80" : "#F87171",
+                        }}>
+                          {feedback.isCorrect ? "Correct!" : "Incorrect"}
+                        </span>
+                        <span style={{
+                          fontWeight: 700, fontSize: 15,
+                          color: feedback.scoreChange > 0 ? "#4ADE80" : "#F87171",
+                        }}>
+                          {feedback.scoreChange > 0 ? `+${feedback.scoreChange}` : feedback.scoreChange} points
+                        </span>
+                      </div>
+                      {feedback.explanation && (
+                        <p style={{ color: "#CBD5E1", fontSize: 14, lineHeight: 1.75, margin: "0 0 10px" }}>
+                          {feedback.explanation}
+                        </p>
+                      )}
+                      {feedback.encouragement && (
+                        <p style={{ color: "#94A3B8", fontSize: 13, margin: 0, fontStyle: "italic" }}>
+                          {feedback.encouragement}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Action buttons */}
+              <div style={{ display: "flex", gap: 12, paddingBottom: 48 }}>
+                {!answered ? (
+                  <button
+                    onClick={doCheckAnswer}
+                    disabled={!selected || practiceLoading}
+                    style={{
+                      padding: "15px 36px", borderRadius: 12, border: "none", fontWeight: 700, fontSize: 15,
+                      background: selected
+                        ? `linear-gradient(135deg, ${subjectColor}, ${subjectColor}CC)`
+                        : "#1E293B",
+                      color: selected ? "#fff" : "#475569",
+                      cursor: selected ? "pointer" : "not-allowed",
+                      boxShadow: selected ? `0 4px 20px ${subjectColor}40` : "none",
+                      transition: "all 0.2s",
+                    }}
+                  >
+                    Check Answer →
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => doFetchNextQuestion()}
+                    disabled={practiceLoading}
+                    style={{
+                      padding: "15px 36px", borderRadius: 12, border: "none", fontWeight: 700, fontSize: 15,
+                      background: `linear-gradient(135deg, ${subjectColor}, ${subjectColor}CC)`,
+                      color: "#fff", cursor: "pointer",
+                      boxShadow: `0 4px 20px ${subjectColor}40`,
+                    }}
+                  >
+                    Next Question →
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
   }
 
-  if (error) {
+  // ─── Render ───────────────────────────────────────────────────────────────
+
+  if (phase === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="max-w-md w-full mx-4 p-6 bg-red-900/20 border border-red-500/30 rounded-lg text-center">
-          <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
-          <p className="text-red-300 font-medium mb-2">Error</p>
-          <p className="text-red-200 text-sm mb-4">{error}</p>
+      <div style={{
+        minHeight: "100vh", background: "#0F172A",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontFamily: "Inter, system-ui, sans-serif",
+      }}>
+        <div style={{ textAlign: "center" }}>
+          <div style={{
+            width: 56, height: 56, borderRadius: "50%",
+            border: `4px solid ${subjectColor}20`, borderTopColor: subjectColor,
+            animation: "spin 0.8s linear infinite", margin: "0 auto 20px",
+          }} />
+          <p style={{ color: "#64748B", fontSize: 15 }}>Preparing your lesson with MEERA...</p>
+          <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+        </div>
+      </div>
+    );
+  }
+
+  if (phase === "error") {
+    return (
+      <div style={{
+        minHeight: "100vh", background: "#0F172A",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontFamily: "Inter, system-ui, sans-serif",
+      }}>
+        <div style={{
+          maxWidth: 400, width: "100%", margin: "0 16px", padding: 36,
+          background: "#1E293B", border: "1px solid #EF4444", borderRadius: 18, textAlign: "center",
+        }}>
+          <div style={{ fontSize: 48, marginBottom: 16 }}>⚠️</div>
+          <h2 style={{ color: "#F8FAFC", fontWeight: 800, margin: "0 0 10px" }}>Something went wrong</h2>
+          <p style={{ color: "#94A3B8", fontSize: 14, margin: "0 0 24px" }}>{errorMsg || "Please try again."}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded font-medium transition"
+            style={{
+              padding: "12px 32px", background: subjectColor, color: "#fff",
+              border: "none", borderRadius: 10, fontWeight: 700, fontSize: 14, cursor: "pointer",
+            }}
           >
             Reload
           </button>
@@ -510,316 +974,7 @@ export default function NeetTutorClient({
     );
   }
 
-  if (!question) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <p className="text-slate-300">No question available</p>
-      </div>
-    );
-  }
-
-  const subjectColor: Record<string, string> = {
-    physics: "from-blue-500 to-blue-600",
-    chemistry: "from-green-500 to-green-600",
-    biology: "from-purple-500 to-purple-600",
-  };
-
-  const bgGradient = subjectColor[subject] || "from-blue-500 to-blue-600";
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
-      {/* Header */}
-      <div className="max-w-4xl mx-auto mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${bgGradient} flex items-center justify-center text-white font-bold text-sm`}>
-              {subject.charAt(0).toUpperCase()}
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white">
-                {subject.charAt(0).toUpperCase() + subject.slice(1)}
-              </h1>
-              <p className="text-sm text-slate-400">{chapter.replace("_", " ")}</p>
-            </div>
-          </div>
-          <div className="flex gap-6 items-end">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-purple-400">{score}</p>
-              <p className="text-xs text-slate-400">Points</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-slate-300">{questionCount}</p>
-              <p className="text-xs text-slate-400">Question</p>
-            </div>
-            {questionCount > 3 && (
-              <button
-                onClick={() => setShowMeeraInsights(!showMeeraInsights)}
-                className="px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-medium text-sm transition flex items-center gap-1"
-              >
-                🎙️ Meera
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Progress bar */}
-        <div className="w-full h-1 bg-slate-700 rounded-full overflow-hidden">
-          <div className={`h-full bg-gradient-to-r ${bgGradient} transition-all duration-500`} style={{ width: "50%" }} />
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto">
-        {/* Exercise Group Tabs */}
-        <div className="mb-6 border-b border-slate-700">
-          <div className="flex gap-2 overflow-x-auto pb-4">
-            {exerciseGroups.map((group) => {
-              const isActive = group.group === currentExerciseGroup;
-              const isLocked = group.status === "locked";
-              const isCompleted = group.status === "completed";
-
-              return (
-                <button
-                  key={group.group}
-                  onClick={() => handleSwitchExerciseGroup(group.group)}
-                  disabled={isLocked}
-                  className={`px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2 whitespace-nowrap ${
-                    isActive
-                      ? "bg-purple-600 text-white border border-purple-500"
-                      : isCompleted
-                      ? "bg-green-900/40 text-green-300 border border-green-500/50"
-                      : isLocked
-                      ? "bg-slate-700/50 text-slate-500 border border-slate-600 cursor-not-allowed opacity-50"
-                      : "bg-slate-700 text-slate-300 border border-slate-600 hover:bg-slate-600"
-                  }`}
-                >
-                  <span className="text-sm font-bold">{group.group}</span>
-                  <span className="text-xs text-slate-300 hidden sm:inline">
-                    {group.subtopic}
-                  </span>
-                  {isCompleted && <Check className="w-4 h-4" />}
-                  {isLocked && <span>🔒</span>}
-                  {group.accuracy > 0 && (
-                    <span className="text-xs ml-1">{Math.round(group.accuracy)}%</span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-          <div className="text-xs text-slate-400 mb-2">
-            Complete each group to unlock the next level
-          </div>
-        </div>
-
-        <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 mb-6">
-          {/* Question Text */}
-          <h2 className="text-xl font-semibold text-white mb-8 leading-relaxed">
-            {question.questionText}
-          </h2>
-
-          {/* Options */}
-          <div className="space-y-3 mb-8">
-            {(["A", "B", "C", "D"] as const).map((option) => {
-              const text = question.options[option];
-              const isSelected = selectedOption === option;
-              const isCorrect = option === question.correctOption;
-              const isWrong = isSelected && !isCorrect && isSubmitted;
-              const showAsCorrect = isSubmitted && isCorrect;
-
-              let bgClass = "bg-slate-700 hover:bg-slate-600 border-slate-600";
-              let borderClass = "border";
-
-              if (isSubmitted) {
-                if (showAsCorrect) {
-                  bgClass = "bg-green-900/40 border-green-500/50";
-                } else if (isWrong) {
-                  bgClass = "bg-red-900/40 border-red-500/50";
-                } else {
-                  bgClass = "bg-slate-700 border-slate-600";
-                }
-              } else if (isSelected) {
-                bgClass = "bg-purple-600/40 border-purple-500";
-              }
-
-              return (
-                <button
-                  key={option}
-                  onClick={() => handleSelectOption(option)}
-                  disabled={isSubmitted}
-                  className={`w-full text-left p-4 rounded-lg ${borderClass} ${bgClass} transition-all duration-200 disabled:cursor-default`}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 w-8 h-8 rounded border-2 flex items-center justify-center font-semibold mt-0.5 ${
-                      isSubmitted
-                        ? showAsCorrect
-                          ? "bg-green-500 border-green-400 text-white"
-                          : isWrong
-                          ? "bg-red-500 border-red-400 text-white"
-                          : "bg-slate-600 border-slate-500 text-slate-300"
-                        : isSelected
-                        ? "bg-purple-500 border-purple-400 text-white"
-                        : "bg-slate-600 border-slate-500 text-slate-300"
-                    }`}>
-                      {isSubmitted && showAsCorrect ? (
-                        <Check className="w-4 h-4" />
-                      ) : isSubmitted && isWrong ? (
-                        <X className="w-4 h-4" />
-                      ) : (
-                        option
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-slate-100">{text}</p>
-                      {isSubmitted && checkResult?.allOptionExplanations?.[option] && (
-                        <p className="text-xs text-slate-400 mt-2">
-                          {checkResult.allOptionExplanations[option]}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Adaptive Learning Suggestion */}
-          {isSubmitted && suggestedNextAction && (
-            <div className="mb-6 bg-gradient-to-r from-purple-900/40 to-blue-900/40 border border-purple-500/30 rounded-lg p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xl">💡</span>
-                <h3 className="font-semibold text-purple-300">Meera's Recommendation:</h3>
-              </div>
-              {suggestedNextAction === "reteach" && (
-                <p className="text-slate-300">
-                  I noticed you're struggling with this concept. Let me explain it differently, or try a different approach.
-                  Would you like me to reteach this topic before continuing?
-                </p>
-              )}
-              {suggestedNextAction === "practice" && (
-                <p className="text-slate-300">
-                  Great effort! Let's practice more questions on this topic to build your confidence and speed.
-                </p>
-              )}
-              {suggestedNextAction === "continue" && (
-                <p className="text-slate-300">
-                  Excellent! You're mastering this topic. Let's move to the next exercise group to deepen your understanding.
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* Feedback Section */}
-          {isSubmitted && checkResult && (
-            <div className={`p-4 rounded-lg mb-6 ${
-              checkResult.isCorrect
-                ? "bg-green-900/30 border border-green-500/30"
-                : "bg-red-900/30 border border-red-500/30"
-            }`}>
-              <div className="flex items-start gap-3 mb-3">
-                {checkResult.isCorrect ? (
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                ) : (
-                  <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                )}
-                <div className="flex-1">
-                  <p className={`font-semibold mb-1 ${
-                    checkResult.isCorrect ? "text-green-300" : "text-red-300"
-                  }`}>
-                    {checkResult.isCorrect ? "Correct!" : "Incorrect"}
-                  </p>
-                  <p className="text-sm text-slate-300 mb-2">
-                    {checkResult.meeraMessage}
-                  </p>
-                  {checkResult.commonMistakeWarning && (
-                    <p className="text-xs text-slate-400 italic">
-                      ⚠️ {checkResult.commonMistakeWarning}
-                    </p>
-                  )}
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <p className={`text-lg font-bold ${
-                    checkResult.scoreChange >= 0 ? "text-green-400" : "text-red-400"
-                  }`}>
-                    {checkResult.scoreChange > 0 ? "+" : ""}{checkResult.scoreChange}
-                  </p>
-                </div>
-              </div>
-
-              {/* Main explanation */}
-              {checkResult.explanation && (
-                <div className="bg-slate-700/50 p-3 rounded mt-3 border border-slate-600">
-                  <p className="text-sm text-slate-200">{checkResult.explanation}</p>
-                </div>
-              )}
-
-              {/* SVG Explanation Button */}
-              {!checkResult.isCorrect && (
-                <button
-                  onClick={() => setShowExplanation(!showExplanation)}
-                  className="mt-3 w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded font-medium transition flex items-center justify-center gap-2"
-                >
-                  <Zap className="w-4 h-4" />
-                  {showExplanation ? "Hide" : "Meera Explains This"}
-                </button>
-              )}
-            </div>
-          )}
-
-          {/* SVG Explanation Viewer */}
-          {showExplanation && svgData && (
-            <div className="mb-6">
-              <SVGExplanationPlayer svgDataUrl={svgData} questionId={question.questionId} />
-            </div>
-          )}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-4 justify-center">
-          {!isSubmitted ? (
-            <button
-              onClick={handleSubmitAnswer}
-              disabled={!selectedOption || loading}
-              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-            >
-              {loading ? "Checking..." : "Check Answer"}
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          ) : (
-            <button
-              onClick={handleNextQuestion}
-              disabled={loading}
-              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-            >
-              {loading ? "Loading..." : "Next Question"}
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Meera Insights Modal */}
-      {showMeeraInsights && sessionId && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-slate-800 border-b border-slate-700 p-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white">Meera's Performance Analysis</h2>
-              <button
-                onClick={() => setShowMeeraInsights(false)}
-                className="p-1 hover:bg-slate-700 rounded text-slate-400 hover:text-slate-200"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="p-6">
-              <MeeraInsights
-                sessionId={sessionId}
-                chapterCode={chapter}
-                onClose={() => setShowMeeraInsights(false)}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  if (phase === "teaching") return renderTeaching();
+  if (phase === "practice") return renderPractice();
+  return null;
 }

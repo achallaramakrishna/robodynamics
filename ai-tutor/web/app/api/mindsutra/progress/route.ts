@@ -16,6 +16,7 @@ import {
   loadMindSutraSkillMastery,
   saveMindSutraSkillMastery,
   syncMindSutraLessonProgress,
+  loadMindSutraCompletedLessons,
 } from "@/lib/mindsutraSkillMasteryDb";
 import { getMsLesson } from "@/lib/mindsutraCatalog";
 
@@ -30,9 +31,14 @@ export async function GET(req: NextRequest) {
   let effectiveSession = session;
 
   try {
-    const persisted = await loadMindSutraSkillMastery(session.childId || session.userId);
-    if (persisted.length) {
-      effectiveSession = mergeMindSutraSkillMasteryIntoSession(session, persisted);
+    const studentId = session.childId || session.userId;
+    const [persistedSkills, completedIds] = await Promise.all([
+      loadMindSutraSkillMastery(studentId),
+      loadMindSutraCompletedLessons(studentId),
+    ]);
+    
+    if (persistedSkills.length || completedIds.length) {
+      effectiveSession = mergeMindSutraSkillMasteryIntoSession(session, persistedSkills, completedIds);
     }
   } catch {
     // DB persistence is additive. If it is unavailable, the cookie session still works.
@@ -60,9 +66,14 @@ export async function POST(req: NextRequest) {
   let effectiveSession = session;
 
   try {
-    const persisted = await loadMindSutraSkillMastery(session.childId || session.userId);
-    if (persisted.length) {
-      effectiveSession = mergeMindSutraSkillMasteryIntoSession(session, persisted);
+    const studentId = session.childId || session.userId;
+    const [persistedSkills, completedIds] = await Promise.all([
+      loadMindSutraSkillMastery(studentId),
+      loadMindSutraCompletedLessons(studentId),
+    ]);
+    
+    if (persistedSkills.length || completedIds.length) {
+      effectiveSession = mergeMindSutraSkillMasteryIntoSession(session, persistedSkills, completedIds);
     }
   } catch {
     // Fall back to cookie-only personalization when DB persistence is unavailable.

@@ -198,3 +198,19 @@ export async function syncMindSutraLessonProgress(
     [studentId, levelId, lessonId, status, score, isComplete ? new Date() : null],
   );
 }
+
+export async function loadMindSutraCompletedLessons(studentId: number): Promise<string[]> {
+  if (!studentId) return [];
+
+  const db = getDb();
+  const [rows] = await db.execute<RowDataPacket[]>(
+    `
+      SELECT lesson_id
+      FROM rd_vm_student_progress
+      WHERE student_id = ? AND (status = 'completed' OR status = 'mastered')
+    `,
+    [studentId],
+  );
+
+  return rows.map(r => r.lesson_id);
+}

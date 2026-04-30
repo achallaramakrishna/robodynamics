@@ -1,0 +1,140 @@
+{
+  "products": {
+    "meera": {
+      "name": "MEERA - NEET Prep",
+      "description": "NEET Physics, Chemistry, Biology preparation with AI tutoring",
+      "urlPath": "/ai-tutor/neet",
+      "sourcePatterns": [
+        "ai-tutor/web/app/ai-tutor/neet/**",
+        "ai-tutor/web/components/MeeraAvatar.tsx",
+        "ai-tutor/web/components/SVGExplanationPlayer.tsx",
+        "ai-tutor/web/components/MeeraInsights.tsx",
+        "ai-tutor/web/lib/neet*.ts",
+        "ai-tutor/tutor-api/content-template/neet_*/**",
+        "ai-tutor/tutor-api/app/neet_*.py"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web",
+        "rd-ai-tutor-api"
+      ],
+      "postDeployValidation": "https://robodynamics.in/ai-tutor/neet/session"
+    },
+    "mindsutra": {
+      "name": "MindSutra - Vedic Math",
+      "description": "Vedic Mathematics tutoring system with interactive lessons",
+      "urlPath": "/mindsutra",
+      "sourcePatterns": [
+        "ai-tutor/web/app/mindsutra_BAK/**",
+        "ai-tutor/web/app/api/mindsutra/**",
+        "ai-tutor/web/app/api/student/**",
+        "ai-tutor/web/lib/mindsutra*.ts",
+        "ai-tutor/web/lib/meeraDb.ts",
+        "ai-tutor/web/lib/appSession.ts",
+        "ai-tutor/tutor-api/content-template/vedic_math/**",
+        "ai-tutor/tutor-api/app/vedic_*.py"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web",
+        "rd-ai-tutor-api"
+      ],
+      "postDeployValidation": "https://robodynamics.in/mindsutra/"
+    },
+    "mindsparc": {
+      "name": "MindSparc - Aptitude & Reasoning",
+      "description": "Aptitude and Reasoning preparation for competitive exams",
+      "urlPath": "/mindsparc",
+      "sourcePatterns": [
+        "ai-tutor/web/app/ai-tutor/**",
+        "ai-tutor/web/lib/mindsparc*.ts",
+        "ai-tutor/tutor-api/content-template/aptitude_reasoning/**",
+        "ai-tutor/tutor-api/app/aptitude_*.py"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web",
+        "rd-ai-tutor-api"
+      ],
+      "postDeployValidation": "https://robodynamics.in/mindsparc/"
+    },
+    "moneymind": {
+      "name": "MoneyMind - Financial Literacy",
+      "description": "Personal finance and financial literacy education",
+      "urlPath": "/moneymind",
+      "sourcePatterns": [
+        "ai-tutor/web/app/moneymind/**",
+        "ai-tutor/web/components/moneymind/**",
+        "ai-tutor/web/lib/moneymind*.ts"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web"
+      ],
+      "postDeployValidation": "https://robodynamics.in/moneymind/"
+    },
+    "codesutra": {
+      "name": "CodeSutra - Python AI Tutor",
+      "description": "Python programming education with AI tutoring",
+      "urlPath": "/python-ai",
+      "sourcePatterns": [
+        "ai-tutor/web/app/python-ai/**",
+        "ai-tutor/web/lib/python*.ts",
+        "ai-tutor/web/components/python/**",
+        "ai-tutor/tutor-api/content-template/coding_python_basics/**",
+        "ai-tutor/tutor-api/app/python_*.py"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web",
+        "rd-ai-tutor-api"
+      ],
+      "postDeployValidation": "https://robodynamics.in/python-ai/"
+    },
+    "hindisutra": {
+      "name": "HindiSutra - NCERT Language Academy",
+      "description": "K-12 Hindi Masterclass and Interactive Language Learning",
+      "urlPath": "/hindiguru",
+      "sourcePatterns": [
+        "ai-tutor/web/app/hindiguru/**",
+        "ai-tutor/web/lib/hindiGuru*.ts",
+        "ai-tutor/web/components/hindiguru/**",
+        "ai-tutor/tutor-api/content-template/hindi_guru/**",
+        "ai-tutor/web/public/hindiguru/**"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web"
+      ],
+      "postDeployValidation": "https://robodynamics.in/hindiguru/course/grade-12-core"
+    }
+  },
+  "environments": {
+    "production": {
+      "sshHost": "168.231.123.108",
+      "sshUser": "root",
+      "basePath": "/opt/robodynamics",
+      "packagePath": "/tmp",
+      "owner": "tomcat:tomcat"
+    },
+    "staging": {
+      "sshHost": "staging-server.example.com",
+      "sshUser": "root",
+      "basePath": "/opt/robodynamics",
+      "packagePath": "/tmp",
+      "owner": "tomcat:tomcat"
+    }
+  }
+}

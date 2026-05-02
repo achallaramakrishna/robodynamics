@@ -1,0 +1,56 @@
+# Deployment Credentials (NEVER COMMIT)
+scripts/config/production.env
+scripts/config/staging.env
+
+# Temporary Files
+*.tar.gz
+*.tgz
+*.zip
+/tmp/
+/temp/
+*.log
+
+# Node.js
+node_modules/
+.next/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build Artifacts
+*.o
+*.a
+*.so
+*.dylib
+target/
+bin/
+out/
+.gradle/
+.m2repo/
+.turbo/
+node_modules/
+.next/
+dist/
+build/
+.pushsync/
+brain/
+artifacts/
+scratch/
+tmp*/

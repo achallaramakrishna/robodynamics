@@ -24,6 +24,7 @@ import { LEVEL_6_ROMAN_MAP } from "@/lib/vaaniLevel6Data";
 import VaaniBarakhadiGrid from "@/components/Vaani/VaaniBarakhadiGrid";
 import VaaniSentenceReader from "@/components/Vaani/VaaniSentenceReader";
 import VaaniGrammarExplainer from "@/components/Vaani/VaaniGrammarExplainer";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const COLORS = {
   ink: "#172033",
@@ -1017,20 +1018,23 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
             </div>
             <div style={{ fontSize: 30, fontWeight: 900, letterSpacing: -1 }}>{payload.lesson.title}</div>
           </div>
-          <Link
-            href={`/${payload.course.levelSlug}`}
-            style={{
-              textDecoration: "none",
-              color: COLORS.blue,
-              border: "1px solid rgba(59,130,246,0.18)",
-              background: "rgba(59,130,246,0.08)",
-              padding: "12px 16px",
-              borderRadius: 16,
-              fontWeight: 800,
-            }}
-          >
-            Back to level
-          </Link>
+          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+            <LanguageSelector />
+            <Link
+              href={`/${payload.course.levelSlug}`}
+              style={{
+                textDecoration: "none",
+                color: COLORS.blue,
+                border: "1px solid rgba(59,130,246,0.18)",
+                background: "rgba(59,130,246,0.08)",
+                padding: "12px 16px",
+                borderRadius: 16,
+                fontWeight: 800,
+              }}
+            >
+              Back to level
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -1681,8 +1685,8 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                   prompt={vaaniSay(
                     `बोलो: ${item.word}! 🎙️`,
                     `Say: ${item.word}! 🎙️`,
-                    `Say: "${item.wordEng}"! 🎙️`,
-                    `Can you say: "${item.wordEng}"? 🎙️`,
+                    `Say: "${item.word}"! 🎙️`,
+                    `Can you say: "${item.word}"? 🎙️`,
                   )}
                   studentName={studentName}
                   hindiLevel={hindiLevel}

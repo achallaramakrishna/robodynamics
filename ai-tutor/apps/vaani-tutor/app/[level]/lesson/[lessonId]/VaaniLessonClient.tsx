@@ -610,7 +610,13 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
   // Extract level-specific lesson data
   const lessonChar = lessonLevel === 2
     ? (payload.lesson as any).modifiedChar || "का"   // For Level 2, display the matra-modified character
-    : (payload.lesson as any).char || "अ";            // For Level 1, display the base character
+    : lessonLevel === 4
+    ? (payload.lesson as any).consonant || "क"       // For Level 4, display consonant
+    : lessonLevel === 5
+    ? (payload.lesson as any).firstWord || ""        // For Level 5, display first word
+    : lessonLevel === 6
+    ? (payload.lesson as any).grammarTopic || ""      // For Level 6, display grammar topic
+    : (payload.lesson as any).char || "अ";            // For Level 1 & 3, display the base character
 
   // Level 2-specific fields (null for Level 1)
   const lessonBaseChar = lessonLevel === 2
@@ -644,10 +650,21 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
   // Roman transliteration — extracted from title or lesson data
   // Used in all speech prompts so kids hear/see the Hindi word name, not English translation
   const lessonWordRoman: string = (() => {
+    // For Level 4+, check specific romanization fields
+    if (lessonLevel === 4) {
+      return (payload.lesson as any).wordRoman || lessonWord;
+    }
+    if (lessonLevel === 5) {
+      return (payload.lesson as any).sentenceRoman || lessonWord;
+    }
+    if (lessonLevel === 6) {
+      return (payload.lesson as any).exampleSentenceRoman || lessonWord;
+    }
+
     const title: string = (payload.lesson as any).title || "";
     const afterFor = title.split(" for ")[1]?.trim();
-    // For Level 2, also check wordRoman field
-    if (!afterFor && lessonLevel === 2) {
+    // For Level 2 & 3, also check wordRoman field
+    if (!afterFor && (lessonLevel === 2 || lessonLevel === 3)) {
       return (payload.lesson as any).wordRoman || lessonWord;
     }
     return afterFor || lessonWord; // fallback to Hindi script

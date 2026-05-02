@@ -647,6 +647,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
 
   const lessonWord = (payload.lesson as any).wordHindi || "अनार";
   const lessonWordEng = (payload.lesson as any).wordEnglish || "Pomegranate";
+  const lessonAssetPath = (payload.lesson as any).assetPath || "/assets/gemini/placeholder.png";
 
   // Roman transliteration — extracted from title or lesson data
   // Used in all speech prompts so kids hear/see the Hindi word name, not English translation
@@ -1668,6 +1669,23 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                     `${studentName}, can you still remember? 🤔`,
                   )}
                 </div>
+                {item.assetPath && (
+                  <div
+                    style={{
+                      background: "linear-gradient(180deg, #fff7ed, #ffffff)",
+                      borderRadius: 20,
+                      padding: 14,
+                      border: "1px solid rgba(249,115,22,0.14)",
+                      marginBottom: 18,
+                    }}
+                  >
+                    <img
+                      src={item.assetPath.startsWith('/') ? item.assetPath : `/vaani${item.assetPath}`}
+                      alt={`${item.word} - ${item.wordEng}`}
+                      style={{ width: "100%", maxHeight: 240, objectFit: "contain" }}
+                    />
+                  </div>
+                )}
                 <div style={{
                   fontSize: 96, fontWeight: 900, lineHeight: 1, marginBottom: 8,
                   background: "linear-gradient(135deg, #7c3aed, #ec4899)",
@@ -1789,7 +1807,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                   `Amazing ${studentName}! You completed the lesson! You learned the letter ${lessonChar}!`,
                   `Wonderful ${studentName}! You finished the lesson! Great job learning the letter ${lessonChar}!`,
                 ));
-                markLearned(lessonChar, lessonWord, lessonWordEng, lessonIndex);
+                markLearned(lessonChar, lessonWord, lessonWordEng, lessonIndex, lessonAssetPath);
                 musicRef.current?.stop();
                 setLessonComplete(true);
               }}

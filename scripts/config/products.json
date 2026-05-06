@@ -101,6 +101,25 @@
       ],
       "postDeployValidation": "https://robodynamics.in/python-ai/"
     },
+    "vidya": {
+      "name": "Vidya - Python AI Tutor Elite",
+      "description": "Next-Gen gamified Python tutoring with Pyodide AST",
+      "urlPath": "/vidya",
+      "sourcePatterns": [
+        "ai-tutor/web/app/vidya/**",
+        "ai-tutor/web/components/vidya/**",
+        "ai-tutor/web/lib/vidya*.ts",
+        "ai-tutor/web/hooks/usePyodide.ts",
+        "ai-tutor/web/app/api/vidya/**"
+      ],
+      "buildSteps": [
+        "cd /opt/robodynamics/ai-tutor/web && rm -rf .next && npm run build"
+      ],
+      "restartServices": [
+        "rd-ai-tutor-web"
+      ],
+      "postDeployValidation": "https://robodynamics.in/vidya/level-1"
+    },
     "hindisutra": {
       "name": "HindiSutra - NCERT Language Academy",
       "description": "K-12 Hindi Masterclass and Interactive Language Learning",

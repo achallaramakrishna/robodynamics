@@ -597,27 +597,13 @@ export function updateMindSutraSessionProgress(
 export function mergeMindSutraSkillMasteryIntoSession(
   session: AppSession,
   persistedSkills: SessionSkillMastery[],
-  persistedCompletedIds?: string[],
 ): AppSession {
-  if (!persistedSkills.length && !persistedCompletedIds?.length) return session;
+  if (!persistedSkills.length) return session;
 
   const otherProducts = (session.skillMastery ?? []).filter((skill) => skill.productSlug !== "mindsutra");
-  
-  // Combine IDs from three sources:
-  // 1. Existing session IDs (cookies)
-  // 2. Skill mastery record presence (implies some activity/completion)
-  // 3. Explicit completion records from rd_vm_student_progress (most authoritative)
-  const inferredIds = persistedSkills.map(s => s.lessonId);
-  const mergedCompletedIds = Array.from(new Set([
-    ...session.completedLessonIds, 
-    ...inferredIds,
-    ...(persistedCompletedIds ?? [])
-  ]));
-
   return {
     ...session,
     skillMastery: [...otherProducts, ...persistedSkills],
-    completedLessonIds: mergedCompletedIds,
   };
 }
 
@@ -662,7 +648,6 @@ export function buildMindSutraLearnerSnapshot(session: AppSession, lessonId: str
     conceptClarityScore,
     transferScore,
     avgConfidence,
-    xp: session.xp,
     skillMastery: skillMastery.map((skill) => ({
       skillKey: skill.skillKey,
       skillName: skill.skillName,

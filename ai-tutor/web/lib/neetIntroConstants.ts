@@ -5,9 +5,6 @@ export interface IntroSlide {
   keyPoints: string[];
   demoSteps?: string[];
   demoSpeech?: string;
-  demoStepTiming?: Array<{ step: number; startTime: number; narration: string }>;
-  diagramSrc?: string;
-  diagramCaption?: string;
 }
 
 export interface ChapterIntro {
@@ -16,7 +13,7 @@ export interface ChapterIntro {
   slides: IntroSlide[];
 }
 
-export const chapterIntros: Record<string, ChapterIntro> = {
+const chapterIntros: Record<string, ChapterIntro> = {
   // Biology Chapters
   BIO_CELL: {
     code: "BIO_CELL",
@@ -365,59 +362,44 @@ export const chapterIntros: Record<string, ChapterIntro> = {
     slides: [
       {
         slide: "explain",
-        title: "Photosynthesis & Plant Life Processes",
-        description: "Master the science of how plants make food and respond to their environment.",
+        title: "How Plants Grow and Respond",
+        description: "Plants are dynamic organisms that respond to their environment.",
         keyPoints: [
-          "Photosynthesis: Light reactions produce ATP/NADPH; Calvin cycle fixes CO₂ into glucose",
-          "C3 vs C4 plants: Different CO₂ fixation pathways; C4 is more efficient in heat/drought",
-          "Cellular respiration: Glycolysis (2 ATP) → Krebs cycle → ETC (~38 ATP total)",
-          "Phytohormones: Auxins (growth), Gibberellins (germination), ABA (stress), Cytokinins (division)",
+          "Photosynthesis converts light to chemical energy",
+          "Hormones regulate growth and responses",
+          "Tropisms: Growth toward/away from stimuli",
+          "Photoperiodism: Response to day length",
         ],
       },
       {
         slide: "demo",
-        title: "The Complete Photosynthesis Story",
-        description: "See how plants capture sunlight and convert it into the chemical energy that fuels all life.",
+        title: "Photosynthesis: Food Factory",
+        description: "Watch how plants convert sunlight into sugars.",
         keyPoints: [
-          "Photolysis (water splitting) produces O₂ — the oxygen you breathe comes from water, not CO₂! 💡",
-          "Z-scheme: PS II → electron transport → PS I → NADPH formation",
-          "Cyclic photophosphorylation: Only PS I, produces only ATP (no O₂, no NADPH)",
-          "Calvin cycle (dark reactions): CO₂ + RuBP → 3-PG → glucose in the stroma",
-          "C3 plants (wheat, rice): RuBisCO fixes CO₂ directly to RuBP in all cells",
-          "C4 plants (maize, sugarcane): PEP carboxylase fixes CO₂ in mesophyll → OAA in bundle sheath (no photorespiration!)",
+          "Light reactions (thylakoid): ATP + NADPH",
+          "Dark reactions (stroma): CO₂ → Glucose",
+          "Chlorophyll captures light energy",
+          "6CO₂ + 6H₂O + Light → C₆H₁₂O₆ + 6O₂",
         ],
         demoSteps: [
-          "Step 1: Sunlight excites chlorophyll in Photosystem II (thylakoid membrane)",
-          "Step 2: Water molecules split (photolysis): 2H₂O → 4H⁺ + 4e⁻ + O₂ (oxygen released!)",
-          "Step 3: Electrons travel through cytochrome b6f complex (Z-scheme path)",
-          "Step 4: Energy charges Photosystem I → electrons reduce NADP⁺ to NADPH",
-          "Step 5: Proton gradient drives ATP synthase → ATP production",
-          "Step 6: ATP + NADPH power the Calvin cycle in stroma",
-          "Step 7: CO₂ + RuBP → 3-phosphoglycerate → glucose molecule formed",
+          "Light hits chlorophyll",
+          "Water molecules split (photolysis)",
+          "Electrons excited to higher energy",
+          "ATP and NADPH produced",
+          "Calvin cycle uses them to fix CO₂",
         ],
         demoSpeech:
-          "Listen carefully—this is CRITICAL for NEET. In the light reactions, water splits to release oxygen. That oxygen you're breathing? It came from water photolysis, not from CO₂. The electrons travel the Z-scheme—PS II to cytochrome complex to PS I. This journey pumps protons to create an energy gradient, like water behind a dam. ATP synthase is the turbine that uses this gradient to make ATP. Meanwhile, PS I reduces NADP⁺ to NADPH. These two energy molecules—ATP and NADPH—then fuel the Calvin cycle in the stroma, where CO₂ is fixed into glucose. C4 plants are smarter: they use PEP carboxylase first, which has higher CO₂ affinity, avoiding photorespiration. That's why C4 plants thrive in hot, dry climates.",
-        demoStepTiming: [
-          { step: 1, startTime: 0, narration: "Photosystem II in thylakoid membrane captures light energy" },
-          { step: 2, startTime: 3, narration: "Water molecules split (photolysis): 2H₂O → 4H⁺ + 4e⁻ + O₂" },
-          { step: 3, startTime: 10, narration: "Electrons travel Z-scheme path through cytochrome b6f complex" },
-          { step: 4, startTime: 20, narration: "Photosystem I reduces NADP⁺ to form NADPH" },
-          { step: 5, startTime: 18, narration: "Proton gradient drives ATP synthase → ATP production" },
-          { step: 6, startTime: 32, narration: "ATP + NADPH power the Calvin cycle in stroma" },
-          { step: 7, startTime: 40, narration: "CO₂ + RuBP → glucose via Calvin cycle" },
-        ],
-        diagramSrc: "/neet/diagrams/photosynthesis.svg",
-        diagramCaption: "Z-Scheme of Photosynthesis: PS II (P680) → PQ → Cyt b6f → PC → PS I (P700) → Fd → NADP reductase → NADPH | Thylakoid lumen accumulates H⁺ for ATP synthase | Stroma: Calvin cycle fixes CO₂ into glucose",
+          "Photosynthesis happens in two parts. In the light reactions on the thylakoid membrane, light energy splits water and produces ATP and NADPH. In the Calvin cycle in the stroma, these energy molecules drive the fixation of CO₂ into glucose. This is how plants convert sunlight directly into chemical energy we can use when we eat them.",
       },
       {
         slide: "guided",
-        title: "Practice: Photosynthesis & Hormones",
-        description: "Test your understanding with NEET-style questions.",
+        title: "Practice: Plant Responses",
+        description: "Identify plant hormones and their effects.",
         keyPoints: [
-          "C4 CO₂ acceptor in mesophyll: PEP (not RuBP); first product: OAA (not 3-PG)",
-          "Cyclic photophosphorylation: Only ATP, no NADPH, no O₂ (PS I only)",
-          "ABA = stress hormone: closes stomata in drought, promotes seed dormancy",
-          "Gibberellins promote growth & seed germination; Auxins promote elongation & apical dominance",
+          "Auxins: Promote cell elongation",
+          "Gibberellins: Promote growth and germination",
+          "Cytokinins: Promote cell division",
+          "Abscisic acid: Stress responses",
         ],
       },
     ],

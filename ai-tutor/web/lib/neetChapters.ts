@@ -502,9 +502,6 @@ export const BIOLOGY_CHAPTERS: NeetChapter[] = [
       "Plant Growth: Phytohormones (Auxin, GA, Cytokinin, ABA, Ethylene)",
     ],
     highYieldTags: ["Z-scheme", "Calvin cycle", "C3 vs C4", "Krebs cycle ATP yield", "auxin vs GA"],
-    diagrams: [
-      { id: "photosynthesis", title: "Photosynthesis Process", src: "/neet/diagrams/photosynthesis.svg", caption: "Inputs: H₂O + CO₂ + Light → Outputs: Glucose + O₂ | Light reactions (thylakoid) → Calvin cycle (stroma)", topic: "Photosynthesis" },
-    ],
   },
   {
     chapterCode: "BIO_HUMAN_PHYSIO",

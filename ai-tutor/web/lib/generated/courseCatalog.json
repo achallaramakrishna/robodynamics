@@ -1,0 +1,1049 @@
+{
+  "generatedAt": "2026-03-19T15:35:36.974Z",
+  "contentRoot": "ai-tutor/tutor-api/content-template",
+  "products": {
+    "mindspark": {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "families": [
+        {
+          "id": "aptitude_reasoning",
+          "name": "Aptitude & Reasoning"
+        }
+      ],
+      "courses": [
+        {
+          "courseId": "aptitude_campus_elite",
+          "courseName": "MindSpark Campus Elite — Dream Company Prep",
+          "family": "aptitude_reasoning",
+          "courseKey": "campus_elite",
+          "grade": null,
+          "gradeSlug": null,
+          "chapterCount": 8
+        },
+        {
+          "courseId": "aptitude_campus_pro",
+          "courseName": "MindSpark Campus Pro — Placement Aptitude",
+          "family": "aptitude_reasoning",
+          "courseKey": "campus_pro",
+          "grade": null,
+          "gradeSlug": null,
+          "chapterCount": 12
+        },
+        {
+          "courseId": "aptitude_reasoning_g4",
+          "courseName": "MindSpark Grade 4 — Aptitude & Reasoning",
+          "family": "aptitude_reasoning",
+          "courseKey": "grade_4",
+          "grade": 4,
+          "gradeSlug": "grade-4",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "aptitude_reasoning_g5",
+          "courseName": "MindSpark Grade 5 — Aptitude & Reasoning",
+          "family": "aptitude_reasoning",
+          "courseKey": "grade_5",
+          "grade": 5,
+          "gradeSlug": "grade-5",
+          "chapterCount": 7
+        },
+        {
+          "courseId": "aptitude_reasoning_g6",
+          "courseName": "MindSpark Grade 6 — Aptitude & Reasoning",
+          "family": "aptitude_reasoning",
+          "courseKey": "grade_6",
+          "grade": 6,
+          "gradeSlug": "grade-6",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "aptitude_reasoning_g7",
+          "courseName": "MindSpark Grade 7 — Aptitude & Reasoning",
+          "family": "aptitude_reasoning",
+          "courseKey": "grade_7",
+          "grade": 7,
+          "gradeSlug": "grade-7",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "aptitude_reasoning_g8",
+          "courseName": "MindSpark Grade 8 — Aptitude & Reasoning",
+          "family": "aptitude_reasoning",
+          "courseKey": "grade_8",
+          "grade": 8,
+          "gradeSlug": "grade-8",
+          "chapterCount": 8
+        }
+      ]
+    },
+    "mindsutra": {
+      "productSlug": "mindsutra",
+      "productName": "MindSutra",
+      "families": [
+        {
+          "id": "vedic_math",
+          "name": "Vedic Math"
+        }
+      ],
+      "courses": [
+        {
+          "courseId": "vedic_math_g4",
+          "courseName": "MindSutra Grade 4 - Vedic Math",
+          "family": "vedic_math",
+          "courseKey": "grade_4",
+          "grade": 4,
+          "gradeSlug": "grade-4",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "vedic_math_g5",
+          "courseName": "MindSutra Grade 5 — Vedic Math",
+          "family": "vedic_math",
+          "courseKey": "grade_5",
+          "grade": 5,
+          "gradeSlug": "grade-5",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "vedic_math_g6",
+          "courseName": "MindSutra Grade 6 — Vedic Math",
+          "family": "vedic_math",
+          "courseKey": "grade_6",
+          "grade": 6,
+          "gradeSlug": "grade-6",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "vedic_math_g7",
+          "courseName": "MindSutra Grade 7 — Vedic Math",
+          "family": "vedic_math",
+          "courseKey": "grade_7",
+          "grade": 7,
+          "gradeSlug": "grade-7",
+          "chapterCount": 8
+        },
+        {
+          "courseId": "vedic_math_g8",
+          "courseName": "MindSutra Grade 8 — Vedic Math",
+          "family": "vedic_math",
+          "courseKey": "grade_8",
+          "grade": 8,
+          "gradeSlug": "grade-8",
+          "chapterCount": 8
+        }
+      ]
+    }
+  },
+  "courses": [
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "campus_elite",
+      "courseId": "aptitude_campus_elite",
+      "courseName": "MindSpark Campus Elite — Dream Company Prep",
+      "tagline": "Amazon. Microsoft. Google. You're Ready.",
+      "grade": null,
+      "gradeSlug": null,
+      "targetAudience": "Final year students targeting top-tier tech companies, AMCAT/eLitmus",
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/campus_elite/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/campus_elite/chapters.json",
+      "chapters": [
+        {
+          "code": "CE_L1_ADVANCED_QA",
+          "title": "Advanced Quantitative Aptitude",
+          "order": 1,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L2_PUZZLES_HARD",
+          "title": "Advanced Puzzles & Cryptarithmetic",
+          "order": 2,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L3_AMCAT_PATTERN",
+          "title": "AMCAT Pattern — Full Mock",
+          "order": 3,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L4_ELITMUS_PATTERN",
+          "title": "eLitmus pH Test Pattern",
+          "order": 4,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L5_AMAZON_APT",
+          "title": "Amazon Aptitude Style",
+          "order": 5,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L6_MICROSOFT_APT",
+          "title": "Microsoft Aptitude Style",
+          "order": 6,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L7_GOOGLE_APT",
+          "title": "Google-Style Problem Solving",
+          "order": 7,
+          "estimatedMinutes": null,
+          "freePreview": false
+        },
+        {
+          "code": "CE_L8_DI_ADVANCED",
+          "title": "Advanced DI — Mixed Sets",
+          "order": 8,
+          "estimatedMinutes": null,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "campus_pro",
+      "courseId": "aptitude_campus_pro",
+      "courseName": "MindSpark Campus Pro — Placement Aptitude",
+      "tagline": "Get Placed. Get the Edge.",
+      "grade": null,
+      "gradeSlug": null,
+      "targetAudience": "Engineering Year 3–4 students preparing for campus placements",
+      "chapterCount": 12,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/campus_pro/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/campus_pro/chapters.json",
+      "chapters": [
+        {
+          "code": "CP_L1_NUMBER_SYSTEMS",
+          "title": "Number Systems & Series",
+          "order": 1,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L2_PERCENTAGES",
+          "title": "Percentages & Profit/Loss",
+          "order": 2,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L3_TIME_WORK",
+          "title": "Time, Work & Pipes",
+          "order": 3,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L4_TIME_SPEED",
+          "title": "Time, Speed & Distance",
+          "order": 4,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L5_AVERAGES",
+          "title": "Averages, Mixtures & Alligation",
+          "order": 5,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L6_PERMCOMB",
+          "title": "Permutations, Combinations & Probability",
+          "order": 6,
+          "estimatedMinutes": 28,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L7_DI",
+          "title": "Data Interpretation",
+          "order": 7,
+          "estimatedMinutes": 30,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L8_SEATING",
+          "title": "Logical Reasoning — Arrangements",
+          "order": 8,
+          "estimatedMinutes": 28,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L9_PUZZLES",
+          "title": "Logical Reasoning — Puzzles & Syllogisms",
+          "order": 9,
+          "estimatedMinutes": 28,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L10_VERBAL",
+          "title": "Verbal Ability",
+          "order": 10,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L11_TCS_NQT",
+          "title": "TCS NQT Pattern Practice",
+          "order": 11,
+          "estimatedMinutes": 35,
+          "freePreview": false
+        },
+        {
+          "code": "CP_L12_COMPANY_MIX",
+          "title": "Infosys/Wipro/Accenture Pattern",
+          "order": 12,
+          "estimatedMinutes": 35,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "grade_4",
+      "courseId": "aptitude_reasoning_g4",
+      "courseName": "MindSpark Grade 4 — Aptitude & Reasoning",
+      "tagline": "Think Sharp, Reason Fast",
+      "grade": 4,
+      "gradeSlug": "grade-4",
+      "targetAudience": "Grade 4 students (age 9–10)",
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_4/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_4/chapters.json",
+      "chapters": [
+        {
+          "code": "AR_G4_L1_PATTERNS",
+          "title": "Number Patterns",
+          "order": 1,
+          "estimatedMinutes": 12,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L2_ODD_ONE",
+          "title": "Odd One Out",
+          "order": 2,
+          "estimatedMinutes": 12,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L3_PICTURE",
+          "title": "Picture Series",
+          "order": 3,
+          "estimatedMinutes": 13,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L4_DIRECTIONS",
+          "title": "Basic Directions",
+          "order": 4,
+          "estimatedMinutes": 12,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L5_CODING",
+          "title": "Simple Coding",
+          "order": 5,
+          "estimatedMinutes": 13,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L6_ANALOGY",
+          "title": "Simple Analogies",
+          "order": 6,
+          "estimatedMinutes": 12,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L7_SORTING",
+          "title": "Ordering and Ranking",
+          "order": 7,
+          "estimatedMinutes": 12,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G4_L8_CALENDAR",
+          "title": "Days and Calendar",
+          "order": 8,
+          "estimatedMinutes": 12,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "grade_5",
+      "courseId": "aptitude_reasoning_g5",
+      "courseName": "MindSpark Grade 5 — Aptitude & Reasoning",
+      "tagline": "Think Sharp, Reason Fast",
+      "grade": 5,
+      "gradeSlug": "grade-5",
+      "targetAudience": "Grade 5 students (age 10–11)",
+      "chapterCount": 7,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_5/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_5/chapters.json",
+      "chapters": [
+        {
+          "code": "AR_G5_L1_NUMBER_SERIES",
+          "title": "Number Series",
+          "order": 1,
+          "estimatedMinutes": 14,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G5_L2_LETTER_CODING",
+          "title": "Letter Coding Basics",
+          "order": 2,
+          "estimatedMinutes": 14,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G5_L3_CALENDAR",
+          "title": "Calendar Basics",
+          "order": 3,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G5_L4_SHAPES",
+          "title": "Shape Classification",
+          "order": 4,
+          "estimatedMinutes": 13,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G5_L5_SPATIAL",
+          "title": "Spatial Reasoning",
+          "order": 5,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G5_L6_ANALOGIES",
+          "title": "Basic Analogies",
+          "order": 6,
+          "estimatedMinutes": 14,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G5_L7_DATA_CHARTS",
+          "title": "Reading Data Charts",
+          "order": 7,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "grade_6",
+      "courseId": "aptitude_reasoning_g6",
+      "courseName": "MindSpark Grade 6 — Aptitude & Reasoning",
+      "tagline": "Think Sharp, Reason Fast",
+      "grade": 6,
+      "gradeSlug": "grade-6",
+      "targetAudience": "Grade 6 students (age 11–12)",
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_6/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_6/chapters.json",
+      "chapters": [
+        {
+          "code": "AR_G6_L1_SERIES",
+          "title": "Series Completion",
+          "order": 1,
+          "estimatedMinutes": 16,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L2_CODING",
+          "title": "Coding and Decoding",
+          "order": 2,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L3_ANALOGIES",
+          "title": "Analogies",
+          "order": 3,
+          "estimatedMinutes": 16,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L4_VENN",
+          "title": "Venn Diagrams",
+          "order": 4,
+          "estimatedMinutes": 17,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L5_CLOCKS",
+          "title": "Clocks and Time",
+          "order": 5,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L6_RANKINGS",
+          "title": "Rankings and Positions",
+          "order": 6,
+          "estimatedMinutes": 14,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L7_DATA",
+          "title": "Data Tables and Charts",
+          "order": 7,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G6_L8_PUZZLES",
+          "title": "Simple Logical Puzzles",
+          "order": 8,
+          "estimatedMinutes": 16,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "grade_7",
+      "courseId": "aptitude_reasoning_g7",
+      "courseName": "MindSpark Grade 7 — Aptitude & Reasoning",
+      "tagline": "Think Sharp, Reason Fast",
+      "grade": 7,
+      "gradeSlug": "grade-7",
+      "targetAudience": "Grade 7 students (age 12–13)",
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_7/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_7/chapters.json",
+      "chapters": [
+        {
+          "code": "AR_G7_L1_SEQUENCES",
+          "title": "Logical Sequences",
+          "order": 1,
+          "estimatedMinutes": 16,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L2_BLOOD_REL",
+          "title": "Blood Relations",
+          "order": 2,
+          "estimatedMinutes": 17,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L3_DIRECTION",
+          "title": "Direction & Distance",
+          "order": 3,
+          "estimatedMinutes": 16,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L4_AGE",
+          "title": "Age Problems",
+          "order": 4,
+          "estimatedMinutes": 17,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L5_SYMBOLS",
+          "title": "Symbol Substitution",
+          "order": 5,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L6_GROUPING",
+          "title": "Classification & Grouping",
+          "order": 6,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L7_DATA_GRAPHS",
+          "title": "Data Graphs",
+          "order": 7,
+          "estimatedMinutes": 17,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G7_L8_CALENDAR",
+          "title": "Calendar Puzzles",
+          "order": 8,
+          "estimatedMinutes": 15,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindspark",
+      "productName": "MindSpark",
+      "family": "aptitude_reasoning",
+      "familyName": "Aptitude & Reasoning",
+      "courseKey": "grade_8",
+      "courseId": "aptitude_reasoning_g8",
+      "courseName": "MindSpark Grade 8 — Aptitude & Reasoning",
+      "tagline": "Think Sharp, Reason Fast",
+      "grade": 8,
+      "gradeSlug": "grade-8",
+      "targetAudience": "Grade 8 students (age 13–14)",
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/aptitude_reasoning/grade_8/chapters.json",
+      "chapters": [
+        {
+          "code": "AR_G8_L1_SEQUENCES",
+          "title": "Advanced Sequences",
+          "order": 1,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L2_SEATING",
+          "title": "Seating Arrangements",
+          "order": 2,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L3_SYLLOGISM",
+          "title": "Syllogisms",
+          "order": 3,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L4_BLOOD_REL",
+          "title": "Complex Blood Relations",
+          "order": 4,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L5_CODING",
+          "title": "Advanced Coding-Decoding",
+          "order": 5,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L6_DATA_INTERP",
+          "title": "Data Interpretation",
+          "order": 6,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L7_CRITICAL",
+          "title": "Critical Reasoning",
+          "order": 7,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "AR_G8_L8_PUZZLES",
+          "title": "Complex Logical Puzzles",
+          "order": 8,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindsutra",
+      "productName": "MindSutra",
+      "family": "vedic_math",
+      "familyName": "Vedic Math",
+      "courseKey": "grade_4",
+      "courseId": "vedic_math_g4",
+      "courseName": "MindSutra Grade 4 - Vedic Math",
+      "tagline": "",
+      "grade": 4,
+      "gradeSlug": "grade-4",
+      "targetAudience": null,
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/vedic_math/grade_4/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/vedic_math/grade_4/chapters.json",
+      "chapters": [
+        {
+          "code": "VM_G4_L1_FAST_ADDITION",
+          "title": "Completing the Whole - Fast Addition Trick",
+          "order": 1,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L2_TABLES_11_TO_19",
+          "title": "Lightning Tables 11-19 - Ekadhikena Pattern",
+          "order": 2,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L3_DOUBLING_HALVING",
+          "title": "Double Fast, Half Fast - Multiplication Secrets",
+          "order": 3,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L4_MULT_BY_11",
+          "title": "The 11-Trick - Multiply Any 2-Digit Number by 11",
+          "order": 4,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L5_SUBT_BORROW_FREE",
+          "title": "No More Borrowing! - Vedic Subtraction",
+          "order": 5,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L6_MULT_BY_5_25",
+          "title": "x5 and x25 in a Flash - Base Multiplication",
+          "order": 6,
+          "estimatedMinutes": 18,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L7_NEAR_100",
+          "title": "Near 100 Magic - Add and Subtract Close Numbers",
+          "order": 7,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G4_L8_CRISS_CROSS_2DIG",
+          "title": "The X-Factor - Urdhva Criss-Cross Multiplication",
+          "order": 8,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindsutra",
+      "productName": "MindSutra",
+      "family": "vedic_math",
+      "familyName": "Vedic Math",
+      "courseKey": "grade_5",
+      "courseId": "vedic_math_g5",
+      "courseName": "MindSutra Grade 5 — Vedic Math",
+      "tagline": "",
+      "grade": 5,
+      "gradeSlug": "grade-5",
+      "targetAudience": null,
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/vedic_math/grade_5/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/vedic_math/grade_5/chapters.json",
+      "chapters": [
+        {
+          "code": "VM_G5_L1_NIKHILAM_NEAR100",
+          "title": "Nikhilam — Multiply Near Base 100",
+          "order": 1,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L2_ANURUPYENA_3DIG",
+          "title": "Proportionally! — 3-Digit × Single-Digit Speed",
+          "order": 2,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L3_CRISS_CROSS_3DIG",
+          "title": "Triple Cross — 3-Digit × 3-Digit Urdhva",
+          "order": 3,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L4_DIVISION_BY_9",
+          "title": "Divide by 9 — The Running Remainder Trick",
+          "order": 4,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L5_SQUARES_NEAR50",
+          "title": "Square It! — Numbers Near 50",
+          "order": 5,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L6_FRACTIONS_SPEED",
+          "title": "Fractions Made Fast — Vedic Simplification",
+          "order": 6,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L7_DECIMAL_SPEED",
+          "title": "Decimal Lightning — Multiply and Divide Decimals Mentally",
+          "order": 7,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G5_L8_DIVISION_FLAG",
+          "title": "Flag Division — Divide Any Number in One Line",
+          "order": 8,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindsutra",
+      "productName": "MindSutra",
+      "family": "vedic_math",
+      "familyName": "Vedic Math",
+      "courseKey": "grade_6",
+      "courseId": "vedic_math_g6",
+      "courseName": "MindSutra Grade 6 — Vedic Math",
+      "tagline": "",
+      "grade": 6,
+      "gradeSlug": "grade-6",
+      "targetAudience": null,
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/vedic_math/grade_6/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/vedic_math/grade_6/chapters.json",
+      "chapters": [
+        {
+          "code": "VM_G6_L1_VINCULUM",
+          "title": "Vinculum Numbers — The Bar That Changes Everything",
+          "order": 1,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L2_INTEGER_MULT",
+          "title": "Integer Multiplication Shortcuts",
+          "order": 2,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L3_NIKHILAM_BASE10",
+          "title": "Nikhilam — Multiply Near Any Base (10, 100, 1000)",
+          "order": 3,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L4_RATIO_SHORTCUT",
+          "title": "Ratio Racing — Compare and Simplify Ratios Fast",
+          "order": 4,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L5_HCF_LCM_VEDIC",
+          "title": "HCF and LCM — Vedic Speed Method",
+          "order": 5,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L6_SQUARES_2DIG",
+          "title": "Square Any 2-Digit Number — The Anurupyena Formula",
+          "order": 6,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L7_PARAVARTYA_DIV",
+          "title": "Paravartya — Divide by Transpose-and-Adjust",
+          "order": 7,
+          "estimatedMinutes": 24,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G6_L8_ALGEBRA_SPEED",
+          "title": "Algebra by Inspection — Sunyam Samyasamuccaye",
+          "order": 8,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindsutra",
+      "productName": "MindSutra",
+      "family": "vedic_math",
+      "familyName": "Vedic Math",
+      "courseKey": "grade_7",
+      "courseId": "vedic_math_g7",
+      "courseName": "MindSutra Grade 7 — Vedic Math",
+      "tagline": "",
+      "grade": 7,
+      "gradeSlug": "grade-7",
+      "targetAudience": null,
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/vedic_math/grade_7/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/vedic_math/grade_7/chapters.json",
+      "chapters": [
+        {
+          "code": "VM_G7_L1_SQUARING_NEAR_BASE",
+          "title": "Power Squaring — Near Base 100 and 1000",
+          "order": 1,
+          "estimatedMinutes": 24,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L2_RATIONAL_ADD",
+          "title": "Rational Number Speed — LCM-Free Addition",
+          "order": 2,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L3_LINEAR_EQ_VEDIC",
+          "title": "Equation Ninja — Solve Linear Equations by Sutra",
+          "order": 3,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L4_CUBING_ANURUPYENA",
+          "title": "Cube It! — Cubing Any 2-Digit Number",
+          "order": 4,
+          "estimatedMinutes": 24,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L5_NIKHILAM_3DIG",
+          "title": "Nikhilam Level Up — 3-Digit Multiplication Near 1000",
+          "order": 5,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L6_EXPONENT_PATTERNS",
+          "title": "Power Patterns — Exponents via Vedic Sequences",
+          "order": 6,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L7_TRIANGLE_SHORTCUTS",
+          "title": "Geometry Speed — Triangle and Area Shortcuts",
+          "order": 7,
+          "estimatedMinutes": 20,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G7_L8_ALGEBRAIC_IDENTITIES",
+          "title": "Identity Power — Algebraic Expansions at Speed",
+          "order": 8,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        }
+      ]
+    },
+    {
+      "productSlug": "mindsutra",
+      "productName": "MindSutra",
+      "family": "vedic_math",
+      "familyName": "Vedic Math",
+      "courseKey": "grade_8",
+      "courseId": "vedic_math_g8",
+      "courseName": "MindSutra Grade 8 — Vedic Math",
+      "tagline": "",
+      "grade": 8,
+      "gradeSlug": "grade-8",
+      "targetAudience": null,
+      "chapterCount": 8,
+      "chapterDir": "ai-tutor/tutor-api/content-template/vedic_math/grade_8/chapter",
+      "indexPath": "ai-tutor/tutor-api/content-template/vedic_math/grade_8/chapters.json",
+      "chapters": [
+        {
+          "code": "VM_G8_L1_SQUARE_ROOTS",
+          "title": "Square Root by Inspection — Vedic Digit-Grouping",
+          "order": 1,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L2_CUBE_ROOTS",
+          "title": "Cube Root by Magic — Vedic Units-Digit Inspection",
+          "order": 2,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L3_ALGEBRAIC_IDENTITIES_ADV",
+          "title": "Identity Champion — Advanced Algebraic Identities",
+          "order": 3,
+          "estimatedMinutes": 24,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L4_SIMULTANEOUS_EQ",
+          "title": "Two Equations, Zero Effort — Paravartya Simultaneous",
+          "order": 4,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L5_CRISS_CROSS_4DIG",
+          "title": "4-Digit Criss-Cross — Urdhva at Full Power",
+          "order": 5,
+          "estimatedMinutes": 26,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L6_PERCENTAGE_SPEED",
+          "title": "Percentage Power — Mental % in 3 Seconds",
+          "order": 6,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L7_NIKHILAM_LARGE",
+          "title": "Nikhilam Mastery — 4-Digit Numbers Near 10000",
+          "order": 7,
+          "estimatedMinutes": 25,
+          "freePreview": false
+        },
+        {
+          "code": "VM_G8_L8_DIVISIBILITY_ADVANCED",
+          "title": "Divisibility Decoded — Test by 7, 11, 13 and Beyond",
+          "order": 8,
+          "estimatedMinutes": 22,
+          "freePreview": false
+        }
+      ]
+    }
+  ]
+}

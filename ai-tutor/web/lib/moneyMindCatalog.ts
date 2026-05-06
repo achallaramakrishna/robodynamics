@@ -23,7 +23,6 @@ export type MoneyMindLevel = {
   xpToUnlock: number;
   xpOnComplete: number;
   lessons: MoneyMindLesson[];
-  image?: string; // Added for visual cards
 };
 
 export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
@@ -32,7 +31,6 @@ export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
     tagline: "Understand the value of the Rupee and master needs vs wants.",
     emoji: "💵", color: "#10B981", ageEquiv: "Age 8-10", gradeEquiv: "Grade 4-5",
     xpToUnlock: 0, xpOnComplete: 200,
-    image: "/moneymind/moneymind_l1_basics.png",
     lessons: [
       { id: "MM_L1_1", title: "What is Money?", category: "Macro", skill: "Origins of the Rupee and currency basics", durationMin: 15, freePreview: true },
       { id: "MM_L1_2", title: "Needs vs Wants", category: "Budgeting", skill: "Make smart choices in a shopping list", durationMin: 15, freePreview: true },
@@ -45,7 +43,6 @@ export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
     tagline: "Step inside a bank and learn to use an ATM safely.",
     emoji: "🏦", color: "#3B82F6", ageEquiv: "Age 10-12", gradeEquiv: "Grade 5-6",
     xpToUnlock: 200, xpOnComplete: 300,
-    image: "/moneymind/moneymind_l2_banking.png",
     lessons: [
       { id: "MM_L2_1", title: "What is a Bank?", category: "Saving", skill: "The role of banks and vault security", durationMin: 20, freePreview: true },
       { id: "MM_L2_2", title: "The ATM Mission", category: "Safety", skill: "Withdraw cash safely using a PIN", durationMin: 25, freePreview: false },
@@ -58,7 +55,6 @@ export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
     tagline: "Master UPI, QR codes, and protect yourself from scams.",
     emoji: "📱", color: "#6366F1", ageEquiv: "Age 11-13", gradeEquiv: "Grade 6-7",
     xpToUnlock: 500, xpOnComplete: 400,
-    image: "/moneymind/moneymind_l3_safety.png",
     lessons: [
       { id: "MM_L3_1", title: "Going Digital: UPI", category: "Macro", skill: "How instant payments work via UPI", durationMin: 20, freePreview: true },
       { id: "MM_L3_2", title: "Scanner Pro", category: "Safety", skill: "Scanning QR codes & verifying merchants", durationMin: 25, freePreview: false },
@@ -71,7 +67,6 @@ export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
     tagline: "Plan festivals, parties, and family groceries like a pro.",
     emoji: "🛒", color: "#F59E0B", ageEquiv: "Age 12-14", gradeEquiv: "Grade 7-8",
     xpToUnlock: 900, xpOnComplete: 500,
-    image: "/moneymind/moneymind_l4_budgeting.png",
     lessons: [
       { id: "MM_L4_1", title: "The Birthday Challenge", category: "Budgeting", skill: "Planning a party on a fixed budget", durationMin: 30, freePreview: true },
       { id: "MM_L4_2", title: "Smart Shopper", category: "Budgeting", skill: "Comparing prices online vs offline", durationMin: 30, freePreview: false },
@@ -84,7 +79,6 @@ export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
     tagline: "Understand investing, inflation, and why risk matters.",
     emoji: "🌱", color: "#8B5CF6", ageEquiv: "Age 13-16", gradeEquiv: "Grade 8-10",
     xpToUnlock: 1400, xpOnComplete: 600,
-    image: "/moneymind/moneymind_l5_growth.png",
     lessons: [
       { id: "MM_L5_1", title: "Idle vs Active Money", category: "Investing", skill: "The concept of interest and growth", durationMin: 30, freePreview: true },
       { id: "MM_L5_2", title: "The Inflation Monster", category: "Macro", skill: "Why things get more expensive over time", durationMin: 35, freePreview: false },
@@ -97,7 +91,6 @@ export const MONEYMIND_LEVELS: MoneyMindLevel[] = [
     tagline: "Salary slips, credit scores, and planning for adulthood.",
     emoji: "🚀", color: "#F43F5E", ageEquiv: "Age 15-18", gradeEquiv: "Grade 10-12",
     xpToUnlock: 2000, xpOnComplete: 700,
-    image: "/moneymind/moneymind_l6_readiness.png",
     lessons: [
       { id: "MM_L6_1", title: "My First Salary", category: "Biz", skill: "Reading a salary slip and taxes", durationMin: 40, freePreview: true },
       { id: "MM_L6_2", title: "The Debt Trap", category: "Budgeting", skill: "EMI, Interest rates, and Credit Cards", durationMin: 40, freePreview: false },

@@ -11,6 +11,8 @@ import VaaniCameraCapture from "@/components/Vaani/VaaniCameraCapture";
 import { getVaaniAudio } from "@/lib/vaaniAudioMapping";
 import { startVaaniMusic, type MusicController } from "@/lib/vaaniMusic";
 import { markLearned, getDueForReview, markReviewed } from "@/lib/vaaniSpacedRepetition";
+import { awardLessonXP } from "@/lib/vaaniGamification";
+import { generateWorksheet } from "@/lib/vaaniWorksheetGenerator";
 import { vaaniLevel2Data, LEVEL_2_ROMAN_MAP } from "@/lib/vaaniLevel2Data";
 import VaaniMatraComparison from "@/components/Vaani/VaaniMatraComparison";
 import VaaniMatraTracer from "@/components/Vaani/VaaniMatraTracer";
@@ -25,6 +27,7 @@ import VaaniBarakhadiGrid from "@/components/Vaani/VaaniBarakhadiGrid";
 import VaaniSentenceReader from "@/components/Vaani/VaaniSentenceReader";
 import VaaniGrammarExplainer from "@/components/Vaani/VaaniGrammarExplainer";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const COLORS = {
   ink: "#172033",
@@ -37,7 +40,8 @@ const COLORS = {
   pink: "#ec4899",
 };
 
-function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak, lessonLevel, lessonBaseChar, lessonMatra, lessonConsonant1, lessonConsonant2, lessonCombined, lessonHalantForm, lesson }: { step: any; boardKey: number; onTraceComplete?: () => void; onMatchComplete?: () => void; onSpeak?: (text: string) => void; lessonLevel?: number; lessonBaseChar?: string | null; lessonMatra?: string | null; lessonConsonant1?: string | null; lessonConsonant2?: string | null; lessonCombined?: string | null; lessonHalantForm?: string | null; lesson?: any }) {
+function BoardPanel({ step, boardKey, onTraceComplete, onTracingRoundComplete, onMatchComplete, onSpeak, onMcqAnswer, lessonLevel, hindiLevel, lessonChar, lessonBaseChar, lessonMatra, lessonConsonant1, lessonConsonant2, lessonCombined, lessonHalantForm, lesson, romanMap }: { step: any; boardKey: number; onTraceComplete?: () => void; onTracingRoundComplete?: (round: number, total: number) => void; onMatchComplete?: () => void; onSpeak?: (text: string) => void; onMcqAnswer?: (correct: boolean) => void; lessonLevel?: number; hindiLevel?: string; lessonChar?: string | null; lessonBaseChar?: string | null; lessonMatra?: string | null; lessonConsonant1?: string | null; lessonConsonant2?: string | null; lessonCombined?: string | null; lessonHalantForm?: string | null; lesson?: any; romanMap?: Record<string, unknown> }) {
+  if (!step.board) return null;
   const { data, type } = step.board;
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -89,7 +93,78 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
             marginBottom: 22,
           }}
         >
-          <img src={data.assetPath.startsWith('/vaani') ? data.assetPath : `/vaani${data.assetPath}`} alt={data.headline || "Lesson visual"} style={{ width: "100%", maxHeight: 360, objectFit: "contain" }} />
+          <img src={data.assetPath.startsWith('/vaani') ? data.assetPath : `/vaani${data.assetPath}`} alt={data.headline || "Lesson visual"} style={{ width: "100%", maxHeight: 360, objectFit: "contain" }} onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }} />
+        </div>
+      )}
+
+      {/* ── Letter Spotlight — big letter + word image side-by-side ── */}
+      {type === "letterSpotlight" && (data.char || lessonChar) && (
+        <div>
+          {/* Two-column: giant letter on left, image on right */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "center", marginBottom: 18 }}>
+            {/* LEFT — giant glowing letter */}
+            <button
+              onClick={() => onSpeak?.(data.char || lessonChar)}
+              title="Tap to hear!"
+              style={{
+                background: "linear-gradient(135deg,rgba(249,115,22,0.10),rgba(59,130,246,0.08))",
+                border: "2px solid rgba(249,115,22,0.22)",
+                borderRadius: 28,
+                padding: "24px 12px",
+                cursor: "pointer",
+                display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
+              }}
+            >
+              <span style={{
+                fontSize: 96, fontWeight: 900, lineHeight: 1,
+                background: "linear-gradient(135deg,#f97316,#ec4899)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+                filter: "drop-shadow(0 4px 12px rgba(249,115,22,0.30))",
+              }}>
+                {lessonChar || data.char}
+              </span>
+              <span style={{ fontSize: 12, color: COLORS.soft, fontWeight: 700 }}>🔊 Tap to hear</span>
+            </button>
+
+            {/* RIGHT — word image + label */}
+            {data.assetPath && (
+              <div style={{
+                background: "linear-gradient(180deg,#fff7ed,#ffffff)",
+                borderRadius: 24, padding: 14,
+                border: "1px solid rgba(249,115,22,0.16)",
+                display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
+              }}>
+                <img
+                  src={data.assetPath.startsWith("/vaani") ? data.assetPath : `/vaani${data.assetPath}`}
+                  alt={data.wordHindi || ""}
+                  style={{ width: "100%", maxHeight: 160, objectFit: "contain", borderRadius: 16 }}
+                  onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+                />
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: 20, fontWeight: 900, color: COLORS.ink }}>{data.wordHindi}</div>
+                  <div style={{ fontSize: 13, color: COLORS.soft, fontWeight: 600 }}>{data.wordEnglish}</div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Connection label */}
+          <div style={{
+            background: "rgba(249,115,22,0.07)", borderRadius: 16, padding: "10px 16px",
+            textAlign: "center", fontWeight: 800, fontSize: 15, color: COLORS.ink,
+            border: "1px solid rgba(249,115,22,0.15)",
+          }}>
+            <span style={{ color: COLORS.orange }}>{lessonChar || data.char}</span>
+            {" से "}
+            <span style={{ color: COLORS.orange }}>{data.wordHindi || lesson?.wordHindi}</span>
+            {(data.wordEnglish || lesson?.wordEnglish) && <span style={{ color: COLORS.soft, fontSize: 13 }}> ({data.wordEnglish || lesson?.wordEnglish})</span>}
+          </div>
+
+          {data.prompt && (
+            <p style={{ margin: "12px 0 0", fontSize: 14, color: COLORS.soft, textAlign: "center" }}>
+              {data.prompt}
+            </p>
+          )}
         </div>
       )}
 
@@ -152,10 +227,16 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                   fontSize: 26, fontWeight: 900,
                   border: "1px solid rgba(23,32,51,0.08)",
                 }}>
-                  {data.expression}
+                  {lessonChar || data.expression || "अ"}
                 </div>
               </div>
-              <VaaniTraceCanvas char={data.expression || "अ"} color={COLORS.orange} onComplete={onTraceComplete} />
+              <VaaniTraceCanvas
+                char={lessonChar || data.expression || "अ"}
+                color={COLORS.orange}
+                rounds={3}
+                onRoundComplete={onTracingRoundComplete}
+                onComplete={onTraceComplete}
+              />
             </>
           )}
         </div>
@@ -271,7 +352,13 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                   setFlippedCards((prev) => ({ ...prev, [index]: !prev[index] }));
                   // Speak when flipping to reveal (front → back)
                   if (!wasFlipped && onSpeak) {
-                    onSpeak(`${cardWord}! ${cardEnglish ? "That means " + cardEnglish + "!" : ""}`);
+                    if (hindiLevel === "native") {
+                      onSpeak(cardWord);
+                    } else if (hindiLevel === "some") {
+                      onSpeak(`${cardWord}! ${cardEnglish}`);
+                    } else {
+                      onSpeak(`${cardWord}! ${cardEnglish ? "That means " + cardEnglish + "!" : ""}`);
+                    }
                   }
                 }}
                 style={{
@@ -294,7 +381,7 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                     transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
                   }}
                 >
-                  {/* FRONT — big emoji + Hindi word */}
+                  {/* FRONT — image (if present) or emoji + Hindi word */}
                   <div
                     style={{
                       position: "absolute", inset: 0, backfaceVisibility: "hidden",
@@ -303,18 +390,29 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                       border: "1px solid rgba(249,115,22,0.20)",
                       display: "flex", flexDirection: "column",
                       alignItems: "center", justifyContent: "center",
-                      padding: 14, gap: 8,
+                      padding: card.image ? "10px 12px 12px" : 14, gap: card.image ? 6 : 8,
                     }}
                   >
-                    <div style={{ fontSize: 60, lineHeight: 1 }}>{cardEmoji}</div>
-                    <div style={{ fontSize: 22, fontWeight: 900, color: COLORS.orange, textAlign: "center" }}>
+                    {card.image ? (
+                      <div style={{ width: "100%", flex: 1, minHeight: 0, borderRadius: 14, overflow: "hidden" }}>
+                        <img
+                          src={card.image.startsWith("/vaani") ? card.image : `/vaani${card.image}`}
+                          alt={cardWord}
+                          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+                        />
+                      </div>
+                    ) : (
+                      <div style={{ fontSize: 60, lineHeight: 1 }}>{cardEmoji}</div>
+                    )}
+                    <div style={{ fontSize: card.image ? 18 : 22, fontWeight: 900, color: COLORS.orange, textAlign: "center" }}>
                       {cardWord}
                     </div>
                     <div style={{ fontSize: 11, color: COLORS.soft, fontWeight: 700 }}>
-                      🔊 Tap to hear!
+                      🔊 Tap to flip!
                     </div>
                   </div>
-                  {/* BACK — English meaning + Hindi word */}
+                  {/* BACK — image (if present) or emoji + English meaning */}
                   <div
                     style={{
                       position: "absolute", inset: 0, backfaceVisibility: "hidden",
@@ -324,19 +422,32 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                       border: "2px solid rgba(16,185,129,0.30)",
                       display: "flex", flexDirection: "column",
                       alignItems: "center", justifyContent: "center",
-                      padding: 14, gap: 6, textAlign: "center",
+                      padding: card.image ? "10px 12px 12px" : 14, gap: 6, textAlign: "center",
                     }}
                   >
-                    <div style={{ fontSize: 48, lineHeight: 1 }}>{cardEmoji}</div>
+                    {card.image ? (
+                      <div style={{ width: "100%", flex: 1, minHeight: 0, borderRadius: 14, overflow: "hidden" }}>
+                        <img
+                          src={card.image.startsWith("/vaani") ? card.image : `/vaani${card.image}`}
+                          alt={cardWord}
+                          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+                        />
+                      </div>
+                    ) : (
+                      <div style={{ fontSize: 48, lineHeight: 1 }}>{cardEmoji}</div>
+                    )}
                     <div style={{ fontSize: 22, fontWeight: 900, color: "#047857" }}>
                       {cardEnglish}
                     </div>
                     <div style={{ fontSize: 16, fontWeight: 700, color: COLORS.orange }}>
                       {cardWord}
                     </div>
-                    <div style={{ fontSize: 10, color: COLORS.blue, fontWeight: 800, letterSpacing: 0.5 }}>
-                      starts with {data.headline?.split(" ").slice(-1)[0] || "?"}
-                    </div>
+                    {data.targetChar && (
+                      <div style={{ fontSize: 10, color: COLORS.blue, fontWeight: 800, letterSpacing: 0.5 }}>
+                        starts with {data.targetChar}
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
@@ -346,65 +457,141 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
       )}
 
       {type === "mcq" && data.options && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 12 }}>
-          {data.options.map((option: string) => {
-            const selected = option === selectedOption;
-            const correct = selected && option === data.answer;
-            const wrong = selected && option !== data.answer;
-            // Split "🍎 अनार" → emoji + word; or just a letter like "अ"
-            const parts = option.split(" ");
-            const hasEmoji = parts.length > 1 && /\p{Emoji}/u.test(parts[0]);
-            const emojiPart = hasEmoji ? parts[0] : "";
-            const wordPart = hasEmoji ? parts.slice(1).join(" ") : option;
-            return (
-              <button
-                key={option}
-                onClick={() => setSelectedOption(option)}
-                style={{
-                  padding: "16px 10px",
-                  borderRadius: 20,
-                  cursor: "pointer",
-                  border: correct
-                    ? "3px solid rgba(16,185,129,0.60)"
-                    : wrong
-                      ? "3px solid rgba(239,68,68,0.50)"
-                      : selected
-                        ? "2px solid rgba(59,130,246,0.40)"
-                        : `1px solid ${COLORS.line}`,
-                  background: correct ? "rgba(16,185,129,0.12)" : wrong ? "rgba(239,68,68,0.08)" : "white",
-                  color: COLORS.ink,
-                  fontWeight: 800,
-                  display: "flex", flexDirection: "column", alignItems: "center",
-                  gap: hasEmoji ? 8 : 4,
-                  position: "relative", minHeight: hasEmoji ? 110 : 72,
-                  transition: "all 0.15s ease",
-                }}
-              >
-                {hasEmoji ? (
-                  <>
+        <>
+          {/* Step 7 style: show the word's image prominently above letter options */}
+          {data.questionImage && (
+            <div style={{
+              display: "flex", alignItems: "center", gap: 16,
+              background: "linear-gradient(135deg,rgba(249,115,22,0.07),rgba(59,130,246,0.06))",
+              borderRadius: 20, padding: "14px 18px", marginBottom: 16,
+              border: "1px solid rgba(249,115,22,0.15)",
+            }}>
+              <img
+                src={data.questionImage.startsWith("/vaani") ? data.questionImage : `/vaani${data.questionImage}`}
+                alt={data.questionWord || "word"}
+                style={{ width: 88, height: 88, objectFit: "contain", borderRadius: 14, flexShrink: 0 }}
+                onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+              />
+              <div>
+                <div style={{ fontSize: 28, fontWeight: 900, color: COLORS.ink, lineHeight: 1.1 }}>
+                  {data.questionWord}
+                </div>
+                {data.questionEnglish && (
+                  <div style={{ fontSize: 14, color: COLORS.soft, fontWeight: 600, marginTop: 4 }}>
+                    {data.questionEnglish}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Options grid — wider cards when images present */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: data.optionImages
+              ? "repeat(2, 1fr)"
+              : "repeat(auto-fit, minmax(130px, 1fr))",
+            gap: 12,
+          }}>
+            {data.options.map((option: string, idx: number) => {
+              const selected = option === selectedOption;
+              const correct = selected && option === data.answer;
+              const wrong = selected && option !== data.answer;
+              const imgSrc: string | undefined = data.optionImages?.[idx];
+              // Fallback: split "🍎 अनार" → emoji + word
+              const parts = option.split(" ");
+              const hasEmoji = !imgSrc && parts.length > 1 && /\p{Emoji}/u.test(parts[0]);
+              const emojiPart = hasEmoji ? parts[0] : "";
+              const wordPart = hasEmoji ? parts.slice(1).join(" ") : option;
+              const normImg = imgSrc
+                ? (imgSrc.startsWith("/vaani") ? imgSrc : `/vaani${imgSrc}`)
+                : undefined;
+              return (
+                <button
+                  key={option}
+                  onClick={() => {
+                    if (!selectedOption) {
+                      // First answer only — fire MCQ accuracy callback
+                      onMcqAnswer?.(option === data.answer);
+                    }
+                    setSelectedOption(option);
+                  }}
+                  style={{
+                    padding: imgSrc ? "10px 8px" : "16px 10px",
+                    borderRadius: 20,
+                    cursor: "pointer",
+                    border: correct
+                      ? "3px solid rgba(16,185,129,0.60)"
+                      : wrong
+                        ? "3px solid rgba(239,68,68,0.50)"
+                        : selected
+                          ? "2px solid rgba(59,130,246,0.40)"
+                          : `1px solid ${COLORS.line}`,
+                    background: correct
+                      ? "rgba(16,185,129,0.12)"
+                      : wrong
+                        ? "rgba(239,68,68,0.08)"
+                        : "white",
+                    color: COLORS.ink,
+                    fontWeight: 800,
+                    display: "flex", flexDirection: "column", alignItems: "center",
+                    gap: (imgSrc || hasEmoji) ? 8 : 4,
+                    position: "relative",
+                    minHeight: imgSrc ? 140 : hasEmoji ? 110 : 72,
+                    transition: "all 0.15s ease",
+                    overflow: "hidden",
+                  }}
+                >
+                  {/* Image from optionImages */}
+                  {normImg && (
+                    <div style={{
+                      width: "100%", height: 90, display: "flex", alignItems: "center",
+                      justifyContent: "center", borderRadius: 14, overflow: "hidden",
+                      background: "rgba(249,115,22,0.05)",
+                    }}>
+                      <img
+                        src={normImg}
+                        alt={option}
+                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                        onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+                      />
+                    </div>
+                  )}
+                  {/* Emoji fallback */}
+                  {hasEmoji && (
                     <span style={{ fontSize: 44, lineHeight: 1 }}>{emojiPart}</span>
-                    <span style={{ fontSize: 16, fontWeight: 900, textAlign: "center" }}>{wordPart}</span>
-                  </>
-                ) : (
-                  <span style={{ fontSize: wordPart.length > 2 ? 26 : 42, fontWeight: 900 }}>{wordPart}</span>
-                )}
-                {(correct || wrong) && (
+                  )}
+                  {/* Word / letter label */}
                   <span style={{
-                    position: "absolute", top: 6, right: 8,
-                    fontSize: 16, fontWeight: 900,
-                    color: correct ? "#10b981" : "#ef4444",
+                    fontSize: normImg ? 15 : hasEmoji ? 16 : wordPart.length > 2 ? 26 : 42,
+                    fontWeight: 900,
+                    textAlign: "center",
+                    lineHeight: 1.2,
                   }}>
-                    {correct ? "✓" : "✕"}
+                    {wordPart}
                   </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
+                  {(correct || wrong) && (
+                    <span style={{
+                      position: "absolute", top: 6, right: 8,
+                      fontSize: 16, fontWeight: 900,
+                      color: correct ? "#10b981" : "#ef4444",
+                    }}>
+                      {correct ? "✓" : "✕"}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </>
       )}
 
       {type === "matchingPairs" && data.pairs && (() => {
-        const pairs: Array<{ left: string; right: string }> = data.pairs;
+        const pairs: Array<{ left: string; right: string; image?: string; rightImage?: string }> = data.pairs;
+        // "letter match" mode — left side is a single letter tile (no image), right side shows word + image
+        const isLetterMatch = pairs.length > 0 && pairs[0].left.length <= 3 && !pairs[0].image && pairs[0].rightImage !== undefined;
+        // "word-meaning" mode — left shows Hindi word, right shows English meaning
+        const isWordMeaning = data.pairsMode === "word-meaning";
         const allMatched = matched.size === pairs.length;
 
         const handleLeft = (leftKey: string) => {
@@ -446,22 +633,26 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
               </div>
             )}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-              {/* LEFT column — picture/emoji cards */}
+              {/* LEFT column */}
               <div style={{ display: "grid", gap: 8 }}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: COLORS.soft, textTransform: "uppercase", letterSpacing: 1, textAlign: "center", marginBottom: 2 }}>
-                  Picture
+                  {isWordMeaning ? "Word" : isLetterMatch ? "Letter" : "Picture"}
                 </div>
                 {pairs.map((pair) => {
                   const isMatched = matched.has(pair.left);
                   const isSelected = matchLeft === pair.left;
                   const isWrong = wrongPair === pair.left;
+                  const normImg = pair.image
+                    ? (pair.image.startsWith("/vaani") ? pair.image : `/vaani${pair.image}`)
+                    : undefined;
                   return (
                     <button
                       key={pair.left}
                       onClick={() => handleLeft(pair.left)}
                       disabled={isMatched}
                       style={{
-                        padding: "14px 10px", borderRadius: 16,
+                        padding: isLetterMatch ? "10px 8px" : normImg ? "8px 8px 10px" : "14px 10px",
+                        borderRadius: 16,
                         border: isMatched ? "2px solid #10b981"
                           : isSelected ? "2px solid #7c3aed"
                           : isWrong ? "2px solid #ef4444"
@@ -469,35 +660,68 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                         background: isMatched ? "rgba(16,185,129,0.10)"
                           : isSelected ? "rgba(124,58,237,0.10)"
                           : isWrong ? "rgba(239,68,68,0.10)"
-                          : "white",
+                          : isLetterMatch ? "linear-gradient(135deg,#fff7ed,#fff)" : "white",
                         cursor: isMatched ? "default" : "pointer",
-                        fontWeight: 900, fontSize: 38, color: isMatched ? "#10b981" : COLORS.ink,
+                        display: "flex", flexDirection: "column", alignItems: "center", gap: isLetterMatch ? 2 : 6,
+                        fontWeight: 900, color: isMatched ? "#10b981" : isLetterMatch ? COLORS.orange : COLORS.ink,
                         transition: "all 0.15s ease",
                         animation: isWrong ? "vn-shake 0.4s ease" : "none",
-                        lineHeight: 1.2,
+                        minHeight: isLetterMatch ? 80 : undefined,
+                        justifyContent: "center",
                       }}
                     >
-                      {isMatched ? <span style={{ fontSize: 20 }}>✓ {pair.left}</span> : pair.left}
+                      {isMatched ? (
+                        <span style={{ fontSize: 16, padding: "6px 0" }}>✓ {pair.left}</span>
+                      ) : isLetterMatch ? (
+                        /* Large letter tile */
+                        <>
+                          <span style={{ fontSize: 44, fontWeight: 900, lineHeight: 1.1, color: isSelected ? "#7c3aed" : COLORS.orange }}>
+                            {pair.left}
+                          </span>
+                          {isSelected && <span style={{ fontSize: 10, color: "#7c3aed", fontWeight: 700 }}>selected →</span>}
+                        </>
+                      ) : (
+                        /* Image + word card */
+                        <>
+                          {normImg && (
+                            <div style={{
+                              width: "100%", height: 64, borderRadius: 10, overflow: "hidden",
+                              background: "rgba(249,115,22,0.05)", flexShrink: 0,
+                            }}>
+                              <img src={normImg} alt={pair.left}
+                                style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                            </div>
+                          )}
+                          <span style={{ fontSize: normImg ? 14 : 34, fontWeight: 900, lineHeight: 1.2, textAlign: "center" }}>
+                            {pair.left}
+                          </span>
+                        </>
+                      )}
                     </button>
                   );
                 })}
               </div>
 
-              {/* RIGHT column — shuffled */}
+              {/* RIGHT column — shuffled word (+ image when isLetterMatch) */}
               <div style={{ display: "grid", gap: 8 }}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: COLORS.soft, textTransform: "uppercase", letterSpacing: 1, textAlign: "center", marginBottom: 2 }}>
-                  Word
+                  {isWordMeaning ? "Meaning" : "Word"}
                 </div>
                 {rightItems.map((rightVal) => {
                   const isMatched = pairs.some(p => p.right === rightVal && matched.has(p.left));
                   const isSelected = matchRight === rightVal;
+                  const rightPair = pairs.find(p => p.right === rightVal);
+                  const rightImg = rightPair?.rightImage
+                    ? (rightPair.rightImage.startsWith("/vaani") ? rightPair.rightImage : `/vaani${rightPair.rightImage}`)
+                    : undefined;
                   return (
                     <button
                       key={rightVal}
                       onClick={() => handleRight(rightVal)}
                       disabled={isMatched || !matchLeft}
                       style={{
-                        padding: "12px 10px", borderRadius: 16,
+                        padding: rightImg ? "8px 8px 10px" : "12px 10px",
+                        borderRadius: 16,
                         border: isMatched ? "2px solid #10b981"
                           : isSelected ? "2px solid #7c3aed"
                           : `1px solid ${COLORS.line}`,
@@ -506,12 +730,20 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
                           : matchLeft ? "rgba(124,58,237,0.04)"
                           : "white",
                         cursor: isMatched || !matchLeft ? "default" : "pointer",
-                        fontWeight: 700, fontSize: 14, color: isMatched ? "#047857" : COLORS.ink,
+                        fontWeight: 700, fontSize: rightImg ? 15 : 14,
+                        color: isMatched ? "#047857" : COLORS.ink,
                         transition: "all 0.15s ease",
                         lineHeight: 1.3,
                         opacity: !matchLeft && !isMatched ? 0.65 : 1,
+                        display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+                        minHeight: rightImg ? 80 : undefined, justifyContent: "center",
                       }}
                     >
+                      {rightImg && !isMatched && (
+                        <div style={{ width: "100%", height: 52, borderRadius: 8, overflow: "hidden", background: "rgba(59,130,246,0.05)" }}>
+                          <img src={rightImg} alt={rightVal} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                        </div>
+                      )}
                       {isMatched ? "✓ " : ""}{rightVal}
                     </button>
                   );
@@ -520,12 +752,12 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
             </div>
             {!allMatched && matchLeft && (
               <div style={{ textAlign: "center", marginTop: 10, fontSize: 13, color: "#7c3aed", fontWeight: 800, animation: "vn-pulse 1.5s ease-in-out infinite" }}>
-                ✨ Now tap the matching word →
+                {isLetterMatch ? "✨ Now tap the word it starts! →" : "✨ Now tap the matching word →"}
               </div>
             )}
             {!allMatched && !matchLeft && (
               <div style={{ textAlign: "center", marginTop: 10, fontSize: 13, color: COLORS.soft, fontWeight: 700 }}>
-                👈 Tap a word on the left to start matching!
+                {isLetterMatch ? "👈 Tap a letter on the left to start!" : "👈 Tap a word on the left to start matching!"}
               </div>
             )}
             <style>{`
@@ -553,6 +785,30 @@ function BoardPanel({ step, boardKey, onTraceComplete, onMatchComplete, onSpeak,
           />
         </div>
       )}
+
+      {type === "text" && (
+        <div style={{
+          background: "linear-gradient(135deg, #f8faff, #eef2ff)",
+          border: "2px solid rgba(99, 102, 241, 0.2)",
+          borderRadius: 24, padding: "28px 32px", textAlign: "center",
+        }}>
+          {data.headline && (
+            <div style={{ fontSize: 22, fontWeight: 900, color: "#3730a3", marginBottom: 16 }}>
+              {data.headline}
+            </div>
+          )}
+          {data.prompt && (
+            <div style={{ fontSize: 16, color: "#4b5563", lineHeight: 1.7, fontWeight: 600 }}>
+              {data.prompt}
+            </div>
+          )}
+          {data.body && (
+            <div style={{ fontSize: 15, color: "#6b7280", marginTop: 12, lineHeight: 1.6 }}>
+              {data.body}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -562,6 +818,8 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
   const [stepIndex, setStepIndex] = useState(0);
   const [boardKey, setBoardKey] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const lastSpokenTextRef = useRef<string>("");
+  const lastSpeakTimeRef = useRef<number>(0);
   const [sessionActive, setSessionActive] = useState(false);
   const [lessonComplete, setLessonComplete] = useState(false);
   const [studentName, setStudentName] = useState("Friend");
@@ -569,7 +827,16 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
   const [nameAsked, setNameAsked] = useState(false);
   const [fruitPopup, setFruitPopup] = useState(false);
   const [fruitLiked, setFruitLiked] = useState<boolean | null>(null);
-  const [hindiLevel, setHindiLevel] = useState<"native" | "some" | "beginner" | "zero">("beginner");
+  // Language mode from the global LanguageSelector (connected via LanguageContext)
+  const { language: languageMode } = useLanguage();
+  // Map LanguageMode → hindiLevel used throughout lesson speech/text.
+  // Note: "zero" (no Hindi) is kept in the type for vaaniSay() compatibility but
+  // the LanguageSelector has no "zero" option — it maps to "beginner".
+  const hindiLevel = (
+    languageMode === "hindi-full"      ? "native"
+    : languageMode === "hindi-english" ? "some"
+    : /* english-simplified */           "beginner"
+  ) as "native" | "some" | "beginner" | "zero";
   // Music
   const [musicOn, setMusicOn] = useState(true);
   const musicRef = useRef<MusicController | null>(null);
@@ -588,7 +855,20 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
   const [reviewQueue, setReviewQueue] = useState<ReturnType<typeof getDueForReview>>([]);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [showReview, setShowReview] = useState(false);
+  // Offline worksheet — Phase B
+  const [worksheetDownloaded, setWorksheetDownloaded] = useState(false);
+  const [worksheetGenerating, setWorksheetGenerating] = useState(false);
+  const [showWorksheetCamera, setShowWorksheetCamera] = useState(false);
+  const [bonusXpEarned, setBonusXpEarned] = useState(false);
+  // Auto-speak flag — true at the start of each step so Vaani speaks once; set to false after speaking
+  // Prevents double-audio when user manually clicks the speak button
+  const [autoSpeak, setAutoSpeak] = useState(true);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
+  // MCQ accuracy tracking — updated by BoardPanel on each answer attempt
+  const mcqStatsRef = useRef<{ correct: number; total: number }>({ correct: 0, total: 0 });
+  // Gamification results shown on completion screen
+  const [completionXP, setCompletionXP] = useState(0);
+  const [completionBadges, setCompletionBadges] = useState<string[]>([]);
   // Derive lesson index from lessonId for spaced repetition scheduling
   const lessonIndex = (() => {
     try { return parseInt((payload.lesson as any).id?.replace(/\D/g, "").slice(-3) || "0", 10); }
@@ -647,7 +927,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
 
   const lessonWord = (payload.lesson as any).wordHindi || "अनार";
   const lessonWordEng = (payload.lesson as any).wordEnglish || "Pomegranate";
-  const lessonAssetPath = (payload.lesson as any).assetPath || "/assets/gemini/placeholder.png";
+  const lessonAssetPath = (payload.lesson as any).assetPath || "/vaani/assets/gemini/placeholder.svg";
 
   // Roman transliteration — extracted from title or lesson data
   // Used in all speech prompts so kids hear/see the Hindi word name, not English translation
@@ -684,19 +964,29 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       setStudentName(saved.trim());
       setNameAsked(true);
     }
-    const level = localStorage.getItem("vaani_hindi_level") as "native" | "some" | "beginner" | "zero" | null;
-    if (level) setHindiLevel(level);
+    // hindiLevel is now derived from LanguageContext (useLanguage hook) — no manual read needed
   }, []);
 
   const currentStep = payload.steps[stepIndex] ?? payload.steps[0];
   const progressPct = payload.steps.length ? Math.round(((stepIndex + 1) / payload.steps.length) * 100) : 0;
   const nextLessonUrl = payload.nextLessonUrl || `/${payload.course.levelSlug}`;
 
-  // speakText is fully awaitable — resolves only when playback finishes
+  // speakText — Google Translate TTS (free, same as MindSutra) → Web Speech fallback
   async function speakText(text: string): Promise<void> {
     if (!text) return;
+
+    // Prevent duplicate audio: don't speak the same text within 1.5s (debounce)
+    const now = Date.now();
+    if (lastSpokenTextRef.current === text && (now - lastSpeakTimeRef.current) < 1500) {
+      console.log("[Vaani] Skipping duplicate audio (same text within 1.5s):", text.substring(0, 30));
+      return;
+    }
+    lastSpokenTextRef.current = text;
+    lastSpeakTimeRef.current = now;
+
     if (activeAudioRef.current) { activeAudioRef.current.pause(); activeAudioRef.current = null; }
 
+    // 1. Pre-recorded audio (zero latency for mapped clips)
     const nativeUrl = getVaaniAudio(text.trim());
     if (nativeUrl) {
       return new Promise<void>((resolve) => {
@@ -704,34 +994,75 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
         activeAudioRef.current = audio;
         setIsSpeaking(true);
         audio.onended = () => { setIsSpeaking(false); resolve(); };
-        audio.onerror = () => { setIsSpeaking(false); resolve(); };
+        audio.onerror  = () => { setIsSpeaking(false); resolve(); };
         audio.play().catch(() => { setIsSpeaking(false); resolve(); });
       });
     }
 
-    setIsSpeaking(true);
+    // 2. Google Translate TTS (server-proxied, same approach as MindSutra)
     try {
+      setIsSpeaking(true);
       const resp = await fetch("/vaani/api/voice/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, avatarId: "priya", provider: "edge" }),
+        body: JSON.stringify({ text }),
       });
-      const data = await resp.json();
-      if (data.audioBase64) {
-        const mime = data.mimeType || "audio/mpeg";
-        return new Promise<void>((resolve) => {
-          const audio = new Audio(`data:${mime};base64,${data.audioBase64}`);
-          activeAudioRef.current = audio;
-          audio.onended = () => { setIsSpeaking(false); resolve(); };
-          audio.onerror = () => { setIsSpeaking(false); resolve(); };
-          audio.play().catch(() => { setIsSpeaking(false); resolve(); });
-        });
-      } else {
-        setIsSpeaking(false);
+      if (resp.ok) {
+        const data = await resp.json();
+        if (data.audioBase64) {
+          const mime = data.mimeType || "audio/mpeg";
+          const played = await new Promise<boolean>((resolve) => {
+            const audio = new Audio(`data:${mime};base64,${data.audioBase64}`);
+            activeAudioRef.current = audio;
+            audio.onended = () => { setIsSpeaking(false); resolve(true); };
+            audio.onerror = () => { setIsSpeaking(false); resolve(false); };
+            audio.play().catch((err) => {
+              // NotAllowedError = autoplay blocked — fall through to speechSynthesis
+              console.warn("[Vaani TTS] audio.play() blocked:", err?.name);
+              activeAudioRef.current = null;
+              resolve(false);
+            });
+          });
+          if (played) return; // success — don't fall through
+          // play() was blocked → drop through to speechSynthesis below
+        }
       }
+      setIsSpeaking(false);
     } catch {
       setIsSpeaking(false);
     }
+
+    // 3. Web Speech API fallback (browser built-in — also handles autoplay-blocked case)
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    setIsSpeaking(true);
+    return new Promise<void>((resolve) => {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      const hasDevanagari = /[ऀ-ॿ]/.test(text);
+      utter.lang   = hasDevanagari ? 'hi-IN' : 'en-IN';
+      utter.rate   = 0.85;
+      utter.pitch  = 1.08;
+      utter.volume = 1;
+      const loadAndSpeak = () => {
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+          const preferred = hasDevanagari
+            ? voices.find(v => v.lang === 'hi-IN') || voices.find(v => v.lang.startsWith('hi'))
+            : voices.find(v => v.lang === 'en-IN') ||
+              voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female')) ||
+              voices.find(v => v.lang.startsWith('en'));
+          if (preferred) utter.voice = preferred;
+        }
+        let done = false;
+        const finish = () => { if (!done) { done = true; clearTimeout(safety); setIsSpeaking(false); resolve(); } };
+        const safety = setTimeout(finish, 10000);
+        utter.onend = finish; utter.onerror = finish;
+        window.speechSynthesis.speak(utter);
+      };
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) loadAndSpeak();
+      else { window.speechSynthesis.onvoiceschanged = loadAndSpeak; setTimeout(loadAndSpeak, 500); }
+    });
   }
 
   // Speak single letter 3 times with pause — uses Web Speech API (more reliable than external audio files)
@@ -811,6 +1142,14 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       : zero;
   }
 
+  // Select the right tutorText variant based on current language mode
+  function getTutorText(step: { tutorText: string; tutorTextHi?: string; tutorTextMix?: string } | null | undefined): string {
+    if (!step) return "";
+    if (hindiLevel === "native" && step.tutorTextHi)   return step.tutorTextHi;
+    if (hindiLevel === "some"   && step.tutorTextMix)  return step.tutorTextMix;
+    return step.tutorText; // beginner / zero / fallback
+  }
+
   // Web Audio chime — plays a happy 4-note ascending chord
   function playSuccessChime() {
     try {
@@ -828,14 +1167,23 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
     } catch { /* ignore if AudioContext unavailable */ }
   }
 
-  // Auto-speak welcome — sequences: intro → letter × 3 clearly → outro
-  // speakText is now awaitable so each part waits for the previous to finish
+  // Welcome speech helper — called from both the auto-speak effect and the 🔊 button
+  function speakWelcome() {
+    const intro = vaaniSay(
+      `नमस्ते ${studentName}! आज हम ${lessonChar} सीखेंगे — जैसे ${lessonWord}!`,
+      `नमस्ते ${studentName}! Today we learn ${lessonChar} — like in ${lessonWord}!`,
+      `Hello ${studentName}! Today's letter is ${lessonChar} — it starts ${lessonWordRoman}!`,
+      `Hi ${studentName}! I'm Vaani! Today we learn the letter ${lessonChar} from the word ${lessonWordRoman}!`,
+    );
+    void speakText(intro);
+  }
+
+  // Auto-speak welcome — Google TTS → speechSynthesis fallback if autoplay is blocked
   useEffect(() => {
     if (!nameAsked) return;
     let cancelled = false;
     const t = setTimeout(async () => {
       if (cancelled) return;
-      // Part 1: intro up to the dash
       const intro = vaaniSay(
         `नमस्ते ${studentName}! आज हम सीखेंगे —`,
         `नमस्ते ${studentName}! Today we learn —`,
@@ -844,11 +1192,9 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       );
       await speakText(intro);
       if (cancelled) return;
-      // Part 2: letter spoken 3× from pre-recorded audio (loud & clear)
       await new Promise(r => setTimeout(r, 250));
       await speakLetterThrice(lessonChar);
       if (cancelled) return;
-      // Part 3: outro with the word
       await new Promise(r => setTimeout(r, 350));
       const outro = vaaniSay(
         `${lessonWord} में है! नीचे अक्षर दबाओ! 🎵`,
@@ -880,7 +1226,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
 
   // Check for spaced repetition reviews when lesson loads
   useEffect(() => {
-    const due = getDueForReview(lessonIndex);
+    const due = getDueForReview(lessonIndex, lessonLevel);
     if (due.length > 0) {
       setReviewQueue(due);
       setReviewIndex(0);
@@ -900,13 +1246,44 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
     setMatchDone(false);
   }, [stepIndex]);
 
-  // Speak lesson step when session starts
+  // ── Arrow key navigation (← Back, → Next Step) ───────────────────────────
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't intercept when user is typing in an input / textarea
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "ArrowLeft") {
+        setStepIndex((v) => Math.max(0, v - 1));
+      } else if (e.key === "ArrowRight") {
+        // Only advance — final-step completion still requires clicking the button
+        setStepIndex((v) => (v < payload.steps.length - 1 ? v + 1 : v));
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [payload.steps.length]);
+
+  // Re-arm autoSpeak whenever the user advances to a new step
+  useEffect(() => {
+    setAutoSpeak(true);
+  }, [stepIndex]);
+
+  // Speak lesson step when session starts or step changes (on initial load only, not on user clicks)
+  useEffect(() => {
+    if (sessionActive && currentStep && autoSpeak) {
+      setBoardKey((value) => value + 1);
+      void speakText(getTutorText(currentStep));
+      setAutoSpeak(false);  // Only speak once per step — prevent double audio on manual clicks
+    }
+  }, [currentStep, sessionActive, autoSpeak]);
+
+  // Re-speak in new language when user changes mode via dropdown (don't reset board)
   useEffect(() => {
     if (sessionActive && currentStep) {
-      setBoardKey((value) => value + 1);
-      void speakText(currentStep.tutorText);
+      void speakText(getTutorText(currentStep));
     }
-  }, [currentStep, sessionActive]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hindiLevel]);
 
   // ── VISUAL STEP MIC INVITE — auto-show after Vaani speaks on "visual" steps ──
   useEffect(() => {
@@ -940,7 +1317,12 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
             शाबाश, {studentName}! 🎉
           </h1>
           <div style={{ fontSize: 20, color: COLORS.soft, marginBottom: 6, fontWeight: 700 }}>
-            Amazing! You learned the letter
+            {lessonLevel === 2 ? "Amazing! You learned the matra"
+              : lessonLevel === 3 ? "Amazing! You learned the conjunct"
+              : lessonLevel === 4 ? "Amazing! You mastered the barakhadi for"
+              : lessonLevel === 5 ? "Amazing! You can now read the sentence"
+              : lessonLevel === 6 ? "Amazing! You mastered the grammar rule"
+              : "Amazing! You learned the letter"}
           </div>
           <div style={{
             fontSize: 96, fontWeight: 900, lineHeight: 1,
@@ -950,9 +1332,36 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
           }}>
             {lessonChar}
           </div>
-          <div style={{ fontSize: 20, color: COLORS.soft, marginBottom: 32 }}>
+          <div style={{ fontSize: 20, color: COLORS.soft, marginBottom: 20 }}>
             {lessonChar} for {lessonWordRoman} &nbsp;·&nbsp; ({lessonWordEng})
           </div>
+
+          {/* XP reward pill */}
+          {completionXP > 0 && (
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 24 }}>
+              <div style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "12px 22px", borderRadius: 999,
+                background: "linear-gradient(135deg, #f97316, #ef4444)",
+                color: "white", fontWeight: 900, fontSize: 20,
+                boxShadow: "0 8px 20px rgba(249,115,22,0.30)",
+                animation: "vn-bounce 0.6s ease-in-out",
+              }}>
+                🏆 +{completionXP} XP
+              </div>
+              {completionBadges.length > 0 && completionBadges.map((badge) => (
+                <div key={badge} style={{
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  padding: "12px 22px", borderRadius: 999,
+                  background: "linear-gradient(135deg, #10b981, #059669)",
+                  color: "white", fontWeight: 900, fontSize: 18,
+                  boxShadow: "0 8px 20px rgba(16,185,129,0.30)",
+                }}>
+                  🏅 Badge unlocked!
+                </div>
+              ))}
+            </div>
+          )}
 
           <div style={{
             background: "rgba(16,185,129,0.10)", borderRadius: 24, padding: "20px 28px",
@@ -968,6 +1377,90 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
             ))}
           </div>
 
+          {/* ── OFFLINE WORKSHEET SECTION ────────────────────────────── */}
+          <div style={{ width: "100%", marginBottom: 16 }}>
+            {!worksheetDownloaded ? (
+              /* Download button */
+              <button
+                onClick={async () => {
+                  setWorksheetGenerating(true);
+                  try {
+                    await generateWorksheet({
+                      lessonId:    (payload.lesson as any).id || "L1-001",
+                      lessonTitle: `${lessonChar} for ${lessonWordRoman}`,
+                      char:        lessonChar,
+                      wordHindi:   lessonWord,
+                      wordEnglish: lessonWordEng,
+                      romanSound:  lessonWordRoman,
+                      level:       lessonLevel,
+                      studentName: studentName !== "Friend" ? studentName : undefined,
+                    });
+                    setWorksheetDownloaded(true);
+                  } catch (err) {
+                    console.error("Worksheet generation failed:", err);
+                  } finally {
+                    setWorksheetGenerating(false);
+                  }
+                }}
+                disabled={worksheetGenerating}
+                style={{
+                  width: "100%", border: "none", cursor: worksheetGenerating ? "wait" : "pointer",
+                  background: worksheetGenerating
+                    ? "rgba(23,32,51,0.08)"
+                    : "linear-gradient(135deg, #7c3aed, #4f46e5)",
+                  color: worksheetGenerating ? "#94a3b8" : "white",
+                  padding: "15px 28px", borderRadius: 20, fontWeight: 900, fontSize: 17,
+                  boxShadow: worksheetGenerating ? "none" : "0 10px 24px rgba(124,58,237,0.28)",
+                  transition: "all 0.2s ease",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                }}
+              >
+                {worksheetGenerating
+                  ? "⏳ Generating PDF…"
+                  : "📄 Download Practice Sheet"}
+              </button>
+            ) : !bonusXpEarned ? (
+              /* Post-download: upload for bonus XP */
+              <div style={{
+                background: "rgba(124,58,237,0.07)", border: "2px solid rgba(124,58,237,0.25)",
+                borderRadius: 20, padding: "16px 20px", textAlign: "center",
+              }}>
+                <div style={{ fontSize: 13, fontWeight: 900, color: "#7c3aed", letterSpacing: 1.1, marginBottom: 6 }}>
+                  📄 WORKSHEET DOWNLOADED!
+                </div>
+                <div style={{ fontSize: 14, color: "#475569", marginBottom: 14, fontWeight: 600 }}>
+                  Print it, practice offline, then upload a photo to earn <span style={{ color: "#f97316", fontWeight: 900 }}>+50 Bonus XP! ⭐</span>
+                </div>
+                <button
+                  onClick={() => setShowWorksheetCamera(true)}
+                  style={{
+                    border: "none", cursor: "pointer", color: "white",
+                    background: "linear-gradient(135deg, #f97316, #ec4899)",
+                    padding: "12px 28px", borderRadius: 16, fontWeight: 900, fontSize: 15,
+                    boxShadow: "0 8px 20px rgba(249,115,22,0.30)",
+                  }}
+                >
+                  📷 Upload Practice Sheet → +50 XP
+                </button>
+              </div>
+            ) : (
+              /* Bonus XP earned celebration */
+              <div style={{
+                background: "rgba(251,191,36,0.12)", border: "2px solid #fbbf24",
+                borderRadius: 20, padding: "16px 20px", textAlign: "center",
+                animation: "vn-bounce 0.5s ease-out",
+              }}>
+                <div style={{ fontSize: 32, marginBottom: 4 }}>🎉</div>
+                <div style={{ fontSize: 18, fontWeight: 900, color: "#92400e" }}>
+                  +50 Bonus XP Earned!
+                </div>
+                <div style={{ fontSize: 13, color: "#78350f", marginTop: 4 }}>
+                  Amazing! Offline practice makes perfect 🌟
+                </div>
+              </div>
+            )}
+          </div>
+
           <button
             onClick={() => router.push(nextLessonUrl)}
             style={{
@@ -977,8 +1470,55 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
               boxShadow: "0 16px 32px rgba(249,115,22,0.28)", width: "100%",
             }}
           >
-            Next Letter →
+            {lessonLevel === 2 ? "Next Matra →"
+              : lessonLevel === 3 ? "Next Conjunct →"
+              : lessonLevel === 4 ? "Next Consonant →"
+              : lessonLevel === 5 ? "Next Sentence →"
+              : lessonLevel === 6 ? "Next Topic →"
+              : "Next Letter →"}
           </button>
+
+          {/* ── WORKSHEET CAMERA MODAL ── */}
+          {showWorksheetCamera && (
+            <div style={{
+              position: "fixed", inset: 0, zIndex: 300,
+              background: "rgba(15,23,42,0.75)", backdropFilter: "blur(8px)",
+              display: "grid", placeItems: "center", padding: 24,
+            }}>
+              <div style={{ maxWidth: 460, width: "100%" }}>
+                <div style={{
+                  background: "white", borderRadius: 28, padding: "20px 20px 0",
+                  marginBottom: 12, textAlign: "center",
+                }}>
+                  <div style={{ fontSize: 15, fontWeight: 900, color: "#7c3aed", marginBottom: 4 }}>
+                    📸 Upload Your Practice Sheet
+                  </div>
+                  <div style={{ fontSize: 13, color: "#64748b", marginBottom: 12 }}>
+                    Show us your offline practice to earn +50 XP!
+                  </div>
+                </div>
+                <VaaniCameraCapture
+                  targetChar={lessonChar}
+                  studentName={studentName}
+                  hindiLevel={hindiLevel}
+                  onSpeak={speakText}
+                  romanMap={lessonLevel === 6 ? LEVEL_6_ROMAN_MAP : lessonLevel === 5 ? LEVEL_5_ROMAN_MAP : lessonLevel === 4 ? LEVEL_4_ROMAN_MAP : lessonLevel === 3 ? LEVEL_3_ROMAN_MAP : lessonLevel === 2 ? LEVEL_2_ROMAN_MAP : undefined}
+                  onResult={() => {
+                    setBonusXpEarned(true);
+                    setShowWorksheetCamera(false);
+                    // Persist bonus XP in localStorage
+                    try {
+                      const key = "vaani_bonus_xp";
+                      const prev = parseInt(localStorage.getItem(key) || "0", 10);
+                      localStorage.setItem(key, String(prev + 50));
+                    } catch {}
+                    playSuccessChime?.();
+                  }}
+                  onClose={() => setShowWorksheetCamera(false)}
+                />
+              </div>
+            </div>
+          )}
         </div>
         <style>{`
           @keyframes vn-bounce {
@@ -1015,7 +1555,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
         <div style={{ maxWidth: 1320, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
           <div>
             <div style={{ fontSize: 12, color: COLORS.orange, fontWeight: 900, textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 6 }}>
-              Level 1 Lesson
+              Level {lessonLevel} Lesson
             </div>
             <div style={{ fontSize: 30, fontWeight: 900, letterSpacing: -1 }}>{payload.lesson.title}</div>
           </div>
@@ -1049,7 +1589,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
               padding: "28px 24px", boxShadow: "0 26px 58px rgba(15,23,42,0.08)",
               display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
             }}>
-              <VaaniAvatar speaking={isSpeaking} size={120} name="Vaani" />
+              <VaaniAvatar speaking={isSpeaking} size={190} name="Vaani" />
 
               {/* Vaani speech bubble — changes with conversation state */}
               <div style={{
@@ -1059,8 +1599,9 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                 border: "1px solid rgba(249,115,22,0.26)",
                 width: "100%", textAlign: "left",
                 boxShadow: "0 4px 14px rgba(249,115,22,0.10)",
+                position: "relative",
               }}>
-                <div style={{ fontSize: 14, lineHeight: 1.6, color: COLORS.ink, fontWeight: 700 }}>
+                <div style={{ fontSize: 14, lineHeight: 1.6, color: COLORS.ink, fontWeight: 700, paddingRight: nameAsked ? 32 : 0 }}>
                   {!nameAsked
                     ? "नमस्ते! मेरा नाम वाणी है 🙏 What is your name? / आपका नाम क्या है?"
                     : fruitLiked === true
@@ -1085,6 +1626,23 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                           )
                   }
                 </div>
+                {/* 🔊 Tap-to-hear button — browser autoplay requires a real user click */}
+                {nameAsked && (
+                  <button
+                    onClick={speakWelcome}
+                    title="Tap to hear Vaani!"
+                    style={{
+                      position: "absolute", top: 8, right: 8,
+                      background: isSpeaking ? "rgba(249,115,22,0.18)" : "rgba(249,115,22,0.10)",
+                      border: "1px solid rgba(249,115,22,0.30)",
+                      borderRadius: 10, padding: "4px 7px",
+                      cursor: "pointer", fontSize: 16, lineHeight: 1,
+                      transition: "background 0.2s",
+                    }}
+                  >
+                    {isSpeaking ? "🔊" : "🔈"}
+                  </button>
+                )}
               </div>
 
               {/* Step 1 — Ask name (shown only when no saved name) */}
@@ -1194,13 +1752,35 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
               padding: 26, boxShadow: "0 26px 58px rgba(249,115,22,0.08)",
               display: "grid", placeItems: "center", height: "100%", minHeight: 460,
             }}>
-              {payload.steps[0]?.board?.data?.assetPath && (
-                <img
-                  src={payload.steps[0].board.data.assetPath.startsWith("/vaani") ? payload.steps[0].board.data.assetPath : `/vaani${payload.steps[0].board.data.assetPath}`}
-                  alt={payload.lesson.title}
-                  style={{ width: "100%", maxHeight: 420, objectFit: "contain" }}
-                />
-              )}
+              {(() => {
+                const rawPath = payload.steps[0]?.board?.data?.assetPath || (payload.lesson as any).assetPath;
+                if (rawPath) {
+                  const src = rawPath.startsWith("/vaani") ? rawPath : `/vaani${rawPath}`;
+                  return (
+                    <img
+                      src={src}
+                      alt={payload.lesson.title}
+                      style={{ width: "100%", maxHeight: 420, objectFit: "contain" }}
+                      onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+                    />
+                  );
+                }
+                // Fallback for lessons without image (e.g. Level 6 Grammar)
+                const levelEmojis: Record<number, string> = { 4: "📖", 5: "📝", 6: "📚" };
+                return (
+                  <div style={{ textAlign: "center", padding: 32 }}>
+                    <div style={{ fontSize: 96, marginBottom: 20 }}>{levelEmojis[lessonLevel] || "✨"}</div>
+                    <div style={{ fontSize: 18, fontWeight: 800, color: "#7c3aed" }}>
+                      {(payload.lesson as any).grammarTopic || (payload.lesson as any).title || "Lesson"}
+                    </div>
+                    {(payload.lesson as any).grammarTopicHindi && (
+                      <div style={{ fontSize: 28, fontWeight: 900, color: "#f97316", marginTop: 8 }}>
+                        {(payload.lesson as any).grammarTopicHindi}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
           </div>
 
@@ -1320,10 +1900,10 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
               </div>
             </div>
 
-            <div style={{ background: "linear-gradient(180deg, rgba(59,130,246,0.08), rgba(255,255,255,0.4))", borderRadius: 26, padding: 10, marginBottom: 16 }}>
-              <VaaniAvatar speaking={isSpeaking} size={160} />
+            <div style={{ background: "linear-gradient(180deg, rgba(59,130,246,0.06), rgba(255,255,255,0.3))", borderRadius: 26, padding: "4px 4px 0", marginBottom: 16, overflow: "hidden" }}>
+              <VaaniAvatar speaking={isSpeaking} size={210} />
               <button
-                onClick={() => currentStep && speakText(currentStep.tutorText)}
+                onClick={() => currentStep && speakText(getTutorText(currentStep))}
                 style={{
                   marginTop: 8,
                   width: "100%",
@@ -1394,8 +1974,18 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
               <div style={{ fontSize: 11, color: COLORS.orange, fontWeight: 900, textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 4 }}>
                 Coach says
               </div>
-              <div style={{ fontSize: 17, lineHeight: 1.5, color: COLORS.ink, fontWeight: 700 }}>{currentStep?.tutorText}</div>
-              {/* English subtitle for beginners/zero Hindi kids */}
+              <div style={{ fontSize: 17, lineHeight: 1.5, color: COLORS.ink, fontWeight: 700 }}>{getTutorText(currentStep)}</div>
+              {/* English subtitle for native/mix Hindi mode — helps kids see the English alongside */}
+              {(hindiLevel === "native" || hindiLevel === "some") && currentStep?.tutorText && currentStep.tutorText !== getTutorText(currentStep) && (
+                <div style={{
+                  marginTop: 8, padding: "6px 12px", borderRadius: 10,
+                  background: "rgba(139,92,246,0.07)", border: "1px solid rgba(139,92,246,0.14)",
+                  fontSize: 13, color: COLORS.soft, fontWeight: 600, fontStyle: "italic",
+                }}>
+                  🇬🇧 {currentStep.tutorText}
+                </div>
+              )}
+              {/* English hint for beginners/zero Hindi kids */}
               {(hindiLevel === "zero" || hindiLevel === "beginner") && (
                 <div style={{
                   marginTop: 10, padding: "8px 14px", borderRadius: 12,
@@ -1414,8 +2004,13 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                 step={currentStep}
                 boardKey={boardKey}
                 onSpeak={speakText}
+                onMcqAnswer={(correct) => {
+                  mcqStatsRef.current.total += 1;
+                  if (correct) mcqStatsRef.current.correct += 1;
+                }}
                 romanMap={lessonLevel === 6 ? LEVEL_6_ROMAN_MAP : lessonLevel === 5 ? LEVEL_5_ROMAN_MAP : lessonLevel === 4 ? LEVEL_4_ROMAN_MAP : lessonLevel === 3 ? LEVEL_3_ROMAN_MAP : lessonLevel === 2 ? LEVEL_2_ROMAN_MAP : undefined}
                 lessonLevel={lessonLevel}
+                lessonChar={lessonChar}
                 lessonBaseChar={lessonBaseChar}
                 lessonMatra={lessonMatra}
                 lessonConsonant1={lessonConsonant1}
@@ -1423,13 +2018,32 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                 lessonCombined={lessonCombined}
                 lessonHalantForm={lessonHalantForm}
                 lesson={payload.lesson}
+                onTracingRoundComplete={(round, total) => {
+                  // Vaani encourages between rounds — different message per round
+                  const encouragements = [
+                    vaaniSay(
+                      `शाबाश! एक बार और — ${lessonChar} फिर लिखो!`,
+                      `शाबाश! Once more — write ${lessonChar} again!`,
+                      `Great! One more time — write ${lessonChar} again!`,
+                      `Nice! Write it one more time!`,
+                    ),
+                    vaaniSay(
+                      `बहुत अच्छा! आखिरी बार — अब तेज़ और साफ लिखो!`,
+                      `Excellent! Last one — write ${lessonChar} fast and clear!`,
+                      `Excellent! Last one — write ${lessonChar} with confidence!`,
+                      `Almost there! One final trace!`,
+                    ),
+                  ];
+                  const msg = encouragements[Math.min(round - 1, encouragements.length - 1)];
+                  void speakText(msg);
+                }}
                 onTraceComplete={() => {
                   playSuccessChime();
                   void speakText(vaaniSay(
-                    `बहुत बढ़िया! अब बोलो ${studentName}: ${lessonWord}!`,
-                    `Great! Now say it ${studentName}: ${lessonWord}!`,
-                    `Well done! Now say the word: ${lessonWordRoman}!`,
-                    `Wonderful! Now say: ${lessonWordRoman}!`,
+                    `बहुत बढ़िया! तीनों बार ${lessonChar} लिखा! अब बोलो: ${lessonWord}!`,
+                    `Amazing! You traced ${lessonChar} three times! Now say: ${lessonWord}!`,
+                    `Brilliant! Three traces done! Now say the word: ${lessonWordRoman}!`,
+                    `Wonderful! Three traces! Now say: ${lessonWordRoman}!`,
                   ));
                   setVoiceCheckVisible(true);
                 }}
@@ -1683,6 +2297,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                       src={item.assetPath.startsWith('/') ? item.assetPath : `/vaani${item.assetPath}`}
                       alt={`${item.word} - ${item.wordEng}`}
                       style={{ width: "100%", maxHeight: 240, objectFit: "contain" }}
+                      onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
                     />
                   </div>
                 )}
@@ -1807,7 +2422,16 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                   `Amazing ${studentName}! You completed the lesson! You learned the letter ${lessonChar}!`,
                   `Wonderful ${studentName}! You finished the lesson! Great job learning the letter ${lessonChar}!`,
                 ));
-                markLearned(lessonChar, lessonWord, lessonWordEng, lessonIndex, lessonAssetPath);
+                markLearned(lessonChar, lessonWord, lessonWordEng, lessonIndex, lessonAssetPath, lessonLevel);
+                // ── Award XP via gamification system ──
+                try {
+                  const { total, correct } = mcqStatsRef.current;
+                  const accuracy = total > 0 ? Math.round((correct / total) * 100) : 75;
+                  const lessonId = (payload.lesson as any).id || "L1-001";
+                  const result = awardLessonXP(lessonId, lessonLevel, accuracy, 0, false);
+                  setCompletionXP(result.xpAwarded);
+                  setCompletionBadges(result.newBadges);
+                } catch { /* storage unavailable — non-fatal */ }
                 musicRef.current?.stop();
                 setLessonComplete(true);
               }}

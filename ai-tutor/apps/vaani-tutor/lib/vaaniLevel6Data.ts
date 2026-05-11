@@ -68,9 +68,9 @@ const chapter1Lessons: GrammarLesson[] = [
     grammarTopic: "Common Nouns",
     grammarTopicHindi: "सामान्य नाम",
     ruleExplanation:
-      "Common nouns refer to general persons, places, or things (not specific). Examples: house, book, dog. In Hindi: घर (house), किताब (book), कुत्ता (dog).",
+      "Common nouns are words for any person, place, or thing — not one specific one. Example: लड़का means any boy (not a specific boy like राज). घर means any house (not one specific house). We can use एक (a/an) with common nouns: एक लड़का, एक घर।",
     ruleExplanationHindi:
-      "सामान्य नाम किसी विशेष व्यक्ति, स्थान या वस्तु का नाम नहीं होते। उदाहरण: घर, किताब, कुत्ता।",
+      "सामान्य नाम — किसी कैटेगरी या समूह के लिए। जैसे लड़का = कोई भी लड़का, घर = कोई भी घर। इन्हें 'एक' के साथ भी कह सकते हैं: एक लड़का, एक घर। इसके विपरीत व्यक्तिवाचक नाम एक विशेष चीज़ को दर्शाता है: राज (सिर्फ एक विशेष लड़का)।",
     exampleSentenceHindi: "मेरे पास एक घर है।",
     exampleSentenceRoman: "mere paas ek ghar hai.",
     exampleSentenceEnglish: "I have a house.",
@@ -142,9 +142,9 @@ const chapter1Lessons: GrammarLesson[] = [
       },
     ],
     summary:
-      "Common nouns refer to general persons, places, or things. They are not specific and can have articles (एक - a/an) in front of them.",
+      "Common nouns refer to general categories (any boy, any house, any book). We can use एक with them. They contrast with proper nouns which are specific names.",
     prompt:
-      "Understand that common nouns refer to general categories, not specific individuals or places. Every household item, animal, or person can be called by a common noun.",
+      "Understand that common nouns refer to general categories. लड़का = any boy. घर = any house. किताब = any book. You can say: 'एक लड़का', 'एक घर'. But proper nouns like राज, दिल्ली don't take एक.",
   },
   {
     id: "L6-C01-L02",
@@ -157,66 +157,83 @@ const chapter1Lessons: GrammarLesson[] = [
     grammarTopic: "Proper Nouns",
     grammarTopicHindi: "व्यक्तिवाचक नाम",
     ruleExplanation:
-      "Proper nouns are names of specific persons, places, or things. They always start with a capital letter. Examples: राज (Raj), दिल्ली (Delhi), भारत (India).",
+      "Proper nouns are the special names of specific people, places, or things. Every person, city, and river has its own unique name. Example: राज is one specific boy, but लड़का means any boy. दिल्ली is one specific city, but शहर means any city.",
     ruleExplanationHindi:
-      "व्यक्तिवाचक नाम किसी विशेष व्यक्ति, स्थान या वस्तु के नाम होते हैं। ये हमेशा बड़े अक्षर से शुरू होते हैं। उदाहरण: राज, दिल्ली, भारत।",
+      "व्यक्तिवाचक नाम — किसी खास इंसान, जगह या चीज़ का अपना नाम। हर इंसान का अपना नाम होता है, हर जगह का नाम होता है। जैसे राज, दिल्ली, गंगा। सामान्य नाम से फर्क: लड़का = कोई भी लड़का, राज = सिर्फ एक विशेष लड़का।",
     exampleSentenceHindi: "राज दिल्ली में रहता है।",
     exampleSentenceRoman: "Raj delhi mein rehta hai.",
     exampleSentenceEnglish: "Raj lives in Delhi.",
     practiceExamples: [
       {
-        hindi: "राज (Raj)",
-        roman: "Raj",
-        english: "Raj (person's name)",
-        explanation: "Proper noun - specific person",
+        hindi: "राज एक लड़का है। (एक लड़का भी हो सकता है।)",
+        roman: "Raj ek ladka hai.",
+        english: "Raj is a boy. (A boy could also be any boy.)",
+        explanation: "राज = proper noun (one specific person). लड़का = common noun (any boy).",
       },
       {
-        hindi: "दिल्ली (Delhi)",
-        roman: "Delhi",
-        english: "Delhi (place)",
-        explanation: "Proper noun - specific city",
+        hindi: "दिल्ली एक शहर है। (लेकिन कोई भी शहर नहीं।)",
+        roman: "Delhi ek shahar hai.",
+        english: "Delhi is a city. (But not just any city.)",
+        explanation: "दिल्ली = proper noun (one specific city). शहर = common noun (any city).",
       },
       {
-        hindi: "भारत (India)",
-        roman: "Bharat",
-        english: "India (country)",
-        explanation: "Proper noun - specific country",
+        hindi: "गंगा भारत की सबसे बड़ी नदी है।",
+        roman: "Ganga Bharat ki sabse badi nadi hai.",
+        english: "Ganga is India's biggest river.",
+        explanation: "गंगा = proper noun (one specific river with this exact name).",
       },
       {
-        hindi: "गंगा (Ganga)",
-        roman: "Ganga",
-        english: "Ganga (river name)",
-        explanation: "Proper noun - specific river",
+        hindi: "मेरी किताब बहुत पुरानी है। (कोई किताब) vs. हरी की 'महाभारत' मेरे पास है। (specific title)",
+        roman: "Meri kitaab purani hai.",
+        english: "My book is very old. vs. I have Hari's 'Mahabharata'.",
+        explanation: "किताब = common noun. महाभारत = proper noun (specific book title).",
       },
     ],
     commonMistakes: [
       {
         incorrect: "मेरा दोस्त एक राज है।",
         correct: "मेरा दोस्त राज है।",
-        explanation: "Proper nouns don't take articles like 'एक' (a) in front.",
+        explanation: "Proper nouns don't take एक because they refer to one specific, named person. With common nouns we use एक: मेरा दोस्त एक लड़का है।",
+      },
+      {
+        incorrect: "मुझे एक दिल्ली बहुत पसंद है।",
+        correct: "मुझे दिल्ली बहुत पसंद है।",
+        explanation: "दिल्ली is a proper noun (one specific city), so no एक needed. We don't say 'एक दिल्ली' because there's only one Delhi.",
       },
     ],
     transformationExercises: [
       {
-        instruction: "Convert common nouns to proper nouns",
-        exampleInstructionHindi: "सामान्य नाम को व्यक्तिवाचक नाम में बदलें",
-        exampleInput: "एक लड़का स्कूल जाता है।",
-        exampleOutput: "राज स्कूल जाता है।",
+        instruction: "Complete the blank: Which sentence uses proper nouns correctly?",
+        exampleInstructionHindi: "खाली जगह भरें — सही व्यक्तिवाचक नाम",
+        exampleInput: "____ एक लड़का है जो स्कूल जाता है।",
+        exampleOutput: "राज एक लड़का है जो स्कूल जाता है। OR: (एक लड़का स्कूल जाता है।)",
       },
     ],
     mcqQuestions: [
       {
-        question: "Which is a proper noun?",
-        options: ["किताब (book)", "अध्यापक (teacher)", "राज (Raj)", "पेन (pen)"],
-        correctAnswer: "राज (Raj)",
+        question: "Fill the blank: ____ रोज़ स्कूल जाता है।",
+        options: ["एक लड़का", "राज", "लड़के", "कुछ लड़के"],
+        correctAnswer: "राज",
         explanation:
-          "राज is a specific person's name (proper noun). Others are common nouns.",
+          "राज is a proper noun (one person's specific name). You could also use 'एक लड़का' (a boy), but राज is the clearest proper noun here.",
+      },
+      {
+        question: "Which sentence is correct?",
+        options: [
+          "मेरा एक दोस्त राज है।",
+          "मेरा दोस्त एक राज है।",
+          "मेरा दोस्त राज है।",
+          "एक मेरा दोस्त राज है।",
+        ],
+        correctAnswer: "मेरा दोस्त राज है।",
+        explanation:
+          "Proper nouns like राज don't take एक in Hindi. We say 'मेरा दोस्त राज है' not 'एक राज है'. Compare with: 'मेरा दोस्त एक लड़का है' (a boy - common noun).",
       },
     ],
     summary:
-      "Proper nouns name specific persons, places, or things and always begin with capital letters. They are unique and don't use articles.",
+      "Proper nouns are the unique names of specific people, places, and things. In Hindi, proper nouns don't take एक (a/an) because they refer to one named thing.",
     prompt:
-      "Learn to identify proper nouns - they are the unique names of specific people, places, or things. Always capitalize them in Hindi writing.",
+      "Learn to identify and use proper nouns correctly. Every person has a name (राज, प्रिया), every city has a name (दिल्ली, मुंबई), every river has a name (गंगा, यमुना). These proper nouns stand alone without एक.",
   },
   {
     id: "L6-C01-L03",
@@ -229,9 +246,9 @@ const chapter1Lessons: GrammarLesson[] = [
     grammarTopic: "Noun Gender",
     grammarTopicHindi: "नाम का लिंग",
     ruleExplanation:
-      "In Hindi, nouns have gender (masculine, feminine, or neuter). Masculine nouns often end in consonants or 'आ'. Feminine nouns often end in 'ई', 'आ', or 'न'. Gender affects adjectives and verbs.",
+      "In Hindi, every noun is either masculine (पुल्लिंग) or feminine (स्त्रीलिंग). Example: 'बड़ा लड़का' (big boy — masculine) vs. 'बड़ी लड़की' (big girl — feminine). Notice the adjective changes! The gender of the noun changes the adjective that goes with it. Many non-living things also have grammatical gender you must learn: किताब (book) is feminine, घर (house) is masculine.",
     ruleExplanationHindi:
-      "हिंदी में नाम के तीन लिंग होते हैं: पुल्लिंग, स्त्रीलिंग, नपुंसक लिंग। पुल्लिंग व्यंजन या 'आ' से खत्म होते हैं। स्त्रीलिंग 'ई', 'आ', या 'न' से खत्म होते हैं।",
+      "हिंदी में हर नाम पुल्लिंग (masculine) या स्त्रीलिंग (feminine) होता है। 'बड़ा लड़का' (masculine) vs. 'बड़ी लड़की' (feminine) — विशेषण बदल जाता है! जानदार चीज़ों में साफ़ है, लेकिन निर्जीव चीज़ें भी grammatically masculine या feminine होती हैं: किताब = feminine, घर = masculine।",
     exampleSentenceHindi: "लड़का बड़ा है। लड़की बड़ी है।",
     exampleSentenceRoman: "Ladka bada hai. Ladki badi hai.",
     exampleSentenceEnglish: "The boy is big. The girl is big.",
@@ -451,36 +468,36 @@ const chapter1Lessons: GrammarLesson[] = [
     grammarTopic: "Comparative Adjectives",
     grammarTopicHindi: "तुलनात्मक विशेषण",
     ruleExplanation:
-      "Comparative adjectives compare two things. Form: adjective + 'तर' (more). Example: बड़ा (big) → बड़ा = bigger. 'अधिक' or 'ज़्यादा' can also be used.",
+      "Comparative adjectives compare two things. In Hindi, use 'से' (than) with the same adjective: 'राज प्रिया से लंबा है' = Raj is taller than Priya. Or add 'ज़्यादा' (more): 'यह ज़्यादा महँगा है' = This is more expensive. The key word is 'से' — it always marks what you are comparing against.",
     ruleExplanationHindi:
-      "तुलनात्मक विशेषण दो चीजों की तुलना करते हैं। रूप: विशेषण + 'तर'। उदाहरण: बड़ा → बड़ा। 'अधिक' या 'ज़्यादा' का भी उपयोग हो सकता है।",
+      "तुलना करने के लिए 'से' का उपयोग करें: 'राज प्रिया से लंबा है' = Raj is taller than Priya। या 'ज़्यादा' जोड़ें: 'यह ज़्यादा महँगा है'। 'से' = 'than' — जो दूसरी चीज़ है उसके बाद।",
     exampleSentenceHindi: "राज प्रिया से बड़ा है।",
     exampleSentenceRoman: "Raj Priya se bada hai.",
     exampleSentenceEnglish: "Raj is bigger than Priya.",
     practiceExamples: [
       {
-        hindi: "बड़ा (bada)",
-        roman: "big",
-        english: "big",
-        explanation: "Positive - base form",
+        hindi: "राज प्रिया से लंबा है।",
+        roman: "Raj Priya se lamba hai.",
+        english: "Raj is taller than Priya.",
+        explanation: "Comparison using 'से': [Person 1] [Person 2 से] [adjective] है",
       },
       {
-        hindi: "बड़ा (bada)",
-        roman: "bigger",
-        english: "bigger",
-        explanation: "Comparative - comparing two things",
+        hindi: "यह किताब उस किताब से ज़्यादा महँगी है।",
+        roman: "Yah kitaab us kitaab se zyada mehengi hai.",
+        english: "This book is more expensive than that book.",
+        explanation: "ज़्यादा + adjective for 'more'. किताब is feminine → महँगी (not महँगा)",
       },
       {
-        hindi: "ज़्यादा सुंदर (zyada sundar)",
-        roman: "more beautiful",
-        english: "more beautiful",
-        explanation: "Comparative using ज़्यादा (more)",
+        hindi: "दिल्ली मुंबई से ज़्यादा ठंडी है।",
+        roman: "Delhi Mumbai se zyada thandi hai.",
+        english: "Delhi is colder than Mumbai.",
+        explanation: "Real comparison of two cities with ज़्यादा + feminine adjective",
       },
       {
-        hindi: "अधिक मजबूत (adhik majbut)",
-        roman: "stronger",
-        english: "stronger",
-        explanation: "Comparative using अधिक (more)",
+        hindi: "मेरा बस्ता तुम्हारे बस्ते से भारी है।",
+        roman: "Mera basta tumhare baste se bhari hai.",
+        english: "My bag is heavier than your bag.",
+        explanation: "से marks what we compare against. बस्ता is masculine → भारी (invariant adj)",
       },
     ],
     commonMistakes: [
@@ -488,7 +505,13 @@ const chapter1Lessons: GrammarLesson[] = [
         incorrect: "यह किताब उससे ज़्यादा बड़ा है।",
         correct: "यह किताब उससे बड़ी है।",
         explanation:
-          "किताब is feminine, so use बड़ी. Don't mix ज़्यादा with तर form.",
+          "किताब is feminine, so adjective must be feminine: बड़ी (not बड़ा).",
+      },
+      {
+        incorrect: "राज प्रिया तुलना में लंबा है।",
+        correct: "राज प्रिया से लंबा है।",
+        explanation:
+          "'से' is the correct word for 'than' in comparisons. Not 'तुलना में'.",
       },
     ],
     transformationExercises: [
@@ -501,10 +524,21 @@ const chapter1Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is the comparative form?",
-        options: ["सबसे बड़ा (biggest)", "बड़ा (big)", "बहुत बड़ा (very big)", "अधिक बड़ा (bigger)"],
-        correctAnswer: "अधिक बड़ा (bigger)",
-        explanation: "Comparative compares two things. सबसे is superlative (most).",
+        question: "Fill the blank: 'चाय कॉफ़ी ____ गर्म है।' (Tea is hotter than coffee.)",
+        options: ["को", "से", "में", "ज़्यादा"],
+        correctAnswer: "से",
+        explanation: "'से' marks 'than' in comparisons. चाय कॉफ़ी से गर्म है = Tea is hotter than coffee.",
+      },
+      {
+        question: "Which sentence correctly shows comparison?",
+        options: [
+          "राज अमित लंबा है।",
+          "राज अमित से लंबा है।",
+          "राज से अमित लंबा है।",
+          "अमित राज लंबा है।",
+        ],
+        correctAnswer: "राज अमित से लंबा है।",
+        explanation: "Pattern: [Subject] [Comparison person से] [adjective] है. अमित से = than Amit.",
       },
     ],
     summary:
@@ -572,10 +606,21 @@ const chapter1Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is superlative?",
-        options: ["बड़ा", "बड़ा", "सबसे बड़ा", "बहुत बड़ा"],
-        correctAnswer: "सबसे बड़ा",
-        explanation: "Superlative uses 'सबसे'. Others are positive or comparative.",
+        question: "Fill the blank: 'कक्षा में राज ___ लंबा है।' (Raj is the tallest in class.)",
+        options: ["बहुत", "ज़्यादा", "सबसे", "बड़ा"],
+        correctAnswer: "सबसे",
+        explanation: "'सबसे' makes the superlative — comparing against all others. राज सबसे लंबा है = Raj is the tallest.",
+      },
+      {
+        question: "Which sentence shows superlative (extreme quality)?",
+        options: [
+          "राज अमित से लंबा है।",
+          "राज बहुत लंबा है।",
+          "राज कक्षा में सबसे लंबा है।",
+          "राज लंबा है।",
+        ],
+        correctAnswer: "राज कक्षा में सबसे लंबा है।",
+        explanation: "'सबसे' = superlative (among all). 'से' = comparative (between two). 'बहुत' = very (not a superlative).",
       },
     ],
     summary:
@@ -594,9 +639,9 @@ const chapter1Lessons: GrammarLesson[] = [
     grammarTopic: "Other Adjective Types",
     grammarTopicHindi: "विशेषण के अन्य प्रकार",
     ruleExplanation:
-      "Besides descriptive adjectives, there are quantitative (कितना/कितनी), interrogative (कौन सा), possessive (मेरा), and demonstrative (यह/वह) adjectives.",
+      "Not all adjectives describe qualities. Some show HOW MANY (कितना — how much, तीन — three), some ask WHICH ONE (कौन सा — which), some show ownership (मेरा — my, तुम्हारा — your), and some point to things (यह — this, वह — that). Example: 'इस घर में कितने कमरे हैं?' = How many rooms are in THIS house? ('इस' = pointing, 'कितने' = quantity).",
     ruleExplanationHindi:
-      "विशेषणों के कई प्रकार हैं: परिमाणवाचक (कितना), प्रश्नवाचक (कौन सा), स्वत्ववाचक (मेरा), संकेतवाचक (यह)।",
+      "कुछ विशेषण गुण नहीं, मात्रा/संख्या बताते हैं: कितना (how many), तीन (three)। कुछ प्रश्न पूछते हैं: कौन सा (which)। कुछ स्वामित्व दिखाते हैं: मेरा, तुम्हारा। कुछ संकेत देते हैं: यह, वह।",
     exampleSentenceHindi: "इस घर में कितने कमरे हैं?",
     exampleSentenceRoman: "Is ghar mein kitne kamre hain?",
     exampleSentenceEnglish: "How many rooms are in this house?",
@@ -644,14 +689,20 @@ const chapter1Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What type of adjective is 'कितनी'?",
-        options: ["Descriptive", "Quantitative", "Possessive", "Demonstrative"],
-        correctAnswer: "Quantitative",
-        explanation: "कितनी (how much) asks about quantity.",
+        question: "Fill the blank: '____  लड़कियाँ आई हैं?' (How many girls came?)",
+        options: ["कौन सी", "कितनी", "इन", "मेरी"],
+        correctAnswer: "कितनी",
+        explanation: "कितनी = how many (quantity question). लड़कियाँ is feminine plural, so कितनी (not कितने).",
+      },
+      {
+        question: "Fill the blank: '____  कमरे में बैठो।' (Sit in THIS room.)",
+        options: ["मेरे", "तुम्हारे", "इस", "कौन से"],
+        correctAnswer: "इस",
+        explanation: "'इस' points to a specific (this) room nearby. It's the oblique of 'यह'.",
       },
     ],
     summary:
-      "Besides descriptive adjectives, Hindi has quantitative, interrogative, possessive, and demonstrative adjectives.",
+      "Hindi adjectives aren't only descriptive — कितना asks quantity, कौन सा asks which, मेरा shows ownership, यह/वह points to things.",
     prompt:
       "Learn that Hindi has many types of adjectives beyond simple descriptions. Each type serves different grammatical purposes.",
   },
@@ -2310,6 +2361,18 @@ const chapter3Lessons: GrammarLesson[] = [
           "जो is the primary relative pronoun joining clauses।",
       },
     ],
+    commonMistakes: [
+      {
+        incorrect: "वह लड़का जिसने आया",
+        correct: "वह लड़का जो आया",
+        explanation: "Use 'जो' for basic relative clauses; 'जिसने' is for oblique/agent constructions.",
+      },
+      {
+        incorrect: "जो लड़का है वह खेल रहा है",
+        correct: "वह लड़का जो खेल रहा है",
+        explanation: "Place 'जो' immediately after the noun it describes.",
+      },
+    ],
     summary:
       "Relative pronoun 'जो' connects dependent and independent clauses.",
     prompt:
@@ -2326,44 +2389,50 @@ const chapter3Lessons: GrammarLesson[] = [
     grammarTopic: "Introduction to Cases",
     grammarTopicHindi: "कारक परिचय",
     ruleExplanation:
-      "Hindi has 8 cases marked by postpositions: कर्ता (agent), कर्म (object-को), करण (instrument-से), संप्रदान (recipient-को), अपादान (source-से), संबंध (genitive-का), अधिकरण (location-में), संबोधन (vocative-ओ).",
+      "Hindi uses small particles called case markers AFTER nouns to show how they relate to the verb. The four most important ones are: ने (shows who did the action in past), को (shows the object or direction), से (shows with/from/by), में (shows location). Example: 'राज ने पेन से पत्र लिखा' = Raj [ने=agent] wrote a letter [से=with] a pen.",
     ruleExplanationHindi:
-      "हिंदी में 8 कारक हैं: कर्ता, कर्म (को), करण (से), संप्रदान (को), अपादान (से), संबंध (का), अधिकरण (में), संबोधन।",
+      "कारक = noun के बाद लगने वाले शब्द जो बताते हैं कि वह verb से कैसे जुड़ा है। चार मुख्य: ने (past agent), को (object/direction), से (with/from/by), में (location)। 'राज ने पेन से पत्र लिखा।'",
     exampleSentenceHindi: "राज ने पेन से पत्र लिखा।",
     exampleSentenceRoman: "Raj ne pen se patra likha.",
     exampleSentenceEnglish: "Raj wrote a letter with a pen.",
     practiceExamples: [
       {
-        hindi: "कर्ता (karta)",
-        roman: "agent - who does action",
-        english: "agent",
-        explanation: "Marked by 'ने' in past",
+        hindi: "राज ने किताब लिखी।",
+        roman: "Raj ne kitaab likhi.",
+        english: "Raj wrote a book.",
+        explanation: "ने = agent marker. राज did the writing (past transitive). Verb agrees with object: किताब (fem) → लिखी.",
       },
       {
-        hindi: "कर्म (karm)",
-        roman: "object - thing acted upon",
-        english: "object",
-        explanation: "Marked by 'को'",
+        hindi: "उसने मुझे किताब दी।",
+        roman: "Usne mujhe kitaab di.",
+        english: "He/She gave me a book.",
+        explanation: "ने = agent (उसने). को/मुझे = recipient (me). Two case markers in one sentence.",
       },
       {
-        hindi: "करण (karan)",
-        roman: "instrument - tool used",
-        english: "instrument",
-        explanation: "Marked by 'से'",
+        hindi: "मैं पेन से घर में काम करता हूँ।",
+        roman: "Main pen se ghar mein kaam karta hoon.",
+        english: "I work at home with a pen.",
+        explanation: "से = with (pen, instrument). में = in (home, location). Two different से/में meanings in one sentence.",
       },
       {
-        hindi: "अधिकरण (adhikaran)",
-        roman: "location - where action happens",
-        english: "location",
-        explanation: "Marked by 'में'",
+        hindi: "राज की किताब टेबल पर है।",
+        roman: "Raj ki kitaab table par hai.",
+        english: "Raj's book is on the table.",
+        explanation: "की = possession (Raj's). पर = on (location, alternate to में for surfaces).",
       },
     ],
     commonMistakes: [
       {
+        incorrect: "मैं किताब लिखा।",
+        correct: "मैंने किताब लिखी।",
+        explanation:
+          "Past + transitive → subject needs 'ने'. मैंने (not मैं). Verb agrees with object: किताब (feminine) → लिखी.",
+      },
+      {
         incorrect: "राज को खेलना। (using को for agent incorrectly)",
         correct: "राज खेलता है। या राज ने खेला।",
         explanation:
-          "को is for object। ने marks agent in past। Direct nominative for present।",
+          "'को' is for objects and recipients, not the doer. 'ने' marks the doer in past tense.",
       },
     ],
     transformationExercises: [
@@ -2376,15 +2445,25 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What marks the object in Hindi?",
-        options: ["ने", "को", "से", "में"],
-        correctAnswer: "को",
-        explanation:
-          "को marks the direct object (karm). ने marks agent in past।",
+        question: "Fill the blank: 'राज ___ किताब लिखी।' (Raj wrote a book — past tense)",
+        options: ["को", "से", "ने", "में"],
+        correctAnswer: "ने",
+        explanation: "Past tense + transitive verb → subject gets 'ने'. राज ने = Raj [did the writing]. 'ने' marks who performed the action.",
+      },
+      {
+        question: "Which sentence correctly uses case markers?",
+        options: [
+          "मैं घर में है।",
+          "मैं घर में हूँ।",
+          "मैं घर को हूँ।",
+          "मैं घर ने हूँ।",
+        ],
+        correctAnswer: "मैं घर में हूँ।",
+        explanation: "'में' marks location (in/at). 'मैं घर में हूँ' = I am in/at home.",
       },
     ],
     summary:
-      "Hindi has 8 cases marked by postpositions. Each shows grammatical relationship.",
+      "Case markers are particles after nouns that show grammatical role: ने (past agent), को (object), से (with/from), में (location).",
     prompt:
       "Learn the 8 cases - foundation for understanding Hindi sentence structure.",
   },
@@ -2577,15 +2656,25 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which case shows the instrument/tool used?",
-        options: ["कर्ता", "करण", "कर्म", "संबंध"],
-        correctAnswer: "करण",
-        explanation:
-          "करण case (से) shows how/with what an action is done।",
+        question: "Fill the blank: 'मैं ____  लिखता हूँ।' (I write with a pen.)",
+        options: ["पेन को", "पेन में", "पेन से", "पेन का"],
+        correctAnswer: "पेन से",
+        explanation: "'से' shows the instrument/tool used. पेन से = with a pen. 'को' = to/for, 'में' = inside, 'का' = of/possession.",
+      },
+      {
+        question: "Which sentence correctly uses 'से' as instrument?",
+        options: [
+          "वह साइकिल में आता है।",
+          "वह साइकिल से आता है।",
+          "वह साइकिल को आता है।",
+          "वह साइकिल का आता है।",
+        ],
+        correctAnswer: "वह साइकिल से आता है।",
+        explanation: "से = by/with (means of transport). 'साइकिल से' = by bicycle. में = in, को = to/for, का = of.",
       },
     ],
     summary:
-      "Instrumental case (से) shows means, instrument, or manner of action.",
+      "Instrumental case (से) shows means, instrument, or manner of action. 'पेन से लिखो' = write WITH a pen.",
     prompt:
       "Use instrumental case to describe how actions are performed and what tools are used.",
   },
@@ -2603,9 +2692,9 @@ const chapter4Lessons: GrammarLesson[] = [
     grammarTopic: "Simple Sentences",
     grammarTopicHindi: "सरल वाक्य",
     ruleExplanation:
-      "Simple sentences have one subject and one main verb: 'मैं खेलता हूँ' (I play). Structure: Subject + Verb + Object (SOV in Hindi).",
+      "Simple sentences have one subject and one main verb. Hindi word order: the VERB comes at the END (SOV). English: 'I eat rice.' Hindi: 'मैं चावल खाता हूँ' — notice खाता हूँ (verb) is at the end, not the middle. Simple rule: Subject + Objects/Modifiers + VERB LAST.",
     ruleExplanationHindi:
-      "सरल वाक्य में एक कर्ता और एक मुख्य क्रिया होती है। संरचना: कर्ता + विषय + क्रिया।",
+      "सरल वाक्य = एक subject + एक verb। हिंदी में verb आखिर में: 'मैं चावल खाता हूँ' (subject = मैं, object = चावल, verb = खाता हूँ — END)। अंग्रेज़ी जैसा नहीं (I eat rice)।",
     exampleSentenceHindi: "राज स्कूल जाता है।",
     exampleSentenceRoman: "Raj school jata hai.",
     exampleSentenceEnglish: "Raj goes to school.",
@@ -2647,15 +2736,30 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What is the basic word order in Hindi?",
-        options: ["SVO (like English)", "SOV (Subject-Object-Verb)", "OVS", "VSO"],
-        correctAnswer: "SOV (Subject-Object-Verb)",
-        explanation:
-          "Hindi uses Subject-Object-Verb order unlike English।",
+        question: "Which sentence has correct Hindi word order?",
+        options: [
+          "मैं खाता हूँ चावल।",
+          "मैं चावल खाता हूँ।",
+          "खाता हूँ मैं चावल।",
+          "चावल मैं खाता।",
+        ],
+        correctAnswer: "मैं चावल खाता हूँ।",
+        explanation: "Hindi: Subject (मैं) + Object (चावल) + Verb last (खाता हूँ). Verb always at the end.",
+      },
+      {
+        question: "Which is the correct Hindi translation of 'She reads a book'?",
+        options: [
+          "पढ़ती है वह किताब।",
+          "वह पढ़ती है किताब।",
+          "वह किताब पढ़ती है।",
+          "किताब वह पढ़ती है।",
+        ],
+        correctAnswer: "वह किताब पढ़ती है।",
+        explanation: "Subject (वह) + Object (किताब) + Verb last (पढ़ती है). The verb goes at the end.",
       },
     ],
     summary:
-      "Simple sentences have one subject, one verb. Hindi word order: Subject-Object-Verb.",
+      "Simple sentences have one subject, one verb. Hindi verb is ALWAYS at the end: Subject + Object + Verb.",
     prompt:
       "Master simple sentences - the foundation of all Hindi writing.",
   },
@@ -2714,15 +2818,25 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which conjunction is used for contrast?",
+        question: "Fill the blank: 'मैं जाना चाहता हूँ ___ मेरे पास समय नहीं है।' (I want to go BUT I have no time.)",
         options: ["और", "या", "लेकिन", "तो"],
         correctAnswer: "लेकिन",
-        explanation:
-          "लेकिन (but) shows contrast। और (and) shows addition। या (or) shows alternatives।",
+        explanation: "'लेकिन' = but (shows contrast/opposite). 'और' = and (adds same direction). 'या' = or (choice). Here we need contrast.",
+      },
+      {
+        question: "Which is a correct compound sentence?",
+        options: [
+          "राज खेलता है।",
+          "राज खेलता है और सीता पढ़ती है।",
+          "जब राज खेलता है।",
+          "क्योंकि राज खेलता है।",
+        ],
+        correctAnswer: "राज खेलता है और सीता पढ़ती है।",
+        explanation: "Compound = two complete clauses joined by a conjunction (और). The others are either simple or incomplete.",
       },
     ],
     summary:
-      "Compound sentences connect simple sentences with conjunctions (और, लेकिन, या).",
+      "Compound sentences connect two complete clauses with conjunctions: और (and adds), लेकिन (but contrasts), या (or gives choice).",
     prompt:
       "Use compound sentences to link related independent clauses.",
   },
@@ -2781,15 +2895,25 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which connects when-clause to result?",
+        question: "Fill the blank: 'जब मैं घर आता हूँ, ___ मैं खाना खाता हूँ।'",
         options: ["और", "क्योंकि", "तो", "या"],
         correctAnswer: "तो",
-        explanation:
-          "'तो' marks the result clause in when/if sentences।",
+        explanation: "'जब...तो' = when...then. 'तो' marks the result of the when-clause. जब = when (sets condition), तो = then (result).",
+      },
+      {
+        question: "Which is a correct complex sentence?",
+        options: [
+          "मैं खाता हूँ।",
+          "मैं खाता हूँ और सोता हूँ।",
+          "जब मैं थक जाता हूँ, तो मैं सो जाता हूँ।",
+          "मैं नहीं आऊँगा।",
+        ],
+        correctAnswer: "जब मैं थक जाता हूँ, तो मैं सो जाता हूँ।",
+        explanation: "Complex = dependent clause (जब...) + main clause (तो...). The 'जब' clause depends on the main clause.",
       },
     ],
     summary:
-      "Complex sentences have main + dependent clauses joined by जब, क्योंकि, तो, etc.",
+      "Complex sentences have a dependent clause (जब, क्योंकि, जहाँ) + a main clause. 'जब...तो' pattern is the most common.",
     prompt:
       "Build complex sentences to express relationships between ideas.",
   },
@@ -2828,11 +2952,33 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What pronoun starts relative clauses?",
-        options: ["कौन", "जो", "जिस", "वह"],
+        question: "Fill the blank: 'वह लड़की ___ गाती है, मेरी बहन है।' (The girl WHO sings is my sister.)",
+        options: ["जो", "कौन", "वह", "यह"],
         correctAnswer: "जो",
-        explanation:
-          "'जो' introduces relative clauses।",
+        explanation: "'जो' = who/which in relative clauses. Correct: 'वह लड़की जो गाती है, वह मेरी बहन है।'",
+      },
+      {
+        question: "Which is a correct relative clause sentence?",
+        options: [
+          "लड़की जो गाती है मेरी बहन।",
+          "जो लड़की गाती है, वह मेरी बहन है।",
+          "लड़की गाती है और मेरी बहन है।",
+          "वह लड़की मेरी बहन है।",
+        ],
+        correctAnswer: "जो लड़की गाती है, वह मेरी बहन है।",
+        explanation: "जो-clause must be complete (जो + verb), and the main clause needs a demonstrative (वह/वे).",
+      },
+    ],
+    commonMistakes: [
+      {
+        incorrect: "लड़की जो गाती है मेरी बहन",
+        correct: "लड़की जो गाती है, वह मेरी बहन है",
+        explanation: "Relative clauses need a corresponding demonstrative (वह/वे) in the main clause.",
+      },
+      {
+        incorrect: "जो किताब, वह अच्छी है",
+        correct: "जो किताब मैंने ली, वह अच्छी है",
+        explanation: "The 'जो' clause needs its own verb to be grammatically complete.",
       },
     ],
     summary:
@@ -2875,11 +3021,33 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which pattern is conditional?",
-        options: ["जब...तब", "अगर...तो", "क्योंकि...इसलिए", "चूँकि...अतः"],
-        correctAnswer: "अगर...तो",
-        explanation:
-          "'अगर...तो' forms conditional if-then sentences।",
+        question: "Fill the blank: 'अगर बारिश हो, ___ हम घर में रहेंगे।'",
+        options: ["और", "क्योंकि", "तो", "या"],
+        correctAnswer: "तो",
+        explanation: "'अगर...तो' = if...then. 'तो' always comes in the result clause of a conditional sentence.",
+      },
+      {
+        question: "Which is correct conditional sentence?",
+        options: [
+          "अगर वह आए हम खेलेंगे।",
+          "अगर वह आए, तो हम खेलेंगे।",
+          "जब वह आए, अगर हम खेलेंगे।",
+          "वह आए, हम खेलेंगे।",
+        ],
+        correctAnswer: "अगर वह आए, तो हम खेलेंगे।",
+        explanation: "Correct: अगर (if-clause) + comma + तो (then-clause). Don't drop तो from the result clause.",
+      },
+    ],
+    commonMistakes: [
+      {
+        incorrect: "अगर वह आए, तो हम जाते हैं",
+        correct: "अगर वह आए, तो हम जाएँगे",
+        explanation: "In future conditionals both clauses should be future tense.",
+      },
+      {
+        incorrect: "अगर तुम मेहनत करो हम जीतेंगे",
+        correct: "अगर तुम मेहनत करो, तो हम जीतेंगे",
+        explanation: "'तो' must appear in the result clause; don't drop it.",
       },
     ],
     summary:
@@ -2942,15 +3110,25 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Where does 'नहीं' usually go in Hindi?",
-        options: ["At the end", "Before the verb", "After the subject", "Anywhere"],
-        correctAnswer: "Before the verb",
-        explanation:
-          "नहीं usually precedes the verb in Hindi sentences।",
+        question: "Which is the correct negative sentence?",
+        options: [
+          "मैं जाता नहीं।",
+          "नहीं मैं जाता।",
+          "मैं नहीं जाता।",
+          "मैं जा नहीं रहा।",
+        ],
+        correctAnswer: "मैं नहीं जाता।",
+        explanation: "नहीं comes BEFORE the verb. 'मैं नहीं जाता' = I don't go. 'मैं जाता नहीं' is wrong.",
+      },
+      {
+        question: "Fill the blank: 'वह यहाँ ______ है।' (He is NOT here.)",
+        options: ["भी", "नहीं", "बहुत", "तो"],
+        correctAnswer: "नहीं",
+        explanation: "'वह यहाँ नहीं है' = He is not here. नहीं goes before the verb है.",
       },
     ],
     summary:
-      "Negative sentences use 'नहीं' placed before verb to negate action.",
+      "Negative sentences use 'नहीं' placed BEFORE the verb. Don't put नहीं at the end.",
     prompt:
       "Form negative sentences by placing नहीं appropriately.",
   },
@@ -3009,15 +3187,20 @@ const chapter4Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "For yes/no questions, what goes at the start?",
-        options: ["कौन", "क्या", "कहाँ", "कब"],
+        question: "Fill the blank: '_____ तुम स्कूल जाते हो?' (Do YOU go to school? — yes/no question)",
+        options: ["कहाँ", "क्या", "कौन", "कब"],
         correctAnswer: "क्या",
-        explanation:
-          "'क्या' at sentence start forms yes/no questions।",
+        explanation: "'क्या' at start makes a yes/no question. 'क्या तुम जाते हो?' = Do you go? (answer: हाँ/नहीं).",
+      },
+      {
+        question: "Fill the blank: '______ आया था?' (WHO had come?)",
+        options: ["क्या", "कब", "कौन", "कहाँ"],
+        correctAnswer: "कौन",
+        explanation: "'कौन' = who. Questions about a person use कौन. क्या = what, कब = when, कहाँ = where.",
       },
     ],
     summary:
-      "Questions use question words (कौन, क्या, कहाँ) or क्या for yes/no.",
+      "Yes/no questions: 'क्या' at sentence start. Information questions: कौन (who), क्या (what), कहाँ (where), कब (when), क्यों (why), कैसे (how).",
     prompt:
       "Form questions to gather information and engage in conversation.",
   },
@@ -3067,6 +3250,18 @@ const chapter4Lessons: GrammarLesson[] = [
         correctAnswer: "कि",
         explanation:
           "'कि' connects reported speech in indirect narration।",
+      },
+    ],
+    commonMistakes: [
+      {
+        incorrect: "राज ने कहा कि \"मैं आऊँगा\"",
+        correct: "राज ने कहा कि वह आएगा",
+        explanation: "In indirect speech remove quotation marks and change first-person pronouns to third-person.",
+      },
+      {
+        incorrect: "राज ने बोला, मैं खेलूँगा",
+        correct: "राज ने कहा, \"मैं खेलूँगा।\"",
+        explanation: "Use 'कहा' (not 'बोला') for direct speech; enclose exact words in quotes.",
       },
     ],
     summary:
@@ -3126,6 +3321,18 @@ const chapter4Lessons: GrammarLesson[] = [
         correctAnswer: "क्योंकि...इसलिए (because...therefore)",
         explanation:
           "'क्योंकि...इसलिए' shows cause-effect relationship।",
+      },
+    ],
+    commonMistakes: [
+      {
+        incorrect: "मैं किताब पढ़ी",
+        correct: "मैंने किताब पढ़ी",
+        explanation: "With transitive verbs in past tense, use 'ने' case marker with the subject.",
+      },
+      {
+        incorrect: "वह लड़की जो गाती है और मेरी बहन है",
+        correct: "वह लड़की जो गाती है, वह मेरी बहन है",
+        explanation: "Don't connect relative and main clauses with 'और'; use the demonstrative instead.",
       },
     ],
     summary:
@@ -3336,9 +3543,7 @@ export const LEVEL_6_ROMAN_MAP: Record<
   नारंगी: { primary: "nargi", variants: ["nargi"], type: "adjective", explanation: "orange" },
 
   // Common activities
-  पढ़ना: { primary: "padhna", variants: ["padhna"], type: "verb", explanation: "to read" },
   खेलना: { primary: "khalna", variants: ["khalna"], type: "verb", explanation: "to play" },
-  खाना: { primary: "khana", variants: ["khana"], type: "verb", explanation: "to eat/food" },
   पीना: { primary: "pina", variants: ["pina"], type: "verb", explanation: "to drink" },
   सोना: { primary: "sona", variants: ["sona"], type: "verb", explanation: "to sleep" },
   दौड़ना: { primary: "daudna", variants: ["daudna"], type: "verb", explanation: "to run" },

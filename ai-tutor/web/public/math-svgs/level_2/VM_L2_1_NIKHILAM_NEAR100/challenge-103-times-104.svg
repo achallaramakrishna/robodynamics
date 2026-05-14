@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="220" viewBox="0 0 500 220">
+  <rect x="12" y="12" width="476" height="196" rx="24" fill="#F6FFFB" stroke="#BFE8D8" stroke-width="2"/>
+  <text x="26" y="34" font-size="21" font-family="Arial" font-weight="700" fill="#0F766E">Challenge: numbers above 100</text>
+  <text x="92" y="82" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#334155">103</text>
+  <text x="274" y="82" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#334155">104</text>
+  <text x="92" y="114" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#059669">+3</text>
+  <text x="274" y="114" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#059669">+4</text>
+  <path d="M258 102 L108 70" stroke="#2563EB" stroke-width="4"/>
+  <rect x="318" y="54" width="138" height="86" rx="16" fill="#FFFFFF" stroke="#BFE8D8" stroke-width="2"/>
+  <text x="387" y="80" text-anchor="middle" font-size="14" font-family="Arial" font-weight="700" fill="#0F766E">Surplus rule</text>
+  <text x="387" y="102" text-anchor="middle" font-size="13" font-family="Arial" fill="#4B5563">Left: 103 + 4 = 107</text>
+  <text x="387" y="122" text-anchor="middle" font-size="13" font-family="Arial" fill="#4B5563">Right: 3 x 4 = 12</text>
+  <text x="250" y="174" text-anchor="middle" font-size="28" font-family="Arial" font-weight="700" fill="#7C3AED">107 | 12 = 10712</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <!-- Generic person node -->
+  <rect x="5" y="5" width="70" height="70" rx="14" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <circle cx="40" cy="26" r="12" fill="#1d4ed8"/>
+  <path d="M20,65 Q20,44 40,44 Q60,44 60,65" fill="#1d4ed8"/>
+</svg>

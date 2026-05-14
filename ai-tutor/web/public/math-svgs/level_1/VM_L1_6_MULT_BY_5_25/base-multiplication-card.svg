@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #1e293b; rx: 16px; stroke: #334155; stroke-width: 4; }
+      .text-light { fill: #f8fafc; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+      .text-blue { fill: #3b82f6; font-family: system-ui, sans-serif; font-weight: bold; font-size: 32px; }
+      .text-purple { fill: #a855f7; font-family: system-ui, sans-serif; font-weight: bold; font-size: 32px; }
+      .divider { stroke: #334155; stroke-width: 4; stroke-dasharray: 8 8; }
+    </style>
+  </defs>
+
+  <rect width="400" height="300" class="bg"/>
+
+  <text x="200" y="70" class="text-light" text-anchor="middle">Base Equivalents</text>
+
+  <!-- x5 Row -->
+  <text x="120" y="140" class="text-blue" text-anchor="middle">× 5</text>
+  <text x="200" y="140" class="text-light" text-anchor="middle">=</text>
+  <text x="280" y="125" class="text-blue" text-anchor="middle">10</text>
+  <line x1="260" y1="135" x2="300" y2="135" stroke="#3b82f6" stroke-width="4"/>
+  <text x="280" y="165" class="text-blue" text-anchor="middle">2</text>
+
+  <line x1="40" y1="200" x2="360" y2="200" class="divider"/>
+
+  <!-- x25 Row -->
+  <text x="120" y="260" class="text-purple" text-anchor="middle">× 25</text>
+  <text x="200" y="260" class="text-light" text-anchor="middle">=</text>
+  <text x="280" y="245" class="text-purple" text-anchor="middle">100</text>
+  <line x1="250" y1="255" x2="310" y2="255" stroke="#a855f7" stroke-width="4"/>
+  <text x="280" y="285" class="text-purple" text-anchor="middle">4</text>
+
+</svg>

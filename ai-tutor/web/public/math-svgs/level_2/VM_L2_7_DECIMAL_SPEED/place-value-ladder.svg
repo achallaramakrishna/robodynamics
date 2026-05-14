@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F8FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D6E2FF" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#0EA5E9"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Place value ladder</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">Climb left for bigger values. Climb right for smaller values.</text>
+
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="82" y="138" width="110" height="112" rx="18" fill="#DBEAFE" stroke="#93C5FD"/>
+    <rect x="212" y="138" width="110" height="112" rx="18" fill="#E0E7FF" stroke="#A5B4FC"/>
+    <rect x="342" y="138" width="110" height="112" rx="18" fill="#F5F3FF" stroke="#C4B5FD"/>
+    <rect x="472" y="138" width="110" height="112" rx="18" fill="#FDF2F8" stroke="#F9A8D4"/>
+    <rect x="602" y="138" width="110" height="112" rx="18" fill="#ECFCCB" stroke="#BEF264"/>
+    <text x="137" y="180" fill="#1D4ED8" font-size="18" font-weight="700">Hundreds</text>
+    <text x="267" y="180" fill="#4338CA" font-size="18" font-weight="700">Tens</text>
+    <text x="397" y="180" fill="#6D28D9" font-size="18" font-weight="700">Ones</text>
+    <text x="527" y="180" fill="#BE185D" font-size="18" font-weight="700">Tenths</text>
+    <text x="657" y="180" fill="#4D7C0F" font-size="18" font-weight="700">Hundredths</text>
+    <text x="137" y="220" fill="#334155" font-size="32" font-weight="700">100</text>
+    <text x="267" y="220" fill="#334155" font-size="32" font-weight="700">10</text>
+    <text x="397" y="220" fill="#334155" font-size="32" font-weight="700">1</text>
+    <text x="527" y="220" fill="#334155" font-size="32" font-weight="700">0.1</text>
+    <text x="657" y="220" fill="#334155" font-size="32" font-weight="700">0.01</text>
+  </g>
+  <path d="M205 194 H598" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="598,194 582,184 582,204" fill="#94A3B8"/>
+  <polygon points="205,194 221,184 221,204" fill="#94A3B8"/>
+  <text x="400" y="300" fill="#0F172A" font-size="17" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Example: 3.6 means 3 ones and 6 tenths</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="200" viewBox="0 0 460 200">
+  <rect width="460" height="200" rx="24" fill="#EAF2FF"/>
+  <rect x="30" y="48" width="168" height="110" rx="20" fill="white" stroke="#3B3A8C" stroke-width="3"/>
+  <rect x="262" y="48" width="168" height="110" rx="20" fill="white" stroke="#E91E8C" stroke-width="3"/>
+  <text x="114" y="82" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#3B3A8C">Standard</text>
+  <text x="346" y="82" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#E91E8C">Vinculum</text>
+  <text x="114" y="126" text-anchor="middle" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#1F2440">17</text>
+  <text x="346" y="126" text-anchor="middle" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#1F2440">2 ?3</text>
+</svg>

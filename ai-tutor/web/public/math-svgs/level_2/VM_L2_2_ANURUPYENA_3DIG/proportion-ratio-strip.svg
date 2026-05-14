@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="20" fill="#f8fafc"/>
+  <rect x="20" y="20" width="760" height="360" rx="22" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="400" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1e293b">Proportional Rule</text>
+  <text x="400" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">Multiply one factor, divide the other by the same amount.</text>
+  <g transform="translate(120 176)">
+    <text x="0" y="0" font-family="Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#111827">A x B</text>
+    <path d="M120 -10 H230" stroke="#94a3b8" stroke-width="5"/>
+    <circle cx="150" cy="-10" r="9" fill="#f97316"><animate attributeName="cx" values="150;215;150" dur="2s" repeatCount="indefinite"/></circle>
+    <text x="245" y="0" font-family="Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#111827">(A x k) x (B / k)</text>
+  </g>
+</svg>

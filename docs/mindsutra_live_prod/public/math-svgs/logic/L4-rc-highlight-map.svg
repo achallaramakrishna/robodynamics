@@ -1,0 +1,59 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L4 RC Insight Map - Evidence Highlighter</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Reading Passage Panel */}
+  <g id="passage-container" transform="translate(50, 80)">
+     <rect width="450" height="450" rx="15" fill="#1E293B" stroke="#334155" stroke-width="2" />
+     <path d="M0,40 L450,40" stroke="#334155" />
+     <text x="20" y="25" fill="#60A5FA" font-size="14" font-weight="900">CASE FILE: THE SCIENCE CLUB</text>
+     
+     <g font-size="14" fill="#94A3B8">
+        <text x="20" y="80">Sentence 1: The science club stopped using plastic cups.</text>
+        <rect x="18" y="90" width="350" height="4" fill="#60A5FA" opacity="0.3" id="highlighter-1" />
+        
+        <text x="20" y="140">Sentence 2: Members brought reusable bottles instead.</text>
+        <text x="20" y="200">Sentence 3: At first, some students complained.</text>
+        <text x="20" y="260">Sentence 4: After a month, trash reduced by 50%.</text>
+        <rect x="18" y="270" width="300" height="4" fill="#60A5FA" opacity="0" id="highlighter-2">
+           <animate attributeName="opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite" />
+        </rect>
+     </g>
+  </g>
+
+  {/* Insight Analysis Board (Right) */}
+  <g transform="translate(520, 80)">
+     <rect width="230" height="450" rx="15" fill="#0F172A" stroke="#60A5FA" stroke-width="2" stroke-dasharray="10,5" />
+     <text x="115" y="30" text-anchor="middle" fill="#60A5FA" font-size="14" font-weight="900">VERDICT CLOUDS</text>
+     
+     {/* Bubble: Main Idea */}
+     <g transform="translate(115, 100)">
+        <circle r="45" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+        <text text-anchor="middle" y="5" fill="white" font-size="10" font-weight="900">MAIN IDEA</text>
+     </g>
+
+     {/* Bubble: Inference */}
+     <g transform="translate(115, 220)">
+        <circle r="45" fill="#1E293B" stroke="#F472B6" stroke-width="2" />
+        <text text-anchor="middle" y="5" fill="white" font-size="10" font-weight="900">INFERENCE</text>
+     </g>
+
+     {/* Bubble: Evidence Link */}
+     <g transform="translate(115, 340)">
+        <circle r="45" fill="#1E293B" stroke="#10B981" stroke-width="2" />
+        <text text-anchor="middle" y="5" fill="white" font-size="10" font-weight="900">EVIDENCE</text>
+     </g>
+
+     {/* Connecting Line (Sample link) */}
+     <path d="M-50,260 Q-250,150 -350,150" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="5,5" opacity="0.4" />
+  </g>
+
+  {/* Control Bar */}
+  <g transform="translate(50, 540)">
+     <rect width="450" height="40" rx="10" fill="#3B82F6" />
+     <text x="225" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="900">MATCH SENTENCE TO INSIGHT BUBBLE</text>
+  </g>
+
+  <text x="400" y="50" text-anchor="middle" font-size="28" font-weight="900" fill="white">Reading Insight Map</text>
+</svg>

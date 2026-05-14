@@ -1,0 +1,29 @@
+<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="100" y="20" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Round Mouth (उ/ऊ)</text>
+
+  <!-- Head outline -->
+  <circle cx="100" cy="80" r="45" fill="none" stroke="#333" stroke-width="2"/>
+
+  <!-- Face features -->
+  <!-- Eyes -->
+  <circle cx="85" cy="65" r="5" fill="#333"/>
+  <circle cx="115" cy="65" r="5" fill="#333"/>
+
+  <!-- Nose -->
+  <line x1="100" y1="65" x2="100" y2="80" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Mouth - ROUND -->
+  <circle cx="100" cy="100" r="18" fill="#FF6B6B" stroke="#333" stroke-width="2"/>
+
+  <!-- Lips pushed forward -->
+  <path d="M 82 100 Q 82 88 100 85 Q 118 88 118 100" fill="#FFB3B3" stroke="#333" stroke-width="1"/>
+
+  <!-- Tongue -->
+  <circle cx="100" cy="105" r="10" fill="#FF8C8C" stroke="none"/>
+
+  <!-- Label -->
+  <text x="100" y="180" font-size="14" text-anchor="middle" fill="#333">Sound: उ or ऊ</text>
+  <text x="100" y="200" font-size="12" text-anchor="middle" fill="#666">Mouth round and small</text>
+  <text x="100" y="220" font-size="12" text-anchor="middle" fill="#666">Lips pushed forward</text>
+</svg>

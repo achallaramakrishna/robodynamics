@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="20" fill="#f8fafc"/>
+  <rect x="20" y="20" width="760" height="360" rx="22" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="400" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1e293b">Complement Strip</text>
+  <text x="400" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">Read each digit transformation from left to right.</text>
+  <g transform="translate(110 172)">
+    <rect x="0" y="0" width="120" height="82" rx="20" fill="#eef2ff" stroke="#818cf8" stroke-width="3"/>
+    <rect x="170" y="0" width="120" height="82" rx="20" fill="#fff7ed" stroke="#fb923c" stroke-width="3"/>
+    <rect x="340" y="0" width="120" height="82" rx="20" fill="#fdf2f8" stroke="#f472b6" stroke-width="3"/>
+    <rect x="510" y="0" width="120" height="82" rx="20" fill="#ecfdf5" stroke="#34d399" stroke-width="3"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#3730a3">6 -> 3</text>
+    <text x="230" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#c2410c">3 -> 6</text>
+    <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#be185d">7 -> 3</text>
+    <text x="570" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#166534">637 -> 363</text>
+    <path d="M120 41 H170 M290 41 H340 M460 41 H510" stroke="#94a3b8" stroke-width="4"/>
+  </g>
+</svg>

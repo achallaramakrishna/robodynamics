@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: none; }
+      .card-1 { fill: #1e293b; rx: 16px; stroke: #3b82f6; stroke-width: 4; }
+      .card-2 { fill: #1e293b; rx: 16px; stroke: #a855f7; stroke-width: 4; }
+      .text-light { fill: #f8fafc; font-family: system-ui, sans-serif; font-weight: bold; font-size: 56px; }
+      .text-gray { fill: #64748b; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+      .text-label { fill: #94a3b8; font-family: system-ui, sans-serif; font-size: 16px; font-weight: 500; }
+    </style>
+  </defs>
+
+  <rect width="400" height="200" class="bg"/>
+
+  <!-- Left Factor -->
+  <rect x="40" y="30" width="120" height="140" class="card-1"/>
+  <text x="100" y="115" class="text-light" text-anchor="middle">16</text>
+  <text x="100" y="155" class="text-label" text-anchor="middle">Factor A</text>
+
+  <!-- Multiplication Sign -->
+  <text x="200" y="110" class="text-gray" text-anchor="middle">×</text>
+
+  <!-- Right Factor -->
+  <rect x="240" y="30" width="120" height="140" class="card-2"/>
+  <text x="300" y="115" class="text-light" text-anchor="middle">25</text>
+  <text x="300" y="155" class="text-label" text-anchor="middle">Factor B</text>
+
+</svg>

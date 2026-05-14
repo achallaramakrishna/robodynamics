@@ -18,8 +18,8 @@ export default function BudgetPlanner({ data }: { data: any }) {
             const isGeneric = selections[item.name] === "generic";
             total += isGeneric ? item.generic.price : item.price;
           }
-        ))}
-      );
+        });
+      });
     } else if (data.items) {
       data.items.forEach((item: any) => {
         if (selections[item.name]) total += item.price;

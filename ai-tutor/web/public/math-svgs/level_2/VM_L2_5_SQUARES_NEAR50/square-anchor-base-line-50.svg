@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="20" fill="#f8fafc"/>
+  <rect x="20" y="20" width="760" height="360" rx="22" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="400" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1e293b">Anchor at 50</text>
+  <g transform="translate(90 200)">
+    <line x1="0" y1="0" x2="620" y2="0" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="340" cy="0" r="18" fill="#f97316"/>
+    <circle cx="304" cy="0" r="18" fill="#6366f1"/>
+    <text x="340" y="-30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#c2410c">50</text>
+    <text x="304" y="-30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#3730a3">47</text>
+    <path d="M304 -42 V-64 H340 V-42" fill="none" stroke="#94a3b8" stroke-width="4"/>
+    <text x="322" y="-76" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">3 away</text>
+  </g>
+</svg>

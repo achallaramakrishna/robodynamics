@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Worked Example: sqrt(7056)</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Pair digits, then use the last-digit clue</text>
+  <rect x="52" y="108" width="696" height="236" rx="18" fill="#111827" stroke="#475569" stroke-width="2" />
+  <text x="84" y="150" fill="#E2E8F0" font-size="26" font-weight="800" font-family="Verdana, sans-serif">70 | 56</text>
+  <text x="84" y="198" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Last digit 6 -> root ends in 4 or 6</text>
+  <line x1="84" y1="236" x2="364" y2="236" stroke="#38BDF8" stroke-width="4" />
+  <circle cx="276" cy="236" r="10" fill="#FDE68A" />
+  <text x="84" y="274" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">8^2 = 64 <= 70 < 9^2 = 81</text>
+  <text x="84" y="308" fill="#FDE68A" font-size="24" font-weight="800" font-family="Verdana, sans-serif">So the tens digit is 8</text>
+  <text x="446" y="170" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Candidates: 84 or 86</text>
+  <text x="446" y="222" fill="#86EFAC" font-size="24" font-weight="900" font-family="Verdana, sans-serif">84^2 = 7056</text>
+  <text x="446" y="270" fill="#86EFAC" font-size="32" font-weight="900" font-family="Verdana, sans-serif">Answer = 84</text>
+</svg>

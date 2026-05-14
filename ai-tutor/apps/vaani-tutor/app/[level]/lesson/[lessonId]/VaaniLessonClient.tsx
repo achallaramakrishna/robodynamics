@@ -8,10 +8,12 @@ import VaaniAvatar from "./VaaniAvatar";
 import VaaniTraceCanvas from "@/components/Vaani/VaaniTraceCanvas";
 import VaaniSpeakCheck from "@/components/Vaani/VaaniSpeakCheck";
 import VaaniCameraCapture from "@/components/Vaani/VaaniCameraCapture";
+import AnimatedLessonVisual from "@/components/Vaani/AnimatedLessonVisual";
 import { getVaaniAudio } from "@/lib/vaaniAudioMapping";
 import { startVaaniMusic, type MusicController } from "@/lib/vaaniMusic";
 import { markLearned, getDueForReview, markReviewed } from "@/lib/vaaniSpacedRepetition";
 import { awardLessonXP } from "@/lib/vaaniGamification";
+import { hydrateVaaniProgress, syncVaaniProgress } from "@/lib/vaaniProgressSync";
 import { generateWorksheet } from "@/lib/vaaniWorksheetGenerator";
 import { vaaniLevel2Data, LEVEL_2_ROMAN_MAP } from "@/lib/vaaniLevel2Data";
 import VaaniMatraComparison from "@/components/Vaani/VaaniMatraComparison";
@@ -93,7 +95,19 @@ function BoardPanel({ step, boardKey, onTraceComplete, onTracingRoundComplete, o
             marginBottom: 22,
           }}
         >
-          <img src={data.assetPath.startsWith('/vaani') ? data.assetPath : `/vaani${data.assetPath}`} alt={data.headline || "Lesson visual"} style={{ width: "100%", maxHeight: 360, objectFit: "contain" }} onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }} />
+          <AnimatedLessonVisual
+            src={data.assetPath.startsWith('/vaani') ? data.assetPath : `/vaani${data.assetPath}`}
+            alt={data.headline || "Lesson visual"}
+            lessonId={lesson?.id}
+            title={lesson?.title || data.headline}
+            wordHindi={data.wordHindi || lesson?.wordHindi}
+            wordEnglish={data.wordEnglish || lesson?.wordEnglish}
+            maxHeight={360}
+            onError={(e) => {
+              const t = e.target as HTMLImageElement;
+              if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg";
+            }}
+          />
         </div>
       )}
 
@@ -134,11 +148,19 @@ function BoardPanel({ step, boardKey, onTraceComplete, onTracingRoundComplete, o
                 border: "1px solid rgba(249,115,22,0.16)",
                 display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
               }}>
-                <img
+                <AnimatedLessonVisual
                   src={data.assetPath.startsWith("/vaani") ? data.assetPath : `/vaani${data.assetPath}`}
                   alt={data.wordHindi || ""}
-                  style={{ width: "100%", maxHeight: 160, objectFit: "contain", borderRadius: 16 }}
-                  onError={(e) => { const t = e.target as HTMLImageElement; if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg"; }}
+                  lessonId={lesson?.id}
+                  title={lesson?.title || data.headline}
+                  wordHindi={data.wordHindi || lesson?.wordHindi}
+                  wordEnglish={data.wordEnglish || lesson?.wordEnglish}
+                  maxHeight={160}
+                  borderRadius={16}
+                  onError={(e) => {
+                    const t = e.target as HTMLImageElement;
+                    if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg";
+                  }}
                 />
                 <div style={{ textAlign: "center" }}>
                   <div style={{ fontSize: 20, fontWeight: 900, color: COLORS.ink }}>{data.wordHindi}</div>
@@ -864,6 +886,8 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
   // Prevents double-audio when user manually clicks the speak button
   const [autoSpeak, setAutoSpeak] = useState(true);
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const speechRequestIdRef = useRef(0);
+  const prevHindiLevelRef = useRef(hindiLevel);
   // MCQ accuracy tracking — updated by BoardPanel on each answer attempt
   const mcqStatsRef = useRef<{ correct: number; total: number }>({ correct: 0, total: 0 });
   // Gamification results shown on completion screen
@@ -954,22 +978,51 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
 
   // Read student name + Hindi level from parent registration (localStorage)
   useEffect(() => {
-    const saved =
-      localStorage.getItem("vaani_student_name") ||
-      localStorage.getItem("studentName") ||
-      localStorage.getItem("child_name") ||
-      localStorage.getItem("childName") ||
-      null;
-    if (saved && saved.trim()) {
-      setStudentName(saved.trim());
-      setNameAsked(true);
-    }
+    let cancelled = false;
+
+    const loadStudentProfile = async () => {
+      await hydrateVaaniProgress();
+      if (cancelled) return;
+
+      const saved =
+        localStorage.getItem("vaani_student_name") ||
+        localStorage.getItem("studentName") ||
+        localStorage.getItem("child_name") ||
+        localStorage.getItem("childName") ||
+        null;
+      if (saved && saved.trim()) {
+        setStudentName(saved.trim());
+        setNameAsked(true);
+      }
+    };
+
+    void loadStudentProfile();
+
+    return () => {
+      cancelled = true;
+    };
     // hindiLevel is now derived from LanguageContext (useLanguage hook) — no manual read needed
   }, []);
 
   const currentStep = payload.steps[stepIndex] ?? payload.steps[0];
   const progressPct = payload.steps.length ? Math.round(((stepIndex + 1) / payload.steps.length) * 100) : 0;
   const nextLessonUrl = payload.nextLessonUrl || `/${payload.course.levelSlug}`;
+
+  function stopAllSpeech() {
+    speechRequestIdRef.current += 1;
+
+    if (activeAudioRef.current) {
+      activeAudioRef.current.pause();
+      activeAudioRef.current.currentTime = 0;
+      activeAudioRef.current = null;
+    }
+
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+
+    setIsSpeaking(false);
+  }
 
   // speakText — Google Translate TTS (free, same as MindSutra) → Web Speech fallback
   async function speakText(text: string): Promise<void> {
@@ -984,18 +1037,41 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
     lastSpokenTextRef.current = text;
     lastSpeakTimeRef.current = now;
 
-    if (activeAudioRef.current) { activeAudioRef.current.pause(); activeAudioRef.current = null; }
+    stopAllSpeech();
+    const requestId = speechRequestIdRef.current;
 
     // 1. Pre-recorded audio (zero latency for mapped clips)
     const nativeUrl = getVaaniAudio(text.trim());
     if (nativeUrl) {
       return new Promise<void>((resolve) => {
         const audio = new Audio(nativeUrl);
+        if (requestId !== speechRequestIdRef.current) {
+          resolve();
+          return;
+        }
         activeAudioRef.current = audio;
         setIsSpeaking(true);
-        audio.onended = () => { setIsSpeaking(false); resolve(); };
-        audio.onerror  = () => { setIsSpeaking(false); resolve(); };
-        audio.play().catch(() => { setIsSpeaking(false); resolve(); });
+        audio.onended = () => {
+          if (requestId === speechRequestIdRef.current) {
+            activeAudioRef.current = null;
+            setIsSpeaking(false);
+          }
+          resolve();
+        };
+        audio.onerror  = () => {
+          if (requestId === speechRequestIdRef.current) {
+            activeAudioRef.current = null;
+            setIsSpeaking(false);
+          }
+          resolve();
+        };
+        audio.play().catch(() => {
+          if (requestId === speechRequestIdRef.current) {
+            activeAudioRef.current = null;
+            setIsSpeaking(false);
+          }
+          resolve();
+        });
       });
     }
 
@@ -1009,17 +1085,36 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       });
       if (resp.ok) {
         const data = await resp.json();
+        if (requestId !== speechRequestIdRef.current) return;
         if (data.audioBase64) {
           const mime = data.mimeType || "audio/mpeg";
           const played = await new Promise<boolean>((resolve) => {
             const audio = new Audio(`data:${mime};base64,${data.audioBase64}`);
+            if (requestId !== speechRequestIdRef.current) {
+              resolve(false);
+              return;
+            }
             activeAudioRef.current = audio;
-            audio.onended = () => { setIsSpeaking(false); resolve(true); };
-            audio.onerror = () => { setIsSpeaking(false); resolve(false); };
+            audio.onended = () => {
+              if (requestId === speechRequestIdRef.current) {
+                activeAudioRef.current = null;
+                setIsSpeaking(false);
+              }
+              resolve(true);
+            };
+            audio.onerror = () => {
+              if (requestId === speechRequestIdRef.current) {
+                activeAudioRef.current = null;
+                setIsSpeaking(false);
+              }
+              resolve(false);
+            };
             audio.play().catch((err) => {
               // NotAllowedError = autoplay blocked — fall through to speechSynthesis
               console.warn("[Vaani TTS] audio.play() blocked:", err?.name);
-              activeAudioRef.current = null;
+              if (requestId === speechRequestIdRef.current) {
+                activeAudioRef.current = null;
+              }
               resolve(false);
             });
           });
@@ -1027,13 +1122,14 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
           // play() was blocked → drop through to speechSynthesis below
         }
       }
-      setIsSpeaking(false);
+      if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
     } catch {
-      setIsSpeaking(false);
+      if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
     }
 
     // 3. Web Speech API fallback (browser built-in — also handles autoplay-blocked case)
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    if (requestId !== speechRequestIdRef.current) return;
     setIsSpeaking(true);
     return new Promise<void>((resolve) => {
       window.speechSynthesis.cancel();
@@ -1054,10 +1150,23 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
           if (preferred) utter.voice = preferred;
         }
         let done = false;
-        const finish = () => { if (!done) { done = true; clearTimeout(safety); setIsSpeaking(false); resolve(); } };
+        const finish = () => {
+          if (!done) {
+            done = true;
+            clearTimeout(safety);
+            if (requestId === speechRequestIdRef.current) {
+              setIsSpeaking(false);
+            }
+            resolve();
+          }
+        };
         const safety = setTimeout(finish, 10000);
         utter.onend = finish; utter.onerror = finish;
-        window.speechSynthesis.speak(utter);
+        if (requestId === speechRequestIdRef.current) {
+          window.speechSynthesis.speak(utter);
+        } else {
+          finish();
+        }
       };
       const voices = window.speechSynthesis.getVoices();
       if (voices.length > 0) loadAndSpeak();
@@ -1076,6 +1185,8 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       return;
     }
 
+    stopAllSpeech();
+    const requestId = speechRequestIdRef.current;
     setIsSpeaking(true);
     return new Promise<void>((resolve) => {
       const utterance = new SpeechSynthesisUtterance(char);
@@ -1086,6 +1197,11 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       let count = 0;
 
       const speak = () => {
+        if (requestId !== speechRequestIdRef.current) {
+          setIsSpeaking(false);
+          resolve();
+          return;
+        }
         count++;
         console.log(`[Vaani] Speaking "${char}" (attempt ${count}/3)`);
         window.speechSynthesis.cancel();
@@ -1099,7 +1215,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
           if (count < 3) {
             setTimeout(speak, 600);
           } else {
-            setIsSpeaking(false);
+            if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
             console.log(`[Vaani] Completed 3x pronunciation of "${char}"`);
             resolve();
           }
@@ -1110,7 +1226,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
           if (count < 3) {
             setTimeout(speak, 600);
           } else {
-            setIsSpeaking(false);
+            if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
             console.warn(`[Vaani] Speech failed after 3 attempts for "${char}"`);
             resolve();
           }
@@ -1120,7 +1236,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
           window.speechSynthesis.speak(utterance);
         } catch (err) {
           console.error('[Vaani] Exception while speaking:', err);
-          setIsSpeaking(false);
+          if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
           resolve();
         }
       };
@@ -1142,9 +1258,72 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
       : zero;
   }
 
+  function getLevel2TutorText(step: { label?: string; tutorText: string }): string | null {
+    if (lessonLevel !== 2 || !lessonBaseChar || !lessonMatra) return null;
+
+    const wordForFullHindi = lessonWord || lessonWordRoman;
+    const wordForMixed = lessonWordRoman || lessonWord;
+
+    switch (step.label) {
+      case "See the Word":
+        return vaaniSay(
+          `${lessonChar} से ${wordForFullHindi}। चित्र देखो और बोलो: ${wordForFullHindi}।`,
+          `${lessonChar} se ${wordForMixed}. Picture dekho aur bolo: ${wordForMixed}.`,
+          `${lessonChar} is heard in ${wordForMixed}. Look at the picture and say ${wordForMixed}.`,
+          step.tutorText,
+        );
+      case "Observe the Matra":
+        return vaaniSay(
+          `ध्यान से देखो। ${lessonBaseChar} में ${lessonMatra} की मात्रा जोड़ने पर ${lessonChar} बनता है।`,
+          `Dhyaan se dekho. ${lessonBaseChar} mein ${lessonMatra} ki matra jodne par ${lessonChar} banta hai.`,
+          `Watch closely. When we add ${lessonMatra} to ${lessonBaseChar}, it becomes ${lessonChar}.`,
+          step.tutorText,
+        );
+      case "Trace the Matra":
+        return vaaniSay(
+          `${lessonMatra} की मात्रा ट्रेस करो और साथ में बोलो: ${lessonChar}।`,
+          `${lessonMatra} ki matra trace karo aur saath mein bolo: ${lessonChar}.`,
+          `Trace the ${lessonMatra} matra and say ${lessonChar} as you draw.`,
+          step.tutorText,
+        );
+      case "Word Gallery":
+        return vaaniSay(
+          `${lessonMatra} की मात्रा से ${lessonChar} की ध्वनि बनती है। ${wordForFullHindi} शब्द सुनो और पहचानो।`,
+          `${lessonMatra} ki matra se ${lessonChar} ki dhvani banti hai. ${wordForMixed} shabd suno aur pehchano.`,
+          `This matra makes the ${lessonChar} sound. Listen to and recognize the word ${wordForMixed}.`,
+          step.tutorText,
+        );
+      case "Match the Pair":
+        return vaaniSay(
+          `अक्षर को सही शब्द के साथ मिलाओ। ${lessonChar} किस शब्द से जुड़ता है, पहचानो।`,
+          `Akshar ko sahi shabd ke saath milao. ${lessonChar} kis shabd se judta hai, pehchano.`,
+          `Match the letter with the correct word. Find which word goes with ${lessonChar}.`,
+          step.tutorText,
+        );
+      case "Quick Check 1":
+        return vaaniSay(
+          `चित्र देखो और सही हिंदी शब्द चुनो।`,
+          `Chitra dekho aur sahi Hindi shabd chuno.`,
+          `Look at the picture and choose the correct Hindi word.`,
+          step.tutorText,
+        );
+      case "Quick Check 2":
+        return vaaniSay(
+          `अब बताओ: ${lessonBaseChar} में ${lessonMatra} जोड़ने पर कौन सा अक्षर बनता है?`,
+          `Ab batao: ${lessonBaseChar} mein ${lessonMatra} jodne par kaun sa akshar banta hai?`,
+          `Now tell me: which letter is formed when we add ${lessonMatra} to ${lessonBaseChar}?`,
+          step.tutorText,
+        );
+      default:
+        return null;
+    }
+  }
+
   // Select the right tutorText variant based on current language mode
   function getTutorText(step: { tutorText: string; tutorTextHi?: string; tutorTextMix?: string } | null | undefined): string {
     if (!step) return "";
+    const level2Text = getLevel2TutorText(step);
+    if (level2Text) return level2Text;
     if (hindiLevel === "native" && step.tutorTextHi)   return step.tutorTextHi;
     if (hindiLevel === "some"   && step.tutorTextMix)  return step.tutorTextMix;
     return step.tutorText; // beginner / zero / fallback
@@ -1207,6 +1386,12 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
     return () => { cancelled = true; clearTimeout(t); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nameAsked, studentName, hindiLevel]);
+
+  useEffect(() => {
+    return () => {
+      stopAllSpeech();
+    };
+  }, []);
 
   // Start background music when session becomes active
   useEffect(() => {
@@ -1279,11 +1464,15 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
 
   // Re-speak in new language when user changes mode via dropdown (don't reset board)
   useEffect(() => {
-    if (sessionActive && currentStep) {
+    const previousLanguage = prevHindiLevelRef.current;
+    prevHindiLevelRef.current = hindiLevel;
+
+    if (previousLanguage === hindiLevel) return;
+    if (sessionActive && currentStep && !autoSpeak) {
       void speakText(getTutorText(currentStep));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hindiLevel]);
+  }, [hindiLevel, sessionActive, currentStep, autoSpeak]);
 
   // ── VISUAL STEP MIC INVITE — auto-show after Vaani speaks on "visual" steps ──
   useEffect(() => {
@@ -1659,7 +1848,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                         setStudentName(n);
                         localStorage.setItem("vaani_student_name", n);
                         setNameAsked(true);
-                        void speakText(`नमस्ते ${n}! बहुत अच्छा नाम है! आज हम ${lessonChar} सीखेंगे — जैसे ${lessonWord}!`);
+                        void syncVaaniProgress();
                       }
                     }}
                     style={{
@@ -1679,7 +1868,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                       setStudentName(n);
                       localStorage.setItem("vaani_student_name", n);
                       setNameAsked(true);
-                      void speakText(`नमस्ते ${n}! बहुत अच्छा नाम है! आज हम ${lessonChar} सीखेंगे — जैसे ${lessonWord}!`);
+                      void syncVaaniProgress();
                     }}
                     style={{
                       width: "100%", border: "none",
@@ -1834,7 +2023,12 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                     onClick={() => {
                       setFruitLiked(true);
                       setFruitPopup(false);
-                      void speakText(`वाह ${studentName}! ${lessonWord} बहुत मज़ेदार है! और देखो — ${lessonChar} से ${lessonWord}! चलो मिलकर ${lessonChar} सीखते हैं!`);
+                      void speakText(vaaniSay(
+                        `वाह ${studentName}! ${lessonWord} बहुत मज़ेदार है! और देखो — ${lessonChar} से ${lessonWord}! चलो मिलकर ${lessonChar} सीखते हैं!`,
+                        `वाह ${studentName}! ${lessonWord} is so fun! And look — ${lessonWord} starts with ${lessonChar}! Let's learn ${lessonChar} together!`,
+                        `Wow ${studentName}! ${lessonWordRoman} is fun! Look — it starts with ${lessonChar}. Let's learn this letter together!`,
+                        `Nice, ${studentName}! ${lessonWordRoman} starts with ${lessonChar}. Let's learn that letter together!`,
+                      ));
                     }}
                     style={{
                       border: "none", cursor: "pointer",
@@ -1850,7 +2044,12 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                     onClick={() => {
                       setFruitLiked(false);
                       setFruitPopup(false);
-                      void speakText(`कोई बात नहीं ${studentName}! ${lessonWord} एक बहुत अच्छा फल है। एक दिन ज़रूर खाना! अभी चलो ${lessonChar} सीखते हैं!`);
+                      void speakText(vaaniSay(
+                        `कोई बात नहीं ${studentName}! ${lessonWord} एक बहुत अच्छा फल है। एक दिन ज़रूर खाना! अभी चलो ${lessonChar} सीखते हैं!`,
+                        `कोई बात नहीं ${studentName}! ${lessonWord} is a lovely fruit. Try it one day! For now, let's learn ${lessonChar}!`,
+                        `That's okay, ${studentName}! ${lessonWordRoman} is a lovely fruit. Maybe try it one day. For now, let's learn ${lessonChar}!`,
+                        `That's okay, ${studentName}! Maybe you can try ${lessonWordRoman} another day. Now let's learn ${lessonChar}!`,
+                      ));
                     }}
                     style={{
                       border: "2px solid rgba(23,32,51,0.12)", cursor: "pointer",
@@ -2431,6 +2630,7 @@ export default function VaaniLessonClient({ payload }: { payload: VaaniLessonPay
                   const result = awardLessonXP(lessonId, lessonLevel, accuracy, 0, false);
                   setCompletionXP(result.xpAwarded);
                   setCompletionBadges(result.newBadges);
+                  void syncVaaniProgress();
                 } catch { /* storage unavailable — non-fatal */ }
                 musicRef.current?.stop();
                 setLessonComplete(true);

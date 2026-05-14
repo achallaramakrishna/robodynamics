@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" rx="16" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- Top Accent Bar -->
+  <rect x="0" y="0" width="800" height="6" fill="#F97316"/>
+
+  <!-- Titles -->
+  <text x="400" y="60" font-family="'Inter', sans-serif" font-weight="800" font-size="28" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">
+    Integer Multiplication Shortcuts
+  </text>
+  <text x="400" y="90" font-family="'Inter', sans-serif" font-weight="600" font-size="16" fill="#94A3B8" text-anchor="middle">
+    Ānurūpyena + sign rules
+  </text>
+  <text x="400" y="115" font-family="monospace" font-size="12" fill="#F97316" text-anchor="middle" opacity="0.8">
+    ASSET_ID: same-vs-different-sign-panel
+  </text>
+
+  <!-- Generative / Placeholder Content Wireframe -->
+  <rect x="50" y="140" width="700" height="220" rx="12" fill="#1E293B" stroke="#334155" stroke-dasharray="8 8" stroke-width="2"/>
+  
+  <text x="400" y="240" font-family="'Inter', sans-serif" font-weight="700" font-size="20" fill="#64748B" text-anchor="middle">
+    Dynamic content logic to be injected by AnimatedBoard
+  </text>
+  
+  <!-- Subtle Grid Pattern in background -->
+  <g stroke="#334155" stroke-width="1" opacity="0.3">
+    <line x1="100" y1="140" x2="100" y2="360" />
+    <line x1="200" y1="140" x2="200" y2="360" />
+    <line x1="300" y1="140" x2="300" y2="360" />
+    <line x1="400" y1="140" x2="400" y2="360" />
+    <line x1="500" y1="140" x2="500" y2="360" />
+    <line x1="600" y1="140" x2="600" y2="360" />
+    <line x1="700" y1="140" x2="700" y2="360" />
+    <line x1="50" y1="190" x2="750" y2="190" />
+    <line x1="50" y1="240" x2="750" y2="240" />
+    <line x1="50" y1="290" x2="750" y2="290" />
+    <line x1="50" y1="340" x2="750" y2="340" />
+  </g>
+</svg>

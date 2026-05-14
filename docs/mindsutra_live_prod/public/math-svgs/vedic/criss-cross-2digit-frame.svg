@@ -1,0 +1,26 @@
+<svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- top row -->
+  <rect x="80" y="30" width="50" height="50" rx="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"></rect>
+  <rect x="150" y="30" width="50" height="50" rx="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"></rect>
+  <text x="105" y="62" text-anchor="middle" font-size="28" font-family="Arial">2</text>
+  <text x="175" y="62" text-anchor="middle" font-size="28" font-family="Arial">3</text>
+
+  <!-- bottom row -->
+  <rect x="80" y="120" width="50" height="50" rx="10" fill="#ECFCCB" stroke="#65A30D" stroke-width="2"></rect>
+  <rect x="150" y="120" width="50" height="50" rx="10" fill="#ECFCCB" stroke="#65A30D" stroke-width="2"></rect>
+  <text x="105" y="152" text-anchor="middle" font-size="28" font-family="Arial">1</text>
+  <text x="175" y="152" text-anchor="middle" font-size="28" font-family="Arial">4</text>
+
+  <!-- vertical right -->
+  <line x1="175" y1="80" x2="175" y2="120" stroke="#7C3AED" stroke-width="4"></line>
+  <!-- cross arrows -->
+  <line x1="105" y1="80" x2="175" y2="120" stroke="#7C3AED" stroke-width="3"></line>
+  <line x1="175" y1="80" x2="105" y2="120" stroke="#7C3AED" stroke-width="3"></line>
+  <!-- vertical left -->
+  <line x1="105" y1="80" x2="105" y2="120" stroke="#7C3AED" stroke-width="4"></line>
+
+  <!-- answer slots -->
+  <rect x="60" y="185" width="35" height="25" rx="5" fill="#FFF7ED" stroke="#FB923C"></rect>
+  <rect x="110" y="185" width="35" height="25" rx="5" fill="#FFF7ED" stroke="#FB923C"></rect>
+  <rect x="160" y="185" width="35" height="25" rx="5" fill="#FFF7ED" stroke="#FB923C"></rect>
+</svg>

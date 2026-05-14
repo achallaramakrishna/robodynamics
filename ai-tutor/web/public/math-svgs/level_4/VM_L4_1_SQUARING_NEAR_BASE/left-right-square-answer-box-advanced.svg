@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F8FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D6E2FF" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#2563EB"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Build the answer in two parts</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">Near-base squares split into a left side and a right side.</text>
+  <rect x="84" y="150" width="280" height="140" rx="20" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="434" y="150" width="280" height="140" rx="20" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="224" y="188" fill="#1D4ED8" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Left side</text>
+  <text x="224" y="240" fill="#10213F" font-size="42" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">97 − 3 = 94</text>
+  <text x="574" y="188" fill="#C2410C" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Right side</text>
+  <text x="574" y="240" fill="#10213F" font-size="42" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">3² = 09</text>
+  <text x="400" y="348" fill="#0F172A" font-size="34" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">94 | 09 = 9409</text>
+</svg>

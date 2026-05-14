@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FFFBEB"/>
+  
+  <g id="letter_au">
+    <text x="180" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">औ</text>
+  </g>
+  
+  <g id="object_aurat">
+    <!-- Stylized Woman Figure -->
+    <circle cx="750" cy="420" r="60" fill="#FFE4D6"/>
+    <path d="M680 700C680 550 750 480 750 480S820 550 820 700H680Z" fill="#DB2777"/> <!-- Sari/Dress -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">औ से औरत</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">AU for Aurat (Woman)</text>
+</svg>

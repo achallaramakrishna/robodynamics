@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" width="360" height="220" font-family="Nunito,sans-serif">
+  <!-- Background -->
+  <rect width="360" height="220" rx="14" fill="#f0fdf4"/>
+  <!-- Title -->
+  <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Nikhilam — Deficit from Base 100</text>
+
+  <!-- BASE 100 label -->
+  <rect x="130" y="38" width="100" height="28" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="180" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Base = 100</text>
+
+  <!-- Number A: 97 -->
+  <text x="80" y="105" text-anchor="middle" font-size="32" font-weight="800" fill="#1e3a5f">97</text>
+  <line x1="80" y1="112" x2="80" y2="148" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="80" y="163" text-anchor="middle" font-size="15" fill="#ef4444" font-weight="700">−3</text>
+  <text x="80" y="180" text-anchor="middle" font-size="11" fill="#64748b">(deficit)</text>
+
+  <!-- Number B: 96 -->
+  <text x="280" y="105" text-anchor="middle" font-size="32" font-weight="800" fill="#1e3a5f">96</text>
+  <line x1="280" y1="112" x2="280" y2="148" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="280" y="163" text-anchor="middle" font-size="15" fill="#ef4444" font-weight="700">−4</text>
+  <text x="280" y="180" text-anchor="middle" font-size="11" fill="#64748b">(deficit)</text>
+
+  <!-- × symbol -->
+  <text x="180" y="108" text-anchor="middle" font-size="26" fill="#64748b" font-weight="700">×</text>
+
+  <!-- Arrow lines from 100 to numbers -->
+  <line x1="130" y1="52" x2="95" y2="85" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="230" y1="52" x2="265" y2="85" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Result box -->
+  <rect x="100" y="188" width="160" height="26" rx="6" fill="#166534" />
+  <text x="180" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="white">97 × 96 = 9312</text>
+
+  <!-- Formula hint -->
+  <text x="180" y="218" text-anchor="middle" font-size="10" fill="#64748b">(97−4) | (3×4) = 93 | 12</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#22c55e"/>
+    </marker>
+  </defs>
+</svg>

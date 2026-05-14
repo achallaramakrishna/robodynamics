@@ -4,70 +4,71 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 const levels = [
   {
     id: 1,
-    title: "Akshar Adventure",
-    hindiTitle: "अक्षर",
-    desc: "Public-ready alphabet journey with sounds, tracing, and joyful picture memory.",
-    topics: ["All core vowels", "Early consonant clusters", "Tracing and quick checks"],
-    badge: "Open Now",
+    title: "Swar Foundation",
+    hindiTitle: "स्वर · Vowels & Consonants",
+    desc: "Master 51 letters with sounds, tracing, and visual memory. Foundation of Hindi reading.",
+    topics: ["13 vowels (स्वर)", "36 consonants (व्यंजन)", "Letter tracing & speaking"],
+    badge: "Live ✅",
     color: "#f97316",
     icon: "अ",
   },
   {
     id: 2,
-    title: "Word Garden",
-    hindiTitle: "शब्द",
-    desc: "Vocabulary building through themes like fruits, family, body parts, and actions.",
-    topics: ["Theme words", "Everyday objects", "Word-picture recall"],
-    badge: "Next",
+    title: "Matra Mastery",
+    hindiTitle: "मात्रा · Vowel Modifiers",
+    desc: "Learn how vowels modify consonants. Essential for reading and writing real Hindi words.",
+    topics: ["8 vowel modifiers", "Consonant + matra combinations", "Word formation"],
+    badge: "Live ✅",
     color: "#10b981",
-    icon: "श",
+    icon: "ा",
   },
   {
     id: 3,
-    title: "Sentence Studio",
-    hindiTitle: "वाक्य",
-    desc: "Short Hindi sentences with bridge-language guidance and speaking confidence.",
-    topics: ["Simple grammar", "Speaking prompts", "Sentence practice"],
-    badge: "Planned",
+    title: "Conjunct Conquest",
+    hindiTitle: "संयुक्त · Consonant Clusters",
+    desc: "Decode consonant clusters and complex letter combinations in Hindi texts.",
+    topics: ["36 conjunct forms", "Halant combinations", "Recognition & writing"],
+    badge: "Live ✅",
     color: "#3b82f6",
-    icon: "व",
+    icon: "क्त",
   },
   {
     id: 4,
-    title: "Reading River",
-    hindiTitle: "पढ़ना",
-    desc: "Smooth reading, fluency, and simple comprehension passages.",
-    topics: ["Reading panels", "Meaning support", "Fluency growth"],
-    badge: "Planned",
+    title: "Consonant Academy",
+    hindiTitle: "बारखड़ी · Complete Grid",
+    desc: "Fluent reading through the Barakhadi grid—all consonants with every vowel mark.",
+    topics: ["Full Barakhadi grid (36x8=288)", "Rapid recognition", "Reading fluency"],
+    badge: "Live ✅",
     color: "#8b5cf6",
-    icon: "प",
+    icon: "क",
   },
   {
     id: 5,
-    title: "Writing Workshop",
-    hindiTitle: "लिखना",
-    desc: "Paragraphs, sentence building, and guided written expression.",
-    topics: ["Guided writing", "Creative prompts", "Feedback loops"],
-    badge: "Planned",
+    title: "Conversation Clinic",
+    hindiTitle: "बातचीत · Real Dialogues",
+    desc: "Speak & understand everyday Hindi with common phrases, cultural context, and confidence.",
+    topics: ["31 everyday sentences", "Greetings & politeness", "Real-life situations"],
+    badge: "Live ✅",
     color: "#ec4899",
-    icon: "ल",
+    icon: "नमस्ते",
   },
   {
     id: 6,
-    title: "Exam Edge",
-    hindiTitle: "परीक्षा",
-    desc: "Timed practice, review, and exam readiness once foundations are strong.",
-    topics: ["Readiness checks", "Mock format", "Revision support"],
-    badge: "Planned",
+    title: "Grammar Essentials",
+    hindiTitle: "व्याकरण · Complete Grammar",
+    desc: "🆕 Master nouns, verbs, adjectives, pronouns, and sentence construction. Ready for Hindi expressions!",
+    topics: ["Parts of speech", "Verb conjugation", "Sentence structures"],
+    badge: "New! 🎉",
     color: "#ef4444",
-    icon: "प",
+    icon: "व",
   },
 ];
 
 const promises = [
-  "Bridge-friendly Hindi learning for South Indian learners",
-  "Colourful visual anchors for every early literacy lesson",
-  "Tracing, listening, reading, and quick memory checks in one flow",
+  "Complete Hindi curriculum: Letters → Grammar → Real conversations",
+  "AI tutor adapts to your child's pace with spaced repetition",
+  "Interactive tracing, audio, and engaging visuals for every lesson",
+  "NEW: Grammar essentials (42 lessons) now live—master verbs, nouns, adjectives!",
 ];
 
 export default function VaaniHome() {
@@ -177,16 +178,16 @@ export default function VaaniHome() {
                 alignItems: "center",
                 borderRadius: 999,
                 padding: "10px 16px",
-                background: "rgba(255,255,255,0.72)",
-                border: "1px solid rgba(249,115,22,0.14)",
-                color: "#c2410c",
+                background: "rgba(239,68,68,0.08)",
+                border: "1px solid rgba(239,68,68,0.24)",
+                color: "#991b1b",
                 fontSize: 13,
                 fontWeight: 800,
                 marginBottom: 20,
               }}
             >
-              Public Launch Focus
-              <span style={{ color: "#0f766e" }}>Level 1 is ready to shine</span>
+              🎉 Complete Curriculum
+              <span style={{ color: "#0f766e" }}>All 6 levels now live!</span>
             </div>
 
             <h1
@@ -198,7 +199,7 @@ export default function VaaniHome() {
                 fontWeight: 900,
               }}
             >
-              Joyful Hindi literacy
+              From letters to grammar
               <br />
               <span
                 style={{
@@ -207,13 +208,12 @@ export default function VaaniHome() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                built for first-time learners.
+                Complete Hindi mastery
               </span>
             </h1>
 
             <p style={{ fontSize: 20, lineHeight: 1.65, color: "#556070", maxWidth: 760, margin: "0 0 28px" }}>
-              Vaani helps children see, hear, trace, and remember Hindi letters with bright visuals, supportive coaching,
-              and a gentle bridge for non-native learners.
+              Vaani is the complete Hindi AI tutor: Learn 51 letters, master word combinations, speak real sentences, and understand grammar rules. All with bright visuals, adaptive AI coaching, and spaced repetition.
             </p>
 
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 28 }}>
@@ -447,7 +447,7 @@ export default function VaaniHome() {
                   </div>
 
                   <Link
-                    href={isOpen ? "/level-1" : "/level-1"}
+                    href={`/level-${level.id}`}
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -461,7 +461,7 @@ export default function VaaniHome() {
                       background: isOpen ? `linear-gradient(135deg, ${level.color}, #fb7185)` : `${level.color}12`,
                     }}
                   >
-                    {isOpen ? "Open Level 1" : "See roadmap from Level 1"}
+                    {isOpen ? `Open Level ${level.id}` : `See Level ${level.id} roadmap`}
                   </Link>
                 </div>
               </div>

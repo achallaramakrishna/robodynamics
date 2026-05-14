@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230" width="380" height="230" font-family="Nunito,sans-serif">
+  <rect width="380" height="230" rx="14" fill="#f0fdf4"/>
+  <text x="190" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Nikhilam — Deficit from Base 1000</text>
+
+  <!-- BASE 1000 label -->
+  <rect x="140" y="36" width="100" height="28" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="190" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Base = 1000</text>
+
+  <!-- Number A: 997 -->
+  <text x="80" y="108" text-anchor="middle" font-size="30" font-weight="800" fill="#1e3a5f">997</text>
+  <line x1="80" y1="115" x2="80" y2="148" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="80" y="163" text-anchor="middle" font-size="15" fill="#ef4444" font-weight="700">−3</text>
+  <text x="80" y="178" text-anchor="middle" font-size="11" fill="#64748b">(deficit)</text>
+
+  <!-- Number B: 994 -->
+  <text x="300" y="108" text-anchor="middle" font-size="30" font-weight="800" fill="#1e3a5f">994</text>
+  <line x1="300" y1="115" x2="300" y2="148" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="300" y="163" text-anchor="middle" font-size="15" fill="#ef4444" font-weight="700">−6</text>
+  <text x="300" y="178" text-anchor="middle" font-size="11" fill="#64748b">(deficit)</text>
+
+  <!-- × symbol -->
+  <text x="190" y="112" text-anchor="middle" font-size="26" fill="#64748b" font-weight="700">×</text>
+
+  <!-- Arrows from 1000 to numbers -->
+  <line x1="140" y1="50" x2="100" y2="88" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="240" y1="50" x2="280" y2="88" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Formula steps -->
+  <text x="190" y="198" text-anchor="middle" font-size="11" fill="#374151">Cross: 997 − 6 = <tspan font-weight="700" fill="#1d4ed8">991</tspan>  |  Deficits: 3 × 6 = <tspan font-weight="700" fill="#1d4ed8">018</tspan></text>
+
+  <!-- Result box -->
+  <rect x="110" y="206" width="160" height="20" rx="6" fill="#166534"/>
+  <text x="190" y="220" text-anchor="middle" font-size="12" font-weight="700" fill="white">997 × 994 = 991 018</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#22c55e"/>
+    </marker>
+  </defs>
+</svg>

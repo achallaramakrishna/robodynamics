@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#f8faff"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="#ffffff" stroke="#dce5ff" stroke-width="2"/>
+
+  <text x="48" y="58" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#64748b">VEDIKA RATIO SHORTCUTS</text>
+  <text x="400" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#2b3f98">Equivalent Ratios</text>
+  <text x="400" y="106" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5e6b85">Multiply or divide both terms by the same number to keep the ratio unchanged.</text>
+
+  <rect x="76" y="148" width="196" height="116" rx="22" fill="#eef3ff" stroke="#3555b4" stroke-width="3"/>
+  <text x="174" y="186" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#3555b4">Start</text>
+  <text x="174" y="232" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="34" font-weight="700" fill="#1f2440">3 : 4</text>
+
+  <rect x="302" y="148" width="196" height="116" rx="22" fill="#fff4e2" stroke="#d58a00" stroke-width="3"/>
+  <text x="400" y="186" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#9a6200">Scale by 2</text>
+  <text x="400" y="232" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="34" font-weight="700" fill="#1f2440">6 : 8</text>
+
+  <rect x="528" y="148" width="196" height="116" rx="22" fill="#ecfdf5" stroke="#10b981" stroke-width="3"/>
+  <text x="626" y="186" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#166534">Simplify by 5</text>
+  <text x="626" y="232" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="34" font-weight="700" fill="#1f2440">15 : 20 -> 3 : 4</text>
+
+  <path d="M272 206 H300" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="300,206 288,199 288,213" fill="#94a3b8"/>
+  <path d="M498 206 H526" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="526,206 514,199 514,213" fill="#94a3b8"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L1 Number Bridge - Crystal Bridge Animation</title>
+  
+  <rect width="800" height="600" fill="#ECFDF5" />
+  
+  {/* River */}
+  <rect x="0" y="250" width="800" height="100" fill="#BFDBFE" />
+  <path d="M0,250 Q400,270 800,250" stroke="#60A5FA" stroke-width="2" fill="none">
+    <animate attributeName="d" values="M0,250 Q400,270 800,250; M0,250 Q400,230 800,250; M0,250 Q400,270 800,250" dur="3s" repeatCount="indefinite" />
+  </path>
+
+  {/* Stones */}
+  <g id="bridge-stones">
+    <rect x="50" y="240" width="60" height="120" rx="10" fill="#94A3B8" stroke="#475569" stroke-width="2" />
+    <text x="80" y="305" text-anchor="middle" fill="white" font-size="20" font-weight="900">4</text>
+
+    <rect x="150" y="240" width="60" height="120" rx="10" fill="#94A3B8" stroke="#475569" stroke-width="2" />
+    <text x="180" y="305" text-anchor="middle" fill="white" font-size="20" font-weight="900">7</text>
+
+    <rect x="250" y="240" width="60" height="120" rx="10" fill="#94A3B8" stroke="#475569" stroke-width="2" />
+    <text x="280" y="305" text-anchor="middle" fill="white" font-size="20" font-weight="900">10</text>
+
+    <rect x="350" y="240" width="60" height="120" rx="10" fill="#94A3B8" stroke="#475569" stroke-width="2" />
+    <text x="380" y="305" text-anchor="middle" fill="white" font-size="20" font-weight="900">13</text>
+
+    {/* The Target Slot */}
+    <rect id="target-stone" x="450" y="240" width="60" height="120" rx="10" fill="white" stroke="#38BDF8" stroke-width="3" stroke-dasharray="8,4" />
+    <text x="480" y="305" text-anchor="middle" fill="#38BDF8" font-size="24" font-weight="900" opacity="0.5">?</text>
+  </g>
+
+  <g id="sparkle-water" opacity="0">
+     <circle cx="480" cy="300" r="40" fill="none" stroke="#FACC15" stroke-width="5" stroke-dasharray="10,5">
+        <animateTransform attributeName="transform" type="rotate" from="0 480 300" to="360 480 300" dur="2s" repeatCount="indefinite" />
+     </circle>
+  </g>
+
+  <text x="400" y="100" text-anchor="middle" font-size="28" font-weight="900" fill="#1E3A8A">Restore the Crystal Bridge!</text>
+  <text x="400" y="140" text-anchor="middle" font-size="18" font-weight="700" fill="#3B82F6">What is the next secret stone code?</text>
+</svg>

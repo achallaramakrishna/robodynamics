@@ -1,0 +1,52 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L4 Probability Spinner - Campus Chance Arena</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Spinner Station */}
+  <g id="spinner-station" transform="translate(400, 300)">
+     {/* Outer Dial */}
+     <circle r="200" fill="#1E293B" stroke="#334155" stroke-width="8" />
+     <circle r="180" fill="#0F172A" />
+
+     {/* Sectors (Probability distribution) */}
+     <g id="sectors">
+        {/* Sector 1 (Blue) */}
+        <path d="M0,0 L0,-180 A180,180 0 0,1 127,-127 Z" fill="#3B82F6" stroke="white" stroke-width="1" />
+        {/* Sector 2 (Pink) */}
+        <path d="M0,0 L127,-127 A180,180 0 0,1 127,127 Z" fill="#F472B6" />
+        {/* Sector 3 (Amber) */}
+        <path d="M0,0 L127,127 A180,180 0 0,1 -127,127 Z" fill="#FACC15" />
+        {/* Sector 4 (Green) */}
+        <path d="M0,0 L-127,127 A180,180 0 0,1 0,-180 Z" fill="#10B981" />
+     </g>
+
+     {/* Center Pivot */}
+     <circle r="20" fill="#1E293B" stroke="white" stroke-width="2" />
+     
+     {/* Selector Needle (Animated rotation) */}
+     <g id="needle">
+        <path d="M-5,0 L0,-160 L5,0 Z" fill="white" />
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite" />
+     </g>
+  </g>
+
+  {/* Probability Stat Cards */}
+  <g transform="translate(50, 80)">
+     <rect width="180" height="100" rx="15" fill="#1E293B" stroke="#60A5FA" />
+     <text x="90" y="30" text-anchor="middle" fill="#60A5FA" font-size="12" font-weight="900">BLUE CHANCE</text>
+     <text x="90" y="70" text-anchor="middle" fill="white" font-size="32" font-weight="900">1 / 8</text>
+  </g>
+
+  <g transform="translate(570, 80)">
+     <rect width="180" height="100" rx="15" fill="#1E293B" stroke="#F472B6" />
+     <text x="90" y="30" text-anchor="middle" fill="#F472B6" font-size="12" font-weight="900">PINK CHANCE</text>
+     <text x="90" y="70" text-anchor="middle" fill="white" font-size="32" font-weight="900">1 / 4</text>
+  </g>
+
+  {/* Mission Control Card */}
+  <rect x="250" y="500" width="300" height="60" rx="30" fill="#3B82F6" />
+  <text x="400" y="535" text-anchor="middle" fill="white" font-size="18" font-weight="900">SPIN TO UNLOCK GATE</text>
+
+  <text x="400" y="50" text-anchor="middle" font-size="28" font-weight="900" fill="white">Probability Selection Arena</text>
+</svg>

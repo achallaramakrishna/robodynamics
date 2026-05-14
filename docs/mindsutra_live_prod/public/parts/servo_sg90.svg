@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+  <!-- body -->
+  <rect x="30" y="40" width="160" height="110" rx="10" fill="#f57f17"/>
+  <rect x="45" y="55" width="130" height="80" rx="5" fill="#e65100"/>
+  <!-- gear output -->
+  <circle cx="110" cy="95" r="28" fill="#bbb"/>
+  <circle cx="110" cy="95" r="18" fill="#888"/>
+  <circle cx="110" cy="95" r="8" fill="#555"/>
+  <!-- horn -->
+  <rect x="106" y="67" width="8" height="40" rx="4" fill="#ddd" transform="rotate(-30,110,95)"/>
+  <!-- mounting tabs -->
+  <rect x="10" y="70" width="25" height="35" rx="5" fill="#f57f17"/>
+  <circle cx="22" cy="87" r="6" fill="#555"/>
+  <rect x="185" y="70" width="25" height="35" rx="5" fill="#f57f17"/>
+  <circle cx="198" cy="87" r="6" fill="#555"/>
+  <!-- wires -->
+  <line x1="70" y1="150" x2="70" y2="200" stroke="#cc0000" stroke-width="4"/>
+  <line x1="90" y1="150" x2="90" y2="200" stroke="#cc0000" stroke-width="4"/>
+  <line x1="110" y1="150" x2="110" y2="200" stroke="#f9a825" stroke-width="4"/>
+  <!-- labels -->
+  <text x="70" y="215" font-family="monospace" font-size="9" fill="#c62828" text-anchor="middle">VCC</text>
+  <text x="90" y="215" font-family="monospace" font-size="9" fill="#1565c0" text-anchor="middle">GND</text>
+  <text x="110" y="215" font-family="monospace" font-size="9" fill="#555" text-anchor="middle">SIG</text>
+  <text x="110" y="28" font-family="Arial" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">Servo Motor SG90</text>
+  <text x="110" y="197" font-family="Arial" font-size="9" fill="#888" text-anchor="middle"></text>
+</svg>

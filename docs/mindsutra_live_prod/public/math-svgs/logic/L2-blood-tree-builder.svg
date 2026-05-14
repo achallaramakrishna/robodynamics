@@ -1,0 +1,62 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L2 Blood Tree Builder - Royal Logic</title>
+  
+  <rect width="800" height="600" fill="#F8FAFC" />
+  
+  {/* Royal Header */}
+  <path d="M0,0 L800,0 L800,60 L400,100 L0,60 Z" fill="#1E3A8A" />
+  <text x="400" y="45" text-anchor="middle" fill="#FACC15" font-size="24" font-weight="900">REBUILD THE ROYAL FAMILY TREE</text>
+
+  {/* Tree Grid */}
+  <g id="tree-grid" stroke="#94A3B8" stroke-width="2" stroke-dasharray="5,5">
+     {/* Generation 1 */}
+     <rect id="slot-g1-1" x="350" y="120" width="100" height="60" rx="10" fill="white" />
+     
+     {/* Generation 2 */}
+     <rect id="slot-g2-1" x="200" y="250" width="100" height="60" rx="10" fill="white" />
+     <rect id="slot-g2-2" x="500" y="250" width="100" height="60" rx="10" fill="white" />
+
+     {/* Generation 3 */}
+     <rect id="slot-g3-1" x="100" y="380" width="100" height="60" rx="10" fill="white" />
+     <rect id="slot-g3-2" x="300" y="380" width="100" height="60" rx="10" fill="white" />
+     <rect id="slot-g3-3" x="400" y="380" width="100" height="60" rx="10" fill="white" />
+     <rect id="slot-g3-4" x="600" y="380" width="100" height="60" rx="10" fill="white" />
+  </g>
+
+  {/* Connecting Lines */}
+  <path d="M400,180 L400,210 L250,210 L250,250 M400,210 L550,210 L550,250" stroke="#1E3A8A" stroke-width="3" fill="none" opacity="0.3" />
+  <path d="M250,310 L250,340 L150,340 L150,380 M250,340 L350,340 L350,380" stroke="#1E3A8A" stroke-width="3" fill="none" opacity="0.3" />
+
+  {/* Draggable Person Cards Container */}
+  <rect x="0" y="480" width="800" height="120" fill="#1E293B" />
+  <g id="draggables">
+     <g id="drag-king" transform="translate(100, 500)" cursor="pointer">
+        <circle r="30" fill="#FACC15" />
+        <path d="M-10,-10 L0,-25 L10,-10" fill="#991B1B" />
+        <text y="45" text-anchor="middle" fill="white" font-size="12" font-weight="900">KING</text>
+     </g>
+     <g id="drag-prince" transform="translate(250, 500)" cursor="pointer">
+        <circle r="30" fill="#38BDF8" />
+        <text y="45" text-anchor="middle" fill="white" font-size="12" font-weight="900">PRINCE</text>
+     </g>
+     <g id="drag-princess" transform="translate(400, 500)" cursor="pointer">
+        <circle r="30" fill="#F472B6" />
+        <text y="45" text-anchor="middle" fill="white" font-size="12" font-weight="900">PRINCESS</text>
+     </g>
+  </g>
+
+  {/* Question Panel */}
+  <g id="question-card" transform="translate(550, 100)">
+     <rect width="220" height="150" rx="20" fill="white" stroke="#1E3A8A" stroke-width="2" />
+     <text x="110" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#1E3A8A">MISSION BRIEF</text>
+     <text x="20" y="60" font-size="12" fill="#475569">Anu is Rahul's sister.</text>
+     <text x="20" y="80" font-size="12" fill="#475569">Rahul is Meena's son.</text>
+     <text x="20" y="110" font-size="12" font-weight="900" fill="#1E3A8A">How is Anu related</text>
+     <text x="20" y="130" font-size="12" font-weight="900" fill="#1E3A8A">to Meena?</text>
+  </g>
+
+  <g id="feedback-medal" opacity="0">
+     <circle cx="400" cy="300" r="50" fill="#FACC15" stroke="#92400E" stroke-width="4" />
+     <text x="400" y="310" text-anchor="middle" fill="#92400E" font-size="14" font-weight="900">MASTER</text>
+  </g>
+</svg>

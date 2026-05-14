@@ -1,0 +1,112 @@
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .phase-label { font-size: 14px; font-weight: bold; fill: #2c3e50; }
+      .text { font-size: 10px; fill: #333; }
+      .chromosome { stroke: #e74c3c; fill: #fadbd8; stroke-width: 2; }
+      .spindle { stroke: #3498db; stroke-width: 1.5; }
+      .border { stroke: #95a5a6; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="250" y="25" class="phase-label" text-anchor="middle" font-size="18">MITOSIS</text>
+
+  <!-- PROPHASE -->
+  <g id="prophase">
+    <rect x="10" y="50" width="110" height="130" class="border" fill="#fff" rx="5"/>
+    <circle cx="65" cy="95" r="40" stroke="#95a5a6" stroke-width="1" fill="none"/>
+
+    <!-- Chromosomes -->
+    <path d="M 45 75 Q 50 85 55 75" class="chromosome"/>
+    <path d="M 55 75 Q 60 85 65 75" class="chromosome"/>
+    <path d="M 65 75 Q 70 85 75 75" class="chromosome"/>
+    <path d="M 75 75 Q 80 85 85 75" class="chromosome"/>
+    <path d="M 50 100 Q 55 110 60 100" class="chromosome"/>
+    <path d="M 60 100 Q 65 110 70 100" class="chromosome"/>
+
+    <!-- Centrioles -->
+    <circle cx="35" cy="110" r="3" fill="#27ae60"/>
+    <circle cx="95" cy="110" r="3" fill="#27ae60"/>
+
+    <text x="65" y="165" class="phase-label" text-anchor="middle" font-size="12">Prophase</text>
+    <text x="65" y="180" class="text" text-anchor="middle">Chromosomes condense</text>
+  </g>
+
+  <!-- METAPHASE -->
+  <g id="metaphase">
+    <rect x="135" y="50" width="110" height="130" class="border" fill="#fff" rx="5"/>
+    <circle cx="190" cy="95" r="40" stroke="#95a5a6" stroke-width="1" fill="none"/>
+
+    <!-- Spindle fibers -->
+    <line x1="160" y1="70" x2="220" y2="70" class="spindle"/>
+    <line x1="160" y1="120" x2="220" y2="120" class="spindle"/>
+
+    <!-- Chromosomes at metaphase plate -->
+    <path d="M 185 110 Q 190 115 195 110" class="chromosome" stroke-width="2.5"/>
+    <path d="M 185 120 Q 190 125 195 120" class="chromosome" stroke-width="2.5"/>
+    <path d="M 185 100 Q 190 105 195 100" class="chromosome" stroke-width="2.5"/>
+
+    <text x="190" y="165" class="phase-label" text-anchor="middle" font-size="12">Metaphase</text>
+    <text x="190" y="180" class="text" text-anchor="middle">Chromosomes aligned</text>
+  </g>
+
+  <!-- ANAPHASE -->
+  <g id="anaphase">
+    <rect x="260" y="50" width="110" height="130" class="border" fill="#fff" rx="5"/>
+    <circle cx="315" cy="95" r="40" stroke="#95a5a6" stroke-width="1" fill="none"/>
+
+    <!-- Spindle fibers -->
+    <line x1="290" y1="75" x2="290" y2="110" class="spindle"/>
+    <line x1="340" y1="75" x2="340" y2="110" class="spindle"/>
+
+    <!-- Sister chromatids separating -->
+    <path d="M 285 80 L 285 100" class="chromosome" stroke-width="2.5"/>
+    <path d="M 345 80 L 345 100" class="chromosome" stroke-width="2.5"/>
+    <path d="M 290 85 L 290 105" class="chromosome" stroke-width="2.5"/>
+    <path d="M 340 85 L 340 105" class="chromosome" stroke-width="2.5"/>
+
+    <text x="315" y="165" class="phase-label" text-anchor="middle" font-size="12">Anaphase</text>
+    <text x="315" y="180" class="text" text-anchor="middle">Chromatids separate</text>
+  </g>
+
+  <!-- TELOPHASE -->
+  <g id="telophase">
+    <rect x="385" y="50" width="110" height="130" class="border" fill="#fff" rx="5"/>
+
+    <!-- Left nucleus -->
+    <circle cx="410" cy="85" r="20" stroke="#95a5a6" stroke-width="1" fill="none"/>
+    <path d="M 405 85 Q 410 90 415 85" class="chromosome" stroke-width="1.5"/>
+    <path d="M 405 92 Q 410 97 415 92" class="chromosome" stroke-width="1.5"/>
+
+    <!-- Right nucleus -->
+    <circle cx="460" cy="85" r="20" stroke="#95a5a6" stroke-width="1" fill="none"/>
+    <path d="M 455 85 Q 460 90 465 85" class="chromosome" stroke-width="1.5"/>
+    <path d="M 455 92 Q 460 97 465 92" class="chromosome" stroke-width="1.5"/>
+
+    <text x="440" y="165" class="phase-label" text-anchor="middle" font-size="12">Telophase</text>
+    <text x="440" y="180" class="text" text-anchor="middle">Nuclear envelope forms</text>
+  </g>
+
+  <!-- Arrow between phases -->
+  <path d="M 125 115 L 135 115" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 250 115 L 260 115" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 375 115 L 385 115" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#95a5a6"/>
+    </marker>
+  </defs>
+
+  <!-- Cytokinesis info -->
+  <rect x="20" y="220" width="460" height="60" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="3"/>
+  <text x="30" y="240" class="phase-label" font-size="12">Cytokinesis (Cytoplasm Division)</text>
+  <text x="30" y="260" class="text">• Cleavage furrow forms (animal cells)</text>
+  <text x="30" y="275" class="text">• Cell plate forms (plant cells)</text>
+
+  <!-- Result -->
+  <rect x="20" y="305" width="460" height="50" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" rx="3"/>
+  <text x="30" y="330" class="phase-label" text-anchor="start" font-size="13">Result: TWO IDENTICAL DIPLOID DAUGHTER CELLS (2n)</text>
+</svg>

@@ -82,25 +82,46 @@ export const VM_L5_1_LESSON: MindSutraLessonPayload = {
     },
     {
       id: "guided_practice", label: "Guided Practice",
-      tutorText: "Find √5329. Pairs: 53|29. Last digit 9 → root ends 3 or 7.",
+      tutorText: "Find √5329. Pairs: 53|29. First lock the ones digit from the last-digit rule.",
       board: {
         type: "practice_board",
         data: {
           expression: "√5329",
-          prompt: "Left pair 53: floor(√53)=7. Candidates: 73 or 77.",
+          prompt: "Last digit 9 means the root must end in 3 or 7. Start there.",
           assetPath: "/math-svgs/level_5/VM_L5_1_SQUARE_ROOTS/digit-grouping-bracket-pairs.svg",
         },
       },
       explanation: { title: "Steps", body: "73²=5329. Answer: 73." },
       practice: {
-        mode: "numeric",
-        prompt: "√5329 = ?",
-        answer: 73,
+        mode: "mcq",
+        prompt: "What ones digit must the root of 5329 end with?",
+        answer: 3,
+        options: ["2", "3", "7", "9"],
         hints: [
-          "Last digit 9 → root ends 3 or 7",
-          "floor(√53) = 7 → candidates 73 or 77",
-          "73² = 5329 ✓",
+          "A square ending in 9 can come from 3 or 7",
+          "The left pair 53 gives tens digit 7, so the real candidates are 73 or 77",
+          "73² = 5329, so the ones digit is 3",
         ],
+        remediation: {
+          prompt: "Checkpoint: which two ones digits are possible when a square ends in 9?",
+          answer: "3 or 7",
+          options: ["1 or 9", "2 or 8", "3 or 7", "4 or 6"],
+          hints: [
+            "Use the square-ending map",
+            "3² and 7² both end in 9",
+            "So the possible ones digits are 3 or 7",
+          ],
+        },
+        challenge: {
+          prompt: "Transfer check: after fixing ones digit 3 and tens digit 7, what full root do you get for √5329?",
+          answer: 73,
+          options: ["63", "73", "77", "83"],
+          hints: [
+            "The left pair 53 gives tens digit 7",
+            "The correct ones digit is 3",
+            "So the full root is 73",
+          ],
+        },
       },
       actions: [
         { id: "check", label: "Check answer", primary: true },
@@ -109,24 +130,45 @@ export const VM_L5_1_LESSON: MindSutraLessonPayload = {
     },
     {
       id: "challenge", label: "Challenge",
-      tutorText: "Find √9604. Work through both steps.",
+      tutorText: "Find √9604. Again, first choose the ones digit from the last-digit rule.",
       board: {
         type: "practice_board",
         data: {
           expression: "√9604",
-          prompt: "Pairs: 96|04. Last digit 4 → ends 2 or 8.",
+          prompt: "Pairs: 96|04. Last digit 4 means the root ends in 2 or 8.",
           assetPath: "/math-svgs/level_5/VM_L5_1_SQUARE_ROOTS/root-answer-lane.svg",
         },
       },
       practice: {
-        mode: "numeric",
-        prompt: "√9604 = ?",
-        answer: 98,
+        mode: "mcq",
+        prompt: "What ones digit must the root of 9604 end with?",
+        answer: 8,
+        options: ["2", "4", "6", "8"],
         hints: [
-          "Last digit 4 → root ends 2 or 8",
-          "floor(√96) = 9 → candidates 92 or 98",
-          "98² = 9604 ✓",
+          "A square ending in 4 can come from 2 or 8",
+          "The left pair 96 gives tens digit 9, so the candidates are 92 or 98",
+          "98² = 9604, so the ones digit is 8",
         ],
+        remediation: {
+          prompt: "Checkpoint: which two ones digits are possible when a square ends in 4?",
+          answer: "2 or 8",
+          options: ["1 or 9", "2 or 8", "3 or 7", "4 or 6"],
+          hints: [
+            "Use the square-ending map",
+            "2² and 8² both end in 4",
+            "So the possible ones digits are 2 or 8",
+          ],
+        },
+        challenge: {
+          prompt: "Transfer check: after fixing ones digit 8 and tens digit 9, what full root do you get for √9604?",
+          answer: 98,
+          options: ["92", "94", "98", "99"],
+          hints: [
+            "The left pair 96 gives tens digit 9",
+            "The correct ones digit is 8",
+            "So the full root is 98",
+          ],
+        },
       },
       actions: [
         { id: "check", label: "Check answer", primary: true },
@@ -268,25 +310,46 @@ export const VM_L5_2_LESSON: MindSutraLessonPayload = {
     },
     {
       id: "guided_practice", label: "Guided Practice",
-      tutorText: "Find ∛19683. Triple: 19|683. Last digit 3 → root ends ?",
+      tutorText: "Find ∛19683. Triple: 19|683. First lock the ones digit from the cube-ending map.",
       board: {
         type: "practice_board",
         data: {
           expression: "∛19683",
-          prompt: "Last digit 3 → root ends 7 (since 7³=343 ends in 3). Left triple 19 → ?",
+          prompt: "Last digit 3 points to one exact root ending. Start there.",
           assetPath: "/math-svgs/level_5/VM_L5_2_CUBE_ROOTS/root-digit-selector.svg",
         },
       },
       explanation: { title: "Steps", body: "Left 19: 2³=8≤19<3³=27 → tens=2. Root ends 7. Answer: 27." },
       practice: {
-        mode: "numeric",
-        prompt: "∛19683 = ?",
-        answer: 27,
+        mode: "mcq",
+        prompt: "What ones digit must the root of 19683 end with?",
+        answer: 7,
+        options: ["3", "7", "8", "9"],
         hints: [
-          "Last digit 3 → root ends 7",
-          "Left triple 19: floor(∛19) = 2",
-          "Answer: 27",
+          "Cube endings are unique, unlike square endings",
+          "A cube ending in 3 comes from a root ending in 7",
+          "Then the left triple 19 gives tens digit 2, so the full root is 27",
         ],
+        remediation: {
+          prompt: "Checkpoint: which root ending gives a cube ending in 3?",
+          answer: 7,
+          options: ["2", "3", "7", "8"],
+          hints: [
+            "Think of the swap pair in the cube map",
+            "3 and 7 swap roles in cube endings",
+            "So a cube ending in 3 comes from a root ending in 7",
+          ],
+        },
+        challenge: {
+          prompt: "Transfer check: after fixing the ones digit 7, what full root do you get for ∛19683?",
+          answer: 27,
+          options: ["17", "23", "27", "37"],
+          hints: [
+            "The left triple is 19",
+            "2³=8≤19<3³=27, so the tens digit is 2",
+            "Combine tens 2 with ones 7 to get 27",
+          ],
+        },
       },
       actions: [
         { id: "check", label: "Check answer", primary: true },
@@ -295,24 +358,45 @@ export const VM_L5_2_LESSON: MindSutraLessonPayload = {
     },
     {
       id: "challenge", label: "Challenge",
-      tutorText: "Find ∛54872. Triple: 54|872.",
+      tutorText: "Find ∛54872. Triple: 54|872. Again, begin with the unique ones digit.",
       board: {
         type: "practice_board",
         data: {
           expression: "∛54872",
-          prompt: "Last digit 2 → root ends 8. Left triple 54 → floor(∛54) = ?",
+          prompt: "Last digit 2 points to a unique root ending. Then inspect the left triple.",
           assetPath: "/math-svgs/level_5/VM_L5_2_CUBE_ROOTS/cube-root-inspection-board.svg",
         },
       },
       practice: {
-        mode: "numeric",
-        prompt: "∛54872 = ?",
-        answer: 38,
+        mode: "mcq",
+        prompt: "What ones digit must the root of 54872 end with?",
+        answer: 8,
+        options: ["2", "4", "6", "8"],
         hints: [
-          "Last digit 2 → root ends 8",
-          "3³=27≤54<4³=64 → tens digit = 3",
-          "Answer: 38",
+          "In the cube map, 2 and 8 swap roles",
+          "So a cube ending in 2 comes from a root ending in 8",
+          "Then the left triple 54 gives tens digit 3, so the full root is 38",
         ],
+        remediation: {
+          prompt: "Checkpoint: which root ending gives a cube ending in 2?",
+          answer: 8,
+          options: ["2", "5", "7", "8"],
+          hints: [
+            "Use the swapped cube-ending pair",
+            "2 and 8 map to each other in cube endings",
+            "So the root ending is 8",
+          ],
+        },
+        challenge: {
+          prompt: "Transfer check: after fixing ones digit 8, what full root do you get for ∛54872?",
+          answer: 38,
+          options: ["28", "34", "38", "48"],
+          hints: [
+            "The left triple is 54",
+            "3³=27≤54<4³=64, so the tens digit is 3",
+            "Combine tens 3 with ones 8 to get 38",
+          ],
+        },
       },
       actions: [
         { id: "check", label: "Check answer", primary: true },
@@ -844,19 +928,40 @@ export const VM_L5_5_LESSON: MindSutraLessonPayload = {
         type: "practice_board",
         data: {
           expression: "1112 × 1111",
-          prompt: "All multipliers are 1 — sums are just digit counts per column.",
+          prompt: "All multipliers are 1 — first identify the middle band before you read the full answer.",
           assetPath: "/math-svgs/level_5/VM_L5_5_CRISS_CROSS_4DIG/answer-slot-series-7.svg",
         },
       },
       explanation: { title: "Steps", body: "C1:2, C2:1+2=3, C3:1+1+2=4, C4:1+1+1+2=5, C5:1+1+1=3, C6:1+1=2, C7:1. Answer: 1235432." },
       practice: {
-        mode: "numeric",
-        prompt: "Solve: 1112 × 1111",
-        answer: 1235432,
+        mode: "mcq",
+        prompt: "What is the middle band value C4 for 1112 × 1111?",
+        answer: 5,
+        options: ["4", "5", "6", "8"],
         hints: [
           "C4 = 1+1+1+2 = 5 (no carry)",
-          "Read columns: 1,2,3,5,4,3,2 → 1235432",
+          "Once C4 is fixed, the full answer reads 1,2,3,5,4,3,2 → 1235432",
         ],
+        remediation: {
+          prompt: "Small step first: how many terms are there in the middle band for a 4-digit criss-cross problem?",
+          answer: 4,
+          options: ["2", "3", "4", "5"],
+          hints: [
+            "The pattern grows as 1, 2, 3, 4, 3, 2, 1",
+            "The middle band is the widest band",
+            "So the middle band always has 4 terms",
+          ],
+        },
+        challenge: {
+          prompt: "Transfer check: after C4 = 5, what full answer do you read for 1112 × 1111?",
+          answer: 1235432,
+          options: ["1234532", "1235432", "1235542", "1245432"],
+          hints: [
+            "Read the bands from left to right after reversing the right-to-left totals",
+            "The band totals are 2, 3, 4, 5, 3, 2, 1 from right",
+            "So the answer becomes 1, 2, 3, 5, 4, 3, 2",
+          ],
+        },
       },
       actions: [
         { id: "check", label: "Check answer", primary: true },

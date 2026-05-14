@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <rect width="800" height="600" rx="36" fill="url(#default-grad)" />
+  <defs>
+    <linearGradient id="default-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6a11cb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2575fc;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="50" y="50" width="700" height="500" rx="28" fill="#ffffff" fill-opacity="0.95" />
+  <text x="400" y="280" font-family="'Segoe UI Emoji', sans-serif" font-size="100" text-anchor="middle">📖</text>
+  <text x="400" y="400" font-family="system-ui, sans-serif" font-weight="900" font-size="42" fill="#1e293b" text-anchor="middle">ಕಾವೇರಿ ಕನ್ನಡ ತರಬೇತಿ 🐘</text>
+  <text x="400" y="450" font-family="system-ui, sans-serif" font-weight="600" font-size="20" fill="#64748b" text-anchor="middle">Kaveri Literacy Academy</text>
+</svg>

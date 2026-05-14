@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" width="200" height="180">
+  <!-- PCB -->
+  <rect x="20" y="30" width="160" height="100" rx="6" fill="#1b5e20"/>
+  <!-- IR emitter (clear) -->
+  <circle cx="70" cy="80" r="18" fill="#ddd" opacity="0.9"/>
+  <circle cx="70" cy="80" r="12" fill="#eee"/>
+  <!-- IR receiver (dark) -->
+  <circle cx="130" cy="80" r="18" fill="#222"/>
+  <circle cx="130" cy="80" r="12" fill="#111"/>
+  <!-- potentiometer -->
+  <circle cx="100" cy="55" r="10" fill="#555"/>
+  <circle cx="100" cy="55" r="5" fill="#888"/>
+  <!-- pins -->
+  <rect x="55" y="130" width="10" height="25" rx="2" fill="#bbb"/>
+  <rect x="90" y="130" width="10" height="25" rx="2" fill="#bbb"/>
+  <rect x="125" y="130" width="10" height="25" rx="2" fill="#bbb"/>
+  <text x="60" y="165" font-family="monospace" font-size="9" fill="#c62828" text-anchor="middle">VCC</text>
+  <text x="95" y="165" font-family="monospace" font-size="9" fill="#1565c0" text-anchor="middle">GND</text>
+  <text x="130" y="165" font-family="monospace" font-size="9" fill="#333" text-anchor="middle">OUT</text>
+  <text x="100" y="20" font-family="Arial" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">IR Obstacle Sensor</text>
+</svg>

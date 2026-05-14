@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200" width="380" height="200" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0F1C"/><stop offset="100%" stop-color="#060D1A"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="380" height="200" fill="url(#bg)" rx="12"/>
+  <rect width="380" height="200" fill="none" stroke="#1E293B" stroke-width="1.5" rx="12"/>
+
+  <text x="190" y="22" font-size="11" font-weight="800" fill="#F59E0B" text-anchor="middle" letter-spacing="1">DEVIATION FROM 100</text>
+
+  <!-- Example: 97 and 103 -->
+  <!-- Base 100 line -->
+  <rect x="150" y="50" width="80" height="50" rx="10" fill="#F59E0B18" stroke="#F59E0B" stroke-width="2.5" filter="url(#glow)"/>
+  <text x="190" y="71" font-size="11" fill="#F59E0B" text-anchor="middle" font-weight="700">BASE</text>
+  <text x="190" y="89" font-size="20" font-weight="900" fill="#F8FAFC" text-anchor="middle">100</text>
+
+  <!-- 97 on left -->
+  <rect x="40" y="58" width="70" height="34" rx="8" fill="#1E3A2F" stroke="#22C55E" stroke-width="2"/>
+  <text x="75" y="80" font-size="20" font-weight="900" fill="#4ADE80" text-anchor="middle">97</text>
+  <!-- Arrow from 97 to 100 -->
+  <line x1="112" y1="75" x2="148" y2="75" stroke="#EF4444" stroke-width="2"/>
+  <polygon points="146,70 154,75 146,80" fill="#EF4444"/>
+  <!-- Deficit tag -->
+  <rect x="95" y="55" width="42" height="16" rx="5" fill="#EF444420" stroke="#EF444460"/>
+  <text x="116" y="67" font-size="9" fill="#EF4444" text-anchor="middle" font-weight="800">−3</text>
+  <text x="75" y="104" font-size="9" fill="#EF4444" text-anchor="middle">deficit</text>
+
+  <!-- 103 on right -->
+  <rect x="270" y="58" width="70" height="34" rx="8" fill="#1E2A3F" stroke="#3B82F6" stroke-width="2"/>
+  <text x="305" y="80" font-size="20" font-weight="900" fill="#60A5FA" text-anchor="middle">103</text>
+  <!-- Arrow from 100 to 103 -->
+  <line x1="232" y1="75" x2="268" y2="75" stroke="#3B82F6" stroke-width="2"/>
+  <polygon points="266,70 274,75 266,80" fill="#3B82F6"/>
+  <!-- Surplus tag -->
+  <rect x="233" y="55" width="38" height="16" rx="5" fill="#3B82F620" stroke="#3B82F660"/>
+  <text x="252" y="67" font-size="9" fill="#60A5FA" text-anchor="middle" font-weight="800">+3</text>
+  <text x="305" y="104" font-size="9" fill="#60A5FA" text-anchor="middle">surplus</text>
+
+  <!-- Separator -->
+  <line x1="30" y1="118" x2="350" y2="118" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Formula rows -->
+  <text x="190" y="136" font-size="11" fill="#94A3B8" text-anchor="middle">97 = 100 − 3 → deviation = <tspan fill="#EF4444" font-weight="800">−3</tspan></text>
+  <text x="190" y="154" font-size="11" fill="#94A3B8" text-anchor="middle">103 = 100 + 3 → deviation = <tspan fill="#60A5FA" font-weight="800">+3</tspan></text>
+  <text x="190" y="178" font-size="12" font-weight="800" fill="#F8FAFC" text-anchor="middle">97 + 103 = 100 + 100 + (−3 + 3) = 200</text>
+</svg>

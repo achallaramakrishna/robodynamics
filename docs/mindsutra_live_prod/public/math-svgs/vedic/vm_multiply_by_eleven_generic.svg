@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" fill="none">
+  <rect width="720" height="320" rx="28" fill="#FAF5FF"/>
+  <rect x="20" y="20" width="680" height="280" rx="24" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="2"/>
+  <text x="42" y="58" fill="#581C87" font-size="26" font-family="Arial, sans-serif" font-weight="700">Multiply by Eleven</text>
+  <text x="42" y="84" fill="#6B7280" font-size="14" font-family="Arial, sans-serif">Keep the outer digits, add the middle sum, and carry forward only when needed.</text>
+
+  <rect x="42" y="112" width="186" height="154" rx="18" fill="#F5F3FF" stroke="#C4B5FD"/>
+  <text x="60" y="142" fill="#6D28D9" font-size="18" font-family="Arial, sans-serif" font-weight="700">Outer Left</text>
+  <text x="60" y="176" fill="#111827" font-size="20" font-family="Arial, sans-serif" font-weight="700">First digit stays in front</text>
+  <text x="60" y="208" fill="#6B7280" font-size="14" font-family="Arial, sans-serif">Start the answer with the left digit.</text>
+
+  <rect x="266" y="112" width="186" height="154" rx="18" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="284" y="142" fill="#C2410C" font-size="18" font-family="Arial, sans-serif" font-weight="700">Middle Sum</text>
+  <text x="284" y="176" fill="#111827" font-size="20" font-family="Arial, sans-serif" font-weight="700">Add the two digits</text>
+  <text x="284" y="208" fill="#6B7280" font-size="14" font-family="Arial, sans-serif">If the sum is large, keep one digit and carry forward.</text>
+
+  <rect x="490" y="112" width="186" height="154" rx="18" fill="#EEF2FF" stroke="#A5B4FC"/>
+  <text x="508" y="142" fill="#3730A3" font-size="18" font-family="Arial, sans-serif" font-weight="700">Outer Right</text>
+  <text x="508" y="176" fill="#111827" font-size="20" font-family="Arial, sans-serif" font-weight="700">Last digit stays at the end</text>
+  <text x="508" y="208" fill="#6B7280" font-size="14" font-family="Arial, sans-serif">The rightmost digit does not change.</text>
+</svg>

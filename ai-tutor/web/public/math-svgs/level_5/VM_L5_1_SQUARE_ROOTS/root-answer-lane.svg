@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#FBFCFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#10B981"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Write the root from left to right</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">The first pair gives the tens digit. The last digit clue gives the ones digit.</text>
+  <rect x="116" y="146" width="568" height="120" rx="24" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="250" y="192" fill="#047857" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Tens digit</text>
+  <text x="550" y="192" fill="#047857" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Ones digit</text>
+  <text x="250" y="236" fill="#10213F" font-size="54" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">8</text>
+  <text x="550" y="236" fill="#10213F" font-size="54" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">4</text>
+  <line x1="400" y1="166" x2="400" y2="248" stroke="#A7F3D0" stroke-width="4"/>
+  <rect x="254" y="298" width="292" height="42" rx="12" fill="#F0FDF4" stroke="#86EFAC"/>
+  <text x="400" y="326" fill="#15803D" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Root = 84</text>
+</svg>

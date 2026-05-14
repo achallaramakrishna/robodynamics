@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#22C55E" />
+
+  <text x="40" y="46" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">
+    Worked Example: (x + 5)²
+  </text>
+  <text x="40" y="76" fill="#BBF7D0" font-size="16" font-weight="600" font-family="Verdana, sans-serif">
+    First square, middle double-product, last square
+  </text>
+
+  <rect x="54" y="110" width="280" height="280" fill="#1F2937" stroke="#E5E7EB" stroke-width="3" />
+  <rect x="54" y="110" width="180" height="180" fill="#172554" stroke="#93C5FD" stroke-width="2" />
+  <rect x="234" y="110" width="100" height="180" fill="#0F3D2E" stroke="#86EFAC" stroke-width="2" />
+  <rect x="54" y="290" width="180" height="100" fill="#0F3D2E" stroke="#86EFAC" stroke-width="2" />
+  <rect x="234" y="290" width="100" height="100" fill="#78350F" stroke="#FDE68A" stroke-width="2" />
+  <text x="120" y="210" fill="#DBEAFE" font-size="34" font-weight="800" font-family="Verdana, sans-serif">x²</text>
+  <text x="258" y="210" fill="#D1FAE5" font-size="26" font-weight="800" font-family="Verdana, sans-serif">5x</text>
+  <text x="124" y="350" fill="#D1FAE5" font-size="26" font-weight="800" font-family="Verdana, sans-serif">5x</text>
+  <text x="260" y="350" fill="#FEF3C7" font-size="26" font-weight="800" font-family="Verdana, sans-serif">25</text>
+  <text x="120" y="102" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">x</text>
+  <text x="268" y="102" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">5</text>
+  <text x="30" y="210" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">x</text>
+  <text x="30" y="348" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">5</text>
+
+  <rect x="388" y="110" width="360" height="226" rx="18" fill="#111827" stroke="#94A3B8" stroke-width="2" />
+  <text x="410" y="148" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Identity breakdown</text>
+  <text x="410" y="192" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">a = x, b = 5</text>
+  <text x="410" y="228" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">a² = x²</text>
+  <text x="410" y="264" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">2ab = 2·x·5 = 10x</text>
+  <text x="410" y="300" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">b² = 25</text>
+  <text x="410" y="344" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">x² + 10x + 25</text>
+</svg>

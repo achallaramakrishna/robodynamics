@@ -1,0 +1,18 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FEF2F2"/>
+  
+  <g id="letter_ri">
+    <text x="210" y="600" font-family="Sanskrit, serif" font-size="450" font-weight="900" fill="#2563EB">ऋ</text>
+  </g>
+  
+  <g id="object_rishi">
+    <!-- Stylized Sage/Meditating Figure -->
+    <path d="M750 400C750 350 780 320 820 320C860 320 890 350 890 400" fill="#F59E0B" fill-opacity="0.2"/> <!-- Aura -->
+    <circle cx="750" cy="450" r="60" fill="#FFE4D6"/> <!-- face -->
+    <path d="M700 550L750 480L800 550H700Z" fill="#F97316"/> <!-- Robes -->
+    <path d="M680 580C680 580 750 630 820 580" stroke="#F97316" stroke-width="12" stroke-linecap="round"/> <!-- Meditating Legs -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">ऋ से ऋषि</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">RI for Rishi (Sage)</text>
+</svg>

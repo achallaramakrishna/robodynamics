@@ -18,6 +18,7 @@ interface Props {
   onResult?: (result: ScanResult) => void;
   onSpeak: (text: string) => void;
   onClose: () => void;
+  romanMap?: Record<string, unknown>;
 }
 
 const QUALITY_STYLE = {

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindSutra Vedic Maths Flyer</title>
+  <!-- Modern premium typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 50% 0%, #0B1528 0%, #030712 100%);
+      --accent-primary: #38BDF8;
+      --accent-secondary: #3B82F6;
+      --accent-gold: #F59E0B;
+      --text-main: #F8FAFC;
+      --text-sub: #94A3B8;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --border-glow: rgba(56, 189, 248, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    /* Container styled like a premium digital poster flyer */
+    .flyer-container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(10, 17, 32, 0.95);
+      border: 2px solid var(--border-glow);
+      border-radius: 36px;
+      padding: 50px 40px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(56, 189, 248, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Beautiful ambient glow circles in background */
+    .flyer-container::before {
+      content: "";
+      position: absolute;
+      top: -150px;
+      left: -150px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .flyer-container::after {
+      content: "";
+      position: absolute;
+      bottom: -150px;
+      right: -150px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* Header styling */
+    header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 24px;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 24px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+      color: #030712;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent-primary);
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      color: var(--accent-gold);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      color: var(--text-sub);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Pillars / Highlights section */
+    .highlights-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .highlight-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .highlight-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .highlight-desc {
+      font-size: 11px;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+
+    /* Curriculum Levels */
+    .curriculum-section {
+      margin-bottom: 40px;
+    }
+
+    .section-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--accent-primary);
+      padding-left: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .level-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .level-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+
+    .level-emoji {
+      font-size: 32px;
+      background: rgba(255, 255, 255, 0.04);
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .level-content {
+      flex: 1;
+    }
+
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .level-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text-main);
+    }
+
+    .level-tagline {
+      font-size: 12px;
+      color: var(--accent-primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .level-details {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* Premium Banner CTA Box */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(56, 189, 248, 0.05) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 24px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-badge {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: #030712;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 16px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .cta-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: #FFFFFF;
+    }
+
+    .cta-pitch {
+      color: var(--text-sub);
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #25D366;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      padding: 16px 36px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .whatsapp-icon {
+      font-size: 24px;
+    }
+
+    .cta-footnote {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    .cta-footnote strong {
+      color: #FFF;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .flyer-container {
+        padding: 30px 20px;
+      }
+      h1 {
+        font-size: 30px;
+      }
+      .highlights-row {
+        grid-template-columns: 1fr;
+      }
+      .level-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .level-emoji {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="flyer-container">
+    <header>
+      <div class="logo-container">
+        <div class="logo-badge">MS</div>
+        <div class="logo-text">Mind<span>Sutra</span></div>
+      </div>
+      <p class="hero-tagline">Calculate 10x Faster</p>
+      <h1>Supercharge Your Child's Mental Speed!</h1>
+      <p class="hero-sub">
+        Unlock the secrets of ancient Vedic Math. Build fearless math logic, lightning-fast calculations, and high mental agility. No more calculators, no more exam stress!
+      </p>
+    </header>
+
+    <!-- Key Highlights -->
+    <div class="highlights-row">
+      <div class="highlight-card">
+        <div class="highlight-icon">⚡</div>
+        <div class="highlight-title">Lightning Speed</div>
+        <div class="highlight-desc">Solve complex multiplication and division in single steps mentally.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🧠</div>
+        <div class="highlight-title">Olympiad Prep</div>
+        <div class="highlight-desc">Perfect foundations for logical reasoning and board exams.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🛡️</div>
+        <div class="highlight-title">Fearless Math</div>
+        <div class="highlight-desc">Replace formula-memorization with structural patterns & games.</div>
+      </div>
+    </div>
+
+    <!-- The 5 Levels of Mastery -->
+    <div class="curriculum-section">
+      <h2 class="section-heading">The 5 Levels of Vedic Math Mastery</h2>
+      
+      <div class="level-list">
+        <!-- Level 1 -->
+        <div class="level-card">
+          <div class="level-emoji">🌱</div>
+          <div class="level-content">
+            <div class="level-header">
+              <span class="level-name">Level 1: Foundation</span>
+              <span class="level-tagline" style="color: #22C55E;">Build the speed base</span>
+            </div>
+            <p class="level-details">
+              Complements to 10, 100, 1000, 2-digit criss-cross mental multiplication, tables 11-19 shortcut pattern, and subtraction without borrowing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Level 2 -->
+        <div class="level-card">
+          <div class="level-emoji">⚡</div>
+          <div class="level-content">
+            <div class="level-header">
+              <span class="level-name">Level 2: Speed Builder</span>
+              <span class="level-tagline" style="color: #3B82F6;">Shortcuts for exams</span>
+            </div>
+            <p class="level-details">
+              Nikhilam multiplication (near-100), proportional 3-digit multiplication, one-line division by 9, squaring near 50, and Flag Division.
+            </p>
+          </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="level-card">
+          <div class="level-emoji">🔥</div>
+          <div class="level-content">
+            <div class="level-header">
+              <span class="level-name">Level 3: Power</span>
+              <span class="level-tagline" style="color: #F59E0B;">Advanced magic patterns</span>
+            </div>
+            <p class="level-details">
+              Vinculum numbers (bar notation), flexible-base multiplication, Vedic HCF & LCM, 2-digit squaring (Duplex Yoga), and Paravartya division.
+            </p>
+          </div>
+        </div>
+
+        <!-- Level 4 -->
+        <div class="level-card">
+          <div class="level-emoji">🏆</div>
+          <div class="level-content">
+            <div class="level-header">
+              <span class="level-name">Level 4: Ace</span>
+              <span class="level-tagline" style="color: #8B5CF6;">Elite techniques</span>
+            </div>
+            <p class="level-details">
+              Squaring near any base (100, 1000), fraction additions without LCD, cubing via expansion, single-step linear equations, and Pythagorean geometry shortcuts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Level 5 -->
+        <div class="level-card">
+          <div class="level-emoji">🌟</div>
+          <div class="level-content">
+            <div class="level-header">
+              <span class="level-name">Level 5: Champion</span>
+              <span class="level-tagline" style="color: #EC4899;">Olympiads & Boards</span>
+            </div>
+            <p class="level-details">
+              Square root & cube root by inspection, simultaneous equations solved in one line, 4-digit mental criss-cross multiplication, and mental percentage hacks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Area -->
+    <div class="cta-box">
+      <span class="cta-badge">Limited Slots</span>
+      <h3 class="cta-title">Book a FREE Demo Class!</h3>
+      <p class="cta-pitch">
+        Give your child the ultimate math superpower. Parents can register in 10 seconds via WhatsApp and start learning right away!
+      </p>
+      <a href="https://wa.me/918374377311?text=I'm%20interested%20in%20a%20free%20MindSutra%20Vedic%20Maths%20demo%20class!" class="whatsapp-btn">
+        <span class="whatsapp-icon">💬</span> Register on WhatsApp: 8374377311
+      </a>
+      <p class="cta-footnote">
+        Or simply send <strong>"Vedic Math"</strong> to <strong>+91 83743 77311</strong> to get going!
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

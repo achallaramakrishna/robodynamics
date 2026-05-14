@@ -1,0 +1,47 @@
+<svg width="640" height="420" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MindSparc Level 1 - Number Patterns</title>
+  <desc id="desc">A colorful Olympiad number pattern path with the missing next number.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfeff"/>
+      <stop offset="1" stop-color="#fff7ed"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="640" height="420" rx="32" fill="url(#bg)"/>
+  <circle cx="84" cy="74" r="42" fill="#fde68a" opacity=".7"/>
+  <circle cx="570" cy="344" r="54" fill="#bae6fd" opacity=".75"/>
+  <text x="54" y="72" fill="#0f766e" font-family="Verdana, Arial, sans-serif" font-size="26" font-weight="800">Number Patterns</text>
+  <text x="54" y="105" fill="#475569" font-family="Verdana, Arial, sans-serif" font-size="15">Find the hop size, then predict the next step.</text>
+  <path d="M92 250 C180 140 292 330 398 210 C456 146 510 162 556 204" fill="none" stroke="#14b8a6" stroke-width="12" stroke-linecap="round" opacity=".35"/>
+  <g filter="url(#shadow)" font-family="Verdana, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    <g transform="translate(92 250)">
+      <circle r="44" fill="#22c55e"/>
+      <text y="10" font-size="28" fill="#fff">2</text>
+    </g>
+    <g transform="translate(196 176)">
+      <circle r="44" fill="#38bdf8"/>
+      <text y="10" font-size="28" fill="#fff">4</text>
+    </g>
+    <g transform="translate(304 270)">
+      <circle r="44" fill="#f97316"/>
+      <text y="10" font-size="28" fill="#fff">6</text>
+    </g>
+    <g transform="translate(414 202)">
+      <circle r="44" fill="#8b5cf6"/>
+      <text y="10" font-size="28" fill="#fff">8</text>
+    </g>
+    <g transform="translate(536 204)">
+      <circle r="48" fill="#fff" stroke="#ef4444" stroke-width="6" stroke-dasharray="10 8"/>
+      <text y="12" font-size="34" fill="#ef4444">?</text>
+    </g>
+  </g>
+  <g font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="800" fill="#0f766e" text-anchor="middle">
+    <text x="146" y="208">+2</text>
+    <text x="250" y="228">+2</text>
+    <text x="360" y="238">+2</text>
+    <text x="476" y="184">+2</text>
+  </g>
+</svg>

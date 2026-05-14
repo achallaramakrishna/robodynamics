@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Near-1000 Squaring Rule</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Right side must always be 3 digits</text>
+  <rect x="56" y="108" width="688" height="236" rx="18" fill="#111827" stroke="#475569" stroke-width="2"/>
+  <text x="88" y="156" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">999^2: d = -1</text>
+  <text x="88" y="196" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Left = 999 - 1 = 998</text>
+  <text x="88" y="234" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Right = 1^2 = 001</text>
+  <text x="88" y="278" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">999^2 = 998001</text>
+  <text x="430" y="156" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">997^2: d = -3</text>
+  <text x="430" y="196" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Left = 997 - 3 = 994</text>
+  <text x="430" y="234" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Right = 9 -> 009</text>
+  <text x="430" y="278" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">997^2 = 994009</text>
+</svg>

@@ -37,8 +37,8 @@ export const VM_L1_1_LESSON: MindSutraLessonPayload = {
           headline: "Fast Addition by Completing the Whole",
           example: "97 + 5",
           goal: "Turn difficult addition into a friendly number first.",
-          assetPath: "/math-svgs/vedic/l1_friendly_base_bridge.svg",
-          assetSource: "ai-tutor/web/public/math-svgs/vedic/l1_friendly_base_bridge.svg",
+          assetPath: "/math-svgs/level_1/VM_L1_1_FAST_ADDITION/part-whole-number-bond.svg",
+          assetSource: "ai-tutor/web/public/math-svgs/level_1/VM_L1_1_FAST_ADDITION/part-whole-number-bond.svg",
         },
       },
       actions: [{ id: "next", label: "Let's begin", primary: true }],
@@ -54,8 +54,8 @@ export const VM_L1_1_LESSON: MindSutraLessonPayload = {
           number: 97,
           complement: 3,
           caption: "97 needs 3 more to become 100",
-          assetPath: "/math-svgs/vedic/l1_complement_97_to_100.svg",
-          assetSource: "ai-tutor/web/public/math-svgs/vedic/l1_complement_97_to_100.svg",
+          assetPath: "/math-svgs/level_1/VM_L1_1_FAST_ADDITION/complement-bar-to-100.svg",
+          assetSource: "ai-tutor/web/public/math-svgs/level_1/VM_L1_1_FAST_ADDITION/complement-bar-to-100.svg",
         },
       },
       explanation: {
@@ -80,8 +80,8 @@ export const VM_L1_1_LESSON: MindSutraLessonPayload = {
             "100 + 2 = 102"
           ],
           answer: 102,
-          assetPath: "/math-svgs/vedic/l1_worked_97_plus_5.svg",
-          assetSource: "ai-tutor/web/public/math-svgs/vedic/l1_worked_97_plus_5.svg",
+          assetPath: "/math-svgs/level_1/VM_L1_1_FAST_ADDITION/complete-the-whole-panel.svg",
+          assetSource: "ai-tutor/web/public/math-svgs/level_1/VM_L1_1_FAST_ADDITION/complete-the-whole-panel.svg",
         },
       },
       explanation: {
@@ -104,8 +104,8 @@ export const VM_L1_1_LESSON: MindSutraLessonPayload = {
         data: {
           expression: "98 + 27",
           prompt: "Complete 98 to 100 first.",
-          assetPath: "/math-svgs/vedic/missing-part-blocks.svg",
-          assetSource: "docs/vedic_math_assets/grade_4/VM_G4_L1_FAST_ADDITION/missing-part-blocks.svg",
+          assetPath: "/math-svgs/level_1/VM_L1_1_FAST_ADDITION/missing-part-blocks.svg",
+          assetSource: "ai-tutor/web/public/math-svgs/level_1/VM_L1_1_FAST_ADDITION/missing-part-blocks.svg",
         },
       },
       explanation: {
@@ -157,8 +157,8 @@ export const VM_L1_1_LESSON: MindSutraLessonPayload = {
         data: {
           expression: "96 + 38",
           prompt: "Try this mentally before revealing steps.",
-          assetPath: "/math-svgs/vedic/fill-gap-highlight.svg",
-          assetSource: "ai-tutor/web/public/math-svgs/vedic/fill-gap-highlight.svg",
+          assetPath: "/math-svgs/level_1/VM_L1_1_FAST_ADDITION/fill-gap-highlight.svg",
+          assetSource: "ai-tutor/web/public/math-svgs/level_1/VM_L1_1_FAST_ADDITION/fill-gap-highlight.svg",
         },
       },
       practice: {
@@ -191,8 +191,8 @@ export const VM_L1_1_LESSON: MindSutraLessonPayload = {
             "Add using the friendly base"
           ],
           example: "8 + 4 = 10 + 2 = 12",
-          assetPath: "/math-svgs/vedic/l1_recap_make_10_8_plus_4.svg",
-          assetSource: "ai-tutor/web/public/math-svgs/vedic/l1_recap_make_10_8_plus_4.svg",
+          assetPath: "/math-svgs/level_1/VM_L1_1_FAST_ADDITION/base-completion-strip.svg",
+          assetSource: "ai-tutor/web/public/math-svgs/level_1/VM_L1_1_FAST_ADDITION/base-completion-strip.svg",
         },
       },
       explanation: {

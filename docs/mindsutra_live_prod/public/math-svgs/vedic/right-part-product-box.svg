@@ -1,0 +1,5 @@
+<svg width="240" height="120" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
+  <rect x="16" y="18" width="208" height="84" rx="20" fill="#ECFDF5" stroke="#059669" stroke-width="2.4"/>
+  <text x="120" y="46" text-anchor="middle" font-size="14" font-family="Arial" font-weight="700" fill="#059669">Multiply the side numbers</text>
+  <text x="120" y="82" text-anchor="middle" font-size="34" font-family="Arial" font-weight="700" fill="#059669">3 ? 4 = 12</text>
+</svg>

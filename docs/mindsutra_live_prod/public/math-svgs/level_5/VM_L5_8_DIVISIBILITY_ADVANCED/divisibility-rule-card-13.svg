@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#F59E0B" />
+  <text x="40" y="46" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Divisibility by 13</text>
+  <text x="40" y="76" fill="#FDE68A" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Rest plus four times the last digit</text>
+
+  <rect x="40" y="110" width="320" height="230" rx="18" fill="#3F3F46" stroke="#FCD34D" stroke-width="2" />
+  <text x="60" y="148" fill="#FFFBEB" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Rule</text>
+  <text x="60" y="190" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Take the last digit.</text>
+  <text x="60" y="222" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Multiply it by 4.</text>
+  <text x="60" y="256" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Add to the rest.</text>
+  <text x="60" y="298" fill="#FDE68A" font-size="24" font-weight="800" font-family="Verdana, sans-serif">If the result is divisible by 13, so is the number.</text>
+
+  <rect x="388" y="110" width="372" height="230" rx="18" fill="#111827" stroke="#94A3B8" stroke-width="2" />
+  <text x="408" y="148" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Example: 286</text>
+  <text x="408" y="192" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">28 + 4×6 = 52</text>
+  <text x="408" y="230" fill="#86EFAC" font-size="28" font-weight="900" font-family="Verdana, sans-serif">52 is divisible by 13</text>
+  <text x="408" y="268" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">So 286 is divisible by 13</text>
+  <text x="408" y="306" fill="#FCA5A5" font-size="20" font-weight="800" font-family="Verdana, sans-serif">Counterexample: 170 → 17 + 0 = 17 → not divisible</text>
+</svg>

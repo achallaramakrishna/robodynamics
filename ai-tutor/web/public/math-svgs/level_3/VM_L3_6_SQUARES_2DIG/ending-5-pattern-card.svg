@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#F8FAFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="white" stroke="#DCE5FF" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#2B3F98">Challenge Example: 89²</text>
+  <text x="400" y="90" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#5E6B85">Large digits create big carries. Track each carry before moving left.</text>
+
+  <rect x="100" y="132" width="180" height="86" rx="18" fill="#ECFDF5" stroke="#0F9F6E" stroke-width="3"/>
+  <rect x="310" y="132" width="180" height="86" rx="18" fill="#FFF4E2" stroke="#D58A00" stroke-width="3"/>
+  <rect x="520" y="132" width="180" height="86" rx="18" fill="#EEF3FF" stroke="#3555B4" stroke-width="3"/>
+  <text x="190" y="166" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#0F9F6E">Right slot</text>
+  <text x="400" y="166" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#9A6200">Middle duplex</text>
+  <text x="610" y="166" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#3555B4">Left slot</text>
+  <text x="190" y="199" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">9² = 81</text>
+  <text x="400" y="199" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">2×8×9 = 144</text>
+  <text x="610" y="199" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">8² = 64</text>
+
+  <text x="110" y="266" font-family="Segoe UI, Arial" font-size="17" fill="#1F2440">Carry 8 from 81 into the middle slot</text>
+  <text x="110" y="294" font-family="Segoe UI, Arial" font-size="17" fill="#1F2440">144 + 8 = 152, so write 2 and carry 15</text>
+  <text x="110" y="322" font-family="Segoe UI, Arial" font-size="17" fill="#1F2440">64 + 15 = 79</text>
+
+  <rect x="540" y="278" width="160" height="58" rx="16" fill="#E8EEFF" stroke="#3555B4" stroke-width="3"/>
+  <text x="620" y="301" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" fill="#3555B4">Final answer</text>
+  <text x="620" y="324" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#1F2440">7921</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Near-100 Squaring Rule</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">n^2 = (n + d) | d^2 where d = n - 100</text>
+  <rect x="54" y="108" width="692" height="236" rx="18" fill="#0F172A" stroke="#475569" stroke-width="2"/>
+  <text x="86" y="156" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">98^2: d = -2</text>
+  <text x="86" y="196" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Left = 98 + (-2) = 96</text>
+  <text x="86" y="234" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Right = (-2)^2 = 04</text>
+  <text x="86" y="278" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">98^2 = 96|04 = 9604</text>
+  <text x="426" y="156" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">103^2: d = +3</text>
+  <text x="426" y="196" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Left = 103 + 3 = 106</text>
+  <text x="426" y="234" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Right = 3^2 = 09</text>
+  <text x="426" y="278" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">103^2 = 106|09 = 10609</text>
+</svg>

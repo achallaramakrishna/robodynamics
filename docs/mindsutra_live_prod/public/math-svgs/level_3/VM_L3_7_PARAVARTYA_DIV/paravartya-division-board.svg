@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="240" viewBox="0 0 560 240">
+  <rect width="560" height="240" rx="24" fill="white"/>
+  <text x="30" y="42" font-family="Segoe UI, Arial" font-size="24" font-weight="700" fill="#3B3A8C">Paravartya Yojayet</text>
+  <rect x="28" y="68" width="120" height="72" rx="18" fill="#EAF2FF" stroke="#3B3A8C" stroke-width="3"/>
+  <rect x="168" y="68" width="278" height="72" rx="18" fill="white" stroke="#C9D3F5" stroke-width="3"/>
+  <rect x="462" y="68" width="70" height="72" rx="18" fill="#FCE7F3" stroke="#E91E8C" stroke-width="3"/>
+  <text x="280" y="186" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">use the divisor complement to correct each next quotient digit</text>
+</svg>

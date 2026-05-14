@@ -1,0 +1,20 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FDF4FF"/>
+  
+  <g id="letter_ang">
+    <text x="200" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">अं</text>
+  </g>
+  
+  <g id="object_angoor">
+    <!-- Grapes -->
+    <circle cx="700" cy="450" r="30" fill="#8B5CF6"/>
+    <circle cx="760" cy="450" r="30" fill="#8B5CF6"/>
+    <circle cx="730" cy="500" r="30" fill="#8B5CF6"/>
+    <circle cx="790" cy="500" r="30" fill="#8B5CF6"/>
+    <circle cx="760" cy="550" r="30" fill="#8B5CF6"/>
+    <path d="M730 420C730 420 730 380 750 350" stroke="#059669" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">अं से अंगूर</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">ANG for Angoor (Grapes)</text>
+</svg>

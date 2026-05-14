@@ -1,0 +1,9 @@
+<svg width="260" height="160" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
+  <text x="60" y="44" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#334155">97</text>
+  <text x="196" y="44" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#DC2626">-3</text>
+  <text x="60" y="132" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#334155">96</text>
+  <text x="196" y="132" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#DC2626">-4</text>
+  <line x1="182" y1="52" x2="72" y2="118" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+  <line x1="178" y1="122" x2="72" y2="50" stroke="#E91E8C" stroke-width="4" stroke-linecap="round"/>
+  <text x="130" y="92" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#7C3AED">X</text>
+</svg>

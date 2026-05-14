@@ -1,0 +1,9 @@
+<svg width="220" height="150" viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="20" width="100" height="50" rx="12" fill="#EAF2FF" stroke="#2563EB" stroke-width="3"></rect>
+  <text x="110" y="53" text-anchor="middle" font-size="28" font-family="Arial" fill="#3B3A8C">103</text>
+  <line x1="110" y1="70" x2="110" y2="88" stroke="#64748B" stroke-width="2"></line>
+  <rect x="78" y="88" width="64" height="32" rx="10" fill="#ECFDF5" stroke="#059669" stroke-width="2"></rect>
+  <text x="110" y="110" text-anchor="middle" font-size="20" font-family="Arial" fill="#059669">+3</text>
+  <rect x="20" y="122" width="78" height="22" rx="8" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"></rect>
+  <text x="59" y="137" text-anchor="middle" font-size="13" font-family="Arial" fill="#334155">Base 100</text>
+</svg>

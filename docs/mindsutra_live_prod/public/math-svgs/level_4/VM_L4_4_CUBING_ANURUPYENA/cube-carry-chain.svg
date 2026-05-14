@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="200" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="2"/>
+
+  <g transform="translate(50, 100)" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="32">
+     <text x="0" y="0" fill="#F8FAFC">1 | 6 | 12 | 8</text>
+     
+     <!-- Carries -->
+     <g stroke="#EC4899" stroke-width="2" fill="none">
+        <!-- 12 to 6 -->
+        <path d="M 180,-10 Q 140,-40 100,-10" marker-end="url(#arrow)" />
+        <text x="140" y="-45" fill="#F472B6" font-size="14" text-anchor="middle" font-family="Inter">+1</text>
+     </g>
+
+     <text x="0" y="60" fill="#D946EF">1 | 7 | 2 | 8  → 1728</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#EC4899" />
+    </marker>
+  </defs>
+</svg>

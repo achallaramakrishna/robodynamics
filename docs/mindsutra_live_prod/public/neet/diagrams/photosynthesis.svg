@@ -1,0 +1,80 @@
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .label { font-size: 12px; font-weight: bold; fill: #333; }
+      .text { font-size: 10px; fill: #555; }
+      .light-box { fill: #fff9e6; stroke: #f39c12; stroke-width: 2; }
+      .dark-box { fill: #e8f8f5; stroke: #27ae60; stroke-width: 2; }
+      .arrow { stroke: #2c3e50; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2c3e50"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="250" y="30" class="title" text-anchor="middle">PHOTOSYNTHESIS PROCESS</text>
+
+  <!-- Sun symbol -->
+  <circle cx="30" cy="50" r="15" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <line x1="30" y1="25" x2="30" y2="15" stroke="#f39c12" stroke-width="2"/>
+  <line x1="55" y1="50" x2="65" y2="50" stroke="#f39c12" stroke-width="2"/>
+
+  <!-- INPUT BOX -->
+  <rect x="20" y="80" width="200" height="100" class="light-box" rx="5"/>
+  <text x="120" y="100" class="label" text-anchor="middle">INPUTS</text>
+  <text x="30" y="125" class="text">• H₂O (Water) - from soil</text>
+  <text x="30" y="145" class="text">• CO₂ (Carbon dioxide) - from air</text>
+  <text x="30" y="165" class="text">• Light Energy (from sun)</text>
+
+  <!-- CHLOROPLAST -->
+  <ellipse cx="250" cy="130" rx="80" ry="100" fill="#d5f4e6" stroke="#27ae60" stroke-width="3"/>
+  <text x="250" y="125" class="label" text-anchor="middle" font-size="13">CHLOROPLAST</text>
+
+  <!-- Light reactions (top) -->
+  <rect x="180" y="75" width="140" height="50" fill="#fff9e6" stroke="#f39c12" stroke-width="1" rx="3"/>
+  <text x="250" y="90" class="label" text-anchor="middle" font-size="11">Light Reactions</text>
+  <text x="250" y="105" class="text" text-anchor="middle" font-size="9">(Thylakoid)</text>
+  <text x="250" y="120" class="text" text-anchor="middle" font-size="9">Produces: ATP + NADPH</text>
+
+  <!-- Dark reactions (bottom) -->
+  <rect x="180" y="155" width="140" height="50" fill="#e8f8f5" stroke="#27ae60" stroke-width="1" rx="3"/>
+  <text x="250" y="170" class="label" text-anchor="middle" font-size="11">Calvin Cycle</text>
+  <text x="250" y="185" class="text" text-anchor="middle" font-size="9">(Stroma)</text>
+  <text x="250" y="200" class="text" text-anchor="middle" font-size="9">Uses: ATP + NADPH + CO₂</text>
+
+  <!-- Arrows within chloroplast -->
+  <path d="M 250 130 L 250 155" class="arrow" stroke="#27ae60"/>
+
+  <!-- OUTPUT BOX -->
+  <rect x="280" y="80" width="200" height="100" class="dark-box" rx="5"/>
+  <text x="380" y="100" class="label" text-anchor="middle">OUTPUTS</text>
+  <text x="290" y="125" class="text">• C₆H₁₂O₆ (Glucose)</text>
+  <text x="290" y="145" class="text">• O₂ (Oxygen) - released</text>
+  <text x="290" y="165" class="text">• Energy for growth</text>
+
+  <!-- Arrows to outputs -->
+  <path d="M 330 130 L 280 130" class="arrow"/>
+
+  <!-- OVERALL EQUATION -->
+  <rect x="30" y="220" width="440" height="60" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2" rx="5"/>
+  <text x="250" y="245" class="label" text-anchor="middle" font-size="12">6CO₂ + 6H₂O + Light Energy → C₆H₁₂O₆ + 6O₂</text>
+  <text x="250" y="265" class="text" text-anchor="middle">(Glucose formation from CO₂ fixation)</text>
+
+  <!-- DETAILED BREAKDOWN -->
+  <text x="30" y="310" class="label" font-size="13">Light-Dependent Reactions:</text>
+  <rect x="30" y="320" width="440" height="120" fill="#fff9e6" stroke="#f39c12" stroke-width="1" rx="3"/>
+  <text x="40" y="340" class="text">• Location: Thylakoid membrane</text>
+  <text x="40" y="360" class="text">• Light is absorbed by chlorophyll in PS II and PS I</text>
+  <text x="40" y="380" class="text">• Water is split, releasing O₂ (photolysis)</text>
+  <text x="40" y="400" class="text">• Electron transport chain produces ATP & NADPH</text>
+  <text x="40" y="420" class="text">• O₂ released as byproduct</text>
+
+  <text x="30" y="465" class="label" font-size="13">Light-Independent Reactions (Calvin Cycle):</text>
+  <rect x="30" y="475" width="440" height="100" fill="#e8f8f5" stroke="#27ae60" stroke-width="1" rx="3"/>
+  <text x="40" y="495" class="text">• Location: Stroma</text>
+  <text x="40" y="515" class="text">• CO₂ fixation: CO₂ combines with RuBP (5-carbon sugar)</text>
+  <text x="40" y="535" class="text">• Reduction phase: Uses ATP & NADPH from light reactions</text>
+  <text x="40" y="555" class="text">• Produces glucose (C₆H₁₂O₆)</text>
+</svg>

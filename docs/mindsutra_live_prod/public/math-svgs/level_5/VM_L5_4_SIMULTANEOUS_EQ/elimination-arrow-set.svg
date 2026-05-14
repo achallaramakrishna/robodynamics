@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#38BDF8" />
+
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">
+    Cross-Multiply Formula for Two Equations
+  </text>
+  <text x="40" y="74" fill="#BAE6FD" font-size="16" font-weight="600" font-family="Verdana, sans-serif">
+    Same denominator D, different cross-multiplied numerators
+  </text>
+
+  <rect x="40" y="102" width="220" height="240" rx="18" fill="#111827" stroke="#94A3B8" stroke-width="2" />
+  <text x="60" y="140" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">General form</text>
+  <text x="60" y="184" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">a₁x + b₁y = c₁</text>
+  <text x="60" y="220" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">a₂x + b₂y = c₂</text>
+  <text x="60" y="278" fill="#FDE68A" font-size="24" font-weight="800" font-family="Verdana, sans-serif">D = a₁b₂ − a₂b₁</text>
+
+  <rect x="290" y="102" width="220" height="240" rx="18" fill="#0F3D2E" stroke="#34D399" stroke-width="2" />
+  <text x="310" y="140" fill="#D1FAE5" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Formula for x</text>
+  <text x="310" y="194" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">x = (c₁b₂ − c₂b₁) / D</text>
+  <text x="310" y="244" fill="#86EFAC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">Use constants with</text>
+  <text x="310" y="272" fill="#86EFAC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">the opposite y-coefficients.</text>
+
+  <rect x="540" y="102" width="220" height="240" rx="18" fill="#3B0824" stroke="#F472B6" stroke-width="2" />
+  <text x="560" y="140" fill="#FBCFE8" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Formula for y</text>
+  <text x="560" y="194" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">y = (a₁c₂ − a₂c₁) / D</text>
+  <text x="560" y="244" fill="#F9A8D4" font-size="20" font-weight="800" font-family="Verdana, sans-serif">Use constants with</text>
+  <text x="560" y="272" fill="#F9A8D4" font-size="20" font-weight="800" font-family="Verdana, sans-serif">the opposite x-coefficients.</text>
+
+  <text x="40" y="378" fill="#F8FAFC" font-size="18" font-weight="700" font-family="Verdana, sans-serif">
+    Keep the subtraction order the same as D in both numerators.
+  </text>
+</svg>

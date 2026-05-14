@@ -1,0 +1,64 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L5 Cryptarithmetic Grid</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Cipher Key Pad (Bottom) */}
+  <g id="cipher-pad" transform="translate(100, 480)">
+     <rect width="600" height="80" rx="40" fill="#1E293B" stroke="#A855F7" stroke-width="2" />
+     <g font-size="18" font-weight="900" text-anchor="middle" fill="#A855F7">
+        <text x="50" y="45">0</text>
+        <text x="110" y="45">1</text>
+        <text x="170" y="45">2</text>
+        <text x="230" y="45">3</text>
+        <text x="290" y="45">4</text>
+        <text x="350" y="45">5</text>
+        <text x="410" y="45">6</text>
+        <text x="470" y="45">7</text>
+        <text x="530" y="45">8</text>
+        <text x="590" y="45">9</text>
+     </g>
+  </g>
+
+  {/* Main Crypta Console */}
+  <g transform="translate(200, 80)">
+     <rect width="400" height="350" rx="20" fill="#1E293B" stroke="#334155" stroke-width="2" />
+     
+     {/* Carry Row */}
+     <g id="carry-row" transform="translate(0, 40)" opacity="0.6">
+        <rect x="50" y="0" width="40" height="40" rx="5" fill="#0F172A" stroke="#A855F7" stroke-dasharray="2,2" />
+        <rect x="150" y="0" width="40" height="40" rx="5" fill="#0F172A" stroke="#A855F7" stroke-dasharray="2,2" />
+        <rect x="250" y="0" width="40" height="40" rx="5" fill="#0F172A" stroke="#A855F7" stroke-dasharray="2,2" />
+        <text x="310" y="25" fill="#A855F7" font-size="10">CARRY</text>
+     </g>
+
+     {/* Equation Grid */}
+     <g id="equation-grid" font-size="64" font-weight="900" fill="white" text-anchor="middle">
+        {/* Row 1 */}
+        <text x="250" y="160">S</text>
+        <text x="150" y="160">M</text>
+        
+        {/* Row 2 */}
+        <text x="50" y="240">+</text>
+        <text x="250" y="240">S</text>
+        <text x="150" y="240">A</text>
+
+        {/* Separator */}
+        <line x1="50" y1="260" x2="350" y2="260" stroke="#334155" stroke-width="4" />
+
+        {/* Result Row */}
+        <text x="350" y="330">E</text>
+        <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+     </g>
+  </g>
+
+  <g transform="translate(620, 100)">
+     <rect width="150" height="200" rx="10" fill="rgba(168, 85, 247, 0.1)" stroke="#A855F7" />
+     <text x="75" y="30" text-anchor="middle" fill="#A855F7" font-size="12" font-weight="900">DECODER LOG</text>
+     <text x="15" y="60" fill="#94A3B8" font-size="11">S → ?</text>
+     <text x="15" y="85" fill="#94A3B8" font-size="11">M → ?</text>
+     <text x="15" y="110" fill="#94A3B8" font-size="11">A → ?</text>
+  </g>
+
+  <text x="400" y="40" text-anchor="middle" font-size="28" font-weight="900" fill="white">Cryptarithmetic Cipher</text>
+</svg>

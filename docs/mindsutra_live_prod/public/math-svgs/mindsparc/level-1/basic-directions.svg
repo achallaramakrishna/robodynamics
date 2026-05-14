@@ -1,0 +1,30 @@
+<svg width="640" height="420" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MindSparc Level 1 - Basic Directions</title>
+  <desc id="desc">A simple map for learning left, right, north, south directions.</desc>
+  <rect width="640" height="420" rx="32" fill="#eff6ff"/>
+  <text x="54" y="72" fill="#1d4ed8" font-family="Verdana, Arial, sans-serif" font-size="26" font-weight="800">Basic Directions</text>
+  <text x="54" y="105" fill="#475569" font-family="Verdana, Arial, sans-serif" font-size="15">Follow steps and discover the final place.</text>
+  <g transform="translate(102 138)">
+    <rect width="300" height="230" rx="24" fill="#fff" stroke="#93c5fd" stroke-width="4"/>
+    <g stroke="#bfdbfe" stroke-width="2">
+      <path d="M100 0 V230"/><path d="M200 0 V230"/><path d="M0 77 H300"/><path d="M0 154 H300"/>
+    </g>
+    <circle cx="50" cy="192" r="22" fill="#f97316"/>
+    <text x="50" y="199" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="900" fill="#fff">S</text>
+    <path d="M50 192 H150 V115 H250" fill="none" stroke="#22c55e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M250 115 l-18 -14 v28 Z" fill="#22c55e"/>
+    <circle cx="250" cy="115" r="22" fill="#8b5cf6"/>
+    <text x="250" y="122" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="900" fill="#fff">?</text>
+  </g>
+  <g transform="translate(472 158)" font-family="Verdana, Arial, sans-serif" font-weight="900" text-anchor="middle">
+    <circle cx="54" cy="54" r="54" fill="#fff" stroke="#60a5fa" stroke-width="4"/>
+    <path d="M54 13 L66 47 H42 Z" fill="#ef4444"/>
+    <path d="M54 95 L42 61 H66 Z" fill="#1d4ed8"/>
+    <path d="M13 54 L47 42 V66 Z" fill="#22c55e"/>
+    <path d="M95 54 L61 66 V42 Z" fill="#f59e0b"/>
+    <text x="54" y="-10" fill="#1d4ed8" font-size="16">N</text>
+    <text x="54" y="134" fill="#1d4ed8" font-size="16">S</text>
+    <text x="-7" y="60" fill="#1d4ed8" font-size="16">W</text>
+    <text x="116" y="60" fill="#1d4ed8" font-size="16">E</text>
+  </g>
+</svg>

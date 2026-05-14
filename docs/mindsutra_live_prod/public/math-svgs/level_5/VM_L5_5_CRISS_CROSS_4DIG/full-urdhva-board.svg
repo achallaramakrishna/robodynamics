@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="400" rx="18" fill="url(#bg)" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+
+  <text x="40" y="46" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">
+    1234 × 1111
+  </text>
+  <text x="40" y="76" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">
+    Sum the seven criss-cross columns from right to left
+  </text>
+
+  <rect x="38" y="100" width="724" height="92" rx="18" fill="#111827" stroke="#475569" stroke-width="2" />
+  <text x="170" y="138" fill="#F8FAFC" font-size="42" font-weight="800" font-family="Verdana, sans-serif">1 2 3 4</text>
+  <text x="170" y="182" fill="#CBD5E1" font-size="38" font-weight="700" font-family="Verdana, sans-serif">1 1 1 1</text>
+  <line x1="144" y1="146" x2="346" y2="146" stroke="#38BDF8" stroke-width="3" />
+  <line x1="144" y1="188" x2="346" y2="188" stroke="#94A3B8" stroke-width="2" />
+  <text x="450" y="150" fill="#E2E8F0" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Columns:</text>
+  <text x="450" y="182" fill="#FDE68A" font-size="24" font-weight="800" font-family="Verdana, sans-serif">C1 C2 C3 C4 C5 C6 C7</text>
+
+  <rect x="38" y="214" width="724" height="148" rx="18" fill="#020617" stroke="#334155" stroke-width="2" />
+  <text x="60" y="246" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C1 = 4×1 = 4</text>
+  <text x="60" y="276" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C2 = 3×1 + 4×1 = 7</text>
+  <text x="60" y="306" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C3 = 2×1 + 3×1 + 4×1 = 9</text>
+  <text x="60" y="336" fill="#FDE68A" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C4 = 1×1 + 2×1 + 3×1 + 4×1 = 10 → write 0, carry 1</text>
+
+  <text x="440" y="246" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C5 = 1×1 + 2×1 + 3×1 + 1 = 7</text>
+  <text x="440" y="276" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C6 = 1×1 + 2×1 = 3</text>
+  <text x="440" y="306" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">C7 = 1×1 = 1</text>
+  <text x="440" y="346" fill="#86EFAC" font-size="28" font-weight="900" font-family="Verdana, sans-serif">Answer = 1 3 7 0 9 7 4</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#082F49" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#115E59" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="400" rx="18" fill="url(#bg)" />
+  <rect x="0" y="0" width="800" height="8" fill="#F59E0B" />
+
+  <text x="44" y="50" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">
+    Rational Number Addition
+  </text>
+  <text x="44" y="80" fill="#CFFAFE" font-size="16" font-weight="600" font-family="Verdana, sans-serif">
+    Cross-multiply, then simplify
+  </text>
+
+  <rect x="38" y="104" width="724" height="90" rx="18" fill="#0B1120" stroke="#38BDF8" stroke-width="2" />
+  <text x="150" y="160" fill="#F8FAFC" font-size="40" font-weight="700" font-family="Verdana, sans-serif">3   5</text>
+  <line x1="136" y1="166" x2="205" y2="166" stroke="#F8FAFC" stroke-width="3" />
+  <line x1="210" y1="166" x2="228" y2="166" stroke="none" />
+  <line x1="238" y1="166" x2="307" y2="166" stroke="#F8FAFC" stroke-width="3" />
+  <text x="152" y="192" fill="#F8FAFC" font-size="34" font-weight="700" font-family="Verdana, sans-serif">4   6</text>
+  <text x="222" y="170" fill="#FBBF24" font-size="42" font-weight="800" font-family="Verdana, sans-serif">+</text>
+  <text x="380" y="165" fill="#94A3B8" font-size="34" font-weight="700" font-family="Verdana, sans-serif">=</text>
+  <text x="460" y="160" fill="#F8FAFC" font-size="40" font-weight="700" font-family="Verdana, sans-serif">38</text>
+  <line x1="446" y1="166" x2="518" y2="166" stroke="#F8FAFC" stroke-width="3" />
+  <text x="466" y="192" fill="#F8FAFC" font-size="34" font-weight="700" font-family="Verdana, sans-serif">24</text>
+  <text x="550" y="165" fill="#94A3B8" font-size="34" font-weight="700" font-family="Verdana, sans-serif">=</text>
+  <text x="612" y="160" fill="#FDE68A" font-size="40" font-weight="800" font-family="Verdana, sans-serif">19</text>
+  <line x1="600" y1="166" x2="676" y2="166" stroke="#FDE68A" stroke-width="3" />
+  <text x="628" y="192" fill="#FDE68A" font-size="34" font-weight="800" font-family="Verdana, sans-serif">12</text>
+
+  <line x1="180" y1="126" x2="278" y2="186" stroke="#FB7185" stroke-width="4" />
+  <line x1="274" y1="126" x2="174" y2="186" stroke="#38BDF8" stroke-width="4" />
+  <text x="292" y="128" fill="#FCA5A5" font-size="18" font-weight="700" font-family="Verdana, sans-serif">3×6 = 18</text>
+  <text x="292" y="190" fill="#7DD3FC" font-size="18" font-weight="700" font-family="Verdana, sans-serif">4×5 = 20</text>
+
+  <rect x="38" y="220" width="340" height="136" rx="18" fill="url(#panel)" stroke="#99F6E4" stroke-width="2" />
+  <text x="58" y="252" fill="#ECFEFF" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Numerator</text>
+  <text x="58" y="288" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">(3×6) + (4×5)</text>
+  <text x="58" y="320" fill="#FDE68A" font-size="26" font-weight="800" font-family="Verdana, sans-serif">18 + 20 = 38</text>
+
+  <rect x="414" y="220" width="348" height="136" rx="18" fill="#111827" stroke="#94A3B8" stroke-width="2" />
+  <text x="434" y="252" fill="#E2E8F0" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Denominator + Simplify</text>
+  <text x="434" y="288" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">4×6 = 24</text>
+  <text x="434" y="320" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">38/24 ÷ 2 = 19/12</text>
+  <text x="434" y="346" fill="#FBBF24" font-size="18" font-weight="700" font-family="Verdana, sans-serif">Always simplify at the end.</text>
+</svg>

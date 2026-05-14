@@ -1,0 +1,12 @@
+<svg width="420" height="190" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg">
+  <rect x="16" y="18" width="180" height="154" rx="22" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="224" y="18" width="180" height="154" rx="22" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="106" y="42" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#DC2626">Below 100</text>
+  <text x="106" y="78" text-anchor="middle" font-size="26" font-family="Arial" font-weight="700" fill="#334155">97   -3</text>
+  <text x="106" y="118" text-anchor="middle" font-size="26" font-family="Arial" font-weight="700" fill="#334155">96   -4</text>
+  <text x="106" y="154" text-anchor="middle" font-size="16" font-family="Arial" fill="#2563EB">Diagonal subtraction</text>
+  <text x="314" y="42" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#059669">Above 100</text>
+  <text x="314" y="78" text-anchor="middle" font-size="26" font-family="Arial" font-weight="700" fill="#334155">103   +3</text>
+  <text x="314" y="118" text-anchor="middle" font-size="26" font-family="Arial" font-weight="700" fill="#334155">104   +4</text>
+  <text x="314" y="154" text-anchor="middle" font-size="16" font-family="Arial" fill="#059669">Diagonal addition</text>
+</svg>

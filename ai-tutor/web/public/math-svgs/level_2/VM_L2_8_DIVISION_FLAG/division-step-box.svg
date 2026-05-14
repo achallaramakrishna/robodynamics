@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="220" viewBox="0 0 520 220">
+  <rect x="12" y="12" width="496" height="196" rx="24" fill="#F6FFFB" stroke="#BFE8D8" stroke-width="2"/>
+  <text x="24" y="34" font-family="Arial" font-size="21" font-weight="700" fill="#0F766E">Challenge: 952 ÷ 7</text>
+
+  <rect x="44" y="62" width="42" height="30" rx="10" fill="#DCFCE7" stroke="#22C55E" stroke-width="2"/>
+  <text x="65" y="82" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#15803D">7</text>
+  <rect x="118" y="56" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <rect x="184" y="56" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <rect x="250" y="56" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="146" y="82" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">9</text>
+  <text x="212" y="82" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">5</text>
+  <text x="278" y="82" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">2</text>
+
+  <rect x="332" y="52" width="154" height="122" rx="16" fill="#FFFFFF" stroke="#BFE8D8" stroke-width="2"/>
+  <text x="409" y="78" text-anchor="middle" font-family="Arial" font-size="15" font-weight="700" fill="#0F766E">Carry flow</text>
+  <text x="348" y="104" font-family="Arial" font-size="14" fill="#4B5563">9 ÷ 7 = 1 R2</text>
+  <text x="348" y="126" font-family="Arial" font-size="14" fill="#4B5563">25 ÷ 7 = 3 R4</text>
+  <text x="348" y="148" font-family="Arial" font-size="14" fill="#4B5563">42 ÷ 7 = 6 R0</text>
+  <text x="409" y="170" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#166534">Answer = 136</text>
+
+  <path d="M160 124 H226" stroke="#22C55E" stroke-width="5" stroke-linecap="round"/>
+  <path d="M226 124 L216 116 M226 124 L216 132" stroke="#22C55E" stroke-width="5" stroke-linecap="round"/>
+  <text x="194" y="148" text-anchor="middle" font-family="Arial" font-size="13" fill="#15803D">prefix carry</text>
+</svg>

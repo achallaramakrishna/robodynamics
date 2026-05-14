@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+  <!-- LDR body disc -->
+  <circle cx="100" cy="95" r="50" fill="#f5f5f5" stroke="#bbb" stroke-width="3"/>
+  <!-- snake pattern on disc -->
+  <path d="M60 75 Q80 65 100 75 Q120 85 140 75" stroke="#555" stroke-width="4" fill="none"/>
+  <path d="M60 88 Q80 78 100 88 Q120 98 140 88" stroke="#555" stroke-width="4" fill="none"/>
+  <path d="M60 101 Q80 91 100 101 Q120 111 140 101" stroke="#555" stroke-width="4" fill="none"/>
+  <path d="M60 114 Q80 104 100 114 Q120 124 140 114" stroke="#555" stroke-width="4" fill="none"/>
+  <!-- leads -->
+  <line x1="80" y1="145" x2="80" y2="210" stroke="#bbb" stroke-width="4"/>
+  <line x1="120" y1="145" x2="120" y2="200" stroke="#bbb" stroke-width="4"/>
+  <!-- sun rays -->
+  <line x1="100" y1="30" x2="100" y2="18" stroke="#f9a825" stroke-width="3"/>
+  <line x1="128" y1="38" x2="136" y2="30" stroke="#f9a825" stroke-width="3"/>
+  <line x1="72" y1="38" x2="64" y2="30" stroke="#f9a825" stroke-width="3"/>
+  <!-- labels -->
+  <text x="100" y="15" font-family="Arial" font-size="13" fill="#f57f17" text-anchor="middle" font-weight="bold">LDR (Light Sensor)</text>
+  <text x="100" y="185" font-family="monospace" font-size="10" fill="#555" text-anchor="middle">Resistance varies</text>
+  <text x="100" y="200" font-family="monospace" font-size="10" fill="#555" text-anchor="middle">with light intensity</text>
+</svg>

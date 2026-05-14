@@ -58,7 +58,26 @@ export const LanguageSelector: React.FC = () => {
         }}
       >
         <span style={{ fontSize: '16px' }}>🌐</span>
-        {getLanguageLabel(language)}
+        <span
+          style={{
+            display: 'inline-block',
+            padding: '2px 7px',
+            borderRadius: '6px',
+            fontSize: '11px',
+            fontWeight: 800,
+            background:
+              language === 'hindi-full' ? 'rgba(249,115,22,0.15)' :
+              language === 'hindi-english' ? 'rgba(59,130,246,0.15)' :
+              'rgba(16,185,129,0.15)',
+            color:
+              language === 'hindi-full' ? '#c2410c' :
+              language === 'hindi-english' ? '#1d4ed8' :
+              '#065f46',
+          }}
+        >
+          {language === 'hindi-full' ? 'हिं' : language === 'hindi-english' ? 'हिं·EN' : 'EN'}
+        </span>
+        {language === 'hindi-full' ? 'Hindi (Full)' : language === 'hindi-english' ? 'Bilingual Mix' : 'English (Simple)'}
         <span style={{ fontSize: '11px', marginLeft: '4px' }}>▼</span>
       </button>
 
@@ -108,10 +127,33 @@ export const LanguageSelector: React.FC = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '16px' }}>
-                  {language === lang ? '✓' : ' '}
+                <span style={{ fontSize: '16px', color: '#8b5cf6', fontWeight: 900, minWidth: '16px' }}>
+                  {language === lang ? '✓' : ''}
                 </span>
-                {getLanguageLabel(lang)}
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '2px 7px',
+                    borderRadius: '6px',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    background:
+                      lang === 'hindi-full' ? 'rgba(249,115,22,0.12)' :
+                      lang === 'hindi-english' ? 'rgba(59,130,246,0.12)' :
+                      'rgba(16,185,129,0.12)',
+                    color:
+                      lang === 'hindi-full' ? '#c2410c' :
+                      lang === 'hindi-english' ? '#1d4ed8' :
+                      '#065f46',
+                    marginRight: '4px',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  {lang === 'hindi-full' ? 'हिं' : lang === 'hindi-english' ? 'हिं·EN' : 'EN'}
+                </span>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#172033' }}>
+                  {lang === 'hindi-full' ? 'Hindi (Full)' : lang === 'hindi-english' ? 'Bilingual Mix' : 'English (Simple)'}
+                </span>
               </div>
               <div
                 style={{

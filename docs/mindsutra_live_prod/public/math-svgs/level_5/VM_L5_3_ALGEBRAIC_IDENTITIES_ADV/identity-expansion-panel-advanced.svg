@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Guided Pattern: (x - 2)^3</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Signs alternate for the minus case</text>
+  <rect x="58" y="116" width="684" height="212" rx="18" fill="#0F172A" stroke="#475569" stroke-width="2" />
+  <text x="92" y="164" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">x^3</text>
+  <text x="186" y="164" fill="#FCA5A5" font-size="24" font-weight="900" font-family="Verdana, sans-serif">- 3x^2(2)</text>
+  <text x="386" y="164" fill="#86EFAC" font-size="24" font-weight="900" font-family="Verdana, sans-serif">+ 3x(4)</text>
+  <text x="544" y="164" fill="#FCA5A5" font-size="24" font-weight="900" font-family="Verdana, sans-serif">- 8</text>
+  <text x="92" y="232" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">= x^3 - 6x^2 + 12x - 8</text>
+  <text x="92" y="292" fill="#FDE68A" font-size="24" font-weight="900" font-family="Verdana, sans-serif">Remember the sign pattern: +, -, +, -</text>
+</svg>

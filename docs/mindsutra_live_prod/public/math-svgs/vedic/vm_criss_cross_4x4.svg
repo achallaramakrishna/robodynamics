@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="380" height="260" font-family="Nunito,sans-serif">
+  <rect width="380" height="260" rx="14" fill="#fff7ed"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Urdhva-Tiryak — 3-Digit × 3-Digit (5 Steps)</text>
+  <text x="190" y="44" text-anchor="middle" font-size="12" fill="#92400e">123 × 321</text>
+
+  <!-- Top number digits: 1 2 3 -->
+  <rect x="50" y="54" width="40" height="40" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="70" y="80" text-anchor="middle" font-size="22" font-weight="800" fill="#b45309">1</text>
+  <rect x="100" y="54" width="40" height="40" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="120" y="80" text-anchor="middle" font-size="22" font-weight="800" fill="#b45309">2</text>
+  <rect x="150" y="54" width="40" height="40" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="170" y="80" text-anchor="middle" font-size="22" font-weight="800" fill="#b45309">3</text>
+
+  <!-- Bottom number digits: 3 2 1 -->
+  <rect x="210" y="54" width="40" height="40" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="230" y="80" text-anchor="middle" font-size="22" font-weight="800" fill="#15803d">3</text>
+  <rect x="260" y="54" width="40" height="40" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="280" y="80" text-anchor="middle" font-size="22" font-weight="800" fill="#15803d">2</text>
+  <rect x="310" y="54" width="40" height="40" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="330" y="80" text-anchor="middle" font-size="22" font-weight="800" fill="#15803d">1</text>
+
+  <!-- 5 step boxes -->
+  <rect x="20" y="112" width="68" height="36" rx="6" fill="#fee2e2"/>
+  <text x="54" y="125" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">① 3×1</text>
+  <text x="54" y="141" text-anchor="middle" font-size="12" font-weight="800" fill="#dc2626">=3</text>
+
+  <rect x="94" y="112" width="68" height="36" rx="6" fill="#fce7f3"/>
+  <text x="128" y="125" text-anchor="middle" font-size="9" font-weight="700" fill="#be185d">② 2×1+3×2</text>
+  <text x="128" y="141" text-anchor="middle" font-size="12" font-weight="800" fill="#be185d">=8</text>
+
+  <rect x="168" y="112" width="68" height="36" rx="6" fill="#ede9fe"/>
+  <text x="202" y="125" text-anchor="middle" font-size="9" font-weight="700" fill="#6d28d9">③ 1×1+2×2+3×3</text>
+  <text x="202" y="141" text-anchor="middle" font-size="12" font-weight="800" fill="#6d28d9">=14</text>
+
+  <rect x="242" y="112" width="68" height="36" rx="6" fill="#dcfce7"/>
+  <text x="276" y="125" text-anchor="middle" font-size="9" font-weight="700" fill="#15803d">④ 1×2+2×3</text>
+  <text x="276" y="141" text-anchor="middle" font-size="12" font-weight="800" fill="#15803d">=8</text>
+
+  <rect x="316" y="112" width="50" height="36" rx="6" fill="#dbeafe"/>
+  <text x="341" y="125" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8">⑤ 1×3</text>
+  <text x="341" y="141" text-anchor="middle" font-size="12" font-weight="800" fill="#1d4ed8">=3</text>
+
+  <!-- Carry propagation -->
+  <text x="190" y="170" text-anchor="middle" font-size="11" fill="#374151">3 | 8 | 14 | 8 | 3  →  handle carries left to right</text>
+  <text x="190" y="188" text-anchor="middle" font-size="11" fill="#374151">3 | 8 | 14 | 8 | 3  →  3 | 8 | 14 | 8 | 3</text>
+  <text x="190" y="206" text-anchor="middle" font-size="11" fill="#374151">= 3 | 9 | 4 | 8 | 3  (after carrying 1 from 14)</text>
+
+  <!-- Result box -->
+  <rect x="100" y="218" width="180" height="32" rx="10" fill="#b45309"/>
+  <text x="190" y="239" text-anchor="middle" font-size="18" font-weight="800" fill="white">123 × 321 = 39483</text>
+</svg>

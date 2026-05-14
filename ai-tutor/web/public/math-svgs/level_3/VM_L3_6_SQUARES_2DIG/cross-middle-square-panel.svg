@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#F8FAFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="white" stroke="#DCE5FF" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#2B3F98">The Middle Duplex</text>
+  <text x="400" y="90" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#5E6B85">The middle slot is not a square. It is the cross-double: 2 × a × b.</text>
+
+  <rect x="170" y="138" width="110" height="110" rx="20" fill="#EEF3FF" stroke="#3555B4" stroke-width="3"/>
+  <rect x="520" y="138" width="110" height="110" rx="20" fill="#ECFDF5" stroke="#0F9F6E" stroke-width="3"/>
+  <text x="225" y="202" text-anchor="middle" font-family="Segoe UI, Arial" font-size="42" font-weight="700" fill="#1F2440">6</text>
+  <text x="575" y="202" text-anchor="middle" font-family="Segoe UI, Arial" font-size="42" font-weight="700" fill="#1F2440">7</text>
+
+  <path d="M280 188 C350 112, 450 112, 520 188" fill="none" stroke="#D58A00" stroke-width="8" stroke-linecap="round"/>
+  <path d="M520 188 C450 264, 350 264, 280 188" fill="none" stroke="#D58A00" stroke-width="8" stroke-linecap="round"/>
+  <text x="400" y="184" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#9A6200">6 × 7</text>
+  <text x="400" y="232" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#9A6200">7 × 6</text>
+
+  <rect x="300" y="270" width="200" height="62" rx="16" fill="#FFF4E2" stroke="#D58A00" stroke-width="3"/>
+  <text x="400" y="298" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#9A6200">Middle duplex</text>
+  <text x="400" y="322" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">2 × 6 × 7 = 84</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
+  <rect width="420" height="120" rx="24" fill="#EAF2FF"/>
+  <text x="210" y="74" text-anchor="middle" font-family="Segoe UI, Arial" font-size="40" font-weight="700" fill="#1F2440">3 4 5</text>
+  <line x1="166" y1="40" x2="194" y2="40" stroke="#E91E8C" stroke-width="7" stroke-linecap="round"/>
+  <line x1="210" y1="40" x2="238" y2="40" stroke="#E91E8C" stroke-width="7" stroke-linecap="round"/>
+  <line x1="254" y1="40" x2="282" y2="40" stroke="#E91E8C" stroke-width="7" stroke-linecap="round"/>
+</svg>

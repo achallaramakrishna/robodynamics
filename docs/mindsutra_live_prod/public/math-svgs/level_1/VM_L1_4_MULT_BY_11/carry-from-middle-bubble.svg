@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 320" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="560" height="320" fill="#EEF2FF" rx="16"/>
+
+  <!-- Step label -->
+  <text x="280" y="28" text-anchor="middle" font-size="12" fill="#6366f1" font-weight="700" letter-spacing="1.5">CARRY RULE — WHEN MIDDLE SUM ≥ 10</text>
+
+  <!-- ══ Source number: 76 ══ -->
+  <rect x="188" y="44" width="72" height="72" rx="12" fill="#3730a3" stroke="#818cf8" stroke-width="2"/>
+  <text x="224" y="100" text-anchor="middle" font-size="46" font-weight="800" fill="white">7</text>
+
+  <text x="280" y="92" text-anchor="middle" font-size="18" font-weight="700" fill="#818cf8">×11</text>
+
+  <rect x="300" y="44" width="72" height="72" rx="12" fill="#3730a3" stroke="#818cf8" stroke-width="2"/>
+  <text x="336" y="100" text-anchor="middle" font-size="46" font-weight="800" fill="white">6</text>
+
+  <!-- Arrow down -->
+  <line x1="280" y1="122" x2="280" y2="148" stroke="#818cf8" stroke-width="2.5" stroke-dasharray="5,3" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.6s" dur="0.3s" fill="freeze"/>
+  </line>
+  <polygon points="274,145 280,155 286,145" fill="#818cf8" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.6s" dur="0.3s" fill="freeze"/>
+  </polygon>
+
+  <!-- ══ Three initial boxes ══ -->
+  <!-- Left box -->
+  <rect x="62" y="158" width="108" height="80" rx="14" fill="#3730a3" stroke="#818cf8" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.35s" fill="freeze"/>
+  </rect>
+  <text x="116" y="210" text-anchor="middle" font-size="44" font-weight="800" fill="white" opacity="0">7
+    <animate attributeName="opacity" from="0" to="1" begin="1.4s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="116" y="250" text-anchor="middle" font-size="11" fill="#a5b4fc" opacity="0">first digit (A)
+    <animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.3s" fill="freeze"/>
+  </text>
+
+  <!-- Middle box — shows 13 initially, then becomes 3 after carry -->
+  <rect x="226" y="158" width="108" height="80" rx="14" fill="#b45309" stroke="#fbbf24" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.35s" fill="freeze"/>
+  </rect>
+  <!-- Annotation above middle: 7+6=13 -->
+  <text x="280" y="142" text-anchor="middle" font-size="13" fill="#fbbf24" font-weight="700" opacity="0">7 + 6 = 13
+    <animate attributeName="opacity" from="0" to="1" begin="1.8s" dur="0.35s" fill="freeze"/>
+  </text>
+  <line x1="280" y1="145" x2="280" y2="158" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.8s" dur="0.3s" fill="freeze"/>
+  </line>
+  <!-- "13" shows first... -->
+  <text x="280" y="210" text-anchor="middle" font-size="38" font-weight="800" fill="#fef08a" opacity="0">13
+    <animate attributeName="opacity" from="0" to="1" begin="2.1s" dur="0.3s" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" begin="2.8s" dur="0.3s" fill="freeze"/>
+  </text>
+  <!-- ...then fades to "3" after carry -->
+  <text x="280" y="210" text-anchor="middle" font-size="44" font-weight="800" fill="#fef08a" opacity="0">3
+    <animate attributeName="opacity" from="0" to="1" begin="3.1s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="280" y="250" text-anchor="middle" font-size="11" fill="#fde68a" opacity="0">write 3, carry 1
+    <animate attributeName="opacity" from="0" to="1" begin="3.1s" dur="0.3s" fill="freeze"/>
+  </text>
+
+  <!-- Right box -->
+  <rect x="390" y="158" width="108" height="80" rx="14" fill="#3730a3" stroke="#818cf8" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.35s" fill="freeze"/>
+  </rect>
+  <text x="444" y="210" text-anchor="middle" font-size="44" font-weight="800" fill="white" opacity="0">6
+    <animate attributeName="opacity" from="0" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="444" y="250" text-anchor="middle" font-size="11" fill="#a5b4fc" opacity="0">last digit (B)
+    <animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.3s" fill="freeze"/>
+  </text>
+
+  <!-- ══ Carry arrow: from middle to left, adds +1 ══ -->
+  <!-- Carry label "carry +1" -->
+  <text x="190" y="270" text-anchor="middle" font-size="13" fill="#f87171" font-weight="700" opacity="0">carry +1 →
+    <animate attributeName="opacity" from="0" to="1" begin="3.3s" dur="0.35s" fill="freeze"/>
+  </text>
+  <!-- Curved arrow over the boxes -->
+  <path d="M 280,158 C 280,128 116,128 116,158" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="3.3s" dur="0.35s" fill="freeze"/>
+  </path>
+  <polygon points="111,153 116,162 121,153" fill="#ef4444" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="3.3s" dur="0.35s" fill="freeze"/>
+  </polygon>
+
+  <!-- Left box updates: 7 → 8 (with cross-through on 7) -->
+  <text x="116" y="210" text-anchor="middle" font-size="44" font-weight="800" fill="#ef4444" opacity="0">8
+    <animate attributeName="opacity" from="0" to="1" begin="3.6s" dur="0.4s" fill="freeze"/>
+  </text>
+  <!-- Strikethrough "7" to show replacement -->
+  <line x1="88" y1="198" x2="144" y2="185" stroke="#ef4444" stroke-width="3" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="3.3s" dur="0.3s" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" begin="3.6s" dur="0.2s" fill="freeze"/>
+  </line>
+
+  <!-- ══ Answer ══ -->
+  <text x="280" y="300" text-anchor="middle" font-size="18" font-weight="800" fill="#16a34a" opacity="0">76 × 11 = 836 ✓
+    <animate attributeName="opacity" from="0" to="1" begin="4.1s" dur="0.5s" fill="freeze"/>
+  </text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="150" viewBox="0 0 420 150">
+  <rect width="420" height="150" rx="24" fill="#FFF4CC"/>
+  <path d="M48 76 H344" stroke="#D4A72C" stroke-width="8" stroke-linecap="round"/>
+  <path d="M330 62 L358 76 L330 90" fill="none" stroke="#D4A72C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="118" cy="76" r="22" fill="white" stroke="#D4A72C" stroke-width="4"/>
+  <text x="118" y="84" text-anchor="middle" font-family="Segoe UI, Arial" font-size="20" font-weight="700" fill="#1F2440">8</text>
+  <text x="208" y="84" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#1F2440">carry</text>
+  <text x="210" y="130" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">move extra tens to the next slot</text>
+</svg>

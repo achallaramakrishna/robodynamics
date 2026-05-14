@@ -1,0 +1,138 @@
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .label { font-size: 12px; font-weight: bold; fill: #333; }
+      .text { font-size: 10px; fill: #555; }
+      .section-title { font-size: 13px; font-weight: bold; fill: #fff; }
+      .symbol { stroke: #2c3e50; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="250" y="35" class="title" text-anchor="middle">SEMICONDUCTOR P-N JUNCTION DIODE</text>
+
+  <!-- ===== P-N JUNCTION DIAGRAM ===== -->
+  <g id="pn-junction">
+    <!-- P-type region -->
+    <rect x="40" y="80" width="120" height="120" fill="#fadbd8" stroke="#c0392b" stroke-width="2"/>
+    <text x="100" y="130" class="label" text-anchor="middle" font-size="14">P-type</text>
+    <text x="100" y="150" class="text" text-anchor="middle">(Holes +)</text>
+
+    <!-- N-type region -->
+    <rect x="160" y="80" width="120" height="120" fill="#d6eaf8" stroke="#2980b9" stroke-width="2"/>
+    <text x="220" y="130" class="label" text-anchor="middle" font-size="14">N-type</text>
+    <text x="220" y="150" class="text" text-anchor="middle">(Electrons -)</text>
+
+    <!-- Depletion region (boundary) -->
+    <line x1="160" y1="75" x2="160" y2="205" stroke="#e74c3c" stroke-width="3"/>
+    <text x="160" y="220" class="text" text-anchor="middle" font-size="9">Depletion</text>
+    <text x="160" y="233" class="text" text-anchor="middle" font-size="9">Region</text>
+
+    <!-- Majority carriers (holes in P) -->
+    <circle cx="70" cy="100" r="4" fill="#c0392b"/>
+    <circle cx="110" cy="120" r="4" fill="#c0392b"/>
+    <circle cx="90" cy="140" r="4" fill="#c0392b"/>
+    <circle cx="120" cy="160" r="4" fill="#c0392b"/>
+
+    <!-- Majority carriers (electrons in N) -->
+    <circle cx="190" cy="100" r="4" fill="#2980b9"/>
+    <circle cx="230" cy="120" r="4" fill="#2980b9"/>
+    <circle cx="210" cy="140" r="4" fill="#2980b9"/>
+    <circle cx="240" cy="160" r="4" fill="#2980b9"/>
+  </g>
+
+  <!-- ===== FORWARD BIAS ===== -->
+  <g id="forward-bias">
+    <rect x="40" y="250" width="200" height="150" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2" rx="5"/>
+
+    <text x="140" y="270" class="label" text-anchor="middle" font-size="12">FORWARD BIAS</text>
+
+    <!-- Diode symbol -->
+    <line x1="70" y1="300" x2="150" y2="300" stroke="#2c3e50" stroke-width="2"/>
+    <polygon points="150,290 150,310 170,300" fill="#2c3e50"/>
+    <line x1="170" y1="290" x2="170" y2="310" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="170" y1="300" x2="210" y2="300" stroke="#2c3e50" stroke-width="2"/>
+
+    <!-- Battery connections -->
+    <circle cx="50" cy="300" r="5" fill="#e74c3c"/>
+    <text x="45" y="330" class="text" text-anchor="middle" font-size="9">+ve</text>
+
+    <circle cx="230" cy="300" r="5" fill="#2980b9"/>
+    <text x="235" y="330" class="text" text-anchor="middle" font-size="9">−ve</text>
+
+    <!-- Current flow arrow -->
+    <path d="M 140 320 L 140 340" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/>
+    <text x="160" y="335" class="text" font-size="9">Current flows</text>
+
+    <!-- Characteristics -->
+    <text x="50" y="360" class="text" font-size="9">• Barrier potential reduced</text>
+    <text x="50" y="375" class="text" font-size="9">• Carriers cross junction</text>
+    <text x="50" y="390" class="text" font-size="9">• Low resistance</text>
+  </g>
+
+  <!-- ===== REVERSE BIAS ===== -->
+  <g id="reverse-bias">
+    <rect x="260" y="250" width="200" height="150" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2" rx="5"/>
+
+    <text x="360" y="270" class="label" text-anchor="middle" font-size="12">REVERSE BIAS</text>
+
+    <!-- Diode symbol -->
+    <line x1="290" y1="300" x2="370" y2="300" stroke="#2c3e50" stroke-width="2"/>
+    <polygon points="370,290 370,310 390,300" fill="#2c3e50"/>
+    <line x1="390" y1="290" x2="390" y2="310" stroke="#2c3e50" stroke-width="3"/>
+    <line x1="390" y1="300" x2="430" y2="300" stroke="#2c3e50" stroke-width="2"/>
+
+    <!-- Battery connections (reversed) -->
+    <circle cx="280" cy="300" r="5" fill="#2980b9"/>
+    <text x="275" y="330" class="text" text-anchor="middle" font-size="9">−ve</text>
+
+    <circle cx="450" cy="300" r="5" fill="#e74c3c"/>
+    <text x="455" y="330" class="text" text-anchor="middle" font-size="9">+ve</text>
+
+    <!-- No current indicator -->
+    <circle cx="360" cy="330" r="20" fill="none" stroke="#e74c3c" stroke-width="2"/>
+    <line x1="345" y1="315" x2="375" y2="345" stroke="#e74c3c" stroke-width="2"/>
+    <text x="360" y="360" class="text" text-anchor="middle" font-size="9">No current</text>
+
+    <!-- Characteristics -->
+    <text x="270" y="375" class="text" font-size="9">• Barrier potential increases</text>
+    <text x="270" y="390" class="text" font-size="9">• Depletion region widens</text>
+    <text x="270" y="405" class="text" font-size="9">• High resistance</text>
+  </g>
+
+  <!-- Arrow marker -->
+  <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+    <polygon points="0 0, 10 3, 0 6" fill="#e74c3c"/>
+  </marker>
+
+  <!-- ===== I-V CHARACTERISTIC CURVE ===== -->
+  <g id="iv-curve">
+    <rect x="40" y="430" width="420" height="140" fill="#f9f9f9" stroke="#95a5a6" stroke-width="1.5" rx="3"/>
+
+    <text x="250" y="450" class="label" text-anchor="middle" font-size="12">I-V Characteristic Curve</text>
+
+    <!-- Axes -->
+    <line x1="80" y1="520" x2="440" y2="520" stroke="#2c3e50" stroke-width="2"/>
+    <line x1="80" y1="470" x2="80" y2="520" stroke="#2c3e50" stroke-width="2"/>
+
+    <!-- Axis labels -->
+    <text x="450" y="525" class="text" font-size="10">Forward (V)</text>
+    <text x="55" y="475" class="text" font-size="10">I (A)</text>
+
+    <!-- Curve (exponential in forward bias region) -->
+    <path d="M 80 515 L 150 505 Q 200 480 240 420 Q 260 380 280 350 L 300 350"
+          stroke="#27ae60" stroke-width="2" fill="none"/>
+
+    <!-- Reverse bias region (nearly flat) -->
+    <line x1="80 y1="518" x2="60 y2="518" stroke="#3498db" stroke-width="2"/>
+
+    <!-- Breakdown region -->
+    <path d="M 60 518 L 40 540" stroke="#e74c3c" stroke-width="2"/>
+
+    <!-- Labels on curve -->
+    <text x="250" y="350" class="text" font-size="8">Forward bias</text>
+    <text x="70" y="505" class="text" font-size="8">Reverse bias</text>
+    <text x="40" y="560" class="text" font-size="8">Breakdown</text>
+  </g>
+</svg>

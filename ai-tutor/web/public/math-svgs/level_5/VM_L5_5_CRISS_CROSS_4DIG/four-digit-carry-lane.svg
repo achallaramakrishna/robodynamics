@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <marker id="carryArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="800" height="400" rx="22" fill="#fff1f2"/>
+  <rect x="18" y="18" width="764" height="364" rx="20" fill="#ffffff" stroke="#fecdd3" stroke-width="2"/>
+  <text x="42" y="56" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#0f172a">Carry Lane Example</text>
+  <text x="42" y="83" font-family="Arial, sans-serif" font-size="15" fill="#475569">When a band total has two digits, write one digit and send the extra left.</text>
+
+  <g transform="translate(54 132)" font-family="Arial, sans-serif">
+    <rect x="0" y="58" width="88" height="88" rx="16" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
+    <rect x="98" y="58" width="88" height="88" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+    <rect x="196" y="58" width="88" height="88" rx="16" fill="#e0e7ff" stroke="#a5b4fc" stroke-width="2"/>
+    <rect x="294" y="58" width="88" height="88" rx="16" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+    <rect x="392" y="58" width="88" height="88" rx="16" fill="#e0e7ff" stroke="#a5b4fc" stroke-width="2"/>
+    <rect x="490" y="58" width="88" height="88" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+    <rect x="588" y="58" width="88" height="88" rx="16" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
+
+    <text x="44" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C7</text>
+    <text x="142" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C6</text>
+    <text x="240" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C5</text>
+    <text x="338" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C4</text>
+    <text x="436" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C3</text>
+    <text x="534" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C2</text>
+    <text x="632" y="44" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">C1</text>
+
+    <text x="44" y="112" font-size="30" font-weight="700" fill="#0f172a" text-anchor="middle">1</text>
+    <text x="142" y="112" font-size="30" font-weight="700" fill="#0f172a" text-anchor="middle">3</text>
+    <text x="240" y="112" font-size="30" font-weight="700" fill="#0f172a" text-anchor="middle">7</text>
+    <text x="338" y="112" font-size="30" font-weight="700" fill="#dc2626" text-anchor="middle">10</text>
+    <text x="436" y="112" font-size="30" font-weight="700" fill="#0f172a" text-anchor="middle">9</text>
+    <text x="534" y="112" font-size="30" font-weight="700" fill="#0f172a" text-anchor="middle">7</text>
+    <text x="632" y="112" font-size="30" font-weight="700" fill="#0f172a" text-anchor="middle">4</text>
+
+    <line x1="338" y1="28" x2="240" y2="18" stroke="#dc2626" stroke-width="4" marker-end="url(#carryArrow)"/>
+    <text x="290" y="16" font-size="18" font-weight="700" fill="#dc2626" text-anchor="middle">carry 1</text>
+  </g>
+
+  <rect x="108" y="330" width="584" height="36" rx="18" fill="#ffe4e6" stroke="#fda4af"/>
+  <text x="400" y="354" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#9f1239" text-anchor="middle">10 becomes write 0 in this band, add 1 to the next band on the left.</text>
+</svg>

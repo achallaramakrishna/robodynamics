@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F8FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D6E2FF" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#7C3AED"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Move the decimal with place value</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">Each step to the left makes the value 10 times bigger. Each step right makes it 10 times smaller.</text>
+
+  <line x1="110" y1="190" x2="690" y2="190" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <circle cx="150" cy="190" r="22" fill="#DBEAFE"/><text x="150" y="197" fill="#1D4ED8" font-size="14" font-weight="700">0.24</text>
+    <circle cx="260" cy="190" r="22" fill="#E0E7FF"/><text x="260" y="197" fill="#4338CA" font-size="14" font-weight="700">2.4</text>
+    <circle cx="370" cy="190" r="22" fill="#F5F3FF"/><text x="370" y="197" fill="#6D28D9" font-size="14" font-weight="700">24</text>
+    <circle cx="480" cy="190" r="22" fill="#FCE7F3"/><text x="480" y="197" fill="#BE185D" font-size="14" font-weight="700">240</text>
+    <circle cx="590" cy="190" r="22" fill="#ECFCCB"/><text x="590" y="197" fill="#4D7C0F" font-size="14" font-weight="700">2400</text>
+  </g>
+  <path d="M265 150 C305 120, 325 120, 365 150" fill="none" stroke="#7C3AED" stroke-width="4"/>
+  <polygon points="365,150 353,144 355,158" fill="#7C3AED"/>
+  <text x="315" y="126" fill="#7C3AED" font-size="16" font-family="Arial, sans-serif" font-weight="700">×10</text>
+
+  <path d="M475 150 C435 120, 415 120, 375 150" fill="none" stroke="#BE185D" stroke-width="4"/>
+  <polygon points="375,150 387,144 385,158" fill="#BE185D"/>
+  <text x="425" y="126" fill="#BE185D" font-size="16" font-family="Arial, sans-serif" font-weight="700">÷10</text>
+
+  <rect x="68" y="270" width="306" height="68" rx="18" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <rect x="426" y="270" width="306" height="68" rx="18" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="92" y="301" fill="#5B21B6" font-size="18" font-family="Arial, sans-serif" font-weight="700">Example</text>
+  <text x="92" y="325" fill="#334155" font-size="16" font-family="Arial, sans-serif">2.4 × 10 = 24</text>
+  <text x="450" y="301" fill="#1D4ED8" font-size="18" font-family="Arial, sans-serif" font-weight="700">Reverse check</text>
+  <text x="450" y="325" fill="#334155" font-size="16" font-family="Arial, sans-serif">24 ÷ 10 = 2.4</text>
+</svg>

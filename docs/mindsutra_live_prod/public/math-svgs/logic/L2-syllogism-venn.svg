@@ -1,0 +1,53 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L2 Logic Venn Detective - Syllogism Board</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Detective Board */}
+  <rect x="50" y="80" width="700" height="400" rx="20" fill="#1E293B" stroke="#334155" stroke-width="4" />
+  <path d="M50,130 L750,130" stroke="#334155" stroke-width="2" />
+
+  {/* Venn Circles */}
+  <g id="venn" transform="translate(400, 300)">
+     <circle id="set-a" cx="-50" cy="0" r="100" fill="rgba(56, 189, 248, 0.2)" stroke="#38BDF8" stroke-width="3" />
+     <circle id="set-b" cx="50" cy="0" r="100" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" stroke-width="3" />
+     
+     <text x="-100" y="-120" text-anchor="middle" fill="#38BDF8" font-weight="900" font-size="14">FLOWERS</text>
+     <text x="100" y="-120" text-anchor="middle" fill="#F472B6" font-weight="900" font-size="14">PLANTS</text>
+
+     {/* Overlap Shimmer */}
+     <path d="M0,-86 A100,100 0 0,1 0,86 A100,100 0 0,1 0,-86" fill="white" opacity="0.1" class="shimmer" />
+  </g>
+
+  {/* Statement Cards */}
+  <g transform="translate(80, 150)">
+     <rect width="200" height="60" rx="10" fill="#334155" stroke="#38BDF8" stroke-opacity="0.5" />
+     <text x="20" y="35" fill="white" font-size="12">STATEMENT 1:</text>
+     <text x="20" y="52" fill="#38BDF8" font-size="10" font-weight="900">ALL ROSES ARE FLOWERS</text>
+  </g>
+
+  <g transform="translate(80, 230)">
+     <rect width="200" height="60" rx="10" fill="#334155" stroke="#F472B6" stroke-opacity="0.5" />
+     <text x="20" y="35" fill="white" font-size="12">STATEMENT 2:</text>
+     <text x="20" y="52" fill="#F472B6" font-size="10" font-weight="900">ALL FLOWERS ARE PLANTS</text>
+  </g>
+
+  {/* Conclusion Verdict */}
+  <g transform="translate(520, 150)">
+     <rect width="200" height="150" rx="10" fill="#0F172A" stroke="#38BDF8" />
+     <text x="100" y="30" text-anchor="middle" fill="white" font-size="12" font-weight="900">DETECTIVE VERDICT</text>
+     <text x="100" y="70" text-anchor="middle" fill="#94A3B8" font-size="11">DO ALL ROSES BELONG</text>
+     <text x="100" y="90" text-anchor="middle" fill="#94A3B8" font-size="11">TO THE PLANT CIRCLE?</text>
+     
+     <rect x="25" y="110" width="150" height="30" rx="5" fill="#38BDF8" cursor="pointer" />
+     <text x="100" y="130" text-anchor="middle" fill="#0F172A" font-weight="900">YES, IT FOLLOWS!</text>
+  </g>
+
+  {/* Magnifying Glass FX */}
+  <g transform="translate(700, 500)">
+     <circle r="30" fill="none" stroke="#94A3B8" stroke-width="10" />
+     <line x1="20" y1="20" x2="50" y2="50" stroke="#94A3B8" stroke-width="10" stroke-linecap="round" />
+  </g>
+
+  <text x="400" y="50" text-anchor="middle" font-size="28" font-weight="900" fill="#F8FAFC">Logic Venn Detective</text>
+</svg>

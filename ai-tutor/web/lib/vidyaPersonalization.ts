@@ -197,6 +197,16 @@ export function buildVidyaLearnerSnapshot(session: AppSession, lessonId: string)
   const strongestSkills = [...skillMastery].sort((a, b) => b.masteryScore - a.masteryScore).slice(0, 2).map((s) => s.skillName);
   const weakSkills = [...skillMastery].sort((a, b) => a.masteryScore - b.masteryScore).slice(0, 2).map((s) => s.skillName);
 
+  const relevant = (session.skillMastery ?? []).filter((skill) =>
+    skill.productSlug === "vidya" && skill.lessonId === lessonId,
+  );
+  const conceptClarityScore = relevant.length ? average(relevant.map((skill) => ratio(skill.conceptClearCount ?? 0, skill.conceptChecks ?? 0))) : 0.65;
+  const transferScore = relevant.length ? average(relevant.map((skill) => ratio(skill.transferCorrect ?? 0, skill.transferChecks ?? 0))) : 0.70;
+  // If there are confidence scores, average them, else default to 0.75
+  const confidenceSum = relevant.reduce((sum, skill) => sum + (skill.confidenceScoreTotal ?? 0), 0);
+  const confidenceCount = relevant.reduce((sum, skill) => sum + (skill.conceptChecks ?? 0) + (skill.transferChecks ?? 0), 0);
+  const avgConfidence = confidenceCount > 0 ? confidenceSum / confidenceCount : 0.75;
+
   const coachLine =
     supportMode === "challenge"
       ? `${firstName}, you look ready for stretch work. I will remove scaffolding so you can architect this from scratch.`
@@ -212,5 +222,8 @@ export function buildVidyaLearnerSnapshot(session: AppSession, lessonId: string)
     weakSkills,
     recommendedNextFocus: weakSkills[0] ?? "General Python fluency",
     xp: session.xp,
+    conceptClarityScore: round(clamp(conceptClarityScore || 0.65, 0, 1)),
+    transferScore: round(clamp(transferScore || 0.70, 0, 1)),
+    avgConfidence: round(clamp(avgConfidence || 0.75, 0, 1)),
   };
 }

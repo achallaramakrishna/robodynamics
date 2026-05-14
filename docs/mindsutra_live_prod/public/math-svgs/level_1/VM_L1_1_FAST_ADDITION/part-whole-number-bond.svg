@@ -1,0 +1,13 @@
+<svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="130" cy="40" r="28" fill="#DBEAFE" stroke="#2563EB" stroke-width="3"></circle>
+  <text x="130" y="47" text-anchor="middle" font-size="28" font-family="Arial" fill="#1E3A8A">5</text>
+
+  <line x1="115" y1="65" x2="80" y2="110" stroke="#6B7280" stroke-width="3"></line>
+  <line x1="145" y1="65" x2="180" y2="110" stroke="#6B7280" stroke-width="3"></line>
+
+  <circle cx="70" cy="125" r="24" fill="#DCFCE7" stroke="#16A34A" stroke-width="3"></circle>
+  <text x="70" y="132" text-anchor="middle" font-size="24" font-family="Arial" fill="#166534">2</text>
+
+  <circle cx="190" cy="125" r="24" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"></circle>
+  <text x="190" y="132" text-anchor="middle" font-size="24" font-family="Arial" fill="#92400E">3</text>
+</svg>

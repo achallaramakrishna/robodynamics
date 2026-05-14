@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" width="200" height="180">
+  <defs><style>.bg{fill:#0D1B2A;}</style></defs>
+  <rect width="200" height="180" rx="12" class="bg"/>
+  <text x="100" y="22" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#818CF8">Surplus Chip</text>
+
+  <!-- Chip -->
+  <rect x="30" y="38" width="140" height="90" rx="14" fill="rgba(34,197,94,0.12)" stroke="#22C55E" stroke-width="2.5"/>
+
+  <!-- Number -->
+  <text x="100" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="36" font-weight="900" fill="#34D399">103</text>
+
+  <!-- Surplus badge -->
+  <rect x="116" y="42" width="50" height="26" rx="6" fill="#22C55E"/>
+  <text x="141" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="800" fill="#fff">+3</text>
+
+  <text x="100" y="116" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#94A3B8">above 100</text>
+
+  <!-- Arrow pointing down from 100 -->
+  <line x1="100" y1="134" x2="100" y2="150" stroke="#22C55E" stroke-width="2"/>
+  <polygon points="96,134 100,124 104,134" fill="#22C55E"/>
+  <text x="100" y="174" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#475569">100 + 3 extra</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="210" viewBox="0 0 440 210">
+  <rect width="440" height="210" rx="24" fill="white"/>
+  <text x="30" y="42" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="#3B3A8C">Rewrite with a bar</text>
+  <text x="30" y="84" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">13 becomes 1 and barred 7</text>
+  <text x="30" y="116" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">take 1 to the left, keep the complement as a bar digit</text>
+  <rect x="286" y="52" width="118" height="100" rx="18" fill="#FCE7F3" stroke="#E91E8C" stroke-width="3"/>
+  <text x="345" y="111" text-anchor="middle" font-family="Segoe UI, Arial" font-size="38" font-weight="700" fill="#1F2440">1 ?7</text>
+</svg>

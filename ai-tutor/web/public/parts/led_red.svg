@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
+  <defs>
+    <radialGradient id="ledGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff6666"/>
+      <stop offset="60%" stop-color="#cc0000"/>
+      <stop offset="100%" stop-color="#880000"/>
+    </radialGradient>
+    <radialGradient id="ledShine" cx="35%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.7)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+  </defs>
+  <!-- LED body dome -->
+  <ellipse cx="100" cy="95" rx="55" ry="55" fill="url(#ledGlow)" opacity="0.95"/>
+  <!-- flat base -->
+  <rect x="45" y="140" width="110" height="28" rx="4" fill="#aa0000"/>
+  <!-- flat edge marker (cathode side) -->
+  <rect x="45" y="140" width="35" height="28" rx="4" fill="#880000"/>
+  <!-- shine -->
+  <ellipse cx="85" cy="80" rx="28" ry="22" fill="url(#ledShine)"/>
+  <!-- leads -->
+  <line x1="80" y1="168" x2="80" y2="250" stroke="#aaa" stroke-width="4" stroke-linecap="round"/>
+  <line x1="120" y1="168" x2="120" y2="240" stroke="#aaa" stroke-width="4" stroke-linecap="round"/>
+  <!-- labels -->
+  <text x="63" y="265" font-family="monospace" font-size="11" fill="#cc0000" font-weight="bold">−(short)</text>
+  <text x="105" y="255" font-family="monospace" font-size="11" fill="#cc0000" font-weight="bold">+(long)</text>
+  <text x="100" y="30" font-family="Arial" font-size="16" fill="#333" text-anchor="middle" font-weight="bold">Red LED</text>
+  <text x="100" y="50" font-family="Arial" font-size="11" fill="#666" text-anchor="middle">5mm • 2V • 20mA</text>
+</svg>

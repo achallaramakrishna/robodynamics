@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="200" viewBox="0 0 420 200">
+  <rect width="420" height="200" rx="24" fill="#FFF4CC"/>
+  <text x="34" y="48" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="#1F2440">Adjustment Step</text>
+  <text x="34" y="86" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">1. Take the current quotient digit</text>
+  <text x="34" y="116" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">2. Multiply by the complement</text>
+  <text x="34" y="146" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">3. Add or subtract into the next column</text>
+</svg>

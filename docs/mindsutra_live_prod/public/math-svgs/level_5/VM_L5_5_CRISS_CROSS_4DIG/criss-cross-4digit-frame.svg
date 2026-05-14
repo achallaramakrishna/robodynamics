@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">4-Digit x 4-Digit in 7 Columns</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Example frame: 1234 x 1111</text>
+  <rect x="48" y="102" width="704" height="236" rx="18" fill="#111827" stroke="#475569" stroke-width="2" />
+  <text x="168" y="148" fill="#F8FAFC" font-size="38" font-weight="800" font-family="Verdana, sans-serif">1 2 3 4</text>
+  <text x="168" y="194" fill="#CBD5E1" font-size="34" font-weight="700" font-family="Verdana, sans-serif">1 1 1 1</text>
+  <line x1="146" y1="156" x2="342" y2="156" stroke="#38BDF8" stroke-width="3" />
+  <text x="410" y="148" fill="#E2E8F0" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Columns from right to left</text>
+  <text x="410" y="188" fill="#FDE68A" font-size="24" font-weight="800" font-family="Verdana, sans-serif">C1   C2   C3   C4   C5   C6   C7</text>
+  <rect x="84" y="236" width="68" height="54" rx="10" fill="#1E293B" stroke="#64748B" />
+  <rect x="162" y="236" width="68" height="54" rx="10" fill="#1E293B" stroke="#64748B" />
+  <rect x="240" y="236" width="68" height="54" rx="10" fill="#1E293B" stroke="#64748B" />
+  <rect x="318" y="236" width="68" height="54" rx="10" fill="#78350F" stroke="#FDE68A" />
+  <rect x="396" y="236" width="68" height="54" rx="10" fill="#1E293B" stroke="#64748B" />
+  <rect x="474" y="236" width="68" height="54" rx="10" fill="#1E293B" stroke="#64748B" />
+  <rect x="552" y="236" width="68" height="54" rx="10" fill="#1E293B" stroke="#64748B" />
+  <text x="99" y="270" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">D×H</text>
+  <text x="171" y="270" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">2 terms</text>
+  <text x="249" y="270" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">3 terms</text>
+  <text x="328" y="270" fill="#FEF3C7" font-size="20" font-weight="900" font-family="Verdana, sans-serif">4 terms</text>
+  <text x="407" y="270" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">3 terms</text>
+  <text x="485" y="270" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">2 terms</text>
+  <text x="577" y="270" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">A×E</text>
+  <text x="82" y="322" fill="#FDE68A" font-size="20" font-weight="800" font-family="Verdana, sans-serif">Middle column is the longest.</text>
+</svg>

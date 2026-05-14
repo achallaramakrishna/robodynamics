@@ -1,0 +1,26 @@
+<svg width="640" height="420" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MindSparc Level 1 - Simple Analogies</title>
+  <desc id="desc">A simple analogy card showing bird is to nest as fish is to water.</desc>
+  <rect width="640" height="420" rx="32" fill="#ecfdf5"/>
+  <text x="54" y="72" fill="#047857" font-family="Verdana, Arial, sans-serif" font-size="26" font-weight="800">Simple Analogies</text>
+  <text x="54" y="105" fill="#475569" font-family="Verdana, Arial, sans-serif" font-size="15">Find the relationship, then copy the logic.</text>
+  <g font-family="Verdana, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    <rect x="58" y="154" width="116" height="116" rx="26" fill="#fff" stroke="#34d399" stroke-width="4"/>
+    <path d="M92 215 C112 176 154 180 158 216 C134 205 114 205 92 215 Z" fill="#38bdf8"/>
+    <circle cx="135" cy="196" r="5" fill="#0f172a"/>
+    <path d="M158 203 L176 194 L160 216 Z" fill="#f97316"/>
+    <text x="116" y="306" fill="#047857" font-size="16">Bird</text>
+    <text x="226" y="218" fill="#047857" font-size="28">:</text>
+    <rect x="278" y="154" width="116" height="116" rx="26" fill="#fff" stroke="#34d399" stroke-width="4"/>
+    <path d="M306 210 C326 184 366 184 386 210 C366 236 326 236 306 210 Z" fill="#a16207" opacity=".35"/>
+    <path d="M318 210 C336 196 356 196 374 210" fill="none" stroke="#92400e" stroke-width="5"/>
+    <text x="336" y="306" fill="#047857" font-size="16">Nest</text>
+    <text x="440" y="218" fill="#047857" font-size="28">::</text>
+    <rect x="486" y="154" width="116" height="116" rx="26" fill="#fff" stroke="#34d399" stroke-width="4"/>
+    <path d="M515 212 C540 184 574 196 590 212 C574 228 540 240 515 212 Z" fill="#06b6d4"/>
+    <circle cx="566" cy="207" r="4" fill="#083344"/>
+    <text x="544" y="306" fill="#047857" font-size="16">Fish : ?</text>
+  </g>
+  <rect x="244" y="338" width="152" height="46" rx="23" fill="#fff" stroke="#10b981" stroke-width="3"/>
+  <text x="320" y="368" text-anchor="middle" fill="#047857" font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="900">Water</text>
+</svg>

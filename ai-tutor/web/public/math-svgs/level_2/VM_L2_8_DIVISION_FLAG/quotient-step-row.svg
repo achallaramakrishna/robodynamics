@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="250" viewBox="0 0 560 250">
+  <rect x="12" y="12" width="536" height="226" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="24" y="34" font-family="Arial" font-size="21" font-weight="700" fill="#B45309">Worked example: 756 ÷ 4</text>
+
+  <rect x="44" y="64" width="42" height="30" rx="10" fill="#FFEDD5" stroke="#F59E0B" stroke-width="2"/>
+  <text x="65" y="84" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#B45309">4</text>
+
+  <rect x="118" y="58" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <rect x="184" y="58" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <rect x="250" y="58" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="146" y="84" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">7</text>
+  <text x="212" y="84" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">5</text>
+  <text x="278" y="84" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">6</text>
+
+  <rect x="116" y="118" width="58" height="36" rx="10" fill="#EEF2FF" stroke="#6366F1" stroke-width="2"/>
+  <rect x="182" y="118" width="58" height="36" rx="10" fill="#EEF2FF" stroke="#6366F1" stroke-width="2"/>
+  <rect x="248" y="118" width="58" height="36" rx="10" fill="#EEF2FF" stroke="#6366F1" stroke-width="2"/>
+  <text x="145" y="141" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#4338CA">1</text>
+  <text x="211" y="141" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#4338CA">8</text>
+  <text x="277" y="141" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#4338CA">9</text>
+
+  <rect x="332" y="56" width="184" height="124" rx="16" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2"/>
+  <text x="424" y="82" text-anchor="middle" font-family="Arial" font-size="15" font-weight="700" fill="#9A3412">Digit flow</text>
+  <text x="348" y="108" font-family="Arial" font-size="14" fill="#4B5563">7 ÷ 4 = 1 remainder 3</text>
+  <text x="348" y="130" font-family="Arial" font-size="14" fill="#4B5563">35 ÷ 4 = 8 remainder 3</text>
+  <text x="348" y="152" font-family="Arial" font-size="14" fill="#4B5563">36 ÷ 4 = 9 remainder 0</text>
+  <text x="348" y="172" font-family="Arial" font-size="14" font-weight="700" fill="#166534">Quotient = 189</text>
+
+  <text x="212" y="208" text-anchor="middle" font-family="Arial" font-size="18" fill="#64748B">quotient digits appear one at a time</text>
+</svg>

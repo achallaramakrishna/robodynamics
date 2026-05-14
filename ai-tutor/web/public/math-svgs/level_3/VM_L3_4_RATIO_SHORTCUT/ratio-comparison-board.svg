@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F9FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#2563EB"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Compare ratios by simplifying first</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">Reduce each ratio to its simplest form before deciding.</text>
+
+  <rect x="90" y="144" width="270" height="158" rx="22" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="440" y="144" width="270" height="158" rx="22" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="225" y="182" fill="#1D4ED8" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Ratio A</text>
+  <text x="575" y="182" fill="#15803D" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Ratio B</text>
+  <text x="225" y="224" fill="#10213F" font-size="38" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">12 : 18</text>
+  <text x="575" y="224" fill="#10213F" font-size="38" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">2 : 3</text>
+  <text x="225" y="264" fill="#475569" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">divide by 6 → 2 : 3</text>
+  <text x="575" y="264" fill="#475569" font-size="18" font-family="Arial, sans-serif" text-anchor="middle">already simplest</text>
+  <rect x="188" y="318" width="424" height="34" rx="10" fill="#F0FDF4" stroke="#86EFAC"/>
+  <text x="400" y="340" fill="#15803D" font-size="17" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Both reduce to 2 : 3, so the ratios are equal.</text>
+</svg>

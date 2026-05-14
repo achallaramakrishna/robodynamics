@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Worked Example: 997 x 995</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Base 1000, so the right side uses 3 digits</text>
+  <rect x="54" y="108" width="692" height="236" rx="18" fill="#111827" stroke="#475569" stroke-width="2"/>
+  <text x="86" y="154" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">d1 = -3, d2 = -5</text>
+  <text x="86" y="196" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Left = 997 - 5 = 992</text>
+  <text x="86" y="236" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Right = 15 -> 015</text>
+  <text x="86" y="286" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">997 x 995 = 992015</text>
+</svg>

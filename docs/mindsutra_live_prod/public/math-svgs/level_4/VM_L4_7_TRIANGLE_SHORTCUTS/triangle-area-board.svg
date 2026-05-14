@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Triangle Area by Triple Recognition</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Example: 3-4-5 and its multiples</text>
+  <polygon points="110,300 110,140 290,300" fill="#0F172A" stroke="#94A3B8" stroke-width="3"/>
+  <text x="92" y="224" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">4</text>
+  <text x="184" y="324" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">3</text>
+  <text x="210" y="210" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">5</text>
+  <text x="374" y="176" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Area = 1/2 x base x height</text>
+  <text x="374" y="224" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">1/2 x 3 x 4 = 6</text>
+  <text x="374" y="278" fill="#FDE68A" font-size="24" font-weight="900" font-family="Verdana, sans-serif">15-20-25 -> 1/2 x 15 x 20 = 150</text>
+</svg>

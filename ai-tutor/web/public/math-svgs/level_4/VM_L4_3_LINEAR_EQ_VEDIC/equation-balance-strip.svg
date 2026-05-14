@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <rect width="800" height="200" rx="18" fill="#f8fafc"/>
+  <rect x="18" y="18" width="764" height="164" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+
+  <text x="42" y="48" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#64748b">VEDIKA LINEAR EQUATIONS</text>
+  <text x="400" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1e293b">Ax + B = Cx + D  ->  x = (D - B) / (A - C)</text>
+
+  <g transform="translate(90 112)">
+    <rect x="0" y="0" width="150" height="42" rx="14" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="75" y="27" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#3730a3">keep x terms together</text>
+
+    <rect x="190" y="0" width="150" height="42" rx="14" fill="#fff7ed" stroke="#fdba74"/>
+    <text x="265" y="27" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#c2410c">move constants together</text>
+
+    <rect x="380" y="0" width="240" height="42" rx="14" fill="#ecfdf5" stroke="#86efac"/>
+    <text x="500" y="27" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#166534">divide once the balance is clean</text>
+  </g>
+</svg>

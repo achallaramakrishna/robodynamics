@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="180" viewBox="0 0 360 180">
+  <rect width="360" height="180" rx="24" fill="#E7FBF5"/>
+  <rect x="88" y="36" width="64" height="96" rx="18" fill="white" stroke="#34B27B" stroke-width="3"/>
+  <rect x="208" y="36" width="64" height="96" rx="18" fill="white" stroke="#34B27B" stroke-width="3"/>
+  <path d="M120 46 V122" stroke="#34B27B" stroke-width="6" stroke-linecap="round"/>
+  <path d="M240 46 V122" stroke="#34B27B" stroke-width="6" stroke-linecap="round"/>
+  <text x="180" y="156" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">multiply straight down first</text>
+</svg>

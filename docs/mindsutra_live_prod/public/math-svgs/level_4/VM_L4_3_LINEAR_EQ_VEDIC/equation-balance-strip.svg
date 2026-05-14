@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="200" rx="12" fill="url(#bgGrad)" stroke="#334155" stroke-width="2"/>
+
+  <!-- Formula Strip -->
+  <g transform="translate(100, 100)" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="36" text-anchor="middle">
+     <text x="0" y="0" fill="#F8FAFC">Ax</text>
+     <text x="50" y="0" fill="#64748B">+</text>
+     <text x="100" y="0" fill="#F59E0B">B</text>
+     
+     <text x="180" y="0" fill="#F8FAFC">=</text>
+
+     <text x="260" y="0" fill="#F8FAFC">Cx</text>
+     <text x="310" y="0" fill="#64748B">+</text>
+     <text x="360" y="0" fill="#F59E0B">D</text>
+
+     <text x="440" y="0" fill="#F8FAFC">→</text>
+
+     <g transform="translate(560, 0)">
+        <text x="0" y="10" fill="#94A3B8" font-size="28">x = </text>
+        <g transform="translate(70, 0)">
+           <text x="0" y="-15" fill="#F59E0B">D - B</text>
+           <line x1="-50" y1="0" x2="50" y2="0" stroke="#F8FAFC" stroke-width="3" />
+           <text x="0" y="25" fill="#F8FAFC">A - C</text>
+        </g>
+     </g>
+  </g>
+
+  <rect x="580" y="145" width="160" height="25" rx="6" fill="#6366F1" opacity="0.1" />
+  <text x="660" y="162" font-family="Inter" font-size="12" font-weight="800" fill="#818CF8" text-anchor="middle">THE PARĀVARTYA RULE</text>
+</svg>

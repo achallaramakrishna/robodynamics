@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 200" width="180" height="200">
+  <!-- body -->
+  <circle cx="90" cy="95" r="55" fill="#212121"/>
+  <circle cx="90" cy="95" r="45" fill="#333"/>
+  <!-- sound waves -->
+  <circle cx="90" cy="95" r="20" fill="none" stroke="#555" stroke-width="3" stroke-dasharray="5,3"/>
+  <circle cx="90" cy="95" r="30" fill="none" stroke="#555" stroke-width="2" stroke-dasharray="5,4"/>
+  <text x="90" y="99" font-family="monospace" font-size="12" fill="#aaa" text-anchor="middle">♪</text>
+  <!-- polarity label -->
+  <text x="72" y="158" font-family="monospace" font-size="14" fill="#e53935" font-weight="bold">+</text>
+  <text x="104" y="158" font-family="monospace" font-size="14" fill="#888">−</text>
+  <!-- pins -->
+  <line x1="75" y1="150" x2="75" y2="195" stroke="#bbb" stroke-width="4"/>
+  <line x1="105" y1="150" x2="105" y2="185" stroke="#bbb" stroke-width="4"/>
+  <!-- labels -->
+  <text x="90" y="20" font-family="Arial" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">Buzzer (Active)</text>
+  <text x="90" y="175" font-family="monospace" font-size="9" fill="#c62828" text-anchor="middle">Long=+  Short=−</text>
+</svg>

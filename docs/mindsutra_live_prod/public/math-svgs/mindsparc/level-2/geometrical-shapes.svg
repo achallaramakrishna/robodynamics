@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">Geometrical Shapes</title>
+  <desc id="desc">Basic 2D and 3D shape family for geometry recognition.</desc>
+  <rect width="480" height="320" rx="28" fill="#F0FDFA"/>
+  <rect x="34" y="34" width="412" height="252" rx="24" fill="#FFFFFF" stroke="#99F6E4" stroke-width="4"/>
+  <circle cx="110" cy="130" r="42" fill="#60A5FA"/>
+  <rect x="182" y="88" width="84" height="84" rx="8" fill="#F97316"/>
+  <polygon points="340,84 390,170 290,170" fill="#22C55E"/>
+  <path d="M108 212l34-28 36 16-10 44H98z" fill="#FBBF24"/>
+  <path d="M244 194l42 20v48l-42 20-42-20v-48z" fill="#A78BFA"/>
+  <path d="M344 196l42 20v40h-84v-40z" fill="#FB7185"/>
+  <text x="72" y="276" font-family="Verdana, sans-serif" font-size="20" font-weight="700" fill="#0F766E">Learn sides, corners, and solid shapes</text>
+</svg>

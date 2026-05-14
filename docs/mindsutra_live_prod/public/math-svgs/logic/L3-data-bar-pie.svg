@@ -1,0 +1,68 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L3 Analytics Stat Board - Sky Academy Scoreboard</title>
+  
+  <rect width="800" height="600" fill="#0C4A6E" />
+  
+  {/* Data Dashboard */}
+  <g id="stats" transform="translate(50, 100)">
+     <rect width="700" height="350" rx="30" fill="#1E293B" stroke="#7DD3FC" stroke-width="4" />
+     <path d="M50,130 L750,130 M400,130 L400,450" stroke="#334155" stroke-width="2" opacity="0.5" />
+
+     {/* Bar Chart (Math/Sci/Eng) */}
+     <g id="bars" transform="translate(50, 160)">
+        <text x="0" y="30" fill="#94A3B8" font-size="12">SUBJECT SCORES</text>
+        
+        {/* MATHS */}
+        <rect x="20" y="150" width="40" height="70" fill="#38BDF8">
+           <animate attributeName="height" from="0" to="70" dur="0.8s" fill="freeze" />
+           <animate attributeName="y" from="220" to="150" dur="0.8s" fill="freeze" />
+        </rect>
+        <text x="40" y="240" text-anchor="middle" fill="#94A3B8" font-size="10">MATHS</text>
+        <text x="40" y="140" text-anchor="middle" fill="white" font-size="12" font-weight="900">40</text>
+
+        {/* SCIENCE */}
+        <rect x="100" y="110" width="40" height="110" fill="#38BDF8">
+           <animate attributeName="height" from="0" to="110" dur="1s" fill="freeze" />
+           <animate attributeName="y" from="220" to="110" dur="1s" fill="freeze" />
+        </rect>
+        <text x="120" y="240" text-anchor="middle" fill="#94A3B8" font-size="10">SCIENCE</text>
+        <text x="120" y="100" text-anchor="middle" fill="white" font-size="12" font-weight="900">60</text>
+
+        {/* ENGLISH */}
+        <rect x="180" y="130" width="40" height="90" fill="#38BDF8">
+           <animate attributeName="height" from="0" to="90" dur="1.2s" fill="freeze" />
+           <animate attributeName="y" from="220" to="130" dur="1.2s" fill="freeze" />
+        </rect>
+        <text x="200" y="240" text-anchor="middle" fill="#94A3B8" font-size="10">ENGLISH</text>
+        <text x="200" y="120" text-anchor="middle" fill="white" font-size="12" font-weight="900">50</text>
+     </g>
+
+     {/* Pie Chart (Clubs) */}
+     <g id="pie" transform="translate(520, 260)">
+        <text x="0" y="-80" text-anchor="middle" fill="#94A3B8" font-size="12">CLUB PARTICIPATION</text>
+        
+        {/* ROBOTICS 25% */}
+        <path d="M0,0 L0,-60 A60,60 0 0,1 60,0 Z" fill="#7DD3FC" />
+        <text x="40" y="-30" fill="white" font-size="10" font-weight="900">25%</text>
+
+        {/* CODING 35% */}
+        <path d="M0,0 L60,0 A60,60 0 0,1 -40,45 Z" fill="#0EA5E9" />
+        <text x="0" y="45" fill="white" font-size="10" font-weight="900">35%</text>
+
+        {/* MATHS CLUB 20% */}
+        <path d="M0,0 L-40,45 A60,60 0 0,1 -60,0 Z" fill="#0369A1" opacity="0.8" />
+        
+        {/* ART 20% */}
+        <path d="M0,0 L-60,0 A60,60 0 0,1 0,-60 Z" fill="#0369A1" opacity="0.6" />
+     </g>
+  </g>
+
+  {/* Verdict Panel */}
+  <g transform="translate(100, 480)">
+     <rect width="600" height="80" rx="15" fill="#0F172A" stroke="#7DD3FC" />
+     <text x="300" y="30" text-anchor="middle" fill="#94A3B8" font-size="12">DETECTIVE MISSION</text>
+     <text x="300" y="60" text-anchor="middle" fill="#FACC15" font-size="18" font-weight="900">WHICH ACTIVITY HAS THE LARGEST SHARE?</text>
+  </g>
+
+  <text x="400" y="50" text-anchor="middle" font-size="28" font-weight="900" fill="white">Sky Academy Scoreboard</text>
+</svg>

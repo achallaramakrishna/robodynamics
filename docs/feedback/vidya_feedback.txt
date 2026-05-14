@@ -1,0 +1,13 @@
+# Vidya AI Python Tutor Feedback
+
+## Feedback Item 1: Precise String Execution Checks causing Logic Errors on Typos/Whitespace (2026-05-13)
+- **Feedback**:
+  - String execution checks are extremely precise.
+  - Typing `print("Hello Coder !")` (extra space before punctuation `!`) instead of `print("Hello Coder!")` triggers a non-descriptive `Logic Error` mismatch, which confuses younger learners.
+- **Expected Resolution**:
+  - The AI tutor (Vidya) should automatically diagnose common formatting discrepancies (such as extra/missing spaces before punctuation, general spacing issues, and case-sensitivity mismatches) and output highly detailed, friendly debugging guidelines explaining exactly why the error occurred and how to fix it step-by-step.
+- **Implemented Solution**:
+  - Added a smart mismatch analyzer inside the code evaluation sandbox (`VidyaLessonEngine.tsx`).
+  - Added specific detection hooks for punctuation whitespace errors, case discrepancies, and general space alignment issues.
+  - Formatted the outputs to match the user's friendly tutor tone and outputted with `whitespace-pre-wrap` styling for crisp rendering.
+- **Status**: Implemented Locally (2026-05-13)

@@ -1,0 +1,82 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L3 Scholarship Sky Realm Progress Map</title>
+  
+  <style>
+    .island { filter: drop-shadow(0 0 8px rgba(125, 211, 252, 0.4)); cursor: pointer; transition: transform 0.3s; }
+    .island:hover { transform: translateY(-10px); filter: drop-shadow(0 0 15px rgba(125, 211, 252, 0.7)); }
+    .sky-beam { stroke: #7DD3FC; stroke-width: 2; stroke-dasharray: 10,5; opacity: 0.3; }
+    .cloud { opacity: 0.6; animation: drift 20s linear infinite; }
+    @keyframes drift { from { transform: translateX(-100px); } to { transform: translateX(900px); } }
+    .crystal-glow { animation: pulse 2s infinite ease-in-out; }
+    @keyframes pulse { 0%, 100% { opacity: 0.6; filter: brightness(1); } 50% { opacity: 1; filter: brightness(1.5); } }
+  </style>
+
+  <rect width="800" height="600" fill="#0C4A6E" />
+  
+  {/* Moving Clouds */}
+  <g class="cloud">
+     <circle cx="50" cy="100" r="30" fill="white" />
+     <circle cx="80" cy="110" r="40" fill="white" />
+     <circle cx="120" cy="100" r="30" fill="white" />
+  </g>
+  <g class="cloud" style="animation-delay: -10s;">
+     <circle cx="450" cy="400" r="40" fill="white" />
+     <circle cx="500" cy="410" r="50" fill="white" />
+  </g>
+
+  {/* Connection Beams */}
+  <line x1="200" y1="400" x2="350" y2="250" class="sky-beam" />
+  <line x1="350" y1="250" x2="550" y2="200" class="sky-beam" />
+  <line x1="550" y1="200" x2="650" y2="450" class="sky-beam" />
+
+  {/* Island 1: Matrix Coding */}
+  <g id="island1" class="island" transform="translate(150, 350)">
+    <ellipse cx="50" cy="50" rx="80" ry="30" fill="#334155" />
+    <rect x="30" y="0" width="40" height="60" fill="#7DD3FC" rx="5" />
+    <circle cx="50" cy="0" r="8" fill="#FACC15" class="crystal-glow" />
+    <text x="50" y="100" text-anchor="middle" fill="#7DD3FC" font-size="12" font-weight="900">CODING MATRIX</text>
+  </g>
+
+  {/* Island 2: Speed & Race */}
+  <g id="island2" class="island" transform="translate(300, 200)">
+    <ellipse cx="50" cy="50" rx="80" ry="30" fill="#334155" />
+    <path d="M20,10 L80,10 L90,40 L10,40 Z" fill="#7DD3FC" opacity="0.8" />
+    <circle cx="50" cy="10" r="8" fill="#FACC15" class="crystal-glow" />
+    <text x="50" y="100" text-anchor="middle" fill="#7DD3FC" font-size="12" font-weight="900">HYPER-TRACK</text>
+  </g>
+
+  {/* Island 3: 3D Cubes */}
+  <g id="island3" class="island" transform="translate(500, 150)">
+    <ellipse cx="50" cy="50" rx="80" ry="30" fill="#334155" />
+    <rect x="35" y="10" width="30" height="30" fill="#7DD3FC" />
+    <circle cx="50" cy="10" r="8" fill="#FACC15" class="crystal-glow" />
+    <text x="50" y="100" text-anchor="middle" fill="#7DD3FC" font-size="12" font-weight="900">PILLAR CUBES</text>
+  </g>
+
+  {/* Island 4: Data Boards */}
+  <g id="island4" class="island" transform="translate(600, 400)">
+    <ellipse cx="50" cy="50" rx="80" ry="30" fill="#334155" />
+    <rect x="20" y="20" width="10" height="30" fill="#7DD3FC" />
+    <rect x="40" y="10" width="10" height="40" fill="#7DD3FC" />
+    <rect x="60" y="25" width="10" height="25" fill="#7DD3FC" />
+    <circle cx="50" cy="10" r="8" fill="#FACC15" class="crystal-glow" />
+    <text x="50" y="100" text-anchor="middle" fill="#7DD3FC" font-size="12" font-weight="900">STAT BOARD</text>
+  </g>
+
+  {/* Score Dashboard */}
+  <g transform="translate(620, 40)">
+     <rect width="150" height="50" rx="25" fill="rgba(12, 74, 110, 0.5)" stroke="#7DD3FC" stroke-width="2" />
+     <text x="75" y="32" text-anchor="middle" fill="#7DD3FC" font-size="20" font-weight="900">0 / 20 💎</text>
+  </g>
+
+  <text x="400" y="80" text-anchor="middle" font-size="36" font-weight="900" fill="white">Scholarship Sky Realm</text>
+  <text x="400" y="115" text-anchor="middle" font-size="18" font-weight="700" fill="#7DD3FC">Complete the trials to earn your scholarship!</text>
+
+  <g id="sparky-scholar" transform="translate(100, 100)">
+     <circle r="45" fill="#F97316" />
+     <rect x="-30" y="-10" width="60" height="15" rx="5" fill="#334155" />
+     <circle cx="-15" cy="-5" r="4" fill="white" />
+     <circle cx="15" cy="-5" r="4" fill="white" />
+     <text x="0" y="75" text-anchor="middle" font-size="16" font-weight="900" fill="#F97316">SKY COACH SPARK</text>
+  </g>
+</svg>

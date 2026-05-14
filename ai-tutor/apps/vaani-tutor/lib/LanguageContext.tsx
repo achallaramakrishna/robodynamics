@@ -152,7 +152,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useLanguage must be used within LanguageProvider');
+    // Return a safe default during SSR pre-rendering or outside provider
+    return { language: 'hindi-full', setLanguage: () => {}, isLoading: false };
   }
   return context;
 };
@@ -161,11 +162,11 @@ export const useLanguage = (): LanguageContextType => {
 export const getLanguageLabel = (lang: LanguageMode): string => {
   switch (lang) {
     case 'hindi-full':
-      return '🇮🇳 Hindi (Full)';
+      return 'हिं Hindi (Full)';
     case 'hindi-english':
-      return '🇮🇳🇬🇧 Hindi-English Mix';
+      return 'हिं·EN Bilingual Mix';
     case 'english-simplified':
-      return '🇬🇧 English (Simplified)';
+      return 'EN English (Simple)';
     default:
       return 'Select Language';
   }

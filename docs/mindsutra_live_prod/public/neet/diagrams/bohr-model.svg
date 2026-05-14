@@ -1,0 +1,93 @@
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .label { font-size: 12px; font-weight: bold; fill: #333; }
+      .text { font-size: 10px; fill: #555; }
+      .orbit { stroke: #95a5a6; stroke-width: 1; fill: none; stroke-dasharray: 2,2; }
+      .nucleus { fill: #e74c3c; }
+      .electron { fill: #3498db; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="250" y="30" class="title" text-anchor="middle">BOHR'S ATOMIC MODEL - HYDROGEN ATOM</text>
+
+  <!-- Nucleus (Proton) -->
+  <circle cx="250" cy="250" r="15" class="nucleus"/>
+  <text x="250" y="256" class="label" text-anchor="middle" font-size="10" fill="white">p⁺</text>
+  <text x="250" y="285" class="label" text-anchor="middle" font-size="11">Nucleus</text>
+
+  <!-- Orbital paths (Bohr orbits) -->
+  <!-- n=1 orbit -->
+  <circle cx="250" cy="250" r="50" class="orbit" stroke-width="2"/>
+  <text x="305" y="250" class="text" font-size="10" fill="#95a5a6">n=1</text>
+
+  <!-- n=2 orbit -->
+  <circle cx="250" cy="250" r="100" class="orbit" stroke-width="2"/>
+  <text x="355" y="250" class="text" font-size="10" fill="#95a5a6">n=2</text>
+
+  <!-- n=3 orbit -->
+  <circle cx="250" cy="250" r="150" class="orbit" stroke-width="2"/>
+  <text x="405" y="250" class="text" font-size="10" fill="#95a5a6">n=3</text>
+
+  <!-- Electron in ground state (n=1) -->
+  <circle cx="300" cy="250" r="6" class="electron"/>
+  <text x="300" y="275" class="label" text-anchor="middle" font-size="10">e⁻</text>
+
+  <!-- Energy levels -->
+  <text x="30" y="100" class="label" font-size="11">Energy Levels:</text>
+
+  <!-- E1 level -->
+  <rect x="30" y="110" width="150" height="25" fill="#fadbd8" stroke="#e74c3c" stroke-width="2" rx="3"/>
+  <text x="40" y="130" class="text">n=1: Lowest energy</text>
+
+  <!-- E2 level -->
+  <rect x="30" y="145" width="150" height="25" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" rx="3"/>
+  <text x="40" y="165" class="text">n=2: Higher energy</text>
+
+  <!-- E3 level -->
+  <rect x="30" y="180" width="150" height="25" fill="#d6eaf8" stroke="#3498db" stroke-width="2" rx="3"/>
+  <text x="40" y="200" class="text">n=3: Highest energy</text>
+
+  <!-- Postulates Box -->
+  <rect x="30" y="290" width="440" height="150" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2" rx="5"/>
+  <text x="40" y="310" class="label" font-size="12">Bohr's Postulates:</text>
+
+  <text x="40" y="330" class="text">1. Electrons revolve in discrete orbits (shells) around nucleus</text>
+  <text x="40" y="348" class="text">   without radiating energy</text>
+
+  <text x="40" y="368" class="text">2. Only certain orbits (n=1,2,3...) are allowed with specific</text>
+  <text x="40" y="386" class="text">   discrete energy values</text>
+
+  <text x="40" y="406" class="text">3. Electron absorbs/emits energy during transition between</text>
+  <text x="40" y="424" class="text">   orbits (ΔE = hf)</text>
+
+  <!-- Electron transition arrows -->
+  <g id="transitions">
+    <!-- Excitation arrow -->
+    <path d="M 340 250 L 380 250" stroke="#f39c12" stroke-width="2" fill="none" marker-end="url(#orange-arrow)"/>
+    <text x="360" y="240" class="text" font-size="9">Excitation</text>
+    <text x="360" y="252" class="text" font-size="9">(Energy absorbed)</text>
+
+    <!-- De-excitation arrow -->
+    <path d="M 380 270 L 340 270" stroke="#c0392b" stroke-width="2" fill="none" marker-end="url(#red-arrow)"/>
+    <text x="335" y="285" class="text" font-size="9">De-excitation</text>
+    <text x="335" y="297" class="text" font-size="9">(Photon emitted)</text>
+  </g>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="orange-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#f39c12"/>
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <!-- Key information -->
+  <text x="30" y="460" class="label" font-size="11">For Hydrogen Atom:</text>
+  <text x="30" y="478" class="text">• Radius of n=1 orbit (Bohr radius) = 0.53 Å</text>
+  <text x="30" y="493" class="text">• Energy of n=1 = -13.6 eV</text>
+</svg>

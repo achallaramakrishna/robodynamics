@@ -1,0 +1,66 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L5 Advanced Boardroom Seating</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* The Circular Boardroom Table */}
+  <g id="board-table" transform="translate(400, 300)">
+     <circle r="180" fill="#1E293B" stroke="#334155" stroke-width="4" />
+     <circle r="150" fill="none" stroke="#38BDF8" stroke-width="1" stroke-dasharray="10,10" opacity="0.3" />
+     
+     {/* Seating Nodes (8 Slots) */}
+     <g id="seats">
+        <circle cy="-180" r="30" fill="#0F172A" stroke="#38BDF8" stroke-width="2" id="seat-1" />
+        <circle cx="127" cy="-127" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-2" />
+        <circle cx="180" cy="0" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-3" />
+        <circle cx="127" cy="127" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-4" />
+        <circle cy="180" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-5" />
+        <circle cx="-127" cy="127" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-6" />
+        <circle cx="-180" cy="0" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-7" />
+        <circle cx="-127" cy="-127" r="30" fill="#0F172A" stroke="#64748B" stroke-width="2" id="seat-8" />
+     </g>
+
+     {/* Center Direction Indicator */}
+     <circle r="40" fill="#0F172A" stroke="#10B981" stroke-width="2" />
+     <path d="M-10,-20 L0,-40 L10,-20 Z" fill="#10B981" id="facing-indicator">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" />
+     </path>
+     <text text-anchor="middle" y="5" fill="#10B981" font-size="10" font-weight="900">FACING IN</text>
+  </g>
+
+  {/* Candidate Deck (Left) */}
+  <g transform="translate(40, 60)">
+     <rect width="180" height="480" rx="15" fill="#1E293B" stroke="#334155" />
+     <text x="90" y="30" text-anchor="middle" fill="#64748B" font-size="12" font-weight="900">EXECUTIVES</text>
+     
+     <g transform="translate(40, 60)">
+        <rect width="100" height="40" rx="20" fill="#3B82F6" cursor="pointer" />
+        <text x="50" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="900">A</text>
+     </g>
+     <g transform="translate(40, 110)">
+        <rect width="100" height="40" rx="20" fill="#A855F7" cursor="pointer" />
+        <text x="50" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="900">B</text>
+     </g>
+     <g transform="translate(40, 160)">
+        <rect width="100" height="40" rx="20" fill="#F472B6" cursor="pointer" />
+        <text x="50" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="900">C</text>
+     </g>
+  </g>
+
+  {/* Clue Checklist (Right) */}
+  <g transform="translate(600, 60)">
+     <rect width="160" height="400" rx="15" fill="#1E293B" stroke="#334155" />
+     <text x="80" y="30" text-anchor="middle" fill="#64748B" font-size="12" font-weight="900">CONSTRAINTS</text>
+     
+     <g transform="translate(20, 60)">
+        <circle r="6" fill="#64748B" cx="10" cy="0" />
+        <text x="25" y="5" fill="#94A3B8" font-size="10">A is opposite C</text>
+     </g>
+     <g transform="translate(20, 90)">
+        <circle r="6" fill="#10B981" cx="10" cy="0" />
+        <text x="25" y="5" fill="white" font-size="10">B is neighbor of A</text>
+     </g>
+  </g>
+
+  <text x="400" y="30" text-anchor="middle" font-size="28" font-weight="900" fill="white">Boardroom Seating Chart</text>
+</svg>

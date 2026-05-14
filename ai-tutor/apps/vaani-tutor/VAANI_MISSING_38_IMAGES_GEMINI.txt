@@ -1,0 +1,135 @@
+====================================
+VAANI HINDI AI TUTOR
+MISSING IMAGES FOR LEVELS 4 & 5
+GEMINI BATCH GENERATION PROMPT
+====================================
+
+PROJECT: Vaani (Hindi Literacy AI Tutor)
+TARGET: 38 Missing Images (7 Level 4 + 31 Level 5)
+STYLE: Bright, colorful, child-friendly illustrations (800x600px)
+
+---
+
+COPY THIS INTO GEMINI FOR BATCH IMAGE GENERATION:
+
+I need to generate 38 educational illustrations for a Hindi language learning app called Vaani. These are for Levels 4-5 lessons (consonant review and conversational Hindi). All images should be:
+- Bright, colorful, child-friendly style
+- 800x600px resolution
+- Include Hindi script labels/words where visible
+- Diverse children and characters (Indian setting)
+- Professional quality
+
+Please generate these images with the following prompts:
+
+============================================
+LEVEL 4: CONSONANT REVIEW & CHALLENGES (7 images)
+============================================
+
+These are visual aids for learning consonant categories in Hindi.
+
+1. "vaani_l4_stops_review" - Grid or showcase of stop consonants (क, ख, ग, घ, च, छ, ज, झ, ट, ठ, ड, ढ, त, थ, द, ध, प, फ, ब, भ) with children demonstrating mouth positions for stop sounds, bright colors, mouth-forming illustrations
+
+2. "vaani_l4_nasals_review" - Visual showing nasal consonants (ण, न, म) and nasal vowels (ं, ः) with children touching their noses, sound waves from nose, nasal sound indicators, cultural context
+
+3. "vaani_l4_fricatives_review" - Showcase of fricative/sibilant sounds (स, ष, श, ह) with visual representation of air flow, children blowing/demonstrating breath sounds, wind illustrations, color-coded by sound type
+
+4. "vaani_l4_aspirated_challenge" - Illustration showing aspirated consonants (ख, घ, छ, झ, ठ, ढ, थ, ध, फ, भ) with emphasis on the aspirated 'h' sound, speech bubbles showing aspiration, children demonstrating with breath
+
+5. "vaani_l4_liquids_review" - Visual guide to liquid sounds (ल, ड़, ळ) with tongue position illustrations, children saying the sounds with animated tongue positions, water/flow imagery to represent "liquid"
+
+6. "vaani_l4_ga_gha_review" - Side-by-side comparison of ग (soft) vs घ (aspirated) with mouth position guide, children demonstrating the difference, visual cues showing aspiration difference
+
+7. "vaani_l4_mastery_complete" - Celebration scene showing a child successfully completing consonant learning, trophy or medal, confetti, big checkmark, all 36 consonants arranged in background, victory pose
+
+============================================
+LEVEL 5: CONVERSATIONAL HINDI - COMMON PHRASES (31 images)
+============================================
+
+These illustrate common conversational sentences in Hindi for everyday situations.
+
+8. "vaani_l5_namaste_bhai" - Two children meeting and greeting with "नमस्ते भाई" (Hello, brother), namaste hand gesture, bright greeting scene, respectful pose, morning sun
+
+9. "vaani_l5_aap_kaise" - Scene showing "आप कैसे हैं?" (How are you?), child asking with question mark, friendly conversation, warm background, social context
+
+10. "vaani_l5_main_theek" - Child responding "मैं ठीक हूँ" (I am fine), happy expression, thumbs up gesture, content expression, green/positive colors
+
+11. "vaani_l5_aapka_naam" - Child asking "आपका नाम?" (What is your name?), name tag visible, conversation bubble, curious child, introduction scene
+
+12. "vaani_l5_mera_naam" - Child answering "मेरा नाम राज है" (My name is Raj), name tag with "राज", introducing themselves, confident pose, label with name
+
+13. "vaani_l5_main_school" - Scene showing "मैं स्कूल में हूँ" (I go to school), school building, child with backpack, classroom, education-themed
+
+14. "vaani_l5_delhi_rehta" - Child saying "मैं दिल्ली में रहता हूँ" (I live in Delhi), Delhi landmarks (Red Fort, Lotus Temple), map of Delhi, house with flag
+
+15. "vaani_l5_kripaya_baithiye" - Polite invitation scene "कृपया बैठिए" (Please sit), child offering chair, hospitable scene, respectful gesture, comfortable sitting area
+
+16. "vaani_l5_dhanyavaad_bhai" - Scene showing gratitude "धन्यवाद भाई" (Thank you, brother), child with grateful expression, hands together, thankful pose, warmth
+
+17. "vaani_l5_madad" - Child asking for help "मुझे मदद चाहिए" (I need help), raised hand, helpful friend coming to assist, support scene, cooperation
+
+18. "vaani_l5_dost" - Two children as best friends "हम दोस्त हैं" (We are friends), arms around each other, friendship scene, happy together, vibrant colors
+
+19. "vaani_l5_mujhe_bhookh" - Child showing hunger "मुझे भूख है" (I am hungry), stomach rumbling motion lines, kitchen/food scene, hungry expression, lunchtime
+
+20. "vaani_l5_mujhe_pyas" - Child expressing thirst "मुझे प्यास है" (I am thirsty), reaching for water glass, water droplets, hot/thirsty scene, refreshment
+
+21. "vaani_l5_mujhe_pasand" - Child liking something "यह मुझे पसंद है" (I like this), with toy/candy/item they like, happy expression, approval gesture, positive feelings
+
+22. "vaani_l5_kela_pasand" - Parent/adult offering "क्या आपको केला पसंद है?" (Do you like bananas?), banana in hand, child's excited response, fruit market or kitchen
+
+23. "vaani_l5_main_khush" - Happy child expressing "मैं खुश हूँ" (I am happy), wide smile, jumping or celebrating, joy radiating, colorful background
+
+24. "vaani_l5_yeh_kitaab" - Child pointing at book "यह किताब है" (This is a book), book in hand, reading scene, library or classroom, educational
+
+25. "vaani_l5_yeh_pani" - Child pointing at water "यह पानी है" (This is water), water glass or stream, water droplets, clear label, everyday object
+
+26. "vaani_l5_mausam" - Weather discussion "मौसम कैसा है?" (How is the weather?), various weather elements (sun, rain, clouds), seasonal scene, weather icons
+
+27. "vaani_l5_ped" - Child pointing at tree "यह एक पेड़ है" (This is a tree), large tree, nature scene, birds in tree, natural environment, green colors
+
+28. "vaani_l5_ghar_billi" - Scene with house and cat "घर में एक बिल्ली है" (There is a cat in the house), house with cat inside/outside, cozy home scene, pet animal
+
+29. "vaani_l5_hindi_bol" - Child speaking Hindi "मैं हिंदी बोलता हूँ" (I speak Hindi), speech bubbles with Hindi text, proud expression, talking gesture, language celebration
+
+30. "vaani_l5_reading_routine" - Daily routine scene "मैं हर दिन पढ़ता हूँ" (I read every day), child reading book, calendar/clock showing daily habit, consistent action, routine setup
+
+31. "vaani_l5_need_book" - Child requesting book "मुझे किताब चाहिए" (I need a book), child pointing at/reaching for book, library or shelf background, learning need
+
+32. "vaani_l5_kaun_ho" - Two children meeting "तुम कौन हो?" (Who are you?), questioning pose, curious children, introduction scenario, uncertainty markers
+
+33. "vaani_l5_raj_boy" - Boy character named Raj "राज एक लड़का है" (Raj is a boy), character introduction, boy with "राज" label, smiling portrait style
+
+34. "vaani_l5_intro_full" - Full introduction scene "नमस्ते, मैं राज हूँ। मैं दिल्ली में रहता हूँ। मैं स्कूल जाता हूँ" (Hello, I'm Raj. I live in Delhi. I go to school), composite scene showing introduction, location, and activity together
+
+35. "vaani_l5_khalna" - Children playing/exercising "हम खेल रहे हैं" (We are playing), outdoor scene, children doing sports/play activities, movement, action, fun
+
+36. "vaani_l5_thali_tha" - Scene with plate/eating "यह एक थाली है" (This is a plate), plate with food, dining scene, mealtime, cultural food presentation, kitchen or dining table
+
+37. "vaani_l5_chhuti" - Vacation/free time scene "आज छुट्टी है" (Today is a holiday/day off), celebration, child relaxing or doing leisure activity, calendar showing holiday
+
+38. "vaani_l5_mastery_final" - Grand celebration scene for completing Level 5 "शानदार! Level 5 पूरा किया!" (Excellent! Level 5 Complete!), child celebrating with trophy/medal, confetti, Hindi sentence structures displayed in background, achievement scene, festive colors
+
+============================================
+GENERATION NOTES:
+- Style: Colorful, child-friendly, similar to educational textbook illustrations
+- Include Hindi script labels where shown in brackets above
+- All characters should be diverse Indian children with happy expressions
+- Use bright primary colors (red, blue, yellow) and pastels
+- Keep backgrounds simple and uncluttered
+- Resolution: 800x600px minimum
+- Professional finish suitable for app UI
+- Each image should be self-contained (no dependencies on other images)
+
+OUTPUT FORMAT:
+Please name each image using the filename shown in quotes (e.g., "vaani_l4_stops_review.png")
+
+============================================
+PRIORITY NOTES:
+- Level 4 (7 images): Consonant categories and mastery
+- Level 5 (31 images): Daily conversations and common phrases
+- All 38 images are BLOCKING launch - please generate all
+- Generate in PNG format, 800x600px, bright colors for children
+
+============================================
+Ready to paste into Gemini!
+====================================

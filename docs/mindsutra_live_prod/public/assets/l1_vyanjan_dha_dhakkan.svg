@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FEF2F2"/>
+  
+  <g id="letter_dha_retro">
+    <text x="250" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">ढ</text>
+  </g>
+  
+  <g id="object_dhakkan">
+    <!-- Lid of a pot -->
+    <ellipse cx="750" cy="550" rx="140" ry="40" fill="#94A3B8" stroke="#475569" stroke-width="4"/>
+    <circle cx="750" cy="510" r="20" fill="#475569"/> <!-- Knob -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">ढ से ढक्कन</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">DHA for Dhakkan (Lid)</text>
+</svg>

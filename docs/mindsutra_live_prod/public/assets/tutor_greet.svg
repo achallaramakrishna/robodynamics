@@ -1,0 +1,36 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Glow -->
+  <circle cx="512" cy="512" r="400" fill="url(#paint0_radial_tutor)" fill-opacity="0.1"/>
+  
+  <!-- Body/Kurta -->
+  <path d="M362 900C362 820 400 700 512 700C624 700 662 820 662 900H362Z" fill="#F59E0B"/>
+  
+  <!-- Head -->
+  <rect x="422" y="320" width="180" height="220" rx="90" fill="#FFE4D6"/>
+  
+  <!-- Hair (Stylized) -->
+  <path d="M422 400C422 320 450 280 512 280C574 280 602 320 602 400V420H422V400Z" fill="#2D3748"/>
+  
+  <!-- Eyes (Friendly) -->
+  <circle cx="472" cy="420" r="12" fill="#2D3748"/>
+  <circle cx="552" cy="420" r="12" fill="#2D3748"/>
+  
+  <!-- Smile -->
+  <path d="M482 480C482 480 497 500 512 500C527 500 542 480 542 480" stroke="#2D3748" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Namaste Gesture Arms -->
+  <g id="arms_namaste">
+    <path d="M402 750L482 620L512 650L402 750Z" fill="#FFE4D6" stroke="#F59E0B" stroke-width="2"/>
+    <path d="M622 750L542 620L512 650L622 750Z" fill="#FFE4D6" stroke="#F59E0B" stroke-width="2"/>
+  </g>
+
+  <!-- Title Text (Optional Layer) -->
+  <text x="512" y="960" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="40" fill="#2563EB">NAMASTE (नमस्ते)</text>
+
+  <defs>
+    <radialGradient id="paint0_radial_tutor" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(400)">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

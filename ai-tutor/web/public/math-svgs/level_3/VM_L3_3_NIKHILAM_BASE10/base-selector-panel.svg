@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F8FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D6E2FF" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#0EA5E9"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Pick the base that feels closest</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">The smaller the deviation, the easier the mental multiplication.</text>
+
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="80" y="148" width="180" height="120" rx="20" fill="#DBEAFE" stroke="#93C5FD"/>
+    <rect x="310" y="148" width="180" height="120" rx="20" fill="#EDE9FE" stroke="#C4B5FD"/>
+    <rect x="540" y="148" width="180" height="120" rx="20" fill="#DCFCE7" stroke="#86EFAC"/>
+
+    <text x="170" y="185" fill="#1D4ED8" font-size="22" font-weight="700">Base 10</text>
+    <text x="170" y="220" fill="#10213F" font-size="28" font-weight="700">8 × 7</text>
+    <text x="170" y="248" fill="#475569" font-size="15">best for 1-digit near 10</text>
+
+    <text x="400" y="185" fill="#6D28D9" font-size="22" font-weight="700">Base 100</text>
+    <text x="400" y="220" fill="#10213F" font-size="28" font-weight="700">97 × 93</text>
+    <text x="400" y="248" fill="#475569" font-size="15">best for 2-digit near 100</text>
+
+    <text x="630" y="185" fill="#15803D" font-size="22" font-weight="700">Base 1000</text>
+    <text x="630" y="220" fill="#10213F" font-size="28" font-weight="700">998 × 997</text>
+    <text x="630" y="248" fill="#475569" font-size="15">best for 3-digit near 1000</text>
+  </g>
+
+  <rect x="104" y="308" width="592" height="40" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="400" y="334" fill="#1D4ED8" font-size="17" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Choose the base that gives the friendliest deviations.</text>
+</svg>

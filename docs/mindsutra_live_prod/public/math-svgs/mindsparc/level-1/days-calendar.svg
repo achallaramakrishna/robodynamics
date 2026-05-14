@@ -1,0 +1,25 @@
+<svg width="640" height="420" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MindSparc Level 1 - Days and Calendar</title>
+  <desc id="desc">A bright calendar card for simple day and date reasoning.</desc>
+  <rect width="640" height="420" rx="32" fill="#fdf2f8"/>
+  <text x="54" y="72" fill="#be185d" font-family="Verdana, Arial, sans-serif" font-size="26" font-weight="800">Days and Calendar</text>
+  <text x="54" y="105" fill="#475569" font-family="Verdana, Arial, sans-serif" font-size="15">Yesterday, today, tomorrow and simple dates.</text>
+  <g transform="translate(128 136)" font-family="Verdana, Arial, sans-serif" text-anchor="middle">
+    <rect width="384" height="236" rx="24" fill="#fff" stroke="#f9a8d4" stroke-width="4"/>
+    <rect width="384" height="58" rx="24" fill="#ec4899"/>
+    <rect y="34" width="384" height="24" fill="#ec4899"/>
+    <text x="192" y="39" fill="#fff" font-size="22" font-weight="900">MindSparc Week</text>
+    <g font-size="13" font-weight="800" fill="#831843">
+      <text x="44" y="92">MON</text><text x="94" y="92">TUE</text><text x="144" y="92">WED</text><text x="194" y="92">THU</text><text x="244" y="92">FRI</text><text x="294" y="92">SAT</text><text x="344" y="92">SUN</text>
+    </g>
+    <g font-size="18" font-weight="900">
+      <rect x="122" y="112" width="44" height="44" rx="12" fill="#fce7f3"/><text x="144" y="141" fill="#be185d">12</text>
+      <rect x="172" y="112" width="44" height="44" rx="12" fill="#ec4899"/><text x="194" y="141" fill="#fff">13</text>
+      <rect x="222" y="112" width="44" height="44" rx="12" fill="#fce7f3"/><text x="244" y="141" fill="#be185d">14</text>
+      <rect x="272" y="112" width="44" height="44" rx="12" fill="#fce7f3"/><text x="294" y="141" fill="#be185d">15</text>
+    </g>
+    <text x="192" y="202" fill="#831843" font-size="17" font-weight="900">If today is Thursday, tomorrow is?</text>
+    <rect x="250" y="212" width="82" height="34" rx="17" fill="#fff1f2" stroke="#fb7185" stroke-width="3"/>
+    <text x="291" y="235" fill="#be123c" font-size="16" font-weight="900">Friday</text>
+  </g>
+</svg>

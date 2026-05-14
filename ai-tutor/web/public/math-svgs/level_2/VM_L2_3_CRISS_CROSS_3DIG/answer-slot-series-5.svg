@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="140" viewBox="0 0 500 140">
+  <rect width="500" height="140" rx="24" fill="#FFF7D6"/>
+  <text x="28" y="34" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="#6C5300">Five answer slots for a 3 x 3 product</text>
+  <text x="28" y="54" font-family="Segoe UI, Arial" font-size="13" fill="#6E6751">The manual's pattern grows and then shrinks: 1, 2, 3, 2, 1.</text>
+
+  <g font-family="Segoe UI, Arial" text-anchor="middle">
+    <rect x="28" y="72" width="72" height="42" rx="12" fill="#FFFFFF" stroke="#D7B347" stroke-width="2"/>
+    <rect x="120" y="72" width="72" height="42" rx="12" fill="#FFFFFF" stroke="#D7B347" stroke-width="2"/>
+    <rect x="212" y="72" width="72" height="42" rx="12" fill="#FFFFFF" stroke="#D7B347" stroke-width="2"/>
+    <rect x="304" y="72" width="72" height="42" rx="12" fill="#FFFFFF" stroke="#D7B347" stroke-width="2"/>
+    <rect x="396" y="72" width="72" height="42" rx="12" fill="#FFFFFF" stroke="#D7B347" stroke-width="2"/>
+
+    <text x="64" y="98" font-size="16" font-weight="700" fill="#1F2440">1 prod</text>
+    <text x="156" y="98" font-size="16" font-weight="700" fill="#1F2440">2 prods</text>
+    <text x="248" y="98" font-size="16" font-weight="700" fill="#7A2458">3 prods</text>
+    <text x="340" y="98" font-size="16" font-weight="700" fill="#1F2440">2 prods</text>
+    <text x="432" y="98" font-size="16" font-weight="700" fill="#1F2440">1 prod</text>
+
+    <text x="64" y="128" font-size="13" fill="#5B6275">ones</text>
+    <text x="156" y="128" font-size="13" fill="#5B6275">tens</text>
+    <text x="248" y="128" font-size="13" fill="#7A2458">hundreds</text>
+    <text x="340" y="128" font-size="13" fill="#5B6275">thousands</text>
+    <text x="432" y="128" font-size="13" fill="#5B6275">ten-thousands</text>
+  </g>
+</svg>

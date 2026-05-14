@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 340" width="300" height="510">
+  <defs>
+    <radialGradient id="sg" cx="45%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FDD5B5"/>
+      <stop offset="100%" stop-color="#E8A070"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="100" cy="334" rx="45" ry="7" fill="rgba(0,0,0,0.13)"/>
+  <rect x="76" y="220" width="21" height="96" rx="9" fill="#1D2C46"/>
+  <rect x="103" y="220" width="21" height="96" rx="9" fill="#1D2C46"/>
+  <rect x="66" y="309" width="40" height="15" rx="5" fill="#2A2020"/>
+  <rect x="94" y="309" width="40" height="15" rx="5" fill="#2A2020"/>
+  <path d="M68 136 L132 136 L130 223 L70 223Z" fill="#7A8FA6"/>
+  <path d="M68 136 L85 157 L100 166 L100 136Z" fill="#6A7F96"/>
+  <path d="M132 136 L115 157 L100 166 L100 136Z" fill="#6A7F96"/>
+  <path d="M92 134 L100 150 L108 134 L108 168 L92 168Z" fill="#FFFFFF"/>
+  <path d="M92 134 L84 150 L76 148 L92 134" fill="#FFFFFF"/>
+  <path d="M108 134 L116 150 L124 148 L108 134" fill="#FFFFFF"/>
+  <!-- Right hand touching chin thoughtfully -->
+  <path d="M132 150 Q148 158 154 172" stroke="#E8A070" stroke-width="19" fill="none" stroke-linecap="round"/>
+  <path d="M154 172 Q152 148 148 130" stroke="#E8A070" stroke-width="17" fill="none" stroke-linecap="round"/>
+  <ellipse cx="147" cy="122" rx="13" ry="10" fill="#F5C8A5"/>
+  <!-- Left arm at side -->
+  <path d="M68 148 Q48 168 46 198" stroke="#E8A070" stroke-width="19" fill="none" stroke-linecap="round"/>
+  <ellipse cx="46" cy="202" rx="13" ry="10" fill="#F5C8A5"/>
+  <rect x="91" y="112" width="18" height="25" rx="6" fill="#F5C8A5"/>
+  <ellipse cx="100" cy="82" rx="43" ry="41" fill="#5A3015"/>
+  <ellipse cx="100" cy="90" rx="36" ry="39" fill="url(#sg)"/>
+  <path d="M64 84 Q66 50 100 44 Q134 50 136 84 Q124 56 100 54 Q76 56 64 84Z" fill="#5A3015"/>
+  <path d="M64 84 Q55 108 60 134" stroke="#5A3015" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M136 84 Q145 108 140 134" stroke="#5A3015" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <ellipse cx="64" cy="93" rx="7" ry="9" fill="#F0B890"/>
+  <ellipse cx="136" cy="93" rx="7" ry="9" fill="#F0B890"/>
+  <!-- Concerned brows angled inward -->
+  <path d="M75 80 Q84 76 91 80" stroke="#5A3015" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <path d="M109 80 Q116 76 125 80" stroke="#5A3015" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <!-- Inner brow furrow -->
+  <path d="M90 79 Q96 76 91 80" stroke="#8B5E3C" stroke-width="2" fill="none"/>
+  <path d="M110 79 Q104 76 109 80" stroke="#8B5E3C" stroke-width="2" fill="none"/>
+  <ellipse cx="84" cy="90" rx="9" ry="10" fill="white"/>
+  <ellipse cx="116" cy="90" rx="9" ry="10" fill="white"/>
+  <ellipse cx="85" cy="91" rx="6" ry="7" fill="#4E2C10"/>
+  <ellipse cx="117" cy="91" rx="6" ry="7" fill="#4E2C10"/>
+  <ellipse cx="85" cy="92" rx="3.5" ry="4" fill="#1A0800"/>
+  <ellipse cx="117" cy="92" rx="3.5" ry="4" fill="#1A0800"/>
+  <circle cx="87" cy="88" r="2" fill="white"/>
+  <circle cx="119" cy="88" r="2" fill="white"/>
+  <path d="M96 101 Q100 106 104 101" stroke="#D08860" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Concerned downturned mouth -->
+  <path d="M88 113 Q100 108 112 113" stroke="#C06848" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="71" cy="103" rx="9" ry="6" fill="rgba(200,150,120,0.18)"/>
+  <ellipse cx="129" cy="103" rx="9" ry="6" fill="rgba(200,150,120,0.18)"/>
+</svg>

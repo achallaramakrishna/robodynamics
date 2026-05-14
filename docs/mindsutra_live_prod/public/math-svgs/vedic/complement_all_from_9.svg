@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210" width="360" height="210" font-family="Nunito,sans-serif">
+  <rect width="360" height="210" rx="14" fill="#f0f9ff"/>
+  <text x="180" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">All From 9, Last From 10</text>
+  <text x="180" y="42" text-anchor="middle" font-size="11" fill="#0369a1">Find 1000 − 364</text>
+
+  <!-- Digit row for 364 -->
+  <!-- 3 -->
+  <rect x="60" y="55" width="50" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="85" y="87" text-anchor="middle" font-size="28" font-weight="800" fill="#1e40af">3</text>
+  <!-- 6 -->
+  <rect x="155" y="55" width="50" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="180" y="87" text-anchor="middle" font-size="28" font-weight="800" fill="#1e40af">6</text>
+  <!-- 4 -->
+  <rect x="250" y="55" width="50" height="50" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="275" y="87" text-anchor="middle" font-size="28" font-weight="800" fill="#be185d">4</text>
+
+  <!-- Rule labels -->
+  <text x="85" y="120" text-anchor="middle" font-size="11" fill="#1e40af">9 − 3</text>
+  <text x="180" y="120" text-anchor="middle" font-size="11" fill="#1e40af">9 − 6</text>
+  <text x="275" y="120" text-anchor="middle" font-size="11" fill="#be185d">10 − 4</text>
+
+  <!-- Arrow down -->
+  <line x1="85" y1="123" x2="85" y2="143" stroke="#3b82f6" stroke-width="2" marker-end="url(#blueArr)"/>
+  <line x1="180" y1="123" x2="180" y2="143" stroke="#3b82f6" stroke-width="2" marker-end="url(#blueArr)"/>
+  <line x1="275" y1="123" x2="275" y2="143" stroke="#ec4899" stroke-width="2" marker-end="url(#pinkArr)"/>
+
+  <!-- Result digits -->
+  <rect x="60" y="148" width="50" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="85" y="178" text-anchor="middle" font-size="28" font-weight="800" fill="#15803d">6</text>
+
+  <rect x="155" y="148" width="50" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="180" y="178" text-anchor="middle" font-size="28" font-weight="800" fill="#15803d">3</text>
+
+  <rect x="250" y="148" width="50" height="45" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="275" y="178" text-anchor="middle" font-size="28" font-weight="800" fill="#15803d">6</text>
+
+  <text x="180" y="204" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">1000 − 364 = 636 ✓</text>
+
+  <!-- Label: NOT last -->
+  <text x="35" y="76" font-size="9" fill="#1e40af">from 9</text>
+  <text x="35" y="86" font-size="9" fill="#1e40af">↓</text>
+  <text x="310" y="76" font-size="9" fill="#be185d">from 10</text>
+  <text x="316" y="86" font-size="9" fill="#be185d">↓</text>
+
+  <defs>
+    <marker id="blueArr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="pinkArr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#ec4899"/>
+    </marker>
+  </defs>
+</svg>

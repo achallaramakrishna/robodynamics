@@ -1,0 +1,17 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FFF7ED"/>
+  
+  <g id="letter_aa">
+    <text x="180" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">आ</text>
+  </g>
+  
+  <g id="object_aam">
+    <!-- Mango Shape -->
+    <path d="M700 350C620 350 580 450 580 550C580 700 700 800 850 650C900 600 900 450 820 400C780 375 740 350 700 350Z" fill="#FBBF24"/>
+    <path d="M700 350C700 350 720 300 700 280" stroke="#92400E" stroke-width="8" stroke-linecap="round"/> <!-- Stem -->
+    <path d="M700 350C700 350 750 320 780 280C800 250 800 220 800 220" stroke="#059669" stroke-width="12" stroke-linecap="round"/> <!-- Leaf -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">आ से आम</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">AA for Aam (Mango)</text>
+</svg>

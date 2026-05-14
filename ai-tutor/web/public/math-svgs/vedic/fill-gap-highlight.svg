@@ -1,0 +1,7 @@
+<svg width="260" height="120" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
+  <rect x="18" y="44" width="170" height="26" rx="13" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="18" y="44" width="136" height="26" rx="13" fill="#EAF2FF" stroke="#3B3A8C" stroke-width="0"/>
+  <rect x="154" y="44" width="34" height="26" rx="13" fill="#FFF7ED" stroke="#F97316" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="205" y="62" font-size="18" font-family="Arial" font-weight="700" fill="#F97316">gap</text>
+  <path d="M216 38 C206 28, 192 28, 176 40" fill="none" stroke="#E91E8C" stroke-width="4" stroke-linecap="round"/>
+</svg>

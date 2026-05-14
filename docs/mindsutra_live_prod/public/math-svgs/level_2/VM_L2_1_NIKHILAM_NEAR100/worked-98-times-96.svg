@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" fill="none">
+  <rect width="720" height="320" rx="28" fill="#F8FAFC"/>
+  <rect x="20" y="20" width="680" height="280" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="42" y="58" fill="#0F172A" font-size="26" font-family="Arial, sans-serif" font-weight="700">Nikhilam Worked Example</text>
+  <text x="42" y="84" fill="#475569" font-size="14" font-family="Arial, sans-serif">Both numbers are below 100, so both deviations are negative.</text>
+
+  <rect x="42" y="112" width="210" height="154" rx="18" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="60" y="144" fill="#991B1B" font-size="18" font-family="Arial, sans-serif" font-weight="700">Deviations</text>
+  <text x="147" y="184" text-anchor="middle" fill="#111827" font-size="34" font-family="Arial, sans-serif" font-weight="800">98 -> -2</text>
+  <text x="147" y="224" text-anchor="middle" fill="#111827" font-size="34" font-family="Arial, sans-serif" font-weight="800">96 -> -4</text>
+
+  <rect x="264" y="112" width="190" height="154" rx="18" fill="#EEF2FF" stroke="#A5B4FC"/>
+  <text x="359" y="144" text-anchor="middle" fill="#3730A3" font-size="18" font-family="Arial, sans-serif" font-weight="700">Left part</text>
+  <text x="359" y="190" text-anchor="middle" fill="#111827" font-size="28" font-family="Arial, sans-serif" font-weight="800">98 - 4 = 94</text>
+  <text x="359" y="226" text-anchor="middle" fill="#3730A3" font-size="16" font-family="Arial, sans-serif" font-weight="700">cross-subtract</text>
+
+  <rect x="486" y="112" width="192" height="154" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="582" y="144" text-anchor="middle" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Right part</text>
+  <text x="582" y="182" text-anchor="middle" fill="#111827" font-size="26" font-family="Arial, sans-serif" font-weight="800">2 x 4 = 08</text>
+  <text x="582" y="216" text-anchor="middle" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">pad to 2 digits</text>
+  <text x="582" y="246" text-anchor="middle" fill="#166534" font-size="28" font-family="Arial, sans-serif" font-weight="800">9408</text>
+</svg>

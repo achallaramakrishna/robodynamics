@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="400" rx="16" fill="url(#bgGrad)" stroke="#334155" stroke-width="2"/>
+  <rect x="0" y="0" width="800" height="6" fill="#F59E0B"/>
+
+  <text x="400" y="50" font-family="'Inter', sans-serif" font-weight="800" font-size="28" fill="#F8FAFC" text-anchor="middle">Vinculum Numbers</text>
+  <text x="400" y="80" font-family="'Inter', sans-serif" font-weight="600" font-size="16" fill="#94A3B8" text-anchor="middle">Removing high digits (6, 7, 8, 9) for easier math</text>
+
+  <g transform="translate(150, 160)">
+    <!-- Original Number -->
+    <g transform="translate(0, 0)" font-family="'JetBrains Mono'" font-size="82" font-weight="900" fill="#F8FAFC">
+      <text x="0" y="50">38</text>
+      <text x="140" y="50" font-size="48" fill="#64748B">→</text>
+    </g>
+
+    <!-- Vinculum Conversion -->
+    <g transform="translate(240, 0)" font-family="'JetBrains Mono'" font-size="82" font-weight="900">
+      <text x="0" y="50" fill="#F8FAFC">4</text>
+      <g transform="translate(65, 0)">
+        <text x="0" y="50" fill="#F43F5E" filter="url(#glow)">2</text>
+        <line x1="-5" y1="-30" x2="55" y2="-30" stroke="#F43F5E" stroke-width="8" stroke-linecap="round" filter="url(#glow)" />
+      </g>
+    </g>
+
+    <!-- Explanation -->
+    <g transform="translate(0, 120)" font-family="Inter" font-size="18" font-weight="600">
+       <text x="0" y="0" fill="#94A3B8">38 = (40 - 2)</text>
+       <text x="0" y="30" fill="#F43F5E">Bar 2 means -2</text>
+    </g>
+  </g>
+
+  <rect x="520" y="320" width="240" height="60" rx="12" fill="#1E293B" stroke="#334155" />
+  <text x="640" y="355" font-family="Inter" font-size="14" font-weight="800" fill="#F59E0B" text-anchor="middle">REKHANKA SUTRA</text>
+</svg>

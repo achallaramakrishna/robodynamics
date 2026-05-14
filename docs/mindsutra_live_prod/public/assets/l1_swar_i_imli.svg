@@ -1,0 +1,18 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#F0F9FF"/>
+  
+  <g id="letter_i">
+    <text x="220" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">इ</text>
+  </g>
+  
+  <g id="object_imli">
+    <!-- Tamarind Pod -->
+    <path d="M650 400C600 400 580 450 630 500C680 550 720 580 670 630C620 680 650 750 750 720C850 690 850 450 750 420C700 405 680 400 650 400Z" fill="#78350F"/>
+    <circle cx="700" cy="500" r="15" fill="#4B1A04"/>
+    <circle cx="750" cy="620" r="15" fill="#4B1A04"/>
+    <path d="M630 420C630 420 600 380 580 350" stroke="#059669" stroke-width="6"/> <!-- Stem/Leaf connection -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">इ से इमली</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">I for Imli (Tamarind)</text>
+</svg>

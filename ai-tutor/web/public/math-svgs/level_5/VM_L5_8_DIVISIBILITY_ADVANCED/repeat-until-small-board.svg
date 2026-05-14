@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#f9fbff"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#ffffff" stroke="#d9e2f5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#eab308"/>
+  <text x="48" y="68" fill="#10213f" font-size="28" font-family="Arial, sans-serif" font-weight="700">Reduce step by step until the number is easy</text>
+  <text x="48" y="98" fill="#51627f" font-size="16" font-family="Arial, sans-serif">Use the rule repeatedly until you reach a small number you can judge quickly.</text>
+
+  <g transform="translate(84 152)" font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="0" y="0" width="632" height="126" rx="22" fill="#fefce8" stroke="#fde68a"/>
+    <circle cx="90" cy="63" r="36" fill="#fef3c7" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="316" cy="63" r="36" fill="#fef3c7" stroke="#fbbf24" stroke-width="3"/>
+    <circle cx="542" cy="63" r="36" fill="#dcfce7" stroke="#22c55e" stroke-width="3"/>
+    <text x="90" y="71" fill="#92400e" font-size="22" font-weight="700">143</text>
+    <text x="316" y="71" fill="#92400e" font-size="22" font-weight="700">13</text>
+    <text x="542" y="71" fill="#166534" font-size="22" font-weight="700">Pass</text>
+    <path d="M126 63 H280" stroke="#f59e0b" stroke-width="4"/>
+    <path d="M352 63 H506" stroke="#22c55e" stroke-width="4"/>
+    <circle cx="204" cy="63" r="9" fill="#f59e0b">
+      <animate attributeName="cx" values="140;266;140" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="430" cy="63" r="9" fill="#22c55e">
+      <animate attributeName="cx" values="366;492;366" dur="2.2s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <rect x="148" y="318" width="504" height="32" rx="10" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="400" y="340" fill="#c2410c" font-size="16" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">If the reduced number passes the test, the original number also passes.</text>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F9FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D8E3F8" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#EC4899"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">The decimal point is the place marker</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">It tells us where whole numbers stop and tenths begin.</text>
+
+  <rect x="60" y="138" width="680" height="110" rx="18" fill="#FDF2F8" stroke="#FBCFE8"/>
+  <g font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="170" y="204" fill="#10213F" font-size="56">2</text>
+    <circle cx="246" cy="194" r="11" fill="#EC4899"/>
+    <text x="330" y="204" fill="#10213F" font-size="56">4</text>
+    <text x="170" y="228" fill="#64748B" font-size="15">ones</text>
+    <text x="330" y="228" fill="#64748B" font-size="15">tenths</text>
+  </g>
+  <path d="M246 148 L246 122" stroke="#EC4899" stroke-width="4" stroke-linecap="round"/>
+  <text x="246" y="108" fill="#BE185D" font-size="16" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">decimal point</text>
+
+  <rect x="82" y="282" width="192" height="54" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="304" y="282" width="192" height="54" rx="14" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <rect x="526" y="282" width="192" height="54" rx="14" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="104" y="315" fill="#1D4ED8" font-size="15" font-family="Arial, sans-serif" font-weight="700">2.4 = 2 whole + 4 tenths</text>
+  <text x="326" y="315" fill="#6D28D9" font-size="15" font-family="Arial, sans-serif" font-weight="700">0.7 = 7 tenths</text>
+  <text x="548" y="315" fill="#047857" font-size="15" font-family="Arial, sans-serif" font-weight="700">3.60 = 3 and 60 hundredths</text>
+</svg>

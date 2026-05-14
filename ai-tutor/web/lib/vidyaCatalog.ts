@@ -3,7 +3,11 @@ import type { AppSession } from "./appSession";
 import {
   getStudentTheme,
   get_PY_L1_01_SETUP_LESSON,
+  get_PY_L1_02_VARS_LESSON,
+  get_PY_L1_03_MATH_LESSON,
   get_PY_L1_04_LOGIC_LESSON,
+  get_PY_L1_05_WHILE_LESSON,
+  get_PY_L1_06_FOR_LESSON,
 } from "./vidyaLessonsL1";
 
 /**
@@ -17,9 +21,17 @@ export function getVidyaLesson(lessonId: string, session?: AppSession): VidyaLes
   switch (lessonId) {
     case "PY_L1_01_SETUP":
       return get_PY_L1_01_SETUP_LESSON(theme);
+    case "PY_L1_02_VARS":
+      return get_PY_L1_02_VARS_LESSON(theme);
+    case "PY_L1_03_MATH":
+      return get_PY_L1_03_MATH_LESSON(theme);
     case "PY_L1_04_LOGIC":
       return get_PY_L1_04_LOGIC_LESSON(theme);
-    // TODO: Add remaining 10 lessons for Level 1
+    case "PY_L1_05_WHILE":
+      return get_PY_L1_05_WHILE_LESSON(theme);
+    case "PY_L1_06_FOR":
+      return get_PY_L1_06_FOR_LESSON(theme);
+    // TODO: Add remaining 6 lessons for Level 1
     default:
       return null;
   }

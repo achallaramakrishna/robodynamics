@@ -6,7 +6,7 @@ import { buildCodeSutraLearnerSnapshot, summarizeCodeSutraSkillMastery } from ".
 export const APP_SESSION_COOKIE = "rd_user_session";
 
 export type SessionRole = "PARENT" | "STUDENT";
-export type SessionProductSlug = "mindsutra" | "mindsparc" | "codesutra";
+export type SessionProductSlug = "mindsutra" | "mindsparc" | "codesutra" | "vidya";
 
 type SessionChapter = {
   code: string;
@@ -108,9 +108,9 @@ function normalizeProductSlug(value?: string | null): SessionProductSlug {
 }
 
 function productNameForSlug(productSlug: SessionProductSlug): string {
-  if (productSlug === "mindsparc") return "MindSparc";
+  if (productSlug === "mindsparc") return "Yukti";
   if (productSlug === "codesutra") return "CodeSutra";
-  return "MindSutra";
+  return "Vedika";
 }
 
 function inferProductSlugFromCourseId(courseId?: string | null): SessionProductSlug {

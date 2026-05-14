@@ -1,0 +1,65 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L2 Direction Navigator - Olympiad Island Treasure</title>
+  
+  <rect width="800" height="600" fill="#F0F9FF" />
+  
+  {/* Compass Rose */}
+  <g id="compass" transform="translate(100, 100)">
+     <circle r="60" fill="white" stroke="#0E7490" stroke-width="4" />
+     <path d="M0,-50 L10,0 L0,10 L-10,0 Z" fill="#EF4444" />
+     <path d="M0,50 L10,0 L0,-10 L-10,0 Z" fill="#334155" />
+     <text y="-70" text-anchor="middle" font-weight="900" fill="#0E7490">N</text>
+     <text y="85" text-anchor="middle" font-weight="900" fill="#0E7490">S</text>
+     <text x="75" y="5" text-anchor="middle" font-weight="900" fill="#0E7490">E</text>
+     <text x="-75" y="5" text-anchor="middle" font-weight="900" fill="#0E7490">W</text>
+  </g>
+
+  {/* Island Map Grid */}
+  <g id="grid-map" transform="translate(250, 100)">
+     <rect width="500" height="400" fill="#FEF3C7" stroke="#D97706" stroke-width="2" />
+     <path d="M0,0 M100,0 L100,400 M200,0 L200,400 M300,0 L300,400 M400,0 L400,400" stroke="#D97706" stroke-width="1" opacity="0.3" />
+     <path d="M0,100 L500,100 M0,200 L500,200 M0,300 L500,300" stroke="#D97706" stroke-width="1" opacity="0.3" />
+
+     {/* Starting Point */}
+     <circle cx="200" cy="300" r="10" fill="#0E7490" />
+     <text x="200" y="325" text-anchor="middle" font-size="10" fill="#0E7490">START</text>
+
+     {/* Explorer Avatar */}
+     <g id="explorer" transform="translate(200, 300)">
+        <path d="M-10,-15 L10,-15 L0,5 Z" fill="#065F46" />
+        <circle cy="-20" r="8" fill="#FDBA74" />
+        <line y1="5" y2="15" stroke="black" stroke-width="2" />
+     </g>
+
+     {/* Path Trail (Dashed) */}
+     <path id="route-trail" d="M200,300 L200,100 L400,100" stroke="#10B981" stroke-width="4" fill="none" stroke-dasharray="10,5" opacity="0.5" />
+     
+     {/* Hidden Treasure */}
+     <rect x="380" y="80" width="40" height="40" rx="5" fill="#FACC15" stroke="#92400E" stroke-width="2" class="shimmer" />
+  </g>
+
+  {/* Navigation Dashboard */}
+  <g id="controls" transform="translate(50, 450)">
+     <rect width="200" height="120" rx="15" fill="#1E293B" />
+     <text x="100" y="30" text-anchor="middle" fill="white" font-size="12" font-weight="900">NAVIGATOR CONTROLS</text>
+     
+     <g transform="translate(40, 60)" cursor="pointer">
+        <rect width="50" height="40" rx="5" fill="#334155" />
+        <path d="M15,15 L10,20 L15,25" stroke="white" stroke-width="2" fill="none" />
+        <text x="25" y="55" text-anchor="middle" fill="#94A3B8" font-size="10">LEFT</text>
+     </g>
+
+     <g transform="translate(110, 60)" cursor="pointer">
+        <rect width="50" height="40" rx="5" fill="#334155" />
+        <path d="M35,15 L40,20 L35,25" stroke="white" stroke-width="2" fill="none" />
+        <text x="25" y="55" text-anchor="middle" fill="#94A3B8" font-size="10">RIGHT</text>
+     </g>
+  </g>
+
+  {/* Mission Card */}
+  <g transform="translate(280, 520)">
+     <rect width="450" height="60" rx="10" fill="#0E7490" />
+     <text x="20" y="25" fill="#A5F3FC" font-size="14" font-weight="900">MISSION: NORTH 5M, RIGHT TURN, EAST 3M</text>
+     <text x="20" y="45" fill="white" font-size="12">What is the final facing direction?</text>
+  </g>
+</svg>

@@ -1,0 +1,107 @@
+====================================
+KAVERI KANNADA AI TUTOR
+IMAGE GENERATION PROMPTS FOR GEMINI
+====================================
+
+PROJECT: Kaveri (Kannada Literacy AI Tutor)
+TARGET: Level 6 Grammar Essentials (42 images)
+STYLE: Bright, colorful, child-friendly illustrations (800x600px)
+
+---
+
+COPY THIS INTO GEMINI FOR BATCH IMAGE GENERATION:
+
+I need to generate 42 educational illustrations for a Kannada language learning app called Kaveri. These are for Level 6 Grammar lessons. All images should be:
+- Bright, colorful, child-friendly style
+- 800x600px resolution
+- Include Kannada script labels where visible
+- Diverse children and characters
+- Professional quality
+
+Please generate these images with the following prompts:
+
+CHAPTER 1: NOUNS (9 images)
+1. "kaveri_l6_c01_l01_common_nouns" - Variety of everyday objects (house, book, dog, flower, butterfly) in colorful children's book illustration style with natural colors
+2. "kaveri_l6_c01_l02_proper_nouns" - Colorful name tags and labels showing Raj, Bangalore, India with Kannada script ರಾಜ, ಬೆಂಗಳೂರು, ಭಾರತ
+3. "kaveri_l6_c01_l03_masculine_nouns" - Father figure, boy, and lion with clearly masculine features in warm earth tones (brown, gold)
+4. "kaveri_l6_c01_l04_feminine_nouns" - Mother figure, girl, and lioness with feminine features in bright colors (pink, purple, red)
+5. "kaveri_l6_c01_l05_neuter_nouns" - Objects like table, chair, pencil, pot, bottle in classroom setting with neutral colors (gray, blue)
+6. "kaveri_l6_c01_l06_singular_nouns" - One apple, one book, one house each isolated with number "1" label - simple clean design
+7. "kaveri_l6_c01_l07_plural_nouns" - Many apples, many books, group of children playing together showing abundance and multiple items
+8. "kaveri_l6_c01_l08_nominative_case" - Subject doing action: boy actively reading book while sitting with focused happy expression
+9. "kaveri_l6_c01_l09_accusative_case" - Object receiving action: book being read by child with close-up focus on the book in action
+
+CHAPTER 2: ADJECTIVES (8 images)
+10. "kaveri_l6_c02_l01_basic_adjectives" - New book, big dog, red ball, small flower showing adjectives with objects clearly labeled
+11. "kaveri_l6_c02_l02_quality_adjectives" - Good happy smiling face vs bad sad frowning face; beautiful flower vs ugly withered flower comparison
+12. "kaveri_l6_c02_l03_quantity_adjectives" - Some apples on plate, many stars in sky, all children in group showing different quantities
+13. "kaveri_l6_c02_l04_demonstrative_adjectives" - This book (nearby) vs that mountain (far) with distance perspective clearly shown
+14. "kaveri_l6_c02_l05_interrogative_adjectives" - Question mark with "which apple?" pointing finger with multiple apples to choose from
+15. "kaveri_l6_c02_l06_gender_number_agreement" - Big boy, big girl, big children showing how adjective changes with different genders and numbers
+16. "kaveri_l6_c02_l07_comparative_adjectives" - Two houses side by side: small house vs big house, tall child vs taller child in comparison
+17. "kaveri_l6_c02_l08_superlative_adjectives" - Biggest house, most beautiful flower, prettiest girl displayed as winner or supreme example
+
+CHAPTER 3: PRONOUNS (8 images)
+18. "kaveri_l6_c03_l01_personal_pronouns" - I, you, he, she, it, we, they - different diverse people representing each pronoun
+19. "kaveri_l6_c03_l02_possessive_pronouns" - My book, your pen, his toy, her doll, their toys clearly showing ownership relationships
+20. "kaveri_l6_c03_l03_third_person_pronouns" - He (boy), she (girl), it (animal), they (group) referring to others not the speaker
+21. "kaveri_l6_c03_l04_relative_pronouns" - "The boy who reads" with connection line showing relationship between clauses visually
+22. "kaveri_l6_c03_l05_interrogative_pronouns" - Who, what, which, whose question marks with different people and objects to ask about
+23. "kaveri_l6_c03_l06_demonstrative_pronouns" - This book, that house, these flowers, those mountains with pointing gestures shown
+24. "kaveri_l6_c03_l07_reflexive_pronouns" - Person doing action to themselves (myself, yourself, himself) shown as mirror or self-action
+25. "kaveri_l6_c03_l08_indefinite_pronouns" - Someone, something, anyone, anything silhouette showing vague unclear person or object
+
+CHAPTER 4: VERBS (10 images)
+26. "kaveri_l6_c04_l01_verb_introduction" - Action verbs: read, write, run, jump, dance with child performing multiple actions in sequence
+27. "kaveri_l6_c04_l02_present_tense" - Child reading NOW with active motion lines and clock showing present time happening
+28. "kaveri_l6_c04_l03_past_tense" - Child with yesterday calendar label and past action memory bubble showing what happened before
+29. "kaveri_l6_c04_l04_future_tense" - Child with tomorrow calendar label and dreaming cloud showing what will happen in future
+30. "kaveri_l6_c04_l05_transitive_verbs" - Child reading book: action clearly affecting the object, object receives the action
+31. "kaveri_l6_c04_l06_intransitive_verbs" - Child walking or running without object: self-contained action with no target object
+32. "kaveri_l6_c04_l07_verb_agreement" - Boy reads vs girl reads showing different verb endings that match the subject
+33. "kaveri_l6_c04_l08_imperative_verbs" - Commands: Read! Write! Go! with exclamation marks and pointing fingers
+34. "kaveri_l6_c04_l09_negation_verbs" - Don't read, not going with prohibition symbols, stop signs, and head shaking
+35. "kaveri_l6_c04_l10_ability_verbs" - "I can read" showing capability and confidence: child successfully doing action
+
+CHAPTER 5: SENTENCE STRUCTURE (7 images)
+36. "kaveri_l6_c05_l01_sentence_basics" - Subject-Object-Verb flow diagram: boy reads book showing SOV word order structure
+37. "kaveri_l6_c05_l02_simple_sentences" - One clear action: child reading with no complications, simple structure
+38. "kaveri_l6_c05_l03_compound_sentences" - Two actions joined: child reading AND writing with "and" symbol showing connection
+39. "kaveri_l6_c05_l04_complex_sentences" - Main and dependent clauses shown as tree diagram showing relationship structure
+40. "kaveri_l6_c05_l05_interrogative_sentences" - Question mark with curious and surprised child showing asking expression
+41. "kaveri_l6_c05_l06_negative_sentences" - "No" symbol, denial sign, child shaking head showing prohibition
+42. "kaveri_l6_c05_l07_exclamatory_sentences" - Exclamation mark with excited, surprised, delighted child showing strong emotion
+
+---
+
+GENERATION NOTES:
+- Style: Colorful, child-friendly, similar to educational textbook illustrations
+- Include Kannada script labels where shown in brackets above
+- All characters should be diverse children with happy expressions
+- Use bright primary colors (red, blue, yellow) and pastels
+- Keep backgrounds simple and uncluttered
+- Resolution: 800x600px minimum
+- Professional finish suitable for app UI
+
+OUTPUT FORMAT:
+Please name each image using the filename shown in quotes (e.g., "kaveri_l6_c01_l01_common_nouns.png")
+
+---
+
+ALTERNATIVE: SIMPLE BATCH REQUEST
+
+If you prefer, you can paste the CSV file content instead. The CSV has all 42 image specifications ready to process.
+
+---
+
+PROJECT LINKS:
+- App: Kaveri (Kannada Literacy AI Tutor)
+- Location: /apps/kaveri-tutor/
+- Content files: Level 6 Grammar Data (kaveriLevel6Data.ts)
+- Total lessons: 42 grammar concepts across 5 chapters
+
+Start with Level 6 (42 images) as priority, then move to Levels 1-5 if needed.
+
+====================================
+Ready to paste into Gemini!
+====================================

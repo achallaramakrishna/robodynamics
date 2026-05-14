@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 160" width="380" height="160" font-family="Nunito,sans-serif">
+  <rect width="380" height="160" rx="14" fill="#f0fdf4"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Doubling Chain — Multiply by 4, 8, 16</text>
+  <text x="190" y="40" text-anchor="middle" font-size="11" fill="#166534">Example: 23 × 8</text>
+
+  <!-- Chain boxes -->
+  <!-- 23 -->
+  <rect x="20" y="54" width="60" height="48" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="50" y="84" text-anchor="middle" font-size="26" font-weight="800" fill="#15803d">23</text>
+  <text x="50" y="114" text-anchor="middle" font-size="10" fill="#64748b">start</text>
+
+  <!-- Arrow ×2 -->
+  <line x1="80" y1="78" x2="106" y2="78" stroke="#22c55e" stroke-width="2.5" marker-end="url(#gA)"/>
+  <text x="93" y="72" text-anchor="middle" font-size="11" fill="#166534" font-weight="700">×2</text>
+
+  <!-- 46 -->
+  <rect x="108" y="54" width="60" height="48" rx="10" fill="#bbf7d0" stroke="#16a34a" stroke-width="2"/>
+  <text x="138" y="84" text-anchor="middle" font-size="26" font-weight="800" fill="#15803d">46</text>
+  <text x="138" y="114" text-anchor="middle" font-size="10" fill="#64748b">×2</text>
+
+  <!-- Arrow ×2 -->
+  <line x1="168" y1="78" x2="194" y2="78" stroke="#22c55e" stroke-width="2.5" marker-end="url(#gA)"/>
+  <text x="181" y="72" text-anchor="middle" font-size="11" fill="#166634" font-weight="700">×2</text>
+
+  <!-- 92 -->
+  <rect x="196" y="54" width="60" height="48" rx="10" fill="#86efac" stroke="#15803d" stroke-width="2"/>
+  <text x="226" y="84" text-anchor="middle" font-size="26" font-weight="800" fill="#166534">92</text>
+  <text x="226" y="114" text-anchor="middle" font-size="10" fill="#64748b">×4</text>
+
+  <!-- Arrow ×2 -->
+  <line x1="256" y1="78" x2="282" y2="78" stroke="#22c55e" stroke-width="2.5" marker-end="url(#gA)"/>
+  <text x="269" y="72" text-anchor="middle" font-size="11" fill="#166534" font-weight="700">×2</text>
+
+  <!-- 184 -->
+  <rect x="284" y="54" width="76" height="48" rx="10" fill="#166534"/>
+  <text x="322" y="84" text-anchor="middle" font-size="26" font-weight="800" fill="white">184</text>
+  <text x="322" y="114" text-anchor="middle" font-size="10" fill="#4ade80">×8 ✓</text>
+
+  <text x="190" y="145" text-anchor="middle" font-size="12" fill="#374151">23 × 8 = <tspan font-weight="800" fill="#166534">184</tspan>  (double 3 times!)</text>
+
+  <defs>
+    <marker id="gA" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#22c55e"/>
+    </marker>
+  </defs>
+</svg>

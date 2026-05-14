@@ -1,0 +1,60 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L5 Argument Chain Analysis</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Argument Chain Flow */}
+  <g id="logic-flow" transform="translate(100, 300)">
+     {/* Link Arrows */}
+     <path d="M100,0 L250,0 M400,0 L550,0" stroke="#334155" stroke-width="4" stroke-dasharray="10,5" fill="none" />
+     
+     {/* Nodes */}
+     <g id="node-premise" transform="translate(0, -40)">
+        <rect width="200" height="80" rx="10" fill="#1E293B" stroke="#3B82F6" stroke-width="2" />
+        <text x="100" y="30" text-anchor="middle" fill="#3B82F6" font-size="12" font-weight="900">PREMISE</text>
+        <text x="100" y="55" text-anchor="middle" fill="white" font-size="11">Provided Fact</text>
+     </g>
+
+     <g id="node-assumption" transform="translate(300, -60)">
+        <rect width="200" height="120" rx="10" fill="#0F172A" stroke="#F472B6" stroke-width="2" stroke-dasharray="5,5" />
+        <text x="100" y="30" text-anchor="middle" fill="#F472B6" font-size="12" font-weight="900">ASSUMPTION</text>
+        <text x="100" y="65" text-anchor="middle" fill="#F472B6" font-size="24">?</text>
+        <text x="100" y="95" text-anchor="middle" fill="#64748B" font-size="10">The Missing Link</text>
+     </g>
+
+     <g id="node-conclusion" transform="translate(600, -40)">
+        <rect width="200" height="80" rx="10" fill="#1E293B" stroke="#10B981" stroke-width="2" />
+        <text x="100" y="30" text-anchor="middle" fill="#10B981" font-size="12" font-weight="900">CONCLUSION</text>
+        <text x="100" y="55" text-anchor="middle" fill="white" font-size="11">The Claim</text>
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+     </g>
+  </g>
+
+  {/* Attack/Support Tools (Bottom) */}
+  <g transform="translate(150, 480)">
+     <rect width="500" height="80" rx="20" fill="#1E293B" stroke="#334155" />
+     
+     <g transform="translate(100, 40)">
+        <circle r="25" fill="#10B981" opacity="0.8" />
+        <path d="M-10,0 L10,0 M0,-10 L0,10" stroke="white" stroke-width="4" fill="none" />
+        <text y="45" text-anchor="middle" fill="#10B981" font-size="10" font-weight="900">STRENGTHEN</text>
+     </g>
+
+     <g transform="translate(400, 40)">
+        <circle r="25" fill="#EF4444" opacity="0.8" />
+        <path d="M-10,0 L10,0" stroke="white" stroke-width="4" fill="none" />
+        <text y="45" text-anchor="middle" fill="#EF4444" font-size="10" font-weight="900">WEAKEN</text>
+     </g>
+  </g>
+
+  {/* Case Study Card (Top) */}
+  <g transform="translate(100, 60)">
+     <rect width="600" height="120" rx="15" fill="#1E293B" stroke="#334155" />
+     <path d="M0,35 L600,35" stroke="#334155" />
+     <text x="20" y="22" fill="#3B82F6" font-size="12" font-weight="900">STRATEGY ANALYSIS: GMAT MODE</text>
+     <text x="30" y="70" fill="#94A3B8" font-size="14">"If corporate productivity rose after coffee limits..."</text>
+     <text x="30" y="95" fill="#94A3B8" font-size="14">"...then coffee limits cause productivity."</text>
+  </g>
+
+  <text x="400" y="30" text-anchor="middle" font-size="28" font-weight="900" fill="white">Critical Reasoning Chain</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="250" viewBox="0 0 520 250">
+  <rect x="12" y="12" width="496" height="226" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="28" y="34" font-size="21" font-family="Arial" font-weight="700" fill="#25327A">Worked example: 98 x 96</text>
+  <text x="86" y="80" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#334155">98</text>
+  <text x="290" y="80" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#334155">96</text>
+  <text x="86" y="112" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#DC2626">-2</text>
+  <text x="290" y="112" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#DC2626">-4</text>
+  <path d="M274 102 L102 70" stroke="#2563EB" stroke-width="4"/>
+  <path d="M102 102 L274 70" stroke="#E91E8C" stroke-width="4"/>
+  <rect x="42" y="138" width="176" height="54" rx="16" fill="#EAF2FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="130" y="160" text-anchor="middle" font-size="14" font-family="Arial" font-weight="700" fill="#2563EB">Left part</text>
+  <text x="130" y="182" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#2563EB">98 - 4 = 94</text>
+  <rect x="250" y="138" width="176" height="54" rx="16" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <text x="338" y="160" text-anchor="middle" font-size="14" font-family="Arial" font-weight="700" fill="#059669">Right part</text>
+  <text x="338" y="182" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#059669">2 x 4 = 08</text>
+  <text x="260" y="220" text-anchor="middle" font-size="28" font-family="Arial" font-weight="700" fill="#7C3AED">9408</text>
+</svg>

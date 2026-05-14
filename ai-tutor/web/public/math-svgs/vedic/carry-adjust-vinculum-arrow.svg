@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <rect width="320" height="160" rx="24" fill="white"/>
+  <path d="M82 116 C82 54, 238 54, 238 116" fill="none" stroke="#E91E8C" stroke-width="8" stroke-linecap="round"/>
+  <path d="M222 100 L238 118 L256 102" fill="none" stroke="#E91E8C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="160" y="146" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">carry 1 left while converting</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Guided Practice: 5^4</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Use 5^3 = 125 as the anchor</text>
+  <rect x="60" y="116" width="680" height="216" rx="18" fill="#111827" stroke="#475569" stroke-width="2"/>
+  <text x="94" y="166" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">5^3 = 125</text>
+  <text x="94" y="216" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">5^4 = 125 x 5</text>
+  <text x="94" y="276" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">5^4 = 625</text>
+</svg>

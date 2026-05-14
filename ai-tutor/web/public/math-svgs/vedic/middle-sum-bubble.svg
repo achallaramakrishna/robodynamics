@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="140" viewBox="0 0 300 140">
+  <rect x="18" y="18" width="264" height="86" rx="26" fill="#FCE7F3" stroke="#E91E8C" stroke-width="4"/>
+  <path d="M138 104 L160 126 L176 104" fill="#FCE7F3" stroke="#E91E8C" stroke-width="4" stroke-linejoin="round"/>
+  <text x="150" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="20" font-weight="700" fill="#E91E8C">4 + 7 = 11</text>
+  <text x="150" y="86" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" fill="#1F2440">middle digits live here</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#f8faff"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="#ffffff" stroke="#dce5ff" stroke-width="2"/>
+
+  <text x="48" y="58" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#64748b">VEDIKA SIMULTANEOUS EQUATIONS</text>
+  <text x="400" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#2b3f98">Spot the Common Answer</text>
+  <text x="400" y="106" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5e6b85">The solution point is the pair that satisfies both equations.</text>
+
+  <rect x="84" y="142" width="260" height="138" rx="24" fill="#eef3ff" stroke="#3555b4" stroke-width="3"/>
+  <text x="214" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#3555b4">Equation A</text>
+  <text x="214" y="224" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#1f2440">x + y = 9</text>
+  <text x="214" y="254" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">Examples: (6,3), (5,4), (7,2)</text>
+
+  <rect x="456" y="142" width="260" height="138" rx="24" fill="#fff4e2" stroke="#d58a00" stroke-width="3"/>
+  <text x="586" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#9a6200">Equation B</text>
+  <text x="586" y="224" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#1f2440">x - y = 3</text>
+  <text x="586" y="254" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">Examples: (6,3), (5,2), (7,4)</text>
+
+  <circle cx="400" cy="211" r="42" fill="#ecfdf5" stroke="#10b981" stroke-width="4"/>
+  <text x="400" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#166534">common</text>
+  <text x="400" y="229" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="24" font-weight="700" fill="#166534">(6,3)</text>
+</svg>

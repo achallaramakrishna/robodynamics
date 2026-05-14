@@ -1,0 +1,86 @@
+<svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .label { font-size: 12px; font-weight: bold; fill: #fff; }
+      .text { font-size: 10px; fill: #333; }
+      .energy-arrow { fill: none; stroke: #e74c3c; stroke-width: 2.5; marker-end: url(#arrow-red); }
+      .box { stroke-width: 2; }
+    </style>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="300" y="35" class="title" text-anchor="middle">FOOD CHAIN - ENERGY FLOW</text>
+
+  <!-- ===== FOOD CHAIN ===== -->
+  <!-- Sun (Energy source) -->
+  <circle cx="300" cy="80" r="25" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="300" y="88" class="label" text-anchor="middle" font-size="13">☀</text>
+  <text x="300" y="120" class="text" text-anchor="middle" font-weight="bold">Solar Energy</text>
+
+  <!-- Producer (Plants) -->
+  <rect x="220" y="150" width="160" height="80" fill="#27ae60" class="box" stroke="#1e8449" rx="5"/>
+  <text x="300" y="180" class="label" text-anchor="middle" font-size="13">PRODUCER</text>
+  <text x="300" y="205" class="label" text-anchor="middle" font-size="11">(Green Plants)</text>
+  <text x="300" y="223" class="text" text-anchor="middle" font-size="9">100% Energy</text>
+
+  <!-- Energy arrow down -->
+  <path d="M 300 130 L 300 150" class="energy-arrow"/>
+
+  <!-- Primary Consumer (Herbivores) -->
+  <rect x="220" y="250" width="160" height="80" fill="#3498db" class="box" stroke="#2980b9" rx="5"/>
+  <text x="300" y="280" class="label" text-anchor="middle" font-size="13">PRIMARY CONSUMER</text>
+  <text x="300" y="305" class="label" text-anchor="middle" font-size="11">(Herbivores)</text>
+  <text x="300" y="323" class="text" text-anchor="middle" font-size="9">10% Energy</text>
+
+  <!-- Energy arrow down -->
+  <path d="M 300 330 L 300 350" class="energy-arrow"/>
+
+  <!-- Secondary Consumer (Carnivores) -->
+  <rect x="220" y="350" width="160" height="80" fill="#e74c3c" class="box" stroke="#c0392b" rx="5"/>
+  <text x="300" y="380" class="label" text-anchor="middle" font-size="13">SECONDARY CONSUMER</text>
+  <text x="300" y="405" class="label" text-anchor="middle" font-size="11">(Small Carnivores)</text>
+  <text x="300" y="423" class="text" text-anchor="middle" font-size="9">1% Energy</text>
+
+  <!-- ===== ENERGY LOSS BOX (Right side) ===== -->
+  <rect x="430" y="200" width="150" height="280" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2" rx="5"/>
+  <text x="505" y="225" class="text" text-anchor="middle" font-weight="bold" font-size="11">Energy Loss</text>
+  <text x="505" y="245" class="text" text-anchor="middle" font-size="9">90% lost at each level:</text>
+
+  <g id="loss-details">
+    <text x="440" y="265" class="text" font-size="9">• Respiration</text>
+    <text x="440" y="283" class="text" font-size="9">• Heat production</text>
+    <text x="440" y="301" class="text" font-size="9">• Movement</text>
+    <text x="440" y="319" class="text" font-size="9">• Digestion</text>
+    <text x="440" y="337" class="text" font-size="9">• Decomposition</text>
+    <text x="440" y="355" class="text" font-size="9">• Waste products</text>
+    <text x="440" y="373" class="text" font-size="9">• Feces & urine</text>
+  </g>
+
+  <!-- ===== PYRAMID OF ENERGY (Bottom) ===== -->
+  <g id="pyramid">
+    <text x="50" y="480" class="text" font-weight="bold" font-size="10">Pyramid of Energy:</text>
+
+    <!-- Base -->
+    <polygon points="50,480 150,480 130,460 70,460" fill="#27ae60" stroke="#1e8449" stroke-width="1.5"/>
+    <text x="100" y="472" class="text" text-anchor="middle" font-size="8" fill="white">Producers</text>
+
+    <!-- Middle -->
+    <polygon points="75,460 125,460 115,445 85,445" fill="#3498db" stroke="#2980b9" stroke-width="1.5"/>
+    <text x="100" y="454" class="text" text-anchor="middle" font-size="8" fill="white">Primary</text>
+
+    <!-- Top -->
+    <polygon points="90,445 110,445 105,432 95,432" fill="#e74c3c" stroke="#c0392b" stroke-width="1.5"/>
+    <text x="100" y="441" class="text" text-anchor="middle" font-size="7" fill="white">Sec</text>
+  </g>
+
+  <!-- Key information -->
+  <rect x="40" y="365" width="550" height="85" fill="#ffe6e6" stroke="#e74c3c" stroke-width="1.5" rx="3"/>
+  <text x="55" y="385" class="text" font-weight="bold" font-size="10">Key Concepts:</text>
+  <text x="55" y="403" class="text" font-size="9">• 10% Energy Rule: Only 10% energy is transferred from one trophic level to next</text>
+  <text x="55" y="420" class="text" font-size="9">• Trophic Levels: Organisms grouped by feeding position (plants → herbivores → carnivores)</text>
+  <text x="55" y="437" class="text" font-size="9">• Biomass decreases at each level, so pyramids are usually triangular</text>
+</svg>

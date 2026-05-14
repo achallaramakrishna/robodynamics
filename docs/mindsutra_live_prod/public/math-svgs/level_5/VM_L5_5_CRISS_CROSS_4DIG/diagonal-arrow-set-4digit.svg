@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">ABCD x EFGH Column Pattern</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Build from the outside in, then back out</text>
+  <text x="120" y="128" fill="#F8FAFC" font-size="34" font-weight="800" font-family="Verdana, sans-serif">A B C D</text>
+  <text x="120" y="172" fill="#CBD5E1" font-size="34" font-weight="800" font-family="Verdana, sans-serif">E F G H</text>
+  <line x1="116" y1="136" x2="276" y2="136" stroke="#38BDF8" stroke-width="3" />
+  <line x1="254" y1="154" x2="254" y2="280" stroke="#FB7185" stroke-width="4" />
+  <line x1="214" y1="154" x2="294" y2="238" stroke="#FDE68A" stroke-width="4" />
+  <line x1="174" y1="154" x2="334" y2="280" stroke="#4ADE80" stroke-width="4" />
+  <line x1="134" y1="154" x2="374" y2="316" stroke="#A78BFA" stroke-width="4" />
+  <text x="410" y="124" fill="#F8FAFC" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Column formulas</text>
+  <text x="410" y="160" fill="#F8FAFC" font-size="20" font-weight="700" font-family="Verdana, sans-serif">C1 = D x H</text>
+  <text x="410" y="190" fill="#F8FAFC" font-size="20" font-weight="700" font-family="Verdana, sans-serif">C2 = C x H + D x G</text>
+  <text x="410" y="220" fill="#F8FAFC" font-size="20" font-weight="700" font-family="Verdana, sans-serif">C3 = B x H + C x G + D x F</text>
+  <text x="410" y="250" fill="#FEF3C7" font-size="20" font-weight="900" font-family="Verdana, sans-serif">C4 = A x H + B x G + C x F + D x E</text>
+  <text x="410" y="280" fill="#F8FAFC" font-size="20" font-weight="700" font-family="Verdana, sans-serif">C5 = A x G + B x F + C x E</text>
+  <text x="410" y="310" fill="#F8FAFC" font-size="20" font-weight="700" font-family="Verdana, sans-serif">C6 = A x F + B x E,  C7 = A x E</text>
+</svg>

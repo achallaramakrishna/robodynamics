@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" width="480" height="200" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0F1C"/><stop offset="100%" stop-color="#060D1A"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="480" height="200" fill="url(#bg)" rx="12"/>
+  <rect width="480" height="200" fill="none" stroke="#1E293B" stroke-width="1.5" rx="12"/>
+
+  <text x="240" y="22" font-size="11" font-weight="800" fill="#A78BFA" text-anchor="middle" letter-spacing="2">FACTOR BALANCE BEAM — Product stays the same</text>
+
+  <!-- Balance beam -->
+  <!-- Pivot -->
+  <polygon points="240,140 230,162 250,162" fill="#475569"/>
+  <rect x="225" y="160" width="30" height="8" rx="3" fill="#334155"/>
+  <!-- Beam bar -->
+  <rect x="80" y="136" width="320" height="8" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+
+  <!-- Left pan: 16 × 25 -->
+  <line x1="120" y1="144" x2="120" y2="96" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <rect x="70" y="60" width="100" height="38" rx="10" fill="#1E3A5F" stroke="#3B82F6" stroke-width="2"/>
+  <text x="120" y="78" font-size="15" font-weight="900" fill="#F8FAFC" text-anchor="middle">16 × 25</text>
+  <text x="120" y="93" font-size="10" fill="#93C5FD" text-anchor="middle">= 400</text>
+
+  <!-- Right pan: 8 × 50 (halve 16, double 25) -->
+  <line x1="360" y1="144" x2="360" y2="96" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <rect x="310" y="60" width="100" height="38" rx="10" fill="#1A3A2F" stroke="#22C55E" stroke-width="2"/>
+  <text x="360" y="78" font-size="15" font-weight="900" fill="#F8FAFC" text-anchor="middle">8 × 50</text>
+  <text x="360" y="93" font-size="10" fill="#86EFAC" text-anchor="middle">= 400</text>
+
+  <!-- Arrows showing transformation -->
+  <text x="175" y="48" font-size="9" fill="#F59E0B" text-anchor="middle">÷2</text>
+  <path d="M155,55 Q200,35 225,55" fill="none" stroke="#F59E0B" stroke-width="1.5" marker-end="url(#ah)" stroke-dasharray="4,2"/>
+
+  <text x="305" y="48" font-size="9" fill="#F59E0B" text-anchor="middle">×2</text>
+  <path d="M255,55 Q280,35 305,55" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <!-- Equals sign in centre -->
+  <text x="240" y="80" font-size="20" font-weight="900" fill="#F59E0B" text-anchor="middle" filter="url(#glow)">=</text>
+
+  <!-- Bottom label -->
+  <text x="240" y="182" font-size="10" fill="#475569" text-anchor="middle">Halve one factor, double the other → product unchanged!</text>
+  <text x="240" y="196" font-size="9" fill="#334155" text-anchor="middle">Key idea: 16 × 25 → 8 × 50 → 4 × 100 = 400 ✓</text>
+</svg>

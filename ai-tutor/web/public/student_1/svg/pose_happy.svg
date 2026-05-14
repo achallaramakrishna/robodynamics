@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 340" width="300" height="510">
+  <defs>
+    <radialGradient id="fg" cx="45%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FDD5B5"/>
+      <stop offset="100%" stop-color="#E8A070"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="100" cy="334" rx="42" ry="7" fill="rgba(0,0,0,0.13)"/>
+  <rect x="78" y="218" width="20" height="98" rx="8" fill="#1D2C46"/>
+  <rect x="102" y="218" width="20" height="98" rx="8" fill="#1D2C46"/>
+  <rect x="68" y="309" width="38" height="14" rx="5" fill="#1A1A1A"/>
+  <rect x="95" y="309" width="38" height="14" rx="5" fill="#1A1A1A"/>
+  <rect x="72" y="214" width="56" height="8" rx="3" fill="#2A1A08"/>
+  <rect x="96" y="214" width="8" height="8" rx="1" fill="#8B7340"/>
+  <path d="M70 138 L130 138 L128 218 L72 218Z" fill="#F0F4FF"/>
+  <path d="M97 138 L100 155 L103 138Z" fill="#1D3A6B"/>
+  <path d="M97 138 L94 168 L100 200 L106 168 L103 138Z" fill="#1D3A6B"/>
+  <path d="M97 138 L88 152 L80 150 L97 138" fill="#F0F4FF"/>
+  <path d="M103 138 L112 152 L120 150 L103 138" fill="#F0F4FF"/>
+  <!-- Arms raised in cheer -->
+  <path d="M70 150 Q46 136 36 116" stroke="#E8A070" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <ellipse cx="32" cy="110" rx="12" ry="9" fill="#F5C8A5" transform="rotate(-20,32,110)"/>
+  <path d="M130 150 Q154 136 164 116" stroke="#E8A070" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <ellipse cx="168" cy="110" rx="12" ry="9" fill="#F5C8A5" transform="rotate(20,168,110)"/>
+  <rect x="92" y="114" width="16" height="26" rx="6" fill="#F5C8A5"/>
+  <ellipse cx="100" cy="82" rx="40" ry="38" fill="#1A1A1A"/>
+  <path d="M68 76 Q72 52 80 44 Q88 38 100 36 Q112 38 120 44 Q128 52 132 76" fill="#1A1A1A"/>
+  <path d="M75 60 L72 42 L84 58" fill="#1A1A1A"/>
+  <path d="M88 50 L90 30 L100 50" fill="#1A1A1A"/>
+  <path d="M100 50 L108 30 L112 50" fill="#1A1A1A"/>
+  <path d="M116 54 L126 38 L128 58" fill="#1A1A1A"/>
+  <ellipse cx="100" cy="90" rx="34" ry="37" fill="url(#fg)"/>
+  <ellipse cx="66" cy="92" rx="6" ry="8" fill="#F0B890"/>
+  <ellipse cx="134" cy="92" rx="6" ry="8" fill="#F0B890"/>
+  <!-- Happy arched brows -->
+  <path d="M77 75 Q86 69 94 75" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M106 75 Q114 69 123 75" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Happy squint eyes -->
+  <path d="M78 89 Q86 82 94 89" stroke="#2A1400" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M106 89 Q114 82 122 89" stroke="#2A1400" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <!-- Lashes -->
+  <path d="M78 88 Q86 82 94 88" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+  <path d="M106 88 Q114 82 122 88" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+  <path d="M96 101 Q100 106 104 101" stroke="#D08860" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Big grin teeth -->
+  <path d="M85 108 Q100 124 115 108" fill="#B85040" stroke="#B85040" stroke-width="1"/>
+  <path d="M87 109 Q100 122 113 109 L113 116 Q100 123 87 116Z" fill="#FFFFFF"/>
+  <ellipse cx="72" cy="100" rx="11" ry="8" fill="rgba(255,120,90,0.38)"/>
+  <ellipse cx="128" cy="100" rx="11" ry="8" fill="rgba(255,120,90,0.38)"/>
+  <!-- Stars -->
+  <text x="16" y="105" font-size="14" fill="#FFD700" opacity="0.9">★</text>
+  <text x="172" y="100" font-size="12" fill="#FFD700" opacity="0.85">★</text>
+</svg>

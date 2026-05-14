@@ -1,0 +1,25 @@
+<svg width="640" height="420" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MindSparc Level 1 - Odd One Out</title>
+  <desc id="desc">A child-friendly odd one out visual reasoning card.</desc>
+  <rect width="640" height="420" rx="32" fill="#fff7ed"/>
+  <path d="M0 322 C120 282 220 386 342 326 C462 266 528 292 640 248 L640 420 L0 420 Z" fill="#fed7aa"/>
+  <text x="54" y="72" fill="#c2410c" font-family="Verdana, Arial, sans-serif" font-size="26" font-weight="800">Odd One Out</text>
+  <text x="54" y="105" fill="#7c2d12" font-family="Verdana, Arial, sans-serif" font-size="15">Which one does not belong to the group?</text>
+  <g transform="translate(92 150)" stroke-width="5" stroke-linejoin="round">
+    <rect x="0" y="0" width="102" height="102" rx="24" fill="#fff" stroke="#fb923c"/>
+    <circle cx="51" cy="51" r="28" fill="#22c55e"/>
+  </g>
+  <g transform="translate(218 150)" stroke-width="5" stroke-linejoin="round">
+    <rect x="0" y="0" width="102" height="102" rx="24" fill="#fff" stroke="#fb923c"/>
+    <circle cx="51" cy="51" r="28" fill="#22c55e"/>
+  </g>
+  <g transform="translate(344 150)" stroke-width="5" stroke-linejoin="round">
+    <rect x="0" y="0" width="102" height="102" rx="24" fill="#fff" stroke="#fb923c"/>
+    <circle cx="51" cy="51" r="28" fill="#22c55e"/>
+  </g>
+  <g transform="translate(470 150)" stroke-width="5" stroke-linejoin="round">
+    <rect x="0" y="0" width="102" height="102" rx="24" fill="#fff" stroke="#ef4444" stroke-dasharray="8 8"/>
+    <path d="M51 22 L82 80 L20 80 Z" fill="#8b5cf6"/>
+  </g>
+  <text x="521" y="302" fill="#ef4444" font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="800" text-anchor="middle">Different shape</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 400" width="360" height="400">
+  <defs><style>.bg{fill:#0D1B2A;}</style></defs>
+  <rect width="360" height="400" rx="14" class="bg"/>
+  <text x="180" y="26" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#818CF8">Product Sequence Ladder — 18 ×</text>
+  <text x="180" y="44" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#475569">Climb the ladder — each rung adds 18</text>
+
+  <!-- Ladder rungs -->
+  <!-- Side rails -->
+  <line x1="80" y1="60" x2="80" y2="375" stroke="#334155" stroke-width="4"/>
+  <line x1="280" y1="60" x2="280" y2="375" stroke="#334155" stroke-width="4"/>
+
+  <g font-family="Inter,sans-serif">
+    <!-- Rung 9 at top -->
+    <line x1="80" y1="70" x2="280" y2="70" stroke="#F43F5E" stroke-width="3"/>
+    <text x="180" y="66" text-anchor="middle" font-size="11" fill="#F43F5E" font-weight="700">18 × 9 = 162</text>
+    <text x="70" y="74" text-anchor="end" font-size="10" fill="#475569">×9</text>
+
+    <line x1="80" y1="108" x2="280" y2="108" stroke="#EC4899" stroke-width="3"/>
+    <text x="180" y="104" text-anchor="middle" font-size="11" fill="#EC4899" font-weight="700">18 × 8 = 144</text>
+    <text x="70" y="112" text-anchor="end" font-size="10" fill="#475569">×8</text>
+
+    <line x1="80" y1="146" x2="280" y2="146" stroke="#A855F7" stroke-width="3"/>
+    <text x="180" y="142" text-anchor="middle" font-size="11" fill="#A855F7" font-weight="700">18 × 7 = 126</text>
+    <text x="70" y="150" text-anchor="end" font-size="10" fill="#475569">×7</text>
+
+    <line x1="80" y1="184" x2="280" y2="184" stroke="#8B5CF6" stroke-width="3"/>
+    <text x="180" y="180" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="700">18 × 6 = 108</text>
+    <text x="70" y="188" text-anchor="end" font-size="10" fill="#475569">×6</text>
+
+    <line x1="80" y1="222" x2="280" y2="222" stroke="#6366F1" stroke-width="3"/>
+    <text x="180" y="218" text-anchor="middle" font-size="11" fill="#6366F1" font-weight="700">18 × 5 = 90</text>
+    <text x="70" y="226" text-anchor="end" font-size="10" fill="#475569">×5</text>
+
+    <line x1="80" y1="260" x2="280" y2="260" stroke="#3B82F6" stroke-width="3"/>
+    <text x="180" y="256" text-anchor="middle" font-size="11" fill="#3B82F6" font-weight="700">18 × 4 = 72</text>
+    <text x="70" y="264" text-anchor="end" font-size="10" fill="#475569">×4</text>
+
+    <line x1="80" y1="298" x2="280" y2="298" stroke="#14B8A6" stroke-width="3"/>
+    <text x="180" y="294" text-anchor="middle" font-size="11" fill="#14B8A6" font-weight="700">18 × 3 = 54</text>
+    <text x="70" y="302" text-anchor="end" font-size="10" fill="#475569">×3</text>
+
+    <line x1="80" y1="336" x2="280" y2="336" stroke="#22C55E" stroke-width="3"/>
+    <text x="180" y="332" text-anchor="middle" font-size="11" fill="#22C55E" font-weight="700">18 × 2 = 36</text>
+    <text x="70" y="340" text-anchor="end" font-size="10" fill="#475569">×2</text>
+
+    <line x1="80" y1="374" x2="280" y2="374" stroke="#84CC16" stroke-width="3"/>
+    <text x="180" y="370" text-anchor="middle" font-size="11" fill="#84CC16" font-weight="700">18 × 1 = 18</text>
+    <text x="70" y="378" text-anchor="end" font-size="10" fill="#475569">×1</text>
+  </g>
+
+  <!-- Difference arrows on right -->
+  <g font-family="Inter,sans-serif" font-size="10" fill="#475569">
+    <text x="292" y="91">+18</text>
+    <text x="292" y="129">+18</text>
+    <text x="292" y="167">+18</text>
+    <text x="292" y="205">+18</text>
+    <text x="292" y="243">+18</text>
+    <text x="292" y="281">+18</text>
+    <text x="292" y="319">+18</text>
+    <text x="292" y="357">+18</text>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg">
+  <rect x="12" y="12" width="496" height="186" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="28" y="28" width="112" height="40" rx="14" fill="#FDF0F8" stroke="#E91E8C" stroke-width="2"/>
+  <rect x="144" y="28" width="112" height="40" rx="14" fill="#EAF2FF" stroke="#3B3A8C" stroke-width="2"/>
+  <rect x="260" y="28" width="112" height="40" rx="14" fill="#FDF0F8" stroke="#E91E8C" stroke-width="2"/>
+  <rect x="376" y="28" width="112" height="40" rx="14" fill="#EAF2FF" stroke="#3B3A8C" stroke-width="2"/>
+  <text x="84" y="54" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#E91E8C">Thousands</text>
+  <text x="200" y="54" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#3B3A8C">Hundreds</text>
+  <text x="316" y="54" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#E91E8C">Tens</text>
+  <text x="432" y="54" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#3B3A8C">Ones</text>
+  <line x1="140" y1="26" x2="140" y2="184" stroke="#CBD5E1" stroke-width="2"/>
+  <line x1="256" y1="26" x2="256" y2="184" stroke="#CBD5E1" stroke-width="2"/>
+  <line x1="372" y1="26" x2="372" y2="184" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="84" y="136" text-anchor="middle" font-size="48" font-family="Arial" font-weight="700" fill="#334155">1</text>
+  <text x="200" y="136" text-anchor="middle" font-size="48" font-family="Arial" font-weight="700" fill="#334155">2</text>
+  <text x="316" y="136" text-anchor="middle" font-size="48" font-family="Arial" font-weight="700" fill="#334155">5</text>
+  <text x="432" y="136" text-anchor="middle" font-size="48" font-family="Arial" font-weight="700" fill="#334155">7</text>
+  <text x="260" y="174" text-anchor="middle" font-size="14" font-family="Arial" fill="#64748B">Use for regrouping, complements, decimals, and division flow</text>
+</svg>

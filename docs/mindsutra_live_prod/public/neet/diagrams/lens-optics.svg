@@ -1,0 +1,107 @@
+<svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .label { font-size: 11px; font-weight: bold; fill: #333; }
+      .text { font-size: 9px; fill: #555; }
+      .lens { stroke: #3498db; stroke-width: 3; fill: #d6eaf8; opacity: 0.7; }
+      .ray { stroke: #e74c3c; stroke-width: 1.5; fill: none; }
+      .axis { stroke: #95a5a6; stroke-width: 1; stroke-dasharray: 2,2; }
+      .focal { fill: #e74c3c; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="300" y="25" class="title" text-anchor="middle">CONVEX & CONCAVE LENSES</text>
+
+  <!-- ===== CONVEX LENS (Left) ===== -->
+  <g id="convex">
+    <!-- Lens -->
+    <path d="M 90 80 Q 70 80 70 160 Q 70 240 90 240" class="lens"/>
+    <path d="M 90 80 Q 110 80 110 160 Q 110 240 90 240" class="lens"/>
+
+    <!-- Optical axis -->
+    <line x1="20" y1="160" x2="160" y2="160" class="axis"/>
+
+    <!-- Focal points -->
+    <circle cx="45" cy="160" r="3" class="focal"/>
+    <circle cx="135" cy="160" r="3" class="focal"/>
+
+    <!-- Center -->
+    <circle cx="100" cy="160" r="2" fill="#2c3e50"/>
+
+    <!-- Labels for focal points and center -->
+    <text x="45" y="180" class="label" text-anchor="middle" font-size="10">F</text>
+    <text x="135" y="180" class="label" text-anchor="middle" font-size="10">F</text>
+    <text x="100" y="180" class="label" text-anchor="middle" font-size="10">O</text>
+
+    <!-- Ray 1: Parallel ray -->
+    <line x1="10" y1="140" x2="90" y2="140" class="ray"/>
+    <path d="M 90 140 L 135 160" class="ray"/>
+
+    <!-- Ray 2: Through center -->
+    <line x1="10" y1="120" x2="90" y2="160" class="ray"/>
+    <path d="M 90 160 L 160 160" class="ray"/>
+
+    <!-- Ray 3: Through focal point -->
+    <line x1="10" y1="100" x2="45" y2="160" class="ray"/>
+    <path d="M 45 160 L 90 140" class="ray"/>
+    <path d="M 90 140 L 160 140" class="ray"/>
+
+    <!-- Image point -->
+    <circle cx="135" cy="160" r="4" fill="none" stroke="#27ae60" stroke-width="2"/>
+
+    <!-- Labels -->
+    <text x="100" y="270" class="label" text-anchor="middle" font-size="12">CONVEX LENS</text>
+    <text x="100" y="290" class="text" text-anchor="middle">(Converging lens)</text>
+    <text x="100" y="305" class="text" text-anchor="middle" font-size="9">Focal length: f > 0</text>
+    <text x="100" y="318" class="text" text-anchor="middle" font-size="9">Power: Positive</text>
+  </g>
+
+  <!-- ===== CONCAVE LENS (Right) ===== -->
+  <g id="concave">
+    <!-- Lens -->
+    <path d="M 390 80 Q 410 80 410 160 Q 410 240 390 240" class="lens" stroke="#c0392b" fill="#fadbd8"/>
+    <path d="M 390 80 Q 370 80 370 160 Q 370 240 390 240" class="lens" stroke="#c0392b" fill="#fadbd8"/>
+
+    <!-- Optical axis -->
+    <line x1="320" y1="160" x2="460" y2="160" class="axis"/>
+
+    <!-- Focal points (virtual) -->
+    <circle cx="415" cy="160" r="3" class="focal" fill="none" stroke="#c0392b" stroke-width="2"/>
+    <circle cx="325" cy="160" r="3" class="focal" fill="none" stroke="#c0392b" stroke-width="2"/>
+
+    <!-- Center -->
+    <circle cx="400" cy="160" r="2" fill="#2c3e50"/>
+
+    <!-- Labels -->
+    <text x="325" y="180" class="label" text-anchor="middle" font-size="10" fill="#c0392b">F</text>
+    <text x="415" y="180" class="label" text-anchor="middle" font-size="10" fill="#c0392b">F</text>
+    <text x="400" y="180" class="label" text-anchor="middle" font-size="10">O</text>
+
+    <!-- Ray 1: Parallel ray -->
+    <line x1="310" y1="140" x2="390" y2="140" class="ray"/>
+    <path d="M 390 140 L 435 160" class="ray" stroke-dasharray="3,3"/>
+
+    <!-- Ray 2: Through center -->
+    <line x1="310" y1="160" x2="460" y2="160" class="ray"/>
+
+    <!-- Ray 3: Toward focal point -->
+    <line x1="310" y1="100" x2="415" y2="160" class="ray"/>
+    <path d="M 415 160 L 390 140" class="ray"/>
+    <path d="M 390 140 L 310 140" class="ray" stroke-dasharray="3,3"/>
+
+    <!-- Virtual image -->
+    <circle cx="325" cy="160" r="4" fill="none" stroke="#27ae60" stroke-width="2" stroke-dasharray="2,2"/>
+
+    <!-- Labels -->
+    <text x="400" y="270" class="label" text-anchor="middle" font-size="12">CONCAVE LENS</text>
+    <text x="400" y="290" class="text" text-anchor="middle">(Diverging lens)</text>
+    <text x="400" y="305" class="text" text-anchor="middle" font-size="9">Focal length: f < 0</text>
+    <text x="400" y="318" class="text" text-anchor="middle" font-size="9">Power: Negative</text>
+  </g>
+
+  <!-- Lens Formula Box -->
+  <rect x="20" y="330" width="560" height="40" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="3"/>
+  <text x="300" y="350" class="label" text-anchor="middle" font-size="11">Lens Formula: 1/f = 1/u + 1/v     |     Magnification: m = v/u</text>
+</svg>

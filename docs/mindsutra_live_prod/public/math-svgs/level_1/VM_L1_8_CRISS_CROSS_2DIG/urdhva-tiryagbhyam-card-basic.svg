@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="200" viewBox="0 0 420 200">
+  <rect width="420" height="200" rx="24" fill="#EAF2FF"/>
+  <text x="36" y="50" font-family="Segoe UI, Arial" font-size="24" font-weight="700" fill="#3B3A8C">Urdhva-Tiryagbhyam</text>
+  <text x="36" y="84" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">Vertical and crosswise multiplication</text>
+  <text x="36" y="118" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">1. Straight</text>
+  <text x="36" y="146" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">2. Crosswise</text>
+  <text x="36" y="174" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">3. Straight</text>
+  <circle cx="332" cy="100" r="50" fill="white" stroke="#E91E8C" stroke-width="4"/>
+  <path d="M302 72 L362 128 M362 72 L302 128" stroke="#E91E8C" stroke-width="7" stroke-linecap="round"/>
+</svg>

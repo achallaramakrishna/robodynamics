@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
+  <rect width="420" height="120" rx="24" fill="white"/>
+  <rect x="28" y="30" width="72" height="56" rx="14" fill="#FFF4CC" stroke="#E2B93B" stroke-width="3"/>
+  <rect x="122" y="30" width="72" height="56" rx="14" fill="#FFF4CC" stroke="#E2B93B" stroke-width="3"/>
+  <rect x="216" y="30" width="72" height="56" rx="14" fill="#FFF4CC" stroke="#E2B93B" stroke-width="3"/>
+  <rect x="310" y="30" width="72" height="56" rx="14" fill="#FFF4CC" stroke="#E2B93B" stroke-width="3"/>
+  <text x="210" y="108" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">quotient digits appear left to right</text>
+</svg>

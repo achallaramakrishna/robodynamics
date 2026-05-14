@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Exponent Anchor Grid</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Three quick memory rows</text>
+  <rect x="56" y="110" width="688" height="236" rx="18" fill="#111827" stroke="#475569" stroke-width="2"/>
+  <text x="88" y="156" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Powers of 2: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024</text>
+  <text x="88" y="206" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Powers of 5: 5, 25, 125, 625, 3125</text>
+  <text x="88" y="256" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Powers of 3: 3, 9, 27, 81, 243</text>
+  <text x="88" y="312" fill="#FDE68A" font-size="22" font-weight="900" font-family="Verdana, sans-serif">Twin-base identity: 2^n x 5^n = 10^n</text>
+</svg>

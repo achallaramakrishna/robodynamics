@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="200" viewBox="0 0 420 200">
+  <rect width="420" height="200" rx="24" fill="#EEF5FF"/>
+  <text x="28" y="34" font-family="Segoe UI, Arial" font-size="23" font-weight="700" fill="#25327A">Urdhva-Tiryagbhyam for 2 x 2 digits</text>
+  <text x="28" y="54" font-family="Segoe UI, Arial" font-size="13" fill="#5C6783">This is the same pattern that later grows to 3 bands and 5 bands.</text>
+
+  <rect x="28" y="76" width="172" height="98" rx="18" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="44" y="102" font-family="Segoe UI, Arial" font-size="16" font-weight="700" fill="#1F2440">Band order</text>
+  <text x="44" y="126" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">1. B x D</text>
+  <text x="44" y="146" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">2. A x D + B x C</text>
+  <text x="44" y="166" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">3. A x C</text>
+
+  <rect x="214" y="76" width="178" height="98" rx="18" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="230" y="102" font-family="Segoe UI, Arial" font-size="16" font-weight="700" fill="#1F2440">How to think</text>
+  <text x="230" y="126" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Start from the right.</text>
+  <text x="230" y="146" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Middle band has two products.</text>
+  <text x="230" y="166" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Carry extra tens to the left.</text>
+
+  <g>
+    <circle cx="90" cy="188" r="6" fill="#D9A500">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="188" r="6" fill="#D3478E">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="2.4s" begin="0.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="188" r="6" fill="#5C7CE2">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="2.4s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

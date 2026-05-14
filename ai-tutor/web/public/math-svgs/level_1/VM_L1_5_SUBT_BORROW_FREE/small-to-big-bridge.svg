@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 250" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #1e293b; rx: 16px; stroke: #334155; stroke-width: 3; }
+      .bridge { fill: none; stroke: #22c55e; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 12 12; }
+      .pillar { fill: #475569; rx: 8px; }
+      .text-light { fill: #f8fafc; font-family: system-ui, sans-serif; font-weight: bold; font-size: 36px; }
+      .text-green { fill: #22c55e; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+    </style>
+  </defs>
+
+  <rect width="500" height="250" class="bg"/>
+
+  <!-- Left Pillar -->
+  <rect x="80" y="140" width="80" height="60" class="pillar"/>
+  <text x="120" y="182" class="text-light" text-anchor="middle">637</text>
+
+  <!-- Right Pillar -->
+  <rect x="340" y="140" width="80" height="60" class="pillar"/>
+  <text x="380" y="182" class="text-light" text-anchor="middle">1000</text>
+
+  <!-- Arching Bridge -->
+  <path d="M 120 130 Q 250 10 380 130" class="bridge"/>
+  <polygon points="360,110 380,130 395,105" fill="#22c55e"/>
+
+  <!-- Distance -->
+  <text x="250" y="70" class="text-green" text-anchor="middle">+363</text>
+
+</svg>

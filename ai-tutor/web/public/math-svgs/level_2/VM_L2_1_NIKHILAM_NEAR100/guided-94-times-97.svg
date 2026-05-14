@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="220" viewBox="0 0 500 220">
+  <rect x="12" y="12" width="476" height="196" rx="24" fill="#F8FBFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="26" y="34" font-size="21" font-family="Arial" font-weight="700" fill="#25327A">Guided practice: 94 x 97</text>
+  <text x="78" y="82" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#334155">94</text>
+  <text x="252" y="82" text-anchor="middle" font-size="30" font-family="Arial" font-weight="700" fill="#334155">97</text>
+  <text x="78" y="114" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#DC2626">-6</text>
+  <text x="252" y="114" text-anchor="middle" font-size="22" font-family="Arial" font-weight="700" fill="#DC2626">-3</text>
+  <rect x="300" y="58" width="154" height="82" rx="16" fill="#FFF7ED" stroke="#F59E0B" stroke-width="2"/>
+  <text x="377" y="82" text-anchor="middle" font-size="15" font-family="Arial" font-weight="700" fill="#B45309">Student steps</text>
+  <text x="377" y="104" text-anchor="middle" font-size="13" font-family="Arial" fill="#4B5563">Left: 94 - 3 = 91</text>
+  <text x="377" y="124" text-anchor="middle" font-size="13" font-family="Arial" fill="#4B5563">Right: 6 x 3 = 18</text>
+  <text x="250" y="174" text-anchor="middle" font-size="28" font-family="Arial" font-weight="700" fill="#7C3AED">91 | 18 = 9118</text>
+</svg>

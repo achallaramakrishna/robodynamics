@@ -17,13 +17,18 @@ const OPENAI_VISION_MODEL = "gpt-4o-mini";
 type HindiLevel = "native" | "some" | "beginner" | "zero";
 
 function gracefulFallback(studentName: string, isEnglish: boolean) {
+  // Safe fallback: never auto-pass writing when we can't actually verify it.
+  // Return correct: false so the child is encouraged to keep practising rather
+  // than receiving misleading confirmation that incorrect writing is correct.
   return NextResponse.json({
-    correct: true,
-    quality: "good",
+    correct: false,
+    quality: "needs_work",
     feedback: isEnglish
-      ? `Well done ${studentName}! Your writing looks great — keep practising every day!`
-      : `शाबाश ${studentName}! बहुत अच्छा लिखा है! रोज़ अभ्यास करते रहो!`,
-    tip: null,
+      ? `Good try ${studentName}! Keep practising — the more you trace, the better you get!`
+      : `अच्छी कोशिश ${studentName}! बार-बार अभ्यास करो — तुम ज़रूर सीख जाओगे!`,
+    tip: isEnglish
+      ? "Try tracing the letter slowly, one stroke at a time."
+      : "अक्षर को धीरे-धीरे, एक-एक रेखा करके बनाओ।",
   });
 }
 

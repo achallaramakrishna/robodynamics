@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827"/>
+  <rect x="0" y="0" width="800" height="8" fill="#F97316"/>
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Worked Example: 10, 24, 26</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Recognize 2 x (5,12,13)</text>
+  <polygon points="100,300 100,140 300,300" fill="#0F172A" stroke="#94A3B8" stroke-width="3"/>
+  <text x="82" y="224" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">24</text>
+  <text x="186" y="324" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">10</text>
+  <text x="220" y="210" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">26</text>
+  <text x="382" y="184" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Legs: 10 and 24</text>
+  <text x="382" y="236" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Area = 1/2 x 10 x 24</text>
+  <text x="382" y="290" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">Area = 120</text>
+</svg>

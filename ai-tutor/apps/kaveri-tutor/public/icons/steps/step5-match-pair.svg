@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="s5bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F3FF"/>
+      <stop offset="100%" stop-color="#EDE9FE"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#s5bg)"/>
+  <!-- Left column items -->
+  <!-- Item 1 left (matched - green) -->
+  <rect x="6" y="12" width="20" height="12" rx="6" fill="#10B981"/>
+  <text x="16" y="18" font-family="'Noto Sans Devanagari', serif" font-size="9" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">अनार</text>
+  <!-- Item 2 left (selected - purple) -->
+  <rect x="6" y="28" width="20" height="12" rx="6" fill="#8B5CF6"/>
+  <text x="16" y="34" font-family="'Noto Sans Devanagari', serif" font-size="9" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">आम</text>
+  <!-- Item 3 left (idle) -->
+  <rect x="6" y="44" width="20" height="12" rx="6" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <text x="16" y="50" font-family="'Noto Sans Devanagari', serif" font-size="9" font-weight="700"
+        fill="#6D28D9" text-anchor="middle" dominant-baseline="middle">इमली</text>
+
+  <!-- Connecting lines -->
+  <line x1="26" y1="18" x2="38" y2="18" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="26" y1="34" x2="38" y2="34" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 2"/>
+  <!-- Right column items -->
+  <!-- Item 1 right (matched) -->
+  <rect x="38" y="12" width="20" height="12" rx="6" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+  <text x="48" y="18" font-size="9" font-weight="700" fill="#065F46"
+        text-anchor="middle" dominant-baseline="middle">Pomegranate</text>
+  <!-- Item 2 right (highlight) -->
+  <rect x="38" y="28" width="20" height="12" rx="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5"/>
+  <text x="48" y="34" font-size="9" font-weight="700" fill="#5B21B6"
+        text-anchor="middle" dominant-baseline="middle">Mango</text>
+  <!-- Item 3 right (idle) -->
+  <rect x="38" y="44" width="20" height="12" rx="6" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <text x="48" y="50" font-size="9" font-weight="700" fill="#6D28D9"
+        text-anchor="middle" dominant-baseline="middle">Tamarind</text>
+  <!-- Check on matched -->
+  <circle cx="56" cy="12" r="6" fill="#10B981"/>
+  <path d="M53 12 L55 14.5 L59 9.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

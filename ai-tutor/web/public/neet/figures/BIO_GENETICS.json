@@ -1,0 +1,125 @@
+{
+  "chapterCode": "BIO_GENETICS",
+  "figures": [
+    {
+      "id": "genetics_monohybrid",
+      "title": "Monohybrid Cross — Mendel's Experiment",
+      "src": null,
+      "topic": "Mendelian Inheritance",
+      "neetFrequency": "very high",
+      "whatItShows": [
+        "Cross between TT (tall) × tt (dwarf) pea plants",
+        "F1: all Tt (tall) — dominance of T over t",
+        "F2 selfing gives 3 Tall : 1 Dwarf (3:1 phenotypic ratio)",
+        "Genotypic ratio: 1 TT : 2 Tt : 1 tt"
+      ],
+      "neetTip": "NEET asks: What is the phenotypic ratio in F2 of a monohybrid cross? Answer: 3:1. Genotypic: 1:2:1. Don't confuse the two!",
+      "memoryAid": "3:1 = Phenotype | 1:2:1 = Genotype"
+    },
+    {
+      "id": "genetics_dihybrid",
+      "title": "Dihybrid Cross — 9:3:3:1 Ratio",
+      "src": null,
+      "topic": "Law of Independent Assortment",
+      "neetFrequency": "very high",
+      "whatItShows": [
+        "RRYY (round yellow) × rryy (wrinkled green)",
+        "F1: all RrYy — Round Yellow (both dominant)",
+        "F2: 9 Round Yellow : 3 Round Green : 3 Wrinkled Yellow : 1 Wrinkled Green",
+        "Proves genes on different chromosomes assort independently"
+      ],
+      "neetTip": "When ratio deviates from 9:3:3:1 it indicates epistasis. Know all epistatic ratios: 9:7 (complementary), 12:3:1 (dominant epistasis), 9:3:4 (recessive epistasis).",
+      "memoryAid": "9+3+3+1 = 16 = 4² = 4 gametes from each parent"
+    },
+    {
+      "id": "genetics_pedigree",
+      "title": "Pedigree Chart Symbols & Analysis",
+      "src": null,
+      "topic": "Pedigree Analysis",
+      "neetFrequency": "high",
+      "whatItShows": [
+        "Square = Male, Circle = Female",
+        "Filled = Affected, Half-filled = Carrier",
+        "Horizontal line = Mating, Vertical line = Offspring",
+        "Used to determine autosomal/X-linked dominant/recessive inheritance"
+      ],
+      "neetTip": "If ALL sons of an affected father are normal → X-linked. If father affected and daughter affected → Autosomal dominant. Two normal parents → Affected child = Autosomal recessive.",
+      "memoryAid": "Father→Son via Y: no X-linked trait passes father to son directly"
+    },
+    {
+      "id": "genetics_dna_structure",
+      "title": "DNA Double Helix — Watson & Crick Model",
+      "src": null,
+      "topic": "Molecular Basis of Inheritance",
+      "neetFrequency": "very high",
+      "whatItShows": [
+        "Two antiparallel strands — one 3'→5', other 5'→3'",
+        "Base pairing: A=T (2 H-bonds), G≡C (3 H-bonds)",
+        "Diameter: 2 nm | Pitch: 3.4 nm | Base pairs per turn: 10",
+        "Sugar-phosphate backbone on outside, bases inside"
+      ],
+      "neetTip": "Frequently asked: 'If A=30% then G=?' — Use Chargaff's rule: A=T, G=C, A+G=50%. So G=C=20%. Also: G+C content determines DNA stability.",
+      "memoryAid": "AT = 2 bonds (weak) | GC = 3 bonds (strong) → GC-rich DNA is more stable"
+    },
+    {
+      "id": "genetics_meselson_stahl",
+      "title": "Meselson & Stahl Experiment",
+      "src": null,
+      "topic": "DNA Replication",
+      "neetFrequency": "high",
+      "whatItShows": [
+        "E. coli grown in ¹⁵N (heavy) medium → all ¹⁵N DNA",
+        "Transferred to ¹⁴N medium → after 1 division: hybrid ¹⁴N/¹⁵N",
+        "After 2 divisions: 50% hybrid + 50% light (¹⁴N/¹⁴N)",
+        "Proved Semi-conservative replication — each strand serves as template"
+      ],
+      "neetTip": "NEET asks which type of replication was proved — always Semi-conservative. Taylor et al proved it in Vicia faba (plant). Kornberg enzyme = DNA Pol III in prokaryotes.",
+      "memoryAid": "Semi-conservative = half old, half new in EACH daughter DNA"
+    },
+    {
+      "id": "genetics_lac_operon",
+      "title": "Lac Operon — Jacob & Monod Model",
+      "src": "/neet/diagrams/lac-operon.svg",
+      "topic": "Gene Regulation",
+      "neetFrequency": "very high",
+      "whatItShows": [
+        "Structural genes: lacZ (β-galactosidase), lacY (permease), lacA (transacetylase)",
+        "Regulator gene → Repressor protein binds operator → blocks transcription",
+        "Lactose (inducer) → binds repressor → releases operator → genes ON",
+        "Glucose present: cAMP low → CAP inactive → transcription low (catabolite repression)"
+      ],
+      "neetTip": "Most tested: Which enzyme breaks lactose? β-galactosidase (lacZ). Lac operon is INDUCIBLE. Trp operon is REPRESSIBLE. Glucose = catabolite repression via cAMP-CAP.",
+      "memoryAid": "Lactose = Inducer → Repressor OFF → Genes ON (like a switch)"
+    },
+    {
+      "id": "genetics_transcription",
+      "title": "Transcription — DNA to mRNA",
+      "src": null,
+      "topic": "Central Dogma",
+      "neetFrequency": "high",
+      "whatItShows": [
+        "Template strand (antisense 3'→5') is read by RNA Polymerase",
+        "mRNA synthesised 5'→3' direction",
+        "Prokaryotes: no nuclear membrane, translation begins before transcription ends",
+        "Eukaryotes: hnRNA → capping + polyadenylation + splicing → mRNA"
+      ],
+      "neetTip": "NEET asks: Which strand is template? The one read 3'→5'. Coding strand = non-template strand = same sequence as mRNA (but T→U). RNA Pol needs no primer.",
+      "memoryAid": "Template = antisense = non-coding. Coding strand = sense strand = same as mRNA"
+    },
+    {
+      "id": "genetics_translation",
+      "title": "Translation — mRNA to Protein",
+      "src": null,
+      "topic": "Protein Synthesis",
+      "neetFrequency": "high",
+      "whatItShows": [
+        "Ribosome moves 5'→3' on mRNA",
+        "A site: aminoacyl-tRNA enters | P site: peptide bond forms | E site: empty tRNA exits",
+        "Start codon: AUG (Met) | Stop codons: UAA, UAG, UGA",
+        "Polysomes: multiple ribosomes on one mRNA simultaneously"
+      ],
+      "neetTip": "Stop codons: UAA (Ochre), UAG (Amber), UGA (Opal/Umber) — no tRNA for these. AUG also codes for fMet in prokaryotes. Shine-Dalgarno sequence for ribosome binding in prokaryotes.",
+      "memoryAid": "Stop codons: UAA, UAG, UGA = 'U Are Away', 'U Are Gone', 'U Go Away'"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect x="5" y="5" width="170" height="170" fill="none" stroke="#475569" stroke-width="3"/>
+  <line x1="62" y1="5"   x2="62"  y2="175" stroke="#475569" stroke-width="2"/>
+  <line x1="118" y1="5"  x2="118" y2="175" stroke="#475569" stroke-width="2"/>
+  <line x1="5"  y1="62"  x2="175" y2="62"  stroke="#475569" stroke-width="2"/>
+  <line x1="5"  y1="118" x2="175" y2="118" stroke="#475569" stroke-width="2"/>
+  <!-- bottom-right cell highlighted as "?" -->
+  <rect x="119" y="119" width="56" height="56" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+  <text x="147" y="155" font-family="Arial,sans-serif" font-size="28" font-weight="bold" fill="#f59e0b" text-anchor="middle">?</text>
+</svg>

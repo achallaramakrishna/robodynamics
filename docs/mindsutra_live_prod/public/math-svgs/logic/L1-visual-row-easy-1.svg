@@ -1,0 +1,66 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L1 Visual Pattern Row - Banana Leaf Vine</title>
+  <desc>Interactive pattern matching for Indian kids - drag shapes to complete the sequence</desc>
+
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <linearGradient id="vineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#166534;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="#F0FDFA" />
+  
+  <path d="M50,300 Q400,250 750,300" stroke="url(#vineGrad)" stroke-width="12" fill="none" />
+
+  <g id="slots">
+    <rect id="slot1" x="100" y="270" width="60" height="60" rx="10" fill="white" stroke="#22C55E" stroke-width="2" />
+    <rect id="slot2" x="220" y="260" width="60" height="60" rx="10" fill="white" stroke="#22C55E" stroke-width="2" />
+    <rect id="slot3" x="340" y="250" width="60" height="60" rx="10" fill="white" stroke="#22C55E" stroke-width="2" />
+    <rect id="slot4" x="460" y="260" width="60" height="60" rx="10" fill="white" stroke="#22C55E" stroke-width="2" />
+    <rect id="slot5" x="580" y="270" width="60" height="60" rx="10" fill="white" stroke="#22C55E" stroke-width="2" stroke-dasharray="5,5" />
+    <rect id="slot6" x="700" y="280" width="60" height="60" rx="10" fill="white" stroke="#22C55E" stroke-width="2" stroke-dasharray="5,5" />
+  </g>
+
+  <g id="pattern-items">
+    <path d="M110,280 L130,320 L150,280 Z" fill="#EF4444" />
+    <rect x="230" y="270" width="40" height="40" fill="#3B82F6" />
+    <circle cx="370" cy="280" r="20" fill="#FACC15" />
+    <path d="M470,280 L490,320 L510,280 Z" fill="#EF4444" />
+    <rect x="590" y="280" width="40" height="40" fill="#3B82F6" />
+  </g>
+
+  <g id="draggables" transform="translate(0, 450)">
+    <rect width="800" height="150" fill="#F8FAFC" stroke="#E2E8F0" />
+    <g id="drag-circle" data-correct="true" cursor="pointer">
+      <circle cx="200" cy="75" r="30" fill="#FACC15" filter="url(#glow)" />
+      <text x="200" y="115" text-anchor="middle" font-size="12" font-weight="800">Circle</text>
+    </g>
+    <g id="drag-triangle" data-correct="false" cursor="pointer">
+      <path d="M370,45 L400,105 L430,45 Z" fill="#EF4444" filter="url(#glow)" />
+      <text x="400" y="115" text-anchor="middle" font-size="12" font-weight="800">Triangle</text>
+    </g>
+    <g id="drag-square" data-correct="false" cursor="pointer">
+      <rect x="570" y="45" width="60" height="60" fill="#3B82F6" filter="url(#glow)" />
+      <text x="600" y="115" text-anchor="middle" font-size="12" font-weight="800">Square</text>
+    </g>
+  </g>
+
+  <g id="crystal-burst" opacity="0">
+    <circle cx="610" cy="300" r="5" fill="#38BDF8">
+      <animate attributeName="r" from="5" to="50" dur="0.5s" begin="indefinite" fill="freeze" />
+      <animate attributeName="opacity" from="1" to="0" dur="0.5s" begin="indefinite" fill="freeze" />
+    </circle>
+  </g>
+
+  <text x="400" y="50" text-anchor="middle" font-size="24" font-weight="900" fill="#0F172A">Fix the Magic Pattern!</text>
+  <text x="400" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#22C55E">△ □ ○ △ □ ?</text>
+
+  <g id="hint-text" opacity="0">
+     <text x="400" y="420" text-anchor="middle" font-size="16" fill="#EF4444" font-weight="800">Arre! Try once more, beta! The pattern repeats every 3 shapes.</text>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Square-End Mapping</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">The last digit narrows the root to one or two choices</text>
+  <rect x="44" y="108" width="220" height="232" rx="18" fill="#1E1B4B" stroke="#C4B5FD" stroke-width="2" />
+  <text x="66" y="146" fill="#F5F3FF" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Square ends 1</text>
+  <text x="66" y="182" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Root ends 1 or 9</text>
+  <text x="66" y="226" fill="#F5F3FF" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Square ends 4</text>
+  <text x="66" y="262" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Root ends 2 or 8</text>
+  <text x="66" y="306" fill="#F5F3FF" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Square ends 6</text>
+  <text x="66" y="342" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Root ends 4 or 6</text>
+  <rect x="290" y="108" width="220" height="232" rx="18" fill="#052E16" stroke="#4ADE80" stroke-width="2" />
+  <text x="312" y="146" fill="#DCFCE7" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Square ends 5</text>
+  <text x="312" y="182" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Root ends 5</text>
+  <text x="312" y="226" fill="#DCFCE7" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Square ends 9</text>
+  <text x="312" y="262" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Root ends 3 or 7</text>
+  <text x="312" y="306" fill="#DCFCE7" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Square ends 0</text>
+  <text x="312" y="342" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Root ends 0</text>
+  <rect x="536" y="108" width="220" height="232" rx="18" fill="#0F172A" stroke="#94A3B8" stroke-width="2" />
+  <text x="558" y="146" fill="#E2E8F0" font-size="22" font-weight="800" font-family="Verdana, sans-serif">Example: 9604</text>
+  <text x="558" y="192" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">Ends in 4 -> 2 or 8</text>
+  <text x="558" y="236" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">96 gives tens digit 9</text>
+  <text x="558" y="286" fill="#FDE68A" font-size="28" font-weight="900" font-family="Verdana, sans-serif">Candidates: 92 or 98</text>
+</svg>

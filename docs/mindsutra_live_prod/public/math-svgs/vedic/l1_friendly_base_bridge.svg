@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" fill="none">
+  <rect width="720" height="320" rx="28" fill="#F8FAFC"/>
+  <rect x="20" y="20" width="680" height="280" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="42" y="58" fill="#0F172A" font-size="26" font-family="Arial, sans-serif" font-weight="700">Friendly Base First</text>
+  <text x="42" y="84" fill="#475569" font-size="14" font-family="Arial, sans-serif">Make 10 or 100 first, then add the small amount left over.</text>
+
+  <rect x="42" y="112" width="296" height="154" rx="18" fill="#EEF2FF" stroke="#A5B4FC"/>
+  <text x="60" y="144" fill="#3730A3" font-size="18" font-family="Arial, sans-serif" font-weight="700">Small-number idea</text>
+  <circle cx="112" cy="204" r="26" fill="#C7D2FE"/>
+  <circle cx="182" cy="204" r="26" fill="#A7F3D0"/>
+  <circle cx="252" cy="204" r="26" fill="#FDE68A"/>
+  <text x="112" y="212" text-anchor="middle" fill="#312E81" font-size="22" font-family="Arial, sans-serif" font-weight="800">8</text>
+  <text x="182" y="212" text-anchor="middle" fill="#065F46" font-size="22" font-family="Arial, sans-serif" font-weight="800">+2</text>
+  <text x="252" y="212" text-anchor="middle" fill="#92400E" font-size="22" font-family="Arial, sans-serif" font-weight="800">10</text>
+  <text x="190" y="248" text-anchor="middle" fill="#475569" font-size="14" font-family="Arial, sans-serif">Use a small piece to reach the base.</text>
+
+  <rect x="382" y="112" width="296" height="154" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="400" y="144" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Lesson example</text>
+  <rect x="414" y="178" width="90" height="48" rx="12" fill="#DBEAFE" stroke="#60A5FA"/>
+  <text x="459" y="210" text-anchor="middle" fill="#1E3A8A" font-size="28" font-family="Arial, sans-serif" font-weight="800">97</text>
+  <line x1="510" y1="202" x2="560" y2="202" stroke="#10B981" stroke-width="4"/>
+  <polygon points="560,202 548,196 548,208" fill="#10B981"/>
+  <rect x="566" y="178" width="78" height="48" rx="12" fill="#DCFCE7" stroke="#22C55E"/>
+  <text x="605" y="210" text-anchor="middle" fill="#166534" font-size="28" font-family="Arial, sans-serif" font-weight="800">100</text>
+  <text x="535" y="188" text-anchor="middle" fill="#059669" font-size="16" font-family="Arial, sans-serif" font-weight="700">+3</text>
+  <text x="530" y="248" text-anchor="middle" fill="#475569" font-size="14" font-family="Arial, sans-serif">97 + 5 becomes 100 + 2</text>
+</svg>

@@ -1,0 +1,1423 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    <title>Database - Historical Data- Reserve Bank of India</title>
+    <meta name="description" content="Database - Historical Data- Reserve Bank of India" />
+    <meta name="keyword" content="RBI Database" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="/js/libs/modernizr-2.5.3.min.js"></script>
+    <style>
+#watermark {
+    position: absolute;
+    font-size: 655%;
+    transform: rotate(-35deg);
+    padding-left: 5%;
+    bottom: 15%;
+    opacity: 0.4;
+    color: #ed0909;
+    background-color: rgb(131 50 185 / 0%);
+    height: 25%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-blend-mode: multiply;
+}
+    </style>
+</head>
+<body>
+    <form method="post" action="./bs_viewcontent.aspx?Id=2070" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTUwMDQ0MjE4M2RkhpK34Y9MIT3qhP2sbeHMrxNOY0rt9HQAD9Yvsq9VjhU=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="172DD500" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAqteFgCr2QCNrGOpK2JuQkuzch9gUQx1u2SZvrPMlJzYIusF+4O1fudXecv7meNPTGlO+M0widObuMOofTg188MZDpy7WJnvc3tgXY08CYLJD+rfdwJAuBoVBISURIXWlwboBEaHvuGHT+vg5u4vVMCyDc2K+c0S3pCwpKi8IIr233F/WWhFe/KBE4z8DU740cmi6coIYYAd3TjPNWEE9nPzM9ruNShWIkLQjwcGgZOEU6HJhMqkruiryqsP+YUf2c=" />
+</div>
+    
+<link href="/JQuery/css/jquery-ui-1.8.18.custom2.css" rel="stylesheet" type="text/css" />
+<link href="/includes/print.css" rel="stylesheet" media="print" type="text/css" />
+
+<link href="/Styles/960.css?v=1.0" rel="stylesheet" type="text/css" />
+<link href="/Includes1/rbi.css?v=5.0" rel="Stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/JQuery/ui/jquery.ui.revampRBI.js"></script>
+<script type="text/javascript" src="/js/ImgSaveDisable.js"></script>
+<!--<script src='//tw.netcore.co.in/smartechclient.js'></script>
+<script>
+smartech('create', 'ADGMOT35CHFLVDHBJNIG50K968AU3Q5FOE3L6REE67CQ9HGBQ58G');
+smartech('register', '4d6884e503ecf55a3339a37e98b711da');
+smartech('identify', '');
+smartech('dispatch', 1, { });
+</script>-->
+<script type="text/javascript">
+  
+//Redirect to mobile site start
+    function detectmob() {
+        if (screen.width <= 599 || screen.Height <= 975) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    if (detectmob()) {
+       window.location.href = "https://m.rbi.org.in" + window.location.pathname;
+		
+       
+    }
+ //$(document).ready(function () { //for IAAP by ni
+ //      $('.container_12').attr('role','main');
+	
+ //   });
+	//Redirect to mobile site End
+    $(document).ready(function () {
+        Search();
+	
+    });
+
+    function Search() {
+        highlightTextAutocomplete();
+        $(".autoSuggest").autocomplete({
+
+
+            source: function (request, response) {
+                var param = { keyWord: document.getElementById('txtSearch').value };
+
+                $.ajax({
+                    url: "../Home.aspx/GetKeywords",
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+
+                        if (data.d.length > 0) {
+                            response($.map(data.d, function (item) {
+                                return {
+                                    value: RemoveSpecialChars(item)
+
+                                }
+                            }))
+                        }
+                        else {
+                            response([{ label: "No results found", value: ""}]);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+
+            //            select: function (event, ui) {
+            //                if (ui.item.value != "") {
+            //                    window.open("/scripts/SearchResults.aspx?search=" + ui.item.value, '_blank');
+            //                }
+            //            },
+            minLength: 3
+
+        });
+    }
+
+    function highlightTextAutocomplete() {
+
+        var oldFn = $.ui.autocomplete.prototype._renderItem;
+
+        $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+
+            var t = String(item.value).replace(
+                new RegExp(this.term, "gi"),
+                "<span class='ui-state-highlight'>$&</span>");
+            if (item.value != "") {
+                return $("<li class='borderAutocomplete'></li>")
+                  .data("item.autocomplete", item)
+                  .append("<a role='link'>" + t + "</a>")
+                  .appendTo(ul);
+            }
+
+            else {
+                return $("<li></li>")
+                  .data("item.autocomplete", item)
+                  .append("")
+                  .appendTo(ul);
+            }
+        };
+    }
+
+
+    function RemoveSpecialChars(inputText) {
+        var filteredString = inputText.replace(/[\*\^\'\!\@\$\.\#\(\)\-\?\<\>\;\"\&\+\{\}\:]/g, '');
+        //alert(filteredString);
+        return filteredString;
+    }
+    //    jQuery(document).ready(function () {
+    //        var xmlhttp;
+    //        jQuery("#txtSearch").autocomplete(
+    //                    {
+    //                        minLength: 3,
+    //                        delay: 0,
+    //                        source: function (request, response) {
+    //                            if (!xmlhttp) {
+    //                                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    //                                    xmlhttp = new XMLHttpRequest();
+    //                                }
+    //                                else {// code for IE6, IE5
+    //                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    //                                }
+    //                            }
+    //                            else if (xmlhttp.readyState != 0) {
+    //                                xmlhttp.abort();
+    //                            }
+    //                            xmlhttp.onreadystatechange = function () {
+    //                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //                                    fetchedKeywords = xmlhttp.responseText.split("'");
+    //                                    
+    //                                    if (fetchedKeywords.length > 10) {
+    //                                        fetchedKeywords.splice(10, fetchedKeywords.length - 10);
+    //                                    }
+    //                                    if (fetchedKeywords != "") response(fetchedKeywords);
+    //                                    else response(null);
+    //                                }
+    //                            }
+    //                            var input = document.getElementById("txtSearch").value;
+    //                            xmlhttp.open("POST", "/Webservice/KeywordSearch.ashx?q=" + input, true);
+    //                            xmlhttp.send();
+    //                        }
+    //                    });
+    //    });
+
+    function LoadSearchData(id, key) {
+        if (id == "txtSearch") {
+            if (key == 13) {
+                validateSearchText();
+                return false;
+            }
+        }
+        else validateSearchText();
+        return true;
+    }
+    function validateSearchText() {
+        if (validation()) {
+            var strloc = new String(document.location.href.toString());
+            if (strloc.indexOf("SearchResults.aspx") == -1) {//             
+                window.open("/scripts/SearchResults.aspx?search=" + document.getElementById("txtSearch").value);
+            }
+            else window.open("/scripts/SearchResults.aspx?search=" + document.getElementById("txtSearch").value, '_parent');
+        }
+    }
+    function validation() {
+        strSearch = trim(document.getElementById('txtSearch').value);
+        if (strSearch == "") { alert('Please enter the search text'); return false; }
+        else {
+            //var strFilterChars = new RegExp("[~`!@#$%^&*()_+-={}\\[\\]:/\\\\\";|'<>,.?]");
+            var strFilterChars = new RegExp("^[0-9a-zA-Z ]*$");
+            if (!strFilterChars.test(strSearch)) { alert("Please remove special characters from search text"); return false; }
+        }
+        return true;
+    }
+    function trim(value) {
+        value = value.replace(/^\s+/, '');
+        value = value.replace(/\s+$/, '');
+        return value;
+    }
+
+</script>
+
+    <style type="text/css">
+    .blink_msm1 
+{
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 3s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+.blink_NewWebsite {
+        animation:blinker 1.5s linear 3;
+        color:blue;
+        font-size:1.5em;
+        margin-bottom:0px;
+        }
+    @keyframes blinker
+    {
+        50%{
+            opacity:0;
+        }
+    }
+
+.sr-only {
+position: absolute;
+left: -9999px;
+}
+</style>
+<div class="top_setting">
+    <div class="container_12">
+        <div class="grid_5 top_settings">
+            <a href="#mainsection">Skip to main content </a>
+        </div>
+        <div id="UsrFontCntr_tblThemes" style="float: right" class="grid_4 prefix_3 top_settings">
+            <ul style="margin:0px; padding:0px;">
+               <li class="fonts"> 
+                <a id="UsrFontCntr_LinkBtnSpace" title="Increase Line Spacing" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnSpace&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/letspace.png" alt="Increase Font Size" />
+                                <span id="UsrFontCntr_spanBtnSpace" class="sr-only"></span></a>                                
+            </li>
+
+            <li class="fonts">
+                <a id="UsrFontCntr_LinkBtnFontIncrease" title="Increase Font Size" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnFontIncrease&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/font-increase.gif" alt="Increase Font Size" />
+                    <span id="UsrFontCntr_spanFontIncrease" class="sr-only"></span></a>
+            </li>
+            <li class="fonts">
+                <a id="UsrFontCntr_LinkBtnFontRegular" title="Regular Font Size" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnFontRegular&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/font-reset.gif" alt="Regular Font Size" />
+                    <span id="UsrFontCntr_spanFontRegular" class="sr-only">Selected</span></a>
+            </li>
+            <li class="fonts">
+                <a id="UsrFontCntr_LinkBtnFontDecrease" title="Decrease Font Size" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnFontDecrease&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/font-decrease.gif" alt="Decrease Font Size" />
+                    <span id="UsrFontCntr_spanFontDecrease" class="sr-only"></span></a>
+            </li></ul>
+		<ul style="margin:0px;padding:0px;">
+            <li class="black">
+                <a id="UsrFontCntr_LinkBtnAccessibilty" title="Apply Dark Theme" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnAccessibilty&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/dark-theme.gif" alt="Apply Dark Theme" />
+                    <span id="UsrFontCntr_spanAccessibilty" class="sr-only"></span></a>
+            </li>
+            <li class="white">
+                <a id="UsrFontCntr_LinkBtnUndoAccessibilty" title="Apply Normal Theme" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnUndoAccessibilty&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/bright-theme.gif" alt="Apply Normal Theme" />
+                     <span id="UsrFontCntr_spanUndoAccessibilty" class="sr-only">Selected</span></a>
+            </li>
+            <li class="white">
+            <a id="UsrFontCntr_LinkBtnGreyScale" title="Apply Grey Theme" href="javascript:__doPostBack(&#39;UsrFontCntr$LinkBtnGreyScale&#39;,&#39;&#39;)" style="text-decoration:none;"><img src="/images/graytheme.gif" alt="Apply Gray Theme" />
+                                <span id="UsrFontCntr_spanGreyScale" class="sr-only"></span></a></li>
+
+            
+
+            </ul>
+		<div>
+		     <a href="#" onclick="javascript:window.print();" id="A1" title="Print This Page" style="text-decoration:none;" >
+                <img src="/images/print-icon.png" alt="Print this page" class="print" />
+		</a></div>
+            <div style="float: right">
+                <label style="margin-right: 6px;color: #000000;">
+                    Language</label>
+			<a class="link1" id="lnkhindi" title="Hindi site" style="color:#122c4d !important;" href="https://www.rbi.org.in/hindi/Home.aspx">हिंदी</a>
+			
+			</div>
+                    
+        </div>
+        <div class="clearfix">
+        </div>
+    </div>
+    
+</div>
+<div class="container_12">
+    <div class="grid_4" role="banner">
+        <div class="logo">
+            <a href="/home.aspx" title="Official website of Reserve Bank of India">
+                <img src="/images/rbi-company-logo.jpg" alt="Reserve Bank of India" title="Official website of Reserve Bank of India" /></a></div>
+    </div>
+    <div class="grid_5" align="right" role="search" style="float: right">
+        <label for="searchbox" class="search_label">
+            Search the Website</label>
+        <input name="UsrFontCntr$txtSearch" type="text" maxlength="103" id="txtSearch" class="search_box autoSuggest" title="Search the Website" aria-label="Search the Website" onkeydown="return LoadSearchData(&#39;txtSearch&#39;,event.keyCode);" placeHolder="Search" />
+        <button id="btnSearch" onclick="return LoadSearchData('btnSearch',event.keyCode);"
+            type="button" class="search_button">
+            Search</button>
+    </div>
+	<div class="grid_2" align="CENTER" role="" style="float: right">
+        <div class="logo" >
+            
+            <img src="../images/BBBP_Logo_4.jpg" alt="Beti Bachao Beti Padhao Logo" style="padding-top: 10px;">
+        </div>
+    	</div>
+    <div class="clearfix">
+    </div>
+</div>
+<!--  NAVIGATION START-->
+<nav role="navigation" aria-label="Main">
+       <div class="top-newmenu">
+		<div class="midmenu">
+        <ul>
+			  <li><a href="https://rbi.org.in/home.aspx">Home</a></li>
+			  <li><a href="/Scripts/AboutusDisplay.aspx">About Us</a></li>
+			  
+            <li class="hasSubmenu"><a href="#">Notifications <img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+                <ul>
+                  <li><a href="../Scripts/NotificationUser.aspx">Notifications </a></li>
+                  <li><a href="../Scripts/BS_ViewMasterDirections.aspx">Master Directions </a></li>
+                  <li><a href="../Scripts/BS_ViewMasterCirculardetails.aspx">Master Circulars </a></li> 
+                  <li><a href="../Scripts/DraftNotificationsGuildelines.aspx">Draft Notifications/Guidelines </a></li> 
+                  <li><a href="../Scripts/BS_ViewREwiseDraftDirections.aspx">Draft Directions (RE-wise)</a></li> 
+                  <li><a href="../Scripts/BS_CircularIndexDisplay.aspx">Index To RBI Circulars </a></li>
+                  <li><a href="../Scripts/BS_ViewListofstandalonecirculars.aspx">Standalone Circulars </a></li> 
+                  <li class="last"><a href="../Scripts/NotificationUserWithdrawnCircular.aspx">Circulars Withdrawn </a></li>
+                </ul>
+              </li>
+
+			  <li><a href="/Scripts/BS_PressReleaseDisplay.aspx">Press Releases</a></li>
+			  
+
+            <li class="hasSubmenu"><a href="#">Speeches & Media Interactions<img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+                <ul>
+                  <li><a href="/Scripts/BS_ViewSpeeches.aspx">Speeches</a></li>
+                  <li><a href="/Scripts/BS_ViewInterviews.aspx">Media Interactions</a></li>
+                  <li><a href="/Scripts/Lectures.aspx">Memorial Lectures</a></li>
+                  <li class="last"><a href="/Scripts/BS_ViewPodcast.aspx">Podcasts</a></li>
+                </ul>
+              </li>
+              
+              <li class="hasSubmenu"><a href="#">Publications <img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+                <ul>
+		  <li><a href="../Scripts/Publications.aspx?publication=Biennial">Biennial</a></li>
+                  <li><a href="/Scripts/Publications.aspx?publication=Annual">Annual</a></li>
+                  <li><a href="/Scripts/Publications.aspx?publication=HalfYearly">Half-Yearly</a></li>
+                  <li><a href="/Scripts/Publications.aspx?publication=Quarterly">Quarterly</a></li>
+		          <li><a href="/Scripts/Publications.aspx?publication=Bimonthly">Bi-monthly</a></li>
+                  <li><a href="/Scripts/Publications.aspx?publication=Monthly">Monthly</a></li>
+                  <li><a href="/Scripts/Publications.aspx?publication=Weekly">Weekly</a></li>
+                  <li><a href="/Scripts/Publications.aspx?publication=Occasional">Occasional</a></li>
+                   <li><a href="/Scripts/Publications.aspx?publication=Reports">Reports</a></li>
+		            <li class="last"><a href="/Scripts/OccasionalPublications.aspx?head=Working Papers">Working Papers</a></li>
+	   	            
+
+                </ul>
+              </li>
+
+			  
+              
+             <li class="hasSubmenu"><a href="#">Legal Framework <img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+                <ul>
+                  <li><a href="/Scripts/Act.aspx">Act </a></li>
+                   <li><a href="/Scripts/Rules.aspx">Rules </a></li>
+                    <li><a href="/Scripts/Regulations.aspx">Regulations </a></li> 
+                    <li class="last"><a href="/Scripts/Schemes.aspx">Schemes </a></li>
+                </ul>
+              </li>
+            	
+	     
+		<li class="hasSubmenu"><a href="#">Research <img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+	        <ul>
+                <li><a href="/Scripts/ExternalResearchSchemes.aspx">External Research Schemes</a></li>
+                <li><a href="/Scripts/OccasionalPapers.aspx">RBI Occasional Papers</a></li>
+                <li><a href="/Scripts/OccasionalPublications.aspx?head=Working%20Papers">Working Papers</a></li>
+                <li><a href="/Scripts/BS_ViewBulletin.aspx">RBI Bulletin</a></li>
+	            <li><a href="/Scripts/Project1.aspx">History</a></li>
+                <li><a href="/Scripts/Occas_DRG_Studies.aspx">DRG Studies</a></li>
+                <li><a href="/Scripts/KLEMS.aspx">KLEMS</a></li>
+		        <li class="last"><a href="/Scripts/StateStatisticsFinances.aspx">State Statistics and Finances</a></li>
+                </ul>
+           </li>
+	    
+              <li class="hasSubmenu"><a href="#">Statistics <img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+                <ul>
+                  <li><a href="/Scripts/Statistics.aspx">Data Releases</a></li>
+                  <li><a href="https://data.rbi.org.in" target="_blank">Database on Indian Economy</a></li>
+                  <li class="last"><a href="/scripts/FS_PDS.aspx">Public Debt Statistics</a></li>
+                </ul>
+              </li>
+
+              <li class="hasSubmenu"><a href="#">Regulatory Reporting<img src="/images/down.gif" alt="" class="downarrowclass" style="border:0; padding-left: 5px"></a>
+				 <ul>
+					<li><a href="/scripts/BS_Listofallreturns.aspx">List of Returns</a></li>
+					
+                    <li><a href="/scripts/DataDefinition.aspx">Data Definition</a>
+                        <!--<ul>
+                            <li><a href="../scripts/Assets.aspx">Assets</a></li>
+							<li><a href="../Scripts/Liabilities.aspx">Liabilities</a></li>	
+							<li><a href="../Scripts/OffBalanceSheetItems.aspx">Off-Balance Sheet Items</a></li>
+							<li><a href="../Scripts/ProfitandLossAccountItems.aspx">Profit and Loss Account Items</a></li>
+							<li><a href="../Scripts/Miscellaneous.aspx">Miscellaneous</a></li>
+                        </ul>-->
+                    </li>
+
+					<li><a href="/scripts/ValidationRules.aspx">Validation rules/ Taxonomy</a></li>
+					<li><a href="/scripts/ReportingPlaform.aspx">List of RBI Reporting Portals</a></li>
+					<li class="last"><a href="/scripts/ReportingFAQ.aspx">FAQs of RBI Reporting Portals</a></li>
+
+
+                </ul>
+             </li>
+
+
+              
+
+        </ul>
+    
+ </div>
+</div>
+</nav>
+<!--  NAVIGATION END-->
+<!--HEADER END-->
+<input type="submit" name="UsrFontCntr$btn" value="" id="btn" style="visibility: hidden; height: 0px; width: 0px;" />
+
+<script type="text/javascript">
+    function SetLink() {
+        //a.href = "https://www.rbi.org.in/hindi/Home.aspx";
+        var txt="This will lead you to Hindi (हिन्दी) language website. Are you sure you want to switch to this language?"
+        if(window.confirm(txt)==true){
+            document.cookie = 'preferLang' + '=;secure; expires=Thu, 01-Jan-70 00:00:01 GMT;path=/;';
+            window.location.replace("https://www.rbi.org.in/hindi/");
+        }
+        else return false;
+        
+    }
+
+
+// Open submenu on Enter/Space by ni
+
+/*const allMenuItems = document.querySelectorAll("nav ul li");
+allMenuItems.forEach(item => {
+item.addEventListener("focusin", (event) => {	
+		if(item.className.includes('hasSubmenu')){
+		}	
+		else{
+			const allMenuItems1 = document.querySelectorAll(".hasSubmenu");
+		allMenuItems1.forEach(item1 => {
+			item1.classList.remove('focused');
+			//if(item!==item1)
+			//rollback(item1)
+		});
+		}
+								
+		item.classList.add('focused');
+	});
+	item.addEventListener("focusout", (event) => {
+		
+		if(!item.className.includes('focused')){
+		
+		//rollback(item)
+		//item.className="hasSubmenu"
+		}
+		item.classList.remove('focused');
+	});
+});*/
+
+	const allMenuItems = document.querySelectorAll("nav ul li");
+	
+	allMenuItems.forEach(item => {
+		item.addEventListener("focusin", (event) => {	
+			const MenuText =event.target.textContent;
+			const allMenuItems1 = document.querySelectorAll(".hasSubmenu");
+			allMenuItems1.forEach(item1 => {
+				if (MenuText === 'Press Releases')
+				{	
+					//alert(MenuText);
+					item1.classList.remove('focused');
+					rollback(item1)
+					item1.classList.remove('open');
+				}
+			});
+			
+		});
+	});
+
+
+const menuItems = document.querySelectorAll(".hasSubmenu");
+menuItems.forEach(item => {
+	item.addEventListener("mouseenter", (event) => {
+		item.className="hasSubmenu open focused"
+		expandThis(item);
+	});
+	item.addEventListener("mouseleave", (event) => {		
+		rollback(item)
+		item.className="hasSubmenu"
+	});
+	item.addEventListener("focusin", (event) => {		
+		const allMenuItems = document.querySelectorAll("nav ul li");
+		allMenuItems.forEach(item1 => {
+			item1.classList.remove('focused');
+			if(item!==item1)
+			rollback(item1)
+			item1.classList.remove('open');	
+		});							
+		item.classList.add('focused');
+	});
+	item.addEventListener("focusout", (event) => {
+		
+		if(!item.className.includes('focused')){
+		
+		rollback(item)
+		item.className="hasSubmenu"
+		}
+		item.classList.remove('focused');
+		item.classList.remove('open');
+	});
+
+    item.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+		if(item.className.includes("hasSubmenu open")){
+			rollback(item)
+			item.className="hasSubmenu"
+		}
+		else{
+          	item.className="hasSubmenu open focused"
+		var ele=item.querySelectorAll("a")[0];
+		//ele.css('aria-expanded','true');
+		//var elel=item.querySelectorAll("ul")[0]; $(elel).trigger('mouseenter');
+		expandThis(item);	
+		}
+				
+        }
+	//var ctrlUl=item.querySelectorAll("ul");
+	//ctrlUl[0].css('display','block');
+    });
+	
+});
+function expandThis(menu){
+ var $targetul = $(menu).children("ul:eq(0)")
+				    if ($targetul.queue().length <= 1) //if 1 or less queued animations
+				        if (this.istopheader)
+					$targetul.css({ left: $(this).children('a').eq(0).position().left, top: $mainmenu.position().top + this._dimensions.h - 2 })
+				            
+				    if (document.all && !window.XMLHttpRequest) //detect IE6 or less, fix issue with overflow
+				        $mainmenu.find('ul').css({ overflow: (this.istopheader) ? 'hidden' : 'visible' })
+					
+					//$targetul.trigger('mouseenter');
+				    $targetul.dequeue().stop(true, true).slideDown(droplinemenu.animateduration.over)
+}
+const menuItemsf = document.querySelectorAll("nav .midmenu ul li");
+
+menuItemsf.forEach(item => {
+    item.addEventListener("keydown", (event) => {
+	//if (event.key !== "Enter" && event.key !== "Shift" ) {	
+	if(item.className.includes("last") ){
+		 if (pressedKeys['shift'] && event.key === "Tab"){}else{
+		var lastItem = document.getElementsByClassName('hasSubmenu open');
+		rollback(lastItem[0])
+		lastItem[0].className="hasSubmenu";
+		}
+	}
+	//}
+	});
+	
+	});
+	
+
+function rollback(menu){
+ var $targetul = $(menu).children("ul:eq(0)")
+$targetul.dequeue().stop(true, true).slideUp(droplinemenu.animateduration.out);
+//$targetul[0].style.display='';
+}
+ 
+
+function setLetterSpace(val) {
+    
+	
+    if (false) {
+                    document.body.setAttribute("style", "letter-spacing:1px; line-height:20px; word-spacing:2px;");
+       
+    }
+    else {
+                    document.body.removeAttribute("style");
+    }
+    return false;
+
+    
+    }
+   
+</script>
+    <div>
+        <div role="main" class="container_12">
+            <a id="mainsection" name="mainsection"></a>
+            
+            <nav aria-label="Breadcrumb" class="grid_12 breadcrumbs">
+                 <ul>
+                                    <li><a href="../Home.aspx">Home</a></li>
+                                    <li><a>Payment and Settlement Systems</a></li> <li><a href="FS_UsefulInfoCustomer.aspx?fn=9"> Information Useful to Customer</a></li>
+                                </ul>
+                 </nav>
+
+
+            <div class="clear">
+            </div>
+            <div class="grid_12 omega">
+                
+                <div id="example-min" class="text1">
+                    <div>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class = "tablebg">
+                            <tr><td class="tableheader"><a id='APDF_CFC101212' target='_blank' href='https://rbidocs.rbi.org.in/rdocs/Content/PDFs/CFC101212.PDF' aria-labelledby='APDF_CFC101212 SPDF_CFC101212'>
+			<img alt='PDF - Customer Facilitation Centres – NEFT (Updated as on March 16, 2026)'  style='padding: 8px;' src='../Images/pdf.gif' width='16' height='16' alt='PDF document' border=0 align='absmiddle'></a> (<span id='SPDF_CFC101212' aria-hidden="true">292 kb</span>)</td></tr><tr><th>Customer Facilitation Centres – NEFT (Updated as on March 16, 2026)</th></tr><tr><td><table width="95%" border="0" align="center" cellpadding="0" cellspacing="1" class="tablebg">  <tr>    <th width="4%" align="center">S No</th>    <th width="36%" align="center">BANK NAME</th>    <th width="30%" align="center">PHONE</th>    <th width="30%" align="center">E Mail</th>  </tr>  <tr>    <td align="center" valign="top">1</td>    <td valign="top">ABHYUDAYA COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 9653261383</td>    <td valign="top">neftcell@abhyudayabank.net</td>  </tr>  <tr>    <td align="center" valign="top">2</td>    <td valign="top">AHMEDABAD MERCANTILE COOPERATIVE BANK</td>    <td valign="top">Tel: 079-26426582-84-88</td>    <td valign="top">treasury@amco-bank.com</td>  </tr>  <tr>    <td align="center" valign="top">3</td>    <td valign="top">AHMEDNAGAR MERCHANTS CO-OP BANK LTD</td>    <td valign="top">9767477700</td>    <td valign="top">1. admin@amcbank.in<br>      2. info@amcbank.in</td>  </tr>  <tr>    <td align="center" valign="top">4</td>    <td valign="top">AIRTEL PAYMENTS BANK LIMITED</td>    <td valign="top">Tel: 0124-4247797</td>    <td valign="top">nefthelpdesk@airtelbank.com</td>  </tr>  <tr>    <td align="center" valign="top">5</td>    <td valign="top">AKOLA JANATA COMMERCIAL COOPERATIVE BANK</td>    <td valign="top">Tel: 0724-2430012/ 2430241/2430639</td>    <td valign="top">rtgsneftops@akolajanatabank.com</td>  </tr>  <tr>    <td align="center" valign="top">6</td>    <td valign="top">ALMORA URBAN COOPERATIVE BANK LTD.</td>    <td valign="top">Tel: 05946-286300; 05962-231947; 05962-230743</td>    <td valign="top">rtgs.aucb@almoraurbanbank.com<br>      info@almoraurbanbank.com</td>  </tr>  <tr>    <td align="center" valign="top">7</td>    <td valign="top">AMBARNATH JAI HIND CO-OPERATIVE BANK LTD,AMBARNATH</td>    <td valign="top">0251-2605068/69</td>    <td valign="top">paymentcell@ajhc.bank.in<br>    rtgs@ajhc.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">8</td>    <td valign="top">ANDHRA PRADESH GRAMEEN VIKAS BANK</td>    <td valign="top">Tel: 7382620369, 9490153763, 9440903904,<br>      9491065590</td>    <td valign="top">treasury@apgvbank.in;<br>      cmaccounts@apgvbank.in;<br>      cmit@apgvbank.in</td>  </tr>  <tr>    <td align="center" valign="top">9</td>    <td valign="top">ANDHRA PRAGATHI GRAMEENA BANK</td>    <td valign="top">Tel: 7382633823</td>    <td valign="top">rtgsneft@apgb.in</td>  </tr>  <tr>    <td align="center" valign="top">10</td>    <td valign="top">Apna Sahakari Bank Ltd</td>    <td valign="top">022-24103313<br>      022-24121788</td>    <td valign="top">cpd@apnabank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">11</td>    <td valign="top">AU SMALL FINANCE BANK LIMITED</td>    <td valign="top">9116181332/ 7340011989/ 8003996120</td>    <td valign="top">rtgsneft@aubank.in;<br>      epay@aubank.in</td>  </tr>  <tr>    <td align="center" valign="top">12</td>    <td valign="top">AUSTRALIA AND NEW ZEALAND BANKING GROUP LIMITED</td>    <td valign="top">Tel: 022 4112 0073</td>    <td valign="top">indiapcomumbaioffice@anz.com<br>      pgsupport.india@anz.com</td>  </tr>  <tr>    <td align="center" valign="top">13</td>    <td valign="top">AXIS BANK</td>    <td valign="top">Tel: 022 7131 5766</td>    <td valign="top">Cfc@axis.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">14</td>    <td valign="top">B N P PARIBAS</td>    <td valign="top">022-6196 4645<br>      022-6196 4646</td>    <td valign="top">rtgs.query@asia.bnpparibas.com</td>  </tr>  <tr>    <td align="center" valign="top">15</td>    <td valign="top">BANDHAN BANK LIMITED</td>    <td valign="top">Tel: 033-40456456<br>      Ext: 5415</td>    <td valign="top">rtgsneft.desk@bandhanbank.com</td>  </tr>  <tr>    <td align="center" valign="top">16</td>    <td valign="top">BANK OF AMERICA N. A.</td>    <td valign="top">044-69904782/4857/4802/4751</td>    <td valign="top">dg.inrpayments@bofa.com</td>  </tr>  <tr>    <td align="center" valign="top">17</td>    <td valign="top">BANK OF BAHARAIN AND KUWAIT BSC</td>    <td valign="top" nowrap>Tel: 022-22880038 / 22823698 / 99 <br>      Extn - 246/238</td>    <td valign="top">csdmumbai@bbkindia.com</td>  </tr>  <tr>    <td align="center" valign="top">18</td>    <td valign="top">BANK OF BARODA</td>    <td valign="top">Tel: 0265-2316160/6161</td>    <td valign="top">neft.mumbai@bankofbaroda.com</td>  </tr>  <tr>    <td align="center" valign="top">19</td>    <td valign="top">BANK OF CEYLON</td>    <td valign="top">Tel: 044-39519907/9902, 044-28190972</td>    <td valign="top">bocops@bankofceylon.in</td>  </tr>  <tr>    <td align="center" valign="top">20</td>    <td valign="top">BANK OF INDIA</td>    <td valign="top">Tel: 022-61312997</td>    <td valign="top">boi.neft@bankofindia.co.in</td>  </tr>  <tr>    <td align="center" valign="top">21</td>    <td valign="top">BANK OF MAHARASHTRA</td>    <td valign="top">020-71658-362/020-71658-363</td>    <td valign="top">bomneft@bankofmaharashtra.bank.in<br>  cmrtgs@bankofmaharashtra.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">22</td>    <td valign="top">MUFG BANK LTD</td>    <td valign="top">022 – 6669 3000; 011-4100 3456;<br>      044-4560-5900; 080-6758-0000</td>    <td valign="top">OPD_India@in.mufg.jp</td>  </tr>  <tr>    <td align="center" valign="top">23</td>    <td valign="top">BARCLAYS BANK</td>    <td valign="top">Tel: 022-61754261 / 4619 / 4620 / 4670</td>    <td valign="top">grcbpayment.ops@barclays.com</td>  </tr>  <tr>    <td align="center" valign="top">24</td>    <td valign="top">Bassein Catholic Co-op Bank Ltd</td>    <td valign="top">+91-8888837146</td>    <td valign="top">rtgs@bccb.co.in</td>  </tr>  <tr>    <td align="center" valign="top">25</td>    <td valign="top">Bhagini Nivedita Sahakari Bank Ltd., Pune</td>    <td valign="top">020 69088021 /69088022 <br>      9822034166</td>    <td valign="top">neft_rtgs@bhagininiveditabank.com,<br>      madhura.karve@bhagininiveditabank.com</td>  </tr>  <tr>    <td align="center" valign="top">26</td>    <td valign="top">BHARAT COOPERATIVE BANK (MUMBAI) LTD</td>    <td valign="top">022-61890067/62849381</td>    <td valign="top">payments@bharatbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">27</td>    <td valign="top">CANARA BANK</td>    <td valign="top">080-25129492, 080-25129496,<br>      080-25129495</td>    <td valign="top">neft@canarabank.com rtgs@canarabank.com<br>    horeconhelpdesk@canarabank.com<br>    neftrtgshelpdesk@canarabank.com</td>  </tr>  <tr>    <td align="center" valign="top">28</td>    <td valign="top">CAPITAL SMALL FINANCE BANK LTD.</td>    <td valign="top">Tel: 0181-5050759/727/730/775</td>    <td valign="top">epayments@capitalbank.co.in<br>      treasury@capitalbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">29</td>    <td valign="top">CSB BANK LIMITED</td>    <td valign="top">Tel: 9072601527/ 528</td>    <td valign="top">rtgs@csb.co.in</td>  </tr>  <tr>    <td align="center" valign="top">30</td>    <td valign="top">Central Bank of India<br>      FOR RTGS<br>      <br>      Central Bank of India<br>      FOR NEFT</td>    <td valign="top">022 – 66387513<br>      <br>      022 – 66387543<br>      <br>      022- 22637966</td>    <td valign="top">cmrtgs@centralbank.bank.in<br>      <br>      smfmd@centralbank.bank.in<br>      <br>      cbineftcfc@centralbank.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">31</td>    <td valign="top">CHINATRUST COMMERCIAL BANK LIMITED</td>    <td valign="top">Tel: 011-43688888, 233560001</td>    <td valign="top">in.customerservices@ctbcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">32</td>    <td valign="top">CITI BANK</td>    <td valign="top">022-68807889; 022-68807814;<br>      022-68804895</td>    <td valign="top">citipaymentquerydesk@citi.com<br>      pay.ops@citi.com<br>      rtgs.citi@citi.com</td>  </tr>  <tr>    <td align="center" valign="top">33</td>    <td valign="top">CITIZENCREDIT CO-OPERATIVE BANK LTD.</td>    <td valign="top">9820652261, 9011931797,<br>      9819682817</td>    <td valign="top">neft.rtgs@citizencreditbank.com,<br>      cpd.hod@citizencreditbank.com,<br>      cpd@citizencreditbank.com</td>  </tr>  <tr>    <td align="center" valign="top">34</td>    <td valign="top">CITY UNION BANK LIMITED</td>    <td valign="top">Tel: 044-28297905</td>    <td valign="top">payment_system@cityunionbank.in</td>  </tr>  <tr>    <td align="center" valign="top">35</td>    <td valign="top">Credit Agricole Corporate & Investment Bank</td>    <td valign="top">022-67371035/1034/1116/1170 / 9930620852 /<br>    9594111895 / 9967615094</td>    <td valign="top">rtgs.crly@ca-cib.com</td>  </tr>  <tr>    <td align="center" valign="top">36</td>    <td valign="top">CREDIT SUISSE AG</td>    <td valign="top">Tel: 022 6777<br>      3417022<br>      6777 3510</td>    <td valign="top">list.rtgs.cres@credit-suisse.com</td>  </tr>  <tr>    <td align="center" valign="top">37</td>    <td valign="top">THE DARUSSALAM CO-OPERATIVE URBAN BANK LTD</td>    <td valign="top">8125208125</td>    <td valign="top">dcub1000@darussalam.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">38</td>    <td valign="top">DCB BANK LIMITED</td>    <td valign="top">Tel: 022-66187225/ 228/244/243/283/246/021</td>    <td valign="top">neft@dcbbank.com</td>  </tr>  <tr>    <td align="center" valign="top">39</td>    <td valign="top">DEOGIRI NAGARI SAHAKARI BANK LTD, CHH. SAMBHAJINAGAR (SCHEDULED BANK)</td>    <td valign="top">0240-2240212/2484827/28</td>    <td valign="top">neftrtgs@deogiri.bank.in;<br>      accounts@deogiri.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">40</td>    <td valign="top">DEPOSIT INSURANCE AND CREDIT GUARANTEE CORPORATION</td>    <td valign="top">Tel: 022-23062680, 23084121</td>    <td valign="top">dicgccsd@rbi.org.in</td>  </tr>  <tr>    <td align="center" valign="top">41</td>    <td valign="top">DEUTSCHE BANK</td>    <td valign="top">022-71806539, 022-71803524,<br>      022-71806318, 022-71803918,<br>      022-71806051</td>    <td valign="top">neft.deutsche@deutsche.bank.in<br>      rtgs.deutsche@deutsche.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">42</td>    <td valign="top">DBS BANK INDIA LTD.</td>    <td valign="top">Tel: 022 – 6833 0934</td>    <td valign="top">paymentrecall@dbs.com</td>  </tr>  <tr>    <td align="center" valign="top">43</td>    <td valign="top">DHANALAKSHMI BANK</td>    <td valign="top">Tel: 0487-6627046 / 084</td>    <td valign="top">neft@dhanbank.co.in,<br>      rtgs.dlxb@dhanbank.co.in,<br>      rtgs@dhanbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">44</td>    <td valign="top">DMK JAOLI BANK LTD</td>    <td valign="top">Tel: 022-23828488</td>    <td valign="top">jsbl@vsnl.com;<br>      hoaccounts@jaolibank.in</td>  </tr>  <tr>    <td align="center" valign="top">45</td>    <td valign="top">DOHA BANK QPSC</td>    <td valign="top">022-6286 1161, 022-6286 1162,<br>      022-6286 1186</td>    <td valign="top">indiahelpdesk@dohabank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">46</td>    <td valign="top">DOMBIVLI NAGARI SAHAKARI BANK LTD</td>    <td valign="top">0251-2875000-9,<br>      0251-2875077/78/79</td>    <td valign="top">neft@dnsb.co.in, rtgs@dnsb.co.in</td>  </tr>  <tr>    <td align="center" valign="top">47</td>    <td valign="top">DURGAPUR STEEL PEOPLES COOPERATIVE BANK LTD</td>    <td valign="top">Tel: 0343 - 2575711,<br>      9475413151<br>      8373090004</td>    <td valign="top">clearingcell@dspcoopbank.com<br>      dspcoop@gmail.com;<br>      chanchal.pal@dspcoopbank.com</td>  </tr>  <tr>    <td align="center" valign="top">48</td>    <td valign="top">EMIRATES NBD BANK PJSC</td>    <td valign="top">Tel: 8879020254</td>    <td valign="top">rtgsebil@EmiratesNBD.com</td>  </tr>  <tr>    <td align="center" valign="top">49</td>    <td valign="top">EQUITAS SMALL FINANCE BANK</td>    <td valign="top">044-30898056/8050/8015/8070</td>    <td valign="top">rtgs-cell@equitasbank.com<br>      rtgs-cell@equitas.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">50</td>    <td valign="top">ESAF SMALL FINANCE BANK LIMITED</td>    <td valign="top">9288092812</td>    <td valign="top">payments@esafbank.com</td>  </tr>  <tr>    <td align="center" valign="top">51</td>    <td valign="top">EXPORT IMPORT BANK OF INDIA</td>    <td valign="top">Tel: 022-22172669/2647/ 2438/2444</td>    <td valign="top">rtgs@eximbankindia.in</td>  </tr>  <tr>    <td align="center" valign="top">52</td>    <td valign="top">FEDERAL BANK</td>    <td valign="top">0484-2752077, 0484-2752051, <br>      0484-2752072</td>    <td valign="top">neft@federalbank.co.in<br>      rtgs@federalbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">53</td>    <td valign="top">FINCARE SMALL FINANCE BANK</td>    <td valign="top">Tel: 080 - 42504444 <br>      Ext 643, 611, 610</td>    <td valign="top">cpcpayments@fincarebank.com</td>  </tr>  <tr>    <td align="center" valign="top">54</td>    <td valign="top">FINO PAYMENTS BANK LTD</td>    <td valign="top">Tel: 022-71047116, 022-71047025, <br>      022-71047191</td>    <td valign="top">neftrtgs.cell@finobank.com,<br>      care@finobank.com,<br>      customercare@finobank.com</td>  </tr>  <tr>    <td align="center" valign="top">55</td>    <td valign="top">FIRST ABU DHABI BANK PJSC</td>    <td valign="top">Tel: 022-33311131/1151</td>    <td valign="top">mumbaisupportit@nbad.com</td>  </tr>  <tr>    <td align="center" valign="top">56</td>    <td valign="top">FIRSTRAND BANK LIMITED</td>    <td valign="top">Tel: 022-66258682/ 66258666/ 66258629</td>    <td valign="top">frin.tradeoperations@firstrand.co.in</td>  </tr>  <tr>    <td align="center" valign="top">57</td>    <td valign="top">G P PARSIK BANK</td>    <td valign="top">Tel: 022-25456500, <br>      Extn. 6529, 6509</td>    <td valign="top">invest@gpparsikbank.com;<br>      accounts@gpparsikbank.net</td>  </tr>  <tr>    <td align="center" valign="top">58</td>    <td valign="top">GS Mahanagar Co-OP Bank Ltd.</td>    <td valign="top">1) 9284665722 - Mr. Avinash Lokhande <br>      (Operation Manager)<br>      2) 7738710140 - Mr. Mayuresh Chavan <br>      (IT Manager)</td>    <td valign="top">clearing@gsmahanagar.bank.in<br>    mayur.chavan@gsmahanagar.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">59</td>    <td valign="top">HARYANA STATE CO-OP APEX BANK</td>    <td valign="top">Tel: 0172-2784278</td>    <td valign="top">harco17@gmail.com;<br>      neft@harcobank.org.in;<br>      rtgs@harcobank.org.in</td>  </tr>  <tr>    <td align="center" valign="top">60</td>    <td valign="top">HDFC BANK LTD</td>    <td valign="top">022-30752044 / 53</td>    <td valign="top">neftinward@hdfcbank.com,<br>    neftinward@hdfcbank.bank.in,<br>    neftoutward@hdfcbank.com,<br>    neftoutward@hdfcbank.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">61</td>    <td valign="top">HIMACHAL PRADESH STATE COOPERATIVE BANK LTD</td>    <td valign="top">Tel: 0177-2659641</td>    <td valign="top">rtgs.hpsc@hpscb.com</td>  </tr>  <tr>    <td align="center" valign="top">62</td>    <td valign="top">HSBC BANK</td>    <td valign="top">9820331072</td>    <td valign="top">paymentinvestigations@hsbc.co.in</td>  </tr>  <tr>    <td align="center" valign="top">63</td>    <td valign="top">HUTATMA SAHAKARI BANK LTD WALWA</td>    <td valign="top">9970686373<br>      9604724458<br>      9850552010<br>      9822485709</td>    <td valign="top">bamore@hutatmabank.com<br>      mmchougule@hutatmabank.com<br>      sskonvadekar@hutatmabank.com<br>      nbpatil@hutatmabank.com</td>  </tr>  <tr>    <td align="center" valign="top">64</td>    <td valign="top">ICICI BANK LTD</td>    <td valign="top">Tel: 022- 33667777 &<br>      040- 33667777<br>      Fax: 040-41064450</td>    <td valign="top">neft.query@icicibank.com</td>  </tr>  <tr>    <td align="center" valign="top">65</td>    <td valign="top">IDBI BANK</td>    <td valign="top">Tel: 022 – 66552776/77/ 78, 022-66700304<br>      022-66908536</td>    <td valign="top">etpc@idbi.co.in;<br>      rtgsneftops@idbi.co.in</td>  </tr>  <tr>    <td align="center" valign="top">66</td>    <td valign="top">IDFC FIRST BANK</td>    <td valign="top">Tel: 180010888, 011-45036123</td>    <td valign="top">CFC@idfcfirstbank.com</td>  </tr>  <tr>    <td align="center" valign="top">67</td>    <td valign="top">IDUKKI DISTRICT CO OPERATIVE BANK LTD</td>    <td valign="top">Tel: 04862 – 235141</td>    <td valign="top">it@idukkidcb.in</td>  </tr>  <tr>    <td align="center" valign="top">68</td>    <td valign="top">INDIA POST PAYMENTS BANK LIMITED</td>    <td valign="top">Tel: 011-23815485, 23815488</td>    <td valign="top">rtgs.cfc@ippbonline.in</td>  </tr>  <tr>    <td align="center" valign="top">69</td>    <td valign="top">Indian Bank</td>    <td valign="top">044-28294988 <br>      044-28134173</td>    <td valign="top">rtgscell@indianbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">70</td>    <td valign="top">INDIAN OVERSEAS BANK</td>    <td valign="top">044-28889397</td>    <td valign="top">rtgscell@iobnet.co.in</td>  </tr>  <tr>    <td align="center" valign="top">71</td>    <td valign="top">IndusInd Bank Limited</td>    <td valign="top">022-62815131/ 62815123</td>    <td valign="top">neft@indusind.com</td>  </tr>  <tr>    <td align="center" valign="top">72</td>    <td valign="top">INDUSTRIAL AND COMMERCIAL BANK OF CHINA LIMITED</td>    <td valign="top">Tel: 022-33155931/5926</td>    <td valign="top">rtgs.icbk@india.icbc.com.cn</td>  </tr>  <tr>    <td align="center" valign="top">73</td>    <td valign="top">INDUSTRIAL BANK OF KOREA</td>    <td valign="top">Tel: 011-40768000 / 8022 / 8009</td>    <td valign="top">neft.ibko@ibk.co.kr<br>      ibkamitdeb@ibk.co.kr<br>      rohit@ibk.co.kr</td>  </tr>  <tr>    <td align="center" valign="top">74</td>    <td valign="top">IRINJALAKUDA TOWN CO-OPERATIVE BANK LTD</td>    <td valign="top">Tel: 9447755843, 9497068429, <br>      9847411160, 0480-2670300,<br>      2670331</td>    <td valign="top">ho@itubank.com,<br>      mail@itubank.com</td>  </tr>  <tr>    <td align="center" valign="top">75</td>    <td valign="top">Jalgaon Janata Sahakari Bank Ltd Jalgaon</td>    <td valign="top">0257-2232175<br>      8805165747, <br>      9657117663</td>    <td valign="top">RTGS.JJSB0000001@jjsbl.co.in<br>      mayur.patil@jjsbl.co.in,<br>      sanjay.thosare@jjsbl.co.in<u> </u></td>  </tr>  <tr>    <td align="center" valign="top">76</td>    <td valign="top">JAMMU AND KASHMIR BANK LIMITED</td>    <td valign="top">Tel: 0194-2481930/31/32/ 33/34/35</td>    <td valign="top">neftservices@jkbmail.com;<br>      jakaneft@jkbmail.com</td>  </tr>  <tr>    <td align="center" valign="top">77</td>    <td valign="top">JANA SMALL FINANCE BANK</td>    <td valign="top">Tel: 080-33425262/ Ext:358/143</td>    <td valign="top">channel_payments@janabank.com</td>  </tr>  <tr>    <td align="center" valign="top">78</td>    <td valign="top">JANASEVA SAHAKARI BANK BORIVLI LIMITED</td>    <td valign="top">Tel: 022- 28914747, 28333522</td>    <td valign="top">jssbl@mtnl.net.in</td>  </tr>  <tr>    <td align="center" valign="top">79</td>    <td valign="top">JANASEVA SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 020-24440097</td>    <td valign="top">investment@janasevabankpune.com</td>  </tr>  <tr>    <td align="center" valign="top">80</td>    <td valign="top">JANATA SAHAKARI BANK LTD, PUNE</td>    <td valign="top">9970013148<br>      020-24405003/5001/4498</td>    <td valign="top">jsbservice@jsblpune.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">81</td>    <td valign="top">JANKALYAN SAHAKARI BANK</td>    <td valign="top">Tel: 022-25222582/ 25246804, <br>      022-25264123/122/151/111</td>    <td valign="top">jksbl@jksbl.com</td>  </tr>  <tr>    <td align="center" valign="top">82</td>    <td valign="top">JIO PAYMENTS BANK LIMITED</td>    <td valign="top">022 35116231, 1800 890 7070</td>    <td valign="top">we.care@jiopayments.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">83</td>    <td valign="top">JP MORGAN CHASE BANK</td>    <td valign="top">Tel:- 022-61575043, 022 61573844,<br>      022 61573837<br>      Tel:- 022 61573305 /<br>      61573445 / 61573667</td>    <td valign="top">mumbai.cash.operation@jpmorgan.com<br>      funding.mumbai.branch@jpmorgan.com<br>      rtgs_chas@jpmorgan.com</td>  </tr>  <tr>    <td align="center" valign="top">84</td>    <td valign="top">KALLAPPANNA AWADE ICHALKARANJI JANATA SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 0230-2427263</td>    <td valign="top">treasury@ijsbank.com</td>  </tr>  <tr>    <td align="center" valign="top">85</td>    <td valign="top">KALUPUR COMMERCIAL COOPERATIVE BANK</td>    <td valign="top">Tel: 079-27582020 to 27582026</td>    <td valign="top">info@kalupurbank.com<br>      rtgs.kccb@kalupurbank.com</td>  </tr>  <tr>    <td align="center" valign="top">86</td>    <td valign="top">The Kalyan Janata Sahakari Bank Ltd</td>    <td valign="top">0251-2219030 / 9031 /9039</td>    <td valign="top">cpc.rtgsneft@kalyanjanata.in</td>  </tr>  <tr>    <td align="center" valign="top">87</td>    <td valign="top">KARNATAKA BANK LIMITED</td>    <td valign="top">Tel: 022 - 22823031/32</td>    <td valign="top">neft.srbr@ktkbank.com</td>  </tr>  <tr>    <td align="center" valign="top">88</td>    <td valign="top">KARNATAKA VIKAS GRAMEENA BANK</td>    <td valign="top">Tel: 0836-2442204</td>    <td valign="top">kvgbhoit@gmail.com<br>      neftrtgscell@kvgbank.com</td>  </tr>  <tr>    <td align="center" valign="top">89</td>    <td valign="top">KOOKMIN BANK</td>    <td valign="top">Izhar Ahmad: 0124-4532223<br>      Shania Sultan: 0124-4532283<br>      Kasid Warsi: 0124-4532255</td>    <td valign="top">izhar.ahmad@kbfg.com <br>      shania.sultan@kbfg.com<br>      kasid.warsi@kbfg.com</td>  </tr>  <tr>    <td align="center" valign="top">90</td>    <td valign="top">THE KARUR VYSYA BANK LTD</td>    <td valign="top">Tel: 0422–2227778, 0422–2227779, 0422-2227760</td>    <td valign="top">neft@kvbmail.com;<br>      neftcfc@kvbmail.com</td>  </tr>  <tr>    <td align="center" valign="top">91</td>    <td valign="top">KEB HANA BANK</td>    <td valign="top">0124-4168230</td>    <td valign="top">gurugram@hanafn.com<br>      raashi.malhotra@hanafn.com</td>  </tr>  <tr>    <td align="center" valign="top">92</td>    <td valign="top">KERALA GRAMEENA BANK</td>    <td valign="top">9400999031</td>    <td valign="top">neftcell.kgb@kgb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">93</td>    <td valign="top">KOTAK MAHINDRA BANK LIMITED</td>    <td valign="top">Tel: 022-69410816/69410817</td>    <td valign="top">neftrtgs.query@kotak.com</td>  </tr>  <tr>    <td align="center" valign="top">94</td>    <td valign="top">KOZHIKODE DISTRICT COOP BANK LTD.</td>    <td valign="top">Tel: 0495-2701520</td>    <td valign="top">rtgs@kdcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">95</td>    <td valign="top">MAHARASHTRA GRAMIN BANK</td>    <td valign="top">Tel: 0240-2476141, 022-25435154,<br>      25344059/60</td>    <td valign="top">rtgs@mahagramin.co.in<br>      neft@mahagramin.co.in<br>      mgbneftcell@gmail.com</td>  </tr>  <tr>    <td align="center" valign="top">96</td>    <td valign="top">The Maharashtra State Cooperative Bank Ltd., Mumbai</td>    <td valign="top">022-69801258 / 022-69801073</td>    <td valign="top">1. rtgs@msc.bank.in<br>      2. it.phmscell@msc.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">97</td>    <td valign="top">MAHESH SAHAKARI BANK LTD PUNE</td>    <td valign="top">9970065170<br>      9860218000<br>      9011011280</td>    <td valign="top">accountsho@maheshbankpune.in</td>  </tr>  <tr>    <td align="center" valign="top">98</td>    <td valign="top">MASHREQBANK PSC</td>    <td valign="top">Tel: 022-66327200/300/301</td>    <td valign="top">opsindia@mashreq.com;</td>  </tr>  <tr>    <td align="center" valign="top">99</td>    <td valign="top">MIZUHO BANK LTD.</td>    <td valign="top">Tel: 022 49112000/21/23 /61 022 49112746/77</td>    <td valign="top">inward.remittances@mizuho-cb.com</td>  </tr>  <tr>    <td align="center" valign="top">100</td>    <td valign="top">MODEL CO-OPERATIVE BANK LTD.</td>    <td valign="top">Tel: 022-66914227/ 8080938018</td>    <td valign="top">rtgs@modelbank.in</td>  </tr>  <tr>    <td align="center" valign="top">101</td>    <td valign="top">NABARD</td>    <td valign="top">022-2653 9197 <br>      022-2653 9793</td>    <td valign="top">fd.disb@nabard.org<br>      clmas@nabard.org</td>  </tr>  <tr>    <td align="center" valign="top">102</td>    <td valign="top">NAGAR URBAN CO OPERATIVE BANK</td>    <td valign="top">Tel: 0241-2346941, 2343642</td>    <td valign="top">rtgs@nagarurbanbank.com</td>  </tr>  <tr>    <td align="center" valign="top">103</td>    <td valign="top">NAGPUR NAGARIK SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 0712-2764313, 2761386</td>    <td valign="top">neft@nnsbank.com</td>  </tr>  <tr>    <td align="center" valign="top">104</td>    <td valign="top">NEW INDIA CO-OPERATIVE BANK LTD</td>    <td valign="top">Tel: 022 6626 4353</td>    <td valign="top">rtgsdesk@newindiabank.in /<br>    rtgs.nicb@newindiabank.in</td>  </tr>  <tr>    <td align="center" valign="top">105</td>    <td valign="top">NKGSB COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022-67545022, 67545009</td>    <td valign="top">rtgs@nkgsb-bank.com</td>  </tr>  <tr>    <td align="center" valign="top">106</td>    <td valign="top">NORTH EAST SMALL FINANCE BANK</td>    <td valign="top">Tel: 0361-7180001</td>    <td valign="top">customercare@nesfb.com</td>  </tr>  <tr>    <td align="center" valign="top">107</td>    <td valign="top">NSDL Payment Bank Ltd</td>    <td valign="top">Tel: 022-42022100</td>    <td valign="top">dispute@nsdlbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">108</td>    <td valign="top">NUTAN NAGARIK SAHAKARI BANK LTD.</td>    <td valign="top">079-26444441</td>    <td valign="top">rtgs@nutan.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">109</td>    <td valign="top">PAYTM PAYMENTS BANK LIMITED</td>    <td valign="top">Tel: 0120-4456456</td>    <td valign="top">neftrtgs.support@paytmbank.com</td>  </tr>  <tr>    <td align="center" valign="top">110</td>    <td valign="top">KARNATAKA GRAMIN BANK</td>    <td valign="top">08194-234315, 08194-234215</td>    <td valign="top">hoanx.neftcell@kgbk.in;<br>      dbswing.kgbk@kgbk.in</td>  </tr>  <tr>    <td align="center" valign="top">111</td>    <td valign="top">PRIME CO-OP. BANK LTD.</td>    <td valign="top">Tel: 0261 - 2804777</td>    <td valign="top">rtgs@primebankindia.com</td>  </tr>  <tr>    <td align="center" valign="top">112</td>    <td valign="top">PT BANK MAYBANK INDONESIA TBK</td>    <td valign="top">Tel: 022 6730 3400/423/418/440/409</td>    <td valign="top">customercareindia@maybank.co.id</td>  </tr>  <tr>    <td align="center" valign="top">113</td>    <td valign="top">PUNJAB AND MAHARSHTRA COOPERATIVE BANK</td>    <td valign="top">Tel: 022-61284316/4317/4313</td>    <td valign="top">rtgs@pmcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">114</td>    <td valign="top">Punjab & Sind Bank</td>    <td valign="top">011-25860657</td>    <td valign="top">rtgsneftoperation@psb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">115</td>    <td valign="top">PUNJAB NATIONAL BANK</td>    <td valign="top">0124-4176993/995</td>    <td valign="top">NEFT@PNB.BANK.IN</td>  </tr>  <tr>    <td align="center" valign="top">116</td>    <td valign="top">QATAR NATIONAL BANK (Q.P.S.C.)</td>    <td valign="top">Tel: 022-62296306/ 6311</td>    <td valign="top">indiaoperations@qnb.com</td>  </tr>  <tr>    <td align="center" valign="top">117</td>    <td valign="top">RABOBANK INTERNATIONAL</td>    <td valign="top">Tel: 022-22097890/7900 /7881</td>    <td valign="top">fm.in.mumbai.cmps@rabobank.com</td>  </tr>  <tr>    <td align="center" valign="top">118</td>    <td valign="top">RAJARAMBAPU SAHAKARI BANK</td>    <td valign="top">Tel: 9890080260</td>    <td valign="top">account@rajarambapubank.org;</td>  </tr>  <tr>    <td align="center" valign="top">119</td>    <td valign="top">RAJARSHI SHAHU SAHAKARI BANK Ltd</td>    <td valign="top">020-24432557, 020-24435384,<br>      020-24435385</td>    <td valign="top">rtgsneft@rajarshishahubankpune.com</td>  </tr>  <tr>    <td align="center" valign="top">120</td>    <td valign="top">RAJGURUNAGAR SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 02135-222085, 222118</td>    <td valign="top">rtgs.rsbl@rajgurunagarbank.com</td>  </tr>  <tr>    <td align="center" valign="top">121</td>    <td valign="top">RAJKOT NAGARIK SAHAKARI BANK LTD.</td>    <td valign="top">Tel: 0281-2238524, 2226476, 2222054</td>    <td valign="top">rtgsops@rnsbindia.com,<br>      rtgs@rnsbindia.com,</td>  </tr>  <tr>    <td align="center" valign="top">122</td>    <td valign="top">RBL BANK LIMITED</td>    <td valign="top">Tel: 022-62327777</td>    <td valign="top">customercare@rblbank.com</td>  </tr>  <tr>    <td align="center" valign="top">123</td>    <td valign="top">RESERVE BANK OF INDIA (FOR GOVT BANKING DIVISION)</td>    <td valign="top">Tel: 022-22603329</td>    <td valign="top">neftpadmumbai@rbi.org.in</td>  </tr>  <tr>    <td align="center" valign="top">124</td>    <td valign="top">SAHEBRAO DESHMUKH COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022-28522514/15, 022-28520369</td>    <td valign="top">clg@sdcbank.in</td>  </tr>  <tr>    <td align="center" valign="top">125</td>    <td valign="top">SAMARTH SAHAKARI BANK LTD.</td>    <td valign="top">Tel: 02172744214</td>    <td valign="top">rtgs.sbls@samarthbank.com</td>  </tr>  <tr>    <td align="center" valign="top">126</td>    <td valign="top">SARASWAT COOPERATIVE BANK LIMITED</td>    <td valign="top">(022) 67315444, 67315402</td>    <td valign="top">rtgs_neft@saraswatbank.com;<br>    suhas.shidhaye@saraswatbank.com</td>  </tr>  <tr>    <td align="center" valign="top">127</td>    <td valign="top">SBER BANK</td>    <td valign="top">011-40048888</td>    <td valign="top">SupportService-ind@Sberbank.ru</td>  </tr>  <tr>    <td align="center" valign="top">128</td>    <td valign="top">SBM BANK (INDIA) LIMITED</td>    <td valign="top">022-43028888 / 022-43028824 /<br>      022-43028826</td>    <td valign="top">CFC@SBMBank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">129</td>    <td valign="top">SHIKSHAK SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 0712-2722705 / 2774866</td>    <td valign="top">rtgs.sksb@shikshakbank.com</td>  </tr>  <tr>    <td align="center" valign="top">130</td>    <td valign="top">SHINHAN BANK</td>    <td valign="top">Tel: 022-61991990</td>    <td valign="top">operations.mum@shinhan.com;<br>      treasury.bo.ind@shinhan.com;<br>      rtgs.shbk@shinhan.com</td>  </tr>  <tr>    <td align="center" valign="top">131</td>    <td valign="top">SHIVALIK SMALL FINANCE BANK LIMITED</td>    <td valign="top">Tel:0132-3509728</td>    <td valign="top">rtgs@shivalikbank.com</td>  </tr>  <tr>    <td align="center" valign="top">132</td>    <td valign="top">SHRI CHHATRAPATI RAJASHRI SHAHU URBAN COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel - 2442-229772, 2442-228961</td>    <td valign="top">headoffice@shahubank.com</td>  </tr>  <tr>    <td align="center" valign="top">133</td>    <td valign="top">SHRI VEERSHAIV CO-OP BANK LTD</td>    <td valign="top">Tel: 0231-2536940, 8380051173</td>    <td valign="top">nitincharankar@shriveershaivbank.com</td>  </tr>  <tr>    <td align="center" valign="top">134</td>    <td valign="top">SINDHUDURG DCCB LTD</td>    <td valign="top">Tel: 02362-229005 To 10</td>    <td valign="top">rtgs.neft@sindhudurgdcc.com</td>  </tr>  <tr>    <td align="center" valign="top">135</td>    <td valign="top">SIR M. VISVESWARAYA CO-OP BANK LTD.</td>    <td valign="top">Tel: 9480885371, 9449599908</td>    <td valign="top">hl.suresh@yahoo.co.in;<br>      l.ganesh@vcb.co.in</td>  </tr>  <tr>    <td align="center" valign="top">136</td>    <td valign="top">SOCIETE GENERALE</td>    <td valign="top">Tel: 022-66309500</td>    <td valign="top">mum.oper.mop@socgen.com</td>  </tr>  <tr>    <td align="center" valign="top">137</td>    <td valign="top">SOLAPUR JANATA SAHAKARI BANK LIMITED</td>    <td valign="top">Tel – 0217-2741100</td>    <td valign="top">info@sjsbbank.com</td>  </tr>  <tr>    <td align="center" valign="top">138</td>    <td valign="top">South Indian Bank</td>    <td valign="top">+91-</strong>9048039555</td>    <td valign="top">rtgscell@sib.co.in</td>  </tr>  <tr>    <td align="center" valign="top">139</td>    <td valign="top">Standard Chartered Bank</td>    <td valign="top">Tel: 044-66821088</td>    <td valign="top">neft.recall@sc.com</td>  </tr>  <tr>    <td align="center" valign="top">140</td>    <td valign="top">STATE BANK OF INDIA</td>    <td valign="top">Tel: 022-2756 0743 /<br>      022-2756 0746</td>    <td valign="top">neft@sbi.co.in</td>  </tr>  <tr>    <td align="center" valign="top">141</td>    <td valign="top">Sumitom Mitsui Banking Corporattion</td>    <td valign="top">011-47689111</td>    <td valign="top">remittance_ops@in.smbc.co.jp</td>  </tr>  <tr>    <td align="center" valign="top">142</td>    <td valign="top">Surat National Co-Op Bank Ltd.</td>    <td valign="top">0261-6713040 / 0261-6713033</td>    <td valign="top">rtgs.sunb@suratnational.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">143</td>    <td valign="top">SURYODAY SMALL FINANCE BANK LTD</td>    <td valign="top">Tel: 022-41856734/40436757</td>    <td valign="top">payments@suryodaybank.com</td>  </tr>  <tr>    <td align="center" valign="top">144</td>    <td valign="top">SUCO SOUHARDA SAHAKARI BANK LTD</td>    <td valign="top">6366354846</td>    <td valign="top">partham@suco.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">145</td>    <td valign="top">THE SUTEX COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 0261-2632519, 2632027/28</td>    <td valign="top">rtgs.support@sutexbank.in</td>  </tr>  <tr>    <td align="center" valign="top">146</td>    <td valign="top">TAMILNAD MERCANTILE BANK LIMITED</td>    <td valign="top">Tel: 044-28131092/28131091</td>    <td valign="top">rtgs@tmbank.in</td>  </tr>  <tr>    <td align="center" valign="top">147</td>    <td valign="top">Telangana State Co-Op Apex Bank</td>    <td valign="top">Tel: 040-23443814/ 24685501,<br>    040-24685568, 040-23443845</td>    <td valign="top">rtgscell@tscab.org</td>  </tr>  <tr>    <td align="center" valign="top">148</td>    <td valign="top">TEXTILE TRADERS COOP BANK LTD.</td>    <td valign="top">Tel: 079-26430545079-26434255 / 26434200</td>    <td valign="top">rtgs.ttcb@ttcbank.co.in<br>      headoffice@ttcbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">149</td>    <td valign="top">THE A.P. MAHESH COOPERATIVE URBAN BANK LIMITED</td>    <td valign="top">Tel: 040-24732711/22</td>    <td valign="top">info@apmaheshbank.com;<br>      hofin@apmaheshbank.com</td>  </tr>  <tr>    <td align="center" valign="top">150</td>    <td valign="top">The Akola-Washim District Central Co-operative Bank Limited, Akola</td>    <td valign="top">0724-2415107,<br>      0724-2415108, 18002332393</td>    <td valign="top">rtgs.adcc@akolawashimdcc.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">151</td>    <td valign="top">The Andhra Pradesh State Cooperative Bank Ltd.,</td>    <td valign="top">87120 14428,<br>      0866 242 9065</td>    <td valign="top">rtgscell@apcob.org</td>  </tr>  <tr>    <td align="center" valign="top">152</td>    <td valign="top">THE BANK OF NOVA SCOTIA</td>    <td valign="top">Tel: 022-6636 4200</td>    <td valign="top">support.mumbai@scotiabank.com</td>  </tr>  <tr>    <td align="center" valign="top">153</td>    <td valign="top">THE BARAMATI SAHAKARI BANK</td>    <td valign="top">Tel: 02112-224865 <br>      Ext: 316</td>    <td valign="top">rtgs@baramatibank.com</td>  </tr>  <tr>    <td align="center" valign="top">154</td>    <td valign="top">The Cosmos Coop Bank Ltd</td>    <td valign="top">022 6740 6044<br>      022 6740 6043</td>    <td valign="top">rtgscell@cosmosbank.in<br>      neftcell@cosmosbank.in</td>  </tr>  <tr>    <td align="center" valign="top">155</td>    <td valign="top">THE DELHI STATE COOPERATIVE BANK LTD.</td>    <td valign="top">011-23281924 <br>      011-42880910<br>      011-41705038</td>    <td valign="top">DSCBRTGS@GMAIL.COM<br>      BKG.DSCB@GMAIL.COM</td>  </tr>  <tr>    <td align="center" valign="top">156</td>    <td valign="top">THE GADCHIROLI DISTRICT CENTRAL COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 07132-232050, 232965, 233438,<br>      233570, 8055143754 (Pravin Janganwar)</td>    <td valign="top">gdcc_gad@gdccbank.com</td>  </tr>  <tr>    <td align="center" valign="top">157</td>    <td valign="top">THE GREATER BOMBAY COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022 61285927/61285900</td>    <td valign="top">clearing@greaterbank.com</td>  </tr>  <tr>    <td align="center" valign="top">158</td>    <td valign="top">THE GUJARAT STATE COOPERATIVE BANK LIMITED</td>    <td valign="top">079-27459013, 27459916, 27459033</td>    <td valign="top">info@gscbank.coop</td>  </tr>  <tr>    <td align="center" valign="top">159</td>    <td valign="top">THE HASTI COOP BANK LTD</td>    <td valign="top">Tel: 02566-245616, 247306, 244106,<br>    244306, 247306, 247307</td>    <td valign="top">rbiusersgroup@hastibank.org</td>  </tr>  <tr>    <td align="center" valign="top">160</td>    <td valign="top">THE JALGAON PEOPELS COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 0257-2227711 to16</td>    <td valign="top">rtgs.jpcb@jpcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">161</td>    <td valign="top">The Kangra Central Co-Op Bank Ltd</td>    <td valign="top">Tel: 01892-222269<br>    Ext. 268</td>    <td valign="top">dbdc@kccb.in</td>  </tr>  <tr>    <td align="center" valign="top">162</td>    <td valign="top">THE KANGRA COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 011-23582056</td>    <td valign="top">ser_branch@kangrabank.com</td>  </tr>  <tr>    <td align="center" valign="top">163</td>    <td valign="top">THE KARAD URBAN COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022-24171471</td>    <td valign="top">treasury@karadurbanbank.com</td>  </tr>  <tr>    <td align="center" valign="top">164</td>    <td valign="top">THE KARANATAKA STATE COOPERATIVE APEX BANK LIMITED</td>    <td valign="top">Tel: 080-22976614</td>    <td valign="top">rtgs@karnatakaapex.com</td>  </tr>  <tr>    <td align="center" valign="top">165</td>    <td valign="top">THE KURMANCHAL NAGAR SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 05942-263574</td>    <td valign="top">kurmanchalbank@yahoo.com</td>  </tr>  <tr>    <td align="center" valign="top">166</td>    <td valign="top">THE MEHSANA URBAN COOPERATIVE BANK</td>    <td valign="top">Tel: 02762-240761</td>    <td valign="top">info@mucbank.com</td>  </tr>  <tr>    <td align="center" valign="top">167</td>    <td valign="top">MUMBAI DISTRICT CENTRAL CO OP BANK LTD</td>    <td valign="top">8976754266</td>    <td valign="top">rtgsneft@mumbaidistrictbank.com</td>  </tr>  <tr>    <td align="center" valign="top">168</td>    <td valign="top">THE MUNICIPAL COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022-22616911/12</td>    <td valign="top">accounts@mcbmumbai.com</td>  </tr>  <tr>    <td align="center" valign="top">169</td>    <td valign="top">THE NAINITAL BANK LIMITED</td>    <td valign="top">Tel: 011-23583041/40</td>    <td valign="top">rtgshelpdesk@nainitalbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">170</td>    <td valign="top">The Nasik Merchants Co-Operative Bank Ltd., Nashik</td>    <td valign="top">0253-2308200</td>    <td valign="top">rtgsneft@namcobank.in</td>  </tr>  <tr>    <td align="center" valign="top">171</td>    <td valign="top">THE NAVNIRMAN CO OP BANK LTD.</td>    <td valign="top">079-26568259, 079-26568258,<br>      9624180830, 8866543936,<br>      9925925120, 8511561708,<br>      8000254490, 6356039000</td>    <td valign="top">support@navnirman.bank.in,<br>    it1@navnirman.bank.in,<br>    it2@navnirman.bank.in,<br>    it3@navnirman.bank.in,<br>    ho@navnirman.bank.in,<br>    managerit@navnirman.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">172</td>    <td valign="top">THE PANDHARPUR URBAN CO OP. BANK LTD. PANDHARPUR</td>    <td valign="top">Tel: 02186-228484, 223163, 223484</td>    <td valign="top">rtgsneft@pandharpurbank.com</td>  </tr>  <tr>    <td align="center" valign="top">173</td>    <td valign="top">THE RAJASTHAN STATE COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 0141-2744704</td>    <td valign="top">rscb.raj@gmail.com</td>  </tr>  <tr>    <td align="center" valign="top">174</td>    <td valign="top">THE SEVA VIKAS COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 020-27412289,<br>      020-27413371</td>    <td valign="top">rtgs.svbl@sevavikasbank.com</td>  </tr>  <tr>    <td align="center" valign="top">175</td>    <td valign="top">SVC CO OP BANK LTD<br>      (THE SHAMRAO VITHAL CO OP BANK)</td>    <td valign="top">022-71991468/69/70/72/73</td>    <td valign="top">rtgscell@svcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">176</td>    <td valign="top">THE SURAT DISTRICT CO-OP BANK LTD.</td>    <td valign="top">Tel: 0261-2466012,<br>      0261-2466018</td>    <td valign="top">agmbanking@sudicobank.com;<br>      treasury@sudicobank.com</td>  </tr>  <tr>    <td align="center" valign="top">177</td>    <td valign="top">THE SURATH PEOPLES COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 0261-2464621 to 624</td>    <td valign="top">info@spcbl.in</td>  </tr>  <tr>    <td align="center" valign="top">178</td>    <td valign="top">THE TAMIL NADU STATE APEX COOPERATIVE BANK</td>    <td valign="top">Tel: 044-25358859/2308, 044-25340973</td>    <td valign="top">rtgs@tnscbank.com</td>  </tr>  <tr>    <td align="center" valign="top">179</td>    <td valign="top">THE THANE BHARAT SAHAKARI BANK LIMITED</td>    <td valign="top">8652277768, 7506701004,<br>      7506701779, 9820703044,<br>      7506701227, 7506701873</td>    <td valign="top">rtgs.tbsb@tbsbl.com,<br>    tbsbl.clearing@tbsbl.com,<br>    nitin.palwankar@tbsbl.com,<br>    devendra.jadhav@tbsbl.com</td>  </tr>  <tr>    <td align="center" valign="top">180</td>    <td valign="top">THE THANE DISTRICT CENTRAL COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022-25433510</td>    <td valign="top">edp@thanedistrictbank.com</td>  </tr>  <tr>    <td align="center" valign="top">181</td>    <td valign="top">THE UDAIPUR URBAN CO-OPERATIVE BANK LTD.</td>    <td valign="top">9251638224</td>    <td valign="top">addlceo@uucbudaipur.com</td>  </tr>  <tr>    <td align="center" valign="top">182</td>    <td valign="top">THE VARACHHA CO-OPERATIVE BANK LIMITED</td>    <td valign="top">0261-6918015,<br>      0261-6918000</td>    <td valign="top">nefthelp@varachha.bank.in;<br>      info@varachha.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">183</td>    <td valign="top">The Vishweshwar Sahakari Bank Ltd,.Pune</td>    <td valign="top">020-24261755<br>      020-24262745</td>    <td valign="top">treasury@vishweshwarbank.com</td>  </tr>  <tr>    <td align="center" valign="top">184</td>    <td valign="top">The West Bengal State Co-operative Bank Ltd.</td>    <td valign="top">033 4004 2721,<br>      033 4000 0386</td>    <td valign="top">infoneft@wbstcb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">185</td>    <td valign="top">THE ZOROASTRIAN COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 022-22696050</td>    <td valign="top">rtgs.zcbl@zcbl.in</td>  </tr>  <tr>    <td align="center" valign="top">186</td>    <td valign="top">THRISSUR DISTRICT COOPERATIVE BANK LTD</td>    <td valign="top">04872329520</td>    <td valign="top">neftrtgs@thrissurdcb.com</td>  </tr>  <tr>    <td align="center" valign="top">187</td>    <td valign="top">TJSB SAHAKARI BANK LTD</td>    <td valign="top">Tel: 022-69978527</td>    <td valign="top">rtgs.tjsb@tjsb.co.in</td>  </tr>  <tr>    <td align="center" valign="top">188</td>    <td valign="top">TUMKUR GRAIN MERCHANTS COOPERATIVE BANK LIMITED</td>    <td valign="top">Tel: 0816-4021102/03, 0816-2257636</td>    <td valign="top">rtgs.tgmb@tgmcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">189</td>    <td valign="top">UCB PERINTHALMANNA</td>    <td valign="top">Tel: 9447077586, 9447326689,<br>    9447404902</td>    <td valign="top">info@ucbpmna.com;<br>      ucbpchiefacct@gmail.com;<br>      ucbpagm@gmal.com</td>  </tr>  <tr>    <td align="center" valign="top">190</td>    <td valign="top">UCO BANK</td>    <td valign="top">Tel: 022-66547342,7343,7344 & 7359</td>    <td valign="top">rtgsneftcell@ucobank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">191</td>    <td valign="top">UJJIVAN SMALL FINANCE BANK</td>    <td valign="top">8118052385</td>    <td valign="top">disputes.neft-rtgs@ujjivan.com/<br>    ujjivan-neft@ujjivan.com</td>  </tr>  <tr>    <td align="center" valign="top">192</td>    <td valign="top">Union Bank Of India</td>    <td valign="top">022-45064193</td>    <td valign="top">neftcell@unionbankofindia.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">193</td>    <td valign="top">UNITED OVERSEAS BANK LIMITED</td>    <td valign="top">022-42472800 / 813 / 814 / 815 / 841.<br>      Mobile: 9867290799</td>    <td valign="top">inmumbaioperations@uobgroup.com</td>  </tr>  <tr>    <td align="center" valign="top">194</td>    <td valign="top">UTKARSH SMALL FINANCE BANK LTD</td>    <td valign="top">Tel: 1800-123-9878</td>    <td valign="top">customercare@utkarsh.bank</td>  </tr>  <tr>    <td align="center" valign="top">195</td>    <td valign="top">VASAI JANATA SAHAKARI BANK</td>    <td valign="top">Tel: 0250 2308898/2308327;<br>      Mobile:7774038963;<br>      8879001410</td>    <td valign="top">s.thakare@vjsbl.com;<br>      dc@vjsbl.com<br>      neft-rtgs@vjsbl.com<br>      martin.sequeira@vjsbl.com</td>  </tr>  <tr>    <td align="center" valign="top">196</td>    <td valign="top">VASAI VIKAS SAHAKARI BANK LIMITED</td>    <td valign="top">Tel: 0250-2326998,<br>      0250-2326984</td>    <td valign="top">rtgs@vasaivikasbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">197</td>    <td valign="top">WOORI BANK</td>    <td valign="top">+91-22-62638105</td>    <td valign="top">rtgs.hvbk@wooribank.com</td>  </tr>  <tr>    <td align="center" valign="top">198</td>    <td valign="top">YES BANK</td>    <td valign="top">Tel: 18001200,<br>      022-50229981</td>    <td valign="top">yestouch@yesbank.in; cfc@yesbank.in</td>  </tr>  <tr>    <td align="center" valign="top">199</td>    <td valign="top">Sant Sopankaka Sahakari Bank Ltd., Saswad</td>    <td valign="top">020-24444001 <br>      020-24444002<br>      91-8888259792<br>      91-9763723710<br>      91-9075010177</td>    <td valign="top">rtgsneft@santsopankakabank.com <br>      edp@santsopankakabank.com<br>      nr_takawale@santsopankakabank.com<br>      sachin_jagtap@santsopankakabank.com<br>      an_shinde@santsopankakabank.com<br>      vikas_jagtap@sopankakabank.com<br>      vv_anande@santsopankakabank.com<br>      dm_sabne@sopankakabank.com</td>  </tr>  <tr>    <td align="center" valign="top">200</td>    <td valign="top">ZILA SAHAKRI BANK LIMITED GHAZIABAD</td>    <td valign="top">Tel: 0120-2824884/85/86, 0120-2823955</td>    <td valign="top">rtgs.zsbl@zsblghaziabad.com</td>  </tr>  <tr>    <td align="center" valign="top">201</td>    <td valign="top">Nav Jeevan co-operative Bank Limited</td>    <td valign="top">0251-2572101</td>    <td valign="top">navjeevanbank@njcb.in;<br>      rtgs@njcb.in;<br>      edp@njcb.in</td>  </tr>  <tr>    <td align="center" valign="top">202</td>    <td valign="top">Vijay Co operative Bank Ltd</td>    <td valign="top">079-26587011<br>      079-26581960<br>      079-26580750</td>    <td valign="top">edp@vijaycooperative.bank.in<br>      agm@vijaycooperative.bank.in<br>      mngbnk@vijaycooperative.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">203</td>    <td valign="top">KERALA STATE CO-OPERATIVE BANK</td>    <td valign="top">0471-2547252, 0471-2547249</td>    <td valign="top">kscb@keralacobank.com;<br>      cobankcad@yahoo.co.in</td>  </tr>  <tr>    <td align="center" valign="top">204</td>    <td valign="top">Nilambur co –operative bank ltd</td>    <td valign="top">Hareesh VS: 9961766976<br>      Rajeev R Nair: 9495762810</td>    <td valign="top">hareeshvs@nilamburcub.com;<br>      rajeevrnair@nilamburcub.com</td>  </tr>  <tr>    <td align="center" valign="top">205</td>    <td valign="top">Rajasthan Gramin Bank</td>    <td valign="top">Preeti Meena: 9116176444<br>    Deepak Kumar Singh: 8003490022</td>    <td valign="top">Preeti Meena: neft_rtgs@rgb.bank.in <br>      Deepak Kumar Singh: NEFT_COAJMER@rgb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">206</td>    <td valign="top">SARASPUR NAGRIK CO OP BANK LTD</td>    <td valign="top">9727845001 / 9714509721/ 9662625065</td>    <td valign="top">info@saraspur.bank.in<br>      neftrtgs@saraspur.bank.in <br>      cts@saraspur.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">207</td>    <td valign="top">MALKAPUR URBAN CO-OP BANK LTD.</td>    <td valign="top">Tel: 9422207012<br>    Rajesh Bapat (Asst. Manager)</td>    <td valign="top">bapatmlk@rediffmail.com</td>  </tr>  <tr>    <td align="center" valign="top">208</td>    <td valign="top">THE AJARA URBAN CO-OP BANK LTD, AJARA</td>    <td valign="top">0231-2991837 <br>      Mr.Nitin Gavas- 8380057812<br>      Mr Anuj Naik:- 7774920861</td>    <td valign="top">rtgs.rbi@ajarabank.com <br>      headit@ajarabank.com</td>  </tr>  <tr>    <td align="center" valign="top">209</td>    <td valign="top">UTTAR PRADESH CO-OPERATIVE BANK LTD</td>    <td valign="top">0522-4151200 Ext-403 <br>      2623806, 2623740, 7525006029, <br>      7525006030</td>    <td valign="top">rtgshelpdesk@upcbl.in <br>      itcell@upcbl.in</td>  </tr>  <tr>    <td align="center" valign="top">210</td>    <td valign="top">MUSLIM COOPERATIVE BANK LTD.</td>    <td valign="top">Tel: 020 – 26435007/<br>      020 - 24475215 / 24473521</td>    <td valign="top">nazimmulla72@gmail.com<br>      0502ruby@gmail.com<br>      ahmed@muslimcooperativebank.com</td>  </tr>  <tr>    <td align="center" valign="top">211</td>    <td valign="top">ODISHA STATE COOPERATIVE BANK LTD.</td>    <td valign="top">Tel: 0674-2375100/2510528</td>    <td valign="top">oscb.cbs2013@gmail.com</td>  </tr>  <tr>    <td align="center" valign="top">212</td>    <td valign="top">The Satara Sahakari Bank Ltd</td>    <td valign="top">8108479999, 022-24124743,<br>      022-24146371</td>    <td valign="top">info@satarabank.net<br>    prashant.harugade@satarabank.net</td>  </tr>  <tr>    <td align="center" valign="top">213</td>    <td valign="top">PUSAD URBAN COOPERATIVE BANK LTD.</td>    <td valign="top">Tel: 0712-2292644, 7888097938</td>    <td valign="top">ho@pucbl.org,<br>      rtgs@pucbl.org,<br>      nagpur@pucbl.org</td>  </tr>  <tr>    <td align="center" valign="top">214</td>    <td valign="top">COASTAL LOCAL AREA BANK LTD</td>    <td valign="top">0866-2494425/26</td>    <td valign="top">rtgs.neft@coastalareabank.com</td>  </tr>  <tr>    <td align="center" valign="top">215</td>    <td valign="top">The Punjab State Cooperative Bank Ltd.</td>    <td valign="top">0172-5067016<br>      Indu Mehta:  94633-86781</td>    <td valign="top">neftrtgs@pscb.in</td>  </tr>  <tr>    <td align="center" valign="top">216</td>    <td valign="top">THE NAWANAGAR CO-OPERATIVE BANK LTD.</td>    <td valign="top">Tel: 0288-2563984/85</td>    <td valign="top">rtgsneftops@nawanagarbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">217</td>    <td valign="top">ARVIND SAHAKARI BANK LTD.</td>    <td valign="top">9890207342, 9860361472,<br>      9860304002, 9422827839</td>    <td valign="top">nilesh.jagnade@arvindbank.com<br>      ravi.harjal@arvindbank.com <br>      yogesh.wankhede@arvindbank.com<br>      rajendra.chavan@arvindbank.com</td>  </tr>  <tr>    <td align="center" valign="top">218</td>    <td valign="top">Sree Charan Souhardha Co-operative Bank Ltd</td>    <td valign="top">080 - 26676837<br>      080 - 26606836<br>      +91 9901453378<br>      +91 9901453385</td>    <td valign="top">manager.accounts@sreecharanbank.com<br>      it.support@sreecharanbank.com<br>      it.head@sreecharanbank.com</td>  </tr>  <tr>    <td align="center" valign="top">219</td>    <td valign="top">Janatha Seva Co-operative Bank Ltd.</td>    <td valign="top">080-29776055, 080-23504924,<br>      080-23110019, 9980846055</td>    <td valign="top">jscbneftcell@jscbl.com<br>      jscbrtgscell@jscbl.com<br>      girishbg@jscbl.com<br>      yogesh.b@jscbl.com<br>      geetha.c@jscbl.com</td>  </tr>  <tr>    <td align="center" valign="top">220</td>    <td valign="top">Bombay Mercantile Co-operative Bank Ltd.</td>    <td valign="top">022-23019825</td>    <td valign="top">cfc@bmcbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">221</td>    <td valign="top">Jila Sahakari Kendriya Bank Maryadit Rajnandgaon</td>    <td valign="top">07744-223620, 07744-220409,<br>      07744-224408</td>    <td valign="top">cbs@jskbrjn.bank.in<br>      account@jskbrjn.bank.in<br>      jskbrajnandgaon@jskbrjn.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">222</td>    <td valign="top">The Banaskantha Mercantile Co-Operative Bank Ltd,</td>    <td valign="top">02742-253849<br>      7573031002</td>    <td valign="top">rtgsdesk@bmcb.bank.in<br>      admin@bmcb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">223</td>    <td valign="top">The Satara District Central Co-Op Bank Ltd.</td>    <td valign="top">02162-236036</td>    <td valign="top">rtgsneft@sataradccb.com</td>  </tr>  <tr>    <td align="center" valign="top">224</td>    <td valign="top">The Malad Sahakari Bank Ltd.</td>    <td valign="top">022-7506444054/55, 022-28838636,<br>      022-28889898</td>    <td valign="top">accounts@maladbank.com<br>      it@maladbank.com</td>  </tr>  <tr>    <td align="center" valign="top">225</td>    <td valign="top">The Akola Urban Co-operative Bank Ltd., Akola</td>    <td valign="top">0724-2453851</td>    <td valign="top">rtgs@aucbakola.com</td>  </tr>  <tr>    <td align="center" valign="top">226</td>    <td valign="top">Smriti Nagrik Sahakari Bank Maryadit, Mandsaur</td>    <td valign="top">07422-405622</td>    <td valign="top">smritibank@smritibank.com</td>  </tr>  <tr>    <td align="center" valign="top">227</td>    <td valign="top">Pavana Sahakari Bank Ltd Pune</td>    <td valign="top">020-67171600 <br>      020-67171601</td>    <td valign="top">neftrtgs@pavanabank.com</td>  </tr>  <tr>    <td align="center" valign="top">228</td>    <td valign="top">Chhattisgarh Rajya Gramin Bank</td>    <td valign="top">0771-4388819</td>    <td valign="top">psg@cgbank.in</td>  </tr>  <tr>    <td align="center" valign="top">229</td>    <td valign="top">The Meghalaya Co-Operative Apex Bank Ltd.</td>    <td valign="top">0364-2224160 <br>      0364-2226169</td>    <td valign="top">headoffice@megcab.com</td>  </tr>  <tr>    <td align="center" valign="top">230</td>    <td valign="top">Shree Kadi Nagarik Sahakari Bank Ltd.</td>    <td valign="top">02764-263500, 9904997770,<br>      8511074025</td>    <td valign="top">it@knsb.in;<br>      info@knsb.in;<br>      support@knsb.in</td>  </tr>  <tr>    <td align="center" valign="top">231</td>    <td valign="top">Saurashtra Gramin Bank</td>    <td valign="top">0281-2482422</td>    <td valign="top">neft-rtgs_support@sgbrrb.org</td>  </tr>  <tr>    <td align="center" valign="top">232</td>    <td valign="top">Unity Small Finance Bank Limited</td>    <td valign="top">022-42159421 / 557</td>    <td valign="top">payments@unitybank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">233</td>    <td valign="top">The Burdwan Central Cooperative Bank Ltd</td>    <td valign="top">8373077670, 8373099601, 8373077636</td>    <td valign="top">rtgs@burdwanccb.bank.in<br>    hofund@burdwanccb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">234</td>    <td valign="top">Guardian Souharda Sahakari Bank Niyamita</td>    <td valign="top">080-25580972 /973/974<br>      080-41239737/41132318</td>    <td valign="top">rtgscell@guardianbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">235</td>    <td valign="top">Saptagiri Grameena Bank</td>    <td valign="top">08572 – 227992</td>    <td valign="top">neftrtgs@sgbank.in</td>  </tr>  <tr>    <td align="center" valign="top">236</td>    <td valign="top">The Co-operative Bank of Rajkot Ltd.</td>    <td valign="top">0281 2234454 / 2224120</td>    <td valign="top">rtgsneft@tcbrl.com</td>  </tr>  <tr>    <td align="center" valign="top">237</td>    <td valign="top">The Adarsh Cooperative Urban Bank Limited</td>    <td valign="top">7416021600 &<br>      040-48681010</td>    <td valign="top">customercare@adarshbank.com</td>  </tr>  <tr>    <td align="center" valign="top">238</td>    <td valign="top">Vikas Souharda Cooperative Bank Ltd</td>    <td valign="top">9620220923<br>      9620220916<br>      9620220924</td>    <td valign="top">payments@vikasbank.com<br>      gavisiddappa@vikasbank.com<br>      ashwini@vikasbank.com</td>  </tr>  <tr>    <td align="center" valign="top">239</td>    <td valign="top">Uttarakhand State Cooperative Bank Ltd.</td>    <td valign="top">8191896039</td>    <td valign="top">rtgs_neft@ukstcbank.com</td>  </tr>  <tr>    <td align="center" valign="top">240</td>    <td valign="top">NongHyup Bank</td>    <td valign="top">0120 – 6982811<br>      0120 – 6982815<br>      0120 – 6982825</td>    <td valign="top">operations@nhbank.co.in<br>      infratech@nhbank.co.in<br>      compliance@nhbank.co.in</td>  </tr>  <tr>    <td align="center" valign="top">241</td>    <td valign="top">Telangana Grameena Bank</td>    <td valign="top">8332988541<br>      8331840810</td>    <td valign="top">neft_rtgs@tgb.bank.in<br>      hod.it@tgb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">242</td>    <td valign="top">The Gayatri Co-Operative Urban Bank Ltd</td>    <td valign="top">9441976677</td>    <td valign="top">cps.neft@gayatribank.in</td>  </tr>  <tr>    <td align="center" valign="top">243</td>    <td valign="top">Pay Point India Network Pvt. Ltd.</td>    <td valign="top">9004030294 <br>      022-4050 8888, <br>      022-4063 3333</td>    <td valign="top">naresh.rathod@paypointindia.net</td>  </tr>  <tr>    <td align="center" valign="top">244</td>    <td valign="top">URBAN CO OPERATIVE BANK LTD. BAREILLY</td>    <td valign="top">98978-66225, 0581-2311340, <br>      91059-66225</td>    <td valign="top">digitalservices@ucblb.bank.in, <br>      gm_ucb@ucblb.bank.in</td>  </tr>  <tr>    <td align="center" valign="top">245</td>    <td valign="top">Bank of China Limited</td>    <td valign="top">022 68246643</td>    <td valign="top">cibd_in@in.bank-of-china.com</td>  </tr>  <tr>    <td align="center" valign="top">246</td>    <td valign="top">Phonepe Limited</td>    <td valign="top">080-68727374</td>    <td valign="top">CPShelpdesk@phonepe.com</td>  </tr></table></td></tr>
+                        </table>
+                        <br />
+                      
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#top" class="scrollToTop" id="backToTop">Top</a>
+<div id="backDiv" style=" text-align:center;" >
+<a href="javascript:history.back()" class="paraheader">Back to previous page</a>
+</div>
+<footer class="footer">
+
+<div class="footer">
+  <div class="container_12">
+
+
+    <!--<div class="grid_9" style="width: 833px !important; ">
+      <h4><span class="blue">More</span> Links :</h4>
+      <div class="grid_2 alpha" style="width:150px !important">
+        <ul class="footerlist">
+          
+          <li><a target="_blank" href="https://www.rbi.org.in/FinancialEducation/">Financial Education</a></li>https://www.rbi.org.in/commonperson/English/Scripts/Home.aspx
+	      <li><a target="_blank" href="https://ncfe.org.in/e-lms">E-LMS</a></li>
+	      <li><a target="_blank" href="https://rbikehtahai.rbi.org.in/">RBI Kehta Hai</a></li>
+          <li><a href="/Scripts/FAQDisplay.aspx">FAQs</a></li>
+         
+          <li><a href="/Scripts/IFSCMICRDetails.aspx">IFSC/MICR Codes</a></li>
+        </ul>
+      </div>
+      <div class="grid_2 omega" style="width:150px !important;">
+        <ul class="footerlist">
+          <li><a href="/Scripts/BS_ViewTenders.aspx">Tenders</a></li>
+          <li><a target="_blank" href="https://opportunities.rbi.org.in/scripts/index.aspx">Opportunities<font>@</font>RBI</a></li>
+          <li><a href="/Scripts/HolidayMatrixDisplay.aspx">Bank Holidays</a></li>
+          <li><a href="/Scripts/BS_ViewForms.aspx">Forms</a></li>
+          <li><a href="https://www.rbi.org.in/scripts/bs_viewcontent.aspx?Id=3894">COVID-19 Measures</a></li>
+            
+        </ul>
+      </div>
+      <div class="grid_2 alpha omega" style="width:254px !important;">
+        <ul class="footerlist">
+          <li><a href="/Scripts/EventsDisplay.aspx">Events</a></li>
+         
+          <li><a href="/Scripts/rbi_clarification.aspx">RBI Clarifications</a></li>
+	  <li><a href="/Scripts/Righttoinfoact.aspx">Right to Information Act</a></li>
+            <li><a href="/Scripts/OtherLinks.aspx">Important Websites</a></li>
+	  <li><a href="https://rbidocs.rbi.org.in/rdocs/content/pdfs/Utkarsh30122022.pdf">RBI's Core Purpose, Values and Vision <img src="../Images/pdf.gif" width="12" height="12" alt="PDF document" border="0" align="absmiddle" style="padding-bottom: 4px;"> 1257 kb</a></li>
+        </ul>
+      </div>
+      <div class="grid_2" style="width:215px !important;">
+        <ul class="footerlist">
+          
+          <li><a href="/Scripts/CitiChart.aspx">Citizen's Charter</a></li>
+          <li><a href="/Scripts/Timlines.aspx">Timelines for Regulatory Approvals</a></li>
+          <li><a href="/Scripts/Complaints.aspx">Complaints</a></li>
+	  <li><a href="https://shabdavali.rbi.org.in/">Banking Glossary</a></li>
+          <li><a href="/Scripts/helpdesk.aspx">Contact Us</a></li>
+	  
+        </ul>
+      </div>
+    </div>-->
+      <div class="grid_9" style="width: 833px !important; ">
+          <!--<h4><span class="blue">More</span> Links :</h4>-->
+          <h2><span class="blue">More</span> Links :</h2>
+          <!--<div class="grid_2 alpha" style="width:170px !important">
+              <ul class="footerlist">
+                  <li><a href="/Scripts/HolidayMatrixDisplay.aspx">Bank Holidays</a></li>
+                  <li><a href="https://shabdavali.rbi.org.in/">Banking Glossary</a></li>
+                  <li><a href="/Scripts/CitiChart.aspx">Citizen's Charter</a></li>
+                  <li><a href="/Scripts/Complaints.aspx">Complaints</a></li>
+                  <li><a href="/Scripts/helpdesk.aspx">Contact Us</a></li>
+              </ul>
+          </div>
+          <div class="grid_2 omega" style="width:180px !important;">
+              <ul class="footerlist">
+                  <li><a href="https://www.rbi.org.in/scripts/bs_viewcontent.aspx?Id=3894">COVID-19 Measures</a></li>
+                  <li><a target="_blank" href="https://ncfe.org.in/e-lms">E-LMS</a></li>
+                  <li><a href="/Scripts/EventsDisplay.aspx">Events</a></li>
+                  <li><a href="/Scripts/FAQDisplay.aspx">FAQs</a></li>
+                  <li><a target="_blank" href="https://www.rbi.org.in/FinancialEducation/">Financial Education</a></li>
+          </div>
+          <div class="grid_2 alpha omega" style="width:180px !important;">
+              <ul class="footerlist">
+                  <li><a href="/Scripts/BS_ViewForms.aspx">Forms</a></li>
+                  <li><a href="/Scripts/IFSCMICRDetails.aspx">IFSC/MICR Codes</a></li>
+                  <li><a href="/Scripts/OtherLinks.aspx">Important Websites</a></li>
+                  <li><a target="_blank" href="https://opportunities.rbi.org.in/scripts/index.aspx">Opportunities<span>@</span>RBI</a></li>
+                  <li><a href="/Scripts/rbi_clarification.aspx">RBI Clarifications</a></li>
+              </ul>
+          </div>
+          <div class="grid_2" style="width:254px !important;">
+              <ul class="footerlist">
+
+                  <li><a target="_blank" href="https://rbikehtahai.rbi.org.in/">RBI Kehta Hai</a></li>
+                  <li><a href="https://rbidocs.rbi.org.in/rdocs/content/pdfs/Utkarsh30122022.pdf">RBI's Core Purpose, Values and Vision <img src="../Images/pdf.gif" width="12" height="12" alt="PDF document" border="0" align="absmiddle" style="padding-bottom: 4px;"> 1257 kb</a></li>
+                  <li><a href="/Scripts/Righttoinfoact.aspx">Right to Information Act</a></li>
+                  <li><a href="/Scripts/BS_ViewTenders.aspx">Tenders</a></li>
+                  <li><a href="/Scripts/Timlines.aspx">Timelines for Regulatory Approvals</a></li>
+              </ul>
+          </div>-->
+		<ul class="footerlist" style="column-count:4">
+                  <li ><a href="/Scripts/HolidayMatrixDisplay.aspx">Bank Holidays</a></li>
+                  <li ><a href="https://shabdavali.rbi.org.in/">Banking Glossary</a></li>
+                  <li ><a href="/Scripts/CitiChart.aspx">Citizen's Charter</a></li>
+                  <li ><a href="/Scripts/Complaints.aspx">Complaints</a></li>
+                  <li ><a href="/Scripts/helpdesk.aspx">Contact Us</a></li>
+  		<li ><a href="https://www.rbi.org.in/scripts/bs_viewcontent.aspx?Id=3894">COVID-19 Measures</a></li>
+                  <li ><a target="_blank" href="https://ncfe.org.in/e-lms">E-LMS</a></li>
+                  <li ><a href="/Scripts/EventsDisplay.aspx">Events</a></li>
+                  <li ><a href="/Scripts/FAQDisplay.aspx">FAQs</a></li>
+                  <li ><a target="_blank" href="https://www.rbi.org.in/FinancialEducation/">Financial Education</a></li>
+		<li ><a href="/Scripts/BS_ViewForms.aspx">Forms</a></li>
+                  <li ><a href="/Scripts/IFSCMICRDetails.aspx">IFSC/MICR Codes</a></li>
+                  <li><a href="/Scripts/OtherLinks.aspx">Important Websites</a></li>
+                  <li><a target="_blank" href="https://opportunities.rbi.org.in/scripts/index.aspx">Opportunities<span>@</span>RBI</a></li>
+                  <li><a href="/Scripts/rbi_clarification.aspx">RBI Clarifications</a></li>
+ 		<li><a target="_blank" href="https://rbikehtahai.rbi.org.in/">RBI Kehta Hai</a></li>
+                  <li><a href="https://rbidocs.rbi.org.in/rdocs/content/pdfs/Utkarsh202910042026.pdf">RBI’s Vision and Values <!--<img src="../Images/pdf.gif" width="12" height="12" alt="PDF document" border="0" align="absmiddle" style="padding-bottom: 4px;"> (1257 kb)--></a></li>
+                  <li><a href="/Scripts/Righttoinfoact.aspx">Right to Information Act</a></li>
+                  <li><a href="/Scripts/BS_ViewTenders.aspx">Tenders</a></li>
+                  <!--<li><a href="/Scripts/Timlines.aspx">Timelines for Regulatory Approvals</a></li>--><!--https://www.rbi.org.in/commonperson/English/Scripts/Home.aspx-->
+              </ul>
+      </div>
+
+    <div class="grid_3" style="width:197px !important">
+      <!--<h4><span class="blue">Follow</span> RBI </h4>-->
+        <h2><span class="blue">Follow</span> RBI</h2>
+      <ul class="footerlist">
+        <!--<li><a href="/Scripts/rss.aspx"><img src="/images/rss-icon.png" alt="Subscribe to RSS" class="rss"/>RSS</a></li>-->
+
+          <li style="float: left;background: url(/images/footer_list_arrow.gif) left 8px no-repeat;"><a href="/Scripts/rss.aspx"><img src="/images/rss-icon.png" alt="" class="rss">RSS</a></li>
+
+        <!--<li><a href="https://twitter.com/RBI" target="_blank" class="twitter"><img src="/images/Twitter_New.png" width="14px" height="14px" alt="Follow RBI on Twitter" class="videos" />Twitter</a></li>-->
+          <li>
+              <a href="https://twitter.com/RBI" target="_blank" class="twitter">
+                  <img src="/images/Twitter_New.png" width="14px" height="14px" alt="" class="videos" style="padding-left: 18%;">Twitter
+              </a>
+          </li>
+
+        <!--<li><a href="https://www.youtube.com/channel/UCIfCOl43tunZVNYafeC4RQA" class="videos" target="_blank"><img src="/images/videos-icon.png" alt="Check RBI Videos" class="videos"/>Videos</a></li>-->
+
+          <li style="float: left;"><a href="https://www.youtube.com/channel/UCIfCOl43tunZVNYafeC4RQA" class="videos" target="_blank"><img src="/images/youtube.png" alt="" class="videos">YouTube</a></li>
+
+          <li>
+              <a href="https://instagram.com/reservebankofindia" class="videos" target="_blank">
+                  <img src="/images/Instagram.jpg" width="14px" height="14px" alt="" class="videos" style="padding-left: 5%;">Instagram
+              </a>
+          </li>
+          <li style="float: left;"><a href="https://www.facebook.com/RBIsays" class="videos" target="_blank"><img src="/images/Facebook.jpg" width="14px" height="14px" alt="" class="videos">Facebook</a></li>
+          <li>
+              <a href="https://www.linkedin.com/company/reservebankofindia" class="videos" target="_blank">
+                  <img src="/images/LinkedinIcon1.png" alt="" class="" style="padding-left: 4%;width: 17px;background: bottom no-repeat;display: block;float: left;margin: 2px 3px 0 1px;">LinkedIn
+              </a>
+          </li>
+	<li>
+   	 Download Mobile App<br> 
+   	 <a href="https://play.google.com/store/apps/details?id=com.reservebankofindia&pli=1" target="_blank"><img src="/images/Android.png" alt="" class="rss" style="width:17px" >Play Store</a><br>
+	<a href="https://apps.apple.com/us/app/reserve-bank-of-india/id1154394549?ls=1" target="_blank"><img src="/images/IOS.png" alt="" class="rss" style="width:18px;height:17px">App Store</a>
+	</li>
+
+      </ul>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="copyright">
+    <div class="container_12">
+     <div class="grid_6 pull_left">&copy; Reserve Bank of India. All Rights Reserved. </div>
+        <div class="grid_5 pull_right"><a href="/Scripts/sitemap.aspx">Sitemap</a> <span aria-hidden="true">|</span> <a href="/Scripts/Disclaimer.aspx">Disclaimer</a></div>
+        <div class="clearfix"></div>
+
+        <div class="grid_6 pull_left">Website owned and managed by Reserve Bank of India. Contact us on helpdoc[at]rbi[dot]org[dot]in</div>
+        <div class="grid_5 pull_right">Website last updated date: Apr 13, 2026</div>
+        <div class="clearfix"></div>
+        <div class="grid_6 pull_left">Supports: Google Chrome 125+ | Firefox 126+ | Microsoft Edge Version 125+ | Safari 17+</div>
+        <div class="grid_5 pull_right"><a href="https://rbidocs.rbi.org.in/rdocs/content/pdfs/Accessibility20012026.pdf">Accessibility Statement</a><span aria-hidden="true"> |</span><a href="/scripts/ScreenReader.aspx" title="Information related to screen reader">Screen Reader</a></div>
+        <div class="clearfix"></div>
+    </div>
+  </div>
+  
+
+<!--Welcome note-->
+
+ <!-- <div id="boxesWN">
+  <div id="dialogWN" class="window" style="top:100px;">
+  <div> <img width="60" height="60" src="/images/Rbinote.jpeg" alt="Rbi note" /> </div>
+   <table class="WelcomeNote" >
+   <tr>
+   <td style="float:right;">
+
+   April 14, 2015
+   </td>
+   </tr>
+    <tr>
+  
+    <td >
+    
+   Dear All
+    </td>
+    </tr>
+     <tr>
+     <td >
+     
+  Welcome to the refurbished site of the Reserve Bank of India. 
+    </td>
+   
+    </tr>
+    <tr>
+    <td >
+    
+  The two most important features of the site are: One, in addition to the default site, the refurbished site also has all the information bifurcated functionwise; two, a much improved search – well, at least we think so but you be the judge. 
+    </td>
+   
+    </tr>
+
+      <tr>
+    <td>
+   With this makeover, we also take a small step into social media. We will now use Twitter (albeit one way) to send out alerts on the announcements we make and YouTube to place in public domain our press conferences, interviews of our top management, events, such as, town halls and of course, some films aimed at consumer literacy.  
+    </td>
+   
+    </tr>
+    <tr>
+    <td>
+    The site can be accessed through most browsers and devices; it also meets accessibility standards. 
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Please save the url of the refurbished site in your favourites as we will give up the existing site shortly and register or re-register yourselves for receiving RSS feeds for uninterrupted alerts from the Reserve Bank. 
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Do feel free to give us your feedback by clicking on the feedback button on the right hand corner of the refurbished site. 
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Thank you for your continued support.<br /><br />
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>
+    Department of Communication <br />
+Reserve Bank of India</strong>
+
+    </td>
+    </tr>
+	<tr><td id="popupfootWN"><a href="#" class="close agree" style="float:right" >Next</a></td></tr>
+    </table>-->
+   <!-- <div id="popupfootWN"> <a href="#" class="close agree" style="float:right" >Next</a>    </div>--><!--<img src="../images/button_close.gif" alt="Close" class="close agree" />-->
+ <!-- </div>
+  <div id="maskWN" style="width:100% !important"></div>-->
+
+<!--<div id="feedbackbtn"><a href="#"><div align="center" class="feedbacktext">Feedback</div></a></div>-->
+
+</div>
+</div>
+</footer>
+<!--<script type="text/javascript" src="/js/URLchange.js"></script>-->
+<!-- For live comment out below line.-->
+
+<script src="/js/ReplaceURL.js" type="text/javascript"></script>
+<script src="/js/jquery.cookie.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+
+
+    //this is for floating TOP link
+    
+    $(document).ready(function () {
+
+        var offset = 230;
+        var duration = 500;
+
+
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > offset) {
+                jQuery('.scrollToTop').fadeIn(duration);
+                // $('#backToTop').css('right', (diffWidth / 2) - 6);
+            } else {
+                jQuery('.scrollToTop').fadeOut(duration);
+                //  $('#backToTop').css('right', (diffWidth / 2) - 6);
+            }
+        });
+
+        //        $('a[href*=#]:not([href=#])').click(function () {
+
+        //            if (location.pathname.replace(/^\//, '') == window.location.pathname.replace(/^\//, '') && location.hostname == window.location.hostname) {
+
+        //                var target = $(this.hash);
+        //                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        //                if (target.length) {
+        //                    $('html,body').animate({
+        //                        scrollTop: target.offset().top
+        //                    }, 800);
+        //                    return false;
+        //                }
+        //            }
+        //        });
+	$('.page_title').attr('tabindex','-1');//for IAAP point 5 by ni
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+		$('.page_title').focus(); //for IAAP point 5 by ni
+            return false;
+        });
+	
+//Added by ni
+
+	if(!window.location.href.includes("Home.aspx") && !window.location.href.includes("home.aspx"))
+{ 
+if( window.location.href.includes(".aspx")){
+var div= document.getElementById('backDiv');
+	div.removeAttribute("hidden");}
+else{
+var div1= document.getElementById('backDiv');
+	div1.setAttribute("hidden","true");}
+}
+else{
+
+
+	var div1= document.getElementById('backDiv');
+	div1.setAttribute("hidden","true");}
+    });
+
+
+    //Below code is for floating left panel and floating tree structure
+    //first if condition is for functionwise pages and 2nd one for rest all
+    $(window).scroll(function () {
+
+        if ($('div.banner2').length) {
+
+            if ($(window).scrollTop() >= 265) {
+                $('#menubar').css("position", "fixed");
+                $('#menubar').css("width", "240px");
+                $('#menubar').css("margin-top", "-281px");
+                $('.content_area').css("margin-left", "252px");
+
+                $('.sidebar_nav').css("position", "fixed");
+                $('.sidebar_nav').css("margin-top", "-200px");
+                $('.sidebar_nav').css("width", "236px");
+
+
+              //  $('#DateSettree_lbltree').css('position', 'fixed');
+              //  $('#DateSettree_lbltree').css('margin-top', '-281px');
+
+            }
+
+            else {
+                $('#menubar').css("position", "");
+                $('#menubar').css("width", "");
+                $('#menubar').css("margin-top", "");
+                $('.content_area').css("margin-left", "");
+
+                $('.sidebar_nav').css("position", "");
+                $('.sidebar_nav').css("margin-top", "");
+                $('.sidebar_nav').css("width", "");
+
+
+
+          //      $('#DateSettree_lbltree').css('position', '');
+          //      $('#DateSettree_lbltree').css('margin-top', '');
+            }
+
+        }
+
+        else if ($(window).scrollTop() >= 185) {
+            $('#menubar').css("position", "fixed");
+            $('#menubar').css("width", "240px");
+            $('#menubar').css("margin-top", "-200px");
+            $('.content_area').css("margin-left", "252px");
+
+            $('.sidebar_nav').css("position", "fixed");
+            $('.sidebar_nav').css("margin-top", "-200px");
+            $('.sidebar_nav').css("width", "236px");
+
+
+          //  $('#DateSettree_lbltree').css('position', 'fixed');
+          //  $('#DateSettree_lbltree').css('margin-top', '-200px');
+
+        }
+
+        else {
+            $('#menubar').css("position", "");
+            $('#menubar').css("width", "");
+            $('#menubar').css("margin-top", "");
+            $('.content_area').css("margin-left", "");
+
+            $('.sidebar_nav').css("position", "");
+            $('.sidebar_nav').css("margin-top", "");
+            $('.sidebar_nav').css("width", "");
+
+
+        //    $('#DateSettree_lbltree').css('position', '');
+        //    $('#DateSettree_lbltree').css('margin-top', '');
+        }
+//        if ($(window).scrollTop() >= 235) {
+
+//            $('#DateSettree_lbltree').css('height', '183px');
+//            $('#DateSettree_lbltree').css('overflow-y', 'scroll');
+//            $('#DateSettree_lbltree').css('width', '100px');
+
+//        }
+//        else {
+//            $('#DateSettree_lbltree').css('height', '');
+//            $('#DateSettree_lbltree').css('overflow-y', '');
+//            $('#DateSettree_lbltree').css('width', '');
+
+//        }
+
+       
+    });
+	
+       // $(window).unload(function () {
+       //     $.cookies.del('feedback_Cookie'); 
+       // });
+    $(document).ready(function () {
+	
+	
+		  $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('#maskWN').hide();
+            $('.window').hide();
+            var scroll = $(window).scrollTop();
+            $("html").scrollTop(scroll);
+        });
+		
+		 $('#maskWN').click(function () {
+            $(this).hide();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('.window').hide();
+
+        });
+
+        //        if ($.cookie('feedback_Cookie') == null) {
+        //            var id = '#dialog';
+
+        //            //Get the screen height and width
+        //            var maskHeight = $(document).height();
+        //            var maskWidth = $(window).width();
+        //           
+
+        //            //Set heigth and width to mask to fill up the whole screen
+        //            $('#mask').css({ 'width': '100%', 'height': '100%','position':'fixed' });
+
+        //            //transition effect
+        //            $('#mask').fadeIn(500);
+        //            $('#mask').fadeTo("slow", 0.9);
+
+        //            //Get the window height and width
+        //            var winH = $(window).height();
+        //            var winW = $(window).width();
+
+        //            //Set the popup window to center
+        //            $(id).css('top', winH / 2 - $(id).height() / 2);
+        //            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //            //transition effect
+        //            $(id).fadeIn(2000);
+
+
+
+        //        }
+//        $('blockquote p').css('margin','auto');
+//        $('blockquote blockquote blockquote p').contents().contents().unwrap();
+//        $('blockquote blockquote blockquote').contents().unwrap();
+//        $('blockquote blockquote').contents().unwrap();
+//        $('blockquote').contents().unwrap();
+        
+
+        //if close button is clicked
+        $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('#mask').hide();
+            $('.window').hide();
+            var scroll = $(window).scrollTop();
+            $("html").scrollTop(scroll);
+        });
+
+        //if mask is clicked
+        $('#mask').click(function () {
+            $(this).hide();
+            $('.window').hide();
+        });
+        $('#feedbackbtn').click(function () {
+            var id = '#dialog';
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            //$('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+            $('#mask').css({ 'width': '100%', 'height': '100%', 'position': 'fixed' });
+
+            //transition effect
+            $('#mask').fadeIn(500);
+            $('#mask').fadeTo("slow", 0.9);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+        });
+
+        $('.submit').click(function () {
+            var Name = $("[id*=txtFeedbackName]").val();
+            var Email = $("[id*=txtFeedbackEmail]").val();
+            var Comments = $("[id*=txtFeedbackComments]").val();
+            if (Name == "") {
+
+                alert("Please enter your name");
+                $("[id*=txtFeedbackName]").focus();
+                return false;
+            }
+            else if (Email == "") {
+                alert("Please enter your email");
+                $("[id*=txtFeedbackEmail]").focus();
+                return false;
+            }
+            else if (Email != "" && !ValidateEmail(Email)) {
+                alert("Please enter a valid email address");
+                $("[id*=txtFeedbackEmail]").focus();
+                return false;
+            }
+
+            else if (Comments == "") {
+
+                alert("Please enter some comments");
+                $("[id*=txtFeedbackComments]").focus();
+                return false;
+            }
+
+            else {
+                $('[id*=Button1]').attr('disabled', 'disabled');
+
+                var param = { Name: Name, EmailID: Email, Comments: Comments };
+                $.ajax({
+                    type: "POST",
+                    url: "../Home.aspx/SaveFeedback",
+                    data: JSON.stringify(param),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+
+                    success: function (response) {
+
+                        if (response.d == "0") {
+                            alert("Thank you for your feedback");
+                            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+                            $('#mask').hide();
+                            $('.window').hide();
+                            $('[id*=Button1]').removeAttr('disabled');
+                            $("[id*=txtFeedbackName]").val("");
+                            $("[id*=txtFeedbackEmail]").val("");
+                            $("[id*=txtFeedbackComments]").val("");
+                        }
+                        else {
+                            alert("Please try again");
+                            $('[id*=Button1]').removeAttr('disabled');
+
+
+                        }
+
+                    }
+                });
+            }
+
+        });
+
+        function ValidateEmail(email) {
+            var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            return expr.test(email);
+        };
+
+        //        $('#divArchiveMain').click(function () {
+        //            
+        //            if ($(window).scrollTop() >= 235) {
+
+        //                $('#DateSettree_lbltree').css('height', '181px');
+        //                $('#DateSettree_lbltree').css('overflow-y', 'scroll');
+        //                $('#DateSettree_lbltree').css('width', '100px');
+
+        //            }
+        //            else {
+        //                $('#DateSettree_lbltree').css('height', '');
+        //                $('#DateSettree_lbltree').css('overflow-y', '');
+        //                $('#DateSettree_lbltree').css('width', '');
+
+        //            }
+        //        });
+
+        $('a.style1').each(function () {
+
+            var $this = $(this);
+            var aHref = $this.attr('class');
+            $this.attr('class', aHref.replace('style1', 'links'));
+        });
+
+		
+   });
+
+//added by ni
+  function isExternal(url) {
+       if(url=='#' || url=='javascript:void(0);' || url.includes('javascript')||url=='' )
+	{ return false;} 
+	else
+    	return (url.indexOf("rbi.org.in")==-1)
+    }
+    document.addEventListener("click", function () {
+	
+        if (event.target.tagName.toLowerCase() === "a") {
+            if (isExternal(event.target.href)) {
+
+                if (confirm("You are being redirected to an external website that opens in a new tab. Please note that Reserve Bank of India will not be held responsible for external websites content in any manner.")) {
+
+                    return;
+                }
+
+                else {
+                   
+                    event.preventDefault();
+                    return;
+                }
+            }
+        }
+	else if (event.target.tagName.toLowerCase() === "img") {
+		$(event.target).preventDefault;		
+		if($(event.target).parent('a').length){
+			 if (isExternal($(event.target).parent('a').prop('href'))) {
+                		if (confirm("You are being redirected to an external website that opens in a new tab. Please note that Reserve Bank of India will not be held responsible for external websites content in any manner.")) {
+                    		return;
+               		 }
+
+                	else {                   
+                    		event.preventDefault();
+                    		return;
+                	}
+		}
+	}}
+    });
+
+
+</script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61369961-1', 'auto');
+  ga('send', 'pageview');
+
+$('.tablebg').attr('role','presentation');
+$('.brd-ptable1').attr('role','presentation');
+$('html').attr('lang', 'en');
+
+$('#doublescroll').children('table').filter(':first').attr("role", "presentation");
+$('.page_title').nextAll('table').first().attr("role", "presentation");
+
+//document.getElementsByClassName('tableheader');
+//$(window).on('load',function(){
+document.addEventListener('DOMContentLoaded', function(){
+$('.tableheader b').each(function () {
+		var curEle= $(this);
+           $(curEle).replaceWith("<h2 class='dop_header'>"+$(curEle).html()+"</h2>")
+        });
+ });
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+setLetterSpace(false);//]]>
+</script>
+</form>
+</body>
+</html>
+<script type="text/javascript" src="/js/plugins.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+<script type="text/javascript" src="/js/Scroll.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('img').each(function(key, val){
+         $(val).attr('src', $(val).attr('src').replace("http://", "https://"));
+    });
+
+	var urls=window.location.href;
+	var link1="https://rbi.org.in/Scripts/BS_ViewContent.aspx?Id=309";
+	var link2="https://www.rbi.org.in/Scripts/BS_ViewContent.aspx?Id=309";
+	urls=urls.toLowerCase();
+	link1=link1.toLowerCase();
+	link2=link2.toLowerCase();
+	if (urls==link1 || urls==link2)
+	{
+		window.location.href="https://rbi.org.in/Scripts/category.aspx";
+	}
+
+	var date = new Date();
+
+	if (date.getDate() === 16) {
+	    if (date.getDate() <= 16 && date.getHours() <= 18 && date.getMinutes() <= 5) {
+	        document.getElementById("CurT").style.display = 'block';
+	        document.getElementById("currentdata").style.display = 'block';
+	        document.getElementById("FUTT").style.display = 'none';
+	        document.getElementById("futuredata").style.display = 'none';
+
+	    }
+	    if (date.getDate() >= 16 && date.getHours() >= 17 && date.getMinutes() >= 5) {
+	        document.getElementById("CurT").style.display = 'none';
+	        document.getElementById("currentdata").style.display = 'none';
+	        document.getElementById("FUTT").style.display = 'block';
+	        document.getElementById("futuredata").style.display = 'block';
+	    }
+	}
+	else {
+	    document.getElementById("CurT").style.display = 'block';
+	    document.getElementById("currentdata").style.display = 'block';
+	    document.getElementById("FUTT").style.display = 'none';
+	    document.getElementById("futuredata").style.display = 'none';
+	}
+});
+</script>

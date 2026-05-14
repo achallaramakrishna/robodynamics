@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" viewBox="0 0 460 150">
+  <rect width="460" height="150" rx="24" fill="#E7FBF5"/>
+  <path d="M44 74 H378" stroke="#34B27B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M364 60 L392 74 L364 88" fill="none" stroke="#34B27B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="230" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#1F2440">normalize each band</text>
+  <text x="230" y="118" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">send extra tens to the next answer slot</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="220" viewBox="0 0 360 220">
+  <rect width="360" height="220" rx="24" fill="#EAF2FF"/>
+  <path d="M68 48 L292 172" stroke="#3B3A8C" stroke-width="7" stroke-linecap="round"/>
+  <path d="M180 48 L180 172" stroke="#E2B93B" stroke-width="7" stroke-linecap="round"/>
+  <path d="M292 48 L68 172" stroke="#E91E8C" stroke-width="7" stroke-linecap="round"/>
+  <text x="180" y="202" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">outer cross, center straight, reverse cross</text>
+</svg>

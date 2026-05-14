@@ -1,0 +1,29 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Shape -->
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FFF7ED"/>
+  
+  <!-- Main Letter Group -->
+  <g id="letter_a">
+    <text x="200" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">अ</text>
+  </g>
+  
+  <!-- Object Illustration (Anar) -->
+  <g id="object_anar">
+    <!-- Pomegranate Body -->
+    <circle cx="700" cy="550" r="180" fill="#EF4444"/>
+    <path d="M700 370L680 340H720L700 370Z" fill="#EF4444"/> <!-- Crown -->
+    
+    <!-- Cut-out section to show seeds -->
+    <path d="M700 550C700 550 780 450 820 550C860 650 700 730 700 730V550Z" fill="#B91C1C" fill-opacity="0.2"/>
+    
+    <!-- Seeds -->
+    <circle cx="740" cy="580" r="12" fill="#F87171"/>
+    <circle cx="770" cy="540" r="10" fill="#F87171"/>
+    <circle cx="740" cy="520" r="14" fill="#F87171"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">अ से अनार</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">A for Anar (Pomegranate)</text>
+
+</svg>

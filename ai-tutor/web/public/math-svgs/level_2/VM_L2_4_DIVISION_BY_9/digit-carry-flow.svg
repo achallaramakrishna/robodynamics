@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="140" viewBox="0 0 400 140">
+  <rect width="400" height="140" rx="24" fill="#E7FBF5"/>
+  <path d="M46 70 H324" stroke="#34B27B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M310 56 L338 70 L310 84" fill="none" stroke="#34B27B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="56" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#1F2440">bring the previous total forward</text>
+</svg>

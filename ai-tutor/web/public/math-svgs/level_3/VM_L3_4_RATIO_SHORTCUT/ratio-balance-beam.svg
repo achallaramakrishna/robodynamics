@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#FBFCFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#8B5CF6"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Equivalent ratios stay balanced</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">If both parts scale by the same factor, the ratio does not change.</text>
+
+  <line x1="168" y1="214" x2="632" y2="214" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <path d="M380 214 L420 214 L400 270 Z" fill="#64748B"/>
+  <rect x="176" y="150" width="126" height="46" rx="14" fill="#EEF2FF" stroke="#C7D2FE"/>
+  <rect x="176" y="234" width="126" height="46" rx="14" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <rect x="498" y="150" width="126" height="46" rx="14" fill="#EEF2FF" stroke="#C7D2FE"/>
+  <rect x="498" y="234" width="126" height="46" rx="14" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="239" y="180" fill="#3730A3" font-size="26" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">3</text>
+  <text x="239" y="264" fill="#6D28D9" font-size="26" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">4</text>
+  <text x="561" y="180" fill="#3730A3" font-size="26" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">6</text>
+  <text x="561" y="264" fill="#6D28D9" font-size="26" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">8</text>
+  <text x="400" y="176" fill="#334155" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">×2</text>
+  <text x="400" y="264" fill="#334155" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">×2</text>
+  <rect x="136" y="316" width="528" height="34" rx="10" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <text x="400" y="338" fill="#5B21B6" font-size="17" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">3 : 4 = 6 : 8 because both sides were scaled equally.</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+
+  <text x="40" y="46" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">
+    Identity Pattern Recognition
+  </text>
+  <text x="40" y="76" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">
+    Example path: spot the shape before expanding
+  </text>
+
+  <rect x="40" y="108" width="220" height="220" rx="18" fill="#111827" stroke="#94A3B8" stroke-width="2" />
+  <text x="60" y="146" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Start</text>
+  <text x="60" y="196" fill="#F8FAFC" font-size="34" font-weight="800" font-family="Verdana, sans-serif">(x + 3)²</text>
+  <text x="60" y="246" fill="#CBD5E1" font-size="20" font-weight="700" font-family="Verdana, sans-serif">This is a square of a sum.</text>
+
+  <rect x="292" y="108" width="220" height="220" rx="18" fill="#172554" stroke="#60A5FA" stroke-width="2" />
+  <text x="312" y="146" fill="#DBEAFE" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Choose identity</text>
+  <text x="312" y="196" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Verdana, sans-serif">(a + b)²</text>
+  <text x="312" y="230" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">= a² + 2ab + b²</text>
+  <text x="312" y="274" fill="#93C5FD" font-size="20" font-weight="800" font-family="Verdana, sans-serif">Set a = x, b = 3</text>
+
+  <rect x="544" y="108" width="216" height="220" rx="18" fill="#0F3D2E" stroke="#34D399" stroke-width="2" />
+  <text x="564" y="146" fill="#D1FAE5" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Write answer</text>
+  <text x="564" y="196" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">x² + 2·x·3 + 3²</text>
+  <text x="564" y="240" fill="#86EFAC" font-size="30" font-weight="900" font-family="Verdana, sans-serif">x² + 6x + 9</text>
+
+  <line x1="260" y1="220" x2="292" y2="220" stroke="#FDE68A" stroke-width="5" />
+  <polygon points="292,220 280,212 280,228" fill="#FDE68A" />
+  <line x1="512" y1="220" x2="544" y2="220" stroke="#FDE68A" stroke-width="5" />
+  <polygon points="544,220 532,212 532,228" fill="#FDE68A" />
+</svg>

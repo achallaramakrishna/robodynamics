@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .panel-bg { fill: #1e293b; rx: 16px; stroke: #334155; stroke-width: 2; }
+      .text-light { fill: #f8fafc; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+      .text-blue { fill: #3b82f6; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+      .text-green { fill: #22c55e; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+      .text-purple { fill: #a855f7; font-family: system-ui, sans-serif; font-weight: bold; font-size: 40px; }
+      .text-gold { fill: #eab308; font-family: system-ui, sans-serif; font-weight: bold; font-size: 48px; }
+      .text-label { fill: #94a3b8; font-family: system-ui, sans-serif; font-size: 20px; font-weight: 500; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="800" height="300" class="bg" rx="16"/>
+
+  <!-- Top row: Original problem -->
+  <text x="400" y="60" class="text-label" text-anchor="middle">Problem: 97 + 8</text>
+  
+  <rect x="50" y="90" width="700" height="120" class="panel-bg"/>
+
+  <!-- Left: 97 + 3 (Base 100) -->
+  <text x="180" y="165" class="text-blue" text-anchor="end">97</text>
+  <text x="210" y="165" class="text-light" text-anchor="middle">+</text>
+  <text x="240" y="165" class="text-green" text-anchor="start">3</text>
+  <path d="M 170 180 Q 210 210 250 180" class="arrow"/>
+  <text x="210" y="235" class="text-light" text-anchor="middle">100</text>
+
+  <!-- Middle: Plus -->
+  <text x="400" y="210" class="text-light" text-anchor="middle">+</text>
+
+  <!-- Leftover: 5 -->
+  <text x="590" y="165" class="text-purple" text-anchor="middle">5</text>
+  <path d="M 590 180 L 590 200" class="arrow"/>
+  <text x="590" y="235" class="text-purple" text-anchor="middle">5</text>
+
+  <!-- Final Answer Arrow -->
+  <path d="M 230 250 L 570 250 L 400 270 Z" fill="#334155" opacity="0.5"/>
+  <text x="400" y="285" class="text-gold" text-anchor="middle">105</text>
+
+  <!-- Explanatory top text for split -->
+  <text x="400" y="120" class="text-label" text-anchor="middle">Split 8 into 3 + 5</text>
+  <path d="M 400 130 C 350 130 280 140 250 140" class="arrow" marker-end="url(#arrowhead)"/>
+  <path d="M 400 130 C 450 130 520 140 570 140" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+    </marker>
+  </defs>
+
+</svg>

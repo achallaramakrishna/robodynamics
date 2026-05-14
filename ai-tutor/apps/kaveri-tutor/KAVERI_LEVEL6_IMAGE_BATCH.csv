@@ -1,0 +1,43 @@
+image_id,kannada_word,english_concept,image_prompt,level,chapter
+kaveri_l6_c01_l01_common_nouns,ಸಾಮಾನ್ಯ ನಾಮಪದ,Common Nouns,Variety of everyday objects including house book dog flower butterfly - colorful children's book illustration style natural colors,6,1
+kaveri_l6_c01_l02_proper_nouns,ವ್ಯಕ್ತಿನಾಮ,Proper Nouns,Name tags and labels showing Raj Bangalore India with Kannada script - colorful tag style location markers,6,1
+kaveri_l6_c01_l03_masculine_nouns,ಪುಲ್ಲಿಂಗ ನಾಮಪದ,Masculine Nouns,Father figure boy and lion with clearly masculine features - warm earth tones brown gold colors,6,1
+kaveri_l6_c01_l04_feminine_nouns,ಸ್ತ್ರೀಲಿಂಗ ನಾಮಪದ,Feminine Nouns,Mother figure girl and lioness with feminine features bright colors pink purple red,6,1
+kaveri_l6_c01_l05_neuter_nouns,ನೋಂದಿ ಲಿಂಗ ನಾಮಪದ,Neuter Nouns,Objects table chair pencil pot bottle in classroom setting - neutral colors gray blue,6,1
+kaveri_l6_c01_l06_singular_nouns,ಏಕವಚನ ನಾಮಪದ,Singular Nouns,One apple one book one house each isolated with number 1 - simple clean design,6,1
+kaveri_l6_c01_l07_plural_nouns,ಬಹುವಚನ ನಾಮಪದ,Plural Nouns,Many apples many books group of children playing together - abundance multiple items,6,1
+kaveri_l6_c01_l08_nominative_case,ಕರ್ತೃಪದ,Nominative Case,Subject doing action - boy actively reading book sitting with focused expression happy,6,1
+kaveri_l6_c01_l09_accusative_case,ಕರ್ಮಪದ,Accusative Case,Object receiving action - book being read by child close-up of book in focus,6,1
+kaveri_l6_c02_l01_basic_adjectives,ವಿಶೇಷಣ,Basic Adjectives,New book big dog red ball small flower - showing adjectives with objects together,6,2
+kaveri_l6_c02_l02_quality_adjectives,ಗುಣವಾಚಕ ವಿಶೇಷಣ,Quality Adjectives,Good happy smiling face vs bad sad frowning face beautiful flower vs ugly withered flower,6,2
+kaveri_l6_c02_l03_quantity_adjectives,ಪರಿಮಾಣವಾಚಕ ವಿಶೇಷಣ,Quantity Adjectives,Some apples on plate many stars in sky all children in group - showing different quantities,6,2
+kaveri_l6_c02_l04_demonstrative_adjectives,ವರ್ಣನೆಯ ವಿಶೇಷಣ,Demonstrative Adjectives,This book nearby vs that mountain far distance perspective showing difference,6,2
+kaveri_l6_c02_l05_interrogative_adjectives,ಬಿಡಿಪದ ವಿಶೇಷಣ,Interrogative Adjectives,Question mark with which apple pointing finger multiple apples to choose from,6,2
+kaveri_l6_c02_l06_gender_number_agreement,ಲಿಂಗ ಮತ್ತು ವಚನ ಸಮನ್ವಯ,Gender Number Agreement,Big boy big girl big children - showing how adjective changes with different genders numbers,6,2
+kaveri_l6_c02_l07_comparative_adjectives,ತುಲನಾ ವಿಶೇಷಣ,Comparative Adjectives,Two houses side by side big house vs bigger house tall child vs taller child comparison,6,2
+kaveri_l6_c02_l08_superlative_adjectives,ಅತಿಪ್ರಸಿದ್ಧ ವಿಶೇಷಣ,Superlative Adjectives,Biggest house most beautiful flower prettiest girl - winner or supreme example,6,2
+kaveri_l6_c03_l01_personal_pronouns,ವ್ಯಕ್ತಿ ಸರ್ವನಾಮ,Personal Pronouns,I you he she it we they - different people representing different pronouns diverse,6,3
+kaveri_l6_c03_l02_possessive_pronouns,ಸೋಮ್ಯವಾಚಕ ಸರ್ವನಾಮ,Possessive Pronouns,My book your pen his toy her doll their toys - showing ownership,6,3
+kaveri_l6_c03_l03_third_person_pronouns,ತೃತೀಯ ವ್ಯಕ್ತಿ ಸರ್ವನಾಮ,Third Person Pronouns,He boy she girl it animal they group - referring to others not speaker,6,3
+kaveri_l6_c03_l04_relative_pronouns,ಸಂಬಂಧವಾಚಕ ಸರ್ವನಾಮ,Relative Pronouns,The boy who reads connection line showing relationship between clauses,6,3
+kaveri_l6_c03_l05_interrogative_pronouns,ಬಿಡಿ ಸರ್ವನಾಮ,Interrogative Pronouns,Who what which whose question marks with different people and objects,6,3
+kaveri_l6_c03_l06_demonstrative_pronouns,ನಿರ್ದಿಷ್ಟವಾಚಕ ಸರ್ವನಾಮ,Demonstrative Pronouns,This book that house these flowers those mountains - pointing gestures,6,3
+kaveri_l6_c03_l07_reflexive_pronouns,ಆತ್ಮವಾಚಕ ಸರ್ವನಾಮ,Reflexive Pronouns,Person doing action to themselves myself yourself himself mirror self-action,6,3
+kaveri_l6_c03_l08_indefinite_pronouns,ಅನಿರ್ದಿಷ್ಟ ಸರ್ವನಾಮ,Indefinite Pronouns,Someone something anyone anything silhouette vague unclear person object,6,3
+kaveri_l6_c04_l01_verb_introduction,ಕ್ರಿಯಾಪದ ಪರಿಚಯ,Verb Introduction,Action verbs read write run jump dance - child performing multiple actions,6,4
+kaveri_l6_c04_l02_present_tense,ಪ್ರಸುತ ಕಾಲ,Present Tense,Child reading NOW happening actively motion lines clock showing present time,6,4
+kaveri_l6_c04_l03_past_tense,ಭೂತ ಕಾಲ,Past Tense,Child with yesterday calendar past action memory bubble showing what happened before,6,4
+kaveri_l6_c04_l04_future_tense,ಭವಿಷ್ಯತ್ ಕಾಲ,Future Tense,Child with tomorrow calendar future action dreaming cloud showing what will happen,6,4
+kaveri_l6_c04_l05_transitive_verbs,ಸಕರ್ಮಕ ಕ್ರಿಯೆ,Transitive Verbs,Child reading book - action affecting object clear object receives action,6,4
+kaveri_l6_c04_l06_intransitive_verbs,ಅಕರ್ಮಕ ಕ್ರಿಯೆ,Intransitive Verbs,Child walking running without object self-contained action no target,6,4
+kaveri_l6_c04_l07_verb_agreement,ಕ್ರಿಯೆಯ ವ್ಯಕ್ತಿ ಮತ್ತು ಲಿಂಗ ಸಮನ್ವಯ,Verb Agreement,Boy reads vs girl reads different verb endings matching subject,6,4
+kaveri_l6_c04_l08_imperative_verbs,ಆದೇಶಾರ್ಥಕ ಕ್ರಿಯೆ,Imperative Verbs,Read Write Go commands with exclamation marks pointing fingers,6,4
+kaveri_l6_c04_l09_negation_verbs,ನಿಷೇಧ ಕ್ರಿಯೆ,Negation,Don't read not going with no symbol prohibition stop sign,6,4
+kaveri_l6_c04_l10_ability_verbs,ಸಾಮರ್ಥ್ಯ ಕ್ರಿಯೆ,Ability Verbs,I can read showing capability confident child doing action successfully,6,4
+kaveri_l6_c05_l01_sentence_basics,ವಾಕ್ಯ ಪರಿಚಯ,Sentence Basics,Subject object verb flow diagram - boy reads book SOV order,6,5
+kaveri_l6_c05_l02_simple_sentences,ಸರಳ ವಾಕ್ಯ,Simple Sentences,One action child reading single clear action no complications,6,5
+kaveri_l6_c05_l03_compound_sentences,ಯುಗ್ಮ ವಾಕ್ಯ,Compound Sentences,Two actions joined child reading AND writing and symbol connection,6,5
+kaveri_l6_c05_l04_complex_sentences,ಸಂಕೀರ್ಣ ವಾಕ್ಯ,Complex Sentences,Main and dependent clauses diagram tree structure relationship,6,5
+kaveri_l6_c05_l05_interrogative_sentences,ಪ್ರಶ್ನಾರ್ಥಕ ವಾಕ್ಯ,Interrogative Sentences,Question mark with curious surprised child asking expression,6,5
+kaveri_l6_c05_l06_negative_sentences,ನಿಷೇಧಾರ್ಥಕ ವಾಕ್ಯ,Negative Sentences,No symbol denial with child shaking head prohibition,6,5
+kaveri_l6_c05_l07_exclamatory_sentences,ವಿಸ್ಮಯಾರ್ಥಕ ವಾಕ್ಯ,Exclamatory Sentences,Exclamation mark with excited surprised delighted child emotion,6,5

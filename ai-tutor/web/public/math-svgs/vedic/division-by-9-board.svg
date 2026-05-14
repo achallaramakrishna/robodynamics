@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="240" viewBox="0 0 560 240">
+  <rect width="560" height="240" rx="24" fill="white"/>
+  <text x="30" y="42" font-family="Segoe UI, Arial" font-size="24" font-weight="700" fill="#3B3A8C">Division by 9</text>
+  <rect x="28" y="64" width="74" height="66" rx="18" fill="#EAF2FF" stroke="#3B3A8C" stroke-width="3"/>
+  <rect x="116" y="64" width="320" height="66" rx="18" fill="white" stroke="#C9D3F5" stroke-width="3"/>
+  <rect x="450" y="64" width="82" height="66" rx="18" fill="#FCE7F3" stroke="#E91E8C" stroke-width="3"/>
+  <text x="65" y="106" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#3B3A8C">9</text>
+  <text x="490" y="106" text-anchor="middle" font-family="Segoe UI, Arial" font-size="20" font-weight="700" fill="#E91E8C">R</text>
+  <text x="280" y="172" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">bring down, add forward, keep the last as remainder</text>
+</svg>

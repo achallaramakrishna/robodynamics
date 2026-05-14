@@ -103,29 +103,29 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     id: "L1-C01-L07",
     chapterId: "C01",
     chapterTitle: "Swar Foundations",
-    title: "ऋ for Rishi",
+    title: "ऋ in ऋषि",
     category: "Vowels",
     skill: "Special Sound Practice",
     char: "ऋ",
     wordHindi: "ऋषि",
     wordEnglish: "Sage",
     assetPath: "/assets/gemini/vaani_l1_rishi_ri_1777125345133.png",
-    summary: "Introduce the special ऋ sound through ऋषि.",
-    prompt: "This is a special sound. Say it slowly with the coach.",
+    summary: "Introduce the special ऋ sound through the word ऋषि, with slower guided listening.",
+    prompt: "This is a special sound. Listen first, then repeat it slowly with the coach.",
   },
   {
     id: "L1-C01-L08",
     chapterId: "C01",
     chapterTitle: "Swar Foundations",
-    title: "ए for Edi",
+    title: "ए in एड़ी",
     category: "Vowels",
     skill: "Picture Mapping",
     char: "ए",
     wordHindi: "एड़ी",
     wordEnglish: "Heel",
     assetPath: "/assets/gemini/vaani_l1_edi_e_1777125373821.png",
-    summary: "Use a body-part word to lock in the ए sound.",
-    prompt: "Tap your heel and say एड़ी.",
+    summary: "Use a familiar body-part word to notice the ए sound inside a full word.",
+    prompt: "Say ए slowly, then hear it again in एड़ी.",
   },
   {
     id: "L1-C01-L09",
@@ -145,29 +145,29 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     id: "L1-C01-L10",
     chapterId: "C01",
     chapterTitle: "Swar Foundations",
-    title: "ओ for Okhli",
+    title: "ओ in ओखली",
     category: "Vowels",
     skill: "Cultural Word Recall",
     char: "ओ",
     wordHindi: "ओखली",
     wordEnglish: "Mortar",
     assetPath: "/assets/gemini/vaani_l1_okhli_o_1777126185580.png",
-    summary: "Practice ओ with a traditional household object.",
-    prompt: "Open the mouth in a round shape for ओ.",
+    summary: "Practice the rounded ओ sound through a full-word example.",
+    prompt: "Round your mouth gently and listen for the ओ sound in ओखली.",
   },
   {
     id: "L1-C01-L11",
     chapterId: "C01",
     chapterTitle: "Swar Foundations",
-    title: "औ for Aurat",
+    title: "औ in औरत",
     category: "Vowels",
     skill: "Word Recognition",
     char: "औ",
     wordHindi: "औरत",
     wordEnglish: "Woman",
     assetPath: "/assets/gemini/vaani_l1_aurat_au_1777126210291.png",
-    summary: "Learn the bold औ sound through a familiar word.",
-    prompt: "Hear the deeper opening sound in औरत.",
+    summary: "Learn the broad औ sound by hearing it clearly at the start of a word.",
+    prompt: "Listen for the opening औ sound, then repeat the whole word slowly.",
   },
   {
     id: "L1-C01-L12",
@@ -187,15 +187,15 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     id: "L1-C01-L13",
     chapterId: "C01",
     chapterTitle: "Swar Foundations",
-    title: "अः Sound Discovery",
+    title: "अः Visarga Sound Discovery",
     category: "Vowels",
     skill: "Breath Sound Awareness",
     char: "अः",
     wordHindi: "विसर्ग",
     wordEnglish: "Breath Sound",
     assetPath: "/assets/gemini/vaani_l1_aha_sound_aha_1777126260955.png",
-    summary: "Meet the soft breath-like अः sound in a gentle, low-pressure activity.",
-    prompt: "This sound feels like a soft breath after the letter.",
+    summary: "Meet the breath-like अः sound in a gentle listening-first activity.",
+    prompt: "This sound feels like a soft breath after the letter. Hear it first, then try it.",
   },
   {
     id: "L1-C02-L01",
@@ -207,7 +207,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ख",
     wordHindi: "खरगोश",
     wordEnglish: "Rabbit",
-    assetPath: "/assets/l1_vyanjan_kha_khargosh.svg",
+    assetPath: "/assets/gemini/vaani_l1_khargosh_kha.png",
     summary: "Jump into consonants with khargosh and the airy ख sound.",
     prompt: "Feel the extra breath in the ख sound.",
   },
@@ -221,7 +221,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ग",
     wordHindi: "गमला",
     wordEnglish: "Plant Pot",
-    assetPath: "/assets/l1_vyanjan_ga_gamla.svg",
+    assetPath: "/assets/gemini/vaani_l1_gamla_ga.png",
     summary: "Use a garden object to make ग easy to remember.",
     prompt: "Say ग while pointing to the pot shape.",
   },
@@ -235,7 +235,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "घ",
     wordHindi: "घर",
     wordEnglish: "Home",
-    assetPath: "/house.png",
+    assetPath: "/assets/gemini/vaani_l1_gamla_ga.png",
     summary: "Build a meaningful connection between घ and home.",
     prompt: "Say घर and look for the first sound only.",
   },
@@ -249,7 +249,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "च",
     wordHindi: "चरखा",
     wordEnglish: "Spinning Wheel",
-    assetPath: "/assets/l1_vyanjan_cha_charkha.svg",
+    assetPath: "/assets/gemini/vaani_l1_charkha_cha.png",
     summary: "Discover च through the spinning charkha visual.",
     prompt: "Look for the curl in the letter and say च clearly.",
   },
@@ -263,7 +263,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "छ",
     wordHindi: "छतरी",
     wordEnglish: "Umbrella",
-    assetPath: "/assets/l1_vyanjan_chha_chatri.svg",
+    assetPath: "/assets/gemini/vaani_l1_chhatri_chha.png",
     summary: "Trace छ while remembering the umbrella above it.",
     prompt: "Can you imagine rain when you say छतरी?",
   },
@@ -277,7 +277,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ज",
     wordHindi: "जहाज",
     wordEnglish: "Ship",
-    assetPath: "/assets/l1_vyanjan_ja_jahaz.svg",
+    assetPath: "/assets/gemini/vaani_l1_jahaz_ja.png",
     summary: "Board the जहाज and practice the ज sound with confidence.",
     prompt: "Say ज as the ship begins its journey.",
   },
@@ -291,7 +291,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "झ",
     wordHindi: "झंडा",
     wordEnglish: "Flag",
-    assetPath: "/assets/l1_vyanjan_jha_jhanda.svg",
+    assetPath: "/assets/gemini/vaani_l1_jhanda_jha.png",
     summary: "Practice the stronger झ sound using the waving flag.",
     prompt: "Say the sound with energy: झ.",
   },
@@ -305,7 +305,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ट",
     wordHindi: "टमाटर",
     wordEnglish: "Tomato",
-    assetPath: "/assets/l1_vyanjan_ta_tamatar.svg",
+    assetPath: "/assets/gemini/vaani_l1_tamatar_ta.png",
     summary: "Spot the retroflex ट and connect it to tomato.",
     prompt: "Listen carefully: ट is sharp and strong.",
   },
@@ -313,14 +313,14 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     id: "L1-C04-L02",
     chapterId: "C04",
     chapterTitle: "Retroflex Group",
-    title: "ठ for Tharmas",
+    title: "ठ for Thela",
     category: "Consonants",
     skill: "Sound Contrast",
     char: "ठ",
-    wordHindi: "थर्मस",
-    wordEnglish: "Thermos",
-    assetPath: "/assets/l1_vyanjan_tha_tharmas.svg",
-    summary: "Differentiate ठ from ट with a fresh everyday object.",
+    wordHindi: "ठेला",
+    wordEnglish: "Pushcart",
+    assetPath: "/assets/gemini/vaani_l1_thathera_tha.png",
+    summary: "Differentiate ठ from ट with a familiar street-vendor cart.",
     prompt: "Notice the puff of air while saying ठ.",
   },
   {
@@ -333,7 +333,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ड",
     wordHindi: "डमरू",
     wordEnglish: "Drum",
-    assetPath: "/assets/l1_vyanjan_da_damru.svg",
+    assetPath: "/assets/gemini/vaani_l1_damru_da.png",
     summary: "Use rhythm and sound to remember ड.",
     prompt: "Tap a beat as you say डमरू.",
   },
@@ -347,7 +347,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ढ",
     wordHindi: "ढक्कन",
     wordEnglish: "Lid",
-    assetPath: "/assets/l1_vyanjan_dha_dhakkan.svg",
+    assetPath: "/assets/gemini/vaani_l1_dhakkan_dha.png",
     summary: "Strengthen the ढ sound with a familiar object from home.",
     prompt: "Lift an imaginary lid and say ढ.",
   },
@@ -361,7 +361,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "त",
     wordHindi: "तरबूज",
     wordEnglish: "Watermelon",
-    assetPath: "/assets/l1_vyanjan_ta_tarbooz.svg",
+    assetPath: "/assets/gemini/vaani_l1_tarbooz_ta2.png",
     summary: "Pair the softer dental त with juicy tarbooj.",
     prompt: "Touch the tip of your tongue lightly for त.",
   },
@@ -369,15 +369,15 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     id: "L1-C05-L02",
     chapterId: "C05",
     chapterTitle: "Dental Group",
-    title: "थ for Thathera",
+    title: "थ for Thali",
     category: "Consonants",
-    skill: "Advanced Word Exposure",
+    skill: "Everyday Vocabulary",
     char: "थ",
-    wordHindi: "थठेरा",
-    wordEnglish: "Metal Worker",
-    assetPath: "/assets/l1_vyanjan_tha_thathera.svg",
-    summary: "Introduce a richer Hindi vocabulary word while practicing थ.",
-    prompt: "This is a new word. Repeat it boldly with the coach.",
+    wordHindi: "थाली",
+    wordEnglish: "Plate",
+    assetPath: "/assets/gemini/vaani_l1_thathera_tha.png",
+    summary: "Link थ to a familiar mealtime object — the thali.",
+    prompt: "Imagine your dinner thali while saying थाली!",
   },
   {
     id: "L1-C05-L03",
@@ -389,7 +389,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "द",
     wordHindi: "दावत",
     wordEnglish: "Feast",
-    assetPath: "/assets/l1_vyanjan_da_dawat.svg",
+    assetPath: "/assets/gemini/vaani_l1_dawat_da2.png",
     summary: "Celebrate the द sound through a lively dawat visual.",
     prompt: "Say द with a soft tongue placement.",
   },
@@ -403,7 +403,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "ध",
     wordHindi: "धनुष",
     wordEnglish: "Bow",
-    assetPath: "/assets/l1_vyanjan_dha_dhanush.svg",
+    assetPath: "/assets/gemini/vaani_l1_dhanush_dha2.png",
     summary: "Use story imagination to remember ध.",
     prompt: "Imagine pulling a bow while saying धनुष.",
   },
@@ -417,7 +417,7 @@ const LEVEL_ONE_SEEDS: LevelOneSeed[] = [
     char: "न",
     wordHindi: "नल",
     wordEnglish: "Tap",
-    assetPath: "/assets/l1_vyanjan_na_nal.svg",
+    assetPath: "/assets/gemini/vaani_l1_nal_na.png",
     summary: "Finish the dental set with a simple everyday word.",
     prompt: "Turn the imaginary tap and say नल.",
   },
@@ -670,31 +670,107 @@ const COURSE_CARD_COLORS = [
   "#ec4899",
 ];
 
+// Emoji map for common Hindi words used in Level 1 lessons
+const WORD_EMOJI: Record<string, string> = {
+  "अनार": "🍎", "आम": "🥭", "इमली": "🌿", "ईख": "🎋", "उल्लू": "🦉",
+  "ऊन": "🧶", "ऋषि": "🧙", "एड़ी": "🦶", "ऐनक": "👓", "ओखली": "🪨",
+  "औरत": "👩", "अंगूर": "🍇", "अःकाश": "🌌", "कमल": "🌸", "खरगोश": "🐇",
+  "गमला": "🪴", "घड़ी": "⌚", "चाँद": "🌙", "छाता": "☂️", "जहाज": "✈️",
+  "झंडा": "🚩", "टमाटर": "🍅", "ठंड": "❄️", "डमरू": "🥁", "ढोल": "🪘",
+  "तरबूज": "🍉", "थाली": "🍽️", "दरवाज़ा": "🚪", "धनुष": "🏹", "नल": "🚿",
+  "पतंग": "🪁", "फूल": "🌺", "बकरी": "🐐", "भालू": "🐻", "मछली": "🐟",
+  "यक": "🐃", "राजा": "👑", "लालटेन": "🏮", "वर": "🌲", "शेर": "🦁",
+  "षट्कोण": "⬡", "सेब": "🍏", "हाथी": "🐘", "क्षत्रिय": "⚔️",
+  "त्रिकोण": "🔺", "ज्ञान": "📚", "श्रमिक": "👷",
+};
+
+function getEmoji(wordHindi: string): string {
+  return WORD_EMOJI[wordHindi] || "📖";
+}
+
+// Three same-starting-letter words per Level-1 character:
+//   [0] + [1] → Word Gallery (cards) & Match the Pair
+//   [0] + [1] + [2] → Quick Check 1 distractors (all same letter as the lesson)
+// IMPORTANT: none of these words may duplicate the lesson's own seed word.
+const GALLERY_WORDS: Record<string, Array<{ word: string; english: string }>> = {
+  // ── Vowels ──────────────────────────────────────────────────────────────────
+  "अ":   [{ word: "अंगूर",    english: "Grapes"          }, { word: "अच्छा",     english: "Good"            }, { word: "अमरूद",    english: "Guava"           }],
+  "आ":   [{ word: "आँख",      english: "Eye"             }, { word: "आग",        english: "Fire"            }, { word: "आकाश",     english: "Sky"             }],
+  "इ":   [{ word: "इनाम",     english: "Prize"           }, { word: "इंद्रधनुष", english: "Rainbow"         }, { word: "इमारत",    english: "Building"        }],
+  "ई":   [{ word: "ईश्वर",    english: "God"             }, { word: "ईमान",      english: "Faith"           }, { word: "ईंट",      english: "Brick"           }],
+  "उ":   [{ word: "उपहार",    english: "Gift"            }, { word: "उँगली",     english: "Finger"          }, { word: "उड़ान",    english: "Flight"          }],
+  "ऊ":   [{ word: "ऊँट",      english: "Camel"           }, { word: "ऊँचा",      english: "Tall"            }, { word: "ऊर्जा",    english: "Energy"          }],
+  "ऋ":   [{ word: "ऋतु",      english: "Season"          }, { word: "ऋण",        english: "Debt"            }, { word: "ऋषभ",      english: "Bull"            }],
+  "ए":   [{ word: "एक",       english: "One"             }, { word: "एकता",      english: "Unity"           }, { word: "एहसान",    english: "Favour"          }],
+  "ऐ":   [{ word: "ऐसा",      english: "Like this"       }, { word: "ऐरावत",     english: "White Elephant"  }, { word: "ऐश्वर्य",  english: "Prosperity"      }],
+  "ओ":   [{ word: "ओस",       english: "Dew"             }, { word: "ओढ़नी",     english: "Shawl"           }, { word: "ओले",      english: "Hail"            }],
+  "औ":   [{ word: "औजार",     english: "Tool"            }, { word: "औषधि",     english: "Medicine"        }, { word: "औलाद",     english: "Offspring"       }],
+  "अं":  [{ word: "अंक",      english: "Number"          }, { word: "अंकुर",     english: "Sprout"          }, { word: "अंधेरा",   english: "Darkness"        }],
+  // अः (Visarga) appears at end of words; seed is विसर्ग — use common Sanskrit words with अः sound
+  "अः":  [{ word: "प्रातः",   english: "Morning"         }, { word: "नमः",       english: "Salutation"      }, { word: "स्वतः",    english: "By itself"       }],
+  // ── Consonants ───────────────────────────────────────────────────────────────
+  "क":   [{ word: "किताब",    english: "Book"            }, { word: "कुत्ता",    english: "Dog"             }, { word: "कबूतर",    english: "Pigeon"          }],
+  "ख":   [{ word: "खाना",     english: "Food"            }, { word: "खेल",       english: "Play"            }, { word: "खिड़की",   english: "Window"          }],
+  "ग":   [{ word: "गाय",      english: "Cow"             }, { word: "गाना",      english: "Song"            }, { word: "गुड़िया",  english: "Doll"            }],
+  "घ":   [{ word: "घड़ी",     english: "Clock"           }, { word: "घास",       english: "Grass"           }, { word: "घोड़ा",    english: "Horse"           }],
+  "च":   [{ word: "चाँद",     english: "Moon"            }, { word: "चाबी",      english: "Key"             }, { word: "चिड़िया",  english: "Bird"            }],
+  "छ":   [{ word: "छत",       english: "Roof"            }, { word: "छड़ी",      english: "Stick"           }, { word: "छाया",     english: "Shadow"          }],
+  "ज":   [{ word: "जल",       english: "Water"           }, { word: "जंगल",      english: "Forest"          }, { word: "जूता",     english: "Shoe"            }],
+  "झ":   [{ word: "झील",      english: "Lake"            }, { word: "झाड़ू",     english: "Broom"           }, { word: "झरना",     english: "Waterfall"       }],
+  "ट":   [{ word: "टोपी",     english: "Hat"             }, { word: "टेबल",      english: "Table"           }, { word: "टोकरी",    english: "Basket"          }],
+  "ठ":   [{ word: "ठंड",      english: "Cold"            }, { word: "ठोकर",      english: "Kick"            }, { word: "ठप्पा",    english: "Stamp"           }],
+  "ड":   [{ word: "डाकिया",   english: "Postman"         }, { word: "डाल",       english: "Branch"          }, { word: "डिब्बा",   english: "Box"             }],
+  // ढ seed is ढक्कन — do NOT include ढक्कन here
+  "ढ":   [{ word: "ढेर",      english: "Pile"            }, { word: "ढोल",       english: "Drum"            }, { word: "ढलान",     english: "Slope"           }],
+  "त":   [{ word: "तारा",     english: "Star"            }, { word: "तोता",      english: "Parrot"          }, { word: "तकिया",    english: "Pillow"          }],
+  "थ":   [{ word: "थैला",     english: "Bag"             }, { word: "थकान",      english: "Tiredness"       }, { word: "थपकी",     english: "Pat"             }],
+  "द":   [{ word: "दूध",      english: "Milk"            }, { word: "दिल",       english: "Heart"           }, { word: "दर्पण",    english: "Mirror"          }],
+  "ध":   [{ word: "धरती",     english: "Earth"           }, { word: "धन",        english: "Wealth"          }, { word: "धूप",      english: "Sunlight"        }],
+  "न":   [{ word: "नाव",      english: "Boat"            }, { word: "नदी",       english: "River"           }, { word: "नींबू",    english: "Lemon"           }],
+  "प":   [{ word: "पानी",     english: "Water"           }, { word: "पक्षी",     english: "Bird"            }, { word: "पहाड़",    english: "Mountain"        }],
+  // फ seed is फल — do NOT include फल here
+  "फ":   [{ word: "फूल",      english: "Flower"          }, { word: "फूलदान",    english: "Vase"            }, { word: "फसल",      english: "Crop"            }],
+  "ब":   [{ word: "बादल",     english: "Cloud"           }, { word: "बाज़ार",    english: "Market"          }, { word: "बिल्ली",   english: "Cat"             }],
+  "भ":   [{ word: "भाई",      english: "Brother"         }, { word: "भूमि",      english: "Earth"           }, { word: "भेड़",     english: "Sheep"           }],
+  "म":   [{ word: "माँ",      english: "Mother"          }, { word: "मेज़",      english: "Table"           }, { word: "मिठाई",    english: "Sweets"          }],
+  "य":   [{ word: "यात्रा",   english: "Journey"         }, { word: "यंत्र",     english: "Machine"         }, { word: "यमुना",    english: "Yamuna River"    }],
+  "र":   [{ word: "रात",      english: "Night"           }, { word: "रोटी",      english: "Bread"           }, { word: "रंग",      english: "Colour"          }],
+  "ल":   [{ word: "लड्डू",    english: "Sweet Ball"      }, { word: "लहर",       english: "Wave"            }, { word: "लकड़ी",    english: "Wood"            }],
+  "व":   [{ word: "वन",       english: "Forest"          }, { word: "वर्षा",     english: "Rain"            }, { word: "विद्यालय", english: "School"          }],
+  "श":   [{ word: "शहद",      english: "Honey"           }, { word: "शाल",       english: "Shawl"           }, { word: "शेर",      english: "Lion"            }],
+  // ष seed is षट्कोण — do NOT include षट्कोण here
+  "ष":   [{ word: "षट्",      english: "Six"             }, { word: "षड्यंत्र",  english: "Conspiracy"      }, { word: "षोडश",     english: "Sixteen"         }],
+  "स":   [{ word: "सेब",      english: "Apple"           }, { word: "सड़क",      english: "Road"            }, { word: "सूरज",     english: "Sun"             }],
+  "ह":   [{ word: "हल",       english: "Plow"            }, { word: "हवा",       english: "Wind"            }, { word: "हिरण",     english: "Deer"            }],
+  // ── Joint Consonants ──────────────────────────────────────────────────────────
+  "क्ष": [{ word: "क्षण",     english: "Moment"          }, { word: "क्षमा",     english: "Forgiveness"     }, { word: "क्षेत्र",  english: "Area"            }],
+  "त्र": [{ word: "त्रिकोण",  english: "Triangle"        }, { word: "त्रुटि",    english: "Error"           }, { word: "त्रिवेणी", english: "Confluence"      }],
+  "ज्ञ": [{ word: "ज्ञान",    english: "Knowledge"       }, { word: "ज्ञात",     english: "Known"           }, { word: "ज्ञापन",   english: "Memo"            }],
+  "श्र": [{ word: "श्रेणी",   english: "Grade"           }, { word: "श्रम",      english: "Labour"          }, { word: "श्रद्धा",  english: "Devotion"        }],
+};
+
 function getNextLessonUrl(index: number) {
   const nextLesson = LEVEL_ONE_SEEDS[index + 1];
   return nextLesson ? `/level-1/lesson/${nextLesson.id}` : "/level-1";
 }
 
-function buildFlashcards(seed: LevelOneSeed) {
-  return [
-    { front: seed.char, back: `${seed.wordHindi} (${seed.wordEnglish})` },
-    { front: `${seed.char}...`, back: `Listen for the starting sound in ${seed.wordHindi}.` },
-    { front: "Coach Tip", back: `Trace ${seed.char} slowly and say it clearly.` },
-  ];
-}
-
-function buildQuizOptions(seed: LevelOneSeed) {
-  const pool = [seed.wordHindi, "आम", "अनार", "जहाज", "तरबूज", "घर"];
-  const unique = Array.from(new Set(pool.filter((item) => item !== seed.wordHindi)));
-  return [seed.wordHindi, ...unique.slice(0, 2)];
+// Pick 3 distractor seeds (not current) for gallery + quiz variety
+function getDistractors(index: number, count: number): LevelOneSeed[] {
+  const result: LevelOneSeed[] = [];
+  const total = LEVEL_ONE_SEEDS.length;
+  for (let i = 1; result.length < count; i++) {
+    const s = LEVEL_ONE_SEEDS[(index + i) % total];
+    if (s.id !== LEVEL_ONE_SEEDS[index].id) result.push(s);
+  }
+  return result;
 }
 
 export const VAANI_L1_COURSE_LESSONS = LEVEL_ONE_SEEDS.map((seed, index) => ({
   id: seed.id,
   order: index + 1,
-  title: `${seed.char} for ${seed.wordEnglish}`,
+  title: `${seed.char} for ${seed.wordHindi}`,
   category: seed.category,
-  durationMin: seed.durationMin ?? 6,
+  durationMin: seed.durationMin ?? 8,
   status: (index < 12 ? "available" : "current") as "available" | "current",
   summary: seed.summary,
   skill: seed.skill,
@@ -711,84 +787,201 @@ export const VAANI_L1_COURSE_LESSONS = LEVEL_ONE_SEEDS.map((seed, index) => ({
 }));
 
 export const VAANI_L1_LESSONS: Record<string, any> = Object.fromEntries(
-  LEVEL_ONE_SEEDS.map((seed, index) => [
-    seed.id,
-    {
-      course: {
-        title: "Vaani AI Level 1",
-        grade: "1",
-        levelSlug: "level-1",
+  LEVEL_ONE_SEEDS.map((seed, index) => {
+    const distractors = getDistractors(index, 3);
+    const [d1, d2, d3] = distractors;
+
+    return [
+      seed.id,
+      {
+        course: {
+          title: "Vaani AI Level 1",
+          grade: "1",
+          levelSlug: "level-1",
+        },
+        lesson: {
+          id: seed.id,
+          chapterId: seed.chapterId,
+          chapterTitle: seed.chapterTitle,
+          title: seed.title,
+          category: seed.category,
+          durationMin: seed.durationMin ?? 8,
+          summary: seed.summary,
+          xpReward: 60,
+          difficulty: "Beginner",
+          char: seed.char,
+          wordHindi: seed.wordHindi,
+          wordEnglish: seed.wordEnglish,
+          assetPath: seed.assetPath,
+        },
+        steps: [
+
+          // ── Step 1: Look & Listen ─────────────────────────────────────────────
+          {
+            id: `${seed.id}_observe`,
+            label: "Look and Listen",
+            skillTags: ["reading", "vocabulary", "pronunciation"],
+            tutorText: `Hello! Today we meet the letter ${seed.char}! Look at the ${seed.wordEnglish}. ${seed.prompt} Can you see the ${seed.wordHindi}?`,
+            tutorTextHi: `वाह! आज हम "${seed.char}" सीखेंगे! देखो — ${seed.wordHindi} 🎉 ${seed.wordHindi} से "${seed.char}" की आवाज़ आती है! ${seed.prompt}`,
+            tutorTextMix: `Hello! आज हम "${seed.char}" सीखेंगे! Look — ${seed.wordHindi} (${seed.wordEnglish}). ${seed.prompt} क्या तुम ${seed.wordHindi} देख सकते हो?`,
+            board: {
+              type: "visual",
+              data: {
+                assetPath: seed.assetPath,
+                headline: `${seed.char} से ${seed.wordHindi}`,
+                prompt: `${seed.wordEnglish} — remember it starts with the sound ${seed.char}!`,
+              },
+            },
+          },
+
+          // ── Step 2: Letter Spotlight ──────────────────────────────────────────
+          {
+            id: `${seed.id}_spotlight`,
+            label: "Letter Spotlight",
+            skillTags: ["pronunciation", "letter_recognition"],
+            tutorText: `Look at this beautiful letter — ${seed.char}! Say it slowly with me: ${seed.char} ... ${seed.char} ... ${seed.char}! Great job!`,
+            tutorTextHi: `यह सुंदर अक्षर है — ${seed.char}! मेरे साथ धीरे-धीरे बोलो: ${seed.char} ... ${seed.char} ... ${seed.char}! शाबाश! 🌟`,
+            tutorTextMix: `देखो this beautiful letter — ${seed.char}! Say it with me: ${seed.char} ... ${seed.char} ... ${seed.char}! शाबाश!`,
+            board: {
+              type: "letterSpotlight",
+              data: {
+                char: seed.char,
+                wordHindi: seed.wordHindi,
+                wordEnglish: seed.wordEnglish,
+                assetPath: seed.assetPath,
+                prompt: `This letter makes the "${seed.char}" sound. Tap the letter to hear it!`,
+              },
+            },
+          },
+
+          // ── Step 3: Trace the Letter ──────────────────────────────────────────
+          {
+            id: `${seed.id}_trace`,
+            label: "Trace the Letter",
+            skillTags: ["writing", "pronunciation"],
+            tutorText: `Excellent! Now let's write it. Trace the letter ${seed.char} with your finger! Say "${seed.char}" as you draw each stroke.`,
+            tutorTextHi: `शाबाश! अब लिखते हैं। अपनी उंगली से "${seed.char}" बनाओ! हर रेखा खींचते समय "${seed.char}" बोलो। 🖊️`,
+            tutorTextMix: `Excellent! अब लिखते हैं। Trace "${seed.char}" with your finger! हर stroke पर बोलो "${seed.char}"!`,
+            board: {
+              type: "tracing_canvas",
+              data: {
+                headline: `Trace ${seed.char}`,
+                expression: seed.char,
+                prompt: `Follow the shape slowly. Say ${seed.char} as you trace — muscle memory builds reading speed!`,
+              },
+            },
+          },
+
+          // ── Step 4: Word Gallery — all cards start with the same letter ─────
+          {
+            id: `${seed.id}_gallery`,
+            label: "Word Gallery",
+            skillTags: ["vocabulary", "reading"],
+            tutorText: `Amazing tracing! Now let's discover words that start with ${seed.char}. Tap each card to flip it and hear the word!`,
+            tutorTextHi: `वाह, क्या अच्छा! अब "${seed.char}" से शुरू होने वाले शब्द देखो — हर कार्ड को पलटो और सुनो! 📖`,
+            tutorTextMix: `Amazing! अब "${seed.char}" के words देखते हैं। हर card flip करो और word सुनो! 🃏`,
+            board: {
+              type: "flashcards",
+              data: {
+                headline: `${seed.char} के शब्द (Words with ${seed.char})`,
+                targetChar: seed.char,
+                prompt: "Tap a card to flip it and hear the word!",
+                cards: (() => {
+                  const extras = GALLERY_WORDS[seed.char] || [];
+                  const w1 = extras[0] ?? { word: d1.wordHindi, english: d1.wordEnglish };
+                  const w2 = extras[1] ?? { word: d2.wordHindi, english: d2.wordEnglish };
+                  return [
+                    { emoji: getEmoji(seed.wordHindi), word: seed.wordHindi,  english: seed.wordEnglish, front: `${getEmoji(seed.wordHindi)} ${seed.wordHindi}`,  back: seed.wordEnglish },
+                    { emoji: getEmoji(w1.word),         word: w1.word,         english: w1.english,        front: `${getEmoji(w1.word)} ${w1.word}`,                 back: w1.english },
+                    { emoji: getEmoji(w2.word),         word: w2.word,         english: w2.english,        front: `${getEmoji(w2.word)} ${w2.word}`,                 back: w2.english },
+                  ];
+                })(),
+              },
+            },
+          },
+
+          // ── Step 5: Match the Pair — Hindi word → English meaning (all same letter) ──
+          {
+            id: `${seed.id}_match`,
+            label: "Match the Pair",
+            skillTags: ["reading", "recall"],
+            tutorText: `Great! Match each ${seed.char} word to its English meaning. Tap a word on the left, then find its meaning on the right!`,
+            tutorTextHi: `बहुत अच्छा! "${seed.char}" के शब्दों को उनके अर्थ से मिलाओ! बाईं तरफ शब्द छुओ, फिर दाईं तरफ उसका अर्थ छुओ! 🔗`,
+            tutorTextMix: `Great! "${seed.char}" के words को उनकी meaning से मिलाओ! Left word tap करो, right meaning tap करो! 🎯`,
+            board: {
+              type: "matchingPairs",
+              data: {
+                headline: `${seed.char} के शब्द मिलाओ!`,
+                prompt: "Tap a Hindi word, then tap its English meaning!",
+                pairsMode: "word-meaning",
+                pairs: (() => {
+                  const extras = GALLERY_WORDS[seed.char] || [];
+                  const w1 = extras[0] ?? { word: d1.wordHindi, english: d1.wordEnglish };
+                  const w2 = extras[1] ?? { word: d2.wordHindi, english: d2.wordEnglish };
+                  return [
+                    { left: seed.wordHindi, right: seed.wordEnglish },
+                    { left: w1.word,        right: w1.english },
+                    { left: w2.word,        right: w2.english },
+                  ];
+                })(),
+              },
+            },
+          },
+
+          // ── Step 6: Quick Check 1 — picture → Hindi word reading ─────────────
+          {
+            id: `${seed.id}_quiz1`,
+            label: "Quick Check 1",
+            skillTags: ["reading", "recall"],
+            tutorText: `Quiz time! Look at the picture — what is the Hindi word for this? Read the options and pick the right one! 🌟`,
+            tutorTextHi: `अब प्रश्न! तस्वीर देखो — इसे हिंदी में क्या कहते हैं? सही शब्द चुनो! 🌟`,
+            tutorTextMix: `Quiz time! Picture देखो — इसे Hindi में क्या कहते हैं? Read and pick! 🌟`,
+            board: {
+              type: "mcq",
+              data: {
+                headline: `इसे क्या कहते हैं?`,
+                prompt: `Look at the picture — what is the Hindi name for this?`,
+                questionImage: seed.assetPath,
+                questionWord: seed.wordEnglish,
+                options: (() => {
+                    const ex = GALLERY_WORDS[seed.char] || [];
+                    return [
+                      seed.wordHindi,
+                      ex[0]?.word ?? d1.wordHindi,
+                      ex[1]?.word ?? d2.wordHindi,
+                      ex[2]?.word ?? d3.wordHindi,
+                    ];
+                  })(),
+                answer: seed.wordHindi,
+              },
+            },
+          },
+
+          // ── Step 7: Quick Check 2 — letter identification ─────────────────────
+          {
+            id: `${seed.id}_quiz2`,
+            label: "Quick Check 2",
+            skillTags: ["reading", "letter_recognition"],
+            tutorText: `One more! Look at the picture — "${seed.wordHindi}" means ${seed.wordEnglish}. Which letter does it start with? 🎯`,
+            tutorTextHi: `एक और! तस्वीर देखो — "${seed.wordHindi}" का मतलब है ${seed.wordEnglish}। यह किस अक्षर से शुरू होता है? 🎯`,
+            tutorTextMix: `One more! Picture देखो — "${seed.wordHindi}" means ${seed.wordEnglish}. यह किस letter से start होता है? 🎯`,
+            board: {
+              type: "mcq",
+              data: {
+                headline: `${seed.wordHindi} किस अक्षर से शुरू होता है?`,
+                prompt: `"${seed.wordHindi}" (${seed.wordEnglish}) — find its first letter!`,
+                questionImage: seed.assetPath,
+                questionWord: seed.wordHindi,
+                questionEnglish: seed.wordEnglish,
+                options: [seed.char, d1.char, d2.char, d3.char],
+                answer: seed.char,
+              },
+            },
+          },
+
+        ],
+        nextLessonUrl: getNextLessonUrl(index),
       },
-      lesson: {
-        id: seed.id,
-        chapterId: seed.chapterId,
-        chapterTitle: seed.chapterTitle,
-        title: seed.title,
-        category: seed.category,
-        durationMin: seed.durationMin ?? 6,
-        summary: seed.summary,
-        xpReward: 60,
-        difficulty: "Beginner",
-      },
-      steps: [
-        {
-          id: `${seed.id}_observe`,
-          label: "Look and Listen",
-          skillTags: ["reading", "vocabulary", "pronunciation"],
-          tutorText: `Today we learn ${seed.char} through ${seed.wordHindi}. ${seed.prompt}`,
-          board: {
-            type: "visual",
-            data: {
-              assetPath: seed.assetPath,
-              headline: `${seed.char} से ${seed.wordHindi}`,
-              prompt: `${seed.wordEnglish} helps us remember the sound of ${seed.char}.`,
-            },
-          },
-        },
-        {
-          id: `${seed.id}_trace`,
-          label: "Trace the Letter",
-          skillTags: ["writing", "pronunciation"],
-          tutorText: `Use your finger or mouse to trace ${seed.char}. Say the sound as you draw it.`,
-          board: {
-            type: "tracing_canvas",
-            data: {
-              headline: `Trace ${seed.char}`,
-              expression: seed.char,
-              prompt: `Start slowly, keep the curves smooth, and finish with confidence.`,
-            },
-          },
-        },
-        {
-          id: `${seed.id}_remember`,
-          label: "Word Memory",
-          skillTags: ["reading", "vocabulary"],
-          tutorText: `Flip the cards and connect ${seed.char} with ${seed.wordHindi}.`,
-          board: {
-            type: "flashcards",
-            data: {
-              headline: `Remember ${seed.char}`,
-              cards: buildFlashcards(seed),
-            },
-          },
-        },
-        {
-          id: `${seed.id}_quiz`,
-          label: "Quick Check",
-          skillTags: ["reading", "vocabulary"],
-          tutorText: `Which word matches the sound ${seed.char}? Pick the best answer.`,
-          board: {
-            type: "mcq",
-            data: {
-              headline: "Quick Check",
-              prompt: `Choose the correct word for ${seed.char}.`,
-              options: buildQuizOptions(seed),
-              answer: seed.wordHindi,
-            },
-          },
-        },
-      ],
-      nextLessonUrl: getNextLessonUrl(index),
-    },
-  ]),
+    ];
+  }),
 );

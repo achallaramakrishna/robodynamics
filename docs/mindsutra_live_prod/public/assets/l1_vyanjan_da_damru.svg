@@ -1,0 +1,17 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FEF2F2"/>
+  
+  <g id="letter_da_retro">
+    <text x="250" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">ड</text>
+  </g>
+  
+  <g id="object_damru">
+    <!-- Hourglass Drum -->
+    <path d="M650 450C650 450 750 520 850 450V650C850 650 750 580 650 650V450Z" fill="#78350F" stroke="#451A03" stroke-width="4"/>
+    <path d="M750 550L880 500" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/> <!-- String -->
+    <circle cx="880" cy="500" r="12" fill="#1E293B"/> <!-- Bead -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">ड से डमरू</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">DA for Damru (Drum)</text>
+</svg>

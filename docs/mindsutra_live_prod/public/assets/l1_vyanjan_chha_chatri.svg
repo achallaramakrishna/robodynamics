@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#F0F9FF"/>
+  
+  <g id="letter_chha">
+    <text x="250" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">छ</text>
+  </g>
+  
+  <g id="object_chatri">
+    <!-- Umbrella Canopy -->
+    <path d="M650 550C650 480 750 430 850 550H650Z" fill="#F43F5E"/>
+    <path d="M750 550V680C750 680 750 710 720 710" stroke="#1E293B" stroke-width="8" fill="none" stroke-linecap="round"/> <!-- Handle -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">छ से छतरी</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">CHHA for Chatri (Umbrella)</text>
+</svg>

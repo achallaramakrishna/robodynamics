@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 250" width="380" height="250" font-family="Nunito,sans-serif">
+  <rect width="380" height="250" rx="14" fill="#fdf4ff"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#581c87">(a + b)² — Area Model</text>
+
+  <!-- Large square outline -->
+  <rect x="60" y="36" width="180" height="180" rx="4" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+  <!-- a label top -->
+  <text x="120" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#6d28d9">a</text>
+  <!-- b label top -->
+  <text x="210" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#be185d">b</text>
+  <!-- a label left -->
+  <text x="50" y="126" text-anchor="middle" font-size="14" font-weight="700" fill="#6d28d9">a</text>
+  <!-- b label left -->
+  <text x="50" y="196" text-anchor="middle" font-size="14" font-weight="700" fill="#be185d">b</text>
+
+  <!-- Inner dividers -->
+  <line x1="180" y1="36" x2="180" y2="216" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="60" y1="156" x2="240" y2="156" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- a² cell -->
+  <rect x="62" y="38" width="116" height="116" rx="4" fill="#ede9fe"/>
+  <text x="120" y="100" text-anchor="middle" font-size="20" font-weight="800" fill="#5b21b6">a²</text>
+
+  <!-- ab top-right -->
+  <rect x="182" y="38" width="56" height="116" rx="4" fill="#fce7f3"/>
+  <text x="210" y="100" text-anchor="middle" font-size="16" font-weight="700" fill="#9d174d">ab</text>
+
+  <!-- ab bottom-left -->
+  <rect x="62" y="158" width="116" height="56" rx="4" fill="#fce7f3"/>
+  <text x="120" y="190" text-anchor="middle" font-size="16" font-weight="700" fill="#9d174d">ab</text>
+
+  <!-- b² cell -->
+  <rect x="182" y="158" width="56" height="56" rx="4" fill="#fdf2f8"/>
+  <text x="210" y="190" text-anchor="middle" font-size="14" font-weight="700" fill="#be185d">b²</text>
+
+  <!-- Formula -->
+  <text x="310" y="100" text-anchor="middle" font-size="13" fill="#374151">
+    <tspan x="310" dy="0">(a+b)²</tspan>
+    <tspan x="310" dy="20">= a²</tspan>
+    <tspan x="310" dy="18">+ 2ab</tspan>
+    <tspan x="310" dy="18">+ b²</tspan>
+  </text>
+
+  <!-- Result box -->
+  <rect x="255" y="170" width="110" height="26" rx="6" fill="#6d28d9"/>
+  <text x="310" y="187" text-anchor="middle" font-size="11" font-weight="700" fill="white">a² + 2ab + b²</text>
+</svg>

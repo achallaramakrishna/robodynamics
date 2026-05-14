@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" fill="none">
+  <rect width="720" height="320" rx="28" fill="#F8FAFC"/>
+  <rect x="20" y="20" width="680" height="280" rx="24" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2"/>
+  <text x="42" y="58" fill="#0F172A" font-size="26" font-family="Arial, sans-serif" font-weight="700">Borrow-Free Rule</text>
+  <text x="42" y="84" fill="#475569" font-size="14" font-family="Arial, sans-serif">Use the complement rule instead of borrowing from digit to digit.</text>
+
+  <rect x="42" y="112" width="198" height="154" rx="18" fill="#EFF6FF" stroke="#93C5FD"/>
+  <text x="60" y="144" fill="#1D4ED8" font-size="18" font-family="Arial, sans-serif" font-weight="700">Rule</text>
+  <text x="141" y="188" text-anchor="middle" fill="#111827" font-size="22" font-family="Arial, sans-serif" font-weight="800">All from 9</text>
+  <text x="141" y="220" text-anchor="middle" fill="#111827" font-size="22" font-family="Arial, sans-serif" font-weight="800">Last from 10</text>
+  <text x="141" y="246" text-anchor="middle" fill="#6B7280" font-size="14" font-family="Arial, sans-serif">The last digit is the special one.</text>
+
+  <rect x="262" y="112" width="198" height="154" rx="18" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="280" y="144" fill="#991B1B" font-size="18" font-family="Arial, sans-serif" font-weight="700">Example</text>
+  <text x="361" y="182" text-anchor="middle" fill="#111827" font-size="26" font-family="Arial, sans-serif" font-weight="800">1000 - 637</text>
+  <text x="361" y="214" text-anchor="middle" fill="#DC2626" font-size="18" font-family="Arial, sans-serif" font-weight="700">9-6 = 3, 9-3 = 6, 10-7 = 3</text>
+  <text x="361" y="244" text-anchor="middle" fill="#B91C1C" font-size="22" font-family="Arial, sans-serif" font-weight="800">Answer = 363</text>
+
+  <rect x="482" y="112" width="198" height="154" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="500" y="144" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Mental cue</text>
+  <text x="581" y="188" text-anchor="middle" fill="#111827" font-size="20" font-family="Arial, sans-serif" font-weight="700">No borrowing</text>
+  <text x="581" y="216" text-anchor="middle" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Just complements</text>
+  <text x="581" y="244" text-anchor="middle" fill="#6B7280" font-size="14" font-family="Arial, sans-serif">Gap thinking and rule thinking match.</text>
+</svg>

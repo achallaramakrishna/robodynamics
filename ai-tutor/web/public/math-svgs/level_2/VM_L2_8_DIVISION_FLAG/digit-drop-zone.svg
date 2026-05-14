@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="220" viewBox="0 0 520 220">
+  <rect x="12" y="12" width="496" height="196" rx="24" fill="#F8FBFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="24" y="34" font-family="Arial" font-size="21" font-weight="700" fill="#B45309">Guided practice: 639 ÷ 3</text>
+
+  <rect x="44" y="62" width="42" height="30" rx="10" fill="#FFEDD5" stroke="#F59E0B" stroke-width="2"/>
+  <text x="65" y="82" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="#B45309">3</text>
+  <rect x="118" y="56" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <rect x="184" y="56" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <rect x="250" y="56" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="146" y="82" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">6</text>
+  <text x="212" y="82" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">3</text>
+  <text x="278" y="82" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#1F2440">9</text>
+
+  <rect x="118" y="118" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#C7D2FE" stroke-dasharray="6 4" stroke-width="2"/>
+  <rect x="184" y="118" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#C7D2FE" stroke-dasharray="6 4" stroke-width="2"/>
+  <rect x="250" y="118" width="56" height="38" rx="10" fill="#FFFFFF" stroke="#C7D2FE" stroke-dasharray="6 4" stroke-width="2"/>
+  <text x="146" y="142" text-anchor="middle" font-family="Arial" font-size="13" fill="#6366F1">q1</text>
+  <text x="212" y="142" text-anchor="middle" font-family="Arial" font-size="13" fill="#6366F1">q2</text>
+  <text x="278" y="142" text-anchor="middle" font-family="Arial" font-size="13" fill="#6366F1">q3</text>
+
+  <rect x="332" y="52" width="154" height="120" rx="16" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2"/>
+  <text x="409" y="78" text-anchor="middle" font-family="Arial" font-size="15" font-weight="700" fill="#9A3412">Step order</text>
+  <text x="348" y="104" font-family="Arial" font-size="14" fill="#4B5563">1. 6 ÷ 3 = 2</text>
+  <text x="348" y="126" font-family="Arial" font-size="14" fill="#4B5563">2. 3 ÷ 3 = 1</text>
+  <text x="348" y="148" font-family="Arial" font-size="14" fill="#4B5563">3. 9 ÷ 3 = 3</text>
+  <text x="410" y="188" text-anchor="middle" font-family="Arial" font-size="16" fill="#64748B">fill the quotient row</text>
+</svg>

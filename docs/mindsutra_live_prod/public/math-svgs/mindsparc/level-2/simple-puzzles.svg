@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">Simple Puzzles</title>
+  <desc id="desc">Clue cards and colorful puzzle pieces for basic arrangement logic.</desc>
+  <rect width="480" height="320" rx="28" fill="#FEFCE8"/>
+  <rect x="36" y="34" width="408" height="252" rx="24" fill="#FFFFFF" stroke="#FDE68A" stroke-width="4"/>
+  <rect x="66" y="74" width="156" height="110" rx="18" fill="#EEF2FF"/>
+  <text x="84" y="108" font-family="Verdana, sans-serif" font-size="18" font-weight="700" fill="#3730A3">Clues</text>
+  <text x="84" y="138" font-family="Verdana, sans-serif" font-size="16" fill="#4338CA">A sits before B</text>
+  <text x="84" y="162" font-family="Verdana, sans-serif" font-size="16" fill="#4338CA">C sits after A</text>
+  <rect x="276" y="84" width="54" height="54" rx="12" fill="#34D399"/>
+  <rect x="332" y="84" width="54" height="54" rx="12" fill="#60A5FA"/>
+  <rect x="304" y="140" width="54" height="54" rx="12" fill="#F97316"/>
+  <text x="295" y="117" font-family="Verdana, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">A</text>
+  <text x="351" y="117" font-family="Verdana, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">B</text>
+  <text x="323" y="174" font-family="Verdana, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">C</text>
+  <path d="M118 214h242" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="160" cy="214" r="10" fill="#34D399"/>
+  <circle cx="242" cy="214" r="10" fill="#60A5FA"/>
+  <circle cx="324" cy="214" r="10" fill="#F97316"/>
+  <text x="122" y="278" font-family="Verdana, sans-serif" font-size="20" font-weight="700" fill="#A16207">Solve clue-by-clue puzzles</text>
+</svg>

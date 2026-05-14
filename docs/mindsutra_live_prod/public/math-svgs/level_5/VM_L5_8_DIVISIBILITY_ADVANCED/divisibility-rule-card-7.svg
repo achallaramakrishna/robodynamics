@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#22C55E" />
+  <text x="40" y="46" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Divisibility by 7</text>
+  <text x="40" y="76" fill="#BBF7D0" font-size="16" font-weight="600" font-family="Verdana, sans-serif">Rest minus double the last digit</text>
+
+  <rect x="40" y="110" width="320" height="230" rx="18" fill="#052E16" stroke="#4ADE80" stroke-width="2" />
+  <text x="60" y="148" fill="#DCFCE7" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Rule</text>
+  <text x="60" y="190" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Take the last digit.</text>
+  <text x="60" y="224" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Double it.</text>
+  <text x="60" y="258" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">Subtract from the rest.</text>
+  <text x="60" y="298" fill="#FDE68A" font-size="24" font-weight="800" font-family="Verdana, sans-serif">If the result is divisible by 7, so is the number.</text>
+
+  <rect x="388" y="110" width="372" height="230" rx="18" fill="#111827" stroke="#94A3B8" stroke-width="2" />
+  <text x="408" y="148" fill="#E2E8F0" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Example: 1001</text>
+  <text x="408" y="192" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">100 − 2×1 = 98</text>
+  <text x="408" y="230" fill="#86EFAC" font-size="28" font-weight="900" font-family="Verdana, sans-serif">98 is divisible by 7</text>
+  <text x="408" y="270" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">So 1001 is divisible by 7.</text>
+  <text x="408" y="308" fill="#FCA5A5" font-size="20" font-weight="800" font-family="Verdana, sans-serif">Counterexample: 75 → 7 − 10 = −3 → not divisible</text>
+</svg>

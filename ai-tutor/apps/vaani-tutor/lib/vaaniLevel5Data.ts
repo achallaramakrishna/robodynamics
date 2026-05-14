@@ -38,7 +38,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L01",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "नमस्ते भाई - Hello brother",
     category: "Greetings",
     skill: "Basic Greeting",
@@ -63,7 +63,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L02",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "आप कैसे? - How are you?",
     category: "Polite Questions",
     skill: "Simple Questions",
@@ -88,7 +88,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L03",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "मैं ठीक - I am fine",
     category: "Status Responses",
     skill: "Answering Questions",
@@ -113,7 +113,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L04",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "धन्यवाद भाई - Thank you brother",
     category: "Politeness",
     skill: "Gratitude",
@@ -131,7 +131,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L05",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "कृपया बैठिए - Please sit",
     category: "Requests",
     skill: "Polite Requests",
@@ -149,7 +149,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L06",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "मेरा नाम - My name",
     category: "Introduction",
     skill: "Self-Introduction",
@@ -168,7 +168,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L07",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "आपका नाम - Your name",
     category: "Introduction",
     skill: "Asking Names",
@@ -188,7 +188,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L08",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "मुझे भूख है - I am hungry",
     category: "Needs",
     skill: "Expressing Hunger",
@@ -207,8 +207,8 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L09",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
-    title: "यह क्या है? - What is this?",
+    chapterTitle: "Basic Sentences (2–5 words)",
+    title: "यह एक किताब है - This is a book",
     category: "Objects",
     skill: "Identifying Things",
     sentence: "यह एक किताब है।",
@@ -227,7 +227,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L10",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "मुझे पसंद है - I like",
     category: "Preferences",
     skill: "Expressing Likes",
@@ -242,12 +242,12 @@ export const LEVEL_5_DATA: Level5Seed[] = [
     ],
     assetPath: "/assets/gemini/vaani_l5_mujhe_pasand_1777200217.png",
     summary: "Express your preferences in Hindi.",
-    prompt: "पसंद means liked!",
+    prompt: "पसंद means like or enjoy!",
   },
   {
     id: "L5-C01-L11",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "मैं स्कूल जाता हूँ - I go to school",
     category: "Actions",
     skill: "Daily Actions",
@@ -267,7 +267,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L12",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "क्या आप मदद कर सकते हैं? - Can you help me?",
     category: "Requests",
     skill: "Asking for Help",
@@ -290,7 +290,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L13",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "यह पानी है - This is water",
     category: "Objects",
     skill: "Identifying Liquids",
@@ -309,7 +309,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L14",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences",
+    chapterTitle: "Basic Sentences (2–5 words)",
     title: "मुझे प्यास है - I am thirsty",
     category: "Needs",
     skill: "Expressing Thirst",
@@ -328,7 +328,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
   {
     id: "L5-C01-L15",
     chapterId: "C01",
-    chapterTitle: "Simple 2-Word Sentences - Consolidation",
+    chapterTitle: "Basic Sentences — Consolidation",
     title: "Review - Simple 2-Word Sentences",
     category: "Consolidation",
     skill: "Basic Mastery",

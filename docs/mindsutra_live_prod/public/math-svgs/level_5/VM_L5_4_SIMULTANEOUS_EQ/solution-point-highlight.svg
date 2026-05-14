@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#0F172A" />
+  <rect x="0" y="0" width="800" height="8" fill="#EC4899" />
+
+  <text x="40" y="46" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">
+    Challenge: 3x + 2y = 8, x − y = 1
+  </text>
+  <text x="40" y="76" fill="#FBCFE8" font-size="16" font-weight="600" font-family="Verdana, sans-serif">
+    Track D and the x numerator carefully
+  </text>
+
+  <rect x="40" y="108" width="224" height="240" rx="18" fill="#1E1B4B" stroke="#C4B5FD" stroke-width="2" />
+  <text x="60" y="144" fill="#F5F3FF" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Equations</text>
+  <text x="60" y="184" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Verdana, sans-serif">3x + 2y = 8</text>
+  <text x="60" y="220" fill="#F8FAFC" font-size="26" font-weight="700" font-family="Verdana, sans-serif">x − y = 1</text>
+  <text x="60" y="274" fill="#DDD6FE" font-size="22" font-weight="700" font-family="Verdana, sans-serif">a₁=3 b₁=2 c₁=8</text>
+  <text x="60" y="306" fill="#DDD6FE" font-size="22" font-weight="700" font-family="Verdana, sans-serif">a₂=1 b₂=−1 c₂=1</text>
+
+  <rect x="286" y="108" width="214" height="240" rx="18" fill="#3B0824" stroke="#F472B6" stroke-width="2" />
+  <text x="306" y="144" fill="#FCE7F3" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Determinant</text>
+  <text x="306" y="190" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">D = 3×(−1) − 1×2</text>
+  <text x="306" y="228" fill="#F9A8D4" font-size="30" font-weight="900" font-family="Verdana, sans-serif">D = −5</text>
+  <text x="306" y="282" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">x = (8×−1 − 1×2)/−5</text>
+  <text x="306" y="318" fill="#F9A8D4" font-size="28" font-weight="900" font-family="Verdana, sans-serif">x = (−8 − 2)/−5 = 2</text>
+
+  <rect x="522" y="108" width="238" height="240" rx="18" fill="#052E16" stroke="#4ADE80" stroke-width="2" />
+  <text x="542" y="144" fill="#DCFCE7" font-size="24" font-weight="800" font-family="Verdana, sans-serif">Check the point</text>
+  <text x="542" y="190" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">x − y = 1</text>
+  <text x="542" y="224" fill="#F8FAFC" font-size="22" font-weight="700" font-family="Verdana, sans-serif">2 − y = 1</text>
+  <text x="542" y="258" fill="#86EFAC" font-size="28" font-weight="900" font-family="Verdana, sans-serif">y = 1</text>
+  <text x="542" y="308" fill="#86EFAC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">3×2 + 2×1 = 8</text>
+  <text x="542" y="336" fill="#F8FAFC" font-size="20" font-weight="800" font-family="Verdana, sans-serif">So the solution point is (2, 1).</text>
+</svg>

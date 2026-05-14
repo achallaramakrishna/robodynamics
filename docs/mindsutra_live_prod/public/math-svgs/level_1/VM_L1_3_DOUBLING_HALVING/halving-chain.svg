@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0F1C"/>
+      <stop offset="100%" stop-color="#060D1A"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A3A2F"/>
+      <stop offset="100%" stop-color="#0D2018"/>
+    </linearGradient>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ADE80"/>
+    </marker>
+    <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="480" height="160" fill="url(#bgGrad)" rx="12"/>
+  <rect width="480" height="160" fill="none" stroke="#1E293B" stroke-width="1.5" rx="12"/>
+
+  <text x="240" y="22" font-size="11" font-weight="800" fill="#4ADE80" text-anchor="middle" letter-spacing="2">HALVING CHAIN — ÷2 each step</text>
+
+  <!-- Arrows -->
+  <line x1="82" y1="90" x2="108" y2="90" stroke="#4ADE80" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="162" y1="90" x2="188" y2="90" stroke="#4ADE80" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="242" y1="90" x2="268" y2="90" stroke="#4ADE80" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="322" y1="90" x2="348" y2="90" stroke="#4ADE80" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="402" y1="90" x2="428" y2="90" stroke="#4ADE80" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- ÷2 labels -->
+  <text x="95" y="82" font-size="9" fill="#86EFAC" text-anchor="middle">÷2</text>
+  <text x="175" y="82" font-size="9" fill="#86EFAC" text-anchor="middle">÷2</text>
+  <text x="255" y="82" font-size="9" fill="#86EFAC" text-anchor="middle">÷2</text>
+  <text x="335" y="82" font-size="9" fill="#86EFAC" text-anchor="middle">÷2</text>
+  <text x="415" y="82" font-size="9" fill="#86EFAC" text-anchor="middle">÷2</text>
+
+  <!-- Nodes: 96 → 48 → 24 → 12 → 6 → 3 -->
+  <rect x="18" y="68" width="46" height="44" rx="10" fill="url(#nodeGrad)" stroke="#22C55E" stroke-width="2.5"/>
+  <text x="41" y="87" font-size="16" font-weight="900" fill="#F8FAFC" text-anchor="middle">96</text>
+  <text x="41" y="103" font-size="8" fill="#4ADE80" text-anchor="middle">start</text>
+
+  <rect x="98" y="68" width="46" height="44" rx="10" fill="url(#nodeGrad)" stroke="#22C55E" stroke-width="2"/>
+  <text x="121" y="87" font-size="16" font-weight="900" fill="#F8FAFC" text-anchor="middle">48</text>
+  <text x="121" y="103" font-size="8" fill="#4ADE80" text-anchor="middle">step 1</text>
+
+  <rect x="178" y="68" width="46" height="44" rx="10" fill="url(#nodeGrad)" stroke="#22C55E" stroke-width="2"/>
+  <text x="201" y="87" font-size="18" font-weight="900" fill="#F8FAFC" text-anchor="middle">24</text>
+  <text x="201" y="103" font-size="8" fill="#4ADE80" text-anchor="middle">step 2</text>
+
+  <rect x="258" y="68" width="46" height="44" rx="10" fill="url(#nodeGrad)" stroke="#22C55E" stroke-width="2"/>
+  <text x="281" y="87" font-size="18" font-weight="900" fill="#F8FAFC" text-anchor="middle">12</text>
+  <text x="281" y="103" font-size="8" fill="#4ADE80" text-anchor="middle">step 3</text>
+
+  <rect x="338" y="68" width="46" height="44" rx="10" fill="url(#nodeGrad)" stroke="#22C55E" stroke-width="2"/>
+  <text x="361" y="87" font-size="18" font-weight="900" fill="#F8FAFC" text-anchor="middle">6</text>
+  <text x="361" y="103" font-size="8" fill="#4ADE80" text-anchor="middle">step 4</text>
+
+  <rect x="418" y="68" width="46" height="44" rx="10" fill="url(#nodeGrad)" stroke="#F59E0B" stroke-width="2.5" filter="url(#glow)"/>
+  <text x="441" y="87" font-size="18" font-weight="900" fill="#FCD34D" text-anchor="middle">3</text>
+  <text x="441" y="103" font-size="8" fill="#F59E0B" text-anchor="middle">easy!</text>
+
+  <text x="240" y="148" font-size="10" fill="#475569" text-anchor="middle">Halve one factor → multiply by easy number → same product</text>
+</svg>

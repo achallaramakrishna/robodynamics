@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="160" viewBox="0 0 360 160">
+  <rect width="360" height="160" rx="24" fill="#FFF4CC"/>
+  <rect x="72" y="40" width="216" height="76" rx="20" fill="white" stroke="#E2B93B" stroke-width="4"/>
+  <text x="180" y="88" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" font-weight="700" fill="#1F2440">5 + 8 = 13</text>
+  <text x="180" y="136" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">highlight the middle sum before carrying</text>
+</svg>

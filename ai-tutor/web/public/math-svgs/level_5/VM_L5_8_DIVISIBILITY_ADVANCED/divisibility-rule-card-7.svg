@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="20" fill="#f8fafc"/>
+  <rect x="20" y="20" width="760" height="360" rx="22" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="44" y="58" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#64748b">VEDIKA DIVISIBILITY</text>
+  <text x="400" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1e293b">Rule for 7</text>
+  <text x="400" y="114" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">Double the last digit, subtract it from the rest, and repeat if needed.</text>
+
+  <g transform="translate(110 156)">
+    <rect x="0" y="0" width="170" height="100" rx="24" fill="#eef2ff" stroke="#818cf8" stroke-width="3"/>
+    <rect x="190" y="0" width="170" height="100" rx="24" fill="#fff7ed" stroke="#fb923c" stroke-width="3"/>
+    <rect x="380" y="0" width="170" height="100" rx="24" fill="#ecfdf5" stroke="#34d399" stroke-width="3"/>
+
+    <text x="85" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#3730a3">Start</text>
+    <text x="275" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#c2410c">Transform</text>
+    <text x="465" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#166534">Result</text>
+
+    <text x="85" y="74" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="34" font-weight="700" fill="#111827">203</text>
+    <text x="275" y="74" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#111827">20 - 2x3</text>
+    <text x="465" y="74" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="34" font-weight="700" fill="#166534">14</text>
+
+    <path d="M170 50 H190" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="180" cy="50" r="8" fill="#6366f1">
+      <animate attributeName="cx" values="180;188;180" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M360 50 H380" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="370" cy="50" r="8" fill="#f97316">
+      <animate attributeName="cx" values="370;378;370" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <text x="400" y="316" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#334155">Since 14 is divisible by 7, 203 is also divisible by 7.</text>
+</svg>

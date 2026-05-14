@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="18" fill="#111827" />
+  <rect x="0" y="0" width="800" height="8" fill="#F97316" />
+  <text x="40" y="44" fill="#F8FAFC" font-size="28" font-weight="800" font-family="Verdana, sans-serif">Coefficient and power flow</text>
+  <text x="40" y="74" fill="#FDBA74" font-size="16" font-weight="600" font-family="Verdana, sans-serif">a powers go down, b powers go up</text>
+  <rect x="56" y="118" width="688" height="210" rx="18" fill="#0F172A" stroke="#475569" stroke-width="2" />
+  <text x="90" y="170" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">a^3</text>
+  <text x="220" y="170" fill="#FDE68A" font-size="24" font-weight="900" font-family="Verdana, sans-serif">3a^2b</text>
+  <text x="384" y="170" fill="#FDE68A" font-size="24" font-weight="900" font-family="Verdana, sans-serif">3ab^2</text>
+  <text x="548" y="170" fill="#F8FAFC" font-size="24" font-weight="700" font-family="Verdana, sans-serif">b^3</text>
+  <line x1="112" y1="208" x2="586" y2="208" stroke="#38BDF8" stroke-width="4" />
+  <polygon points="586,208 572,200 572,216" fill="#38BDF8" />
+  <text x="92" y="260" fill="#E2E8F0" font-size="22" font-weight="800" font-family="Verdana, sans-serif">a: 3 -> 2 -> 1 -> 0</text>
+  <text x="92" y="298" fill="#E2E8F0" font-size="22" font-weight="800" font-family="Verdana, sans-serif">b: 0 -> 1 -> 2 -> 3</text>
+</svg>

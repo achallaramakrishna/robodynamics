@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">Classification</title>
+  <desc id="desc">Objects grouped by common property.</desc>
+  <rect width="480" height="320" rx="28" fill="#ECFDF5"/>
+  <rect x="34" y="34" width="412" height="252" rx="24" fill="#FFFFFF" stroke="#86EFAC" stroke-width="4"/>
+  <rect x="64" y="78" width="154" height="164" rx="20" fill="#DCFCE7"/>
+  <rect x="262" y="78" width="154" height="164" rx="20" fill="#DBEAFE"/>
+  <text x="102" y="108" font-family="Verdana, sans-serif" font-size="22" font-weight="700" fill="#166534">Animals</text>
+  <text x="315" y="108" font-family="Verdana, sans-serif" font-size="22" font-weight="700" fill="#1D4ED8">Vehicles</text>
+  <text x="94" y="154" font-family="Verdana, sans-serif" font-size="36">🐶</text>
+  <text x="150" y="154" font-family="Verdana, sans-serif" font-size="36">🐘</text>
+  <text x="122" y="214" font-family="Verdana, sans-serif" font-size="36">🦜</text>
+  <text x="290" y="154" font-family="Verdana, sans-serif" font-size="36">🚗</text>
+  <text x="350" y="154" font-family="Verdana, sans-serif" font-size="36">🚲</text>
+  <text x="320" y="214" font-family="Verdana, sans-serif" font-size="36">🚌</text>
+  <text x="102" y="278" font-family="Verdana, sans-serif" font-size="20" font-weight="700" fill="#047857">Sort by the common rule</text>
+</svg>

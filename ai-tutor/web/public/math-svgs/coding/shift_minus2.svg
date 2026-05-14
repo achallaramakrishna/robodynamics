@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60">
+  <!-- D box (original letter) -->
+  <rect x="5" y="10" width="44" height="40" rx="8" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="27" y="36" font-family="monospace" font-size="18" font-weight="bold" fill="#7c3aed" text-anchor="middle">D</text>
+  <!-- −2 arrow (pointing left = backward shift) -->
+  <line x1="105" y1="30" x2="55" y2="30" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="55,24 42,30 55,36" fill="#ef4444"/>
+  <text x="80" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#ef4444" text-anchor="middle">−2</text>
+  <!-- B box (result letter) -->
+  <rect x="110" y="10" width="44" height="40" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="132" y="36" font-family="monospace" font-size="18" font-weight="bold" fill="#1d4ed8" text-anchor="middle">B</text>
+</svg>

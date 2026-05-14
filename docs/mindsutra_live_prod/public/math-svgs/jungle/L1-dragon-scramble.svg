@@ -1,0 +1,28 @@
+<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <title>L1 Dragon Scramble - Scramble Animation</title>
+  
+  <style>
+    @keyframes fly-across {
+      0% { transform: translateX(-400px); }
+      100% { transform: translateX(800px); }
+    }
+    .dragon-path { animation: fly-across 1.5s linear infinite; }
+    .smoke { opacity: 0.6; }
+  </style>
+
+  <rect width="400" height="200" fill="transparent" />
+
+  <g class="dragon-path">
+    {/* Chaos Dragon Body */}
+    <path d="M0,100 Q50,50 100,100 T200,100 T300,100" stroke="#EF4444" stroke-width="20" fill="none" class="smoke" />
+    <circle cx="0" cy="100" r="15" fill="#991B1B" />
+    <path d="M-10,95 L-20,80 M10,95 L20,80" stroke="white" stroke-width="3" />
+    
+    {/* Fire bits */}
+    <circle cx="-5" cy="110" r="5" fill="#FACC15">
+       <animate attributeName="opacity" values="1;0;1" dur="0.3s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <text x="200" y="180" text-anchor="middle" font-size="14" font-weight="900" fill="#EF4444" opacity="0.8">The Dragon is Scrambling the Logic! 🐉</text>
+</svg>

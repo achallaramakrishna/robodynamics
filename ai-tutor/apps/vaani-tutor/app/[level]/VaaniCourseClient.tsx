@@ -8,6 +8,7 @@ import {
   getAllCompletions,
   type LessonCompletion,
 } from "@/lib/vaaniGamification";
+import { hydrateVaaniProgress } from "@/lib/vaaniProgressSync";
 
 // ── Design tokens ────────────────────────────────────────────────────────────
 const SHELL = {
@@ -31,11 +32,18 @@ const LEVEL_THEMES: Record<number, { primary: string; light: string; dark: strin
 
 const DEFAULT_THEME = LEVEL_THEMES[1];
 
-const spotlight = [
-  "Visual word anchors",
-  "Finger tracing practice",
-  "Flashcards and quick checks",
-];
+const LEVEL_SPOTLIGHTS: Record<number, string[]> = {
+  1: [
+    "Visual word anchors",
+    "Finger tracing practice",
+    "Flashcards and quick checks",
+  ],
+  2: [
+    "Matra picture cards on every lesson",
+    "See how the base letter changes its sound",
+    "Practice with word-image memory hooks",
+  ],
+};
 
 const ROADMAP_DEFAULT_VISIBLE = 8;
 
@@ -45,6 +53,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
     payload.selectedLesson?.id ?? payload.lessons[0]?.id ?? ""
   );
   const [showAll, setShowAll] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(1280);
 
   // ── Derive level number from first lesson ID (e.g. "L3-C01-L01" → 3) ──────
   const levelNumber = useMemo<number>(() => {
@@ -54,6 +63,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
   }, [payload.lessons]);
 
   const theme = LEVEL_THEMES[levelNumber] ?? DEFAULT_THEME;
+  const spotlight = LEVEL_SPOTLIGHTS[levelNumber] ?? LEVEL_SPOTLIGHTS[1];
   const totalLessons: number = payload.course.totalLessons ?? payload.lessons.length;
 
   // ── Gamification state (client-side localStorage hydration) ──────────────
@@ -65,15 +75,36 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
   const [completionMap, setCompletionMap] = useState<Record<string, LessonCompletion>>({});
 
   useEffect(() => {
-    setLevelStats(getLevelStats(levelNumber));
-    setProfileStats(getProfileStats());
-    // Build best-star completion map per lesson
-    const map: Record<string, LessonCompletion> = {};
-    for (const c of getAllCompletions()) {
-      const prev = map[c.lessonId];
-      if (!prev || c.starsEarned > prev.starsEarned) map[c.lessonId] = c;
-    }
-    setCompletionMap(map);
+    if (typeof window === "undefined") return;
+    const updateViewport = () => setViewportWidth(window.innerWidth);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadProgress = async () => {
+      await hydrateVaaniProgress();
+      if (cancelled) return;
+
+      setLevelStats(getLevelStats(levelNumber));
+      setProfileStats(getProfileStats());
+
+      const map: Record<string, LessonCompletion> = {};
+      for (const c of getAllCompletions()) {
+        const prev = map[c.lessonId];
+        if (!prev || c.starsEarned > prev.starsEarned) map[c.lessonId] = c;
+      }
+      setCompletionMap(map);
+    };
+
+    void loadProgress();
+
+    return () => {
+      cancelled = true;
+    };
   }, [levelNumber]);
 
   // ── Derived values ────────────────────────────────────────────────────────
@@ -97,6 +128,64 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
   const hiddenCount = Math.max(0, payload.lessons.length - ROADMAP_DEFAULT_VISIBLE);
 
   const selectedCompletion = selectedLesson ? completionMap[selectedLesson.id] : undefined;
+  const isPhone = viewportWidth < 768;
+  const isTablet = viewportWidth >= 768 && viewportWidth < 1100;
+  const isCompact = viewportWidth < 1100;
+  const levelLinks = [1, 2, 3, 4, 5, 6].map((n) => ({
+    number: n,
+    href: `/vaani/level-${n}`,
+    active: n === levelNumber,
+  }));
+  const utilityCards = [
+    {
+      title: "Current focus",
+      text: selectedLesson?.category ?? "Lesson roadmap",
+      accent: theme.primary,
+    },
+    {
+      title: "Next action",
+      text: completedCount > 0 ? `Continue with ${nextLesson?.title ?? "the next lesson"}` : `Start Level ${levelNumber}`,
+      accent: SHELL.accentTwo,
+    },
+    {
+      title: "Lesson pace",
+      text: `${selectedLesson?.durationMin ?? 6} min guided practice`,
+      accent: SHELL.accentThree,
+    },
+    {
+      title: "Reward target",
+      text: levelStats?.nextBadgeName ? `Unlock ${levelStats.nextBadgeName}` : "Earn your first badge",
+      accent: theme.dark,
+    },
+  ];
+  const supportCards = [
+    {
+      title: "What you will practice",
+      text: levelNumber === 2
+        ? "See how a base consonant changes when the matra is added, then connect that sound to a real Hindi word."
+        : "Observe the sound, connect it to the picture, then practice until recognition feels easy.",
+      color: theme.primary,
+    },
+    {
+      title: "Why this matters",
+      text: levelNumber === 2
+        ? "Matras unlock real Hindi reading. Once learners spot the sound shift, they can decode many more words confidently."
+        : "This lesson builds one dependable reading pattern that makes the next lesson easier and faster.",
+      color: SHELL.accentTwo,
+    },
+    {
+      title: "Parent tip",
+      text: "Ask the child to say the sound aloud once before tapping the lesson. That small pause improves recall and attention.",
+      color: SHELL.accentThree,
+    },
+    {
+      title: "Next reward",
+      text: selectedCompletion
+        ? `Best run so far: ${selectedCompletion.starsEarned} stars and ${selectedCompletion.xpEarned} XP.`
+        : "Complete this lesson cleanly to collect stars, XP, and move closer to the next badge.",
+      color: theme.dark,
+    },
+  ];
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
@@ -108,14 +197,14 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
         fontFamily: "'Outfit', 'Trebuchet MS', sans-serif",
       }}
     >
-      <section style={{ maxWidth: 1280, margin: "0 auto", padding: "34px 24px 48px" }}>
+      <section style={{ maxWidth: 1280, margin: "0 auto", padding: isPhone ? "22px 14px 36px" : isTablet ? "28px 18px 42px" : "34px 24px 48px" }}>
 
         {/* ── PAGE HEADER ───────────────────────────────────────────────────── */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-start",
+            alignItems: isPhone ? "stretch" : "flex-start",
             gap: 16,
             flexWrap: "wrap",
             marginBottom: 20,
@@ -131,6 +220,59 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
             <p style={{ margin: "10px 0 0", color: SHELL.soft, fontSize: 18, maxWidth: 760, lineHeight: 1.65 }}>
               {payload.course.subtitle}. {payload.course.tagline}.
             </p>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 10,
+                alignItems: "center",
+                marginTop: 18,
+              }}
+            >
+              <a
+                href="/vaani"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "10px 14px",
+                  borderRadius: 999,
+                  textDecoration: "none",
+                  fontSize: 13,
+                  fontWeight: 800,
+                  color: SHELL.soft,
+                  background: "rgba(255,255,255,0.86)",
+                  border: `1px solid ${SHELL.line}`,
+                }}
+              >
+                All Levels
+              </a>
+              {levelLinks.map((level) => (
+                <a
+                  key={level.number}
+                  href={level.href}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minWidth: 92,
+                    padding: "10px 14px",
+                    borderRadius: 999,
+                    textDecoration: "none",
+                    fontSize: 13,
+                    fontWeight: 800,
+                    color: level.active ? "white" : theme.dark,
+                    background: level.active
+                      ? `linear-gradient(135deg, ${theme.primary}, ${theme.dark})`
+                      : theme.light,
+                    border: level.active ? "none" : `1px solid ${theme.primary}25`,
+                    boxShadow: level.active ? `0 10px 24px ${theme.shadow}` : "none",
+                  }}
+                >
+                  Level {level.number}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* ── STATS PILLS ─────────────────────────────────────────────────── */}
@@ -181,6 +323,35 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
         </div>
 
         {/* ── PRIMARY CTA ───────────────────────────────────────────────────── */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: 14,
+            marginBottom: 22,
+          }}
+        >
+          {utilityCards.map((card) => (
+            <div
+              key={card.title}
+              style={{
+                background: "rgba(255,255,255,0.72)",
+                borderRadius: 22,
+                border: `1px solid ${SHELL.line}`,
+                padding: "16px 18px",
+                boxShadow: "0 14px 28px rgba(15,23,42,0.05)",
+              }}
+            >
+              <div style={{ fontSize: 11, fontWeight: 900, textTransform: "uppercase", letterSpacing: 1, color: card.accent, marginBottom: 8 }}>
+                {card.title}
+              </div>
+              <div style={{ fontSize: 14, lineHeight: 1.55, color: SHELL.ink, fontWeight: 700 }}>
+                {card.text}
+              </div>
+            </div>
+          ))}
+        </div>
+
         {nextLesson && (
           <div style={{ marginBottom: 28 }}>
             <button
@@ -207,7 +378,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
         )}
 
         {/* ── TWO-COLUMN LAYOUT: ROADMAP + LESSON DETAIL ─────────────────── */}
-        <div style={{ display: "grid", gridTemplateColumns: "360px 1fr", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isCompact ? "1fr" : "360px 1fr", gap: isPhone ? 18 : 24 }}>
 
           {/* ── ROADMAP SIDEBAR ─────────────────────────────────────────────── */}
           <aside
@@ -215,9 +386,10 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
               background: SHELL.surface,
               borderRadius: 30,
               border: `1px solid ${SHELL.line}`,
-              padding: 22,
+              padding: isPhone ? 16 : 22,
               boxShadow: "0 24px 52px rgba(15,23,42,0.08)",
               height: "fit-content",
+              order: isCompact ? 2 : 1,
             }}
           >
             <div style={{ fontSize: 12, color: "#5b6475", fontWeight: 900, textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 14 }}>
@@ -229,6 +401,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                 const active = lesson.id === selectedId;
                 const completion = completionMap[lesson.id];
                 const stars = completion?.starsEarned ?? 0;
+                const showThumbnail = levelNumber === 2 && Boolean(lesson.image);
 
                 return (
                   <button
@@ -293,6 +466,53 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                       </div>
                     </div>
 
+                    {showThumbnail && (
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "64px 1fr",
+                          gap: 10,
+                          alignItems: "center",
+                          marginBottom: 8,
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 64,
+                            height: 64,
+                            borderRadius: 16,
+                            overflow: "hidden",
+                            background: "rgba(255,255,255,0.9)",
+                            border: `1px solid ${SHELL.line}`,
+                            display: "grid",
+                            placeItems: "center",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <img
+                            src={(lesson.image as string).startsWith("/vaani") ? lesson.image : `/vaani${lesson.image}`}
+                            alt={lesson.title}
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            onError={(e) => {
+                              const t = e.target as HTMLImageElement;
+                              if (!t.src.includes("placeholder")) t.src = "/vaani/assets/gemini/placeholder.svg";
+                            }}
+                          />
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 28,
+                            fontWeight: 900,
+                            color: theme.primary,
+                            lineHeight: 1,
+                            justifySelf: "start",
+                          }}
+                        >
+                          {lesson.modifiedChar ?? lesson.title?.split(" - ")[0] ?? "का"}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Row 2: title */}
                     <div style={{ fontSize: 15, fontWeight: 900, color: SHELL.ink, marginBottom: 4, lineHeight: 1.3 }}>
                       {lesson.title}
@@ -352,7 +572,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
           </aside>
 
           {/* ── LESSON DETAIL PANEL ─────────────────────────────────────────── */}
-          <section style={{ display: "grid", gap: 22, alignContent: "start" }}>
+          <section style={{ display: "grid", gap: 22, alignContent: "start", order: isCompact ? 1 : 2 }}>
             {selectedLesson && (
               <>
                 {/* Hero card */}
@@ -361,7 +581,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                     background: SHELL.surface,
                     borderRadius: 34,
                     border: `1px solid ${SHELL.line}`,
-                    padding: 28,
+                    padding: isPhone ? 18 : isTablet ? 22 : 28,
                     boxShadow: "0 28px 58px rgba(59,130,246,0.08)",
                     overflow: "hidden",
                     position: "relative",
@@ -378,7 +598,7 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                     }}
                   />
 
-                  <div style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: 24, alignItems: "center" }}>
+                  <div style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: isCompact ? "1fr" : "1.05fr 0.95fr", gap: isPhone ? 18 : 24, alignItems: "start" }}>
                     {/* Left: info */}
                     <div>
                       <div
@@ -411,6 +631,63 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                         {selectedLesson.summary}
                       </p>
 
+                      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 18 }}>
+                        {[
+                          selectedLesson.category,
+                          selectedLesson.durationMin ? `${selectedLesson.durationMin} min practice` : null,
+                          selectedCompletion ? `${selectedCompletion.starsEarned} stars earned` : "Stars available",
+                          levelNumber === 2 && selectedLesson.wordHindi ? `Word: ${selectedLesson.wordHindi}` : null,
+                        ]
+                          .filter(Boolean)
+                          .map((chip) => (
+                            <div
+                              key={String(chip)}
+                              style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                borderRadius: 999,
+                                padding: "8px 12px",
+                                background: "rgba(255,255,255,0.8)",
+                                border: `1px solid ${SHELL.line}`,
+                                color: SHELL.soft,
+                                fontSize: 12,
+                                fontWeight: 800,
+                              }}
+                            >
+                              {chip}
+                            </div>
+                          ))}
+                      </div>
+
+                      {levelNumber === 2 && (
+                        <div
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 10,
+                            padding: "12px 16px",
+                            borderRadius: 18,
+                            background: "rgba(255,255,255,0.78)",
+                            border: `1px solid ${SHELL.line}`,
+                            marginBottom: 20,
+                            fontWeight: 900,
+                            color: theme.dark,
+                            flexWrap: "wrap",
+                          }}
+                        >
+                          <span style={{ fontSize: 22 }}>{selectedLesson.baseChar ?? "क"}</span>
+                          <span style={{ fontSize: 18, color: SHELL.soft }}>+</span>
+                          <span style={{ fontSize: 22 }}>{selectedLesson.matra ?? "ा"}</span>
+                          <span style={{ fontSize: 18, color: SHELL.soft }}>=</span>
+                          <span style={{ fontSize: 28, color: theme.primary }}>{selectedLesson.modifiedChar ?? "का"}</span>
+                          {selectedLesson.wordHindi && (
+                            <span style={{ fontSize: 14, color: SHELL.soft, fontWeight: 700 }}>
+                              · {selectedLesson.wordHindi}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
                       <div style={{ display: "grid", gap: 10, marginBottom: 24 }}>
                         {spotlight.map((item) => (
                           <div key={item} style={{ display: "flex", alignItems: "center", gap: 10, color: SHELL.ink, fontWeight: 700 }}>
@@ -440,7 +717,11 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                           style={{
                             border: "none",
                             cursor: "pointer",
-                            padding: "14px 24px",
+                            width: isPhone ? "100%" : undefined,
+                            justifyContent: "center",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            padding: isPhone ? "14px 18px" : "14px 24px",
                             borderRadius: 18,
                             fontWeight: 900,
                             fontSize: 16,
@@ -519,24 +800,8 @@ export default function VaaniCourseClient({ payload }: { payload: any }) {
                 </div>
 
                 {/* Info cards */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
-                  {[
-                    {
-                      title: "Coach style",
-                      text: "Friendly audio-led explanations with simple repetition.",
-                      color: theme.primary,
-                    },
-                    {
-                      title: "Learner action",
-                      text: "Observe, trace, remember, then answer a quick check.",
-                      color: SHELL.accentTwo,
-                    },
-                    {
-                      title: "Launch value",
-                      text: `Every ${payload.course.title.split(":")[0]} lesson points to a real public asset URL.`,
-                      color: SHELL.accentThree,
-                    },
-                  ].map((card) => (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18 }}>
+                  {supportCards.map((card) => (
                     <div
                       key={card.title}
                       style={{

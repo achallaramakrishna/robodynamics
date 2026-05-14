@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="200" viewBox="0 0 420 200">
+  <rect width="420" height="200" rx="24" fill="#F8FBFF"/>
+  <text x="28" y="34" font-family="Segoe UI, Arial" font-size="22" font-weight="700" fill="#25327A">Work one band at a time</text>
+  <text x="28" y="54" font-family="Segoe UI, Arial" font-size="13" fill="#5F6A83">Guided example from the lesson: 112 x 213</text>
+
+  <rect x="24" y="72" width="372" height="44" rx="14" fill="#FFFFFF" stroke="#D6E1FA"/>
+  <text x="38" y="99" font-family="Segoe UI, Arial" font-size="16" fill="#1F2440">1. Ones  = 2 x 3 = 6</text>
+
+  <rect x="24" y="122" width="372" height="52" rx="14" fill="#FFFFFF" stroke="#D6E1FA"/>
+  <text x="38" y="145" font-family="Segoe UI, Arial" font-size="16" fill="#1F2440">2. Tens  = 1 x 3 + 2 x 1 = 5</text>
+  <text x="38" y="165" font-family="Segoe UI, Arial" font-size="16" fill="#7A2458">3. Hundreds = 1 x 3 + 1 x 1 + 2 x 2 = 8</text>
+
+  <rect x="280" y="82" width="104" height="82" rx="16" fill="#FFF3FA" stroke="#E9B5CF"/>
+  <text x="332" y="108" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="700" fill="#7A2458">Middle check</text>
+  <text x="332" y="130" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#4A5670">3 terms here</text>
+  <text x="332" y="148" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#4A5670">not 2 terms</text>
+</svg>

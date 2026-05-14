@@ -1,0 +1,71 @@
+<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .cell-label { font-size: 12px; font-weight: bold; fill: #333; }
+      .cell-text { font-size: 10px; fill: #555; }
+      .membrane { stroke: #2c3e50; stroke-width: 2; fill: none; }
+      .organelle { stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <!-- Cell Membrane -->
+  <circle cx="200" cy="250" r="170" class="membrane" stroke="#2980b9" stroke-width="2.5"/>
+
+  <!-- Nucleus -->
+  <circle cx="200" cy="120" r="50" class="organelle" stroke="#8e44ad" fill="#e8daef"/>
+  <circle cx="200" cy="120" r="40" class="organelle" stroke="#8e44ad" fill="none"/>
+  <circle cx="200" cy="120" r="8" fill="#c0392b"/>
+  <text x="200" y="180" class="cell-label" text-anchor="middle">Nucleus</text>
+
+  <!-- Centrioles -->
+  <g>
+    <circle cx="130" cy="220" r="15" class="organelle" stroke="#e74c3c" fill="#fadbd8"/>
+    <path d="M 125 220 L 135 220 M 130 215 L 130 225" stroke="#e74c3c" stroke-width="2"/>
+    <text x="130" y="245" class="cell-label" text-anchor="middle">Centriole</text>
+  </g>
+
+  <!-- Mitochondria -->
+  <ellipse cx="280" cy="160" rx="40" ry="50" class="organelle" stroke="#e74c3c" fill="#fadbd8"/>
+  <ellipse cx="280" cy="160" rx="30" ry="40" class="organelle" stroke="#e74c3c" fill="none"/>
+  <path d="M 265 145 Q 280 155 295 145" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+  <path d="M 265 170 Q 280 180 295 170" stroke="#e74c3c" stroke-width="1.5" fill="none"/>
+  <text x="280" y="225" class="cell-label" text-anchor="middle">Mitochondria</text>
+
+  <!-- Rough ER -->
+  <path d="M 120 150 L 120 200" stroke="#3498db" stroke-width="3" fill="none"/>
+  <circle cx="115" cy="160" r="2.5" fill="#e74c3c"/>
+  <circle cx="115" cy="180" r="2.5" fill="#e74c3c"/>
+  <text x="95" y="220" class="cell-label" text-anchor="middle">Rough ER</text>
+
+  <!-- Smooth ER -->
+  <path d="M 280 280 L 320 300" stroke="#3498db" stroke-width="3" fill="none"/>
+  <path d="M 320 300 L 280 320" stroke="#3498db" stroke-width="3" fill="none"/>
+  <text x="305" y="340" class="cell-label">Smooth ER</text>
+
+  <!-- Golgi Apparatus -->
+  <g>
+    <rect x="160" y="300" width="8" height="40" fill="#9b59b6"/>
+    <rect x="170" y="295" width="8" height="50" fill="#9b59b6"/>
+    <rect x="180" y="300" width="8" height="40" fill="#9b59b6"/>
+    <rect x="190" y="305" width="8" height="35" fill="#9b59b6"/>
+    <text x="175" y="360" class="cell-label" text-anchor="middle">Golgi</text>
+  </g>
+
+  <!-- Ribosomes -->
+  <circle cx="240" cy="280" r="3" fill="#16a085"/>
+  <circle cx="250" cy="285" r="3" fill="#16a085"/>
+  <circle cx="260" cy="280" r="3" fill="#16a085"/>
+  <text x="250" y="310" class="cell-label" text-anchor="middle">Ribosomes</text>
+
+  <!-- Lysosomes -->
+  <circle cx="150" cy="350" r="15" class="organelle" stroke="#c0392b" fill="#f5b7b1"/>
+  <text x="150" y="380" class="cell-label" text-anchor="middle">Lysosome</text>
+
+  <!-- Microtubules -->
+  <line x1="70" y1="250" x2="330" y2="250" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="30" y="265" class="cell-text">Microtubules</text>
+
+  <!-- Labels -->
+  <text x="50" y="25" class="cell-label" fill="#2980b9">ANIMAL CELL</text>
+  <text x="50" y="460" class="cell-text">No: Cell wall, Chloroplasts. Small/multiple vacuoles</text>
+</svg>

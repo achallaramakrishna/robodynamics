@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="380" height="220" font-family="Nunito,sans-serif">
+  <rect width="380" height="220" rx="14" fill="#fff7ed"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Percentage Bar Model — 37% of 200</text>
+
+  <!-- Total bar -->
+  <rect x="30" y="44" width="320" height="36" rx="6" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="190" y="67" text-anchor="middle" font-size="12" font-weight="700" fill="#374151">200 (Total = 100%)</text>
+
+  <!-- 10% blocks -->
+  <text x="20" y="104" text-anchor="end" font-size="11" fill="#6b7280">10%</text>
+  <rect x="30" y="90" width="32" height="28" rx="4" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+  <text x="46" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#78350f">20</text>
+
+  <rect x="64" y="90" width="32" height="28" rx="4" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+  <text x="80" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#78350f">20</text>
+
+  <rect x="98" y="90" width="32" height="28" rx="4" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+  <text x="114" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#78350f">20</text>
+
+  <!-- 5% block -->
+  <rect x="132" y="90" width="16" height="28" rx="4" fill="#34d399" stroke="#10b981" stroke-width="1"/>
+  <text x="140" y="104" text-anchor="middle" font-size="9" font-weight="700" fill="#065f46">10</text>
+  <text x="140" y="126" text-anchor="middle" font-size="9" fill="#059669">5%</text>
+
+  <!-- 2% block -->
+  <rect x="150" y="90" width="6.4" height="28" rx="3" fill="#818cf8" stroke="#6366f1" stroke-width="1"/>
+  <text x="162" y="126" text-anchor="middle" font-size="9" fill="#4338ca">2%</text>
+
+  <!-- Remaining -->
+  <rect x="158" y="90" width="192" height="28" rx="4" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="254" y="108" text-anchor="middle" font-size="11" fill="#9ca3af">63% remaining</text>
+
+  <!-- Breakdown text -->
+  <text x="190" y="152" text-anchor="middle" font-size="12" fill="#374151">30% = 3 × 20 = <tspan font-weight="700" fill="#d97706">60</tspan></text>
+  <text x="190" y="170" text-anchor="middle" font-size="12" fill="#374151">5% = 10,   2% = 4</text>
+  <text x="190" y="188" text-anchor="middle" font-size="12" fill="#374151">37% = 60 + 10 + 4 = <tspan font-weight="700" fill="#dc2626">74</tspan></text>
+
+  <!-- Result box -->
+  <rect x="120" y="198" width="140" height="18" rx="6" fill="#166534"/>
+  <text x="190" y="211" text-anchor="middle" font-size="11" font-weight="700" fill="white">37% of 200 = 74</text>
+</svg>

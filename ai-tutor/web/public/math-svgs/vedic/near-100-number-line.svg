@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" width="520" height="160" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0A0F1C"/><stop offset="100%" stop-color="#060D1A"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="arrR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#EF4444"/></marker>
+    <marker id="arrB" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#3B82F6"/></marker>
+    <marker id="arrY" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#F59E0B"/></marker>
+  </defs>
+  <rect width="520" height="160" fill="url(#bg)" rx="12"/>
+  <rect width="520" height="160" fill="none" stroke="#1E293B" stroke-width="1.5" rx="12"/>
+
+  <text x="260" y="20" font-size="11" font-weight="800" fill="#F59E0B" text-anchor="middle" letter-spacing="1">NEAR-100 NUMBER LINE</text>
+
+  <!-- Number line -->
+  <line x1="40" y1="90" x2="480" y2="90" stroke="#334155" stroke-width="2"/>
+  <!-- Arrowhead at right -->
+  <polygon points="478,86 486,90 478,94" fill="#334155"/>
+
+  <!-- Major ticks and labels: 90, 95, 97, 98, 100, 102, 103, 105, 110 -->
+  <!-- Position mapping: 40px = 90, 480px = 110, so 22px per unit -->
+  <!-- 90 → 40, 95 → 150, 97 → 194, 98 → 216, 100 → 260, 102 → 304, 103 → 326, 105 → 370, 110 → 480 -->
+
+  <line x1="40" y1="84" x2="40" y2="96" stroke="#334155" stroke-width="1.5"/>
+  <text x="40" y="110" font-size="10" fill="#475569" text-anchor="middle">90</text>
+
+  <line x1="150" y1="84" x2="150" y2="96" stroke="#334155" stroke-width="1.5"/>
+  <text x="150" y="110" font-size="10" fill="#475569" text-anchor="middle">95</text>
+
+  <!-- 97 — deficit node -->
+  <line x1="194" y1="80" x2="194" y2="100" stroke="#EF4444" stroke-width="2"/>
+  <circle cx="194" cy="90" r="5" fill="#EF4444" filter="url(#glow)"/>
+  <text x="194" y="74" font-size="11" font-weight="800" fill="#EF4444" text-anchor="middle">97</text>
+  <text x="194" y="125" font-size="9" fill="#EF4444" text-anchor="middle">−3</text>
+
+  <!-- 98 — deficit node -->
+  <line x1="216" y1="80" x2="216" y2="100" stroke="#EF4444" stroke-width="2"/>
+  <circle cx="216" cy="90" r="5" fill="#EF4444" filter="url(#glow)"/>
+  <text x="216" y="74" font-size="11" font-weight="800" fill="#EF4444" text-anchor="middle">98</text>
+  <text x="216" y="125" font-size="9" fill="#EF4444" text-anchor="middle">−2</text>
+
+  <!-- 100 — BASE -->
+  <line x1="260" y1="74" x2="260" y2="106" stroke="#F59E0B" stroke-width="2.5"/>
+  <circle cx="260" cy="90" r="8" fill="#F59E0B" filter="url(#glow)"/>
+  <text x="260" y="66" font-size="12" font-weight="900" fill="#F59E0B" text-anchor="middle">100</text>
+  <text x="260" y="122" font-size="9" fill="#F59E0B" text-anchor="middle">BASE</text>
+
+  <!-- 102 — surplus -->
+  <line x1="304" y1="80" x2="304" y2="100" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="304" cy="90" r="5" fill="#3B82F6" filter="url(#glow)"/>
+  <text x="304" y="74" font-size="11" font-weight="800" fill="#3B82F6" text-anchor="middle">102</text>
+  <text x="304" y="125" font-size="9" fill="#3B82F6" text-anchor="middle">+2</text>
+
+  <!-- 103 — surplus -->
+  <line x1="326" y1="80" x2="326" y2="100" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="326" cy="90" r="5" fill="#3B82F6" filter="url(#glow)"/>
+  <text x="326" y="74" font-size="11" font-weight="800" fill="#3B82F6" text-anchor="middle">103</text>
+  <text x="326" y="125" font-size="9" fill="#3B82F6" text-anchor="middle">+3</text>
+
+  <line x1="370" y1="84" x2="370" y2="96" stroke="#334155" stroke-width="1.5"/>
+  <text x="370" y="110" font-size="10" fill="#475569" text-anchor="middle">105</text>
+
+  <line x1="480" y1="84" x2="480" y2="96" stroke="#334155" stroke-width="1.5"/>
+  <text x="480" y="110" font-size="10" fill="#475569" text-anchor="middle">110</text>
+
+  <!-- Brace under deficit region -->
+  <path d="M185,136 Q205,145 215,136" fill="none" stroke="#EF444460" stroke-width="1"/>
+  <text x="204" y="150" font-size="8" fill="#EF4444" text-anchor="middle">deficit zone</text>
+
+  <!-- Brace under surplus region -->
+  <path d="M295,136 Q312,145 335,136" fill="none" stroke="#3B82F660" stroke-width="1"/>
+  <text x="315" y="150" font-size="8" fill="#3B82F6" text-anchor="middle">surplus zone</text>
+</svg>

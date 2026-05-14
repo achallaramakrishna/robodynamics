@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F9FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#0EA5E9"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">The same idea works at base 1000</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">Just remember the right side must use three digits.</text>
+  <line x1="104" y1="220" x2="696" y2="220" stroke="#CBD5E1" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="560" cy="220" r="30" fill="#E0F2FE" stroke="#7DD3FC" stroke-width="3"/>
+  <text x="560" y="228" fill="#0369A1" font-size="24" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">1000</text>
+  <circle cx="476" cy="220" r="24" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3"/>
+  <text x="476" y="227" fill="#C2410C" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">996</text>
+  <path d="M476 180 L560 180" stroke="#F97316" stroke-width="4"/>
+  <text x="518" y="165" fill="#EA580C" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">deficit 4</text>
+  <rect x="88" y="284" width="624" height="56" rx="16" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="112" y="319" fill="#047857" font-size="18" font-family="Arial, sans-serif" font-weight="700">Example: 996² → left 992, right 016</text>
+</svg>

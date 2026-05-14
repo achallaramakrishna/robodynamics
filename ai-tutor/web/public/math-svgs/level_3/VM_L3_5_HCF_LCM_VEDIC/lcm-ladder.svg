@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F8FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D6E2FF" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#14B8A6"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">LCM ladder: collect the highest powers</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">The least common multiple keeps every prime factor needed by both numbers.</text>
+
+  <rect x="126" y="144" width="548" height="164" rx="22" fill="#F0FDFA" stroke="#99F6E4"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="220" y="188" fill="#0F766E" font-size="24" font-weight="700">12</text>
+    <text x="400" y="188" fill="#0F766E" font-size="24" font-weight="700">18</text>
+    <text x="580" y="188" fill="#0F766E" font-size="24" font-weight="700">Keep</text>
+    <text x="220" y="228" fill="#10213F" font-size="20">2 × 2 × 3</text>
+    <text x="400" y="228" fill="#10213F" font-size="20">2 × 3 × 3</text>
+    <text x="580" y="228" fill="#10213F" font-size="20">2 × 2 × 3 × 3</text>
+    <text x="400" y="274" fill="#0F172A" font-size="34" font-weight="700">LCM = 36</text>
+  </g>
+  <rect x="168" y="326" width="464" height="32" rx="10" fill="#ECFEFF" stroke="#A5F3FC"/>
+  <text x="400" y="347" fill="#0F766E" font-size="16" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Take each prime at its highest count across both numbers.</text>
+</svg>

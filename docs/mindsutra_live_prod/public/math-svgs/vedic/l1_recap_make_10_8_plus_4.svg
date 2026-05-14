@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" fill="none">
+  <rect width="720" height="240" rx="24" fill="#F8FAFC"/>
+  <rect x="24" y="24" width="672" height="192" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="42" y="58" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">Make 10 first: 8 + 4</text>
+  <text x="42" y="84" fill="#475569" font-size="14" font-family="Arial, sans-serif">Give 2 from 4 to 8, then add the leftover 2.</text>
+  <text x="120" y="156" text-anchor="middle" fill="#111827" font-size="30" font-family="Arial, sans-serif" font-weight="700">8 + 2</text>
+  <text x="120" y="190" text-anchor="middle" fill="#166534" font-size="24" font-family="Arial, sans-serif" font-weight="700">10</text>
+  <text x="360" y="156" text-anchor="middle" fill="#111827" font-size="30" font-family="Arial, sans-serif" font-weight="700">4 = 2 + 2</text>
+  <text x="600" y="156" text-anchor="middle" fill="#111827" font-size="30" font-family="Arial, sans-serif" font-weight="700">10 + 2 = 12</text>
+</svg>

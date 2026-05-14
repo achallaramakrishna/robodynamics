@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" width="520" height="620" font-family="Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="520" height="620" fill="#0f172a" rx="12"/>
+
+  <!-- Title -->
+  <text x="260" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="bold">Nephron — Urine Formation</text>
+  <text x="260" y="48" text-anchor="middle" fill="#64748b" font-size="11">NEET Biology | Excretory System</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- BOWMAN'S CAPSULE + GLOMERULUS (top)    -->
+  <!-- ═══════════════════════════════════════ -->
+  <!-- Capsule outer -->
+  <ellipse cx="260" cy="105" rx="42" ry="38" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <!-- Glomerulus (capillary ball) -->
+  <ellipse cx="260" cy="108" rx="24" ry="22" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1.5"/>
+  <!-- Glomerulus detail loops -->
+  <path d="M248,100 Q260,92 272,100 Q268,110 260,116 Q252,110 248,100Z" fill="#3b82f6" opacity="0.6"/>
+  <path d="M250,108 Q260,102 270,108" fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.8"/>
+  <path d="M252,115 Q260,110 268,115" fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.8"/>
+
+  <!-- Afferent arteriole (entering) -->
+  <path d="M200,88 Q232,90 248,100" fill="none" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="162" y="86" fill="#fca5a5" font-size="10">Afferent</text>
+  <text x="155" y="98" fill="#fca5a5" font-size="10">arteriole</text>
+
+  <!-- Efferent arteriole (leaving) -->
+  <path d="M272,100 Q295,88 320,90" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="322" y="86" fill="#fdba74" font-size="10">Efferent</text>
+  <text x="322" y="98" fill="#fdba74" font-size="10">arteriole</text>
+
+  <!-- Bowman's capsule label -->
+  <line x1="218" y1="82" x2="240" y2="72" stroke="#38bdf8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="140" y="70" fill="#38bdf8" font-size="11" font-weight="bold">Bowman's</text>
+  <text x="148" y="82" fill="#38bdf8" font-size="11" font-weight="bold">Capsule</text>
+
+  <!-- Glomerulus label -->
+  <line x1="270" y1="118" x2="305" y2="128" stroke="#60a5fa" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="308" y="132" fill="#60a5fa" font-size="10">Glomerulus</text>
+
+  <!-- ULTRAFILTRATION badge -->
+  <rect x="195" y="136" width="130" height="18" rx="9" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1"/>
+  <text x="260" y="149" text-anchor="middle" fill="#7dd3fc" font-size="10">① Ultrafiltration (GFR ~125 mL/min)</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- PCT — Proximal Convoluted Tubule       -->
+  <!-- ═══════════════════════════════════════ -->
+  <!-- Wavy tube descending left side -->
+  <path d="M240,143 Q210,155 215,170 Q220,185 205,195 Q190,205 200,220 Q210,232 225,232"
+        fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- PCT label -->
+  <text x="148" y="178" fill="#a78bfa" font-size="11" font-weight="bold">PCT</text>
+  <text x="118" y="190" fill="#c4b5fd" font-size="10">(Proximal</text>
+  <text x="110" y="202" fill="#c4b5fd" font-size="10">Convoluted</text>
+  <text x="116" y="214" fill="#c4b5fd" font-size="10">Tubule)</text>
+  <line x1="163" y1="183" x2="195" y2="198" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- PCT reabsorption badge -->
+  <rect x="52" y="226" width="175" height="28" rx="6" fill="#2d1b69" stroke="#a78bfa" stroke-width="1"/>
+  <text x="66" y="238" fill="#c4b5fd" font-size="9">Reabsorbs: ALL glucose,</text>
+  <text x="66" y="250" fill="#c4b5fd" font-size="9">amino acids, 70% water, Na⁺</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- LOOP OF HENLE                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <!-- Descending limb -->
+  <path d="M225,232 Q230,265 228,300 Q226,330 230,360 Q233,378 250,390"
+        fill="none" stroke="#34d399" stroke-width="4" stroke-linecap="round"/>
+  <!-- Ascending limb -->
+  <path d="M250,390 Q268,378 272,360 Q276,330 274,300 Q272,265 275,232"
+        fill="none" stroke="#6ee7b7" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Loop bend -->
+  <path d="M230,360 Q240,395 250,390 Q260,385 272,360" fill="none" stroke="#34d399" stroke-width="4"/>
+
+  <!-- Loop of Henle label -->
+  <text x="325" y="295" fill="#34d399" font-size="11" font-weight="bold">Loop of</text>
+  <text x="325" y="308" fill="#34d399" font-size="11" font-weight="bold">Henle</text>
+  <line x1="276" y1="300" x2="322" y2="300" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Descending limb label -->
+  <text x="155" y="298" fill="#86efac" font-size="9" font-style="italic">Descending</text>
+  <text x="162" y="310" fill="#86efac" font-size="9" font-style="italic">(water out)</text>
+
+  <!-- Ascending limb label -->
+  <text x="285" y="340" fill="#6ee7b7" font-size="9" font-style="italic">Ascending</text>
+  <text x="283" y="352" fill="#6ee7b7" font-size="9" font-style="italic">(ions out)</text>
+
+  <!-- Medulla gradient band -->
+  <rect x="60" y="285" width="16" height="110" rx="4" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="30" y="336" fill="#475569" font-size="9" transform="rotate(-90,30,336)">MEDULLA</text>
+
+  <!-- Cortex label -->
+  <rect x="60" y="155" width="16" height="125" rx="4" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="30" y="230" fill="#475569" font-size="9" transform="rotate(-90,30,230)">CORTEX</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- DCT — Distal Convoluted Tubule         -->
+  <!-- ═══════════════════════════════════════ -->
+  <!-- Wavy tube on right side going up -->
+  <path d="M275,232 Q300,240 305,255 Q310,270 298,280 Q286,290 295,305 Q304,318 292,328"
+        fill="none" stroke="#fb923c" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- DCT label -->
+  <text x="345" y="255" fill="#fb923c" font-size="11" font-weight="bold">DCT</text>
+  <text x="338" y="267" fill="#fdba74" font-size="10">(Distal</text>
+  <text x="332" y="279" fill="#fdba74" font-size="10">Convoluted</text>
+  <text x="338" y="291" fill="#fdba74" font-size="10">Tubule)</text>
+  <line x1="344" y1="262" x2="308" y2="270" stroke="#fb923c" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- DCT badge -->
+  <rect x="330" y="300" width="158" height="28" rx="6" fill="#431407" stroke="#fb923c" stroke-width="1"/>
+  <text x="345" y="312" fill="#fdba74" font-size="9">ADH → water reabsorption</text>
+  <text x="345" y="324" fill="#fdba74" font-size="9">Aldosterone → Na⁺ reabsorption</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- COLLECTING DUCT                        -->
+  <!-- ═══════════════════════════════════════ -->
+  <path d="M292,328 Q282,358 278,400 Q275,430 274,470"
+        fill="none" stroke="#f472b6" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Collecting duct label -->
+  <text x="305" y="400" fill="#f472b6" font-size="11" font-weight="bold">Collecting</text>
+  <text x="317" y="413" fill="#f472b6" font-size="11" font-weight="bold">Duct</text>
+  <line x1="280" y1="405" x2="302" y2="405" stroke="#f472b6" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Final urine arrow -->
+  <path d="M274,470 L274,505" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <text x="285" y="495" fill="#94a3b8" font-size="10">To renal pelvis</text>
+  <text x="292" y="508" fill="#94a3b8" font-size="10">→ ureter → bladder</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- LEGEND / KEY PROCESSES                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <rect x="52" y="530" width="416" height="72" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="260" y="547" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">KEY PROCESSES</text>
+
+  <!-- Legend items row 1 -->
+  <circle cx="72" cy="562" r="5" fill="#38bdf8"/>
+  <text x="82" y="566" fill="#cbd5e1" font-size="10">Ultrafiltration</text>
+  <circle cx="185" cy="562" r="5" fill="#a78bfa"/>
+  <text x="195" y="566" fill="#cbd5e1" font-size="10">Reabsorption (PCT)</text>
+  <circle cx="330" cy="562" r="5" fill="#34d399"/>
+  <text x="340" y="566" fill="#cbd5e1" font-size="10">Conc. gradient</text>
+
+  <!-- Legend items row 2 -->
+  <circle cx="72" cy="582" r="5" fill="#fb923c"/>
+  <text x="82" y="586" fill="#cbd5e1" font-size="10">Hormone action (DCT)</text>
+  <circle cx="225" cy="582" r="5" fill="#f472b6"/>
+  <text x="235" y="586" fill="#cbd5e1" font-size="10">Final concentration</text>
+  <circle cx="355" cy="582" r="5" fill="#ef4444"/>
+  <text x="365" y="586" fill="#cbd5e1" font-size="10">Blood supply</text>
+
+  <!-- NEET tip -->
+  <text x="260" y="612" text-anchor="middle" fill="#475569" font-size="9">GFR = 125 mL/min | Urine output = ~1.5 L/day | Reabsorption = 99% of filtrate</text>
+
+</svg>

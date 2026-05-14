@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="110" viewBox="0 0 400 110">
+  <rect width="400" height="110" rx="24" fill="#FFF4CC"/>
+  <path d="M40 56 H360" stroke="#E2B93B" stroke-width="6" stroke-dasharray="10 10"/>
+  <text x="200" y="48" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#1F2440">running total</text>
+</svg>

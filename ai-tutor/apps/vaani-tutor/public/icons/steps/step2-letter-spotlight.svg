@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="18" fill="#FFFBEB"/>
+  <defs>
+    <radialGradient id="s2spot" cx="50%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </radialGradient>
+    <radialGradient id="s2glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FCD34D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#s2spot)"/>
+  <!-- Spotlight beam -->
+  <path d="M32 8 L16 52 L48 52 Z" fill="url(#s2glow)" opacity="0.6"/>
+  <!-- Lamp top -->
+  <ellipse cx="32" cy="10" rx="9" ry="5" fill="#F59E0B"/>
+  <rect x="28" y="5" width="8" height="6" rx="3" fill="#D97706"/>
+  <!-- Hindi letter अ in spotlight -->
+  <text x="32" y="43" font-family="'Noto Sans Devanagari', serif" font-size="24" font-weight="900"
+        fill="#92400E" text-anchor="middle" dominant-baseline="middle">अ</text>
+  <!-- Sparkles -->
+  <circle cx="16" cy="20" r="2.5" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="48" cy="18" r="2" fill="#FBBF24" opacity="0.7"/>
+  <circle cx="52" cy="34" r="1.5" fill="#FCD34D" opacity="0.6"/>
+  <circle cx="12" cy="36" r="1.5" fill="#F59E0B" opacity="0.6"/>
+  <!-- Star sparkle top-right -->
+  <path d="M54 12 L55.2 15.4 L58.8 15.4 L56 17.6 L57.1 21 L54 18.8 L50.9 21 L52 17.6 L49.2 15.4 L52.8 15.4Z"
+        fill="#FCD34D" opacity="0.7"/>
+</svg>

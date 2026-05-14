@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#F8FAFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="white" stroke="#DCE5FF" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#2B3F98">Guided Example: 43²</text>
+  <text x="400" y="90" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#5E6B85">Right slot first, then the middle duplex, then the left square with carry.</text>
+
+  <rect x="88" y="140" width="146" height="86" rx="18" fill="#ECFDF5" stroke="#0F9F6E" stroke-width="3"/>
+  <rect x="284" y="140" width="232" height="86" rx="18" fill="#FFF4E2" stroke="#D58A00" stroke-width="3"/>
+  <rect x="566" y="140" width="146" height="86" rx="18" fill="#EEF3FF" stroke="#3555B4" stroke-width="3"/>
+  <text x="161" y="174" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#0F9F6E">Right slot</text>
+  <text x="400" y="174" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#9A6200">Middle duplex</text>
+  <text x="639" y="174" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#3555B4">Left slot</text>
+  <text x="161" y="206" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">3² = 9</text>
+  <text x="400" y="206" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">2×4×3 = 24</text>
+  <text x="639" y="206" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">4² = 16</text>
+
+  <path d="M400 238 L400 292" stroke="#D58A00" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="400,292 390,276 410,276" fill="#D58A00"/>
+  <text x="430" y="268" font-family="Segoe UI, Arial" font-size="15" fill="#9A6200">write 4, carry 2</text>
+
+  <rect x="260" y="304" width="280" height="40" rx="14" fill="#E8EEFF" stroke="#3555B4" stroke-width="2"/>
+  <text x="400" y="330" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">16 + 2 = 18, so 43² = 1849</text>
+</svg>

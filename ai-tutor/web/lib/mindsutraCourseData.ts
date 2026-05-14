@@ -1,4 +1,4 @@
-﻿import {
+import {
   MINDSUTRA_LEVELS,
   getMsLesson,
   getMsLevel,
@@ -63,6 +63,8 @@ import {
   VM_L5_7_LESSON,
   VM_L5_8_LESSON,
 } from "./mindsutraLessonsL5";
+
+const COURSE_PREVIEW_ASSET_VERSION = "20260514-svg-refresh";
 
 function toLevelSlug(levelId: string): string {
   return `level-${levelId.replace(/^L/i, "")}`;
@@ -152,8 +154,11 @@ function buildCourseBoardPreview(lessonId: string, lesson: MsLesson): MindSutraC
   // Use the real lesson payload's intro step SVG for an accurate preview
   const payload = buildMindSutraLessonPayload(lessonId);
   const introStep = payload?.steps.find((s) => s.id === "intro") ?? payload?.steps[0];
-  const assetPath = introStep && typeof introStep.board.data.assetPath === "string"
+  const rawAssetPath = introStep && typeof introStep.board.data.assetPath === "string"
     ? introStep.board.data.assetPath
+    : null;
+  const assetPath = rawAssetPath
+    ? `${rawAssetPath}${rawAssetPath.includes("?") ? "&" : "?"}v=${COURSE_PREVIEW_ASSET_VERSION}`
     : null;
   if (assetPath) {
     return {
@@ -242,6 +247,12 @@ export function buildMindSutraCoursePayload(
       progressPct: lessons.length ? Math.round((completedLessons / lessons.length) * 100) : 0,
       earnedXp,
       totalXpAvailable,
+      streak: session?.streak ?? Math.floor((session?.xp ?? 0) / 500) % 7,
+      achievements: [
+        ...(completedLessons >= 1 ? [{ icon: "⭐", label: "Early Starter" }] : []),
+        ...(completedLessons >= 5 ? [{ icon: "💎", label: "Math Magician" }] : []),
+        ...(earnedXp >= 200 ? [{ icon: "🏆", label: "XP Collector" }] : []),
+      ],
     },
     lessons,
     selectedLesson: {

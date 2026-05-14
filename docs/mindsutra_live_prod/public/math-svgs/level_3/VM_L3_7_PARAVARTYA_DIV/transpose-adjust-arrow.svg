@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="180" viewBox="0 0 340 180">
+  <rect width="340" height="180" rx="24" fill="#EAF2FF"/>
+  <path d="M74 126 C110 54, 230 54, 266 126" fill="none" stroke="#3B3A8C" stroke-width="8" stroke-linecap="round"/>
+  <path d="M248 110 L268 128 L286 108" fill="none" stroke="#3B3A8C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="170" y="154" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">132 ÷ 11 → transpose and adjust</text>
+</svg>

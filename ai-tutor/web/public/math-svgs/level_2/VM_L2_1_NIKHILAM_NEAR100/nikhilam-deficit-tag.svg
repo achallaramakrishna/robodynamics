@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="170" viewBox="0 0 300 170">
+  <rect x="18" y="18" width="264" height="134" rx="22" fill="#F8FBFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="150" y="44" text-anchor="middle" font-size="18" font-family="Arial" font-weight="700" fill="#25327A">Deviation tag</text>
+
+  <rect x="96" y="56" width="108" height="42" rx="12" fill="#DBEAFE" stroke="#2563EB" stroke-width="3"/>
+  <text x="150" y="84" text-anchor="middle" font-size="28" font-family="Arial" font-weight="700" fill="#1E3A8A">97</text>
+
+  <line x1="150" y1="98" x2="150" y2="114" stroke="#6B7280" stroke-width="2"/>
+
+  <rect x="112" y="114" width="76" height="30" rx="10" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+  <text x="150" y="135" text-anchor="middle" font-size="20" font-family="Arial" fill="#991B1B">-3</text>
+
+  <text x="150" y="158" text-anchor="middle" font-size="13" font-family="Arial" fill="#546173">97 is 3 below 100</text>
+</svg>

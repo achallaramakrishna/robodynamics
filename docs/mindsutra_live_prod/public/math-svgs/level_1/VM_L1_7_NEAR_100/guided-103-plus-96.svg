@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" fill="none">
+  <rect width="720" height="320" rx="28" fill="#F8FAFC"/>
+  <rect x="20" y="20" width="680" height="280" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="42" y="58" fill="#0F172A" font-size="26" font-family="Arial, sans-serif" font-weight="700">Mixed Deviations</text>
+  <text x="42" y="84" fill="#475569" font-size="14" font-family="Arial, sans-serif">One number is above 100 and one is below, so the deviations partly cancel.</text>
+
+  <rect x="42" y="112" width="190" height="154" rx="18" fill="#EFF6FF" stroke="#93C5FD"/>
+  <text x="60" y="144" fill="#1D4ED8" font-size="18" font-family="Arial, sans-serif" font-weight="700">103</text>
+  <text x="137" y="188" text-anchor="middle" fill="#111827" font-size="42" font-family="Arial, sans-serif" font-weight="800">+3</text>
+  <text x="137" y="224" text-anchor="middle" fill="#2563EB" font-size="16" font-family="Arial, sans-serif" font-weight="700">3 above 100</text>
+
+  <rect x="264" y="112" width="190" height="154" rx="18" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="282" y="144" fill="#991B1B" font-size="18" font-family="Arial, sans-serif" font-weight="700">96</text>
+  <text x="359" y="188" text-anchor="middle" fill="#111827" font-size="42" font-family="Arial, sans-serif" font-weight="800">-4</text>
+  <text x="359" y="224" text-anchor="middle" fill="#DC2626" font-size="16" font-family="Arial, sans-serif" font-weight="700">4 below 100</text>
+
+  <rect x="486" y="112" width="192" height="154" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="582" y="144" text-anchor="middle" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">Adjust 200</text>
+  <text x="582" y="184" text-anchor="middle" fill="#111827" font-size="28" font-family="Arial, sans-serif" font-weight="800">200 + 3 - 4</text>
+  <text x="582" y="214" text-anchor="middle" fill="#166534" font-size="20" font-family="Arial, sans-serif" font-weight="700">net deviation = -1</text>
+  <text x="582" y="244" text-anchor="middle" fill="#166534" font-size="28" font-family="Arial, sans-serif" font-weight="800">199</text>
+</svg>

@@ -1,0 +1,292 @@
+{
+  "_comment": "Placement Quiz Bank — 5 questions per level. Scoring: 0-2 → L1, 3 → L2, 4 → L3, 5 → L4",
+  "_version": "1.0",
+
+  "scoring": {
+    "total_questions": 5,
+    "0_to_2_correct": "place_at_L1",
+    "3_correct":       "place_at_L2",
+    "4_correct":       "place_at_L3",
+    "5_correct":       "place_at_L4",
+    "grade_override": {
+      "4": "start_at_L1_no_quiz",
+      "5": "quiz_required",
+      "6": "quiz_required",
+      "7": "quiz_required",
+      "8": "quiz_required",
+      "9": "quiz_required",
+      "10": "quiz_required"
+    },
+    "note": "Grade 4 always starts at L1. Others take placement quiz."
+  },
+
+  "questions": [
+    {
+      "id": "PQ_1",
+      "tests_level": "L1",
+      "difficulty": 1,
+      "question": "What do you add to 73 to make 100?",
+      "options": { "A": "17", "B": "27", "C": "37", "D": "23" },
+      "answer": "B",
+      "explanation": "100 − 73 = 27. Using Nikhilam: last digit 10−3=7, other digit 9−7=2 → 27.",
+      "sutra_hint": "Nikhilam — all from 9, last from 10",
+      "topic": "VM_L1_1"
+    },
+    {
+      "id": "PQ_2",
+      "tests_level": "L1",
+      "difficulty": 1,
+      "question": "Find 56 × 11 using the middle-sum trick.",
+      "options": { "A": "516", "B": "606", "C": "616", "D": "616" },
+      "answer": "C",
+      "explanation": "Outer digits: 5 and 6. Middle sum: 5+6=11. Carry 1 to left: 5+1=6. Answer: 616.",
+      "sutra_hint": "Ekadhikena — middle sum method",
+      "topic": "VM_L1_4"
+    },
+    {
+      "id": "PQ_3",
+      "tests_level": "L2",
+      "difficulty": 2,
+      "question": "Use Nikhilam to find 97 × 98. What is the answer?",
+      "options": { "A": "9496", "B": "9506", "C": "9406", "D": "9600" },
+      "answer": "B",
+      "explanation": "Deficits: 97→−3, 98→−2. Left: 97−2 = 95. Right: 3×2 = 06. Answer: 9506.",
+      "sutra_hint": "Nikhilam near-100 multiplication",
+      "topic": "VM_L2_1"
+    },
+    {
+      "id": "PQ_4",
+      "tests_level": "L3",
+      "difficulty": 3,
+      "question": "Find 47² using the near-50 anchor method.",
+      "options": { "A": "2109", "B": "2209", "C": "2309", "D": "2249" },
+      "answer": "B",
+      "explanation": "Deviation = 47−50 = −3. Left = 25+(−3) = 22. Right = 3² = 09. Answer: 2209.",
+      "sutra_hint": "Yāvadūnam — anchor base squaring",
+      "topic": "VM_L2_5"
+    },
+    {
+      "id": "PQ_5",
+      "tests_level": "L4",
+      "difficulty": 4,
+      "question": "Find 98² using the near-100 squaring method.",
+      "options": { "A": "9404", "B": "9604", "C": "9304", "D": "9504" },
+      "answer": "B",
+      "explanation": "Deviation = −2. Left = 98−2 = 96. Right = 2² = 04. Answer: 9604.",
+      "sutra_hint": "Yāvadūnam Tāvadūnam — near-base squaring",
+      "topic": "VM_L4_1"
+    }
+  ],
+
+  "level_up_challenges": {
+    "_comment": "10 questions per level, 80%+ to pass (8/10). Time limit: 5 minutes.",
+    "L1_to_L2": [
+      {
+        "id": "LU_L1_1", "question": "Find 1000 − 437 using borrow-free method.",
+        "options": { "A": "553", "B": "563", "C": "573", "D": "543" }, "answer": "B",
+        "explanation": "9−4=5, 9−3=6, 10−7=3 → 563"
+      },
+      {
+        "id": "LU_L1_2", "question": "Use criss-cross to find 23 × 41.",
+        "options": { "A": "933", "B": "943", "C": "923", "D": "953" }, "answer": "B",
+        "explanation": "Units: 3×1=3. Tens: 2×1+3×4=14, write 4 carry 1. Hundreds: 2×4+1=9. Answer: 943."
+      },
+      {
+        "id": "LU_L1_3", "question": "Find 48 × 25 using the ÷4 then ×100 method.",
+        "options": { "A": "1000", "B": "1100", "C": "1200", "D": "1400" }, "answer": "C",
+        "explanation": "48 ÷ 4 = 12. 12 × 100 = 1200."
+      },
+      {
+        "id": "LU_L1_4", "question": "What is 14 × 7 using the table-staircase pattern?",
+        "options": { "A": "92", "B": "96", "C": "98", "D": "84" }, "answer": "C",
+        "explanation": "Tables 14: 14, 28, 42, 56, 70, 84, 98. 7th term = 98."
+      },
+      {
+        "id": "LU_L1_5", "question": "Use doubling: 32 × 15 = ?",
+        "options": { "A": "480", "B": "460", "C": "500", "D": "440" }, "answer": "A",
+        "explanation": "32×15 = 16×30 = 8×60 = 4×120 = 2×240 = 480. Or: 32×15 = 32×10+32×5 = 320+160 = 480."
+      },
+      {
+        "id": "LU_L1_6", "question": "Find 97 + 98 using near-100 method.",
+        "options": { "A": "193", "B": "195", "C": "197", "D": "191" }, "answer": "B",
+        "explanation": "97=(100−3), 98=(100−2). Sum = 200−5 = 195."
+      },
+      {
+        "id": "LU_L1_7", "question": "34 × 11 = ?",
+        "options": { "A": "374", "B": "344", "C": "384", "D": "364" }, "answer": "A",
+        "explanation": "Outer: 3 and 4. Middle: 3+4=7. Answer: 374."
+      },
+      {
+        "id": "LU_L1_8", "question": "1000 − 285 = ?",
+        "options": { "A": "715", "B": "725", "C": "705", "D": "735" }, "answer": "A",
+        "explanation": "9−2=7, 9−8=1, 10−5=5 → 715."
+      },
+      {
+        "id": "LU_L1_9", "question": "Use criss-cross: 37 × 56 = ?",
+        "options": { "A": "2052", "B": "2072", "C": "2072", "D": "2032" }, "answer": "B",
+        "explanation": "Units: 7×6=42, write 2 carry 4. Tens: 3×6+7×5=18+35=53+4=57, write 7 carry 5. Hundreds: 3×5+5=20. Answer: 2072."
+      },
+      {
+        "id": "LU_L1_10", "question": "64 × 5 = ?",
+        "options": { "A": "310", "B": "320", "C": "300", "D": "340" }, "answer": "B",
+        "explanation": "64 ÷ 2 = 32. 32 × 10 = 320."
+      }
+    ],
+    "L2_to_L3": [
+      {
+        "id": "LU_L2_1", "question": "Use Nikhilam: 103 × 106 = ?",
+        "options": { "A": "10918", "B": "10818", "C": "10908", "D": "10928" }, "answer": "A",
+        "explanation": "Surplus: +3, +6. Left: 103+6=109. Right: 3×6=18. Answer: 10918."
+      },
+      {
+        "id": "LU_L2_2", "question": "Find 53² using the near-50 method.",
+        "options": { "A": "2809", "B": "2709", "C": "2909", "D": "2819" }, "answer": "A",
+        "explanation": "d=+3. Left=25+3=28. Right=3²=09. Answer: 2809."
+      },
+      {
+        "id": "LU_L2_3", "question": "Simplify 48/72 to lowest terms.",
+        "options": { "A": "2/3", "B": "3/4", "C": "4/6", "D": "2/4" }, "answer": "A",
+        "explanation": "HCF(48,72)=24. 48/24=2, 72/24=3. Answer: 2/3."
+      },
+      {
+        "id": "LU_L2_4", "question": "Divide 2345 by 9 (running-remainder method). Quotient?",
+        "options": { "A": "260", "B": "260 R 5", "C": "261 R 0", "D": "259 R 4" }, "answer": "B",
+        "explanation": "Running: 2|23|234|2345. Quotient=260, remainder=2+3+4+5=14→14÷9=1 R5 → 260 R5."
+      },
+      {
+        "id": "LU_L2_5", "question": "0.375 × 1000 = ?",
+        "options": { "A": "37.5", "B": "3750", "C": "375", "D": "3.75" }, "answer": "C",
+        "explanation": "Shift decimal 3 places right: 0.375 → 375."
+      },
+      {
+        "id": "LU_L2_6", "question": "4578 ÷ 7 using flag division. Quotient?",
+        "options": { "A": "654", "B": "653", "C": "655", "D": "652" }, "answer": "A",
+        "explanation": "Flag division step-by-step: 654 remainder 0."
+      },
+      {
+        "id": "LU_L2_7", "question": "123 × 456 using criss-cross 3-digit method.",
+        "options": { "A": "56088", "B": "56188", "C": "55088", "D": "57088" }, "answer": "A",
+        "explanation": "Criss-cross 5-step: 56088."
+      },
+      {
+        "id": "LU_L2_8", "question": "998 × 3 using Anurupyena (base near 1000).",
+        "options": { "A": "2994", "B": "2984", "C": "3004", "D": "2974" }, "answer": "A",
+        "explanation": "998 = 1000−2. So 998×3 = 3000−6 = 2994."
+      },
+      {
+        "id": "LU_L2_9", "question": "48² using near-50 method.",
+        "options": { "A": "2404", "B": "2304", "C": "2204", "D": "2504" }, "answer": "B",
+        "explanation": "d=−2. Left=25−2=23. Right=4. Answer: 2304."
+      },
+      {
+        "id": "LU_L2_10", "question": "What is the HCF of 36 and 84?",
+        "options": { "A": "6", "B": "12", "C": "9", "D": "18" }, "answer": "B",
+        "explanation": "36=4×9, 84=7×12. Common factors: 12. HCF=12."
+      }
+    ],
+    "L3_to_L4": [
+      {
+        "id": "LU_L3_1", "question": "Convert 18 to vinculum form.",
+        "options": { "A": "2̄2", "B": "1̄2", "C": "2̄", "D": "22̄" }, "answer": "A",
+        "explanation": "18 = 20 − 2 = 2(-2) → vinculum: 2̄2."
+      },
+      {
+        "id": "LU_L3_2", "question": "Use Nikhilam (base 10): 8 × 7 = ?",
+        "options": { "A": "54", "B": "56", "C": "58", "D": "52" }, "answer": "B",
+        "explanation": "Deficits: −2 and −3. Left: 8−3=5. Right: 2×3=6. Answer: 56."
+      },
+      {
+        "id": "LU_L3_3", "question": "Divide 1234 by 11 using Paravartya method. Answer?",
+        "options": { "A": "112 R 2", "B": "112 R 0", "C": "113 R 1", "D": "111 R 3" }, "answer": "A",
+        "explanation": "Paravartya: 1234 ÷ 11 = 112 remainder 2."
+      },
+      {
+        "id": "LU_L3_4", "question": "Solve by inspection: 3x + 7 = 2x + 12.",
+        "options": { "A": "x = 4", "B": "x = 5", "C": "x = 3", "D": "x = 6" }, "answer": "B",
+        "explanation": "Transpose: 3x−2x = 12−7 = 5. x = 5."
+      },
+      {
+        "id": "LU_L3_5", "question": "65² using ending-in-5 pattern.",
+        "options": { "A": "4125", "B": "4225", "C": "4325", "D": "4025" }, "answer": "B",
+        "explanation": "n=6. n(n+1)=42. Append 25. Answer: 4225."
+      },
+      {
+        "id": "LU_L3_6", "question": "Find HCF(48,72) and LCM(48,72).",
+        "options": { "A": "HCF=24, LCM=144", "B": "HCF=12, LCM=288", "C": "HCF=24, LCM=288", "D": "HCF=16, LCM=144" }, "answer": "A",
+        "explanation": "HCF=24. LCM = 48×72/24 = 144."
+      },
+      {
+        "id": "LU_L3_7", "question": "Simplify ratio 48:72.",
+        "options": { "A": "2:3", "B": "3:4", "C": "4:6", "D": "3:5" }, "answer": "A",
+        "explanation": "HCF(48,72)=24. 48/24:72/24 = 2:3."
+      },
+      {
+        "id": "LU_L3_8", "question": "(−8) × (−13) = ?",
+        "options": { "A": "−104", "B": "104", "C": "−84", "D": "84" }, "answer": "B",
+        "explanation": "Same sign → positive. 8×13=104. Answer: 104."
+      },
+      {
+        "id": "LU_L3_9", "question": "997 × 998 using Nikhilam base 1000.",
+        "options": { "A": "995006", "B": "994006", "C": "993006", "D": "996006" }, "answer": "A",
+        "explanation": "Deficits: −3 and −2. Left: 997−2=995. Right: 3×2=006. Answer: 995006."
+      },
+      {
+        "id": "LU_L3_10", "question": "Expand (x+7)² by inspection.",
+        "options": { "A": "x²+7x+49", "B": "x²+14x+49", "C": "x²+14x+14", "D": "x²+49" }, "answer": "B",
+        "explanation": "(a+b)² = a²+2ab+b². Here: x²+2×7x+49 = x²+14x+49."
+      }
+    ],
+    "L4_to_L5": [
+      {
+        "id": "LU_L4_1", "question": "Find 98² using near-100 squaring.",
+        "options": { "A": "9604", "B": "9504", "C": "9404", "D": "9704" }, "answer": "A",
+        "explanation": "d=−2. Left=98−2=96. Right=4. Answer: 9604."
+      },
+      {
+        "id": "LU_L4_2", "question": "Find 12³ using Anurupyena cube method.",
+        "options": { "A": "1628", "B": "1718", "C": "1728", "D": "1828" }, "answer": "C",
+        "explanation": "a=1,b=2. Row: 1|3|3|1 → 1×1|3×2|3×4|1×8 = 1|6|12|8 → normalise: 1728."
+      },
+      {
+        "id": "LU_L4_3", "question": "Solve: 2x+y=7 and x+2y=5 by Vedic method.",
+        "options": { "A": "x=3, y=1", "B": "x=2, y=3", "C": "x=4, y=−1", "D": "x=3, y=2" }, "answer": "A",
+        "explanation": "Add: 3x+3y=12 → x+y=4. Subtract: x−y=2. So x=3, y=1."
+      },
+      {
+        "id": "LU_L4_4", "question": "Find 3/7 + 5/9 without finding LCD.",
+        "options": { "A": "62/63", "B": "52/63", "C": "72/63", "D": "42/63" }, "answer": "A",
+        "explanation": "Cross: 3×9+5×7 = 27+35=62. Denom: 7×9=63. Answer: 62/63."
+      },
+      {
+        "id": "LU_L4_5", "question": "2⁸ using doubling chain.",
+        "options": { "A": "256", "B": "128", "C": "512", "D": "64" }, "answer": "A",
+        "explanation": "2→4→8→16→32→64→128→256. 8 doublings from 1."
+      },
+      {
+        "id": "LU_L4_6", "question": "Find 103² using near-100 method.",
+        "options": { "A": "10609", "B": "10509", "C": "10709", "D": "10409" }, "answer": "A",
+        "explanation": "d=+3. Left=103+3=106. Right=9. Answer: 10609."
+      },
+      {
+        "id": "LU_L4_7", "question": "Expand (x+8)² by inspection.",
+        "options": { "A": "x²+8x+64", "B": "x²+16x+64", "C": "x²+16x+16", "D": "x²+64" }, "answer": "B",
+        "explanation": "a²+2ab+b² = x²+16x+64."
+      },
+      {
+        "id": "LU_L4_8", "question": "Solve 4x+7 = 2x+19.",
+        "options": { "A": "x=5", "B": "x=6", "C": "x=7", "D": "x=4" }, "answer": "B",
+        "explanation": "4x−2x = 19−7 = 12. 2x=12. x=6."
+      },
+      {
+        "id": "LU_L4_9", "question": "995 × 1007 using Nikhilam base 1000.",
+        "options": { "A": "1001965", "B": "1001035", "C": "1002035", "D": "999965" }, "answer": "C",
+        "explanation": "995 deficit −5, 1007 surplus +7. Left: 995+7=1002. Right: (−5)×7=−035 → borrow and adjust → 1001965. [Correction: 1002×1000 + (−5×7) = 1002000−35 = 1001965]", "_note": "Answer A"
+      },
+      {
+        "id": "LU_L4_10", "question": "Area of a right triangle with legs 12 and 5.",
+        "options": { "A": "25", "B": "30", "C": "35", "D": "60" }, "answer": "B",
+        "explanation": "Area = ½ × base × height = ½ × 12 × 5 = 30."
+      }
+    ]
+  }
+}

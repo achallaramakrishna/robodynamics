@@ -16,6 +16,11 @@ const VAANI_L2_COURSE_LESSONS = LEVEL_2_DATA.map((seed, index) => ({
   status: (index < 12 ? "available" : "current") as "available" | "current",
   summary: seed.summary,
   skill: seed.skill,
+  baseChar: seed.baseChar,
+  matra: seed.matra,
+  modifiedChar: seed.modifiedChar,
+  wordHindi: seed.wordHindi,
+  wordEnglish: seed.wordEnglish,
   boardPreview: { type: "visual", data: { assetPath: seed.assetPath, headline: `${seed.modifiedChar} - ${seed.wordHindi}` } },
   image: seed.assetPath,
   startUrl: `/level-2/lesson/${seed.id}`,
@@ -135,7 +140,9 @@ export interface VaaniLessonPayload {
     skillTags: Array<"speaking" | "reading" | "writing" | "grammar" | "vocabulary" | "pronunciation">;
     teacherLineHindi?: string;
     teacherLineEnglishBridge?: string;
-    tutorText: string;
+    tutorText: string;           // English / beginner default
+    tutorTextHi?: string;        // Full Hindi (hindi-full mode)
+    tutorTextMix?: string;       // Hindi-English mix (hindi-english mode)
     explanation?: {
       title: string;
       body: string;
@@ -428,6 +435,7 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         xpReward: 70,
         difficulty: "Intermediate" as const,
         // Level 2-specific fields read by VaaniLessonClient
+        assetPath: seed.assetPath,
         baseChar: seed.baseChar,
         baseSoundRoman: seed.baseSoundRoman,
         matra: seed.matra,
@@ -439,7 +447,22 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         wordRoman: seed.wordRoman,
       },
       steps: [
-        // Step 1: Observe the matra transformation
+        // Step 1: Visual anchor — see the word image
+        {
+          id: `${seed.id}_observe`,
+          label: "See the Word",
+          skillTags: ["reading", "vocabulary"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+          tutorText: `${seed.modifiedChar} — ${seed.wordHindi} means "${seed.wordEnglish}"! Look at the picture and say the word aloud: ${seed.wordRoman}!`,
+          board: {
+            type: "visual" as const,
+            data: {
+              assetPath: seed.assetPath,
+              headline: `${seed.modifiedChar} — ${seed.wordHindi}`,
+              prompt: seed.prompt,
+            },
+          },
+        },
+        // Step 2: Observe the matra transformation
         {
           id: `${seed.id}_compare`,
           label: "Observe the Matra",
@@ -448,6 +471,7 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
           board: {
             type: "flashcards",
             data: {
+              assetPath: seed.assetPath,
               headline: `${seed.baseChar} + ${seed.matra} = ${seed.modifiedChar}`,
               expression: "matra_comparison",
               prompt: seed.prompt,
@@ -463,13 +487,14 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
           board: {
             type: "tracing_canvas",
             data: {
+              assetPath: seed.assetPath,
               headline: `Trace ${seed.matra}`,
               expression: seed.matra,
               prompt: `Trace the matra and say ${seed.modifiedSoundRoman}!`,
             },
           },
         },
-        // Step 3: Word gallery — words using this matra
+        // Step 3: Word gallery — words using this matra (with images)
         {
           id: `${seed.id}_gallery`,
           label: "Word Gallery",
@@ -479,10 +504,10 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             type: "flashcards",
             data: {
               headline: `Words with ${seed.modifiedChar} (${seed.modifiedSoundRoman})`,
-              prompt: "Tap each card to hear the word!",
+              prompt: "Tap each card to flip and hear the word!",
               cards: [
-                { emoji: seed.modifiedChar, word: seed.wordHindi, english: seed.wordEnglish, front: `${seed.modifiedChar} ${seed.wordHindi}`, back: seed.wordEnglish },
-                { emoji: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar, word: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi, english: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordEnglish, front: `${LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar} ${LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi}`, back: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordEnglish },
+                { image: seed.assetPath, emoji: seed.modifiedChar, word: seed.wordHindi, english: seed.wordEnglish, front: `${seed.modifiedChar} ${seed.wordHindi}`, back: seed.wordEnglish },
+                { image: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].assetPath, emoji: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar, word: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi, english: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordEnglish, front: `${LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar} ${LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi}`, back: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordEnglish },
               ],
             },
           },
@@ -499,24 +524,35 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
               headline: "Match the character to its word",
               prompt: "Tap a character, then tap its matching word!",
               pairs: [
-                { left: seed.modifiedChar, right: seed.wordHindi },
-                { left: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar, right: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi },
-                { left: LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].modifiedChar, right: LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].wordHindi },
+                { left: seed.modifiedChar, right: seed.wordHindi, rightImage: seed.assetPath },
+                {
+                  left: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar,
+                  right: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi,
+                  rightImage: LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].assetPath,
+                },
+                {
+                  left: LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].modifiedChar,
+                  right: LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].wordHindi,
+                  rightImage: LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].assetPath,
+                },
               ],
             },
           },
         },
-        // Step 5: MCQ — which word uses this matra
+        // Step 5: MCQ — which word uses this matra (with image)
         {
           id: `${seed.id}_quiz1`,
           label: "Quick Check 1",
           skillTags: ["reading", "recall"],
-          tutorText: `Quiz time! Which word uses the ${seed.matra} matra? 🌟`,
+          tutorText: `Quiz time! Look at the picture — which Hindi word matches? 🌟`,
           board: {
             type: "mcq",
             data: {
               headline: `Which word has the ${seed.matra} matra?`,
-              prompt: `Find the word that uses the "${seed.matraSoundRoman}" sound!`,
+              prompt: `Look at the picture and find the matching Hindi word!`,
+              questionImage: seed.assetPath,
+              questionWord: seed.modifiedChar,
+              questionEnglish: seed.wordEnglish,
               options: [
                 seed.wordHindi,
                 LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].wordHindi,
@@ -538,11 +574,20 @@ const VAANI_L2_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             data: {
               headline: `${seed.baseChar} + ${seed.matra} = ?`,
               prompt: `Which character is formed when we add the ${seed.matra} matra to ${seed.baseChar}?`,
+              questionImage: seed.assetPath,
+              questionWord: seed.wordHindi,
+              questionEnglish: seed.wordEnglish,
               options: [
                 seed.modifiedChar,
                 LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].modifiedChar,
                 LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].modifiedChar,
                 LEVEL_2_DATA[(index + 3) % LEVEL_2_DATA.length].modifiedChar,
+              ],
+              optionImages: [
+                seed.assetPath,
+                LEVEL_2_DATA[(index + 1) % LEVEL_2_DATA.length].assetPath,
+                LEVEL_2_DATA[(index + 2) % LEVEL_2_DATA.length].assetPath,
+                LEVEL_2_DATA[(index + 3) % LEVEL_2_DATA.length].assetPath,
               ],
               answer: seed.modifiedChar,
             },
@@ -573,6 +618,7 @@ const VAANI_L3_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         xpReward: 80,
         difficulty: "Advanced" as const,
         // Level 3-specific fields read by VaaniLessonClient
+        assetPath: seed.assetPath,
         consonant1: seed.consonant1,
         consonant1SoundRoman: seed.consonant1SoundRoman,
         consonant2: seed.consonant2,
@@ -585,7 +631,22 @@ const VAANI_L3_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         wordRoman: seed.wordRoman,
       },
       steps: [
-        // Step 1: Observe the conjunct transformation
+        // Step 1: Visual anchor — see the conjunct word image
+        {
+          id: `${seed.id}_observe`,
+          label: "See the Word",
+          skillTags: ["reading", "vocabulary"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+          tutorText: `${seed.combinedChar} — ${seed.wordHindi} means "${seed.wordEnglish}"! This conjunct appears in many Hindi words. Say: ${seed.wordRoman}!`,
+          board: {
+            type: "visual" as const,
+            data: {
+              assetPath: seed.assetPath,
+              headline: `${seed.combinedChar} — ${seed.wordHindi}`,
+              prompt: seed.prompt,
+            },
+          },
+        },
+        // Step 2: Observe the conjunct transformation
         {
           id: `${seed.id}_compare`,
           label: "Observe the Conjunct",
@@ -615,7 +676,7 @@ const VAANI_L3_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-        // Step 3: Word gallery with conjunct examples
+        // Step 3: Word gallery with conjunct examples (with images)
         {
           id: `${seed.id}_gallery`,
           label: "Word Gallery",
@@ -625,10 +686,10 @@ const VAANI_L3_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             type: "flashcards",
             data: {
               headline: `Words with ${seed.combinedChar} (${seed.combinedSoundRoman})`,
-              prompt: "Tap each card to hear the word!",
+              prompt: "Tap each card to flip and hear the word!",
               cards: [
-                { emoji: seed.combinedChar, word: seed.wordHindi, english: seed.wordEnglish, front: `${seed.combinedChar} ${seed.wordHindi}`, back: seed.wordEnglish },
-                { emoji: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].combinedChar, word: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordHindi, english: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordEnglish, front: `${LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].combinedChar} ${LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordHindi}`, back: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordEnglish },
+                { image: seed.assetPath, emoji: seed.combinedChar, word: seed.wordHindi, english: seed.wordEnglish, front: `${seed.combinedChar} ${seed.wordHindi}`, back: seed.wordEnglish },
+                { image: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].assetPath, emoji: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].combinedChar, word: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordHindi, english: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordEnglish, front: `${LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].combinedChar} ${LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordHindi}`, back: LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordEnglish },
               ],
             },
           },
@@ -652,17 +713,20 @@ const VAANI_L3_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-        // Step 5: MCQ — identify the word containing this conjunct
+        // Step 5: MCQ — identify the word containing this conjunct (with image)
         {
           id: `${seed.id}_quiz1`,
           label: "Quick Check 1",
           skillTags: ["reading", "recall"],
-          tutorText: `Quiz time! Which word contains the conjunct ${seed.combinedChar}? 🌟`,
+          tutorText: `Quiz time! Look at the picture — which word uses the conjunct ${seed.combinedChar}? 🌟`,
           board: {
             type: "mcq",
             data: {
               headline: `Which word has the conjunct ${seed.combinedChar}?`,
-              prompt: `Find the word that contains "${seed.combinedSoundRoman}"!`,
+              prompt: `Look at the picture and find the matching Hindi word!`,
+              questionImage: seed.assetPath,
+              questionWord: seed.combinedChar,
+              questionEnglish: seed.wordEnglish,
               options: [
                 seed.wordHindi,
                 LEVEL_3_DATA[(index + 1) % LEVEL_3_DATA.length].wordHindi,
@@ -719,6 +783,7 @@ const VAANI_L4_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         xpReward: 90,
         difficulty: "Advanced" as const,
         // Level 4-specific fields read by VaaniLessonClient
+        assetPath: seed.assetPath,
         consonant: seed.consonant,
         consonantRoman: seed.consonantRoman,
         barakhadiRow: seed.barakhadiRow,
@@ -726,15 +791,86 @@ const VAANI_L4_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         wordEnglish: seed.wordEnglish,
         wordRoman: seed.wordRoman,
       },
-      steps: [
-        // Step 1: Observe the barakhadi grid
+      steps: (() => {
+        // Review seeds (consonant contains & or , or category is Review/Consolidation)
+        const isReview = seed.category === "Review Practice" || seed.category === "Consolidation" ||
+          seed.consonant.includes("&") || seed.consonant.includes(",");
+        if (isReview) {
+          return [
+            {
+              id: `${seed.id}_overview`,
+              label: "Review Overview",
+              skillTags: ["reading", "vocabulary", "pronunciation"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+              tutorText: `Great work so far! Let's review what you've learned. ${seed.prompt}`,
+              board: {
+                type: "flashcards" as const,
+                data: {
+                  headline: seed.title,
+                  prompt: seed.summary,
+                  cards: seed.exampleWords.map(w => ({ front: w.hindi, back: `${w.english} (${w.roman})` })),
+                },
+              },
+            },
+            {
+              id: `${seed.id}_quiz`,
+              label: "Review Quiz",
+              skillTags: ["reading", "recall"] as Array<"reading" | "recall" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+              tutorText: `Quick quiz! Let's check what you remember.`,
+              board: {
+                type: "mcq" as const,
+                data: {
+                  headline: `Review: ${seed.consonant}`,
+                  prompt: `Which word does NOT use the consonant ${seed.consonant.split(" ")[0]}?`,
+                  options: [
+                    seed.exampleWords[0]?.hindi || seed.wordHindi,
+                    seed.exampleWords[1]?.hindi || LEVEL_4_DATA[(index + 1) % LEVEL_4_DATA.length].wordHindi,
+                    LEVEL_4_DATA[(index + 5) % LEVEL_4_DATA.length].wordHindi,
+                    seed.exampleWords[2]?.hindi || seed.wordHindi,
+                  ],
+                  answer: LEVEL_4_DATA[(index + 5) % LEVEL_4_DATA.length].wordHindi,
+                },
+              },
+            },
+            {
+              id: `${seed.id}_celebrate`,
+              label: "Review Complete!",
+              skillTags: ["reading", "vocabulary"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+              tutorText: `Excellent! You've mastered the barakhadi for ${seed.consonant}. Keep going! 🌟`,
+              board: {
+                type: "visual" as const,
+                data: {
+                  assetPath: seed.assetPath,
+                  headline: `Barakhadi Review: ${seed.consonant}`,
+                  prompt: seed.summary,
+                },
+              },
+            },
+          ];
+        }
+        return [
+        // Step 1: Visual anchor — see the consonant word image
+        {
+          id: `${seed.id}_observe`,
+          label: "See the Word",
+          skillTags: ["reading", "vocabulary"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+          tutorText: `${seed.consonant} (${seed.consonantRoman}) — ${seed.wordHindi} means "${seed.wordEnglish}"! Look at the picture and say the word!`,
+          board: {
+            type: "visual" as const,
+            data: {
+              assetPath: seed.assetPath,
+              headline: `${seed.consonant} — ${seed.wordHindi}`,
+              prompt: seed.prompt,
+            },
+          },
+        },
+        // Step 2: Observe the barakhadi grid
         {
           id: `${seed.id}_grid`,
           label: "Explore the Barakhadi",
-          skillTags: ["reading", "vocabulary", "pronunciation"],
+          skillTags: ["reading", "vocabulary", "pronunciation"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
           tutorText: `Let's explore all 12 syllable forms of ${seed.consonant}! ${seed.prompt}`,
           board: {
-            type: "flashcards",
+            type: "flashcards" as const,
             data: {
               headline: `${seed.consonant} की बारहखड़ी (Barakhadi of ${seed.consonantRoman})`,
               expression: "barakhadi_grid",
@@ -742,7 +878,7 @@ const VAANI_L4_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-        // Step 2: Word gallery with consonant examples
+        // Step 2: Word gallery with consonant examples (with images)
         {
           id: `${seed.id}_gallery`,
           label: "Word Gallery",
@@ -752,8 +888,9 @@ const VAANI_L4_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             type: "flashcards",
             data: {
               headline: `Words with ${seed.consonant} (${seed.consonantRoman})`,
-              prompt: "Tap each card to hear the word!",
-              cards: seed.exampleWords.slice(0, 2).map(w => ({
+              prompt: "Tap each card to flip and hear the word!",
+              cards: seed.exampleWords.slice(0, 2).map((w, wi) => ({
+                image: wi === 0 ? seed.assetPath : (LEVEL_4_DATA[(index + 1) % LEVEL_4_DATA.length]?.assetPath || seed.assetPath),
                 emoji: seed.consonant,
                 word: w.hindi,
                 english: w.english,
@@ -824,17 +961,20 @@ const VAANI_L4_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-        // Step 6: MCQ — pronunciation practice
+        // Step 6: MCQ — pronunciation practice (with image)
         {
           id: `${seed.id}_quiz3`,
           label: "Final Challenge",
           skillTags: ["pronunciation", "recall"],
-          tutorText: `Last one! Which word uses the ${seed.consonant} consonant? 🏆`,
+          tutorText: `Last one! Look at the picture — which word uses the ${seed.consonant} consonant? 🏆`,
           board: {
             type: "mcq",
             data: {
               headline: `Which word has ${seed.consonant}?`,
-              prompt: `Find the word that contains the consonant ${seed.consonant}!`,
+              prompt: `Look at the picture and find the word with ${seed.consonant}!`,
+              questionImage: seed.assetPath,
+              questionWord: seed.consonant,
+              questionEnglish: seed.wordEnglish,
               options: [
                 seed.wordHindi,
                 LEVEL_4_DATA[(index + 1) % LEVEL_4_DATA.length].wordHindi,
@@ -845,7 +985,8 @@ const VAANI_L4_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-      ],
+        ]; // end normal barakhadi steps
+      })(), // end IIFE
       nextLessonUrl: index < LEVEL_4_DATA.length - 1
         ? `/level-4/lesson/${LEVEL_4_DATA[index + 1].id}`
         : `/level-4`,
@@ -870,16 +1011,34 @@ const VAANI_L5_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         xpReward: 100,
         difficulty: "Advanced" as const,
         // Level 5-specific fields read by VaaniLessonClient
+        assetPath: seed.assetPath,
         sentence: seed.sentence,
         sentenceRoman: seed.sentenceRoman,
         sentenceEnglish: seed.sentenceEnglish,
         words: seed.words,
-        wordHindi: seed.wordHindi,
-        wordEnglish: seed.wordEnglish,
-        wordRoman: seed.wordRoman,
+        // Map sentence fields to the generic word* keys VaaniLessonClient uses
+        // for display (lessonWord, lessonWordEng, lessonWordRoman)
+        wordHindi: seed.sentence,
+        wordEnglish: seed.sentenceEnglish,
+        wordRoman: seed.sentenceRoman,
       },
       steps: [
-        // Step 1: Observe the sentence
+        // Step 1: Visual anchor — see the sentence scene image
+        {
+          id: `${seed.id}_observe`,
+          label: "See the Scene",
+          skillTags: ["reading", "vocabulary"] as Array<"reading" | "vocabulary" | "pronunciation" | "writing" | "speaking" | "grammar">,
+          tutorText: `Look at this picture! The sentence "${seed.sentence}" means "${seed.sentenceEnglish}". ${seed.prompt}`,
+          board: {
+            type: "visual" as const,
+            data: {
+              assetPath: seed.assetPath,
+              headline: seed.sentence,
+              prompt: `"${seed.sentenceEnglish}" — ${seed.sentenceRoman}`,
+            },
+          },
+        },
+        // Step 2: Read the sentence
         {
           id: `${seed.id}_reader`,
           label: "Read the Sentence",
@@ -894,19 +1053,20 @@ const VAANI_L5_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-        // Step 2: Word gallery
+        // Step 2: Word gallery (with sentence image on first card)
         {
           id: `${seed.id}_gallery`,
           label: "Word Gallery",
           skillTags: ["reading", "vocabulary"],
-          tutorText: `Let's look at each word in the sentence. "${seed.wordHindi}" means "${seed.wordEnglish}"!`,
+          tutorText: `Let's look at each word in the sentence. "${seed.sentence}" means "${seed.sentenceEnglish}"!`,
           board: {
             type: "flashcards",
             data: {
               headline: `Words from: ${seed.sentence}`,
-              prompt: "Tap each card to hear the word!",
+              prompt: "Tap each card to flip and hear the word!",
               cards: seed.words.map((w, i) => ({
-                emoji: seed.words.length > i ? "📝" : "✨",
+                image: i === 0 ? seed.assetPath : undefined,
+                emoji: "📝",
                 word: w.hindi,
                 english: w.english,
                 front: w.hindi,
@@ -933,36 +1093,88 @@ const VAANI_L5_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
             },
           },
         },
-        // Step 4: First MCQ from lesson
+        // Step 4: First MCQ from lesson (with image)
         {
           id: `${seed.id}_quiz1`,
           label: "Quick Check 1",
           skillTags: ["reading", "recall"],
-          tutorText: `Question 1 about the sentence! 🌟`,
+          tutorText: `Quiz time! Look at the picture and answer! 🌟`,
           board: {
             type: "mcq",
-            data: {
-              headline: seed.mcqs[0]?.question || `What does the sentence mean?`,
-              prompt: seed.mcqs[0]?.question || "Choose the correct answer!",
-              options: seed.mcqs[0]?.options || [seed.sentenceEnglish, "Unknown", "Other", "None"],
-              answer: seed.mcqs[0]?.answer || seed.sentenceEnglish,
-            },
+            data: (() => {
+              if (seed.mcqs?.[0]) {
+                return {
+                  headline: seed.mcqs[0].question,
+                  prompt: seed.mcqs[0].question,
+                  questionImage: seed.assetPath,
+                  questionWord: seed.sentence,
+                  questionEnglish: seed.sentenceEnglish,
+                  options: seed.mcqs[0].options,
+                  answer: seed.mcqs[0].answer,
+                };
+              }
+              // Auto-generate: "What does this sentence mean?"
+              const distractors = seed.words.slice(0, 3).map((w: any) => w.english);
+              while (distractors.length < 3) distractors.push(["Something else", "I don't know", "Other"][distractors.length] || "Other");
+              return {
+                headline: `What does "${seed.sentenceRoman}" mean?`,
+                prompt: "Look at the picture — choose the correct meaning!",
+                questionImage: seed.assetPath,
+                questionWord: seed.sentence,
+                questionEnglish: seed.sentenceEnglish,
+                options: [distractors[0], distractors[1], seed.sentenceEnglish, distractors[2]],
+                answer: seed.sentenceEnglish,
+              };
+            })(),
           },
         },
-        // Step 5: Second MCQ from lesson (if available)
+        // Step 5: Second MCQ from lesson — with image (if available)
         {
           id: `${seed.id}_quiz2`,
           label: "Quick Check 2",
           skillTags: ["reading", "vocabulary"],
-          tutorText: `Question 2! Can you figure it out? 🎯`,
+          tutorText: `Question 2! Look at the picture and figure it out! 🎯`,
           board: {
             type: "mcq",
-            data: {
-              headline: seed.mcqs[1]?.question || `Which word means...?`,
-              prompt: seed.mcqs[1]?.question || "Choose the best answer!",
-              options: seed.mcqs[1]?.options || ["Option 1", "Option 2", "Option 3", "Option 4"],
-              answer: seed.mcqs[1]?.answer || seed.mcqs[1]?.options?.[0] || "Answer",
-            },
+            data: (() => {
+              if (seed.mcqs?.[1]) {
+                return {
+                  headline: seed.mcqs[1].question,
+                  prompt: seed.mcqs[1].question,
+                  questionImage: seed.assetPath,
+                  questionWord: seed.sentence,
+                  questionEnglish: seed.sentenceEnglish,
+                  options: seed.mcqs[1].options,
+                  answer: seed.mcqs[1].answer,
+                };
+              }
+              // Auto-generate: "Which Hindi word means [English]?"
+              const w0 = seed.words[0];
+              if (!w0) {
+                return {
+                  headline: `How do you say "${seed.sentenceEnglish}" in Hindi?`,
+                  prompt: "Look at the picture — choose the correct Hindi sentence!",
+                  questionImage: seed.assetPath,
+                  questionWord: seed.sentence,
+                  options: [seed.sentence, "नमस्ते।", "धन्यवाद।", "ठीक है।"],
+                  answer: seed.sentence,
+                };
+              }
+              return {
+                headline: `Which Hindi word means "${w0.english}"?`,
+                prompt: "Find the correct Hindi word!",
+                questionImage: seed.assetPath,
+                questionWord: seed.sentence,
+                questionEnglish: seed.sentenceEnglish,
+                options: [
+                  seed.words[1]?.hindi || "कुछ",
+                  w0.hindi,
+                  seed.words[2]?.hindi || "कोई",
+                  seed.words[3]?.hindi || "यह",
+                ],
+                answer: w0.hindi,
+              };
+            })(),
           },
         },
         // Step 6: Grammar / word order tip
@@ -987,6 +1199,40 @@ const VAANI_L5_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
   ])
 );
 
+// ── Level 6 grammar topic → visual metadata ──────────────────────────────────
+const L6_TOPIC_EMOJI: Record<string, string> = {
+  "Common Nouns": "🏷️",        "Proper Nouns": "🗺️",
+  "Noun Gender": "⚧️",          "Noun Number": "🔢",
+  "Descriptive Adjectives": "🎨","Comparative Adjectives": "⚖️",
+  "Superlative Adjectives": "🏆","Other Adjective Types": "✳️",
+  "Compound Adjectives": "🔗",   "Adjective Position": "📍",
+  "Comprehensive Review": "🌟",  "Infinitive Verbs": "⚡",
+  "Present Habitual Tense": "🔄","Present Continuous Tense": "▶️",
+  "Future Tense": "🔮",          "Present Perfect Tense": "✅",
+  "Imperative Mood": "📢",       "Subject-Verb Agreement": "🤝",
+  "Transitive & Intransitive Verbs": "↔️","Verb Tenses Review": "📅",
+  "Personal Pronouns": "👤",     "Possessive Pronouns": "🔑",
+  "Demonstrative Pronouns": "👆","Interrogative Pronouns": "❓",
+  "Reflexive Pronouns": "🪞",    "Case Markers": "🔖",
+  "Ne Marker": "✏️",             "Ko Marker": "📌",
+  "Se Marker": "🔀",             "Pronouns Review": "👥",
+  "Simple Sentences": "📝",      "Compound Sentences": "🔗",
+  "Complex Sentences": "🌐",     "Question Sentences": "❓",
+  "Negative Sentences": "🚫",    "SOV Word Order": "📐",
+  "Sentence Patterns": "🔲",     "Synthesis Review": "🎓",
+};
+const L6_TOPIC_COLOR: Record<string, string> = {
+  "Noun": "#f97316", "Adjective": "#8b5cf6", "Verb": "#3b82f6",
+  "Pronoun": "#10b981", "Sentence": "#f59e0b", "Review": "#ec4899",
+  "Marker": "#06b6d4", "Word Order": "#6366f1",
+};
+function l6Color(topic: string): string {
+  for (const [key, val] of Object.entries(L6_TOPIC_COLOR)) {
+    if (topic.includes(key)) return val;
+  }
+  return "#6366f1";
+}
+
 // ── Level 6 lesson map (Grammar Essentials) ──────────────────────────────────
 const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
   LEVEL_6_DATA.map((seed: any, index: number) => [
@@ -1008,6 +1254,9 @@ const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
         grammarTopicHindi: seed.grammarTopicHindi,
         ruleExplanation: seed.ruleExplanation,
         ruleExplanationHindi: seed.ruleExplanationHindi,
+        exampleSentenceHindi: seed.exampleSentenceHindi,
+        exampleSentenceRoman: seed.exampleSentenceRoman,
+        exampleSentenceEnglish: seed.exampleSentenceEnglish,
       },
       steps: [
         // Step 1: Grammar rule explanation
@@ -1037,8 +1286,11 @@ const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
               headline: `Examples of ${seed.grammarTopic}`,
               prompt: "Tap each example to hear it!",
               cards: seed.practiceExamples?.map((ex: any) => ({
+                emoji: "📝",
+                word: ex.hindi,
+                english: ex.english,
                 front: ex.hindi,
-                back: `${ex.roman} - ${ex.english}`,
+                back: ex.english,
               })) || [],
             },
           },
@@ -1056,7 +1308,7 @@ const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
               prompt: "Connect related items!",
               pairs: seed.practiceExamples?.map((ex: any, i: number) => ({
                 left: ex.hindi,
-                right: ex.explanation,
+                right: ex.english,
               })) || [],
             },
           },
@@ -1073,6 +1325,9 @@ const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
               headline: `Common Mistakes with ${seed.grammarTopic}`,
               prompt: "Notice the errors and corrections",
               cards: seed.commonMistakes?.map((mistake: any) => ({
+                emoji: "❌",
+                word: mistake.incorrect,
+                english: `✓ ${mistake.correct}`,
                 front: `❌ ${mistake.incorrect}`,
                 back: `✓ ${mistake.correct}`,
               })) || [],
@@ -1088,10 +1343,10 @@ const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
           board: {
             type: "mcq",
             data: {
-              headline: seed.mcqQuestions?.[0]?.question || `Understand ${seed.grammarTopic}`,
-              prompt: seed.mcqQuestions?.[0]?.question || "Choose the correct answer!",
-              options: seed.mcqQuestions?.[0]?.options || ["Option 1", "Option 2", "Option 3", "Option 4"],
-              answer: seed.mcqQuestions?.[0]?.correctAnswer || "Answer",
+              headline: (seed.mcqQuestions || [])[0]?.question || `Understand ${seed.grammarTopic}`,
+              prompt: (seed.mcqQuestions || [])[0]?.question || "Choose the correct answer!",
+              options: (seed.mcqQuestions || [])[0]?.options || ["Option 1", "Option 2", "Option 3", "Option 4"],
+              answer: (seed.mcqQuestions || [])[0]?.correctAnswer || "Answer",
             },
           },
         },
@@ -1103,12 +1358,39 @@ const VAANI_L6_LESSONS: Record<string, VaaniLessonPayload> = Object.fromEntries(
           tutorText: `Final check! Can you apply ${seed.grammarTopic} correctly?`,
           board: {
             type: "mcq",
-            data: {
-              headline: seed.mcqQuestions?.[1]?.question || `Apply ${seed.grammarTopic}`,
-              prompt: seed.mcqQuestions?.[1]?.question || "Choose the correct example!",
-              options: seed.mcqQuestions?.[1]?.options || ["Option 1", "Option 2", "Option 3", "Option 4"],
-              answer: seed.mcqQuestions?.[1]?.correctAnswer || "Answer",
-            },
+            data: (() => {
+              const q2 = (seed.mcqQuestions || [])[1];
+              if (q2) {
+                return {
+                  headline: q2.question,
+                  prompt: q2.question,
+                  options: q2.options,
+                  answer: q2.correctAnswer,
+                };
+              }
+              // Auto-generate from practiceExamples: "Which sentence is correct?"
+              const ex = seed.practiceExamples || [];
+              const correct = ex[0];
+              if (!correct) {
+                return {
+                  headline: `Which sentence uses ${seed.grammarTopic} correctly?`,
+                  prompt: "Choose the correct example!",
+                  options: [seed.exampleSentenceHindi, "वह जाता है।", "मैं खाना।", "तुम कल।"],
+                  answer: seed.exampleSentenceHindi,
+                };
+              }
+              return {
+                headline: `What does "${correct.hindi}" mean?`,
+                prompt: "Choose the correct meaning!",
+                options: [
+                  ex[1]?.english || "Something else",
+                  correct.english,
+                  ex[2]?.english || "Other",
+                  ex[3]?.english || "None of these",
+                ],
+                answer: correct.english,
+              };
+            })(),
           },
         },
       ],

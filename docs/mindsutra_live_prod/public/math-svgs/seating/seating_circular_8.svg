@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Table -->
+  <circle cx="100" cy="100" r="40" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="100" y="105" font-family="Arial,sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">TABLE</text>
+  <!-- 8 seats around the table at 45° intervals -->
+  <!-- Seat 1: top (270° / 12 o'clock) -->
+  <circle cx="100" cy="22"  r="16" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="100" y="27"  font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8" text-anchor="middle">1</text>
+  <!-- Seat 2: top-right (315°) -->
+  <circle cx="157" cy="43"  r="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="157" y="48"  font-family="Arial,sans-serif" font-size="12" fill="#475569" text-anchor="middle">2</text>
+  <!-- Seat 3: right (0°) -->
+  <circle cx="178" cy="100" r="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="178" y="105" font-family="Arial,sans-serif" font-size="12" fill="#475569" text-anchor="middle">3</text>
+  <!-- Seat 4: bottom-right (45°) -->
+  <circle cx="157" cy="157" r="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="157" y="162" font-family="Arial,sans-serif" font-size="12" fill="#475569" text-anchor="middle">4</text>
+  <!-- Seat 5: bottom (90°) -->
+  <circle cx="100" cy="178" r="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="100" y="183" font-family="Arial,sans-serif" font-size="12" fill="#475569" text-anchor="middle">5</text>
+  <!-- Seat 6: bottom-left (135°) -->
+  <circle cx="43"  cy="157" r="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="43"  y="162" font-family="Arial,sans-serif" font-size="12" fill="#475569" text-anchor="middle">6</text>
+  <!-- Seat 7: left (180°) -->
+  <circle cx="22"  cy="100" r="16" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="22"  y="105" font-family="Arial,sans-serif" font-size="12" fill="#475569" text-anchor="middle">7</text>
+  <!-- Seat 8: top-left (225°) — question seat -->
+  <circle cx="43"  cy="43"  r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <text x="43"  y="48"  font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#f59e0b" text-anchor="middle">?</text>
+</svg>

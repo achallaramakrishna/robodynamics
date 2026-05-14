@@ -1,0 +1,17 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FEF2F2"/>
+  
+  <g id="letter_ta_retro">
+    <text x="250" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">ट</text>
+  </g>
+  
+  <g id="object_tamatar">
+    <!-- Tomato -->
+    <circle cx="750" cy="550" r="140" fill="#EF4444"/>
+    <path d="M750 410C750 410 770 370 750 350" stroke="#059669" stroke-width="8" stroke-linecap="round"/> <!-- Stem -->
+    <path d="M750 430L730 400L770 400L750 430Z" fill="#059669"/> <!-- Leaf -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">ट से टमाटर</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">TA for Tamatar (Tomato)</text>
+</svg>

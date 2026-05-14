@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" fill="none">
+  <rect width="640" height="280" rx="24" fill="#F8FAFC"/>
+  <rect x="24" y="24" width="592" height="232" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="44" y="58" fill="#0F172A" font-size="24" font-family="Arial, sans-serif" font-weight="700">Completing the Whole</text>
+  <text x="44" y="84" fill="#475569" font-size="14" font-family="Arial, sans-serif">Use the missing part to complete 10, 100, and 1000.</text>
+
+  <rect x="44" y="108" width="164" height="108" rx="18" fill="#EEF2FF" stroke="#A5B4FC"/>
+  <text x="62" y="138" fill="#3730A3" font-size="18" font-family="Arial, sans-serif" font-weight="700">To 10</text>
+  <text x="62" y="170" fill="#1E293B" font-size="22" font-family="Arial, sans-serif">7 + 3 = 10</text>
+  <text x="62" y="198" fill="#475569" font-size="14" font-family="Arial, sans-serif">3 is the missing part.</text>
+  <circle cx="168" cy="166" r="18" fill="#C7D2FE"/>
+  <text x="162" y="173" fill="#312E81" font-size="18" font-family="Arial, sans-serif" font-weight="700">3</text>
+
+  <rect x="236" y="108" width="164" height="108" rx="18" fill="#ECFDF5" stroke="#86EFAC"/>
+  <text x="254" y="138" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">To 100</text>
+  <text x="254" y="170" fill="#1E293B" font-size="22" font-family="Arial, sans-serif">46 + 54 = 100</text>
+  <text x="254" y="198" fill="#475569" font-size="14" font-family="Arial, sans-serif">54 completes the whole.</text>
+  <circle cx="360" cy="166" r="22" fill="#BBF7D0"/>
+  <text x="347" y="173" fill="#166534" font-size="18" font-family="Arial, sans-serif" font-weight="700">54</text>
+
+  <rect x="428" y="108" width="164" height="108" rx="18" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="446" y="138" fill="#9A3412" font-size="18" font-family="Arial, sans-serif" font-weight="700">To 1000</text>
+  <text x="446" y="170" fill="#1E293B" font-size="22" font-family="Arial, sans-serif">628 + 372 = 1000</text>
+  <text x="446" y="198" fill="#475569" font-size="14" font-family="Arial, sans-serif">372 fills the gap.</text>
+  <circle cx="552" cy="166" r="24" fill="#FED7AA"/>
+  <text x="536" y="173" fill="#9A3412" font-size="18" font-family="Arial, sans-serif" font-weight="700">372</text>
+
+  <path d="M214 162H228" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M406 162H420" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+</svg>

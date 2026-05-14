@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" viewBox="0 0 440 150">
+  <rect width="440" height="150" rx="24" fill="#E7FBF5"/>
+  <path d="M46 76 H360" stroke="#34B27B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M346 62 L374 76 L346 90" fill="none" stroke="#34B27B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="220" y="56" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#1F2440">correct the next digit using the complement</text>
+</svg>

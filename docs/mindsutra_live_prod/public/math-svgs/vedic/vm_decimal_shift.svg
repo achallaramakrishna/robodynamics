@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="380" height="220" font-family="Nunito,sans-serif">
+  <rect width="380" height="220" rx="14" fill="#fdf4ff"/>
+  <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#581c87">Decimal Point — Shift Rule</text>
+
+  <!-- ×10 row -->
+  <text x="40" y="60" font-size="12" font-weight="700" fill="#7c3aed">× 10</text>
+  <rect x="100" y="44" width="200" height="28" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="200" y="63" text-anchor="middle" font-size="15" font-weight="700" fill="#4c1d95">3.45  →  34.5</text>
+  <text x="316" y="60" font-size="11" fill="#6d28d9">shift 1 right</text>
+
+  <!-- ×100 row -->
+  <text x="40" y="100" font-size="12" font-weight="700" fill="#7c3aed">× 100</text>
+  <rect x="100" y="84" width="200" height="28" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="200" y="103" text-anchor="middle" font-size="15" font-weight="700" fill="#4c1d95">3.45  →  345</text>
+  <text x="316" y="100" font-size="11" fill="#6d28d9">shift 2 right</text>
+
+  <!-- ÷10 row -->
+  <text x="40" y="140" font-size="12" font-weight="700" fill="#be185d">÷ 10</text>
+  <rect x="100" y="124" width="200" height="28" rx="6" fill="#fce7f3" stroke="#be185d" stroke-width="1.5"/>
+  <text x="200" y="143" text-anchor="middle" font-size="15" font-weight="700" fill="#9d174d">3.45  →  0.345</text>
+  <text x="316" y="140" font-size="11" fill="#be185d">shift 1 left</text>
+
+  <!-- ÷100 row -->
+  <text x="40" y="180" font-size="12" font-weight="700" fill="#be185d">÷ 100</text>
+  <rect x="100" y="164" width="200" height="28" rx="6" fill="#fce7f3" stroke="#be185d" stroke-width="1.5"/>
+  <text x="200" y="183" text-anchor="middle" font-size="15" font-weight="700" fill="#9d174d">3.45  →  0.0345</text>
+  <text x="316" y="180" font-size="11" fill="#be185d">shift 2 left</text>
+
+  <text x="190" y="212" text-anchor="middle" font-size="10" fill="#9ca3af">Multiply → shift right  |  Divide → shift left</text>
+</svg>

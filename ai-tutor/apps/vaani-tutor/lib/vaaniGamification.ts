@@ -1,7 +1,7 @@
 /**
  * Vaani Gamification System
  * Handles: XP points, badges, streaks, lesson completion tracking
- * Storage: localStorage (client-side, no backend required)
+ * Storage: localStorage (client-side, with optional backend sync)
  */
 
 // ============================================
@@ -114,6 +114,9 @@ const BADGES: Record<number, BadgeDefinition> = {
 const STORAGE_KEYS = {
   PROFILE: "vaani_student_profile",
   COMPLETIONS: "vaani_lesson_completions",
+  STUDENT_NAME: "vaani_student_name",
+  HINDI_LEVEL: "vaani_hindi_level",
+  STUDENT_ID: "vaani_student_id",
 };
 
 // ============================================
@@ -127,6 +130,42 @@ function generateStudentId(): string {
   return `student_${Date.now()}_${Math.random().toString(36).substring(7)}`;
 }
 
+function slugifyStudentName(name: string): string {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48);
+}
+
+function getSavedStudentName(): string {
+  if (typeof window === "undefined") return "";
+  return (
+    localStorage.getItem(STORAGE_KEYS.STUDENT_NAME) ||
+    localStorage.getItem("childName") ||
+    localStorage.getItem("studentName") ||
+    ""
+  ).trim();
+}
+
+function getPreferredStudentId(): string | null {
+  if (typeof window === "undefined") return null;
+
+  const explicitId = localStorage.getItem(STORAGE_KEYS.STUDENT_ID)?.trim();
+  if (explicitId) return explicitId;
+
+  const studentName = getSavedStudentName();
+  if (!studentName) return null;
+
+  const slug = slugifyStudentName(studentName);
+  if (!slug) return null;
+
+  const derivedId = `vaani_${slug}`;
+  localStorage.setItem(STORAGE_KEYS.STUDENT_ID, derivedId);
+  return derivedId;
+}
+
 /**
  * Initialize or fetch student game profile from localStorage
  */
@@ -136,21 +175,27 @@ export function getStudentGameProfile(): StudentGameProfile {
     return createEmptyProfile(generateStudentId());
   }
 
+  const preferredId = getPreferredStudentId();
   const stored = localStorage.getItem(STORAGE_KEYS.PROFILE);
   if (stored) {
     try {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored) as StudentGameProfile;
+      if (preferredId && parsed.studentId !== preferredId) {
+        parsed.studentId = preferredId;
+        saveProfile(parsed);
+      }
+      return parsed;
     } catch {
       // Corrupted data: reset
       console.warn("[Gamification] Corrupted profile data, resetting");
-      const newProfile = createEmptyProfile(generateStudentId());
+      const newProfile = createEmptyProfile(preferredId || generateStudentId());
       saveProfile(newProfile);
       return newProfile;
     }
   }
 
   // New student
-  const profile = createEmptyProfile(generateStudentId());
+  const profile = createEmptyProfile(preferredId || generateStudentId());
   saveProfile(profile);
   return profile;
 }
@@ -186,6 +231,7 @@ function createEmptyProfile(studentId: string): StudentGameProfile {
 function saveProfile(profile: StudentGameProfile): void {
   if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(profile));
+    localStorage.setItem(STORAGE_KEYS.STUDENT_ID, profile.studentId);
   }
 }
 
@@ -215,6 +261,40 @@ function saveCompletion(completion: LessonCompletion): void {
   const completions = getAllCompletions();
   completions.push(completion);
   localStorage.setItem(STORAGE_KEYS.COMPLETIONS, JSON.stringify(completions));
+}
+
+export function replaceGameData(
+  profile: StudentGameProfile,
+  completions: LessonCompletion[]
+): void {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(profile));
+  localStorage.setItem(STORAGE_KEYS.COMPLETIONS, JSON.stringify(completions));
+  localStorage.setItem(STORAGE_KEYS.STUDENT_ID, profile.studentId);
+}
+
+export function getGamificationSnapshot(): {
+  profile: StudentGameProfile;
+  completions: LessonCompletion[];
+} {
+  return {
+    profile: getStudentGameProfile(),
+    completions: getAllCompletions(),
+  };
+}
+
+export function getStudentMetadata(): {
+  studentId: string;
+  studentName: string;
+  hindiLevel: string;
+} {
+  const profile = getStudentGameProfile();
+  return {
+    studentId: profile.studentId,
+    studentName: getSavedStudentName(),
+    hindiLevel:
+      typeof window === "undefined" ? "" : localStorage.getItem(STORAGE_KEYS.HINDI_LEVEL) || "",
+  };
 }
 
 /**

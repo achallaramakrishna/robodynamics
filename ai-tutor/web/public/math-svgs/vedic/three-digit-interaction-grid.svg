@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="260" viewBox="0 0 380 260">
+  <rect width="380" height="260" rx="24" fill="white"/>
+  <line x1="110" y1="36" x2="110" y2="224" stroke="#C9D3F5" stroke-width="3"/>
+  <line x1="190" y1="36" x2="190" y2="224" stroke="#C9D3F5" stroke-width="3"/>
+  <line x1="270" y1="36" x2="270" y2="224" stroke="#C9D3F5" stroke-width="3"/>
+  <line x1="30" y1="100" x2="350" y2="100" stroke="#C9D3F5" stroke-width="3"/>
+  <line x1="30" y1="164" x2="350" y2="164" stroke="#C9D3F5" stroke-width="3"/>
+  <text x="190" y="248" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">map every top digit to every bottom digit</text>
+</svg>

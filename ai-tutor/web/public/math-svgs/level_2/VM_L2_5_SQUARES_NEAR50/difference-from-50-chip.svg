@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#FBFCFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#F97316"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Measure the distance from 50</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">Squares near 50 become easier once the difference is visible.</text>
+
+  <line x1="120" y1="220" x2="680" y2="220" stroke="#CBD5E1" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="400" cy="220" r="28" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3"/>
+  <text x="400" y="229" fill="#C2410C" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">50</text>
+  <circle cx="470" cy="220" r="22" fill="#DBEAFE" stroke="#93C5FD" stroke-width="3"/>
+  <text x="470" y="227" fill="#1D4ED8" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">57</text>
+  <path d="M400 178 L470 178" stroke="#2563EB" stroke-width="4"/>
+  <text x="435" y="164" fill="#1D4ED8" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">+7</text>
+
+  <rect x="86" y="288" width="628" height="52" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="110" y="321" fill="#1D4ED8" font-size="18" font-family="Arial, sans-serif" font-weight="700">Use the chip: 57 = 50 + 7, so work with 50 and the difference 7.</text>
+</svg>

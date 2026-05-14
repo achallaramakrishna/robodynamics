@@ -1,0 +1,11 @@
+<svg width="190" height="60" viewBox="0 0 190 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="baseChipBg10000" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EAF2FF" />
+      <stop offset="100%" stop-color="#FDF0F8" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="182" height="52" rx="22" fill="url(#baseChipBg10000)" stroke="#3B3A8C" stroke-width="2.4"/>
+  <circle cx="24" cy="30" r="8" fill="#E91E8C"/>
+  <text x="95.0" y="36" text-anchor="middle" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#3B3A8C">BASE 10000</text>
+</svg>

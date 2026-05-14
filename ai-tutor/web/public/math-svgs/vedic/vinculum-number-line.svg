@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="140" viewBox="0 0 460 140">
+  <rect width="460" height="140" rx="24" fill="#FFF4CC"/>
+  <path d="M40 78 H420" stroke="#D4A72C" stroke-width="6" stroke-linecap="round"/>
+  <text x="120" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">positive digit</text>
+  <text x="330" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">bar digit acts negative</text>
+</svg>

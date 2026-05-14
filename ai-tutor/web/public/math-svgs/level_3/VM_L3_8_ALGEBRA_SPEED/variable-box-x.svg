@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#F8FAFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="#FFFFFF" stroke="#DCE5FF" stroke-width="2"/>
+
+  <text x="48" y="58" font-family="Segoe UI, Arial" font-size="13" font-weight="700" fill="#64748B">ROBODYNAMICS MINDSUTRA</text>
+  <text x="400" y="76" text-anchor="middle" font-family="Segoe UI, Arial" font-size="27" font-weight="700" fill="#2B3F98">Algebra by Inspection</text>
+  <text x="400" y="102" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#5E6B85">Use the visual structure to reason faster.</text>
+
+  <rect x="54" y="128" width="164" height="34" rx="17" fill="#F3F6FF" stroke="#C9D7FF"/>
+  <text x="136" y="150" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" font-weight="700" fill="#3555B4">Focus Box</text>
+
+
+  <rect x="118" y="144" width="150" height="92" rx="18" fill="#EEF3FF" stroke="#3555B4" stroke-width="3"/>
+  <rect x="326" y="144" width="150" height="92" rx="18" fill="#FFF4E2" stroke="#D58A00" stroke-width="3"/>
+  <rect x="534" y="144" width="150" height="92" rx="18" fill="#ECFDF5" stroke="#0F9F6E" stroke-width="3"/>
+  <text x="193" y="182" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#3555B4">Pattern</text>
+  <text x="401" y="182" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#9A6200">Move</text>
+  <text x="609" y="182" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#0F9F6E">Answer</text>
+  <text x="193" y="216" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">x + 3 = 9</text>
+  <text x="401" y="216" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">2x + 5 = 17</text>
+  <text x="609" y="216" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">balance both sides</text>
+  <path d="M608 260 C560 300, 470 300, 422 260" fill="none" stroke="#0F9F6E" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="422,260 438,252 436,269" fill="#0F9F6E"/>
+  <path d="M400 260 C350 300, 260 300, 212 260" fill="none" stroke="#D58A00" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="212,260 228,252 226,269" fill="#D58A00"/>
+
+  <rect x="80" y="282" width="642" height="72" rx="18" fill="#F8FAFF" stroke="#DCE5FF"/>
+  <text x="108" y="308" font-family="Segoe UI, Arial" font-size="20" font-weight="700" fill="#6366f1">Key Moves</text>
+  <g transform="translate(108 320)">
+
+    <g transform="translate(0 0)">
+      <circle cx="13" cy="13" r="7" fill="#6366f1" />
+      <text x="34" y="19" font-family="Segoe UI, Arial" font-size="19" fill="#334155">Look for equal totals and cancellation patterns.</text>
+    </g>
+    <g transform="translate(0 40)">
+      <circle cx="13" cy="13" r="7" fill="#6366f1" />
+      <text x="34" y="19" font-family="Segoe UI, Arial" font-size="19" fill="#334155">Move like terms together before solving.</text>
+    </g>
+    <g transform="translate(0 80)">
+      <circle cx="13" cy="13" r="7" fill="#6366f1" />
+      <text x="34" y="19" font-family="Segoe UI, Arial" font-size="19" fill="#334155">Use balance thinking to keep equations fair.</text>
+    </g>
+  </g>
+</svg>

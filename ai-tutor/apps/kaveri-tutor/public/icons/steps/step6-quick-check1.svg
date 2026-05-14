@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="s6bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDFA"/>
+      <stop offset="100%" stop-color="#CCFBF1"/>
+    </linearGradient>
+    <linearGradient id="s6star" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#s6bg)"/>
+  <!-- Quiz card -->
+  <rect x="8" y="10" width="48" height="44" rx="10" fill="white" stroke="#2DD4BF" stroke-width="2"/>
+  <!-- Question mark large -->
+  <text x="32" y="30" font-family="Arial, sans-serif" font-size="26" font-weight="900"
+        fill="#0D9488" text-anchor="middle" dominant-baseline="middle">?</text>
+  <!-- MCQ dots -->
+  <circle cx="15" cy="46" r="3.5" fill="#14B8A6"/>
+  <rect x="21" y="43.5" width="16" height="5" rx="2.5" fill="#99F6E4"/>
+  <circle cx="43" cy="46" r="3.5" fill="#E5E7EB"/>
+  <rect x="49" y="43.5" width="8" height="5" rx="2.5" fill="#F3F4F6"/>
+  <!-- Star badge top-right -->
+  <g transform="translate(47,8)">
+    <path d="M9 0 L11 6.5 L18 6.5 L12.5 10.5 L14.5 17 L9 13 L3.5 17 L5.5 10.5 L0 6.5 L7 6.5Z"
+          fill="url(#s6star)"/>
+  </g>
+</svg>

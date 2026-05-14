@@ -30,8 +30,10 @@ export default function AudioPlaybackTTS({
   const audioRef = useRef<HTMLAudioElement>(null);
   const [audioUrl, setAudioUrl] = useState<string>("");
 
-  // Generate audio URL on mount or when inputs change
+  // Fetch Google TTS audio via our server proxy to avoid browser CORS issues.
   useEffect(() => {
+    let cancelled = false;
+
     const generateAudioUrl = async () => {
       try {
         // Map sound keys to Hindi text
@@ -84,17 +86,27 @@ export default function AudioPlaybackTTS({
           return;
         }
 
-        // Generate Google Translate TTS URL
-        const encodedText = encodeURIComponent(textToSpeak);
-        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=hi&client=tw-ob`;
-
-        setAudioUrl(url);
+        const response = await fetch("/api/voice/tts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: textToSpeak, languageCode: "hi-IN" }),
+        });
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !data?.audioBase64 || cancelled) {
+          console.warn("Failed to fetch Google TTS audio");
+          return;
+        }
+        const mimeType = String(data.mimeType || "audio/mpeg");
+        setAudioUrl(`data:${mimeType};base64,${data.audioBase64}`);
       } catch (error) {
         console.error("Error generating audio URL:", error);
       }
     };
 
     generateAudioUrl();
+    return () => {
+      cancelled = true;
+    };
   }, [soundKey, customText]);
 
   const handlePlay = async () => {

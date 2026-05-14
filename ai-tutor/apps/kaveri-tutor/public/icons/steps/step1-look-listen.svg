@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="18" fill="#FFF7ED"/>
+  <rect width="64" height="64" rx="18" fill="url(#s1bg)"/>
+  <defs>
+    <radialGradient id="s1bg" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#FED7AA"/>
+      <stop offset="100%" stop-color="#FFEDD5"/>
+    </radialGradient>
+  </defs>
+  <!-- Eye shape -->
+  <path d="M12 32 Q32 16 52 32 Q32 48 12 32Z" fill="white" stroke="#F97316" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Iris -->
+  <circle cx="32" cy="32" r="8" fill="#F97316"/>
+  <!-- Pupil -->
+  <circle cx="32" cy="32" r="4.5" fill="#7C2D12"/>
+  <!-- Eye highlight -->
+  <circle cx="34.5" cy="29.5" r="2" fill="white" opacity="0.9"/>
+  <!-- Sound waves right of eye -->
+  <path d="M46 24 Q52 28 52 32 Q52 36 46 40" stroke="#F97316" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M49 27 Q57 30 57 34" stroke="#FB923C" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <!-- Eyelashes top -->
+  <path d="M22 26 Q20 22 19 20" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M30 22 Q30 18 30 16" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M38 22 Q39 18 41 16" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+</svg>

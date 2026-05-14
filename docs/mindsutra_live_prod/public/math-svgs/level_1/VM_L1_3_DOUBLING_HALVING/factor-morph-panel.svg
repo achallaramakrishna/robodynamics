@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #1e293b; rx: 16px; stroke: #334155; stroke-width: 3; }
+      .text-blue { fill: #3b82f6; font-family: system-ui, sans-serif; font-weight: bold; font-size: 56px; }
+      .text-purple { fill: #a855f7; font-family: system-ui, sans-serif; font-weight: bold; font-size: 56px; }
+      .text-gold { fill: #eab308; font-family: system-ui, sans-serif; font-weight: bold; font-size: 56px; }
+      .text-op { fill: #64748b; font-family: system-ui, sans-serif; font-weight: bold; font-size: 48px; }
+      .text-label-blue { fill: #3b82f6; font-family: system-ui, sans-serif; font-weight: bold; font-size: 20px; }
+      .text-label-purple { fill: #a855f7; font-family: system-ui, sans-serif; font-weight: bold; font-size: 20px; }
+      .line { fill: none; stroke: #64748b; stroke-width: 3; stroke-dasharray: 6 6; }
+      .arrow { fill: none; stroke: #64748b; stroke-width: 4; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect width="600" height="400" class="bg"/>
+
+  <!-- Row 1 -->
+  <text x="200" y="100" class="text-blue" text-anchor="middle">16</text>
+  <text x="300" y="95" class="text-op" text-anchor="middle">×</text>
+  <text x="400" y="100" class="text-purple" text-anchor="middle">25</text>
+
+  <!-- Morph Arrows -->
+  <path d="M 200 130 L 200 230" class="arrow"/>
+  <rect x="175" y="160" width="50" height="30" fill="#1e293b"/>
+  <text x="200" y="182" class="text-label-blue" text-anchor="middle">÷ 2</text>
+
+  <path d="M 400 130 L 400 230" class="arrow"/>
+  <rect x="375" y="160" width="50" height="30" fill="#1e293b"/>
+  <text x="400" y="182" class="text-label-purple" text-anchor="middle">× 2</text>
+
+  <!-- Row 2 -->
+  <text x="200" y="290" class="text-blue" text-anchor="middle">8</text>
+  <text x="300" y="285" class="text-op" text-anchor="middle">×</text>
+  <text x="400" y="290" class="text-purple" text-anchor="middle">50</text>
+
+  <text x="490" y="285" class="text-op" text-anchor="middle">=</text>
+  <text x="500" y="290" class="text-gold" text-anchor="start">400</text>
+  
+</svg>

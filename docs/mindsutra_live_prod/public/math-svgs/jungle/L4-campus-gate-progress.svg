@@ -1,0 +1,84 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L4 Campus Gate Arena Progress Map</title>
+  
+  <style>
+    .gate { cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .gate:hover { transform: scale(1.05); filter: drop-shadow(0 0 15px #60A5FA); }
+    .status-light { animation: pulse 2s infinite ease-in-out; }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+    .arena-grid { stroke: #1E293B; stroke-width: 1; opacity: 0.2; }
+    .locked { opacity: 0.6; grayscale: 1; }
+    .gate-glow { filter: drop-shadow(0 0 5px #60A5FA); }
+  </style>
+
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Arena Grid Background */}
+  <g id="grid-bg">
+     <line x1="0" y1="100" x2="800" y2="100" class="arena-grid" />
+     <line x1="0" y1="200" x2="800" y2="200" class="arena-grid" />
+     <line x1="0" y1="300" x2="800" y2="300" class="arena-grid" />
+     <line x1="0" y1="400" x2="800" y2="400" class="arena-grid" />
+     <line x1="0" y1="500" x2="800" y2="500" class="arena-grid" />
+     <line x1="100" y1="0" x2="100" y2="600" class="arena-grid" />
+     <line x1="200" y1="0" x2="200" y2="600" class="arena-grid" />
+     <line x1="300" y1="0" x2="300" y2="600" class="arena-grid" />
+     <line x1="400" y1="0" x2="400" y2="600" class="arena-grid" />
+     <line x1="500" y1="0" x2="500" y2="600" class="arena-grid" />
+     <line x1="600" y1="0" x2="600" y2="600" class="arena-grid" />
+     <line x1="700" y1="0" x2="700" y2="600" class="arena-grid" />
+  </g>
+
+  {/* Main Arena Structure */}
+  <path d="M100,200 L700,200 L750,500 L50,500 Z" fill="#1E293B" stroke="#334155" stroke-width="2" />
+  <text x="400" y="80" text-anchor="middle" font-size="32" font-weight="900" fill="white">CAMPUS GATE ARENA</text>
+  <text x="400" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#60A5FA">Master the trials to unlock your future!</text>
+
+  {/* Gate 1: P&C */}
+  <g id="gate1" class="gate gate-glow" transform="translate(150, 250)">
+     <rect width="100" height="150" rx="10" fill="#334155" stroke="#60A5FA" stroke-width="2" />
+     <circle cx="50" cy="30" r="15" fill="#1E293B" stroke="#60A5FA" />
+     <path d="M40,30 L60,30 M50,20 L50,40" stroke="#60A5FA" stroke-width="2" />
+     <text x="50" y="180" text-anchor="middle" fill="#60A5FA" font-size="12" font-weight="900">1: SELECTION</text>
+     <circle cx="50" cy="130" r="5" fill="#10B981" class="status-light" />
+  </g>
+
+  {/* Gate 2: Logic Deductions */}
+  <g id="gate2" class="gate locked" transform="translate(300, 250)">
+     <rect width="100" height="150" rx="10" fill="#334155" stroke="#334155" stroke-width="2" />
+     <circle cx="50" cy="30" r="15" fill="#1E293B" stroke="#475569" />
+     <text x="50" y="35" text-anchor="middle" fill="#475569" font-size="14">?</text>
+     <text x="50" y="180" text-anchor="middle" fill="#475569" font-size="12" font-weight="900">2: DEDUCTION</text>
+  </g>
+
+  {/* Gate 3: Probability */}
+  <g id="gate3" class="gate locked" transform="translate(450, 250)">
+     <rect width="100" height="150" rx="10" fill="#334155" stroke="#334155" stroke-width="2" />
+     <circle cx="50" cy="30" r="15" fill="#1E293B" stroke="#475569" />
+     <path d="M40,30 L60,30" stroke="#475569" rotate="45" />
+     <text x="50" y="180" text-anchor="middle" fill="#475569" font-size="12" font-weight="900">3: CHANCE</text>
+  </g>
+
+  {/* Gate 4: RC Analysis */}
+  <g id="gate4" class="gate locked" transform="translate(600, 250)">
+     <rect width="100" height="150" rx="10" fill="#334155" stroke="#334155" stroke-width="2" />
+     <circle cx="50" cy="30" r="15" fill="#1E293B" stroke="#475569" />
+     <text x="50" y="35" text-anchor="middle" fill="#475569" font-size="14">¶</text>
+     <text x="50" y="180" text-anchor="middle" fill="#475569" font-size="12" font-weight="900">4: INSIGHT</text>
+  </g>
+
+  {/* Score Dashboard */}
+  <g transform="translate(620, 500)">
+     <rect width="150" height="50" rx="25" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+     <text x="75" y="32" text-anchor="middle" fill="#60A5FA" font-size="20" font-weight="900">LEVEL 4 TRIAL</text>
+  </g>
+
+  {/* Sparky Campus Coach */}
+  <g id="sparky-coach" transform="translate(100, 100)">
+     <circle r="40" fill="#F97316" />
+     <rect x="-30" y="-10" width="60" height="10" rx="5" fill="#1E293B" />
+     <circle cx="-15" cy="-5" r="4" fill="white" />
+     <circle cx="15" cy="-5" r="4" fill="white" />
+     <text x="0" y="65" text-anchor="middle" font-size="14" font-weight="900" fill="#F97316">COACH SPARK</text>
+  </g>
+</svg>

@@ -1,0 +1,102 @@
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 16px; font-weight: bold; fill: #2c3e50; }
+      .label { font-size: 11px; font-weight: bold; fill: #333; }
+      .text { font-size: 9px; fill: #555; }
+      .artery { stroke: #e74c3c; stroke-width: 2.5; fill: none; }
+      .vein { stroke: #3498db; stroke-width: 2.5; fill: none; }
+      .chamber { fill: #fadbd8; stroke: #c0392b; stroke-width: 2; }
+      .valve { stroke: #2c3e50; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="250" y="25" class="title" text-anchor="middle">HUMAN HEART STRUCTURE</text>
+
+  <!-- Heart outline -->
+  <path d="M 150 150 Q 120 120 100 150 Q 80 180 100 220 L 250 350 L 400 220 Q 420 180 400 150 Q 380 120 350 150"
+        fill="#ffe6e6" stroke="#c0392b" stroke-width="2"/>
+
+  <!-- Right Atrium (RA) -->
+  <ellipse cx="180" cy="160" rx="45" ry="50" class="chamber"/>
+  <text x="180" y="160" class="label" text-anchor="middle" font-size="10">RA</text>
+  <text x="180" y="220" class="label" text-anchor="middle" font-size="9">Right Atrium</text>
+
+  <!-- Left Atrium (LA) -->
+  <ellipse cx="320" cy="160" rx="45" ry="50" class="chamber"/>
+  <text x="320" y="160" class="label" text-anchor="middle" font-size="10">LA</text>
+  <text x="320" y="220" class="label" text-anchor="middle" font-size="9">Left Atrium</text>
+
+  <!-- Right Ventricle (RV) -->
+  <ellipse cx="200" cy="300" rx="50" ry="60" class="chamber"/>
+  <text x="200" y="300" class="label" text-anchor="middle" font-size="10">RV</text>
+  <text x="200" y="370" class="label" text-anchor="middle" font-size="9">Right Ventricle</text>
+
+  <!-- Left Ventricle (LV) -->
+  <ellipse cx="300" cy="300" rx="50" ry="60" class="chamber"/>
+  <text x="300" y="300" class="label" text-anchor="middle" font-size="10">LV</text>
+  <text x="300" y="370" class="label" text-anchor="middle" font-size="9">Left Ventricle</text>
+
+  <!-- Septa (walls) -->
+  <line x1="250" y1="150" x2="250" y2="350" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- Valves -->
+  <!-- Tricuspid valve -->
+  <circle cx="220" cy="230" r="8" class="valve" fill="none"/>
+  <line x1="216" y1="230" x2="224" y2="230" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- Mitral valve -->
+  <circle cx="280" cy="230" r="8" class="valve" fill="none"/>
+  <line x1="276" y1="230" x2="284" y2="230" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- Pulmonary valve -->
+  <circle cx="170" cy="270" r="8" class="valve" fill="none"/>
+
+  <!-- Aortic valve -->
+  <circle cx="330" cy="270" r="8" class="valve" fill="none"/>
+
+  <!-- Superior Vena Cava -->
+  <path d="M 180 100 L 180 130" class="vein" marker-end="url(#vein-arrow)"/>
+  <text x="145" y="115" class="label" font-size="10">SVC</text>
+
+  <!-- Inferior Vena Cava -->
+  <path d="M 180 350 L 180 380" class="vein" marker-end="url(#vein-arrow)"/>
+  <text x="145" y="380" class="label" font-size="10">IVC</text>
+
+  <!-- Pulmonary Arteries -->
+  <path d="M 150 270 L 100 270" class="artery" marker-end="url(#artery-arrow)"/>
+  <text x="85" y="260" class="label" font-size="10">PA</text>
+
+  <!-- Pulmonary Veins -->
+  <path d="M 320 200 L 340 180" class="vein" marker-end="url(#vein-arrow)"/>
+  <text x="330" y="175" class="label" font-size="10">PV</text>
+
+  <!-- Aorta -->
+  <path d="M 330 250 L 380 200" class="artery" marker-end="url(#artery-arrow)"/>
+  <text x="375" y="220" class="label" font-size="10">Aorta</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="artery-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c"/>
+    </marker>
+    <marker id="vein-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db"/>
+    </marker>
+  </defs>
+
+  <!-- Information Box -->
+  <rect x="20" y="410" width="460" height="40" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="3"/>
+  <text x="30" y="430" class="label">Blood Flow: RA → RV → Lungs → LA → LV → Body</text>
+  <text x="30" y="445" class="text">Red = Oxygenated Blood | Blue = Deoxygenated Blood</text>
+
+  <!-- Key Features -->
+  <rect x="20" y="460" width="460" height="125" fill="#fff" stroke="#95a5a6" stroke-width="1" rx="3"/>
+  <text x="30" y="480" class="label" font-size="11">Key Structures:</text>
+  <text x="30" y="498" class="text">• Atria (upper chambers): Receive blood</text>
+  <text x="30" y="514" class="text">• Ventricles (lower chambers): Pump blood</text>
+  <text x="30" y="530" class="text">• Valves: Prevent backflow (Tricuspid, Mitral, Pulmonary, Aortic)</text>
+  <text x="30" y="546" class="text">• Septa: Walls separating right & left sides</text>
+  <text x="30" y="562" class="text">• Coronary arteries: Supply oxygen-rich blood to heart muscle</text>
+</svg>

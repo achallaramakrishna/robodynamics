@@ -239,7 +239,7 @@ const chapter1Lessons: GrammarLesson[] = [
     id: "L6-C01-L03",
     chapterId: "C01",
     chapterTitle: "नाम और विशेषण · Nouns & Adjectives",
-    title: "लिंग (Gender) - masculine, feminine, neuter",
+    title: "लिंग (Gender) - masculine and feminine",
     category: "Grammar",
     skill: "Parts of Speech",
     order: 3,
@@ -308,9 +308,9 @@ const chapter1Lessons: GrammarLesson[] = [
       },
     ],
     summary:
-      "Hindi nouns have gender (masculine/feminine/neuter). This affects adjectives and verbs. Masculine adjectives differ from feminine.",
+      "Hindi nouns have grammatical gender: masculine or feminine. This affects adjective and verb agreement.",
     prompt:
-      "Learn that Hindi nouns have gender. When you add adjectives or verbs, they must agree with the noun's gender. This is a key feature of Hindi grammar.",
+      "Learn how masculine and feminine nouns change the words around them. Gender agreement is a key feature of Hindi grammar.",
   },
   {
     id: "L6-C01-L04",
@@ -1042,11 +1042,23 @@ const chapter2Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is present habitual?",
-        options: ["खाना", "खा रहा है", "खाता है", "खाया है"],
-        correctAnswer: "खाता है",
+        question: "Fill in the blank: 'हर रोज़ मैं दूध ___'",
+        options: ["पीता हूँ", "पी रहा हूँ", "पिया था", "पीऊँगा"],
+        correctAnswer: "पीता हूँ",
         explanation:
-          "खाता है indicates habitual present. खा रहा है is continuous; खाया है is past.",
+          "हर रोज़ (every day) = repeated daily action = present habitual = पीता हूँ. पी रहा हूँ would mean 'drinking right now'; पिया था is past; पीऊँगा is future.",
+      },
+      {
+        question: "Which sentence correctly shows what she usually does?",
+        options: [
+          "वह अभी पढ़ रही है।",
+          "वह हमेशा पढ़ती है।",
+          "वह कल पढ़ेगी।",
+          "वह बैठी है।",
+        ],
+        correctAnswer: "वह हमेशा पढ़ती है।",
+        explanation:
+          "हमेशा (always) + feminine verb पढ़ती है = habitual action. अभी पढ़ रही है is 'reading right now' (continuous); कल पढ़ेगी is 'will read tomorrow' (future).",
       },
     ],
     summary:
@@ -1115,11 +1127,23 @@ const chapter2Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which shows an action happening RIGHT NOW?",
-        options: ["खाता है", "खा रहा है", "खाएगा", "खाया था"],
-        correctAnswer: "खा रहा है",
+        question: "Fill in the blank: 'अभी मैं पानी ___'",
+        options: ["पीता हूँ", "पी रहा हूँ", "पिया था", "पीऊँगा"],
+        correctAnswer: "पी रहा हूँ",
         explanation:
-          "खा रहा है is present continuous (happening now). खाता है is habitual.",
+          "अभी (right now) = action happening at this moment = present continuous = पी रहा हूँ. पीता हूँ would be habitual; पिया था is past; पीऊँगा is future.",
+      },
+      {
+        question: "What is the difference? 'वह पढ़ता है' vs 'वह पढ़ रहा है'?",
+        options: [
+          "First is reading now, second usually reads",
+          "First usually reads, second is reading now",
+          "Both mean the same",
+          "First is past, second is present",
+        ],
+        correctAnswer: "First usually reads, second is reading now",
+        explanation:
+          "पढ़ता है (habitual) = what he usually does. पढ़ रहा है (continuous) = what he is doing right now. This is a critical distinction in Hindi.",
       },
     ],
     summary:
@@ -1206,18 +1230,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is correct future tense?",
-        options: ["मैं जाता हूँ", "मैं जाऊँगा", "मैं गया", "मैं जा रहा हूँ"],
-        correctAnswer: "मैं जाऊँगा",
+        question: "Complete the sentence: 'मैं कल स्कूल ____।'",
+        options: ["जाता हूँ", "जाऊँगा", "गया", "जा रहा हूँ"],
+        correctAnswer: "जाऊँगा",
         explanation:
-          "जाऊँगा is future tense. जाता हूँ is present habitual, गया is past, जा रहा हूँ is present continuous.",
+          "'कल' here means tomorrow, so the future form is 'जाऊँगा'.",
       },
       {
-        question: "What is the future form of 'खाता है' for 'वह' (she)?",
+        question: "Choose the correct sentence for a girl: 'सीमा शाम को खाना ____।'",
         options: ["खाएगा", "खाएगी", "खाती है", "खाया"],
         correctAnswer: "खाएगी",
         explanation:
-          "वह is feminine, so the verb takes feminine form: खाएगी (will eat).",
+          "सीमा is feminine, so the future verb must be 'खाएगी'.",
       },
     ],
     summary:
@@ -1291,18 +1315,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is present perfect?",
+        question: "Which sentence means 'I have finished eating'?",
         options: ["मैं खा रहा हूँ", "मैंने खा लिया है", "मैं खाता हूँ", "मैं खाऊँगा"],
         correctAnswer: "मैंने खा लिया है",
         explanation:
-          "खा लिया है is present perfect (have eaten). Others are present continuous, habitual, and future.",
+          "'मैंने खा लिया है' shows a completed action with present relevance.",
       },
       {
-        question: "What needs to be added to the subject in perfect tense?",
+        question: "Fill the blank: 'रीता ___ होमवर्क पूरा किया है।'",
         options: ["को", "में", "ने", "से"],
         correctAnswer: "ने",
         explanation:
-          "The object marker 'ने' marks the agent in perfect and past tenses in Hindi.",
+          "With a completed transitive action, the doer takes 'ने': 'रीता ने होमवर्क पूरा किया है।'",
       },
     ],
     summary:
@@ -1383,18 +1407,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What is the informal imperative of 'खाना'?",
+        question: "You are speaking politely to your teacher. Which sentence fits best?",
         options: ["खानो", "खा", "खाओ", "खाइए"],
-        correctAnswer: "खा",
+        correctAnswer: "खाइए",
         explanation:
-          "खा is the sharp imperative. खाओ is also correct (softer). खाइए is formal.",
+          "'खाइए' is the polite/formal imperative used with respectful speech.",
       },
       {
-        question: "Which is formal imperative?",
+        question: "Choose the polite request you would use with 'आप'.",
         options: ["करो", "कर", "करिए", "करना"],
         correctAnswer: "करिए",
         explanation:
-          "करिए is the polite formal command. करो/कर are informal.",
+          "'करिए' matches respectful 'आप'. 'करो' and 'कर' are informal.",
       },
     ],
     summary:
@@ -1469,18 +1493,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is correct for 'वह लड़का'?",
+        question: "Complete the sentence: 'वह लड़का मैदान में ____।'",
         options: ["खेल रही है", "खेल रहा है", "खेल रहे हैं", "खेल रहा हूँ"],
         correctAnswer: "खेल रहा है",
         explanation:
-          "लड़का (boy) is singular masculine, so खेल रहा है is correct.",
+          "'लड़का' is singular masculine, so the correct verb phrase is 'खेल रहा है'.",
       },
       {
-        question: "What form do we use with plural subjects?",
-        options: ["Singular ending", "Plural ending (-ते हैं/-ती हैं)", "Personal ending", "No ending"],
-        correctAnswer: "Plural ending (-ते हैं/-ती हैं)",
+        question: "Which sentence is correct for a plural subject?",
+        options: ["हम स्कूल जाता है।", "हम स्कूल जाते हैं।", "हम स्कूल जाती है।", "हम स्कूल जा रहा हूँ।"],
+        correctAnswer: "हम स्कूल जाते हैं।",
         explanation:
-          "Plural subjects take plural verb forms with -ते or -ती endings.",
+          "'हम' is plural, so it needs the plural form 'जाते हैं'.",
       },
     ],
     summary:
@@ -1555,18 +1579,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is transitive verb?",
-        options: ["दौड़ना", "खाना", "सोना", "हँसना"],
-        correctAnswer: "खाना",
+        question: "Which sentence has a verb that takes an object?",
+        options: ["रीता दौड़ती है।", "राज सेब खाता है।", "बच्चा सोता है।", "वह हँसती है।"],
+        correctAnswer: "राज सेब खाता है।",
         explanation:
-          "खाना (to eat) takes an object (भोजन). दौड़ना, सोना, हँसना are intransitive.",
+          "'सेब' is the object here, so 'खाता है' is being used transitively.",
       },
       {
-        question: "Should we use 'ने' with intransitive verbs in past?",
-        options: ["Yes, always", "No, never", "Sometimes", "Only with plurals"],
-        correctAnswer: "No, never",
+        question: "Choose the correct past sentence with an intransitive verb.",
+        options: ["मैंने हँसा।", "मैं हँसा।", "मैंने सोया हूँ।", "मैं से हँसा।"],
+        correctAnswer: "मैं हँसा।",
         explanation:
-          "'ने' is used only with transitive verbs. Intransitive verbs don't take 'ने'।",
+          "With an intransitive verb like 'हँसना', we do not use 'ने' in this example.",
       },
     ],
     summary:
@@ -1641,18 +1665,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What auxiliary shows ability?",
-        options: ["चाहना", "सकना", "देना", "जाना"],
-        correctAnswer: "सकना",
+        question: "Which sentence shows ability?",
+        options: ["मैं जाना चाहता हूँ।", "मैं जा सकता हूँ।", "मैं जा रहा हूँ।", "मैं गया।"],
+        correctAnswer: "मैं जा सकता हूँ।",
         explanation:
-          "सकना means 'can' or 'able to'. चाहना means 'want', देना means 'let'।",
+          "'जा सकता हूँ' shows ability: I can go.",
       },
       {
-        question: "Which uses auxiliary 'चाहना'?",
+        question: "Which sentence shows desire or wish?",
         options: ["मैं जा सकता हूँ", "मैं जाना चाहता हूँ", "मैं जा दूँ", "मैं जा रहा हूँ"],
         correctAnswer: "मैं जाना चाहता हूँ",
         explanation:
-          "जाना चाहता हूँ shows wanting/intention. जा सकता हूँ shows ability।",
+          "'जाना चाहता हूँ' shows desire or wish.",
       },
     ],
     summary:
@@ -1727,18 +1751,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What is the past of 'करना'?",
+        question: "Choose the correct sentence for yesterday: 'मैंने काम ____।'",
         options: ["करनी", "किया", "कर रहा है", "करूँगा"],
         correctAnswer: "किया",
         explanation:
-          "करना is irregular; past is किया (masculine) or की (feminine)।",
+          "'करना' becomes 'किया/की' in the past. Here the correct completion is 'मैंने काम किया।'",
       },
       {
-        question: "Which is correct past of 'जाना' for 'वह' (she)?",
+        question: "Choose the correct sentence for a girl: 'वह बाज़ार ____।'",
         options: ["जाई", "गई", "जाना", "जा रही है"],
         correctAnswer: "गई",
         explanation:
-          "जाना is highly irregular. Past feminine is गई. Past masculine is गया।",
+          "The past of 'जाना' is irregular. For a feminine subject, use 'गई'.",
       },
     ],
     summary:
@@ -1813,18 +1837,18 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which tense is used for daily habits?",
-        options: ["Present continuous", "Present habitual", "Past tense", "Future tense"],
-        correctAnswer: "Present habitual",
+        question: "Which sentence talks about a daily habit?",
+        options: ["मैं खेल रहा हूँ।", "मैं रोज़ खेलता हूँ।", "मैं खेला।", "मैं खेलूँगा।"],
+        correctAnswer: "मैं रोज़ खेलता हूँ।",
         explanation:
-          "Present habitual (करता/करती हूँ) is used for daily routines. Present continuous is for now.",
+          "'रोज़' plus 'खेलता हूँ' shows a repeated daily habit.",
       },
       {
-        question: "Complete: मैं कल स्कूल _____ (go)?",
-        options: ["जाता हूँ", "गया", "जाऊँगा", "जा रहा हूँ"],
-        correctAnswer: "जाऊँगा",
+        question: "Complete: 'अभी मैं किताब ____।'",
+        options: ["पढ़ता हूँ", "पढ़ा", "पढ़ूँगा", "पढ़ रहा हूँ"],
+        correctAnswer: "पढ़ रहा हूँ",
         explanation:
-          "'कल' (tomorrow) indicates future, so use जाऊँगा (future tense)।",
+          "'अभी' shows an action happening now, so the present continuous form is correct.",
       },
     ],
     summary:
@@ -1902,18 +1926,18 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which pronoun is formal/respectful?",
+        question: "You are speaking to your teacher. Which pronoun should you use?",
         options: ["तू", "मैं", "आप", "यह"],
         correctAnswer: "आप",
         explanation:
           "आप is used in formal situations. तू is intimate/familiar।",
       },
       {
-        question: "What should we use instead of 'तू' in formal speech?",
-        options: ["मैं", "आप", "वह", "यह"],
-        correctAnswer: "आप",
+        question: "Choose the polite sentence.",
+        options: ["तू बैठ।", "आप बैठिए।", "वह बैठ।", "मैं बैठिए।"],
+        correctAnswer: "आप बैठिए।",
         explanation:
-          "In formal or unfamiliar situations, use आप instead of तू।",
+          "'आप बैठिए।' is the polite sentence because it uses respectful pronoun and verb form.",
       },
     ],
     summary:
@@ -1982,14 +2006,14 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is correct nominative form?",
+        question: "Fill the blank with a subject form: '___ स्कूल जाता हूँ।'",
         options: ["मैंको", "मैं", "मेरा", "मुझे"],
         correctAnswer: "मैं",
         explanation:
           "मैं is nominative (subject). मुझे is oblique (object/indirect)।",
       },
       {
-        question: "In 'वह जाता है', वह is _____?",
+        question: "In 'वह जाता है', who is doing the action?",
         options: ["Object", "Subject", "Possessive", "Indirect object"],
         correctAnswer: "Subject",
         explanation:
@@ -2068,14 +2092,14 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What is the oblique form of 'मैं'?",
+        question: "Fill the blank: '___ पानी चाहिए।'",
         options: ["मेरा", "मुझे", "मुझको", "मुझे है"],
         correctAnswer: "मुझे",
         explanation:
           "मुझे is the oblique form used with postpositions like को, में।",
       },
       {
-        question: "In 'उसे किताब दो', उसे is _____?",
+        question: "In 'उसे किताब दो', who receives the book?",
         options: ["Subject", "Object", "Possessive", "Reflexive"],
         correctAnswer: "Object",
         explanation:
@@ -2154,18 +2178,18 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What is the possessive for 'वह' with feminine noun?",
+        question: "Complete the sentence: 'यह ___ किताब है।' (his/her book)",
         options: ["उसा", "उसकी", "उसके", "उसको"],
         correctAnswer: "उसकी",
         explanation:
           "उसकी is feminine possessive. उसके is plural। उसका is masculine।",
       },
       {
-        question: "Correct: 'मेरा लड़की'?",
-        options: ["Yes, correct", "No, use 'मेरी लड़की'", "No, use 'मेरे लड़की'", "All are correct"],
-        correctAnswer: "No, use 'मेरी लड़की'",
+        question: "Which sentence is correct?",
+        options: ["मेरा लड़की", "मेरी लड़की", "मेरे लड़की", "मेरी लड़का"],
+        correctAnswer: "मेरी लड़की",
         explanation:
-          "लड़की (girl) is feminine, so मेरी, not मेरा।",
+          "'लड़की' is feminine, so the correct phrase is 'मेरी लड़की'.",
       },
     ],
     summary:
@@ -2234,7 +2258,7 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which pronoun points to something far away?",
+        question: "You point to a book across the room. Which word fits?",
         options: ["यह", "वह", "ये", "यहाँ"],
         correctAnswer: "वह",
         explanation:
@@ -2307,7 +2331,7 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which interrogative pronoun asks about people?",
+        question: "Which question would you ask about a person?",
         options: ["क्या", "कौन", "कहाँ", "कौन सा"],
         correctAnswer: "कौन",
         explanation:
@@ -2354,11 +2378,16 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "What is the main relative pronoun in Hindi?",
-        options: ["कौन", "जो", "क्या", "वह"],
-        correctAnswer: "जो",
+        question: "Choose the sentence that correctly joins two ideas.",
+        options: [
+          "वह लड़का जो दौड़ रहा है, मेरा भाई है।",
+          "क्या लड़का दौड़ रहा है, वह मेरा भाई है।",
+          "कौन लड़का दौड़ रहा है, वह मेरा भाई है।",
+          "वह लड़का दौड़ रहा है, जो मेरा भाई है।",
+        ],
+        correctAnswer: "वह लड़का जो दौड़ रहा है, मेरा भाई है।",
         explanation:
-          "जो is the primary relative pronoun joining clauses।",
+          "'जो' correctly links the description to the noun and joins the two ideas.",
       },
     ],
     commonMistakes: [
@@ -2522,7 +2551,7 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which genitive form is correct for 'राज का _____' with feminine noun?",
+        question: "Complete the phrase: 'राज ___ किताब'",
         options: ["का", "की", "के", "को"],
         correctAnswer: "की",
         explanation:
@@ -2589,11 +2618,11 @@ const chapter3Lessons: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which is correct locative?",
-        options: ["दिल्ली को", "दिल्ली में", "दिल्ली से", "दिल्ली का"],
-        correctAnswer: "दिल्ली में",
+        question: "Complete the sentence: 'वह दिल्ली ___ रहता है।'",
+        options: ["को", "में", "से", "का"],
+        correctAnswer: "में",
         explanation:
-          "में marks location. को marks object। से marks source/instrument।",
+          "For location, Hindi uses 'में': 'वह दिल्ली में रहता है।'",
       },
     ],
     summary:

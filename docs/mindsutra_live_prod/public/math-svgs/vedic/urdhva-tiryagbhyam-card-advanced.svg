@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="220" viewBox="0 0 440 220">
+  <rect width="440" height="220" rx="24" fill="#EAF2FF"/>
+  <text x="34" y="48" font-family="Segoe UI, Arial" font-size="24" font-weight="700" fill="#3B3A8C">Urdhva-Tiryagbhyam</text>
+  <text x="34" y="82" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">3-digit flow: 1, 2, 3, 2, 1 products</text>
+  <text x="34" y="118" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">Reveal one band at a time</text>
+  <text x="34" y="152" font-family="Segoe UI, Arial" font-size="18" fill="#1F2440">Carry forward after each band</text>
+  <rect x="292" y="50" width="108" height="108" rx="24" fill="white" stroke="#E91E8C" stroke-width="4"/>
+  <text x="346" y="115" text-anchor="middle" font-family="Segoe UI, Arial" font-size="42" font-weight="700" fill="#E91E8C">1 2 3</text>
+</svg>

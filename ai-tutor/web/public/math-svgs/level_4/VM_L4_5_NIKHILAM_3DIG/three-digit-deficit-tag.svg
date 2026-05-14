@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#F9FBFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#0EA5E9"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Find the three-digit deficit</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">For numbers near 1000, the shortfall controls the fast multiplication step.</text>
+
+  <rect x="84" y="144" width="258" height="150" rx="22" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="213" y="188" fill="#9A3412" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Example number</text>
+  <text x="213" y="248" fill="#10213F" font-size="58" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">997</text>
+
+  <rect x="412" y="144" width="304" height="150" rx="22" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text x="564" y="188" fill="#1D4ED8" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Base 1000</text>
+  <text x="564" y="248" fill="#10213F" font-size="58" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">−3</text>
+  <path d="M342 220 H412" stroke="#0EA5E9" stroke-width="4"/>
+  <text x="377" y="205" fill="#0369A1" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">deficit</text>
+
+  <rect x="104" y="316" width="592" height="34" rx="10" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <text x="400" y="338" fill="#047857" font-size="17" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">997 is 3 below 1000, so the deficit tag is 3.</text>
+</svg>

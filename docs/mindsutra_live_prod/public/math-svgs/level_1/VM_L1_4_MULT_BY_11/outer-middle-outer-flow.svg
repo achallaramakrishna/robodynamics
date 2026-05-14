@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="560" height="300" fill="#EEF2FF" rx="16"/>
+
+  <!-- Step label -->
+  <text x="280" y="28" text-anchor="middle" font-size="12" fill="#6366f1" font-weight="700" letter-spacing="1.5">OUTER · MIDDLE-SUM · OUTER</text>
+
+  <!-- ══ Source number: 54 ══ -->
+  <!-- Digit "5" (tens) -->
+  <rect x="188" y="44" width="72" height="72" rx="12" fill="#3730a3" stroke="#818cf8" stroke-width="2"/>
+  <text x="224" y="100" text-anchor="middle" font-size="46" font-weight="800" fill="white">5</text>
+
+  <!-- ×11 label -->
+  <text x="280" y="92" text-anchor="middle" font-size="18" font-weight="700" fill="#818cf8">×11</text>
+
+  <!-- Digit "4" (units) -->
+  <rect x="300" y="44" width="72" height="72" rx="12" fill="#3730a3" stroke="#818cf8" stroke-width="2"/>
+  <text x="336" y="100" text-anchor="middle" font-size="46" font-weight="800" fill="white">4</text>
+
+  <!-- ══ Arrow down ══ -->
+  <line x1="280" y1="122" x2="280" y2="148" stroke="#818cf8" stroke-width="2.5" stroke-dasharray="5,3" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.3s" fill="freeze"/>
+  </line>
+  <polygon points="274,145 280,155 286,145" fill="#818cf8" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.3s" fill="freeze"/>
+  </polygon>
+
+  <!-- ══ Three result boxes ══ -->
+  <!-- Left box -->
+  <rect x="62" y="158" width="108" height="86" rx="14" fill="#3730a3" stroke="#818cf8" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.35s" fill="freeze"/>
+  </rect>
+  <!-- Left value "5" appears with slide -->
+  <text x="116" y="215" text-anchor="middle" font-size="44" font-weight="800" fill="white" opacity="0">5
+    <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="116" y="254" text-anchor="middle" font-size="11" fill="#a5b4fc" letter-spacing="0.5" opacity="0">first digit (A)
+    <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.3s" fill="freeze"/>
+  </text>
+
+  <!-- Arrow from left source "5" to left box -->
+  <path d="M 224,118 C 224,138 116,138 116,158" stroke="#818cf8" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.4s" dur="0.3s" fill="freeze"/>
+  </path>
+  <polygon points="111,153 116,162 121,153" fill="#818cf8" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.4s" dur="0.3s" fill="freeze"/>
+  </polygon>
+
+  <!-- Middle box -->
+  <rect x="226" y="158" width="108" height="86" rx="14" fill="#5b21b6" stroke="#a78bfa" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.35s" fill="freeze"/>
+  </rect>
+  <!-- Middle annotation: 5+4 -->
+  <text x="280" y="142" text-anchor="middle" font-size="13" fill="#fbbf24" font-weight="700" opacity="0">5 + 4 = 9
+    <animate attributeName="opacity" from="0" to="1" begin="2.0s" dur="0.35s" fill="freeze"/>
+  </text>
+  <line x1="280" y1="145" x2="280" y2="158" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="2.0s" dur="0.3s" fill="freeze"/>
+  </line>
+  <!-- Middle value "9" -->
+  <text x="280" y="215" text-anchor="middle" font-size="44" font-weight="800" fill="#fbbf24" opacity="0">9
+    <animate attributeName="opacity" from="0" to="1" begin="2.3s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="280" y="254" text-anchor="middle" font-size="11" fill="#c4b5fd" letter-spacing="0.5" opacity="0">A + B = 9
+    <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.3s" fill="freeze"/>
+  </text>
+
+  <!-- Right box -->
+  <rect x="390" y="158" width="108" height="86" rx="14" fill="#3730a3" stroke="#818cf8" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.35s" fill="freeze"/>
+  </rect>
+  <!-- Right value "4" -->
+  <text x="444" y="215" text-anchor="middle" font-size="44" font-weight="800" fill="white" opacity="0">4
+    <animate attributeName="opacity" from="0" to="1" begin="1.9s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text x="444" y="254" text-anchor="middle" font-size="11" fill="#a5b4fc" letter-spacing="0.5" opacity="0">last digit (B)
+    <animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.3s" fill="freeze"/>
+  </text>
+
+  <!-- Arrow from right source "4" to right box -->
+  <path d="M 336,118 C 336,138 444,138 444,158" stroke="#818cf8" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.7s" dur="0.3s" fill="freeze"/>
+  </path>
+  <polygon points="439,153 444,162 449,153" fill="#818cf8" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.7s" dur="0.3s" fill="freeze"/>
+  </polygon>
+
+  <!-- ══ Answer ══ -->
+  <text x="280" y="284" text-anchor="middle" font-size="18" font-weight="800" fill="#16a34a" opacity="0">54 × 11 = 594 ✓
+    <animate attributeName="opacity" from="0" to="1" begin="3.0s" dur="0.5s" fill="freeze"/>
+  </text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" rx="18" fill="#F8FAFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="20" fill="white" stroke="#DCE5FF" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="28" font-weight="700" fill="#2B3F98">Worked Example: 67²</text>
+  <text x="400" y="90" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#5E6B85">Split the square into slots, then normalize carries from right to left.</text>
+
+  <rect x="110" y="138" width="170" height="90" rx="18" fill="#EEF3FF" stroke="#3555B4" stroke-width="3"/>
+  <rect x="315" y="138" width="170" height="90" rx="18" fill="#FFF4E2" stroke="#D58A00" stroke-width="3"/>
+  <rect x="520" y="138" width="170" height="90" rx="18" fill="#ECFDF5" stroke="#0F9F6E" stroke-width="3"/>
+  <text x="195" y="174" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#3555B4">Left</text>
+  <text x="400" y="174" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#9A6200">Middle</text>
+  <text x="605" y="174" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" fill="#0F9F6E">Right</text>
+  <text x="195" y="208" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">6² = 36</text>
+  <text x="400" y="208" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">2×6×7 = 84</text>
+  <text x="605" y="208" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="28" font-weight="700" fill="#1F2440">7² = 49</text>
+
+  <text x="132" y="282" font-family="Segoe UI, Arial" font-size="16" fill="#1F2440">Right slot: write 9, carry 4</text>
+  <text x="132" y="308" font-family="Segoe UI, Arial" font-size="16" fill="#1F2440">Middle: 84 + 4 = 88, write 8, carry 8</text>
+  <text x="132" y="334" font-family="Segoe UI, Arial" font-size="16" fill="#1F2440">Left: 36 + 8 = 44</text>
+
+  <rect x="534" y="278" width="154" height="58" rx="16" fill="#E8EEFF" stroke="#3555B4" stroke-width="3"/>
+  <text x="611" y="301" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" fill="#3555B4">Final answer</text>
+  <text x="611" y="324" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#1F2440">4489</text>
+</svg>

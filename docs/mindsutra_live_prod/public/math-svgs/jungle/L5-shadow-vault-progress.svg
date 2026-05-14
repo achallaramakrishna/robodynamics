@@ -1,0 +1,75 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L5 FAANG Shadow Vault Progress Map</title>
+  
+  <style>
+    .vault-chamber { cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .vault-chamber:hover { transform: scale(1.05); filter: drop-shadow(0 0 20px #22D3EE); }
+    .status-neon { animation: pulse 2.5s infinite ease-in-out; }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; filter: brightness(1); } 50% { opacity: 1; filter: brightness(1.8); } }
+    .circuit-path { stroke: #1E293B; stroke-width: 1.5; fill: none; opacity: 0.4; }
+    .locked { opacity: 0.5; filter: grayscale(1); }
+    .glow-cyan { filter: drop-shadow(0 0 8px #22D3EE); }
+    .glow-violet { filter: drop-shadow(0 0 8px #A855F7); }
+  </style>
+
+  <rect width="800" height="600" fill="#020617" />
+  
+  {/* Circuit Background Grid */}
+  <g id="circuitry">
+     <path d="M100,0 L100,600 M200,0 L200,600 M300,0 L300,600 M400,0 L400,600 M500,0 L500,600 M600,0 L600,600 M700,0 L700,600" class="circuit-path" />
+     <path d="M0,100 L800,100 M0,200 L800,200 M0,300 L800,300 M0,400 L800,400 M0,500 L800,500" class="circuit-path" />
+     <circle cx="100" cy="100" r="3" fill="#22D3EE" opacity="0.5" />
+     <circle cx="700" cy="500" r="3" fill="#A855F7" opacity="0.5" />
+  </g>
+
+  {/* Vault Central Access Hub */}
+  <circle cx="400" cy="300" r="220" fill="none" stroke="#1E293B" stroke-width="40" opacity="0.3" />
+  <circle cx="400" cy="300" r="218" fill="none" stroke="#22D3EE" stroke-width="2" stroke-dasharray="10,20" class="status-neon" />
+
+  <text x="400" y="70" text-anchor="middle" font-size="36" font-weight="900" fill="white">FAANG SHADOW VAULT</text>
+  <text x="400" y="105" text-anchor="middle" font-size="16" font-weight="700" fill="#22D3EE">The Elite Logic Trials</text>
+
+  {/* Chamber 1: Data Sufficiency */}
+  <g id="chamber1" class="vault-chamber glow-cyan" transform="translate(400, 120)">
+     <rect x="-60" y="-80" width="120" height="160" rx="10" fill="#0F172A" stroke="#22D3EE" stroke-width="2" />
+     <path d="M-40,0 L40,0 M0,-40 L0,40" stroke="#22D3EE" stroke-width="2" opacity="0.3" />
+     <text y="105" text-anchor="middle" fill="#22D3EE" font-size="12" font-weight="900">DATA VAULT</text>
+     <circle cy="-40" r="6" fill="#22D3EE" class="status-neon" />
+  </g>
+
+  {/* Chamber 2: Cryptarithm */}
+  <g id="chamber2" class="vault-chamber locked" transform="translate(620, 300)">
+     <rect x="-60" y="-80" width="120" height="160" rx="10" fill="#0F172A" stroke="#334155" stroke-width="2" />
+     <text x="0" y="10" text-anchor="middle" fill="#334155" font-size="24">#</text>
+     <text y="105" text-anchor="middle" fill="#334155" font-size="12" font-weight="900">CRYPTA CODE</text>
+  </g>
+
+  {/* Chamber 3: Critical Reasoning */}
+  <g id="chamber3" class="vault-chamber locked" transform="translate(400, 480)">
+     <rect x="-60" y="-80" width="120" height="160" rx="10" fill="#0F172A" stroke="#334155" stroke-width="2" />
+     <circle r="20" fill="none" stroke="#334155" stroke-width="2" />
+     <text y="105" text-anchor="middle" fill="#334155" font-size="12" font-weight="900">ARGUMENT CHAIN</text>
+  </g>
+
+  {/* Chamber 4: Seating */}
+  <g id="chamber4" class="vault-chamber locked" transform="translate(180, 300)">
+     <rect x="-60" y="-80" width="120" height="160" rx="10" fill="#0F172A" stroke="#334155" stroke-width="2" />
+     <circle r="25" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="5,5" />
+     <text y="105" text-anchor="middle" fill="#334155" font-size="12" font-weight="900">BOARDROOM</text>
+  </g>
+
+  {/* Level Progress Dashboard */}
+  <g transform="translate(630, 520)">
+     <rect width="140" height="40" rx="20" fill="rgba(30, 41, 59, 0.5)" stroke="#A855F7" stroke-width="2" />
+     <text x="70" y="26" text-anchor="middle" fill="#A855F7" font-size="14" font-weight="900">ELITE MODE</text>
+  </g>
+
+  {/* Elite Coach Spark */}
+  <g id="sparky-elite" transform="translate(80, 80)">
+     <circle r="45" fill="#F97316" />
+     <rect x="-35" y="-12" width="70" height="12" rx="6" fill="#020617" />
+     <circle cx="-18" cy="-6" r="4" fill="white" />
+     <circle cx="18" cy="-6" r="4" fill="white" />
+     <text x="0" y="72" text-anchor="middle" font-size="14" font-weight="900" fill="#F97316">ELITE COACH SPARK</text>
+  </g>
+</svg>

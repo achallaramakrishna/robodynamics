@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="220" viewBox="0 0 180 220">
+  <rect x="18" y="18" width="144" height="184" rx="28" fill="white" stroke="#3B3A8C" stroke-width="4"/>
+  <text x="90" y="122" text-anchor="middle" font-family="Segoe UI, Arial" font-size="64" font-weight="700" fill="#1F2440">7</text>
+  <line x1="58" y1="64" x2="122" y2="64" stroke="#E91E8C" stroke-width="8" stroke-linecap="round"/>
+  <text x="90" y="176" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#6B7290">barred digit</text>
+</svg>

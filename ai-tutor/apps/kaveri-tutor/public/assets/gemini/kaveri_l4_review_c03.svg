@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad-L4-C03-L06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#130cb7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#52e5e7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1e293b" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Premium Card Background -->
+  <rect width="800" height="600" rx="36" fill="url(#grad-L4-C03-L06)" />
+  
+  <!-- Subtle Grid overlay -->
+  <g opacity="0.08">
+    <line x1="100" y1="0" x2="100" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="200" y1="0" x2="200" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="300" y1="0" x2="300" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="400" y1="0" x2="400" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="500" y1="0" x2="500" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="600" y1="0" x2="600" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="700" y1="0" x2="700" y2="600" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="500" x2="800" y2="500" stroke="#ffffff" stroke-width="2"/>
+  </g>
+
+  <!-- Modern Glassmorphic Container -->
+  <rect x="50" y="50" width="700" height="500" rx="28" fill="#ffffff" fill-opacity="0.9" filter="url(#shadow)" />
+
+  <!-- Accent Circle -->
+  <circle cx="400" cy="230" r="110" fill="url(#grad-L4-C03-L06)" fill-opacity="0.1" />
+
+  <!-- Giant Concept Emoji -->
+  <text x="400" y="270" font-family="'Segoe UI Emoji', 'Apple Color Emoji', sans-serif" font-size="120" text-anchor="middle" filter="url(#shadow)">🧢</text>
+
+  <!-- Floating Letter Badge -->
+  
+  <g transform="translate(130, 140)" filter="url(#shadow)">
+    <rect x="-50" y="-50" width="100" height="100" rx="22" fill="url(#grad-L4-C03-L06)" />
+    <text x="0" y="16" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="48" fill="#ffffff" text-anchor="middle">ಟ & ಠ & ಡ & ಢ & ಣ</text>
+  </g>
+  
+
+  <!-- Kannada Script Display -->
+  <text x="400" y="440" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="38" fill="#1e293b" text-anchor="middle">ಟೊಪ್ಪಿ</text>
+
+  <!-- English / Translation Display -->
+  <text x="400" y="495" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="24" fill="#64748b" text-anchor="middle">Cap</text>
+
+  <!-- Kaveri Branding Badge -->
+  <g transform="translate(680, 500)" opacity="0.4">
+    <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="16" fill="#64748b" text-anchor="middle">ಕಾವೇರಿ AI 🐘</text>
+  </g>
+</svg>

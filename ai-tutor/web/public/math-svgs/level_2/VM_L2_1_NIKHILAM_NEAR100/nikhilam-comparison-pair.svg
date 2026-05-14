@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="190" viewBox="0 0 420 190">
+  <rect x="16" y="18" width="180" height="154" rx="22" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="224" y="18" width="180" height="154" rx="22" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+
+  <text x="106" y="42" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#DC2626">Below 100</text>
+  <text x="106" y="76" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#334155">97  and  96</text>
+  <text x="106" y="106" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#991B1B">-3   -4</text>
+  <text x="106" y="132" text-anchor="middle" font-size="15" font-family="Arial" fill="#2563EB">cross-subtract for left part</text>
+  <text x="106" y="154" text-anchor="middle" font-size="15" font-family="Arial" fill="#059669">multiply deviations for right part</text>
+
+  <text x="314" y="42" text-anchor="middle" font-size="16" font-family="Arial" font-weight="700" fill="#059669">Above 100</text>
+  <text x="314" y="76" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#334155">103  and  104</text>
+  <text x="314" y="106" text-anchor="middle" font-size="24" font-family="Arial" font-weight="700" fill="#047857">+3   +4</text>
+  <text x="314" y="132" text-anchor="middle" font-size="15" font-family="Arial" fill="#2563EB">cross-add for left part</text>
+  <text x="314" y="154" text-anchor="middle" font-size="15" font-family="Arial" fill="#059669">multiply deviations for right part</text>
+</svg>

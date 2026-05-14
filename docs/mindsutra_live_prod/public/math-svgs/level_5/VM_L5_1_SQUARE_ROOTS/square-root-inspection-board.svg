@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="400" rx="16" fill="url(#bgGrad)" stroke="#334155" stroke-width="2"/>
+  <rect x="0" y="0" width="800" height="6" fill="#8B5CF6"/>
+
+  <text x="400" y="50" font-family="'Inter', sans-serif" font-weight="800" font-size="28" fill="#F8FAFC" text-anchor="middle">Vilokanam — Square Root</text>
+  <text x="400" y="80" font-family="'Inter', sans-serif" font-weight="600" font-size="16" fill="#94A3B8" text-anchor="middle">Finding square roots by observation</text>
+
+  <g transform="translate(200, 160)">
+    <!-- Root Symbol -->
+    <path d="M 0,50 L 20,50 L 40,80 L 70,0 L 350,0" fill="none" stroke="#F8FAFC" stroke-width="4" stroke-linecap="round" />
+    
+    <!-- Number under root -->
+    <g font-family="'JetBrains Mono'" font-size="72" font-weight="900" fill="#F8FAFC">
+      <text x="80" y="70">70 | 56</text>
+    </g>
+
+    <!-- Analysis -->
+    <g transform="translate(80, 130)" font-family="Inter" font-size="18" font-weight="700">
+       <g fill="#10B981">
+         <text x="0" y="0">Group 1: 70</text>
+         <text x="0" y="30" font-size="14" fill="#34D399">floor(√70) = 8</text>
+       </g>
+       
+       <g fill="#3B82F6" transform="translate(180, 0)">
+         <text x="0" y="0">Group 2: 56</text>
+         <text x="0" y="30" font-size="14" fill="#60A5FA">Ends in 6 → 4 or 6</text>
+       </g>
+    </g>
+
+    <!-- Final Choice -->
+    <g transform="translate(400, 40)" text-anchor="middle">
+       <text font-family="'JetBrains Mono'" font-size="82" font-weight="900" fill="#8B5CF6" filter="url(#glow)">84</text>
+       <text y="40" font-family="Inter" font-size="12" font-weight="800" fill="#94A3B8">RESULT</text>
+    </g>
+  </g>
+
+  <rect x="550" y="280" width="200" height="80" rx="12" fill="#1E293B" stroke="#334155" />
+  <g transform="translate(570, 310)" font-family="Inter" font-size="12" font-weight="700">
+    <circle r="4" fill="#10B981" />
+    <text x="15" y="5" fill="#94A3B8">Tens: Left Pair</text>
+    <circle cx="0" cy="25" r="4" fill="#3B82F6" />
+    <text x="15" y="30" fill="#94A3B8">Ones: Last Digit</text>
+  </g>
+</svg>

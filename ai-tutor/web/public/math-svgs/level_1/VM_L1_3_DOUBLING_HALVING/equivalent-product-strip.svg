@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .text-light { fill: #f8fafc; font-family: system-ui, sans-serif; font-weight: bold; font-size: 32px; }
+      .text-blue { fill: #3b82f6; font-family: system-ui, sans-serif; font-weight: bold; font-size: 32px; }
+      .text-green { fill: #22c55e; font-family: system-ui, sans-serif; font-weight: bold; font-size: 32px; }
+      .text-gold { fill: #eab308; font-family: system-ui, sans-serif; font-weight: bold; font-size: 36px; }
+      .arrow { fill: none; stroke: #64748b; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect width="800" height="120" class="bg" rx="16"/>
+
+  <text x="80" y="70" class="text-blue" text-anchor="middle">24 × 25</text>
+
+  <path d="M 150 60 L 190 60" class="arrow"/>
+  <path d="M 180 50 L 190 60 L 180 70" class="arrow"/>
+
+  <text x="260" y="70" class="text-green" text-anchor="middle">12 × 50</text>
+
+  <path d="M 330 60 L 370 60" class="arrow"/>
+  <path d="M 360 50 L 370 60 L 360 70" class="arrow"/>
+
+  <text x="450" y="70" class="text-light" text-anchor="middle">6 × 100</text>
+
+  <path d="M 540 60 L 580 60" class="arrow"/>
+  <path d="M 570 50 L 580 60 L 570 70" class="arrow"/>
+
+  <text x="660" y="70" class="text-gold" text-anchor="middle">600</text>
+
+</svg>

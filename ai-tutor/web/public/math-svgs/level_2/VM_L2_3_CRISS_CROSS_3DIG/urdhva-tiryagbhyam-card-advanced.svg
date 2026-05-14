@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="220" viewBox="0 0 440 220">
+  <rect width="440" height="220" rx="24" fill="#EEF5FF"/>
+  <text x="28" y="36" font-family="Segoe UI, Arial" font-size="23" font-weight="700" fill="#25327A">Urdhva-Tiryagbhyam for 3 x 3 digits</text>
+  <text x="28" y="58" font-family="Segoe UI, Arial" font-size="13" fill="#5C6783">Use the same left-right symmetry shown in the manual.</text>
+
+  <rect x="28" y="78" width="186" height="110" rx="18" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="46" y="104" font-family="Segoe UI, Arial" font-size="16" font-weight="700" fill="#1F2440">Band order</text>
+  <text x="46" y="128" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">1. C x F</text>
+  <text x="46" y="148" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">2. B x F + C x E</text>
+  <text x="46" y="168" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">3. A x F + B x E + C x D</text>
+  <text x="46" y="188" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">4. A x E + B x D</text>
+
+  <rect x="230" y="78" width="182" height="110" rx="18" fill="#FFFFFF" stroke="#D6E1FA" stroke-width="2"/>
+  <text x="248" y="104" font-family="Segoe UI, Arial" font-size="16" font-weight="700" fill="#1F2440">What changes each time</text>
+  <text x="248" y="128" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Count of products: 1, 2, 3, 2, 1</text>
+  <text x="248" y="148" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Middle band is the most important.</text>
+  <text x="248" y="168" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Write one digit in each answer slot.</text>
+  <text x="248" y="188" font-family="Segoe UI, Arial" font-size="15" fill="#41506F">Carry any extra tens to the left.</text>
+
+  <g>
+    <circle cx="88" cy="202" r="7" fill="#D9A500">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="124" cy="202" r="7" fill="#5C7CE2">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="3s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="202" r="7" fill="#D3478E">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="196" cy="202" r="7" fill="#5C7CE2">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="232" cy="202" r="7" fill="#D9A500">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="3s" begin="1.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

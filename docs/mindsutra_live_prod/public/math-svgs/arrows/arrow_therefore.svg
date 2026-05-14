@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Therefore symbol: three dots in triangle arrangement -->
+  <circle cx="30" cy="12" r="5" fill="#7c3aed"/>
+  <circle cx="14" cy="46" r="5" fill="#7c3aed"/>
+  <circle cx="46" cy="46" r="5" fill="#7c3aed"/>
+</svg>

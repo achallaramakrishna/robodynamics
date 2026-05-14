@@ -11,6 +11,7 @@ export interface LearnedChar {
   score: number;      // SM-2 easiness factor
   reviewAfterLesson: number; // Next lesson to review after
   learnedAtLesson: number;   // Lesson where character was learned
+  level?: number;            // Vaani level (1–6). Undefined = legacy (treated as level 1).
 }
 
 const STORAGE_KEY = "vaani_learned_chars";
@@ -53,34 +54,27 @@ export function markLearned(
   word: string,
   wordEng: string,
   currentLessonIndex: number,
-  assetPath: string = "/assets/gemini/placeholder.png"
+  assetPath: string = "/assets/gemini/placeholder.svg",
+  level: number = 1
 ): void {
   const all = getAllLearned();
 
-  // Check if already learned
-  const existing = all.findIndex(c => c.char === char);
+  // Check if already learned (match on char + level so Level 2 "का" ≠ Level 1 "क")
+  const existing = all.findIndex(c => c.char === char && (c.level ?? 1) === level);
 
   if (existing >= 0) {
-    // Update existing entry
     all[existing] = {
       ...all[existing],
-      word,
-      wordEng,
-      assetPath,
+      word, wordEng, assetPath, level,
       learnedAtLesson: currentLessonIndex,
-      // Keep score but reset review schedule
       reviewAfterLesson: currentLessonIndex + 1,
     };
   } else {
-    // Add new learned character
     all.push({
-      char,
-      word,
-      wordEng,
-      assetPath,
-      score: 2.5,  // SM-2 initial easiness
+      char, word, wordEng, assetPath, level,
+      score: 2.5,
       learnedAtLesson: currentLessonIndex,
-      reviewAfterLesson: currentLessonIndex + 1,  // Review next lesson
+      reviewAfterLesson: currentLessonIndex + 1,
     });
   }
 
@@ -93,15 +87,16 @@ export function markLearned(
  * @param currentLessonIndex - Current lesson index (0-based)
  * @returns Array of characters due for review
  */
-export function getDueForReview(currentLessonIndex: number): LearnedChar[] {
+export function getDueForReview(currentLessonIndex: number, level: number = 1): LearnedChar[] {
   const all = getAllLearned();
 
-  // Characters due for review are those where reviewAfterLesson <= currentLessonIndex
+  // Filter to SAME LEVEL only — prevents Level-2 matra reviews appearing in Level-1 lessons
   const due = all.filter(
-    c => c.learnedAtLesson < currentLessonIndex && c.reviewAfterLesson <= currentLessonIndex
+    c => (c.level ?? 1) === level
+      && c.learnedAtLesson < currentLessonIndex
+      && c.reviewAfterLesson <= currentLessonIndex
   );
 
-  // Shuffle for variety
   return due.sort(() => Math.random() - 0.5);
 }
 
@@ -153,8 +148,9 @@ export function clearAllLearned(): void {
 
 /**
  * Get statistics about learning progress
+ * @param currentLessonIndex - Optional current lesson index for accurate "due" count
  */
-export function getLearningStats(): {
+export function getLearningStats(currentLessonIndex?: number): {
   totalLearned: number;
   dueForReview: number;
   masterLevelChars: string[];
@@ -162,9 +158,14 @@ export function getLearningStats(): {
   const all = getAllLearned();
   const masters = all.filter(c => c.score >= 2.5).map(c => c.char);
 
+  // If lesson index provided, count truly due items; otherwise count weak items (score < 2.0)
+  const dueCount = currentLessonIndex !== undefined
+    ? all.filter(c => c.reviewAfterLesson <= currentLessonIndex && c.learnedAtLesson < currentLessonIndex).length
+    : all.filter(c => c.score < 2.0).length;
+
   return {
     totalLearned: all.length,
-    dueForReview: all.filter(c => c.reviewAfterLesson <= 0).length,
+    dueForReview: dueCount,
     masterLevelChars: masters,
   };
 }

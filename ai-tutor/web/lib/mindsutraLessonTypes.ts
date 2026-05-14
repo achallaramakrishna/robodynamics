@@ -45,6 +45,7 @@ export interface MindSutraQuizQuestion {
 export interface MindSutraPracticeVariant {
   prompt: string;
   answer: string | number;
+  options?: string[];
   hints?: string[];
   skillKeys?: string[];
 }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <rect width="800" height="400" rx="24" fill="#FBFCFF"/>
+  <rect x="24" y="24" width="752" height="352" rx="22" fill="#FFFFFF" stroke="#D9E2F5" stroke-width="2"/>
+  <rect x="24" y="24" width="752" height="10" rx="5" fill="#10B981"/>
+  <text x="48" y="68" fill="#10213F" font-size="28" font-family="Arial, sans-serif" font-weight="700">Build the answer in two parts</text>
+  <text x="48" y="98" fill="#51627F" font-size="16" font-family="Arial, sans-serif">The base decides how many digits the right side should keep.</text>
+
+  <rect x="90" y="148" width="260" height="136" rx="22" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <rect x="450" y="148" width="260" height="136" rx="22" fill="#ECFDF5" stroke="#A7F3D0"/>
+
+  <text x="220" y="185" fill="#1D4ED8" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Left side</text>
+  <text x="220" y="230" fill="#10213F" font-size="40" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">97 - 7 = 90</text>
+
+  <text x="580" y="185" fill="#15803D" font-size="22" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Right side</text>
+  <text x="580" y="230" fill="#10213F" font-size="40" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">(-3)(-7) = 21</text>
+
+  <rect x="170" y="314" width="460" height="38" rx="12" fill="#F0FDF4" stroke="#86EFAC"/>
+  <text x="400" y="339" fill="#15803D" font-size="18" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">Base 100 keeps 2 digits on the right → 90 | 21 = 9021</text>
+</svg>

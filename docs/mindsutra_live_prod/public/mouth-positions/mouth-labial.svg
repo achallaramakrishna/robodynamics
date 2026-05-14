@@ -1,0 +1,33 @@
+<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="100" y="20" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Lips Together (प/ब/म)</text>
+
+  <!-- Head outline -->
+  <circle cx="100" cy="80" r="45" fill="none" stroke="#333" stroke-width="2"/>
+
+  <!-- Face features -->
+  <!-- Eyes -->
+  <circle cx="85" cy="65" r="5" fill="#333"/>
+  <circle cx="115" cy="65" r="5" fill="#333"/>
+
+  <!-- Nose -->
+  <line x1="100" y1="65" x2="100" y2="80" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Mouth - LIPS TOGETHER (or slight opening) -->
+  <ellipse cx="100" cy="98" rx="25" ry="8" fill="#FF6B6B" stroke="#333" stroke-width="2"/>
+
+  <!-- Indicate closed/almost closed -->
+  <line x1="75" y1="98" x2="125" y2="98" stroke="#333" stroke-width="2"/>
+
+  <!-- Emphasis on lips -->
+  <path d="M 75 98 Q 75 102 100 105 Q 125 102 125 98" fill="#FFB3B3" stroke="none"/>
+
+  <!-- Cheeks puffed slightly -->
+  <circle cx="60" cy="90" r="12" fill="none" stroke="#FF8C8C" stroke-width="1" stroke-dasharray="2,2"/>
+  <circle cx="140" cy="90" r="12" fill="none" stroke="#FF8C8C" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- Label -->
+  <text x="100" y="180" font-size="14" text-anchor="middle" fill="#333">Sound: प, ब, म</text>
+  <text x="100" y="200" font-size="12" text-anchor="middle" fill="#666">Lips touch or almost touch</text>
+  <text x="100" y="220" font-size="12" text-anchor="middle" fill="#666">Labial sounds</text>
+</svg>

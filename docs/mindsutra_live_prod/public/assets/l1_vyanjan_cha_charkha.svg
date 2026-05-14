@@ -1,0 +1,20 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#FFF7ED"/>
+  
+  <g id="letter_cha">
+    <text x="250" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">च</text>
+  </g>
+  
+  <g id="object_charkha">
+    <!-- Spinning Wheel -->
+    <circle cx="750" cy="550" r="120" stroke="#92400E" stroke-width="8" fill="#FEF3C7"/>
+    <line x1="750" y1="550" x2="870" y2="550" stroke="#92400E" stroke-width="4"/>
+    <line x1="750" y1="550" x2="630" y2="550" stroke="#92400E" stroke-width="4"/>
+    <line x1="750" y1="550" x2="750" y2="430" stroke="#92400E" stroke-width="4"/>
+    <line x1="750" y1="550" x2="750" y2="670" stroke="#92400E" stroke-width="4"/>
+    <rect x="630" y="670" width="240" height="10" fill="#92400E"/> <!-- Base -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">च से चरखा</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">CHA for Charkha (Spinning Wheel)</text>
+</svg>

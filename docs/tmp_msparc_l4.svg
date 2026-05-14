@@ -1,0 +1,52 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>L4 Permutation Lock - Campus Gate Arena</title>
+  
+  <rect width="800" height="600" fill="#0F172A" />
+  
+  {/* Circular Lock Ring */}
+  <g id="lock-ring" transform="translate(400, 300)">
+     <circle r="180" fill="none" stroke="#1E293B" stroke-width="40" />
+     <circle r="180" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="10,10" opacity="0.3" />
+     
+     {/* Slots for circular arrangement */}
+     <g id="slots">
+        <circle cx="0" cy="-180" r="30" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+        <circle x="127" y="-127" cx="127" cy="-127" r="30" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+        <circle cx="180" cy="0" r="30" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+        <circle cx="127" cy="127" r="30" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+        <circle cx="0" cy="180" r="30" fill="#1E293B" stroke="#60A5FA" stroke-width="2" />
+     </g>
+
+     {/* Central Gear */}
+     <circle r="60" fill="#1E293B" stroke="#60A5FA" stroke-width="4" />
+     <path d="M-10,-40 L0,-60 L10,-40 Z" fill="#60A5FA" />
+     <text text-anchor="middle" y="5" fill="#60A5FA" font-size="24" font-weight="900">nP r</text>
+  </g>
+
+  {/* Formula Display Panel */}
+  <g transform="translate(50, 50)">
+     <rect width="250" height="100" rx="15" fill="rgba(30, 41, 59, 0.8)" stroke="#60A5FA" />
+     <text x="20" y="40" fill="#60A5FA" font-size="14" font-weight="900">GATE LOGIC MODE:</text>
+     <text x="20" y="75" fill="white" font-size="24" font-weight="900">PERMUTATION</text>
+  </g>
+
+  {/* Team Members Draggables */}
+  <g transform="translate(50, 480)">
+     <rect width="700" height="100" rx="20" fill="#1E293B" stroke="#334155" />
+     <text x="350" y="30" text-anchor="middle" fill="#94A3B8" font-size="12">CHOOSE CANDIDATES FOR THE TEAM</text>
+     
+     <circle cx="150" cy="65" r="25" fill="#38BDF8" cursor="pointer" />
+     <circle cx="250" cy="65" r="25" fill="#F472B6" cursor="pointer" />
+     <circle cx="350" cy="65" r="25" fill="#FACC15" cursor="pointer" />
+     <circle cx="450" cy="65" r="25" fill="#10B981" cursor="pointer" />
+     <circle cx="550" cy="65" r="25" fill="#A855F7" cursor="pointer" />
+  </g>
+
+  <g id="feedback-success" opacity="0">
+     <circle cx="400" cy="300" r="200" fill="none" stroke="#10B981" stroke-width="5" stroke-dasharray="20,10">
+        <animateTransform attributeName="transform" type="rotate" from="0 400 300" to="360 400 300" dur="10s" repeatCount="indefinite" />
+     </circle>
+  </g>
+
+  <text x="400" y="50" text-anchor="middle" font-size="28" font-weight="900" fill="white">Campus Team Selector</text>
+</svg>

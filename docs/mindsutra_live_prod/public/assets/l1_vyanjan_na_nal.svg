@@ -1,0 +1,17 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="112" y="112" width="800" height="800" rx="40" fill="#F0FDF4"/>
+  
+  <g id="letter_na">
+    <text x="250" y="600" font-family="Sanskrit, serif" font-size="500" font-weight="900" fill="#2563EB">न</text>
+  </g>
+  
+  <g id="object_nal">
+    <!-- Water Tap -->
+    <path d="M700 500H800V600" stroke="#94A3B8" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <rect x="730" y="460" width="40" height="10" rx="5" fill="#475569"/> <!-- Handle -->
+    <path d="M780 600V650" stroke="#3B82F6" stroke-width="8" stroke-linecap="round"/> <!-- Water drop -->
+  </g>
+
+  <text x="512" y="880" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="900" font-size="64" fill="#1F2937">न से नल</text>
+  <text x="512" y="940" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="500" font-size="32" fill="#6B7280">NA for Nal (Tap)</text>
+</svg>

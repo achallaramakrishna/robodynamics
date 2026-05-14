@@ -1168,9 +1168,9 @@ const chapter2LessonsRest: GrammarLesson[] = [
     grammarTopic: "Future Tense",
     grammarTopicHindi: "भविष्य काल",
     ruleExplanation:
-      "Future tense describes actions that will happen. In Hindi, add '-गा/-गी/-गे' to the verb stem. Example: मैं जाऊँगा (I will go), वह खाएगी (She will eat).",
+      "Future tense describes actions that will happen after now. In Hindi, when we talk about tomorrow or later, we change the verb ending. Example: मैं कल खेलूँगा = I will play tomorrow. The ending -गा/-गी/-गे shows it hasn't happened yet - it's a promise or plan for the future.",
     ruleExplanationHindi:
-      "भविष्य काल वह कार्य दिखाता है जो आगे होगा। क्रिया के मूल में '-गा/-गी/-गे' लगाते हैं। उदाहरण: मैं जाऊँगा, वह खाएगी।",
+      "भविष्य काल वह कार्य दिखाता है जो अभी नहीं हुआ, आगे होगा। कल, आने वाली बार, कभी - जब भविष्य की बात करते हैं तो '-गा/-गी/-गे' लगाते हैं। यह दिखाता है कि क्रिया अभी नहीं हुई, भविष्य में होगी।",
     exampleSentenceHindi: "मैं कल स्कूल जाऊँगा।",
     exampleSentenceRoman: "Main kal school jaunga.",
     exampleSentenceEnglish: "I will go to school tomorrow.",
@@ -1230,11 +1230,11 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Complete the sentence: 'मैं कल स्कूल ____।'",
-        options: ["जाता हूँ", "जाऊँगा", "गया", "जा रहा हूँ"],
-        correctAnswer: "जाऊँगा",
+        question: "Fill in the blank: 'कल मैं पार्क में ____।'",
+        options: ["खेलता हूँ", "खेल रहा हूँ", "खेलूँगा", "खेला"],
+        correctAnswer: "खेलूँगा",
         explanation:
-          "'कल' here means tomorrow, so the future form is 'जाऊँगा'.",
+          "'कल' (tomorrow) = future action = future tense = खेलूँगा. खेलता हूँ would mean 'I usually play'; खेल रहा हूँ is 'playing right now'; खेला is past.",
       },
       {
         question: "Choose the correct sentence for a girl: 'सीमा शाम को खाना ____।'",
@@ -1260,9 +1260,9 @@ const chapter2LessonsRest: GrammarLesson[] = [
     grammarTopic: "Present Perfect Tense",
     grammarTopicHindi: "पूर्ण वर्तमान काल",
     ruleExplanation:
-      "Present perfect shows completed actions with present relevance. Use '-ा है/-ी है/-े हैं' form. Example: मैंने खाना खा लिया है (I have eaten the food).",
+      "Perfect tense shows that something has already happened, and it matters right now. You did it (past), but now you're telling about it (present). Formation: मैंने + action + लिया है = I have just done it. Example: मैंने खाना खा लिया है (I have eaten - the food is still on my mind, the effect is here now).",
     ruleExplanationHindi:
-      "पूर्ण वर्तमान काल पूरे किए गए कार्य को दिखाता है जिसका वर्तमान से संबंध है। '-ा है/-ी है/-े हैं' रूप लगाते हैं।",
+      "पूर्ण वर्तमान काल दिखाता है कि कुछ पहले हो गया है, और अभी भी महत्वपूर्ण है। पूर्व में करा, अब बता रहे हैं। बनावट: मैंने + क्रिया + लिया है। उदाहरण: मैंने खाना खा लिया है = मैंने खा लिया है और अभी भी उसका असर है (पेट भरा हुआ है)।",
     exampleSentenceHindi: "मैंने अपना होमवर्क कर लिया है।",
     exampleSentenceRoman: "Mainne apna homework kar liya hai.",
     exampleSentenceEnglish: "I have done my homework.",
@@ -1315,11 +1315,11 @@ const chapter2LessonsRest: GrammarLesson[] = [
     ],
     mcqQuestions: [
       {
-        question: "Which sentence means 'I have finished eating'?",
-        options: ["मैं खा रहा हूँ", "मैंने खा लिया है", "मैं खाता हूँ", "मैं खाऊँगा"],
-        correctAnswer: "मैंने खा लिया है",
+        question: "You just finished your homework. Which sentence would you use?",
+        options: ["मैं होमवर्क कर रहा हूँ", "मैंने होमवर्क कर लिया है", "मैं होमवर्क करता हूँ", "मैं होमवर्क करूँगा"],
+        correctAnswer: "मैंने होमवर्क कर लिया है",
         explanation:
-          "'मैंने खा लिया है' shows a completed action with present relevance.",
+          "'मैंने होमवर्क कर लिया है' = I have just finished (action completed, and it's important now because it's done). कर रहा हूँ = still doing it; करता हूँ = usually do; करूँगा = will do later.",
       },
       {
         question: "Fill the blank: 'रीता ___ होमवर्क पूरा किया है।'",
@@ -1345,9 +1345,9 @@ const chapter2LessonsRest: GrammarLesson[] = [
     grammarTopic: "Imperative Mood",
     grammarTopicHindi: "अनुज्ञा",
     ruleExplanation:
-      "Imperative gives commands or requests. Remove 'ना' from infinitive: करना → करो (do!), खाना → खा (eat!). Formal: करिए, खाइए.",
+      "Imperative mood is used to give orders, make requests, or give instructions. The form changes based on who you're talking to: friends (करो), strangers/teachers (करिए). Remove 'ना' from the infinitive to get the basic form.",
     ruleExplanationHindi:
-      "अनुज्ञा आदेश या निवेदन देती है। धातु से 'ना' हटाते हैं: करना → करो, खाना → खा। औपचारिक: करिए, खाइए।",
+      "अनुज्ञा उन क्रियाएँ हैं जो आदेश, निवेदन, या निर्देश देती हैं। जिससे बात करते हैं, उसके आधार पर रूप बदलता है - दोस्त को 'करो', शिक्षक को 'करिए'। धातु से 'ना' हटाते हैं।",
     exampleSentenceHindi: "बैठो और खाना खाओ।",
     exampleSentenceRoman: "Baitho aur khana khao.",
     exampleSentenceEnglish: "Sit down and eat the food.",
@@ -1523,9 +1523,9 @@ const chapter2LessonsRest: GrammarLesson[] = [
     grammarTopic: "Transitive & Intransitive Verbs",
     grammarTopicHindi: "सकर्मक और अकर्मक क्रिया",
     ruleExplanation:
-      "Transitive verbs take objects (खाना - to eat food). Intransitive verbs don't (हँसना - to laugh). In Hindi, past tense transitive verbs use 'ने' marker.",
+      "Some verbs need an object to make sense: खाना (eat) needs food, पढ़ना (read) needs a book. These are transitive. Other verbs don't need an object: हँसना (laugh), सोना (sleep) - these are intransitive. In Hindi, transitive verbs in past tense always use 'ने' with the subject.",
     ruleExplanationHindi:
-      "सकर्मक क्रिया के साथ कर्म आता है (खाना - भोजन खाना)। अकर्मक के साथ नहीं (हँसना)। हिंदी में 'ने' का प्रयोग सकर्मक में होता है।",
+      "कुछ क्रियाएँ अधूरी हैं जब तक उन्हें कर्म (object) न मिले: खाना (भोजन), पढ़ना (किताब), लिखना (पत्र)। ये सकर्मक हैं। कुछ क्रियाएँ पूरी हैं बिना कर्म के: हँसना, सोना, दौड़ना। ये अकर्मक हैं। भूतकाल में सकर्मक क्रिया के साथ कर्ता को 'ने' मिलता है।",
     exampleSentenceHindi: "राज ने सेब खाया। (transitive) रीता हँसी। (intransitive)",
     exampleSentenceRoman: "Raj ne seb khaya. Rita hansi.",
     exampleSentenceEnglish: "Raj ate an apple. Rita laughed.",

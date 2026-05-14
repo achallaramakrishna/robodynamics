@@ -50,7 +50,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಮಸ್ಕಾರ", roman: "namaskara", english: "greetings / hello" },
       { hindi: "ಅಕ್ಕ", roman: "akka", english: "elder sister" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_namaskara_akka.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_namaskara_akka.png",
     summary: "Learn the respectful Kannada greeting ನಮಸ್ಕಾರ paired with ಅಕ್ಕ.",
     prompt: "ನಮಸ್ಕಾರ is how we greet with respect in Kannada — ಅಕ್ಕ means elder sister!",
     mcqs: [
@@ -77,7 +77,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಾನು", roman: "naanu", english: "I" },
       { hindi: "ಇದ್ದೇನೆ", roman: "iddene", english: "am here" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_iddene.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_iddene.png",
     summary: "First-person sentence — ನಾನು (I) + ಇದ್ದೇನೆ (am here).",
     prompt: "ನಾನು is the Kannada word for 'I' — say it proudly!",
     mcqs: [
@@ -104,7 +104,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಇದು", roman: "idu", english: "this" },
       { hindi: "ಮನೆ", roman: "mane", english: "house" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_idu_mane.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_idu_mane.png",
     summary: "ಇದು means 'this' — use it to point at things around you!",
     prompt: "ಇದು ಮನೆ — point to a house and say it loud!",
     mcqs: [
@@ -131,7 +131,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಅವಳು", roman: "avalu", english: "she" },
       { hindi: "ಅಮ್ಮ", roman: "amma", english: "mother" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_avalu_amma.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_avalu_amma.png",
     summary: "ಅವಳು means 'she' — used when talking about a woman or girl.",
     prompt: "ಅವಳು ಅಮ್ಮ — she is the one who loves you most!",
     mcqs: [
@@ -158,7 +158,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಅವನು", roman: "avanu", english: "he" },
       { hindi: "ಅಣ್ಣ", roman: "anna", english: "elder brother" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_avanu_anna.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_avanu_anna.png",
     summary: "ಅವನು means 'he' — used when talking about a man or boy.",
     prompt: "ಅವನು ಅಣ್ಣ — do you have an elder brother?",
     mcqs: [
@@ -185,7 +185,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಾಯಿ", roman: "naayi", english: "dog" },
       { hindi: "ಓಡುತ್ತದೆ", roman: "oduttade", english: "runs" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naayi_oduttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naayi_oduttade.png",
     summary: "ನಾಯಿ is dog, ಓಡುತ್ತದೆ is runs — a simple action sentence!",
     prompt: "ನಾಯಿ ಓಡುತ್ತದೆ — watch the dog zoom away!",
     mcqs: [
@@ -212,7 +212,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಮಗು", roman: "magu", english: "baby / child" },
       { hindi: "ಅಳುತ್ತದೆ", roman: "aluttade", english: "cries" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_magu_aluttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_magu_aluttade.png",
     summary: "ಮಗು (baby/child) + ಅಳುತ್ತದೆ (cries) — describing an action.",
     prompt: "ಮಗು ಅಳುತ್ತದೆ — don't worry, give it a hug!",
     mcqs: [
@@ -239,7 +239,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಹಕ್ಕಿ", roman: "hakki", english: "bird" },
       { hindi: "ಹಾರುತ್ತದೆ", roman: "haaruttade", english: "flies" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_hakki_haaruttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_hakki_haaruttade.png",
     summary: "ಹಕ್ಕಿ (bird) + ಹಾರುತ್ತದೆ (flies) — both start with ಹ!",
     prompt: "ಹಕ್ಕಿ ಹಾರುತ್ತದೆ — notice how both words start with ಹ!",
     mcqs: [
@@ -266,7 +266,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಾನು", roman: "naanu", english: "I" },
       { hindi: "ತಿನ್ನುತ್ತೇನೆ", roman: "tinnuttene", english: "eat" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_tinnuttene.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_tinnuttene.png",
     summary: "First-person verb — ನಾನು (I) + ತಿನ್ನುತ್ತೇನೆ (eat).",
     prompt: "ನಾನು ತಿನ್ನುತ್ತೇನೆ — what's your favourite food?",
     mcqs: [
@@ -293,7 +293,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಅವಳು", roman: "avalu", english: "she" },
       { hindi: "ಕುಡಿಯುತ್ತಾಳೆ", roman: "kudiyuttale", english: "drinks" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_avalu_kudiyuttale.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_avalu_kudiyuttale.png",
     summary: "Feminine third-person verb — ಅವಳು (she) + ಕುಡಿಯುತ್ತಾಳೆ (drinks).",
     prompt: "ಅವಳು ಕುಡಿಯುತ್ತಾಳೆ — Kannada verbs change with gender!",
     mcqs: [
@@ -320,7 +320,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಾನು", roman: "naanu", english: "I" },
       { hindi: "ಬರೆಯುತ್ತೇನೆ", roman: "bareyuttene", english: "write" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_bareyuttene.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_bareyuttene.png",
     summary: "ನಾನು ಬರೆಯುತ್ತೇನೆ — you are already writing Kannada!",
     prompt: "ಬರೆಯುತ್ತೇನೆ comes from ಬರೆ (baro) — to write in Kannada!",
     mcqs: [
@@ -347,7 +347,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಅವನು", roman: "avanu", english: "he" },
       { hindi: "ಓದುತ್ತಾನೆ", roman: "oduttane", english: "reads" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_avanu_oduttane.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_avanu_oduttane.png",
     summary: "Masculine third-person verb — ಅವನು (he) + ಓದುತ್ತಾನೆ (reads).",
     prompt: "ಅವನು ಓದುತ್ತಾನೆ — just like you are reading Kannada right now!",
     mcqs: [
@@ -374,7 +374,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಮೀನು", roman: "meenu", english: "fish" },
       { hindi: "ಈಜುತ್ತದೆ", roman: "eejuttade", english: "swims" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_meenu_eejuttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_meenu_eejuttade.png",
     summary: "ಮೀನು (fish) + ಈಜುತ್ತದೆ (swims) — nature in action!",
     prompt: "ಮೀನು ಈಜುತ್ತದೆ — the fish glides through water!",
     mcqs: [
@@ -401,7 +401,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಮಗು", roman: "magu", english: "baby / child" },
       { hindi: "ನಗುತ್ತದೆ", roman: "naguttade", english: "smiles / laughs" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_magu_naguttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_magu_naguttade.png",
     summary: "ಮಗು (child) + ನಗುತ್ತದೆ (smiles) — joy in two words!",
     prompt: "ಮಗು ನಗುತ್ತದೆ — smiles are the same in every language!",
     mcqs: [
@@ -428,7 +428,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಅಮ್ಮ", roman: "amma", english: "mother" },
       { hindi: "ಬರುತ್ತಾರೆ", roman: "baruttare", english: "is coming (honourific)" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_amma_baruttare.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_amma_baruttare.png",
     summary: "ಬರುತ್ತಾರೆ uses the respectful plural form for elders like Amma.",
     prompt: "ಬರುತ್ತಾರೆ — Kannada shows respect through verb endings for elders!",
     mcqs: [
@@ -459,7 +459,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಇದು", roman: "idu", english: "this" },
       { hindi: "ಏನು", roman: "enu", english: "what" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_idu_enu.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_idu_enu.png",
     summary: "ಇದು ಏನು? is the most useful question for a curious learner!",
     prompt: "ಏನು means 'what' — use ಇದು ಏನು to ask about anything you see!",
     mcqs: [
@@ -486,7 +486,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಇದು", roman: "idu", english: "this" },
       { hindi: "ಪುಸ್ತಕ", roman: "pustaka", english: "book" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_idu_pustaka.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_idu_pustaka.png",
     summary: "Answer ಇದು ಏನು? with ಇದು ಪುಸ್ತಕ — this is a book!",
     prompt: "ಪುಸ್ತಕ — the very thing you are reading right now!",
     mcqs: [
@@ -514,7 +514,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಶಾಲೆಗೆ", roman: "shalege", english: "to school" },
       { hindi: "ಹೋಗುತ್ತೇನೆ", roman: "hoguttene", english: "go" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_shalege.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_shalege.png",
     summary: "First 3-word sentence! ನಾನು (I) + ಶಾಲೆಗೆ (to school) + ಹೋಗುತ್ತೇನೆ (go).",
     prompt: "ಶಾಲೆಗೆ — the suffix ಗೆ means 'to' in Kannada!",
     mcqs: [
@@ -542,7 +542,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಊಟ", roman: "uuta", english: "lunch / meal" },
       { hindi: "ಮಾಡುತ್ತೇನೆ", roman: "maaduttene", english: "do / eat" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_uuta.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_uuta.png",
     summary: "ಊಟ ಮಾಡುತ್ತೇನೆ — literally 'do eating' — Kannada meal idiom!",
     prompt: "ಊಟ ಮಾಡು means 'eat a meal' — what's your favourite ಊಟ?",
     mcqs: [
@@ -570,7 +570,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಅಡಿಗೆ", roman: "adige", english: "cooking" },
       { hindi: "ಮಾಡುತ್ತಾರೆ", roman: "maaduttare", english: "does (honourific)" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_amma_adige.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_amma_adige.png",
     summary: "ಅಡಿಗೆ is Kannada for cooking — the whole kitchen in one word!",
     prompt: "ಅಡಿಗೆ ಮಾಡುತ್ತಾರೆ — ಅಮ್ಮ's cooking is the best!",
     mcqs: [
@@ -598,7 +598,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಆಟ", roman: "aata", english: "game / play" },
       { hindi: "ಆಡುತ್ತಾನೆ", roman: "aaduttane", english: "plays" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_anna_aata.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_anna_aata.png",
     summary: "ಆಟ (game) + ಆಡು (play) — both start with ಆ, easy to remember!",
     prompt: "ಆಟ ಆಡುತ್ತಾನೆ — what game does your ಅಣ್ಣ play?",
     mcqs: [
@@ -626,7 +626,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನೀರು", roman: "neeru", english: "water" },
       { hindi: "ಕುಡಿಯುತ್ತೇನೆ", roman: "kudiyuttene", english: "drink" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_neeru.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_neeru.png",
     summary: "ನೀರು is water — one of the most important words in any language!",
     prompt: "ನೀರು ಕುಡಿಯುತ್ತೇನೆ — drink water, stay healthy!",
     mcqs: [
@@ -654,7 +654,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಹಾಲು", roman: "haalu", english: "milk" },
       { hindi: "ಕೊಡುತ್ತದೆ", roman: "koduttade", english: "gives" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_hasu_haalu.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_hasu_haalu.png",
     summary: "ಹಸು (cow) + ಹಾಲು (milk) + ಕೊಡುತ್ತದೆ (gives) — all start with ಹ!",
     prompt: "ಹಸು ಹಾಲು ಕೊಡುತ್ತದೆ — three ಹ words in one sentence!",
     mcqs: [
@@ -681,7 +681,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಮಳೆ", roman: "male", english: "rain" },
       { hindi: "ಬರುತ್ತದೆ", roman: "baruttade", english: "comes" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_male_baruttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_male_baruttade.png",
     summary: "ಮಳೆ ಬರುತ್ತದೆ — Kannada says 'rain comes', not 'it rains'!",
     prompt: "ಮಳೆ ಬರುತ್ತದೆ — do you like rainy days?",
     mcqs: [
@@ -708,7 +708,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಬಿಸಿಲು", roman: "bisilu", english: "sunshine / sunlight" },
       { hindi: "ಬರುತ್ತದೆ", roman: "baruttade", english: "comes" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_bisilu_baruttade.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_bisilu_baruttade.png",
     summary: "ಬಿಸಿಲು ಬರುತ್ತದೆ — sunshine comes, just like ಮಳೆ ಬರುತ್ತದೆ!",
     prompt: "ಬಿಸಿಲು — warm, bright sunshine in Kannada!",
     mcqs: [
@@ -735,7 +735,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಾನು", roman: "naanu", english: "I" },
       { hindi: "ಮಲಗುತ್ತೇನೆ", roman: "malaguttene", english: "sleep" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_malaguttene.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_malaguttene.png",
     summary: "ಮಲಗು (malagu) is to lie down / sleep in Kannada.",
     prompt: "ನಾನು ಮಲಗುತ್ತೇನೆ — sweet dreams in Kannada!",
     mcqs: [
@@ -763,7 +763,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಕೆಲಸಕ್ಕೆ", roman: "kelasake", english: "to work" },
       { hindi: "ಹೋಗುತ್ತಾರೆ", roman: "hoguttare", english: "go (honourific)" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_appa_kelasake.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_appa_kelasake.png",
     summary: "ಕೆಲಸ (work) + ಗೆ (to) = ಕೆಲಸಕ್ಕೆ — the suffix changes the meaning!",
     prompt: "ಕೆಲಸಕ್ಕೆ — adding ಗೆ/ಕ್ಕೆ means 'to' a place in Kannada!",
     mcqs: [
@@ -791,7 +791,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಮನೆ", roman: "mane", english: "house" },
       { hindi: "ದೊಡ್ಡದು", roman: "doddadu", english: "big" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_namma_mane_doddadu.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_namma_mane_doddadu.png",
     summary: "ನಮ್ಮ (our) + ಮನೆ (house) + ದೊಡ್ಡದು (big) — describing home!",
     prompt: "ದೊಡ್ಡದು is big — its opposite is ಚಿಕ್ಕದು (small)!",
     mcqs: [
@@ -818,7 +818,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ನಾನು", roman: "naanu", english: "I" },
       { hindi: "ಖುಷಿಯಾಗಿದ್ದೇನೆ", roman: "khushiyagiddene", english: "am happy" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_naanu_khushiyagiddene.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_naanu_khushiyagiddene.png",
     summary: "ಖುಷಿ comes from the Urdu/Persian word for happiness — used in everyday Kannada!",
     prompt: "ನಾನು ಖುಷಿಯಾಗಿದ್ದೇನೆ — say it when you feel joy!",
     mcqs: [
@@ -846,7 +846,7 @@ export const LEVEL_5_DATA: Level5Seed[] = [
       { hindi: "ಮಧುರವಾದ", roman: "madhuravada", english: "sweet / melodious" },
       { hindi: "ಭಾಷೆ", roman: "bhashe", english: "language" },
     ],
-    assetPath: "/assets/gemini/kaveri_l5_kannada_bhashe.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l5_kannada_bhashe.png",
     summary: "ಮಧುರ means sweet/melodious — Kannada is India's sweetest classical language!",
     prompt: "ಕನ್ನಡ ಮಧುರವಾದ ಭಾಷೆ — now YOU can speak it!",
     mcqs: [

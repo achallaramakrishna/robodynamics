@@ -131,7 +131,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Common nouns are general words for people, places, or things. They start with lowercase and refer to any member of a category.",
     prompt:
       "Understand common nouns as building blocks of Kannada — they describe what something is, not what it's called.",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l01_common_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l01_common_nouns.png",
   },
 
   {
@@ -206,7 +206,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Proper nouns name specific people, places, or things. Always capitalize them to show they are special, unique names.",
     prompt:
       "Think of proper nouns as someone's favorite thing — they deserve capitalization because they're special and specific!",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l02_proper_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l02_proper_nouns.png",
   },
 
   {
@@ -281,7 +281,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Masculine nouns in Kannada refer to male beings or masculine things. They pair with masculine verb forms.",
     prompt:
       "Masculine nouns like ಮಗ and ತಂದೆ change how verbs look — they're teamwork in Kannada!",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l03_masculine_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l03_masculine_nouns.png",
   },
 
   {
@@ -356,7 +356,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Feminine nouns in Kannada refer to female beings or feminine things. They pair with feminine verb forms.",
     prompt:
       "Feminine nouns like ಮಗಳು and ಅಮ್ಮ change verb endings — they're the queen of agreement in Kannada!",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l04_feminine_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l04_feminine_nouns.png",
   },
 
   {
@@ -431,7 +431,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Neuter nouns in Kannada refer to things, objects, and concepts without male or female gender.",
     prompt:
       "Neuter nouns like ಪುಸ್ತಕ and ಮನೆ are the middle ground — neither masculine nor feminine!",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l05_neuter_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l05_neuter_nouns.png",
   },
 
   {
@@ -506,7 +506,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Singular nouns in Kannada refer to exactly one person, place, or thing. They pair with singular verbs.",
     prompt:
       "Singular nouns are one-count — ಒಂದು ಮಗ is just one boy, making everything single and simple!",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l06_singular_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l06_singular_nouns.png",
   },
 
   {
@@ -581,7 +581,7 @@ const chapter1Lessons: GrammarLesson[] = [
       "Plural nouns in Kannada refer to more than one person, place, or thing. They use special endings like -ಳು, -ಲು, -ಗಳು.",
     prompt:
       "Plural nouns like ಮಕ್ಕಳು and ಪುಸ್ತಕಗಳು multiply the count — two or more of anything!",
-    assetPath: "/assets/gemini/kaveri_l6_c01_l07_plural_nouns.png",
+    assetPath: "/kaveri/assets/gemini/kaveri_l6_c01_l07_plural_nouns.png",
   },
 
   {

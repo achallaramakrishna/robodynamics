@@ -421,7 +421,8 @@ export default function YamunaProblemEngine({ program, onComplete, onExit }: Pro
         <div className="flex gap-3">
           {!allPassed && <button onClick={()=>{setStage("code");setRuntimeError(null);}} className="flex-1 py-3 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 font-bold text-sm transition-colors">← Fix & Retry</button>}
           {allPassed && <button onClick={()=>setStage("reflect")} className="flex-1 py-3.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-base transition-all shadow-lg shadow-amber-900/40 active:scale-95">Collect XP → Reflect 🌟</button>}
-          {!allPassed&&decision==="show_reference" && <button onClick={()=>onComplete({programId:program.id,score:0,decision,xpEarned:0,hintsUsed:hintsRevealed,failedAttempts,testCasesPassed:0,totalTestCases:program.testCases.filter(t=>!t.isHidden).length,secondsElapsed:Math.floor((Date.now()-startTime)/1000)})} className="flex-1 py-3 rounded-xl bg-amber-700 hover:bg-amber-600 text-white font-bold text-sm transition-colors">Skip → Next Program</button>}
+          {/* Skip always uses next_program so getNextProgram advances instead of replaying current */}
+          <button onClick={()=>onComplete({programId:program.id,score:0,decision:"next_program",xpEarned:0,hintsUsed:hintsRevealed,failedAttempts,testCasesPassed:testResults.filter(r=>r.passed).length,totalTestCases:program.testCases.filter(t=>!t.isHidden).length,secondsElapsed:Math.floor((Date.now()-startTime)/1000)})} className="px-4 py-3 rounded-xl border border-slate-700 text-slate-400 hover:text-slate-200 text-sm font-semibold transition-colors">Skip →</button>
         </div>
       </div>
     );

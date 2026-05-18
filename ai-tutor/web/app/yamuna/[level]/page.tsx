@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { APP_SESSION_COOKIE, parseAppSession } from "@/lib/appSession";
 import { loadYamunaCompletedLessons } from "@/lib/yamunaProgressDb";
-import { YAMUNA_LEVEL1_LESSONS } from "@/lib/yamunaCatalog";
+import { YAMUNA_LEVEL1_LESSONS, YAMUNA_LEVEL2_LESSONS } from "@/lib/yamunaCatalog";
 import YamunaCourseClient from "./YamunaCourseClient";
 
 export const dynamic = "force-dynamic";
@@ -9,6 +9,7 @@ export const dynamic = "force-dynamic";
 export function generateStaticParams() {
   return [
     { level: "level-1" },
+    { level: "level-2" },
   ];
 }
 
@@ -61,12 +62,57 @@ const LESSON_META: Record<string, {
     outcomes: ["Declare and initialise 1D arrays", "Traverse arrays with for and enhanced for-each", "Use String methods: length, charAt, substring, contains, split"],
     codePreview: `int[] scores = {95, 87, 72, 64, 91};\nfor (int s : scores) System.out.print(s + " ");\nString msg = "Hello, Java!";\nSystem.out.println(msg.toUpperCase().replace("JAVA","World"));`,
   },
+  // Level 2 — OOP
+  JV_L2_01_CLASS: {
+    sutra: "Blueprint Sutra", durationMin: 50, difficulty: 2,
+    objective: "Define Java classes with fields and methods, create objects using the new keyword.",
+    summary: "In Java, a class is a blueprint and an object is an instance. Learn to model real-world entities as Java classes with data and behaviour.",
+    outcomes: ["Define a class with fields and methods", "Create objects using new", "Distinguish between class definition and object creation"],
+    codePreview: `class Dog {\n    String name;\n    void bark() { System.out.println(name + " says Woof!"); }\n}\nDog d = new Dog();\nd.name = "Buddy";\nd.bark();`,
+  },
+  JV_L2_02_CONSTRUCT: {
+    sutra: "Constructor Sutra", durationMin: 50, difficulty: 2,
+    objective: "Write parameterized constructors, use this(), and overload methods with different parameter lists.",
+    summary: "Constructors initialize objects at creation time. Method overloading lets you write the same method name with different parameters for flexibility.",
+    outcomes: ["Write default and parameterized constructors", "Use this() for constructor chaining", "Overload methods with different signatures"],
+    codePreview: `class Point {\n    int x, y;\n    Point() { this(0, 0); }\n    Point(int x, int y) { this.x = x; this.y = y; }\n    String describe() { return "(" + x + "," + y + ")"; }\n}`,
+  },
+  JV_L2_03_ENCAP: {
+    sutra: "Encapsulation Sutra", durationMin: 55, difficulty: 2,
+    objective: "Apply private access modifiers, getters, setters with validation to encapsulate class data.",
+    summary: "Encapsulation hides internal state and forces all access through controlled methods. Setters can validate data before storing it.",
+    outcomes: ["Make fields private", "Write getters and setters", "Validate data inside setters"],
+    codePreview: `class BankAccount {\n    private double balance;\n    public void deposit(double amt) {\n        if (amt > 0) balance += amt;\n    }\n    public double getBalance() { return balance; }\n}`,
+  },
+  JV_L2_04_INHERIT: {
+    sutra: "Inheritance Sutra", durationMin: 55, difficulty: 3,
+    objective: "Use extends and super to build class hierarchies and override parent methods.",
+    summary: "Inheritance lets a child class reuse and extend a parent's behaviour. super() calls the parent constructor; @Override redefines a method.",
+    outcomes: ["Extend a class with extends", "Call super() in constructors", "Override methods with @Override"],
+    codePreview: `class Animal {\n    String name;\n    Animal(String n) { name = n; }\n    void speak() { System.out.println(name + " makes a sound"); }\n}\nclass Dog extends Animal {\n    Dog(String n) { super(n); }\n    @Override void speak() { System.out.println(name + " barks!"); }\n}`,
+  },
+  JV_L2_05_POLY: {
+    sutra: "Polymorphism Sutra", durationMin: 60, difficulty: 3,
+    objective: "Define interfaces, implement them in multiple classes, and use polymorphic references.",
+    summary: "Interfaces define contracts. A class can implement many interfaces. Polymorphism means one reference type can point to different implementations.",
+    outcomes: ["Define an interface with method signatures", "Implement an interface in a class", "Use interface references for polymorphism"],
+    codePreview: `interface Drawable {\n    void draw();\n}\nclass Circle implements Drawable {\n    public void draw() { System.out.println("Drawing circle"); }\n}\nDrawable d = new Circle();\nd.draw();`,
+  },
+  JV_L2_06_ABSTRACT: {
+    sutra: "Abstract Sutra", durationMin: 60, difficulty: 3,
+    objective: "Write abstract classes with abstract methods, and create enums with fields and behaviour.",
+    summary: "Abstract classes can't be instantiated — they define structure for subclasses. Enums are type-safe constants that can carry data and methods.",
+    outcomes: ["Write an abstract class with abstract methods", "Create concrete subclasses", "Define enums with fields and methods"],
+    codePreview: `abstract class Shape {\n    abstract double area();\n    void print() { System.out.printf("Area: %.2f%n", area()); }\n}\nclass Circle extends Shape {\n    double r;\n    Circle(double r) { this.r = r; }\n    double area() { return Math.PI * r * r; }\n}`,
+  },
 };
 
 // ── Level config ──────────────────────────────────────────────────────────────
 
+type LessonMeta = typeof YAMUNA_LEVEL1_LESSONS;
+
 const LEVEL_CONFIG: Record<string, {
-  lessons: typeof YAMUNA_LEVEL1_LESSONS;
+  lessons: LessonMeta;
   levelId: string; title: string; subtitle: string; tagline: string; chapterIds: string[];
 }> = {
   "level-1": {
@@ -76,6 +122,14 @@ const LEVEL_CONFIG: Record<string, {
     subtitle: "Level 1 — Foundations",
     tagline: "Master the syntax. Understand the JVM. Write your first Java programs.",
     chapterIds: ["JCH01_HELLO","JCH02_VARS","JCH03_MATH","JCH04_LOGIC","JCH05_LOOPS","JCH06_ARRAYS"],
+  },
+  "level-2": {
+    lessons: YAMUNA_LEVEL2_LESSONS,
+    levelId: "L2",
+    title: "Yamuna Java Core",
+    subtitle: "Level 2 — Object-Oriented Programming",
+    tagline: "Think in objects. Design with classes. Master the pillars of OOP.",
+    chapterIds: ["JCH07_CLASS","JCH08_CONSTRUCT","JCH09_ENCAP","JCH10_INHERIT","JCH11_POLY","JCH12_ABSTRACT"],
   },
 };
 

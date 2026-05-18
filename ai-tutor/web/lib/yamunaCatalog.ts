@@ -9,6 +9,14 @@ import {
   get_JV_L1_05_LOOPS_LESSON,
   get_JV_L1_06_ARRAYS_LESSON,
 } from "./yamunaLessonsL1";
+import {
+  get_JV_L2_01_CLASS_LESSON,
+  get_JV_L2_02_CONSTRUCT_LESSON,
+  get_JV_L2_03_ENCAP_LESSON,
+  get_JV_L2_04_INHERIT_LESSON,
+  get_JV_L2_05_POLY_LESSON,
+  get_JV_L2_06_ABSTRACT_LESSON,
+} from "./yamunaLessonsL2";
 
 export interface YamunaLessonMeta {
   id: string;
@@ -28,10 +36,22 @@ export const YAMUNA_LEVEL1_LESSONS: YamunaLessonMeta[] = [
   { id: "JV_L1_06_ARRAYS", title: "Arrays & Strings",        levelSlug: "level-1", levelTitle: "Level 1 — Foundations" },
 ];
 
+// ── Level 2 ───────────────────────────────────────────────────────────────────
+
+export const YAMUNA_LEVEL2_LESSONS: YamunaLessonMeta[] = [
+  { id: "JV_L2_01_CLASS",    title: "Classes & Objects",              levelSlug: "level-2", levelTitle: "Level 2 — OOP" },
+  { id: "JV_L2_02_CONSTRUCT",title: "Constructors & Method Overloading", levelSlug: "level-2", levelTitle: "Level 2 — OOP" },
+  { id: "JV_L2_03_ENCAP",    title: "Encapsulation",                  levelSlug: "level-2", levelTitle: "Level 2 — OOP" },
+  { id: "JV_L2_04_INHERIT",  title: "Inheritance",                    levelSlug: "level-2", levelTitle: "Level 2 — OOP" },
+  { id: "JV_L2_05_POLY",     title: "Polymorphism & Interfaces",      levelSlug: "level-2", levelTitle: "Level 2 — OOP" },
+  { id: "JV_L2_06_ABSTRACT", title: "Abstract Classes & Enums",       levelSlug: "level-2", levelTitle: "Level 2 — OOP" },
+];
+
 // ── All lessons flat list (for nav) ──────────────────────────────────────────
 
 export const ALL_YAMUNA_LESSONS: YamunaLessonMeta[] = [
   ...YAMUNA_LEVEL1_LESSONS,
+  ...YAMUNA_LEVEL2_LESSONS,
 ];
 
 // ── Navigation helper ─────────────────────────────────────────────────────────
@@ -69,6 +89,14 @@ export function getYamunaLesson(lessonId: string, session?: AppSession): YamunaL
     case "JV_L1_04_LOGIC":  return get_JV_L1_04_LOGIC_LESSON(theme);
     case "JV_L1_05_LOOPS":  return get_JV_L1_05_LOOPS_LESSON(theme);
     case "JV_L1_06_ARRAYS": return get_JV_L1_06_ARRAYS_LESSON(theme);
+
+    // ── Level 2 ──────────────────────────────────────────────────────────────
+    case "JV_L2_01_CLASS":    return get_JV_L2_01_CLASS_LESSON(theme);
+    case "JV_L2_02_CONSTRUCT":return get_JV_L2_02_CONSTRUCT_LESSON(theme);
+    case "JV_L2_03_ENCAP":    return get_JV_L2_03_ENCAP_LESSON(theme);
+    case "JV_L2_04_INHERIT":  return get_JV_L2_04_INHERIT_LESSON(theme);
+    case "JV_L2_05_POLY":     return get_JV_L2_05_POLY_LESSON(theme);
+    case "JV_L2_06_ABSTRACT": return get_JV_L2_06_ABSTRACT_LESSON(theme);
 
     default:
       return null;

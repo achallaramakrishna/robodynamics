@@ -6,7 +6,7 @@ import { buildCodeSutraLearnerSnapshot, summarizeCodeSutraSkillMastery } from ".
 export const APP_SESSION_COOKIE = "rd_user_session";
 
 export type SessionRole = "PARENT" | "STUDENT";
-export type SessionProductSlug = "mindsutra" | "mindsparc" | "codesutra" | "vidya";
+export type SessionProductSlug = "mindsutra" | "mindsparc" | "codesutra" | "vidya" | "yamuna";
 
 type SessionChapter = {
   code: string;

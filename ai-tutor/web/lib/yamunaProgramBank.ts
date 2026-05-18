@@ -18,6 +18,12 @@ import { CH03_PROGRAMS } from "./yamunaProgramBank_ch03";
 import { CH04_PROGRAMS } from "./yamunaProgramBank_ch04";
 import { CH05_PROGRAMS } from "./yamunaProgramBank_ch05";
 import { CH06_PROGRAMS } from "./yamunaProgramBank_ch06";
+import { CH07_PROGRAMS } from "./yamunaProgramBank_ch07";
+import { CH08_PROGRAMS } from "./yamunaProgramBank_ch08";
+import { CH09_PROGRAMS } from "./yamunaProgramBank_ch09";
+import { CH10_PROGRAMS } from "./yamunaProgramBank_ch10";
+import { CH11_PROGRAMS } from "./yamunaProgramBank_ch11";
+import { CH12_PROGRAMS } from "./yamunaProgramBank_ch12";
 
 export { CH01_PROGRAMS } from "./yamunaProgramBank_ch01";
 export { CH02_PROGRAMS } from "./yamunaProgramBank_ch02";
@@ -25,6 +31,12 @@ export { CH03_PROGRAMS } from "./yamunaProgramBank_ch03";
 export { CH04_PROGRAMS } from "./yamunaProgramBank_ch04";
 export { CH05_PROGRAMS } from "./yamunaProgramBank_ch05";
 export { CH06_PROGRAMS } from "./yamunaProgramBank_ch06";
+export { CH07_PROGRAMS } from "./yamunaProgramBank_ch07";
+export { CH08_PROGRAMS } from "./yamunaProgramBank_ch08";
+export { CH09_PROGRAMS } from "./yamunaProgramBank_ch09";
+export { CH10_PROGRAMS } from "./yamunaProgramBank_ch10";
+export { CH11_PROGRAMS } from "./yamunaProgramBank_ch11";
+export { CH12_PROGRAMS } from "./yamunaProgramBank_ch12";
 
 /** All programs in chapter + tier order */
 export const YAMUNA_PROGRAM_BANK: YamunaProgram[] = [
@@ -34,6 +46,12 @@ export const YAMUNA_PROGRAM_BANK: YamunaProgram[] = [
   ...CH04_PROGRAMS,
   ...CH05_PROGRAMS,
   ...CH06_PROGRAMS,
+  ...CH07_PROGRAMS,
+  ...CH08_PROGRAMS,
+  ...CH09_PROGRAMS,
+  ...CH10_PROGRAMS,
+  ...CH11_PROGRAMS,
+  ...CH12_PROGRAMS,
 ];
 
 // ── Lookup helpers ────────────────────────────────────────────────────────────
@@ -113,7 +131,7 @@ export const JAVA_FOUNDATION_TRACK: YamunaTrack = {
       title: "Level 2 — Object-Oriented Programming",
       subtitle: "Classes, Constructors, Encapsulation, Inheritance, Polymorphism, Abstract",
       chapterIds: ["JCH07_CLASS","JCH08_CONSTRUCT","JCH09_ENCAP","JCH10_INHERIT","JCH11_POLY","JCH12_ABSTRACT"],
-      status: "coming_soon",
+      status: "available",
     },
     {
       id: "L3", slug: "level-3",
